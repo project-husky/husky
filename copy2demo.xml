@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="copy2demo" default="doit" basedir=".">
+	<target name ="doit" description="Copies the library to the demo projects">
+		<copy file="${basedir}/dist/ehealthconnector.jar" tofile="${basedir}/../../../demo/java/trunk/ehealthconnectorDemo/lib/ehealthconnector.jar"/>
+	</target>
+	<exec executable="ikvmc">
+		<arg value="-target:library"/>
+		<arg value="-out:${basedir}/../../../demo/dotnet/trunk/eHealthConnectorDemo/lib/ehealthconnector.dll"/>
+		<arg value="${basedir}/dist/ehealthconnector.jar"/>
+	</exec>
+</project>

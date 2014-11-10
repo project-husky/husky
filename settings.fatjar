@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Jan 28 14:12:27 CET 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=C\:\\code\\demo\\java\\trunk\\ehealthconnectorDemo\\lib\\ehealthconnector_20140128.jar
+manifest.mergeall=false
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=
