@@ -147,7 +147,7 @@ public abstract class CdaCh {
 	 * @param patient
 	 *            Patient
 	 */
-	public void cSetPatient(Patient patient) {
+	public void setPatient(Patient patient) {
 		doc.getRecordTargets().add(patient.mRecordTarget);
 	}
 
@@ -157,7 +157,7 @@ public abstract class CdaCh {
 	 * @param author
 	 *            Der Autor
 	 */
-	public void cAddAuthor(ehealthconnector.cda.documents.ch.Author author) {
+	public void addAuthor(ehealthconnector.cda.documents.ch.Author author) {
 		// create a new (!) MDHT author Objekt.
 		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
 		docAuthor = author.getAuthorMdht();
@@ -170,7 +170,7 @@ public abstract class CdaCh {
 	 * 
 	 * @return das eHealthConnector Author Objekt
 	 */
-	public ehealthconnector.cda.documents.ch.Author cGetAuthor() {
+	public ehealthconnector.cda.documents.ch.Author getAuthor() {
 		ehealthconnector.cda.documents.ch.Author author = new ehealthconnector.cda.documents.ch.Author(
 				doc.getAuthors().get(0));
 		return author;
@@ -182,7 +182,7 @@ public abstract class CdaCh {
 	 * @param organization
 	 *            verwaltende Organisation
 	 */
-	public void cSetCustodian(Organization organization) {
+	public void setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
 		final Custodian mdhtCustodian = CDAFactory.eINSTANCE.createCustodian();
 		doc.setCustodian(mdhtCustodian);
@@ -203,7 +203,7 @@ public abstract class CdaCh {
 	 * 
 	 * @return das openHealthTools Custodian Objekt
 	 */
-	public Custodian cGetCustodian() {
+	public Custodian getCustodian() {
 		return doc.getCustodian();
 	}
 
@@ -213,7 +213,7 @@ public abstract class CdaCh {
 	 * @param legalAuthenticator
 	 *            rechtsgültiger Unterzeichner
 	 */
-	public void cSetLegalAuthenticator(
+	public void setLegalAuthenticator(
 			ehealthconnector.cda.documents.ch.Author legalAuthenticator) {
 		doc.setLegalAuthenticator(CdaChUtil
 				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
@@ -225,8 +225,8 @@ public abstract class CdaCh {
 	 * @param versicherung
 	 *            Die Versicherung als Organization Objekt
 	 */
-	public void cAddInsurance(Organization versicherung) {
-		this.cAddParticipant(versicherung, ParticipantType.Insurance);
+	public void addInsurance(Organization versicherung) {
+		this.addParticipant(versicherung, ParticipantType.Insurance);
 	}
 	
 	/**
@@ -234,7 +234,7 @@ public abstract class CdaCh {
 	 *
 	 * @return the patient
 	 */
-	public Patient cGetPatient() {
+	public Patient getPatient() {
 		return (Patient) doc.getRecordTargets().get(0).getPatientRole()
 				.getPatient();
 	}
@@ -247,7 +247,7 @@ public abstract class CdaCh {
 	 * @param participantType
 	 *            Art der Partizipation (z.B. Versicherung)
 	 */
-	public void cAddParticipant(Organization organization,
+	public void addParticipant(Organization organization,
 			ParticipantType participantType) {
 		// Set the given organization as Participant of this document.
 		final Participant1 participant = CDAFactory.eINSTANCE
@@ -266,7 +266,7 @@ public abstract class CdaCh {
 	/**
 	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
 	 */
-	public void cPrintXmlToConsole() {
+	public void printXmlToConsole() {
 		try {
 			CDAUtil.save(doc, System.out);
 		} catch (final Exception e) {
@@ -282,7 +282,7 @@ public abstract class CdaCh {
 	 *            Dateiname (inkl. Pfadangaben)
 	 * @throws Exception
 	 */
-	public void cSaveToFile(String fileName) throws Exception {
+	public void saveToFile(String fileName) throws Exception {
 		File yourFile = new File(fileName);
 		if (!yourFile.exists()) {
 			yourFile.createNewFile();

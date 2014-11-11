@@ -38,8 +38,8 @@ public class Code {
 	 */
 	public Code(ConvenienceUtilsEnums.KnownOID oid, String code)  {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		this.cSetOid(ConvenienceUtilsEnums.knownOID(oid));
-		this.cSetCode(code);
+		this.setOid(ConvenienceUtilsEnums.knownOID(oid));
+		this.setCode(code);
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class Code {
 	 */
 	public Code(String oid, String code)  {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		this.cSetOid(oid);
-		this.cSetCode(code);
+		this.setOid(oid);
+		this.setCode(code);
 	}
 
 	/**
@@ -66,28 +66,28 @@ public class Code {
 	/**
 	 * @return das code Objekt
 	 */
-	public String cGetCode() {
+	public String getCode() {
 		return this.mCD.getCode();
 	}
 
 	/**
 	 * @param code das code Objekt welches gesetzt wird
 	 */
-	public void cSetCode(String code) {
+	public void setCode(String code) {
 		this.mCD.setCode(code);
 	}
 
 	/**
 	 * @return das oid Objekt
 	 */
-	public String cGetOid() {
+	public String getOid() {
 		return this.mCD.getCodeSystem();
 	}
 
 	/**
 	 * @param oid das oid Objekt welches gesetzt wird
 	 */
-	public void cSetOid(String oid) {
+	public void setOid(String oid) {
 		 this.mCD.setCodeSystem(oid);
 	}
 

@@ -77,8 +77,8 @@ public class ProblemConcernEntry {
 	public ProblemConcernEntry(String concern, StatusCode concernStatus) {
 		mProblemConcernEntry = IHEFactory.eINSTANCE.createProblemConcernEntry();
 		mProblemConcernEntry.init();
-		this.cSetProblemConcern(concern);
-		this.cSetCodedStatusOfConcern(concernStatus);
+		this.setProblemConcern(concern);
+		this.setCodedStatusOfConcern(concernStatus);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class ProblemConcernEntry {
 	 * 
 	 * @return Status des Leidens
 	 */
-	public StatusCode cGetCodedStatusOfConcern() {
+	public StatusCode getCodedStatusOfConcern() {
 		return null;
 		// TODO return the status code
 		// return this.getStatusCode().getCode();
@@ -188,7 +188,7 @@ public class ProblemConcernEntry {
 	 * 
 	 * @return Ende des Leidens
 	 */
-	public String cGetEndOfConcern() {
+	public String getEndOfConcern() {
 		return CdaChUtil.createEurDateStrFromTS(mProblemConcernEntry
 				.getEffectiveTime().getHigh().getValue());
 	}
@@ -198,7 +198,7 @@ public class ProblemConcernEntry {
 	 * 
 	 * @return Beginn des Leidens
 	 */
-	public String cGetStartOfConcern() {
+	public String getStartOfConcern() {
 		return CdaChUtil.createEurDateStrFromTS(mProblemConcernEntry
 				.getEffectiveTime().getLow().getValue());
 	}
@@ -209,7 +209,7 @@ public class ProblemConcernEntry {
 	 * @param concernStatus
 	 *            Status
 	 */
-	public void cSetCodedStatusOfConcern(StatusCode concernStatus) {
+	public void setCodedStatusOfConcern(StatusCode concernStatus) {
 		// Create and set the status code
 		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
 		// (Implementierungsleitfaden 7.5.2.4)
@@ -224,7 +224,7 @@ public class ProblemConcernEntry {
 	 * @param endOfConcern
 	 *            Ende des Leidens
 	 */
-	public void cSetEndOfConcern(String endOfConcern) {
+	public void setEndOfConcern(String endOfConcern) {
 		try {
 			mProblemConcernEntry.getEffectiveTime().setHigh(
 					CdaChUtil.createIVXB_TSFromEuroDate(endOfConcern));
@@ -239,7 +239,7 @@ public class ProblemConcernEntry {
 	 * @param startOfConcern
 	 *            Beginn des Leidens
 	 */
-	public void cSetStartOfConcern(String startOfConcern) {
+	public void setStartOfConcern(String startOfConcern) {
 		try {
 			mProblemConcernEntry.getEffectiveTime().setLow(
 					CdaChUtil.createIVXB_TSFromEuroDate(startOfConcern));
@@ -254,7 +254,7 @@ public class ProblemConcernEntry {
 	 * @param concern
 	 *            Leiden
 	 */
-	public void cSetProblemConcern(String concern) {
+	public void setProblemConcern(String concern) {
 		// Create and set the concern as freetext
 		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
 		mProblemConcernEntry.setText(concernText);
@@ -264,7 +264,7 @@ public class ProblemConcernEntry {
 	 * Gibt das Leiden zurück
 	 * 
 	 */
-	public String cGetProblemConcern() {
+	public String getProblemConcern() {
 		return mProblemConcernEntry.getText().getText();
 	}
 
@@ -274,7 +274,7 @@ public class ProblemConcernEntry {
 	 * @param problemEntry
 	 *            Das Problem
 	 */
-	public void cAddProblemEntry(ProblemEntry problemEntry) {
+	public void addProblemEntry(ProblemEntry problemEntry) {
 		mProblemConcernEntry.addObservation(problemEntry.mProblemEntry);
 	}
 
@@ -283,7 +283,7 @@ public class ProblemConcernEntry {
 	 * 
 	 * @return das problemConcern Objekt
 	 */
-	public ProblemEntry cGetProblemEntry() {
+	public ProblemEntry getProblemEntry() {
 		// TODO Convert the Observation List in a ehealthconnector ProblemEntry
 		// list (List<ProblemEntry>) this.getObservations();
 		ProblemEntry problemEntry = new ProblemEntry(mProblemConcernEntry
@@ -294,11 +294,11 @@ public class ProblemConcernEntry {
 	/**
 	 * Gibt ein medizinische Problem zu dem Leiden zurück.
 	 * 
-	 * @param leidenNr 
+	 * @param problemNr 
 	 * 		Nummer des Leidens
 	 * @return das problemConcern Objekt, sonst null
 	 */
-	public ProblemEntry cGetProblemEntry(int problemNr) {
+	public ProblemEntry getProblemEntry(int problemNr) {
 		// TODO Convert the Observation List in a ehealthconnector ProblemEntry
 		// list (List<ProblemEntry>) this.getObservations();
 		ProblemEntry problemEntry = new ProblemEntry(mProblemConcernEntry

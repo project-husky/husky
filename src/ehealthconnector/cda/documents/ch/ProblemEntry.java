@@ -72,10 +72,10 @@ public class ProblemEntry {
 	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
 			String endOfProblem, Code problem) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		this.cSetProblemNotOccured(problemNotOccured);
+		this.setProblemNotOccured(problemNotOccured);
 		try {
-			this.cSetStartOfProblem(startOfProblem);
-			this.cSetEndOfProblem(endOfProblem);
+			this.setStartOfProblem(startOfProblem);
+			this.setEndOfProblem(endOfProblem);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class ProblemEntry {
 	}
 	
 	/**
-	 * @param observation
+	 * @param problemEntry
 	 */
 	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
 		this.mProblemEntry = problemEntry;
@@ -100,7 +100,7 @@ public class ProblemEntry {
 	/**
 	 * @return das problemNotOccured Objekt
 	 */
-	public boolean cIsProblemNotOccured() {
+	public boolean isProblemNotOccured() {
 		return mProblemEntry.getNegationInd();
 	}
 
@@ -108,14 +108,14 @@ public class ProblemEntry {
 	 * @param problemNotOccured
 	 *            das problemNotOccured Objekt welches gesetzt wird
 	 */
-	public void cSetProblemNotOccured(boolean problemNotOccured) {
+	public void setProblemNotOccured(boolean problemNotOccured) {
 		mProblemEntry.setNegationInd(problemNotOccured);
 	}
 
 	/**
 	 * @return das startOfProblem Objekt
 	 */
-	public String cGetStartOfProblem() {
+	public String getStartOfProblem() {
 		return CdaChUtil.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getLow().getValue());
 	}
@@ -125,7 +125,7 @@ public class ProblemEntry {
 	 *            das startOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void cSetStartOfProblem(String startOfProblem) throws ParseException {
+	public void setStartOfProblem(String startOfProblem) throws ParseException {
 		if (mProblemEntry.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mProblemEntry.setEffectiveTime(interval);
@@ -138,7 +138,7 @@ public class ProblemEntry {
 	/**
 	 * @return das endOfProblem Objekt
 	 */
-	public String cGetEndOfProblem() {
+	public String getEndOfProblem() {
 		return CdaChUtil.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getHigh().getValue());
 	}
@@ -148,7 +148,7 @@ public class ProblemEntry {
 	 *            das endOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void cSetEndOfProblem(String endOfProblem) throws ParseException {
+	public void setEndOfProblem(String endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
 				CdaChUtil.createIVXB_TSFromEuroDate(endOfProblem));
 	}
@@ -156,7 +156,7 @@ public class ProblemEntry {
 	/**
 	 * @return das codedProblem Objekt
 	 */
-	public Code cGetCodedProblem() {
+	public Code getCodedProblem() {
 		Code code = new Code(mProblemEntry.getCode());
 		return code;
 	}

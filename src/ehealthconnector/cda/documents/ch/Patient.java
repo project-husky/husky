@@ -94,7 +94,7 @@ public class Patient {
 	 * @param address
 	 *            Adresse
 	 */
-	public void cAddAddress(Address address) {
+	public void addAddress(Address address) {
 		mRecordTarget.getPatientRole().getAddrs().add(address);
 	}
 
@@ -104,10 +104,10 @@ public class Patient {
 	 * @param identificator
 	 *            Identificator
 	 */
-	public void cAddID(Identificator identificator) {
+	public void addID(Identificator identificator) {
 		II id = DatatypesFactory.eINSTANCE.createII();
-		id.setRoot(identificator.cGetRoot());
-		id.setExtension(identificator.cGetExtension());
+		id.setRoot(identificator.getRoot());
+		id.setExtension(identificator.getExtension());
 		mRecordTarget.getPatientRole().getIds().add(id);
 	}
 
@@ -120,7 +120,7 @@ public class Patient {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
-	public void cAddPhone(String phoneNr, UseCode usage) {
+	public void addPhone(String phoneNr, UseCode usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		TelecommunicationAddressUse useCode = TelecommunicationAddressUse.HP;
 		switch (usage) {

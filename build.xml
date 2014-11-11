@@ -10,6 +10,8 @@
 		<fatjar.build output="${basedir}/dist/ehealthconnector.jar">
 			<fatjar.manifest mergemanifests="false" removesigners="true"/>
 			<fatjar.filesource path="${basedir}/bin" relpath=""/>
+			<fatjar.filesource path="${basedir}/doc" relpath="doc"/>
+			<fatjar.filesource path="${basedir}/src" relpath="src"/>
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.mdht.uml.cda.ch.runtime/org.openhealthtools.mdht.uml.cda.ch.jar"/>
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar"/>
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1.jar"/>
@@ -78,6 +80,6 @@
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.mdht.uml.cda.hitsp.runtime.201212071459/1.2.0_Runtime/org.openhealthtools.mdht.uml.hl7.vocab_1.2.0.201212201425.jar"/>
 			<fatjar.jarsource file="${basedir}/lib/xerces/org.apache.xerces_2.9.0.v201101211617.jar"/>
 		</fatjar.build>
-		<copy file="${basedir}/dist/ehealthconnector.jar" tofile="${basedir}/../../../demo/java/trunk/ehealthconnectorDemo/lib/ehealthconnector.jar"/>
+		<copy file="${basedir}/dist/ehealthconnector.jar" tofile="${basedir}/../demo/java/ehealthconnectorDemo/lib/ehealthconnector.jar"/>
 	</target>
 </project>

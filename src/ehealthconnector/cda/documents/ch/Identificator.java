@@ -41,8 +41,8 @@ public class Identificator {
 	 */
 	public Identificator(String id, KnownOID oid) {
 		this.mII = DatatypesFactory.eINSTANCE.createII();
-		this.cSetRoot(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.knownOID(oid));
-		this.cSetExtension(id);
+		this.setRoot(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.knownOID(oid));
+		this.setExtension(id);
 	}
 
 	/**
@@ -55,15 +55,15 @@ public class Identificator {
 	 */
 	public Identificator(String id, String oid) {
 		this.mII = DatatypesFactory.eINSTANCE.createII();
-		this.cSetRoot(oid);
-		this.cSetExtension(id);
+		this.setRoot(oid);
+		this.setExtension(id);
 	}
 	
 	/**
 	 * Liefert die OID (der Domäne)
 	 * @return OID
 	 */
-	public String cGetRoot(){
+	public String getRoot(){
 		return this.mII.getRoot();
 	}
 	
@@ -72,7 +72,7 @@ public class Identificator {
 	 * @param root
 	 * 			OID einer Domäne
 	 */
-	public void cSetRoot(String root) {
+	public void setRoot(String root) {
 		if (root != null && !root.equals("")) {
 			this.mII.setRoot(root);
 		}
@@ -82,7 +82,7 @@ public class Identificator {
 	 * Liefert die ID
 	 * @return ID
 	 */
-	public String cGetExtension(){
+	public String getExtension(){
 		return this.mII.getExtension();
 	}
 	
@@ -91,7 +91,7 @@ public class Identificator {
 	 * @param extension
 	 * 			Extension ID 
 	 */
-	public void cSetExtension(String extension) {
+	public void setExtension(String extension) {
 		if (extension != null && !extension.equals("")) {
 			this.mII.setExtension(extension);
 		}

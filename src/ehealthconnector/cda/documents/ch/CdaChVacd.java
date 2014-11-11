@@ -71,7 +71,7 @@ public class CdaChVacd extends CdaCh {
 	 * 		<div class="fr"> allergie</div>
 	 * 		<div class="it"> allergie</div>
 	 */
-	public void cAddAllergy(AllergyIntolerance allergie) {
+	public void addAllergy(AllergyIntolerance allergie) {
 		// Auto-generated method stub
 
 	}
@@ -84,7 +84,7 @@ public class CdaChVacd extends CdaCh {
 	 * @param date            Datum der Verabreichung
 	 * @param arzt            Verabreichender Arzt
 	 */
-	public void cAddImmunization(Medication medication, Value dosage,
+	public void addImmunization(Medication medication, Value dosage,
 			Date date, ehealthconnector.cda.documents.ch.Author arzt) {
 	}
 
@@ -93,7 +93,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @param problem            Das Leiden
 	 */
-	public void cAddProblemConcern(
+	public void addProblemConcern(
 			ehealthconnector.cda.documents.ch.ProblemConcernEntry problem) {
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = IHEFactory.eINSTANCE
 				.createActiveProblemsSection().init();
@@ -127,7 +127,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Impfempfehlungen
 	 */
-	public List<Immunization> cGetImmunizationRecommendations() {
+	public List<Immunization> getImmunizationRecommendations() {
 		// Auto-generated method stub
 		return null;
 	}
@@ -137,7 +137,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Impfungen
 	 */
-	public List<Immunization> cGetImmunizations() {
+	public List<Immunization> getImmunizations() {
 		// Auto-generated method stub
 		return null;
 	}
@@ -147,7 +147,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Leiden
 	 */
-	public ArrayList<ProblemConcernEntry> cGetProblemConcernEntries() {
+	public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
 		// Get the ActiveProblemSection from the Document
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = (org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection) doc
 				.getSections().get(0);

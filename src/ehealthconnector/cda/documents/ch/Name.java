@@ -40,10 +40,10 @@ public class Name {
 		// Create and fill Person Name
 		mPn = DatatypesFactory.eINSTANCE.createPN();
 		if ((firstName != null) && !firstName.equals("")) {
-			this.cSetFirstName(firstName);
+			this.setFirstName(firstName);
 		}
 		if ((name != null) && !name.equals("")) {
-			this.cSetName(name);
+			this.setName(name);
 		}
 	}
 	
@@ -83,28 +83,28 @@ public class Name {
 	/**
 	 * @return das firstName Objekt
 	 */
-	public String cGetFirstName() {
+	public String getFirstName() {
 		return mPn.getGivens().get(0).getText();
 	}
 
 	/**
 	 * @return das name Objekt
 	 */
-	public String cGetName() {
+	public String getName() {
 		return mPn.getFamilies().get(0).getText();
 	}
 	
 	public String cGetCompleteName() {
 		StringBuilder nameBuilder = new StringBuilder();
 
-		if (this.cGetPrefix() != null) {
-			nameBuilder.append(cGetPrefix()+" ");
+		if (this.getPrefix() != null) {
+			nameBuilder.append(getPrefix()+" ");
 		}
-		if (this.cGetFirstName() != null) {
-			nameBuilder.append(cGetFirstName()+" ");
+		if (this.getFirstName() != null) {
+			nameBuilder.append(getFirstName()+" ");
 		}
-		if (this.cGetName() != null) {
-			nameBuilder.append(cGetName()+" ");
+		if (this.getName() != null) {
+			nameBuilder.append(getName()+" ");
 		}
 		// TODO if a part of the name is not present, the system throws a IndexOutOfBounds exception (not null).
 //		if (this.cGetSuffix() != null) {
@@ -116,21 +116,21 @@ public class Name {
 	/**
 	 * @return das prefix Objekt
 	 */
-	public String cGetPrefix() {
+	public String getPrefix() {
 		return mPn.getPrefixes().get(0).getText();
 	}
 
 	/**
 	 * @return das suffix Objekt
 	 */
-	public String cGetSuffix() {
+	public String getSuffix() {
 		return mPn.getSuffixes().get(0).getText();
 	}
 
 	/**
 	 * @return das title Objekt
 	 */
-	public String cGetTitle() {
+	public String getTitle() {
 		return mPn.getPrefixes().get(0).getText();
 	}
 
@@ -138,7 +138,7 @@ public class Name {
 	 * @param firstName
 	 *          das firstName Objekt welches gesetzt wird
 	 */
-	public void cSetFirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		if ((firstName != null) && !firstName.equals("")) {
 			mPn.addGiven(firstName);
 		}
@@ -148,7 +148,7 @@ public class Name {
 	 * @param name
 	 *          das name Objekt welches gesetzt wird
 	 */
-	public void cSetName(String name) {
+	public void setName(String name) {
 		if ((name != null) && !name.equals("")) {
 			mPn.addFamily(name);
 		}
@@ -158,7 +158,7 @@ public class Name {
 	 * @param prefix
 	 *          das prefix Objekt welches gesetzt wird
 	 */
-	public void cSetPrefix(String prefix) {
+	public void setPrefix(String prefix) {
 		if ((prefix != null) && !prefix.equals("")) {
 			mPn.addPrefix(prefix);
 		}
@@ -168,7 +168,7 @@ public class Name {
 	 * @param title
 	 *          das title Objekt welches gesetzt wird
 	 */
-	public void cSetTitle(String title) {
+	public void setTitle(String title) {
 		mPn.addPrefix(title);
 	}
 

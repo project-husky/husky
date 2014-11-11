@@ -198,7 +198,7 @@ public class CdaChUtil {
 				.createCustodianOrganization();
 
 		ON on = DatatypesFactory.eINSTANCE.createON();
-		on.addText(organization.cGetName());
+		on.addText(organization.getName());
 		mdhtCustOrg.setName(on);
 		// take the first address and set it as CustodianAdress
 		mdhtCustOrg.setAddr(organization.mOrganization.getAddrs().get(0));

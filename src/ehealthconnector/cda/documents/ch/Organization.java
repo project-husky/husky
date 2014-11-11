@@ -41,7 +41,7 @@ public class Organization {
 	 */
 	public Organization(String name) {
 		mOrganization = CDAFactory.eINSTANCE.createOrganization();
-		this.cAddName(name);
+		this.addName(name);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class Organization {
 	 * @param name
 	 *            Name
 	 */
-	public void cAddName(String name) {
+	public void addName(String name) {
 		ON orgaName = DatatypesFactory.eINSTANCE.createON();
 		mOrganization.getNames().add(orgaName);
 		orgaName.addText(name);
@@ -62,7 +62,7 @@ public class Organization {
 	 * @param address
 	 *            Adresse
 	 */
-	public void cAddAddress(Address address) {
+	public void addAddress(Address address) {
 		mOrganization.getAddrs().add(address);
 	}
 
@@ -72,7 +72,7 @@ public class Organization {
 	 * @param eMail
 	 *            eMail Adresse
 	 */
-	public void cAddEMail(String eMail) {
+	public void addEMail(String eMail) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("mailto:" + eMail);
@@ -86,7 +86,7 @@ public class Organization {
 	 *            Faxnummer (nur internationale Rufnummer ohne Sonderzeichen
 	 *            erlaubt). Beispiel: +41322345566
 	 */
-	public void cAddFax(String faxNr) {
+	public void addFax(String faxNr) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("fax:" + faxNr);
@@ -100,7 +100,7 @@ public class Organization {
 	 *            Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen
 	 *            erlaubt). Beispiel: +41322345566
 	 */
-	public void cAddPhone(String phoneNr) {
+	public void addPhone(String phoneNr) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("tel:" + phoneNr);
@@ -113,7 +113,7 @@ public class Organization {
 	 * @param url
 	 *            URL der Webseite
 	 */
-	public void cAddWebsite(String url) {
+	public void addWebsite(String url) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("http://" + url);
@@ -125,7 +125,7 @@ public class Organization {
 	 * 
 	 * @return Namen der Organisation
 	 */
-	public String cGetName() {
+	public String getName() {
 		return mOrganization.getNames().get(0).getText();
 	}
 

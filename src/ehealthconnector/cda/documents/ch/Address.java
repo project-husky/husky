@@ -44,8 +44,8 @@ public class Address extends ADImpl {
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
 		this(zip, city, UseCode.Business);
-		this.cSetStreet(street);
-		this.cSetHouseNumber(houseNumber);
+		this.setStreet(street);
+		this.setHouseNumber(houseNumber);
 	}
 
 	/**
@@ -67,9 +67,9 @@ public class Address extends ADImpl {
 	public Address(String addressline1, String addressline2,
 			String addressline3, String zip, String city, UseCode usage) {
 		this(zip, city, usage);
-		this.cSetAddressline1(addressline1);
-		this.cSetAddressline2(addressline2);
-		this.cSetAddressline3(addressline3);
+		this.setAddressline1(addressline1);
+		this.setAddressline2(addressline2);
+		this.setAddressline3(addressline3);
 	}
 
 	/**
@@ -89,8 +89,8 @@ public class Address extends ADImpl {
 	public Address(String street, String houseNumber, String zip, String city,
 			UseCode usage) {
 		this(zip, city, usage);
-		this.cSetStreet(street);
-		this.cSetHouseNumber(houseNumber);
+		this.setStreet(street);
+		this.setHouseNumber(houseNumber);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Address extends ADImpl {
 	 */
 	public Address(String addressline, String zip, String city, UseCode usage) {
 		this(zip, city, usage);
-		this.cSetAddressline1(addressline);
+		this.setAddressline1(addressline);
 	}
 
 	/**
@@ -121,8 +121,8 @@ public class Address extends ADImpl {
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	private Address(String zip, String city, UseCode usage) {
-		this.cSetCity(city);
-		this.cSetZip(zip);
+		this.setCity(city);
+		this.setZip(zip);
 		switch (usage) {
 		case Business:
 			this.getUses().add(PostalAddressUse.WP);
@@ -141,7 +141,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Adress-Zeile 1
 	 */
-	public String cGetAddressline1() {
+	public String getAddressline1() {
 		return this.getStreetAddressLines().get(0).getText();
 	}
 
@@ -150,7 +150,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Adress-Zeile 2
 	 */
-	public String cGetAddressline2() {
+	public String getAddressline2() {
 		return this.getStreetAddressLines().get(1).getText();
 	}
 
@@ -159,7 +159,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Adress-Zeile 3
 	 */
-	public String cGetAddressline3() {
+	public String getAddressline3() {
 		return this.getStreetAddressLines().get(2).getText();
 	}
 
@@ -168,7 +168,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Ort
 	 */
-	public String cGetCity() {
+	public String getCity() {
 		return this.getCities().get(0).getText();
 	}
 
@@ -177,7 +177,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Hausnummer
 	 */
-	public String cGetHouseNumber() {
+	public String getHouseNumber() {
 		return this.getHouseNumbers().get(0).getText();
 	}
 
@@ -186,7 +186,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Strasse
 	 */
-	public String cGetStreet() {
+	public String getStreet() {
 		return this.getStreetNames().get(0).getText();
 	}
 
@@ -195,7 +195,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return Art der Adresse
 	 */
-	public String cGetUsage() {
+	public String getUsage() {
 		return this.getUses().get(0).getLiteral();
 	}
 
@@ -204,7 +204,7 @@ public class Address extends ADImpl {
 	 * 
 	 * @return PLZ
 	 */
-	public String cGetZip() {
+	public String getZip() {
 		return this.getPostalCodes().get(0).getText();
 	}
 
@@ -214,7 +214,7 @@ public class Address extends ADImpl {
 	 * @param addressline
 	 *            Adress-Zeile 1
 	 */
-	public void cSetAddressline1(String addressline) {
+	public void setAddressline1(String addressline) {
 		this.addStreetAddressLine(addressline);
 	}
 
@@ -224,7 +224,7 @@ public class Address extends ADImpl {
 	 * @param addressline
 	 *            Adress-Zeile 2
 	 */
-	public void cSetAddressline2(String addressline) {
+	public void setAddressline2(String addressline) {
 		this.addStreetAddressLine(addressline);
 	}
 
@@ -234,7 +234,7 @@ public class Address extends ADImpl {
 	 * @param addressline
 	 *            Adress-Zeile 3
 	 */
-	public void cSetAddressline3(String addressline) {
+	public void setAddressline3(String addressline) {
 		this.addStreetAddressLine(addressline);
 	}
 
@@ -244,7 +244,7 @@ public class Address extends ADImpl {
 	 * @param city
 	 *            Ort
 	 */
-	public void cSetCity(String city) {
+	public void setCity(String city) {
 		this.addCity(city);
 	}
 
@@ -254,7 +254,7 @@ public class Address extends ADImpl {
 	 * @param HouseNumber
 	 *            Hausnummer
 	 */
-	public void cSetHouseNumber(String HouseNumber) {
+	public void setHouseNumber(String HouseNumber) {
 		this.addHouseNumber(HouseNumber);
 	}
 
@@ -264,7 +264,7 @@ public class Address extends ADImpl {
 	 * @param street
 	 *            Strasse
 	 */
-	public void cSetStreet(String street) {
+	public void setStreet(String street) {
 		this.addStreetName(street);
 	}
 
@@ -274,7 +274,7 @@ public class Address extends ADImpl {
 	 * @param zip
 	 *            PLZ
 	 */
-	public void cSetZip(String zip) {
+	public void setZip(String zip) {
 		this.addPostalCode(zip);
 	}
 

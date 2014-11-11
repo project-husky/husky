@@ -67,7 +67,7 @@ public class Author {
 		asAuth.getIds().add(id);
 
 		mAuthor.setAssignedAuthor(asAuth);
-		this.cAddName(name);
+		this.addName(name);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class Author {
 	 * @param address
 	 *            Die Postadresse des Autors
 	 */
-	public void cAddAddress(Address address) {
+	public void addAddress(Address address) {
 		mAuthor.getAssignedAuthor().getAddrs().add(address);
 	}
 
@@ -95,7 +95,7 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void cAddEMail(String eMail, UseCode usage) {
+	public void addEMail(String eMail, UseCode usage) {
 		// Auto-generated method stub
 
 	}
@@ -109,7 +109,7 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void cAddFax(String faxNr, UseCode usage) {
+	public void addFax(String faxNr, UseCode usage) {
 		// Auto-generated method stub
 
 	}
@@ -121,7 +121,7 @@ public class Author {
 	 *            Kombination von eigentlicher ID und der OID der verwaltenden
 	 *            Domäne
 	 */
-	public void cAddID(Identificator identificator) {
+	public void addID(Identificator identificator) {
 		mAuthor.getAssignedAuthor().getIds().add(identificator.mII);
 	}
 
@@ -134,7 +134,7 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
-	public void cAddPhone(String phoneNr, UseCode usage) {
+	public void addPhone(String phoneNr, UseCode usage) {
 		// Auto-generated method stub
 
 	}
@@ -145,7 +145,7 @@ public class Author {
 	 * @param speciality
 	 *            Fachgebiet (z.B. Facharzt für Allgemeine Medizin)
 	 */
-	public void cAddSpeciality(String speciality) {
+	public void addSpeciality(String speciality) {
 		// Auto-generated method stub
 		// This is not a CDA-Element, but is important for the transmission of a
 		// document with XDS!
@@ -159,22 +159,22 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void cAddWebsite(String eMail, UseCode usage) {
+	public void addWebsite(String eMail, UseCode usage) {
 		// Auto-generated method stub
 
 	}
 
-	public void cAddName(Name name) {
+	public void addName(Name name) {
 		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
 				.add(name.mPn);
 	}
 
-	public void cAddName(String familyName) {
+	public void addName(String familyName) {
 		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0)
 				.getFamilies().add(CdaChUtil.createName(familyName));
 	}
 
-	public String cGetCompleteName() {
+	public String getCompleteName() {
 		Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
 				.getNames().get(0));
 		return name.cGetCompleteName();
@@ -184,16 +184,16 @@ public class Author {
 		return this.mAuthor;
 	}
 
-	public String cGetGln() {
+	public String getGln() {
 		// TODO Alle Ids durchsehen und die richtige (anhand der root-id)
 		// zurückliefern.
 		return mAuthor.getAssignedAuthor().getIds().get(0).getExtension();
 	}
 
-	public void cSetGln(String gln) {
+	public void setGln(String gln) {
 		// TODO Construct Enums that deliver the real OIDs in Numbers (like in
 		// hl7.vocab.PostalAdressUse). Replace the construction of the II in the
 		// following line with this number.
-		this.cAddID(new Identificator(gln, KnownOID.GLN));
+		this.addID(new Identificator(gln, KnownOID.GLN));
 	}
 }
