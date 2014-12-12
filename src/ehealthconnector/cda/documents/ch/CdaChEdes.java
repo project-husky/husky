@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHEDESCTNN;
+import org.openhealthtools.mdht.uml.cda.ch.EDESCTNN;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
@@ -18,14 +18,14 @@ import ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language;
 public class CdaChEdes extends CdaCh {
 
 	/**
-	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-eVACDOC Objekts. Beide repräsentieren ein Impfdokument.</div>
+	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
 	 * <div class="fr"></div>
 	 *
 	 * @param doc 
 	 * 		<div class="de">CdaChEdes</div>
 	 *		<div class="fr"></div>
 	 */
-	public CdaChEdes(CDACHEDESCTNN doc) {
+	public CdaChEdes(EDESCTNN doc) {
 		super();
 		this.setDoc(doc);
 	}
@@ -39,7 +39,7 @@ public class CdaChEdes extends CdaCh {
 	 */
 	public CdaChEdes(Language language, String stylesheet) {
 		super();
-		super.doc = CHFactory.eINSTANCE.createCDACHEDESCTNN().init();
+		super.doc = CHFactory.eINSTANCE.createEDESCTNN().init();
 		super.setChMetadata(language, stylesheet);
 		printXmlToConsole();
 	}
@@ -122,8 +122,8 @@ public class CdaChEdes extends CdaCh {
 	 *
 	 * @return the doc
 	 */
-	public CDACHEDESCTNN getDoc () {
-		return (CDACHEDESCTNN) this.doc;
+	public EDESCTNN getDoc () {
+		return (EDESCTNN) this.doc;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class CdaChEdes extends CdaCh {
 	 *
 	 * @param doc the new doc
 	 */
-	public void setDoc(CDACHEDESCTNN doc) {
+	public void setDoc(EDESCTNN doc) {
 		this.doc = doc;
 	}
 }

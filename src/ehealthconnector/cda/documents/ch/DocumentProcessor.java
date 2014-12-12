@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.VHitGArztbrief;
-import org.openhealthtools.mdht.uml.cda.ch.eVACDOC;
+import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
 /**
@@ -73,7 +73,7 @@ public class DocumentProcessor {
 		// Explicit initialization
 		CHPackage.eINSTANCE.eClass();
 
-		eVACDOC evacdocMdht = null;
+		VACD evacdocMdht = null;
 		//System.out.println("\n\n ===== Checking type of clinical document =====");
 		if (clinicalDocument instanceof VHitGArztbrief) {
 			 //System.out.println("clinicalDocument is an instance of VHitGArztbrief");
@@ -81,9 +81,9 @@ public class DocumentProcessor {
 		if (clinicalDocument instanceof CDACH) {
 			 //System.out.println("clinicalDocument is an instance of CDACH");
 		}
-		if (clinicalDocument instanceof eVACDOC) {
+		if (clinicalDocument instanceof VACD) {
 			 //System.out.println("clinicalDocument is an instance of eVACDOC");
-			evacdocMdht = (eVACDOC) clinicalDocument;
+			evacdocMdht = (VACD) clinicalDocument;
 		} else {
 			 System.out.println("clinical document is NOT an instance of eVACDOC");
 		}

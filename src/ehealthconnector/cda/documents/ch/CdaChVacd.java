@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ch.eVACDOC;
+import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language;
 
@@ -43,7 +43,7 @@ public class CdaChVacd extends CdaCh {
 	 * 		<div class="de">eVACDOC</div>
 	 *		<div class="fr"></div>
 	 */
-	public CdaChVacd(eVACDOC doc) {
+	public CdaChVacd(VACD doc) {
 		super();
 		this.doc = doc;
 	}
@@ -58,7 +58,7 @@ public class CdaChVacd extends CdaCh {
 	public CdaChVacd(Language language, String stylesheet) {
 		//super (language, stylesheet);
 		super();
-		doc = CHFactory.eINSTANCE.createeVACDOC().init();
+		doc = CHFactory.eINSTANCE.createVACD().init();
 		docRoot.setClinicalDocument(doc);
 		super.setChMetadata(language, stylesheet);
 	}
@@ -173,8 +173,8 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return the doc
 	 */
-	public eVACDOC getDoc () {
-		return (eVACDOC) this.doc;
+	public VACD getDoc () {
+		return (VACD) this.doc;
 	}
 	
 	/**
@@ -182,7 +182,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @param doc the new doc
 	 */
-	public void setDoc(eVACDOC doc) {
+	public void setDoc(VACD doc) {
 		this.doc = doc;
 	}
 }
