@@ -16,11 +16,13 @@
 *
 *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
-import org.ehc.cda.ConvenienceUtilsEnums.KnownOID;
+import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+
+import org.ehc.general.ConvenienceUtilsEnums;
 
 /**
  * Representiert eine weltweit eindeutige ID (besteht aus lokaler ID und der OID
@@ -40,7 +42,7 @@ public class Identificator {
 	 */
 	public Identificator(String id, KnownOID oid) {
 		this.mII = DatatypesFactory.eINSTANCE.createII();
-		this.setRoot(org.ehc.cda.ConvenienceUtilsEnums.knownOID(oid));
+		this.setRoot(ConvenienceUtilsEnums.knownOID(oid));
 		this.setExtension(id);
 	}
 

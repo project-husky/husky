@@ -18,6 +18,6 @@
 
 package org.ehc.communication;
 
-public interface XdsErrorList {
+public interface ErrorList {
 
 }

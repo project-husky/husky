@@ -16,14 +16,14 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.ehc.cda.ConvenienceUtilsEnums.AdministrativeGenderCode;
-import org.ehc.cda.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.ConvenienceUtilsEnums.AdministrativeGenderCode;
+import org.ehc.general.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -31,8 +31,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
-
-import ch.ehc.cda.CdaChUtil;
 
 public class Patient {
 
@@ -74,15 +72,15 @@ public class Patient {
 		patientRole.setPatient(patient);
 
 		// Create and fill gender
-		patient.setAdministrativeGenderCode(CdaChUtil
+		patient.setAdministrativeGenderCode(Util
 				.createAdministrativeGenderCode(sex));
 
 		// Fill Patient Name
-		patient.getNames().add(name.mPn);
+		patient.getNames().add(name.getPn());
 
 		// Create and fill birth date
 		try {
-			patient.setBirthTime(CdaChUtil.createTSFromEuroDate(birthDate));
+			patient.setBirthTime(Util.createTSFromEuroDate(birthDate));
 		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

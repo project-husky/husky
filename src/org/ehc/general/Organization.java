@@ -16,7 +16,7 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
 import java.util.List;
 

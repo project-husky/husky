@@ -16,10 +16,10 @@
 *
 *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
-import org.ehc.cda.ConvenienceUtilsEnums.KnownOID;
-import org.ehc.cda.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
+import org.ehc.general.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;

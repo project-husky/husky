@@ -23,11 +23,6 @@ import java.io.FileOutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.ehc.cda.Organization;
-import org.ehc.cda.Patient;
-import org.ehc.cda.Person;
-import org.ehc.cda.ConvenienceUtilsEnums.Language;
-import org.ehc.cda.ConvenienceUtilsEnums.ParticipantType;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.AssociatedEntity;
 import org.openhealthtools.mdht.uml.cda.Author;
@@ -43,6 +38,13 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.ehc.general.Organization;
+import org.ehc.general.Patient;
+import org.ehc.general.Person;
+import org.ehc.general.Util;
+import org.ehc.general.ConvenienceUtilsEnums.Language;
+
+import ch.ehc.general.ConvenienceUtilsEnums.ParticipantType;
 
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
@@ -89,7 +91,7 @@ public abstract class CdaCh {
 	 */
 	public void setChMetadata(Language language, String stylesheet) {
 		// Set language of the document
-		doc.setLanguageCode(CdaChUtil.createLanguageCode(language));
+		doc.setLanguageCode(Util.createLanguageCode(language));
 
 		// Set OID of the document
 		//TODO this.setId(CdaChUtil.generateDocId(applicationOidRoot));
@@ -159,7 +161,7 @@ public abstract class CdaCh {
 	 * @param author
 	 *            Der Autor
 	 */
-	public void addAuthor(org.ehc.cda.Author author) {
+	public void addAuthor(org.ehc.general.Author author) {
 		// create a new (!) MDHT author Objekt.
 		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
 		docAuthor = author.getAuthorMdht();
@@ -172,8 +174,8 @@ public abstract class CdaCh {
 	 * 
 	 * @return das eHealthConnector Author Objekt
 	 */
-	public org.ehc.cda.Author getAuthor() {
-		org.ehc.cda.Author author = new org.ehc.cda.Author(
+	public org.ehc.general.Author getAuthor() {
+		org.ehc.general.Author author = new org.ehc.general.Author(
 				doc.getAuthors().get(0));
 		return author;
 	}
@@ -196,7 +198,7 @@ public abstract class CdaCh {
 		mdhtCustodian
 				.getAssignedCustodian()
 				.setRepresentedCustodianOrganization(
-						CdaChUtil
+						Util
 								.createCustodianOrganizationFromOrganization(organization));
 	}
 
@@ -216,8 +218,8 @@ public abstract class CdaCh {
 	 *            rechtsgültiger Unterzeichner
 	 */
 	public void setLegalAuthenticator(
-			org.ehc.cda.Author legalAuthenticator) {
-		doc.setLegalAuthenticator(CdaChUtil
+			org.ehc.general.Author legalAuthenticator) {
+		doc.setLegalAuthenticator(Util
 				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
 	}
 

@@ -16,13 +16,14 @@
 *
 *******************************************************************************/
 
-package org.ehc.communication;
+package ch.ehc.communication;
 
-import org.ehc.cda.Identificator;
-import org.ehc.cda.ConvenienceUtilsEnums.AuthorRoleCode;
-import org.ehc.cda.ConvenienceUtilsEnums.AuthorSpecialityCode;
-import org.ehc.cda.ConvenienceUtilsEnums.HealthcareFacilityTypeCode;
-import org.ehc.cda.ConvenienceUtilsEnums.PracticeSettingCode;
+import org.ehc.general.Identificator;
+
+import ch.ehc.general.ConvenienceUtilsEnums.AuthorRoleCode;
+import ch.ehc.general.ConvenienceUtilsEnums.AuthorSpecialityCode;
+import ch.ehc.general.ConvenienceUtilsEnums.HealthcareFacilityTypeCode;
+import ch.ehc.general.ConvenienceUtilsEnums.PracticeSettingCode;
 
 /**
  * Stellt die Metadaten gemäss [IHE ITI TF-3], Table 4.1-5: Document Metadata

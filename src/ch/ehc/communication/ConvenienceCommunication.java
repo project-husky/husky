@@ -23,10 +23,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.ehc.cda.DocumentMetadata;
-import org.ehc.cda.Identificator;
 import org.ehc.communication.Destination;
-import org.ehc.communication.XdsMetadata;
-import org.ehc.communication.XdsResponse;
+import org.ehc.communication.Response;
+import org.ehc.general.Identificator;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 
 import ch.ehc.cda.CdaCh;
@@ -113,7 +112,7 @@ public class ConvenienceCommunication {
 	 * @return status der XDS-Übertragung
 	 * @throws Exception
 	 */
-	public static XdsResponse sendCdaDocument(XdsMetadata metadata,
+	public static Response sendCdaDocument(XdsMetadata metadata,
 			Destination destination, CdaChVacd doc) throws Exception {
 		return null;
 	}

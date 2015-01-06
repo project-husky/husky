@@ -16,11 +16,11 @@
 *
 *******************************************************************************/
 
-package org.ehc.cda;
+package ch.ehc.cda;
 
-import org.ehc.cda.ConvenienceUtilsEnums.AllergySubstanceType;
-import org.ehc.cda.ConvenienceUtilsEnums.AllergyType;
-import org.ehc.cda.ConvenienceUtilsEnums.Severity;
+import ch.ehc.general.ConvenienceUtilsEnums.AllergySubstanceType;
+import org.ehc.general.ConvenienceUtilsEnums.AllergyType;
+import org.ehc.general.ConvenienceUtilsEnums.Severity;
 
 /**
  * Codierte Allergie oder Unverträglichkeit

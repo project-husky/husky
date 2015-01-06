@@ -16,9 +16,9 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
-import org.ehc.cda.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.impl.ADImpl;
 import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
 

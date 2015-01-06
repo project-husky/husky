@@ -19,16 +19,16 @@
 package org.ehc.communication;
 
 
-public class XdsResponse {
+public class Response {
 	/**
 	 * Eine Liste mit evtl. aufgetretenden Fehlern
 	 */
-	XdsErrorList xdsErrorList;
+	ErrorList xdsErrorList;
 
 	/**
 	 * Gibt den Gesamtstatus der Transaktion wieder
 	 */
-	XdsStatus xdsStatus;
+	Status xdsStatus;
 
 	/**
 	 * true, wenn die Transaktion erfolgreich war. Sonst: false.

@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ProblemConcernEntry;
-import org.ehc.cda.ConvenienceUtilsEnums.Language;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.EDESCTNN;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+
+import org.ehc.general.ConvenienceUtilsEnums.Language;
 
 public class CdaChEdes extends CdaCh {
 

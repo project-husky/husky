@@ -22,12 +22,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+import org.ehc.general.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
-
-import ch.ehc.cda.CdaChUtil;
 
 /**
  * Ein medizinisches Problem
@@ -51,7 +50,7 @@ public class ProblemEntry {
 	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 */
 	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
-			Date endOfProblem, Code problem) {
+			Date endOfProblem, org.ehc.general.Code problem) {
 		this(problemNotOccured, DateFormat.getDateInstance().format(
 				startOfProblem), DateFormat.getDateInstance().format(
 				endOfProblem), problem);
@@ -72,7 +71,7 @@ public class ProblemEntry {
 	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 */
 	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-			String endOfProblem, Code problem) {
+			String endOfProblem, org.ehc.general.Code problem) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
 		this.setProblemNotOccured(problemNotOccured);
 		try {
@@ -118,7 +117,7 @@ public class ProblemEntry {
 	 * @return das startOfProblem Objekt
 	 */
 	public String getStartOfProblem() {
-		return CdaChUtil.createEurDateStrFromTS(mProblemEntry
+		return Util.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getLow().getValue());
 	}
 
@@ -134,14 +133,14 @@ public class ProblemEntry {
 		}
 		// IVXB_TS startTime = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		mProblemEntry.getEffectiveTime().setLow(
-				CdaChUtil.createIVXB_TSFromEuroDate(startOfProblem));
+				Util.createIVXB_TSFromEuroDate(startOfProblem));
 	}
 
 	/**
 	 * @return das endOfProblem Objekt
 	 */
 	public String getEndOfProblem() {
-		return CdaChUtil.createEurDateStrFromTS(mProblemEntry
+		return Util.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getHigh().getValue());
 	}
 
@@ -152,14 +151,14 @@ public class ProblemEntry {
 	 */
 	public void setEndOfProblem(String endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
-				CdaChUtil.createIVXB_TSFromEuroDate(endOfProblem));
+				Util.createIVXB_TSFromEuroDate(endOfProblem));
 	}
 
 	/**
 	 * @return das codedProblem Objekt
 	 */
-	public Code getCodedProblem() {
-		Code code = new Code(mProblemEntry.getCode());
+	public org.ehc.general.Code getCodedProblem() {
+	  org.ehc.general.Code code = new org.ehc.general.Code(mProblemEntry.getCode());
 		return code;
 	}
 
@@ -167,7 +166,7 @@ public class ProblemEntry {
 	 * @param codedProblem
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
-	public void cSetCodedProblem(Code codedProblem) {
-		mProblemEntry.setCode(codedProblem.mCD);
+	public void cSetCodedProblem(org.ehc.general.Code codedProblem) {
+		mProblemEntry.setCode(codedProblem.getCD());
 	}
 }

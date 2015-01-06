@@ -16,7 +16,7 @@
  *
  *******************************************************************************/
 
-package ch.ehc.cda;
+package org.ehc.general;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,10 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import org.ehc.cda.Organization;
-import org.ehc.cda.ConvenienceUtilsEnums.AdministrativeGenderCode;
-import org.ehc.cda.ConvenienceUtilsEnums.Language;
-import org.ehc.cda.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.ConvenienceUtilsEnums.AdministrativeGenderCode;
+import org.ehc.general.ConvenienceUtilsEnums.Language;
+import org.ehc.general.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
@@ -47,7 +46,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
  * Hilfs-Methoden
  * 
  */
-public class CdaChUtil {
+public class Util {
 
 	/**
 	 * Erzeugt eine Adresse
@@ -215,7 +214,7 @@ public class CdaChUtil {
 	 * @param author
 	 */
 	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
-			org.ehc.cda.Author author) {
+			org.ehc.general.Author author) {
 		// FIXME Copy the values from the author object, without drawing / move
 		// them from it.
 

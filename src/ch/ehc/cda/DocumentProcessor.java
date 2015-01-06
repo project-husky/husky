@@ -16,7 +16,7 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package ch.ehc.cda;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,9 +28,6 @@ import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.VHitGArztbrief;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
-
-import ch.ehc.cda.CdaChVacd;
-import ch.ehc.cda.CdaChValidationHandler;
 
 /**
  * Der DocumentProcessor verarbeitet ein gegebenes CDA Dokument. Er bietet

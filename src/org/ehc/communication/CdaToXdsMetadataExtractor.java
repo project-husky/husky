@@ -5,7 +5,7 @@ package org.ehc.communication;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.ehc.cda.Author;
+import org.ehc.general.Author;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
@@ -41,7 +41,7 @@ private DocumentEntryType extract () {
  public Author extractAuthor () {
 	 DocumentEntryType docEntry = this.extract(); 
 	 org.openhealthtools.ihe.xds.metadata.AuthorType iAuthor= (org.openhealthtools.ihe.xds.metadata.AuthorType) docEntry.getAuthors().get(0);
-	org.ehc.cda.Author author = new Author (iAuthor);
+	org.ehc.general.Author author = new Author (iAuthor);
 	 return author;
  }
  

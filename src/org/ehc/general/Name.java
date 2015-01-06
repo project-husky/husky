@@ -16,7 +16,7 @@
 *
 *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
@@ -29,7 +29,15 @@ public class Name {
 
 	PN mPn;
 	
-	/**
+	public PN getPn() {
+    return mPn;
+  }
+
+  public void setPn(PN pn) {
+    this.mPn = pn;
+  }
+
+  /**
 	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für
 	 * Patienten)
 	 * 

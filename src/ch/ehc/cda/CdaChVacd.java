@@ -22,16 +22,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehc.cda.AllergyIntolerance;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.Medication;
 import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.cda.Value;
-import org.ehc.cda.ConvenienceUtilsEnums.Language;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.ehc.general.ConvenienceUtilsEnums.Language;
 
 /**
  * <div class="de" Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD entspricht.</div>
@@ -61,7 +60,6 @@ public class CdaChVacd extends CdaCh {
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
 	public CdaChVacd(Language language, String stylesheet) {
-		//super (language, stylesheet);
 		super();
 		doc = CHFactory.eINSTANCE.createVACD().init();
 		docRoot.setClinicalDocument(doc);
@@ -90,7 +88,7 @@ public class CdaChVacd extends CdaCh {
 	 * @param arzt            Verabreichender Arzt
 	 */
 	public void addImmunization(Medication medication, Value dosage,
-			Date date, org.ehc.cda.Author arzt) {
+			Date date, org.ehc.general.Author arzt) {
 	}
 
 	/**

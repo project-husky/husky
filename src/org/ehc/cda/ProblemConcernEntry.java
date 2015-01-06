@@ -23,13 +23,12 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.ehc.cda.ConvenienceUtilsEnums.StatusCode;
+import org.ehc.general.ConvenienceUtilsEnums.StatusCode;
+import org.ehc.general.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-
-import ch.ehc.cda.CdaChUtil;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -137,7 +136,7 @@ public class ProblemConcernEntry {
 
 		// Create and set the concern interval
 		try {
-			getProblemConcernEntry().setEffectiveTime(CdaChUtil
+			getProblemConcernEntry().setEffectiveTime(Util
 					.createIVL_TSFromEuroDate(begin, end));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -190,7 +189,7 @@ public class ProblemConcernEntry {
 	 * @return Ende des Leidens
 	 */
 	public String getEndOfConcern() {
-		return CdaChUtil.createEurDateStrFromTS(getProblemConcernEntry()
+		return Util.createEurDateStrFromTS(getProblemConcernEntry()
 				.getEffectiveTime().getHigh().getValue());
 	}
 
@@ -200,7 +199,7 @@ public class ProblemConcernEntry {
 	 * @return Beginn des Leidens
 	 */
 	public String getStartOfConcern() {
-		return CdaChUtil.createEurDateStrFromTS(getProblemConcernEntry()
+		return Util.createEurDateStrFromTS(getProblemConcernEntry()
 				.getEffectiveTime().getLow().getValue());
 	}
 
@@ -228,7 +227,7 @@ public class ProblemConcernEntry {
 	public void setEndOfConcern(String endOfConcern) {
 		try {
 			getProblemConcernEntry().getEffectiveTime().setHigh(
-					CdaChUtil.createIVXB_TSFromEuroDate(endOfConcern));
+					Util.createIVXB_TSFromEuroDate(endOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -243,7 +242,7 @@ public class ProblemConcernEntry {
 	public void setStartOfConcern(String startOfConcern) {
 		try {
 			getProblemConcernEntry().getEffectiveTime().setLow(
-					CdaChUtil.createIVXB_TSFromEuroDate(startOfConcern));
+					Util.createIVXB_TSFromEuroDate(startOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

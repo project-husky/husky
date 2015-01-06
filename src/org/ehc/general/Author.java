@@ -16,17 +16,17 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
-import org.ehc.cda.ConvenienceUtilsEnums.KnownOID;
-import org.ehc.cda.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
+import org.ehc.general.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
-import ch.ehc.cda.CdaChUtil;
+import org.ehc.general.ConvenienceUtilsEnums;
 
 /**
  * Ein Autor (meist ein Arzt)
@@ -167,12 +167,12 @@ public class Author {
 
 	public void addName(Name name) {
 		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-				.add(name.mPn);
+				.add(name.getPn());
 	}
 
 	public void addName(String familyName) {
 		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0)
-				.getFamilies().add(CdaChUtil.createName(familyName));
+				.getFamilies().add(Util.createName(familyName));
 	}
 
 	public String getCompleteName() {

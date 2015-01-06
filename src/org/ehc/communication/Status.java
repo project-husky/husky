@@ -18,6 +18,6 @@
 
 package org.ehc.communication;
 
-public interface XdsStatus {
+public interface Status {
 
 }

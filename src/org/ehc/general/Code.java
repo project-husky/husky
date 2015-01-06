@@ -16,7 +16,7 @@
 *
 *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.general;
 
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -28,7 +28,15 @@ public class Code {
 
 	CD mCD;
 	
-	/**
+	public CD getCD() {
+    return mCD;
+  }
+
+  public void setCD(CD cd) {
+    this.mCD = cd;
+  }
+
+  /**
 	 * Erstellt einen neuen Wert
 	 * 
 	 * @param code
