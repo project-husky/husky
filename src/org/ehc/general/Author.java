@@ -20,13 +20,18 @@ package org.ehc.general;
 
 import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.general.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.Address;
+import org.ehc.general.Identificator;
+import org.ehc.general.Name;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.ehc.general.Util;
+import org.ehc.general.DateUtil;
 
-import org.ehc.general.ConvenienceUtilsEnums;
 
 /**
  * Ein Autor (meist ein Arzt)
@@ -68,7 +73,20 @@ public class Author {
 		asAuth.getIds().add(id);
 
 		mAuthor.setAssignedAuthor(asAuth);
+		
+		// add functionCode and time
+		mAuthor.setFunctionCode(createFunctionCode());
+		mAuthor.setTime(DateUtil.nowAsTS());
 		this.addName(name);
+	}
+	
+	private CE createFunctionCode() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("221");
+		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
+		ce.setCodeSystemName("ISCO-08");
+		ce.setDisplayName("Medical doctors");
+		return ce;
 	}
 
 	/**
@@ -123,7 +141,7 @@ public class Author {
 	 *            Domäne
 	 */
 	public void addID(Identificator identificator) {
-		mAuthor.getAssignedAuthor().getIds().add(identificator.mII);
+		mAuthor.getAssignedAuthor().getIds().add(identificator.getIi());
 	}
 
 	/**

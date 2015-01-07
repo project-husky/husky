@@ -97,4 +97,8 @@ public class Identificator {
 			this.mII.setExtension(extension);
 		}
 	}
+	
+	public II getIi() {
+		return this.mII;
+	}
 }

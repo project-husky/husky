@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0.jar"/>
@@ -69,5 +68,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.mdht.uml.cda.hitsp.runtime.201212071459/1.2.0_Runtime/org.openhealthtools.mdht.uml.hl7.vocab_1.2.0.201212201425.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xerces/org.apache.xerces_2.9.0.v201101211617.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.mdht.uml.cda.ch.runtime/org.openhealthtools.mdht.uml.cda.ch.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.5.0_22"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

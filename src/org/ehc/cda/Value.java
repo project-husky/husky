@@ -60,4 +60,9 @@ public class Value {
 		return this.unit;
 	}
 
+	@Override
+	public String toString() {
+		return "Value [value=" + value + ", unit=" + unit + "]";
+	}
+
 }

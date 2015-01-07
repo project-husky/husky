@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Name {
 
-	PN mPn;
+	private PN mPn;
 	
 	public PN getPn() {
     return mPn;

@@ -20,16 +20,25 @@ package org.ehc.general;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehc.general.ConvenienceUtilsEnums.AdministrativeGenderCode;
 import org.ehc.general.ConvenienceUtilsEnums.UseCode;
+import org.ehc.general.Address;
+import org.ehc.general.Identificator;
+import org.ehc.general.Name;
+import org.ehc.general.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 public class Patient {
@@ -88,6 +97,15 @@ public class Patient {
 	}
 
 	/**
+	 * Constructor (used when deserializing CDA document).
+	 * 
+	 * @param recordTarget
+	 */
+	Patient(RecordTarget recordTarget) {
+		this.mRecordTarget = recordTarget;
+	}
+
+	/**
 	 * Fügt eine Adresse hinzu
 	 * 
 	 * @param address
@@ -141,10 +159,59 @@ public class Patient {
 	}
 
 	public RecordTarget getRecordTarget() {
-		return mRecordTarget;
+		return this.mRecordTarget;
 	}
 
 	public void setRecordTarget(RecordTarget mRecordTarget) {
 		this.mRecordTarget = mRecordTarget;
+	}
+
+	public Name getName() {
+		PN pn = getPatient().getNames().get(0);
+		return new Name(pn);
+	}
+	
+	public Date getBirthDate() {
+		try {
+			TS birthTime = getPatient().getBirthTime();
+			String value = birthTime.getValue();
+			return parseDate(value);
+		} catch (ParseException e) {
+			throw new IllegalArgumentException("Cannot convert birthdate", e);
+		}
+	}
+	
+	public AdministrativeGenderCode getGenderCode() {
+		CE code = getPatient().getAdministrativeGenderCode();
+		if ("M".equals(code.getCode())) {
+			return AdministrativeGenderCode.Male;
+		} else if ("F".equals(code.getCode())) {
+			return AdministrativeGenderCode.Female;
+		} else {
+			return AdministrativeGenderCode.Undifferentiated;
+		}
+	}
+	
+	private Date parseDate(String value) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.parse(value);
+	}
+	
+	private org.openhealthtools.mdht.uml.cda.Patient getPatient() {
+		return mRecordTarget.getPatientRole().getPatient();
+	}
+
+	public Address getAddress() {
+		AD ad = mRecordTarget.getPatientRole().getAddrs().get(0);
+		return convertAddress(ad);
+	}
+
+	private Address convertAddress(AD ad) {
+		String street = ad.getStreetNames().get(0).getText();
+		String houseNumber = ad.getHouseNumbers().get(0).getText();
+		String zip = ad.getPostalCodes().get(0).getText();
+		String city = ad.getCities().get(0).getText();
+		
+		return new Address(street, houseNumber, zip, city);
 	}
 }

@@ -22,6 +22,11 @@ package org.ehc.cda;
  * Ein Medikament
  */
 public class Medication {
+	
+	private String atcCode;
+	private String name;
+	private String gtin;
+	
 	/**
 	 * Erstellt ein neues Medikament
 	 * 
@@ -34,7 +39,9 @@ public class Medication {
 	 *          Strichcode des Artikels (z.B. 7680006690011)
 	 */
 	public Medication(String atcCode, String name, String gtin) {
-
+		this.atcCode = atcCode;
+		this.name = name;
+		this.gtin = gtin;
 	}
 
 	/**
@@ -43,6 +50,6 @@ public class Medication {
 	 * @return Namen
 	 */
 	public String getName() {
-		return null;
+		return this.name;
 	}
 }
