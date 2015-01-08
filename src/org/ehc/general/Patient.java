@@ -41,7 +41,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
-public class Patient {
+public class Patient extends Person {
 
 	private RecordTarget mRecordTarget;
 
@@ -70,6 +70,7 @@ public class Patient {
 	 *            Geburtsdatum (als Text) Beispiel:20.05.1967
 	 */
 	public Patient(Name name, AdministrativeGenderCode sex, String birthDate) {
+	  super(name.getGivenName(), name.getFamilyName());
 		// Create the patientRole
 		setRecordTarget(CDAFactory.eINSTANCE.createRecordTarget());
 		PatientRole patientRole = CDAFactory.eINSTANCE.createPatientRole();
@@ -101,7 +102,7 @@ public class Patient {
 	 * 
 	 * @param recordTarget
 	 */
-	Patient(RecordTarget recordTarget) {
+	protected Patient(RecordTarget recordTarget) {
 		this.mRecordTarget = recordTarget;
 	}
 
