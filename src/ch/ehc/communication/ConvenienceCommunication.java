@@ -92,7 +92,30 @@ public class ConvenienceCommunication {
 
 	// Übermittlung per XDR und XDS (Senden und Empfangen) - A5, A6, A7,
 
-	/**
+    /**
+     * <p>
+     * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
+     * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
+     * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
+     * </p>
+     * <p>
+     * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+     * Document Source Actor</b>
+     * </p>
+     * 
+     * @param destination
+     *          Ziel der Übertragung (Kommunikations-Endpunkt)
+     * @param doc
+     *          das CDA-Dokument, welches verschickt werden soll
+     * @return status der XDS-Übertragung
+     * @throws Exception
+     */
+    public static Response sendCdaDocument(Destination destination, CdaCh doc) throws Exception {
+      XdsMetadata metadata = null; //TODO extract from CDA
+      return sendCdaDocument(metadata, destination, doc);
+    }
+
+    /**
 	 * <p>
 	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
 	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
@@ -113,11 +136,36 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 */
 	public static Response sendCdaDocument(XdsMetadata metadata,
-			Destination destination, CdaChVacd doc) throws Exception {
+			Destination destination, CdaCh doc) throws Exception {
 		return null;
 	}
 
-	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10, A11
+    /**
+     * <p>
+     * Sendet eine beliebige Datei an einen Empfänger (Repository Akteur gemäss IHE
+     * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
+     * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
+     * </p>
+     * <p>
+     * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+     * Document Source Actor</b>
+     * </p>
+     * 
+     * @param metadata
+     *          Metadaten zum Dokument
+     * @param destination
+     *          Ziel der Übertragung (Kommunikations-Endpunkt)
+     * @param filePath
+     *          Datei (inkl. Pfad), welche verschickt werden soll
+     * @return status der XDS-Übertragung
+     * @throws Exception
+     */
+    public static Response sendDocument(XdsMetadata metadata,
+            Destination destination, String filePath) throws Exception {
+        return null;
+    }
+
+    // Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10, A11
 
 	/**
 	 * <p>
