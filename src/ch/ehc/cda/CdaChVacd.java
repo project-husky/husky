@@ -38,12 +38,13 @@ import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastIllnessBuilder;
 import org.ehc.cda.ProblemConcernEntry;
-import org.ehc.cda.ProblemConcernTextBuilder;
+//import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
 import org.ehc.cda.Treatment;
 import org.ehc.cda.TreatmentBuilder;
 import org.ehc.cda.TreatmentPlanTextBuilder;
 import org.ehc.cda.Value;
+import org.ehc.general.Util;
 import org.ehc.cda.converter.MedicationConverter;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -110,6 +111,18 @@ public class CdaChVacd extends CdaCh {
 		super();
 		doc = CHFactory.eINSTANCE.createVACD().init();
 		setChMetadata(language, stylesheet);
+		
+		// fix missing extension values in MDHT model.
+		for (II templateId : doc.getTemplateIds()) {
+			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH-VACD");
+			}
+		}
+		for (II templateId : doc.getTemplateIds()) {
+			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH");
+			}
+		}
 
 		docRoot.setClinicalDocument(doc);
 	}
@@ -131,107 +144,6 @@ public class CdaChVacd extends CdaCh {
     public void setDoc(VACD doc) {
         this.doc = doc;
     }
-	
-//	/**
-//	 * Set title and effectiveTime, otherwise document is NOT XML schema compliant.
-//	 * 
-//	 * @see ehealthconnector.cda.documents.ch.CdaCh#setChMetadata(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language, java.lang.String)
-//	 */
-//	@Override
-//	public void setChMetadata(Language language, String stylesheet) {
-//		super.setChMetadata(language, stylesheet);
-//		
-//		setParentTemplateIds();
-//		
-//		doc.setTitle(st("eVACDOC"));
-//		doc.setEffectiveTime(DateUtil.nowAsTS());
-//	}
-//	
-//	/**
-//	 * Sets the parent template ids
-//	 * Schematron validation checks for this ids !
-//	 */
-//	private void setParentTemplateIds() {
-//		// IHE PCC Medical Documents Specification
-//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
-//	
-//		// IHE Immunization Detail Specification
-//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
-//		
-//		// CDA-CH
-//		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1", "CDA-CH"));
-//
-//		// eVACDOC (VACD) V1
-//		
-//		// TODO: acutually validator crashes when setting this !!??
-////		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH-VACD"));
-//		
-//		// fix missing extension value in MDHT model.
-//		for (II templateId : doc.getTemplateIds()) {
-//			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
-//				templateId.setExtension("CDA-CH-VACD");
-//			}
-//		}
-//	}
-//	
-//	/**
-//	 * Erstellt ein neues eVACDOC CDA Dokument
-//	 * 
-//	 * @param language
-//	 *            Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
-//	 * @param stylesheet
-//	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> fuer die
-//	 *            menschlich Lesbare Darstellung referenziert werden soll.
-//	 */
-//	public CdaChVacd(Language language, String stylesheet, Object old) {
-//		doc = CHFactory.eINSTANCE.createVACD().init();
-//
-//		// Set language of the document
-//		doc.setLanguageCode(Util.createLanguageCode(language));
-//
-//		// Set OID of the document
-//		II docID = DatatypesFactory.eINSTANCE.createII();
-//		doc.setId(docID);
-//		docID.setRoot("MDHT");
-//		docID.setExtension("1817558763");
-//
-//		// Set Type ID
-//		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
-//				.createInfrastructureRootTypeId();
-//		doc.setTypeId(typeId);
-//		typeId.setRoot("2.16.840.1.113883.1.3");
-//		typeId.setExtension("POCD_HD000040");
-//
-//		// set title
-//		doc.setTitle(st("eVACDOC"));
-//
-//		// set effective time
-//		doc.setEffectiveTime(DateUtil.nowAsTS());
-//		
-//		// Set Confidentially Code
-//		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
-//		doc.setConfidentialityCode(confidentialityCode);
-//		confidentialityCode.setCode("1941043196");
-//
-//		initDocumentRoot(stylesheet);
-//	}
-//	
-//	private void initDocumentRoot(String stylesheet) {
-//		// Create document root
-//		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
-//
-//		// Add the stylesheet processing instructions to the document root using featuremaputil
-//		if (stylesheet != null) {
-//		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
-//						+ "\" ");
-//		}
-//
-//		// Set the CDA document
-//		docRoot.setClinicalDocument(doc);
-//
-//		// set xml namespace
-//		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
-//	}
     
     /**
      * Fügt ein Leiden hinzu.
@@ -348,26 +260,11 @@ public class CdaChVacd extends CdaCh {
 		Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
-		observation.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.3.1.6"));
+		observation.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.1.6"));
 		observation.setCode(createCode(serologie));
 		observation.setStatusCode(CSUtil.completed());
-		observation.setEffectiveTime(convertDate(serologie.getDate()));
+		observation.setEffectiveTime(Util.convertDate(serologie.getDate()));
 		return observation;
-	}
-
-	private IVL_TS convertDate(Date date) {
-		if (date == null) {
-			return createUnknownTime();
-		} else {
-			IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
-			ts.setValue(format(date));
-			return ts;
-		}
-	}
-
-	private String format(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		return sdf.format(date);
 	}
 
 	private CD createCode(Serologie serologie) {
@@ -419,16 +316,16 @@ public class CdaChVacd extends CdaCh {
 
 	private Section createLaboratorySpecialitySection() {
 		Section section = CDAFactory.eINSTANCE.createSection();
-		section.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.3.3.2.1"));
+		section.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.3.2.1"));
 		section.setCode(createLaboratorySpecialityCode());
-		section.setTitle(st("Laborbefund"));
+		section.setTitle(Util.st("Laborbefund"));
 		return section;
 	}
 	
 	private Section createTreatmentPlanSection() {
 		Section section = CDAFactory.eINSTANCE.createSection();
-		section.setTitle(st("Impfempfehlung"));
-		section.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.3.3.2.1"));
+		section.setTitle(Util.st("Impfempfehlung"));
+		section.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.3.2.1"));
 		section.setCode(createTreatmentPlanCode());
 		return section;
 	}	
@@ -440,18 +337,6 @@ public class CdaChVacd extends CdaCh {
 		ce.setDisplayName("TREATMENT PLAN");
 		return ce;
 	}
-
-	private II ii(String root) {
-		II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(root);
-		return ii;
-	}
-	
-	private II ii(String root, String extension) {
-		II ii = ii(root);
-		ii.setExtension(extension);
-		return ii;
-	}	
 
 	private CE createLaboratorySpecialityCode() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -530,30 +415,8 @@ public class CdaChVacd extends CdaCh {
 	@SuppressWarnings("unused")
 	private Procedure createProcedure() {
 		Procedure procedure = IHEFactory.eINSTANCE.createProcedureEntryPlanOfCareActivityProcedure();
-		procedure.setEffectiveTime(createUnknownTime());
+		procedure.setEffectiveTime(Util.createUnknownTime());
 		return procedure;
-	}
-
-	private IVL_TS createUnknownTime() {
-		IVXB_TS ts_unknown = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		
-		IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
-		effectiveTime.setLow(ts_unknown);
-		
-		return effectiveTime;
-	}
-	
-	private IVL_TS createUnknownLowHighTimeNullFlavor() {
-		IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
-		effectiveTime.setLow(createNullFlavorUnknown());
-		effectiveTime.setHigh(createNullFlavorUnknown());
-		return effectiveTime;
-	}	
-
-	private IVXB_TS createNullFlavorUnknown() {
-		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		ts.setNullFlavor(NullFlavor.UNK);
-		return ts;
 	}
 
 	private ImmunizationsSection getImmunizationSection() {
@@ -585,7 +448,7 @@ public class CdaChVacd extends CdaCh {
 	
 	private HistoryOfPastIllnessSection createHistoryOfPastIllnessSection() {
 		HistoryOfPastIllnessSection section = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
-		section.setTitle(st("Bisherige Krankheiten"));
+		section.setTitle(Util.st("Bisherige Krankheiten"));
 		return section;
 	}
 
@@ -649,14 +512,8 @@ public class CdaChVacd extends CdaCh {
 	 */
 	private org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection createImmunizationSection() {
 		org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection section = IHEFactory.eINSTANCE.createImmunizationsSection().init();
-		section.setTitle(st("Impfungen"));
+		section.setTitle(Util.st("Impfungen"));
 		return section;
-	}
-	
-	private ST st(String text) {
-		ST value = DatatypesFactory.eINSTANCE.createST();
-		value.addText(text);
-		return value;
 	}
 
 	public void addProblemConcernEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
@@ -721,29 +578,23 @@ public class CdaChVacd extends CdaCh {
 		return code;
 	}
 	
-	
-	
 	private org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry createProblemEntry(Disease disease) {
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry = IHEFactory.eINSTANCE.createProblemEntry();
 		entry.setClassCode(ActClassObservation.OBS);
 		entry.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		
-		entry.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
-		entry.getTemplateIds().add(ii("2.16.840.1.113883.10.20.1.28"));
-		entry.getTemplateIds().add(ii("2.16.840.1.113883.10.20.1.54"));
+		entry.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
+		entry.getTemplateIds().add(Util.ii("2.16.840.1.113883.10.20.1.28"));
+		entry.getTemplateIds().add(Util.ii("2.16.840.1.113883.10.20.1.54"));
 		
-		entry.getIds().add(ii("2.16.756.5.30.1.1.1.1.3.1.1", "B3DC860A-D59C-42E2-9527-BE21A0D0334F"));
+		entry.getIds().add(Util.ii("2.16.756.5.30.1.1.1.1.3.1.1", "B3DC860A-D59C-42E2-9527-BE21A0D0334F"));
 		
 		entry.setCode(createCode(disease));
-		entry.setText(createProblemEntryText());
+		entry.setText(Util.createProblemEntryText());
 		entry.setStatusCode(CSUtil.completed());
-		entry.setEffectiveTime(createUnknownLowHighTimeNullFlavor());
+		entry.setEffectiveTime(Util.createUnknownLowHighTimeNullFlavor());
 		entry.getValues().add(createCode(disease));
 		return entry;
-	}
-
-	private ED createProblemEntryText() {
-		return DatatypesFactory.eINSTANCE.createED();
 	}
 
 	private CD createCode(Disease disease) {
@@ -754,27 +605,6 @@ public class CdaChVacd extends CdaCh {
 		code.setDisplayName(disease.name());
 		return code;
 	}
-
-//	/**
-//	 * Fügt ein Leiden hinzu.
-//	 *
-//	 * @param problemConcern            Das Leiden
-//	 */
-//	public void addProblemConcern(
-//			org.ehc.cda.ProblemConcernEntry problemConcern) {
-//		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = IHEFactory.eINSTANCE
-//				.createActiveProblemsSection().init();
-//		doc.addSection(activeProblemsSection);
-//		
-//	    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry leidenMdht = problemConcern.getProblemConcernEntry();
-//
-//		ProblemConcernTextBuilder problemTextBuilder = new ProblemConcernTextBuilder(this.getProblemConcernEntries());
-//		// set up the narrative (human-readable) text portion of the ActiveProblems
-//		// section
-//		activeProblemsSection.createStrucDocText(problemTextBuilder.toString());
-//		//activeProblemsSection.createStrucDocText("TEST");
-//		activeProblemsSection.addAct(leidenMdht);
-//	}
 
 	/**
 	 * Liefert alle Impfempfehlungen im eVACDOC.
@@ -812,6 +642,20 @@ public class CdaChVacd extends CdaCh {
 		return new Immunization(iheImmunization);
 	}
 
+	public boolean hasPastIllness(Disease disease) {
+		HistoryOfPastIllnessSection section = getHistoryOfPastIllnessSection();
+		EList<Act> acts = section.getActs();
+		for (Act act : acts) {
+			for (Observation observation : act.getObservations()) {
+				CD code = observation.getCode();
+				if (code.getCode().equals(disease.getSnomedCode())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 //	/**
 //	 * Liefert alle Leiden im eVACDOC.
 //	 *
@@ -841,18 +685,127 @@ public class CdaChVacd extends CdaCh {
 //
 //		return problemConcernEntryList;
 //	}
+	
 
-	public boolean hasPastIllness(Disease disease) {
-		HistoryOfPastIllnessSection section = getHistoryOfPastIllnessSection();
-		EList<Act> acts = section.getActs();
-		for (Act act : acts) {
-			for (Observation observation : act.getObservations()) {
-				CD code = observation.getCode();
-				if (code.getCode().equals(disease.getSnomedCode())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+//	/**
+//	 * Fügt ein Leiden hinzu.
+//	 *
+//	 * @param problemConcern            Das Leiden
+//	 */
+//	public void addProblemConcern(
+//			org.ehc.cda.ProblemConcernEntry problemConcern) {
+//		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = IHEFactory.eINSTANCE
+//				.createActiveProblemsSection().init();
+//		doc.addSection(activeProblemsSection);
+//		
+//	    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry leidenMdht = problemConcern.getProblemConcernEntry();
+//
+//		ProblemConcernTextBuilder problemTextBuilder = new ProblemConcernTextBuilder(this.getProblemConcernEntries());
+//		// set up the narrative (human-readable) text portion of the ActiveProblems
+//		// section
+//		activeProblemsSection.createStrucDocText(problemTextBuilder.toString());
+//		//activeProblemsSection.createStrucDocText("TEST");
+//		activeProblemsSection.addAct(leidenMdht);
+//	}
+	
+//	/**
+//	 * Set title and effectiveTime, otherwise document is NOT XML schema compliant.
+//	 * 
+//	 * @see ehealthconnector.cda.documents.ch.CdaCh#setChMetadata(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language, java.lang.String)
+//	 */
+//	@Override
+//	public void setChMetadata(Language language, String stylesheet) {
+//		super.setChMetadata(language, stylesheet);
+//		
+//		setParentTemplateIds();
+//		
+//		doc.setTitle(st("eVACDOC"));
+//		doc.setEffectiveTime(DateUtil.nowAsTS());
+//	}
+//	
+//	/**
+//	 * Sets the parent template ids
+//	 * Schematron validation checks for this ids !
+//	 */
+//	private void setParentTemplateIds() {
+//		// IHE PCC Medical Documents Specification
+//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
+//	
+//		// IHE Immunization Detail Specification
+//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
+//		
+//		// CDA-CH
+//		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1", "CDA-CH"));
+//
+//		// eVACDOC (VACD) V1
+//		
+//		// TODO: acutually validator crashes when setting this !!??
+////		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH-VACD"));
+//		
+//		// fix missing extension value in MDHT model.
+//		for (II templateId : doc.getTemplateIds()) {
+//			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+//				templateId.setExtension("CDA-CH-VACD");
+//			}
+//		}
+//	}
+//	
+//	/**
+//	 * Erstellt ein neues eVACDOC CDA Dokument
+//	 * 
+//	 * @param language
+//	 *            Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
+//	 * @param stylesheet
+//	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> fuer die
+//	 *            menschlich Lesbare Darstellung referenziert werden soll.
+//	 */
+//	public CdaChVacd(Language language, String stylesheet, Object old) {
+//		doc = CHFactory.eINSTANCE.createVACD().init();
+//
+//		// Set language of the document
+//		doc.setLanguageCode(Util.createLanguageCode(language));
+//
+//		// Set OID of the document
+//		II docID = DatatypesFactory.eINSTANCE.createII();
+//		doc.setId(docID);
+//		docID.setRoot("MDHT");
+//		docID.setExtension("1817558763");
+//
+//		// Set Type ID
+//		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
+//				.createInfrastructureRootTypeId();
+//		doc.setTypeId(typeId);
+//		typeId.setRoot("2.16.840.1.113883.1.3");
+//		typeId.setExtension("POCD_HD000040");
+//
+//		// set title
+//		doc.setTitle(st("eVACDOC"));
+//
+//		// set effective time
+//		doc.setEffectiveTime(DateUtil.nowAsTS());
+//		
+//		// Set Confidentially Code
+//		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
+//		doc.setConfidentialityCode(confidentialityCode);
+//		confidentialityCode.setCode("1941043196");
+//
+//		initDocumentRoot(stylesheet);
+//	}
+//	
+//	private void initDocumentRoot(String stylesheet) {
+//		// Create document root
+//		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
+//
+//		// Add the stylesheet processing instructions to the document root using featuremaputil
+//		if (stylesheet != null) {
+//		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
+//						+ "\" ");
+//		}
+//
+//		// Set the CDA document
+//		docRoot.setClinicalDocument(doc);
+//
+//		// set xml namespace
+//		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+//	}
 }

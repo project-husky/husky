@@ -35,12 +35,15 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Hilfs-Methoden
@@ -388,5 +391,64 @@ public class Util {
 		ENXP mName = DatatypesFactory.eINSTANCE.createENXP();
 		mName.addText(name);
 		return mName;
+	}
+	
+	public static II ii(String root) {
+		II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(root);
+		return ii;
+	}
+	
+	public static II ii(String root, String extension) {
+		II ii = ii(root);
+		ii.setExtension(extension);
+		return ii;
+	}	
+	
+	public static IVL_TS convertDate(Date date) {
+		if (date == null) {
+			return createUnknownTime();
+		} else {
+			IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
+			ts.setValue(format(date));
+			return ts;
+		}
+	}
+
+	public static ED createProblemEntryText() {
+		return DatatypesFactory.eINSTANCE.createED();
+	}
+	
+	public static ST st(String text) {
+		ST value = DatatypesFactory.eINSTANCE.createST();
+		value.addText(text);
+		return value;
+	}
+	
+	public static String format(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		return sdf.format(date);
+	}
+	
+	public static IVL_TS createUnknownTime() {
+		IVXB_TS ts_unknown = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		
+		IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+		effectiveTime.setLow(ts_unknown);
+		
+		return effectiveTime;
+	}
+	
+	public static IVL_TS createUnknownLowHighTimeNullFlavor() {
+		IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+		effectiveTime.setLow(createNullFlavorUnknown());
+		effectiveTime.setHigh(createNullFlavorUnknown());
+		return effectiveTime;
+	}	
+
+	public static IVXB_TS createNullFlavorUnknown() {
+		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		ts.setNullFlavor(NullFlavor.UNK);
+		return ts;
 	}
 }
