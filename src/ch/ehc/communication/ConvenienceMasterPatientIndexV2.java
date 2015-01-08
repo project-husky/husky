@@ -14,6 +14,7 @@ import ch.ehc.cda.CdaChVacd;
 /**
  * <p>
  * Diese Klasse stellt Methoden für die Kommunikation mit einem Master Patient Index bereit (MPI)
+ * Die Kommunikation erfolgt in dieser Klasse mit HL7 V2 (PIX)
  * 
  * Die Klasse implementiert folgende IHE Akteure und Transaktionen:
  * <ul>
@@ -28,7 +29,7 @@ import ch.ehc.cda.CdaChVacd;
  * </ul>
  * </p>
  */
-public class ConvenienceMasterPatientIndex {
+public class ConvenienceMasterPatientIndexV2 {
 
   /**
    * <p>
