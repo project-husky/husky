@@ -23,9 +23,12 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.ehc.general.Util;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
 /**
@@ -48,13 +51,38 @@ public class ProblemEntry {
 	 * @param problem
 	 *            Freitextbeschreibung zu dem Problem oder Code zu
 	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param internalProblemId
+     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
 	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
-			Date endOfProblem, org.ehc.general.Code problem) {
+			Date endOfProblem, org.ehc.general.Code problem, String internalProblemId) {
 		this(problemNotOccured, DateFormat.getDateInstance().format(
 				startOfProblem), DateFormat.getDateInstance().format(
-				endOfProblem), problem);
+				endOfProblem), problem, internalProblemId);
 	}
+	
+	 /**
+     * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
+     * einem ProblemConcernEntry hinzugefügt werden.
+     * 
+     * @param problemNotOccured
+     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+     * @param startOfProblem
+     *            Beginn des Problems
+     * @param endOfProblem
+     *            Ende des Problems
+     * @param problem
+     *            Freitextbeschreibung zu dem Problem oder Code zu
+     *            Komplikationsrisiken oder Expositionsrisiken.
+     * @param internalProblemId
+     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
+     */
+    public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
+            Date endOfProblem, org.ehc.general.Code problem) {
+        this(problemNotOccured, DateFormat.getDateInstance().format(
+                startOfProblem), DateFormat.getDateInstance().format(
+                endOfProblem), problem);
+    }
 
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
@@ -69,20 +97,56 @@ public class ProblemEntry {
 	 * @param problem
 	 *            Freitextbeschreibung zu dem Problem oder Code zu
 	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param internalProblemId
+     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
 	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-			String endOfProblem, org.ehc.general.Code problem) {
+			String endOfProblem, org.ehc.general.Code problem, String internalProblemId) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
 		this.setProblemNotOccured(problemNotOccured);
 		try {
 			this.setStartOfProblem(startOfProblem);
 			this.setEndOfProblem(endOfProblem);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.cSetCodedProblem(problem);
+		this.setCodedProblem(problem);
 	}
+	
+	 /**
+     * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
+     * einem ProblemConcernEntry hinzugefügt werden.
+     * 
+     * @param problemNotOccured
+     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+     * @param startOfProblem
+     *            Beginn des Problems
+     * @param endOfProblem
+     *            Ende des Problems
+     * @param problem
+     *            Freitextbeschreibung zu dem Problem oder Code zu
+     *            Komplikationsrisiken oder Expositionsrisiken.
+     */
+    public ProblemEntry(boolean problemNotOccured, String startOfProblem,
+            String endOfProblem, org.ehc.general.Code problem) {
+        mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+        this.setProblemNotOccured(problemNotOccured);
+        try {
+            this.setStartOfProblem(startOfProblem);
+            this.setEndOfProblem(endOfProblem);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        this.setCodedProblem(problem);
+        this.setInternalId(UUID.generate());
+    }
+	   
+    private void setInternalId(String id) {
+      II ii = DatatypesFactory.eINSTANCE.createII();
+      ii.setRoot(id);
+      mProblemEntry.getIds().add(ii);
+    }
 
 	/**
 	 * @param observation
@@ -166,7 +230,7 @@ public class ProblemEntry {
 	 * @param codedProblem
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
-	public void cSetCodedProblem(org.ehc.general.Code codedProblem) {
+	public void setCodedProblem(org.ehc.general.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
 	}
 }

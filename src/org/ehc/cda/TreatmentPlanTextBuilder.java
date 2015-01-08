@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TreatmentPlanTextBuilder extends TextBuilder {
 
-	public TreatmentPlanTextBuilder(List<Immunization> cGetImmunizations) {
+	public TreatmentPlanTextBuilder(List<Immunization> getImmunizations) {
 		super();
 	}
 

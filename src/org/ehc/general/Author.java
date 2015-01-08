@@ -196,7 +196,7 @@ public class Author {
 	public String getCompleteName() {
 		Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
 				.getNames().get(0));
-		return name.cGetCompleteName();
+		return name.getCompleteName();
 	}
 
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {

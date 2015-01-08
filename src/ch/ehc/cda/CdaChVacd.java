@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehc.cda.AllergyIntolerance;
 import org.ehc.general.Util;
@@ -37,6 +38,7 @@ import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastIllnessBuilder;
 import org.ehc.cda.ProblemConcernEntry;
+import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
 import org.ehc.cda.Treatment;
 import org.ehc.cda.TreatmentBuilder;
@@ -61,6 +63,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -83,36 +86,18 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
  */
 public class CdaChVacd extends CdaCh {
 
-	/**
-	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-eVACDOC Objekts. Beide repräsentieren ein Impfdokument.</div>
-	 * <div class="fr"></div>
-	 *
-	 * @param doc 
-	 * 		<div class="de">eVACDOC</div>
-	 *		<div class="fr"></div>
-	 */
-	public CdaChVacd(VACD doc) {
-		super();
-		this.doc = doc;
-	}
-	
-	/**
-	 * Liefert das MDHT-eVACDOC-Objekt zurück
-	 *
-	 * @return the doc
-	 */
-	public VACD getDoc() {
-		return (VACD) this.doc;
-	}
-	
-	/**
-	 * Setzt das MDHT-eVACDOC-Objekt
-	 *
-	 * @param doc the new doc
-	 */
-	public void setDoc(VACD doc) {
-		this.doc = doc;
-	}	
+  /**
+   * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
+   * <div class="fr"></div>
+   *
+   * @param doc 
+   *      <div class="de">CdaChVacd</div>
+   *      <div class="fr"></div>
+   */
+  public CdaChVacd(VACD doc) {
+      super();
+      this.setDoc(doc);
+  }
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
@@ -129,106 +114,197 @@ public class CdaChVacd extends CdaCh {
 		docRoot.setClinicalDocument(doc);
 	}
 	
-	/**
-	 * Set title and effectiveTime, otherwise document is NOT XML schema compliant.
-	 * 
-	 * @see ehealthconnector.cda.documents.ch.CdaCh#setChMetadata(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language, java.lang.String)
-	 */
-	@Override
-	public void setChMetadata(Language language, String stylesheet) {
-		super.setChMetadata(language, stylesheet);
-		
-		setParentTemplateIds();
-		
-		doc.setTitle(st("eVACDOC"));
-		doc.setEffectiveTime(DateUtil.nowAsTS());
-	}
+	 /**
+     * Liefert das MDHT-VACD-Objekt zurück
+     *
+     * @return the doc
+     */
+    public VACD getDoc () {
+        return (VACD) this.doc;
+    }
+
+    /**
+     * Setzt das MDHT-CDAEDESCTNN-Objekt
+     *
+     * @param doc the new doc
+     */
+    public void setDoc(VACD doc) {
+        this.doc = doc;
+    }
 	
-	/**
-	 * Sets the parent template ids
-	 * Schematron validation checks for this ids !
-	 */
-	private void setParentTemplateIds() {
-		// IHE PCC Medical Documents Specification
-		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
-	
-		// IHE Immunization Detail Specification
-		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
-		
-		// CDA-CH
-		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1", "CDA-CH"));
+//	/**
+//	 * Set title and effectiveTime, otherwise document is NOT XML schema compliant.
+//	 * 
+//	 * @see ehealthconnector.cda.documents.ch.CdaCh#setChMetadata(ehealthconnector.cda.documents.ch.ConvenienceUtilsEnums.Language, java.lang.String)
+//	 */
+//	@Override
+//	public void setChMetadata(Language language, String stylesheet) {
+//		super.setChMetadata(language, stylesheet);
+//		
+//		setParentTemplateIds();
+//		
+//		doc.setTitle(st("eVACDOC"));
+//		doc.setEffectiveTime(DateUtil.nowAsTS());
+//	}
+//	
+//	/**
+//	 * Sets the parent template ids
+//	 * Schematron validation checks for this ids !
+//	 */
+//	private void setParentTemplateIds() {
+//		// IHE PCC Medical Documents Specification
+//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
+//	
+//		// IHE Immunization Detail Specification
+//		doc.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
+//		
+//		// CDA-CH
+//		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1", "CDA-CH"));
+//
+//		// eVACDOC (VACD) V1
+//		
+//		// TODO: acutually validator crashes when setting this !!??
+////		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH-VACD"));
+//		
+//		// fix missing extension value in MDHT model.
+//		for (II templateId : doc.getTemplateIds()) {
+//			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+//				templateId.setExtension("CDA-CH-VACD");
+//			}
+//		}
+//	}
+//	
+//	/**
+//	 * Erstellt ein neues eVACDOC CDA Dokument
+//	 * 
+//	 * @param language
+//	 *            Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
+//	 * @param stylesheet
+//	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> fuer die
+//	 *            menschlich Lesbare Darstellung referenziert werden soll.
+//	 */
+//	public CdaChVacd(Language language, String stylesheet, Object old) {
+//		doc = CHFactory.eINSTANCE.createVACD().init();
+//
+//		// Set language of the document
+//		doc.setLanguageCode(Util.createLanguageCode(language));
+//
+//		// Set OID of the document
+//		II docID = DatatypesFactory.eINSTANCE.createII();
+//		doc.setId(docID);
+//		docID.setRoot("MDHT");
+//		docID.setExtension("1817558763");
+//
+//		// Set Type ID
+//		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
+//				.createInfrastructureRootTypeId();
+//		doc.setTypeId(typeId);
+//		typeId.setRoot("2.16.840.1.113883.1.3");
+//		typeId.setExtension("POCD_HD000040");
+//
+//		// set title
+//		doc.setTitle(st("eVACDOC"));
+//
+//		// set effective time
+//		doc.setEffectiveTime(DateUtil.nowAsTS());
+//		
+//		// Set Confidentially Code
+//		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
+//		doc.setConfidentialityCode(confidentialityCode);
+//		confidentialityCode.setCode("1941043196");
+//
+//		initDocumentRoot(stylesheet);
+//	}
+//	
+//	private void initDocumentRoot(String stylesheet) {
+//		// Create document root
+//		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
+//
+//		// Add the stylesheet processing instructions to the document root using featuremaputil
+//		if (stylesheet != null) {
+//		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
+//						+ "\" ");
+//		}
+//
+//		// Set the CDA document
+//		docRoot.setClinicalDocument(doc);
+//
+//		// set xml namespace
+//		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+//	}
+    
+    /**
+     * Fügt ein Leiden hinzu.
+     *
+     * @param problemConcern Das Leiden
+     */
+    public void addProblemConcern(
+            org.ehc.cda.ProblemConcernEntry problemConcern) {
 
-		// eVACDOC (VACD) V1
-		
-		// TODO: acutually validator crashes when setting this !!??
-//		doc.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH-VACD"));
-		
-		// fix missing extension value in MDHT model.
-		for (II templateId : doc.getTemplateIds()) {
-			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH-VACD");
-			}
-		}
-	}
-	
-	/**
-	 * Erstellt ein neues eVACDOC CDA Dokument
-	 * 
-	 * @param language
-	 *            Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
-	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> fuer die
-	 *            menschlich Lesbare Darstellung referenziert werden soll.
-	 */
-	public CdaChVacd(Language language, String stylesheet, Object old) {
-		doc = CHFactory.eINSTANCE.createVACD().init();
+        org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
+        
+        if (this.getDoc().getActiveProblemsSection() == null) {
+            activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
+            this.getDoc().addSection(activeProblemsSection);
+        }
+        else {
+            activeProblemsSection = this.getDoc().getActiveProblemsSection();
+        }
 
-		// Set language of the document
-		doc.setLanguageCode(Util.createLanguageCode(language));
+        // set up the narrative (human-readable) text portion of the ProblemConcern Section
+        // section
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("<table border=\"1\" width=\"100%\">");
+        buffer.append("<thead>");
+        buffer.append("<tr>");
+        buffer.append("<th>Risikokategorie</th>");
+        buffer.append("<th>Risikofaktor</th>");
+        buffer.append("</tr>");
+        buffer.append("</thead>");
+        buffer.append("<tbody>");
+        buffer.append("<tr>");
+        buffer.append("<td>Komplikationsrisiko</td>");
+        buffer.append("<td><content ID='p1'>Niereninsuffizienz</content></td>");
+        buffer.append("</tr>");
+        buffer.append("</tbody>");
+        buffer.append("</table>");
+        activeProblemsSection.createStrucDocText(buffer.toString());
 
-		// Set OID of the document
-		II docID = DatatypesFactory.eINSTANCE.createII();
-		doc.setId(docID);
-		docID.setRoot("MDHT");
-		docID.setExtension("1817558763");
+        //create a copy of the given object and its sub-objects
+        org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.getProblemConcernEntry());
+        activeProblemsSection.addAct(problemConcernEntryMdht);
+    }
+    
+    public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
+        ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) this.getDoc().getActiveProblemsSection().getActs().get(leidenNr));
+        return problemConcernEntry;
+    }
 
-		// Set Type ID
-		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
-		doc.setTypeId(typeId);
-		typeId.setRoot("2.16.840.1.113883.1.3");
-		typeId.setExtension("POCD_HD000040");
+    /**
+     * Liefert alle Leiden im eVACDOC.
+     *
+     * @return Liste von Leiden
+     */
+    public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
+        // Get the ActiveProblemSection from the Document
+        org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = (org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection) getDoc().getSections().get(0);
 
-		// set title
-		doc.setTitle(st("eVACDOC"));
+        // Create a List with Problem ConcernEntries
+        ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
 
-		// set effective time
-		doc.setEffectiveTime(DateUtil.nowAsTS());
-		
-		// Set Confidentially Code
-		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
-		doc.setConfidentialityCode(confidentialityCode);
-		confidentialityCode.setCode("1941043196");
+        System.out.println("Assembling ProblemConcernEntryList");
+        // Check if an Act is a problemConcernEntry. If so, create an
+        // eHealthConnector ProblemConcernObject and add it to the list.
+        for (Act act : activeProblemsSection.getActs()) {
+            if (act instanceof org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) {
+                ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+                problemConcernEntryList.add(problemConcernEntry);
+                System.out.println("List Item Code: "+problemConcernEntry.getProblemConcern());
+            }
+        }
 
-		initDocumentRoot(stylesheet);
-	}
-	
-	private void initDocumentRoot(String stylesheet) {
-		// Create document root
-		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
-
-		// Add the stylesheet processing instructions to the document root using featuremaputil
-		if (stylesheet != null) {
-		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
-						+ "\" ");
-		}
-
-		// Set the CDA document
-		docRoot.setClinicalDocument(doc);
-
-		// set xml namespace
-		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
-	}
+        return problemConcernEntryList;
+    }
 
 	/**
 	 * C add allergy.
@@ -238,7 +314,7 @@ public class CdaChVacd extends CdaCh {
 	 * 		<div class="fr"> allergie</div>
 	 * 		<div class="it"> allergie</div>
 	 */
-	public void cAddAllergy(AllergyIntolerance allergy) {
+	public void addAllergy(AllergyIntolerance allergy) {
 		AllergyIntoleranceConcern concern = IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init();
 		
 		org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance iheAllergy = allergy.getAllergyIntolerance();
@@ -253,7 +329,7 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param serologie
 	 */
-	public void cAddSerologie(Serologie serologie) {
+	public void addSerologie(Serologie serologie) {
 		Act act = CDAFactory.eINSTANCE.createAct();
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.EVN);
@@ -412,14 +488,14 @@ public class CdaChVacd extends CdaCh {
 	 * @param date            Datum der Verabreichung
 	 * @param arzt            Verabreichender Arzt
 	 */
-	public void cAddImmunization(Medication medication, Value dosage, Date date, org.ehc.general.Author arzt) {
+	public void addImmunization(Medication medication, Value dosage, Date date, org.ehc.general.Author arzt) {
 		MedicationConverter c = new MedicationConverter(medication);
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization = c.convert();
 		
 		getImmunizationSection().addSubstanceAdministration(immunization);
 	}
 	
-	public void cAddImmunization(org.ehc.cda.Immunization immunization, org.ehc.general.Author author) {
+	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.general.Author author) {
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization = immunization.getImmunization();
 		iheImmunization.getAuthors().add(author.getAuthorMdht());
 		
@@ -428,12 +504,12 @@ public class CdaChVacd extends CdaCh {
 	}
 	
 	private String getImmunizationText() {
-		ImmunizationTextBuilder b = new ImmunizationTextBuilder(cGetImmunizations());
+		ImmunizationTextBuilder b = new ImmunizationTextBuilder(getImmunizations());
 		return b.toString();
 	}
 	
 	private String getTreatmentPlanText() {
-		TreatmentPlanTextBuilder b = new TreatmentPlanTextBuilder(cGetImmunizations());
+		TreatmentPlanTextBuilder b = new TreatmentPlanTextBuilder(getImmunizations());
 		return b.toString();
 	}	
 
@@ -583,13 +659,13 @@ public class CdaChVacd extends CdaCh {
 		return value;
 	}
 
-	public void cAddProblemConcernEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
+	public void addProblemConcernEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblem = problemConcernEntry.getProblemConcernEntry();
 		
 		getActiveProblemsSection().addAct(iheProblem);
 	}
 	
-	public void cAddHistoryOfPastIllnessEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
+	public void addHistoryOfPastIllnessEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblem = problemConcernEntry.getProblemConcernEntry();
 		
 		getHistoryOfPastIllnessSection().addAct(iheProblem);
@@ -600,7 +676,7 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param disease
 	 */
-	public void cAddPastIllNess(Disease disease) {
+	public void addPastIllNess(Disease disease) {
 		PastIllnessBuilder builder = new PastIllnessBuilder(disease);
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblemConcernEntry = builder.build();
 		
@@ -613,7 +689,7 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param disease
 	 */
-	public void cAddTreatment(Treatment treatment) {
+	public void addTreatment(Treatment treatment) {
 		TreatmentBuilder b = new TreatmentBuilder(treatment);
 		org.openhealthtools.mdht.uml.cda.SubstanceAdministration substanceAdministration = b.build();
 		
@@ -679,39 +755,26 @@ public class CdaChVacd extends CdaCh {
 		return code;
 	}
 
-	/**
-	 * Fügt ein Leiden hinzu.
-	 *
-	 * @param problem            Das Leiden
-	 */
-	public void addProblemConcern(
-			org.ehc.cda.ProblemConcernEntry problem) {
-		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = IHEFactory.eINSTANCE
-				.createActiveProblemsSection().init();
-		doc.addSection(activeProblemsSection);
-
-		// set up the narrative (human-readable) text portion of the alerts
-		// section
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<table border=\"1\" width=\"100%\">");
-		buffer.append("<thead>");
-		buffer.append("<tr>");
-		buffer.append("<th>Risikokategorie</th>");
-		buffer.append("<th>Risikofaktor</th>");
-		buffer.append("</tr>");
-		buffer.append("</thead>");
-		buffer.append("<tbody>");
-		buffer.append("<tr>");
-		buffer.append("<td>Komplikationsrisiko</td>");
-		buffer.append("<td><content ID='p1'>Niereninsuffizienz</content></td>");
-		buffer.append("</tr>");
-		buffer.append("</tbody>");
-		buffer.append("</table>");
-		activeProblemsSection.createStrucDocText(buffer.toString());
-
-		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry leidenMdht = problem.getProblemConcernEntry();
-		activeProblemsSection.addAct(leidenMdht);
-	}
+//	/**
+//	 * Fügt ein Leiden hinzu.
+//	 *
+//	 * @param problemConcern            Das Leiden
+//	 */
+//	public void addProblemConcern(
+//			org.ehc.cda.ProblemConcernEntry problemConcern) {
+//		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = IHEFactory.eINSTANCE
+//				.createActiveProblemsSection().init();
+//		doc.addSection(activeProblemsSection);
+//		
+//	    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry leidenMdht = problemConcern.getProblemConcernEntry();
+//
+//		ProblemConcernTextBuilder problemTextBuilder = new ProblemConcernTextBuilder(this.getProblemConcernEntries());
+//		// set up the narrative (human-readable) text portion of the ActiveProblems
+//		// section
+//		activeProblemsSection.createStrucDocText(problemTextBuilder.toString());
+//		//activeProblemsSection.createStrucDocText("TEST");
+//		activeProblemsSection.addAct(leidenMdht);
+//	}
 
 	/**
 	 * Liefert alle Impfempfehlungen im eVACDOC.
@@ -728,7 +791,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Impfungen
 	 */
-	public List<Immunization> cGetImmunizations() {
+	public List<Immunization> getImmunizations() {
 		EList<SubstanceAdministration> substanceAdministrations = getImmunizationSection().getSubstanceAdministrations();
 		
 		List<Immunization> immunizations = new ArrayList<Immunization>();
@@ -749,33 +812,37 @@ public class CdaChVacd extends CdaCh {
 		return new Immunization(iheImmunization);
 	}
 
-	/**
-	 * Liefert alle Leiden im eVACDOC.
-	 *
-	 * @return Liste von Leiden
-	 */
-	public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
-		// Get the ActiveProblemSection from the Document
-		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = (org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection) doc
-				.getSections().get(0);
+//	/**
+//	 * Liefert alle Leiden im eVACDOC.
+//	 *
+//	 * @return Liste von Leiden
+//	 */
+//	public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
+//	  // Get a list of ActiveProblemSections from the Document
+//	  System.out.println("\nUsing CDAUtil Query/Filter Operations (programmatic access for Java gurus)");
+//	  Query query = new Query(doc);
+//	  List<org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection> mdhtActiveProblemsSectionList = query.getSections(org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection.class);
+//
+//		// Create a List of eHC Problem ConcernEntries
+//		ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+//
+//		for(org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection: mdhtActiveProblemsSectionList) {
+//		// Check if an Act is a problemConcernEntry. If so, create an
+//	        // eHealthConnector ProblemConcernObject with it and add it to the list.
+//	        for (Act act : activeProblemsSection.getActs()) {
+//	            if (act instanceof org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) {
+//	                ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry(
+//	                        (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+//	                problemConcernEntryList.add(problemConcernEntry);
+//	            }
+//	        }
+//		}
+//		
+//
+//		return problemConcernEntryList;
+//	}
 
-		// Create a List with Problem ConcernEntries
-		ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
-
-		// Check if an Act is a problemConcernEntry. If so, create an
-		// eHealthConnector ProblemConcernObject with it and add it to the list.
-		for (Act act : activeProblemsSection.getActs()) {
-			if (act instanceof org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) {
-				ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry(
-						(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
-				problemConcernEntryList.add(problemConcernEntry);
-			}
-		}
-
-		return problemConcernEntryList;
-	}
-
-	public boolean cHasPastIllness(Disease disease) {
+	public boolean hasPastIllness(Disease disease) {
 		HistoryOfPastIllnessSection section = getHistoryOfPastIllnessSection();
 		EList<Act> acts = section.getActs();
 		for (Act act : acts) {
