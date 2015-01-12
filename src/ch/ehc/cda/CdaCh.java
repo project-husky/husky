@@ -35,6 +35,7 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -55,6 +56,7 @@ public abstract class CdaCh {
 	public static String applicationOidRoot = "2.16.756.5.30.1.139.1.1.1";  // Currently, the Proof of Concept OID. See: http://oid.refdata.ch/
 	protected CDACH doc = null;												// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
+	protected Query query;
 	
 	/**
 	 * Standard Constructor

@@ -3,83 +3,130 @@ package org.ehc.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehc.general.DateUtil;
+import org.ehc.general.Util;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Observation;
 
 /**
  * Builds the <text> part of the Treatment plan section.
  * 
  * Always builds the whole part (not only adds one recommendation).
  * 
- * @author gsc
+ * @author gsc, ahelmer
  */
 public class ProblemConcernTextBuilder extends TextBuilder {
-  
-  private List<ProblemConcernEntry> problemConcernEntries;
 
-  public ProblemConcernTextBuilder(ArrayList<ProblemConcernEntry> problemConcernEntries) {
-    this.problemConcernEntries = problemConcernEntries;
-  }
+	private List<ProblemConcernEntry> problemConcernEntries;
+	private ProblemConcernEntry newProblemConcernEntry;
+	private String sectionText;
+	private int newId;
+	public final static String contentIdPrefix = "aps";
+	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
-  private void addHeader() {
-    append("<thead>");
-    append("<tr>");
-    append("<th>Risikokategorie</th>");
-    append("<th>Risikofaktor</th>");
-    append("</tr>");
-    append("</thead>");
-  }
+	public ProblemConcernTextBuilder(
+			ArrayList<ProblemConcernEntry> problemConcernEntries,
+			ProblemConcernEntry newProblemConcernEntry, String sectionText) {
+		this.problemConcernEntries = problemConcernEntries;
+		this.newProblemConcernEntry = newProblemConcernEntry;
+		this.sectionText = sectionText;
+		init();
+	}
 
-  private void addBody() {
-    append("<tbody>");
-    append("<tr>");
-    append("<td>Komplikationsrisiko</td>");
-    append("<td><content ID='p1'>Niereninsuffizienz</content></td>");
-    append("</tr>");
-    append("</tbody>");
-    append("</table>");
-  }
+	public void init() {
+		// ID
+		if (problemConcernEntries.size() != 0) {
+			this.newId = problemConcernEntries.size() + 1;
+			if (sectionText.equals("") || sectionText == null)
+				try {
+					throw new Exception(
+							"If there is more than zero elements, the sectionText can´t be empty.");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		} else {
+			this.newId = 1;
+			this.sectionText = tableStub + tableFooter;
+		}
 
-//  private void addRow(ProblemConcernEntry problemConcernEntry, int i) {
-//    append("<tr>");
-//    addCellWithContent(problemConcernEntry., i);
-//    addCell("");
-//    addCell("");
-//    addCell(DateUtil.formatDateCH(immunization.getEffectiveTime()));
-//    addCell(""); // gegen
-//    addCell(immunization.getAuthor().getCompleteName());
-//    addCell("");
-//    append("</tr>");
-//}
-//
-//private void addCell(String text) {
-//    append("<td>");
-//    append(text);
-//    append("</td>");
-//}
-//
-//private void addCellWithContent(String text, int i) {
-//    append("<td>");
-//    addContent(text, i);
-//    append("</td>");
-//}
-//
-//private void addContent(String text, int i) {
-//    append("<content ID='i" + i + "'>");
-//    append(text);
-//    append("</content>");
-//}   
-  
-  /**
-   * Returns HTML formatted string.
-   * 
-   * @see java.lang.Object#toString()
-   */
-  public String toString() {
-    append("<table border='1' width='100%'>");
-    addHeader();
-    addBody();
-    append("</table>");
-    return super.toString();
-  }
+		this.newProblemConcernEntry = insertContentReference(
+				newProblemConcernEntry, newId);
+		this.sectionText = insertRow(newProblemConcernEntry, newId,
+				this.sectionText);
+	}
+
+	public ProblemConcernEntry insertContentReference(
+			ProblemConcernEntry newProblemConcernEntry, int newId) {
+		Observation obs = CDAFactory.eINSTANCE.createObservation();
+		obs = newProblemConcernEntry.getProblemConcernEntry().getObservations()
+				.get(0);
+		obs.setText(Util.createReference(newId, contentIdPrefix));
+		return newProblemConcernEntry;
+	}
+
+	public String insertRow(ProblemConcernEntry problemConcernEntry, int newId,
+			String sectionText) {
+		String rowStr = buildRow(problemConcernEntry, newId);
+		// TODO If there is no element found that could be replaced, then an
+		// error occured (e.g. in a scenario, where an external document is
+		// loaded where the table footer does not match this table footer. If
+		// the convenience API is used to add a ProblemConcern then this method
+		// would not find the specific text.
+		// - In this case: Generate a new (convennience API conformant) set of
+		// ids, update the text and the objects. For this purpose the other
+		// methods of this and the super class could be useful.
+		String tableStr = sectionText
+				.replace(tableFooter, rowStr + tableFooter);
+		return tableStr;
+	}
+
+	private String buildRow(ProblemConcernEntry problemConcernEntry, int newId) {
+		StringBuilder rowBuilder = new StringBuilder();
+		rowBuilder.append("<tr>");
+		rowBuilder.append(buildCell("Komplikationsrisiko"));
+		rowBuilder
+				.append(buildCellWithContent(
+						problemConcernEntry.getProblemConcern(), newId,
+						contentIdPrefix));
+		rowBuilder.append("</tr>");
+		return rowBuilder.toString();
+	}
+
+	public ProblemConcernEntry getProblemConcernEntry() {
+		return this.newProblemConcernEntry;
+	}
+
+	public String getSectionText() {
+		return this.sectionText;
+	}
+
+	//
+	// /**
+	// * Returns HTML formatted string.
+	// *
+	// * @see java.lang.Object#toString()
+	// */
+	// public String toString() {
+	// return super.toString();
+	// }
+	//
+	// public String buildCompleteText() {
+	// // tableHeader = new String[]
+	// //
+	// {"Impfstoff Handelsname","Hersteller","Lot-Nr","Datum","Impfung gegen","Impfung erfolgt durch"};
+	// // Header
+	// tableHeader = new String[] { "Risikokategorie", "Risikofaktor" };
+	// // Body
+	// tableBody = new String[problemConcernEntries.size()][2];
+	// for (int i = 0; i < problemConcernEntries.size(); i++) {
+	// tableBody[i][0] = "Komplikationsrisiko";
+	// tableBody[i][1] = problemConcernEntries.get(i).getProblemConcern();
+	// }
+	// // References
+	// referenceBodyCell = new Boolean[] { false, true };
+	//
+	// // Build the Complete Text for all ProblemConcernEntries
+	// super.build(tableHeader, tableBody, referenceBodyCell);
+	// return super.toString();
+	// }
 
 }

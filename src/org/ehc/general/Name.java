@@ -102,6 +102,7 @@ public class Name {
   public String getCompleteName() {
     StringBuilder nameBuilder = new StringBuilder();
 
+    //TODO Fix this with String.join
     String prefixes = this.getPrefixes();
     String givens = this.getGivenNames();
     String families = this.getFamilyNames();

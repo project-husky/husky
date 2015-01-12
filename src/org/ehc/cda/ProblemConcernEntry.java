@@ -74,11 +74,13 @@ public class ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ProblemConcernEntry(String concern, StatusCode concernStatus) {
+	public ProblemConcernEntry(String concern, ProblemEntry problemEntry) {
 		setProblemConcernEntry(IHEFactory.eINSTANCE.createProblemConcernEntry());
 		getProblemConcernEntry().init();
 		this.setProblemConcern(concern);
-		this.setCodedStatusOfConcern(concernStatus);
+		this.addProblemEntry(problemEntry);
+		// The status code in VACD has to be: completed
+		//this.setCodedStatusOfConcern(concernStatus);
 	}
 
 	/**
@@ -102,11 +104,11 @@ public class ProblemConcernEntry {
 	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
 	 *            du problème</div>
 	 */
-	public ProblemConcernEntry(String concern, StatusCode concernStatus,
-			Date begin, Date end) {
-		this(concern, concernStatus,
+	public ProblemConcernEntry(String concern,
+			Date begin, Date end, ProblemEntry problemEntry) {
+		this(concern,
 				DateFormat.getDateInstance().format(begin), DateFormat
-						.getDateInstance().format(end));
+						.getDateInstance().format(end), problemEntry);
 	}
 
 	/**
@@ -130,9 +132,9 @@ public class ProblemConcernEntry {
 	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
 	 *            du problème</div>
 	 */
-	public ProblemConcernEntry(String concern, StatusCode concernStatus,
-			String begin, String end) {
-		this(concern, concernStatus);
+	public ProblemConcernEntry(String concern, 
+			String begin, String end, ProblemEntry problemEntry) {
+		this(concern, problemEntry);
 
 		// Create and set the concern interval
 		try {
@@ -164,9 +166,9 @@ public class ProblemConcernEntry {
 	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
 	 *            du problème</div>
 	 */
-	public ProblemConcernEntry(String concern, StatusCode concernStatus,
-			Calendar begin, Calendar end) {
-		this(concern, concernStatus);
+	public ProblemConcernEntry(String concern,
+			Calendar begin, Calendar end, ProblemEntry problemEntry) {
+		this(concern, problemEntry);
 
 		// Create and set the concern interval
 		// Create ProblemConcernEntry from Calendar or Daten objects

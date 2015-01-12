@@ -71,22 +71,4 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		addCell("");
 		append("</tr>");
 	}
-	
-	private void addCell(String text) {
-		append("<td>");
-		append(text);
-		append("</td>");
-	}
-	
-	private void addCellWithContent(String text, int i) {
-		append("<td>");
-		addContent(text, i);
-		append("</td>");
-	}
-
-	private void addContent(String text, int i) {
-		append("<content ID='i" + i + "'>");
-		append(text);
-		append("</content>");
-	}	
 }

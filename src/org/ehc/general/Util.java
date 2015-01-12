@@ -18,12 +18,24 @@
 
 package org.ehc.general;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.Stack;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.type.AnyType;
+import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.general.ConvenienceUtilsEnums.AdministrativeGenderCode;
 import org.ehc.general.ConvenienceUtilsEnums.Language;
 import org.ehc.general.ConvenienceUtilsEnums.UseCode;
@@ -31,7 +43,9 @@ import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
+import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -42,6 +56,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
@@ -439,6 +454,17 @@ public class Util {
 		return effectiveTime;
 	}
 	
+	public static ED createReference(int contentId, String prefix) {
+		ED text = DatatypesFactory.eINSTANCE.createED();
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		
+		//Dirty BugFix for missing addReference method. 
+		//TODO Make me beautiful :)
+		tel.setValue("#"+prefix+String.valueOf(contentId));
+		text.setReference(tel);		
+		return text;
+	}
+	
 	public static IVL_TS createUnknownLowHighTimeNullFlavor() {
 		IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
 		effectiveTime.setLow(createNullFlavorUnknown());
@@ -451,4 +477,133 @@ public class Util {
 		ts.setNullFlavor(NullFlavor.UNK);
 		return ts;
 	}
+	
+	public static ED createEd(String text) {
+		ED ed = DatatypesFactory.eINSTANCE.createED();
+		//ed.setReference(arg0);
+		return (ed.addText(text));
+	}
+	
+	public static CD createCodeNullFlavor() {
+		CD code = DatatypesFactory.eINSTANCE.createCD();
+		code.setNullFlavor(NullFlavor.NA);
+		return code;
+	}
+	
+    public static StrucDocText createNonQotedStrucDocText(String xmlString) {
+    	Resource.Factory factory = new GenericXMLResourceFactoryImpl();
+		XMLResource resource = (XMLResource) factory.createResource(null);
+		try {
+			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"), null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
+		AnyType value = (AnyType) root.getMixed().getValue(0);
+		StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
+		text.getMixed().addAll(value.getMixed());
+		return text;
+    }
+    
+    public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
+    	StringBuilder sb = new StringBuilder();
+    	if (strucDocText != null) {
+    	sb = traverse2(strucDocText.getMixed(),sb);
+    	}
+    	System.out.println("SB:"+sb);
+    	return sb.toString();
+    }
+    
+    private static String getText(FeatureMap featureMap) {
+		StringBuffer buffer = new StringBuffer("");					
+		for (FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName()
+							+ ">");
+				}
+				// AnyType anyValue = (AnyType)entry.getValue();
+				// buffer.append(getText(anyValue.getMixed()));
+			}
+		}
+		return buffer.toString().trim();
+	}
+
+	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
+		for (int i = 0; i <= featureMap.size()-1; i++) {
+			 //for (int i = featureMap.size() - 1; i >= 0; i--) {
+			Entry entry = featureMap.get(i);
+		if (entry.getEStructuralFeature() instanceof EReference) {
+			sb.append("<" + entry.getEStructuralFeature().getName());
+			AnyType anyType = (AnyType) entry.getValue();
+			sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
+			sb.append(">");
+			traverse2(anyType.getMixed(), sb);
+			sb.append("</" + entry.getEStructuralFeature().getName() + ">");
+		} else {
+			// //Text between the Elements
+			if (entry.getValue() != null) {
+				String value = entry.getValue().toString();
+				if (value.trim().length() > 0) {
+					sb.append(value);
+				}
+			} else {
+				System.out.println(" }");
+			}
+		}
+		}
+		return sb;
+	}
+    
+    private static void traverse(FeatureMap root) {
+        Stack<FeatureMap> stack = new Stack<FeatureMap>();
+        Stack<String> stack2 = new Stack<String>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            FeatureMap featureMap = stack.pop();
+            for (int i = featureMap.size() - 1; i >= 0; i--) {
+                Entry entry = featureMap.get(i);
+                if (entry.getEStructuralFeature() instanceof EReference) {
+                    System.out.print("<"+entry.getEStructuralFeature().getName());
+                    AnyType anyType = (AnyType) entry.getValue();
+                    traverseAttributes(anyType.getAnyAttribute());
+                    System.out.print(">");
+                    stack.push(anyType.getMixed());
+ 
+                } else {
+//                    if (entry.getValue() != null && !stack2.isEmpty()) {
+//                        System.out.print("</"+stack2.pop()+">");}
+//                  //Text between the Elements
+                    if (entry.getValue() != null) {
+                        String value = entry.getValue().toString();
+                        if (value.trim().length() > 0) {
+                            System.out.print(value);
+                        }
+                    } else {                    	
+                        System.out.println(" }");
+                    }
+                }
+              if (entry.getValue() != null && !stack2.isEmpty()) {
+              System.out.print("</"+stack2.pop()+">");}
+            }
+        }
+    }
+
+    private static void traverseAttributes(FeatureMap anyAttribute) {
+        for (Entry entry : anyAttribute) {
+            System.out.print(" " + entry.getEStructuralFeature().getName() + "=\"" +
+                    entry.getValue().toString()+"\"");
+        }
+    }
+    
+    private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
+        for (Entry entry : anyAttribute) {
+            sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" +
+                    entry.getValue().toString()+"\"");
+        }
+        return sb;
+    }
 }

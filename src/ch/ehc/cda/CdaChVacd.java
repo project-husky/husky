@@ -18,14 +18,21 @@
 
 package ch.ehc.cda;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.type.AnyType;
+import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.AllergyIntolerance;
 import org.ehc.general.Util;
 import org.ehc.general.ConvenienceUtilsEnums.Language;
@@ -38,6 +45,7 @@ import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastIllnessBuilder;
 import org.ehc.cda.ProblemConcernEntry;
+import org.ehc.cda.ProblemConcernTextBuilder;
 //import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
 import org.ehc.cda.Treatment;
@@ -54,6 +62,7 @@ import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Procedure;
 import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -86,6 +95,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
  * <div class="it">Class CdaChVacd.</div>
  */
 public class CdaChVacd extends CdaCh {
+	ActiveProblemsSection mActiveProblemsSection;
 
   /**
    * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
@@ -154,44 +164,49 @@ public class CdaChVacd extends CdaCh {
             org.ehc.cda.ProblemConcernEntry problemConcern) {
 
         org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
+        ProblemConcernTextBuilder tb;
+        StrucDocText sectionTextStrucDoc;
+    	String activeProblemsSectionText;
         
+        //Check if this section has already be created, if not create it
         if (this.getDoc().getActiveProblemsSection() == null) {
             activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
             this.getDoc().addSection(activeProblemsSection);
+            sectionTextStrucDoc = CDAFactory.eINSTANCE.createStrucDocText();
+            sectionTextStrucDoc.addText("");
         }
         else {
             activeProblemsSection = this.getDoc().getActiveProblemsSection();
         }
-
-        // set up the narrative (human-readable) text portion of the ProblemConcern Section
-        // section
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("<table border=\"1\" width=\"100%\">");
-        buffer.append("<thead>");
-        buffer.append("<tr>");
-        buffer.append("<th>Risikokategorie</th>");
-        buffer.append("<th>Risikofaktor</th>");
-        buffer.append("</tr>");
-        buffer.append("</thead>");
-        buffer.append("<tbody>");
-        buffer.append("<tr>");
-        buffer.append("<td>Komplikationsrisiko</td>");
-        buffer.append("<td><content ID='p1'>Niereninsuffizienz</content></td>");
-        buffer.append("</tr>");
-        buffer.append("</tbody>");
-        buffer.append("</table>");
-        activeProblemsSection.createStrucDocText(buffer.toString());
-
+        
+        //Update existing Entries with the reference to the CDA level 1 text and create the level 1 text.
+        activeProblemsSectionText = Util.extractStringFromNonQuotedStrucDocText(activeProblemsSection.getText());
+        ArrayList<ProblemConcernEntry> problemConcernEntries = this.getProblemConcernEntries();
+        tb = new ProblemConcernTextBuilder(problemConcernEntries, problemConcern, activeProblemsSectionText);
+        problemConcern = tb.getProblemConcernEntry();
+        
+        //Update the section text.
+        //This is a workaround for the following problem: 
+        //- The sectionText can only be created once with the createSectionText Method
+        //- The StrucDocText Object can´t create text with xml-elements inside. These will be quoted.
+        //The Workaround crates a special text object, which can´t be read by the getText Method. So the current state of the section text is stored in the activeProblemSectionText field.
+        activeProblemsSectionText = tb.getSectionText();
+        sectionTextStrucDoc = Util.createNonQotedStrucDocText(activeProblemsSectionText);
+        activeProblemsSection.setText(sectionTextStrucDoc);
+        
         //create a copy of the given object and its sub-objects
         org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.getProblemConcernEntry());
         activeProblemsSection.addAct(problemConcernEntryMdht);
+        
+        //TEST
+        //String test = Util.extractStringFromNonQuotedStrucDocText(sectionTextStrucDoc);
     }
     
     public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
         ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) this.getDoc().getActiveProblemsSection().getActs().get(leidenNr));
         return problemConcernEntry;
     }
-
+    
     /**
      * Liefert alle Leiden im eVACDOC.
      *
@@ -199,8 +214,12 @@ public class CdaChVacd extends CdaCh {
      */
     public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
         // Get the ActiveProblemSection from the Document
-        org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = (org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection) getDoc().getSections().get(0);
-
+        query = new Query(this.doc);
+    	org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = query.getSections(org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection.class).get(0);
+    	if (activeProblemsSection.getActs()==null) {
+    		return null;
+    	}
+    	else {
         // Create a List with Problem ConcernEntries
         ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
 
@@ -216,6 +235,7 @@ public class CdaChVacd extends CdaCh {
         }
 
         return problemConcernEntryList;
+    	}
     }
 
 	/**
@@ -570,12 +590,6 @@ public class CdaChVacd extends CdaCh {
 			}
 		}
 		return null;
-	}
-	
-	private CD createCodeNullFlavor() {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setNullFlavor(NullFlavor.NA);
-		return code;
 	}
 	
 	private org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry createProblemEntry(Disease disease) {
