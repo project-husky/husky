@@ -22,12 +22,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.general.Code;
 import org.ehc.general.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
@@ -110,7 +115,8 @@ public class ProblemEntry {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		this.setCodedProblem(problem);
+		this.setInternalId(internalProblemId);
+		this.setValue(problem);
 	}
 	
 	 /**
@@ -129,17 +135,8 @@ public class ProblemEntry {
      */
     public ProblemEntry(boolean problemNotOccured, String startOfProblem,
             String endOfProblem, org.ehc.general.Code problem) {
-        mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-        this.setProblemNotOccured(problemNotOccured);
-        try {
-            this.setStartOfProblem(startOfProblem);
-            this.setEndOfProblem(endOfProblem);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        
-        this.setCodedProblem(problem);
-        this.setInternalId(UUID.generate());
+      this(problemNotOccured, startOfProblem,
+          endOfProblem, problem, UUID.generate());
     }
 	   
     private void setInternalId(String id) {
@@ -231,6 +228,33 @@ public class ProblemEntry {
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
 	public void setCodedProblem(org.ehc.general.Code codedProblem) {
-		mProblemEntry.setCode(codedProblem.getCD());
+	  mProblemEntry.setCode(codedProblem.getCD());
 	}
+
+  public void setValue(Code codedProblem) {
+    CD mCodedProblem = EcoreUtil.copy(codedProblem.getCD());
+    mProblemEntry.getValues().add((ANY) mCodedProblem);
+  }
+  
+  /**
+   * The Value may be a coded or uncoded String. 
+   * <p>If the value is coded, the convenience API will return the Code. </p>
+   * <p>If the value is uncoded, the convenience API will return the xml reference to the free text description of the document for further processing. </p>
+   * @return the problem value as string.
+   */
+  public String getValue() { 
+    //TODO The best solution is to return the human readable content, if no code is available. 
+    //Maybe it´s better to generate a list with values here, but this way is more convenient and should be ok, in most of the cases.
+    for (ANY any : mProblemEntry.getValues()) {
+      if (any instanceof CD) {
+          CD code = (CD) any;
+          return ((CD) any).getCode();
+      }
+      if (any instanceof ED) {
+        ED ed = (ED) any;
+        return ((ED) any).getText();
+      }
+    }
+    return null;
+  }
 }
