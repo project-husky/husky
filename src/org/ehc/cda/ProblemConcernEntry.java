@@ -179,10 +179,9 @@ public class ProblemConcernEntry {
 	 * 
 	 * @return Status des Leidens
 	 */
-	public StatusCode getCodedStatusOfConcern() {
-		return null;
-		// TODO return the status code
-		// return this.getStatusCode().getCode();
+	public String getCodedStatusOfConcern() {
+		//TODO map the String to an enum 
+		return mProblemConcernEntry.getStatusCode().getCode();
 	}
 
 	/**

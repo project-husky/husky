@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.AllergyIntolerance;
+import org.ehc.general.ConvenienceUtilsEnums.StatusCode;
 import org.ehc.general.Util;
 import org.ehc.general.ConvenienceUtilsEnums.Language;
 import org.ehc.general.DateUtil;
@@ -194,12 +195,15 @@ public class CdaChVacd extends CdaCh {
         sectionTextStrucDoc = Util.createNonQotedStrucDocText(activeProblemsSectionText);
         activeProblemsSection.setText(sectionTextStrucDoc);
         
+        //insert the values which are special for VACD Document
+        problemConcern.setCodedStatusOfConcern(StatusCode.completed);									//Status code has to be "completed"
+        problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));	//Add the ProblemEntry Template ID
+        
         //create a copy of the given object and its sub-objects
         org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.getProblemConcernEntry());
         activeProblemsSection.addAct(problemConcernEntryMdht);
-        
-        //TEST
-        //String test = Util.extractStringFromNonQuotedStrucDocText(sectionTextStrucDoc);
+        problemConcernEntryMdht.getEntryRelationships().get(0).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+        problemConcernEntryMdht.getEntryRelationships().get(0).setInversionInd(false);
     }
     
     public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
