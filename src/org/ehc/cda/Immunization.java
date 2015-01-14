@@ -76,7 +76,7 @@ public class Immunization {
 		// TODO add correct GTIN for vaccination
 		mImmunization.getIds().add(ii("1.3.160", "7680006690011"));
 		
-		mImmunization.setText(createText());
+		//mImmunization.setText(createText());
 		mImmunization.setStatusCode(CSUtil.completed());
 		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
 		mImmunization.setPriorityCode(createPriorityCode());

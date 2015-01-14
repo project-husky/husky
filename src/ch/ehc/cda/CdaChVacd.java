@@ -400,11 +400,22 @@ public class CdaChVacd extends CdaCh {
 	}
 	
 	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.common.Author author) {
+	    ImmunizationsSection immunizationSection = this.getImmunizationSection();
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization = EcoreUtil.copy(immunization.getImmunization());
-		iheImmunization.getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
 		
-		getImmunizationSection().addSubstanceAdministration(iheImmunization);
-		getImmunizationSection().createStrucDocText(getImmunizationText());
+		iheImmunization.getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
+				
+		immunizationSection.addSubstanceAdministration(iheImmunization);
+		
+		//Update the content references to cda level 1 text
+		int numberOfImmunizations = immunizationSection.getSubstanceAdministrations().size();
+		ED reference = Util.createReference(numberOfImmunizations, "i");
+		SubstanceAdministration substanceAdministration = immunizationSection.getSubstanceAdministrations().get(numberOfImmunizations-1);
+		
+		substanceAdministration.setText(reference);
+		substanceAdministration.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
+		
+		immunizationSection.createStrucDocText(getImmunizationText());
 	}
 	
 	private String getImmunizationText() {

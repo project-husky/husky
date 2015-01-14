@@ -3,17 +3,22 @@ package org.ehc.cda;
 import java.util.List;
 
 import org.ehc.common.DateUtil;
+import org.ehc.common.Util;
+import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
  * Builds the <text> part of the History of immunzations.
  * 
  * Always builds the whole part (not only adds one immunization).
  * 
- * @author gsc
+ * @author gsc, Axel Helmer
  */
 public class ImmunizationTextBuilder extends TextBuilder {
 
-	private List<Immunization> immunizations;
+	//TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
+    private List<Immunization> immunizations;
+    public final static String contentIdPrefix = "i";
 	
 	/**
 	 * Constructor.
@@ -22,6 +27,19 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	 */
 	public ImmunizationTextBuilder(List<Immunization> immunizations) {
 		this.immunizations = immunizations;
+	}
+	
+	public List<Immunization> getUpdatedImmunizations() {
+	  int i = 0;
+	  for (Immunization immunization : this.immunizations) {
+	    ED reference = Util.createReference(i, contentIdPrefix);
+	    SubstanceAdministration substanceAdminstration = immunization.getImmunization();
+	    substanceAdminstration.setText(reference);
+	    //.getSubstanceAdministrations().get(0);
+	    i++;
+	  }
+    return immunizations;
+	    
 	}
 	
 	/**
