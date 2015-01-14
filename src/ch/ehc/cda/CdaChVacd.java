@@ -121,21 +121,17 @@ public class CdaChVacd extends CdaCh {
 	public CdaChVacd(Language language, String stylesheet) {
 		super();
 		doc = CHFactory.eINSTANCE.createVACD().init();
-		setChMetadata(language, stylesheet);
+		setChMetadata(language, stylesheet, "eVACDOC");
 		
 		// fix missing extension values in MDHT model.
 		for (II templateId : doc.getTemplateIds()) {
 			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
 				templateId.setExtension("CDA-CH-VACD");
 			}
+	         if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
+               templateId.setExtension("CDA-CH");
+           }
 		}
-		for (II templateId : doc.getTemplateIds()) {
-			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH");
-			}
-		}
-
-		docRoot.setClinicalDocument(doc);
 	}
 	
 	 /**
@@ -405,8 +401,8 @@ public class CdaChVacd extends CdaCh {
 	}
 	
 	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.general.Author author) {
-		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization = immunization.getImmunization();
-		iheImmunization.getAuthors().add(author.getAuthorMdht());
+		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization = EcoreUtil.copy(immunization.getImmunization());
+		iheImmunization.getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
 		
 		getImmunizationSection().addSubstanceAdministration(iheImmunization);
 		getImmunizationSection().createStrucDocText(getImmunizationText());

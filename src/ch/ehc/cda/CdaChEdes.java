@@ -31,6 +31,8 @@ public class CdaChEdes extends CdaCh {
 		this.setDoc(doc);
 	}
 
+	//TODO Der Konstruktor sollte alle minimal benötigten Elemente enthalten (also alle Sections), damit die Anwender wissen, was sie zuvor zusammenbauen müssen.
+	
 	/**
 	 * Erstellt ein neues CdaChEdes CDA Dokument.
 	 *
@@ -41,7 +43,7 @@ public class CdaChEdes extends CdaCh {
 	public CdaChEdes(Language language, String stylesheet) {
 		super();
 		super.doc = CHFactory.eINSTANCE.createEDESCTNN().init();
-		super.setChMetadata(language, stylesheet);
+		super.setChMetadata(language, stylesheet, "EDES");
 		printXmlToConsole();
 	}
 

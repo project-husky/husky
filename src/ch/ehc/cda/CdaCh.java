@@ -39,10 +39,14 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.ehc.general.ConvenienceUtilsEnums;
+import org.ehc.general.DateUtil;
 import org.ehc.general.Organization;
 import org.ehc.general.Patient;
 import org.ehc.general.Person;
 import org.ehc.general.Util;
+import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.general.ConvenienceUtilsEnums.Language;
 
 import ch.ehc.general.ConvenienceUtilsEnums.ParticipantType;
@@ -91,7 +95,7 @@ public abstract class CdaCh {
 	 *          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
-	public void setChMetadata(Language language, String stylesheet) {
+	public void setChMetadata(Language language, String stylesheet, String title) {
 		// Set language of the document
 		doc.setLanguageCode(Util.createLanguageCode(language));
 
@@ -99,6 +103,7 @@ public abstract class CdaCh {
 		//TODO this.setId(CdaChUtil.generateDocId(applicationOidRoot));
 		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
 		II docID = DatatypesFactory.eINSTANCE.createII();
+		doc.setId(docID);
 		docID.setRoot(applicationOidRoot);
 		docID.setExtension("1817558762");
 
@@ -122,6 +127,12 @@ public abstract class CdaCh {
 
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+		ST titleSt = DatatypesFactory.eINSTANCE.createST();
+		titleSt.addText(title);
+		doc.setTitle(titleSt);
+		
+		// Set creation time of the document
+		doc.setEffectiveTime(DateUtil.nowAsTS());
 	}
 	
 	
@@ -202,6 +213,14 @@ public abstract class CdaCh {
 				.setRepresentedCustodianOrganization(
 						Util
 								.createCustodianOrganizationFromOrganization(organization));
+		
+		//mdhtCustodian.setNullFlavor(NullFlavor.);
+		//Setzt die GLN des Arztes
+		II id = DatatypesFactory.eINSTANCE.createII();
+		if (organization.getOrganization().getIds().size()>0) {
+          id = organization.getOrganization().getIds().get(0);
+		}
+	    mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
 
 	/**
@@ -232,6 +251,7 @@ public abstract class CdaCh {
 	 *            Die Versicherung als Organization Objekt
 	 */
 	public void addInsurance(Organization versicherung) {
+	  //TODO TypeCode Setzen (Wert fehlt noch bei den Enums)
 		this.addParticipant(versicherung, ParticipantType.Insurance);
 	}
 	

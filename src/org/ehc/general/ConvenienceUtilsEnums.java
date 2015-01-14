@@ -44,6 +44,29 @@ public class ConvenienceUtilsEnums {
      */
     Undifferentiated
   }
+  
+  /**
+   * Geschlecht gemäss HL7 Vocabulary AdministrativeGender [2.16.840.1.113883.5.1]
+   * <ul>
+   * <li>Male (männlich;M)</li>
+   * <li>Female (weiblich;F)</li>
+   * <li>Undifferentiated (undifferenziert;U)</li>
+   * </ul>
+   */
+  public enum Test {
+    /**
+     * männlich (HL7 Vocabulary Code: M)
+     */
+    Bla,
+    /**
+     * weiblich (HL7 Vocabulary Code: F)
+     */
+    Blub,
+    /**
+     * Undifferenziert (HL7 Vocabulary Code: U)
+     */
+    Undifferentiated
+  }
 
   /**
    * Nutzungszweck von Adressen und Kommunikationsmitteln gemäss HL7 Vocabulary

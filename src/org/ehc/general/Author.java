@@ -48,6 +48,8 @@ public class Author {
 	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
 		this.mAuthor = authorMdht;
 	}
+	
+	//TODO Hier wäre es evtl. sinnvoller für einen Arzt eine eigene Klasse zu erstellen, in der die GLN Verpflichtend anzugeben ist. Beim Aufruf des VACD-Konstruktors wird dann eben diese Klasse dem Dokument hinzugefügt (daraus kann dann auch gleich die ID für den Custodian generiert werden).
 
 	/**
 	 * Erstellt einen neuen Autor (Dieser Konstruktor wird oft gebraucht für

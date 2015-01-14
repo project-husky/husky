@@ -20,8 +20,10 @@ package org.ehc.general;
 
 import java.util.List;
 
+import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
@@ -31,8 +33,11 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  */
 public class Organization {
 
-	private org.openhealthtools.mdht.uml.cda.Organization mOrganization;
+	public org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
+	//TODO Verschiedene Konstruktoren für unterschiedliche Organisationen angeben:
+	//1. Verein, Firma, Versicherung etc. (nur Name)
+	//2. Spital / Arztpraxis (ID: GLN)
 	/**
 	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
 	 * 
@@ -43,6 +48,20 @@ public class Organization {
 		setOrganization(CDAFactory.eINSTANCE.createOrganization());
 		this.addName(name);
 	}
+	
+	 /**
+     * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene ID (GLN) verfügt
+     * 
+     * @param name
+     *            Name der Organisation
+     */
+    public Organization(String name, String gln) {
+        this(name);
+        II id = DatatypesFactory.eINSTANCE.createII();
+        id.setRoot(ConvenienceUtilsEnums.knownOID(KnownOID.GLN));
+        id.setExtension(gln);
+        mOrganization.getIds().add(id);
+    }
 
 	/**
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
@@ -128,6 +147,15 @@ public class Organization {
 	public String getName() {
 		return getOrganization().getNames().get(0).getText();
 	}
+	
+	 /**
+     * Gibt die ID der Organisation zurück (wenn z.B. eine GLN vorhanden ist)
+     * 
+     * @return ID der Organisation
+     */
+    public String getId() {
+        return getOrganization().getIds().get(0).getExtension();
+    }
 
 	public List<TEL> getTelecoms() {
 		return getOrganization().getTelecoms();
