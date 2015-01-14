@@ -75,13 +75,12 @@ public class ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ProblemConcernEntry(String concern, ProblemEntry problemEntry) {
+	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
 		setProblemConcernEntry(IHEFactory.eINSTANCE.createProblemConcernEntry());
 		getProblemConcernEntry().init();
 		this.setProblemConcern(concern);
 		this.addProblemEntry(problemEntry);
-		// The status code in VACD has to be: completed
-		//this.setCodedStatusOfConcern(concernStatus);
+		this.setCodedStatusOfConcern(concernStatus);
 	}
 
 	/**
@@ -106,10 +105,10 @@ public class ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public ProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry) {
+			Date begin, Date end, ProblemEntry problemEntry, StatusCode concernStatus) {
 		this(concern,
 				DateFormat.getDateInstance().format(begin), DateFormat
-						.getDateInstance().format(end), problemEntry);
+						.getDateInstance().format(end), problemEntry, concernStatus);
 	}
 
 	/**
@@ -134,8 +133,8 @@ public class ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public ProblemConcernEntry(String concern, 
-			String begin, String end, ProblemEntry problemEntry) {
-		this(concern, problemEntry);
+			String begin, String end, ProblemEntry problemEntry, StatusCode concernStatus) {
+		this(concern, problemEntry, concernStatus);
 
 		// Create and set the concern interval
 		try {
@@ -168,8 +167,8 @@ public class ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public ProblemConcernEntry(String concern,
-			Calendar begin, Calendar end, ProblemEntry problemEntry) {
-		this(concern, problemEntry);
+			Calendar begin, Calendar end, ProblemEntry problemEntry, StatusCode concernStatus) {
+		this(concern, problemEntry, concernStatus);
 
 		// Create and set the concern interval
 		// Create ProblemConcernEntry from Calendar or Daten objects

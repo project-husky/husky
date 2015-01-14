@@ -193,8 +193,15 @@ public class CdaChVacd extends CdaCh {
         
         //insert the values which are special for VACD Document
         //TODO Enum einfügen
-        //problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);								//Status code of the problem has to be "completed"
-        problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));	//Add the ProblemEntry Template ID
+        //problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);	//Status code of the problem has to be "completed"
+        problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));					//Add the ProblemEntry Template ID
+        //Add the code for "Komplikations- oder Expositionsrisiken"
+        CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
+        komplikationsExpositionsrisikoCode.setCodeSystem("2.16.840.1.113883.6.96");
+        komplikationsExpositionsrisikoCode.setCode("55607006");
+        komplikationsExpositionsrisikoCode.setCodeSystemName("SNOMED CT");
+        komplikationsExpositionsrisikoCode.setDisplayName("Problem");
+        problemConcern.getMdhtProblemEntryList().get(0).setCode(komplikationsExpositionsrisikoCode);
         
         //create a copy of the given object and its sub-objects
         org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.getProblemConcernEntry());
