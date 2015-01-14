@@ -50,6 +50,7 @@ import org.ehc.cda.TreatmentPlanTextBuilder;
 import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.CSUtil;
+import org.ehc.common.ConvenienceUtilsEnums;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
@@ -191,7 +192,8 @@ public class CdaChVacd extends CdaCh {
         activeProblemsSection.setText(sectionTextStrucDoc);
         
         //insert the values which are special for VACD Document
-        problemConcern.setCodedStatusOfConcern(StatusCode.completed);									//Status code has to be "completed"
+        //TODO Enum einfügen
+        //problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);								//Status code of the problem has to be "completed"
         problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5"));	//Add the ProblemEntry Template ID
         
         //create a copy of the given object and its sub-objects

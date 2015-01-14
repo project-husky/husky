@@ -22,6 +22,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
@@ -313,5 +314,9 @@ public class ProblemConcernEntry {
 
 	public void setProblemConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry) {
 		this.mProblemConcernEntry = mProblemConcernEntry;
+	}
+	
+	public List<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> getMdhtProblemEntryList() {
+      return this.mProblemConcernEntry.getProblemEntries();
 	}
 }
