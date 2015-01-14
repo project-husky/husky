@@ -23,8 +23,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehc.general.Code;
-import org.ehc.general.Util;
+import org.ehc.common.Code;
+import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -60,7 +60,7 @@ public class ProblemEntry {
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
 	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
-			Date endOfProblem, org.ehc.general.Code problem, String internalProblemId) {
+			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
 		this(problemNotOccured, DateFormat.getDateInstance().format(
 				startOfProblem), DateFormat.getDateInstance().format(
 				endOfProblem), problem, internalProblemId);
@@ -83,7 +83,7 @@ public class ProblemEntry {
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
      */
     public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
-            Date endOfProblem, org.ehc.general.Code problem) {
+            Date endOfProblem, org.ehc.common.Code problem) {
         this(problemNotOccured, DateFormat.getDateInstance().format(
                 startOfProblem), DateFormat.getDateInstance().format(
                 endOfProblem), problem);
@@ -106,7 +106,7 @@ public class ProblemEntry {
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
 	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-			String endOfProblem, org.ehc.general.Code problem, String internalProblemId) {
+			String endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
 		this.setProblemNotOccured(problemNotOccured);
 		try {
@@ -134,7 +134,7 @@ public class ProblemEntry {
      *            Komplikationsrisiken oder Expositionsrisiken.
      */
     public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-            String endOfProblem, org.ehc.general.Code problem) {
+            String endOfProblem, org.ehc.common.Code problem) {
       this(problemNotOccured, startOfProblem,
           endOfProblem, problem, UUID.generate());
     }
@@ -218,8 +218,8 @@ public class ProblemEntry {
 	/**
 	 * @return das codedProblem Objekt
 	 */
-	public org.ehc.general.Code getCodedProblem() {
-	  org.ehc.general.Code code = new org.ehc.general.Code(mProblemEntry.getCode());
+	public org.ehc.common.Code getCodedProblem() {
+	  org.ehc.common.Code code = new org.ehc.common.Code(mProblemEntry.getCode());
 		return code;
 	}
 
@@ -227,7 +227,7 @@ public class ProblemEntry {
 	 * @param codedProblem
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
-	public void setCodedProblem(org.ehc.general.Code codedProblem) {
+	public void setCodedProblem(org.ehc.common.Code codedProblem) {
 	  mProblemEntry.setCode(codedProblem.getCD());
 	}
 

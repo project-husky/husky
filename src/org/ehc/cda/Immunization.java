@@ -42,9 +42,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
-import org.ehc.general.CSUtil;
-import org.ehc.general.DateUtil;
-import org.ehc.general.Author;
+import org.ehc.common.Author;
+import org.ehc.common.CSUtil;
+import org.ehc.common.DateUtil;
 
 /**
  * Eine Impfung

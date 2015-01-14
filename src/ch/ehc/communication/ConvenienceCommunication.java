@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.ehc.cda.DocumentMetadata;
+import org.ehc.common.Identificator;
 import org.ehc.communication.Destination;
 import org.ehc.communication.Response;
-import org.ehc.general.Identificator;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 
 import ch.ehc.cda.CdaCh;

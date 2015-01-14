@@ -34,11 +34,6 @@ import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.AllergyIntolerance;
-import org.ehc.general.ConvenienceUtilsEnums.StatusCode;
-import org.ehc.general.Util;
-import org.ehc.general.ConvenienceUtilsEnums.Language;
-import org.ehc.general.DateUtil;
-import org.ehc.general.CSUtil;
 import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationTextBuilder;
@@ -53,8 +48,12 @@ import org.ehc.cda.Treatment;
 import org.ehc.cda.TreatmentBuilder;
 import org.ehc.cda.TreatmentPlanTextBuilder;
 import org.ehc.cda.Value;
-import org.ehc.general.Util;
 import org.ehc.cda.converter.MedicationConverter;
+import org.ehc.common.CSUtil;
+import org.ehc.common.DateUtil;
+import org.ehc.common.Util;
+import org.ehc.common.ConvenienceUtilsEnums.Language;
+import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
@@ -393,14 +392,14 @@ public class CdaChVacd extends CdaCh {
 	 * @param date            Datum der Verabreichung
 	 * @param arzt            Verabreichender Arzt
 	 */
-	public void addImmunization(Medication medication, Value dosage, Date date, org.ehc.general.Author arzt) {
+	public void addImmunization(Medication medication, Value dosage, Date date, org.ehc.common.Author arzt) {
 		MedicationConverter c = new MedicationConverter(medication);
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization = c.convert();
 		
 		getImmunizationSection().addSubstanceAdministration(immunization);
 	}
 	
-	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.general.Author author) {
+	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.common.Author author) {
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization = EcoreUtil.copy(immunization.getImmunization());
 		iheImmunization.getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
 		

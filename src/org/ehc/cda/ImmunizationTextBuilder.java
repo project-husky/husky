@@ -1,7 +1,8 @@
 package org.ehc.cda;
 
 import java.util.List;
-import org.ehc.general.DateUtil;
+
+import org.ehc.common.DateUtil;
 
 /**
  * Builds the <text> part of the History of immunzations.

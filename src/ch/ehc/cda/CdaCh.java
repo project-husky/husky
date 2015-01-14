@@ -40,16 +40,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
-import org.ehc.general.ConvenienceUtilsEnums;
-import org.ehc.general.DateUtil;
-import org.ehc.general.Organization;
-import org.ehc.general.Patient;
-import org.ehc.general.Person;
-import org.ehc.general.Util;
-import org.ehc.general.ConvenienceUtilsEnums.KnownOID;
-import org.ehc.general.ConvenienceUtilsEnums.Language;
+import org.ehc.common.ConvenienceUtilsEnums;
+import org.ehc.common.DateUtil;
+import org.ehc.common.Organization;
+import org.ehc.common.Patient;
+import org.ehc.common.Person;
+import org.ehc.common.Util;
+import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
+import org.ehc.common.ConvenienceUtilsEnums.Language;
 
-import ch.ehc.general.ConvenienceUtilsEnums.ParticipantType;
+import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
 
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
@@ -174,7 +174,7 @@ public abstract class CdaCh {
 	 * @param author
 	 *            Der Autor
 	 */
-	public void addAuthor(org.ehc.general.Author author) {
+	public void addAuthor(org.ehc.common.Author author) {
 		// create a new (!) MDHT author Objekt.
 		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
 		docAuthor = author.getAuthorMdht();
@@ -187,8 +187,8 @@ public abstract class CdaCh {
 	 * 
 	 * @return das eHealthConnector Author Objekt
 	 */
-	public org.ehc.general.Author getAuthor() {
-		org.ehc.general.Author author = new org.ehc.general.Author(
+	public org.ehc.common.Author getAuthor() {
+		org.ehc.common.Author author = new org.ehc.common.Author(
 				doc.getAuthors().get(0));
 		return author;
 	}
@@ -239,7 +239,7 @@ public abstract class CdaCh {
 	 *            rechtsgültiger Unterzeichner
 	 */
 	public void setLegalAuthenticator(
-			org.ehc.general.Author legalAuthenticator) {
+			org.ehc.common.Author legalAuthenticator) {
 		doc.setLegalAuthenticator(Util
 				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
 	}

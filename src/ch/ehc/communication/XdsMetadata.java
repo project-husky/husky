@@ -18,12 +18,12 @@
 
 package ch.ehc.communication;
 
-import org.ehc.general.Identificator;
+import org.ehc.common.Identificator;
 
-import ch.ehc.general.ConvenienceUtilsEnums.AuthorRoleCode;
-import ch.ehc.general.ConvenienceUtilsEnums.AuthorSpecialityCode;
-import ch.ehc.general.ConvenienceUtilsEnums.HealthcareFacilityTypeCode;
-import ch.ehc.general.ConvenienceUtilsEnums.PracticeSettingCode;
+import ch.ehc.common.ConvenienceUtilsEnums.AuthorRoleCode;
+import ch.ehc.common.ConvenienceUtilsEnums.AuthorSpecialityCode;
+import ch.ehc.common.ConvenienceUtilsEnums.HealthcareFacilityTypeCode;
+import ch.ehc.common.ConvenienceUtilsEnums.PracticeSettingCode;
 
 /**
  * Stellt die Metadaten gemäss [IHE ITI TF-3], Table 4.1-5: Document Metadata

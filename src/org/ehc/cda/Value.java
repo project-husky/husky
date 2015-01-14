@@ -18,7 +18,7 @@
 
 package org.ehc.cda;
 
-import org.ehc.general.ConvenienceUtilsEnums.UCUM;
+import org.ehc.common.ConvenienceUtilsEnums.UCUM;
 
 /**
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit

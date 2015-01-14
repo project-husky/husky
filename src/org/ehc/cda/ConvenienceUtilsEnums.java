@@ -241,7 +241,7 @@ public class ConvenienceUtilsEnums {
 
 	}
 
-	public static String knownOID(org.ehc.general.ConvenienceUtilsEnums.KnownOID gln) {
+	public static String knownOID(org.ehc.common.ConvenienceUtilsEnums.KnownOID gln) {
 		switch (gln) {
 		case IcrDha080401Disease:
 			return "2.16.756.5.30.1.127.3.1.20080401.1";

@@ -20,7 +20,7 @@ package org.ehc.cda;
 
 import java.util.Calendar;
 
-import org.ehc.general.ConvenienceUtilsEnums.Language;
+import org.ehc.common.ConvenienceUtilsEnums.Language;
 
 /**
  * Metadaten zu einem Dokument (wird für IHE XDS Registry verwendet)

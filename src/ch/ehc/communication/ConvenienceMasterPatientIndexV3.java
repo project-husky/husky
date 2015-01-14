@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.ehc.common.Identificator;
+import org.ehc.common.Patient;
 import org.ehc.communication.Destination;
 import org.ehc.communication.Response;
-import org.ehc.general.Identificator;
-import org.ehc.general.Patient;
 
 import ch.ehc.cda.CdaChVacd;
 

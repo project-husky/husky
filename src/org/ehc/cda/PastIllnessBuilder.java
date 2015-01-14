@@ -13,7 +13,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
-import org.ehc.general.CSUtil;
+import org.ehc.common.CSUtil;
 
 /**
  * Builder for one problem concern entry.

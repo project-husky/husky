@@ -23,8 +23,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.ehc.general.ConvenienceUtilsEnums.StatusCode;
-import org.ehc.general.Util;
+import org.ehc.common.Util;
+import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;

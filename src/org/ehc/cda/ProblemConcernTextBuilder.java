@@ -3,7 +3,7 @@ package org.ehc.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehc.general.Util;
+import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Observation;
 
