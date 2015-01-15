@@ -41,8 +41,7 @@ public class TreatmentBuilder {
 		
 		// TODO add correct GTIN for recommended vaccination
 		substanceAdministration.getIds().add(ii("1.3.160", "7680006690012"));
-		
-		
+			
 		return substanceAdministration;
 	}
 	

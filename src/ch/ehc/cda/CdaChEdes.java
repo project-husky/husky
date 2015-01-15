@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.ch.EDESCTNN;
+import org.openhealthtools.mdht.uml.cda.ch.EDES;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
@@ -25,7 +25,7 @@ public class CdaChEdes extends CdaCh {
 	 * 		<div class="de">CdaChEdes</div>
 	 *		<div class="fr"></div>
 	 */
-	public CdaChEdes(EDESCTNN doc) {
+	public CdaChEdes(EDES doc) {
 		super();
 		this.setDoc(doc);
 	}
@@ -41,7 +41,7 @@ public class CdaChEdes extends CdaCh {
 	 */
 	public CdaChEdes(Language language, String stylesheet) {
 		super();
-		super.doc = CHFactory.eINSTANCE.createEDESCTNN().init();
+		super.doc = CHFactory.eINSTANCE.createEDES().init();
 		super.setChMetadata(language, stylesheet, "EDES");
 		printXmlToConsole();
 	}
@@ -56,12 +56,12 @@ public class CdaChEdes extends CdaCh {
 
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
 		
-		if (this.getDoc().getActiveProblemsSection() == null) {
+		if (this.getDoc().getActiveProblemsSections() == null) {
 			activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
 			this.getDoc().addSection(activeProblemsSection);
 		}
 		else {
-			activeProblemsSection = this.getDoc().getActiveProblemsSection();
+			activeProblemsSection = this.getDoc().getActiveProblemsSections().get(0);
 		}
 
 		// set up the narrative (human-readable) text portion of the ProblemConcern Section
@@ -89,7 +89,7 @@ public class CdaChEdes extends CdaCh {
 	}
 	
 	public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
-		ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) this.getDoc().getActiveProblemsSection().getActs().get(leidenNr));
+		ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) this.getDoc().getActiveProblemsSections().get(0).getActs().get(leidenNr));
 		return problemConcernEntry;
 	}
 
@@ -124,8 +124,8 @@ public class CdaChEdes extends CdaCh {
 	 *
 	 * @return the doc
 	 */
-	public EDESCTNN getDoc () {
-		return (EDESCTNN) this.doc;
+	public EDES getDoc () {
+		return (EDES) this.doc;
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class CdaChEdes extends CdaCh {
 	 *
 	 * @param doc the new doc
 	 */
-	public void setDoc(EDESCTNN doc) {
+	public void setDoc(EDES doc) {
 		this.doc = doc;
 	}
 }
