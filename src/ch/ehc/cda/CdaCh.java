@@ -40,6 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.ehc.common.ConvenienceUtilsEnums;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Organization;
@@ -57,7 +58,6 @@ import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
  */
 public abstract class CdaCh {
 	
-	public static String applicationOidRoot = "2.16.756.5.30.1.139.1.1.1";  // Currently, the Proof of Concept OID. See: http://oid.refdata.ch/
 	protected CDACH doc = null;												// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
 	protected Query query;
@@ -104,7 +104,7 @@ public abstract class CdaCh {
 		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
 		II docID = DatatypesFactory.eINSTANCE.createII();
 		doc.setId(docID);
-		docID.setRoot(applicationOidRoot);
+		docID.setRoot(KnownOIDs.EHealthConnectorV1.get());
 		docID.setExtension("1817558762");
 
 		// Set Type ID 
