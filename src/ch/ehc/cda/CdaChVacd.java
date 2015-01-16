@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.AllergyIntolerance;
 import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
+import org.ehc.cda.ImmunizationRecommendation;
 import org.ehc.cda.ImmunizationTextBuilder;
 import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
@@ -65,6 +66,8 @@ import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendations;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
@@ -154,6 +157,20 @@ public class CdaChVacd extends CdaCh {
 
     getHistoryOfPastIllnessSection().addAct(iheProblem);
   }
+  
+  /**
+   * Adds an entry to the "TREATMENT PLAN" section.
+   * 
+   * @param disease
+   */
+  public void addTreatment(Treatment treatment) {
+    TreatmentBuilder b = new TreatmentBuilder(treatment);
+    org.openhealthtools.mdht.uml.cda.SubstanceAdministration substanceAdministration = b.build();
+
+    getTreatmentPlanSection().addSubstanceAdministration(substanceAdministration);
+    getTreatmentPlanSection().createStrucDocText(getTreatmentPlanText());
+    CHFactory.eINSTANCE.createImmunizationRecommendations();
+  }
 
   /**
    * Fügt eine Impfung hinzu.
@@ -219,15 +236,8 @@ public class CdaChVacd extends CdaCh {
     StrucDocText sectionTextStrucDoc;
     String activeProblemsSectionText;
 
-    // Check if this section has already be created, if not create it
-    if (this.getDoc().getActiveProblemsSection() == null) {
-      activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-      this.getDoc().addSection(activeProblemsSection);
-      sectionTextStrucDoc = CDAFactory.eINSTANCE.createStrucDocText();
-      sectionTextStrucDoc.addText("");
-    } else {
-      activeProblemsSection = this.getDoc().getActiveProblemsSection();
-    }
+    activeProblemsSection = getActiveProblemsSection();
+    
 
     // Update existing Entries with the reference to the CDA level 1 text and create the level 1
     // text.
@@ -300,19 +310,6 @@ public class CdaChVacd extends CdaCh {
     act.getEntryRelationships().get(0).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 
     getLaboratorySpecialitySection().addAct(act);
-  }
-
-  /**
-   * Adds an entry to the "TREATMENT PLAN" section.
-   * 
-   * @param disease
-   */
-  public void addTreatment(Treatment treatment) {
-    TreatmentBuilder b = new TreatmentBuilder(treatment);
-    org.openhealthtools.mdht.uml.cda.SubstanceAdministration substanceAdministration = b.build();
-
-    getTreatmentPlanSection().addSubstanceAdministration(substanceAdministration);
-    getTreatmentPlanSection().createStrucDocText(getTreatmentPlanText());
   }
 
   /**
@@ -519,7 +516,7 @@ public class CdaChVacd extends CdaCh {
 
   private ImmunizationsSection findImmunizationSection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isHistoryOfImmunization(section.getCode().getCode())) {
+     if (LoincSectionCode.isHistoryOfImmunization(section.getCode().getCode())) {
         return (ImmunizationsSection) section;
       }
     }
@@ -552,11 +549,16 @@ public class CdaChVacd extends CdaCh {
   }
 
   private ActiveProblemsSection getActiveProblemsSection() {
+    // Check if this section has already be created, if not create it
+
     org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection section =
         findActiveProblemsSection();
     if (section == null) {
-      section = createActiveProblemsSection();
+      section = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
       doc.addSection(section);
+      
+      StrucDocText sectionTextStrucDoc = CDAFactory.eINSTANCE.createStrucDocText();
+      sectionTextStrucDoc.addText("");;
     }
     return section;
   }
@@ -570,8 +572,6 @@ public class CdaChVacd extends CdaCh {
     }
     return section;
   }
-
-
 
   /**
    * Liefert das MDHT-VACD-Objekt zurück
@@ -683,8 +683,8 @@ public class CdaChVacd extends CdaCh {
   private Section getTreatmentPlanSection() {
     org.openhealthtools.mdht.uml.cda.Section section = findTreatmentPlanSection();
     if (section == null) {
-      section = createTreatmentPlanSection();
-      doc.addSection(section);
+      ImmunizationRecommendations immunizationRecommendations = CHFactory.eINSTANCE.createImmunizationRecommendations();
+      doc.addSection(immunizationRecommendations);
     }
     return section;
   }

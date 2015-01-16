@@ -18,7 +18,8 @@
 
 package org.ehc.cda;
 
-import java.util.Calendar;
+import java.util.Date;
+import java.util.Date;
 
 /**
  * Eine Impfempfehlung
@@ -27,8 +28,8 @@ public class ImmunizationRecommendation {
 	private boolean intendedOrProposed;
 	private boolean shallNotBeAdministerd;
 	private String codedId;
-	private Calendar startOfPossibleAppliance;
-	private Calendar endOfPossibleAppliance;
+	private Date startOfPossibleAppliance;
+	private Date endOfPossibleAppliance;
 	private String dataEnterer;
 	private String responsibleHealthcareProfessional;
 	private String tradeNameOfVaccine;
@@ -63,7 +64,7 @@ public class ImmunizationRecommendation {
 	 */
 	public ImmunizationRecommendation(boolean intendedOrProposed,
 			boolean shallNotBeAdministerd, String codedId,
-			Calendar startOfPossibleAppliance, Calendar endOfPossibleAppliance,
+			Date startOfPossibleAppliance, Date endOfPossibleAppliance,
 			String dataEnterer, String responsibleHealthcareProfessional,
 			String tradeNameOfVaccine, String whoACTCode) {
 		this.intendedOrProposed = intendedOrProposed;
@@ -94,7 +95,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * @return das endOfPossibleAppliance Objekt
 	 */
-	public Calendar getEndOfPossibleAppliance() {
+	public Date getEndOfPossibleAppliance() {
 		return this.endOfPossibleAppliance;
 	}
 
@@ -108,7 +109,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * @return das startOfPossibleAppliance Objekt
 	 */
-	public Calendar getStartOfPossibleAppliance() {
+	public Date getStartOfPossibleAppliance() {
 		return this.startOfPossibleAppliance;
 	}
 
@@ -160,7 +161,7 @@ public class ImmunizationRecommendation {
 	 * @param endOfPossibleAppliance
 	 *          das endOfPossibleAppliance Objekt welches gesetzt wird
 	 */
-	public void setEndOfPossibleAppliance(Calendar endOfPossibleAppliance) {
+	public void setEndOfPossibleAppliance(Date endOfPossibleAppliance) {
 		this.endOfPossibleAppliance = endOfPossibleAppliance;
 	}
 
@@ -193,7 +194,7 @@ public class ImmunizationRecommendation {
 	 * @param startOfPossibleAppliance
 	 *          das startOfPossibleAppliance Objekt welches gesetzt wird
 	 */
-	public void setStartOfPossibleAppliance(Calendar startOfPossibleAppliance) {
+	public void setStartOfPossibleAppliance(Date startOfPossibleAppliance) {
 		this.startOfPossibleAppliance = startOfPossibleAppliance;
 	}
 
