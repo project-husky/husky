@@ -35,6 +35,7 @@ import org.ehc.cda.AllergyIntolerance;
 import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
+import org.ehc.cda.ImmunizationRecommendationTextBuilder;
 import org.ehc.cda.ImmunizationTextBuilder;
 import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
@@ -67,7 +68,7 @@ import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendations;
+import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
@@ -169,7 +170,7 @@ public class CdaChVacd extends CdaCh {
 
     getTreatmentPlanSection().addSubstanceAdministration(substanceAdministration);
     getTreatmentPlanSection().createStrucDocText(getTreatmentPlanText());
-    CHFactory.eINSTANCE.createImmunizationRecommendations();
+    CHFactory.eINSTANCE.createImmunizationRecommendationsSection();
   }
 
   /**
@@ -223,6 +224,69 @@ public class CdaChVacd extends CdaCh {
     getHistoryOfPastIllnessSection().createStrucDocText("KeineAngaben");
     getHistoryOfPastIllnessSection().addAct(iheProblemConcernEntry);
   }
+  
+  public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
+    org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection immunizationRecommendationsSection;
+
+    immunizationRecommendationsSection = getImmunizationRecommendationsSection();
+    immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation.getMdhtImmunizationRecommendation());
+    
+    // Update the content references to cda level 1 text
+    int numberOfImmunizations = immunizationRecommendationsSection.getSubstanceAdministrations().size();
+    ED reference = Util.createReference(numberOfImmunizations, "i");
+    SubstanceAdministration substanceAdministration =
+        immunizationRecommendationsSection.getSubstanceAdministrations().get(numberOfImmunizations - 1);
+
+    substanceAdministration.setText(reference);
+    substanceAdministration.getConsumable().getManufacturedProduct().getManufacturedMaterial()
+        .getCode().setOriginalText(EcoreUtil.copy(reference));
+
+    immunizationRecommendationsSection.createStrucDocText(getImmunizationRecommendationText());
+//    
+//    
+//    // Update existing Entries with the reference to the CDA level 1 text and create the level 1
+//    // text.
+//    activeProblemsSectionText =
+//        Util.extractStringFromNonQuotedStrucDocText(activeProblemsSection.getText());
+//    ArrayList<ProblemConcernEntry> problemConcernEntries = this.getProblemConcernEntries();
+//    tb =
+//        new ProblemConcernTextBuilder(problemConcernEntries, problemConcern,
+//            activeProblemsSectionText);
+//    problemConcern = tb.getProblemConcernEntry();
+//
+//    // Update the section text.
+//    // This is a workaround for the following problem:
+//    // - The sectionText can only be created once with the createSectionText Method
+//    // - The StrucDocText Object can´t create text with xml-elements inside. These will be quoted.
+//    // The Workaround crates a special text object, which can´t be read by the getText Method. So
+//    // the current state of the section text is stored in the activeProblemSectionText field.
+//    activeProblemsSectionText = tb.getSectionText();
+//    sectionTextStrucDoc = Util.createNonQotedStrucDocText(activeProblemsSectionText);
+//    activeProblemsSection.setText(sectionTextStrucDoc);
+//
+//    // insert the values which are special for VACD Document
+//    // TODO Enum einfügen
+//    // problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);
+//    // //Status code of the problem has to be "completed"
+//    problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
+//    
+//    // Add the code for "Komplikations- oder Expositionsrisiken"
+//    CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
+//    komplikationsExpositionsrisikoCode.setCodeSystem("2.16.840.1.113883.6.96");
+//    komplikationsExpositionsrisikoCode.setCode("55607006");
+//    komplikationsExpositionsrisikoCode.setCodeSystemName("SNOMED CT");
+//    komplikationsExpositionsrisikoCode.setDisplayName("Problem");
+//    problemConcern.getMdhtProblemEntryList().get(0).setCode(komplikationsExpositionsrisikoCode);
+//
+//    // create a copy of the given object and its sub-objects
+//    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
+//        EcoreUtil.copy(problemConcern.getProblemConcernEntry());
+//    activeProblemsSection.addAct(problemConcernEntryMdht);
+//    problemConcernEntryMdht.getEntryRelationships().get(0)
+//        .setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+//    problemConcernEntryMdht.getEntryRelationships().get(0).setInversionInd(false);
+    
+  }
 
   /**
    * Fügt ein Leiden hinzu.
@@ -238,7 +302,6 @@ public class CdaChVacd extends CdaCh {
 
     activeProblemsSection = getActiveProblemsSection();
     
-
     // Update existing Entries with the reference to the CDA level 1 text and create the level 1
     // text.
     activeProblemsSectionText =
@@ -263,11 +326,8 @@ public class CdaChVacd extends CdaCh {
     // TODO Enum einfügen
     // problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);
     // //Status code of the problem has to be "completed"
-    problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); // Add
-                                                                                                    // the
-                                                                                                    // ProblemEntry
-                                                                                                    // Template
-                                                                                                    // ID
+    problemConcern.getProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
+    
     // Add the code for "Komplikations- oder Expositionsrisiken"
     CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
     komplikationsExpositionsrisikoCode.setCodeSystem("2.16.840.1.113883.6.96");
@@ -486,6 +546,26 @@ public class CdaChVacd extends CdaCh {
     section.setCode(createTreatmentPlanCode());
     return section;
   }
+  
+  private ImmunizationRecommendationsSection getImmunizationRecommendationsSection() {
+    List<ImmunizationRecommendationsSection> immunizationRecommendationsSections;
+    ImmunizationRecommendationsSection immunizationRecommendationsSection;
+    
+    query = new Query(this.doc);
+    List<ImmunizationRecommendationsSection> sections = query.getSections(org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection.class);
+    
+    for (ImmunizationRecommendationsSection section : sections) {
+      if (LoincSectionCode.isTreatmentPlan(section.getCode().getCode())) {
+        return (ImmunizationRecommendationsSection) section;
+      }
+    }
+    
+    immunizationRecommendationsSection = CHFactory.eINSTANCE.createImmunizationRecommendationsSection().init();
+    ST title = DatatypesFactory.eINSTANCE.createST("Impfplan");
+    immunizationRecommendationsSection.setTitle(title);
+    this.doc.addSection(immunizationRecommendationsSection);
+    return immunizationRecommendationsSection;
+  }
 
   private ActiveProblemsSection findActiveProblemsSection() {
     for (Section section : doc.getSections()) {
@@ -597,9 +677,16 @@ public class CdaChVacd extends CdaCh {
    *
    * @return Liste von Impfempfehlungen
    */
-  public List<Immunization> getImmunizationRecommendations() {
-    // Auto-generated method stub
-    return null;
+  public List<ImmunizationRecommendation> getImmunizationRecommendations() {
+    EList<SubstanceAdministration> substanceAdministrations =
+        getImmunizationRecommendationsSection().getSubstanceAdministrations();
+
+    List<ImmunizationRecommendation> immunizations = new ArrayList<ImmunizationRecommendation>();
+    for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
+      ImmunizationRecommendation immunization = new ImmunizationRecommendation((org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation) substanceAdministration);
+      immunizations.add(immunization);
+    }
+    return immunizations;
   }
 
   /**
@@ -631,6 +718,11 @@ public class CdaChVacd extends CdaCh {
 
   private String getImmunizationText() {
     ImmunizationTextBuilder b = new ImmunizationTextBuilder(getImmunizations());
+    return b.toString();
+  }
+  
+  private String getImmunizationRecommendationText() {
+    ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(getImmunizationRecommendations());
     return b.toString();
   }
 
@@ -683,7 +775,7 @@ public class CdaChVacd extends CdaCh {
   private Section getTreatmentPlanSection() {
     org.openhealthtools.mdht.uml.cda.Section section = findTreatmentPlanSection();
     if (section == null) {
-      ImmunizationRecommendations immunizationRecommendations = CHFactory.eINSTANCE.createImmunizationRecommendations();
+      ImmunizationRecommendationsSection immunizationRecommendations = CHFactory.eINSTANCE.createImmunizationRecommendationsSection();
       doc.addSection(immunizationRecommendations);
     }
     return section;
@@ -716,4 +808,5 @@ public class CdaChVacd extends CdaCh {
   public void setDoc(VACD doc) {
     this.doc = doc;
   }
+
 }

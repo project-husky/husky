@@ -19,22 +19,26 @@
 package org.ehc.cda;
 
 import java.util.Date;
-import java.util.Date;
+import java.util.List;
+
+import org.ehc.common.Author;
+import org.ehc.common.Code;
+import org.ehc.common.Util;
+import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
+import org.openhealthtools.mdht.uml.cda.Material;
+import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Eine Impfempfehlung
  */
 public class ImmunizationRecommendation {
-	private boolean intendedOrProposed;
-	private boolean shallNotBeAdministerd;
-	private String codedId;
-	private Date startOfPossibleAppliance;
-	private Date endOfPossibleAppliance;
-	private String dataEnterer;
-	private String responsibleHealthcareProfessional;
-	private String tradeNameOfVaccine;
-	private String WHOACTCode;
-
+  
+	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
+	
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
@@ -53,116 +57,46 @@ public class ImmunizationRecommendation {
 	 * @param endOfPossibleAppliance
 	 *          Ende des Zeitraums, in welchem die empfohlene Impfung verabreicht
 	 *          werden soll.
-	 * @param dataEnterer
-	 *          Nachname der Person, die die Eintragung vornimmt
-	 * @param responsibleHealthcareProfessional
-	 *          Nachname Fachperson, die für die Impfung verantwortlich ist
 	 * @param tradeNameOfVaccine
 	 *          Handelsname des Impfstoffes
 	 * @param whoACTCode
 	 *          WHO ACT Code des Impfstoffes
+	 * @param author
+     *          Arzt, der diese Eintragung veranlasst hat
 	 */
-	public ImmunizationRecommendation(boolean intendedOrProposed,
-			boolean shallNotBeAdministerd, String codedId,
-			Date startOfPossibleAppliance, Date endOfPossibleAppliance,
-			String dataEnterer, String responsibleHealthcareProfessional,
-			String tradeNameOfVaccine, String whoACTCode) {
-		this.intendedOrProposed = intendedOrProposed;
-		this.shallNotBeAdministerd = shallNotBeAdministerd;
-		this.codedId = codedId;
-		this.startOfPossibleAppliance = startOfPossibleAppliance;
-		this.endOfPossibleAppliance = endOfPossibleAppliance;
-		this.dataEnterer = dataEnterer;
-		this.responsibleHealthcareProfessional = responsibleHealthcareProfessional;
-		this.tradeNameOfVaccine = tradeNameOfVaccine;
-		this.WHOACTCode = whoACTCode;
-	}
+	public ImmunizationRecommendation (boolean intendedOrProposed,
+			boolean shallNotBeAdministerd, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
+			Code codedId, String tradeNameOfVaccine, String whoACTCode, org.ehc.common.Author author) {      
+	    mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
+	    Consumable consumable = new Consumable(codedId, tradeNameOfVaccine, whoACTCode);
+	    mImmunizationRecommendation.setConsumable(consumable.getMdhtConsumable());
 
-	/**
-	 * @return das codedId Objekt
-	 */
-	public String getCodedId() {
-		return this.codedId;
+	    this.setCodedId(codedId);
+        this.setIntendedOrProposed(intendedOrProposed);
+        this.setShallNotBeAdministerd(shallNotBeAdministerd);
+        this.setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
+        this.getEffectiveTime();
+        this.mImmunizationRecommendation.getAuthors().add(author.getAuthorMdht());
 	}
+	
+    public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
+      setMdhtImmunizationRecommendation(immunizationRecommendation);
+    }
+	
+	
+	
+	private void setCodedId(Code codedId) {
+	  //Seems dirty, but the Spec wants it like this
+	  II ii = DatatypesFactory.eINSTANCE.createII(codedId.getCD().getCodeSystem(), codedId.getCode());
+	  mImmunizationRecommendation.getIds().add(ii);
+    }
 
-	/**
-	 * @return das dataEnterer Objekt
-	 */
-	public String getDataEnterer() {
-		return this.dataEnterer;
-	}
-
-	/**
-	 * @return das endOfPossibleAppliance Objekt
-	 */
-	public Date getEndOfPossibleAppliance() {
-		return this.endOfPossibleAppliance;
-	}
-
-	/**
-	 * @return das responsibleHealthcareProfessional Objekt
-	 */
-	public String getResponsibleHealthcareProfessional() {
-		return this.responsibleHealthcareProfessional;
-	}
-
-	/**
-	 * @return das startOfPossibleAppliance Objekt
-	 */
-	public Date getStartOfPossibleAppliance() {
-		return this.startOfPossibleAppliance;
-	}
-
-	/**
-	 * @return das tradeNameOfVaccine Objekt
-	 */
-	public String getTradeNameOfVaccine() {
-		return this.tradeNameOfVaccine;
-	}
-
-	/**
-	 * @return das wHOACTCode Objekt
-	 */
-	public String getWHOACTCode() {
-		return this.WHOACTCode;
-	}
-
-	/**
-	 * @return das intendedOrProposed Objekt
-	 */
-	public boolean isIntendedOrProposed() {
-		return this.intendedOrProposed;
-	}
-
-	/**
-	 * @return das shallNotBeAdministerd Objekt
-	 */
-	public boolean isShallNotBeAdministerd() {
-		return this.shallNotBeAdministerd;
-	}
-
-	/**
-	 * @param codedId
-	 *          das codedId Objekt welches gesetzt wird
-	 */
-	public void setCodedId(String codedId) {
-		this.codedId = codedId;
-	}
-
-	/**
-	 * @param dataEnterer
-	 *          das dataEnterer Objekt welches gesetzt wird
-	 */
-	public void setDataEnterer(String dataEnterer) {
-		this.dataEnterer = dataEnterer;
-	}
-
-	/**
+  /**
 	 * @param endOfPossibleAppliance
 	 *          das endOfPossibleAppliance Objekt welches gesetzt wird
 	 */
-	public void setEndOfPossibleAppliance(Date endOfPossibleAppliance) {
-		this.endOfPossibleAppliance = endOfPossibleAppliance;
+	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
+	  mImmunizationRecommendation.getEffectiveTimes().add(0, Util.createSTCM_TS(startOfPossibleAppliacne, endOfPossibleAppliance));
 	}
 
 	/**
@@ -170,16 +104,13 @@ public class ImmunizationRecommendation {
 	 *          das intendedOrProposed Objekt welches gesetzt wird
 	 */
 	public void setIntendedOrProposed(boolean intendedOrProposed) {
-		this.intendedOrProposed = intendedOrProposed;
-	}
-
-	/**
-	 * @param responsibleHealthcareProfessional
-	 *          das responsibleHealthcareProfessional Objekt welches gesetzt wird
-	 */
-	public void setResponsibleHealthcareProfessional(
-			String responsibleHealthcareProfessional) {
-		this.responsibleHealthcareProfessional = responsibleHealthcareProfessional;
+	  if (intendedOrProposed) {
+	    mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);
+	  }
+	  else {
+	    mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
+	  }
+	  
 	}
 
 	/**
@@ -187,31 +118,38 @@ public class ImmunizationRecommendation {
 	 *          das shallNotBeAdministerd Objekt welches gesetzt wird
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
-		this.shallNotBeAdministerd = shallNotBeAdministerd;
+	    if (shallNotBeAdministerd) {
+	      mImmunizationRecommendation.setNegationInd(true);
+	    }
+	    else {
+	      mImmunizationRecommendation.setNegationInd(false);
+	    }
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
+	  return this.mImmunizationRecommendation;
 	}
 
-	/**
-	 * @param startOfPossibleAppliance
-	 *          das startOfPossibleAppliance Objekt welches gesetzt wird
-	 */
-	public void setStartOfPossibleAppliance(Date startOfPossibleAppliance) {
-		this.startOfPossibleAppliance = startOfPossibleAppliance;
-	}
+	   public void setMdhtImmunizationRecommendation(org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
+	      this.mImmunizationRecommendation = immunizationRecommendation;
+	    }
+	
+  public String getVaccineName() {
+    return this.mImmunizationRecommendation.getConsumable().getManufacturedProduct().getManufacturedMaterial().getName().getText();
+  }
 
-	/**
-	 * @param tradeNameOfVaccine
-	 *          das tradeNameOfVaccine Objekt welches gesetzt wird
-	 */
-	public void setTradeNameOfVaccine(String tradeNameOfVaccine) {
-		this.tradeNameOfVaccine = tradeNameOfVaccine;
-	}
-
-	/**
-	 * @param wHOACTCode
-	 *          das wHOACTCode Objekt welches gesetzt wird
-	 */
-	public void setWHOACTCode(String wHOACTCode) {
-		this.WHOACTCode = wHOACTCode;
-	}
-
+  public String getEffectiveTime() {
+     List<SXCM_TS> effectiveTimes = this.mImmunizationRecommendation.getEffectiveTimes();
+     return Util.convertSXCM_TSToEurString(effectiveTimes);
+  }
+  
+  public org.ehc.common.Author getAuthor() {
+    try {
+      org.openhealthtools.mdht.uml.cda.Author author = mImmunizationRecommendation.getAuthors().get(0);
+      return new Author(author);
+  } catch(IndexOutOfBoundsException e) {
+      // no author available
+      return null;
+  }
+  }
 }

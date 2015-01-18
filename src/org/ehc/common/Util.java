@@ -23,6 +23,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -56,6 +57,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -346,32 +348,91 @@ public class Util {
 
 		return ohtIntervalPoint;
 	}
+	
+	 /**
+     * Erzeugt ein IVXB_TS Objekt
+     * 
+     * @param eurDateStr
+     *            ein Date String in dem Format dd.MM.yyyy wie er in Europa
+     *            gebräuchlich ist
+     * @return HL7 IVXB_TS Objekt
+     * @throws ParseException
+     */
+    public static IVXB_TS createIVXB_TSFromDate(Date date)
+            throws ParseException {
+        // Create IVXB_TS
+        IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
+        ohtIntervalPoint.setValue(DateUtil.formatDate(date));
 
-	/**
-	 * Erzeugt ein IVL_TS Objekt
-	 * 
-	 * @param eurDateBegin
-	 *            der Begin des Intervals in dem Format dd.MM.yyyy wie er in
-	 *            Europa gebräuchlich ist
-	 * @param eurDateEnd
-	 *            das Ende des Intervals in dem Format dd.MM.yyyy wie er in
-	 *            Europa gebräuchlich ist
-	 * @return HL7 IVL_TS Objekt
-	 * @throws ParseException
-	 */
-	public static IVL_TS createIVL_TSFromEuroDate(String eurDateBegin,
-			String eurDateEnd) throws ParseException {
-		// Create OHT Data structure
-		IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
+        return ohtIntervalPoint;
+    }
 
-		// Create and set Begin
-		ohtInterval.setLow(createIVXB_TSFromEuroDate(eurDateBegin));
+   /**
+     * Erzeugt ein IVL_TS Objekt
+     * 
+     * @param eurDateBegin
+     *            der Begin des Intervals in dem Format dd.MM.yyyy wie er in
+     *            Europa gebräuchlich ist
+     * @param eurDateEnd
+     *            das Ende des Intervals in dem Format dd.MM.yyyy wie er in
+     *            Europa gebräuchlich ist
+     * @return HL7 IVL_TS Objekt
+     * @throws ParseException
+     */
+    public static IVL_TS createIVL_TSFromEuroDate(String eurDateBegin,
+            String eurDateEnd) throws ParseException {
+        // Create OHT Data structure
+        IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
 
-		// Create and set End
-		ohtInterval.setHigh(createIVXB_TSFromEuroDate(eurDateEnd));
+        // Create and set Begin
+        ohtInterval.setLow(createIVXB_TSFromEuroDate(eurDateBegin));
 
-		return ohtInterval;
-	}
+        // Create and set End
+        ohtInterval.setHigh(createIVXB_TSFromEuroDate(eurDateEnd));
+
+        return ohtInterval;
+    }
+    
+    /**
+     * Erzeugt ein IVL_TS Objekt
+     * 
+     * @param eurDateBegin
+     *            der Begin des Intervals in dem Format dd.MM.yyyy wie er in
+     *            Europa gebräuchlich ist
+     * @param eurDateEnd
+     *            das Ende des Intervals in dem Format dd.MM.yyyy wie er in
+     *            Europa gebräuchlich ist
+     * @return HL7 IVL_TS Objekt
+     * @throws ParseException
+     */
+    public static IVL_TS createIVL_TSFromEuroDate(Date eurDateBegin,
+            Date eurDateEnd) throws ParseException {
+        // Create OHT Data structure
+        IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
+
+        // Create and set Begin
+        ohtInterval.setLow(createIVXB_TSFromDate(eurDateBegin));
+
+        // Create and set End
+        ohtInterval.setHigh(createIVXB_TSFromDate(eurDateEnd));
+
+        return ohtInterval;
+    }
+	
+    public static SXCM_TS createSTCM_TS (Date startOfPossibleAppliacne,
+        Date endOfPossibleAppliance) {
+       //sxcm_ts = DatatypesFactory.eINSTANCE.createSXCM_TS();
+      try {
+        IVL_TS ivl_ts; 
+        ivl_ts = createIVL_TSFromEuroDate(startOfPossibleAppliacne, endOfPossibleAppliance);
+        SXCM_TS sxcm_ts = (IVL_TS) ivl_ts;
+        return sxcm_ts;
+      } catch (ParseException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      return null;
+    }
 
 	/**
 	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot
@@ -605,5 +666,28 @@ public class Util {
                     entry.getValue().toString()+"\"");
         }
         return sb;
+    }
+
+    public static String convertSXCM_TSToEurString(List<SXCM_TS> effectiveTimes) {
+      StringBuilder b = new StringBuilder();
+      for (SXCM_TS effectiveTime : effectiveTimes) {         
+        if (effectiveTime instanceof IVL_TS) {
+          IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
+          Date tsLow = DateUtil.parseDate(effectiveTimeInterval.getLow().getValue());
+          Date tsHigh = DateUtil.parseDate(effectiveTimeInterval.getHigh().getValue());
+          String tsLowStr = DateUtil.formatDateCH(tsLow);
+          String tsHighStr = DateUtil.formatDateCH(tsHigh);
+          b.append(tsLowStr + " - " + tsHighStr);
+        }
+        else {
+        if (effectiveTime instanceof TS) {
+         Date ts = DateUtil.parseDate(effectiveTime.getValue());
+         String tsStr = DateUtil.formatDateCH(ts);
+         b.append(tsStr);
+        }
+        b.append(" ");
+        }
+      }
+      return b.toString();
     }
 }

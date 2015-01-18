@@ -123,7 +123,7 @@ public abstract class CdaCh {
 		// Add the stylesheet processing instructions to the document	root using featuremaputil
 		// TODO Erstellen eines Constructors, der ohne übergebenes Stylesheet ein Standard-Stylesheet verwendet.
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\" " ); 
+				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
 
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
