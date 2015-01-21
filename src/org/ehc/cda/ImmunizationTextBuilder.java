@@ -18,7 +18,6 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	//TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
     private List<Immunization> immunizations;
-    public final static String contentIdPrefix = "i";
 	
 	/**
 	 * Constructor.
@@ -32,7 +31,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	public List<Immunization> getUpdatedImmunizations() {
 	  int i = 0;
 	  for (Immunization immunization : this.immunizations) {
-	    ED reference = Util.createReference(i, contentIdPrefix);
+	    ED reference = Util.createReference(i, LoincSectionCode.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
 	    SubstanceAdministration substanceAdminstration = immunization.getImmunization();
 	    substanceAdminstration.setText(reference);
 	    //.getSubstanceAdministrations().get(0);
@@ -81,7 +80,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
-		addCellWithContent(immunization.getVaccineName(), i);
+		addCellWithContent(immunization.getVaccineName(), LoincSectionCode.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
 		addCell("");
 		addCell("");
 		addCell(DateUtil.formatDateCH(immunization.getEffectiveTime()));

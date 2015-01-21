@@ -53,6 +53,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
@@ -533,6 +534,18 @@ public class Util {
 		return effectiveTime;
 	}	
 
+	public static IVL_PQ createIVL_PQNullFlavorNASK() {
+		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivlpq.setNullFlavor(NullFlavor.NASK);
+		return ivlpq;
+	}
+	
+	public static CE createCENullFlavorNASK() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(NullFlavor.NASK);
+		return ce;
+	}
+	
 	public static IVXB_TS createNullFlavorUnknown() {
 		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		ts.setNullFlavor(NullFlavor.UNK);

@@ -25,6 +25,11 @@ public enum KnownOIDs {
 		 */
 		GTIN ("1.3.160"),
 		/**
+		 * OID: 2.16.756.5.32 <div class="de">SwissINDEX</div> <div
+		 * class="fr">SwissIndex</div>
+		 */
+		SwissINDEX ("2.16.756.5.30.2.6.1"),
+		/**
 		 * OID: 2.16.756.5.32 <div class="de">AHV Nummer (die Neue)</div> <div
 		 * class="fr">No AVS (le nouveaux)</div>
 		 */

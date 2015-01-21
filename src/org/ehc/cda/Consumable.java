@@ -19,6 +19,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.EN;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
+import ch.ehc.cda.KnownOIDs;
+
 public class Consumable {
 
   // private org.openhealthtools.mdht.uml.cda.SubstanceAdministration mSubstanceAdministration;
@@ -32,12 +34,10 @@ public class Consumable {
    * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
    * 
    * @param codedId Packungs-GTIN, GLN oder swissINDEX
-   * @param endOfPossibleAppliance Ende des Zeitraums, in welchem die empfohlene Impfung verabreicht
-   *        werden soll.
    * @param tradeNameOfVaccine Handelsname des Impfstoffes
-   * @param whoACTCode WHO ACT Code des Impfstoffes
+   * @param whoACTCode WHO ATC Code des Impfstoffes
    */
-  public Consumable(Code codedId, String tradeNameOfVaccine, String whoActCode) {
+  public Consumable(Code codedId, String tradeNameOfVaccine, String whoAtcCode) {
 
     this.mConsumable = CDAFactory.eINSTANCE.createConsumable();
     this.mProductEntry = IHEFactory.eINSTANCE.createProductEntry().init();
@@ -51,16 +51,27 @@ public class Consumable {
 
     this.setCodedId(codedId);
     this.setTradeNameOfVaccine(tradeNameOfVaccine);
-    this.setWHOACTCode(whoActCode);
+    this.setWHOACTCode(whoAtcCode);
     this.mConsumable.setTypeCode(ParticipationType.CSM);
   }
-
+  
   /**
    * @return das codedId Objekt
    */
   public Code getCodedId() {
     Code code = new Code(mConsumable.getManufacturedProduct().getManufacturedMaterial().getCode());
     return code;
+  }
+  
+  public Code getGtinOrEanOrSwissIndex() {
+	  for (CD codeTranslation : mConsumable.getManufacturedProduct().getManufacturedMaterial().getCode().getTranslations()) {
+		  String codeTransStr = codeTranslation.getCodeSystem();
+		  if (codeTransStr.equals(KnownOIDs.GTIN.get()) || codeTransStr.equals(KnownOIDs.GLN.get()) || codeTransStr.equals(KnownOIDs.SwissINDEX.get())) {
+			  Code code = new Code(codeTranslation);
+			  return code;
+		  }
+	  }
+	  return null;
   }
 
 
@@ -95,15 +106,16 @@ public class Consumable {
 //    cd.setCodeSystem("2.16.840.1.113883.6.73");
 //    cd.setCode(whoActCode);
 //    mMaterial.getCode().getTranslations().add(cd);
-  CE ce = mMaterial.getCode();
-  ce.setCodeSystem("2.16.840.1.113883.6.73");
-  ce.setCode(whoActCode);
-    mMaterial.setCode(ce);
-
+  
+	  //TODO Klären, ob das Setzen von Gtin als Code ausreichend ist.
+	  CE ce = mMaterial.getCode();
+	  ce.setCodeSystem("2.16.840.1.113883.6.73");
+	  ce.setCode(whoActCode);
+	  mMaterial.setCode(ce);
   }
 
   public org.openhealthtools.mdht.uml.cda.Consumable getMdhtConsumable() {
-    return this.mConsumable;
+    return EcoreUtil.copy(this.mConsumable);
   }
   
   public void setGtin(Code codedId) {

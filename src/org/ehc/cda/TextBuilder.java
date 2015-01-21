@@ -6,11 +6,8 @@ package org.ehc.cda;
  * @author gsc
  */
 abstract class TextBuilder {
-	// old
+
 	private StringBuffer buffer = new StringBuffer();
-	// protected String[] tableHeader;
-	// protected String[][] tableBody;
-	// protected Boolean[] referenceBodyCell;
 
 	protected final static String tableFooter = "</tbody></table>";
 
@@ -41,14 +38,14 @@ abstract class TextBuilder {
 		append("</td>");
 	}
 
-	protected void addCellWithContent(String text, int i) {
+	protected void addCellWithContent(String text, String prefix, int i) {
 		append("<td>");
-		addContent(text, i);
+		addContent(text, prefix, i);
 		append("</td>");
 	}
 
-	protected void addContent(String text, int i) {
-		append("<content ID='i" + i + "'>");
+	protected void addContent(String text, String prefix, int i) {
+		append("<content ID='"+prefix + i + "'>");
 		append(text);
 		append("</content>");
 	}

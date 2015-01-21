@@ -18,6 +18,7 @@
 
 package org.ehc.common;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.Address;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Identificator;
@@ -202,7 +203,7 @@ public class Author {
 	}
 
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
-		return this.mAuthor;
+		return EcoreUtil.copy(this.mAuthor);
 	}
 
 	public String getGln() {

@@ -20,7 +20,6 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 	private ProblemConcernEntry newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
-	public final static String contentIdPrefix = "aps";
 	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
 	public ProblemConcernTextBuilder(
@@ -59,7 +58,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		Observation obs = CDAFactory.eINSTANCE.createObservation();
 		obs = newProblemConcernEntry.getProblemConcernEntry().getObservations()
 				.get(0);
-		obs.setText(Util.createReference(newId, contentIdPrefix));
+		obs.setText(Util.createReference(newId, LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		return newProblemConcernEntry;
 	}
 
@@ -86,7 +85,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		rowBuilder
 				.append(buildCellWithContent(
 						problemConcernEntry.getProblemConcern(), newId,
-						contentIdPrefix));
+						LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();
 	}

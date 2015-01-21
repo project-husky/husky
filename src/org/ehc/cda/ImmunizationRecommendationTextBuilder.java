@@ -2,23 +2,21 @@ package org.ehc.cda;
 
 import java.util.List;
 
-import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
- * Builds the <text> part of the History of immunzations.
+ * Builds the <text> part of the Immunization recommendations.
  * 
- * Always builds the whole part (not only adds one immunization).
+ * Always builds the whole part (not only adds one immunization recommendation).
  * 
- * @author gsc, Axel Helmer
+ * @author Axel Helmer
  */
 public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 
     //TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
     private List<ImmunizationRecommendation> immunizations;
-    public final static String contentIdPrefix = "ir";
     
     /**
      * Constructor.
@@ -32,7 +30,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
     public List<ImmunizationRecommendation> getUpdatedImmunizations() {
       int i = 0;
       for (ImmunizationRecommendation immunization : this.immunizations) {
-        ED reference = Util.createReference(i, contentIdPrefix);
+        ED reference = Util.createReference(i, LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix());
         SubstanceAdministration substanceAdminstration = immunization.getMdhtImmunizationRecommendation();
         substanceAdminstration.setText(reference);
         i++;
@@ -80,7 +78,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 
     private void addRow(ImmunizationRecommendation immunization, int i) {
         append("<tr>");
-        addCellWithContent(immunization.getVaccineName(), i);
+        addCellWithContent(immunization.getVaccineName(), LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix(), i);
         addCell("");
         addCell("");
         addCell(immunization.getEffectiveTime());
