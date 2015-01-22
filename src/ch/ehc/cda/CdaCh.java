@@ -40,16 +40,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
-import org.ehc.common.ConvenienceUtilsEnums;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Organization;
 import org.ehc.common.Patient;
 import org.ehc.common.Person;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 
+import ch.ehc.cda.enums.EHealthConnectorVersions;
 import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
 
 /**
@@ -71,6 +69,9 @@ public abstract class CdaCh {
 	public CdaCh() {
 		this.docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
 		this.docRoot.setClinicalDocument(doc);
+	    // Add the stylesheet processing instructions to the document root using featuremaputil
+        // set xml namespace
+        docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 	}
 	
 	/**
@@ -104,7 +105,7 @@ public abstract class CdaCh {
 		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
 		II docID = DatatypesFactory.eINSTANCE.createII();
 		doc.setId(docID);
-		docID.setRoot(KnownOIDs.EHealthConnectorV1.get());
+		docID.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
 		docID.setExtension("1817558762");
 
 		// Set Type ID 
@@ -123,7 +124,7 @@ public abstract class CdaCh {
 		// Add the stylesheet processing instructions to the document	root using featuremaputil
 		// TODO Erstellen eines Constructors, der ohne übergebenes Stylesheet ein Standard-Stylesheet verwendet.
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
+				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
 
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);

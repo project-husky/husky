@@ -197,9 +197,25 @@ public class Author {
 	}
 
 	public String getCompleteName() {
-		Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
-				.getNames().get(0));
-		return name.getCompleteName();
+		//Search for the author name. If it isn´t there, try to use the organisation name.
+	  if (mAuthor.getAssignedAuthor() != null) {
+		  if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
+		    if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
+		      Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
+	                .getNames().get(0));
+		        return name.getCompleteName();
+		  }
+		  else {
+		    if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
+		      if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+	            Name name = new Name(mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
+	            return name.getCompleteName();
+		      }
+		    }
+		  }
+		  }
+		}
+    return "";
 	}
 
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {

@@ -21,6 +21,7 @@ package org.ehc.common;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Ein Code bestehend aus eigentlichem Code und dem zugehörigen Codesystem (OID)
@@ -76,7 +77,17 @@ public class Code {
 	 * @return das code Objekt
 	 */
 	public String getCode() {
-		return this.mCD.getCode();
+	  String codeStr = "";
+	  if (this.mCD.getCode() == null) {
+	    if (this.mCD.getNullFlavor() != null) {
+	      //TODO: Später String Ersetzungen für den NullFlavor im Enum nachschlagen
+	      mCD.getNullFlavor().getLiteral();
+	    }
+	  }
+	  else {
+	    codeStr = this.mCD.getCode();
+	  }
+	  return codeStr;
 	}
 
 	/**
@@ -90,7 +101,17 @@ public class Code {
 	 * @return das oid Objekt
 	 */
 	public String getOid() {
-		return this.mCD.getCodeSystem();
+	    String codeStr = "";
+	      if (this.mCD.getCodeSystem() == null) {
+	        if (this.mCD.getNullFlavor() != null) {
+	          //TODO: Später String Ersetzungen für den NullFlavor im Enum nachschlagen
+	          mCD.getNullFlavor().getLiteral();
+	        }
+	      }
+	      else {
+	        codeStr = this.mCD.getCodeSystem();
+	      }
+	      return codeStr;
 	}
 
 	/**

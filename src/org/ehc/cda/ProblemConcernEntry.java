@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -138,7 +139,7 @@ public class ProblemConcernEntry {
 
 		// Create and set the concern interval
 		try {
-			getProblemConcernEntry().setEffectiveTime(Util
+			getProblemConcernEntry().setEffectiveTime(DateUtil
 					.createIVL_TSFromEuroDate(begin, end));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -228,7 +229,7 @@ public class ProblemConcernEntry {
 	public void setEndOfConcern(String endOfConcern) {
 		try {
 			getProblemConcernEntry().getEffectiveTime().setHigh(
-					Util.createIVXB_TSFromEuroDate(endOfConcern));
+			    DateUtil.createIVXB_TSFromEuroDate(endOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -243,7 +244,7 @@ public class ProblemConcernEntry {
 	public void setStartOfConcern(String startOfConcern) {
 		try {
 			getProblemConcernEntry().getEffectiveTime().setLow(
-					Util.createIVXB_TSFromEuroDate(startOfConcern));
+			    DateUtil.createIVXB_TSFromEuroDate(startOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

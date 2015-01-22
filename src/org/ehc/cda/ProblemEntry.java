@@ -24,6 +24,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.Code;
+import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -194,7 +195,7 @@ public class ProblemEntry {
 		}
 		// IVXB_TS startTime = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		mProblemEntry.getEffectiveTime().setLow(
-				Util.createIVXB_TSFromEuroDate(startOfProblem));
+		    DateUtil.createIVXB_TSFromEuroDate(startOfProblem));
 	}
 
 	/**
@@ -212,7 +213,7 @@ public class ProblemEntry {
 	 */
 	public void setEndOfProblem(String endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
-				Util.createIVXB_TSFromEuroDate(endOfProblem));
+		    DateUtil.createIVXB_TSFromEuroDate(endOfProblem));
 	}
 
 	/**

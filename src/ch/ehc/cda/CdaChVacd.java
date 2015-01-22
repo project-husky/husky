@@ -34,11 +34,10 @@ import org.ehc.cda.PastIllnessBuilder;
 import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
-import org.ehc.cda.Treatment;
-import org.ehc.cda.TreatmentPlanTextBuilder;
 import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.CSUtil;
+import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -65,7 +64,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
@@ -172,26 +170,12 @@ public class CdaChVacd extends CdaCh {
 
     immunizationSection.createStrucDocText(getImmunizationText());
   }
-
-  /**
-   * Adds an entry to the "HISTORY OF PAST ILLNESS" section.
-   * 
-   * @param disease
-   */
-  public void addPastIllNess(Disease disease) {
-    PastIllnessBuilder builder = new PastIllnessBuilder(disease);
-    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblemConcernEntry =
-        builder.build();
-
-    getHistoryOfPastIllnessSection().createStrucDocText("KeineAngaben");
-    getHistoryOfPastIllnessSection().addAct(iheProblemConcernEntry);
-  }
-  
+ 
   public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
     org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection immunizationRecommendationsSection;
 
     //find or create (and add) the Section
-    immunizationRecommendationsSection = (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection) findTreatmentPlanSection();
+    immunizationRecommendationsSection = (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection) findImmunizationRecommendationSection();
     if (immunizationRecommendationsSection==null) {
     	immunizationRecommendationsSection = createTreatmentPlanSection().init();
     	this.doc.addSection(immunizationRecommendationsSection);
@@ -216,6 +200,20 @@ public class CdaChVacd extends CdaCh {
 	    	ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
 	    }
 }
+  
+  /**
+   * Adds an entry to the "HISTORY OF PAST ILLNESS" section.
+   * 
+   * @param disease
+   */
+  public void addPastIllNess(Disease disease) {
+    PastIllnessBuilder builder = new PastIllnessBuilder(disease);
+    org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblemConcernEntry =
+        builder.build();
+
+    getHistoryOfPastIllnessSection().createStrucDocText("KeineAngaben");
+    getHistoryOfPastIllnessSection().addAct(iheProblemConcernEntry);
+  }
 
 /**
    * Fügt ein Leiden hinzu.
@@ -402,14 +400,14 @@ public class CdaChVacd extends CdaCh {
     observation.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.1.6"));
     observation.setCode(createCode(serologie));
     observation.setStatusCode(CSUtil.completed());
-    observation.setEffectiveTime(Util.convertDate(serologie.getDate()));
+    observation.setEffectiveTime(DateUtil.convertDate(serologie.getDate()));
     return observation;
   }
 
   @SuppressWarnings("unused")
   private Procedure createProcedure() {
     Procedure procedure = IHEFactory.eINSTANCE.createProcedureEntryPlanOfCareActivityProcedure();
-    procedure.setEffectiveTime(Util.createUnknownTime());
+    procedure.setEffectiveTime(DateUtil.createUnknownTime());
     return procedure;
   }
 
@@ -470,7 +468,7 @@ public class CdaChVacd extends CdaCh {
     return null;
   }
 
-  private Section findTreatmentPlanSection() {
+  private Section findImmunizationRecommendationSection() {
     for (Section section : doc.getSections()) {
       if (LoincSectionCode.isTreatmentPlan(section.getCode().getCode())) {
         return (Section) section;
@@ -530,7 +528,7 @@ public class CdaChVacd extends CdaCh {
    */
   public List<ImmunizationRecommendation> getImmunizationRecommendations() {
 	  //Search for the right section 
-	  Section tps = findTreatmentPlanSection();
+	  Section tps = findImmunizationRecommendationSection();
 	  if (tps==null) {
 		  return null;
 	  }
@@ -538,7 +536,12 @@ public class CdaChVacd extends CdaCh {
 
     List<ImmunizationRecommendation> immunizations = new ArrayList<ImmunizationRecommendation>();
     for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
+      //FIXME Debug
+      @SuppressWarnings("unused")
+      CE test = substanceAdministration.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode();
+      String test2 = test.getCode();
       ImmunizationRecommendation immunization = new ImmunizationRecommendation((org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation) substanceAdministration);
+      String test3 = immunization.getVaccineName();
       immunizations.add(immunization);
     }
     return immunizations;
@@ -627,20 +630,6 @@ public class CdaChVacd extends CdaCh {
     return doc.getSections();
   }
 
-  private Section getTreatmentPlanSection() {
-    org.openhealthtools.mdht.uml.cda.Section section = findTreatmentPlanSection();
-    if (section == null) {
-      ImmunizationRecommendationsSection immunizationRecommendations = CHFactory.eINSTANCE.createImmunizationRecommendationsSection();
-      doc.addSection(immunizationRecommendations);
-    }
-    return section;
-  }
-
-  private String getTreatmentPlanText() {
-    TreatmentPlanTextBuilder b = new TreatmentPlanTextBuilder(getImmunizations());
-    return b.toString();
-  }
-
   public boolean hasPastIllness(Disease disease) {
     HistoryOfPastIllnessSection section = getHistoryOfPastIllnessSection();
     EList<Act> acts = section.getActs();
@@ -656,7 +645,7 @@ public class CdaChVacd extends CdaCh {
   }
 
   /**
-   * Setzt das MDHT-CDAEDESCTNN-Objekt
+   * Setzt das MDHT-VACD-Objekt
    *
    * @param doc the new doc
    */

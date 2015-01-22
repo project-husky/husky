@@ -90,7 +90,7 @@ public class Patient extends Person {
 
 		// Create and fill birth date
 		try {
-			patient.setBirthTime(Util.createTSFromEuroDate(birthDate));
+			patient.setBirthTime(DateUtil.createTSFromEuroDate(birthDate));
 		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

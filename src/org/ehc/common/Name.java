@@ -18,6 +18,7 @@ package org.ehc.common;
 
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
@@ -83,6 +84,10 @@ public class Name {
    */
   public Name(PN pn) {
     this.mPn = pn;
+  }
+
+  public Name(ON on) {
+    this.mPn = (PN) on;
   }
 
   /**
