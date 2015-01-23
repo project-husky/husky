@@ -16,11 +16,12 @@
 
 package org.ehc.common;
 
-import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+
+import ch.ehc.cda.enums.CodeSystems;
 
 /**
  * Eine Person (z.B. Arzt, Datenerfasser, Angehörige, ...)
@@ -89,7 +90,7 @@ public class Person {
    */
   public void addGLN(String gln) {
     // Auto-generated method stub
-    this.addID(new Identificator(gln, KnownOID.GLN));
+    this.addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
   }
 
   /**

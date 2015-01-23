@@ -23,6 +23,8 @@ import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
+import ch.ehc.cda.enums.CodeSystems;
+
 /**
  * Representiert eine weltweit eindeutige ID (besteht aus lokaler ID und der OID
  * der Domäne)
@@ -34,26 +36,40 @@ public class Identificator {
 	/**
 	 * Erstellt einen neuen Identifikator
 	 * 
+	 * @param oid
+     *          OID der Domäne, in welcher die lokale ID eindeutig ist
 	 * @param id
 	 *          lokale ID
-	 * @param oid
-	 *          OID der Domäne, in welcher die lokale ID eindeutig ist
 	 */
-	public Identificator(String id, KnownOID oid) {
+	public Identificator(KnownOID oid, String id) {
 		this.mII = DatatypesFactory.eINSTANCE.createII();
 		this.setRoot(ConvenienceUtilsEnums.knownOID(oid));
 		this.setExtension(id);
 	}
+	
+	 /**
+     * Erstellt einen neuen Identifikator
+     * 
+     * @param oid
+     *          OID der Domäne, in welcher die lokale ID eindeutig ist
+     * @param id
+     *          lokale ID
+     */
+    public Identificator(CodeSystems oid, String id) {
+        this.mII = DatatypesFactory.eINSTANCE.createII();
+        this.setRoot(oid.getCodeSystemId());
+        this.setExtension(id);
+    }
 
 	/**
 	 * Erstellt einen neuen Identifikator
 	 * 
+	 * @param oid
+     *          OID der Domäne, in welcher die lokale ID eindeutig ist
 	 * @param id
 	 *          lokale ID
-	 * @param oid
-	 *          OID der Domäne, in welcher die lokale ID eindeutig ist
 	 */
-	public Identificator(String id, String oid) {
+	public Identificator(String oid, String id) {
 		this.mII = DatatypesFactory.eINSTANCE.createII();
 		this.setRoot(oid);
 		this.setExtension(id);

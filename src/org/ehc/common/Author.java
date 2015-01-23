@@ -33,6 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
+import ch.ehc.cda.enums.CodeSystems;
+
 
 /**
  * Ein Autor (meist ein Arzt)
@@ -232,6 +234,6 @@ public class Author {
 		// TODO Construct Enums that deliver the real OIDs in Numbers (like in
 		// hl7.vocab.PostalAdressUse). Replace the construction of the II in the
 		// following line with this number.
-		this.addID(new Identificator(gln, KnownOID.GLN));
+		this.addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 }
