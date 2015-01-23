@@ -130,6 +130,11 @@ public class DateUtil {
    * @throws ParseException
    */
   public static IVXB_TS createIVXB_TSFromEuroDate(String eurDateStr) throws ParseException {
+    IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
+    if (eurDateStr == null) {
+      ohtIntervalPoint.setNullFlavor(NullFlavor.UNK);
+    }
+    else {
     final DateFormat eurDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
     final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
 
@@ -138,8 +143,8 @@ public class DateUtil {
     final String ohtDate = ohtDateFormatter.format(date);
 
     // Create IVXB_TS
-    IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
     ohtIntervalPoint.setValue(ohtDate);
+    }
 
     return ohtIntervalPoint;
   }

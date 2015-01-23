@@ -15,7 +15,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
  */
 public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 
-    //TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
     private List<ImmunizationRecommendation> immunizations;
     
     /**

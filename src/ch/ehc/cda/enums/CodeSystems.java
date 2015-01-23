@@ -43,7 +43,13 @@ public enum CodeSystems {
    * OID: 2.16.756.5.31 <div class="de">AHV Nummer (die Alte)</div> <div
    * class="fr">No AVS (le vieil)</div>
    */
-  SwissSSNDeprecated ("2.16.756.5.31","AHV Nummer (die Alte)");
+  SwissSSNDeprecated ("2.16.756.5.31","AHV Nummer (die Alte)"),
+  /**
+   * OID: 2.16.756.5.31 <div class="de">ICD-10</div> <div
+   * class="fr">ICD-10</div>
+   */
+  ICD10 ("2.16.756.5.30.1.126.3.2","ICD-10");
+  
 
   private String codeSystem;
   private String codeSystemName;

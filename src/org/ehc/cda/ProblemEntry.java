@@ -43,6 +43,31 @@ public class ProblemEntry {
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
+    /**
+     * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+     * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist.
+     * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
+     * 
+     * @param problemNotOccured
+     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+     * @param startOfProblem
+     *            Beginn des Problems
+     * @param endOfProblem
+     *            Ende des Problems
+     * @param problem
+     *            Freitextbeschreibung zu dem Problem oder Code zu
+     *            Komplikationsrisiken oder Expositionsrisiken.
+     * @param internalProblemId
+     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
+     */
+    public ProblemEntry(boolean problemNotOccured, org.ehc.common.Code problem) {
+        mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+        this.mProblemEntry.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
+        this.setProblemNotOccured(problemNotOccured);
+        this.setCodedProblem(problem);
+        this.setInternalId(null);
+    }
+	
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
 	 * einem ProblemConcernEntry hinzugefügt werden.
@@ -141,7 +166,12 @@ public class ProblemEntry {
 	   
     private void setInternalId(String id) {
       II ii = DatatypesFactory.eINSTANCE.createII();
-      ii.setRoot(id);
+      if (id==null) {
+        ii.setRoot(UUID.generate());
+      }
+      else {
+        ii.setRoot(id);
+      }
       mProblemEntry.getIds().add(ii);
     }
 

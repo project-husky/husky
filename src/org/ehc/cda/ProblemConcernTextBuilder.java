@@ -16,15 +16,15 @@ import org.openhealthtools.mdht.uml.cda.Observation;
  */
 public class ProblemConcernTextBuilder extends TextBuilder {
 
-	private List<ProblemConcernEntry> problemConcernEntries;
-	private ProblemConcernEntry newProblemConcernEntry;
+	private List<ActiveProblemConcernEntry> problemConcernEntries;
+	private ActiveProblemConcernEntry newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
 	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
 	public ProblemConcernTextBuilder(
-			ArrayList<ProblemConcernEntry> problemConcernEntries,
-			ProblemConcernEntry newProblemConcernEntry, String sectionText) {
+			ArrayList<ActiveProblemConcernEntry> problemConcernEntries,
+			ActiveProblemConcernEntry newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
 		this.newProblemConcernEntry = newProblemConcernEntry;
 		this.sectionText = sectionText;
@@ -53,18 +53,18 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 				this.sectionText);
 	}
 
-	public ProblemConcernEntry insertContentReference(
-			ProblemConcernEntry newProblemConcernEntry, int newId) {
+	public ActiveProblemConcernEntry insertContentReference(
+			ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
 		Observation obs = CDAFactory.eINSTANCE.createObservation();
-		obs = newProblemConcernEntry.getProblemConcernEntry().getObservations()
+		obs = newProblemConcernEntry2.getMdhtProblemConcernEntry().getObservations()
 				.get(0);
 		obs.setText(Util.createReference(newId, LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
-		return newProblemConcernEntry;
+		return newProblemConcernEntry2;
 	}
 
-	public String insertRow(ProblemConcernEntry problemConcernEntry, int newId,
+	public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,
 			String sectionText) {
-		String rowStr = buildRow(problemConcernEntry, newId);
+		String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// TODO If there is no element found that could be replaced, then an
 		// error occured (e.g. in a scenario, where an external document is
 		// loaded where the table footer does not match this table footer. If
@@ -78,19 +78,19 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		return tableStr;
 	}
 
-	private String buildRow(ProblemConcernEntry problemConcernEntry, int newId) {
+	private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
 		StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");
 		rowBuilder.append(buildCell("Komplikationsrisiko"));
 		rowBuilder
 				.append(buildCellWithContent(
-						problemConcernEntry.getProblemConcern(), newId,
+						newProblemConcernEntry2.getProblemConcern(), newId,
 						LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();
 	}
 
-	public ProblemConcernEntry getProblemConcernEntry() {
+	public ActiveProblemConcernEntry getProblemConcernEntry() {
 		return this.newProblemConcernEntry;
 	}
 
