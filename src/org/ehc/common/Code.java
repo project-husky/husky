@@ -73,6 +73,11 @@ public class Code {
 		this.mCD = code;
 	}
 
+	public Code(String codeSystem, String code, String displayName) {
+		this(codeSystem, code);
+		mCD.setDisplayName(displayName);
+	}
+
 	/**
 	 * @return das code Objekt
 	 */

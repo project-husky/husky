@@ -1,5 +1,14 @@
 package ch.ehc.cda.enums;
 
+import java.util.Arrays;
+import org.ehc.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+
+/*
+*<div class="de">Codesystem: HL7 ObservationInterpretation (OID: 2.16.840.1.113883.5.83). Das folgende Subset (siehe auch OID 2.16.756.5.30.1.127.3.2.20121101.3) ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
+*<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
+*/
 public enum ObservationInterpretation {
 
 	/** 
@@ -12,6 +21,13 @@ public enum ObservationInterpretation {
 	*<div class="fr">Négatif: L’agent pathogène n’a pas pu être dépisté dans l’échantillon</div>
 	*/
 	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN ("NEG", "Negative: Pathogen couldn't be determined in speci-men");
+	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE="POS";
+	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN_CODE="NEG";
+
+
+	public static final String CODE_SYSTEM="2.16.756.5.30.1.127.3.2.20121101.3";
+	public static final String CODE_SYSTEM_NAME="HL7 ObservationInterpretation ";
+
 
 	private String code;
 	private String displayName;
@@ -21,12 +37,45 @@ public enum ObservationInterpretation {
 		this.displayName = displayName;
 	}
 
-	public String getCode() {
+	public String getCodeValue() {
 		return this.code;
 	}
 
 	public String getdisplayName() {
 		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
+	}
+
+	public boolean isEnumOfValueSet(String enumStr) {
+		return Arrays.asList(values()).contains(enumStr);
+	}
+
+	public boolean isInValueSet(String code) {
+		for (ObservationInterpretation x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

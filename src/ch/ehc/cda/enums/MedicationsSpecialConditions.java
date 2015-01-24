@@ -1,5 +1,14 @@
 package ch.ehc.cda.enums;
 
+import java.util.Arrays;
+import org.ehc.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+
+/*
+*<div class="de">Quelle für Subset: [IHE PCC TF-2], Table 6.3.4.16.7-1</div>
+*<div class="fr">Source du sous-ensemble : [IHE PCC TF-2],Table 6.3.4.16.7-1</div>
+*/
 public enum MedicationsSpecialConditions {
 
 	/** 
@@ -22,6 +31,15 @@ public enum MedicationsSpecialConditions {
 	*<div class="fr">Le patient refuse la vaccination.</div>
 	*/
 	MEDICATION_REFUSED_PATIENT_OBJECTIVE ("406149000", "Medication refused, Patient Objective");
+	public static final String DRUG_TREATMENT_UNKNOWN_CODE="182904002";
+	public static final String NO_DRUG_THERAPY_PRESCRIBED_CODE="182849000";
+	public static final String PATIENT_NOT_ON_SELF_MEDICATIONS_CODE="408350003";
+	public static final String MEDICATION_REFUSED_PATIENT_OBJECTIVE_CODE="406149000";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
 
 	private String code;
 	private String displayName;
@@ -31,12 +49,45 @@ public enum MedicationsSpecialConditions {
 		this.displayName = displayName;
 	}
 
-	public String getCode() {
+	public String getCodeValue() {
 		return this.code;
 	}
 
 	public String getdisplayName() {
 		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
+	}
+
+	public boolean isEnumOfValueSet(String enumStr) {
+		return Arrays.asList(values()).contains(enumStr);
+	}
+
+	public boolean isInValueSet(String code) {
+		for (MedicationsSpecialConditions x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

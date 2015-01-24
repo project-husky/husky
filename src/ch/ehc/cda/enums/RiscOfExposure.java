@@ -1,5 +1,14 @@
 package ch.ehc.cda.enums;
 
+import java.util.Arrays;
+import org.ehc.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+
+/*
+*<div class="de">Hinweis: Diese Tabelle wird jährliche durch die EKIF angepasst (siehe auch [Impfplan 2013]). eHealth Suisse wird eine jährlich aktualisierte Version dieses Value-Sets in elektronischer Form publizieren. (Quelle: Schweizerischer [Impfplan], 7.2 Erhöhtes Expositionsrisiko und/oder Übertragungsrisiko)</div>
+*<div class="fr">Remarque : Ce tableau est adapté chaque année par la CFV (cf. également [plan de vaccination suisse 2013]). eHealth Suisse publiera une version actualisée chaque année de ce Value Set au format électronique. (Source : [Plan de vaccination suisse], 7.2 Risque accru dexposition et/ou de transmission)</div>
+*/
 public enum RiscOfExposure {
 
 	/** 
@@ -122,6 +131,35 @@ public enum RiscOfExposure {
 	*<div class="fr">Autres risques d’exposition</div>
 	*/
 	TOTRANSLATE_24 ("999", "TOTRANSLATE");
+	public static final String TOTRANSLATE_1_CODE="1";
+	public static final String TOTRANSLATE_2_CODE="2";
+	public static final String TOTRANSLATE_3_CODE="3";
+	public static final String TOTRANSLATE_4_CODE="4";
+	public static final String TOTRANSLATE_5_CODE="5";
+	public static final String TOTRANSLATE_6_CODE="6";
+	public static final String TOTRANSLATE_7_CODE="7";
+	public static final String TOTRANSLATE_8_CODE="8";
+	public static final String TOTRANSLATE_9_CODE="9";
+	public static final String TOTRANSLATE_10_CODE="10";
+	public static final String TOTRANSLATE_11_CODE="11";
+	public static final String TOTRANSLATE_12_CODE="12";
+	public static final String TOTRANSLATE_13_CODE="13";
+	public static final String TOTRANSLATE_14_CODE="14";
+	public static final String TOTRANSLATE_15_CODE="15";
+	public static final String TOTRANSLATE_16_CODE="16";
+	public static final String TOTRANSLATE_17_CODE="17";
+	public static final String TOTRANSLATE_18_CODE="18";
+	public static final String TOTRANSLATE_19_CODE="19";
+	public static final String TOTRANSLATE_20_CODE="20";
+	public static final String TOTRANSLATE_21_CODE="21";
+	public static final String TOTRANSLATE_22_CODE="22";
+	public static final String TOTRANSLATE_23_CODE="23";
+	public static final String TOTRANSLATE_24_CODE="999";
+
+
+	public static final String CODE_SYSTEM="2.16.756.5.30.1.127.3.3.2013.2";
+	public static final String CODE_SYSTEM_NAME="Defined by EKIF und eHealth Suisse";
+
 
 	private String code;
 	private String displayName;
@@ -131,12 +169,45 @@ public enum RiscOfExposure {
 		this.displayName = displayName;
 	}
 
-	public String getCode() {
+	public String getCodeValue() {
 		return this.code;
 	}
 
 	public String getdisplayName() {
 		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
+	}
+
+	public boolean isEnumOfValueSet(String enumStr) {
+		return Arrays.asList(values()).contains(enumStr);
+	}
+
+	public boolean isInValueSet(String code) {
+		for (RiscOfExposure x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

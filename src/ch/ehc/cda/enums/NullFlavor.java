@@ -1,5 +1,14 @@
 package ch.ehc.cda.enums;
 
+import java.util.Arrays;
+import org.ehc.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+
+/*
+*<div class="de">Codesystem: HL7 nullFlavor Tabelle (OID: 2.16.840.1.113883.5.1008). Dieses Subset ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
+*<div class="fr">Source du sous-ensemble : [IHE PCC TF-2],Table 6.3.4.16.7-1</div>
+*/
 public enum NullFlavor {
 
 	/** 
@@ -27,6 +36,16 @@ public enum NullFlavor {
 	*<div class="fr">Non connu, sans autre précision</div>
 	*/
 	UNKNOWN ("UNK", "unknown");
+	public static final String ASKED_BUT_UNKNOWN_CODE="ASKU";
+	public static final String MASKED_CODE="MSK";
+	public static final String NOT_ASKED_CODE="NASK";
+	public static final String TEMPORARILY_UNAVAILABLE_CODE="NAV";
+	public static final String UNKNOWN_CODE="UNK";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1008";
+	public static final String CODE_SYSTEM_NAME="HL7 nullFlavor ";
+
 
 	private String code;
 	private String displayName;
@@ -36,12 +55,45 @@ public enum NullFlavor {
 		this.displayName = displayName;
 	}
 
-	public String getCode() {
+	public String getCodeValue() {
 		return this.code;
 	}
 
 	public String getdisplayName() {
 		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
+	}
+
+	public boolean isEnumOfValueSet(String enumStr) {
+		return Arrays.asList(values()).contains(enumStr);
+	}
+
+	public boolean isInValueSet(String code) {
+		for (NullFlavor x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }
