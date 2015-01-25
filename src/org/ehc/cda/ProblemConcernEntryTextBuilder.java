@@ -18,6 +18,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
     private ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns;
+	private String contentIdPrefix = LoincSectionCode.HISTORY_OF_PAST_ILLNESS.getContentIdPrefix();
     
     /**
      * Constructor.
@@ -70,7 +71,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
     private void addRow(org.ehc.cda.ProblemConcernEntry problemConcern, int i) {
         append("<tr>");
         addCell("Komplikationsrisiko");
-        addCellWithContent(problemConcern.getProblemConcern(), LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix(), i);
+        addCellWithContent(problemConcern.getProblemConcern(), contentIdPrefix , i);
         append("</tr>");
     }
 }

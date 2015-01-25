@@ -36,6 +36,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
+import ch.ehc.cda.enums.NullFlavor;
+
 /**
  * Ein medizinisches Problem
  */
@@ -66,6 +68,9 @@ public class ProblemEntry {
         this.setProblemNotOccured(problemNotOccured);
         this.setCodedProblem(problem);
         this.setInternalId(null);
+        CD cd = DatatypesFactory.eINSTANCE.createCD();
+        cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.UNK);
+        this.mProblemEntry.getValues().add(cd);
     }
 	
 	/**

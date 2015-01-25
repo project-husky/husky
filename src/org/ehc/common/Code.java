@@ -78,6 +78,12 @@ public class Code {
 		mCD.setDisplayName(displayName);
 	}
 
+	public Code(String codeSystem, String code, String codeSystemName,
+			String displayName) {
+		this(codeSystem, code, displayName);
+		mCD.setCodeSystemName(codeSystemName);
+	}
+
 	/**
 	 * @return das code Objekt
 	 */
