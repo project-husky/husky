@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
@@ -80,11 +81,12 @@ public class ProblemConcernEntry {
 	 */
 	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
 		setProblemConcernEntry(IHEFactory.eINSTANCE.createProblemConcernEntry());
-		getMdhtProblemConcernEntry().init();
+		mProblemConcernEntry.init();
 		this.setProblemConcern(concern);
 		this.addProblemEntry(problemEntry);
 		this.setCodedStatusOfConcern(concernStatus);
 		this.setInternalId(null);
+		this.setEffectiveTime(null, null);
 	}
 	
 	/**
@@ -143,12 +145,9 @@ public class ProblemConcernEntry {
 	}
 
 	public void setEffectiveTime(String begin, String end) {
-	  if (begin == null) {
-	    getMdhtProblemConcernEntry().setEffectiveTime(DateUtil.convertDate(null));
-      }
 	  // Create and set the concern interval
       try {
-          getMdhtProblemConcernEntry().setEffectiveTime(DateUtil
+          mProblemConcernEntry.setEffectiveTime(DateUtil
                   .createIVL_TSFromEuroDate(begin, end));
       } catch (ParseException e) {
           e.printStackTrace();
@@ -171,7 +170,7 @@ public class ProblemConcernEntry {
 	 * @return Ende des Leidens
 	 */
 	public String getEndOfConcern() {
-		return Util.createEurDateStrFromTS(getMdhtProblemConcernEntry()
+		return Util.createEurDateStrFromTS(copyMdhtProblemConcernEntry()
 				.getEffectiveTime().getHigh().getValue());
 	}
 
@@ -181,7 +180,7 @@ public class ProblemConcernEntry {
 	 * @return Beginn des Leidens
 	 */
 	public String getStartOfConcern() {
-		return Util.createEurDateStrFromTS(getMdhtProblemConcernEntry()
+		return Util.createEurDateStrFromTS(copyMdhtProblemConcernEntry()
 				.getEffectiveTime().getLow().getValue());
 	}
 
@@ -197,7 +196,7 @@ public class ProblemConcernEntry {
 		// (Implementierungsleitfaden 7.5.2.4)
 		CS concernStatusCode = DatatypesFactory.eINSTANCE
 				.createCS(concernStatus.name());
-		getMdhtProblemConcernEntry().setStatusCode(concernStatusCode);
+		mProblemConcernEntry.setStatusCode(concernStatusCode);
 	}
 
 	/**
@@ -208,7 +207,7 @@ public class ProblemConcernEntry {
 	 */
 	public void setEndOfConcern(String endOfConcern) {
 		try {
-			getMdhtProblemConcernEntry().getEffectiveTime().setHigh(
+			mProblemConcernEntry.getEffectiveTime().setHigh(
 			    DateUtil.createIVXB_TSFromEuroDate(endOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -223,7 +222,7 @@ public class ProblemConcernEntry {
 	 */
 	public void setStartOfConcern(String startOfConcern) {
 		try {
-			getMdhtProblemConcernEntry().getEffectiveTime().setLow(
+			mProblemConcernEntry.getEffectiveTime().setLow(
 			    DateUtil.createIVXB_TSFromEuroDate(startOfConcern));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -239,7 +238,7 @@ public class ProblemConcernEntry {
 	public void setProblemConcern(String concern) {
 		// Create and set the concern as freetext
 		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
-		getMdhtProblemConcernEntry().setText(concernText);
+		mProblemConcernEntry.setText(concernText);
 	}
 
 	/**
@@ -247,7 +246,7 @@ public class ProblemConcernEntry {
 	 * 
 	 */
 	public String getProblemConcern() {
-		return getMdhtProblemConcernEntry().getText().getText();
+		return mProblemConcernEntry.getText().getText();
 	}
 
 	/**
@@ -257,10 +256,10 @@ public class ProblemConcernEntry {
 	 *            Das Problem
 	 */
 	public void addProblemEntry(ProblemEntry problemEntry) {
-		getMdhtProblemConcernEntry().addObservation(problemEntry.mProblemEntry);
-		getMdhtProblemConcernEntry().getEntryRelationships().get(0)
+	  mProblemConcernEntry.addObservation(problemEntry.mProblemEntry);
+		mProblemConcernEntry.getEntryRelationships().get(0)
 	    .setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		getMdhtProblemConcernEntry().getEntryRelationships().get(0).setInversionInd(false);
+		mProblemConcernEntry.getEntryRelationships().get(0).setInversionInd(false);
 	}
 
 	/**
@@ -271,7 +270,7 @@ public class ProblemConcernEntry {
 	public ProblemEntry getProblemEntry() {
 		// TODO Convert the Observation List in a ehealthconnector ProblemEntry
 		// list (List<ProblemEntry>) this.getObservations();
-		ProblemEntry problemEntry = new ProblemEntry(getMdhtProblemConcernEntry()
+		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getObservations().get(0));
 		return problemEntry;
 	}
@@ -286,7 +285,7 @@ public class ProblemConcernEntry {
 	public ProblemEntry getProblemEntry(int problemNr) {
 		// TODO Convert the Observation List in a ehealthconnector ProblemEntry
 		// list (List<ProblemEntry>) this.getObservations();
-		ProblemEntry problemEntry = new ProblemEntry(getMdhtProblemConcernEntry()
+		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getObservations().get(problemNr));
 		return problemEntry;
 	}
@@ -302,8 +301,8 @@ public class ProblemConcernEntry {
       mProblemConcernEntry.getIds().add(ii);
     }
 
-	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry getMdhtProblemConcernEntry() {
-		return mProblemConcernEntry;
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry copyMdhtProblemConcernEntry() {
+		return EcoreUtil.copy(mProblemConcernEntry);
 	}
 
 	public void setProblemConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry) {

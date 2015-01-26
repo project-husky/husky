@@ -30,7 +30,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
       ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcernEntryList = new ArrayList<org.ehc.cda.ProblemConcernEntry>();
       
       for (PastProblemConcernEntry pastProblemConcern : problemConcerns) {
-        org.ehc.cda.ProblemConcernEntry problemConcernEntry = new  org.ehc.cda.ProblemConcernEntry(pastProblemConcern.getMdhtProblemConcernEntry());
+        org.ehc.cda.ProblemConcernEntry problemConcernEntry = new  org.ehc.cda.ProblemConcernEntry(pastProblemConcern.copyMdhtProblemConcernEntry());
         problemConcernEntryList.add(problemConcernEntry);
       }
       this.problemConcerns = problemConcernEntryList;

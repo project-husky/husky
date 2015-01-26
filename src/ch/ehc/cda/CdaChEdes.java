@@ -84,7 +84,7 @@ public class CdaChEdes extends CdaCh {
 		activeProblemsSection.createStrucDocText(buffer.toString());
 
 		//create a copy of the given object and its sub-objects
-		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.getMdhtProblemConcernEntry());
+		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
 		activeProblemsSection.addAct(problemConcernEntryMdht);
 	}
 	

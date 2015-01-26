@@ -56,7 +56,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 	public ActiveProblemConcernEntry insertContentReference(
 			ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
 		Observation obs = CDAFactory.eINSTANCE.createObservation();
-		obs = newProblemConcernEntry2.getMdhtProblemConcernEntry().getObservations()
+		obs = newProblemConcernEntry2.mProblemConcernEntry.getObservations()
 				.get(0);
 		obs.setText(Util.createReference(newId, LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		return newProblemConcernEntry2;

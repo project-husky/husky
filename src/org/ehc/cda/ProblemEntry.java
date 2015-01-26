@@ -36,8 +36,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
-import ch.ehc.cda.enums.NullFlavor;
-
 /**
  * Ein medizinisches Problem
  */
@@ -282,11 +280,9 @@ public class ProblemEntry {
     //Maybe it´s better to generate a list with values here, but this way is more convenient and should be ok, in most of the cases.
     for (ANY any : mProblemEntry.getValues()) {
       if (any instanceof CD) {
-          CD code = (CD) any;
           return ((CD) any).getCode();
       }
       if (any instanceof ED) {
-        ED ed = (ED) any;
         return ((ED) any).getText();
       }
     }

@@ -30,7 +30,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
       int i = 0;
       for (ImmunizationRecommendation immunization : this.immunizations) {
         ED reference = Util.createReference(i, LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix());
-        SubstanceAdministration substanceAdminstration = immunization.getMdhtImmunizationRecommendation();
+        SubstanceAdministration substanceAdminstration = immunization.copyMdhtImmunizationRecommendation();
         substanceAdminstration.setText(reference);
         i++;
       }

@@ -40,6 +40,7 @@ import org.ehc.cda.Serologie;
 import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.CSUtil;
+import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
@@ -156,7 +157,7 @@ public class CdaChVacd extends CdaCh {
     // TODO Enum einfügen
     // problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);
     // //Status code of the problem has to be "completed"
-    problemConcern.getMdhtProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
+    problemConcern.copyMdhtProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
 
     // Add the code for "Komplikations- oder Expositionsrisiken"
     CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
@@ -168,7 +169,7 @@ public class CdaChVacd extends CdaCh {
 
     // create a copy of the given object and its sub-objects
     org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
-        EcoreUtil.copy(problemConcern.getMdhtProblemConcernEntry());
+        EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
     activeProblemsSection.addAct(problemConcernEntryMdht);
   }
 
@@ -193,7 +194,7 @@ public class CdaChVacd extends CdaCh {
 
   public void addHistoryOfPastIllnessEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
     org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblem =
-        problemConcernEntry.getMdhtProblemConcernEntry();
+        problemConcernEntry.copyMdhtProblemConcernEntry();
 
     getHistoryOfPastIllnessSection().addAct(iheProblem);
   }
@@ -240,7 +241,7 @@ public class CdaChVacd extends CdaCh {
     }
 
     //add the MDHT Object to the section
-    immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation.getMdhtImmunizationRecommendation());
+    immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation.copyMdhtImmunizationRecommendation());
 
     //update the MDHT Object content references to CDA level 1 text
     updateSubstanceAdministrationReferences(immunizationRecommendationsSection.getSubstanceAdministrations(), LoincSectionCode.TREATMENT_PLAN);
@@ -260,7 +261,7 @@ public class CdaChVacd extends CdaCh {
     }
 
     //add the MDHT Object to the section
-    hopis.addAct(pastProblemConcern.getMdhtProblemConcernEntry());
+    hopis.addAct(pastProblemConcern.copyMdhtProblemConcernEntry());
 
     //update the MDHT Object content references to CDA level 1 text
     if (updateProblemConcernReferences(hopis.getActs(), LoincSectionCode.HISTORY_OF_PAST_ILLNESS)) {
@@ -269,7 +270,7 @@ public class CdaChVacd extends CdaCh {
     }
     else {
       hopis.createStrucDocText("Keine Angaben");
-      pastProblemConcern.getMdhtProblemConcernEntry().getEntryRelationships().get(0).getObservation().setText(Util.createEd(""));
+      pastProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0).getObservation().setText(Util.createEd(""));
     }
   }
 
@@ -669,9 +670,8 @@ public class CdaChVacd extends CdaCh {
       if (problemConcernEntry.getProblemEntries().size()>0) {
         org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry = problemConcernEntry.getProblemEntries().get(0);
         //Check if the problem is not unknown (leads to no reference, because there is no problem)
-        CD code = problemConcernEntry.getProblemEntries().get(0).getCode();
-        //TODO Change to enum codesystem
-        if (code.getCodeSystem().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+        Code code = new Code (problemConcernEntry.getProblemEntries().get(0).getCode());
+        if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
           return false;
         }
         else {
@@ -680,11 +680,10 @@ public class CdaChVacd extends CdaCh {
           ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
           problemEntry.setText(reference);
           problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
-          return true;
         }
       }
     }
-    return false;
+    return true;
   }
 
   private void updateSubstanceAdministrationReferences(List<SubstanceAdministration> substanceAdministrations, LoincSectionCode loincSectionCode) {

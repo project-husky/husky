@@ -161,7 +161,7 @@ public class ImmunizationRecommendation {
     return this.getConsumable().getGtinOrEanOrSwissIndex();
   }
   
-  public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
+  public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
     return EcoreUtil.copy(this.mImmunizationRecommendation);
   }
 
