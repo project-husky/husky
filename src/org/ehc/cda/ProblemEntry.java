@@ -41,10 +41,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 public class ProblemEntry {
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
-
+	
     /**
      * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-     * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist.
+     * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
      * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
      * 
      * @param problemNotOccured
@@ -71,8 +71,9 @@ public class ProblemEntry {
     }
 	
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden.
+	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * 
 	 * @param problemNotOccured
 	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
@@ -101,8 +102,9 @@ public class ProblemEntry {
 	}
 	
 	 /**
-     * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-     * einem ProblemConcernEntry hinzugefügt werden.
+     * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+     * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+     * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
      * 
      * @param problemNotOccured
      *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.

@@ -39,8 +39,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	    //.getSubstanceAdministrations().get(0);
 	    i++;
 	  }
-    return immunizations;
-	    
+    return immunizations;  
 	}
 	
 	/**
@@ -48,7 +47,8 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		append("<table border='1' width='100%'>");
 		addHeader();
 		addBody();
