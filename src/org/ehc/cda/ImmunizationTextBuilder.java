@@ -7,6 +7,8 @@ import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
+import ch.ehc.common.SectionsVACD;
+
 /**
  * Builds the <text> part of the History of immunzations.
  * 
@@ -31,7 +33,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	public List<Immunization> getUpdatedImmunizations() {
 	  int i = 0;
 	  for (Immunization immunization : this.immunizations) {
-	    ED reference = Util.createReference(i, LoincSectionCode.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
+	    ED reference = Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
 	    SubstanceAdministration substanceAdminstration = immunization.getImmunization();
 	    substanceAdminstration.setText(reference);
 	    //.getSubstanceAdministrations().get(0);
@@ -80,7 +82,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
-		addCellWithContent(immunization.getVaccineName(), LoincSectionCode.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
+		addCellWithContent(immunization.getVaccineName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
 		addCell("");
 		addCell("");
 		addCell(DateUtil.formatDateCH(immunization.getEffectiveTime()));

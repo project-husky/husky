@@ -116,7 +116,7 @@ public class ImmunizationRecommendation {
         templateId.setExtension("CDA-CH.Body.MediL3");
       }
     }
-
+    
     //TODO Later: Also consider real (Enum-) values here
     //Set the null values
     if (priority == null) {

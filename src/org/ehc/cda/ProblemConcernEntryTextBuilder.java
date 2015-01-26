@@ -8,6 +8,8 @@ import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
+import ch.ehc.common.SectionsVACD;
+
 /**
  * Builds the <text> part of the Immunization recommendations.
  * 
@@ -18,7 +20,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
     private ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns;
-	private String contentIdPrefix = LoincSectionCode.HISTORY_OF_PAST_ILLNESS.getContentIdPrefix();
+	private String contentIdPrefix = SectionsVACD.HISTORY_OF_PAST_ILLNESS.getContentIdPrefix();
     
     /**
      * Constructor.

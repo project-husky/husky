@@ -18,7 +18,6 @@
 
 package org.ehc.cda;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -89,9 +88,16 @@ public class ProblemEntry {
 	 */
 	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
 			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
-		this(problemNotOccured, DateFormat.getDateInstance().format(
-				startOfProblem), DateFormat.getDateInstance().format(
-				endOfProblem), problem, internalProblemId);
+      mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+      this.setProblemNotOccured(problemNotOccured);
+      try {
+          this.setStartOfProblem(startOfProblem);
+          this.setEndOfProblem(endOfProblem);
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+      this.setInternalId(internalProblemId);
+      this.setValue(problem);
 	}
 	
 	 /**
@@ -107,65 +113,62 @@ public class ProblemEntry {
      * @param problem
      *            Freitextbeschreibung zu dem Problem oder Code zu
      *            Komplikationsrisiken oder Expositionsrisiken.
-     * @param internalProblemId
-     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
      */
     public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
             Date endOfProblem, org.ehc.common.Code problem) {
-        this(problemNotOccured, DateFormat.getDateInstance().format(
-                startOfProblem), DateFormat.getDateInstance().format(
-                endOfProblem), problem);
+      this(problemNotOccured, startOfProblem, endOfProblem, problem, UUID.generate());
+      
     }
 
-	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param problemNotOccured
-	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
-	 * @param internalProblemId
-     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
-	 */
-	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-			String endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
-		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		this.setProblemNotOccured(problemNotOccured);
-		try {
-			this.setStartOfProblem(startOfProblem);
-			this.setEndOfProblem(endOfProblem);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.setInternalId(internalProblemId);
-		this.setValue(problem);
-	}
-	
-	 /**
-     * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-     * einem ProblemConcernEntry hinzugefügt werden.
-     * 
-     * @param problemNotOccured
-     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
-     * @param startOfProblem
-     *            Beginn des Problems
-     * @param endOfProblem
-     *            Ende des Problems
-     * @param problem
-     *            Freitextbeschreibung zu dem Problem oder Code zu
-     *            Komplikationsrisiken oder Expositionsrisiken.
-     */
-    public ProblemEntry(boolean problemNotOccured, String startOfProblem,
-            String endOfProblem, org.ehc.common.Code problem) {
-      this(problemNotOccured, startOfProblem,
-          endOfProblem, problem, UUID.generate());
-    }
+//	/**
+//	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
+//	 * einem ProblemConcernEntry hinzugefügt werden.
+//	 * 
+//	 * @param problemNotOccured
+//	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+//	 * @param startOfProblem
+//	 *            Beginn des Problems
+//	 * @param endOfProblem
+//	 *            Ende des Problems
+//	 * @param problem
+//	 *            Freitextbeschreibung zu dem Problem oder Code zu
+//	 *            Komplikationsrisiken oder Expositionsrisiken.
+//	 * @param internalProblemId
+//     *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
+//	 */
+//	public ProblemEntry(boolean problemNotOccured, String startOfProblem,
+//			String endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
+//		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+//		this.setProblemNotOccured(problemNotOccured);
+//		try {
+//			this.setStartOfProblem(startOfProblem);
+//			this.setEndOfProblem(endOfProblem);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		this.setInternalId(internalProblemId);
+//		this.setValue(problem);
+//	}
+//	
+//	 /**
+//     * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
+//     * einem ProblemConcernEntry hinzugefügt werden.
+//     * 
+//     * @param problemNotOccured
+//     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+//     * @param startOfProblem
+//     *            Beginn des Problems
+//     * @param endOfProblem
+//     *            Ende des Problems
+//     * @param problem
+//     *            Freitextbeschreibung zu dem Problem oder Code zu
+//     *            Komplikationsrisiken oder Expositionsrisiken.
+//     */
+//    public ProblemEntry(boolean problemNotOccured, String startOfProblem,
+//            String endOfProblem, org.ehc.common.Code problem) {
+//      this(problemNotOccured, startOfProblem,
+//          endOfProblem, problem, UUID.generate());
+//    }
 	   
     private void setInternalId(String id) {
       II ii = DatatypesFactory.eINSTANCE.createII();
@@ -220,14 +223,13 @@ public class ProblemEntry {
 	 *            das startOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setStartOfProblem(String startOfProblem) throws ParseException {
+	public void setStartOfProblem(Date startOfProblem) throws ParseException {
 		if (mProblemEntry.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mProblemEntry.setEffectiveTime(interval);
 		}
-		// IVXB_TS startTime = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		mProblemEntry.getEffectiveTime().setLow(
-		    DateUtil.createIVXB_TSFromEuroDate(startOfProblem));
+		DateUtil.createIVXB_TSFromDate(startOfProblem));
 	}
 
 	/**
@@ -243,9 +245,9 @@ public class ProblemEntry {
 	 *            das endOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setEndOfProblem(String endOfProblem) throws ParseException {
+	public void setEndOfProblem(Date endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
-		    DateUtil.createIVXB_TSFromEuroDate(endOfProblem));
+		    DateUtil.createIVXB_TSFromDate(endOfProblem));
 	}
 
 	/**

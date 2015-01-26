@@ -29,7 +29,6 @@ import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
 import org.ehc.cda.ImmunizationRecommendationTextBuilder;
 import org.ehc.cda.ImmunizationTextBuilder;
-import org.ehc.cda.LoincSectionCode;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastIllnessBuilder;
 import org.ehc.cda.PastProblemConcernEntry;
@@ -75,6 +74,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
 import ch.ehc.cda.enums.ProblemsSpecialConditions;
+import ch.ehc.common.SectionsVACD;
 
 /**
  * <div class="de" Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD entspricht.</div> <div
@@ -225,7 +225,7 @@ public class CdaChVacd extends CdaCh {
     immunizationSection.addSubstanceAdministration(iheImmunization);
 
     // Update the content references to cda level 1 text
-    updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(), LoincSectionCode.HISTORY_OF_IMMUNIZATION);
+    updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(), SectionsVACD.HISTORY_OF_IMMUNIZATION);
 
     immunizationSection.createStrucDocText(getImmunizationText());
   }
@@ -237,6 +237,7 @@ public class CdaChVacd extends CdaCh {
     immunizationRecommendationsSection = (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection) findImmunizationRecommendationSection();
     if (immunizationRecommendationsSection==null) {
       immunizationRecommendationsSection = createTreatmentPlanSection().init();
+      immunizationRecommendationsSection.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitleDe()));
       this.doc.addSection(immunizationRecommendationsSection);
     }
 
@@ -244,7 +245,7 @@ public class CdaChVacd extends CdaCh {
     immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation.copyMdhtImmunizationRecommendation());
 
     //update the MDHT Object content references to CDA level 1 text
-    updateSubstanceAdministrationReferences(immunizationRecommendationsSection.getSubstanceAdministrations(), LoincSectionCode.TREATMENT_PLAN);
+    updateSubstanceAdministrationReferences(immunizationRecommendationsSection.getSubstanceAdministrations(), SectionsVACD.TREATMENT_PLAN);
 
     //create the CDA level 1 text
     immunizationRecommendationsSection.createStrucDocText(getImmunizationRecommendationText());
@@ -257,6 +258,7 @@ public class CdaChVacd extends CdaCh {
     hopis = (org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection) findHistoryOfPastIllnessSection();
     if (hopis==null) {
       hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
+      hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS.getSectionTitleDe()));
       this.doc.addSection(hopis);
     }
 
@@ -264,7 +266,7 @@ public class CdaChVacd extends CdaCh {
     hopis.addAct(pastProblemConcern.copyMdhtProblemConcernEntry());
 
     //update the MDHT Object content references to CDA level 1 text
-    if (updateProblemConcernReferences(hopis.getActs(), LoincSectionCode.HISTORY_OF_PAST_ILLNESS)) {
+    if (updateProblemConcernReferences(hopis.getActs(), SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
       //create the CDA level 1 text
       hopis.createStrucDocText(getPastProblemConcernText());
     }
@@ -366,13 +368,13 @@ public class CdaChVacd extends CdaCh {
   private org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection createImmunizationSection() {
     org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection section =
         IHEFactory.eINSTANCE.createImmunizationsSection().init();
-    section.setTitle(Util.st("Impfungen"));
+    section.setTitle(Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe()));
     return section;
   }
 
   private CE createLaboratorySpecialityCode() {
     CE ce = DatatypesFactory.eINSTANCE.createCE();
-    ce.setCode(LoincSectionCode.SEROLOGY_STUDIES.getLoincCode());
+    ce.setCode(SectionsVACD.SEROLOGY_STUDIES.getLoincCode());
     ce.setCodeSystem("2.16.840.1.113883.6.1");
     ce.setDisplayName("SEROLOGY STUDIES");
     return ce;
@@ -412,13 +414,13 @@ public class CdaChVacd extends CdaCh {
 
   private ImmunizationRecommendationsSection createTreatmentPlanSection() {
     ImmunizationRecommendationsSection section = CHFactory.eINSTANCE.createImmunizationRecommendationsSection().init();
-    section.setTitle(Util.st("Impfplan"));
+    section.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitleDe()));
     return section;
   }
 
   private ActiveProblemsSection findActiveProblemsSection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isActiveProblems(section.getCode().getCode())) {
+      if (SectionsVACD.isActiveProblems(section.getCode().getCode())) {
         return (ActiveProblemsSection) section;
       }
     }
@@ -427,7 +429,7 @@ public class CdaChVacd extends CdaCh {
 
   private AllergiesReactionsSection findAllergiesReactionsSection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isAllergiesReactions(section.getCode().getCode())) {
+      if (SectionsVACD.isAllergiesReactions(section.getCode().getCode())) {
         return (AllergiesReactionsSection) section;
       }
     }
@@ -436,7 +438,7 @@ public class CdaChVacd extends CdaCh {
 
   private HistoryOfPastIllnessSection findHistoryOfPastIllnessSection() {
     for (Section section : getSections()) {
-      if (LoincSectionCode.isHistoryOfPastIllness(section.getCode().getCode())) {
+      if (SectionsVACD.isHistoryOfPastIllness(section.getCode().getCode())) {
         return (HistoryOfPastIllnessSection) section;
       }
     }
@@ -445,7 +447,7 @@ public class CdaChVacd extends CdaCh {
 
   private Section findImmunizationRecommendationSection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isTreatmentPlan(section.getCode().getCode())) {
+      if (SectionsVACD.isTreatmentPlan(section.getCode().getCode())) {
         return (Section) section;
       }
     }
@@ -454,7 +456,7 @@ public class CdaChVacd extends CdaCh {
 
   private ImmunizationsSection findImmunizationSection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isHistoryOfImmunization(section.getCode().getCode())) {
+      if (SectionsVACD.isHistoryOfImmunization(section.getCode().getCode())) {
         return (ImmunizationsSection) section;
       }
     }
@@ -463,7 +465,7 @@ public class CdaChVacd extends CdaCh {
 
   private Section findLaboratorySpecialitySection() {
     for (Section section : doc.getSections()) {
-      if (LoincSectionCode.isLaboratorySpeciality(section.getCode().getCode())) {
+      if (SectionsVACD.isLaboratorySpeciality(section.getCode().getCode())) {
         return (Section) section;
       }
     }
@@ -477,6 +479,7 @@ public class CdaChVacd extends CdaCh {
         findActiveProblemsSection();
     if (section == null) {
       section = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
+      section.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitleDe()));
       doc.addSection(section);
 
       StrucDocText sectionTextStrucDoc = CDAFactory.eINSTANCE.createStrucDocText();
@@ -663,7 +666,7 @@ public class CdaChVacd extends CdaCh {
   }
 
   private boolean updateProblemConcernReferences(
-      EList<Act> acts, LoincSectionCode loincSectionCode) {
+      EList<Act> acts, SectionsVACD loincSectionCode) {
     int i = 0;
     for (Act act : acts) {
       org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
@@ -686,7 +689,7 @@ public class CdaChVacd extends CdaCh {
     return true;
   }
 
-  private void updateSubstanceAdministrationReferences(List<SubstanceAdministration> substanceAdministrations, LoincSectionCode loincSectionCode) {
+  private void updateSubstanceAdministrationReferences(List<SubstanceAdministration> substanceAdministrations, SectionsVACD loincSectionCode) {
     int i = 0;
     for (SubstanceAdministration ir : substanceAdministrations) {
       i++;

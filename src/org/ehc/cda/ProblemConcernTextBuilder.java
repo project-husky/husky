@@ -7,6 +7,8 @@ import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Observation;
 
+import ch.ehc.common.SectionsVACD;
+
 /**
  * Builds the <text> part of the Treatment plan section.
  * 
@@ -58,7 +60,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		Observation obs = CDAFactory.eINSTANCE.createObservation();
 		obs = newProblemConcernEntry2.mProblemConcernEntry.getObservations()
 				.get(0);
-		obs.setText(Util.createReference(newId, LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
+		obs.setText(Util.createReference(newId, SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		return newProblemConcernEntry2;
 	}
 
@@ -85,7 +87,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		rowBuilder
 				.append(buildCellWithContent(
 						newProblemConcernEntry2.getProblemConcern(), newId,
-						LoincSectionCode.ACTIVE_PROBLEMS.getContentIdPrefix()));
+						SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();
 	}

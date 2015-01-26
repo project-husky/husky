@@ -6,6 +6,8 @@ import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
+import ch.ehc.common.SectionsVACD;
+
 /**
  * Builds the <text> part of the Immunization recommendations.
  * 
@@ -29,7 +31,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
     public List<ImmunizationRecommendation> getUpdatedImmunizations() {
       int i = 0;
       for (ImmunizationRecommendation immunization : this.immunizations) {
-        ED reference = Util.createReference(i, LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix());
+        ED reference = Util.createReference(i, SectionsVACD.TREATMENT_PLAN.getContentIdPrefix());
         SubstanceAdministration substanceAdminstration = immunization.copyMdhtImmunizationRecommendation();
         substanceAdminstration.setText(reference);
         i++;
@@ -77,7 +79,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 
     private void addRow(ImmunizationRecommendation immunization, int i) {
         append("<tr>");
-        addCellWithContent(immunization.getVaccineName(), LoincSectionCode.TREATMENT_PLAN.getContentIdPrefix(), i);
+        addCellWithContent(immunization.getVaccineName(), SectionsVACD.TREATMENT_PLAN.getContentIdPrefix(), i);
         addCell("");
         addCell("");
         addCell(immunization.getEffectiveTime());
