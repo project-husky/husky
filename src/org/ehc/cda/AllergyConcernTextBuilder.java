@@ -37,7 +37,6 @@ public class AllergyConcernTextBuilder extends TextBuilder {
         append("</table>");
         return super.toString();
     }
-    
 
     private void addBody() {
         append("<tbody>");

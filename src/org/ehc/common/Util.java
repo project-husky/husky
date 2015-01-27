@@ -294,7 +294,6 @@ public class Util {
     if (strucDocText != null) {
       sb = traverse2(strucDocText.getMixed(), sb);
     }
-    System.out.println("SB:" + sb);
     return sb.toString();
   }
 

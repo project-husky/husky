@@ -49,7 +49,7 @@ abstract class TextBuilder {
 		append(text);
 		append("</content>");
 	}
-
+	
 	// public void build(String[] tableHeader, String[][] tableBody,
 	// Boolean referenceBodyCell[]) {
 	// this.tableHeader = tableHeader;

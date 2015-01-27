@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.lf5.viewer.configure.MRUFileManager;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ActiveProblemConcernEntry;
@@ -38,6 +39,7 @@ import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.cda.ProblemConcernEntryTextBuilder;
 import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
+import org.ehc.cda.SimpleTextBuilder;
 import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.CSUtil;
@@ -55,11 +57,14 @@ import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationsSection;
+import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
@@ -96,7 +101,7 @@ public class CdaChVacd extends CdaCh {
     super();
     doc = CHFactory.eINSTANCE.createVACD().init();
     setChMetadata(language, stylesheet, "eVACDOC");
-
+    CHPackage.eINSTANCE.eClass();
     // fix missing extension values in MDHT model.
     for (II templateId : doc.getTemplateIds()) {
       if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
@@ -117,6 +122,7 @@ public class CdaChVacd extends CdaCh {
    */
   public CdaChVacd(VACD doc) {
     super();
+    CHPackage.eINSTANCE.eClass();
     this.setDoc(doc);
     query = new Query(this.doc);
   }
@@ -233,33 +239,65 @@ public class CdaChVacd extends CdaCh {
     //create the CDA level 1 text
     immunizationRecommendationsSection.createStrucDocText(getImmunizationRecommendationText());
   }
-  
+
   public void addAllergyProblemConcern(AllergyConcern huenereinweissAllergieLeiden) {
-	    org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
+    org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
 
-	    //find or create (and add) the Section
-	    ars = (AllergiesReactionsSection) findAllergiesReactionsSection();
-	    if (ars==null) {
-	      ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
-	      ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS.getSectionTitleDe()));
-	      this.doc.addSection(ars);
-	    }
+    //find or create (and add) the Section
+    ars = (AllergiesReactionsSection) findAllergiesReactionsSection();
+    if (ars==null) {
+      ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
+      ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS.getSectionTitleDe()));
+      this.doc.addSection(ars);
+    }
 
-	    //add the MDHT Object to the section
-	    ars.addAct(huenereinweissAllergieLeiden.copyMdhtAllergyConcern());
+    //add the MDHT Object to the section
+    ars.addAct(huenereinweissAllergieLeiden.copyMdhtAllergyConcern());
 
-	    //update the MDHT Object content references to CDA level 1 text
-	    if (updateAllergyConcernReferences(ars.getActs(), SectionsVACD.ALLERGIES_REACTIONS)) {
-	      //create the CDA level 1 text
-	      ars.createStrucDocText(getAllergyProblemConcernText());
-	    }
-	    else {
-	      ars.createStrucDocText("Keine Angaben");
-	      huenereinweissAllergieLeiden.copyMdhtAllergyConcern().getEntryRelationships().get(0).getObservation().setText(Util.createEd(""));
-	    }
-	  }
+    //update the MDHT Object content references to CDA level 1 text
+    if (updateAllergyConcernReferences(ars.getActs(), SectionsVACD.ALLERGIES_REACTIONS)) {
+      //create the CDA level 1 text
+      ars.createStrucDocText(getAllergyProblemConcernText());
+    }
+    else {
+      ars.createStrucDocText("Keine Angaben");
+      huenereinweissAllergieLeiden.copyMdhtAllergyConcern().getEntryRelationships().get(0).getObservation().setText(Util.createEd(""));
+    }
+  }
 
-public void addPastProblemConcern(PastProblemConcernEntry pastProblemConcern) {
+  public void addComment(String comment) {
+    org.openhealthtools.mdht.uml.cda.ch.RemarksSection rs;
+    SimpleTextBuilder sb;
+
+    //find or create (and add) the Section
+    rs = (RemarksSection) findRemarksSection();
+    if (rs==null) {
+      rs = CHFactory.eINSTANCE.createRemarksSection().init();
+      rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitleDe()));
+      this.doc.addSection(rs);
+    }
+
+    //create add the MDHT Object to the section
+    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
+    rs.addAct(mComment);
+
+    //update the MDHT Object content references to CDA level 1 text
+    if (rs.getText() != null) {
+      String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
+      sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
+    }
+    else {
+      sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
+    }
+        
+    ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.REMARKS.getContentIdPrefix());
+    mComment.setText(reference);
+
+    //create the CDA level 1 text
+    rs.createStrucDocText(sb.toString());
+  }
+
+  public void addPastProblemConcern(PastProblemConcernEntry pastProblemConcern) {
     org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection hopis;
 
     //find or create (and add) the Section
@@ -444,6 +482,26 @@ public void addPastProblemConcern(PastProblemConcernEntry pastProblemConcern) {
     return null;
   }
 
+  private Section findRemarksSection() {
+    for (Section section : doc.getSections()) {
+      if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+       
+        EList<II>test = section.getTemplateIds();
+        CE test2 = section.getCode();
+        return (Section) section;
+      }
+    }
+    return null;
+  }
+  
+//  private Section findRemarksSection() {
+//  query = new Query(this.doc);
+//  org.openhealthtools.mdht.uml.cda.ch.RemarksSection rs =  query.getSections(org.openhealthtools.mdht.uml.cda.ch.RemarksSection.class).get(0);
+//  
+//  return rs;
+//  
+//  }
+
   private HistoryOfPastIllnessSection findHistoryOfPastIllnessSection() {
     for (Section section : getSections()) {
       if (SectionsVACD.isHistoryOfPastIllness(section.getCode().getCode())) {
@@ -607,47 +665,47 @@ public void addPastProblemConcern(PastProblemConcernEntry pastProblemConcern) {
     }
     return problemConcernEntries;
   }
-  
+
   private String getPastProblemConcernText() {
-	  ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
-	  //Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
-	  for (PastProblemConcernEntry prob : getPastProblemConcernEntries()) {
-		  problemConcernEntryList.add(prob);
-	  }
-	  
+    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    //Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
+    for (PastProblemConcernEntry prob : getPastProblemConcernEntries()) {
+      problemConcernEntryList.add(prob);
+    }
+
     ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
     return b.toString();
   }
-  
+
   private String getAllergyProblemConcernText() {
-	  ArrayList<AllergyConcern> problemConcernEntryList = new ArrayList<AllergyConcern>();
-	  //Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
-	  for (AllergyConcern prob : getAllergyProblemConcernEntries()) {
-		  //TODO Create an Allergy Text Builder here
-		  problemConcernEntryList.add(prob);
-	  }
-	  
+    ArrayList<AllergyConcern> problemConcernEntryList = new ArrayList<AllergyConcern>();
+    //Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
+    for (AllergyConcern prob : getAllergyProblemConcernEntries()) {
+      //TODO Create an Allergy Text Builder here
+      problemConcernEntryList.add(prob);
+    }
+
     AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(problemConcernEntryList, SectionsVACD.ALLERGIES_REACTIONS);
     return b.toString();
   }
-
+  
   private ArrayList<AllergyConcern> getAllergyProblemConcernEntries() {
-	    //Search for the right section 
-	    Section ars = findAllergiesReactionsSection();
-	    if (ars==null) {
-	      return null;
-	    }
-	    EList<Act> acts = ars.getActs();
+    //Search for the right section 
+    Section ars = findAllergiesReactionsSection();
+    if (ars==null) {
+      return null;
+    }
+    EList<Act> acts = ars.getActs();
 
-	    ArrayList<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
-	    for (Act act : acts) {
-	      AllergyConcern problemConcernEntry = new AllergyConcern((org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
-	      problemConcernEntries.add(problemConcernEntry);
-	    }
-	    return problemConcernEntries;
-	  }
+    ArrayList<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
+    for (Act act : acts) {
+      AllergyConcern problemConcernEntry = new AllergyConcern((org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
+      problemConcernEntries.add(problemConcernEntry);
+    }
+    return problemConcernEntries;
+  }
 
-/**
+  /**
    * Liefert alle Leiden im eVACDOC.
    *
    * @return Liste von Leiden
@@ -706,30 +764,30 @@ public void addPastProblemConcern(PastProblemConcernEntry pastProblemConcern) {
   public void setDoc(VACD doc) {
     this.doc = doc;
   }
-  
+
   private boolean updateAllergyConcernReferences(
-	      EList<Act> acts, SectionsVACD loincSectionCode) {
-	    int i = 0;
-	    for (Act act : acts) {
-	      org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
-	      if (problemConcernEntry.getAllergyIntolerances().size()>0) {
-	        org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry = problemConcernEntry.getAllergyIntolerances().get(0);
-	        //Check if the problem is not unknown (leads to no reference, because there is no problem)
-	        Code code = new Code (problemConcernEntry.getAllergyIntolerances().get(0).getCode());
-	        if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
-	          return false;
-	        }
-	        else {
-	          //Create references to level 1 text
-	          i++;
-	          ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
-	          problemEntry.setText(reference);
-	          problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
-	        }
-	      }
-	    }
-	    return true;
-	  }
+      EList<Act> acts, SectionsVACD loincSectionCode) {
+    int i = 0;
+    for (Act act : acts) {
+      org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
+      if (problemConcernEntry.getAllergyIntolerances().size()>0) {
+        org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry = problemConcernEntry.getAllergyIntolerances().get(0);
+        //Check if the problem is not unknown (leads to no reference, because there is no problem)
+        Code code = new Code (problemConcernEntry.getAllergyIntolerances().get(0).getCode());
+        if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+          return false;
+        }
+        else {
+          //Create references to level 1 text
+          i++;
+          ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
+          problemEntry.setText(reference);
+          problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
+        }
+      }
+    }
+    return true;
+  }
 
   private boolean updateProblemConcernReferences(
       EList<Act> acts, SectionsVACD loincSectionCode) {

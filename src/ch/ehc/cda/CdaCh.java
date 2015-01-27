@@ -56,7 +56,7 @@ import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
  */
 public abstract class CdaCh {
 	
-	protected CDACH doc = null;												// The CDA Document
+	CDACH doc = null;          												// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
 	protected Query query;
 	
