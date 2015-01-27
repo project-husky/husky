@@ -20,14 +20,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.lf5.viewer.configure.MRUFileManager;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ActiveProblemConcernEntry;
 import org.ehc.cda.AllergyConcern;
 import org.ehc.cda.AllergyConcernTextBuilder;
 import org.ehc.cda.AllergyIntolerance;
-import org.ehc.cda.AllergyProblem;
 import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
@@ -63,7 +61,6 @@ import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
-import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -98,8 +95,7 @@ public class CdaChVacd extends CdaCh {
    *        Lesbare Darstellung referenziert werden soll.
    */
   public CdaChVacd(Language language, String stylesheet) {
-    super();
-    doc = CHFactory.eINSTANCE.createVACD().init();
+    super(CHFactory.eINSTANCE.createVACD().init());
     setChMetadata(language, stylesheet, "eVACDOC");
     CHPackage.eINSTANCE.eClass();
     // fix missing extension values in MDHT model.
@@ -121,7 +117,7 @@ public class CdaChVacd extends CdaCh {
    * @param doc <div class="de">CdaChVacd</div> <div class="fr"></div>
    */
   public CdaChVacd(VACD doc) {
-    super();
+    super(doc);
     CHPackage.eINSTANCE.eClass();
     this.setDoc(doc);
     query = new Query(this.doc);

@@ -33,6 +33,8 @@ import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
+import org.openhealthtools.mdht.uml.cda.ch.EDES;
+import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
@@ -56,7 +58,7 @@ import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
  */
 public abstract class CdaCh {
 	
-	CDACH doc = null;          												// The CDA Document
+	CDACH doc = null;      												// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
 	protected Query query;
 	
@@ -66,7 +68,8 @@ public abstract class CdaCh {
 	 * <div class="de">Erstellt ein CdaCh Objekt</div>
 	 * <div class="fr"></div>
 	 */
-	public CdaCh() {
+	public CdaCh(CDACH doc) {
+	    this.doc = doc;
 		this.docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
 		this.docRoot.setClinicalDocument(doc);
 	    // Add the stylesheet processing instructions to the document root using featuremaputil
@@ -86,7 +89,7 @@ public abstract class CdaCh {
 		this.docRoot = root;
 	}
 
-	/**
+  /**
 	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet werden
 	 * (DocumentID, TypeID, Confidentially Code, Language Code, Stylesheet)
 	 * 

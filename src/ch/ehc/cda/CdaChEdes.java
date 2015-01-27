@@ -26,7 +26,7 @@ public class CdaChEdes extends CdaCh {
 	 *		<div class="fr"></div>
 	 */
 	public CdaChEdes(EDES doc) {
-		super();
+		super(doc);
 		this.setDoc(doc);
 	}
 
@@ -40,8 +40,7 @@ public class CdaChEdes extends CdaCh {
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
 	public CdaChEdes(Language language, String stylesheet) {
-		super();
-		super.doc = CHFactory.eINSTANCE.createEDES().init();
+		super(CHFactory.eINSTANCE.createEDES().init());
 		super.setChMetadata(language, stylesheet, "EDES");
 		printXmlToConsole();
 	}
