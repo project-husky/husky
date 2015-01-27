@@ -1,13 +1,6 @@
 package org.ehc.cda;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import org.ehc.common.Util;
-import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
-import org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-
 import ch.ehc.common.SectionsVACD;
 
 /**
@@ -17,9 +10,9 @@ import ch.ehc.common.SectionsVACD;
  * 
  * @author Axel Helmer
  */
-public class ProblemConcernEntryTextBuilder extends TextBuilder {
+public class AllergyConcernTextBuilder extends TextBuilder {
 
-    private ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns;
+    private ArrayList<org.ehc.cda.AllergyConcern> problemConcerns;
 	private String contentIdPrefix;
     
     /**
@@ -27,7 +20,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
      * 
      * @param pastProblemConcerns
      */
-    public ProblemConcernEntryTextBuilder(ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns, SectionsVACD section) {
+    public AllergyConcernTextBuilder(ArrayList<org.ehc.cda.AllergyConcern> problemConcerns, SectionsVACD section) {
       this.problemConcerns = problemConcerns;
       this.contentIdPrefix = section.getContentIdPrefix();
     }
@@ -49,7 +42,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
     private void addBody() {
         append("<tbody>");
         int i = 1;
-        for (org.ehc.cda.ProblemConcernEntry problemConcern : problemConcerns) {
+        for (org.ehc.cda.AllergyConcern problemConcern : problemConcerns) {
             addRow(problemConcern, i++);
         }
         append("</tbody>");
@@ -64,10 +57,10 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
         append("</thead>");
     }
 
-    private void addRow(org.ehc.cda.ProblemConcernEntry problemConcern, int i) {
+    private void addRow(AllergyConcern problemConcern, int i) {
         append("<tr>");
         addCell("Komplikationsrisiko");
-        addCellWithContent(problemConcern.getProblemConcern(), contentIdPrefix , i);
+        addCellWithContent(problemConcern.getAllergyConcern(), contentIdPrefix , i);
         append("</tr>");
     }
 }

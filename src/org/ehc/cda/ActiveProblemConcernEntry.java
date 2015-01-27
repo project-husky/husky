@@ -19,7 +19,6 @@
 package org.ehc.cda;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 

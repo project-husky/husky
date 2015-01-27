@@ -26,7 +26,7 @@ import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
-import org.openhealthtools.mdht.uml.cda.Observation;
+import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
@@ -35,14 +35,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
-/**
- * Ein medizinisches Problem
- */
-public class ProblemEntry {
+import ch.ehc.cda.enums.AllergiesAndIntolerances;
 
-	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
+/**
+ * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
+ * souffrance de la santé</div>
+ */
+public class AllergyProblem {
+	AllergyIntolerance mAllergyProblem; 
 	
-    /**
+	 /**
      * Erzeugt ein Objekt welches ein Problem repräsentiert. 
      * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
      * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
@@ -53,21 +55,21 @@ public class ProblemEntry {
      *            Beginn des Problems
      * @param endOfProblem
      *            Ende des Problems
-     * @param problem
+     * @param allergy
      *            Freitextbeschreibung zu dem Problem oder Code zu
      *            Komplikationsrisiken oder Expositionsrisiken.
      * @param internalProblemId
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
      */
-    public ProblemEntry(boolean problemNotOccured, org.ehc.common.Code problem) {
-        mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-        this.mProblemEntry.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
+    public AllergyProblem(boolean problemNotOccured, AllergiesAndIntolerances allergy) {
+        mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
+        this.mAllergyProblem.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
         this.setProblemNotOccured(problemNotOccured);
-        this.setCodedProblem(problem);
+        this.setCodedProblem(allergy.getCode());
         this.setInternalId(null);
         CD cd = DatatypesFactory.eINSTANCE.createCD();
         cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.UNK);
-        this.mProblemEntry.getValues().add(cd);
+        this.mAllergyProblem.getValues().add(cd);
     }
 	
 	/**
@@ -87,9 +89,9 @@ public class ProblemEntry {
 	 * @param internalProblemId
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
-	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
+	public AllergyProblem(boolean problemNotOccured, Date startOfProblem,
 			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
-      mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+      mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
       this.setProblemNotOccured(problemNotOccured);
       try {
           this.setStartOfProblem(startOfProblem);
@@ -116,7 +118,7 @@ public class ProblemEntry {
      *            Freitextbeschreibung zu dem Problem oder Code zu
      *            Komplikationsrisiken oder Expositionsrisiken.
      */
-    public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
+    public AllergyProblem(boolean problemNotOccured, Date startOfProblem,
             Date endOfProblem, org.ehc.common.Code problem) {
       this(problemNotOccured, startOfProblem, endOfProblem, problem, UUID.generate());
       
@@ -130,28 +132,21 @@ public class ProblemEntry {
       else {
         ii.setRoot(id);
       }
-      mProblemEntry.getIds().add(ii);
+      mAllergyProblem.getIds().add(ii);
     }
 
 	/**
-	 * @param observation
-	 */
-	public ProblemEntry(Observation observation) {
-		this.mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
-	}
-	
-	/**
 	 * @param problemEntry
 	 */
-	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
-		this.mProblemEntry = problemEntry;
+	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+		this.mAllergyProblem = allergyIntolerance;
 	}
 
 	/**
 	 * @return das problemNotOccured Objekt
 	 */
 	public boolean isProblemNotOccured() {
-		return mProblemEntry.getNegationInd();
+		return mAllergyProblem.getNegationInd();
 	}
 
 	/**
@@ -159,14 +154,14 @@ public class ProblemEntry {
 	 *            das problemNotOccured Objekt welches gesetzt wird
 	 */
 	public void setProblemNotOccured(boolean problemNotOccured) {
-		mProblemEntry.setNegationInd(problemNotOccured);
+		mAllergyProblem.setNegationInd(problemNotOccured);
 	}
 
 	/**
 	 * @return das startOfProblem Objekt
 	 */
 	public String getStartOfProblem() {
-		return Util.createEurDateStrFromTS(mProblemEntry
+		return Util.createEurDateStrFromTS(mAllergyProblem
 				.getEffectiveTime().getLow().getValue());
 	}
 
@@ -176,11 +171,11 @@ public class ProblemEntry {
 	 * @throws ParseException
 	 */
 	public void setStartOfProblem(Date startOfProblem) throws ParseException {
-		if (mProblemEntry.getEffectiveTime() == null) {
+		if (mAllergyProblem.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
-			mProblemEntry.setEffectiveTime(interval);
+			mAllergyProblem.setEffectiveTime(interval);
 		}
-		mProblemEntry.getEffectiveTime().setLow(
+		mAllergyProblem.getEffectiveTime().setLow(
 		DateUtil.createIVXB_TSFromDate(startOfProblem));
 	}
 
@@ -188,7 +183,7 @@ public class ProblemEntry {
 	 * @return das endOfProblem Objekt
 	 */
 	public String getEndOfProblem() {
-		return Util.createEurDateStrFromTS(mProblemEntry
+		return Util.createEurDateStrFromTS(mAllergyProblem
 				.getEffectiveTime().getHigh().getValue());
 	}
 
@@ -198,7 +193,7 @@ public class ProblemEntry {
 	 * @throws ParseException
 	 */
 	public void setEndOfProblem(Date endOfProblem) throws ParseException {
-		mProblemEntry.getEffectiveTime().setHigh(
+		mAllergyProblem.getEffectiveTime().setHigh(
 		    DateUtil.createIVXB_TSFromDate(endOfProblem));
 	}
 
@@ -206,7 +201,7 @@ public class ProblemEntry {
 	 * @return das codedProblem Objekt
 	 */
 	public org.ehc.common.Code getCodedProblem() {
-	  org.ehc.common.Code code = new org.ehc.common.Code(mProblemEntry.getCode());
+	  org.ehc.common.Code code = new org.ehc.common.Code(mAllergyProblem.getCode());
 		return code;
 	}
 
@@ -215,12 +210,12 @@ public class ProblemEntry {
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
 	public void setCodedProblem(org.ehc.common.Code codedProblem) {
-	  mProblemEntry.setCode(codedProblem.getCD());
+	  mAllergyProblem.setCode(codedProblem.getCD());
 	}
 
   public void setValue(Code codedProblem) {
     CD mCodedProblem = EcoreUtil.copy(codedProblem.getCD());
-    mProblemEntry.getValues().add((ANY) mCodedProblem);
+    mAllergyProblem.getValues().add((ANY) mCodedProblem);
   }
   
   /**
@@ -232,7 +227,7 @@ public class ProblemEntry {
   public String getValue() { 
     //TODO The best solution is to return the human readable content, if no code is available. 
     //Maybe it´s better to generate a list with values here, but this way is more convenient and should be ok, in most of the cases.
-    for (ANY any : mProblemEntry.getValues()) {
+    for (ANY any : mAllergyProblem.getValues()) {
       if (any instanceof CD) {
           return ((CD) any).getCode();
       }
@@ -243,3 +238,4 @@ public class ProblemEntry {
     return null;
   }
 }
+
