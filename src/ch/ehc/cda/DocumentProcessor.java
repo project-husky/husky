@@ -25,7 +25,6 @@ import java.io.InputStream;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ch.VHitGArztbrief;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
@@ -75,9 +74,6 @@ public class DocumentProcessor {
 
 		VACD evacdocMdht = null;
 		//System.out.println("\n\n ===== Checking type of clinical document =====");
-		if (clinicalDocument instanceof VHitGArztbrief) {
-			 //System.out.println("clinicalDocument is an instance of VHitGArztbrief");
-		}
 		if (clinicalDocument instanceof CDACH) {
 			 //System.out.println("clinicalDocument is an instance of CDACH");
 		}
