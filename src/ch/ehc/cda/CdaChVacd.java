@@ -62,6 +62,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
+import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -150,7 +151,7 @@ public class CdaChVacd extends CdaCh {
     tb =
         new ProblemConcernTextBuilder(problemConcernEntries, problemConcern,
             activeProblemsSectionText);
-    problemConcern = tb.getProblemConcernEntry();
+    //problemConcern = tb.getProblemConcernEntry();
 
     // Update the section text.
     // This is a workaround for the following problem:
@@ -180,6 +181,7 @@ public class CdaChVacd extends CdaCh {
     org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
         EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
     activeProblemsSection.addAct(problemConcernEntryMdht);
+    updateProblemConcernReferences(activeProblemsSection.getActs(), SectionsVACD.ACTIVE_PROBLEMS);
   }
 
   public void addAllergyProblemConcern(AllergyConcern huenereinweissAllergieLeiden) {
@@ -232,7 +234,7 @@ public class CdaChVacd extends CdaCh {
     else {
       sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
     }
-        
+
     ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.REMARKS.getContentIdPrefix());
     mComment.setText(reference);
 
@@ -609,7 +611,7 @@ public class CdaChVacd extends CdaCh {
     }
     return problemConcernEntries;
   }
-  
+
   private String getPastProblemConcernText() {
     ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
     //Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
@@ -686,10 +688,9 @@ public class CdaChVacd extends CdaCh {
     int i = 0;
     for (Act act : acts) {
       org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
-      if (problemConcernEntry.getAllergyIntolerances().size()>0) {
-        org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry = problemConcernEntry.getAllergyIntolerances().get(0);
+      for (ProblemEntry problemEntry : problemConcernEntry.getAllergyIntolerances()) {
         //Check if the problem is not unknown (leads to no reference, because there is no problem)
-        Code code = new Code (problemConcernEntry.getAllergyIntolerances().get(0).getCode());
+        Code code = new Code (problemEntry.getCode());
         if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
           return false;
         }
@@ -697,7 +698,7 @@ public class CdaChVacd extends CdaCh {
           //Create references to level 1 text
           i++;
           ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
-          problemEntry.setText(reference);
+          problemEntry.setText(EcoreUtil.copy(reference));
           problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
         }
       }
@@ -710,10 +711,9 @@ public class CdaChVacd extends CdaCh {
     int i = 0;
     for (Act act : acts) {
       org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
-      if (problemConcernEntry.getProblemEntries().size()>0) {
-        org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry = problemConcernEntry.getProblemEntries().get(0);
+      for (ProblemEntry problemEntry : problemConcernEntry.getProblemEntries()) {
         //Check if the problem is not unknown (leads to no reference, because there is no problem)
-        Code code = new Code (problemConcernEntry.getProblemEntries().get(0).getCode());
+        Code code = new Code (problemEntry.getCode());
         if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
           return false;
         }
@@ -721,7 +721,7 @@ public class CdaChVacd extends CdaCh {
           //Create references to level 1 text
           i++;
           ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
-          problemEntry.setText(reference);
+          problemEntry.setText(EcoreUtil.copy(reference));
           problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
         }
       }

@@ -23,16 +23,20 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+
+import com.sun.glass.ui.Size;
 
 import ch.ehc.cda.enums.StatusCode;
 
@@ -256,10 +260,11 @@ public class ProblemConcernEntry {
 	 *            Das Problem
 	 */
 	public void addProblemEntry(ProblemEntry problemEntry) {
-	  mProblemConcernEntry.addObservation(problemEntry.mProblemEntry);
-		mProblemConcernEntry.getEntryRelationships().get(0)
-	    .setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		mProblemConcernEntry.getEntryRelationships().get(0).setInversionInd(false);
+	  mProblemConcernEntry.addObservation(problemEntry.getMdhtProblemEntry());
+	  EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships(); 
+	  //Set the Attributes of the last added element
+	  entryRel.get(entryRel.size()-1).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+	  entryRel.get(entryRel.size()-1).setInversionInd(false);
 	}
 
 	/**

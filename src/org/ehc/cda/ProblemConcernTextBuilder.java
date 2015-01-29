@@ -49,19 +49,8 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 			this.sectionText = tableStub + tableFooter;
 		}
 
-		this.newProblemConcernEntry = insertContentReference(
-				newProblemConcernEntry, newId);
 		this.sectionText = insertRow(newProblemConcernEntry, newId,
 				this.sectionText);
-	}
-
-	public ActiveProblemConcernEntry insertContentReference(
-			ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
-		Observation obs = CDAFactory.eINSTANCE.createObservation();
-		obs = newProblemConcernEntry2.mProblemConcernEntry.getObservations()
-				.get(0);
-		obs.setText(Util.createReference(newId, SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
-		return newProblemConcernEntry2;
 	}
 
 	public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,

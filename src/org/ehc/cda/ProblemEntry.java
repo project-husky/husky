@@ -242,4 +242,8 @@ public class ProblemEntry {
     }
     return null;
   }
+  
+  public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
+    return EcoreUtil.copy(this.mProblemEntry);
+  }
 }
