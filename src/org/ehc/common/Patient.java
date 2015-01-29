@@ -27,7 +27,7 @@ import org.ehc.common.Address;
 import org.ehc.common.Identificator;
 import org.ehc.common.Name;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.AdministrativeGenderCode;
+import ch.ehc.cda.enums.AdministrativeGender;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -55,7 +55,7 @@ public class Patient extends Person {
 	 * @param birthDay
 	 *            Geburtsdatum
 	 */
-	public Patient(Name name, AdministrativeGenderCode sex, Date birthDay) {
+	public Patient(Name name, AdministrativeGender sex, Date birthDay) {
 		this(name, sex, DateFormat.getDateInstance().format(birthDay));
 	}
 
@@ -69,7 +69,7 @@ public class Patient extends Person {
 	 * @param birthDate
 	 *            Geburtsdatum (als Text) Beispiel:20.05.1967
 	 */
-	public Patient(Name name, AdministrativeGenderCode sex, String birthDate) {
+	public Patient(Name name, AdministrativeGender sex, String birthDate) {
 	  super(name.getGivenName(), name.getFamilyName());
 		// Create the patientRole
 		setRecordTarget(CDAFactory.eINSTANCE.createRecordTarget());
@@ -82,8 +82,7 @@ public class Patient extends Person {
 		patientRole.setPatient(patient);
 
 		// Create and fill gender
-		patient.setAdministrativeGenderCode(Util
-				.createAdministrativeGenderCode(sex));
+		patient.setAdministrativeGenderCode((CE) sex.getCE());
 
 		// Fill Patient Name
 		patient.getNames().add(name.getPn());
@@ -182,14 +181,14 @@ public class Patient extends Person {
 		}
 	}
 	
-	public AdministrativeGenderCode getGenderCode() {
+	public AdministrativeGender getGenderCode() {
 		CE code = getPatient().getAdministrativeGenderCode();
 		if ("M".equals(code.getCode())) {
-			return AdministrativeGenderCode.Male;
+			return AdministrativeGender.MALE;
 		} else if ("F".equals(code.getCode())) {
-			return AdministrativeGenderCode.Female;
+			return AdministrativeGender.FEMALE;
 		} else {
-			return AdministrativeGenderCode.Undifferentiated;
+			return AdministrativeGender.UNDIFFERENTIATED;
 		}
 	}
 	

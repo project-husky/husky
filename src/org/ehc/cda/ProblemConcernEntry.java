@@ -26,7 +26,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -34,6 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+
+import ch.ehc.cda.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -79,7 +80,7 @@ public class ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
+	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, ch.ehc.cda.enums.StatusCode concernStatus) {
 		setProblemConcernEntry(IHEFactory.eINSTANCE.createProblemConcernEntry());
 		mProblemConcernEntry.init();
 		this.setProblemConcern(concern);
@@ -190,13 +191,12 @@ public class ProblemConcernEntry {
 	 * @param concernStatus
 	 *            Status
 	 */
-	public void setCodedStatusOfConcern(StatusCode concernStatus) {
+	public void setCodedStatusOfConcern(ch.ehc.cda.enums.StatusCode concernStatus) {
 		// Create and set the status code
 		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
 		// (Implementierungsleitfaden 7.5.2.4)
-		CS concernStatusCode = DatatypesFactory.eINSTANCE
-				.createCS(concernStatus.name());
-		mProblemConcernEntry.setStatusCode(concernStatusCode);
+		
+		mProblemConcernEntry.setStatusCode(concernStatus.getCS());
 	}
 
 	/**

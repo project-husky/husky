@@ -40,11 +40,10 @@ import org.ehc.cda.Serologie;
 import org.ehc.cda.SimpleTextBuilder;
 import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
-import org.ehc.common.CSUtil;
 import org.ehc.common.Code;
+import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Encounter;
@@ -57,7 +56,6 @@ import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection;
-import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -67,6 +65,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -76,7 +75,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
+import ch.ehc.cda.enums.LanguageCode;
 import ch.ehc.cda.enums.ProblemsSpecialConditions;
+import ch.ehc.cda.enums.StatusCode;
 import ch.ehc.common.SectionsVACD;
 
 /**
@@ -89,13 +90,13 @@ public class CdaChVacd extends CdaCh {
   /**
    * Erstellt ein neues eVACDOC CDA Dokument.
    *
-   * @param language Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
+   * @param german Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
    * @param stylesheet Stylesheet, welches im CDA mittels <?xml-stylesheet> für die menschlich
    *        Lesbare Darstellung referenziert werden soll.
    */
-  public CdaChVacd(Language language, String stylesheet) {
+  public CdaChVacd(LanguageCode german, String stylesheet) {
     super(CHFactory.eINSTANCE.createVACD().init());
-    setChMetadata(language, stylesheet, "eVACDOC");
+    setChMetadata(german, stylesheet, "eVACDOC");
     CHPackage.eINSTANCE.eClass();
     // fix missing extension values in MDHT model.
     for (II templateId : doc.getTemplateIds()) {
@@ -344,7 +345,7 @@ public class CdaChVacd extends CdaCh {
 
     act.setCode(createLaboratorySpecialityCode());
 
-    act.setStatusCode(CSUtil.completed());
+    act.setStatusCode(StatusCode.COMPLETED.getCS());
     act.addObservation(createObservation(serologie));
 
     act.getEntryRelationships().get(0).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
@@ -450,7 +451,7 @@ public class CdaChVacd extends CdaCh {
     observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
     observation.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.1.6"));
     observation.setCode(createCode(serologie));
-    observation.setStatusCode(CSUtil.completed());
+    observation.setStatusCode(StatusCode.COMPLETED.getCS());
     observation.setEffectiveTime(DateUtil.convertDate(serologie.getDate()));
     return observation;
   }

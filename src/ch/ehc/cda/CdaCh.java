@@ -50,6 +50,7 @@ import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 
 import ch.ehc.cda.enums.EHealthConnectorVersions;
+import ch.ehc.cda.enums.LanguageCode;
 import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;
 
 /**
@@ -93,15 +94,15 @@ public abstract class CdaCh {
 	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet werden
 	 * (DocumentID, TypeID, Confidentially Code, Language Code, Stylesheet)
 	 * 
-	 * @param language
+	 * @param german
 	 *          Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
 	 * @param stylesheet
 	 *          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
-	public void setChMetadata(Language language, String stylesheet, String title) {
+	public void setChMetadata(LanguageCode language, String stylesheet, String title) {
 		// Set language of the document
-		doc.setLanguageCode(Util.createLanguageCode(language));
+		doc.setLanguageCode(language.getCS());
 
 		// Set OID of the document
 		//TODO this.setId(CdaChUtil.generateDocId(applicationOidRoot));

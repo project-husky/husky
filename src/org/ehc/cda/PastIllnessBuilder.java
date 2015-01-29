@@ -2,6 +2,7 @@ package org.ehc.cda;
 
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -13,7 +14,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
-import org.ehc.common.CSUtil;
+
+import ch.ehc.cda.enums.StatusCode;
 
 /**
  * Builder for one problem concern entry.
@@ -50,7 +52,7 @@ public class PastIllnessBuilder {
 		
 		entry.setCode(createCodeNullFlavor());
 		entry.setText(DatatypesFactory.eINSTANCE.createED());
-		entry.setStatusCode(CSUtil.completed());
+		entry.setStatusCode(StatusCode.COMPLETED.getCS());
 		
 		entry.setEffectiveTime(createUnknownLowHighTime());
 		
@@ -75,7 +77,7 @@ public class PastIllnessBuilder {
 		
 		entry.setCode(createCode(disease));
 		entry.setText(createProblemEntryText());
-		entry.setStatusCode(CSUtil.completed());
+		entry.setStatusCode(StatusCode.COMPLETED.getCS());
 		entry.setEffectiveTime(createUnknownLowHighTimeNullFlavor());
 		entry.getValues().add(createCode(disease));
 		return entry;

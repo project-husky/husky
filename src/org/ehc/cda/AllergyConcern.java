@@ -26,7 +26,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.StatusCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -34,6 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+
+import ch.ehc.cda.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -71,17 +72,17 @@ public class AllergyConcern {
 	 * @param concern
 	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
+	 * @param completed
 	 *            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public AllergyConcern(String concern, AllergyProblem problemEntry, StatusCode concernStatus) {
+	public AllergyConcern(String concern, AllergyProblem problemEntry, ch.ehc.cda.enums.StatusCode completed) {
 		setAllergyConcern(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern());
 		mAllergyConcern.init();
 		this.setAllergyConcern(concern);
 		this.addAllergy(problemEntry);
-		this.setCodedStatusOfConcern(concernStatus);
+		this.setCodedStatusOfConcern(completed);
 		this.setInternalId(null);
 		this.setEffectiveTime(null, null);
 	}
@@ -184,16 +185,15 @@ public class AllergyConcern {
 	/**
 	 * Setzt den Status (aktiv/inaktiv/...) des Leidens
 	 * 
-	 * @param concernStatus
+	 * @param completed
 	 *            Status
 	 */
-	public void setCodedStatusOfConcern(StatusCode concernStatus) {
+	public void setCodedStatusOfConcern(ch.ehc.cda.enums.StatusCode statusCode) {
 		// Create and set the status code
 		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
 		// (Implementierungsleitfaden 7.5.2.4)
-		CS concernStatusCode = DatatypesFactory.eINSTANCE
-				.createCS(concernStatus.name());
-		mAllergyConcern.setStatusCode(concernStatusCode);
+	
+		mAllergyConcern.setStatusCode(statusCode.getCS());
 	}
 
 	/**

@@ -106,29 +106,6 @@ public class Util {
   }
 
   /**
-   * Erzeugt ein AdministrativeGenderCode
-   * 
-   * @param sex Geschlecht
-   * @return HL7 CE Objekt
-   */
-  public static CE createAdministrativeGenderCode(AdministrativeGenderCode sex) {
-    // TODO Auf das richtige Value Set ändern
-    String pSexStr = null;
-    switch (sex) {
-      case Male:
-        pSexStr = "M";
-        break;
-      case Female:
-        pSexStr = "F";
-        break;
-      case Undifferentiated:
-        pSexStr = "U";
-    }
-    final CE pSex = DatatypesFactory.eINSTANCE.createCE(pSexStr, "2.16.840.1.113883.5.1");
-    return pSex;
-  }
-
-  /**
    * Erzeugt eine Adresse
    * 
    * @param addressline

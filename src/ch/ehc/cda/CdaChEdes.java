@@ -15,6 +15,8 @@ import org.openhealthtools.mdht.uml.cda.ch.EDES;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
+import ch.ehc.cda.enums.LanguageCode;
+
 public class CdaChEdes extends CdaCh {
 
 	/**
@@ -39,7 +41,7 @@ public class CdaChEdes extends CdaCh {
 	 * @param stylesheet          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
-	public CdaChEdes(Language language, String stylesheet) {
+	public CdaChEdes(LanguageCode language, String stylesheet) {
 		super(CHFactory.eINSTANCE.createEDES().init());
 		super.setChMetadata(language, stylesheet, "EDES");
 		printXmlToConsole();

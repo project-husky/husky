@@ -29,6 +29,7 @@ import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EN;
@@ -43,8 +44,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 import org.ehc.common.Author;
-import org.ehc.common.CSUtil;
 import org.ehc.common.DateUtil;
+
+import ch.ehc.cda.enums.StatusCode;
 
 /**
  * Eine Impfung
@@ -77,7 +79,7 @@ public class Immunization {
 		mImmunization.getIds().add(ii("1.3.160", "7680006690011"));
 		
 		//mImmunization.setText(createText());
-		mImmunization.setStatusCode(CSUtil.completed());
+		mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
 		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
 		mImmunization.setPriorityCode(createPriorityCode());
 		mImmunization.setRouteCode(getRouteCodeAsCE());
@@ -167,7 +169,7 @@ public class Immunization {
 		// TODO define OID constant
 		observation.getIds().add(ii("2.16.756.5.30.1.1.1.1.3.2.1", "66502037-9B9C-4ECB-9D24-A8EAD5D77D4B"));
 		observation.setCode(createCode(disease));
-		observation.setStatusCode(CSUtil.completed());
+		observation.setStatusCode(StatusCode.COMPLETED.getCS());
 		return observation;
 	}
 
