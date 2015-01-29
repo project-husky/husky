@@ -56,12 +56,12 @@ public enum AdministrativeGender {
 		return ehcCode;
 	}
 
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public CD getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {

@@ -80,12 +80,12 @@ public enum StatusCode {
 		return ehcCode;
 	}
 
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public CD getCS() {
+		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCodeSystem(CODE_SYSTEM);
+		cs.setCode(code);
+		cs.setDisplayName(displayName);
+		return cs;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
