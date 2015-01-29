@@ -58,9 +58,7 @@ public enum LanguageCode {
 
 	public CS getCS() {
 		CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCodeSystem(CODE_SYSTEM);
 		cs.setCode(code);
-		cs.setDisplayName(displayName);
 		return cs;
 	}
 
