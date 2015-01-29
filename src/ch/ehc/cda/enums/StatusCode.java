@@ -80,7 +80,7 @@ public enum StatusCode {
 		return ehcCode;
 	}
 
-	public CD getCS() {
+	public CS getCS() {
 		CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCodeSystem(CODE_SYSTEM);
 		cs.setCode(code);
