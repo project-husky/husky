@@ -2,8 +2,8 @@ package ch.ehc.cda.enums;
 
 import java.util.Arrays;
 import org.ehc.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
 *<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>

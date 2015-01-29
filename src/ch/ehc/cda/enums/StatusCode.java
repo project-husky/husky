@@ -2,8 +2,8 @@ package ch.ehc.cda.enums;
 
 import java.util.Arrays;
 import org.ehc.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
 *<div class="de">Die Codes beschreiben die möglichen Zustände einer Aktion</div>
@@ -15,22 +15,22 @@ public enum StatusCode {
 	*<div class="de"></div>
 	*<div class="fr"></div>
 	*/
-	PRE_STARTING_ACTION_STATUS ("new", "pre-starting action status"),
+	NEW ("new", "new"),
 	/** 
 	*<div class="de"></div>
 	*<div class="fr"></div>
 	*/
-	POST_STARTING_ACTION_STATUS ("active", "post-starting action status"),
+	ACTIV ("active", "activ"),
 	/** 
 	*<div class="de"></div>
 	*<div class="fr"></div>
 	*/
-	DONE ("complete", "done"),
+	COMPLETED ("completed", "completed"),
 	/** 
 	*<div class="de"></div>
 	*<div class="fr"></div>
 	*/
-	UNDER_CONSIDERATION ("held", "under consideration"),
+	HELD ("held", "held"),
 	/** 
 	*<div class="de"></div>
 	*<div class="fr"></div>
@@ -45,14 +45,14 @@ public enum StatusCode {
 	*<div class="de"></div>
 	*<div class="fr"></div>
 	*/
-	ABANDONED ("aborted", "abandoned");
-	public static final String PRE_STARTING_ACTION_STATUS_CODE="new";
-	public static final String POST_STARTING_ACTION_STATUS_CODE="active";
-	public static final String DONE_CODE="complete";
-	public static final String UNDER_CONSIDERATION_CODE="held";
+	ABORTED ("aborted", "aborted");
+	public static final String NEW_CODE="new";
+	public static final String ACTIV_CODE="active";
+	public static final String COMPLETED_CODE="completed";
+	public static final String HELD_CODE="held";
 	public static final String CANCELLED_CODE="cancelled";
 	public static final String SUSPENDED_CODE="suspended";
-	public static final String ABANDONED_CODE="aborted";
+	public static final String ABORTED_CODE="aborted";
 
 
 	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
