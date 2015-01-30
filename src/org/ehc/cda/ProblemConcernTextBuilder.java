@@ -75,7 +75,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		rowBuilder.append(buildCell("Komplikationsrisiko"));
 		rowBuilder
 				.append(buildCellWithContent(
-						newProblemConcernEntry2.getProblemConcern(), newId,
+						newProblemConcernEntry2.getConcern(), newId,
 						SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();

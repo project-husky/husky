@@ -160,8 +160,6 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 * @return das problemConcern Objekt
 	 */
 	public ProblemEntry getProblemEntry() {
-		// TODO Convert the Observation List to a ehealthconnector ProblemEntry
-		// list (List<ProblemEntry>) this.getObservations();
 		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getObservations().get(0));
 		return problemEntry;

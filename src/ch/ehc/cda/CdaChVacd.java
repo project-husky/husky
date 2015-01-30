@@ -646,7 +646,7 @@ public class CdaChVacd extends CdaCh {
               new ActiveProblemConcernEntry(
                   (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
           problemConcernEntryList.add(problemConcernEntry);
-          System.out.println("List Item Code: " + problemConcernEntry.getProblemConcern());
+          System.out.println("List Item Code: " + problemConcernEntry.getConcern());
         }
       }
 

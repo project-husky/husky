@@ -19,18 +19,13 @@
 package org.ehc.cda;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehc.common.DateUtil;
-import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -40,7 +35,7 @@ import ch.ehc.cda.enums.StatusCode;
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
  * souffrance de la santé</div>
  */
-public class AllergyConcern {
+public class AllergyConcern extends ConcernEntry {
 
 	protected org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
 
@@ -51,15 +46,16 @@ public class AllergyConcern {
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
 	 * 
-	 * @param problemConcernEntry
+	 * @param allergyConcernEntry
 	 * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
 	 * 
 	 * <div class="fr">Objet préexistante à cloner</div>
 	 * 
 	 */
 	public AllergyConcern(
-			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry) {
-		this.setAllergyConcern(problemConcernEntry);
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
+	  super(allergyConcern);
+	  this.mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
 	}
 
 	/**
@@ -78,9 +74,9 @@ public class AllergyConcern {
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern, AllergyProblem problemEntry, ch.ehc.cda.enums.StatusCode completed) {
-		setAllergyConcern(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern());
-		mAllergyConcern.init();
-		this.setAllergyConcern(concern);
+	    super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
+	    this.mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
+		this.setProblemConcern(concern);
 		this.addAllergy(problemEntry);
 		this.setCodedStatusOfConcern(completed);
 		this.setInternalId(null);
@@ -140,110 +136,6 @@ public class AllergyConcern {
 			String begin, String end, AllergyProblem problemEntry, StatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
 		this.setEffectiveTime(begin, end);
-	}
-
-	public void setEffectiveTime(String begin, String end) {
-	  // Create and set the concern interval
-      try {
-          mAllergyConcern.setEffectiveTime(DateUtil
-                  .createIVL_TSFromEuroDate(begin, end));
-      } catch (ParseException e) {
-          e.printStackTrace();
-      }
-  }
-
-	/**
-	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
-	 * 
-	 * @return Status des Leidens
-	 */
-	public String getCodedStatusOfConcern() {
-		//TODO map the String to an enum 
-		return mAllergyConcern.getStatusCode().getCode();
-	}
-
-	/**
-	 * Gibt das Ende des Leidens zurück
-	 * 
-	 * @return Ende des Leidens
-	 */
-	public String getEndOfConcern() {
-		return Util.createEurDateStrFromTS(copyMdhtAllergyConcern()
-				.getEffectiveTime().getHigh().getValue());
-	}
-
-	/**
-	 * Gibt den Beginn des Leidens zurück
-	 * 
-	 * @return Beginn des Leidens
-	 */
-	public String getStartOfConcern() {
-		return Util.createEurDateStrFromTS(copyMdhtAllergyConcern()
-				.getEffectiveTime().getLow().getValue());
-	}
-
-	/**
-	 * Setzt den Status (aktiv/inaktiv/...) des Leidens
-	 * 
-	 * @param completed
-	 *            Status
-	 */
-	public void setCodedStatusOfConcern(ch.ehc.cda.enums.StatusCode statusCode) {
-		// Create and set the status code
-		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
-		// (Implementierungsleitfaden 7.5.2.4)
-	
-		mAllergyConcern.setStatusCode(statusCode.getCS());
-	}
-
-	/**
-	 * Setzt das Ende des Leidens
-	 * 
-	 * @param endOfConcern
-	 *            Ende des Leidens
-	 */
-	public void setEndOfConcern(String endOfConcern) {
-		try {
-			mAllergyConcern.getEffectiveTime().setHigh(
-			    DateUtil.createIVXB_TSFromEuroDate(endOfConcern));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Setzt den Beginn des Leidens
-	 * 
-	 * @param startOfConcern
-	 *            Beginn des Leidens
-	 */
-	public void setStartOfConcern(String startOfConcern) {
-		try {
-			mAllergyConcern.getEffectiveTime().setLow(
-			    DateUtil.createIVXB_TSFromEuroDate(startOfConcern));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Setzt das Leiden
-	 * 
-	 * @param concern
-	 *            Leiden
-	 */
-	public void setAllergyConcern(String concern) {
-		// Create and set the concern as freetext
-		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
-		mAllergyConcern.setText(concernText);
-	}
-
-	/**
-	 * Gibt das Leiden zurück
-	 * 
-	 */
-	public String getAllergyConcern() {
-		return mAllergyConcern.getText().getText();
 	}
 
 	/**

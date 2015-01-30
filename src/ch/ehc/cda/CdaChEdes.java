@@ -113,7 +113,7 @@ public class CdaChEdes extends CdaCh {
 			if (act instanceof org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) {
 				ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
 				problemConcernEntryList.add(problemConcernEntry);
-				System.out.println("List Item Code: "+problemConcernEntry.getProblemConcern());
+				System.out.println("List Item Code: "+problemConcernEntry.getConcern());
 			}
 		}
 

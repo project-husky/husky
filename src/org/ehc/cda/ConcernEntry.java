@@ -119,7 +119,7 @@ public class ConcernEntry {
    * Gibt das Leiden zurück
    * 
    */
-  public String getProblemConcern() {
+  public String getConcern() {
       return mConcernEntry.getText().getText();
   }
 }

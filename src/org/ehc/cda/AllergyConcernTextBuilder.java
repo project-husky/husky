@@ -56,10 +56,10 @@ public class AllergyConcernTextBuilder extends TextBuilder {
         append("</thead>");
     }
 
-    private void addRow(AllergyConcern problemConcern, int i) {
+    private void addRow(AllergyConcern allergyConcern, int i) {
         append("<tr>");
         addCell("Komplikationsrisiko");
-        addCellWithContent(problemConcern.getAllergyConcern(), contentIdPrefix , i);
+        addCellWithContent(allergyConcern.getConcern(), contentIdPrefix , i);
         append("</tr>");
     }
 }

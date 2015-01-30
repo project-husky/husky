@@ -67,7 +67,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
     private void addRow(org.ehc.cda.ProblemConcernEntry problemConcern, int i) {
         append("<tr>");
         addCell("Komplikationsrisiko");
-        addCellWithContent(problemConcern.getProblemConcern(), contentIdPrefix , i);
+        addCellWithContent(problemConcern.getConcern(), contentIdPrefix , i);
         append("</tr>");
     }
 }
