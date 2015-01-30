@@ -12,17 +12,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.
 public enum LanguageCode {
 
 	/** 
-	*<div class="de"></div>
+	*<div class="de">deutsch</div>
 	*<div class="fr"></div>
 	*/
 	GERMAN ("de-CH", "german"),
 	/** 
-	*<div class="de"></div>
+	*<div class="de">französisch</div>
 	*<div class="fr"></div>
 	*/
 	FRENCH ("fr-CH", "french"),
 	/** 
-	*<div class="de"></div>
+	*<div class="de">italienisch</div>
 	*<div class="fr"></div>
 	*/
 	ITALIAN ("it-CH", "italian");

@@ -6,51 +6,33 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="de">Die Codes beschreiben die möglichen Zustände einer Aktion</div>
+*<div class="de">Zustand eines Leidens</div>
 *<div class="fr"></div>
 */
-public enum StatusCode {
+public enum ProblemConcernStatusCode {
 
 	/** 
-	*<div class="de">aktuell</div>
-	*<div class="fr"></div>
+	*<div class="de">Ein Leiden, das noch aktuell ist</div>
+	*<div class="fr">Affectation encore actuelle suspended</div>
 	*/
-	NEW ("new", "new"),
+	ACTIVE ("active", "active"),
 	/** 
-	*<div class="de">aktiv</div>
-	*<div class="fr"></div>
-	*/
-	ACTIV ("active", "activ"),
-	/** 
-	*<div class="de">erledigt</div>
-	*<div class="fr"></div>
+	*<div class="de">Das Leiden wurde geheilt. Es wird nicht weiter behandelt. Der Eintrag wird nur noch zwecks Historisierung geführt.</div>
+	*<div class="fr">Affectation guérie. Traitement terminé. L’entrée n'est effectuée qu’afin de compléter l’historique.</div>
 	*/
 	COMPLETED ("completed", "completed"),
 	/** 
-	*<div class="de">abwartend</div>
-	*<div class="fr"></div>
-	*/
-	HELD ("held", "held"),
-	/** 
-	*<div class="de">abgebrochen</div>
-	*<div class="fr"></div>
-	*/
-	CANCELLED ("cancelled", "cancelled"),
-	/** 
-	*<div class="de">ausgesetzt</div>
-	*<div class="fr"></div>
+	*<div class="de">Ein Leiden, das nicht geheilt wurde, aber derzeit nicht aktuell ist</div>
+	*<div class="fr">Affectation guérie. Traitement terminé. L’entrée n'est effectuée qu’afin de compléter l’historique.</div>
 	*/
 	SUSPENDED ("suspended", "suspended"),
 	/** 
-	*<div class="de">nicht mehr gewollt</div>
-	*<div class="fr"></div>
+	*<div class="de">Ein Leiden, das nicht geheilt wurde, aber nicht mehr weiter behandelt wird. Dieser Wert kann z.B. dann eingesetzt werden, wenn der Patient gegen den ärztlichen Rat eine Behandlung abgebrochen hat.</div>
+	*<div class="fr">Affectation qui n’a pas été guérie, mais dont le traitement n’est plus poursuivi. Cette valeur peut par exemple être utilisée si le patient a interrompu un traitement contre l’avis du médecin.</div>
 	*/
 	ABORTED ("aborted", "aborted");
-	public static final String NEW_CODE="new";
-	public static final String ACTIV_CODE="active";
+	public static final String ACTIVE_CODE="active";
 	public static final String COMPLETED_CODE="completed";
-	public static final String HELD_CODE="held";
-	public static final String CANCELLED_CODE="cancelled";
 	public static final String SUSPENDED_CODE="suspended";
 	public static final String ABORTED_CODE="aborted";
 
@@ -62,7 +44,7 @@ public enum StatusCode {
 	private String code;
 	private String displayName;
 
-	StatusCode (String code, String displayName) {
+	ProblemConcernStatusCode (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -91,7 +73,7 @@ public enum StatusCode {
 	}
 
 	public boolean isInValueSet(String code) {
-		for (StatusCode x : values()) {
+		for (ProblemConcernStatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

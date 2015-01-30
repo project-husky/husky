@@ -2,8 +2,8 @@ package ch.ehc.cda.enums;
 
 import java.util.Arrays;
 import org.ehc.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
 *<div class="de">Hinweis: Diese Tabelle wird jährliche durch die EKIF angepasst (siehe auch [Impfplan 2013]). eHealth Suisse wird eine jährlich aktualisierte Version dieses Value-Sets in elektronischer Form publizieren. (Quelle: Schweizerischer [Impfplan], 7.2 Erhöhtes Expositionsrisiko und/oder Übertragungsrisiko)</div>

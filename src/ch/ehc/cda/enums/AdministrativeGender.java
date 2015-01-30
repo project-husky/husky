@@ -12,17 +12,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum AdministrativeGender {
 
 	/** 
-	*<div class="de"></div>
+	*<div class="de">Weiblich</div>
 	*<div class="fr"></div>
 	*/
 	FEMALE ("F", "Female"),
 	/** 
-	*<div class="de"></div>
+	*<div class="de">Männlich</div>
 	*<div class="fr"></div>
 	*/
 	MALE ("M", "Male"),
 	/** 
-	*<div class="de"></div>
+	*<div class="de">Undifferenziert</div>
 	*<div class="fr"></div>
 	*/
 	UNDIFFERENTIATED ("UN", "Undifferentiated");
