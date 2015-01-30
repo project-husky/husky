@@ -1,12 +1,15 @@
 package org.ehc.cda;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
+
+import ch.ehc.cda.enums.ProblemConcernStatusCode;
 
 public class ConcernEntry {
   org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
@@ -15,15 +18,24 @@ public class ConcernEntry {
     this.mConcernEntry = concernEntry;
   }
   
-  public void setEffectiveTime(String begin, String end) {
-    // Create and set the concern interval
+//  public void setEffectiveTime(String begin, String end) {
+//    // Create and set the concern interval
+//    try {
+//      mConcernEntry.setEffectiveTime(DateUtil
+//                .createIVL_TSFromEuroDate(begin, end));
+//    } catch (ParseException e) {
+//        e.printStackTrace();
+//    }
+//}
+  
+  protected void setEffectiveTime(Date begin, Date end) {
     try {
-      mConcernEntry.setEffectiveTime(DateUtil
-                .createIVL_TSFromEuroDate(begin, end));
+      mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(begin, end));
     } catch (ParseException e) {
-        e.printStackTrace();
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-}
+  }
 
   /**
    * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
@@ -65,7 +77,7 @@ public class ConcernEntry {
    * @param concernStatus
    *            Status
    */
-  public void setCodedStatusOfConcern(ch.ehc.cda.enums.StatusCode concernStatus) {
+  public void setCodedStatusOfConcern(ProblemConcernStatusCode concernStatus) {
       // Create and set the status code
       // TODO Prüfen, ob hier immer "completed" angegeben werden muss
       // (Implementierungsleitfaden 7.5.2.4)

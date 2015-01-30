@@ -79,7 +79,6 @@ public class DateUtil {
 
     // Create and set End
     ohtInterval.setHigh(createIVXB_TSFromDate(eurDateEnd));
-
     return ohtInterval;
   }
 
@@ -117,8 +116,12 @@ public class DateUtil {
   public static IVXB_TS createIVXB_TSFromDate(Date date) throws ParseException {
     // Create IVXB_TS
     IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
-    ohtIntervalPoint.setValue(DateUtil.formatDate(date));
-
+    if (date == null) {
+      ohtIntervalPoint.setNullFlavor(NullFlavor.UNK);
+    }
+    else {
+      ohtIntervalPoint.setValue(DateUtil.formatDate(date));
+    }
     return ohtIntervalPoint;
   }
 

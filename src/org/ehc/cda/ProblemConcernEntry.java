@@ -31,6 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
+import ch.ehc.cda.enums.ProblemConcernStatusCode;
 import ch.ehc.cda.enums.StatusCode;
 
 /**
@@ -75,7 +76,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, ch.ehc.cda.enums.StatusCode concernStatus) {
+	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, ch.ehc.cda.enums.ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 		this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
 		this.setProblemConcern(concern);
@@ -107,40 +108,12 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 *            du problème</div>
 	 */
 	public ProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, StatusCode concernStatus) {
-		this(concern,
-				DateFormat.getDateInstance().format(begin), DateFormat
-						.getDateInstance().format(end), problemEntry, concernStatus);
+			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+      this(concern, problemEntry, concernStatus);
+      this.setEffectiveTime(begin, end);
 	}
 
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 * @param begin
-	 *            <div class="de">Beginn des Leidens</div> <div class="fr">Le
-	 *            début du problème</div>
-	 * @param end
-	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
-	 *            du problème</div>
-	 */
-	public ProblemConcernEntry(String concern, 
-			String begin, String end, ProblemEntry problemEntry, StatusCode concernStatus) {
-		this(concern, problemEntry, concernStatus);
-		this.setEffectiveTime(begin, end);
-	}
-
-	/**
+  /**
 	 * Fügt dem Leiden ein medizinisches Problem hinzu
 	 * 
 	 * @param problemEntry

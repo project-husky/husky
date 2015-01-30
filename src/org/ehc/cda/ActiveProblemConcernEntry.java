@@ -21,6 +21,7 @@ package org.ehc.cda;
 import java.text.DateFormat;
 import java.util.Date;
 
+import ch.ehc.cda.enums.ProblemConcernStatusCode;
 import ch.ehc.cda.enums.StatusCode;
 
 /**
@@ -62,7 +63,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
+	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 	  super(concern, problemEntry, concernStatus);
 	}
 	
@@ -76,7 +77,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 * @param concern
 	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param statusCode
+	 * @param aborted
 	 *            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
@@ -88,9 +89,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public ActiveProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, ch.ehc.cda.enums.StatusCode statusCode) {
-		super(concern,
-				DateFormat.getDateInstance().format(begin), DateFormat
-						.getDateInstance().format(end), problemEntry, statusCode);
+			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+		super(concern, begin, end, problemEntry, problemConcernStatus);
 	}
 }

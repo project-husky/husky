@@ -56,7 +56,6 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
-import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -162,9 +161,6 @@ public class CdaChVacd extends CdaCh {
     activeProblemsSection.setText(sectionTextStrucDoc);
 
     // insert the values which are special for VACD Document
-    // TODO Enum einfügen
-    // problemConcern.getMdhtProblemEntryList().get(0).setStatusCode(ConvenienceUtilsEnums.StatusCode.completed);
-    // //Status code of the problem has to be "completed"
     problemConcern.copyMdhtProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
 
     // Add the code for "Komplikations- oder Expositionsrisiken"
@@ -363,17 +359,6 @@ public class CdaChVacd extends CdaCh {
     return new Immunization(iheImmunization);
   }
 
-  /**
-   * Creates the allergies reactions section (displayName="Allergies and Adverse Reactions").
-   * 
-   * @return AllergiesReactionsSection
-   */
-  private AllergiesReactionsSection createAllergiesReactionsSection() {
-    org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection section =
-        IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
-    return section;
-  }
-
   @SuppressWarnings("unused")
   private CD createAllergyCode() {
     CD code = DatatypesFactory.eINSTANCE.createCD();
@@ -408,13 +393,6 @@ public class CdaChVacd extends CdaCh {
     Encounter encounter = IHEFactory.eINSTANCE.createEncounterActivity();
 
     return encounter;
-  }
-
-  private HistoryOfPastIllnessSection createHistoryOfPastIllnessSection() {
-    HistoryOfPastIllnessSection section =
-        IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
-    section.setTitle(Util.st("Bisherige Krankheiten"));
-    return section;
   }
 
   /**
@@ -652,10 +630,6 @@ public class CdaChVacd extends CdaCh {
 
       return problemConcernEntryList;
     }
-  }
-
-  private EList<Section> getSections() {
-    return doc.getSections();
   }
 
   public boolean hasPastIllness(Disease disease) {

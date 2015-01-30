@@ -33,8 +33,6 @@ import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
-import org.openhealthtools.mdht.uml.cda.ch.EDES;
-import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
@@ -47,8 +45,6 @@ import org.ehc.common.Organization;
 import org.ehc.common.Patient;
 import org.ehc.common.Person;
 import org.ehc.common.Util;
-import org.ehc.common.ConvenienceUtilsEnums.Language;
-
 import ch.ehc.cda.enums.EHealthConnectorVersions;
 import ch.ehc.cda.enums.LanguageCode;
 import ch.ehc.common.ConvenienceUtilsEnums.ParticipantType;

@@ -18,11 +18,10 @@
 
 package org.ehc.cda;
 
-import java.text.DateFormat;
 import java.util.Date;
 
+import ch.ehc.cda.enums.ProblemConcernStatusCode;
 import ch.ehc.cda.enums.ProblemsSpecialConditions;
-import ch.ehc.cda.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -64,7 +63,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
      *            statut du problème (active/suspended/aborted/completed)</div>
      */
     public PastProblemConcernEntry() {
-      super("Keine Angaben", new ProblemEntry(false, ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()), StatusCode.COMPLETED);
+      super("Keine Angaben", new ProblemEntry(false, ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()), ProblemConcernStatusCode.COMPLETED);
       //super.getMdhtProblemConcernEntry().getObservations().get(0).get
     }
 
@@ -83,7 +82,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public PastProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
+	public PastProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 	
@@ -97,7 +96,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 * @param concern
 	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param statusCode
+	 * @param problemConcernStatus
 	 *            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
@@ -109,9 +108,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public PastProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, ch.ehc.cda.enums.StatusCode statusCode) {
-		super(concern,
-				DateFormat.getDateInstance().format(begin), DateFormat
-						.getDateInstance().format(end), problemEntry, statusCode);
+			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+		super(concern,begin, end, problemEntry, problemConcernStatus);
 	}
 }
