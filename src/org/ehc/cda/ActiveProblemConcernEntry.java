@@ -63,7 +63,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, StatusCode concernStatus) {
-		super(concern, problemEntry, concernStatus);
+	  super(concern, problemEntry, concernStatus);
 	}
 	
 	/**
