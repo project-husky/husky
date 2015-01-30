@@ -92,4 +92,9 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
 		super(concern, begin, end, problemEntry, problemConcernStatus);
 	}
+
+  public ActiveProblemConcernEntry(String string, Date date, ProblemEntry problemEntry,
+      ProblemConcernStatusCode problemStatusCode) {
+    this(string, date, null, problemEntry, problemStatusCode);
+  }
 }

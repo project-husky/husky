@@ -59,10 +59,10 @@ public class ProblemEntry {
      * @param internalProblemId
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
      */
-    public ProblemEntry(boolean problemNotOccured, org.ehc.common.Code problem) {
+    public ProblemEntry(org.ehc.common.Code problem) {
         mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
         this.mProblemEntry.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
-        this.setProblemNotOccured(problemNotOccured);
+        this.setProblemNotOccured(false);
         this.setCodedProblem(problem);
         this.setInternalId(null);
         CD cd = DatatypesFactory.eINSTANCE.createCD();
@@ -75,8 +75,6 @@ public class ProblemEntry {
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
 	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * 
-	 * @param problemNotOccured
-	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
 	 * @param startOfProblem
 	 *            Beginn des Problems
 	 * @param endOfProblem
@@ -87,10 +85,10 @@ public class ProblemEntry {
 	 * @param internalProblemId
      *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
-	public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
+	public ProblemEntry(Date startOfProblem,
 			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
       mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-      this.setProblemNotOccured(problemNotOccured);
+      this.setProblemNotOccured(false);
       try {
           this.setStartOfProblem(startOfProblem);
           this.setEndOfProblem(endOfProblem);
@@ -106,8 +104,6 @@ public class ProblemEntry {
      * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
      * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
      * 
-     * @param problemNotOccured
-     *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
      * @param startOfProblem
      *            Beginn des Problems
      * @param endOfProblem
@@ -116,9 +112,9 @@ public class ProblemEntry {
      *            Freitextbeschreibung zu dem Problem oder Code zu
      *            Komplikationsrisiken oder Expositionsrisiken.
      */
-    public ProblemEntry(boolean problemNotOccured, Date startOfProblem,
+    public ProblemEntry(Date startOfProblem,
             Date endOfProblem, org.ehc.common.Code problem) {
-      this(problemNotOccured, startOfProblem, endOfProblem, problem, UUID.generate());
+      this(startOfProblem, endOfProblem, problem, UUID.generate());
       
     }
 	   
@@ -147,7 +143,11 @@ public class ProblemEntry {
 		this.mProblemEntry = problemEntry;
 	}
 
-	/**
+	public ProblemEntry(Date date, Code code) {
+    this(date, null, code);
+  }
+
+  /**
 	 * @return das problemNotOccured Objekt
 	 */
 	public boolean isProblemNotOccured() {
