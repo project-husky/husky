@@ -191,13 +191,21 @@ public class DateUtil {
     return effectiveTime;
   }
 
+//  public static IVL_TS createUnknownTime() {
+//    IVXB_TS ts_unknown = DatatypesFactory.eINSTANCE.createIVXB_TS();
+//    ts_unknown.setNullFlavor(NullFlavor.UNK);
+//
+//    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+//    effectiveTime.setLow(ts_unknown);
+//
+//    return effectiveTime;
+//  }
+  
   public static IVL_TS createUnknownTime() {
-    IVXB_TS ts_unknown = DatatypesFactory.eINSTANCE.createIVXB_TS();
+	    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+	    effectiveTime.setNullFlavor(NullFlavor.UNK);
 
-    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
-    effectiveTime.setLow(ts_unknown);
-
-    return effectiveTime;
+	    return effectiveTime;
   }
 
   public static String format(Date date) {
@@ -252,13 +260,15 @@ public class DateUtil {
     String value = timeStamp.getValue();
     return parseDate(value);
   }
+  
+  public static String parseDateToStr(TS timestamp) {
+	  Date date = parseDate(timestamp);
+	  return formatDateCH(date);
+  }
 
   public static TS ts(Date date) {
     TS timestamp = DatatypesFactory.eINSTANCE.createTS();
     timestamp.setValue(DateUtil.formatDate(date));
     return timestamp;
   }
-
-  private DateUtil() {}
-
 }
