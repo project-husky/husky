@@ -190,16 +190,6 @@ public class DateUtil {
     effectiveTime.setHigh(Util.createNullFlavorUnknown());
     return effectiveTime;
   }
-
-//  public static IVL_TS createUnknownTime() {
-//    IVXB_TS ts_unknown = DatatypesFactory.eINSTANCE.createIVXB_TS();
-//    ts_unknown.setNullFlavor(NullFlavor.UNK);
-//
-//    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
-//    effectiveTime.setLow(ts_unknown);
-//
-//    return effectiveTime;
-//  }
   
   public static IVL_TS createUnknownTime() {
 	    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
