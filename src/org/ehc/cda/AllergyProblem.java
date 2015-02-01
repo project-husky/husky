@@ -120,18 +120,12 @@ public class AllergyProblem {
      */
     public AllergyProblem(boolean problemNotOccured, Date startOfProblem,
             Date endOfProblem, org.ehc.common.Code problem) {
-      this(problemNotOccured, startOfProblem, endOfProblem, problem, UUID.generate());
+      this(problemNotOccured, startOfProblem, endOfProblem, problem, null);
       
     }
 	   
     public void setInternalId(String id) {
-      II ii = DatatypesFactory.eINSTANCE.createII();
-      if (id==null) {
-        ii.setRoot(UUID.generate());
-      }
-      else {
-        ii.setRoot(id);
-      }
+      II ii = Util.createUuidVacd(id);
       mAllergyProblem.getIds().add(ii);
     }
 

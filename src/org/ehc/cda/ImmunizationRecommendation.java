@@ -126,10 +126,10 @@ public class ImmunizationRecommendation {
       mImmunizationRecommendation.setRouteCode(Util.createCENullFlavorNASK());
     }
     if (doseQuantity == null) {
-      mImmunizationRecommendation.setDoseQuantity(DateUtil.createIVL_PQNullFlavorNASK());
+      mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNASK());
     }
     if (rateQuantity == null) {
-      mImmunizationRecommendation.setRateQuantity(DateUtil.createIVL_PQNullFlavorNASK());
+      mImmunizationRecommendation.setRateQuantity(Util.createIVL_PQNullFlavorNASK());
     }    
   }
 

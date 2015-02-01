@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.common.ConvenienceUtilsEnums.AdministrativeGenderCode;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
@@ -46,11 +47,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+
+import ch.ehc.cda.CdaChVacd;
 
 /**
  * Hilfs-Methoden
@@ -58,6 +62,24 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
+  public static IVL_PQ createIVL_PQNullFlavorNASK() {
+    IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+    ivlpq.setNullFlavor(NullFlavor.NASK);
+    return ivlpq;
+  }
+  
+  public static II createUuidVacd(String id) {
+    II ii = DatatypesFactory.eINSTANCE.createII();
+    ii.setRoot(CdaChVacd.OID_VACD);
+    if (id==null) {
+      ii.setExtension(UUID.generate());
+    }
+    else {
+      ii.setRoot(id);
+    }
+    return ii;
+  }
+  
   /**
    * Erzeugt eine Adresse
    * 

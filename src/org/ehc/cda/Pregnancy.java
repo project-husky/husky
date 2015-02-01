@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.DateUtil;
+import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -26,7 +27,7 @@ public class Pregnancy {
 		this.mPregnancy.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		this.setInternalId(null);
 		this.mPregnancy.setCode(Pregnancies.DELIVERY_DATE_CLINICAL_ESTIMATE.getCD());
-		this.mPregnancy.setEffectiveTime(DateUtil.createUnknownTime());
+		this.mPregnancy.setEffectiveTime(DateUtil.createUnknownTime(null));
 	}
 
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
@@ -48,13 +49,7 @@ public class Pregnancy {
 	}
 	
     private void setInternalId(String id) {
-        II ii = DatatypesFactory.eINSTANCE.createII();
-        if (id==null) {
-          ii.setRoot(UUID.generate());
-        }
-        else {
-          ii.setRoot(id);
-        }
+        II ii = Util.createUuidVacd(id);
         mPregnancy.getIds().add(ii);
       }
 

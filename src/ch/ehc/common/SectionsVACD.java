@@ -51,7 +51,6 @@ public enum SectionsVACD {
     return ALLERGIES_REACTIONS.getLoincCode().equals(code);
   }
 
-
   public static boolean isActiveProblems(String code) {
     return ACTIVE_PROBLEMS.getLoincCode().equals(code);
   }
@@ -66,5 +65,9 @@ public enum SectionsVACD {
 
   public static boolean isRemarks(String code) {
     return REMARKS.getLoincCode().equals(code);
+  }
+
+  public static boolean isCodedResults(String code) {
+    return CODED_RESULTS.getLoincCode().equals(code);
   }
 }

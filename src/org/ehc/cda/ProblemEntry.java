@@ -114,18 +114,12 @@ public class ProblemEntry {
      */
     public ProblemEntry(Date startOfProblem,
             Date endOfProblem, org.ehc.common.Code problem) {
-      this(startOfProblem, endOfProblem, problem, UUID.generate());
+      this(startOfProblem, endOfProblem, problem, null);
       
     }
 	   
     public void setInternalId(String id) {
-      II ii = DatatypesFactory.eINSTANCE.createII();
-      if (id==null) {
-        ii.setRoot(UUID.generate());
-      }
-      else {
-        ii.setRoot(id);
-      }
+      II ii = Util.createUuidVacd(id);
       mProblemEntry.getIds().add(ii);
     }
 

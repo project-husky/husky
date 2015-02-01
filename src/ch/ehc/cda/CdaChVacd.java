@@ -44,6 +44,7 @@ import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Encounter;
@@ -55,6 +56,8 @@ import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
+import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeWeeksSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -68,7 +71,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -84,7 +89,8 @@ import ch.ehc.common.SectionsVACD;
  * class="fr">Class CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
 public class CdaChVacd extends CdaCh {
-	Query query;
+	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
+    Query query;
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
@@ -265,7 +271,64 @@ public class CdaChVacd extends CdaCh {
 		//create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
 	}
+	
+	  public void addGestationalAge(int i, int j) {
+	    Section crs;
+	    SimpleTextBuilder sb;
 
+	    //find or create (and add) the Section
+	    crs = findCodedResultsSection();
+
+	    if (crs==null) {
+	      crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
+	      crs.setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitleDe()));
+	      this.doc.addSection(crs);
+	    }
+
+	    //create and add the MDHT Objects to the section
+	    GestationalAgeWeeksSimpleObservation mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
+	    GestationalAgeDaysSimpleObservation mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
+	    crs.addObservation(mWeeks);
+	    crs.addObservation(mDays);
+	    
+	    //create and and the values, ids and effectiveTime for weeks and days
+	    PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(i, "wk");
+	    PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(j, "d");
+	    mWeeks.getValues().add(mWeeksValue);
+	    mDays.getValues().add(mDaysValue);
+	    II ii = Util.createUuidVacd(null);
+	    mWeeks.getIds().add(EcoreUtil.copy(ii));
+	    mDays.getIds().add(EcoreUtil.copy(ii));
+	    mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+	    mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+	    
+	    //update the MDHT Object content references to CDA level 1 text
+	    String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(i)+" Wochen und "+String.valueOf(j)+" Tage";
+	    if (crs.getText() != null) {
+	      String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(crs.getText());
+	      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText, oldSectionText);
+	    }
+	    else {
+	      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText);
+	    }
+
+	    ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
+	    mWeeks.setText(EcoreUtil.copy(reference));
+	    mDays.setText(EcoreUtil.copy(reference));
+
+	    //create the CDA level 1 text
+	    crs.createStrucDocText(sb.toString());
+	  }
+
+    private Section findCodedResultsSection() {
+    for (Section section : this.doc.getSections()) {
+      if (SectionsVACD.isCodedResults(section.getCode().getCode())) {
+        return section;
+      }
+    }
+    return null;
+  }
+	
 	private Section findRemarksSection() {
 		for (Section section : this.doc.getSections()) {
 			if (SectionsVACD.isRemarks(section.getCode().getCode())) {
@@ -467,7 +530,7 @@ public class CdaChVacd extends CdaCh {
 	@SuppressWarnings("unused")
 	private Procedure createProcedure() {
 		Procedure procedure = IHEFactory.eINSTANCE.createProcedureEntryPlanOfCareActivityProcedure();
-		procedure.setEffectiveTime(DateUtil.createUnknownTime());
+		procedure.setEffectiveTime(DateUtil.createUnknownTime(null));
 		return procedure;
 	}
 

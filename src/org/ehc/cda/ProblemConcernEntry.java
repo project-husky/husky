@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -154,13 +155,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	}
 	
     private void setInternalId(String id) {
-      II ii = DatatypesFactory.eINSTANCE.createII();
-      if (id==null) {
-        ii.setRoot(UUID.generate());
-      }
-      else {
-        ii.setRoot(id);
-      }
+      II ii = Util.createUuidVacd(id);
       mProblemConcernEntry.getIds().add(ii);
     }
 

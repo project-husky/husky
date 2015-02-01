@@ -23,7 +23,7 @@ public class DateUtil {
 
   public static IVL_TS convertDate(Date date) {
     if (date == null) {
-      return createUnknownTime();
+      return createUnknownTime(null);
     } else {
       IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
       ts.setValue(format(date));
@@ -51,12 +51,6 @@ public class DateUtil {
       }
     }
     return b.toString();
-  }
-
-  public static IVL_PQ createIVL_PQNullFlavorNASK() {
-    IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-    ivlpq.setNullFlavor(NullFlavor.NASK);
-    return ivlpq;
   }
 
   /**
@@ -191,11 +185,15 @@ public class DateUtil {
     return effectiveTime;
   }
   
-  public static IVL_TS createUnknownTime() {
-	    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+  public static IVL_TS createUnknownTime(NullFlavor nf) {
+    IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+    if (nf==null) {
 	    effectiveTime.setNullFlavor(NullFlavor.UNK);
-
-	    return effectiveTime;
+    }
+    else {
+      effectiveTime.setNullFlavor(nf);
+    }
+	return effectiveTime;
   }
 
   public static String format(Date date) {
