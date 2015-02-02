@@ -50,12 +50,11 @@ public enum ObservationInterpretation {
 		return ehcCode;
 	}
 
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCode(code);
+		return ce;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
