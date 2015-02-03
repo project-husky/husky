@@ -25,7 +25,7 @@ public enum ObservationInterpretation {
 	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN_CODE="NEG";
 
 
-	public static final String CODE_SYSTEM="2.16.756.5.30.1.127.3.2.20121101.3";
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.83";
 	public static final String CODE_SYSTEM_NAME="HL7 ObservationInterpretation ";
 
 
@@ -54,6 +54,7 @@ public enum ObservationInterpretation {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM);
 		ce.setCode(code);
+		ce.setDisplayName(displayName);
 		return ce;
 	}
 
