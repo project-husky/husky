@@ -2,6 +2,8 @@ package org.ehc.cda;
 
 import java.util.Date;
 
+import org.ehc.common.Value;
+
 /**
  * Serologie holds attributes to store in CDA "Serologie Studies" section.
  * 

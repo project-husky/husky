@@ -31,6 +31,7 @@ import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
 import org.ehc.cda.ImmunizationRecommendationTextBuilder;
 import org.ehc.cda.ImmunizationTextBuilder;
+import org.ehc.cda.LaboratoryObservationTextBuilder;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastProblemConcernEntry;
 import org.ehc.cda.Pregnancy;
@@ -39,15 +40,15 @@ import org.ehc.cda.ProblemConcernEntryTextBuilder;
 import org.ehc.cda.ProblemConcernTextBuilder;
 import org.ehc.cda.Serologie;
 import org.ehc.cda.SimpleTextBuilder;
-import org.ehc.cda.Value;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
-import org.openhealthtools.ihe.utils.UUID;
+import org.ehc.common.Value;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Encounter;
+import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Procedure;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -59,6 +60,10 @@ import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeWeeksSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection;
+import org.openhealthtools.mdht.uml.cda.ch.LaboratoryBatteryOrganizer;
+import org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation;
+import org.openhealthtools.mdht.uml.cda.ch.LaboratoryReportDataProcessingEntry;
+import org.openhealthtools.mdht.uml.cda.ch.SpecimenAct;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
@@ -73,6 +78,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
@@ -184,36 +190,6 @@ public class CdaChVacd extends CdaCh {
 		updateProblemConcernReferences(activeProblemsSection.getActs(), SectionsVACD.ACTIVE_PROBLEMS);
 	}
 
-	public void addPregnancy(Pregnancy pregnancy) {
-		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
-		SimpleTextBuilder sb;
-
-		//TODO Change to max one section in the model
-		phs = getDoc().getPregnancyHistorySection();
-
-		if (phs==null) {
-			phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
-			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES.getSectionTitleDe()));
-			this.doc.addSection(phs);
-		}
-
-		//create the CDA level 1 text and update the MDHT Object content references to CDA level 1 text
-		String pregnancyText = "Voraussichtlicher Geburtstermin: "+pregnancy.getEstimatedBirthdate();
-		if (phs.getText() != null) {
-			String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(phs.getText());
-			sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText, oldSectionText);
-		}
-		else {
-			sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText);
-		}
-
-		ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
-		pregnancy.getMdhtPregnancy().setText(reference);
-		phs.addObservation(pregnancy.copyMdhtPregnancy());
-
-		phs.createStrucDocText(sb.toString());
-	}
-
 	public void addAllergyProblemConcern(AllergyConcern huenereinweissAllergieLeiden) {
 		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
 
@@ -271,96 +247,78 @@ public class CdaChVacd extends CdaCh {
 		//create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
 	}
-	
-	  public void addGestationalAge(int i, int j) {
-	    Section crs;
-	    SimpleTextBuilder sb;
 
-	    //find or create (and add) the Section
-	    crs = findCodedResultsSection();
+	public void addGestationalAge(int i, int j) {
+    Section crs;
+    SimpleTextBuilder sb;
 
-	    if (crs==null) {
-	      crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
-	      crs.setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitleDe()));
-	      this.doc.addSection(crs);
-	    }
+    //find or create (and add) the Section
+    crs = findCodedResultsSection();
 
-	    //create and add the MDHT Objects to the section
-	    GestationalAgeWeeksSimpleObservation mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
-	    GestationalAgeDaysSimpleObservation mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
-	    crs.addObservation(mWeeks);
-	    crs.addObservation(mDays);
-	    
-	    //create and and the values, ids and effectiveTime for weeks and days
-	    PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(i, "wk");
-	    PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(j, "d");
-	    mWeeks.getValues().add(mWeeksValue);
-	    mDays.getValues().add(mDaysValue);
-	    II ii = Util.createUuidVacd(null);
-	    mWeeks.getIds().add(EcoreUtil.copy(ii));
-	    mDays.getIds().add(EcoreUtil.copy(ii));
-	    mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	    mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	    
-	    //update the MDHT Object content references to CDA level 1 text
-	    String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(i)+" Wochen und "+String.valueOf(j)+" Tage";
-	    if (crs.getText() != null) {
-	      String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(crs.getText());
-	      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText, oldSectionText);
-	    }
-	    else {
-	      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText);
-	    }
-
-	    ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
-	    mWeeks.setText(EcoreUtil.copy(reference));
-	    mDays.setText(EcoreUtil.copy(reference));
-
-	    //create the CDA level 1 text
-	    crs.createStrucDocText(sb.toString());
-	  }
-
-    private Section findCodedResultsSection() {
-    for (Section section : this.doc.getSections()) {
-      if (SectionsVACD.isCodedResults(section.getCode().getCode())) {
-        return section;
-      }
+    if (crs==null) {
+      crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
+      crs.setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitleDe()));
+      this.doc.addSection(crs);
     }
-    return null;
+
+    //create and add the MDHT Objects to the section
+    GestationalAgeWeeksSimpleObservation mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
+    GestationalAgeDaysSimpleObservation mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
+    crs.addObservation(mWeeks);
+    crs.addObservation(mDays);
+    
+    //create and and the values, ids and effectiveTime for weeks and days
+    PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(i, "wk");
+    PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(j, "d");
+    mWeeks.getValues().add(mWeeksValue);
+    mDays.getValues().add(mDaysValue);
+    II ii = Util.createUuidVacd(null);
+    mWeeks.getIds().add(EcoreUtil.copy(ii));
+    mDays.getIds().add(EcoreUtil.copy(ii));
+    mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+    mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+    
+    //update the MDHT Object content references to CDA level 1 text
+    String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(i)+" Wochen und "+String.valueOf(j)+" Tage";
+    if (crs.getText() != null) {
+      String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(crs.getText());
+      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText, oldSectionText);
+    }
+    else {
+      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalText);
+    }
+
+    ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
+    mWeeks.setText(EcoreUtil.copy(reference));
+    mDays.setText(EcoreUtil.copy(reference));
+
+    //create the CDA level 1 text
+    crs.createStrucDocText(sb.toString());
   }
 	
-	private Section findRemarksSection() {
-		for (Section section : this.doc.getSections()) {
-			if (SectionsVACD.isRemarks(section.getCode().getCode())) {
-				return section;
-			}
-		}
-		return null;
-	}
+	  public void addHistoryOfPastIllnessEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
+    	org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblem =
+    			problemConcernEntry.copyMdhtProblemConcernEntry();
 
-	public void addHistoryOfPastIllnessEntry(org.ehc.cda.ProblemConcernEntry problemConcernEntry) {
-		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry iheProblem =
-				problemConcernEntry.copyMdhtProblemConcernEntry();
+    	getDoc().getHistoryOfPastIllnessSection().addAct(iheProblem);
+    }
 
-		getDoc().getHistoryOfPastIllnessSection().addAct(iheProblem);
-	}
+    /**
+     * Fügt eine Impfung hinzu.
+     *
+     * @param medication Medikament
+     * @param dosage Dosis
+     * @param date Datum der Verabreichung
+     * @param arzt Verabreichender Arzt
+     */
+    public void addImmunization(Medication medication, Value dosage, Date date,
+    		org.ehc.common.Author arzt) {
+    	MedicationConverter c = new MedicationConverter(medication);
+    	org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization = c.convert();
 
-	/**
-	 * Fügt eine Impfung hinzu.
-	 *
-	 * @param medication Medikament
-	 * @param dosage Dosis
-	 * @param date Datum der Verabreichung
-	 * @param arzt Verabreichender Arzt
-	 */
-	public void addImmunization(Medication medication, Value dosage, Date date,
-			org.ehc.common.Author arzt) {
-		MedicationConverter c = new MedicationConverter(medication);
-		org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization = c.convert();
-
-		getImmunizationSection().addSubstanceAdministration(immunization);
-	}
-
+    	getImmunizationSection().addSubstanceAdministration(immunization);
+    }
+	
 	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.common.Author author) {
 		ImmunizationsSection immunizationSection = this.getImmunizationSection();
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization =
@@ -420,6 +378,78 @@ public class CdaChVacd extends CdaCh {
 			hopis.createStrucDocText("Keine Angaben");
 			pastProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0).getObservation().setText(Util.createEd(""));
 		}
+	}
+	
+	//TODO Evtl. Erzeugung eines weiteren Konstruktors, um LaboratoryBatteryOrganizer einzufügen
+	   public void addLaboratoryObservation(org.ehc.cda.LaboratoryObservation lo) {
+	        org.openhealthtools.mdht.uml.cda.ch.LaboratorySpecialitySection lss;
+	        LaboratoryReportDataProcessingEntry lrdpe;
+	        SpecimenAct spa;
+	        LaboratoryObservationTextBuilder tb;
+
+	        //find or create (and add) the Section
+	        lss = getDoc().getLaboratorySpecialitySection();
+	        if (lss==null) {
+	          lss = CHFactory.eINSTANCE.createLaboratorySpecialitySection().init();
+	          lrdpe = CHFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init();
+	          spa = CHFactory.eINSTANCE.createSpecimenAct().init();
+
+	          lss.getEntries().add(lrdpe);
+              lrdpe.setAct(spa);    
+
+	          lss.setTitle(Util.st(SectionsVACD.SEROLOGY_STUDIES.getSectionTitleDe()));
+	          this.doc.addSection(lss);
+	        }
+	        //If the section is already present, get instances of the templates
+	        else {
+	          lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+	          spa = (SpecimenAct) lrdpe.getAct();
+	        }
+	        
+	        //Create a new Laboratory Battery Organizer for each Observation that is added through this constructor and add it to the specimen act. 
+	        LaboratoryBatteryOrganizer lbo = CHFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init();        
+	        spa.addOrganizer(lbo);
+	                
+	        //add the MDHT Object to the section
+	        lbo.addObservation(lo.copyMdhtLaboratoryObservation());
+	        
+	        //Set the Type codes
+            lbo.getComponents().get(lbo.getComponents().size()-1).setTypeCode(ActRelationshipHasComponent.COMP);
+            spa.getEntryRelationships().get(spa.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+
+	        //TODO update the MDHT Object content references to CDA level 1 text (if necessary)
+	        tb = new LaboratoryObservationTextBuilder(this.getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
+	        lss.createStrucDocText(tb.toString());
+	    }
+
+  public void addPregnancy(Pregnancy pregnancy) {
+		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
+		SimpleTextBuilder sb;
+
+		//TODO Change to max one section in the model
+		phs = getDoc().getPregnancyHistorySection();
+
+		if (phs==null) {
+			phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
+			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES.getSectionTitleDe()));
+			this.doc.addSection(phs);
+		}
+
+		//create the CDA level 1 text and update the MDHT Object content references to CDA level 1 text
+		String pregnancyText = "Voraussichtlicher Geburtstermin: "+pregnancy.getEstimatedBirthdate();
+		if (phs.getText() != null) {
+			String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(phs.getText());
+			sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText, oldSectionText);
+		}
+		else {
+			sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText);
+		}
+
+		ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
+		pregnancy.getMdhtPregnancy().setText(reference);
+		phs.addObservation(pregnancy.copyMdhtPregnancy());
+
+		phs.createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -546,6 +576,15 @@ public class CdaChVacd extends CdaCh {
 		return section;
 	}
 
+	private Section findCodedResultsSection() {
+  for (Section section : this.doc.getSections()) {
+    if (SectionsVACD.isCodedResults(section.getCode().getCode())) {
+      return section;
+    }
+  }
+  return null;
+ }
+
 	private ImmunizationsSection findImmunizationSection() {
 		for (Section section : doc.getSections()) {
 			if (SectionsVACD.isHistoryOfImmunization(section.getCode().getCode())) {
@@ -557,6 +596,15 @@ public class CdaChVacd extends CdaCh {
 
 	private Section findLaboratorySpecialitySection() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Section findRemarksSection() {
+		for (Section section : this.doc.getSections()) {
+			if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+				return section;
+			}
+		}
 		return null;
 	}
 
@@ -603,7 +651,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Impfempfehlungen
 	 */
-	public List<ImmunizationRecommendation> getImmunizationRecommendations() {
+	public ArrayList<ImmunizationRecommendation> getImmunizationRecommendations() {
 		//Search for the right section 
 		Section tps = getDoc().getImmunizationRecommendationSection();
 		if (tps==null) {
@@ -611,13 +659,40 @@ public class CdaChVacd extends CdaCh {
 		}
 		EList<SubstanceAdministration> substanceAdministrations = tps.getSubstanceAdministrations();
 
-		List<ImmunizationRecommendation> immunizations = new ArrayList<ImmunizationRecommendation>();
+		ArrayList<ImmunizationRecommendation> immunizations = new ArrayList<ImmunizationRecommendation>();
 		for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
 			ImmunizationRecommendation immunization = new ImmunizationRecommendation((org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation) substanceAdministration);
 			immunizations.add(immunization);
 		}
 		return immunizations;
 	}
+	
+	   /**
+     * Liefert alle Impfempfehlungen im eVACDOC.
+     *
+     * @return Liste von Impfempfehlungen
+     */
+    public ArrayList<org.ehc.cda.LaboratoryObservation> getLaboratoryObservations() {
+        //Search for the right section 
+        Section los = getDoc().getLaboratorySpecialitySection();
+        if (los==null) {
+            return null;
+        }
+        EList<Entry> entries = los.getEntries();
+
+        ArrayList<org.ehc.cda.LaboratoryObservation> labObservations = new ArrayList<org.ehc.cda.LaboratoryObservation>();
+        for (Entry entry : entries) {
+          org.openhealthtools.mdht.uml.cda.ch.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ch.LaboratoryReportDataProcessingEntry) entry;
+          org.openhealthtools.mdht.uml.cda.ch.SpecimenAct mSpecAct = (org.openhealthtools.mdht.uml.cda.ch.SpecimenAct) mLabRdpe.getAct();
+          for (org.openhealthtools.mdht.uml.cda.ch.LaboratoryBatteryOrganizer mLabOrg : mSpecAct.getLaboratoryBatteryOrganizers()) {
+            for(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLo : mLabOrg.getLaboratoryObservations()) {
+              org.ehc.cda.LaboratoryObservation lo = new org.ehc.cda.LaboratoryObservation (mLo);
+              labObservations.add(lo);
+            }
+          }
+        }
+        return labObservations;
+    }
 
 	private String getImmunizationRecommendationText() {
 		ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(getImmunizationRecommendations());
@@ -629,11 +704,11 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Impfungen
 	 */
-	public List<Immunization> getImmunizations() {
+	public ArrayList<Immunization> getImmunizations() {
 		EList<SubstanceAdministration> substanceAdministrations =
 				getImmunizationSection().getSubstanceAdministrations();
 
-		List<Immunization> immunizations = new ArrayList<Immunization>();
+		ArrayList<Immunization> immunizations = new ArrayList<Immunization>();
 		for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
 			Immunization immunization =
 					convert((org.openhealthtools.mdht.uml.cda.ihe.Immunization) substanceAdministration);

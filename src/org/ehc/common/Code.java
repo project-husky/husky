@@ -100,6 +100,10 @@ public class Code {
 	  }
 	  return codeStr;
 	}
+	
+	public String getDisplayName() {
+	  return this.mCD.getDisplayName();
+	}
 
 	/**
 	 * @param code das code Objekt welches gesetzt wird

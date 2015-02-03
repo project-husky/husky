@@ -20,7 +20,9 @@ package org.ehc.common;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
+import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -63,7 +65,11 @@ public class Organization {
         mOrganization.getIds().add(id);
     }
 
-	/**
+    public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
+      this.mOrganization = organization;
+    }
+
+    /**
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
 	 * 
 	 * @param name
@@ -71,7 +77,7 @@ public class Organization {
 	 */
 	public void addName(String name) {
 		ON orgaName = DatatypesFactory.eINSTANCE.createON();
-		getOrganization().getNames().add(orgaName);
+		getMdhtOrganization().getNames().add(orgaName);
 		orgaName.addText(name);
 	}
 
@@ -82,7 +88,7 @@ public class Organization {
 	 *            Adresse
 	 */
 	public void addAddress(Address address) {
-		getOrganization().getAddrs().add(address);
+		getMdhtOrganization().getAddrs().add(address);
 	}
 
 	/**
@@ -95,7 +101,7 @@ public class Organization {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("mailto:" + eMail);
-		getOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
@@ -109,7 +115,7 @@ public class Organization {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("fax:" + faxNr);
-		getOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
@@ -123,7 +129,7 @@ public class Organization {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("tel:" + phoneNr);
-		getOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
@@ -136,7 +142,7 @@ public class Organization {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("http://" + url);
-		getOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
@@ -145,7 +151,7 @@ public class Organization {
 	 * @return Namen der Organisation
 	 */
 	public String getName() {
-		return getOrganization().getNames().get(0).getText();
+		return getMdhtOrganization().getNames().get(0).getText();
 	}
 	
 	 /**
@@ -154,15 +160,19 @@ public class Organization {
      * @return ID der Organisation
      */
     public String getId() {
-        return getOrganization().getIds().get(0).getExtension();
+        return getMdhtOrganization().getIds().get(0).getExtension();
     }
 
 	public List<TEL> getTelecoms() {
-		return getOrganization().getTelecoms();
+		return getMdhtOrganization().getTelecoms();
 	}
 
-	public org.openhealthtools.mdht.uml.cda.Organization getOrganization() {
+	public org.openhealthtools.mdht.uml.cda.Organization getMdhtOrganization() {
 		return mOrganization;
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.Organization copyMdhtOrganization() {
+      return EcoreUtil.copy(mOrganization);
 	}
 
 	public void setOrganization(org.openhealthtools.mdht.uml.cda.Organization mOrganization) {

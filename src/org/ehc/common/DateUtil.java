@@ -36,14 +36,14 @@ public class DateUtil {
     for (SXCM_TS effectiveTime : effectiveTimes) {
       if (effectiveTime instanceof IVL_TS) {
         IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-        Date tsLow = DateUtil.parseDate(effectiveTimeInterval.getLow().getValue());
-        Date tsHigh = DateUtil.parseDate(effectiveTimeInterval.getHigh().getValue());
+        Date tsLow = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+        Date tsHigh = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
         String tsLowStr = DateUtil.formatDateCH(tsLow);
         String tsHighStr = DateUtil.formatDateCH(tsHigh);
         b.append(tsLowStr + " - " + tsHighStr);
       } else {
         if (effectiveTime instanceof TS) {
-          Date ts = DateUtil.parseDate(effectiveTime.getValue());
+          Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
           String tsStr = DateUtil.formatDateCH(ts);
           b.append(tsStr);
         }
@@ -53,6 +53,25 @@ public class DateUtil {
     return b.toString();
   }
 
+  /**
+   * Erzeugt ein IVL_TS Objekt
+   * 
+   * @param eurDateTime der Begin des Intervals in dem Format dd.MM.yyyy HH:mm wie er in Europa
+   *        gebräuchlich ist
+   * @return HL7 IVL_TS Objekt
+   */
+  public static IVL_TS createIVL_TSFromEuroDateTime(Date eurDateTime)
+      throws ParseException {
+    // Create OHT Data structure
+    IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
+
+    final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmmZ");
+    // Create and set Begin
+    ohtInterval.setValue(cdaDateFormatter.format(eurDateTime));
+
+    return ohtInterval;
+  }
+  
   /**
    * Erzeugt ein IVL_TS Objekt
    * 
@@ -234,9 +253,43 @@ public class DateUtil {
    * @return java.util.Date
    * @throws ParseException
    */
-  public static Date parseDate(String value) {
+  public static Date parseDateyyyyMMdd(String value) {
     try {
       SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+      return sdf.parse(value);
+    } catch (ParseException e) {
+      throw new IllegalArgumentException("Cannot parse date, value=[" + value
+          + "]. Expected format is yyyyMMdd.", e);
+    }
+  }
+  
+  /**
+   * Parse date in format yyyyMMddHHmmZ.
+   * 
+   * @param value
+   * @return java.util.Date
+   * @throws ParseException
+   */
+  public static Date parseDateyyyyMMddHHmmZ(String value) {
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmZ");
+      return sdf.parse(value);
+    } catch (ParseException e) {
+      throw new IllegalArgumentException("Cannot parse date, value=[" + value
+          + "]. Expected format is yyyyMMdd.", e);
+    }
+  }
+  
+  /**
+   * Parse date in format yyyyMMddHHmm.
+   * 
+   * @param value
+   * @return java.util.Date
+   * @throws ParseException
+   */
+  public static Date parseDateyyyyMMddHHmm(String value) {
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
       return sdf.parse(value);
     } catch (ParseException e) {
       throw new IllegalArgumentException("Cannot parse date, value=[" + value
@@ -246,7 +299,7 @@ public class DateUtil {
 
   public static Date parseDate(TS timeStamp) {
     String value = timeStamp.getValue();
-    return parseDate(value);
+    return parseDateyyyyMMdd(value);
   }
   
   public static String parseDateToStr(TS timestamp) {
@@ -258,5 +311,10 @@ public class DateUtil {
     TS timestamp = DatatypesFactory.eINSTANCE.createTS();
     timestamp.setValue(DateUtil.formatDate(date));
     return timestamp;
+  }
+
+  public static Date parseIVL_TSVDateTimeValue(IVL_TS effectiveTime) {
+    String value = effectiveTime.getValue();
+    return parseDateyyyyMMddHHmmZ(value);
   }
 }

@@ -171,9 +171,9 @@ public class Util {
     on.addText(organization.getName());
     mdhtCustOrg.setName(on);
     // take the first address and set it as CustodianAdress
-    mdhtCustOrg.setAddr(organization.getOrganization().getAddrs().get(0));
+    mdhtCustOrg.setAddr(organization.getMdhtOrganization().getAddrs().get(0));
     // take the first telecom and set it as CustodianTelecom
-    mdhtCustOrg.setTelecom(organization.getOrganization().getTelecoms().get(0));
+    mdhtCustOrg.setTelecom(organization.getMdhtOrganization().getTelecoms().get(0));
     // TODO handle any other adresses/telecoms
     return mdhtCustOrg;
   }

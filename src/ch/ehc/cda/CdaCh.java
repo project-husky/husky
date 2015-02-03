@@ -218,8 +218,8 @@ public abstract class CdaCh {
 		//mdhtCustodian.setNullFlavor(NullFlavor.);
 		//Setzt die GLN des Arztes
 		II id = DatatypesFactory.eINSTANCE.createII();
-		if (organization.getOrganization().getIds().size()>0) {
-          id = organization.getOrganization().getIds().get(0);
+		if (organization.getMdhtOrganization().getIds().size()>0) {
+          id = organization.getMdhtOrganization().getIds().get(0);
 		}
 	    mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
@@ -286,7 +286,7 @@ public abstract class CdaCh {
 
 		org.openhealthtools.mdht.uml.cda.Organization docOrganization = CDAFactory.eINSTANCE
 				.createOrganization();
-		docOrganization = organization.getOrganization();
+		docOrganization = organization.getMdhtOrganization();
 		assEnt.setScopingOrganization(docOrganization);
 	}
 	

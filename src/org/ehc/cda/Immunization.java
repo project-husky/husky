@@ -45,6 +45,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 import org.ehc.common.Author;
 import org.ehc.common.DateUtil;
+import org.ehc.common.Value;
 
 import ch.ehc.cda.enums.StatusCode;
 
@@ -202,7 +203,7 @@ public class Immunization {
 
 	public Date getEffectiveTime() {
 		SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
-		return DateUtil.parseDate(date.getValue());
+		return DateUtil.parseDateyyyyMMdd(date.getValue());
 	}
 	
 	private Consumable createConsumable(String vaccineName, String atcCode) {
