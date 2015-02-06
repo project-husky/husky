@@ -16,14 +16,18 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 public class Pregnancy {
 	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 
-	public Pregnancy (Date estimatedBirdDate) {
-		mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
-		setEstimatedBirthDate(estimatedBirdDate);
+	public Pregnancy() {
+		this.mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
 		mPregnancy.setClassCode(ActClassObservation.OBS);
 		mPregnancy.setMoodCode(x_ActMoodDocumentObservation.EVN);
-		setInternalId(null);
 		mPregnancy.setCode(Pregnancies.DELIVERY_DATE_CLINICAL_ESTIMATE.getCD());
 		mPregnancy.setEffectiveTime(DateUtil.createUnknownTime(null));
+		setInternalId(null);
+	}
+	
+	public Pregnancy (Date estimatedBirdDate) {
+		this();
+		setEstimatedBirthDate(estimatedBirdDate);
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {

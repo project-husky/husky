@@ -26,12 +26,11 @@ import org.ehc.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
+import org.ehc.common.Value;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
@@ -42,6 +41,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 public class AllergyProblem {
 	AllergyIntolerance mAllergyProblem; 
 
+	public AllergyProblem () {
+		this.mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
+	}
+	
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
@@ -59,11 +62,11 @@ public class AllergyProblem {
 	 * @param internalProblemId
 	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
-	public AllergyProblem(boolean problemNotOccured, AllergiesAndIntolerances allergy) {
+	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 		mAllergyProblem.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
-		setProblemNotOccured(problemNotOccured);
-		setProblem(allergy.getCode());
+		setProblemNotOccured(false);
+		setCode(allergy);
 		setId(null);
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.UNK);
@@ -85,9 +88,9 @@ public class AllergyProblem {
 	 *            Freitextbeschreibung zu dem Problem oder Code zu
 	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 */
-	public AllergyProblem(boolean problemNotOccured, Date startOfProblem,
+	public AllergyProblem(Date startOfProblem,
 			Date endOfProblem, AllergiesAndIntolerances kindOfAllergy, org.ehc.common.Code problem) {
-		this(problemNotOccured, startOfProblem, endOfProblem, kindOfAllergy, problem, null);
+		this (startOfProblem, endOfProblem, kindOfAllergy, problem, null);
 
 	}
 
@@ -108,12 +111,12 @@ public class AllergyProblem {
 	 * @param internalProblemId
 	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
-	public AllergyProblem(boolean problemNotOccured, Date startOfProblem,
+	public AllergyProblem(Date startOfProblem,
 			Date endOfProblem, AllergiesAndIntolerances kindOfAllergy, org.ehc.common.Code problem, String internalProblemId) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
-		setProblemNotOccured(problemNotOccured);
+		setProblemNotOccured(false);
 		try {
-			setStartOfProblem(startOfProblem);
+			setStart(startOfProblem);
 			setEndOfProblem(endOfProblem);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -133,7 +136,7 @@ public class AllergyProblem {
 	/**
 	 * @return das codedProblem Objekt
 	 */
-	public org.ehc.common.Code getCodedProblem() {
+	public org.ehc.common.Code getCode() {
 		org.ehc.common.Code code = new org.ehc.common.Code(mAllergyProblem.getCode());
 		return code;
 	}
@@ -141,7 +144,7 @@ public class AllergyProblem {
 	/**
 	 * @return das endOfProblem Objekt
 	 */
-	public String getEndOfProblem() {
+	public String getEnd() {
 		return Util.createEurDateStrFromTS(mAllergyProblem
 				.getEffectiveTime().getHigh().getValue());
 	}
@@ -149,7 +152,7 @@ public class AllergyProblem {
 	/**
 	 * @return das startOfProblem Objekt
 	 */
-	public String getStartOfProblem() {
+	public String getStart() {
 		return Util.createEurDateStrFromTS(mAllergyProblem
 				.getEffectiveTime().getLow().getValue());
 	}
@@ -160,33 +163,16 @@ public class AllergyProblem {
 	 * <p>If the value is uncoded, the convenience API will return the xml reference to the free text description of the document for further processing. </p>
 	 * @return the problem value as string.
 	 */
-	public String getValue() { 
-		//TODO The best solution is to return the human readable content, if no code is available. 
-		//Maybe it´s better to generate a list with values here, but this way is more convenient and should be ok, in most of the cases.
-		for (ANY any : mAllergyProblem.getValues()) {
-			if (any instanceof CD) {
-				return ((CD) any).getCode();
-			}
-			if (any instanceof ED) {
-				return ((ED) any).getText();
-			}
-		}
-		return null;
+	public Value getValue() { 
+		Value value = new Value(mAllergyProblem.getValues().get(0));
+		return value;
 	}
 
 	/**
 	 * @return das problemNotOccured Objekt
 	 */
-	public boolean isProblemNotOccured() {
+	public boolean getProblemNotOccured() {
 		return mAllergyProblem.getNegationInd();
-	}
-
-	/**
-	 * @param codedProblem
-	 *            das codedProblem Objekt welches gesetzt wird
-	 */
-	public void setProblem(org.ehc.common.Code codedProblem) {
-		mAllergyProblem.setCode(codedProblem.getCD());
 	}
 
 	/**
@@ -217,7 +203,7 @@ public class AllergyProblem {
 	 *            das startOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setStartOfProblem(Date startOfProblem) throws ParseException {
+	public void setStart(Date startOfProblem) throws ParseException {
 		if (mAllergyProblem.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mAllergyProblem.setEffectiveTime(interval);
@@ -231,8 +217,16 @@ public class AllergyProblem {
 		mAllergyProblem.getValues().add(mCodedProblem);
 	}
 	
-	private void setCode(AllergiesAndIntolerances kindOfAllergy) {
+	public void setCode(AllergiesAndIntolerances kindOfAllergy) {
 		mAllergyProblem.setCode(kindOfAllergy.getCD());
+	}
+	
+	public AllergyIntolerance getMdhtAllergyProblem() {
+		return this.mAllergyProblem;
+	}
+	
+	public AllergyIntolerance copyMdAllergyIntolerance() {
+		return EcoreUtil.copy(mAllergyProblem);
 	}
 }
 

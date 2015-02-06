@@ -19,15 +19,11 @@
 package org.ehc.cda;
 
 import java.util.Date;
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -37,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class ProblemConcernEntry extends ConcernEntry {
 
 	protected org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry;
-
+	
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
@@ -109,6 +105,11 @@ public class ProblemConcernEntry extends ConcernEntry {
 		setId(null);
 	}
 
+	public ProblemConcernEntry() {
+		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
+		this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.getMdhtConcern();
+	}
+
 	/**
 	 * Fügt dem Leiden ein medizinisches Problem hinzu
 	 * 
@@ -127,10 +128,10 @@ public class ProblemConcernEntry extends ConcernEntry {
 		return EcoreUtil.copy(mProblemConcernEntry);
 	}
 
-	public List<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> getMdhtProblemEntryList() {
-		return mProblemConcernEntry.getProblemEntries();
-	}
-
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry getMdhtProblemConcernEntry() {
+		return mProblemConcernEntry;
+	} 
+	
 	/**
 	 * Gibt das (erste) medizinische Problem zu dem Leiden zurück
 	 * 

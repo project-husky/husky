@@ -28,6 +28,10 @@ import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
  */
 public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 
+	public ActiveProblemConcernEntry () {
+		super();
+	}
+	
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>

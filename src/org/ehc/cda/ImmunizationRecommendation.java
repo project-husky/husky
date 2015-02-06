@@ -39,6 +39,10 @@ public class ImmunizationRecommendation {
 
 	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
+	public ImmunizationRecommendation() {
+		this.mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
+	}
+	
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
@@ -134,7 +138,7 @@ public class ImmunizationRecommendation {
 	}
 
 	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
-		setMdhtImmunizationRecommendation(immunizationRecommendation);
+		mImmunizationRecommendation = immunizationRecommendation;
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
@@ -196,9 +200,9 @@ public class ImmunizationRecommendation {
 		}
 
 	}
-
-	public void setMdhtImmunizationRecommendation(org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
-		mImmunizationRecommendation = immunizationRecommendation;
+	
+	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
+		return this.mImmunizationRecommendation;
 	}
 
 	/**
@@ -221,4 +225,6 @@ public class ImmunizationRecommendation {
 			mImmunizationRecommendation.setNegationInd(false);
 		}
 	}
+	
+	
 }

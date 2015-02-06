@@ -47,7 +47,6 @@ import org.ehc.common.Util;
 import org.ehc.common.Value;
 import org.ehc.common.ch.SectionsVACD;
 import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Encounter;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -72,7 +71,6 @@ import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -172,7 +170,7 @@ public class CdaChVacd extends CdaCh {
 		komplikationsExpositionsrisikoCode.setCode("55607006");
 		komplikationsExpositionsrisikoCode.setCodeSystemName("SNOMED CT");
 		komplikationsExpositionsrisikoCode.setDisplayName("Problem");
-		problemConcern.getMdhtProblemEntryList().get(0).setCode(komplikationsExpositionsrisikoCode);
+		problemConcern.getMdhtProblemConcernEntry().getProblemEntries().get(0).setCode(komplikationsExpositionsrisikoCode);
 
 		// create a copy of the given object and its sub-objects
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
@@ -263,7 +261,7 @@ public class CdaChVacd extends CdaCh {
 		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(j, "d");
 		mWeeks.getValues().add(mWeeksValue);
 		mDays.getValues().add(mDaysValue);
-		II ii = Util.createUuidVacd(null);
+		II ii = Util.createUuidVacdIdentificator(null);
 		mWeeks.getIds().add(EcoreUtil.copy(ii));
 		mDays.getIds().add(EcoreUtil.copy(ii));
 		mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
@@ -472,22 +470,6 @@ public class CdaChVacd extends CdaCh {
 		return section;
 	}
 
-	private CE createLaboratorySpecialityCode() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode(SectionsVACD.SEROLOGY_STUDIES.getLoincCode());
-		ce.setCodeSystem("2.16.840.1.113883.6.1");
-		ce.setDisplayName("SEROLOGY STUDIES");
-		return ce;
-	}
-
-	private Section createLaboratorySpecialitySection() {
-		Section section = CDAFactory.eINSTANCE.createSection();
-		section.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.3.2.1"));
-		section.setCode(createLaboratorySpecialityCode());
-		section.setTitle(Util.st("Laborbefund"));
-		return section;
-	}
-
 	@SuppressWarnings("unused")
 	private Procedure createProcedure() {
 		Procedure procedure = IHEFactory.eINSTANCE.createProcedureEntryPlanOfCareActivityProcedure();
@@ -522,11 +504,6 @@ public class CdaChVacd extends CdaCh {
 				return (ImmunizationsSection) section;
 			}
 		}
-		return null;
-	}
-
-	private Section findLaboratorySpecialitySection() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -660,15 +637,6 @@ public class CdaChVacd extends CdaCh {
 			}
 		}
 		return labObservations;
-	}
-
-	private Section getLaboratorySpecialitySection() {
-		org.openhealthtools.mdht.uml.cda.Section section = findLaboratorySpecialitySection();
-		if (section == null) {
-			section = createLaboratorySpecialitySection();
-			doc.addSection(section);
-		}
-		return section;
 	}
 
 	private ArrayList<PastProblemConcernEntry> getPastProblemConcernEntries() {

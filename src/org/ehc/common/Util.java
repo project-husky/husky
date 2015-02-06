@@ -450,5 +450,16 @@ public class Util {
 		return ad;
 	}
 
+	public static II createUuidVacdIdentificator(Identificator id) {
+		II ii;
+		if (id == null){
+			ii = Util.createUuidVacd(null);
+		}
+		else {
+			ii = id.getIi();
+		}
+		return ii;
+	}
+
 
 }

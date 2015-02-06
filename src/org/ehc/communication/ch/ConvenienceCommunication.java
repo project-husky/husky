@@ -22,11 +22,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import org.ehc.cda.DocumentMetadata;
 import org.ehc.cda.ch.CdaCh;
 import org.ehc.cda.ch.CdaChVacd;
 import org.ehc.common.Identificator;
 import org.ehc.communication.Destination;
+import org.ehc.communication.DocumentMetadata;
 import org.ehc.communication.Response;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 

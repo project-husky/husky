@@ -56,7 +56,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class Immunization {
 
 	private org.openhealthtools.mdht.uml.cda.ihe.Immunization mImmunization;
-
 	private RouteOfAdministration routeCode;
 
 	/**

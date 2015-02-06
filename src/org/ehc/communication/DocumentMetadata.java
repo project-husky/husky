@@ -16,7 +16,7 @@
  *
  *******************************************************************************/
 
-package org.ehc.cda;
+package org.ehc.communication;
 
 import java.util.Calendar;
 

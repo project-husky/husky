@@ -12,7 +12,6 @@ import org.ehc.common.Organization;
 import org.ehc.common.Value;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -23,6 +22,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 public class LaboratoryObservation {
 	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
+	public LaboratoryObservation() {
+		this.mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
+	}
+	
 	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 
@@ -50,8 +53,12 @@ public class LaboratoryObservation {
 		mLaboratoryObservation = labObs;
 	}
 
-	public Observation copyMdhtLaboratoryObservation() {
+	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation copyMdhtLaboratoryObservation() {
 		return EcoreUtil.copy(mLaboratoryObservation);
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtOLaboratoryObservation() {
+		return mLaboratoryObservation;
 	}
 
 	public Code getCode() {

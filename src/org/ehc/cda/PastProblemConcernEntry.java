@@ -21,14 +21,14 @@ package org.ehc.cda;
 import java.util.Date;
 
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.cda.ch.enums.ProblemsSpecialConditions;
+import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
  * souffrance de la santé</div>
  */
 public class PastProblemConcernEntry extends ProblemConcernEntry {
-
+	
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer HistoryOfPastIllnessSection hinzugefügt werden.</div>
@@ -45,7 +45,8 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public PastProblemConcernEntry() {
-		super("Keine Angaben", new ProblemEntry(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()), ProblemConcernStatusCode.COMPLETED);
+		this.mProblemConcernEntry = IHEFactory.eINSTANCE.createProblemConcernEntry().init();
+		//super("Keine Angaben", new ProblemEntry(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()), ProblemConcernStatusCode.COMPLETED);
 		//super.getMdhtProblemConcernEntry().getObservations().get(0).get
 	}
 

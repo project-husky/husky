@@ -28,12 +28,11 @@ import org.ehc.common.Util;
 import org.ehc.common.Value;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Ein medizinisches Problem
@@ -42,8 +41,17 @@ public class ProblemEntry {
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
-	public ProblemEntry(Date date, Code code) {
-		this(date, null, code);
+	public ProblemEntry() {
+		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+		setNotOccured(false);
+	}
+	
+	public ProblemEntry(Date date, Value value) {
+		this(date, null, value);
+	}
+	
+	public ProblemEntry(Date date, Code value) {
+		this(date, null, value);
 	}
 
 	/**
@@ -61,8 +69,25 @@ public class ProblemEntry {
 	 */
 	public ProblemEntry(Date startOfProblem,
 			Date endOfProblem, org.ehc.common.Code problem) {
+		this(startOfProblem, endOfProblem, new Value(problem), null);
+	}
+	
+	/**
+	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
+	 * 
+	 * @param startOfProblem
+	 *            Beginn des Problems
+	 * @param endOfProblem
+	 *            Ende des Problems
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 */
+	public ProblemEntry(Date startOfProblem,
+			Date endOfProblem, org.ehc.common.Value problem) {
 		this(startOfProblem, endOfProblem, problem, null);
-
 	}
 
 	/**
@@ -81,11 +106,11 @@ public class ProblemEntry {
 	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
 	 */
 	public ProblemEntry(Date startOfProblem,
-			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
+			Date endOfProblem, org.ehc.common.Value problem, String internalProblemId) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
 		setNotOccured(false);
 		try {
-			setProblemStart(startOfProblem);
+			setStart(startOfProblem);
 			setEnd(endOfProblem);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -136,8 +161,18 @@ public class ProblemEntry {
 		mProblemEntry = problemEntry;
 	}
 
+	public ProblemEntry(Date startOfProblem, Date endOfProblem,
+			Code problemCode, Value problemValue) {
+		this(startOfProblem, endOfProblem, problemCode);
+		this.setValue(problemValue);
+	}
+
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry copyMdhtProblemEntry() {
 		return EcoreUtil.copy(mProblemEntry);
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
+		return mProblemEntry;
 	}
 
 	/**
@@ -216,7 +251,7 @@ public class ProblemEntry {
 	 *            das startOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setProblemStart(Date startOfProblem) throws ParseException {
+	public void setStart(Date startOfProblem) throws ParseException {
 		if (mProblemEntry.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mProblemEntry.setEffectiveTime(interval);
@@ -225,8 +260,14 @@ public class ProblemEntry {
 				DateUtil.createIVXB_TSFromDate(startOfProblem));
 	}
 
-	public void setValue(Code codedProblem) {
-		CD mCodedProblem = EcoreUtil.copy(codedProblem.getCD());
-		mProblemEntry.getValues().add(mCodedProblem);
+	public void setValue(Value problemValue) {
+		if (problemValue == null) {
+			CD cd = DatatypesFactory.eINSTANCE.createCD();
+			cd.setNullFlavor(NullFlavor.UNK);
+			mProblemEntry.getValues().add(cd);
+		}
+		else {
+			mProblemEntry.getValues().add(problemValue.getValue());
+		}
 	}
 }

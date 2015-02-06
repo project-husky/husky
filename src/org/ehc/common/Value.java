@@ -24,6 +24,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit
@@ -102,6 +103,13 @@ public class Value {
 		else {
 			return false;
 		}
+	}
+	
+	public ANY getValue() {
+		if (mValue == null) {
+			mValue.setNullFlavor(NullFlavor.UNK);
+		}
+		return mValue;
 	}
 
 	public boolean isPhysicalQuantity () {
