@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ActiveProblemConcernEntry;
 import org.ehc.cda.AllergyConcern;
 import org.ehc.cda.AllergyConcernTextBuilder;
-import org.ehc.cda.AllergyIntolerance;
 import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
@@ -38,11 +37,9 @@ import org.ehc.cda.Pregnancy;
 import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.cda.ProblemConcernEntryTextBuilder;
 import org.ehc.cda.ProblemConcernTextBuilder;
-import org.ehc.cda.Serologie;
 import org.ehc.cda.SimpleTextBuilder;
 import org.ehc.cda.ch.enums.LanguageCode;
 import org.ehc.cda.ch.enums.ProblemsSpecialConditions;
-import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
@@ -65,7 +62,6 @@ import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeWeeksSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection;
 import org.openhealthtools.mdht.uml.cda.ch.LaboratoryBatteryOrganizer;
-import org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation;
 import org.openhealthtools.mdht.uml.cda.ch.LaboratoryReportDataProcessingEntry;
 import org.openhealthtools.mdht.uml.cda.ch.SpecimenAct;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
@@ -81,13 +77,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
 /**
  * <div class="de" Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD entspricht.</div> <div
@@ -452,26 +444,6 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Fuegt eine Serologie hinzu.
-	 * 
-	 * @param serologie
-	 */
-	public void addSerologie(Serologie serologie) {
-		Act act = CDAFactory.eINSTANCE.createAct();
-		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
-		act.setMoodCode(x_DocumentActMood.EVN);
-
-		act.setCode(createLaboratorySpecialityCode());
-
-		act.setStatusCode(StatusCode.COMPLETED.getCS());
-		act.addObservation(createObservation(serologie));
-
-		act.getEntryRelationships().get(0).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-
-		getLaboratorySpecialitySection().addAct(act);
-	}
-
-	/**
 	 * Converts from IHE to convenience API class.
 	 * 
 	 * @param immunization
@@ -479,35 +451,6 @@ public class CdaChVacd extends CdaCh {
 	 */
 	private Immunization convert(org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization) {
 		return new Immunization(iheImmunization);
-	}
-
-	@SuppressWarnings("unused")
-	private CD createAllergyCode() {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setCode("213020009");
-		code.setCodeSystem("2.16.840.1.113883.6.96");
-		code.setCodeSystemName("SNOMED CT");
-		code.setDisplayName("Egg protein allergy (disorder)");
-		return code;
-	}
-
-	@SuppressWarnings("unused")
-	private CD createAllergyObservationCode(AllergyIntolerance allergie) {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setCode("FALG");
-		code.setCodeSystem("2.16.840.1.113883.5.4");
-		code.setCodeSystemName("ObservationIntoleranceType");
-		code.setDisplayName("");
-		return code;
-	}
-
-	private CD createCode(Serologie serologie) {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setCode("5193-3");
-		code.setCodeSystem("2.16.840.1.113883.6.1");
-		code.setCodeSystemName("LOINC");
-		code.setDisplayName(serologie.toString());
-		return code;
 	}
 
 	@SuppressWarnings("unused")
@@ -543,17 +486,6 @@ public class CdaChVacd extends CdaCh {
 		section.setCode(createLaboratorySpecialityCode());
 		section.setTitle(Util.st("Laborbefund"));
 		return section;
-	}
-
-	private Observation createObservation(Serologie serologie) {
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
-		observation.setClassCode(ActClassObservation.OBS);
-		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
-		observation.getTemplateIds().add(Util.ii("1.3.6.1.4.1.19376.1.3.1.6"));
-		observation.setCode(createCode(serologie));
-		observation.setStatusCode(StatusCode.COMPLETED.getCS());
-		observation.setEffectiveTime(DateUtil.convertDate(serologie.getDate()));
-		return observation;
 	}
 
 	@SuppressWarnings("unused")
