@@ -1,25 +1,26 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
+
 import org.ehc.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus den, in Kapitel 7.5.2.4 Spezifikation CDA Body Level 3  Problem Entry auf Seite 53 genannten Codesystemen dürfen ebenfalls verwendet werden.</div>
-*<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés des systèmes de codes mentionnés au cha-pitre 7.5.2.4 « Spécification CDA Body Level 3  Problem Entry » à la page 53</div>
-*/
+ *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus den, in Kapitel 7.5.2.4 Spezifikation CDA Body Level 3  Problem Entry auf Seite 53 genannten Codesystemen dürfen ebenfalls verwendet werden.</div>
+ *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés des systèmes de codes mentionnés au cha-pitre 7.5.2.4 « Spécification CDA Body Level 3  Problem Entry » à la page 53</div>
+ */
 public enum Allergies {
 
 	/** 
-	*<div class="de">Hühnereiweiss</div>
-	*<div class="fr">Protéine d’œufs de poule</div>
-	*/
+	 *<div class="de">Hühnereiweiss</div>
+	 *<div class="fr">Protéine d’œufs de poule</div>
+	 */
 	EGG_PROTEIN_SUBSTANCE ("303300008", "Egg protein (substance)"),
 	/** 
-	*<div class="de">Atopisches Ekzem</div>
-	*<div class="fr">Eczéma atopique</div>
-	*/
+	 *<div class="de">Atopisches Ekzem</div>
+	 *<div class="fr">Eczéma atopique</div>
+	 */
 	ATOPIC_DERMATITIS ("24079001", "Atopic dermatitis");
 	public static final String EGG_PROTEIN_SUBSTANCE_CODE="303300008";
 	public static final String ATOPIC_DERMATITIS_CODE="24079001";
@@ -37,19 +38,6 @@ public enum Allergies {
 		this.displayName = displayName;
 	}
 
-	public String getCodeValue() {
-		return this.code;
-	}
-
-	public String getdisplayName() {
-		return this.displayName;
-	}
-
-	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
-		return ehcCode;
-	}
-
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM);
@@ -58,10 +46,30 @@ public enum Allergies {
 		return cd;
 	}
 
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	public String getCodeValue() {
+		return code;
+	}
+
+	public String getdisplayName() {
+		return displayName;
+	}
+
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
-
 	public boolean isInValueSet(String code) {
 		for (Allergies x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -69,13 +77,6 @@ public enum Allergies {
 			}
 		}
 		return false;
-	}
-
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
 	}
 
 }

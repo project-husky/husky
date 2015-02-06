@@ -14,24 +14,6 @@ abstract class TextBuilder {
 	TextBuilder() {
 	}
 
-	protected String buildCell(String text) {
-		return ("<td>" + text + "</td>");
-	}
-
-	protected String buildCellWithContent(String text, int i, String prefix) {
-		return ("<td><content ID=\"" + prefix + i + "\">" + text + "</content></td>");
-	}
-
-	// old
-	protected void append(String text) {
-		buffer.append(text);
-	}
-
-	@Override
-	public String toString() {
-		return buffer.toString();
-	}
-
 	protected void addCell(String text) {
 		append("<td>");
 		append(text);
@@ -49,7 +31,25 @@ abstract class TextBuilder {
 		append(text);
 		append("</content>");
 	}
-	
+
+	// old
+	protected void append(String text) {
+		buffer.append(text);
+	}
+
+	protected String buildCell(String text) {
+		return ("<td>" + text + "</td>");
+	}
+
+	protected String buildCellWithContent(String text, int i, String prefix) {
+		return ("<td><content ID=\"" + prefix + i + "\">" + text + "</content></td>");
+	}
+
+	@Override
+	public String toString() {
+		return buffer.toString();
+	}
+
 	// public void build(String[] tableHeader, String[][] tableBody,
 	// Boolean referenceBodyCell[]) {
 	// this.tableHeader = tableHeader;

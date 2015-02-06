@@ -12,7 +12,7 @@ import org.ehc.common.Value;
 public class Serologie {
 	private Value value;
 	private Date date;
-	
+
 	/**
 	 * Constructor.
 	 * 
@@ -25,18 +25,18 @@ public class Serologie {
 		this.date = date;
 	}
 
-	public Value getValue() {
-		return value;
-	}
-
 	public Date getDate() {
 		return date;
+	}
+
+	public Value getValue() {
+		return value;
 	}
 
 	@Override
 	public String toString() {
 		return "Serologie [value=" + value + ", date=" + date + "]";
 	}
-	
-	
+
+
 }

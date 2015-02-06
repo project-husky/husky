@@ -75,13 +75,13 @@ public class DocumentProcessor {
 		VACD evacdocMdht = null;
 		//System.out.println("\n\n ===== Checking type of clinical document =====");
 		if (clinicalDocument instanceof CDACH) {
-			 //System.out.println("clinicalDocument is an instance of CDACH");
+			//System.out.println("clinicalDocument is an instance of CDACH");
 		}
 		if (clinicalDocument instanceof VACD) {
-			 //System.out.println("clinicalDocument is an instance of eVACDOC");
+			//System.out.println("clinicalDocument is an instance of eVACDOC");
 			evacdocMdht = (VACD) clinicalDocument;
 		} else {
-			 System.out.println("clinical document is NOT an instance of eVACDOC");
+			System.out.println("clinical document is NOT an instance of eVACDOC");
 		}
 		//System.out.println("\n\n");
 

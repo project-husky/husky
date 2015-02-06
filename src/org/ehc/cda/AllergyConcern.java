@@ -18,17 +18,13 @@
 
 package org.ehc.cda;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Util;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -55,8 +51,8 @@ public class AllergyConcern extends ConcernEntry {
 	 */
 	public AllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
-	  super(allergyConcern);
-	  this.mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
+		super(allergyConcern);
+		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
 	}
 
 	/**
@@ -75,15 +71,15 @@ public class AllergyConcern extends ConcernEntry {
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern, AllergyProblem problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode completed) {
-	    super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
-	    this.mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
-		this.setProblemConcern(concern);
-		this.addAllergy(problemEntry);
-		this.setCodedStatusOfConcern(completed);
-		this.setInternalId(null);
-		this.setEffectiveTime(null, null);
+		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
+		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
+		setProblemConcern(concern);
+		addAllergy(problemEntry);
+		setCodedStatusOfConcern(completed);
+		setId(null);
+		setEffectiveTime(null, null);
 	}
-	
+
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
@@ -108,7 +104,7 @@ public class AllergyConcern extends ConcernEntry {
 	public AllergyConcern(String concern,
 			Date begin, Date end, AllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
-		this.setEffectiveTime(begin, end);
+		setEffectiveTime(begin, end);
 	}
 
 	/**
@@ -118,26 +114,26 @@ public class AllergyConcern extends ConcernEntry {
 	 *            Das Problem
 	 */
 	public void addAllergy(AllergyProblem problemEntry) {
-	  mAllergyConcern.addObservation(problemEntry.mAllergyProblem);
+		mAllergyConcern.addObservation(problemEntry.mAllergyProblem);
 		mAllergyConcern.getEntryRelationships().get(0)
-	    .setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		mAllergyConcern.getEntryRelationships().get(0).setInversionInd(false);
 	}
-	
-    private void setInternalId(String id) {
-      II ii = Util.createUuidVacd(id);
-      mAllergyConcern.getIds().add(ii);
-    }
 
 	public org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern copyMdhtAllergyConcern() {
 		return EcoreUtil.copy(mAllergyConcern);
 	}
 
+	public List<org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance> getMdhtAllergyList() {
+		return mAllergyConcern.getAllergyIntolerances();
+	}
+
 	public void setAllergyConcern(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern) {
 		this.mAllergyConcern = mAllergyConcern;
 	}
-	
-	public List<org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance> getMdhtAllergyList() {
-      return this.mAllergyConcern.getAllergyIntolerances();
+
+	private void setId(String id) {
+		II ii = Util.createUuidVacd(id);
+		mAllergyConcern.getIds().add(ii);
 	}
 }

@@ -21,134 +21,134 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
 public class LaboratoryObservation {
-  org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
-  
-  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
-    mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
-    
-    this.setCode(code.getCode());
-    this.setInterpretationCode(immuneProtection);
-    this.setDateTimeOfResult(dateTimeOfResult);
-    this.setLaboratory(laboratory, dateTimeOfResult);
-  }
-  
-  //TODO Create Constructor for unknown Types of "Erregernachweise"
- 
-  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, double value, String valuesUcumUnit, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
-    this(code, immuneProtection, dateTimeOfResult, laboratory);
-    
-    this.setValue(value, valuesUcumUnit);
-  }
-  
-  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Code valueCode, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
-    this(code, immuneProtection, dateTimeOfResult, laboratory);
-    
-    this.setValue(valueCode);
-  }
+	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
-  public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
-    this.mLaboratoryObservation = labObs;
-  }
+	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 
-  public void setValue(double value, String valuesUcumUnit) {
-    PQ pq = DatatypesFactory.eINSTANCE.createPQ(value, valuesUcumUnit);
-    mLaboratoryObservation.getValues().add(pq);
-  }
-  
-  public void setValue(Value value) {
-   if (value.isPhysicalQuantity()) {
-     mLaboratoryObservation.getValues().add(value.copyMdhtPhysicalQuantity());
-   }
-   if (value.isCode()) {
-     mLaboratoryObservation.getValues().add(value.copyMdhtCode());
-   }
-  }
-  
-  public void setValue(Code code) {
-    mLaboratoryObservation.getValues().add(code.getCD());
-  }
-  
-  public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {
-    Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
-    AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
-    
-    II ii = DatatypesFactory.eINSTANCE.createII(CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
-    asEnt.getIds().add(ii);
-    
-    asEnt.getRepresentedOrganizations().add(laboratory.copyMdhtOrganization());
-    perf.setAssignedEntity(asEnt);
-    perf.setTypeCode(ParticipationPhysicalPerformer.PRF);
-    try {
-      perf.setTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    mLaboratoryObservation.getPerformers().add(perf);
-  }
-  
-  public Organization getLaboratory() {
-    if (mLaboratoryObservation.getPerformers().size()>0) {
-      if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity() != null) {
-        if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().size()>0) {
-           return new Organization(mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().get(0));
-        }
-      }
-    }
-    return null;
-  }
+		setCode(code.getCode());
+		setInterpretationCode(immuneProtection);
+		setDateTimeOfResult(dateTimeOfResult);
+		setLaboratory(laboratory, dateTimeOfResult);
+	}
 
-  public void setDateTimeOfResult(Date dateTimeOfResult) {
-    try {
-      mLaboratoryObservation.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
-  
-  public Date getDateTimeOfResult() {
-    if (mLaboratoryObservation.getPerformers().size()>0) {
-      return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime());
-    }
-    else {
-      return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
-    }
-  }
+	//TODO Create Constructor for unknown Types of "Erregernachweise"
 
-  public void setInterpretationCode(boolean immuneProtection) {
-    if (immuneProtection == true) {
-      mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCE());
-    }
-    else {
-      mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN.getCE());
-    }
-  }
-  
-  public boolean getImmuneProtection() {
-    if (mLaboratoryObservation.getInterpretationCodes().get(0).equals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCode())) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-  
-  public String getInterpretationCode() {
-    return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-  }
+	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Code valueCode, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
-  public void setCode(Code code) {
-    mLaboratoryObservation.setCode(code.getCD());
-  }
-  
-  public Code getCode() {
-    Code code = new Code(mLaboratoryObservation.getCode());
-    return code;
-  }
+		this.setValue(valueCode);
+	}
 
-  public Observation copyMdhtLaboratoryObservation() {
-    return EcoreUtil.copy(mLaboratoryObservation);
-  }
+	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, double value, String valuesUcumUnit, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+		this(code, immuneProtection, dateTimeOfResult, laboratory);
+
+		this.setValue(value, valuesUcumUnit);
+	}
+
+	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
+		mLaboratoryObservation = labObs;
+	}
+
+	public Observation copyMdhtLaboratoryObservation() {
+		return EcoreUtil.copy(mLaboratoryObservation);
+	}
+
+	public Code getCode() {
+		Code code = new Code(mLaboratoryObservation.getCode());
+		return code;
+	}
+
+	public Date getDateTimeOfResult() {
+		if (mLaboratoryObservation.getPerformers().size()>0) {
+			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime());
+		}
+		else {
+			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
+		}
+	}
+
+	public boolean getImmuneProtection() {
+		if (mLaboratoryObservation.getInterpretationCodes().get(0).equals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCode())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public String getInterpretationCode() {
+		return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
+	}
+
+	public Organization getLaboratory() {
+		if (mLaboratoryObservation.getPerformers().size()>0) {
+			if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity() != null) {
+				if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().size()>0) {
+					return new Organization(mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().get(0));
+				}
+			}
+		}
+		return null;
+	}
+
+	public void setCode(Code code) {
+		mLaboratoryObservation.setCode(code.getCD());
+	}
+
+	public void setDateTimeOfResult(Date dateTimeOfResult) {
+		try {
+			mLaboratoryObservation.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setInterpretationCode(boolean immuneProtection) {
+		if (immuneProtection == true) {
+			mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCE());
+		}
+		else {
+			mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN.getCE());
+		}
+	}
+
+	public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {
+		Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
+		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
+
+		II ii = DatatypesFactory.eINSTANCE.createII(CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
+		asEnt.getIds().add(ii);
+
+		asEnt.getRepresentedOrganizations().add(laboratory.copyMdhtOrganization());
+		perf.setAssignedEntity(asEnt);
+		perf.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		try {
+			perf.setTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		mLaboratoryObservation.getPerformers().add(perf);
+	}
+
+	public void setValue(Code code) {
+		mLaboratoryObservation.getValues().add(code.getCD());
+	}
+
+	public void setValue(double value, String valuesUcumUnit) {
+		PQ pq = DatatypesFactory.eINSTANCE.createPQ(value, valuesUcumUnit);
+		mLaboratoryObservation.getValues().add(pq);
+	}
+
+	public void setValue(Value value) {
+		if (value.isPhysicalQuantity()) {
+			mLaboratoryObservation.getValues().add(value.copyMdhtPhysicalQuantity());
+		}
+		if (value.isCode()) {
+			mLaboratoryObservation.getValues().add(value.copyMdhtCode());
+		}
+	}
 }

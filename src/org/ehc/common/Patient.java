@@ -24,10 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehc.cda.ch.enums.AdministrativeGender;
-import org.ehc.common.Address;
-import org.ehc.common.Identificator;
-import org.ehc.common.Name;
-import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -70,7 +66,7 @@ public class Patient extends Person {
 	 *            Geburtsdatum (als Text) Beispiel:20.05.1967
 	 */
 	public Patient(Name name, AdministrativeGender sex, String birthDate) {
-	  super(name.getGivenName(), name.getFamilyName());
+		super(name.getGivenName(), name.getFamilyName());
 		// Create the patientRole
 		setRecordTarget(CDAFactory.eINSTANCE.createRecordTarget());
 		PatientRole patientRole = CDAFactory.eINSTANCE.createPatientRole();
@@ -82,7 +78,7 @@ public class Patient extends Person {
 		patientRole.setPatient(patient);
 
 		// Create and fill gender
-		patient.setAdministrativeGenderCode((CE) sex.getCE());
+		patient.setAdministrativeGenderCode(sex.getCE());
 
 		// Fill Patient Name
 		patient.getNames().add(name.getPn());
@@ -102,7 +98,7 @@ public class Patient extends Person {
 	 * @param recordTarget
 	 */
 	protected Patient(RecordTarget recordTarget) {
-		this.mRecordTarget = recordTarget;
+		mRecordTarget = recordTarget;
 	}
 
 	/**
@@ -121,6 +117,7 @@ public class Patient extends Person {
 	 * @param identificator
 	 *            Identificator
 	 */
+	@Override
 	public void addID(Identificator identificator) {
 		II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(identificator.getRoot());
@@ -137,6 +134,7 @@ public class Patient extends Person {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
+	@Override
 	public void addPhone(String phoneNr, UseCode usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		TelecommunicationAddressUse useCode = TelecommunicationAddressUse.HP;
@@ -158,19 +156,20 @@ public class Patient extends Person {
 		getRecordTarget().getPatientRole().getTelecoms().add(tel);
 	}
 
-	public RecordTarget getRecordTarget() {
-		return this.mRecordTarget;
+	private Address convertAddress(AD ad) {
+		String street = ad.getStreetNames().get(0).getText();
+		String houseNumber = ad.getHouseNumbers().get(0).getText();
+		String zip = ad.getPostalCodes().get(0).getText();
+		String city = ad.getCities().get(0).getText();
+
+		return new Address(street, houseNumber, zip, city);
 	}
 
-	public void setRecordTarget(RecordTarget mRecordTarget) {
-		this.mRecordTarget = mRecordTarget;
+	public Address getAddress() {
+		AD ad = mRecordTarget.getPatientRole().getAddrs().get(0);
+		return convertAddress(ad);
 	}
 
-	public Name getName() {
-		PN pn = getPatient().getNames().get(0);
-		return new Name(pn);
-	}
-	
 	public Date getBirthDate() {
 		try {
 			TS birthTime = getPatient().getBirthTime();
@@ -180,7 +179,7 @@ public class Patient extends Person {
 			throw new IllegalArgumentException("Cannot convert birthdate", e);
 		}
 	}
-	
+
 	public AdministrativeGender getGenderCode() {
 		CE code = getPatient().getAdministrativeGenderCode();
 		if ("M".equals(code.getCode())) {
@@ -191,27 +190,26 @@ public class Patient extends Person {
 			return AdministrativeGender.UNDIFFERENTIATED;
 		}
 	}
-	
-	private Date parseDate(String value) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		return sdf.parse(value);
+
+	public Name getName() {
+		PN pn = getPatient().getNames().get(0);
+		return new Name(pn);
 	}
-	
+
 	private org.openhealthtools.mdht.uml.cda.Patient getPatient() {
 		return mRecordTarget.getPatientRole().getPatient();
 	}
 
-	public Address getAddress() {
-		AD ad = mRecordTarget.getPatientRole().getAddrs().get(0);
-		return convertAddress(ad);
+	public RecordTarget getRecordTarget() {
+		return mRecordTarget;
 	}
 
-	private Address convertAddress(AD ad) {
-		String street = ad.getStreetNames().get(0).getText();
-		String houseNumber = ad.getHouseNumbers().get(0).getText();
-		String zip = ad.getPostalCodes().get(0).getText();
-		String city = ad.getCities().get(0).getText();
-		
-		return new Address(street, houseNumber, zip, city);
+	private Date parseDate(String value) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.parse(value);
+	}
+
+	public void setRecordTarget(RecordTarget mRecordTarget) {
+		this.mRecordTarget = mRecordTarget;
 	}
 }

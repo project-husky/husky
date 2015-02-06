@@ -15,14 +15,14 @@ public enum RouteCode {
 	SQ("Injection, subcutaneous/Injektion, subkutan"),
 	TRNSDERMD("Diffusion, transdermal/Diffusion, transdermal"),
 	IM("Injection, intramuscular/Injektion, intramuskulär");
-	
+
 	private String displayName;
-	
+
 	private RouteCode(String value) {
-		this.displayName = value;
+		displayName = value;
 	}
-	
+
 	public String getDisplayName() {
-		return this.displayName;
+		return displayName;
 	}
 }

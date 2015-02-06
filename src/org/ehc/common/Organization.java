@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
-import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -37,6 +36,10 @@ public class Organization {
 
 	public org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
+	public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
+		mOrganization = organization;
+	}
+
 	//TODO Verschiedene Konstruktoren für unterschiedliche Organisationen angeben:
 	//1. Verein, Firma, Versicherung etc. (nur Name)
 	//2. Spital / Arztpraxis (ID: GLN)
@@ -48,37 +51,21 @@ public class Organization {
 	 */
 	public Organization(String name) {
 		setOrganization(CDAFactory.eINSTANCE.createOrganization());
-		this.addName(name);
+		addName(name);
 	}
-	
-	 /**
-     * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene ID (GLN) verfügt
-     * 
-     * @param name
-     *            Name der Organisation
-     */
-    public Organization(String name, String gln) {
-        this(name);
-        II id = DatatypesFactory.eINSTANCE.createII();
-        id.setRoot(ConvenienceUtilsEnums.knownOID(KnownOID.GLN));
-        id.setExtension(gln);
-        mOrganization.getIds().add(id);
-    }
 
-    public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
-      this.mOrganization = organization;
-    }
-
-    /**
-	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
+	/**
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene ID (GLN) verfügt
 	 * 
 	 * @param name
-	 *            Name
+	 *            Name der Organisation
 	 */
-	public void addName(String name) {
-		ON orgaName = DatatypesFactory.eINSTANCE.createON();
-		getMdhtOrganization().getNames().add(orgaName);
-		orgaName.addText(name);
+	public Organization(String name, String gln) {
+		this(name);
+		II id = DatatypesFactory.eINSTANCE.createII();
+		id.setRoot(ConvenienceUtilsEnums.knownOID(KnownOID.GLN));
+		id.setExtension(gln);
+		mOrganization.getIds().add(id);
 	}
 
 	/**
@@ -119,6 +106,18 @@ public class Organization {
 	}
 
 	/**
+	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
+	 * 
+	 * @param name
+	 *            Name
+	 */
+	public void addName(String name) {
+		ON orgaName = DatatypesFactory.eINSTANCE.createON();
+		getMdhtOrganization().getNames().add(orgaName);
+		orgaName.addText(name);
+	}
+
+	/**
 	 * Weist der Organisation eine Telefonnummer zu
 	 * 
 	 * @param phoneNr
@@ -145,6 +144,23 @@ public class Organization {
 		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
+	public org.openhealthtools.mdht.uml.cda.Organization copyMdhtOrganization() {
+		return EcoreUtil.copy(mOrganization);
+	}
+
+	/**
+	 * Gibt die ID der Organisation zurück (wenn z.B. eine GLN vorhanden ist)
+	 * 
+	 * @return ID der Organisation
+	 */
+	public String getId() {
+		return getMdhtOrganization().getIds().get(0).getExtension();
+	}
+
+	public org.openhealthtools.mdht.uml.cda.Organization getMdhtOrganization() {
+		return mOrganization;
+	}
+
 	/**
 	 * Gibt den Namen der Organisation zurück
 	 * 
@@ -153,26 +169,9 @@ public class Organization {
 	public String getName() {
 		return getMdhtOrganization().getNames().get(0).getText();
 	}
-	
-	 /**
-     * Gibt die ID der Organisation zurück (wenn z.B. eine GLN vorhanden ist)
-     * 
-     * @return ID der Organisation
-     */
-    public String getId() {
-        return getMdhtOrganization().getIds().get(0).getExtension();
-    }
 
 	public List<TEL> getTelecoms() {
 		return getMdhtOrganization().getTelecoms();
-	}
-
-	public org.openhealthtools.mdht.uml.cda.Organization getMdhtOrganization() {
-		return mOrganization;
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.Organization copyMdhtOrganization() {
-      return EcoreUtil.copy(mOrganization);
 	}
 
 	public void setOrganization(org.openhealthtools.mdht.uml.cda.Organization mOrganization) {

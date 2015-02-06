@@ -29,99 +29,99 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit
  */
 public class Value {
-  ANY mValue;
+	ANY mValue;
 
-  /**
-   * Erstellt einen neuen Wert
-   * 
-   * @param value
-   *          Der eigentliche Wert
-   * @param unit
-   *          Die Einheit
-   */
-  public Value(String value, UCUM unit) {
-    this(DatatypesFactory.eINSTANCE.createPQ());
-    this.setPqValue(value);
-    this.setUcumUnit(unit);
-  }
+	public Value(CD cd) {
+		mValue = cd;
+	}
 
-  private void setUcumUnit(UCUM unit) {
-    PQ pq = (PQ) this.mValue;
-    pq.setUnit(unit.toString());
-  }
+	public Value(Code code) {
+		mValue = code.getCD();
+	}
 
-  private void setPqValue(String value) {
-    PQ pq = (PQ) this.mValue;
-    pq.setValue(Double.valueOf(value));
-  }
+	public Value(PQ pq) {
+		mValue = pq;
+	}
 
-  public Value(PQ pq) {
-    this.mValue = pq;
-  }
-  
-  public Value(CD cd) {
-    this.mValue = cd;
-  }
-  
-  public Value(Code code) {
-    this.mValue = code.getCD();
-  }
+	/**
+	 * Erstellt einen neuen Wert
+	 * 
+	 * @param value
+	 *          Der eigentliche Wert
+	 * @param unit
+	 *          Die Einheit
+	 */
+	public Value(String value, UCUM unit) {
+		this(DatatypesFactory.eINSTANCE.createPQ());
+		setPqValue(value);
+		setUcumUnit(unit);
+	}
 
-  /**
-   * Gibt den Wert zurück
-   * 
-   * @return 
-   *  Der eigentlich Wert
-   */
-  public String getPhysicalQuantityValue() {
-    PQ pq = (PQ) this.mValue;
-    return String.valueOf(pq.getValue());
-  }
+	public CD copyMdhtCode() {
+		return EcoreUtil.copy((CD) mValue);
+	}
 
-  /**
-   * Gibt die Einheit zurück
-   * 
-   * @return Die Einheit
-   */
-  public String getPhysicalQuantityUnit() {
-    PQ pq = (PQ) this.mValue;
-    return pq.getUnit();
-  }
-  
-  public PQ copyMdhtPhysicalQuantity() {
-    return EcoreUtil.copy((PQ) mValue);
-  }
-  
-  public CD copyMdhtCode() {
-   return EcoreUtil.copy((CD) this.mValue);
-  }
-   
-  public Code getCode() {
-    Code code = new Code ((CD) this.mValue);
-    return code;
-  }
+	public PQ copyMdhtPhysicalQuantity() {
+		return EcoreUtil.copy((PQ) mValue);
+	}
 
-  @Override
-  public String toString() {
-    return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit() + "]";
-  }
+	public Code getCode() {
+		Code code = new Code ((CD) mValue);
+		return code;
+	}
 
-  public boolean isPhysicalQuantity () {
-    if (this.mValue instanceof PQ) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
+	/**
+	 * Gibt die Einheit zurück
+	 * 
+	 * @return Die Einheit
+	 */
+	public String getPhysicalQuantityUnit() {
+		PQ pq = (PQ) mValue;
+		return pq.getUnit();
+	}
 
-  public boolean isCode() {
-    if (this.mValue instanceof CD) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
+	/**
+	 * Gibt den Wert zurück
+	 * 
+	 * @return 
+	 *  Der eigentlich Wert
+	 */
+	public String getPhysicalQuantityValue() {
+		PQ pq = (PQ) mValue;
+		return String.valueOf(pq.getValue());
+	}
+
+	public boolean isCode() {
+		if (mValue instanceof CD) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isPhysicalQuantity () {
+		if (mValue instanceof PQ) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private void setPqValue(String value) {
+		PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	private void setUcumUnit(UCUM unit) {
+		PQ pq = (PQ) mValue;
+		pq.setUnit(unit.toString());
+	}
+
+	@Override
+	public String toString() {
+		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit() + "]";
+	}
 
 }

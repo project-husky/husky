@@ -18,11 +18,9 @@
 
 package org.ehc.cda;
 
-import java.text.DateFormat;
 import java.util.Date;
 
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.cda.ch.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -58,25 +56,6 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 * @param concern
 	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 */
-	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
-	  super(concern, problemEntry, concernStatus);
-	}
-	
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
 	 * @param aborted
 	 *            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
@@ -93,8 +72,27 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 		super(concern, begin, end, problemEntry, problemConcernStatus);
 	}
 
-  public ActiveProblemConcernEntry(String string, Date date, ProblemEntry problemEntry,
-      ProblemConcernStatusCode problemStatusCode) {
-    this(string, date, null, problemEntry, problemStatusCode);
-  }
+	public ActiveProblemConcernEntry(String string, Date date, ProblemEntry problemEntry,
+			ProblemConcernStatusCode problemStatusCode) {
+		this(string, date, null, problemEntry, problemStatusCode);
+	}
+
+	/**
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 * 
+	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+	 * être ajouté dans ActiveProblemsSection.</div>
+	 * 
+	 * @param concern
+	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param concernStatus
+	 *            <div class="de">Der Status Code des Leidens
+	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
+	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 */
+	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+		super(concern, problemEntry, concernStatus);
+	}
 }

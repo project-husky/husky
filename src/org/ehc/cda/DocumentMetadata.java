@@ -1,20 +1,20 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by
-* medshare GmbH, Switzerland. All rights reserved.
-* http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the
-* Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the
-* Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
-*
-* Year of publication: 2014
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
+ *
+ * Year of publication: 2014
+ *
+ *******************************************************************************/
 
 package org.ehc.cda;
 
@@ -107,35 +107,35 @@ public class DocumentMetadata {
 	 * @return das codedLanguage Objekt
 	 */
 	public Language getCodedLanguage() {
-		return this.codedLanguage;
+		return codedLanguage;
 	}
 
 	/**
 	 * @return das dateOfDocumentCreation Objekt
 	 */
 	public Calendar getDateOfDocumentCreation() {
-		return this.dateOfDocumentCreation;
+		return dateOfDocumentCreation;
 	}
 
 	/**
 	 * @return das documentId Objekt
 	 */
 	public String getDocumentId() {
-		return this.documentId;
+		return documentId;
 	}
 
 	/**
 	 * @return das title Objekt
 	 */
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	/**
 	 * @return das versionId Objekt
 	 */
 	public String getVersionId() {
-		return this.versionId;
+		return versionId;
 	}
 
 	/**

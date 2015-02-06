@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.cda.ch.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.ch.EDES;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.EDES;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 public class CdaChEdes extends CdaCh {
@@ -27,11 +27,11 @@ public class CdaChEdes extends CdaCh {
 	 */
 	public CdaChEdes(EDES doc) {
 		super(doc);
-		this.setDoc(doc);
+		setDoc(doc);
 	}
 
 	//TODO Der Konstruktor sollte alle minimal benötigten Elemente enthalten (also alle Sections), damit die Anwender wissen, was sie zuvor zusammenbauen müssen.
-	
+
 	/**
 	 * Erstellt ein neues CdaChEdes CDA Dokument.
 	 *
@@ -54,13 +54,13 @@ public class CdaChEdes extends CdaCh {
 			org.ehc.cda.ProblemConcernEntry problemConcern) {
 
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
-		
-		if (this.getDoc().getActiveProblemsSections() == null) {
+
+		if (getDoc().getActiveProblemsSections() == null) {
 			activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-			this.getDoc().addSection(activeProblemsSection);
+			getDoc().addSection(activeProblemsSection);
 		}
 		else {
-			activeProblemsSection = this.getDoc().getActiveProblemsSections().get(0);
+			activeProblemsSection = getDoc().getActiveProblemsSections().get(0);
 		}
 
 		// set up the narrative (human-readable) text portion of the ProblemConcern Section
@@ -86,10 +86,19 @@ public class CdaChEdes extends CdaCh {
 		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht = EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
 		activeProblemsSection.addAct(problemConcernEntryMdht);
 	}
-	
+
 	public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
-		ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) this.getDoc().getActiveProblemsSections().get(0).getActs().get(leidenNr));
+		ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) getDoc().getActiveProblemsSections().get(0).getActs().get(leidenNr));
 		return problemConcernEntry;
+	}
+
+	/**
+	 * Liefert das MDHT-CDAEDESCTNN-Objekt zurück
+	 *
+	 * @return the doc
+	 */
+	public EDES getDoc () {
+		return (EDES) doc;
 	}
 
 	/**
@@ -116,15 +125,6 @@ public class CdaChEdes extends CdaCh {
 		}
 
 		return problemConcernEntryList;
-	}
-
-	/**
-	 * Liefert das MDHT-CDAEDESCTNN-Objekt zurück
-	 *
-	 * @return the doc
-	 */
-	public EDES getDoc () {
-		return (EDES) this.doc;
 	}
 
 	/**

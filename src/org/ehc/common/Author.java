@@ -20,11 +20,6 @@ package org.ehc.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.CodeSystems;
-import org.ehc.common.Address;
-import org.ehc.common.DateUtil;
-import org.ehc.common.Identificator;
-import org.ehc.common.Name;
-import org.ehc.common.Util;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
@@ -42,15 +37,12 @@ public class Author {
 	org.openhealthtools.mdht.uml.cda.Author mAuthor;
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
-	 * Objekts
-	 * 
-	 * @param authorMdht
+	 * @param iAuthor
 	 */
-	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
-		this.mAuthor = authorMdht;
+	public Author(AuthorType iAuthor) {
+		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
-	
+
 	//TODO Hier wäre es evtl. sinnvoller für einen Arzt eine eigene Klasse zu erstellen, in der die GLN Verpflichtend anzugeben ist. Beim Aufruf des VACD-Konstruktors wird dann eben diese Klasse dem Dokument hinzugefügt (daraus kann dann auch gleich die ID für den Custodian generiert werden).
 
 	/**
@@ -77,27 +69,21 @@ public class Author {
 		asAuth.getIds().add(id);
 
 		mAuthor.setAssignedAuthor(asAuth);
-		
+
 		// add functionCode and time
 		mAuthor.setFunctionCode(createFunctionCode());
 		mAuthor.setTime(DateUtil.nowAsTS());
 		this.addName(name);
 	}
-	
-	private CE createFunctionCode() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode("221");
-		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
-		ce.setCodeSystemName("ISCO-08");
-		ce.setDisplayName("Medical doctors");
-		return ce;
-	}
 
 	/**
-	 * @param iAuthor
+	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
+	 * Objekts
+	 * 
+	 * @param authorMdht
 	 */
-	public Author(AuthorType iAuthor) {
-		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
+	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
+		mAuthor = authorMdht;
 	}
 
 	/**
@@ -148,6 +134,16 @@ public class Author {
 		mAuthor.getAssignedAuthor().getIds().add(identificator.getIi());
 	}
 
+	public void addName(Name name) {
+		mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
+		.add(name.getPn());
+	}
+
+	public void addName(String familyName) {
+		mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0)
+		.getFamilies().add(Util.createName(familyName));
+	}
+
 	/**
 	 * Weist dem Autor eine Telefonnummer zu
 	 * 
@@ -187,40 +183,39 @@ public class Author {
 
 	}
 
-	public void addName(Name name) {
-		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-				.add(name.getPn());
+	private CE createFunctionCode() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("221");
+		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
+		ce.setCodeSystemName("ISCO-08");
+		ce.setDisplayName("Medical doctors");
+		return ce;
 	}
 
-	public void addName(String familyName) {
-		this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0)
-				.getFamilies().add(Util.createName(familyName));
+	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
+		return EcoreUtil.copy(mAuthor);
 	}
 
 	public String getCompleteName() {
 		//Search for the author name. If it isn´t there, try to use the organisation name.
-	  if (mAuthor.getAssignedAuthor() != null) {
-		  if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
-		    if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
-		      Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
-	                .getNames().get(0));
-		        return name.getCompleteName();
-		  }
-		  else {
-		    if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-		      if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
-	            Name name = new Name(mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
-	            return name.getCompleteName();
-		      }
-		    }
-		  }
-		  }
+		if (mAuthor.getAssignedAuthor() != null) {
+			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
+				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
+					Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson()
+							.getNames().get(0));
+					return name.getCompleteName();
+				}
+				else {
+					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
+						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+							Name name = new Name(mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
+							return name.getCompleteName();
+						}
+					}
+				}
+			}
 		}
-    return "";
-	}
-
-	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
-		return EcoreUtil.copy(this.mAuthor);
+		return "";
 	}
 
 	public String getGln() {
@@ -233,6 +228,6 @@ public class Author {
 		// TODO Construct Enums that deliver the real OIDs in Numbers (like in
 		// hl7.vocab.PostalAdressUse). Replace the construction of the II in the
 		// following line with this number.
-		this.addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 }

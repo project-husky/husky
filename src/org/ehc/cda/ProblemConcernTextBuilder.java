@@ -3,10 +3,7 @@ package org.ehc.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehc.common.Util;
 import org.ehc.common.ch.SectionsVACD;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Observation;
 
 /**
  * Builds the <text> part of the Treatment plan section.
@@ -32,10 +29,30 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		init();
 	}
 
+	private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
+		StringBuilder rowBuilder = new StringBuilder();
+		rowBuilder.append("<tr>");
+		rowBuilder.append(buildCell("Komplikationsrisiko"));
+		rowBuilder
+		.append(buildCellWithContent(
+				newProblemConcernEntry2.getConcern(), newId,
+				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
+		rowBuilder.append("</tr>");
+		return rowBuilder.toString();
+	}
+
+	public ActiveProblemConcernEntry getProblemConcernEntry() {
+		return newProblemConcernEntry;
+	}
+
+	public String getSectionText() {
+		return sectionText;
+	}
+
 	public void init() {
 		// ID
 		if (problemConcernEntries.size() != 0) {
-			this.newId = problemConcernEntries.size() + 1;
+			newId = problemConcernEntries.size() + 1;
 			if (sectionText.equals("") || sectionText == null)
 				try {
 					throw new Exception(
@@ -44,12 +61,12 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 					e.printStackTrace();
 				}
 		} else {
-			this.newId = 1;
-			this.sectionText = tableStub + tableFooter;
+			newId = 1;
+			sectionText = tableStub + tableFooter;
 		}
 
-		this.sectionText = insertRow(newProblemConcernEntry, newId,
-				this.sectionText);
+		sectionText = insertRow(newProblemConcernEntry, newId,
+				sectionText);
 	}
 
 	public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,
@@ -66,26 +83,6 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		String tableStr = sectionText
 				.replace(tableFooter, rowStr + tableFooter);
 		return tableStr;
-	}
-
-	private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
-		StringBuilder rowBuilder = new StringBuilder();
-		rowBuilder.append("<tr>");
-		rowBuilder.append(buildCell("Komplikationsrisiko"));
-		rowBuilder
-				.append(buildCellWithContent(
-						newProblemConcernEntry2.getConcern(), newId,
-						SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
-		rowBuilder.append("</tr>");
-		return rowBuilder.toString();
-	}
-
-	public ActiveProblemConcernEntry getProblemConcernEntry() {
-		return this.newProblemConcernEntry;
-	}
-
-	public String getSectionText() {
-		return this.sectionText;
 	}
 
 	//

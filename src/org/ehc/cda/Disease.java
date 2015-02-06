@@ -22,29 +22,29 @@ public enum Disease {
 	HEPATITE_A("40468003", "243789007"),
 	CE_ENCEPHALITIS("16901001", "281658005"),
 	YELLOW_FEVER("16541001", "67308009");
-	
+
 	private String snomedCode;
 	private String snomedCodeProcedure;
 
 	private Disease() {
 		this(null);
 	}
-		
+
 	private Disease(String snomedCode) {
 		this.snomedCode = snomedCode;
-		this.snomedCodeProcedure = "tbd";
+		snomedCodeProcedure = "tbd";
 	}
-	
+
 	Disease(String snomedCode, String procedureCode) {
 		this.snomedCode = snomedCode;
-		this.snomedCodeProcedure = procedureCode;
+		snomedCodeProcedure = procedureCode;
 	}	
+
+	public String getProcedureCode() {
+		return snomedCodeProcedure;
+	}
 
 	public String getSnomedCode() {
 		return snomedCode;
-	}
-	
-	public String getProcedureCode() {
-		return snomedCodeProcedure;
 	}
 }

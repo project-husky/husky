@@ -18,8 +18,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 public class ImmunizationTextBuilder extends TextBuilder {
 
 	//TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
-    private List<Immunization> immunizations;
-	
+	private List<Immunization> immunizations;
+
 	/**
 	 * Constructor.
 	 * 
@@ -28,33 +28,6 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	public ImmunizationTextBuilder(List<Immunization> immunizations) {
 		this.immunizations = immunizations;
 	}
-	
-	public List<Immunization> getUpdatedImmunizations() {
-	  int i = 0;
-	  for (Immunization immunization : this.immunizations) {
-	    ED reference = Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
-	    SubstanceAdministration substanceAdminstration = immunization.getImmunization();
-	    substanceAdminstration.setText(reference);
-	    //.getSubstanceAdministrations().get(0);
-	    i++;
-	  }
-    return immunizations;  
-	}
-	
-	/**
-	 * Returns HTML formatted string.
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-  public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
-	}
-	
 
 	private void addBody() {
 		append("<tbody>");
@@ -64,7 +37,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		}
 		append("</tbody>");
 	}
-	
+
 	private void addHeader() {
 		append("<thead>");
 		append("<tr>");
@@ -79,6 +52,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
+
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
 		addCellWithContent(immunization.getVaccineName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
@@ -89,5 +63,31 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		addCell(immunization.getAuthor().getCompleteName());
 		addCell("");
 		append("</tr>");
+	}
+
+	public List<Immunization> getUpdatedImmunizations() {
+		int i = 0;
+		for (Immunization immunization : immunizations) {
+			ED reference = Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
+			SubstanceAdministration substanceAdminstration = immunization.getImmunization();
+			substanceAdminstration.setText(reference);
+			//.getSubstanceAdministrations().get(0);
+			i++;
+		}
+		return immunizations;  
+	}
+
+	/**
+	 * Returns HTML formatted string.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
 	}
 }

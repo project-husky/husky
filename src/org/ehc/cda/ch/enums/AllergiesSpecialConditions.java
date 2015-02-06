@@ -1,30 +1,31 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
+
 import org.ehc.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="de">Quelle für Subset: [IHE PCC TF-2], 6.3.4.14.11</div>
-*<div class="fr">Source du sous-ensemble : [IHE PCC TF-2], 6.3.4.14.11</div>
-*/
+ *<div class="de">Quelle für Subset: [IHE PCC TF-2], 6.3.4.14.11</div>
+ *<div class="fr">Source du sous-ensemble : [IHE PCC TF-2], 6.3.4.14.11</div>
+ */
 public enum AllergiesSpecialConditions {
 
 	/** 
-	*<div class="de">Patient hat Allergie/Unverträglichkeit auf eine unbekannte Substanz</div>
-	*<div class="fr">Le patient présente une allergie/intolérance à une substance inconnue.</div>
-	*/
+	 *<div class="de">Patient hat Allergie/Unverträglichkeit auf eine unbekannte Substanz</div>
+	 *<div class="fr">Le patient présente une allergie/intolérance à une substance inconnue.</div>
+	 */
 	SUBSTANCE_TYPE_UNKNOWN ("64970000", "Substance Type Unknown"),
 	/** 
-	*<div class="de">Keine Allergien bekannt</div>
-	*<div class="fr">Aucune allergie connue</div>
-	*/
+	 *<div class="de">Keine Allergien bekannt</div>
+	 *<div class="fr">Aucune allergie connue</div>
+	 */
 	NO_KNOWN_ALLERGIES ("160244002", "No Known Allergies"),
 	/** 
-	*<div class="de">Keine Unverträglichkeiten von Medikamenten bekannt</div>
-	*<div class="fr">Aucune intolérance à des médicaments connue</div>
-	*/
+	 *<div class="de">Keine Unverträglichkeiten von Medikamenten bekannt</div>
+	 *<div class="fr">Aucune intolérance à des médicaments connue</div>
+	 */
 	NO_KNOWN_DRUG_ALLERGIES ("409137002", "No Known Drug Allergies");
 	public static final String SUBSTANCE_TYPE_UNKNOWN_CODE="64970000";
 	public static final String NO_KNOWN_ALLERGIES_CODE="160244002";
@@ -43,19 +44,6 @@ public enum AllergiesSpecialConditions {
 		this.displayName = displayName;
 	}
 
-	public String getCodeValue() {
-		return this.code;
-	}
-
-	public String getdisplayName() {
-		return this.displayName;
-	}
-
-	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
-		return ehcCode;
-	}
-
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM);
@@ -64,10 +52,30 @@ public enum AllergiesSpecialConditions {
 		return cd;
 	}
 
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	public String getCodeValue() {
+		return code;
+	}
+
+	public String getdisplayName() {
+		return displayName;
+	}
+
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
-
 	public boolean isInValueSet(String code) {
 		for (AllergiesSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -75,13 +83,6 @@ public enum AllergiesSpecialConditions {
 			}
 		}
 		return false;
-	}
-
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
 	}
 
 }

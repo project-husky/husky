@@ -18,19 +18,15 @@
 
 package org.ehc.cda;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Util;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -57,35 +53,10 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 */
 	public ProblemConcernEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
-	  super(problemConcernEntry);
-	  this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
+		super(problemConcernEntry);
+		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
 	}
 
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 */
-	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode concernStatus) {
-		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
-		this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
-		this.setProblemConcern(concern);
-		this.addProblemEntry(problemEntry);
-		this.setCodedStatusOfConcern(concernStatus);
-	    this.setEffectiveTime(null, null);
-		this.setInternalId(null);
-	}
-	
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
@@ -109,22 +80,55 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 */
 	public ProblemConcernEntry(String concern,
 			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
-      this(concern, problemEntry, concernStatus);
-      this.setEffectiveTime(begin, end);
+		this(concern, problemEntry, concernStatus);
+		setEffectiveTime(begin, end);
 	}
 
-  /**
+	/**
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 * 
+	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+	 * être ajouté dans ActiveProblemsSection.</div>
+	 * 
+	 * @param concern
+	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param concernStatus
+	 *            <div class="de">Der Status Code des Leidens
+	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
+	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 */
+	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode concernStatus) {
+		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
+		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
+		setProblemConcern(concern);
+		addProblemEntry(problemEntry);
+		setCodedStatusOfConcern(concernStatus);
+		setEffectiveTime(null, null);
+		setInternalId(null);
+	}
+
+	/**
 	 * Fügt dem Leiden ein medizinisches Problem hinzu
 	 * 
 	 * @param problemEntry
 	 *            Das Problem
 	 */
 	public void addProblemEntry(ProblemEntry problemEntry) {
-	  mProblemConcernEntry.addObservation(problemEntry.getMdhtProblemEntry());
-	  EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships(); 
-	  //Set the Attributes of the last added element
-	  entryRel.get(entryRel.size()-1).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-	  entryRel.get(entryRel.size()-1).setInversionInd(false);
+		mProblemConcernEntry.addObservation(problemEntry.getMdhtProblemEntry());
+		EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships(); 
+		//Set the Attributes of the last added element
+		entryRel.get(entryRel.size()-1).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		entryRel.get(entryRel.size()-1).setInversionInd(false);
+	}
+
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry copyMdhtProblemConcernEntry() {
+		return EcoreUtil.copy(mProblemConcernEntry);
+	}
+
+	public List<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> getMdhtProblemEntryList() {
+		return mProblemConcernEntry.getProblemEntries();
 	}
 
 	/**
@@ -137,7 +141,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 				.getObservations().get(0));
 		return problemEntry;
 	}
-	
+
 	/**
 	 * Gibt ein medizinische Problem zu dem Leiden zurück.
 	 * 
@@ -152,21 +156,13 @@ public class ProblemConcernEntry extends ConcernEntry {
 				.getObservations().get(problemNr));
 		return problemEntry;
 	}
-	
-    private void setInternalId(String id) {
-      II ii = Util.createUuidVacd(id);
-      mProblemConcernEntry.getIds().add(ii);
-    }
 
-	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry copyMdhtProblemConcernEntry() {
-		return EcoreUtil.copy(mProblemConcernEntry);
+	private void setInternalId(String id) {
+		II ii = Util.createUuidVacd(id);
+		mProblemConcernEntry.getIds().add(ii);
 	}
 
 	public void setProblemConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry) {
 		this.mProblemConcernEntry = mProblemConcernEntry;
-	}
-	
-	public List<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> getMdhtProblemEntryList() {
-      return this.mProblemConcernEntry.getProblemEntries();
 	}
 }

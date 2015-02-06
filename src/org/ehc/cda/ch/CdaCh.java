@@ -23,6 +23,14 @@ import java.io.FileOutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.ehc.cda.ch.enums.EHealthConnectorVersions;
+import org.ehc.cda.ch.enums.LanguageCode;
+import org.ehc.common.DateUtil;
+import org.ehc.common.Organization;
+import org.ehc.common.Patient;
+import org.ehc.common.Person;
+import org.ehc.common.Util;
+import org.ehc.common.ch.ConvenienceUtilsEnums.ParticipantType;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.AssociatedEntity;
 import org.openhealthtools.mdht.uml.cda.Author;
@@ -40,25 +48,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
-import org.ehc.cda.ch.enums.EHealthConnectorVersions;
-import org.ehc.cda.ch.enums.LanguageCode;
-import org.ehc.common.DateUtil;
-import org.ehc.common.Organization;
-import org.ehc.common.Patient;
-import org.ehc.common.Person;
-import org.ehc.common.Util;
-import org.ehc.common.ch.ConvenienceUtilsEnums.ParticipantType;
 
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
  * 
  */
 public abstract class CdaCh {
-	
+
 	CDACH doc = null;      												// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
 	protected Query query;
-	
+
 	/**
 	 * Standard Constructor
 	 * 
@@ -66,14 +66,14 @@ public abstract class CdaCh {
 	 * <div class="fr"></div>
 	 */
 	public CdaCh(CDACH doc) {
-	    this.doc = doc;
-		this.docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
-		this.docRoot.setClinicalDocument(doc);
-	    // Add the stylesheet processing instructions to the document root using featuremaputil
-        // set xml namespace
-        docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+		this.doc = doc;
+		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
+		docRoot.setClinicalDocument(doc);
+		// Add the stylesheet processing instructions to the document root using featuremaputil
+		// set xml namespace
+		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 	}
-	
+
 	/**
 	 * <div class="de">Erstellt ein CdaCh Objekt mittels eines IHE DocumentRoot Objekts</div>
 	 * <div class="fr"></div>
@@ -83,10 +83,150 @@ public abstract class CdaCh {
 	 *		<div class="fr"></div>
 	 */
 	public CdaCh(DocumentRoot root) {
-		this.docRoot = root;
+		docRoot = root;
 	}
 
-  /**
+	/**
+	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
+	 * 
+	 * @param authenticator
+	 *            Unterzeichner
+	 */
+	public void addAuthenticator(Person authenticator) {
+
+	}
+
+
+
+	/**
+	 * Fügt einen Autoren hinzu.
+	 * 
+	 * @param author
+	 *            Der Autor
+	 */
+	public void addAuthor(org.ehc.common.Author author) {
+		// create a new (!) MDHT author Objekt.
+		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
+		docAuthor = author.getAuthorMdht();
+
+		doc.getAuthors().add(docAuthor);
+	}
+
+	/**
+	 * Fügt dem CDA Dokument einen Erfasser hinzu
+	 * 
+	 * @param dataEnterer
+	 *            Erfasser oder Sachbearbeiter/-in, welche(r) das Dokument
+	 *            erstellt oder Beiträge dazu geliefert hat.
+	 */
+	public void addDataEnterer(Person dataEnterer) {
+
+	}
+
+	/**
+	 * Fügt eine Versicherung hinzu
+	 * 
+	 * @param versicherung
+	 *            Die Versicherung als Organization Objekt
+	 */
+	public void addInsurance(Organization versicherung) {
+		//TODO TypeCode Setzen (Wert fehlt noch bei den Enums)
+		addParticipant(versicherung, ParticipantType.Insurance);
+	}
+
+	/**
+	 * Fügt dem CDA Dokument eine Partizipation hinzu
+	 * 
+	 * @param organization
+	 *            Organisation
+	 * @param participantType
+	 *            Art der Partizipation (z.B. Versicherung)
+	 */
+	public void addParticipant(Organization organization,
+			ParticipantType participantType) {
+		// Set the given organization as Participant of this document.
+		final Participant1 participant = CDAFactory.eINSTANCE
+				.createParticipant1();
+		doc.getParticipants().add(participant);
+		final AssociatedEntity assEnt = CDAFactory.eINSTANCE
+				.createAssociatedEntity();
+		participant.setAssociatedEntity(assEnt);
+
+		org.openhealthtools.mdht.uml.cda.Organization docOrganization = CDAFactory.eINSTANCE
+				.createOrganization();
+		docOrganization = organization.getMdhtOrganization();
+		assEnt.setScopingOrganization(docOrganization);
+	}
+
+	/**
+	 * Gibt den Autor des Dokuments zurück
+	 * 
+	 * @return das eHealthConnector Author Objekt
+	 */
+	public org.ehc.common.Author getAuthor() {
+		org.ehc.common.Author author = new org.ehc.common.Author(
+				doc.getAuthors().get(0));
+		return author;
+	}
+
+	/**
+	 * Gibt den Verantwortlichen für das Dokument zurück
+	 * 
+	 * @return das openHealthTools Custodian Objekt
+	 */
+	public Custodian getCustodian() {
+		return doc.getCustodian();
+	}
+
+	/**
+	 * Liefert das Patientenobjekt zurück
+	 *
+	 * @return the patient
+	 */
+	public Patient getPatient() {
+		return (Patient) doc.getRecordTargets().get(0).getPatientRole()
+				.getPatient();
+	}
+
+	/**
+	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
+	 */
+	public void printXmlToConsole() {
+		try {
+			CDAUtil.save(doc, System.out);
+		} catch (final Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Speichert das CDA Dokument als XML Datei
+	 * 
+	 * @param fileName
+	 *            Dateiname (inkl. Pfadangaben)
+	 * @throws Exception
+	 */
+	public void saveToFile(String fileName) throws Exception {
+		File yourFile = new File(fileName);
+		if (!yourFile.exists()) {
+			yourFile.createNewFile();
+		}
+		FileOutputStream oFile = new FileOutputStream(yourFile, false);
+
+		// create emf resource
+		CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE
+				.createResource(URI.createURI(CDAPackage.eNS_URI));
+
+		// add the document root to the resource
+		docRoot.setClinicalDocument(doc);
+		resource.getContents().add(docRoot);
+
+		// save resource to console
+		resource.save(oFile, null);
+	}
+
+	/**
 	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet werden
 	 * (DocumentID, TypeID, Confidentially Code, Language Code, Stylesheet)
 	 * 
@@ -131,67 +271,9 @@ public abstract class CdaCh {
 		ST titleSt = DatatypesFactory.eINSTANCE.createST();
 		titleSt.addText(title);
 		doc.setTitle(titleSt);
-		
+
 		// Set creation time of the document
 		doc.setEffectiveTime(DateUtil.nowAsTS());
-	}
-	
-	
-
-	/**
-	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
-	 * 
-	 * @param authenticator
-	 *            Unterzeichner
-	 */
-	public void addAuthenticator(Person authenticator) {
-
-	}
-
-	/**
-	 * Fügt dem CDA Dokument einen Erfasser hinzu
-	 * 
-	 * @param dataEnterer
-	 *            Erfasser oder Sachbearbeiter/-in, welche(r) das Dokument
-	 *            erstellt oder Beiträge dazu geliefert hat.
-	 */
-	public void addDataEnterer(Person dataEnterer) {
-
-	}
-
-	/**
-	 * Weist dem CDA Dokument den Patienten zu
-	 * 
-	 * @param patient
-	 *            Patient
-	 */
-	public void setPatient(Patient patient) {
-		doc.getRecordTargets().add(patient.getRecordTarget());
-	}
-
-	/**
-	 * Fügt einen Autoren hinzu.
-	 * 
-	 * @param author
-	 *            Der Autor
-	 */
-	public void addAuthor(org.ehc.common.Author author) {
-		// create a new (!) MDHT author Objekt.
-		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
-		docAuthor = author.getAuthorMdht();
-
-		doc.getAuthors().add(docAuthor);
-	}
-
-	/**
-	 * Gibt den Autor des Dokuments zurück
-	 * 
-	 * @return das eHealthConnector Author Objekt
-	 */
-	public org.ehc.common.Author getAuthor() {
-		org.ehc.common.Author author = new org.ehc.common.Author(
-				doc.getAuthors().get(0));
-		return author;
 	}
 
 	/**
@@ -210,27 +292,18 @@ public abstract class CdaCh {
 		mdhtCustodian.setAssignedCustodian(assCust);
 
 		mdhtCustodian
-				.getAssignedCustodian()
-				.setRepresentedCustodianOrganization(
-						Util
-								.createCustodianOrganizationFromOrganization(organization));
-		
+		.getAssignedCustodian()
+		.setRepresentedCustodianOrganization(
+				Util
+				.createCustodianOrganizationFromOrganization(organization));
+
 		//mdhtCustodian.setNullFlavor(NullFlavor.);
 		//Setzt die GLN des Arztes
 		II id = DatatypesFactory.eINSTANCE.createII();
 		if (organization.getMdhtOrganization().getIds().size()>0) {
-          id = organization.getMdhtOrganization().getIds().get(0);
+			id = organization.getMdhtOrganization().getIds().get(0);
 		}
-	    mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
-	}
-
-	/**
-	 * Gibt den Verantwortlichen für das Dokument zurück
-	 * 
-	 * @return das openHealthTools Custodian Objekt
-	 */
-	public Custodian getCustodian() {
-		return doc.getCustodian();
+		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
 
 	/**
@@ -246,85 +319,12 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt eine Versicherung hinzu
+	 * Weist dem CDA Dokument den Patienten zu
 	 * 
-	 * @param versicherung
-	 *            Die Versicherung als Organization Objekt
+	 * @param patient
+	 *            Patient
 	 */
-	public void addInsurance(Organization versicherung) {
-	  //TODO TypeCode Setzen (Wert fehlt noch bei den Enums)
-		this.addParticipant(versicherung, ParticipantType.Insurance);
-	}
-	
-	/**
-	 * Liefert das Patientenobjekt zurück
-	 *
-	 * @return the patient
-	 */
-	public Patient getPatient() {
-		return (Patient) doc.getRecordTargets().get(0).getPatientRole()
-				.getPatient();
-	}
-
-	/**
-	 * Fügt dem CDA Dokument eine Partizipation hinzu
-	 * 
-	 * @param organization
-	 *            Organisation
-	 * @param participantType
-	 *            Art der Partizipation (z.B. Versicherung)
-	 */
-	public void addParticipant(Organization organization,
-			ParticipantType participantType) {
-		// Set the given organization as Participant of this document.
-		final Participant1 participant = CDAFactory.eINSTANCE
-				.createParticipant1();
-		doc.getParticipants().add(participant);
-		final AssociatedEntity assEnt = CDAFactory.eINSTANCE
-				.createAssociatedEntity();
-		participant.setAssociatedEntity(assEnt);
-
-		org.openhealthtools.mdht.uml.cda.Organization docOrganization = CDAFactory.eINSTANCE
-				.createOrganization();
-		docOrganization = organization.getMdhtOrganization();
-		assEnt.setScopingOrganization(docOrganization);
-	}
-	
-	/**
-	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
-	 */
-	public void printXmlToConsole() {
-		try {
-			CDAUtil.save(doc, System.out);
-		} catch (final Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Speichert das CDA Dokument als XML Datei
-	 * 
-	 * @param fileName
-	 *            Dateiname (inkl. Pfadangaben)
-	 * @throws Exception
-	 */
-	public void saveToFile(String fileName) throws Exception {
-		File yourFile = new File(fileName);
-		if (!yourFile.exists()) {
-			yourFile.createNewFile();
-		}
-		FileOutputStream oFile = new FileOutputStream(yourFile, false);
-
-		// create emf resource
-		CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE
-				.createResource(URI.createURI(CDAPackage.eNS_URI));
-
-		// add the document root to the resource
-		docRoot.setClinicalDocument(doc);
-		resource.getContents().add(docRoot);
-
-		// save resource to console
-		resource.save(oFile, null);
+	public void setPatient(Patient patient) {
+		doc.getRecordTargets().add(patient.getRecordTarget());
 	}
 }

@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.ch.CdaChVacd;
-import org.ehc.common.ConvenienceUtilsEnums.AdministrativeGenderCode;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.utils.UUID;
@@ -61,395 +60,395 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
-  public static IVL_PQ createIVL_PQNullFlavorNASK() {
-    IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-    ivlpq.setNullFlavor(NullFlavor.NASK);
-    return ivlpq;
-  }
-  
-  public static II createUuidVacd(String id) {
-    II ii = DatatypesFactory.eINSTANCE.createII();
-    ii.setRoot(CdaChVacd.OID_VACD);
-    if (id==null) {
-      ii.setExtension(UUID.generate());
-    }
-    else {
-      ii.setRoot(id);
-    }
-    return ii;
-  }
-  
-  /**
-   * Erzeugt eine Adresse
-   * 
-   * @param streetName Contains the StreetName
-   * @param houseNumber Contains the house number
-   * @param zip PLZ
-   * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
-   * @return the new address
-   */
-  public static AD createAddress(String streetName, String houseNumber, String zip, String city,
-      UseCode usage) {
-    final AD ad = createAddress(zip, city, usage);
+	/**
+	 * Erzeugt eine Adresse
+	 * 
+	 * @param streetName Contains the StreetName
+	 * @param houseNumber Contains the house number
+	 * @param zip PLZ
+	 * @param city Ort
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 * @return the new address
+	 */
+	public static AD createAddress(String streetName, String houseNumber, String zip, String city,
+			UseCode usage) {
+		final AD ad = createAddress(zip, city, usage);
 
-    if (streetName != null) {
-      ad.addStreetAddressLine(streetName);
-    }
-    if (houseNumber != null) {
-      ad.addHouseNumber(houseNumber);
-    }
-    return ad;
-  }
+		if (streetName != null) {
+			ad.addStreetAddressLine(streetName);
+		}
+		if (houseNumber != null) {
+			ad.addHouseNumber(houseNumber);
+		}
+		return ad;
+	}
 
-  /**
-   * Erzeugt eine Adresse
-   * 
-   * @param zip PLZ
-   * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
-   * @return HL7 AD Objekt
-   */
-  public static AD createAddress(String zip, String city, UseCode usage) {
-    final AD ad = DatatypesFactory.eINSTANCE.createAD();
+	/**
+	 * Erzeugt eine Adresse
+	 * 
+	 * @param zip PLZ
+	 * @param city Ort
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 * @return HL7 AD Objekt
+	 */
+	public static AD createAddress(String zip, String city, UseCode usage) {
+		final AD ad = DatatypesFactory.eINSTANCE.createAD();
 
-    if (zip != null) {
-      ad.addPostalCode(zip);
-    }
-    if (city != null) {
-      ad.addCity(city);
-    }
-    if (usage != null) {
-      // TODO add the real Use Code here
-      // ad.getUses().add(usage);
-    }
-    return ad;
-  }
+		if (zip != null) {
+			ad.addPostalCode(zip);
+		}
+		if (city != null) {
+			ad.addCity(city);
+		}
+		if (usage != null) {
+			// TODO add the real Use Code here
+			// ad.getUses().add(usage);
+		}
+		return ad;
+	}
 
-  /**
-   * Erzeugt eine Adresse
-   * 
-   * @param addressline
-   * @param zip PLZ
-   * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
-   */
-  public static AD createAdress(String addressline, String zip, String city, UseCode usage) {
-    final AD ad = createAddress(zip, city, usage);
+	/**
+	 * Erzeugt eine Adresse
+	 * 
+	 * @param addressline
+	 * @param zip PLZ
+	 * @param city Ort
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 */
+	public static AD createAdress(String addressline, String zip, String city, UseCode usage) {
+		final AD ad = createAddress(zip, city, usage);
 
-    if (addressline != null) {
-      ad.addStreetAddressLine(addressline);
-    }
-    return ad;
-  }
+		if (addressline != null) {
+			ad.addStreetAddressLine(addressline);
+		}
+		return ad;
+	}
 
-  public static CE createCENullFlavorNASK() {
-    CE ce = DatatypesFactory.eINSTANCE.createCE();
-    ce.setNullFlavor(NullFlavor.NASK);
-    return ce;
-  }
+	public static CE createCENullFlavorNASK() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(NullFlavor.NASK);
+		return ce;
+	}
 
-  public static CD createCodeNullFlavor() {
-    CD code = DatatypesFactory.eINSTANCE.createCD();
-    code.setNullFlavor(NullFlavor.NA);
-    return code;
-  }
+	public static CD createCodeNullFlavor() {
+		CD code = DatatypesFactory.eINSTANCE.createCD();
+		code.setNullFlavor(NullFlavor.NA);
+		return code;
+	}
 
-  /**
-   * Erzeugt aus einem MDHT Organization Objekt ein neues MDHT CustodianOrganization Objekt
-   * 
-   * @param organization Organisation
-   * @return CustodianOrganization
-   */
-  public static CustodianOrganization createCustodianOrganizationFromOrganization(
-      Organization organization) {
-    // create and set the mdht RepresentedCustodianOrganization Object
-    final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE.createCustodianOrganization();
+	/**
+	 * Erzeugt aus einem MDHT Organization Objekt ein neues MDHT CustodianOrganization Objekt
+	 * 
+	 * @param organization Organisation
+	 * @return CustodianOrganization
+	 */
+	public static CustodianOrganization createCustodianOrganizationFromOrganization(
+			Organization organization) {
+		// create and set the mdht RepresentedCustodianOrganization Object
+		final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE.createCustodianOrganization();
 
-    ON on = DatatypesFactory.eINSTANCE.createON();
-    on.addText(organization.getName());
-    mdhtCustOrg.setName(on);
-    // take the first address and set it as CustodianAdress
-    mdhtCustOrg.setAddr(organization.getMdhtOrganization().getAddrs().get(0));
-    // take the first telecom and set it as CustodianTelecom
-    mdhtCustOrg.setTelecom(organization.getMdhtOrganization().getTelecoms().get(0));
-    // TODO handle any other adresses/telecoms
-    return mdhtCustOrg;
-  }
+		ON on = DatatypesFactory.eINSTANCE.createON();
+		on.addText(organization.getName());
+		mdhtCustOrg.setName(on);
+		// take the first address and set it as CustodianAdress
+		mdhtCustOrg.setAddr(organization.getMdhtOrganization().getAddrs().get(0));
+		// take the first telecom and set it as CustodianTelecom
+		mdhtCustOrg.setTelecom(organization.getMdhtOrganization().getTelecoms().get(0));
+		// TODO handle any other adresses/telecoms
+		return mdhtCustOrg;
+	}
 
-  public static ED createEd(String text) {
-    ED ed = DatatypesFactory.eINSTANCE.createED();
-    // ed.setReference(arg0);
-    return (ed.addText(text));
-  }
+	public static ED createEd(String text) {
+		ED ed = DatatypesFactory.eINSTANCE.createED();
+		// ed.setReference(arg0);
+		return (ed.addText(text));
+	}
+
+	public static String createEurDateStrFromTS(String hl7Stimestamp) {
+		// TODO Prüfen, ob der übergebene String das richtige Format hat.
+		String eurDateStr =
+				hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "."
+						+ hl7Stimestamp.substring(0, 4);
+		return eurDateStr;
+	}
+
+	public static IVL_PQ createIVL_PQNullFlavorNASK() {
+		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivlpq.setNullFlavor(NullFlavor.NASK);
+		return ivlpq;
+	}
 
 
 
-  public static String createEurDateStrFromTS(String hl7Stimestamp) {
-    // TODO Prüfen, ob der übergebene String das richtige Format hat.
-    String eurDateStr =
-        hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "."
-            + hl7Stimestamp.substring(0, 4);
-    return eurDateStr;
-  }
+	/**
+	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt
+	 * 
+	 * @param author
+	 */
+	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehc.common.Author author) {
+		// FIXME Copy the values from the author object, without drawing / move
+		// them from it.
 
-  /**
-   * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt
-   * 
-   * @param author
-   */
-  public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehc.common.Author author) {
-    // FIXME Copy the values from the author object, without drawing / move
-    // them from it.
+		// create and set the mdht RepresentedCustodianOrganization Object
+		LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
+		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
+		mdhtLegAuth.setAssignedEntity(asEnt);
 
-    // create and set the mdht RepresentedCustodianOrganization Object
-    LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
-    AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
-    mdhtLegAuth.setAssignedEntity(asEnt);
+		org.openhealthtools.mdht.uml.cda.Person authorPerson = CDAFactory.eINSTANCE.createPerson();
+		asEnt.setAssignedPerson(authorPerson);
 
-    org.openhealthtools.mdht.uml.cda.Person authorPerson = CDAFactory.eINSTANCE.createPerson();
-    asEnt.setAssignedPerson(authorPerson);
+		authorPerson = author.getAuthorMdht().getAssignedAuthor().getAssignedPerson();
 
-    authorPerson = author.getAuthorMdht().getAssignedAuthor().getAssignedPerson();
+		return mdhtLegAuth;
+	}
 
-    return mdhtLegAuth;
-  }
+	/**
+	 * Erzeut ein LanguageCode Objekt
+	 * 
+	 * @param language Sprache
+	 * @return HL7 CS Objekt
+	 */
+	public static CS createLanguageCode(Language language) {
+		// TODO: Use Modeled code system
+		// Set one of the language codes which are possible in Swiss
+		final CS lang = DatatypesFactory.eINSTANCE.createCS();
+		switch (language) {
+		case German:
+			lang.setCode("de-CH");
+			break;
+		case French:
+			lang.setCode("fr-CH");
+			break;
+		case Italian:
+			lang.setCode("it-CH");
+		}
+		return lang;
+	}
 
-  /**
-   * Erzeut ein LanguageCode Objekt
-   * 
-   * @param language Sprache
-   * @return HL7 CS Objekt
-   */
-  public static CS createLanguageCode(Language language) {
-    // TODO: Use Modeled code system
-    // Set one of the language codes which are possible in Swiss
-    final CS lang = DatatypesFactory.eINSTANCE.createCS();
-    switch (language) {
-      case German:
-        lang.setCode("de-CH");
-        break;
-      case French:
-        lang.setCode("fr-CH");
-        break;
-      case Italian:
-        lang.setCode("it-CH");
-    }
-    return lang;
-  }
+	public static ENXP createName(String name) {
+		ENXP mName = DatatypesFactory.eINSTANCE.createENXP();
+		mName.addText(name);
+		return mName;
+	}
 
-  public static ENXP createName(String name) {
-    ENXP mName = DatatypesFactory.eINSTANCE.createENXP();
-    mName.addText(name);
-    return mName;
-  }
+	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
+		Resource.Factory factory = new GenericXMLResourceFactoryImpl();
+		XMLResource resource = (XMLResource) factory.createResource(null);
+		try {
+			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"), null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
+		AnyType value = (AnyType) root.getMixed().getValue(0);
+		StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
+		text.getMixed().addAll(value.getMixed());
+		return text;
+	}
 
-  public static StrucDocText createNonQotedStrucDocText(String xmlString) {
-    Resource.Factory factory = new GenericXMLResourceFactoryImpl();
-    XMLResource resource = (XMLResource) factory.createResource(null);
-    try {
-      resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"), null);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
-    AnyType value = (AnyType) root.getMixed().getValue(0);
-    StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
-    text.getMixed().addAll(value.getMixed());
-    return text;
-  }
+	public static IVXB_TS createNullFlavorUnknown() {
+		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		ts.setNullFlavor(NullFlavor.UNK);
+		return ts;
+	}
 
 
 
-  public static IVXB_TS createNullFlavorUnknown() {
-    IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
-    ts.setNullFlavor(NullFlavor.UNK);
-    return ts;
-  }
+	public static ED createProblemEntryText() {
+		return DatatypesFactory.eINSTANCE.createED();
+	}
 
-  public static ED createProblemEntryText() {
-    return DatatypesFactory.eINSTANCE.createED();
-  }
+	public static ED createReference(int contentId, String prefix) {
+		ED text = DatatypesFactory.eINSTANCE.createED();
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 
-
-
-  public static ED createReference(int contentId, String prefix) {
-    ED text = DatatypesFactory.eINSTANCE.createED();
-    TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-
-    // Dirty BugFix for missing addReference method.
-    // TODO Make me beautiful :)
-    tel.setValue("#" + prefix + String.valueOf(contentId));
-    text.setReference(tel);
-    return text;
-  }
+		// Dirty BugFix for missing addReference method.
+		// TODO Make me beautiful :)
+		tel.setValue("#" + prefix + String.valueOf(contentId));
+		text.setReference(tel);
+		return text;
+	}
 
 
 
-  public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
-    StringBuilder sb = new StringBuilder();
-    if (strucDocText != null) {
-      sb = traverse2(strucDocText.getMixed(), sb);
-    }
-    return sb.toString();
-  }
+	public static II createUuidVacd(String id) {
+		II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(CdaChVacd.OID_VACD);
+		if (id==null) {
+			ii.setExtension(UUID.generate());
+		}
+		else {
+			ii.setRoot(id);
+		}
+		return ii;
+	}
 
-  /**
-   * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot
-   * 
-   * @param appliactionOidRoot identifiziert diese Version des eHCs
-   * @return HL7 II Objekt
-   */
-  public static II generateDocId(String appliactionOidRoot) {
-    // Unique identifier of the document. The root part identifies the
-    // application instance, the extension part identifies the document
-    // instance.
 
-    final String documentOid =
-        org.openhealthtools.ihe.utils.OID.createOIDGivenRoot("ehealthconnctor");
-    // Creates a random extension ID to identify the document
-    final Random r = new Random();
-    final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(r.nextInt()));
-    return id;
-  }
 
-  private static String getText(FeatureMap featureMap) {
-    StringBuffer buffer = new StringBuffer("");
-    for (FeatureMap.Entry entry : featureMap) {
-      if (FeatureMapUtil.isText(entry)) {
-        buffer.append(entry.getValue().toString());
-      } else {
-        if (entry.getEStructuralFeature() instanceof EReference) {
-          buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-        }
-        // AnyType anyValue = (AnyType)entry.getValue();
-        // buffer.append(getText(anyValue.getMixed()));
-      }
-    }
-    return buffer.toString().trim();
-  }
+	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
+		StringBuilder sb = new StringBuilder();
+		if (strucDocText != null) {
+			sb = traverse2(strucDocText.getMixed(), sb);
+		}
+		return sb.toString();
+	}
 
-  public static II ii(String root) {
-    II ii = DatatypesFactory.eINSTANCE.createII();
-    ii.setRoot(root);
-    return ii;
-  }
+	/**
+	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot
+	 * 
+	 * @param appliactionOidRoot identifiziert diese Version des eHCs
+	 * @return HL7 II Objekt
+	 */
+	public static II generateDocId(String appliactionOidRoot) {
+		// Unique identifier of the document. The root part identifies the
+		// application instance, the extension part identifies the document
+		// instance.
 
-  public static II ii(String root, String extension) {
-    II ii = ii(root);
-    ii.setExtension(extension);
-    return ii;
-  }
+		final String documentOid =
+				org.openhealthtools.ihe.utils.OID.createOIDGivenRoot("ehealthconnctor");
+		// Creates a random extension ID to identify the document
+		final Random r = new Random();
+		final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(r.nextInt()));
+		return id;
+	}
 
-  public static ST st(String text) {
-    ST value = DatatypesFactory.eINSTANCE.createST();
-    value.addText(text);
-    return value;
-  }
+	private static String getText(FeatureMap featureMap) {
+		StringBuffer buffer = new StringBuffer("");
+		for (FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
+				}
+				// AnyType anyValue = (AnyType)entry.getValue();
+				// buffer.append(getText(anyValue.getMixed()));
+			}
+		}
+		return buffer.toString().trim();
+	}
 
-  private static void traverse(FeatureMap root) {
-    Stack<FeatureMap> stack = new Stack<FeatureMap>();
-    Stack<String> stack2 = new Stack<String>();
-    stack.push(root);
-    while (!stack.isEmpty()) {
-      FeatureMap featureMap = stack.pop();
-      for (int i = featureMap.size() - 1; i >= 0; i--) {
-        Entry entry = featureMap.get(i);
-        if (entry.getEStructuralFeature() instanceof EReference) {
-          System.out.print("<" + entry.getEStructuralFeature().getName());
-          AnyType anyType = (AnyType) entry.getValue();
-          traverseAttributes(anyType.getAnyAttribute());
-          System.out.print(">");
-          stack.push(anyType.getMixed());
+	public static II ii(String root) {
+		II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(root);
+		return ii;
+	}
 
-        } else {
-          // if (entry.getValue() != null && !stack2.isEmpty()) {
-          // System.out.print("</"+stack2.pop()+">");}
-          // //Text between the Elements
-          if (entry.getValue() != null) {
-            String value = entry.getValue().toString();
-            if (value.trim().length() > 0) {
-              System.out.print(value);
-            }
-          } else {
-            System.out.println(" }");
-          }
-        }
-        if (entry.getValue() != null && !stack2.isEmpty()) {
-          System.out.print("</" + stack2.pop() + ">");
-        }
-      }
-    }
-  }
+	public static II ii(String root, String extension) {
+		II ii = ii(root);
+		ii.setExtension(extension);
+		return ii;
+	}
 
-  private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
-    for (int i = 0; i <= featureMap.size() - 1; i++) {
-      // for (int i = featureMap.size() - 1; i >= 0; i--) {
-      Entry entry = featureMap.get(i);
-      if (entry.getEStructuralFeature() instanceof EReference) {
-        sb.append("<" + entry.getEStructuralFeature().getName());
-        AnyType anyType = (AnyType) entry.getValue();
-        sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
-        sb.append(">");
-        traverse2(anyType.getMixed(), sb);
-        sb.append("</" + entry.getEStructuralFeature().getName() + ">");
-      } else {
-        // //Text between the Elements
-        if (entry.getValue() != null) {
-          String value = entry.getValue().toString();
-          if (value.trim().length() > 0) {
-            sb.append(value);
-          }
-        } else {
-          System.out.println(" }");
-        }
-      }
-    }
-    return sb;
-  }
+	public static ST st(String text) {
+		ST value = DatatypesFactory.eINSTANCE.createST();
+		value.addText(text);
+		return value;
+	}
 
-  private static void traverseAttributes(FeatureMap anyAttribute) {
-    for (Entry entry : anyAttribute) {
-      System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
-          + entry.getValue().toString() + "\"");
-    }
-  }
+	private static void traverse(FeatureMap root) {
+		Stack<FeatureMap> stack = new Stack<FeatureMap>();
+		Stack<String> stack2 = new Stack<String>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			FeatureMap featureMap = stack.pop();
+			for (int i = featureMap.size() - 1; i >= 0; i--) {
+				Entry entry = featureMap.get(i);
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					System.out.print("<" + entry.getEStructuralFeature().getName());
+					AnyType anyType = (AnyType) entry.getValue();
+					traverseAttributes(anyType.getAnyAttribute());
+					System.out.print(">");
+					stack.push(anyType.getMixed());
 
-  private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
-    for (Entry entry : anyAttribute) {
-      sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString()
-          + "\"");
-    }
-    return sb;
-  }
+				} else {
+					// if (entry.getValue() != null && !stack2.isEmpty()) {
+					// System.out.print("</"+stack2.pop()+">");}
+					// //Text between the Elements
+					if (entry.getValue() != null) {
+						String value = entry.getValue().toString();
+						if (value.trim().length() > 0) {
+							System.out.print(value);
+						}
+					} else {
+						System.out.println(" }");
+				}
+				}
+				if (entry.getValue() != null && !stack2.isEmpty()) {
+					System.out.print("</" + stack2.pop() + ">");
+				}
+			}
+		}
+	}
 
-  /**
-   * Erzeugt eine Adresse
-   * 
-   * @param addressline1 Adresszeile 1
-   * @param addressline2 Adresszeile 2
-   * @param addressline3 Adresszeile 3
-   * @param zip PLZ
-   * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
-   * @return HL7 AD Objekt
-   */
-  public AD createAddress(String addressline1, String addressline2, String addressline3,
-      String zip, String city, UseCode usage) {
-    final AD ad = createAddress(zip, city, usage);
+	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
+		for (int i = 0; i <= featureMap.size() - 1; i++) {
+			// for (int i = featureMap.size() - 1; i >= 0; i--) {
+			Entry entry = featureMap.get(i);
+			if (entry.getEStructuralFeature() instanceof EReference) {
+				sb.append("<" + entry.getEStructuralFeature().getName());
+				AnyType anyType = (AnyType) entry.getValue();
+				sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
+				sb.append(">");
+				traverse2(anyType.getMixed(), sb);
+				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
+			} else {
+				// //Text between the Elements
+				if (entry.getValue() != null) {
+					String value = entry.getValue().toString();
+					if (value.trim().length() > 0) {
+						sb.append(value);
+					}
+				} else {
+					System.out.println(" }");
+			}
+			}
+		}
+		return sb;
+	}
 
-    if (addressline1 != null) {
-      ad.addStreetAddressLine(addressline1);
-    }
-    if (addressline2 != null) {
-      ad.addStreetAddressLine(addressline2);
-    }
-    if (addressline3 != null) {
-      ad.addStreetAddressLine(addressline3);
-    }
-    return ad;
-  }
+	private static void traverseAttributes(FeatureMap anyAttribute) {
+		for (Entry entry : anyAttribute) {
+			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
+					+ entry.getValue().toString() + "\"");
+		}
+	}
+
+	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
+		for (Entry entry : anyAttribute) {
+			sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString()
+					+ "\"");
+		}
+		return sb;
+	}
+
+	/**
+	 * Erzeugt eine Adresse
+	 * 
+	 * @param addressline1 Adresszeile 1
+	 * @param addressline2 Adresszeile 2
+	 * @param addressline3 Adresszeile 3
+	 * @param zip PLZ
+	 * @param city Ort
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 * @return HL7 AD Objekt
+	 */
+	public AD createAddress(String addressline1, String addressline2, String addressline3,
+			String zip, String city, UseCode usage) {
+		final AD ad = createAddress(zip, city, usage);
+
+		if (addressline1 != null) {
+			ad.addStreetAddressLine(addressline1);
+		}
+		if (addressline2 != null) {
+			ad.addStreetAddressLine(addressline2);
+		}
+		if (addressline3 != null) {
+			ad.addStreetAddressLine(addressline3);
+		}
+		return ad;
+	}
 
 
 }

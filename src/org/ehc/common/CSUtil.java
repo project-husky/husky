@@ -10,8 +10,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public class CSUtil {
 
-	private CSUtil() {}
-	
 	/**
 	 * Returns "completed" statusCode.
 	 * 
@@ -20,12 +18,14 @@ public class CSUtil {
 	public static CS completed() {
 		return createStatus("completed");
 	}
-	
+
 	private static CS createStatus(String code) {
 		CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}
-	
+
+	private CSUtil() {}
+
 }
 

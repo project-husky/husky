@@ -27,201 +27,201 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Name {
 
-  private PN mPn;
+	private PN mPn;
 
-  public PN getPn() {
-    return mPn;
-  }
+	public Name(ON on) {
+		mPn = (PN) on;
+	}
 
-  public void setPn(PN pn) {
-    this.mPn = pn;
-  }
+	/**
+	 * @param pn
+	 */
+	public Name(PN pn) {
+		mPn = pn;
+	}
 
-  /**
-   * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Patienten)
-   * 
-   * @param givenName Vorname
-   * @param familyName Nachname
-   */
-  public Name(String givenName, String familyName) {
-    // Create and fill Person Name
-    mPn = DatatypesFactory.eINSTANCE.createPN();
-    if ((givenName != null) && !givenName.equals("")) {
-      this.setGivenName(givenName);
-    }
-    if ((familyName != null) && !familyName.equals("")) {
-      this.setFamilyName(familyName);
-    }
-  }
+	/**
+	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Patienten)
+	 * 
+	 * @param givenName Vorname
+	 * @param familyName Nachname
+	 */
+	public Name(String givenName, String familyName) {
+		// Create and fill Person Name
+		mPn = DatatypesFactory.eINSTANCE.createPN();
+		if ((givenName != null) && !givenName.equals("")) {
+			setGivenName(givenName);
+		}
+		if ((familyName != null) && !familyName.equals("")) {
+			setFamilyName(familyName);
+		}
+	}
 
-  /**
-   * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Behandelnde)
-   * 
-   * @param givenName Vorname
-   * @param familyName Nachname
-   * @param title Titel (z.B. Dr. med.)
-   */
-  public Name(String givenName, String familyName, String title) {
-    this(givenName, familyName);
-    mPn.addPrefix(title);
-  }
+	/**
+	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Behandelnde)
+	 * 
+	 * @param givenName Vorname
+	 * @param familyName Nachname
+	 * @param title Titel (z.B. Dr. med.)
+	 */
+	public Name(String givenName, String familyName, String title) {
+		this(givenName, familyName);
+		mPn.addPrefix(title);
+	}
 
-  /**
-   * Erzeugt einen Personennamen
-   * 
-   * @param familyName Nachname
-   * @param givenName Vorname
-   * @param prefix Prefix (z.B. "Dipl. Inf.")
-   * @param suffix Suffix (z.b. "der Dritte")
-   */
-  public Name(String givenName, String familyName, String prefix, String suffix) {
-    this(givenName, familyName, prefix);
-    mPn.addSuffix(suffix);
-  }
+	/**
+	 * Erzeugt einen Personennamen
+	 * 
+	 * @param familyName Nachname
+	 * @param givenName Vorname
+	 * @param prefix Prefix (z.B. "Dipl. Inf.")
+	 * @param suffix Suffix (z.b. "der Dritte")
+	 */
+	public Name(String givenName, String familyName, String prefix, String suffix) {
+		this(givenName, familyName, prefix);
+		mPn.addSuffix(suffix);
+	}
 
-  /**
-   * @param pn
-   */
-  public Name(PN pn) {
-    this.mPn = pn;
-  }
+	public String getCompleteName() {
+		StringBuilder nameBuilder = new StringBuilder();
 
-  public Name(ON on) {
-    this.mPn = (PN) on;
-  }
+		//TODO Fix this with String.join
+		String prefixes = getPrefixes();
+		String givens = getGivenNames();
+		String families = getFamilyNames();
+		String suffixes = getSuffixes();
 
-  /**
-   * @return Vornamen
-   */
-  public String getGivenName() {
-    return mPn.getGivens().get(0).getText();
-  }
+		if (prefixes != "") {
+			nameBuilder.append(prefixes);
+		}
+		if (givens != "") {
+			nameBuilder.append(" " + givens);
+		}
+		if (families != "") {
+			nameBuilder.append(" " + families);
+		}
+		if (suffixes != "") {
+			nameBuilder.append(" " + suffixes);
+		}
 
-  /**
-   * @return Nachnamen
-   */
-  public String getFamilyName() {
-    return mPn.getFamilies().get(0).getText();
-  }
+		return nameBuilder.toString();
+	}
 
-  public String getCompleteName() {
-    StringBuilder nameBuilder = new StringBuilder();
+	/**
+	 * @return Nachnamen
+	 */
+	public String getFamilyName() {
+		return mPn.getFamilies().get(0).getText();
+	}
 
-    //TODO Fix this with String.join
-    String prefixes = this.getPrefixes();
-    String givens = this.getGivenNames();
-    String families = this.getFamilyNames();
-    String suffixes = this.getSuffixes();
+	/**
+	 * @return das suffix Objekt
+	 */
+	public String getFamilyNames() {
+		StringBuilder nameBuilder = new StringBuilder();
 
-    if (prefixes != "") {
-      nameBuilder.append(prefixes);
-    }
-    if (givens != "") {
-      nameBuilder.append(" " + givens);
-    }
-    if (families != "") {
-      nameBuilder.append(" " + families);
-    }
-    if (suffixes != "") {
-      nameBuilder.append(" " + suffixes);
-    }
+		for (ENXP enxp : mPn.getFamilies()) {
+			nameBuilder.append(enxp.getText());
+		}
 
-    return nameBuilder.toString();
-  }
+		return nameBuilder.toString();
+	}
 
-  /**
-   * @return das prefix Objekt
-   */
-  public String getPrefixes() {
-    StringBuilder nameBuilder = new StringBuilder();
+	/**
+	 * @return Vornamen
+	 */
+	public String getGivenName() {
+		return mPn.getGivens().get(0).getText();
+	}
 
-    for (ENXP enxp : this.mPn.getPrefixes()) {
-      nameBuilder.append(enxp.getText());
-    }
+	/**
+	 * @return das suffix Objekt
+	 */
+	public String getGivenNames() {
+		StringBuilder nameBuilder = new StringBuilder();
 
-    return nameBuilder.toString();
-  }
+		for (ENXP enxp : mPn.getGivens()) {
+			nameBuilder.append(enxp.getText());
+		}
 
-  /**
-   * @return das suffix Objekt
-   */
-  public String getSuffixes() {
-    StringBuilder nameBuilder = new StringBuilder();
+		return nameBuilder.toString();
+	}
 
-    for (ENXP enxp : this.mPn.getSuffixes()) {
-      nameBuilder.append(enxp.getText());
-    }
+	public PN getPn() {
+		return mPn;
+	}
 
-    return nameBuilder.toString();
-  }
+	/**
+	 * @return das prefix Objekt
+	 */
+	public String getPrefixes() {
+		StringBuilder nameBuilder = new StringBuilder();
 
-  /**
-   * @return das suffix Objekt
-   */
-  public String getGivenNames() {
-    StringBuilder nameBuilder = new StringBuilder();
+		for (ENXP enxp : mPn.getPrefixes()) {
+			nameBuilder.append(enxp.getText());
+		}
 
-    for (ENXP enxp : this.mPn.getGivens()) {
-      nameBuilder.append(enxp.getText());
-    }
+		return nameBuilder.toString();
+	}
 
-    return nameBuilder.toString();
-  }
+	/**
+	 * @return das suffix Objekt
+	 */
+	public String getSuffixes() {
+		StringBuilder nameBuilder = new StringBuilder();
 
-  /**
-   * @return das suffix Objekt
-   */
-  public String getFamilyNames() {
-    StringBuilder nameBuilder = new StringBuilder();
+		for (ENXP enxp : mPn.getSuffixes()) {
+			nameBuilder.append(enxp.getText());
+		}
 
-    for (ENXP enxp : this.mPn.getFamilies()) {
-      nameBuilder.append(enxp.getText());
-    }
+		return nameBuilder.toString();
+	}
 
-    return nameBuilder.toString();
-  }
+	/**
+	 * @param familyName Nachnamen
+	 */
+	public void setFamilyName(String familyName) {
+		if ((familyName != null) && !familyName.equals("")) {
+			mPn.addFamily(familyName);
+		}
+	}
 
-  /**
-   * @param givenName Vornamen
-   */
-  public void setGivenName(String givenName) {
-    if ((givenName != null) && !givenName.equals("")) {
-      mPn.addGiven(givenName);
-    }
-  }
+	/**
+	 * @param givenName Vornamen
+	 */
+	public void setGivenName(String givenName) {
+		if ((givenName != null) && !givenName.equals("")) {
+			mPn.addGiven(givenName);
+		}
+	}
 
-  /**
-   * @param familyName Nachnamen
-   */
-  public void setFamilyName(String familyName) {
-    if ((familyName != null) && !familyName.equals("")) {
-      mPn.addFamily(familyName);
-    }
-  }
+	public void setPn(PN pn) {
+		mPn = pn;
+	}
 
-  /**
-   * @param prefix das prefix Objekt welches gesetzt wird
-   */
-  public void setPrefix(String prefix) {
-    if ((prefix != null) && !prefix.equals("")) {
-      mPn.addPrefix(prefix);
-    }
-  }
+	/**
+	 * @param prefix das prefix Objekt welches gesetzt wird
+	 */
+	public void setPrefix(String prefix) {
+		if ((prefix != null) && !prefix.equals("")) {
+			mPn.addPrefix(prefix);
+		}
+	}
 
-  /**
-   * @param title das title Objekt welches gesetzt wird
-   */
-  public void setTitle(String title) {
-    mPn.addPrefix(title);
-  }
+	/**
+	 * @param suffix das suffix Objekt welches gesetzt wird
+	 */
+	public void setSuffix(String suffix) {
+		if ((suffix != null) && !suffix.equals("")) {
+			mPn.addSuffix(suffix);
+		}
+	}
 
-  /**
-   * @param suffix das suffix Objekt welches gesetzt wird
-   */
-  public void setSuffix(String suffix) {
-    if ((suffix != null) && !suffix.equals("")) {
-      mPn.addSuffix(suffix);
-    }
-  }
+	/**
+	 * @param title das title Objekt welches gesetzt wird
+	 */
+	public void setTitle(String title) {
+		mPn.addPrefix(title);
+	}
 
 }
