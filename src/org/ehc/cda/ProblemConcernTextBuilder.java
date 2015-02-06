@@ -17,15 +17,15 @@ import org.openhealthtools.mdht.uml.cda.Observation;
  */
 public class ProblemConcernTextBuilder extends TextBuilder {
 
-	private List<ActiveProblemConcern> problemConcernEntries;
-	private ActiveProblemConcern newProblemConcernEntry;
+	private List<ActiveProblemConcernEntry> problemConcernEntries;
+	private ActiveProblemConcernEntry newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
 	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
 	public ProblemConcernTextBuilder(
-			ArrayList<ActiveProblemConcern> problemConcernEntries,
-			ActiveProblemConcern newProblemConcernEntry, String sectionText) {
+			ArrayList<ActiveProblemConcernEntry> problemConcernEntries,
+			ActiveProblemConcernEntry newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
 		this.newProblemConcernEntry = newProblemConcernEntry;
 		this.sectionText = sectionText;
@@ -52,7 +52,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 				this.sectionText);
 	}
 
-	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
+	public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,
 			String sectionText) {
 		String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// TODO If there is no element found that could be replaced, then an
@@ -68,7 +68,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		return tableStr;
 	}
 
-	private String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
+	private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
 		StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");
 		rowBuilder.append(buildCell("Komplikationsrisiko"));
@@ -80,7 +80,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		return rowBuilder.toString();
 	}
 
-	public ActiveProblemConcern getProblemConcernEntry() {
+	public ActiveProblemConcernEntry getProblemConcernEntry() {
 		return this.newProblemConcernEntry;
 	}
 
