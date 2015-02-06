@@ -24,22 +24,22 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ActiveProblemConcernEntry;
 import org.ehc.cda.AllergyConcern;
-import org.ehc.cda.AllergyConcernTextBuilder;
-import org.ehc.cda.Disease;
 import org.ehc.cda.Immunization;
 import org.ehc.cda.ImmunizationRecommendation;
-import org.ehc.cda.ImmunizationRecommendationTextBuilder;
-import org.ehc.cda.ImmunizationTextBuilder;
-import org.ehc.cda.LaboratoryObservationTextBuilder;
 import org.ehc.cda.Medication;
 import org.ehc.cda.PastProblemConcernEntry;
 import org.ehc.cda.Pregnancy;
 import org.ehc.cda.ProblemConcernEntry;
-import org.ehc.cda.ProblemConcernEntryTextBuilder;
-import org.ehc.cda.ProblemConcernTextBuilder;
-import org.ehc.cda.SimpleTextBuilder;
+import org.ehc.cda.ch.enums.HistoryOfPastIllness;
 import org.ehc.cda.ch.enums.LanguageCode;
 import org.ehc.cda.ch.enums.ProblemsSpecialConditions;
+import org.ehc.cda.ch.textbuilder.AllergyConcernTextBuilder;
+import org.ehc.cda.ch.textbuilder.ImmunizationRecommendationTextBuilder;
+import org.ehc.cda.ch.textbuilder.ImmunizationTextBuilder;
+import org.ehc.cda.ch.textbuilder.LaboratoryObservationTextBuilder;
+import org.ehc.cda.ch.textbuilder.ProblemConcernEntryTextBuilder;
+import org.ehc.cda.ch.textbuilder.ProblemConcernTextBuilder;
+import org.ehc.cda.ch.textbuilder.SimpleTextBuilder;
 import org.ehc.cda.converter.MedicationConverter;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
@@ -731,13 +731,13 @@ public class CdaChVacd extends CdaCh {
 		}
 	}
 
-	public boolean hasPastIllness(Disease disease) {
+	public boolean hasPastIllness(HistoryOfPastIllness disease) {
 		HistoryOfPastIllnessSection section = getDoc().getHistoryOfPastIllnessSection();
 		EList<Act> acts = section.getActs();
 		for (Act act : acts) {
 			for (Observation observation : act.getObservations()) {
 				CD code = observation.getCode();
-				if (code.getCode().equals(disease.getSnomedCode())) {
+				if (code.getCode().equals(disease.getCode().getCode())) {
 					return true;
 				}
 			}

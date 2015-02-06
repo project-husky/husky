@@ -57,6 +57,10 @@ public class Value {
 		setUcumUnit(unit);
 	}
 
+	public Value(ANY value) {
+		this.mValue = value;
+	}
+
 	public CD copyMdhtCode() {
 		return EcoreUtil.copy((CD) mValue);
 	}

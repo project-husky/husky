@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
+import org.ehc.common.Value;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
@@ -82,14 +83,14 @@ public class ProblemEntry {
 	public ProblemEntry(Date startOfProblem,
 			Date endOfProblem, org.ehc.common.Code problem, String internalProblemId) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		setProblemNotOccured(false);
+		setNotOccured(false);
 		try {
-			setStartOfProblem(startOfProblem);
-			setEndOfProblem(endOfProblem);
+			setProblemStart(startOfProblem);
+			setEnd(endOfProblem);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		setInternalId(internalProblemId);
+		setId(internalProblemId);
 		setValue(problem);
 	}
 
@@ -120,9 +121,9 @@ public class ProblemEntry {
 	public ProblemEntry(org.ehc.common.Code problem) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
 		mProblemEntry.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
-		setProblemNotOccured(false);
-		setCodedProblem(problem);
-		setInternalId(null);
+		setNotOccured(false);
+		setCode(problem);
+		setId(null);
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.UNK);
 		mProblemEntry.getValues().add(cd);
@@ -135,10 +136,14 @@ public class ProblemEntry {
 		mProblemEntry = problemEntry;
 	}
 
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry copyMdhtProblemEntry() {
+		return EcoreUtil.copy(mProblemEntry);
+	}
+
 	/**
 	 * @return das codedProblem Objekt
 	 */
-	public org.ehc.common.Code getCodedProblem() {
+	public org.ehc.common.Code getCode() {
 		org.ehc.common.Code code = new org.ehc.common.Code(mProblemEntry.getCode());
 		return code;
 	}
@@ -146,41 +151,26 @@ public class ProblemEntry {
 	/**
 	 * @return das endOfProblem Objekt
 	 */
-	public String getEndOfProblem() {
+	public String getEnd() {
 		return Util.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getHigh().getValue());
-	}
-
-	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
-		return EcoreUtil.copy(mProblemEntry);
 	}
 
 	/**
 	 * @return das startOfProblem Objekt
 	 */
-	public String getStartOfProblem() {
+	public String getStart() {
 		return Util.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getLow().getValue());
 	}
 
 	/**
 	 * The Value may be a coded or uncoded String. 
-	 * <p>If the value is coded, the convenience API will return the Code. </p>
-	 * <p>If the value is uncoded, the convenience API will return the xml reference to the free text description of the document for further processing. </p>
 	 * @return the problem value as string.
 	 */
-	public String getValue() { 
-		//TODO The best solution is to return the human readable content, if no code is available. 
-		//Maybe it´s better to generate a list with values here, but this way is more convenient and should be ok, in most of the cases.
-		for (ANY any : mProblemEntry.getValues()) {
-			if (any instanceof CD) {
-				return ((CD) any).getCode();
-			}
-			if (any instanceof ED) {
-				return ((ED) any).getText();
-			}
-		}
-		return null;
+	public Value getValue() { 
+		Value value = new Value(mProblemEntry.getValues().get(0));
+		return value;
 	}
 
 	/**
@@ -190,11 +180,16 @@ public class ProblemEntry {
 		return mProblemEntry.getNegationInd();
 	}
 
+	public void setId(String id) {
+		II ii = Util.createUuidVacd(id);
+		mProblemEntry.getIds().add(ii);
+	}
+
 	/**
 	 * @param codedProblem
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
-	public void setCodedProblem(org.ehc.common.Code codedProblem) {
+	public void setCode(org.ehc.common.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
 	}
 
@@ -203,21 +198,16 @@ public class ProblemEntry {
 	 *            das endOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setEndOfProblem(Date endOfProblem) throws ParseException {
+	public void setEnd(Date endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
 				DateUtil.createIVXB_TSFromDate(endOfProblem));
-	}
-
-	public void setInternalId(String id) {
-		II ii = Util.createUuidVacd(id);
-		mProblemEntry.getIds().add(ii);
 	}
 
 	/**
 	 * @param problemNotOccured
 	 *            das problemNotOccured Objekt welches gesetzt wird
 	 */
-	public void setProblemNotOccured(boolean problemNotOccured) {
+	public void setNotOccured(boolean problemNotOccured) {
 		mProblemEntry.setNegationInd(problemNotOccured);
 	}
 
@@ -226,7 +216,7 @@ public class ProblemEntry {
 	 *            das startOfProblem Objekt welches gesetzt wird
 	 * @throws ParseException
 	 */
-	public void setStartOfProblem(Date startOfProblem) throws ParseException {
+	public void setProblemStart(Date startOfProblem) throws ParseException {
 		if (mProblemEntry.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mProblemEntry.setEffectiveTime(interval);

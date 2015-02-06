@@ -21,6 +21,8 @@ package org.ehc.cda;
 import java.util.Date;
 import java.util.List;
 
+import org.ehc.cda.ch.enums.HistoryOfPastIllness;
+import org.ehc.cda.ch.enums.RouteOfAdministration;
 import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Author;
 import org.ehc.common.DateUtil;
@@ -55,7 +57,7 @@ public class Immunization {
 
 	private org.openhealthtools.mdht.uml.cda.ihe.Immunization mImmunization;
 
-	private RouteCode routeCode;
+	private RouteOfAdministration routeCode;
 
 	/**
 	 * Constructor.
@@ -65,7 +67,7 @@ public class Immunization {
 	 * @param atcCode
 	 * @param diseases - 
 	 */
-	public Immunization(Date appliedAt, String vaccineName, String atcCode, List<Disease> diseases) {
+	public Immunization(Date appliedAt, String vaccineName, String atcCode, List<HistoryOfPastIllness> diseases) {
 		mImmunization = IHEFactory.eINSTANCE.createImmunization().init();
 		mImmunization.setClassCode(ActClass.SBADM);
 		mImmunization.setMoodCode(x_DocumentSubstanceMood.EVN);
@@ -96,13 +98,13 @@ public class Immunization {
 		mImmunization = immunization;
 	}
 
-	private void addObservations(List<Disease> diseases) {
+	private void addObservations(List<HistoryOfPastIllness> diseases) {
 		if (diseases == null) {
 			return;
 		}
 
 		int i = 0;
-		for (Disease disease : diseases) {
+		for (HistoryOfPastIllness disease : diseases) {
 			mImmunization.addObservation(createObservation(disease));
 			// TODO how can we do this otherwise
 			mImmunization.getEntryRelationships().get(i++).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
@@ -118,17 +120,6 @@ public class Immunization {
 		timestamp.setValue(DateUtil.formatDate(appliedAt));
 		return timestamp;
 	}
-
-	private CD createCode(Disease disease) {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setCode(getProcedureCode(disease));
-		// TODO define OID constant
-		code.setCodeSystem("2.16.840.1.113883.6.96");
-
-		code.setCodeSystemName("SNOMED CT");
-		code.setDisplayName(getName(disease));
-		return code;
-	}	
 
 	private Consumable createConsumable(String vaccineName, String atcCode) {
 		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
@@ -199,7 +190,7 @@ public class Immunization {
 		return name;
 	}
 
-	private Observation createObservation(Disease disease) {
+	private Observation createObservation(HistoryOfPastIllness disease) {
 		Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
@@ -207,7 +198,7 @@ public class Immunization {
 		observation.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.2.1", "CDA-CH.VACD.Body.MediL3.Reason"));
 		// TODO define OID constant
 		observation.getIds().add(ii("2.16.756.5.30.1.1.1.1.3.2.1", "66502037-9B9C-4ECB-9D24-A8EAD5D77D4B"));
-		observation.setCode(createCode(disease));
+		observation.setCode(disease.getCD());
 		observation.setStatusCode(StatusCode.COMPLETED.getCS());
 		return observation;
 	}
@@ -232,8 +223,8 @@ public class Immunization {
 	 */
 	private CE createRouteCode() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode(routeCode.name());
-		ce.setDisplayName(routeCode.getDisplayName());
+		ce.setCode(routeCode.getCodeValue());
+		ce.setDisplayName(routeCode.getdisplayName());
 
 		// TODO define OID constant
 		ce.setCodeSystem("2.16.840.1.113883.5.112");
@@ -316,14 +307,6 @@ public class Immunization {
 		return null;
 	}
 
-	private String getName(Disease disease) {
-		return (disease == null) ? "null-disease" : disease.name() + " (procedure)";
-	}
-
-	private String getProcedureCode(Disease disease) {
-		return (disease == null) ? "null-disease" : disease.getProcedureCode();
-	}
-
 	private CE getRouteCodeAsCE() {
 		if (routeCode == null) {
 			return createRouteCodeUnknown();
@@ -350,7 +333,7 @@ public class Immunization {
 	 * 
 	 * @param routeCode
 	 */
-	public void setRouteCode(RouteCode routeCode) {
+	public void setRouteCode(RouteOfAdministration routeCode) {
 		this.routeCode = routeCode;
 	}
 

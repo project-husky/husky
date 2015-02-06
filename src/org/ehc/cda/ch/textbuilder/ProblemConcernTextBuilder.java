@@ -1,8 +1,9 @@
-package org.ehc.cda;
+package org.ehc.cda.ch.textbuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehc.cda.ActiveProblemConcernEntry;
 import org.ehc.common.ch.SectionsVACD;
 
 /**

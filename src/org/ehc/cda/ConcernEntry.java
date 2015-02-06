@@ -6,9 +6,11 @@ import java.util.Date;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehc.common.DateUtil;
+import org.ehc.common.Identificator;
 import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 public class ConcernEntry {
 	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
@@ -17,28 +19,8 @@ public class ConcernEntry {
 		mConcernEntry = concernEntry;
 	}
 
-	//  public void setEffectiveTime(String begin, String end) {
-	//    // Create and set the concern interval
-	//    try {
-	//      mConcernEntry.setEffectiveTime(DateUtil
-	//                .createIVL_TSFromEuroDate(begin, end));
-	//    } catch (ParseException e) {
-	//        e.printStackTrace();
-	//    }
-	//}
-
 	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
 		return EcoreUtil.copy(mConcernEntry);
-	}
-
-	/**
-	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
-	 * 
-	 * @return Status des Leidens
-	 */
-	public String getCodedStatusOfConcern() {
-		//TODO map the String to an enum 
-		return mConcernEntry.getStatusCode().getCode();
 	}
 
 	/**
@@ -46,7 +28,10 @@ public class ConcernEntry {
 	 * 
 	 */
 	public String getConcern() {
-		return mConcernEntry.getText().getText();
+		if (mConcernEntry.getText() != null) {
+			return mConcernEntry.getText().getText();
+		}
+		else return null;
 	}
 
 	/**
@@ -54,7 +39,7 @@ public class ConcernEntry {
 	 * 
 	 * @return Ende des Leidens
 	 */
-	public String getEndOfConcern() {
+	public String getEnd() {
 		return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
 				.getEffectiveTime().getHigh().getValue());
 	}
@@ -64,9 +49,38 @@ public class ConcernEntry {
 	 * 
 	 * @return Beginn des Leidens
 	 */
-	public String getStartOfConcern() {
+	public String getStart() {
 		return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
 				.getEffectiveTime().getLow().getValue());
+	}
+
+	/**
+	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
+	 * 
+	 * @return Status des Leidens
+	 */
+	public String getStatus() {
+		//TODO map the String to an enum 
+		return mConcernEntry.getStatusCode().getCode();
+	}
+
+	public Identificator getId() {
+		Identificator id = new Identificator(mConcernEntry.getIds().get(0).getRoot(), mConcernEntry.getIds().get(0).getExtension());
+		return id;
+	}
+	
+	
+
+	/**
+	 * Setzt das Leiden
+	 * 
+	 * @param concern
+	 *            Leiden
+	 */
+	public void setConcern(String concern) {
+		// Create and set the concern as freetext
+		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
+		mConcernEntry.setText(concernText);
 	}
 
 	/**
@@ -75,7 +89,7 @@ public class ConcernEntry {
 	 * @param concernStatus
 	 *            Status
 	 */
-	public void setCodedStatusOfConcern(ProblemConcernStatusCode concernStatus) {
+	public void setStatus(ProblemConcernStatusCode concernStatus) {
 		// Create and set the status code
 		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
 		// (Implementierungsleitfaden 7.5.2.4)
@@ -98,7 +112,7 @@ public class ConcernEntry {
 	 * @param endOfConcern
 	 *            Ende des Leidens
 	 */
-	public void setEndOfConcern(String endOfConcern) {
+	public void setEnd(String endOfConcern) {
 		try {
 			mConcernEntry.getEffectiveTime().setHigh(
 					DateUtil.createIVXB_TSFromEuroDate(endOfConcern));
@@ -106,26 +120,19 @@ public class ConcernEntry {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Setzt das Leiden
-	 * 
-	 * @param concern
-	 *            Leiden
-	 */
-	public void setProblemConcern(String concern) {
-		// Create and set the concern as freetext
-		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
-		mConcernEntry.setText(concernText);
+	
+	public void setId(String id) {
+		II ii = Util.createUuidVacd(id);
+		mConcernEntry.getIds().add(ii);
 	}
-
+	
 	/**
 	 * Setzt den Beginn des Leidens
 	 * 
 	 * @param startOfConcern
 	 *            Beginn des Leidens
 	 */
-	public void setStartOfConcern(String startOfConcern) {
+	public void setStart(String startOfConcern) {
 		try {
 			mConcernEntry.getEffectiveTime().setLow(
 					DateUtil.createIVXB_TSFromEuroDate(startOfConcern));

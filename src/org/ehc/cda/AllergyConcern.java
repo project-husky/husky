@@ -73,9 +73,9 @@ public class AllergyConcern extends ConcernEntry {
 	public AllergyConcern(String concern, AllergyProblem problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode completed) {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
-		setProblemConcern(concern);
+		setConcern(concern);
 		addAllergy(problemEntry);
-		setCodedStatusOfConcern(completed);
+		setStatus(completed);
 		setId(null);
 		setEffectiveTime(null, null);
 	}
@@ -130,10 +130,5 @@ public class AllergyConcern extends ConcernEntry {
 
 	public void setAllergyConcern(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern) {
 		this.mAllergyConcern = mAllergyConcern;
-	}
-
-	private void setId(String id) {
-		II ii = Util.createUuidVacd(id);
-		mAllergyConcern.getIds().add(ii);
 	}
 }

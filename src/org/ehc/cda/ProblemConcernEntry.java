@@ -102,11 +102,11 @@ public class ProblemConcernEntry extends ConcernEntry {
 	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
-		setProblemConcern(concern);
+		setConcern(concern);
 		addProblemEntry(problemEntry);
-		setCodedStatusOfConcern(concernStatus);
+		setStatus(concernStatus);
 		setEffectiveTime(null, null);
-		setInternalId(null);
+		setId(null);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 *            Das Problem
 	 */
 	public void addProblemEntry(ProblemEntry problemEntry) {
-		mProblemConcernEntry.addObservation(problemEntry.getMdhtProblemEntry());
+		mProblemConcernEntry.addObservation(problemEntry.copyMdhtProblemEntry());
 		EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships(); 
 		//Set the Attributes of the last added element
 		entryRel.get(entryRel.size()-1).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
@@ -155,11 +155,6 @@ public class ProblemConcernEntry extends ConcernEntry {
 		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getObservations().get(problemNr));
 		return problemEntry;
-	}
-
-	private void setInternalId(String id) {
-		II ii = Util.createUuidVacd(id);
-		mProblemConcernEntry.getIds().add(ii);
 	}
 
 	public void setProblemConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry) {

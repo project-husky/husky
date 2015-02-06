@@ -1,4 +1,4 @@
-package org.ehc.cda;
+package org.ehc.cda.ch.textbuilder;
 
 /**
  * Common code for all text builder classes.

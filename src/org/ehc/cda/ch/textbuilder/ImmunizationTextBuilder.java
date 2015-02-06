@@ -1,7 +1,8 @@
-package org.ehc.cda;
+package org.ehc.cda.ch.textbuilder;
 
 import java.util.List;
 
+import org.ehc.cda.Immunization;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.ehc.common.ch.SectionsVACD;

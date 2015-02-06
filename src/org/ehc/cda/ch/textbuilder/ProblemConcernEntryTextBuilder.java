@@ -1,7 +1,8 @@
-package org.ehc.cda;
+package org.ehc.cda.ch.textbuilder;
 
 import java.util.ArrayList;
 
+import org.ehc.cda.ProblemConcernEntry;
 import org.ehc.common.ch.SectionsVACD;
 
 /**
@@ -11,9 +12,9 @@ import org.ehc.common.ch.SectionsVACD;
  * 
  * @author Axel Helmer
  */
-public class AllergyConcernTextBuilder extends TextBuilder {
+public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-	private ArrayList<org.ehc.cda.AllergyConcern> problemConcerns;
+	private ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns;
 	private String contentIdPrefix;
 
 	/**
@@ -21,7 +22,7 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 	 * 
 	 * @param pastProblemConcerns
 	 */
-	public AllergyConcernTextBuilder(ArrayList<org.ehc.cda.AllergyConcern> problemConcerns, SectionsVACD section) {
+	public ProblemConcernEntryTextBuilder(ArrayList<org.ehc.cda.ProblemConcernEntry> problemConcerns, SectionsVACD section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
@@ -29,11 +30,12 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
-		for (org.ehc.cda.AllergyConcern problemConcern : problemConcerns) {
+		for (org.ehc.cda.ProblemConcernEntry problemConcern : problemConcerns) {
 			addRow(problemConcern, i++);
 		}
 		append("</tbody>");
 	}
+
 
 	private void addHeader() {
 		append("<thead>");
@@ -44,10 +46,10 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
-	private void addRow(AllergyConcern allergyConcern, int i) {
+	private void addRow(org.ehc.cda.ProblemConcernEntry problemConcern, int i) {
 		append("<tr>");
 		addCell("Komplikationsrisiko");
-		addCellWithContent(allergyConcern.getConcern(), contentIdPrefix , i);
+		addCellWithContent(problemConcern.getConcern(), contentIdPrefix , i);
 		append("</tr>");
 	}
 

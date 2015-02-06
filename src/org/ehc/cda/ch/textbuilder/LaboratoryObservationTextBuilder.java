@@ -1,7 +1,8 @@
-package org.ehc.cda;
+package org.ehc.cda.ch.textbuilder;
 
 import java.util.ArrayList;
 
+import org.ehc.cda.LaboratoryObservation;
 import org.ehc.common.ch.SectionsVACD;
 
 /**
