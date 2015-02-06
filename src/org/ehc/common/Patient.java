@@ -23,11 +23,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.ehc.cda.ch.enums.AdministrativeGender;
 import org.ehc.common.Address;
 import org.ehc.common.Identificator;
 import org.ehc.common.Name;
 import org.ehc.common.Util;
-import ch.ehc.cda.enums.AdministrativeGender;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;

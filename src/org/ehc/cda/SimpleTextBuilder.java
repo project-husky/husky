@@ -1,6 +1,6 @@
 package org.ehc.cda;
 
-import ch.ehc.common.SectionsVACD;
+import org.ehc.common.ch.SectionsVACD;
 
 public class SimpleTextBuilder extends TextBuilder {
   public static final String contentTagStr = "<content";

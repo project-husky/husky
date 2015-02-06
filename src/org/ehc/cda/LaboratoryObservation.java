@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.CodeSystems;
+import org.ehc.cda.ch.enums.ObservationInterpretation;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Organization;
@@ -18,13 +20,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
-import ch.ehc.cda.enums.CodeSystems;
-import ch.ehc.cda.enums.ObservationInterpretation;
-
 public class LaboratoryObservation {
   org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
   
-  public LaboratoryObservation(ch.ehc.cda.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
     mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
     
     this.setCode(code.getCode());
@@ -35,13 +34,13 @@ public class LaboratoryObservation {
   
   //TODO Create Constructor for unknown Types of "Erregernachweise"
  
-  public LaboratoryObservation(ch.ehc.cda.enums.Serologie code, double value, String valuesUcumUnit, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, double value, String valuesUcumUnit, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
     this(code, immuneProtection, dateTimeOfResult, laboratory);
     
     this.setValue(value, valuesUcumUnit);
   }
   
-  public LaboratoryObservation(ch.ehc.cda.enums.Serologie code, Code valueCode, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+  public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Code valueCode, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
     this(code, immuneProtection, dateTimeOfResult, laboratory);
     
     this.setValue(valueCode);

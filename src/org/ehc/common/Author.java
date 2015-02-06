@@ -19,6 +19,7 @@
 package org.ehc.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.Address;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Identificator;
@@ -32,8 +33,6 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-
-import ch.ehc.cda.enums.CodeSystems;
 
 
 /**

@@ -20,8 +20,8 @@ package org.ehc.cda;
 
 import java.net.URI;
 
-import ch.ehc.common.ConvenienceUtilsEnums.AdvanceDirectiveTypeCdaChVacd;
-import ch.ehc.common.ConvenienceUtilsEnums.AgreementStatusCode;
+import org.ehc.common.ch.ConvenienceUtilsEnums.AdvanceDirectiveTypeCdaChVacd;
+import org.ehc.common.ch.ConvenienceUtilsEnums.AgreementStatusCode;
 
 /**
  * Codierte Patienteneinverständniserklärung

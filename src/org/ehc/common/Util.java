@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
+import org.ehc.cda.ch.CdaChVacd;
 import org.ehc.common.ConvenienceUtilsEnums.AdministrativeGenderCode;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
@@ -53,8 +54,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-
-import ch.ehc.cda.CdaChVacd;
 
 /**
  * Hilfs-Methoden

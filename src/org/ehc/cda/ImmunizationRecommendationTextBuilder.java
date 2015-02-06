@@ -3,10 +3,9 @@ package org.ehc.cda;
 import java.util.List;
 
 import org.ehc.common.Util;
+import org.ehc.common.ch.SectionsVACD;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-
-import ch.ehc.common.SectionsVACD;
 
 /**
  * Builds the <text> part of the Immunization recommendations.

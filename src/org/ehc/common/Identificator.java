@@ -18,12 +18,11 @@
 
 package org.ehc.common;
 
+import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-
-import ch.ehc.cda.enums.CodeSystems;
 
 /**
  * Representiert eine weltweit eindeutige ID (besteht aus lokaler ID und der OID

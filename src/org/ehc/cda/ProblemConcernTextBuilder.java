@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehc.common.Util;
+import org.ehc.common.ch.SectionsVACD;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Observation;
-
-import ch.ehc.common.SectionsVACD;
 
 /**
  * Builds the <text> part of the Treatment plan section.
@@ -18,15 +17,15 @@ import ch.ehc.common.SectionsVACD;
  */
 public class ProblemConcernTextBuilder extends TextBuilder {
 
-	private List<ActiveProblemConcernEntry> problemConcernEntries;
-	private ActiveProblemConcernEntry newProblemConcernEntry;
+	private List<ActiveProblemConcern> problemConcernEntries;
+	private ActiveProblemConcern newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
 	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
 	public ProblemConcernTextBuilder(
-			ArrayList<ActiveProblemConcernEntry> problemConcernEntries,
-			ActiveProblemConcernEntry newProblemConcernEntry, String sectionText) {
+			ArrayList<ActiveProblemConcern> problemConcernEntries,
+			ActiveProblemConcern newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
 		this.newProblemConcernEntry = newProblemConcernEntry;
 		this.sectionText = sectionText;
@@ -53,7 +52,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 				this.sectionText);
 	}
 
-	public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,
+	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
 			String sectionText) {
 		String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// TODO If there is no element found that could be replaced, then an
@@ -69,7 +68,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		return tableStr;
 	}
 
-	private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
+	private String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
 		StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");
 		rowBuilder.append(buildCell("Komplikationsrisiko"));
@@ -81,7 +80,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 		return rowBuilder.toString();
 	}
 
-	public ActiveProblemConcernEntry getProblemConcernEntry() {
+	public ActiveProblemConcern getProblemConcernEntry() {
 		return this.newProblemConcernEntry;
 	}
 

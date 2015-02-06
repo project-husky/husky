@@ -1,6 +1,7 @@
 package org.ehc.cda;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.Code;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Material;
@@ -11,8 +12,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EN;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
-
-import ch.ehc.cda.enums.CodeSystems;
 
 public class Consumable {
 

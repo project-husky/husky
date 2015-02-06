@@ -23,15 +23,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-
-import ch.ehc.cda.enums.ProblemConcernStatusCode;
-import ch.ehc.cda.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -75,7 +74,7 @@ public class AllergyConcern extends ConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public AllergyConcern(String concern, AllergyProblem problemEntry, ch.ehc.cda.enums.ProblemConcernStatusCode completed) {
+	public AllergyConcern(String concern, AllergyProblem problemEntry, org.ehc.cda.ch.enums.ProblemConcernStatusCode completed) {
 	    super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 	    this.mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
 		this.setProblemConcern(concern);

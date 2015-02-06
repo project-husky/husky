@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -31,9 +33,6 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-
-import ch.ehc.cda.enums.ProblemConcernStatusCode;
-import ch.ehc.cda.enums.StatusCode;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
@@ -77,7 +76,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public ProblemConcernEntry(String concern, ProblemEntry problemEntry, ch.ehc.cda.enums.ProblemConcernStatusCode concernStatus) {
+	public ProblemConcernEntry(String concern, Problem problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 		this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
 		this.setProblemConcern(concern);
@@ -109,7 +108,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 *            du problème</div>
 	 */
 	public ProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+			Date begin, Date end, Problem problemEntry, ProblemConcernStatusCode concernStatus) {
       this(concern, problemEntry, concernStatus);
       this.setEffectiveTime(begin, end);
 	}
@@ -120,7 +119,7 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 * @param problemEntry
 	 *            Das Problem
 	 */
-	public void addProblemEntry(ProblemEntry problemEntry) {
+	public void addProblemEntry(Problem problemEntry) {
 	  mProblemConcernEntry.addObservation(problemEntry.getMdhtProblemEntry());
 	  EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships(); 
 	  //Set the Attributes of the last added element
@@ -133,8 +132,8 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 * 
 	 * @return das problemConcern Objekt
 	 */
-	public ProblemEntry getProblemEntry() {
-		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
+	public Problem getProblemEntry() {
+		Problem problemEntry = new Problem(copyMdhtProblemConcernEntry()
 				.getObservations().get(0));
 		return problemEntry;
 	}
@@ -146,10 +145,10 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 * 		Nummer des Leidens
 	 * @return das problemConcern Objekt, sonst null
 	 */
-	public ProblemEntry getProblemEntry(int problemNr) {
+	public Problem getProblemEntry(int problemNr) {
 		// TODO Convert the Observation List in a ehealthconnector ProblemEntry
 		// list (List<ProblemEntry>) this.getObservations();
-		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
+		Problem problemEntry = new Problem(copyMdhtProblemConcernEntry()
 				.getObservations().get(problemNr));
 		return problemEntry;
 	}

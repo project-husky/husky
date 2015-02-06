@@ -3,7 +3,7 @@ package org.ehc.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ehc.common.SectionsVACD;
+import org.ehc.common.ch.SectionsVACD;
 
 /**
  * Builds the <text> part of the Immunization recommendations.

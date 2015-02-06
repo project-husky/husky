@@ -1,5 +1,6 @@
 package org.ehc.cda;
 
+import org.ehc.cda.ch.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -14,8 +15,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
-
-import ch.ehc.cda.enums.StatusCode;
 
 /**
  * Builder for one problem concern entry.

@@ -4,12 +4,11 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-
-import ch.ehc.cda.enums.ProblemConcernStatusCode;
 
 public class ConcernEntry {
   org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;

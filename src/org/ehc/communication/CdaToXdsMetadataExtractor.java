@@ -5,12 +5,11 @@ package org.ehc.communication;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.ehc.cda.ch.CdaChVacd;
 import org.ehc.common.Author;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
-
-import ch.ehc.cda.CdaChVacd;
 
 public class CdaToXdsMetadataExtractor {
 	

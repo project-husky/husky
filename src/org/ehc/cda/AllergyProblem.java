@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Util;
@@ -34,8 +35,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
-
-import ch.ehc.cda.enums.AllergiesAndIntolerances;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
