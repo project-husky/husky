@@ -1,61 +1,62 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
-
 import org.ehc.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
- *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus den, in Kapitel 7.5.2.4 Spezifikation CDA Body Level 3  Problem Entry auf Seite 53 genannten Codesystemen dürfen ebenfalls verwendet werden. Hinweis: es handelt sich hier um durchgemachte Erkrankungen, die einen Immunschutz zur Folge haben.</div>
- *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés des systèmes de codes mentionnés au cha-pitre 7.5.2.4 « Spécification CDA Body Level 3  Problem Entry » à la page 53. Remarque : il sagit ici d'antécédents médicaux ayant été à lorigine dune protection immunitaire.</div>
- */
+*<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus den, in Kapitel 7.5.2.4 Spezifikation CDA Body Level 3  Problem Entry auf Seite 53 genannten Codesystemen dürfen ebenfalls verwendet werden. Hinweis: es handelt sich hier um durchgemachte Erkrankungen, die einen Immunschutz zur Folge haben.</div>
+*<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés des systèmes de codes mentionnés au cha-pitre 7.5.2.4 « Spécification CDA Body Level 3  Problem Entry » à la page 53. Remarque : il sagit ici d'antécédents médicaux ayant été à lorigine dune protection immunitaire.</div>
+*/
 public enum HistoryOfPastIllness {
 
 	/** 
-	 *<div class="de">Windpocken</div>
-	 *<div class="fr">Varicelle</div>
-	 */
+	*<div class="de">Windpocken</div>
+	*<div class="fr">Varicelle</div>
+	*/
 	HO_CHICKENPOX ("38907003", "H/O: chickenpox"),
 	/** 
-	 *<div class="de">Masern</div>
-	 *<div class="fr">Rougeole</div>
-	 */
+	*<div class="de">Masern</div>
+	*<div class="fr">Rougeole</div>
+	*/
 	HO_MEASLES ("14189004", "H/O: measles"),
 	/** 
-	 *<div class="de">Mumps</div>
-	 *<div class="fr">Oreillons</div>
-	 */
+	*<div class="de">Mumps</div>
+	*<div class="fr">Oreillons</div>
+	*/
 	HO_MUMPS ("36989005", "H/O: mumps"),
 	/** 
-	 *<div class="de">Röteln</div>
-	 *<div class="fr">Rubéole</div>
-	 */
+	*<div class="de">Röteln</div>
+	*<div class="fr">Rubéole</div>
+	*/
 	HO_RUBELLA ("36653000", "H/O: rubella"),
 	/** 
-	 *<div class="de">Hepatitis A</div>
-	 *<div class="fr">Hépatite A</div>
-	 */
+	*<div class="de">Hepatitis A</div>
+	*<div class="fr">Hépatite A</div>
+	*/
 	HEPATITIS_A ("40468003", "Hepatitis A"),
 	/** 
-	 *<div class="de">Hepatitis B</div>
-	 *<div class="fr">Hépatite B</div>
-	 */
+	*<div class="de">Hepatitis B</div>
+	*<div class="fr">Hépatite B</div>
+	*/
 	HEPATITIS_B ("66071002", "Hepatitis B"),
 	/** 
-	 *<div class="de">FSM</div>
-	 *<div class="fr">Encéphalite à tiques</div>
-	 */
+	*<div class="de">FSM</div>
+	*<div class="fr">Encéphalite à tiques</div>
+	*/
 	CENTRAL_EUROPEAN_ENCEPHALITIS ("16901001", "Central European encephalitis"),
 	/** 
-	 *<div class="de">Gelbfieber</div>
-	 *<div class="fr">Fièvre jaune</div>
-	 */
+	*<div class="de">Gelbfieber</div>
+	*<div class="fr">Fièvre jaune</div>
+	*/
 	YELLOW_FEVER ("16541001", "Yellow Fever"),
 	/** 
-	 *<div class="de">Tetanus</div>
-	 *<div class="fr">Tétanos</div>
-	 */
+	*<div class="de">Tetanus</div>
+	*<div class="fr">Tétanos</div>
+	*/
 	TETANUS ("76902006", "Tetanus");
 	public static final String HO_CHICKENPOX_CODE="38907003";
 	public static final String HO_MEASLES_CODE="14189004";
@@ -80,6 +81,19 @@ public enum HistoryOfPastIllness {
 		this.displayName = displayName;
 	}
 
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	public String getdisplayName() {
+		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM);
@@ -88,30 +102,19 @@ public enum HistoryOfPastIllness {
 		return cd;
 	}
 
-	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
-		return ehcCode;
-	}
-
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	public String getCodeValue() {
-		return code;
-	}
-
-	public String getdisplayName() {
-		return displayName;
+	public static HistoryOfPastIllness getEnum(String code) {
+		for (HistoryOfPastIllness x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
+
 	public boolean isInValueSet(String code) {
 		for (HistoryOfPastIllness x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -119,6 +122,13 @@ public enum HistoryOfPastIllness {
 			}
 		}
 		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

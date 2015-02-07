@@ -1,31 +1,32 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
-
 import org.ehc.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
- *<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>
- *<div class="fr"></div>
- */
+*<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>
+*<div class="fr"></div>
+*/
 public enum AdministrativeGender {
 
 	/** 
-	 *<div class="de">Weiblich</div>
-	 *<div class="fr"></div>
-	 */
+	*<div class="de">Weiblich</div>
+	*<div class="fr"></div>
+	*/
 	FEMALE ("F", "Female"),
 	/** 
-	 *<div class="de">Männlich</div>
-	 *<div class="fr"></div>
-	 */
+	*<div class="de">Männlich</div>
+	*<div class="fr"></div>
+	*/
 	MALE ("M", "Male"),
 	/** 
-	 *<div class="de">Undifferenziert</div>
-	 *<div class="fr"></div>
-	 */
+	*<div class="de">Undifferenziert</div>
+	*<div class="fr"></div>
+	*/
 	UNDIFFERENTIATED ("UN", "Undifferentiated");
 	public static final String FEMALE_CODE="F";
 	public static final String MALE_CODE="M";
@@ -44,11 +45,12 @@ public enum AdministrativeGender {
 		this.displayName = displayName;
 	}
 
-	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
-		ce.setCode(code);
-		return ce;
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	public String getdisplayName() {
+		return this.displayName;
 	}
 
 	public Code getCode() {
@@ -56,25 +58,27 @@ public enum AdministrativeGender {
 		return ehcCode;
 	}
 
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	public String getCodeValue() {
-		return code;
-	}
-
-	public String getdisplayName() {
-		return displayName;
+	public static AdministrativeGender getEnum(String code) {
+		for (AdministrativeGender x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
+
 	public boolean isInValueSet(String code) {
 		for (AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -82,6 +86,13 @@ public enum AdministrativeGender {
 			}
 		}
 		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

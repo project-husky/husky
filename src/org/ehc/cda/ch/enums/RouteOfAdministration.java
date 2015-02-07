@@ -1,46 +1,47 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
-
 import org.ehc.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
- *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>
- *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés de HL7 RouteOfAdministration.Remarque : Les entrées pertinentes pour les vaccins sont indiquées en gras.</div>
- */
+*<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>
+*<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés de HL7 RouteOfAdministration.Remarque : Les entrées pertinentes pour les vaccins sont indiquées en gras.</div>
+*/
 public enum RouteOfAdministration {
 
 	/** 
-	 *<div class="de">Injektion, intradermal</div>
-	 *<div class="fr">Injection intradermique</div>
-	 */
+	*<div class="de">Injektion, intradermal</div>
+	*<div class="fr">Injection intradermique</div>
+	*/
 	INJECTION_INTRADERMAL ("IDINJ", "Injection, intradermal "),
 	/** 
-	 *<div class="de">Inhalation, Vernebelung, nasal</div>
-	 *<div class="fr">Inhalation par nébulisation nasale</div>
-	 */
+	*<div class="de">Inhalation, Vernebelung, nasal</div>
+	*<div class="fr">Inhalation par nébulisation nasale</div>
+	*/
 	INHALATION_NEBULIZATION_NASAL ("NASNEB", "Inhalation, nebulization, nasal "),
 	/** 
-	 *<div class="de">Schlucken, oral</div>
-	 *<div class="fr">Prendre par la bouche</div>
-	 */
+	*<div class="de">Schlucken, oral</div>
+	*<div class="fr">Prendre par la bouche</div>
+	*/
 	SWALLOW_ORAL ("PO", "Swallow, oral "),
 	/** 
-	 *<div class="de">Injektion, subkutan</div>
-	 *<div class="fr">Injection sous-cutanée</div>
-	 */
+	*<div class="de">Injektion, subkutan</div>
+	*<div class="fr">Injection sous-cutanée</div>
+	*/
 	INJECTION_SUBCUTANEOUS ("SQ", "Injection, subcutaneous "),
 	/** 
-	 *<div class="de">Diffusion, transdermal</div>
-	 *<div class="fr">Diffusion transdermique</div>
-	 */
+	*<div class="de">Diffusion, transdermal</div>
+	*<div class="fr">Diffusion transdermique</div>
+	*/
 	DIFFUSION_TRANSDERMAL ("TRNSDERMD", "Diffusion, transdermal "),
 	/** 
-	 *<div class="de">Injektion, intramuskulär</div>
-	 *<div class="fr">Injection intra-musculaire</div>
-	 */
+	*<div class="de">Injektion, intramuskulär</div>
+	*<div class="fr">Injection intra-musculaire</div>
+	*/
 	INJECTION_INTRAMUSCULAR ("IM", "Injection, intramuscular");
 	public static final String INJECTION_INTRADERMAL_CODE="IDINJ";
 	public static final String INHALATION_NEBULIZATION_NASAL_CODE="NASNEB";
@@ -62,12 +63,12 @@ public enum RouteOfAdministration {
 		this.displayName = displayName;
 	}
 
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	public String getdisplayName() {
+		return this.displayName;
 	}
 
 	public Code getCode() {
@@ -75,25 +76,27 @@ public enum RouteOfAdministration {
 		return ehcCode;
 	}
 
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	public String getCodeValue() {
-		return code;
-	}
-
-	public String getdisplayName() {
-		return displayName;
+	public static RouteOfAdministration getEnum(String code) {
+		for (RouteOfAdministration x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
+
 	public boolean isInValueSet(String code) {
 		for (RouteOfAdministration x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -101,6 +104,13 @@ public enum RouteOfAdministration {
 			}
 		}
 		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

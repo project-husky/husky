@@ -1,36 +1,37 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
-
 import org.ehc.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
- *<div class="de">Quelle für Subset: [IHE PCC TF-2], 6.3.4.14.11</div>
- *<div class="fr">Source du sous-ensemble : [IHE PCC TF-2], 6.3.4.14.11</div>
- */
+*<div class="de">Quelle für Subset: [IHE PCC TF-2], 6.3.4.14.11</div>
+*<div class="fr">Source du sous-ensemble : [IHE PCC TF-2], 6.3.4.14.11</div>
+*/
 public enum ProblemsSpecialConditions {
 
 	/** 
-	 *<div class="de">Keine relevante Anamnese</div>
-	 *<div class="fr">Aucune anamnèse pertinente</div>
-	 */
+	*<div class="de">Keine relevante Anamnese</div>
+	*<div class="fr">Aucune anamnèse pertinente</div>
+	*/
 	NO_SIGNIFICANT_MEDICAL_HISTORY ("160243008", "No Significant Medical History"),
 	/** 
-	 *<div class="de">Patient hat keine aktuellen Probleme</div>
-	 *<div class="fr">Aucun problème actuel</div>
-	 */
+	*<div class="de">Patient hat keine aktuellen Probleme</div>
+	*<div class="fr">Aucun problème actuel</div>
+	*/
 	NO_CURRENT_PROBLEMS_OR_DISABILITY ("160245001", "No current problems or disability"),
 	/** 
-	 *<div class="de">Keine Anamnese bekannt</div>
-	 *<div class="fr">Aucune anamnèse connue</div>
-	 */
+	*<div class="de">Keine Anamnese bekannt</div>
+	*<div class="fr">Aucune anamnèse connue</div>
+	*/
 	HISTORY_OF_PAST_ILLNESS_UNKNOWN ("396782006", "History of Past Illness unknown"),
 	/** 
-	 *<div class="de">Keine Familienanamnese bekannt</div>
-	 *<div class="fr">Aucun antécédent familial connu</div>
-	 */
+	*<div class="de">Keine Familienanamnese bekannt</div>
+	*<div class="fr">Aucun antécédent familial connu</div>
+	*/
 	FAMILY_HISTORY_UNKNOWN ("407559004", "Family History Unknown");
 	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE="160243008";
 	public static final String NO_CURRENT_PROBLEMS_OR_DISABILITY_CODE="160245001";
@@ -50,6 +51,19 @@ public enum ProblemsSpecialConditions {
 		this.displayName = displayName;
 	}
 
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	public String getdisplayName() {
+		return this.displayName;
+	}
+
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		return ehcCode;
+	}
+
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM);
@@ -58,30 +72,19 @@ public enum ProblemsSpecialConditions {
 		return cd;
 	}
 
-	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
-		return ehcCode;
-	}
-
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	public String getCodeValue() {
-		return code;
-	}
-
-	public String getdisplayName() {
-		return displayName;
+	public static ProblemsSpecialConditions getEnum(String code) {
+		for (ProblemsSpecialConditions x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}
+
 	public boolean isInValueSet(String code) {
 		for (ProblemsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -89,6 +92,13 @@ public enum ProblemsSpecialConditions {
 			}
 		}
 		return false;
+	}
+
+	public String getCodeSystemId() {
+		return CODE_SYSTEM;
+	}
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }
