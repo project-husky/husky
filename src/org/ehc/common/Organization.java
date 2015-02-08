@@ -75,7 +75,7 @@ public class Organization {
 	 *            Adresse
 	 */
 	public void addAddress(Address address) {
-		getMdhtOrganization().getAddrs().add(address);
+		getMdhtOrganization().getAddrs().add(address.copyMdhtAdress());
 	}
 
 	/**

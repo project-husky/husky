@@ -72,6 +72,10 @@ public class Identificator {
 		setRoot(oid);
 		setExtension(id);
 	}
+	
+	public Identificator(II ii) {
+		this.mII = ii;
+	}
 
 	/**
 	 * Liefert die ID

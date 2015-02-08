@@ -18,16 +18,25 @@
 
 package org.ehc.common;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.AllergyProblem;
 import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 
 /**
@@ -37,9 +46,20 @@ public class Author {
 	org.openhealthtools.mdht.uml.cda.Author mAuthor;
 
 	/**
+	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
+	 * Objekts
+	 * 
+	 * @param authorMdht
+	 */
+	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
+		mAuthor = authorMdht;
+	}
+
+	/**
 	 * @param iAuthor
 	 */
 	public Author(AuthorType iAuthor) {
+		//TODO Create Constructor for IHEProfiles Author object
 		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
 
@@ -77,23 +97,13 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
-	 * Objekts
-	 * 
-	 * @param authorMdht
-	 */
-	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
-		mAuthor = authorMdht;
-	}
-
-	/**
 	 * Weist dem Autor eine Postadresse zu
 	 * 
 	 * @param address
 	 *            Die Postadresse des Autors
 	 */
 	public void addAddress(Address address) {
-		mAuthor.getAssignedAuthor().getAddrs().add(address);
+		mAuthor.getAssignedAuthor().getAddrs().add(address.copyMdhtAdress());
 	}
 
 	/**
@@ -104,23 +114,8 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void addEMail(String eMail, UseCode usage) {
-		// Auto-generated method stub
-
-	}
-
-	/**
-	 * Weist dem Autor eine Faxnummer zu
-	 * 
-	 * @param faxNr
-	 *            Faxnummer (nur internationale Rufnummer ohne Sonderzeichen
-	 *            erlaubt). Beispiel: +41322345566
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addFax(String faxNr, UseCode usage) {
-		// Auto-generated method stub
-
+	private void addEMail(String eMail, UseCode usage) {
+		//TODO Implement this
 	}
 
 	/**
@@ -130,8 +125,17 @@ public class Author {
 	 *            Kombination von eigentlicher ID und der OID der verwaltenden
 	 *            Domäne
 	 */
-	public void addID(Identificator identificator) {
+	public void addId(Identificator identificator) {
 		mAuthor.getAssignedAuthor().getIds().add(identificator.getIi());
+	}
+	
+	public ArrayList<Identificator> getIds() {
+		ArrayList<Identificator> il = new ArrayList<Identificator>();
+		for (II mId: mAuthor.getAssignedAuthor().getIds()) {
+			Identificator id = new Identificator(mId);
+			il.add(id);
+		}
+		return il;
 	}
 
 	public void addName(Name name) {
@@ -139,35 +143,40 @@ public class Author {
 		.add(name.getPn());
 	}
 
-	public void addName(String familyName) {
-		mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0)
-		.getFamilies().add(Util.createName(familyName));
-	}
-
 	/**
-	 * Weist dem Autor eine Telefonnummer zu
+	 * Weist dem Autor eine Telefon- oder Faxnummer zu
 	 * 
 	 * @param phoneNr
-	 *            Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen
+	 *            Telefon- oder Faxnummer (nur internationale Rufnummer ohne Sonderzeichen
 	 *            erlaubt). Beispiel: +41322345566
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
-	public void addPhone(String phoneNr, UseCode usage) {
-		// Auto-generated method stub
-
+	public void addTelecom(String phoneNr, TelecommunicationAddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL(phoneNr);
+		tel.getUses().add(usage);
+		this.mAuthor.getAssignedAuthor().getTelecoms().add(tel);
 	}
-
+	
+	public HashMap<String, TelecommunicationAddressUse> getTelecoms() {
+		HashMap<String, TelecommunicationAddressUse> pm = new HashMap<String, TelecommunicationAddressUse>();
+		for (TEL mName: mAuthor.getAssignedAuthor().getTelecoms()) {
+			pm.put(mName.getValue(), mName.getUses().get(0));
+		}
+		return pm;
+	}
+	
 	/**
 	 * Weist dem Autor ein Fachgebiet zu (wird vor allem für Ärzte gebraucht)
 	 * 
 	 * @param speciality
 	 *            Fachgebiet (z.B. Facharzt für Allgemeine Medizin)
 	 */
-	public void addSpeciality(String speciality) {
+	private void addSpeciality(String speciality) {
 		// Auto-generated method stub
 		// This is not a CDA-Element, but is important for the transmission of a
 		// document with XDS!
+		//TODO Implement this (there seems to be no way to do it directly with the MDHT API).
 	}
 
 	/**
@@ -179,8 +188,7 @@ public class Author {
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public void addWebsite(String eMail, UseCode usage) {
-		// Auto-generated method stub
-
+		//TODO Implement this!
 	}
 
 	private CE createFunctionCode() {
@@ -217,17 +225,48 @@ public class Author {
 		}
 		return "";
 	}
+	
+	public Name getName() {
+		Name name = new Name (this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+		return name;
+	}
+	
+	public ArrayList<Name> getNames() {
+		ArrayList<Name> nl = new ArrayList<Name>();
+		for (PN mName: mAuthor.getAssignedAuthor().getAssignedPerson().getNames()) {
+			Name name = new Name(mName);
+			nl.add(name);
+		}
+		return nl;
+	}
 
 	public String getGln() {
 		// TODO Alle Ids durchsehen und die richtige (anhand der root-id)
 		// zurückliefern.
 		return mAuthor.getAssignedAuthor().getIds().get(0).getExtension();
 	}
+	
+	public Identificator getGlnAdIdentificator() {
+		II ii =  mAuthor.getAssignedAuthor().getIds().get(0);
+		Identificator id = new Identificator(ii);
+		return id;
+	}
+	
+	public Address getAddress() {
+		Address address = new Address(mAuthor.getAssignedAuthor().getAddrs().get(0));
+		return address;
+	}
+	
+	public ArrayList<Address> getAddresses() {
+		ArrayList<Address> al = new ArrayList<Address>();
+		for (AD mAddress: mAuthor.getAssignedAuthor().getAddrs()) {
+			Address address = new Address(mAddress);
+			al.add(address);
+		}
+		return al;
+	}
 
 	public void setGln(String gln) {
-		// TODO Construct Enums that deliver the real OIDs in Numbers (like in
-		// hl7.vocab.PostalAdressUse). Replace the construction of the II in the
-		// following line with this number.
-		addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 }

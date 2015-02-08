@@ -18,16 +18,20 @@
 
 package org.ehc.common;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
-import org.openhealthtools.mdht.uml.hl7.datatypes.impl.ADImpl;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
 
 /**
  * Das HL7 Address Objekt
  * 
  */
-public class Address extends ADImpl {
+public class Address {
 
+	AD mAd;
+	
 	/**
 	 * Erstellt ein Adress-Objekt ohne UseCode (Wird oft für Organisationen
 	 * benötigt)
@@ -43,6 +47,71 @@ public class Address extends ADImpl {
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
 		this(zip, city, UseCode.Business);
+		setStreet(street);
+		setHouseNumber(houseNumber);
+	}
+
+	/**
+	 * Erstellt ein Adress-Objekt
+	 * 
+	 * @param zip
+	 *            PLZ
+	 * @param city
+	 *            Ort
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	private Address(String zip, String city, UseCode usage) {
+		mAd = DatatypesFactory.eINSTANCE.createAD();
+		setCity(city);
+		setZip(zip);
+		switch (usage) {
+		case Business:
+			mAd.getUses().add(PostalAddressUse.WP);
+			break;
+		case Private:
+			mAd.getUses().add(PostalAddressUse.HP);
+			break;
+		default:
+			mAd.getUses().add(PostalAddressUse.WP);
+			break;
+		}
+	}
+
+	/**
+	 * Erstellt ein Adress-Objekt
+	 * 
+	 * @param addressline
+	 *            Strasse und Hausnummer
+	 * @param zip
+	 *            PLZ
+	 * @param city
+	 *            Ort
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	public Address(String addressline, String zip, String city, UseCode usage) {
+		this(zip, city, usage);
+		setAddressline1(addressline);
+	}
+
+	/**
+	 * Erstellt ein Adress-Objekt
+	 * 
+	 * @param street
+	 *            Strasse (ohne Hausnummer)
+	 * @param houseNumber
+	 *            Hausnummer
+	 * @param zip
+	 *            PLZ
+	 * @param city
+	 *            Ort
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	public Address(String street, String houseNumber, String zip, String city,
+			UseCode usage) {
+		this(zip, city, usage);
 		setStreet(street);
 		setHouseNumber(houseNumber);
 	}
@@ -72,76 +141,12 @@ public class Address extends ADImpl {
 	}
 
 	/**
-	 * Erstellt ein Adress-Objekt
-	 * 
-	 * @param street
-	 *            Strasse (ohne Hausnummer)
-	 * @param houseNumber
-	 *            Hausnummer
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
-	 */
-	public Address(String street, String houseNumber, String zip, String city,
-			UseCode usage) {
-		this(zip, city, usage);
-		setStreet(street);
-		setHouseNumber(houseNumber);
-	}
-
-	/**
-	 * Erstellt ein Adress-Objekt
-	 * 
-	 * @param addressline
-	 *            Strasse und Hausnummer
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
-	 */
-	public Address(String addressline, String zip, String city, UseCode usage) {
-		this(zip, city, usage);
-		setAddressline1(addressline);
-	}
-
-	/**
-	 * Erstellt ein Adress-Objekt
-	 * 
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
-	 */
-	private Address(String zip, String city, UseCode usage) {
-		setCity(city);
-		setZip(zip);
-		switch (usage) {
-		case Business:
-			getUses().add(PostalAddressUse.WP);
-			break;
-		case Private:
-			getUses().add(PostalAddressUse.HP);
-			break;
-		default:
-			getUses().add(PostalAddressUse.WP);
-			break;
-		}
-	}
-
-	/**
 	 * Liefert die Adress-Zeile 1
 	 * 
 	 * @return Adress-Zeile 1
 	 */
 	public String getAddressline1() {
-		return getStreetAddressLines().get(0).getText();
+		return mAd.getStreetAddressLines().get(0).getText();
 	}
 
 	/**
@@ -150,7 +155,7 @@ public class Address extends ADImpl {
 	 * @return Adress-Zeile 2
 	 */
 	public String getAddressline2() {
-		return getStreetAddressLines().get(1).getText();
+		return mAd.getStreetAddressLines().get(1).getText();
 	}
 
 	/**
@@ -159,7 +164,7 @@ public class Address extends ADImpl {
 	 * @return Adress-Zeile 3
 	 */
 	public String getAddressline3() {
-		return getStreetAddressLines().get(2).getText();
+		return mAd.getStreetAddressLines().get(2).getText();
 	}
 
 	/**
@@ -168,7 +173,7 @@ public class Address extends ADImpl {
 	 * @return Ort
 	 */
 	public String getCity() {
-		return getCities().get(0).getText();
+		return mAd.getCities().get(0).getText();
 	}
 
 	/**
@@ -177,7 +182,7 @@ public class Address extends ADImpl {
 	 * @return Hausnummer
 	 */
 	public String getHouseNumber() {
-		return getHouseNumbers().get(0).getText();
+		return mAd.getHouseNumbers().get(0).getText();
 	}
 
 	/**
@@ -186,7 +191,7 @@ public class Address extends ADImpl {
 	 * @return Strasse
 	 */
 	public String getStreet() {
-		return getStreetNames().get(0).getText();
+		return mAd.getStreetNames().get(0).getText();
 	}
 
 	/**
@@ -195,7 +200,7 @@ public class Address extends ADImpl {
 	 * @return Art der Adresse
 	 */
 	public String getUsage() {
-		return getUses().get(0).getLiteral();
+		return mAd.getUses().get(0).getLiteral();
 	}
 
 	/**
@@ -204,7 +209,7 @@ public class Address extends ADImpl {
 	 * @return PLZ
 	 */
 	public String getZip() {
-		return getPostalCodes().get(0).getText();
+		return mAd.getPostalCodes().get(0).getText();
 	}
 
 	/**
@@ -214,7 +219,7 @@ public class Address extends ADImpl {
 	 *            Adress-Zeile 1
 	 */
 	public void setAddressline1(String addressline) {
-		addStreetAddressLine(addressline);
+		mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -224,7 +229,7 @@ public class Address extends ADImpl {
 	 *            Adress-Zeile 2
 	 */
 	public void setAddressline2(String addressline) {
-		addStreetAddressLine(addressline);
+		mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -234,7 +239,7 @@ public class Address extends ADImpl {
 	 *            Adress-Zeile 3
 	 */
 	public void setAddressline3(String addressline) {
-		addStreetAddressLine(addressline);
+		mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -244,7 +249,7 @@ public class Address extends ADImpl {
 	 *            Ort
 	 */
 	public void setCity(String city) {
-		addCity(city);
+		mAd.addCity(city);
 	}
 
 	/**
@@ -254,7 +259,7 @@ public class Address extends ADImpl {
 	 *            Hausnummer
 	 */
 	public void setHouseNumber(String HouseNumber) {
-		addHouseNumber(HouseNumber);
+		mAd.addHouseNumber(HouseNumber);
 	}
 
 	/**
@@ -264,7 +269,7 @@ public class Address extends ADImpl {
 	 *            Strasse
 	 */
 	public void setStreet(String street) {
-		addStreetName(street);
+		mAd.addStreetName(street);
 	}
 
 	/**
@@ -274,7 +279,18 @@ public class Address extends ADImpl {
 	 *            PLZ
 	 */
 	public void setZip(String zip) {
-		addPostalCode(zip);
+		mAd.addPostalCode(zip);
 	}
 
+	public AD getMdhtAdress() {
+		return this.mAd;
+	}
+	
+	public Address (AD ad) {
+		this.mAd = ad;
+	}
+	
+	public AD copyMdhtAdress() {
+		return EcoreUtil.copy(mAd);
+	}
 }

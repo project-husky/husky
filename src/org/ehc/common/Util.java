@@ -60,6 +60,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
+//	public Code getCode(String codeSystem, CD code) {
+//		
+//	}
+	
 	/**
 	 * Erzeugt eine Adresse
 	 * 

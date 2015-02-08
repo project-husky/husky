@@ -108,7 +108,7 @@ public class Patient extends Person {
 	 *            Adresse
 	 */
 	public void addAddress(Address address) {
-		getRecordTarget().getPatientRole().getAddrs().add(address);
+		getRecordTarget().getPatientRole().getAddrs().add(address.copyMdhtAdress());
 	}
 
 	/**
