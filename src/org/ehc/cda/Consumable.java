@@ -20,6 +20,10 @@ public class Consumable {
 	private Material mMaterial;
 	private ProductEntry mProductEntry;
 
+	protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+		setMdhtConsumable(consumable);
+	}
+
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
@@ -40,14 +44,10 @@ public class Consumable {
 		//    CE ce = DatatypesFactory.eINSTANCE.createCE();
 		//    mMaterial.setCode(ce);
 
-		setWHOACTCode(whoAtcCode);
+		setWhoAtcCode(whoAtcCode);
 		setCodedId(codedId);
-		setTradeNameOfVaccine(tradeNameOfVaccine);
+		setTradeName(tradeNameOfVaccine);
 		mConsumable.setTypeCode(ParticipationType.CSM);
-	}
-
-	protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
-		setMdhtConsumable(consumable);
 	}
 
 	/**
@@ -76,19 +76,18 @@ public class Consumable {
 	/**
 	 * @return das tradeNameOfVaccine Objekt
 	 */
-	public String getTradeNameOfVaccine() {
+	public String getTradeName() {
 		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
 	}
 
 	/**
 	 */
-	public Code getWHOATCCode() {
+	public Code getWhoAtcCode() {
 		Code code;
 
 		//Check if the code is nullFlavor
 		if (mMaterial.getCode()!=null) {
 			code = new Code (mMaterial.getCode());
-
 			if (code.getOid().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
 				return code;
 			}
@@ -118,7 +117,7 @@ public class Consumable {
 		mMaterial.getCode().getTranslations().add(cd);
 	}
 
-	public void setMdhtConsumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+	protected void setMdhtConsumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
 		mConsumable = EcoreUtil.copy(consumable);
 		mProductEntry = (ProductEntry) consumable.getManufacturedProduct();
 		mMaterial = mProductEntry.getManufacturedMaterial();
@@ -127,7 +126,7 @@ public class Consumable {
 	/**
 	 * @param tradeNameOfVaccine das tradeNameOfVaccine Objekt welches gesetzt wird
 	 */
-	public void setTradeNameOfVaccine(String tradeNameOfVaccine) {
+	public void setTradeName(String tradeNameOfVaccine) {
 		EN en = DatatypesFactory.eINSTANCE.createEN();
 		en.addText(tradeNameOfVaccine);
 		mMaterial.setName(en);
@@ -136,7 +135,7 @@ public class Consumable {
 	/**
 	 * @param whoActCode das WHOACTCode Objekt welches gesetzt wird
 	 */
-	public void setWHOACTCode(String whoActCode) {
+	public void setWhoAtcCode(String whoActCode) {
 		//    CD cd = DatatypesFactory.eINSTANCE.createCD();
 		//    cd.setCodeSystem("2.16.840.1.113883.6.73");
 		//    cd.setCode(whoActCode);
@@ -148,5 +147,4 @@ public class Consumable {
 		ce.setCode(whoActCode);
 		mMaterial.setCode(ce);
 	}
-
 }

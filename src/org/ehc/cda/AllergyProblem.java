@@ -41,6 +41,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 public class AllergyProblem {
 	AllergyIntolerance mAllergyProblem; 
 
+	/**
+	 * @param problemEntry
+	 */
+	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+		mAllergyProblem = allergyIntolerance;
+	}
+	
 	public AllergyProblem () {
 		this.mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 	}
@@ -77,20 +84,19 @@ public class AllergyProblem {
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
 	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param problemNotOccured
-	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 * @param startOfProblem
 	 *            Beginn des Problems
 	 * @param endOfProblem
 	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param problemNotOccured
+	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
 	 */
-	public AllergyProblem(Date startOfProblem,
-			Date endOfProblem, AllergiesAndIntolerances kindOfAllergy, org.ehc.common.Code problem) {
-		this (startOfProblem, endOfProblem, kindOfAllergy, problem, null);
+	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+			org.ehc.common.Code problem, Date startOfProblem, Date endOfProblem) {
+		this (kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
 	}
 
@@ -98,21 +104,20 @@ public class AllergyProblem {
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
 	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param problemNotOccured
-	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 * @param startOfProblem
 	 *            Beginn des Problems
 	 * @param endOfProblem
 	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
 	 * @param internalProblemId
 	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
+	 * @param problemNotOccured
+	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
 	 */
-	public AllergyProblem(Date startOfProblem,
-			Date endOfProblem, AllergiesAndIntolerances kindOfAllergy, org.ehc.common.Code problem, String internalProblemId) {
+	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+			org.ehc.common.Code problem, Date startOfProblem, Date endOfProblem, String internalProblemId) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 		setProblemNotOccured(false);
 		try {
@@ -124,13 +129,6 @@ public class AllergyProblem {
 		setId(internalProblemId);
 		setCode(kindOfAllergy);
 		setValue(problem);
-	}
-
-	/**
-	 * @param problemEntry
-	 */
-	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
-		mAllergyProblem = allergyIntolerance;
 	}
 
 	/**

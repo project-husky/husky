@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.RouteOfAdministration;
 import org.ehc.common.Author;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
@@ -39,6 +40,10 @@ public class ImmunizationRecommendation {
 
 	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
+	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
+		mImmunizationRecommendation = immunizationRecommendation;
+	}
+
 	public ImmunizationRecommendation() {
 		this.mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 	}
@@ -46,47 +51,45 @@ public class ImmunizationRecommendation {
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
-	 * 
+	 * @param consumable 
+	 * 			Impfstoff, der empfohlen wird
+	 * @param author
+	 *          Arzt, der diese Eintragung veranlasst hat
+	 * @param startOfPossibleAppliance
+	 * 			Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
+	 * @param endOfPossibleAppliance 
+	 * 			Ende des Zeitraumes, in dem die Impfung erfolgen sollte
 	 * @param intendedOrProposed
 	 *          true, bei einer beabsichtigten, aber noch nicht erfolgten Impfung.
 	 *          false bei einer vorgeschlagenen Impfung.
 	 * @param shallNotBeAdministerd
 	 *          true, wenn die Impfung nicht verabreicht werden soll. false, wenn
 	 *          die Impfung zu verabreichen ist.
-	 * @param startOfPossibleAppliance
-	 * 			Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
-	 * @param endOfPossibleAppliance 
-	 * 			Ende des Zeitraumes, in dem die Impfung erfolgen sollte
-	 * @param consumable 
-	 * 			Impfstoff, der empfohlen wird
-	 * @param author
-	 *          Arzt, der diese Eintragung veranlasst hat
 	 */
-	public ImmunizationRecommendation (boolean intendedOrProposed,
-			boolean shallNotBeAdministerd, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
-			Consumable consumable, org.ehc.common.Author author) {      
+	public ImmunizationRecommendation (Consumable consumable,
+			org.ehc.common.Author author, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
+			boolean intendedOrProposed, boolean shallNotBeAdministerd) {      
 
-		this(intendedOrProposed, shallNotBeAdministerd, startOfPossibleAppliance, endOfPossibleAppliance, consumable, author, null, null, null, null, null);
+		this(consumable, author, startOfPossibleAppliance, endOfPossibleAppliance, intendedOrProposed, shallNotBeAdministerd, null, null, null, null);
 	}
 
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
-	 * 
+	 * @param consumable 
+	 * 			Impfstoff, der empfohlen wird
+	 * @param author
+	 *          Arzt, der diese Eintragung veranlasst hat
+	 * @param startOfPossibleAppliance
+	 * 			Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
+	 * @param endOfPossibleAppliance 
+	 * 			Ende des Zeitraumes, in dem die Impfung erfolgen sollte
 	 * @param intendedOrProposed
 	 *          true, bei einer beabsichtigten, aber noch nicht erfolgten Impfung.
 	 *          false bei einer vorgeschlagenen Impfung.
 	 * @param shallNotBeAdministerd
 	 *          true, wenn die Impfung nicht verabreicht werden soll. false, wenn
 	 *          die Impfung zu verabreichen ist.
-	 * @param startOfPossibleAppliance
-	 * 			Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
-	 * @param endOfPossibleAppliance 
-	 * 			Ende des Zeitraumes, in dem die Impfung erfolgen sollte
-	 * @param consumable 
-	 * 			Impfstoff, der empfohlen wird
-	 * @param author
-	 *          Arzt, der diese Eintragung veranlasst hat
 	 * @param priority 
 	 * 			Dringlichkeit der Einnahme. Bei null wird auf die Angabe der Dringlichkeit verzichtet
 	 * @param routeOfAdministration 
@@ -98,15 +101,15 @@ public class ImmunizationRecommendation {
 	 * @param rateQuantity
 	 * 			Einnahmefrequenz. Bei null wird auf die Angabe der Einnahmefrequenz verzichtet.
 	 */
-	private ImmunizationRecommendation (boolean intendedOrProposed,
-			boolean shallNotBeAdministerd, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
-			Consumable consumable, org.ehc.common.Author author, String priority, String routeOfAdministration, String approachSiteCode, String doseQuantity, String rateQuantity) {      
+	private ImmunizationRecommendation (Consumable consumable,
+			org.ehc.common.Author author, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
+			boolean intendedOrProposed, boolean shallNotBeAdministerd, String priority, RouteOfAdministration routeOfAdministration, String doseQuantity, String rateQuantity) {      
 
 		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 		mImmunizationRecommendation.setConsumable(consumable.getMdhtConsumable());  
 
 		//Set the Attributes of this class
-		setCodedId(consumable.getGtinOrEanOrSwissIndex());
+		setGtinId(consumable.getGtinOrEanOrSwissIndex());
 		setIntendedOrProposed(intendedOrProposed);
 		setShallNotBeAdministerd(shallNotBeAdministerd);
 		setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
@@ -137,10 +140,6 @@ public class ImmunizationRecommendation {
 		}    
 	}
 
-	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
-		mImmunizationRecommendation = immunizationRecommendation;
-	}
-
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
 		return EcoreUtil.copy(mImmunizationRecommendation);
 	}
@@ -169,8 +168,14 @@ public class ImmunizationRecommendation {
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
-	public Code getGtinCode() {
-		return getConsumable().getGtinOrEanOrSwissIndex();
+	public Code getGtinId() {
+		II ii = mImmunizationRecommendation.getIds().get(0);
+		Code code = new Code(ii.getRoot(), ii.getExtension());
+		return code;
+	}
+
+	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
+		return this.mImmunizationRecommendation;
 	}
 
 	public String getVaccineName() {
@@ -178,15 +183,15 @@ public class ImmunizationRecommendation {
 	}
 
 	public Code getWhoActCode() {
-		return getConsumable().getWHOATCCode();
+		return getConsumable().getWhoAtcCode();
 	}
 
-	private void setCodedId(Code codedId) {
+	public void setGtinId(Code codedId) {
 		//Seems dirty, but the Spec wants it like this
 		II ii = DatatypesFactory.eINSTANCE.createII(codedId.getCD().getCodeSystem(), codedId.getCode());
 		mImmunizationRecommendation.getIds().add(ii);
 	}
-
+	
 	/**
 	 * @param intendedOrProposed
 	 *          das intendedOrProposed Objekt welches gesetzt wird
@@ -199,10 +204,6 @@ public class ImmunizationRecommendation {
 			mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
 		}
 
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
-		return this.mImmunizationRecommendation;
 	}
 
 	/**

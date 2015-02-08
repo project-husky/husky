@@ -7,14 +7,14 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 public class Comment {
 	org.openhealthtools.mdht.uml.cda.ihe.Comment mComment;
 
-	public Comment() {
-		mComment = IHEFactory.eINSTANCE.createComment().init();
-	}
-	
 	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		mComment = comment;
 	}
 
+	public Comment() {
+		mComment = IHEFactory.eINSTANCE.createComment().init();
+	}
+	
 	public Comment (String text) {
 		mComment = IHEFactory.eINSTANCE.createComment().init();
 		setText(text);

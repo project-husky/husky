@@ -16,14 +16,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 public class ConcernEntry {
 	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
 
-	public ConcernEntry () {
-		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
-	}
-	
 	public ConcernEntry (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
 		mConcernEntry = concernEntry;
 	}
 
+	public ConcernEntry () {
+		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
+	}
+	
 	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
 		return EcoreUtil.copy(mConcernEntry);
 	}
