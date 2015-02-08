@@ -16,6 +16,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 public class Pregnancy {
 	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 
+	public Pregnancy(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
+		this.mPregnancy = pregnancy;
+	}
+
 	public Pregnancy() {
 		this.mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
 		mPregnancy.setClassCode(ActClassObservation.OBS);
@@ -34,6 +38,10 @@ public class Pregnancy {
 		return EcoreUtil.copy(mPregnancy);
 	}
 
+	public PregnancyObservation getMdhtPregnancy() {
+		return mPregnancy;
+	}
+
 	public String getEstimatedBirthdate() {
 
 		if (mPregnancy.getValues().size()>0) {
@@ -41,10 +49,6 @@ public class Pregnancy {
 			return DateUtil.parseDateToStr(ts);
 		}
 		else return null;
-	}
-
-	public PregnancyObservation getMdhtPregnancy() {
-		return mPregnancy;
 	}
 
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {

@@ -73,7 +73,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 */
 	public ActiveProblemConcernEntry(String concern,
 			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
-		super(concern, begin, end, problemEntry, problemConcernStatus);
+		super(concern, problemEntry, problemConcernStatus, begin, end);
 	}
 
 	public ActiveProblemConcernEntry(String string, Date date, ProblemEntry problemEntry,

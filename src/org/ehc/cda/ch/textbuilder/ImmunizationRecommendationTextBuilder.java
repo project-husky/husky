@@ -54,7 +54,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 
 	private void addRow(ImmunizationRecommendation immunization, int i) {
 		append("<tr>");
-		addCellWithContent(immunization.getVaccineName(), SectionsVACD.TREATMENT_PLAN.getContentIdPrefix(), i);
+		addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.TREATMENT_PLAN.getContentIdPrefix(), i);
 		addCell("");
 		addCell("");
 		addCell(immunization.getEffectiveTime());

@@ -22,6 +22,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 public class LaboratoryObservation {
 	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
+	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
+		mLaboratoryObservation = labObs;
+	}
+
 	public LaboratoryObservation() {
 		this.mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 	}
@@ -30,27 +34,23 @@ public class LaboratoryObservation {
 		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 
 		setCode(code.getCode());
-		setInterpretationCode(immuneProtection);
+		setImmuneProtection(immuneProtection);
 		setDateTimeOfResult(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
 	}
 
 	//TODO Create Constructor for unknown Types of "Erregernachweise"
 
-	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Code valueCode, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.setValue(valueCode);
 	}
 
-	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, double value, String valuesUcumUnit, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
-		this.setValue(value, valuesUcumUnit);
-	}
-
-	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
-		mLaboratoryObservation = labObs;
+		this.setValue(value);
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation copyMdhtLaboratoryObservation() {
@@ -83,9 +83,13 @@ public class LaboratoryObservation {
 			return false;
 		}
 	}
-
+	
 	public String getInterpretationCode() {
 		return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
+	}
+
+	public void setInterpretationCode(ObservationInterpretation code) {
+		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}
 
 	public Organization getLaboratory() {
@@ -112,7 +116,7 @@ public class LaboratoryObservation {
 		}
 	}
 
-	public void setInterpretationCode(boolean immuneProtection) {
+	public void setImmuneProtection(boolean immuneProtection) {
 		if (immuneProtection == true) {
 			mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCE());
 		}
@@ -143,11 +147,6 @@ public class LaboratoryObservation {
 
 	public void setValue(Code code) {
 		mLaboratoryObservation.getValues().add(code.getCD());
-	}
-
-	public void setValue(double value, String valuesUcumUnit) {
-		PQ pq = DatatypesFactory.eINSTANCE.createPQ(value, valuesUcumUnit);
-		mLaboratoryObservation.getValues().add(pq);
 	}
 
 	public void setValue(Value value) {

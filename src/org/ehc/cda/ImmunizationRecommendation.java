@@ -40,14 +40,10 @@ public class ImmunizationRecommendation {
 
 	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
-	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
-		mImmunizationRecommendation = immunizationRecommendation;
-	}
-
 	public ImmunizationRecommendation() {
 		this.mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
@@ -72,7 +68,7 @@ public class ImmunizationRecommendation {
 
 		this(consumable, author, startOfPossibleAppliance, endOfPossibleAppliance, intendedOrProposed, shallNotBeAdministerd, null, null, null, null);
 	}
-
+	
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
@@ -140,6 +136,10 @@ public class ImmunizationRecommendation {
 		}    
 	}
 
+	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
+		mImmunizationRecommendation = immunizationRecommendation;
+	}
+
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
 		return EcoreUtil.copy(mImmunizationRecommendation);
 	}
@@ -153,11 +153,7 @@ public class ImmunizationRecommendation {
 			return null;
 		}
 	}
-
-	public Code getCode() {
-		return getConsumable().getCodedId();
-	}
-
+	
 	public Consumable getConsumable() {
 		Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
 		return consumable;
@@ -178,12 +174,8 @@ public class ImmunizationRecommendation {
 		return this.mImmunizationRecommendation;
 	}
 
-	public String getVaccineName() {
-		return mImmunizationRecommendation.getConsumable().getManufacturedProduct().getManufacturedMaterial().getName().getText();
-	}
-
-	public Code getWhoActCode() {
-		return getConsumable().getWhoAtcCode();
+	public void setAuthor(org.ehc.common.Author author) {
+		mImmunizationRecommendation.getAuthors().add(author.getAuthorMdht());
 	}
 
 	public void setGtinId(Code codedId) {

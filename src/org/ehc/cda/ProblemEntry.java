@@ -41,84 +41,13 @@ public class ProblemEntry {
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
-	public ProblemEntry() {
-		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		setNotOccured(false);
+	/**
+	 * @param problemEntry
+	 */
+	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
+		mProblemEntry = problemEntry;
 	}
 	
-	public ProblemEntry(Date date, Value value) {
-		this(date, null, value);
-	}
-	
-	public ProblemEntry(Date date, Code value) {
-		this(date, null, value);
-	}
-
-	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
-	 */
-	public ProblemEntry(Date startOfProblem,
-			Date endOfProblem, org.ehc.common.Code problem) {
-		this(startOfProblem, endOfProblem, new Value(problem), null);
-	}
-	
-	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
-	 */
-	public ProblemEntry(Date startOfProblem,
-			Date endOfProblem, org.ehc.common.Value problem) {
-		this(startOfProblem, endOfProblem, problem, null);
-	}
-
-	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems
-	 * @param problem
-	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	 *            Komplikationsrisiken oder Expositionsrisiken.
-	 * @param internalProblemId
-	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
-	 */
-	public ProblemEntry(Date startOfProblem,
-			Date endOfProblem, org.ehc.common.Value problem, String internalProblemId) {
-		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		setNotOccured(false);
-		try {
-			setStart(startOfProblem);
-			setEnd(endOfProblem);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		setId(internalProblemId);
-		setValue(problem);
-	}
-
 	/**
 	 * @param observation
 	 */
@@ -126,6 +55,11 @@ public class ProblemEntry {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
 	}
 
+	public ProblemEntry() {
+		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+		setNotOccured(false);
+	}
+	
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
@@ -154,16 +88,79 @@ public class ProblemEntry {
 		mProblemEntry.getValues().add(cd);
 	}
 
-	/**
-	 * @param problemEntry
-	 */
-	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
-		mProblemEntry = problemEntry;
+	public ProblemEntry(Value value, Date date) {
+		this(value, date, null);
+	}
+	
+	public ProblemEntry(Code value, Date date) {
+		this(value, date, null);
 	}
 
-	public ProblemEntry(Date startOfProblem, Date endOfProblem,
-			Code problemCode, Value problemValue) {
-		this(startOfProblem, endOfProblem, problemCode);
+	/**
+	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param start
+	 *            Beginn des Problems
+	 * @param end
+	 *            Ende des Problems
+	 */
+	public ProblemEntry(org.ehc.common.Code problem,
+			Date start, Date end) {
+		this(new Value(problem), start, end, null);
+	}
+	
+	/**
+	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param start
+	 *            Beginn des Problems
+	 * @param end
+	 *            Ende des Problems
+	 */
+	public ProblemEntry(org.ehc.common.Value problem,
+			Date start, Date end) {
+		this(problem, start, end, null);
+	}
+
+	/**
+	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
+	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
+	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
+	 * @param problem
+	 *            Freitextbeschreibung zu dem Problem oder Code zu
+	 *            Komplikationsrisiken oder Expositionsrisiken.
+	 * @param startOfProblem
+	 *            Beginn des Problems
+	 * @param endOfProblem
+	 *            Ende des Problems
+	 * @param internalProblemId
+	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
+	 */
+	protected ProblemEntry(org.ehc.common.Value problem,
+			Date startOfProblem, Date endOfProblem, String internalProblemId) {
+		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+		setNotOccured(false);
+		try {
+			setStart(startOfProblem);
+			setEnd(endOfProblem);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		setId(internalProblemId);
+		setValue(problem);
+	}
+
+	public ProblemEntry(Value problemValue, Code problemCode,
+			Date startOfProblem, Date endOfProblem) {
+		this(problemCode, startOfProblem, endOfProblem);
 		this.setValue(problemValue);
 	}
 
@@ -211,7 +208,7 @@ public class ProblemEntry {
 	/**
 	 * @return das problemNotOccured Objekt
 	 */
-	public boolean isProblemNotOccured() {
+	public boolean getProblemNotOccured() {
 		return mProblemEntry.getNegationInd();
 	}
 

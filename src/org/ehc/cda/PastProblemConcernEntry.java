@@ -36,6 +36,24 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
 	 * 
+	 * @param problemConcernEntry
+	 * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
+	 * 
+	 * <div class="fr">Objet préexistante à cloner</div>
+	 * 
+	 */
+	public PastProblemConcernEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
+		super(problemConcernEntry);
+	}
+
+	/**
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+	 * Dieses Objekt kann einer HistoryOfPastIllnessSection hinzugefügt werden.</div>
+	 * 
+	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+	 * être ajouté dans ActiveProblemsSection.</div>
+	 * 
 	 * @param concern
 	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
@@ -57,15 +75,16 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
 	 * 
-	 * @param problemConcernEntry
-	 * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
-	 * 
-	 * <div class="fr">Objet préexistante à cloner</div>
-	 * 
+	 * @param concern
+	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param concernStatus
+	 *            <div class="de">Der Status Code des Leidens
+	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
+	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public PastProblemConcernEntry(
-			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
-		super(problemConcernEntry);
+	public PastProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+		super(concern, problemEntry, concernStatus);
 	}
 
 	/**
@@ -90,26 +109,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            du problème</div>
 	 */
 	public PastProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
-		super(concern,begin, end, problemEntry, problemConcernStatus);
-	}
-
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer HistoryOfPastIllnessSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 */
-	public PastProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
-		super(concern, problemEntry, concernStatus);
+			ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus, Date begin, Date end) {
+		super(concern,problemEntry, problemConcernStatus, begin, end);
 	}
 }
