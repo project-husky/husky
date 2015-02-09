@@ -35,7 +35,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class ProblemConcernEntry extends ConcernEntry {
 
 	protected org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry;
-	
+
+	public ProblemConcernEntry() {
+		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
+		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.getMdhtConcern();
+	}
+
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
 	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
@@ -53,11 +58,6 @@ public class ProblemConcernEntry extends ConcernEntry {
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
 		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
-	}
-
-	public ProblemConcernEntry() {
-		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
-		this.mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.getMdhtConcern();
 	}
 
 	/**
@@ -133,7 +133,16 @@ public class ProblemConcernEntry extends ConcernEntry {
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry getMdhtProblemConcernEntry() {
 		return mProblemConcernEntry;
 	} 
-	
+
+	public ArrayList<ProblemEntry> getProblemEntries() {
+		ArrayList<ProblemEntry> pel = new ArrayList<ProblemEntry>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy: mProblemConcernEntry.getProblemEntries()) {
+			ProblemEntry problem = new ProblemEntry(mAllergy);
+			pel.add(problem);
+		}
+		return pel;
+	}
+
 	/**
 	 * Gibt das (erste) medizinische Problem zu dem Leiden zurück
 	 * 
@@ -143,15 +152,6 @@ public class ProblemConcernEntry extends ConcernEntry {
 		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getObservations().get(0));
 		return problemEntry;
-	}
-	
-	public ArrayList<ProblemEntry> getProblemEntries() {
-		ArrayList<ProblemEntry> pel = new ArrayList<ProblemEntry>();
-		for (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy: mProblemConcernEntry.getProblemEntries()) {
-			ProblemEntry problem = new ProblemEntry(mAllergy);
-			pel.add(problem);
-		}
-		return pel;
 	}
 
 }

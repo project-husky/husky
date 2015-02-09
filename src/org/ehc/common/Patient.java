@@ -18,14 +18,12 @@
 
 package org.ehc.common;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.cda.ch.enums.AdministrativeGender;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -58,10 +56,10 @@ public class Patient extends Person {
 		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
 		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
 		mPatient = CDAFactory.eINSTANCE.createPatient();
-		
+
 		mPatientRole.setPatient(mPatient);
 		mRecordTarget.setPatientRole(mPatientRole);
-		
+
 		// Create and fill gender
 		mPatient.setAdministrativeGenderCode(sex.getCE());
 
@@ -76,7 +74,7 @@ public class Patient extends Person {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Erstellt einen neuen Patienten inkl. einer Patienten Id. Wenn es sich bei dem Dokument um einen Impfausweis handelt dann MUSS dieser Konstruktor verwendet werden.
 	 * 
@@ -92,32 +90,23 @@ public class Patient extends Person {
 		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
 		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
 		mPatient = CDAFactory.eINSTANCE.createPatient();
-		
+
 		mPatientRole.setPatient(mPatient);
 		mRecordTarget.setPatientRole(mPatientRole);
-		
+
 		// Gender
 		setGender(sex);
-		
+
 		// Patient Name
 		addName(name);
 
 		// Day of birth
 		setBirthday(birthDay);
-		
+
 		// Id
 		addId(id);
 	}
-	
-	public void setTelecoms(Telecoms telecoms) {
-		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
-	}
-	
-	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
-		return telecoms;
-	}
-	
+
 	/**
 	 * Constructor (used when deserializing CDA document).
 	 * 
@@ -153,15 +142,15 @@ public class Patient extends Person {
 	public void addName(Name name) {
 		mPatient.getNames().add(name.copyMdhtPn());
 	}
-	
+
 	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
 		return EcoreUtil.copy(mPatient);
 	}
-	
+
 	public PatientRole copyMdhtPatientRole() {
 		return EcoreUtil.copy(mPatientRole);
 	}
-	
+
 	public RecordTarget copyMdhtRecordTarget() {
 		return EcoreUtil.copy(mRecordTarget);
 	}
@@ -171,7 +160,7 @@ public class Patient extends Person {
 		Address address = new Address(mAd); 
 		return address;
 	}
-	
+
 	public ArrayList<Address> getAddresses() {
 		ArrayList<Address> al = new ArrayList<Address>();
 		for (AD mAddress: mPatientRole.getAddrs()) {
@@ -190,8 +179,7 @@ public class Patient extends Person {
 			throw new IllegalArgumentException("Cannot convert birthdate", e);
 		}
 	}
-	
-		
+
 	public AdministrativeGender getGenderCode() {
 		CE code = getMdhtPatient().getAdministrativeGenderCode();
 		return AdministrativeGender.getEnum(code.getCode());
@@ -205,24 +193,27 @@ public class Patient extends Person {
 		}
 		return il;
 	}
-	
+
+
 	public org.openhealthtools.mdht.uml.cda.Patient getMdhtPatient() {
 		return mPatient;
 	}
-	
+
 	public PatientRole getMdhtPatientRole() {
 		return mPatientRole;
 	}
-	
+
 	public RecordTarget getMdhtRecordTarget() {
 		return mRecordTarget;
 	}
 
+	@Override
 	public Name getName() {
 		Name name = new Name (mPatient.getNames().get(0));
 		return name;
 	}
-	
+
+	@Override
 	public ArrayList<Name> getNames() {
 		ArrayList<Name> nl = new ArrayList<Name>();
 		for (PN mName: mPatient.getNames()) {
@@ -231,7 +222,12 @@ public class Patient extends Person {
 		}
 		return nl;
 	}
-	
+
+	public Telecoms getTelecoms() {
+		Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
+		return telecoms;
+	}
+
 	private Date parseDate(String value) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.parse(value);
@@ -248,5 +244,9 @@ public class Patient extends Person {
 
 	public void setGender(AdministrativeGender sex) {
 		mPatient.setAdministrativeGenderCode(sex.getCE());
+	}
+
+	public void setTelecoms(Telecoms telecoms) {
+		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
 	}
 }

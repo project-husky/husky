@@ -41,13 +41,15 @@ public class ProblemEntry {
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
-	/**
-	 * @param problemEntry
-	 */
-	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
-		mProblemEntry = problemEntry;
+	public ProblemEntry() {
+		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+		setNotOccured(false);
 	}
-	
+
+	public ProblemEntry(Code value, Date date) {
+		this(value, date, null);
+	}
+
 	/**
 	 * @param observation
 	 */
@@ -55,11 +57,6 @@ public class ProblemEntry {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
 	}
 
-	public ProblemEntry() {
-		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-		setNotOccured(false);
-	}
-	
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
@@ -88,14 +85,6 @@ public class ProblemEntry {
 		mProblemEntry.getValues().add(cd);
 	}
 
-	public ProblemEntry(Value value, Date date) {
-		this(value, date, null);
-	}
-	
-	public ProblemEntry(Code value, Date date) {
-		this(value, date, null);
-	}
-
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
@@ -112,7 +101,7 @@ public class ProblemEntry {
 			Date start, Date end) {
 		this(new Value(problem), start, end, null);
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
@@ -158,18 +147,25 @@ public class ProblemEntry {
 		setValue(problem);
 	}
 
+	/**
+	 * @param problemEntry
+	 */
+	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
+		mProblemEntry = problemEntry;
+	}
+
 	public ProblemEntry(Value problemValue, Code problemCode,
 			Date startOfProblem, Date endOfProblem) {
 		this(problemCode, startOfProblem, endOfProblem);
-		this.setValue(problemValue);
+		setValue(problemValue);
+	}
+
+	public ProblemEntry(Value value, Date date) {
+		this(value, date, null);
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry copyMdhtProblemEntry() {
 		return EcoreUtil.copy(mProblemEntry);
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
-		return mProblemEntry;
 	}
 
 	/**
@@ -186,6 +182,17 @@ public class ProblemEntry {
 	public String getEnd() {
 		return Util.createEurDateStrFromTS(mProblemEntry
 				.getEffectiveTime().getHigh().getValue());
+	}
+
+	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
+		return mProblemEntry;
+	}
+
+	/**
+	 * @return das problemNotOccured Objekt
+	 */
+	public boolean getProblemNotOccured() {
+		return mProblemEntry.getNegationInd();
 	}
 
 	/**
@@ -206,18 +213,6 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * @return das problemNotOccured Objekt
-	 */
-	public boolean getProblemNotOccured() {
-		return mProblemEntry.getNegationInd();
-	}
-
-	public void setId(String id) {
-		II ii = Util.createUuidVacd(id);
-		mProblemEntry.getIds().add(ii);
-	}
-
-	/**
 	 * @param codedProblem
 	 *            das codedProblem Objekt welches gesetzt wird
 	 */
@@ -233,6 +228,11 @@ public class ProblemEntry {
 	public void setEnd(Date endOfProblem) throws ParseException {
 		mProblemEntry.getEffectiveTime().setHigh(
 				DateUtil.createIVXB_TSFromDate(endOfProblem));
+	}
+
+	public void setId(String id) {
+		II ii = Util.createUuidVacd(id);
+		mProblemEntry.getIds().add(ii);
 	}
 
 	/**

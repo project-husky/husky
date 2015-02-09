@@ -16,20 +16,15 @@ import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
 public class LaboratoryObservation {
 	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
-	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
-		mLaboratoryObservation = labObs;
+	public LaboratoryObservation() {
+		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 	}
 
-	public LaboratoryObservation() {
-		this.mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
-	}
-	
 	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 
@@ -39,13 +34,13 @@ public class LaboratoryObservation {
 		setLaboratory(laboratory, dateTimeOfResult);
 	}
 
-	//TODO Create Constructor for unknown Types of "Erregernachweise"
-
 	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.setValue(valueCode);
 	}
+
+	//TODO Create Constructor for unknown Types of "Erregernachweise"
 
 	public LaboratoryObservation(org.ehc.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -53,12 +48,12 @@ public class LaboratoryObservation {
 		this.setValue(value);
 	}
 
+	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
+		mLaboratoryObservation = labObs;
+	}
+
 	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation copyMdhtLaboratoryObservation() {
 		return EcoreUtil.copy(mLaboratoryObservation);
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtOLaboratoryObservation() {
-		return mLaboratoryObservation;
 	}
 
 	public Code getCode() {
@@ -83,13 +78,9 @@ public class LaboratoryObservation {
 			return false;
 		}
 	}
-	
+
 	public String getInterpretationCode() {
 		return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-	}
-
-	public void setInterpretationCode(ObservationInterpretation code) {
-		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}
 
 	public Organization getLaboratory() {
@@ -101,6 +92,10 @@ public class LaboratoryObservation {
 			}
 		}
 		return null;
+	}
+
+	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtOLaboratoryObservation() {
+		return mLaboratoryObservation;
 	}
 
 	public void setCode(Code code) {
@@ -123,6 +118,10 @@ public class LaboratoryObservation {
 		else {
 			mLaboratoryObservation.getInterpretationCodes().add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN.getCE());
 		}
+	}
+
+	public void setInterpretationCode(ObservationInterpretation code) {
+		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}
 
 	public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {

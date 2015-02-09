@@ -41,12 +41,12 @@ public class Person {
 		// Create and fill Person Name
 		mPerson.getNames().add(name.copyMdhtPn());
 	}
-	
+
 	public Name getName() {
 		Name name = new Name(mPerson.getNames().get(0)); 
 		return name;
 	}
-	
+
 	public ArrayList<Name> getNames() {
 		ArrayList<Name> nl = new ArrayList<Name>();
 		for (PN mName: mPerson.getNames()) {

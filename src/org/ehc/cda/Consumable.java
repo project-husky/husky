@@ -20,10 +20,6 @@ public class Consumable {
 	private Material mMaterial;
 	private ProductEntry mProductEntry;
 
-	protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
-		setMdhtConsumable(consumable);
-	}
-
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
@@ -48,6 +44,10 @@ public class Consumable {
 		setCodedId(codedId);
 		setTradeName(tradeNameOfVaccine);
 		mConsumable.setTypeCode(ParticipationType.CSM);
+	}
+
+	protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+		setMdhtConsumable(consumable);
 	}
 
 	/**

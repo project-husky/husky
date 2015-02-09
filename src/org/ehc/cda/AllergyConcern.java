@@ -35,7 +35,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class AllergyConcern extends ConcernEntry {
 
 	protected org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
-	
+
 	public AllergyConcern() {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
@@ -124,7 +124,11 @@ public class AllergyConcern extends ConcernEntry {
 		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		mAllergyConcern.getEntryRelationships().get(0).setInversionInd(false);
 	}
-	
+
+	public org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern copyMdhtAllergyConcern() {
+		return EcoreUtil.copy(mAllergyConcern);
+	}
+
 	public ArrayList<AllergyProblem> getAllergyProblems() {
 		ArrayList<AllergyProblem> apl = new ArrayList<AllergyProblem>();
 		for (AllergyIntolerance mAllergy: mAllergyConcern.getAllergyIntolerances()) {
@@ -132,10 +136,6 @@ public class AllergyConcern extends ConcernEntry {
 			apl.add(allergy);
 		}
 		return apl;
-	}
-
-	public org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern copyMdhtAllergyConcern() {
-		return EcoreUtil.copy(mAllergyConcern);
 	}
 
 	public AllergyIntoleranceConcern getMdhtAllergyConcern() {

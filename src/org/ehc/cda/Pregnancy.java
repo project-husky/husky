@@ -16,30 +16,26 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 public class Pregnancy {
 	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 
-	public Pregnancy(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
-		this.mPregnancy = pregnancy;
-	}
-
 	public Pregnancy() {
-		this.mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
+		mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
 		mPregnancy.setClassCode(ActClassObservation.OBS);
 		mPregnancy.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		mPregnancy.setCode(Pregnancies.DELIVERY_DATE_CLINICAL_ESTIMATE.getCD());
 		mPregnancy.setEffectiveTime(DateUtil.createUnknownTime(null));
 		setInternalId(null);
 	}
-	
+
 	public Pregnancy (Date estimatedBirdDate) {
 		this();
 		setEstimatedBirthDate(estimatedBirdDate);
 	}
 
-	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
-		return EcoreUtil.copy(mPregnancy);
+	public Pregnancy(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
+		mPregnancy = pregnancy;
 	}
 
-	public PregnancyObservation getMdhtPregnancy() {
-		return mPregnancy;
+	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
+		return EcoreUtil.copy(mPregnancy);
 	}
 
 	public String getEstimatedBirthdate() {
@@ -49,6 +45,10 @@ public class Pregnancy {
 			return DateUtil.parseDateToStr(ts);
 		}
 		else return null;
+	}
+
+	public PregnancyObservation getMdhtPregnancy() {
+		return mPregnancy;
 	}
 
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {

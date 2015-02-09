@@ -16,14 +16,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 public class ConcernEntry {
 	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
 
+	public ConcernEntry () {
+		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
+	}
+
 	public ConcernEntry (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
 		mConcernEntry = concernEntry;
 	}
 
-	public ConcernEntry () {
-		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
-	}
-	
 	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
 		return EcoreUtil.copy(mConcernEntry);
 	}
@@ -55,7 +55,7 @@ public class ConcernEntry {
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
-		return this.mConcernEntry;
+		return mConcernEntry;
 	}
 
 	/**
@@ -67,8 +67,8 @@ public class ConcernEntry {
 		return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
 				.getEffectiveTime().getLow().getValue());
 	}
-	
-	
+
+
 
 	/**
 	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
@@ -115,12 +115,12 @@ public class ConcernEntry {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setId(Identificator id) {
 		II ii = Util.createUuidVacdIdentificator(id);
 		mConcernEntry.getIds().add(ii);
 	}
-	
+
 	/**
 	 * Setzt den Beginn des Leidens
 	 * 

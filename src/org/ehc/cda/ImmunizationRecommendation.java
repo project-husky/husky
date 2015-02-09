@@ -41,7 +41,7 @@ public class ImmunizationRecommendation {
 	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
 	public ImmunizationRecommendation() {
-		this.mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
+		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ImmunizationRecommendation {
 
 		this(consumable, author, startOfPossibleAppliance, endOfPossibleAppliance, intendedOrProposed, shallNotBeAdministerd, null, null, null, null);
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
 	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
@@ -153,7 +153,7 @@ public class ImmunizationRecommendation {
 			return null;
 		}
 	}
-	
+
 	public Consumable getConsumable() {
 		Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
 		return consumable;
@@ -171,7 +171,7 @@ public class ImmunizationRecommendation {
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
-		return this.mImmunizationRecommendation;
+		return mImmunizationRecommendation;
 	}
 
 	public void setAuthor(org.ehc.common.Author author) {
@@ -183,7 +183,7 @@ public class ImmunizationRecommendation {
 		II ii = DatatypesFactory.eINSTANCE.createII(codedId.getCD().getCodeSystem(), codedId.getCode());
 		mImmunizationRecommendation.getIds().add(ii);
 	}
-	
+
 	/**
 	 * @param intendedOrProposed
 	 *          das intendedOrProposed Objekt welches gesetzt wird
@@ -218,6 +218,6 @@ public class ImmunizationRecommendation {
 			mImmunizationRecommendation.setNegationInd(false);
 		}
 	}
-	
-	
+
+
 }

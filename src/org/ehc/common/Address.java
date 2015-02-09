@@ -31,9 +31,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
 public class Address {
 
 	AD mAd;
-	
+
 	public Address (AD ad) {
-		this.mAd = ad;
+		mAd = ad;
 	}
 
 	/**
@@ -194,7 +194,7 @@ public class Address {
 	}
 
 	public AD getMdhtAdress() {
-		return this.mAd;
+		return mAd;
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class Address {
 	public void setHouseNumber(String HouseNumber) {
 		mAd.addHouseNumber(HouseNumber);
 	}
-	
+
 	/**
 	 * Setzt die Strasse
 	 * 
@@ -283,7 +283,7 @@ public class Address {
 	public void setStreet(String street) {
 		mAd.addStreetName(street);
 	}
-	
+
 	/**
 	 * Setzt die PLZ
 	 * 

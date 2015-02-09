@@ -31,6 +31,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  */
 public class Identificator {
 
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				Identificator id = new Identificator(i);
+				return id;
+			}
+		}
+		return null;
+	}
+
 	II mII;
 
 	/**
@@ -45,6 +55,10 @@ public class Identificator {
 		mII = DatatypesFactory.eINSTANCE.createII();
 		setRoot(oid.getCodeSystemId());
 		setExtension(id);
+	}
+
+	public Identificator(II ii) {
+		mII = ii;
 	}
 
 	/**
@@ -73,10 +87,6 @@ public class Identificator {
 		mII = DatatypesFactory.eINSTANCE.createII();
 		setRoot(oid);
 		setExtension(id);
-	}
-	
-	public Identificator(II ii) {
-		this.mII = ii;
 	}
 
 	/**
@@ -119,15 +129,5 @@ public class Identificator {
 		if (root != null && !root.equals("")) {
 			mII.setRoot(root);
 		}
-	}
-	
-	public static Identificator getIdentificator(List<II> iiList, String root) {
-		for (II i : iiList) {
-			if (i.getRoot().equals(root)) {
-				Identificator id = new Identificator(i);
-				return id;
-			}
-		}
-		return null;
 	}
 }

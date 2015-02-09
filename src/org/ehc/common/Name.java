@@ -82,6 +82,10 @@ public class Name {
 		mPn.addSuffix(suffix);
 	}
 
+	public PN copyMdhtPn() {
+		return EcoreUtil.copy(mPn);
+	}
+
 	public String getCompleteName() {
 		String name;
 
@@ -99,7 +103,7 @@ public class Name {
 
 		return name;
 	}
-	
+
 	/**
 	 * @return Nachnamen
 	 */
@@ -123,10 +127,6 @@ public class Name {
 
 	public PN getMdhtPn() {
 		return mPn;
-	}
-	
-	public PN copyMdhtPn() {
-		return EcoreUtil.copy(mPn);
 	}
 
 	/**

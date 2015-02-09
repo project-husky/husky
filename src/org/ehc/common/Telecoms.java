@@ -12,17 +12,17 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 public class Telecoms {
 	ArrayList<TEL> mTels;
-	
+
 	public Telecoms() {
 		mTels = new ArrayList<TEL>();
 	}
-	
+
 	public Telecoms(EList<TEL> telecoms) {
 		for (TEL tel: telecoms) {
 			mTels.add(tel);
 		}
 	}
-	
+
 	/**
 	 * Weist dem Autor eine eMail Adresse zu
 	 * 
@@ -34,7 +34,7 @@ public class Telecoms {
 	public void addEMail(String eMail, AddressUse usage) {
 		mTels.add(Util.createEMail(eMail, usage));
 	}
-	
+
 	/**
 	 * Weist dem Autor eine Fax Adresse zu
 	 * 
@@ -46,7 +46,7 @@ public class Telecoms {
 	public void addFax(String fax, AddressUse usage) {
 		mTels.add(Util.createFax(fax, usage));
 	}
-	
+
 	/**
 	 * Weist dem Autor eine Telefonnummer zu
 	 * 
@@ -59,7 +59,7 @@ public class Telecoms {
 	public void addPhone(String phoneNr, AddressUse usage) {
 		mTels.add(Util.createTel(phoneNr, usage));
 	}
-	
+
 	/**
 	 * Weist dem Autor eine Webseite zu
 	 * 
@@ -71,7 +71,11 @@ public class Telecoms {
 	public void addWebsite(String eMail, UseCode usage) {
 		//TODO Implement this!
 	}
-	
+
+	public EList<TEL> copyMdhtTelecoms() {
+		return (EList<TEL>) EcoreUtil.copyAll(mTels);
+	}
+
 	public ArrayList<String> getEMails() {
 		return Util.getEMail(mTels);
 	}
@@ -79,24 +83,20 @@ public class Telecoms {
 	public ArrayList<String> getFaxes() {
 		return Util.getFax(mTels);
 	}
-	
+
+	public ArrayList<TEL> getMdhtTelecoms() {
+		return mTels;
+	}
+
 	public ArrayList<String> getPhones() {
 		return Util.getPhone(mTels);
 	}
-	
+
 	public HashMap<String, TelecommunicationAddressUse> getTelecoms() {
 		HashMap<String, TelecommunicationAddressUse> pm = new HashMap<String, TelecommunicationAddressUse>();
 		for (TEL mName: mTels) {
 			pm.put(mName.getValue(), mName.getUses().get(0));
 		}
 		return pm;
-	}
-	
-	public ArrayList<TEL> getMdhtTelecoms() {
-		return mTels;
-	}
-	
-	public EList<TEL> copyMdhtTelecoms() {
-		return (EList<TEL>) EcoreUtil.copyAll(mTels);
 	}
 }

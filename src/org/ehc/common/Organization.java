@@ -18,10 +18,7 @@
 
 package org.ehc.common;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -129,11 +126,7 @@ public class Organization {
 	public String getName() {
 		return getMdhtOrganization().getNames().get(0).getText();
 	}
-	
-	public void setTelecoms(Telecoms telecoms) {
-		mOrganization.getTelecoms().addAll(telecoms.getMdhtTelecoms());
-	}
-	
+
 	public Telecoms getTelecoms() {
 		Telecoms telecoms = new Telecoms(mOrganization.getTelecoms());
 		return telecoms;
@@ -141,5 +134,9 @@ public class Organization {
 
 	public void setOrganization(org.openhealthtools.mdht.uml.cda.Organization mOrganization) {
 		this.mOrganization = mOrganization;
+	}
+
+	public void setTelecoms(Telecoms telecoms) {
+		mOrganization.getTelecoms().addAll(telecoms.getMdhtTelecoms());
 	}
 }

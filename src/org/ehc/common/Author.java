@@ -19,25 +19,17 @@
 package org.ehc.common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehc.cda.AllergyProblem;
-import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.cda.ch.enums.CodeSystems;
-import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
-import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 
 /**
@@ -82,10 +74,8 @@ public class Author {
 		// add functionCode and time
 		mAuthor.setFunctionCode(createFunctionCode());
 		mAuthor.setTime(DateUtil.nowAsTS());
-		this.addName(name);
+		addName(name);
 	}
-
-	//TODO Hier wäre es evtl. sinnvoller für einen Arzt eine eigene Klasse zu erstellen, in der die GLN Verpflichtend anzugeben ist. Beim Aufruf des VACD-Konstruktors wird dann eben diese Klasse dem Dokument hinzugefügt (daraus kann dann auch gleich die ID für den Custodian generiert werden).
 
 	/**
 	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
@@ -95,15 +85,6 @@ public class Author {
 	 */
 	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
 		mAuthor = authorMdht;
-	}
-	
-	public void setTelecoms(Telecoms telecoms) {
-		mAuthor.getAssignedAuthor().getTelecoms().addAll(telecoms.getMdhtTelecoms());
-	}
-	
-	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mAuthor.getAssignedAuthor().getTelecoms());
-		return telecoms;
 	}
 
 	/**
@@ -115,7 +96,7 @@ public class Author {
 	public void addAddress(Address address) {
 		mAuthor.getAssignedAuthor().getAddrs().add(address.copyMdhtAdress());
 	}
-	
+
 	/**
 	 * Weist dem Autoren eine ID zu
 	 * 
@@ -126,12 +107,12 @@ public class Author {
 	public void addId(Identificator identificator) {
 		mAuthor.getAssignedAuthor().getIds().add(identificator.getIi());
 	}
-	
+
 	public void addName(Name name) {
 		mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
 		.add(name.getMdhtPn());
 	}
-	
+
 	/**
 	 * Weist dem Autor ein Fachgebiet zu (wird vor allem für Ärzte gebraucht)
 	 * 
@@ -158,7 +139,7 @@ public class Author {
 		Address address = new Address(mAuthor.getAssignedAuthor().getAddrs().get(0));
 		return address;
 	}
-	
+
 	public ArrayList<Address> getAddresses() {
 		ArrayList<Address> al = new ArrayList<Address>();
 		for (AD mAddress: mAuthor.getAssignedAuthor().getAddrs()) {
@@ -167,7 +148,7 @@ public class Author {
 		}
 		return al;
 	}
-	
+
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
 		return EcoreUtil.copy(mAuthor);
 	}
@@ -198,13 +179,13 @@ public class Author {
 		Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(), CodeSystems.GLN.getCodeSystemId());
 		return gln.getExtension();
 	}
-	
+
 	public Identificator getGlnAsIdentificator() {
 		II ii =  mAuthor.getAssignedAuthor().getIds().get(0);
 		Identificator id = new Identificator(ii);
 		return id;
 	}
-	
+
 	public ArrayList<Identificator> getIds() {
 		ArrayList<Identificator> il = new ArrayList<Identificator>();
 		for (II mId: mAuthor.getAssignedAuthor().getIds()) {
@@ -215,10 +196,10 @@ public class Author {
 	}
 
 	public Name getName() {
-		Name name = new Name (this.mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+		Name name = new Name (mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 		return name;
 	}
-	
+
 	public ArrayList<Name> getNames() {
 		ArrayList<Name> nl = new ArrayList<Name>();
 		for (PN mName: mAuthor.getAssignedAuthor().getAssignedPerson().getNames()) {
@@ -228,7 +209,16 @@ public class Author {
 		return nl;
 	}
 
+	public Telecoms getTelecoms() {
+		Telecoms telecoms = new Telecoms(mAuthor.getAssignedAuthor().getTelecoms());
+		return telecoms;
+	}
+
 	public void setGln(String gln) {
 		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+	}
+
+	public void setTelecoms(Telecoms telecoms) {
+		mAuthor.getAssignedAuthor().getTelecoms().addAll(telecoms.getMdhtTelecoms());
 	}
 }

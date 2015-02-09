@@ -41,17 +41,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 public class AllergyProblem {
 	AllergyIntolerance mAllergyProblem; 
 
-	/**
-	 * @param problemEntry
-	 */
-	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
-		mAllergyProblem = allergyIntolerance;
-	}
-	
 	public AllergyProblem () {
-		this.mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
+		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
 	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
@@ -132,6 +125,17 @@ public class AllergyProblem {
 	}
 
 	/**
+	 * @param problemEntry
+	 */
+	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+		mAllergyProblem = allergyIntolerance;
+	}
+
+	public AllergyIntolerance copyMdAllergyIntolerance() {
+		return EcoreUtil.copy(mAllergyProblem);
+	}
+
+	/**
 	 * @return das codedProblem Objekt
 	 */
 	public org.ehc.common.Code getCode() {
@@ -145,6 +149,17 @@ public class AllergyProblem {
 	public String getEnd() {
 		return Util.createEurDateStrFromTS(mAllergyProblem
 				.getEffectiveTime().getHigh().getValue());
+	}
+
+	public AllergyIntolerance getMdhtAllergyProblem() {
+		return mAllergyProblem;
+	}
+
+	/**
+	 * @return das problemNotOccured Objekt
+	 */
+	public boolean getProblemNotOccured() {
+		return mAllergyProblem.getNegationInd();
 	}
 
 	/**
@@ -166,11 +181,8 @@ public class AllergyProblem {
 		return value;
 	}
 
-	/**
-	 * @return das problemNotOccured Objekt
-	 */
-	public boolean getProblemNotOccured() {
-		return mAllergyProblem.getNegationInd();
+	public void setCode(AllergiesAndIntolerances kindOfAllergy) {
+		mAllergyProblem.setCode(kindOfAllergy.getCD());
 	}
 
 	/**
@@ -213,18 +225,6 @@ public class AllergyProblem {
 	public void setValue(Code codedProblem) {
 		CD mCodedProblem = EcoreUtil.copy(codedProblem.getCD());
 		mAllergyProblem.getValues().add(mCodedProblem);
-	}
-	
-	public void setCode(AllergiesAndIntolerances kindOfAllergy) {
-		mAllergyProblem.setCode(kindOfAllergy.getCD());
-	}
-	
-	public AllergyIntolerance getMdhtAllergyProblem() {
-		return this.mAllergyProblem;
-	}
-	
-	public AllergyIntolerance copyMdAllergyIntolerance() {
-		return EcoreUtil.copy(mAllergyProblem);
 	}
 }
 

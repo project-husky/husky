@@ -32,6 +32,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class Value {
 	ANY mValue;
 
+	public Value(ANY value) {
+		mValue = value;
+	}
+
 	public Value(CD cd) {
 		mValue = cd;
 	}
@@ -56,10 +60,6 @@ public class Value {
 		this(DatatypesFactory.eINSTANCE.createPQ());
 		setPqValue(value);
 		setUcumUnit(unit);
-	}
-
-	public Value(ANY value) {
-		this.mValue = value;
 	}
 
 	public CD copyMdhtCode() {
@@ -96,6 +96,13 @@ public class Value {
 		return String.valueOf(pq.getValue());
 	}
 
+	public ANY getValue() {
+		if (mValue == null) {
+			mValue.setNullFlavor(NullFlavor.UNK);
+		}
+		return mValue;
+	}
+
 	public boolean isCode() {
 		if (mValue instanceof CD) {
 			return true;
@@ -103,13 +110,6 @@ public class Value {
 		else {
 			return false;
 		}
-	}
-	
-	public ANY getValue() {
-		if (mValue == null) {
-			mValue.setNullFlavor(NullFlavor.UNK);
-		}
-		return mValue;
 	}
 
 	public boolean isPhysicalQuantity () {

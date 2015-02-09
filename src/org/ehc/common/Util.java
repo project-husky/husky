@@ -56,74 +56,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /**
  * Hilfs-Methoden
  * 
  */
 public class Util {
-	
-	public static final String TELECOMS_FAX_PREFIX = "fax:";
-	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
-	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
-	public static TEL createFax(String faxNr, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
-		return tel;
-	}
-	
-	public static ArrayList<String> getFax(ArrayList<TEL> telecoms) {
-		return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
-	}
-	
-	public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
-		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
-	}
-	
-	public static ArrayList<String> getPhone(ArrayList<TEL> telecoms) {
-		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
-	}
-	
-	private static ArrayList<String> getTelecomType(ArrayList<TEL> telecoms, String type) {
-		ArrayList<String> tl = new ArrayList<String>();
-		for (TEL tel : telecoms) {
-			if (tel.getValue().contains(type)) {
-				tl.add(tel.getValue());
-			}
-		}
-		return tl;
-	}
-	
-	public static TEL createEMail(String eMail, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
-		return tel;
-	}
-	
-	public static TEL createTel(String telNr, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
-		return tel;
-	}
-	
-	public static String joinEListStr(EList<ENXP> list) {
-		if (list.size()==0) {
-			return null;
-		}
-		String names = list.get(0).getText();
-		if (list.size()>1) {
-			for (int i = 2; i<= list.size();i++) {
-				names = String.join(" ", names, list.get(i).getText());
-			}
-		}
-		return names;
-	}
-	
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -146,7 +85,6 @@ public class Util {
 		}
 		return ad;
 	}
-
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -170,7 +108,6 @@ public class Util {
 		}
 		return ad;
 	}
-
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -228,6 +165,13 @@ public class Util {
 		return (ed.addText(text));
 	}
 
+	public static TEL createEMail(String eMail, AddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
+		return tel;
+	}
+
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
 		// TODO Prüfen, ob der übergebene String das richtige Format hat.
 		String eurDateStr =
@@ -236,13 +180,18 @@ public class Util {
 		return eurDateStr;
 	}
 
+	public static TEL createFax(String faxNr, AddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
+		return tel;
+	}
+
 	public static IVL_PQ createIVL_PQNullFlavorNASK() {
 		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NASK);
 		return ivlpq;
 	}
-
-
 
 	/**
 	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt
@@ -317,8 +266,6 @@ public class Util {
 		return ts;
 	}
 
-
-
 	public static ED createProblemEntryText() {
 		return DatatypesFactory.eINSTANCE.createED();
 	}
@@ -334,7 +281,12 @@ public class Util {
 		return text;
 	}
 
-
+	public static TEL createTel(String telNr, AddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
+		return tel;
+	}
 
 	public static II createUuidVacd(String id) {
 		II ii = DatatypesFactory.eINSTANCE.createII();
@@ -349,6 +301,17 @@ public class Util {
 	}
 
 
+
+	public static II createUuidVacdIdentificator(Identificator id) {
+		II ii;
+		if (id == null){
+			ii = Util.createUuidVacd(null);
+		}
+		else {
+			ii = id.getIi();
+		}
+		return ii;
+	}
 
 	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
 		StringBuilder sb = new StringBuilder();
@@ -377,6 +340,32 @@ public class Util {
 		return id;
 	}
 
+	public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
+	}
+
+	public static ArrayList<String> getFax(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
+	}
+
+
+
+	public static ArrayList<String> getPhone(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
+	}
+
+	private static ArrayList<String> getTelecomType(ArrayList<TEL> telecoms, String type) {
+		ArrayList<String> tl = new ArrayList<String>();
+		for (TEL tel : telecoms) {
+			if (tel.getValue().contains(type)) {
+				tl.add(tel.getValue());
+			}
+		}
+		return tl;
+	}
+
+
+
 	private static String getText(FeatureMap featureMap) {
 		StringBuffer buffer = new StringBuffer("");
 		for (FeatureMap.Entry entry : featureMap) {
@@ -393,6 +382,8 @@ public class Util {
 		return buffer.toString().trim();
 	}
 
+
+
 	public static II ii(String root) {
 		II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(root);
@@ -403,6 +394,19 @@ public class Util {
 		II ii = ii(root);
 		ii.setExtension(extension);
 		return ii;
+	}
+
+	public static String joinEListStr(EList<ENXP> list) {
+		if (list.size()==0) {
+			return null;
+		}
+		String names = list.get(0).getText();
+		if (list.size()>1) {
+			for (int i = 2; i<= list.size();i++) {
+				names = String.join(" ", names, list.get(i).getText());
+			}
+		}
+		return names;
 	}
 
 	public static ST st(String text) {
@@ -437,7 +441,7 @@ public class Util {
 						}
 					} else {
 						System.out.println(" }");
-				}
+					}
 				}
 				if (entry.getValue() != null && !stack2.isEmpty()) {
 					System.out.print("</" + stack2.pop() + ">");
@@ -466,7 +470,7 @@ public class Util {
 					}
 				} else {
 					System.out.println(" }");
-			}
+				}
 			}
 		}
 		return sb;
@@ -486,6 +490,12 @@ public class Util {
 		}
 		return sb;
 	}
+
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
+
+	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+
+	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
 	 * Erzeugt eine Adresse
@@ -512,17 +522,6 @@ public class Util {
 			ad.addStreetAddressLine(addressline3);
 		}
 		return ad;
-	}
-
-	public static II createUuidVacdIdentificator(Identificator id) {
-		II ii;
-		if (id == null){
-			ii = Util.createUuidVacd(null);
-		}
-		else {
-			ii = id.getIi();
-		}
-		return ii;
 	}
 
 
