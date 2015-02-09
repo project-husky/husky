@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehc.cda.ch.CdaChVacd;
+import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.utils.UUID;
@@ -62,17 +63,24 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  */
 public class Util {
 
-	public static TEL createFax(String faxNr) {
+	public static TEL createFax(String faxNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(TelecommunicationAddressUse.WP);
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		tel.setValue("fax:" + faxNr);
 		return tel;
 	}
 	
-	public static TEL createEMail(String eMail) {
+	public static TEL createEMail(String eMail, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(TelecommunicationAddressUse.WP);
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		tel.setValue("mailto:" + eMail);
+		return tel;
+	}
+	
+	public static TEL createTel(String telNr, AddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		tel.setValue("tel:" + telNr);
 		return tel;
 	}
 	

@@ -21,6 +21,7 @@ package org.ehc.common;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -85,7 +86,7 @@ public class Organization {
 	 *            eMail Adresse
 	 */
 	public void addEMail(String eMail) {
-		getMdhtOrganization().getTelecoms().add(Util.createEMail(eMail));
+		getMdhtOrganization().getTelecoms().add(Util.createEMail(eMail, AddressUse.BUSINESS));
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class Organization {
 	 *            erlaubt). Beispiel: +41322345566
 	 */
 	public void addFax(String faxNr) {
-		getMdhtOrganization().getTelecoms().add(Util.createFax(faxNr));
+		getMdhtOrganization().getTelecoms().add(Util.createFax(faxNr, AddressUse.BUSINESS));
 	}
 
 	/**

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.cda.ch.enums.AdministrativeGender;
 import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
@@ -149,25 +150,8 @@ public class Patient extends Person {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
-	public void addPhone(String phoneNr, UseCode usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		TelecommunicationAddressUse useCode = TelecommunicationAddressUse.HP;
-		switch (usage) {
-		case Private:
-			useCode = TelecommunicationAddressUse.HP;
-			break;
-		case Business:
-			useCode = TelecommunicationAddressUse.WP;
-			break;
-		case Mobile:
-			useCode = TelecommunicationAddressUse.MC;
-		default:
-			useCode = TelecommunicationAddressUse.HP;
-			break;
-		}
-		tel.getUses().add(useCode);
-		tel.setValue("tel:" + phoneNr);
-		getMdhtRecordTarget().getPatientRole().getTelecoms().add(tel);
+	public void addPhone(String phoneNr, AddressUse usage) {
+		getMdhtRecordTarget().getPatientRole().getTelecoms().add(Util.createTel(phoneNr, usage));
 	}
 	
 	/**
@@ -208,8 +192,8 @@ public class Patient extends Person {
 	 * @param eMail eMail Adresse
 	 * @param usage Verwendungszweck (Privat, Geschäft)
 	 */
-	public void addEMail(String eMail, UseCode usage) {
-		mPatientRole.getTelecoms().add(Util.createEMail(eMail));
+	public void addEMail(String eMail, AddressUse usage) {
+		mPatientRole.getTelecoms().add(Util.createEMail(eMail, usage));
 	}
 
 	/**
@@ -219,8 +203,8 @@ public class Patient extends Person {
 	 *        +41322345566
 	 * @param usage Verwendungszweck (Privat, Geschäft)
 	 */
-	public void addFax(String faxNr, UseCode usage) {
-		mPatientRole.getTelecoms().add(Util.createFax(faxNr));
+	public void addFax(String faxNr, AddressUse usage) {
+		mPatientRole.getTelecoms().add(Util.createFax(faxNr, usage));
 	}
 	
 	/**

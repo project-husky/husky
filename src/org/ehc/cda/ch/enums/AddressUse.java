@@ -1,11 +1,14 @@
 package org.ehc.cda.ch.enums;
 
 import java.util.Arrays;
+
 import org.ehc.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
+import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /*
 *<div class="de">Nutzungszweck von Adressen und Kommunikationsmitteln gemäss HL7 Vocabulary TelecommunicationAddressUse [2.16.840.1.113883.1.11.201] und AddressUse [2.16.840.1.113883.5.1119] Wichtigste für die Schweiz: Private (Privat;HP), Business(Geschäft;WP), Mobil(Mobile;MC)</div>
@@ -95,4 +98,30 @@ public enum AddressUse {
 		return CODE_SYSTEM_NAME;
 	}
 
+	//Special for this enum: Return the Use Code in different HL7 enum types
+	public TelecommunicationAddressUse getAddressUseAsTelecommunicationAddressUse () {
+		switch (this) {
+		case PRIVATE:
+			return TelecommunicationAddressUse.HP;
+		case BUSINESS:
+			return TelecommunicationAddressUse.WP;
+		case MOBILE:
+			return TelecommunicationAddressUse.MC;
+		default:
+			return TelecommunicationAddressUse.HP;
+		}
+	}
+	
+	public PostalAddressUse getAddressUseAsPostalAddressUse () {
+		switch (this) {
+		case PRIVATE:
+			return PostalAddressUse.HP;
+		case BUSINESS:
+			return PostalAddressUse.WP;
+		case MOBILE:
+			return PostalAddressUse.TMP;
+		default:
+			return PostalAddressUse.HP;
+		}
+	}
 }

@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.AllergyProblem;
+import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
@@ -114,8 +115,8 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void addEMail(String eMail, UseCode usage) {
-		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createEMail(eMail));
+	public void addEMail(String eMail, AddressUse usage) {
+		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createEMail(eMail, usage));
 	}
 	
 	/**
@@ -126,8 +127,8 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public void addFax(String fax, UseCode usage) {
-		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createFax(fax));
+	public void addFax(String fax, AddressUse usage) {
+		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createFax(fax, usage));
 	}
 
 	/**

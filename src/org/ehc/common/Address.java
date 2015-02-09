@@ -19,6 +19,7 @@
 package org.ehc.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -46,7 +47,7 @@ public class Address {
 	 *            Ort
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
-		this(zip, city, UseCode.Business);
+		this(zip, city, AddressUse.BUSINESS);
 		setStreet(street);
 		setHouseNumber(houseNumber);
 	}
@@ -61,15 +62,15 @@ public class Address {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	private Address(String zip, String city, UseCode usage) {
+	private Address(String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setCity(city);
 		setZip(zip);
 		switch (usage) {
-		case Business:
+		case BUSINESS:
 			mAd.getUses().add(PostalAddressUse.WP);
 			break;
-		case Private:
+		case PRIVATE:
 			mAd.getUses().add(PostalAddressUse.HP);
 			break;
 		default:
@@ -90,7 +91,7 @@ public class Address {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	public Address(String addressline, String zip, String city, UseCode usage) {
+	public Address(String addressline, String zip, String city, AddressUse usage) {
 		this(zip, city, usage);
 		setAddressline1(addressline);
 	}
@@ -110,7 +111,7 @@ public class Address {
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public Address(String street, String houseNumber, String zip, String city,
-			UseCode usage) {
+			AddressUse usage) {
 		this(zip, city, usage);
 		setStreet(street);
 		setHouseNumber(houseNumber);
@@ -133,7 +134,7 @@ public class Address {
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public Address(String addressline1, String addressline2,
-			String addressline3, String zip, String city, UseCode usage) {
+			String addressline3, String zip, String city, AddressUse usage) {
 		this(zip, city, usage);
 		setAddressline1(addressline1);
 		setAddressline2(addressline2);
