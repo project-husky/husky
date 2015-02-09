@@ -21,9 +21,12 @@ package org.ehc.common;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.AdministrativeGender;
+import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -40,6 +43,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 public class Patient extends Person {
 
 	private RecordTarget mRecordTarget;
+	private PatientRole mPatientRole;
+	private org.openhealthtools.mdht.uml.cda.Patient mPatient;
 
 	/**
 	 * Erstellt einen neuen Patienten
@@ -66,32 +71,43 @@ public class Patient extends Person {
 	 *            Geburtsdatum (als Text) Beispiel:20.05.1967
 	 */
 	public Patient(Name name, AdministrativeGender sex, String birthDate) {
-		super(name.getGivenName(), name.getFamilyName());
-		// Create the patientRole
+		// Create the RecordTarget, PatientRole and Patient
 		setRecordTarget(CDAFactory.eINSTANCE.createRecordTarget());
-		PatientRole patientRole = CDAFactory.eINSTANCE.createPatientRole();
-		getRecordTarget().setPatientRole(patientRole);
-
-		// Create the Patient
-		org.openhealthtools.mdht.uml.cda.Patient patient = CDAFactory.eINSTANCE
-				.createPatient();
-		patientRole.setPatient(patient);
-
+		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
+		mPatient = CDAFactory.eINSTANCE.createPatient();
+		
+		mPatientRole.setPatient(mPatient);
+		mRecordTarget.setPatientRole(mPatientRole);
+		
 		// Create and fill gender
-		patient.setAdministrativeGenderCode(sex.getCE());
+		mPatient.setAdministrativeGenderCode(sex.getCE());
 
 		// Fill Patient Name
-		patient.getNames().add(name.getPn());
+		mPatient.getNames().add(name.getMdhtPn());
 
 		// Create and fill birth date
 		try {
-			patient.setBirthTime(DateUtil.createTSFromEuroDate(birthDate));
+			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDate));
 		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public Name getName() {
+		Name name = new Name (mPatient.getNames().get(0));
+		return name;
+	}
+	
+	public ArrayList<Name> getNames() {
+		ArrayList<Name> nl = new ArrayList<Name>();
+		for (PN mName: mPatient.getNames()) {
+			Name name = new Name(mName);
+			nl.add(name);
+		}
+		return nl;
+	}
+	
 	/**
 	 * Constructor (used when deserializing CDA document).
 	 * 
@@ -108,7 +124,7 @@ public class Patient extends Person {
 	 *            Adresse
 	 */
 	public void addAddress(Address address) {
-		getRecordTarget().getPatientRole().getAddrs().add(address.copyMdhtAdress());
+		mPatientRole.getAddrs().add(address.copyMdhtAdress());
 	}
 
 	/**
@@ -117,12 +133,11 @@ public class Patient extends Person {
 	 * @param identificator
 	 *            Identificator
 	 */
-	@Override
 	public void addID(Identificator identificator) {
 		II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(identificator.getRoot());
 		id.setExtension(identificator.getExtension());
-		getRecordTarget().getPatientRole().getIds().add(id);
+		mPatientRole.getIds().add(id);
 	}
 
 	/**
@@ -134,7 +149,6 @@ public class Patient extends Person {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
-	@Override
 	public void addPhone(String phoneNr, UseCode usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		TelecommunicationAddressUse useCode = TelecommunicationAddressUse.HP;
@@ -153,26 +167,29 @@ public class Patient extends Person {
 		}
 		tel.getUses().add(useCode);
 		tel.setValue("tel:" + phoneNr);
-		getRecordTarget().getPatientRole().getTelecoms().add(tel);
+		getMdhtRecordTarget().getPatientRole().getTelecoms().add(tel);
 	}
-
-	private Address convertAddress(AD ad) {
-		String street = ad.getStreetNames().get(0).getText();
-		String houseNumber = ad.getHouseNumbers().get(0).getText();
-		String zip = ad.getPostalCodes().get(0).getText();
-		String city = ad.getCities().get(0).getText();
-
-		return new Address(street, houseNumber, zip, city);
+	
+	/**
+	 * Weist der Person eine Webseite zu
+	 * 
+	 * @param eMail Webseite
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addWebsite(String eMail, UseCode usage) {
+		// Auto-generated method stub
+		//TODO
 	}
 
 	public Address getAddress() {
-		AD ad = mRecordTarget.getPatientRole().getAddrs().get(0);
-		return convertAddress(ad);
+		AD mAd = mPatientRole.getAddrs().get(0);
+		Address address = new Address(mAd); 
+		return address;
 	}
 
 	public Date getBirthDate() {
 		try {
-			TS birthTime = getPatient().getBirthTime();
+			TS birthTime = getMdhtPatient().getBirthTime();
 			String value = birthTime.getValue();
 			return parseDate(value);
 		} catch (ParseException e) {
@@ -181,27 +198,62 @@ public class Patient extends Person {
 	}
 
 	public AdministrativeGender getGenderCode() {
-		CE code = getPatient().getAdministrativeGenderCode();
-		if ("M".equals(code.getCode())) {
-			return AdministrativeGender.MALE;
-		} else if ("F".equals(code.getCode())) {
-			return AdministrativeGender.FEMALE;
-		} else {
-			return AdministrativeGender.UNDIFFERENTIATED;
-		}
+		CE code = getMdhtPatient().getAdministrativeGenderCode();
+		return AdministrativeGender.getEnum(code.getCode());
+	}
+	
+	/**
+	 * Weist dem Patient eine eMail Adresse zu
+	 * 
+	 * @param eMail eMail Adresse
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addEMail(String eMail, UseCode usage) {
+		mPatientRole.getTelecoms().add(Util.createEMail(eMail));
 	}
 
-	public Name getName() {
-		PN pn = getPatient().getNames().get(0);
-		return new Name(pn);
+	/**
+	 * Weist der Person eine Faxnummer zu
+	 * 
+	 * @param faxNr Faxnummer (nur internationale Rufnummer ohne Sonderzeichen erlaubt). Beispiel:
+	 *        +41322345566
+	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addFax(String faxNr, UseCode usage) {
+		mPatientRole.getTelecoms().add(Util.createFax(faxNr));
+	}
+	
+	/**
+	 * Weist der Person eine GLN zu (wird vor allem für Ärzte gebraucht)
+	 * 
+	 * @param gln Global Location Number (GLN)
+	 */
+	public void addGLN(String gln) {
+		addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 
-	private org.openhealthtools.mdht.uml.cda.Patient getPatient() {
-		return mRecordTarget.getPatientRole().getPatient();
+	public org.openhealthtools.mdht.uml.cda.Patient getMdhtPatient() {
+		return mPatient;
+	}
+	
+	public PatientRole getMdhtPatientRole() {
+		return mPatientRole;
 	}
 
-	public RecordTarget getRecordTarget() {
+	public RecordTarget getMdhtRecordTarget() {
 		return mRecordTarget;
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
+		return EcoreUtil.copy(mPatient);
+	}
+	
+	public PatientRole copyMdhtPatientRole() {
+		return EcoreUtil.copy(mPatientRole);
+	}
+
+	public RecordTarget copyMdhtRecordTarget() {
+		return EcoreUtil.copy(mRecordTarget);
 	}
 
 	private Date parseDate(String value) throws ParseException {
@@ -211,5 +263,9 @@ public class Patient extends Person {
 
 	public void setRecordTarget(RecordTarget mRecordTarget) {
 		this.mRecordTarget = mRecordTarget;
+	}
+
+	public void addName(Name name) {
+		mPatient.getNames().add(name.copyMdhtPn());
 	}
 }

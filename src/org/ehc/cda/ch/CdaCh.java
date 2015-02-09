@@ -93,7 +93,7 @@ public abstract class CdaCh {
 	 *            Unterzeichner
 	 */
 	public void addAuthenticator(Person authenticator) {
-
+		//TODO
 	}
 
 
@@ -120,7 +120,7 @@ public abstract class CdaCh {
 	 *            erstellt oder Beiträge dazu geliefert hat.
 	 */
 	public void addDataEnterer(Person dataEnterer) {
-
+		//TODO
 	}
 
 	/**
@@ -325,6 +325,6 @@ public abstract class CdaCh {
 	 *            Patient
 	 */
 	public void setPatient(Patient patient) {
-		doc.getRecordTargets().add(patient.getRecordTarget());
+		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
 	}
 }

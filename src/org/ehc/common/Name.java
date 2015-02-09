@@ -16,8 +16,8 @@
 
 package org.ehc.common;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
@@ -83,30 +83,23 @@ public class Name {
 	}
 
 	public String getCompleteName() {
-		StringBuilder nameBuilder = new StringBuilder();
+		String name;
 
-		//TODO Fix this with String.join
 		String prefixes = getPrefixes();
 		String givens = getGivenNames();
 		String families = getFamilyNames();
 		String suffixes = getSuffixes();
+		if (prefixes != null && givens != null) {
+			name = String.join(" ", prefixes, givens);
+		}
+		else {
+			name = givens;
+		}
+		name = String.join(" " , name, families, suffixes);
 
-		if (prefixes != "") {
-			nameBuilder.append(prefixes);
-		}
-		if (givens != "") {
-			nameBuilder.append(" " + givens);
-		}
-		if (families != "") {
-			nameBuilder.append(" " + families);
-		}
-		if (suffixes != "") {
-			nameBuilder.append(" " + suffixes);
-		}
-
-		return nameBuilder.toString();
+		return name;
 	}
-
+	
 	/**
 	 * @return Nachnamen
 	 */
@@ -118,63 +111,36 @@ public class Name {
 	 * @return das suffix Objekt
 	 */
 	public String getFamilyNames() {
-		StringBuilder nameBuilder = new StringBuilder();
-
-		for (ENXP enxp : mPn.getFamilies()) {
-			nameBuilder.append(enxp.getText());
-		}
-
-		return nameBuilder.toString();
+		return Util.joinEListStr (mPn.getFamilies());
 	}
 
 	/**
 	 * @return Vornamen
 	 */
-	public String getGivenName() {
-		return mPn.getGivens().get(0).getText();
-	}
-
-	/**
-	 * @return das suffix Objekt
-	 */
 	public String getGivenNames() {
-		StringBuilder nameBuilder = new StringBuilder();
-
-		for (ENXP enxp : mPn.getGivens()) {
-			nameBuilder.append(enxp.getText());
-		}
-
-		return nameBuilder.toString();
+		return Util.joinEListStr (mPn.getGivens());
 	}
 
-	public PN getPn() {
+	public PN getMdhtPn() {
 		return mPn;
+	}
+	
+	public PN copyMdhtPn() {
+		return EcoreUtil.copy(mPn);
 	}
 
 	/**
 	 * @return das prefix Objekt
 	 */
 	public String getPrefixes() {
-		StringBuilder nameBuilder = new StringBuilder();
-
-		for (ENXP enxp : mPn.getPrefixes()) {
-			nameBuilder.append(enxp.getText());
-		}
-
-		return nameBuilder.toString();
+		return Util.joinEListStr (mPn.getPrefixes());
 	}
 
 	/**
 	 * @return das suffix Objekt
 	 */
 	public String getSuffixes() {
-		StringBuilder nameBuilder = new StringBuilder();
-
-		for (ENXP enxp : mPn.getSuffixes()) {
-			nameBuilder.append(enxp.getText());
-		}
-
-		return nameBuilder.toString();
+		return Util.joinEListStr (mPn.getSuffixes());
 	}
 
 	/**

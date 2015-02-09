@@ -135,4 +135,19 @@ public class Code {
 		mCD.setCodeSystem(oid);
 	}
 
+	public static Code getTranslationOrCode(String codeSystem, CD code) {
+		Code eHcCode;
+		if (code.getCodeSystem().equals(codeSystem)) {
+			 eHcCode = new Code(code);
+		}
+		else {
+			for (CD mCd: code.getTranslations()) {
+				if (mCd.getCodeSystem().equals(codeSystem)) {
+					eHcCode = new Code(mCd);
+					return eHcCode;
+				}
+			}
+		}
+		return null;
+	}
 }

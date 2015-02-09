@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Stack;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -53,6 +54,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /**
  * Hilfs-Methoden
@@ -60,9 +62,32 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
-//	public Code getCode(String codeSystem, CD code) {
-//		
-//	}
+	public static TEL createFax(String faxNr) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(TelecommunicationAddressUse.WP);
+		tel.setValue("fax:" + faxNr);
+		return tel;
+	}
+	
+	public static TEL createEMail(String eMail) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.getUses().add(TelecommunicationAddressUse.WP);
+		tel.setValue("mailto:" + eMail);
+		return tel;
+	}
+	
+	public static String joinEListStr(EList<ENXP> list) {
+		if (list.size()==0) {
+			return null;
+		}
+		String names = list.get(0).getText();
+		if (list.size()>1) {
+			for (int i = 2; i<= list.size();i++) {
+				names = String.join(" ", names, list.get(i).getText());
+			}
+		}
+		return names;
+	}
 	
 	/**
 	 * Erzeugt eine Adresse

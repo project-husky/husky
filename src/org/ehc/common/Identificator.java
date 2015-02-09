@@ -18,6 +18,8 @@
 
 package org.ehc.common;
 
+import java.util.List;
+
 import org.ehc.cda.ch.enums.CodeSystems;
 import org.ehc.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -117,5 +119,15 @@ public class Identificator {
 		if (root != null && !root.equals("")) {
 			mII.setRoot(root);
 		}
+	}
+	
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				Identificator id = new Identificator(i);
+				return id;
+			}
+		}
+		return null;
 	}
 }

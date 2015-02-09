@@ -114,8 +114,20 @@ public class Author {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	private void addEMail(String eMail, UseCode usage) {
-		//TODO Implement this
+	public void addEMail(String eMail, UseCode usage) {
+		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createEMail(eMail));
+	}
+	
+	/**
+	 * Weist dem Autor eine eMail Adresse zu
+	 * 
+	 * @param eMail
+	 *            eMail Adresse
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addFax(String fax, UseCode usage) {
+		mAuthor.getAssignedAuthor().getTelecoms().add(Util.createFax(fax));
 	}
 
 	/**
@@ -140,7 +152,7 @@ public class Author {
 
 	public void addName(Name name) {
 		mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-		.add(name.getPn());
+		.add(name.getMdhtPn());
 	}
 
 	/**

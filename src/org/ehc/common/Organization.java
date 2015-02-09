@@ -85,10 +85,7 @@ public class Organization {
 	 *            eMail Adresse
 	 */
 	public void addEMail(String eMail) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(TelecommunicationAddressUse.WP);
-		tel.setValue("mailto:" + eMail);
-		getMdhtOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(Util.createEMail(eMail));
 	}
 
 	/**
@@ -99,10 +96,7 @@ public class Organization {
 	 *            erlaubt). Beispiel: +41322345566
 	 */
 	public void addFax(String faxNr) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(TelecommunicationAddressUse.WP);
-		tel.setValue("fax:" + faxNr);
-		getMdhtOrganization().getTelecoms().add(tel);
+		getMdhtOrganization().getTelecoms().add(Util.createFax(faxNr));
 	}
 
 	/**
