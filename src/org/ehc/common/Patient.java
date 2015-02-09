@@ -27,8 +27,6 @@ import java.util.Date;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.AddressUse;
 import org.ehc.cda.ch.enums.AdministrativeGender;
-import org.ehc.cda.ch.enums.CodeSystems;
-import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -37,9 +35,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
-import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 public class Patient extends Person {
 
@@ -58,22 +54,8 @@ public class Patient extends Person {
 	 *            Geburtsdatum
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay) {
-		this(name, sex, DateFormat.getDateInstance().format(birthDay));
-	}
-
-	/**
-	 * Erstellt einen neuen Patienten
-	 * 
-	 * @param name
-	 *            Name
-	 * @param sex
-	 *            Geschlecht
-	 * @param birthDate
-	 *            Geburtsdatum (als Text) Beispiel:20.05.1967
-	 */
-	public Patient(Name name, AdministrativeGender sex, String birthDate) {
 		// Create the RecordTarget, PatientRole and Patient
-		setRecordTarget(CDAFactory.eINSTANCE.createRecordTarget());
+		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
 		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
 		mPatient = CDAFactory.eINSTANCE.createPatient();
 		
@@ -88,13 +70,54 @@ public class Patient extends Person {
 
 		// Create and fill birth date
 		try {
-			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDate));
+			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
 		} catch (final ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Erstellt einen neuen Patienten inkl. einer Patienten Id. Wenn es sich bei dem Dokument um einen Impfausweis handelt dann MUSS dieser Konstruktor verwendet werden.
+	 * 
+	 * @param name
+	 *            Name
+	 * @param sex
+	 *            Geschlecht
+	 * @param birthDay
+	 *            Geburtsdatum
+	 */
+	public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
+		// Create the RecordTarget, PatientRole and Patient
+		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
+		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
+		mPatient = CDAFactory.eINSTANCE.createPatient();
+		
+		mPatientRole.setPatient(mPatient);
+		mRecordTarget.setPatientRole(mPatientRole);
+		
+		// Gender
+		setGender(sex);
+		
+		// Patient Name
+		addName(name);
 
+		// Day of birth
+		setBirthday(birthDay);
+		
+		// Id
+		addId(id);
+	}
+	
+	public void setTelecoms(Telecoms telecoms) {
+		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+	}
+	
+	public Telecoms getTelecoms() {
+		Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
+		return telecoms;
+	}
+	
 	/**
 	 * Constructor (used when deserializing CDA document).
 	 * 
@@ -103,7 +126,7 @@ public class Patient extends Person {
 	protected Patient(RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
 	}
-	
+
 	/**
 	 * Fügt eine Adresse hinzu
 	 * 
@@ -113,7 +136,7 @@ public class Patient extends Person {
 	public void addAddress(Address address) {
 		mPatientRole.getAddrs().add(address.copyMdhtAdress());
 	}
-	
+
 	/**
 	 * Fügt einen Identifikator hinzu
 	 * 
@@ -126,35 +149,11 @@ public class Patient extends Person {
 		id.setExtension(identificator.getExtension());
 		mPatientRole.getIds().add(id);
 	}
-	
+
 	public void addName(Name name) {
 		mPatient.getNames().add(name.copyMdhtPn());
 	}
-
-	/**
-	 * Weist dem Patienten eine Telefonnummer zu
-	 * 
-	 * @param phoneNr
-	 *            Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen
-	 *            erlaubt). Beispiel: +41322345566
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft, Mobil)
-	 */
-	public void addPhone(String phoneNr, AddressUse usage) {
-		getMdhtRecordTarget().getPatientRole().getTelecoms().add(Util.createTel(phoneNr, usage));
-	}
-
-	/**
-	 * Weist der Person eine Webseite zu
-	 * 
-	 * @param eMail Webseite
-	 * @param usage Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addWebsite(String eMail, UseCode usage) {
-		// Auto-generated method stub
-		//TODO
-	}
-
+	
 	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
 		return EcoreUtil.copy(mPatient);
 	}
@@ -162,18 +161,27 @@ public class Patient extends Person {
 	public PatientRole copyMdhtPatientRole() {
 		return EcoreUtil.copy(mPatientRole);
 	}
-
+	
 	public RecordTarget copyMdhtRecordTarget() {
 		return EcoreUtil.copy(mRecordTarget);
 	}
-	
+
 	public Address getAddress() {
 		AD mAd = mPatientRole.getAddrs().get(0);
 		Address address = new Address(mAd); 
 		return address;
 	}
+	
+	public ArrayList<Address> getAddresses() {
+		ArrayList<Address> al = new ArrayList<Address>();
+		for (AD mAddress: mPatientRole.getAddrs()) {
+			Address address = new Address(mAddress);
+			al.add(address);
+		}
+		return al;
+	}
 
-	public Date getBirthDate() {
+	public Date getBirthday() {
 		try {
 			TS birthTime = getMdhtPatient().getBirthTime();
 			String value = birthTime.getValue();
@@ -183,40 +191,21 @@ public class Patient extends Person {
 		}
 	}
 	
+		
 	public AdministrativeGender getGenderCode() {
 		CE code = getMdhtPatient().getAdministrativeGenderCode();
 		return AdministrativeGender.getEnum(code.getCode());
 	}
 
-	/**
-	 * Weist dem Patient eine eMail Adresse zu
-	 * 
-	 * @param eMail eMail Adresse
-	 * @param usage Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addEMail(String eMail, AddressUse usage) {
-		mPatientRole.getTelecoms().add(Util.createEMail(eMail, usage));
-	}
-	/**
-	 * Weist der Person eine Faxnummer zu
-	 * 
-	 * @param faxNr Faxnummer (nur internationale Rufnummer ohne Sonderzeichen erlaubt). Beispiel:
-	 *        +41322345566
-	 * @param usage Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addFax(String faxNr, AddressUse usage) {
-		mPatientRole.getTelecoms().add(Util.createFax(faxNr, usage));
+	public ArrayList<Identificator> getIds() {
+		ArrayList<Identificator> il = new ArrayList<Identificator>();
+		for (II mId: mPatientRole.getIds()) {
+			Identificator id = new Identificator(mId);
+			il.add(id);
+		}
+		return il;
 	}
 	
-	/**
-	 * Weist der Person eine GLN zu (wird vor allem für Ärzte gebraucht)
-	 * 
-	 * @param gln Global Location Number (GLN)
-	 */
-	public void addGLN(String gln) {
-		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
-	}
-
 	public org.openhealthtools.mdht.uml.cda.Patient getMdhtPatient() {
 		return mPatient;
 	}
@@ -233,7 +222,7 @@ public class Patient extends Person {
 		Name name = new Name (mPatient.getNames().get(0));
 		return name;
 	}
-
+	
 	public ArrayList<Name> getNames() {
 		ArrayList<Name> nl = new ArrayList<Name>();
 		for (PN mName: mPatient.getNames()) {
@@ -242,13 +231,22 @@ public class Patient extends Person {
 		}
 		return nl;
 	}
-
+	
 	private Date parseDate(String value) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.parse(value);
 	}
 
-	public void setRecordTarget(RecordTarget mRecordTarget) {
-		this.mRecordTarget = mRecordTarget;
+	public void setBirthday(Date birthDay) {
+		try {
+			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
+		} catch (final ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setGender(AdministrativeGender sex) {
+		mPatient.setAdministrativeGenderCode(sex.getCE());
 	}
 }

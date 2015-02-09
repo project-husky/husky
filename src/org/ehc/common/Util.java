@@ -17,6 +17,7 @@
 package org.ehc.common;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
@@ -62,25 +63,51 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  * 
  */
 public class Util {
+	
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
+	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	public static TEL createFax(String faxNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue("fax:" + faxNr);
+		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
 		return tel;
+	}
+	
+	public static ArrayList<String> getFax(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
+	}
+	
+	public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
+	}
+	
+	public static ArrayList<String> getPhone(ArrayList<TEL> telecoms) {
+		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
+	}
+	
+	private static ArrayList<String> getTelecomType(ArrayList<TEL> telecoms, String type) {
+		ArrayList<String> tl = new ArrayList<String>();
+		for (TEL tel : telecoms) {
+			if (tel.getValue().contains(type)) {
+				tl.add(tel.getValue());
+			}
+		}
+		return tl;
 	}
 	
 	public static TEL createEMail(String eMail, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue("mailto:" + eMail);
+		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
 	}
 	
 	public static TEL createTel(String telNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		tel.setValue("tel:" + telNr);
+		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
 		return tel;
 	}
 	

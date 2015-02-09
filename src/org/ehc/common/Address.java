@@ -20,7 +20,6 @@ package org.ehc.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.AddressUse;
-import org.ehc.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
@@ -33,23 +32,8 @@ public class Address {
 
 	AD mAd;
 	
-	/**
-	 * Erstellt ein Adress-Objekt ohne UseCode (Wird oft für Organisationen
-	 * benötigt)
-	 * 
-	 * @param street
-	 *            Strasse (ohne Hausnummer)
-	 * @param houseNumber
-	 *            Hausnummer
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 */
-	public Address(String street, String houseNumber, String zip, String city) {
-		this(zip, city, AddressUse.BUSINESS);
-		setStreet(street);
-		setHouseNumber(houseNumber);
+	public Address (AD ad) {
+		this.mAd = ad;
 	}
 
 	/**
@@ -97,6 +81,25 @@ public class Address {
 	}
 
 	/**
+	 * Erstellt ein Adress-Objekt ohne UseCode (Wird oft für Organisationen
+	 * benötigt)
+	 * 
+	 * @param street
+	 *            Strasse (ohne Hausnummer)
+	 * @param houseNumber
+	 *            Hausnummer
+	 * @param zip
+	 *            PLZ
+	 * @param city
+	 *            Ort
+	 */
+	public Address(String street, String houseNumber, String zip, String city) {
+		this(zip, city, AddressUse.BUSINESS);
+		setStreet(street);
+		setHouseNumber(houseNumber);
+	}
+
+	/**
 	 * Erstellt ein Adress-Objekt
 	 * 
 	 * @param street
@@ -139,6 +142,10 @@ public class Address {
 		setAddressline1(addressline1);
 		setAddressline2(addressline2);
 		setAddressline3(addressline3);
+	}
+
+	public AD copyMdhtAdress() {
+		return EcoreUtil.copy(mAd);
 	}
 
 	/**
@@ -184,6 +191,10 @@ public class Address {
 	 */
 	public String getHouseNumber() {
 		return mAd.getHouseNumbers().get(0).getText();
+	}
+
+	public AD getMdhtAdress() {
+		return this.mAd;
 	}
 
 	/**
@@ -262,7 +273,7 @@ public class Address {
 	public void setHouseNumber(String HouseNumber) {
 		mAd.addHouseNumber(HouseNumber);
 	}
-
+	
 	/**
 	 * Setzt die Strasse
 	 * 
@@ -272,7 +283,7 @@ public class Address {
 	public void setStreet(String street) {
 		mAd.addStreetName(street);
 	}
-
+	
 	/**
 	 * Setzt die PLZ
 	 * 
@@ -281,17 +292,5 @@ public class Address {
 	 */
 	public void setZip(String zip) {
 		mAd.addPostalCode(zip);
-	}
-
-	public AD getMdhtAdress() {
-		return this.mAd;
-	}
-	
-	public Address (AD ad) {
-		this.mAd = ad;
-	}
-	
-	public AD copyMdhtAdress() {
-		return EcoreUtil.copy(mAd);
 	}
 }

@@ -185,11 +185,27 @@ public class DateUtil {
 	 * @return HL7 TS Objekt
 	 * @throws ParseException
 	 */
-	public static TS createTSFromEuroDate(String eurDateStr) throws ParseException {
+	public static TS createTSFromEuroDateStr(String eurDateStr) throws ParseException {
 		final DateFormat eurDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
 		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
 
 		final Date eurDate = eurDateFormatter.parse(eurDateStr);
+		final String ohtDateStr = ohtDateFormatter.format(eurDate);
+
+		final TS ohtDate = DatatypesFactory.eINSTANCE.createTS(ohtDateStr);
+		return ohtDate;
+	}
+	
+	/**
+	 * Erzeugt ein TS Objekt
+	 * 
+	 * @param eurDateStr ein Date String in dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist
+	 * @return HL7 TS Objekt
+	 * @throws ParseException
+	 */
+	public static TS createTSFromEuroDate(Date eurDate) throws ParseException {
+		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
+
 		final String ohtDateStr = ohtDateFormatter.format(eurDate);
 
 		final TS ohtDate = DatatypesFactory.eINSTANCE.createTS(ohtDateStr);

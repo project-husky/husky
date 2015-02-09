@@ -80,27 +80,6 @@ public class Organization {
 	}
 
 	/**
-	 * Weist der Organisation eine eMail Adresse zu
-	 * 
-	 * @param eMail
-	 *            eMail Adresse
-	 */
-	public void addEMail(String eMail) {
-		getMdhtOrganization().getTelecoms().add(Util.createEMail(eMail, AddressUse.BUSINESS));
-	}
-
-	/**
-	 * Weist der Organisation eine Faxnummer zu
-	 * 
-	 * @param faxNr
-	 *            Faxnummer (nur internationale Rufnummer ohne Sonderzeichen
-	 *            erlaubt). Beispiel: +41322345566
-	 */
-	public void addFax(String faxNr) {
-		getMdhtOrganization().getTelecoms().add(Util.createFax(faxNr, AddressUse.BUSINESS));
-	}
-
-	/**
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
 	 * 
 	 * @param name
@@ -110,20 +89,6 @@ public class Organization {
 		ON orgaName = DatatypesFactory.eINSTANCE.createON();
 		getMdhtOrganization().getNames().add(orgaName);
 		orgaName.addText(name);
-	}
-
-	/**
-	 * Weist der Organisation eine Telefonnummer zu
-	 * 
-	 * @param phoneNr
-	 *            Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen
-	 *            erlaubt). Beispiel: +41322345566
-	 */
-	public void addPhone(String phoneNr) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(TelecommunicationAddressUse.WP);
-		tel.setValue("tel:" + phoneNr);
-		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
@@ -164,9 +129,14 @@ public class Organization {
 	public String getName() {
 		return getMdhtOrganization().getNames().get(0).getText();
 	}
-
-	public List<TEL> getTelecoms() {
-		return getMdhtOrganization().getTelecoms();
+	
+	public void setTelecoms(Telecoms telecoms) {
+		mOrganization.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+	}
+	
+	public Telecoms getTelecoms() {
+		Telecoms telecoms = new Telecoms(mOrganization.getTelecoms());
+		return telecoms;
 	}
 
 	public void setOrganization(org.openhealthtools.mdht.uml.cda.Organization mOrganization) {
