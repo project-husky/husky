@@ -95,20 +95,6 @@ public class Patient extends Person {
 		}
 	}
 
-	public Name getName() {
-		Name name = new Name (mPatient.getNames().get(0));
-		return name;
-	}
-	
-	public ArrayList<Name> getNames() {
-		ArrayList<Name> nl = new ArrayList<Name>();
-		for (PN mName: mPatient.getNames()) {
-			Name name = new Name(mName);
-			nl.add(name);
-		}
-		return nl;
-	}
-	
 	/**
 	 * Constructor (used when deserializing CDA document).
 	 * 
@@ -117,7 +103,7 @@ public class Patient extends Person {
 	protected Patient(RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
 	}
-
+	
 	/**
 	 * Fügt eine Adresse hinzu
 	 * 
@@ -127,18 +113,22 @@ public class Patient extends Person {
 	public void addAddress(Address address) {
 		mPatientRole.getAddrs().add(address.copyMdhtAdress());
 	}
-
+	
 	/**
 	 * Fügt einen Identifikator hinzu
 	 * 
 	 * @param identificator
 	 *            Identificator
 	 */
-	public void addID(Identificator identificator) {
+	public void addId(Identificator identificator) {
 		II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(identificator.getRoot());
 		id.setExtension(identificator.getExtension());
 		mPatientRole.getIds().add(id);
+	}
+	
+	public void addName(Name name) {
+		mPatient.getNames().add(name.copyMdhtPn());
 	}
 
 	/**
@@ -153,7 +143,7 @@ public class Patient extends Person {
 	public void addPhone(String phoneNr, AddressUse usage) {
 		getMdhtRecordTarget().getPatientRole().getTelecoms().add(Util.createTel(phoneNr, usage));
 	}
-	
+
 	/**
 	 * Weist der Person eine Webseite zu
 	 * 
@@ -165,6 +155,18 @@ public class Patient extends Person {
 		//TODO
 	}
 
+	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
+		return EcoreUtil.copy(mPatient);
+	}
+	
+	public PatientRole copyMdhtPatientRole() {
+		return EcoreUtil.copy(mPatientRole);
+	}
+
+	public RecordTarget copyMdhtRecordTarget() {
+		return EcoreUtil.copy(mRecordTarget);
+	}
+	
 	public Address getAddress() {
 		AD mAd = mPatientRole.getAddrs().get(0);
 		Address address = new Address(mAd); 
@@ -180,12 +182,12 @@ public class Patient extends Person {
 			throw new IllegalArgumentException("Cannot convert birthdate", e);
 		}
 	}
-
+	
 	public AdministrativeGender getGenderCode() {
 		CE code = getMdhtPatient().getAdministrativeGenderCode();
 		return AdministrativeGender.getEnum(code.getCode());
 	}
-	
+
 	/**
 	 * Weist dem Patient eine eMail Adresse zu
 	 * 
@@ -195,7 +197,6 @@ public class Patient extends Person {
 	public void addEMail(String eMail, AddressUse usage) {
 		mPatientRole.getTelecoms().add(Util.createEMail(eMail, usage));
 	}
-
 	/**
 	 * Weist der Person eine Faxnummer zu
 	 * 
@@ -213,7 +214,7 @@ public class Patient extends Person {
 	 * @param gln Global Location Number (GLN)
 	 */
 	public void addGLN(String gln) {
-		addID(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 
 	public org.openhealthtools.mdht.uml.cda.Patient getMdhtPatient() {
@@ -223,21 +224,23 @@ public class Patient extends Person {
 	public PatientRole getMdhtPatientRole() {
 		return mPatientRole;
 	}
-
+	
 	public RecordTarget getMdhtRecordTarget() {
 		return mRecordTarget;
 	}
-	
-	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
-		return EcoreUtil.copy(mPatient);
-	}
-	
-	public PatientRole copyMdhtPatientRole() {
-		return EcoreUtil.copy(mPatientRole);
+
+	public Name getName() {
+		Name name = new Name (mPatient.getNames().get(0));
+		return name;
 	}
 
-	public RecordTarget copyMdhtRecordTarget() {
-		return EcoreUtil.copy(mRecordTarget);
+	public ArrayList<Name> getNames() {
+		ArrayList<Name> nl = new ArrayList<Name>();
+		for (PN mName: mPatient.getNames()) {
+			Name name = new Name(mName);
+			nl.add(name);
+		}
+		return nl;
 	}
 
 	private Date parseDate(String value) throws ParseException {
@@ -247,9 +250,5 @@ public class Patient extends Person {
 
 	public void setRecordTarget(RecordTarget mRecordTarget) {
 		this.mRecordTarget = mRecordTarget;
-	}
-
-	public void addName(Name name) {
-		mPatient.getNames().add(name.copyMdhtPn());
 	}
 }

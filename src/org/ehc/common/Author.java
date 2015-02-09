@@ -256,7 +256,8 @@ public class Author {
 	public String getGln() {
 		// TODO Alle Ids durchsehen und die richtige (anhand der root-id)
 		// zurückliefern.
-		return mAuthor.getAssignedAuthor().getIds().get(0).getExtension();
+		Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(), CodeSystems.GLN.getCodeSystemId());
+		return gln.getExtension();
 	}
 	
 	public Identificator getGlnAdIdentificator() {
