@@ -62,6 +62,13 @@ public class Value {
 		setUcumUnit(unit);
 	}
 
+	public Value(String codeSystemId, String string) {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(codeSystemId);
+		cd.setCode(string);
+		this.mValue = cd;
+	}
+
 	public CD copyMdhtCode() {
 		return EcoreUtil.copy((CD) mValue);
 	}

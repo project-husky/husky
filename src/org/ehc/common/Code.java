@@ -29,6 +29,9 @@ public class Code {
 
 	public static Code getTranslationOrCode(String codeSystem, CD code) {
 		Code eHcCode;
+		if (code.getCode()==null) {
+			return null;
+		}
 		if (code.getCodeSystem().equals(codeSystem)) {
 			eHcCode = new Code(code);
 		}
@@ -89,6 +92,10 @@ public class Code {
 			String displayName) {
 		this(codeSystem, code, displayName);
 		mCD.setCodeSystemName(codeSystemName);
+	}
+
+	public Code(Code code) {
+		this(code.getOid(),code.getCode(),code.getDisplayName());
 	}
 
 	public CD getCD() {

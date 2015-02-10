@@ -99,7 +99,10 @@ public class Name {
 		else {
 			name = givens;
 		}
-		name = String.join(" " , name, families, suffixes);
+		name = String.join(" " , name, families);
+		if (suffixes!=null) {
+			name= String.join(" " , name, suffixes);
+		}
 
 		return name;
 	}

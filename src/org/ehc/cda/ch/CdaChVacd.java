@@ -774,7 +774,9 @@ public class CdaChVacd extends CdaCh {
 			i++;
 			ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 			ir.setText(reference);
-			ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
+			if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode()!=null) {
+				ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
+			}
 		}
 	}
 

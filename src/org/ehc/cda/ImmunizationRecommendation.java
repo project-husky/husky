@@ -26,6 +26,7 @@ import org.ehc.cda.ch.enums.RouteOfAdministration;
 import org.ehc.common.Author;
 import org.ehc.common.Code;
 import org.ehc.common.DateUtil;
+import org.ehc.common.Identificator;
 import org.ehc.common.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -105,11 +106,10 @@ public class ImmunizationRecommendation {
 		mImmunizationRecommendation.setConsumable(consumable.getMdhtConsumable());  
 
 		//Set the Attributes of this class
-		setGtinId(consumable.getGtinOrEanOrSwissIndex());
+		setId(null);
 		setIntendedOrProposed(intendedOrProposed);
 		setShallNotBeAdministerd(shallNotBeAdministerd);
 		setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
-		getEffectiveTime();
 		mImmunizationRecommendation.getAuthors().add(author.getAuthorMdht());
 
 		//Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
@@ -164,10 +164,9 @@ public class ImmunizationRecommendation {
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
-	public Code getGtinId() {
-		II ii = mImmunizationRecommendation.getIds().get(0);
-		Code code = new Code(ii.getRoot(), ii.getExtension());
-		return code;
+	public Identificator getId() {
+		Identificator id = new Identificator(mImmunizationRecommendation.getIds().get(0));
+		return id;
 	}
 
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
@@ -178,9 +177,9 @@ public class ImmunizationRecommendation {
 		mImmunizationRecommendation.getAuthors().add(author.getAuthorMdht());
 	}
 
-	public void setGtinId(Code codedId) {
+	public void setId(Identificator codedId) {
 		//Seems dirty, but the Spec wants it like this
-		II ii = DatatypesFactory.eINSTANCE.createII(codedId.getCD().getCodeSystem(), codedId.getCode());
+		II ii = Util.createUuidVacdIdentificator(codedId);
 		mImmunizationRecommendation.getIds().add(ii);
 	}
 
