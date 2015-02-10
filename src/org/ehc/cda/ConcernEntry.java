@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.DateUtil;
 import org.ehc.common.Identificator;
 import org.ehc.common.Util;
@@ -75,9 +76,8 @@ public class ConcernEntry {
 	 * 
 	 * @return Status des Leidens
 	 */
-	public String getStatus() {
-		//TODO map the String to an enum 
-		return mConcernEntry.getStatusCode().getCode();
+	public StatusCode getStatus() {
+		return StatusCode.getEnum(mConcernEntry.getStatusCode().getCode());
 	}
 
 	/**

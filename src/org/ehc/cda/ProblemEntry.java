@@ -58,6 +58,8 @@ public class ProblemEntry {
 			setCode(ProblemType.PROBLEM.getCode());
 			setValue(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY.getCode());
 			setId(null);
+			setStart(null);
+			setEnd(null);
 		}
 	}
 
@@ -372,6 +374,6 @@ public class ProblemEntry {
 	
 	public void setValue(Code code) {
 		Value value = new Value (code);
-		this.setValue(code);
+		this.setValue(value);
 	}
 }
