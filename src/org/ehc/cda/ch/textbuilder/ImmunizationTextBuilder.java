@@ -56,10 +56,10 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
-		addCellWithContent(immunization.getVaccineName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
+		addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
 		addCell("");
 		addCell("");
-		addCell(DateUtil.formatDateCH(immunization.getEffectiveTime()));
+		addCell(DateUtil.formatDateCH(immunization.getApplyDate()));
 		addCell(""); // gegen
 		addCell(immunization.getAuthor().getCompleteName());
 		addCell("");
@@ -70,7 +70,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		int i = 0;
 		for (Immunization immunization : immunizations) {
 			ED reference = Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
-			SubstanceAdministration substanceAdminstration = immunization.getImmunization();
+			SubstanceAdministration substanceAdminstration = immunization.getMdhtImmunization();
 			substanceAdminstration.setText(reference);
 			//.getSubstanceAdministrations().get(0);
 			i++;

@@ -21,33 +21,20 @@ package org.ehc.cda;
 import java.util.Date;
 import java.util.List;
 
-import org.ehc.cda.ch.enums.HistoryOfPastIllness;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehc.cda.ch.enums.RouteOfAdministration;
-import org.ehc.cda.ch.enums.StatusCode;
 import org.ehc.common.Author;
 import org.ehc.common.DateUtil;
+import org.ehc.common.Identificator;
+import org.ehc.common.Util;
 import org.ehc.common.Value;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Consumable;
-import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
-import org.openhealthtools.mdht.uml.cda.Material;
-import org.openhealthtools.mdht.uml.cda.Observation;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.datatypes.EN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClass;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Eine Impfung
@@ -56,36 +43,66 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class Immunization {
 
 	private org.openhealthtools.mdht.uml.cda.ihe.Immunization mImmunization;
-	private RouteOfAdministration routeCode;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param appliedAt
-	 * @param vaccineName
-	 * @param atcCode
-	 * @param diseases - 
-	 */
-	public Immunization(Date appliedAt, String vaccineName, String atcCode, List<HistoryOfPastIllness> diseases) {
-		mImmunization = IHEFactory.eINSTANCE.createImmunization().init();
-		mImmunization.setClassCode(ActClass.SBADM);
-		mImmunization.setMoodCode(x_DocumentSubstanceMood.EVN);
+	public Immunization() {
+		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
 		mImmunization.setNegationInd(Boolean.FALSE);
-
-		// TODO define OID constant
-		addTemplateId(ii("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3"));
-
-		// TODO add correct GTIN for vaccination
-		mImmunization.getIds().add(ii("1.3.160", "7680006690011"));
+	}
+	
+	/**
+	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen. 
+	 * @param consumable Impfstoff
+	 * @author author Die eintragende Person
+	 * @param appliedAt Datum der Impfung
+	 */
+	public Immunization(Consumable consumable, Author author, Date appliedAt) {
+		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
+		mImmunization.setNegationInd(Boolean.FALSE);
+	
+		//Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
+		List<II> templateIds = mImmunization.getTemplateIds();
+		for (II templateId: templateIds) {
+			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+				templateId.setExtension("CDA-CH.Body.MediL3");
+			}
+		}
 
 		//mImmunization.setText(createText());
-		mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
-		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
-		mImmunization.setPriorityCode(createPriorityCode());
-		mImmunization.setRouteCode(getRouteCodeAsCE());
-		mImmunization.setDoseQuantity(createDoseQuantity());
-		mImmunization.setConsumable(createConsumable(vaccineName, atcCode));
-		addObservations(diseases);
+		setApplyDate(appliedAt);
+		setPriorityCode(createPriorityCode());
+		setId(null);
+		setConsumable(consumable);
+		setAuthor(author);
+	}
+	
+	/**
+	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen. 
+	 * @param consumable Impfstoff
+	 * @author author Die eintragende Person
+	 * @param appliedAt Datum der Impfung
+	 * @param route Einnahmeart (darf null sein)
+	 * @param doseQuantity in milliliters (e.g. 0.5) (darf null sein)
+	 */
+	public Immunization(Consumable consumable, Author author, Date appliedAt, RouteOfAdministration route, String doseQuantity) {
+		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
+		mImmunization.setNegationInd(Boolean.FALSE);
+	
+		//Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
+		List<II> templateIds = mImmunization.getTemplateIds();
+		for (II templateId: templateIds) {
+			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+				templateId.setExtension("CDA-CH.Body.MediL3");
+			}
+		}
+
+		//mImmunization.setText(createText());
+		setApplyDate(appliedAt);
+		setPriorityCode(createPriorityCode());
+		setRouteOfAdministration(route);
+		setDosage(doseQuantity);
+		setId(null);
+		setConsumable(consumable);
+		setAuthor(author);
 	}
 
 	/**
@@ -95,19 +112,6 @@ public class Immunization {
 	 */
 	public Immunization(org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization) {
 		mImmunization = immunization;
-	}
-
-	private void addObservations(List<HistoryOfPastIllness> diseases) {
-		if (diseases == null) {
-			return;
-		}
-
-		int i = 0;
-		for (HistoryOfPastIllness disease : diseases) {
-			mImmunization.addObservation(createObservation(disease));
-			// TODO how can we do this otherwise
-			mImmunization.getEntryRelationships().get(i++).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		}
 	}
 
 	private void addTemplateId(II id) {
@@ -120,20 +124,14 @@ public class Immunization {
 		return timestamp;
 	}
 
-	private Consumable createConsumable(String vaccineName, String atcCode) {
-		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
-
-		consumable.setManufacturedProduct(createManufacturedProduct(vaccineName, atcCode));
-
-		return consumable;
-	}
-
-	private IVL_PQ createDoseQuantity() {
-		IVL_PQ quantity = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		// TODO set correct values (viavac doesn't have such...)
-		quantity.setValue(0.5);
-		quantity.setUnit("ml");
-		return quantity;
+	/**
+	 * Returns the encapsulated IHE class.
+	 * Method should be package private.
+	 * 
+	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.Immunization copyMdhtImmunization() {
+		return EcoreUtil.copy(mImmunization);
 	}
 
 	private CE createEpsosPivotCode() {
@@ -150,58 +148,6 @@ public class Immunization {
 		return code;
 	}
 
-	/**
-	 * Medikationsdaten muessen den GTIN (swissIndex) sowie den ATC-Code enthalten.
-	 * @return
-	 */
-	private CE createEpsosPivotCodeElement(String atcCode) {
-		CE code = createEpsosPivotCode();
-
-		code.setOriginalText(createText());
-		// TODO set correct GTIN
-		code.getTranslations().add(createTranslation("7680006690011", "1.3.160"));
-
-		code.getTranslations().add(createTranslation(atcCode, "2.16.840.1.113883.6.73"));
-		return code;
-	}
-
-	private Material createManufacturedMaterial(String vaccineName, String atcCode) {
-		Material material = CDAFactory.eINSTANCE.createMaterial();
-		material.setName(createName(vaccineName));
-
-		material.setCode(createEpsosPivotCodeElement(atcCode));
-
-		return material;
-	}
-
-	private ManufacturedProduct createManufacturedProduct(String vaccineName, String atcCode) {
-		ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
-		// TODO define OID constant
-		product.getTemplateIds().add(ii("1.3.6.1.4.1.19376.1.5.3.1.4.7.2"));
-		product.getTemplateIds().add(ii("2.16.840.1.113883.10.20.1.53"));
-		product.setManufacturedMaterial(createManufacturedMaterial(vaccineName, atcCode));
-		return product;
-	}
-
-	private EN createName(String vaccineName) {
-		EN name = DatatypesFactory.eINSTANCE.createEN();
-		name.addText(vaccineName);
-		return name;
-	}
-
-	private Observation createObservation(HistoryOfPastIllness disease) {
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
-		observation.setClassCode(ActClassObservation.OBS);
-		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
-		// TODO define OID constant
-		observation.getTemplateIds().add(ii("2.16.756.5.30.1.1.1.1.3.2.1", "CDA-CH.VACD.Body.MediL3.Reason"));
-		// TODO define OID constant
-		observation.getIds().add(ii("2.16.756.5.30.1.1.1.1.3.2.1", "66502037-9B9C-4ECB-9D24-A8EAD5D77D4B"));
-		observation.setCode(disease.getCD());
-		observation.setStatusCode(StatusCode.COMPLETED.getCS());
-		return observation;
-	}
-
 	private CE createPriorityCode() {
 		CE priorityCode = DatatypesFactory.eINSTANCE.createCE();
 		priorityCode.setCode("R");
@@ -211,49 +157,11 @@ public class Immunization {
 		priorityCode.setCodeSystem("2.16.840.1.113883.5.7");
 		priorityCode.setCodeSystemName("ActPriority");
 		return priorityCode;
-	}	
-
-	/**
-	 * Only codes defined in cda-ch-vacd-voc.xml are allowed.
-	 * 
-	 * Actually these are: IDINJ, NASNEB, PO, SQ, TRNSDERMD and IM.
-	 * 
-	 * @return CE
-	 */
-	private CE createRouteCode() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode(routeCode.getCodeValue());
-		ce.setDisplayName(routeCode.getdisplayName());
-
-		// TODO define OID constant
-		ce.setCodeSystem("2.16.840.1.113883.5.112");
-		ce.setCodeSystemName("VACD_RouteOfAdministration");
-		return ce;
 	}
 
-	private CE createRouteCodeUnknown() {
-		CE routeCode = DatatypesFactory.eINSTANCE.createCE();
-		routeCode.setNullFlavor(NullFlavor.NA);
-		return routeCode;
-	}
-
-	private TEL createTEL() {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.setValue("#i1");
-		return tel;
-	}
-
-	private ED createText() {
-		ED text = DatatypesFactory.eINSTANCE.createED();
-		text.setReference(createTEL());		
-		return text;
-	}
-
-	private CD createTranslation(String code, String codeSystem) {
-		CD translation = DatatypesFactory.eINSTANCE.createCD();
-		translation.setCode(code);
-		translation.setCodeSystem(codeSystem);
-		return translation;
+	public Date getApplyDate() {
+		SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
+		return DateUtil.parseDateyyyyMMdd(date.getValue());
 	}
 
 	/**
@@ -272,20 +180,58 @@ public class Immunization {
 
 	}
 
-
+	public Consumable getConsumable() {
+		Consumable consumable = new Consumable(this.mImmunization.getConsumable());
+		return consumable;
+	}
+	
 	/**
-	 * Gibt die Dosis der Impfung zur��ck
+	 * Gibt die Dosis der Impfung zurück
 	 * 
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
-		return null;
+		Value value = new Value(mImmunization.getDoseQuantity());
+		return value;
+	}	
+
+	public Identificator getId() {
+		Identificator id = new Identificator(mImmunization.getIds().get(0));
+		return id;
 	}
 
-	public Date getEffectiveTime() {
-		SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
-		return DateUtil.parseDateyyyyMMdd(date.getValue());
-	}
+//	/**
+//	 * Medikationsdaten muessen den GTIN (swissIndex) sowie den ATC-Code enthalten.
+//	 * @return
+//	 */
+//	private CE createEpsosPivotCodeElement(String atcCode) {
+//		CE code = createEpsosPivotCode();
+//
+//		code.setOriginalText(createText());
+//		// TODO set correct GTIN
+//		code.getTranslations().add(createTranslation("7680006690011", "1.3.160"));
+//
+//		code.getTranslations().add(createTranslation(atcCode, "2.16.840.1.113883.6.73"));
+//		return code;
+//	}
+//
+//	/**
+//	 * Only codes defined in cda-ch-vacd-voc.xml are allowed.
+//	 * 
+//	 * Actually these are: IDINJ, NASNEB, PO, SQ, TRNSDERMD and IM.
+//	 * 
+//	 * @return CE
+//	 */
+//	private CE createRouteCode() {
+//		CE ce = DatatypesFactory.eINSTANCE.createCE();
+//		ce.setCode(routeCode.getCodeValue());
+//		ce.setDisplayName(routeCode.getdisplayName());
+//
+//		// TODO define OID constant
+//		ce.setCodeSystem("2.16.840.1.113883.5.112");
+//		ce.setCodeSystemName("VACD_RouteOfAdministration");
+//		return ce;
+//	}
 
 	/**
 	 * Returns the encapsulated IHE class.
@@ -293,47 +239,61 @@ public class Immunization {
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
 	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.Immunization getImmunization() {
+	public org.openhealthtools.mdht.uml.cda.ihe.Immunization getMdhtImmunization() {
 		return mImmunization;
 	}
-
-	/**
-	 * Gibt das Medikament fuer die Impfung zurueck.
-	 * 
-	 * @return Medikament Medikament für die Impfung
-	 */
-	public Medication getMedication() {
-		return null;
+	
+	public RouteOfAdministration getRouteOfAdministration() {
+		return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
 	}
 
-	private CE getRouteCodeAsCE() {
-		if (routeCode == null) {
-			return createRouteCodeUnknown();
-		} else {
-			return createRouteCode();
+	public void setApplyDate(Date appliedAt) {
+		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
+	}
+
+	public void setAuthor(Author author) {
+		mImmunization.getAuthors().add(author.copyMdhtAuthor());
+	}
+
+	public void setConsumable(Consumable consumable) {
+		mImmunization.setConsumable(consumable.copyMdhtConsumable());
+	}
+	
+	public void setDosage(String doseQuantity) {
+		if (doseQuantity==null) {
+			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
+		}
+		else {
+			IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+			ivl_pq.setUnit("ml");
+			ivl_pq.setValue(Double.valueOf(doseQuantity));
 		}
 	}
 
-	public String getVaccineName() {
-		return mImmunization.getConsumable().getManufacturedProduct().getManufacturedMaterial().getName().getText();
+	public void setId(Identificator codedId) {
+		II ii = Util.createUuidVacdIdentificator(codedId);
+		mImmunization.getIds().add(ii);
 	}
-
-	private II ii(String root) {
-		return DatatypesFactory.eINSTANCE.createII(root);	
+	
+	private void setPriorityCode(CE priorityCode) {
+		mImmunization.setPriorityCode(priorityCode);
 	}
-
-	private II ii(String root, String extension) {
-		return DatatypesFactory.eINSTANCE.createII(root, extension);	
-	}
-
+	
 	/**
-	 * Optionaly, one can set the route code (Einnahmearten).
+	 * Optionally, one can set the route code (Einnahmearten).
 	 * If not set, <routeCode nullFlavor="NA"/> is written to CDA document.
 	 * 
 	 * @param routeCode
 	 */
-	public void setRouteCode(RouteOfAdministration routeCode) {
-		this.routeCode = routeCode;
+	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
+		if (routeCode == null) {
+			CE ce = DatatypesFactory.eINSTANCE.createCE();
+			ce.setNullFlavor(NullFlavor.UNK);
+			mImmunization.setRouteCode(ce);
+		}
+		else {
+			mImmunization.setRouteCode(routeCode.getCE());
+		}
 	}
 
 }

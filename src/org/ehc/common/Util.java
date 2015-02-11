@@ -192,6 +192,12 @@ public class Util {
 		ivlpq.setNullFlavor(NullFlavor.NASK);
 		return ivlpq;
 	}
+	
+	public static IVL_PQ createIVL_PQNullFlavorNA() {
+		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivlpq.setNullFlavor(NullFlavor.NA);
+		return ivlpq;
+	}
 
 	/**
 	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt

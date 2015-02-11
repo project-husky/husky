@@ -103,7 +103,7 @@ public class ImmunizationRecommendation {
 			boolean intendedOrProposed, boolean shallNotBeAdministerd, String priority, RouteOfAdministration routeOfAdministration, String doseQuantity, String rateQuantity) {      
 
 		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
-		mImmunizationRecommendation.setConsumable(consumable.getMdhtConsumable());  
+		mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());  
 
 		//Set the Attributes of this class
 		setId(null);
@@ -178,7 +178,6 @@ public class ImmunizationRecommendation {
 	}
 
 	public void setId(Identificator codedId) {
-		//Seems dirty, but the Spec wants it like this
 		II ii = Util.createUuidVacdIdentificator(codedId);
 		mImmunizationRecommendation.getIds().add(ii);
 	}

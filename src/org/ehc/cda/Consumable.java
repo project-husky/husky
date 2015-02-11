@@ -188,4 +188,8 @@ public class Consumable {
 		}
 		mMaterial.setCode(ce);
 	}
+
+	public org.openhealthtools.mdht.uml.cda.Consumable copyMdhtConsumable() {
+		return EcoreUtil.copy(mConsumable);
+	}
 }

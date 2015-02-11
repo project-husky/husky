@@ -45,6 +45,10 @@ public class Author {
 		//TODO Create Constructor for IHEProfiles Author object
 		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
+	
+	public org.openhealthtools.mdht.uml.cda.Author copyMdhtAuthor() {
+		return EcoreUtil.copy(mAuthor);
+	}
 
 	/**
 	 * Erstellt einen neuen Autor (Dieser Konstruktor wird oft gebraucht für

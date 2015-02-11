@@ -305,21 +305,27 @@ public class CdaChVacd extends CdaCh {
 		MedicationConverter c = new MedicationConverter(medication);
 		org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization = c.convert();
 
-		getImmunizationSection().addSubstanceAdministration(immunization);
+		getDoc().getImmunizationsSection().addSubstanceAdministration(immunization);
 	}
 
-	public void addImmunization(org.ehc.cda.Immunization immunization, org.ehc.common.Author author) {
-		ImmunizationsSection immunizationSection = getImmunizationSection();
-		org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization =
-				EcoreUtil.copy(immunization.getImmunization());
+	public void addImmunization(org.ehc.cda.Immunization immunization) {
+		org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection;
 
-		iheImmunization.getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
+		//find or create (and add) the Section
+		immunizationSection = getDoc().getImmunizationsSection();
+		if (immunizationSection==null) {
+			immunizationSection = CHFactory.eINSTANCE.createImmunizationsSection().init();
+			immunizationSection.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitleDe()));
+			doc.addSection(immunizationSection);
+		}
 
-		immunizationSection.addSubstanceAdministration(iheImmunization);
+		//add the MDHT Object to the section
+		immunizationSection.addSubstanceAdministration(immunization.copyMdhtImmunization());
 
-		// Update the content references to cda level 1 text
-		updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(), SectionsVACD.HISTORY_OF_IMMUNIZATION);
+		//update the MDHT Object content references to CDA level 1 text
+		updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(), SectionsVACD.TREATMENT_PLAN);
 
+		//create the CDA level 1 text
 		immunizationSection.createStrucDocText(getImmunizationText());
 	}
 
@@ -329,7 +335,7 @@ public class CdaChVacd extends CdaCh {
 		//find or create (and add) the Section
 		immunizationRecommendationsSection = getDoc().getImmunizationRecommendationSection();
 		if (immunizationRecommendationsSection==null) {
-			immunizationRecommendationsSection = createTreatmentPlanSection().init();
+			immunizationRecommendationsSection = CHFactory.eINSTANCE.createImmunizationRecommendationSection().init();
 			immunizationRecommendationsSection.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitleDe()));
 			doc.addSection(immunizationRecommendationsSection);
 		}
@@ -491,17 +497,10 @@ public class CdaChVacd extends CdaCh {
 
 	private Section findCodedResultsSection() {
 		for (Section section : doc.getSections()) {
-			if (SectionsVACD.isCodedResults(section.getCode().getCode())) {
-				return section;
-			}
-		}
-		return null;
-	}
-
-	private ImmunizationsSection findImmunizationSection() {
-		for (Section section : doc.getSections()) {
-			if (SectionsVACD.isHistoryOfImmunization(section.getCode().getCode())) {
-				return (ImmunizationsSection) section;
+			if (section.getCode()!=null) {
+				if (SectionsVACD.isCodedResults(section.getCode().getCode())) {
+					return section;
+				}
 			}
 		}
 		return null;
@@ -509,8 +508,10 @@ public class CdaChVacd extends CdaCh {
 
 	private Section findRemarksSection() {
 		for (Section section : doc.getSections()) {
+			if (section.getCode()!=null) {
 			if (SectionsVACD.isRemarks(section.getCode().getCode())) {
 				return section;
+			}
 			}
 		}
 		return null;
@@ -587,7 +588,7 @@ public class CdaChVacd extends CdaCh {
 	 */
 	public ArrayList<Immunization> getImmunizations() {
 		EList<SubstanceAdministration> substanceAdministrations =
-				getImmunizationSection().getSubstanceAdministrations();
+				getDoc().getImmunizationsSection().getSubstanceAdministrations();
 
 		ArrayList<Immunization> immunizations = new ArrayList<Immunization>();
 		for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
@@ -596,15 +597,6 @@ public class CdaChVacd extends CdaCh {
 			immunizations.add(immunization);
 		}
 		return immunizations;
-	}
-
-	private ImmunizationsSection getImmunizationSection() {
-		org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection section = findImmunizationSection();
-		if (section == null) {
-			section = createImmunizationSection();
-			doc.addSection(section);
-		}
-		return section;
 	}
 
 	private String getImmunizationText() {
