@@ -18,7 +18,9 @@ package org.ehc.common;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
@@ -27,8 +29,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class Person {
 
 	org.openhealthtools.mdht.uml.cda.Person mPerson;
+	
+	public Person() {
+		
+	}
 
-	protected Person() {}
+	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
+		this.mPerson = person;
+	}
 
 	/**
 	 * Erstellt eine neue Person (Dieser Konstruktor wird oft gebraucht für Behandelnde)
@@ -54,5 +62,13 @@ public class Person {
 			nl.add(name);
 		}
 		return nl;
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.Person getMdhtPerson() {
+		return mPerson;
+	}
+	
+	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
+		return EcoreUtil.copy(mPerson);
 	}
 }

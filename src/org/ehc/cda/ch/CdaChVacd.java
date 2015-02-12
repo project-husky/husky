@@ -79,18 +79,15 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class CdaChVacd extends CdaCh {
 	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
+	public static final String eVACDOCTitle = "eVACDOC";
 	Query query;
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 *
-	 * @param german Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
-	 * @param stylesheet Stylesheet, welches im CDA mittels <?xml-stylesheet> für die menschlich
-	 *        Lesbare Darstellung referenziert werden soll.
 	 */
-	public CdaChVacd(LanguageCode german, String stylesheet) {
+	public CdaChVacd() {
 		super(CHFactory.eINSTANCE.createVACD().init());
-		setChMetadata(german, stylesheet, "eVACDOC");
 		CHPackage.eINSTANCE.eClass();
 		// fix missing extension values in MDHT model.
 		for (II templateId : doc.getTemplateIds()) {
@@ -102,6 +99,35 @@ public class CdaChVacd extends CdaCh {
 			}
 		}
 		query = new Query(doc);
+	}
+	
+	/**
+	 * Erstellt ein neues eVACDOC CDA Dokument.
+	 *
+	 * @param language Dokument-Sprache
+	 * @param immunization Impfung
+	 */
+	public CdaChVacd(LanguageCode language, Immunization immunization) {
+		this();	
+		setLanguageCode(language);
+		setTitle(eVACDOCTitle);
+		setProcessingInstructions(null);
+		addImmunization(immunization);
+	}
+	
+	/**
+	 * Erstellt ein neues eVACDOC CDA Dokument.
+	 *
+	 * @param german Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
+	 * @param stylesheet Stylesheet, welches im CDA mittels <?xml-stylesheet> für die menschlich
+	 *        Lesbare Darstellung referenziert werden soll.
+	 */
+	public CdaChVacd(LanguageCode language, Immunization immunization, String stylesheet) {
+		this();
+		setLanguageCode(language);
+		setTitle(eVACDOCTitle);
+		setProcessingInstructions(stylesheet);
+		addImmunization(immunization);
 	}
 
 	/**

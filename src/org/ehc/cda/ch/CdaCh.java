@@ -20,6 +20,7 @@ package org.ehc.cda.ch;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
@@ -32,11 +33,14 @@ import org.ehc.common.Person;
 import org.ehc.common.Util;
 import org.ehc.common.ch.ConvenienceUtilsEnums.ParticipantType;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
+import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.AssociatedEntity;
+import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.Participant1;
@@ -72,6 +76,28 @@ public abstract class CdaCh {
 		// Add the stylesheet processing instructions to the document root using featuremaputil
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+		
+		// Set OID of the document
+		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
+		II docID = DatatypesFactory.eINSTANCE.createII();
+		doc.setId(docID);
+		docID.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
+		docID.setExtension("1817558762");
+
+		// Set Confidentially Code
+		// Standard is "N" for "normal". Can be changed through the set method
+		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
+		doc.setConfidentialityCode(confidentialityCode);
+		confidentialityCode.setCode("N");
+
+		// set xml namespace
+		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+
+		// Set creation time of the document
+		doc.setEffectiveTime(DateUtil.nowAsTS());
+		
+		//Type ID
+		setTypeId();
 	}
 
 	/**
@@ -92,11 +118,31 @@ public abstract class CdaCh {
 	 * @param authenticator
 	 *            Unterzeichner
 	 */
-	public void addAuthenticator(Person authenticator) {
-		//TODO
+	public void addAuthenticator(org.ehc.common.Author authenticator) {
+		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
+		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
+		
+		auth.setAssignedEntity(entity);
+		entity.setAssignedPerson(authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
+
+		doc.getAuthenticators().add(auth);
 	}
+	
+	/**
+	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
+	 * 
+	 * @param authenticator
+	 *            Unterzeichner
+	 */
+	public void addAuthenticator(Person authenticator) {
+		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
+		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
+		
+		auth.setAssignedEntity(entity);
+		entity.setAssignedPerson(authenticator.copyMdhtPerson());
 
-
+		doc.getAuthenticators().add(auth);
+	}
 
 	/**
 	 * Fügt einen Autoren hinzu.
@@ -105,10 +151,7 @@ public abstract class CdaCh {
 	 *            Der Autor
 	 */
 	public void addAuthor(org.ehc.common.Author author) {
-		// create a new (!) MDHT author Objekt.
-		Author docAuthor = CDAFactory.eINSTANCE.createAuthor();
-		docAuthor = author.getAuthorMdht();
-
+		Author docAuthor = author.copyMdhtAuthor();
 		doc.getAuthors().add(docAuthor);
 	}
 
@@ -120,7 +163,13 @@ public abstract class CdaCh {
 	 *            erstellt oder Beiträge dazu geliefert hat.
 	 */
 	public void addDataEnterer(Person dataEnterer) {
-		//TODO
+		DataEnterer enterer = CDAFactory.eINSTANCE.createDataEnterer();
+		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
+
+		enterer.setAssignedEntity(entity);
+		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
+		
+		doc.getDataEnterer().setAssignedEntity(entity);
 	}
 
 	/**
@@ -130,10 +179,9 @@ public abstract class CdaCh {
 	 *            Die Versicherung als Organization Objekt
 	 */
 	public void addInsurance(Organization versicherung) {
-		//TODO TypeCode Setzen (Wert fehlt noch bei den Enums)
 		addParticipant(versicherung, ParticipantType.Insurance);
 	}
-
+	
 	/**
 	 * Fügt dem CDA Dokument eine Partizipation hinzu
 	 * 
@@ -157,7 +205,7 @@ public abstract class CdaCh {
 		docOrganization = organization.getMdhtOrganization();
 		assEnt.setScopingOrganization(docOrganization);
 	}
-
+	
 	/**
 	 * Gibt den Autor des Dokuments zurück
 	 * 
@@ -167,6 +215,20 @@ public abstract class CdaCh {
 		org.ehc.common.Author author = new org.ehc.common.Author(
 				doc.getAuthors().get(0));
 		return author;
+	}
+	
+	/**
+	 * Gibt alle Autoren des Dokuments zurück
+	 * 
+	 * @return das eHealthConnector Author Objekt
+	 */
+	public ArrayList<org.ehc.common.Author> getAuthors() {
+		ArrayList<org.ehc.common.Author> authors = new ArrayList<org.ehc.common.Author>();
+		for (Author mAutor : doc.getAuthors()){
+			org.ehc.common.Author author = new org.ehc.common.Author(mAutor);
+			authors.add(author);
+		}
+		return authors;
 	}
 
 	/**
@@ -179,6 +241,69 @@ public abstract class CdaCh {
 	}
 
 	/**
+	 * Gibt alle Autoren des Dokuments zurück
+	 * 
+	 * @return das eHealthConnector Author Objekt
+	 */
+	public org.ehc.common.Person getDataEnterer() {
+		if (doc.getDataEnterer()!=null) {
+			if (doc.getDataEnterer().getAssignedEntity()!=null) {
+				if (doc.getDataEnterer().getAssignedEntity().getAssignedPerson()!=null) {
+					org.ehc.common.Person person = new org.ehc.common.Person(doc.getDataEnterer().getAssignedEntity().getAssignedPerson());
+					return person;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Gibt alle Versicherungen zurück
+	 * 
+	 * @param versicherung
+	 *            Die Versicherung als Organization Objekt
+	 */
+	public ArrayList<Organization> getInsurances(Organization versicherung) {
+		ArrayList<Organization> organizations = new ArrayList<Organization>();
+		for (Participant1 part : doc.getParticipants()) {
+			if (part.getTypeCode().equals(ParticipantType.Insurance)) {
+				Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
+				organizations.add(org);
+			}
+		}
+		return organizations;
+	}
+	
+	/**
+	 * Gibt alle rechtliche Unterzeichner des Dokuments zurück
+	 * 
+	 * @return die rechtlichen Unterzeichner
+	 */
+	public ArrayList<org.ehc.common.Person> getLegalAuthenticators() {
+		ArrayList<org.ehc.common.Person> persons = new ArrayList<org.ehc.common.Person>();
+		for (Authenticator mAutor : doc.getAuthenticators()){
+			org.ehc.common.Person person = new org.ehc.common.Person(mAutor.getAssignedEntity().getAssignedPerson());
+			persons.add(person);
+		}
+		return persons;
+	}
+	
+	/**
+	 * Gibt alle Participants zurück
+	 * 
+	 * @param versicherung
+	 *            Die Versicherung als Organization Objekt
+	 */
+	public ArrayList<Organization> getParticipants(Organization versicherung) {
+		ArrayList<Organization> organizations = new ArrayList<Organization>();
+		for (Participant1 part : doc.getParticipants()) {
+				Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
+				organizations.add(org);
+		}
+		return organizations;
+	}
+
+	/**
 	 * Liefert das Patientenobjekt zurück
 	 *
 	 * @return the patient
@@ -188,6 +313,10 @@ public abstract class CdaCh {
 				.getPatient();
 	}
 
+	public String getTitle() {
+		return doc.getTitle().getText();
+	}
+
 	/**
 	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
 	 */
@@ -195,7 +324,6 @@ public abstract class CdaCh {
 		try {
 			CDAUtil.save(doc, System.out);
 		} catch (final Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -227,56 +355,6 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet werden
-	 * (DocumentID, TypeID, Confidentially Code, Language Code, Stylesheet)
-	 * 
-	 * @param german
-	 *          Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
-	 * @param stylesheet
-	 *          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
-	 *          menschlich Lesbare Darstellung referenziert werden soll.
-	 */
-	public void setChMetadata(LanguageCode language, String stylesheet, String title) {
-		// Set language of the document
-		doc.setLanguageCode(language.getCS());
-
-		// Set OID of the document
-		//TODO this.setId(CdaChUtil.generateDocId(applicationOidRoot));
-		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
-		II docID = DatatypesFactory.eINSTANCE.createII();
-		doc.setId(docID);
-		docID.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
-		docID.setExtension("1817558762");
-
-		// Set Type ID 
-		// Identifies the Type of the xml document (fixed)
-		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
-		doc.setTypeId(typeId);
-		typeId.setRoot("2.16.840.1.113883.1.3");
-		typeId.setExtension("POCD_HD000040");
-
-		// Set Confidentially Code
-		// Standard is "N" for "normal". Can be changed through the set method
-		CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
-		doc.setConfidentialityCode(confidentialityCode);
-		confidentialityCode.setCode("N");
-
-		// Add the stylesheet processing instructions to the document	root using featuremaputil
-		// TODO Erstellen eines Constructors, der ohne übergebenes Stylesheet ein Standard-Stylesheet verwendet.
-		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
-
-		// set xml namespace
-		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
-		ST titleSt = DatatypesFactory.eINSTANCE.createST();
-		titleSt.addText(title);
-		doc.setTitle(titleSt);
-
-		// Set creation time of the document
-		doc.setEffectiveTime(DateUtil.nowAsTS());
-	}
-
-	/**
 	 * Weist dem CDA Dokument die verwaltende Organisation zu
 	 * 
 	 * @param organization
@@ -305,7 +383,12 @@ public abstract class CdaCh {
 		}
 		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
-
+	
+	public void setLanguageCode(LanguageCode language) {
+		// Set language of the document
+		doc.setLanguageCode(language.getCS());
+	}
+	
 	/**
 	 * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu
 	 * 
@@ -317,7 +400,7 @@ public abstract class CdaCh {
 		doc.setLegalAuthenticator(Util
 				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
 	}
-
+	
 	/**
 	 * Weist dem CDA Dokument den Patienten zu
 	 * 
@@ -326,5 +409,40 @@ public abstract class CdaCh {
 	 */
 	public void setPatient(Patient patient) {
 		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
+	}
+
+	protected void setProcessingInstructions(String stylesheet) {
+		// Add the stylesheet processing instructions to the document
+		if (stylesheet == null) {
+			stylesheet = "../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl";	
+		}
+			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
+					"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
+	}
+
+	public void setTitle(String title) {
+		ST titleSt = DatatypesFactory.eINSTANCE.createST();
+		titleSt.addText(title);
+		doc.setTitle(titleSt);
+	}
+
+	/**
+	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet werden
+	 * (DocumentID, TypeID, Confidentially Code, Language Code, Stylesheet)
+	 * 
+	 * @param german
+	 *          Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
+	 * @param stylesheet
+	 *          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
+	 *          menschlich Lesbare Darstellung referenziert werden soll.
+	 */
+	
+	public void setTypeId() {
+		// Set Type ID 
+		// Identifies the Type of the xml document
+		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
+		doc.setTypeId(typeId);
+		typeId.setRoot("2.16.840.1.113883.1.3");
+		typeId.setExtension("POCD_HD000040");
 	}
 }
