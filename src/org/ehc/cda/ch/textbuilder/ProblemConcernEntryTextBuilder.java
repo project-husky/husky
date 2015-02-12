@@ -35,7 +35,6 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 		append("</tbody>");
 	}
 
-
 	private void addHeader() {
 		append("<thead>");
 		append("<tr>");

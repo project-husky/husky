@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
  * souffrance de la santé</div>
  */
-public class PastProblemConcernEntry extends ProblemConcernEntry {
+public class PastProblemConcern extends ProblemConcernEntry {
 
 	/**
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
@@ -45,7 +45,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public PastProblemConcernEntry() {
+	public PastProblemConcern() {
 		super();
 	}
 
@@ -62,7 +62,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 * <div class="fr">Objet préexistante à cloner</div>
 	 * 
 	 */
-	public PastProblemConcernEntry(
+	public PastProblemConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
 	}
@@ -82,7 +82,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public PastProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+	public PastProblemConcern(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 
@@ -107,7 +107,7 @@ public class PastProblemConcernEntry extends ProblemConcernEntry {
 	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
 	 *            du problème</div>
 	 */
-	public PastProblemConcernEntry(String concern,
+	public PastProblemConcern(String concern,
 			ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus, Date begin, Date end) {
 		super(concern,problemEntry, problemConcernStatus, begin, end);
 	}

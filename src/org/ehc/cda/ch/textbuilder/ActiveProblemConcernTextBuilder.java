@@ -13,7 +13,7 @@ import org.ehc.common.ch.SectionsVACD;
  * 
  * @author gsc, ahelmer
  */
-public class ProblemConcernTextBuilder extends TextBuilder {
+public class ActiveProblemConcernTextBuilder extends TextBuilder {
 
 	private List<ActiveProblemConcernEntry> problemConcernEntries;
 	private ActiveProblemConcernEntry newProblemConcernEntry;
@@ -21,7 +21,7 @@ public class ProblemConcernTextBuilder extends TextBuilder {
 	private int newId;
 	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
-	public ProblemConcernTextBuilder(
+	public ActiveProblemConcernTextBuilder(
 			ArrayList<ActiveProblemConcernEntry> problemConcernEntries,
 			ActiveProblemConcernEntry newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
