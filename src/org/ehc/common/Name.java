@@ -16,6 +16,9 @@
 
 package org.ehc.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
@@ -89,22 +92,18 @@ public class Name {
 	public String getCompleteName() {
 		String name = null;
 
-//		String prefixes = getPrefixes();
-//		String givens = getGivenNames();
-//		String families = getFamilyNames();
-//		String suffixes = getSuffixes();
-//		if (prefixes != null && givens != null) {
-//			name = String.join(" ", prefixes, givens);
-//		}
-//		else {
-//			name = givens;
-//		}
-//		name = String.join(" " , name, families);
-//		if (suffixes!=null) {
-//			name= String.join(" " , name, suffixes);
-//		}
-
-		return name;
+		String prefixes = getPrefixes();
+		String givens = getGivenNames();
+		String families = getFamilyNames();
+		String suffixes = getSuffixes();
+		
+		ArrayList<String> nameList = new ArrayList<String>();
+		nameList.add(prefixes);
+		nameList.add(givens);
+		nameList.add(families);
+		nameList.add(suffixes);
+		
+		return Util.join(nameList, " ");
 	}
 
 	/**

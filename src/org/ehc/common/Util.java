@@ -17,7 +17,10 @@
 package org.ehc.common;
 
 import java.io.IOException;
+import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -63,6 +66,31 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
+	public static String join(ArrayList<String> nameList, String delimiter) {
+	    String string;
+	    StringBuilder builder;
+	    
+		if (nameList == null || nameList.isEmpty()) return "";
+	    Iterator<String> iter = nameList.iterator();
+	    string = iter.next();
+	    if (string.equals("")) {
+	    	builder = new StringBuilder(iter.next());
+	    }
+	    else {
+	    	builder = new StringBuilder(iter.next());
+	    }
+	    while( iter.hasNext() )
+	    {
+	    	string = iter.next();
+	    	if (string.equals("")) {
+	    	}
+	    	else {
+	    		builder.append(delimiter).append(string);
+	    	}
+	    }
+	    return builder.toString();
+	}
+	
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -404,13 +432,15 @@ public class Util {
 
 	public static String joinEListStr(EList<ENXP> list) {
 		if (list.size()==0) {
-			return null;
+			return "";
 		}
 		String names = list.get(0).getText();
 		if (list.size()>1) {
+			ArrayList<String> nameList = new ArrayList<String>();
 			for (int i = 2; i<= list.size();i++) {
-//				names = String.join(" ", names, list.get(i).getText());
+				nameList.add(list.get(i).getText());
 			}
+			return Util.join(nameList, " ");
 		}
 		return names;
 	}
