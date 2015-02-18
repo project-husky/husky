@@ -87,22 +87,22 @@ public class Name {
 	}
 
 	public String getCompleteName() {
-		String name;
+		String name = null;
 
-		String prefixes = getPrefixes();
-		String givens = getGivenNames();
-		String families = getFamilyNames();
-		String suffixes = getSuffixes();
-		if (prefixes != null && givens != null) {
-			name = String.join(" ", prefixes, givens);
-		}
-		else {
-			name = givens;
-		}
-		name = String.join(" " , name, families);
-		if (suffixes!=null) {
-			name= String.join(" " , name, suffixes);
-		}
+//		String prefixes = getPrefixes();
+//		String givens = getGivenNames();
+//		String families = getFamilyNames();
+//		String suffixes = getSuffixes();
+//		if (prefixes != null && givens != null) {
+//			name = String.join(" ", prefixes, givens);
+//		}
+//		else {
+//			name = givens;
+//		}
+//		name = String.join(" " , name, families);
+//		if (suffixes!=null) {
+//			name= String.join(" " , name, suffixes);
+//		}
 
 		return name;
 	}

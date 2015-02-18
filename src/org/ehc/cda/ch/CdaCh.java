@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehc.cda.ch.enums.EHealthConnectorVersions;
@@ -327,6 +328,16 @@ public abstract class CdaCh {
 			e.printStackTrace();
 		}
 	}
+	
+	public ByteArrayOutputStream getOutputStream () {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			CDAUtil.save(doc, baos);
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return baos;
+	}
 
 	/**
 	 * Speichert das CDA Dokument als XML Datei
@@ -349,7 +360,7 @@ public abstract class CdaCh {
 		// add the document root to the resource
 		docRoot.setClinicalDocument(doc);
 		resource.getContents().add(docRoot);
-
+		
 		// save resource to console
 		resource.save(oFile, null);
 	}

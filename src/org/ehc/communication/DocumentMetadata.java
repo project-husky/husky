@@ -20,12 +20,23 @@ package org.ehc.communication;
 
 import java.util.Calendar;
 
+import org.ehc.common.Author;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
+import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
  * Metadaten zu einem Dokument (wird für IHE XDS Registry verwendet)
  */
 public class DocumentMetadata {
+	SubmitTransactionData txnData;
+	
+	public DocumentMetadata() {
+		
+	}
+	
+	public void addAuthor(Author author) {
+	}
+	
 	/**
 	 * Die Dokumenten-Id wird als Globally Unique Identifier (GUID) angegeben.
 	 */
