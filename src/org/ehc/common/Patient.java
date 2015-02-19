@@ -112,7 +112,7 @@ public class Patient extends Person {
 	 * 
 	 * @param recordTarget
 	 */
-	protected Patient(RecordTarget recordTarget) {
+	public Patient(RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
 	}
 

@@ -30,9 +30,11 @@ import org.ehc.communication.Destination;
 import org.ehc.communication.DocumentMetadata;
 import org.ehc.communication.Response;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
@@ -52,11 +54,15 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.extract.InputStreamDocumentEntryExtractor;
+import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
+import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
+import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+
 
 /**
  * <p>
@@ -89,12 +95,23 @@ import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 public class DocumentSourceClient {
 
 	
-	public DocumentSourceClient() {
-		
+	public DocumentSourceClient(String organizationalId, String repositoryUri, boolean auditorEnabled, String log4jConfigPath) throws Exception {
+		txnData = new SubmitTransactionData();
+		this.organizationalId = organizationalId;
+		if (log4jConfigPath==null) {
+			log4jConfigPath = "./rsc/log4j.xml";
+		}
+		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
+	}
+	
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws IOException, MetadataExtractionException, SubmitTransactionCompositionException {
+		XDSDocument clinicalDocument = new XDSDocumentFromFile(desc,filePath);
+		String docEntryUUID = txnData.addDocument(clinicalDocument);
+		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
+		return docMetadata;
 	}
 	
 	public static final String absResFolder = "F:/ihe/org.openhealthtools.ihe.xds.source/";
-	public static final String ORGANIZATIONAL_ID ="1.3.6.1.4.1.21367.2010.1.2.666";
 	public static final boolean CATMode = true;
 	
 	// NIST Repository (query interface)
@@ -114,6 +131,10 @@ public class DocumentSourceClient {
 	// Source instance
 	private B_Source source = null;
 
+	private String organizationalId;
+
+	SubmitTransactionData txnData;
+	
 	/**
 	 * <p>
 	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
@@ -133,7 +154,7 @@ public class DocumentSourceClient {
 	 * @throws Exception
 	 */
 	public Response sendCdaDocument(Destination destination, CdaCh doc) throws Exception {
-		setUp(NIST, false, absResFolder+"resources/conf/submitTest_log4j.xml");
+		setUp(NIST, false, "./rsc/log4j.xml");
 		try {
 			//testWithPrecookedMetadata();
 			//testWithCdaDoc(ORGANIZATIONAL_ID,absResFolder+"./resources/sample_files/test2/ScanSample.xml");
@@ -188,7 +209,7 @@ public class DocumentSourceClient {
 		// set uniqueID
 		// say that you are assigned an organizational oid of "1.2.3.4"
 		// added length limit for NIST registry of 64
-		txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(ORGANIZATIONAL_ID,64));
+		txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
 		logger.debug("Done setting documentEntry metadata for: " +txnData.getDocumentEntry(docEntryUUID).toString());
 		txnData.saveMetadataToFile("C:/temp/metadata2.xml");
 
@@ -203,13 +224,13 @@ public class DocumentSourceClient {
 		// set uniqueID
 		// say that you are assigned an organizational oid of TestConfiguration.ORGANIZATIONAL_OID
 		// added length limit for NIST registry of 64
-		txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(ORGANIZATIONAL_ID,64));
+		txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
 		// set submission time
 		txnData.getSubmissionSet().setSubmissionTime(DateUtil.nowAsTS().getValue());
 		txnData.saveMetadataToFile("C:/temp/metadata.xml");
 		
 		// set submission set source id
-		txnData.getSubmissionSet().setSourceId(ORGANIZATIONAL_ID);
+		txnData.getSubmissionSet().setSourceId(organizationalId);
 		
 		logger.debug("Submitting Document.");
 		XDSResponseType response = source.submit(txnData);
@@ -580,8 +601,28 @@ public class DocumentSourceClient {
 	 * @return status der XDS-Übertragung
 	 * @throws Exception
 	 */
-	public static Response sendDocument(XdsMetadata metadata,
-			Destination destination, String filePath) throws Exception {
+	public Response sendDocument(DocumentMetadata metadata, DocumentDescriptor docDesc, String filePath) throws Exception {
+		txnData = new SubmitTransactionData();
+		// invoke transformation for metadata extraction on test file
+		logger.debug("Adding input document, and metadata.");
+		XDSDocument document = new XDSDocumentFromFile(docDesc, filePath);
+		txnData.addDocument(document);
+		
+		//From Bytestream
+//		ByteArrayOutputStream baos = doc.getOutputStream();
+//		XDSDocument clinicalDocument = new XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
+		
+		//From File
+		XDSDocument clinicalDocument = new XDSDocumentFromFile(docDesc,filePath);
+		String docEntryUUID = txnData.addDocument(clinicalDocument);
+		
+		txnData.saveMetadataToFile("C:/temp/demoVACDXDSMetadataExtractedPDF.xml");
+		
+		//txnData.getDocumentEntry(docEntryUUID).
+		
+		//Metadata by object creation
+		//CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		
 		return null;
 	}
 
@@ -624,6 +665,11 @@ public class DocumentSourceClient {
 	public static boolean storeOnMedia(File destination, ClinicalDocument doc)
 			throws Exception {
 		return false;
+	}
+
+	public XDSResponseType submit() throws Exception {
+		txnData.saveMetadataToFile("C:/temp/meta.xml");
+		return source.submit(txnData);
 	}
 
 }

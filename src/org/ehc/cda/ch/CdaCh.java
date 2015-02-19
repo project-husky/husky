@@ -310,8 +310,8 @@ public abstract class CdaCh {
 	 * @return the patient
 	 */
 	public Patient getPatient() {
-		return (Patient) doc.getRecordTargets().get(0).getPatientRole()
-				.getPatient();
+		Patient patient = new Patient(doc.getRecordTargets().get(0));
+		return patient;
 	}
 
 	public String getTitle() {

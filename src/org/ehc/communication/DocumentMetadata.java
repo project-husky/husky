@@ -18,23 +18,84 @@
 
 package org.ehc.communication;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 
 import org.ehc.common.Author;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
+import org.ehc.common.Patient;
+import org.openhealthtools.ihe.atna.auditor.models.rfc3881.ParticipantObjectIdentificationType;
+import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
+import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
+import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
+import org.openhealthtools.ihe.xds.document.XDSDocument;
+import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import org.openhealthtools.ihe.xds.metadata.extract.InputStreamDocumentEntryExtractor;
+import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
+import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
  * Metadaten zu einem Dokument (wird für IHE XDS Registry verwendet)
  */
 public class DocumentMetadata {
+	
 	SubmitTransactionData txnData;
+	DocumentEntryType xDoc;
+	DocumentDescriptor xDesc;
+	FileInputStream fis;
+	ClinicalDocument cda;
+	CDAR2Extractor extractor;
 	
 	public DocumentMetadata() {
-		
+		xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
+		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		extractor = new CDAR2Extractor(cda);
 	}
 	
-	public void addAuthor(Author author) {
+	//Constructor for File Documents
+	//If the Document is CDA, the Metadata will be extraced, otherwise it will just be tested, if the file is accessible
+	public DocumentMetadata(String filePath, DocumentDescriptor docDesc) throws Exception {
+		this();
+		File docEntryFile = new File (filePath);
+		fis = new FileInputStream(docEntryFile);
+		if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
+			ClinicalDocument clinicalDocument = CDAUtil.load(fis);
+			CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
+			xDoc = deExtractor.extract();
+		}
+		fis.close();
+	}
+	
+	public void addAuthor(Author author) {		
+		//Workaround for a Bug in the CDAR2Extractor, which causes a NullpointerException, if no Telecom value is interted and logger.Debug is set to true
+		if (author.getAuthorMdht().getAssignedAuthor().getTelecoms()==null || author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
+		}
+
+		cda.getAuthors().add(author.copyMdhtAuthor());
+		
+		AuthorType xAuthor = extractor.extractAuthors().get(0);
+		xDoc.getAuthors().add(xAuthor);
+	}
+	
+	public void setPatient(Patient patient) {
+		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
+		
+		SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
+		xDoc.setSourcePatientInfo(spi);
 	}
 	
 	/**
@@ -114,6 +175,11 @@ public class DocumentMetadata {
 		this.dateOfDocumentCreation = dateOfDocumentCreation;
 	}
 
+	public DocumentMetadata(DocumentEntryType documentEntryType) {
+		this();
+		this.xDoc = documentEntryType;
+	}
+
 	/**
 	 * @return das codedLanguage Objekt
 	 */
@@ -188,5 +254,4 @@ public class DocumentMetadata {
 	public void setVersionId(String versionId) {
 		this.versionId = versionId;
 	}
-
 }
