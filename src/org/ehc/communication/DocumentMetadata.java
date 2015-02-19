@@ -20,28 +20,28 @@ package org.ehc.communication;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.LanguageCode;
 import org.ehc.common.Author;
+import org.ehc.common.Code;
 import org.ehc.common.ConvenienceUtilsEnums.Language;
+import org.ehc.common.Identificator;
 import org.ehc.common.Patient;
-import org.openhealthtools.ihe.atna.auditor.models.rfc3881.ParticipantObjectIdentificationType;
-import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
+import org.ehc.common.XdsUtil;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
-import org.openhealthtools.ihe.xds.metadata.extract.InputStreamDocumentEntryExtractor;
-import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
@@ -51,7 +51,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
  */
 public class DocumentMetadata {
 	
-	SubmitTransactionData txnData;
 	DocumentEntryType xDoc;
 	DocumentDescriptor xDesc;
 	FileInputStream fis;
@@ -64,19 +63,49 @@ public class DocumentMetadata {
 		extractor = new CDAR2Extractor(cda);
 	}
 	
-	//Constructor for File Documents
-	//If the Document is CDA, the Metadata will be extraced, otherwise it will just be tested, if the file is accessible
-	public DocumentMetadata(String filePath, DocumentDescriptor docDesc) throws Exception {
+	public DocumentMetadata(DocumentEntryType documentEntryType) {
 		this();
-		File docEntryFile = new File (filePath);
-		fis = new FileInputStream(docEntryFile);
-		if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
-			ClinicalDocument clinicalDocument = CDAUtil.load(fis);
-			CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
-			xDoc = deExtractor.extract();
-		}
-		fis.close();
+		this.xDoc = documentEntryType;
 	}
+
+//	//Constructor for File Documents
+//	//If the Document is CDA, the Metadata will be extraced, otherwise it will just be tested, if the file is accessible
+//	public DocumentMetadata(String filePath, DocumentDescriptor docDesc) throws Exception {
+//		this();
+//		File docEntryFile = new File (filePath);
+//		fis = new FileInputStream(docEntryFile);
+//		if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
+//			ClinicalDocument clinicalDocument = CDAUtil.load(fis);
+//			CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
+//			xDoc = deExtractor.extract();
+//		}
+//		fis.close();
+//	}
+	
+//	/**
+//	 * @param documentId
+//	 *          Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
+//	 *          angegeben.
+//	 * @param versionId
+//	 *          Nur anzugeben, wenn es sich nicht um die erste Version des
+//	 *          Dokuments handelt. Die Version ist eine fortlaufende Nummer.
+//	 * @param title
+//	 *          Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
+//	 *          Betreffzeile
+//	 * @param codedLanguage
+//	 *          In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
+//	 *          (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
+//	 * @param dateOfDocumentCreation
+//	 *          Datum, an dem das Dokument erstellt wurde
+//	 */
+//	public DocumentMetadata(String documentId, String versionId, String title,
+//			Language codedLanguage, Calendar dateOfDocumentCreation) {
+////		this.documentId = documentId;
+////		this.versionId = versionId;
+////		this.title = title;
+////		this.codedLanguage = codedLanguage;
+////		this.dateOfDocumentCreation = dateOfDocumentCreation;
+//	}
 	
 	public void addAuthor(Author author) {		
 		//Workaround for a Bug in the CDAR2Extractor, which causes a NullpointerException, if no Telecom value is interted and logger.Debug is set to true
@@ -91,6 +120,49 @@ public class DocumentMetadata {
 		xDoc.getAuthors().add(xAuthor);
 	}
 	
+	public void addConfidentiallyCode(String code) {
+		//TODO Consider Enum here
+		xDoc.getConfidentialityCode().add(code);
+	}
+
+	public DocumentEntryType copyMdhtDocumentEntryType() {
+		return EcoreUtil.copy(xDoc);
+	}
+
+	public DocumentEntryType getMdhtDocumentEntryType() {
+		return xDoc;
+	}
+
+	public void setClassCode(Code code) {
+		xDoc.setClassCode(XdsUtil.convertCode(code));
+	}
+	
+	/**
+	 * @param codedLanguage
+	 *          das codedLanguage Objekt welches gesetzt wird
+	 */
+	public void setCodedLanguage(LanguageCode codedLanguage) {
+		xDoc.setLanguageCode(codedLanguage.getCodeValue());
+	}
+	
+	/**
+	 * @param dateOfDocumentCreation
+	 *          das dateOfDocumentCreation Objekt welches gesetzt wird
+	 */
+	public void setDateOfDocumentCreation(Date dateAndTime) {
+		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
+		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
+	}
+	
+	public void setHealthcareFacilityTypeCode(Code code) {
+		//TODO Consider Enum here
+		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
+	}
+	
+	public void setMimeType(String mimeType) {
+		xDoc.setMimeType(mimeType);
+	}
+	
 	public void setPatient(Patient patient) {
 		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
 		
@@ -98,160 +170,28 @@ public class DocumentMetadata {
 		xDoc.setSourcePatientInfo(spi);
 	}
 	
-	/**
-	 * Die Dokumenten-Id wird als Globally Unique Identifier (GUID) angegeben.
-	 */
-	String documentId;
-
-	/**
-	 * Nur anzugeben, wenn es sich nicht um die erste Version des Dokuments
-	 * handelt. Die Version ist eine fortlaufende Nummer.
-	 */
-	String versionId;
-
-	/**
-	 * Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
-	 * Betreffzeile
-	 */
-	String title;
-
-	/**
-	 * In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766 (ISO-639-1 und
-	 * ISO 3166): de-CH, fr-CH, it-CH
-	 */
-	Language codedLanguage;
-
-	/**
-	 * Datum, an dem das Dokument erstellt wurde
-	 */
-	Calendar dateOfDocumentCreation;
-
-	/**
-	 * @param documentId
-	 *          Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
-	 *          angegeben.
-	 * @param title
-	 *          Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
-	 *          Betreffzeile
-	 * @param codedLanguage
-	 *          In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
-	 *          (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
-	 * @param dateOfDocumentCreation
-	 *          Datum, an dem das Dokument erstellt wurde
-	 */
-	public DocumentMetadata(String documentId, String title,
-			Language codedLanguage, Calendar dateOfDocumentCreation) {
-		super();
-		// this.documentId = documentId;
-		// this.versionId = versionId;
-		// this.title = title;
-		// this.codedLanguage = codedLanguage;
-		// this.dateOfDocumentCreation = dateOfDocumentCreation;
+	public void setPatientId(Identificator id) {
+		xDoc.setPatientId(XdsUtil.convertIdentificator(id));
 	}
-
-	/**
-	 * @param documentId
-	 *          Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
-	 *          angegeben.
-	 * @param versionId
-	 *          Nur anzugeben, wenn es sich nicht um die erste Version des
-	 *          Dokuments handelt. Die Version ist eine fortlaufende Nummer.
-	 * @param title
-	 *          Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
-	 *          Betreffzeile
-	 * @param codedLanguage
-	 *          In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
-	 *          (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
-	 * @param dateOfDocumentCreation
-	 *          Datum, an dem das Dokument erstellt wurde
-	 */
-	public DocumentMetadata(String documentId, String versionId, String title,
-			Language codedLanguage, Calendar dateOfDocumentCreation) {
-		super();
-		this.documentId = documentId;
-		this.versionId = versionId;
-		this.title = title;
-		this.codedLanguage = codedLanguage;
-		this.dateOfDocumentCreation = dateOfDocumentCreation;
+	
+	public void setPracticeSettingCode (Code code) {
+		//TODO Consider Enum here
+		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
 	}
-
-	public DocumentMetadata(DocumentEntryType documentEntryType) {
-		this();
-		this.xDoc = documentEntryType;
+	
+	public void setSourcePatientId(Identificator id) {
+		xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
 	}
-
-	/**
-	 * @return das codedLanguage Objekt
-	 */
-	public Language getCodedLanguage() {
-		return codedLanguage;
-	}
-
-	/**
-	 * @return das dateOfDocumentCreation Objekt
-	 */
-	public Calendar getDateOfDocumentCreation() {
-		return dateOfDocumentCreation;
-	}
-
-	/**
-	 * @return das documentId Objekt
-	 */
-	public String getDocumentId() {
-		return documentId;
-	}
-
-	/**
-	 * @return das title Objekt
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @return das versionId Objekt
-	 */
-	public String getVersionId() {
-		return versionId;
-	}
-
-	/**
-	 * @param codedLanguage
-	 *          das codedLanguage Objekt welches gesetzt wird
-	 */
-	public void setCodedLanguage(Language codedLanguage) {
-		this.codedLanguage = codedLanguage;
-	}
-
-	/**
-	 * @param dateOfDocumentCreation
-	 *          das dateOfDocumentCreation Objekt welches gesetzt wird
-	 */
-	public void setDateOfDocumentCreation(Calendar dateOfDocumentCreation) {
-		this.dateOfDocumentCreation = dateOfDocumentCreation;
-	}
-
-	/**
-	 * @param documentId
-	 *          das documentId Objekt welches gesetzt wird
-	 */
-	public void setDocumentId(String documentId) {
-		this.documentId = documentId;
-	}
-
+	
 	/**
 	 * @param title
 	 *          das title Objekt welches gesetzt wird
 	 */
 	public void setTitle(String title) {
-		this.title = title;
+		xDoc.setTitle(XdsUtil.createInternationalString(title));
 	}
-
-	/**
-	 * @param versionId
-	 *          das versionId Objekt welches gesetzt wird
-	 */
-	public void setVersionId(String versionId) {
-		this.versionId = versionId;
+	
+	public void setTypeCode(Code code) {
+		xDoc.setTypeCode(XdsUtil.convertCode(code));
 	}
 }
