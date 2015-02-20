@@ -33,6 +33,7 @@ import org.ehc.communication.Destination;
 import org.ehc.communication.DocumentMetadata;
 import org.ehc.communication.Response;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
 import java.io.FileInputStream;
@@ -46,6 +47,7 @@ import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSet;
 import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes.ProvideAndRegisterDocumentSetB;
 import org.openhealthtools.ihe.common.ebxml._2._1.rim.InternationalStringType;
+import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
@@ -65,7 +67,10 @@ import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
+import sun.font.CreatedFontTracker;
+
 import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 
 /**
@@ -99,7 +104,7 @@ import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 public class DocumentSourceClient {
 	public static final String absResFolder = "F:/ihe/org.openhealthtools.ihe.xds.source/";
 	public static final boolean CATMode = true;
-	
+
 	// NIST Repository (query interface)
 	//public static final String NIST = "http://hcxw2k1.nist.gov:8080/xdsServices2/registry/soap/portals/yr3a/repository";
 	public static final String NIST = "http://ihexds.nist.gov/tf6/services/xdsrepositoryb";
@@ -110,132 +115,132 @@ public class DocumentSourceClient {
 
 	// IBM Audit Repository
 	//public static final String IBM_ARR ="syslog://lswin10.dfw.ibm.com:515";
-	
+
 	// logger
 	private static final Logger logger = Logger.getLogger(DocumentSourceClient.class);
-	
+
 	// Source instance
 	private B_Source source = null;
 
 	private String organizationalId;
 
 	SubmitTransactionData txnData;
-	
-//	/**
-//	 * <p>
-//	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
-//	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
-//	 * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
-//	 * </p>
-//	 * <p>
-//	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
-//	 * Document Source Actor</b>
-//	 * </p>
-//	 * 
-//	 * @param destination
-//	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
-//	 * @param doc
-//	 *          das CDA-Dokument, welches verschickt werden soll
-//	 * @return status der XDS-Übertragung
-//	 * @throws Exception
-//	 */
-//	public Response sendCdaDocument(Destination destination, CdaCh doc) throws Exception {
-//		setUp(NIST, false, "./rsc/log4j.xml");
-//		try {
-//			//testWithPrecookedMetadata();
-//			//testWithCdaDoc(ORGANIZATIONAL_ID,absResFolder+"./resources/sample_files/test2/ScanSample.xml");
-//		} catch (Throwable e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		SubmitTransactionData txnData = new SubmitTransactionData();
-//		// invoke transformation for metadata extraction on test file
-//		logger.debug("Adding input document, and metadata.");
-//		
-//		//From Bytestream
-//		ByteArrayOutputStream baos = doc.getOutputStream();
-//		XDSDocument clinicalDocument = new XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
-//		
-//		//From File
-//		//XDSDocument clinicalDocument = new XDSDocumentFromFile(DocumentDescriptor.CDA_R2,"F:/temp/DemoVACD.xml");
-//		String docEntryUUID = txnData.addDocument(clinicalDocument);
-//		txnData.saveMetadataToFile("C:/temp/demoVACDXDSMetadataExtracted.xml");
-//		
-//		//Metadata by object creation
-//		//CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-//		
-//		logger.debug("Supplementing Document Entry metadata");
-//		File docEntryFile = new File (absResFolder+"./resources/sample_files/test2/docEntry.xml");
-//		FileInputStream fis = new FileInputStream(docEntryFile);
-//		InputStreamDocumentEntryExtractor deExtractor = new InputStreamDocumentEntryExtractor(fis);
-//		DocumentEntryType docEntryFixes = deExtractor.extract();
-//		fis.close();
-//		
-//		DocumentEntryType docEntry = txnData.getDocumentEntry(docEntryUUID);
-//		// set classCode - Ersetzt den Loinc Code durch eine ConnectAthon Beschreibung  
-//		//txnData.getDocumentEntry(docEntryUUID).setClassCode(docEntryFixes.getClassCode());
-//		CodedMetadataType cmt = docEntry.getClassCode();
-//		//docEntry.getClassCode().setSchemeName("1.3.6.1.4.1.21367.100.1");
-//		//docEntry.getClassCode().setDisplayName(createInternationalString("Summarization of Episode Note"));
-//		
-//		//re-set conf code - Ergänzt den DisplayName
-//		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().clear();
-//		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().add(docEntryFixes.getConfidentialityCode().get(0));
-//		// format code - Ist nach CDAExtraction nicht gesetzt. Kann fest gesetzt werden (in diesem Fall auf CDA R2)
-//		txnData.getDocumentEntry(docEntryUUID).setFormatCode(docEntryFixes.getFormatCode());
-//		// healthcare facilty code  - Ist nach CDAExtraction nicht gesetzt. 
-//		txnData.getDocumentEntry(docEntryUUID).setHealthCareFacilityTypeCode(docEntryFixes.getHealthCareFacilityTypeCode());
-//		// patient Id - Kommt von Oliver
-//		txnData.getDocumentEntry(docEntryUUID).setPatientId(docEntryFixes.getPatientId());
-//		// prac setting code - Kann wahrscheinlich einfach auf "General Medicine" gesetzt werden
-//		txnData.getDocumentEntry(docEntryUUID).setPracticeSettingCode(docEntryFixes.getPracticeSettingCode());
-//		// type code - Typ des Dokuments. Hier kann der Type Code des CDA Dokuments verwendet werden.
-//		txnData.getDocumentEntry(docEntryUUID).setTypeCode(docEntryFixes.getTypeCode());
-//		// set uniqueID
-//		// say that you are assigned an organizational oid of "1.2.3.4"
-//		// added length limit for NIST registry of 64
-//		txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
-//		logger.debug("Done setting documentEntry metadata for: " +txnData.getDocumentEntry(docEntryUUID).toString());
-//		txnData.saveMetadataToFile("C:/temp/metadata2.xml");
-//
-//		// add submission set metadata
-//		logger.debug("Applying Submission Set Metadata to the Submission.");
-//		File submissionSetFile = new File(absResFolder+"./resources/sample_files/test2/submissionSet.xml");
-//		fis = new FileInputStream(submissionSetFile);
-//		txnData.loadSubmissionSet(fis);
-//		fis.close();
-//		txnData.saveMetadataToFile("C:/temp/metadata3.xml");
-//		
-//		// set uniqueID
-//		// say that you are assigned an organizational oid of TestConfiguration.ORGANIZATIONAL_OID
-//		// added length limit for NIST registry of 64
-//		txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
-//		// set submission time
-//		txnData.getSubmissionSet().setSubmissionTime(DateUtil.nowAsTS().getValue());
-//		txnData.saveMetadataToFile("C:/temp/metadata.xml");
-//		
-//		// set submission set source id
-//		txnData.getSubmissionSet().setSourceId(organizationalId);
-//		
-//		logger.debug("Submitting Document.");
-//		XDSResponseType response = source.submit(txnData);
-//		logger.debug("Response status: " + response.getStatus().getName());
-//		if(response.getErrorList() != null){
-//			if(response.getErrorList().getError() != null){
-//				logger.debug("Returned " + response.getErrorList().getError().size() + " errors.");
-//			}
-//		}
-//		logger.debug("DONE MESA 12049 with metadata extraction from CDA");
-//		
-//		
-//		//logger.debug("Submitting Document.");
-//		//XDSResponseType response1 = source.submit(txnData);
-//		return null;
-//		
-//		//return sendCdaDocument(metadata, destination, doc);
-//	}
-	
+
+	//	/**
+	//	 * <p>
+	//	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
+	//	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
+	//	 * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
+	//	 * </p>
+	//	 * <p>
+	//	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+	//	 * Document Source Actor</b>
+	//	 * </p>
+	//	 * 
+	//	 * @param destination
+	//	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
+	//	 * @param doc
+	//	 *          das CDA-Dokument, welches verschickt werden soll
+	//	 * @return status der XDS-Übertragung
+	//	 * @throws Exception
+	//	 */
+	//	public Response sendCdaDocument(Destination destination, CdaCh doc) throws Exception {
+	//		setUp(NIST, false, "./rsc/log4j.xml");
+	//		try {
+	//			//testWithPrecookedMetadata();
+	//			//testWithCdaDoc(ORGANIZATIONAL_ID,absResFolder+"./resources/sample_files/test2/ScanSample.xml");
+	//		} catch (Throwable e) {
+	//			// TODO Auto-generated catch block
+	//			e.printStackTrace();
+	//		}
+	//		
+	//		SubmitTransactionData txnData = new SubmitTransactionData();
+	//		// invoke transformation for metadata extraction on test file
+	//		logger.debug("Adding input document, and metadata.");
+	//		
+	//		//From Bytestream
+	//		ByteArrayOutputStream baos = doc.getOutputStream();
+	//		XDSDocument clinicalDocument = new XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
+	//		
+	//		//From File
+	//		//XDSDocument clinicalDocument = new XDSDocumentFromFile(DocumentDescriptor.CDA_R2,"F:/temp/DemoVACD.xml");
+	//		String docEntryUUID = txnData.addDocument(clinicalDocument);
+	//		txnData.saveMetadataToFile("C:/temp/demoVACDXDSMetadataExtracted.xml");
+	//		
+	//		//Metadata by object creation
+	//		//CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+	//		
+	//		logger.debug("Supplementing Document Entry metadata");
+	//		File docEntryFile = new File (absResFolder+"./resources/sample_files/test2/docEntry.xml");
+	//		FileInputStream fis = new FileInputStream(docEntryFile);
+	//		InputStreamDocumentEntryExtractor deExtractor = new InputStreamDocumentEntryExtractor(fis);
+	//		DocumentEntryType docEntryFixes = deExtractor.extract();
+	//		fis.close();
+	//		
+	//		DocumentEntryType docEntry = txnData.getDocumentEntry(docEntryUUID);
+	//		// set classCode - Ersetzt den Loinc Code durch eine ConnectAthon Beschreibung  
+	//		//txnData.getDocumentEntry(docEntryUUID).setClassCode(docEntryFixes.getClassCode());
+	//		CodedMetadataType cmt = docEntry.getClassCode();
+	//		//docEntry.getClassCode().setSchemeName("1.3.6.1.4.1.21367.100.1");
+	//		//docEntry.getClassCode().setDisplayName(createInternationalString("Summarization of Episode Note"));
+	//		
+	//		//re-set conf code - Ergänzt den DisplayName
+	//		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().clear();
+	//		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().add(docEntryFixes.getConfidentialityCode().get(0));
+	//		// format code - Ist nach CDAExtraction nicht gesetzt. Kann fest gesetzt werden (in diesem Fall auf CDA R2)
+	//		txnData.getDocumentEntry(docEntryUUID).setFormatCode(docEntryFixes.getFormatCode());
+	//		// healthcare facilty code  - Ist nach CDAExtraction nicht gesetzt. 
+	//		txnData.getDocumentEntry(docEntryUUID).setHealthCareFacilityTypeCode(docEntryFixes.getHealthCareFacilityTypeCode());
+	//		// patient Id - Kommt von Oliver
+	//		txnData.getDocumentEntry(docEntryUUID).setPatientId(docEntryFixes.getPatientId());
+	//		// prac setting code - Kann wahrscheinlich einfach auf "General Medicine" gesetzt werden
+	//		txnData.getDocumentEntry(docEntryUUID).setPracticeSettingCode(docEntryFixes.getPracticeSettingCode());
+	//		// type code - Typ des Dokuments. Hier kann der Type Code des CDA Dokuments verwendet werden.
+	//		txnData.getDocumentEntry(docEntryUUID).setTypeCode(docEntryFixes.getTypeCode());
+	//		// set uniqueID
+	//		// say that you are assigned an organizational oid of "1.2.3.4"
+	//		// added length limit for NIST registry of 64
+	//		txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
+	//		logger.debug("Done setting documentEntry metadata for: " +txnData.getDocumentEntry(docEntryUUID).toString());
+	//		txnData.saveMetadataToFile("C:/temp/metadata2.xml");
+	//
+	//		// add submission set metadata
+	//		logger.debug("Applying Submission Set Metadata to the Submission.");
+	//		File submissionSetFile = new File(absResFolder+"./resources/sample_files/test2/submissionSet.xml");
+	//		fis = new FileInputStream(submissionSetFile);
+	//		txnData.loadSubmissionSet(fis);
+	//		fis.close();
+	//		txnData.saveMetadataToFile("C:/temp/metadata3.xml");
+	//		
+	//		// set uniqueID
+	//		// say that you are assigned an organizational oid of TestConfiguration.ORGANIZATIONAL_OID
+	//		// added length limit for NIST registry of 64
+	//		txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
+	//		// set submission time
+	//		txnData.getSubmissionSet().setSubmissionTime(DateUtil.nowAsTS().getValue());
+	//		txnData.saveMetadataToFile("C:/temp/metadata.xml");
+	//		
+	//		// set submission set source id
+	//		txnData.getSubmissionSet().setSourceId(organizationalId);
+	//		
+	//		logger.debug("Submitting Document.");
+	//		XDSResponseType response = source.submit(txnData);
+	//		logger.debug("Response status: " + response.getStatus().getName());
+	//		if(response.getErrorList() != null){
+	//			if(response.getErrorList().getError() != null){
+	//				logger.debug("Returned " + response.getErrorList().getError().size() + " errors.");
+	//			}
+	//		}
+	//		logger.debug("DONE MESA 12049 with metadata extraction from CDA");
+	//		
+	//		
+	//		//logger.debug("Submitting Document.");
+	//		//XDSResponseType response1 = source.submit(txnData);
+	//		return null;
+	//		
+	//		//return sendCdaDocument(metadata, destination, doc);
+	//	}
+
 	public DocumentSourceClient(String organizationalId, String repositoryUri, boolean auditorEnabled, String log4jConfigPath) throws Exception {
 		txnData = new SubmitTransactionData();
 		this.organizationalId = organizationalId;
@@ -264,28 +269,12 @@ public class DocumentSourceClient {
 		source = new B_Source(repositoryURI);
 		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
 	}
-	
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws IOException, MetadataExtractionException, SubmitTransactionCompositionException {
+
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
 		XDSDocument clinicalDocument = new XDSDocumentFromFile(desc,filePath);
 		String docEntryUUID = txnData.addDocument(clinicalDocument);
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
-		
-		//Automatically create the formatCode of the Document according to the DocumentDescriptor
-		//TODO Später: Kann bei CDA Dokumenten gemacht werden, indem die TemplateIDs mit dieser List (als Enum) verglichen werden: http://wiki.ihe.net/index.php?title=IHE_Format_Codes
-		Code formatCode;
-//		if (DocumentDescriptor.CDA_R2.equals(desc)) {
-//			 formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", );
-//			docMetadata.setFormatCode();
-//		}
-//		docMetadata.getMdhtDocumentEntryType().setFormatCode(desc.toString());
-		if (DocumentDescriptor.PDF.equals(desc)) {
-			formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
-			docMetadata.getMdhtDocumentEntryType().setFormatCode(XdsUtil.convertCode(formatCode));
-		}
-		
-		//Automatically set the MimeType of the Document
-		docMetadata.setMimeType(desc.getMimeType());
-		
+
 		return docMetadata;
 	}
 
@@ -407,22 +396,22 @@ public class DocumentSourceClient {
 		logger.debug("Adding input document, and metadata.");
 		XDSDocument document = new XDSDocumentFromFile(docDesc, filePath);
 		txnData.addDocument(document);
-		
+
 		//From Bytestream
-//		ByteArrayOutputStream baos = doc.getOutputStream();
-//		XDSDocument clinicalDocument = new XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
-		
+		//		ByteArrayOutputStream baos = doc.getOutputStream();
+		//		XDSDocument clinicalDocument = new XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
+
 		//From File
 		XDSDocument clinicalDocument = new XDSDocumentFromFile(docDesc,filePath);
 		String docEntryUUID = txnData.addDocument(clinicalDocument);
-		
+
 		txnData.saveMetadataToFile("C:/temp/demoVACDXDSMetadataExtractedPDF.xml");
-		
+
 		//txnData.getDocumentEntry(docEntryUUID).
-		
+
 		//Metadata by object creation
 		//CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		
+
 		return null;
 	}
 
@@ -466,15 +455,96 @@ public class DocumentSourceClient {
 			throws Exception {
 		return false;
 	}
+	
+	private void generateMissingDocEntryAttributes(String docEntryUuid) throws Exception {
+
+		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
+		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
+		
+		//Automatically create the formatCode of the Document according to the DocumentDescriptor
+		//TODO Später: Kann bei CDA Dokumenten gemacht werden, indem die TemplateIDs mit dieser List (als Enum) verglichen werden: http://wiki.ihe.net/index.php?title=IHE_Format_Codes
+		//				if (DocumentDescriptor.CDA_R2.equals(desc)) {
+		//					 formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", );
+		//					docMetadata.setFormatCode();
+		//				}
+		//				docMetadata.getMdhtDocumentEntryType().setFormatCode(desc.toString());
+		if (DocumentDescriptor.PDF.equals(desc)) {
+			Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
+			docMetadata.getMdhtDocumentEntryType().setFormatCode(XdsUtil.convertCode(formatCode));
+		}
+		
+		//TODO Später: Wenn das Dokument ein CDA Dokument und zudem eine bekannte Instanz (z.B. VACD) ist, dann kann der ContentTypeCode automatisch abgeleitet werden
+		//If the given doc is a CDA Doc load it for further processing
+		if (desc.equals(DocumentDescriptor.CDA_R2)) {
+			ClinicalDocument cda = CDAUtil.load(txnData.getDocument(docEntryUuid).getStream());
+			
+			//Set the Document Code as SubmissionSet ContentType -- Affinity Domain specific!
+			
+			//Set the Document Code as 
+			if (cda.getCode()!=null) {
+				Code code = new Code(cda.getCode());
+				docMetadata.setTypeCode(code);
+			}
+			
+//			if (cda instanceof VACD) {
+//				
+//			}
+		}
+
+		//Derive MimeType from DocumentDescriptor
+		if (docMetadata.getMdhtDocumentEntryType().getMimeType()==null) {
+			docMetadata.setMimeType(desc.getMimeType());
+		}
+		
+		//Generate the UUID
+		if (docMetadata.getMdhtDocumentEntryType().getUniqueId()==null) {
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId,64));
+		}
+		
+		//Set ConfidentiallyCode to Normal ("N");
+		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty() || docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()==null) {
+			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
+			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25", "N", null, null));
+		}
+		
+		//Generate Creation Time with the current time
+		if (docMetadata.getMdhtDocumentEntryType().getCreationTime() == null) {
+			docMetadata.setCreationTime(DateUtil.nowAsDate());
+		}
+		
+		//Use the TypeCode for ClassCode
+		if (docMetadata.getMdhtDocumentEntryType().getClassCode() == null && docMetadata.getMdhtDocumentEntryType().getTypeCode() != null){
+			docMetadata.getMdhtDocumentEntryType().setClassCode(EcoreUtil.copy(docMetadata.getMdhtDocumentEntryType().getTypeCode()));
+		}
+	}
 
 	public XDSResponseType submit() throws Exception {
-		//Create SubmissionSet
-		SubmissionSetType subSet = MetadataFactory.eINSTANCE.createSubmissionSetType();
+		//generate missing information for all documents
+		for (XDSDocument xdsDoc : txnData.getDocList()) {
+			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
+		}
 		
+		//Create SubmissionSet
+		SubmissionSetType subSet = txnData.getSubmissionSet();
+		subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId),64));
+		
+		// set submission set source id
+		subSet.setSourceId(organizationalId);
+
+		// set submission time
+		subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+		txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
 		//Use the PatientId of the first Document for the SubmissionSet/patientId
 		String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
-		subSet.setPatientId(EcoreUtil.copy(txnData.getDocumentEntry(uuid).getPatientId()));
-		
+		//CX testCx = XdsUtil.createCx("TESTAuthority", "TestId");
+		//subSet.setPatientId(testCx);
+		CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
+		subSet.setPatientId(EcoreUtil.copy(testCx));
+
+		// set ContentTypeCode
+		subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note" , null));
+
 		txnData.saveMetadataToFile("C:/temp/meta.xml");
 		return source.submit(txnData);
 	}
@@ -593,84 +663,84 @@ public class DocumentSourceClient {
 	//		
 	//		//return sendCdaDocument(metadata, destination, doc);
 	//	}
-		
-		/**
-		 * TEST 2: XDS.b Submission test with automatic metadata extraction from CDA R2
-		 * Data for this test is in ./resources/sample_files/test2/
-		 * <br>
-		 * Corresponds to Connectathon 2008-2009 Test: 12049
-		 * <br>
-		 * http://ihewiki.wustl.edu/wiki/index.php/XDS_Test_Kit_2007-2008_Test_Descriptions#12049
-		 * @throws Throwable
-		 */
-		public void nistTest(String organizationalOid, String filePath) throws Throwable {
-			logger.debug("BEGIN MESA 12049 with metadata extraction from CDA");
-	
-			SubmitTransactionData txnData = new SubmitTransactionData();
-			// invoke transformation for metadata extraction on test file
-			logger.debug("Adding input document, and metadata.");
-			XDSDocument clinicalDocument = new XDSDocumentFromFile(DocumentDescriptor.CDA_R2,filePath);
-			String docEntryUUID = txnData.addDocument(clinicalDocument);
-			
-			txnData.saveMetadataToFile("C:/temp/metadata1.xml");
-			
-			logger.debug("Supplementing Document Entry metadata");
-			File docEntryFile = new File (absResFolder+"./resources/sample_files/test2/docEntry.xml");
-			FileInputStream fis = new FileInputStream(docEntryFile);
-			InputStreamDocumentEntryExtractor deExtractor = new InputStreamDocumentEntryExtractor(fis);
-			DocumentEntryType docEntryFixes = deExtractor.extract();
-			fis.close();
-			
-			// set classCode - Ersetzt den Loinc Code durch eine ConnectAthon Beschreibung  
-			txnData.getDocumentEntry(docEntryUUID).setClassCode(docEntryFixes.getClassCode());
-			//re-set conf code - Ergänzt den DisplayName
-			txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().clear();
-			txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().add(docEntryFixes.getConfidentialityCode().get(0));
-			// format code - Ist nach CDAExtraction nicht gesetzt. Kann fest gesetzt werden (in diesem Fall auf CDA R2)
-			txnData.getDocumentEntry(docEntryUUID).setFormatCode(docEntryFixes.getFormatCode());
-			// healthcare facilty code  - Ist nach CDAExtraction nicht gesetzt. 
-			txnData.getDocumentEntry(docEntryUUID).setHealthCareFacilityTypeCode(docEntryFixes.getHealthCareFacilityTypeCode());
-			// patient Id - Kommt von Oliver
-			txnData.getDocumentEntry(docEntryUUID).setPatientId(docEntryFixes.getPatientId());
-			// prac setting code - Kann wahrscheinlich einfach auf "General Medicine" gesetzt werden
-			txnData.getDocumentEntry(docEntryUUID).setPracticeSettingCode(docEntryFixes.getPracticeSettingCode());
-			// type code - Typ des Dokuments. Hier kann der Type Code des CDA Dokuments verwendet werden.
-			txnData.getDocumentEntry(docEntryUUID).setTypeCode(docEntryFixes.getTypeCode());
-			// set uniqueID
-			// say that you are assigned an organizational oid of "1.2.3.4"
-			// added length limit for NIST registry of 64
-			txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(organizationalOid,64));
-			logger.debug("Done setting documentEntry metadata for: " +txnData.getDocumentEntry(docEntryUUID).toString());
-			txnData.saveMetadataToFile("C:/temp/metadata2.xml");
-	
-			// add submission set metadata
-			logger.debug("Applying Submission Set Metadata to the Submission.");
-			File submissionSetFile = new File(absResFolder+"./resources/sample_files/test2/submissionSet.xml");
-			fis = new FileInputStream(submissionSetFile);
-			txnData.loadSubmissionSet(fis);
-			fis.close();
-			txnData.saveMetadataToFile("C:/temp/metadata3.xml");
-			
-			// set uniqueID
-			// say that you are assigned an organizational oid of TestConfiguration.ORGANIZATIONAL_OID
-			// added length limit for NIST registry of 64
-			txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(organizationalOid,64));
-			// set submission time
-			txnData.getSubmissionSet().setSubmissionTime(DateUtil.nowAsTS().getValue());
-			txnData.saveMetadataToFile("C:/temp/metadata.xml");
-			
-			// set submission set source id
-			txnData.getSubmissionSet().setSourceId(organizationalOid);
-			
-			logger.debug("Submitting Document.");
-			XDSResponseType response = source.submit(txnData);
-			logger.debug("Response status: " + response.getStatus().getName());
-			if(response.getErrorList() != null){
-				if(response.getErrorList().getError() != null){
-					logger.debug("Returned " + response.getErrorList().getError().size() + " errors.");
-				}
+
+	/**
+	 * TEST 2: XDS.b Submission test with automatic metadata extraction from CDA R2
+	 * Data for this test is in ./resources/sample_files/test2/
+	 * <br>
+	 * Corresponds to Connectathon 2008-2009 Test: 12049
+	 * <br>
+	 * http://ihewiki.wustl.edu/wiki/index.php/XDS_Test_Kit_2007-2008_Test_Descriptions#12049
+	 * @throws Throwable
+	 */
+	public void nistTest(String organizationalOid, String filePath) throws Throwable {
+		logger.debug("BEGIN MESA 12049 with metadata extraction from CDA");
+
+		SubmitTransactionData txnData = new SubmitTransactionData();
+		// invoke transformation for metadata extraction on test file
+		logger.debug("Adding input document, and metadata.");
+		XDSDocument clinicalDocument = new XDSDocumentFromFile(DocumentDescriptor.CDA_R2,filePath);
+		String docEntryUUID = txnData.addDocument(clinicalDocument);
+
+		txnData.saveMetadataToFile("C:/temp/metadata1.xml");
+
+		logger.debug("Supplementing Document Entry metadata");
+		File docEntryFile = new File (absResFolder+"./resources/sample_files/test2/docEntry.xml");
+		FileInputStream fis = new FileInputStream(docEntryFile);
+		InputStreamDocumentEntryExtractor deExtractor = new InputStreamDocumentEntryExtractor(fis);
+		DocumentEntryType docEntryFixes = deExtractor.extract();
+		fis.close();
+
+		// set classCode - Ersetzt den Loinc Code durch eine ConnectAthon Beschreibung  
+		txnData.getDocumentEntry(docEntryUUID).setClassCode(docEntryFixes.getClassCode());
+		//re-set conf code - Ergänzt den DisplayName
+		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().clear();
+		txnData.getDocumentEntry(docEntryUUID).getConfidentialityCode().add(docEntryFixes.getConfidentialityCode().get(0));
+		// format code - Ist nach CDAExtraction nicht gesetzt. Kann fest gesetzt werden (in diesem Fall auf CDA R2)
+		txnData.getDocumentEntry(docEntryUUID).setFormatCode(docEntryFixes.getFormatCode());
+		// healthcare facilty code  - Ist nach CDAExtraction nicht gesetzt. 
+		txnData.getDocumentEntry(docEntryUUID).setHealthCareFacilityTypeCode(docEntryFixes.getHealthCareFacilityTypeCode());
+		// patient Id - Kommt von Oliver
+		txnData.getDocumentEntry(docEntryUUID).setPatientId(docEntryFixes.getPatientId());
+		// prac setting code - Kann wahrscheinlich einfach auf "General Medicine" gesetzt werden
+		txnData.getDocumentEntry(docEntryUUID).setPracticeSettingCode(docEntryFixes.getPracticeSettingCode());
+		// type code - Typ des Dokuments. Hier kann der Type Code des CDA Dokuments verwendet werden.
+		txnData.getDocumentEntry(docEntryUUID).setTypeCode(docEntryFixes.getTypeCode());
+		// set uniqueID
+		// say that you are assigned an organizational oid of "1.2.3.4"
+		// added length limit for NIST registry of 64
+		txnData.getDocumentEntry(docEntryUUID).setUniqueId(OID.createOIDGivenRoot(organizationalOid,64));
+		logger.debug("Done setting documentEntry metadata for: " +txnData.getDocumentEntry(docEntryUUID).toString());
+		txnData.saveMetadataToFile("C:/temp/metadata2.xml");
+
+		// add submission set metadata
+		logger.debug("Applying Submission Set Metadata to the Submission.");
+		File submissionSetFile = new File(absResFolder+"./resources/sample_files/test2/submissionSet.xml");
+		fis = new FileInputStream(submissionSetFile);
+		txnData.loadSubmissionSet(fis);
+		fis.close();
+		txnData.saveMetadataToFile("C:/temp/metadata3.xml");
+
+		// set uniqueID
+		// say that you are assigned an organizational oid of TestConfiguration.ORGANIZATIONAL_OID
+		// added length limit for NIST registry of 64
+		txnData.getSubmissionSet().setUniqueId(OID.createOIDGivenRoot(organizationalOid,64));
+		// set submission time
+		txnData.getSubmissionSet().setSubmissionTime(DateUtil.nowAsTS().getValue());
+		txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+		// set submission set source id
+		txnData.getSubmissionSet().setSourceId(organizationalOid);
+
+		logger.debug("Submitting Document.");
+		XDSResponseType response = source.submit(txnData);
+		logger.debug("Response status: " + response.getStatus().getName());
+		if(response.getErrorList() != null){
+			if(response.getErrorList().getError() != null){
+				logger.debug("Returned " + response.getErrorList().getError().size() + " errors.");
 			}
-			logger.debug("DONE MESA 12049 with metadata extraction from CDA");
 		}
+		logger.debug("DONE MESA 12049 with metadata extraction from CDA");
+	}
 
 }

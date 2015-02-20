@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 public class Identificator {
 	
 	public static Identificator convertToIdentificator(Code code) {
-		Identificator id = new Identificator(code.getOid(), code.getCode());
+		Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
 		return id;
 	}
 

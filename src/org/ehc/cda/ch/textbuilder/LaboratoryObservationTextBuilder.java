@@ -61,7 +61,7 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		}
 		addCell("");
 		addCell(laboratoryObservation.getCode().getCode());
-		addCell(laboratoryObservation.getCode().getOid());
+		addCell(laboratoryObservation.getCode().getCodeSystem());
 		addCell("");
 		append("</tr>");
 	}

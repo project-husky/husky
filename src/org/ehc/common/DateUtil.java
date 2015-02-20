@@ -260,6 +260,10 @@ public class DateUtil {
 	public static TS nowAsTS() {
 		return ts(new Date());
 	}
+	
+	public static Date nowAsDate() {
+		return new Date();
+	}
 
 	public static Date parseDate(TS timeStamp) {
 		String value = timeStamp.getValue();
@@ -331,5 +335,25 @@ public class DateUtil {
 		TS timestamp = DatatypesFactory.eINSTANCE.createTS();
 		timestamp.setValue(DateUtil.formatDate(date));
 		return timestamp;
+	}
+
+	public static Date date(String dateSt) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+			return sdf.parse(dateSt);
+		} catch (ParseException e) {
+			// convert to RuntimeException
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	public static Date dateAndTime(String dateSt) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			return sdf.parse(dateSt);
+		} catch (ParseException e) {
+			// convert to RuntimeException
+			throw new IllegalArgumentException(e);
+		}
 	}
 }

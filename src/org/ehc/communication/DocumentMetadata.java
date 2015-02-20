@@ -149,7 +149,7 @@ public class DocumentMetadata {
 	 * @param dateOfDocumentCreation
 	 *          das dateOfDocumentCreation Objekt welches gesetzt wird
 	 */
-	public void setDateOfDocumentCreation(Date dateAndTime) {
+	public void setCreationTime(Date dateAndTime) {
 		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
 		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
 	}
@@ -166,8 +166,15 @@ public class DocumentMetadata {
 	public void setPatient(Patient patient) {
 		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
 		
+		//Source Patient Info (Adress etc.)
 		SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
 		xDoc.setSourcePatientInfo(spi);
+		
+		//PatientID
+		//xDoc.setPatientId(extractor.extractPatientId());
+		if (patient.getIds() != null) {
+			this.setPatientId(patient.getIds().get(0));
+		}
 	}
 	
 	public void setPatientId(Identificator id) {
@@ -181,6 +188,10 @@ public class DocumentMetadata {
 	
 	public void setSourcePatientId(Identificator id) {
 		xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
+	}
+	
+	public void setUniqueId(String id) {
+		xDoc.setUniqueId(id);
 	}
 	
 	/**

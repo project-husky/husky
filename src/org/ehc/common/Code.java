@@ -19,6 +19,7 @@
 package org.ehc.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehc.cda.ch.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -60,12 +61,12 @@ public class Code {
 	 * 
 	 * @param code
 	 *          Der eigentliche Code
-	 * @param oid
+	 * @param codeSystem
 	 *          Die OID des zugehörigen Codesystems
 	 */
-	public Code(ConvenienceUtilsEnums.KnownOID oid, String code)  {
+	public Code(CodeSystems codeSystem, String code)  {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		setOid(ConvenienceUtilsEnums.knownOID(oid));
+		setCodeSystem(codeSystem.getCodeSystemId());
 		setCode(code);
 	}
 
@@ -79,7 +80,7 @@ public class Code {
 	 */
 	public Code(String oid, String code)  {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		setOid(oid);
+		setCodeSystem(oid);
 		setCode(code);
 	}
 
@@ -95,7 +96,7 @@ public class Code {
 	}
 
 	public Code(Code code) {
-		this(code.getOid(),code.getCode(),code.getDisplayName());
+		this(code.getCodeSystem(),code.getCode(),code.getDisplayName());
 	}
 
 	public CD getCD() {
@@ -126,7 +127,7 @@ public class Code {
 	/**
 	 * @return das oid Objekt
 	 */
-	public String getOid() {
+	public String getCodeSystem() {
 		String codeStr = "";
 		if (mCD.getCodeSystem() == null) {
 			if (mCD.getNullFlavor() != null) {
@@ -154,7 +155,7 @@ public class Code {
 	/**
 	 * @param oid das oid Objekt welches gesetzt wird
 	 */
-	public void setOid(String oid) {
+	public void setCodeSystem(String oid) {
 		mCD.setCodeSystem(oid);
 	}
 }

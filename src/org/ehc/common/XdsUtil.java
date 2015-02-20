@@ -15,11 +15,13 @@ public class XdsUtil {
 		return ist;
 	}
 	
-	public static CodedMetadataType createCodedMetadata(String code, String displayName, String schemeName, String schemeUuid) {
+	public static CodedMetadataType createCodedMetadata(String schemeName, String code, String displayName, String schemeUuid) {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		
 		cmt.setCode(code);
-		cmt.setDisplayName(createInternationalString(displayName));
+		if (displayName != null) {
+			cmt.setDisplayName(createInternationalString(displayName));
+		}
 		if (schemeName != null) {
 			cmt.setSchemeName(schemeName);
 		}
@@ -31,7 +33,7 @@ public class XdsUtil {
 	}
 	
 	public static CodedMetadataType convertCode (Code code) {
-		return createCodedMetadata(code.getCode(), code.getDisplayName(), code.getOid(), null);		
+		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(), null);		
 	}
 	
 	public static CX createCx (String authorityId, String id) {

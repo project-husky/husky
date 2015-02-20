@@ -677,7 +677,7 @@ public class CdaChVacd extends CdaCh {
 			for (ProblemEntry problemEntry : problemConcernEntry.getAllergyIntolerances()) {
 				//Check if the problem is not unknown (leads to no reference, because there is no problem)
 				Code code = new Code (problemEntry.getCode());
-				if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				}
 				else {
@@ -700,7 +700,7 @@ public class CdaChVacd extends CdaCh {
 			for (ProblemEntry problemEntry : problemConcernEntry.getProblemEntries()) {
 				//Check if the problem is not unknown (leads to no reference, because there is no problem)
 				Code code = new Code (problemEntry.getCode());
-				if (code.getOid().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96") && code.getCode().equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				}
 				else {
