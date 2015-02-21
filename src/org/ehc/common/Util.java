@@ -559,6 +559,15 @@ public class Util {
 		}
 		return ad;
 	}
-
-
+	
+	public static II findII(EList<II> iis, II ii) {
+		for (II curII: iis) {
+			if (curII.getRoot().equals(ii.getRoot())) {
+				if (ii.getExtension() == null || curII.getExtension().equals(ii.getExtension())) {
+					return curII;
+				}
+			}
+		}
+		return null;
+	}
 }

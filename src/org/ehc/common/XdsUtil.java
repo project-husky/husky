@@ -5,6 +5,7 @@ import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 public class XdsUtil {
 	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString (String text) {
@@ -46,5 +47,9 @@ public class XdsUtil {
 	
 	public static CX convertIdentificator (Identificator id) {
 		return createCx(id.getRoot(), id.getExtension());
+	}
+	
+	public static CX convertII (II ii) {
+		return createCx(ii.getRoot(), ii.getExtension());
 	}
 }

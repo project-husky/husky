@@ -172,6 +172,7 @@ public class DocumentMetadata {
 		
 		//PatientID
 		//xDoc.setPatientId(extractor.extractPatientId());
+		
 		if (patient.getIds() != null) {
 			this.setPatientId(patient.getIds().get(0));
 		}
@@ -204,5 +205,9 @@ public class DocumentMetadata {
 	
 	public void setTypeCode(Code code) {
 		xDoc.setTypeCode(XdsUtil.convertCode(code));
+	}
+
+	public void setFormatCode(Code code) {
+		xDoc.setFormatCode(XdsUtil.convertCode(code));
 	}
 }

@@ -35,11 +35,15 @@ import org.ehc.communication.Response;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import javax.xml.datatype.DatatypeFactory;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.log4j.Logger;
@@ -54,6 +58,7 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromByteArray;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
+import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
@@ -271,8 +276,8 @@ public class DocumentSourceClient {
 	}
 
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
-		XDSDocument clinicalDocument = new XDSDocumentFromFile(desc,filePath);
-		String docEntryUUID = txnData.addDocument(clinicalDocument);
+		XDSDocument doc = new XDSDocumentFromFile(desc,filePath);
+		String docEntryUUID = txnData.addDocument(doc);
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
 
 		return docMetadata;
@@ -462,33 +467,14 @@ public class DocumentSourceClient {
 		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
 		
 		//Automatically create the formatCode of the Document according to the DocumentDescriptor
-		//TODO Später: Kann bei CDA Dokumenten gemacht werden, indem die TemplateIDs mit dieser List (als Enum) verglichen werden: http://wiki.ihe.net/index.php?title=IHE_Format_Codes
-		//				if (DocumentDescriptor.CDA_R2.equals(desc)) {
-		//					 formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", );
-		//					docMetadata.setFormatCode();
-		//				}
-		//				docMetadata.getMdhtDocumentEntryType().setFormatCode(desc.toString());
 		if (DocumentDescriptor.PDF.equals(desc)) {
 			Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
 			docMetadata.getMdhtDocumentEntryType().setFormatCode(XdsUtil.convertCode(formatCode));
 		}
-		
-		//TODO Später: Wenn das Dokument ein CDA Dokument und zudem eine bekannte Instanz (z.B. VACD) ist, dann kann der ContentTypeCode automatisch abgeleitet werden
+	
 		//If the given doc is a CDA Doc load it for further processing
 		if (desc.equals(DocumentDescriptor.CDA_R2)) {
-			ClinicalDocument cda = CDAUtil.load(txnData.getDocument(docEntryUuid).getStream());
-			
-			//Set the Document Code as SubmissionSet ContentType -- Affinity Domain specific!
-			
-			//Set the Document Code as 
-			if (cda.getCode()!=null) {
-				Code code = new Code(cda.getCode());
-				docMetadata.setTypeCode(code);
-			}
-			
-//			if (cda instanceof VACD) {
-//				
-//			}
+			generateMissingDocEntryAttributesCda(docEntryUuid);
 		}
 
 		//Derive MimeType from DocumentDescriptor
@@ -516,6 +502,48 @@ public class DocumentSourceClient {
 		if (docMetadata.getMdhtDocumentEntryType().getClassCode() == null && docMetadata.getMdhtDocumentEntryType().getTypeCode() != null){
 			docMetadata.getMdhtDocumentEntryType().setClassCode(EcoreUtil.copy(docMetadata.getMdhtDocumentEntryType().getTypeCode()));
 		}
+	}
+
+	private void generateMissingDocEntryAttributesCda(String docEntryUuid) throws Exception {
+		ClinicalDocument cda = CDAUtil.load(txnData.getDocument(docEntryUuid).getStream());
+		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
+		
+		//PatientId from recordTarget/patientRole
+		if (cda.getPatientRoles()!=null && docMetadata.getMdhtDocumentEntryType().getPatientId()==null) {
+			if (cda.getPatientRoles().get(0).getIds()!=null) {
+				docMetadata.getMdhtDocumentEntryType().setPatientId(XdsUtil.convertII(cda.getPatientRoles().get(0).getIds().get(0)));
+			}
+		}
+		
+		//TODO Später: Kann bei CDA Dokumenten gemacht werden, indem die TemplateIDs mit dieser Liste (als Enum) verglichen werden: http://wiki.ihe.net/index.php?title=IHE_Format_Codes
+		//Currently only mapping to CDA-CH-VACD
+		II medicalDocumentII = DatatypesFactory.eINSTANCE.createII("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2");
+		II ii = org.ehc.common.Util.findII(cda.getTemplateIds(), medicalDocumentII);
+		if (ii!=null) {
+			Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:pcc:ic:2009");
+			docMetadata.setFormatCode(formatCode);
+		}
+		
+		//Set the Document Code as SubmissionSet ContentType -- Affinity Domain specific!
+		
+		//Set the Document Code as TypeCode
+		if (cda.getCode()!=null) {
+			Code code = new Code(cda.getCode());
+			docMetadata.setTypeCode(code);
+		}
+		
+		//Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not a known Slot for the NIST Registry by deleting all authorTelecommunications
+		for (Object object: docMetadata.getMdhtDocumentEntryType().getAuthors()) {
+			AuthorType at = (AuthorType) object;
+			at.getAuthorTelecommunication().clear();
+		}
+		
+		//Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are to long for the registry (EXT part is larger than the allowed 16 characters)
+		docMetadata.setUniqueId(OID.createOIDGivenRoot(cda.getId().getRoot()));
+		
+//		if (cda instanceof VACD) {
+//			
+//		}
 	}
 
 	public XDSResponseType submit() throws Exception {
