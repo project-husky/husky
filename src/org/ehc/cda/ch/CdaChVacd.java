@@ -42,6 +42,8 @@ import org.ehc.common.Util;
 import org.ehc.common.ch.SectionsVACD;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Entry;
+import org.openhealthtools.mdht.uml.cda.Patient;
+import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -56,9 +58,15 @@ import org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -128,6 +136,35 @@ public class CdaChVacd extends CdaCh {
 		super(doc);
 		setDoc(doc);
 		query = new Query(this.doc);
+	}
+	
+	public void pseudonymization() {
+		for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
+			mPatientRole = getDoc().getPatientRoles().get(0);
+			Patient mPatient = mPatientRole.getPatient();
+			
+			//Name
+			mPatient.getNames().clear();
+			PN pn = DatatypesFactory.eINSTANCE.createPN();
+			pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+			mPatient.getNames().add(pn);
+			
+			//Street
+			for (AD ad : mPatientRole.getAddrs()) {
+				ad.getStreetAddressLines().clear();
+				ad.getStreetNames().clear();
+				ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+				adxp.setNullFlavor(NullFlavor.MSK);
+				ad.getStreetNames().add(adxp);
+			}
+		
+			//Phone
+			mPatientRole.getTelecoms().clear();
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+			mPatientRole.getTelecoms().add(tel);
+		}
+	 
 	}
 	
 	public void addActiveProblemConcern(ActiveProblemConcernEntry activeProblemConcern) {
