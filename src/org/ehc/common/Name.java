@@ -17,7 +17,6 @@
 package org.ehc.common;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -96,13 +95,13 @@ public class Name {
 		String givens = getGivenNames();
 		String families = getFamilyNames();
 		String suffixes = getSuffixes();
-		
+
 		ArrayList<String> nameList = new ArrayList<String>();
 		nameList.add(prefixes);
 		nameList.add(givens);
 		nameList.add(families);
 		nameList.add(suffixes);
-		
+
 		return Util.join(nameList, " ");
 	}
 

@@ -230,6 +230,26 @@ public class DateUtil {
 		return effectiveTime;
 	}
 
+	public static Date date(String dateSt) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+			return sdf.parse(dateSt);
+		} catch (ParseException e) {
+			// convert to RuntimeException
+			throw new IllegalArgumentException(e);
+		}
+	}
+
+	public static Date dateAndTime(String dateSt) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			return sdf.parse(dateSt);
+		} catch (ParseException e) {
+			// convert to RuntimeException
+			throw new IllegalArgumentException(e);
+		}
+	}
+
 	public static String format(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		return sdf.format(date);
@@ -257,12 +277,12 @@ public class DateUtil {
 		return sdf.format(date);
 	}
 
-	public static TS nowAsTS() {
-		return ts(new Date());
-	}
-	
 	public static Date nowAsDate() {
 		return new Date();
+	}
+
+	public static TS nowAsTS() {
+		return ts(new Date());
 	}
 
 	public static Date parseDate(TS timeStamp) {
@@ -335,25 +355,5 @@ public class DateUtil {
 		TS timestamp = DatatypesFactory.eINSTANCE.createTS();
 		timestamp.setValue(DateUtil.formatDate(date));
 		return timestamp;
-	}
-
-	public static Date date(String dateSt) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-			return sdf.parse(dateSt);
-		} catch (ParseException e) {
-			// convert to RuntimeException
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	public static Date dateAndTime(String dateSt) {
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-			return sdf.parse(dateSt);
-		} catch (ParseException e) {
-			// convert to RuntimeException
-			throw new IllegalArgumentException(e);
-		}
 	}
 }

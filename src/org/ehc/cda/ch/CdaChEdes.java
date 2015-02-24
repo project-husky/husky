@@ -18,7 +18,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 public class CdaChEdes extends CdaCh {
 
 	public static final String EDES_TITLE= "EDES";
-	
+
 	/**
 	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
 	 * <div class="fr"></div>

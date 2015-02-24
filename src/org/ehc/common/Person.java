@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
@@ -29,13 +28,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class Person {
 
 	org.openhealthtools.mdht.uml.cda.Person mPerson;
-	
-	public Person() {
-		
-	}
 
-	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
-		this.mPerson = person;
+	public Person() {
+
 	}
 
 	/**
@@ -50,6 +45,18 @@ public class Person {
 		mPerson.getNames().add(name.copyMdhtPn());
 	}
 
+	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
+		mPerson = person;
+	}
+
+	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
+		return EcoreUtil.copy(mPerson);
+	}
+
+	public org.openhealthtools.mdht.uml.cda.Person getMdhtPerson() {
+		return mPerson;
+	}
+
 	public Name getName() {
 		Name name = new Name(mPerson.getNames().get(0)); 
 		return name;
@@ -62,13 +69,5 @@ public class Person {
 			nl.add(name);
 		}
 		return nl;
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.Person getMdhtPerson() {
-		return mPerson;
-	}
-	
-	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
-		return EcoreUtil.copy(mPerson);
 	}
 }

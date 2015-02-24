@@ -21,8 +21,6 @@ package org.ehc.cda;
 import java.util.Date;
 
 import org.ehc.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehc.cda.ch.enums.StatusCode;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une

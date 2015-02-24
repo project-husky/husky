@@ -56,6 +56,10 @@ public class Code {
 		mCD = code;
 	}
 
+	public Code(Code code) {
+		this(code.getCodeSystem(),code.getCode(),code.getDisplayName());
+	}
+
 	/**
 	 * Erstellt einen neuen Wert
 	 * 
@@ -95,10 +99,6 @@ public class Code {
 		mCD.setCodeSystemName(codeSystemName);
 	}
 
-	public Code(Code code) {
-		this(code.getCodeSystem(),code.getCode(),code.getDisplayName());
-	}
-
 	public CD getCD() {
 		return EcoreUtil.copy(mCD);
 	}
@@ -120,10 +120,6 @@ public class Code {
 		return codeStr;
 	}
 
-	public String getDisplayName() {
-		return mCD.getDisplayName();
-	}
-
 	/**
 	 * @return das oid Objekt
 	 */
@@ -139,6 +135,10 @@ public class Code {
 			codeStr = mCD.getCodeSystem();
 		}
 		return codeStr;
+	}
+
+	public String getDisplayName() {
+		return mCD.getDisplayName();
 	}
 
 	public void setCD(CD cd) {

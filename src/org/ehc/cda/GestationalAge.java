@@ -27,11 +27,11 @@ public class GestationalAge {
 	II mIi;
 
 	public GestationalAge(CodedResultsSection codedResultsSection) {
-		this.crs = codedResultsSection;
+		crs = codedResultsSection;
 		mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection.getGestationalAgeWeeksSimpleObservations();
 		mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection.getGestationalAgeDaysSimpleObservations();
 	}
-	
+
 	public GestationalAge (int days) {
 		this(days/7, days%7);
 	}
@@ -43,23 +43,35 @@ public class GestationalAge {
 		mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
 		crs.addObservation(mWeeks);
 		crs.addObservation(mDays);
-		
+
 		//Create Id
 		mIi = Util.createUuidVacdIdentificator(null);
-		
+
 		//Set payload
 		setWeeksOfWeeksAndDays(weeks);
 		setDaysOfWeeksAndDays(weeksDays);
-		
+
 		crs.addProcedure(createEmptyProcedureEntry());
 	}
-	
+
+	public CodedResultsSection copyMdhtCodedResultsSection() {
+		return EcoreUtil.copy(crs);
+	}
+
+	public GestationalAgeDaysSimpleObservation copyMdhtGestationalAgeDaysObservation() {
+		return EcoreUtil.copy(mDays);
+	}
+
+	public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
+		return EcoreUtil.copy(mWeeks);
+	}
+
 	private ProcedureEntry createEmptyProcedureEntry() {
 		//Create and add an empty procedureEntry
 		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE.createProcedureEntryProcedureActivityProcedure().init();
 		pe.getIds().add(Util.createUuidVacd(null));
 		pe.setCode(Util.createCodeNullFlavor());
-		
+
 		//Create NullFlavor Reference
 		ED text = DatatypesFactory.eINSTANCE.createED();
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -70,6 +82,59 @@ public class GestationalAge {
 		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 		pe.setStatusCode(StatusCode.COMPLETED.getCS());
 		return pe;
+	}	
+
+	public int getAboluteDays () {
+		return (getWeeksOfWeeksAndDays()*7)+getDaysOfWeeksAndDays();
+	}
+
+	public int getDaysOfWeeksAndDays() {
+		for (ANY any: mDays.getValues()){
+			PQ pq = (PQ) any;
+			if (pq.getUnit().equals("d")) {
+				return pq.getValue().intValue();
+			}
+		}
+		return 0;
+	}
+
+	public String getGestationalAgeText() {
+		String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
+		return gestationalText;
+	}
+
+	public CodedResultsSection getMdhtCodedResultsSection() {
+		return crs;
+	}
+
+	public GestationalAgeDaysSimpleObservation getMdhtGestationalAgeDaysObservation() {
+		return mDays;
+	}
+
+	public GestationalAgeWeeksSimpleObservation getMdhtGestationalAgeWeeksObservation() {
+		return mWeeks;
+	}
+
+	public int getWeeksOfWeeksAndDays() {
+		for (ANY any: mWeeks.getValues()){
+			PQ pq = (PQ) any;
+			if (pq.getUnit().equals("wk")) {
+				return pq.getValue().intValue();
+			}
+		}
+		return 0;
+	}
+
+	public void setAsboluteDays (int days) {
+		setWeeksOfWeeksAndDays(days/7);
+		setDaysOfWeeksAndDays(days%7);
+	}
+
+	public void setDaysOfWeeksAndDays(int days) {
+		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
+		mDays.getValues().add(mDaysValue);
+		mDays.getIds().add(EcoreUtil.copy(mIi));
+		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 	}
 
 	public void setWeeksOfWeeksAndDays(int weeks) {
@@ -80,69 +145,4 @@ public class GestationalAge {
 		mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 	}
 
-	public void setDaysOfWeeksAndDays(int days) {
-		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
-		mDays.getValues().add(mDaysValue);
-		mDays.getIds().add(EcoreUtil.copy(mIi));
-		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	}
-	
-	public int getWeeksOfWeeksAndDays() {
-		for (ANY any: mWeeks.getValues()){
-			PQ pq = (PQ) any;
-			if (pq.getUnit().equals("wk")) {
-				return pq.getValue().intValue();
-			}
-		}
-		return 0;
-	}	
-	
-	public int getDaysOfWeeksAndDays() {
-		for (ANY any: mDays.getValues()){
-			PQ pq = (PQ) any;
-			if (pq.getUnit().equals("d")) {
-				return pq.getValue().intValue();
-			}
-		}
-		return 0;
-	}
-	
-	public int getAboluteDays () {
-		return (getWeeksOfWeeksAndDays()*7)+getDaysOfWeeksAndDays();
-	}
-	
-	public void setAsboluteDays (int days) {
-		setWeeksOfWeeksAndDays(days/7);
-		setDaysOfWeeksAndDays(days%7);
-	}
-	
-	public String getGestationalAgeText() {
-		String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
-		return gestationalText;
-	}
-
-	public GestationalAgeWeeksSimpleObservation getMdhtGestationalAgeWeeksObservation() {
-		return mWeeks;
-	}
-	
-	public GestationalAgeDaysSimpleObservation getMdhtGestationalAgeDaysObservation() {
-		return mDays;
-	}
-	
-	public CodedResultsSection getMdhtCodedResultsSection() {
-		return crs;
-	}
-	
-	public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
-		return EcoreUtil.copy(mWeeks);
-	}
-	
-	public GestationalAgeDaysSimpleObservation copyMdhtGestationalAgeDaysObservation() {
-		return EcoreUtil.copy(mDays);
-	}
-	
-	public CodedResultsSection copyMdhtCodedResultsSection() {
-		return EcoreUtil.copy(crs);
-	}
-	
 }

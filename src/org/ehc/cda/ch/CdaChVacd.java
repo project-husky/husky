@@ -96,7 +96,7 @@ public class CdaChVacd extends CdaCh {
 		}
 		query = new Query(doc);
 	}
-	
+
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 *
@@ -110,7 +110,7 @@ public class CdaChVacd extends CdaCh {
 		setProcessingInstructions(null);
 		addImmunization(immunization);
 	}
-	
+
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 *
@@ -137,7 +137,7 @@ public class CdaChVacd extends CdaCh {
 		setDoc(doc);
 		query = new Query(this.doc);
 	}
-	
+
 	public void pseudonymization() {
 		for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
 			mPatientRole = getDoc().getPatientRoles().get(0);
@@ -192,62 +192,62 @@ public class CdaChVacd extends CdaCh {
 		}
 	}
 
-//	/**
-//	 * Fügt ein Leiden hinzu.
-//	 *
-//	 * @param problemConcern Das Leiden
-//	 */
-//	public void addActiveProblemConcern(org.ehc.cda.ActiveProblemConcernEntry problemConcern) {
-//
-//		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
-//		ActiveProblemConcernTextBuilder tb;
-//		StrucDocText sectionTextStrucDoc;
-//		String activeProblemsSectionText;
-//
-//		activeProblemsSection = getDoc().getActiveProblemsSection();
-//		if (activeProblemsSection == null) {
-//			activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-//			activeProblemsSection.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitleDe()));
-//			doc.addSection(activeProblemsSection);
-//		}
-//
-//		// Update existing Entries with the reference to the CDA level 1 text and create the level 1
-//		// text.
-//		activeProblemsSectionText =
-//				Util.extractStringFromNonQuotedStrucDocText(activeProblemsSection.getText());
-//		ArrayList<ActiveProblemConcernEntry> problemConcernEntries = getActiveProblemConcerns();
-//		tb =
-//				new ActiveProblemConcernTextBuilder(problemConcernEntries, problemConcern,
-//						activeProblemsSectionText);
-//		//problemConcern = tb.getProblemConcernEntry();
-//
-//		// Update the section text.
-//		// This is a workaround for the following problem:
-//		// - The sectionText can only be created once with the createSectionText Method
-//		// - The StrucDocText Object can´t create text with xml-elements inside. These will be quoted.
-//		// The Workaround crates a special text object, which can´t be read by the getText Method. So
-//		// the current state of the section text is stored in the activeProblemSectionText field.
-//		activeProblemsSectionText = tb.getSectionText();
-//		sectionTextStrucDoc = Util.createNonQotedStrucDocText(activeProblemsSectionText);
-//		activeProblemsSection.setText(sectionTextStrucDoc);
-//
-//		// insert the values which are special for VACD Document
-//		problemConcern.copyMdhtProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
-//
-//		// Add the code for "Komplikations- oder Expositionsrisiken"
-//		CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
-//		komplikationsExpositionsrisikoCode.setCodeSystem("2.16.840.1.113883.6.96");
-//		komplikationsExpositionsrisikoCode.setCode("55607006");
-//		komplikationsExpositionsrisikoCode.setCodeSystemName("SNOMED CT");
-//		komplikationsExpositionsrisikoCode.setDisplayName("Problem");
-//		problemConcern.getMdhtProblemConcernEntry().getProblemEntries().get(0).setCode(komplikationsExpositionsrisikoCode);
-//
-//		// create a copy of the given object and its sub-objects
-//		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
-//				EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
-//		activeProblemsSection.addAct(problemConcernEntryMdht);
-//		updateProblemConcernReferences(activeProblemsSection.getActs(), SectionsVACD.ACTIVE_PROBLEMS);
-//	}
+	//	/**
+	//	 * Fügt ein Leiden hinzu.
+	//	 *
+	//	 * @param problemConcern Das Leiden
+	//	 */
+	//	public void addActiveProblemConcern(org.ehc.cda.ActiveProblemConcernEntry problemConcern) {
+	//
+	//		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
+	//		ActiveProblemConcernTextBuilder tb;
+	//		StrucDocText sectionTextStrucDoc;
+	//		String activeProblemsSectionText;
+	//
+	//		activeProblemsSection = getDoc().getActiveProblemsSection();
+	//		if (activeProblemsSection == null) {
+	//			activeProblemsSection = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
+	//			activeProblemsSection.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitleDe()));
+	//			doc.addSection(activeProblemsSection);
+	//		}
+	//
+	//		// Update existing Entries with the reference to the CDA level 1 text and create the level 1
+	//		// text.
+	//		activeProblemsSectionText =
+	//				Util.extractStringFromNonQuotedStrucDocText(activeProblemsSection.getText());
+	//		ArrayList<ActiveProblemConcernEntry> problemConcernEntries = getActiveProblemConcerns();
+	//		tb =
+	//				new ActiveProblemConcernTextBuilder(problemConcernEntries, problemConcern,
+	//						activeProblemsSectionText);
+	//		//problemConcern = tb.getProblemConcernEntry();
+	//
+	//		// Update the section text.
+	//		// This is a workaround for the following problem:
+	//		// - The sectionText can only be created once with the createSectionText Method
+	//		// - The StrucDocText Object can´t create text with xml-elements inside. These will be quoted.
+	//		// The Workaround crates a special text object, which can´t be read by the getText Method. So
+	//		// the current state of the section text is stored in the activeProblemSectionText field.
+	//		activeProblemsSectionText = tb.getSectionText();
+	//		sectionTextStrucDoc = Util.createNonQotedStrucDocText(activeProblemsSectionText);
+	//		activeProblemsSection.setText(sectionTextStrucDoc);
+	//
+	//		// insert the values which are special for VACD Document
+	//		problemConcern.copyMdhtProblemConcernEntry().getIds().add(Util.ii("1.3.6.1.4.1.19376.1.5.3.1.4.5")); 
+	//
+	//		// Add the code for "Komplikations- oder Expositionsrisiken"
+	//		CD komplikationsExpositionsrisikoCode = DatatypesFactory.eINSTANCE.createCD();
+	//		komplikationsExpositionsrisikoCode.setCodeSystem("2.16.840.1.113883.6.96");
+	//		komplikationsExpositionsrisikoCode.setCode("55607006");
+	//		komplikationsExpositionsrisikoCode.setCodeSystemName("SNOMED CT");
+	//		komplikationsExpositionsrisikoCode.setDisplayName("Problem");
+	//		problemConcern.getMdhtProblemConcernEntry().getProblemEntries().get(0).setCode(komplikationsExpositionsrisikoCode);
+	//
+	//		// create a copy of the given object and its sub-objects
+	//		org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntryMdht =
+	//				EcoreUtil.copy(problemConcern.copyMdhtProblemConcernEntry());
+	//		activeProblemsSection.addAct(problemConcernEntryMdht);
+	//		updateProblemConcernReferences(activeProblemsSection.getActs(), SectionsVACD.ACTIVE_PROBLEMS);
+	//	}
 
 	public void addAllergyProblemConcern(AllergyConcern huenereinweissAllergieLeiden) {
 		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
@@ -305,7 +305,7 @@ public class CdaChVacd extends CdaCh {
 		//create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
 	}
-	
+
 	public void addImmunization(org.ehc.cda.Immunization immunization) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection;
 
@@ -326,7 +326,7 @@ public class CdaChVacd extends CdaCh {
 		//create the CDA level 1 text
 		immunizationSection.createStrucDocText(getImmunizationText());
 	}
-	
+
 	public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection immunizationRecommendationsSection;
 
@@ -458,9 +458,9 @@ public class CdaChVacd extends CdaCh {
 	private Section findRemarksSection() {
 		for (Section section : doc.getSections()) {
 			if (section.getCode()!=null) {
-			if (SectionsVACD.isRemarks(section.getCode().getCode())) {
-				return section;
-			}
+				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+					return section;
+				}
 			}
 		}
 		return null;
@@ -481,11 +481,11 @@ public class CdaChVacd extends CdaCh {
 		}
 		return problemConcernEntries;
 	}
-	
-//	public String getActiveProblemConcernText() {
-//		ActiveProblemConcernTextBuilder b = new ActiveProblemConcernTextBuilder((), SectionsVACD.ALLERGIES_REACTIONS);
-//		return b.toString();
-//	}
+
+	//	public String getActiveProblemConcernText() {
+	//		ActiveProblemConcernTextBuilder b = new ActiveProblemConcernTextBuilder((), SectionsVACD.ALLERGIES_REACTIONS);
+	//		return b.toString();
+	//	}
 
 	public String getActiveProblemConcernsText() {
 		ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
@@ -518,20 +518,20 @@ public class CdaChVacd extends CdaCh {
 		AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(getAllergyProblemConcerns(), SectionsVACD.ALLERGIES_REACTIONS);
 		return b.toString();
 	}
-	
 
-	
+
+
 	public String getComment() {
 		Section rs;
 		org.ehc.cda.Comment comment;
-		
+
 		//find the Section
 		rs = findRemarksSection();
 		if (rs==null) {
 			return null;
 		}
 		comment = new org.ehc.cda.Comment(rs.getText().getText());
-		
+
 		return comment.getText();
 	}
 
@@ -545,13 +545,13 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	public GestationalAge getGestationalAge() {
-		return new GestationalAge(this.getDoc().getCodedResultsSection());
+		return new GestationalAge(getDoc().getCodedResultsSection());
 	}
 
 	public String getGestationalAgeText() {
 		return getGestationalAge().getGestationalAgeText();
 	}
-	
+
 	/**
 	 * Liefert alle Impfempfehlungen im eVACDOC.
 	 *
@@ -572,7 +572,7 @@ public class CdaChVacd extends CdaCh {
 		}
 		return immunizations;
 	}
-	
+
 	private String getImmunizationRecommendationsText() {
 		ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(getImmunizationRecommendations());
 		return b.toString();
@@ -632,7 +632,7 @@ public class CdaChVacd extends CdaCh {
 		LaboratoryObservationTextBuilder b = new LaboratoryObservationTextBuilder(getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
 		return b.toString();
 	}
-	
+
 	public ArrayList<PastProblemConcern> getPastProblemConcernEntries() {
 		//Search for the right section 
 		Section hopis = getDoc().getHistoryOfPastIllnessSection();
@@ -648,7 +648,7 @@ public class CdaChVacd extends CdaCh {
 		}
 		return problemConcernEntries;
 	}
-	
+
 	public String getPastProblemConcernEntriesText() {
 		ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
 		//Convert from the specific PastProblemConcern Type to the more genearal PastProblemConcern
@@ -659,7 +659,7 @@ public class CdaChVacd extends CdaCh {
 		ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
-	
+
 	/**
 	 * Liefert alle Schwangerschaften im eVACDOC.
 	 *
@@ -690,7 +690,7 @@ public class CdaChVacd extends CdaCh {
 
 	public void setGestationalAge(GestationalAge gestationalAge) {
 		SimpleTextBuilder sb;
-	
+
 		//update the MDHT Object content references to CDA level 1 text
 		sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getGestationalAgeText());
 
@@ -700,9 +700,9 @@ public class CdaChVacd extends CdaCh {
 
 		//create the CDA level 1 text
 		gestationalAge.getMdhtCodedResultsSection().createStrucDocText(sb.toString());
-		
+
 		gestationalAge.getMdhtCodedResultsSection().setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitleDe()));
-		
+
 		doc.addSection(gestationalAge.copyMdhtCodedResultsSection());
 	}
 

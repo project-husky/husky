@@ -77,7 +77,7 @@ public abstract class CdaCh {
 		// Add the stylesheet processing instructions to the document root using featuremaputil
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
-		
+
 		// Set OID of the document
 		//TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
 		II docID = DatatypesFactory.eINSTANCE.createII();
@@ -96,7 +96,7 @@ public abstract class CdaCh {
 
 		// Set creation time of the document
 		doc.setEffectiveTime(DateUtil.nowAsTS());
-		
+
 		//Type ID
 		setTypeId();
 	}
@@ -122,13 +122,13 @@ public abstract class CdaCh {
 	public void addAuthenticator(org.ehc.common.Author authenticator) {
 		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
-		
+
 		auth.setAssignedEntity(entity);
 		entity.setAssignedPerson(authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
 		doc.getAuthenticators().add(auth);
 	}
-	
+
 	/**
 	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
 	 * 
@@ -138,7 +138,7 @@ public abstract class CdaCh {
 	public void addAuthenticator(Person authenticator) {
 		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
-		
+
 		auth.setAssignedEntity(entity);
 		entity.setAssignedPerson(authenticator.copyMdhtPerson());
 
@@ -169,7 +169,7 @@ public abstract class CdaCh {
 
 		enterer.setAssignedEntity(entity);
 		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
-		
+
 		doc.getDataEnterer().setAssignedEntity(entity);
 	}
 
@@ -182,7 +182,7 @@ public abstract class CdaCh {
 	public void addInsurance(Organization versicherung) {
 		addParticipant(versicherung, ParticipantType.Insurance);
 	}
-	
+
 	/**
 	 * Fügt dem CDA Dokument eine Partizipation hinzu
 	 * 
@@ -206,7 +206,7 @@ public abstract class CdaCh {
 		docOrganization = organization.getMdhtOrganization();
 		assEnt.setScopingOrganization(docOrganization);
 	}
-	
+
 	/**
 	 * Gibt den Autor des Dokuments zurück
 	 * 
@@ -217,7 +217,7 @@ public abstract class CdaCh {
 				doc.getAuthors().get(0));
 		return author;
 	}
-	
+
 	/**
 	 * Gibt alle Autoren des Dokuments zurück
 	 * 
@@ -257,7 +257,7 @@ public abstract class CdaCh {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gibt alle Versicherungen zurück
 	 * 
@@ -274,7 +274,7 @@ public abstract class CdaCh {
 		}
 		return organizations;
 	}
-	
+
 	/**
 	 * Gibt alle rechtliche Unterzeichner des Dokuments zurück
 	 * 
@@ -288,7 +288,17 @@ public abstract class CdaCh {
 		}
 		return persons;
 	}
-	
+
+	public ByteArrayOutputStream getOutputStream () {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			CDAUtil.save(doc, baos);
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return baos;
+	}
+
 	/**
 	 * Gibt alle Participants zurück
 	 * 
@@ -298,8 +308,8 @@ public abstract class CdaCh {
 	public ArrayList<Organization> getParticipants(Organization versicherung) {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
 		for (Participant1 part : doc.getParticipants()) {
-				Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
-				organizations.add(org);
+			Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
+			organizations.add(org);
 		}
 		return organizations;
 	}
@@ -328,16 +338,6 @@ public abstract class CdaCh {
 			e.printStackTrace();
 		}
 	}
-	
-	public ByteArrayOutputStream getOutputStream () {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try {
-			CDAUtil.save(doc, baos);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return baos;
-	}
 
 	/**
 	 * Speichert das CDA Dokument als XML Datei
@@ -360,7 +360,7 @@ public abstract class CdaCh {
 		// add the document root to the resource
 		docRoot.setClinicalDocument(doc);
 		resource.getContents().add(docRoot);
-		
+
 		// save resource to console
 		resource.save(oFile, null);
 	}
@@ -394,12 +394,12 @@ public abstract class CdaCh {
 		}
 		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
-	
+
 	public void setLanguageCode(LanguageCode language) {
 		// Set language of the document
 		doc.setLanguageCode(language.getCS());
 	}
-	
+
 	/**
 	 * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu
 	 * 
@@ -411,7 +411,7 @@ public abstract class CdaCh {
 		doc.setLegalAuthenticator(Util
 				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
 	}
-	
+
 	/**
 	 * Weist dem CDA Dokument den Patienten zu
 	 * 
@@ -427,8 +427,8 @@ public abstract class CdaCh {
 		if (stylesheet == null) {
 			stylesheet = "../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl";	
 		}
-			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-					"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
+		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
+				"xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
 	}
 
 	public void setTitle(String title) {
@@ -447,7 +447,7 @@ public abstract class CdaCh {
 	 *          Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
 	 *          menschlich Lesbare Darstellung referenziert werden soll.
 	 */
-	
+
 	public void setTypeId() {
 		// Set Type ID 
 		// Identifies the Type of the xml document

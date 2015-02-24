@@ -48,6 +48,13 @@ public class Value {
 		mValue = pq;
 	}
 
+	public Value(String codeSystemId, String string) {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(codeSystemId);
+		cd.setCode(string);
+		mValue = cd;
+	}
+
 	/**
 	 * Erstellt einen neuen Wert
 	 * 
@@ -60,13 +67,6 @@ public class Value {
 		this(DatatypesFactory.eINSTANCE.createPQ());
 		setPqValue(value);
 		setUcumUnit(unit);
-	}
-
-	public Value(String codeSystemId, String string) {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(codeSystemId);
-		cd.setCode(string);
-		this.mValue = cd;
 	}
 
 	public CD copyMdhtCode() {

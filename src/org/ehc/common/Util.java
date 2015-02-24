@@ -17,10 +17,8 @@
 package org.ehc.common;
 
 import java.io.IOException;
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -66,31 +64,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Util {
 
-	public static String join(ArrayList<String> nameList, String delimiter) {
-	    String string;
-	    StringBuilder builder;
-	    
-		if (nameList == null || nameList.isEmpty()) return "";
-	    Iterator<String> iter = nameList.iterator();
-	    string = iter.next();
-	    if (string.equals("")) {
-	    	builder = new StringBuilder(iter.next());
-	    }
-	    else {
-	    	builder = new StringBuilder(iter.next());
-	    }
-	    while( iter.hasNext() )
-	    {
-	    	string = iter.next();
-	    	if (string.equals("")) {
-	    	}
-	    	else {
-	    		builder.append(delimiter).append(string);
-	    	}
-	    }
-	    return builder.toString();
-	}
-	
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -113,6 +86,7 @@ public class Util {
 		}
 		return ad;
 	}
+
 	/**
 	 * Erzeugt eine Adresse
 	 * 
@@ -152,7 +126,6 @@ public class Util {
 		}
 		return ad;
 	}
-
 	public static CE createCENullFlavorNASK() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NASK);
@@ -215,15 +188,15 @@ public class Util {
 		return tel;
 	}
 
-	public static IVL_PQ createIVL_PQNullFlavorNASK() {
-		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		ivlpq.setNullFlavor(NullFlavor.NASK);
-		return ivlpq;
-	}
-	
 	public static IVL_PQ createIVL_PQNullFlavorNA() {
 		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NA);
+		return ivlpq;
+	}
+
+	public static IVL_PQ createIVL_PQNullFlavorNASK() {
+		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivlpq.setNullFlavor(NullFlavor.NASK);
 		return ivlpq;
 	}
 
@@ -334,8 +307,6 @@ public class Util {
 		return ii;
 	}
 
-
-
 	public static II createUuidVacdIdentificator(Identificator id) {
 		II ii;
 		if (id == null){
@@ -347,12 +318,25 @@ public class Util {
 		return ii;
 	}
 
+
+
 	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
 		StringBuilder sb = new StringBuilder();
 		if (strucDocText != null) {
 			sb = traverse2(strucDocText.getMixed(), sb);
 		}
 		return sb.toString();
+	}
+
+	public static II findII(EList<II> iis, II ii) {
+		for (II curII: iis) {
+			if (curII.getRoot().equals(ii.getRoot())) {
+				if (ii.getExtension() == null || curII.getExtension().equals(ii.getExtension())) {
+					return curII;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -428,6 +412,31 @@ public class Util {
 		II ii = ii(root);
 		ii.setExtension(extension);
 		return ii;
+	}
+
+	public static String join(ArrayList<String> nameList, String delimiter) {
+		String string;
+		StringBuilder builder;
+
+		if (nameList == null || nameList.isEmpty()) return "";
+		Iterator<String> iter = nameList.iterator();
+		string = iter.next();
+		if (string.equals("")) {
+			builder = new StringBuilder(iter.next());
+		}
+		else {
+			builder = new StringBuilder(iter.next());
+		}
+		while( iter.hasNext() )
+		{
+			string = iter.next();
+			if (string.equals("")) {
+			}
+			else {
+				builder.append(delimiter).append(string);
+			}
+		}
+		return builder.toString();
 	}
 
 	public static String joinEListStr(EList<ENXP> list) {
@@ -558,16 +567,5 @@ public class Util {
 			ad.addStreetAddressLine(addressline3);
 		}
 		return ad;
-	}
-	
-	public static II findII(EList<II> iis, II ii) {
-		for (II curII: iis) {
-			if (curII.getRoot().equals(ii.getRoot())) {
-				if (ii.getExtension() == null || curII.getExtension().equals(ii.getExtension())) {
-					return curII;
-				}
-			}
-		}
-		return null;
 	}
 }

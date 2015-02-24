@@ -27,7 +27,7 @@ public class Consumable {
 	protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
 		setMdhtConsumable(consumable);
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
@@ -36,7 +36,7 @@ public class Consumable {
 	public Consumable(String tradeNameOfVaccine) {
 		this(tradeNameOfVaccine, null);
 	}
-	
+
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
@@ -83,6 +83,10 @@ public class Consumable {
 		mMaterial.getCode().getTranslations().add(codedId.getCD());
 	}
 
+	public org.openhealthtools.mdht.uml.cda.Consumable copyMdhtConsumable() {
+		return EcoreUtil.copy(mConsumable);
+	}
+
 	/**
 	 * @return das codedId Objekt
 	 */
@@ -101,7 +105,7 @@ public class Consumable {
 		}
 		return null;
 	}
-	
+
 	public EList<CD> getManufacturedMaterialTranslations() {
 		return mMaterial.getCode().getTranslations();
 	}
@@ -122,25 +126,25 @@ public class Consumable {
 	public Code getWhoAtcCode() {
 
 		return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
-//		//Check if the code is nullFlavor
-//		Code code;
-//		if (mMaterial.getCode()!=null) {
-//			code = new Code (mMaterial.getCode());
-//			if (code.getOid().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
-//				return code;
-//			}
-//			else {
-//				for (CD codeTranslation : mMaterial.getCode().getTranslations()) {
-//					String codeTransStr = codeTranslation.getCodeSystem();
-//					if (codeTransStr.equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
-//						code = new Code(codeTranslation);
-//						return code;
-//					}
-//				}
-//				return code;
-//			}  
-//		}
-//		return null;
+		//		//Check if the code is nullFlavor
+		//		Code code;
+		//		if (mMaterial.getCode()!=null) {
+		//			code = new Code (mMaterial.getCode());
+		//			if (code.getOid().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
+		//				return code;
+		//			}
+		//			else {
+		//				for (CD codeTranslation : mMaterial.getCode().getTranslations()) {
+		//					String codeTransStr = codeTranslation.getCodeSystem();
+		//					if (codeTransStr.equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
+		//						code = new Code(codeTranslation);
+		//						return code;
+		//					}
+		//				}
+		//				return code;
+		//			}  
+		//		}
+		//		return null;
 	}
 
 	public void setManufacturedMaterialCode(Code codedId) {
@@ -187,9 +191,5 @@ public class Consumable {
 			ce.setNullFlavor(NullFlavor.UNK);
 		}
 		mMaterial.setCode(ce);
-	}
-
-	public org.openhealthtools.mdht.uml.cda.Consumable copyMdhtConsumable() {
-		return EcoreUtil.copy(mConsumable);
 	}
 }

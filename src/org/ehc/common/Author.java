@@ -45,10 +45,6 @@ public class Author {
 		//TODO Create Constructor for IHEProfiles Author object
 		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
-	
-	public org.openhealthtools.mdht.uml.cda.Author copyMdhtAuthor() {
-		return EcoreUtil.copy(mAuthor);
-	}
 
 	/**
 	 * Erstellt einen neuen Autor (Dieser Konstruktor wird oft gebraucht für
@@ -128,6 +124,10 @@ public class Author {
 		// This is not a CDA-Element, but is important for the transmission of a
 		// document with XDS!
 		//TODO Implement this (there seems to be no way to do it directly with the MDHT API).
+	}
+
+	public org.openhealthtools.mdht.uml.cda.Author copyMdhtAuthor() {
+		return EcoreUtil.copy(mAuthor);
 	}
 
 	private CE createFunctionCode() {
