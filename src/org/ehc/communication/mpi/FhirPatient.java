@@ -17,22 +17,30 @@
  *******************************************************************************/
 package org.ehc.communication.mpi;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.ehc.cda.ch.enums.AdministrativeGender;
 import org.ehc.common.Address;
+import org.ehc.common.Name;
 import org.ehc.common.Patient;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dev.composite.AddressDt;
+import ca.uhn.fhir.model.dev.composite.HumanNameDt;
 import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
  * The Class FhirPatient. FHIRPatient extends from the FHIR HAPI Patient Resource
  * 
  * @see http://jamesagnew.github.io/hapi-fhir/index.html
  */
+@ResourceDef(name="Patient")
 public class FhirPatient extends ca.uhn.fhir.model.dev.resource.Patient {
 
   /** The log. */
@@ -134,7 +142,88 @@ public class FhirPatient extends ca.uhn.fhir.model.dev.resource.Patient {
       }
 
     }
+    // FIXME Identificator, adresses etc are missing
+  }
+  
+  public Patient getPatient() {
+    
+    Name patientName = new Name(null,null);
+    PN pn = patientName.getMdhtPn();
+    AdministrativeGender patientGender=null;
+    Date patientBirthdate = null;
 
+    HumanNameDt humanDt = this.getNameFirstRep();
+    if (humanDt !=null) {
+      for (StringDt name : humanDt.getPrefix()) {
+        pn.addPrefix(name.getValue());
+      }
+      for (StringDt name : humanDt.getGiven()) {
+        pn.addGiven(name.getValue());
+      }
+      for (StringDt name : humanDt.getFamily()) {
+        pn.addFamily(name.getValue());
+      }
+      for (StringDt name : humanDt.getSuffix()) {
+        pn.addSuffix(name.getValue());
+      }
+    }
+    
+    // FIXME what happens when not set?
+    patientBirthdate = getBirthDate();
+
+   String gender = getGender();
+    if (gender.equals(AdministrativeGenderEnum.FEMALE.getCode())) {
+      patientGender = AdministrativeGender.FEMALE;
+    } else if (gender.equals(AdministrativeGenderEnum.MALE.getCode())) {
+      patientGender = AdministrativeGender.MALE;
+    } else if (gender.equals(AdministrativeGenderEnum.OTHER.getCode())) {
+      patientGender = AdministrativeGender.UNDIFFERENTIATED;
+    }
+    
+    // FIXME address
+//    if (patient.getAddresses() != null && patient.getAddresses().size() > 0) {
+//      Address homeAddress = null;
+//      if (patient.getAddresses().size() == 1) {
+//        homeAddress = patient.getAddress();
+//      } else {
+//        for (int i = 0; i < patient.getAddresses().size(); ++i) {
+//          if ("HP".equals(patient.getAddresses().get(i).getUsage())) {
+//            homeAddress = patient.getAddresses().get(i);
+//          }
+//        }
+//      }
+//      if (homeAddress != null) {
+//        AddressDt addressDt = new AddressDt();
+//        if (homeAddress.getAddressline1() != null) {
+//          addressDt.addLine().setValue(homeAddress.getAddressline1());
+//        }
+//        if (homeAddress.getAddressline2() != null) {
+//          addressDt.addLine().setValue(homeAddress.getAddressline2());
+//        }
+//        if (homeAddress.getAddressline3() != null) {
+//          addressDt.addLine().setValue(homeAddress.getAddressline3());
+//        }
+//        if (homeAddress.getCity() != null) {
+//          addressDt.setCity(homeAddress.getCity());
+//        }
+//        if (homeAddress.getZip() != null) {
+//          addressDt.setPostalCode(homeAddress.getZip());
+//        }
+//        if (homeAddress.getMdhtAdress().getStates() != null
+//            && homeAddress.getMdhtAdress().getStates().size() > 0) {
+//          addressDt.setState(homeAddress.getMdhtAdress().getStates().get(0).getText());
+//        }
+//        if (homeAddress.getMdhtAdress().getCountries() != null
+//            && homeAddress.getMdhtAdress().getCountries().size() > 0) {
+//          addressDt.setCountry(homeAddress.getMdhtAdress().getCountries().get(0).getText());
+//        }
+//        this.getAddress().add(addressDt);
+      
+      Patient patient = new Patient(patientName, patientGender, patientBirthdate);
+      
+      return patient;
+      
+    
   }
 
 }

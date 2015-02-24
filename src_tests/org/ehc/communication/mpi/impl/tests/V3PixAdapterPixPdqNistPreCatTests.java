@@ -11,6 +11,7 @@ import org.ehc.communication.mpi.impl.V3PixAdapter;
 import org.ehc.communication.mpi.impl.V3PixAdapterConfig;
 import org.junit.Test;
 
+import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dev.composite.AddressDt;
 import ca.uhn.fhir.model.dev.composite.HumanNameDt;
 import ca.uhn.fhir.model.dev.composite.IdentifierDt;
@@ -95,6 +96,14 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     patient.getAddress().add(address);
     patient.setGender(AdministrativeGenderEnum.MALE);
     patient.getManagingOrganization().setResource(getScopingOrganization());
+    
+    
+ // We can now use a parser to encode this resource into a string.
+    FhirContext ctx = new FhirContext();
+    String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+    System.out.println(encoded);
+    
+    
 
     assertTrue(v3PixAdapter.addPatient(patient));
   }

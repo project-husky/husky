@@ -236,29 +236,31 @@ public class V3PixAdapter implements MpiAdapterInterface {
           .setScopingOrganization(organizationOid, organizationName, telecomValue);
     }
 
-    // Patient Address
-    AddressDt addressDt = patient.getAddress().get(0);
-
-    String adressOtherDesignation = null;
-    if (addressDt.getLine().size() > 1) {
-      adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
-    }
-
-    // FIXME parameter adressType
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-          addressDt.getPostalCode(), adressOtherDesignation, null);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-          addressDt.getPostalCode(), adressOtherDesignation, null);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-          addressDt.getPostalCode(), adressOtherDesignation, null);
+    if (patient.getAddress().size()>0) {
+      // Patient Address
+      AddressDt addressDt = patient.getAddress().get(0);
+  
+      String adressOtherDesignation = null;
+      if (addressDt.getLine().size() > 1) {
+        adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+      }
+  
+      // FIXME parameter adressType
+      if (v3RecordAddedMessage != null) {
+        v3RecordAddedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
+            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+            addressDt.getPostalCode(), adressOtherDesignation, null);
+      }
+      if (v3RecordRevisedMessage != null) {
+        v3RecordRevisedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
+            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+            addressDt.getPostalCode(), adressOtherDesignation, null);
+      }
+      if (v3MergePatientsMessage != null) {
+        v3MergePatientsMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
+            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+            addressDt.getPostalCode(), adressOtherDesignation, null);
+      }
     }
 
   }

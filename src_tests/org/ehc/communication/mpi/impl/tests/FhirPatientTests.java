@@ -28,6 +28,13 @@ import org.ehc.common.Patient;
 import org.ehc.communication.mpi.FhirPatient;
 import org.junit.Test;
 
+import ca.uhn.fhir.model.dev.composite.AddressDt;
+import ca.uhn.fhir.model.dev.composite.HumanNameDt;
+import ca.uhn.fhir.model.dev.composite.IdentifierDt;
+import ca.uhn.fhir.model.dev.resource.Organization;
+import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.primitive.DateDt;
+
 /**
  * Junit Tests for the FhirPatient
  * 
@@ -124,6 +131,40 @@ public class FhirPatientTests {
     assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
     assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
     assertEquals("state", fhirPatient.getAddressFirstRep().getState());
+  }
+  
+  private Organization getScopingOrganization() {
+    Organization org = new Organization();
+    IdentifierDt identifier = new IdentifierDt();
+    identifier.setValue("OHT");
+    identifier.setSystem("2.16.840.1.113883.3.72.5.9.2");
+    org.getIdentifier().add(identifier);
+    return org;
+  }
+
+  
+  @Test
+  public void testConveniencePatient() {
+    
+    // ALPHA ALAN
+    FhirPatient fhirPatient = new FhirPatient();
+    HumanNameDt humanName = new HumanNameDt().addFamily("ALPHA").addGiven("ALAN");
+    fhirPatient.getName().add(humanName);
+    AddressDt address =
+        new AddressDt().addLine("1 PINETREE").setPostalCode("63119").setCity("WEBSTER")
+            .setState("MO");
+    IdentifierDt identifier = new IdentifierDt();
+    identifier.setValue("PIX");
+    identifier.setSystem("2.16.840.1.113883.3.72.5.9.1");
+    fhirPatient.getIdentifier().add(identifier);
+    fhirPatient.setBirthDate(new DateDt("19380224"));
+    fhirPatient.getAddress().add(address);
+    fhirPatient.setGender(AdministrativeGenderEnum.MALE);
+    fhirPatient.getManagingOrganization().setResource(getScopingOrganization());
+    
+    Patient patient = fhirPatient.getPatient();
+    
+    
   }
 
 
