@@ -437,7 +437,7 @@ public class Util {
 		String names = list.get(0).getText();
 		if (list.size()>1) {
 			ArrayList<String> nameList = new ArrayList<String>();
-			for (int i = 2; i<= list.size();i++) {
+			for (int i = 0; i<list.size();i++) {
 				nameList.add(list.get(i).getText());
 			}
 			return Util.join(nameList, " ");

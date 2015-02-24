@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src_tests"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.log4j_1.2.15.v201005080500.jar"/>
@@ -101,8 +102,15 @@
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-base-0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-structures-dev-0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/fhir/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/slf4j-api-1.7.9.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/slf4j-log4j12-1.7.10.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.hl7v3_2.0.2/hl7v3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
