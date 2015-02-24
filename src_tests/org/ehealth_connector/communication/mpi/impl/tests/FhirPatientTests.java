@@ -12,7 +12,7 @@
  * 
  * Year of publication: 2015
  *******************************************************************************/
-package org.ehc.communication.mpi.impl.tests;
+package org.ehealth_connector.communication.mpi.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,12 +20,12 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehc.cda.ch.enums.AddressUse;
-import org.ehc.cda.ch.enums.AdministrativeGender;
-import org.ehc.common.Address;
-import org.ehc.common.Name;
-import org.ehc.common.Patient;
-import org.ehc.communication.mpi.FhirPatient;
+import org.ehealth_connector.cda.ch.enums.AddressUse;
+import org.ehealth_connector.cda.ch.enums.AdministrativeGender;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
 
 import ca.uhn.fhir.model.dev.composite.AddressDt;
@@ -38,7 +38,7 @@ import ca.uhn.fhir.model.primitive.DateDt;
 /**
  * Junit Tests for the FhirPatient
  * 
- * @see org.ehc.communication.mpi.FhirPatient
+ * @see org.ehealth_connector.communication.mpi.FhirPatient
  * @author oliveregger
  * 
  */

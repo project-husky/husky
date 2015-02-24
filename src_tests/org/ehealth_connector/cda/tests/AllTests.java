@@ -1,4 +1,4 @@
-package org.ehc.cda.tests;
+package org.ehealth_connector.cda.tests;
 import java.util.Random;
 
 import org.junit.runner.RunWith;

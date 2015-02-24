@@ -12,22 +12,22 @@
  * 
  * Year of publication: 2015
  *******************************************************************************/
-package org.ehc.communication.mpi.impl.tests;
+package org.ehealth_connector.communication.mpi.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehc.communication.mpi.FhirPatient;
-import org.ehc.communication.mpi.impl.InMemoryMockMpiAdapter;
+import org.ehealth_connector.communication.mpi.FhirPatient;
+import org.ehealth_connector.communication.mpi.impl.InMemoryMockMpiAdapter;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Junit Tests for the ImMemoryMpiAdapter
  * 
- * @see org.ehc.communication.mpi.impl.InMemoryMockMpiAdapter
+ * @see org.ehealth_connector.communication.mpi.impl.InMemoryMockMpiAdapter
  * @author oliveregger
  * 
  */

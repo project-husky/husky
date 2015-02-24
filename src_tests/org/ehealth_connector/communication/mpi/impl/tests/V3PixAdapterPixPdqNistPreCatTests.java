@@ -1,4 +1,4 @@
-package org.ehc.communication.mpi.impl.tests;
+package org.ehealth_connector.communication.mpi.impl.tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,9 +6,9 @@ import java.net.URI;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehc.communication.mpi.FhirPatient;
-import org.ehc.communication.mpi.impl.V3PixAdapter;
-import org.ehc.communication.mpi.impl.V3PixAdapterConfig;
+import org.ehealth_connector.communication.mpi.FhirPatient;
+import org.ehealth_connector.communication.mpi.impl.V3PixAdapter;
+import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;
 import org.junit.Test;
 
 import ca.uhn.fhir.context.FhirContext;

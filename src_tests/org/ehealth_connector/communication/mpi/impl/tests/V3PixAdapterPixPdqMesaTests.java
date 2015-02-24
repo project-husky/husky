@@ -1,4 +1,4 @@
-package org.ehc.communication.mpi.impl.tests;
+package org.ehealth_connector.communication.mpi.impl.tests;
 
 
 /**

@@ -15,13 +15,13 @@
  * @author oliveregger
  * 
  *******************************************************************************/
-package org.ehc.communication.mpi.impl.tests;
+package org.ehealth_connector.communication.mpi.impl.tests;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.ehc.communication.mpi.FhirPatient;
+import org.ehealth_connector.communication.mpi.FhirPatient;
 
 import ca.uhn.fhir.model.dev.composite.AddressDt;
 import ca.uhn.fhir.model.dev.composite.HumanNameDt;

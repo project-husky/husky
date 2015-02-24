@@ -1,4 +1,4 @@
-package org.ehc.cda.tests;
+package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,13 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.ehc.cda.ProblemConcernEntry;
-import org.ehc.cda.ProblemEntry;
-import org.ehc.cda.ch.CdaChEdes;
-import org.ehc.cda.ch.enums.CodeSystems;
-import org.ehc.cda.ch.enums.LanguageCode;
-import org.ehc.common.Code;
-import org.ehc.common.ConvenienceUtilsEnums;
+import org.ehealth_connector.cda.ProblemConcernEntry;
+import org.ehealth_connector.cda.ProblemEntry;
+import org.ehealth_connector.cda.ch.CdaChEdes;
+import org.ehealth_connector.cda.ch.enums.CodeSystems;
+import org.ehealth_connector.cda.ch.enums.LanguageCode;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.ConvenienceUtilsEnums;
 import org.junit.Before;
 import org.junit.Test;
 
