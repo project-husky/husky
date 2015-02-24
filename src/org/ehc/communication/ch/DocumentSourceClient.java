@@ -98,6 +98,20 @@ public class DocumentSourceClient {
 		}
 		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
 	}
+	
+	public DocumentSourceClient(String organizationalId, String repositoryUri, boolean auditorEnabled, String keystorePath, String keystorePassword, String truststorePath, String truststorePassowrd, String log4jConfigPath) throws Exception {
+	    System.setProperty("javax.net.ssl.keyStore",keystorePath);
+	    System.setProperty("javax.net.ssl.keyStorePassword",keystorePassword);
+	    System.setProperty("javax.net.ssl.trustStore",truststorePath);
+	    System.setProperty("javax.net.ssl.trustStorePassword",truststorePassowrd);
+		
+		txnData = new SubmitTransactionData();
+		this.organizationalId = organizationalId;
+		if (log4jConfigPath==null) {
+			log4jConfigPath = "./rsc/log4jInfo.xml";
+		}
+		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
+	}
 
 	/**
 	 * Test set up
