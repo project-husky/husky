@@ -98,10 +98,9 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     patient.getManagingOrganization().setResource(getScopingOrganization());
     
     
- // We can now use a parser to encode this resource into a string.
     FhirContext ctx = new FhirContext();
     String encoded = ctx.newXmlParser().encodeResourceToString(patient);
-    System.out.println(encoded);
+    log.debug(encoded);
     
     
 
@@ -190,6 +189,11 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     patient.getAddress().add(address);
     patient.setGender(AdministrativeGenderEnum.FEMALE);
     patient.getManagingOrganization().setResource(getScopingOrganization());
+    
+    FhirContext ctx = new FhirContext();
+    String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+    log.debug(encoded);
+
 
     assertTrue(v3PixAdapter.mergePatient(patient, "PIXW"));
   }
@@ -267,6 +271,11 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     patient.getAddress().add(address);
     patient.setGender(AdministrativeGenderEnum.FEMALE);
     patient.getManagingOrganization().setResource(getScopingOrganization());
+    
+    FhirContext ctx = new FhirContext();
+    String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+    log.debug(encoded);
+
 
     assertTrue(v3PixAdapter.updatePatient(patient));
   }
@@ -337,6 +346,11 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     identifier.setValue("PIXL1");
     identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
+    
+    FhirContext ctx = new FhirContext();
+    String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+    log.debug(encoded);
+
 
     // note: response in precat tool doest not contain response with id
     v3PixAdapter.queryPatientId(patient);
@@ -421,6 +435,11 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     identifier.setValue("PIXL1");
     identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
+    
+    FhirContext ctx = new FhirContext();
+    String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+    log.debug(encoded);
+
 
     // NOTE: response in precat tool doest not contain response id
     v3PixAdapter.queryPatientId(patient);

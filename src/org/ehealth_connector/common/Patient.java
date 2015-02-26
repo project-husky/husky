@@ -64,17 +64,21 @@ public class Patient extends Person {
 		mRecordTarget.setPatientRole(mPatientRole);
 
 		// Create and fill gender
-		mPatient.setAdministrativeGenderCode(sex.getCE());
+		if (sex!=null) {
+		  mPatient.setAdministrativeGenderCode(sex.getCE());
+		}
 
 		// Fill Patient Name
 		mPatient.getNames().add(name.getMdhtPn());
 
 		// Create and fill birth date
-		try {
-			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
-		} catch (final ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (birthDay!=null) {
+    		try {
+    			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
+    		} catch (final ParseException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
 		}
 	}
 
@@ -176,6 +180,9 @@ public class Patient extends Person {
 	public Date getBirthday() {
 		try {
 			TS birthTime = getMdhtPatient().getBirthTime();
+			if (birthTime==null) {
+			  return null;
+			}
 			String value = birthTime.getValue();
 			return parseDate(value);
 		} catch (ParseException e) {
@@ -185,6 +192,9 @@ public class Patient extends Person {
 
 	public AdministrativeGender getGenderCode() {
 		CE code = getMdhtPatient().getAdministrativeGenderCode();
+		if (code == null) {
+		  return null;
+		}
 		return AdministrativeGender.getEnum(code.getCode());
 	}
 

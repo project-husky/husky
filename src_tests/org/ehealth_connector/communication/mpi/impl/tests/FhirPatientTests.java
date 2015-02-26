@@ -26,6 +26,7 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
+import org.hl7.v3.II;
 import org.junit.Test;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
@@ -164,6 +165,38 @@ public class FhirPatientTests {
     
     Patient patient = fhirPatient.getPatient();
     
+    assertEquals("2.16.840.1.113883.3.72.5.9.1",patient.getIds().get(0).getRoot());
+    assertEquals("PIX",patient.getIds().get(0).getExtension());
+    assertEquals("1 PINETREE",patient.getAddress().getAddressline1());
+    assertEquals("63119",patient.getAddress().getZip());
+    assertEquals("WEBSTER",patient.getAddress().getCity());
+    assertEquals("ALPHA",patient.getName().getFamilyName());
+    assertEquals("ALAN",patient.getName().getGivenNames());
+    
+    org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
+    assertEquals("OHT", ii.getExtension());
+    assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
+
+    
+    
+    
+    FhirPatient fhirPatientEquals = new FhirPatient(patient);
+    Patient patientEquals = fhirPatientEquals.getPatient();
+       
+    assertEquals("2.16.840.1.113883.3.72.5.9.1",patientEquals.getIds().get(0).getRoot());
+    assertEquals("PIX",patientEquals.getIds().get(0).getExtension());
+    assertEquals("1 PINETREE",patientEquals.getAddress().getAddressline1());
+    assertEquals("63119",patientEquals.getAddress().getZip());
+    assertEquals("WEBSTER",patientEquals.getAddress().getCity());
+    assertEquals("ALPHA",patientEquals.getName().getFamilyName());
+    assertEquals("ALAN",patientEquals.getName().getGivenNames());
+    
+    ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
+    assertEquals("OHT", ii.getExtension());
+    assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
+    
+    
+
     
   }
 

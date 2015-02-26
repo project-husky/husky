@@ -455,8 +455,10 @@ public class V3PixAdapter implements MpiAdapterInterface {
     if (queryDomainOids != null) {
       domainToReturnOids = queryDomainOids;
     } else {
-      domainToReturnOids = new String[1];
-      domainToReturnOids[0] = adapterCfg.domainToReturnOid;
+      if (adapterCfg.domainToReturnOid!=null) {
+        domainToReturnOids = new String[1];
+        domainToReturnOids[0] = adapterCfg.domainToReturnOid;
+      }
     }
     if (queryDomainNamespaces != null) {
       domainToReturnNamespaces = queryDomainNamespaces;
@@ -475,13 +477,15 @@ public class V3PixAdapter implements MpiAdapterInterface {
       v3PixConsumerQuery.addPatientIdToQuery(homeCommunityPatientId, homeCommunityOid,
           adapterCfg.homeCommunityNamespace);
 
-      for (int i = 0; i < domainToReturnOids.length; ++i) {
-        String domainToReturnOid = domainToReturnOids[i];
-        String domainToReturnNamespace = null;
-        if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
-          domainToReturnNamespace = domainToReturnNamespaces[i];
+      if (domainToReturnOids!=null) {
+        for (int i = 0; i < domainToReturnOids.length; ++i) {
+          String domainToReturnOid = domainToReturnOids[i];
+          String domainToReturnNamespace = null;
+          if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
+            domainToReturnNamespace = domainToReturnNamespaces[i];
+          }
+          v3PixConsumerQuery.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
         }
-        v3PixConsumerQuery.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
       }
       V3PixConsumerResponse v3PixConsumerResponse = null;
       try {

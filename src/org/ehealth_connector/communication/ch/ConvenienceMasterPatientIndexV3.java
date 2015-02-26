@@ -1,12 +1,12 @@
 package org.ehealth_connector.communication.ch;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.communication.AtnaConfig;
 import org.ehealth_connector.communication.Destination;
 import org.ehealth_connector.communication.Response;
 import org.ehealth_connector.communication.mpi.FhirPatient;
@@ -46,36 +46,36 @@ public class ConvenienceMasterPatientIndexV3 {
    * Cross-Reference Concumer</b>
    * </p>
    * 
-   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
    * @param patient demografische Personendaten eines Patienten
    * @param homeCommunityOID OID der lokalen Patient ID (Gemeinschaft des Aufrufers)
    * @param requestedCommunityOID OID der gewünschten Patienten Identifikationsdomäne
+   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
+   * @param atna ATNA Konfiguration
    * @return Patienten-ID in der requestedCommunityOID
    * @throws Exception
    */
-  public static ArrayList<Identificator> queryPatientID(Destination dest, Patient patient,
-      String homeCommunityOID, String[] requestedCommunityOIDs) throws Exception {
-    // FIXME should also not an Response Object returned?
-    URI pixQueryUri = null; // FIXME need to add configuration parameters
-    String senderApplicationOid = null; // FIXME need to add configuration parameters
-    String senderFacilityOid = null; // FIXME need to add configuration parameters
-    String receiverApplicationOid = null; // FIXME need to add configuration parameters
-    String receiverFacilityOid = null; // FIXME need to add configuration parameters
-    String auditRepositoryUri = null; // FIXME need to add configuration parameters
-    String auditSourceId = null; // FIXME need to add configuration parameters
+  public static ArrayList<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
+      String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna, Response response) {
 
     V3PixAdapterConfig v3PixAdapterConfig =
-        new V3PixAdapterConfig(pixQueryUri, null, senderApplicationOid, senderFacilityOid,
-            receiverApplicationOid, receiverFacilityOid, homeCommunityOID, null, null, null,
-            auditRepositoryUri, auditSourceId);
-
+        new V3PixAdapterConfig((dest != null ? dest.getPixQueryUri() : null), null,
+            (dest != null ? dest.getSenderApplicationOid() : null),
+            (dest != null ? dest.getSenderFacilityOid() : null),
+            (dest != null ? dest.getReceiverApplicationOid() : null),
+            (dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+            null, (atna != null ? atna.getAuditRepositoryUri() : null),
+            (atna != null ? atna.getAuditSourceId() : null));
     V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
     String ids[] =
         v3PixAdapter.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs, null);
     ArrayList<Identificator> list = new ArrayList<Identificator>();
-    if (ids != null) {
-      for (int i = 0; i < ids.length; ++i) {
-        list.add(new Identificator(requestedCommunityOIDs[i], ids[i]));
+    if (requestedCommunityOIDs != null) {
+      for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
+        String id = "";
+        if (i<ids.length) {
+          id = ids[i];
+        }
+        list.add(new Identificator(requestedCommunityOIDs[i], id));
       }
     }
     return list;
@@ -91,28 +91,22 @@ public class ConvenienceMasterPatientIndexV3 {
    * Source</b>
    * </p>
    * 
-   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
    * @param patient demografische Personendaten eines Patienten
    * @param homeCommunityOID OID der lokalen Patient ID (Gemeinschaft des Aufrufers)
+   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
+   * @param atna ATNA Konfiguration
    * @return Status der Übertragung
-   * @throws Exception
    */
-  public static Response addPatientDemographics(Destination dest, Patient patient,
-      String homeCommunityOID) throws Exception {
-
-    URI pixSourceUri = null; // FIXME need to add configuration parameters
-    String senderApplicationOid = null; // FIXME need to add configuration parameters
-    String senderFacilityOid = null; // FIXME need to add configuration parameters
-    String receiverApplicationOid = null; // FIXME need to add configuration parameters
-    String receiverFacilityOid = null; // FIXME need to add configuration parameters
-    String auditRepositoryUri = null; // FIXME need to add configuration parameters
-    String auditSourceId = null; // FIXME need to add configuration parameters
-
+  public static Response addPatientDemographics(Patient patient, String homeCommunityOID,
+      Destination dest, AtnaConfig atna) {
     V3PixAdapterConfig v3PixAdapterConfig =
-        new V3PixAdapterConfig(null, pixSourceUri, senderApplicationOid, senderFacilityOid,
-            receiverApplicationOid, receiverFacilityOid, homeCommunityOID, null, null, null,
-            auditRepositoryUri, auditSourceId);
-
+        new V3PixAdapterConfig(null, (dest != null ? dest.getPixSourceUri() : null),
+            (dest != null ? dest.getSenderApplicationOid() : null),
+            (dest != null ? dest.getSenderFacilityOid() : null),
+            (dest != null ? dest.getReceiverApplicationOid() : null),
+            (dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+            null, (atna != null ? atna.getAuditRepositoryUri() : null),
+            (atna != null ? atna.getAuditSourceId() : null));
     V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
     boolean ret = v3PixAdapter.addPatient(new FhirPatient(patient));
     Response response = new Response(null, null, ret);
@@ -129,28 +123,22 @@ public class ConvenienceMasterPatientIndexV3 {
    * Source</b>
    * </p>
    * 
-   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
    * @param patient demografische Personendaten eines Patienten
    * @param homeCommunityOID OID der lokalen Patient ID (Gemeinschaft des Aufrufers)
+   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
+   * @param atna ATNA Konfiguration
    * @return Status der Übertragung
-   * @throws Exception
    */
-  public static Response updatePatientDemographics(Destination dest, Patient patient,
-      String homeCommunityOID) throws Exception {
-
-    URI pixSourceUri = null; // FIXME need to add configuration parameters
-    String senderApplicationOid = null; // FIXME need to add configuration parameters
-    String senderFacilityOid = null; // FIXME need to add configuration parameters
-    String receiverApplicationOid = null; // FIXME need to add configuration parameters
-    String receiverFacilityOid = null; // FIXME need to add configuration parameters
-    String auditRepositoryUri = null; // FIXME need to add configuration parameters
-    String auditSourceId = null; // FIXME need to add configuration parameters
-
+  public static Response updatePatientDemographics(Patient patient, String homeCommunityOID,
+      Destination dest, AtnaConfig atna) {
     V3PixAdapterConfig v3PixAdapterConfig =
-        new V3PixAdapterConfig(null, pixSourceUri, senderApplicationOid, senderFacilityOid,
-            receiverApplicationOid, receiverFacilityOid, homeCommunityOID, null, null, null,
-            auditRepositoryUri, auditSourceId);
-
+        new V3PixAdapterConfig(null, (dest != null ? dest.getPixSourceUri() : null),
+            (dest != null ? dest.getSenderApplicationOid() : null),
+            (dest != null ? dest.getSenderFacilityOid() : null),
+            (dest != null ? dest.getReceiverApplicationOid() : null),
+            (dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+            null, (atna != null ? atna.getAuditRepositoryUri() : null),
+            (atna != null ? atna.getAuditSourceId() : null));
     V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
     boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
     Response response = new Response(null, null, ret);
@@ -167,42 +155,34 @@ public class ConvenienceMasterPatientIndexV3 {
    * Source</b>
    * </p>
    * 
-   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
    * @param finalPatient demografische Personendaten des finalen Patienten (Dieser Patient soll im
    *        MPI verbleiben)
-   * @param mergePatient demografische Personendaten des Patienten, welcher mit dem finalen
+   * @param mergeObsoleteId id des Patienten, welcher mit dem finalen
    *        Patienten vereinigt wird
    * @param homeCommunityOID OID der lokalen Patient ID (Gemeinschaft des Aufrufers)
+   * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
+   * @param atna ATNA Konfiguration
    * @return Status der Übertragung
-   * @throws Exception
    */
-  public static Response mergePatients(Destination dest, Patient finalPatient,
-      Patient mergePatient, String homeCommunityOID) throws Exception {
-    URI pixSourceUri = null; // FIXME need to add configuration parameters
-    String senderApplicationOid = null; // FIXME need to add configuration parameters
-    String senderFacilityOid = null; // FIXME need to add configuration parameters
-    String receiverApplicationOid = null; // FIXME need to add configuration parameters
-    String receiverFacilityOid = null; // FIXME need to add configuration parameters
-    String auditRepositoryUri = null; // FIXME need to add configuration parameters
-    String auditSourceId = null; // FIXME need to add configuration parameters
+  public static Response mergePatients(Patient finalPatient, String mergeObsoleId,
+      String homeCommunityOID, Destination dest, AtnaConfig atna) {
 
     V3PixAdapterConfig v3PixAdapterConfig =
-        new V3PixAdapterConfig(null, pixSourceUri, senderApplicationOid, senderFacilityOid,
-            receiverApplicationOid, receiverFacilityOid, homeCommunityOID, null, null, null,
-            auditRepositoryUri, auditSourceId);
-
+        new V3PixAdapterConfig(null, (dest != null ? dest.getPixSourceUri() : null),
+            (dest != null ? dest.getSenderApplicationOid() : null),
+            (dest != null ? dest.getSenderFacilityOid() : null),
+            (dest != null ? dest.getReceiverApplicationOid() : null),
+            (dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+            null, (atna != null ? atna.getAuditRepositoryUri() : null),
+            (atna != null ? atna.getAuditSourceId() : null));
     V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
-
-    Identificator obsoleteId =
-        Identificator
-            .getIdentificator(mergePatient.getMdhtPatientRole().getIds(), homeCommunityOID);
-    if (obsoleteId == null) {
+    if (mergeObsoleId == null) {
       // FIXME add error message to response
       log.error("no localid specified for oid " + homeCommunityOID);
       return new Response(null, null, false);
     }
     boolean ret =
-        v3PixAdapter.mergePatient(new FhirPatient(finalPatient), obsoleteId.getExtension());
+        v3PixAdapter.mergePatient(new FhirPatient(finalPatient), mergeObsoleId);
     Response response = new Response(null, null, ret);
     return response;
   }

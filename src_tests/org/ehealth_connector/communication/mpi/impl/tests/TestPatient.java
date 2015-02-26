@@ -131,12 +131,6 @@ public class TestPatient {
         new HumanNameDt().addFamily(testPatient.family).addGiven(testPatient.given);
     patient.getName().add(humanName);
 
-    // IdentifierDt identifier = new IdentifierDt();
-    // identifier.setUse(IdentifierUseEnum.OFFICIAL);
-    // identifier.setSystem(TestPatient.oidInsuranceCard);
-    // identifier.setValue(testPatient.idInsuranceCard);
-    // patient.getIdentifier().add(identifier);
-
     IdentifierDt identifier = new IdentifierDt();
     identifier.setUse(IdentifierUseEnum.USUAL);
     identifier.setSystem("urn:oid:"+oidLocalId);
