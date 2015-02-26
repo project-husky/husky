@@ -105,7 +105,7 @@
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-base-0.9-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-structures-dev-0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-structures-dstu2-0.9-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/fhir/commons-lang3-3.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/fhir/slf4j-api-1.7.9.jar"/>

@@ -23,12 +23,12 @@ import java.util.Date;
 
 import org.ehealth_connector.communication.mpi.FhirPatient;
 
-import ca.uhn.fhir.model.dev.composite.AddressDt;
-import ca.uhn.fhir.model.dev.composite.HumanNameDt;
-import ca.uhn.fhir.model.dev.composite.IdentifierDt;
-import ca.uhn.fhir.model.dev.valueset.AddressUseEnum;
-import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dev.valueset.IdentifierUseEnum;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.IdentifierUseEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 
 /**
@@ -139,7 +139,7 @@ public class TestPatient {
 
     IdentifierDt identifier = new IdentifierDt();
     identifier.setUse(IdentifierUseEnum.USUAL);
-    identifier.setSystem(oidLocalId);
+    identifier.setSystem("urn:oid:"+oidLocalId);
     identifier.setValue(testPatient.localId);
 
     patient.getIdentifier().add(identifier);
@@ -169,7 +169,7 @@ public class TestPatient {
 
     IdentifierDt identifier = new IdentifierDt();
     identifier.setUse(IdentifierUseEnum.USUAL);
-    identifier.setSystem(oidLocalId);
+    identifier.setSystem("urn:oid:"+oidLocalId);
     identifier.setValue(testPatient.localId);
 
     patient.getIdentifier().add(identifier);

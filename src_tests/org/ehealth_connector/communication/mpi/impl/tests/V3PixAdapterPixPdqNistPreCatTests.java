@@ -12,11 +12,11 @@ import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;
 import org.junit.Test;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.dev.composite.AddressDt;
-import ca.uhn.fhir.model.dev.composite.HumanNameDt;
-import ca.uhn.fhir.model.dev.composite.IdentifierDt;
-import ca.uhn.fhir.model.dev.resource.Organization;
-import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 
 /**
@@ -57,7 +57,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     Organization org = new Organization();
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("OHT");
-    identifier.setSystem("2.16.840.1.113883.3.72.5.9.2");
+    identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.2");
     org.getIdentifier().add(identifier);
     return org;
   }
@@ -90,7 +90,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
             .setState("MO");
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIX");
-    identifier.setSystem(homeCommunityOid);
+    identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
     patient.setBirthDate(new DateDt("19380224"));
     patient.getAddress().add(address);
@@ -184,7 +184,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
             .setState("IL");
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIXL");
-    identifier.setSystem(homeCommunityOid);
+    identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
     patient.setBirthDate(new DateDt("19771208"));
     patient.getAddress().add(address);
@@ -261,7 +261,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
             .setState("NY");
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIX");
-    identifier.setSystem(homeCommunityOid);
+    identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
     patient.setBirthDate(new DateDt("19780510"));
     patient.getAddress().add(address);
@@ -335,7 +335,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     FhirPatient patient = new FhirPatient();
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIXL1");
-    identifier.setSystem(homeCommunityOid);
+    identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
 
     // note: response in precat tool doest not contain response with id
@@ -419,7 +419,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     FhirPatient patient = new FhirPatient();
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIXL1");
-    identifier.setSystem(homeCommunityOid);
+    identifier.setSystem("urn:oid:"+homeCommunityOid);
     patient.getIdentifier().add(identifier);
 
     // NOTE: response in precat tool doest not contain response id

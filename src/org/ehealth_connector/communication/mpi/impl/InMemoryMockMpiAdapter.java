@@ -19,11 +19,11 @@ import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ehealth_connector.communication.mpi.FhirPatient;
+import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.openhealthtools.ihe.utils.UUID;
 
-import ca.uhn.fhir.model.dev.composite.IdentifierDt;
-import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
-import org.ehealth_connector.communication.mpi.FhirPatient;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 
 /**
  * InMemoryMockMpiAdapter to test a basic MPI with no crossmatching of patient for testing Note: No
@@ -53,7 +53,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
   private String getPatientId(FhirPatient patient, String system) {
     initHomeCommunityId(patient);
     for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      if (identifierDt.getSystem().toString().equals(system)) {
+      if (identifierDt.getSystem().equals(system)) {
         return identifierDt.getValue();
       }
     }
@@ -75,7 +75,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
    */
   private String getHomeCommunityPatientId(FhirPatient patient) {
     initHomeCommunityId(patient);
-    return getPatientId(patient, this.homeCommunityOid);
+    return getPatientId(patient, "urn:oid:"+this.homeCommunityOid);
   }
 
   /**
@@ -86,7 +86,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
    */
   private String getMpiPatientId(FhirPatient patient) {
     initHomeCommunityId(patient);
-    return getPatientId(patient, mpiCommunityOid);
+    return getPatientId(patient, "urn:oid:"+mpiCommunityOid);
   }
 
 
@@ -98,7 +98,13 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
   private void initHomeCommunityId(FhirPatient patient) {
     if (homeCommunityOid == null) {
       if (patient.getIdentifier().size() == 1) {
-        homeCommunityOid = patient.getIdentifier().get(0).getSystem().toString();
+        String system = patient.getIdentifier().get(0).getSystem();
+        if (system.length()>8) {
+          //"urn:oid:"+
+          homeCommunityOid =system.substring(8);
+        } else {
+          throw new IllegalStateException("system has to start with urn:oid:");
+        }
       } else {
         throw new IllegalStateException("homeCommunityId has to be specified");
       }
@@ -149,7 +155,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
       // TODO: just copied the id of the patient currently, no demographic data
       immutablePatient.setIdentifier(patient.getIdentifier());
       IdentifierDt id = immutablePatient.addIdentifier();
-      id.setSystem(mpiCommunityOid);
+      id.setSystem("urn:oid:"+mpiCommunityOid);
       id.setValue(mpiIdendity);
       map.put(mapKey, immutablePatient);
       log.info("added patient to mpi with key " + mapKey + " and mpi idendity " + mpiCommunityOid
@@ -179,7 +185,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
         // TODO: just copied the id of the patient currently, no demographic data
         immutablePatient.setIdentifier(patient.getIdentifier());
         IdentifierDt id = immutablePatient.addIdentifier();
-        id.setSystem(mpiCommunityOid);
+        id.setSystem("urn:oid:"+mpiCommunityOid);
         id.setValue(getMpiPatientId(oldPatient));
         map.put(mapKey, immutablePatient);
         return true;
@@ -253,7 +259,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
         FhirPatient patientMpi = map.get(mapKey);
         String returnIds[] = new String[domainOids.length];
         for (int i = 0; i < returnIds.length; ++i) {
-          returnIds[i] = this.getPatientId(patientMpi, domainOids[i]);
+          returnIds[i] = this.getPatientId(patientMpi, "urn:oid:"+domainOids[i]);
         }
         return returnIds;
       }

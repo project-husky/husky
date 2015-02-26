@@ -40,9 +40,9 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordAdded;
 import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
 import org.w3c.dom.Element;
 
-import ca.uhn.fhir.model.dev.composite.AddressDt;
-import ca.uhn.fhir.model.dev.composite.IdentifierDt;
-import ca.uhn.fhir.model.dev.resource.Organization;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.resource.Organization;
 
 /**
  * V3PixAdapter
@@ -216,7 +216,9 @@ public class V3PixAdapter implements MpiAdapterInterface {
 
     if (organization != null && organization.getIdentifier().size() > 0) {
       IdentifierDt organizationId = organization.getIdentifier().get(0);
-      organizationOid = organizationId.getSystem().toString();
+      if (organizationId.getSystem().startsWith("urn:oid:")) {
+        organizationOid = organizationId.getSystem().substring(8);
+      }
       organizationName = organizationId.getValue();
     }
 
@@ -409,8 +411,10 @@ public class V3PixAdapter implements MpiAdapterInterface {
    */
   private String getHomeCommunityPatientId(FhirPatient patient) {
     for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      if (identifierDt.getSystem().toString().equals(this.homeCommunityOid)) {
-        return identifierDt.getValue();
+      if (identifierDt.getSystem().startsWith("urn:oid:")) {
+        if (identifierDt.getSystem().substring(8).equals(this.homeCommunityOid)) {
+          return identifierDt.getValue();
+        }
       }
     }
     return null;
@@ -582,7 +586,9 @@ public class V3PixAdapter implements MpiAdapterInterface {
   private void initHomeCommunityId(FhirPatient patient) {
     if (homeCommunityOid == null) {
       if (patient.getIdentifier().size() == 1) {
-        homeCommunityOid = patient.getIdentifier().get(0).getSystem().toString();
+        if (patient.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
+          homeCommunityOid = patient.getIdentifier().get(0).getSystem();
+        }
       } else {
         throw new IllegalStateException("homeCommunityId has to be specified");
       }
@@ -593,14 +599,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
    * returns a patient id defined by patient identity issuing system.
    * 
    * @param patient the Patient
-   * @param system the system responsible for issued the patient id
+   * @param systemOid the oid of the system responsible which issued the patient id
    * @return the patient id
    */
-  private String getPatientId(FhirPatient patient, String system) {
+  private String getPatientId(FhirPatient patient, String systemOid) {
     initHomeCommunityId(patient);
     for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      URI uri = identifierDt.getSystem();
-      if (uri != null && uri.toString().equals(system)) {
+      String idSystem = identifierDt.getSystem();
+      if (idSystem != null && idSystem.equals("urn:oid:"+systemOid)) {
         return identifierDt.getValue();
       }
     }

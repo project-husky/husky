@@ -28,11 +28,11 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
 
-import ca.uhn.fhir.model.dev.composite.AddressDt;
-import ca.uhn.fhir.model.dev.composite.HumanNameDt;
-import ca.uhn.fhir.model.dev.composite.IdentifierDt;
-import ca.uhn.fhir.model.dev.resource.Organization;
-import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 
 /**
@@ -137,7 +137,7 @@ public class FhirPatientTests {
     Organization org = new Organization();
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("OHT");
-    identifier.setSystem("2.16.840.1.113883.3.72.5.9.2");
+    identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.2");
     org.getIdentifier().add(identifier);
     return org;
   }
@@ -155,7 +155,7 @@ public class FhirPatientTests {
             .setState("MO");
     IdentifierDt identifier = new IdentifierDt();
     identifier.setValue("PIX");
-    identifier.setSystem("2.16.840.1.113883.3.72.5.9.1");
+    identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.1");
     fhirPatient.getIdentifier().add(identifier);
     fhirPatient.setBirthDate(new DateDt("19380224"));
     fhirPatient.getAddress().add(address);

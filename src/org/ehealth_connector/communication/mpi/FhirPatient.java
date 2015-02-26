@@ -30,9 +30,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import ca.uhn.fhir.model.dev.composite.AddressDt;
-import ca.uhn.fhir.model.dev.composite.HumanNameDt;
-import ca.uhn.fhir.model.dev.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
@@ -41,7 +41,7 @@ import ca.uhn.fhir.model.primitive.StringDt;
  * @see http://jamesagnew.github.io/hapi-fhir/index.html
  */
 @ResourceDef(name="Patient")
-public class FhirPatient extends ca.uhn.fhir.model.dev.resource.Patient {
+public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
   /** The log. */
   private Log log = LogFactory.getLog(FhirPatient.class);
