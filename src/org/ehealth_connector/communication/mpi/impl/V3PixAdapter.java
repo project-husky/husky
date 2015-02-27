@@ -490,11 +490,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
       V3PixConsumerResponse v3PixConsumerResponse = null;
       try {
         v3PixConsumerResponse = v3PixConsumer.sendQuery(v3PixConsumerQuery);
-        String returnIds[] = new String[domainToReturnOids.length];
-        for (int i = 0; i < returnIds.length; ++i) {
-          returnIds[i] = getPatientDomainId(v3PixConsumerResponse, domainToReturnOids[i]);
+        if (domainToReturnOids!=null) {
+          String returnIds[] = new String[domainToReturnOids.length];
+          for (int i = 0; i < returnIds.length; ++i) {
+            returnIds[i] = getPatientDomainId(v3PixConsumerResponse, domainToReturnOids[i]);
+          }
+          return returnIds;
         }
-        return returnIds;
+        return null;
       } catch (Exception e) {
         log.error("exception queryPatient", e);
         return null;

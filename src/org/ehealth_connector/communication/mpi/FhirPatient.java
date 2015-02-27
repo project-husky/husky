@@ -28,7 +28,6 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
-import org.hl7.v3.II;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Organization;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -226,7 +225,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     }
     String zip = "";
     if (addressDt.getPostalCode()!=null) {
-      city = addressDt.getPostalCode();
+      zip = addressDt.getPostalCode();
     }
     
     
