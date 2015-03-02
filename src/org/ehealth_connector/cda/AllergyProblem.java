@@ -57,8 +57,8 @@ public class AllergyProblem {
 	 *
 	 * @param allergy 
 	 *      <div class="de">Die Art der Allergie</div>
-     *      <div class="fr"> kind of allergy</div>
-     *      <div class="it"> kind of allergy</div>
+     *      <div class="fr"></div>
+     *      <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
@@ -78,8 +78,8 @@ public class AllergyProblem {
 	 *
 	 * @param kindOfAllergy <br>
 	 * 		<div class="de"> kind of allergy</div>
-	 * 		<div class="fr"> kind of allergy</div>
-	 * 		<div class="it"> kind of allergy</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param problem
 	 *     <div class="de">Code zu Komplikationsrisiken oder Expositionsrisiken.</div>
 	 *     <div class="fr"></div>
@@ -106,8 +106,8 @@ public class AllergyProblem {
 	 *
 	 * @param kindOfAllergy <br>
 	 * 		<div class="de">Die Art der Allergie</div>
-	 * 		<div class="fr"> kind of allergy</div>
-	 * 		<div class="it"> kind of allergy</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
      * @param problem
      *     <div class="de">Code zu Komplikationsrisiken oder Expositionsrisiken.</div>
      *     <div class="fr"></div>
@@ -145,8 +145,8 @@ public class AllergyProblem {
 	 *
 	 * @param allergyIntolerance <br>
 	 * 		<div class="de"> allergy intolerance</div>
-	 * 		<div class="fr"> allergy intolerance</div>
-	 * 		<div class="it"> allergy intolerance</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
 		mAllergyProblem = allergyIntolerance;
@@ -154,8 +154,8 @@ public class AllergyProblem {
 
 	/**
 	 * <div class="de">Copy mdht allergy intolerance.</div>
-	 * <div class="fr">Copy mdht allergy intolerance.</div>
-	 * <div class="it">Copy mdht allergy intolerance.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the allergy intolerance
 	 */

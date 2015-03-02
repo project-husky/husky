@@ -175,6 +175,10 @@ public class Consumable {
 	public String getTradeName() {
 		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
 	}
+	
+	public Code getWhoAtcCode() {
+	  return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
+	}
 
 	/**
 	 * Sets the manufactured material code.
