@@ -60,7 +60,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
  */
 public abstract class CdaCh {
 
-	CDACH doc = null;      												// The CDA Document
+	CDACH doc = null;      													// The CDA Document
 	public DocumentRoot docRoot = null; 									// The OHT-Element that helds the document
 	protected Query query;
 

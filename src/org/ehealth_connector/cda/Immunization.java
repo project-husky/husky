@@ -36,9 +36,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
-// TODO: Auto-generated Javadoc
 /**
- * Eine Impfung.
+ * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen.
  */
 public class Immunization {
 
@@ -58,7 +57,7 @@ public class Immunization {
 	 * @author author Die eintragende Person
 	 * @param consumable Impfstoff
 	 * @param author <br>
-	 * 		<div class="de"> author</div>
+	 * 		<div class="de">Autor der Impfung</div>
 	 * 		<div class="fr"> author</div>
 	 * 		<div class="it"> author</div>
 	 * @param appliedAt Datum der Impfung
@@ -89,9 +88,9 @@ public class Immunization {
 	 * @author author Die eintragende Person
 	 * @param consumable Impfstoff
 	 * @param author <br>
-	 * 		<div class="de"> author</div>
-	 * 		<div class="fr"> author</div>
-	 * 		<div class="it"> author</div>
+	 * 		<div class="de">Autor der Impfung</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param appliedAt Datum der Impfung
 	 * @param route Einnahmeart (darf null sein)
 	 * @param doseQuantity in milliliters (e.g. 0.5) (darf null sein)
@@ -122,7 +121,7 @@ public class Immunization {
 	 * Constructor.
 	 *
 	 * @param immunization <br>
-	 * 		<div class="de"> immunization</div>
+	 * 		<div class="de">IHE Impf-Objekt</div>
 	 * 		<div class="fr"> immunization</div>
 	 * 		<div class="it"> immunization</div>
 	 */
@@ -142,7 +141,6 @@ public class Immunization {
 
 	/**
 	 * Returns the encapsulated IHE class.
-	 * Method should be package private.
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
 	 */
@@ -231,42 +229,8 @@ public class Immunization {
 		return id;
 	}
 
-	//	/**
-	//	 * Medikationsdaten muessen den GTIN (swissIndex) sowie den ATC-Code enthalten.
-	//	 * @return
-	//	 */
-	//	private CE createEpsosPivotCodeElement(String atcCode) {
-	//		CE code = createEpsosPivotCode();
-	//
-	//		code.setOriginalText(createText());
-	//		// TODO set correct GTIN
-	//		code.getTranslations().add(createTranslation("7680006690011", "1.3.160"));
-	//
-	//		code.getTranslations().add(createTranslation(atcCode, "2.16.840.1.113883.6.73"));
-	//		return code;
-	//	}
-	//
-	//	/**
-	//	 * Only codes defined in cda-ch-vacd-voc.xml are allowed.
-	//	 * 
-	//	 * Actually these are: IDINJ, NASNEB, PO, SQ, TRNSDERMD and IM.
-	//	 * 
-	//	 * @return CE
-	//	 */
-	//	private CE createRouteCode() {
-	//		CE ce = DatatypesFactory.eINSTANCE.createCE();
-	//		ce.setCode(routeCode.getCodeValue());
-	//		ce.setDisplayName(routeCode.getdisplayName());
-	//
-	//		// TODO define OID constant
-	//		ce.setCodeSystem("2.16.840.1.113883.5.112");
-	//		ce.setCodeSystemName("VACD_RouteOfAdministration");
-	//		return ce;
-	//	}
-
 	/**
 	 * Returns the encapsulated IHE class.
-	 * Method should be package private.
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
 	 */
@@ -342,7 +306,7 @@ public class Immunization {
 
 	/**
 	 * Optionally, one can set the route code (Einnahmearten).
-	 * If not set, <routeCode nullFlavor="NA"/> is written to CDA document.
+	 * If not set, <routeCode nullFlavor="UNK"/> is written to CDA document.
 	 *
 	 * @param routeCode the new route of administration
 	 */

@@ -35,9 +35,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
-// TODO: Auto-generated Javadoc
 /**
- * <div class="de">Class LaboratoryObservation.</div>\n
+ * <div class="de">Klasse Laborbefund</div>\n
  * <div class="fr">Class LaboratoryObservation.</div>\n
  * <div class="it">Class LaboratoryObservation.</div>
  */
@@ -57,21 +56,21 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code <br>
-	 * 		<div class="de"> code</div>
-	 * 		<div class="fr"> code</div>
-	 * 		<div class="it"> code</div>
+	 * 		<div class="de">Code für einen bezüglich einer Impfung relevanten Laborbefund</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param immuneProtection <br>
-	 * 		<div class="de"> immune protection</div>
-	 * 		<div class="fr"> immune protection</div>
-	 * 		<div class="it"> immune protection</div>
+	 * 		<div class="de">true, wenn ein Immunschutz besteht.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param dateTimeOfResult <br>
-	 * 		<div class="de"> date time of result</div>
-	 * 		<div class="fr"> date time of result</div>
-	 * 		<div class="it"> date time of result</div>
+	 * 		<div class="de">Datum und Uhrzeit, an dem das Resultat bekannt wurde.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param laboratory <br>
-	 * 		<div class="de"> laboratory</div>
-	 * 		<div class="fr"> laboratory</div>
-	 * 		<div class="it"> laboratory</div>
+	 * 		<div class="de">Das ausführende Labor.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public LaboratoryObservation(org.ehealth_connector.cda.ch.enums.Serologie code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
@@ -86,25 +85,25 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code <br>
-	 * 		<div class="de"> code</div>
-	 * 		<div class="fr"> code</div>
-	 * 		<div class="it"> code</div>
-	 * @param laboratory <br>
-	 * 		<div class="de"> laboratory</div>
-	 * 		<div class="fr"> laboratory</div>
-	 * 		<div class="it"> laboratory</div>
+	 * 		<div class="de">Code für einen bezüglich einer Impfung relevanten Laborbefund</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param immuneProtection <br>
-	 * 		<div class="de"> immune protection</div>
-	 * 		<div class="fr"> immune protection</div>
-	 * 		<div class="it"> immune protection</div>
+	 * 		<div class="de">true, wenn ein Immunschutz besteht.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param dateTimeOfResult <br>
-	 * 		<div class="de"> date time of result</div>
-	 * 		<div class="fr"> date time of result</div>
-	 * 		<div class="it"> date time of result</div>
+	 * 		<div class="de">Datum und Uhrzeit, an dem das Resultat bekannt wurde.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param laboratory <br>
+	 * 		<div class="de">Das ausführende Labor.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param valueCode <br>
-	 * 		<div class="de"> value code</div>
-	 * 		<div class="fr"> value code</div>
-	 * 		<div class="it"> value code</div>
+	 * 		<div class="de">Wert des Resultats (als Code-Objekt)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public LaboratoryObservation(org.ehealth_connector.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -118,25 +117,25 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code <br>
-	 * 		<div class="de"> code</div>
-	 * 		<div class="fr"> code</div>
-	 * 		<div class="it"> code</div>
-	 * @param laboratory <br>
-	 * 		<div class="de"> laboratory</div>
-	 * 		<div class="fr"> laboratory</div>
-	 * 		<div class="it"> laboratory</div>
+	 * 		<div class="de">Code für einen bezüglich einer Impfung relevanten Laborbefund</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param immuneProtection <br>
-	 * 		<div class="de"> immune protection</div>
-	 * 		<div class="fr"> immune protection</div>
-	 * 		<div class="it"> immune protection</div>
+	 * 		<div class="de">true, wenn ein Immunschutz besteht.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param dateTimeOfResult <br>
-	 * 		<div class="de"> date time of result</div>
-	 * 		<div class="fr"> date time of result</div>
-	 * 		<div class="it"> date time of result</div>
-	 * @param value <br>
-	 * 		<div class="de"> value</div>
-	 * 		<div class="fr"> value</div>
-	 * 		<div class="it"> value</div>
+	 * 		<div class="de">Datum und Uhrzeit, an dem das Resultat bekannt wurde.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param laboratory <br>
+	 * 		<div class="de">Das ausführende Labor.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param valueCode <br>
+	 * 		<div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public LaboratoryObservation(org.ehealth_connector.cda.ch.enums.Serologie code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -168,7 +167,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the code.
+	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the code
 	 */
@@ -178,7 +179,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the date time of result.
+	 * <div class="de">Gibt das Datum zurück, wann die Untersuchung durchgeführt wurde.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the date time of result
 	 */
@@ -192,9 +195,11 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the immune protection.
-	 *
-	 * @return the immune protection
+	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation Code).</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * 
+	 * @return true, wenn ein Impfschutz besteht, false sonst.
 	 */
 	public boolean getImmuneProtection() {
 		if (mLaboratoryObservation.getInterpretationCodes().get(0).equals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCode())) {
@@ -206,7 +211,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the interpretation code.
+	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation Code).</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the interpretation code
 	 */
@@ -215,8 +222,10 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the laboratory.
-	 *
+	 * <div class="de">Gibt das Labor zurück, welches das Ergebnis ermittelt hat.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * 
 	 * @return the laboratory
 	 */
 	public Organization getLaboratory() {
@@ -231,11 +240,11 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Gets the mdht o laboratory observation.
+	 * Gets the mdht laboratory observation.
 	 *
-	 * @return the mdht o laboratory observation
+	 * @return the mdht laboratory observation
 	 */
-	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtOLaboratoryObservation() {
+	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtLaboratoryObservation() {
 		return mLaboratoryObservation;
 	}
 

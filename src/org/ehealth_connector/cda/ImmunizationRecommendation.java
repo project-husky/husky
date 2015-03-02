@@ -32,9 +32,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
-// TODO: Auto-generated Javadoc
 /**
- * Eine Impfempfehlung.
+ * Dieses Element enthält den empfohlenen Impfplan für den Patienten. Zudem kann zur Begründung ein Verweis auf entsprechende Guidelines angegeben werden.
+ * Dieses Kapitel ist KONDITIONAL und nur dann erforderlich, wenn es sich beim Dokument um die Antwort aus einem Expertensystem für Impfempfehlungen handelt (Clinical Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht erfolgte Impfungen dokumentiert werden.
  */
 public class ImmunizationRecommendation {
 
@@ -122,7 +122,6 @@ public class ImmunizationRecommendation {
 			}
 		}
 
-		//TODO Later: Also consider real (Enum-) values here
 		//Set the null values
 		if (priority == null) {
 			mImmunizationRecommendation.setPriorityCode(Util.createCENullFlavorNASK());
@@ -142,9 +141,9 @@ public class ImmunizationRecommendation {
 	 * Instantiates a new immunization recommendation.
 	 *
 	 * @param immunizationRecommendation <br>
-	 * 		<div class="de"> immunization recommendation</div>
-	 * 		<div class="fr"> immunization recommendation</div>
-	 * 		<div class="it"> immunization recommendation</div>
+	 * 		<div class="de">Impfempfehlung</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
 		mImmunizationRecommendation = immunizationRecommendation;
@@ -152,8 +151,8 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * <div class="de">Copy mdht immunization recommendation.</div>
-	 * <div class="fr">Copy mdht immunization recommendation.</div>
-	 * <div class="it">Copy mdht immunization recommendation.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. immunization recommendation
 	 */
@@ -237,7 +236,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * Sets the intended or proposed.
 	 *
-	 * @param intendedOrProposed          das intendedOrProposed Objekt welches gesetzt wird
+	 * @param intendedOrProposed das intendedOrProposed Objekt welches gesetzt wird
 	 */
 	public void setIntendedOrProposed(boolean intendedOrProposed) {
 		if (intendedOrProposed) {
@@ -250,22 +249,27 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Sets the possible appliance.</div>
-	 * <div class="fr">Sets the possible appliance.</div>
-	 * <div class="it">Sets the possible appliance.</div>
+	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param startOfPossibleAppliacne <br>
-	 * 		<div class="de"> start of possible appliacne</div>
-	 * 		<div class="fr"> start of possible appliacne</div>
-	 * 		<div class="it"> start of possible appliacne</div>
-	 * @param endOfPossibleAppliance          das endOfPossibleAppliance Objekt welches gesetzt wird
+	 * 		<div class="de">Startpunkt des Zeitraumes, wann die Impfung verabreicht werden soll.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param endOfPossibleAppliance          
+	 * 		<div class="de">Endpunkt des Zeitraumes, wann die Impfung verabreicht werden soll.</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
 		mImmunizationRecommendation.getEffectiveTimes().add(0, DateUtil.createSTCM_TS(startOfPossibleAppliacne, endOfPossibleAppliance));
 	}  
 
 	/**
-	 * Sets the shall not be administerd.
+	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param shallNotBeAdministerd          das shallNotBeAdministerd Objekt welches gesetzt wird
 	 */

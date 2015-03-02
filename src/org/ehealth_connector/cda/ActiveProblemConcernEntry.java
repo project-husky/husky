@@ -23,7 +23,7 @@ import java.util.Date;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
 /**
- * <div class="de">Ein gesundheitliches Leiden</div> 
+ * <div class="de">Dieses Element bezeichnet das Leiden und dokumentiert die Zeitspanne, in welcher das Leiden für den Patienten aktuell ist. Es enthält zudem eine Sammlung von Verweisen auf Probleme, die zu diesem Leiden gehören. Im Zusammenhang mit Impfungen MUSS für Komplikations- und Expositionsrisiken je ein Problem Concern Entry angegeben werden.</div> 
  * <div class="fr">Une souffrance de la santé</div>.
  */
 public class ActiveProblemConcernEntry extends ProblemConcernEntry {

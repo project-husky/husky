@@ -36,12 +36,11 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
  * <div class="de">Ein konsumierbares Produkt</div>\n
- * <div class="fr">Class Consumable.</div>\n
- * <div class="it">Class Consumable.</div>
+ * <div class="fr"></div>\n
+ * <div class="it"></div>
  */
 public class Consumable {
 
-	// private org.openhealthtools.mdht.uml.cda.SubstanceAdministration mSubstanceAdministration;
 	private org.openhealthtools.mdht.uml.cda.Consumable mConsumable;
 	private Material mMaterial;
 	private ProductEntry mProductEntry;
@@ -175,35 +174,6 @@ public class Consumable {
 	 */
 	public String getTradeName() {
 		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
-	}
-
-	/**
-	 * Gets the who atc code.
-	 *
-	 * @return the who atc code
-	 */
-	public Code getWhoAtcCode() {
-
-		return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
-		//		//Check if the code is nullFlavor
-		//		Code code;
-		//		if (mMaterial.getCode()!=null) {
-		//			code = new Code (mMaterial.getCode());
-		//			if (code.getOid().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
-		//				return code;
-		//			}
-		//			else {
-		//				for (CD codeTranslation : mMaterial.getCode().getTranslations()) {
-		//					String codeTransStr = codeTranslation.getCodeSystem();
-		//					if (codeTransStr.equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
-		//						code = new Code(codeTranslation);
-		//						return code;
-		//					}
-		//				}
-		//				return code;
-		//			}  
-		//		}
-		//		return null;
 	}
 
 	/**

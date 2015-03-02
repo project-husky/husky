@@ -28,10 +28,9 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-// TODO: Auto-generated Javadoc
 /**
- * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
- * souffrance de la santé</div>.
+ * <div class="de">Ein gesundheitliches Leiden</div> 
+ * <div class="fr">Une souffrance de la santé</div>.
  */
 public class ProblemConcernEntry extends ConcernEntry {
 
@@ -98,21 +97,24 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
 	 *
-	 * @param concern            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param concern            
+	 * 		<div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *      <div class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry <br>
-	 * 		<div class="de"> problem entry</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
-	 * @param concernStatus            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 * 		<div class="de"></div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param concernStatus            
+	 * 		<div class="de">Der Status Code des Leidens
+	 *       (active/suspended/aborted/completed)</div> 
+	 *       <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
 	 * @param start <br>
-	 * 		<div class="de"> start</div>
-	 * 		<div class="fr"> start</div>
-	 * 		<div class="it"> start</div>
-	 * @param end            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
-	 *            du problème</div>
+	 * 		<div class="de">Beginn des Leidens</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 * @param end            
+	 * 		<div class="de">Ende des Leidens</div> 
+	 * 		<div class="fr">Le fin du problème</div>
 	 */
 	public ProblemConcernEntry(String concern,
 			ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus, Date start, Date end) {
@@ -134,9 +136,9 @@ public class ProblemConcernEntry extends ConcernEntry {
 	}
 
 	/**
-	 * <div class="de">Copy mdht problem concern entry.</div>
-	 * <div class="fr">Copy mdht problem concern entry.</div>
-	 * <div class="it">Copy mdht problem concern entry.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem concern entry
 	 */
@@ -151,10 +153,10 @@ public class ProblemConcernEntry extends ConcernEntry {
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry getMdhtProblemConcernEntry() {
 		return mProblemConcernEntry;
-	} 
+	}
 
 	/**
-	 * Gets the problem entries.
+	 * Gibt alle zu dem Leiden zugehörigen medizinischen Probleme zurück
 	 *
 	 * @return the problem entries
 	 */

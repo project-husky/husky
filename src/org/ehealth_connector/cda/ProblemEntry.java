@@ -38,13 +38,11 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
-// TODO: Auto-generated Javadoc
 /**
- * Ein medizinisches Problem.
+ * Medzinisches Problem in strukturierter Angabe (z.B. Symptom, Beschwerde, Diagnose, etc.)
  */
 public class ProblemEntry {
 
-	/** The m problem entry. */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
 	/**
@@ -74,24 +72,24 @@ public class ProblemEntry {
 
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko) besteht und dieses im Freitext angegeben wird.
+	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko) besteht und dieses als Freitext angegeben wird.
 	 *
 	 * @param code <br>
-	 * 		<div class="de"> code</div>
-	 * 		<div class="fr"> code</div>
-	 * 		<div class="it"> code</div>
+	 * 		<div class="de">Code des Problems (z.B. SNOMED Code für eine Diagnose)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param value <br>
-	 * 		<div class="de"> value</div>
-	 * 		<div class="fr"> value</div>
-	 * 		<div class="it"> value</div>
+	 * 		<div class="de">Beschreibung des Problems (z.B. Lungenentzündung)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param start <br>
-	 * 		<div class="de"> start</div>
-	 * 		<div class="fr"> start</div>
-	 * 		<div class="it"> start</div>
+	 * 		<div class="de">Beginn des Problems</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param end <br>
-	 * 		<div class="de"> end</div>
-	 * 		<div class="fr"> end</div>
-	 * 		<div class="it"> end</div>
+	 * 		<div class="de">Ende des Problems</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public ProblemEntry(Code code, String value, Date start, Date end) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
@@ -109,21 +107,21 @@ public class ProblemEntry {
 	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko) besteht und dieses codiert angegeben wird.
 	 *
 	 * @param code <br>
-	 * 		<div class="de"> code</div>
-	 * 		<div class="fr"> code</div>
-	 * 		<div class="it"> code</div>
+	 * 		<div class="de">Code des Problems (z.B. SNOMED Code für eine Diagnose)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param value <br>
-	 * 		<div class="de"> value</div>
-	 * 		<div class="fr"> value</div>
-	 * 		<div class="it"> value</div>
+	 * 		<div class="de">Wert des Problems (z.B. ICD Code für Lungenentzündung)</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param start <br>
-	 * 		<div class="de"> start</div>
-	 * 		<div class="fr"> start</div>
-	 * 		<div class="it"> start</div>
+	 * 		<div class="de">Beginn des Problems</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param end <br>
-	 * 		<div class="de"> end</div>
-	 * 		<div class="fr"> end</div>
-	 * 		<div class="it"> end</div>
+	 * 		<div class="de">Ende des Problems</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public ProblemEntry(Code code, Value value, Date start, Date end) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
@@ -141,8 +139,8 @@ public class ProblemEntry {
 	 *
 	 * @param observation <br>
 	 * 		<div class="de"> observation</div>
-	 * 		<div class="fr"> observation</div>
-	 * 		<div class="it"> observation</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public ProblemEntry(Observation observation) {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
@@ -185,26 +183,26 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * <div class="de">Adds the value text.</div>
-	 * <div class="fr">Adds the value text.</div>
-	 * <div class="it">Adds the value text.</div>
+	 * <div class="de">Fügt dem Wert (Value) einen Text hinzu</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param value <br>
+	 * @param text <br>
 	 * 		<div class="de"> value</div>
 	 * 		<div class="fr"> value</div>
 	 * 		<div class="it"> value</div>
 	 */
-	public void addValueText(String value) {
+	public void addValueText(String text) {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setNullFlavor(NullFlavor.UNK);
-		cd.setOriginalText(Util.createEd(value));
+		cd.setOriginalText(Util.createEd(text));
 		mProblemEntry.getValues().add(cd);		
 	}
 
 	/**
 	 * <div class="de">Copy mdht problem entry.</div>
-	 * <div class="fr">Copy mdht problem entry.</div>
-	 * <div class="it">Copy mdht problem entry.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem entry
 	 */
@@ -213,7 +211,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Gets the code.
+	 * <div class="de">Gibt den Code des Problems zurück.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return das codedProblem Objekt
 	 */
@@ -223,7 +223,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Gets the end.
+	 * <div class="de">Gibt das Zeitpunkt zurück, seitdem das Problems beendet ist</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return das endOfProblem Objekt
 	 */
@@ -242,7 +244,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Gets the problem not occured.
+	 * <div class="de">Gibt zurück, ob das Problem nicht aufgetreten ist.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return das problemNotOccured Objekt
 	 */
@@ -251,7 +255,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Gets the start.
+	 * <div class="de">Gibt das Zeitpunkt zurück, seit das Problems angefangen hat</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return das startOfProblem Objekt
 	 */
@@ -272,15 +278,16 @@ public class ProblemEntry {
 	/**
 	 * Sets the code.
 	 *
-	 * @param codedProblem            das codedProblem Objekt welches gesetzt wird
+	 * @param codedProblem das codedProblem Objekt welches gesetzt wird
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
 	}
 
 	/**
-	 * Sets the end.
-	 *
+	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet ist</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param endOfProblem            das endOfProblem Objekt welches gesetzt wird
 	 */
 	public void setEnd(Date endOfProblem) {
@@ -294,7 +301,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Sets the id.
+	 * <div class="de">Setzt eine interne (z.B. aus der Krankenakte bekannte) ID für das Problem. Wird null angegeben, dann wird eine ID generiert.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param id the new id
 	 */
@@ -304,8 +313,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Sets the not occured.
-	 *
+	 * <div class="de">true, wenn das Problem nicht aufgetreten ist, false sonst (negationInd)</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param problemNotOccured            das problemNotOccured Objekt welches gesetzt wird
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
@@ -313,8 +323,9 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Sets the start.
-	 *
+	 * <div class="de">Setzt den Zeitpunkt, an dem das Problems angefangen hat</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param startOfProblem            das startOfProblem Objekt welches gesetzt wird
 	 */
 	public void setStart(Date startOfProblem) {
@@ -332,7 +343,15 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Sets the value.
+	 * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen:
+	 * 	CHOP	2.16.756.5.30.1.126.3.1 
+	 * 	ICD-10	2.16.756.5.30.1.126.3.2 
+	 * 	ICPC-2	2.16.840.1.113883.6.139
+	 * 	VVK-EDI	2.16.756.5.30.1.127.3.1.20080401.1
+	 * 	SNOMED CT	2.16.840.1.113883.6.96
+	 * 	</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param code the new value
 	 */
@@ -342,8 +361,15 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * Sets the value.
-	 *
+	 * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen:
+	 * 	CHOP	2.16.756.5.30.1.126.3.1 
+	 * 	ICD-10	2.16.756.5.30.1.126.3.2 
+	 * 	ICPC-2	2.16.840.1.113883.6.139
+	 * 	VVK-EDI	2.16.756.5.30.1.127.3.1.20080401.1
+	 * 	SNOMED CT	2.16.840.1.113883.6.96
+	 * 	</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param problemValue the new value
 	 */
 	public void setValue(Value problemValue) {

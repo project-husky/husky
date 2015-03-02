@@ -23,8 +23,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
  * <div class="de">Die Klasse für Kommentar-Objekte</div>\n
- * <div class="fr">Class Comment.</div>\n
- * <div class="it">Class Comment.</div>
+ * <div class="fr"></div>\n
+ * <div class="it"></div>
  */
 public class Comment {
 	
@@ -54,7 +54,7 @@ public class Comment {
 	 * Instantiates a new comment.
 	 *
 	 * @param text <br>
-	 * 		<div class="de"> text</div>
+	 * 		<div class="de"> Kommentar</div>
 	 * 		<div class="fr"> text</div>
 	 * 		<div class="it"> text</div>
 	 */

@@ -36,31 +36,23 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
-// TODO: Auto-generated Javadoc
 /**
- * <div class="de">Class GestationalAge.</div>\n
- * <div class="fr">Class GestationalAge.</div>\n
- * <div class="it">Class GestationalAge.</div>
+ * <div class="de">Klasse Gestationsalter. Dies ist der Zeitraum vom 1. Tag der letzten Regelblutung der Mutter bis zur Geburt des Kindes. Hier kann Gestationsalter eines Kindes angegeben werden, sofern das rund um Impfungen am Kind relevant ist. </div>\n
+ * <div class="fr"></div>\n
+ * <div class="it"></div>
  */
 public class GestationalAge {
 
-	/** The crs. */
 	CodedResultsSection crs;
-	
-	/** The m weeks. */
 	GestationalAgeWeeksSimpleObservation mWeeks;
-	
-	/** The m days. */
 	GestationalAgeDaysSimpleObservation mDays;
-	
-	/** The m ii. */
 	II mIi;
 
 	/**
 	 * Instantiates a new gestational age.
 	 *
 	 * @param codedResultsSection <br>
-	 * 		<div class="de"> coded results section</div>
+	 * 		<div class="de">Instantiiert das Objekt auf Basis einer MDHT CodedResultsSection</div>
 	 * 		<div class="fr"> coded results section</div>
 	 * 		<div class="it"> coded results section</div>
 	 */
@@ -74,7 +66,7 @@ public class GestationalAge {
 	 * Instantiates a new gestational age.
 	 *
 	 * @param days <br>
-	 * 		<div class="de"> days</div>
+	 * 		<div class="de">Gestationsalter in Tagen</div>
 	 * 		<div class="fr"> days</div>
 	 * 		<div class="it"> days</div>
 	 */
@@ -86,11 +78,11 @@ public class GestationalAge {
 	 * Instantiates a new gestational age.
 	 *
 	 * @param weeks <br>
-	 * 		<div class="de"> weeks</div>
+	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen an.</div>
 	 * 		<div class="fr"> weeks</div>
 	 * 		<div class="it"> weeks</div>
 	 * @param weeksDays <br>
-	 * 		<div class="de"> weeks days</div>
+	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage an.</div>
 	 * 		<div class="fr"> weeks days</div>
 	 * 		<div class="it"> weeks days</div>
 	 */
@@ -166,7 +158,10 @@ public class GestationalAge {
 	/**
 	 * Gets the abolute days.
 	 *
-	 * @return the abolute days
+	 * @return 	
+	 * <div class="de">Gibt das Gestationsalter in absoluten Tagen (ohne Wochen) zurück.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 */
 	public int getAboluteDays () {
 		return (getWeeksOfWeeksAndDays()*7)+getDaysOfWeeksAndDays();
@@ -175,7 +170,10 @@ public class GestationalAge {
 	/**
 	 * Gets the days of weeks and days.
 	 *
-	 * @return the days of weeks and days
+	 * @return
+	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage zurückgegeben.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div> 
 	 */
 	public int getDaysOfWeeksAndDays() {
 		for (ANY any: mDays.getValues()){
@@ -191,6 +189,9 @@ public class GestationalAge {
 	 * Gets the gestational age text.
 	 *
 	 * @return the gestational age text
+	 * <div class="de">Das Gestationsalter in Satz-form: "Das Gestationsalter beträgt: X Wochen und Y Tage"</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div> 
 	 */
 	public String getGestationalAgeText() {
 		String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
@@ -227,7 +228,10 @@ public class GestationalAge {
 	/**
 	 * Gets the weeks of weeks and days.
 	 *
-	 * @return the weeks of weeks and days
+	 * @return
+	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen zurückgegeben.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>  
 	 */
 	public int getWeeksOfWeeksAndDays() {
 		for (ANY any: mWeeks.getValues()){
@@ -242,7 +246,10 @@ public class GestationalAge {
 	/**
 	 * Sets the asbolute days.
 	 *
-	 * @param days the new asbolute days
+	 * @param days
+	 * <div class="de">Setzt das Gestationsalter in absoluten Tagen (nicht in Wochen UND Tagen).</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div> 
 	 */
 	public void setAsboluteDays (int days) {
 		setWeeksOfWeeksAndDays(days/7);
@@ -252,7 +259,10 @@ public class GestationalAge {
 	/**
 	 * Sets the days of weeks and days.
 	 *
-	 * @param days the new days of weeks and days
+	 * @param 
+	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div> 
 	 */
 	public void setDaysOfWeeksAndDays(int days) {
 		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
@@ -264,7 +274,10 @@ public class GestationalAge {
 	/**
 	 * Sets the weeks of weeks and days.
 	 *
-	 * @param weeks the new weeks of weeks and days
+	 * @param 
+	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div> 
 	 */
 	public void setWeeksOfWeeksAndDays(int weeks) {
 		//create and the values, ids and effectiveTime for weeks and days

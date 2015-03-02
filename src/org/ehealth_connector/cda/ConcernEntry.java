@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * <div class="de">Class ConcernEntry.</div>\n
+ * <div class="de">Klasse ConcernEntry.</div>\n
  * <div class="fr">Class ConcernEntry.</div>\n
  * <div class="it">Class ConcernEntry.</div>
  */

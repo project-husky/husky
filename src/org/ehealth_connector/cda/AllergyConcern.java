@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 
 /**
  * Allergy Concern
- * <div class="de">Ein allergisches Leiden</div> 
+ * <div class="de">Dieses Element enthält die Allergien und Unverträglichkeiten des Patienten.</div> 
  * <div class="fr"></div>.
  */
 public class AllergyConcern extends ConcernEntry {

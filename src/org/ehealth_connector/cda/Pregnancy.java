@@ -30,9 +30,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 
-// TODO: Auto-generated Javadoc
 /**
- * <div class="de">Class Pregnancy.</div>\n
+ * <div class="de">Bei Frauen KANN mit diesem Element die strukturierte Angabe der Anamnese zu einer Schwangerschaft erfolgen.</div>\n
  * <div class="fr">Class Pregnancy.</div>\n
  * <div class="it">Class Pregnancy.</div>
  */
@@ -56,14 +55,14 @@ public class Pregnancy {
 	/**
 	 * Instantiates a new pregnancy.
 	 *
-	 * @param estimatedBirdDate <br>
-	 * 		<div class="de"> estimated bird date</div>
-	 * 		<div class="fr"> estimated bird date</div>
-	 * 		<div class="it"> estimated bird date</div>
+	 * @param estimatedBirthDate <br>
+	 * 		<div class="de">Errechneter Geburtstermin</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
-	public Pregnancy (Date estimatedBirdDate) {
+	public Pregnancy (Date estimatedBirthDate) {
 		this();
-		setEstimatedBirthDate(estimatedBirdDate);
+		setEstimatedBirthDate(estimatedBirthDate);
 	}
 
 	/**
@@ -90,7 +89,7 @@ public class Pregnancy {
 	}
 
 	/**
-	 * Gets the estimated birthdate.
+	 * Gibt den errechneten Geburtstermin zurück.
 	 *
 	 * @return the estimated birthdate
 	 */
@@ -113,7 +112,7 @@ public class Pregnancy {
 	}
 
 	/**
-	 * Sets the estimated birth date.
+	 * Setzt den errechneten Geburtstermin
 	 *
 	 * @param estimatedBirdDate the new estimated birth date
 	 */

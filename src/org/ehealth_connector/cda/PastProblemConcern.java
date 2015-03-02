@@ -22,7 +22,6 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
-// TODO: Auto-generated Javadoc
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
  * souffrance de la santé</div>.
