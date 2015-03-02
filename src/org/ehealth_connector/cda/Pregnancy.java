@@ -1,3 +1,20 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda;
 
 import java.util.Date;
@@ -13,9 +30,20 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * <div class="de">Class Pregnancy.</div>\n
+ * <div class="fr">Class Pregnancy.</div>\n
+ * <div class="it">Class Pregnancy.</div>
+ */
 public class Pregnancy {
+	
+	/** The m pregnancy. */
 	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 
+	/**
+	 * Instantiates a new pregnancy.
+	 */
 	public Pregnancy() {
 		mPregnancy = IHEFactory.eINSTANCE.createPregnancyObservation().init();
 		mPregnancy.setClassCode(ActClassObservation.OBS);
@@ -25,19 +53,47 @@ public class Pregnancy {
 		setInternalId(null);
 	}
 
+	/**
+	 * Instantiates a new pregnancy.
+	 *
+	 * @param estimatedBirdDate <br>
+	 * 		<div class="de"> estimated bird date</div>
+	 * 		<div class="fr"> estimated bird date</div>
+	 * 		<div class="it"> estimated bird date</div>
+	 */
 	public Pregnancy (Date estimatedBirdDate) {
 		this();
 		setEstimatedBirthDate(estimatedBirdDate);
 	}
 
+	/**
+	 * Instantiates a new pregnancy.
+	 *
+	 * @param pregnancy <br>
+	 * 		<div class="de"> pregnancy</div>
+	 * 		<div class="fr"> pregnancy</div>
+	 * 		<div class="it"> pregnancy</div>
+	 */
 	public Pregnancy(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
 		mPregnancy = pregnancy;
 	}
 
+	/**
+	 * <div class="de">Copy mdht pregnancy.</div>
+	 * <div class="fr">Copy mdht pregnancy.</div>
+	 * <div class="it">Copy mdht pregnancy.</div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.ihe. pregnancy observation
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
 		return EcoreUtil.copy(mPregnancy);
 	}
 
+	/**
+	 * Gets the estimated birthdate.
+	 *
+	 * @return the estimated birthdate
+	 */
 	public String getEstimatedBirthdate() {
 
 		if (mPregnancy.getValues().size()>0) {
@@ -47,10 +103,20 @@ public class Pregnancy {
 		else return null;
 	}
 
+	/**
+	 * Gets the mdht pregnancy.
+	 *
+	 * @return the mdht pregnancy
+	 */
 	public PregnancyObservation getMdhtPregnancy() {
 		return mPregnancy;
 	}
 
+	/**
+	 * Sets the estimated birth date.
+	 *
+	 * @param estimatedBirdDate the new estimated birth date
+	 */
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
 		TS ts = DateUtil.ts(estimatedBirdDate);
 		mPregnancy.getValues().add(ts);

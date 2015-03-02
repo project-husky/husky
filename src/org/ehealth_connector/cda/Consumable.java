@@ -1,3 +1,20 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda;
 
 import org.eclipse.emf.common.util.EList;
@@ -17,6 +34,11 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
+/**
+ * <div class="de">Ein konsumierbares Produkt</div>\n
+ * <div class="fr">Class Consumable.</div>\n
+ * <div class="it">Class Consumable.</div>
+ */
 public class Consumable {
 
 	// private org.openhealthtools.mdht.uml.cda.SubstanceAdministration mSubstanceAdministration;
@@ -50,9 +72,13 @@ public class Consumable {
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
+	 *
 	 * @param tradeNameOfVaccine Handelsname des Impfstoffes
 	 * @param gtinOrPharmacodeOrGln Packungs-GTIN, GLN oder swissINDEX (GLN ist veraltet)
-	 * @param whoACTCode WHO ATC Code des Impfstoffes
+	 * @param whoAtcCode <br>
+	 * 		<div class="de"> who atc code</div>
+	 * 		<div class="fr"> who atc code</div>
+	 * 		<div class="it"> who atc code</div>
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, String whoAtcCode) {
 
@@ -77,17 +103,30 @@ public class Consumable {
 	}
 
 	/**
+	 * <div class="de">Adds the manufactured material translation.</div>
+	 * <div class="fr">Adds the manufactured material translation.</div>
+	 * <div class="it">Adds the manufactured material translation.</div>
+	 *
 	 * @param codedId das codedId Objekt welches gesetzt wird
 	 */
 	public void addManufacturedMaterialTranslation(Code codedId) {
 		mMaterial.getCode().getTranslations().add(codedId.getCD());
 	}
 
+	/**
+	 * <div class="de">Copy mdht consumable.</div>
+	 * <div class="fr">Copy mdht consumable.</div>
+	 * <div class="it">Copy mdht consumable.</div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda. consumable
+	 */
 	public org.openhealthtools.mdht.uml.cda.Consumable copyMdhtConsumable() {
 		return EcoreUtil.copy(mConsumable);
 	}
 
 	/**
+	 * Gets the manufactured material code.
+	 *
 	 * @return das codedId Objekt
 	 */
 	public Code getManufacturedMaterialCode() {
@@ -95,6 +134,11 @@ public class Consumable {
 		return code;
 	}
 
+	/**
+	 * Gets the manufactured material translation gtin or ean or swiss index.
+	 *
+	 * @return the manufactured material translation gtin or ean or swiss index
+	 */
 	public Code getManufacturedMaterialTranslationGtinOrEanOrSwissIndex() {
 		for (CD codeTranslation : getManufacturedMaterialTranslations()) {
 			String codeTransStr = codeTranslation.getCodeSystem();
@@ -106,15 +150,27 @@ public class Consumable {
 		return null;
 	}
 
+	/**
+	 * Gets the manufactured material translations.
+	 *
+	 * @return the manufactured material translations
+	 */
 	public EList<CD> getManufacturedMaterialTranslations() {
 		return mMaterial.getCode().getTranslations();
 	}
 
+	/**
+	 * Gets the mdht consumable.
+	 *
+	 * @return the mdht consumable
+	 */
 	public org.openhealthtools.mdht.uml.cda.Consumable getMdhtConsumable() {
 		return EcoreUtil.copy(mConsumable);
 	}
 
 	/**
+	 * Gets the trade name.
+	 *
 	 * @return das tradeNameOfVaccine Objekt
 	 */
 	public String getTradeName() {
@@ -122,6 +178,9 @@ public class Consumable {
 	}
 
 	/**
+	 * Gets the who atc code.
+	 *
+	 * @return the who atc code
 	 */
 	public Code getWhoAtcCode() {
 
@@ -147,11 +206,21 @@ public class Consumable {
 		//		return null;
 	}
 
+	/**
+	 * Sets the manufactured material code.
+	 *
+	 * @param codedId the new manufactured material code
+	 */
 	public void setManufacturedMaterialCode(Code codedId) {
 		CD cd = EcoreUtil.copy(codedId.getCD());
 		mMaterial.getCode().getTranslations().add(cd);
 	}
 
+	/**
+	 * Sets the manufactured product id.
+	 *
+	 * @param gtinOrPharmacodeOrGln the new manufactured product id
+	 */
 	public void setManufacturedProductId(Code gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
 			mProductEntry.getIds().add(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln).getIi());
@@ -170,6 +239,8 @@ public class Consumable {
 	}
 
 	/**
+	 * Sets the trade name.
+	 *
 	 * @param tradeNameOfVaccine das tradeNameOfVaccine Objekt welches gesetzt wird
 	 */
 	public void setTradeName(String tradeNameOfVaccine) {
@@ -179,6 +250,8 @@ public class Consumable {
 	}
 
 	/**
+	 * Sets the who atc code.
+	 *
 	 * @param whoActCode das WHOACTCode Objekt welches gesetzt wird
 	 */
 	public void setWhoAtcCode(String whoActCode) {

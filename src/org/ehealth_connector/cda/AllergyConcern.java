@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -29,13 +29,17 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
- * souffrance de la santé</div>
+ * Allergy Concern
+ * <div class="de">Ein allergisches Leiden</div> 
+ * <div class="fr"></div>.
  */
 public class AllergyConcern extends ConcernEntry {
 
 	protected org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
 
+	/**
+	 * Instantiates a new allergy concern.
+	 */
 	public AllergyConcern() {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
@@ -47,12 +51,11 @@ public class AllergyConcern extends ConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param allergyConcernEntry
-	 * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
-	 * 
-	 * <div class="fr">Objet préexistante à cloner</div>
-	 * 
+	 *
+	 * @param allergyConcern <br>
+	 * 		<div class="de"> allergy concern</div>
+	 * 		<div class="fr"> allergy concern</div>
+	 * 		<div class="it"> allergy concern</div>
 	 */
 	public AllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
@@ -66,14 +69,17 @@ public class AllergyConcern extends ConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param completed
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 *
+	 * @param concern            
+	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param problemEntry <br>
+	 * 		<div class="de"> Das medizinische Problem</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param completed            
+	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
+	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern, AllergyProblem problemEntry, org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode completed) {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
@@ -91,20 +97,23 @@ public class AllergyConcern extends ConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 * @param begin
-	 *            <div class="de">Beginn des Leidens</div> <div class="fr">Le
-	 *            début du problème</div>
-	 * @param end
-	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
-	 *            du problème</div>
+	 *
+	 * @param concern            
+	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param begin            
+	 *     <div class="de">Beginn des Leidens</div> 
+	 *     <div class="fr">Le début du problème</div>
+	 * @param end            
+	 *     <div class="de">Ende des Leidens</div> 
+	 *     <div class="fr">Le fin du problème</div>
+	 * @param problemEntry <br>
+	 * 		<div class="de">Das medizinische Problem</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param concernStatus            
+	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
+	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern,
 			Date begin, Date end, AllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
@@ -113,10 +122,9 @@ public class AllergyConcern extends ConcernEntry {
 	}
 
 	/**
-	 * Fügt dem Leiden ein medizinisches Problem hinzu
-	 * 
-	 * @param problemEntry
-	 *            Das Problem
+	 * Fügt dem Leiden ein medizinisches Problem hinzu.
+	 *
+	 * @param problemEntry            Das Problem
 	 */
 	public void addAllergyProblem(AllergyProblem problemEntry) {
 		mAllergyConcern.addObservation(problemEntry.mAllergyProblem);
@@ -125,10 +133,22 @@ public class AllergyConcern extends ConcernEntry {
 		mAllergyConcern.getEntryRelationships().get(0).setInversionInd(false);
 	}
 
+	/**
+	 * <div class="de">Copy mdht allergy concern.</div>
+	 * <div class="fr">Copy mdht allergy concern.</div>
+	 * <div class="it">Copy mdht allergy concern.</div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.ihe. allergy intolerance concern
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern copyMdhtAllergyConcern() {
 		return EcoreUtil.copy(mAllergyConcern);
 	}
 
+	/**
+	 * Gets the allergy problems.
+	 *
+	 * @return the allergy problems
+	 */
 	public ArrayList<AllergyProblem> getAllergyProblems() {
 		ArrayList<AllergyProblem> apl = new ArrayList<AllergyProblem>();
 		for (AllergyIntolerance mAllergy: mAllergyConcern.getAllergyIntolerances()) {
@@ -138,6 +158,11 @@ public class AllergyConcern extends ConcernEntry {
 		return apl;
 	}
 
+	/**
+	 * Gets the mdht allergy concern.
+	 *
+	 * @return the mdht allergy concern
+	 */
 	public AllergyIntoleranceConcern getMdhtAllergyConcern() {
 		return mAllergyConcern;
 	}

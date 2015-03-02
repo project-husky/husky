@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -22,9 +22,10 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
+// TODO: Auto-generated Javadoc
 /**
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
- * souffrance de la santé</div>
+ * souffrance de la santé</div>.
  */
 public class PastProblemConcern extends ProblemConcernEntry {
 
@@ -34,14 +35,6 @@ public class PastProblemConcern extends ProblemConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public PastProblemConcern() {
 		super();
@@ -71,12 +64,14 @@ public class PastProblemConcern extends ProblemConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *
+	 * @param concern            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
+	 * @param problemEntry <br>
+	 * 		<div class="de"> problem entry</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param concernStatus            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
@@ -90,19 +85,19 @@ public class PastProblemConcern extends ProblemConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *
+	 * @param concern            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param problemConcernStatus
-	 *            <div class="de">Der Status Code des Leidens
+	 * @param problemEntry <br>
+	 * 		<div class="de"> problem entry</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param problemConcernStatus            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 * @param begin
-	 *            <div class="de">Beginn des Leidens</div> <div class="fr">Le
+	 * @param begin            <div class="de">Beginn des Leidens</div> <div class="fr">Le
 	 *            début du problème</div>
-	 * @param end
-	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
+	 * @param end            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
 	 *            du problème</div>
 	 */
 	public PastProblemConcern(String concern,

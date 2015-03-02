@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -36,14 +36,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+// TODO: Auto-generated Javadoc
 /**
- * Eine Impfung
- * 
+ * Eine Impfung.
  */
 public class Immunization {
 
 	private org.openhealthtools.mdht.uml.cda.ihe.Immunization mImmunization;
 
+	/**
+	 * Instantiates a new immunization.
+	 */
 	public Immunization() {
 		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
 		mImmunization.setNegationInd(Boolean.FALSE);
@@ -51,8 +54,13 @@ public class Immunization {
 
 	/**
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen. 
-	 * @param consumable Impfstoff
+	 *
 	 * @author author Die eintragende Person
+	 * @param consumable Impfstoff
+	 * @param author <br>
+	 * 		<div class="de"> author</div>
+	 * 		<div class="fr"> author</div>
+	 * 		<div class="it"> author</div>
 	 * @param appliedAt Datum der Impfung
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
@@ -77,8 +85,13 @@ public class Immunization {
 
 	/**
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen. 
-	 * @param consumable Impfstoff
+	 *
 	 * @author author Die eintragende Person
+	 * @param consumable Impfstoff
+	 * @param author <br>
+	 * 		<div class="de"> author</div>
+	 * 		<div class="fr"> author</div>
+	 * 		<div class="it"> author</div>
 	 * @param appliedAt Datum der Impfung
 	 * @param route Einnahmeart (darf null sein)
 	 * @param doseQuantity in milliliters (e.g. 0.5) (darf null sein)
@@ -107,8 +120,11 @@ public class Immunization {
 
 	/**
 	 * Constructor.
-	 * 
-	 * @param immunization
+	 *
+	 * @param immunization <br>
+	 * 		<div class="de"> immunization</div>
+	 * 		<div class="fr"> immunization</div>
+	 * 		<div class="it"> immunization</div>
 	 */
 	public Immunization(org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization) {
 		mImmunization = immunization;
@@ -159,6 +175,11 @@ public class Immunization {
 		return priorityCode;
 	}
 
+	/**
+	 * Gets the apply date.
+	 *
+	 * @return the apply date
+	 */
 	public Date getApplyDate() {
 		SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
 		return DateUtil.parseDateyyyyMMdd(date.getValue());
@@ -180,14 +201,19 @@ public class Immunization {
 
 	}
 
+	/**
+	 * Gets the consumable.
+	 *
+	 * @return the consumable
+	 */
 	public Consumable getConsumable() {
 		Consumable consumable = new Consumable(mImmunization.getConsumable());
 		return consumable;
 	}
 
 	/**
-	 * Gibt die Dosis der Impfung zurück
-	 * 
+	 * Gibt die Dosis der Impfung zurück.
+	 *
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
@@ -195,6 +221,11 @@ public class Immunization {
 		return value;
 	}	
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Identificator getId() {
 		Identificator id = new Identificator(mImmunization.getIds().get(0));
 		return id;
@@ -243,22 +274,47 @@ public class Immunization {
 		return mImmunization;
 	}
 
+	/**
+	 * Gets the route of administration.
+	 *
+	 * @return the route of administration
+	 */
 	public RouteOfAdministration getRouteOfAdministration() {
 		return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
 	}
 
+	/**
+	 * Sets the apply date.
+	 *
+	 * @param appliedAt the new apply date
+	 */
 	public void setApplyDate(Date appliedAt) {
 		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
 	}
 
+	/**
+	 * Sets the author.
+	 *
+	 * @param author the new author
+	 */
 	public void setAuthor(Author author) {
 		mImmunization.getAuthors().add(author.copyMdhtAuthor());
 	}
 
+	/**
+	 * Sets the consumable.
+	 *
+	 * @param consumable the new consumable
+	 */
 	public void setConsumable(Consumable consumable) {
 		mImmunization.setConsumable(consumable.copyMdhtConsumable());
 	}
 
+	/**
+	 * Sets the dosage.
+	 *
+	 * @param doseQuantity the new dosage
+	 */
 	public void setDosage(String doseQuantity) {
 		if (doseQuantity==null) {
 			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
@@ -270,6 +326,11 @@ public class Immunization {
 		}
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param codedId the new id
+	 */
 	public void setId(Identificator codedId) {
 		II ii = Util.createUuidVacdIdentificator(codedId);
 		mImmunization.getIds().add(ii);
@@ -282,8 +343,8 @@ public class Immunization {
 	/**
 	 * Optionally, one can set the route code (Einnahmearten).
 	 * If not set, <routeCode nullFlavor="NA"/> is written to CDA document.
-	 * 
-	 * @param routeCode
+	 *
+	 * @param routeCode the new route of administration
 	 */
 	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
 		if (routeCode == null) {

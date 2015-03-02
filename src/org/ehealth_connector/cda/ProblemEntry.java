@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -38,13 +38,18 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+// TODO: Auto-generated Javadoc
 /**
- * Ein medizinisches Problem
+ * Ein medizinisches Problem.
  */
 public class ProblemEntry {
 
+	/** The m problem entry. */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
+	/**
+	 * Instantiates a new problem entry.
+	 */
 	public ProblemEntry() {
 
 	}
@@ -70,12 +75,23 @@ public class ProblemEntry {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko) besteht und dieses im Freitext angegeben wird.
-	 * 
-	 * @param risc Expositionsrisiko
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems (Zeitpunkt, an dem bekannt ist, dass das Problem nicht mehr existiert. In allen anderen Fällen wird null angegeben).
+	 *
+	 * @param code <br>
+	 * 		<div class="de"> code</div>
+	 * 		<div class="fr"> code</div>
+	 * 		<div class="it"> code</div>
+	 * @param value <br>
+	 * 		<div class="de"> value</div>
+	 * 		<div class="fr"> value</div>
+	 * 		<div class="it"> value</div>
+	 * @param start <br>
+	 * 		<div class="de"> start</div>
+	 * 		<div class="fr"> start</div>
+	 * 		<div class="it"> start</div>
+	 * @param end <br>
+	 * 		<div class="de"> end</div>
+	 * 		<div class="fr"> end</div>
+	 * 		<div class="it"> end</div>
 	 */
 	public ProblemEntry(Code code, String value, Date start, Date end) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
@@ -91,12 +107,23 @@ public class ProblemEntry {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko) besteht und dieses codiert angegeben wird.
-	 * 
-	 * @param risc Expositionsrisiko
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems (Zeitpunkt, an dem bekannt ist, dass das Problem nicht mehr existiert. In allen anderen Fällen wird null angegeben).
+	 *
+	 * @param code <br>
+	 * 		<div class="de"> code</div>
+	 * 		<div class="fr"> code</div>
+	 * 		<div class="it"> code</div>
+	 * @param value <br>
+	 * 		<div class="de"> value</div>
+	 * 		<div class="fr"> value</div>
+	 * 		<div class="it"> value</div>
+	 * @param start <br>
+	 * 		<div class="de"> start</div>
+	 * 		<div class="fr"> start</div>
+	 * 		<div class="it"> start</div>
+	 * @param end <br>
+	 * 		<div class="de"> end</div>
+	 * 		<div class="fr"> end</div>
+	 * 		<div class="it"> end</div>
 	 */
 	public ProblemEntry(Code code, Value value, Date start, Date end) {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
@@ -110,7 +137,12 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * @param observation
+	 * Instantiates a new problem entry.
+	 *
+	 * @param observation <br>
+	 * 		<div class="de"> observation</div>
+	 * 		<div class="fr"> observation</div>
+	 * 		<div class="it"> observation</div>
 	 */
 	public ProblemEntry(Observation observation) {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
@@ -119,12 +151,16 @@ public class ProblemEntry {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein Komplikationsrisiko besteht.
-	 * 
+	 *
 	 * @param risc Komplikationsrisiko
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems (Zeitpunkt, an dem bekannt ist, dass das Problem nicht mehr existiert. In allen anderen Fällen wird null angegeben).
+	 * @param start <br>
+	 * 		<div class="de"> start</div>
+	 * 		<div class="fr"> start</div>
+	 * 		<div class="it"> start</div>
+	 * @param end <br>
+	 * 		<div class="de"> end</div>
+	 * 		<div class="fr"> end</div>
+	 * 		<div class="it"> end</div>
 	 */
 	public ProblemEntry(RiscOfComplications risc, Date start, Date end) {
 		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
@@ -133,17 +169,31 @@ public class ProblemEntry {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
 	 * Dieser Konstruktor wird verwendet, wenn für den Patienten ein Expositionsrisiko besteht.
-	 * 
+	 *
 	 * @param risc Expositionsrisiko
-	 * @param startOfProblem
-	 *            Beginn des Problems
-	 * @param endOfProblem
-	 *            Ende des Problems (Zeitpunkt, an dem bekannt ist, dass das Problem nicht mehr existiert. In allen anderen Fällen wird null angegeben).
+	 * @param start <br>
+	 * 		<div class="de"> start</div>
+	 * 		<div class="fr"> start</div>
+	 * 		<div class="it"> start</div>
+	 * @param end <br>
+	 * 		<div class="de"> end</div>
+	 * 		<div class="fr"> end</div>
+	 * 		<div class="it"> end</div>
 	 */
 	public ProblemEntry(RiscOfExposure risc, Date start, Date end) {
 		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
 	}
 
+	/**
+	 * <div class="de">Adds the value text.</div>
+	 * <div class="fr">Adds the value text.</div>
+	 * <div class="it">Adds the value text.</div>
+	 *
+	 * @param value <br>
+	 * 		<div class="de"> value</div>
+	 * 		<div class="fr"> value</div>
+	 * 		<div class="it"> value</div>
+	 */
 	public void addValueText(String value) {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setNullFlavor(NullFlavor.UNK);
@@ -151,118 +201,20 @@ public class ProblemEntry {
 		mProblemEntry.getValues().add(cd);		
 	}
 
-	//	/**
-	//	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	//	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code angegeben werden soll.
-	//	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	//	 * 
-	//	 * @param problemNotOccured
-	//	 *            Normalerweise false. Ist ein Problem nicht aufgetreten: true.
-	//	 * @param startOfProblem
-	//	 *            Beginn des Problems
-	//	 * @param endOfProblem
-	//	 *            Ende des Problems
-	//	 * @param problem
-	//	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	//	 *            Komplikationsrisiken oder Expositionsrisiken.
-	//	 * @param internalProblemId
-	//	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
-	//	 */
-	//	public ProblemEntry(org.ehealth_connector.common.Code problem) {
-	//		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-	//		mProblemEntry.setEffectiveTime(DateUtil.createUnknownLowHighTimeNullFlavor());
-	//		setNotOccured(false);
-	//		setCode(problem);
-	//		setId(null);
-	//		CD cd = DatatypesFactory.eINSTANCE.createCD();
-	//		cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.UNK);
-	//		mProblemEntry.getValues().add(cd);
-	//	}
-	//
-	//	/**
-	//	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	//	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	//	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	//	 * @param problem
-	//	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	//	 *            Komplikationsrisiken oder Expositionsrisiken.
-	//	 * @param start
-	//	 *            Beginn des Problems
-	//	 * @param end
-	//	 *            Ende des Problems
-	//	 */
-	//	private ProblemEntry(org.ehealth_connector.common.Code problem,
-	//			Date start, Date end) {
-	//		this(new Value(problem), start, end, null);
-	//	}
-	//
-	//	/**
-	//	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	//	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	//	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	//	 * @param problem
-	//	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	//	 *            Komplikationsrisiken oder Expositionsrisiken.
-	//	 * @param start
-	//	 *            Beginn des Problems
-	//	 * @param end
-	//	 *            Ende des Problems
-	//	 */
-	//	public ProblemEntry(org.ehealth_connector.common.Value problem,
-	//			Date start, Date end) {
-	//		this(problem, start, end, null);
-	//	}
-	//
-	//	/**
-	//	 * Erzeugt ein Objekt welches ein Problem repräsentiert. 
-	//	 * Dieser Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code angegeben werden soll.
-	//	 * Dieses Objekt kann einem ProblemConcernEntry hinzugefügt werden.
-	//	 * @param problem
-	//	 *            Freitextbeschreibung zu dem Problem oder Code zu
-	//	 *            Komplikationsrisiken oder Expositionsrisiken.
-	//	 * @param startOfProblem
-	//	 *            Beginn des Problems
-	//	 * @param endOfProblem
-	//	 *            Ende des Problems
-	//	 * @param internalProblemId
-	//	 *            Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.
-	//	 */
-	//	protected ProblemEntry(org.ehealth_connector.common.Value problem,
-	//			Date startOfProblem, Date endOfProblem, String internalProblemId) {
-	//		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
-	//		setNotOccured(false);
-	//		try {
-	//			setStart(startOfProblem);
-	//			setEnd(endOfProblem);
-	//		} catch (ParseException e) {
-	//			e.printStackTrace();
-	//		}
-	//		setId(internalProblemId);
-	//		setValue(problem);
-	//	}
-	//
-	//	/**
-	//	 * @param problemEntry
-	//	 */
-	//	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry) {
-	//		mProblemEntry = problemEntry;
-	//	}
-	//
-	//	public ProblemEntry(Value problemValue, Code problemCode,
-	//			Date startOfProblem, Date endOfProblem) {
-	//		this(problemCode, startOfProblem, endOfProblem);
-	//		setValue(problemValue);
-	//	}
-	//
-	//	public ProblemEntry(Value value, Date date) {
-	//		this(value, date, null);
-	//	}
-
+	/**
+	 * <div class="de">Copy mdht problem entry.</div>
+	 * <div class="fr">Copy mdht problem entry.</div>
+	 * <div class="it">Copy mdht problem entry.</div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem entry
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry copyMdhtProblemEntry() {
 		return EcoreUtil.copy(mProblemEntry);
 	}
 
 	/**
+	 * Gets the code.
+	 *
 	 * @return das codedProblem Objekt
 	 */
 	public org.ehealth_connector.common.Code getCode() {
@@ -271,6 +223,8 @@ public class ProblemEntry {
 	}
 
 	/**
+	 * Gets the end.
+	 *
 	 * @return das endOfProblem Objekt
 	 */
 	public String getEnd() {
@@ -278,11 +232,18 @@ public class ProblemEntry {
 				.getEffectiveTime().getHigh().getValue());
 	}
 
+	/**
+	 * Gets the mdht problem entry.
+	 *
+	 * @return the mdht problem entry
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry getMdhtProblemEntry() {
 		return mProblemEntry;
 	}
 
 	/**
+	 * Gets the problem not occured.
+	 *
 	 * @return das problemNotOccured Objekt
 	 */
 	public boolean getProblemNotOccured() {
@@ -290,6 +251,8 @@ public class ProblemEntry {
 	}
 
 	/**
+	 * Gets the start.
+	 *
 	 * @return das startOfProblem Objekt
 	 */
 	public String getStart() {
@@ -307,17 +270,18 @@ public class ProblemEntry {
 	}
 
 	/**
-	 * @param codedProblem
-	 *            das codedProblem Objekt welches gesetzt wird
+	 * Sets the code.
+	 *
+	 * @param codedProblem            das codedProblem Objekt welches gesetzt wird
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
 	}
 
 	/**
-	 * @param endOfProblem
-	 *            das endOfProblem Objekt welches gesetzt wird
-	 * @throws ParseException
+	 * Sets the end.
+	 *
+	 * @param endOfProblem            das endOfProblem Objekt welches gesetzt wird
 	 */
 	public void setEnd(Date endOfProblem) {
 		try {
@@ -329,23 +293,29 @@ public class ProblemEntry {
 		}
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		II ii = Util.createUuidVacd(id);
 		mProblemEntry.getIds().add(ii);
 	}
 
 	/**
-	 * @param problemNotOccured
-	 *            das problemNotOccured Objekt welches gesetzt wird
+	 * Sets the not occured.
+	 *
+	 * @param problemNotOccured            das problemNotOccured Objekt welches gesetzt wird
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
 		mProblemEntry.setNegationInd(problemNotOccured);
 	}
 
 	/**
-	 * @param startOfProblem
-	 *            das startOfProblem Objekt welches gesetzt wird
-	 * @throws ParseException
+	 * Sets the start.
+	 *
+	 * @param startOfProblem            das startOfProblem Objekt welches gesetzt wird
 	 */
 	public void setStart(Date startOfProblem) {
 		if (mProblemEntry.getEffectiveTime() == null) {
@@ -361,11 +331,21 @@ public class ProblemEntry {
 		}
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param code the new value
+	 */
 	public void setValue(Code code) {
 		Value value = new Value (code);
 		this.setValue(value);
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param problemValue the new value
+	 */
 	public void setValue(Value problemValue) {
 		if (problemValue == null) {
 			CD cd = DatatypesFactory.eINSTANCE.createCD();

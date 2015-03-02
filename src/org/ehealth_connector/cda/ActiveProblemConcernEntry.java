@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -23,11 +23,14 @@ import java.util.Date;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
 /**
- * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
- * souffrance de la santé</div>
+ * <div class="de">Ein gesundheitliches Leiden</div> 
+ * <div class="fr">Une souffrance de la santé</div>.
  */
 public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 
+	/**
+	 * Instantiates a new active problem concern entry.
+	 */
 	public ActiveProblemConcernEntry () {
 		super();
 	}
@@ -56,29 +59,53 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param aborted
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
-	 * @param begin
-	 *            <div class="de">Beginn des Leidens</div> <div class="fr">Le
-	 *            début du problème</div>
-	 * @param end
-	 *            <div class="de">Ende des Leidens</div> <div class="fr">Le fin
-	 *            du problème</div>
+	 *
+	 * @param concern            
+	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param begin            
+	 *     <div class="de">Beginn des Leidens</div> 
+	 *     <div class="fr">Le début du problème</div>
+	 * @param end            
+	 *     <div class="de">Ende des Leidens</div> 
+	 *     <div class="fr">Le fin du problème</div>
+	 * @param problemEntry <br>
+	 * 		<div class="de">Das medizinische Problem</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param problemConcernStatus <br>
+	 * 		<div class="de">Status des Leidens</div>
+	 * 		<div class="fr"> problem concern status</div>
+	 * 		<div class="it"> problem concern status</div>
 	 */
 	public ActiveProblemConcernEntry(String concern,
 			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
 		super(concern, problemEntry, problemConcernStatus, begin, end);
 	}
 
-	public ActiveProblemConcernEntry(String string, Date date, ProblemEntry problemEntry,
+	/**
+	 * Instantiates a new active problem concern entry.
+	 *
+     * @param concern            
+     *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+     *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * 	   <div class="it"> string</div>
+	 * @param date <br>
+	 * 		<div class="de"> date</div>
+	 * 		<div class="fr"> date</div>
+	 * 		<div class="it"> date</div>
+	 * @param problemEntry <br>
+	 * 		<div class="de">Das medizinische Problem</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param problemStatusCode <br>
+	 * 		<div class="de">Status des Leidens</div>
+	 * 		<div class="fr"> problem status code</div>
+	 * 		<div class="it"> problem status code</div>
+	 */
+	public ActiveProblemConcernEntry(String concern, Date date, ProblemEntry problemEntry,
 			ProblemConcernStatusCode problemStatusCode) {
-		this(string, date, null, problemEntry, problemStatusCode);
+		this(concern, date, null, problemEntry, problemStatusCode);
 	}
 
 	/**
@@ -87,14 +114,17 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
 	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param concern
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param concernStatus
-	 *            <div class="de">Der Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 *
+	 * @param concern            
+	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param problemEntry <br>
+	 * 		<div class="de">Das medizinische Problem</div>
+	 * 		<div class="fr"> problem entry</div>
+	 * 		<div class="it"> problem entry</div>
+	 * @param concernStatus            
+	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
+	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
 	 */
 	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);

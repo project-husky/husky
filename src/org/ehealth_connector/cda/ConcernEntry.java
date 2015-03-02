@@ -1,3 +1,20 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda;
 
 import java.text.ParseException;
@@ -14,13 +31,31 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
-public class ConcernEntry {
+/**
+ * <div class="de">Class ConcernEntry.</div>\n
+ * <div class="fr">Class ConcernEntry.</div>\n
+ * <div class="it">Class ConcernEntry.</div>
+ */
+class ConcernEntry {
+	
+	/** The m concern entry. */
 	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
 
+	/**
+	 * Instantiates a new concern entry.
+	 */
 	public ConcernEntry () {
 		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
 	}
 
+	/**
+	 * Instantiates a new concern entry.
+	 *
+	 * @param concernEntry <br>
+	 * 		<div class="de"> concern entry</div>
+	 * 		<div class="fr"> concern entry</div>
+	 * 		<div class="it"> concern entry</div>
+	 */
 	public ConcernEntry (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
 		mConcernEntry = concernEntry;
 	}
@@ -30,8 +65,9 @@ public class ConcernEntry {
 	}
 
 	/**
-	 * Gibt das Leiden zurück
-	 * 
+	 * Gibt das Leiden zurück.
+	 *
+	 * @return the concern
 	 */
 	public String getConcern() {
 		if (mConcernEntry.getText() != null) {
@@ -41,8 +77,8 @@ public class ConcernEntry {
 	}
 
 	/**
-	 * Gibt das Ende des Leidens zurück
-	 * 
+	 * Gibt das Ende des Leidens zurück.
+	 *
 	 * @return Ende des Leidens
 	 */
 	public String getEnd() {
@@ -50,18 +86,28 @@ public class ConcernEntry {
 				.getEffectiveTime().getHigh().getValue());
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Identificator getId() {
 		Identificator id = new Identificator(mConcernEntry.getIds().get(0).getRoot(), mConcernEntry.getIds().get(0).getExtension());
 		return id;
 	}
 
+	/**
+	 * Gets the mdht concern.
+	 *
+	 * @return the mdht concern
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
 		return mConcernEntry;
 	}
 
 	/**
-	 * Gibt den Beginn des Leidens zurück
-	 * 
+	 * Gibt den Beginn des Leidens zurück.
+	 *
 	 * @return Beginn des Leidens
 	 */
 	public String getStart() {
@@ -81,10 +127,9 @@ public class ConcernEntry {
 	}
 
 	/**
-	 * Setzt das Leiden
-	 * 
-	 * @param concern
-	 *            Leiden
+	 * Setzt das Leiden.
+	 *
+	 * @param concern            Leiden
 	 */
 	public void setConcern(String concern) {
 		// Create and set the concern as freetext
@@ -102,10 +147,9 @@ public class ConcernEntry {
 	}
 
 	/**
-	 * Setzt das Ende des Leidens
-	 * 
-	 * @param endOfConcern
-	 *            Ende des Leidens
+	 * Setzt das Ende des Leidens.
+	 *
+	 * @param endOfConcern            Ende des Leidens
 	 */
 	public void setEnd(Date endOfConcern) {
 		try {
@@ -116,16 +160,20 @@ public class ConcernEntry {
 		}
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Identificator id) {
 		II ii = Util.createUuidVacdIdentificator(id);
 		mConcernEntry.getIds().add(ii);
 	}
 
 	/**
-	 * Setzt den Beginn des Leidens
-	 * 
-	 * @param startOfConcern
-	 *            Beginn des Leidens
+	 * Setzt den Beginn des Leidens.
+	 *
+	 * @param startOfConcern            Beginn des Leidens
 	 */
 	public void setStart(Date startOfConcern) {
 		try {

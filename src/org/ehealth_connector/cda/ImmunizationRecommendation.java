@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -32,13 +32,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
+// TODO: Auto-generated Javadoc
 /**
- * Eine Impfempfehlung
+ * Eine Impfempfehlung.
  */
 public class ImmunizationRecommendation {
 
 	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
+	/**
+	 * Instantiates a new immunization recommendation.
+	 */
 	public ImmunizationRecommendation() {
 		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 	}
@@ -134,14 +138,34 @@ public class ImmunizationRecommendation {
 		}    
 	}
 
+	/**
+	 * Instantiates a new immunization recommendation.
+	 *
+	 * @param immunizationRecommendation <br>
+	 * 		<div class="de"> immunization recommendation</div>
+	 * 		<div class="fr"> immunization recommendation</div>
+	 * 		<div class="it"> immunization recommendation</div>
+	 */
 	public ImmunizationRecommendation (org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
 		mImmunizationRecommendation = immunizationRecommendation;
 	}
 
+	/**
+	 * <div class="de">Copy mdht immunization recommendation.</div>
+	 * <div class="fr">Copy mdht immunization recommendation.</div>
+	 * <div class="it">Copy mdht immunization recommendation.</div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.ch. immunization recommendation
+	 */
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
 		return EcoreUtil.copy(mImmunizationRecommendation);
 	}
 
+	/**
+	 * Gets the author.
+	 *
+	 * @return the author
+	 */
 	public org.ehealth_connector.common.Author getAuthor() {
 		try {
 			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil.copy(mImmunizationRecommendation.getAuthors().get(0));
@@ -152,37 +176,68 @@ public class ImmunizationRecommendation {
 		}
 	}
 
+	/**
+	 * Gets the consumable.
+	 *
+	 * @return the consumable
+	 */
 	public Consumable getConsumable() {
 		Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
 		return consumable;
 	}
 
+	/**
+	 * Gets the effective time.
+	 *
+	 * @return the effective time
+	 */
 	public String getEffectiveTime() {
 		List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Identificator getId() {
 		Identificator id = new Identificator(mImmunizationRecommendation.getIds().get(0));
 		return id;
 	}
 
+	/**
+	 * Gets the mdht immunization recommendation.
+	 *
+	 * @return the mdht immunization recommendation
+	 */
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
 		return mImmunizationRecommendation;
 	}
 
+	/**
+	 * Sets the author.
+	 *
+	 * @param author the new author
+	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		mImmunizationRecommendation.getAuthors().add(author.getAuthorMdht());
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param codedId the new id
+	 */
 	public void setId(Identificator codedId) {
 		II ii = Util.createUuidVacdIdentificator(codedId);
 		mImmunizationRecommendation.getIds().add(ii);
 	}
 
 	/**
-	 * @param intendedOrProposed
-	 *          das intendedOrProposed Objekt welches gesetzt wird
+	 * Sets the intended or proposed.
+	 *
+	 * @param intendedOrProposed          das intendedOrProposed Objekt welches gesetzt wird
 	 */
 	public void setIntendedOrProposed(boolean intendedOrProposed) {
 		if (intendedOrProposed) {
@@ -195,16 +250,24 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * @param endOfPossibleAppliance
-	 *          das endOfPossibleAppliance Objekt welches gesetzt wird
+	 * <div class="de">Sets the possible appliance.</div>
+	 * <div class="fr">Sets the possible appliance.</div>
+	 * <div class="it">Sets the possible appliance.</div>
+	 *
+	 * @param startOfPossibleAppliacne <br>
+	 * 		<div class="de"> start of possible appliacne</div>
+	 * 		<div class="fr"> start of possible appliacne</div>
+	 * 		<div class="it"> start of possible appliacne</div>
+	 * @param endOfPossibleAppliance          das endOfPossibleAppliance Objekt welches gesetzt wird
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
 		mImmunizationRecommendation.getEffectiveTimes().add(0, DateUtil.createSTCM_TS(startOfPossibleAppliacne, endOfPossibleAppliance));
 	}  
 
 	/**
-	 * @param shallNotBeAdministerd
-	 *          das shallNotBeAdministerd Objekt welches gesetzt wird
+	 * Sets the shall not be administerd.
+	 *
+	 * @param shallNotBeAdministerd          das shallNotBeAdministerd Objekt welches gesetzt wird
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {
