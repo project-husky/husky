@@ -27,6 +27,15 @@ public enum AdministrativeGender {
 	 *<div class="fr"></div>
 	 */
 	UNDIFFERENTIATED ("UN", "Undifferentiated");
+	public static final String FEMALE_CODE="F";
+	public static final String MALE_CODE="M";
+	public static final String UNDIFFERENTIATED_CODE="UN";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1";
+	public static final String CODE_SYSTEM_NAME="AdministrativeGender";
+
+
 	public static AdministrativeGender getEnum(String code) {
 		for (AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -35,15 +44,6 @@ public enum AdministrativeGender {
 		}
 		return null;
 	}
-	public static final String FEMALE_CODE="F";
-	public static final String MALE_CODE="M";
-
-
-	public static final String UNDIFFERENTIATED_CODE="UN";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1";
-
-
-	public static final String CODE_SYSTEM_NAME="AdministrativeGender";
 	private String code;
 
 	private String displayName;

@@ -22,6 +22,14 @@ public enum Allergies {
 	 *<div class="fr">Eczéma atopique</div>
 	 */
 	ATOPIC_DERMATITIS ("24079001", "Atopic dermatitis");
+	public static final String EGG_PROTEIN_SUBSTANCE_CODE="303300008";
+	public static final String ATOPIC_DERMATITIS_CODE="24079001";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
+
 	public static Allergies getEnum(String code) {
 		for (Allergies x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -30,14 +38,6 @@ public enum Allergies {
 		}
 		return null;
 	}
-	public static final String EGG_PROTEIN_SUBSTANCE_CODE="303300008";
-
-
-	public static final String ATOPIC_DERMATITIS_CODE="24079001";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
-
-
-	public static final String CODE_SYSTEM_NAME="SNOMED CT";
 	private String code;
 
 	private String displayName;

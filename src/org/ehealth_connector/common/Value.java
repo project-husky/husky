@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit.
  */
 public class Value {
-	
+
 	/**
 	 * The m value.
 	 */
@@ -241,14 +241,14 @@ public class Value {
 	}
 
 
-	 /**
-     * <div class="en">Gets the value as String (e.g. "Value [value=200, unit=ml]")</div>
-     * <div class="de">Liefert value.</div>
-     * <div class="fr"></div>
-     * <div class="it"></div>
-     *
-     * @return <div class="en">the value</div>
-     */
+	/**
+	 * <div class="en">Gets the value as String (e.g. "Value [value=200, unit=ml]")</div>
+	 * <div class="de">Liefert value.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return <div class="en">the value</div>
+	 */
 	@Override
 	public String toString() {
 		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit() + "]";

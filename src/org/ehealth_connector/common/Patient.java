@@ -25,17 +25,14 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.AdministrativeGender;
-import org.ehealth_connector.cda.ch.enums.NullFlavor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 
 /**
@@ -65,7 +62,7 @@ public class Patient extends Person {
 
 		// Create and fill gender
 		if (sex!=null) {
-		  mPatient.setAdministrativeGenderCode(sex.getCE());
+			mPatient.setAdministrativeGenderCode(sex.getCE());
 		}
 
 		// Fill Patient Name
@@ -73,12 +70,12 @@ public class Patient extends Person {
 
 		// Create and fill birth date
 		if (birthDay!=null) {
-    		try {
-    			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
-    		} catch (final ParseException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
+			try {
+				mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
+			} catch (final ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -229,6 +226,22 @@ public class Patient extends Person {
 	}
 
 	/**
+	 * <div class="en">Gets the gender code.</div>
+	 * <div class="de">Liefert das Geschlecht</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return <div class="en">the gender code</div>
+	 */
+	public AdministrativeGender getAdministrativeGenderCode() {
+		CE code = getMdhtPatient().getAdministrativeGenderCode();
+		if (code == null) {
+			return null;
+		}
+		return AdministrativeGender.getEnum(code.getCode());
+	}
+
+	/**
 	 * <div class="en">Gets the birthday.</div>
 	 * <div class="de">Liefert birthday.</div>
 	 * <div class="fr"></div>
@@ -240,29 +253,13 @@ public class Patient extends Person {
 		try {
 			TS birthTime = getMdhtPatient().getBirthTime();
 			if (birthTime==null) {
-			  return null;
+				return null;
 			}
 			String value = birthTime.getValue();
 			return parseDate(value);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("Cannot convert birthdate", e);
 		}
-	}
-
-	/**
-	 * <div class="en">Gets the gender code.</div>
-	 * <div class="de">Liefert das Geschlecht</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return <div class="en">the gender code</div>
-	 */
-	public AdministrativeGender getAdministrativeGenderCode() {
-		CE code = getMdhtPatient().getAdministrativeGenderCode();
-		if (code == null) {
-		  return null;
-		}
-		return AdministrativeGender.getEnum(code.getCode());
 	}
 
 	/**
@@ -360,6 +357,23 @@ public class Patient extends Person {
 	}
 
 	/**
+	 * <div class="en">Sets the gender.</div>
+	 * <div class="de">Setzt gender.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
+	 *
+	 * @param sex 
+	 * <div class="en">the new (administrative) gender</div>
+	 * <div class="de">das neue (administrative) Geschlecht</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 */
+	public void setAdministrativeGender(AdministrativeGender sex) {
+		mPatient.setAdministrativeGenderCode(sex.getCE());
+	}
+
+	/**
 	 * <div class="en">Sets the birthday.</div>
 	 * <div class="de">Setzt birthday.</div>
 	 * <div class="fr"></div>
@@ -378,23 +392,6 @@ public class Patient extends Person {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * <div class="en">Sets the gender.</div>
-	 * <div class="de">Setzt gender.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *  
-	 *
-	 * @param sex 
-	 * <div class="en">the new (administrative) gender</div>
-	 * <div class="de">das neue (administrative) Geschlecht</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	public void setAdministrativeGender(AdministrativeGender sex) {
-		mPatient.setAdministrativeGenderCode(sex.getCE());
 	}
 
 	/**

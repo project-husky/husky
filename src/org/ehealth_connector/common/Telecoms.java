@@ -23,7 +23,6 @@ import java.util.HashMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.AddressUse;
-import org.ehealth_connector.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
@@ -33,7 +32,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  * <div class="it"></div>
  */
 public class Telecoms {
-	
+
 	/**
 	 * The mdht tels.
 	 */
@@ -99,15 +98,15 @@ public class Telecoms {
 		mTels.add(Util.createTel(phoneNr, usage));
 	}
 
-//	/**
-//	 * Weist dem Autor eine Webseite zu.
-//	 *
-//	 * @param eMail            Webseite
-//	 * @param usage            Verwendungszweck (Privat, Geschäft)
-//	 */
-//	public void addWebsite(String eMail, UseCode usage) {
-//		//TODO Implement this!
-//	}
+	//	/**
+	//	 * Weist dem Autor eine Webseite zu.
+	//	 *
+	//	 * @param eMail            Webseite
+	//	 * @param usage            Verwendungszweck (Privat, Geschäft)
+	//	 */
+	//	public void addWebsite(String eMail, UseCode usage) {
+	//		//TODO Implement this!
+	//	}
 
 	/**
 	 * <div class="en">Copy mdht telecoms.</div>

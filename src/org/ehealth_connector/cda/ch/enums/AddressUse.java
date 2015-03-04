@@ -29,6 +29,15 @@ public enum AddressUse {
 	 *<div class="fr"></div>
 	 */
 	MOBILE ("MC", "Mobile");
+	public static final String PRIVATE_CODE="HP";
+	public static final String BUSINESS_CODE="WP";
+	public static final String MOBILE_CODE="MC";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1119";
+	public static final String CODE_SYSTEM_NAME="AddressUse";
+
+
 	public static AddressUse getEnum(String code) {
 		for (AddressUse x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -37,15 +46,6 @@ public enum AddressUse {
 		}
 		return null;
 	}
-	public static final String PRIVATE_CODE="HP";
-	public static final String BUSINESS_CODE="WP";
-
-
-	public static final String MOBILE_CODE="MC";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1119";
-
-
-	public static final String CODE_SYSTEM_NAME="AddressUse";
 	private String code;
 
 	private String displayName;

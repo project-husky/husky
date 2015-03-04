@@ -59,7 +59,7 @@ public class Organization {
 	 *            Name der Organisation
 	 */
 	public Organization(String name) {
-	     this.mOrganization = CDAFactory.eINSTANCE.createOrganization();
+		mOrganization = CDAFactory.eINSTANCE.createOrganization();
 		addName(name);
 	}
 

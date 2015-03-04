@@ -76,13 +76,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * class="fr">Class CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
 public class CdaChVacd extends CdaCh {
-	
+
 	/** The Constant OID_VACD. */
 	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
-	
+
 	/** The Constant eVACDOCTitle. */
 	public static final String eVACDOCTitle = "eVACDOC";
-	
+
 	/** The query. */
 	Query query;
 
@@ -153,40 +153,6 @@ public class CdaChVacd extends CdaCh {
 		query = new Query(this.doc);
 	}
 
-	/**
-	 * <div class="de">Pseudonymisiert das Dokument für die Anfrage einer Impfempfehlung</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	public void pseudonymization() {
-		for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
-			mPatientRole = getDoc().getPatientRoles().get(0);
-			Patient mPatient = mPatientRole.getPatient();
-			
-			//Name
-			mPatient.getNames().clear();
-			PN pn = DatatypesFactory.eINSTANCE.createPN();
-			pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-			mPatient.getNames().add(pn);
-			
-			//Street
-			for (AD ad : mPatientRole.getAddrs()) {
-				ad.getStreetAddressLines().clear();
-				ad.getStreetNames().clear();
-				ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
-				adxp.setNullFlavor(NullFlavor.MSK);
-				ad.getStreetNames().add(adxp);
-			}
-		
-			//Phone
-			mPatientRole.getTelecoms().clear();
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-			mPatientRole.getTelecoms().add(tel);
-		}
-	 
-	}
-	
 	/**
 	 * <div class="en">Adds the active problem concern.</div>
 	 * <div class="de">Fügt ein Aktives Leiden hinzu</div>
@@ -512,8 +478,8 @@ public class CdaChVacd extends CdaCh {
 
 	/**     
 	 * <div class="de">Liefert alle Aktiven Leiden zurück</div>
-     * <div class="fr"></div>
-     * <div class="it"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return the active problem concerns
 	 */
 	public ArrayList<ActiveProblemConcernEntry> getActiveProblemConcerns() {
@@ -579,8 +545,6 @@ public class CdaChVacd extends CdaCh {
 		return b.toString();
 	}
 
-
-
 	/**
 	 * Liefert die Kommentare zurück
 	 *
@@ -599,6 +563,8 @@ public class CdaChVacd extends CdaCh {
 
 		return comment.getText();
 	}
+
+
 
 	/**
 	 * Liefert das MDHT-VACD-Objekt zurück.
@@ -779,6 +745,40 @@ public class CdaChVacd extends CdaCh {
 			pregnancies.add(immunization);
 		}
 		return pregnancies;
+	}
+
+	/**
+	 * <div class="de">Pseudonymisiert das Dokument für die Anfrage einer Impfempfehlung</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 */
+	public void pseudonymization() {
+		for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
+			mPatientRole = getDoc().getPatientRoles().get(0);
+			Patient mPatient = mPatientRole.getPatient();
+
+			//Name
+			mPatient.getNames().clear();
+			PN pn = DatatypesFactory.eINSTANCE.createPN();
+			pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+			mPatient.getNames().add(pn);
+
+			//Street
+			for (AD ad : mPatientRole.getAddrs()) {
+				ad.getStreetAddressLines().clear();
+				ad.getStreetNames().clear();
+				ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+				adxp.setNullFlavor(NullFlavor.MSK);
+				ad.getStreetNames().add(adxp);
+			}
+
+			//Phone
+			mPatientRole.getTelecoms().clear();
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+			mPatientRole.getTelecoms().add(tel);
+		}
+
 	}
 
 	/**

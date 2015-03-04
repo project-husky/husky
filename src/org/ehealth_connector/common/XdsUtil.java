@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  * <div class="it">Class XdsUtil.</div>
  */
 public class XdsUtil {
-	
+
 	/**
 	 * <div class="en">Convert code.</div>
 	 * <div class="de"></div>

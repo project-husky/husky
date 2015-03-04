@@ -35,9 +35,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class AllergyConcern extends ConcernEntry {
 
-  /**
-   * The MDHT allergy concern.
-   */
+	/**
+	 * The MDHT allergy concern.
+	 */
 	protected org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
 
 	/**

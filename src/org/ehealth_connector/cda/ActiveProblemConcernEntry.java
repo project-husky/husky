@@ -86,9 +86,9 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 	/**
 	 * Instantiates a new active problem concern entry.
 	 *
-     * @param concern            
-     *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-     *     <div class="fr">Le nom du problème (texte libre)</div>
+	 * @param concern            
+	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+	 *     <div class="fr">Le nom du problème (texte libre)</div>
 	 * 	   <div class="it"> string</div>
 	 * @param date <br>
 	 * 		<div class="de"> date</div>

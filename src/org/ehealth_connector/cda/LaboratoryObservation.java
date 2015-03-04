@@ -41,7 +41,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
  * <div class="it">Class LaboratoryObservation.</div>
  */
 public class LaboratoryObservation {
-	
+
 	/** The m laboratory observation. */
 	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
@@ -121,9 +121,9 @@ public class LaboratoryObservation {
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>
 	 * @param laboratory <br>
-     *      <div class="de">Das ausführende Labor.</div>
-     *      <div class="fr"></div>
-     *      <div class="it"></div>
+	 *      <div class="de">Das ausführende Labor.</div>
+	 *      <div class="fr"></div>
+	 *      <div class="it"></div>
 	 * @param immuneProtection <br>
 	 * 		<div class="de">true, wenn ein Immunschutz besteht.</div>
 	 * 		<div class="fr"></div>

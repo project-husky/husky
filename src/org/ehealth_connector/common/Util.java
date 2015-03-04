@@ -66,6 +66,21 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class Util {
 
 	/**
+	 * The Constant TELECOMS_FAX_PREFIX.
+	 */
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
+
+	/**
+	 * The Constant TELECOMS_EMAIL_PREFIX.
+	 */
+	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+
+	/**
+	 * The Constant TELECOMS_PHONE_PREFIX.
+	 */
+	public static final String TELECOMS_PHONE_PREFIX = "tel:";
+
+	/**
 	 * Erzeugt eine Adresse.
 	 *
 	 * @param streetName Contains the StreetName
@@ -111,7 +126,7 @@ public class Util {
 		}
 		return ad;
 	}
-	
+
 	/**
 	 * Erzeugt eine Adresse.
 	 *
@@ -132,7 +147,7 @@ public class Util {
 		}
 		return ad;
 	}
-	
+
 	/**
 	 * <div class="en">Creates the ce null flavor nask.</div>
 	 * <div class="de"></div>
@@ -443,6 +458,8 @@ public class Util {
 		return text;
 	}
 
+
+
 	/**
 	 * <div class="en">Creates the tel.</div>
 	 * <div class="de"></div>
@@ -513,8 +530,6 @@ public class Util {
 		return ii;
 	}
 
-
-
 	/**
 	 * <div class="en">Extract string from non quoted struc doc text.</div>
 	 * <div class="de"></div>
@@ -562,6 +577,8 @@ public class Util {
 		return null;
 	}
 
+
+
 	/**
 	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot.
 	 *
@@ -596,6 +613,8 @@ public class Util {
 	public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
 	}
+
+
 
 	/**
 	 * <div class="en">Gets the fax.</div>
@@ -641,8 +660,6 @@ public class Util {
 		return tl;
 	}
 
-
-
 	private static String getText(FeatureMap featureMap) {
 		StringBuffer buffer = new StringBuffer("");
 		for (FeatureMap.Entry entry : featureMap) {
@@ -658,8 +675,6 @@ public class Util {
 		}
 		return buffer.toString().trim();
 	}
-
-
 
 	/**
 	 * <div class="en">Ii.</div>
@@ -862,21 +877,6 @@ public class Util {
 		}
 		return sb;
 	}
-
-	/**
-	 * The Constant TELECOMS_FAX_PREFIX.
-	 */
-	public static final String TELECOMS_FAX_PREFIX = "fax:";
-
-	/**
-	 * The Constant TELECOMS_EMAIL_PREFIX.
-	 */
-	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
-
-	/**
-	 * The Constant TELECOMS_PHONE_PREFIX.
-	 */
-	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
 	 * Erzeugt eine Adresse.

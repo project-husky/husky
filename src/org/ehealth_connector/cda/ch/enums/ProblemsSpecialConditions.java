@@ -32,6 +32,16 @@ public enum ProblemsSpecialConditions {
 	 *<div class="fr">Aucun antécédent familial connu</div>
 	 */
 	FAMILY_HISTORY_UNKNOWN ("407559004", "Family History Unknown");
+	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE="160243008";
+	public static final String NO_CURRENT_PROBLEMS_OR_DISABILITY_CODE="160245001";
+	public static final String HISTORY_OF_PAST_ILLNESS_UNKNOWN_CODE="396782006";
+	public static final String FAMILY_HISTORY_UNKNOWN_CODE="407559004";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
+
 	public static ProblemsSpecialConditions getEnum(String code) {
 		for (ProblemsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -40,16 +50,6 @@ public enum ProblemsSpecialConditions {
 		}
 		return null;
 	}
-	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE="160243008";
-	public static final String NO_CURRENT_PROBLEMS_OR_DISABILITY_CODE="160245001";
-	public static final String HISTORY_OF_PAST_ILLNESS_UNKNOWN_CODE="396782006";
-
-
-	public static final String FAMILY_HISTORY_UNKNOWN_CODE="407559004";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
-
-
-	public static final String CODE_SYSTEM_NAME="SNOMED CT";
 	private String code;
 
 	private String displayName;

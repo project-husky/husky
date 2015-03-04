@@ -17,6 +17,13 @@ public enum Pregnancies {
 	 *<div class="fr">Date de l’accouchement (estimation clinique)</div>
 	 */
 	DELIVERY_DATE_CLINICAL_ESTIMATE ("11778-8", "DELIVERY DATE (CLINICAL ESTIMATE)");
+	public static final String DELIVERY_DATE_CLINICAL_ESTIMATE_CODE="11778-8";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.6.1";
+	public static final String CODE_SYSTEM_NAME="LOINC";
+
+
 	public static Pregnancies getEnum(String code) {
 		for (Pregnancies x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -25,13 +32,6 @@ public enum Pregnancies {
 		}
 		return null;
 	}
-
-
-	public static final String DELIVERY_DATE_CLINICAL_ESTIMATE_CODE="11778-8";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.1";
-
-
-	public static final String CODE_SYSTEM_NAME="LOINC";
 	private String code;
 
 	private String displayName;

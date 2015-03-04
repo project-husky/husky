@@ -22,6 +22,14 @@ public enum ObservationInterpretation {
 	 *<div class="fr">Négatif: L’agent pathogène n’a pas pu être dépisté dans l’échantillon</div>
 	 */
 	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN ("NEG", "Negative: Pathogen couldn't be determined in speci-men");
+	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE="POS";
+	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN_CODE="NEG";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.83";
+	public static final String CODE_SYSTEM_NAME="HL7 ObservationInterpretation ";
+
+
 	public static ObservationInterpretation getEnum(String code) {
 		for (ObservationInterpretation x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -30,14 +38,6 @@ public enum ObservationInterpretation {
 		}
 		return null;
 	}
-	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE="POS";
-
-
-	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN_CODE="NEG";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.83";
-
-
-	public static final String CODE_SYSTEM_NAME="HL7 ObservationInterpretation ";
 	private String code;
 
 	private String displayName;

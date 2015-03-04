@@ -29,9 +29,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
  */
 public class Address {
 
-  /**
-   * Das HL7 Address Objekt.
-   */
+	/**
+	 * Das HL7 Address Objekt.
+	 */
 	AD mAd;
 
 	/**

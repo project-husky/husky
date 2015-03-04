@@ -47,6 +47,19 @@ public enum ProblemType {
 	 *<div class="fr">Symptôme</div>
 	 */
 	SYMPTOM ("418799008", "Symptom ");
+	public static final String PROBLEM_CODE="55607006";
+	public static final String CONDITION_CODE="64572001";
+	public static final String FUNCTIONAL_LIMITATION_CODE="248536006";
+	public static final String DIAGNOSIS_CODE="282291009";
+	public static final String FINDING_CODE="404684003";
+	public static final String COMPLAINT_CODE="409586006";
+	public static final String SYMPTOM_CODE="418799008";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
+
 	public static ProblemType getEnum(String code) {
 		for (ProblemType x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -55,19 +68,6 @@ public enum ProblemType {
 		}
 		return null;
 	}
-	public static final String PROBLEM_CODE="55607006";
-	public static final String CONDITION_CODE="64572001";
-	public static final String FUNCTIONAL_LIMITATION_CODE="248536006";
-	public static final String DIAGNOSIS_CODE="282291009";
-	public static final String FINDING_CODE="404684003";
-	public static final String COMPLAINT_CODE="409586006";
-
-
-	public static final String SYMPTOM_CODE="418799008";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
-
-
-	public static final String CODE_SYSTEM_NAME="SNOMED CT";
 	private String code;
 
 	private String displayName;

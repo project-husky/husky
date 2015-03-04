@@ -39,7 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
  * <div class="fr"></div>.
  */
 public class AllergyProblem {
-	
+
 	/** The m allergy problem. */
 	AllergyIntolerance mAllergyProblem; 
 
@@ -57,8 +57,8 @@ public class AllergyProblem {
 	 *
 	 * @param allergy 
 	 *      <div class="de">Die Art der Allergie</div>
-     *      <div class="fr"></div>
-     *      <div class="it"></div>
+	 *      <div class="fr"></div>
+	 *      <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
@@ -83,15 +83,15 @@ public class AllergyProblem {
 	 * @param problem
 	 *     <div class="de">Code zu Komplikationsrisiken oder Expositionsrisiken.</div>
 	 *     <div class="fr"></div>
-     *     <div class="it"></div>
+	 *     <div class="it"></div>
 	 * @param startOfProblem 
 	 *     <div class="de">Beginn des Problems</div>
 	 *     <div class="fr"></div>
-     *     <div class="it"></div>           
+	 *     <div class="it"></div>           
 	 * @param endOfProblem            
 	 *     <div class="de">Ende des Problems</div>
 	 *     <div class="fr"></div>
-     *     <div class="it"></div>     
+	 *     <div class="it"></div>     
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
@@ -108,22 +108,22 @@ public class AllergyProblem {
 	 * 		<div class="de">Die Art der Allergie</div>
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>
-     * @param problem
-     *     <div class="de">Code zu Komplikationsrisiken oder Expositionsrisiken.</div>
-     *     <div class="fr"></div>
-     *     <div class="it"></div>
-     * @param startOfProblem 
-     *     <div class="de">Beginn des Problems</div>
-     *     <div class="fr"></div>
-     *     <div class="it"></div>           
-     * @param endOfProblem            
-     *     <div class="de">Ende des Problems</div>
-     *     <div class="fr"></div>
-     *     <div class="it"></div>     
+	 * @param problem
+	 *     <div class="de">Code zu Komplikationsrisiken oder Expositionsrisiken.</div>
+	 *     <div class="fr"></div>
+	 *     <div class="it"></div>
+	 * @param startOfProblem 
+	 *     <div class="de">Beginn des Problems</div>
+	 *     <div class="fr"></div>
+	 *     <div class="it"></div>           
+	 * @param endOfProblem            
+	 *     <div class="de">Ende des Problems</div>
+	 *     <div class="fr"></div>
+	 *     <div class="it"></div>     
 	 * @param internalProblemId
-     *     <div class="de">Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.</div>
-     *     <div class="fr"></div>
-     *     <div class="it"></div>            
+	 *     <div class="de">Interne ID des Problems innerhalb der Akte. Steht eine solche nicht zur Verfügung dann kann ein anderer Konstruktor verwendet werden und es wird stattdesssen eine GUID durch die Convenience API generiert.</div>
+	 *     <div class="fr"></div>
+	 *     <div class="it"></div>            
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem, String internalProblemId) {

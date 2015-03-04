@@ -27,9 +27,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 public class Name {
 
-  /**
-   * Der HL7 Datentyp Name.
-   */
+	/**
+	 * Der HL7 Datentyp Name.
+	 */
 	private PN mPn;
 
 	/**
@@ -117,10 +117,10 @@ public class Name {
 	}
 
 	/**
-     * <div class="en">Gets the complete name.</div>
-     * <div class="de">Liefert den ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
-     * <div class="fr"></div>
-     * <div class="it"></div>
+	 * <div class="en">Gets the complete name.</div>
+	 * <div class="de">Liefert den ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return String <div class="en">the complete name</div>
 	 */

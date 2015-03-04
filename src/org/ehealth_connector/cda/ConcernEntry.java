@@ -37,7 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  * <div class="it">Class ConcernEntry.</div>
  */
 class ConcernEntry {
-	
+
 	/** The m concern entry. */
 	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
 

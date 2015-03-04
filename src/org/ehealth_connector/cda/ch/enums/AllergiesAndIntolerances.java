@@ -32,6 +32,16 @@ public enum AllergiesAndIntolerances {
 	 *<div class="fr">Réaction indésirable du système immunitaire en cas d’absorption de certains aliments.</div>
 	 */
 	FOOD_INTOLERANCE ("FINT", "Food Intolerance");
+	public static final String DRUG_ALLERGY_CODE="DALG";
+	public static final String DRUG_INTOLERANCE_CODE="DINT";
+	public static final String FOOD_ALLERGY_CODE="FALG";
+	public static final String FOOD_INTOLERANCE_CODE="FINT";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.4";
+	public static final String CODE_SYSTEM_NAME="HL7 ActCode";
+
+
 	public static AllergiesAndIntolerances getEnum(String code) {
 		for (AllergiesAndIntolerances x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -40,16 +50,6 @@ public enum AllergiesAndIntolerances {
 		}
 		return null;
 	}
-	public static final String DRUG_ALLERGY_CODE="DALG";
-	public static final String DRUG_INTOLERANCE_CODE="DINT";
-	public static final String FOOD_ALLERGY_CODE="FALG";
-
-
-	public static final String FOOD_INTOLERANCE_CODE="FINT";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.4";
-
-
-	public static final String CODE_SYSTEM_NAME="HL7 ActCode";
 	private String code;
 
 	private String displayName;

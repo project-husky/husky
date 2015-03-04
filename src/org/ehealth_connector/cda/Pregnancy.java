@@ -36,7 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
  * <div class="it">Class Pregnancy.</div>
  */
 public class Pregnancy {
-	
+
 	/** The m pregnancy. */
 	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 

@@ -27,6 +27,15 @@ public enum Severity {
 	 *<div class="fr">Score de sévérité bas</div>
 	 */
 	LOW_SEVERITY ("L", "low severity");
+	public static final String HIGH_SEVERITY_CODE="H";
+	public static final String MODERATE_SEVERITY_CODE="M";
+	public static final String LOW_SEVERITY_CODE="L";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1063";
+	public static final String CODE_SYSTEM_NAME="HL7 SeverityObservation";
+
+
 	public static Severity getEnum(String code) {
 		for (Severity x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -35,15 +44,6 @@ public enum Severity {
 		}
 		return null;
 	}
-	public static final String HIGH_SEVERITY_CODE="H";
-	public static final String MODERATE_SEVERITY_CODE="M";
-
-
-	public static final String LOW_SEVERITY_CODE="L";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1063";
-
-
-	public static final String CODE_SYSTEM_NAME="HL7 SeverityObservation";
 	private String code;
 
 	private String displayName;

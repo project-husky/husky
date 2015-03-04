@@ -47,6 +47,19 @@ public enum StatusCode {
 	 *<div class="fr"></div>
 	 */
 	ABORTED ("aborted", "aborted");
+	public static final String NEW_CODE="new";
+	public static final String ACTIV_CODE="active";
+	public static final String COMPLETED_CODE="completed";
+	public static final String HELD_CODE="held";
+	public static final String CANCELLED_CODE="cancelled";
+	public static final String SUSPENDED_CODE="suspended";
+	public static final String ABORTED_CODE="aborted";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
+	public static final String CODE_SYSTEM_NAME="ActStatus";
+
+
 	public static StatusCode getEnum(String code) {
 		for (StatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -55,19 +68,6 @@ public enum StatusCode {
 		}
 		return null;
 	}
-	public static final String NEW_CODE="new";
-	public static final String ACTIV_CODE="active";
-	public static final String COMPLETED_CODE="completed";
-	public static final String HELD_CODE="held";
-	public static final String CANCELLED_CODE="cancelled";
-	public static final String SUSPENDED_CODE="suspended";
-
-
-	public static final String ABORTED_CODE="aborted";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
-
-
-	public static final String CODE_SYSTEM_NAME="ActStatus";
 	private String code;
 
 	private String displayName;

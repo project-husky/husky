@@ -7,9 +7,9 @@ package org.ehealth_connector.cda.ch.textbuilder;
  */
 abstract class TextBuilder {
 
-	private StringBuffer buffer = new StringBuffer();
-
 	protected final static String tableFooter = "</tbody></table>";
+
+	private StringBuffer buffer = new StringBuffer();
 
 	TextBuilder() {
 	}

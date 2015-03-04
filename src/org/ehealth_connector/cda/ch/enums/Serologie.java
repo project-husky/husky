@@ -57,14 +57,6 @@ public enum Serologie {
 	 *<div class="fr">Tétanos</div>
 	 */
 	CLOSTRIDIUM_TETANI_TOXIN_AB_IGG ("58770-9", "Clostridium tetani toxin Ab.IgG");
-	public static Serologie getEnum(String code) {
-		for (Serologie x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 	public static final String VARICELLA_ZOSTER_VIRUS_AB_IGG_CODE="22602-7";
 	public static final String MEASLES_VIRUS_AB_IGG_CODE="22502-9";
 	public static final String MUMPS_VIRUS_AB_IGG_CODE="22417-0";
@@ -73,13 +65,21 @@ public enum Serologie {
 	public static final String HEPATITIS_B_VIRUS_SURFACE_AB_IGG_CODE="16935-9";
 	public static final String EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB_CODE="26061-2";
 	public static final String YELLOW_FEVER_VIRUS_AB_CODE="6589-6";
-
-
 	public static final String CLOSTRIDIUM_TETANI_TOXIN_AB_IGG_CODE="58770-9";
+
+
 	public static final String CODE_SYSTEM="2.16.840.1.113883.6.1";
-
-
 	public static final String CODE_SYSTEM_NAME="LOINC";
+
+
+	public static Serologie getEnum(String code) {
+		for (Serologie x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 	private String code;
 
 	private String displayName;

@@ -15,11 +15,11 @@ import org.ehealth_connector.common.ch.SectionsVACD;
  */
 public class ActiveProblemConcernTextBuilder extends TextBuilder {
 
+	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 	private List<ActiveProblemConcernEntry> problemConcernEntries;
 	private ActiveProblemConcernEntry newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
-	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
 
 	public ActiveProblemConcernTextBuilder(
 			ArrayList<ActiveProblemConcernEntry> problemConcernEntries,

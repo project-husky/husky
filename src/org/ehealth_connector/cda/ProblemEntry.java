@@ -43,9 +43,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class ProblemEntry {
 
-  /**
-   * The MDHT Problem Entry Object
-   */
+	/**
+	 * The MDHT Problem Entry Object
+	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mProblemEntry;
 
 	/**

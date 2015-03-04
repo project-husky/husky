@@ -175,7 +175,7 @@ public class Consumable {
 	public String getTradeName() {
 		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
 	}
-	
+
 	/**
 	 * <div class="en">Gets the who atc code.</div>
 	 * <div class="de">Liefert who atc code.</div>
@@ -185,7 +185,7 @@ public class Consumable {
 	 * @return Code <div class="en">the who atc code</div>
 	 */
 	public Code getWhoAtcCode() {
-	  return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
+		return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
 	}
 
 	/**

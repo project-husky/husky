@@ -37,6 +37,17 @@ public enum NullFlavor {
 	 *<div class="fr">Non connu, sans autre précision</div>
 	 */
 	UNKNOWN ("UNK", "unknown");
+	public static final String ASKED_BUT_UNKNOWN_CODE="ASKU";
+	public static final String MASKED_CODE="MSK";
+	public static final String NOT_ASKED_CODE="NASK";
+	public static final String TEMPORARILY_UNAVAILABLE_CODE="NAV";
+	public static final String UNKNOWN_CODE="UNK";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1008";
+	public static final String CODE_SYSTEM_NAME="HL7 nullFlavor ";
+
+
 	public static NullFlavor getEnum(String code) {
 		for (NullFlavor x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -45,17 +56,6 @@ public enum NullFlavor {
 		}
 		return null;
 	}
-	public static final String ASKED_BUT_UNKNOWN_CODE="ASKU";
-	public static final String MASKED_CODE="MSK";
-	public static final String NOT_ASKED_CODE="NASK";
-	public static final String TEMPORARILY_UNAVAILABLE_CODE="NAV";
-
-
-	public static final String UNKNOWN_CODE="UNK";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1008";
-
-
-	public static final String CODE_SYSTEM_NAME="HL7 nullFlavor ";
 	private String code;
 
 	private String displayName;

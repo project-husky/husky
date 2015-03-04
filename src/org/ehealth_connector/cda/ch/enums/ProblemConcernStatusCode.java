@@ -32,6 +32,16 @@ public enum ProblemConcernStatusCode {
 	 *<div class="fr">Affectation qui n’a pas été guérie, mais dont le traitement n’est plus poursuivi. Cette valeur peut par exemple être utilisée si le patient a interrompu un traitement contre l’avis du médecin.</div>
 	 */
 	ABORTED ("aborted", "aborted");
+	public static final String ACTIVE_CODE="active";
+	public static final String COMPLETED_CODE="completed";
+	public static final String SUSPENDED_CODE="suspended";
+	public static final String ABORTED_CODE="aborted";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
+	public static final String CODE_SYSTEM_NAME="ActStatus";
+
+
 	public static ProblemConcernStatusCode getEnum(String code) {
 		for (ProblemConcernStatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -40,16 +50,6 @@ public enum ProblemConcernStatusCode {
 		}
 		return null;
 	}
-	public static final String ACTIVE_CODE="active";
-	public static final String COMPLETED_CODE="completed";
-	public static final String SUSPENDED_CODE="suspended";
-
-
-	public static final String ABORTED_CODE="aborted";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
-
-
-	public static final String CODE_SYSTEM_NAME="ActStatus";
 	private String code;
 
 	private String displayName;

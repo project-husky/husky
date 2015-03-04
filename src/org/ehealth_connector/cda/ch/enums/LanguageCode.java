@@ -27,6 +27,15 @@ public enum LanguageCode {
 	 *<div class="fr"></div>
 	 */
 	ITALIAN ("it-CH", "italian");
+	public static final String GERMAN_CODE="de-CH";
+	public static final String FRENCH_CODE="fr-CH";
+	public static final String ITALIAN_CODE="it-CH";
+
+
+	public static final String CODE_SYSTEM="ISO 3166";
+	public static final String CODE_SYSTEM_NAME="";
+
+
 	public static LanguageCode getEnum(String code) {
 		for (LanguageCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -35,15 +44,6 @@ public enum LanguageCode {
 		}
 		return null;
 	}
-	public static final String GERMAN_CODE="de-CH";
-	public static final String FRENCH_CODE="fr-CH";
-
-
-	public static final String ITALIAN_CODE="it-CH";
-	public static final String CODE_SYSTEM="ISO 3166";
-
-
-	public static final String CODE_SYSTEM_NAME="";
 	private String code;
 
 	private String displayName;

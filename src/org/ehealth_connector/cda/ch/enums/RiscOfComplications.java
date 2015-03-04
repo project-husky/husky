@@ -142,14 +142,6 @@ public enum RiscOfComplications {
 	 *<div class="fr">Autres risques de complication</div>
 	 */
 	TOTRANSLATE_26 ("999", "TOTRANSLATE");
-	public static RiscOfComplications getEnum(String code) {
-		for (RiscOfComplications x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 	public static final String TOTRANSLATE_1_CODE="1";
 	public static final String TOTRANSLATE_2_CODE="2";
 	public static final String TOTRANSLATE_3_CODE="3";
@@ -175,13 +167,21 @@ public enum RiscOfComplications {
 	public static final String TOTRANSLATE_23_CODE="23";
 	public static final String TOTRANSLATE_24_CODE="24";
 	public static final String TOTRANSLATE_25_CODE="25";
-
-
 	public static final String TOTRANSLATE_26_CODE="999";
+
+
 	public static final String CODE_SYSTEM="2.16.756.5.30.1.127.3.3.2013.1";
-
-
 	public static final String CODE_SYSTEM_NAME="Defined by EKIF und eHealth Suisse";
+
+
+	public static RiscOfComplications getEnum(String code) {
+		for (RiscOfComplications x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 	private String code;
 
 	private String displayName;

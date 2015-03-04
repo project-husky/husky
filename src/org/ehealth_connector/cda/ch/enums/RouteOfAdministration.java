@@ -42,6 +42,18 @@ public enum RouteOfAdministration {
 	 *<div class="fr">Injection intra-musculaire</div>
 	 */
 	INJECTION_INTRAMUSCULAR ("IM", "Injection, intramuscular");
+	public static final String INJECTION_INTRADERMAL_CODE="IDINJ";
+	public static final String INHALATION_NEBULIZATION_NASAL_CODE="NASNEB";
+	public static final String SWALLOW_ORAL_CODE="PO";
+	public static final String INJECTION_SUBCUTANEOUS_CODE="SQ";
+	public static final String DIFFUSION_TRANSDERMAL_CODE="TRNSDERMD";
+	public static final String INJECTION_INTRAMUSCULAR_CODE="IM";
+
+
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.112";
+	public static final String CODE_SYSTEM_NAME="HL7 RouteOfAdministration";
+
+
 	public static RouteOfAdministration getEnum(String code) {
 		for (RouteOfAdministration x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -50,18 +62,6 @@ public enum RouteOfAdministration {
 		}
 		return null;
 	}
-	public static final String INJECTION_INTRADERMAL_CODE="IDINJ";
-	public static final String INHALATION_NEBULIZATION_NASAL_CODE="NASNEB";
-	public static final String SWALLOW_ORAL_CODE="PO";
-	public static final String INJECTION_SUBCUTANEOUS_CODE="SQ";
-	public static final String DIFFUSION_TRANSDERMAL_CODE="TRNSDERMD";
-
-
-	public static final String INJECTION_INTRAMUSCULAR_CODE="IM";
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.112";
-
-
-	public static final String CODE_SYSTEM_NAME="HL7 RouteOfAdministration";
 	private String code;
 
 	private String displayName;

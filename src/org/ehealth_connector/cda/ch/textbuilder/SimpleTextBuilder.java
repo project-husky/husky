@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import org.ehealth_connector.common.ch.SectionsVACD;
 
 public class SimpleTextBuilder extends TextBuilder {
+	public static final String contentTagStr = "<content";
 	public static int countMatches(final String str, final String sub) {
 		if (str.equals("") || sub.equals("")) {
 			return 0;
@@ -15,7 +16,6 @@ public class SimpleTextBuilder extends TextBuilder {
 		}
 		return count;
 	}
-	public static final String contentTagStr = "<content";
 	String contentIdPrefix;
 	String text;
 

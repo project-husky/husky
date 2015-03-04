@@ -72,14 +72,6 @@ public enum ImmunologicalDisorders {
 	 *<div class="fr"> Déficit en protéine S</div>
 	 */
 	PROTEIN_S_DEFICIENCY_DISEASE ("1563006", "Protein S deficiency disease ");
-	public static ImmunologicalDisorders getEnum(String code) {
-		for (ImmunologicalDisorders x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 	public static final String AUTOIMMUNE_DISEASE_CODE="85828009";
 	public static final String RHEUMATISM_CODE="396332003";
 	public static final String DRUG_INDUCED_IMMUNODEFICIENCY_CODE="234645009";
@@ -91,13 +83,21 @@ public enum ImmunologicalDisorders {
 	public static final String SICKLE_CELL_ANEMIA_CODE="160320002";
 	public static final String MANNAN_BINDING_PROTEIN_DEFICIENCY_CODE="234579001";
 	public static final String PROTEIN_C_DEFICIENCY_DISEASE_CODE="76407009";
-
-
 	public static final String PROTEIN_S_DEFICIENCY_DISEASE_CODE="1563006";
+
+
 	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
-
-
 	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
+
+	public static ImmunologicalDisorders getEnum(String code) {
+		for (ImmunologicalDisorders x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 	private String code;
 
 	private String displayName;

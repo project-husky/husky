@@ -36,7 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  * Ein Autor (meist ein Arzt).
  */
 public class Author {
-	
+
 	/**
 	 * The m author.
 	 */

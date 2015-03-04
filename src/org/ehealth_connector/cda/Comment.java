@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
  * <div class="it"></div>
  */
 public class Comment {
-	
+
 	/** The m comment. */
 	org.openhealthtools.mdht.uml.cda.ihe.Comment mComment;
 

@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public class Code {
 
-  /**
+	/**
 	 * <div class="en">Gets the translation or code.</div>
 	 * <div class="de">Sucht in einem CD-Objekt nach einem CodeSystem und liefert den dazugehörigen Code zurück.</div>
 	 * <div class="fr"></div>
@@ -62,7 +62,7 @@ public class Code {
 		}
 		return null;
 	}
-  
+
 	CD mCD;
 
 	/**

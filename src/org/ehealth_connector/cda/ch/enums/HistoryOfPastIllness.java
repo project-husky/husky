@@ -57,14 +57,6 @@ public enum HistoryOfPastIllness {
 	 *<div class="fr">Tétanos</div>
 	 */
 	TETANUS ("76902006", "Tetanus");
-	public static HistoryOfPastIllness getEnum(String code) {
-		for (HistoryOfPastIllness x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 	public static final String HO_CHICKENPOX_CODE="38907003";
 	public static final String HO_MEASLES_CODE="14189004";
 	public static final String HO_MUMPS_CODE="36989005";
@@ -73,13 +65,21 @@ public enum HistoryOfPastIllness {
 	public static final String HEPATITIS_B_CODE="66071002";
 	public static final String CENTRAL_EUROPEAN_ENCEPHALITIS_CODE="16901001";
 	public static final String YELLOW_FEVER_CODE="16541001";
-
-
 	public static final String TETANUS_CODE="76902006";
+
+
 	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
-
-
 	public static final String CODE_SYSTEM_NAME="SNOMED CT";
+
+
+	public static HistoryOfPastIllness getEnum(String code) {
+		for (HistoryOfPastIllness x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 	private String code;
 
 	private String displayName;
