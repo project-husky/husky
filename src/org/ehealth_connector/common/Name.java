@@ -1,16 +1,18 @@
 /*******************************************************************************
  *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
  *
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
  *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
  *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 3.0 Switzerland License.
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -23,28 +25,46 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
-/**
- * Der HL7 Datentyp Name
- *
- */
 public class Name {
 
+  /**
+   * Der HL7 Datentyp Name.
+   */
 	private PN mPn;
 
-	public Name(ON on) {
-		mPn = (PN) on;
-	}
-
 	/**
-	 * @param pn
+	 * <div class="en">Instantiates a new name.</div>
+	 * <div class="de">Instantiiert ein neues Name Objekt</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param organizationName <br>
+	 * 		<div class="de"> on</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
-	public Name(PN pn) {
-		mPn = pn;
+	public Name(ON organizationName) {
+		mPn = (PN) organizationName;
 	}
 
 	/**
-	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Patienten)
-	 * 
+	 * <div class="en">Instantiates a new name.</div>
+	 * <div class="de">Instantiiert ein neues Name Objekt mit einem MDHT PN Objekt</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param personName <br>
+	 * 		<div class="de"> pn</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 */
+	public Name(PN personName) {
+		mPn = personName;
+	}
+
+	/**
+	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Patienten).
+	 *
 	 * @param givenName Vorname
 	 * @param familyName Nachname
 	 */
@@ -60,8 +80,8 @@ public class Name {
 	}
 
 	/**
-	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Behandelnde)
-	 * 
+	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für Behandelnde).
+	 *
 	 * @param givenName Vorname
 	 * @param familyName Nachname
 	 * @param title Titel (z.B. Dr. med.)
@@ -72,10 +92,10 @@ public class Name {
 	}
 
 	/**
-	 * Erzeugt einen Personennamen
-	 * 
-	 * @param familyName Nachname
+	 * Erzeugt einen Personennamen.
+	 *
 	 * @param givenName Vorname
+	 * @param familyName Nachname
 	 * @param prefix Prefix (z.B. "Dipl. Inf.")
 	 * @param suffix Suffix (z.b. "der Dritte")
 	 */
@@ -84,10 +104,26 @@ public class Name {
 		mPn.addSuffix(suffix);
 	}
 
+	/**
+	 * <div class="en">Copy mdht pn.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return PN the pn
+	 */
 	public PN copyMdhtPn() {
 		return EcoreUtil.copy(mPn);
 	}
 
+	/**
+     * <div class="en">Gets the complete name.</div>
+     * <div class="de">Liefert den ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+	 *
+	 * @return String <div class="en">the complete name</div>
+	 */
 	public String getCompleteName() {
 		String name = null;
 
@@ -106,6 +142,11 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the (first) family name.</div>
+	 * <div class="de">Liefert den (ersten) Familiennamen</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return Nachnamen
 	 */
 	public String getFamilyName() {
@@ -113,6 +154,11 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the family names.</div>
+	 * <div class="de">Liefert alle Familiennamen</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return das suffix Objekt
 	 */
 	public String getFamilyNames() {
@@ -120,17 +166,35 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the given names.</div>
+	 * <div class="de">Liefert alle Vornamen</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return Vornamen
 	 */
 	public String getGivenNames() {
 		return Util.joinEListStr (mPn.getGivens());
 	}
 
+	/**
+	 * <div class="en">Gets the mdht pn.</div>
+	 * <div class="de">Liefert mdht pn.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return PN <div class="en">the mdht pn</div>
+	 */
 	public PN getMdhtPn() {
 		return mPn;
 	}
 
 	/**
+	 * <div class="en">Gets the prefixes.</div>
+	 * <div class="de">Liefert alle Prefixes (z.B. "Dr. med.")</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return das prefix Objekt
 	 */
 	public String getPrefixes() {
@@ -138,6 +202,11 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the suffixes.</div>
+	 * <div class="de">Liefert alle suffixes (z.B. " der Dritte")</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return das suffix Objekt
 	 */
 	public String getSuffixes() {
@@ -145,6 +214,12 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Sets the family name.</div>
+	 * <div class="de">Setzt family name.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
+	 *
 	 * @param familyName Nachnamen
 	 */
 	public void setFamilyName(String familyName) {
@@ -154,6 +229,12 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Sets the given name.</div>
+	 * <div class="de">Setzt given name.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
+	 *
 	 * @param givenName Vornamen
 	 */
 	public void setGivenName(String givenName) {
@@ -162,11 +243,28 @@ public class Name {
 		}
 	}
 
-	public void setPn(PN pn) {
-		mPn = pn;
+	/**
+	 * <div class="en">Sets the pn.</div>
+	 * <div class="de">Setzt pn.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
+	 * @param mdhtPn <div class="en">the new pn</div>
+	 * <div class="de">das neue pn.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 */
+	public void setPn(PN mdhtPn) {
+		mPn = mdhtPn;
 	}
 
 	/**
+	 * <div class="en">Sets the prefix.</div>
+	 * <div class="de">Setzt ein prefix (z.B. "Dr. med.")</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
+	 *
 	 * @param prefix das prefix Objekt welches gesetzt wird
 	 */
 	public void setPrefix(String prefix) {
@@ -176,6 +274,11 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Sets the suffix.</div>
+	 * <div class="de">Setzt ein suffix. z.B. "der Dritte"</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  
 	 * @param suffix das suffix Objekt welches gesetzt wird
 	 */
 	public void setSuffix(String suffix) {
@@ -183,12 +286,4 @@ public class Name {
 			mPn.addSuffix(suffix);
 		}
 	}
-
-	/**
-	 * @param title das title Objekt welches gesetzt wird
-	 */
-	public void setTitle(String title) {
-		mPn.addPrefix(title);
-	}
-
 }

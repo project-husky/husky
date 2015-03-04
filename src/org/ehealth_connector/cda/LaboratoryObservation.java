@@ -120,6 +120,10 @@ public class LaboratoryObservation {
 	 * 		<div class="de">Code für einen bezüglich einer Impfung relevanten Laborbefund</div>
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>
+	 * @param laboratory <br>
+     *      <div class="de">Das ausführende Labor.</div>
+     *      <div class="fr"></div>
+     *      <div class="it"></div>
 	 * @param immuneProtection <br>
 	 * 		<div class="de">true, wenn ein Immunschutz besteht.</div>
 	 * 		<div class="fr"></div>
@@ -128,11 +132,7 @@ public class LaboratoryObservation {
 	 * 		<div class="de">Datum und Uhrzeit, an dem das Resultat bekannt wurde.</div>
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>
-	 * @param laboratory <br>
-	 * 		<div class="de">Das ausführende Labor.</div>
-	 * 		<div class="fr"></div>
-	 * 		<div class="it"></div>
-	 * @param valueCode <br>
+	 * @param value <br>
 	 * 		<div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>

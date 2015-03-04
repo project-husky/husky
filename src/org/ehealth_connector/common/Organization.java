@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -32,15 +32,26 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  */
 public class Organization {
 
+	/**
+	 * The mdht organization object.
+	 */
 	public org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
+	/**
+	 * <div class="en">Instantiates a new organization.</div>
+	 * <div class="de">Instantiiert ein neues Organization Objekt</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param organization <br>
+	 * 		<div class="de"> organization</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
+	 */
 	public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
 		mOrganization = organization;
 	}
 
-	//TODO Verschiedene Konstruktoren für unterschiedliche Organisationen angeben:
-	//1. Verein, Firma, Versicherung etc. (nur Name)
-	//2. Spital / Arztpraxis (ID: GLN)
 	/**
 	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
 	 * 
@@ -48,15 +59,18 @@ public class Organization {
 	 *            Name der Organisation
 	 */
 	public Organization(String name) {
-		setOrganization(CDAFactory.eINSTANCE.createOrganization());
+	     this.mOrganization = CDAFactory.eINSTANCE.createOrganization();
 		addName(name);
 	}
 
 	/**
-	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene ID (GLN) verfügt
-	 * 
-	 * @param name
-	 *            Name der Organisation
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene ID (GLN) verfügt.
+	 *
+	 * @param name            Name der Organisation
+	 * @param gln <br>
+	 * 		<div class="de"> gln</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public Organization(String name, String gln) {
 		this(name);
@@ -67,20 +81,18 @@ public class Organization {
 	}
 
 	/**
-	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
-	 * 
-	 * @param address
-	 *            Adresse
+	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
+	 *
+	 * @param address            Adresse
 	 */
 	public void addAddress(Address address) {
 		getMdhtOrganization().getAddrs().add(address.copyMdhtAdress());
 	}
 
 	/**
-	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse)
-	 * 
-	 * @param name
-	 *            Name
+	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
+	 *
+	 * @param name            Name
 	 */
 	public void addName(String name) {
 		ON orgaName = DatatypesFactory.eINSTANCE.createON();
@@ -89,10 +101,9 @@ public class Organization {
 	}
 
 	/**
-	 * Weist der Organisation eine Webseite zu
-	 * 
-	 * @param url
-	 *            URL der Webseite
+	 * Weist der Organisation eine Webseite zu.
+	 *
+	 * @param url            URL der Webseite
 	 */
 	public void addWebsite(String url) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -101,6 +112,14 @@ public class Organization {
 		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
+	/**
+	 * <div class="en">Copy mdht organization.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.Organization
+	 */
 	public org.openhealthtools.mdht.uml.cda.Organization copyMdhtOrganization() {
 		return EcoreUtil.copy(mOrganization);
 	}
@@ -114,28 +133,51 @@ public class Organization {
 		return getMdhtOrganization().getIds().get(0).getExtension();
 	}
 
+	/**
+	 * <div class="en">Gets the mdht organization.</div>
+	 * <div class="de">Liefert mdht organization.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return org.openhealthtools.mdht.uml.cda.Organization <div class="en">the mdht organization</div>
+	 */
 	public org.openhealthtools.mdht.uml.cda.Organization getMdhtOrganization() {
 		return mOrganization;
 	}
 
 	/**
-	 * Gibt den Namen der Organisation zurück
-	 * 
+	 * Gibt den (ersten) Namen der Organisation zurück.
+	 *
 	 * @return Namen der Organisation
 	 */
 	public String getName() {
 		return getMdhtOrganization().getNames().get(0).getText();
 	}
 
+	/**
+	 * <div class="en">Gets the telecoms.</div>
+	 * <div class="de">Liefert telecoms.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return Telecoms <div class="en">the telecoms</div>
+	 */
 	public Telecoms getTelecoms() {
 		Telecoms telecoms = new Telecoms(mOrganization.getTelecoms());
 		return telecoms;
 	}
 
-	public void setOrganization(org.openhealthtools.mdht.uml.cda.Organization mOrganization) {
-		this.mOrganization = mOrganization;
-	}
-
+	/**
+	 * <div class="en">Sets the telecoms.</div>
+	 * <div class="de">Setzt telecoms.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param telecoms <div class="en">the new telecoms</div>
+	 * <div class="de">das neue telecoms.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mOrganization.getTelecoms().addAll(telecoms.getMdhtTelecoms());
 	}

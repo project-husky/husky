@@ -1,16 +1,18 @@
 /*******************************************************************************
  *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
  *
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
  *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
  *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 3.0 Switzerland License.
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -59,14 +61,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
- * Hilfs-Methoden
- * 
+ * Hilfs-Methoden.
  */
 public class Util {
 
 	/**
-	 * Erzeugt eine Adresse
-	 * 
+	 * Erzeugt eine Adresse.
+	 *
 	 * @param streetName Contains the StreetName
 	 * @param houseNumber Contains the house number
 	 * @param zip PLZ
@@ -88,8 +89,8 @@ public class Util {
 	}
 
 	/**
-	 * Erzeugt eine Adresse
-	 * 
+	 * Erzeugt eine Adresse.
+	 *
 	 * @param zip PLZ
 	 * @param city Ort
 	 * @param usage Verwendungszweck (Privat, Geschäft)
@@ -110,13 +111,18 @@ public class Util {
 		}
 		return ad;
 	}
+	
 	/**
-	 * Erzeugt eine Adresse
-	 * 
-	 * @param addressline
+	 * Erzeugt eine Adresse.
+	 *
+	 * @param addressline <br>
+	 * 		<div class="de"> addressline</div>
+	 * 		<div class="fr"> addressline</div>
+	 * 		<div class="it"> addressline</div>
 	 * @param zip PLZ
 	 * @param city Ort
 	 * @param usage Verwendungszweck (Privat, Geschäft)
+	 * @return the ad
 	 */
 	public static AD createAdress(String addressline, String zip, String city, UseCode usage) {
 		final AD ad = createAddress(zip, city, usage);
@@ -126,12 +132,29 @@ public class Util {
 		}
 		return ad;
 	}
+	
+	/**
+	 * <div class="en">Creates the ce null flavor nask.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the ce
+	 */
 	public static CE createCENullFlavorNASK() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NASK);
 		return ce;
 	}
 
+	/**
+	 * <div class="en">Creates the code null flavor.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the cd
+	 */
 	public static CD createCodeNullFlavor() {
 		CD code = DatatypesFactory.eINSTANCE.createCD();
 		code.setNullFlavor(NullFlavor.NA);
@@ -139,8 +162,8 @@ public class Util {
 	}
 
 	/**
-	 * Erzeugt aus einem MDHT Organization Objekt ein neues MDHT CustodianOrganization Objekt
-	 * 
+	 * Erzeugt aus einem MDHT Organization Objekt ein neues MDHT CustodianOrganization Objekt.
+	 *
 	 * @param organization Organisation
 	 * @return CustodianOrganization
 	 */
@@ -160,12 +183,40 @@ public class Util {
 		return mdhtCustOrg;
 	}
 
+	/**
+	 * <div class="en">Creates the ed.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param text <br>
+	 * 		<div class="de"> text</div>
+	 * 		<div class="fr"> text</div>
+	 * 		<div class="it"> text</div>
+	 * @return the ed
+	 */
 	public static ED createEd(String text) {
 		ED ed = DatatypesFactory.eINSTANCE.createED();
 		// ed.setReference(arg0);
 		return (ed.addText(text));
 	}
 
+	/**
+	 * <div class="en">Creates the e mail.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param eMail <br>
+	 * 		<div class="de"> e mail</div>
+	 * 		<div class="fr"> e mail</div>
+	 * 		<div class="it"> e mail</div>
+	 * @param usage <br>
+	 * 		<div class="de"> usage</div>
+	 * 		<div class="fr"> usage</div>
+	 * 		<div class="it"> usage</div>
+	 * @return the tel
+	 */
 	public static TEL createEMail(String eMail, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
@@ -173,6 +224,18 @@ public class Util {
 		return tel;
 	}
 
+	/**
+	 * <div class="en">Creates the eur date str from ts.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param hl7Stimestamp <br>
+	 * 		<div class="de"> hl7 stimestamp</div>
+	 * 		<div class="fr"> hl7 stimestamp</div>
+	 * 		<div class="it"> hl7 stimestamp</div>
+	 * @return the string
+	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
 		// TODO Prüfen, ob der übergebene String das richtige Format hat.
 		String eurDateStr =
@@ -181,6 +244,22 @@ public class Util {
 		return eurDateStr;
 	}
 
+	/**
+	 * <div class="en">Creates the fax.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param faxNr <br>
+	 * 		<div class="de"> fax nr</div>
+	 * 		<div class="fr"> fax nr</div>
+	 * 		<div class="it"> fax nr</div>
+	 * @param usage <br>
+	 * 		<div class="de"> usage</div>
+	 * 		<div class="fr"> usage</div>
+	 * 		<div class="it"> usage</div>
+	 * @return the tel
+	 */
 	public static TEL createFax(String faxNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
@@ -188,12 +267,28 @@ public class Util {
 		return tel;
 	}
 
+	/**
+	 * <div class="en">Creates the iv l_ pq null flavor na.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the ivl pq
+	 */
 	public static IVL_PQ createIVL_PQNullFlavorNA() {
 		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NA);
 		return ivlpq;
 	}
 
+	/**
+	 * <div class="en">Creates the iv l_ pq null flavor nask.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the ivl pq
+	 */
 	public static IVL_PQ createIVL_PQNullFlavorNASK() {
 		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NASK);
@@ -201,9 +296,13 @@ public class Util {
 	}
 
 	/**
-	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt
-	 * 
-	 * @param author
+	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator Objekt.
+	 *
+	 * @param author <br>
+	 * 		<div class="de"> author</div>
+	 * 		<div class="fr"> author</div>
+	 * 		<div class="it"> author</div>
+	 * @return the legal authenticator
 	 */
 	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehealth_connector.common.Author author) {
 		// FIXME Copy the values from the author object, without drawing / move
@@ -223,8 +322,8 @@ public class Util {
 	}
 
 	/**
-	 * Erzeut ein LanguageCode Objekt
-	 * 
+	 * Erzeut ein LanguageCode Objekt.
+	 *
 	 * @param language Sprache
 	 * @return HL7 CS Objekt
 	 */
@@ -245,12 +344,36 @@ public class Util {
 		return lang;
 	}
 
+	/**
+	 * <div class="en">Creates the name.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param name <br>
+	 * 		<div class="de"> name</div>
+	 * 		<div class="fr"> name</div>
+	 * 		<div class="it"> name</div>
+	 * @return the enxp
+	 */
 	public static ENXP createName(String name) {
 		ENXP mName = DatatypesFactory.eINSTANCE.createENXP();
 		mName.addText(name);
 		return mName;
 	}
 
+	/**
+	 * <div class="en">Creates the non qoted struc doc text.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param xmlString <br>
+	 * 		<div class="de"> xml string</div>
+	 * 		<div class="fr"> xml string</div>
+	 * 		<div class="it"> xml string</div>
+	 * @return the struc doc text
+	 */
 	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
 		Resource.Factory factory = new GenericXMLResourceFactoryImpl();
 		XMLResource resource = (XMLResource) factory.createResource(null);
@@ -267,16 +390,48 @@ public class Util {
 		return text;
 	}
 
+	/**
+	 * <div class="en">Creates the null flavor unknown.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the ivxb ts
+	 */
 	public static IVXB_TS createNullFlavorUnknown() {
 		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		ts.setNullFlavor(NullFlavor.UNK);
 		return ts;
 	}
 
+	/**
+	 * <div class="en">Creates the problem entry text.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the ed
+	 */
 	public static ED createProblemEntryText() {
 		return DatatypesFactory.eINSTANCE.createED();
 	}
 
+	/**
+	 * <div class="en">Creates the reference.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param contentId <br>
+	 * 		<div class="de"> content id</div>
+	 * 		<div class="fr"> content id</div>
+	 * 		<div class="it"> content id</div>
+	 * @param prefix <br>
+	 * 		<div class="de"> prefix</div>
+	 * 		<div class="fr"> prefix</div>
+	 * 		<div class="it"> prefix</div>
+	 * @return the ed
+	 */
 	public static ED createReference(int contentId, String prefix) {
 		ED text = DatatypesFactory.eINSTANCE.createED();
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -288,6 +443,22 @@ public class Util {
 		return text;
 	}
 
+	/**
+	 * <div class="en">Creates the tel.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param telNr <br>
+	 * 		<div class="de"> tel nr</div>
+	 * 		<div class="fr"> tel nr</div>
+	 * 		<div class="it"> tel nr</div>
+	 * @param usage <br>
+	 * 		<div class="de"> usage</div>
+	 * 		<div class="fr"> usage</div>
+	 * 		<div class="it"> usage</div>
+	 * @return the tel
+	 */
 	public static TEL createTel(String telNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
@@ -295,6 +466,18 @@ public class Util {
 		return tel;
 	}
 
+	/**
+	 * <div class="en">Creates the uuid vacd.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param id <br>
+	 * 		<div class="de"> id</div>
+	 * 		<div class="fr"> id</div>
+	 * 		<div class="it"> id</div>
+	 * @return the ii
+	 */
 	public static II createUuidVacd(String id) {
 		II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(CdaChVacd.OID_VACD);
@@ -307,6 +490,18 @@ public class Util {
 		return ii;
 	}
 
+	/**
+	 * <div class="en">Creates the uuid vacd identificator.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param id <br>
+	 * 		<div class="de"> id</div>
+	 * 		<div class="fr"> id</div>
+	 * 		<div class="it"> id</div>
+	 * @return the ii
+	 */
 	public static II createUuidVacdIdentificator(Identificator id) {
 		II ii;
 		if (id == null){
@@ -320,6 +515,18 @@ public class Util {
 
 
 
+	/**
+	 * <div class="en">Extract string from non quoted struc doc text.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param strucDocText <br>
+	 * 		<div class="de"> struc doc text</div>
+	 * 		<div class="fr"> struc doc text</div>
+	 * 		<div class="it"> struc doc text</div>
+	 * @return the string
+	 */
 	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
 		StringBuilder sb = new StringBuilder();
 		if (strucDocText != null) {
@@ -328,6 +535,22 @@ public class Util {
 		return sb.toString();
 	}
 
+	/**
+	 * <div class="en">Find ii.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param iis <br>
+	 * 		<div class="de"> iis</div>
+	 * 		<div class="fr"> iis</div>
+	 * 		<div class="it"> iis</div>
+	 * @param ii <br>
+	 * 		<div class="de"> ii</div>
+	 * 		<div class="fr"> ii</div>
+	 * 		<div class="it"> ii</div>
+	 * @return the ii
+	 */
 	public static II findII(EList<II> iis, II ii) {
 		for (II curII: iis) {
 			if (curII.getRoot().equals(ii.getRoot())) {
@@ -340,8 +563,8 @@ public class Util {
 	}
 
 	/**
-	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot
-	 * 
+	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot.
+	 *
 	 * @param appliactionOidRoot identifiziert diese Version des eHCs
 	 * @return HL7 II Objekt
 	 */
@@ -358,16 +581,52 @@ public class Util {
 		return id;
 	}
 
+	/**
+	 * <div class="en">Gets the e mail.</div>
+	 * <div class="de">Liefert e mail.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param telecoms <br>
+	 * 		<div class="de"> telecoms</div>
+	 * 		<div class="fr"> telecoms</div>
+	 * 		<div class="it"> telecoms</div>
+	 * @return <div class="en">the e mail</div>
+	 */
 	public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
 	}
 
+	/**
+	 * <div class="en">Gets the fax.</div>
+	 * <div class="de">Liefert fax.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param telecoms <br>
+	 * 		<div class="de"> telecoms</div>
+	 * 		<div class="fr"> telecoms</div>
+	 * 		<div class="it"> telecoms</div>
+	 * @return <div class="en">the fax</div>
+	 */
 	public static ArrayList<String> getFax(ArrayList<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
 	}
 
 
 
+	/**
+	 * <div class="en">Gets the phone.</div>
+	 * <div class="de">Liefert phone.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param telecoms <br>
+	 * 		<div class="de"> telecoms</div>
+	 * 		<div class="fr"> telecoms</div>
+	 * 		<div class="it"> telecoms</div>
+	 * @return <div class="en">the phone</div>
+	 */
 	public static ArrayList<String> getPhone(ArrayList<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
 	}
@@ -402,18 +661,62 @@ public class Util {
 
 
 
+	/**
+	 * <div class="en">Ii.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param root <br>
+	 * 		<div class="de"> root</div>
+	 * 		<div class="fr"> root</div>
+	 * 		<div class="it"> root</div>
+	 * @return the ii
+	 */
 	public static II ii(String root) {
 		II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(root);
 		return ii;
 	}
 
+	/**
+	 * <div class="en">Ii.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param root <br>
+	 * 		<div class="de"> root</div>
+	 * 		<div class="fr"> root</div>
+	 * 		<div class="it"> root</div>
+	 * @param extension <br>
+	 * 		<div class="de"> extension</div>
+	 * 		<div class="fr"> extension</div>
+	 * 		<div class="it"> extension</div>
+	 * @return the ii
+	 */
 	public static II ii(String root, String extension) {
 		II ii = ii(root);
 		ii.setExtension(extension);
 		return ii;
 	}
 
+	/**
+	 * <div class="en">Join.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param nameList <br>
+	 * 		<div class="de"> name list</div>
+	 * 		<div class="fr"> name list</div>
+	 * 		<div class="it"> name list</div>
+	 * @param delimiter <br>
+	 * 		<div class="de"> delimiter</div>
+	 * 		<div class="fr"> delimiter</div>
+	 * 		<div class="it"> delimiter</div>
+	 * @return the string
+	 */
 	public static String join(ArrayList<String> nameList, String delimiter) {
 		String string;
 		StringBuilder builder;
@@ -439,6 +742,18 @@ public class Util {
 		return builder.toString();
 	}
 
+	/**
+	 * <div class="en">Join e list str.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param list <br>
+	 * 		<div class="de"> list</div>
+	 * 		<div class="fr"> list</div>
+	 * 		<div class="it"> list</div>
+	 * @return the string
+	 */
 	public static String joinEListStr(EList<ENXP> list) {
 		if (list.size()==0) {
 			return "";
@@ -454,6 +769,18 @@ public class Util {
 		return names;
 	}
 
+	/**
+	 * <div class="en">St.</div>
+	 * <div class="de"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param text <br>
+	 * 		<div class="de"> text</div>
+	 * 		<div class="fr"> text</div>
+	 * 		<div class="it"> text</div>
+	 * @return the st
+	 */
 	public static ST st(String text) {
 		ST value = DatatypesFactory.eINSTANCE.createST();
 		value.addText(text);
@@ -536,15 +863,24 @@ public class Util {
 		return sb;
 	}
 
+	/**
+	 * The Constant TELECOMS_FAX_PREFIX.
+	 */
 	public static final String TELECOMS_FAX_PREFIX = "fax:";
 
+	/**
+	 * The Constant TELECOMS_EMAIL_PREFIX.
+	 */
 	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
 
+	/**
+	 * The Constant TELECOMS_PHONE_PREFIX.
+	 */
 	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
-	 * Erzeugt eine Adresse
-	 * 
+	 * Erzeugt eine Adresse.
+	 *
 	 * @param addressline1 Adresszeile 1
 	 * @param addressline2 Adresszeile 2
 	 * @param addressline3 Adresszeile 3

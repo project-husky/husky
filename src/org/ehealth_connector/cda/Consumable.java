@@ -176,6 +176,14 @@ public class Consumable {
 		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
 	}
 	
+	/**
+	 * <div class="en">Gets the who atc code.</div>
+	 * <div class="de">Liefert who atc code.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return Code <div class="en">the who atc code</div>
+	 */
 	public Code getWhoAtcCode() {
 	  return Code.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode()); 
 	}
@@ -226,13 +234,13 @@ public class Consumable {
 	/**
 	 * Sets the who atc code.
 	 *
-	 * @param whoActCode das WHOACTCode Objekt welches gesetzt wird
+	 * @param whoAtcCode das WHOATcCode Objekt welches gesetzt wird
 	 */
-	public void setWhoAtcCode(String whoActCode) {
+	public void setWhoAtcCode(String whoAtcCode) {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		if (whoActCode!=null) {
+		if (whoAtcCode!=null) {
 			ce.setCodeSystem(CodeSystems.WHOATCCode.getCodeSystemId());
-			ce.setCode(whoActCode);
+			ce.setCode(whoAtcCode);
 		}
 		else {
 			ce.setNullFlavor(NullFlavor.UNK);

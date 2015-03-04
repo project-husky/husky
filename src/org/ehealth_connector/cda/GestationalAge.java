@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * <div class="de">Klasse Gestationsalter. Dies ist der Zeitraum vom 1. Tag der letzten Regelblutung der Mutter bis zur Geburt des Kindes. Hier kann Gestationsalter eines Kindes angegeben werden, sofern das rund um Impfungen am Kind relevant ist. </div>\n
- * <div class="fr"></div>\n
+ * <div class="fr"></div>
  * <div class="it"></div>
  */
 public class GestationalAge {
@@ -53,8 +53,8 @@ public class GestationalAge {
 	 *
 	 * @param codedResultsSection <br>
 	 * 		<div class="de">Instantiiert das Objekt auf Basis einer MDHT CodedResultsSection</div>
-	 * 		<div class="fr"> coded results section</div>
-	 * 		<div class="it"> coded results section</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public GestationalAge(CodedResultsSection codedResultsSection) {
 		crs = codedResultsSection;
@@ -67,8 +67,8 @@ public class GestationalAge {
 	 *
 	 * @param days <br>
 	 * 		<div class="de">Gestationsalter in Tagen</div>
-	 * 		<div class="fr"> days</div>
-	 * 		<div class="it"> days</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public GestationalAge (int days) {
 		this(days/7, days%7);
@@ -79,12 +79,12 @@ public class GestationalAge {
 	 *
 	 * @param weeks <br>
 	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen an.</div>
-	 * 		<div class="fr"> weeks</div>
-	 * 		<div class="it"> weeks</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param weeksDays <br>
 	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage an.</div>
-	 * 		<div class="fr"> weeks days</div>
-	 * 		<div class="it"> weeks days</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public GestationalAge (int weeks, int weeksDays) {
 		//create and add the MDHT Objects to the section
@@ -106,8 +106,8 @@ public class GestationalAge {
 
 	/**
 	 * <div class="de">Copy mdht coded results section.</div>
-	 * <div class="fr">Copy mdht coded results section.</div>
-	 * <div class="it">Copy mdht coded results section.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the coded results section
 	 */
@@ -117,8 +117,8 @@ public class GestationalAge {
 
 	/**
 	 * <div class="de">Copy mdht gestational age days observation.</div>
-	 * <div class="fr">Copy mdht gestational age days observation.</div>
-	 * <div class="it">Copy mdht gestational age days observation.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the gestational age days simple observation
 	 */
@@ -128,8 +128,8 @@ public class GestationalAge {
 
 	/**
 	 * <div class="de">Copy mdht gestational age weeks observation.</div>
-	 * <div class="fr">Copy mdht gestational age weeks observation.</div>
-	 * <div class="it">Copy mdht gestational age weeks observation.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the gestational age weeks simple observation
 	 */
@@ -259,7 +259,7 @@ public class GestationalAge {
 	/**
 	 * Sets the days of weeks and days.
 	 *
-	 * @param 
+	 * @param days
 	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div> 
@@ -274,7 +274,7 @@ public class GestationalAge {
 	/**
 	 * Sets the weeks of weeks and days.
 	 *
-	 * @param 
+	 * @param weeks
 	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div> 

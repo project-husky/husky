@@ -648,6 +648,13 @@ public class CdaChVacd extends CdaCh {
 		return immunizations;
 	}
 
+	/**
+	 * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel Impfempfehlungen zurück</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return <div class="en">the immunization recommendations text</div>
+	 */
 	public String getImmunizationRecommendationsText() {
 		ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(getImmunizationRecommendations());
 		return b.toString();

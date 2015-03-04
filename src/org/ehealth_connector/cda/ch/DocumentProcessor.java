@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -46,20 +46,11 @@ public class DocumentProcessor {
 	}
 
 	/**
-	 * Gibt das Dokument als XML-String zurück
-	 * 
-	 * @return XML Repräsentation des Dokuments
-	 */
-	public static String getXMLString() throws Exception {
-		return null;
-	}
-
-	/**
-	 * Lädt ein Dokument in Form einer XML-Datei aus dem Dateisystem
-	 * 
-	 * @param filePath
-	 *            das File Object
+	 * Lädt ein Dokument in Form einer XML-Datei aus dem Dateisystem.
+	 *
+	 * @param filePath            das File Object
 	 * @return den DocumentProcessor
+	 * @throws Exception the exception
 	 */
 	public static CdaChVacd loadFromFile(String filePath) throws Exception {
 		// TODO Falsche Pfade abfangen (z.B. mit \ in \\ escapen)
@@ -91,11 +82,11 @@ public class DocumentProcessor {
 	}
 
 	/**
-	 * Speichert das Dokument (standardkonform) als UTF8 enkodierte XML-Datei
-	 * 
-	 * @param file
-	 *            das File Object
+	 * Speichert das Dokument (standardkonform) als UTF8 enkodierte XML-Datei.
+	 *
+	 * @param file            das File Object
 	 * @return den DocumentProcessor
+	 * @throws Exception the exception
 	 */
 	public static DocumentProcessor saveToFile(File file) throws Exception {
 		return null;
