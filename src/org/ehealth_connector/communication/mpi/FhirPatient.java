@@ -96,8 +96,8 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (patient.getBirthday() != null) {
       setBirthDateWithDayPrecision(patient.getBirthday());
     }
-    if (patient.getGenderCode() != null) {
-      AdministrativeGender gender = patient.getGenderCode();
+    if (patient.getAdministrativeGenderCode() != null) {
+      AdministrativeGender gender = patient.getAdministrativeGenderCode();
       if (gender.equals(AdministrativeGender.FEMALE)) {
         this.setGender(AdministrativeGenderEnum.FEMALE);
       } else if (gender.equals(AdministrativeGender.MALE)) {

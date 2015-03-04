@@ -219,7 +219,7 @@ public class Patient extends Person {
 	 *
 	 * @return <div class="en">the adresses</div>
 	 */
-	public ArrayList<Address> getAdresses() {
+	public ArrayList<Address> getAddresses() {
 		ArrayList<Address> al = new ArrayList<Address>();
 		for (AD mAddress: mPatientRole.getAddrs()) {
 			Address address = new Address(mAddress);
