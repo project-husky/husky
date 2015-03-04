@@ -16,7 +16,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.communication.ch;
+package org.ehealth_connector.communication;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -29,9 +29,6 @@ import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.XdsUtil;
-import org.ehealth_connector.communication.Destination;
-import org.ehealth_connector.communication.DocumentMetadata;
-import org.ehealth_connector.communication.Response;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
@@ -44,6 +41,8 @@ import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+
+import com.sun.istack.internal.Nullable;
 
 
 /**
@@ -74,13 +73,14 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
  * </ul>
  * </p>
  */
-public class DocumentSourceClient {
+public class ConvenienceCommunication {
 
 	// IBM Audit Repository
 	//public static final String IBM_ARR ="syslog://lswin10.dfw.ibm.com:515";
 
 	// logger
-	private static final Logger logger = Logger.getLogger(DocumentSourceClient.class);
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ConvenienceCommunication.class);
 
 	/**
 	 * <p>
@@ -108,8 +108,10 @@ public class DocumentSourceClient {
 	 */
 	public static CdaChVacd getImmunizationRecommendationRequest(
 			Destination destination, CdaChVacd doc) throws Exception {
+	    //TODO
 		return null;
 	}
+	
 	/**
 	 * <p>
 	 * Lädt CDA-Dokumente von einem Medium (Datenträger oder Pfad im Dateisystem;
@@ -120,64 +122,37 @@ public class DocumentSourceClient {
 	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
 	 * Portable Media Importer Akteur</b>
 	 * </p>
-	 * 
-	 * @param destination
-	 *          Pfad zum Datenträger von dem XDM-konforme Daten geladen werden
+	 *
+	 * @param destination          Pfad zum Datenträger von dem XDM-konforme Daten geladen werden
 	 * @return eine Liste von CDA-Dokumenten
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public static ArrayList<ClinicalDocument> parseStoredCdaChVacd(File destination)
 			throws Exception {
-		return null;
-	}
-	/**
-	 * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD Spezifikation
-	 * (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und insbesondere Kapitel
-	 * "7.4 CDA Header", Regel <CH-VACD-HPAT> )
-	 * 
-	 * @return das pseudonymisierte CdaChVacd
-	 */
-	public static CdaChVacd pseudonymize(CdaChVacd doc) {
+	  //TODO
 		return null;
 	}
 
 	/**
-	 * <p>
-	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
-	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
-	 * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
-	 * </p>
-	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
-	 * Document Source Actor</b>
-	 * </p>
-	 * 
-	 * @param metadata
-	 *          Zusätzliche Metadaten für die Übertragung
-	 * @param destination
-	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
-	 * @param doc
-	 *          das CDA-Dokument, welches verschickt werden soll
-	 * @return status der XDS-Übertragung
-	 * @throws Exception
+	 * Pseudonymize.
+	 *
+	 * @param doc the doc
+	 * @return the cda ch vacd
 	 */
-	public static Response sendCdaDocument(XdsMetadata metadata,
-			Destination destination, CdaCh doc) throws Exception {
-		return null;
+	public static CdaChVacd pseudonymize(CdaChVacd doc) {  
+		//TODO
+	  return null;
 	}
 
 	/**
 	 * Speichert ein CDA Dokument für den Versand zu einer beliebigen Destination
-	 * auf einem Medium
-	 * 
-	 * @param destination
-	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
-	 * @param doc
-	 *          CDA-CH Dokument
+	 * auf einem Medium.
+	 *
+	 * @param destination          Ziel der Übertragung (Kommunikations-Endpunkt)
+	 * @param doc          CDA-CH Dokument
 	 */
 	public static void storeOnMedia(Destination destination, CdaCh doc) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -190,21 +165,20 @@ public class DocumentSourceClient {
 	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
 	 * Portable Media Creator Akteur</b>
 	 * </p>
-	 * 
-	 * @param destination
-	 *          Pfad zum Datenträger auf dem XDM-konforme Daten gespeichert werden
-	 * @param doc
-	 *          das CDA-Dokument, welches gespeichert werden soll
+	 *
+	 * @param destination          Pfad zum Datenträger auf dem XDM-konforme Daten gespeichert werden
+	 * @param doc          das CDA-Dokument, welches gespeichert werden soll
 	 * @return true, wenn das Dokument erfolgreich gespeichert wurde. Sonst:
 	 *         false.
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public static boolean storeOnMedia(File destination, ClinicalDocument doc)
 			throws Exception {
+	  //TODO
 		return false;
 	}
 
-	// Source instance
+	/** The source. */
 	private B_Source source = null;
 
 	//	public DocumentMetadata addDocument(ClinicalDocument cdaDoc) throws Exception {
@@ -222,8 +196,10 @@ public class DocumentSourceClient {
 	//		return docMetadata;
 	//	}
 
+	/** The organizational id. */
 	private String organizationalId;
 
+	/** The transaction data. */
 	SubmitTransactionData txnData;
 
 	//	private void generateMissingDocEntryAttributesCda(String docEntryUuid) throws Exception {
@@ -262,7 +238,17 @@ public class DocumentSourceClient {
 	//		docMetadata.setUniqueId(OID.createOIDGivenRoot(cda.getId().getRoot()));
 	//	}
 
-	public DocumentSourceClient(String organizationalId, String repositoryUri, boolean auditorEnabled, String log4jConfigPath) throws Exception {
+
+	/**
+	 * Instantiates a new convenience communication.
+	 *
+	 * @param organizationalId the organizational id (the OID of your Organization, e.g. "1.3.6.1.4.1.21367.2010.1.2.1")
+	 * @param repositoryUri the repository uri (the URI of the Communication Endpoint, e.g. the NIST Repository "http://ihexds.nist.gov/tf6/services/xdsrepositoryb")
+	 * @param auditorEnabled the auditor enabled
+	 * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
+	 * @throws Exception the exception
+	 */
+	public ConvenienceCommunication(String organizationalId, String repositoryUri, boolean auditorEnabled, @Nullable String log4jConfigPath) throws Exception {
 		txnData = new SubmitTransactionData();
 		this.organizationalId = organizationalId;
 		if (log4jConfigPath==null) {
@@ -271,7 +257,20 @@ public class DocumentSourceClient {
 		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
 	}
 
-	public DocumentSourceClient(String organizationalId, String repositoryUri, boolean auditorEnabled, String keystorePath, String keystorePassword, String truststorePath, String truststorePassowrd, String log4jConfigPath) throws Exception {
+	/**
+	 * Instantiates a new convenience communication.
+	 *
+     * @param organizationalId the organizational id (the OID of your Organization, e.g. "1.3.6.1.4.1.21367.2010.1.2.1")
+     * @param repositoryUri the repository uri (the URI of the Communication Endpoint, e.g. the NIST Repository "http://ihexds.nist.gov/tf6/services/xdsrepositoryb")
+	 * @param auditorEnabled the auditor enabled
+	 * @param keystorePath the keystore path
+	 * @param keystorePassword the keystore password
+	 * @param truststorePath the truststore path
+	 * @param truststorePassowrd the truststore passowrd
+	 * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
+	 * @throws Exception the exception
+	 */
+	public ConvenienceCommunication(String organizationalId, String repositoryUri, boolean auditorEnabled, String keystorePath, String keystorePassword, String truststorePath, String truststorePassowrd, String log4jConfigPath) throws Exception {
 		System.setProperty("javax.net.ssl.keyStore",keystorePath);
 		System.setProperty("javax.net.ssl.keyStorePassword",keystorePassword);
 		System.setProperty("javax.net.ssl.trustStore",truststorePath);
@@ -285,6 +284,14 @@ public class DocumentSourceClient {
 		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
 	}
 
+	/**
+	 * Adds a document to the XDS Submission set
+	 *
+	 * @param desc the document descriptor (which kind of document do you want to transfer? e.g. PDF, CDA,...)
+	 * @param filePath the file path
+	 * @return the document metadata (which have to be completed)
+	 * @throws Exception the exception
+	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
 		//Cda Metadata extration is not implemented yet
 		XDSDocument doc = new XDSDocumentFromFile(desc,filePath);
@@ -299,6 +306,11 @@ public class DocumentSourceClient {
 
 	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10, A11
 
+	/**
+	 * Cda fixes.
+	 *
+	 * @param docMetadata the doc metadata
+	 */
 	private void cdaFixes(DocumentMetadata docMetadata) {
 		docMetadata.getMdhtDocumentEntryType().setLanguageCode(null);
 		docMetadata.getMdhtDocumentEntryType().setClassCode(null);
@@ -315,6 +327,12 @@ public class DocumentSourceClient {
 
 	// XDS: Interaktion mit einer IHE Registry - A8
 
+	/**
+	 * Generate missing doc entry attributes.
+	 *
+	 * @param docEntryUuid the doc entry uuid
+	 * @throws Exception the exception
+	 */
 	private void generateMissingDocEntryAttributes(String docEntryUuid) throws Exception {
 
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
@@ -360,35 +378,16 @@ public class DocumentSourceClient {
 
 	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
 
-	/**
-	 * <p>
-	 * Sendet eine beliebige Datei an einen Empfänger (Repository Akteur gemäss IHE
-	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
-	 * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
-	 * </p>
-	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
-	 * Document Source Actor</b>
-	 * </p>
-	 * 
-	 * @param metadata
-	 *          Metadaten zum Dokument
-	 * @param destination
-	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
-	 * @param filePath
-	 *          Datei (inkl. Pfad), welche verschickt werden soll
-	 * @return status der XDS-Übertragung
-	 * @throws Exception
-	 */
-	public Response sendDocument(DocumentMetadata metadata, DocumentDescriptor docDesc, String filePath) throws Exception {
-		return null;
-	}
-
 	// Anfrage einer Immunization Recommendation (Senden der Anfrage und Empfangen
 	// der Antwort) - A4, A5, A6
 
 	/**
-	 * Test set up
+	 * Setting up the communication endpoint and the logger
+	 *
+	 * @param repositoryUri the repository uri
+	 * @param auditorEnabled the auditor enabled
+	 * @param log4jConfigPath the log4j config path
+	 * @throws Exception the exception
 	 */
 	protected void setUp(String repositoryUri, boolean auditorEnabled, String log4jConfigPath) throws Exception {
 		//super.setUp();
@@ -405,6 +404,20 @@ public class DocumentSourceClient {
 		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
 	}
 
+	 /**
+   	 * <p>
+   	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
+   	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
+   	 * gemäss <b>IHE [ITI-41] Provide & Register Document Set – b</b>.
+   	 * </p>
+   	 * <p>
+   	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+   	 * Document Source Actor</b>
+   	 * </p>
+   	 *
+   	 * @return XDSResponseType
+   	 * @throws Exception the exception
+   	 */
 	public XDSResponseType submit() throws Exception {
 		//generate missing information for all documents
 		for (XDSDocument xdsDoc : txnData.getDocList()) {

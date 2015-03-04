@@ -42,8 +42,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * Metadaten zu einem Dokument (wird für IHE XDS Registry verwendet)
- */
+ * Stellt die Metadaten gemäss [IHE ITI TF-3], Table 4.1-5: Document Metadata
+ * Attribute Definition bereit
+ * */
 public class DocumentMetadata {
 
 	DocumentEntryType xDoc;

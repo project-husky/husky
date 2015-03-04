@@ -747,11 +747,11 @@ public class CdaChVacd extends CdaCh {
 		return pregnancies;
 	}
 
-	/**
-	 * <div class="de">Pseudonymisiert das Dokument für die Anfrage einer Impfempfehlung</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
+    /**
+     * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD Spezifikation
+     * (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und insbesondere Kapitel
+     * "7.4 CDA Header", Regel <CH-VACD-HPAT> )
+     */
 	public void pseudonymization() {
 		for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
 			mPatientRole = getDoc().getPatientRoles().get(0);
