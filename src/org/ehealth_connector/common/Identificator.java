@@ -20,6 +20,7 @@ package org.ehealth_connector.common;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -145,7 +146,7 @@ public class Identificator {
 	 * @return II <div class="en">the ii</div>
 	 */
 	public II getIi() {
-		return mII;
+		return EcoreUtil.copy(mII);
 	}
 
 	/**

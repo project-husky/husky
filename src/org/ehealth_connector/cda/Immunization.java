@@ -36,6 +36,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+import com.sun.istack.internal.Nullable;
+
 /**
  * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen.
  */
@@ -58,8 +60,8 @@ public class Immunization {
 	 * @param consumable Impfstoff
 	 * @param author <br>
 	 * 		<div class="de">Autor der Impfung</div>
-	 * 		<div class="fr"> author</div>
-	 * 		<div class="it"> author</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param appliedAt Datum der Impfung
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
@@ -95,7 +97,7 @@ public class Immunization {
 	 * @param route Einnahmeart (darf null sein)
 	 * @param doseQuantity in milliliters (e.g. 0.5) (darf null sein)
 	 */
-	public Immunization(Consumable consumable, Author author, Date appliedAt, RouteOfAdministration route, String doseQuantity) {
+	public Immunization(Consumable consumable, Author author, Date appliedAt, RouteOfAdministration route, Double doseQuantity) {
 		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
 		mImmunization.setNegationInd(Boolean.FALSE);
 
@@ -215,8 +217,11 @@ public class Immunization {
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
-		Value value = new Value(mImmunization.getDoseQuantity());
-		return value;
+		if (mImmunization.getDoseQuantity()!=null) {
+	      Value value = new Value(mImmunization.getDoseQuantity());
+	      return value;
+		}
+		return null;
 	}	
 
 	/**
@@ -277,16 +282,17 @@ public class Immunization {
 	/**
 	 * Sets the dosage.
 	 *
-	 * @param doseQuantity the new dosage
+	 * @param doseQuantity the new dosage (null ok)
 	 */
-	public void setDosage(String doseQuantity) {
+	public void setDosage(@Nullable Double doseQuantity) {
 		if (doseQuantity==null) {
 			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
 		}
 		else {
 			IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 			ivl_pq.setUnit("ml");
-			ivl_pq.setValue(Double.valueOf(doseQuantity));
+			ivl_pq.setValue(doseQuantity);
+			mImmunization.setDoseQuantity(ivl_pq);
 		}
 	}
 

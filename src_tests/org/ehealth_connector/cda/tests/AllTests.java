@@ -7,12 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * <div class="de">Erzeugt ein AllTests.java- Objekt.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
  */
 
 /**
- * @author hodi
  * Test 
  */
 @RunWith(Suite.class)

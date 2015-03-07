@@ -62,7 +62,8 @@ public class Consumable {
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
 	 * @param tradeNameOfVaccine Handelsname des Impfstoffes
-	 * @param gtin Packungs-GTIN, GLN oder swissINDEX
+	 * @param gtin Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein GTIN, GLN, oder Swiss Index Code sein.
+     * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
 		this(tradeNameOfVaccine, gtin, null);
@@ -70,14 +71,14 @@ public class Consumable {
 
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
-	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
+	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden. Wenn der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland verabreichte Impfung), dann muss das Antigen mittels WHO ATC angegeben werden. Wenn in einem Produkt mehrere Antigene enthalten sind, MUSS das Immunization Element für jedes Antigen je einmal angegeben werden. 
 	 *
 	 * @param tradeNameOfVaccine Handelsname des Impfstoffes
 	 * @param gtinOrPharmacodeOrGln Packungs-GTIN, GLN oder swissINDEX (GLN ist veraltet)
 	 * @param whoAtcCode <br>
 	 * 		<div class="de"> who atc code</div>
-	 * 		<div class="fr"> who atc code</div>
-	 * 		<div class="it"> who atc code</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, String whoAtcCode) {
 
@@ -103,8 +104,8 @@ public class Consumable {
 
 	/**
 	 * <div class="de">Adds the manufactured material translation.</div>
-	 * <div class="fr">Adds the manufactured material translation.</div>
-	 * <div class="it">Adds the manufactured material translation.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param codedId das codedId Objekt welches gesetzt wird
 	 */
@@ -114,8 +115,8 @@ public class Consumable {
 
 	/**
 	 * <div class="de">Copy mdht consumable.</div>
-	 * <div class="fr">Copy mdht consumable.</div>
-	 * <div class="it">Copy mdht consumable.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda. consumable
 	 */
@@ -134,19 +135,35 @@ public class Consumable {
 	}
 
 	/**
-	 * Gets the manufactured material translation gtin or ean or swiss index.
+	 * Gets the product id from the ManufacturedProduct Ids oder the ManufacturedMaterial Code or the according translations
 	 *
-	 * @return the manufactured material translation gtin or ean or swiss index
+	 * @return the gtin or ean or swiss index, null otherwise
 	 */
-	public Code getManufacturedMaterialTranslationGtinOrEanOrSwissIndex() {
-		for (CD codeTranslation : getManufacturedMaterialTranslations()) {
-			String codeTransStr = codeTranslation.getCodeSystem();
-			if (codeTransStr.equals(CodeSystems.GTIN.getCodeSystemId()) || codeTransStr.equals(CodeSystems.GLN.getCodeSystemId()) || codeTransStr.equals(CodeSystems.SwissINDEX.getCodeSystemId())) {
-				Code code = new Code(codeTranslation);
-				return code;
-			}
+	public Code getManufacturedProductId() {
+	  for (II id : mProductEntry.getIds()) {
+	    if (id.getRoot() != null && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId()) || id.getRoot() != null && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()) || id.getRoot() != null && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+	      Code code = new Code(id.getRoot(), id.getExtension());
+	      return code;
+	    }
+	  }
+		if (Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode())!=null) {
+		  return Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode());
 		}
-		return null;
+	    if (Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode())!=null) {
+	          return Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode());
+	        }
+	       if (Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode())!=null) {
+             return Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode());
+           }
+	       return null;
+//	  for (CD codeTranslation : getManufacturedMaterialTranslations()) {
+//			String codeTransStr = codeTranslation.getCodeSystem();
+//			if (codeTransStr.equals(CodeSystems.GTIN.getCodeSystemId()) || codeTransStr.equals(CodeSystems.GLN.getCodeSystemId()) || codeTransStr.equals(CodeSystems.SwissINDEX.getCodeSystemId())) {
+//				Code code = new Code(codeTranslation);
+//				return code;
+//			}
+//		}
+//		return null;
 	}
 
 	/**
@@ -189,22 +206,24 @@ public class Consumable {
 	}
 
 	/**
-	 * Sets the manufactured material code.
+	 * Adds the manufactured material code to the code element.
 	 *
-	 * @param codedId the new manufactured material code
+	 * @param code the new manufactured material code
 	 */
-	public void setManufacturedMaterialCode(Code codedId) {
-		CD cd = EcoreUtil.copy(codedId.getCD());
+	private void addManufacturedMaterialCodeTranslation(Code code) {
+		CD cd = EcoreUtil.copy(code.getCD());
 		mMaterial.getCode().getTranslations().add(cd);
 	}
 
 	/**
-	 * Sets the manufactured product id.
+	 * Sets the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss Index Code
+	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 *
 	 * @param gtinOrPharmacodeOrGln the new manufactured product id
 	 */
 	public void setManufacturedProductId(Code gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
+			mProductEntry.getIds().clear();
 			mProductEntry.getIds().add(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln).getIi());
 		}
 		else {

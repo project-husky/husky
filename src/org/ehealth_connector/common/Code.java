@@ -51,6 +51,7 @@ public class Code {
 		}
 		if (code.getCodeSystem().equals(codeSystem)) {
 			eHcCode = new Code(code);
+			return eHcCode;
 		}
 		else {
 			for (CD mCd: code.getTranslations()) {
