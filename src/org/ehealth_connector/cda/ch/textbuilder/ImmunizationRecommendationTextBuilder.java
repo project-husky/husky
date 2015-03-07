@@ -57,7 +57,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 		addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.TREATMENT_PLAN.getContentIdPrefix(), i);
 		addCell("");
 		addCell("");
-		addCell(immunization.getEffectiveTime());
+		addCell(immunization.getPossibleAppliance());
 		addCell(""); // gegen
 		addCell(immunization.getAuthor().getCompleteName());
 		addCell("");

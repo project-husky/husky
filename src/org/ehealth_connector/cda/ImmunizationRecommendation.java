@@ -104,8 +104,7 @@ public class ImmunizationRecommendation {
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance, Date endOfPossibleAppliance,
 			boolean intendedOrProposed, boolean shallNotBeAdministerd, String priority, RouteOfAdministration routeOfAdministration, String doseQuantity, String rateQuantity) {      
 
-		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
-		mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());  
+		setConsumable(consumable);
 
 		//Set the Attributes of this class
 		setId(null);
@@ -137,6 +136,17 @@ public class ImmunizationRecommendation {
 		}    
 	}
 
+	
+	/**
+	 * Sets the consumable.
+	 *
+	 * @param consumable the new consumable
+	 */
+	public void setConsumable(Consumable consumable) {
+      mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
+      mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());  
+    }
+	
 	/**
 	 * Instantiates a new immunization recommendation.
 	 *
@@ -185,12 +195,17 @@ public class ImmunizationRecommendation {
 		return consumable;
 	}
 
-	/**
-	 * Gets the effective time.
-	 *
-	 * @return the effective time
-	 */
-	public String getEffectiveTime() {
+    /**
+     * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht werden soll als String (z.B. "01.01.2015 - 01.03.1015")</div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+     *
+     * @return 
+     *      <div class="de">Zeitraum, in dem die Impfung verabreicht werden soll als String</div>
+     *      <div class="fr"></div>
+     *      <div class="it"></div>
+     */
+	public String getPossibleAppliance() {
 		List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
 	}
@@ -204,6 +219,29 @@ public class ImmunizationRecommendation {
 		Identificator id = new Identificator(mImmunizationRecommendation.getIds().get(0));
 		return id;
 	}
+	
+    /**
+     * <div class="de">Gibt zurück, ob eine Impfung beabsichtigt, aber noch nicht erfolgt, oder vorgeschlagen ist (moodCode).</div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+     * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. false, wenn eine Impfung vorgeschlagen ist.
+     */
+	public boolean getIntendedOrProposed() {
+	  if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT)) return true;
+	  if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP)) return false;
+	  return true;
+	}
+	
+	 /**
+     * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden soll.</div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+     *
+     * @return true, wenn die Impfung nicht verabreicht werden soll, sonst false
+     */
+    public boolean gettShallNotBeAdministerd() {
+       return mImmunizationRecommendation.getNegationInd();
+    }
 
 	/**
 	 * Gets the mdht immunization recommendation.
@@ -234,9 +272,10 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * Sets the intended or proposed.
-	 *
-	 * @param intendedOrProposed das intendedOrProposed Objekt welches gesetzt wird
+     * <div class="de">Setzt, ob eine Impfung beabsichtigt, aber noch nicht erfolgt, oder vorgeschlagen ist (moodCode).</div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+	 * @param intendedOrProposed true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. false, wenn eine Impfung vorgeschlagen ist.
 	 */
 	public void setIntendedOrProposed(boolean intendedOrProposed) {
 		if (intendedOrProposed) {
@@ -245,7 +284,6 @@ public class ImmunizationRecommendation {
 		else {
 			mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
 		}
-
 	}
 
 	/**
@@ -271,7 +309,10 @@ public class ImmunizationRecommendation {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param shallNotBeAdministerd          das shallNotBeAdministerd Objekt welches gesetzt wird
+	 * @param shallNotBeAdministerd
+	 *      <div class="de">true, wenn die Impfung nicht verabreicht werden soll, sonst false</div>
+     *      <div class="fr"></div>
+     *      <div class="it"></div>
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {

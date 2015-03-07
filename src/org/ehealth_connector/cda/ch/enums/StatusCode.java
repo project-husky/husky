@@ -22,7 +22,7 @@ public enum StatusCode {
 	*<div class="de">aktiv</div>
 	*<div class="fr"></div>
 	*/
-	ACTIV ("active", "activ"),
+	ACTIVE ("active", "activ"),
 	/** 
 	*<div class="de">erledigt</div>
 	*<div class="fr"></div>
@@ -49,7 +49,7 @@ public enum StatusCode {
 	*/
 	ABORTED ("aborted", "aborted");
 	public static final String NEW_CODE="new";
-	public static final String ACTIV_CODE="active";
+	public static final String ACTIVE_CODE="active";
 	public static final String COMPLETED_CODE="completed";
 	public static final String HELD_CODE="held";
 	public static final String CANCELLED_CODE="cancelled";

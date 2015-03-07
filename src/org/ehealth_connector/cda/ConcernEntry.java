@@ -33,8 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * <div class="de">Klasse ConcernEntry.</div>\n
- * <div class="fr">Class ConcernEntry.</div>\n
- * <div class="it">Class ConcernEntry.</div>
+ * <div class="fr"></div>\n
+ * <div class="it"></div>
  */
 class ConcernEntry {
 
@@ -53,8 +53,8 @@ class ConcernEntry {
 	 *
 	 * @param concernEntry <br>
 	 * 		<div class="de"> concern entry</div>
-	 * 		<div class="fr"> concern entry</div>
-	 * 		<div class="it"> concern entry</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public ConcernEntry (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
 		mConcernEntry = concernEntry;
@@ -115,15 +115,13 @@ class ConcernEntry {
 				.getEffectiveTime().getLow().getValue());
 	}
 
-
-
 	/**
 	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
 	 * 
 	 * @return Status des Leidens
 	 */
-	public StatusCode getStatus() {
-		return StatusCode.getEnum(mConcernEntry.getStatusCode().getCode());
+	public ProblemConcernStatusCode getStatus() {
+		return ProblemConcernStatusCode.getEnum(mConcernEntry.getStatusCode().getCode());
 	}
 
 	/**
@@ -153,6 +151,9 @@ class ConcernEntry {
 	 */
 	public void setEnd(Date endOfConcern) {
 		try {
+          if (mConcernEntry.getEffectiveTime() == null) {
+            mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(endOfConcern));
+          }
 			mConcernEntry.getEffectiveTime().setHigh(
 					DateUtil.createIVXB_TSFromDate(endOfConcern));
 		} catch (ParseException e) {
@@ -177,6 +178,9 @@ class ConcernEntry {
 	 */
 	public void setStart(Date startOfConcern) {
 		try {
+	      if (mConcernEntry.getEffectiveTime() == null) {
+	        mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(startOfConcern));
+	      }
 			mConcernEntry.getEffectiveTime().setLow(
 					DateUtil.createIVXB_TSFromDate(startOfConcern));
 		} catch (ParseException e) {

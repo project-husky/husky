@@ -8,12 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
+import org.ehealth_connector.cda.ActiveProblemConcernEntry;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.Immunization;
+import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
+import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.tests.AllTests;
 import org.ehealth_connector.common.Author;
@@ -59,9 +63,18 @@ public class CdaChVacdTest {
   Author author2;
   
   Consumable consumable1;
+  
+  Immunization immunization1;
+  ActiveProblemConcernEntry apce1;
+  PastProblemConcern ppc1;
+  
+  ImmunizationRecommendation immunizationRecommendation1;
+
+  
 
   SimpleDateFormat eurDateFormatter;
-  private Object gtinCode; 
+  Object gtinCode;
+
 
   @Before 
   public void initTestData() {
@@ -111,47 +124,103 @@ public class CdaChVacdTest {
   public void setterGetterTest() {
     testDoc = new CdaChVacd();
     
-    Immunization i = testImmunizationSetterGetter();
-
+    consumable1 = testConsumableSetterGetter();
+    
+    //Body Sections
+    immunization1 = testImmunizationSetterGetter();
+    ppc1 = testPastProblemConcernGetterSetter();
+    apce1 = testActiveProblemsGetterSetter();
+    immunizationRecommendation1 = testImmunizationRecommendationGetterSetter();
+    
     testDoc2 = new CdaChVacd(testDoc.getDoc());
     //testDocMetadata("MDHT Document", testDoc2);
   }
   
-  public Consumable testConsumableSetter() {
+  public Consumable testConsumableSetterGetter() {
     Consumable c = new Consumable(ts1);
     
     c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
-    assertEquals(null, true, isEqual(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), c.getManufacturedProductId()));
+    assertEquals(true, isEqual(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), c.getManufacturedProductId()));
     
     c.setTradeName(ts2);
-    assertEquals(null, ts2, c.getTradeName());
+    assertEquals(ts2, c.getTradeName());
     
     c.setWhoAtcCode(ts3);
-    assertEquals(null, ts3, c.getWhoAtcCode().getCode());
+    assertEquals(ts3, c.getWhoAtcCode().getCode());
     
     return consumable1;
   }
-    
+  //1  
   public Immunization testImmunizationSetterGetter() {
     Immunization i = new Immunization();
     
     i.setApplyDate(startDate);
-    assertEquals(null, startDate, i.getApplyDate());
+    assertEquals(startDate, i.getApplyDate());
     
     i.setAuthor(author1);
-    assertEquals(null, true, isEqual(author1, i.getAuthor()));
+    assertEquals(true, isEqual(author1, i.getAuthor()));
     
-    i.setConsumable(testConsumableSetter());
-    assertEquals(null, true, isEqual(testConsumableSetter(), i.getConsumable()));
+    i.setConsumable(consumable1);
+    assertEquals(true, isEqual(consumable1, i.getConsumable()));
     
     i.setDosage(number);
-    assertEquals(null, number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
+    assertEquals(number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
     
     i.setId(id1);
-    assertEquals(null, id1, id1);
+    assertEquals(id1, id1);
     
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
-    assertEquals(null, RouteOfAdministration.DIFFUSION_TRANSDERMAL, i.getRouteOfAdministration());
+    assertEquals(RouteOfAdministration.DIFFUSION_TRANSDERMAL, i.getRouteOfAdministration());
+    
+    return i;
+  }
+  
+  //2
+  public ActiveProblemConcernEntry testActiveProblemsGetterSetter() {
+    ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
+    
+    a.setId(id1);
+    assertEquals(true, isEqual(id1, a.getId()));
+    
+    a.setStart(startDate);
+    assertEquals("28.02.2015", a.getStart());
+    
+    a.setEnd(endDate);
+    assertEquals("28.02.2018", a.getEnd());
+    
+    a.setStatus(ProblemConcernStatusCode.ACTIVE);
+    assertEquals(ProblemConcernStatusCode.ACTIVE, a.getStatus());
+    
+    a.setConcern(ts1);
+    assertEquals(ts1, a.getConcern());
+    
+    return a;
+  }
+  
+  //3
+  
+  
+  //11
+  public ImmunizationRecommendation testImmunizationRecommendationGetterSetter() {
+    ImmunizationRecommendation i = new ImmunizationRecommendation();
+    
+    i.setAuthor(author2);
+    assertEquals(true, isEqual(author2, i.getAuthor()));
+    
+    i.setId(id2);
+    assertEquals(true, isEqual(id2, i.getId()));
+    
+    i.setIntendedOrProposed(true);
+    assertEquals(true, i.getIntendedOrProposed());
+    
+    i.setPossibleAppliance(startDate, endDate);
+    assertEquals("28.02.2015 - 28.02.2018", i.getPossibleAppliance());
+    
+    i.setShallNotBeAdministerd(true);
+    assertEquals(true, i.gettShallNotBeAdministerd());
+    
+    i.setConsumable(consumable1);
+    assertEquals(true, isEqual(consumable1, i.getConsumable()));
     
     return i;
   }
