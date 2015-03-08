@@ -3,7 +3,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.ArrayList;
 
 import org.ehealth_connector.cda.AllergyConcern;
-import org.ehealth_connector.common.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.SectionsVACD;
 
 /**
  * Builds the <text> part of the Immunization recommendations.

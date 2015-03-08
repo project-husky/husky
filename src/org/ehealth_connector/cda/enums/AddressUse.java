@@ -15,7 +15,7 @@
  * Year of publication: 2015
  *
  *******************************************************************************/
-package org.ehealth_connector.cda.ch.enums;
+package org.ehealth_connector.cda.enums;
 
 import java.util.Arrays;
 

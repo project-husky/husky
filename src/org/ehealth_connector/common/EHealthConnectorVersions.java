@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.enums;
+package org.ehealth_connector.common;
 
 public enum EHealthConnectorVersions {
 	/**

@@ -19,7 +19,7 @@
 package org.ehealth_connector.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.enums.AddressUse;
+import org.ehealth_connector.cda.enums.AddressUse;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;

@@ -22,7 +22,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.ch.enums.StatusCode;
+import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Util;

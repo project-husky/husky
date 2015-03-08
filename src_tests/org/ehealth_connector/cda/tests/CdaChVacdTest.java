@@ -1,22 +1,21 @@
 package org.ehealth_connector.cda.tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.ehealth_connector.cda.ActiveProblemConcernEntry;
+import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.PastProblemConcern;
+import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
-import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.tests.AllTests;
@@ -25,6 +24,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +55,8 @@ public class CdaChVacdTest {
   
   Code code1;
   Code code2;
+  Value value1;
+  Value value2;
   Identificator id1;
   Identificator id2;
   Name name1;
@@ -63,10 +65,12 @@ public class CdaChVacdTest {
   Author author2;
   
   Consumable consumable1;
+  ProblemEntry problem1; 
   
   Immunization immunization1;
   ActiveProblemConcernEntry apce1;
   PastProblemConcern ppc1;
+  AllergyConcern ac1;
   
   ImmunizationRecommendation immunizationRecommendation1;
 
@@ -74,14 +78,16 @@ public class CdaChVacdTest {
 
   SimpleDateFormat eurDateFormatter;
   Object gtinCode;
+  private ProblemEntry problem2;
+  private AllergyProblem allergyProblem1;
 
 
   @Before 
   public void initTestData() {
     //Dates
     eurDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-    startDateString = "08.10.2013";
-    endDateString = "28.01.2014";
+    startDateString = "28.02.2015";
+    endDateString = "28.02.2018";
     
     startDate = DateUtil.date("28.02.2015");
     endDate = DateUtil.date("28.02.2018");
@@ -99,8 +105,9 @@ public class CdaChVacdTest {
     //Convenience API Types
     code1 = createCode1();
     code2 = createCode2();
-    gtinCode = createGtinCode();
-    
+    value1 = createValue1();
+    value2 = createValue2();
+    gtinCode = createGtinCode();  
     id1 = createIdentificator1();
     id2 = createIdentificator2();
     
@@ -112,11 +119,13 @@ public class CdaChVacdTest {
     
     consumable1 = createConsumable1();
     consumable1 = createConsumable2();
-
-    //Start the construcorTest at first
-    setterGetterTest();
+    
+    problem1 = createProblemEntry();
+    problem2 = createProblemEntry();
+    
+    allergyProblem1 = createAllergyProblem();
   }
-  
+
   /**
    * <div class="de">Testet die verschiedenen Konstruktoren eines EDES Dokuments</div>
    */
@@ -124,24 +133,72 @@ public class CdaChVacdTest {
   public void setterGetterTest() {
     testDoc = new CdaChVacd();
     
-    consumable1 = testConsumableSetterGetter();
+//    consumable1 = testConsumableSetterGetter();
+//    problem1 = testProblemEntrySetterGetter();
     
     //Body Sections
-    immunization1 = testImmunizationSetterGetter();
-    ppc1 = testPastProblemConcernGetterSetter();
-    apce1 = testActiveProblemsGetterSetter();
-    immunizationRecommendation1 = testImmunizationRecommendationGetterSetter();
+//    immunization1 = testImmunizationSetterGetter();
+//    ppc1 = testPastProblemConcernGetterSetter();
+//    apce1 = testActiveProblemsGetterSetter();
+//    ac1 = testAllergyConcernSetterGetter();
+//    immunizationRecommendation1 = testImmunizationRecommendationGetterSetter();
     
     testDoc2 = new CdaChVacd(testDoc.getDoc());
     //testDocMetadata("MDHT Document", testDoc2);
-  }
-  
-  private PastProblemConcern testPastProblemConcernGetterSetter() {
-    // TODO Auto-generated method stub
-    return null;
+    //testProblemEntrySetterGetter();
   }
 
-  public Consumable testConsumableSetterGetter() {
+  @Test
+  public void testProblemEntrySetterGetter() {
+    ProblemEntry p = new ProblemEntry();
+    
+    p.setCode(code1);
+    assertEquals(true, isEqual(code1, p.getCode()));
+    
+    p.setId(id1);
+    assertEquals(true, isEqual(id1, p.getId()));
+    
+    p.setStart(startDate);
+    assertEquals(startDateString, p.getStart());
+    
+    p.setNotOccured(true);
+    assertEquals(true, p.getProblemNotOccured());
+    
+    p.addValue(code2);
+    assertEquals(true, isEqual(code2, p.getValue().getCode()));
+    
+    p.addValue(value1);
+    assertEquals(true, isEqual(value1, p.getValues().get(1)));
+    
+    p.addValue(value2);
+    assertEquals(true, isEqual(value2, p.getValues().get(2)));
+  }
+  
+  @Test
+  public void testAllergyProblemSetterGetter() {
+    AllergyProblem p = new AllergyProblem();
+    
+    p.setId(id1);
+    assertEquals(true, isEqual(id1, p.getId()));
+    
+    p.setStart(startDate);
+    assertEquals(startDateString, p.getStart());
+    
+    p.setNotOccured(true);
+    assertEquals(true, p.getNotOccured());
+    
+    p.addValue(code2);
+    assertEquals(true, isEqual(code2, p.getValue().getCode()));
+    
+    p.addValue(value1);
+    assertEquals(true, isEqual(value1, p.getValues().get(1)));
+    
+    p.addValue(value2);
+    assertEquals(true, isEqual(value2, p.getValues().get(2)));
+  }
+
+  @Test
+  public void testConsumableSetterGetter() {
     Consumable c = new Consumable(ts1);
     
     c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
@@ -152,11 +209,11 @@ public class CdaChVacdTest {
     
     c.setWhoAtcCode(ts3);
     assertEquals(ts3, c.getWhoAtcCode().getCode());
-    
-    return consumable1;
   }
-  //1  
-  public Immunization testImmunizationSetterGetter() {
+  
+  //1
+  @Test
+  public void testImmunizationSetterGetter() {
     Immunization i = new Immunization();
     
     i.setApplyDate(startDate);
@@ -176,22 +233,21 @@ public class CdaChVacdTest {
     
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
     assertEquals(RouteOfAdministration.DIFFUSION_TRANSDERMAL, i.getRouteOfAdministration());
-    
-    return i;
   }
   
   //2
-  public ActiveProblemConcernEntry testActiveProblemsGetterSetter() {
+  @Test
+  public void testActiveProblemsSetterGetter() {
     ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
     
     a.setId(id1);
     assertEquals(true, isEqual(id1, a.getId()));
     
     a.setStart(startDate);
-    assertEquals("28.02.2015", a.getStart());
+    assertEquals(startDateString, a.getStart());
     
     a.setEnd(endDate);
-    assertEquals("28.02.2018", a.getEnd());
+    assertEquals(endDateString, a.getEnd());
     
     a.setStatus(ProblemConcernStatusCode.ACTIVE);
     assertEquals(ProblemConcernStatusCode.ACTIVE, a.getStatus());
@@ -199,14 +255,64 @@ public class CdaChVacdTest {
     a.setConcern(ts1);
     assertEquals(ts1, a.getConcern());
     
-    return a;
+    a.addProblemEntry(problem1);
+    assertTrue(isEqual(problem1, a.getProblemEntry()));
+    
+    a.addProblemEntry(problem2);
+    assertTrue(isEqual(problem2, a.getProblemEntries().get(1)));
   }
   
   //3
+  @Test
+  public void testPastProblemConcernSetterGetter() {
+    PastProblemConcern p = new PastProblemConcern();
+    
+    p.setId(id1);
+    assertEquals(true, isEqual(id1, p.getId()));
+    
+    p.setStart(startDate);
+    assertEquals(startDateString, p.getStart());
+    
+    p.setEnd(endDate);
+    assertEquals(endDateString, p.getEnd());
+    
+    p.setStatus(ProblemConcernStatusCode.ACTIVE);
+    assertEquals(ProblemConcernStatusCode.ACTIVE, p.getStatus());
+    
+    p.setConcern(ts1);
+    assertEquals(ts1, p.getConcern());
+  }
   
+  //4
+  @Test
+  public void testAllergyConcernSetterGetter() {
+    AllergyConcern a = new AllergyConcern();
+    
+    a.setId(id1);
+    assertEquals(true, isEqual(id1, a.getId()));
+    
+    a.setStart(startDate);
+    assertEquals(startDateString, a.getStart());
+    
+    a.setEnd(endDate);
+    assertEquals(endDateString, a.getEnd());
+    
+    a.setStatus(ProblemConcernStatusCode.COMPLETED);
+    assertEquals(ProblemConcernStatusCode.COMPLETED, a.getStatus());
+    
+    a.setConcern(ts3);
+    assertEquals(ts3, a.getConcern());
+    
+    a.addAllergyProblem(allergyProblem1);
+    assertTrue(isEqual(allergyProblem1, a.getAllergyProblems().get(0)));
+    
+    a.addAllergyProblem(allergyProblem1);
+    assertTrue(isEqual(allergyProblem1, a.getAllergyProblems().get(1)));
+  }
   
   //11
-  public ImmunizationRecommendation testImmunizationRecommendationGetterSetter() {
+  @Test
+  public void testImmunizationRecommendationSetterGetter() {
     ImmunizationRecommendation i = new ImmunizationRecommendation();
     
     i.setAuthor(author2);
@@ -219,17 +325,14 @@ public class CdaChVacdTest {
     assertEquals(true, i.getIntendedOrProposed());
     
     i.setPossibleAppliance(startDate, endDate);
-    assertEquals("28.02.2015 - 28.02.2018", i.getPossibleAppliance());
+    assertEquals(startDateString+" - "+endDateString, i.getPossibleAppliance());
     
     i.setShallNotBeAdministerd(true);
     assertEquals(true, i.gettShallNotBeAdministerd());
     
     i.setConsumable(consumable1);
     assertEquals(true, isEqual(consumable1, i.getConsumable()));
-    
-    return i;
   }
-
 
   public void testDocMetadata(String constructorName, CdaChEdes doc) {
     assertNotNull(constructorName+" Constructor - DocumentRoot is null", doc.docRoot);
@@ -363,6 +466,16 @@ public class CdaChVacdTest {
     return code;
   }
   
+  private Value createValue2() {
+    Value value = new Value(ts1, ts2);
+    return value;
+  }
+
+  private Value createValue1() {
+    Value value = new Value("500", "ml");
+    return value;
+  }
+  
   public Identificator createIdentificator1() {
      Identificator id = new Identificator(CodeSystems.GLN, numS1);
     return id;
@@ -403,7 +516,133 @@ public class CdaChVacdTest {
     return c;
   }
   
+  public ProblemEntry createProblemEntry() {
+    ProblemEntry p = new ProblemEntry();
+    
+    p.setCode(code1);
+    p.setId(id1);
+    p.setStart(startDate);
+    p.setNotOccured(true);
+    p.addValue(code2);
+    p.addValue(value1);
+    p.addValue(value2);
+    
+    return p;
+  }
+  
+
+  private AllergyProblem createAllergyProblem() {
+    AllergyProblem p = new AllergyProblem();
+    
+    p.setId(id1);
+    p.setStart(startDate);
+    p.setNotOccured(true);
+    p.addValue(code2);
+    p.addValue(value1);
+    p.addValue(value2);
+    return p;
+  }
+
+  public Consumable createConsumable() {
+    Consumable c = new Consumable(ts1);
+    
+    c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
+    c.setTradeName(ts2);
+    c.setWhoAtcCode(ts3);
+    
+    return consumable1;
+  }
+  //1  
+  public Immunization createImmunization() {
+    Immunization i = new Immunization();
+    
+    i.setApplyDate(startDate);
+    i.setAuthor(author1);
+    i.setConsumable(consumable1);
+    i.setDosage(number);
+    i.setId(id1);
+    i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
+    
+    return i;
+  }
+  
+  //2
+  public ActiveProblemConcernEntry createActiveProblems() {
+    ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
+    
+    a.setId(id1);
+    a.setStart(startDate);
+    a.setEnd(endDate);
+    a.setStatus(ProblemConcernStatusCode.ACTIVE);
+    a.setConcern(ts1);
+    
+    return a;
+  }
+  
+  //3
+  private PastProblemConcern createPastProblemConcern() {
+    PastProblemConcern p = new PastProblemConcern();
+    
+    p.setId(id1);
+    p.setStart(startDate);
+    p.setEnd(endDate);
+    p.setStatus(ProblemConcernStatusCode.ACTIVE);
+    p.setConcern(ts1);
+    
+    return p;
+  }
+  
+  //4
+  public AllergyConcern createAllergyConcern() {
+    AllergyConcern a = new AllergyConcern();
+    
+    a.setId(id1);
+    a.setStart(startDate);
+    a.setEnd(endDate);
+    a.setStatus(ProblemConcernStatusCode.COMPLETED);
+    a.setConcern(ts3);
+    
+    return a;
+  }
+  
+  
+  
+  //11
+  public ImmunizationRecommendation createImmunizationRecommendation() {
+    ImmunizationRecommendation i = new ImmunizationRecommendation();
+    
+    i.setAuthor(author2);
+    i.setId(id2);
+    i.setIntendedOrProposed(true);
+    i.setPossibleAppliance(startDate, endDate);
+    i.setShallNotBeAdministerd(true);
+    i.setConsumable(consumable1); 
+    return i;
+  }
+ 
+  
   //Compare Test Objects
+  public boolean isEqual(Value v1, Value v2) {
+    //Check Code
+    if (v1.getCode()!=null) {
+      if (!isEqual(v1.getCode(), v2.getCode())) return false;
+      if (!v1.isCode()==v2.isCode()) return false;
+    }
+    
+    //Check PQ
+    if (v1.getPhysicalQuantityUnit()!=null) {
+      if (!v1.getPhysicalQuantityUnit().equals(v2.getPhysicalQuantityUnit())) return false;
+      if (!v1.isPhysicalQuantity()==v2.isPhysicalQuantity()) return false;
+    }
+  
+    if (v1.getPhysicalQuantityValue()!=null) {
+      if (!v1.getPhysicalQuantityValue().equals(v2.getPhysicalQuantityValue())) return false;
+    }
+    
+    
+    return true;
+  }
+  
   public boolean isEqual(Code c1, Code c2) {
 //    if (c1==null && c2==null) {
 //      return true;
@@ -452,6 +691,28 @@ public class CdaChVacdTest {
     if (!isEqual(c1.getManufacturedProductId(), c2.getManufacturedProductId())) return false;
     if (!c1.getTradeName().equals(c2.getTradeName())) return false;
     if (!isEqual(c1.getWhoAtcCode(),c2.getWhoAtcCode())) return false;
+    return true;
+  }
+  
+  public boolean isEqual(ProblemEntry p1, ProblemEntry p2) {
+    if (!isEqual(p1.getCode(),p2.getCode())) return false;
+    if (p1.getEnd() != null && !p1.getEnd().equals(p2.getEnd())) return false;
+    if (p1.getStart()!=null && !p1.getStart().equals(p2.getStart())) return false;
+    if (!isEqual(p1.getId(), p2.getId())) return false;
+    for (int i = 0; i<p1.getValues().size();i++) {
+      if (!isEqual(p1.getValues().get(i), p2.getValues().get(i))) return false;
+    }
+    return true;
+  }
+  
+  public boolean isEqual(AllergyProblem p1, AllergyProblem p2) {
+    if (!isEqual(p1.getCode(),p2.getCode())) return false;
+    if (p1.getEnd() != null && !p1.getEnd().equals(p2.getEnd())) return false;
+    if (p1.getStart()!=null && !p1.getStart().equals(p2.getStart())) return false;
+    if (!isEqual(p1.getId(), p2.getId())) return false;
+    for (int i = 0; i<p1.getValues().size();i++) {
+      if (!isEqual(p1.getValues().get(i), p2.getValues().get(i))) return false;
+    }
     return true;
   }
 }

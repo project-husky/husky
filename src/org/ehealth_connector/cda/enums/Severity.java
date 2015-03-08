@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.enums;
+package org.ehealth_connector.cda.enums;
 
 import java.util.Arrays;
 import org.ehealth_connector.common.Code;
@@ -8,57 +8,33 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="de">Die Codes beschreiben die möglichen Zustände einer Aktion</div>
-*<div class="fr"></div>
+*<div class="de">Wertebereich für Schweregrad (HL7 SeverityObservation; 2.16.840.1.113883.5.1063)</div>
+*<div class="fr">Domaine de valeurs pour « Score de sévérité » (HL7 SeverityObservation; 2.16.840.1.113883.5.1063)</div>
 */
-public enum StatusCode {
+public enum Severity {
 
 	/** 
-	*<div class="de">aktuell</div>
-	*<div class="fr"></div>
+	*<div class="de">Hoher Schweregrad</div>
+	*<div class="fr">Score de sévérité élevé</div>
 	*/
-	NEW ("new", "new"),
+	HIGH_SEVERITY ("H", "high severity"),
 	/** 
-	*<div class="de">aktiv</div>
-	*<div class="fr"></div>
+	*<div class="de">Mittlerer Schweregrad</div>
+	*<div class="fr">Score de sévérité moyen</div>
 	*/
-	ACTIVE ("active", "activ"),
+	MODERATE_SEVERITY ("M", "moderate severity"),
 	/** 
-	*<div class="de">erledigt</div>
-	*<div class="fr"></div>
+	*<div class="de">Leichter Schweregrad</div>
+	*<div class="fr">Score de sévérité bas</div>
 	*/
-	COMPLETED ("completed", "completed"),
-	/** 
-	*<div class="de">abwartend</div>
-	*<div class="fr"></div>
-	*/
-	HELD ("held", "held"),
-	/** 
-	*<div class="de">abgebrochen</div>
-	*<div class="fr"></div>
-	*/
-	CANCELLED ("cancelled", "cancelled"),
-	/** 
-	*<div class="de">ausgesetzt</div>
-	*<div class="fr"></div>
-	*/
-	SUSPENDED ("suspended", "suspended"),
-	/** 
-	*<div class="de">nicht mehr gewollt</div>
-	*<div class="fr"></div>
-	*/
-	ABORTED ("aborted", "aborted");
-	public static final String NEW_CODE="new";
-	public static final String ACTIVE_CODE="active";
-	public static final String COMPLETED_CODE="completed";
-	public static final String HELD_CODE="held";
-	public static final String CANCELLED_CODE="cancelled";
-	public static final String SUSPENDED_CODE="suspended";
-	public static final String ABORTED_CODE="aborted";
+	LOW_SEVERITY ("L", "low severity");
+	public static final String HIGH_SEVERITY_CODE="H";
+	public static final String MODERATE_SEVERITY_CODE="M";
+	public static final String LOW_SEVERITY_CODE="L";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.14";
-	public static final String CODE_SYSTEM_NAME="ActStatus";
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.1063";
+	public static final String CODE_SYSTEM_NAME="HL7 SeverityObservation";
 
 
 	private String code;
@@ -74,7 +50,7 @@ public enum StatusCode {
 	* @param displayName <br>
 	*	<div class="de"> display name</div>
 	*/
-	StatusCode (String code, String displayName) {
+	Severity (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -120,10 +96,12 @@ public enum StatusCode {
 	*
 	* @return <div class="en">The MDHT Code</div>
 	*/
-	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode(code);
-		return cs;
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
 	}
 
  
@@ -135,8 +113,8 @@ public enum StatusCode {
 	*      <div class="de"> code</div>
 	* @return <div class="en">the enum</div>
 	*/
-	public static StatusCode getEnum(String code) {
-		for (StatusCode x : values()) {
+	public static Severity getEnum(String code) {
+		for (Severity x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -168,7 +146,7 @@ public enum StatusCode {
 	* @return true, if is in value set
 	*/
 	public boolean isInValueSet(String code) {
-		for (StatusCode x : values()) {
+		for (Severity x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

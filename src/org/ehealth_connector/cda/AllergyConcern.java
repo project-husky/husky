@@ -57,8 +57,8 @@ public class AllergyConcern extends ConcernEntry {
 	 *
 	 * @param allergyConcern <br>
 	 * 		<div class="de"> allergy concern</div>
-	 * 		<div class="fr"> allergy concern</div>
-	 * 		<div class="it"> allergy concern</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 */
 	public AllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
@@ -78,8 +78,8 @@ public class AllergyConcern extends ConcernEntry {
 	 *     <div class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry <br>
 	 * 		<div class="de"> Das medizinische Problem</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param completed            
 	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
 	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
@@ -112,8 +112,8 @@ public class AllergyConcern extends ConcernEntry {
 	 *     <div class="fr">Le fin du problème</div>
 	 * @param problemEntry <br>
 	 * 		<div class="de">Das medizinische Problem</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param concernStatus            
 	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
 	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
@@ -130,16 +130,16 @@ public class AllergyConcern extends ConcernEntry {
 	 * @param problemEntry            Das Problem
 	 */
 	public void addAllergyProblem(AllergyProblem problemEntry) {
-		mAllergyConcern.addObservation(problemEntry.mAllergyProblem);
-		mAllergyConcern.getEntryRelationships().get(0)
+		mAllergyConcern.addObservation(EcoreUtil.copy(problemEntry.mAllergyProblem));
+		mAllergyConcern.getEntryRelationships().get(mAllergyConcern.getEntryRelationships().size()-1)
 		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		mAllergyConcern.getEntryRelationships().get(0).setInversionInd(false);
+		mAllergyConcern.getEntryRelationships().get(mAllergyConcern.getEntryRelationships().size()-1).setInversionInd(false);
 	}
 
 	/**
 	 * <div class="de">Copy mdht allergy concern.</div>
-	 * <div class="fr">Copy mdht allergy concern.</div>
-	 * <div class="it">Copy mdht allergy concern.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. allergy intolerance concern
 	 */

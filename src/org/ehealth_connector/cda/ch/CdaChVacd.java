@@ -41,7 +41,6 @@ import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
-import org.ehealth_connector.common.ch.SectionsVACD;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.Patient;

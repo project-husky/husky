@@ -173,8 +173,13 @@ public class Value {
 	 * @return Die Einheit
 	 */
 	public String getPhysicalQuantityUnit() {
-		PQ pq = (PQ) mValue;
-		return pq.getUnit();
+		if (isPhysicalQuantity()) {
+	      PQ pq = (PQ) mValue;
+	      return pq.getUnit();
+		}
+		else {
+		  return null;
+		}
 	}
 
 	/**
@@ -183,8 +188,11 @@ public class Value {
 	 * @return  Der eigentlich Wert
 	 */
 	public String getPhysicalQuantityValue() {
-		PQ pq = (PQ) mValue;
-		return String.valueOf(pq.getValue());
+		if (isPhysicalQuantity()) {
+		   PQ pq = (PQ) mValue;
+		   return String.valueOf(pq.getValue());
+		}
+	   return null;
 	}
 
 	/**
