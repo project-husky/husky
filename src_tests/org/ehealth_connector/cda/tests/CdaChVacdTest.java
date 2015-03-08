@@ -136,6 +136,11 @@ public class CdaChVacdTest {
     //testDocMetadata("MDHT Document", testDoc2);
   }
   
+  private PastProblemConcern testPastProblemConcernGetterSetter() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
   public Consumable testConsumableSetterGetter() {
     Consumable c = new Consumable(ts1);
     
