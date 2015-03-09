@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.ch;
+package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @param atna ATNA Konfiguration
 	 * @return Status der Übertragung
 	 */
-	public static Response addPatientDemographics(Patient patient, String homeCommunityOID,
+	public static boolean addPatientDemographics(Patient patient, String homeCommunityOID,
 			Destination dest, AtnaConfig atna) {
 		V3PixAdapterConfig v3PixAdapterConfig =
 				new V3PixAdapterConfig(null, (dest != null ? dest.getPixSourceUri() : null),
@@ -62,10 +62,14 @@ public class ConvenienceMasterPatientIndexV3 {
 						(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
 						null, (atna != null ? atna.getAuditRepositoryUri() : null),
 						(atna != null ? atna.getAuditSourceId() : null));
+		log.debug("addPatientDemographics, creating V3PixAdapter");
 		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
-		boolean ret = v3PixAdapter.addPatient(new FhirPatient(patient));
-		Response response = new Response(null, null, ret);
-		return response;
+        log.debug("addPatientDemographics, creating patient");
+        FhirPatient fhirPatient = new FhirPatient(patient);
+        log.debug("addPatientDemographics, add patient");
+		boolean ret = v3PixAdapter.addPatient(fhirPatient);
+        log.debug("addPatientDemographics, add patient finished");
+		return ret;
 	}
 
 	/**
@@ -87,7 +91,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @param atna ATNA Konfiguration
 	 * @return Status der Übertragung
 	 */
-	public static Response mergePatients(Patient finalPatient, String mergeObsoleId,
+	public static boolean mergePatients(Patient finalPatient, String mergeObsoleId,
 			String homeCommunityOID, Destination dest, AtnaConfig atna) {
 
 		V3PixAdapterConfig v3PixAdapterConfig =
@@ -100,14 +104,12 @@ public class ConvenienceMasterPatientIndexV3 {
 						(atna != null ? atna.getAuditSourceId() : null));
 		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
 		if (mergeObsoleId == null) {
-			// FIXME add error message to response
 			log.error("no localid specified for oid " + homeCommunityOID);
-			return new Response(null, null, false);
+			return false;
 		}
 		boolean ret =
 				v3PixAdapter.mergePatient(new FhirPatient(finalPatient), mergeObsoleId);
-		Response response = new Response(null, null, ret);
-		return response;
+		return ret;
 	}
 
 	/**
@@ -171,7 +173,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @param atna ATNA Konfiguration
 	 * @return Status der Übertragung
 	 */
-	public static Response updatePatientDemographics(Patient patient, String homeCommunityOID,
+	public static boolean updatePatientDemographics(Patient patient, String homeCommunityOID,
 			Destination dest, AtnaConfig atna) {
 		V3PixAdapterConfig v3PixAdapterConfig =
 				new V3PixAdapterConfig(null, (dest != null ? dest.getPixSourceUri() : null),
@@ -183,8 +185,7 @@ public class ConvenienceMasterPatientIndexV3 {
 						(atna != null ? atna.getAuditSourceId() : null));
 		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
 		boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
-		Response response = new Response(null, null, ret);
-		return response;
+		return ret;
 	}
 
 

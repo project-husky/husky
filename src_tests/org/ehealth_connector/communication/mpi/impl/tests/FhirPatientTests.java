@@ -26,7 +26,6 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
-import org.hl7.v3.II;
 import org.junit.Test;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
