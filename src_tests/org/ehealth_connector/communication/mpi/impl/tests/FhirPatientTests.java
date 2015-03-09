@@ -20,8 +20,8 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.ch.enums.AddressUse;
-import org.ehealth_connector.cda.ch.enums.AdministrativeGender;
+import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
