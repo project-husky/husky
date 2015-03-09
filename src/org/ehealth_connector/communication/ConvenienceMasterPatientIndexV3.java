@@ -131,7 +131,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @throws Exception
 	 */
 	public static ArrayList<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
-			String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna, Response response) {
+			String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna) {
 
 		V3PixAdapterConfig v3PixAdapterConfig =
 				new V3PixAdapterConfig((dest != null ? dest.getPixQueryUri() : null), null,

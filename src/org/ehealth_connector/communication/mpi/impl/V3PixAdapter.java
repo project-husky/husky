@@ -277,9 +277,11 @@ public class V3PixAdapter implements MpiAdapterInterface {
    */
   public boolean addPatient(FhirPatient patient) {
     configure(true);
+    log.debug("creating v3RecordAddedMessage");
     V3PixSourceRecordAdded v3RecordAddedMessage =
         new V3PixSourceRecordAdded(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
             adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+    log.debug("add demographic data");
     addDemographicData(patient, v3RecordAddedMessage);
     try {
       printMessage("addPatient", v3RecordAddedMessage.getRequest());
@@ -516,6 +518,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
    */
   public boolean configure(boolean source) {
     try {
+      log.debug("configure start");
       if (source && !sourceConfigured) {
         this.sourceConfigured = true;
         if (adapterCfg.auditSourceId != null) {
@@ -542,18 +545,12 @@ public class V3PixAdapter implements MpiAdapterInterface {
           v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
         }
       }
-      // FIXME configure logging
-      // DOMConfigurator.configure(TestConfiguration.LOG4J_PATH);
-
-      // InputStream cpStream = new
-      // FileInputStream(TestConfiguration.CPROFILE_PATH_PDQ);
-
     } catch (Exception e) {
       log.error("configuring not successfull", e);
       return false;
     }
+    log.debug("configure end");
     return true;
-
   }
 
   /**
