@@ -27,8 +27,10 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
@@ -132,13 +134,26 @@ public class FhirPatientTests {
     assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
     assertEquals("state", fhirPatient.getAddressFirstRep().getState());
   }
+ 
   
   private Organization getScopingOrganization() {
+    return this.getScopingOrganization("2.16.840.1.113883.3.72.5.9.2","OHT",null);
+  }
+  
+  private Organization getScopingOrganization(String oid, String name, String tel) {
     Organization org = new Organization();
-    IdentifierDt identifier = new IdentifierDt();
-    identifier.setValue("OHT");
-    identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.2");
-    org.getIdentifier().add(identifier);
+    if (oid!=null) {
+      IdentifierDt identifier = new IdentifierDt();
+      identifier.setSystem("urn:oid:"+oid);
+      org.getIdentifier().add(identifier);
+    }
+    if (name!=null) {
+      org.setName(name);
+    }
+    if (tel!=null) {
+      ContactPointDt fhirTel = org.addTelecom();
+      fhirTel.setValue(tel);
+    }
     return org;
   }
 
@@ -173,11 +188,7 @@ public class FhirPatientTests {
     assertEquals("ALAN",patient.getName().getGivenNames());
     
     org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
-    assertEquals("OHT", ii.getExtension());
     assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
-
-    
-    
     
     FhirPatient fhirPatientEquals = new FhirPatient(patient);
     Patient patientEquals = fhirPatientEquals.getPatient();
@@ -191,12 +202,34 @@ public class FhirPatientTests {
     assertEquals("ALAN",patientEquals.getName().getGivenNames());
     
     ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
-    assertEquals("OHT", ii.getExtension());
     assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
-    
+  }
+  
+  @Test
+  public void testConveniencePatientOrganization() {
+    FhirPatient fhirPatient = new FhirPatient();
+    fhirPatient.getManagingOrganization().setResource(getScopingOrganization("1234","Test","+417600000000"));
     
 
+    ca.uhn.fhir.model.dstu2.resource.Organization org =
+        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient.getManagingOrganization().getResource();
     
+    assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
+    assertEquals("Test", org.getName());
+    assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
+    
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("Test", patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
+    assertEquals("1234", patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0).getRoot());
+    assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization().getTelecoms().get(0).getValue());
+
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    org =
+        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization().getResource();
+    
+    assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
+    assertEquals("Test", org.getName());
+    assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
   }
 
 

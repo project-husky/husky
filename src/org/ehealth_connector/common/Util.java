@@ -479,7 +479,9 @@ public class Util {
    */
   public static TEL createTel(String telNr, AddressUse usage) {
     TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-    tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+    if (usage!=null) {
+      tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+    }
     tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
     return tel;
   }

@@ -16,7 +16,6 @@
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
-import java.net.URI;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -41,6 +40,7 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
 import org.w3c.dom.Element;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 
@@ -219,11 +219,19 @@ public class V3PixAdapter implements MpiAdapterInterface {
       if (organizationId.getSystem().startsWith("urn:oid:")) {
         organizationOid = organizationId.getSystem().substring(8);
       }
-      organizationName = organizationId.getValue();
+    }
+    
+    if (organization != null) {
+      organizationName = organization.getName();
     }
 
     if (organization != null && organization.getTelecom().size() > 0) {
-      telecomValue = organization.getTelecomFirstRep().getValue();
+      if (organization.getTelecom().size()>0) {
+        ContactPointDt contactPoint = organization.getTelecomFirstRep();
+        if (contactPoint!=null) {
+          telecomValue = contactPoint.getValue();
+        }
+      }
     }
 
     if (v3RecordAddedMessage != null) {
@@ -262,6 +270,15 @@ public class V3PixAdapter implements MpiAdapterInterface {
         v3MergePatientsMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
             addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
             addressDt.getPostalCode(), adressOtherDesignation, null);
+      }
+    }
+    
+    // telecommuication addresses
+    if (patient.getTelecom()!=null && patient.getTelecom().size()>0) {
+      for(ContactPointDt contactPointDt : patient.getTelecom()) {
+        
+        
+        
       }
     }
 

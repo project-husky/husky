@@ -28,14 +28,17 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Organization;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
@@ -152,20 +155,33 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
           .add(new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
     }
     Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
-    if (organization!=null && organization.getIds()!=null && organization.getIds().size()>0) {
-      org.openhealthtools.mdht.uml.hl7.datatypes.II ii = organization.getIds().get(0);
-      getManagingOrganization().setResource(getScopingOrganization(ii));
+    if (organization != null) {
+      ca.uhn.fhir.model.dstu2.resource.Organization fhirOrganization =
+          new ca.uhn.fhir.model.dstu2.resource.Organization();
+
+      if (organization != null && organization.getIds() != null && organization.getIds().size() > 0) {
+        org.openhealthtools.mdht.uml.hl7.datatypes.II ii = organization.getIds().get(0);
+        IdentifierDt identifier = new IdentifierDt();
+        identifier.setValue(ii.getExtension());
+        identifier.setSystem("urn:oid:" + ii.getRoot());
+        fhirOrganization.getIdentifier().add(identifier);
+      }
+      
+      if (organization.getNames()!=null && organization.getNames().size()>0) {
+        String name = organization.getNames().get(0).getText();
+        fhirOrganization.setName(name);
+      }
+      
+      if (organization.getTelecoms()!=null && organization.getTelecoms().size()>0) {
+        TEL tel = organization.getTelecoms().get(0);
+        ContactPointDt fhirTel = fhirOrganization.addTelecom();
+        if (tel.getValue().startsWith("tel:")) {
+          fhirTel.setValue(tel.getValue().substring(4));
+        }
+      }
+      getManagingOrganization().setResource(fhirOrganization);
     }
 
-  }
-  
-  private ca.uhn.fhir.model.dstu2.resource.Organization getScopingOrganization(org.openhealthtools.mdht.uml.hl7.datatypes.II ii) {
-    ca.uhn.fhir.model.dstu2.resource.Organization org = new ca.uhn.fhir.model.dstu2.resource.Organization();
-    IdentifierDt identifier = new IdentifierDt();
-    identifier.setValue(ii.getExtension());
-    identifier.setSystem("urn:oid:"+ii.getRoot());
-    org.getIdentifier().add(identifier);
-    return org;
   }
 
 
@@ -193,7 +209,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     }
 
     String gender = getGender();
-    if (gender!=null) {
+    if (gender != null) {
       if (gender.equals(AdministrativeGenderEnum.FEMALE.getCode())) {
         patientGender = AdministrativeGender.FEMALE;
       } else if (gender.equals(AdministrativeGenderEnum.MALE.getCode())) {
@@ -203,7 +219,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       }
     }
 
-    
+
     String addressline1 = "";
     String addressline2 = "";
     String addressline3 = "";
@@ -218,22 +234,23 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (addressDt.getLine().size() > 0) {
       addressline1 = addressDt.getLine().get(0).getValueAsString();
     }
-    
+
     String city = "";
-    if (addressDt.getCity()!=null) {
+    if (addressDt.getCity() != null) {
       city = addressDt.getCity();
     }
     String zip = "";
-    if (addressDt.getPostalCode()!=null) {
+    if (addressDt.getPostalCode() != null) {
       zip = addressDt.getPostalCode();
     }
-    
-    
-    Address patientAddress = new Address(addressline1,addressline2,addressline3,zip,city,AddressUse.PRIVATE);
-    if (addressDt.getState()!=null) {
+
+
+    Address patientAddress =
+        new Address(addressline1, addressline2, addressline3, zip, city, AddressUse.PRIVATE);
+    if (addressDt.getState() != null) {
       patientAddress.getMdhtAdress().addState(addressDt.getState());
     }
-    if (addressDt.getCountry()!=null) {
+    if (addressDt.getCountry() != null) {
       patientAddress.getMdhtAdress().addCountry(addressDt.getCountry());
     }
 
@@ -252,19 +269,35 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (patientAddress != null) {
       patient.addAddress(patientAddress);
     }
-    
-    if (getManagingOrganization()!=null) {
+
+    if (getManagingOrganization() != null) {
       PatientRole patientRole = patient.getMdhtPatientRole();
       Organization organization = CDAFactory.eINSTANCE.createOrganization();
+      org.ehealth_connector.common.Organization convenienceOrganization = new org.ehealth_connector.common.Organization(organization);
+      
       patientRole.setProviderOrganization(organization);
-      ca.uhn.fhir.model.dstu2.resource.Organization org = (ca.uhn.fhir.model.dstu2.resource.Organization) getManagingOrganization().getResource();
-      String oid = "";
+      ca.uhn.fhir.model.dstu2.resource.Organization org =
+          (ca.uhn.fhir.model.dstu2.resource.Organization) getManagingOrganization().getResource();
+      
+      if (org!=null && org.getName()!=null) {
+        convenienceOrganization.addName(org.getName());
+      }
+      
       if (org!=null && org.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
+        String oid = "";
         oid = org.getIdentifierFirstRep().getSystem().substring(8);
-        organization.getIds().add(new Identificator(oid,org.getIdentifierFirstRep().getValue()).getIi());
+        organization.getIds().add(
+            new Identificator(oid, org.getIdentifierFirstRep().getValue()).getIi());
+      }
+      if (org !=null && org.getTelecom().size()>0) {
+        ContactPointDt contactPointDt = org.getTelecomFirstRep();
+        if (contactPointDt!=null && contactPointDt.getValue()!=null) {
+          TEL tel = Util.createTel(contactPointDt.getValue(),null);
+          organization.getTelecoms().add(tel);
+        }
       }
     }
-    
+
     return patient;
   }
 
