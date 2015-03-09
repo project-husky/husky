@@ -51,6 +51,16 @@ public class Immunization {
 	public Immunization() {
 		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
 		mImmunization.setNegationInd(Boolean.FALSE);
+		
+	    //Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
+        List<II> templateIds = mImmunization.getTemplateIds();
+        for (II templateId: templateIds) {
+            if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+                templateId.setExtension("CDA-CH.Body.MediL3");
+            }
+        }
+        
+        setPriorityCode(createPriorityCode());
 	}
 
 	/**
@@ -65,20 +75,11 @@ public class Immunization {
 	 * @param appliedAt Datum der Impfung
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
-		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
-		mImmunization.setNegationInd(Boolean.FALSE);
-
-		//Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
-		List<II> templateIds = mImmunization.getTemplateIds();
-		for (II templateId: templateIds) {
-			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
-				templateId.setExtension("CDA-CH.Body.MediL3");
-			}
-		}
+	    this();
+	    mImmunization.setNegationInd(Boolean.FALSE);
 
 		//mImmunization.setText(createText());
 		setApplyDate(appliedAt);
-		setPriorityCode(createPriorityCode());
 		setId(null);
 		setConsumable(consumable);
 		setAuthor(author);
@@ -98,20 +99,11 @@ public class Immunization {
 	 * @param doseQuantity in milliliters (e.g. 0.5) (darf null sein)
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt, RouteOfAdministration route, Double doseQuantity) {
-		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
+	    this();
 		mImmunization.setNegationInd(Boolean.FALSE);
-
-		//Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
-		List<II> templateIds = mImmunization.getTemplateIds();
-		for (II templateId: templateIds) {
-			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
-				templateId.setExtension("CDA-CH.Body.MediL3");
-			}
-		}
 
 		//mImmunization.setText(createText());
 		setApplyDate(appliedAt);
-		setPriorityCode(createPriorityCode());
 		setRouteOfAdministration(route);
 		setDosage(doseQuantity);
 		setId(null);
@@ -192,7 +184,7 @@ public class Immunization {
 	 */
 	public Author getAuthor() {
 		try {
-			org.openhealthtools.mdht.uml.cda.Author author = mImmunization.getAuthors().get(0);
+			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil.copy(mImmunization.getAuthors().get(0));
 			return new Author(author);
 		} catch(IndexOutOfBoundsException e) {
 			// no author available
@@ -267,6 +259,7 @@ public class Immunization {
 	 * @param author the new author
 	 */
 	public void setAuthor(Author author) {
+	    mImmunization.getAuthors().clear();
 		mImmunization.getAuthors().add(author.copyMdhtAuthor());
 	}
 

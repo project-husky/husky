@@ -68,8 +68,8 @@ public class PastProblemConcern extends ProblemConcernEntry {
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry <br>
 	 * 		<div class="de"> problem entry</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it">/div>
 	 * @param concernStatus            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
@@ -89,8 +89,8 @@ public class PastProblemConcern extends ProblemConcernEntry {
 	 *            <div class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry <br>
 	 * 		<div class="de"> problem entry</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @param problemConcernStatus            <div class="de">Der Status Code des Leidens
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>

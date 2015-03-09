@@ -189,8 +189,9 @@ class ConcernEntry {
 	}
 
 	/**
-	 * Setzt den Status (aktiv/inaktiv/...) des Leidens
-	 * 
+	 * Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
+	 * Bei einem Aktiven Leiden (@see org.ehealth_connector.cda.ActiveProblemConcern) muss entweder completed, aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS die setEnd-Methode verwendet werden. <br>
+	 * Bei einem vergangenen Leiden (@see org.ehealth_connector.cda.PastProblemConcern) muss entweder completed, aborted gesetzt werden. Es MUSS die setEnd-Methode verwendet werden.<br>
 	 * @param concernStatus
 	 *            Status
 	 */

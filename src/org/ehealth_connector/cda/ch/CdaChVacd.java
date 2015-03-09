@@ -359,7 +359,7 @@ public class CdaChVacd extends CdaCh {
 		}
 		//If the section is already present, get instances of the templates
 		else {
-			lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+			lrdpe = (LaboratoryReportDataProcessingEntry) lss.getEntries().get(0);
 			spa = (SpecimenAct) lrdpe.getAct();
 		}
 
