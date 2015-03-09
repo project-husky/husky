@@ -388,6 +388,11 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.format(date);
 	}
+	
+	  public static String formatDateTimeCh(Date date) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+	    return sdf.format(date);
+	  }
 
 	/**
 	 * Converts Date to String.
@@ -504,8 +509,8 @@ public class DateUtil {
 	 *
 	 * @param value <br>
 	 * 		<div class="de"> value</div>
-	 * 		<div class="fr"> value</div>
-	 * 		<div class="it"> value</div>
+	 * 		<div class="fr"></div>
+	 * 		<div class="it"></div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMddHHmmZ(String value) {

@@ -9,21 +9,27 @@ import org.ehealth_connector.cda.ActiveProblemConcernEntry;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Consumable;
+import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
+import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.tests.AllTests;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +58,8 @@ public class CdaChVacdTest {
   String numS1;
   String numS2;
   Double number;
+  String telS1;
+  String telS2;
   
   Code code1;
   Code code2;
@@ -59,11 +67,12 @@ public class CdaChVacdTest {
   Value value2;
   Identificator id1;
   Identificator id2;
+  
   Name name1;
   Name name2;
   Author author1;
   Author author2;
-  
+  Organization organization1;
   Consumable consumable1;
   ProblemEntry problem1; 
   
@@ -80,6 +89,7 @@ public class CdaChVacdTest {
   Object gtinCode;
   private ProblemEntry problem2;
   private AllergyProblem allergyProblem1;
+  private Telecoms telecoms1;
 
 
   @Before 
@@ -101,6 +111,8 @@ public class CdaChVacdTest {
     numS1 = "1231425352";
     numS2 = "987653";
     number = 121241241.212323;
+    telS1 = "+41.32.234.66.77";
+    telS2 = "+44.32.234.66.99";
     
     //Convenience API Types
     code1 = createCode1();
@@ -111,20 +123,19 @@ public class CdaChVacdTest {
     id1 = createIdentificator1();
     id2 = createIdentificator2();
     
+    telecoms1 = createTelecoms1();
     name1 = createName1();
     name2 = createName2();
-    
     author1 = createAuthor1();
     author2 = createAuthor2();
-    
+    organization1 = createOrganization1();
     consumable1 = createConsumable1();
     consumable1 = createConsumable2();
-    
     problem1 = createProblemEntry();
     problem2 = createProblemEntry();
-    
     allergyProblem1 = createAllergyProblem();
-  }
+    
+ }
 
   /**
    * <div class="de">Testet die verschiedenen Konstruktoren eines EDES Dokuments</div>
@@ -308,6 +319,61 @@ public class CdaChVacdTest {
     
     a.addAllergyProblem(allergyProblem1);
     assertTrue(isEqual(allergyProblem1, a.getAllergyProblems().get(1)));
+  }
+  
+  //6
+  @Test
+  public void testCodedResultsSetterGetter() {
+    GestationalAge g = new GestationalAge();
+    
+    g.setAsboluteDays(70);
+    assertEquals(70, g.getAboluteDays());
+    assertEquals(10, g.getWeeksOfWeeksAndDays());
+    assertEquals(0,g.getDaysOfWeeksAndDays());
+    
+    g.setWeeksAndDays(10, 0);
+    assertEquals(10, g.getWeeksOfWeeksAndDays());
+    assertEquals(0,g.getDaysOfWeeksAndDays());
+    assertEquals(70, g.getAboluteDays());
+    
+    g.setAsboluteDays(2);
+    assertEquals(2, g.getAboluteDays());
+    assertEquals(0, g.getWeeksOfWeeksAndDays());
+    assertEquals(2,g.getDaysOfWeeksAndDays());
+    
+    g.setWeeksAndDays(0, 2);
+    assertEquals(0, g.getWeeksOfWeeksAndDays());
+    assertEquals(2,g.getDaysOfWeeksAndDays());
+    assertEquals(2, g.getAboluteDays());
+  }
+  
+  //8
+  @Test
+  public void testLaboratoryObservation() {
+    LaboratoryObservation l = new LaboratoryObservation();
+    
+    l.setCode(code1);
+    assertTrue(isEqual(code1, l.getCode()));
+    
+    l.setLaboratory(organization1, endDate);
+    assertTrue(isEqual(organization1, l.getLaboratory()));
+    assertEquals(endDate.getTime(), l.getDateTimeOfResult().getTime());
+    
+    l.setEffectiveTime(startDate);
+    //assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
+    assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
+    
+    l.setImmuneProtection(true);
+    assertTrue(l.getImmuneProtection());
+    
+    l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+    assertEquals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN.getCodeValue(), l.getInterpretationCode());
+    
+    l.addValue(code2);
+    assertTrue(isEqual(code2, l.getValue().getCode()));
+    
+    l.addValue(value1);
+    assertTrue(isEqual(value1, l.getValues().get(1)));
   }
   
   //11
@@ -506,6 +572,23 @@ public class CdaChVacdTest {
     return a;
   }
   
+  public Organization createOrganization1() {
+    Organization o = new Organization(ts1, numS1);
+    o.setTelecoms(telecoms1);
+    return o;
+  }
+  
+  public Telecoms createTelecoms1() {
+    Telecoms t = new Telecoms();
+    t.addEMail(telS1, AddressUse.BUSINESS);
+    t.addEMail(telS2, AddressUse.PRIVATE);
+    t.addFax(telS1, AddressUse.BUSINESS);
+    t.addFax(telS2, AddressUse.PRIVATE);
+    t.addPhone(telS1, AddressUse.BUSINESS);
+    t.addPhone(telS2, AddressUse.PRIVATE);
+    return t;
+  }
+  
   public Consumable createConsumable1() {
     Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), ts2);
     return c;
@@ -683,6 +766,33 @@ public class CdaChVacdTest {
     for (int i = 0; i<a1.getIds().size(); i++) {
       if (!isEqual(a1.getIds().get(i), a2.getIds().get(i))) return false;
     }
+    return true;
+  }
+  
+  public boolean isEqual(Telecoms t1, Telecoms t2) {
+    if (t1.getEMails()!=null) {
+      for (int i = 0; i<t1.getEMails().size();i++) {
+        if (t1.getEMails().get(i) != t2.getEMails().get(i)) return false;
+      }
+    }
+    if (t1.getFaxes()!=null) {
+      for (int i = 0; i<t1.getFaxes().size();i++) {
+        if (t1.getFaxes().get(i) != t2.getFaxes().get(i)) return false;
+      }
+    }
+    if (t1.getPhones()!=null) {
+      for (int i = 0; i<t1.getPhones().size();i++) {
+        if (t1.getPhones().get(i) != t2.getPhones().get(i)) return false;
+      }
+    }
+    
+    return true;
+  }
+  
+  public boolean isEqual(Organization o1, Organization o2) {
+    if (!o1.getId().equals(o2.getId())) return false;
+    if (!o1.getName().equals(o2.getName())) return false;
+    if (!isEqual(o1.getTelecoms(), o2.getTelecoms())) return false;
     return true;
   }
   

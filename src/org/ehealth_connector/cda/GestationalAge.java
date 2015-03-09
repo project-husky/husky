@@ -48,6 +48,25 @@ public class GestationalAge {
 	GestationalAgeDaysSimpleObservation mDays;
 	II mIi;
 
+	 /**
+     * Instantiates a new gestational age.
+     *
+     */
+    public GestationalAge() {
+      crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
+      mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
+      mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
+      
+      crs.addObservation(mWeeks);
+      crs.addObservation(mDays);
+
+      //Create Id
+      mIi = Util.createUuidVacdIdentificator(null);
+
+      //CreateEmpty Procedure Entry
+      crs.addProcedure(createEmptyProcedureEntry());
+    }
+	
 	/**
 	 * Instantiates a new gestational age.
 	 *
@@ -66,7 +85,7 @@ public class GestationalAge {
 	 * Instantiates a new gestational age.
 	 *
 	 * @param days <br>
-	 * 		<div class="de">Gestationsalter in Tagen</div>
+	 * 		<div class="de">Gestationsalter in Tagen (nicht in Wochen UND Tagen)</div>
 	 * 		<div class="fr"></div>
 	 * 		<div class="it"></div>
 	 */
@@ -88,20 +107,10 @@ public class GestationalAge {
 	 */
 	public GestationalAge (int weeks, int weeksDays) {
 		//create and add the MDHT Objects to the section
-		crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
-		mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
-		mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
-		crs.addObservation(mWeeks);
-		crs.addObservation(mDays);
-
-		//Create Id
-		mIi = Util.createUuidVacdIdentificator(null);
-
+		this();
+		
 		//Set payload
-		setWeeksOfWeeksAndDays(weeks);
-		setDaysOfWeeksAndDays(weeksDays);
-
-		crs.addProcedure(createEmptyProcedureEntry());
+		setWeeksAndDays(weeks, weeksDays);
 	}
 
 	/**
@@ -252,10 +261,31 @@ public class GestationalAge {
 	 * <div class="it"></div> 
 	 */
 	public void setAsboluteDays (int days) {
-		setWeeksOfWeeksAndDays(days/7);
-		setDaysOfWeeksAndDays(days%7);
+		setWeeksAndDays(days/7, days%7);
 	}
 
+	 /**
+     * Sets the days of weeks and days.
+     *
+     * @param weeks
+     * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+     * <div class="fr"></div>
+     * <div class="it"></div> 
+     * 
+     * @param days
+     * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+     * <div class="fr"></div>
+     * <div class="it"></div> 
+     */
+    public void setWeeksAndDays(int weeks, int days) {
+        mDays.getValues().clear();
+        mDays.getIds().clear();
+        mWeeks.getValues().clear();
+        mWeeks.getIds().clear();
+        this.setWeeksOfWeeksAndDays(weeks);
+        this.setDaysOfWeeksAndDays(days);
+    }
+	
 	/**
 	 * Sets the days of weeks and days.
 	 *
@@ -264,7 +294,7 @@ public class GestationalAge {
 	 * <div class="fr"></div>
 	 * <div class="it"></div> 
 	 */
-	public void setDaysOfWeeksAndDays(int days) {
+	private void setDaysOfWeeksAndDays(int days) {
 		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
 		mDays.getValues().add(mDaysValue);
 		mDays.getIds().add(EcoreUtil.copy(mIi));
@@ -279,7 +309,7 @@ public class GestationalAge {
 	 * <div class="fr"></div>
 	 * <div class="it"></div> 
 	 */
-	public void setWeeksOfWeeksAndDays(int weeks) {
+	private void setWeeksOfWeeksAndDays(int weeks) {
 		//create and the values, ids and effectiveTime for weeks and days
 		PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(weeks, "wk");
 		mWeeks.getValues().add(mWeeksValue);

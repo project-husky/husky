@@ -20,6 +20,7 @@ package org.ehealth_connector.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
@@ -619,11 +620,11 @@ public class Util {
    *
    * @param telecoms <br>
    * 		<div class="de"> telecoms</div>
-   * 		<div class="fr"> telecoms</div>
-   * 		<div class="it"> telecoms</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
    * @return <div class="en">the e mail</div>
    */
-  public static ArrayList<String> getEMail(ArrayList<TEL> telecoms) {
+  public static HashMap<String, AddressUse> getEMail(ArrayList<TEL> telecoms) {
     return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
   }
 
@@ -637,11 +638,11 @@ public class Util {
    *
    * @param telecoms <br>
    * 		<div class="de"> telecoms</div>
-   * 		<div class="fr"> telecoms</div>
-   * 		<div class="it"> telecoms</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
    * @return <div class="en">the fax</div>
    */
-  public static ArrayList<String> getFax(ArrayList<TEL> telecoms) {
+  public static HashMap<String, AddressUse> getFax(ArrayList<TEL> telecoms) {
     return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
   }
 
@@ -655,19 +656,19 @@ public class Util {
    *
    * @param telecoms <br>
    * 		<div class="de"> telecoms</div>
-   * 		<div class="fr"> telecoms</div>
-   * 		<div class="it"> telecoms</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
    * @return <div class="en">the phone</div>
    */
-  public static ArrayList<String> getPhone(ArrayList<TEL> telecoms) {
+  public static HashMap<String, AddressUse> getPhone(ArrayList<TEL> telecoms) {
     return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
   }
 
-  private static ArrayList<String> getTelecomType(ArrayList<TEL> telecoms, String type) {
-    ArrayList<String> tl = new ArrayList<String>();
+  private static HashMap<String, AddressUse> getTelecomType(ArrayList<TEL> telecoms, String type) {
+    HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
     for (TEL tel : telecoms) {
       if (tel.getValue().contains(type)) {
-        tl.add(tel.getValue());
+        tl.put(tel.getValue(), AddressUse.getEnum(tel.getUses().get(0).getName()));
       }
     }
     return tl;
