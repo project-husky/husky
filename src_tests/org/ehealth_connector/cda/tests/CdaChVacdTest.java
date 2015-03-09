@@ -8,12 +8,14 @@ import java.util.Date;
 import org.ehealth_connector.cda.ActiveProblemConcernEntry;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
+import org.ehealth_connector.cda.Comment;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
+import org.ehealth_connector.cda.Pregnancy;
 import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
@@ -22,7 +24,6 @@ import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.AddressUse;
-import org.ehealth_connector.cda.tests.AllTests;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -33,6 +34,7 @@ import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
+import org.ehealth_connector.cda.tests.AllTests;
 
 /**
  * 
@@ -43,7 +45,7 @@ public class CdaChVacdTest {
   public static final int NUMBER_OF_CONTENT_MODULE_TESTS = 50;
 
   //Test data
-  CdaChVacd testDoc;
+  CdaChVacd d;
   CdaChVacd testDoc2;
 
   String startDateString;
@@ -90,6 +92,18 @@ public class CdaChVacdTest {
   private ProblemEntry problem2;
   private AllergyProblem allergyProblem1;
   private Telecoms telecoms1;
+  private GestationalAge cr1;
+  private LaboratoryObservation lss1;
+  private Pregnancy ph1;
+  private Immunization immunization2;
+  private PastProblemConcern ppc2;
+  private ActiveProblemConcernEntry apce2;
+  private AllergyConcern ac2;
+  private LaboratoryObservation lss2;
+  private Pregnancy ph2;
+  private ImmunizationRecommendation immunizationRecommendation2;
+  private Comment c1;
+  private Comment c2;
 
 
   @Before 
@@ -141,20 +155,55 @@ public class CdaChVacdTest {
    * <div class="de">Testet die verschiedenen Konstruktoren eines EDES Dokuments</div>
    */
   @Test
-  public void setterGetterTest() {
-    testDoc = new CdaChVacd();
-    
-//    consumable1 = testConsumableSetterGetter();
-//    problem1 = testProblemEntrySetterGetter();
+  public void testCdaChVacd() {
+    d = new CdaChVacd();  
     
     //Body Sections
-//    immunization1 = testImmunizationSetterGetter();
-//    ppc1 = testPastProblemConcernGetterSetter();
-//    apce1 = testActiveProblemsGetterSetter();
-//    ac1 = testAllergyConcernSetterGetter();
-//    immunizationRecommendation1 = testImmunizationRecommendationGetterSetter();
+    immunization1 = createImmunization();
+    immunization2 = createImmunization();
+    d.addImmunization(immunization1);
+    d.addImmunization(immunization2);
     
-    testDoc2 = new CdaChVacd(testDoc.getDoc());
+    ppc1 = createPastProblemConcern();
+    ppc2 = createPastProblemConcern();
+    d.addPastProblemConcern(ppc1);
+    d.addPastProblemConcern(ppc2);
+    
+    apce1 = createActiveProblems();
+    apce2 = createActiveProblems();
+    d.addActiveProblemConcern(apce1);
+    d.addActiveProblemConcern(apce2);
+    
+    ac1 = createAllergyConcern();
+    ac2 = createAllergyConcern();
+    d.addAllergyProblemConcern(ac1);
+    d.addAllergyProblemConcern(ac2);
+    
+    cr1 = createCodedResults();
+    d.setGestationalAge(cr1);
+    
+    lss1 = createLaboratoryObservation();
+    lss2 = createLaboratoryObservation();
+    d.addLaboratoryObservation(lss1);
+    d.addLaboratoryObservation(lss2);
+    
+    ph1 = createPregnancy();
+    ph2 = createPregnancy();
+    d.addPregnancy(ph1);
+    d.addPregnancy(ph2);
+    
+    immunizationRecommendation1 = createImmunizationRecommendation();
+    immunizationRecommendation2 = createImmunizationRecommendation();
+    d.addImmunizationRecommendation(immunizationRecommendation1);
+    d.addImmunizationRecommendation(immunizationRecommendation2);
+    
+    c1 = createComment();
+    c2 = createComment();
+    //TODO
+    d.addComment(ts1);
+    d.addComment(ts2);
+   
+    testDoc2 = new CdaChVacd(d.getDoc());
     //testDocMetadata("MDHT Document", testDoc2);
     //testProblemEntrySetterGetter();
   }
@@ -376,6 +425,15 @@ public class CdaChVacdTest {
     assertTrue(isEqual(value1, l.getValues().get(1)));
   }
   
+  //9
+  @Test
+  public void testPregnancySetterGetter() {
+    Pregnancy p = new Pregnancy();
+    
+    p.setEstimatedBirthDate(startDate);
+    assertEquals(startDateString, p.getEstimatedBirthdate());
+  }
+  
   //11
   @Test
   public void testImmunizationRecommendationSetterGetter() {
@@ -399,122 +457,21 @@ public class CdaChVacdTest {
     i.setConsumable(consumable1);
     assertEquals(true, isEqual(consumable1, i.getConsumable()));
   }
+  
+  //12
+  @Test
+  public void testCommentSetterGetter() {
+    org.ehealth_connector.cda.Comment c = new org.ehealth_connector.cda.Comment();
+    
+    c.setText(ts1);
+    assertEquals(ts1, c.getText());
+  }
 
   public void testDocMetadata(String constructorName, CdaChEdes doc) {
     assertNotNull(constructorName+" Constructor - DocumentRoot is null", doc.docRoot);
     assertNotNull(constructorName+" Constructor - Document is null", doc.getDoc());
     assertEquals(constructorName+" Constructor - Wrong Language Code set", "de-CH", doc.getDoc().getLanguageCode().getCode());
   }
-
-  /**
-   * Test method for {@link ehealthconnector.cda.documents.ch.CdaChEdes#cAddProblemConcern(ehealthconnector.cda.documents.ch.ProblemConcernEntry)}.
-   */
-  //	@Test
-  //	public void testCAddProblemConcern() {
-  //		// Create medical payload (Body)
-  //		Code niereninsuffiziez = new Code(CodeSystems.IcrDha080401Disease.getCodeSystemId(), testString);
-  //		ProblemEntry problem = new ProblemEntry(false, startDate,endDate, niereninsuffiziez);
-  //
-  //		// Problem "Bauchschmerzen"
-  //		ProblemConcernEntry leiden = new ProblemConcernEntry(testString,
-  //				ConvenienceUtilsEnums.StatusCode.completed, startDate,endDate);
-  //		leiden.addProblemEntry(problem);
-  //		testDoc.addProblemConcern(leiden);
-  //
-  //		ArrayList<ProblemConcernEntry> problemConcernEntries = testDoc.getProblemConcernEntries();
-  //
-  //		assertEquals("ProblemConcernEntry Concern not found in document",testString, problemConcernEntries.get(0).getProblemConcern());
-  //		assertEquals("ProblemConcernEntry startDate not found in document",startDateString, problemConcernEntries.get(0).getStartOfConcern());
-  //		assertEquals("ProblemConcernEntry endDate not found in document",endDateString, problemConcernEntries.get(0).getEndOfConcern());
-  //	}
-
-  /**
-   * <div class="de">Testet das Hinzufügen mehrerer Leiden mit zugehörigen Problemen zu einem Dokument</div>
-   * <div class="fr">Test c add problem concern list.</div>
-   * <div class="it">Test c add problem concern list.</div>
-   */
-  //	@Test
-  //	public void testCAddProblemConcernList() {
-  //		ProblemConcernEntry problemConcernEntry = null;
-  //
-  //		//Create three different ProblemEntries
-  //		Code code1 = new Code(ConvenienceUtilsEnums.KnownOID.IcrDha080401Disease, "code1");
-  //		ProblemEntry problem1 = new ProblemEntry(false, startDate, endDate, code1);
-  //		Code code2 = new Code(ConvenienceUtilsEnums.KnownOID.IcrDha080401Disease, "code2");
-  //		ProblemEntry problem2 = new ProblemEntry(false, startDate, endDate, code2);
-  //		Code code3 = new Code(ConvenienceUtilsEnums.KnownOID.IcrDha080401Disease, "code3");
-  //		ProblemEntry problem3 = new ProblemEntry(false, startDate, endDate, code3);
-  //
-  //		for (int i = 0; i <= NUMBER_OF_CONTENT_MODULE_TESTS; i++) {
-  //			testString = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-  //
-  //			// Create a problemConcernEntry and add the three ProblemEntries
-  //			problemConcernEntry = new ProblemConcernEntry(testString,
-  //					ConvenienceUtilsEnums.StatusCode.completed, startDate,endDate);
-  //			problemConcernEntry.addProblemEntry(problem1);
-  //			problemConcernEntry.addProblemEntry(problem2);
-  //			problemConcernEntry.addProblemEntry(problem3);
-  //
-  //			//Add the problemConcernEntry to the document
-  //			testDoc.addProblemConcern(problemConcernEntry);
-  //
-  //			//Get the (unordered) list of all ProblemConcernEntries in the document and check if one of these Entries contains the test Data. 
-  //			//If so, check if this ProblemConcernEntry contains all of the three problems.
-  //			//If so, the test is passed.
-  //			boolean testDataInDocument = false;
-  //			for (ProblemConcernEntry testDocProblemConcernEntry :  testDoc.getProblemConcernEntries()) {
-  //				
-  //				//Problem Concern Entry ok?
-  //				if (testDocProblemConcernEntry.getProblemConcern().equals(testString) 
-  //						&& testDocProblemConcernEntry.getStartOfConcern().equals(startDateString) 
-  //						&& testDocProblemConcernEntry.getEndOfConcern().equals(endDateString)) {
-  //					
-  //					//Problems ok?
-  //					if (testDocProblemConcernEntry.getProblemEntry(0).getCodedProblem().getCode().equals("code1") 
-  //							&& testDocProblemConcernEntry.getProblemEntry(1).getCodedProblem().getCode().equals("code2")
-  //							&& testDocProblemConcernEntry.getProblemEntry(2).getCodedProblem().getCode().equals("code3")) {
-  //						
-  //						//Everything ok? => Test Passed
-  //						testDataInDocument = true;
-  //						break;
-  //					}
-  //				}
-  //			}
-  //			assertTrue("ProblemConcernEntry Date (concern || startDate || endDate) not found in document",testDataInDocument);
-  //		}
-  //		System.out.println("\n\n**** Test Document after adding a list of ProblemConcernEntries: *****\n");
-  //		testDoc.addProblemConcern(problemConcernEntry);
-  //		testDoc.printXmlToConsole();
-  //	}
-
-  /**
-   * <div class="de">Testet das Hinzufügen mehrerer medizinischer Probleme zu einerm Leiden</div>
-   */
-  //	@Test
-  //	public void testCAddProblemEntryListToProblemConcernEntry() {
-  //		// Create a problemConcernEntry
-  ////		ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry("ProblemConcernEntry that holds "+NUMBER_OF_CONTENT_MODULE_TESTS+" Problems",
-  ////				ConvenienceUtilsEnums.StatusCode.completed, startDate,endDate);
-  ////
-  ////		for (int problemCounter = 0; problemCounter <= NUMBER_OF_CONTENT_MODULE_TESTS; problemCounter++) {
-  ////			testString = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-  ////
-  ////			// Create medical payload (Body)
-  ////			Code niereninsuffiziez = new Code(ConvenienceUtilsEnums.KnownOID.IcrDha080401Disease, testString);
-  ////			ProblemEntry problem = new ProblemEntry(false, startDate, endDate, niereninsuffiziez);
-  ////			System.out.println("testString in problem: "+problem.getCodedProblem().getCode());
-  ////
-  ////			problemConcernEntry.addProblemEntry(problem);
-  ////			System.out.println("testString in problemConcernEntry cGetProblemEntry: "+problemConcernEntry.getProblemEntry(problemCounter).getCodedProblem().getCode());
-  ////
-  ////			assertEquals("ProblemEntry Concern not found in document",testString, problemConcernEntry.getProblemEntry(problemCounter).getCodedProblem().getCode());
-  ////			assertEquals("ProblemEntry startDate not found in document",startDateString, problemConcernEntry.getProblemEntry(problemCounter).getStartOfProblem());
-  ////			assertEquals("ProblemEntry endDate not found in document",endDateString, problemConcernEntry.getProblemEntry(problemCounter).getEndOfProblem());
-  ////		}
-  ////		System.out.println("\n\n**** Test Document after adding a list of ProblemEntries to a problemConcernEntry, which is added to the test document: *****\n");
-  ////		testDoc.addProblemConcern(problemConcernEntry);
-  ////		testDoc.printXmlToConsole();
-  //	}
   
   //Create Test Objects
   public Code createCode1() {
@@ -601,7 +558,6 @@ public class CdaChVacdTest {
   
   public ProblemEntry createProblemEntry() {
     ProblemEntry p = new ProblemEntry();
-    
     p.setCode(code1);
     p.setId(id1);
     p.setStart(startDate);
@@ -609,14 +565,12 @@ public class CdaChVacdTest {
     p.addValue(code2);
     p.addValue(value1);
     p.addValue(value2);
-    
     return p;
   }
   
 
   private AllergyProblem createAllergyProblem() {
     AllergyProblem p = new AllergyProblem();
-    
     p.setId(id1);
     p.setStart(startDate);
     p.setNotOccured(true);
@@ -628,72 +582,89 @@ public class CdaChVacdTest {
 
   public Consumable createConsumable() {
     Consumable c = new Consumable(ts1);
-    
     c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
     c.setTradeName(ts2);
     c.setWhoAtcCode(ts3);
-    
     return consumable1;
   }
   //1  
   public Immunization createImmunization() {
     Immunization i = new Immunization();
-    
     i.setApplyDate(startDate);
     i.setAuthor(author1);
     i.setConsumable(consumable1);
     i.setDosage(number);
     i.setId(id1);
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
-    
     return i;
   }
   
   //2
   public ActiveProblemConcernEntry createActiveProblems() {
     ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
-    
     a.setId(id1);
     a.setStart(startDate);
     a.setEnd(endDate);
     a.setStatus(ProblemConcernStatusCode.ACTIVE);
     a.setConcern(ts1);
-    
     return a;
   }
   
   //3
   private PastProblemConcern createPastProblemConcern() {
     PastProblemConcern p = new PastProblemConcern();
-    
     p.setId(id1);
     p.setStart(startDate);
     p.setEnd(endDate);
     p.setStatus(ProblemConcernStatusCode.ACTIVE);
     p.setConcern(ts1);
-    
     return p;
   }
   
   //4
   public AllergyConcern createAllergyConcern() {
     AllergyConcern a = new AllergyConcern();
-    
     a.setId(id1);
     a.setStart(startDate);
     a.setEnd(endDate);
     a.setStatus(ProblemConcernStatusCode.COMPLETED);
     a.setConcern(ts3);
-    
     return a;
   }
   
+  //6
+  public GestationalAge createCodedResults() {
+    GestationalAge g = new GestationalAge();
+    g.setAsboluteDays(70);  
+    g.setWeeksAndDays(10, 0);
+    g.setAsboluteDays(2); 
+    g.setWeeksAndDays(0, 2);
+    return g;
+  }
   
+  //8
+  public LaboratoryObservation createLaboratoryObservation() {
+    LaboratoryObservation l = new LaboratoryObservation();
+    l.setCode(code1);  
+    l.setLaboratory(organization1, endDate);
+    l.setEffectiveTime(startDate);
+    l.setImmuneProtection(true);
+    l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+    l.addValue(code2);
+    l.addValue(value1);
+    return l;
+  }
+  
+  //9
+  public Pregnancy createPregnancy() {
+    Pregnancy p = new Pregnancy(); 
+    p.setEstimatedBirthDate(startDate);
+    return p;
+  }
   
   //11
   public ImmunizationRecommendation createImmunizationRecommendation() {
     ImmunizationRecommendation i = new ImmunizationRecommendation();
-    
     i.setAuthor(author2);
     i.setId(id2);
     i.setIntendedOrProposed(true);
@@ -701,6 +672,14 @@ public class CdaChVacdTest {
     i.setShallNotBeAdministerd(true);
     i.setConsumable(consumable1); 
     return i;
+  }
+  
+  //12
+  public Comment createComment() {
+    org.ehealth_connector.cda.Comment c = new org.ehealth_connector.cda.Comment();
+    
+    c.setText(ts1);
+    return c;
   }
  
   
