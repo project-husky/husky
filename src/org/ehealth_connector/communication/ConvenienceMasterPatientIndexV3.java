@@ -8,7 +8,6 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.AtnaConfig;
 import org.ehealth_connector.communication.Destination;
-import org.ehealth_connector.communication.Response;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.ehealth_connector.communication.mpi.impl.V3PixAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;

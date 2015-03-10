@@ -1,33 +1,50 @@
 /*******************************************************************************
- * 
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- * 
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved.
+ * http://medshare.net
+ *
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- * 
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- * 
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 3.0 Switzerland License.
- * 
- * Year of publication: 2014
- * 
+ *
+ * This code is are made available under the terms of the
+ * Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the
+ * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
  *******************************************************************************/
 
 package org.ehealth_connector.communication;
 
 import java.net.URI;
+import java.security.KeyStore;
 import java.security.PrivateKey;
 
 /**
  * The Class Destination.
  */
+/**
+ * @author Axel
+ *
+ */
 public class Destination {
 
 	/**
-	 * URI des Repository. Z.B. "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"
+	 * URI for the XDS Registry
 	 */
-	private URI repositoryUri;
+	private URI registryUri;
+	
+	public URI getRegistryUri() {
+      return registryUri;
+    }
+
+    private String senderOrganizationalOid;
+	private String keyStore = null;
+	private String keyStorePassword;
+	private String trustStore;
+	private String trustStorePassword;
 
 	/** URI for pix Source ITI-44. */
 	private URI pixSourceUri; 
@@ -38,8 +55,8 @@ public class Destination {
 	/** The sender application oid for PIX/PDQ V3. */
 	private String senderApplicationOid; 
 
-	/** The sender facility oid for PIX/PDQ V3. */
-	private String senderFacilityOid; 
+	/** The sender facility oid for PIX/PDQ V3 and XDS */
+	private String senderFacilityOid;
 
 	/** The receiver application oid for PIX/PDQ V3 */
 	private String receiverApplicationOid; 
@@ -48,73 +65,103 @@ public class Destination {
 	private String receiverFacilityOid; 
 
 	/**
-	 * Privater X.509 Zertifikats-Schlüssel
-	 */
-	PrivateKey privateX509Key;
-
-	/**
-	 * ID des Empfängers der Nachricht. Z.B. 1.2.3.4.1789.10 bei
-	 * "Princeton Hospital^^^^^^^^^1.2.3.4.1789.10"
-	 */
-	String intendedRecipientId;
-
-	/**
-	 * Name des Empfängers der Nachricht. Z.B. Princeton Hospital bei
-	 * "Princeton Hospital^^^^^^^^^1.2.3.4.1789.10"
-	 */
-	String intendedRecipientName;
-
-	/**
-	 * Kommunikations-Endpunkt.
+	 * Communication Endpoint for an unsecured XDS-b transaction.
 	 *
-	 * @param repositoryUri URI des Kommunikations-Endpunkt
+	 * @param senderOrganizationalOid Oid of the Sender Organization
+	 * @param repositoryUri URI of the communication endpoint
 	 */
-	public Destination(URI repositoryUri) {
-		this(repositoryUri, null, null);
+	public Destination(String senderOrganizationalOid, URI repositoryUri) {
+		this.registryUri = repositoryUri;
+		this.senderOrganizationalOid = senderOrganizationalOid;
 	}
+	
+	 /**
+     * Communication Endpoint for a TLS-secured XDS-b transaction with a single keystore that combines keystore and truststore.
+     *
+     * @param repositoryUri URI of the communication endpoint
+     * @param keyStore path to the keystore file
+     * @param keyStorePassword the password for the keystore file
+     */
+    public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword) {
+        this(senderOrganizationalOid, repositoryUri);
+        this.keyStore = keyStore;
+        this.keyStorePassword = keyStorePassword;
+        this.trustStore = keyStore;
+        this.trustStorePassword = keyStorePassword;
+    }
 
 	/**
-	 * Kommunikations-Endpunkt (TLS).
+	 * Communication Endpoint for a TLS-secured XDS-b transaction with a seperate keystore and truststore.
 	 *
-	 * @param repositoryUri URI des Kommunikations-Endpunkt
-	 * @param privateX509Key Privater X.509 Zertifikats-Schlüssel
+	 * @param repositoryUri URI of the communication endpoint
+     * @param keyStore path to the keystore file
+     * @param keyStorePassword the password for the keystore file
+     * @param trustStore path to the truststore file
+     * @param trustStorePassword the password for the truststore file
 	 */
-	public Destination(URI repositoryUri, PrivateKey privateX509Key) {
-		this(repositoryUri, null, null, privateX509Key);
+	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword, String trustStore, String trustStorePassword) {
+		this(senderOrganizationalOid, repositoryUri);
+		this.keyStore = keyStore;
+		this.keyStorePassword = keyStorePassword;
+		this.trustStore = trustStore;
+		this.trustStorePassword = trustStorePassword;
 	}
+	
+	public void setRegistryUri(URI registryUri) {
+	    this.registryUri = registryUri;
+	  }
 
-	/**
-	 * Kommunikations-Endpunkt.
-	 *
-	 * @param repositoryUri URI des Kommunikations-Endpunkt
-	 * @param intendedRecipientId Id des Empfängers
-	 * @param intendedRecipientName Name des Empfängers
-	 */
-	public Destination(URI repositoryUri, String intendedRecipientId, String intendedRecipientName) {
+	  public String getSenderOrganizationalOid() {
+	    return senderOrganizationalOid;
+	  }
 
-	}
+	  public void setSenderOrganizationalOid(String senderOrganizationalOid) {
+	    this.senderOrganizationalOid = senderOrganizationalOid;
+	  }
 
-	/**
-	 * Kommunikations-Endpunkt (TLS).
-	 *
-	 * @param repositoryUri URI des Kommunikations-Endpunkt
-	 * @param intendedRecipientId Id des Empfängers
-	 * @param intendedRecipientName Name des Empfängers
-	 * @param privateX509Key Privater X.509 Zertifikats-Schlüssel
-	 */
-	public Destination(URI repositoryUri, String intendedRecipientId, String intendedRecipientName,
-			PrivateKey privateX509Key) {
+	  public String getKeyStore() {
+	    return keyStore;
+	  }
 
-	}
+	  public void setKeyStore(String keyStore) {
+	    this.keyStore = keyStore;
+	  }
 
-	/**
-	 * Liefert den Empfänger der Nachricht.
-	 *
-	 * @return das intendedRecipient Objekt
-	 */
-	public String getIntendedRecipientId() {
-		return intendedRecipientId;
-	}
+	  public String getKeyStorePassword() {
+	    return keyStorePassword;
+	  }
+
+	  public void setKeyStorePassword(String keyStorePassword) {
+	    this.keyStorePassword = keyStorePassword;
+	  }
+
+	  public String getTrustStore() {
+	    return trustStore;
+	  }
+
+	  public void setTrustStore(String trustStore) {
+	    this.trustStore = trustStore;
+	  }
+
+	  public String getTrustStorePassword() {
+	    return trustStorePassword;
+	  }
+
+	  /**
+  	 * <div class="en">Sets the trust store password.</div>
+  	 * <div class="de">Setzt trust store password.</div>
+  	 * <div class="fr"></div>
+  	 * <div class="it"></div>
+  	 *  
+  	 *
+  	 * @param trustStorePassword <div class="en">the new trust store password</div>
+  	 * <div class="de">das neue trust store password.</div>
+  	 * <div class="fr"></div>
+  	 * <div class="it"></div>
+  	 */
+  	public void setTrustStorePassword(String trustStorePassword) {
+	    this.trustStorePassword = trustStorePassword;
+	  }
 
 	/**
 	 * Gets the pix query uri.
@@ -132,15 +179,6 @@ public class Destination {
 	 */
 	public URI getPixSourceUri() {
 		return pixSourceUri;
-	}
-
-	/**
-	 * Liefert den privaten X.509 Zertifikats-Schlüssel
-	 * 
-	 * @return das privateX509Key Objekt
-	 */
-	public PrivateKey getPrivateX509Key() {
-		return privateX509Key;
 	}
 
 	/**
@@ -162,24 +200,6 @@ public class Destination {
 	}
 
 	/**
-	 * Gets the repository uri.
-	 *
-	 * @return the repository uri
-	 */
-	public URI getRepositoryUri() {
-		return repositoryUri;
-	}
-
-	/**
-	 * Liefert die URI des Kommunikations-Endpunkts.
-	 *
-	 * @return das repositoryUri Objekt
-	 */
-	public URI getResositoryUri() {
-		return repositoryUri;
-	}
-
-	/**
 	 * Gets the sender application oid.
 	 *
 	 * @return the sender application oid
@@ -195,15 +215,6 @@ public class Destination {
 	 */
 	public String getSenderFacilityOid() {
 		return senderFacilityOid;
-	}
-
-	/**
-	 * Setzt den Empfänger der Nachricht.
-	 *
-	 * @param intendedRecipientId das intendedRecipientId Objekt welches gesetzt wird
-	 */
-	public void setIntendedRecipientId(String intendedRecipientId) {
-		this.intendedRecipientId = intendedRecipientId;
 	}
 
 	/**
@@ -225,15 +236,6 @@ public class Destination {
 	}
 
 	/**
-	 * Setzt den privaten X.509 Zertifikats-Schlüssel
-	 * 
-	 * @param privateX509Key das privateX509Key Objekt welches gesetzt wird
-	 */
-	public void setPrivateX509Key(PrivateKey privateX509Key) {
-		this.privateX509Key = privateX509Key;
-	}
-
-	/**
 	 * Sets the receiver application oid.
 	 *
 	 * @param receiverApplicationOid the new receiver application oid
@@ -249,24 +251,6 @@ public class Destination {
 	 */
 	public void setReceiverFacilityOid(String receiverFacilityOid) {
 		this.receiverFacilityOid = receiverFacilityOid;
-	}
-
-	/**
-	 * Sets the repository uri.
-	 *
-	 * @param repositoryUri the new repository uri
-	 */
-	public void setRepositoryUri(URI repositoryUri) {
-		this.repositoryUri = repositoryUri;
-	}
-
-	/**
-	 * Setzt die URI des Kommunikations-Endpunkts.
-	 *
-	 * @param repositoryUri das repositoryUri Objekt welches gesetzt wird
-	 */
-	public void setResositoryUri(URI repositoryUri) {
-		this.repositoryUri = repositoryUri;
 	}
 
 	/**

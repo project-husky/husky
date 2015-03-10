@@ -39,7 +39,7 @@ import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
-import org.ehealth_connector.cda.tests.AllTests;
+import org.ehealth_connector.cda.tests.TestUtils;
 
 /**
  * 
@@ -384,11 +384,11 @@ public class CdaChVacdTest {
     endDate = DateUtil.date("28.02.2018");
 
     //Test String with German, French and Italic special characters
-    ts1 = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-    ts2 = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-    ts3 = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-    ts4 = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-    ts5 = AllTests.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+    ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+    ts2 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+    ts3 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+    ts4 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+    ts5 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
     numS1 = "1231425352";
     numS2 = "987653";
     number = 121241241.212323;

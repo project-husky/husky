@@ -12,7 +12,7 @@
  * Accompanying materials are made available under the terms of the
  * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
  *
- * Year of publication: 2014
+ * Year of publication: 2015
  *
  *******************************************************************************/
 
@@ -43,7 +43,6 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 
 import com.sun.istack.internal.Nullable;
-
 
 /**
  * <p>
@@ -248,44 +247,17 @@ public class ConvenienceCommunication {
 	 * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
 	 * @throws Exception the exception
 	 */
-	public ConvenienceCommunication(String organizationalId, String repositoryUri, boolean auditorEnabled, @Nullable String log4jConfigPath) throws Exception {
+	public ConvenienceCommunication(Destination dest, boolean auditorEnabled, @Nullable String log4jConfigPath) throws Exception {
 		txnData = new SubmitTransactionData();
-		this.organizationalId = organizationalId;
+		this.organizationalId = dest.getSenderOrganizationalOid();
 		if (log4jConfigPath==null) {
 			log4jConfigPath = "./rsc/log4jInfo.xml";
 		}
-		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
+		setUp(dest, auditorEnabled, log4jConfigPath);
 	}
 
 	/**
-	 * Instantiates a new convenience communication.
-	 *
-     * @param organizationalId the organizational id (the OID of your Organization, e.g. "1.3.6.1.4.1.21367.2010.1.2.1")
-     * @param repositoryUri the repository uri (the URI of the Communication Endpoint, e.g. the NIST Repository "http://ihexds.nist.gov/tf6/services/xdsrepositoryb")
-	 * @param auditorEnabled the auditor enabled
-	 * @param keystorePath the keystore path
-	 * @param keystorePassword the keystore password
-	 * @param truststorePath the truststore path
-	 * @param truststorePassowrd the truststore passowrd
-	 * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
-	 * @throws Exception the exception
-	 */
-	public ConvenienceCommunication(String organizationalId, String repositoryUri, boolean auditorEnabled, String keystorePath, String keystorePassword, String truststorePath, String truststorePassowrd, String log4jConfigPath) throws Exception {
-		System.setProperty("javax.net.ssl.keyStore",keystorePath);
-		System.setProperty("javax.net.ssl.keyStorePassword",keystorePassword);
-		System.setProperty("javax.net.ssl.trustStore",truststorePath);
-		System.setProperty("javax.net.ssl.trustStorePassword",truststorePassowrd);
-
-		txnData = new SubmitTransactionData();
-		this.organizationalId = organizationalId;
-		if (log4jConfigPath==null) {
-			log4jConfigPath = "./rsc/log4jInfo.xml";
-		}
-		setUp(repositoryUri, auditorEnabled, log4jConfigPath);
-	}
-
-	/**
-	 * Adds a document to the XDS Submission set
+	 * Adds a document to the XDS Submission set.
 	 *
 	 * @param desc the document descriptor (which kind of document do you want to transfer? e.g. PDF, CDA,...)
 	 * @param filePath the file path
@@ -389,19 +361,21 @@ public class ConvenienceCommunication {
 	 * @param log4jConfigPath the log4j config path
 	 * @throws Exception the exception
 	 */
-	protected void setUp(String repositoryUri, boolean auditorEnabled, String log4jConfigPath) throws Exception {
+	protected void setUp(Destination dest, boolean auditorEnabled, String log4jConfigPath) throws Exception {
 		//super.setUp();
 		File conf = new File(log4jConfigPath);
 		org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
 		java.net.URI repositoryURI = null;
-		try {
-			repositoryURI = new java.net.URI(repositoryUri);
-		} catch (URISyntaxException e) {
-			logger.fatal("SOURCE URI CANNOT BE SET: \n" + e.getMessage());
-			throw e;
-		}
-		source = new B_Source(repositoryURI);
+
+		source = new B_Source(dest.getRegistryUri());
 		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+		
+		if (dest.getKeyStore()!=null) {
+	        System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
+	        System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
+	        System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
+	        System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
+		}
 	}
 
 	 /**
