@@ -15,6 +15,7 @@
 package org.ehealth_connector.communication.mpi.impl.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
@@ -37,7 +39,11 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
+import ca.uhn.fhir.model.dstu2.valueset.MaritalStatusCodesEnum;
+import ca.uhn.fhir.model.primitive.BooleanDt;
 import ca.uhn.fhir.model.primitive.DateDt;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.IntegerDt;
 
 /**
  * Junit Tests for the FhirPatient
@@ -136,33 +142,33 @@ public class FhirPatientTests {
     assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
     assertEquals("state", fhirPatient.getAddressFirstRep().getState());
   }
- 
-  
+
+
   private Organization getScopingOrganization() {
-    return this.getScopingOrganization("2.16.840.1.113883.3.72.5.9.2","OHT",null);
+    return this.getScopingOrganization("2.16.840.1.113883.3.72.5.9.2", "OHT", null);
   }
-  
+
   private Organization getScopingOrganization(String oid, String name, String tel) {
     Organization org = new Organization();
-    if (oid!=null) {
+    if (oid != null) {
       IdentifierDt identifier = new IdentifierDt();
-      identifier.setSystem("urn:oid:"+oid);
+      identifier.setSystem("urn:oid:" + oid);
       org.getIdentifier().add(identifier);
     }
-    if (name!=null) {
+    if (name != null) {
       org.setName(name);
     }
-    if (tel!=null) {
+    if (tel != null) {
       ContactPointDt fhirTel = org.addTelecom();
       fhirTel.setValue(tel);
     }
     return org;
   }
 
-  
+
   @Test
   public void testConveniencePatient() {
-    
+
     // ALPHA ALAN
     FhirPatient fhirPatient = new FhirPatient();
     HumanNameDt humanName = new HumanNameDt().addFamily("ALPHA").addGiven("ALAN");
@@ -178,68 +184,75 @@ public class FhirPatientTests {
     fhirPatient.getAddress().add(address);
     fhirPatient.setGender(AdministrativeGenderEnum.MALE);
     fhirPatient.getManagingOrganization().setResource(getScopingOrganization());
-    
+
     Patient patient = fhirPatient.getPatient();
-    
-    assertEquals("2.16.840.1.113883.3.72.5.9.1",patient.getIds().get(0).getRoot());
-    assertEquals("PIX",patient.getIds().get(0).getExtension());
-    assertEquals("1 PINETREE",patient.getAddress().getAddressline1());
-    assertEquals("63119",patient.getAddress().getZip());
-    assertEquals("WEBSTER",patient.getAddress().getCity());
-    assertEquals("ALPHA",patient.getName().getFamilyName());
-    assertEquals("ALAN",patient.getName().getGivenNames());
-    
-    org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
+
+    assertEquals("2.16.840.1.113883.3.72.5.9.1", patient.getIds().get(0).getRoot());
+    assertEquals("PIX", patient.getIds().get(0).getExtension());
+    assertEquals("1 PINETREE", patient.getAddress().getAddressline1());
+    assertEquals("63119", patient.getAddress().getZip());
+    assertEquals("WEBSTER", patient.getAddress().getCity());
+    assertEquals("ALPHA", patient.getName().getFamilyName());
+    assertEquals("ALAN", patient.getName().getGivenNames());
+
+    org.openhealthtools.mdht.uml.hl7.datatypes.II ii =
+        patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
     assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
-    
+
     FhirPatient fhirPatientEquals = new FhirPatient(patient);
     Patient patientEquals = fhirPatientEquals.getPatient();
-       
-    assertEquals("2.16.840.1.113883.3.72.5.9.1",patientEquals.getIds().get(0).getRoot());
-    assertEquals("PIX",patientEquals.getIds().get(0).getExtension());
-    assertEquals("1 PINETREE",patientEquals.getAddress().getAddressline1());
-    assertEquals("63119",patientEquals.getAddress().getZip());
-    assertEquals("WEBSTER",patientEquals.getAddress().getCity());
-    assertEquals("ALPHA",patientEquals.getName().getFamilyName());
-    assertEquals("ALAN",patientEquals.getName().getGivenNames());
-    
+
+    assertEquals("2.16.840.1.113883.3.72.5.9.1", patientEquals.getIds().get(0).getRoot());
+    assertEquals("PIX", patientEquals.getIds().get(0).getExtension());
+    assertEquals("1 PINETREE", patientEquals.getAddress().getAddressline1());
+    assertEquals("63119", patientEquals.getAddress().getZip());
+    assertEquals("WEBSTER", patientEquals.getAddress().getCity());
+    assertEquals("ALPHA", patientEquals.getName().getFamilyName());
+    assertEquals("ALAN", patientEquals.getName().getGivenNames());
+
     ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
     assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
   }
-  
+
   @Test
   public void testConveniencePatientOrganization() {
     FhirPatient fhirPatient = new FhirPatient();
-    fhirPatient.getManagingOrganization().setResource(getScopingOrganization("1234","Test","+417600000000"));
-    
+    fhirPatient.getManagingOrganization().setResource(
+        getScopingOrganization("1234", "Test", "+417600000000"));
+
 
     ca.uhn.fhir.model.dstu2.resource.Organization org =
-        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient.getManagingOrganization().getResource();
-    
+        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient.getManagingOrganization()
+            .getResource();
+
     assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
     assertEquals("Test", org.getName());
     assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
-    
+
     Patient patient = fhirPatient.getPatient();
-    assertEquals("Test", patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
-    assertEquals("1234", patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0).getRoot());
-    assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization().getTelecoms().get(0).getValue());
+    assertEquals("Test", patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0)
+        .getText());
+    assertEquals("1234", patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0)
+        .getRoot());
+    assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization()
+        .getTelecoms().get(0).getValue());
 
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     org =
-        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization().getResource();
-    
+        (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization()
+            .getResource();
+
     assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
     assertEquals("Test", org.getName());
     assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
   }
-  
-  
+
+
   @Test
   public void testConveniencePatientTelecom() {
-    
+
     FhirPatient fhirPatient = new FhirPatient();
-    
+
     ContactPointDt telHome = new ContactPointDt();
     telHome.setUse(ContactPointUseEnum.HOME);
     telHome.setSystem(ContactPointSystemEnum.PHONE);
@@ -264,39 +277,136 @@ public class FhirPatientTests {
     fhirPatient.getTelecom().add(telWork);
     fhirPatient.getTelecom().add(telMobile);
     fhirPatient.getTelecom().add(eMail);
-    
+
     Patient patient = fhirPatient.getPatient();
-    
+
     HashMap<String, AddressUse> phones = patient.getTelecoms().getPhones();
-    
+
     assertEquals(AddressUse.PRIVATE, phones.get("tel:+4144000000000"));
     assertEquals(AddressUse.BUSINESS, phones.get("tel:+4188000000000"));
     assertEquals(AddressUse.MOBILE, phones.get("tel:+4176000000000"));
 
     HashMap<String, AddressUse> emails = patient.getTelecoms().getEMails();
     assertEquals(AddressUse.BUSINESS, emails.get("mailto:xyz@abc.ch"));
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
-    
-    assertEquals(ContactPointUseEnum.HOME, fhirPatient2.getTelecom().get(0).getUseElement().getValueAsEnum());
-    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0).getSystemElement().getValueAsEnum());
+
+    assertEquals(ContactPointUseEnum.HOME, fhirPatient2.getTelecom().get(0).getUseElement()
+        .getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0).getSystemElement()
+        .getValueAsEnum());
     assertEquals("+4144000000000", fhirPatient2.getTelecom().get(0).getValue());
 
-    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(1).getUseElement().getValueAsEnum());
-    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1).getSystemElement().getValueAsEnum());
+    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(1).getUseElement()
+        .getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1).getSystemElement()
+        .getValueAsEnum());
     assertEquals("+4188000000000", fhirPatient2.getTelecom().get(1).getValue());
 
-    assertEquals(ContactPointUseEnum.MOBILE, fhirPatient2.getTelecom().get(2).getUseElement().getValueAsEnum());
-    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2).getSystemElement().getValueAsEnum());
+    assertEquals(ContactPointUseEnum.MOBILE, fhirPatient2.getTelecom().get(2).getUseElement()
+        .getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2).getSystemElement()
+        .getValueAsEnum());
     assertEquals("+4176000000000", fhirPatient2.getTelecom().get(2).getValue());
-    
-    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(3).getUseElement().getValueAsEnum());
-    assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3).getSystemElement().getValueAsEnum());
-    assertEquals("xyz@abc.ch", fhirPatient2.getTelecom().get(3).getValue());
 
+    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(3).getUseElement()
+        .getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3).getSystemElement()
+        .getValueAsEnum());
+    assertEquals("xyz@abc.ch", fhirPatient2.getTelecom().get(3).getValue());
   }
 
+  @Test
+  public void testConveniencePatientLanguage() {
+    FhirPatient fhirPatient = new FhirPatient();
+    CodeableConceptDt deCH = new CodeableConceptDt();
+    deCH.setText("de-CH");
+    CodeableConceptDt frCH = new CodeableConceptDt();
+    frCH.setText("fr-CH");
+
+    fhirPatient.getCommunication().add(deCH);
+    fhirPatient.getCommunication().add(frCH);
+
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunications().get(0)
+        .getLanguageCode().getCode());
+    assertEquals("fr-CH", patient.getMdhtPatient().getLanguageCommunications().get(1)
+        .getLanguageCode().getCode());
+
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+
+    assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getText());
+    assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getText());
+  }
+  
+  @Test
+  public void testConveniencePatientMaritialStatus() {
+    FhirPatient fhirPatient = new FhirPatient();
+    fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
     
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("M", patient.getMdhtPatient().getMaritalStatusCode().getCode());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertEquals("M", fhirPatient2.getMaritalStatus().getValueAsEnum().toArray()[0].toString());
+  }
+  
+  @Test
+  public void testConveniencePatientDeceasedIndicator() {
+    FhirPatient fhirPatient = new FhirPatient();
+    BooleanDt booleanDt = new BooleanDt();
+    booleanDt.setValue(true);
+    fhirPatient.setDeceased(booleanDt);
+    
+    Patient patient = fhirPatient.getPatient();
+    assertTrue(patient.getDeceasedInd().booleanValue());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertTrue(((BooleanDt) fhirPatient2.getDeceased()).getValue().booleanValue());
+  }
+  
+  @Test
+  public void testConveniencePatientDeceasedDateTime() {
+    FhirPatient fhirPatient = new FhirPatient();
+    Date dtNow = new Date();
+    DateTimeDt dateTimeDt = new DateTimeDt(dtNow);
+    
+    fhirPatient.setDeceased(dateTimeDt);
+    
+    Patient patient = fhirPatient.getPatient();
+    assertEquals(dtNow,patient.getDeceasedTime());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertEquals(dtNow, ((DateTimeDt) fhirPatient2.getDeceased()).getValue());
+  }
+  
+  @Test
+  public void testConveniencePatientMultipleBirthIndicator() {
+    FhirPatient fhirPatient = new FhirPatient();
+    BooleanDt booleanDt = new BooleanDt();
+    booleanDt.setValue(true);
+    fhirPatient.setMultipleBirth(booleanDt);
+    
+    Patient patient = fhirPatient.getPatient();
+    assertTrue(patient.getMultipleBirthInd().booleanValue());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertTrue(((BooleanDt) fhirPatient2.getMultipleBirth()).getValue().booleanValue());
+  }
+
+  @Test
+  public void testConveniencePatientMultipleBirthOrder() {
+    FhirPatient fhirPatient = new FhirPatient();
+    IntegerDt integerDt = new IntegerDt(2);
+    fhirPatient.setMultipleBirth(integerDt);
+    
+    Patient patient = fhirPatient.getPatient();
+    assertEquals(2, patient.getMultipleBirthOrderNumber().intValue());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertEquals(2, ((IntegerDt) fhirPatient2.getMultipleBirth()).getValue().intValue());
+  }
+
 
 
 
