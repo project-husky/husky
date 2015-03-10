@@ -210,7 +210,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
     // scoping organization set the scoping organization
     String organizationOid = "";
     String organizationName = "";
-    String telecomValue = "";
+    String organizationTelecomValue = "";
 
     Organization organization = (Organization) patient.getManagingOrganization().getResource();
 
@@ -229,21 +229,21 @@ public class V3PixAdapter implements MpiAdapterInterface {
       if (organization.getTelecom().size()>0) {
         ContactPointDt contactPoint = organization.getTelecomFirstRep();
         if (contactPoint!=null) {
-          telecomValue = contactPoint.getValue();
+          organizationTelecomValue = contactPoint.getValue();
         }
       }
     }
 
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setScopingOrganization(organizationOid, organizationName, telecomValue);
+      v3RecordAddedMessage.setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
     }
     if (v3RecordRevisedMessage != null) {
       v3RecordRevisedMessage
-          .setScopingOrganization(organizationOid, organizationName, telecomValue);
+          .setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
     }
     if (v3MergePatientsMessage != null) {
       v3MergePatientsMessage
-          .setScopingOrganization(organizationOid, organizationName, telecomValue);
+          .setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
     }
 
     if (patient.getAddress().size()>0) {
@@ -273,16 +273,45 @@ public class V3PixAdapter implements MpiAdapterInterface {
       }
     }
     
-    // telecommuication addresses
+    // telecommunication addresses (only phone and email will be added to source)
     if (patient.getTelecom()!=null && patient.getTelecom().size()>0) {
       for(ContactPointDt contactPointDt : patient.getTelecom()) {
-        
-        
-        
+        // system    I   0..1    code    phone | fax | email | url
+        // use M   0..1    code    home | work | temp | old | mobile - purpose of this contact point
+        String telecomValue = "";
+        // FIXME ? OHT supports currently only "HP" or "WP"
+        String useValue="";
+        if ("phone".equals(contactPointDt.getSystem())) {
+          telecomValue = "tel:"+contactPointDt.getValue();
+          if ("home".equals(contactPointDt.getUse())) {
+            useValue="HP";
+          } if ("workd".equals(contactPointDt.getUse())) {
+            useValue="WP";
+          } 
+        }
+        if ("email".equals(contactPointDt.getSystem())) {
+          telecomValue = "mailto:"+contactPointDt.getValue();
+          if ("home".equals(contactPointDt.getUse())) {
+            useValue="HP";
+          } if ("workd".equals(contactPointDt.getUse())) {
+            useValue="WP";
+          } 
+        }
+        if (v3RecordAddedMessage != null) {
+          v3RecordAddedMessage.addPatientTelecom(telecomValue, useValue);
+        }
+        if (v3RecordRevisedMessage != null) {
+          v3RecordRevisedMessage.addPatientTelecom(telecomValue, useValue);
+        }
+        if (v3MergePatientsMessage != null) {
+          v3MergePatientsMessage.addPatientTelecom(telecomValue, useValue);
+        }
       }
     }
 
   }
+  
+  
 
   /**
    * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add Patient Record

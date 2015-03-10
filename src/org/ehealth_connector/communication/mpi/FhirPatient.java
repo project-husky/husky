@@ -28,6 +28,7 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Organization;
@@ -181,7 +182,13 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       }
       getManagingOrganization().setResource(fhirOrganization);
     }
-
+    
+    if (patient.getTelecoms()!=null) {
+//      for(Telecoms telecom : patient.getTelecoms().getPhones()) {
+//        
+//      }
+      
+    }
   }
 
 

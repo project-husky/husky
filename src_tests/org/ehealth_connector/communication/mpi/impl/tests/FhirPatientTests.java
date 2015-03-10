@@ -231,6 +231,19 @@ public class FhirPatientTests {
     assertEquals("Test", org.getName());
     assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
   }
+  
+  
+  @Test
+  public void testConveniencePatientTelecom() {
+    
+    FhirPatient fhirPatient = new FhirPatient();
+    
+    
+
+
+  }
+
+    
 
 
 
