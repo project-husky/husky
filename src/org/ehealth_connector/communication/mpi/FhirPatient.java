@@ -36,6 +36,7 @@ import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
@@ -43,6 +44,8 @@ import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
@@ -184,10 +187,32 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     }
     
     if (patient.getTelecoms()!=null) {
-//      for(Telecoms telecom : patient.getTelecoms().getPhones()) {
-//        
-//      }
-      
+      for(TEL tel : patient.getTelecoms().getMdhtTelecoms()) {
+        ContactPointDt contactPointDt = new ContactPointDt();
+        String value = null;
+        ContactPointSystemEnum system = null;
+        ContactPointUseEnum use = null;
+        if (tel.getValue().length()>4 && tel.getValue().startsWith("tel:")) {
+          value = tel.getValue().substring(4);
+          system = ContactPointSystemEnum.PHONE;
+        } else if (tel.getValue().length()>4 && tel.getValue().startsWith("mailto:")) {
+          value = tel.getValue().substring(7);
+          system = ContactPointSystemEnum.EMAIL;
+        }
+        if (tel.getUses().size()>0 && tel.getUses().get(0)==TelecommunicationAddressUse.HP) {
+          use = ContactPointUseEnum.HOME;
+        }
+        if (tel.getUses().size()>0 && tel.getUses().get(0)==TelecommunicationAddressUse.WP) {
+          use = ContactPointUseEnum.WORK;
+        }
+        if (tel.getUses().size()>0 && tel.getUses().get(0)==TelecommunicationAddressUse.MC) {
+          use = ContactPointUseEnum.MOBILE;
+        }
+        contactPointDt.setSystem(system);
+        contactPointDt.setUse(use);
+        contactPointDt.setValue(value);
+        this.getTelecom().add(contactPointDt);
+      }
     }
   }
 
@@ -304,6 +329,37 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         }
       }
     }
+    
+    // telecommunications
+    if (getTelecom().size()>0) {
+      Telecoms telecoms = new Telecoms();
+      for(ContactPointDt contactPointDt : getTelecom()) {
+        if (ContactPointSystemEnum.PHONE.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+          AddressUse addressUse = null;
+          if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+            addressUse = AddressUse.PRIVATE;
+          } else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+            addressUse = AddressUse.BUSINESS;
+          } else if (ContactPointUseEnum.MOBILE.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+            addressUse = AddressUse.MOBILE;
+          } 
+          telecoms.addPhone(contactPointDt.getValue(), addressUse);
+        }
+        if (ContactPointSystemEnum.EMAIL.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+          AddressUse addressUse = null;
+          if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+            addressUse = AddressUse.PRIVATE;
+          } else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+            addressUse = AddressUse.BUSINESS;
+          } 
+          telecoms.addEMail(contactPointDt.getValue(), addressUse);
+        }
+      }
+      if (telecoms.getMdhtTelecoms().size()>0) {
+        patient.setTelecoms(telecoms);
+      }
+    }
+    
 
     return patient;
   }

@@ -17,6 +17,7 @@ package org.ehealth_connector.communication.mpi.impl.tests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,7 +28,6 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
@@ -35,6 +35,8 @@ import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 
 /**
@@ -238,8 +240,59 @@ public class FhirPatientTests {
     
     FhirPatient fhirPatient = new FhirPatient();
     
-    
+    ContactPointDt telHome = new ContactPointDt();
+    telHome.setUse(ContactPointUseEnum.HOME);
+    telHome.setSystem(ContactPointSystemEnum.PHONE);
+    telHome.setValue("+4144000000000");
 
+    ContactPointDt telWork = new ContactPointDt();
+    telWork.setUse(ContactPointUseEnum.WORK);
+    telWork.setSystem(ContactPointSystemEnum.PHONE);
+    telWork.setValue("+4188000000000");
+
+    ContactPointDt telMobile = new ContactPointDt();
+    telMobile.setUse(ContactPointUseEnum.MOBILE);
+    telMobile.setSystem(ContactPointSystemEnum.PHONE);
+    telMobile.setValue("+4176000000000");
+
+    ContactPointDt eMail = new ContactPointDt();
+    eMail.setUse(ContactPointUseEnum.WORK);
+    eMail.setSystem(ContactPointSystemEnum.EMAIL);
+    eMail.setValue("xyz@abc.ch");
+
+    fhirPatient.getTelecom().add(telHome);
+    fhirPatient.getTelecom().add(telWork);
+    fhirPatient.getTelecom().add(telMobile);
+    fhirPatient.getTelecom().add(eMail);
+    
+    Patient patient = fhirPatient.getPatient();
+    
+    HashMap<String, AddressUse> phones = patient.getTelecoms().getPhones();
+    
+    assertEquals(AddressUse.PRIVATE, phones.get("tel:+4144000000000"));
+    assertEquals(AddressUse.BUSINESS, phones.get("tel:+4188000000000"));
+    assertEquals(AddressUse.MOBILE, phones.get("tel:+4176000000000"));
+
+    HashMap<String, AddressUse> emails = patient.getTelecoms().getEMails();
+    assertEquals(AddressUse.BUSINESS, emails.get("mailto:xyz@abc.ch"));
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    
+    assertEquals(ContactPointUseEnum.HOME, fhirPatient2.getTelecom().get(0).getUseElement().getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0).getSystemElement().getValueAsEnum());
+    assertEquals("+4144000000000", fhirPatient2.getTelecom().get(0).getValue());
+
+    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(1).getUseElement().getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1).getSystemElement().getValueAsEnum());
+    assertEquals("+4188000000000", fhirPatient2.getTelecom().get(1).getValue());
+
+    assertEquals(ContactPointUseEnum.MOBILE, fhirPatient2.getTelecom().get(2).getUseElement().getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2).getSystemElement().getValueAsEnum());
+    assertEquals("+4176000000000", fhirPatient2.getTelecom().get(2).getValue());
+    
+    assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(3).getUseElement().getValueAsEnum());
+    assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3).getSystemElement().getValueAsEnum());
+    assertEquals("xyz@abc.ch", fhirPatient2.getTelecom().get(3).getValue());
 
   }
 

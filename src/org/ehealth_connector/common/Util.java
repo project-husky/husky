@@ -670,7 +670,7 @@ public class Util {
     HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
     for (TEL tel : telecoms) {
       if (tel.getValue().contains(type)) {
-        tl.put(tel.getValue(), AddressUse.getEnum(tel.getUses().get(0).getName()));
+        tl.put(tel.getValue(), (tel.getUses().size()>0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
       }
     }
     return tl;
