@@ -64,6 +64,10 @@ public class Destination {
 	/** The receiver facility oid  for PIX/PDQ V3 */
 	private String receiverFacilityOid; 
 
+	public Destination() {
+	  
+	}
+	
 	/**
 	 * Communication Endpoint for an unsecured XDS-b transaction.
 	 *
