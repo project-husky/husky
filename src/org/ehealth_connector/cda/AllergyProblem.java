@@ -134,6 +134,25 @@ public class AllergyProblem {
   }
 
   /**
+   * Adds the value.
+   *
+   * @param code the new value
+   */
+  public void addValue(Code code) {
+    CD mCodedProblem = EcoreUtil.copy(code.getCD());
+    mAllergyProblem.getValues().add(mCodedProblem);
+  }
+
+  /**
+   * Adds the value.
+   *
+   * @param value the new value
+   */
+  public void addValue(Value value) {
+    mAllergyProblem.getValues().add(value.getValue());
+  }
+
+  /**
    * <div class="de">Copy mdht allergy intolerance.</div> <div class="fr"></div> <div
    * class="it"></div>
    *
@@ -164,6 +183,21 @@ public class AllergyProblem {
       if (mAllergyProblem.getEffectiveTime().getHigh() != null) {
         return Util.createEurDateStrFromTS(mAllergyProblem.getEffectiveTime().getHigh().getValue());
       }
+    }
+    return null;
+  }
+
+  /**
+   * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte bekannte) ID für das
+   * Allergie Problem. Ist keine ID vorhanden, wird null zurückgegeben.</div> <div class="fr"></div>
+   * <div class="it"></div>
+   *
+   * @param id the new id
+   */
+  public Identificator getId() {
+    if (mAllergyProblem.getIds().size() > 0) {
+      Identificator id = new Identificator(mAllergyProblem.getIds().get(0));
+      return id;
     }
     return null;
   }
@@ -218,6 +252,20 @@ public class AllergyProblem {
   }
 
   /**
+   * Get a list of all problem values. Each Value may be a coded or uncoded String.
+   * 
+   * @return all problem values as ArrayList.
+   */
+  public ArrayList<Value> getValues() {
+    ArrayList<Value> vl = new ArrayList<Value>();
+    for (ANY a : mAllergyProblem.getValues()) {
+      Value v = new Value(a);
+      vl.add(v);
+    }
+    return vl;
+  }
+
+  /**
    * Sets the code.
    *
    * @param kindOfAllergy the new code
@@ -247,21 +295,6 @@ public class AllergyProblem {
   }
 
   /**
-   * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte bekannte) ID für das
-   * Allergie Problem. Ist keine ID vorhanden, wird null zurückgegeben.</div> <div class="fr"></div>
-   * <div class="it"></div>
-   *
-   * @param id the new id
-   */
-  public Identificator getId() {
-    if (mAllergyProblem.getIds().size() > 0) {
-      Identificator id = new Identificator(mAllergyProblem.getIds().get(0));
-      return id;
-    }
-    return null;
-  }
-
-  /**
    * Sets the problem not occured (negationId)
    *
    * @param notOccured true, if the problem is not occured, false otherwise.
@@ -287,38 +320,5 @@ public class AllergyProblem {
     catch (ParseException e) {
       e.printStackTrace();
     }
-  }
-
-  /**
-   * Adds the value.
-   *
-   * @param code the new value
-   */
-  public void addValue(Code code) {
-    CD mCodedProblem = EcoreUtil.copy(code.getCD());
-    mAllergyProblem.getValues().add(mCodedProblem);
-  }
-  
-  /**
-   * Adds the value.
-   *
-   * @param value the new value
-   */
-  public void addValue(Value value) {
-    mAllergyProblem.getValues().add(value.getValue());
-  }
-  
-  /**
-   * Get a list of all problem values. Each Value may be a coded or uncoded String.
-   * 
-   * @return all problem values as ArrayList.
-   */
-  public ArrayList<Value> getValues() {
-    ArrayList<Value> vl = new ArrayList<Value>();
-    for (ANY a : mAllergyProblem.getValues()) {
-      Value v = new Value(a);
-      vl.add(v);
-    }
-    return vl;
   }
 }

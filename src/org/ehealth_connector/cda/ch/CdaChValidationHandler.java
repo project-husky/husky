@@ -24,6 +24,6 @@ package org.ehealth_connector.cda.ch;
  */
 public class CdaChValidationHandler {
 
-	public CdaChValidationHandler() {
-	}
+  public CdaChValidationHandler() {
+  }
 }

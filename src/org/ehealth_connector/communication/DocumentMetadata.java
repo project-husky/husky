@@ -46,162 +46,252 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
  * */
 public class DocumentMetadata {
 
-	DocumentEntryType xDoc;
-	DocumentDescriptor xDesc;
-	ClinicalDocument cda;
-	CDAR2Extractor extractor;
+  /** The x doc. */
+  DocumentEntryType xDoc;
 
-	public DocumentMetadata() {
-		xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
-		extractor = new CDAR2Extractor(cda);
-	}
+  /** The x desc. */
+  DocumentDescriptor xDesc;
 
-	public DocumentMetadata(DocumentEntryType documentEntryType) {
-		this();
-		xDoc = documentEntryType;
-	}
+  /** The cda. */
+  ClinicalDocument cda;
 
-	//	//Constructor for File Documents
-	//	//If the Document is CDA, the Metadata will be extraced, otherwise it will just be tested, if the file is accessible
-	//	public DocumentMetadata(String filePath, DocumentDescriptor docDesc) throws Exception {
-	//		this();
-	//		File docEntryFile = new File (filePath);
-	//		fis = new FileInputStream(docEntryFile);
-	//		if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
-	//			ClinicalDocument clinicalDocument = CDAUtil.load(fis);
-	//			CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
-	//			xDoc = deExtractor.extract();
-	//		}
-	//		fis.close();
-	//	}
+  /** The extractor. */
+  CDAR2Extractor extractor;
 
-	//	/**
-	//	 * @param documentId
-	//	 *          Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
-	//	 *          angegeben.
-	//	 * @param versionId
-	//	 *          Nur anzugeben, wenn es sich nicht um die erste Version des
-	//	 *          Dokuments handelt. Die Version ist eine fortlaufende Nummer.
-	//	 * @param title
-	//	 *          Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
-	//	 *          Betreffzeile
-	//	 * @param codedLanguage
-	//	 *          In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
-	//	 *          (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
-	//	 * @param dateOfDocumentCreation
-	//	 *          Datum, an dem das Dokument erstellt wurde
-	//	 */
-	//	public DocumentMetadata(String documentId, String versionId, String title,
-	//			Language codedLanguage, Calendar dateOfDocumentCreation) {
-	////		this.documentId = documentId;
-	////		this.versionId = versionId;
-	////		this.title = title;
-	////		this.codedLanguage = codedLanguage;
-	////		this.dateOfDocumentCreation = dateOfDocumentCreation;
-	//	}
+  /**
+   * Instantiates a new document metadata.
+   */
+  public DocumentMetadata() {
+    xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
+    cda = CDAFactory.eINSTANCE.createClinicalDocument();
+    extractor = new CDAR2Extractor(cda);
+  }
 
-	public void addAuthor(Author author) {		
-		//Workaround for a Bug in the CDAR2Extractor, which causes a NullpointerException, if no Telecom value is interted and logger.Debug is set to true
-		if (author.getAuthorMdht().getAssignedAuthor().getTelecoms()==null || author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
-		}
+  /**
+   * Instantiates a new document metadata.
+   *
+   * @param documentEntryType the document entry type
+   */
+  public DocumentMetadata(DocumentEntryType documentEntryType) {
+    this();
+    xDoc = documentEntryType;
+  }
 
-		cda.getAuthors().add(author.copyMdhtAuthor());
+  //	//Constructor for File Documents
+  //	//If the Document is CDA, the Metadata will be extraced, otherwise it will just be tested, if the file is accessible
+  //	public DocumentMetadata(String filePath, DocumentDescriptor docDesc) throws Exception {
+  //		this();
+  //		File docEntryFile = new File (filePath);
+  //		fis = new FileInputStream(docEntryFile);
+  //		if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
+  //			ClinicalDocument clinicalDocument = CDAUtil.load(fis);
+  //			CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
+  //			xDoc = deExtractor.extract();
+  //		}
+  //		fis.close();
+  //	}
 
-		AuthorType xAuthor = extractor.extractAuthors().get(0);
-		xDoc.getAuthors().add(xAuthor);
-	}
+  //	/**
+  //	 * @param documentId
+  //	 *          Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
+  //	 *          angegeben.
+  //	 * @param versionId
+  //	 *          Nur anzugeben, wenn es sich nicht um die erste Version des
+  //	 *          Dokuments handelt. Die Version ist eine fortlaufende Nummer.
+  //	 * @param title
+  //	 *          Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
+  //	 *          Betreffzeile
+  //	 * @param codedLanguage
+  //	 *          In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
+  //	 *          (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
+  //	 * @param dateOfDocumentCreation
+  //	 *          Datum, an dem das Dokument erstellt wurde
+  //	 */
+  //	public DocumentMetadata(String documentId, String versionId, String title,
+  //			Language codedLanguage, Calendar dateOfDocumentCreation) {
+  ////		this.documentId = documentId;
+  ////		this.versionId = versionId;
+  ////		this.title = title;
+  ////		this.codedLanguage = codedLanguage;
+  ////		this.dateOfDocumentCreation = dateOfDocumentCreation;
+  //	}
 
-	public void addConfidentiallyCode(String code) {
-		//TODO Consider Enum here
-		xDoc.getConfidentialityCode().add(code);
-	}
+  /**
+   * Adds an (optional) author element. All information relevant for the XDS Document Metadata will be extracted from the Convencience API Author.
+   *
+   * @param author the author
+   */
+  @SuppressWarnings("unchecked")
+  public void addAuthor(Author author) {		
+    //Workaround for a Bug in the CDAR2Extractor, which causes a NullpointerException, if no Telecom value is interted and logger.Debug is set to true
+    if (author.getAuthorMdht().getAssignedAuthor().getTelecoms()==null || author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
+      TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+      author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
+    }
 
-	public DocumentEntryType copyMdhtDocumentEntryType() {
-		return EcoreUtil.copy(xDoc);
-	}
+    cda.getAuthors().add(author.copyMdhtAuthor());
 
-	public DocumentEntryType getMdhtDocumentEntryType() {
-		return xDoc;
-	}
+    AuthorType xAuthor = extractor.extractAuthors().get(0);
+    xDoc.getAuthors().add(xAuthor);
+  }
 
-	public void setClassCode(Code code) {
-		xDoc.setClassCode(XdsUtil.convertCode(code));
-	}
+  /**
+   * Adds the (optional) confidentially code (e.g. 'N' for 'normal')
+   *
+   * @param code the code
+   */
+  @SuppressWarnings("unchecked")
+  public void addConfidentiallyCode(String code) {
+    //TODO Consider Enum here
+    xDoc.getConfidentialityCode().add(code);
+  }
 
-	/**
-	 * @param codedLanguage
-	 *          das codedLanguage Objekt welches gesetzt wird
-	 */
-	public void setCodedLanguage(LanguageCode codedLanguage) {
-		xDoc.setLanguageCode(codedLanguage.getCodeValue());
-	}
+  /**
+   * Copy mdht document entry type.
+   *
+   * @return the document entry type
+   */
+  public DocumentEntryType copyMdhtDocumentEntryType() {
+    return EcoreUtil.copy(xDoc);
+  }
 
-	/**
-	 * @param dateOfDocumentCreation
-	 *          das dateOfDocumentCreation Objekt welches gesetzt wird
-	 */
-	public void setCreationTime(Date dateAndTime) {
-		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
-		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
-	}
+  /**
+   * Gets the mdht document entry type.
+   *
+   * @return the mdht document entry type
+   */
+  public DocumentEntryType getMdhtDocumentEntryType() {
+    return xDoc;
+  }
 
-	public void setFormatCode(Code code) {
-		xDoc.setFormatCode(XdsUtil.convertCode(code));
-	}
+  /**
+   * Sets the (required, but in principle computable) class code, which defines the class of the document (e.g. Code for "Consultation")
+   *
+   * @param code the new class code
+   */
+  public void setClassCode(Code code) {
+    xDoc.setClassCode(XdsUtil.convertCode(code));
+  }
 
-	public void setHealthcareFacilityTypeCode(Code code) {
-		//TODO Consider Enum here
-		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
-	}
+  /**
+   * Sets the (required) coded language (e.g. "de-CH"). This code can be extracted from CDA Document automatically.
+   *
+   * @param codedLanguage the new language code
+   */
+  public void setCodedLanguage(LanguageCode codedLanguage) {
+    xDoc.setLanguageCode(codedLanguage.getCodeValue());
+  }
 
-	public void setMimeType(String mimeType) {
-		xDoc.setMimeType(mimeType);
-	}
+  /**
+   * Sets the (required) creation time of the document. If not set, the current time will be used.
+   *
+   * @param dateAndTime the new creation time
+   */
+  public void setCreationTime(Date dateAndTime) {
+    final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
+    xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
+  }
 
-	public void setPatient(Patient patient) {
-		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
+  /**
+   * Sets the (required) format code. If not set, the system will try to derive it from the Document MimeType.
+   *
+   * @param code the new format code
+   */
+  public void setFormatCode(Code code) {
+    xDoc.setFormatCode(XdsUtil.convertCode(code));
+  }
 
-		//Source Patient Info (Adress etc.)
-		SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
-		xDoc.setSourcePatientInfo(spi);
+  /**
+   * Sets the (required) healthcare facility type code (e.g. Code for "Hospital")
+   *
+   * @param code the new healthcare facility type code
+   */
+  public void setHealthcareFacilityTypeCode(Code code) {
+    //TODO Consider Enum here
+    xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
+  }
 
-		//PatientID
-		//xDoc.setPatientId(extractor.extractPatientId());
+  /**
+   * Sets the (required) mime type (e.g. "text/xml")
+   *
+   * @param mimeType the new mime type
+   */
+  public void setMimeType(String mimeType) {
+    xDoc.setMimeType(mimeType);
+  }
 
-		if (patient.getIds() != null) {
-			setPatientId(patient.getIds().get(0));
-		}
-	}
+  /**
+   * Sets the (required) patient. All information relevant for the XDS Document Metadata will be extracted from the Convencience API Patient.
+   *
+   * @param patient the new patient
+   */
+  public void setPatient(Patient patient) {
+    cda.getRecordTargets().add(patient.getMdhtRecordTarget());
 
-	public void setPatientId(Identificator id) {
-		xDoc.setPatientId(XdsUtil.convertIdentificator(id));
-	}
+    //Source Patient Info (Adress etc.)
+    SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
+    xDoc.setSourcePatientInfo(spi);
 
-	public void setPracticeSettingCode (Code code) {
-		//TODO Consider Enum here
-		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
-	}
+    //PatientID
+    //xDoc.setPatientId(extractor.extractPatientId());
 
-	public void setSourcePatientId(Identificator id) {
-		xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
-	}
+    if (patient.getIds() != null) {
+      setPatientId(patient.getIds().get(0));
+    }
+  }
 
-	/**
-	 * @param title
-	 *          das title Objekt welches gesetzt wird
-	 */
-	public void setTitle(String title) {
-		xDoc.setTitle(XdsUtil.createInternationalString(title));
-	}
+  /**
+   * Sets the (required) patient id, which is used in the affinity domain (typically retrieved from a Master Patient Index (MPI))
+   *
+   * @param id the new patient id
+   */
+  public void setPatientId(Identificator id) {
+    xDoc.setPatientId(XdsUtil.convertIdentificator(id));
+  }
 
-	public void setTypeCode(Code code) {
-		xDoc.setTypeCode(XdsUtil.convertCode(code));
-	}
+  /**
+   * Sets the (required) practice setting code. This is the medical speciality of the practice where the document was produced (e.g. Code for "General Medicine")
+   *
+   * @param code the new practice setting code
+   */
+  public void setPracticeSettingCode (Code code) {
+    //TODO Consider Enum here
+    xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
+  }
 
-	public void setUniqueId(String id) {
-		xDoc.setUniqueId(id);
-	}
+  /**
+   * Sets the (required) source patient id. This is the local patient id, e.g. inside a hospital.
+   *
+   * @param id the new source patient id
+   */
+  public void setSourcePatientId(Identificator id) {
+    xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
+  }
+
+  /**
+   * Sets the (optional) title.
+   *
+   * @param title          das title Objekt welches gesetzt wird
+   */
+  public void setTitle(String title) {
+    xDoc.setTitle(XdsUtil.createInternationalString(title));
+  }
+
+  /**
+   * Sets the (required) type code. Specifies the type of the document (like the class code, but more specific) (e.g. Code for "Summarization of Episode Note")
+   *
+   * @param code the new type code
+   */
+  public void setTypeCode(Code code) {
+    xDoc.setTypeCode(XdsUtil.convertCode(code));
+  }
+
+  /**
+   * Sets the unique id. The UUID of the document. Will be generated, when the instance of class is retrieved from ConvenienceCommunication.addDocument() 
+   *
+   * @param id the new unique id
+   */
+  public void setUniqueId(String id) {
+    xDoc.setUniqueId(id);
+  }
 }

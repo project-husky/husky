@@ -54,7 +54,7 @@ public class Patient extends Person {
    */
   private Boolean multipleBirthInd;
 
-   /**
+  /**
    * The multipleBirthOrderNumber extension is used to record the order number within a multiple
    * birth that the recordTarget or subjectPerson was born in.
    */
@@ -272,6 +272,25 @@ public class Patient extends Person {
   }
 
   /**
+   * Gets the deceased Indicator
+   *
+   * @return the deceased ind
+   */
+  public Boolean getDeceasedInd() {
+    return deceasedInd;
+  }
+
+
+  /**
+   * Gets the deceased time.
+   *
+   * @return the deceased time
+   */
+  public Date getDeceasedTime() {
+    return deceasedTime;
+  }
+
+  /**
    * <div class="en">Gets the ids.</div> <div class="de">Liefert alle ids.</div> <div
    * class="fr"></div> <div class="it"></div>
    * 
@@ -285,7 +304,6 @@ public class Patient extends Person {
     }
     return il;
   }
-
 
   /**
    * <div class="en">Gets the mdht patient.</div> <div class="de">Liefert mdht patient.</div> <div
@@ -315,6 +333,24 @@ public class Patient extends Person {
    */
   public RecordTarget getMdhtRecordTarget() {
     return mRecordTarget;
+  }
+
+  /**
+   * Gets the multiple birth Indictator
+   *
+   * @return the multiple birth ind
+   */
+  public Boolean getMultipleBirthInd() {
+    return multipleBirthInd;
+  }
+
+  /**
+   * Gets the multiple birth order number.
+   *
+   * @return the multiple birth order number
+   */
+  public Integer getMultipleBirthOrderNumber() {
+    return multipleBirthOrderNumber;
   }
 
   /*
@@ -359,6 +395,7 @@ public class Patient extends Person {
     return sdf.parse(value);
   }
 
+
   /**
    * <div class="en">Sets the gender.</div> <div class="de">Setzt gender.</div> <div
    * class="fr"></div> <div class="it"></div>
@@ -388,26 +425,22 @@ public class Patient extends Person {
   }
 
   /**
-   * <div class="en">Sets the telecoms.</div> <div class="de">Setzt telecoms.</div> <div
-   * class="fr"></div> <div class="it"></div>
-   * 
-   * 
-   * @param telecoms <div class="en">the new telecoms</div> <div class="de">das neue telecoms.</div>
-   *        <div class="fr"></div> <div class="it"></div>
-   */
-  public void setTelecoms(Telecoms telecoms) {
-    mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
-  }
-  
-  /**
-   * Gets the multiple birth Indictator
+   * Sets the deceased Indicator
    *
-   * @return the multiple birth ind
+   * @param deceasedInd the new deceased ind
    */
-  public Boolean getMultipleBirthInd() {
-    return multipleBirthInd;
+  public void setDeceasedInd(Boolean deceasedInd) {
+    this.deceasedInd = deceasedInd;
   }
 
+  /**
+   * Sets the deceased time.
+   *
+   * @param deceasedTime the new deceased time
+   */
+  public void setDeceasedTime(Date deceasedTime) {
+    this.deceasedTime = deceasedTime;
+  }
 
   /**
    * Sets the multiple birth Indicator
@@ -416,15 +449,6 @@ public class Patient extends Person {
    */
   public void setMultipleBirthInd(Boolean multipleBirthInd) {
     this.multipleBirthInd = multipleBirthInd;
-  }
-
-  /**
-   * Gets the multiple birth order number.
-   *
-   * @return the multiple birth order number
-   */
-  public Integer getMultipleBirthOrderNumber() {
-    return multipleBirthOrderNumber;
   }
 
   /**
@@ -437,38 +461,14 @@ public class Patient extends Person {
   }
 
   /**
-   * Gets the deceased Indicator
-   *
-   * @return the deceased ind
+   * <div class="en">Sets the telecoms.</div> <div class="de">Setzt telecoms.</div> <div
+   * class="fr"></div> <div class="it"></div>
+   * 
+   * 
+   * @param telecoms <div class="en">the new telecoms</div> <div class="de">das neue telecoms.</div>
+   *        <div class="fr"></div> <div class="it"></div>
    */
-  public Boolean getDeceasedInd() {
-    return deceasedInd;
-  }
-
-  /**
-   * Sets the deceased Indicator
-   *
-   * @param deceasedInd the new deceased ind
-   */
-  public void setDeceasedInd(Boolean deceasedInd) {
-    this.deceasedInd = deceasedInd;
-  }
-
-  /**
-   * Gets the deceased time.
-   *
-   * @return the deceased time
-   */
-  public Date getDeceasedTime() {
-    return deceasedTime;
-  }
-
-  /**
-   * Sets the deceased time.
-   *
-   * @param deceasedTime the new deceased time
-   */
-  public void setDeceasedTime(Date deceasedTime) {
-    this.deceasedTime = deceasedTime;
+  public void setTelecoms(Telecoms telecoms) {
+    mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
   }
 }

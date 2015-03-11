@@ -283,6 +283,19 @@ public class Util {
     return tel;
   }
 
+  public static II createIdentificator(Identificator id) {
+    II ii;
+    if (id==null) {
+      ii = DatatypesFactory.eINSTANCE.createII();
+      ii.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
+      ii.setExtension(UUID.generate());
+    }
+    else {
+      ii = id.getIi();
+    }
+    return ii;
+  }
+
   /**
    * <div class="en">Creates the iv l_ pq null flavor na.</div>
    * <div class="de"></div>
@@ -432,6 +445,8 @@ public class Util {
     return DatatypesFactory.eINSTANCE.createED();
   }
 
+
+
   /**
    * <div class="en">Creates the reference.</div>
    * <div class="de"></div>
@@ -458,8 +473,6 @@ public class Util {
     text.setReference(tel);
     return text;
   }
-
-
 
   /**
    * <div class="en">Creates the tel.</div>
@@ -506,19 +519,6 @@ public class Util {
     }
     else {
       ii.setRoot(id);
-    }
-    return ii;
-  }
-
-  public static II createIdentificator(Identificator id) {
-    II ii;
-    if (id==null) {
-      ii = DatatypesFactory.eINSTANCE.createII();
-      ii.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
-      ii.setExtension(UUID.generate());
-    }
-    else {
-      ii = id.getIi();
     }
     return ii;
   }

@@ -19,8 +19,6 @@
 package org.ehealth_connector.communication;
 
 import java.net.URI;
-import java.security.KeyStore;
-import java.security.PrivateKey;
 
 /**
  * The Class Destination.
@@ -31,249 +29,249 @@ import java.security.PrivateKey;
  */
 public class Destination {
 
-	/**
-	 * URI for the XDS Registry
-	 */
-	private URI registryUri;
-	
-	public URI getRegistryUri() {
-      return registryUri;
-    }
+  /**
+   * URI for the XDS Registry
+   */
+  private URI registryUri;
 
-    private String senderOrganizationalOid;
-	private String keyStore = null;
-	private String keyStorePassword;
-	private String trustStore;
-	private String trustStorePassword;
+  private String senderOrganizationalOid;
 
-	/** URI for pix Source ITI-44. */
-	private URI pixSourceUri; 
+  private String keyStore = null;
+  private String keyStorePassword;
+  private String trustStore;
+  private String trustStorePassword;
+  /** URI for pix Source ITI-44. */
+  private URI pixSourceUri;
 
-	/** URI for pix Query ITI-45. */
-	private URI pixQueryUri; 
+  /** URI for pix Query ITI-45. */
+  private URI pixQueryUri; 
 
-	/** The sender application oid for PIX/PDQ V3. */
-	private String senderApplicationOid; 
+  /** The sender application oid for PIX/PDQ V3. */
+  private String senderApplicationOid; 
 
-	/** The sender facility oid for PIX/PDQ V3 and XDS */
-	private String senderFacilityOid;
+  /** The sender facility oid for PIX/PDQ V3 and XDS */
+  private String senderFacilityOid; 
 
-	/** The receiver application oid for PIX/PDQ V3 */
-	private String receiverApplicationOid; 
+  /** The receiver application oid for PIX/PDQ V3 */
+  private String receiverApplicationOid;
 
-	/** The receiver facility oid  for PIX/PDQ V3 */
-	private String receiverFacilityOid; 
+  /** The receiver facility oid  for PIX/PDQ V3 */
+  private String receiverFacilityOid; 
 
-	public Destination() {
-	  
-	}
-	
-	/**
-	 * Communication Endpoint for an unsecured XDS-b transaction.
-	 *
-	 * @param senderOrganizationalOid Oid of the Sender Organization
-	 * @param repositoryUri URI of the communication endpoint
-	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri) {
-		this.registryUri = repositoryUri;
-		this.senderOrganizationalOid = senderOrganizationalOid;
-	}
-	
-	 /**
-     * Communication Endpoint for a TLS-secured XDS-b transaction with a single keystore that combines keystore and truststore.
-     *
-     * @param repositoryUri URI of the communication endpoint
-     * @param keyStore path to the keystore file
-     * @param keyStorePassword the password for the keystore file
-     */
-    public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword) {
-        this(senderOrganizationalOid, repositoryUri);
-        this.keyStore = keyStore;
-        this.keyStorePassword = keyStorePassword;
-        this.trustStore = keyStore;
-        this.trustStorePassword = keyStorePassword;
-    }
+  public Destination() {
 
-	/**
-	 * Communication Endpoint for a TLS-secured XDS-b transaction with a seperate keystore and truststore.
-	 *
-	 * @param repositoryUri URI of the communication endpoint
-     * @param keyStore path to the keystore file
-     * @param keyStorePassword the password for the keystore file
-     * @param trustStore path to the truststore file
-     * @param trustStorePassword the password for the truststore file
-	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword, String trustStore, String trustStorePassword) {
-		this(senderOrganizationalOid, repositoryUri);
-		this.keyStore = keyStore;
-		this.keyStorePassword = keyStorePassword;
-		this.trustStore = trustStore;
-		this.trustStorePassword = trustStorePassword;
-	}
-	
-	public void setRegistryUri(URI registryUri) {
-	    this.registryUri = registryUri;
-	  }
+  } 
 
-	  public String getSenderOrganizationalOid() {
-	    return senderOrganizationalOid;
-	  }
+  /**
+   * Communication Endpoint for an unsecured XDS-b transaction.
+   *
+   * @param senderOrganizationalOid Oid of the Sender Organization
+   * @param repositoryUri URI of the communication endpoint
+   */
+  public Destination(String senderOrganizationalOid, URI repositoryUri) {
+    registryUri = repositoryUri;
+    this.senderOrganizationalOid = senderOrganizationalOid;
+  }
 
-	  public void setSenderOrganizationalOid(String senderOrganizationalOid) {
-	    this.senderOrganizationalOid = senderOrganizationalOid;
-	  }
+  /**
+   * Communication Endpoint for a TLS-secured XDS-b transaction with a single keystore that combines keystore and truststore.
+   *
+   * @param repositoryUri URI of the communication endpoint
+   * @param keyStore path to the keystore file
+   * @param keyStorePassword the password for the keystore file
+   */
+  public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword) {
+    this(senderOrganizationalOid, repositoryUri);
+    this.keyStore = keyStore;
+    this.keyStorePassword = keyStorePassword;
+    trustStore = keyStore;
+    trustStorePassword = keyStorePassword;
+  }
 
-	  public String getKeyStore() {
-	    return keyStore;
-	  }
+  /**
+   * Communication Endpoint for a TLS-secured XDS-b transaction with a seperate keystore and truststore.
+   *
+   * @param repositoryUri URI of the communication endpoint
+   * @param keyStore path to the keystore file
+   * @param keyStorePassword the password for the keystore file
+   * @param trustStore path to the truststore file
+   * @param trustStorePassword the password for the truststore file
+   */
+  public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore, String keyStorePassword, String trustStore, String trustStorePassword) {
+    this(senderOrganizationalOid, repositoryUri);
+    this.keyStore = keyStore;
+    this.keyStorePassword = keyStorePassword;
+    this.trustStore = trustStore;
+    this.trustStorePassword = trustStorePassword;
+  }
 
-	  public void setKeyStore(String keyStore) {
-	    this.keyStore = keyStore;
-	  }
+  public String getKeyStore() {
+    return keyStore;
+  }
 
-	  public String getKeyStorePassword() {
-	    return keyStorePassword;
-	  }
+  public String getKeyStorePassword() {
+    return keyStorePassword;
+  }
 
-	  public void setKeyStorePassword(String keyStorePassword) {
-	    this.keyStorePassword = keyStorePassword;
-	  }
+  /**
+   * Gets the pix query uri.
+   *
+   * @return the pix query uri
+   */
+  public URI getPixQueryUri() {
+    return pixQueryUri;
+  }
 
-	  public String getTrustStore() {
-	    return trustStore;
-	  }
+  /**
+   * Gets the pix source uri.
+   *
+   * @return the pix source uri
+   */
+  public URI getPixSourceUri() {
+    return pixSourceUri;
+  }
 
-	  public void setTrustStore(String trustStore) {
-	    this.trustStore = trustStore;
-	  }
+  /**
+   * Gets the receiver application oid.
+   *
+   * @return the receiver application oid
+   */
+  public String getReceiverApplicationOid() {
+    return receiverApplicationOid;
+  }
 
-	  public String getTrustStorePassword() {
-	    return trustStorePassword;
-	  }
+  /**
+   * Gets the receiver facility oid.
+   *
+   * @return the receiver facility oid
+   */
+  public String getReceiverFacilityOid() {
+    return receiverFacilityOid;
+  }
 
-	  /**
-  	 * <div class="en">Sets the trust store password.</div>
-  	 * <div class="de">Setzt trust store password.</div>
-  	 * <div class="fr"></div>
-  	 * <div class="it"></div>
-  	 *  
-  	 *
-  	 * @param trustStorePassword <div class="en">the new trust store password</div>
-  	 * <div class="de">das neue trust store password.</div>
-  	 * <div class="fr"></div>
-  	 * <div class="it"></div>
-  	 */
-  	public void setTrustStorePassword(String trustStorePassword) {
-	    this.trustStorePassword = trustStorePassword;
-	  }
+  public URI getRegistryUri() {
+    return registryUri;
+  }
 
-	/**
-	 * Gets the pix query uri.
-	 *
-	 * @return the pix query uri
-	 */
-	public URI getPixQueryUri() {
-		return pixQueryUri;
-	}
+  /**
+   * Gets the sender application oid.
+   *
+   * @return the sender application oid
+   */
+  public String getSenderApplicationOid() {
+    return senderApplicationOid;
+  }
 
-	/**
-	 * Gets the pix source uri.
-	 *
-	 * @return the pix source uri
-	 */
-	public URI getPixSourceUri() {
-		return pixSourceUri;
-	}
+  /**
+   * Gets the sender facility oid.
+   *
+   * @return the sender facility oid
+   */
+  public String getSenderFacilityOid() {
+    return senderFacilityOid;
+  }
 
-	/**
-	 * Gets the receiver application oid.
-	 *
-	 * @return the receiver application oid
-	 */
-	public String getReceiverApplicationOid() {
-		return receiverApplicationOid;
-	}
+  public String getSenderOrganizationalOid() {
+    return senderOrganizationalOid;
+  }
 
-	/**
-	 * Gets the receiver facility oid.
-	 *
-	 * @return the receiver facility oid
-	 */
-	public String getReceiverFacilityOid() {
-		return receiverFacilityOid;
-	}
+  public String getTrustStore() {
+    return trustStore;
+  }
 
-	/**
-	 * Gets the sender application oid.
-	 *
-	 * @return the sender application oid
-	 */
-	public String getSenderApplicationOid() {
-		return senderApplicationOid;
-	}
+  public String getTrustStorePassword() {
+    return trustStorePassword;
+  }
 
-	/**
-	 * Gets the sender facility oid.
-	 *
-	 * @return the sender facility oid
-	 */
-	public String getSenderFacilityOid() {
-		return senderFacilityOid;
-	}
+  public void setKeyStore(String keyStore) {
+    this.keyStore = keyStore;
+  }
 
-	/**
-	 * Sets the pix query uri.
-	 *
-	 * @param pixQueryUri the new pix query uri
-	 */
-	public void setPixQueryUri(URI pixQueryUri) {
-		this.pixQueryUri = pixQueryUri;
-	}
+  public void setKeyStorePassword(String keyStorePassword) {
+    this.keyStorePassword = keyStorePassword;
+  }
 
-	/**
-	 * Sets the pix source uri.
-	 *
-	 * @param pixSourceUri the new pix source uri
-	 */
-	public void setPixSourceUri(URI pixSourceUri) {
-		this.pixSourceUri = pixSourceUri;
-	}
+  /**
+   * Sets the pix query uri.
+   *
+   * @param pixQueryUri the new pix query uri
+   */
+  public void setPixQueryUri(URI pixQueryUri) {
+    this.pixQueryUri = pixQueryUri;
+  }
 
-	/**
-	 * Sets the receiver application oid.
-	 *
-	 * @param receiverApplicationOid the new receiver application oid
-	 */
-	public void setReceiverApplicationOid(String receiverApplicationOid) {
-		this.receiverApplicationOid = receiverApplicationOid;
-	}
+  /**
+   * Sets the pix source uri.
+   *
+   * @param pixSourceUri the new pix source uri
+   */
+  public void setPixSourceUri(URI pixSourceUri) {
+    this.pixSourceUri = pixSourceUri;
+  }
 
-	/**
-	 * Sets the receiver facility oid.
-	 *
-	 * @param receiverFacilityOid the new receiver facility oid
-	 */
-	public void setReceiverFacilityOid(String receiverFacilityOid) {
-		this.receiverFacilityOid = receiverFacilityOid;
-	}
+  /**
+   * Sets the receiver application oid.
+   *
+   * @param receiverApplicationOid the new receiver application oid
+   */
+  public void setReceiverApplicationOid(String receiverApplicationOid) {
+    this.receiverApplicationOid = receiverApplicationOid;
+  }
 
-	/**
-	 * Sets the sender application oid.
-	 *
-	 * @param senderApplicationOid the new sender application oid
-	 */
-	public void setSenderApplicationOid(String senderApplicationOid) {
-		this.senderApplicationOid = senderApplicationOid;
-	}
+  /**
+   * Sets the receiver facility oid.
+   *
+   * @param receiverFacilityOid the new receiver facility oid
+   */
+  public void setReceiverFacilityOid(String receiverFacilityOid) {
+    this.receiverFacilityOid = receiverFacilityOid;
+  }
 
-	/**
-	 * Sets the sender facility oid.
-	 *
-	 * @param senderFacilityOid the new sender facility oid
-	 */
-	public void setSenderFacilityOid(String senderFacilityOid) {
-		this.senderFacilityOid = senderFacilityOid;
-	}
+  public void setRegistryUri(URI registryUri) {
+    this.registryUri = registryUri;
+  }
+
+  /**
+   * Sets the sender application oid.
+   *
+   * @param senderApplicationOid the new sender application oid
+   */
+  public void setSenderApplicationOid(String senderApplicationOid) {
+    this.senderApplicationOid = senderApplicationOid;
+  }
+
+  /**
+   * Sets the sender facility oid.
+   *
+   * @param senderFacilityOid the new sender facility oid
+   */
+  public void setSenderFacilityOid(String senderFacilityOid) {
+    this.senderFacilityOid = senderFacilityOid;
+  }
+
+  public void setSenderOrganizationalOid(String senderOrganizationalOid) {
+    this.senderOrganizationalOid = senderOrganizationalOid;
+  }
+
+  public void setTrustStore(String trustStore) {
+    this.trustStore = trustStore;
+  }
+
+  /**
+   * <div class="en">Sets the trust store password.</div>
+   * <div class="de">Setzt trust store password.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *  
+   *
+   * @param trustStorePassword <div class="en">the new trust store password</div>
+   * <div class="de">das neue trust store password.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public void setTrustStorePassword(String trustStorePassword) {
+    this.trustStorePassword = trustStorePassword;
+  }
 
 
 }

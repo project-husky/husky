@@ -33,14 +33,6 @@ public interface MpiAdapterInterface {
   abstract boolean addPatient(FhirPatient patient);
 
   /**
-   * updates the demographic information of the patient in the mpi.
-   * 
-   * @param patient the patient
-   * @return if success true, false otherwise
-   */
-  abstract boolean updatePatient(FhirPatient patient);
-
-  /**
    * a patient referenced with the obsolete id will be merged into supplied patient.
    * 
    * @param patient the patient
@@ -60,5 +52,13 @@ public interface MpiAdapterInterface {
    */
   abstract String[] queryPatientId(FhirPatient patient, String queryDomainOids[],
       String queryDomainNamespaces[]);
+
+  /**
+   * updates the demographic information of the patient in the mpi.
+   * 
+   * @param patient the patient
+   * @return if success true, false otherwise
+   */
+  abstract boolean updatePatient(FhirPatient patient);
 
 }

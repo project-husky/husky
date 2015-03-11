@@ -28,76 +28,76 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
  */
 public class Comment {
 
-	/** The m comment. */
-	org.openhealthtools.mdht.uml.cda.ihe.Comment mComment;
+  /** The m comment. */
+  org.openhealthtools.mdht.uml.cda.ihe.Comment mComment;
 
-	/**
-	 * Instantiates a new comment.
-	 */
-	public Comment() {
-		mComment = IHEFactory.eINSTANCE.createComment().init();
-	}
+  /**
+   * Instantiates a new comment.
+   */
+  public Comment() {
+    mComment = IHEFactory.eINSTANCE.createComment().init();
+  }
 
-	/**
-	 * Instantiates a new comment.
-	 *
-	 * @param comment <br>
-	 * 		<div class="de">Kommentar</div>
-	 * 		<div class="fr"> comment</div>
-	 * 		<div class="it"> comment</div>
-	 */
-	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
-		mComment = comment;
-	}
+  /**
+   * Instantiates a new comment.
+   *
+   * @param comment <br>
+   * 		<div class="de">Kommentar</div>
+   * 		<div class="fr"> comment</div>
+   * 		<div class="it"> comment</div>
+   */
+  public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
+    mComment = comment;
+  }
 
-	/**
-	 * Instantiates a new comment.
-	 *
-	 * @param text <br>
-	 * 		<div class="de"> Kommentar</div>
-	 * 		<div class="fr"> text</div>
-	 * 		<div class="it"> text</div>
-	 */
-	public Comment (String text) {
-		mComment = IHEFactory.eINSTANCE.createComment().init();
-		setText(text);
-	}
+  /**
+   * Instantiates a new comment.
+   *
+   * @param text <br>
+   * 		<div class="de"> Kommentar</div>
+   * 		<div class="fr"> text</div>
+   * 		<div class="it"> text</div>
+   */
+  public Comment (String text) {
+    mComment = IHEFactory.eINSTANCE.createComment().init();
+    setText(text);
+  }
 
-	/**
-	 * <div class="de">Copy mdht comment.</div>
-	 * <div class="fr">Copy mdht comment.</div>
-	 * <div class="it">Copy mdht comment.</div>
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda.ihe. comment
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.Comment copyMdhtComment() {
-		return EcoreUtil.copy(mComment);
-	}
+  /**
+   * <div class="de">Copy mdht comment.</div>
+   * <div class="fr">Copy mdht comment.</div>
+   * <div class="it">Copy mdht comment.</div>
+   *
+   * @return the org.openhealthtools.mdht.uml.cda.ihe. comment
+   */
+  public org.openhealthtools.mdht.uml.cda.ihe.Comment copyMdhtComment() {
+    return EcoreUtil.copy(mComment);
+  }
 
-	/**
-	 * Gets the mdht comment.
-	 *
-	 * @return the mdht comment
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.Comment getMdhtComment() {
-		return mComment;
-	}
+  /**
+   * Gets the mdht comment.
+   *
+   * @return the mdht comment
+   */
+  public org.openhealthtools.mdht.uml.cda.ihe.Comment getMdhtComment() {
+    return mComment;
+  }
 
-	/**
-	 * Gets the text.
-	 *
-	 * @return the text
-	 */
-	public String getText() {
-		return mComment.getText().getText();
-	}
+  /**
+   * Gets the text.
+   *
+   * @return the text
+   */
+  public String getText() {
+    return mComment.getText().getText();
+  }
 
-	/**
-	 * Sets the text.
-	 *
-	 * @param text the new text
-	 */
-	public void setText(String text) {
-		mComment.setText(Util.createEd(text));
-	}
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
+  public void setText(String text) {
+    mComment.setText(Util.createEd(text));
+  }
 }

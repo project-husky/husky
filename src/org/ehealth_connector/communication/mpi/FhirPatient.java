@@ -149,14 +149,14 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
             && homeAddress.getMdhtAdress().getCountries().size() > 0) {
           addressDt.setCountry(homeAddress.getMdhtAdress().getCountries().get(0).getText());
         }
-        this.getAddress().add(addressDt);
+        getAddress().add(addressDt);
       } else {
         log.error("adress specified, but no home address");
       }
     }
     for (Identificator ident : patient.getIds()) {
-      this.getIdentifier()
-          .add(new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
+      getIdentifier()
+      .add(new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
     }
     Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
     if (organization != null) {
@@ -170,12 +170,12 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         identifier.setSystem("urn:oid:" + ii.getRoot());
         fhirOrganization.getIdentifier().add(identifier);
       }
-      
+
       if (organization.getNames()!=null && organization.getNames().size()>0) {
         String name = organization.getNames().get(0).getText();
         fhirOrganization.setName(name);
       }
-      
+
       if (organization.getTelecoms()!=null && organization.getTelecoms().size()>0) {
         TEL tel = organization.getTelecoms().get(0);
         ContactPointDt fhirTel = fhirOrganization.addTelecom();
@@ -185,7 +185,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       }
       getManagingOrganization().setResource(fhirOrganization);
     }
-    
+
     if (patient.getTelecoms()!=null) {
       for(TEL tel : patient.getTelecoms().getMdhtTelecoms()) {
         ContactPointDt contactPointDt = new ContactPointDt();
@@ -211,7 +211,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         contactPointDt.setSystem(system);
         contactPointDt.setUse(use);
         contactPointDt.setValue(value);
-        this.getTelecom().add(contactPointDt);
+        getTelecom().add(contactPointDt);
       }
     }
   }
@@ -224,7 +224,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     AdministrativeGender patientGender = null;
     Date patientBirthdate = null;
 
-    HumanNameDt humanDt = this.getNameFirstRep();
+    HumanNameDt humanDt = getNameFirstRep();
     if (humanDt != null) {
       for (StringDt name : humanDt.getPrefix()) {
         pn.addPrefix(name.getValue());
@@ -306,15 +306,15 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       PatientRole patientRole = patient.getMdhtPatientRole();
       Organization organization = CDAFactory.eINSTANCE.createOrganization();
       org.ehealth_connector.common.Organization convenienceOrganization = new org.ehealth_connector.common.Organization(organization);
-      
+
       patientRole.setProviderOrganization(organization);
       ca.uhn.fhir.model.dstu2.resource.Organization org =
           (ca.uhn.fhir.model.dstu2.resource.Organization) getManagingOrganization().getResource();
-      
+
       if (org!=null && org.getName()!=null) {
         convenienceOrganization.addName(org.getName());
       }
-      
+
       if (org!=null && org.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
         String oid = "";
         oid = org.getIdentifierFirstRep().getSystem().substring(8);
@@ -329,7 +329,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         }
       }
     }
-    
+
     // telecommunications
     if (getTelecom().size()>0) {
       Telecoms telecoms = new Telecoms();
@@ -359,7 +359,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         patient.setTelecoms(telecoms);
       }
     }
-    
+
 
     return patient;
   }

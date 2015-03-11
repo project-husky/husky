@@ -21,46 +21,46 @@ package org.ehealth_connector.communication;
  */
 public class AtnaConfig {
 
-	/** The audit repository uri. */
-	private String auditRepositoryUri;
+  /** The audit repository uri. */
+  private String auditRepositoryUri;
 
-	/** The audit source id. */
-	private String auditSourceId;
+  /** The audit source id. */
+  private String auditSourceId;
 
-	/**
-	 * Gets the audit repository uri.
-	 *
-	 * @return the audit repository uri
-	 */
-	public String getAuditRepositoryUri() {
-		return auditRepositoryUri;
-	}
+  /**
+   * Gets the audit repository uri.
+   *
+   * @return the audit repository uri
+   */
+  public String getAuditRepositoryUri() {
+    return auditRepositoryUri;
+  }
 
-	/**
-	 * Gets the audit source id.
-	 *
-	 * @return the audit source id
-	 */
-	public String getAuditSourceId() {
-		return auditSourceId;
-	}
+  /**
+   * Gets the audit source id.
+   *
+   * @return the audit source id
+   */
+  public String getAuditSourceId() {
+    return auditSourceId;
+  }
 
-	/**
-	 * Sets the audit repository uri.
-	 *
-	 * @param auditRepositoryUri the new audit repository uri
-	 */
-	public void setAuditRepositoryUri(String auditRepositoryUri) {
-		this.auditRepositoryUri = auditRepositoryUri;
-	}
+  /**
+   * Sets the audit repository uri.
+   *
+   * @param auditRepositoryUri the new audit repository uri
+   */
+  public void setAuditRepositoryUri(String auditRepositoryUri) {
+    this.auditRepositoryUri = auditRepositoryUri;
+  }
 
-	/**
-	 * Sets the audit source id.
-	 *
-	 * @param auditSourceId the new audit source id
-	 */
-	public void setAuditSourceId(String auditSourceId) {
-		this.auditSourceId = auditSourceId;
-	}
+  /**
+   * Sets the audit source id.
+   *
+   * @param auditSourceId the new audit source id
+   */
+  public void setAuditSourceId(String auditSourceId) {
+    this.auditSourceId = auditSourceId;
+  }
 
 }

@@ -33,107 +33,15 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  */
 public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
-  private Log log = LogFactory.getLog(InMemoryMockMpiAdapter.class);
-
-  /** The home community oid */
-  private String homeCommunityOid;
-
   static private HashMap<String, FhirPatient> map = new HashMap<String, FhirPatient>();
 
   /** The mpi community oid. */
   static private String mpiCommunityOid = UUID.generate();
 
-  /**
-   * gets the patient identifier defined by the system which issued the patient identifier.
-   * 
-   * @param patient the Patient
-   * @param system the system responsible which issued the patient identifer
-   * @return the patient id
-   */
-  private String getPatientId(FhirPatient patient, String system) {
-    initHomeCommunityId(patient);
-    for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      if (identifierDt.getSystem().equals(system)) {
-        return identifierDt.getValue();
-      }
-    }
-    return null;
-  }
+  private Log log = LogFactory.getLog(InMemoryMockMpiAdapter.class);
 
-  /**
-   * resets the mpi, mpi data is static.
-   */
-  public void clear() {
-    map = new HashMap<String, FhirPatient>();
-  }
-
-  /**
-   * Gets the home community patient id.
-   * 
-   * @param patient the patient
-   * @return the home community patient id
-   */
-  private String getHomeCommunityPatientId(FhirPatient patient) {
-    initHomeCommunityId(patient);
-    return getPatientId(patient, "urn:oid:"+this.homeCommunityOid);
-  }
-
-  /**
-   * Gets the mpi patient id.
-   * 
-   * @param patient the patient
-   * @return the mpi patient id
-   */
-  private String getMpiPatientId(FhirPatient patient) {
-    initHomeCommunityId(patient);
-    return getPatientId(patient, "urn:oid:"+mpiCommunityOid);
-  }
-
-
-  /**
-   * Inits the home community id.
-   * 
-   * @param patient the patient
-   */
-  private void initHomeCommunityId(FhirPatient patient) {
-    if (homeCommunityOid == null) {
-      if (patient.getIdentifier().size() == 1) {
-        String system = patient.getIdentifier().get(0).getSystem();
-        if (system.length()>8) {
-          //"urn:oid:"+
-          homeCommunityOid =system.substring(8);
-        } else {
-          throw new IllegalStateException("system has to start with urn:oid:");
-        }
-      } else {
-        throw new IllegalStateException("homeCommunityId has to be specified");
-      }
-    }
-  }
-
-  /**
-   * Gets the internal map key.
-   * 
-   * @param homeCommunityPatientId the home community patient id
-   * @return the map key
-   */
-  private String getMapKey(String homeCommunityPatientId) {
-    return homeCommunityOid + "-" + homeCommunityPatientId;
-  }
-
-  /**
-   * Gets the internal map key.
-   * 
-   * @param patient the patient
-   * @return the map key
-   */
-  private String getMapKey(FhirPatient patient) {
-    String homeCommunityPatientId = getHomeCommunityPatientId(patient);
-    if (homeCommunityPatientId == null) {
-      return null;
-    }
-    return getMapKey(homeCommunityPatientId);
-  }
+  /** The home community oid */
+  private String homeCommunityOid;
 
   /**
    * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.communication.mpi.FhirPatient)
@@ -163,38 +71,101 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
       return true;
     } else {
       log.error("patient has no homeCommunityPatientId of "
-          + this.getHomeCommunityPatientId(patient));
+          + getHomeCommunityPatientId(patient));
     }
     return false;
   }
 
   /**
-   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
+   * resets the mpi, mpi data is static.
    */
-  @Override
-  public boolean updatePatient(FhirPatient patient) {
-    if (patient == null) {
-      log.debug("patient is null");
-      return false;
+  public void clear() {
+    map = new HashMap<String, FhirPatient>();
+  }
+
+  /**
+   * Gets the home community patient id.
+   * 
+   * @param patient the patient
+   * @return the home community patient id
+   */
+  private String getHomeCommunityPatientId(FhirPatient patient) {
+    initHomeCommunityId(patient);
+    return getPatientId(patient, "urn:oid:"+homeCommunityOid);
+  }
+
+  /**
+   * Gets the internal map key.
+   * 
+   * @param patient the patient
+   * @return the map key
+   */
+  private String getMapKey(FhirPatient patient) {
+    String homeCommunityPatientId = getHomeCommunityPatientId(patient);
+    if (homeCommunityPatientId == null) {
+      return null;
     }
-    String mapKey = this.getMapKey(patient);
-    if (mapKey != null) {
-      if (map.containsKey(mapKey)) {
-        FhirPatient oldPatient = map.get(mapKey);
-        FhirPatient immutablePatient = new FhirPatient();
-        // TODO: just copied the id of the patient currently, no demographic data
-        immutablePatient.setIdentifier(patient.getIdentifier());
-        IdentifierDt id = immutablePatient.addIdentifier();
-        id.setSystem("urn:oid:"+mpiCommunityOid);
-        id.setValue(getMpiPatientId(oldPatient));
-        map.put(mapKey, immutablePatient);
-        return true;
+    return getMapKey(homeCommunityPatientId);
+  }
+
+
+  /**
+   * Gets the internal map key.
+   * 
+   * @param homeCommunityPatientId the home community patient id
+   * @return the map key
+   */
+  private String getMapKey(String homeCommunityPatientId) {
+    return homeCommunityOid + "-" + homeCommunityPatientId;
+  }
+
+  /**
+   * Gets the mpi patient id.
+   * 
+   * @param patient the patient
+   * @return the mpi patient id
+   */
+  private String getMpiPatientId(FhirPatient patient) {
+    initHomeCommunityId(patient);
+    return getPatientId(patient, "urn:oid:"+mpiCommunityOid);
+  }
+
+  /**
+   * gets the patient identifier defined by the system which issued the patient identifier.
+   * 
+   * @param patient the Patient
+   * @param system the system responsible which issued the patient identifer
+   * @return the patient id
+   */
+  private String getPatientId(FhirPatient patient, String system) {
+    initHomeCommunityId(patient);
+    for (IdentifierDt identifierDt : patient.getIdentifier()) {
+      if (identifierDt.getSystem().equals(system)) {
+        return identifierDt.getValue();
       }
-      log.error("patient not found in mpi " + patient);
-    } else {
-      log.error("no patient id provided " + patient);
     }
-    return false;
+    return null;
+  }
+
+  /**
+   * Inits the home community id.
+   * 
+   * @param patient the patient
+   */
+  private void initHomeCommunityId(FhirPatient patient) {
+    if (homeCommunityOid == null) {
+      if (patient.getIdentifier().size() == 1) {
+        String system = patient.getIdentifier().get(0).getSystem();
+        if (system.length()>8) {
+          //"urn:oid:"+
+          homeCommunityOid =system.substring(8);
+        } else {
+          throw new IllegalStateException("system has to start with urn:oid:");
+        }
+      } else {
+        throw new IllegalStateException("homeCommunityId has to be specified");
+      }
+    }
   }
 
   /**
@@ -234,7 +205,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
     return queryPatientId(patient, null, null)[0];
   }
 
-
   /**
    * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.communication.mpi.FhirPatient,
    *      java.lang.String, java.lang.String)
@@ -259,7 +229,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
         FhirPatient patientMpi = map.get(mapKey);
         String returnIds[] = new String[domainOids.length];
         for (int i = 0; i < returnIds.length; ++i) {
-          returnIds[i] = this.getPatientId(patientMpi, "urn:oid:"+domainOids[i]);
+          returnIds[i] = getPatientId(patientMpi, "urn:oid:"+domainOids[i]);
         }
         return returnIds;
       }
@@ -268,6 +238,36 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
       log.error("no patient id provided " + patient);
     }
     return null;
+  }
+
+
+  /**
+   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
+   */
+  @Override
+  public boolean updatePatient(FhirPatient patient) {
+    if (patient == null) {
+      log.debug("patient is null");
+      return false;
+    }
+    String mapKey = this.getMapKey(patient);
+    if (mapKey != null) {
+      if (map.containsKey(mapKey)) {
+        FhirPatient oldPatient = map.get(mapKey);
+        FhirPatient immutablePatient = new FhirPatient();
+        // TODO: just copied the id of the patient currently, no demographic data
+        immutablePatient.setIdentifier(patient.getIdentifier());
+        IdentifierDt id = immutablePatient.addIdentifier();
+        id.setSystem("urn:oid:"+mpiCommunityOid);
+        id.setValue(getMpiPatientId(oldPatient));
+        map.put(mapKey, immutablePatient);
+        return true;
+      }
+      log.error("patient not found in mpi " + patient);
+    } else {
+      log.error("no patient id provided " + patient);
+    }
+    return false;
   }
 
 }

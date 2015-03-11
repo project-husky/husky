@@ -43,278 +43,278 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class GestationalAge {
 
-	CodedResultsSection crs;
-	GestationalAgeWeeksSimpleObservation mWeeks;
-	GestationalAgeDaysSimpleObservation mDays;
-	II mIi;
+  CodedResultsSection crs;
+  GestationalAgeWeeksSimpleObservation mWeeks;
+  GestationalAgeDaysSimpleObservation mDays;
+  II mIi;
 
-	 /**
-     * Instantiates a new gestational age.
-     *
-     */
-    public GestationalAge() {
-      crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
-      mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
-      mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
-      
-      crs.addObservation(mWeeks);
-      crs.addObservation(mDays);
+  /**
+   * Instantiates a new gestational age.
+   *
+   */
+  public GestationalAge() {
+    crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
+    mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
+    mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
 
-      //Create Id
-      mIi = Util.createUuidVacdIdentificator(null);
+    crs.addObservation(mWeeks);
+    crs.addObservation(mDays);
 
-      //CreateEmpty Procedure Entry
-      crs.addProcedure(createEmptyProcedureEntry());
+    //Create Id
+    mIi = Util.createUuidVacdIdentificator(null);
+
+    //CreateEmpty Procedure Entry
+    crs.addProcedure(createEmptyProcedureEntry());
+  }
+
+  /**
+   * Instantiates a new gestational age.
+   *
+   * @param codedResultsSection <br>
+   * 		<div class="de">Instantiiert das Objekt auf Basis einer MDHT CodedResultsSection</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
+   */
+  public GestationalAge(CodedResultsSection codedResultsSection) {
+    crs = codedResultsSection;
+    mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection.getGestationalAgeWeeksSimpleObservations();
+    mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection.getGestationalAgeDaysSimpleObservations();
+  }
+
+  /**
+   * Instantiates a new gestational age.
+   *
+   * @param days <br>
+   * 		<div class="de">Gestationsalter in Tagen (nicht in Wochen UND Tagen)</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
+   */
+  public GestationalAge (int days) {
+    this(days/7, days%7);
+  }
+
+  /**
+   * Instantiates a new gestational age.
+   *
+   * @param weeks <br>
+   * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen an.</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
+   * @param weeksDays <br>
+   * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage an.</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
+   */
+  public GestationalAge (int weeks, int weeksDays) {
+    //create and add the MDHT Objects to the section
+    this();
+
+    //Set payload
+    setWeeksAndDays(weeks, weeksDays);
+  }
+
+  /**
+   * <div class="de">Copy mdht coded results section.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *
+   * @return the coded results section
+   */
+  public CodedResultsSection copyMdhtCodedResultsSection() {
+    return EcoreUtil.copy(crs);
+  }
+
+  /**
+   * <div class="de">Copy mdht gestational age days observation.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *
+   * @return the gestational age days simple observation
+   */
+  public GestationalAgeDaysSimpleObservation copyMdhtGestationalAgeDaysObservation() {
+    return EcoreUtil.copy(mDays);
+  }
+
+  /**
+   * <div class="de">Copy mdht gestational age weeks observation.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *
+   * @return the gestational age weeks simple observation
+   */
+  public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
+    return EcoreUtil.copy(mWeeks);
+  }
+
+  private ProcedureEntry createEmptyProcedureEntry() {
+    //Create and add an empty procedureEntry
+    ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE.createProcedureEntryProcedureActivityProcedure().init();
+    pe.getIds().add(Util.createUuidVacd(null));
+    pe.setCode(Util.createCodeNullFlavor());
+
+    //Create NullFlavor Reference
+    ED text = DatatypesFactory.eINSTANCE.createED();
+    TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+    tel.setNullFlavor(NullFlavor.NA);
+    text.setReference(tel);
+
+    pe.setText(text);
+    pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+    pe.setStatusCode(StatusCode.COMPLETED.getCS());
+    return pe;
+  }	
+
+  /**
+   * Gets the abolute days.
+   *
+   * @return 	
+   * <div class="de">Gibt das Gestationsalter in absoluten Tagen (ohne Wochen) zurück.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public int getAboluteDays () {
+    return (getWeeksOfWeeksAndDays()*7)+getDaysOfWeeksAndDays();
+  }
+
+  /**
+   * Gets the days of weeks and days.
+   *
+   * @return
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage zurückgegeben.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  public int getDaysOfWeeksAndDays() {
+    for (ANY any: mDays.getValues()){
+      PQ pq = (PQ) any;
+      if (pq.getUnit().equals("d")) {
+        return pq.getValue().intValue();
+      }
     }
-	
-	/**
-	 * Instantiates a new gestational age.
-	 *
-	 * @param codedResultsSection <br>
-	 * 		<div class="de">Instantiiert das Objekt auf Basis einer MDHT CodedResultsSection</div>
-	 * 		<div class="fr"></div>
-	 * 		<div class="it"></div>
-	 */
-	public GestationalAge(CodedResultsSection codedResultsSection) {
-		crs = codedResultsSection;
-		mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection.getGestationalAgeWeeksSimpleObservations();
-		mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection.getGestationalAgeDaysSimpleObservations();
-	}
+    return 0;
+  }
 
-	/**
-	 * Instantiates a new gestational age.
-	 *
-	 * @param days <br>
-	 * 		<div class="de">Gestationsalter in Tagen (nicht in Wochen UND Tagen)</div>
-	 * 		<div class="fr"></div>
-	 * 		<div class="it"></div>
-	 */
-	public GestationalAge (int days) {
-		this(days/7, days%7);
-	}
+  /**
+   * Gets the gestational age text.
+   *
+   * @return the gestational age text
+   * <div class="de">Das Gestationsalter in Satz-form: "Das Gestationsalter beträgt: X Wochen und Y Tage"</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  public String getGestationalAgeText() {
+    String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
+    return gestationalText;
+  }
 
-	/**
-	 * Instantiates a new gestational age.
-	 *
-	 * @param weeks <br>
-	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen an.</div>
-	 * 		<div class="fr"></div>
-	 * 		<div class="it"></div>
-	 * @param weeksDays <br>
-	 * 		<div class="de">Gestationsalter in Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage an.</div>
-	 * 		<div class="fr"></div>
-	 * 		<div class="it"></div>
-	 */
-	public GestationalAge (int weeks, int weeksDays) {
-		//create and add the MDHT Objects to the section
-		this();
-		
-		//Set payload
-		setWeeksAndDays(weeks, weeksDays);
-	}
+  /**
+   * Gets the mdht coded results section.
+   *
+   * @return the mdht coded results section
+   */
+  public CodedResultsSection getMdhtCodedResultsSection() {
+    return crs;
+  }
 
-	/**
-	 * <div class="de">Copy mdht coded results section.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return the coded results section
-	 */
-	public CodedResultsSection copyMdhtCodedResultsSection() {
-		return EcoreUtil.copy(crs);
-	}
+  /**
+   * Gets the mdht gestational age days observation.
+   *
+   * @return the mdht gestational age days observation
+   */
+  public GestationalAgeDaysSimpleObservation getMdhtGestationalAgeDaysObservation() {
+    return mDays;
+  }
 
-	/**
-	 * <div class="de">Copy mdht gestational age days observation.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return the gestational age days simple observation
-	 */
-	public GestationalAgeDaysSimpleObservation copyMdhtGestationalAgeDaysObservation() {
-		return EcoreUtil.copy(mDays);
-	}
+  /**
+   * Gets the mdht gestational age weeks observation.
+   *
+   * @return the mdht gestational age weeks observation
+   */
+  public GestationalAgeWeeksSimpleObservation getMdhtGestationalAgeWeeksObservation() {
+    return mWeeks;
+  }
 
-	/**
-	 * <div class="de">Copy mdht gestational age weeks observation.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return the gestational age weeks simple observation
-	 */
-	public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
-		return EcoreUtil.copy(mWeeks);
-	}
-
-	private ProcedureEntry createEmptyProcedureEntry() {
-		//Create and add an empty procedureEntry
-		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE.createProcedureEntryProcedureActivityProcedure().init();
-		pe.getIds().add(Util.createUuidVacd(null));
-		pe.setCode(Util.createCodeNullFlavor());
-
-		//Create NullFlavor Reference
-		ED text = DatatypesFactory.eINSTANCE.createED();
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.setNullFlavor(NullFlavor.NA);
-		text.setReference(tel);
-
-		pe.setText(text);
-		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-		pe.setStatusCode(StatusCode.COMPLETED.getCS());
-		return pe;
-	}	
-
-	/**
-	 * Gets the abolute days.
-	 *
-	 * @return 	
-	 * <div class="de">Gibt das Gestationsalter in absoluten Tagen (ohne Wochen) zurück.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	public int getAboluteDays () {
-		return (getWeeksOfWeeksAndDays()*7)+getDaysOfWeeksAndDays();
-	}
-
-	/**
-	 * Gets the days of weeks and days.
-	 *
-	 * @return
-	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage zurückgegeben.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div> 
-	 */
-	public int getDaysOfWeeksAndDays() {
-		for (ANY any: mDays.getValues()){
-			PQ pq = (PQ) any;
-			if (pq.getUnit().equals("d")) {
-				return pq.getValue().intValue();
-			}
-		}
-		return 0;
-	}
-
-	/**
-	 * Gets the gestational age text.
-	 *
-	 * @return the gestational age text
-	 * <div class="de">Das Gestationsalter in Satz-form: "Das Gestationsalter beträgt: X Wochen und Y Tage"</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div> 
-	 */
-	public String getGestationalAgeText() {
-		String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
-		return gestationalText;
-	}
-
-	/**
-	 * Gets the mdht coded results section.
-	 *
-	 * @return the mdht coded results section
-	 */
-	public CodedResultsSection getMdhtCodedResultsSection() {
-		return crs;
-	}
-
-	/**
-	 * Gets the mdht gestational age days observation.
-	 *
-	 * @return the mdht gestational age days observation
-	 */
-	public GestationalAgeDaysSimpleObservation getMdhtGestationalAgeDaysObservation() {
-		return mDays;
-	}
-
-	/**
-	 * Gets the mdht gestational age weeks observation.
-	 *
-	 * @return the mdht gestational age weeks observation
-	 */
-	public GestationalAgeWeeksSimpleObservation getMdhtGestationalAgeWeeksObservation() {
-		return mWeeks;
-	}
-
-	/**
-	 * Gets the weeks of weeks and days.
-	 *
-	 * @return
-	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen zurückgegeben.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>  
-	 */
-	public int getWeeksOfWeeksAndDays() {
-		for (ANY any: mWeeks.getValues()){
-			PQ pq = (PQ) any;
-			if (pq.getUnit().equals("wk")) {
-				return pq.getValue().intValue();
-			}
-		}
-		return 0;
-	}
-
-	/**
-	 * Sets the asbolute days.
-	 *
-	 * @param days
-	 * <div class="de">Setzt das Gestationsalter in absoluten Tagen (nicht in Wochen UND Tagen).</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div> 
-	 */
-	public void setAsboluteDays (int days) {
-		setWeeksAndDays(days/7, days%7);
-	}
-
-	 /**
-     * Sets the days of weeks and days.
-     *
-     * @param weeks
-     * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
-     * <div class="fr"></div>
-     * <div class="it"></div> 
-     * 
-     * @param days
-     * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
-     * <div class="fr"></div>
-     * <div class="it"></div> 
-     */
-    public void setWeeksAndDays(int weeks, int days) {
-        mDays.getValues().clear();
-        mDays.getIds().clear();
-        mWeeks.getValues().clear();
-        mWeeks.getIds().clear();
-        this.setWeeksOfWeeksAndDays(weeks);
-        this.setDaysOfWeeksAndDays(days);
+  /**
+   * Gets the weeks of weeks and days.
+   *
+   * @return
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen zurückgegeben.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>  
+   */
+  public int getWeeksOfWeeksAndDays() {
+    for (ANY any: mWeeks.getValues()){
+      PQ pq = (PQ) any;
+      if (pq.getUnit().equals("wk")) {
+        return pq.getValue().intValue();
+      }
     }
-	
-	/**
-	 * Sets the days of weeks and days.
-	 *
-	 * @param days
-	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div> 
-	 */
-	private void setDaysOfWeeksAndDays(int days) {
-		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
-		mDays.getValues().add(mDaysValue);
-		mDays.getIds().add(EcoreUtil.copy(mIi));
-		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	}
+    return 0;
+  }
 
-	/**
-	 * Sets the weeks of weeks and days.
-	 *
-	 * @param weeks
-	 * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div> 
-	 */
-	private void setWeeksOfWeeksAndDays(int weeks) {
-		//create and the values, ids and effectiveTime for weeks and days
-		PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(weeks, "wk");
-		mWeeks.getValues().add(mWeeksValue);
-		mWeeks.getIds().add(EcoreUtil.copy(mIi));
-		mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	}
+  /**
+   * Sets the asbolute days.
+   *
+   * @param days
+   * <div class="de">Setzt das Gestationsalter in absoluten Tagen (nicht in Wochen UND Tagen).</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  public void setAsboluteDays (int days) {
+    setWeeksAndDays(days/7, days%7);
+  }
+
+  /**
+   * Sets the days of weeks and days.
+   *
+   * @param days
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  private void setDaysOfWeeksAndDays(int days) {
+    PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
+    mDays.getValues().add(mDaysValue);
+    mDays.getIds().add(EcoreUtil.copy(mIi));
+    mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+  }
+
+  /**
+   * Sets the days of weeks and days.
+   *
+   * @param weeks
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   * 
+   * @param days
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  public void setWeeksAndDays(int weeks, int days) {
+    mDays.getValues().clear();
+    mDays.getIds().clear();
+    mWeeks.getValues().clear();
+    mWeeks.getIds().clear();
+    setWeeksOfWeeksAndDays(weeks);
+    setDaysOfWeeksAndDays(days);
+  }
+
+  /**
+   * Sets the weeks of weeks and days.
+   *
+   * @param weeks
+   * <div class="de">Das Gestationsalter in Wochen und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div> 
+   */
+  private void setWeeksOfWeeksAndDays(int weeks) {
+    //create and the values, ids and effectiveTime for weeks and days
+    PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(weeks, "wk");
+    mWeeks.getValues().add(mWeeksValue);
+    mWeeks.getIds().add(EcoreUtil.copy(mIi));
+    mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+  }
 
 }

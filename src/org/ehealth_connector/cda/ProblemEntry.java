@@ -174,6 +174,39 @@ public class ProblemEntry {
   }
 
   /**
+   * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende
+   * Codesysteme (oder Unterknoten davon) zugelassen: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
+   * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
+   * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96 </div> <div
+   * class="fr"></div> <div class="it"></div>
+   *
+   * @param code the new value
+   */
+  public void addValue(Code code) {
+    Value value = new Value(code);
+    this.addValue(value);
+  }
+
+  /**
+   * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende
+   * Codesysteme (oder Unterknoten davon) zugelassen: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
+   * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
+   * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96 </div> <div
+   * class="fr"></div> <div class="it"></div>
+   * 
+   * @param problemValue the new value
+   */
+  public void addValue(Value problemValue) {
+    if (problemValue == null) {
+      CD cd = DatatypesFactory.eINSTANCE.createCD();
+      cd.setNullFlavor(NullFlavor.UNK);
+      mProblemEntry.getValues().add(cd);
+    } else {
+      mProblemEntry.getValues().add(problemValue.getValue());
+    }
+  }
+
+  /**
    * <div class="de">Fügt dem Wert (Value) einen Text hinzu</div> <div class="fr"></div> <div
    * class="it"></div>
    *
@@ -221,6 +254,18 @@ public class ProblemEntry {
       }
     }
     return null;
+  }
+
+  /**
+   * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte bekannte) ID für das
+   * Problem. Ist keine ID vorhanden, wird null zurückgegeben.</div> <div class="fr"></div> <div
+   * class="it"></div>
+   *
+   * @param id the new id
+   */
+  public Identificator getId() {
+    Identificator id = new Identificator(mProblemEntry.getIds().get(0));
+    return id;
   }
 
   /**
@@ -318,18 +363,6 @@ public class ProblemEntry {
   }
 
   /**
-   * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte bekannte) ID für das
-   * Problem. Ist keine ID vorhanden, wird null zurückgegeben.</div> <div class="fr"></div> <div
-   * class="it"></div>
-   *
-   * @param id the new id
-   */
-  public Identificator getId() {
-    Identificator id = new Identificator(mProblemEntry.getIds().get(0));
-    return id;
-  }
-
-  /**
    * <div class="de">true, wenn das Problem nicht aufgetreten ist, false sonst (negationInd)</div>
    * <div class="fr"></div> <div class="it"></div>
    * 
@@ -355,39 +388,6 @@ public class ProblemEntry {
     } catch (ParseException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
-    }
-  }
-
-  /**
-   * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende
-   * Codesysteme (oder Unterknoten davon) zugelassen: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
-   * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
-   * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96 </div> <div
-   * class="fr"></div> <div class="it"></div>
-   *
-   * @param code the new value
-   */
-  public void addValue(Code code) {
-    Value value = new Value(code);
-    this.addValue(value);
-  }
-
-  /**
-   * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der Schweiz folgende
-   * Codesysteme (oder Unterknoten davon) zugelassen: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
-   * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
-   * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96 </div> <div
-   * class="fr"></div> <div class="it"></div>
-   * 
-   * @param problemValue the new value
-   */
-  public void addValue(Value problemValue) {
-    if (problemValue == null) {
-      CD cd = DatatypesFactory.eINSTANCE.createCD();
-      cd.setNullFlavor(NullFlavor.UNK);
-      mProblemEntry.getValues().add(cd);
-    } else {
-      mProblemEntry.getValues().add(problemValue.getValue());
     }
   }
 }

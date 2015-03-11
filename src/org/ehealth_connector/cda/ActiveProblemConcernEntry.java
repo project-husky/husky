@@ -28,105 +28,105 @@ import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
  */
 public class ActiveProblemConcernEntry extends ProblemConcernEntry {
 
-	/**
-	 * Instantiates a new active problem concern entry.
-	 */
-	public ActiveProblemConcernEntry () {
-		super();
-	}
+  /**
+   * Instantiates a new active problem concern entry.
+   */
+  public ActiveProblemConcernEntry () {
+    super();
+  }
 
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
-	 * @param problemConcernEntry
-	 * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
-	 * 
-	 * <div class="fr">Objet préexistante à cloner</div>
-	 * 
-	 */
-	public ActiveProblemConcernEntry(
-			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
-		super(problemConcernEntry);
-	}
+  /**
+   * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+   * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+   * 
+   * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+   * être ajouté dans ActiveProblemsSection.</div>
+   * 
+   * @param problemConcernEntry
+   * <div class="de">Vorbestehendes Objekt, das geklont werden soll</div>
+   * 
+   * <div class="fr">Objet préexistante à cloner</div>
+   * 
+   */
+  public ActiveProblemConcernEntry(
+      org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
+    super(problemConcernEntry);
+  }
 
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 *
-	 * @param concern            
-	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *     <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param begin            
-	 *     <div class="de">Beginn des Leidens</div> 
-	 *     <div class="fr">Le début du problème</div>
-	 * @param end            
-	 *     <div class="de">Ende des Leidens</div> 
-	 *     <div class="fr">Le fin du problème</div>
-	 * @param problemEntry <br>
-	 * 		<div class="de">Das medizinische Problem</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
-	 * @param problemConcernStatus <br>
-	 * 		<div class="de">Status des Leidens</div>
-	 * 		<div class="fr"> problem concern status</div>
-	 * 		<div class="it"> problem concern status</div>
-	 */
-	public ActiveProblemConcernEntry(String concern,
-			Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
-		super(concern, problemEntry, problemConcernStatus, begin, end);
-	}
+  /**
+   * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+   * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+   * 
+   * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+   * être ajouté dans ActiveProblemsSection.</div>
+   *
+   * @param concern            
+   *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+   *     <div class="fr">Le nom du problème (texte libre)</div>
+   * @param begin            
+   *     <div class="de">Beginn des Leidens</div> 
+   *     <div class="fr">Le début du problème</div>
+   * @param end            
+   *     <div class="de">Ende des Leidens</div> 
+   *     <div class="fr">Le fin du problème</div>
+   * @param problemEntry <br>
+   * 		<div class="de">Das medizinische Problem</div>
+   * 		<div class="fr"> problem entry</div>
+   * 		<div class="it"> problem entry</div>
+   * @param problemConcernStatus <br>
+   * 		<div class="de">Status des Leidens</div>
+   * 		<div class="fr"> problem concern status</div>
+   * 		<div class="it"> problem concern status</div>
+   */
+  public ActiveProblemConcernEntry(String concern,
+      Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+    super(concern, problemEntry, problemConcernStatus, begin, end);
+  }
 
-	/**
-	 * Instantiates a new active problem concern entry.
-	 *
-	 * @param concern            
-	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *     <div class="fr">Le nom du problème (texte libre)</div>
-	 * 	   <div class="it"> string</div>
-	 * @param date <br>
-	 * 		<div class="de"> date</div>
-	 * 		<div class="fr"> date</div>
-	 * 		<div class="it"> date</div>
-	 * @param problemEntry <br>
-	 * 		<div class="de">Das medizinische Problem</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
-	 * @param problemStatusCode <br>
-	 * 		<div class="de">Status des Leidens</div>
-	 * 		<div class="fr"> problem status code</div>
-	 * 		<div class="it"> problem status code</div>
-	 */
-	public ActiveProblemConcernEntry(String concern, Date date, ProblemEntry problemEntry,
-			ProblemConcernStatusCode problemStatusCode) {
-		this(concern, date, null, problemEntry, problemStatusCode);
-	}
+  /**
+   * Instantiates a new active problem concern entry.
+   *
+   * @param concern            
+   *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+   *     <div class="fr">Le nom du problème (texte libre)</div>
+   * 	   <div class="it"> string</div>
+   * @param date <br>
+   * 		<div class="de"> date</div>
+   * 		<div class="fr"> date</div>
+   * 		<div class="it"> date</div>
+   * @param problemEntry <br>
+   * 		<div class="de">Das medizinische Problem</div>
+   * 		<div class="fr"> problem entry</div>
+   * 		<div class="it"> problem entry</div>
+   * @param problemStatusCode <br>
+   * 		<div class="de">Status des Leidens</div>
+   * 		<div class="fr"> problem status code</div>
+   * 		<div class="it"> problem status code</div>
+   */
+  public ActiveProblemConcernEntry(String concern, Date date, ProblemEntry problemEntry,
+      ProblemConcernStatusCode problemStatusCode) {
+    this(concern, date, null, problemEntry, problemStatusCode);
+  }
 
-	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
-	 * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 *
-	 * @param concern            
-	 *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *     <div class="fr">Le nom du problème (texte libre)</div>
-	 * @param problemEntry <br>
-	 * 		<div class="de">Das medizinische Problem</div>
-	 * 		<div class="fr"> problem entry</div>
-	 * 		<div class="it"> problem entry</div>
-	 * @param concernStatus            
-	 *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
-	 *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
-	 */
-	public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
-		super(concern, problemEntry, concernStatus);
-	}
+  /**
+   * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
+   * Dieses Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+   * 
+   * <div class="fr">Crée un objet qui représente un problème. L'objet peut
+   * être ajouté dans ActiveProblemsSection.</div>
+   *
+   * @param concern            
+   *     <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
+   *     <div class="fr">Le nom du problème (texte libre)</div>
+   * @param problemEntry <br>
+   * 		<div class="de">Das medizinische Problem</div>
+   * 		<div class="fr"> problem entry</div>
+   * 		<div class="it"> problem entry</div>
+   * @param concernStatus            
+   *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
+   *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
+   */
+  public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+    super(concern, problemEntry, concernStatus);
+  }
 }

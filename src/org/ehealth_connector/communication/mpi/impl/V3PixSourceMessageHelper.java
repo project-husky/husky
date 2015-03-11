@@ -72,57 +72,58 @@ public class V3PixSourceMessageHelper {
     }
   }
 
-  public V3PixSourceRecordAdded getV3RecordAddedMessage() {
-    return v3RecordAddedMessage;
-  }
-
-  public V3PixSourceRecordRevised getV3RecordRevisedMessage() {
-    return v3RecordRevisedMessage;
-  }
-
-  public V3PixSourceMergePatients getV3MergePatientsMessage() {
-    return v3MergePatientsMessage;
-  }
-
-
   /**
-   * Set the scoping organization for the patient
-   * 
-   * @param organizationOID
-   * @param organizationName
-   * @param telecomValue
+   * Adds the language communication.
+   *
+   * @param languageCommunication the language communication
    */
-  public void setScopingOrganization(String organizationOID, String organizationName,
-      String telecomValue) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setScopingOrganization(organizationOID, organizationName, telecomValue);
+  public void addLanguageCommunication(String languageCommunication) {
+    if (v3RecordAddedMessage!=null) {
+      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);  
+      PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201301UV02LanguageCommunication();
+      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
+      patientPerson.getLanguageCommunication().add(communication);
     }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage
-          .setScopingOrganization(organizationOID, organizationName, telecomValue);
+    if (v3RecordRevisedMessage!=null) {
+      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);  
+      PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201302UV02LanguageCommunication();
+      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
+      patientPerson.getLanguageCommunication().add(communication);
     }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage
-          .setScopingOrganization(organizationOID, organizationName, telecomValue);
+    if (v3MergePatientsMessage!=null) {
+      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);  
+      PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201303UV02LanguageCommunication();
+      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
+      patientPerson.getLanguageCommunication().add(communication);
     }
   }
 
   /**
-   * Set the patient id
+   * Add an address for the patient.
    * 
-   * @param extension
-   * @param root
-   * @param namespace
+   * @param addressStreetAddress
+   * @param addressCity
+   * @param addressCounty
+   * @param addressState
+   * @param addressCountry
+   * @param addressZip
+   * @param addressOtherDesignation
+   * @param addressType
    */
-  public void addPatientID(String extension, String root, String namespace) {
+  public void addPatientAddress(String addressStreetAddress, String addressCity,
+      String addressCounty, String addressState, String addressCountry, String addressZip,
+      String addressOtherDesignation, String addressType) {
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientID(extension, root, namespace);
+      v3RecordAddedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
+          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
     }
     if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientID(extension, root, namespace);
+      v3RecordRevisedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
+          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
     }
     if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientID(extension, root, namespace);
+      v3MergePatientsMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
+          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
     }
   }
 
@@ -143,20 +144,40 @@ public class V3PixSourceMessageHelper {
     }
   }
 
+
   /**
-   * Set Patient Very Important Person code
+   * Add Patient Ethnic Group Code to the patient
    * 
    * @param code
    */
-  public void setPatientVeryImportantPerson(String code) {
+  public void addPatientEthnicGroupCode(String code) {
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setPatientVeryImportantPerson(code);
+      v3RecordAddedMessage.addPatientEthnicGroupCode(code);
     }
     if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setPatientVeryImportantPerson(code);
+      v3RecordRevisedMessage.addPatientEthnicGroupCode(code);
     }
     if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setPatientVeryImportantPerson(code);
+      v3MergePatientsMessage.addPatientEthnicGroupCode(code);
+    }
+  }
+
+  /**
+   * Set the patient id
+   * 
+   * @param extension
+   * @param root
+   * @param namespace
+   */
+  public void addPatientID(String extension, String root, String namespace) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.addPatientID(extension, root, namespace);
+    }
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage.addPatientID(extension, root, namespace);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.addPatientID(extension, root, namespace);
     }
   }
 
@@ -185,6 +206,41 @@ public class V3PixSourceMessageHelper {
   }
 
   /**
+   * Add a Patient Other ID for the patient
+   * 
+   * @param extension
+   * @param root
+   */
+  public void addPatientOtherID(String extension, String root) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.addPatientOtherID(extension, root);
+    }
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage.addPatientOtherID(extension, root);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.addPatientOtherID(extension, root);
+    }
+  }
+
+  /**
+   * Add Patient Race Code to the patient
+   * 
+   * @param code
+   */
+  public void addPatientRaceCode(String code) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.addPatientRaceCode(code);
+    }
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage.addPatientRaceCode(code);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.addPatientRaceCode(code);
+    }
+  }
+
+  /**
    * Add a telecom value with the provided useValue ("HP" or "WP")
    * 
    * @param telecomValue
@@ -205,19 +261,94 @@ public class V3PixSourceMessageHelper {
   }
 
   /**
-   * Set the patient gender to the provided value ("M", "F", or "U")
-   * 
-   * @param gender
+   * Gets the patient person.
+   *
+   * @param v3MergePatientsMessage the v3 merge patients message
+   * @return the patient person
    */
-  public void setPatientGender(String gender) {
+  private PRPAMT201303UV02Person getPatientPerson(V3PixSourceMergePatients v3MergePatientsMessage) {
+    if (v3MergePatientsMessage != null) {
+      PRPAIN201304UV02Type rootElement = v3MergePatientsMessage.getRootElement();
+      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+          .getSubject1().getPatient().getPatientPerson();
+    }
+    return null;
+  }
+
+  /**
+   * Gets the patient person.
+   *
+   * @param v3RecordAddedMessage the v3 record added message
+   * @return the patient person
+   */
+  private PRPAMT201301UV02Person getPatientPerson(V3PixSourceRecordAdded v3RecordAddedMessage) {
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setPatientGender(gender);
+      PRPAIN201301UV02Type rootElement = v3RecordAddedMessage.getRootElement();
+      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+          .getSubject1().getPatient().getPatientPerson();
+    }
+    return null;
+  }
+
+  /**
+   * Gets the patient person.
+   *
+   * @param v3RecordRevisedMessage the v3 record revised message
+   * @return the patient person
+   */
+  private PRPAMT201302UV02PatientPatientPerson getPatientPerson(
+      V3PixSourceRecordRevised v3RecordRevisedMessage) {
+    if (v3RecordRevisedMessage != null) {
+      PRPAIN201302UV02Type rootElement = v3RecordRevisedMessage.getRootElement();
+      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+          .getSubject1().getPatient().getPatientPerson();
+    }
+    return null;
+  }
+
+  public V3PixSourceMergePatients getV3MergePatientsMessage() {
+    return v3MergePatientsMessage;
+  }
+
+  public V3PixSourceRecordAdded getV3RecordAddedMessage() {
+    return v3RecordAddedMessage;
+  }
+
+  public V3PixSourceRecordRevised getV3RecordRevisedMessage() {
+    return v3RecordRevisedMessage;
+  }
+
+  /**
+   * Set whether there was a multiple birth.
+   * 
+   * @param birthIndicator
+   */
+  public void setMultipleBirthIndicator(boolean birthIndicator) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.setMultipleBirthIndicator(birthIndicator);
     }
     if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setPatientGender(gender);
+      v3RecordRevisedMessage.setMultipleBirthIndicator(birthIndicator);
     }
     if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setPatientGender(gender);
+      v3MergePatientsMessage.setMultipleBirthIndicator(birthIndicator);
+    }
+  }
+
+  /**
+   * Set the birth order number to the provided value
+   * 
+   * @param birthNumber
+   */
+  public void setMultipleBirthOrderNumber(int birthNumber) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.setMultipleBirthOrderNumber(birthNumber);
+    }
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage.setMultipleBirthOrderNumber(birthNumber);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.setMultipleBirthOrderNumber(birthNumber);
     }
   }
 
@@ -273,65 +404,19 @@ public class V3PixSourceMessageHelper {
   }
 
   /**
-   * Set whether there was a multiple birth.
+   * Set the patient gender to the provided value ("M", "F", or "U")
    * 
-   * @param birthIndicator
+   * @param gender
    */
-  public void setMultipleBirthIndicator(boolean birthIndicator) {
+  public void setPatientGender(String gender) {
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setMultipleBirthIndicator(birthIndicator);
+      v3RecordAddedMessage.setPatientGender(gender);
     }
     if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setMultipleBirthIndicator(birthIndicator);
+      v3RecordRevisedMessage.setPatientGender(gender);
     }
     if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setMultipleBirthIndicator(birthIndicator);
-    }
-  }
-
-  /**
-   * Set the birth order number to the provided value
-   * 
-   * @param birthNumber
-   */
-  public void setMultipleBirthOrderNumber(int birthNumber) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setMultipleBirthOrderNumber(birthNumber);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setMultipleBirthOrderNumber(birthNumber);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setMultipleBirthOrderNumber(birthNumber);
-    }
-  }
-
-  /**
-   * Add an address for the patient.
-   * 
-   * @param addressStreetAddress
-   * @param addressCity
-   * @param addressCounty
-   * @param addressState
-   * @param addressCountry
-   * @param addressZip
-   * @param addressOtherDesignation
-   * @param addressType
-   */
-  public void addPatientAddress(String addressStreetAddress, String addressCity,
-      String addressCounty, String addressState, String addressCountry, String addressZip,
-      String addressOtherDesignation, String addressType) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
-          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
-          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
-          addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
+      v3MergePatientsMessage.setPatientGender(gender);
     }
   }
 
@@ -352,74 +437,6 @@ public class V3PixSourceMessageHelper {
     }
   }
 
-  /**
-   * Set the religious affiliation for the patient
-   * 
-   * @param religiousAffiliation
-   */
-  public void setPatientReligiousAffiliation(String religiousAffiliation) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setPatientReligiousAffiliation(religiousAffiliation);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setPatientReligiousAffiliation(religiousAffiliation);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setPatientReligiousAffiliation(religiousAffiliation);
-    }
-  }
-
-  /**
-   * Add Patient Race Code to the patient
-   * 
-   * @param code
-   */
-  public void addPatientRaceCode(String code) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientRaceCode(code);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientRaceCode(code);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientRaceCode(code);
-    }
-  }
-
-  /**
-   * Add Patient Ethnic Group Code to the patient
-   * 
-   * @param code
-   */
-  public void addPatientEthnicGroupCode(String code) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientEthnicGroupCode(code);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientEthnicGroupCode(code);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientEthnicGroupCode(code);
-    }
-  }
-
-  /**
-   * Add a Patient Other ID for the patient
-   * 
-   * @param extension
-   * @param root
-   */
-  public void addPatientOtherID(String extension, String root) {
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientOtherID(extension, root);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientOtherID(extension, root);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientOtherID(extension, root);
-    }
-  }
 
   /**
    * Add a mother's maiden name for the patient.
@@ -442,79 +459,62 @@ public class V3PixSourceMessageHelper {
       v3MergePatientsMessage.setPatientMothersMaidenName(family, given, other, suffix, prefix);
     }
   }
-  
-  
+
+
   /**
-   * Adds the language communication.
-   *
-   * @param languageCommunication the language communication
+   * Set the religious affiliation for the patient
+   * 
+   * @param religiousAffiliation
    */
-  public void addLanguageCommunication(String languageCommunication) {
-    if (v3RecordAddedMessage!=null) {
-      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);  
-      PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201301UV02LanguageCommunication();
-      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
-      patientPerson.getLanguageCommunication().add(communication);
-    }
-    if (v3RecordRevisedMessage!=null) {
-      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);  
-      PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201302UV02LanguageCommunication();
-      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
-      patientPerson.getLanguageCommunication().add(communication);
-    }
-    if (v3MergePatientsMessage!=null) {
-      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);  
-      PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201303UV02LanguageCommunication();
-      communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
-      patientPerson.getLanguageCommunication().add(communication);
-    }
-  }
-  
-  
-  /**
-   * Gets the patient person.
-   *
-   * @param v3RecordAddedMessage the v3 record added message
-   * @return the patient person
-   */
-  private PRPAMT201301UV02Person getPatientPerson(V3PixSourceRecordAdded v3RecordAddedMessage) {
+  public void setPatientReligiousAffiliation(String religiousAffiliation) {
     if (v3RecordAddedMessage != null) {
-      PRPAIN201301UV02Type rootElement = v3RecordAddedMessage.getRootElement();
-      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-          .getSubject1().getPatient().getPatientPerson();
+      v3RecordAddedMessage.setPatientReligiousAffiliation(religiousAffiliation);
     }
-    return null;
-  }
-
-  /**
-   * Gets the patient person.
-   *
-   * @param v3RecordRevisedMessage the v3 record revised message
-   * @return the patient person
-   */
-  private PRPAMT201302UV02PatientPatientPerson getPatientPerson(
-      V3PixSourceRecordRevised v3RecordRevisedMessage) {
     if (v3RecordRevisedMessage != null) {
-      PRPAIN201302UV02Type rootElement = v3RecordRevisedMessage.getRootElement();
-      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-          .getSubject1().getPatient().getPatientPerson();
+      v3RecordRevisedMessage.setPatientReligiousAffiliation(religiousAffiliation);
     }
-    return null;
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.setPatientReligiousAffiliation(religiousAffiliation);
+    }
   }
 
   /**
-   * Gets the patient person.
-   *
-   * @param v3MergePatientsMessage the v3 merge patients message
-   * @return the patient person
+   * Set Patient Very Important Person code
+   * 
+   * @param code
    */
-  private PRPAMT201303UV02Person getPatientPerson(V3PixSourceMergePatients v3MergePatientsMessage) {
-    if (v3MergePatientsMessage != null) {
-      PRPAIN201304UV02Type rootElement = v3MergePatientsMessage.getRootElement();
-      return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-          .getSubject1().getPatient().getPatientPerson();
+  public void setPatientVeryImportantPerson(String code) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.setPatientVeryImportantPerson(code);
     }
-    return null;
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage.setPatientVeryImportantPerson(code);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage.setPatientVeryImportantPerson(code);
+    }
+  }
+
+  /**
+   * Set the scoping organization for the patient
+   * 
+   * @param organizationOID
+   * @param organizationName
+   * @param telecomValue
+   */
+  public void setScopingOrganization(String organizationOID, String organizationName,
+      String telecomValue) {
+    if (v3RecordAddedMessage != null) {
+      v3RecordAddedMessage.setScopingOrganization(organizationOID, organizationName, telecomValue);
+    }
+    if (v3RecordRevisedMessage != null) {
+      v3RecordRevisedMessage
+      .setScopingOrganization(organizationOID, organizationName, telecomValue);
+    }
+    if (v3MergePatientsMessage != null) {
+      v3MergePatientsMessage
+      .setScopingOrganization(organizationOID, organizationName, telecomValue);
+    }
   }
 
 }

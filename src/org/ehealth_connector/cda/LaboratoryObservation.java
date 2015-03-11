@@ -143,6 +143,29 @@ public class LaboratoryObservation {
   }
 
   /**
+   * Sets the value.
+   *
+   * @param code the new value
+   */
+  public void addValue(Code code) {
+    mLaboratoryObservation.getValues().add(code.getCD());
+  }
+
+  /**
+   * Adds the value.
+   *
+   * @param value the new value
+   */
+  public void addValue(Value value) {
+    if (value.isPhysicalQuantity()) {
+      mLaboratoryObservation.getValues().add(value.copyMdhtPhysicalQuantity());
+    }
+    if (value.isCode()) {
+      mLaboratoryObservation.getValues().add(value.copyMdhtCode());
+    }
+  }
+
+  /**
    * <div class="de">Copy mdht laboratory observation.</div> <div class="fr">Copy mdht laboratory
    * observation.</div> <div class="it">Copy mdht laboratory observation.</div>
    *
@@ -177,7 +200,7 @@ public class LaboratoryObservation {
       return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
     }
   }
-  
+
   /**
    * <div class="de">Gibt das Datum und die Uhrzeit zurück, wann die Untersuchung durchgeführt wurde als String zurück (z.B. "28.02.2015 16:00")</div> <div
    * class="fr"></div> <div class="it"></div>
@@ -194,6 +217,15 @@ public class LaboratoryObservation {
   }
 
   /**
+   * Gets the Effective Time
+   *
+   * @param dateTimeOfResult the new date time of result
+   */
+  public Date getEffectiveTime() {
+    return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
+  }
+
+  /**
    * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation Code).</div> <div
    * class="fr"></div> <div class="it"></div>
    * 
@@ -201,7 +233,7 @@ public class LaboratoryObservation {
    */
   public boolean getImmuneProtection() {
     //mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-    
+
     if (mLaboratoryObservation
         .getInterpretationCodes().get(0).getCode().equals(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN.getCodeValue())) {
       return true;
@@ -249,6 +281,32 @@ public class LaboratoryObservation {
   }
 
   /**
+   * Get the (first) problem value. The Value may be a coded or uncoded String.
+   * 
+   * @return the (first) problem value as string.
+   */
+  public Value getValue() {
+    if (!mLaboratoryObservation.getValues().isEmpty()) {
+      return new Value(mLaboratoryObservation.getValues().get(0));
+    }
+    return null;
+  }
+
+  /**
+   * Get a list of all problem values. Each Value may be a coded or uncoded String.
+   * 
+   * @return all problem values as ArrayList.
+   */
+  public ArrayList<Value> getValues() {
+    ArrayList<Value> vl = new ArrayList<Value>();
+    for (ANY a : mLaboratoryObservation.getValues()) {
+      Value v = new Value(a);
+      vl.add(v);
+    }
+    return vl;
+  }
+
+  /**
    * Sets the code.
    *
    * @param code the new code
@@ -270,15 +328,6 @@ public class LaboratoryObservation {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-  }
-  
-  /**
-   * Gets the Effective Time
-   *
-   * @param dateTimeOfResult the new date time of result
-   */
-  public Date getEffectiveTime() {
-    return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
   }
 
   /**
@@ -339,54 +388,5 @@ public class LaboratoryObservation {
     }
 
     mLaboratoryObservation.getPerformers().add(perf);
-  }
-
-  /**
-   * Sets the value.
-   *
-   * @param code the new value
-   */
-  public void addValue(Code code) {
-    mLaboratoryObservation.getValues().add(code.getCD());
-  }
-
-  /**
-   * Get the (first) problem value. The Value may be a coded or uncoded String.
-   * 
-   * @return the (first) problem value as string.
-   */
-  public Value getValue() {
-    if (!mLaboratoryObservation.getValues().isEmpty()) {
-      return new Value(mLaboratoryObservation.getValues().get(0));
-    }
-    return null;
-  }
-
-  /**
-   * Get a list of all problem values. Each Value may be a coded or uncoded String.
-   * 
-   * @return all problem values as ArrayList.
-   */
-  public ArrayList<Value> getValues() {
-    ArrayList<Value> vl = new ArrayList<Value>();
-    for (ANY a : mLaboratoryObservation.getValues()) {
-      Value v = new Value(a);
-      vl.add(v);
-    }
-    return vl;
-  }
-
-  /**
-   * Adds the value.
-   *
-   * @param value the new value
-   */
-  public void addValue(Value value) {
-    if (value.isPhysicalQuantity()) {
-      mLaboratoryObservation.getValues().add(value.copyMdhtPhysicalQuantity());
-    }
-    if (value.isCode()) {
-      mLaboratoryObservation.getValues().add(value.copyMdhtCode());
-    }
   }
 }
