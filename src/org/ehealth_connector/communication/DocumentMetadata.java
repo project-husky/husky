@@ -18,7 +18,6 @@
 
 package org.ehealth_connector.communication;
 
-import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +48,6 @@ public class DocumentMetadata {
 
 	DocumentEntryType xDoc;
 	DocumentDescriptor xDesc;
-	FileInputStream fis;
 	ClinicalDocument cda;
 	CDAR2Extractor extractor;
 

@@ -80,101 +80,90 @@ public class ConvenienceCommunication {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ConvenienceCommunication.class);
 
-	/**
-	 * <p>
-	 * Anfrage einer Impfempfehlung (pseudonymisiert das Dokument vor dem
-	 * eigentlichen Versand ans Expertensystem). Die Kommunikation zum
-	 * Kommunikations-Endpunkt erfolgt gemäss <b>IHE [PCC-12] Request for Clinical
-	 * Guidance</b>.
-	 * </p>
-	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PCC
-	 * Care Manager Akteur</b>
-	 * </p>
-	 * 
-	 * @param destination
-	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
-	 * @param doc
-	 *          CDA-CH-VACD Dokument mit den Impfungen und anderen für die
-	 *          Impfempfehlung relevanten Angaben eines Patienten.
-	 * @return CDA-CH-VACD Dokument, welches mit dem Parameter doc übergeben
-	 *         worden ist und nun zusätzlich die Section mit den Impfempfehlungen
-	 *         enthält
-	 * 
-	 * @throws Exception
-	 *           Fehler während der Übertragung
-	 */
-	public static CdaChVacd getImmunizationRecommendationRequest(
-			Destination destination, CdaChVacd doc) throws Exception {
-	    //TODO
-		return null;
-	}
-	
-	/**
-	 * <p>
-	 * Lädt CDA-Dokumente von einem Medium (Datenträger oder Pfad im Dateisystem;
-	 * gemäss IHE XDM). Die Verarbeitung des Mediums erfolgt gemäss <b>[ITI-32]
-	 * Distribute Document Set on Media</b>.
-	 * </p>
-	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
-	 * Portable Media Importer Akteur</b>
-	 * </p>
-	 *
-	 * @param destination          Pfad zum Datenträger von dem XDM-konforme Daten geladen werden
-	 * @return eine Liste von CDA-Dokumenten
-	 * @throws Exception the exception
-	 */
-	public static ArrayList<ClinicalDocument> parseStoredCdaChVacd(File destination)
-			throws Exception {
-	  //TODO
-		return null;
-	}
-
-	/**
-	 * Pseudonymize.
-	 *
-	 * @param doc the doc
-	 * @return the cda ch vacd
-	 */
-	public static CdaChVacd pseudonymize(CdaChVacd doc) {  
-		//TODO
-	  return null;
-	}
-
-	/**
-	 * Speichert ein CDA Dokument für den Versand zu einer beliebigen Destination
-	 * auf einem Medium.
-	 *
-	 * @param destination          Ziel der Übertragung (Kommunikations-Endpunkt)
-	 * @param doc          CDA-CH Dokument
-	 */
-	public static void storeOnMedia(Destination destination, CdaCh doc) {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * <p>
-	 * Speichert ein CDA-Dokument inkl. der benötigten Metadaten auf einem
-	 * Datenträger (gemäss IHE XDM). Die Speicherung auf dem Medium erfolgt gemäss
-	 * <b>[ITI-32] Distribute Document Set on Media</b>.
-	 * </p>
-	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
-	 * Portable Media Creator Akteur</b>
-	 * </p>
-	 *
-	 * @param destination          Pfad zum Datenträger auf dem XDM-konforme Daten gespeichert werden
-	 * @param doc          das CDA-Dokument, welches gespeichert werden soll
-	 * @return true, wenn das Dokument erfolgreich gespeichert wurde. Sonst:
-	 *         false.
-	 * @throws Exception the exception
-	 */
-	public static boolean storeOnMedia(File destination, ClinicalDocument doc)
-			throws Exception {
-	  //TODO
-		return false;
-	}
+//	/**
+//	 * <p>
+//	 * Anfrage einer Impfempfehlung (pseudonymisiert das Dokument vor dem
+//	 * eigentlichen Versand ans Expertensystem). Die Kommunikation zum
+//	 * Kommunikations-Endpunkt erfolgt gemäss <b>IHE [PCC-12] Request for Clinical
+//	 * Guidance</b>.
+//	 * </p>
+//	 * <p>
+//	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PCC
+//	 * Care Manager Akteur</b>
+//	 * </p>
+//	 * 
+//	 * @param destination
+//	 *          Ziel der Übertragung (Kommunikations-Endpunkt)
+//	 * @param doc
+//	 *          CDA-CH-VACD Dokument mit den Impfungen und anderen für die
+//	 *          Impfempfehlung relevanten Angaben eines Patienten.
+//	 * @return CDA-CH-VACD Dokument, welches mit dem Parameter doc übergeben
+//	 *         worden ist und nun zusätzlich die Section mit den Impfempfehlungen
+//	 *         enthält
+//	 * 
+//	 * @throws Exception
+//	 *           Fehler während der Übertragung
+//	 */
+//	public static CdaChVacd getImmunizationRecommendationRequest(
+//			Destination destination, CdaChVacd doc) throws Exception {
+//	    //TODO
+//		return null;
+//	}
+//	
+//	/**
+//	 * <p>
+//	 * Lädt CDA-Dokumente von einem Medium (Datenträger oder Pfad im Dateisystem;
+//	 * gemäss IHE XDM). Die Verarbeitung des Mediums erfolgt gemäss <b>[ITI-32]
+//	 * Distribute Document Set on Media</b>.
+//	 * </p>
+//	 * <p>
+//	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+//	 * Portable Media Importer Akteur</b>
+//	 * </p>
+//	 *
+//	 * @param destination          Pfad zum Datenträger von dem XDM-konforme Daten geladen werden
+//	 * @return eine Liste von CDA-Dokumenten
+//	 * @throws Exception the exception
+//	 */
+//	public static ArrayList<ClinicalDocument> parseStoredCdaChVacd(File destination)
+//			throws Exception {
+//	  //TODO
+//		return null;
+//	}
+//
+//	/**
+//	 * Speichert ein CDA Dokument für den Versand zu einer beliebigen Destination
+//	 * auf einem Medium.
+//	 *
+//	 * @param destination          Ziel der Übertragung (Kommunikations-Endpunkt)
+//	 * @param doc          CDA-CH Dokument
+//	 */
+//	public static void storeOnMedia(Destination destination, CdaCh doc) {
+//		// TODO Auto-generated method stub
+//	}
+//
+//	/**
+//	 * <p>
+//	 * Speichert ein CDA-Dokument inkl. der benötigten Metadaten auf einem
+//	 * Datenträger (gemäss IHE XDM). Die Speicherung auf dem Medium erfolgt gemäss
+//	 * <b>[ITI-32] Distribute Document Set on Media</b>.
+//	 * </p>
+//	 * <p>
+//	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE ITI
+//	 * Portable Media Creator Akteur</b>
+//	 * </p>
+//	 *
+//	 * @param destination          Pfad zum Datenträger auf dem XDM-konforme Daten gespeichert werden
+//	 * @param doc          das CDA-Dokument, welches gespeichert werden soll
+//	 * @return true, wenn das Dokument erfolgreich gespeichert wurde. Sonst:
+//	 *         false.
+//	 * @throws Exception the exception
+//	 */
+//	public static boolean storeOnMedia(File destination, ClinicalDocument doc)
+//			throws Exception {
+//	  //TODO
+//		return false;
+//	}
 
 	/** The source. */
 	private B_Source source = null;
@@ -250,7 +239,7 @@ public class ConvenienceCommunication {
 		txnData = new SubmitTransactionData();
 		this.organizationalId = dest.getSenderOrganizationalOid();
 		if (log4jConfigPath==null) {
-			log4jConfigPath = "./rsc/log4jDebug.xml";
+			log4jConfigPath = "./rsc/log4jInfo.xml";
 		}
 		setUp(dest, auditorEnabled, log4jConfigPath);
 	}

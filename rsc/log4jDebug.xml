@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*******************************************************************************
+ * Copyright (c) 2006 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
+ -->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- Log4J configuration file -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+<!--               Appenders                  -->
+    
+  <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+  	<layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern"
+             value="[%-5p][%F:%L] %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="SubmitTestFileAppender" class="org.apache.log4j.FileAppender">
+      <!-- FIX the path here -->
+      <param name="File" value="rsc/logs/source.log" />
+  	<layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern"
+             value="[%-5p][%F:%L] %m%n"/>
+    </layout>
+  </appender>
+
+  
+  
+<!--                  Categories                     -->
+
+ <category name="org.openhealthtools.ihe.xds.source">
+    <priority value="debug" />
+ </category >
+ 
+  <category name="org.openhealthtools.ihe.xds.source.document">
+    <priority value="debug" />
+ </category >
+ 
+   <category name="org.openhealthtools.ihe.xds.metadata">
+    <priority value="debug" />
+ </category >
+ 
+   <category name="org.openhealthtools.ihe.xds.metadata.extract">
+    <priority value="debug" />
+ </category >
+ 
+ <category name="org.openhealthtools.ihe.xds.metadata.transform">
+    <priority value="debug" />
+ </category >
+ 
+  <category name="org.openhealthtools.ihe.xds.soap">
+    <priority value="debug" />
+ </category >
+ 
+  <category name="org.eclipse.ohf.ihe.atna.audit">
+    <priority value="debug" />
+ </category >
+
+  	<category name="org.apache">
+    	<priority value="inf" />
+	</category >
+	
+  	<category name="org.apache.axiom">
+    	<priority value="info" />
+	</category >	
+
+  	<category name="org.apache.axis2">
+    	<priority value="dinfo" />
+	</category >	
+	
+	<category name="org.apache.axis2.context">
+    	<priority value="info" />
+	</category>	
+	
+	<category name="org.apache.axis2.client">
+    	<priority value="info" />
+	</category>	
+	
+	<category name="org.apache.axis2.description">
+    	<priority value="info" />
+	</category>	
+	
+	
+
+  	<category name="org.apache.commons.httpclient">
+    	<priority value="info" />
+	</category >	
+
+  	<category name="org.apache.commons.httpclient.Wire">
+    	<priority value="debug" />
+	</category >	
+	
+	
+
+ 
+  <root>
+    <priority value="DEBUG" />
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="SubmitTestFileAppender" />
+  </root>
+  
+</log4j:configuration>
+
+
+<!--
+   Log4J Configuration Quick Reference:
+   ====================================
+
+
+   Priority order is DEBUG < INFO < WARN < ERROR < FATAL
+
+
+   PatternLayout conversion characters:
+
+    %c   Category of the logging event
+    %C   Fully qualified class name of the caller
+    %d   Date of the logging event  (example: %d{HH:mm:ss,SSS} )
+    %F   File name where the logging request was issued (caution: extremely slow)
+    %l   Location information of the caller (caution: extremely slow)
+    %L   Line number from where the logging request was issued (caution: extremely slow)
+    %m   Application-supplied message
+    %M   Method name from where the logging request was issued (caution: extremely slow)
+    %n   Line separator
+    %p   Priority of the logging event
+    %r   Number of milliseconds since the start of the application
+    %t   Name of the thread that generated the logging event
+    %x   Nested diagnotic context associated with the thread
+    %%   A single percent sign
+
+   Format modifiers examples:
+
+    %20c     Left pad with spaces if category is less than 20 characters long
+    %-20c    Right pad with spaces if category is less than 20 characters long
+    %.30c    Truncate from the beginning if category is more than 30 chars long
+    %20.30c  Left pad 20 chars + truncate from beginning if more than 30 chars
+    %-20.30c Right pad 20 chars + truncate from beginning if more than 30 chars
+
+   Examples:  "%r [%t] %-5p %c %x - %m\n"
+              "%-6r [%15.15t] %-5p %30.30c %x - %m\n"
+
+-->
