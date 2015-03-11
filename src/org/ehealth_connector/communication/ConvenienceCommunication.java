@@ -19,7 +19,6 @@
 package org.ehealth_connector.communication;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -251,7 +250,7 @@ public class ConvenienceCommunication {
 		txnData = new SubmitTransactionData();
 		this.organizationalId = dest.getSenderOrganizationalOid();
 		if (log4jConfigPath==null) {
-			log4jConfigPath = "./rsc/log4jInfo.xml";
+			log4jConfigPath = "./rsc/log4jDebug.xml";
 		}
 		setUp(dest, auditorEnabled, log4jConfigPath);
 	}
@@ -362,20 +361,18 @@ public class ConvenienceCommunication {
 	 * @throws Exception the exception
 	 */
 	protected void setUp(Destination dest, boolean auditorEnabled, String log4jConfigPath) throws Exception {
-		//super.setUp();
 		File conf = new File(log4jConfigPath);
 		org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
-		java.net.URI repositoryURI = null;
 
+	    if (dest.getKeyStore()!=null) {
+            System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
+            System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
+            System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
+            System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
+        }
+		
 		source = new B_Source(dest.getRegistryUri());
 		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
-		
-		if (dest.getKeyStore()!=null) {
-	        System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
-	        System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
-	        System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
-	        System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
-		}
 	}
 
 	 /**

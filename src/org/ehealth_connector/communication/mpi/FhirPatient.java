@@ -31,31 +31,21 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.LanguageCommunication;
 import org.openhealthtools.mdht.uml.cda.Organization;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
-import ca.uhn.fhir.model.api.IDatatype;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
-import ca.uhn.fhir.model.dstu2.valueset.MaritalStatusCodesEnum;
-import ca.uhn.fhir.model.primitive.BooleanDt;
-import ca.uhn.fhir.model.primitive.DateTimeDt;
-import ca.uhn.fhir.model.primitive.IntegerDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
@@ -224,42 +214,8 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         this.getTelecom().add(contactPointDt);
       }
     }
-    
-    // languageCommunications
-    if (patient.getMdhtPatient().getLanguageCommunications().size()>0) {
-      for(LanguageCommunication languageCommunication : patient.getMdhtPatient().getLanguageCommunications()) {
-        CodeableConceptDt communication = new CodeableConceptDt();
-        communication.setText(languageCommunication.getLanguageCode().getCode());
-        this.getCommunication().add(communication);
-      }
-    }
-    
-    // maritalStatus
-    if ((patient.getMdhtPatient().getMaritalStatusCode()!=null && patient.getMdhtPatient().getMaritalStatusCode().getCode()!=null)) {
-      this.setMaritalStatus(MaritalStatusCodesEnum.valueOf(patient.getMdhtPatient().getMaritalStatusCode().getCode()));
-    }
-    
-    // deceasedBooolean
-    if (patient.getDeceasedInd()!=null) {
-      setDeceased(new BooleanDt(patient.getDeceasedInd()));
-    }
-    
-    // deceasedDateTime
-    if (patient.getDeceasedTime()!=null) {
-      setDeceased(new DateTimeDt(patient.getDeceasedTime()));
-    }
-    
-    // multipleBirthInd
-    if (patient.getMultipleBirthInd()!=null) {
-      setMultipleBirth(new BooleanDt(patient.getMultipleBirthInd()));
-    }
-    
-    // multipleBirthOrder
-    if (patient.getMultipleBirthOrderNumber()!=null) {
-      setMultipleBirth(new IntegerDt(patient.getMultipleBirthOrderNumber()));
-    }
-    
   }
+
 
   public Patient getPatient() {
 
@@ -404,60 +360,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       }
     }
     
-    // languageCommunications
-    if (getCommunication().size()>0) {
-      for(CodeableConceptDt communication : getCommunication()) {
-        LanguageCommunication lang = CDAFactory.eINSTANCE.createLanguageCommunication();
-        CS languageCode = DatatypesFactory.eINSTANCE.createCS();
-        languageCode.setCode(communication.getText());
-        lang.setLanguageCode(languageCode);
-        patient.getMdhtPatient().getLanguageCommunications().add(lang);
-      }
-    }
-    
-    // maritalStatus
-    if (!getMaritalStatus().isEmpty()) {
-      CE maritalStatusCode = DatatypesFactory.eINSTANCE.createCE();
-      maritalStatusCode.setCode(getMaritalStatus().getValueAsEnum().toArray()[0].toString());
-      patient.getMdhtPatient().setMaritalStatusCode(maritalStatusCode);
-    }
-    
-    // deceasedBooolean
-    IDatatype idDeceased = getDeceased();
-    if (idDeceased instanceof BooleanDt ) {
-      BooleanDt deceased = (BooleanDt) idDeceased;
-      if (deceased.getValue()!=null) {
-        patient.setDeceasedInd(deceased.getValue());
-      }
-    }
-    
-    // deceasedDateTime
-    if (idDeceased instanceof DateTimeDt ) {
-      DateTimeDt deceased = (DateTimeDt) idDeceased;
-      if (deceased.getValue()!=null) {
-        patient.setDeceasedTime(deceased.getValue());
-        patient.setDeceasedInd(true);
-      }
-    }
-    
-    // multipleBirthOrder
-    IDatatype iMultipleBirth = getMultipleBirth();
-    if (iMultipleBirth instanceof IntegerDt ) {
-      IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
-      if (multipleBirth.getValue()!=null) {
-        patient.setMultipleBirthOrderNumber(multipleBirth.getValue());
-        patient.setMultipleBirthInd(true);
-      }
-    }
-    
-    // multipleBirth Indicator
-    if (iMultipleBirth instanceof BooleanDt ) {
-      BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
-      if (multipleBirth.getValue()!=null) {
-        patient.setMultipleBirthInd(true);
-      }
-    }    
- 
+
     return patient;
   }
 
