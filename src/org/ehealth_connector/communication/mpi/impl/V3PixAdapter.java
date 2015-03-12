@@ -16,6 +16,7 @@
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -34,15 +35,17 @@ import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerQuery;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerResponse;
 import org.openhealthtools.ihe.pix.source.v3.V3PixSource;
 import org.openhealthtools.ihe.pix.source.v3.V3PixSourceAcknowledgement;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceMergePatients;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordAdded;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
 import org.w3c.dom.Element;
 
+import ca.uhn.fhir.model.api.IDatatype;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.primitive.BooleanDt;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.IntegerDt;
 
 /**
  * V3PixAdapter
@@ -52,11 +55,14 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
  * 
  * @see ftp://ftp.ihe.net/DocumentPublication/CurrentPublished/ITInfrastructure/IHE_ITI_TF_Vol2b.pdf
  * 
- * The V3PixAdapter implements the MpiAdapterIntefarce with the Open Health Tools (OHT) IHE
- * Profile Classes V3PixConsumer and V3PixSource Open Health Tools IHE Profiles 
- * @see https://www.projects.openhealthtools.org/sf/projects/iheprofiles/ 
- * V3PixSource @see https://www.projects.openhealthtools.org/sf/projects/iheprofiles/javadocs/2.0.0/org/openhealthtools/ihe/pix/source/v3/V3PixSource.html 
- * V3PixConsumer @see https://www.projects.openhealthtools.org/sf/projects/iheprofiles /javadocs/2.0.0/org/openhealthtools/ihe/pix/consumer/v3/V3PixConsumer.html
+ *      The V3PixAdapter implements the MpiAdapterIntefarce with the Open Health Tools (OHT) IHE
+ *      Profile Classes V3PixConsumer and V3PixSource Open Health Tools IHE Profiles
+ * @see https://www.projects.openhealthtools.org/sf/projects/iheprofiles/ V3PixSource @see
+ *      https://www
+ *      .projects.openhealthtools.org/sf/projects/iheprofiles/javadocs/2.0.0/org/openhealthtools
+ *      /ihe/pix/source/v3/V3PixSource.html V3PixConsumer @see
+ *      https://www.projects.openhealthtools.org/sf/projects/iheprofiles
+ *      /javadocs/2.0.0/org/openhealthtools/ihe/pix/consumer/v3/V3PixConsumer.html
  * 
  * @author oliveregger
  */
@@ -93,222 +99,34 @@ public class V3PixAdapter implements MpiAdapterInterface {
     homeCommunityOid = adapterCfg.homeCommunityOid;
   }
 
-  /**
-   * Adds the demographic data of a patient for the V3PixSourceMergePatients message
-   * 
-   * @param patient the patient
-   * @param v3MergePatientsMessage the message
-   */
-  private void addDemographicData(FhirPatient patient,
-      V3PixSourceMergePatients v3MergePatientsMessage) {
-    addDemographicData(patient, null, null, v3MergePatientsMessage);
-  }
-
-  /**
-   * Adds the demographic data of a patient for the V3PixSourceRecordAdded message
-   * 
-   * @param patient the patient
-   * @param v3RecordAddedMessage the message
-   */
-  private void addDemographicData(FhirPatient patient, V3PixSourceRecordAdded v3RecordAddedMessage) {
-    addDemographicData(patient, v3RecordAddedMessage, null, null);
-  }
 
   /**
    * adds the demographic data to the pix queries, can be overloaded if additional information of
    * the patient needs to be providied for the mpi.
    * 
    * @param patient the patient
-   * @param v3RecordAddedMessage the v3 add message
+   * @param v3PixSourceMessage the v3 add message
    * @param v3RecordRevisedMessage the v3 revised message
    * @param v3MergePatientsMessage the v3 merge message
    */
-  protected void addDemographicData(FhirPatient patient,
-      V3PixSourceRecordAdded v3RecordAddedMessage, V3PixSourceRecordRevised v3RecordRevisedMessage,
-      V3PixSourceMergePatients v3MergePatientsMessage) {
-
-    // patient local id
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientID(getPatientId(patient, homeCommunityOid), homeCommunityOid,
-          adapterCfg.homeCommunityNamespace);
+  protected void addDemographicData(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    if (v3PixSourceMessage == null) {
+      return;
     }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientID(getPatientId(patient, homeCommunityOid),
-          homeCommunityOid, adapterCfg.homeCommunityNamespace);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientID(getPatientId(patient, homeCommunityOid),
-          homeCommunityOid, adapterCfg.homeCommunityNamespace);
-    }
-
-    // Name
-    String familyName = patient.getName().get(0).getFamilyAsSingleString();
-    String givenName = patient.getName().get(0).getGivenAsSingleString();
-    String otherName = ""; // other is resolved into given in addPatientName
-    // below, we have that already with above lines
-    String prefixName = patient.getName().get(0).getPrefixAsSingleString();
-    String suffixName = patient.getName().get(0).getSuffixAsSingleString();
-
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientName(familyName, givenName, otherName, prefixName, suffixName);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientName(familyName, givenName, otherName, prefixName,
-          suffixName);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientName(familyName, givenName, otherName, prefixName,
-          suffixName);
-    }
-
-    // Gender
-    if (patient.getGender() != null) {
-      String gender = "";
-      if ("male".equals(patient.getGender())) {
-        gender = "M";
-      } else if ("female".equals(patient.getGender())) {
-        gender = "F";
-      } else {
-        gender = "U";
-      }
-      if (v3RecordAddedMessage != null) {
-        v3RecordAddedMessage.setPatientGender(gender);
-      }
-      if (v3RecordRevisedMessage != null) {
-        v3RecordRevisedMessage.setPatientGender(gender);
-      }
-      if (v3MergePatientsMessage != null) {
-        v3MergePatientsMessage.setPatientGender(gender);
-      }
-    }
-
-    // Birthtime
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
-          .replaceAll("-", ""));
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
-          .replaceAll("-", ""));
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
-          .replaceAll("-", ""));
-    }
-
-    // scoping organization set the scoping organization
-    String organizationOid = "";
-    String organizationName = "";
-    String organizationTelecomValue = "";
-
-    Organization organization = (Organization) patient.getManagingOrganization().getResource();
-
-    if (organization != null && organization.getIdentifier().size() > 0) {
-      IdentifierDt organizationId = organization.getIdentifier().get(0);
-      if (organizationId.getSystem().startsWith("urn:oid:")) {
-        organizationOid = organizationId.getSystem().substring(8);
-      }
-    }
-
-    if (organization != null) {
-      organizationName = organization.getName();
-    }
-
-    if (organization != null && organization.getTelecom().size() > 0) {
-      if (organization.getTelecom().size()>0) {
-        ContactPointDt contactPoint = organization.getTelecomFirstRep();
-        if (contactPoint!=null) {
-          organizationTelecomValue = contactPoint.getValue();
-        }
-      }
-    }
-
-    if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
-    }
-    if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage
-      .setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
-    }
-    if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage
-      .setScopingOrganization(organizationOid, organizationName, organizationTelecomValue);
-    }
-
-    if (patient.getAddress().size()>0) {
-      // Patient Address
-      AddressDt addressDt = patient.getAddress().get(0);
-
-      String adressOtherDesignation = null;
-      if (addressDt.getLine().size() > 1) {
-        adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
-      }
-
-      // FIXME parameter adressType
-      if (v3RecordAddedMessage != null) {
-        v3RecordAddedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-            addressDt.getPostalCode(), adressOtherDesignation, null);
-      }
-      if (v3RecordRevisedMessage != null) {
-        v3RecordRevisedMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-            addressDt.getPostalCode(), adressOtherDesignation, null);
-      }
-      if (v3MergePatientsMessage != null) {
-        v3MergePatientsMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-            addressDt.getPostalCode(), adressOtherDesignation, null);
-      }
-    }
-
-    // telecommunication addresses (only phone and email will be added to source)
-    if (patient.getTelecom()!=null && patient.getTelecom().size()>0) {
-      for(ContactPointDt contactPointDt : patient.getTelecom()) {
-        // system    I   0..1    code    phone | fax | email | url
-        // use M   0..1    code    home | work | temp | old | mobile - purpose of this contact point
-        String telecomValue = "";
-        // FIXME ? OHT supports currently only "HP" or "WP"
-        String useValue="";
-        if ("phone".equals(contactPointDt.getSystem())) {
-          telecomValue = "tel:"+contactPointDt.getValue();
-          if ("home".equals(contactPointDt.getUse())) {
-            useValue="HP";
-          } if ("workd".equals(contactPointDt.getUse())) {
-            useValue="WP";
-          } 
-        }
-        if ("email".equals(contactPointDt.getSystem())) {
-          telecomValue = "mailto:"+contactPointDt.getValue();
-          if ("home".equals(contactPointDt.getUse())) {
-            useValue="HP";
-          } if ("workd".equals(contactPointDt.getUse())) {
-            useValue="WP";
-          } 
-        }
-        if (v3RecordAddedMessage != null) {
-          v3RecordAddedMessage.addPatientTelecom(telecomValue, useValue);
-        }
-        if (v3RecordRevisedMessage != null) {
-          v3RecordRevisedMessage.addPatientTelecom(telecomValue, useValue);
-        }
-        if (v3MergePatientsMessage != null) {
-          v3MergePatientsMessage.addPatientTelecom(telecomValue, useValue);
-        }
-      }
-    }
-
-  }
-
-  /**
-   * Adds the demographic data of a patient for the V3PixSourceRecordRevised message
-   * 
-   * @param patient the patient
-   * @param v3RecordRevisedMessage the message
-   */
-  private void addDemographicData(FhirPatient patient,
-      V3PixSourceRecordRevised v3RecordRevisedMessage) {
-    addDemographicData(patient, null, v3RecordRevisedMessage, null);
+    setScopingOrganization(patient, v3PixSourceMessage);
+    addPatientId(patient, v3PixSourceMessage);
+    addPatientName(patient, v3PixSourceMessage);
+    setPatientBirthTime(patient, v3PixSourceMessage);
+    setPatientGender(patient, v3PixSourceMessage);
+    addPatientAddresses(patient, v3PixSourceMessage);
+    addPatientTelecoms(patient, v3PixSourceMessage);
+    addLanguageCommunication(patient, v3PixSourceMessage);
+    setPatientMaritalStatus(patient, v3PixSourceMessage);
+    setDeceased(patient, v3PixSourceMessage);
+    setMultipeBirth(patient, v3PixSourceMessage);
+    // FIXME TODO
+    // non-medical identifiers
+    // mothers maiden name
   }
 
 
@@ -321,18 +139,19 @@ public class V3PixAdapter implements MpiAdapterInterface {
    * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.
    *      communication.mpi.FhirPatient)
    */
-  @Override
   public boolean addPatient(FhirPatient patient) {
     configure(true);
     log.debug("creating v3RecordAddedMessage");
-    V3PixSourceRecordAdded v3RecordAddedMessage =
-        new V3PixSourceRecordAdded(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-            adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+    V3PixSourceMessageHelper v3RecordAddedMessage =
+        new V3PixSourceMessageHelper(true, false, false, adapterCfg.senderApplicationOid,
+            adapterCfg.senderFacilityOid, adapterCfg.receiverApplicationOid,
+            adapterCfg.receiverFacilityOid);
     log.debug("add demographic data");
     addDemographicData(patient, v3RecordAddedMessage);
     try {
-      printMessage("addPatient", v3RecordAddedMessage.getRequest());
-      V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordAdded(v3RecordAddedMessage);
+      printMessage("addPatient", v3RecordAddedMessage.getV3RecordAddedMessage().getRequest());
+      V3PixSourceAcknowledgement v3pixack =
+          pixSource.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage());
       printMessage("sendRecordAdded", v3pixack.getRequest());
       return checkResponse(v3pixack);
     } catch (Exception e) {
@@ -357,63 +176,74 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Configures the V3PixAdapter, is automatically called by the different functions.
+   * updates the demographic information of the patient in the mpi.
    * 
-   * @param source true if source actor, false for consumer
+   * implements ITI-44 Patient Identity Source – Revise Patient Record updates the demographic
+   * information of the patient in the mpi.
+   * 
+   * @param patient the patient
    * @return true, if successful
+   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.
+   *      communication.mpi.FhirPatient)
    */
-  public boolean configure(boolean source) {
+  public boolean updatePatient(FhirPatient patient) {
+    if (pixSource == null) {
+      pixSource = new V3PixSource(adapterCfg.pixSourceUri);
+    }
+    V3PixSourceMessageHelper v3RecordRevisedMessage =
+        new V3PixSourceMessageHelper(false, true, false, adapterCfg.senderApplicationOid,
+            adapterCfg.senderFacilityOid, adapterCfg.receiverApplicationOid,
+            adapterCfg.receiverFacilityOid);
+    addDemographicData(patient, v3RecordRevisedMessage);
     try {
-      log.debug("configure start");
-      if (source && !sourceConfigured) {
-        sourceConfigured = true;
-        if (adapterCfg.auditSourceId != null) {
-          PIXSourceAuditor.getAuditor().getConfig().setAuditSourceId(adapterCfg.auditSourceId);
-        }
-        if (adapterCfg.auditRepositoryUri != null) {
-          PIXSourceAuditor.getAuditor().getConfig()
-          .setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
-        }
-        if (pixSource == null) {
-          pixSource = new V3PixSource(adapterCfg.pixSourceUri);
-        }
-      }
-      if (!source && !consumerConfigured) {
-        consumerConfigured = true;
-        if (adapterCfg.auditSourceId != null) {
-          PIXConsumerAuditor.getAuditor().getConfig().setAuditSourceId(adapterCfg.auditSourceId);
-        }
-        if (adapterCfg.auditRepositoryUri != null) {
-          PIXConsumerAuditor.getAuditor().getConfig()
-          .setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
-        }
-        if (v3PixConsumer == null) {
-          v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
-        }
-      }
+      printMessage("sourceUpdate", v3RecordRevisedMessage.getV3RecordRevisedMessage().getRequest());
+      V3PixSourceAcknowledgement v3pixack =
+          pixSource.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage());
+      printMessage("sourceUpdate", v3pixack.getRequest());
+      return checkResponse(v3pixack);
     } catch (Exception e) {
-      log.error("configuring not successfull", e);
+      log.error("updatePatient failed", e);
       return false;
     }
-    log.debug("configure end");
-    return true;
   }
 
   /**
-   * Gets the home community patient id.
+   * Merge patient. implements ITI-44 Patient Identity Source – Patient Identity Merge
    * 
-   * @param patient the patient
-   * @return the home community patient id
+   * Patient Registry Duplicates Resolved message indicates that the Patient Identity Source has
+   * done a merge within a specific Patient Identification Domain. That is, the surviving identifier
+   * (patient ID) has subsumed a duplicate patient identifier.
+   * 
+   * @param patient the patient (with the suriving identifier)
+   * @param obsoleteId the obsolete id (duplicate patient identifier)
+   * @return true, if successful
+   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.
+   *      communication.mpi.FhirPatient, java.lang.String)
    */
-  private String getHomeCommunityPatientId(FhirPatient patient) {
-    for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      if (identifierDt.getSystem().startsWith("urn:oid:")) {
-        if (identifierDt.getSystem().substring(8).equals(homeCommunityOid)) {
-          return identifierDt.getValue();
-        }
-      }
+  public boolean mergePatient(FhirPatient patient, String obsoleteId) {
+
+    if (!configure(true)) {
+      return false;
     }
-    return null;
+
+    V3PixSourceMessageHelper v3pixSourceMsgMerge =
+        new V3PixSourceMessageHelper(false, false, true, adapterCfg.senderApplicationOid,
+            adapterCfg.senderFacilityOid, adapterCfg.receiverApplicationOid,
+            adapterCfg.receiverFacilityOid);
+    addDemographicData(patient, v3pixSourceMsgMerge);
+
+    v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId,
+        this.homeCommunityOid, this.adapterCfg.homeCommunityNamespace);
+    try {
+      printMessage("sourceMerge", v3pixSourceMsgMerge.getV3MergePatientsMessage().getRequest());
+      V3PixSourceAcknowledgement v3pixack =
+          pixSource.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage());
+      printMessage("sourceMerge", v3pixack.getRequest());
+      return checkResponse(v3pixack);
+    } catch (Exception e) {
+      log.error("mergePatient failed", e);
+      return false;
+    }
   }
 
   /**
@@ -447,78 +277,151 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * returns a patient id defined by patient identity issuing system.
+   * Gets the home community patient id.
    * 
-   * @param patient the Patient
-   * @param systemOid the oid of the system responsible which issued the patient id
-   * @return the patient id
+   * @param patient the patient
+   * @return the home community patient id
    */
-  private String getPatientId(FhirPatient patient, String systemOid) {
-    initHomeCommunityId(patient);
+  private String getHomeCommunityPatientId(FhirPatient patient) {
     for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      String idSystem = identifierDt.getSystem();
-      if (idSystem != null && idSystem.equals("urn:oid:"+systemOid)) {
-        return identifierDt.getValue();
+      if (identifierDt.getSystem().startsWith("urn:oid:")) {
+        if (identifierDt.getSystem().substring(8).equals(this.homeCommunityOid)) {
+          return identifierDt.getValue();
+        }
       }
     }
     return null;
   }
 
   /**
-   * Inits the home community
-   * 
-   * if home community ist not defined and patient has only one identifier, the home homeCommunityId
-   * is initialized with the system of the identifier
+   * Query patient id.
    * 
    * @param patient the patient
+   * @return the string
    */
-  private void initHomeCommunityId(FhirPatient patient) {
-    if (homeCommunityOid == null) {
-      if (patient.getIdentifier().size() == 1) {
-        if (patient.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
-          homeCommunityOid = patient.getIdentifier().get(0).getSystem();
-        }
-      } else {
-        throw new IllegalStateException("homeCommunityId has to be specified");
+  public String queryPatientId(FhirPatient patient) {
+    return queryPatientId(patient, null, null)[0];
+  }
+
+  /**
+   * query the mpi with patient id and return the ids in the queried Domains from the mpi.
+   * 
+   * Implements ITI-45 Patient Identifier Cross-reference Consumer Queries the Patient Identifier
+   * Cross-reference Manager for a list of corresponding patientidentifiers, if any
+   * 
+   * @param patient the patient
+   * @param queryDomainOids the query domain oids
+   * @param queryDomainNamespaces the query domain namespaces
+   * @return the string[]
+   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.
+   *      communication.mpi.FhirPatient, java.lang.String, java.lang.String)
+   */
+  public String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
+      String[] queryDomainNamespaces) {
+
+    if (!configure(false)) {
+      return null;
+    }
+    String domainToReturnOids[] = null;
+    String domainToReturnNamespaces[] = null;
+
+    if (queryDomainOids != null) {
+      domainToReturnOids = queryDomainOids;
+    } else {
+      if (adapterCfg.domainToReturnOid != null) {
+        domainToReturnOids = new String[1];
+        domainToReturnOids[0] = adapterCfg.domainToReturnOid;
       }
+    }
+    if (queryDomainNamespaces != null) {
+      domainToReturnNamespaces = queryDomainNamespaces;
+    } else if (adapterCfg.domainToReturnNamespace != null) {
+      domainToReturnNamespaces = new String[1];
+      domainToReturnNamespaces[0] = adapterCfg.domainToReturnNamespace;
+    }
+
+    V3PixConsumerQuery v3PixConsumerQuery =
+        new V3PixConsumerQuery(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
+            adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+
+    // add the patient identifier
+    String homeCommunityPatientId = this.getHomeCommunityPatientId(patient);
+    if (homeCommunityPatientId != null) {
+      v3PixConsumerQuery.addPatientIdToQuery(homeCommunityPatientId, homeCommunityOid,
+          adapterCfg.homeCommunityNamespace);
+
+      if (domainToReturnOids != null) {
+        for (int i = 0; i < domainToReturnOids.length; ++i) {
+          String domainToReturnOid = domainToReturnOids[i];
+          String domainToReturnNamespace = null;
+          if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
+            domainToReturnNamespace = domainToReturnNamespaces[i];
+          }
+          v3PixConsumerQuery.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
+        }
+      }
+      V3PixConsumerResponse v3PixConsumerResponse = null;
+      try {
+        v3PixConsumerResponse = v3PixConsumer.sendQuery(v3PixConsumerQuery);
+        if (domainToReturnOids != null) {
+          String returnIds[] = new String[domainToReturnOids.length];
+          for (int i = 0; i < returnIds.length; ++i) {
+            returnIds[i] = getPatientDomainId(v3PixConsumerResponse, domainToReturnOids[i]);
+          }
+          return returnIds;
+        }
+        return null;
+      } catch (Exception e) {
+        log.error("exception queryPatient", e);
+        return null;
+      }
+    } else {
+      log.error("homeCommunityPatientId not provided");
+      return null;
     }
   }
 
   /**
-   * Merge patient. implements ITI-44 Patient Identity Source – Patient Identity Merge
+   * Configures the V3PixAdapter, is automatically called by the different functions.
    * 
-   * Patient Registry Duplicates Resolved message indicates that the Patient Identity Source has
-   * done a merge within a specific Patient Identification Domain. That is, the surviving identifier
-   * (patient ID) has subsumed a duplicate patient identifier.
-   * 
-   * @param patient the patient (with the suriving identifier)
-   * @param obsoleteId the obsolete id (duplicate patient identifier)
+   * @param source true if source actor, false for consumer
    * @return true, if successful
-   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.
-   *      communication.mpi.FhirPatient, java.lang.String)
    */
-  @Override
-  public boolean mergePatient(FhirPatient patient, String obsoleteId) {
-
-    if (!configure(true)) {
-      return false;
-    }
-
-    V3PixSourceMergePatients v3MergePatientsMessage =
-        new V3PixSourceMergePatients(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-            adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
-    addDemographicData(patient, v3MergePatientsMessage);
-    v3MergePatientsMessage.setObsoletePatientID(obsoleteId, homeCommunityOid,
-        adapterCfg.homeCommunityNamespace);
+  public boolean configure(boolean source) {
     try {
-      printMessage("sourceMerge", v3MergePatientsMessage.getRequest());
-      V3PixSourceAcknowledgement v3pixack = pixSource.sendMergePatients(v3MergePatientsMessage);
-      printMessage("sourceMerge", v3pixack.getRequest());
-      return checkResponse(v3pixack);
+      log.debug("configure start");
+      if (source && !sourceConfigured) {
+        this.sourceConfigured = true;
+        if (adapterCfg.auditSourceId != null) {
+          PIXSourceAuditor.getAuditor().getConfig().setAuditSourceId(adapterCfg.auditSourceId);
+        }
+        if (adapterCfg.auditRepositoryUri != null) {
+          PIXSourceAuditor.getAuditor().getConfig()
+              .setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
+        }
+        if (pixSource == null) {
+          pixSource = new V3PixSource(adapterCfg.pixSourceUri);
+        }
+      }
+      if (!source && !consumerConfigured) {
+        this.consumerConfigured = true;
+        if (adapterCfg.auditSourceId != null) {
+          PIXConsumerAuditor.getAuditor().getConfig().setAuditSourceId(adapterCfg.auditSourceId);
+        }
+        if (adapterCfg.auditRepositoryUri != null) {
+          PIXConsumerAuditor.getAuditor().getConfig()
+              .setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
+        }
+        if (v3PixConsumer == null) {
+          v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
+        }
+      }
     } catch (Exception e) {
-      log.error("mergePatient failed", e);
+      log.error("configuring not successfull", e);
       return false;
     }
+    log.debug("configure end");
+    return true;
   }
 
   /**
@@ -548,123 +451,238 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Query patient id.
+   * Inits the home community
+   * 
+   * if home community ist not defined and patient has only one identifier, the home homeCommunityId
+   * is initialized with the system of the identifier
    * 
    * @param patient the patient
-   * @return the string
    */
-  public String queryPatientId(FhirPatient patient) {
-    return queryPatientId(patient, null, null)[0];
+  private void initHomeCommunityId(FhirPatient patient) {
+    if (homeCommunityOid == null) {
+      if (patient.getIdentifier().size() == 1) {
+        if (patient.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
+          homeCommunityOid = patient.getIdentifier().get(0).getSystem();
+        }
+      } else {
+        throw new IllegalStateException("homeCommunityId has to be specified");
+      }
+    }
+  }
+
+
+  private void addPatientTelecoms(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    // telecommunication addresses (only phone and email will be added to source)
+    if (patient.getTelecom() != null && patient.getTelecom().size() > 0) {
+      for (ContactPointDt contactPointDt : patient.getTelecom()) {
+        // system I 0..1 code phone | fax | email | url
+        // use M 0..1 code home | work | temp | old | mobile - purpose of this contact point
+        String telecomValue = "";
+        // FIXME ? OHT supports currently only "HP" or "WP"
+        String useValue = "";
+        if ("phone".equals(contactPointDt.getSystem())) {
+          telecomValue = "tel:" + contactPointDt.getValue();
+          if ("home".equals(contactPointDt.getUse())) {
+            useValue = "HP";
+          }
+          if ("workd".equals(contactPointDt.getUse())) {
+            useValue = "WP";
+          }
+        }
+        if ("email".equals(contactPointDt.getSystem())) {
+          telecomValue = "mailto:" + contactPointDt.getValue();
+          if ("home".equals(contactPointDt.getUse())) {
+            useValue = "HP";
+          }
+          if ("workd".equals(contactPointDt.getUse())) {
+            useValue = "WP";
+          }
+        }
+        v3PixSourceMessage.addPatientTelecom(telecomValue, useValue);
+      }
+    }
+  }
+
+  private void addPatientAddresses(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    // FIXME multiple Addresses would be possible
+    if (patient.getAddress().size() > 0) {
+      // Patient Address
+      AddressDt addressDt = patient.getAddress().get(0);
+
+      String adressOtherDesignation = null;
+      if (addressDt.getLine().size() > 1) {
+        adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+      }
+
+      // FIXME parameter adressType
+      v3PixSourceMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
+          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+          addressDt.getPostalCode(), adressOtherDesignation, null);
+    }
+  }
+
+  private void setScopingOrganization(FhirPatient patient,
+      V3PixSourceMessageHelper v3PixSourceMessage) {
+    // scoping organization set the scoping organization
+    String organizationOid = "";
+    String organizationName = "";
+    String organizationTelecomValue = "";
+
+    Organization organization = (Organization) patient.getManagingOrganization().getResource();
+
+    if (organization != null && organization.getIdentifier().size() > 0) {
+      IdentifierDt organizationId = organization.getIdentifier().get(0);
+      if (organizationId.getSystem().startsWith("urn:oid:")) {
+        organizationOid = organizationId.getSystem().substring(8);
+      }
+    }
+
+    if (organization != null && organization.getName()!=null) {
+      organizationName = organization.getName();
+    }
+
+    if (organization != null && organization.getTelecom().size() > 0) {
+      if (organization.getTelecom().size() > 0) {
+        ContactPointDt contactPoint = organization.getTelecomFirstRep();
+        if (contactPoint != null) {
+          organizationTelecomValue = contactPoint.getValue();
+        }
+      }
+    }
+
+    v3PixSourceMessage.setScopingOrganization(organizationOid, organizationName,
+        organizationTelecomValue);
+  }
+
+  private void setPatientBirthTime(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    v3PixSourceMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
+        .replaceAll("-", ""));
+  }
+
+  private void setPatientGender(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    // Gender
+    if (patient.getGender() != null) {
+      String gender = "";
+      if ("male".equals(patient.getGender())) {
+        gender = "M";
+      } else if ("female".equals(patient.getGender())) {
+        gender = "F";
+      } else {
+        gender = "U";
+      }
+      v3PixSourceMessage.setPatientGender(gender);
+    }
+  }
+
+  private void addPatientId(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    // patient local id
+    v3PixSourceMessage.addPatientID(getPatientId(patient, homeCommunityOid), homeCommunityOid,
+        adapterCfg.homeCommunityNamespace);
+  }
+
+  private void addPatientName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    // Name
+    String familyName = patient.getName().get(0).getFamilyAsSingleString();
+    String givenName = patient.getName().get(0).getGivenAsSingleString();
+    String otherName = ""; // other is resolved into given in addPatientName
+    // below, we have that already with above lines
+    String prefixName = patient.getName().get(0).getPrefixAsSingleString();
+    String suffixName = patient.getName().get(0).getSuffixAsSingleString();
+    v3PixSourceMessage.addPatientName(familyName, givenName, otherName, prefixName, suffixName);
   }
 
   /**
-   * query the mpi with patient id and return the ids in the queried Domains from the mpi.
-   * 
-   * Implements ITI-45 Patient Identifier Cross-reference Consumer Queries the Patient Identifier
-   * Cross-reference Manager for a list of corresponding patientidentifiers, if any
+   * Adds the language communication. FHIR language code is based on
+   * http://tools.ietf.org/html/bcp47, HL7V3 makes no requirements
    * 
    * @param patient the patient
-   * @param queryDomainOids the query domain oids
-   * @param queryDomainNamespaces the query domain namespaces
-   * @return the string[]
-   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.
-   *      communication.mpi.FhirPatient, java.lang.String, java.lang.String)
+   * @param v3PixSourceMessage the v3 pix source message
    */
-  @Override
-  public String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
-      String[] queryDomainNamespaces) {
-
-    if (!configure(false)) {
-      return null;
-    }
-    String domainToReturnOids[] = null;
-    String domainToReturnNamespaces[] = null;
-
-    if (queryDomainOids != null) {
-      domainToReturnOids = queryDomainOids;
-    } else {
-      if (adapterCfg.domainToReturnOid!=null) {
-        domainToReturnOids = new String[1];
-        domainToReturnOids[0] = adapterCfg.domainToReturnOid;
+  private void addLanguageCommunication(FhirPatient patient,
+      V3PixSourceMessageHelper v3PixSourceMessage) {
+    if (patient.getCommunication().size() > 0) {
+      for (CodeableConceptDt communication : patient.getCommunication()) {
+        v3PixSourceMessage.addLanguageCommunication(communication.getText());
       }
-    }
-    if (queryDomainNamespaces != null) {
-      domainToReturnNamespaces = queryDomainNamespaces;
-    } else if (adapterCfg.domainToReturnNamespace != null) {
-      domainToReturnNamespaces = new String[1];
-      domainToReturnNamespaces[0] = adapterCfg.domainToReturnNamespace;
-    }
-
-    V3PixConsumerQuery v3PixConsumerQuery =
-        new V3PixConsumerQuery(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-            adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
-
-    // add the patient identifier
-    String homeCommunityPatientId = getHomeCommunityPatientId(patient);
-    if (homeCommunityPatientId != null) {
-      v3PixConsumerQuery.addPatientIdToQuery(homeCommunityPatientId, homeCommunityOid,
-          adapterCfg.homeCommunityNamespace);
-
-      if (domainToReturnOids!=null) {
-        for (int i = 0; i < domainToReturnOids.length; ++i) {
-          String domainToReturnOid = domainToReturnOids[i];
-          String domainToReturnNamespace = null;
-          if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
-            domainToReturnNamespace = domainToReturnNamespaces[i];
-          }
-          v3PixConsumerQuery.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
-        }
-      }
-      V3PixConsumerResponse v3PixConsumerResponse = null;
-      try {
-        v3PixConsumerResponse = v3PixConsumer.sendQuery(v3PixConsumerQuery);
-        if (domainToReturnOids!=null) {
-          String returnIds[] = new String[domainToReturnOids.length];
-          for (int i = 0; i < returnIds.length; ++i) {
-            returnIds[i] = getPatientDomainId(v3PixConsumerResponse, domainToReturnOids[i]);
-          }
-          return returnIds;
-        }
-        return null;
-      } catch (Exception e) {
-        log.error("exception queryPatient", e);
-        return null;
-      }
-    } else {
-      log.error("homeCommunityPatientId not provided");
-      return null;
     }
   }
 
   /**
-   * updates the demographic information of the patient in the mpi.
-   * 
-   * implements ITI-44 Patient Identity Source – Revise Patient Record updates the demographic
-   * information of the patient in the mpi.
+   * Adds the marital status. 
+   * TODO is the coding of marital status of fhir equivalent to HL7 V3?
+   * http://hl7.org/implement/standards/FHIR-Develop/valueset-marital-status.html
    * 
    * @param patient the patient
-   * @return true, if successful
-   * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.
-   *      communication.mpi.FhirPatient)
+   * @param v3PixSourceMessage the v3 pix source message
    */
-  @Override
-  public boolean updatePatient(FhirPatient patient) {
-    if (pixSource == null) {
-      pixSource = new V3PixSource(adapterCfg.pixSourceUri);
-    }
-    V3PixSourceRecordRevised v3RecordRevisedMessage =
-        new V3PixSourceRecordRevised(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-            adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
-    addDemographicData(patient, v3RecordRevisedMessage);
-    try {
-      printMessage("sourceUpdate", v3RecordRevisedMessage.getRequest());
-      V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordRevised(v3RecordRevisedMessage);
-      printMessage("sourceUpdate", v3pixack.getRequest());
-      return checkResponse(v3pixack);
-    } catch (Exception e) {
-      log.error("updatePatient failed", e);
-      return false;
+  private void setPatientMaritalStatus(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    if (!patient.getMaritalStatus().isEmpty()) {
+      v3PixSourceMessage.setPatientMaritalStatus(patient.getMaritalStatus().getValueAsEnum().toArray()[0].toString());
     }
   }
+  
+  /**
+   * sets the deceased status, either boolean or by datetime
+   * @param patient
+   * @param v3PixSourceMessage
+   */
+  public void setDeceased(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    IDatatype idDeceased = patient.getDeceased();
+    if (idDeceased instanceof DateTimeDt ) {
+      DateTimeDt deceased = (DateTimeDt) idDeceased;
+      if (deceased.getValue()!=null) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        v3PixSourceMessage.setPatientDeceasedTime(dateFormat.format(deceased.getValue()));
+        v3PixSourceMessage.setPatientDeceased(true);
+      }
+    }
+    if (idDeceased instanceof BooleanDt ) {
+      BooleanDt deceased = (BooleanDt) idDeceased;
+      if (deceased.getValue()!=null) {
+        v3PixSourceMessage.setPatientDeceased(deceased.getValue());
+      }
+    }
+  }
+  
+  /**
+   * Set the patient Birth Order
+   * @param patient
+   * @param v3PixSourceMessage
+   */
+  public void setMultipeBirth(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    IDatatype iMultipleBirth = patient.getMultipleBirth();
+    if (iMultipleBirth instanceof IntegerDt ) {
+      IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
+      if (multipleBirth.getValue()!=null) {
+        v3PixSourceMessage.setMultipleBirthOrderNumber(multipleBirth.getValue());
+        v3PixSourceMessage.setMultipleBirthIndicator(true);
+      }
+    }
+    if (iMultipleBirth instanceof BooleanDt ) {
+      BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
+      if (multipleBirth.getValue()!=null) {
+        v3PixSourceMessage.setPatientDeceased(multipleBirth.getValue());
+      }
+    }    
+  }
+
+  /**
+   * returns a patient id defined by patient identity issuing system.
+   * 
+   * @param patient the Patient
+   * @param systemOid the oid of the system responsible which issued the patient id
+   * @return the patient id
+   */
+  private String getPatientId(FhirPatient patient, String systemOid) {
+    initHomeCommunityId(patient);
+    for (IdentifierDt identifierDt : patient.getIdentifier()) {
+      String idSystem = identifierDt.getSystem();
+      if (idSystem != null && idSystem.equals("urn:oid:" + systemOid)) {
+        return identifierDt.getValue();
+      }
+    }
+    return null;
+  }
+
 
 }
