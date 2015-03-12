@@ -28,8 +28,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
+import org.hl7.v3.AD;
 import org.openhealthtools.ihe.atna.auditor.PIXConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
+import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumer;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerQuery;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerResponse;
@@ -41,6 +43,7 @@ import ca.uhn.fhir.model.api.IDatatype;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
+import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.primitive.BooleanDt;
@@ -124,9 +127,10 @@ public class V3PixAdapter implements MpiAdapterInterface {
     setPatientMaritalStatus(patient, v3PixSourceMessage);
     setDeceased(patient, v3PixSourceMessage);
     setMultipeBirth(patient, v3PixSourceMessage);
+    setPatientMothersMaidenName(patient, v3PixSourceMessage);
+    setBirthPlace(patient, v3PixSourceMessage);
     // FIXME TODO
     // non-medical identifiers
-    // mothers maiden name
   }
 
 
@@ -478,23 +482,25 @@ public class V3PixAdapter implements MpiAdapterInterface {
         // system I 0..1 code phone | fax | email | url
         // use M 0..1 code home | work | temp | old | mobile - purpose of this contact point
         String telecomValue = "";
-        // FIXME ? OHT supports currently only "HP" or "WP"
         String useValue = "";
         if ("phone".equals(contactPointDt.getSystem())) {
           telecomValue = "tel:" + contactPointDt.getValue();
           if ("home".equals(contactPointDt.getUse())) {
-            useValue = "HP";
+            useValue = "H";
           }
-          if ("workd".equals(contactPointDt.getUse())) {
+          if ("work".equals(contactPointDt.getUse())) {
             useValue = "WP";
+          }
+          if ("mobile".equals(contactPointDt.getUse())) {
+            useValue = "MC";
           }
         }
         if ("email".equals(contactPointDt.getSystem())) {
           telecomValue = "mailto:" + contactPointDt.getValue();
           if ("home".equals(contactPointDt.getUse())) {
-            useValue = "HP";
+            useValue = "H";
           }
-          if ("workd".equals(contactPointDt.getUse())) {
+          if ("work".equals(contactPointDt.getUse())) {
             useValue = "WP";
           }
         }
@@ -504,20 +510,34 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   private void addPatientAddresses(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-    // FIXME multiple Addresses would be possible
     if (patient.getAddress().size() > 0) {
-      // Patient Address
-      AddressDt addressDt = patient.getAddress().get(0);
-
-      String adressOtherDesignation = null;
-      if (addressDt.getLine().size() > 1) {
-        adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+      for(AddressDt addressDt : patient.getAddress()) {
+  
+        String adressOtherDesignation = null;
+        if (addressDt.getLine().size() > 1) {
+          adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+        }
+        String addressType = null;
+        if (addressDt.getUseElement()!=null && addressDt.getUseElement().getValueAsEnum()!=null) {
+          switch(addressDt.getUseElement().getValueAsEnum()) {
+            case HOME:
+              addressType = "H";
+              break;
+            case WORK:
+              addressType = "WP";
+              break;
+            case TEMP:
+              addressType = "TMP";
+              break;
+            case OLD:
+              addressType = "OLD";
+              break;
+          }
+        }
+        v3PixSourceMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
+            addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+            addressDt.getPostalCode(), adressOtherDesignation, addressType);
       }
-
-      // FIXME parameter adressType
-      v3PixSourceMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
-          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-          addressDt.getPostalCode(), adressOtherDesignation, null);
     }
   }
 
@@ -665,6 +685,42 @@ public class V3PixAdapter implements MpiAdapterInterface {
       }
     }    
   }
+  
+  /**
+   * Sets the patients mother maiden name
+   * @param patient
+   * @param v3PixSourceMessage
+   */
+  public void setPatientMothersMaidenName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    HumanNameDt maidenName = patient.getMothersMaidenName();
+    if (maidenName.isEmpty()) {
+      String familyName = maidenName.getFamilyAsSingleString();
+      String givenName = maidenName.getGivenAsSingleString();
+      String otherName = ""; // other is resolved into given in addPatientName
+      String prefixName = maidenName.getPrefixAsSingleString();
+      String suffixName = maidenName.getSuffixAsSingleString();
+      v3PixSourceMessage.setPatientMothersMaidenName(familyName, givenName, otherName, suffixName, prefixName);
+    }
+  }
+  
+  /**
+   * Sets the birthplace
+   * @param patient
+   * @param v3PixSourceMessage
+   */
+  public void setBirthPlace(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    if (patient.getBirthPlace()!=null) {
+      AddressDt addressDt = patient.getBirthPlace();
+      String adressOtherDesignation = null;
+      if (addressDt.getLine().size() > 1) {
+        adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+      }
+      AD patientAddress = PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(),
+          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
+          addressDt.getPostalCode(), adressOtherDesignation, null);
+      v3PixSourceMessage.setBirthPlace(patientAddress);
+    }
+  }
 
   /**
    * returns a patient id defined by patient identity issuing system.
@@ -683,6 +739,9 @@ public class V3PixAdapter implements MpiAdapterInterface {
     }
     return null;
   }
+  
+  
+  
 
 
 }

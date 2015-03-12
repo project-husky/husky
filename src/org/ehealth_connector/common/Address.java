@@ -63,16 +63,18 @@ public class Address {
     mAd = DatatypesFactory.eINSTANCE.createAD();
     setCity(city);
     setZip(zip);
-    switch (usage) {
-      case BUSINESS:
-        mAd.getUses().add(PostalAddressUse.WP);
-        break;
-      case PRIVATE:
-        mAd.getUses().add(PostalAddressUse.HP);
-        break;
-      default:
-        mAd.getUses().add(PostalAddressUse.WP);
-        break;
+    if (usage!=null) {
+      switch (usage) {
+        case BUSINESS:
+          mAd.getUses().add(PostalAddressUse.WP);
+          break;
+        case PRIVATE:
+          mAd.getUses().add(PostalAddressUse.HP);
+          break;
+        default:
+          mAd.getUses().add(PostalAddressUse.WP);
+          break;
+      }
     }
   }
 

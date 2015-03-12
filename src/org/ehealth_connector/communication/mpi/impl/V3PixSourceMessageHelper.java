@@ -15,16 +15,25 @@
  *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
+import org.eclipse.emf.common.util.Enumerator;
+import org.hl7.v3.AD;
+import org.hl7.v3.COCTMT710007UVPlace;
+import org.hl7.v3.HomeAddressUse;
 import org.hl7.v3.PRPAIN201301UV02Type;
 import org.hl7.v3.PRPAIN201302UV02Type;
 import org.hl7.v3.PRPAIN201304UV02Type;
+import org.hl7.v3.PRPAMT201301UV02BirthPlace;
 import org.hl7.v3.PRPAMT201301UV02LanguageCommunication;
 import org.hl7.v3.PRPAMT201301UV02Person;
+import org.hl7.v3.PRPAMT201302UV02BirthPlace;
 import org.hl7.v3.PRPAMT201302UV02LanguageCommunication;
 import org.hl7.v3.PRPAMT201302UV02PatientPatientPerson;
+import org.hl7.v3.PRPAMT201303UV02BirthPlace;
 import org.hl7.v3.PRPAMT201303UV02LanguageCommunication;
 import org.hl7.v3.PRPAMT201303UV02Person;
+import org.hl7.v3.TEL;
 import org.hl7.v3.V3Factory;
+import org.hl7.v3.WorkPlaceAddressUse;
 import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
 import org.openhealthtools.ihe.pix.source.v3.V3PixSourceMergePatients;
 import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordAdded;
@@ -33,7 +42,9 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
 /**
  * The Class V3PixSourceMessageHelper.
  * 
- * Simplifies the api to the three different PIX Source messages implementations and leaves the possibility to get back to the PatientRole for languageCommunication which is not implemented in OHT V3 Message
+ * Simplifies the api to the three different PIX Source messages implementations and leaves the
+ * possibility to get back to the PatientRole for languageCommunication which is not implemented in
+ * OHT V3 Message
  * 
  * @author oliveregger
  */
@@ -74,29 +85,68 @@ public class V3PixSourceMessageHelper {
 
   /**
    * Adds the language communication.
-   *
+   * 
    * @param languageCommunication the language communication
    */
   public void addLanguageCommunication(String languageCommunication) {
-    if (v3RecordAddedMessage!=null) {
-      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);  
-      PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201301UV02LanguageCommunication();
+    if (v3RecordAddedMessage != null) {
+      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
+      PRPAMT201301UV02LanguageCommunication communication =
+          V3Factory.eINSTANCE.createPRPAMT201301UV02LanguageCommunication();
       communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
       patientPerson.getLanguageCommunication().add(communication);
     }
-    if (v3RecordRevisedMessage!=null) {
-      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);  
-      PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201302UV02LanguageCommunication();
+    if (v3RecordRevisedMessage != null) {
+      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
+      PRPAMT201302UV02LanguageCommunication communication =
+          V3Factory.eINSTANCE.createPRPAMT201302UV02LanguageCommunication();
       communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
       patientPerson.getLanguageCommunication().add(communication);
     }
-    if (v3MergePatientsMessage!=null) {
-      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);  
-      PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201303UV02LanguageCommunication();
+    if (v3MergePatientsMessage != null) {
+      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
+      PRPAMT201303UV02LanguageCommunication communication =
+          V3Factory.eINSTANCE.createPRPAMT201303UV02LanguageCommunication();
       communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
       patientPerson.getLanguageCommunication().add(communication);
     }
   }
+
+  /**
+   * Adds the birth place
+   * 
+   * @param addressBirthPlace the new birth place address
+   */
+  public void setBirthPlace(AD addressBirthPlace) {
+    if (v3RecordAddedMessage != null) {
+      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
+      PRPAMT201301UV02BirthPlace birthplace =
+          V3Factory.eINSTANCE.createPRPAMT201301UV02BirthPlace();
+      COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+      place.setAddr(addressBirthPlace);
+      birthplace.setBirthplace(place);
+      patientPerson.setBirthPlace(birthplace);
+    }
+    if (v3RecordRevisedMessage != null) {
+      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
+      PRPAMT201302UV02BirthPlace birthplace =
+          V3Factory.eINSTANCE.createPRPAMT201302UV02BirthPlace();
+      COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+      place.setAddr(addressBirthPlace);
+      birthplace.setBirthplace(place);
+      patientPerson.setBirthPlace(birthplace);
+    }
+    if (v3MergePatientsMessage != null) {
+      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
+      PRPAMT201303UV02BirthPlace birthplace =
+          V3Factory.eINSTANCE.createPRPAMT201303UV02BirthPlace();
+      COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+      place.setAddr(addressBirthPlace);
+      birthplace.setBirthplace(place);
+      patientPerson.setBirthPlace(birthplace);
+    }
+  }
+
 
   /**
    * Add an address for the patient.
@@ -241,28 +291,73 @@ public class V3PixSourceMessageHelper {
   }
 
   /**
-   * Add a telecom value with the provided useValue ("HP" or "WP")
+   * Create a TEL type object with the supplied telecom value and use value (if supplied)
+   * we extend the type her also for the mobile, the standard PixPdqV3Utils.createTel has only WP and HP for usevalue
+   * 
+   * @param telecomValue (the phone, web, or e-mail address value)
+   * @param useValue (original either "WP" for Work or "HP" for Home)
+   * @return TEL type with the supplied telecom and use values.
+   */
+  public static TEL createTEL(String telecomValue, String useValue) {
+      TEL returnTEL = V3Factory.eINSTANCE.createTEL();
+      returnTEL.setValue(telecomValue);
+      if (null != useValue)
+      {
+          if (useValue == "WP")
+              returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(WorkPlaceAddressUse.WP));
+          else if(useValue == "HP")
+              returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(HomeAddressUse.HP));
+          else if(useValue == "H")
+            returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(HomeAddressUse.H));
+          else if(useValue == "MC") {
+            returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(new Enumerator() {
+
+              @Override
+              public String getLiteral() {
+                return "MC";
+              }
+
+              @Override
+              public String getName() {
+                return "MC";
+              }
+
+              @Override
+              public int getValue() {
+                return 0;
+              }
+              
+            }));
+          }
+      }
+      return returnTEL;
+  }
+
+  /**
+   * Add a telecom value with the provided useValue ("HP" or "WP" or "H" or "MC")
    * 
    * @param telecomValue
    * @param useValue
    */
   public void addPatientTelecom(String telecomValue, String useValue) {
+    
     if (v3RecordAddedMessage != null) {
-      v3RecordAddedMessage.addPatientTelecom(telecomValue, useValue);
+      PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
+      patientPerson.getTelecom().add(createTEL(telecomValue, useValue));
     }
     if (v3RecordRevisedMessage != null) {
-      v3RecordRevisedMessage.addPatientTelecom(telecomValue, useValue);
+      PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
+      patientPerson.getTelecom().add(createTEL(telecomValue, useValue));
     }
     if (v3MergePatientsMessage != null) {
-      v3MergePatientsMessage.addPatientTelecom(telecomValue, useValue);
+      PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
+      patientPerson.getTelecom().add(createTEL(telecomValue, useValue));
     }
-    // FIXME implementation uses only HP and WP
-    // patientPerson.getTelecom().add(PixPdqV3Utils.createTEL(telecomValue, useValue));
   }
 
   /**
    * Gets the patient person.
-   *
+   * 
    * @param v3MergePatientsMessage the v3 merge patients message
    * @return the patient person
    */
@@ -277,7 +372,7 @@ public class V3PixSourceMessageHelper {
 
   /**
    * Gets the patient person.
-   *
+   * 
    * @param v3RecordAddedMessage the v3 record added message
    * @return the patient person
    */
@@ -292,7 +387,7 @@ public class V3PixSourceMessageHelper {
 
   /**
    * Gets the patient person.
-   *
+   * 
    * @param v3RecordRevisedMessage the v3 record revised message
    * @return the patient person
    */
@@ -509,11 +604,11 @@ public class V3PixSourceMessageHelper {
     }
     if (v3RecordRevisedMessage != null) {
       v3RecordRevisedMessage
-      .setScopingOrganization(organizationOID, organizationName, telecomValue);
+          .setScopingOrganization(organizationOID, organizationName, telecomValue);
     }
     if (v3MergePatientsMessage != null) {
       v3MergePatientsMessage
-      .setScopingOrganization(organizationOID, organizationName, telecomValue);
+          .setScopingOrganization(organizationOID, organizationName, telecomValue);
     }
   }
 

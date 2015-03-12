@@ -20,8 +20,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;
@@ -53,8 +51,6 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  * 
  */
 public class FhirPatientTests {
-
-  private Log log = LogFactory.getLog(FhirPatientTests.class);
 
   private Patient getPatient(TestPatient patientMueller) {
     Name name = new Name(patientMueller.given, patientMueller.family);
@@ -406,6 +402,45 @@ public class FhirPatientTests {
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals(2, ((IntegerDt) fhirPatient2.getMultipleBirth()).getValue().intValue());
   }
+  
+  @Test
+  public void testConveniencePatientMothersName() {
+    FhirPatient fhirPatient = new FhirPatient();
+    
+    assertTrue(fhirPatient.getMothersMaidenName().isEmpty());
+    
+    HumanNameDt mothersMaidenName = new HumanNameDt();
+    mothersMaidenName.addFamily("Wiedmer");
+    fhirPatient.setMothersMaidenName(mothersMaidenName);
+    
+    assertEquals("Wiedmer", fhirPatient.getMothersMaidenName().getFamilyAsSingleString());
+    
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("Wiedmer", patient.getMothersMaidenName());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertEquals("Wiedmer", fhirPatient2.getMothersMaidenName().getFamilyAsSingleString());
+  }
+  
+  @Test
+  public void testConveniencePatientBirthPlace() {
+    FhirPatient fhirPatient = new FhirPatient();
+    
+    AddressDt addressDt = new AddressDt();
+    addressDt.setCity("Doncaster");
+    
+    fhirPatient.setBirthPlace(addressDt);
+    
+    assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
+    
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr().getCities().get(0).getText());
+    
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+    assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
+  }
+  
+
 
 
 

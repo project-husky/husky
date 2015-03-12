@@ -70,7 +70,15 @@ public class Patient extends Person {
    * subjectPerson.
    */
   private Date deceasedTime;
-
+  
+  /**
+   * Mother's Maiden Name
+   * Citing Keith Boone, the CDA Book p237:
+   * in CDA Release 2.0 there is no appropriate place beneath <recordTarget> where this information would appear
+   * insteaad a <participant> would need to be added to the CDA header that identified the mother of the patient
+   * TODO: only use at the moment in the OHT PIX communication, for CDA no functionality yet
+   */
+  private String mothersMaidenName;
 
   /**
    * Erstellt einen neuen Patienten.
@@ -470,5 +478,23 @@ public class Patient extends Person {
    */
   public void setTelecoms(Telecoms telecoms) {
     mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+  }
+
+  /**
+   * Gets the mothers maiden name.
+   *
+   * @return the mothers maiden name
+   */
+  public String getMothersMaidenName() {
+    return mothersMaidenName;
+  }
+
+  /**
+   * Sets the mothers maiden name.
+   *
+   * @param mothersMaidenName the new mothers maiden name
+   */
+  public void setMothersMaidenName(String mothersMaidenName) {
+    this.mothersMaidenName = mothersMaidenName;
   }
 }
