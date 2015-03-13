@@ -7,6 +7,7 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -183,9 +184,16 @@ public class TestUtils {
   public Code gtinCode;
 
   public Telecoms telecoms1;
+  
+  public Address address1;
 
   public TestUtils () {
     //initTestData();
+  }
+  
+  public Address createAddress1() {
+    Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen", AddressUse.BUSINESS);
+    return a;
   }
 
   public Author createAuthor1() {

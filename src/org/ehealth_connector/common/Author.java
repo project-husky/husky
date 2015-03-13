@@ -41,7 +41,27 @@ public class Author {
    * The m author.
    */
   org.openhealthtools.mdht.uml.cda.Author mAuthor;
+  org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+  org.openhealthtools.mdht.uml.cda.Person mPerson;
 
+  public Author () {
+    mAuthor = CDAFactory.eINSTANCE.createAuthor();
+    mPerson = CDAFactory.eINSTANCE.createPerson();
+    mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+    
+    mAsAuthor.setAssignedPerson(mPerson);
+    mAuthor.setAssignedAuthor(mAsAuthor);
+
+    // add functionCode and time
+    mAuthor.setFunctionCode(createFunctionCode());
+    mAuthor.setTime(DateUtil.nowAsTS());
+  }
+  
+  public Author(Name name) {
+    this();
+    addName(name);
+  }
+  
   /**
    * <div class="en">Instantiates a new author.</div>
    * <div class="de">Instantiiert a neuen Autor</div>
@@ -66,25 +86,14 @@ public class Author {
    * @param gln            Global Location Number (GLN)
    */
   public Author(Name name, String gln) {
+    this(name);
+    
     // Create and fill Person Name and GLN
     II id = DatatypesFactory.eINSTANCE.createII();
     id.setRoot(CodeSystems.GLN.getCodeSystemId());
     id.setExtension(gln);
 
-    mAuthor = CDAFactory.eINSTANCE.createAuthor();
-    org.openhealthtools.mdht.uml.cda.Person asPers = CDAFactory.eINSTANCE
-        .createPerson();
-
-    AssignedAuthor asAuth = CDAFactory.eINSTANCE.createAssignedAuthor();
-    asAuth.setAssignedPerson(asPers);
-    asAuth.getIds().add(id);
-
-    mAuthor.setAssignedAuthor(asAuth);
-
-    // add functionCode and time
-    mAuthor.setFunctionCode(createFunctionCode());
-    mAuthor.setTime(DateUtil.nowAsTS());
-    addName(name);
+    mAsAuthor.getIds().add(id);
   }
 
   /**
@@ -295,6 +304,23 @@ public class Author {
     }
     return nl;
   }
+  
+  /**
+   * <div class="en">Gets the organization (RepresentedOrganization)</div>
+   * <div class="de">Liefert die Organisation (RepresentedOrganization), der der Autor angehört (z.B. ein Krankenhaus)</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *  
+   *
+   * @return organization <div class="en">the organization</div>
+   * <div class="de">die Organisation</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public Organization getOrganization() {
+    Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
+    return o;
+  }
 
   /**
    * <div class="en">Gets the telecoms.</div>
@@ -323,6 +349,22 @@ public class Author {
    */
   public void setGln(String gln) {
     addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+  }
+  
+  /**
+   * <div class="en">Sets the organization (RepresentedOrganization)</div>
+   * <div class="de">Setzt eine Organisation (RepresentedOrganization), der der Autor angehört (z.B. ein Krankenhaus)</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *  
+   *
+   * @param organization <div class="en">the new organization</div>
+   * <div class="de">die neue Organisation</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public void setOrganization(Organization organization) {
+    mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
   }
 
   /**

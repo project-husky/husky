@@ -187,6 +187,20 @@ public class Address {
   public String getCity() {
     return mAd.getCities().get(0).getText();
   }
+  
+  /**
+   * Returns the State
+   *
+   * @return State
+   */
+  public String getCountry() {
+    if (mAd.getCountries()!=null) {
+      if (mAd.getCountries().get(0)!=null) {
+        return mAd.getCountries().get(0).getText();
+      }
+    }
+    return null;
+  }
 
   /**
    * Liefert die Hausnummer.
@@ -270,6 +284,16 @@ public class Address {
    */
   public void setCity(String city) {
     mAd.addCity(city);
+  }
+  
+  /**
+   * Sets the country
+   * div class="de">Setzt den Ort</div>
+   *
+   * @param country the country
+   */
+  public void setCountry(String country) {
+    mAd.addCountry(country);
   }
 
   /**

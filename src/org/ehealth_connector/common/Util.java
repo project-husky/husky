@@ -80,6 +80,8 @@ public class Util {
    * The Constant TELECOMS_PHONE_PREFIX.
    */
   public static final String TELECOMS_PHONE_PREFIX = "tel:";
+  
+  public static final String TELECOMS_WEBSIDE_PREFIX = "http";
 
   /**
    * Erzeugt eine Adresse.
@@ -329,23 +331,16 @@ public class Util {
    *
    * @param author <br>
    * 		<div class="de"> author</div>
-   * 		<div class="fr"> author</div>
-   * 		<div class="it"> author</div>
+   * 		<div class="fr"></div>
+   * 		<div class="it"></div>
    * @return the legal authenticator
    */
   public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehealth_connector.common.Author author) {
-    // FIXME Copy the values from the author object, without drawing / move
-    // them from it.
-
     // create and set the mdht RepresentedCustodianOrganization Object
     LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
     AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
     mdhtLegAuth.setAssignedEntity(asEnt);
-
-    org.openhealthtools.mdht.uml.cda.Person authorPerson = CDAFactory.eINSTANCE.createPerson();
-    asEnt.setAssignedPerson(authorPerson);
-
-    authorPerson = author.getAuthorMdht().getAssignedAuthor().getAssignedPerson();
+    asEnt.setAssignedPerson(author.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
     return mdhtLegAuth;
   }
@@ -662,14 +657,30 @@ public class Util {
    * 		<div class="it"></div>
    * @return <div class="en">the phone</div>
    */
-  public static HashMap<String, AddressUse> getPhone(ArrayList<TEL> telecoms) {
+  public static HashMap<String, AddressUse> getPhones(ArrayList<TEL> telecoms) {
     return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
+  }
+  
+  /**
+   * <div class="en">Gets the Webside</div>
+   * <div class="de">Liefert Webside.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *
+   * @param telecoms <br>
+   *        <div class="de"> telecoms</div>
+   *        <div class="fr"></div>
+   *        <div class="it"></div>
+   * @return <div class="en">the webside</div>
+   */
+  public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
+    return getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
   }
 
   private static HashMap<String, AddressUse> getTelecomType(ArrayList<TEL> telecoms, String type) {
     HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
     for (TEL tel : telecoms) {
-      if (tel.getValue().contains(type)) {
+      if (tel.getValue().toLowerCase().contains(type)) {
         tl.put(tel.getValue(), (tel.getUses().size()>0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
       }
     }

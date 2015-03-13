@@ -21,6 +21,7 @@ import java.util.HashMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.AddressUse;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
@@ -92,15 +93,18 @@ public class Telecoms {
     mTels.add(Util.createTel(phoneNr, usage));
   }
 
-  // /**
-  // * Weist dem Autor eine Webseite zu.
-  // *
-  // * @param eMail Webseite
-  // * @param usage Verwendungszweck (Privat, Geschäft)
-  // */
-  // public void addWebsite(String eMail, UseCode usage) {
-  // //TODO Implement this!
-  // }
+   /**
+   * Weist der Telecoms Liste eine Webseite zu.
+   *
+   * @param url Webseite (z.B. "http://www.ehealth-connector.org")
+   * @param usage Verwendungszweck (Privat, Geschäft)
+   */
+   public void addWebsite(String url, AddressUse usage) {
+     TEL t = DatatypesFactory.eINSTANCE.createTEL();
+     t.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+     t.setValue(url);
+     mTels.add(t);
+   }
 
   /**
    * <div class="en">Copy mdht telecoms.</div> <div class="de"></div> <div class="fr"></div> <div
@@ -131,6 +135,16 @@ public class Telecoms {
   public HashMap<String, AddressUse> getFaxes() {
     return Util.getFax(mTels);
   }
+  
+  /**
+   * <div class="en">Gets the Websides</div> <div class="de">Liefert alle Websides</div> <div
+   * class="fr"></div> <div class="it"></div>
+   *
+   * @return <div class="en">the websides</div>
+   */
+  public HashMap<String, AddressUse> getWebsites() {
+    return Util.getWebsites(mTels);
+  }
 
   /**
    * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert mdht telecoms.</div> <div
@@ -149,7 +163,7 @@ public class Telecoms {
    * @return <div class="en">the phones</div>
    */
   public HashMap<String, AddressUse> getPhones() {
-    return Util.getPhone(mTels);
+    return Util.getPhones(mTels);
   }
 
   /**

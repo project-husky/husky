@@ -211,7 +211,7 @@ public class CdaChVacdTest extends TestUtils {
     i.setAuthor(author1);
     i.setConsumable(consumable1);
     i.setDosage(number);
-    i.setId(id1);
+    i.addId(id1);
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
     return i;
   }
@@ -556,7 +556,7 @@ public class CdaChVacdTest extends TestUtils {
     i.setDosage(number);
     assertEquals(number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
 
-    i.setId(id1);
+    i.addId(id1);
     assertEquals(id1, id1);
 
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);

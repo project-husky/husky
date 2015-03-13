@@ -90,6 +90,16 @@ public class Organization {
   }
 
   /**
+   * Weist der Organisation eine ID zu.
+   *
+   * @param id Der neue Identificator
+   */
+  public void addId(Identificator id) {
+    mOrganization.getIds().add(id.getIi());
+  }
+  
+  
+  /**
    * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
    *
    * @param name            Name
@@ -125,7 +135,7 @@ public class Organization {
   }
 
   /**
-   * Gibt die ID der Organisation zurück (wenn z.B. eine GLN vorhanden ist)
+   * Gibt die (erste) ID der Organisation zurück (wenn z.B. eine GLN vorhanden ist)
    * 
    * @return ID der Organisation
    */

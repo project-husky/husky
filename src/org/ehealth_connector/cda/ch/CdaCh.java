@@ -44,6 +44,7 @@ import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
+import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
@@ -281,17 +282,29 @@ public abstract class CdaCh {
   }
 
   /**
-   * Gibt alle rechtliche Unterzeichner des Dokuments zurück
+   * Gibt alle Unterzeichner des Dokuments zurück
    * 
    * @return die rechtlichen Unterzeichner
    */
-  public ArrayList<org.ehealth_connector.common.Person> getLegalAuthenticators() {
+  public ArrayList<org.ehealth_connector.common.Person> getAuthenticators() {
     ArrayList<org.ehealth_connector.common.Person> persons = new ArrayList<org.ehealth_connector.common.Person>();
     for (Authenticator mAutor : doc.getAuthenticators()){
       org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(mAutor.getAssignedEntity().getAssignedPerson());
       persons.add(person);
     }
     return persons;
+  }
+  
+  /**
+   * Gets the legal authenticator of the document
+   * <div class="de">Gibt den juristisch verantwortlichen Unterzeichner des Dokuments zurück</div>
+   * 
+   * @return the legal authenticator
+   */
+  public Person getLegalAuthenticator() {
+    LegalAuthenticator la = doc.getLegalAuthenticator();
+    Person p = new Person(la.getAssignedEntity().getAssignedPerson());
+    return p;
   }
 
   public ByteArrayOutputStream getOutputStream () {

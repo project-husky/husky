@@ -80,7 +80,7 @@ public class Immunization {
 
     //mImmunization.setText(createText());
     setApplyDate(appliedAt);
-    setId(null);
+    addId(null);
     setConsumable(consumable);
     setAuthor(author);
   }
@@ -106,7 +106,7 @@ public class Immunization {
     setApplyDate(appliedAt);
     setRouteOfAdministration(route);
     setDosage(doseQuantity);
-    setId(null);
+    addId(null);
     setConsumable(consumable);
     setAuthor(author);
   }
@@ -290,7 +290,7 @@ public class Immunization {
    *
    * @param codedId the new id
    */
-  public void setId(Identificator codedId) {
+  public void addId(Identificator codedId) {
     II ii = Util.createUuidVacdIdentificator(codedId);
     mImmunization.getIds().add(ii);
   }
