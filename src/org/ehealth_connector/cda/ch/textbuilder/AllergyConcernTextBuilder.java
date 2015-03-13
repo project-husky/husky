@@ -48,7 +48,12 @@ public class AllergyConcernTextBuilder extends TextBuilder {
   private void addRow(AllergyConcern allergyConcern, int i) {
     append("<tr>");
     addCell("Komplikationsrisiko");
-    addCellWithContent(allergyConcern.getConcern(), contentIdPrefix , i);
+    if (allergyConcern.getConcern()!=null) {
+      addCellWithContent(allergyConcern.getConcern(), contentIdPrefix , i);
+    }
+    else {
+      addCell("");
+    }
     append("</tr>");
   }
 

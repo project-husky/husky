@@ -50,7 +50,18 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 
   private void addRow(LaboratoryObservation laboratoryObservation, int i) {
     append("<tr>");
-    addCell(laboratoryObservation.getCode().getDisplayName());
+    if (laboratoryObservation.getCode()!=null) {
+      if (laboratoryObservation.getCode().getDisplayName()!=null) {
+        addCell(laboratoryObservation.getCode().getDisplayName());
+      }
+      else {
+        addCell("");
+      }
+    }
+    else {
+      addCell("");
+    }
+    
     if (laboratoryObservation.getImmuneProtection()) {
       addCell("Positiv");
     }
@@ -58,8 +69,24 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
       addCell("Negativ");
     }
     addCell("");
-    addCell(laboratoryObservation.getCode().getCode());
-    addCell(laboratoryObservation.getCode().getCodeSystem());
+    if (laboratoryObservation.getCode()!=null) {
+      if (laboratoryObservation.getCode().getCode() !=null) {
+        addCell(laboratoryObservation.getCode().getCode());
+      }
+      else {
+        addCell("");
+      }
+      if (laboratoryObservation.getCode().getCodeSystem() !=null) {
+       addCell(laboratoryObservation.getCode().getCodeSystem());
+      }
+      else {
+        addCell("");
+      }
+      
+    }
+    else {
+      addCell("");
+    }
     addCell("");
     append("</tr>");
   }

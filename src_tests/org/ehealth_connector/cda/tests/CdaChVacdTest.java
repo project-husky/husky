@@ -143,7 +143,7 @@ public class CdaChVacdTest extends TestUtils {
 
   public Consumable createConsumable() {
     Consumable c = new Consumable(ts1);
-    c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
+    c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
     c.setTradeName(ts2);
     c.setWhoAtcCode(ts3);
     return consumable1;
@@ -499,8 +499,8 @@ public class CdaChVacdTest extends TestUtils {
   public void testConsumableSetterGetter() {
     Consumable c = new Consumable(ts1);
 
-    c.setManufacturedProductId(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1));
-    assertEquals(true, TestUtils.isEqual(new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), c.getManufacturedProductId()));
+    c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
+    assertEquals(true, TestUtils.isEqual(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1), c.getManufacturedProductId()));
 
     c.setTradeName(ts2);
     assertEquals(ts2, c.getTradeName());

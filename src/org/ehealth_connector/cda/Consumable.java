@@ -90,7 +90,7 @@ public class Consumable {
     mConsumable.setManufacturedProduct(mProductEntry);
 
     //The WhoAtcCode has to be present as code element, otherwise translations can´t be set
-    setManufacturedProductId(gtinOrPharmacodeOrGln);
+    setManufacturedProductId(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln));
     if (whoAtcCode!=null) {
       setWhoAtcCode(whoAtcCode);
       addManufacturedMaterialTranslation(gtinOrPharmacodeOrGln);
@@ -158,22 +158,22 @@ public class Consumable {
    *
    * @return the gtin or ean or swiss index, null otherwise
    */
-  public Code getManufacturedProductId() {
+  public Identificator getManufacturedProductId() {
     for (II id : mProductEntry.getIds()) {
       if (id.getRoot() != null && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId()) || id.getRoot() != null && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()) || id.getRoot() != null && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
-        Code code = new Code(id.getRoot(), id.getExtension());
-        return code;
+        Identificator ide = new Identificator(id);
+        return ide;
       }
     }
-    if (Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode())!=null) {
-      return Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode());
-    }
-    if (Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode())!=null) {
-      return Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode());
-    }
-    if (Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode())!=null) {
-      return Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode());
-    }
+//    if (Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode())!=null) {
+//      return Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(), mMaterial.getCode());
+//    }
+//    if (Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode())!=null) {
+//      return Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(), mMaterial.getCode());
+//    }
+//    if (Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode())!=null) {
+//      return Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(), mMaterial.getCode());
+//    }
     return null;
     //	  for (CD codeTranslation : getManufacturedMaterialTranslations()) {
     //			String codeTransStr = codeTranslation.getCodeSystem();
@@ -219,12 +219,12 @@ public class Consumable {
    * Sets the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss Index Code
    * @see org.ehealth_connector.cda.ch.enums.CodeSystems
    *
-   * @param gtinOrPharmacodeOrGln the new manufactured product id
+   * @param gtinOrPharmacodeOrGln the new manufactured product id. If null, a NullFlavor.UNK will be set instead.
    */
-  public void setManufacturedProductId(Code gtinOrPharmacodeOrGln) {
+  public void setManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
     if (gtinOrPharmacodeOrGln != null) {
       mProductEntry.getIds().clear();
-      mProductEntry.getIds().add(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln).getIi());
+      mProductEntry.getIds().add(gtinOrPharmacodeOrGln.getIi());
     }
     else {
       II ii = DatatypesFactory.eINSTANCE.createII();

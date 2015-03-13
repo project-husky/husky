@@ -47,7 +47,12 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
   private void addRow(org.ehealth_connector.cda.ProblemConcernEntry problemConcern, int i) {
     append("<tr>");
     addCell("Komplikationsrisiko");
-    addCellWithContent(problemConcern.getConcern(), contentIdPrefix , i);
+    if (problemConcern.getConcern()!=null) {
+      addCellWithContent(problemConcern.getConcern(), contentIdPrefix , i);
+    }
+    else {
+      addCell("");
+    }
     append("</tr>");
   }
 

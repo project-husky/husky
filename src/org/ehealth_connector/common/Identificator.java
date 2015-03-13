@@ -45,8 +45,11 @@ public class Identificator {
    * @return the identificator
    */
   public static Identificator convertToIdentificator(Code code) {
-    Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
-    return id;
+    if (code != null) {
+      Identificator id = new Identificator(code.getCodeSystem(), code.getCode()); 
+      return id;
+    }
+    return null;
   }
 
   /**

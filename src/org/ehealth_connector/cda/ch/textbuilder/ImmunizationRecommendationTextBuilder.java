@@ -57,9 +57,19 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
     addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.TREATMENT_PLAN.getContentIdPrefix(), i);
     addCell("");
     addCell("");
-    addCell(immunization.getPossibleAppliance());
+    if (immunization.getPossibleAppliance()!=null) {
+      addCell(immunization.getPossibleAppliance());
+    }
+    else {
+      addCell("");
+    }
     addCell(""); // gegen
-    addCell(immunization.getAuthor().getCompleteName());
+    if (immunization.getAuthor()!=null) {
+      addCell(immunization.getAuthor().getCompleteName());
+    }
+    else {
+      addCell("");
+    }
     addCell("");
     append("</tr>");
   }

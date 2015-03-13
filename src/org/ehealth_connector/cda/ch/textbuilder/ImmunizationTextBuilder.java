@@ -59,9 +59,19 @@ public class ImmunizationTextBuilder extends TextBuilder {
     addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
     addCell("");
     addCell("");
-    addCell(DateUtil.formatDateCH(immunization.getApplyDate()));
+    if (immunization.getApplyDate()!=null) {
+      addCell(DateUtil.formatDateCH(immunization.getApplyDate()));
+    }
+    else {
+      addCell("");
+    }
     addCell(""); // gegen
-    addCell(immunization.getAuthor().getCompleteName());
+    if (immunization.getAuthor() != null) {
+      addCell(immunization.getAuthor().getCompleteName());
+    }
+    else {
+      addCell("");
+    }
     addCell("");
     append("</tr>");
   }
