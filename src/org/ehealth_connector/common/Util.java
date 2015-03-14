@@ -90,7 +90,7 @@ public class Util {
    * @param houseNumber Contains the house number
    * @param zip PLZ
    * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
+   * @param usage Verwendungszweck (Privat, GeschÃ¤ft)
    * @return the new address
    */
   public static AD createAddress(String streetName, String houseNumber, String zip, String city,
@@ -111,7 +111,7 @@ public class Util {
    *
    * @param zip PLZ
    * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
+   * @param usage Verwendungszweck (Privat, GeschÃ¤ft)
    * @return HL7 AD Objekt
    */
   public static AD createAddress(String zip, String city, UseCode usage) {
@@ -139,7 +139,7 @@ public class Util {
    * 		<div class="it"> addressline</div>
    * @param zip PLZ
    * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
+   * @param usage Verwendungszweck (Privat, GeschÃ¤ft)
    * @return the ad
    */
   public static AD createAdress(String addressline, String zip, String city, UseCode usage) {
@@ -255,7 +255,7 @@ public class Util {
    * @return the string
    */
   public static String createEurDateStrFromTS(String hl7Stimestamp) {
-    // TODO Prüfen, ob der übergebene String das richtige Format hat.
+    // TODO PrÃ¼fen, ob der Ã¼bergebene String das richtige Format hat.
     String eurDateStr =
         hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "."
             + hl7Stimestamp.substring(0, 4);
@@ -340,8 +340,31 @@ public class Util {
     LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
     AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
     mdhtLegAuth.setAssignedEntity(asEnt);
-    asEnt.setAssignedPerson(author.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
-
+    
+    org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
+    asEnt.setAssignedPerson(a.getAssignedAuthor().getAssignedPerson());
+    
+    //Set signature Code to 's'
+    CS cs = DatatypesFactory.eINSTANCE.createCS("S");
+    mdhtLegAuth.setSignatureCode(cs);
+    //Copy Time
+    mdhtLegAuth.setTime(a.getTime());
+    //Copy Addresses
+    if (a.getAssignedAuthor().getAddrs()!=null) {
+    	asEnt.getAddrs().addAll(a.getAssignedAuthor().getAddrs());
+    }
+    //Copy Ids
+    if (a.getAssignedAuthor().getIds() !=null) {
+    	asEnt.getIds().addAll(a.getAssignedAuthor().getIds());
+    }
+    //Copy Telecoms
+    if (a.getAssignedAuthor().getTelecoms() != null) {
+    	asEnt.getTelecoms().addAll(a.getAssignedAuthor().getTelecoms());
+    }
+    //Copy Represented Organization
+    if (a.getAssignedAuthor().getRepresentedOrganization()!=null) {
+    	asEnt.getRepresentedOrganizations().add(a.getAssignedAuthor().getRepresentedOrganization());
+    }
     return mdhtLegAuth;
   }
 
@@ -913,7 +936,7 @@ public class Util {
    * @param addressline3 Adresszeile 3
    * @param zip PLZ
    * @param city Ort
-   * @param usage Verwendungszweck (Privat, Geschäft)
+   * @param usage Verwendungszweck (Privat, GeschÃ¤ft)
    * @return HL7 AD Objekt
    */
   public AD createAddress(String addressline1, String addressline2, String addressline3,

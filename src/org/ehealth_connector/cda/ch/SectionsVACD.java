@@ -5,7 +5,7 @@ package org.ehealth_connector.cda.ch;
  * 
  * @see document Austauschformat, p. 80. CDA Body Level 2 Section Codes.
  * @author gsc
- */
+ */ 
 public enum SectionsVACD {
   HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen"),
   ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste"),
