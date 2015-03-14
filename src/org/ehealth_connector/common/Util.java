@@ -41,10 +41,12 @@ import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.common.ConvenienceUtilsEnums.Language;
 import org.ehealth_connector.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.utils.UUID;
+import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
+import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
@@ -336,36 +338,40 @@ public class Util {
    * @return the legal authenticator
    */
   public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehealth_connector.common.Author author) {
-    // create and set the mdht RepresentedCustodianOrganization Object
+	  org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
     LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
-    AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
-    mdhtLegAuth.setAssignedEntity(asEnt);
-    
-    org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
-    asEnt.setAssignedPerson(a.getAssignedAuthor().getAssignedPerson());
+    mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
     
     //Set signature Code to 's'
     CS cs = DatatypesFactory.eINSTANCE.createCS("S");
     mdhtLegAuth.setSignatureCode(cs);
     //Copy Time
     mdhtLegAuth.setTime(a.getTime());
-    //Copy Addresses
-    if (a.getAssignedAuthor().getAddrs()!=null) {
-    	asEnt.getAddrs().addAll(a.getAssignedAuthor().getAddrs());
-    }
-    //Copy Ids
-    if (a.getAssignedAuthor().getIds() !=null) {
-    	asEnt.getIds().addAll(a.getAssignedAuthor().getIds());
-    }
-    //Copy Telecoms
-    if (a.getAssignedAuthor().getTelecoms() != null) {
-    	asEnt.getTelecoms().addAll(a.getAssignedAuthor().getTelecoms());
-    }
-    //Copy Represented Organization
-    if (a.getAssignedAuthor().getRepresentedOrganization()!=null) {
-    	asEnt.getRepresentedOrganizations().add(a.getAssignedAuthor().getRepresentedOrganization());
-    }
+    
     return mdhtLegAuth;
+  }
+  
+  public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
+	  AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();  
+	  //Copy Addresses
+	    if (a.getAddrs()!=null) {
+	    	asEnt.getAddrs().addAll(a.getAddrs());
+	    }
+	    //Copy Ids
+	    if (a.getIds() !=null) {
+	    	asEnt.getIds().addAll(a.getIds());
+	    }
+	    //Copy Telecoms
+	    if (a.getTelecoms() != null) {
+	    	asEnt.getTelecoms().addAll(a.getTelecoms());
+	    }
+	    //Copy Represented Organization
+	    if (a.getRepresentedOrganization()!=null) {
+	    	asEnt.getRepresentedOrganizations().add(a.getRepresentedOrganization());
+	    }
+	    //Set Assigned Person
+	    asEnt.setAssignedPerson(a.getAssignedPerson());
+	    return asEnt;
   }
 
   /**

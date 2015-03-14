@@ -24,11 +24,18 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
+import org.openhealthtools.mdht.uml.cda.AssignedEntity;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -172,6 +179,9 @@ public class Immunization {
     SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
     return DateUtil.parseDateyyyyMMdd(date.getValue());
   }
+  
+  public void addReason() {
+  }
 
   /**
    * Returns author of this immunization.
@@ -239,6 +249,30 @@ public class Immunization {
   public RouteOfAdministration getRouteOfAdministration() {
     return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
   }
+  
+  /** 
+   * A set of codes (e.g., for routine, emergency), specifying the urgency under which the Act happened, can happen, is happening, is intended to happen, or is requested/demanded to happen.
+   * Codesystem: 2.16.840.1.113883.5.7
+   * 
+   * @return priorityCode
+   */
+  public Code getPriorityCode() {
+	  return new Code(mImmunization.getPriorityCode());
+  }
+  
+  /**
+   * Sets the apply date.
+   *
+   * @param appliedAt the new apply date
+   */
+  public Performer getPerformer() {
+	  if (mImmunization.getPerformers() != null) {
+		  if (mImmunization.getPerformers().get(0)!=null) {
+			  return new Performer(mImmunization.getPerformers().get(0));
+		  }
+	  }
+	return null;
+  }
 
   /**
    * Sets the apply date.
@@ -284,6 +318,27 @@ public class Immunization {
       mImmunization.setDoseQuantity(ivl_pq);
     }
   }
+  
+  /**
+   * Sets the Person, who performs the Immunization 
+   *
+   * @param performer the new performer (Convenience Author will be converted to a performer)
+   */  
+  public void setPerformer(Author performer) {
+	  Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
+	  mImmunization.getPerformers().add(p2);
+	  
+	  p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor().getAssignedAuthor()));
+  }
+  
+  /**
+   * Sets the Person, who performs the Immunization 
+   *
+   * @param performer the new performer
+   */  
+  public void setPerformer(Performer performer) {
+	  mImmunization.getPerformers().add(performer.copyMdhtPerfomer());
+  }
 
   /**
    * Sets the id.
@@ -295,7 +350,13 @@ public class Immunization {
     mImmunization.getIds().add(ii);
   }
 
-  private void setPriorityCode(CE priorityCode) {
+  /** 
+   * A set of codes (e.g., for routine, emergency), specifying the urgency under which the Act happened, can happen, is happening, is intended to happen, or is requested/demanded to happen.
+   * Codesystem: 2.16.840.1.113883.5.7
+   * 
+   * @param priorityCode
+   */
+  public void setPriorityCode(CE priorityCode) {
     mImmunization.setPriorityCode(priorityCode);
   }
 

@@ -159,6 +159,26 @@ public class DateUtil {
 
     return ohtInterval;
   }
+  
+  /**
+   * Erzeugt ein IVL_TS Objekt.
+   *
+   * @param eurDateTime der Begin des Intervals in dem Format dd.MM.yyyy wie er in Europa
+   *        gebräuchlich ist
+   * @return HL7 IVL_TS Objekt
+   * @throws ParseException the parse exception
+   */
+  public static IVL_TS createIVL_TSFromEuroDate(Date eurDateTime)
+      throws ParseException {
+    // Create OHT Data structure
+    IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
+
+    final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMdd");
+    // Create and set Begin
+    ohtInterval.setValue(cdaDateFormatter.format(eurDateTime));
+
+    return ohtInterval;
+  }
 
   /**
    * Erzeugt ein IVXB_TS Objekt.
