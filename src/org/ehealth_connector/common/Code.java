@@ -21,6 +21,7 @@ package org.ehealth_connector.common;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
@@ -183,6 +184,29 @@ public class Code {
    */
   public CD getCD() {
     return EcoreUtil.copy(mCD);
+  }
+  
+  public CE getCE() {
+	  CE ce = DatatypesFactory.eINSTANCE.createCE();
+	  if (mCD.getCodeSystem()!=null) {
+		  ce.setCodeSystem(mCD.getCodeSystem());
+	  }
+	  if (mCD.getCode()!=null) {
+		  ce.setCode(mCD.getCode());
+	  }
+	  if (mCD.getCodeSystemName()!=null) {
+		  ce.setCodeSystemName(mCD.getCodeSystemName());
+	  }
+	  if (mCD.getDisplayName()!=null) {
+		  ce.setDisplayName(mCD.getDisplayName());
+	  }
+	  if (mCD.getCodeSystemVersion()!=null) {
+		  ce.setCodeSystemVersion(mCD.getCodeSystemVersion());
+	  }
+	  if (mCD.getNullFlavor()!=null) {
+		  ce.setNullFlavor(mCD.getNullFlavor());
+	  }
+	  return ce;
   }
 
   /**

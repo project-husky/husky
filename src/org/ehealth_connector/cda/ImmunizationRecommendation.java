@@ -18,18 +18,38 @@
 
 package org.ehealth_connector.cda;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
+import org.ehealth_connector.common.Value;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.Observation;
+import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
+import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
+
+import com.sun.istack.internal.Nullable;
 
 /**
  * Dieses Element enthält den empfohlenen Impfplan für den Patienten. Zudem kann zur Begründung ein Verweis auf entsprechende Guidelines angegeben werden.
@@ -86,7 +106,7 @@ public class ImmunizationRecommendation {
     setConsumable(consumable);
 
     //Set the Attributes of this class
-    setId(null);
+    addId(null);
     setIntendedOrProposed(intendedOrProposed);
     setShallNotBeAdministerd(shallNotBeAdministerd);
     setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
@@ -117,6 +137,16 @@ public class ImmunizationRecommendation {
     return EcoreUtil.copy(mImmunizationRecommendation);
   }
 
+  /**
+   * Adds the id.
+   *
+   * @param id the new id
+   */
+  public void addId(Identificator id) {
+    II ii = Util.createUuidVacdIdentificator(id);
+    mImmunizationRecommendation.getIds().add(ii);
+  }
+  
   /**
    * Gets the author.
    *
@@ -165,6 +195,60 @@ public class ImmunizationRecommendation {
   }
 
   /**
+   * Gets the reference to the comment in the level 2 section text.
+   *
+   * @return the reference of the level 3 comment entry, which point to the level 2 text
+   */
+  public String getCommentRef() {
+    for (EntryRelationship er : mImmunizationRecommendation.getEntryRelationships()) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+        //Get the ed and update it with the reference
+        if (er.getAct().getText()!=null) {
+    	  ED ed =  er.getAct().getText();
+    	  if (ed.getReference() != null) {
+    		  return ed.getReference().getValue();
+    	  }
+    	}
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * Sets a comment text
+   *
+   * @param text the text
+   */
+  public void setCommentText(String text) {
+    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
+    ED ed = DatatypesFactory.eINSTANCE.createED();
+    ed.addText(text);
+    mComment.setText(ed);
+    //mComment.setText(Util.createEd(text));
+    mImmunizationRecommendation.addAct(mComment);
+          
+    EntryRelationship er = mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1);
+    er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+    er.setInversionInd(true);
+  }
+  
+  /**
+   * Gets the text of the comment text element (this is not necessarily the comment itself)
+   *
+   * @return the comment text
+   */
+  public String getCommentText() {
+    for (EntryRelationship er : mImmunizationRecommendation.getEntryRelationships()) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+        //Get the ed and update it with the reference
+        ED ed =  er.getAct().getText();
+        return ed.getText();
+      }
+    }
+    return null;
+  }
+  
+  /**
    * Gets the mdht immunization recommendation.
    *
    * @return the mdht immunization recommendation
@@ -186,6 +270,20 @@ public class ImmunizationRecommendation {
   public String getPossibleAppliance() {
     List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
     return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
+  }
+  
+  /**
+   * Gets the Performer (Person, die die Impfung durchgeführt hat)
+   *
+   * @return the performer
+   */
+  public Performer getPerformer() {
+	  if (mImmunizationRecommendation.getPerformers() != null) {
+		  if (mImmunizationRecommendation.getPerformers().get(0)!=null) {
+			  return new Performer(mImmunizationRecommendation.getPerformers().get(0));
+		  }
+	  }
+	return null;
   }
 
   /**
@@ -217,16 +315,36 @@ public class ImmunizationRecommendation {
   public void setConsumable(Consumable consumable) {
     mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());  
   }
-
+  
   /**
-   * Sets the id.
+   * Sets the dosage.
    *
-   * @param codedId the new id
+   * @param doseQuantity the new dosage (use null, if not asked)
    */
-  public void setId(Identificator codedId) {
-    II ii = Util.createUuidVacdIdentificator(codedId);
-    mImmunizationRecommendation.getIds().add(ii);
+  public void setDosage(@Nullable Double doseQuantity) {
+    if (doseQuantity==null) {
+      mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
+    }
+    else {
+      IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+      ivl_pq.setUnit("ml");
+      ivl_pq.setValue(doseQuantity);
+      mImmunizationRecommendation.setDoseQuantity(ivl_pq);
+    }
   }
+  
+  /**
+   * Gibt die Dosis der Impfung zurück.
+   *
+   * @return Dosis Dosis der Impfung
+   */
+  public Value getDosage() {
+    if (mImmunizationRecommendation.getDoseQuantity()!=null) {
+      Value value = new Value(mImmunizationRecommendation.getDoseQuantity());
+      return value;
+    }
+    return null;
+  }	
 
   /**
    * <div class="de">Setzt, ob eine Impfung beabsichtigt, aber noch nicht erfolgt, oder vorgeschlagen ist (moodCode).</div>
@@ -280,5 +398,79 @@ public class ImmunizationRecommendation {
     }
   }
 
+  /**
+   * Sets the Person, who performs the Immunization 
+   *
+   * @param performer the new performer (Convenience Author will be converted to a performer)
+   */  
+  public void setPerformer(Author performer) {
+	  Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
+	  mImmunizationRecommendation.getPerformers().clear();
+	  mImmunizationRecommendation.getPerformers().add(p2);
+	  
+	  p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor().getAssignedAuthor()));
+	  try {
+		p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  }
+  
+  private CDACHMSETBodyImmunizationL3Target createReason(Code code) {
+	    CDACHMSETBodyImmunizationL3Target t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Target().init();
+	    //Fix Template ID
+	    for (II i : t.getTemplateIds()) {
+	      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.2.1")) {
+	        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Target");
+	      }
+	    }
+	    //Set Status Code
+	    t.setStatusCode(StatusCode.COMPLETED.getCS());
+	    
+	    //Set Code
+	    t.setCode(code.getCD());
+	    
+	    return t;
+	  }
+  
+  /**
+   * Gets a list of reasons for the immunization (the illnesses, which the immunization should prevent). 
+   *
+   * @return A ArrayList of Code  
+   * 
+   */
+  public ArrayList<Code> getReasons() {
+    ArrayList<Code> cl = new ArrayList<Code>();
+    EList<EntryRelationship> erl = mImmunizationRecommendation.getEntryRelationships();
+    for (EntryRelationship er : erl) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.RSON)) {
+        Observation o = er.getObservation();
+        cl.add(new Code (o.getCode()));
+      }
+    }
+    return cl;
+  }
+  
+  /**
+   * Adds the reason for the immunization (the illness, which the immunization should prevent)
+   *
+   * @param code Code for the illness
+   */
+  public void addReason(Code code) {
+    mImmunizationRecommendation.addObservation(createReason(code));
+    mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+    mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1).setInversionInd(false);
+  }
+
+  /**
+   * Sets the Person, who performs the Immunization 
+   *
+   * @param performer the new performer
+   */  
+  public void setPerformer(Performer performer) {
+	  mImmunizationRecommendation.getPerformers().clear();
+	  mImmunizationRecommendation.getPerformers().add(performer.copyMdhtPerfomer());
+  }
 
 }

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -265,5 +266,24 @@ public class Consumable {
       ce.setNullFlavor(NullFlavor.UNK);
     }
     mMaterial.setCode(ce);
+  }
+  
+  /**
+   * Sets the Organization that manufactured this product
+   * @param organization the organization
+   */
+  public void setManufacturer(Organization organization) {
+	  mProductEntry.setManufacturerOrganization(organization.copyMdhtOrganization());
+  }
+  
+  /**
+   * Gets the  Organization that manufactured this product
+   * @return the organization
+   */
+  public Organization getManufacturer() {
+	  if (mProductEntry!=null && mProductEntry.getManufacturerOrganization()!=null) {
+		  return new Organization(mProductEntry.getManufacturerOrganization());
+	  }
+	return null;
   }
 }

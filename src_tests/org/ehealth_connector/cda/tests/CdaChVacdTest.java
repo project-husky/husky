@@ -36,10 +36,12 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
+import org.openhealthtools.mdht.uml.cda.Performer1;
 
 /**
  * 
@@ -61,6 +63,7 @@ public class CdaChVacdTest extends TestUtils {
   ActiveProblemConcernEntry apce1;
   PastProblemConcern ppc1;
   AllergyConcern ac1;
+  Performer p1;
 
   ImmunizationRecommendation immunizationRecommendation1;
   SimpleDateFormat eurDateFormatter;
@@ -80,6 +83,10 @@ public class CdaChVacdTest extends TestUtils {
   private ImmunizationRecommendation immunizationRecommendation2;
   private Comment c1;
   private Comment c2;
+
+private Performer performer1;
+
+private Performer performer2;
 
   public CdaChVacdTest () {
     super();
@@ -213,6 +220,10 @@ public class CdaChVacdTest extends TestUtils {
     i.setDosage(number);
     i.addId(id1);
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
+    i.setCommentText(ts1);
+    i.setPerformer(author1);
+    i.addReason(code1);
+    i.addReason(code2);
     return i;
   }
 
@@ -220,11 +231,14 @@ public class CdaChVacdTest extends TestUtils {
   public ImmunizationRecommendation createImmunizationRecommendation() {
     ImmunizationRecommendation i = new ImmunizationRecommendation();
     i.setAuthor(author2);
-    i.setId(id2);
+    i.addId(id2);
     i.setIntendedOrProposed(true);
     i.setPossibleAppliance(startDate, endDate);
     i.setShallNotBeAdministerd(true);
     i.setConsumable(consumable1); 
+    i.addId(id1);
+    i.setDosage(number);
+    i.setPerformer(performer1);
     return i;
   }
 
@@ -311,6 +325,8 @@ public class CdaChVacdTest extends TestUtils {
     name2 = createName2();
     author1 = createAuthor1();
     author2 = createAuthor2();
+    performer1 = createPerformer1();
+    performer2 = createPerformer2();
     organization1 = createOrganization1();
     consumable1 = createConsumable1();
     consumable1 = createConsumable2();
@@ -507,6 +523,9 @@ public class CdaChVacdTest extends TestUtils {
 
     c.setWhoAtcCode(ts3);
     assertEquals(ts3, c.getWhoAtcCode().getCode());
+    
+    c.setManufacturer(organization1);
+    assertTrue(isEqual(organization1, c.getManufacturer()));
   }
 
   public void testDocMetadata(String constructorName, CdaChEdes doc) {
@@ -523,7 +542,7 @@ public class CdaChVacdTest extends TestUtils {
     i.setAuthor(author2);
     assertEquals(true, TestUtils.isEqual(author2, i.getAuthor()));
 
-    i.setId(id2);
+    i.addId(id2);
     assertEquals(true, TestUtils.isEqual(id2, i.getId()));
 
     i.setIntendedOrProposed(true);
@@ -537,6 +556,22 @@ public class CdaChVacdTest extends TestUtils {
 
     i.setConsumable(consumable1);
     assertEquals(true, TestUtils.isEqual(consumable1, i.getConsumable()));
+    
+    i.setDosage(number);
+    assertEquals(number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
+    
+    i.setPerformer(performer1);
+    assertTrue(isEqual(name1,i.getPerformer().getName()));
+    
+    i.addReason(code1);
+    assertNotNull(i.getReasons());
+    assertTrue(isEqual(code1, i.getReasons().get(0)));
+    
+    i.addReason(code2);
+    assertTrue(isEqual(code2, i.getReasons().get(1)));
+    
+    i.setCommentText(ts2);
+    assertEquals(ts2,i.getCommentText());
   }
 
   //1
@@ -558,9 +593,26 @@ public class CdaChVacdTest extends TestUtils {
 
     i.addId(id1);
     assertEquals(id1, id1);
+    
+    i.setPriorityCode(code2);
+    assertTrue(isEqual(code2, i.getPriorityCode()));
 
     i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
     assertEquals(RouteOfAdministration.DIFFUSION_TRANSDERMAL, i.getRouteOfAdministration());
+    
+    i.setPerformer(author1);
+    assertNotNull(i.getPerformer());
+    assertTrue(isEqual(author1.getName(), i.getPerformer().getName()));
+    
+    i.addReason(code1);
+    assertNotNull(i.getReasons());
+    assertTrue(isEqual(code1, i.getReasons().get(0)));
+    
+    i.addReason(code2);
+    assertTrue(isEqual(code2, i.getReasons().get(1)));
+    
+    i.setCommentText(ts1);
+    assertEquals(ts1,i.getCommentText());
   }
 
   //8

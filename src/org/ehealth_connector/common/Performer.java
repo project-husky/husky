@@ -27,17 +27,13 @@ public class Performer {
 	  public Performer () {
 	    mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
 	    mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
+	    mPerson = CDAFactory.eINSTANCE.createPerson();
 	    
 	    mAsEntity.setAssignedPerson(mPerson);
 	    mPerfomer.setAssignedEntity(mAsEntity);
 
-	    // add functionCode and time
-	    try {
-			mPerfomer.setTime(DateUtil.createIVL_TSFromEuroDateTime(new Date()));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    // add time
+	    setTimeValue(new Date());
 	  }
 	  
 	  public Performer(Name name) {
@@ -70,6 +66,8 @@ public class Performer {
 	   */
 	  public Performer(org.openhealthtools.mdht.uml.cda.Performer2 performerMdht) {
 	    mPerfomer = performerMdht;
+	    mAsEntity = performerMdht.getAssignedEntity();
+	    mPerson = performerMdht.getAssignedEntity().getAssignedPerson();
 	  }
 
 	  /**

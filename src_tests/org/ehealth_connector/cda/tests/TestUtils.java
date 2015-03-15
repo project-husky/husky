@@ -13,6 +13,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 
@@ -205,7 +206,17 @@ public class TestUtils {
     Author a = new Author(createName2(), numS2);
     return a;
   }
-
+  
+  public Performer createPerformer1() {
+	  Performer p = new Performer(createName1(), numS1);
+	  return p;
+  }
+  
+  public Performer createPerformer2() {
+	  Performer p = new Performer(createName2(), numS2);
+	  return p;
+  }
+  
   //Create Test Objects
   public Code createCode1() {
     Code code = new Code(ts1, ts2, ts3, ts4);

@@ -18,13 +18,13 @@
 
 package org.ehealth_connector.cda;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.SectionsVACD;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
@@ -34,7 +34,6 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
-import org.hl7.v3.LOINCObservationActContextAgeType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -43,13 +42,13 @@ import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -61,7 +60,6 @@ import com.sun.istack.internal.Nullable;
 public class Immunization {
 
   private org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
-  private String comment = null;
 
   /**
    * Instantiates a new immunization.
@@ -141,6 +139,27 @@ public class Immunization {
     mImmunization = immunization;
   }
 
+  /**
+   * Adds the id.
+   *
+   * @param codedId the new id
+   */
+  public void addId(Identificator codedId) {
+    II ii = Util.createUuidVacdIdentificator(codedId);
+    mImmunization.getIds().add(ii);
+  }
+
+  /**
+   * Adds the reason for the immunization (the illness, which the immunization should prevent)
+   *
+   * @param code Code for the illness
+   */
+  public void addReason(Code code) {
+    mImmunization.addObservation(createReason(code));
+    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setInversionInd(false);
+  }
+
   private SXCM_TS convertDate(Date appliedAt) {
     SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
     timestamp.setValue(DateUtil.formatDate(appliedAt));
@@ -169,57 +188,16 @@ public class Immunization {
 
     return code;
   }
-
-  private CE createPriorityCode() {
-    CE priorityCode = DatatypesFactory.eINSTANCE.createCE();
+  
+  private Code createPriorityCode() {
+    CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
     priorityCode.setCode("R");
     priorityCode.setDisplayName("Routine");
 
     // TODO define OID constant
     priorityCode.setCodeSystem("2.16.840.1.113883.5.7");
     priorityCode.setCodeSystemName("ActPriority");
-    return priorityCode;
-  }
-
-  /**
-   * Gets the apply date.
-   *
-   * @return the apply date
-   */
-  public Date getApplyDate() {
-    SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
-    return DateUtil.parseDateyyyyMMdd(date.getValue());
-  }
-  
-  /**
-   * Sets a comment
-   *
-   * @param text the text
-   */
-  public void setComment(String text) {
-    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
-    ED ed = DatatypesFactory.eINSTANCE.createED();
-    ed.addText(text);
-    mComment.setText(ed);
-    //mComment.setText(Util.createEd(text));
-    mImmunization.addAct(mComment);
-          
-    EntryRelationship er = mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1);
-    er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-    er.setInversionInd(true);
-    
-    comment = text;
-  }
-  
-  /**
-   * Adds the reason for the immunization (the illness, which the immunization should prevent)
-   *
-   * @param code Code for the illness
-   */
-  public void addReason(Code code) {
-    mImmunization.addObservation(createReason(code));
-    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setInversionInd(false);
+    return new Code(priorityCode);
   }
   
   private CDACHMSETBodyImmunizationL3Target createReason(Code code) {
@@ -237,6 +215,16 @@ public class Immunization {
     t.setCode(code.getCD());
     
     return t;
+  }
+  
+  /**
+   * Gets the apply date.
+   *
+   * @return the apply date
+   */
+  public Date getApplyDate() {
+    SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
+    return DateUtil.parseDateyyyyMMdd(date.getValue());
   }
 
   /**
@@ -256,31 +244,30 @@ public class Immunization {
   }
 
   /**
-   * Gets the consumable.
-   *
-   * @return the consumable
-   */
-  public Consumable getConsumable() {
-    Consumable consumable = new Consumable(mImmunization.getConsumable());
-    return consumable;
-  }
-  
-  /**
    * Gets the reference to the comment in the level 2 section text.
    *
-   * @return the comment
+   * @return the reference of the level 3 comment entry, which point to the level 2 text
    */
   public String getCommentRef() {
     for (EntryRelationship er : mImmunization.getEntryRelationships()) {
       if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
         //Get the ed and update it with the reference
-        ED ed =  er.getAct().getText();
-        return ed.getReference().getValue();
+        if (er.getAct().getText()!=null) {
+    	  ED ed =  er.getAct().getText();
+    	  if (ed.getReference() != null) {
+    		  return ed.getReference().getValue();
+    	  }
+    	}
       }
     }
     return null;
   }
   
+  /**
+   * Gets the text of the comment text element (this is not necessarily the comment itself)
+   *
+   * @return the comment text
+   */
   public String getCommentText() {
     for (EntryRelationship er : mImmunization.getEntryRelationships()) {
       if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
@@ -290,6 +277,16 @@ public class Immunization {
       }
     }
     return null;
+  }
+  
+  /**
+   * Gets the consumable.
+   *
+   * @return the consumable
+   */
+  public Consumable getConsumable() {
+    Consumable consumable = new Consumable(mImmunization.getConsumable());
+    return consumable;
   }
 
   /**
@@ -305,24 +302,6 @@ public class Immunization {
     return null;
   }	
   
-  /**
-   * Gets a list of reasons for the immunization (the illnesses, which the immunization should prevent). 
-   *
-   * @return A ArrayList of Code  
-   * 
-   */
-  public ArrayList<Code> getReasons() {
-    ArrayList<Code> cl = new ArrayList<Code>();
-    EList<EntryRelationship> erl = mImmunization.getEntryRelationships();
-    for (EntryRelationship er : erl) {
-      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.RSON)) {
-        Observation o = er.getObservation();
-        cl.add(new Code (o.getCode()));
-      }
-    }
-    return cl;
-  }
-
   /**
    * Gets the id.
    *
@@ -343,14 +322,19 @@ public class Immunization {
   }
 
   /**
-   * Gets the route of administration.
+   * Gets the Performer (Person, die die Impfung durchgeführt hat)
    *
-   * @return the route of administration
+   * @return the performer
    */
-  public RouteOfAdministration getRouteOfAdministration() {
-    return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
+  public Performer getPerformer() {
+	  if (mImmunization.getPerformers() != null) {
+		  if (mImmunization.getPerformers().get(0)!=null) {
+			  return new Performer(mImmunization.getPerformers().get(0));
+		  }
+	  }
+	return null;
   }
-  
+
   /** 
    * A set of codes (e.g., for routine, emergency), specifying the urgency under which the Act happened, can happen, is happening, is intended to happen, or is requested/demanded to happen.
    * Codesystem: 2.16.840.1.113883.5.7
@@ -362,17 +346,30 @@ public class Immunization {
   }
   
   /**
-   * Sets the apply date.
+   * Gets a list of reasons for the immunization (the illnesses, which the immunization should prevent). 
    *
-   * @param appliedAt the new apply date
+   * @return A ArrayList of Code  
+   * 
    */
-  public Performer getPerformer() {
-	  if (mImmunization.getPerformers() != null) {
-		  if (mImmunization.getPerformers().get(0)!=null) {
-			  return new Performer(mImmunization.getPerformers().get(0));
-		  }
-	  }
-	return null;
+  public ArrayList<Code> getReasons() {
+    ArrayList<Code> cl = new ArrayList<Code>();
+    EList<EntryRelationship> erl = mImmunization.getEntryRelationships();
+    for (EntryRelationship er : erl) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.RSON)) {
+        Observation o = er.getObservation();
+        cl.add(new Code (o.getCode()));
+      }
+    }
+    return cl;
+  }
+  
+  /**
+   * Gets the route of administration.
+   *
+   * @return the route of administration
+   */
+  public RouteOfAdministration getRouteOfAdministration() {
+    return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
   }
 
   /**
@@ -395,6 +392,24 @@ public class Immunization {
   }
 
   /**
+   * Sets a comment text
+   *
+   * @param text the text
+   */
+  public void setCommentText(String text) {
+    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
+    ED ed = DatatypesFactory.eINSTANCE.createED();
+    ed.addText(text);
+    mComment.setText(ed);
+    //mComment.setText(Util.createEd(text));
+    mImmunization.addAct(mComment);
+          
+    EntryRelationship er = mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1);
+    er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+    er.setInversionInd(true);
+  }
+
+  /**
    * Sets the consumable.
    *
    * @param consumable the new consumable
@@ -402,11 +417,11 @@ public class Immunization {
   public void setConsumable(Consumable consumable) {
     mImmunization.setConsumable(consumable.copyMdhtConsumable());
   }
-
+  
   /**
    * Sets the dosage.
    *
-   * @param doseQuantity the new dosage (null ok)
+   * @param doseQuantity the new dosage (use null, if not known)
    */
   public void setDosage(@Nullable Double doseQuantity) {
     if (doseQuantity==null) {
@@ -427,28 +442,26 @@ public class Immunization {
    */  
   public void setPerformer(Author performer) {
 	  Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
+	  mImmunization.getPerformers().clear();
 	  mImmunization.getPerformers().add(p2);
 	  
 	  p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor().getAssignedAuthor()));
+	  try {
+		p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
-  
+
   /**
    * Sets the Person, who performs the Immunization 
    *
    * @param performer the new performer
    */  
   public void setPerformer(Performer performer) {
+	  mImmunization.getPerformers().clear();
 	  mImmunization.getPerformers().add(performer.copyMdhtPerfomer());
-  }
-
-  /**
-   * Sets the id.
-   *
-   * @param codedId the new id
-   */
-  public void addId(Identificator codedId) {
-    II ii = Util.createUuidVacdIdentificator(codedId);
-    mImmunization.getIds().add(ii);
   }
 
   /** 
@@ -457,8 +470,8 @@ public class Immunization {
    * 
    * @param priorityCode
    */
-  public void setPriorityCode(CE priorityCode) {
-    mImmunization.setPriorityCode(priorityCode);
+  public void setPriorityCode(Code priorityCode) {
+    mImmunization.setPriorityCode(priorityCode.getCE());
   }
 
   /**

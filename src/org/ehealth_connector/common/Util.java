@@ -703,15 +703,16 @@ public class Util {
    * @return <div class="en">the webside</div>
    */
   public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
-    return getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
+    HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
+    return h;
   }
 
   private static HashMap<String, AddressUse> getTelecomType(ArrayList<TEL> telecoms, String type) {
     HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
     for (TEL tel : telecoms) {
       if (tel.getValue().toLowerCase().contains(type)) {
-        tl.put(tel.getValue(), (tel.getUses().size()>0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
-      }
+    	  tl.put(tel.getValue(), (tel.getUses().size()>0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+       }
     }
     return tl;
   }

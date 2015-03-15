@@ -106,6 +106,5 @@ public void init() {
     a.addName(name2);
     a.setGln(numS1);
     a.setGln(numS2);
-    //TODO Telecoms
   }
 }
