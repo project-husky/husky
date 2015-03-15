@@ -43,6 +43,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Entry;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -454,16 +455,6 @@ public class CdaChVacd extends CdaCh {
     phs.createStrucDocText(sb.toString());
   }
 
-  /**
-   * Converts from IHE to convenience API class.
-   * 
-   * @param immunization
-   * @return Immunization - convenience API class
-   */
-  private Immunization convert(org.openhealthtools.mdht.uml.cda.ihe.Immunization iheImmunization) {
-    return new Immunization(iheImmunization);
-  }
-
   private Section findRemarksSection() {
     for (Section section : doc.getSections()) {
       if (section.getCode()!=null) {
@@ -631,13 +622,12 @@ public class CdaChVacd extends CdaCh {
    * @return Liste von Impfungen
    */
   public ArrayList<Immunization> getImmunizations() {
-    EList<SubstanceAdministration> substanceAdministrations =
-        getDoc().getImmunizationsSection().getSubstanceAdministrations();
+    EList<org.openhealthtools.mdht.uml.cda.ch.Immunization> il =
+        getDoc().getImmunizationsSection().getImmunizations();
 
     ArrayList<Immunization> immunizations = new ArrayList<Immunization>();
-    for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
-      Immunization immunization =
-          convert((org.openhealthtools.mdht.uml.cda.ihe.Immunization) substanceAdministration);
+    for (org.openhealthtools.mdht.uml.cda.ch.Immunization i : il) {
+      Immunization immunization = new Immunization(i);
       immunizations.add(immunization);
     }
     return immunizations;
@@ -866,6 +856,16 @@ public class CdaChVacd extends CdaCh {
       ir.setText(reference);
       if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode()!=null) {
         ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
+      }
+      for (EntryRelationship er : ir.getEntryRelationships()) {
+        if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+          //Get the ed and update it with the reference
+          ED ed =  er.getAct().getText();
+          TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+          ed.setReference(tel);
+          tel.setValue("#"+SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment"+i);
+          er.getAct().setText(ed);
+        }
       }
     }
   }

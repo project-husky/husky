@@ -18,11 +18,15 @@
 
 package org.ehealth_connector.cda;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.SectionsVACD;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -30,18 +34,24 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
-import org.openhealthtools.mdht.uml.cda.AssignedEntity;
+import org.hl7.v3.LOINCObservationActContextAgeType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
-import org.openhealthtools.mdht.uml.cda.Reference;
+import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ch.VACD;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
+import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 import com.sun.istack.internal.Nullable;
 
@@ -50,7 +60,8 @@ import com.sun.istack.internal.Nullable;
  */
 public class Immunization {
 
-  private org.openhealthtools.mdht.uml.cda.ihe.Immunization mImmunization;
+  private org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
+  private String comment = null;
 
   /**
    * Instantiates a new immunization.
@@ -126,7 +137,7 @@ public class Immunization {
    * 		<div class="fr"> immunization</div>
    * 		<div class="it"> immunization</div>
    */
-  public Immunization(org.openhealthtools.mdht.uml.cda.ihe.Immunization immunization) {
+  public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
     mImmunization = immunization;
   }
 
@@ -141,7 +152,7 @@ public class Immunization {
    * 
    * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
    */
-  public org.openhealthtools.mdht.uml.cda.ihe.Immunization copyMdhtImmunization() {
+  public org.openhealthtools.mdht.uml.cda.ch.Immunization copyMdhtImmunization() {
     return EcoreUtil.copy(mImmunization);
   }
 
@@ -180,7 +191,52 @@ public class Immunization {
     return DateUtil.parseDateyyyyMMdd(date.getValue());
   }
   
-  public void addReason() {
+  /**
+   * Sets a comment
+   *
+   * @param text the text
+   */
+  public void setComment(String text) {
+    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
+    ED ed = DatatypesFactory.eINSTANCE.createED();
+    ed.addText(text);
+    mComment.setText(ed);
+    //mComment.setText(Util.createEd(text));
+    mImmunization.addAct(mComment);
+          
+    EntryRelationship er = mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1);
+    er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+    er.setInversionInd(true);
+    
+    comment = text;
+  }
+  
+  /**
+   * Adds the reason for the immunization (the illness, which the immunization should prevent)
+   *
+   * @param code Code for the illness
+   */
+  public void addReason(Code code) {
+    mImmunization.addObservation(createReason(code));
+    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+    mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size()-1).setInversionInd(false);
+  }
+  
+  private CDACHMSETBodyImmunizationL3Target createReason(Code code) {
+    CDACHMSETBodyImmunizationL3Target t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Target().init();
+    //Fix Template ID
+    for (II i : t.getTemplateIds()) {
+      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.2.1")) {
+        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Target");
+      }
+    }
+    //Set Status Code
+    t.setStatusCode(StatusCode.COMPLETED.getCS());
+    
+    //Set Code
+    t.setCode(code.getCD());
+    
+    return t;
   }
 
   /**
@@ -208,6 +264,33 @@ public class Immunization {
     Consumable consumable = new Consumable(mImmunization.getConsumable());
     return consumable;
   }
+  
+  /**
+   * Gets the reference to the comment in the level 2 section text.
+   *
+   * @return the comment
+   */
+  public String getCommentRef() {
+    for (EntryRelationship er : mImmunization.getEntryRelationships()) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+        //Get the ed and update it with the reference
+        ED ed =  er.getAct().getText();
+        return ed.getReference().getValue();
+      }
+    }
+    return null;
+  }
+  
+  public String getCommentText() {
+    for (EntryRelationship er : mImmunization.getEntryRelationships()) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+        //Get the ed and update it with the reference
+        ED ed =  er.getAct().getText();
+        return ed.getText();
+      }
+    }
+    return null;
+  }
 
   /**
    * Gibt die Dosis der Impfung zurück.
@@ -221,6 +304,24 @@ public class Immunization {
     }
     return null;
   }	
+  
+  /**
+   * Gets a list of reasons for the immunization (the illnesses, which the immunization should prevent). 
+   *
+   * @return A ArrayList of Code  
+   * 
+   */
+  public ArrayList<Code> getReasons() {
+    ArrayList<Code> cl = new ArrayList<Code>();
+    EList<EntryRelationship> erl = mImmunization.getEntryRelationships();
+    for (EntryRelationship er : erl) {
+      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.RSON)) {
+        Observation o = er.getObservation();
+        cl.add(new Code (o.getCode()));
+      }
+    }
+    return cl;
+  }
 
   /**
    * Gets the id.

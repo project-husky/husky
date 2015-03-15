@@ -18,8 +18,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
  */
 public class ImmunizationTextBuilder extends TextBuilder {
 
-  //TODO einen Enum mit allen Prefixes über alle Dokumententemplates anlegen. Den Prefix dann von dort holen (verhindert doppelte prefixe)
-  private List<Immunization> immunizations;
+ private List<Immunization> immunizations;
 
   /**
    * Constructor.
@@ -49,6 +48,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
     append("<th>Impfung gegen</th>");
     append("<th>Impfung erfolgt durch</th>");
     append("<th>Impfung dokumentiert durch</th>");
+    append("<th>Kommentar</th>");
     append("</tr>");
     append("</thead>");
   }
@@ -71,6 +71,13 @@ public class ImmunizationTextBuilder extends TextBuilder {
     }
     else {
       addCell("");
+    }
+    if (immunization.getCommentText()!=null) {
+//    for (EntryRelationship er : ir.getEntryRelationships()) {
+//    if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+//      er.getAct().setText(Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment"));
+//    }
+      addCellWithContent(immunization.getCommentText(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment", i);
     }
     addCell("");
     append("</tr>");
