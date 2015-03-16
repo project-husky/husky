@@ -14,8 +14,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
-import com.sun.deploy.uitoolkit.impl.fx.Utils;
-
 public class Performer {
 	  /**
 	   * The m author.
