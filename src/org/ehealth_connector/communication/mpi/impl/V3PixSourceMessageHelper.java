@@ -198,7 +198,7 @@ public class V3PixSourceMessageHelper {
   /**
    * Add Patient Ethnic Group Code to the patient
    * 
-   * @param code
+   * @param code  (SET<CE>) {CWE:Ethnicity}
    */
   public void addPatientEthnicGroupCode(String code) {
     if (v3RecordAddedMessage != null) {
@@ -276,7 +276,7 @@ public class V3PixSourceMessageHelper {
   /**
    * Add Patient Race Code to the patient
    * 
-   * @param code
+   * @param code (SET<CE>) {CWE:Race}
    */
   public void addPatientRaceCode(String code) {
     if (v3RecordAddedMessage != null) {
@@ -559,7 +559,7 @@ public class V3PixSourceMessageHelper {
   /**
    * Set the religious affiliation for the patient
    * 
-   * @param religiousAffiliation
+   * @param religiousAffiliation  CWE:ReligiousAffiliation
    */
   public void setPatientReligiousAffiliation(String religiousAffiliation) {
     if (v3RecordAddedMessage != null) {

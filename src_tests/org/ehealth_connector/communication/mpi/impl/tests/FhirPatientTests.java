@@ -20,6 +20,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;
@@ -28,6 +30,7 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.junit.Test;
 
+import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
@@ -42,6 +45,7 @@ import ca.uhn.fhir.model.primitive.BooleanDt;
 import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.IntegerDt;
+import ca.uhn.fhir.parser.IParser;
 
 /**
  * Junit Tests for the FhirPatient
@@ -51,6 +55,11 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  * 
  */
 public class FhirPatientTests {
+
+  private FhirContext ctx = new FhirContext();
+  private Log log = LogFactory.getLog(FhirPatientTests.class);
+
+
 
   private Patient getPatient(TestPatient patientMueller) {
     Name name = new Name(patientMueller.given, patientMueller.family);
@@ -334,58 +343,74 @@ public class FhirPatientTests {
     assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getText());
     assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getText());
   }
-  
+
   @Test
   public void testConveniencePatientMaritialStatus() {
     FhirPatient fhirPatient = new FhirPatient();
     fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
-    
+
     Patient patient = fhirPatient.getPatient();
     assertEquals("M", patient.getMdhtPatient().getMaritalStatusCode().getCode());
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals("M", fhirPatient2.getMaritalStatus().getValueAsEnum().toArray()[0].toString());
   }
   
+  @Test
+  public void testConveniencePatientReligiousAffiliation() {
+    FhirPatient fhirPatient = new FhirPatient();
+    CodeableConceptDt religion = new CodeableConceptDt();
+    religion.setText("1077");
+
+    fhirPatient.setReligiousAffiliation(religion);
+
+    Patient patient = fhirPatient.getPatient();
+    assertEquals("1077", patient.getReligiousAffiliation());
+
+    FhirPatient fhirPatient2 = new FhirPatient(patient);
+
+    assertEquals("1077", fhirPatient2.getReligiousAffiliation().getText());
+  }
+
   @Test
   public void testConveniencePatientDeceasedIndicator() {
     FhirPatient fhirPatient = new FhirPatient();
     BooleanDt booleanDt = new BooleanDt();
     booleanDt.setValue(true);
     fhirPatient.setDeceased(booleanDt);
-    
+
     Patient patient = fhirPatient.getPatient();
     assertTrue(patient.getDeceasedInd().booleanValue());
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertTrue(((BooleanDt) fhirPatient2.getDeceased()).getValue().booleanValue());
   }
-  
+
   @Test
   public void testConveniencePatientDeceasedDateTime() {
     FhirPatient fhirPatient = new FhirPatient();
     Date dtNow = new Date();
     DateTimeDt dateTimeDt = new DateTimeDt(dtNow);
-    
+
     fhirPatient.setDeceased(dateTimeDt);
-    
+
     Patient patient = fhirPatient.getPatient();
-    assertEquals(dtNow,patient.getDeceasedTime());
-    
+    assertEquals(dtNow, patient.getDeceasedTime());
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals(dtNow, ((DateTimeDt) fhirPatient2.getDeceased()).getValue());
   }
-  
+
   @Test
   public void testConveniencePatientMultipleBirthIndicator() {
     FhirPatient fhirPatient = new FhirPatient();
     BooleanDt booleanDt = new BooleanDt();
     booleanDt.setValue(true);
     fhirPatient.setMultipleBirth(booleanDt);
-    
+
     Patient patient = fhirPatient.getPatient();
     assertTrue(patient.getMultipleBirthInd().booleanValue());
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertTrue(((BooleanDt) fhirPatient2.getMultipleBirth()).getValue().booleanValue());
   }
@@ -395,53 +420,122 @@ public class FhirPatientTests {
     FhirPatient fhirPatient = new FhirPatient();
     IntegerDt integerDt = new IntegerDt(2);
     fhirPatient.setMultipleBirth(integerDt);
-    
+
     Patient patient = fhirPatient.getPatient();
     assertEquals(2, patient.getMultipleBirthOrderNumber().intValue());
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals(2, ((IntegerDt) fhirPatient2.getMultipleBirth()).getValue().intValue());
   }
-  
+
   @Test
   public void testConveniencePatientMothersName() {
     FhirPatient fhirPatient = new FhirPatient();
-    
+
     assertTrue(fhirPatient.getMothersMaidenName().isEmpty());
-    
+
     HumanNameDt mothersMaidenName = new HumanNameDt();
     mothersMaidenName.addFamily("Wiedmer");
     fhirPatient.setMothersMaidenName(mothersMaidenName);
-    
+
     assertEquals("Wiedmer", fhirPatient.getMothersMaidenName().getFamilyAsSingleString());
-    
+
     Patient patient = fhirPatient.getPatient();
     assertEquals("Wiedmer", patient.getMothersMaidenName());
-    
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals("Wiedmer", fhirPatient2.getMothersMaidenName().getFamilyAsSingleString());
   }
-  
+
   @Test
   public void testConveniencePatientBirthPlace() {
     FhirPatient fhirPatient = new FhirPatient();
-    
+
     AddressDt addressDt = new AddressDt();
     addressDt.setCity("Doncaster");
-    
+
     fhirPatient.setBirthPlace(addressDt);
-    
+
     assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
-    
+
     Patient patient = fhirPatient.getPatient();
-    assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr().getCities().get(0).getText());
-    
+    assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr()
+        .getCities().get(0).getText());
+
     FhirPatient fhirPatient2 = new FhirPatient(patient);
     assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
   }
-  
+
+  @Test
+  public void testFhirSerializeDeserialize() {
+
+    FhirPatient fhirPatient = TestPatient.getFhirPatientMueller();
+
+    fhirPatient.getManagingOrganization().setResource(
+        getScopingOrganization("1234", "Test", "+417600000000"));
+
+    // telecom
+    ContactPointDt telHome = new ContactPointDt();
+    telHome.setUse(ContactPointUseEnum.HOME);
+    telHome.setSystem(ContactPointSystemEnum.PHONE);
+    telHome.setValue("+4144000000000");
+
+    ContactPointDt telWork = new ContactPointDt();
+    telWork.setUse(ContactPointUseEnum.WORK);
+    telWork.setSystem(ContactPointSystemEnum.PHONE);
+    telWork.setValue("+4188000000000");
+
+    ContactPointDt telMobile = new ContactPointDt();
+    telMobile.setUse(ContactPointUseEnum.MOBILE);
+    telMobile.setSystem(ContactPointSystemEnum.PHONE);
+    telMobile.setValue("+4176000000000");
+
+    ContactPointDt eMail = new ContactPointDt();
+    eMail.setUse(ContactPointUseEnum.WORK);
+    eMail.setSystem(ContactPointSystemEnum.EMAIL);
+    eMail.setValue("xyz@abc.ch");
+
+    fhirPatient.getTelecom().add(telHome);
+    fhirPatient.getTelecom().add(telWork);
+    fhirPatient.getTelecom().add(telMobile);
+    fhirPatient.getTelecom().add(eMail);
 
 
+    // communication
+    CodeableConceptDt deCH = new CodeableConceptDt();
+    deCH.setText("de-CH");
+
+    fhirPatient.getCommunication().add(deCH);
+
+    fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
+
+
+    HumanNameDt mothersMaidenName = new HumanNameDt();
+    mothersMaidenName.addFamily("Meier");
+    fhirPatient.setMothersMaidenName(mothersMaidenName);
+
+
+    BooleanDt booleanDt = new BooleanDt();
+    booleanDt.setValue(false);
+    fhirPatient.setDeceased(booleanDt);
+
+    AddressDt addressDt = new AddressDt();
+
+    addressDt.setCity("Doncaster");
+    fhirPatient.setBirthPlace(addressDt);
+    
+    CodeableConceptDt religion = new CodeableConceptDt();
+    religion.setText("1077");
+
+    String stringPatient = ctx.newXmlParser().encodeResourceToString(fhirPatient);
+
+    log.debug(stringPatient);
+
+    IParser parser = ctx.newXmlParser();
+    FhirPatient fhirPatientDeserialized = parser.parseResource(FhirPatient.class, stringPatient);
+    assertTrue(fhirPatientDeserialized != null);
+
+  }
 
 
 

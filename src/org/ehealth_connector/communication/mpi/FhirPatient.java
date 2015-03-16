@@ -12,8 +12,6 @@
  * 
  * Year of publication: 2015
  * 
- * @author oliveregger
- * 
  *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
@@ -66,17 +64,29 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
- * The Class FhirPatient. FHIRPatient extends from the FHIR HAPI Patient Resource
+ * The Class FhirPatient. FHIRPatient extends from the FHIR HAPI Patient Resource and provides
+ * convenience methods to translate between the convenience patient in the ehc and back
+ * 
+ * @author oliveregger
  * 
  * @see http://jamesagnew.github.io/hapi-fhir/index.html
  */
 @ResourceDef(name = "Patient")
 public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
-  
-  @Child(name="birthPlace") 
-  @Extension(url="http://hl7.org/fhir/ExtensionDefinition/birthPlace", definedLocally=false, isModifier=false)
-  @Description(shortDefinition="The birtplace of the patientt")
+
+  @Child(name = "birthPlace")
+  @Extension(url = "http://hl7.org/fhir/ExtensionDefinition/birthPlace", definedLocally = false,
+      isModifier = false)
+  @Description(shortDefinition = "The birtplace of the patientt")
   private AddressDt birthPlace;
+  
+  
+  @Child(name = "religiousAffiliation")
+  @Extension(url = "http://hl7.org/fhir/ExtensionDefinition/us-core-religion", definedLocally = false,
+      isModifier = false)
+  @Description(shortDefinition = "The religious Affiliation of the patient")
+  private CodeableConceptDt religiousAffiliation;
+
 
   /**
    * Instantiates a new fhir patient.
@@ -96,31 +106,29 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       return null;
     }
     AddressDt addressDt = new AddressDt();
-    if (address.getStreetAddressLines()!=null && address.getStreetAddressLines().size()>0) {
+    if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 0) {
       addressDt.addLine().setValue(address.getStreetAddressLines().get(0).getText());
     }
-    if (address.getStreetAddressLines()!=null && address.getStreetAddressLines().size()>1) {
+    if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 1) {
       addressDt.addLine().setValue(address.getStreetAddressLines().get(1).getText());
     }
-    if (address.getStreetAddressLines()!=null && address.getStreetAddressLines().size()>2) {
+    if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 2) {
       addressDt.addLine().setValue(address.getStreetAddressLines().get(2).getText());
     }
-    if (address.getCities()!=null && address.getCities().size()>0) {
+    if (address.getCities() != null && address.getCities().size() > 0) {
       addressDt.setCity(address.getCities().get(0).getText());
     }
-    if (address.getPostalCodes()!=null && address.getPostalCodes().size()>0) {
+    if (address.getPostalCodes() != null && address.getPostalCodes().size() > 0) {
       addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
     }
-    if (address.getStates() != null
-        && address.getStates().size() > 0) {
+    if (address.getStates() != null && address.getStates().size() > 0) {
       addressDt.setState(address.getStates().get(0).getText());
     }
-    if (address.getCountries() != null
-        && address.getCountries().size() > 0) {
+    if (address.getCountries() != null && address.getCountries().size() > 0) {
       addressDt.setCountry(address.getCountries().get(0).getText());
     }
-    if (address.getUses()!=null && address.getCountries().size() >0 ) {
-      switch(address.getUses().get(0)) {
+    if (address.getUses() != null && address.getCountries().size() > 0) {
+      switch (address.getUses().get(0)) {
         case H:
         case HP:
           addressDt.setUse(AddressUseEnum.HOME);
@@ -129,16 +137,17 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
           addressDt.setUse(AddressUseEnum.WORK);
           break;
       }
-      
+
     }
     return addressDt;
   }
 
-  /** converts the fhir address to the convenience address
-  * 
-  * @param address
-  * @return
-  */
+  /**
+   * converts the fhir address to the convenience address
+   * 
+   * @param address
+   * @return
+   */
   private Address convertAddress(AddressDt addressDt) {
     if (addressDt == null) {
       return null;
@@ -166,10 +175,10 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (addressDt.getPostalCode() != null) {
       zip = addressDt.getPostalCode();
     }
-    
+
     AddressUse addressUse = null;
-    if (addressDt.getUseElement()!=null && addressDt.getUseElement().getValueAsEnum()!=null) {
-      switch(addressDt.getUseElement().getValueAsEnum()) {
+    if (addressDt.getUseElement() != null && addressDt.getUseElement().getValueAsEnum() != null) {
+      switch (addressDt.getUseElement().getValueAsEnum()) {
         case HOME:
           addressUse = AddressUse.PRIVATE;
           break;
@@ -186,7 +195,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (addressDt.getCountry() != null) {
       patientAddress.getMdhtAdress().addCountry(addressDt.getCountry());
     }
-    
+
     return patientAddress;
   }
 
@@ -417,6 +426,13 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
         && patient.getMdhtPatient().getBirthplace().getPlace() != null) {
       setBirthPlace(convertAddress(patient.getMdhtPatient().getBirthplace().getPlace().getAddr()));
     }
+    
+    // religiousAffiliation
+    if (patient.getReligiousAffiliation()!=null) {
+      CodeableConceptDt religiousAffiliation = new CodeableConceptDt();
+      religiousAffiliation.setText(patient.getReligiousAffiliation());
+      this.setReligiousAffiliation(religiousAffiliation);
+    }
 
   }
 
@@ -471,7 +487,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
       patient.addId(identificator);
     }
 
-    for(AddressDt addressDt : getAddress()) { 
+    for (AddressDt addressDt : getAddress()) {
       patient.addAddress(convertAddress(addressDt));
     }
 
@@ -596,16 +612,29 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
     if (!mothersMaidenName.isEmpty()) {
       patient.setMothersMaidenName(mothersMaidenName.getFamilyAsSingleString());
     }
-    
-    if (getBirthPlace()!=null && !getBirthPlace().isEmpty()) {
+
+    if (getBirthPlace() != null && !getBirthPlace().isEmpty()) {
       Birthplace birthPlace = CDAFactory.eINSTANCE.createBirthplace();
       Place place = CDAFactory.eINSTANCE.createPlace();
       birthPlace.setPlace(place);
       place.setAddr(this.convertAddress(this.getBirthPlace()).getMdhtAdress());
       patient.getMdhtPatient().setBirthplace(birthPlace);
     }
+    
+    // religiousAffiliation
+    if (getReligiousAffiliation() != null && !getReligiousAffiliation().isEmpty()) {
+      patient.setReligiousAffiliation(getReligiousAffiliation().getText());
+    }
 
     return patient;
+  }
+
+  public CodeableConceptDt getReligiousAffiliation() {
+    return religiousAffiliation;
+  }
+
+  public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
+    this.religiousAffiliation = religiousAffiliation;
   }
 
 }

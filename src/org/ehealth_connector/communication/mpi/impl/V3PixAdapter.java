@@ -17,6 +17,8 @@ package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -54,8 +56,9 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  * V3PixAdapter
  * 
  * V3PixAdapter implements the Actor Patient Identity Source from ITI-44 Patient Identity Feed HL7
- * V3 and the Actor Patient Identifier Cross-reference Consumer from ITI-55 PIXV3 Query
+ * V3 and the Actor Patient Identifier Cross-reference Consumer from ITI-55 PIXV3 Query.
  * 
+ * @author oliveregger
  * @see ftp://ftp.ihe.net/DocumentPublication/CurrentPublished/ITInfrastructure/IHE_ITI_TF_Vol2b.pdf
  * 
  *      The V3PixAdapter implements the MpiAdapterIntefarce with the Open Health Tools (OHT) IHE
@@ -66,30 +69,41 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  *      /ihe/pix/source/v3/V3PixSource.html V3PixConsumer @see
  *      https://www.projects.openhealthtools.org/sf/projects/iheprofiles
  *      /javadocs/2.0.0/org/openhealthtools/ihe/pix/consumer/v3/V3PixConsumer.html
- * 
- * @author oliveregger
  */
 public class V3PixAdapter implements MpiAdapterInterface {
 
+  /** The log. */
   private Log log = LogFactory.getLog(V3PixAdapter.class);
 
+  /** The adapter cfg. */
   private V3PixAdapterConfig adapterCfg;
 
+  /** The home community oid. */
   private String homeCommunityOid;
 
+  /** The source configured. */
   private boolean sourceConfigured;
 
+  /** The consumer configured. */
   private boolean consumerConfigured;
 
+  /** The pix source. */
   protected V3PixSource pixSource;
 
+  /** The v3 pix consumer. */
   protected V3PixConsumer v3PixConsumer;
+
+  /**
+   * Used to capture additional oid identifiers for the person such as a Drivers’ license or Social
+   * Security Number.
+   */
+  protected Set<String> otherIdsOidSet;
 
   /**
    * Instantiates a new v3 pix adapter.
    */
   public V3PixAdapter() {
-
+    otherIdsOidSet = new HashSet<String>();
   }
 
   /**
@@ -109,31 +123,29 @@ public class V3PixAdapter implements MpiAdapterInterface {
    * 
    * @param patient the patient
    * @param v3PixSourceMessage the v3 add message
-   * @param v3RecordRevisedMessage the v3 revised message
-   * @param v3MergePatientsMessage the v3 merge message
    */
   protected void addDemographicData(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     if (v3PixSourceMessage == null) {
       return;
     }
     setScopingOrganization(patient, v3PixSourceMessage);
-    addPatientId(patient, v3PixSourceMessage);
+    addPatientIds(patient, v3PixSourceMessage);
     addPatientName(patient, v3PixSourceMessage);
     setPatientBirthTime(patient, v3PixSourceMessage);
     setPatientGender(patient, v3PixSourceMessage);
     addPatientAddresses(patient, v3PixSourceMessage);
     addPatientTelecoms(patient, v3PixSourceMessage);
-    addLanguageCommunication(patient, v3PixSourceMessage);
+    addLanguageCommunications(patient, v3PixSourceMessage);
     setPatientMaritalStatus(patient, v3PixSourceMessage);
     setDeceased(patient, v3PixSourceMessage);
     setMultipeBirth(patient, v3PixSourceMessage);
     setPatientMothersMaidenName(patient, v3PixSourceMessage);
     setBirthPlace(patient, v3PixSourceMessage);
-    // FIXME TODO
-    // non-medical identifiers
+    setPatientReligiousAffiliation(patient, v3PixSourceMessage);
+    // TODO Citizen not implemented in OHT
+    // TODO Nation not implemented in OHT
+    // TODO Employee not implemented in OHT
   }
-
-
 
   /**
    * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add Patient Record
@@ -165,7 +177,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Checks the response, error are logged
+   * Checks the response, error are logged.
    * 
    * @param response the response
    * @return true, if response has no error, false if there are errors
@@ -429,7 +441,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Logs a debug message
+   * Logs a debug message.
    * 
    * @param test will be prefixed to the log message
    * @param element the xml element serialized to be logged
@@ -455,26 +467,11 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Inits the home community
-   * 
-   * if home community ist not defined and patient has only one identifier, the home homeCommunityId
-   * is initialized with the system of the identifier
+   * Adds the patient telecoms.
    * 
    * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
-  private void initHomeCommunityId(FhirPatient patient) {
-    if (homeCommunityOid == null) {
-      if (patient.getIdentifier().size() == 1) {
-        if (patient.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
-          homeCommunityOid = patient.getIdentifier().get(0).getSystem();
-        }
-      } else {
-        throw new IllegalStateException("homeCommunityId has to be specified");
-      }
-    }
-  }
-
-
   private void addPatientTelecoms(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     // telecommunication addresses (only phone and email will be added to source)
     if (patient.getTelecom() != null && patient.getTelecom().size() > 0) {
@@ -509,17 +506,23 @@ public class V3PixAdapter implements MpiAdapterInterface {
     }
   }
 
+  /**
+   * Adds the patient addresses.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
   private void addPatientAddresses(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     if (patient.getAddress().size() > 0) {
-      for(AddressDt addressDt : patient.getAddress()) {
-  
+      for (AddressDt addressDt : patient.getAddress()) {
+
         String adressOtherDesignation = null;
         if (addressDt.getLine().size() > 1) {
           adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
         }
         String addressType = null;
-        if (addressDt.getUseElement()!=null && addressDt.getUseElement().getValueAsEnum()!=null) {
-          switch(addressDt.getUseElement().getValueAsEnum()) {
+        if (addressDt.getUseElement() != null && addressDt.getUseElement().getValueAsEnum() != null) {
+          switch (addressDt.getUseElement().getValueAsEnum()) {
             case HOME:
               addressType = "H";
               break;
@@ -541,6 +544,12 @@ public class V3PixAdapter implements MpiAdapterInterface {
     }
   }
 
+  /**
+   * Sets the scoping organization.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
   private void setScopingOrganization(FhirPatient patient,
       V3PixSourceMessageHelper v3PixSourceMessage) {
     // scoping organization set the scoping organization
@@ -557,7 +566,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
       }
     }
 
-    if (organization != null && organization.getName()!=null) {
+    if (organization != null && organization.getName() != null) {
       organizationName = organization.getName();
     }
 
@@ -574,11 +583,23 @@ public class V3PixAdapter implements MpiAdapterInterface {
         organizationTelecomValue);
   }
 
+  /**
+   * Sets the patient birth time.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
   private void setPatientBirthTime(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     v3PixSourceMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
         .replaceAll("-", ""));
   }
 
+  /**
+   * Sets the patient gender.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
   private void setPatientGender(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     // Gender
     if (patient.getGender() != null) {
@@ -594,12 +615,37 @@ public class V3PixAdapter implements MpiAdapterInterface {
     }
   }
 
-  private void addPatientId(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-    // patient local id
-    v3PixSourceMessage.addPatientID(getPatientId(patient, homeCommunityOid), homeCommunityOid,
-        adapterCfg.homeCommunityNamespace);
+  /**
+   * Adds the patient ids.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
+  private void addPatientIds(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+    for(IdentifierDt identifierDt : patient.getIdentifier()) {
+      if (this.otherIdsOidSet.contains(identifierDt.getSystem())) {
+          v3PixSourceMessage.addPatientOtherID(identifierDt.getValue(), identifierDt.getSystem().substring(8));
+      } else {
+        if (identifierDt.getSystem().length()>8 && (identifierDt.getSystem().startsWith("urn:oid:"))) {
+          String oid = identifierDt.getSystem().substring(8);
+          if (homeCommunityOid.equals(oid)) {
+            v3PixSourceMessage.addPatientID(identifierDt.getValue(), homeCommunityOid,
+                adapterCfg.homeCommunityNamespace);
+          } else {
+            v3PixSourceMessage.addPatientID(identifierDt.getValue(), oid,
+                "");
+          }
+        }
+      }
+    }
   }
 
+  /**
+   * Adds the patient name.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
+   */
   private void addPatientName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     // Name
     String familyName = patient.getName().get(0).getFamilyAsSingleString();
@@ -612,13 +658,13 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Adds the language communication. FHIR language code is based on
+   * Adds the language communications. FHIR language code is based on
    * http://tools.ietf.org/html/bcp47, HL7V3 makes no requirements
    * 
    * @param patient the patient
    * @param v3PixSourceMessage the v3 pix source message
    */
-  private void addLanguageCommunication(FhirPatient patient,
+  private void addLanguageCommunications(FhirPatient patient,
       V3PixSourceMessageHelper v3PixSourceMessage) {
     if (patient.getCommunication().size() > 0) {
       for (CodeableConceptDt communication : patient.getCommunication()) {
@@ -628,70 +674,75 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * Adds the marital status. 
-   * TODO is the coding of marital status of fhir equivalent to HL7 V3?
+   * Adds the marital status. TODO is the coding of marital status of fhir equivalent to HL7 V3?
    * http://hl7.org/implement/standards/FHIR-Develop/valueset-marital-status.html
    * 
    * @param patient the patient
    * @param v3PixSourceMessage the v3 pix source message
    */
-  private void setPatientMaritalStatus(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+  private void setPatientMaritalStatus(FhirPatient patient,
+      V3PixSourceMessageHelper v3PixSourceMessage) {
     if (!patient.getMaritalStatus().isEmpty()) {
-      v3PixSourceMessage.setPatientMaritalStatus(patient.getMaritalStatus().getValueAsEnum().toArray()[0].toString());
+      v3PixSourceMessage.setPatientMaritalStatus(patient.getMaritalStatus().getValueAsEnum()
+          .toArray()[0].toString());
     }
   }
-  
+
   /**
-   * sets the deceased status, either boolean or by datetime
-   * @param patient
-   * @param v3PixSourceMessage
+   * sets the deceased status, either boolean or by datetime.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
   public void setDeceased(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     IDatatype idDeceased = patient.getDeceased();
-    if (idDeceased instanceof DateTimeDt ) {
+    if (idDeceased instanceof DateTimeDt) {
       DateTimeDt deceased = (DateTimeDt) idDeceased;
-      if (deceased.getValue()!=null) {
+      if (deceased.getValue() != null) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         v3PixSourceMessage.setPatientDeceasedTime(dateFormat.format(deceased.getValue()));
         v3PixSourceMessage.setPatientDeceased(true);
       }
     }
-    if (idDeceased instanceof BooleanDt ) {
+    if (idDeceased instanceof BooleanDt) {
       BooleanDt deceased = (BooleanDt) idDeceased;
-      if (deceased.getValue()!=null) {
+      if (deceased.getValue() != null) {
         v3PixSourceMessage.setPatientDeceased(deceased.getValue());
       }
     }
   }
-  
+
   /**
-   * Set the patient Birth Order
-   * @param patient
-   * @param v3PixSourceMessage
+   * Set the patient Birth Order.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
   public void setMultipeBirth(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
     IDatatype iMultipleBirth = patient.getMultipleBirth();
-    if (iMultipleBirth instanceof IntegerDt ) {
+    if (iMultipleBirth instanceof IntegerDt) {
       IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
-      if (multipleBirth.getValue()!=null) {
+      if (multipleBirth.getValue() != null) {
         v3PixSourceMessage.setMultipleBirthOrderNumber(multipleBirth.getValue());
         v3PixSourceMessage.setMultipleBirthIndicator(true);
       }
     }
-    if (iMultipleBirth instanceof BooleanDt ) {
+    if (iMultipleBirth instanceof BooleanDt) {
       BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
-      if (multipleBirth.getValue()!=null) {
-        v3PixSourceMessage.setPatientDeceased(multipleBirth.getValue());
+      if (multipleBirth.getValue() != null) {
+        v3PixSourceMessage.setMultipleBirthIndicator(multipleBirth.getValue());
       }
-    }    
+    }
   }
-  
+
   /**
-   * Sets the patients mother maiden name
-   * @param patient
-   * @param v3PixSourceMessage
+   * Sets the patients mother maiden name.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
-  public void setPatientMothersMaidenName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
+  public void setPatientMothersMaidenName(FhirPatient patient,
+      V3PixSourceMessageHelper v3PixSourceMessage) {
     HumanNameDt maidenName = patient.getMothersMaidenName();
     if (maidenName.isEmpty()) {
       String familyName = maidenName.getFamilyAsSingleString();
@@ -699,49 +750,56 @@ public class V3PixAdapter implements MpiAdapterInterface {
       String otherName = ""; // other is resolved into given in addPatientName
       String prefixName = maidenName.getPrefixAsSingleString();
       String suffixName = maidenName.getSuffixAsSingleString();
-      v3PixSourceMessage.setPatientMothersMaidenName(familyName, givenName, otherName, suffixName, prefixName);
+      v3PixSourceMessage.setPatientMothersMaidenName(familyName, givenName, otherName, suffixName,
+          prefixName);
     }
   }
-  
+
   /**
-   * Sets the birthplace
-   * @param patient
-   * @param v3PixSourceMessage
+   * Sets the birthplace.
+   * 
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
   public void setBirthPlace(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-    if (patient.getBirthPlace()!=null) {
+    if (patient.getBirthPlace() != null) {
       AddressDt addressDt = patient.getBirthPlace();
       String adressOtherDesignation = null;
       if (addressDt.getLine().size() > 1) {
         adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
       }
-      AD patientAddress = PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(),
-          addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
-          addressDt.getPostalCode(), adressOtherDesignation, null);
+      AD patientAddress =
+          PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(), addressDt.getCity(), null,
+              addressDt.getState(), addressDt.getCountry(), addressDt.getPostalCode(),
+              adressOtherDesignation, null);
       v3PixSourceMessage.setBirthPlace(patientAddress);
     }
   }
 
   /**
-   * returns a patient id defined by patient identity issuing system.
+   * Sets the patient religious affiliation.
    * 
-   * @param patient the Patient
-   * @param systemOid the oid of the system responsible which issued the patient id
-   * @return the patient id
+   * @param patient the patient
+   * @param v3PixSourceMessage the v3 pix source message
    */
-  private String getPatientId(FhirPatient patient, String systemOid) {
-    initHomeCommunityId(patient);
-    for (IdentifierDt identifierDt : patient.getIdentifier()) {
-      String idSystem = identifierDt.getSystem();
-      if (idSystem != null && idSystem.equals("urn:oid:" + systemOid)) {
-        return identifierDt.getValue();
-      }
+  private void setPatientReligiousAffiliation(FhirPatient patient,
+      V3PixSourceMessageHelper v3PixSourceMessage) {
+    if (!patient.getReligiousAffiliation().isEmpty()) {
+      v3PixSourceMessage.setPatientReligiousAffiliation(patient.getReligiousAffiliation().getText());
     }
-    return null;
   }
-  
-  
-  
+
+
+  /**
+   * add another oid identifiers for the person such as a Drivers’ license or Social Security
+   * Number.
+   * 
+   * @param oid
+   */
+  public void addOtherIdsOid(String oid) {
+    otherIdsOidSet.add("urn:oid:" + oid);
+  }
+
 
 
 }

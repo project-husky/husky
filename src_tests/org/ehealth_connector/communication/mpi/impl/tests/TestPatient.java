@@ -52,7 +52,7 @@ public class TestPatient {
   static public String oidInsuranceCard = "urn:oid:2.16.756.5.30.1.123.100.1.1.1";
   public String idInsuranceCard;
   public String localId;
-  static private String oidLocalId = "oid:1.2.3.4";
+  static private String oidLocalId = "1.2.3.4";
 
   static public TestPatient getTestPatientMueller() {
     TestPatient testPatient = new TestPatient();

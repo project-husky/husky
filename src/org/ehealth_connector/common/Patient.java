@@ -79,6 +79,13 @@ public class Patient extends Person {
    * TODO: only use at the moment in the OHT PIX communication, for CDA no functionality yet
    */
   private String mothersMaidenName;
+  
+  
+  /**
+   * religious Affiliation
+   */
+  private String religiousAffiliation;
+  
 
   /**
    * Erstellt einen neuen Patienten.
@@ -496,5 +503,23 @@ public class Patient extends Person {
    */
   public void setMothersMaidenName(String mothersMaidenName) {
     this.mothersMaidenName = mothersMaidenName;
+  }
+
+  /**
+   * Gets the religious affiliation.
+   *
+   * @return the religious affiliation
+   */
+  public String getReligiousAffiliation() {
+    return religiousAffiliation;
+  }
+
+  /**
+   * Sets the religious affiliation.
+   *
+   * @param religiousAffiliation the new religious affiliation
+   */
+  public void setReligiousAffiliation(String religiousAffiliation) {
+    this.religiousAffiliation = religiousAffiliation;
   }
 }
