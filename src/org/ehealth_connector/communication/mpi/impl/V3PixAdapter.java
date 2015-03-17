@@ -56,7 +56,7 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  * V3PixAdapter
  * 
  * V3PixAdapter implements the Actor Patient Identity Source from ITI-44 Patient Identity Feed HL7
- * V3 and the Actor Patient Identifier Cross-reference Consumer from ITI-55 PIXV3 Query.
+ * V3 and the Actor Patient Identifier Cross-reference Consumer from ITI-45 PIXV3 Query.
  * 
  * @author oliveregger
  * @see ftp://ftp.ihe.net/DocumentPublication/CurrentPublished/ITInfrastructure/IHE_ITI_TF_Vol2b.pdf
@@ -112,8 +112,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
    * @param adapterConfig the adapter config
    */
   public V3PixAdapter(V3PixAdapterConfig adapterConfig) {
+    otherIdsOidSet = new HashSet<String>();
     adapterCfg = adapterConfig;
     homeCommunityOid = adapterCfg.homeCommunityOid;
+    if (adapterConfig.otherOidIds!=null) {
+      for(String oid: adapterConfig.otherOidIds) {
+        otherIdsOidSet.add(oid); 
+      }
+    }
   }
 
 
@@ -230,7 +236,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
    * done a merge within a specific Patient Identification Domain. That is, the surviving identifier
    * (patient ID) has subsumed a duplicate patient identifier.
    * 
-   * @param patient the patient (with the suriving identifier)
+   * @param patient the patient (with the surviving identifier)
    * @param obsoleteId the obsolete id (duplicate patient identifier)
    * @return true, if successful
    * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.
@@ -320,7 +326,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
   }
 
   /**
-   * query the mpi with patient id and return the ids in the queried Domains from the mpi.
+   * query the mpi with patient id and return the ids in the queried domains from the mpi.
    * 
    * Implements ITI-45 Patient Identifier Cross-reference Consumer Queries the Patient Identifier
    * Cross-reference Manager for a list of corresponding patientidentifiers, if any
@@ -784,7 +790,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
    */
   private void setPatientReligiousAffiliation(FhirPatient patient,
       V3PixSourceMessageHelper v3PixSourceMessage) {
-    if (!patient.getReligiousAffiliation().isEmpty()) {
+    if (patient.getReligiousAffiliation()!=null && !patient.getReligiousAffiliation().isEmpty()) {
       v3PixSourceMessage.setPatientReligiousAffiliation(patient.getReligiousAffiliation().getText());
     }
   }

@@ -43,7 +43,7 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
  * The Class V3PixSourceMessageHelper.
  * 
  * Simplifies the api to the three different PIX Source messages implementations and leaves the
- * possibility to get back to the PatientRole for languageCommunication which is not implemented in
+ * possibility to get back to elements PatientRole for languageCommunication which are not implemented in
  * OHT V3 Message
  * 
  * @author oliveregger

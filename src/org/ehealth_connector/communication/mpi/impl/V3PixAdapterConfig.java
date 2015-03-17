@@ -62,6 +62,9 @@ public class V3PixAdapterConfig {
 
   /** The ATNA audit source id. */
   final public String auditSourceId;
+  
+  /** oid of id domains which are not medical ids */
+  final public String[] otherOidIds;
 
   /**
    * Instantiates a new v3 pix adapter config.
@@ -79,11 +82,12 @@ public class V3PixAdapterConfig {
    * @param domainToReturnNamespace the domain to return namespace (optional)
    * @param auditRepositoryUri the ATNA audit repository uri
    * @param auditSourceId the ATNA audit source id
+   * @param otherOidIds oid of id domains which are not medical ids
    */
   public V3PixAdapterConfig(URI pixQueryUri, URI pixSourceUri, String senderApplicationOid,
       String senderFacilityOid, String receiverApplicationOid, String receiverFacilityOid,
       String homeCommunityOid, String homeCommunityNamespace, String domainToReturnOid,
-      String domainToReturnNamespace, String auditRepositoryUri, String auditSourceId) {
+      String domainToReturnNamespace, String auditRepositoryUri, String auditSourceId, String[] otherOidIds) {
     super();
     this.pixQueryUri = pixQueryUri;
     this.pixSourceUri = pixSourceUri;
@@ -97,6 +101,7 @@ public class V3PixAdapterConfig {
     this.domainToReturnNamespace = domainToReturnNamespace;
     this.auditRepositoryUri = auditRepositoryUri;
     this.auditSourceId = auditSourceId;
+    this.otherOidIds = otherOidIds;
   }
 
 

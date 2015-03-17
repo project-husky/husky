@@ -65,7 +65,7 @@ import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
  * The Class FhirPatient. FHIRPatient extends from the FHIR HAPI Patient Resource and provides
- * convenience methods to translate between the convenience patient in the ehc and back
+ * convenience methods to translate between the convenience patient in the ehealthconeector  and back
  * 
  * @author oliveregger
  * 
@@ -437,7 +437,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
   }
 
   /**
-   * converts the fhir patient resource in the convencience api patient
+   * converts the fhir patient resource in the convenience api patient
    * 
    * @return the patient convenience api patient
    */

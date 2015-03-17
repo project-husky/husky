@@ -41,7 +41,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
   private V3PixAdapterConfig v3PixAdapterCfg;
 
   // TODO: fill below in from test tool before running test
-  final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.633";
+  final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.940";
   final private String ipAddress = "129.6.24.79";
   final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
 
@@ -78,7 +78,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     v3PixAdapterCfg =
         new V3PixAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"),
             senderApplicationOid, null, applicationName, facilityName, homeCommunityOid,
-            homeCommunityNamespace, null, null, null, null);
+            homeCommunityNamespace, null, null, null, null,null);
     v3PixAdapter = new V3PixAdapter(v3PixAdapterCfg);
 
     // ALPHA ALAN
@@ -171,7 +171,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     v3PixAdapterCfg =
         new V3PixAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"),
             senderApplicationOid, null, applicationName, facilityName, homeCommunityOid,
-            homeCommunityNamespace, null, null, null, null);
+            homeCommunityNamespace, null, null, null, null,null);
     v3PixAdapter = new V3PixAdapter(v3PixAdapterCfg);
 
     // LINCOLN MARY
@@ -253,7 +253,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     v3PixAdapterCfg =
         new V3PixAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"),
             senderApplicationOid, null, applicationName, facilityName, homeCommunityOid,
-            homeCommunityNamespace, null, null, null, null);
+            homeCommunityNamespace, null, null, null, null,null);
     v3PixAdapter = new V3PixAdapter(v3PixAdapterCfg);
 
     // TAU TERI
@@ -338,7 +338,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     v3PixAdapterCfg =
         new V3PixAdapterConfig(URI.create("http://" + ipAddress + ":9090"), null,
             senderApplicationOid, null, applicationName, facilityName, homeCommunityOid,
-            homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace, null, null);
+            homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace, null, null,null);
     v3PixAdapter = new V3PixAdapter(v3PixAdapterCfg);
 
     FhirPatient patient = new FhirPatient();
@@ -427,7 +427,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
     v3PixAdapterCfg =
         new V3PixAdapterConfig(URI.create("http://" + ipAddress + ":9090"), null,
             senderApplicationOid, null, applicationName, facilityName, homeCommunityOid,
-            homeCommunityNamespace, null, null, null, null);
+            homeCommunityNamespace, null, null, null, null,null);
     v3PixAdapter = new V3PixAdapter(v3PixAdapterCfg);
 
     FhirPatient patient = new FhirPatient();
