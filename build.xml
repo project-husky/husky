@@ -146,7 +146,7 @@
 			<fatjar.filesource path="${basedir}/bin" relpath="" />
 			<fatjar.filesource path="${basedir}/doc" relpath="doc" />
 			<fatjar.filesource path="${basedir}/src" relpath="src" />
-
+			<fatjar.filesource path="${basedir}/rsc" relpath="rsc" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.log4j_1.2.15.v201005080500.jar" />

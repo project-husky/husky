@@ -1,3 +1,18 @@
+/*******************************************************************************
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
+ * Year of publication: 2015
+*
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.List;
@@ -73,10 +88,6 @@ public class ImmunizationTextBuilder extends TextBuilder {
       addCell("");
     }
     if (immunization.getCommentText()!=null) {
-//    for (EntryRelationship er : ir.getEntryRelationships()) {
-//    if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-//      er.getAct().setText(Util.createReference(i, SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment"));
-//    }
       addCellWithContent(immunization.getCommentText(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment", i);
     }
     addCell("");

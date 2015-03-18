@@ -1,19 +1,17 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by
- * medshare GmbH, Switzerland. All rights reserved.
- * http://medshare.net
- *
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the
- * Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the
- * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
- *
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
  * Year of publication: 2015
- *
+*
  *******************************************************************************/
 
 package org.ehealth_connector.cda.ch;
@@ -28,6 +26,7 @@ import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.Pregnancy;
 import org.ehealth_connector.cda.ProblemConcernEntry;
@@ -44,6 +43,7 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -345,6 +345,7 @@ public class CdaChVacd extends CdaCh {
     SpecimenAct spa;
     LaboratoryObservationTextBuilder tb;
 
+    //FIXME: Dieser Teil muss in dem Objekt selbst ausgeführt werden. Also in LaboratoryObservation die Battery etc. erzeugen. 
     //find or create (and add) the Section
     lss = getDoc().getLaboratorySpecialitySection();
     if (lss==null) {
@@ -376,11 +377,13 @@ public class CdaChVacd extends CdaCh {
     spa.getEntryRelationships().get(spa.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
     //TODO update the MDHT Object content references to CDA level 1 text (if necessary)
+    updateLaboratoryObservationReferences(spa, SectionsVACD.SEROLOGY_STUDIES);
+    
     tb = new LaboratoryObservationTextBuilder(getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
     lss.createStrucDocText(tb.toString());
   }
 
-  /**
+/**
    * <div class="de">Fügt ein vergangenes Leiden hinzu</div>
    * <div class="fr"></div>
    * <div class="it"></div>
@@ -806,6 +809,8 @@ public class CdaChVacd extends CdaCh {
       EList<Act> acts, SectionsVACD loincSectionCode) {
     int i = 0;
     for (Act act : acts) {
+    	int j = 0;
+        i++;
       org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
       for (ProblemEntry problemEntry : problemConcernEntry.getAllergyIntolerances()) {
         //Check if the problem is not unknown (leads to no reference, because there is no problem)
@@ -815,10 +820,13 @@ public class CdaChVacd extends CdaCh {
         }
         else {
           //Create references to level 1 text
-          i++;
           ED reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
           problemEntry.setText(EcoreUtil.copy(reference));
           problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
+        }
+        for (EntryRelationship er : problemEntry.getEntryRelationships()) {
+            j++;
+        	er = Util.updateRefIfComment(er, String.valueOf(i)+String.valueOf(j), loincSectionCode);
         }
       }
     }
@@ -858,16 +866,25 @@ public class CdaChVacd extends CdaCh {
         ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode().setOriginalText(EcoreUtil.copy(reference));
       }
       for (EntryRelationship er : ir.getEntryRelationships()) {
-        if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-          //Get the ed and update it with the reference
-          ED ed =  er.getAct().getText();
-          TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-          ed.setReference(tel);
-          tel.setValue("#"+SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()+"-comment"+i);
-          er.getAct().setText(ed);
-        }
+       er = Util.updateRefIfComment(er, String.valueOf(i), loincSectionCode);
       }
     }
+  }
+  
+  private void updateLaboratoryObservationReferences(SpecimenAct spa, SectionsVACD loincSectionCode) {
+	for (int i = 0; i<spa.getLaboratoryBatteryOrganizers().size(); i++) {
+		LaboratoryBatteryOrganizer lba = spa.getLaboratoryBatteryOrganizers().get(i);
+		for (int j = 0; j<lba.getLaboratoryObservations().size(); j++) {
+			org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation lo = lba.getLaboratoryObservations().get(j);
+			for (int k = 0; k<lo.getEntryRelationships().size();k++) {
+				EntryRelationship er = lo.getEntryRelationships().get(k);
+				if (Util.isComment(er)) {
+					k++;
+					er = Util.updateRefIfComment(er, String.valueOf(i+1)+String.valueOf(j+1)+String.valueOf(k+1), loincSectionCode);
+				}
+			}
+		}
+	}
   }
 
 }

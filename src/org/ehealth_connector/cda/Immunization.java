@@ -1,19 +1,17 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by
- * medshare GmbH, Switzerland. All rights reserved.
- * http://medshare.net
- *
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the
- * Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the
- * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
- *
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
  * Year of publication: 2015
- *
+*
  *******************************************************************************/
 
 package org.ehealth_connector.cda;
@@ -77,6 +75,8 @@ public class Immunization {
     }
 
     setPriorityCode(createPriorityCode());
+    setRouteOfAdministration(null);
+    setDosage(null);
   }
 
   /**
@@ -249,18 +249,7 @@ public class Immunization {
    * @return the reference of the level 3 comment entry, which point to the level 2 text
    */
   public String getCommentRef() {
-    for (EntryRelationship er : mImmunization.getEntryRelationships()) {
-      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-        //Get the ed and update it with the reference
-        if (er.getAct().getText()!=null) {
-    	  ED ed =  er.getAct().getText();
-    	  if (ed.getReference() != null) {
-    		  return ed.getReference().getValue();
-    	  }
-    	}
-      }
-    }
-    return null;
+    return Util.getCommentRef(mImmunization.getEntryRelationships());
   }
   
   /**
@@ -269,14 +258,7 @@ public class Immunization {
    * @return the comment text
    */
   public String getCommentText() {
-    for (EntryRelationship er : mImmunization.getEntryRelationships()) {
-      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-        //Get the ed and update it with the reference
-        ED ed =  er.getAct().getText();
-        return ed.getText();
-      }
-    }
-    return null;
+    return Util.getCommentText(mImmunization.getEntryRelationships());
   }
   
   /**

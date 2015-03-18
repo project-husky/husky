@@ -1,23 +1,23 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by
- * medshare GmbH, Switzerland. All rights reserved.
- * http://medshare.net
- *
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the
- * Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the
- * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
- *
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
  * Year of publication: 2015
- *
+*
  *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
+import java.net.URI;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +35,7 @@ import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.ExternalDocument;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
@@ -46,6 +47,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
@@ -200,18 +203,7 @@ public class ImmunizationRecommendation {
    * @return the reference of the level 3 comment entry, which point to the level 2 text
    */
   public String getCommentRef() {
-    for (EntryRelationship er : mImmunizationRecommendation.getEntryRelationships()) {
-      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-        //Get the ed and update it with the reference
-        if (er.getAct().getText()!=null) {
-    	  ED ed =  er.getAct().getText();
-    	  if (ed.getReference() != null) {
-    		  return ed.getReference().getValue();
-    	  }
-    	}
-      }
-    }
-    return null;
+	  return Util.getCommentRef(mImmunizationRecommendation.getEntryRelationships());
   }
   
   /**
@@ -238,14 +230,7 @@ public class ImmunizationRecommendation {
    * @return the comment text
    */
   public String getCommentText() {
-    for (EntryRelationship er : mImmunizationRecommendation.getEntryRelationships()) {
-      if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
-        //Get the ed and update it with the reference
-        ED ed =  er.getAct().getText();
-        return ed.getText();
-      }
-    }
-    return null;
+    return Util.getCommentText(mImmunizationRecommendation.getEntryRelationships());
   }
   
   /**
@@ -460,7 +445,24 @@ public class ImmunizationRecommendation {
   public void addReason(Code code) {
     mImmunizationRecommendation.addObservation(createReason(code));
     mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1).setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-    mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1).setInversionInd(false);
+    mImmunizationRecommendation.getEntryRelationships().get(mImmunizationRecommendation.getEntryRelationships().size()-1).setInversionInd(false);   
+  }
+  
+  public void setExternalDocument(URL link, Identificator id) {
+	  ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
+	  e.setClassCode(ActClassDocument.DOC);
+	  e.setMoodCode(ActMood.EVN);
+	  
+	  //set the given or generate an ID for the document
+	  e.setSetId(Util.createUuidVacdIdentificator(id));
+	  
+	  //set the URL
+	  e.setText(Util.createEd(link.toString()));
+	  
+	  //Was ist das ExternalDocument für ein Objekt? Kein Act, Keine EntryRelationship, wie füge ich es der Immunization Recommendation hinzu?
+//	  Observation o = CDAFactory.eINSTANCE.createObservation();
+//	  
+//	  mImmunizationRecommendation.getEntryRelationships().add(e);
   }
 
   /**

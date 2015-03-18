@@ -1,9 +1,28 @@
+/*******************************************************************************
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
+ * Year of publication: 2015
+*
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.ArrayList;
 
 import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.common.Util;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * Builds the <text> part of the Immunization recommendations.
@@ -41,6 +60,7 @@ public class AllergyConcernTextBuilder extends TextBuilder {
     append("<tr>");
     append("<th>Risikokategorie</th>");
     append("<th>Risikofaktor</th>");
+    append("<th>Kommentar</th>");
     append("</tr>");
     append("</thead>");
   }
@@ -53,6 +73,32 @@ public class AllergyConcernTextBuilder extends TextBuilder {
     }
     else {
       addCell("");
+    }
+    if (allergyConcern.getAllergyProblems()==null) {
+    	addCell("");
+    }
+    else {
+    	//Create a string with more than one reference
+    	String cellStr = "<td>";
+    	int j = 0;
+    	boolean minOneComment = false;
+    	for (AllergyProblem ap : allergyConcern.getAllergyProblems()) {
+       		if (ap.getMdhtAllergyProblem().getEntryRelationships()!=null) {
+       			for (EntryRelationship er : ap.getMdhtAllergyProblem().getEntryRelationships()) {
+       				if (Util.isComment(er)) {
+       					j++;
+       					minOneComment = true;
+       					cellStr=cellStr+("<content ID='"+SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix()+"-comment" + i + j+ "'>");
+       					cellStr=cellStr+(ap.getCommentText());
+       					cellStr=cellStr+("</content>");
+       				}
+       			}
+    		}
+    	}
+    	if (minOneComment) {
+			cellStr=cellStr+"</td>";
+			append(cellStr);
+    	}
     }
     append("</tr>");
   }

@@ -1,17 +1,17 @@
 /*******************************************************************************
- *
+*
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+* All rights reserved. http://medshare.net
+*
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
+*
  * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+*
  * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 3.0 Switzerland License.
- *
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
  * Year of publication: 2015
- *
+*
  *******************************************************************************/
 package org.ehealth_connector.cda;
 
@@ -25,15 +25,21 @@ import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
+import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * <div class="de">Klasse Laborbefund</div>\n <div class="fr">Class LaboratoryObservation.</div>\n
@@ -388,5 +394,41 @@ public class LaboratoryObservation {
     }
 
     mLaboratoryObservation.getPerformers().add(perf);
+  }
+  
+  /**
+   * Gets the reference to the comment in the level 2 section text (when set).
+   *
+   * @return the reference of the level 3 comment entry, which point to the level 2 text
+   */
+  public String getCommentRef() {
+    return Util.getCommentRef(mLaboratoryObservation.getEntryRelationships());
+  }
+  
+  /**
+   * Sets a comment text
+   *
+   * @param text the text
+   */
+  public void setCommentText(String text) {
+    Comment mComment = IHEFactory.eINSTANCE.createComment().init();
+    ED ed = DatatypesFactory.eINSTANCE.createED();
+    ed.addText(text);
+    mComment.setText(ed);
+    //mComment.setText(Util.createEd(text));
+    mLaboratoryObservation.addAct(mComment);
+          
+    EntryRelationship er = mLaboratoryObservation.getEntryRelationships().get(mLaboratoryObservation.getEntryRelationships().size()-1);
+    er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+    er.setInversionInd(true);
+  }
+  
+  /**
+   * Gets the text of the comment text element (this is not necessarily the comment itself)
+   *
+   * @return the comment text
+   */
+  public String getCommentText() {
+    return Util.getCommentText(mLaboratoryObservation.getEntryRelationships());
   }
 }

@@ -1,3 +1,18 @@
+/*******************************************************************************
+*
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+ * Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
+ * Year of publication: 2015
+*
+ *******************************************************************************/
 package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
@@ -126,6 +141,7 @@ private Performer performer2;
     p.addValue(problemCode);
     p.addValue(new Value(problemCode));
     p.addValue(new Value(problemCode));
+    p.setCommentText(ts1);
     return p;
   }
 
@@ -239,6 +255,7 @@ private Performer performer2;
     i.addId(id1);
     i.setDosage(number);
     i.setPerformer(performer1);
+    i.setCommentText(ts1);
     return i;
   }
 
@@ -252,6 +269,7 @@ private Performer performer2;
     l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
     l.addValue(code2);
     l.addValue(value1);
+    l.setCommentText(ts1);
     return l;
   }
 
@@ -412,6 +430,9 @@ private Performer performer2;
 
     p.addValue(value2);
     assertEquals(true, TestUtils.isEqual(value2, p.getValues().get(2)));
+    
+    p.setCommentText(ts1);
+    assertEquals(ts1, p.getCommentText());
   }
 
   @Test
@@ -617,7 +638,7 @@ private Performer performer2;
 
   //8
   @Test
-  public void testLaboratoryObservation() {
+  public void testLaboratoryObservationSetterGetter() {
     LaboratoryObservation l = new LaboratoryObservation();
 
     l.setCode(code1);
@@ -642,6 +663,10 @@ private Performer performer2;
 
     l.addValue(value1);
     assertTrue(TestUtils.isEqual(value1, l.getValues().get(1)));
+    
+    l.setCommentText(ts1);
+    assertEquals(ts1, l.getCommentText());
+    String t = l.getCommentRef();
   }
 
   //3

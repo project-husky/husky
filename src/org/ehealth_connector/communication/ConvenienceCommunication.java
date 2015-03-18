@@ -1,20 +1,19 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by
- * medshare GmbH, Switzerland. All rights reserved.
- * http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the
- * Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the
- * Creative Commons Attribution-ShareAlike 3.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 Switzerland License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
+
 
 package org.ehealth_connector.communication;
 
@@ -31,6 +30,7 @@ import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
+import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
@@ -250,7 +250,8 @@ public class ConvenienceCommunication {
    */
   public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
     //Cda Metadata extration is not implemented yet
-    XDSDocument doc = new XDSDocumentFromFile(desc,filePath);
+    XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+	  //XDSDocument doc = new XDSDocumentFromStream(desc,this.getClass().getResourceAsStream(filePath));
     String docEntryUUID = txnData.addDocument(doc);
     DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
     if (DocumentDescriptor.CDA_R2.equals(desc)) {
