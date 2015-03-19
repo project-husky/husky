@@ -127,7 +127,7 @@
 	
     <target depends="init" name="build">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}" compiler="javac1.6">
             <src path="src"/>
             <classpath refid="ehealthconnector.classpath"/>
         </javac>
