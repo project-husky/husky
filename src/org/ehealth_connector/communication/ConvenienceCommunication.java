@@ -371,24 +371,21 @@ public class ConvenienceCommunication {
 //    org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
 
     if (dest.getKeyStore()!=null) {
-      InputStream keystoreInput = getClass().getResourceAsStream(dest.getKeyStore());
-      InputStream truststoreInput = getClass().getResourceAsStream(dest.getTrustStore());
-      setSSLFactories(keystoreInput, dest.getKeyStorePassword(), truststoreInput, dest.getTrustStorePassword());
-      keystoreInput.close();
-      truststoreInput.close();
+//      InputStream keystoreInput = getClass().getResourceAsStream(dest.getKeyStore());
+//      InputStream truststoreInput = getClass().getResourceAsStream(dest.getTrustStore());
+//      setSSLFactories(keystoreInput, dest.getKeyStorePassword(), truststoreInput, dest.getTrustStorePassword());
+//      keystoreInput.close();
+//      truststoreInput.close();
       
-//      System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
-//      System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
-//      System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
-//      System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
+      System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
+      System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
+      System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
+      System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
     }
 
     source = new B_Source(dest.getRegistryUri());
     XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
-  }
-  
-
-
+  } 
 
   private static void setSSLFactories(InputStream keyStream, String keyStorePassword, InputStream trustStream, String trustStorePassword) throws Exception
   {    
