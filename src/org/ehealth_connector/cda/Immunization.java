@@ -51,8 +51,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-import com.sun.istack.internal.Nullable;
-
 /**
  * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten Impfungen.
  */
@@ -406,7 +404,7 @@ public class Immunization {
    *
    * @param doseQuantity the new dosage (use null, if not known)
    */
-  public void setDosage(@Nullable Double doseQuantity) {
+  public void setDosage(Double doseQuantity) {
     if (doseQuantity==null) {
       mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
     }

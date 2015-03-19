@@ -53,8 +53,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
-import com.sun.istack.internal.Nullable;
-
 /**
  * Dieses Element enthält den empfohlenen Impfplan für den Patienten. Zudem kann zur Begründung ein Verweis auf entsprechende Guidelines angegeben werden.
  * Dieses Kapitel ist KONDITIONAL und nur dann erforderlich, wenn es sich beim Dokument um die Antwort aus einem Expertensystem für Impfempfehlungen handelt (Clinical Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht erfolgte Impfungen dokumentiert werden.
@@ -307,7 +305,7 @@ public class ImmunizationRecommendation {
    *
    * @param doseQuantity the new dosage (use null, if not asked)
    */
-  public void setDosage(@Nullable Double doseQuantity) {
+  public void setDosage(Double doseQuantity) {
     if (doseQuantity==null) {
       mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
     }
