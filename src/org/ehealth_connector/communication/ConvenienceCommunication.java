@@ -37,8 +37,6 @@ import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
-import com.sun.istack.internal.Nullable;
-
 /**
  * <p>
  * Die ConvenienceCommunication Klasse stellt Methoden für die Kommunikation von
@@ -231,7 +229,7 @@ public class ConvenienceCommunication {
    * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
    * @throws Exception the exception
    */
-  public ConvenienceCommunication(Destination dest, boolean auditorEnabled, @Nullable String log4jConfigPath) throws Exception {
+  public ConvenienceCommunication(Destination dest, boolean auditorEnabled, String log4jConfigPath) throws Exception {
     txnData = new SubmitTransactionData();
     organizationalId = dest.getSenderOrganizationalOid();
     if (log4jConfigPath==null) {
