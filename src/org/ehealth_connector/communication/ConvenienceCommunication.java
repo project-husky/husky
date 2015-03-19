@@ -20,6 +20,13 @@ package org.ehealth_connector.communication;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.security.KeyStore;
+
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,6 +45,9 @@ import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+
+
+
 
 /**
  * <p>
@@ -69,6 +79,8 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class ConvenienceCommunication {
 
+  static SSLContext sslContext;
+  
   // IBM Audit Repository
   //public static final String IBM_ARR ="syslog://lswin10.dfw.ibm.com:515";
 
@@ -359,14 +371,65 @@ public class ConvenienceCommunication {
 //    org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
 
     if (dest.getKeyStore()!=null) {
-      System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
-      System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
-      System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
-      System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
+      InputStream keystoreInput = getClass().getResourceAsStream(dest.getKeyStore());
+      InputStream truststoreInput = getClass().getResourceAsStream(dest.getTrustStore());
+      setSSLFactories(keystoreInput, dest.getKeyStorePassword(), truststoreInput, dest.getTrustStorePassword());
+      keystoreInput.close();
+      truststoreInput.close();
+      
+//      System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
+//      System.setProperty("javax.net.ssl.keyStorePassword",dest.getKeyStorePassword());
+//      System.setProperty("javax.net.ssl.trustStore",dest.getTrustStore());
+//      System.setProperty("javax.net.ssl.trustStorePassword",dest.getTrustStorePassword());
     }
 
     source = new B_Source(dest.getRegistryUri());
     XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+  }
+  
+
+
+
+  private static void setSSLFactories(InputStream keyStream, String keyStorePassword, InputStream trustStream, String trustStorePassword) throws Exception
+  {    
+    // Get keyStore
+    KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());    
+
+    // if your store is password protected then declare it (it can be null however)
+    char[] keyPassword = keyStorePassword.toCharArray();
+
+    // load the stream to your store
+    keyStore.load(keyStream, keyPassword);
+
+    // initialize a trust manager factory with the trusted store
+    KeyManagerFactory keyFactory = 
+    KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());    
+    keyFactory.init(keyStore, keyPassword);
+
+    // get the trust managers from the factory
+    KeyManager[] keyManagers = keyFactory.getKeyManagers();
+
+    // Now get trustStore
+    KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());    
+
+    // if your store is password protected then declare it (it can be null however)
+    char[] trustPassword = trustStorePassword.toCharArray();
+
+    // load the stream to your store
+    trustStore.load(trustStream, trustPassword);
+
+    // initialize a trust manager factory with the trusted store
+    TrustManagerFactory trustFactory = 
+    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());    
+    trustFactory.init(trustStore);
+
+    // get the trust managers from the factory
+    TrustManager[] trustManagers = trustFactory.getTrustManagers();
+
+    // initialize an ssl context to use these managers and set as default
+    sslContext = SSLContext.getInstance("SSL");
+    sslContext.init(keyManagers, trustManagers, null);
+    SSLContext.setDefault(sslContext);    
   }
 
   /**
@@ -398,7 +461,7 @@ public class ConvenienceCommunication {
 
     // set submission time
     subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
-    txnData.saveMetadataToFile("C:/temp/metadata.xml");
+    //txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
     //Use the PatientId of the first Document for the SubmissionSet/patientId
     String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
@@ -410,7 +473,7 @@ public class ConvenienceCommunication {
     // set ContentTypeCode
     subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note" , null));
 
-    txnData.saveMetadataToFile("C:/temp/meta.xml");
+    //txnData.saveMetadataToFile("C:/temp/meta.xml");
     return source.submit(txnData);
   }
 }
