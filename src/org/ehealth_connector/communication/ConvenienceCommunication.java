@@ -18,6 +18,8 @@
 package org.ehealth_connector.communication;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -226,14 +228,14 @@ public class ConvenienceCommunication {
    * @param organizationalId the organizational id (the OID of your Organization, e.g. "1.3.6.1.4.1.21367.2010.1.2.1")
    * @param repositoryUri the repository uri (the URI of the Communication Endpoint, e.g. the NIST Repository "http://ihexds.nist.gov/tf6/services/xdsrepositoryb")
    * @param auditorEnabled the auditor enabled
-   * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./rsc/log4jInfo.xml" will be used)
+   * @param log4jConfigPath the log4j config path (if null, the standard log4j config file under: "./log4jConfigs/log4jInfo.xml" will be used)
    * @throws Exception the exception
    */
   public ConvenienceCommunication(Destination dest, boolean auditorEnabled, String log4jConfigPath) throws Exception {
     txnData = new SubmitTransactionData();
     organizationalId = dest.getSenderOrganizationalOid();
     if (log4jConfigPath==null) {
-      log4jConfigPath = "./rsc/log4jInfo.xml";
+      log4jConfigPath = "/log4jConfigs/log4jInfo.xml";
     }
     setUp(dest, auditorEnabled, log4jConfigPath);
   }
@@ -248,7 +250,8 @@ public class ConvenienceCommunication {
    */
   public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
     //Cda Metadata extration is not implemented yet
-    XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+    InputStream inputStream = getClass().getResourceAsStream(filePath);
+    XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
 	  //XDSDocument doc = new XDSDocumentFromStream(desc,this.getClass().getResourceAsStream(filePath));
     String docEntryUUID = txnData.addDocument(doc);
     DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
@@ -345,8 +348,15 @@ public class ConvenienceCommunication {
    * @throws Exception the exception
    */
   protected void setUp(Destination dest, boolean auditorEnabled, String log4jConfigPath) throws Exception {
-    File conf = new File(log4jConfigPath);
-    org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
+    //log4jConfigPath = "/log4jConfigs/log4jInfo.xml";
+    System.out.println("Path:"+log4jConfigPath);
+    URL resourceUrl = getClass().getResource(log4jConfigPath);
+    System.out.println("Url:"+resourceUrl);
+    org.apache.log4j.xml.DOMConfigurator.configure(resourceUrl);
+    
+//    log4jConfigPath = "./rsc/log4jConfigs/log4jInfo.xml";
+//    File conf = new File(log4jConfigPath);
+//    org.apache.log4j.xml.DOMConfigurator.configure(conf.getAbsolutePath());
 
     if (dest.getKeyStore()!=null) {
       System.setProperty("javax.net.ssl.keyStore",dest.getKeyStore());
