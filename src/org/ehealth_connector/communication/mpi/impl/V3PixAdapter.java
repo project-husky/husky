@@ -284,13 +284,13 @@ public class V3PixAdapter implements MpiAdapterInterface {
 
       for (int i = 0; i < v3PixConsumerResponse.getNumPatientIds(); i++) {
         String id[] = v3PixConsumerResponse.getPatientID(i);
-        if (id[1] != null && id[1].equals(rootOid)) {
+        if (id[2] != null && id[2].equals(rootOid)) {
           return id[0];
         }
       }
       for (int i = 0; i < v3PixConsumerResponse.getNumAsOtherIds(); i++) {
         String id[] = v3PixConsumerResponse.getPatientAsOtherID(i);
-        if (id[1] != null && id[1].equals(rootOid)) {
+        if (id[2] != null && id[2].equals(rootOid)) {
           return id[0];
         }
       }

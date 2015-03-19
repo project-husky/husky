@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.ehealth_connector.communication.mpi.impl.V3PixAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -48,6 +49,7 @@ import ca.uhn.fhir.model.primitive.DateDt;
  * @author oliveregger
  * 
  */
+@Ignore
 public class V3PixAdapterPixPdqNistPreCatTests {
 
   private Log log = LogFactory.getLog(V3PixAdapterPixPdqNistPreCatTests.class);
@@ -55,7 +57,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
   private V3PixAdapter v3PixAdapter;
   private V3PixAdapterConfig v3PixAdapterCfg;
 
-  // TODO: fill below in from test tool before running test
+  // TODO: fill below in from test tool before running test and remove @Ignore Annotation above to run the tests manual
   final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.940";
   final private String ipAddress = "129.6.24.79";
   final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
