@@ -28,7 +28,7 @@
 
   <appender name="SubmitTestFileAppender" class="org.apache.log4j.FileAppender">
       <!-- FIX the path here -->
-      <param name="File" value="rsc/logs/source.log" />
+      <param name="File" value="logs/docsource.log" />
   	<layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern"
              value="[%-5p][%F:%L] %m%n"/>
