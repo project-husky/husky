@@ -79,6 +79,14 @@ public void init() {
   
   c = new CdaChVacd();
 }
+
+@Test
+public void testSetterGetterCdaCh() {
+  c.setTimestamp(startDate);
+  assertEquals(startDate.getTime(), c.getTimestamp().getTime());
+  c.setConfidentialityCode(code1);
+  assertTrue(isEqual(code1, c.getConfidentialityCode()));
+}
    
   @Test
   public void testLegalAuthenticator() {

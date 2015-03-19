@@ -19,12 +19,15 @@ package org.ehealth_connector.cda.ch;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Organization;
@@ -50,6 +53,7 @@ import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
@@ -85,25 +89,44 @@ public abstract class CdaCh {
 
     // Set OID of the document
     //TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
-    II docID = DatatypesFactory.eINSTANCE.createII();
+    II docID = Util.createUuidVacd(null);
     doc.setId(docID);
-    docID.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
-    docID.setExtension("1817558762");
 
-    // Set Confidentially Code
-    // Standard is "N" for "normal". Can be changed through the set method
-    CE confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
-    doc.setConfidentialityCode(confidentialityCode);
-    confidentialityCode.setCode("N");
-
-    // set xml namespace
-    docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
+    setConfidentialityCode(null);
+   
+//    // set xml namespace
+//    docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 
     // Set creation time of the document
-    doc.setEffectiveTime(DateUtil.nowAsTS());
+    setTimestamp(null);
+    
+    //Fix RealmCode
+    CS cs = DatatypesFactory.eINSTANCE.createCS();
+    cs.setCode("CH");
+    doc.getRealmCodes().clear();
+    doc.getRealmCodes().add(cs);
 
     //Type ID
     setTypeId();
+  }
+
+  /**
+   * Sets Confidentially Code
+   * 
+   * @param code If null, "N" for "normal" will be set.
+   */
+  public void setConfidentialityCode(Code code) {
+    CE confidentialityCode;
+    if (code == null) {
+      confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
+      confidentialityCode.setCode("N");
+      confidentialityCode.setCodeSystem("2.16.840.1.113883.5.25");
+      confidentialityCode.setDisplayName("Normal");
+    }
+    else {
+      confidentialityCode = code.getCE();
+    }
+    doc.setConfidentialityCode(confidentialityCode);
   }
 
   /**
@@ -344,6 +367,13 @@ public abstract class CdaCh {
   public String getTitle() {
     return doc.getTitle().getText();
   }
+  
+  public Date getTimestamp() {
+    if (doc.getEffectiveTime()!=null) {
+      return DateUtil.parseDate(doc.getEffectiveTime());
+    }
+    return null;
+  }
 
   /**
    * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
@@ -381,6 +411,7 @@ public abstract class CdaCh {
     // save resource to console
     resource.save(oFile, null);
   }
+  
 
   /**
    * Weist dem CDA Dokument die verwaltende Organisation zu
@@ -438,8 +469,27 @@ public abstract class CdaCh {
   public void setPatient(Patient patient) {
     doc.getRecordTargets().add(patient.getMdhtRecordTarget());
   }
+  
+  public void setTimestamp(Date date) {
+    if (date == null) {
+      doc.setEffectiveTime(DateUtil.nowAsTS());
+    }
+    else {
+      try {
+        doc.setEffectiveTime(DateUtil.createTSFromEuroDate(date));
+      } catch (ParseException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
 
-  protected void setProcessingInstructions(String stylesheet) {
+  /**
+   * Fügt ein Stylesheet zu den XML Processing Instructions hinzu
+   * 
+   * @param stylesheet Bei null wird das Standardstylesheet mit dem Pfad: '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl' gesetzt
+   */
+  public void setCss(String stylesheet) {
     // Add the stylesheet processing instructions to the document
     if (stylesheet == null) {
       stylesheet = "../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl";	
@@ -448,7 +498,7 @@ public abstract class CdaCh {
         "xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
   }
 
-  public void setTitle(String title) {
+  protected void setTitle(String title) {
     ST titleSt = DatatypesFactory.eINSTANCE.createST();
     titleSt.addText(title);
     doc.setTitle(titleSt);

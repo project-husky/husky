@@ -56,7 +56,7 @@ public class CdaChEdes extends CdaCh {
     super(CHFactory.eINSTANCE.createEDES().init());
     setLanguageCode(language);
     setTitle(EDES_TITLE);
-    setProcessingInstructions(stylesheet);
+    setCss(stylesheet);
   }
 
   /**

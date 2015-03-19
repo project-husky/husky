@@ -103,6 +103,7 @@ public class CdaChVacd extends CdaCh {
         templateId.setExtension("CDA-CH");
       }
     }
+    setTitle(eVACDOCTitle);
     query = new Query(doc);
   }
 
@@ -115,8 +116,7 @@ public class CdaChVacd extends CdaCh {
   public CdaChVacd(LanguageCode language, Immunization immunization) {
     this();	
     setLanguageCode(language);
-    setTitle(eVACDOCTitle);
-    setProcessingInstructions(null);
+    setCss(null);
     addImmunization(immunization);
   }
 
@@ -137,8 +137,7 @@ public class CdaChVacd extends CdaCh {
   public CdaChVacd(LanguageCode language, Immunization immunization, String stylesheet) {
     this();
     setLanguageCode(language);
-    setTitle(eVACDOCTitle);
-    setProcessingInstructions(stylesheet);
+    setCss(stylesheet);
     addImmunization(immunization);
   }
 
@@ -886,6 +885,13 @@ public class CdaChVacd extends CdaCh {
 			}
 		}
 	}
+  }
+
+  public Code getConfidentialityCode() {
+    if (doc.getConfidentialityCode()!=null) {
+      return new Code(doc.getConfidentialityCode());
+    }
+    return null;
   }
 
 }
