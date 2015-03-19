@@ -86,6 +86,8 @@ public void testSetterGetterCdaCh() {
   assertEquals(startDate.getTime(), c.getTimestamp().getTime());
   c.setConfidentialityCode(code1);
   assertTrue(isEqual(code1, c.getConfidentialityCode()));
+  c.setId(id1);
+  assertTrue(isEqual(id1, c.getId()));
 }
    
   @Test

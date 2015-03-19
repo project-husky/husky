@@ -30,6 +30,7 @@ import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
@@ -89,8 +90,7 @@ public abstract class CdaCh {
 
     // Set OID of the document
     //TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
-    II docID = Util.createUuidVacd(null);
-    doc.setId(docID);
+    setId(null);
 
     setConfidentialityCode(null);
    
@@ -110,7 +110,17 @@ public abstract class CdaCh {
     setTypeId();
   }
 
-  /**
+  public void setId(Identificator id) {
+	if (id==null) {
+	    II docID = Util.createUuidVacd(null);
+	    doc.setId(docID);
+	}
+	else {
+		doc.setId(id.getIi());
+	}
+}
+
+/**
    * Sets Confidentially Code
    * 
    * @param code If null, "N" for "normal" will be set.
@@ -441,6 +451,13 @@ public abstract class CdaCh {
       id = organization.getMdhtOrganization().getIds().get(0);
     }
     mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
+  }
+  
+  public Identificator getId() {
+	  if (doc.getId()!= null) {
+		  return new Identificator(doc.getId());
+	  }
+	  return null;
   }
 
   public void setLanguageCode(LanguageCode language) {
