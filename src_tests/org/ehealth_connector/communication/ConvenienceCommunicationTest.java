@@ -32,17 +32,17 @@ public class ConvenienceCommunicationTest {
   // NIST SECURED Repository (query interface)
   public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
   //Keystore and Truststore for secured communication (in this example, we use one keystore file for those two)
-  public static final String KEY_STORE = "./rsc/security/keystore";
+  public static final String KEY_STORE = "./rsc/testDocSource/security/keystore";
   public static final String KEY_STORE_PASS ="nistbill";
-  public static final String TRUST_STORE="./rsc/security/keystore";
+  public static final String TRUST_STORE="./rsc/testDocSource/security/keystore";
   public static final String TRUST_STORE_PASS="nistbill";
 
   //The ID of your Organization
   public static final String ORGANIZATIONAL_ID ="1.3.6.1.4.1.21367.2010.1.2.666";
 
   //One PDF and one CDA Document that will be transfered
-  public static final String pdfFilePath = "./rsc/test/patientconsent.pdf";
-  public static final String cdaFilePath = "./rsc/test/CDA-CH-VACD_Impfausweis.xml";
+  public static final String pdfFilePath = "./rsc/testDocSource/patientconsent.pdf";
+  public static final String cdaFilePath = "./rsc/testDocSource/CDA-CH-VACD_Impfausweis.xml";
   java.net.URI repUri;
   Destination dest;
   ConvenienceCommunication c;
