@@ -263,6 +263,20 @@ public class DateUtil {
     }
     return null;
   }
+  
+  public static SXCM_TS createSTCM_TS(Date date) {
+    // sxcm_ts = DatatypesFactory.eINSTANCE.createSXCM_TS();
+    try {
+      IVL_TS ivl_ts;
+      ivl_ts = createIVL_TSFromEuroDate(date);
+      SXCM_TS sxcm_ts = ivl_ts;
+      return sxcm_ts;
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   /**
    * Erzeugt ein TS Objekt.

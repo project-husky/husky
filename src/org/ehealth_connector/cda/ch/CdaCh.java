@@ -25,6 +25,7 @@ import java.util.Date;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
@@ -36,6 +37,7 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.ch.ConvenienceUtilsEnums.ParticipantType;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.AssociatedEntity;
@@ -57,6 +59,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 
 /**
@@ -91,6 +94,7 @@ public abstract class CdaCh {
     // Set OID of the document
     //TODO zumindest die Extension muss als fortlaufende Nummer generiert werden (siehe Arztbrief Seite 44)
     setId(null);
+    setVersion(null, null);
 
     setConfidentialityCode(null);
    
@@ -112,7 +116,9 @@ public abstract class CdaCh {
 
   public void setId(Identificator id) {
 	if (id==null) {
-	    II docID = Util.createUuidVacd(null);
+	    II docID = DatatypesFactory.eINSTANCE.createII();
+	    docID.setRoot("2.16.756.5.30.1.1.1.1");
+	    docID.setExtension(UUID.generate());
 	    doc.setId(docID);
 	}
 	else {
@@ -378,6 +384,20 @@ public abstract class CdaCh {
     return doc.getTitle().getText();
   }
   
+  public Identificator getSetId() {
+    if (doc.getSetId() != null) {
+      return new Identificator(doc.getSetId().getRoot(), doc.getSetId().getExtension());
+    }
+    return null;
+  }
+  
+  public Integer getVersion() {
+    if (doc.getVersionNumber()!=null) {
+      return doc.getVersionNumber().getValue().intValue();
+    }
+    return null;
+  }
+  
   public Date getTimestamp() {
     if (doc.getEffectiveTime()!=null) {
       return DateUtil.parseDate(doc.getEffectiveTime());
@@ -495,7 +515,6 @@ public abstract class CdaCh {
       try {
         doc.setEffectiveTime(DateUtil.createTSFromEuroDate(date));
       } catch (ParseException e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
@@ -506,7 +525,7 @@ public abstract class CdaCh {
    * 
    * @param stylesheet Bei null wird das Standardstylesheet mit dem Pfad: '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl' gesetzt
    */
-  public void setCss(String stylesheet) {
+  public void addStylesheet(String stylesheet) {
     // Add the stylesheet processing instructions to the document
     if (stylesheet == null) {
       stylesheet = "../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl";	
@@ -514,11 +533,50 @@ public abstract class CdaCh {
     FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
         "xml-stylesheet", "type=\"text/xsl\" href=\""+stylesheet+"\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\"" ); 
   }
+  
+  /**
+   * Fügt ein Cascading Stylesheet (CSS) zu den XML Processing Instructions hinzu
+   * 
+   * @param stylesheet Bei null wird das Standardstylesheet mit dem Pfad: '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl' gesetzt
+   */
+  public void addCss(String css) {
+    // Add the stylesheet processing instructions to the document
+    FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
+        "xml-stylesheet", "type=\"text/css\" href=\""+css+"\"");
+  }
 
   protected void setTitle(String title) {
     ST titleSt = DatatypesFactory.eINSTANCE.createST();
     titleSt.addText(title);
     doc.setTitle(titleSt);
+  }
+  
+  public void setVersion(String guidVersion1, Integer version) {
+      setSetId(guidVersion1);
+      setVersionNumber(version);
+  }
+
+  protected void setSetId(String id) {
+    if (id == null) {
+      doc.setSetId(EcoreUtil.copy(doc.getId()));
+    }
+    else {
+      II ii = DatatypesFactory.eINSTANCE.createII();
+      ii.setRoot("2.16.756.5.30.1.1.1.1");
+      ii.setExtension(id);
+      doc.setSetId(ii);
+    }
+  }
+  
+  protected void setVersionNumber(Integer number) {
+    INT i = DatatypesFactory.eINSTANCE.createINT();
+    if (number == null) {
+      i.setValue(1);
+    }
+    else {
+      i.setValue(number);
+    }
+    doc.setVersionNumber(i);
   }
 
   /**

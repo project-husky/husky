@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
@@ -59,7 +60,8 @@ public class Immunization {
   private org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
 
   /**
-   * Instantiates a new immunization.
+   * Erzeugt ein Objekt welches eine Impfung repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres
+   * Object initialisiert werden soll 
    */
   public Immunization() {
     mImmunization = CHFactory.eINSTANCE.createImmunization().init();
@@ -73,9 +75,30 @@ public class Immunization {
       }
     }
 
-    setPriorityCode(createPriorityCode());
+
     setRouteOfAdministration(null);
     setDosage(null);
+    setPriorityCode(createPriorityCode());
+  }
+  
+  /**
+   * Erzeugt ein Objekt welches eine Impfung repräsentiert. Dieser Konstruktor wird verwendet, wenn codiert werden soll, dass keine Impfungen bekannt sind.
+   * 
+   * @param author Autor der Eintragung
+   */
+  public Immunization (Author author) {
+    this();
+      mImmunization.setCode(MedicationsSpecialConditions.DRUG_TREATMENT_UNKNOWN.getCD());
+      mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
+      CE ce = DatatypesFactory.eINSTANCE.createCE();
+      ce.setNullFlavor(NullFlavor.UNK);
+      mImmunization.setPriorityCode(ce);
+      mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+      mImmunization.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+      mImmunization.getIds().add(Util.createUuidVacd(null));
+      Consumable c = new Consumable(false);
+      setAuthor(author);
+      setConsumable(c);
   }
 
   /**
@@ -222,8 +245,11 @@ public class Immunization {
    * @return the apply date
    */
   public Date getApplyDate() {
+    if (mImmunization.getEffectiveTimes()!=null && mImmunization.getEffectiveTimes().size()>0) {
     SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
     return DateUtil.parseDateyyyyMMdd(date.getValue());
+    }
+    else return null;
   }
 
   /**

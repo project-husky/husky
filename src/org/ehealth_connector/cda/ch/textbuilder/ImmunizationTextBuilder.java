@@ -72,7 +72,12 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
   private void addRow(Immunization immunization, int i) {
     append("<tr>");
-    addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
+    if (immunization.getConsumable()!=null && immunization.getConsumable().getTradeName()!=null) {
+      addCellWithContent(immunization.getConsumable().getTradeName(), SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
+    }
+    else {
+      addCell("");
+    }
     addCell("");
     addCell("");
     if (immunization.getApplyDate()!=null) {

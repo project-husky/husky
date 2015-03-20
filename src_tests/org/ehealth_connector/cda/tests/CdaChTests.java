@@ -31,6 +31,7 @@ import org.junit.Test;
 public class CdaChTests extends TestUtils {
   TestUtils t;
   CdaChVacd c;
+  String uuid;
   
   public CdaChTests () {
     super();
@@ -58,6 +59,7 @@ public void init() {
   number = 121241241.212323;
   telS1 = "+41.32.234.66.77";
   telS2 = "+44.32.234.66.99";
+  uuid = "807563C2-5146-11D5-A672-00B0D022E945";
 
   //Convenience API Types
   code1 = createCode1();
@@ -80,14 +82,40 @@ public void init() {
   c = new CdaChVacd();
 }
 
+@Test 
+public void testInitCdaCh() {
+  //Check if an inital setId, Version number, timestamp is generated
+  assertNotNull(c.getVersion());
+  assertEquals(1,c.getVersion().intValue());
+  assertNotNull(c.getSetId());
+  assertNotNull(c.getTimestamp());
+}
+
 @Test
 public void testSetterGetterCdaCh() {
+  //Check in XML Dump
+  c.addStylesheet("../testStylesheet.xsl");
+  c.addCss("../testCss.css");
+
   c.setTimestamp(startDate);
   assertEquals(startDate.getTime(), c.getTimestamp().getTime());
   c.setConfidentialityCode(code1);
   assertTrue(isEqual(code1, c.getConfidentialityCode()));
+  //doc id root
+  assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
+  //set Version
+  c.setVersion(uuid, 3);
+  assertEquals(3, c.getVersion().intValue());
+  assertEquals(uuid, c.getSetId().getExtension());
   c.setId(id1);
   assertTrue(isEqual(id1, c.getId()));
+  
+  try {
+    c.saveToFile("C:/temp/testCdaCd.xml");
+  } catch (Exception e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+  }
 }
    
   @Test

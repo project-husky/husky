@@ -48,7 +48,20 @@ public class Consumable {
   protected Consumable (org.openhealthtools.mdht.uml.cda.Consumable consumable) {
     setMdhtConsumable(consumable);
   }
-
+  
+  /**
+   * Erzeugt ein Objekt welches eine Substanz repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres
+   * Object initialisiert werden soll (true) oder codiert werden soll, dass die Substanz unbekannt ist (false)
+   * 
+   * @param currentProblems true: Erstellung eines leeren Objekts, false: Es sind keine Impfungen bekannt.
+   */
+  public Consumable(boolean consumableKnown) {
+    this("Unbekannt");
+    if (consumableKnown) {
+      
+    }
+  }
+  
   /**
    * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert. Dieses Objekt kann einer
    * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
@@ -246,7 +259,12 @@ public class Consumable {
    */
   public void setTradeName(String tradeNameOfVaccine) {
     EN en = DatatypesFactory.eINSTANCE.createEN();
-    en.addText(tradeNameOfVaccine);
+    if (tradeNameOfVaccine == null) {
+      en.addText("Unknown");
+    }
+    else {
+      en.addText(tradeNameOfVaccine);
+    }
     mMaterial.setName(en);
   }
 
