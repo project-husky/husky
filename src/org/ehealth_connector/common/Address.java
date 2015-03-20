@@ -86,8 +86,23 @@ public class Address {
    * @param usage            Verwendungszweck (Privat, Geschäft)
    */
   public Address(String addressline, String zip, String city, AddressUse usage) {
-    this(zip, city, usage);
+    mAd = DatatypesFactory.eINSTANCE.createAD();
     setAddressline1(addressline);
+    setCity(city);
+    setZip(zip);
+    if (usage!=null) {
+      switch (usage) {
+        case BUSINESS:
+          mAd.getUses().add(PostalAddressUse.WP);
+          break;
+        case PRIVATE:
+          mAd.getUses().add(PostalAddressUse.HP);
+          break;
+        default:
+          mAd.getUses().add(PostalAddressUse.WP);
+          break;
+      }
+    }
   }
 
   /**
