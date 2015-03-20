@@ -484,6 +484,13 @@ public abstract class CdaCh {
     // Set language of the document
     doc.setLanguageCode(language.getCS());
   }
+  
+  public CS getLanuageCode() {
+    if (doc.getLanguageCode() != null) {
+      return doc.getLanguageCode();
+    }
+    return null;
+  }
 
   /**
    * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu

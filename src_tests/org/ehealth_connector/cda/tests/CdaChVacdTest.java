@@ -35,6 +35,7 @@ import org.ehealth_connector.cda.Pregnancy;
 import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
+import org.ehealth_connector.cda.ch.SectionsVACD;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
@@ -57,6 +58,8 @@ import org.ehealth_connector.common.Value;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.Performer1;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * 
@@ -435,6 +438,54 @@ private Performer performer2;
     assertEquals(ts1, p.getCommentText());
   }
 
+  @Test
+  public void testCdaChVacdSectionTitleLanguage() {
+    d = createHeader();
+    
+    //Test Section Titles in dependence of the document languageCode
+    immunization1 = createImmunization();
+    immunization2 = createImmunization();
+    d.setLanguageCode(LanguageCode.GERMAN);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    d = createHeader();
+    d.setLanguageCode(LanguageCode.FRENCH);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    d = createHeader();
+    d.setLanguageCode(LanguageCode.ITALIAN);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    CS cs = DatatypesFactory.eINSTANCE.createCS();
+    
+    cs.setCode("de");
+    d = createHeader();
+    d.getDoc().setLanguageCode(cs);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    d = createHeader();
+    cs.setCode("FR");
+    d.getDoc().setLanguageCode(cs);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    d = createHeader();
+    cs.setCode("It");
+    d.getDoc().setLanguageCode(cs);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc().getImmunizationsSection().getTitle().getText());
+    
+    d = createHeader();
+    cs.setCode("eN");
+    d.getDoc().setLanguageCode(cs);
+    d.addImmunization(immunization1);
+    assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleEn(), d.getDoc().getImmunizationsSection().getTitle().getText());
+  }
+  
   @Test
   public void testCdaChVacd() {
     d = createHeader();  

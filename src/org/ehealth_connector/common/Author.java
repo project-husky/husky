@@ -17,7 +17,9 @@
 
 package org.ehealth_connector.common;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
@@ -37,7 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class Author {
 
   /**
-   * The m author.
+   * The author.
    */
   org.openhealthtools.mdht.uml.cda.Author mAuthor;
   org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
@@ -348,6 +350,47 @@ public class Author {
    */
   public void setGln(String gln) {
     addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+  }
+  
+  
+  /**
+   * <div class="en">Gets the author time. The author/time element represents the start time of the author’s participation in the creation of the clinical document </div>
+   * <div class="de">Liefert die Zeit für den Autor. Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des Dokument mitgewirkt hat.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *  
+   *
+   * @return date <div class="en">the start time of the participation as string</div>
+   * <div class="de">den Startzeitpunkt der Partizipation als String</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public String getTime() {
+    if (mAuthor.getTime()!=null) {
+      return DateUtil.parseDateToStr(mAuthor.getTime());
+    }
+    return null;
+  }
+  
+  /**
+   * <div class="en">Sets the author time. The author/time element represents the start time of the author’s participation in the creation of the clinical document </div>
+   * <div class="de">Setzt die Zeit für den Autor. Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des Dokument mitgewirkt hat.</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   *  
+   *
+   * @param date <div class="en">the start time of the participation as date</div>
+   * <div class="de">den Startzeitpunkt der Partizipation als Date</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public void setTime(Date date) {
+    try {
+      mAuthor.setTime(DateUtil.createTSFromEuroDate(date));
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
   
   /**

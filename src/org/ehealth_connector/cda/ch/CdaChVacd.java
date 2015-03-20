@@ -179,7 +179,7 @@ public class CdaChVacd extends CdaCh {
     if (aps == null) {
       aps = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
       aps.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS
-          .getSectionTitleDe()));
+          .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(aps);
     }
 
@@ -216,7 +216,7 @@ public class CdaChVacd extends CdaCh {
     if (ars == null) {
       ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
       ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS
-          .getSectionTitleDe()));
+          .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(ars);
     }
 
@@ -252,7 +252,7 @@ public class CdaChVacd extends CdaCh {
     rs = findRemarksSection();
     if (rs == null) {
       rs = CHFactory.eINSTANCE.createRemarksSection().init();
-      rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitleDe()));
+      rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitle(doc.getLanguageCode())));
       doc.addSection(rs);
     }
 
@@ -298,7 +298,7 @@ public class CdaChVacd extends CdaCh {
           .createImmunizationsSection().init();
       immunizationSection.setTitle(Util
           .st(SectionsVACD.HISTORY_OF_IMMUNIZATION
-              .getSectionTitleDe()));
+              .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(immunizationSection);
     }
 
@@ -335,7 +335,7 @@ public class CdaChVacd extends CdaCh {
       immunizationRecommendationsSection = CHFactory.eINSTANCE
           .createImmunizationRecommendationSection().init();
       immunizationRecommendationsSection.setTitle(Util
-          .st(SectionsVACD.TREATMENT_PLAN.getSectionTitleDe()));
+          .st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(doc.getLanguageCode())));
       doc.addSection(immunizationRecommendationsSection);
     }
 
@@ -386,7 +386,7 @@ public class CdaChVacd extends CdaCh {
       lrdpe.setAct(spa);
 
       lss.setTitle(Util.st(SectionsVACD.SEROLOGY_STUDIES
-          .getSectionTitleDe()));
+          .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(lss);
     }
     // If the section is already present, get instances of the templates
@@ -440,7 +440,7 @@ public class CdaChVacd extends CdaCh {
       hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection()
           .init();
       hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS
-          .getSectionTitleDe()));
+          .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(hopis);
     }
 
@@ -479,7 +479,7 @@ public class CdaChVacd extends CdaCh {
     if (phs == null) {
       phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
       phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES
-          .getSectionTitleDe()));
+          .getSectionTitle(doc.getLanguageCode())));
       doc.addSection(phs);
     }
 
@@ -870,7 +870,7 @@ public class CdaChVacd extends CdaCh {
         sb.toString());
 
     gestationalAge.getMdhtCodedResultsSection().setTitle(
-        Util.st(SectionsVACD.CODED_RESULTS.getSectionTitleDe()));
+        Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc.getLanguageCode())));
 
     doc.addSection(gestationalAge.copyMdhtCodedResultsSection());
   }
