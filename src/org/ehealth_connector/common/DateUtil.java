@@ -76,10 +76,16 @@ public class DateUtil {
       if (effectiveTime instanceof IVL_TS) {
         IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
         Date tsLow = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
-        Date tsHigh = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
-        String tsLowStr = DateUtil.formatDateCH(tsLow);
-        String tsHighStr = DateUtil.formatDateCH(tsHigh);
-        b.append(tsLowStr + " - " + tsHighStr);
+        if (effectiveTimeInterval.getHigh()!=null && effectiveTimeInterval.getHigh().getValue()!=null) {
+          Date tsHigh = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
+          String tsHighStr = DateUtil.formatDateCH(tsHigh);
+          String tsLowStr = DateUtil.formatDateCH(tsLow);
+          b.append(tsLowStr + " - " + tsHighStr);
+        }
+        else {
+          String tsLowStr = DateUtil.formatDateCH(tsLow);
+          b.append(tsLowStr);
+        }
       } else {
         if (effectiveTime instanceof TS) {
           Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
