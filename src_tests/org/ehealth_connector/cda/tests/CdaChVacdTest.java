@@ -357,7 +357,7 @@ private Performer performer2;
     allergyProblem1 = createAllergyProblem();
 
   }
-
+ 
   //2
   @Test
   public void testActiveProblemsSetterGetter() {
@@ -495,50 +495,66 @@ private Performer performer2;
     immunization2 = createImmunization();
     d.addImmunization(immunization1);
     d.addImmunization(immunization2);
+    d.setNarrativeTextImmunizations(ts1);
+    assertTrue(d.getNarrativeTextImmunizations().contains(ts1));
 
     ppc1 = createPastProblemConcern();
     ppc2 = createPastProblemConcern();
     d.addPastProblemConcern(ppc1);
     d.addPastProblemConcern(ppc2);
-
+    d.setNarrativeTextPastProblemConcerns(ts2);
+    assertTrue(d.getNarrativeTextPastProblemConcerns().contains(ts2));
+    
     apce1 = createActiveProblems();
     apce2 = createActiveProblems();
     d.addActiveProblemConcern(apce1);
     d.addActiveProblemConcern(apce2);
+    d.setNarrativeTextActiveProblemConcerns(ts3);
+    assertTrue(d.getNarrativeTextActiveProblemConcerns().contains(ts3));
 
     ac1 = createAllergyConcern();
     ac2 = createAllergyConcern();
     d.addAllergyProblemConcern(ac1);
     d.addAllergyProblemConcern(ac2);
+    d.setNarrativeTextAllergyProblemConcerns(ts4);
+    assertTrue(d.getNarrativeTextAllergyProblemConcerns().contains(ts4));
 
     cr1 = createCodedResults();
     d.setGestationalAge(cr1);
+    d.setNarrativeTextGestationalAge(ts5);
+    assertTrue(d.getNarrativeTextGestationalAge().contains(ts5));
 
     lss1 = createLaboratoryObservation();
     lss2 = createLaboratoryObservation();
     d.addLaboratoryObservation(lss1);
     d.addLaboratoryObservation(lss2);
+    d.setNarrativeTextLaboratoryObservation(ts1);
+    assertTrue(d.getNarrativeTextLaboratoryObservation().contains(ts1));
 
     ph1 = createPregnancy();
     ph2 = createPregnancy();
     d.addPregnancy(ph1);
     d.addPregnancy(ph2);
+    d.setNarrativeTextPregnancies(ts2);
+    assertTrue(d.getNarrativeTextPregnancies().contains(ts2));
 
     immunizationRecommendation1 = createImmunizationRecommendation();
     immunizationRecommendation2 = createImmunizationRecommendation();
     d.addImmunizationRecommendation(immunizationRecommendation1);
     d.addImmunizationRecommendation(immunizationRecommendation2);
+    d.setNarrativeTextImmunizationRecommendations(ts3);
+    assertTrue(d.getNarrativeTextImmunizationRecommendation().contains(ts3));
 
     c1 = createComment();
     c2 = createComment();
-    //TODO
     d.addComment(ts1);
     d.addComment(ts2);
+    d.setNarrativeTextComments(ts4);
+    assertTrue(d.getNarrativeTextComments().contains(ts4));
 
     try {
       d.saveToFile("C:/temp/testVACD.xml");
     } catch (Exception e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 

@@ -67,8 +67,6 @@ public class Immunization {
     mImmunization = CHFactory.eINSTANCE.createImmunization().init();
     mImmunization.setNegationInd(Boolean.FALSE);
 
-    //Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
-    
     //Get the TemplateIds save them, clear the list and add the modified item again
     List<II> savedTemplateIds = (List<II>) EcoreUtil.copyAll(mImmunization.getTemplateIds());
     mImmunization.getTemplateIds().clear();
