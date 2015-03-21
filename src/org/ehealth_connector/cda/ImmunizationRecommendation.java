@@ -414,7 +414,7 @@ public class ImmunizationRecommendation {
 	    //Fix Template ID
 	    for (II i : t.getTemplateIds()) {
 	      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
-	        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Reason");
+	        i.setExtension("CDA-CH.VACD.Body.MediL3.Reason");
 	      }
 	    }
 	    //Set Status Code

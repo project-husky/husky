@@ -39,7 +39,6 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -104,19 +103,10 @@ public class Immunization {
    * 
    * @param author Autor der Eintragung
    */
-  public Immunization (Author author) {
+  public Immunization (MedicationsSpecialConditions specialCode, Author author) {
     this();
-      mImmunization.setCode(MedicationsSpecialConditions.DRUG_TREATMENT_UNKNOWN.getCD());
-      mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
-      CE ce = DatatypesFactory.eINSTANCE.createCE();
-      ce.setNullFlavor(NullFlavor.UNK);
-      mImmunization.setPriorityCode(ce);
-      mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-      mImmunization.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-      mImmunization.getIds().add(Util.createUuidVacd(null));
-      Consumable c = new Consumable(false);
       setAuthor(author);
-      setConsumable(c);
+      setCode(specialCode);
   }
 
   /**
@@ -240,7 +230,7 @@ public class Immunization {
     //Fix Template ID
     for (II i : t.getTemplateIds()) {
       if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
-        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Reason");
+        i.setExtension("CDA-CH.VACD.Body.MediL3.Reason");
       }
     }
     //Set Status Code
@@ -398,6 +388,7 @@ public class Immunization {
    * @param appliedAt the new apply date
    */
   public void setApplyDate(Date appliedAt) {
+    mImmunization.getEffectiveTimes().clear();
     mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
   }
 
@@ -415,6 +406,24 @@ public class Immunization {
       immmunizationAuthor.setFunctionCode(ce);
     }
     mImmunization.getAuthors().add(immmunizationAuthor);
+  }
+  
+  /**
+   * Sets a special code that explains the absence of immunizations in this document 
+   *
+   * @param author the new author
+   */
+  public void setCode(MedicationsSpecialConditions specialCode) {
+    mImmunization.setCode(specialCode.getCD());
+    mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
+    CE ce = DatatypesFactory.eINSTANCE.createCE();
+    ce.setNullFlavor(NullFlavor.UNK);
+    mImmunization.setPriorityCode(ce);
+    mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+    mImmunization.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+    mImmunization.getIds().add(Util.createUuidVacd(null));
+    Consumable c = new Consumable(false);
+    setConsumable(c);
   }
 
   /**
@@ -475,7 +484,6 @@ public class Immunization {
 	  try {
 		p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
 	} catch (ParseException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
   }

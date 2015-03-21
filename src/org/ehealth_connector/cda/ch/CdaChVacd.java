@@ -84,6 +84,8 @@ public class CdaChVacd extends CdaCh {
 
   /** The Constant eVACDOCTitle. */
   public static final String eVACDOCTitle = "eVACDOC";
+  
+  public static final boolean CDALevel2TextGeneration = false;
 
   /** The query. */
   Query query;
@@ -107,14 +109,6 @@ public class CdaChVacd extends CdaCh {
     setTitle(eVACDOCTitle);
     fixGeneralHeaderConstraintTemplateId();
     query = new Query(doc);
-  }
-
-  private void fixGeneralHeaderConstraintTemplateId() {
-    for (int i=0; i<doc.getTemplateIds().size();i++) {
-      if (doc.getTemplateIds().get(i).getRoot().equals("2.16.840.1.113883.10.20.3")) {
-        doc.getTemplateIds().remove(i);
-      }
-    }
   }
 
   /**
@@ -200,7 +194,7 @@ public class CdaChVacd extends CdaCh {
     if (updateProblemConcernReferences(aps.getActs(),
         SectionsVACD.ACTIVE_PROBLEMS)) {
       // create the CDA level 1 text
-      aps.createStrucDocText(getActiveProblemConcernsText());
+      aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
     } else {
       aps.createStrucDocText("Keine Angaben");
       activeProblemConcern.copyMdhtProblemConcernEntry()
@@ -237,7 +231,7 @@ public class CdaChVacd extends CdaCh {
     if (updateAllergyConcernReferences(ars.getActs(),
         SectionsVACD.ALLERGIES_REACTIONS)) {
       // create the CDA level 1 text
-      ars.createStrucDocText(getAllergyProblemConcernsText());
+      ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
     } else {
       ars.createStrucDocText("Keine Angaben");
       allergyConcern.copyMdhtAllergyConcern().getEntryRelationships()
@@ -316,13 +310,16 @@ public class CdaChVacd extends CdaCh {
     immunizationSection.addSubstanceAdministration(immunization
         .copyMdhtImmunization());
 
-    // update the MDHT Object content references to CDA level 2 text
-    updateSubstanceAdministrationReferences(
-        immunizationSection.getSubstanceAdministrations(),
-        SectionsVACD.HISTORY_OF_IMMUNIZATION);
 
-    // create the CDA level 1 text
-    immunizationSection.createStrucDocText(getImmunizationText());
+      // update the MDHT Object content references to CDA level 2 text
+      updateSubstanceAdministrationReferences(
+          immunizationSection.getSubstanceAdministrations(),
+          SectionsVACD.HISTORY_OF_IMMUNIZATION);
+      immunizationSection.createStrucDocText("Menschenlesbarer Text zu Impfungen");
+    if (CDALevel2TextGeneration) {
+      // create the CDA level 1 text
+      immunizationSection.createStrucDocText(generateNarrativeTextImmunizations());
+    }
   }
 
   /**
@@ -362,7 +359,7 @@ public class CdaChVacd extends CdaCh {
 
     // create the CDA level 1 text
     immunizationRecommendationsSection
-    .createStrucDocText(getImmunizationRecommendationsText());
+    .createStrucDocText(generateNarrativeTextImmunizationRecommendations());
   }
 
   /**
@@ -461,7 +458,7 @@ public class CdaChVacd extends CdaCh {
     if (updateProblemConcernReferences(hopis.getActs(),
         SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
       // create the CDA level 1 text
-      hopis.createStrucDocText(getPastProblemConcernEntriesText());
+      hopis.createStrucDocText(generateNarrativeTextPastProblemConcernEntries());
     } else {
       hopis.createStrucDocText("Keine Angaben");
       pastProblemConcern.copyMdhtProblemConcernEntry()
@@ -526,6 +523,96 @@ public class CdaChVacd extends CdaCh {
     return null;
   }
 
+  private void fixGeneralHeaderConstraintTemplateId() {
+    for (int i=0; i<doc.getTemplateIds().size();i++) {
+      if (doc.getTemplateIds().get(i).getRoot().equals("2.16.840.1.113883.10.20.3")) {
+        doc.getTemplateIds().remove(i);
+      }
+    }
+  }
+
+  /**
+   * Liefert den menschenlesbaren Text des Kapitels zu Aktiven Leiden zurück
+   *
+   * @return the active problem concerns text
+   */
+  public String generateNarrativeTextActiveProblemConcerns() {
+    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    // Convert from the specific PastProblemConcern Type to the more
+    // genearal PastProblemConcern
+    for (ActiveProblemConcernEntry prob : getActiveProblemConcerns()) {
+      problemConcernEntryList.add(prob);
+    }
+
+    ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+        problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
+    return b.toString();
+  }
+
+  /**
+   * Liefert den Text des Kapitels Allergie Leiden zurück
+   *
+   * @return the allergy problem concerns text
+   */
+  public String generateNarrativeTextAllergyProblemConcerns() {
+    AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(
+        getAllergyProblemConcerns(), SectionsVACD.ALLERGIES_REACTIONS);
+    return b.toString();
+  }
+
+  /**
+   * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel
+   * Impfempfehlungen zurück</div> <div class="fr"></div> <div
+   * class="it"></div>
+   *
+   * @return <div class="en">the immunization recommendations text</div>
+   */
+  public String generateNarrativeTextImmunizationRecommendations() {
+    ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(
+        getImmunizationRecommendations());
+    return b.toString();
+  }
+
+  /**
+   * Gets the immunization text.
+   *
+   * @return the immunization text
+   */
+  public String generateNarrativeTextImmunizations() {
+    ImmunizationTextBuilder b = new ImmunizationTextBuilder(
+        getImmunizations());
+    return b.toString();
+  }
+
+  /**
+   * Liefert den menschenlesbaren Text zu dem Kapitel Laborresultate zurück
+   *
+   * @return the laboratory observations text
+   */
+  public String generateNarrativeTextLaboratoryObservations() {
+    LaboratoryObservationTextBuilder b = new LaboratoryObservationTextBuilder(
+        getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
+    return b.toString();
+  }
+
+  /**
+   * Liefert den menschenlesbaren Text zu allen vergangenen Leiden zurück
+   *
+   * @return the past problem concern entries text
+   */
+  public String generateNarrativeTextPastProblemConcernEntries() {
+    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    // Convert from the specific PastProblemConcern Type to the more
+    // genearal PastProblemConcern
+    for (PastProblemConcern prob : getPastProblemConcernEntries()) {
+      problemConcernEntryList.add(prob);
+    }
+
+    ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+        problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+    return b.toString();
+  }
+
   /**
    * <div class="de">Liefert alle Aktiven Leiden zurück</div> <div
    * class="fr"></div> <div class="it"></div>
@@ -547,24 +634,6 @@ public class CdaChVacd extends CdaCh {
       problemConcernEntries.add(problemConcernEntry);
     }
     return problemConcernEntries;
-  }
-
-  /**
-   * Liefert den menschenlesbaren Text des Kapitels zu Aktiven Leiden zurück
-   *
-   * @return the active problem concerns text
-   */
-  public String getActiveProblemConcernsText() {
-    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
-    // Convert from the specific PastProblemConcern Type to the more
-    // genearal PastProblemConcern
-    for (ActiveProblemConcernEntry prob : getActiveProblemConcerns()) {
-      problemConcernEntryList.add(prob);
-    }
-
-    ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-        problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
-    return b.toString();
   }
 
   /**
@@ -590,17 +659,6 @@ public class CdaChVacd extends CdaCh {
   }
 
   /**
-   * Liefert den Text des Kapitels Allergie Leiden zurück
-   *
-   * @return the allergy problem concerns text
-   */
-  public String getAllergyProblemConcernsText() {
-    AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(
-        getAllergyProblemConcerns(), SectionsVACD.ALLERGIES_REACTIONS);
-    return b.toString();
-  }
-
-  /**
    * Liefert die Kommentare zurück
    *
    * @return the comment
@@ -617,6 +675,13 @@ public class CdaChVacd extends CdaCh {
     comment = new org.ehealth_connector.cda.Comment(rs.getText().getText());
 
     return comment.getText();
+  }
+
+  public Code getConfidentialityCode() {
+    if (doc.getConfidentialityCode() != null) {
+      return new Code(doc.getConfidentialityCode());
+    }
+    return null;
   }
 
   /**
@@ -670,19 +735,6 @@ public class CdaChVacd extends CdaCh {
   }
 
   /**
-   * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel
-   * Impfempfehlungen zurück</div> <div class="fr"></div> <div
-   * class="it"></div>
-   *
-   * @return <div class="en">the immunization recommendations text</div>
-   */
-  public String getImmunizationRecommendationsText() {
-    ImmunizationRecommendationTextBuilder b = new ImmunizationRecommendationTextBuilder(
-        getImmunizationRecommendations());
-    return b.toString();
-  }
-
-  /**
    * Liefert alle Impfungen zurück
    *
    * @return Liste von Impfungen
@@ -697,17 +749,6 @@ public class CdaChVacd extends CdaCh {
       immunizations.add(immunization);
     }
     return immunizations;
-  }
-
-  /**
-   * Gets the immunization text.
-   *
-   * @return the immunization text
-   */
-  public String getImmunizationText() {
-    ImmunizationTextBuilder b = new ImmunizationTextBuilder(
-        getImmunizations());
-    return b.toString();
   }
 
   /**
@@ -742,17 +783,6 @@ public class CdaChVacd extends CdaCh {
   }
 
   /**
-   * Liefert den menschenlesbaren Text zu dem Kapitel Laborresultate zurück
-   *
-   * @return the laboratory observations text
-   */
-  public String getLaboratoryObservationsText() {
-    LaboratoryObservationTextBuilder b = new LaboratoryObservationTextBuilder(
-        getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
-    return b.toString();
-  }
-
-  /**
    * Liefert alle vergangen Leiden zurück
    *
    * @return the past problem concern entries
@@ -772,24 +802,6 @@ public class CdaChVacd extends CdaCh {
       problemConcernEntries.add(problemConcernEntry);
     }
     return problemConcernEntries;
-  }
-
-  /**
-   * Liefert den menschenlesbaren Text zu allen vergangenen Leiden zurück
-   *
-   * @return the past problem concern entries text
-   */
-  public String getPastProblemConcernEntriesText() {
-    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
-    // Convert from the specific PastProblemConcern Type to the more
-    // genearal PastProblemConcern
-    for (PastProblemConcern prob : getPastProblemConcernEntries()) {
-      problemConcernEntryList.add(prob);
-    }
-
-    ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-        problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
-    return b.toString();
   }
 
   /**
@@ -853,6 +865,20 @@ public class CdaChVacd extends CdaCh {
    */
   public void setDoc(VACD doc) {
     this.doc = doc;
+  }
+  
+  /**
+   * <div class="en">Sets the human readable CDA section text for the according section</div>
+   * <div class="de">Setzt den menschenlesbaren CDA Section Text für die entsprechende Section</div>
+   *  
+   *
+   * @param text
+   * <div class="en"> the new text for the human readable part of the cda document</div>
+   * <div class="de"> der neue text für den menschlenlesbaren Teil des CDA-Dokuments</div>
+   *           
+   */
+  public void setNarrativeTextImmunizations(String text) {
+    getDoc().getImmunizationsSection().createStrucDocText(text);
   }
 
   /**
@@ -922,6 +948,28 @@ public class CdaChVacd extends CdaCh {
     return true;
   }
 
+  private void updateLaboratoryObservationReferences(SpecimenAct spa,
+      SectionsVACD loincSectionCode) {
+    for (int i = 0; i < spa.getLaboratoryBatteryOrganizers().size(); i++) {
+      LaboratoryBatteryOrganizer lba = spa
+          .getLaboratoryBatteryOrganizers().get(i);
+      for (int j = 0; j < lba.getLaboratoryObservations().size(); j++) {
+        org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation lo = lba
+            .getLaboratoryObservations().get(j);
+        for (int k = 0; k < lo.getEntryRelationships().size(); k++) {
+          EntryRelationship er = lo.getEntryRelationships().get(k);
+          if (Util.isComment(er)) {
+            k++;
+            er = Util.updateRefIfComment(er,
+                String.valueOf(i + 1) + String.valueOf(j + 1)
+                + String.valueOf(k + 1),
+                loincSectionCode);
+          }
+        }
+      }
+    }
+  }
+
   private boolean updateProblemConcernReferences(EList<Act> acts,
       SectionsVACD loincSectionCode) {
     int i = 0;
@@ -957,8 +1005,10 @@ public class CdaChVacd extends CdaCh {
     int i = 0;
     for (SubstanceAdministration ir : substanceAdministrations) {
       i++;
-      ED reference = Util.createReference(i,
-          loincSectionCode.getContentIdPrefix());
+//      ED reference = Util.createReference(i,
+//          loincSectionCode.getContentIdPrefix());
+    ED reference = Util.createReference(1,
+    loincSectionCode.getContentIdPrefix());
       ir.setText(reference);
       if (ir.getConsumable()!=null) {
         if (ir.getConsumable().getManufacturedProduct()!=null) {
@@ -977,35 +1027,6 @@ public class CdaChVacd extends CdaCh {
         }
       }
     }
-  }
-
-  private void updateLaboratoryObservationReferences(SpecimenAct spa,
-      SectionsVACD loincSectionCode) {
-    for (int i = 0; i < spa.getLaboratoryBatteryOrganizers().size(); i++) {
-      LaboratoryBatteryOrganizer lba = spa
-          .getLaboratoryBatteryOrganizers().get(i);
-      for (int j = 0; j < lba.getLaboratoryObservations().size(); j++) {
-        org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation lo = lba
-            .getLaboratoryObservations().get(j);
-        for (int k = 0; k < lo.getEntryRelationships().size(); k++) {
-          EntryRelationship er = lo.getEntryRelationships().get(k);
-          if (Util.isComment(er)) {
-            k++;
-            er = Util.updateRefIfComment(er,
-                String.valueOf(i + 1) + String.valueOf(j + 1)
-                + String.valueOf(k + 1),
-                loincSectionCode);
-          }
-        }
-      }
-    }
-  }
-
-  public Code getConfidentialityCode() {
-    if (doc.getConfidentialityCode() != null) {
-      return new Code(doc.getConfidentialityCode());
-    }
-    return null;
   }
 
 }
