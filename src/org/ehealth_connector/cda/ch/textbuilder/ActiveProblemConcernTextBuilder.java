@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ActiveProblemConcernEntry;
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
  * Builds the <text> part of the Treatment plan section.

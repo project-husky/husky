@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;

@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.ArrayList;
 
 import org.ehealth_connector.cda.LaboratoryObservation;
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ch.LaboratoryBatteryOrganizer;

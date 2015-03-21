@@ -13,16 +13,15 @@
 * Year of publication: 2015
 *
 ********************************************************************************/
-package org.ehealth_connector.cda.ch;
+package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 /**
  * Defines the LOINC codes used for the different sections in CDA document.
  * 
  * @see document Austauschformat, p. 80. CDA Body Level 2 Section Codes.
- * @author gsc
+ * @author gsc, ahel
  */
 public enum SectionsVACD {
   HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni", "Immunizations"),

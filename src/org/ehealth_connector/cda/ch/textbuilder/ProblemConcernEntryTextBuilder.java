@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.ArrayList;
 
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
  * Builds the <text> part of the Immunization recommendations.

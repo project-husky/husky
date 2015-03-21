@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.List;
 
 import org.ehealth_connector.cda.ImmunizationRecommendation;
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;

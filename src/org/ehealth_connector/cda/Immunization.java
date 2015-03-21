@@ -38,6 +38,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -68,13 +69,30 @@ public class Immunization {
     mImmunization.setNegationInd(Boolean.FALSE);
 
     //Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
-    List<II> templateIds = mImmunization.getTemplateIds();
-    for (II templateId: templateIds) {
+    
+    //Get the TemplateIds save them, clear the list and add the modified item again
+    List<II> savedTemplateIds = (List<II>) EcoreUtil.copyAll(mImmunization.getTemplateIds());
+    mImmunization.getTemplateIds().clear();
+    
+    int i = 0;
+    for (II templateId: savedTemplateIds) {
+      //Fix the extension for the swiss template id
       if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
         templateId.setExtension("CDA-CH.Body.MediL3");
       }
+      //Add every template that is not Immunization
+      if (!templateId.getRoot().equals("1.3.6.1.4.1.19376.1.5.3.1.4.12")) {
+        mImmunization.getTemplateIds().add(templateId);
+      }
+      else {
+        i++;
+        //Add only the first Immunization Template Id
+        if (i<2) {
+          mImmunization.getTemplateIds().add(templateId);
+        }
+      }
+      
     }
-
 
     setRouteOfAdministration(null);
     setDosage(null);
@@ -213,21 +231,16 @@ public class Immunization {
   
   private Code createPriorityCode() {
     CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
-    priorityCode.setCode("R");
-    priorityCode.setDisplayName("Routine");
-
-    // TODO define OID constant
-    priorityCode.setCodeSystem("2.16.840.1.113883.5.7");
-    priorityCode.setCodeSystemName("ActPriority");
+    priorityCode.setNullFlavor(NullFlavor.UNK);
     return new Code(priorityCode);
   }
   
-  private CDACHMSETBodyImmunizationL3Target createReason(Code code) {
-    CDACHMSETBodyImmunizationL3Target t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Target().init();
+  private CDACHMSETBodyImmunizationL3Reason createReason(Code code) {
+    CDACHMSETBodyImmunizationL3Reason t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason().init();
     //Fix Template ID
     for (II i : t.getTemplateIds()) {
-      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.2.1")) {
-        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Target");
+      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
+        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Reason");
       }
     }
     //Set Status Code
@@ -395,7 +408,13 @@ public class Immunization {
    */
   public void setAuthor(Author author) {
     mImmunization.getAuthors().clear();
-    mImmunization.getAuthors().add(author.copyMdhtAuthor());
+    org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
+    //Remove author function Code if present
+    if (immmunizationAuthor.getFunctionCode()!=null) {
+      CE ce = null;
+      immmunizationAuthor.setFunctionCode(ce);
+    }
+    mImmunization.getAuthors().add(immmunizationAuthor);
   }
 
   /**

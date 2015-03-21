@@ -32,6 +32,7 @@ import org.ehealth_connector.cda.Pregnancy;
 import org.ehealth_connector.cda.ProblemConcernEntry;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.ImmunizationRecommendationTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.ImmunizationTextBuilder;
@@ -306,7 +307,7 @@ public class CdaChVacd extends CdaCh {
     immunizationSection.addSubstanceAdministration(immunization
         .copyMdhtImmunization());
 
-    // update the MDHT Object content references to CDA level 1 text
+    // update the MDHT Object content references to CDA level 2 text
     updateSubstanceAdministrationReferences(
         immunizationSection.getSubstanceAdministrations(),
         SectionsVACD.HISTORY_OF_IMMUNIZATION);

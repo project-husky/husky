@@ -39,10 +39,12 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ExternalDocument;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Target;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -288,7 +290,13 @@ public class ImmunizationRecommendation {
    */
   public void setAuthor(org.ehealth_connector.common.Author author) {
     mImmunizationRecommendation.getAuthors().clear();
-    mImmunizationRecommendation.getAuthors().add(author.copyMdhtAuthor());
+    org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
+    //Remove author function Code if present
+    if (immmunizationAuthor.getFunctionCode()!=null) {
+      CE ce = null;
+      immmunizationAuthor.setFunctionCode(ce);
+    }
+    mImmunizationRecommendation.getAuthors().add(immmunizationAuthor);
   }
 
   /**
@@ -401,12 +409,12 @@ public class ImmunizationRecommendation {
 	}
   }
   
-  private CDACHMSETBodyImmunizationL3Target createReason(Code code) {
-	    CDACHMSETBodyImmunizationL3Target t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Target().init();
+  private CDACHMSETBodyImmunizationL3Reason createReason(Code code) {
+	    CDACHMSETBodyImmunizationL3Reason t = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason().init();
 	    //Fix Template ID
 	    for (II i : t.getTemplateIds()) {
-	      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.2.1")) {
-	        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Target");
+	      if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
+	        i.setExtension("CDA-CH.MSET.Body.ImmunizationL3.Reason");
 	      }
 	    }
 	    //Set Status Code

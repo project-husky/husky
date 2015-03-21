@@ -16,7 +16,7 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
-import org.ehealth_connector.cda.ch.SectionsVACD;
+import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 public class SimpleTextBuilder extends TextBuilder {
   public static final String contentTagStr = "<content";
