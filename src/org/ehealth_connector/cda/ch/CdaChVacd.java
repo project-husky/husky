@@ -105,7 +105,16 @@ public class CdaChVacd extends CdaCh {
       }
     }
     setTitle(eVACDOCTitle);
+    fixGeneralHeaderConstraintTemplateId();
     query = new Query(doc);
+  }
+
+  private void fixGeneralHeaderConstraintTemplateId() {
+    for (int i=0; i<doc.getTemplateIds().size();i++) {
+      if (doc.getTemplateIds().get(i).getRoot().equals("2.16.840.1.113883.10.20.3")) {
+        doc.getTemplateIds().remove(i);
+      }
+    }
   }
 
   /**
