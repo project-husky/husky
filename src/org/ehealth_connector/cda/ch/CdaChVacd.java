@@ -1137,10 +1137,7 @@ public class CdaChVacd extends CdaCh {
           EntryRelationship er = lo.getEntryRelationships().get(k);
           if (Util.isComment(er)) {
             k++;
-            ED reference;
-            if (CDALevel2TextGeneration) {
               er = Util.updateRefIfComment(er, String.valueOf(i + 1) + String.valueOf(j + 1) + String.valueOf(k + 1), loincSectionCode);
-            }
           }
         }
       }

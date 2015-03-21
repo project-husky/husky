@@ -991,7 +991,12 @@ public class Util {
 	          ED ed =  er.getAct().getText();
 	          TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 	          ed.setReference(tel);
-	          tel.setValue("#"+prefix.getContentIdPrefix()+"-comment"+ref);
+	          if (CdaChVacd.CDALevel2TextGeneration) {
+	            tel.setValue("#"+prefix.getContentIdPrefix()+"-comment"+ref);
+	          }
+	          else {
+	            tel.setValue(("#"+prefix.getContentIdPrefix()+"1"));
+	          }
 	          er.getAct().setText(ed);
 	        }
 		 return er;
