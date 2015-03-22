@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * <div class="fr"></div>
  * <div class="it"></div>
  */
-public class GestationalAge {
+public class CodedResults {
 
   CodedResultsSection crs;
   GestationalAgeWeeksSimpleObservation mWeeks;
@@ -51,7 +51,7 @@ public class GestationalAge {
    * Instantiates a new gestational age.
    *
    */
-  public GestationalAge() {
+  public CodedResults() {
     crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
     mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
     mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
@@ -74,7 +74,7 @@ public class GestationalAge {
    * 		<div class="fr"></div>
    * 		<div class="it"></div>
    */
-  public GestationalAge(CodedResultsSection codedResultsSection) {
+  public CodedResults(CodedResultsSection codedResultsSection) {
     crs = codedResultsSection;
     mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection.getGestationalAgeWeeksSimpleObservations();
     mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection.getGestationalAgeDaysSimpleObservations();
@@ -88,7 +88,7 @@ public class GestationalAge {
    * 		<div class="fr"></div>
    * 		<div class="it"></div>
    */
-  public GestationalAge (int days) {
+  public CodedResults (int days) {
     this(days/7, days%7);
   }
 
@@ -104,7 +104,7 @@ public class GestationalAge {
    * 		<div class="fr"></div>
    * 		<div class="it"></div>
    */
-  public GestationalAge (int weeks, int weeksDays) {
+  public CodedResults (int weeks, int weeksDays) {
     //create and add the MDHT Objects to the section
     this();
 
@@ -201,7 +201,7 @@ public class GestationalAge {
    * <div class="fr"></div>
    * <div class="it"></div> 
    */
-  public String getGestationalAgeText() {
+  public String getCodedResultsText() {
     String gestationalText = "Das Gestationsalter beträgt: "+String.valueOf(getWeeksOfWeeksAndDays())+" Wochen und "+String.valueOf(getDaysOfWeeksAndDays())+" Tage";
     return gestationalText;
   }

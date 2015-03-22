@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Comment;
 import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.GestationalAge;
+import org.ehealth_connector.cda.CodedResults;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
@@ -89,7 +89,7 @@ public class CdaChVacdTest extends TestUtils {
   private Problem problem2;
   private AllergyProblem allergyProblem1;
 
-  private GestationalAge cr1;
+  private CodedResults cr1;
   private LaboratoryObservation lss1;
   private Pregnancy ph1;
   private Immunization immunization2;
@@ -149,8 +149,8 @@ private Performer performer2;
   }
 
   //6
-  public GestationalAge createCodedResults() {
-    GestationalAge g = new GestationalAge();
+  public CodedResults createCodedResults() {
+    CodedResults g = new CodedResults();
     g.setAsboluteDays(70);  
     g.setWeeksAndDays(10, 0);
     g.setAsboluteDays(2); 
@@ -520,9 +520,9 @@ private Performer performer2;
     assertTrue(d.getNarrativeTextAllergyProblemConcerns().contains(ts4));
 
     cr1 = createCodedResults();
-    d.setGestationalAge(cr1);
-    d.setNarrativeTextGestationalAge(ts5);
-    assertTrue(d.getNarrativeTextGestationalAge().contains(ts5));
+    d.setCodedResults(cr1);
+    d.setNarrativeTextCodedResults(ts5);
+    assertTrue(d.getNarrativeTextCodedResults().contains(ts5));
 
     lss1 = createLaboratoryObservation();
     lss2 = createLaboratoryObservation();
@@ -567,7 +567,7 @@ private Performer performer2;
   //6
   @Test
   public void testCodedResultsSetterGetter() {
-    GestationalAge g = new GestationalAge();
+    CodedResults g = new CodedResults();
 
     g.setAsboluteDays(70);
     assertEquals(70, g.getAboluteDays());

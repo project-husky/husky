@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
-import org.ehealth_connector.cda.GestationalAge;
+import org.ehealth_connector.cda.CodedResults;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
@@ -661,8 +661,8 @@ public class CdaChVacd extends CdaCh {
    *
    * @return the gestational age
    */
-  public GestationalAge getGestationalAge() {
-    return new GestationalAge(getDoc().getCodedResultsSection());
+  public CodedResults getCodedResults() {
+    return new CodedResults(getDoc().getCodedResultsSection());
   }
 
   /**
@@ -670,8 +670,8 @@ public class CdaChVacd extends CdaCh {
    *
    * @return the gestational age text
    */
-  public String getGestationalAgeText() {
-    return getGestationalAge().getGestationalAgeText();
+  public String getCodedResultsText() {
+    return getCodedResults().getCodedResultsText();
   }
 
   /**
@@ -913,7 +913,7 @@ public class CdaChVacd extends CdaCh {
    *        <div class="de"> der text des menschlenlesbaren Teils des CDA-Dokuments</div>
    * 
    */
-  public String getNarrativeTextGestationalAge() {
+  public String getNarrativeTextCodedResults() {
     return getNarrativeText(getDoc().getCodedResultsSection());
   }
   
@@ -926,7 +926,7 @@ public class CdaChVacd extends CdaCh {
    *        <div class="de"> der neue text für den menschlenlesbaren Teil des CDA-Dokuments</div>
    * 
    */
-  public void setNarrativeTextGestationalAge(String text) {
+  public void setNarrativeTextCodedResults(String text) {
     getDoc().getCodedResultsSection().createStrucDocText(text);
   }
 
@@ -1077,11 +1077,11 @@ public class CdaChVacd extends CdaCh {
    *
    * @param gestationalAge the new gestational age
    */
-  public void setGestationalAge(GestationalAge gestationalAge) {
+  public void setCodedResults(CodedResults gestationalAge) {
     SimpleTextBuilder sb;
 
     // update the MDHT Object content references to CDA level 1 text
-    sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getGestationalAgeText());
+    sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getCodedResultsText());
 
     ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
     gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(EcoreUtil.copy(reference));
