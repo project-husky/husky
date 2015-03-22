@@ -19,6 +19,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import org.ehealth_connector.cda.ActiveProblemConcern;
@@ -261,6 +263,12 @@ private Performer performer2;
     i.setDosage(number);
     i.setPerformer(performer1);
     i.setCommentText(ts1);
+    try {
+      i.setExternalDocument(new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"), numS1);
+    } catch (MalformedURLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     return i;
   }
 
@@ -523,7 +531,7 @@ private Performer performer2;
     assertTrue(d.getNarrativeTextAllergyProblemConcerns().contains(ts4));
 
     cr1 = createCodedResults();
-    d.setCodedResults(cr1);
+    d.addCodedResults(cr1);
     d.setNarrativeTextCodedResults(ts5);
     assertTrue(d.getNarrativeTextCodedResults().contains(ts5));
 
@@ -667,6 +675,15 @@ private Performer performer2;
     
     i.setCommentText(ts2);
     assertEquals(ts2,i.getCommentText());
+    
+    try {
+      i.setExternalDocument(new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"), numS1);
+      assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", i.getExternalDocumentReferenceValue());
+      assertEquals(numS1, i.getExternalDocumentId().getExtension());
+    } catch (MalformedURLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   //1

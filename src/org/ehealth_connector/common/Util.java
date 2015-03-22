@@ -511,6 +511,15 @@ public class Util {
 		text.setReference(tel);
 		return text;
 	}
+	
+	public static ED createReference(String value) {
+	    TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+	    ED ed = DatatypesFactory.eINSTANCE.createED();
+	    tel.setValue(value);
+	    ed.setReference(tel);
+
+	    return ed;
+	}
 
 	/**
 	 * <div class="en">Creates the tel.</div>

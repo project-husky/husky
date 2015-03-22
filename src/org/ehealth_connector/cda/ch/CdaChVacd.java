@@ -1077,7 +1077,7 @@ public class CdaChVacd extends CdaCh {
    *
    * @param gestationalAge the new gestational age
    */
-  public void setCodedResults(CodedResults gestationalAge) {
+  public void addCodedResults(CodedResults gestationalAge) {
     SimpleTextBuilder sb;
 
     // update the MDHT Object content references to CDA level 1 text
