@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.ch.enums.SectionsVACD;
  */
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-  private ArrayList<org.ehealth_connector.cda.ProblemConcernEntry> problemConcerns;
+  private ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns;
   private String contentIdPrefix;
 
   /**
@@ -37,7 +37,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
    * 
    * @param pastProblemConcerns
    */
-  public ProblemConcernEntryTextBuilder(ArrayList<org.ehealth_connector.cda.ProblemConcernEntry> problemConcerns, SectionsVACD section) {
+  public ProblemConcernEntryTextBuilder(ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns, SectionsVACD section) {
     this.problemConcerns = problemConcerns;
     contentIdPrefix = section.getContentIdPrefix();
   }
@@ -45,7 +45,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
   private void addBody() {
     append("<tbody>");
     int i = 1;
-    for (org.ehealth_connector.cda.ProblemConcernEntry problemConcern : problemConcerns) {
+    for (org.ehealth_connector.cda.ProblemConcern problemConcern : problemConcerns) {
       addRow(problemConcern, i++);
     }
     append("</tbody>");
@@ -60,7 +60,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
     append("</thead>");
   }
 
-  private void addRow(org.ehealth_connector.cda.ProblemConcernEntry problemConcern, int i) {
+  private void addRow(org.ehealth_connector.cda.ProblemConcern problemConcern, int i) {
     append("<tr>");
     addCell("Komplikationsrisiko");
     if (problemConcern.getConcern()!=null) {

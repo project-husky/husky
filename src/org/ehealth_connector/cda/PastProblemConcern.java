@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
  * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
  * souffrance de la santé</div>.
  */
-public class PastProblemConcern extends ProblemConcernEntry {
+public class PastProblemConcern extends ProblemConcern {
 
   /**
    * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.
@@ -73,7 +73,7 @@ public class PastProblemConcern extends ProblemConcernEntry {
    *            (active/suspended/aborted/completed)</div> <div class="fr">Le
    *            statut du problème (active/suspended/aborted/completed)</div>
    */
-  public PastProblemConcern(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+  public PastProblemConcern(String concern, Problem problemEntry, ProblemConcernStatusCode concernStatus) {
     super(concern, problemEntry, concernStatus);
   }
 
@@ -99,7 +99,7 @@ public class PastProblemConcern extends ProblemConcernEntry {
    *            du problème</div>
    */
   public PastProblemConcern(String concern,
-      ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus, Date begin, Date end) {
+      Problem problemEntry, ProblemConcernStatusCode problemConcernStatus, Date begin, Date end) {
     super(concern,problemEntry, problemConcernStatus, begin, end);
   }
 }

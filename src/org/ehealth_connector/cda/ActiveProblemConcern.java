@@ -23,12 +23,12 @@ import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
  * <div class="de">Dieses Element bezeichnet das Leiden und dokumentiert die Zeitspanne, in welcher das Leiden für den Patienten aktuell ist. Es enthält zudem eine Sammlung von Verweisen auf Probleme, die zu diesem Leiden gehören. Im Zusammenhang mit Impfungen MUSS für Komplikations- und Expositionsrisiken je ein Problem Concern Entry angegeben werden.</div> 
  * <div class="fr">Une souffrance de la santé</div>.
  */
-public class ActiveProblemConcernEntry extends ProblemConcernEntry {
+public class ActiveProblemConcern extends ProblemConcern {
 
   /**
    * Instantiates a new active problem concern entry.
    */
-  public ActiveProblemConcernEntry () {
+  public ActiveProblemConcern () {
     super();
   }
 
@@ -45,7 +45,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
    * <div class="fr">Objet préexistante à cloner</div>
    * 
    */
-  public ActiveProblemConcernEntry(
+  public ActiveProblemConcern(
       org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
     super(problemConcernEntry);
   }
@@ -75,8 +75,8 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
    * 		<div class="fr"> problem concern status</div>
    * 		<div class="it"> problem concern status</div>
    */
-  public ActiveProblemConcernEntry(String concern,
-      Date begin, Date end, ProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+  public ActiveProblemConcern(String concern,
+      Date begin, Date end, Problem problemEntry, ProblemConcernStatusCode problemConcernStatus) {
     super(concern, problemEntry, problemConcernStatus, begin, end);
   }
 
@@ -100,7 +100,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
    * 		<div class="fr"> problem status code</div>
    * 		<div class="it"> problem status code</div>
    */
-  public ActiveProblemConcernEntry(String concern, Date date, ProblemEntry problemEntry,
+  public ActiveProblemConcern(String concern, Date date, Problem problemEntry,
       ProblemConcernStatusCode problemStatusCode) {
     this(concern, date, null, problemEntry, problemStatusCode);
   }
@@ -123,7 +123,7 @@ public class ActiveProblemConcernEntry extends ProblemConcernEntry {
    *     <div class="de">Der Status Code des Leidens (active/suspended/aborted/completed)</div> 
    *     <div class="fr">Le statut du problème (active/suspended/aborted/completed)</div>
    */
-  public ActiveProblemConcernEntry(String concern, ProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+  public ActiveProblemConcern(String concern, Problem problemEntry, ProblemConcernStatusCode concernStatus) {
     super(concern, problemEntry, concernStatus);
   }
 }

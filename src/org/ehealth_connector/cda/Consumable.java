@@ -22,6 +22,7 @@ import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -57,9 +58,6 @@ public class Consumable {
    */
   public Consumable(boolean consumableKnown) {
     this("Unbekannt");
-    if (consumableKnown) {
-      
-    }
   }
   
   /**
@@ -206,6 +204,17 @@ public class Consumable {
   public org.openhealthtools.mdht.uml.cda.Consumable getMdhtConsumable() {
     return EcoreUtil.copy(mConsumable);
   }
+  
+  /**
+   * Gets the Lot Number (Chargennummer)
+   * @return the Lot Number 
+   */
+  public String getLotNr() {
+    if (this.mMaterial.getLotNumberText()!=null) {
+      return this.mMaterial.getLotNumberText().getText();
+    }
+    return null;
+  }
 
   /**
    * Gets the trade name.
@@ -250,6 +259,14 @@ public class Consumable {
     mConsumable = EcoreUtil.copy(consumable);
     mProductEntry = (ProductEntry) consumable.getManufacturedProduct();
     mMaterial = mProductEntry.getManufacturedMaterial();
+  }
+  
+  /**
+   * Sets the Lot Number (Chargennummer)
+   * @param text
+   */
+  public void setLotNr(String text) {
+    mMaterial.setLotNumberText(Util.st(text));
   }
 
   /**

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ActiveProblemConcernEntry;
+import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.Pregnancy;
-import org.ehealth_connector.cda.ProblemConcernEntry;
+import org.ehealth_connector.cda.ProblemConcern;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
@@ -163,7 +163,7 @@ public class CdaChVacd extends CdaCh {
    *        <div class="en"> active problem concern</div> <div class="de"> Das aktive Leiden</div>
    *        <div class="fr"></div> <div class="it"></div>
    */
-  public void addActiveProblemConcern(ActiveProblemConcernEntry activeProblemConcern) {
+  public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
     org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection aps;
 
     // find or create (and add) the Section
@@ -509,10 +509,10 @@ public class CdaChVacd extends CdaCh {
    * @return the active problem concerns text
    */
   public String generateNarrativeTextActiveProblemConcerns() {
-    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    ArrayList<ProblemConcern> problemConcernEntryList = new ArrayList<ProblemConcern>();
     // Convert from the specific PastProblemConcern Type to the more
     // genearal PastProblemConcern
-    for (ActiveProblemConcernEntry prob : getActiveProblemConcerns()) {
+    for (ActiveProblemConcern prob : getActiveProblemConcerns()) {
       problemConcernEntryList.add(prob);
     }
 
@@ -567,7 +567,7 @@ public class CdaChVacd extends CdaCh {
    * @return the past problem concern entries text
    */
   public String generateNarrativeTextPastProblemConcernEntries() {
-    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    ArrayList<ProblemConcern> problemConcernEntryList = new ArrayList<ProblemConcern>();
     // Convert from the specific PastProblemConcern Type to the more
     // genearal PastProblemConcern
     for (PastProblemConcern prob : getPastProblemConcerns()) {
@@ -584,7 +584,7 @@ public class CdaChVacd extends CdaCh {
    * 
    * @return the active problem concerns
    */
-  public ArrayList<ActiveProblemConcernEntry> getActiveProblemConcerns() {
+  public ArrayList<ActiveProblemConcern> getActiveProblemConcerns() {
     // Search for the right section
     Section aps = getDoc().getActiveProblemsSection();
     if (aps == null) {
@@ -592,9 +592,9 @@ public class CdaChVacd extends CdaCh {
     }
     EList<Act> acts = aps.getActs();
 
-    ArrayList<ActiveProblemConcernEntry> problemConcernEntries = new ArrayList<ActiveProblemConcernEntry>();
+    ArrayList<ActiveProblemConcern> problemConcernEntries = new ArrayList<ActiveProblemConcern>();
     for (Act act : acts) {
-      ActiveProblemConcernEntry problemConcernEntry = new ActiveProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+      ActiveProblemConcern problemConcernEntry = new ActiveProblemConcern((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
       problemConcernEntries.add(problemConcernEntry);
     }
     return problemConcernEntries;

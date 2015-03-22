@@ -43,7 +43,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 /**
  * Medzinisches Problem in strukturierter Angabe (z.B. Symptom, Beschwerde, Diagnose, etc.)
  */
-public class ProblemEntry {
+public class Problem {
 
   /**
    * The MDHT Problem Entry Object
@@ -53,7 +53,7 @@ public class ProblemEntry {
   /**
    * Instantiates a new problem entry.
    */
-  public ProblemEntry() {
+  public Problem() {
     mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
   }
 
@@ -66,7 +66,7 @@ public class ProblemEntry {
    * @param currentProblems true: Erstellung eines leeren Objekts, false: Der Patient hat keine
    *        aktuellen Probleme.
    */
-  public ProblemEntry(boolean currentProblems) {
+  public Problem(boolean currentProblems) {
     this();
     setNotOccured(false);
     if (!currentProblems) {
@@ -95,7 +95,7 @@ public class ProblemEntry {
    * @param end <br>
    *        <div class="de">Ende des Problems</div> <div class="fr"></div> <div class="it"></div>
    */
-  public ProblemEntry(Code code, String value, Date start, Date end) {
+  public Problem(Code code, String value, Date start, Date end) {
     this();
     setNotOccured(false);
 
@@ -123,7 +123,7 @@ public class ProblemEntry {
    * @param end <br>
    *        <div class="de">Ende des Problems</div> <div class="fr"></div> <div class="it"></div>
    */
-  public ProblemEntry(Code code, Value value, Date start, Date end) {
+  public Problem(Code code, Value value, Date start, Date end) {
     this();
     setNotOccured(false);
 
@@ -140,7 +140,7 @@ public class ProblemEntry {
    * @param observation <br>
    *        <div class="de"> observation</div> <div class="fr"></div> <div class="it"></div>
    */
-  public ProblemEntry(Observation observation) {
+  public Problem(Observation observation) {
     mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
   }
 
@@ -155,7 +155,7 @@ public class ProblemEntry {
    * @param end <br>
    *        <div class="de"> end</div> <div class="fr"> end</div> <div class="it"> end</div>
    */
-  public ProblemEntry(RiscOfComplications risc, Date start, Date end) {
+  public Problem(RiscOfComplications risc, Date start, Date end) {
     this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
   }
 
@@ -170,7 +170,7 @@ public class ProblemEntry {
    * @param end <br>
    *        <div class="de"> end</div> <div class="fr"> end</div> <div class="it"> end</div>
    */
-  public ProblemEntry(RiscOfExposure risc, Date start, Date end) {
+  public Problem(RiscOfExposure risc, Date start, Date end) {
     this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
   }
 

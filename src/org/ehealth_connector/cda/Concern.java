@@ -34,7 +34,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  * <div class="fr"></div>\n
  * <div class="it"></div>
  */
-class ConcernEntry {
+class Concern {
 
   /** The m concern entry. */
   org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
@@ -42,7 +42,7 @@ class ConcernEntry {
   /**
    * Instantiates a new concern entry.
    */
-  public ConcernEntry () {
+  public Concern () {
     mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
   }
 
@@ -54,7 +54,7 @@ class ConcernEntry {
    * 		<div class="fr"></div>
    * 		<div class="it"></div>
    */
-  public ConcernEntry (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
+  public Concern (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
     mConcernEntry = concernEntry;
   }
 

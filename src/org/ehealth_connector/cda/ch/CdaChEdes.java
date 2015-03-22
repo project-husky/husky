@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch;
 import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ProblemConcernEntry;
+import org.ehealth_connector.cda.ProblemConcern;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -65,7 +65,7 @@ public class CdaChEdes extends CdaCh {
    * @param problemConcern Das Leiden
    */
   public void addProblemConcern(
-      org.ehealth_connector.cda.ProblemConcernEntry problemConcern) {
+      org.ehealth_connector.cda.ProblemConcern problemConcern) {
 
     org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection;
 
@@ -101,8 +101,8 @@ public class CdaChEdes extends CdaCh {
     activeProblemsSection.addAct(problemConcernEntryMdht);
   }
 
-  public ProblemConcernEntry getActiveProblemConcern (int leidenNr) {
-    ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) getDoc().getActiveProblemsSections().get(0).getActs().get(leidenNr));
+  public ProblemConcern getActiveProblemConcern (int leidenNr) {
+    ProblemConcern problemConcernEntry = new ProblemConcern((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) getDoc().getActiveProblemsSections().get(0).getActs().get(leidenNr));
     return problemConcernEntry;
   }
 
@@ -120,19 +120,19 @@ public class CdaChEdes extends CdaCh {
    *
    * @return Liste von Leiden
    */
-  public ArrayList<ProblemConcernEntry> getProblemConcernEntries() {
+  public ArrayList<ProblemConcern> getProblemConcernEntries() {
     // Get the ActiveProblemSection from the Document
     org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection activeProblemsSection = (org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection) getDoc().getSections().get(0);
 
     // Create a List with Problem ConcernEntries
-    ArrayList<ProblemConcernEntry> problemConcernEntryList = new ArrayList<ProblemConcernEntry>();
+    ArrayList<ProblemConcern> problemConcernEntryList = new ArrayList<ProblemConcern>();
 
     System.out.println("Assembling ProblemConcernEntryList");
     // Check if an Act is a problemConcernEntry. If so, create an
     // eHealthConnector ProblemConcernObject and add it to the list.
     for (Act act : activeProblemsSection.getActs()) {
       if (act instanceof org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) {
-        ProblemConcernEntry problemConcernEntry = new ProblemConcernEntry((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+        ProblemConcern problemConcernEntry = new ProblemConcern((org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
         problemConcernEntryList.add(problemConcernEntry);
         System.out.println("List Item Code: "+problemConcernEntry.getConcern());
       }

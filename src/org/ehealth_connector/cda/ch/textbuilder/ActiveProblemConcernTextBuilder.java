@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.ActiveProblemConcernEntry;
+import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
@@ -32,21 +32,21 @@ import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 public class ActiveProblemConcernTextBuilder extends TextBuilder {
 
   protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
-  private List<ActiveProblemConcernEntry> problemConcernEntries;
-  private ActiveProblemConcernEntry newProblemConcernEntry;
+  private List<ActiveProblemConcern> problemConcernEntries;
+  private ActiveProblemConcern newProblemConcernEntry;
   private String sectionText;
   private int newId;
 
   public ActiveProblemConcernTextBuilder(
-      ArrayList<ActiveProblemConcernEntry> problemConcernEntries,
-      ActiveProblemConcernEntry newProblemConcernEntry, String sectionText) {
+      ArrayList<ActiveProblemConcern> problemConcernEntries,
+      ActiveProblemConcern newProblemConcernEntry, String sectionText) {
     this.problemConcernEntries = problemConcernEntries;
     this.newProblemConcernEntry = newProblemConcernEntry;
     this.sectionText = sectionText;
     init();
   }
 
-  private String buildRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId) {
+  private String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
     StringBuilder rowBuilder = new StringBuilder();
     rowBuilder.append("<tr>");
     rowBuilder.append(buildCell("Komplikationsrisiko"));
@@ -58,7 +58,7 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
     return rowBuilder.toString();
   }
 
-  public ActiveProblemConcernEntry getProblemConcernEntry() {
+  public ActiveProblemConcern getProblemConcernEntry() {
     return newProblemConcernEntry;
   }
 
@@ -86,7 +86,7 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
         sectionText);
   }
 
-  public String insertRow(ActiveProblemConcernEntry newProblemConcernEntry2, int newId,
+  public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
       String sectionText) {
     String rowStr = buildRow(newProblemConcernEntry2, newId);
     // TODO If there is no element found that could be replaced, then an

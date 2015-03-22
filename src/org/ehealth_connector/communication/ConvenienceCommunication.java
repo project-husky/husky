@@ -292,7 +292,9 @@ public class ConvenienceCommunication {
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws Exception {
 		// Cda Metadata extration is not implemented yet
+	    System.out.println("Trying to load from relative filePath: "+filePath);
 		InputStream inputStream = getClass().getResourceAsStream(filePath);
+		System.out.println("InputStream is:"+inputStream.toString());
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
 		// XDSDocument doc = new
 		// XDSDocumentFromStream(desc,this.getClass().getResourceAsStream(filePath));
@@ -534,6 +536,8 @@ public class ConvenienceCommunication {
 				null));
 
 		// txnData.saveMetadataToFile("C:/temp/meta.xml");
-		return source.submit(txnData);
+		XDSResponseType xdsr = source.submit(txnData);
+		System.out.println("XDSResponseType: "+xdsr);
+		return xdsr;
 	}
 }

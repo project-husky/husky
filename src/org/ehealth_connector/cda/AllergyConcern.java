@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Dieses Element enthält die Allergien und Unverträglichkeiten des Patienten.</div> 
  * <div class="fr"></div>.
  */
-public class AllergyConcern extends ConcernEntry {
+public class AllergyConcern extends Concern {
 
   /**
    * The MDHT allergy concern.

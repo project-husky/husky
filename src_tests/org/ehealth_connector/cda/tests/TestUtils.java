@@ -19,7 +19,7 @@ import java.util.Random;
 
 import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.ProblemEntry;
+import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.common.Address;
@@ -39,7 +39,7 @@ public class TestUtils {
   public static String generateString(int length)
   {
     Random rng = new Random();
-    String characters = "abcëÙdÀÿeŒfúgËÛùhijàÊkÇlŸmœ�?çÚnÔÈoæûèp»ÙÈqùôêîïÆrsâÉtéÎuvwèxylïäüìöÄ�?ÒÜÂÖÌ?ßÓ/òó:#\\í�?~*É'é,´Àà";
+    String characters = "abcëÙdÀÿeŒfúgËÛùhijàÊkÇlŸmœ�?çÚnÔÈoæûèp»ÙÈqùôêîïÆrsâÉtéÎuvwèxylïäüìöÄ�?ÒÜÂÖÌ?ßÓ/òó:#\\í�?~*É'é,´Àà";
 
     char[] text = new char[length];
     for (int i = 0; i < length; i++)
@@ -110,7 +110,7 @@ public class TestUtils {
     if (!isEqual(o1.getTelecoms(), o2.getTelecoms())) return false;
     return true;
   }
-  public static boolean isEqual(ProblemEntry p1, ProblemEntry p2) {
+  public static boolean isEqual(Problem p1, Problem p2) {
     if (!isEqual(p1.getCode(),p2.getCode())) return false;
     if (p1.getEnd() != null && !p1.getEnd().equals(p2.getEnd())) return false;
     if (p1.getStart()!=null && !p1.getStart().equals(p2.getStart())) return false;

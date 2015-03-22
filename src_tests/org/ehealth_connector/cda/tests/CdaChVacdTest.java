@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
 
-import org.ehealth_connector.cda.ActiveProblemConcernEntry;
+import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Comment;
@@ -32,7 +32,7 @@ import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.Pregnancy;
-import org.ehealth_connector.cda.ProblemEntry;
+import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
@@ -75,10 +75,10 @@ public class CdaChVacdTest extends TestUtils {
   CdaChVacd testDoc2;
 
   Consumable consumable1;
-  ProblemEntry problem1; 
+  Problem problem1; 
 
   Immunization immunization1;
-  ActiveProblemConcernEntry apce1;
+  ActiveProblemConcern apce1;
   PastProblemConcern ppc1;
   AllergyConcern ac1;
   Performer p1;
@@ -86,7 +86,7 @@ public class CdaChVacdTest extends TestUtils {
   ImmunizationRecommendation immunizationRecommendation1;
   SimpleDateFormat eurDateFormatter;
 
-  private ProblemEntry problem2;
+  private Problem problem2;
   private AllergyProblem allergyProblem1;
 
   private GestationalAge cr1;
@@ -94,7 +94,7 @@ public class CdaChVacdTest extends TestUtils {
   private Pregnancy ph1;
   private Immunization immunization2;
   private PastProblemConcern ppc2;
-  private ActiveProblemConcernEntry apce2;
+  private ActiveProblemConcern apce2;
   private AllergyConcern ac2;
   private LaboratoryObservation lss2;
   private Pregnancy ph2;
@@ -111,8 +111,8 @@ private Performer performer2;
   }
 
   //2
-  public ActiveProblemConcernEntry createActiveProblems() {
-    ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
+  public ActiveProblemConcern createActiveProblems() {
+    ActiveProblemConcern a = new ActiveProblemConcern();
     a.setId(id1);
     a.setStart(startDate);
     a.setStatus(ProblemConcernStatusCode.ACTIVE);
@@ -296,8 +296,8 @@ private Performer performer2;
     return p;
   }
 
-  public ProblemEntry createProblemEntry() {
-    ProblemEntry p = new ProblemEntry();
+  public Problem createProblemEntry() {
+    Problem p = new Problem();
     p.setCode(problemCode);
     p.setId(id1);
     p.setStart(startDate);
@@ -361,7 +361,7 @@ private Performer performer2;
   //2
   @Test
   public void testActiveProblemsSetterGetter() {
-    ActiveProblemConcernEntry a = new ActiveProblemConcernEntry();
+    ActiveProblemConcern a = new ActiveProblemConcern();
 
     a.setId(id1);
     assertEquals(true, TestUtils.isEqual(id1, a.getId()));
@@ -774,7 +774,7 @@ private Performer performer2;
 
   @Test
   public void testProblemEntrySetterGetter() {
-    ProblemEntry p = new ProblemEntry();
+    Problem p = new Problem();
 
     p.setCode(code1);
     assertEquals(true, TestUtils.isEqual(code1, p.getCode()));
