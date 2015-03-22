@@ -1,19 +1,3 @@
-/********************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 Switzerland License.
-*
-* Year of publication: 2015
-*
-********************************************************************************/
-
 package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
@@ -33,12 +17,12 @@ public enum RouteOfAdministration {
 	*<div class="de">Injektion, intradermal</div>
 	*<div class="fr">Injection intradermique</div>
 	*/
-	INJECTION_INTRADERMAL ("IDINJ", "Injection, intradermal "),
+	INJECTION_INTRADERMAL ("IDINJ", "Injection, intradermal"),
 	/** 
 	*<div class="de">Inhalation, Vernebelung, nasal</div>
 	*<div class="fr">Inhalation par nébulisation nasale</div>
 	*/
-	INHALATION_NEBULIZATION_NASAL ("NASNEB", "Inhalation, nebulization, nasal "),
+	INHALATION_NEBULIZATION_NASAL ("NASNEB", "Inhalation, nebulization, nasal"),
 	/** 
 	*<div class="de">Schlucken, oral</div>
 	*<div class="fr">Prendre par la bouche</div>
@@ -48,12 +32,12 @@ public enum RouteOfAdministration {
 	*<div class="de">Injektion, subkutan</div>
 	*<div class="fr">Injection sous-cutanée</div>
 	*/
-	INJECTION_SUBCUTANEOUS ("SQ", "Injection, subcutaneous "),
+	INJECTION_SUBCUTANEOUS ("SQ", "Injection, subcutaneous"),
 	/** 
 	*<div class="de">Diffusion, transdermal</div>
 	*<div class="fr">Diffusion transdermique</div>
 	*/
-	DIFFUSION_TRANSDERMAL ("TRNSDERMD", "Diffusion, transdermal "),
+	DIFFUSION_TRANSDERMAL ("TRNSDERMD", "Diffusion, transdermal"),
 	/** 
 	*<div class="de">Injektion, intramuskulär</div>
 	*<div class="fr">Injection intra-musculaire</div>
