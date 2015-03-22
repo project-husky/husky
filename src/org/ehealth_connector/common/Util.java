@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.Signature;
 import org.ehealth_connector.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
@@ -357,7 +358,7 @@ public class Util {
 		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		//Set signature Code to 's'
-		CS cs = DatatypesFactory.eINSTANCE.createCS("S");
+		CS cs = Signature.SIGNED.getCS();
 		mdhtLegAuth.setSignatureCode(cs);
 		//Copy Time
 		mdhtLegAuth.setTime(a.getTime());

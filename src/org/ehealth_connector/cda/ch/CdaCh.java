@@ -28,6 +28,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.cda.enums.Signature;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
@@ -131,13 +133,10 @@ public abstract class CdaCh {
    * 
    * @param code If null, "N" for "normal" will be set.
    */
-  public void setConfidentialityCode(Code code) {
+  public void setConfidentialityCode(Confidentiality code) {
     CE confidentialityCode;
     if (code == null) {
-      confidentialityCode = DatatypesFactory.eINSTANCE.createCE();
-      confidentialityCode.setCode("N");
-      confidentialityCode.setCodeSystem("2.16.840.1.113883.5.25");
-      confidentialityCode.setDisplayName("Normal");
+      confidentialityCode = Confidentiality.NORMAL.getCE();
     }
     else {
       confidentialityCode = code.getCE();

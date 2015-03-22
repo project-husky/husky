@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.cda.enums.Signature;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -99,8 +101,8 @@ public void testSetterGetterCdaCh() {
 
   c.setTimestamp(startDate);
   assertEquals(startDate.getTime(), c.getTimestamp().getTime());
-  c.setConfidentialityCode(code1);
-  assertTrue(isEqual(code1, c.getConfidentialityCode()));
+  c.setConfidentialityCode(Confidentiality.RESTRICED);
+  assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c.getConfidentialityCode()));
   //doc id root
   assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
   //set Version
