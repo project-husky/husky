@@ -24,51 +24,33 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>
-*<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés de HL7 RouteOfAdministration.Remarque : Les entrées pertinentes pour les vaccins sont indiquées en gras.</div>
+*<div class="de">Die Codes beschreiben ob und wie ein Teilnehmer das Dokument unterschreibt</div>
+*<div class="fr"></div>
 */
-public enum RouteOfAdministration {
+public enum Signature {
 
 	/** 
-	*<div class="de">Injektion, intradermal</div>
-	*<div class="fr">Injection intradermique</div>
+	*<div class="de">Eine Unterschrift ist beabsichtigt</div>
+	*<div class="fr"></div>
 	*/
-	INJECTION_INTRADERMAL ("IDINJ", "Injection, intradermal "),
+	INTENDED ("I", "intended"),
 	/** 
-	*<div class="de">Inhalation, Vernebelung, nasal</div>
-	*<div class="fr">Inhalation par nébulisation nasale</div>
+	*<div class="de">Eine Unterschrift ist erfolgt</div>
+	*<div class="fr"></div>
 	*/
-	INHALATION_NEBULIZATION_NASAL ("NASNEB", "Inhalation, nebulization, nasal "),
+	SIGNED ("S", "signed"),
 	/** 
-	*<div class="de">Schlucken, oral</div>
-	*<div class="fr">Prendre par la bouche</div>
+	*<div class="de">Eine Unterschrift ist für diesen Akteur erforderlich</div>
+	*<div class="fr"></div>
 	*/
-	SWALLOW_ORAL ("PO", "Swallow, oral "),
-	/** 
-	*<div class="de">Injektion, subkutan</div>
-	*<div class="fr">Injection sous-cutanée</div>
-	*/
-	INJECTION_SUBCUTANEOUS ("SQ", "Injection, subcutaneous "),
-	/** 
-	*<div class="de">Diffusion, transdermal</div>
-	*<div class="fr">Diffusion transdermique</div>
-	*/
-	DIFFUSION_TRANSDERMAL ("TRNSDERMD", "Diffusion, transdermal "),
-	/** 
-	*<div class="de">Injektion, intramuskulär</div>
-	*<div class="fr">Injection intra-musculaire</div>
-	*/
-	INJECTION_INTRAMUSCULAR ("IM", "Injection, intramuscular");
-	public static final String INJECTION_INTRADERMAL_CODE="IDINJ";
-	public static final String INHALATION_NEBULIZATION_NASAL_CODE="NASNEB";
-	public static final String SWALLOW_ORAL_CODE="PO";
-	public static final String INJECTION_SUBCUTANEOUS_CODE="SQ";
-	public static final String DIFFUSION_TRANSDERMAL_CODE="TRNSDERMD";
-	public static final String INJECTION_INTRAMUSCULAR_CODE="IM";
+	REQUIRED ("X", "required");
+	public static final String INTENDED_CODE="I";
+	public static final String SIGNED_CODE="S";
+	public static final String REQUIRED_CODE="X";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.112";
-	public static final String CODE_SYSTEM_NAME="HL7RouteOfAdministration";
+	public static final String CODE_SYSTEM="2.16.840.1.113883.5.89";
+	public static final String CODE_SYSTEM_NAME="ParticipationSignature";
 
 
 	private String code;
@@ -84,7 +66,7 @@ public enum RouteOfAdministration {
 	* @param displayName <br>
 	*	<div class="de"> display name</div>
 	*/
-	RouteOfAdministration (String code, String displayName) {
+	Signature (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -130,12 +112,10 @@ public enum RouteOfAdministration {
 	*
 	* @return <div class="en">The MDHT Code</div>
 	*/
-	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
+	public CS getCS() {
+		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode(code);
+		return cs;
 	}
 
  
@@ -147,8 +127,8 @@ public enum RouteOfAdministration {
 	*      <div class="de"> code</div>
 	* @return <div class="en">the enum</div>
 	*/
-	public static RouteOfAdministration getEnum(String code) {
-		for (RouteOfAdministration x : values()) {
+	public static Signature getEnum(String code) {
+		for (Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -180,7 +160,7 @@ public enum RouteOfAdministration {
 	* @return true, if is in value set
 	*/
 	public boolean isInValueSet(String code) {
-		for (RouteOfAdministration x : values()) {
+		for (Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
