@@ -251,7 +251,7 @@ private Performer performer2;
     ImmunizationRecommendation i = new ImmunizationRecommendation();
     i.setAuthor(author2);
     i.addId(id2);
-    i.setIntendedOrProposed(true);
+    i.setProposed();
     i.setPossibleAppliance(startDate, endDate);
     i.setShallNotBeAdministerd(true);
     i.setConsumable(consumable1); 
@@ -633,8 +633,9 @@ private Performer performer2;
     i.addId(id2);
     assertEquals(true, TestUtils.isEqual(id2, i.getId()));
 
-    i.setIntendedOrProposed(true);
-    assertEquals(true, i.getIntendedOrProposed());
+    i.setProposed();
+    assertEquals(true, i.getProposed());
+    assertEquals(false, i.getIntended());
 
     i.setPossibleAppliance(startDate, endDate);
     assertEquals(startDateString+" - "+endDateString, i.getPossibleAppliance());

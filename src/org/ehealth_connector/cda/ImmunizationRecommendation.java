@@ -55,6 +55,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
+import com.ctc.wstx.ent.IntEntity;
+
 /**
  * Dieses Element enthält den empfohlenen Impfplan für den Patienten. Zudem kann zur Begründung ein Verweis auf entsprechende Guidelines angegeben werden.
  * Dieses Kapitel ist KONDITIONAL und nur dann erforderlich, wenn es sich beim Dokument um die Antwort aus einem Expertensystem für Impfempfehlungen handelt (Clinical Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht erfolgte Impfungen dokumentiert werden.
@@ -78,10 +80,13 @@ public class ImmunizationRecommendation {
     }
 
     //Set the null values       
-    mImmunizationRecommendation.setPriorityCode(Util.createCENullFlavorNASK());
-    mImmunizationRecommendation.setRouteCode(Util.createCENullFlavorNASK());
-    mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNASK());
-    mImmunizationRecommendation.setRateQuantity(Util.createIVL_PQNullFlavorNASK());   
+    mImmunizationRecommendation.setPriorityCode(Util.createCENullFlavorUNK());
+    mImmunizationRecommendation.setRouteCode(Util.createCENullFlavorUNK());
+    mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+    mImmunizationRecommendation.setRateQuantity(Util.createIVL_PQNullFlavorUNK());   
+    
+    mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
+    mImmunizationRecommendation.setNegationInd(false);
   }
 
   /**
@@ -107,14 +112,19 @@ public class ImmunizationRecommendation {
       boolean intendedOrProposed, boolean shallNotBeAdministerd) {      
 
     this();
-    setConsumable(consumable);
-
+    if (intendedOrProposed) {
+      setIntended();
+    }
+    else {
+      setProposed();
+    }
+    
     //Set the Attributes of this class
     addId(null);
-    setIntendedOrProposed(intendedOrProposed);
     setShallNotBeAdministerd(shallNotBeAdministerd);
     setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
     setAuthor(author);
+    setConsumable(consumable);
   }
 
 
@@ -172,8 +182,13 @@ public class ImmunizationRecommendation {
    * @return the consumable
    */
   public Consumable getConsumable() {
-    Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
-    return consumable;
+    if (mImmunizationRecommendation.getConsumable()!=null) {
+      Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
+      return consumable;
+    }
+    else {
+      return null;
+    }
   }
 
   /**
@@ -184,18 +199,6 @@ public class ImmunizationRecommendation {
   public Identificator getId() {
     Identificator id = new Identificator(mImmunizationRecommendation.getIds().get(0));
     return id;
-  }
-
-  /**
-   * <div class="de">Gibt zurück, ob eine Impfung beabsichtigt, aber noch nicht erfolgt, oder vorgeschlagen ist (moodCode).</div>
-   * <div class="fr"></div>
-   * <div class="it"></div>
-   * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. false, wenn eine Impfung vorgeschlagen ist.
-   */
-  public boolean getIntendedOrProposed() {
-    if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT)) return true;
-    if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP)) return false;
-    return true;
   }
 
   /**
@@ -337,20 +340,46 @@ public class ImmunizationRecommendation {
     }
     return null;
   }	
-
+  
   /**
-   * <div class="de">Setzt, ob eine Impfung beabsichtigt, aber noch nicht erfolgt, oder vorgeschlagen ist (moodCode).</div>
+   * <div class="de">Setzt, die Information, dass eine Impfung beabsichtigt, aber noch nicht erfolgt ist (moodCode:INT).</div>
    * <div class="fr"></div>
    * <div class="it"></div>
-   * @param intendedOrProposed true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. false, wenn eine Impfung vorgeschlagen ist.
+   * @param intendedOrProposed true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. Sonst: false
    */
-  public void setIntendedOrProposed(boolean intendedOrProposed) {
-    if (intendedOrProposed) {
-      mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);
-    }
-    else {
-      mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
-    }
+  public void setIntended() {
+    mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);
+  }
+  
+  /**
+   * <div class="de">Liefert die Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist (moodCode:INT).</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist. Sonst: false
+   */
+  public boolean getIntended() {
+    if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT)) return true;
+    else return false;
+  }
+  
+  /**
+   * <div class="de">Setzt, die Information, dass eine Impfung vorgeschlagen ist (moodCode:PRP).</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   */
+  public void setProposed() {
+    mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
+  }
+  
+  /**
+   * <div class="de">Liefert, die Information, ob eine Impfung vorgeschlagen ist (moodCode:PRP).</div>
+   * <div class="fr"></div>
+   * <div class="it"></div>
+   * @return true, wenn eine Impfung vorgeschlagen ist. Sonst: false
+   */
+  public boolean getProposed() {
+   if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP)) return true;
+   else return false;
   }
 
   /**

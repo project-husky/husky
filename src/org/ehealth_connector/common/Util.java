@@ -167,6 +167,20 @@ public class Util {
 		ce.setNullFlavor(NullFlavor.NASK);
 		return ce;
 	}
+	
+	   /**
+     * <div class="en">Creates the ce null flavor UNK.</div>
+     * <div class="de"></div>
+     * <div class="fr"></div>
+     * <div class="it"></div>
+     *
+     * @return the ce
+     */
+    public static CE createCENullFlavorUNK() {
+        CE ce = DatatypesFactory.eINSTANCE.createCE();
+        ce.setNullFlavor(NullFlavor.UNK);
+        return ce;
+    }
 
 	/**
 	 * <div class="en">Creates the code null flavor.</div>
@@ -176,7 +190,7 @@ public class Util {
 	 *
 	 * @return the cd
 	 */
-	public static CD createCodeNullFlavor() {
+	public static CD createCodeNullFlavorNA() {
 		CD code = DatatypesFactory.eINSTANCE.createCD();
 		code.setNullFlavor(NullFlavor.NA);
 		return code;

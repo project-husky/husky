@@ -149,7 +149,7 @@ public class GestationalAge {
     //Create and add an empty procedureEntry
     ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE.createProcedureEntryProcedureActivityProcedure().init();
     pe.getIds().add(Util.createUuidVacd(null));
-    pe.setCode(Util.createCodeNullFlavor());
+    pe.setCode(Util.createCodeNullFlavorNA());
 
     //Create NullFlavor Reference
     ED text = DatatypesFactory.eINSTANCE.createED();
