@@ -101,6 +101,7 @@ public class CdaChVacdTest extends TestUtils {
   private ImmunizationRecommendation immunizationRecommendation2;
   private Comment c1;
   private Comment c2;
+  private Code whoAtcCode;
 
 private Performer performer1;
 
@@ -113,7 +114,7 @@ private Performer performer2;
   //2
   public ActiveProblemConcern createActiveProblems() {
     ActiveProblemConcern a = new ActiveProblemConcern();
-    a.setId(id1);
+    a.addId(id1);
     a.setStart(startDate);
     a.setStatus(ProblemConcernStatusCode.ACTIVE);
     a.setConcern(ts1);
@@ -125,7 +126,7 @@ private Performer performer2;
   //4
   public AllergyConcern createAllergyConcern() {
     AllergyConcern a = new AllergyConcern();
-    a.setId(id1);
+    a.addId(id1);
     a.setStart(startDate);
     a.setEnd(endDate);
     a.setStatus(ProblemConcernStatusCode.COMPLETED);
@@ -171,17 +172,18 @@ private Performer performer2;
     Consumable c = new Consumable(ts1);
     c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
     c.setTradeName(ts2);
-    c.setWhoAtcCode(ts3);
+    c.setWhoAtcCode(code2);
+    c.setLotNr(numS2);
     return consumable1;
   }
 
   public Consumable createConsumable1() {
-    Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), ts2);
+    Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
     return c;
   }
 
   public Consumable createConsumable2() {
-    Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2), ts4);
+    Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
     return c;
   }
 
@@ -279,7 +281,7 @@ private Performer performer2;
   //3
   private PastProblemConcern createPastProblemConcern() {
     PastProblemConcern p = new PastProblemConcern();
-    p.setId(id1);
+    p.addId(id1);
     p.setStart(startDate);
     p.setEnd(endDate);
     p.setStatus(ProblemConcernStatusCode.COMPLETED);
@@ -334,6 +336,7 @@ private Performer performer2;
     //Convenience API Types
     code1 = createCode1();
     code2 = createCode2();
+    whoAtcCode = new Code(CodeSystems.WHOATCCode.getCodeSystemId(), numS1, numS2);
     loincCode = new Code("2.16.840.1.113883.6.1", numS1);
     problemCode = new Code("2.16.840.1.113883.6.139", numS2);
     value1 = createValue1();
@@ -363,8 +366,8 @@ private Performer performer2;
   public void testActiveProblemsSetterGetter() {
     ActiveProblemConcern a = new ActiveProblemConcern();
 
-    a.setId(id1);
-    assertEquals(true, TestUtils.isEqual(id1, a.getId()));
+    a.addId(id1);
+    assertEquals(true, TestUtils.isEqual(id1, a.getIds().get(0)));
 
     a.setStart(startDate);
     assertEquals(startDateString, a.getStart());
@@ -390,8 +393,8 @@ private Performer performer2;
   public void testAllergyConcernSetterGetter() {
     AllergyConcern a = new AllergyConcern();
 
-    a.setId(id1);
-    assertEquals(true, TestUtils.isEqual(id1, a.getId()));
+    a.addId(id1);
+    assertEquals(true, TestUtils.isEqual(id1, a.getIds().get(0)));
 
     a.setStart(startDate);
     assertEquals(startDateString, a.getStart());
@@ -609,11 +612,14 @@ private Performer performer2;
     c.setTradeName(ts2);
     assertEquals(ts2, c.getTradeName());
 
-    c.setWhoAtcCode(ts3);
-    assertEquals(ts3, c.getWhoAtcCode().getCode());
+    c.setWhoAtcCode(whoAtcCode);
+    assertTrue(isEqual(whoAtcCode, c.getWhoAtcCode()));
     
     c.setManufacturer(organization1);
     assertTrue(isEqual(organization1, c.getManufacturer()));
+    
+    c.setLotNr(numS2);
+    assertEquals(numS2, c.getLotNr());
   }
 
   public void testDocMetadata(String constructorName, CdaChEdes doc) {
@@ -742,8 +748,8 @@ private Performer performer2;
   public void testPastProblemConcernSetterGetter() {
     PastProblemConcern p = new PastProblemConcern();
 
-    p.setId(id1);
-    assertEquals(true, TestUtils.isEqual(id1, p.getId()));
+    p.addId(id1);
+    assertEquals(true, TestUtils.isEqual(id1, p.getIds().get(0)));
 
     p.setStart(startDate);
     assertEquals(startDateString, p.getStart());

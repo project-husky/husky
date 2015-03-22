@@ -236,12 +236,7 @@ public class Performer {
 	   * @return <div class="en">the ids</div>
 	   */
 	  public ArrayList<Identificator> getIds() {
-	    ArrayList<Identificator> il = new ArrayList<Identificator>();
-	    for (II mId: mAsEntity.getIds()) {
-	      Identificator id = new Identificator(mId);
-	      il.add(id);
-	    }
-	    return il;
+	    return Util.convertIds(mAsEntity.getIds());
 	  }
 
 	  /**

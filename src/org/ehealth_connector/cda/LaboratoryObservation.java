@@ -25,6 +25,7 @@ import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
@@ -150,6 +151,16 @@ public class LaboratoryObservation {
   }
 
   /**
+   * Adds the id.
+   *
+   * @param id the new id
+   */
+  public void addId(Identificator id) {
+    II ii = Util.createUuidVacdIdentificator(id);
+    mLaboratoryObservation.getIds().add(ii);
+  }
+  
+  /**
    * Sets the value.
    *
    * @param code the new value
@@ -247,6 +258,15 @@ public class LaboratoryObservation {
     } else {
       return false;
     }
+  }
+  
+  /**
+   * Get the ids.
+   *
+   * @return the ids
+   */
+  public ArrayList<Identificator> getIds() {
+    return Util.convertIds(mLaboratoryObservation.getIds());
   }
 
   /**

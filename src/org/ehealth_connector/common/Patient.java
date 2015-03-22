@@ -313,12 +313,7 @@ public class Patient extends Person {
    * @return <div class="en">the ids</div>
    */
   public ArrayList<Identificator> getIds() {
-    ArrayList<Identificator> il = new ArrayList<Identificator>();
-    for (II mId : mPatientRole.getIds()) {
-      Identificator id = new Identificator(mId);
-      il.add(id);
-    }
-    return il;
+    return Util.convertIds(mPatientRole.getIds());
   }
 
   /**

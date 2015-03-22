@@ -86,7 +86,7 @@ public class ProblemConcern extends Concern {
     addProblemEntry(problemEntry);
     setStatus(concernStatus);
     setEffectiveTime(new Date(), null);
-    setId(null);
+    addId(null);
   }
 
   /**

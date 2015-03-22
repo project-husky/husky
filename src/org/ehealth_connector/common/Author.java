@@ -24,7 +24,6 @@ import java.util.Date;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -268,12 +267,7 @@ public class Author {
    * @return <div class="en">the ids</div>
    */
   public ArrayList<Identificator> getIds() {
-    ArrayList<Identificator> il = new ArrayList<Identificator>();
-    for (II mId: mAuthor.getAssignedAuthor().getIds()) {
-      Identificator id = new Identificator(mId);
-      il.add(id);
-    }
-    return il;
+    return Util.convertIds(mAuthor.getAssignedAuthor().getIds());
   }
 
   /**

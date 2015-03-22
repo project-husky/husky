@@ -69,6 +69,15 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class Util {
 
+  public static ArrayList<Identificator> convertIds(EList<II> mII) {
+    ArrayList<Identificator> il = new ArrayList<Identificator>();
+    for (II mId: mII) {
+      Identificator id = new Identificator(mId);
+      il.add(id);
+    }
+    return il;
+  }
+  
 	/**
 	 * The Constant TELECOMS_FAX_PREFIX.
 	 */

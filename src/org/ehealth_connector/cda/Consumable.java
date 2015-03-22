@@ -91,7 +91,7 @@ public class Consumable {
    * 		<div class="fr"></div>
    * 		<div class="it"></div>
    */
-  public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, String whoAtcCode) {
+  public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, Code whoAtcCode) {
 
     mConsumable = CDAFactory.eINSTANCE.createConsumable();
     mProductEntry = IHEFactory.eINSTANCE.createProductEntry().init();
@@ -286,15 +286,14 @@ public class Consumable {
   }
 
   /**
-   * Sets the who atc code.
+   * Sets the who atc code (Use CodeSystem.WHOATCCode)
    *
    * @param whoAtcCode das WHOATcCode Objekt welches gesetzt wird
    */
-  public void setWhoAtcCode(String whoAtcCode) {
+  public void setWhoAtcCode(Code whoAtcCode) {
     CE ce = DatatypesFactory.eINSTANCE.createCE();
     if (whoAtcCode!=null) {
-      ce.setCodeSystem(CodeSystems.WHOATCCode.getCodeSystemId());
-      ce.setCode(whoAtcCode);
+      ce = whoAtcCode.getCE();
     }
     else {
       ce.setNullFlavor(NullFlavor.UNK);

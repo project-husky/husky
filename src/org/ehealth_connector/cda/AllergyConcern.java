@@ -88,7 +88,7 @@ public class AllergyConcern extends Concern {
     setConcern(concern);
     addAllergyProblem(problemEntry);
     setStatus(completed);
-    setId(null);
+    addId(null);
     setEffectiveTime(null, null);
   }
 

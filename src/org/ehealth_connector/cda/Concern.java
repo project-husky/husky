@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -85,13 +86,12 @@ class Concern {
   }
 
   /**
-   * Gets the id.
+   * Gets the ids.
    *
    * @return the id
    */
-  public Identificator getId() {
-    Identificator id = new Identificator(mConcernEntry.getIds().get(0).getRoot(), mConcernEntry.getIds().get(0).getExtension());
-    return id;
+  public ArrayList<Identificator> getIds() {
+    return Util.convertIds(mConcernEntry.getIds());
   }
 
   /**
@@ -160,11 +160,11 @@ class Concern {
   }
 
   /**
-   * Sets the id.
+   * Adds the id.
    *
    * @param id the new id
    */
-  public void setId(Identificator id) {
+  public void addId(Identificator id) {
     II ii = Util.createUuidVacdIdentificator(id);
     mConcernEntry.getIds().add(ii);
   }

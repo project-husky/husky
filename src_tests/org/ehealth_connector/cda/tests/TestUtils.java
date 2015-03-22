@@ -66,10 +66,10 @@ public class TestUtils {
     return true;
   }
   public static boolean isEqual(Code c1, Code c2) {
-    //	    if (c1==null && c2==null) {
-    //	      return true;
-    //	    }
-    //	    
+    if (c1==null && c2==null) {
+  	      return true;
+    }
+    if ((c1!=null && c2==null) || (c1==null && c2!=null)) return false;
     if (!c1.getCode().equals(c2.getCode())) return false;
     if (c1.getCodeSystem()!=null) {
       if (!c1.getCodeSystem().equals(c2.getCodeSystem())) return false;
