@@ -72,15 +72,55 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class ConvenienceCommunication {
 
-	static SSLContext sslContext;
+	private static void setSSLFactories(InputStream keyStream,
+			String keyStorePassword, InputStream trustStream,
+			String trustStorePassword) throws Exception {
+		// Get keyStore
+		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+		// if your store is password protected then declare it (it can be null
+		// however)
+		char[] keyPassword = keyStorePassword.toCharArray();
+
+		// load the stream to your store
+		keyStore.load(keyStream, keyPassword);
+
+		// initialize a trust manager factory with the trusted store
+		KeyManagerFactory keyFactory = KeyManagerFactory
+				.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+		keyFactory.init(keyStore, keyPassword);
+
+		// get the trust managers from the factory
+		KeyManager[] keyManagers = keyFactory.getKeyManagers();
+
+		// Now get trustStore
+		KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+		// if your store is password protected then declare it (it can be null
+		// however)
+		char[] trustPassword = trustStorePassword.toCharArray();
+
+		// load the stream to your store
+		trustStore.load(trustStream, trustPassword);
+
+		// initialize a trust manager factory with the trusted store
+		TrustManagerFactory trustFactory = TrustManagerFactory
+				.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+		trustFactory.init(trustStore);
+
+		// get the trust managers from the factory
+		TrustManager[] trustManagers = trustFactory.getTrustManagers();
+
+		// initialize an ssl context to use these managers and set as default
+		sslContext = SSLContext.getInstance("SSL");
+		sslContext.init(keyManagers, trustManagers, null);
+		SSLContext.setDefault(sslContext);
+	}
 
 	// IBM Audit Repository
 	// public static final String IBM_ARR ="syslog://lswin10.dfw.ibm.com:515";
 
-	// logger
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(ConvenienceCommunication.class);
+	static SSLContext sslContext;
 
 	// /**
 	// * <p>
@@ -179,8 +219,10 @@ public class ConvenienceCommunication {
 	// return false;
 	// }
 
-	/** The source. */
-	private B_Source source = null;
+	// logger
+	/** The Constant logger. */
+	private static final Logger logger = Logger
+			.getLogger(ConvenienceCommunication.class);
 
 	// public DocumentMetadata addDocument(ClinicalDocument cdaDoc) throws
 	// Exception {
@@ -200,11 +242,11 @@ public class ConvenienceCommunication {
 	// return docMetadata;
 	// }
 
+	/** The source. */
+	private B_Source source = null;
+
 	/** The organizational id. */
 	private final String organizationalId;
-
-	/** The transaction data. */
-	SubmitTransactionData txnData;
 
 	// private void generateMissingDocEntryAttributesCda(String docEntryUuid)
 	// throws Exception {
@@ -255,6 +297,9 @@ public class ConvenienceCommunication {
 	// docMetadata.setUniqueId(OID.createOIDGivenRoot(cda.getId().getRoot()));
 	// }
 
+	/** The transaction data. */
+	SubmitTransactionData txnData;
+
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
@@ -277,6 +322,9 @@ public class ConvenienceCommunication {
 		setUp(dest, auditorEnabled);
 	}
 
+	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
+	// A11
+
 	/**
 	 * Adds a document to the XDS Submission set.
 	 * 
@@ -292,9 +340,10 @@ public class ConvenienceCommunication {
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws Exception {
 		// Cda Metadata extration is not implemented yet
-	    System.out.println("Trying to load from relative filePath: "+filePath);
+		System.out
+				.println("Trying to load from relative filePath: " + filePath);
 		InputStream inputStream = getClass().getResourceAsStream(filePath);
-		System.out.println("InputStream is:"+inputStream.toString());
+		System.out.println("InputStream is:" + inputStream.toString());
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
 		// XDSDocument doc = new
 		// XDSDocumentFromStream(desc,this.getClass().getResourceAsStream(filePath));
@@ -308,8 +357,7 @@ public class ConvenienceCommunication {
 		return docMetadata;
 	}
 
-	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
-	// A11
+	// XDS: Interaktion mit einer IHE Registry - A8
 
 	/**
 	 * Cda fixes.
@@ -336,7 +384,11 @@ public class ConvenienceCommunication {
 		docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
 	}
 
-	// XDS: Interaktion mit einer IHE Registry - A8
+	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
+
+	// Anfrage einer Immunization Recommendation (Senden der Anfrage und
+	// Empfangen
+	// der Antwort) - A4, A5, A6
 
 	/**
 	 * Generate missing doc entry attributes.
@@ -384,14 +436,14 @@ public class ConvenienceCommunication {
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
 				.isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType()
-						.getConfidentialityCode() == null) {
+				.getConfidentialityCode() == null) {
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
-					.clear();
+			.clear();
 			docMetadata
-					.getMdhtDocumentEntryType()
-					.getConfidentialityCode()
-					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
-							"N", null, null));
+			.getMdhtDocumentEntryType()
+			.getConfidentialityCode()
+			.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
+					"N", null, null));
 		}
 
 		// Generate Creation Time with the current time
@@ -407,12 +459,6 @@ public class ConvenienceCommunication {
 							.getTypeCode()));
 		}
 	}
-
-	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
-
-	// Anfrage einer Immunization Recommendation (Senden der Anfrage und
-	// Empfangen
-	// der Antwort) - A4, A5, A6
 
 	/**
 	 * Setting up the communication endpoint and the logger
@@ -442,52 +488,7 @@ public class ConvenienceCommunication {
 
 		source = new B_Source(dest.getRegistryUri());
 		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(auditorEnabled);
-	}
-
-	private static void setSSLFactories(InputStream keyStream,
-			String keyStorePassword, InputStream trustStream,
-			String trustStorePassword) throws Exception {
-		// Get keyStore
-		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-		// if your store is password protected then declare it (it can be null
-		// however)
-		char[] keyPassword = keyStorePassword.toCharArray();
-
-		// load the stream to your store
-		keyStore.load(keyStream, keyPassword);
-
-		// initialize a trust manager factory with the trusted store
-		KeyManagerFactory keyFactory = KeyManagerFactory
-				.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-		keyFactory.init(keyStore, keyPassword);
-
-		// get the trust managers from the factory
-		KeyManager[] keyManagers = keyFactory.getKeyManagers();
-
-		// Now get trustStore
-		KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-		// if your store is password protected then declare it (it can be null
-		// however)
-		char[] trustPassword = trustStorePassword.toCharArray();
-
-		// load the stream to your store
-		trustStore.load(trustStream, trustPassword);
-
-		// initialize a trust manager factory with the trusted store
-		TrustManagerFactory trustFactory = TrustManagerFactory
-				.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-		trustFactory.init(trustStore);
-
-		// get the trust managers from the factory
-		TrustManager[] trustManagers = trustFactory.getTrustManagers();
-
-		// initialize an ssl context to use these managers and set as default
-		sslContext = SSLContext.getInstance("SSL");
-		sslContext.init(keyManagers, trustManagers, null);
-		SSLContext.setDefault(sslContext);
+		.setAuditorEnabled(auditorEnabled);
 	}
 
 	/**
@@ -537,7 +538,7 @@ public class ConvenienceCommunication {
 
 		// txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
-		System.out.println("XDSResponseType: "+xdsr);
+		System.out.println("XDSResponseType: " + xdsr);
 		return xdsr;
 	}
 }

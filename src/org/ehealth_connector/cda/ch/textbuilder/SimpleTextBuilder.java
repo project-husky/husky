@@ -1,66 +1,67 @@
 /********************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 Switzerland License.
-*
-* Year of publication: 2015
-*
-********************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ ********************************************************************************/
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 public class SimpleTextBuilder extends TextBuilder {
-  public static final String contentTagStr = "<content";
-  public static int countMatches(final String str, final String sub) {
-    if (str.equals("") || sub.equals("")) {
-      return 0;
-    }
-    int count = 0;
-    int idx = 0;
-    while ((idx = str.indexOf(sub, idx)) != -1) {
-      count++;
-      idx += sub.length();
-    }
-    return count;
-  }
-  String contentIdPrefix;
-  String text;
+	public static int countMatches(final String str, final String sub) {
+		if (str.equals("") || sub.equals("")) {
+			return 0;
+		}
+		int count = 0;
+		int idx = 0;
+		while ((idx = str.indexOf(sub, idx)) != -1) {
+			count++;
+			idx += sub.length();
+		}
+		return count;
+	}
 
-  int currentContentId;
+	public static final String contentTagStr = "<content";
+	String contentIdPrefix;
+	String text;
 
-  public SimpleTextBuilder(SectionsVACD section, String newText) {
-    contentIdPrefix = section.getContentIdPrefix();
-    text = newText;
-    addContent(text, contentIdPrefix, 1);
-    currentContentId = 1;
-  }
+	int currentContentId;
 
-  public SimpleTextBuilder(SectionsVACD section, String newText, String oldText) {
-    contentIdPrefix = section.getContentIdPrefix();
+	public SimpleTextBuilder(SectionsVACD section, String newText) {
+		contentIdPrefix = section.getContentIdPrefix();
+		text = newText;
+		addContent(text, contentIdPrefix, 1);
+		currentContentId = 1;
+	}
 
-    //Calculate the current content ID
-    int contentTagOccurences = countMatches(oldText, contentTagStr);
-    currentContentId = contentTagOccurences+1;
-    append(oldText);
-    addContent(newText, contentIdPrefix, currentContentId);
-  }
+	public SimpleTextBuilder(SectionsVACD section, String newText,
+			String oldText) {
+		contentIdPrefix = section.getContentIdPrefix();
 
-  public int getNewTextContentIDNr() {
-    return currentContentId;
-  }
+		// Calculate the current content ID
+		int contentTagOccurences = countMatches(oldText, contentTagStr);
+		currentContentId = contentTagOccurences + 1;
+		append(oldText);
+		addContent(newText, contentIdPrefix, currentContentId);
+	}
 
+	public int getNewTextContentIDNr() {
+		return currentContentId;
+	}
 
-  @Override
-  public String toString() {
-    return super.toString();
-  }
+	@Override
+	public String toString() {
+		return super.toString();
+	}
 }

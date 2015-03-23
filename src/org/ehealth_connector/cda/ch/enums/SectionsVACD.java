@@ -1,18 +1,18 @@
 /********************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 Switzerland License.
-*
-* Year of publication: 2015
-*
-********************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ ********************************************************************************/
 package org.ehealth_connector.cda.ch.enums;
 
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -24,100 +24,120 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
  * @author gsc, ahel
  */
 public enum SectionsVACD {
-  HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni", "Immunizations"),
-  ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste", "Liste des problèmes", "Elenco dei problemi", "Active Problems"),
-  HISTORY_OF_PAST_ILLNESS("11348-0", "hipi", "Bisherige Krankheiten", "Affection du patient", "Affezione del paziente", "Problem Concern"),
-  ALLERGIES_REACTIONS("48765-2", "ar", "Allergien und Unverträglichkeiten", "Allergies et autres réactions indésirables", "Allergie e altre reazioni avverse", "Allergies and Other Adverse Reactions"),
-  CODED_RESULTS("30954-2","cr","Codierte Resultate", "TOTRANSLATE", "TOTRANSLATE", "Coded Results"),
-  SEROLOGY_STUDIES("18727-8", "sst", "Laborbefund", "TOTRANSLATE", "TOTRANSLATE", "Laboratory Specialty Section"),
-  HISTORY_OF_PREGNANCIES("10162-6","hop","Schwangerschaften", "Grossesses", "Gravidanze", "Pregnancy History"),
-  TREATMENT_PLAN("18776-5", "tp", "Impfplan", "TOTRANSLATE", "TOTRANSLATE", "Immunization Recommendations"),
-  REMARKS("48767-8","k","Kommentar", "Commentaire", "Osservazione", "Comment");
+	HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations",
+			"Vaccinazioni", "Immunizations"), ACTIVE_PROBLEMS("11450-4", "ap",
+			"Problemliste", "Liste des problèmes", "Elenco dei problemi",
+			"Active Problems"), HISTORY_OF_PAST_ILLNESS("11348-0", "hipi",
+			"Bisherige Krankheiten", "Affection du patient",
+			"Affezione del paziente", "Problem Concern"), ALLERGIES_REACTIONS(
+			"48765-2", "ar", "Allergien und Unverträglichkeiten",
+			"Allergies et autres réactions indésirables",
+			"Allergie e altre reazioni avverse",
+			"Allergies and Other Adverse Reactions"), CODED_RESULTS("30954-2",
+			"cr", "Codierte Resultate", "TOTRANSLATE", "TOTRANSLATE",
+			"Coded Results"), SEROLOGY_STUDIES("18727-8", "sst", "Laborbefund",
+			"TOTRANSLATE", "TOTRANSLATE", "Laboratory Specialty Section"), HISTORY_OF_PREGNANCIES(
+			"10162-6", "hop", "Schwangerschaften", "Grossesses", "Gravidanze",
+			"Pregnancy History"), TREATMENT_PLAN("18776-5", "tp", "Impfplan",
+			"TOTRANSLATE", "TOTRANSLATE", "Immunization Recommendations"), REMARKS(
+			"48767-8", "k", "Kommentar", "Commentaire", "Osservazione",
+			"Comment");
 
-  public static boolean isActiveProblems(String code) {
-    return ACTIVE_PROBLEMS.getLoincCode().equals(code);
-  }
-  public static boolean isAllergiesReactions(String code) {
-    return ALLERGIES_REACTIONS.getLoincCode().equals(code);
-  }
-  public static boolean isCodedResults(String code) {
-    return CODED_RESULTS.getLoincCode().equals(code);
-  }
+	public static boolean isActiveProblems(String code) {
+		return ACTIVE_PROBLEMS.getLoincCode().equals(code);
+	}
 
-  public static boolean isHistoryOfImmunization(String code) {
-    return HISTORY_OF_IMMUNIZATION.getLoincCode().equals(code);
-  }
+	public static boolean isAllergiesReactions(String code) {
+		return ALLERGIES_REACTIONS.getLoincCode().equals(code);
+	}
 
-  public static boolean isHistoryOfPastIllness(String code) {
-    return HISTORY_OF_PAST_ILLNESS.getLoincCode().equals(code);
-  }
+	public static boolean isCodedResults(String code) {
+		return CODED_RESULTS.getLoincCode().equals(code);
+	}
 
-  public static boolean isLaboratorySpeciality(String code) {
-    return SEROLOGY_STUDIES.getLoincCode().equals(code);
-  }
+	public static boolean isHistoryOfImmunization(String code) {
+		return HISTORY_OF_IMMUNIZATION.getLoincCode().equals(code);
+	}
 
-  public static boolean isRemarks(String code) {
-    return REMARKS.getLoincCode().equals(code);
-  }
+	public static boolean isHistoryOfPastIllness(String code) {
+		return HISTORY_OF_PAST_ILLNESS.getLoincCode().equals(code);
+	}
 
-  public static boolean isTreatmentPlan(String code) {
-    return TREATMENT_PLAN.getLoincCode().equals(code);
-  }
+	public static boolean isLaboratorySpeciality(String code) {
+		return SEROLOGY_STUDIES.getLoincCode().equals(code);
+	}
 
-  private String loincCode;
+	public static boolean isRemarks(String code) {
+		return REMARKS.getLoincCode().equals(code);
+	}
 
-  private String contentIdPrefix;
+	public static boolean isTreatmentPlan(String code) {
+		return TREATMENT_PLAN.getLoincCode().equals(code);
+	}
 
-  private String sectionTitleDe;
-  
-  private String sectionTitleFr;
-  
-  private String sectionTitleIt;
-  
-  private String sectionTitleEn;
+	private String loincCode;
 
-  SectionsVACD(String loincCode, String contentIdPrefix, String sectionTitleDe, String sectionTitleFr, String sectionTitleIt, String sectionTitleEn) {
-    this.loincCode = loincCode;
-    this.contentIdPrefix = contentIdPrefix;
-    this.sectionTitleDe = sectionTitleDe;
-    this.sectionTitleFr = sectionTitleFr;
-    this.sectionTitleIt = sectionTitleIt;
-    this.sectionTitleEn = sectionTitleEn;
-  }
+	private String contentIdPrefix;
 
-  public String getContentIdPrefix() {
-    return contentIdPrefix;
-  }
+	private String sectionTitleDe;
 
-  public String getLoincCode() {
-    return loincCode;
-  }
+	private String sectionTitleFr;
 
-  public String getSectionTitleDe() {
-    return sectionTitleDe;
-  }
-  
-  public String getSectionTitleFr() {
-    return sectionTitleFr;
-  }
-  
-  public String getSectionTitleIt() {
-    return sectionTitleIt;
-  }
-  
-  public String getSectionTitleEn() {
-    return sectionTitleEn;
-  }
-  
-  public String getSectionTitle(CS lc) {
-    String lcStr = lc.getCode().toLowerCase();
-    if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase())) return getSectionTitleDe();
-    if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase())) return getSectionTitleFr();
-    if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase())) return getSectionTitleIt();
-    if (lcStr.equals("de")) return getSectionTitleDe();
-    if (lcStr.equals("fr")) return getSectionTitleFr();
-    if (lcStr.equals("it")) return getSectionTitleIt();
-    if (lcStr.equals("en")) return getSectionTitleEn();
-    return getSectionTitleDe();
-  }
+	private String sectionTitleIt;
+
+	private String sectionTitleEn;
+
+	SectionsVACD(String loincCode, String contentIdPrefix,
+			String sectionTitleDe, String sectionTitleFr,
+			String sectionTitleIt, String sectionTitleEn) {
+		this.loincCode = loincCode;
+		this.contentIdPrefix = contentIdPrefix;
+		this.sectionTitleDe = sectionTitleDe;
+		this.sectionTitleFr = sectionTitleFr;
+		this.sectionTitleIt = sectionTitleIt;
+		this.sectionTitleEn = sectionTitleEn;
+	}
+
+	public String getContentIdPrefix() {
+		return contentIdPrefix;
+	}
+
+	public String getLoincCode() {
+		return loincCode;
+	}
+
+	public String getSectionTitle(CS lc) {
+		String lcStr = lc.getCode().toLowerCase();
+		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
+			return getSectionTitleDe();
+		if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
+			return getSectionTitleFr();
+		if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
+			return getSectionTitleIt();
+		if (lcStr.equals("de"))
+			return getSectionTitleDe();
+		if (lcStr.equals("fr"))
+			return getSectionTitleFr();
+		if (lcStr.equals("it"))
+			return getSectionTitleIt();
+		if (lcStr.equals("en"))
+			return getSectionTitleEn();
+		return getSectionTitleDe();
+	}
+
+	public String getSectionTitleDe() {
+		return sectionTitleDe;
+	}
+
+	public String getSectionTitleEn() {
+		return sectionTitleEn;
+	}
+
+	public String getSectionTitleFr() {
+		return sectionTitleFr;
+	}
+
+	public String getSectionTitleIt() {
+		return sectionTitleIt;
+	}
 }

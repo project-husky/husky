@@ -1,18 +1,18 @@
 /********************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 Switzerland License.
-*
-* Year of publication: 2015
-*
-********************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 Switzerland License.
+ *
+ * Year of publication: 2015
+ *
+ ********************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -31,173 +31,187 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * <div class="de">Klasse ConcernEntry.</div>\n
- * <div class="fr"></div>\n
- * <div class="it"></div>
+ * <div class="de">Klasse ConcernEntry.</div>\n <div class="fr"></div>\n <div
+ * class="it"></div>
  */
 class Concern {
 
-  /** The m concern entry. */
-  org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
+	/** The m concern entry. */
+	org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry;
 
-  /**
-   * Instantiates a new concern entry.
-   */
-  public Concern () {
-    mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
-  }
+	/**
+	 * Instantiates a new concern entry.
+	 */
+	public Concern() {
+		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
+	}
 
-  /**
-   * Instantiates a new concern entry.
-   *
-   * @param concernEntry <br>
-   * 		<div class="de"> concern entry</div>
-   * 		<div class="fr"></div>
-   * 		<div class="it"></div>
-   */
-  public Concern (org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
-    mConcernEntry = concernEntry;
-  }
+	/**
+	 * Instantiates a new concern entry.
+	 *
+	 * @param concernEntry
+	 * <br>
+	 *            <div class="de"> concern entry</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
+	public Concern(
+			org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
+		mConcernEntry = concernEntry;
+	}
 
-  private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
-    return EcoreUtil.copy(mConcernEntry);
-  }
+	/**
+	 * Adds the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void addId(Identificator id) {
+		II ii = Util.createUuidVacdIdentificator(id);
+		mConcernEntry.getIds().add(ii);
+	}
 
-  /**
-   * Gibt das Leiden zurück.
-   *
-   * @return the concern
-   */
-  public String getConcern() {
-    if (mConcernEntry.getText() != null) {
-      return mConcernEntry.getText().getText();
-    }
-    else return null;
-  }
+	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
+		return EcoreUtil.copy(mConcernEntry);
+	}
 
-  /**
-   * Gibt das Ende des Leidens zurück.
-   *
-   * @return Ende des Leidens
-   */
-  public String getEnd() {
-    return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
-        .getEffectiveTime().getHigh().getValue());
-  }
+	/**
+	 * Gibt das Leiden zurück.
+	 *
+	 * @return the concern
+	 */
+	public String getConcern() {
+		if (mConcernEntry.getText() != null) {
+			return mConcernEntry.getText().getText();
+		} else
+			return null;
+	}
 
-  /**
-   * Gets the ids.
-   *
-   * @return the id
-   */
-  public ArrayList<Identificator> getIds() {
-    return Util.convertIds(mConcernEntry.getIds());
-  }
+	/**
+	 * Gibt das Ende des Leidens zurück.
+	 *
+	 * @return Ende des Leidens
+	 */
+	public String getEnd() {
+		return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
+				.getEffectiveTime().getHigh().getValue());
+	}
 
-  /**
-   * Gets the mdht concern.
-   *
-   * @return the mdht concern
-   */
-  public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
-    return mConcernEntry;
-  }
+	/**
+	 * Gets the ids.
+	 *
+	 * @return the id
+	 */
+	public ArrayList<Identificator> getIds() {
+		return Util.convertIds(mConcernEntry.getIds());
+	}
 
-  /**
-   * Gibt den Beginn des Leidens zurück.
-   *
-   * @return Beginn des Leidens
-   */
-  public String getStart() {
-    return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
-        .getEffectiveTime().getLow().getValue());
-  }
+	/**
+	 * Gets the mdht concern.
+	 *
+	 * @return the mdht concern
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
+		return mConcernEntry;
+	}
 
-  /**
-   * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
-   * 
-   * @return Status des Leidens
-   */
-  public ProblemConcernStatusCode getStatus() {
-    return ProblemConcernStatusCode.getEnum(mConcernEntry.getStatusCode().getCode());
-  }
+	/**
+	 * Gibt den Beginn des Leidens zurück.
+	 *
+	 * @return Beginn des Leidens
+	 */
+	public String getStart() {
+		return Util.createEurDateStrFromTS(copyMdhtConcernEntry()
+				.getEffectiveTime().getLow().getValue());
+	}
 
-  /**
-   * Setzt das Leiden.
-   *
-   * @param concern            Leiden
-   */
-  public void setConcern(String concern) {
-    // Create and set the concern as freetext
-    ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
-    mConcernEntry.setText(concernText);
-  }
+	/**
+	 * Gibt den Status (aktiv/inaktiv/...) des Leidens zurück
+	 * 
+	 * @return Status des Leidens
+	 */
+	public ProblemConcernStatusCode getStatus() {
+		return ProblemConcernStatusCode.getEnum(mConcernEntry.getStatusCode()
+				.getCode());
+	}
 
-  protected void setEffectiveTime(Date begin, Date end) {
-    try {
-      mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(begin, end));
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+	/**
+	 * Setzt das Leiden.
+	 *
+	 * @param concern
+	 *            Leiden
+	 */
+	public void setConcern(String concern) {
+		// Create and set the concern as freetext
+		ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
+		mConcernEntry.setText(concernText);
+	}
 
-  /**
-   * Setzt das Ende des Leidens.
-   *
-   * @param endOfConcern            Ende des Leidens
-   */
-  public void setEnd(Date endOfConcern) {
-    try {
-      if (mConcernEntry.getEffectiveTime() == null) {
-        mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(endOfConcern));
-      }
-      mConcernEntry.getEffectiveTime().setHigh(
-          DateUtil.createIVXB_TSFromDate(endOfConcern));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-  }
+	protected void setEffectiveTime(Date begin, Date end) {
+		try {
+			mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(
+					begin, end));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-  /**
-   * Adds the id.
-   *
-   * @param id the new id
-   */
-  public void addId(Identificator id) {
-    II ii = Util.createUuidVacdIdentificator(id);
-    mConcernEntry.getIds().add(ii);
-  }
+	/**
+	 * Setzt das Ende des Leidens.
+	 *
+	 * @param endOfConcern
+	 *            Ende des Leidens
+	 */
+	public void setEnd(Date endOfConcern) {
+		try {
+			if (mConcernEntry.getEffectiveTime() == null) {
+				mConcernEntry.setEffectiveTime(DateUtil
+						.createIVL_TSFromEuroDateTime(endOfConcern));
+			}
+			mConcernEntry.getEffectiveTime().setHigh(
+					DateUtil.createIVXB_TSFromDate(endOfConcern));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
-  /**
-   * Setzt den Beginn des Leidens.
-   *
-   * @param startOfConcern            Beginn des Leidens
-   */
-  public void setStart(Date startOfConcern) {
-    try {
-      if (mConcernEntry.getEffectiveTime() == null) {
-        mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(startOfConcern));
-      }
-      mConcernEntry.getEffectiveTime().setLow(
-          DateUtil.createIVXB_TSFromDate(startOfConcern));
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-  }
+	/**
+	 * Setzt den Beginn des Leidens.
+	 *
+	 * @param startOfConcern
+	 *            Beginn des Leidens
+	 */
+	public void setStart(Date startOfConcern) {
+		try {
+			if (mConcernEntry.getEffectiveTime() == null) {
+				mConcernEntry.setEffectiveTime(DateUtil
+						.createIVL_TSFromEuroDateTime(startOfConcern));
+			}
+			mConcernEntry.getEffectiveTime().setLow(
+					DateUtil.createIVXB_TSFromDate(startOfConcern));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
-  /**
-   * Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
-   * Bei einem Aktiven Leiden (@see org.ehealth_connector.cda.ActiveProblemConcern) muss entweder completed, aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS die setEnd-Methode verwendet werden. <br>
-   * Bei einem vergangenen Leiden (@see org.ehealth_connector.cda.PastProblemConcern) muss entweder completed, aborted gesetzt werden. Es MUSS die setEnd-Methode verwendet werden.<br>
-   * @param concernStatus
-   *            Status
-   */
-  public void setStatus(ProblemConcernStatusCode concernStatus) {
-    // Create and set the status code
-    // TODO Prüfen, ob hier immer "completed" angegeben werden muss
-    // (Implementierungsleitfaden 7.5.2.4)
+	/**
+	 * Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
+	 * Bei einem Aktiven Leiden (@see
+	 * org.ehealth_connector.cda.ActiveProblemConcern) muss entweder completed,
+	 * aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS
+	 * die setEnd-Methode verwendet werden. <br>
+	 * Bei einem vergangenen Leiden (@see
+	 * org.ehealth_connector.cda.PastProblemConcern) muss entweder completed,
+	 * aborted gesetzt werden. Es MUSS die setEnd-Methode verwendet werden.<br>
+	 * 
+	 * @param concernStatus
+	 *            Status
+	 */
+	public void setStatus(ProblemConcernStatusCode concernStatus) {
+		// Create and set the status code
+		// TODO Prüfen, ob hier immer "completed" angegeben werden muss
+		// (Implementierungsleitfaden 7.5.2.4)
 
-    mConcernEntry.setStatusCode(concernStatus.getCS());
-  }
+		mConcernEntry.setStatusCode(concernStatus.getCS());
+	}
 }
