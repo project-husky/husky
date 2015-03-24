@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch;
 
@@ -223,8 +223,8 @@ public class CdaChVacd extends CdaCh {
 		} else {
 			aps.createStrucDocText("Keine Angaben");
 			activeProblemConcern.copyMdhtProblemConcernEntry()
-			.getEntryRelationships().get(0).getObservation()
-			.setText(Util.createEd(""));
+					.getEntryRelationships().get(0).getObservation()
+					.setText(Util.createEd(""));
 		}
 	}
 
@@ -267,7 +267,7 @@ public class CdaChVacd extends CdaCh {
 		} else {
 			ars.createStrucDocText("Keine Angaben");
 			allergyConcern.copyMdhtAllergyConcern().getEntryRelationships()
-			.get(0).getObservation().setText(Util.createEd(""));
+					.get(0).getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -392,7 +392,7 @@ public class CdaChVacd extends CdaCh {
 		// content reference)
 		if (CDALevel2TextGeneration) {
 			immunizationSection
-			.createStrucDocText(generateNarrativeTextImmunizations());
+					.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
 			setNarrativeTextImmunizations("");
 		}
@@ -425,20 +425,20 @@ public class CdaChVacd extends CdaCh {
 
 		// add the MDHT Object to the section
 		immunizationRecommendationsSection
-		.addSubstanceAdministration(immunizationRecommendation
-				.copyMdhtImmunizationRecommendation());
+				.addSubstanceAdministration(immunizationRecommendation
+						.copyMdhtImmunizationRecommendation());
 
 		// update the MDHT Object content references to CDA level 1 text
 		updateSubstanceAdministrationReferences(
 				immunizationRecommendationsSection
-				.getSubstanceAdministrations(),
+						.getSubstanceAdministrations(),
 				SectionsVACD.TREATMENT_PLAN);
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		if (CDALevel2TextGeneration) {
 			immunizationRecommendationsSection
-			.createStrucDocText(generateNarrativeTextImmunizationRecommendations());
+					.createStrucDocText(generateNarrativeTextImmunizationRecommendations());
 		} else {
 			setNarrativeTextImmunizationRecommendations("");
 		}
@@ -458,7 +458,7 @@ public class CdaChVacd extends CdaCh {
 		org.openhealthtools.mdht.uml.cda.ch.LaboratorySpecialitySection lss;
 		LaboratoryReportDataProcessingEntry lrdpe;
 		SpecimenAct spa;
-		//LaboratoryObservationTextBuilder tb;
+		// LaboratoryObservationTextBuilder tb;
 
 		// FIXME: Dieser Teil muss in dem Objekt selbst ausgeführt werden. Also
 		// in LaboratoryObservation die Battery etc. erzeugen.
@@ -497,9 +497,9 @@ public class CdaChVacd extends CdaCh {
 
 		// Set the Type codes
 		lbo.getComponents().get(lbo.getComponents().size() - 1)
-		.setTypeCode(ActRelationshipHasComponent.COMP);
+				.setTypeCode(ActRelationshipHasComponent.COMP);
 		spa.getEntryRelationships().get(spa.getEntryRelationships().size() - 1)
-		.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+				.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		// TODO update the MDHT Object content references to CDA level 1 text
 		// (if necessary)
@@ -553,8 +553,8 @@ public class CdaChVacd extends CdaCh {
 		} else {
 			hopis.createStrucDocText("");
 			pastProblemConcern.copyMdhtProblemConcernEntry()
-			.getEntryRelationships().get(0).getObservation()
-			.setText(Util.createEd(""));
+					.getEntryRelationships().get(0).getObservation()
+					.setText(Util.createEd(""));
 		}
 	}
 
@@ -1304,8 +1304,8 @@ public class CdaChVacd extends CdaCh {
 				Code code = new Code(problemEntry.getCode());
 				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96")
 						&& code.getCode()
-						.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-								.getCode())) {
+								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
+										.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -1347,7 +1347,7 @@ public class CdaChVacd extends CdaCh {
 						k++;
 						er = Util.updateRefIfComment(er,
 								String.valueOf(i + 1) + String.valueOf(j + 1)
-								+ String.valueOf(k + 1),
+										+ String.valueOf(k + 1),
 								loincSectionCode);
 					}
 				}
@@ -1367,8 +1367,8 @@ public class CdaChVacd extends CdaCh {
 				Code code = new Code(problemEntry.getCode());
 				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96")
 						&& code.getCode()
-						.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-								.getCode())) {
+								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
+										.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -1413,8 +1413,8 @@ public class CdaChVacd extends CdaCh {
 						if (ir.getConsumable().getManufacturedProduct()
 								.getManufacturedMaterial().getCode() != null) {
 							ir.getConsumable().getManufacturedProduct()
-							.getManufacturedMaterial().getCode()
-							.setOriginalText(EcoreUtil.copy(reference));
+									.getManufacturedMaterial().getCode()
+									.setOriginalText(EcoreUtil.copy(reference));
 						}
 						for (EntryRelationship er : ir.getEntryRelationships()) {
 							er = Util.updateRefIfComment(er, String.valueOf(i),

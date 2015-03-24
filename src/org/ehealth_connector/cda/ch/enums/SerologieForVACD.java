@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere LOINC Codes dürfen ebenfalls verwendet werden.</div>
  *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés LOINC.</div>
  */
-public enum Serologie {
+public enum SerologieForVACD {
 
 	/**
 	 * <div class="de">Windpocken</div> <div class="fr">Varicelle</div>
@@ -53,20 +53,20 @@ public enum Serologie {
 	 */
 	HEPATITIS_B_VIRUS_SURFACE_AB_IGG("16935-9",
 			"Hepatitis B virus surface Ab.IgG"),
-	/**
-	 * <div class="de">FSME</div> <div class="fr">Encéphalite à tiques</div>
-	 */
-	EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB("26061-2",
-			"European tick borne encephalitis virus Ab"),
-	/**
-	 * <div class="de">Gelbfieber</div> <div class="fr">Fièvre jaune</div>
-	 */
-	YELLOW_FEVER_VIRUS_AB("6589-6", "Yellow fever virus Ab"),
-	/**
-	 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
-	 */
-	CLOSTRIDIUM_TETANI_TOXIN_AB_IGG("58770-9",
-			"Clostridium tetani toxin Ab.IgG");
+			/**
+			 * <div class="de">FSME</div> <div class="fr">Encéphalite à tiques</div>
+			 */
+			EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB("26061-2",
+					"European tick borne encephalitis virus Ab"),
+					/**
+					 * <div class="de">Gelbfieber</div> <div class="fr">Fièvre jaune</div>
+					 */
+					YELLOW_FEVER_VIRUS_AB("6589-6", "Yellow fever virus Ab"),
+					/**
+					 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
+					 */
+					CLOSTRIDIUM_TETANI_TOXIN_AB_IGG("58770-9",
+							"Clostridium tetani toxin Ab.IgG");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -76,8 +76,8 @@ public enum Serologie {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static Serologie getEnum(String code) {
-		for (Serologie x : values()) {
+	public static SerologieForVACD getEnum(String code) {
+		for (SerologieForVACD x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -114,7 +114,7 @@ public enum Serologie {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	Serologie(String code, String displayName) {
+	SerologieForVACD(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -210,7 +210,7 @@ public enum Serologie {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String code) {
-		for (Serologie x : values()) {
+		for (SerologieForVACD x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *<div class="de">Codesystem: HL7 ObservationInterpretation (OID: 2.16.840.1.113883.5.83). Das folgende Subset (siehe auch OID 2.16.756.5.30.1.127.3.2.20121101.3) ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
  *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
  */
-public enum ObservationInterpretation {
+public enum ObservationInterpretationForImmunization {
 
 	/**
 	 * <div class="de">Positiv Erreger in Probe nachgewiesen</div> <div
@@ -34,13 +34,13 @@ public enum ObservationInterpretation {
 	 */
 	POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN("POS",
 			"Positive: Pathogen found in specimen"),
-	/**
-	 * <div class="de">Negativ: Erreger konnte in Probe nicht nachgewiesen
-	 * werden</div> <div class="fr">Négatif: L’agent pathogène n’a pas pu être
-	 * dépisté dans l’échantillon</div>
-	 */
-	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN("NEG",
-			"Negative: Pathogen couldn't be determined in speci-men");
+			/**
+			 * <div class="de">Negativ: Erreger konnte in Probe nicht nachgewiesen
+			 * werden</div> <div class="fr">Négatif: L’agent pathogène n’a pas pu être
+			 * dépisté dans l’échantillon</div>
+			 */
+			NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN("NEG",
+					"Negative: Pathogen couldn't be determined in speci-men");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -50,8 +50,8 @@ public enum ObservationInterpretation {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ObservationInterpretation getEnum(String code) {
-		for (ObservationInterpretation x : values()) {
+	public static ObservationInterpretationForImmunization getEnum(String code) {
+		for (ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -81,7 +81,7 @@ public enum ObservationInterpretation {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	ObservationInterpretation(String code, String displayName) {
+	ObservationInterpretationForImmunization(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -177,7 +177,7 @@ public enum ObservationInterpretation {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String code) {
-		for (ObservationInterpretation x : values()) {
+		for (ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

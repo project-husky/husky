@@ -1,18 +1,18 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
@@ -402,14 +402,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
 				this.sourceConfigured = true;
 				if (adapterCfg.auditSourceId != null) {
 					PIXSourceAuditor.getAuditor().getConfig()
-							.setAuditSourceId(adapterCfg.auditSourceId);
+					.setAuditSourceId(adapterCfg.auditSourceId);
 				}
 				if (adapterCfg.auditRepositoryUri != null) {
 					PIXSourceAuditor
-							.getAuditor()
-							.getConfig()
-							.setAuditRepositoryUri(
-									adapterCfg.auditRepositoryUri);
+					.getAuditor()
+					.getConfig()
+					.setAuditRepositoryUri(
+							adapterCfg.auditRepositoryUri);
 				}
 				if (pixSource == null) {
 					pixSource = new V3PixSource(adapterCfg.pixSourceUri);
@@ -419,14 +419,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
 				this.consumerConfigured = true;
 				if (adapterCfg.auditSourceId != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
-							.setAuditSourceId(adapterCfg.auditSourceId);
+					.setAuditSourceId(adapterCfg.auditSourceId);
 				}
 				if (adapterCfg.auditRepositoryUri != null) {
 					PIXConsumerAuditor
-							.getAuditor()
-							.getConfig()
-							.setAuditRepositoryUri(
-									adapterCfg.auditRepositoryUri);
+					.getAuditor()
+					.getConfig()
+					.setAuditRepositoryUri(
+							adapterCfg.auditRepositoryUri);
 				}
 				if (v3PixConsumer == null) {
 					v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
@@ -484,8 +484,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage
-						.setPatientMultipleBirthOrderNumber(multipleBirth
-								.getValue());
+				.setPatientMultipleBirthOrderNumber(multipleBirth
+						.getValue());
 				v3PixSourceMessage.setPatientMultipleBirthIndicator(true);
 			}
 		}
@@ -493,8 +493,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage
-						.setPatientMultipleBirthIndicator(multipleBirth
-								.getValue());
+				.setPatientMultipleBirthIndicator(multipleBirth
+						.getValue());
 			}
 		}
 	}
@@ -519,7 +519,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			AD patientAddress = PixPdqV3Utils.createAD(addressDt
 					.getLineFirstRep().getValue(), addressDt.getCity(), null,
 					addressDt.getState(), addressDt.getCountry(), addressDt
-							.getPostalCode(), adressOtherDesignation, null);
+					.getPostalCode(), adressOtherDesignation, null);
 			v3PixSourceMessage.setPatienttBirthPlace(patientAddress);
 		}
 	}
@@ -539,7 +539,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			String familyName = maidenName.getFamilyAsSingleString();
 			String givenName = maidenName.getGivenAsSingleString();
 			String otherName = ""; // other is resolved into given in
-									// addPatientName
+			// addPatientName
 			String prefixName = maidenName.getPrefixAsSingleString();
 			String suffixName = maidenName.getSuffixAsSingleString();
 			v3PixSourceMessage.setPatientMothersMaidenName(familyName,
@@ -891,7 +891,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 		if (!patient.getMaritalStatus().isEmpty()) {
 			v3PixSourceMessage.setPatientMaritalStatus(patient
 					.getMaritalStatus().getValueAsEnum().toArray()[0]
-					.toString());
+							.toString());
 		}
 	}
 

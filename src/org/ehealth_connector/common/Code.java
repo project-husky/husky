@@ -1,20 +1,22 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.common;
+
+import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
@@ -27,40 +29,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * (OID).
  */
 public class Code {
-
-	/**
-	 * <div class="en">Gets the translation or code.</div> <div class="de">Sucht
-	 * in einem CD-Objekt nach einem CodeSystem und liefert den dazugehörigen
-	 * Code zurück.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param codeSystem
-	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return <div class="en">the translation or code</div>
-	 */
-	public static Code getTranslationOrCode(String codeSystem, CD code) {
-		Code eHcCode;
-		if (code.getCode() == null) {
-			return null;
-		}
-		if (code.getCodeSystem().equals(codeSystem)) {
-			eHcCode = new Code(code);
-			return eHcCode;
-		} else {
-			for (CD mCd : code.getTranslations()) {
-				if (mCd.getCodeSystem().equals(codeSystem)) {
-					eHcCode = new Code(mCd);
-					return eHcCode;
-				}
-			}
-		}
-		return null;
-	}
 
 	CD mCD;
 
@@ -168,6 +136,52 @@ public class Code {
 	public Code(String codeSystem, String code, String codeSystemName,
 			String displayName) {
 		this(codeSystem, code, displayName);
+		mCD.setCodeSystemName(codeSystemName);
+	}
+
+	/**
+	 * Adds a translation to the code object
+	 * 
+	 * @param code
+	 *            the code
+	 */
+	public void addTranslation(Code code) {
+		mCD.getTranslations().add(code.getCD());
+	}
+
+	/**
+	 * Gets a list of translations for the code object.
+	 * 
+	 * @return an ArrayList, which contains all translation codes
+	 */
+	public ArrayList<Code> getTranslations() {
+		ArrayList<Code> cl = new ArrayList<Code>();
+		for (CD cd : mCD.getTranslations()) {
+			cl.add(new Code(cd));
+		}
+		return cl;
+	}
+
+	/**
+	 * Gets the name of the code system
+	 * 
+	 * @return the name of the code system. null, if it wasn´t set.
+	 */
+	public String getCodeSystemName() {
+		if (mCD.getCodeSystemName() != null) {
+			return mCD.getCodeSystemName();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the name of the code system
+	 * 
+	 * @param the
+	 *            name of the code system.
+	 */
+	public void setCodeSystemName(String codeSystemName) {
 		mCD.setCodeSystemName(codeSystemName);
 	}
 

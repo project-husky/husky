@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -22,7 +22,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
+import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
@@ -83,14 +83,13 @@ public class LaboratoryObservation {
 	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.Serologie code,
+			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
 			boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE
 				.createLaboratoryObservation().init();
 
 		setCode(code.getCode());
-		setImmuneProtection(immuneProtection);
 		setEffectiveTime(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
 	}
@@ -121,7 +120,7 @@ public class LaboratoryObservation {
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.Serologie code,
+			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
 			Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -157,7 +156,7 @@ public class LaboratoryObservation {
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.Serologie code,
+			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
 			Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -315,26 +314,26 @@ public class LaboratoryObservation {
 		return Util.convertIds(mLaboratoryObservation.getIds());
 	}
 
-	/**
-	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
-	 * Code).</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return true, wenn ein Impfschutz besteht, false sonst.
-	 */
-	public boolean getImmuneProtection() {
-		// mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-
-		if (mLaboratoryObservation
-				.getInterpretationCodes()
-				.get(0)
-				.getCode()
-				.equals(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
-						.getCodeValue())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// /**
+	// * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
+	// * Code).</div> <div class="fr"></div> <div class="it"></div>
+	// *
+	// * @return true, wenn ein Impfschutz besteht, false sonst.
+	// */
+	// public boolean getImmuneProtection() {
+	// // mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
+	//
+	// if (mLaboratoryObservation
+	// .getInterpretationCodes()
+	// .get(0)
+	// .getCode()
+	// .equals(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
+	// .getCodeValue())) {
+	// return true;
+	// } else {
+	// return false;
+	// }
+	// }
 
 	/**
 	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
@@ -451,32 +450,32 @@ public class LaboratoryObservation {
 		}
 	}
 
-	/**
-	 * Sets the immune protection.
-	 *
-	 * <div class="de">Setzt, ob ein Immunschutz besteht (Interpretations
-	 * Code)</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @param immuneProtection
-	 *            the new immune protection <div class="de">true, wenn ein
-	 *            Immunschutz besteht (Interpretation Code:
-	 *            POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN). false, wenn kein
-	 *            Immunschutz besteht (Interpretation Code:
-	 *            NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN)</div>
-	 */
-	public void setImmuneProtection(boolean immuneProtection) {
-		if (immuneProtection == false) {
-			mLaboratoryObservation
-					.getInterpretationCodes()
-					.add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
-							.getCE());
-		} else {
-			mLaboratoryObservation
-					.getInterpretationCodes()
-					.add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
-							.getCE());
-		}
-	}
+	// /**
+	// * Sets the immune protection.
+	// *
+	// * <div class="de">Setzt, ob ein Immunschutz besteht (Interpretations
+	// * Code)</div> <div class="fr"></div> <div class="it"></div>
+	// *
+	// * @param immuneProtection
+	// * the new immune protection <div class="de">true, wenn ein
+	// * Immunschutz besteht (Interpretation Code:
+	// * POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN). false, wenn kein
+	// * Immunschutz besteht (Interpretation Code:
+	// * NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN)</div>
+	// */
+	// public void setImmuneProtection(boolean immuneProtection) {
+	// if (immuneProtection == false) {
+	// mLaboratoryObservation
+	// .getInterpretationCodes()
+	// .add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
+	// .getCE());
+	// } else {
+	// mLaboratoryObservation
+	// .getInterpretationCodes()
+	// .add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
+	// .getCE());
+	// }
+	// }
 
 	/**
 	 * Sets the interpretation code.
@@ -484,7 +483,8 @@ public class LaboratoryObservation {
 	 * @param code
 	 *            the new interpretation code
 	 */
-	public void setInterpretationCode(ObservationInterpretation code) {
+	public void setInterpretationCode(
+			ObservationInterpretationForImmunization code) {
 		mLaboratoryObservation.getInterpretationCodes().clear();
 		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}

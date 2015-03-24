@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -47,45 +47,45 @@ public enum ImmunologicalDisorders {
 	 */
 	HUMAN_IMMUNODEFICIENCY_VIRUS_INFECTION("86406008",
 			"Human immunodeficiency virus infection"),
-	/**
-	 * <div class="de">Splenektomie</div> <div class="fr">Splénectomie</div>
-	 */
-	HO_SPLENECTOMY("161626009", "H/O: splenectomy"),
-	/**
-	 * <div class="de">Asplenie</div> <div class="fr">Asplénie</div>
-	 */
-	FUNCTIONAL_ASPLENIA("38096003", "Functional asplenia"),
-	/**
-	 * <div class="de">Antikörpermangel</div> <div class="fr">Déficience en
-	 * anticorps</div>
-	 */
-	SPECIFIC_ANTIBODY_DEFICIENCY("234556002", "Specific antibody deficiency"),
-	/**
-	 * <div class="de">Defizite des Komplementsystems</div> <div
-	 * class="fr">Déficits du système du complément</div>
-	 */
-	COMPLEMENT_DEFICIENCY_DISEASE("24743004", "Complement deficiency disease"),
-	/**
-	 * <div class="de">Sichelzellenanämie</div> <div class="fr">Anémie
-	 * falciforme</div>
-	 */
-	SICKLE_CELL_ANEMIA("160320002", "Sickle cell anemia"),
-	/**
-	 * <div class="de">Defizite im Mannan-bindenden Lektin</div> <div
-	 * class="fr">Déficits de la lectine de liaison des mannanes</div>
-	 */
-	MANNAN_BINDING_PROTEIN_DEFICIENCY("234579001",
-			"Mannan-binding protein deficiency"),
-	/**
-	 * <div class="de">Protein-C-Defizit</div> <div class="fr"> Déficit en
-	 * protéine C</div>
-	 */
-	PROTEIN_C_DEFICIENCY_DISEASE("76407009", "Protein C deficiency disease"),
-	/**
-	 * <div class="de">Protein-S-Defizit</div> <div class="fr"> Déficit en
-	 * protéine S</div>
-	 */
-	PROTEIN_S_DEFICIENCY_DISEASE("1563006", "Protein S deficiency disease ");
+			/**
+			 * <div class="de">Splenektomie</div> <div class="fr">Splénectomie</div>
+			 */
+			HO_SPLENECTOMY("161626009", "H/O: splenectomy"),
+			/**
+			 * <div class="de">Asplenie</div> <div class="fr">Asplénie</div>
+			 */
+			FUNCTIONAL_ASPLENIA("38096003", "Functional asplenia"),
+			/**
+			 * <div class="de">Antikörpermangel</div> <div class="fr">Déficience en
+			 * anticorps</div>
+			 */
+			SPECIFIC_ANTIBODY_DEFICIENCY("234556002", "Specific antibody deficiency"),
+			/**
+			 * <div class="de">Defizite des Komplementsystems</div> <div
+			 * class="fr">Déficits du système du complément</div>
+			 */
+			COMPLEMENT_DEFICIENCY_DISEASE("24743004", "Complement deficiency disease"),
+			/**
+			 * <div class="de">Sichelzellenanämie</div> <div class="fr">Anémie
+			 * falciforme</div>
+			 */
+			SICKLE_CELL_ANEMIA("160320002", "Sickle cell anemia"),
+			/**
+			 * <div class="de">Defizite im Mannan-bindenden Lektin</div> <div
+			 * class="fr">Déficits de la lectine de liaison des mannanes</div>
+			 */
+			MANNAN_BINDING_PROTEIN_DEFICIENCY("234579001",
+					"Mannan-binding protein deficiency"),
+					/**
+					 * <div class="de">Protein-C-Defizit</div> <div class="fr"> Déficit en
+					 * protéine C</div>
+					 */
+					PROTEIN_C_DEFICIENCY_DISEASE("76407009", "Protein C deficiency disease"),
+					/**
+					 * <div class="de">Protein-S-Defizit</div> <div class="fr"> Déficit en
+					 * protéine S</div>
+					 */
+					PROTEIN_S_DEFICIENCY_DISEASE("1563006", "Protein S deficiency disease ");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>

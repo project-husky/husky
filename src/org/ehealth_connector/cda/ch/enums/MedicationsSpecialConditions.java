@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -44,12 +44,12 @@ public enum MedicationsSpecialConditions {
 	 */
 	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003",
 			"Patient Not On Self-Medications"),
-	/**
-	 * <div class="de">Patient lehnt die Impfung ab</div> <div class="fr">Le
-	 * patient refuse la vaccination.</div>
-	 */
-	MEDICATION_REFUSED_PATIENT_OBJECTIVE("406149000",
-			"Medication refused, Patient Objective");
+			/**
+			 * <div class="de">Patient lehnt die Impfung ab</div> <div class="fr">Le
+			 * patient refuse la vaccination.</div>
+			 */
+			MEDICATION_REFUSED_PATIENT_OBJECTIVE("406149000",
+					"Medication refused, Patient Objective");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>

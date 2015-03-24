@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch;
 
@@ -277,7 +277,7 @@ public abstract class CdaCh {
 		}
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
 				"xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
-				+ "\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\""
+						+ "\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\""
 		// );
 	}
 
@@ -343,7 +343,7 @@ public abstract class CdaCh {
 						.getAssignedPerson() != null) {
 					org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(
 							doc.getDataEnterer().getAssignedEntity()
-							.getAssignedPerson());
+									.getAssignedPerson());
 					return person;
 				}
 			}
@@ -526,9 +526,9 @@ public abstract class CdaCh {
 		mdhtCustodian.setAssignedCustodian(assCust);
 
 		mdhtCustodian
-		.getAssignedCustodian()
-		.setRepresentedCustodianOrganization(
-				Util.createCustodianOrganizationFromOrganization(organization));
+				.getAssignedCustodian()
+				.setRepresentedCustodianOrganization(
+						Util.createCustodianOrganizationFromOrganization(organization));
 
 		// mdhtCustodian.setNullFlavor(NullFlavor.);
 		// Setzt die GLN des Arztes
@@ -537,7 +537,7 @@ public abstract class CdaCh {
 			id = organization.getMdhtOrganization().getIds().get(0);
 		}
 		mdhtCustodian.getAssignedCustodian()
-		.getRepresentedCustodianOrganization().getIds().add(id);
+				.getRepresentedCustodianOrganization().getIds().add(id);
 	}
 
 	public void setId(Identificator id) {

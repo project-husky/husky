@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -34,23 +34,23 @@ public enum ProblemsSpecialConditions {
 	 */
 	NO_SIGNIFICANT_MEDICAL_HISTORY("160243008",
 			"No Significant Medical History"),
-	/**
-	 * <div class="de">Patient hat keine aktuellen Probleme</div> <div
-	 * class="fr">Aucun problème actuel</div>
-	 */
-	NO_CURRENT_PROBLEMS_OR_DISABILITY("160245001",
-			"No current problems or disability"),
-	/**
-	 * <div class="de">Keine Anamnese bekannt</div> <div class="fr">Aucune
-	 * anamnèse connue</div>
-	 */
-	HISTORY_OF_PAST_ILLNESS_UNKNOWN("396782006",
-			"History of Past Illness unknown"),
-	/**
-	 * <div class="de">Keine Familienanamnese bekannt</div> <div
-	 * class="fr">Aucun antécédent familial connu</div>
-	 */
-	FAMILY_HISTORY_UNKNOWN("407559004", "Family History Unknown");
+			/**
+			 * <div class="de">Patient hat keine aktuellen Probleme</div> <div
+			 * class="fr">Aucun problème actuel</div>
+			 */
+			NO_CURRENT_PROBLEMS_OR_DISABILITY("160245001",
+					"No current problems or disability"),
+					/**
+					 * <div class="de">Keine Anamnese bekannt</div> <div class="fr">Aucune
+					 * anamnèse connue</div>
+					 */
+					HISTORY_OF_PAST_ILLNESS_UNKNOWN("396782006",
+							"History of Past Illness unknown"),
+							/**
+							 * <div class="de">Keine Familienanamnese bekannt</div> <div
+							 * class="fr">Aucun antécédent familial connu</div>
+							 */
+							FAMILY_HISTORY_UNKNOWN("407559004", "Family History Unknown");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>

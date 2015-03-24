@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.communication;
 
@@ -55,9 +55,9 @@ public class DocumentMetadataTest extends TestUtils {
 	public void testClassCode() {
 		d.setClassCode(new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult",
 				"Consultation")); // Just for the NIST-Repository: This code
-									// should also be optional, but the NIST
-									// repository prevents an automatic
-									// derivation from the typeCode
+		// should also be optional, but the NIST
+		// repository prevents an automatic
+		// derivation from the typeCode
 		assertEquals("1.3.6.1.4.1.21367.100.1", m.getClassCode()
 				.getSchemeName());
 		assertEquals("DEMO-Consult", m.getClassCode().getCode());
@@ -77,8 +77,8 @@ public class DocumentMetadataTest extends TestUtils {
 		d.setFormatCode(new Code("1.3.6.1.4.1.19376.1.2.3",
 				"urn:ihe:iti:xds-sd:pdf:2008",
 				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)")); // Can be
-																	// extracted
-																	// from CDA
+		// extracted
+		// from CDA
 		assertEquals("1.3.6.1.4.1.19376.1.2.3", m.getFormatCode()
 				.getSchemeName());
 		assertEquals("urn:ihe:iti:xds-sd:pdf:2008", m.getFormatCode().getCode());
@@ -92,7 +92,7 @@ public class DocumentMetadataTest extends TestUtils {
 	public void testHealthcareFacilityTypeCode() {
 		d.setHealthcareFacilityTypeCode(new Code("2.16.840.1.113883.5.11",
 				"AMB", "Ambulance")); // The codes here are specific for the
-										// affinity domain
+		// affinity domain
 		assertEquals("2.16.840.1.113883.5.11", m
 				.getHealthCareFacilityTypeCode().getSchemeName());
 		assertEquals("AMB", m.getHealthCareFacilityTypeCode().getCode());
@@ -114,8 +114,8 @@ public class DocumentMetadataTest extends TestUtils {
 	public void testPracticeSettingCode() {
 		d.setPracticeSettingCode(new Code("2.16.840.1.113883.6.96",
 				"394802001", "General Medicine")); // The codes here are
-													// specific for the affinity
-													// domain
+		// specific for the affinity
+		// domain
 		assertEquals("2.16.840.1.113883.6.96", m.getPracticeSettingCode()
 				.getSchemeName());
 		assertEquals("394802001", m.getPracticeSettingCode().getCode());

@@ -1,18 +1,18 @@
-/********************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- ********************************************************************************/
+/*******************************************************************************
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
@@ -40,7 +40,7 @@ import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretation;
+import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
@@ -266,11 +266,12 @@ public class CdaChVacdTest extends TestUtils {
 		i.setDosage(number);
 		i.setPerformer(performer1);
 		i.setCommentText(ts1);
+		i.setIntended();
 		try {
 			i.setExternalDocument(
 					new URL(
 							"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"),
-					numS1);
+							numS1);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -284,8 +285,7 @@ public class CdaChVacdTest extends TestUtils {
 		l.setCode(loincCode);
 		l.setLaboratory(organization1, endDate);
 		l.setEffectiveTime(startDate);
-		l.setImmuneProtection(true);
-		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
 		l.addValue(code2);
 		l.addValue(value1);
 		l.setCommentText(ts1);
@@ -673,6 +673,10 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(true, i.getProposed());
 		assertEquals(false, i.getIntended());
 
+		i.setIntended();
+		assertEquals(true, i.getIntended());
+		assertEquals(false, i.getProposed());
+
 		i.setPossibleAppliance(startDate, endDate);
 		assertEquals(startDateString + " - " + endDateString,
 				i.getPossibleAppliance());
@@ -704,7 +708,7 @@ public class CdaChVacdTest extends TestUtils {
 			i.setExternalDocument(
 					new URL(
 							"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"),
-					numS1);
+							numS1);
 			assertEquals(
 					"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
 					i.getExternalDocumentReferenceValue());
@@ -774,13 +778,10 @@ public class CdaChVacdTest extends TestUtils {
 		// assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
 		assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
 
-		l.setImmuneProtection(true);
-		assertTrue(l.getImmuneProtection());
-
-		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
 		assertEquals(
-				ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
-						.getCodeValue(), l.getInterpretationCode());
+				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
+				.getCodeValue(), l.getInterpretationCode());
 
 		l.addValue(code2);
 		assertTrue(TestUtils.isEqual(code2, l.getValue().getCode()));

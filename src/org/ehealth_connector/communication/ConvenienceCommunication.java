@@ -1,18 +1,18 @@
 /*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 Switzerland License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+*
+* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+* All rights reserved. http://medshare.net
+*
+* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+*
+* This code is are made available under the terms of the Eclipse Public License v1.0.
+*
+* Accompanying materials are made available under the terms of the Creative Commons
+* Attribution-ShareAlike 4.0 License.
+*
+* Year of publication: 2015
+*
+*******************************************************************************/
 
 package org.ehealth_connector.communication;
 
@@ -341,7 +341,7 @@ public class ConvenienceCommunication {
 			throws Exception {
 		// Cda Metadata extration is not implemented yet
 		System.out
-				.println("Trying to load from relative filePath: " + filePath);
+		.println("Trying to load from relative filePath: " + filePath);
 		InputStream inputStream = getClass().getResourceAsStream(filePath);
 		System.out.println("InputStream is:" + inputStream.toString());
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
@@ -436,14 +436,14 @@ public class ConvenienceCommunication {
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
 				.isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType()
-				.getConfidentialityCode() == null) {
+						.getConfidentialityCode() == null) {
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
-			.clear();
+					.clear();
 			docMetadata
-			.getMdhtDocumentEntryType()
-			.getConfidentialityCode()
-			.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
-					"N", null, null));
+					.getMdhtDocumentEntryType()
+					.getConfidentialityCode()
+					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
+							"N", null, null));
 		}
 
 		// Generate Creation Time with the current time
@@ -488,7 +488,7 @@ public class ConvenienceCommunication {
 
 		source = new B_Source(dest.getRegistryUri());
 		XDSSourceAuditor.getAuditor().getConfig()
-		.setAuditorEnabled(auditorEnabled);
+				.setAuditorEnabled(auditorEnabled);
 	}
 
 	/**
