@@ -1,31 +1,23 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication;
 
 import java.io.InputStream;
-import java.security.KeyStore;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -35,6 +27,7 @@ import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
+import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
@@ -72,244 +65,33 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class ConvenienceCommunication {
 
-	private static void setSSLFactories(InputStream keyStream,
-			String keyStorePassword, InputStream trustStream,
-			String trustStorePassword) throws Exception {
-		// Get keyStore
-		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-		// if your store is password protected then declare it (it can be null
-		// however)
-		char[] keyPassword = keyStorePassword.toCharArray();
-
-		// load the stream to your store
-		keyStore.load(keyStream, keyPassword);
-
-		// initialize a trust manager factory with the trusted store
-		KeyManagerFactory keyFactory = KeyManagerFactory
-				.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-		keyFactory.init(keyStore, keyPassword);
-
-		// get the trust managers from the factory
-		KeyManager[] keyManagers = keyFactory.getKeyManagers();
-
-		// Now get trustStore
-		KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-		// if your store is password protected then declare it (it can be null
-		// however)
-		char[] trustPassword = trustStorePassword.toCharArray();
-
-		// load the stream to your store
-		trustStore.load(trustStream, trustPassword);
-
-		// initialize a trust manager factory with the trusted store
-		TrustManagerFactory trustFactory = TrustManagerFactory
-				.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-		trustFactory.init(trustStore);
-
-		// get the trust managers from the factory
-		TrustManager[] trustManagers = trustFactory.getTrustManagers();
-
-		// initialize an ssl context to use these managers and set as default
-		sslContext = SSLContext.getInstance("SSL");
-		sslContext.init(keyManagers, trustManagers, null);
-		SSLContext.setDefault(sslContext);
-	}
-
-	// IBM Audit Repository
-	// public static final String IBM_ARR ="syslog://lswin10.dfw.ibm.com:515";
-
-	static SSLContext sslContext;
-
-	// /**
-	// * <p>
-	// * Anfrage einer Impfempfehlung (pseudonymisiert das Dokument vor dem
-	// * eigentlichen Versand ans Expertensystem). Die Kommunikation zum
-	// * Kommunikations-Endpunkt erfolgt gemäss <b>IHE [PCC-12] Request for
-	// Clinical
-	// * Guidance</b>.
-	// * </p>
-	// * <p>
-	// * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	// PCC
-	// * Care Manager Akteur</b>
-	// * </p>
-	// *
-	// * @param destination
-	// * Ziel der Übertragung (Kommunikations-Endpunkt)
-	// * @param doc
-	// * CDA-CH-VACD Dokument mit den Impfungen und anderen für die
-	// * Impfempfehlung relevanten Angaben eines Patienten.
-	// * @return CDA-CH-VACD Dokument, welches mit dem Parameter doc übergeben
-	// * worden ist und nun zusätzlich die Section mit den Impfempfehlungen
-	// * enthält
-	// *
-	// * @throws Exception
-	// * Fehler während der Übertragung
-	// */
-	// public static CdaChVacd getImmunizationRecommendationRequest(
-	// Destination destination, CdaChVacd doc) throws Exception {
-	// //TODO
-	// return null;
-	// }
-	//
-	// /**
-	// * <p>
-	// * Lädt CDA-Dokumente von einem Medium (Datenträger oder Pfad im
-	// Dateisystem;
-	// * gemäss IHE XDM). Die Verarbeitung des Mediums erfolgt gemäss
-	// <b>[ITI-32]
-	// * Distribute Document Set on Media</b>.
-	// * </p>
-	// * <p>
-	// * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	// ITI
-	// * Portable Media Importer Akteur</b>
-	// * </p>
-	// *
-	// * @param destination Pfad zum Datenträger von dem XDM-konforme Daten
-	// geladen werden
-	// * @return eine Liste von CDA-Dokumenten
-	// * @throws Exception the exception
-	// */
-	// public static ArrayList<ClinicalDocument> parseStoredCdaChVacd(File
-	// destination)
-	// throws Exception {
-	// //TODO
-	// return null;
-	// }
-	//
-	// /**
-	// * Speichert ein CDA Dokument für den Versand zu einer beliebigen
-	// Destination
-	// * auf einem Medium.
-	// *
-	// * @param destination Ziel der Übertragung (Kommunikations-Endpunkt)
-	// * @param doc CDA-CH Dokument
-	// */
-	// public static void storeOnMedia(Destination destination, CdaCh doc) {
-	// // TODO Auto-generated method stub
-	// }
-	//
-	// /**
-	// * <p>
-	// * Speichert ein CDA-Dokument inkl. der benötigten Metadaten auf einem
-	// * Datenträger (gemäss IHE XDM). Die Speicherung auf dem Medium erfolgt
-	// gemäss
-	// * <b>[ITI-32] Distribute Document Set on Media</b>.
-	// * </p>
-	// * <p>
-	// * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	// ITI
-	// * Portable Media Creator Akteur</b>
-	// * </p>
-	// *
-	// * @param destination Pfad zum Datenträger auf dem XDM-konforme Daten
-	// gespeichert werden
-	// * @param doc das CDA-Dokument, welches gespeichert werden soll
-	// * @return true, wenn das Dokument erfolgreich gespeichert wurde. Sonst:
-	// * false.
-	// * @throws Exception the exception
-	// */
-	// public static boolean storeOnMedia(File destination, ClinicalDocument
-	// doc)
-	// throws Exception {
-	// //TODO
-	// return false;
-	// }
-
-	// logger
-	/** The Constant logger. */
-	private static final Logger logger = Logger
-			.getLogger(ConvenienceCommunication.class);
-
-	// public DocumentMetadata addDocument(ClinicalDocument cdaDoc) throws
-	// Exception {
-	// //From Bytestream
-	// ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	// try {
-	// CDAUtil.save(cdaDoc, baos);
-	// } catch (final Exception e) {
-	// e.printStackTrace();
-	// }
-	// XDSDocument clinicalDocument = new
-	// XDSDocumentFromByteArray(DocumentDescriptor.CDA_R2, baos.toByteArray());
-	// String docEntryUUID = txnData.addDocument(clinicalDocument);
-	// DocumentMetadata docMetadata = new
-	// DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
-	//
-	// return docMetadata;
-	// }
+	private Destination destination = null;
 
 	/** The source. */
 	private B_Source source = null;
 
 	/** The organizational id. */
-	private final String organizationalId;
-
-	// private void generateMissingDocEntryAttributesCda(String docEntryUuid)
-	// throws Exception {
-	// ClinicalDocument cda =
-	// CDAUtil.load(txnData.getDocument(docEntryUuid).getStream());
-	// DocumentMetadata docMetadata = new
-	// DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
-	//
-	// //PatientId from recordTarget/patientRole
-	// if (cda.getPatientRoles()!=null &&
-	// docMetadata.getMdhtDocumentEntryType().getPatientId()==null) {
-	// if (cda.getPatientRoles().get(0).getIds()!=null) {
-	// docMetadata.getMdhtDocumentEntryType().setPatientId(XdsUtil.convertII(cda.getPatientRoles().get(0).getIds().get(0)));
-	// }
-	// }
-	//
-	// //TODO Später: Kann bei CDA Dokumenten gemacht werden, indem die
-	// TemplateIDs mit dieser Liste (als Enum) verglichen werden:
-	// http://wiki.ihe.net/index.php?title=IHE_Format_Codes
-	// //Currently only mapping to CDA-CH-VACD
-	// II medicalDocumentII =
-	// DatatypesFactory.eINSTANCE.createII("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2");
-	// II ii = org.ehealth_connector.common.Util.findII(cda.getTemplateIds(),
-	// medicalDocumentII);
-	// if (ii!=null) {
-	// Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3",
-	// "urn:ihe:pcc:ic:2009");
-	// docMetadata.setFormatCode(formatCode);
-	// }
-	//
-	// //Set the Document Code as TypeCode
-	// if (cda.getCode()!=null) {
-	// Code code = new Code(cda.getCode());
-	// docMetadata.setTypeCode(code);
-	// }
-	//
-	// //Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not a
-	// known Slot for the NIST Registry by deleting all authorTelecommunications
-	// for (Object object: docMetadata.getMdhtDocumentEntryType().getAuthors())
-	// {
-	// AuthorType at = (AuthorType) object;
-	// at.getAuthorTelecommunication().clear();
-	// }
-	//
-	// //Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
-	// to long for the registry (EXT part is larger than the allowed 16
-	// characters)
-	// docMetadata.setUniqueId(OID.createOIDGivenRoot(cda.getId().getRoot()));
-	// }
+	private String organizationalId;
 
 	/** The transaction data. */
-	SubmitTransactionData txnData;
+	protected SubmitTransactionData txnData;
 
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
-	 * @param organizationalId
-	 *            the organizational id (the OID of your Organization, e.g.
-	 *            "1.3.6.1.4.1.21367.2010.1.2.1")
-	 * @param repositoryUri
-	 *            the repository uri (the URI of the Communication Endpoint,
-	 *            e.g. the NIST Repository
-	 *            "http://ihexds.nist.gov/tf6/services/xdsrepositoryb")
+	 * @throws Exception
+	 *             the exception
+	 */
+	public ConvenienceCommunication() throws Exception {
+		txnData = new SubmitTransactionData();
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(false);
+	}
+
+	/**
+	 * Instantiates a new convenience communication.
+	 * 
+	 * @param dest
+	 *            the destination
 	 * @param auditorEnabled
 	 *            the auditor enabled
 	 * @throws Exception
@@ -318,8 +100,10 @@ public class ConvenienceCommunication {
 	public ConvenienceCommunication(Destination dest, boolean auditorEnabled)
 			throws Exception {
 		txnData = new SubmitTransactionData();
-		organizationalId = dest.getSenderOrganizationalOid();
-		setUp(dest, auditorEnabled);
+		setDestination(dest);
+
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(auditorEnabled);
 	}
 
 	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
@@ -337,16 +121,9 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
-			throws Exception {
-		// Cda Metadata extration is not implemented yet
-		System.out
-		.println("Trying to load from relative filePath: " + filePath);
-		InputStream inputStream = getClass().getResourceAsStream(filePath);
-		System.out.println("InputStream is:" + inputStream.toString());
+	public DocumentMetadata addDocument(DocumentDescriptor desc,
+			InputStream inputStream) throws Exception {
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-		// XDSDocument doc = new
-		// XDSDocumentFromStream(desc,this.getClass().getResourceAsStream(filePath));
 		String docEntryUUID = txnData.addDocument(doc);
 		DocumentMetadata docMetadata = new DocumentMetadata(
 				txnData.getDocumentEntry(docEntryUUID));
@@ -355,6 +132,71 @@ public class ConvenienceCommunication {
 		}
 
 		return docMetadata;
+	}
+
+	/**
+	 * Adds a document to the XDS Submission set.
+	 * 
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param filePath
+	 *            the file path
+	 * @return the document metadata (which have to be completed)
+	 * @throws Exception
+	 *             the exception
+	 */
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
+			throws Exception {
+		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+		String docEntryUUID = txnData.addDocument(doc);
+		DocumentMetadata docMetadata = new DocumentMetadata(
+				txnData.getDocumentEntry(docEntryUUID));
+		if (DocumentDescriptor.CDA_R2.equals(desc)) {
+			cdaFixes(docMetadata);
+		}
+
+		return docMetadata;
+	}
+
+	/**
+	 * Sets the destination
+	 * 
+	 * @param dest
+	 *            the destination
+	 */
+	public void setDestination(Destination dest) {
+		destination = dest;
+
+		organizationalId = dest.getSenderOrganizationalOid();
+		source = new B_Source(dest.getRegistryUri());
+
+		if (dest.getKeyStore() == null) {
+			System.clearProperty("javax.net.ssl.keyStore");
+			System.clearProperty("javax.net.ssl.keyStorePassword");
+			System.clearProperty("javax.net.ssl.trustStore");
+			System.clearProperty("javax.net.ssl.trustStorePassword");
+		} else {
+			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
+			System.setProperty("javax.net.ssl.keyStorePassword",
+					dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
+			System.setProperty("javax.net.ssl.trustStorePassword",
+					dest.getTrustStorePassword());
+		}
+	}
+
+	/**
+	 * Returns the current destination
+	 * 
+	 * @return the destination
+	 */
+	public Destination getDestination() {
+		return destination;
+	}
+
+	public void clearDocuments() {
+		txnData = new SubmitTransactionData();
 	}
 
 	// XDS: Interaktion mit einer IHE Registry - A8
@@ -461,7 +303,8 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Setting up the communication endpoint and the logger
+	 * <<<<<<< .mine ======= Setting up the communication endpoint and the
+	 * logger
 	 * 
 	 * @param repositoryUri
 	 *            the repository uri
@@ -492,6 +335,7 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * >>>>>>> .r360
 	 * <p>
 	 * Sendet ein CDA Dokument an einen Empfänger (Repository Akteur gemäss IHE
 	 * XDR oder IHE XDS). Die Kommunikation zum Kommunikations-Endpunkt erfolgt
