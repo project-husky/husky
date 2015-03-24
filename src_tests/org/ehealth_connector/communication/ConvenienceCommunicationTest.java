@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 import static org.junit.Assert.assertEquals;
@@ -33,17 +33,17 @@ public class ConvenienceCommunicationTest {
 	public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
 	// Keystore and Truststore for secured communication (in this example, we
 	// use one keystore file for those two)
-	public static final String KEY_STORE = "./rsc/testDocSource/security/keystore";
+	public static final String KEY_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore";
 	public static final String KEY_STORE_PASS = "nistbill";
-	public static final String TRUST_STORE = "./rsc/testDocSource/security/keystore";
+	public static final String TRUST_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore";
 	public static final String TRUST_STORE_PASS = "nistbill";
 
 	// The ID of your Organization
 	public static final String ORGANIZATIONAL_ID = "1.3.6.1.4.1.21367.2010.1.2.666";
 
 	// One PDF and one CDA Document that will be transfered
-	public static final String pdfFilePath = "./rsc/testDocSource/patientconsent.pdf";
-	public static final String cdaFilePath = "./rsc/testDocSource/CDA-CH-VACD_Impfausweis.xml";
+	public static final String pdfFilePath = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/patientconsent.pdf";
+	public static final String cdaFilePath = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/CDA-CH-VACD_Impfausweis.xml";
 	java.net.URI repUri;
 	Destination dest;
 	ConvenienceCommunication c;
