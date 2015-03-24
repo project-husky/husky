@@ -1,19 +1,18 @@
-/********************************************************************************
- *
+/*******************************************************************************
+ * 
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. http://medshare.net
- *
+ * 
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
+ * 
  * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 Switzerland License.
- *
+ * 
  * Year of publication: 2015
- *
- ********************************************************************************/
-
+ * 
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl.tests;
 
 import static org.junit.Assert.assertEquals;
@@ -48,13 +47,13 @@ import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.IntegerDt;
 import ca.uhn.fhir.parser.IParser;
+import ca.uhn.fhir.validation.FhirValidator;
+import ca.uhn.fhir.validation.ValidationResult;
 
 /**
  * Junit Tests for the FhirPatient
  * 
  * @see org.ehealth_connector.communication.mpi.FhirPatient
- * @author oliveregger
- * 
  */
 public class FhirPatientTests {
 
@@ -74,6 +73,96 @@ public class FhirPatientTests {
 		Patient conveniencePatient = new Patient(name, gender,
 				patientMueller.getBirthDate());
 		return conveniencePatient;
+	}
+
+	@Test
+	public void testFhirPatientLastGivenGenderBirthDayGenderMale() {
+		TestPatient patientMueller = TestPatient.getTestPatientMueller();
+		Patient conveniencePatient = getPatient(patientMueller);
+		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
+		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep()
+				.getGivenAsSingleString());
+		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep()
+				.getFamilyAsSingleString());
+		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
+		assertEquals(patientMueller.gender, fhirPatient.getGender());
+	}
+
+	@Test
+	public void testFhirPatientLastGivenGenderBirthDayGenderFemale() {
+		TestPatient patientMueller = TestPatient.getTestPatientMuellerPauline();
+		Patient conveniencePatient = getPatient(patientMueller);
+		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
+		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep()
+				.getGivenAsSingleString());
+		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep()
+				.getFamilyAsSingleString());
+		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
+		assertEquals(patientMueller.gender, fhirPatient.getGender());
+	}
+
+	@Test
+	public void testFhirPatientNames() {
+		Name name = new Name("given", "family", "prefix", "suffix");
+		Patient conveniencePatient = new Patient(name,
+				AdministrativeGender.MALE, new Date());
+		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
+		assertEquals("given", fhirPatient.getNameFirstRep()
+				.getGivenAsSingleString());
+		assertEquals("family", fhirPatient.getNameFirstRep()
+				.getFamilyAsSingleString());
+		assertEquals("prefix", fhirPatient.getNameFirstRep()
+				.getPrefixAsSingleString());
+		assertEquals("suffix", fhirPatient.getNameFirstRep()
+				.getSuffixAsSingleString());
+	}
+
+	@Test
+	public void testFhirPatientMiddleName() {
+		Name name = new Name("given", "family", "prefix", "suffix");
+		name.getMdhtPn().addGiven("middle");
+		name.getMdhtPn().addFamily("family2");
+		name.getMdhtPn().addPrefix("prefix2");
+		name.getMdhtPn().addSuffix("suffix2");
+		Patient conveniencePatient = new Patient(name,
+				AdministrativeGender.MALE, new Date());
+		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
+		assertEquals("given middle", fhirPatient.getNameFirstRep()
+				.getGivenAsSingleString());
+		assertEquals("family family2", fhirPatient.getNameFirstRep()
+				.getFamilyAsSingleString());
+		assertEquals("prefix prefix2", fhirPatient.getNameFirstRep()
+				.getPrefixAsSingleString());
+		assertEquals("suffix suffix2", fhirPatient.getNameFirstRep()
+				.getSuffixAsSingleString());
+	}
+
+	@Test
+	public void testFhirPatientAddress() {
+		Name name = new Name("given", "family", "prefix", "suffix");
+		Patient conveniencePatient = new Patient(name,
+				AdministrativeGender.MALE, new Date());
+
+		Address address = new Address("addressline1", "addressline2",
+				"addressline3", "zip", "city", AddressUse.PRIVATE);
+
+		address.getMdhtAdress().addCountry("cty");
+		address.getMdhtAdress().addState("state");
+
+		conveniencePatient.addAddress(address);
+
+		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
+
+		assertEquals("addressline1", fhirPatient.getAddressFirstRep().getLine()
+				.get(0).getValue());
+		assertEquals("addressline2", fhirPatient.getAddressFirstRep().getLine()
+				.get(1).getValue());
+		assertEquals("addressline3", fhirPatient.getAddressFirstRep().getLine()
+				.get(2).getValue());
+		assertEquals("zip", fhirPatient.getAddressFirstRep().getPostalCode());
+		assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
+		assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
+		assertEquals("state", fhirPatient.getAddressFirstRep().getState());
 	}
 
 	private Organization getScopingOrganization() {
@@ -152,143 +241,6 @@ public class FhirPatientTests {
 	}
 
 	@Test
-	public void testConveniencePatientBirthPlace() {
-		FhirPatient fhirPatient = new FhirPatient();
-
-		AddressDt addressDt = new AddressDt();
-		addressDt.setCity("Doncaster");
-
-		fhirPatient.setBirthPlace(addressDt);
-
-		assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace()
-				.getPlace().getAddr().getCities().get(0).getText());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
-	}
-
-	@Test
-	public void testConveniencePatientDeceasedDateTime() {
-		FhirPatient fhirPatient = new FhirPatient();
-		Date dtNow = new Date();
-		DateTimeDt dateTimeDt = new DateTimeDt(dtNow);
-
-		fhirPatient.setDeceased(dateTimeDt);
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals(dtNow, patient.getDeceasedTime());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertEquals(dtNow,
-				((DateTimeDt) fhirPatient2.getDeceased()).getValue());
-	}
-
-	@Test
-	public void testConveniencePatientDeceasedIndicator() {
-		FhirPatient fhirPatient = new FhirPatient();
-		BooleanDt booleanDt = new BooleanDt();
-		booleanDt.setValue(true);
-		fhirPatient.setDeceased(booleanDt);
-
-		Patient patient = fhirPatient.getPatient();
-		assertTrue(patient.getDeceasedInd().booleanValue());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertTrue(((BooleanDt) fhirPatient2.getDeceased()).getValue()
-				.booleanValue());
-	}
-
-	@Test
-	public void testConveniencePatientLanguage() {
-		FhirPatient fhirPatient = new FhirPatient();
-		CodeableConceptDt deCH = new CodeableConceptDt();
-		deCH.setText("de-CH");
-		CodeableConceptDt frCH = new CodeableConceptDt();
-		frCH.setText("fr-CH");
-
-		fhirPatient.getCommunication().add(deCH);
-		fhirPatient.getCommunication().add(frCH);
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals("de-CH", patient.getMdhtPatient()
-				.getLanguageCommunications().get(0).getLanguageCode().getCode());
-		assertEquals("fr-CH", patient.getMdhtPatient()
-				.getLanguageCommunications().get(1).getLanguageCode().getCode());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-
-		assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getText());
-		assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getText());
-	}
-
-	@Test
-	public void testConveniencePatientMaritialStatus() {
-		FhirPatient fhirPatient = new FhirPatient();
-		fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals("M", patient.getMdhtPatient().getMaritalStatusCode()
-				.getCode());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertEquals("M", fhirPatient2.getMaritalStatus().getValueAsEnum()
-				.toArray()[0].toString());
-	}
-
-	@Test
-	public void testConveniencePatientMothersName() {
-		FhirPatient fhirPatient = new FhirPatient();
-
-		assertTrue(fhirPatient.getMothersMaidenName().isEmpty());
-
-		HumanNameDt mothersMaidenName = new HumanNameDt();
-		mothersMaidenName.addFamily("Wiedmer");
-		fhirPatient.setMothersMaidenName(mothersMaidenName);
-
-		assertEquals("Wiedmer", fhirPatient.getMothersMaidenName()
-				.getFamilyAsSingleString());
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals("Wiedmer", patient.getMothersMaidenName());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertEquals("Wiedmer", fhirPatient2.getMothersMaidenName()
-				.getFamilyAsSingleString());
-	}
-
-	@Test
-	public void testConveniencePatientMultipleBirthIndicator() {
-		FhirPatient fhirPatient = new FhirPatient();
-		BooleanDt booleanDt = new BooleanDt();
-		booleanDt.setValue(true);
-		fhirPatient.setMultipleBirth(booleanDt);
-
-		Patient patient = fhirPatient.getPatient();
-		assertTrue(patient.getMultipleBirthInd().booleanValue());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertTrue(((BooleanDt) fhirPatient2.getMultipleBirth()).getValue()
-				.booleanValue());
-	}
-
-	@Test
-	public void testConveniencePatientMultipleBirthOrder() {
-		FhirPatient fhirPatient = new FhirPatient();
-		IntegerDt integerDt = new IntegerDt(2);
-		fhirPatient.setMultipleBirth(integerDt);
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals(2, patient.getMultipleBirthOrderNumber().intValue());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		assertEquals(2, ((IntegerDt) fhirPatient2.getMultipleBirth())
-				.getValue().intValue());
-	}
-
-	@Test
 	public void testConveniencePatientOrganization() {
 		FhirPatient fhirPatient = new FhirPatient();
 		fhirPatient.getManagingOrganization().setResource(
@@ -318,22 +270,6 @@ public class FhirPatientTests {
 				org.getIdentifierFirstRep().getSystem().substring(8));
 		assertEquals("Test", org.getName());
 		assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
-	}
-
-	@Test
-	public void testConveniencePatientReligiousAffiliation() {
-		FhirPatient fhirPatient = new FhirPatient();
-		CodeableConceptDt religion = new CodeableConceptDt();
-		religion.setText("1077");
-
-		fhirPatient.setReligiousAffiliation(religion);
-
-		Patient patient = fhirPatient.getPatient();
-		assertEquals("1077", patient.getReligiousAffiliation());
-
-		FhirPatient fhirPatient2 = new FhirPatient(patient);
-
-		assertEquals("1077", fhirPatient2.getReligiousAffiliation().getText());
 	}
 
 	@Test
@@ -409,93 +345,187 @@ public class FhirPatientTests {
 	}
 
 	@Test
-	public void testFhirPatientAddress() {
-		Name name = new Name("given", "family", "prefix", "suffix");
-		Patient conveniencePatient = new Patient(name,
-				AdministrativeGender.MALE, new Date());
+	public void testConveniencePatientLanguage() {
+		FhirPatient fhirPatient = new FhirPatient();
+		CodeableConceptDt deCH = new CodeableConceptDt();
+		deCH.setText("de-CH");
+		CodeableConceptDt frCH = new CodeableConceptDt();
+		frCH.setText("fr-CH");
 
-		Address address = new Address("addressline1", "addressline2",
-				"addressline3", "zip", "city", AddressUse.PRIVATE);
+		fhirPatient.getCommunication().add(deCH);
+		fhirPatient.getCommunication().add(frCH);
 
-		address.getMdhtAdress().addCountry("cty");
-		address.getMdhtAdress().addState("state");
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("de-CH", patient.getMdhtPatient()
+				.getLanguageCommunications().get(0).getLanguageCode().getCode());
+		assertEquals("fr-CH", patient.getMdhtPatient()
+				.getLanguageCommunications().get(1).getLanguageCode().getCode());
 
-		conveniencePatient.addAddress(address);
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
 
-		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
-
-		assertEquals("addressline1", fhirPatient.getAddressFirstRep().getLine()
-				.get(0).getValue());
-		assertEquals("addressline2", fhirPatient.getAddressFirstRep().getLine()
-				.get(1).getValue());
-		assertEquals("addressline3", fhirPatient.getAddressFirstRep().getLine()
-				.get(2).getValue());
-		assertEquals("zip", fhirPatient.getAddressFirstRep().getPostalCode());
-		assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
-		assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
-		assertEquals("state", fhirPatient.getAddressFirstRep().getState());
+		assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getText());
+		assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getText());
 	}
 
 	@Test
-	public void testFhirPatientLastGivenGenderBirthDayGenderFemale() {
-		TestPatient patientMueller = TestPatient.getTestPatientMuellerPauline();
-		Patient conveniencePatient = getPatient(patientMueller);
-		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
-		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep()
-				.getGivenAsSingleString());
-		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep()
-				.getFamilyAsSingleString());
-		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
-		assertEquals(patientMueller.gender, fhirPatient.getGender());
+	public void testConveniencePatientMaritialStatus() {
+		FhirPatient fhirPatient = new FhirPatient();
+		fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("M", patient.getMdhtPatient().getMaritalStatusCode()
+				.getCode());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals("M", fhirPatient2.getMaritalStatus().getValueAsEnum()
+				.toArray()[0].toString());
 	}
 
 	@Test
-	public void testFhirPatientLastGivenGenderBirthDayGenderMale() {
-		TestPatient patientMueller = TestPatient.getTestPatientMueller();
-		Patient conveniencePatient = getPatient(patientMueller);
-		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
-		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep()
-				.getGivenAsSingleString());
-		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep()
-				.getFamilyAsSingleString());
-		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
-		assertEquals(patientMueller.gender, fhirPatient.getGender());
+	public void testConveniencePatientReligiousAffiliation() {
+		FhirPatient fhirPatient = new FhirPatient();
+		CodeableConceptDt religion = new CodeableConceptDt();
+		religion.setText("1077");
+
+		fhirPatient.setReligiousAffiliation(religion);
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("1077", patient.getReligiousAffiliation());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+
+		assertEquals("1077", fhirPatient2.getReligiousAffiliation().getText());
 	}
 
 	@Test
-	public void testFhirPatientMiddleName() {
-		Name name = new Name("given", "family", "prefix", "suffix");
-		name.getMdhtPn().addGiven("middle");
-		name.getMdhtPn().addFamily("family2");
-		name.getMdhtPn().addPrefix("prefix2");
-		name.getMdhtPn().addSuffix("suffix2");
-		Patient conveniencePatient = new Patient(name,
-				AdministrativeGender.MALE, new Date());
-		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
-		assertEquals("given middle", fhirPatient.getNameFirstRep()
-				.getGivenAsSingleString());
-		assertEquals("family family2", fhirPatient.getNameFirstRep()
-				.getFamilyAsSingleString());
-		assertEquals("prefix prefix2", fhirPatient.getNameFirstRep()
-				.getPrefixAsSingleString());
-		assertEquals("suffix suffix2", fhirPatient.getNameFirstRep()
-				.getSuffixAsSingleString());
+	public void testConveniencePatientNation() {
+		FhirPatient fhirPatient = new FhirPatient();
+		CodeableConceptDt nation = new CodeableConceptDt();
+		nation.setText("CHE");
+
+		fhirPatient.setNation(nation);
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("CHE", patient.getNation());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+
+		assertEquals("CHE", fhirPatient2.getNation().getText());
 	}
 
 	@Test
-	public void testFhirPatientNames() {
-		Name name = new Name("given", "family", "prefix", "suffix");
-		Patient conveniencePatient = new Patient(name,
-				AdministrativeGender.MALE, new Date());
-		FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
-		assertEquals("given", fhirPatient.getNameFirstRep()
-				.getGivenAsSingleString());
-		assertEquals("family", fhirPatient.getNameFirstRep()
+	public void testConveniencePatientEmployeeOccupationCode() {
+		FhirPatient fhirPatient = new FhirPatient();
+		CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();
+		employeeOccupationCode.setText("employeeOccupationCode");
+		fhirPatient.setEmployeeOccupation(employeeOccupationCode);
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("employeeOccupationCode", patient.getEmployeeOccupation());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals("employeeOccupationCode", fhirPatient2
+				.getEmployeeOccupation().getText());
+	}
+
+	@Test
+	public void testConveniencePatientDeceasedIndicator() {
+		FhirPatient fhirPatient = new FhirPatient();
+		BooleanDt booleanDt = new BooleanDt();
+		booleanDt.setValue(true);
+		fhirPatient.setDeceased(booleanDt);
+
+		Patient patient = fhirPatient.getPatient();
+		assertTrue(patient.getDeceasedInd().booleanValue());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertTrue(((BooleanDt) fhirPatient2.getDeceased()).getValue()
+				.booleanValue());
+	}
+
+	@Test
+	public void testConveniencePatientDeceasedDateTime() {
+		FhirPatient fhirPatient = new FhirPatient();
+		Date dtNow = new Date();
+		DateTimeDt dateTimeDt = new DateTimeDt(dtNow);
+
+		fhirPatient.setDeceased(dateTimeDt);
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals(dtNow, patient.getDeceasedTime());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals(dtNow,
+				((DateTimeDt) fhirPatient2.getDeceased()).getValue());
+	}
+
+	@Test
+	public void testConveniencePatientMultipleBirthIndicator() {
+		FhirPatient fhirPatient = new FhirPatient();
+		BooleanDt booleanDt = new BooleanDt();
+		booleanDt.setValue(true);
+		fhirPatient.setMultipleBirth(booleanDt);
+
+		Patient patient = fhirPatient.getPatient();
+		assertTrue(patient.getMultipleBirthInd().booleanValue());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertTrue(((BooleanDt) fhirPatient2.getMultipleBirth()).getValue()
+				.booleanValue());
+	}
+
+	@Test
+	public void testConveniencePatientMultipleBirthOrder() {
+		FhirPatient fhirPatient = new FhirPatient();
+		IntegerDt integerDt = new IntegerDt(2);
+		fhirPatient.setMultipleBirth(integerDt);
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals(2, patient.getMultipleBirthOrderNumber().intValue());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals(2, ((IntegerDt) fhirPatient2.getMultipleBirth())
+				.getValue().intValue());
+	}
+
+	@Test
+	public void testConveniencePatientMothersName() {
+		FhirPatient fhirPatient = new FhirPatient();
+
+		assertTrue(fhirPatient.getMothersMaidenName().isEmpty());
+
+		HumanNameDt mothersMaidenName = new HumanNameDt();
+		mothersMaidenName.addFamily("Wiedmer");
+		fhirPatient.setMothersMaidenName(mothersMaidenName);
+
+		assertEquals("Wiedmer", fhirPatient.getMothersMaidenName()
 				.getFamilyAsSingleString());
-		assertEquals("prefix", fhirPatient.getNameFirstRep()
-				.getPrefixAsSingleString());
-		assertEquals("suffix", fhirPatient.getNameFirstRep()
-				.getSuffixAsSingleString());
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("Wiedmer", patient.getMothersMaidenName());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals("Wiedmer", fhirPatient2.getMothersMaidenName()
+				.getFamilyAsSingleString());
+	}
+
+	@Test
+	public void testConveniencePatientBirthPlace() {
+		FhirPatient fhirPatient = new FhirPatient();
+
+		AddressDt addressDt = new AddressDt();
+		addressDt.setCity("Doncaster");
+
+		fhirPatient.setBirthPlace(addressDt);
+
+		assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
+
+		Patient patient = fhirPatient.getPatient();
+		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace()
+				.getPlace().getAddr().getCities().get(0).getText());
+
+		FhirPatient fhirPatient2 = new FhirPatient(patient);
+		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
 	}
 
 	@Test
@@ -555,6 +585,29 @@ public class FhirPatientTests {
 
 		CodeableConceptDt religion = new CodeableConceptDt();
 		religion.setText("1077");
+		fhirPatient.setReligiousAffiliation(religion);
+
+		CodeableConceptDt nation = new CodeableConceptDt();
+		nation.setText("CHE");
+		fhirPatient.setNation(nation);
+
+		CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();
+		employeeOccupationCode.setText("employeeOccupationCode");
+		fhirPatient.setEmployeeOccupation(employeeOccupationCode);
+
+		FhirValidator val = ctx.newValidator();
+		ValidationResult result = val.validateWithResult(fhirPatient);
+		if (result.isSuccessful()) {
+			System.out.println("Validation passed");
+		} else {
+			// We failed validation!
+			System.out.println("Validation failed");
+			// The result contains an OperationOutcome outlining the failures
+			String results = ctx.newXmlParser().setPrettyPrint(true)
+					.encodeResourceToString(result.getOperationOutcome());
+			System.out.println(results);
+		}
+		assertTrue(result.isSuccessful());
 
 		String stringPatient = ctx.newXmlParser().encodeResourceToString(
 				fhirPatient);

@@ -1,19 +1,18 @@
-/********************************************************************************
- *
+/*******************************************************************************
+ * 
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. http://medshare.net
- *
+ * 
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
+ * 
  * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 Switzerland License.
- *
+ * 
  * Year of publication: 2015
- *
- ********************************************************************************/
-
+ * 
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
 import java.util.Date;
@@ -69,8 +68,6 @@ import ca.uhn.fhir.model.primitive.StringDt;
  * Resource and provides convenience methods to translate between the
  * convenience patient in the ehealthconeector and back
  * 
- * @author oliveregger
- * 
  * @see http://jamesagnew.github.io/hapi-fhir/index.html
  */
 @ResourceDef(name = "Patient")
@@ -85,6 +82,16 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	@Extension(url = "http://hl7.org/fhir/ExtensionDefinition/us-core-religion", definedLocally = false, isModifier = false)
 	@Description(shortDefinition = "The religious Affiliation of the patient")
 	private CodeableConceptDt religiousAffiliation;
+
+	@Child(name = "nation")
+	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/nation", definedLocally = false, isModifier = false)
+	@Description(shortDefinition = "The nation of the patient")
+	private CodeableConceptDt nation;
+
+	@Child(name = "employeeOccupation")
+	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/employeeOccupation", definedLocally = false, isModifier = false)
+	@Description(shortDefinition = "The employee OccupationCode of the patient")
+	private CodeableConceptDt employeeOccupation;
 
 	/**
 	 * Instantiates a new fhir patient.
@@ -282,151 +289,20 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			this.setReligiousAffiliation(religiousAffiliation);
 		}
 
-	}
-
-	/**
-	 * converts the mdht AD to the fhir address
-	 * 
-	 * @param address
-	 * @return
-	 */
-	private AddressDt convertAddress(AD address) {
-		if (address == null) {
-			return null;
-		}
-		AddressDt addressDt = new AddressDt();
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 0) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(0).getText());
-		}
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 1) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(1).getText());
-		}
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 2) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(2).getText());
-		}
-		if (address.getCities() != null && address.getCities().size() > 0) {
-			addressDt.setCity(address.getCities().get(0).getText());
-		}
-		if (address.getPostalCodes() != null
-				&& address.getPostalCodes().size() > 0) {
-			addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
-		}
-		if (address.getStates() != null && address.getStates().size() > 0) {
-			addressDt.setState(address.getStates().get(0).getText());
-		}
-		if (address.getCountries() != null && address.getCountries().size() > 0) {
-			addressDt.setCountry(address.getCountries().get(0).getText());
-		}
-		if (address.getUses() != null && address.getCountries().size() > 0) {
-			switch (address.getUses().get(0)) {
-			case H:
-			case HP:
-				addressDt.setUse(AddressUseEnum.HOME);
-				break;
-			case WP:
-				addressDt.setUse(AddressUseEnum.WORK);
-				break;
-			}
-
-		}
-		return addressDt;
-	}
-
-	/**
-	 * converts the fhir address to the convenience address
-	 * 
-	 * @param address
-	 * @return
-	 */
-	private Address convertAddress(AddressDt addressDt) {
-		if (addressDt == null) {
-			return null;
+		// nationCode
+		if (patient.getNation() != null) {
+			CodeableConceptDt nationCode = new CodeableConceptDt();
+			nationCode.setText(patient.getNation());
+			this.setNation(nationCode);
 		}
 
-		String addressline1 = "";
-		String addressline2 = "";
-		String addressline3 = "";
-
-		if (addressDt.getLine().size() > 2) {
-			addressline3 = addressDt.getLine().get(2).getValueAsString();
-		}
-		if (addressDt.getLine().size() > 1) {
-			addressline2 = addressDt.getLine().get(1).getValueAsString();
-		}
-		if (addressDt.getLine().size() > 0) {
-			addressline1 = addressDt.getLine().get(0).getValueAsString();
+		// employeeOccupationcode
+		if (patient.getEmployeeOccupation() != null) {
+			CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();
+			employeeOccupationCode.setText(patient.getEmployeeOccupation());
+			this.setEmployeeOccupation(employeeOccupationCode);
 		}
 
-		String city = "";
-		if (addressDt.getCity() != null) {
-			city = addressDt.getCity();
-		}
-		String zip = "";
-		if (addressDt.getPostalCode() != null) {
-			zip = addressDt.getPostalCode();
-		}
-
-		AddressUse addressUse = null;
-		if (addressDt.getUseElement() != null
-				&& addressDt.getUseElement().getValueAsEnum() != null) {
-			switch (addressDt.getUseElement().getValueAsEnum()) {
-			case HOME:
-				addressUse = AddressUse.PRIVATE;
-				break;
-			case WORK:
-				addressUse = AddressUse.BUSINESS;
-				break;
-			}
-		}
-		Address patientAddress = new Address(addressline1, addressline2,
-				addressline3, zip, city, addressUse);
-		if (addressDt.getState() != null) {
-			patientAddress.getMdhtAdress().addState(addressDt.getState());
-		}
-		if (addressDt.getCountry() != null) {
-			patientAddress.getMdhtAdress().addCountry(addressDt.getCountry());
-		}
-
-		return patientAddress;
-	}
-
-	/**
-	 * Gets the birth place.
-	 * 
-	 * @return the birth place
-	 */
-	public AddressDt getBirthPlace() {
-		return birthPlace;
-	}
-
-	/**
-	 * Gets the maiden name, implementation might change, because it is yet an
-	 * open issue how it is stored in pdqm/fhir
-	 * 
-	 * @return
-	 */
-	public HumanNameDt getMothersMaidenName() {
-		for (Contact contact : getContact()) {
-			for (CodeableConceptDt codeableConceptDt : contact
-					.getRelationship()) {
-				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
-					if ("parent".equals(codingDt.getCode())
-							&& "female".equals(contact.getGender())) {
-						if ((NameUseEnum.MAIDEN.equals(contact.getName()
-								.getUseElement().getValueAsEnum()))) {
-							return contact.getName();
-						}
-					}
-				}
-			}
-		}
-		return new HumanNameDt();
 	}
 
 	/**
@@ -633,11 +509,154 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			patient.setReligiousAffiliation(getReligiousAffiliation().getText());
 		}
 
+		// nationCode
+		if (getNation() != null && !getNation().isEmpty()) {
+			patient.setNation(getNation().getText());
+		}
+
+		// employeeOccupationCode
+		if (getEmployeeOccupation() != null
+				&& !getEmployeeOccupation().isEmpty()) {
+			patient.setEmployeeOccupation(getEmployeeOccupation().getText());
+		}
+
 		return patient;
 	}
 
-	public CodeableConceptDt getReligiousAffiliation() {
-		return religiousAffiliation;
+	/**
+	 * converts the mdht AD to the fhir address
+	 * 
+	 * @param address
+	 * @return
+	 */
+	private AddressDt convertAddress(AD address) {
+		if (address == null) {
+			return null;
+		}
+		AddressDt addressDt = new AddressDt();
+		if (address.getStreetAddressLines() != null
+				&& address.getStreetAddressLines().size() > 0) {
+			addressDt.addLine().setValue(
+					address.getStreetAddressLines().get(0).getText());
+		}
+		if (address.getStreetAddressLines() != null
+				&& address.getStreetAddressLines().size() > 1) {
+			addressDt.addLine().setValue(
+					address.getStreetAddressLines().get(1).getText());
+		}
+		if (address.getStreetAddressLines() != null
+				&& address.getStreetAddressLines().size() > 2) {
+			addressDt.addLine().setValue(
+					address.getStreetAddressLines().get(2).getText());
+		}
+		if (address.getCities() != null && address.getCities().size() > 0) {
+			addressDt.setCity(address.getCities().get(0).getText());
+		}
+		if (address.getPostalCodes() != null
+				&& address.getPostalCodes().size() > 0) {
+			addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
+		}
+		if (address.getStates() != null && address.getStates().size() > 0) {
+			addressDt.setState(address.getStates().get(0).getText());
+		}
+		if (address.getCountries() != null && address.getCountries().size() > 0) {
+			addressDt.setCountry(address.getCountries().get(0).getText());
+		}
+		if (address.getUses() != null && address.getCountries().size() > 0) {
+			switch (address.getUses().get(0)) {
+			case H:
+			case HP:
+				addressDt.setUse(AddressUseEnum.HOME);
+				break;
+			case WP:
+				addressDt.setUse(AddressUseEnum.WORK);
+				break;
+			}
+
+		}
+		return addressDt;
+	}
+
+	/**
+	 * converts the fhir address to the convenience address
+	 * 
+	 * @param address
+	 * @return
+	 */
+	private Address convertAddress(AddressDt addressDt) {
+		if (addressDt == null) {
+			return null;
+		}
+
+		String addressline1 = "";
+		String addressline2 = "";
+		String addressline3 = "";
+
+		if (addressDt.getLine().size() > 2) {
+			addressline3 = addressDt.getLine().get(2).getValueAsString();
+		}
+		if (addressDt.getLine().size() > 1) {
+			addressline2 = addressDt.getLine().get(1).getValueAsString();
+		}
+		if (addressDt.getLine().size() > 0) {
+			addressline1 = addressDt.getLine().get(0).getValueAsString();
+		}
+
+		String city = "";
+		if (addressDt.getCity() != null) {
+			city = addressDt.getCity();
+		}
+		String zip = "";
+		if (addressDt.getPostalCode() != null) {
+			zip = addressDt.getPostalCode();
+		}
+
+		AddressUse addressUse = null;
+		if (addressDt.getUseElement() != null
+				&& addressDt.getUseElement().getValueAsEnum() != null) {
+			switch (addressDt.getUseElement().getValueAsEnum()) {
+			case HOME:
+				addressUse = AddressUse.PRIVATE;
+				break;
+			case WORK:
+				addressUse = AddressUse.BUSINESS;
+				break;
+			}
+		}
+		Address patientAddress = new Address(addressline1, addressline2,
+				addressline3, zip, city, addressUse);
+		if (addressDt.getState() != null) {
+			patientAddress.getMdhtAdress().addState(addressDt.getState());
+		}
+		if (addressDt.getCountry() != null) {
+			patientAddress.getMdhtAdress().addCountry(addressDt.getCountry());
+		}
+
+		return patientAddress;
+	}
+
+	/**
+	 * Gets the maiden name, implementation might change, because it is yet an
+	 * open issue how it is stored in pdqm/fhir
+	 * 
+	 * @return
+	 */
+	public HumanNameDt getMothersMaidenName() {
+		for (Contact contact : getContact()) {
+			for (CodeableConceptDt codeableConceptDt : contact
+					.getRelationship()) {
+				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
+					if ("parent".equals(codingDt.getCode())
+							&& "female".equals(contact.getGender())) {
+						if ((NameUseEnum.MAIDEN.equals(contact.getName()
+								.getUseElement().getValueAsEnum()))) {
+							return contact.getName();
+						}
+					}
+				}
+			}
+		}
+		return new HumanNameDt();
 	}
 
 	/**
@@ -649,6 +668,15 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	public void setBirthPlace(AddressDt address) {
 		birthPlace = address;
 
+	}
+
+	/**
+	 * Gets the birth place.
+	 * 
+	 * @return the birth place
+	 */
+	public AddressDt getBirthPlace() {
+		return birthPlace;
 	}
 
 	/**
@@ -680,8 +708,50 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		mother.setName(maidenName);
 	}
 
+	public CodeableConceptDt getReligiousAffiliation() {
+		return religiousAffiliation;
+	}
+
 	public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
 		this.religiousAffiliation = religiousAffiliation;
+	}
+
+	/**
+	 * Gets the nation.
+	 * 
+	 * @return the nation
+	 */
+	public CodeableConceptDt getNation() {
+		return nation;
+	}
+
+	/**
+	 * Sets the nation.
+	 * 
+	 * @param nation
+	 *            the new nation
+	 */
+	public void setNation(CodeableConceptDt nation) {
+		this.nation = nation;
+	}
+
+	/**
+	 * Gets the employee occupation.
+	 * 
+	 * @return the employee occupation
+	 */
+	public CodeableConceptDt getEmployeeOccupation() {
+		return employeeOccupation;
+	}
+
+	/**
+	 * Sets the employee occupation.
+	 * 
+	 * @param employeeOccupation
+	 *            the new employee occupation
+	 */
+	public void setEmployeeOccupation(CodeableConceptDt employeeOccupation) {
+		this.employeeOccupation = employeeOccupation;
 	}
 
 }

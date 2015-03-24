@@ -83,6 +83,16 @@ public class Patient extends Person {
 	private String mothersMaidenName;
 
 	/**
+	 * nation code for pix v3
+	 */
+	private String nation;
+
+	/**
+	 * employeeOccupationCode for pix v3
+	 */
+	private String employeeOccupation;
+
+	/**
 	 * religious Affiliation
 	 */
 	private String religiousAffiliation;
@@ -304,7 +314,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the deceased Indicator
-	 *
+	 * 
 	 * @return the deceased ind
 	 */
 	public Boolean getDeceasedInd() {
@@ -313,7 +323,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the deceased time.
-	 *
+	 * 
 	 * @return the deceased time
 	 */
 	public Date getDeceasedTime() {
@@ -364,7 +374,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the mothers maiden name.
-	 *
+	 * 
 	 * @return the mothers maiden name
 	 */
 	public String getMothersMaidenName() {
@@ -373,7 +383,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the multiple birth Indictator
-	 *
+	 * 
 	 * @return the multiple birth ind
 	 */
 	public Boolean getMultipleBirthInd() {
@@ -382,7 +392,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the multiple birth order number.
-	 *
+	 * 
 	 * @return the multiple birth order number
 	 */
 	public Integer getMultipleBirthOrderNumber() {
@@ -417,7 +427,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the religious affiliation.
-	 *
+	 * 
 	 * @return the religious affiliation
 	 */
 	public String getReligiousAffiliation() {
@@ -474,7 +484,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the deceased Indicator
-	 *
+	 * 
 	 * @param deceasedInd
 	 *            the new deceased ind
 	 */
@@ -484,7 +494,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the deceased time.
-	 *
+	 * 
 	 * @param deceasedTime
 	 *            the new deceased time
 	 */
@@ -494,7 +504,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the mothers maiden name.
-	 *
+	 * 
 	 * @param mothersMaidenName
 	 *            the new mothers maiden name
 	 */
@@ -504,7 +514,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the multiple birth Indicator
-	 *
+	 * 
 	 * @param multipleBirthInd
 	 *            the new multiple birth ind
 	 */
@@ -514,7 +524,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the multiple birth order number.
-	 *
+	 * 
 	 * @param multipleBirthOrderNumber
 	 *            the new multiple birth order number
 	 */
@@ -524,7 +534,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the religious affiliation.
-	 *
+	 * 
 	 * @param religiousAffiliation
 	 *            the new religious affiliation
 	 */
@@ -544,5 +554,43 @@ public class Patient extends Person {
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+	}
+
+	/**
+	 * Gets the nation.
+	 * 
+	 * @return the nation
+	 */
+	public String getNation() {
+		return nation;
+	}
+
+	/**
+	 * Sets the nation.
+	 * 
+	 * @param nation
+	 *            the new nation
+	 */
+	public void setNation(String nation) {
+		this.nation = nation;
+	}
+
+	/**
+	 * Gets the employee occupation.
+	 * 
+	 * @return the employee occupation
+	 */
+	public String getEmployeeOccupation() {
+		return employeeOccupation;
+	}
+
+	/**
+	 * Sets the employee occupation.
+	 * 
+	 * @param employeeOccupation
+	 *            the new employee occupation
+	 */
+	public void setEmployeeOccupation(String employeeOccupation) {
+		this.employeeOccupation = employeeOccupation;
 	}
 }

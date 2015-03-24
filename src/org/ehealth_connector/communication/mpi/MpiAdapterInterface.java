@@ -1,4 +1,4 @@
-/********************************************************************************
+/*******************************************************************************
  *
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. http://medshare.net
@@ -12,14 +12,11 @@
  *
  * Year of publication: 2015
  *
- ********************************************************************************/
-
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
 /**
  * General adapter Inteface for an MPI implementation.
- * 
- * @author oliveregger
  */
 public interface MpiAdapterInterface {
 

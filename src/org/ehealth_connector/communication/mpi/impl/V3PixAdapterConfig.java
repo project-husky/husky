@@ -20,7 +20,6 @@ import java.net.URI;
 /**
  * V3PixAdapterConfig configuration parameters for V3PixAdapter
  * 
- * @author oliveregger
  */
 public class V3PixAdapterConfig {
 

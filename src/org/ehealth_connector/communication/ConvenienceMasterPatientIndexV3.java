@@ -1,4 +1,4 @@
-/********************************************************************************
+/*******************************************************************************
  *
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. http://medshare.net
@@ -12,8 +12,7 @@
  *
  * Year of publication: 2015
  *
- ********************************************************************************/
-
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
@@ -33,30 +32,30 @@ import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;
  * from ITI-44 Patient Identity Feed HL7 V3 and the Actor Patient Identifier
  * Cross-reference Consumer from ITI-45 PIXV3 Query to communicate with an MPI.
  * 
- * @author oliveregger
+ * <div class="de">
+ * <p>
+ * Diese Klasse stellt Methoden für die Kommunikation mit einem Master Patient
+ * Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse mit HL7 V3 (PIX
+ * V3)
  * 
- *         <div class="de">
- *         <p>
- *         Diese Klasse stellt Methoden für die Kommunikation mit einem Master
- *         Patient Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse
- *         mit HL7 V3 (PIX V3)
- * 
- *         Die Klasse implementiert folgende IHE Akteure und Transaktionen:
- *         <ul>
- *         <li><b>IHE PIX V3 Patient Identity Source Akteur</b></li>
- *         <ul>
- *         <li>[ITI-44] Patient Identity Feed</li>
- *         </ul>
- *         <li><b>IHE PIX V3 Patient Identifier Cross-Reference Consumer
- *         Akteur</b></li>
- *         <ul>
- *         <li>[ITI-45] PIX Query</li>
- *         </ul>
- *         </ul>
- *         </p>
- *         </div>
+ * Die Klasse implementiert folgende IHE Akteure und Transaktionen:
+ * <ul>
+ * <li><b>IHE PIX V3 Patient Identity Source Akteur</b></li>
+ * <ul>
+ * <li>[ITI-44] Patient Identity Feed</li>
+ * </ul>
+ * <li><b>IHE PIX V3 Patient Identifier Cross-Reference Consumer Akteur</b></li>
+ * <ul>
+ * <li>[ITI-45] PIX Query</li>
+ * </ul>
+ * </ul>
+ * </p>
+ * </div>
  */
 public class ConvenienceMasterPatientIndexV3 {
+
+	static private Log log = LogFactory
+			.getLog(ConvenienceMasterPatientIndexV3.class);
 
 	/**
 	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source –
@@ -262,8 +261,5 @@ public class ConvenienceMasterPatientIndexV3 {
 		boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
 		return ret;
 	}
-
-	static private Log log = LogFactory
-			.getLog(ConvenienceMasterPatientIndexV3.class);
 
 }

@@ -30,8 +30,6 @@ import org.junit.Test;
  * Junit Tests for the ImMemoryMpiAdapter
  * 
  * @see org.ehealth_connector.communication.mpi.impl.InMemoryMockMpiAdapter
- * @author oliveregger
- * 
  */
 public class InMemoryMockMpiAdapterTests {
 

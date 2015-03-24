@@ -47,9 +47,6 @@ import ca.uhn.fhir.model.primitive.DateDt;
  * 
  * ATTENTION: You need to start the testtool and need to get the parameters from
  * webpage otherwise the test will not run through
- * 
- * @author oliveregger
- * 
  */
 @Ignore
 public class V3PixAdapterPixPdqNistPreCatTests {

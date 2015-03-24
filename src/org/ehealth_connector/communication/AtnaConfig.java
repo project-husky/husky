@@ -1,4 +1,4 @@
-/********************************************************************************
+/*******************************************************************************
  *
  * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. http://medshare.net
@@ -12,14 +12,11 @@
  *
  * Year of publication: 2015
  *
- ********************************************************************************/
-
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 /**
  * The Class AtnaConfig.
- * 
- * @author oliveregger
  */
 public class AtnaConfig {
 
@@ -31,7 +28,7 @@ public class AtnaConfig {
 
 	/**
 	 * Gets the audit repository uri.
-	 *
+	 * 
 	 * @return the audit repository uri
 	 */
 	public String getAuditRepositoryUri() {
@@ -40,7 +37,7 @@ public class AtnaConfig {
 
 	/**
 	 * Gets the audit source id.
-	 *
+	 * 
 	 * @return the audit source id
 	 */
 	public String getAuditSourceId() {
@@ -49,7 +46,7 @@ public class AtnaConfig {
 
 	/**
 	 * Sets the audit repository uri.
-	 *
+	 * 
 	 * @param auditRepositoryUri
 	 *            the new audit repository uri
 	 */
@@ -59,7 +56,7 @@ public class AtnaConfig {
 
 	/**
 	 * Sets the audit source id.
-	 *
+	 * 
 	 * @param auditSourceId
 	 *            the new audit source id
 	 */

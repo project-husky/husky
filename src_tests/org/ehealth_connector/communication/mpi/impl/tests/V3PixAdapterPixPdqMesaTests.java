@@ -16,6 +16,8 @@
 
 package org.ehealth_connector.communication.mpi.impl.tests;
 
+import org.junit.Ignore;
+
 /**
  * See Mesa Tools TODO for installation
  * 
@@ -44,12 +46,11 @@ package org.ehealth_connector.communication.mpi.impl.tests;
  * Soap messages must be sent to this endpoint
  * (http://<serverAdr>:<port>/mesa/test).
  * 
- * @author oliveregger
- * 
- *         FIXME currently the tools returns a java exception before running a
- *         test (classpath issue?)
+ * FIXME currently the tools returns a java exception before running a test
+ * (classpath issue?)
  * 
  */
+@Ignore
 public class V3PixAdapterPixPdqMesaTests {
 
 }

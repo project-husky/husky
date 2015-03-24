@@ -29,8 +29,6 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  * InMemoryMockMpiAdapter to test a basic MPI with no crossmatching of patient
  * for testing Note: No production use, no demographic data is stored, just the
  * identifier.
- * 
- * @author oliveregger
  */
 public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
@@ -46,6 +44,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
 	/**
 	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.communication.mpi.FhirPatient)
+	 *      note: no demographic information is stored
 	 */
 	@Override
 	public boolean addPatient(FhirPatient patient) {
@@ -62,8 +61,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 				return false;
 			}
 			FhirPatient immutablePatient = new FhirPatient();
-			// TODO: just copied the id of the patient currently, no demographic
-			// data
+			// just copied the id of the patient currently, no demographic data
 			immutablePatient.setIdentifier(patient.getIdentifier());
 			IdentifierDt id = immutablePatient.addIdentifier();
 			id.setSystem("urn:oid:" + mpiCommunityOid);
@@ -259,6 +257,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
 	/**
 	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
+	 *      note: no demographic information is stored
 	 */
 	@Override
 	public boolean updatePatient(FhirPatient patient) {
@@ -271,8 +270,8 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 			if (map.containsKey(mapKey)) {
 				FhirPatient oldPatient = map.get(mapKey);
 				FhirPatient immutablePatient = new FhirPatient();
-				// TODO: just copied the id of the patient currently, no
-				// demographic data
+				// just copied the id of the patient currently, no demographic
+				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
 				IdentifierDt id = immutablePatient.addIdentifier();
 				id.setSystem("urn:oid:" + mpiCommunityOid);
