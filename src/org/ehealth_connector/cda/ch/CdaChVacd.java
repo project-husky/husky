@@ -441,7 +441,7 @@ public class CdaChVacd extends CdaCh {
         setNarrativeTextLaboratoryObservation(allComments);
       }
       else {
-        setNarrativeTextLaboratoryObservation("");
+        setNarrativeTextLaboratoryObservation("-");
       }
 
     }

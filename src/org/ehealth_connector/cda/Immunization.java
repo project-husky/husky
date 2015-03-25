@@ -35,7 +35,6 @@ import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;

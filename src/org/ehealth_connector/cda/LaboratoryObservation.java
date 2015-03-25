@@ -511,9 +511,11 @@ public class LaboratoryObservation {
 		Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
 		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 
+		if (laboratory.getId()!=null) {
 		II ii = DatatypesFactory.eINSTANCE.createII(
 				CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
 		asEnt.getIds().add(ii);
+		}
 
 		asEnt.getRepresentedOrganizations().add(
 				laboratory.copyMdhtOrganization());

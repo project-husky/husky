@@ -190,7 +190,7 @@ public class CdaChVacdTest extends TestUtils {
 	}
 	
 	public Reason createReason2() {
-	      Reason r = new Reason(url, numS1);
+	      Reason r = new Reason(code1, url, numS1);
 	      return r;
 	}
 

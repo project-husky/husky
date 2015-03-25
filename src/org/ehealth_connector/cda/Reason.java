@@ -54,8 +54,8 @@ public class Reason {
     mReason.setCode(code.getCD());
   }
   
-  public Reason(URL reference, String id) {
-    this(new Code(NullFlavor.NAV));
+  public Reason(Code code, URL reference, String id) {
+    this(code);
     initExtRef();
     setReference(reference);
     setReferenceId(id);
@@ -85,6 +85,7 @@ public class Reason {
     // Set attributes
     e.setClassCode(ActClassDocument.DOC);
     e.setMoodCode(ActMood.EVN);
+    setReferenceId(null);
   }
   
   /**

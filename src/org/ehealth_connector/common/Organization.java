@@ -142,7 +142,10 @@ public class Organization {
 	 * @return ID der Organisation
 	 */
 	public String getId() {
-		return getMdhtOrganization().getIds().get(0).getExtension();
+	  if (getMdhtOrganization().getIds().size()>0) {
+	  		return getMdhtOrganization().getIds().get(0).getExtension();
+	  }
+	  return null;
 	}
 
 	/**
