@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
@@ -493,6 +494,18 @@ public abstract class CdaCh {
 		// save resource to console
 		resource.save(oFile, null);
 	}
+	
+	 /**
+     * Gets the Confidentially Code
+     * 
+     * @return code
+     */
+	   public Confidentiality getConfidentialityCode() {
+	        if (doc.getConfidentialityCode() != null) {
+	            return Confidentiality.getEnum(doc.getConfidentialityCode().getCode());
+	        }
+	        return null;
+	    }
 
 	/**
 	 * Sets Confidentially Code

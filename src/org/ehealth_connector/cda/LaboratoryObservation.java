@@ -27,6 +27,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
@@ -83,13 +84,13 @@ public class LaboratoryObservation {
 	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
+			Code code,
 			boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE
 				.createLaboratoryObservation().init();
 
-		setCode(code.getCode());
+		setCode(code);
 		setEffectiveTime(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
 	}
@@ -120,7 +121,7 @@ public class LaboratoryObservation {
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
+			Code code,
 			Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -156,7 +157,7 @@ public class LaboratoryObservation {
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(
-			org.ehealth_connector.cda.ch.enums.SerologieForVACD code,
+			Code code,
 			Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
@@ -211,6 +212,9 @@ public class LaboratoryObservation {
 		}
 		if (value.isCode()) {
 			mLaboratoryObservation.getValues().add(value.copyMdhtCode());
+		}
+		if (value.isRto()) {
+		  mLaboratoryObservation.getValues().add(value.copyMdhtRto());
 		}
 	}
 
@@ -522,7 +526,12 @@ public class LaboratoryObservation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		mLaboratoryObservation.getPerformers().add(perf);
+	}
+	
+	public void addPerformer(Performer performer, Date dateTimeOfResult) {
+	  Performer2 mPerformer = performer.copyMdhtPerfomer();
+	  mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
+	  mLaboratoryObservation.getPerformers().add(mPerformer);
 	}
 }

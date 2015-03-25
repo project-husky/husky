@@ -47,7 +47,7 @@ public class Performer {
 		// add time
 		setTimeValue(new Date());
 	}
-
+	
 	public Performer(Name name) {
 		this();
 		addName(name);

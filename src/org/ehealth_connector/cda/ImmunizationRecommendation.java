@@ -51,6 +51,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
@@ -164,8 +165,8 @@ public class ImmunizationRecommendation {
 	 * @param code
 	 *            Code for the illness
 	 */
-	public void addReason(Code code) {
-		mImmunizationRecommendation.addObservation(createReason(code));
+	public void addReason(Reason reason) {
+		mImmunizationRecommendation.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
 		mImmunizationRecommendation
 		.getEntryRelationships()
 		.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
@@ -177,6 +178,21 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
+   * Gets a list of reasons for the immunizationRecommendation (typically a reference to an external BAG document)).
+   *
+   * @return A ArrayList of Resons
+   * 
+   */
+  public ArrayList<Reason> getReasons() {
+  	ArrayList<Reason> cl = new ArrayList<Reason>();
+  	EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation.getCDACHMSETBodyImmunizationL3Reasons();
+  	for (CDACHMSETBodyImmunizationL3Reason er : erl) {
+  		cl.add(new Reason(er));
+  	}
+  	return cl;
+  }
+
+  /**
 	 * <div class="de">Copy mdht immunization recommendation.</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 *
@@ -185,56 +201,6 @@ public class ImmunizationRecommendation {
 	 */
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
 		return EcoreUtil.copy(mImmunizationRecommendation);
-	}
-
-	private CDACHMSETBodyImmunizationL3Reason createReason(Code code) {
-		CDACHMSETBodyImmunizationL3Reason t = CHFactory.eINSTANCE
-				.createCDACHMSETBodyImmunizationL3Reason().init();
-		// Fix Template ID
-		for (II i : t.getTemplateIds()) {
-			if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
-				i.setExtension("CDA-CH.VACD.Body.MediL3.Reason");
-			}
-		}
-		// Set Status Code
-		t.setStatusCode(StatusCode.COMPLETED.getCS());
-
-		// Set Code
-		t.setCode(code.getCD());
-
-		return t;
-	}
-
-	private CDACHBodyExtRef createReferenceExternalDocument(URL reference,
-			String id) {
-		CDACHBodyExtRef r = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
-		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
-		r.setExternalDocument(e);
-
-		// Fix Template ID
-		r.getTemplateIds().clear();
-		II ii = DatatypesFactory.eINSTANCE.createII("2.16.756.5.30.1.1.1.1.1",
-				"CDA-CH.Body.ExtRef");
-		r.getTemplateIds().add(ii);
-
-		// Set attributes
-		e.setClassCode(ActClassDocument.DOC);
-		e.setMoodCode(ActMood.EVN);
-
-		// Create Reference
-		e.setText(Util.createReference(reference.toString()));
-
-		// Set the id or generate if null
-		II docIi = DatatypesFactory.eINSTANCE.createII();
-		docIi.setRoot("2.16.756.5.30.1.1.1.1.3.6.21");
-		if (id == null) {
-			docIi.setExtension(org.openhealthtools.ihe.utils.UUID.generate());
-		} else {
-			docIi.setExtension(id);
-		}
-		e.getIds().add(docIi);
-
-		return r;
 	}
 
 	/**
@@ -313,39 +279,39 @@ public class ImmunizationRecommendation {
 		return null;
 	}
 
-	/**
-	 * Gets the Id of the reference to an external document
-	 * 
-	 * @return the id.
-	 */
-	public Identificator getExternalDocumentId() {
-		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-				.getReferences());
-		if (docRef != null && docRef.getExternalDocument() != null
-				&& docRef.getExternalDocument().getIds() != null) {
-			return new Identificator(docRef.getExternalDocument().getIds()
-					.get(0));
-		} else
-			return null;
-	}
-
-	/**
-	 * Gets the Value of the reference to an external document
-	 * 
-	 * @return the reference. Typically a URL (e.g.
-	 *         'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-	 */
-	public String getExternalDocumentReferenceValue() {
-		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-				.getReferences());
-		if (docRef != null && docRef.getExternalDocument() != null
-				&& docRef.getExternalDocument().getText() != null
-				&& docRef.getExternalDocument().getText().getText() != null) {
-			return docRef.getExternalDocument().getText().getReference()
-					.getValue();
-		} else
-			return null;
-	}
+//	/**
+//	 * Gets the Id of the reference to an external document
+//	 * 
+//	 * @return the id.
+//	 */
+//	public Identificator getExternalDocumentId() {
+//		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
+//				.getReferences());
+//		if (docRef != null && docRef.getExternalDocument() != null
+//				&& docRef.getExternalDocument().getIds() != null) {
+//			return new Identificator(docRef.getExternalDocument().getIds()
+//					.get(0));
+//		} else
+//			return null;
+//	}
+//
+//	/**
+//	 * Gets the Value of the reference to an external document
+//	 * 
+//	 * @return the reference. Typically a URL (e.g.
+//	 *         'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+//	 */
+//	public String getExternalDocumentReferenceValue() {
+//		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
+//				.getReferences());
+//		if (docRef != null && docRef.getExternalDocument() != null
+//				&& docRef.getExternalDocument().getText() != null
+//				&& docRef.getExternalDocument().getText().getText() != null) {
+//			return docRef.getExternalDocument().getText().getReference()
+//					.getValue();
+//		} else
+//			return null;
+//	}
 
 	/**
 	 * Gets the id.
@@ -428,27 +394,6 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * Gets a list of reasons for the immunization (the illnesses, which the
-	 * immunization should prevent).
-	 *
-	 * @return A ArrayList of Code
-	 * 
-	 */
-	public ArrayList<Code> getReasons() {
-		ArrayList<Code> cl = new ArrayList<Code>();
-		EList<EntryRelationship> erl = mImmunizationRecommendation
-				.getEntryRelationships();
-		for (EntryRelationship er : erl) {
-			if (er.getTypeCode()
-					.equals(x_ActRelationshipEntryRelationship.RSON)) {
-				Observation o = er.getObservation();
-				cl.add(new Code(o.getCode()));
-			}
-		}
-		return cl;
-	}
-
-	/**
 	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden
 	 * soll.</div> <div class="fr"></div> <div class="it"></div>
 	 *
@@ -525,29 +470,6 @@ public class ImmunizationRecommendation {
 			ivl_pq.setValue(doseQuantity);
 			mImmunizationRecommendation.setDoseQuantity(ivl_pq);
 		}
-	}
-
-	/**
-	 * Sets a reference to an external Document.
-	 * 
-	 * @param reference
-	 *            The Reference URL (e.g.
-	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-	 */
-	public void setExternalDocument(URL reference) {
-		setExternalDocument(reference, null);
-	}
-
-	/**
-	 * Sets a reference to an external Document.
-	 * 
-	 * @param reference
-	 *            The Reference URL (e.g.
-	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-	 */
-	public void setExternalDocument(URL reference, String id) {
-		mImmunizationRecommendation.getReferences().add(
-				createReferenceExternalDocument(reference, id));
 	}
 
 	/**

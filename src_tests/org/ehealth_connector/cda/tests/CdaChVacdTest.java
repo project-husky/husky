@@ -16,12 +16,14 @@
 package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
@@ -35,6 +37,7 @@ import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.Pregnancy;
 import org.ehealth_connector.cda.Problem;
+import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
@@ -103,6 +106,9 @@ public class CdaChVacdTest extends TestUtils {
 	private Comment c1;
 	private Comment c2;
 	private Code whoAtcCode;
+	private Reason reason1;
+	private Reason reason2;
+	private URL url;
 
 	private Performer performer1;
 
@@ -177,6 +183,16 @@ public class CdaChVacdTest extends TestUtils {
 		c.setLotNr(numS2);
 		return consumable1;
 	}
+	
+	public Reason createReason1() {
+	  Reason r = new Reason(code1);
+	  return r;
+	}
+	
+	public Reason createReason2() {
+	      Reason r = new Reason(url, numS1);
+	      return r;
+	}
 
 	public Consumable createConsumable1() {
 		Consumable c = new Consumable(ts1, new Code(
@@ -248,8 +264,9 @@ public class CdaChVacdTest extends TestUtils {
 		i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
 		i.setCommentText(ts1);
 		i.setPerformer(author1);
-		i.addReason(code1);
-		i.addReason(code2);
+		i.addReason(reason1);
+		i.addReason(reason1);
+		i.setIntended();
 		return i;
 	}
 
@@ -267,15 +284,8 @@ public class CdaChVacdTest extends TestUtils {
 		i.setPerformer(performer1);
 		i.setCommentText(ts1);
 		i.setIntended();
-		try {
-			i.setExternalDocument(
-					new URL(
-							"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"),
-							numS1);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		i.addReason(reason2);
+		//i.addReason(reason2);
 		return i;
 	}
 
@@ -346,6 +356,12 @@ public class CdaChVacdTest extends TestUtils {
 		number = 121241241.212323;
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
+		try {
+		  url = new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
+    } catch (MalformedURLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
 		// Convenience API Types
 		code1 = createCode1();
@@ -371,6 +387,8 @@ public class CdaChVacdTest extends TestUtils {
 		consumable1 = createConsumable2();
 		problem1 = createProblemEntry();
 		problem2 = createProblemEntry();
+		reason1 = createReason1();
+		reason2 = createReason2();
 
 		allergyProblem1 = createAllergyProblem();
 
@@ -694,29 +712,13 @@ public class CdaChVacdTest extends TestUtils {
 		i.setPerformer(performer1);
 		assertTrue(isEqual(name1, i.getPerformer().getName()));
 
-		i.addReason(code1);
-		assertNotNull(i.getReasons());
-		assertTrue(isEqual(code1, i.getReasons().get(0)));
-
-		i.addReason(code2);
-		assertTrue(isEqual(code2, i.getReasons().get(1)));
-
 		i.setCommentText(ts2);
 		assertEquals(ts2, i.getCommentText());
 
-		try {
-			i.setExternalDocument(
-					new URL(
-							"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de"),
-							numS1);
-			assertEquals(
-					"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
-					i.getExternalDocumentReferenceValue());
-			assertEquals(numS1, i.getExternalDocumentId().getExtension());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		i.addReason(reason2);
+		ArrayList<Reason>  r = i.getReasons();
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",i.getReasons().get(0).getReference());
+		assertEquals(numS1, i.getReasons().get(0).getReferenceId());
 	}
 
 	// 1
@@ -751,15 +753,19 @@ public class CdaChVacdTest extends TestUtils {
 		assertNotNull(i.getPerformer());
 		assertTrue(isEqual(author1.getName(), i.getPerformer().getName()));
 
-		i.addReason(code1);
+		i.addReason(reason1);
 		assertNotNull(i.getReasons());
-		assertTrue(isEqual(code1, i.getReasons().get(0)));
+		assertTrue(isEqual(code1, i.getReasons().get(0).getCode()));
 
-		i.addReason(code2);
-		assertTrue(isEqual(code2, i.getReasons().get(1)));
+		i.addReason(reason1);
+		assertTrue(isEqual(code1, i.getReasons().get(1).getCode()));
 
 		i.setCommentText(ts1);
 		assertEquals(ts1, i.getCommentText());
+		
+		assertFalse(i.getIntended());
+		i.setIntended();
+		assertTrue(i.getIntended());
 	}
 
 	// 8
@@ -854,5 +860,18 @@ public class CdaChVacdTest extends TestUtils {
 
 		p.addValue(value2);
 		assertEquals(true, TestUtils.isEqual(value2, p.getValues().get(2)));
+	}
+	
+	@Test
+	public void testReasonSetterGetter()  {
+	  Reason r1 = new Reason();
+	  r1.setCode(code1);
+	  assertTrue(isEqual(code1, r1.getCode()));
+	  
+	  r1.setReference(url);
+	  assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", r1.getReference());
+	  
+	  r1.setReferenceId(numS1);
+	  assertEquals(numS1, r1.getReferenceId());
 	}
 }

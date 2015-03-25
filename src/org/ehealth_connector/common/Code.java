@@ -23,6 +23,7 @@ import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Ein Code bestehend aus eigentlichem Code und dem zugehörigen Codesystem
@@ -58,6 +59,11 @@ public class Code {
 	 */
 	public Code(Code code) {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
+	}
+	
+	public Code(NullFlavor nullFlavor) {
+	  mCD = DatatypesFactory.eINSTANCE.createCD();
+	  mCD.setNullFlavor(nullFlavor);
 	}
 
 	/**
@@ -303,5 +309,17 @@ public class Code {
 	 */
 	public void setCodeSystem(String oid) {
 		mCD.setCodeSystem(oid);
+	}
+	
+	public void setNullFlavor(NullFlavor nf) {
+	  mCD.setNullFlavor(nf);
+	}
+	
+	public NullFlavor getNullFlavor() {
+	  return mCD.getNullFlavor();
+	}
+	
+	public boolean isNullFlavor() {
+	  return mCD.isNullFlavorDefined();
 	}
 }

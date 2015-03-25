@@ -125,7 +125,7 @@ public class CdaChTests extends TestUtils {
 		assertEquals(startDate.getTime(), c.getTimestamp().getTime());
 		c.setConfidentialityCode(Confidentiality.RESTRICED);
 		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(),
-				c.getConfidentialityCode()));
+				c.getConfidentialityCode().getCode()));
 		// doc id root
 		assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
 		// set Version
