@@ -152,7 +152,9 @@ public class Code {
 	 *            the code
 	 */
 	public void addTranslation(Code code) {
+	  if (code!=null) {
 		mCD.getTranslations().add(code.getCD());
+	  }
 	}
 
 	/**
