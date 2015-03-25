@@ -295,7 +295,7 @@ public class CdaChVacdTest extends TestUtils {
 		l.setCode(loincCode);
 		l.setLaboratory(organization1, endDate);
 		l.setEffectiveTime(startDate);
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		l.addValue(code2);
 		l.addValue(value1);
 		l.setCommentText(ts1);
@@ -784,9 +784,9 @@ public class CdaChVacdTest extends TestUtils {
 		// assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
 		assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
 
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN);
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		assertEquals(
-				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
+				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN
 				.getCodeValue(), l.getInterpretationCode());
 
 		l.addValue(code2);

@@ -62,6 +62,7 @@ public class Performer {
     setTimeValue(new Date());
 
     setOrganization(organization);
+    mAsEntity.getIds().addAll(organization.copyMdhtOrganization().getIds());
   }
 
   /**
