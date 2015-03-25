@@ -39,8 +39,8 @@ public enum ObservationInterpretationForImmunization {
 			 * werden</div> <div class="fr">Négatif: L’agent pathogène n’a pas pu être
 			 * dépisté dans l’échantillon</div>
 			 */
-			NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN("NEG",
-					"Negative: Pathogen couldn't be determined in speci-men");
+			NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN("NEG",
+					"Negative: Pathogen couldn't be determined in specimen");
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -61,7 +61,7 @@ public enum ObservationInterpretationForImmunization {
 
 	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
 
-	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN_CODE = "NEG";
+	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
 	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.83";
 
 	public static final String CODE_SYSTEM_NAME = "HL7 ObservationInterpretation ";
