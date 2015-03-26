@@ -19,10 +19,10 @@ package org.ehealth_connector.communication;
 import java.net.URI;
 
 /**
- * The Class Destination.
+ * The Class Destination. Describes an Endpoint for a transmission or communication.
  */
 /**
- * @author Axel
+ * @author ahel
  *
  */
 public class Destination {
@@ -118,10 +118,18 @@ public class Destination {
 		this.trustStorePassword = trustStorePassword;
 	}
 
+	/**
+	 * Gets the path to the keystore
+	 * @return path to the keystore as string
+	 */
 	public String getKeyStore() {
 		return keyStore;
 	}
 
+	/**
+	 * Gets the passoword for the keystore
+	 * @return password of the keystore
+	 */
 	public String getKeyStorePassword() {
 		return keyStorePassword;
 	}
@@ -183,23 +191,48 @@ public class Destination {
 	public String getSenderFacilityOid() {
 		return senderFacilityOid;
 	}
-
+	
+	/**
+	 * Gets the sender Organizational OID
+	 * 
+	 * @return sender Organizational OID
+	 */
 	public String getSenderOrganizationalOid() {
 		return senderOrganizationalOid;
 	}
 
+	/**
+	 * Gets the path to the truststore
+	 * 
+	 * @return path to the trust store as string
+	 */
 	public String getTrustStore() {
 		return trustStore;
 	}
 
+	/**
+	 * Gets the password for the trust store
+	 * 
+	 * @return password for the trust store as string
+	 */
 	public String getTrustStorePassword() {
 		return trustStorePassword;
 	}
 
+	/**
+	 * Sets the path to the key store
+	 * 
+	 * @param keyStore path
+	 */
 	public void setKeyStore(String keyStore) {
 		this.keyStore = keyStore;
 	}
 
+	/**
+	 * Sets the password for the key store
+	 * 
+	 * @param keyStorePassword
+	 */
 	public void setKeyStorePassword(String keyStorePassword) {
 		this.keyStorePassword = keyStorePassword;
 	}

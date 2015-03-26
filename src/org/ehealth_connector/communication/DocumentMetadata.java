@@ -22,6 +22,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -39,8 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * Stellt die Metadaten gemäss [IHE ITI TF-3], Table 4.1-5: Document Metadata
- * Attribute Definition bereit
+ * Provides metadata attributes as specified in [IHE ITI TF-3], Table 4.1-5: Document Metadata
  * */
 public class DocumentMetadata {
 
@@ -150,9 +150,8 @@ public class DocumentMetadata {
 	 *            the code
 	 */
 	@SuppressWarnings("unchecked")
-	public void addConfidentiallyCode(String code) {
-		// TODO Consider Enum here
-		xDoc.getConfidentialityCode().add(code);
+	public void addConfidentiallyCode(Confidentiality code) {
+		xDoc.getConfidentialityCode().add(code.getCode());
 	}
 
 	/**
