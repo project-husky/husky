@@ -239,6 +239,18 @@ public class Util {
 		ce.setNullFlavor(NullFlavor.UNK);
 		return ce;
 	}
+	
+	   /**
+     * <div class="en">Creates the ce null flavor UNK.</div> <div
+     * class="de"></div> <div class="fr"></div> <div class="it"></div>
+     *
+     * @return the ce
+     */
+    public static CD createCDNullFlavorUNK() {
+        CD ce = DatatypesFactory.eINSTANCE.createCD();
+        ce.setNullFlavor(NullFlavor.UNK);
+        return ce;
+    }
 
 	/**
 	 * <div class="en">Creates the code null flavor.</div> <div

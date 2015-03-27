@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
@@ -29,6 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
  * Ein Autor (meist ein Arzt).
@@ -319,8 +321,8 @@ public class Author {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mAuthor.getAssignedAuthor()
-				.getTelecoms());
+		Telecoms telecoms = new Telecoms((EList<TEL>) EcoreUtil.copyAll(mAuthor.getAssignedAuthor()
+				.getTelecoms()));
 		return telecoms;
 	}
 
@@ -385,7 +387,7 @@ public class Author {
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mAuthor.getAssignedAuthor().getTelecoms()
-		.addAll(telecoms.getMdhtTelecoms());
+		.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 
 	/**

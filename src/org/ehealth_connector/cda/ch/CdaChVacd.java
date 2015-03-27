@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.CodedResults;
+import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
@@ -47,10 +48,12 @@ import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
@@ -67,12 +70,9 @@ import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -198,7 +198,7 @@ public class CdaChVacd extends CdaCh {
         // create the CDA level 1 text
         aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
       } else {
-        setNarrativeTextActiveProblemConcerns("");
+        setNarrativeTextActiveProblemConcerns("Problemliste Texte werden (noch) generiert");
       }
     } else {
       aps.createStrucDocText("Keine Angaben");
@@ -236,7 +236,7 @@ public class CdaChVacd extends CdaCh {
         // create the CDA level 1 text
         ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
       } else {
-        setNarrativeTextAllergyProblemConcerns("");
+        setNarrativeTextAllergyProblemConcerns("Allergie Texte werden (noch) generiert");
       }
     } else {
       ars.createStrucDocText("Keine Angaben");
@@ -247,24 +247,26 @@ public class CdaChVacd extends CdaCh {
   /**
    * Setzt das Gestationsalter
    *
-   * @param gestationalAge the new gestational age
+   * @param codedResults the new gestational age
    */
-  public void addCodedResults(CodedResults gestationalAge) {
+  public void addCodedResults(CodedResults codedResults) {
     SimpleTextBuilder sb;
 
     // update the MDHT Object content references to CDA level 1 text
-    sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getCodedResultsText());
+    if (codedResults instanceof GestationalAge) {
+      GestationalAge gestationalAge = (GestationalAge) codedResults;
+      sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getCodedResultsText());
 
-    ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
-    gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(EcoreUtil.copy(reference));
-    gestationalAge.getMdhtGestationalAgeDaysObservation().setText(EcoreUtil.copy(reference));
+      ED reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.CODED_RESULTS.getContentIdPrefix());
+      gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(EcoreUtil.copy(reference));
+      gestationalAge.getMdhtGestationalAgeDaysObservation().setText(EcoreUtil.copy(reference));
 
-    // create the CDA level 1 text
-    gestationalAge.getMdhtCodedResultsSection().createStrucDocText(sb.toString());
+      // create the CDA level 1 text
+      gestationalAge.getMdhtCodedResultsSection().createStrucDocText(sb.toString());
 
-    gestationalAge.getMdhtCodedResultsSection().setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc.getLanguageCode())));
-
-    doc.addSection(gestationalAge.copyMdhtCodedResultsSection());
+      gestationalAge.getMdhtCodedResultsSection().setTitle(Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc.getLanguageCode())));
+    }
+    doc.addSection(codedResults.copyMdhtCodedResultsSection());
   }
 
   /**
@@ -290,24 +292,24 @@ public class CdaChVacd extends CdaCh {
     rs.addAct(mComment);
 
     ED reference;
-    if (CDALevel2TextGeneration) {
-      // update the MDHT Object content references to CDA level 1 text
-      if (rs.getText() != null) {
+    //if (CDALevel2TextGeneration) {
+    // update the MDHT Object content references to CDA level 1 text
+    if (rs.getText() != null) {
 
-        String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
-        sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
-      } else {
-        sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
-      }
-
-      reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.REMARKS.getContentIdPrefix());
-
-      // create the CDA level 1 text
-      rs.createStrucDocText(sb.toString());
+      String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
+      sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
     } else {
-      setNarrativeTextComments("");
-      reference = Util.createReference(1, SectionsVACD.REMARKS.getContentIdPrefix());
+      sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
     }
+
+    reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.REMARKS.getContentIdPrefix());
+
+    // create the CDA level 1 text
+    rs.createStrucDocText(sb.toString());
+    //} else {
+    //      setNarrativeTextComments("Kommentar Texte werden (noch) generiert");
+    //      reference = Util.createReference(1, SectionsVACD.REMARKS.getContentIdPrefix());
+    //}
     mComment.setText(reference);
 
   }
@@ -340,7 +342,7 @@ public class CdaChVacd extends CdaCh {
     if (CDALevel2TextGeneration) {
       immunizationSection.createStrucDocText(generateNarrativeTextImmunizations());
     } else {
-      setNarrativeTextImmunizations("");
+      setNarrativeTextImmunizations("Impfungen Texte werden (noch) generiert");
     }
   }
 
@@ -373,7 +375,7 @@ public class CdaChVacd extends CdaCh {
     if (CDALevel2TextGeneration) {
       immunizationRecommendationsSection.createStrucDocText(generateNarrativeTextImmunizationRecommendations());
     } else {
-      setNarrativeTextImmunizationRecommendations("");
+      setNarrativeTextImmunizationRecommendations("Impfempfehlungen Texte werden (noch) generiert");
     }
   }
 
@@ -441,7 +443,7 @@ public class CdaChVacd extends CdaCh {
         setNarrativeTextLaboratoryObservation(allComments);
       }
       else {
-        setNarrativeTextLaboratoryObservation("-");
+        setNarrativeTextLaboratoryObservation("Laborresultate Texte werden (noch) generiert");
       }
 
     }
@@ -476,7 +478,7 @@ public class CdaChVacd extends CdaCh {
       if (CDALevel2TextGeneration) {
         hopis.createStrucDocText(generateNarrativeTextPastProblemConcernEntries());
       } else {
-        setNarrativeTextPastProblemConcerns("");
+        setNarrativeTextPastProblemConcerns("Vergangene Leiden Texte werden (noch) generiert");
       }
     } else {
       hopis.createStrucDocText("");
@@ -521,7 +523,7 @@ public class CdaChVacd extends CdaCh {
       reference = Util.createReference(sb.getNewTextContentIDNr(), SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
       phs.createStrucDocText(sb.toString());
     } else {
-      setNarrativeTextPregnancies("");
+      setNarrativeTextPregnancies("Codierte Resultate Texte werden (noch) generiert");
       reference = Util.createReference(1, SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
     }
     pregnancy.getMdhtPregnancy().setText(reference);
@@ -670,8 +672,8 @@ public class CdaChVacd extends CdaCh {
    *
    * @return the gestational age
    */
-  public CodedResults getCodedResults() {
-    return new CodedResults(getDoc().getCodedResultsSection());
+  public GestationalAge getCodedResults() {
+    return new GestationalAge(getDoc().getCodedResultsSection());
   }
 
   /**
@@ -711,6 +713,10 @@ public class CdaChVacd extends CdaCh {
     return (VACD) doc;
   }
 
+  //  public GestationalAge createGestationalAgeCodedResult(int weeks, int days) {
+  //    
+  //  }
+
   public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode, Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value) {
     LaboratoryObservation lo = new LaboratoryObservation();
     Code serCode = serologieCode.getCode();
@@ -727,7 +733,7 @@ public class CdaChVacd extends CdaCh {
     lo.setInterpretationCode(observationInterpretation);
     return lo;
   }
-  
+
   public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode, Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value, ObservationInterpretationForImmunization observationInterpretation, String comment) {
     LaboratoryObservation lo = createLaboratoryObservation(serologieCode, laboratorySpecificCode, dateTimeOfResult, performer, value, observationInterpretation);
     lo.setCommentText(comment);
@@ -984,32 +990,73 @@ public class CdaChVacd extends CdaCh {
    * UseCases ab Kapitel 6.3 und insbesondere Kapitel "7.4 CDA Header", Regel <CH-VACD-HPAT> )
    */
   public void pseudonymization() {
-    for (PatientRole mPatientRole : getDoc().getPatientRoles()) {
-      mPatientRole = getDoc().getPatientRoles().get(0);
-      Patient mPatient = mPatientRole.getPatient();
+    RecordTarget destRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
+    for (RecordTarget sourceRecTarget : getDoc().getRecordTargets()) {
 
-      // Name
-      mPatient.getNames().clear();
-      PN pn = DatatypesFactory.eINSTANCE.createPN();
-      pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-      mPatient.getNames().add(pn);
+      for (PatientRole sourcePatientRole : getDoc().getPatientRoles()) {
+        Patient sourcePatient = sourcePatientRole.getPatient();
 
-      // Street
-      for (AD ad : mPatientRole.getAddrs()) {
-        ad.getStreetAddressLines().clear();
-        ad.getStreetNames().clear();
-        ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
-        adxp.setNullFlavor(NullFlavor.MSK);
-        ad.getStreetNames().add(adxp);
+        PatientRole destPatientRole = CDAFactory.eINSTANCE.createPatientRole();
+        Patient destPatient = CDAFactory.eINSTANCE.createPatient();
+        destPatientRole.setPatient(destPatient);
+
+        //Copy the allow attributes from the sourcePatient
+        destPatient.setBirthTime(sourcePatient.getBirthTime());
+        destPatient.setAdministrativeGenderCode(sourcePatient.getAdministrativeGenderCode());
+        //Adress
+        AD ad = DatatypesFactory.eINSTANCE.createAD();
+        if (sourcePatientRole.getAddrs().size()>0) {
+          if (sourcePatientRole.getAddrs().get(0).getPostalCodes().size()>0) {
+            if (sourcePatientRole.getAddrs().get(0).getPostalCodes().get(0).getText()!=null) {
+              ad.addPostalCode(sourcePatientRole.getAddrs().get(0).getPostalCodes().get(0).getText());
+              ad.getUses().addAll(sourcePatientRole.getAddrs().get(0).getUses());
+            }
+          }
+        }
+        destPatientRole.getAddrs().add(ad);
+        //ID MSK
+        II ii = DatatypesFactory.eINSTANCE.createII();
+        ii.setNullFlavor(NullFlavor.MSK);
+        destPatientRole.getIds().add(ii);
+
+        destRecordTarget.setPatientRole(destPatientRole);
+
+        //      sourcePatientRole = destPatientRole;
+        //      sourcePatient = destPatient;
+        //      sourceRecTarget.setPatientRole(destPatientRole);
+        //      
+        //      //Address destAdress = new Address(addressline, zip, city, usage)
+        //      
+        //      // ID
+        //      sourcePatientRole.getIds().clear();
+        //      
+        //      // Name
+        //      sourcePatient.getNames().clear();
+        //      PN pn = DatatypesFactory.eINSTANCE.createPN();
+        //      pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+        //      sourcePatient.getNames().add(pn);
+        //
+        //      // Street
+        //      for (AD ad : sourcePatientRole.getAddrs()) {
+        //        ad.getStreetAddressLines().clear();
+        //        ad.getStreetNames().clear();
+        //        ad.getCities().clear();
+        //        ad.getCounties().clear();
+        //        ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+        //        adxp.setNullFlavor(NullFlavor.MSK);
+        //        ad.getStreetNames().add(adxp);
+        //      }
+        //
+        //      // Phone
+        //      sourcePatientRole.getTelecoms().clear();
+        //      TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+        //      tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
+        //      sourcePatientRole.getTelecoms().add(tel);
       }
-
-      // Phone
-      mPatientRole.getTelecoms().clear();
-      TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-      tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-      mPatientRole.getTelecoms().add(tel);
+      sourceRecTarget = destRecordTarget;
     }
-
+    getDoc().getRecordTargets().clear();
+    getDoc().getRecordTargets().add(destRecordTarget);
   }
 
   /**

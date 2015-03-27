@@ -22,6 +22,7 @@ import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -41,6 +42,7 @@ public class ProblemConcern extends Concern {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super
 				.getMdhtConcern();
+		//mProblemConcernEntry.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**
@@ -61,6 +63,7 @@ public class ProblemConcern extends Concern {
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
 		mProblemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) super.mConcernEntry;
+		//mProblemConcernEntry.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**
@@ -93,6 +96,7 @@ public class ProblemConcern extends Concern {
 		setStatus(concernStatus);
 		setEffectiveTime(new Date(), null);
 		addId(null);
+		//mProblemConcernEntry.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**
@@ -125,6 +129,7 @@ public class ProblemConcern extends Concern {
 			ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		this(concern, problemEntry, concernStatus);
 		setEffectiveTime(start, end);
+		//mProblemConcernEntry.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**

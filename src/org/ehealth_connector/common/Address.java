@@ -58,23 +58,27 @@ public class Address {
 	 */
 	private Address(String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
-		setCity(city);
-		setZip(zip);
-		if (usage != null) {
-			switch (usage) {
-			case BUSINESS:
-				mAd.getUses().add(PostalAddressUse.WP);
-				break;
-			case PRIVATE:
-				mAd.getUses().add(PostalAddressUse.HP);
-				break;
-			default:
-				mAd.getUses().add(PostalAddressUse.WP);
-				break;
-			}
-		}
+		setCityAndZip(zip, city, usage);
 	}
 
+	private void setCityAndZip(String zip, String city, AddressUse usage) {
+	  setCity(city);
+      setZip(zip);
+      if (usage != null) {
+          switch (usage) {
+          case BUSINESS:
+              mAd.getUses().add(PostalAddressUse.WP);
+              break;
+          case PRIVATE:
+              mAd.getUses().add(PostalAddressUse.HP);
+              break;
+          default:
+              mAd.getUses().add(PostalAddressUse.WP);
+              break;
+          }
+      }
+	}
+	
 	/**
 	 * Erstellt ein Adress-Objekt.
 	 *
@@ -90,21 +94,7 @@ public class Address {
 	public Address(String addressline, String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setAddressline1(addressline);
-		setCity(city);
-		setZip(zip);
-		if (usage != null) {
-			switch (usage) {
-			case BUSINESS:
-				mAd.getUses().add(PostalAddressUse.WP);
-				break;
-			case PRIVATE:
-				mAd.getUses().add(PostalAddressUse.HP);
-				break;
-			default:
-				mAd.getUses().add(PostalAddressUse.WP);
-				break;
-			}
-		}
+		setCityAndZip(zip, city, usage);
 	}
 
 	/**
@@ -121,9 +111,10 @@ public class Address {
 	 *            Ort
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
-		this(zip, city, AddressUse.BUSINESS);
+	    mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
 		setHouseNumber(houseNumber);
+	    setCityAndZip(zip, city, AddressUse.PRIVATE);
 	}
 
 	/**
@@ -142,9 +133,10 @@ public class Address {
 	 */
 	public Address(String street, String houseNumber, String zip, String city,
 			AddressUse usage) {
-		this(zip, city, usage);
+	    mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
 		setHouseNumber(houseNumber);
+	    setCityAndZip(zip, city, AddressUse.PRIVATE);
 	}
 
 	/**

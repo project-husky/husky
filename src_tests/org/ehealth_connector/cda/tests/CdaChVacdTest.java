@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.CodedResults;
+import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Comment;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.Immunization;
@@ -93,7 +93,7 @@ public class CdaChVacdTest extends TestUtils {
 	private Problem problem2;
 	private AllergyProblem allergyProblem1;
 
-	private CodedResults cr1;
+	private GestationalAge cr1;
 	private LaboratoryObservation lss1;
 	private Pregnancy ph1;
 	private Immunization immunization2;
@@ -157,8 +157,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 6
-	public CodedResults createCodedResults() {
-		CodedResults g = new CodedResults();
+	public GestationalAge createCodedResults() {
+		GestationalAge g = new GestationalAge();
 		g.setAsboluteDays(70);
 		g.setWeeksAndDays(10, 0);
 		g.setAsboluteDays(2);
@@ -611,7 +611,7 @@ public class CdaChVacdTest extends TestUtils {
 	// 6
 	@Test
 	public void testCodedResultsSetterGetter() {
-		CodedResults g = new CodedResults();
+		GestationalAge g = new GestationalAge();
 
 		g.setAsboluteDays(70);
 		assertEquals(70, g.getAboluteDays());

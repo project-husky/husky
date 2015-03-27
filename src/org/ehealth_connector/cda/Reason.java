@@ -125,6 +125,7 @@ public class Reason {
     } else {
         docIi.setExtension(id);
     }
+    mExtRef.getExternalDocument().getIds().clear();
     mExtRef.getExternalDocument().getIds().add(docIi);
   }
   

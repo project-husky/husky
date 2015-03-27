@@ -44,6 +44,7 @@ class Concern {
 	 */
 	public Concern() {
 		mConcernEntry = IHEFactory.eINSTANCE.createConcernEntry().init();
+		mConcernEntry.setCode(Util.createCENullFlavorUNK());
 	}
 
 	/**

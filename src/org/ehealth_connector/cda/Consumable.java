@@ -125,7 +125,7 @@ public class Consumable {
 				.convertToIdentificator(gtinOrPharmacodeOrGln));
 		if (whoAtcCode != null) {
 			setWhoAtcCode(whoAtcCode);
-			addManufacturedMaterialTranslation(gtinOrPharmacodeOrGln);
+			//addManufacturedMaterialTranslation(gtinOrPharmacodeOrGln);
 		} else {
 			setWhoAtcCode(null);
 		}

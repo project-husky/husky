@@ -21,6 +21,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -44,6 +45,7 @@ public class AllergyConcern extends Concern {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super
 				.getMdhtConcern();
+		//mAllergyConcern.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**
@@ -95,6 +97,7 @@ public class AllergyConcern extends Concern {
 		setStatus(completed);
 		addId(null);
 		setEffectiveTime(null, null);
+	    //mAllergyConcern.setCode(Util.createCDNullFlavorUNK());
 	}
 
 	/**

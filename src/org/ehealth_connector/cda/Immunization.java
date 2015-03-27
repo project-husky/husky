@@ -498,7 +498,7 @@ public class Immunization {
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
-			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
+			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		} else {
 			IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 			ivl_pq.setUnit("ml");

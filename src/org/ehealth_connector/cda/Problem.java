@@ -55,6 +55,7 @@ public class Problem {
 	 */
 	public Problem() {
 		mProblemEntry = IHEFactory.eINSTANCE.createProblemEntry().init();
+		mProblemEntry.setCode(Util.createCENullFlavorUNK());
 	}
 
 	/**

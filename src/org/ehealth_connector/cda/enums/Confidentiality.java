@@ -35,7 +35,7 @@ public enum Confidentiality {
 	/**
 	 * <div class="de">Vertraulich</div> <div class="fr"></div>
 	 */
-	RESTRICED("R", "Restriced"),
+	RESTRICED("R", "Restricted"),
 	/**
 	 * <div class="de">Normal</div> <div class="fr"></div>
 	 */

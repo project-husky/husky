@@ -189,6 +189,6 @@ public class Organization {
 	 *            class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
-		mOrganization.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 }
