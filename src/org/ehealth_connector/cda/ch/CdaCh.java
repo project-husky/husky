@@ -273,9 +273,6 @@ public abstract class CdaCh {
 	 */
 	public void addStylesheet(String stylesheet) {
 		// Add the stylesheet processing instructions to the document
-		if (stylesheet == null) {
-			stylesheet = "../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl";
-		}
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
 				"xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
 						+ "\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\""

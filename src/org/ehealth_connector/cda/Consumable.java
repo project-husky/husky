@@ -294,7 +294,9 @@ public class Consumable {
 	 * @param text
 	 */
 	public void setLotNr(String text) {
+	  if (!text.equals("")) {
 		mMaterial.setLotNumberText(Util.st(text));
+	  }
 	}
 
 	/**
