@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch;
 
@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.Confidentiality;
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
@@ -48,8 +47,10 @@ import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
+import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
+import org.openhealthtools.mdht.uml.cda.Order;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
@@ -150,6 +151,15 @@ public abstract class CdaCh {
 	 */
 	public CdaCh(DocumentRoot root) {
 		docRoot = root;
+	}
+
+	public void setInFulfillmentOf(Identificator id) {
+		InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		Order o = CDAFactory.eINSTANCE.createOrder();
+		o.getIds().add(id.getIi());
+
+		ifo.setOrder(o);
+		doc.getInFulfillmentOfs().add(ifo);
 	}
 
 	/**
@@ -491,18 +501,19 @@ public abstract class CdaCh {
 		// save resource to console
 		resource.save(oFile, null);
 	}
-	
-	 /**
-     * Gets the Confidentially Code
-     * 
-     * @return code
-     */
-	   public Confidentiality getConfidentialityCode() {
-	        if (doc.getConfidentialityCode() != null) {
-	            return Confidentiality.getEnum(doc.getConfidentialityCode().getCode());
-	        }
-	        return null;
-	    }
+
+	/**
+	 * Gets the Confidentially Code
+	 * 
+	 * @return code
+	 */
+	public Confidentiality getConfidentialityCode() {
+		if (doc.getConfidentialityCode() != null) {
+			return Confidentiality.getEnum(doc.getConfidentialityCode()
+					.getCode());
+		}
+		return null;
+	}
 
 	/**
 	 * Sets Confidentially Code

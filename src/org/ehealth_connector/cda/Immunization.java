@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -192,40 +192,40 @@ public class Immunization {
 		mImmunization.getIds().add(ii);
 	}
 
-    /**
-     * Adds the reason for the immunization (the illness, which the immunization
-     * should prevent)
-     *
-     * @param reasion
-     *            the reason
-     */
-    public void addReason(Reason reason) {
-        mImmunization.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-        mImmunization
-        .getEntryRelationships()
-        .get(mImmunization.getEntryRelationships().size() - 1)
-        .setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-        mImmunization
-        .getEntryRelationships()
-        .get(mImmunization.getEntryRelationships().size() - 1)
-        .setInversionInd(false);
-    }
+	/**
+	 * Adds the reason for the immunization (the illness, which the immunization
+	 * should prevent)
+	 *
+	 * @param reasion
+	 *            the reason
+	 */
+	public void addReason(Reason reason) {
+		mImmunization.addObservation(reason
+				.copyMdhtCDACHMSETBodyImmunizationL3Reason());
+		mImmunization.getEntryRelationships()
+				.get(mImmunization.getEntryRelationships().size() - 1)
+				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+		mImmunization.getEntryRelationships()
+				.get(mImmunization.getEntryRelationships().size() - 1)
+				.setInversionInd(false);
+	}
 
-   /**
-   * Gets a list of reasons for the immunization (the illness, which the immunization
-   * should prevent).
-   *
-   * @return A ArrayList of Reasons
-   * 
-   */
-  public ArrayList<Reason> getReasons() {
-    ArrayList<Reason> cl = new ArrayList<Reason>();
-    EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization.getCDACHMSETBodyImmunizationL3Reasons();
-    for (CDACHMSETBodyImmunizationL3Reason er : erl) {
-        cl.add(new Reason(er));
-    }
-    return cl;
-  }
+	/**
+	 * Gets a list of reasons for the immunization (the illness, which the
+	 * immunization should prevent).
+	 *
+	 * @return A ArrayList of Reasons
+	 * 
+	 */
+	public ArrayList<Reason> getReasons() {
+		ArrayList<Reason> cl = new ArrayList<Reason>();
+		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
+				.getCDACHMSETBodyImmunizationL3Reasons();
+		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
+			cl.add(new Reason(er));
+		}
+		return cl;
+	}
 
 	private SXCM_TS convertDate(Date appliedAt) {
 		SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
@@ -242,42 +242,10 @@ public class Immunization {
 		return EcoreUtil.copy(mImmunization);
 	}
 
-	private CE createEpsosPivotCode() {
-		CE code = DatatypesFactory.eINSTANCE.createCE();
-
-		// TODO 141025, set correct code
-		code.setCode("111164008");
-		// TODO 141028, set correct display name
-		code.setDisplayName("Poliomyelitis vaccine");
-
-		code.setCodeSystem("1.3.6.1.4.1.12559.11.10.1.3.1.42.28");
-		code.setCodeSystemName("epSOSVaccine");
-
-		return code;
-	}
-
 	private Code createPriorityCode() {
 		CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
 		priorityCode.setNullFlavor(NullFlavor.UNK);
 		return new Code(priorityCode);
-	}
-
-	private CDACHMSETBodyImmunizationL3Reason createReason(Code code) {
-		CDACHMSETBodyImmunizationL3Reason t = CHFactory.eINSTANCE
-				.createCDACHMSETBodyImmunizationL3Reason().init();
-		// Fix Template ID
-		for (II i : t.getTemplateIds()) {
-			if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.5.1")) {
-				i.setExtension("CDA-CH.VACD.Body.MediL3.Reason");
-			}
-		}
-		// Set Status Code
-		t.setStatusCode(StatusCode.COMPLETED.getCS());
-
-		// Set Code
-		t.setCode(code.getCD());
-
-		return t;
 	}
 
 	/**
@@ -399,7 +367,6 @@ public class Immunization {
 		return new Code(mImmunization.getPriorityCode());
 	}
 
-
 	/**
 	 * Gets the route of administration.
 	 *
@@ -506,36 +473,34 @@ public class Immunization {
 			mImmunization.setDoseQuantity(ivl_pq);
 		}
 	}
-	
-	 /**
-     * <div class="de">Gets the information, if an immunization is intended, but not performed, yet. (moodCode:INT).</div>
-     * <div class="de">Liefert die Information, ob eine Impfung beabsichtigt,
-     * aber noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div>
-     * <div class="it"></div>
-     * 
-     * @return 
-     * <div class="en"> true, if an immunization is intended. Otherwise: false</div>
-     * <div class="de"> true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt
-     *         ist. Sonst: false</div>
-     */
-    public boolean getIntended() {
-        if (mImmunization.getMoodCode().equals(
-                x_DocumentSubstanceMood.INT))
-            return true;
-        else
-            return false;
-    }
-	
-	 /**
-     * <div class="de">Sets the information that an immunization is intended, but not performed, yet. (moodCode:INT).</div>
-     * <div class="de">Setzt, die Information, dass eine Impfung beabsichtigt,
-     * aber noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div>
-     * <div class="it"></div>
-     * 
-     */
-    public void setIntended() {
-        mImmunization.setMoodCode(x_DocumentSubstanceMood.INT);
-    }
+
+	/**
+	 * <div class="de">Gets the information, if an immunization is intended, but
+	 * not performed, yet. (moodCode:INT).</div> <div class="de">Liefert die
+	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
+	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @return <div class="en"> true, if an immunization is intended. Otherwise:
+	 *         false</div> <div class="de"> true, wenn eine Impfung
+	 *         beabsichtigt, aber noch nicht erfolgt ist. Sonst: false</div>
+	 */
+	public boolean getIntended() {
+		if (mImmunization.getMoodCode().equals(x_DocumentSubstanceMood.INT))
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * <div class="de">Sets the information that an immunization is intended,
+	 * but not performed, yet. (moodCode:INT).</div> <div class="de">Setzt, die
+	 * Information, dass eine Impfung beabsichtigt, aber noch nicht erfolgt ist
+	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 */
+	public void setIntended() {
+		mImmunization.setMoodCode(x_DocumentSubstanceMood.INT);
+	}
 
 	/**
 	 * Sets the Person, who performs the Immunization

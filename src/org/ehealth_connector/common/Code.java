@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -60,10 +60,10 @@ public class Code {
 	public Code(Code code) {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
 	}
-	
+
 	public Code(NullFlavor nullFlavor) {
-	  mCD = DatatypesFactory.eINSTANCE.createCD();
-	  mCD.setNullFlavor(nullFlavor);
+		mCD = DatatypesFactory.eINSTANCE.createCD();
+		mCD.setNullFlavor(nullFlavor);
 	}
 
 	/**
@@ -152,9 +152,9 @@ public class Code {
 	 *            the code
 	 */
 	public void addTranslation(Code code) {
-	  if (code!=null) {
-		mCD.getTranslations().add(code.getCD());
-	  }
+		if (code != null) {
+			mCD.getTranslations().add(code.getCD());
+		}
 	}
 
 	/**
@@ -236,8 +236,6 @@ public class Code {
 		String codeStr = "";
 		if (mCD.getCode() == null) {
 			if (mCD.getNullFlavor() != null) {
-				// TODO: Später String Ersetzungen für den NullFlavor im Enum
-				// nachschlagen
 				mCD.getNullFlavor().getLiteral();
 			}
 		} else {
@@ -256,8 +254,6 @@ public class Code {
 		String codeStr = "";
 		if (mCD.getCodeSystem() == null) {
 			if (mCD.getNullFlavor() != null) {
-				// TODO: Später String Ersetzungen für den NullFlavor im Enum
-				// nachschlagen
 				mCD.getNullFlavor().getLiteral();
 			}
 		} else {
@@ -312,16 +308,16 @@ public class Code {
 	public void setCodeSystem(String oid) {
 		mCD.setCodeSystem(oid);
 	}
-	
+
 	public void setNullFlavor(NullFlavor nf) {
-	  mCD.setNullFlavor(nf);
+		mCD.setNullFlavor(nf);
 	}
-	
+
 	public NullFlavor getNullFlavor() {
-	  return mCD.getNullFlavor();
+		return mCD.getNullFlavor();
 	}
-	
+
 	public boolean isNullFlavor() {
-	  return mCD.isNullFlavorDefined();
+		return mCD.isNullFlavorDefined();
 	}
 }

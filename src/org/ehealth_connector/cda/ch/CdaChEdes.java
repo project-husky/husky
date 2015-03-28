@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch;
 
@@ -42,10 +42,6 @@ public class CdaChEdes extends CdaCh {
 		super(doc);
 		setDoc(doc);
 	}
-
-	// TODO Der Konstruktor sollte alle minimal benötigten Elemente enthalten
-	// (also alle Sections), damit die Anwender wissen, was sie zuvor
-	// zusammenbauen müssen.
 
 	/**
 	 * Erstellt ein neues CdaChEdes CDA Dokument.
@@ -111,8 +107,8 @@ public class CdaChEdes extends CdaCh {
 	public ProblemConcern getActiveProblemConcern(int leidenNr) {
 		ProblemConcern problemConcernEntry = new ProblemConcern(
 				(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) getDoc()
-				.getActiveProblemsSections().get(0).getActs()
-				.get(leidenNr));
+						.getActiveProblemsSections().get(0).getActs()
+						.get(leidenNr));
 		return problemConcernEntry;
 	}
 

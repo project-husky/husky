@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
@@ -88,7 +88,7 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 	public String insertRow(ActiveProblemConcern newProblemConcernEntry2,
 			int newId, String sectionText) {
 		String rowStr = buildRow(newProblemConcernEntry2, newId);
-		// TODO If there is no element found that could be replaced, then an
+		// If there is no element found that could be replaced, then an
 		// error occured (e.g. in a scenario, where an external document is
 		// loaded where the table footer does not match this table footer. If
 		// the convenience API is used to add a ProblemConcern then this method

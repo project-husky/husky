@@ -1,22 +1,21 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
-import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,9 +23,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
@@ -34,8 +33,6 @@ import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.ExternalDocument;
-import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef;
@@ -49,8 +46,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
@@ -96,6 +91,28 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
+	 * Sets a special code that explains the absence of immunizations in this
+	 * document
+	 *
+	 * @param author
+	 *            the new author
+	 */
+	public void setCode(MedicationsSpecialConditions specialCode) {
+		mImmunizationRecommendation.setCode(specialCode.getCD());
+		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIV.getCS());
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(NullFlavor.UNK);
+		mImmunizationRecommendation.setPriorityCode(ce);
+		mImmunizationRecommendation.setDoseQuantity(Util
+				.createIVL_PQNullFlavorUNK());
+		mImmunizationRecommendation.getEffectiveTimes().add(
+				DateUtil.createSTCM_TS(new Date()));
+		mImmunizationRecommendation.getIds().add(Util.createUuidVacd(null));
+		Consumable c = new Consumable(false);
+		setConsumable(c);
+	}
+
+	/**
 	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses
 	 * Objekt kann einer ImmunizationRecommendationsSection hinzugefügt werden.
 	 * 
@@ -109,7 +126,8 @@ public class ImmunizationRecommendation {
 	 *            Ende des Zeitraumes, in dem die Impfung erfolgen sollte
 	 * @param intendedOrProposed
 	 *            true, bei einer beabsichtigten, aber noch nicht erfolgten
-	 *            Impfung. false bei einer vorgeschlagenen Impfung.
+	 *            Impfung (intended). false bei einer vorgeschlagenen Impfung
+	 *            (proposed).
 	 * @param shallNotBeAdministerd
 	 *            true, wenn die Impfung nicht verabreicht werden soll. false,
 	 *            wenn die Impfung zu verabreichen ist.
@@ -166,33 +184,36 @@ public class ImmunizationRecommendation {
 	 *            Code for the illness
 	 */
 	public void addReason(Reason reason) {
-		mImmunizationRecommendation.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
+		mImmunizationRecommendation.addObservation(reason
+				.copyMdhtCDACHMSETBodyImmunizationL3Reason());
 		mImmunizationRecommendation
-		.getEntryRelationships()
-		.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-		.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+				.getEntryRelationships()
+				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
+				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 		mImmunizationRecommendation
-		.getEntryRelationships()
-		.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-		.setInversionInd(false);
+				.getEntryRelationships()
+				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
+				.setInversionInd(false);
 	}
 
 	/**
-   * Gets a list of reasons for the immunizationRecommendation (typically a reference to an external BAG document)).
-   *
-   * @return A ArrayList of Resons
-   * 
-   */
-  public ArrayList<Reason> getReasons() {
-  	ArrayList<Reason> cl = new ArrayList<Reason>();
-  	EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation.getCDACHMSETBodyImmunizationL3Reasons();
-  	for (CDACHMSETBodyImmunizationL3Reason er : erl) {
-  		cl.add(new Reason(er));
-  	}
-  	return cl;
-  }
+	 * Gets a list of reasons for the immunizationRecommendation (typically a
+	 * reference to an external BAG document)).
+	 *
+	 * @return A ArrayList of Resons
+	 * 
+	 */
+	public ArrayList<Reason> getReasons() {
+		ArrayList<Reason> cl = new ArrayList<Reason>();
+		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation
+				.getCDACHMSETBodyImmunizationL3Reasons();
+		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
+			cl.add(new Reason(er));
+		}
+		return cl;
+	}
 
-  /**
+	/**
 	 * <div class="de">Copy mdht immunization recommendation.</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 *
@@ -279,39 +300,39 @@ public class ImmunizationRecommendation {
 		return null;
 	}
 
-//	/**
-//	 * Gets the Id of the reference to an external document
-//	 * 
-//	 * @return the id.
-//	 */
-//	public Identificator getExternalDocumentId() {
-//		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-//				.getReferences());
-//		if (docRef != null && docRef.getExternalDocument() != null
-//				&& docRef.getExternalDocument().getIds() != null) {
-//			return new Identificator(docRef.getExternalDocument().getIds()
-//					.get(0));
-//		} else
-//			return null;
-//	}
-//
-//	/**
-//	 * Gets the Value of the reference to an external document
-//	 * 
-//	 * @return the reference. Typically a URL (e.g.
-//	 *         'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-//	 */
-//	public String getExternalDocumentReferenceValue() {
-//		CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-//				.getReferences());
-//		if (docRef != null && docRef.getExternalDocument() != null
-//				&& docRef.getExternalDocument().getText() != null
-//				&& docRef.getExternalDocument().getText().getText() != null) {
-//			return docRef.getExternalDocument().getText().getReference()
-//					.getValue();
-//		} else
-//			return null;
-//	}
+	// /**
+	// * Gets the Id of the reference to an external document
+	// *
+	// * @return the id.
+	// */
+	// public Identificator getExternalDocumentId() {
+	// CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
+	// .getReferences());
+	// if (docRef != null && docRef.getExternalDocument() != null
+	// && docRef.getExternalDocument().getIds() != null) {
+	// return new Identificator(docRef.getExternalDocument().getIds()
+	// .get(0));
+	// } else
+	// return null;
+	// }
+	//
+	// /**
+	// * Gets the Value of the reference to an external document
+	// *
+	// * @return the reference. Typically a URL (e.g.
+	// * 'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+	// */
+	// public String getExternalDocumentReferenceValue() {
+	// CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
+	// .getReferences());
+	// if (docRef != null && docRef.getExternalDocument() != null
+	// && docRef.getExternalDocument().getText() != null
+	// && docRef.getExternalDocument().getText().getText() != null) {
+	// return docRef.getExternalDocument().getText().getReference()
+	// .getValue();
+	// } else
+	// return null;
+	// }
 
 	/**
 	 * Gets the id.
@@ -438,7 +459,7 @@ public class ImmunizationRecommendation {
 		EntryRelationship er = mImmunizationRecommendation
 				.getEntryRelationships().get(
 						mImmunizationRecommendation.getEntryRelationships()
-						.size() - 1);
+								.size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -503,7 +524,6 @@ public class ImmunizationRecommendation {
 		try {
 			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

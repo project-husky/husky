@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -83,10 +83,8 @@ public class LaboratoryObservation {
 	 *            <div class="de">Das ausführende Labor.</div> <div
 	 *            class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(
-			Code code,
-			boolean immuneProtection, Date dateTimeOfResult,
-			Organization laboratory) {
+	public LaboratoryObservation(Code code, boolean immuneProtection,
+			Date dateTimeOfResult, Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE
 				.createLaboratoryObservation().init();
 
@@ -120,16 +118,12 @@ public class LaboratoryObservation {
 	 *            <div class="de">Wert des Resultats (als Code-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(
-			Code code,
-			Organization laboratory, boolean immuneProtection,
-			Date dateTimeOfResult, Code valueCode) {
+	public LaboratoryObservation(Code code, Organization laboratory,
+			boolean immuneProtection, Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.addValue(valueCode);
 	}
-
-	// TODO Create Constructor for unknown Types of "Erregernachweise"
 
 	/**
 	 * Instantiates a new laboratory observation.
@@ -156,10 +150,8 @@ public class LaboratoryObservation {
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(
-			Code code,
-			Organization laboratory, boolean immuneProtection,
-			Date dateTimeOfResult, Value value) {
+	public LaboratoryObservation(Code code, Organization laboratory,
+			boolean immuneProtection, Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.addValue(value);
@@ -214,7 +206,7 @@ public class LaboratoryObservation {
 			mLaboratoryObservation.getValues().add(value.copyMdhtCode());
 		}
 		if (value.isRto()) {
-		  mLaboratoryObservation.getValues().add(value.copyMdhtRto());
+			mLaboratoryObservation.getValues().add(value.copyMdhtRto());
 		}
 	}
 
@@ -449,7 +441,6 @@ public class LaboratoryObservation {
 			mLaboratoryObservation.setEffectiveTime(DateUtil
 					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -511,10 +502,10 @@ public class LaboratoryObservation {
 		Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
 		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 
-		if (laboratory.getId()!=null) {
-		II ii = DatatypesFactory.eINSTANCE.createII(
-				CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
-		asEnt.getIds().add(ii);
+		if (laboratory.getId() != null) {
+			II ii = DatatypesFactory.eINSTANCE.createII(
+					CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
+			asEnt.getIds().add(ii);
 		}
 
 		asEnt.getRepresentedOrganizations().add(
@@ -525,15 +516,14 @@ public class LaboratoryObservation {
 			perf.setTime(DateUtil
 					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		mLaboratoryObservation.getPerformers().add(perf);
 	}
-	
+
 	public void addPerformer(Performer performer, Date dateTimeOfResult) {
-	  Performer2 mPerformer = performer.copyMdhtPerfomer();
-	  mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
-	  mLaboratoryObservation.getPerformers().add(mPerformer);
+		Performer2 mPerformer = performer.copyMdhtPerfomer();
+		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		mLaboratoryObservation.getPerformers().add(mPerformer);
 	}
 }

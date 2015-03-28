@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -68,7 +68,7 @@ public class Author {
 	 *            <div class="it"></div>
 	 */
 	public Author(AuthorType iAuthor) {
-		// TODO Create Constructor for IHEProfiles Author object
+		// Create Constructor for IHEProfiles Author object
 		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
 
@@ -138,7 +138,7 @@ public class Author {
 	 */
 	public void addName(Name name) {
 		mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-		.add(name.getMdhtPn());
+				.add(name.getMdhtPn());
 	}
 
 	/**
@@ -321,8 +321,8 @@ public class Author {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms((EList<TEL>) EcoreUtil.copyAll(mAuthor.getAssignedAuthor()
-				.getTelecoms()));
+		Telecoms telecoms = new Telecoms((EList<TEL>) EcoreUtil.copyAll(mAuthor
+				.getAssignedAuthor().getTelecoms()));
 		return telecoms;
 	}
 
@@ -387,7 +387,7 @@ public class Author {
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mAuthor.getAssignedAuthor().getTelecoms()
-		.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+				.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 
 	/**
@@ -409,7 +409,6 @@ public class Author {
 		try {
 			mAuthor.setTime(DateUtil.createTSFromEuroDate(date));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -38,7 +38,6 @@ import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.Signature;
-import org.ehealth_connector.common.ConvenienceUtilsEnums.UseCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
@@ -127,7 +126,7 @@ public class Util {
 	 * @return the new address
 	 */
 	public static AD createAddress(String streetName, String houseNumber,
-			String zip, String city, UseCode usage) {
+			String zip, String city, AddressUse usage) {
 		final AD ad = createAddress(zip, city, usage);
 
 		if (streetName != null) {
@@ -147,10 +146,10 @@ public class Util {
 	 * @param city
 	 *            Ort
 	 * @param usage
-	 *            Verwendungszweck (Privat, GeschÃ¤ft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 * @return HL7 AD Objekt
 	 */
-	public static AD createAddress(String zip, String city, UseCode usage) {
+	public static AD createAddress(String zip, String city, AddressUse usage) {
 		final AD ad = DatatypesFactory.eINSTANCE.createAD();
 
 		if (zip != null) {
@@ -160,12 +159,10 @@ public class Util {
 			ad.addCity(city);
 		}
 		if (usage != null) {
-			// TODO add the real Use Code here
-			// ad.getUses().add(usage);
+			ad.getUses().add(usage.getAddressUseAsPostalAddressUse());
 		}
 		return ad;
 	}
-
 	/**
 	 * Erzeugt eine Adresse.
 	 *
@@ -182,7 +179,7 @@ public class Util {
 	 * @return the ad
 	 */
 	public static AD createAdress(String addressline, String zip, String city,
-			UseCode usage) {
+			AddressUse usage) {
 		final AD ad = createAddress(zip, city, usage);
 
 		if (addressline != null) {
@@ -239,18 +236,18 @@ public class Util {
 		ce.setNullFlavor(NullFlavor.UNK);
 		return ce;
 	}
-	
-	   /**
-     * <div class="en">Creates the ce null flavor UNK.</div> <div
-     * class="de"></div> <div class="fr"></div> <div class="it"></div>
-     *
-     * @return the ce
-     */
-    public static CD createCDNullFlavorUNK() {
-        CD ce = DatatypesFactory.eINSTANCE.createCD();
-        ce.setNullFlavor(NullFlavor.UNK);
-        return ce;
-    }
+
+	/**
+	 * <div class="en">Creates the ce null flavor UNK.</div> <div
+	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the ce
+	 */
+	public static CD createCDNullFlavorUNK() {
+		CD ce = DatatypesFactory.eINSTANCE.createCD();
+		ce.setNullFlavor(NullFlavor.UNK);
+		return ce;
+	}
 
 	/**
 	 * <div class="en">Creates the code null flavor.</div> <div
@@ -282,12 +279,11 @@ public class Util {
 		on.addText(organization.getName());
 		mdhtCustOrg.setName(on);
 		// take the first address and set it as CustodianAdress
-		mdhtCustOrg.setAddr(organization.getMdhtOrganization().getAddrs()
+		mdhtCustOrg.setAddr(organization.copyMdhtOrganization().getAddrs()
 				.get(0));
 		// take the first telecom and set it as CustodianTelecom
-		mdhtCustOrg.setTelecom(organization.getMdhtOrganization().getTelecoms()
-				.get(0));
-		// TODO handle any other adresses/telecoms
+		mdhtCustOrg.setTelecom(organization.copyMdhtOrganization()
+				.getTelecoms().get(0));
 		return mdhtCustOrg;
 	}
 
@@ -339,7 +335,6 @@ public class Util {
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		// TODO PrÃ¼fen, ob der Ã¼bergebene String das richtige Format hat.
 		String eurDateStr = hl7Stimestamp.substring(6, 8) + "."
 				+ hl7Stimestamp.substring(4, 6) + "."
 				+ hl7Stimestamp.substring(0, 4);
@@ -526,7 +521,6 @@ public class Util {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 
 		// Dirty BugFix for missing addReference method.
-		// TODO Make me beautiful :)
 		tel.setValue("#" + prefix + String.valueOf(contentId));
 		text.setReference(tel);
 		return text;
@@ -1063,7 +1057,7 @@ public class Util {
 	 * @return HL7 AD Objekt
 	 */
 	public AD createAddress(String addressline1, String addressline2,
-			String addressline3, String zip, String city, UseCode usage) {
+			String addressline3, String zip, String city, AddressUse usage) {
 		final AD ad = createAddress(zip, city, usage);
 
 		if (addressline1 != null) {
