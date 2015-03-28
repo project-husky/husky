@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -21,12 +21,8 @@ import org.ehealth_connector.common.ConvenienceUtilsEnums.UCUM;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesPackage;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.QTY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
-import org.openhealthtools.mdht.uml.hl7.datatypes.RTO_PQ_PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.RTO_QTY_QTY;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
@@ -72,21 +68,23 @@ public class Value {
 	public Value(CD cd) {
 		mValue = cd;
 	}
-	
-	 /**
-     * <div class="en">Instantiates a new value with a give MDHT RTO
-     * Objekt (A quantity constructed as the quotient of a numerator quantity divided by a denominator quantity.).</div> <div class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet. Mit
-     * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO 
-     * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
-     * class="it"></div>
-     *
-     * @param cd
-     * <br>
-     *            <div class="de"> cd</div> <div class="fr"></div> <div
-     *            class="it"></div>
-     */
+
+	/**
+	 * <div class="en">Instantiates a new value with a give MDHT RTO Objekt (A
+	 * quantity constructed as the quotient of a numerator quantity divided by a
+	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues
+	 * Value RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet.
+	 * Mit diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
+	 * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 *
+	 * @param cd
+	 * <br>
+	 *            <div class="de"> cd</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
 	public Value(RTO rto) {
-	    mValue = rto;
+		mValue = rto;
 	}
 
 	/**
@@ -157,38 +155,37 @@ public class Value {
 		setPqValue(value);
 		setUcumUnit(unit);
 	}
-	
-	   /**
-     * <div class="en">Instantiates a new value.</div> <div
-     * class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
-     * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird
-     * ein Value Objekt auf Basis von einem CodeSytem und einem Code
-     * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
-     *
-     * @param codeSystem
-     * <br>
-     *            <div class="de"> code system</div> <div class="fr"></div> <div
-     *            class="it"></div>
-     * @param code
-     * <br>
-     *            <div class="de"> code</div> <div class="fr"></div> <div
-     *            class="it"></div>
-     */
-    public Value(double numerator, double denominator, UCUM ucumUnit) {
-        //RTO_PQ_PQ rto = DatatypesFactory.eINSTANCE.createRTO_PQ_PQ();
-        RTO rto = DatatypesFactory.eINSTANCE.createRTO();
-        
-        PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
-        pq1.setUnit(ucumUnit.name());
-        pq1.setValue(numerator);
-        PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
-        pq2.setUnit(ucumUnit.name());
-        pq2.setValue(denominator);
-        
-        rto.setNumerator(pq1);
-        rto.setDenominator(pq2);
-        mValue = rto;
-    }
+
+	/**
+	 * <div class="en">Instantiates a new value.</div> <div
+	 * class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird
+	 * ein Value Objekt auf Basis von einem CodeSytem und einem Code
+	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param codeSystem
+	 * <br>
+	 *            <div class="de"> code system</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
+	public Value(double numerator, double denominator, UCUM ucumUnit) {
+		RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+
+		PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+		pq1.setUnit(ucumUnit.name());
+		pq1.setValue(numerator);
+		PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+		pq2.setUnit(ucumUnit.name());
+		pq2.setValue(denominator);
+
+		rto.setNumerator(pq1);
+		rto.setDenominator(pq2);
+		mValue = rto;
+	}
 
 	/**
 	 * <div class="en">Copy mdht code.</div> <div class="de"></div> <div
@@ -209,9 +206,9 @@ public class Value {
 	public PQ copyMdhtPhysicalQuantity() {
 		return EcoreUtil.copy((PQ) mValue);
 	}
-	
+
 	public RTO copyMdhtRto() {
-	  return EcoreUtil.copy((RTO) mValue);
+		return EcoreUtil.copy((RTO) mValue);
 	}
 
 	/**
@@ -290,19 +287,20 @@ public class Value {
 			return false;
 		}
 	}
-	
-	 /**
-     * Checks if the Value object is a RTO (A quantity constructed as the quotient of a numerator quantity divided by a denominator quantity.).
-     *
-     * @return boolean true, if it is physical quantity, false otherwise
-     */
-    public boolean isRto() {
-        if (mValue instanceof RTO) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+	/**
+	 * Checks if the Value object is a RTO (A quantity constructed as the
+	 * quotient of a numerator quantity divided by a denominator quantity.).
+	 *
+	 * @return boolean true, if it is physical quantity, false otherwise
+	 */
+	public boolean isRto() {
+		if (mValue instanceof RTO) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	private void setPqValue(String value) {
 		PQ pq = (PQ) mValue;

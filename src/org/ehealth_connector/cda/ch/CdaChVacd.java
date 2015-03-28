@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
-import org.ehealth_connector.cda.Pregnancy;
+import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.ProblemConcern;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
@@ -224,7 +224,7 @@ public class CdaChVacd extends CdaCh {
 				// create the CDA level 1 text
 				aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
 			} else {
-				setNarrativeTextActiveProblemConcerns("Problemliste Texte werden (noch) generiert");
+				setNarrativeTextActiveProblemConcerns("");
 			}
 		} else {
 			aps.createStrucDocText("Keine Angaben");
@@ -243,7 +243,7 @@ public class CdaChVacd extends CdaCh {
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void addAllergyProblemConcern(AllergyConcern allergyConcern) {
+	public void addAllergyConcern(AllergyConcern allergyConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
 
 		// find or create (and add) the Section
@@ -268,7 +268,7 @@ public class CdaChVacd extends CdaCh {
 				// create the CDA level 1 text
 				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
 			} else {
-				setNarrativeTextAllergyProblemConcerns("Allergie Texte werden (noch) generiert");
+				setNarrativeTextAllergyProblemConcerns("");
 			}
 		} else {
 			ars.createStrucDocText("Keine Angaben");
@@ -300,8 +300,9 @@ public class CdaChVacd extends CdaCh {
 					EcoreUtil.copy(reference));
 
 			// create the CDA level 1 text
-			gestationalAge.getMdhtCodedResultsSection().createStrucDocText(
-					sb.toString());
+			// gestationalAge.getMdhtCodedResultsSection().createStrucDocText(
+			// sb.toString());
+			gestationalAge.getMdhtCodedResultsSection().createStrucDocText("");
 
 			gestationalAge.getMdhtCodedResultsSection().setTitle(
 					Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc
@@ -309,7 +310,6 @@ public class CdaChVacd extends CdaCh {
 		}
 		doc.addSection(codedResults.copyMdhtCodedResultsSection());
 	}
-
 	/**
 	 * <div class="de">Fügt einen Kommentar hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
@@ -354,11 +354,6 @@ public class CdaChVacd extends CdaCh {
 
 		// create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
-		// } else {
-		// setNarrativeTextComments("Kommentar Texte werden (noch) generiert");
-		// reference = Util.createReference(1,
-		// SectionsVACD.REMARKS.getContentIdPrefix());
-		// }
 		mComment.setText(reference);
 
 	}
@@ -402,7 +397,12 @@ public class CdaChVacd extends CdaCh {
 			immunizationSection
 					.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
-			setNarrativeTextImmunizations("Impfungen Texte werden (noch) generiert");
+			if (immunization.getCommentText() != null) {
+				immunizationSection
+						.createStrucDocText(getNarrativeTextImmunizations()
+								+ " " + immunization.getCommentText());
+			}
+			setNarrativeTextImmunizations(getNarrativeTextImmunizations() + " ");
 		}
 	}
 
@@ -448,7 +448,7 @@ public class CdaChVacd extends CdaCh {
 			immunizationRecommendationsSection
 					.createStrucDocText(generateNarrativeTextImmunizationRecommendations());
 		} else {
-			setNarrativeTextImmunizationRecommendations("Impfempfehlungen Texte werden (noch) generiert");
+			setNarrativeTextImmunizationRecommendations("");
 		}
 	}
 
@@ -523,11 +523,13 @@ public class CdaChVacd extends CdaCh {
 				// Aller vorhandenen Kommentare zusammenfügen
 				String allComments = "";
 				for (LaboratoryObservation t : getLaboratoryObservations()) {
-					allComments = allComments + t.getCommentText() + " ";
+					if (t.getCommentText() != null) {
+						allComments = allComments + t.getCommentText() + " ";
+					}
 				}
 				setNarrativeTextLaboratoryObservation(allComments);
 			} else {
-				setNarrativeTextLaboratoryObservation("Laborresultate Texte werden (noch) generiert");
+				setNarrativeTextLaboratoryObservation("-");
 			}
 
 		}
@@ -566,7 +568,7 @@ public class CdaChVacd extends CdaCh {
 			if (CDALevel2TextGeneration) {
 				hopis.createStrucDocText(generateNarrativeTextPastProblemConcernEntries());
 			} else {
-				setNarrativeTextPastProblemConcerns("Vergangene Leiden Texte werden (noch) generiert");
+				setNarrativeTextPastProblemConcerns("");
 			}
 		} else {
 			hopis.createStrucDocText("");
@@ -585,7 +587,7 @@ public class CdaChVacd extends CdaCh {
 	 *            <div class="de">Schwangerschaft</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void addPregnancy(Pregnancy pregnancy) {
+	public void addPregnancyHistory(PregnancyHistory pregnancy) {
 		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
 		SimpleTextBuilder sb;
 
@@ -621,7 +623,7 @@ public class CdaChVacd extends CdaCh {
 					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 			phs.createStrucDocText(sb.toString());
 		} else {
-			setNarrativeTextPregnancies("Codierte Resultate Texte werden (noch) generiert");
+			setNarrativeTextPregnancies("");
 			reference = Util.createReference(1,
 					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 		}
@@ -799,7 +801,7 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return the comment
 	 */
-	public String getComment() {
+	public String getComments() {
 		Section rs;
 		org.ehealth_connector.cda.Comment comment;
 
@@ -1103,15 +1105,15 @@ public class CdaChVacd extends CdaCh {
 	 *
 	 * @return Liste von Schwangerschaften
 	 */
-	public ArrayList<Pregnancy> getPregnancies() {
+	public ArrayList<PregnancyHistory> getPregnancies() {
 		// Search for the right section
 		PregnancyHistorySection phs = getDoc().getPregnancyHistorySection();
 		if (phs == null) {
 			return null;
 		}
-		ArrayList<Pregnancy> pregnancies = new ArrayList<Pregnancy>();
+		ArrayList<PregnancyHistory> pregnancies = new ArrayList<PregnancyHistory>();
 		for (PregnancyObservation mPregnancy : phs.getPregnancyObservations()) {
-			Pregnancy immunization = new Pregnancy(mPregnancy);
+			PregnancyHistory immunization = new PregnancyHistory(mPregnancy);
 			pregnancies.add(immunization);
 		}
 		return pregnancies;
@@ -1141,7 +1143,8 @@ public class CdaChVacd extends CdaCh {
 	public void pseudonymization() {
 		RecordTarget destRecordTarget = CDAFactory.eINSTANCE
 				.createRecordTarget();
-		for (RecordTarget sourceRecTarget : getDoc().getRecordTargets()) {
+		for (@SuppressWarnings("unused")
+		RecordTarget sourceRecTarget : getDoc().getRecordTargets()) {
 
 			for (PatientRole sourcePatientRole : getDoc().getPatientRoles()) {
 				Patient sourcePatient = sourcePatientRole.getPatient();
@@ -1175,41 +1178,7 @@ public class CdaChVacd extends CdaCh {
 				II ii = DatatypesFactory.eINSTANCE.createII();
 				ii.setNullFlavor(NullFlavor.MSK);
 				destPatientRole.getIds().add(ii);
-
 				destRecordTarget.setPatientRole(destPatientRole);
-
-				// sourcePatientRole = destPatientRole;
-				// sourcePatient = destPatient;
-				// sourceRecTarget.setPatientRole(destPatientRole);
-				//
-				// //Address destAdress = new Address(addressline, zip, city,
-				// usage)
-				//
-				// // ID
-				// sourcePatientRole.getIds().clear();
-				//
-				// // Name
-				// sourcePatient.getNames().clear();
-				// PN pn = DatatypesFactory.eINSTANCE.createPN();
-				// pn.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-				// sourcePatient.getNames().add(pn);
-				//
-				// // Street
-				// for (AD ad : sourcePatientRole.getAddrs()) {
-				// ad.getStreetAddressLines().clear();
-				// ad.getStreetNames().clear();
-				// ad.getCities().clear();
-				// ad.getCounties().clear();
-				// ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
-				// adxp.setNullFlavor(NullFlavor.MSK);
-				// ad.getStreetNames().add(adxp);
-				// }
-				//
-				// // Phone
-				// sourcePatientRole.getTelecoms().clear();
-				// TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-				// tel.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.MSK);
-				// sourcePatientRole.getTelecoms().add(tel);
 			}
 			sourceRecTarget = destRecordTarget;
 		}
@@ -1242,9 +1211,11 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextActiveProblemConcerns(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ACTIVE_PROBLEMS, text);
-		getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
+		if (getDoc().getActiveProblemsSection() != null) {
+			getDoc().getActiveProblemsSection().createStrucDocText(
+					sb.toString());
+		}
 	}
-
 	/**
 	 * <div class="en">Sets the human readable CDA section text for the
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
@@ -1260,8 +1231,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextAllergyProblemConcerns(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ALLERGIES_REACTIONS, text);
-		getDoc().getAllergiesReactionsSection().createStrucDocText(
-				sb.toString());
+		if (getDoc().getAllergiesReactionsSection() != null) {
+			getDoc().getAllergiesReactionsSection().createStrucDocText(
+					sb.toString());
+		}
 	}
 
 	/**
@@ -1277,7 +1250,9 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 */
 	public void setNarrativeTextCodedResults(String text) {
-		getDoc().getCodedResultsSection().createStrucDocText(text);
+		if (getDoc().getCodedResultsSection() != null) {
+			getDoc().getCodedResultsSection().createStrucDocText(text);
+		}
 	}
 
 	/**
@@ -1295,7 +1270,9 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextComments(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.REMARKS, text);
-		findRemarksSection().createStrucDocText(sb.toString());
+		if (findRemarksSection() != null) {
+			findRemarksSection().createStrucDocText(sb.toString());
+		}
 	}
 
 	/**
@@ -1313,8 +1290,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextImmunizationRecommendations(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.TREATMENT_PLAN, text);
-		getDoc().getImmunizationRecommendationSection().createStrucDocText(
-				sb.toString());
+		if (getDoc().getImmunizationRecommendationSection() != null) {
+			getDoc().getImmunizationRecommendationSection().createStrucDocText(
+					sb.toString());
+		}
 	}
 
 	/**
@@ -1332,7 +1311,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextImmunizations(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_IMMUNIZATION, text);
-		getDoc().getImmunizationsSection().createStrucDocText(sb.toString());
+		if (getDoc().getImmunizationsSection() != null) {
+			getDoc().getImmunizationsSection()
+					.createStrucDocText(sb.toString());
+		}
 	}
 
 	/**
@@ -1350,9 +1332,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextLaboratoryObservation(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.SEROLOGY_STUDIES, text);
-		getDoc().getLaboratorySpecialitySection().createStrucDocText(
-				sb.toString());
-		// getDoc().getLaboratorySpecialitySection().createStrucDocText(text);
+		if (getDoc().getLaboratorySpecialitySection() != null) {
+			getDoc().getLaboratorySpecialitySection().createStrucDocText(
+					sb.toString());
+		}
 	}
 
 	/**
@@ -1370,8 +1353,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextPastProblemConcerns(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PAST_ILLNESS, text);
-		getDoc().getHistoryOfPastIllnessSection().createStrucDocText(
-				sb.toString());
+		if (getDoc().getHistoryOfPastIllnessSection() != null) {
+			getDoc().getHistoryOfPastIllnessSection().createStrucDocText(
+					sb.toString());
+		}
 	}
 
 	/**
@@ -1389,7 +1374,10 @@ public class CdaChVacd extends CdaCh {
 	public void setNarrativeTextPregnancies(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, text);
-		getDoc().getPregnancyHistorySection().createStrucDocText(sb.toString());
+		if (getDoc().getPregnancyHistorySection() != null) {
+			getDoc().getPregnancyHistorySection().createStrucDocText(
+					sb.toString());
+		}
 	}
 
 	private boolean updateAllergyConcernReferences(EList<Act> acts,
@@ -1459,6 +1447,7 @@ public class CdaChVacd extends CdaCh {
 
 	private boolean updateProblemConcernReferences(EList<Act> acts,
 			SectionsVACD loincSectionCode) {
+		@SuppressWarnings("unused")
 		int i = 0;
 		for (Act act : acts) {
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;

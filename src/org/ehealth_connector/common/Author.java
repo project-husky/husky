@@ -68,8 +68,6 @@ public class Author {
 	 *            <div class="it"></div>
 	 */
 	public Author(AuthorType iAuthor) {
-		// Create Constructor for IHEProfiles Author object
-		// System.out.println(iAuthor.getAuthorPerson().getFamilyName());
 	}
 
 	public Author(Name name) {

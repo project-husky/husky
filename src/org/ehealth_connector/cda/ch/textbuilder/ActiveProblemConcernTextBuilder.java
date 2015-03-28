@@ -27,7 +27,6 @@ import org.ehealth_connector.cda.ch.enums.SectionsVACD;
  * 
  * Always builds the whole part (not only adds one recommendation).
  * 
- * @author ahelmer
  */
 public class ActiveProblemConcernTextBuilder extends TextBuilder {
 

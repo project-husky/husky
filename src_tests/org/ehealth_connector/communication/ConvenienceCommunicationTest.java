@@ -53,7 +53,6 @@ public class ConvenienceCommunicationTest {
 		try {
 			repUri = new java.net.URI(NIST_SECURED);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -63,7 +62,6 @@ public class ConvenienceCommunicationTest {
 		try {
 			c = new ConvenienceCommunication(dest, false);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -76,7 +74,6 @@ public class ConvenienceCommunicationTest {
 			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
 			assertNotNull(c.txnData);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -89,13 +86,11 @@ public class ConvenienceCommunicationTest {
 		System.setProperty("javax.net.ssl.keyStorePassword", "Null");
 		System.setProperty("javax.net.ssl.trustStore", "Null");
 		System.setProperty("javax.net.ssl.trustStorePassword", "Null");
-		// System.out.println("keyPw: "+System.getProperty("javax.net.ssl.keyStore"));
 
 		ConvenienceCommunication c;
 		try {
 			c = new ConvenienceCommunication(dest, false);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

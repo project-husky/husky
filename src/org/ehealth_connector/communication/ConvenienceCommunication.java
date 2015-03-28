@@ -37,7 +37,8 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
  * <p>
- * The ConvenienceCommunication class provides methods to realize the transmission of documents to different destinations 
+ * The ConvenienceCommunication class provides methods to realize the
+ * transmission of documents to different destinations
  * 
  * The class implements the following profiles and actors
  * <ul>
@@ -45,18 +46,30 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * <ul>
  * <li>[ITI-41] Provide & Register Document Set – b</li>
  * </ul>
-// * <li><b>IHE ITI Document Consumer Akteur</b></li>
-// * <ul>
-// * <li>[ITI-18] Registry Stored Query</li>
-// * <li>[ITI-43] Retrieve Document Set</li>
-// * </ul>
-// * <li><b>IHE ITI Portable Media Creator und Media Importer Akteur</b></li>
-// * <ul>
-// * <li>[ITI-32] Distribute Document Set on Media</li>
-// * </ul>
-// * <li><b>IHE PCC Care Manager und Decision Support Service Akteur</b></li>
-// * <ul>
-// * <li>[PCC-12] Request for Clinical Guidance</li>
+ * // *
+ * <li><b>IHE ITI Document Consumer Akteur</b></li>
+ * // *
+ * <ul>
+ * // *
+ * <li>[ITI-18] Registry Stored Query</li>
+ * // *
+ * <li>[ITI-43] Retrieve Document Set</li>
+ * // *
+ * </ul>
+ * // *
+ * <li><b>IHE ITI Portable Media Creator und Media Importer Akteur</b></li>
+ * // *
+ * <ul>
+ * // *
+ * <li>[ITI-32] Distribute Document Set on Media</li>
+ * // *
+ * </ul>
+ * // *
+ * <li><b>IHE PCC Care Manager und Decision Support Service Akteur</b></li>
+ * // *
+ * <ul>
+ * // *
+ * <li>[PCC-12] Request for Clinical Guidance</li>
  * </ul>
  * </ul>
  * </p>
@@ -91,7 +104,8 @@ public class ConvenienceCommunication {
 	 * @param dest
 	 *            the destination
 	 * @param auditorEnabled
-	 *            sets whether the ATNA audit is enable (secure) or disabled (unsecure) 
+	 *            sets whether the ATNA audit is enable (secure) or disabled
+	 *            (unsecure)
 	 * @throws Exception
 	 *             the exception
 	 */
@@ -200,87 +214,82 @@ public class ConvenienceCommunication {
 	// XDS: Interaktion mit einer IHE Registry - A8
 
 	/**
-   * <p>
-   * Sends the current document to the according receipient (repository actor as specified in IHE XDR or IHE XDS).
-   * The transmission is performed as specified in <b>IHE [ITI-41] Provide & Register Document Set – b</b>
-   * 
-   * </p>
-   * <p>
-   * Role of the API or the application: <b>IHE
-   * ITI Document Source Actor</b>
-   * </p>
-   * 
-   * @return XDSResponseType
-   * @throws Exception
-   *             the exception
-   */
-  public XDSResponseType submit() throws Exception {
-  	// generate missing information for all documents
-  	for (XDSDocument xdsDoc : txnData.getDocList()) {
-  		generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
-  	}
-  
-  	// Create SubmissionSet
-  	SubmissionSetType subSet = txnData.getSubmissionSet();
-  	subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
-  
-  	// set submission set source id
-  	subSet.setSourceId(organizationalId);
-  
-  	// set submission time
-  	subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
-  	// txnData.saveMetadataToFile("C:/temp/metadata.xml");
-  
-  	// Use the PatientId of the first Document for the
-  	// SubmissionSet/patientId
-  	String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
-  	// CX testCx = XdsUtil.createCx("TESTAuthority", "TestId");
-  	// subSet.setPatientId(testCx);
-  	CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
-  	subSet.setPatientId(EcoreUtil.copy(testCx));
-  
-  	// set ContentTypeCode
-  	subSet.setContentTypeCode(XdsUtil.createCodedMetadata(
-  			"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
-  			null));
-  
-  	// txnData.saveMetadataToFile("C:/temp/meta.xml");
-  	XDSResponseType xdsr = source.submit(txnData);
-  	System.out.println("XDSResponseType: " + xdsr);
-  	return xdsr;
-  }
+	 * <p>
+	 * Sends the current document to the according receipient (repository actor
+	 * as specified in IHE XDR or IHE XDS). The transmission is performed as
+	 * specified in <b>IHE [ITI-41] Provide & Register Document Set – b</b>
+	 * 
+	 * </p>
+	 * <p>
+	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
+	 * </p>
+	 * 
+	 * @return XDSResponseType
+	 * @throws Exception
+	 *             the exception
+	 */
+	public XDSResponseType submit() throws Exception {
+		// generate missing information for all documents
+		for (XDSDocument xdsDoc : txnData.getDocList()) {
+			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
+		}
 
-  /**
-   * <<<<<<< .mine ======= Setting up the communication endpoint and the
-   * logger
-   * 
-   * @param repositoryUri
-   *            the repository uri
-     * @param auditorEnabled
-     *            sets whether the ATNA audit is enable (secure) or disabled (unsecure) 
-   * @throws Exception
-   *             the exception
-   */
-  protected void setUp(Destination dest, boolean auditorEnabled)
-  		throws Exception {
-  	// URL resourceUrl = getClass().getResource(log4jConfigPath);
-  	// org.apache.log4j.xml.DOMConfigurator.configure(resourceUrl);
-  
-  	if (dest.getKeyStore() != null) {
-  		System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-  		System.setProperty("javax.net.ssl.keyStorePassword",
-  				dest.getKeyStorePassword());
-  		System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-  		System.setProperty("javax.net.ssl.trustStorePassword",
-  				dest.getTrustStorePassword());
-  	}
-  
-  	source = new B_Source(dest.getRegistryUri());
-  	XDSSourceAuditor.getAuditor().getConfig()
-  			.setAuditorEnabled(auditorEnabled);
-  }
+		// Create SubmissionSet
+		SubmissionSetType subSet = txnData.getSubmissionSet();
+		subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
 
-  /**
+		// set submission set source id
+		subSet.setSourceId(organizationalId);
+
+		// set submission time
+		subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+		// Use the PatientId of the first Document for the
+		String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
+		CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
+		subSet.setPatientId(EcoreUtil.copy(testCx));
+
+		// set ContentTypeCode
+		subSet.setContentTypeCode(XdsUtil.createCodedMetadata(
+				"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
+				null));
+
+		// txnData.saveMetadataToFile("C:/temp/meta.xml");
+		XDSResponseType xdsr = source.submit(txnData);
+		System.out.println("XDSResponseType: " + xdsr);
+		return xdsr;
+	}
+
+	/**
+	 * Setting up the communication endpoint and the logger
+	 * 
+	 * @param repositoryUri
+	 *            the repository uri
+	 * @param auditorEnabled
+	 *            sets whether the ATNA audit is enable (secure) or disabled
+	 *            (unsecure)
+	 * @throws Exception
+	 *             the exception
+	 */
+	protected void setUp(Destination dest, boolean auditorEnabled)
+			throws Exception {
+
+		if (dest.getKeyStore() != null) {
+			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
+			System.setProperty("javax.net.ssl.keyStorePassword",
+					dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
+			System.setProperty("javax.net.ssl.trustStorePassword",
+					dest.getTrustStorePassword());
+		}
+
+		source = new B_Source(dest.getRegistryUri());
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(auditorEnabled);
+	}
+
+	/**
 	 * Cda fixes.
 	 * 
 	 * @param docMetadata
@@ -319,6 +328,7 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 *             the exception
 	 */
+	@SuppressWarnings("unchecked")
 	private void generateMissingDocEntryAttributes(String docEntryUuid)
 			throws Exception {
 
@@ -337,11 +347,6 @@ public class ConvenienceCommunication {
 					XdsUtil.convertCode(formatCode));
 		}
 
-		// //If the given doc is a CDA Doc load it for further processing
-		// if (desc.equals(DocumentDescriptor.CDA_R2)) {
-		// generateMissingDocEntryAttributesCda(docEntryUuid);
-		// }
-
 		// Derive MimeType from DocumentDescriptor
 		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
 			docMetadata.setMimeType(desc.getMimeType());
@@ -353,7 +358,6 @@ public class ConvenienceCommunication {
 					.createOIDGivenRoot(organizationalId, 64));
 		}
 
-		// Set ConfidentiallyCode to Normal ("N");
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
 				.isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType()

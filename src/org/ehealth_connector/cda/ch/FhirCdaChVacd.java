@@ -529,7 +529,7 @@ public class FhirCdaChVacd {
 		// Allergies and Other Adverse Reactions / Allergien und
 		// Unverträglichkeiten
 		for (AllergyConcern allergyProblemConcern : getAllergyProblemConcernEntries(bundle)) {
-			doc.addAllergyProblemConcern(allergyProblemConcern);
+			doc.addAllergyConcern(allergyProblemConcern);
 		}
 
 		// TODO Coded Results / Codierte Resultate

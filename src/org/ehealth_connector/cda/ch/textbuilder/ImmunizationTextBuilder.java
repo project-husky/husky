@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
@@ -30,7 +30,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
  * 
  * Always builds the whole part (not only adds one immunization).
  * 
- * @author gsc, Axel Helmer
  */
 public class ImmunizationTextBuilder extends TextBuilder {
 
@@ -95,7 +94,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		if (immunization.getCommentText() != null) {
 			addCellWithContent(immunization.getCommentText(),
 					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()
-					+ "-comment", i);
+							+ "-comment", i);
 		}
 		addCell("");
 		append("</tr>");
@@ -109,7 +108,6 @@ public class ImmunizationTextBuilder extends TextBuilder {
 			SubstanceAdministration substanceAdminstration = immunization
 					.getMdhtImmunization();
 			substanceAdminstration.setText(reference);
-			// .getSubstanceAdministrations().get(0);
 			i++;
 		}
 		return immunizations;

@@ -1,29 +1,26 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication;
 
 import java.net.URI;
 
 /**
- * The Class Destination. Describes an Endpoint for a transmission or communication.
- */
-/**
- * @author ahel
- *
+ * The Class Destination. Describes an Endpoint for a transmission or
+ * communication.
  */
 public class Destination {
 
@@ -120,6 +117,7 @@ public class Destination {
 
 	/**
 	 * Gets the path to the keystore
+	 * 
 	 * @return path to the keystore as string
 	 */
 	public String getKeyStore() {
@@ -128,6 +126,7 @@ public class Destination {
 
 	/**
 	 * Gets the passoword for the keystore
+	 * 
 	 * @return password of the keystore
 	 */
 	public String getKeyStorePassword() {
@@ -191,7 +190,7 @@ public class Destination {
 	public String getSenderFacilityOid() {
 		return senderFacilityOid;
 	}
-	
+
 	/**
 	 * Gets the sender Organizational OID
 	 * 
@@ -222,7 +221,8 @@ public class Destination {
 	/**
 	 * Sets the path to the key store
 	 * 
-	 * @param keyStore path
+	 * @param keyStore
+	 *            path
 	 */
 	public void setKeyStore(String keyStore) {
 		this.keyStore = keyStore;

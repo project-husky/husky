@@ -32,7 +32,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 /**
  * Utility for date handling.
  * 
- * @author gsc, Axel Helmer
  */
 public class DateUtil {
 
@@ -251,7 +250,6 @@ public class DateUtil {
 	}
 
 	public static SXCM_TS createSTCM_TS(Date date) {
-		// sxcm_ts = DatatypesFactory.eINSTANCE.createSXCM_TS();
 		try {
 			IVL_TS ivl_ts;
 			ivl_ts = createIVL_TSFromEuroDate(date);
@@ -281,7 +279,6 @@ public class DateUtil {
 	 */
 	public static SXCM_TS createSTCM_TS(Date startOfPossibleAppliacne,
 			Date endOfPossibleAppliance) {
-		// sxcm_ts = DatatypesFactory.eINSTANCE.createSXCM_TS();
 		try {
 			IVL_TS ivl_ts;
 			ivl_ts = createIVL_TSFromEuroDate(startOfPossibleAppliacne,

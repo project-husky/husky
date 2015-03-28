@@ -115,7 +115,6 @@ public class Immunization {
 		this();
 		mImmunization.setNegationInd(Boolean.FALSE);
 
-		// mImmunization.setText(createText());
 		setApplyDate(appliedAt);
 		addId(null);
 		setConsumable(consumable);
@@ -145,7 +144,6 @@ public class Immunization {
 		this();
 		mImmunization.setNegationInd(Boolean.FALSE);
 
-		// mImmunization.setText(createText());
 		setApplyDate(appliedAt);
 		setRouteOfAdministration(route);
 		setDosage(doseQuantity);
@@ -438,7 +436,6 @@ public class Immunization {
 		ED ed = DatatypesFactory.eINSTANCE.createED();
 		ed.addText(text);
 		mComment.setText(ed);
-		// mComment.setText(Util.createEd(text));
 		mImmunization.addAct(mComment);
 
 		EntryRelationship er = mImmunization.getEntryRelationships().get(

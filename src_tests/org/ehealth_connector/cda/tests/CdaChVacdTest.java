@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
@@ -28,14 +28,14 @@ import java.util.ArrayList;
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Comment;
 import org.ehealth_connector.cda.Consumable;
+import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
-import org.ehealth_connector.cda.Pregnancy;
+import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.CdaChEdes;
@@ -95,13 +95,13 @@ public class CdaChVacdTest extends TestUtils {
 
 	private GestationalAge cr1;
 	private LaboratoryObservation lss1;
-	private Pregnancy ph1;
+	private PregnancyHistory ph1;
 	private Immunization immunization2;
 	private PastProblemConcern ppc2;
 	private ActiveProblemConcern apce2;
 	private AllergyConcern ac2;
 	private LaboratoryObservation lss2;
-	private Pregnancy ph2;
+	private PregnancyHistory ph2;
 	private ImmunizationRecommendation immunizationRecommendation2;
 	private Comment c1;
 	private Comment c2;
@@ -183,15 +183,15 @@ public class CdaChVacdTest extends TestUtils {
 		c.setLotNr(numS2);
 		return consumable1;
 	}
-	
+
 	public Reason createReason1() {
-	  Reason r = new Reason(code1);
-	  return r;
+		Reason r = new Reason(code1);
+		return r;
 	}
-	
+
 	public Reason createReason2() {
-	      Reason r = new Reason(code1, url, numS1);
-	      return r;
+		Reason r = new Reason(code1, url, numS1);
+		return r;
 	}
 
 	public Consumable createConsumable1() {
@@ -285,7 +285,7 @@ public class CdaChVacdTest extends TestUtils {
 		i.setCommentText(ts1);
 		i.setIntended();
 		i.addReason(reason2);
-		//i.addReason(reason2);
+		// i.addReason(reason2);
 		return i;
 	}
 
@@ -316,8 +316,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 9
-	public Pregnancy createPregnancy() {
-		Pregnancy p = new Pregnancy();
+	public PregnancyHistory createPregnancy() {
+		PregnancyHistory p = new PregnancyHistory();
 		p.setEstimatedBirthDate(startDate);
 		return p;
 	}
@@ -357,11 +357,11 @@ public class CdaChVacdTest extends TestUtils {
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
 		try {
-		  url = new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
-    } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+			url = new URL(
+					"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
 		// Convenience API Types
 		code1 = createCode1();
@@ -504,8 +504,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		ac1 = createAllergyConcern();
 		ac2 = createAllergyConcern();
-		d.addAllergyProblemConcern(ac1);
-		d.addAllergyProblemConcern(ac2);
+		d.addAllergyConcern(ac1);
+		d.addAllergyConcern(ac2);
 		d.setNarrativeTextAllergyProblemConcerns(ts4);
 		assertTrue(d.getNarrativeTextAllergyProblemConcerns().contains(ts4));
 
@@ -523,8 +523,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		ph1 = createPregnancy();
 		ph2 = createPregnancy();
-		d.addPregnancy(ph1);
-		d.addPregnancy(ph2);
+		d.addPregnancyHistory(ph1);
+		d.addPregnancyHistory(ph2);
 		d.setNarrativeTextPregnancies(ts2);
 		assertTrue(d.getNarrativeTextPregnancies().contains(ts2));
 
@@ -614,24 +614,24 @@ public class CdaChVacdTest extends TestUtils {
 		GestationalAge g = new GestationalAge();
 
 		g.setAsboluteDays(70);
-		assertEquals(70, g.getAboluteDays());
+		assertEquals(70, g.getAbsoluteDays());
 		assertEquals(10, g.getWeeksOfWeeksAndDays());
 		assertEquals(0, g.getDaysOfWeeksAndDays());
 
 		g.setWeeksAndDays(10, 0);
 		assertEquals(10, g.getWeeksOfWeeksAndDays());
 		assertEquals(0, g.getDaysOfWeeksAndDays());
-		assertEquals(70, g.getAboluteDays());
+		assertEquals(70, g.getAbsoluteDays());
 
 		g.setAsboluteDays(2);
-		assertEquals(2, g.getAboluteDays());
+		assertEquals(2, g.getAbsoluteDays());
 		assertEquals(0, g.getWeeksOfWeeksAndDays());
 		assertEquals(2, g.getDaysOfWeeksAndDays());
 
 		g.setWeeksAndDays(0, 2);
 		assertEquals(0, g.getWeeksOfWeeksAndDays());
 		assertEquals(2, g.getDaysOfWeeksAndDays());
-		assertEquals(2, g.getAboluteDays());
+		assertEquals(2, g.getAbsoluteDays());
 	}
 
 	// 12
@@ -716,8 +716,10 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(ts2, i.getCommentText());
 
 		i.addReason(reason2);
-		ArrayList<Reason>  r = i.getReasons();
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",i.getReasons().get(0).getReference());
+		ArrayList<Reason> r = i.getReasons();
+		assertEquals(
+				"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
+				i.getReasons().get(0).getReference());
 		assertEquals(numS1, i.getReasons().get(0).getReferenceId());
 	}
 
@@ -762,7 +764,7 @@ public class CdaChVacdTest extends TestUtils {
 
 		i.setCommentText(ts1);
 		assertEquals(ts1, i.getCommentText());
-		
+
 		assertFalse(i.getIntended());
 		i.setIntended();
 		assertTrue(i.getIntended());
@@ -787,7 +789,7 @@ public class CdaChVacdTest extends TestUtils {
 		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		assertEquals(
 				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN
-				.getCodeValue(), l.getInterpretationCode());
+						.getCodeValue(), l.getInterpretationCode());
 
 		l.addValue(code2);
 		assertTrue(TestUtils.isEqual(code2, l.getValue().getCode()));
@@ -830,7 +832,7 @@ public class CdaChVacdTest extends TestUtils {
 	// 9
 	@Test
 	public void testPregnancySetterGetter() {
-		Pregnancy p = new Pregnancy();
+		PregnancyHistory p = new PregnancyHistory();
 
 		p.setEstimatedBirthDate(startDate);
 		assertEquals(startDateString, p.getEstimatedBirthdate());
@@ -861,17 +863,19 @@ public class CdaChVacdTest extends TestUtils {
 		p.addValue(value2);
 		assertEquals(true, TestUtils.isEqual(value2, p.getValues().get(2)));
 	}
-	
+
 	@Test
-	public void testReasonSetterGetter()  {
-	  Reason r1 = new Reason();
-	  r1.setCode(code1);
-	  assertTrue(isEqual(code1, r1.getCode()));
-	  
-	  r1.setReference(url);
-	  assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", r1.getReference());
-	  
-	  r1.setReferenceId(numS1);
-	  assertEquals(numS1, r1.getReferenceId());
+	public void testReasonSetterGetter() {
+		Reason r1 = new Reason();
+		r1.setCode(code1);
+		assertTrue(isEqual(code1, r1.getCode()));
+
+		r1.setReference(url);
+		assertEquals(
+				"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
+				r1.getReference());
+
+		r1.setReferenceId(numS1);
+		assertEquals(numS1, r1.getReferenceId());
 	}
 }

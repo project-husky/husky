@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication;
 
@@ -40,7 +40,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * Provides metadata attributes as specified in [IHE ITI TF-3], Table 4.1-5: Document Metadata
+ * Provides metadata attributes as specified in [IHE ITI TF-3], Table 4.1-5:
+ * Document Metadata
  * */
 public class DocumentMetadata {
 
@@ -76,48 +77,6 @@ public class DocumentMetadata {
 		xDoc = documentEntryType;
 	}
 
-	// //Constructor for File Documents
-	// //If the Document is CDA, the Metadata will be extraced, otherwise it
-	// will just be tested, if the file is accessible
-	// public DocumentMetadata(String filePath, DocumentDescriptor docDesc)
-	// throws Exception {
-	// this();
-	// File docEntryFile = new File (filePath);
-	// fis = new FileInputStream(docEntryFile);
-	// if (DocumentDescriptor.CDA_R2.equals(docDesc)) {
-	// ClinicalDocument clinicalDocument = CDAUtil.load(fis);
-	// CDAR2Extractor deExtractor = new CDAR2Extractor(clinicalDocument);
-	// xDoc = deExtractor.extract();
-	// }
-	// fis.close();
-	// }
-
-	// /**
-	// * @param documentId
-	// * Die Dokumenten-Id wird als Globally Unique Identifier (GUID)
-	// * angegeben.
-	// * @param versionId
-	// * Nur anzugeben, wenn es sich nicht um die erste Version des
-	// * Dokuments handelt. Die Version ist eine fortlaufende Nummer.
-	// * @param title
-	// * Dieses Feld entspricht im herkömmlichen medizinischen Dokument der
-	// * Betreffzeile
-	// * @param codedLanguage
-	// * In der Schweiz gebräuchlichen Language Codes gemäss RFC 1766
-	// * (ISO-639-1 und ISO 3166): de-CH, fr-CH, it-CH
-	// * @param dateOfDocumentCreation
-	// * Datum, an dem das Dokument erstellt wurde
-	// */
-	// public DocumentMetadata(String documentId, String versionId, String
-	// title,
-	// Language codedLanguage, Calendar dateOfDocumentCreation) {
-	// // this.documentId = documentId;
-	// // this.versionId = versionId;
-	// // this.title = title;
-	// // this.codedLanguage = codedLanguage;
-	// // this.dateOfDocumentCreation = dateOfDocumentCreation;
-	// }
-
 	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convencience API Author.
@@ -132,7 +91,7 @@ public class DocumentMetadata {
 		// logger.Debug is set to true
 		if (author.getAuthorMdht().getAssignedAuthor().getTelecoms() == null
 				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms()
-				.isEmpty()) {
+						.isEmpty()) {
 			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
 		}
@@ -225,7 +184,6 @@ public class DocumentMetadata {
 	 *            the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
-		// TODO Consider Enum here
 		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
 	}
 
@@ -254,7 +212,6 @@ public class DocumentMetadata {
 		xDoc.setSourcePatientInfo(spi);
 
 		// PatientID
-		// xDoc.setPatientId(extractor.extractPatientId());
 
 		if (patient.getIds() != null) {
 			setPatientId(patient.getIds().get(0));
@@ -281,7 +238,6 @@ public class DocumentMetadata {
 	 *            the new practice setting code
 	 */
 	public void setPracticeSettingCode(Code code) {
-		// TODO Consider Enum here
 		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
 	}
 

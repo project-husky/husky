@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
@@ -28,7 +28,6 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
  * 
  * Always builds the whole part (not only adds one immunization recommendation).
  * 
- * @author Axel Helmer
  */
 public class LaboratoryObservationTextBuilder extends TextBuilder {
 
@@ -80,13 +79,6 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 			addCell("");
 		}
 
-		// // Erregernachweis
-		// if (laboratoryObservation.getImmuneProtection()) {
-		// addCell("Positiv");
-		// } else {
-		// addCell("Negativ");
-		// }
-
 		// Resultat
 		addCell("");
 
@@ -119,7 +111,7 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 				cellStr = cellStr
 						+ ("<content ID='"
 								+ SectionsVACD.SEROLOGY_STUDIES
-								.getContentIdPrefix() + "-comment"
+										.getContentIdPrefix() + "-comment"
 								+ String.valueOf(i) + String.valueOf(1)
 								+ String.valueOf(k) + "'>");
 				cellStr = cellStr + (laboratoryObservation.getCommentText());

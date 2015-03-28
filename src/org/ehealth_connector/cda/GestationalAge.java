@@ -175,7 +175,7 @@ public class GestationalAge extends CodedResults {
 	 *         Wochen) zurück.</div> <div class="fr"></div> <div
 	 *         class="it"></div>
 	 */
-	public int getAboluteDays() {
+	public int getAbsoluteDays() {
 		return (getWeeksOfWeeksAndDays() * 7) + getDaysOfWeeksAndDays();
 	}
 

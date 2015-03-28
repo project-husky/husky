@@ -282,11 +282,12 @@ public abstract class CdaCh {
 	 *            gesetzt
 	 */
 	public void addStylesheet(String stylesheet) {
-		// Add the stylesheet processing instructions to the document
-		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-				"xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
-						+ "\"");// xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\") xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\""
-		// );
+		if (stylesheet != null) {
+			// Add the stylesheet processing instructions to the document
+			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
+					"xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
+							+ "\"");
+		}
 	}
 
 	/**
@@ -551,7 +552,6 @@ public abstract class CdaCh {
 				.setRepresentedCustodianOrganization(
 						Util.createCustodianOrganizationFromOrganization(organization));
 
-		// mdhtCustodian.setNullFlavor(NullFlavor.);
 		// Setzt die GLN des Arztes
 		II id = DatatypesFactory.eINSTANCE.createII();
 		if (organization.getMdhtOrganization().getIds().size() > 0) {

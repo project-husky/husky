@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -44,13 +44,13 @@ public class CodedResults {
 	II mIi;
 
 	public CodedResults() {
-	  crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
+		crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
 	}
-	
+
 	public CodedResults(CodedResultsSection crsection) {
-	  crs = crsection;
+		crs = crsection;
 	}
-	
+
 	/**
 	 * Instantiates a new Simple Observation
 	 *
@@ -63,13 +63,13 @@ public class CodedResults {
 		mIi = Util.createUuidVacdIdentificator(null);
 
 		// CreateEmpty Procedure Entry
-		//crs.addProcedure(createEmptyProcedureEntry());
+		// crs.addProcedure(createEmptyProcedureEntry());
 	}
 
 	public void addSimpleObservation(SimpleObservation so) {
-	  crs.addObservation(so);
+		crs.addObservation(so);
 	}
-	
+
 	/**
 	 * <div class="de">Copy mdht coded results section.</div> <div
 	 * class="fr"></div> <div class="it"></div>
@@ -80,6 +80,7 @@ public class CodedResults {
 		return EcoreUtil.copy(crs);
 	}
 
+	@SuppressWarnings("unused")
 	private ProcedureEntry createEmptyProcedureEntry() {
 		// Create and add an empty procedureEntry
 		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE

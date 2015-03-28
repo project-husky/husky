@@ -34,8 +34,6 @@ import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;
-import org.openhealthtools.mdht.uml.cda.Reference;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -291,49 +289,6 @@ public class ImmunizationRecommendation {
 		return null;
 	}
 
-	private CDACHBodyExtRef getExternalDocRef(EList<Reference> r) {
-		for (Reference ref : r) {
-			if (ref instanceof CDACHBodyExtRef) {
-				return (CDACHBodyExtRef) ref;
-			}
-		}
-		return null;
-	}
-
-	// /**
-	// * Gets the Id of the reference to an external document
-	// *
-	// * @return the id.
-	// */
-	// public Identificator getExternalDocumentId() {
-	// CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-	// .getReferences());
-	// if (docRef != null && docRef.getExternalDocument() != null
-	// && docRef.getExternalDocument().getIds() != null) {
-	// return new Identificator(docRef.getExternalDocument().getIds()
-	// .get(0));
-	// } else
-	// return null;
-	// }
-	//
-	// /**
-	// * Gets the Value of the reference to an external document
-	// *
-	// * @return the reference. Typically a URL (e.g.
-	// * 'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-	// */
-	// public String getExternalDocumentReferenceValue() {
-	// CDACHBodyExtRef docRef = getExternalDocRef(mImmunizationRecommendation
-	// .getReferences());
-	// if (docRef != null && docRef.getExternalDocument() != null
-	// && docRef.getExternalDocument().getText() != null
-	// && docRef.getExternalDocument().getText().getText() != null) {
-	// return docRef.getExternalDocument().getText().getReference()
-	// .getValue();
-	// } else
-	// return null;
-	// }
-
 	/**
 	 * Gets the id.
 	 *
@@ -453,7 +408,6 @@ public class ImmunizationRecommendation {
 		ED ed = DatatypesFactory.eINSTANCE.createED();
 		ed.addText(text);
 		mComment.setText(ed);
-		// mComment.setText(Util.createEd(text));
 		mImmunizationRecommendation.addAct(mComment);
 
 		EntryRelationship er = mImmunizationRecommendation

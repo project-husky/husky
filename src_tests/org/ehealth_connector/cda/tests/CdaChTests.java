@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
@@ -124,8 +124,8 @@ public class CdaChTests extends TestUtils {
 		c.setTimestamp(startDate);
 		assertEquals(startDate.getTime(), c.getTimestamp().getTime());
 		c.setConfidentialityCode(Confidentiality.RESTRICED);
-		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(),
-				c.getConfidentialityCode().getCode()));
+		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c
+				.getConfidentialityCode().getCode()));
 		// doc id root
 		assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
 		// set Version
@@ -138,7 +138,6 @@ public class CdaChTests extends TestUtils {
 		try {
 			c.saveToFile("C:/temp/testCdaCd.xml");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

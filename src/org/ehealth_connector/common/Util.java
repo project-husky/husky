@@ -299,7 +299,6 @@ public class Util {
 	 */
 	public static ED createEd(String text) {
 		ED ed = DatatypesFactory.eINSTANCE.createED();
-		// ed.setReference(arg0);
 		return (ed.addText(text));
 	}
 
@@ -749,6 +748,7 @@ public class Util {
 		return tl;
 	}
 
+	@SuppressWarnings("unused")
 	private static String getText(FeatureMap featureMap) {
 		StringBuffer buffer = new StringBuffer("");
 		for (FeatureMap.Entry entry : featureMap) {
@@ -759,8 +759,6 @@ public class Util {
 					buffer.append("<" + entry.getEStructuralFeature().getName()
 							+ ">");
 				}
-				// AnyType anyValue = (AnyType)entry.getValue();
-				// buffer.append(getText(anyValue.getMixed()));
 			}
 		}
 		return buffer.toString().trim();
@@ -906,6 +904,7 @@ public class Util {
 		return value;
 	}
 
+	@SuppressWarnings("unused")
 	private static void traverse(FeatureMap root) {
 		Stack<FeatureMap> stack = new Stack<FeatureMap>();
 		Stack<String> stack2 = new Stack<String>();
@@ -945,7 +944,6 @@ public class Util {
 	private static StringBuilder traverse2(FeatureMap featureMap,
 			StringBuilder sb) {
 		for (int i = 0; i <= featureMap.size() - 1; i++) {
-			// for (int i = featureMap.size() - 1; i >= 0; i--) {
 			Entry entry = featureMap.get(i);
 			if (entry.getEStructuralFeature() instanceof EReference) {
 				sb.append("<" + entry.getEStructuralFeature().getName());

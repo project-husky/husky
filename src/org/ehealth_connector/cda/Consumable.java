@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -125,23 +125,11 @@ public class Consumable {
 				.convertToIdentificator(gtinOrPharmacodeOrGln));
 		if (whoAtcCode != null) {
 			setWhoAtcCode(whoAtcCode);
-			//addManufacturedMaterialTranslation(gtinOrPharmacodeOrGln);
 		} else {
 			setWhoAtcCode(null);
 		}
 		setTradeName(tradeNameOfVaccine);
 		mConsumable.setTypeCode(ParticipationType.CSM);
-	}
-
-	/**
-	 * Adds the manufactured material code to the code element.
-	 *
-	 * @param code
-	 *            the new manufactured material code
-	 */
-	private void addManufacturedMaterialCodeTranslation(Code code) {
-		CD cd = EcoreUtil.copy(code.getCD());
-		mMaterial.getCode().getTranslations().add(cd);
 	}
 
 	/**
@@ -209,40 +197,14 @@ public class Consumable {
 					|| id.getRoot() != null
 					&& id.getRoot().equals(
 							CodeSystems.SwissINDEX.getCodeSystemId())
-							|| id.getRoot() != null
-							&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+					|| id.getRoot() != null
+					&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 				Identificator ide = new Identificator(id);
 				return ide;
 			}
 		}
-		// if (Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(),
-		// mMaterial.getCode())!=null) {
-		// return Code.getTranslationOrCode(CodeSystems.GTIN.getCodeSystemId(),
-		// mMaterial.getCode());
-		// }
-		// if (Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(),
-		// mMaterial.getCode())!=null) {
-		// return Code.getTranslationOrCode(CodeSystems.GLN.getCodeSystemId(),
-		// mMaterial.getCode());
-		// }
-		// if
-		// (Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(),
-		// mMaterial.getCode())!=null) {
-		// return
-		// Code.getTranslationOrCode(CodeSystems.SwissINDEX.getCodeSystemId(),
-		// mMaterial.getCode());
-		// }
+
 		return null;
-		// for (CD codeTranslation : getManufacturedMaterialTranslations()) {
-		// String codeTransStr = codeTranslation.getCodeSystem();
-		// if (codeTransStr.equals(CodeSystems.GTIN.getCodeSystemId()) ||
-		// codeTransStr.equals(CodeSystems.GLN.getCodeSystemId()) ||
-		// codeTransStr.equals(CodeSystems.SwissINDEX.getCodeSystemId())) {
-		// Code code = new Code(codeTranslation);
-		// return code;
-		// }
-		// }
-		// return null;
 	}
 
 	/**
@@ -294,9 +256,9 @@ public class Consumable {
 	 * @param text
 	 */
 	public void setLotNr(String text) {
-	  if (!text.equals("")) {
-		mMaterial.setLotNumberText(Util.st(text));
-	  }
+		if (!text.equals("")) {
+			mMaterial.setLotNumberText(Util.st(text));
+		}
 	}
 
 	/**

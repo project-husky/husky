@@ -310,27 +310,6 @@ public class LaboratoryObservation {
 		return Util.convertIds(mLaboratoryObservation.getIds());
 	}
 
-	// /**
-	// * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
-	// * Code).</div> <div class="fr"></div> <div class="it"></div>
-	// *
-	// * @return true, wenn ein Impfschutz besteht, false sonst.
-	// */
-	// public boolean getImmuneProtection() {
-	// // mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-	//
-	// if (mLaboratoryObservation
-	// .getInterpretationCodes()
-	// .get(0)
-	// .getCode()
-	// .equals(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
-	// .getCodeValue())) {
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-
 	/**
 	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
 	 * Code).</div> <div class="fr"></div> <div class="it"></div>
@@ -421,7 +400,6 @@ public class LaboratoryObservation {
 		ED ed = DatatypesFactory.eINSTANCE.createED();
 		ed.addText(text);
 		mComment.setText(ed);
-		// mComment.setText(Util.createEd(text));
 		mLaboratoryObservation.addAct(mComment);
 
 		EntryRelationship er = mLaboratoryObservation.getEntryRelationships()
@@ -444,33 +422,6 @@ public class LaboratoryObservation {
 			e.printStackTrace();
 		}
 	}
-
-	// /**
-	// * Sets the immune protection.
-	// *
-	// * <div class="de">Setzt, ob ein Immunschutz besteht (Interpretations
-	// * Code)</div> <div class="fr"></div> <div class="it"></div>
-	// *
-	// * @param immuneProtection
-	// * the new immune protection <div class="de">true, wenn ein
-	// * Immunschutz besteht (Interpretation Code:
-	// * POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN). false, wenn kein
-	// * Immunschutz besteht (Interpretation Code:
-	// * NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN)</div>
-	// */
-	// public void setImmuneProtection(boolean immuneProtection) {
-	// if (immuneProtection == false) {
-	// mLaboratoryObservation
-	// .getInterpretationCodes()
-	// .add(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECI_MEN
-	// .getCE());
-	// } else {
-	// mLaboratoryObservation
-	// .getInterpretationCodes()
-	// .add(ObservationInterpretation.POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN
-	// .getCE());
-	// }
-	// }
 
 	/**
 	 * Sets the interpretation code.
