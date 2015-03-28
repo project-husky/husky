@@ -29,6 +29,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.ActiveProblemConcern;
+import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.Immunization;
+import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.LaboratoryObservation;
+import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
@@ -41,6 +47,7 @@ import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
@@ -466,6 +473,85 @@ public class FhirCdaChVacd {
 	 * class="de"></div><div class="fr"></div>
 	 */
 	public FhirCdaChVacd() {
+	}
+
+	/**
+	 * <div class="en">Creates an eHC CdaChVacd instance from a valid FHIR
+	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
+	 * 
+	 * @param bundle
+	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @param xsl
+	 *            <div class="en">desired stylesheet for the CDA document</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @param css
+	 *            <div class="en">desired CSS for the CDA document</div> <div
+	 *            class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC CdaChVacd instance containing payload of the
+	 *         given FHIR Bundle resource</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.ch.CdaChVacd createCdaChVacdFromFHIRBundle(
+			Bundle bundle, String xsl, String css) {
+
+		// Header
+		CdaChVacd doc = new CdaChVacd(getDocLanguage(bundle), xsl, css);
+		DocTypeCode docType = getDocType(bundle);
+		doc.setConfidentialityCode(getConfidentialityCode(bundle));
+		doc.setPatient(getPatient(bundle));
+		if (docType == DocTypeCode.PSEUDONYMIZED)
+			doc.pseudonymization();
+
+		for (Author author : getAuthors(bundle)) {
+			author.setTime(DateUtil.date("15.12.2014"));
+			doc.addAuthor(author);
+		}
+		doc.setCustodian(getCustodian(bundle));
+		doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
+
+		// Body
+		// Immunizations / Impfungen
+		for (Immunization immunization : getImmunizations(bundle)) {
+			doc.addImmunization(immunization);
+		}
+
+		// Active Problems / Problemliste
+		for (ActiveProblemConcern activeProblemConcernEntry : getActiveProblemConcernEntries(bundle)) {
+			doc.addActiveProblemConcern(activeProblemConcernEntry);
+		}
+
+		// History of Past Illness / Bisherige Krankheiten/Anamnese
+		for (PastProblemConcern pastProblemConcern : getPastProblemConcernEntries(bundle)) {
+			doc.addPastProblemConcern(pastProblemConcern);
+		}
+
+		// Allergies and Other Adverse Reactions / Allergien und
+		// Unverträglichkeiten
+		for (AllergyConcern allergyProblemConcern : getAllergyProblemConcernEntries(bundle)) {
+			doc.addAllergyProblemConcern(allergyProblemConcern);
+		}
+
+		// TODO Coded Results / Codierte Resultate
+		// for (AllergyConcern allergyProblemConcern :
+		// getAllergyProblemConcernEntries(bundle)) {
+		// doc.add(allergyProblemConcern);
+		// }
+
+		// Laboratory Specialty Section / Relevante Laborbefunde
+		for (LaboratoryObservation laboratoryObservation : getLaboratoryObservations(bundle)) {
+			doc.addLaboratoryObservation(laboratoryObservation);
+		}
+
+		// TODO tony: Schwangerschaften
+
+		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(bundle)) {
+			doc.addImmunizationRecommendation(immunizationRecommendation);
+		}
+
+		doc.addComment(getComment(bundle));
+
+		return doc;
 	}
 
 	/**
