@@ -33,7 +33,7 @@ public class Value {
 	/**
 	 * The m value.
 	 */
-	ANY mValue;
+	private ANY mValue;
 
 	/**
 	 * <div class="en">Instantiates a new value with a given MDHT ANY
@@ -302,16 +302,6 @@ public class Value {
 		}
 	}
 
-	private void setPqValue(String value) {
-		PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
-	private void setUcumUnit(UCUM unit) {
-		PQ pq = (PQ) mValue;
-		pq.setUnit(unit.toString());
-	}
-
 	/**
 	 * <div class="en">Gets the value as String (e.g.
 	 * "Value [value=200, unit=ml]")</div> <div class="de">Liefert value.</div>
@@ -323,6 +313,16 @@ public class Value {
 	public String toString() {
 		return "Value [value=" + getPhysicalQuantityValue() + ", unit="
 				+ getPhysicalQuantityUnit() + "]";
+	}
+
+	private void setPqValue(String value) {
+		PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	private void setUcumUnit(UCUM unit) {
+		PQ pq = (PQ) mValue;
+		pq.setUnit(unit.toString());
 	}
 
 }

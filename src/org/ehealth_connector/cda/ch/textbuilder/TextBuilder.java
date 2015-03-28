@@ -29,6 +29,11 @@ abstract class TextBuilder {
 	TextBuilder() {
 	}
 
+	@Override
+	public String toString() {
+		return buffer.toString();
+	}
+
 	protected void addCell(String text) {
 		append("<td>");
 		append(text);
@@ -58,11 +63,6 @@ abstract class TextBuilder {
 
 	protected String buildCellWithContent(String text, int i, String prefix) {
 		return ("<td><content ID=\"" + prefix + i + "\">" + text + "</content></td>");
-	}
-
-	@Override
-	public String toString() {
-		return buffer.toString();
 	}
 
 	// public void build(String[] tableHeader, String[][] tableBody,

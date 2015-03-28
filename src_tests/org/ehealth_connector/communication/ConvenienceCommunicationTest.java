@@ -72,7 +72,7 @@ public class ConvenienceCommunicationTest {
 			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2,
 					cdaFilePath);
 			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
-			assertNotNull(c.txnData);
+			assertNotNull(c.getTxnData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

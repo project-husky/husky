@@ -44,6 +44,20 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		section.getContentIdPrefix();
 	}
 
+	/**
+	 * Returns HTML formatted string.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
+	}
+
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
@@ -78,10 +92,10 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		} else {
 			addCell("");
 		}
-
+	
 		// Resultat
 		addCell("");
-
+	
 		// Code & CodeSystem
 		if (laboratoryObservation.getCode() != null) {
 			if (laboratoryObservation.getCode().getCode() != null) {
@@ -94,11 +108,11 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 			} else {
 				addCell("");
 			}
-
+	
 		} else {
 			addCell("");
 		}
-
+	
 		// Kommentar
 		String cellStr = "<td>";
 		int k = 0;
@@ -123,19 +137,5 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 			append(cellStr);
 		}
 		append("</tr>");
-	}
-
-	/**
-	 * Returns HTML formatted string.
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
 	}
 }

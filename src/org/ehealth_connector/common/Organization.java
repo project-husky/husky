@@ -33,7 +33,7 @@ public class Organization {
 	/**
 	 * The mdht organization object.
 	 */
-	public org.openhealthtools.mdht.uml.cda.Organization mOrganization;
+	private org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
 	/**
 	 * <div class="en">Instantiates a new organization.</div> <div

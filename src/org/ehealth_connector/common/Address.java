@@ -30,7 +30,7 @@ public class Address {
 	/**
 	 * Das HL7 Address Objekt.
 	 */
-	AD mAd;
+	private AD mAd;
 
 	/**
 	 * <div class="en">Instantiates a new address.</div> <div
@@ -46,39 +46,6 @@ public class Address {
 		mAd = adress;
 	}
 
-	/**
-	 * Erstellt ein Adress-Objekt
-	 * 
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
-	 */
-	private Address(String zip, String city, AddressUse usage) {
-		mAd = DatatypesFactory.eINSTANCE.createAD();
-		setCityAndZip(zip, city, usage);
-	}
-
-	private void setCityAndZip(String zip, String city, AddressUse usage) {
-	  setCity(city);
-      setZip(zip);
-      if (usage != null) {
-          switch (usage) {
-          case BUSINESS:
-              mAd.getUses().add(PostalAddressUse.WP);
-              break;
-          case PRIVATE:
-              mAd.getUses().add(PostalAddressUse.HP);
-              break;
-          default:
-              mAd.getUses().add(PostalAddressUse.WP);
-              break;
-          }
-      }
-	}
-	
 	/**
 	 * Erstellt ein Adress-Objekt.
 	 *
@@ -347,5 +314,38 @@ public class Address {
 	 */
 	public void setZip(String zip) {
 		mAd.addPostalCode(zip);
+	}
+
+	/**
+	 * Erstellt ein Adress-Objekt
+	 * 
+	 * @param zip
+	 *            PLZ
+	 * @param city
+	 *            Ort
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	private Address(String zip, String city, AddressUse usage) {
+		mAd = DatatypesFactory.eINSTANCE.createAD();
+		setCityAndZip(zip, city, usage);
+	}
+
+	private void setCityAndZip(String zip, String city, AddressUse usage) {
+	  setCity(city);
+	  setZip(zip);
+	  if (usage != null) {
+	      switch (usage) {
+	      case BUSINESS:
+	          mAd.getUses().add(PostalAddressUse.WP);
+	          break;
+	      case PRIVATE:
+	          mAd.getUses().add(PostalAddressUse.HP);
+	          break;
+	      default:
+	          mAd.getUses().add(PostalAddressUse.WP);
+	          break;
+	      }
+	  }
 	}
 }

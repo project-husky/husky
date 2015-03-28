@@ -52,7 +52,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class LaboratoryObservation {
 
 	/** The m laboratory observation. */
-	org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
+	private org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
 	/**
 	 * Instantiates a new laboratory observation.

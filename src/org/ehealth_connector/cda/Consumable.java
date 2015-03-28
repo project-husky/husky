@@ -293,13 +293,6 @@ public class Consumable {
 				.copyMdhtOrganization());
 	}
 
-	protected void setMdhtConsumable(
-			org.openhealthtools.mdht.uml.cda.Consumable consumable) {
-		mConsumable = EcoreUtil.copy(consumable);
-		mProductEntry = (ProductEntry) consumable.getManufacturedProduct();
-		mMaterial = mProductEntry.getManufacturedMaterial();
-	}
-
 	/**
 	 * Sets the trade name.
 	 *
@@ -330,5 +323,12 @@ public class Consumable {
 			ce.setNullFlavor(NullFlavor.UNK);
 		}
 		mMaterial.setCode(ce);
+	}
+
+	protected void setMdhtConsumable(
+			org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+		mConsumable = EcoreUtil.copy(consumable);
+		mProductEntry = (ProductEntry) consumable.getManufacturedProduct();
+		mMaterial = mProductEntry.getManufacturedMaterial();
 	}
 }

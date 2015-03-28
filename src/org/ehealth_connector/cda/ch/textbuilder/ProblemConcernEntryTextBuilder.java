@@ -43,6 +43,20 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 		contentIdPrefix = section.getContentIdPrefix();
 	}
 
+	/**
+	 * Returns HTML formatted string.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
+	}
+
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
@@ -71,19 +85,5 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 			addCell("");
 		}
 		append("</tr>");
-	}
-
-	/**
-	 * Returns HTML formatted string.
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
 	}
 }

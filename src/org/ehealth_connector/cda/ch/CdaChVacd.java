@@ -92,9 +92,6 @@ public class CdaChVacd extends CdaCh {
 
 	public static final boolean CDALevel2TextGeneration = false;
 
-	/** The query. */
-	Query query;
-
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 *
@@ -187,7 +184,7 @@ public class CdaChVacd extends CdaCh {
 	public CdaChVacd(VACD doc) {
 		super(doc);
 		setDoc(doc);
-		query = new Query(this.doc);
+		new Query(this.doc);
 	}
 
 	/**
@@ -631,26 +628,6 @@ public class CdaChVacd extends CdaCh {
 		phs.addObservation(pregnancy.copyMdhtPregnancy());
 	}
 
-	private Section findRemarksSection() {
-		for (Section section : doc.getSections()) {
-			if (section.getCode() != null) {
-				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
-					return section;
-				}
-			}
-		}
-		return null;
-	}
-
-	private void fixGeneralHeaderConstraintTemplateId() {
-		for (int i = 0; i < doc.getTemplateIds().size(); i++) {
-			if (doc.getTemplateIds().get(i).getRoot()
-					.equals("2.16.840.1.113883.10.20.3")) {
-				doc.getTemplateIds().remove(i);
-			}
-		}
-	}
-
 	/**
 	 * Liefert den menschenlesbaren Text des Kapitels zu Aktiven Leiden zurück
 	 *
@@ -935,14 +912,6 @@ public class CdaChVacd extends CdaCh {
 		return labObservations;
 	}
 
-	private String getNarrativeText(Section s) {
-		if (s != null && s != null) {
-			StrucDocText t = s.getText();
-			return Util.extractStringFromNonQuotedStrucDocText(t);
-		}
-		return null;
-	}
-
 	/**
 	 * <div class="en">Gets the human readable CDA section text for the
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
@@ -1117,22 +1086,6 @@ public class CdaChVacd extends CdaCh {
 			pregnancies.add(immunization);
 		}
 		return pregnancies;
-	}
-
-	private void initVacd() {
-		CHPackage.eINSTANCE.eClass();
-		// fix missing extension values in MDHT model.
-		for (II templateId : doc.getTemplateIds()) {
-			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH-VACD");
-			}
-			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH");
-			}
-		}
-		setTitle(eVACDOCTitle);
-		fixGeneralHeaderConstraintTemplateId();
-		query = new Query(doc);
 	}
 
 	/**
@@ -1377,6 +1330,50 @@ public class CdaChVacd extends CdaCh {
 		if (getDoc().getPregnancyHistorySection() != null) {
 			getDoc().getPregnancyHistorySection().createStrucDocText(
 					sb.toString());
+		}
+	}
+
+	private void initVacd() {
+		CHPackage.eINSTANCE.eClass();
+		// fix missing extension values in MDHT model.
+		for (II templateId : doc.getTemplateIds()) {
+			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH-VACD");
+			}
+			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH");
+			}
+		}
+		setTitle(eVACDOCTitle);
+		fixGeneralHeaderConstraintTemplateId();
+		new Query(doc);
+	}
+
+	private String getNarrativeText(Section s) {
+		if (s != null && s != null) {
+			StrucDocText t = s.getText();
+			return Util.extractStringFromNonQuotedStrucDocText(t);
+		}
+		return null;
+	}
+
+	private Section findRemarksSection() {
+		for (Section section : doc.getSections()) {
+			if (section.getCode() != null) {
+				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+					return section;
+				}
+			}
+		}
+		return null;
+	}
+
+	private void fixGeneralHeaderConstraintTemplateId() {
+		for (int i = 0; i < doc.getTemplateIds().size(); i++) {
+			if (doc.getTemplateIds().get(i).getRoot()
+					.equals("2.16.840.1.113883.10.20.3")) {
+				doc.getTemplateIds().remove(i);
+			}
 		}
 	}
 

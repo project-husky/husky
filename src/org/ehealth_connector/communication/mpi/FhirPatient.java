@@ -529,6 +529,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * @param address
 	 * @return
 	 */
+	@SuppressWarnings("incomplete-switch")
 	private AddressDt convertAddress(AD address) {
 		if (address == null) {
 			return null;

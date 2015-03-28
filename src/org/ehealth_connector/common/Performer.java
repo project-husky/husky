@@ -32,9 +32,9 @@ public class Performer {
 	/**
 	 * The m author.
 	 */
-	org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
-	org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
-	org.openhealthtools.mdht.uml.cda.Person mPerson;
+	private org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
+	private org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
+	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	public Performer() {
 		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();

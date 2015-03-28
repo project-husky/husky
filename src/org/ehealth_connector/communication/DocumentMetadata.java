@@ -29,7 +29,6 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
@@ -46,16 +45,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 public class DocumentMetadata {
 
 	/** The x doc. */
-	DocumentEntryType xDoc;
-
-	/** The x desc. */
-	DocumentDescriptor xDesc;
+	private DocumentEntryType xDoc;
 
 	/** The cda. */
-	ClinicalDocument cda;
+	private ClinicalDocument cda;
 
 	/** The extractor. */
-	CDAR2Extractor extractor;
+	private CDAR2Extractor extractor;
 
 	/**
 	 * Instantiates a new document metadata.

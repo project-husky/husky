@@ -35,7 +35,7 @@ public class Telecoms {
 	/**
 	 * The mdht tels.
 	 */
-	ArrayList<TEL> mTels;
+	private ArrayList<TEL> mTels;
 
 	/**
 	 * <div class="en">Instantiates a new telecoms.</div> <div

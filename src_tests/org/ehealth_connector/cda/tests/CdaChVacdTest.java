@@ -22,9 +22,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
@@ -74,22 +71,18 @@ public class CdaChVacdTest extends TestUtils {
 	public static final int NUMBER_OF_CONTENT_MODULE_TESTS = 50;
 
 	// Test data
-	TestUtils t;
-	CdaChVacd d;
-	CdaChVacd testDoc2;
+	private TestUtils t;
+	private CdaChVacd d;
+	private CdaChVacd testDoc2;
 
-	Consumable consumable1;
-	Problem problem1;
+	private Consumable consumable1;
+	private Problem problem1;
 
-	Immunization immunization1;
-	ActiveProblemConcern apce1;
-	PastProblemConcern ppc1;
-	AllergyConcern ac1;
-	Performer p1;
-
-	ImmunizationRecommendation immunizationRecommendation1;
-	SimpleDateFormat eurDateFormatter;
-
+	private Immunization immunization1;
+	private ActiveProblemConcern apce1;
+	private PastProblemConcern ppc1;
+	private AllergyConcern ac1;
+	private ImmunizationRecommendation immunizationRecommendation1;
 	private Problem problem2;
 	private AllergyProblem allergyProblem1;
 
@@ -141,19 +134,6 @@ public class CdaChVacdTest extends TestUtils {
 		a.addAllergyProblem(allergyProblem1);
 		a.addAllergyProblem(allergyProblem1);
 		return a;
-	}
-
-	private AllergyProblem createAllergyProblem() {
-		AllergyProblem p = new AllergyProblem();
-		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
-		p.setId(id1);
-		p.setStart(startDate);
-		p.setNotOccured(true);
-		p.addValue(problemCode);
-		p.addValue(new Value(problemCode));
-		p.addValue(new Value(problemCode));
-		p.setCommentText(ts1);
-		return p;
 	}
 
 	// 6
@@ -300,19 +280,6 @@ public class CdaChVacdTest extends TestUtils {
 		l.addValue(value1);
 		l.setCommentText(ts1);
 		return l;
-	}
-
-	// 3
-	private PastProblemConcern createPastProblemConcern() {
-		PastProblemConcern p = new PastProblemConcern();
-		p.addId(id1);
-		p.setStart(startDate);
-		p.setEnd(endDate);
-		p.setStatus(ProblemConcernStatusCode.COMPLETED);
-		p.setConcern(ts1);
-		p.addProblemEntry(problem1);
-		p.addProblemEntry(problem2);
-		return p;
 	}
 
 	// 9
@@ -668,7 +635,7 @@ public class CdaChVacdTest extends TestUtils {
 
 	public void testDocMetadata(String constructorName, CdaChEdes doc) {
 		assertNotNull(constructorName + " Constructor - DocumentRoot is null",
-				doc.docRoot);
+				doc.getDocRoot());
 		assertNotNull(constructorName + " Constructor - Document is null",
 				doc.getDoc());
 		assertEquals(
@@ -716,7 +683,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(ts2, i.getCommentText());
 
 		i.addReason(reason2);
-		ArrayList<Reason> r = i.getReasons();
+		i.getReasons();
 		assertEquals(
 				"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
 				i.getReasons().get(0).getReference());
@@ -799,7 +766,7 @@ public class CdaChVacdTest extends TestUtils {
 
 		l.setCommentText(ts1);
 		assertEquals(ts1, l.getCommentText());
-		String t = l.getCommentRef();
+		l.getCommentRef();
 	}
 
 	// 3
@@ -877,5 +844,31 @@ public class CdaChVacdTest extends TestUtils {
 
 		r1.setReferenceId(numS1);
 		assertEquals(numS1, r1.getReferenceId());
+	}
+
+	private AllergyProblem createAllergyProblem() {
+		AllergyProblem p = new AllergyProblem();
+		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
+		p.setId(id1);
+		p.setStart(startDate);
+		p.setNotOccured(true);
+		p.addValue(problemCode);
+		p.addValue(new Value(problemCode));
+		p.addValue(new Value(problemCode));
+		p.setCommentText(ts1);
+		return p;
+	}
+
+	// 3
+	private PastProblemConcern createPastProblemConcern() {
+		PastProblemConcern p = new PastProblemConcern();
+		p.addId(id1);
+		p.setStart(startDate);
+		p.setEnd(endDate);
+		p.setStatus(ProblemConcernStatusCode.COMPLETED);
+		p.setConcern(ts1);
+		p.addProblemEntry(problem1);
+		p.addProblemEntry(problem2);
+		return p;
 	}
 }

@@ -7,9 +7,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SC;
 
 public class AuthoringDevice {
-	org.openhealthtools.mdht.uml.cda.Author mAuthor;
-	org.openhealthtools.mdht.uml.cda.AssignedAuthor mAssAuthor;
-	org.openhealthtools.mdht.uml.cda.AuthoringDevice mAuthorDevice;
+	private org.openhealthtools.mdht.uml.cda.Author mAuthor;
+	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAssAuthor;
+	private org.openhealthtools.mdht.uml.cda.AuthoringDevice mAuthorDevice;
 
 	public AuthoringDevice() {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();

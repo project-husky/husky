@@ -28,13 +28,6 @@ public enum EHealthConnectorVersions {
 	private String systemVersionName;
 	private String releaseDate;
 
-	EHealthConnectorVersions(String id, String systemVersionName,
-			String releaseDate) {
-		this.id = id;
-		this.systemVersionName = systemVersionName;
-		this.releaseDate = releaseDate;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -45,5 +38,12 @@ public enum EHealthConnectorVersions {
 
 	public String getSystemVersionName() {
 		return systemVersionName;
+	}
+
+	EHealthConnectorVersions(String id, String systemVersionName,
+			String releaseDate) {
+		this.id = id;
+		this.systemVersionName = systemVersionName;
+		this.releaseDate = releaseDate;
 	}
 }

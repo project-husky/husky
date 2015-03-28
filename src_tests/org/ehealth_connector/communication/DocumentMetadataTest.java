@@ -29,9 +29,9 @@ import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 
 public class DocumentMetadataTest extends TestUtils {
 
-	DocumentMetadata d = new DocumentMetadata();
-	DocumentEntryType m = d.getMdhtDocumentEntryType();
-	LocalizedStringType l;
+	private DocumentMetadata d = new DocumentMetadata();
+	private DocumentEntryType m = d.getMdhtDocumentEntryType();
+	private LocalizedStringType l;
 
 	@Before
 	public void initTestData() {

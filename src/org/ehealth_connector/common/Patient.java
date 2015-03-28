@@ -444,11 +444,6 @@ public class Patient extends Person {
 		return telecoms;
 	}
 
-	private Date parseDate(String value) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		return sdf.parse(value);
-	}
-
 	/**
 	 * <div class="en">Sets the gender.</div> <div class="de">Setzt
 	 * gender.</div> <div class="fr"></div> <div class="it"></div>
@@ -590,5 +585,10 @@ public class Patient extends Person {
 	 */
 	public void setEmployeeOccupation(String employeeOccupation) {
 		this.employeeOccupation = employeeOccupation;
+	}
+
+	private Date parseDate(String value) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.parse(value);
 	}
 }

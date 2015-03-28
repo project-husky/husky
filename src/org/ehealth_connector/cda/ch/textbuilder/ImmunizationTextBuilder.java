@@ -44,6 +44,33 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		this.immunizations = immunizations;
 	}
 
+	public List<Immunization> getUpdatedImmunizations() {
+		int i = 0;
+		for (Immunization immunization : immunizations) {
+			ED reference = Util.createReference(i,
+					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
+			SubstanceAdministration substanceAdminstration = immunization
+					.getMdhtImmunization();
+			substanceAdminstration.setText(reference);
+			i++;
+		}
+		return immunizations;
+	}
+
+	/**
+	 * Returns HTML formatted string.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
+	}
+
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
@@ -98,32 +125,5 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		}
 		addCell("");
 		append("</tr>");
-	}
-
-	public List<Immunization> getUpdatedImmunizations() {
-		int i = 0;
-		for (Immunization immunization : immunizations) {
-			ED reference = Util.createReference(i,
-					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
-			SubstanceAdministration substanceAdminstration = immunization
-					.getMdhtImmunization();
-			substanceAdminstration.setText(reference);
-			i++;
-		}
-		return immunizations;
-	}
-
-	/**
-	 * Returns HTML formatted string.
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
 	}
 }

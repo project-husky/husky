@@ -225,12 +225,6 @@ public class Immunization {
 		return cl;
 	}
 
-	private SXCM_TS convertDate(Date appliedAt) {
-		SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		timestamp.setValue(DateUtil.formatDate(appliedAt));
-		return timestamp;
-	}
-
 	/**
 	 * Returns the encapsulated IHE class.
 	 * 
@@ -238,12 +232,6 @@ public class Immunization {
 	 */
 	public org.openhealthtools.mdht.uml.cda.ch.Immunization copyMdhtImmunization() {
 		return EcoreUtil.copy(mImmunization);
-	}
-
-	private Code createPriorityCode() {
-		CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
-		priorityCode.setNullFlavor(NullFlavor.UNK);
-		return new Code(priorityCode);
 	}
 
 	/**
@@ -559,6 +547,18 @@ public class Immunization {
 		} else {
 			mImmunization.setRouteCode(routeCode.getCE());
 		}
+	}
+
+	private SXCM_TS convertDate(Date appliedAt) {
+		SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
+		timestamp.setValue(DateUtil.formatDate(appliedAt));
+		return timestamp;
+	}
+
+	private Code createPriorityCode() {
+		CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
+		priorityCode.setNullFlavor(NullFlavor.UNK);
+		return new Code(priorityCode);
 	}
 
 }

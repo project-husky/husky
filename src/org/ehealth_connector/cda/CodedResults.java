@@ -40,8 +40,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class CodedResults {
 
-	CodedResultsSection crs;
-	II mIi;
+	protected CodedResultsSection crs;
+	protected II mIi;
 
 	public CodedResults() {
 		crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
@@ -87,13 +87,13 @@ public class CodedResults {
 				.createProcedureEntryProcedureActivityProcedure().init();
 		pe.getIds().add(Util.createUuidVacd(null));
 		pe.setCode(Util.createCodeNullFlavorNA());
-
+	
 		// Create NullFlavor Reference
 		ED text = DatatypesFactory.eINSTANCE.createED();
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.NA);
 		text.setReference(tel);
-
+	
 		pe.setText(text);
 		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 		pe.setStatusCode(StatusCode.COMPLETED.getCS());

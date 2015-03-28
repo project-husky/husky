@@ -71,10 +71,6 @@ class Concern {
 		mConcernEntry.getIds().add(ii);
 	}
 
-	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
-		return EcoreUtil.copy(mConcernEntry);
-	}
-
 	/**
 	 * Gibt das Leiden zurück.
 	 *
@@ -209,5 +205,9 @@ class Concern {
 	 */
 	public void setStatus(ProblemConcernStatusCode concernStatus) {
 		mConcernEntry.setStatusCode(concernStatus.getCS());
+	}
+
+	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
+		return EcoreUtil.copy(mConcernEntry);
 	}
 }

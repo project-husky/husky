@@ -735,35 +735,6 @@ public class Util {
 		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
 	}
 
-	private static HashMap<String, AddressUse> getTelecomType(
-			ArrayList<TEL> telecoms, String type) {
-		HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
-		for (TEL tel : telecoms) {
-			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(),
-						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel
-								.getUses().get(0).getName()) : null));
-			}
-		}
-		return tl;
-	}
-
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		StringBuffer buffer = new StringBuffer("");
-		for (FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName()
-							+ ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
-	}
-
 	/**
 	 * <div class="en">Gets the Webside</div> <div class="de">Liefert
 	 * Webside.</div> <div class="fr"></div> <div class="it"></div>
@@ -904,85 +875,6 @@ public class Util {
 		return value;
 	}
 
-	@SuppressWarnings("unused")
-	private static void traverse(FeatureMap root) {
-		Stack<FeatureMap> stack = new Stack<FeatureMap>();
-		Stack<String> stack2 = new Stack<String>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			FeatureMap featureMap = stack.pop();
-			for (int i = featureMap.size() - 1; i >= 0; i--) {
-				Entry entry = featureMap.get(i);
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					System.out.print("<"
-							+ entry.getEStructuralFeature().getName());
-					AnyType anyType = (AnyType) entry.getValue();
-					traverseAttributes(anyType.getAnyAttribute());
-					System.out.print(">");
-					stack.push(anyType.getMixed());
-
-				} else {
-					// if (entry.getValue() != null && !stack2.isEmpty()) {
-					// System.out.print("</"+stack2.pop()+">");}
-					// //Text between the Elements
-					if (entry.getValue() != null) {
-						String value = entry.getValue().toString();
-						if (value.trim().length() > 0) {
-							System.out.print(value);
-						}
-					} else {
-						System.out.println(" }");
-					}
-				}
-				if (entry.getValue() != null && !stack2.isEmpty()) {
-					System.out.print("</" + stack2.pop() + ">");
-				}
-			}
-		}
-	}
-
-	private static StringBuilder traverse2(FeatureMap featureMap,
-			StringBuilder sb) {
-		for (int i = 0; i <= featureMap.size() - 1; i++) {
-			Entry entry = featureMap.get(i);
-			if (entry.getEStructuralFeature() instanceof EReference) {
-				sb.append("<" + entry.getEStructuralFeature().getName());
-				AnyType anyType = (AnyType) entry.getValue();
-				sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
-				sb.append(">");
-				traverse2(anyType.getMixed(), sb);
-				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
-			} else {
-				// //Text between the Elements
-				if (entry.getValue() != null) {
-					String value = entry.getValue().toString();
-					if (value.trim().length() > 0) {
-						sb.append(value);
-					}
-				} else {
-					System.out.println(" }");
-				}
-			}
-		}
-		return sb;
-	}
-
-	private static void traverseAttributes(FeatureMap anyAttribute) {
-		for (Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName()
-					+ "=\"" + entry.getValue().toString() + "\"");
-		}
-	}
-
-	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute,
-			StringBuilder sb) {
-		for (Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
-		}
-		return sb;
-	}
-
 	public static EntryRelationship updateRefIfComment(EntryRelationship er,
 			int i, int j, SectionsVACD prefix) {
 		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
@@ -1068,5 +960,113 @@ public class Util {
 			ad.addStreetAddressLine(addressline3);
 		}
 		return ad;
+	}
+
+	@SuppressWarnings("unused")
+	private static void traverse(FeatureMap root) {
+		Stack<FeatureMap> stack = new Stack<FeatureMap>();
+		Stack<String> stack2 = new Stack<String>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			FeatureMap featureMap = stack.pop();
+			for (int i = featureMap.size() - 1; i >= 0; i--) {
+				Entry entry = featureMap.get(i);
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					System.out.print("<"
+							+ entry.getEStructuralFeature().getName());
+					AnyType anyType = (AnyType) entry.getValue();
+					traverseAttributes(anyType.getAnyAttribute());
+					System.out.print(">");
+					stack.push(anyType.getMixed());
+	
+				} else {
+					// if (entry.getValue() != null && !stack2.isEmpty()) {
+					// System.out.print("</"+stack2.pop()+">");}
+					// //Text between the Elements
+					if (entry.getValue() != null) {
+						String value = entry.getValue().toString();
+						if (value.trim().length() > 0) {
+							System.out.print(value);
+						}
+					} else {
+						System.out.println(" }");
+					}
+				}
+				if (entry.getValue() != null && !stack2.isEmpty()) {
+					System.out.print("</" + stack2.pop() + ">");
+				}
+			}
+		}
+	}
+
+	private static StringBuilder traverse2(FeatureMap featureMap,
+			StringBuilder sb) {
+		for (int i = 0; i <= featureMap.size() - 1; i++) {
+			Entry entry = featureMap.get(i);
+			if (entry.getEStructuralFeature() instanceof EReference) {
+				sb.append("<" + entry.getEStructuralFeature().getName());
+				AnyType anyType = (AnyType) entry.getValue();
+				sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
+				sb.append(">");
+				traverse2(anyType.getMixed(), sb);
+				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
+			} else {
+				// //Text between the Elements
+				if (entry.getValue() != null) {
+					String value = entry.getValue().toString();
+					if (value.trim().length() > 0) {
+						sb.append(value);
+					}
+				} else {
+					System.out.println(" }");
+				}
+			}
+		}
+		return sb;
+	}
+
+	private static void traverseAttributes(FeatureMap anyAttribute) {
+		for (Entry entry : anyAttribute) {
+			System.out.print(" " + entry.getEStructuralFeature().getName()
+					+ "=\"" + entry.getValue().toString() + "\"");
+		}
+	}
+
+	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute,
+			StringBuilder sb) {
+		for (Entry entry : anyAttribute) {
+			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
+					+ entry.getValue().toString() + "\"");
+		}
+		return sb;
+	}
+
+	private static HashMap<String, AddressUse> getTelecomType(
+			ArrayList<TEL> telecoms, String type) {
+		HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		for (TEL tel : telecoms) {
+			if (tel.getValue().toLowerCase().contains(type)) {
+				tl.put(tel.getValue(),
+						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel
+								.getUses().get(0).getName()) : null));
+			}
+		}
+		return tl;
+	}
+
+	@SuppressWarnings("unused")
+	private static String getText(FeatureMap featureMap) {
+		StringBuffer buffer = new StringBuffer("");
+		for (FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName()
+							+ ">");
+				}
+			}
+		}
+		return buffer.toString().trim();
 	}
 }

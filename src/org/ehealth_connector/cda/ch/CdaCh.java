@@ -70,8 +70,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 public abstract class CdaCh {
 
 	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorV1;
-	CDACH doc = null; // The CDA Document
-	public DocumentRoot docRoot = null; // The OHT-Element that helds the
+	protected CDACH doc = null; // The CDA Document
+	private DocumentRoot docRoot = null; // The OHT-Element that helds the
 	// document
 	protected Query query;
 
@@ -599,17 +599,10 @@ public abstract class CdaCh {
 		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
 	}
 
-	protected void setSetId(String id) {
-		if (id == null) {
-			doc.setSetId(EcoreUtil.copy(doc.getId()));
-		} else {
-			II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot("2.16.756.5.30.1.1.1.1");
-			ii.setExtension(id);
-			doc.setSetId(ii);
-		}
+	public DocumentRoot getDocRoot() {
+		return this.docRoot;
 	}
-
+	
 	public void setTimestamp(Date date) {
 		if (date == null) {
 			doc.setEffectiveTime(DateUtil.nowAsTS());
@@ -620,12 +613,6 @@ public abstract class CdaCh {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	protected void setTitle(String title) {
-		ST titleSt = DatatypesFactory.eINSTANCE.createST();
-		titleSt.addText(title);
-		doc.setTitle(titleSt);
 	}
 
 	/**
@@ -653,6 +640,23 @@ public abstract class CdaCh {
 	public void setVersion(String guidVersion1, Integer version) {
 		setSetId(guidVersion1);
 		setVersionNumber(version);
+	}
+
+	protected void setSetId(String id) {
+		if (id == null) {
+			doc.setSetId(EcoreUtil.copy(doc.getId()));
+		} else {
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setRoot("2.16.756.5.30.1.1.1.1");
+			ii.setExtension(id);
+			doc.setSetId(ii);
+		}
+	}
+
+	protected void setTitle(String title) {
+		ST titleSt = DatatypesFactory.eINSTANCE.createST();
+		titleSt.addText(title);
+		doc.setTitle(titleSt);
 	}
 
 	protected void setVersionNumber(Integer number) {

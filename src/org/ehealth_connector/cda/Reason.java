@@ -19,8 +19,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
 public class Reason {
 
-	CDACHMSETBodyImmunizationL3Reason mReason;
-	CDACHBodyExtRef mExtRef = null;
+	private CDACHMSETBodyImmunizationL3Reason mReason;
+	private CDACHBodyExtRef mExtRef = null;
 
 	public Reason() {
 		mReason = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason()
@@ -67,24 +67,6 @@ public class Reason {
 
 	public Code getCode() {
 		return new Code(mReason.getCode());
-	}
-
-	private void initExtRef() {
-		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
-		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
-		mReason.getReferences().add(mExtRef);
-		mExtRef.setExternalDocument(e);
-
-		// Fix Template ID
-		mExtRef.getTemplateIds().clear();
-		II ii = DatatypesFactory.eINSTANCE.createII("2.16.756.5.30.1.1.1.1.1",
-				"CDA-CH.Body.ExtRef");
-		mExtRef.getTemplateIds().add(ii);
-
-		// Set attributes
-		e.setClassCode(ActClassDocument.DOC);
-		e.setMoodCode(ActMood.EVN);
-		setReferenceId(null);
 	}
 
 	/**
@@ -153,5 +135,23 @@ public class Reason {
 
 	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
 		return EcoreUtil.copy(mExtRef);
+	}
+
+	private void initExtRef() {
+		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
+		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
+		mReason.getReferences().add(mExtRef);
+		mExtRef.setExternalDocument(e);
+	
+		// Fix Template ID
+		mExtRef.getTemplateIds().clear();
+		II ii = DatatypesFactory.eINSTANCE.createII("2.16.756.5.30.1.1.1.1.1",
+				"CDA-CH.Body.ExtRef");
+		mExtRef.getTemplateIds().add(ii);
+	
+		// Set attributes
+		e.setClassCode(ActClassDocument.DOC);
+		e.setMoodCode(ActMood.EVN);
+		setReferenceId(null);
 	}
 }

@@ -32,9 +32,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CdaChTests extends TestUtils {
-	TestUtils t;
-	CdaChVacd c;
-	String uuid;
+	private TestUtils t;
+	private CdaChVacd c;
+	private String uuid;
 
 	public CdaChTests() {
 		super();

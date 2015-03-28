@@ -43,9 +43,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class GestationalAge extends CodedResults {
 
-	GestationalAgeWeeksSimpleObservation mWeeks;
-	GestationalAgeDaysSimpleObservation mDays;
-	II mIi;
+	private GestationalAgeWeeksSimpleObservation mWeeks;
+	private GestationalAgeDaysSimpleObservation mDays;
+	private II mIi;
 
 	/**
 	 * Instantiates a new gestational age.
@@ -147,25 +147,6 @@ public class GestationalAge extends CodedResults {
 	 */
 	public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
 		return EcoreUtil.copy(mWeeks);
-	}
-
-	private ProcedureEntry createEmptyProcedureEntry() {
-		// Create and add an empty procedureEntry
-		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
-				.createProcedureEntryProcedureActivityProcedure().init();
-		pe.getIds().add(Util.createUuidVacd(null));
-		pe.setCode(Util.createCodeNullFlavorNA());
-
-		// Create NullFlavor Reference
-		ED text = DatatypesFactory.eINSTANCE.createED();
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.setNullFlavor(NullFlavor.NA);
-		text.setReference(tel);
-
-		pe.setText(text);
-		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-		pe.setStatusCode(StatusCode.COMPLETED.getCS());
-		return pe;
 	}
 
 	/**
@@ -270,21 +251,6 @@ public class GestationalAge extends CodedResults {
 	/**
 	 * Sets the days of weeks and days.
 	 *
-	 * @param days
-	 *            <div class="de">Das Gestationsalter in Wochen und Tagen. Hier
-	 *            wird die Anzahl der Tage gesetzt.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 */
-	private void setDaysOfWeeksAndDays(int days) {
-		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
-		mDays.getValues().add(mDaysValue);
-		mDays.getIds().add(EcoreUtil.copy(mIi));
-		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	}
-
-	/**
-	 * Sets the days of weeks and days.
-	 *
 	 * @param weeks
 	 *            <div class="de">Das Gestationsalter in Wochen und Tagen. Hier
 	 *            wird die Anzahl der Wochen gesetzt.</div> <div
@@ -302,6 +268,40 @@ public class GestationalAge extends CodedResults {
 		mWeeks.getIds().clear();
 		setWeeksOfWeeksAndDays(weeks);
 		setDaysOfWeeksAndDays(days);
+	}
+
+	private ProcedureEntry createEmptyProcedureEntry() {
+		// Create and add an empty procedureEntry
+		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
+				.createProcedureEntryProcedureActivityProcedure().init();
+		pe.getIds().add(Util.createUuidVacd(null));
+		pe.setCode(Util.createCodeNullFlavorNA());
+	
+		// Create NullFlavor Reference
+		ED text = DatatypesFactory.eINSTANCE.createED();
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.setNullFlavor(NullFlavor.NA);
+		text.setReference(tel);
+	
+		pe.setText(text);
+		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+		pe.setStatusCode(StatusCode.COMPLETED.getCS());
+		return pe;
+	}
+
+	/**
+	 * Sets the days of weeks and days.
+	 *
+	 * @param days
+	 *            <div class="de">Das Gestationsalter in Wochen und Tagen. Hier
+	 *            wird die Anzahl der Tage gesetzt.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
+	private void setDaysOfWeeksAndDays(int days) {
+		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
+		mDays.getValues().add(mDaysValue);
+		mDays.getIds().add(EcoreUtil.copy(mIi));
+		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 	}
 
 	/**

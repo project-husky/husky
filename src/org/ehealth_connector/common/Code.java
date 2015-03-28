@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class Code {
 
-	CD mCD;
+	private CD mCD;
 
 	/**
 	 * <div class="en">Instantiates a new code.</div> <div

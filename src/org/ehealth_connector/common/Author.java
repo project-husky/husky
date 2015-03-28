@@ -40,9 +40,9 @@ public class Author {
 	/**
 	 * The author.
 	 */
-	org.openhealthtools.mdht.uml.cda.Author mAuthor;
-	org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
-	org.openhealthtools.mdht.uml.cda.Person mPerson;
+	private org.openhealthtools.mdht.uml.cda.Author mAuthor;
+	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	public Author() {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
@@ -147,15 +147,6 @@ public class Author {
 	 */
 	public org.openhealthtools.mdht.uml.cda.Author copyMdhtAuthor() {
 		return EcoreUtil.copy(mAuthor);
-	}
-
-	private CE createFunctionCode() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode("221");
-		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
-		ce.setCodeSystemName("ISCO-08");
-		ce.setDisplayName("Medical doctors");
-		return ce;
 	}
 
 	/**
@@ -409,5 +400,14 @@ public class Author {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private CE createFunctionCode() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("221");
+		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
+		ce.setCodeSystemName("ISCO-08");
+		ce.setDisplayName("Medical doctors");
+		return ce;
 	}
 }

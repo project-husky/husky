@@ -85,7 +85,7 @@ public class ConvenienceCommunication {
 	private String organizationalId;
 
 	/** The transaction data. */
-	protected SubmitTransactionData txnData;
+	private SubmitTransactionData txnData;
 
 	/**
 	 * Instantiates a new convenience communication.
@@ -205,6 +205,10 @@ public class ConvenienceCommunication {
 	 */
 	public Destination getDestination() {
 		return destination;
+	}
+	
+	public SubmitTransactionData getTxnData() {
+		return this.txnData;
 	}
 
 	public void clearDocuments() {

@@ -37,7 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 public class Pregnancy {
 
 	/** The m pregnancy. */
-	org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
+	private org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation mPregnancy;
 
 	/**
 	 * Instantiates a new pregnancy.

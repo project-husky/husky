@@ -30,7 +30,7 @@ public class Person {
 	/**
 	 * The mdht person.
 	 */
-	org.openhealthtools.mdht.uml.cda.Person mPerson;
+	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	/**
 	 * <div class="en">Instantiates a new person.</div> <div

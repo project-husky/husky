@@ -45,18 +45,6 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		init();
 	}
 
-	private String buildRow(ActiveProblemConcern newProblemConcernEntry2,
-			int newId) {
-		StringBuilder rowBuilder = new StringBuilder();
-		rowBuilder.append("<tr>");
-		rowBuilder.append(buildCell("Komplikationsrisiko"));
-		rowBuilder.append(buildCellWithContent(
-				newProblemConcernEntry2.getConcern(), newId,
-				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
-		rowBuilder.append("</tr>");
-		return rowBuilder.toString();
-	}
-
 	public ActiveProblemConcern getProblemConcernEntry() {
 		return newProblemConcernEntry;
 	}
@@ -98,6 +86,18 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		String tableStr = sectionText
 				.replace(tableFooter, rowStr + tableFooter);
 		return tableStr;
+	}
+
+	private String buildRow(ActiveProblemConcern newProblemConcernEntry2,
+			int newId) {
+		StringBuilder rowBuilder = new StringBuilder();
+		rowBuilder.append("<tr>");
+		rowBuilder.append(buildCell("Komplikationsrisiko"));
+		rowBuilder.append(buildCellWithContent(
+				newProblemConcernEntry2.getConcern(), newId,
+				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
+		rowBuilder.append("</tr>");
+		return rowBuilder.toString();
 	}
 
 	//
