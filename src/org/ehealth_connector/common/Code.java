@@ -186,7 +186,7 @@ public class Code {
 	/**
 	 * Sets the name of the code system
 	 * 
-	 * @param the
+	 * @param codeSystemName
 	 *            name of the code system.
 	 */
 	public void setCodeSystemName(String codeSystemName) {

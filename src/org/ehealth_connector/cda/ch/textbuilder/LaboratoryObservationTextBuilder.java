@@ -36,7 +36,7 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 	/**
 	 * Constructor.
 	 * 
-	 * @param pastProblemConcerns
+	 * @param list a list of laboratory observations
 	 */
 	public LaboratoryObservationTextBuilder(
 			ArrayList<LaboratoryObservation> list, SectionsVACD section) {

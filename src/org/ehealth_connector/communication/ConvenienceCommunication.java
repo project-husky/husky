@@ -127,8 +127,6 @@ public class ConvenienceCommunication {
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
-	 * @param filePath
-	 *            the file path
 	 * @return the document metadata (which have to be completed)
 	 * @throws Exception
 	 *             the exception
@@ -206,7 +204,7 @@ public class ConvenienceCommunication {
 	public Destination getDestination() {
 		return destination;
 	}
-	
+
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
 	}

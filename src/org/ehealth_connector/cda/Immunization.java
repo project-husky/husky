@@ -101,10 +101,9 @@ public class Immunization {
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
 	 * nicht erwünschten Impfungen.
 	 *
-	 * @author author Die eintragende Person
 	 * @param consumable
 	 *            Impfstoff
-	 * @param author
+	 * @param author Die eintragende Person
 	 * <br>
 	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
@@ -125,10 +124,9 @@ public class Immunization {
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
 	 * nicht erwünschten Impfungen.
 	 *
-	 * @author author Die eintragende Person
 	 * @param consumable
 	 *            Impfstoff
-	 * @param author
+	 * @param author Die eintragende Person
 	 * <br>
 	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
@@ -194,7 +192,7 @@ public class Immunization {
 	 * Adds the reason for the immunization (the illness, which the immunization
 	 * should prevent)
 	 *
-	 * @param reasion
+	 * @param reason
 	 *            the reason
 	 */
 	public void addReason(Reason reason) {
@@ -396,8 +394,7 @@ public class Immunization {
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
 	 *
-	 * @param author
-	 *            the new author
+	 * @param specialCode expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		mImmunization.setCode(specialCode.getCD());

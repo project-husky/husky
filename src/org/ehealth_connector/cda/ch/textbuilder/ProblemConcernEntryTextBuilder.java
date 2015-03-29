@@ -34,7 +34,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 	/**
 	 * Constructor.
 	 * 
-	 * @param pastProblemConcerns
+	 * @param problemConcerns a list of Problem Concerns
 	 */
 	public ProblemConcernEntryTextBuilder(
 			ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns,

@@ -86,10 +86,10 @@ public class Performer {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
+	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Performer
 	 * Objekts.
 	 *
-	 * @param authorMdht
+	 * @param performerMdht
 	 *            the MDHT Author Object
 	 */
 	public Performer(org.openhealthtools.mdht.uml.cda.Performer2 performerMdht) {

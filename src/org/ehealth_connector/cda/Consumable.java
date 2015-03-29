@@ -51,7 +51,7 @@ public class Consumable {
 	 * soll (true) oder codiert werden soll, dass die Substanz unbekannt ist
 	 * (false)
 	 * 
-	 * @param currentProblems
+	 * @param consumableKnown
 	 *            true: Erstellung eines leeren Objekts, false: Es sind keine
 	 *            Impfungen bekannt.
 	 */

@@ -78,10 +78,8 @@ public class Value {
 	 * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 *
-	 * @param cd
-	 * <br>
-	 *            <div class="de"> cd</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 * @param rto
+	 *            The RTO object
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
@@ -157,20 +155,21 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value.</div> <div
-	 * class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
-	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird
-	 * ein Value Objekt auf Basis von einem CodeSytem und einem Code
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * RTO Objekt (A quantity constructed as the quotient of a numerator
+	 * quantity divided by a denominator quantity.).</div> <div
+	 * class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird häufig
+	 * für die Angabe von Titer verwendet. Mit diesem Konstruktor wird ein Value
+	 * Objekt auf Basis eines MDHT RTO Datenobjekts initialisiert.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 *
-	 * @param codeSystem
-	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 * @param numerator
+	 *            The nominator value (nominator/denominator)
+	 *
+	 * @param denominator
+	 *            The denominator value (nominator/denominator)
+	 * @param ucumUnit
+	 *            the UCUM Unit
 	 */
 	public Value(double numerator, double denominator, UCUM ucumUnit) {
 		RTO rto = DatatypesFactory.eINSTANCE.createRTO();

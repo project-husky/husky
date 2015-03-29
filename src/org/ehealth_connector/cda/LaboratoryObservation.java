@@ -293,8 +293,6 @@ public class LaboratoryObservation {
 	/**
 	 * Gets the Effective Time
 	 *
-	 * @param dateTimeOfResult
-	 *            the new date time of result
 	 */
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation

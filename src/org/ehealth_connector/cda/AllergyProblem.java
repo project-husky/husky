@@ -245,8 +245,7 @@ public class AllergyProblem {
 	 * bekannte) ID für das Allergie Problem. Ist keine ID vorhanden, wird null
 	 * zurückgegeben.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param id
-	 *            the new id
+	 * @return the new id
 	 */
 	public Identificator getId() {
 		if (mAllergyProblem.getIds().size() > 0) {
@@ -369,7 +368,7 @@ public class AllergyProblem {
 	/**
 	 * Sets the id.
 	 *
-	 * @param id1
+	 * @param id
 	 *            the new id
 	 */
 	public void setId(Identificator id) {

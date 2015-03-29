@@ -92,8 +92,7 @@ public class ImmunizationRecommendation {
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
 	 *
-	 * @param author
-	 *            the new author
+	 * @param specialCode expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		mImmunizationRecommendation.setCode(specialCode.getCD());
@@ -175,11 +174,9 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * Adds the reason for the immunization (the illness, which the immunization
-	 * should prevent)
+	 * Adds the reason for the immunization recommendeation (the BAG Guideline)
 	 *
-	 * @param code
-	 *            Code for the illness
+	 * @param reason the reason
 	 */
 	public void addReason(Reason reason) {
 		mImmunizationRecommendation.addObservation(reason
@@ -452,9 +449,6 @@ public class ImmunizationRecommendation {
 	 * aber noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 * 
-	 * @param intendedOrProposed
-	 *            true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt
-	 *            ist. Sonst: false
 	 */
 	public void setIntended() {
 		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);

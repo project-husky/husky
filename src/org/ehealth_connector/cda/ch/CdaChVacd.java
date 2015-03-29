@@ -918,7 +918,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -933,7 +933,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -948,7 +948,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -963,7 +963,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -978,7 +978,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -993,7 +993,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -1008,7 +1008,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -1023,7 +1023,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 
@@ -1038,7 +1038,7 @@ public class CdaChVacd extends CdaCh {
 	 * Section Text für die entsprechende Section</div>
 	 * 
 	 *
-	 * @eturn <div class="en"> the text of the human readable part of the cda
+	 * @return <div class="en"> the text of the human readable part of the cda
 	 *        document</div> <div class="de"> der text des menschlenlesbaren
 	 *        Teils des CDA-Dokuments</div>
 	 * 

@@ -303,8 +303,7 @@ public class Problem {
 	 * bekannte) ID für das Problem. Ist keine ID vorhanden, wird null
 	 * zurückgegeben.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param id
-	 *            the new id
+	 * @return the new id
 	 */
 	public Identificator getId() {
 		Identificator id = new Identificator(mProblemEntry.getIds().get(0));

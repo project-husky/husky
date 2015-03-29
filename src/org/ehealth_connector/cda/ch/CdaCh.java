@@ -93,12 +93,10 @@ public abstract class CdaCh {
 	 * 
 	 * @param stylesheet
 	 *            the stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). If
-	 *            null, this standard path will be set.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). 
 	 * @param css
 	 *            the Cascasing stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). If
-	 *            null, no cascasing stylesheet will be set.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
 	public CdaCh(CDACH doc, String stylesheet, String css) {
 		this.doc = doc;
@@ -211,10 +209,7 @@ public abstract class CdaCh {
 	 * Fügt ein Cascading Stylesheet (CSS) zu den XML Processing Instructions
 	 * hinzu
 	 * 
-	 * @param stylesheet
-	 *            Bei null wird das Standardstylesheet mit dem Pfad:
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'
-	 *            gesetzt
+	 * @param css path to the CSS file
 	 */
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
@@ -276,10 +271,7 @@ public abstract class CdaCh {
 	/**
 	 * Fügt ein Stylesheet zu den XML Processing Instructions hinzu
 	 * 
-	 * @param stylesheet
-	 *            Bei null wird das Standardstylesheet mit dem Pfad:
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'
-	 *            gesetzt
+	 * @param stylesheet Path to the stylesheet (e.g. '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
 	 */
 	public void addStylesheet(String stylesheet) {
 		if (stylesheet != null) {
@@ -615,28 +607,6 @@ public abstract class CdaCh {
 		}
 	}
 
-	/**
-	 * Setzt die Metadaten, die für Dokumente der CDA-CH-Spezifikation verwendet
-	 * werden (DocumentID, TypeID, Confidentially Code, Language Code,
-	 * Stylesheet)
-	 * 
-	 * @param german
-	 *            Dokument-Sprache (CDA: /ClinicalDocument/languageCode)
-	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
-	 *            menschlich Lesbare Darstellung referenziert werden soll.
-	 */
-
-	public void setTypeId() {
-		// Set Type ID
-		// Identifies the Type of the xml document
-		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
-		doc.setTypeId(typeId);
-		typeId.setRoot("2.16.840.1.113883.1.3");
-		typeId.setExtension("POCD_HD000040");
-	}
-
 	public void setVersion(String guidVersion1, Integer version) {
 		setSetId(guidVersion1);
 		setVersionNumber(version);
@@ -667,5 +637,18 @@ public abstract class CdaCh {
 			i.setValue(number);
 		}
 		doc.setVersionNumber(i);
+	}
+
+	/**
+	 * Sets the TypeId to the default value ("2.16.840.1.113883.1.3", "POCD_HD000040")
+	 */
+	private void setTypeId() {
+		// Set Type ID
+		// Identifies the Type of the xml document
+		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
+				.createInfrastructureRootTypeId();
+		doc.setTypeId(typeId);
+		typeId.setRoot("2.16.840.1.113883.1.3");
+		typeId.setExtension("POCD_HD000040");
 	}
 }
