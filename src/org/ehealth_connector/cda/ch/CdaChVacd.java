@@ -308,6 +308,7 @@ public class CdaChVacd extends CdaCh {
 		}
 		doc.addSection(codedResults.copyMdhtCodedResultsSection());
 	}
+
 	/**
 	 * <div class="de">Fügt einen Kommentar hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
@@ -396,11 +397,17 @@ public class CdaChVacd extends CdaCh {
 					.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
 			if (immunization.getCommentText() != null) {
-				immunizationSection
-						.createStrucDocText(getNarrativeTextImmunizations()
-								+ " " + immunization.getCommentText());
+				// Aller vorhandenen Kommentare zusammenfügen
+				String allComments = "";
+				for (Immunization t : getImmunizations()) {
+					if (t.getCommentText() != null) {
+						allComments = allComments + t.getCommentText() + " ";
+					}
+				}
+				setNarrativeTextImmunizations(allComments);
+			} else {
+				setNarrativeTextImmunizations("-");
 			}
-			setNarrativeTextImmunizations(getNarrativeTextImmunizations() + " ");
 		}
 	}
 
@@ -444,9 +451,20 @@ public class CdaChVacd extends CdaCh {
 		// content reference)
 		if (CDALevel2TextGeneration) {
 			immunizationRecommendationsSection
-					.createStrucDocText(generateNarrativeTextImmunizationRecommendations());
+					.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
-			setNarrativeTextImmunizationRecommendations("");
+			if (immunizationRecommendation.getCommentText() != null) {
+				// Aller vorhandenen Kommentare zusammenfügen
+				String allComments = "";
+				for (ImmunizationRecommendation t : getImmunizationRecommendations()) {
+					if (t.getCommentText() != null) {
+						allComments = allComments + t.getCommentText() + " ";
+					}
+				}
+				setNarrativeTextImmunizationRecommendations(allComments);
+			} else {
+				setNarrativeTextImmunizationRecommendations("-");
+			}
 		}
 	}
 
@@ -1170,6 +1188,7 @@ public class CdaChVacd extends CdaCh {
 					sb.toString());
 		}
 	}
+
 	/**
 	 * <div class="en">Sets the human readable CDA section text for the
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
