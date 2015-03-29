@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
- * Builds the <text> part of the History of immunzations.
+ * Builds the &lt;text&gt; part of the History of immunzations.
  * 
  * Always builds the whole part (not only adds one immunization).
  * 
@@ -39,6 +39,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param immunizations
+	 *            the immunizations
 	 */
 	public ImmunizationTextBuilder(List<Immunization> immunizations) {
 		this.immunizations = immunizations;

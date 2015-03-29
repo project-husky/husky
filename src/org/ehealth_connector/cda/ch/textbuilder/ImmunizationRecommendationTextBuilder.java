@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
- * Builds the <text> part of the Immunization recommendations.
+ * Builds the &lt;text&gt; part of the Immunization recommendations.
  * 
  * Always builds the whole part (not only adds one immunization recommendation).
  * 
@@ -38,6 +38,7 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param immunizations
+	 *            the immunization recommendations
 	 */
 	public ImmunizationRecommendationTextBuilder(
 			List<ImmunizationRecommendation> immunizations) {

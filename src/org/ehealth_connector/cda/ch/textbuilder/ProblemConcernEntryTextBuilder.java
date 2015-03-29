@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
- * Builds the <text> part of the Immunization recommendations.
+ * Builds the &lt;text&gt; part of the Immunization recommendations.
  * 
  * Always builds the whole part (not only adds one immunization recommendation).
  * 
@@ -34,7 +34,10 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 	/**
 	 * Constructor.
 	 * 
-	 * @param problemConcerns a list of Problem Concerns
+	 * @param problemConcerns
+	 *            a list of Problem Concerns
+	 * @param section
+	 *            the section
 	 */
 	public ProblemConcernEntryTextBuilder(
 			ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns,

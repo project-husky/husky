@@ -24,7 +24,7 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 
 /**
- * Builds the <text> part of the Immunization recommendations.
+ * Builds the &lt;text&gt; part of the Immunization recommendations.
  * 
  * Always builds the whole part (not only adds one immunization recommendation).
  * 
@@ -36,7 +36,9 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 	/**
 	 * Constructor.
 	 * 
-	 * @param list a list of laboratory observations
+	 * @param list
+	 *            a list of laboratory observations
+	 * @section the section
 	 */
 	public LaboratoryObservationTextBuilder(
 			ArrayList<LaboratoryObservation> list, SectionsVACD section) {
@@ -92,10 +94,10 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		} else {
 			addCell("");
 		}
-	
+
 		// Resultat
 		addCell("");
-	
+
 		// Code & CodeSystem
 		if (laboratoryObservation.getCode() != null) {
 			if (laboratoryObservation.getCode().getCode() != null) {
@@ -108,11 +110,11 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 			} else {
 				addCell("");
 			}
-	
+
 		} else {
 			addCell("");
 		}
-	
+
 		// Kommentar
 		String cellStr = "<td>";
 		int k = 0;

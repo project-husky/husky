@@ -133,8 +133,8 @@ public class Telecoms {
 	 * <div class="en">Gets the e mails.</div> <div class="de">Liefert e
 	 * mails.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return ArrayList<String, AddressUse> <div class="en">the e mails as am
-	 *         ArrayList of Strings and AddressUse</div>
+	 * @return ArrayList <div class="en">the e mails as am ArrayList of Strings
+	 *         and AddressUse</div>
 	 */
 	public HashMap<String, AddressUse> getEMails() {
 		return Util.getEMail(mTels);
@@ -154,7 +154,7 @@ public class Telecoms {
 	 * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert
 	 * mdht telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return ArrayList<TEL> <div class="en">the mdht telecoms</div>
+	 * @return ArrayList <div class="en">the mdht telecoms</div>
 	 */
 	public ArrayList<TEL> getMdhtTelecoms() {
 		return mTels;
