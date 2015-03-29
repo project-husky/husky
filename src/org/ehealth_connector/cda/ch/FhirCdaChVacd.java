@@ -99,18 +99,6 @@ import ca.uhn.fhir.util.ElementUtil;
  * @see http://hl7.org/implement/standards/FHIR-Develop/resourcelist.html
  * @formatter:on</div><div class="de"></div><div class="fr"></div>
  */
-/**
- * <div class="en"></div><div class="de"></div><div class="fr"></div>
- */
-/**
- * <div class="en"></div><div class="de"></div><div class="fr"></div>
- */
-/**
- * <div class="en"></div><div class="de"></div><div class="fr"></div>
- */
-/**
- * <div class="en"></div><div class="de"></div><div class="fr"></div>
- */
 public class FhirCdaChVacd {
 
 	/**
