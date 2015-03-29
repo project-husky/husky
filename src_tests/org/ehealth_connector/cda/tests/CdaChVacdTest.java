@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
@@ -35,7 +36,6 @@ import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.Reason;
-import org.ehealth_connector.cda.ch.CdaChEdes;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
@@ -633,7 +633,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(numS2, c.getLotNr());
 	}
 
-	public void testDocMetadata(String constructorName, CdaChEdes doc) {
+	public void testDocMetadata(String constructorName, CdaChVacd doc) {
 		assertNotNull(constructorName + " Constructor - DocumentRoot is null",
 				doc.getDocRoot());
 		assertNotNull(constructorName + " Constructor - Document is null",

@@ -98,6 +98,7 @@ public class CdaChVacd extends CdaCh {
 	 */
 	public CdaChVacd() {
 		super(CHFactory.eINSTANCE.createVACD().init());
+		super.initCdaCh();
 		initVacd();
 	}
 
@@ -919,8 +920,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextActiveProblemConcerns() {
@@ -934,8 +935,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextAllergyProblemConcerns() {
@@ -949,8 +950,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextCodedResults() {
@@ -964,8 +965,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextComments() {
@@ -979,8 +980,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextImmunizationRecommendation() {
@@ -994,8 +995,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextImmunizations() {
@@ -1009,8 +1010,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextLaboratoryObservation() {
@@ -1024,8 +1025,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextPastProblemConcerns() {
@@ -1039,8 +1040,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 *
 	 * @return <div class="en"> the text of the human readable part of the cda
-	 *        document</div> <div class="de"> der text des menschlenlesbaren
-	 *        Teils des CDA-Dokuments</div>
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
 	public String getNarrativeTextPregnancies() {

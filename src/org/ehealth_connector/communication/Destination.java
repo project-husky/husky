@@ -74,6 +74,8 @@ public class Destination {
 	 * Communication Endpoint for a TLS-secured XDS-b transaction with a single
 	 * keystore that combines keystore and truststore.
 	 *
+	 * @param senderOrganizationalOid
+	 *            Your OID
 	 * @param repositoryUri
 	 *            URI of the communication endpoint
 	 * @param keyStore
@@ -94,6 +96,9 @@ public class Destination {
 	 * Communication Endpoint for a TLS-secured XDS-b transaction with a
 	 * seperate keystore and truststore.
 	 *
+	 *
+	 * @param senderOrganizationalOid
+	 *            Your OID
 	 * @param repositoryUri
 	 *            URI of the communication endpoint
 	 * @param keyStore
@@ -232,6 +237,7 @@ public class Destination {
 	 * Sets the password for the key store
 	 * 
 	 * @param keyStorePassword
+	 *            the password for your keystore
 	 */
 	public void setKeyStorePassword(String keyStorePassword) {
 		this.keyStorePassword = keyStorePassword;

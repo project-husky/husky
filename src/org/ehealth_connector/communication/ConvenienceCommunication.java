@@ -40,39 +40,16 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * The ConvenienceCommunication class provides methods to realize the
  * transmission of documents to different destinations
  * 
- * The class implements the following profiles and actors
- * <ul>
- * <li><b>IHE ITI Document Source Actor</b></li>
- * <ul>
- * <li>[ITI-41] Provide & Register Document Set – b</li>
- * </ul>
- * // *
- * <li><b>IHE ITI Document Consumer Akteur</b></li>
- * // *
- * <ul>
- * // *
- * <li>[ITI-18] Registry Stored Query</li>
- * // *
- * <li>[ITI-43] Retrieve Document Set</li>
- * // *
- * </ul>
- * // *
- * <li><b>IHE ITI Portable Media Creator und Media Importer Akteur</b></li>
- * // *
- * <ul>
- * // *
- * <li>[ITI-32] Distribute Document Set on Media</li>
- * // *
- * </ul>
- * // *
- * <li><b>IHE PCC Care Manager und Decision Support Service Akteur</b></li>
- * // *
- * <ul>
- * // *
- * <li>[PCC-12] Request for Clinical Guidance</li>
- * </ul>
- * </ul>
- * </p>
+ * The class implements the following profiles and actors <b>IHE ITI Document
+ * Source Actor</b>
+ * 
+ * [ITI-41] Provide and Register Document Set – b
+ * 
+ * <b>IHE ITI Document Consumer Akteur</b> [ITI-18] Registry Stored Query // *
+ * [ITI-43] Retrieve Document Set // * <b>IHE ITI Portable Media Creator und
+ * Media Importer Akteur</b> // * [ITI-32] Distribute Document Set on Media // *
+ * <b>IHE PCC Care Manager und Decision Support Service Akteur</b> // * [PCC-12]
+ * Request for Clinical Guidance
  */
 public class ConvenienceCommunication {
 
@@ -127,6 +104,8 @@ public class ConvenienceCommunication {
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
+	 * @param inputStream
+	 *            The input stream to the document
 	 * @return the document metadata (which have to be completed)
 	 * @throws Exception
 	 *             the exception
@@ -219,7 +198,7 @@ public class ConvenienceCommunication {
 	 * <p>
 	 * Sends the current document to the according receipient (repository actor
 	 * as specified in IHE XDR or IHE XDS). The transmission is performed as
-	 * specified in <b>IHE [ITI-41] Provide & Register Document Set – b</b>
+	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
 	 * 
 	 * </p>
 	 * <p>
