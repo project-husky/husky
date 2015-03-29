@@ -78,7 +78,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de" Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD
+ * <div class="de"> Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD
  * entspricht.</div> <div class="fr">Class CdaChVacd.</div> <div
  * class="it">Class CdaChVacd.</div>
  */
@@ -125,7 +125,7 @@ public class CdaChVacd extends CdaCh {
 	 *            <div class="de">Sprache des Dokments</div> <div
 	 *            class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
+	 *            Stylesheet, welches im CDA mittels ?xml-stylesheet für die
 	 *            menschlich lesbare Darstellung referenziert werden soll (z.B.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
 	 *            Null wird das Standard-Stylesheet verwendet.
@@ -156,7 +156,7 @@ public class CdaChVacd extends CdaCh {
 	 *            <div class="de">Impfung</div> <div class="fr"></div> <div
 	 *            class="it"></div>
 	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels <?xml-stylesheet> für die
+	 *            Stylesheet, welches im CDA mittels ?xml-stylesheet für die
 	 *            menschlich lesbare Darstellung referenziert werden soll (z.B.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
 	 *            Null wird das Standard-Stylesheet verwendet.
@@ -1092,7 +1092,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD
 	 * Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und
-	 * insbesondere Kapitel "7.4 CDA Header", Regel <CH-VACD-HPAT> )
+	 * insbesondere Kapitel "7.4 CDA Header", Regel CH-VACD-HPAT )
 	 */
 	public void pseudonymization() {
 		RecordTarget destRecordTarget = CDAFactory.eINSTANCE

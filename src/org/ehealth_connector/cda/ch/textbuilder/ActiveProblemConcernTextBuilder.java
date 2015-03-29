@@ -23,7 +23,7 @@ import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
- * Builds the <text> part of the Treatment plan section.
+ * Builds the &lt; text &gt; part of the Treatment plan section.
  * 
  * Always builds the whole part (not only adds one recommendation).
  * 

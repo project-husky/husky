@@ -53,6 +53,9 @@ public class CodedResults {
 
 	/**
 	 * Instantiates a new Simple Observation
+	 * 
+	 * @param so
+	 *            the simple observation
 	 *
 	 */
 	public CodedResults(SimpleObservation so) {

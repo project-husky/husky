@@ -391,8 +391,6 @@ public class AllergyProblem {
 	 *
 	 * @param startOfProblem
 	 *            Start of the problem
-	 * @throws ParseException
-	 *             the parse exception
 	 */
 	public void setStart(Date startOfProblem) {
 		if (mAllergyProblem.getEffectiveTime() == null) {

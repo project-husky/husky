@@ -103,8 +103,8 @@ public class Immunization {
 	 *
 	 * @param consumable
 	 *            Impfstoff
-	 * @param author Die eintragende Person
-	 * <br>
+	 * @param author
+	 *            Die eintragende Person <br>
 	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 * @param appliedAt
@@ -126,8 +126,8 @@ public class Immunization {
 	 *
 	 * @param consumable
 	 *            Impfstoff
-	 * @param author Die eintragende Person
-	 * <br>
+	 * @param author
+	 *            Die eintragende Person <br>
 	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 * @param appliedAt
@@ -155,8 +155,11 @@ public class Immunization {
 	 * wird verwendet, wenn codiert werden soll, dass keine Impfungen bekannt
 	 * sind.
 	 * 
+	 * @param specialCode
+	 *            the special code that indicates, why no information is present
+	 *            in this element
 	 * @param author
-	 *            Autor der Eintragung
+	 *            the author of this immunization
 	 */
 	public Immunization(MedicationsSpecialConditions specialCode, Author author) {
 		this();
@@ -394,7 +397,8 @@ public class Immunization {
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
 	 *
-	 * @param specialCode expresses a special condition for this element
+	 * @param specialCode
+	 *            expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		mImmunization.setCode(specialCode.getCD());
@@ -524,6 +528,7 @@ public class Immunization {
 	 * 2.16.840.1.113883.5.7
 	 * 
 	 * @param priorityCode
+	 *            the priority code
 	 */
 	public void setPriorityCode(Code priorityCode) {
 		mImmunization.setPriorityCode(priorityCode.getCE());
@@ -531,7 +536,7 @@ public class Immunization {
 
 	/**
 	 * Optionally, one can set the route code (Einnahmearten). If not set,
-	 * <routeCode nullFlavor="UNK"/> is written to CDA document.
+	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
 	 *
 	 * @param routeCode
 	 *            the new route of administration

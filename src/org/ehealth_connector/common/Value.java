@@ -17,7 +17,7 @@
 package org.ehealth_connector.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.ConvenienceUtilsEnums.UCUM;
+import org.ehealth_connector.cda.enums.Ucum;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -148,7 +148,7 @@ public class Value {
 	 * @param unit
 	 *            Die Einheit
 	 */
-	public Value(String value, UCUM unit) {
+	public Value(String value, Ucum unit) {
 		this(DatatypesFactory.eINSTANCE.createPQ());
 		setPqValue(value);
 		setUcumUnit(unit);
@@ -171,7 +171,7 @@ public class Value {
 	 * @param ucumUnit
 	 *            the UCUM Unit
 	 */
-	public Value(double numerator, double denominator, UCUM ucumUnit) {
+	public Value(double numerator, double denominator, Ucum ucumUnit) {
 		RTO rto = DatatypesFactory.eINSTANCE.createRTO();
 
 		PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
@@ -319,7 +319,7 @@ public class Value {
 		pq.setValue(Double.valueOf(value));
 	}
 
-	private void setUcumUnit(UCUM unit) {
+	private void setUcumUnit(Ucum unit) {
 		PQ pq = (PQ) mValue;
 		pq.setUnit(unit.toString());
 	}

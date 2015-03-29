@@ -137,7 +137,7 @@ public enum Severity {
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
 	 * vorhanden ist.</div>
 	 *
-	 * @param code
+	 * @param codeValue
 	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set

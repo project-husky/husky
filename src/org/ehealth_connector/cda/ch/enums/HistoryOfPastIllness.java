@@ -197,7 +197,7 @@ public enum HistoryOfPastIllness {
 	 * <div class="en">Checks if a given code value is in this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden ist.</div>
 	 *
-	 * @param code <br>
+	 * @param codeValue <br>
 	 *      <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */

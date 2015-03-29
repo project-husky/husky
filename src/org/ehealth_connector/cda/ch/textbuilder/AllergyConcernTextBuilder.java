@@ -25,7 +25,7 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 
 /**
- * Builds the <text> part of the Immunization recommendations.
+ * Builds the &lt;text&gt; part of the Immunization recommendations.
  * 
  * Always builds the whole part (not only adds one immunization recommendation).
  * 
@@ -39,6 +39,7 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param problemConcerns
+	 *            a list of problem concerns
 	 */
 	public AllergyConcernTextBuilder(
 			ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns,

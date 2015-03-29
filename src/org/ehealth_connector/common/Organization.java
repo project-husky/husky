@@ -1,23 +1,23 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.ConvenienceUtilsEnums.KnownOID;
+import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -75,7 +75,7 @@ public class Organization {
 	public Organization(String name, String gln) {
 		this(name);
 		II id = DatatypesFactory.eINSTANCE.createII();
-		id.setRoot(ConvenienceUtilsEnums.knownOID(KnownOID.GLN));
+		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 		mOrganization.getIds().add(id);
 	}
@@ -142,10 +142,10 @@ public class Organization {
 	 * @return ID der Organisation
 	 */
 	public String getId() {
-	  if (getMdhtOrganization().getIds().size()>0) {
-	  		return getMdhtOrganization().getIds().get(0).getExtension();
-	  }
-	  return null;
+		if (getMdhtOrganization().getIds().size() > 0) {
+			return getMdhtOrganization().getIds().get(0).getExtension();
+		}
+		return null;
 	}
 
 	/**
@@ -189,6 +189,7 @@ public class Organization {
 	 *            class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
-		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+		mOrganization.getTelecoms().addAll(
+				EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 }

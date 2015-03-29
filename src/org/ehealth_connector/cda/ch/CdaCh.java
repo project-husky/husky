@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.cda.enums.ParticipantType;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
@@ -35,7 +36,6 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.Util;
-import org.ehealth_connector.common.ch.ConvenienceUtilsEnums.ParticipantType;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
@@ -79,6 +79,9 @@ public abstract class CdaCh {
 	 * Constructor for CdaCh documents
 	 * 
 	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
+	 * 
+	 * @param doc
+	 *            the CDA-CH Object in its MDHT representation
 	 */
 	public CdaCh(CDACH doc) {
 		// this(doc, null, null);
@@ -95,6 +98,8 @@ public abstract class CdaCh {
 	 * <div class="de">Creates a CdaCh Object (Swiss cda document header)</div>
 	 * <div class="fr"></div>
 	 * 
+	 * @param doc
+	 *            the CDA-CH Object in its MDHT representation
 	 * @param stylesheet
 	 *            the stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
@@ -341,6 +346,7 @@ public abstract class CdaCh {
 	 * 
 	 * @param versicherung
 	 *            Die Versicherung als Organization Objekt
+	 * @return the arraylist of organizations
 	 */
 	public ArrayList<Organization> getInsurances(Organization versicherung) {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
@@ -388,6 +394,7 @@ public abstract class CdaCh {
 	 * 
 	 * @param versicherung
 	 *            Die Versicherung als Organization Objekt
+	 * @return the arraylist of organizations
 	 */
 	public ArrayList<Organization> getParticipants(Organization versicherung) {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
@@ -452,6 +459,7 @@ public abstract class CdaCh {
 	 * @param fileName
 	 *            Dateiname (inkl. Pfadangaben)
 	 * @throws Exception
+	 *             the exception
 	 */
 	public void saveToFile(String fileName) throws Exception {
 		File yourFile = new File(fileName);

@@ -133,8 +133,8 @@ public class Telecoms {
 	 * <div class="en">Gets the e mails.</div> <div class="de">Liefert e
 	 * mails.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return ArrayList<String> <div class="en">the e mails and ArrayList with
-	 *         Strings</div>
+	 * @return ArrayList<String, AddressUse> <div class="en">the e mails as am
+	 *         ArrayList of Strings and AddressUse</div>
 	 */
 	public HashMap<String, AddressUse> getEMails() {
 		return Util.getEMail(mTels);

@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -78,10 +78,10 @@ public class Address {
 	 *            Ort
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
-	    mAd = DatatypesFactory.eINSTANCE.createAD();
+		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
 		setHouseNumber(houseNumber);
-	    setCityAndZip(zip, city, AddressUse.PRIVATE);
+		setCityAndZip(zip, city, AddressUse.PRIVATE);
 	}
 
 	/**
@@ -100,10 +100,10 @@ public class Address {
 	 */
 	public Address(String street, String houseNumber, String zip, String city,
 			AddressUse usage) {
-	    mAd = DatatypesFactory.eINSTANCE.createAD();
+		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
 		setHouseNumber(houseNumber);
-	    setCityAndZip(zip, city, AddressUse.PRIVATE);
+		setCityAndZip(zip, city, AddressUse.PRIVATE);
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class Address {
 	}
 
 	/**
-	 * Sets the country div class="de">Setzt den Ort</div>
+	 * Sets the country <div class="de">Setzt den Ort</div>
 	 *
 	 * @param country
 	 *            the country
@@ -332,20 +332,20 @@ public class Address {
 	}
 
 	private void setCityAndZip(String zip, String city, AddressUse usage) {
-	  setCity(city);
-	  setZip(zip);
-	  if (usage != null) {
-	      switch (usage) {
-	      case BUSINESS:
-	          mAd.getUses().add(PostalAddressUse.WP);
-	          break;
-	      case PRIVATE:
-	          mAd.getUses().add(PostalAddressUse.HP);
-	          break;
-	      default:
-	          mAd.getUses().add(PostalAddressUse.WP);
-	          break;
-	      }
-	  }
+		setCity(city);
+		setZip(zip);
+		if (usage != null) {
+			switch (usage) {
+				case BUSINESS :
+					mAd.getUses().add(PostalAddressUse.WP);
+					break;
+				case PRIVATE :
+					mAd.getUses().add(PostalAddressUse.HP);
+					break;
+				default :
+					mAd.getUses().add(PostalAddressUse.WP);
+					break;
+			}
+		}
 	}
 }

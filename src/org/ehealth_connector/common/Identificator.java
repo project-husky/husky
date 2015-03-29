@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
-import org.ehealth_connector.common.ConvenienceUtilsEnums.KnownOID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -102,20 +101,6 @@ public class Identificator {
 	 */
 	public Identificator(II ii) {
 		mII = ii;
-	}
-
-	/**
-	 * Erstellt einen neuen Identifikator.
-	 *
-	 * @param oid
-	 *            OID der Domäne, in welcher die lokale ID eindeutig ist
-	 * @param id
-	 *            lokale ID
-	 */
-	public Identificator(KnownOID oid, String id) {
-		mII = DatatypesFactory.eINSTANCE.createII();
-		setRoot(ConvenienceUtilsEnums.knownOID(oid));
-		setExtension(id);
 	}
 
 	/**

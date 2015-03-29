@@ -254,6 +254,7 @@ public class Consumable {
 	 * Sets the Lot Number (Chargennummer)
 	 * 
 	 * @param text
+	 *            the lot number text
 	 */
 	public void setLotNr(String text) {
 		if (!text.equals("")) {
