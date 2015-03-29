@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda;
 
@@ -39,7 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * <div class="de">Klasse Gestationsalter. Dies ist der Zeitraum vom 1. Tag der
  * letzten Regelblutung der Mutter bis zur Geburt des Kindes. Hier kann
  * Gestationsalter eines Kindes angegeben werden, sofern das rund um Impfungen
- * am Kind relevant ist. </div>\n <div class="fr"></div> <div class="it"></div>
+ * am Kind relevant ist. </div> <div class="fr"></div> <div class="it"></div>
  */
 public class GestationalAge extends CodedResults {
 
@@ -276,13 +276,13 @@ public class GestationalAge extends CodedResults {
 				.createProcedureEntryProcedureActivityProcedure().init();
 		pe.getIds().add(Util.createUuidVacd(null));
 		pe.setCode(Util.createCodeNullFlavorNA());
-	
+
 		// Create NullFlavor Reference
 		ED text = DatatypesFactory.eINSTANCE.createED();
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.NA);
 		text.setReference(tel);
-	
+
 		pe.setText(text);
 		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 		pe.setStatusCode(StatusCode.COMPLETED.getCS());

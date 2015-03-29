@@ -36,8 +36,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
- * <div class="de">Ein konsumierbares Produkt</div>\n <div class="fr"></div>\n
- * <div class="it"></div>
+ * <div class="de">Ein konsumierbares Produkt</div> <div class="fr"></div> <div
+ * class="it"></div>
  */
 public class Consumable {
 

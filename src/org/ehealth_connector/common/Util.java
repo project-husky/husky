@@ -365,7 +365,7 @@ public class Util {
 		II ii;
 		if (id == null) {
 			ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot(EHealthConnectorVersions.EHealthConnectorV1.getId());
+			ii.setRoot(EHealthConnectorVersions.EHealthConnectorR201503.oid());
 			ii.setExtension(UUID.generate());
 		} else {
 			ii = id.getIi();
@@ -978,7 +978,7 @@ public class Util {
 					traverseAttributes(anyType.getAnyAttribute());
 					System.out.print(">");
 					stack.push(anyType.getMixed());
-	
+
 				} else {
 					// if (entry.getValue() != null && !stack2.isEmpty()) {
 					// System.out.print("</"+stack2.pop()+">");}

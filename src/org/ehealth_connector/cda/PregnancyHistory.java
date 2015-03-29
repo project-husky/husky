@@ -31,8 +31,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 
 /**
  * <div class="de">Bei Frauen KANN mit diesem Element die strukturierte Angabe
- * der Anamnese zu einer Schwangerschaft erfolgen.</div>\n <div class="fr">Class
- * PregnancyHistory.</div>\n <div class="it">Class PregnancyHistory.</div>
+ * der Anamnese zu einer Schwangerschaft erfolgen.</div> <div class="fr">Class
+ * PregnancyHistory.</div> <div class="it">Class PregnancyHistory.</div>
  */
 public class PregnancyHistory {
 

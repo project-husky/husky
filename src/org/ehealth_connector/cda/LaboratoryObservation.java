@@ -45,8 +45,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de">Klasse Laborbefund</div>\n <div class="fr">Class
- * LaboratoryObservation.</div>\n <div class="it">Class
+ * <div class="de">Klasse Laborbefund</div> <div class="fr">Class
+ * LaboratoryObservation.</div> <div class="it">Class
  * LaboratoryObservation.</div>
  */
 public class LaboratoryObservation {

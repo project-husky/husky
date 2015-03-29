@@ -1,35 +1,44 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
+/**
+ * Enum that contains the different Versions of the eHealtConnector
+ *
+ */
 public enum EHealthConnectorVersions {
 	/**
-	 * OID: 2.16.756.5.31 <div class="de">eHealth Connector V1</div> <div
-	 * class="fr">eHealth Connector V1</div>
+	 * OID: 2.16.756.5.30.1.139.1.1.1 eHealthConnector Proof of Concept
 	 */
-	EHealthConnectorV1("2.16.756.5.30.1.139.1.1.1", "eHealthConnector V1.0",
-			"20150325");
+	EHealthConnectorR201402("2.16.756.5.30.1.139.1.1.1",
+			"eHealthConnector Proof of Concept", "20140211"),
 
-	private String id;
+	/**
+	 * OID: 2.16.756.5.30.1.139.1.1.1 eHealthConnector R20150331
+	 */
+	EHealthConnectorR201503("2.16.756.5.30.1.139.1.1.2",
+			"eHealthConnector R20150331", "20150331");
+
+	private String oid;
 	private String systemVersionName;
 	private String releaseDate;
 
-	public String getId() {
-		return id;
+	public String oid() {
+		return oid;
 	}
 
 	public String getReleaseDate() {
@@ -40,9 +49,9 @@ public enum EHealthConnectorVersions {
 		return systemVersionName;
 	}
 
-	EHealthConnectorVersions(String id, String systemVersionName,
+	EHealthConnectorVersions(String oid, String systemVersionName,
 			String releaseDate) {
-		this.id = id;
+		this.oid = oid;
 		this.systemVersionName = systemVersionName;
 		this.releaseDate = releaseDate;
 	}

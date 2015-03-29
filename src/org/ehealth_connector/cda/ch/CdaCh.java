@@ -69,7 +69,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
  */
 public abstract class CdaCh {
 
-	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorV1;
+	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorR201503;
 	protected CDACH doc = null; // The CDA Document
 	private DocumentRoot docRoot = null; // The OHT-Element that helds the
 	// document

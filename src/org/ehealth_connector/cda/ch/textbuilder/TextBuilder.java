@@ -52,7 +52,6 @@ abstract class TextBuilder {
 		append("</content>");
 	}
 
-	// old
 	protected void append(String text) {
 		buffer.append(text);
 	}

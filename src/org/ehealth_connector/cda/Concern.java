@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * <div class="de">Klasse ConcernEntry.</div>\n <div class="fr"></div>\n <div
+ * <div class="de">Klasse ConcernEntry.</div> <div class="fr"></div> <div
  * class="it"></div>
  */
 class Concern {
