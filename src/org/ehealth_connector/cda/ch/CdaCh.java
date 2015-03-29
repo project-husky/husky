@@ -81,19 +81,23 @@ public abstract class CdaCh {
 	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
 	 */
 	public CdaCh(CDACH doc) {
-		this(doc, null, null);
+		// this(doc, null, null);
+		this.doc = doc;
+		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
+		docRoot.setClinicalDocument(doc);
 	}
 
 	/**
 	 * Constructor that includes a stylesheet and a cascasing stylesheet into
-	 * the document processing instructions
+	 * the document processing instructions and initalizes the standard document
+	 * attributes.
 	 * 
 	 * <div class="de">Creates a CdaCh Object (Swiss cda document header)</div>
 	 * <div class="fr"></div>
 	 * 
 	 * @param stylesheet
 	 *            the stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). 
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 * @param css
 	 *            the Cascasing stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
@@ -209,7 +213,8 @@ public abstract class CdaCh {
 	 * Fügt ein Cascading Stylesheet (CSS) zu den XML Processing Instructions
 	 * hinzu
 	 * 
-	 * @param css path to the CSS file
+	 * @param css
+	 *            path to the CSS file
 	 */
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
@@ -271,7 +276,9 @@ public abstract class CdaCh {
 	/**
 	 * Fügt ein Stylesheet zu den XML Processing Instructions hinzu
 	 * 
-	 * @param stylesheet Path to the stylesheet (e.g. '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
+	 * @param stylesheet
+	 *            Path to the stylesheet (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
 	 */
 	public void addStylesheet(String stylesheet) {
 		if (stylesheet != null) {
@@ -594,7 +601,7 @@ public abstract class CdaCh {
 	public DocumentRoot getDocRoot() {
 		return this.docRoot;
 	}
-	
+
 	public void setTimestamp(Date date) {
 		if (date == null) {
 			doc.setEffectiveTime(DateUtil.nowAsTS());
@@ -640,7 +647,8 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Sets the TypeId to the default value ("2.16.840.1.113883.1.3", "POCD_HD000040")
+	 * Sets the TypeId to the default value ("2.16.840.1.113883.1.3",
+	 * "POCD_HD000040")
 	 */
 	private void setTypeId() {
 		// Set Type ID
