@@ -1,19 +1,3 @@
-/*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
-
 package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
@@ -67,6 +51,19 @@ public enum SerologieForVACD {
 					 */
 					CLOSTRIDIUM_TETANI_TOXIN_AB_IGG("58770-9",
 							"Clostridium tetani toxin Ab.IgG");
+	public static final String VARICELLA_ZOSTER_VIRUS_AB_IGG_CODE = "22602-7";
+	public static final String MEASLES_VIRUS_AB_IGG_CODE = "22502-9";
+	public static final String MUMPS_VIRUS_AB_IGG_CODE = "22417-0";
+	public static final String RUBELLA_VIRUS_AB_IGG_CODE = "41763-4";
+	public static final String HEPATITIS_A_VIRUS_AB_IGG_CODE = "22313-1";
+	public static final String HEPATITIS_B_VIRUS_SURFACE_AB_IGG_CODE = "16935-9";
+	public static final String EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB_CODE = "26061-2";
+	public static final String YELLOW_FEVER_VIRUS_AB_CODE = "6589-6";
+	public static final String CLOSTRIDIUM_TETANI_TOXIN_AB_IGG_CODE = "58770-9";
+
+	public static final String CODE_SYSTEM = "2.16.840.1.113883.6.1";
+	public static final String CODE_SYSTEM_NAME = "LOINC";
+
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -84,20 +81,6 @@ public enum SerologieForVACD {
 		}
 		return null;
 	}
-
-	public static final String VARICELLA_ZOSTER_VIRUS_AB_IGG_CODE = "22602-7";
-	public static final String MEASLES_VIRUS_AB_IGG_CODE = "22502-9";
-	public static final String MUMPS_VIRUS_AB_IGG_CODE = "22417-0";
-	public static final String RUBELLA_VIRUS_AB_IGG_CODE = "41763-4";
-	public static final String HEPATITIS_A_VIRUS_AB_IGG_CODE = "22313-1";
-	public static final String HEPATITIS_B_VIRUS_SURFACE_AB_IGG_CODE = "16935-9";
-	public static final String EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB_CODE = "26061-2";
-	public static final String YELLOW_FEVER_VIRUS_AB_CODE = "6589-6";
-
-	public static final String CLOSTRIDIUM_TETANI_TOXIN_AB_IGG_CODE = "58770-9";
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.6.1";
-
-	public static final String CODE_SYSTEM_NAME = "LOINC";
 	private String code;
 
 	private String displayName;

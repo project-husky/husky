@@ -1,19 +1,3 @@
-/*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
-
 package org.ehealth_connector.cda.enums;
 
 import java.util.Arrays;
@@ -40,33 +24,14 @@ public enum AdministrativeGender {
 	 * <div class="de">Undifferenziert</div> <div class="fr"></div>
 	 */
 	UNDIFFERENTIATED("UN", "Undifferentiated");
-	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static AdministrativeGender getEnum(String code) {
-		for (AdministrativeGender x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
 	public static final String FEMALE_CODE = "F";
 	public static final String MALE_CODE = "M";
-
 	public static final String UNDIFFERENTIATED_CODE = "UN";
+
 	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.1";
-
 	public static final String CODE_SYSTEM_NAME = "AdministrativeGender";
-	private String code;
 
+	private String code;
 	private String displayName;
 
 	/**
@@ -87,17 +52,23 @@ public enum AdministrativeGender {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>
 	 *
-	 * @return <div class="en">The MDHT Code</div>
+	 * @return <div class="en">the code</div>
 	 */
-	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getdisplayName() {
+		return this.displayName;
 	}
 
 	/**
@@ -112,12 +83,78 @@ public enum AdministrativeGender {
 	}
 
 	/**
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
+	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 *
+	 * @return <div class="en">The MDHT Code</div>
+	 */
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static AdministrativeGender getEnum(String code) {
+		for (AdministrativeGender x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 *
+	 * @param enumName
+	 * <br>
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public boolean isEnumOfValueSet(String enumName) {
+		return Arrays.asList(values()).contains(enumName);
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
+	 */
+	public boolean isInValueSet(String codeValue) {
+		for (AdministrativeGender x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
 	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	public String getCodeSystemId() {
+	public String getCodeSystemOid() {
 		return CODE_SYSTEM;
 	}
 
@@ -129,60 +166,6 @@ public enum AdministrativeGender {
 	 */
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public String getCodeValue() {
-		return code;
-	}
-
-	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
-	 *
-	 * @return <div class="en">the display name</div>
-	 */
-	public String getdisplayName() {
-		return displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 *
-	 * @param enumStr
-	 * <br>
-	 *            <div class="de"> enum str</div>
-	 * @return true, if is enum of value set
-	 */
-	public boolean isEnumOfValueSet(String enumStr) {
-		return Arrays.asList(values()).contains(enumStr);
-	}
-
-	/**
-	 * <div class="en">Checks if a given code is in this value set.</div> <div
-	 * class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public boolean isInValueSet(String code) {
-		for (AdministrativeGender x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

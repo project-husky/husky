@@ -168,7 +168,7 @@ public enum AddressUse {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	public String getCodeSystemId() {
+	public String getCodeSystemOid() {
 		return CODE_SYSTEM;
 	}
 
@@ -206,28 +206,28 @@ public enum AddressUse {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
 	 *
-	 * @param enumStr
+	 *
+	 * @param enumName
 	 * <br>
-	 *            <div class="de"> enum str</div>
-	 * @return true, if is enum of value set
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumStr) {
-		return Arrays.asList(values()).contains(enumStr);
+	public boolean isEnumOfValueSet(String enumName) {
+		return Arrays.asList(values()).contains(enumName);
 	}
 
 	/**
-	 * <div class="en">Checks if a given code is in this value set.</div> <div
-	 * class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 *
 	 * @param code
 	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public boolean isInValueSet(String code) {
+	public boolean isInValueSet(String codeValue) {
 		for (AddressUse x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;

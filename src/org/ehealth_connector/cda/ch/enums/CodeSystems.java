@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -160,65 +160,65 @@ public enum CodeSystems {
 	public String getCodeSystem(
 			org.ehealth_connector.cda.ch.enums.CodeSystems gln) {
 		switch (gln) {
-		case IcrDha080401Disease:
-			return "2.16.756.5.30.1.127.3.1.20080401.1";
-		case GLN:
-			return "1.3.88";
-		case GTIN:
-			return "1.3.160";
-		case SwissSSN:
-			return "2.16.756.5.32";
-		case SwissSSNDeprecated:
-			return "2.16.756.5.31";
-		case ICD10:
-			return "2.16.756.5.30.1.126.3.2";
+			case IcrDha080401Disease:
+				return "2.16.756.5.30.1.127.3.1.20080401.1";
+			case GLN:
+				return "1.3.88";
+			case GTIN:
+				return "1.3.160";
+			case SwissSSN:
+				return "2.16.756.5.32";
+			case SwissSSNDeprecated:
+				return "2.16.756.5.31";
+			case ICD10:
+				return "2.16.756.5.30.1.126.3.2";
 
-		case LanguageCode:
-			return "2.16.840.1.113883.6.121";
+			case LanguageCode:
+				return "2.16.840.1.113883.6.121";
 
-		case ConfidentialityCode:
-			return "2.16.840.1.113883.5.25";
+			case ConfidentialityCode:
+				return "2.16.840.1.113883.5.25";
 
-		case AdministrativeGender:
-			return "2.16.840.1.113883.5.1";
+			case AdministrativeGender:
+				return "2.16.840.1.113883.5.1";
 
-		case AddressUse:
-			return "2.16.840.1.113883.5.1119";
+			case AddressUse:
+				return "2.16.840.1.113883.5.1119";
 
-		case ParticipationSignature:
-			return "2.16.840.1.113883.5.89";
+			case ParticipationSignature:
+				return "2.16.840.1.113883.5.89";
 
-		case ActStatus:
-			return "2.16.840.1.113883.5.14";
+			case ActStatus:
+				return "2.16.840.1.113883.5.14";
 
-		case SNOMEDCT:
-			return "2.16.840.1.113883.6.96";
+			case SNOMEDCT:
+				return "2.16.840.1.113883.6.96";
 
-		case RiscOfComplications:
-			return "2.16.756.5.30.1.127.3.3.2013.1";
+			case RiscOfComplications:
+				return "2.16.756.5.30.1.127.3.3.2013.1";
 
-		case RiscOfExposure:
-			return "2.16.756.5.30.1.127.3.3.2013.2";
+			case RiscOfExposure:
+				return "2.16.756.5.30.1.127.3.3.2013.2";
 
-		case HL7ActCode:
-			return "2.16.840.1.113883.5.4";
+			case HL7ActCode:
+				return "2.16.840.1.113883.5.4";
 
-		case HL7SeverityObservation:
-			return "2.16.840.1.113883.5.1063";
+			case HL7SeverityObservation:
+				return "2.16.840.1.113883.5.1063";
 
-		case HL7RouteOfAdministration:
-			return "2.16.840.1.113883.5.112";
+			case HL7RouteOfAdministration:
+				return "2.16.840.1.113883.5.112";
 
-		case LOINC:
-			return "2.16.840.1.113883.6.1";
+			case LOINC:
+				return "2.16.840.1.113883.6.1";
 
-		case HL7ObservationInterpretation:
-			return "2.16.840.1.113883.5.83";
+			case HL7ObservationInterpretation:
+				return "2.16.840.1.113883.5.83";
 
-		case HL7nullFlavor:
-			return "2.16.840.1.113883.5.1008";
-		default:
-			return "undefined";
+			case HL7nullFlavor:
+				return "2.16.840.1.113883.5.1008";
+			default:
+				return "undefined";
 		}
 	}
 

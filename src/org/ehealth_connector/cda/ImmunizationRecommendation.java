@@ -92,11 +92,12 @@ public class ImmunizationRecommendation {
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
 	 *
-	 * @param specialCode expresses a special condition for this element
+	 * @param specialCode
+	 *            expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		mImmunizationRecommendation.setCode(specialCode.getCD());
-		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIV.getCS());
+		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIVE.getCS());
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.UNK);
 		mImmunizationRecommendation.setPriorityCode(ce);
@@ -176,7 +177,8 @@ public class ImmunizationRecommendation {
 	/**
 	 * Adds the reason for the immunization recommendeation (the BAG Guideline)
 	 *
-	 * @param reason the reason
+	 * @param reason
+	 *            the reason
 	 */
 	public void addReason(Reason reason) {
 		mImmunizationRecommendation.addObservation(reason

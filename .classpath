@@ -98,7 +98,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-discovery-0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-fileupload-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-httpclient-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/fhir/commons-io-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-io-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar"/>
@@ -111,7 +110,7 @@
 	<classpathentry kind="lib" path="lib/fhir/slf4j-log4j12-1.7.10.jar"/>
 	<classpathentry kind="lib" path="lib/fhir/httpclient-4.2.3.jar"/>
 	<classpathentry kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.hl7v3_2.0.2/hl7v3.jar"/>
-	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-base-0.9.jar"/>
-	<classpathentry kind="lib" path="lib/fhir/hapi-fhir-structures-dstu2-0.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-base-0.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-structures-dstu2-0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

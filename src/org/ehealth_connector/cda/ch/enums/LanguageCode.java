@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.cda.ch.enums;
 
@@ -40,6 +40,14 @@ public enum LanguageCode {
 	 * <div class="de">italienisch</div> <div class="fr"></div>
 	 */
 	ITALIAN("it-CH", "italian");
+	public static final String GERMAN_CODE = "de-CH";
+
+	public static final String FRENCH_CODE = "fr-CH";
+	public static final String ITALIAN_CODE = "it-CH";
+
+	public static final String CODE_SYSTEM = "ISO 3166";
+	public static final String CODE_SYSTEM_NAME = "";
+
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -57,14 +65,6 @@ public enum LanguageCode {
 		}
 		return null;
 	}
-
-	public static final String GERMAN_CODE = "de-CH";
-	public static final String FRENCH_CODE = "fr-CH";
-
-	public static final String ITALIAN_CODE = "it-CH";
-	public static final String CODE_SYSTEM = "ISO 3166";
-
-	public static final String CODE_SYSTEM_NAME = "";
 	private String code;
 
 	private String displayName;

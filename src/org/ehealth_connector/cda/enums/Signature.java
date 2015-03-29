@@ -1,19 +1,3 @@
-/*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
-
 package org.ehealth_connector.cda.enums;
 
 import java.util.Arrays;
@@ -43,33 +27,14 @@ public enum Signature {
 	 * erforderlich</div> <div class="fr"></div>
 	 */
 	REQUIRED("X", "required");
-	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static Signature getEnum(String code) {
-		for (Signature x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
 	public static final String INTENDED_CODE = "I";
 	public static final String SIGNED_CODE = "S";
-
 	public static final String REQUIRED_CODE = "X";
+
 	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.89";
-
 	public static final String CODE_SYSTEM_NAME = "ParticipationSignature";
-	private String code;
 
+	private String code;
 	private String displayName;
 
 	/**
@@ -90,6 +55,26 @@ public enum Signature {
 	}
 
 	/**
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getdisplayName() {
+		return this.displayName;
+	}
+
+	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
 	 * class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
@@ -98,36 +83,6 @@ public enum Signature {
 	public Code getCode() {
 		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
 		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-
-	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public String getCodeValue() {
-		return this.code;
 	}
 
 	/**
@@ -143,13 +98,21 @@ public enum Signature {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
 	 */
-	public String getdisplayName() {
-		return this.displayName;
+	public static Signature getEnum(String code) {
+		for (Signature x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -158,32 +121,52 @@ public enum Signature {
 	 * ist.</div>
 	 *
 	 *
-	 * @param enumStr
+	 * @param enumName
 	 * <br>
-	 *            <div class="de"> enum str</div>
-	 * @return true, if is enum of value set
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumStr) {
-		return Arrays.asList(values()).contains(enumStr);
+	public boolean isEnumOfValueSet(String enumName) {
+		return Arrays.asList(values()).contains(enumName);
 	}
 
 	/**
-	 * <div class="en">Checks if a given code is in this value set.</div> <div
-	 * class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 *
 	 * @param code
 	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public boolean isInValueSet(String code) {
+	public boolean isInValueSet(String codeValue) {
 		for (Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * code system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

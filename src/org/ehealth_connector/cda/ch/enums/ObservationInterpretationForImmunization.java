@@ -1,19 +1,3 @@
-/*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
-
 package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
@@ -41,6 +25,12 @@ public enum ObservationInterpretationForImmunization {
 			 */
 			NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN("NEG",
 					"Negative: Pathogen couldn't be determined in specimen");
+	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
+	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
+
+	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.83";
+	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
+
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
@@ -58,13 +48,6 @@ public enum ObservationInterpretationForImmunization {
 		}
 		return null;
 	}
-
-	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
-
-	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.83";
-
-	public static final String CODE_SYSTEM_NAME = "HL7 ObservationInterpretation ";
 	private String code;
 
 	private String displayName;
@@ -112,16 +95,6 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	public String getCodeSystemId() {
-		return CODE_SYSTEM;
-	}
-
-	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
 	 *
@@ -129,6 +102,16 @@ public enum ObservationInterpretationForImmunization {
 	 */
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM;
 	}
 
 	/**
@@ -157,26 +140,26 @@ public enum ObservationInterpretationForImmunization {
 	 * ist.</div>
 	 *
 	 *
-	 * @param enumStr
+	 * @param enumName
 	 * <br>
-	 *            <div class="de"> enum str</div>
-	 * @return true, if is enum of value set
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumStr) {
-		return Arrays.asList(values()).contains(enumStr);
+	public boolean isEnumOfValueSet(String enumName) {
+		return Arrays.asList(values()).contains(enumName);
 	}
 
 	/**
-	 * <div class="en">Checks if a given code is in this value set.</div> <div
-	 * class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 *
 	 * @param code
 	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public boolean isInValueSet(String code) {
+	public boolean isInValueSet(String codeValue) {
 		for (ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
