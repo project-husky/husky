@@ -50,16 +50,12 @@ public class DocumentMetadata {
 	/** The cda. */
 	private ClinicalDocument cda;
 
-	/** The extractor. */
-	private CDAR2Extractor extractor;
-
 	/**
 	 * Instantiates a new document metadata.
 	 */
 	public DocumentMetadata() {
 		xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
 		cda = CDAFactory.eINSTANCE.createClinicalDocument();
-		extractor = new CDAR2Extractor(cda);
 	}
 
 	/**
@@ -94,6 +90,7 @@ public class DocumentMetadata {
 
 		cda.getAuthors().add(author.copyMdhtAuthor());
 
+		CDAR2Extractor extractor = new CDAR2Extractor(cda);
 		AuthorType xAuthor = extractor.extractAuthors().get(0);
 		xDoc.getAuthors().add(xAuthor);
 	}
@@ -204,6 +201,7 @@ public class DocumentMetadata {
 		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
 
 		// Source Patient Info (Adress etc.)
+		CDAR2Extractor extractor = new CDAR2Extractor(cda);
 		SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
 		xDoc.setSourcePatientInfo(spi);
 
@@ -252,7 +250,7 @@ public class DocumentMetadata {
 	 * Sets the (optional) title.
 	 *
 	 * @param title
-	 *            das title Objekt welches gesetzt wird
+	 *            the title object to set
 	 */
 	public void setTitle(String title) {
 		xDoc.setTitle(XdsUtil.createInternationalString(title));
