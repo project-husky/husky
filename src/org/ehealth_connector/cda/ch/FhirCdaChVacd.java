@@ -44,12 +44,11 @@ import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.ch.enums.SerologieForVACD;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.cda.enums.Ucum;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -66,10 +65,12 @@ import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
+import ca.uhn.fhir.model.dstu2.composite.RatioDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
@@ -1460,38 +1461,57 @@ public class FhirCdaChVacd {
 	 */
 	private org.ehealth_connector.cda.LaboratoryObservation getLaboratoryObservation(
 			Observation fhirObservation) {
-		org.ehealth_connector.cda.LaboratoryObservation retVal = null;
+		org.ehealth_connector.cda.LaboratoryObservation retVal = new LaboratoryObservation();
 
-		// TODO Tony: to complete
-		org.ehealth_connector.common.Organization laboratoryOrg = new org.ehealth_connector.common.Organization(
-				"dummyLabor", "12345678");
-		org.ehealth_connector.common.Performer laboratory = new org.ehealth_connector.common.Performer(
-				laboratoryOrg);
-		// boolean immuneProtection = false;
-		Date dateTimeOfResult = DateUtil.date("01.02.2015");
-		// Code obsCode = new Code("dummy1", "dummy1");
-		Value value = new Value(new Code("dummy2", "dummy2"));
-		//
-		// // Create the LaboratoryObservation
-		// retVal = new org.ehealth_connector.cda.LaboratoryObservation(obsCode,
-		// laboratory, immuneProtection, dateTimeOfResult, valueCode);
-		//
-		// // Add Identifiers
-		// for (IdentifierDt id : fhirObservation.getIdentifier()) {
-		// String codeSystem = removeURIPrefix(id.getSystem());
-		// retVal.addId(new Identificator(codeSystem, id.getValue()));
-		// }
+		CodingDt fhirCode = fhirObservation.getCode().getCodingFirstRep();
+		retVal.setCode(new Code(removeURIPrefix(fhirCode.getSystem()), fhirCode
+				.getCode(), fhirCode.getDisplay()));
+		retVal.setEffectiveTime(fhirObservation.getIssued());
+		if (!fhirObservation.getPerformer().isEmpty()) {
+			ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
+			retVal.setLaboratory(
+					getOrganization((Organization) refPerf.getResource()),
+					fhirObservation.getIssued());
+		}
 
-		CdaChVacd doc = new CdaChVacd();
-		retVal = doc
-				.createLaboratoryObservation(
-						SerologieForVACD.MEASLES_VIRUS_AB_IGG,
-						null,
-						dateTimeOfResult,
-						laboratory,
-						value,
-						ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN,
-						"Testkommentar");
+		if (fhirObservation.getValue() instanceof QuantityDt) {
+			// type PQ
+			QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
+			// TODO Axel: fix Ucum unit g/L
+			// retVal.addValue(new Value(fhirQuantity.getValue().toString(),
+			// Ucum
+			// .valueOf(fhirQuantity.getUnits())));
+
+			// TODO workaround
+			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
+					Ucum.GramsPerLiter));
+		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
+			// type CD
+			CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation
+					.getValue()).getCodingFirstRep();
+			retVal.addValue(new Code(new Code(removeURIPrefix(fhirValueCode
+					.getSystem()), fhirValueCode.getCode(), fhirValueCode
+					.getDisplay())));
+		} else if (fhirObservation.getValue() instanceof RatioDt) {
+			// type RTO not yet implemented
+		}
+
+		if (fhirObservation.getReferenceRangeFirstRep() != null) {
+			// ReferenceRange not yet implemented
+		}
+
+		CodingDt fhirInterpretationCode = fhirObservation.getInterpretation()
+				.getCodingFirstRep();
+		if (fhirInterpretationCode != null) {
+			if (fhirInterpretationCode.getSystem() != null) {
+				retVal.setInterpretationCode(new Code(
+						removeURIPrefix(fhirInterpretationCode.getSystem()),
+						fhirInterpretationCode.getCode(),
+						fhirInterpretationCode.getDisplay()));
+			}
+		}
+
+		retVal.setCommentText(fhirObservation.getComments());
 
 		return retVal;
 

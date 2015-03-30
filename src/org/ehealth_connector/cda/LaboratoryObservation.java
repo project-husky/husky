@@ -52,7 +52,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class LaboratoryObservation {
 
 	/** The m laboratory observation. */
-	private org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
+	private final org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
 
 	/**
 	 * Instantiates a new laboratory observation.
@@ -64,7 +64,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="de">Code für einen bezüglich einer Impfung
@@ -95,7 +95,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="de">Code für einen bezüglich einer Impfung
@@ -127,7 +127,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="de">Code für einen bezüglich einer Impfung
@@ -159,7 +159,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.
-	 *
+	 * 
 	 * @param labObs
 	 * <br>
 	 *            <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
@@ -172,7 +172,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Adds the id.
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -183,7 +183,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Sets the value.
-	 *
+	 * 
 	 * @param code
 	 *            the new value
 	 */
@@ -193,7 +193,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Adds the value.
-	 *
+	 * 
 	 * @param value
 	 *            the new value
 	 */
@@ -214,7 +214,7 @@ public class LaboratoryObservation {
 	 * <div class="de">Copy mdht laboratory observation.</div> <div
 	 * class="fr">Copy mdht laboratory observation.</div> <div class="it">Copy
 	 * mdht laboratory observation.</div>
-	 *
+	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. laboratory observation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation copyMdhtLaboratoryObservation() {
@@ -224,7 +224,7 @@ public class LaboratoryObservation {
 	/**
 	 * <div class="de">Gibt den Code der Beobachtung zurück.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the code
 	 */
 	public Code getCode() {
@@ -234,7 +234,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text (when set).
-	 *
+	 * 
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
 	 */
@@ -246,7 +246,7 @@ public class LaboratoryObservation {
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself)
-	 *
+	 * 
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -258,7 +258,7 @@ public class LaboratoryObservation {
 	 * <div class="de">Gibt das Datum und die Uhrzeit zurück, wann die
 	 * Untersuchung durchgeführt wurde.</div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 *
+	 * 
 	 * @return the date time of result
 	 */
 	public Date getDateTimeOfResult() {
@@ -275,7 +275,7 @@ public class LaboratoryObservation {
 	 * <div class="de">Gibt das Datum und die Uhrzeit zurück, wann die
 	 * Untersuchung durchgeführt wurde als String zurück (z.B.
 	 * "28.02.2015 16:00")</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the date time of result
 	 */
 	public String getDateTimeOfResultStr() {
@@ -292,7 +292,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Gets the Effective Time
-	 *
+	 * 
 	 * @return the effective time as date
 	 */
 	public Date getEffectiveTime() {
@@ -302,7 +302,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Get the ids.
-	 *
+	 * 
 	 * @return the ids
 	 */
 	public ArrayList<Identificator> getIds() {
@@ -312,7 +312,7 @@ public class LaboratoryObservation {
 	/**
 	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
 	 * Code).</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the interpretation code
 	 */
 	public String getInterpretationCode() {
@@ -343,7 +343,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Gets the mdht laboratory observation.
-	 *
+	 * 
 	 * @return the mdht laboratory observation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtLaboratoryObservation() {
@@ -380,7 +380,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Sets the code.
-	 *
+	 * 
 	 * @param code
 	 *            the new code
 	 */
@@ -390,7 +390,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Sets a comment text
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -409,7 +409,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Sets the date time of result.
-	 *
+	 * 
 	 * @param dateTimeOfResult
 	 *            the new date time of result
 	 */
@@ -424,7 +424,7 @@ public class LaboratoryObservation {
 
 	/**
 	 * Sets the interpretation code.
-	 *
+	 * 
 	 * @param code
 	 *            the new interpretation code
 	 */
@@ -435,9 +435,20 @@ public class LaboratoryObservation {
 	}
 
 	/**
+	 * Sets the interpretation code.
+	 * 
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void setInterpretationCode(Code code) {
+		mLaboratoryObservation.getInterpretationCodes().clear();
+		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
+	}
+
+	/**
 	 * <div class="de">Sets the laboratory.</div> <div class="fr">Sets the
 	 * laboratory.</div> <div class="it">Sets the laboratory.</div>
-	 *
+	 * 
 	 * @param laboratory
 	 * <br>
 	 *            <div class="de"> laboratory</div> <div class="fr">
