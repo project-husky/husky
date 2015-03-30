@@ -537,10 +537,13 @@ public class CdaChVacd extends CdaCh {
 		} else {
 			if (laboratoryObservation.getCommentText() != null) {
 				// Aller vorhandenen Kommentare zusammenfügen
+				int i = 0;
 				String allComments = "";
 				for (LaboratoryObservation t : getLaboratoryObservations()) {
 					if (t.getCommentText() != null) {
-						allComments = allComments + t.getCommentText() + " ";
+						i++;
+						allComments = allComments + "Kommentar " + i + ": "
+								+ t.getCommentText() + " ";
 					}
 				}
 				setNarrativeTextLaboratoryObservation(allComments);
@@ -1370,7 +1373,7 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	private String getNarrativeText(Section s) {
-		if (s != null && s != null) {
+		if (s != null) {
 			StrucDocText t = s.getText();
 			return Util.extractStringFromNonQuotedStrucDocText(t);
 		}

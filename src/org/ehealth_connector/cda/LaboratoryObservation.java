@@ -316,7 +316,12 @@ public class LaboratoryObservation {
 	 * @return the interpretation code
 	 */
 	public String getInterpretationCode() {
-		return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
+		if (mLaboratoryObservation.getInterpretationCodes().size() > 0) {
+			return mLaboratoryObservation.getInterpretationCodes().get(0)
+					.getCode();
+		} else {
+			return null;
+		}
 	}
 
 	/**

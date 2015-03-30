@@ -190,6 +190,7 @@ public class Code {
 	 *            name of the code system.
 	 */
 	public void setCodeSystemName(String codeSystemName) {
+		mCD.unsetNullFlavor();
 		mCD.setCodeSystemName(codeSystemName);
 	}
 
@@ -294,6 +295,7 @@ public class Code {
 	 *            das code Objekt welches gesetzt wird
 	 */
 	public void setCode(String code) {
+		mCD.unsetNullFlavor();
 		mCD.setCode(code);
 	}
 
@@ -306,6 +308,7 @@ public class Code {
 	 *            das oid Objekt welches gesetzt wird
 	 */
 	public void setCodeSystem(String oid) {
+		mCD.unsetNullFlavor();
 		mCD.setCodeSystem(oid);
 	}
 

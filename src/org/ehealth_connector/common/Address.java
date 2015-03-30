@@ -103,7 +103,7 @@ public class Address {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
 		setHouseNumber(houseNumber);
-		setCityAndZip(zip, city, AddressUse.PRIVATE);
+		setCityAndZip(zip, city, usage);
 	}
 
 	/**
