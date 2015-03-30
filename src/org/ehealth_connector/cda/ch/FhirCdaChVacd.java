@@ -86,6 +86,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ConditionStatusEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
@@ -428,12 +429,6 @@ public class FhirCdaChVacd {
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsPregnancyObservation = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
-	 */
 	public static final String urnUseAsLaboratoryObservation = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation";
 
 	/**
@@ -459,6 +454,12 @@ public class FhirCdaChVacd {
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsPerformer = "urn:ehealth_connector:FhirExtension:useAsPerformer";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR
+	 * extension</div><div class="de"></div><div class="fr"></div>
+	 */
+	public static final String urnUseAsPregnancyObservation = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
@@ -812,37 +813,6 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC CodedResults</div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public org.ehealth_connector.cda.PregnancyHistory getPregnancyHistory(
-			Bundle bundle) {
-		PregnancyHistory retVal = null;
-		Date deliveryDate = null;
-		for (Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(
-					urnUseAsPregnancyObservation).isEmpty()
-					&& (entry.getResource() instanceof Observation)) {
-				Observation fhirObs = (Observation) entry.getResource();
-				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				if (fhirCode.getCode().equals("11778-8")) {
-					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
-				}
-			}
-		}
-
-		if (deliveryDate != null) {
-			retVal = new PregnancyHistory(deliveryDate);
-			// not yet implemented:
-			// retVal.setPerformer(perfomer);
-		}
-		return retVal;
-	}
-
-	/**
-	 * @param bundle
-	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">list of eHC ImmunizationRecommendations</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
@@ -1067,6 +1037,37 @@ public class FhirCdaChVacd {
 	}
 
 	/**
+	 * @param bundle
+	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC CodedResults</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.PregnancyHistory getPregnancyHistory(
+			Bundle bundle) {
+		PregnancyHistory retVal = null;
+		Date deliveryDate = null;
+		for (Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(
+					urnUseAsPregnancyObservation).isEmpty()
+					&& (entry.getResource() instanceof Observation)) {
+				Observation fhirObs = (Observation) entry.getResource();
+				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+				if (fhirCode.getCode().equals("11778-8")) {
+					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
+				}
+			}
+		}
+
+		if (deliveryDate != null) {
+			retVal = new PregnancyHistory(deliveryDate);
+			// not yet implemented:
+			// retVal.setPerformer(perfomer);
+		}
+		return retVal;
+	}
+
+	/**
 	 * @param fhirMedicationStatement
 	 *            <div class="en">FHIR MedicationStatement resource</div> <div
 	 *            class="de"></div> <div class="fr"></div>
@@ -1119,14 +1120,9 @@ public class FhirCdaChVacd {
 		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
 		problemEntry.setCode(new Code(removeURIPrefix(fhirCode.getSystem()),
 				fhirCode.getCode(), fhirCode.getDisplay()));
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		if (fhirCondition.getStatus().equals("confirmed")) {
-			problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		} else {
-			// TODO Tony: Mapping: active, suspended, aborted,
-			// completed=CONFIRMED
-			problemStatusCode = ProblemConcernStatusCode.ACTIVE;
-		}
+
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
+				.getStatusElement().getValueAsEnum());
 
 		// Create the ActiveProblemConcern
 		retVal = new org.ehealth_connector.cda.ActiveProblemConcern(concern,
@@ -1159,14 +1155,8 @@ public class FhirCdaChVacd {
 		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
 		problemEntry.addValue(new Code(removeURIPrefix(fhirCode.getSystem()),
 				fhirCode.getCode(), fhirCode.getDisplay()));
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		if (fhirCondition.getStatus().equals("confirmed")) {
-			problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		} else {
-			// TODO Tony: Mapping: active, suspended, aborted,
-			// completed=CONFIRMED
-			problemStatusCode = ProblemConcernStatusCode.ACTIVE;
-		}
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
+				.getStatusElement().getValueAsEnum());
 
 		// Create the AllergyProblemConcern
 		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
@@ -1542,14 +1532,8 @@ public class FhirCdaChVacd {
 		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
 		problemEntry.setCode(new Code(removeURIPrefix(fhirCode.getSystem()),
 				fhirCode.getCode(), fhirCode.getDisplay()));
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		if (fhirCondition.getStatus().equals("confirmed")) {
-			problemStatusCode = ProblemConcernStatusCode.COMPLETED;
-		} else {
-			// TODO Tony: Mapping: active, suspended, aborted,
-			// completed=CONFIRMED
-			problemStatusCode = ProblemConcernStatusCode.ACTIVE;
-		}
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
+				.getStatusElement().getValueAsEnum());
 
 		// Create the PastProblemConcern
 		retVal = new org.ehealth_connector.cda.PastProblemConcern(concern,
@@ -1563,6 +1547,42 @@ public class FhirCdaChVacd {
 
 		return retVal;
 
+	}
+
+	/**
+	 * <div class="en">Maps the FHIR status code to an eHC
+	 * ProblemConcernStatusCode</div> <div class="de"></div> <div
+	 * class="fr"></div>
+	 * 
+	 * @param status
+	 *            <div class="en">FHIR status</div> <div class="de"></div> <div
+	 *            class="fr"></div>
+	 * @return <div class="en">eHC ProblemConcernStatusCode</div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
+	private org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
+			ConditionStatusEnum status) {
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
+		if (status == ConditionStatusEnum.CONFIRMED) {
+			retVal = ProblemConcernStatusCode.COMPLETED;
+		} else if (status == ConditionStatusEnum.PROVISIONAL) {
+			retVal = ProblemConcernStatusCode.SUSPENDED;
+		} else if (status == ConditionStatusEnum.REFUTED) {
+			retVal = ProblemConcernStatusCode.ABORTED;
+		} else if (status == ConditionStatusEnum.WORKING) {
+			retVal = ProblemConcernStatusCode.ACTIVE;
+		}
+
+		// if (status.equals("confirmed")) {
+		// retVal = ProblemConcernStatusCode.COMPLETED;
+		// } else if (status.equals("active")) {
+		// retVal = ProblemConcernStatusCode.ACTIVE;
+		// } else if (status.equals("suspended")) {
+		// retVal = ProblemConcernStatusCode.SUSPENDED;
+		// } else if (status.equals("aborted")) {
+		// retVal = ProblemConcernStatusCode.ABORTED;
+		// }
+		return retVal;
 	}
 
 	/**
