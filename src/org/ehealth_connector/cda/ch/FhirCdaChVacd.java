@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,10 +32,13 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.CodedResults;
+import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
+import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
@@ -65,6 +69,7 @@ import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
@@ -82,6 +87,7 @@ import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
@@ -368,91 +374,97 @@ public class FhirCdaChVacd {
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsActiveProblemConcern = "urn:ehealth_connector:Demo:FhirExtension:useAsActiveProblemConcern";
+	public static final String urnUseAsActiveProblemConcern = "urn:ehealth_connector:FhirExtension:useAsActiveProblemConcern";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsAllergyProblemConcern = "urn:ehealth_connector:Demo:FhirExtension:useAsAllergyProblemConcern";
+	public static final String urnUseAsAllergyProblemConcern = "urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcern";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsAuthor = "urn:ehealth_connector:Demo:FhirExtension:useAsAuthor";
+	public static final String urnUseAsAuthor = "urn:ehealth_connector:FhirExtension:useAsAuthor";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsCode = "urn:ehealth_connector:Demo:FhirExtension:urnUseAsCode";
+	public static final String urnUseAsCode = "urn:ehealth_connector:FhirExtension:urnUseAsCode";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsComment = "urn:ehealth_connector:Demo:FhirExtension:useAsComment";
+	public static final String urnUseAsComment = "urn:ehealth_connector:FhirExtension:useAsComment";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsCustodian = "urn:ehealth_connector:Demo:FhirExtension:useAsCustodian";
+	public static final String urnUseAsCustodian = "urn:ehealth_connector:FhirExtension:useAsCustodian";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsIdentifier = "urn:ehealth_connector:Demo:FhirExtension:useAsIdentifier";
+	public static final String urnUseAsIdentifier = "urn:ehealth_connector:FhirExtension:useAsIdentifier";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsImmunization = "urn:ehealth_connector:Demo:FhirExtension:useAsImmunization";
+	public static final String urnUseAsImmunization = "urn:ehealth_connector:FhirExtension:useAsImmunization";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsImmunizationRecommendation = "urn:ehealth_connector:Demo:FhirExtension:useAsImmunizationRecommendation";
+	public static final String urnUseAsImmunizationRecommendation = "urn:ehealth_connector:FhirExtension:useAsImmunizationRecommendation";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsLaboratoryObservation = "urn:ehealth_connector:Demo:FhirExtension:useAsLaboratoryObservation";
+	public static final String urnUseAsPregnancyObservation = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsLegalAuthenticator = "urn:ehealth_connector:Demo:FhirExtension:useAsLegalAuthenticator";
+	public static final String urnUseAsLaboratoryObservation = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsLotNumbertext = "urn:ehealth_connector:Demo:FhirExtension:urnUseAsLotNumbertext";
+	public static final String urnUseAsLegalAuthenticator = "urn:ehealth_connector:FhirExtension:useAsLegalAuthenticator";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsPastProblemConcern = "urn:ehealth_connector:Demo:FhirExtension:useAsPastProblemConcern";
+	public static final String urnUseAsLotNumbertext = "urn:ehealth_connector:FhirExtension:urnUseAsLotNumbertext";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsPerformer = "urn:ehealth_connector:Demo:FhirExtension:useAsPerformer";
+	public static final String urnUseAsPastProblemConcern = "urn:ehealth_connector:FhirExtension:useAsPastProblemConcern";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR
 	 * extension</div><div class="de"></div><div class="fr"></div>
 	 */
-	public static final String urnUseAsReason = "urn:ehealth_connector:Demo:FhirExtension:useAsReason";
+	public static final String urnUseAsPerformer = "urn:ehealth_connector:FhirExtension:useAsPerformer";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR
+	 * extension</div><div class="de"></div><div class="fr"></div>
+	 */
+	public static final String urnUseAsReason = "urn:ehealth_connector:FhirExtension:useAsReason";
 
 	private final FhirContext mFhirCtx = new FhirContext();
 
@@ -520,18 +532,25 @@ public class FhirCdaChVacd {
 			doc.addAllergyConcern(allergyProblemConcern);
 		}
 
-		// TODO Coded Results / Codierte Resultate
-		// for (AllergyConcern allergyProblemConcern :
-		// getAllergyProblemConcernEntries(bundle)) {
-		// doc.add(allergyProblemConcern);
-		// }
+		// Coded Results for gestational age / Codierte Resultate für
+		// Gestationsalter
+		CodedResults cr = getGestationalAge(bundle);
+		if (cr != null) {
+			doc.addCodedResults(cr);
+		}
 
 		// Laboratory Specialty Section / Relevante Laborbefunde
 		for (LaboratoryObservation laboratoryObservation : getLaboratoryObservations(bundle)) {
 			doc.addLaboratoryObservation(laboratoryObservation);
 		}
 
-		// TODO tony: Schwangerschaften
+		// Schwangerschaftsanamnese
+		// Coded Results for gestational age / Codierte Resultate für
+		// Gestationsalter
+		PregnancyHistory ph = getPregnancyHistory(bundle);
+		if (ph != null) {
+			doc.addPregnancyHistory(ph);
+		}
 
 		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(bundle)) {
 			doc.addImmunizationRecommendation(immunizationRecommendation);
@@ -748,6 +767,74 @@ public class FhirCdaChVacd {
 					}
 				}
 			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * @param bundle
+	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC CodedResults</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.CodedResults getGestationalAge(
+			Bundle bundle) {
+		CodedResults retVal = null;
+		BigInteger gWeek = BigInteger.valueOf(-1);
+		BigInteger gDay = BigInteger.valueOf(-1);
+		for (Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(
+					urnUseAsPregnancyObservation).isEmpty()
+					&& (entry.getResource() instanceof Observation)) {
+				Observation fhirObs = (Observation) entry.getResource();
+				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+				if (fhirCode.getCode().equals("49051-6")) {
+					gWeek = ((QuantityDt) fhirObs.getValue()).getValue()
+							.toBigInteger();
+				}
+				if (fhirCode.getCode().equals("49052-4")) {
+					gDay = ((QuantityDt) fhirObs.getValue()).getValue()
+							.toBigInteger();
+				}
+			}
+		}
+
+		if ((gDay.intValue() > -1) && (gWeek.intValue() > -1)) {
+			retVal = new GestationalAge(gWeek.intValue(), gDay.intValue());
+			// not yet implemented:
+			// retVal.setPerformer(perfomer);
+		}
+		return retVal;
+	}
+
+	/**
+	 * @param bundle
+	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC CodedResults</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.PregnancyHistory getPregnancyHistory(
+			Bundle bundle) {
+		PregnancyHistory retVal = null;
+		Date deliveryDate = null;
+		for (Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(
+					urnUseAsPregnancyObservation).isEmpty()
+					&& (entry.getResource() instanceof Observation)) {
+				Observation fhirObs = (Observation) entry.getResource();
+				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+				if (fhirCode.getCode().equals("11778-8")) {
+					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
+				}
+			}
+		}
+
+		if (deliveryDate != null) {
+			retVal = new PregnancyHistory(deliveryDate);
+			// not yet implemented:
+			// retVal.setPerformer(perfomer);
 		}
 		return retVal;
 	}
@@ -1361,7 +1448,6 @@ public class FhirCdaChVacd {
 					reason.setReference(new URL(fhirGuidelineObs.getComments()));
 
 				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
