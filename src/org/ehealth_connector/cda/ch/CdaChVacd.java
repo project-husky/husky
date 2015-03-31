@@ -1138,12 +1138,12 @@ public class CdaChVacd extends CdaCh {
 				destPatient.setAdministrativeGenderCode(sourcePatient
 						.getAdministrativeGenderCode());
 				// Adress
-				AD ad = DatatypesFactory.eINSTANCE.createAD();
 				for (AD sourceAd : sourcePatientRole.getAddrs()) {
+					AD ad = DatatypesFactory.eINSTANCE.createAD();
 					for (ADXP adxp : sourceAd.getPostalCodes()) {
 						if (adxp.getText() != null) {
 							ad.addPostalCode(adxp.getText());
-							ad.getUses().addAll(ad.getUses());
+							ad.getUses().addAll(sourceAd.getUses());
 						}
 					}
 					destPatientRole.getAddrs().add(ad);
@@ -1160,6 +1160,7 @@ public class CdaChVacd extends CdaCh {
 		getDoc().getRecordTargets().clear();
 		getDoc().getRecordTargets().add(destRecordTarget);
 	}
+
 	/**
 	 * Setzt das MDHT-VACD-Objekt.
 	 * 
