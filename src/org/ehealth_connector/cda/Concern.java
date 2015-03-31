@@ -145,13 +145,8 @@ public class Concern {
 
 	protected void setEffectiveTime(Date begin, Date end) {
 		try {
-			if (end == null) {
-				mConcernEntry.setEffectiveTime(DateUtil
-						.createIVL_TSFromEuroDate(begin, end));
-			} else {
-				mConcernEntry.setEffectiveTime(DateUtil
-						.createIVL_TSFromEuroDate(begin));
-			}
+			mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(
+					begin, end));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

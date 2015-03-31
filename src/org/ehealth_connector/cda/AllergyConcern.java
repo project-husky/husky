@@ -16,14 +16,18 @@
 
 package org.ehealth_connector.cda;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.common.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -94,7 +98,7 @@ public class AllergyConcern extends Concern {
 		addAllergyProblem(problemEntry);
 		setStatus(completed);
 		addId(null);
-		// setEffectiveTime(null);
+		setEffectiveTime(null, null);
 	}
 
 	/**
@@ -125,7 +129,18 @@ public class AllergyConcern extends Concern {
 	public AllergyConcern(String concern, Date begin, Date end,
 			AllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
-		setEffectiveTime(begin, end);
+		if (end != null) {
+			setEffectiveTime(begin, end);
+		} else {
+			IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
+			try {
+				ivlts.setLow(DateUtil.createIVXB_TSFromDate(begin));
+				mAllergyConcern.setEffectiveTime(ivlts);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

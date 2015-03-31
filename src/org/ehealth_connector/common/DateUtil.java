@@ -114,7 +114,11 @@ public class DateUtil {
 
 		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMdd");
 		// Create and set Begin
-		ohtInterval.setValue(cdaDateFormatter.format(eurDateTime));
+		if (eurDateTime != null) {
+			ohtInterval.setValue(cdaDateFormatter.format(eurDateTime));
+		} else {
+			ohtInterval.setLow(createIVXB_TSFromDate(null));
+		}
 
 		return ohtInterval;
 	}
