@@ -61,9 +61,9 @@ public class Code {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
 	}
 
-	public Code(NullFlavor nullFlavor) {
+	public Code(org.ehealth_connector.cda.enums.NullFlavor nullFlavor) {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		mCD.setNullFlavor(nullFlavor);
+		mCD.setNullFlavor(NullFlavor.getByName(nullFlavor.name()));
 	}
 
 	/**
@@ -312,8 +312,8 @@ public class Code {
 		mCD.setCodeSystem(oid);
 	}
 
-	public void setNullFlavor(NullFlavor nf) {
-		mCD.setNullFlavor(nf);
+	public void setNullFlavor(org.ehealth_connector.cda.enums.NullFlavor nf) {
+		mCD.setNullFlavor(NullFlavor.getByName(nf.name()));
 	}
 
 	public NullFlavor getNullFlavor() {

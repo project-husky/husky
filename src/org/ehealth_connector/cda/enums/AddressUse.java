@@ -29,8 +29,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  *<div class="fr"></div>
  */
 /**
- * <div class="de">Enum AddressUse.</div>\n <div class="fr">Enum
- * AddressUse.</div>\n <div class="it">Enum AddressUse.</div>
+ * <div class="de">Enum AddressUse.</div> <div class="fr">Enum AddressUse.</div>
+ * <div class="it">Enum AddressUse.</div>
  */
 public enum AddressUse {
 

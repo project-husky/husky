@@ -150,7 +150,7 @@ public class GestationalAge extends CodedResults {
 	}
 
 	/**
-	 * Gets the abolute days.
+	 * Gets the absolute days.
 	 *
 	 * @return <div class="de">Gibt das Gestationsalter in absoluten Tagen (ohne
 	 *         Wochen) zurück.</div> <div class="fr"></div> <div
