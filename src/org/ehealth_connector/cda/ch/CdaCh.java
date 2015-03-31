@@ -110,13 +110,14 @@ public abstract class CdaCh {
 	public CdaCh(CDACH doc, String stylesheet, String css) {
 		this.doc = doc;
 		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
-		docRoot.setClinicalDocument(doc);
 
 		if (css != null) {
 			addCss(css);
 		}
 		addStylesheet(stylesheet);
 		initCdaCh();
+
+		docRoot.setClinicalDocument(doc);
 	}
 
 	/**
