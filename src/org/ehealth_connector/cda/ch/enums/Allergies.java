@@ -26,7 +26,7 @@ public enum Allergies {
 	public static final String ATOPIC_DERMATITIS_CODE="24079001";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.96";
 	public static final String CODE_SYSTEM_NAME="SNOMED CT";
 
 
@@ -61,7 +61,7 @@ public enum Allergies {
 	 * @param displayName <br>
 	 *	<div class="de"> display name</div>
 	 */
-	Allergies (String code, String displayName) {
+	private Allergies (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -75,7 +75,7 @@ public enum Allergies {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -89,7 +89,7 @@ public enum Allergies {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -112,7 +112,7 @@ public enum Allergies {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 

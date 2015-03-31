@@ -68,7 +68,7 @@ public enum HistoryOfPastIllness {
 	public static final String TETANUS_CODE="76902006";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.96";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.96";
 	public static final String CODE_SYSTEM_NAME="SNOMED CT";
 
 
@@ -103,7 +103,7 @@ public enum HistoryOfPastIllness {
 	 * @param displayName <br>
 	 *	<div class="de"> display name</div>
 	 */
-	HistoryOfPastIllness (String code, String displayName) {
+	private HistoryOfPastIllness (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -117,7 +117,7 @@ public enum HistoryOfPastIllness {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -131,7 +131,7 @@ public enum HistoryOfPastIllness {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -154,7 +154,7 @@ public enum HistoryOfPastIllness {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 

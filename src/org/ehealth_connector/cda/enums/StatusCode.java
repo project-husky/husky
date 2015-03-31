@@ -48,7 +48,7 @@ public enum StatusCode {
 	public static final String SUSPENDED_CODE = "suspended";
 	public static final String ABORTED_CODE = "aborted";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.14";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.14";
 	public static final String CODE_SYSTEM_NAME = "ActStatus";
 
 	private String code;
@@ -66,7 +66,7 @@ public enum StatusCode {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	StatusCode(String code, String displayName) {
+	private StatusCode(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -98,7 +98,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -173,7 +173,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

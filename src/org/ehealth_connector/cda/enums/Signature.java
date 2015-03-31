@@ -31,7 +31,7 @@ public enum Signature {
 	public static final String SIGNED_CODE = "S";
 	public static final String REQUIRED_CODE = "X";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.89";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.89";
 	public static final String CODE_SYSTEM_NAME = "ParticipationSignature";
 
 	private String code;
@@ -49,7 +49,7 @@ public enum Signature {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	Signature(String code, String displayName) {
+	private Signature(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -81,7 +81,7 @@ public enum Signature {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -156,7 +156,7 @@ public enum Signature {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

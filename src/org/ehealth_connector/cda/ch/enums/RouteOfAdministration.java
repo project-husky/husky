@@ -50,7 +50,7 @@ public enum RouteOfAdministration {
 	public static final String INJECTION_INTRAMUSCULAR_CODE="IM";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.5.112";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.5.112";
 	public static final String CODE_SYSTEM_NAME="HL7RouteOfAdministration";
 
 
@@ -85,7 +85,7 @@ public enum RouteOfAdministration {
 	 * @param displayName <br>
 	 *	<div class="de"> display name</div>
 	 */
-	RouteOfAdministration (String code, String displayName) {
+	private RouteOfAdministration (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -99,7 +99,7 @@ public enum RouteOfAdministration {
 	 */
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -113,7 +113,7 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -136,7 +136,7 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 

@@ -20,7 +20,7 @@ public enum Pregnancies {
 	public static final String DELIVERY_DATE_CLINICAL_ESTIMATE_CODE="11778-8";
 
 
-	public static final String CODE_SYSTEM="2.16.840.1.113883.6.1";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.1";
 	public static final String CODE_SYSTEM_NAME="LOINC";
 
 
@@ -55,7 +55,7 @@ public enum Pregnancies {
 	 * @param displayName <br>
 	 *	<div class="de"> display name</div>
 	 */
-	Pregnancies (String code, String displayName) {
+	private Pregnancies (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -69,7 +69,7 @@ public enum Pregnancies {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -83,7 +83,7 @@ public enum Pregnancies {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -106,7 +106,7 @@ public enum Pregnancies {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 

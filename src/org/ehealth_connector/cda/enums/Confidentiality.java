@@ -28,7 +28,7 @@ public enum Confidentiality {
 	public static final String RESTRICED_CODE = "R";
 	public static final String NORMAL_CODE = "N";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.25";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.25";
 	public static final String CODE_SYSTEM_NAME = "Confidentiality";
 
 	private String code;
@@ -46,7 +46,7 @@ public enum Confidentiality {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	Confidentiality(String code, String displayName) {
+	private Confidentiality(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -78,7 +78,7 @@ public enum Confidentiality {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -90,7 +90,7 @@ public enum Confidentiality {
 	 */
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -155,7 +155,7 @@ public enum Confidentiality {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

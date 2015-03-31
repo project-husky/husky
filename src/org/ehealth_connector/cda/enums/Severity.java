@@ -31,7 +31,7 @@ public enum Severity {
 	public static final String MODERATE_SEVERITY_CODE = "M";
 	public static final String LOW_SEVERITY_CODE = "L";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.1063";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1063";
 	public static final String CODE_SYSTEM_NAME = "HL7SeverityObservation";
 
 	private String code;
@@ -49,7 +49,7 @@ public enum Severity {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	Severity(String code, String displayName) {
+	private Severity(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -81,7 +81,7 @@ public enum Severity {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -93,7 +93,7 @@ public enum Severity {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -158,7 +158,7 @@ public enum Severity {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

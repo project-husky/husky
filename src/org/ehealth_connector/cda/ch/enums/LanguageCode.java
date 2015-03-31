@@ -32,7 +32,7 @@ public enum LanguageCode {
 	public static final String ITALIAN_CODE="it-CH";
 
 
-	public static final String CODE_SYSTEM="ISO 3166";
+	public static final String CODE_SYSTEM_OID="ISO 3166";
 	public static final String CODE_SYSTEM_NAME="";
 
 
@@ -67,7 +67,7 @@ public enum LanguageCode {
 	 * @param displayName <br>
 	 *	<div class="de"> display name</div>
 	 */
-	LanguageCode (String code, String displayName) {
+	private LanguageCode (String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -80,7 +80,7 @@ public enum LanguageCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -103,7 +103,7 @@ public enum LanguageCode {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 

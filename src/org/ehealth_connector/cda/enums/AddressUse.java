@@ -71,7 +71,7 @@ public enum AddressUse {
 	public static final String MOBILE_CODE = "MC";
 
 	/** The Constant CODE_SYSTEM. */
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.1119";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1119";
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "AddressUse";
@@ -145,7 +145,7 @@ public enum AddressUse {
 	 */
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -158,7 +158,7 @@ public enum AddressUse {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -169,7 +169,7 @@ public enum AddressUse {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

@@ -28,7 +28,7 @@ public enum ObservationInterpretationForImmunization {
 	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
 	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.83";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.83";
 	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
 
 	/**
@@ -64,7 +64,8 @@ public enum ObservationInterpretationForImmunization {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	ObservationInterpretationForImmunization(String code, String displayName) {
+	private ObservationInterpretationForImmunization(String code,
+			String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -77,7 +78,7 @@ public enum ObservationInterpretationForImmunization {
 	 */
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM);
+		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -90,7 +91,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -111,7 +112,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**

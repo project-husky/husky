@@ -49,7 +49,7 @@ public enum EHealthConnectorVersions {
 		return systemVersionName;
 	}
 
-	EHealthConnectorVersions(String oid, String systemVersionName,
+	private EHealthConnectorVersions(String oid, String systemVersionName,
 			String releaseDate) {
 		this.oid = oid;
 		this.systemVersionName = systemVersionName;

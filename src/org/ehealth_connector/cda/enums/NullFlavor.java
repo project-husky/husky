@@ -43,7 +43,7 @@ public enum NullFlavor {
 	public static final String TEMPORARILY_UNAVAILABLE_CODE = "NAV";
 	public static final String UNKNOWN_CODE = "UNK";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.5.1008";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1008";
 	public static final String CODE_SYSTEM_NAME = "HL7nullFlavor ";
 
 	private String code;
@@ -61,7 +61,7 @@ public enum NullFlavor {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	NullFlavor(String code, String displayName) {
+	private NullFlavor(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
@@ -93,7 +93,7 @@ public enum NullFlavor {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -105,7 +105,7 @@ public enum NullFlavor {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -170,7 +170,7 @@ public enum NullFlavor {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**
