@@ -1388,35 +1388,37 @@ public class FhirCdaChVacd {
 
 		}
 
-		retVal.setShallNotBeAdministerd(fhirMedicationStatement
-				.getWasNotGiven());
-
 		// code
-		// TODO Special cases
 		Code code = getCode(fhirMedicationStatement);
 		System.out.println(code.getCodeSystem() + "/" + code.getCode() + "/"
 				+ code.getDisplayName());
-		// retVal.setCode();
+		MedicationsSpecialConditions specialConditions = MedicationsSpecialConditions
+				.getEnum(code.getCode());
+		if (specialConditions != null) {
+			retVal.setCode(specialConditions);
+		} else {
+			retVal.setShallNotBeAdministerd(fhirMedicationStatement
+					.getWasNotGiven());
 
-		// effectiveTime
-		// not yet implemented: effectiveTime highValue
-		retVal.setPossibleAppliance(fhirMedicationStatement.getDateAsserted(),
-				null);
+			// effectiveTime
+			// not yet implemented: effectiveTime highValue
+			retVal.setPossibleAppliance(
+					fhirMedicationStatement.getDateAsserted(), null);
 
-		// doseQuantity
-		Double doseQuantity = null;
-		for (Dosage dosage : fhirMedicationStatement.getDosage()) {
-			doseQuantity = dosage.getQuantity().getValue().doubleValue();
-			retVal.setDosage(doseQuantity);
-			break; // currently only support for one doseQuantity
+			// doseQuantity
+			Double doseQuantity = null;
+			for (Dosage dosage : fhirMedicationStatement.getDosage()) {
+				doseQuantity = dosage.getQuantity().getValue().doubleValue();
+				retVal.setDosage(doseQuantity);
+				break; // currently only support for one doseQuantity
+			}
+
+			// consumable
+			retVal.setConsumable(getConsumable(fhirMedicationStatement));
+
+			// perfomer
+			retVal.setPerformer(getPerformer(fhirMedicationStatement));
 		}
-
-		// consumable
-		retVal.setConsumable(getConsumable(fhirMedicationStatement));
-
-		// perfomer
-		retVal.setPerformer(getPerformer(fhirMedicationStatement));
-
 		// author
 		retVal.setAuthor(getAuthor(fhirMedicationStatement));
 
