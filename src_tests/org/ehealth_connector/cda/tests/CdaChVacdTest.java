@@ -71,9 +71,7 @@ public class CdaChVacdTest extends TestUtils {
 	public static final int NUMBER_OF_CONTENT_MODULE_TESTS = 50;
 
 	// Test data
-	private TestUtils t;
 	private CdaChVacd d;
-	private CdaChVacd testDoc2;
 
 	private Consumable consumable1;
 	private Problem problem1;
@@ -96,8 +94,6 @@ public class CdaChVacdTest extends TestUtils {
 	private LaboratoryObservation lss2;
 	private PregnancyHistory ph2;
 	private ImmunizationRecommendation immunizationRecommendation2;
-	private Comment c1;
-	private Comment c2;
 	private Code whoAtcCode;
 	private Reason reason1;
 	private Reason reason2;
@@ -105,7 +101,6 @@ public class CdaChVacdTest extends TestUtils {
 
 	private Performer performer1;
 
-	private Performer performer2;
 
 	public CdaChVacdTest() {
 		super();
@@ -303,7 +298,6 @@ public class CdaChVacdTest extends TestUtils {
 
 	@Before
 	public void initTestData() {
-		t = new TestUtils();
 
 		// Dates
 		startDateString = "28.02.2015";
@@ -348,7 +342,6 @@ public class CdaChVacdTest extends TestUtils {
 		author1 = createAuthor1();
 		author2 = createAuthor2();
 		performer1 = createPerformer1();
-		performer2 = createPerformer2();
 		organization1 = createOrganization1();
 		consumable1 = createConsumable1();
 		consumable1 = createConsumable2();
@@ -502,8 +495,6 @@ public class CdaChVacdTest extends TestUtils {
 		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
 		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
 
-		c1 = createComment();
-		c2 = createComment();
 		d.addComment(ts1);
 		d.addComment(ts2);
 		d.setNarrativeTextSectionRemarks(ts4);
@@ -515,9 +506,6 @@ public class CdaChVacdTest extends TestUtils {
 			e.printStackTrace();
 		}
 
-		testDoc2 = new CdaChVacd(d.getDoc());
-		// testDocMetadata("MDHT Document", testDoc2);
-		// testProblemEntrySetterGetter();
 	}
 
 	@Test

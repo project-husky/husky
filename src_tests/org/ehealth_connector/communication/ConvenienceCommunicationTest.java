@@ -87,7 +87,6 @@ public class ConvenienceCommunicationTest {
 		System.setProperty("javax.net.ssl.trustStore", "Null");
 		System.setProperty("javax.net.ssl.trustStorePassword", "Null");
 
-		ConvenienceCommunication c;
 		try {
 			c = new ConvenienceCommunication(dest, false);
 		} catch (Exception e) {

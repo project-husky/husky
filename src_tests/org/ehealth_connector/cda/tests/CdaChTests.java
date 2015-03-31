@@ -18,8 +18,6 @@ package org.ehealth_connector.cda.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.Confidentiality;
@@ -31,7 +29,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CdaChTests extends TestUtils {
-	private TestUtils t;
 	private CdaChVacd c;
 	private String uuid;
 
@@ -41,7 +38,6 @@ public class CdaChTests extends TestUtils {
 
 	@Before
 	public void init() {
-		t = new TestUtils();
 
 		// Dates
 		startDateString = "28.02.2015";
@@ -145,7 +141,6 @@ public class CdaChTests extends TestUtils {
 	public void testTelecoms() {
 		Telecoms t = new Telecoms();
 		t.addEMail("axel.helmer.job@gmail.com", AddressUse.BUSINESS);
-		HashMap<String, AddressUse> h = t.getEMails();
 		assertTrue(t.getEMails()
 				.containsKey("mailto:axel.helmer.job@gmail.com"));
 		assertTrue(t.getEMails().containsValue(AddressUse.BUSINESS));
