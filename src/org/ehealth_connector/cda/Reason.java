@@ -3,6 +3,7 @@ package org.ehealth_connector.cda;
 import java.net.URL;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
@@ -19,7 +20,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
 public class Reason {
 
-	private CDACHMSETBodyImmunizationL3Reason mReason;
+	private final CDACHMSETBodyImmunizationL3Reason mReason;
 	private CDACHBodyExtRef mExtRef = null;
 
 	public Reason() {
@@ -42,7 +43,7 @@ public class Reason {
 		// initalialize the class member.
 		for (Reference r : reason.getReferences())
 			for (II id : r.getTemplateIds()) {
-				if (id.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+				if (id.getRoot().equals(CdaCh.OID_V1)) {
 					mExtRef = (CDACHBodyExtRef) r;
 				}
 			}
@@ -142,13 +143,13 @@ public class Reason {
 		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
 		mReason.getReferences().add(mExtRef);
 		mExtRef.setExternalDocument(e);
-	
+
 		// Fix Template ID
 		mExtRef.getTemplateIds().clear();
-		II ii = DatatypesFactory.eINSTANCE.createII("2.16.756.5.30.1.1.1.1.1",
+		II ii = DatatypesFactory.eINSTANCE.createII(CdaCh.OID_V1,
 				"CDA-CH.Body.ExtRef");
 		mExtRef.getTemplateIds().add(ii);
-	
+
 		// Set attributes
 		e.setClassCode(ActClassDocument.DOC);
 		e.setMoodCode(ActMood.EVN);

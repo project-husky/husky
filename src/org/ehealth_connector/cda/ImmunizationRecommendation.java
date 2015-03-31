@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
@@ -58,7 +59,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  */
 public class ImmunizationRecommendation {
 
-	private org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
+	private final org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
 
 	/**
 	 * Instantiates a new immunization recommendation.
@@ -70,7 +71,7 @@ public class ImmunizationRecommendation {
 		// Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
 		List<II> templateIds = mImmunizationRecommendation.getTemplateIds();
 		for (II templateId : templateIds) {
-			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+			if (templateId.getRoot().equals(CdaCh.OID_V1)) {
 				templateId.setExtension("CDA-CH.Body.MediL3");
 			}
 		}

@@ -69,6 +69,12 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
  */
 public abstract class CdaCh {
 
+	/** main OID for CDA-CH */
+	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1";
+
+	/** OID for CDA-CH V1.* */
+	public static final String OID_V1 = "2.16.756.5.30.1.1.1.1.1";
+
 	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorR201503;
 	protected CDACH doc = null; // The CDA Document
 	private DocumentRoot docRoot = null; // The OHT-Element that helds the
@@ -127,7 +133,7 @@ public abstract class CdaCh {
 	/**
 	 * <div class="de">Erstellt ein CdaCh Objekt mittels eines IHE DocumentRoot
 	 * Objekts</div> <div class="fr"></div>
-	 *
+	 * 
 	 * @param root
 	 *            <div class="de">DocumentRoot</div> <div class="fr"></div>
 	 */
@@ -413,7 +419,7 @@ public abstract class CdaCh {
 
 	/**
 	 * Liefert das Patientenobjekt zurück
-	 *
+	 * 
 	 * @return the patient
 	 */
 	public Patient getPatient() {
@@ -546,7 +552,7 @@ public abstract class CdaCh {
 	public void setId(Identificator id) {
 		if (id == null) {
 			II docID = DatatypesFactory.eINSTANCE.createII();
-			docID.setRoot("2.16.756.5.30.1.1.1.1");
+			docID.setRoot(CdaCh.OID_MAIN);
 			docID.setExtension(UUID.generate());
 			doc.setId(docID);
 		} else {
@@ -640,7 +646,7 @@ public abstract class CdaCh {
 			doc.setSetId(EcoreUtil.copy(doc.getId()));
 		} else {
 			II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot("2.16.756.5.30.1.1.1.1");
+			ii.setRoot(CdaCh.OID_MAIN);
 			ii.setExtension(id);
 			doc.setSetId(ii);
 		}

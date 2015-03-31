@@ -363,12 +363,11 @@ public class FhirCdaChVacd {
 	public static final String oidLanguage = "urn:oid:"
 			+ CodeSystems.LanguageCode.getCodeSystemId();
 
-	// TODO Tony: aus KnownOIds holen
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div><div
 	 * class="de"></div><div class="fr"></div>
 	 */
-	public static final String oidVACD = "urn:oid:2.16.756.5.30.1.1.1.1.3.5";
+	public static final String oidVACD = "urn:oid:" + CdaChVacd.OID_MAIN;
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR

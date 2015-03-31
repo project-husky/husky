@@ -71,7 +71,7 @@ public class Util {
 	 * <div class="en">Gets the translation or code.</div> <div class="de">Sucht
 	 * in einem CD-Objekt nach einem CodeSystem und liefert den dazugehörigen
 	 * Code zurück.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param codeSystem
 	 * <br>
 	 *            <div class="de"> code system</div> <div class="fr"></div> <div
@@ -112,7 +112,7 @@ public class Util {
 
 	/**
 	 * Erzeugt eine Adresse.
-	 *
+	 * 
 	 * @param streetName
 	 *            Contains the StreetName
 	 * @param houseNumber
@@ -140,7 +140,7 @@ public class Util {
 
 	/**
 	 * Erzeugt eine Adresse.
-	 *
+	 * 
 	 * @param zip
 	 *            PLZ
 	 * @param city
@@ -163,9 +163,10 @@ public class Util {
 		}
 		return ad;
 	}
+
 	/**
 	 * Erzeugt eine Adresse.
-	 *
+	 * 
 	 * @param addressline
 	 * <br>
 	 *            <div class="de"> addressline</div> <div class="fr">
@@ -216,7 +217,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the ce null flavor nask.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ce
 	 */
 	public static CE createCENullFlavorNASK() {
@@ -228,7 +229,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the ce null flavor UNK.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ce
 	 */
 	public static CE createCENullFlavorUNK() {
@@ -240,7 +241,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the ce null flavor UNK.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ce
 	 */
 	public static CD createCDNullFlavorUNK() {
@@ -252,7 +253,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the code null flavor.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the cd
 	 */
 	public static CD createCodeNullFlavorNA() {
@@ -264,7 +265,7 @@ public class Util {
 	/**
 	 * Erzeugt aus einem MDHT Organization Objekt ein neues MDHT
 	 * CustodianOrganization Objekt.
-	 *
+	 * 
 	 * @param organization
 	 *            Organisation
 	 * @return CustodianOrganization
@@ -290,7 +291,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the ed.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param text
 	 * <br>
 	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
@@ -305,7 +306,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the e mail.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param eMail
 	 * <br>
 	 *            <div class="de"> e mail</div> <div class="fr"> e mail</div>
@@ -326,7 +327,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the eur date str from ts.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param hl7Stimestamp
 	 * <br>
 	 *            <div class="de"> hl7 stimestamp</div> <div class="fr"> hl7
@@ -343,7 +344,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the fax.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param faxNr
 	 * <br>
 	 *            <div class="de"> fax nr</div> <div class="fr"> fax nr</div>
@@ -376,7 +377,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the iv l_ pq null flavor na.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ivl pq
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNA() {
@@ -388,7 +389,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the iv l_ pq null flavor nask.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ivl pq
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNASK() {
@@ -400,7 +401,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the iv l_ pq null flavor nask.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ivl pq
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorUNK() {
@@ -412,7 +413,7 @@ public class Util {
 	/**
 	 * Erezugt aus einem MDHT Author Objekt ein neues MDHT LegalAuthenticator
 	 * Objekt.
-	 *
+	 * 
 	 * @param author
 	 * <br>
 	 *            <div class="de"> author</div> <div class="fr"></div> <div
@@ -439,7 +440,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the name.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param name
 	 * <br>
 	 *            <div class="de"> name</div> <div class="fr"> name</div> <div
@@ -455,7 +456,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the non qoted struc doc text.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param xmlString
 	 * <br>
 	 *            <div class="de"> xml string</div> <div class="fr"> xml
@@ -482,7 +483,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the null flavor unknown.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ivxb ts
 	 */
 	public static IVXB_TS createNullFlavorUnknown() {
@@ -494,7 +495,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the problem entry text.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the ed
 	 */
 	public static ED createProblemEntryText() {
@@ -504,7 +505,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the reference.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param contentId
 	 * <br>
 	 *            <div class="de"> content id</div> <div class="fr"> content
@@ -537,7 +538,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the tel.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telNr
 	 * <br>
 	 *            <div class="de"> tel nr</div> <div class="fr"> tel nr</div>
@@ -561,7 +562,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the uuid vacd.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param id
 	 * <br>
 	 *            <div class="de"> id</div> <div class="fr"> id</div> <div
@@ -570,7 +571,7 @@ public class Util {
 	 */
 	public static II createUuidVacd(String id) {
 		II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(CdaChVacd.OID_VACD);
+		ii.setRoot(CdaChVacd.OID_MAIN);
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {
@@ -582,7 +583,7 @@ public class Util {
 	/**
 	 * <div class="en">Creates the uuid vacd identificator.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param id
 	 * <br>
 	 *            <div class="de"> id</div> <div class="fr"> id</div> <div
@@ -602,7 +603,7 @@ public class Util {
 	/**
 	 * <div class="en">Extract string from non quoted struc doc text.</div> <div
 	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param strucDocText
 	 * <br>
 	 *            <div class="de"> struc doc text</div> <div class="fr"> struc
@@ -621,7 +622,7 @@ public class Util {
 	/**
 	 * <div class="en">Find ii.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param iis
 	 * <br>
 	 *            <div class="de"> iis</div> <div class="fr"> iis</div> <div
@@ -646,7 +647,7 @@ public class Util {
 
 	/**
 	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot.
-	 *
+	 * 
 	 * @param appliactionOidRoot
 	 *            identifiziert diese Version des eHCs
 	 * @return HL7 II Objekt
@@ -696,7 +697,7 @@ public class Util {
 	/**
 	 * <div class="en">Gets the e mail.</div> <div class="de">Liefert e
 	 * mail.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telecoms
 	 * <br>
 	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
@@ -710,7 +711,7 @@ public class Util {
 	/**
 	 * <div class="en">Gets the fax.</div> <div class="de">Liefert fax.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telecoms
 	 * <br>
 	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
@@ -724,7 +725,7 @@ public class Util {
 	/**
 	 * <div class="en">Gets the phone.</div> <div class="de">Liefert
 	 * phone.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telecoms
 	 * <br>
 	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
@@ -738,7 +739,7 @@ public class Util {
 	/**
 	 * <div class="en">Gets the Webside</div> <div class="de">Liefert
 	 * Webside.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telecoms
 	 * <br>
 	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
@@ -755,7 +756,7 @@ public class Util {
 	/**
 	 * <div class="en">Ii.</div> <div class="de"></div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param root
 	 * <br>
 	 *            <div class="de"> root</div> <div class="fr"> root</div> <div
@@ -771,7 +772,7 @@ public class Util {
 	/**
 	 * <div class="en">Ii.</div> <div class="de"></div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param root
 	 * <br>
 	 *            <div class="de"> root</div> <div class="fr"> root</div> <div
@@ -800,7 +801,7 @@ public class Util {
 	/**
 	 * <div class="en">Join.</div> <div class="de"></div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param nameList
 	 * <br>
 	 *            <div class="de"> name list</div> <div class="fr"> name
@@ -837,7 +838,7 @@ public class Util {
 	/**
 	 * <div class="en">Join e list str.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param list
 	 * <br>
 	 *            <div class="de"> list</div> <div class="fr"> list</div> <div
@@ -862,7 +863,7 @@ public class Util {
 	/**
 	 * <div class="en">St.</div> <div class="de"></div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param text
 	 * <br>
 	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
@@ -931,7 +932,7 @@ public class Util {
 
 	/**
 	 * Erzeugt eine Adresse.
-	 *
+	 * 
 	 * @param addressline1
 	 *            Adresszeile 1
 	 * @param addressline2

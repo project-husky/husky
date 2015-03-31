@@ -86,15 +86,18 @@ public class CdaChVacd extends CdaCh {
 
 	public static final boolean CDALevel2TextGeneration = false;
 
+	/** main OID for CDA-CH-VACD */
+	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.5";
+
+	/** main OID for CDA-CH-VACD V1 */
+	public static final String OID_V1 = "2.16.756.5.30.1.1.1.1.3.5.1";
+
 	/** The Constant eVACDOCTitle. */
 	public static final String eVACDOCTitle = "eVACDOC";
 
-	/** The Constant OID_VACD. */
-	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
-
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
-	 *
+	 * 
 	 */
 	public CdaChVacd() {
 		super(CHFactory.eINSTANCE.createVACD().init());
@@ -104,7 +107,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
-	 *
+	 * 
 	 * @param language
 	 *            Sprache des Dokments
 	 * @param immunization
@@ -119,7 +122,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
-	 *
+	 * 
 	 * @param language
 	 * <br>
 	 *            <div class="de">Sprache des Dokments</div> <div
@@ -146,7 +149,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
-	 *
+	 * 
 	 * @param language
 	 * <br>
 	 *            <div class="de">Sprache des Dokments</div> <div
@@ -178,7 +181,7 @@ public class CdaChVacd extends CdaCh {
 	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels
 	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
 	 * <div class="fr"></div>
-	 *
+	 * 
 	 * @param doc
 	 *            <div class="de">CdaChVacd</div> <div class="fr"></div>
 	 */
@@ -192,7 +195,7 @@ public class CdaChVacd extends CdaCh {
 	 * <div class="en">Adds the active problem concern.</div> <div
 	 * class="de">Fügt ein Aktives Leiden hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param activeProblemConcern
 	 * <br>
 	 *            <div class="en"> active problem concern</div> <div class="de">
@@ -235,7 +238,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param allergyConcern
 	 * <br>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
@@ -277,7 +280,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Setzt das Gestationsalter
-	 *
+	 * 
 	 * @param codedResults
 	 *            the new gestational age
 	 */
@@ -312,7 +315,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt einen Kommentar hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param comment
 	 * <br>
 	 *            <div class="de">Kommentar</div> <div class="fr"></div> <div
@@ -360,7 +363,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt eine Impfung hinzu.</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param immunization
 	 * <br>
 	 *            <div class="de">Impfung</div> <div class="fr"></div> <div
@@ -414,7 +417,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt eine Impfempfehlung hinzu</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param immunizationRecommendation
 	 * <br>
 	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
@@ -471,7 +474,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt einen Laborbefund hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @param laboratoryObservation
 	 * <br>
 	 *            <div class="de">Der Laborbefund</div> <div class="fr"></div>
@@ -557,7 +560,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt ein vergangenes Leiden hinzu</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param pastProblemConcern
 	 * <br>
 	 *            <div class="de"> past problem concern</div> <div
@@ -600,7 +603,7 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="de">Fügt eine Schwangerschaft hinzu</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param pregnancy
 	 * <br>
 	 *            <div class="de">Schwangerschaft</div> <div class="fr"></div>
@@ -687,7 +690,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert den menschenlesbaren Text des Kapitels zu Aktiven Leiden zurück
-	 *
+	 * 
 	 * @return the active problem concerns text
 	 */
 	public String generateNarrativeTextActiveProblemConcerns() {
@@ -705,7 +708,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert den Text des Kapitels Allergie Leiden zurück
-	 *
+	 * 
 	 * @return the allergy problem concerns text
 	 */
 	public String generateNarrativeTextAllergyProblemConcerns() {
@@ -718,7 +721,7 @@ public class CdaChVacd extends CdaCh {
 	 * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel
 	 * Impfempfehlungen zurück</div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the immunization recommendations text</div>
 	 */
 	public String generateNarrativeTextImmunizationRecommendations() {
@@ -729,7 +732,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Gets the immunization text.
-	 *
+	 * 
 	 * @return the immunization text
 	 */
 	public String generateNarrativeTextImmunizations() {
@@ -740,7 +743,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert den menschenlesbaren Text zu dem Kapitel Laborresultate zurück
-	 *
+	 * 
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations() {
@@ -751,7 +754,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert den menschenlesbaren Text zu allen vergangenen Leiden zurück
-	 *
+	 * 
 	 * @return the past problem concern entries text
 	 */
 	public String generateNarrativeTextPastProblemConcernEntries() {
@@ -792,7 +795,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle Allergie Leiden zurück
-	 *
+	 * 
 	 * @return the allergy problem concerns
 	 */
 	public ArrayList<AllergyConcern> getAllergyProblemConcerns() {
@@ -814,7 +817,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert das Gestationsalter zurück
-	 *
+	 * 
 	 * @return the gestational age
 	 */
 	public GestationalAge getCodedResults() {
@@ -828,7 +831,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert den menschenlesbaren Text zu dem Gestationsalter zurück
-	 *
+	 * 
 	 * @return the gestational age text
 	 */
 	public String getCodedResultsText() {
@@ -837,7 +840,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert die Kommentare zurück
-	 *
+	 * 
 	 * @return the comment
 	 */
 	public String getComments() {
@@ -856,7 +859,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert das MDHT-VACD-Objekt zurück.
-	 *
+	 * 
 	 * @return the doc
 	 */
 	public VACD getDoc() {
@@ -865,7 +868,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle Impfempfehlungen zurück
-	 *
+	 * 
 	 * @return Liste von Impfempfehlungen
 	 */
 	public ArrayList<ImmunizationRecommendation> getImmunizationRecommendations() {
@@ -888,7 +891,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle Impfungen zurück
-	 *
+	 * 
 	 * @return Liste von Impfungen
 	 */
 	public ArrayList<Immunization> getImmunizations() {
@@ -905,7 +908,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle Laborresultate zurück
-	 *
+	 * 
 	 * @return Liste von Laborresultaten
 	 */
 	public ArrayList<org.ehealth_connector.cda.LaboratoryObservation> getLaboratoryObservations() {
@@ -939,7 +942,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -954,7 +957,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -969,7 +972,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -984,7 +987,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -999,7 +1002,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1014,7 +1017,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1029,7 +1032,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1044,7 +1047,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1059,7 +1062,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1071,7 +1074,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle vergangen Leiden zurück
-	 *
+	 * 
 	 * @return the past problem concern entries
 	 */
 	public ArrayList<PastProblemConcern> getPastProblemConcerns() {
@@ -1093,7 +1096,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Liefert alle Schwangerschaften zurück
-	 *
+	 * 
 	 * @return Liste von Schwangerschaften
 	 */
 	public ArrayList<PregnancyHistory> getPregnancies() {
@@ -1163,7 +1166,7 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * Setzt das MDHT-VACD-Objekt.
-	 *
+	 * 
 	 * @param doc
 	 *            the new doc
 	 */
@@ -1176,7 +1179,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1197,14 +1200,15 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
+	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(
+			String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ALLERGIES_REACTIONS, text);
 		if (getDoc().getAllergiesReactionsSection() != null) {
@@ -1218,7 +1222,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1236,7 +1240,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1257,7 +1261,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1278,7 +1282,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1299,7 +1303,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1320,7 +1324,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1341,7 +1345,7 @@ public class CdaChVacd extends CdaCh {
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 * 
-	 *
+	 * 
 	 * @param text
 	 *            <div class="en"> the new text for the human readable part of
 	 *            the cda document</div> <div class="de"> der neue text für den
@@ -1388,10 +1392,10 @@ public class CdaChVacd extends CdaCh {
 		CHPackage.eINSTANCE.eClass();
 		// fix missing extension values in MDHT model.
 		for (II templateId : doc.getTemplateIds()) {
-			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+			if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
 				templateId.setExtension("CDA-CH-VACD");
 			}
-			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
+			if (CdaCh.OID_MAIN.equals(templateId.getRoot())) {
 				templateId.setExtension("CDA-CH");
 			}
 		}

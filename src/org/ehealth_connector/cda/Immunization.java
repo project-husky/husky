@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
@@ -57,7 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  */
 public class Immunization {
 
-	private org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
+	private final org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
 
 	/**
 	 * Erzeugt ein Objekt welches eine Impfung repräsentiert. Dieser Konstruktor
@@ -76,7 +77,7 @@ public class Immunization {
 		int i = 0;
 		for (II templateId : savedTemplateIds) {
 			// Fix the extension for the swiss template id
-			if (templateId.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+			if (templateId.getRoot().equals(CdaCh.OID_V1)) {
 				templateId.setExtension("CDA-CH.Body.MediL3");
 			}
 			// Add every template that is not Immunization
@@ -100,7 +101,7 @@ public class Immunization {
 	/**
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
 	 * nicht erwünschten Impfungen.
-	 *
+	 * 
 	 * @param consumable
 	 *            Impfstoff
 	 * @param author
@@ -123,7 +124,7 @@ public class Immunization {
 	/**
 	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
 	 * nicht erwünschten Impfungen.
-	 *
+	 * 
 	 * @param consumable
 	 *            Impfstoff
 	 * @param author
@@ -169,7 +170,7 @@ public class Immunization {
 
 	/**
 	 * Constructor.
-	 *
+	 * 
 	 * @param immunization
 	 * <br>
 	 *            <div class="de">IHE Impf-Objekt</div> <div class="fr">
@@ -182,7 +183,7 @@ public class Immunization {
 
 	/**
 	 * Adds the id.
-	 *
+	 * 
 	 * @param codedId
 	 *            the new id
 	 */
@@ -194,7 +195,7 @@ public class Immunization {
 	/**
 	 * Adds the reason for the immunization (the illness, which the immunization
 	 * should prevent)
-	 *
+	 * 
 	 * @param reason
 	 *            the reason
 	 */
@@ -212,7 +213,7 @@ public class Immunization {
 	/**
 	 * Gets a list of reasons for the immunization (the illness, which the
 	 * immunization should prevent).
-	 *
+	 * 
 	 * @return A ArrayList of Reasons
 	 * 
 	 */
@@ -237,7 +238,7 @@ public class Immunization {
 
 	/**
 	 * Gets the apply date.
-	 *
+	 * 
 	 * @return the apply date
 	 */
 	public Date getApplyDate() {
@@ -268,7 +269,7 @@ public class Immunization {
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
-	 *
+	 * 
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
 	 */
@@ -279,7 +280,7 @@ public class Immunization {
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself)
-	 *
+	 * 
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -288,7 +289,7 @@ public class Immunization {
 
 	/**
 	 * Gets the consumable.
-	 *
+	 * 
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
@@ -298,7 +299,7 @@ public class Immunization {
 
 	/**
 	 * Gibt die Dosis der Impfung zurück.
-	 *
+	 * 
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
@@ -311,7 +312,7 @@ public class Immunization {
 
 	/**
 	 * Gets the id.
-	 *
+	 * 
 	 * @return the id
 	 */
 	public Identificator getId() {
@@ -330,7 +331,7 @@ public class Immunization {
 
 	/**
 	 * Gets the Performer (Person, die die Impfung durchgeführt hat)
-	 *
+	 * 
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
@@ -356,7 +357,7 @@ public class Immunization {
 
 	/**
 	 * Gets the route of administration.
-	 *
+	 * 
 	 * @return the route of administration
 	 */
 	public RouteOfAdministration getRouteOfAdministration() {
@@ -366,7 +367,7 @@ public class Immunization {
 
 	/**
 	 * Sets the apply date.
-	 *
+	 * 
 	 * @param appliedAt
 	 *            the new apply date
 	 */
@@ -377,7 +378,7 @@ public class Immunization {
 
 	/**
 	 * Sets the author.
-	 *
+	 * 
 	 * @param author
 	 *            the new author
 	 */
@@ -396,7 +397,7 @@ public class Immunization {
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
-	 *
+	 * 
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
@@ -416,7 +417,7 @@ public class Immunization {
 
 	/**
 	 * Sets a comment text
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -435,7 +436,7 @@ public class Immunization {
 
 	/**
 	 * Sets the consumable.
-	 *
+	 * 
 	 * @param consumable
 	 *            the new consumable
 	 */
@@ -445,7 +446,7 @@ public class Immunization {
 
 	/**
 	 * Sets the dosage.
-	 *
+	 * 
 	 * @param doseQuantity
 	 *            the new dosage (use null, if not known)
 	 */
@@ -490,7 +491,7 @@ public class Immunization {
 
 	/**
 	 * Sets the Person, who performs the Immunization
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer (Convenience Author will be converted to a
 	 *            performer)
@@ -512,7 +513,7 @@ public class Immunization {
 
 	/**
 	 * Sets the Person, who performs the Immunization
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer
 	 */
@@ -537,7 +538,7 @@ public class Immunization {
 	/**
 	 * Optionally, one can set the route code (Einnahmearten). If not set,
 	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
-	 *
+	 * 
 	 * @param routeCode
 	 *            the new route of administration
 	 */
