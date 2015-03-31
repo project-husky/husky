@@ -60,7 +60,7 @@ public class AllergyProblem {
 	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
 	 * unbekannt ist, das Problem als Code angegeben werden soll. Dieses Objekt
 	 * kann einem ProblemConcernEntry hinzugefügt werden.
-	 *
+	 * 
 	 * @param allergy
 	 *            <div class="de">Die Art der Allergie</div> <div
 	 *            class="fr"></div> <div class="it"></div>
@@ -83,7 +83,7 @@ public class AllergyProblem {
 	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
 	 * bekannt ist und das Problem als Code angegeben werden soll. Dieses Objekt
 	 * kann einem ProblemConcernEntry hinzugefügt werden.
-	 *
+	 * 
 	 * @param kindOfAllergy
 	 * <br>
 	 *            <div class="de"> kind of allergy</div> <div class="fr"></div>
@@ -111,7 +111,7 @@ public class AllergyProblem {
 	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
 	 * bekannt ist und das Problem als Code angegeben werden soll. Dieses Objekt
 	 * kann einem ProblemConcernEntry hinzugefügt werden.
-	 *
+	 * 
 	 * @param kindOfAllergy
 	 * <br>
 	 *            <div class="de">Die Art der Allergie</div> <div
@@ -139,12 +139,8 @@ public class AllergyProblem {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance()
 				.init();
 		setNotOccured(false);
-		try {
-			setStart(startOfProblem);
-			setEndOfProblem(endOfProblem);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		setStartDate(startOfProblem);
+		setEndDate(endOfProblem);
 		setId(internalProblemId);
 		setCode(kindOfAllergy);
 		addValue(problem);
@@ -152,7 +148,7 @@ public class AllergyProblem {
 
 	/**
 	 * Instantiates a new allergy problem.
-	 *
+	 * 
 	 * @param allergyIntolerance
 	 * <br>
 	 *            <div class="de"> allergy intolerance</div> <div
@@ -164,8 +160,19 @@ public class AllergyProblem {
 	}
 
 	/**
+	 * Adds the id.
+	 * 
+	 * @param id
+	 *            the new id
+	 */
+	public void addId(Identificator id) {
+		II ii = Util.createUuidVacdIdentificator(id);
+		mAllergyProblem.getIds().add(ii);
+	}
+
+	/**
 	 * Adds the value.
-	 *
+	 * 
 	 * @param code
 	 *            the new value
 	 */
@@ -176,7 +183,7 @@ public class AllergyProblem {
 
 	/**
 	 * Adds the value.
-	 *
+	 * 
 	 * @param value
 	 *            the new value
 	 */
@@ -187,7 +194,7 @@ public class AllergyProblem {
 	/**
 	 * <div class="de">Copy mdht allergy intolerance.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the allergy intolerance
 	 */
 	public AllergyIntolerance copyMdhtAllergyIntolerance() {
@@ -196,7 +203,7 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the code.
-	 *
+	 * 
 	 * @return das codedProblem Objekt
 	 */
 	public org.ehealth_connector.common.Code getCode() {
@@ -207,7 +214,7 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
-	 *
+	 * 
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
 	 */
@@ -218,7 +225,7 @@ public class AllergyProblem {
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself)
-	 *
+	 * 
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -227,10 +234,10 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the end of problem.
-	 *
+	 * 
 	 * @return das endOfProblem Objekt
 	 */
-	public String getEnd() {
+	public String getEndDate() {
 		if (mAllergyProblem.getEffectiveTime() != null) {
 			if (mAllergyProblem.getEffectiveTime().getHigh() != null) {
 				return Util.createEurDateStrFromTS(mAllergyProblem
@@ -244,7 +251,7 @@ public class AllergyProblem {
 	 * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte
 	 * bekannte) ID für das Allergie Problem. Ist keine ID vorhanden, wird null
 	 * zurückgegeben.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the new id
 	 */
 	public Identificator getId() {
@@ -258,7 +265,7 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the mdht allergy problem.
-	 *
+	 * 
 	 * @return the mdht allergy problem
 	 */
 	public AllergyIntolerance getMdhtAllergyProblem() {
@@ -267,7 +274,7 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the problem not occured (NegationId).
-	 *
+	 * 
 	 * @return das NotOccured Objekt. True, if the problem did not occur. false,
 	 *         otherwise.
 	 */
@@ -277,10 +284,10 @@ public class AllergyProblem {
 
 	/**
 	 * Gets the start.
-	 *
+	 * 
 	 * @return das startOfProblem Objekt
 	 */
-	public String getStart() {
+	public String getStartDate() {
 		if (mAllergyProblem.getEffectiveTime() != null) {
 			if (mAllergyProblem.getEffectiveTime().getLow() != null) {
 				return Util.createEurDateStrFromTS(mAllergyProblem
@@ -325,7 +332,7 @@ public class AllergyProblem {
 
 	/**
 	 * Sets the code.
-	 *
+	 * 
 	 * @param kindOfAllergy
 	 *            the new code
 	 */
@@ -335,7 +342,7 @@ public class AllergyProblem {
 
 	/**
 	 * Sets a comment text
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -354,20 +361,26 @@ public class AllergyProblem {
 
 	/**
 	 * Sets the end of problem.
-	 *
+	 * 
 	 * @param endOfProblem
 	 *            End of problem date.
-	 * @throws ParseException
-	 *             the parse exception
 	 */
-	public void setEndOfProblem(Date endOfProblem) throws ParseException {
-		mAllergyProblem.getEffectiveTime().setHigh(
-				DateUtil.createIVXB_TSFromDate(endOfProblem));
+	public void setEndDate(Date endOfProblem) {
+		if (mAllergyProblem.getEffectiveTime() == null) {
+			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
+			mAllergyProblem.setEffectiveTime(interval);
+		}
+		try {
+			mAllergyProblem.getEffectiveTime().setHigh(
+					DateUtil.createIVXB_TSFromDate(endOfProblem));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Sets the id.
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -378,7 +391,7 @@ public class AllergyProblem {
 
 	/**
 	 * Sets the problem not occured (negationId)
-	 *
+	 * 
 	 * @param notOccured
 	 *            true, if the problem is not occured, false otherwise.
 	 */
@@ -388,11 +401,11 @@ public class AllergyProblem {
 
 	/**
 	 * Sets the start.
-	 *
+	 * 
 	 * @param startOfProblem
 	 *            Start of the problem
 	 */
-	public void setStart(Date startOfProblem) {
+	public void setStartDate(Date startOfProblem) {
 		if (mAllergyProblem.getEffectiveTime() == null) {
 			IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			mAllergyProblem.setEffectiveTime(interval);

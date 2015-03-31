@@ -32,6 +32,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.CodedResults;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
@@ -45,6 +46,7 @@ import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.cda.enums.Confidentiality;
@@ -1114,23 +1116,14 @@ public class FhirCdaChVacd {
 
 		String concern = fhirCondition.getNotes();
 		Date date = fhirCondition.getDateAsserted();
-		org.ehealth_connector.cda.Problem problemEntry = new org.ehealth_connector.cda.Problem();
-		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-		problemEntry.setCode(new Code(removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
 
+		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
 				.getStatusElement().getValueAsEnum());
 
 		// Create the ActiveProblemConcern
 		retVal = new org.ehealth_connector.cda.ActiveProblemConcern(concern,
 				date, problemEntry, problemStatusCode);
-
-		// Add Identifiers
-		for (IdentifierDt id : fhirCondition.getIdentifier()) {
-			String codeSystem = removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
 
 		return retVal;
 
@@ -1148,24 +1141,20 @@ public class FhirCdaChVacd {
 		org.ehealth_connector.cda.AllergyConcern retVal = null;
 
 		String concern = fhirCondition.getNotes();
-		org.ehealth_connector.cda.AllergyProblem problemEntry = new org.ehealth_connector.cda.AllergyProblem();
-		problemEntry.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
-		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-		problemEntry.addValue(new Code(removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
+		org.ehealth_connector.cda.AllergyProblem problemEntry = getAllergyProblemEntry(fhirCondition);
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
 				.getStatusElement().getValueAsEnum());
 
-		// Create the AllergyProblemConcern
-		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
-				problemEntry, problemStatusCode);
+//		// Create the AllergyProblemConcern
+//		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
+//				problemEntry, problemStatusCode);
+//
+//		// Date
+//		retVal.setStartDate(fhirCondition.getDateAsserted());
 
-		// Add Identifiers
-		for (IdentifierDt id : fhirCondition.getIdentifier()) {
-			String codeSystem = removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
+		retVal = new org.ehealth_connector.cda.AllergyConcern(concern, fhirCondition.getDateAsserted(), null,
+		problemEntry, problemStatusCode);
+		
 		return retVal;
 
 	}
@@ -1387,8 +1376,6 @@ public class FhirCdaChVacd {
 
 		// code
 		Code code = getCode(fhirMedicationStatement);
-		System.out.println(code.getCodeSystem() + "/" + code.getCode() + "/"
-				+ code.getDisplayName());
 		MedicationsSpecialConditions specialConditions = MedicationsSpecialConditions
 				.getEnum(code.getCode());
 		if (specialConditions != null) {
@@ -1539,10 +1526,14 @@ public class FhirCdaChVacd {
 		org.ehealth_connector.cda.PastProblemConcern retVal = null;
 
 		String concern = fhirCondition.getNotes();
-		org.ehealth_connector.cda.Problem problemEntry = new org.ehealth_connector.cda.Problem();
-		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-		problemEntry.setCode(new Code(removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
+		// org.ehealth_connector.cda.Problem problemEntry = new
+		// org.ehealth_connector.cda.Problem();
+		// CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+		// problemEntry.setCode(new Code(removeURIPrefix(fhirCode.getSystem()),
+		// fhirCode.getCode(), fhirCode.getDisplay()));
+
+		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
+
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
 				.getStatusElement().getValueAsEnum());
 
@@ -1550,12 +1541,12 @@ public class FhirCdaChVacd {
 		retVal = new org.ehealth_connector.cda.PastProblemConcern(concern,
 				problemEntry, problemStatusCode);
 
-		// Add Identifiers
-		for (IdentifierDt id : fhirCondition.getIdentifier()) {
-			String codeSystem = removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
+		// // Add Identifiers
+		// for (IdentifierDt id : fhirCondition.getIdentifier()) {
+		// String codeSystem = removeURIPrefix(id.getSystem());
+		// retVal.addId(new Identificator(codeSystem, id.getValue()));
+		// }
+		//
 		return retVal;
 
 	}
@@ -1676,4 +1667,53 @@ public class FhirCdaChVacd {
 		return retVal;
 	}
 
+	private org.ehealth_connector.cda.Problem getProblemEntry(
+			Condition fhirCondition) {
+
+		org.ehealth_connector.cda.Problem retVal = new org.ehealth_connector.cda.Problem();
+		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+
+		// Add Problem Entry Identifiers
+		for (IdentifierDt id : fhirCondition.getIdentifier()) {
+			String codeSystem = removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// TODO code
+		retVal.setCode(ProblemType.PROBLEM);
+
+		// Date
+		retVal.setStartDate(fhirCondition.getDateAsserted());
+
+		// Value
+		retVal.addValue(new Code(removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.AllergyProblem getAllergyProblemEntry(
+			Condition fhirCondition) {
+
+		org.ehealth_connector.cda.AllergyProblem retVal = new org.ehealth_connector.cda.AllergyProblem();
+		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+
+		// Add Problem Entry Identifiers
+		for (IdentifierDt id : fhirCondition.getIdentifier()) {
+			String codeSystem = removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// TODO code
+		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
+
+		// Date
+		retVal.setStartDate(fhirCondition.getDateAsserted());
+
+		// Value
+		retVal.addValue(new Code(removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+
+		return retVal;
+	}
 }

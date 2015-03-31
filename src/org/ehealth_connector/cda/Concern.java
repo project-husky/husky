@@ -49,7 +49,7 @@ public class Concern {
 
 	/**
 	 * Instantiates a new concern entry.
-	 *
+	 * 
 	 * @param concernEntry
 	 * <br>
 	 *            <div class="de"> concern entry</div> <div class="fr"></div>
@@ -62,7 +62,7 @@ public class Concern {
 
 	/**
 	 * Adds the id.
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -73,7 +73,7 @@ public class Concern {
 
 	/**
 	 * Gibt das Leiden zurück.
-	 *
+	 * 
 	 * @return the concern
 	 */
 	public String getConcern() {
@@ -85,7 +85,7 @@ public class Concern {
 
 	/**
 	 * Gibt das Ende des Leidens zurück.
-	 *
+	 * 
 	 * @return Ende des Leidens
 	 */
 	public String getEnd() {
@@ -95,7 +95,7 @@ public class Concern {
 
 	/**
 	 * Gets the ids.
-	 *
+	 * 
 	 * @return the id
 	 */
 	public ArrayList<Identificator> getIds() {
@@ -104,7 +104,7 @@ public class Concern {
 
 	/**
 	 * Gets the mdht concern.
-	 *
+	 * 
 	 * @return the mdht concern
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
@@ -113,7 +113,7 @@ public class Concern {
 
 	/**
 	 * Gibt den Beginn des Leidens zurück.
-	 *
+	 * 
 	 * @return Beginn des Leidens
 	 */
 	public String getStart() {
@@ -133,7 +133,7 @@ public class Concern {
 
 	/**
 	 * Setzt das Leiden.
-	 *
+	 * 
 	 * @param concern
 	 *            Leiden
 	 */
@@ -145,8 +145,13 @@ public class Concern {
 
 	protected void setEffectiveTime(Date begin, Date end) {
 		try {
-			mConcernEntry.setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(
-					begin, end));
+			if (end == null) {
+				mConcernEntry.setEffectiveTime(DateUtil
+						.createIVL_TSFromEuroDate(begin, end));
+			} else {
+				mConcernEntry.setEffectiveTime(DateUtil
+						.createIVL_TSFromEuroDate(begin));
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -154,7 +159,7 @@ public class Concern {
 
 	/**
 	 * Setzt das Ende des Leidens.
-	 *
+	 * 
 	 * @param endOfConcern
 	 *            Ende des Leidens
 	 */
@@ -173,7 +178,7 @@ public class Concern {
 
 	/**
 	 * Setzt den Beginn des Leidens.
-	 *
+	 * 
 	 * @param startOfConcern
 	 *            Beginn des Leidens
 	 */

@@ -286,7 +286,7 @@ public class CdaChVacdTest extends TestUtils {
 		Problem p = new Problem();
 		p.setCode(problemCode);
 		p.setId(id1);
-		p.setStart(startDate);
+		p.setStartDate(startDate);
 		p.setNotOccured(true);
 		p.addValue(problemCode);
 		p.addValue(new Value(problemCode));
@@ -415,8 +415,8 @@ public class CdaChVacdTest extends TestUtils {
 		p.setId(id1);
 		assertEquals(true, TestUtils.isEqual(id1, p.getId()));
 
-		p.setStart(startDate);
-		assertEquals(startDateString, p.getStart());
+		p.setStartDate(startDate);
+		assertEquals(startDateString, p.getStartDate());
 
 		p.setNotOccured(true);
 		assertEquals(true, p.getNotOccured());
@@ -801,8 +801,8 @@ public class CdaChVacdTest extends TestUtils {
 		p.setId(id1);
 		assertEquals(true, TestUtils.isEqual(id1, p.getId()));
 
-		p.setStart(startDate);
-		assertEquals(startDateString, p.getStart());
+		p.setStartDate(startDate);
+		assertEquals(startDateString, p.getStartDate());
 
 		p.setNotOccured(true);
 		assertEquals(true, p.getProblemNotOccured());
@@ -836,7 +836,7 @@ public class CdaChVacdTest extends TestUtils {
 		AllergyProblem p = new AllergyProblem();
 		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
 		p.setId(id1);
-		p.setStart(startDate);
+		p.setStartDate(startDate);
 		p.setNotOccured(true);
 		p.addValue(problemCode);
 		p.addValue(new Value(problemCode));

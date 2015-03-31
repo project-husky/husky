@@ -49,9 +49,9 @@ public class TestUtils {
 	public static boolean isEqual(AllergyProblem p1, AllergyProblem p2) {
 		if (!isEqual(p1.getCode(), p2.getCode()))
 			return false;
-		if (p1.getEnd() != null && !p1.getEnd().equals(p2.getEnd()))
+		if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
 			return false;
-		if (p1.getStart() != null && !p1.getStart().equals(p2.getStart()))
+		if (p1.getStartDate() != null && !p1.getStartDate().equals(p2.getStartDate()))
 			return false;
 		if (!isEqual(p1.getId(), p2.getId()))
 			return false;
@@ -144,9 +144,9 @@ public class TestUtils {
 	public static boolean isEqual(Problem p1, Problem p2) {
 		if (!isEqual(p1.getCode(), p2.getCode()))
 			return false;
-		if (p1.getEnd() != null && !p1.getEnd().equals(p2.getEnd()))
+		if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
 			return false;
-		if (p1.getStart() != null && !p1.getStart().equals(p2.getStart()))
+		if (p1.getStartDate() != null && !p1.getStartDate().equals(p2.getStartDate()))
 			return false;
 		if (!isEqual(p1.getId(), p2.getId()))
 			return false;
