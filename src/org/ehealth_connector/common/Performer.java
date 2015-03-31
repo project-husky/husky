@@ -28,10 +28,12 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
+/**
+ * A Person or Organization performing an action
+ *
+ */
 public class Performer {
-	/**
-	 * The m author.
-	 */
+
 	private org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
 	private org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;

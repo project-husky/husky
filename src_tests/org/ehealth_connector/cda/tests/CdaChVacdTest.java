@@ -101,7 +101,6 @@ public class CdaChVacdTest extends TestUtils {
 
 	private Performer performer1;
 
-
 	public CdaChVacdTest() {
 		super();
 	}
@@ -256,7 +255,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setConsumable(consumable1);
 		i.addId(id1);
 		i.setDosage(number);
-		i.setPerformer(performer1);
 		i.setCommentText(ts1);
 		i.setIntended();
 		i.addReason(reason2);
@@ -467,7 +465,8 @@ public class CdaChVacdTest extends TestUtils {
 		d.addAllergyConcern(ac1);
 		d.addAllergyConcern(ac2);
 		d.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(ts4);
-		assertTrue(d.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(ts4));
+		assertTrue(d.getNarrativeTextSectionAllergiesAndOtherAdverseReactions()
+				.contains(ts4));
 
 		cr1 = createCodedResults();
 		d.addCodedResults(cr1);
@@ -486,14 +485,16 @@ public class CdaChVacdTest extends TestUtils {
 		d.addPregnancyHistory(ph1);
 		d.addPregnancyHistory(ph2);
 		d.setNarrativeTextSectionHistoryOfPregnancies(ts2);
-		assertTrue(d.getNarrativeTextSectionHistoryOfPregnancies().contains(ts2));
+		assertTrue(d.getNarrativeTextSectionHistoryOfPregnancies()
+				.contains(ts2));
 
 		immunizationRecommendation1 = createImmunizationRecommendation();
 		immunizationRecommendation2 = createImmunizationRecommendation();
 		d.addImmunizationRecommendation(immunizationRecommendation1);
 		d.addImmunizationRecommendation(immunizationRecommendation2);
 		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
-		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
+		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations()
+				.contains(ts3));
 
 		d.addComment(ts1);
 		d.addComment(ts2);
@@ -663,9 +664,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setDosage(number);
 		assertEquals(number,
 				Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
-
-		i.setPerformer(performer1);
-		assertTrue(isEqual(name1, i.getPerformer().getName()));
 
 		i.setCommentText(ts2);
 		assertEquals(ts2, i.getCommentText());

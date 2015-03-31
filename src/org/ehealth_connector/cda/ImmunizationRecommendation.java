@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,12 +28,9 @@ import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -326,21 +322,6 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * Gets the Performer (Person, die die Impfung durchgeführt hat)
-	 * 
-	 * @return the performer
-	 */
-	public Performer getPerformer() {
-		if (mImmunizationRecommendation.getPerformers() != null) {
-			if (mImmunizationRecommendation.getPerformers().get(0) != null) {
-				return new Performer(mImmunizationRecommendation
-						.getPerformers().get(0));
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
 	 * werden soll als String (z.B. "01.01.2015 - 01.03.1015")</div> <div
 	 * class="fr"></div> <div class="it"></div>
@@ -455,40 +436,6 @@ public class ImmunizationRecommendation {
 	 */
 	public void setIntended() {
 		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);
-	}
-
-	/**
-	 * Sets the Person, who performs the Immunization
-	 * 
-	 * @param performer
-	 *            the new performer (Convenience Author will be converted to a
-	 *            performer)
-	 */
-	public void setPerformer(Author performer) {
-		Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
-		mImmunizationRecommendation.getPerformers().clear();
-		mImmunizationRecommendation.getPerformers().add(p2);
-
-		p2.setAssignedEntity(Util
-				.createAssignedEntityFromAssignedAuthor(performer
-						.copyMdhtAuthor().getAssignedAuthor()));
-		try {
-			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Sets the Person, who performs the Immunization
-	 * 
-	 * @param performer
-	 *            the new performer
-	 */
-	public void setPerformer(Performer performer) {
-		mImmunizationRecommendation.getPerformers().clear();
-		mImmunizationRecommendation.getPerformers().add(
-				performer.copyMdhtPerfomer());
 	}
 
 	/**

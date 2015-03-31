@@ -1412,9 +1412,6 @@ public class FhirCdaChVacd {
 
 			// consumable
 			retVal.setConsumable(getConsumable(fhirMedicationStatement));
-
-			// perfomer
-			retVal.setPerformer(getPerformer(fhirMedicationStatement));
 		}
 		// author
 		retVal.setAuthor(getAuthor(fhirMedicationStatement));
