@@ -84,13 +84,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class CdaChVacd extends CdaCh {
 
-	/** The Constant OID_VACD. */
-	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
+	public static final boolean CDALevel2TextGeneration = false;
 
 	/** The Constant eVACDOCTitle. */
 	public static final String eVACDOCTitle = "eVACDOC";
 
-	public static final boolean CDALevel2TextGeneration = false;
+	/** The Constant OID_VACD. */
+	public static final String OID_VACD = "2.16.756.5.30.1.1.1.1.3.1.1";
 
 	/**
 	 * Erstellt ein neues eVACDOC CDA Dokument.
@@ -222,7 +222,7 @@ public class CdaChVacd extends CdaCh {
 				// create the CDA level 1 text
 				aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
 			} else {
-				setNarrativeTextActiveProblemConcerns("");
+				setNarrativeTextSectionActiveProblems("");
 			}
 		} else {
 			aps.createStrucDocText("Keine Angaben");
@@ -266,7 +266,7 @@ public class CdaChVacd extends CdaCh {
 				// create the CDA level 1 text
 				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
 			} else {
-				setNarrativeTextAllergyProblemConcerns("");
+				setNarrativeTextSectionAllergiesAndOtherAdverseReactions("");
 			}
 		} else {
 			ars.createStrucDocText("Keine Angaben");
@@ -404,9 +404,9 @@ public class CdaChVacd extends CdaCh {
 						allComments = allComments + t.getCommentText() + " ";
 					}
 				}
-				setNarrativeTextImmunizations(allComments);
+				setNarrativeTextSectionImmunizations(allComments);
 			} else {
-				setNarrativeTextImmunizations("-");
+				setNarrativeTextSectionImmunizations("-");
 			}
 		}
 	}
@@ -461,9 +461,9 @@ public class CdaChVacd extends CdaCh {
 						allComments = allComments + t.getCommentText() + " ";
 					}
 				}
-				setNarrativeTextImmunizationRecommendations(allComments);
+				setNarrativeTextSectionImmunizationRecommendations(allComments);
 			} else {
-				setNarrativeTextImmunizationRecommendations("-");
+				setNarrativeTextSectionImmunizationRecommendations("-");
 			}
 		}
 	}
@@ -546,9 +546,9 @@ public class CdaChVacd extends CdaCh {
 								+ t.getCommentText() + " ";
 					}
 				}
-				setNarrativeTextLaboratoryObservation(allComments);
+				setNarrativeTextSectionLaboratorySpecialty(allComments);
 			} else {
-				setNarrativeTextLaboratoryObservation("-");
+				setNarrativeTextSectionLaboratorySpecialty("-");
 			}
 
 		}
@@ -587,7 +587,7 @@ public class CdaChVacd extends CdaCh {
 			if (CDALevel2TextGeneration) {
 				hopis.createStrucDocText(generateNarrativeTextPastProblemConcernEntries());
 			} else {
-				setNarrativeTextPastProblemConcerns("");
+				setNarrativeTextSectionHistoryOfPastIllnes("");
 			}
 		} else {
 			hopis.createStrucDocText("");
@@ -642,12 +642,47 @@ public class CdaChVacd extends CdaCh {
 					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 			phs.createStrucDocText(sb.toString());
 		} else {
-			setNarrativeTextPregnancies("");
+			setNarrativeTextSectionHistoryOfPregnancies("");
 			reference = Util.createReference(1,
 					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 		}
 		pregnancy.getMdhtPregnancy().setText(reference);
 		phs.addObservation(pregnancy.copyMdhtPregnancy());
+	}
+
+	public LaboratoryObservation createLaboratoryObservation(
+			SerologieForVACD serologieCode, Code laboratorySpecificCode,
+			Date dateTimeOfResult, Performer performer, Value value) {
+		LaboratoryObservation lo = new LaboratoryObservation();
+		Code serCode = serologieCode.getCode();
+		serCode.addTranslation(laboratorySpecificCode);
+		lo.setCode(serCode);
+		lo.setEffectiveTime(dateTimeOfResult);
+		lo.addPerformer(performer, dateTimeOfResult);
+		lo.addValue(value);
+		return lo;
+	}
+
+	public LaboratoryObservation createLaboratoryObservation(
+			SerologieForVACD serologieCode, Code laboratorySpecificCode,
+			Date dateTimeOfResult, Performer performer, Value value,
+			ObservationInterpretationForImmunization observationInterpretation) {
+		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
+				laboratorySpecificCode, dateTimeOfResult, performer, value);
+		lo.setInterpretationCode(observationInterpretation);
+		return lo;
+	}
+
+	public LaboratoryObservation createLaboratoryObservation(
+			SerologieForVACD serologieCode, Code laboratorySpecificCode,
+			Date dateTimeOfResult, Performer performer, Value value,
+			ObservationInterpretationForImmunization observationInterpretation,
+			String comment) {
+		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
+				laboratorySpecificCode, dateTimeOfResult, performer, value,
+				observationInterpretation);
+		lo.setCommentText(comment);
+		return lo;
 	}
 
 	/**
@@ -786,6 +821,11 @@ public class CdaChVacd extends CdaCh {
 		return new GestationalAge(getDoc().getCodedResultsSection());
 	}
 
+	// public GestationalAge createGestationalAgeCodedResult(int weeks, int
+	// days) {
+	//
+	// }
+
 	/**
 	 * Liefert den menschenlesbaren Text zu dem Gestationsalter zurück
 	 *
@@ -821,46 +861,6 @@ public class CdaChVacd extends CdaCh {
 	 */
 	public VACD getDoc() {
 		return (VACD) doc;
-	}
-
-	// public GestationalAge createGestationalAgeCodedResult(int weeks, int
-	// days) {
-	//
-	// }
-
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value) {
-		LaboratoryObservation lo = new LaboratoryObservation();
-		Code serCode = serologieCode.getCode();
-		serCode.addTranslation(laboratorySpecificCode);
-		lo.setCode(serCode);
-		lo.setEffectiveTime(dateTimeOfResult);
-		lo.addPerformer(performer, dateTimeOfResult);
-		lo.addValue(value);
-		return lo;
-	}
-
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value,
-			ObservationInterpretationForImmunization observationInterpretation) {
-		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
-				laboratorySpecificCode, dateTimeOfResult, performer, value);
-		lo.setInterpretationCode(observationInterpretation);
-		return lo;
-	}
-
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value,
-			ObservationInterpretationForImmunization observationInterpretation,
-			String comment) {
-		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
-				laboratorySpecificCode, dateTimeOfResult, performer, value,
-				observationInterpretation);
-		lo.setCommentText(comment);
-		return lo;
 	}
 
 	/**
@@ -945,7 +945,7 @@ public class CdaChVacd extends CdaCh {
 	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
-	public String getNarrativeTextActiveProblemConcerns() {
+	public String getNarrativeTextSectionActiveProblems() {
 		return getNarrativeText(getDoc().getActiveProblemsSection());
 	}
 
@@ -960,7 +960,7 @@ public class CdaChVacd extends CdaCh {
 	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
-	public String getNarrativeTextAllergyProblemConcerns() {
+	public String getNarrativeTextSectionAllergiesAndOtherAdverseReactions() {
 		return getNarrativeText(getDoc().getAllergiesReactionsSection());
 	}
 
@@ -975,7 +975,7 @@ public class CdaChVacd extends CdaCh {
 	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
-	public String getNarrativeTextCodedResults() {
+	public String getNarrativeTextSectionCodedResults() {
 		return getNarrativeText(getDoc().getCodedResultsSection());
 	}
 
@@ -990,67 +990,7 @@ public class CdaChVacd extends CdaCh {
 	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
-	public String getNarrativeTextComments() {
-		return getNarrativeText(findRemarksSection());
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 * 
-	 */
-	public String getNarrativeTextImmunizationRecommendation() {
-		return getNarrativeText(getDoc().getImmunizationRecommendationSection());
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 * 
-	 */
-	public String getNarrativeTextImmunizations() {
-		return (getNarrativeText(getDoc().getImmunizationsSection()));
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 * 
-	 */
-	public String getNarrativeTextLaboratoryObservation() {
-		return getNarrativeText(getDoc().getLaboratorySpecialitySection());
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 * 
-	 */
-	public String getNarrativeTextPastProblemConcerns() {
+	public String getNarrativeTextSectionHistoryOfPastIllnes() {
 		return getNarrativeText(getDoc().getHistoryOfPastIllnessSection());
 	}
 
@@ -1065,8 +1005,68 @@ public class CdaChVacd extends CdaCh {
 	 *         Teils des CDA-Dokuments</div>
 	 * 
 	 */
-	public String getNarrativeTextPregnancies() {
+	public String getNarrativeTextSectionHistoryOfPregnancies() {
 		return getNarrativeText(getDoc().getPregnancyHistorySection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 * 
+	 */
+	public String getNarrativeTextSectionImmunizationRecommendations() {
+		return getNarrativeText(getDoc().getImmunizationRecommendationSection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 * 
+	 */
+	public String getNarrativeTextSectionImmunizations() {
+		return (getNarrativeText(getDoc().getImmunizationsSection()));
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 * 
+	 */
+	public String getNarrativeTextSectionLaboratorySpecialty() {
+		return getNarrativeText(getDoc().getLaboratorySpecialitySection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 * 
+	 */
+	public String getNarrativeTextSectionRemarks() {
+		return getNarrativeText(findRemarksSection());
 	}
 
 	/**
@@ -1183,7 +1183,7 @@ public class CdaChVacd extends CdaCh {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextActiveProblemConcerns(String text) {
+	public void setNarrativeTextSectionActiveProblems(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ACTIVE_PROBLEMS, text);
 		if (getDoc().getActiveProblemsSection() != null) {
@@ -1204,7 +1204,7 @@ public class CdaChVacd extends CdaCh {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextAllergyProblemConcerns(String text) {
+	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ALLERGIES_REACTIONS, text);
 		if (getDoc().getAllergiesReactionsSection() != null) {
@@ -1225,7 +1225,7 @@ public class CdaChVacd extends CdaCh {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextCodedResults(String text) {
+	public void setNarrativeTextSectionCodedResults(String text) {
 		if (getDoc().getCodedResultsSection() != null) {
 			getDoc().getCodedResultsSection().createStrucDocText(text);
 		}
@@ -1243,90 +1243,7 @@ public class CdaChVacd extends CdaCh {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextComments(String text) {
-		SimpleTextBuilder sb;
-		sb = new SimpleTextBuilder(SectionsVACD.REMARKS, text);
-		if (findRemarksSection() != null) {
-			findRemarksSection().createStrucDocText(sb.toString());
-		}
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 * 
-	 */
-	public void setNarrativeTextImmunizationRecommendations(String text) {
-		SimpleTextBuilder sb;
-		sb = new SimpleTextBuilder(SectionsVACD.TREATMENT_PLAN, text);
-		if (getDoc().getImmunizationRecommendationSection() != null) {
-			getDoc().getImmunizationRecommendationSection().createStrucDocText(
-					sb.toString());
-		}
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 * 
-	 */
-	public void setNarrativeTextImmunizations(String text) {
-		SimpleTextBuilder sb;
-		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_IMMUNIZATION, text);
-		if (getDoc().getImmunizationsSection() != null) {
-			getDoc().getImmunizationsSection()
-					.createStrucDocText(sb.toString());
-		}
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 * 
-	 */
-	public void setNarrativeTextLaboratoryObservation(String text) {
-		SimpleTextBuilder sb;
-		sb = new SimpleTextBuilder(SectionsVACD.SEROLOGY_STUDIES, text);
-		if (getDoc().getLaboratorySpecialitySection() != null) {
-			getDoc().getLaboratorySpecialitySection().createStrucDocText(
-					sb.toString());
-		}
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 * 
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 * 
-	 */
-	public void setNarrativeTextPastProblemConcerns(String text) {
+	public void setNarrativeTextSectionHistoryOfPastIllnes(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PAST_ILLNESS, text);
 		if (getDoc().getHistoryOfPastIllnessSection() != null) {
@@ -1347,7 +1264,7 @@ public class CdaChVacd extends CdaCh {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextPregnancies(String text) {
+	public void setNarrativeTextSectionHistoryOfPregnancies(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, text);
 		if (getDoc().getPregnancyHistorySection() != null) {
@@ -1356,28 +1273,87 @@ public class CdaChVacd extends CdaCh {
 		}
 	}
 
-	private void initVacd() {
-		CHPackage.eINSTANCE.eClass();
-		// fix missing extension values in MDHT model.
-		for (II templateId : doc.getTemplateIds()) {
-			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH-VACD");
-			}
-			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH");
-			}
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 * 
+	 */
+	public void setNarrativeTextSectionImmunizationRecommendations(String text) {
+		SimpleTextBuilder sb;
+		sb = new SimpleTextBuilder(SectionsVACD.TREATMENT_PLAN, text);
+		if (getDoc().getImmunizationRecommendationSection() != null) {
+			getDoc().getImmunizationRecommendationSection().createStrucDocText(
+					sb.toString());
 		}
-		setTitle(eVACDOCTitle);
-		fixGeneralHeaderConstraintTemplateId();
-		new Query(doc);
 	}
 
-	private String getNarrativeText(Section s) {
-		if (s != null) {
-			StrucDocText t = s.getText();
-			return Util.extractStringFromNonQuotedStrucDocText(t);
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 * 
+	 */
+	public void setNarrativeTextSectionImmunizations(String text) {
+		SimpleTextBuilder sb;
+		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_IMMUNIZATION, text);
+		if (getDoc().getImmunizationsSection() != null) {
+			getDoc().getImmunizationsSection()
+					.createStrucDocText(sb.toString());
 		}
-		return null;
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 * 
+	 */
+	public void setNarrativeTextSectionLaboratorySpecialty(String text) {
+		SimpleTextBuilder sb;
+		sb = new SimpleTextBuilder(SectionsVACD.SEROLOGY_STUDIES, text);
+		if (getDoc().getLaboratorySpecialitySection() != null) {
+			getDoc().getLaboratorySpecialitySection().createStrucDocText(
+					sb.toString());
+		}
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 * 
+	 */
+	public void setNarrativeTextSectionRemarks(String text) {
+		SimpleTextBuilder sb;
+		sb = new SimpleTextBuilder(SectionsVACD.REMARKS, text);
+		if (findRemarksSection() != null) {
+			findRemarksSection().createStrucDocText(sb.toString());
+		}
 	}
 
 	private Section findRemarksSection() {
@@ -1398,6 +1374,30 @@ public class CdaChVacd extends CdaCh {
 				doc.getTemplateIds().remove(i);
 			}
 		}
+	}
+
+	private String getNarrativeText(Section s) {
+		if (s != null) {
+			StrucDocText t = s.getText();
+			return Util.extractStringFromNonQuotedStrucDocText(t);
+		}
+		return null;
+	}
+
+	private void initVacd() {
+		CHPackage.eINSTANCE.eClass();
+		// fix missing extension values in MDHT model.
+		for (II templateId : doc.getTemplateIds()) {
+			if ("2.16.756.5.30.1.1.1.1.3.5.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH-VACD");
+			}
+			if ("2.16.756.5.30.1.1.1.1".equals(templateId.getRoot())) {
+				templateId.setExtension("CDA-CH");
+			}
+		}
+		setTitle(eVACDOCTitle);
+		fixGeneralHeaderConstraintTemplateId();
+		new Query(doc);
 	}
 
 	private boolean updateAllergyConcernReferences(EList<Act> acts,

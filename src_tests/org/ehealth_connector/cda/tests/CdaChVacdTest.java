@@ -452,62 +452,62 @@ public class CdaChVacdTest extends TestUtils {
 		immunization2 = createImmunization();
 		d.addImmunization(immunization1);
 		d.addImmunization(immunization2);
-		d.setNarrativeTextImmunizations(ts1);
-		assertTrue(d.getNarrativeTextImmunizations().contains(ts1));
+		d.setNarrativeTextSectionImmunizations(ts1);
+		assertTrue(d.getNarrativeTextSectionImmunizations().contains(ts1));
 
 		ppc1 = createPastProblemConcern();
 		ppc2 = createPastProblemConcern();
 		d.addPastProblemConcern(ppc1);
 		d.addPastProblemConcern(ppc2);
-		d.setNarrativeTextPastProblemConcerns(ts2);
-		assertTrue(d.getNarrativeTextPastProblemConcerns().contains(ts2));
+		d.setNarrativeTextSectionHistoryOfPastIllnes(ts2);
+		assertTrue(d.getNarrativeTextSectionHistoryOfPastIllnes().contains(ts2));
 
 		apce1 = createActiveProblems();
 		apce2 = createActiveProblems();
 		d.addActiveProblemConcern(apce1);
 		d.addActiveProblemConcern(apce2);
-		d.setNarrativeTextActiveProblemConcerns(ts3);
-		assertTrue(d.getNarrativeTextActiveProblemConcerns().contains(ts3));
+		d.setNarrativeTextSectionActiveProblems(ts3);
+		assertTrue(d.getNarrativeTextSectionActiveProblems().contains(ts3));
 
 		ac1 = createAllergyConcern();
 		ac2 = createAllergyConcern();
 		d.addAllergyConcern(ac1);
 		d.addAllergyConcern(ac2);
-		d.setNarrativeTextAllergyProblemConcerns(ts4);
-		assertTrue(d.getNarrativeTextAllergyProblemConcerns().contains(ts4));
+		d.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(ts4);
+		assertTrue(d.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(ts4));
 
 		cr1 = createCodedResults();
 		d.addCodedResults(cr1);
-		d.setNarrativeTextCodedResults(ts5);
-		assertTrue(d.getNarrativeTextCodedResults().contains(ts5));
+		d.setNarrativeTextSectionCodedResults(ts5);
+		assertTrue(d.getNarrativeTextSectionCodedResults().contains(ts5));
 
 		lss1 = createLaboratoryObservation();
 		lss2 = createLaboratoryObservation();
 		d.addLaboratoryObservation(lss1);
 		d.addLaboratoryObservation(lss2);
-		d.setNarrativeTextLaboratoryObservation(ts1);
-		assertTrue(d.getNarrativeTextLaboratoryObservation().contains(ts1));
+		d.setNarrativeTextSectionLaboratorySpecialty(ts1);
+		assertTrue(d.getNarrativeTextSectionLaboratorySpecialty().contains(ts1));
 
 		ph1 = createPregnancy();
 		ph2 = createPregnancy();
 		d.addPregnancyHistory(ph1);
 		d.addPregnancyHistory(ph2);
-		d.setNarrativeTextPregnancies(ts2);
-		assertTrue(d.getNarrativeTextPregnancies().contains(ts2));
+		d.setNarrativeTextSectionHistoryOfPregnancies(ts2);
+		assertTrue(d.getNarrativeTextSectionHistoryOfPregnancies().contains(ts2));
 
 		immunizationRecommendation1 = createImmunizationRecommendation();
 		immunizationRecommendation2 = createImmunizationRecommendation();
 		d.addImmunizationRecommendation(immunizationRecommendation1);
 		d.addImmunizationRecommendation(immunizationRecommendation2);
-		d.setNarrativeTextImmunizationRecommendations(ts3);
-		assertTrue(d.getNarrativeTextImmunizationRecommendation().contains(ts3));
+		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
+		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
 
 		c1 = createComment();
 		c2 = createComment();
 		d.addComment(ts1);
 		d.addComment(ts2);
-		d.setNarrativeTextComments(ts4);
-		assertTrue(d.getNarrativeTextComments().contains(ts4));
+		d.setNarrativeTextSectionRemarks(ts4);
+		assertTrue(d.getNarrativeTextSectionRemarks().contains(ts4));
 
 		try {
 			d.saveToFile("C:/temp/testVACD.xml");
