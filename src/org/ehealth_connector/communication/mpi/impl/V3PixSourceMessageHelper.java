@@ -64,13 +64,13 @@ public class V3PixSourceMessageHelper {
 	/**
 	 * create a V3PixSourceMessageHelper with the supplied sender and receiver
 	 * 
-	 * @param senderApplicationOID
+	 * @param senderApplicationOid
 	 *            application oid of the sender
-	 * @param senderFacilityOID
+	 * @param senderFacilityOid
 	 *            facility oid of the sender
-	 * @param receiverApplicationOID
+	 * @param receiverApplicationOid
 	 *            receiver oid the application
-	 * @param receiverFacilityOID
+	 * @param receiverFacilityOid
 	 *            receiver oid of the facility
 	 */
 	public V3PixSourceMessageHelper(boolean addMessage, boolean revisedMessage,
@@ -97,7 +97,7 @@ public class V3PixSourceMessageHelper {
 	/**
 	 * adds an employee code
 	 * 
-	 * @param nationCode
+	 * @param employeeOccupationCode
 	 *            CWE:EmployeeOccupationCode
 	 */
 	public void addEmployeeCode(String employeeOccupationCode) {

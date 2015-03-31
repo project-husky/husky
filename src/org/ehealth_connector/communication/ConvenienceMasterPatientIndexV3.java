@@ -77,7 +77,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            demographic data of the patient
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param destination
+	 * @param dest
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
@@ -130,14 +130,14 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            duplicate patient identifier
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param destination
+	 * @param dest
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean mergePatients(Patient finalPatient,
-			String mergeObsoleId, String homeCommunityOID, Destination dest,
+			String mergeObsoleteId, String homeCommunityOID, Destination dest,
 			AtnaConfig atna) {
 
 		V3PixAdapterConfig v3PixAdapterConfig = new V3PixAdapterConfig(null,
@@ -150,12 +150,12 @@ public class ConvenienceMasterPatientIndexV3 {
 				(atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
-		if (mergeObsoleId == null) {
+		if (mergeObsoleteId == null) {
 			log.error("no localid specified for oid " + homeCommunityOID);
 			return false;
 		}
 		boolean ret = v3PixAdapter.mergePatient(new FhirPatient(finalPatient),
-				mergeObsoleId);
+				mergeObsoleteId);
 		return ret;
 	}
 
@@ -182,9 +182,9 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            demographic data of the patient
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param requestedCommunityOID
+	 * @param requestedCommunityOIDs
 	 *            array of oids for domains to query
-	 * @param destination
+	 * @param dest
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
@@ -240,7 +240,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            demographic data of the patient
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param destination
+	 * @param dest
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration

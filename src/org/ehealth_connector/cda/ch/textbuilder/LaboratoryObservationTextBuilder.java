@@ -38,7 +38,7 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 	 * 
 	 * @param list
 	 *            a list of laboratory observations
-	 * @section the section
+	 * @param section the section
 	 */
 	public LaboratoryObservationTextBuilder(
 			ArrayList<LaboratoryObservation> list, SectionsVACD section) {

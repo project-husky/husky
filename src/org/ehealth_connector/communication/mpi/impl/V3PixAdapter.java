@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
@@ -59,20 +59,13 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  * Identity Feed HL7 V3 and the Actor Patient Identifier Cross-reference
  * Consumer from ITI-45 PIXV3 Query.
  * 
- * @see ftp://ftp.ihe.net/DocumentPublication/CurrentPublished/ITInfrastructure/
- *      IHE_ITI_TF_Vol2b.pdf
+ * The V3PixAdapter implements the MpiAdapterIntefarce with the Open Health
+ * Tools (OHT) IHE Profile Classes V3PixConsumer and V3PixSource Open Health
+ * Tools IHE Profiles
  * 
- *      The V3PixAdapter implements the MpiAdapterIntefarce with the Open Health
- *      Tools (OHT) IHE Profile Classes V3PixConsumer and V3PixSource Open
- *      Health Tools IHE Profiles
- * @see https://www.projects.openhealthtools.org/sf/projects/iheprofiles/
- *      V3PixSource @see https://www
- *      .projects.openhealthtools.org/sf/projects/iheprofiles
- *      /javadocs/2.0.0/org/openhealthtools /ihe/pix/source/v3/V3PixSource.html
- *      V3PixConsumer @see
- *      https://www.projects.openhealthtools.org/sf/projects/iheprofiles
- *      /javadocs
- *      /2.0.0/org/openhealthtools/ihe/pix/consumer/v3/V3PixConsumer.html
+ * @see "https://www.projects.openhealthtools.org/sf/projects/iheprofiles/V3PixSource"
+ * @see "https://www.projects.openhealthtools.org/sf/projects/iheprofiles/javadocs/2.0.0/org/openhealthtools/ihe/pix/source/v3/V3PixSource.html/V3PixConsumer"
+ * @see "https://www.projects.openhealthtools.org/sf/projects/iheprofiles/javadocs/2.0.0/org/openhealthtools/ihe/pix/consumer/v3/V3PixConsumer.html"
  */
 public class V3PixAdapter implements MpiAdapterInterface {
 
@@ -134,8 +127,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.
-	 *      communication.mpi.FhirPatient)
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.communication.mpi.FhirPatient)
 	 */
 	public boolean addPatient(FhirPatient patient) {
 		configure(true);
@@ -170,8 +162,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.
-	 *      communication.mpi.FhirPatient)
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
 	 */
 	public boolean updatePatient(FhirPatient patient) {
 		if (pixSource == null) {
@@ -211,8 +202,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 	 * @param obsoleteId
 	 *            the obsolete id (duplicate patient identifier)
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.
-	 *      communication.mpi.FhirPatient, java.lang.String)
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.communication.mpi.FhirPatient,
+	 *      java.lang.String)
 	 */
 	public boolean mergePatient(FhirPatient patient, String obsoleteId) {
 
@@ -303,8 +294,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 	 * @param queryDomainNamespaces
 	 *            the query domain namespaces
 	 * @return the string[]
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.
-	 *      communication.mpi.FhirPatient, java.lang.String, java.lang.String)
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.communication.mpi.FhirPatient,
+	 *      java.lang.String[], java.lang.String[])
 	 */
 	public String[] queryPatientId(FhirPatient patient,
 			String[] queryDomainOids, String[] queryDomainNamespaces) {
@@ -402,14 +393,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
 				this.sourceConfigured = true;
 				if (adapterCfg.auditSourceId != null) {
 					PIXSourceAuditor.getAuditor().getConfig()
-					.setAuditSourceId(adapterCfg.auditSourceId);
+							.setAuditSourceId(adapterCfg.auditSourceId);
 				}
 				if (adapterCfg.auditRepositoryUri != null) {
 					PIXSourceAuditor
-					.getAuditor()
-					.getConfig()
-					.setAuditRepositoryUri(
-							adapterCfg.auditRepositoryUri);
+							.getAuditor()
+							.getConfig()
+							.setAuditRepositoryUri(
+									adapterCfg.auditRepositoryUri);
 				}
 				if (pixSource == null) {
 					pixSource = new V3PixSource(adapterCfg.pixSourceUri);
@@ -419,14 +410,14 @@ public class V3PixAdapter implements MpiAdapterInterface {
 				this.consumerConfigured = true;
 				if (adapterCfg.auditSourceId != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
-					.setAuditSourceId(adapterCfg.auditSourceId);
+							.setAuditSourceId(adapterCfg.auditSourceId);
 				}
 				if (adapterCfg.auditRepositoryUri != null) {
 					PIXConsumerAuditor
-					.getAuditor()
-					.getConfig()
-					.setAuditRepositoryUri(
-							adapterCfg.auditRepositoryUri);
+							.getAuditor()
+							.getConfig()
+							.setAuditRepositoryUri(
+									adapterCfg.auditRepositoryUri);
 				}
 				if (v3PixConsumer == null) {
 					v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
@@ -484,8 +475,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage
-				.setPatientMultipleBirthOrderNumber(multipleBirth
-						.getValue());
+						.setPatientMultipleBirthOrderNumber(multipleBirth
+								.getValue());
 				v3PixSourceMessage.setPatientMultipleBirthIndicator(true);
 			}
 		}
@@ -493,8 +484,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage
-				.setPatientMultipleBirthIndicator(multipleBirth
-						.getValue());
+						.setPatientMultipleBirthIndicator(multipleBirth
+								.getValue());
 			}
 		}
 	}
@@ -519,7 +510,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 			AD patientAddress = PixPdqV3Utils.createAD(addressDt
 					.getLineFirstRep().getValue(), addressDt.getCity(), null,
 					addressDt.getState(), addressDt.getCountry(), addressDt
-					.getPostalCode(), adressOtherDesignation, null);
+							.getPostalCode(), adressOtherDesignation, null);
 			v3PixSourceMessage.setPatienttBirthPlace(patientAddress);
 		}
 	}
@@ -891,7 +882,7 @@ public class V3PixAdapter implements MpiAdapterInterface {
 		if (!patient.getMaritalStatus().isEmpty()) {
 			v3PixSourceMessage.setPatientMaritalStatus(patient
 					.getMaritalStatus().getValueAsEnum().toArray()[0]
-							.toString());
+					.toString());
 		}
 	}
 

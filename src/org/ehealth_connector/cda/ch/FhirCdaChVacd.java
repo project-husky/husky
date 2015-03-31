@@ -95,7 +95,7 @@ import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
 
 /**
- * <div class="en">FhirCdaChVacd supports the creation of a CDA-CH-CH document
+ * FhirCdaChVacd supports the creation of a CDA-CH-CH document
  * from HL7 FHIR bundle resources. The content of these resources is not
  * currently documented. These resources may be created by the class
  * org.ehealth_connector.demo.cda.VACDResources. This is currently the one any
@@ -103,9 +103,7 @@ import ca.uhn.fhir.util.ElementUtil;
  * these FHIR resources in a text editor in order to change the payload of the
  * resulting CdaChVacd object on your own risk.
  * 
- * @formatter:off
- * @see http://hl7.org/implement/standards/FHIR-Develop/resourcelist.html
- * @formatter:on</div><div class="de"></div><div class="fr"></div>
+ * @see "http://hl7.org/implement/standards/FHIR-Develop/resourcelist.html"
  */
 public class FhirCdaChVacd {
 
@@ -133,7 +131,7 @@ public class FhirCdaChVacd {
 	 * to fulfill the needs for HL7 CDA-CH-CDA creation
 	 * 
 	 * @formatter:off
-	 * @see http://jamesagnew.github.io/hapi-fhir/index.html
+	 * @see "http://jamesagnew.github.io/hapi-fhir/index.html"
 	 * @formatter:on</div><div class="de"></div><div class="fr"></div>
 	 */
 	/**
@@ -278,7 +276,7 @@ public class FhirCdaChVacd {
 		 * It is important to override the isEmpty() method, adding a check for
 		 * any newly added fields.
 		 * 
-		 * @see ca.uhn.fhir.model.dstu2.resource.MedicationStatement#isEmpty()
+		 * @see "ca.uhn.fhir.model.dstu2.resource.MedicationStatement#isEmpty()"
 		 */
 		@Override
 		public boolean isEmpty() {

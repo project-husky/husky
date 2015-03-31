@@ -40,8 +40,8 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 	 * 
 	 * @param problemConcerns
 	 *            a list of problem concerns
-	 * @param the
-	 *            section
+	 * @param section
+	 *            the section
 	 */
 	public AllergyConcernTextBuilder(
 			ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns,

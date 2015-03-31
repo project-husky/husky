@@ -68,7 +68,7 @@ import ca.uhn.fhir.model.primitive.StringDt;
  * Resource and provides convenience methods to translate between the
  * convenience patient in the ehealthconeector and back
  * 
- * @see http://jamesagnew.github.io/hapi-fhir/index.html
+ * @see "http://jamesagnew.github.io/hapi-fhir/index.html"
  */
 @ResourceDef(name = "Patient")
 public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
@@ -641,7 +641,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * Gets the maiden name, implementation might change, because it is yet an
 	 * open issue how it is stored in pdqm/fhir
 	 * 
-	 * @return
+	 * @return mothers maiden name
 	 */
 	public HumanNameDt getMothersMaidenName() {
 		for (Contact contact : getContact()) {
@@ -685,7 +685,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * Sets the maiden name, implementation might change, because it is yet an
 	 * open issue how it is stored in pdqm/fhir
 	 * 
-	 * @return
+	 * @param maidenName sets the mothers maiden name
 	 */
 	public void setMothersMaidenName(HumanNameDt maidenName) {
 		maidenName.setUse(NameUseEnum.MAIDEN);

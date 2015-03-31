@@ -91,7 +91,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document
-	 *
+	 * 
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
@@ -152,7 +152,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Instantiates a new immunization recommendation.
-	 *
+	 * 
 	 * @param immunizationRecommendation
 	 * <br>
 	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
@@ -165,7 +165,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Adds the id.
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -176,7 +176,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Adds the reason for the immunization recommendeation (the BAG Guideline)
-	 *
+	 * 
 	 * @param reason
 	 *            the reason
 	 */
@@ -196,7 +196,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * Gets a list of reasons for the immunizationRecommendation (typically a
 	 * reference to an external BAG document)).
-	 *
+	 * 
 	 * @return A ArrayList of Resons
 	 * 
 	 */
@@ -213,7 +213,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * <div class="de">Copy mdht immunization recommendation.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. immunization
 	 *         recommendation
 	 */
@@ -223,7 +223,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the author.
-	 *
+	 * 
 	 * @return the author
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
@@ -239,7 +239,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
-	 *
+	 * 
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
 	 */
@@ -251,7 +251,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself)
-	 *
+	 * 
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -261,7 +261,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the consumable.
-	 *
+	 * 
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
@@ -276,7 +276,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gibt die Dosis der Impfung zurück.
-	 *
+	 * 
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
@@ -290,7 +290,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the id.
-	 *
+	 * 
 	 * @return the id
 	 */
 	public Identificator getId() {
@@ -317,7 +317,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the mdht immunization recommendation.
-	 *
+	 * 
 	 * @return the mdht immunization recommendation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
@@ -326,7 +326,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets the Performer (Person, die die Impfung durchgeführt hat)
-	 *
+	 * 
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
@@ -343,7 +343,7 @@ public class ImmunizationRecommendation {
 	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
 	 * werden soll als String (z.B. "01.01.2015 - 01.03.1015")</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
 	 *         soll als String</div> <div class="fr"></div> <div
 	 *         class="it"></div>
@@ -371,7 +371,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden
 	 * soll.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return true, wenn die Impfung nicht verabreicht werden soll, sonst false
 	 */
 	public boolean gettShallNotBeAdministerd() {
@@ -380,7 +380,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets the author.
-	 *
+	 * 
 	 * @param author
 	 *            the new author
 	 */
@@ -398,7 +398,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets a comment text
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -419,7 +419,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets the consumable.
-	 *
+	 * 
 	 * @param consumable
 	 *            the new consumable
 	 */
@@ -430,7 +430,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets the dosage.
-	 *
+	 * 
 	 * @param doseQuantity
 	 *            the new dosage (use null, if not asked)
 	 */
@@ -458,7 +458,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets the Person, who performs the Immunization
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer (Convenience Author will be converted to a
 	 *            performer)
@@ -480,7 +480,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Sets the Person, who performs the Immunization
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer
 	 */
@@ -493,7 +493,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht
 	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param startOfPossibleAppliacne
 	 * <br>
 	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
@@ -523,7 +523,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden
 	 * soll.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param shallNotBeAdministerd
 	 *            <div class="de">true, wenn die Impfung nicht verabreicht
 	 *            werden soll, sonst false</div> <div class="fr"></div> <div

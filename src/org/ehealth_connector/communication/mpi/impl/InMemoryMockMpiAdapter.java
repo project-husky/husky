@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.util.HashMap;
@@ -187,7 +187,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 	 * @param obsoleteId
 	 *            the obsolete id
 	 * @return true, if successful
-	 * @see MpiAdapterInterface.mergePatient  
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(FhirPatient patient, String obsoleteId)
 	 */
 	@Override
 	public boolean mergePatient(FhirPatient patient, String obsoleteId) {
@@ -221,7 +221,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
 	/**
 	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.communication.mpi.FhirPatient,
-	 *      java.lang.String, java.lang.String)
+	 *      java.lang.String[], java.lang.String[])
 	 */
 	@Override
 	public String[] queryPatientId(FhirPatient patient,
@@ -257,7 +257,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface {
 
 	/**
 	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
-	 *      note: no demographic information is stored
 	 */
 	@Override
 	public boolean updatePatient(FhirPatient patient) {
