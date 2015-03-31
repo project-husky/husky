@@ -68,8 +68,8 @@ public class AllergyProblem {
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance()
 				.init();
-		mAllergyProblem.setEffectiveTime(DateUtil
-				.createUnknownLowHighTimeNullFlavor());
+		// mAllergyProblem.setEffectiveTime(DateUtil
+		// .createUnknownLowHighTimeNullFlavor());
 		setNotOccured(false);
 		setCode(allergy);
 		setId(null);
