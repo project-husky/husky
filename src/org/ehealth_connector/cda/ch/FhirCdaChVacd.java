@@ -32,7 +32,6 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
-import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.CodedResults;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
@@ -1145,16 +1144,17 @@ public class FhirCdaChVacd {
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
 				.getStatusElement().getValueAsEnum());
 
-//		// Create the AllergyProblemConcern
-//		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
-//				problemEntry, problemStatusCode);
-//
-//		// Date
-//		retVal.setStartDate(fhirCondition.getDateAsserted());
+		// // Create the AllergyProblemConcern
+		// retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
+		// problemEntry, problemStatusCode);
+		//
+		// // Date
+		// retVal.setStartDate(fhirCondition.getDateAsserted());
 
-		retVal = new org.ehealth_connector.cda.AllergyConcern(concern, fhirCondition.getDateAsserted(), null,
-		problemEntry, problemStatusCode);
-		
+		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
+				fhirCondition.getDateAsserted(), null, problemEntry,
+				problemStatusCode);
+
 		return retVal;
 
 	}
@@ -1341,6 +1341,8 @@ public class FhirCdaChVacd {
 				Reason reason = new Reason(new Code(
 						removeURIPrefix(fhirCode.getSystem()),
 						fhirCode.getCode(), fhirCode.getDisplay()));
+				// set Text not yet implemented
+				// retVal.setText(fhirObs.getComments());
 				retVal.addReason(reason);
 			}
 
@@ -1679,7 +1681,7 @@ public class FhirCdaChVacd {
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
-		// TODO code
+		// currently only Problems supported
 		retVal.setCode(ProblemType.PROBLEM);
 
 		// Date
@@ -1704,7 +1706,7 @@ public class FhirCdaChVacd {
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
-		// TODO code
+		// currently only Drug intolerances supported
 		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
 
 		// Date
