@@ -76,8 +76,8 @@ public class Code {
 	 */
 	public Code(CodeSystems codeSystem, String code) {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		setCodeSystem(codeSystem.getCodeSystemId());
-		setCode(code);
+		mCD.setCodeSystem(codeSystem.getCodeSystemId());
+		mCD.setCode(code);
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class Code {
 	 */
 	public Code(String oid, String code) {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		setCodeSystem(oid);
-		setCode(code);
+		mCD.setCodeSystem(oid);
+		mCD.setCode(code);
 	}
 
 	/**
@@ -206,23 +206,24 @@ public class Code {
 
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		if (mCD.getCodeSystem() != null) {
-			ce.setCodeSystem(mCD.getCodeSystem());
+		CD mCD2 = EcoreUtil.copy(mCD);
+		if (mCD2.getCodeSystem() != null) {
+			ce.setCodeSystem(mCD2.getCodeSystem());
 		}
-		if (mCD.getCode() != null) {
-			ce.setCode(mCD.getCode());
+		if (mCD2.getCode() != null) {
+			ce.setCode(mCD2.getCode());
 		}
-		if (mCD.getCodeSystemName() != null) {
-			ce.setCodeSystemName(mCD.getCodeSystemName());
+		if (mCD2.getCodeSystemName() != null) {
+			ce.setCodeSystemName(mCD2.getCodeSystemName());
 		}
-		if (mCD.getDisplayName() != null) {
-			ce.setDisplayName(mCD.getDisplayName());
+		if (mCD2.getDisplayName() != null) {
+			ce.setDisplayName(mCD2.getDisplayName());
 		}
-		if (mCD.getCodeSystemVersion() != null) {
-			ce.setCodeSystemVersion(mCD.getCodeSystemVersion());
+		if (mCD2.getCodeSystemVersion() != null) {
+			ce.setCodeSystemVersion(mCD2.getCodeSystemVersion());
 		}
-		if (mCD.getNullFlavor() != null) {
-			ce.setNullFlavor(mCD.getNullFlavor());
+		if (mCD2.isNullFlavorDefined()) {
+			ce.setNullFlavor(mCD2.getNullFlavor());
 		}
 		return ce;
 	}
