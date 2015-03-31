@@ -70,6 +70,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -1138,20 +1139,16 @@ public class CdaChVacd extends CdaCh {
 						.getAdministrativeGenderCode());
 				// Adress
 				AD ad = DatatypesFactory.eINSTANCE.createAD();
-				if (sourcePatientRole.getAddrs().size() > 0) {
-					if (sourcePatientRole.getAddrs().get(0).getPostalCodes()
-							.size() > 0) {
-						if (sourcePatientRole.getAddrs().get(0)
-								.getPostalCodes().get(0).getText() != null) {
-							ad.addPostalCode(sourcePatientRole.getAddrs()
-									.get(0).getPostalCodes().get(0).getText());
-							ad.getUses().addAll(
-									sourcePatientRole.getAddrs().get(0)
-											.getUses());
+				for (AD sourceAd : sourcePatientRole.getAddrs()) {
+					for (ADXP adxp : sourceAd.getPostalCodes()) {
+						if (adxp.getText() != null) {
+							ad.addPostalCode(adxp.getText());
+							ad.getUses().addAll(ad.getUses());
 						}
 					}
+					destPatientRole.getAddrs().add(ad);
 				}
-				destPatientRole.getAddrs().add(ad);
+
 				// ID MSK
 				II ii = DatatypesFactory.eINSTANCE.createII();
 				ii.setNullFlavor(NullFlavor.MSK);
@@ -1163,7 +1160,6 @@ public class CdaChVacd extends CdaCh {
 		getDoc().getRecordTargets().clear();
 		getDoc().getRecordTargets().add(destRecordTarget);
 	}
-
 	/**
 	 * Setzt das MDHT-VACD-Objekt.
 	 * 
