@@ -95,9 +95,9 @@ import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
 
 /**
- * FhirCdaChVacd supports the creation of a CDA-CH-CH document
- * from HL7 FHIR bundle resources. The content of these resources is not
- * currently documented. These resources may be created by the class
+ * FhirCdaChVacd supports the creation of a CDA-CH-CH document from HL7 FHIR
+ * bundle resources. The content of these resources is not currently documented.
+ * These resources may be created by the class
  * org.ehealth_connector.demo.cda.VACDResources. This is currently the one any
  * only way to create valid FHIR bundle resources for CDA-CH-VACD. You may edit
  * these FHIR resources in a text editor in order to change the payload of the
@@ -1477,14 +1477,9 @@ public class FhirCdaChVacd {
 		if (fhirObservation.getValue() instanceof QuantityDt) {
 			// type PQ
 			QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
-			// TODO Axel: fix Ucum unit g/L
-			// retVal.addValue(new Value(fhirQuantity.getValue().toString(),
-			// Ucum
-			// .valueOf(fhirQuantity.getUnits())));
+			retVal.addValue(new Value(fhirQuantity.getValue().toString(), Ucum
+					.getEnum(fhirQuantity.getUnits())));
 
-			// TODO workaround
-			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
-					Ucum.GramsPerLiter_Mass_Concentration_Units));
 		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
 			// type CD
 			CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation
