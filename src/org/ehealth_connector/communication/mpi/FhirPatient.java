@@ -527,7 +527,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * converts the mdht AD to the fhir address
 	 * 
 	 * @param address
-	 * @return
+	 * @return fhir address
 	 */
 	@SuppressWarnings("incomplete-switch")
 	private AddressDt convertAddress(AD address) {
@@ -582,7 +582,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * converts the fhir address to the convenience address
 	 * 
 	 * @param address
-	 * @return
+	 * @return fhir address
 	 */
 	@SuppressWarnings("incomplete-switch")
 	private Address convertAddress(AddressDt addressDt) {
