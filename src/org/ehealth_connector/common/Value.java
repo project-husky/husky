@@ -175,10 +175,10 @@ public class Value {
 		RTO rto = DatatypesFactory.eINSTANCE.createRTO();
 
 		PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
-		pq1.setUnit(ucumUnit.name());
+		pq1.setUnit(ucumUnit.getCodeValue());
 		pq1.setValue(numerator);
 		PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
-		pq2.setUnit(ucumUnit.name());
+		pq2.setUnit(ucumUnit.getCodeValue());
 		pq2.setValue(denominator);
 
 		rto.setNumerator(pq1);
@@ -321,7 +321,7 @@ public class Value {
 
 	private void setUcumUnit(Ucum unit) {
 		PQ pq = (PQ) mValue;
-		pq.setUnit(unit.toString());
+		pq.setUnit(unit.getCodeValue());
 	}
 
 }

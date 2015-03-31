@@ -1484,7 +1484,7 @@ public class FhirCdaChVacd {
 
 			// TODO workaround
 			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
-					Ucum.GramsPerLiter));
+					Ucum.GramsPerLiter_Mass_Concentration_Units));
 		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
 			// type CD
 			CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation

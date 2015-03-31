@@ -1,1626 +1,2311 @@
 package org.ehealth_connector.cda.enums;
 
-/**
- * UCUM Einheiten AHGEquivalentsPerMilliLiter (AHGEquivalentsPerMilliLiter
- * [Substance Concentration Units];AHG eq/mL), BillionPerLiter (BillionPerLiter
- * [Number Concentration Units];10^9/L), BillionsPerMicroLiter
- * (BillionsPerMicroLiter [Number Concentration Units];10^9/uL),
- * BillionsPerMilliliter (BillionsPerMilliliter [Number Concentration
- * Units];10^9/mL), BoneCollagenEquivalentsPerMicroMoleCreatinine
- * (BoneCollagenEquivalentsPerMicroMoleCreatinine [Substance Ratio Or Substance
- * Fraction Units];BCE/umol Cre), BoneCollagenEquivalentsPerMilliMoleCreatinine
- * (BoneCollagenEquivalentsPerMilliMoleCreatinine [Substance Ratio Or Substance
- * Fraction Units];BCE/mmol Cre), CellsPerMicroLiter (CellsPerMicroLiter [Number
- * Concentration Units];cells/uL), CentiGram (CentiGram [SI Mass Units];cg),
- * CentiLiter (CentiLiter [SI Volume Units];cL), CentiMeter (CentiMeter [SI
- * Length Units];cm), ColonyFormingUnitsPerMilliLiter
- * (ColonyFormingUnitsPerMilliLiter [Number Concentration Units];cfu/mL),
- * ComplementCh50UnitsPerMilliLiter (ComplementCh50UnitsPerMilliLiter [Arbitrary
- * Concentration Units];CH50 U/mL), CopiesPerMilliLiter (CopiesPerMilliLiter
- * [Number Concentration Units];Copies/mL), CubicInch (CubicInch [English Volume
- * Units];in^3), Cup (Cup [English Volume Units];Cup), Day (Day [Time Units];d),
- * DeciGram (DeciGram [SI Mass Units];dg), DeciLiter (DeciLiter [SI Volume
- * Units];dL), DeciMeter (DeciMeter [SI Length Units];dm), DegreesCelsius
- * (DegreesCelsius [Temperature Units];C), DegreesFahrenheit (DegreesFahrenheit
- * [Temperature Units];F), DegreesKelvin (DegreesKelvin [Temperature Units];K),
- * DegreesOfArc (DegreesOfArc [Plane Angle Units];Deg), Dram (Dram [English Mass
- * Units];dr), EhrlichUnitsPer100Gram (EhrlichUnitsPer100Gram [Arbitrary
- * Concentration Content Units];EU/100 g), EhrlichUnitsPerDeciLiter
- * (EhrlichUnitsPerDeciLiter [Arbitrary Concentration Units];EU/dL),
- * ElisaUnitsPerMilliLiter (ElisaUnitsPerMilliLiter [Arbitrary Concentration
- * Units];Elisa U/mL), Equivalent (Equivalent [Substance Units];eq),
- * EquivalentsPerLiter (EquivalentsPerLiter [Substance Concentration
- * Units];eg/L), EquivalentsPerMicroMole (EquivalentsPerMicroMole [Substance
- * Ratio Or Substance Fraction Units];eq/umol), EquivalentsPerMilliLiter
- * (EquivalentsPerMilliLiter [Substance Concentration Units];eq/mL),
- * EquivalentsPerMilliMole (EquivalentsPerMilliMole [Substance Ratio Or
- * Substance Fraction Units];eq/mmol), Fathom (Fathom [English Length
- * Units];fathom), Feet (Feet [English Length Units];ft), FemtoGram (FemtoGram
- * [SI Mass Units];fg), FemtoLiter (FemtoLiter;fL), FemtoMeter (FemtoMeter [SI
- * Length Units];fm), Femtomole (Femtomole [Substance Units];fmol),
- * FemtoMolesPerGram (FemtoMolesPerGram [Substance Content Units];fmol/gm),
- * FemtoMolesPerMilliGram (FemtoMolesPerMilliGram [Substance Content
- * Units];fmol/mg), FemtoMolesPerMilliLiter (FemtoMolesPerMilliLiter [Substance
- * Concentration Units];fmol/mL), FluidDram (FluidDram [English Volume Units];fl
- * dr), FluidOunce (FluidOunce [English Volume Units];fl oz), French (French
- * [English Length Units];French Unit), Gallon (Gallon [English Volume
- * Units];gal), Grain (Grain [English Mass Units];gr), Gram (Gram [SI Mass
- * Units];g), GramMeter (GramMeter [Massive Distance Units];Gram Meter),
- * GramMeterPerHeartbeat (GramMeterPerHeartbeat [Massive Distance Units];Gram
- * Meter/Heartbeat), GramMeterPerHeartbeatPerSquareMeter
- * (GramMeterPerHeartbeatPerSquareMeter [Lineic Mass Units];Gram
- * Meter/Heartbeat/m^2), GramsPer100Gram (GramsPer100Gram [Mass Ratio Or Mass
- * Fraction Or Mass Content Units];g/100g), GramsPerDeciLiter
- * (GramsPerDeciLiter;g/dL), GramsPerGram (GramsPerGram [Mass Ratio Or Mass
- * Fraction Or Mass Content Units];g/g), GramsPerGramCreatinine
- * (GramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];g/g Cre), GramsPerKiloGram (GramsPerKiloGram [Mass Ratio Or Mass
- * Fraction Or Mass Content Units];g/kg), GramsPerLiter (GramsPerLiter;g/L),
- * GramsPerMilliLiter (GramsPerMilliLiter;g/mL), GramsPerSquareMeter
- * (GramsPerSquareMeter [Areic Mass Units];g/m^2), GramsPerTotalWeight
- * (GramsPerTotalWeight [SI Mass Units];g/Total Weight), HectoLiter (HectoLiter
- * [SI Volume Units];hL), Hour (Hour [Time Units];h),
- * IgAPhospholipidUnitsPerMilliLiter (IgAPhospholipidUnitsPerMilliLiter
- * [Arbitrary Concentration Units];IgA Phospholipid U/mL),
- * IgGPhospholipidUnitsPerMilliLiter (IgGPhospholipidUnitsPerMilliLiter
- * [Arbitrary Concentration Units];IgG Phospholipid U/mL),
- * IgMPhospholipidUnitsPerMilliLiter (IgMPhospholipidUnitsPerMilliLiter
- * [Arbitrary Concentration Units];IgM Phospholipid U/mL), Inch (Inch [English
- * Length Units];in), InternationalUnit (InternationalUnit [Arbitrary
- * Units];IU), InternationalUnitsPerDeciLiter (InternationalUnitsPerDeciLiter
- * [Arbitrary Concentration Units];IU/dL), InternationalUnitsPerGram
- * (InternationalUnitsPerGram [Arbitrary Concentration Content Units];IU/g),
- * InternationalUnitsPerGramHemoglobin (InternationalUnitsPerGramHemoglobin
- * [Arbitrary Concentration Content Units];IU/g Hgb),
- * InternationalUnitsPerKilogram (InternationalUnitsPerKilogram [Arbitrary
- * Concentration Content Units];IU/kg), InternationalUnitsPerLiter
- * (InternationalUnitsPerLiter;IU/L), InternationalUnitsPerMilliLiter
- * (InternationalUnitsPerMilliLiter [Arbitrary Concentration Units];IU/mL),
- * KatalPerKilogram (KatalPerKilogram [Substance Rate Content Units];kat/kg),
- * KelvinPerWatt (KelvinPerWatt [Thermal Resistance Units];K/Watt),
- * KiloCaloriesPerOunce (KiloCaloriesPerOunce [Energy Content Units];kCal/oz),
- * KiloGram (KiloGram [SI Mass Units];kg), KiloGramsPerCubicMeter
- * (KiloGramsPerCubicMeter [Mass Concentration Units];kg/m^3), KiloGramsPerLiter
- * (KiloGramsPerLiter [Mass Concentration Units];kg/L), KiloGramsPerMole
- * (KiloGramsPerMole [Molar Mass Units];kg/mol), KiloGramsPerSquareMeter
- * (KiloGramsPerSquareMeter [Areic Mass Units];kg/m^2),
- * KiloInternationalUnitsPerMilliLiter (KiloInternationalUnitsPerMilliLiter
- * [Arbitrary Concentration Units];kIU/mL), KiloLiter (KiloLiter [SI Volume
- * Units];kL), KiloMeter (KiloMeter [SI Length Units];km), KiloPascal
- * (KiloPascal;kPa), KiloSecond (KiloSecond [Time Units];ks), KiloUnitsPerGram
- * (KiloUnitsPerGram [Substance Rate Content Units];kU/g), Liter (Liter [SI
- * Volume Units];L), LitersPerKilogram (LitersPerKilogram [Volume Content
- * Units];L/kg), LiterSquareSecondPerSecond (LiterSquareSecondPerSecond [Volume
- * Duration Units];L s^2/s), Log10 (Log10 [Unity];log 10), Megasecond
- * (Megasecond [Time Units];Ms), Meter (Meter [SI Length Units];m), MetricTon
- * (MetricTon [SI Mass Units];Metric Ton), MicroEquivalent (MicroEquivalent
- * [Substance Units];ueq), MicroEquivalentsPerLiter (MicroEquivalentsPerLiter
- * [Substance Concentration Units];ueg/L), MicroEquivalentsPerMilliLiter
- * (MicroEquivalentsPerMilliLiter [Substance Concentration Units];ueq/mL),
- * MicroGram (MicroGram [SI Mass Units];ug), MicroGramPer100Gram
- * (MicroGramPer100Gram [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];ug/100 g), MicroGramPerGramCreatinine (MicroGramPerGramCreatinine
- * [Mass Ratio Or Mass Fraction Or Mass Content Units];ug/g Cre),
- * MicroGramPerGramDryWeight (MicroGramPerGramDryWeight [Mass Ratio Or Mass
- * Fraction Or Mass Content Units];ug/g Dry Weight), MicroGramsPerDeciLiter
- * (MicroGramsPerDeciLiter;ug/dL), MicroGramsPerDeciLiterRedBloodCells
- * (MicroGramsPerDeciLiterRedBloodCells [Mass Concentration Units];ug/dL RBCs),
- * MicroGramsPerGram (MicroGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
- * Content Units];ug/g), MicroGramsPerGramHemoglobin
- * (MicroGramsPerGramHemoglobin [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];ug/g Hgb), MicroGramsPerKiloGram (MicroGramsPerKiloGram [Mass Ratio Or
- * Mass Fraction Or Mass Content Units];ug/kg), MicroGramsPerLiter
- * (MicroGramsPerLiter;ug/L), MicroGramsPerMilliGram (MicroGramsPerMilliGram
- * [Mass Ratio Or Mass Fraction Or Mass Content Units];ug/mg),
- * MicroGramsPerMilliGramCreatinine (MicroGramsPerMilliGramCreatinine [Mass
- * Ratio Or Mass Fraction Or Mass Content Units];ug/mg Cre),
- * MicroGramsPerMilliLiter (MicroGramsPerMilliLiter;ug/mL),
- * MicroGramsPerNanoGram (MicroGramsPerNanoGram [Mass Ratio Or Mass Fraction Or
- * Mass Content Units];ug/ng), MicroGramsPerSpecimen (MicroGramsPerSpecimen [SI
- * Mass Units];ug/Spec), MicroGramsPerSquareMeter (MicroGramsPerSquareMeter
- * [Areic Mass Units];ug/m^2), MicroGramsPerTotalVolume
- * (MicroGramsPerTotalVolume [SI Mass Units];ug/Total Volume),
- * MicroInternationalUnit (MicroInternationalUnit [Arbitrary Units];uIU),
- * MicroInternationalUnitsPerMilliLiter
- * (MicroInternationalUnitsPerMilliLiter;uIU/mL), MicroLiter (MicroLiter [SI
- * Volume Units];uL), MicroMeter (MicroMeter [SI Length Units];um), MicroMole
- * (MicroMole [Substance Units];umol), MicroMolesPerDeciLiter
- * (MicroMolesPerDeciLiter [Substance Concentration Units];umol/dL),
- * MicroMolesPerGram (MicroMolesPerGram [Substance Content Units];umol/g),
- * MicroMolesPerGramCreatinine (MicroMolesPerGramCreatinine [Substance Content
- * Units];umol/g Cre), MicroMolesPerGramHemoglobin (MicroMolesPerGramHemoglobin
- * [Substance Content Units];umol/g Hgb), MicroMolesPerLiter
- * (MicroMolesPerLiter;umol/L), MicroMolesPerMilliGram (MicroMolesPerMilliGram
- * [Substance Content Units];umol/mg), MicroMolesPerMilliGramCreatinine
- * (MicroMolesPerMilliGramCreatinine [Substance Content Units];umol/mg Cre),
- * MicroMolesPerMilliLiter (MicroMolesPerMilliLiter [Substance Concentration
- * Units];umol/mL), MicroMolesPerMinutePerGram (MicroMolesPerMinutePerGram
- * [Substance Rate Content Units];umol/min/g), MicroMolesPerMole
- * (MicroMolesPerMole [Substance Ratio Or Substance Fraction Units];umol/mol),
- * MicroMolesPerMoleCreatinine (MicroMolesPerMoleCreatinine [Substance Ratio Or
- * Substance Fraction Units];umol/mol Cre), MicroSecond (MicroSecond [Time
- * Units];us), MilliEquivalent (MilliEquivalent [Substance Units];meq),
- * MilliEquivalentPerMilliLiter (MilliEquivalentPerMilliLiter [Substance
- * Concentration Units];meq/mL), MilliEquivalentsPerDeciLiter
- * (MilliEquivalentsPerDeciLiter [Substance Concentration Units];meg/dL),
- * MilliEquivalentsPerGram (MilliEquivalentsPerGram [Substance Content
- * Units];meq/g), MilliEquivalentsPerGramCreatinine
- * (MilliEquivalentsPerGramCreatinine [Substance Content Units];meq/g Cre),
- * MilliEquivalentsPerKiloGram (MilliEquivalentsPerKiloGram [Substance Content
- * Units];meq/kg), MilliEquivalentsPerLiter (MilliEquivalentsPerLiter;mEq/L),
- * MilliEquivalentsPerSpecimen (MilliEquivalentsPerSpecimen [Substance
- * Units];meq/Spec), MilliEquivalentsPerSquareMeter
- * (MilliEquivalentsPerSquareMeter [Areic Substance Units];meg/m^2), MilliGram
- * (MilliGram [SI Mass Units];mg), MilliGramPerGramCreatinine
- * (MilliGramPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];mg/g Cre), MilliGramPerTotalVolume (MilliGramPerTotalVolume [SI Mass
- * Units];mg/Total Volume), MilliGramsPerCubicMeter (MilliGramsPerCubicMeter
- * [Mass Concentration Units];mg/m^3), MilliGramsPerDeciLiter
- * (MilliGramsPerDeciLiter;mg/dL), MilliGramsPerGram (MilliGramsPerGram [Mass
- * Ratio Or Mass Fraction Or Mass Content Units];mg/g), MilliGramsPerKiloGram
- * (MilliGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];mg/kg), MilliGramsPerLiter (MilliGramsPerLiter [Mass Concentration
- * Units];mg/L), MilliGramsPerMilliGram (MilliGramsPerMilliGram [Mass Ratio Or
- * Mass Fraction Or Mass Content Units];mg/mg), MilligramsPerMilligramCreatinine
- * (MilligramsPerMilligramCreatinine [Mass Ratio Or Mass Fraction Or Mass
- * Content Units];mg/mg Cre), MilliGramsPerMilliLiter (MilliGramsPerMilliLiter
- * [Mass Concentration Units];mg/mL), MilliGramsPerSquareMeter
- * (MilliGramsPerSquareMeter [Areic Mass Units];mg/m^2), MilliGramsPerVolume
- * (MilliGramsPerVolume [SI Mass Units];mg/Volume),
- * MilliGramsPhenylketonesPerDeciLiter (MilliGramsPhenylketonesPerDeciLiter
- * [Mass Concentration Units];mg Phe/dL), MilliInternationalUnitsPerLiter
- * (MilliInternationalUnitsPerLiter [Arbitrary Concentration Units];mIU/L),
- * MilliInternationalUnitsPerMilliLiter
- * (MilliInternationalUnitsPerMilliLiter;mIU/mL), MilliLiter (MilliLiter [SI
- * Volume Units];mL), MilliLitersPerDeciLiter (MilliLitersPerDeciLiter [Volume
- * Fraction Units];cc/dL), MilliLitersPerHeartbeat (MilliLitersPerHeartbeat [SI
- * Volume Units];mL/heart beat), MilliLitersPerKiloGram (MilliLitersPerKiloGram
- * [Volume Content Units];mL/kg), MilliMeter (MilliMeter [SI Length Units];mm),
- * MilliMetersOfMercury (MilliMetersOfMercury;mm Hg), MilliMole (MilliMole
- * [Substance Units];mmol), MilliMolesPerDeciLiter (MilliMolesPerDeciLiter
- * [Substance Concentration Units];mmol/dL), MilliMolesPerGram
- * (MilliMolesPerGram [Substance Content Units];mmol/g), MilliMolesPerKiloGram
- * (MilliMolesPerKiloGram;mmol/kg), MilliMolesPerLiter
- * (MilliMolesPerLiter;mmol/L), MilliMolesPerMole (MilliMolesPerMole [Substance
- * Ratio Or Substance Fraction Units];mmol/mol), MilliMolesPerMoleCreatinine
- * (MilliMolesPerMoleCreatinine [Substance Ratio Or Substance Fraction
- * Units];mmol/mol Cre), MilliMolesPerSquareMeter (MilliMolesPerSquareMeter
- * [Areic Substance Units];mmol/m^2), MilliMolesPerTotalVolume
- * (MilliMolesPerTotalVolume [Substance Units];mmol/Total Volume), Million
- * (Million [Unity];x10^6), MillionEquivalentsPerMilliLiter
- * (MillionEquivalentsPerMilliLiter [Substance Concentration Units];10^6 eq/mL),
- * MillionInternationalUnit (MillionInternationalUnit [Arbitrary Units];10^6
- * IU), MillionPerLiter (MillionPerLiter [Number Concentration Units];10^6/L),
- * MillionPerMilliLiter (MillionPerMilliLiter [Number Concentration
- * Units];10^6/mL), MillionPerSpecimen (MillionPerSpecimen [Unity];x10^6/spec),
- * MillionsPerMicroLiter (MillionsPerMicroLiter;M/uL, x10^6/mm^3), MilliOsmole
- * (MilliOsmole [Substance Units];mosm), MilliOsmolesPerKiloGram
- * (MilliOsmolesPerKiloGram;mOsm/kg), MilliOsmolesPerLiter (MilliOsmolesPerLiter
- * [Substance Concentration Units];mOsm/L), MilliSecond (MilliSecond [Time
- * Units];ms), MilliUnitsPerGram (MilliUnitsPerGram [Substance Rate Content
- * Units];mU/g), MilliUnitsPerGramHemoglobin (MilliUnitsPerGramHemoglobin
- * [Substance Rate Content Units];mU/g Hgb), MilliUnitsPerMilligram
- * (MilliUnitsPerMilligram [Substance Rate Content Units];mU/mg),
- * MilliUnitsPerMilliGramCreatinine (MilliUnitsPerMilliGramCreatinine [Substance
- * Rate Content Units];mU/mg Cre), Minute (Minute [Time Units];min), Mole (Mole
- * [Substance Units];mol), MolesPerCubicMeter (MolesPerCubicMeter [Substance
- * Concentration Units];mol/m^3), MolesPerKiloGram (MolesPerKiloGram [Substance
- * Content Units];mol/kg), MolesPerLiter (MolesPerLiter [Substance Concentration
- * Units];mol/L), MolesPerMilliLiter (MolesPerMilliLiter [Substance
- * Concentration Units];mol/mL), Month (Month [Time Units];Mo), NanoGram
- * (NanoGram [SI Mass Units];ng), NanoGramsPerDeciLiter (NanoGramsPerDeciLiter
- * [Mass Concentration Units];ng/dL), NanoGramsPerGram (NanoGramsPerGram [Mass
- * Ratio Or Mass Fraction Or Mass Content Units];ng/g),
- * NanoGramsPerGramCreatinine (NanoGramsPerGramCreatinine [Mass Ratio Or Mass
- * Fraction Or Mass Content Units];ng/g Cre), NanoGramsPerKiloGram
- * (NanoGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];ng/kg), NanoGramsPerLiter (NanoGramsPerLiter [Mass Concentration
- * Units];ng/L), NanoGramsPerMilliGram (NanoGramsPerMilliGram [Mass Ratio Or
- * Mass Fraction Or Mass Content Units];ng/mg), NanoGramsPerMilliGramProtein
- * (NanoGramsPerMilliGramProtein [Mass Ratio Or Mass Fraction Or Mass Content
- * Units];ng/mg Prot), NanoGramsPerMilliLiter (NanoGramsPerMilliLiter;ng/mL),
- * NanoGramsPerMilliLiterRedBloodCells (NanoGramsPerMilliLiterRedBloodCells
- * [Mass Concentration Units];ng/mL RBCs), NanoGramsPerSquareMeter
- * (NanoGramsPerSquareMeter [Areic Mass Units];ng/m^2), NanoLiter (NanoLiter [SI
- * Volume Units];nL), NanoMeter (NanoMeter [SI Length Units];nm), NanoMole
- * (NanoMole [Substance Units];nmol), NanoMolesPerDeciLiter
- * (NanoMolesPerDeciLiter [Substance Concentration Units];nmol/dL),
- * NanoMolesPerGram (NanoMolesPerGram [Substance Content Units];nmol/g),
- * NanoMolesPerGramCreatinine (NanoMolesPerGramCreatinine [Substance Content
- * Units];nmol/g Cre), NanoMolesPerLiter (NanoMolesPerLiter;nmol/L),
- * NanoMolesPerMilliGram (NanoMolesPerMilliGram [Substance Content
- * Units];nmol/mg), NanoMolesPerMilliLiter (NanoMolesPerMilliLiter [Substance
- * Concentration Units];nmol/mL), NanoMolesPerMilliMole (NanoMolesPerMilliMole
- * [Substance Ratio Or Substance Fraction Units];nmol/mmol),
- * NanoMolesPerMilliMoleCreatinine (NanoMolesPerMilliMoleCreatinine [Substance
- * Ratio Or Substance Fraction Units];nmol/mmol Cre), NanoMolesPerMole
- * (NanoMolesPerMole [Substance Ratio Or Substance Fraction Units];nmol/mol),
- * NanoSecond (NanoSecond [Time Units];ns), NauticalMile (NauticalMile [English
- * Length Units];n mile), OneHundredThousand (OneHundredThousand [Unity];x10^5),
- * OsmolesPerKiloGram (OsmolesPerKiloGram [Substance Content Units];Osm/kg),
- * OsmolesPerLiter (OsmolesPerLiter [Substance Concentration Units];Osm/L),
- * Ounce (Ounce [English Mass Units];oz), Per100 (Per100 [Entitic Number
- * Units];/100), Per100Spermatozoa (Per100Spermatozoa [Entitic Number
- * Units];/100 Sperm), Per100WBC (Per100WBC [Entitic Number Units];/100 WBCs),
- * PerArbitraryUnit (PerArbitraryUnit [Arbitrary Number Units];/Arbitrary Unit),
- * PerBillion (PerBillion [Number Fraction Units];/10^9), Percent (Percent;%),
- * Percent0to3Hours (Percent0to3Hours [General Fraction Unit];% 0-3 h),
- * PercentAbnormal (PercentAbnormal [Number Fraction Units];% Abnormal),
- * PercentActivity (PercentActivity [Catalytic Fraction Or Arbitrary Fraction
- * Units];% Activity), PercentBasalActivity (PercentBasalActivity [Catalytic
- * Fraction Or Arbitrary Fraction Units];% Basal Activity), PercentBinding
- * (PercentBinding [Mass Or Substance Fraction Units];% Binding),
- * PercentBlockade (PercentBlockade [Number Fraction Units];% Blockade),
- * PercentBound (PercentBound [Mass Or Substance Fraction Units];% Bound),
- * PercentCarboxyhemoglobin (PercentCarboxyhemoglobin [Mass Or Substance
- * Fraction Units];% CO Hgb), PercentEosinophilsSeen (PercentEosinophilsSeen
- * [Number Fraction Units];% EOS Seen), PercentExcretion (PercentExcretion [Mass
- * Or Substance Rate Fraction Units];% Excretion), PercentFetalErythrocytes
- * (PercentFetalErythrocytes [Number Fraction Units];% Fetal RBC),
- * PercentHemoglobin (PercentHemoglobin [Mass Or Substance Fraction Units];%
- * Hgb), PercentHemoglobinA1C (PercentHemoglobinA1C [Mass Or Substance Fraction
- * Units];% Hgb A1C), PercentHemoglobinSaturation (PercentHemoglobinSaturation
- * [Mass Or Substance Fraction Units];% Hgb SAT), PercentHemolysis
- * (PercentHemolysis [Number Fraction Units];% Hemolysis), PercentInhibition
- * (PercentInhibition [Catalytic Fraction Or Arbitrary Fraction Units];%
- * Inhibition), PercentNormal (PercentNormal [Number Fraction Units];% Normal),
- * PercentNormalPooledPlasma (PercentNormalPooledPlasma [Catalytic Fraction Or
- * Arbitrary Fraction Units];% Normal Pooled Plasma), PercentofBacteria
- * (PercentofBacteria [Number Fraction Units];% Bacteria), PercentOfLymphocytes
- * (PercentOfLymphocytes [Number Fraction Units];% Lymphs), PercentOfWBCs
- * (PercentOfWBCs [Number Fraction Units];% WBCs), PercentOxygen (PercentOxygen
- * [Volume Fraction Units];% Oxygen), PercentPer100WBC (PercentPer100WBC [Number
- * Fraction Units];% per 100 WBC), PercentPositive (PercentPositive [Number
- * Fraction Units];% Positive), PercentSpermMotility (PercentSpermMotility
- * [Number Fraction Units];% Sperm Motility), PercentTotal (PercentTotal
- * [General Fraction Unit];% of Total), PercentTotalProtein (PercentTotalProtein
- * [Mass Or Substance Fraction Units];% Total Protein), PercentUptake
- * (PercentUptake [Mass Or Substance Rate Fraction Units];% Uptake),
- * PerDeciLiter (PerDeciLiter [Number Concentration Units];/dL), PerEntity
- * (PerEntity [Entitic Number Units];/Entity), PerGram (PerGram [Number Content
- * Units];/g), PerGramCreatinine (PerGramCreatinine [Number Content Units];/g
- * Cre), PerGramHemoglobin (PerGramHemoglobin [Number Content Units];/g Hgb),
- * PerGramTotalNitrogen (PerGramTotalNitrogen [Number Content Units];/g Total
- * Nitrogen), PerGramTotalProtein (PerGramTotalProtein [Number Content Units];/g
- * Total Protein), PerGramWetTissue (PerGramWetTissue [Number Content Units];/g
- * Wet Tissue), PerKiloGram (PerKiloGram [Number Content Units];/kg),
- * PerKiloGramBodyWeight (PerKiloGramBodyWeight [Number Content Units];/kg Body
- * Weight), PerLiter (PerLiter [Number Concentration Units];/L), PerMicroLiter
- * (PerMicroLiter;/uL), PerMilliGram (PerMilliGram [Number Content Units];mg),
- * PerMilliLiter (PerMilliLiter [Number Concentration Units];/mL), PerMillion
- * (PerMillion [Number Fraction Units];/10^6), PerSquareMeter (PerSquareMeter
- * [Areic Number Units];/m^2), PerTenGiga (PerTenGiga [Number Fraction
- * Units];/10^10), PerTotalCount (PerTotalCount [Unity];/Total), PerTrillion
- * (PerTrillion [Number Fraction Units];/10^12), PerTrillionRedBloodCells
- * (PerTrillionRedBloodCells [Entitic Number Units];/10^12 RBCs), pH (pH [pH
- * Units];pH), PicoGram (PicoGram [SI Mass Units];pg), PicoGrams (PicoGrams;pg),
- * PicoGramsPerDeciLiter (PicoGramsPerDeciLiter [Mass Concentration
- * Units];pg/dL), PicoGramsPerLiter (PicoGramsPerLiter [Mass Concentration
- * Units];pg/L), PicoGramsPerMilliLiter (PicoGramsPerMilliLiter;pg/mL),
- * PicoGramsPerMilliMeter (PicoGramsPerMilliMeter [Lineic Mass Units];pg/mm),
- * PicoLiter (PicoLiter [SI Volume Units];pL), PicoMeter (PicoMeter [SI Length
- * Units];pm), PicoMole (PicoMole [Substance Units];pmol), PicoMolesPerDeciLiter
- * (PicoMolesPerDeciLiter [Substance Concentration Units];pmol/dL),
- * PicoMolesPerLiter (PicoMolesPerLiter;pmol/L), PicoMolesPerMicroMole
- * (PicoMolesPerMicroMole [Substance Ratio Or Substance Fraction
- * Units];pmol/umol), PicoMolesPerMilliLiter (PicoMolesPerMilliLiter [Substance
- * Concentration Units];pmol/mL), PicoSecond (PicoSecond [Time Units];ps), Pint
- * (Pint [English Volume Units];pt), Pound (Pound [English Mass Units];lb),
- * Quart (Quart [English Volume Units];qt), RedBloodCellsPerMicroLiter
- * (RedBloodCellsPerMicroLiter [Number Concentration Units];RBC/mm^3),
- * RelativePercent (RelativePercent [General Fraction Unit];Relative %), Second
- * (Second [Time Units];sec), SpermatozoaPerMilliLiter (SpermatozoaPerMilliLiter
- * [Number Concentration Units];Sperm/mL), SquareCentiMeter (SquareCentiMeter
- * [SI Area Units];cm^2), SquareFeet (SquareFeet [English Area Units];ft^2),
- * SquareInch (SquareInch [English Area Units];in^2), SquareMeter (SquareMeter
- * [SI Area Units];m^2), SquareMilliMeter (SquareMilliMeter [SI Area
- * Units];mm^2), SquareYard (SquareYard [English Area Units];yd^2), StatuteMile
- * (StatuteMile [English Length Units];mi), TenToEighth (TenToEighth
- * [Unity];x10^8), Thousand (Thousand [Unity];x10^3),
- * ThousandCopiesPerMilliLiter (ThousandCopiesPerMilliLiter [Number
- * Concentration Units];10^3 copies/mL), ThousandPerLiter (ThousandPerLiter
- * [Number Concentration Units];10^3/L), ThousandPerMilliLiter
- * (ThousandPerMilliLiter [Number Concentration Units];10^3/mL),
- * ThousandRedBloodCells (ThousandRedBloodCells [Unity];x10^3 RBCs),
- * ThousandsPerMicroLiter (ThousandsPerMicroLiter;K/uL, x10^3/mm^3), Ton (Ton
- * [English Mass Units];Ton), TrillionPerLiter (TrillionPerLiter [Number
- * Concentration Units];10^12/L), TroyOunce (TroyOunce [English Mass Units];tr
- * oz), UnitsPerGram (UnitsPerGram [Substance Rate Content Units];U/g),
- * UnitsPerGramCreatinine (UnitsPerGramCreatinine [Substance Rate Content
- * Units];U/g Cre), UnitsPerGramHemoglobin (UnitsPerGramHemoglobin [Substance
- * Rate Content Units];U/g Hgb), UnitsPerLiter (UnitsPerLiter;U/L),
- * VolumePercent (VolumePercent [Volume Fraction Units];Volume %), Week (Week
- * [Time Units];wk), Yard (Yard [English Length Units];yd), Year (Year [Time
- * Units];yr).
+import java.util.Arrays;
+
+import org.ehealth_connector.common.Code;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+
+/*
+ *<div class="de">UCUM - Unified Code for Units of Measure</div>
+ *<div class="fr">UCUM - Unified Code for Units of Measure</div>
  */
 public enum Ucum {
 
 	/**
-	 * The AHG equivalents per milli liter.
+	 * <div class="en">Descriptive Name</div>
 	 */
-	AHGEquivalentsPerMilliLiter,
+	Descriptive_Name("Code", "Descriptive Name"),
 	/**
-	 * The Billion per liter.
+	 * <div class="en">Percent [Most Common Healthcare Units]</div>
 	 */
-	BillionPerLiter,
+	Percent_Most_Common_Healthcare_Units("%",
+			"Percent [Most Common Healthcare Units]"),
 	/**
-	 * The Billions per micro liter.
+	 * <div class="en">PerMicroLiter [Most Common Healthcare Units]</div>
 	 */
-	BillionsPerMicroLiter,
+	PerMicroLiter_Most_Common_Healthcare_Units("/uL",
+			"PerMicroLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Billions per milliliter.
+	 * <div class="en">InternationalUnitsPerLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	BillionsPerMilliliter,
+	InternationalUnitsPerLiter_Most_Common_Healthcare_Units("[iU]/L",
+			"InternationalUnitsPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Bone collagen equivalents per micro mole creatinine.
+	 * <div class="en">ThousandsPerMicroLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	BoneCollagenEquivalentsPerMicroMoleCreatinine,
+	ThousandsPerMicroLiter_Most_Common_Healthcare_Units("10*3/uL",
+			"ThousandsPerMicroLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Bone collagen equivalents per milli mole creatinine.
+	 * <div class="en">MillionsPerMicroLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	BoneCollagenEquivalentsPerMilliMoleCreatinine,
+	MillionsPerMicroLiter_Most_Common_Healthcare_Units("10*6/uL",
+			"MillionsPerMicroLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Cells per micro liter.
+	 * <div class="en">FemtoLiter [Most Common Healthcare Units]</div>
 	 */
-	CellsPerMicroLiter,
+	FemtoLiter_Most_Common_Healthcare_Units("fL",
+			"FemtoLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Centi gram.
+	 * <div class="en">GramsPerDeciLiter [Most Common Healthcare Units]</div>
 	 */
-	CentiGram,
+	GramsPerDeciLiter_Most_Common_Healthcare_Units("g/dL",
+			"GramsPerDeciLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Centi liter.
+	 * <div class="en">GramsPerLiter [Most Common Healthcare Units]</div>
 	 */
-	CentiLiter,
+	GramsPerLiter_Most_Common_Healthcare_Units("g/L",
+			"GramsPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Centi meter.
+	 * <div class="en">GramsPerMilliLiter [Most Common Healthcare Units]</div>
 	 */
-	CentiMeter,
+	GramsPerMilliLiter_Most_Common_Healthcare_Units("g/mL",
+			"GramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Colony forming units per milli liter.
+	 * <div class="en">KiloPascal [Most Common Healthcare Units]</div>
 	 */
-	ColonyFormingUnitsPerMilliLiter,
+	KiloPascal_Most_Common_Healthcare_Units("kPa",
+			"KiloPascal [Most Common Healthcare Units]"),
 	/**
-	 * The Complement ch50 units per milli liter.
+	 * <div class="en">MilliInternationalUnitsPerMilliLiter [Most Common
+	 * Healthcare Units]</div>
 	 */
-	ComplementCh50UnitsPerMilliLiter,
+	MilliInternationalUnitsPerMilliLiter_Most_Common_Healthcare_Units(
+			"m[iU]/mL",
+			"MilliInternationalUnitsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Copies per milli liter.
+	 * <div class="en">MilliEquivalentsPerLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	CopiesPerMilliLiter,
+	MilliEquivalentsPerLiter_Most_Common_Healthcare_Units("meq/L",
+			"MilliEquivalentsPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Cubic inch.
+	 * <div class="en">MilliGramsPerDeciLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	CubicInch,
+	MilliGramsPerDeciLiter_Most_Common_Healthcare_Units("mg/dL",
+			"MilliGramsPerDeciLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Cup.
+	 * <div class="en">MilliMetersOfMercury [Most Common Healthcare Units]</div>
 	 */
-	Cup,
+	MilliMetersOfMercury_Most_Common_Healthcare_Units("mm[Hg]",
+			"MilliMetersOfMercury [Most Common Healthcare Units]"),
 	/**
-	 * The Day.
+	 * <div class="en">MilliMolesPerKiloGram [Most Common Healthcare
+	 * Units]</div>
 	 */
-	Day,
+	MilliMolesPerKiloGram_Most_Common_Healthcare_Units("mmol/kg",
+			"MilliMolesPerKiloGram [Most Common Healthcare Units]"),
 	/**
-	 * The Deci gram.
+	 * <div class="en">MilliMolesPerLiter [Most Common Healthcare Units]</div>
 	 */
-	DeciGram,
+	MilliMolesPerLiter_Most_Common_Healthcare_Units("mmol/L",
+			"MilliMolesPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Deci liter.
+	 * <div class="en">MilliOsmolesPerKiloGram [Most Common Healthcare
+	 * Units]</div>
 	 */
-	DeciLiter,
+	MilliOsmolesPerKiloGram_Most_Common_Healthcare_Units("mosm/kg",
+			"MilliOsmolesPerKiloGram [Most Common Healthcare Units]"),
 	/**
-	 * The Deci meter.
+	 * <div class="en">NanoGramsPerMilliLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	DeciMeter,
+	NanoGramsPerMilliLiter_Most_Common_Healthcare_Units("ng/mL",
+			"NanoGramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Degrees celsius.
+	 * <div class="en">NanoMolesPerLiter [Most Common Healthcare Units]</div>
 	 */
-	DegreesCelsius,
+	NanoMolesPerLiter_Most_Common_Healthcare_Units("nmol/L",
+			"NanoMolesPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Degrees fahrenheit.
+	 * <div class="en">PicoGrams [Most Common Healthcare Units]</div>
 	 */
-	DegreesFahrenheit,
+	PicoGrams_Most_Common_Healthcare_Units("pg",
+			"PicoGrams [Most Common Healthcare Units]"),
 	/**
-	 * The Degrees kelvin.
+	 * <div class="en">PicoGramsPerMilliLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	DegreesKelvin,
+	PicoGramsPerMilliLiter_Most_Common_Healthcare_Units("pg/mL",
+			"PicoGramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Degrees of arc.
+	 * <div class="en">PicoMolesPerLiter [Most Common Healthcare Units]</div>
 	 */
-	DegreesOfArc,
+	PicoMolesPerLiter_Most_Common_Healthcare_Units("pmol/L",
+			"PicoMolesPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Dram.
+	 * <div class="en">UnitsPerLiter [Most Common Healthcare Units]</div>
 	 */
-	Dram,
+	UnitsPerLiter_Most_Common_Healthcare_Units("U/L",
+			"UnitsPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Ehrlich units per100 gram.
+	 * <div class="en">MicroInternationalUnitsPerMilliLiter [Most Common
+	 * Healthcare Units]</div>
 	 */
-	EhrlichUnitsPer100Gram,
+	MicroInternationalUnitsPerMilliLiter_Most_Common_Healthcare_Units(
+			"u[iU]/mL",
+			"MicroInternationalUnitsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Ehrlich units per deci liter.
+	 * <div class="en">MicroGramsPerDeciLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	EhrlichUnitsPerDeciLiter,
+	MicroGramsPerDeciLiter_Most_Common_Healthcare_Units("ug/dL",
+			"MicroGramsPerDeciLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Elisa units per milli liter.
+	 * <div class="en">MicroGramsPerLiter [Most Common Healthcare Units]</div>
 	 */
-	ElisaUnitsPerMilliLiter,
+	MicroGramsPerLiter_Most_Common_Healthcare_Units("ug/L",
+			"MicroGramsPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Equivalent.
+	 * <div class="en">MicroGramsPerMilliLiter [Most Common Healthcare
+	 * Units]</div>
 	 */
-	Equivalent,
+	MicroGramsPerMilliLiter_Most_Common_Healthcare_Units("ug/mL",
+			"MicroGramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Equivalents per liter.
+	 * <div class="en">MicroMolesPerLiter [Most Common Healthcare Units]</div>
 	 */
-	EquivalentsPerLiter,
+	MicroMolesPerLiter_Most_Common_Healthcare_Units("umol/L",
+			"MicroMolesPerLiter [Most Common Healthcare Units]"),
 	/**
-	 * The Equivalents per micro mole.
+	 * <div class="en">Log10 [Unity]</div>
 	 */
-	EquivalentsPerMicroMole,
+	Log10_Unity("[lg]", "Log10 [Unity]"),
 	/**
-	 * The Equivalents per milli liter.
+	 * <div class="en">MillionPerSpecimen [Unity]</div>
 	 */
-	EquivalentsPerMilliLiter,
+	MillionPerSpecimen_Unity("10*6/{Specimen}", "MillionPerSpecimen [Unity]"),
 	/**
-	 * The Equivalents per milli mole.
+	 * <div class="en">PerTotalCount [Unity]</div>
 	 */
-	EquivalentsPerMilliMole,
+	PerTotalCount_Unity("/{tot}", "PerTotalCount [Unity]"),
 	/**
-	 * The Fathom.
+	 * <div class="en">Thousand [Unity]</div>
 	 */
-	Fathom,
+	Thousand_Unity("10*3", "Thousand [Unity]"),
 	/**
-	 * The Feet.
+	 * <div class="en">ThousandRedBloodCells [Unity]</div>
 	 */
-	Feet,
+	ThousandRedBloodCells_Unity("10*3.{RBC}", "ThousandRedBloodCells [Unity]"),
 	/**
-	 * The Femto gram.
+	 * <div class="en">OneHundredThousand [Unity]</div>
 	 */
-	FemtoGram,
+	OneHundredThousand_Unity("10*5", "OneHundredThousand [Unity]"),
 	/**
-	 * The Femto liter.
+	 * <div class="en">Million [Unity]</div>
 	 */
-	FemtoLiter,
+	Million_Unity("10*6", "Million [Unity]"),
 	/**
-	 * The Femto meter.
+	 * <div class="en">TenToEighth [Unity]</div>
 	 */
-	FemtoMeter,
+	TenToEighth_Unity("10*8", "TenToEighth [Unity]"),
 	/**
-	 * The Femtomole.
+	 * <div class="en">Percent [General Fraction Unit]</div>
 	 */
-	Femtomole,
+	Percent_General_Fraction_Unit("%", "Percent [General Fraction Unit]"),
 	/**
-	 * The Femto moles per gram.
+	 * <div class="en">RelativePercent [General Fraction Unit]</div>
 	 */
-	FemtoMolesPerGram,
+	RelativePercent_General_Fraction_Unit("{Relative}%",
+			"RelativePercent [General Fraction Unit]"),
 	/**
-	 * The Femto moles per milli gram.
+	 * <div class="en">PercentTotal [General Fraction Unit]</div>
 	 */
-	FemtoMolesPerMilliGram,
+	PercentTotal_General_Fraction_Unit("%{Total}",
+			"PercentTotal [General Fraction Unit]"),
 	/**
-	 * The Femto moles per milli liter.
+	 * <div class="en">Percent0to3Hours [General Fraction Unit]</div>
 	 */
-	FemtoMolesPerMilliLiter,
+	Percent0to3Hours_General_Fraction_Unit("%{0to3Hours}",
+			"Percent0to3Hours [General Fraction Unit]"),
 	/**
-	 * The Fluid dram.
+	 * <div class="en">PerTenGiga [Number Fraction Units]</div>
 	 */
-	FluidDram,
+	PerTenGiga_Number_Fraction_Units("/10*10",
+			"PerTenGiga [Number Fraction Units]"),
 	/**
-	 * The Fluid ounce.
+	 * <div class="en">PerMillion [Number Fraction Units]</div>
 	 */
-	FluidOunce,
+	PerMillion_Number_Fraction_Units("/10*6",
+			"PerMillion [Number Fraction Units]"),
 	/**
-	 * The French.
+	 * <div class="en">PerBillion [Number Fraction Units]</div>
 	 */
-	French,
+	PerBillion_Number_Fraction_Units("/10*9",
+			"PerBillion [Number Fraction Units]"),
 	/**
-	 * The Gallon.
+	 * <div class="en">PerTrillion [Number Fraction Units]</div>
 	 */
-	Gallon,
+	PerTrillion_Number_Fraction_Units("/10*12",
+			"PerTrillion [Number Fraction Units]"),
 	/**
-	 * The Grain.
+	 * <div class="en">PercentNormal [Number Fraction Units]</div>
 	 */
-	Grain,
+	PercentNormal_Number_Fraction_Units("%{Normal}",
+			"PercentNormal [Number Fraction Units]"),
 	/**
-	 * The Gram.
+	 * <div class="en">PercentSpermMotility [Number Fraction Units]</div>
 	 */
-	Gram,
+	PercentSpermMotility_Number_Fraction_Units("%{SpermMotility}",
+			"PercentSpermMotility [Number Fraction Units]"),
 	/**
-	 * The Gram meter.
+	 * <div class="en">PercentPositive [Number Fraction Units]</div>
 	 */
-	GramMeter,
+	PercentPositive_Number_Fraction_Units("%{Positive}",
+			"PercentPositive [Number Fraction Units]"),
 	/**
-	 * The Gram meter per heartbeat.
+	 * <div class="en">PercentFetalErythrocytes [Number Fraction Units]</div>
 	 */
-	GramMeterPerHeartbeat,
+	PercentFetalErythrocytes_Number_Fraction_Units("%{FetalErythrocytes}",
+			"PercentFetalErythrocytes [Number Fraction Units]"),
 	/**
-	 * The Gram meter per heartbeat per square meter.
+	 * <div class="en">PercentOfLymphocytes [Number Fraction Units]</div>
 	 */
-	GramMeterPerHeartbeatPerSquareMeter,
+	PercentOfLymphocytes_Number_Fraction_Units("%{OfLymphocytes}",
+			"PercentOfLymphocytes [Number Fraction Units]"),
 	/**
-	 * The Grams per100 gram.
+	 * <div class="en">PercentofBacteria [Number Fraction Units]</div>
 	 */
-	GramsPer100Gram,
+	PercentofBacteria_Number_Fraction_Units("%{ofBacteria}",
+			"PercentofBacteria [Number Fraction Units]"),
 	/**
-	 * The Grams per deci liter.
+	 * <div class="en">PercentOfWBCs [Number Fraction Units]</div>
 	 */
-	GramsPerDeciLiter,
+	PercentOfWBCs_Number_Fraction_Units("%{OfWBCs}",
+			"PercentOfWBCs [Number Fraction Units]"),
 	/**
-	 * The Grams per gram.
+	 * <div class="en">PercentAbnormal [Number Fraction Units]</div>
 	 */
-	GramsPerGram,
+	PercentAbnormal_Number_Fraction_Units("%{Abnormal}",
+			"PercentAbnormal [Number Fraction Units]"),
 	/**
-	 * The Grams per gram creatinine.
+	 * <div class="en">PercentEosinophilsSeen [Number Fraction Units]</div>
 	 */
-	GramsPerGramCreatinine,
+	PercentEosinophilsSeen_Number_Fraction_Units("%{EosSeen}",
+			"PercentEosinophilsSeen [Number Fraction Units]"),
 	/**
-	 * The Grams per kilo gram.
+	 * <div class="en">PercentHemolysis [Number Fraction Units]</div>
 	 */
-	GramsPerKiloGram,
+	PercentHemolysis_Number_Fraction_Units("%{Hemolysis}",
+			"PercentHemolysis [Number Fraction Units]"),
 	/**
-	 * The Grams per liter.
+	 * <div class="en">PercentBlockade [Number Fraction Units]</div>
 	 */
-	GramsPerLiter,
+	PercentBlockade_Number_Fraction_Units("%{Blockade}",
+			"PercentBlockade [Number Fraction Units]"),
 	/**
-	 * The Grams per milli liter.
+	 * <div class="en">PercentPer100WBC [Number Fraction Units]</div>
 	 */
-	GramsPerMilliLiter,
+	PercentPer100WBC_Number_Fraction_Units("%/100{WBC}",
+			"PercentPer100WBC [Number Fraction Units]"),
 	/**
-	 * The Grams per square meter.
+	 * <div class="en">PercentBinding [Mass Or Substance Fraction Units]</div>
 	 */
-	GramsPerSquareMeter,
+	PercentBinding_Mass_Or_Substance_Fraction_Units("%{Binding}",
+			"PercentBinding [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Grams per total weight.
+	 * <div class="en">PercentTotalProtein [Mass Or Substance Fraction
+	 * Units]</div>
 	 */
-	GramsPerTotalWeight,
+	PercentTotalProtein_Mass_Or_Substance_Fraction_Units("%{TotalProtein}",
+			"PercentTotalProtein [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Hecto liter.
+	 * <div class="en">PercentBound [Mass Or Substance Fraction Units]</div>
 	 */
-	HectoLiter,
+	PercentBound_Mass_Or_Substance_Fraction_Units("%{Bound}",
+			"PercentBound [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Hour.
+	 * <div class="en">PercentHemoglobin [Mass Or Substance Fraction
+	 * Units]</div>
 	 */
-	Hour,
+	PercentHemoglobin_Mass_Or_Substance_Fraction_Units("%{Hemoglobin}",
+			"PercentHemoglobin [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Ig a phospholipid units per milli liter.
+	 * <div class="en">PercentHemoglobinSaturation [Mass Or Substance Fraction
+	 * Units]</div>
 	 */
-	IgAPhospholipidUnitsPerMilliLiter,
+	PercentHemoglobinSaturation_Mass_Or_Substance_Fraction_Units(
+			"%{HemoglobinSaturation}",
+			"PercentHemoglobinSaturation [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Ig g phospholipid units per milli liter.
+	 * <div class="en">PercentCarboxyhemoglobin [Mass Or Substance Fraction
+	 * Units]</div>
 	 */
-	IgGPhospholipidUnitsPerMilliLiter,
+	PercentCarboxyhemoglobin_Mass_Or_Substance_Fraction_Units(
+			"%{Carboxyhemoglobin}",
+			"PercentCarboxyhemoglobin [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Ig m phospholipid units per milli liter.
+	 * <div class="en">PercentHemoglobinA1C [Mass Or Substance Fraction
+	 * Units]</div>
 	 */
-	IgMPhospholipidUnitsPerMilliLiter,
+	PercentHemoglobinA1C_Mass_Or_Substance_Fraction_Units("%{HemoglobinA1C}",
+			"PercentHemoglobinA1C [Mass Or Substance Fraction Units]"),
 	/**
-	 * The Inch.
+	 * <div class="en">PercentExcretion [Mass Or Substance Rate Fraction
+	 * Units]</div>
 	 */
-	Inch,
+	PercentExcretion_Mass_Or_Substance_Rate_Fraction_Units("%{Excretion}",
+			"PercentExcretion [Mass Or Substance Rate Fraction Units]"),
 	/**
-	 * The International unit.
+	 * <div class="en">PercentUptake [Mass Or Substance Rate Fraction
+	 * Units]</div>
 	 */
-	InternationalUnit,
+	PercentUptake_Mass_Or_Substance_Rate_Fraction_Units("%{Uptake}",
+			"PercentUptake [Mass Or Substance Rate Fraction Units]"),
 	/**
-	 * The International units per deci liter.
+	 * <div class="en">MicroGramsPerNanoGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	InternationalUnitsPerDeciLiter,
+	MicroGramsPerNanoGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/ng",
+			"MicroGramsPerNanoGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The International units per gram.
+	 * <div class="en">NanoGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	InternationalUnitsPerGram,
+	NanoGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ng/mg",
+			"NanoGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The International units per gram hemoglobin.
+	 * <div class="en">NanoGramsPerMilliGramProtein [Mass Ratio Or Mass Fraction
+	 * Or Mass Content Units]</div>
 	 */
-	InternationalUnitsPerGramHemoglobin,
+	NanoGramsPerMilliGramProtein_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ng/mg{Protein}",
+			"NanoGramsPerMilliGramProtein [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The International units per kilogram.
+	 * <div class="en">MicroGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	InternationalUnitsPerKilogram,
+	MicroGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/mg",
+			"MicroGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The International units per liter.
+	 * <div class="en">MicroGramsPerMilliGramCreatinine [Mass Ratio Or Mass
+	 * Fraction Or Mass Content Units]</div>
 	 */
-	InternationalUnitsPerLiter,
+	MicroGramsPerMilliGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/mg{Cre}",
+			"MicroGramsPerMilliGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The International units per milli liter.
+	 * <div class="en">MilliGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	InternationalUnitsPerMilliLiter,
+	MilliGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"mg/mg",
+			"MilliGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Katal per kilogram.
+	 * <div class="en">MilligramsPerMilligramCreatinine [Mass Ratio Or Mass
+	 * Fraction Or Mass Content Units]</div>
 	 */
-	KatalPerKilogram,
+	MilligramsPerMilligramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"mg/mg{Cre}",
+			"MilligramsPerMilligramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kelvin per watt.
+	 * <div class="en">NanoGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	KelvinPerWatt,
+	NanoGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units("ng/g",
+			"NanoGramsPerGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo calories per ounce.
+	 * <div class="en">NanoGramsPerGramCreatinine [Mass Ratio Or Mass Fraction
+	 * Or Mass Content Units]</div>
 	 */
-	KiloCaloriesPerOunce,
+	NanoGramsPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ng/g{Cre}",
+			"NanoGramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo gram.
+	 * <div class="en">MicroGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	KiloGram,
+	MicroGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units("ug/g",
+			"MicroGramsPerGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo grams per cubic meter.
+	 * <div class="en">MicroGramPer100Gram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	KiloGramsPerCubicMeter,
+	MicroGramPer100Gram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/[100]g",
+			"MicroGramPer100Gram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo grams per liter.
+	 * <div class="en">MicroGramPerGramDryWeight [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	KiloGramsPerLiter,
+	MicroGramPerGramDryWeight_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/g{DryWeight}",
+			"MicroGramPerGramDryWeight [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo grams per mole.
+	 * <div class="en">MicroGramPerGramCreatinine [Mass Ratio Or Mass Fraction
+	 * Or Mass Content Units]</div>
 	 */
-	KiloGramsPerMole,
+	MicroGramPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/g{Cre}",
+			"MicroGramPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo grams per square meter.
+	 * <div class="en">MicroGramsPerGramHemoglobin [Mass Ratio Or Mass Fraction
+	 * Or Mass Content Units]</div>
 	 */
-	KiloGramsPerSquareMeter,
+	MicroGramsPerGramHemoglobin_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/g{Hgb}",
+			"MicroGramsPerGramHemoglobin [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo international units per milli liter.
+	 * <div class="en">MilliGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	KiloInternationalUnitsPerMilliLiter,
+	MilliGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units("mg/g",
+			"MilliGramsPerGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo liter.
+	 * <div class="en">MilliGramPerGramCreatinine [Mass Ratio Or Mass Fraction
+	 * Or Mass Content Units]</div>
 	 */
-	KiloLiter,
+	MilliGramPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"mg/g{Cre}",
+			"MilliGramPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo meter.
+	 * <div class="en">GramsPerGram [Mass Ratio Or Mass Fraction Or Mass Content
+	 * Units]</div>
 	 */
-	KiloMeter,
+	GramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units("g/g",
+			"GramsPerGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo pascal.
+	 * <div class="en">NanoGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	KiloPascal,
+	NanoGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ng/kg",
+			"NanoGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo second.
+	 * <div class="en">MicroGramsPerKiloGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	KiloSecond,
+	MicroGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"ug/kg",
+			"MicroGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Kilo units per gram.
+	 * <div class="en">MilliGramsPerKiloGram [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	KiloUnitsPerGram,
+	MilliGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"mg/kg",
+			"MilliGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Liter.
+	 * <div class="en">GramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	Liter,
+	GramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units("g/kg",
+			"GramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Liters per kilogram.
+	 * <div class="en">GramsPer100Gram [Mass Ratio Or Mass Fraction Or Mass
+	 * Content Units]</div>
 	 */
-	LitersPerKilogram,
+	GramsPer100Gram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"g/[100]g",
+			"GramsPer100Gram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Liter square second per second.
+	 * <div class="en">GramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or
+	 * Mass Content Units]</div>
 	 */
-	LiterSquareSecondPerSecond,
+	GramsPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units(
+			"g/g{Cre}",
+			"GramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
-	 * The Log10.
+	 * <div class="en">PicoMolesPerMicroMole [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	Log10,
+	PicoMolesPerMicroMole_Substance_Ratio_Or_Substance_Fraction_Units(
+			"pmol/umol",
+			"PicoMolesPerMicroMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Megasecond.
+	 * <div class="en">NanoMolesPerMilliMole [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	Megasecond,
+	NanoMolesPerMilliMole_Substance_Ratio_Or_Substance_Fraction_Units(
+			"nmol/mmol",
+			"NanoMolesPerMilliMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Meter.
+	 * <div class="en">NanoMolesPerMilliMoleCreatinine [Substance Ratio Or
+	 * Substance Fraction Units]</div>
 	 */
-	Meter,
+	NanoMolesPerMilliMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units(
+			"nmol/mmol{Cre}",
+			"NanoMolesPerMilliMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Metric ton.
+	 * <div class="en">NanoMolesPerMole [Substance Ratio Or Substance Fraction
+	 * Units]</div>
 	 */
-	MetricTon,
+	NanoMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units("nmol/mol",
+			"NanoMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro equivalent.
+	 * <div class="en">MicroMolesPerMole [Substance Ratio Or Substance Fraction
+	 * Units]</div>
 	 */
-	MicroEquivalent,
+	MicroMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units("umol/mol",
+			"MicroMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro equivalents per liter.
+	 * <div class="en">MilliMolesPerMole [Substance Ratio Or Substance Fraction
+	 * Units]</div>
 	 */
-	MicroEquivalentsPerLiter,
+	MilliMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units("mmol/mol",
+			"MilliMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro equivalents per milli liter.
+	 * <div class="en">MilliMolesPerMoleCreatinine [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	MicroEquivalentsPerMilliLiter,
+	MilliMolesPerMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units(
+			"mmol/mol{Cre}",
+			"MilliMolesPerMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro gram.
+	 * <div class="en">MicroMolesPerMoleCreatinine [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	MicroGram,
+	MicroMolesPerMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units(
+			"umol/mol{Cre}",
+			"MicroMolesPerMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro gram per100 gram.
+	 * <div class="en">EquivalentsPerMicroMole [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	MicroGramPer100Gram,
+	EquivalentsPerMicroMole_Substance_Ratio_Or_Substance_Fraction_Units(
+			"eq/umol",
+			"EquivalentsPerMicroMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro gram per gram creatinine.
+	 * <div class="en">EquivalentsPerMilliMole [Substance Ratio Or Substance
+	 * Fraction Units]</div>
 	 */
-	MicroGramPerGramCreatinine,
+	EquivalentsPerMilliMole_Substance_Ratio_Or_Substance_Fraction_Units(
+			"eq/mmol",
+			"EquivalentsPerMilliMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro gram per gram dry weight.
+	 * <div class="en">BoneCollagenEquivalentsPerMilliMoleCreatinine [Substance
+	 * Ratio Or Substance Fraction Units]</div>
 	 */
-	MicroGramPerGramDryWeight,
+	BoneCollagenEquivalentsPerMilliMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units(
+			"{BoneCollagen}eq/mmol{Cre}",
+			"BoneCollagenEquivalentsPerMilliMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro grams per deci liter.
+	 * <div class="en">BoneCollagenEquivalentsPerMicroMoleCreatinine [Substance
+	 * Ratio Or Substance Fraction Units]</div>
 	 */
-	MicroGramsPerDeciLiter,
+	BoneCollagenEquivalentsPerMicroMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units(
+			"{BoneCollagen}eq/umol{Cre}",
+			"BoneCollagenEquivalentsPerMicroMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
-	 * The Micro grams per deci liter red blood cells.
+	 * <div class="en">VolumePercent [Volume Fraction Units]</div>
 	 */
-	MicroGramsPerDeciLiterRedBloodCells,
+	VolumePercent_Volume_Fraction_Units("%{vol}",
+			"VolumePercent [Volume Fraction Units]"),
 	/**
-	 * The Micro grams per gram.
+	 * <div class="en">PercentOxygen [Volume Fraction Units]</div>
 	 */
-	MicroGramsPerGram,
+	PercentOxygen_Volume_Fraction_Units("%{Oxygen}",
+			"PercentOxygen [Volume Fraction Units]"),
 	/**
-	 * The Micro grams per gram hemoglobin.
+	 * <div class="en">MilliLitersPerDeciLiter [Volume Fraction Units]</div>
 	 */
-	MicroGramsPerGramHemoglobin,
+	MilliLitersPerDeciLiter_Volume_Fraction_Units("mL/dL",
+			"MilliLitersPerDeciLiter [Volume Fraction Units]"),
 	/**
-	 * The Micro grams per kilo gram.
+	 * <div class="en">PercentNormalPooledPlasma [Catalytic Fraction Or
+	 * Arbitrary Fraction Units]</div>
 	 */
-	MicroGramsPerKiloGram,
+	PercentNormalPooledPlasma_Catalytic_Fraction_Or_Arbitrary_Fraction_Units(
+			"%{NormalPooledPlasma}",
+			"PercentNormalPooledPlasma [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
-	 * The Micro grams per liter.
+	 * <div class="en">PercentActivity [Catalytic Fraction Or Arbitrary Fraction
+	 * Units]</div>
 	 */
-	MicroGramsPerLiter,
+	PercentActivity_Catalytic_Fraction_Or_Arbitrary_Fraction_Units(
+			"%{Activity}",
+			"PercentActivity [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
-	 * The Micro grams per milli gram.
+	 * <div class="en">PercentBasalActivity [Catalytic Fraction Or Arbitrary
+	 * Fraction Units]</div>
 	 */
-	MicroGramsPerMilliGram,
+	PercentBasalActivity_Catalytic_Fraction_Or_Arbitrary_Fraction_Units(
+			"%{BasalActivity}",
+			"PercentBasalActivity [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
-	 * The Micro grams per milli gram creatinine.
+	 * <div class="en">PercentInhibition [Catalytic Fraction Or Arbitrary
+	 * Fraction Units]</div>
 	 */
-	MicroGramsPerMilliGramCreatinine,
+	PercentInhibition_Catalytic_Fraction_Or_Arbitrary_Fraction_Units(
+			"%{Inhibition}",
+			"PercentInhibition [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
-	 * The Micro grams per milli liter.
+	 * <div class="en">PerEntity [Entitic Number Units]</div>
 	 */
-	MicroGramsPerMilliLiter,
+	PerEntity_Entitic_Number_Units("/{Entity}",
+			"PerEntity [Entitic Number Units]"),
 	/**
-	 * The Micro grams per nano gram.
+	 * <div class="en">Per100WBC [Entitic Number Units]</div>
 	 */
-	MicroGramsPerNanoGram,
+	Per100WBC_Entitic_Number_Units("/100{WBC}",
+			"Per100WBC [Entitic Number Units]"),
 	/**
-	 * The Micro grams per specimen.
+	 * <div class="en">Per100 [Entitic Number Units]</div>
 	 */
-	MicroGramsPerSpecimen,
+	Per100_Entitic_Number_Units("/100", "Per100 [Entitic Number Units]"),
 	/**
-	 * The Micro grams per square meter.
+	 * <div class="en">Per100Spermatozoa [Entitic Number Units]</div>
 	 */
-	MicroGramsPerSquareMeter,
+	Per100Spermatozoa_Entitic_Number_Units("/100{Spermatozoa}",
+			"Per100Spermatozoa [Entitic Number Units]"),
 	/**
-	 * The Micro grams per total volume.
+	 * <div class="en">PerTrillionRedBloodCells [Entitic Number Units]</div>
 	 */
-	MicroGramsPerTotalVolume,
+	PerTrillionRedBloodCells_Entitic_Number_Units("/10*12{rbc}",
+			"PerTrillionRedBloodCells [Entitic Number Units]"),
 	/**
-	 * The Micro international unit.
+	 * <div class="en">DegreesOfArc [Plane Angle Units]</div>
 	 */
-	MicroInternationalUnit,
+	DegreesOfArc_Plane_Angle_Units("deg", "DegreesOfArc [Plane Angle Units]"),
 	/**
-	 * The Micro international units per milli liter.
+	 * <div class="en">PerArbitraryUnit [Arbitrary Number Units]</div>
 	 */
-	MicroInternationalUnitsPerMilliLiter,
+	PerArbitraryUnit_Arbitrary_Number_Units("/[arb`U]",
+			"PerArbitraryUnit [Arbitrary Number Units]"),
 	/**
-	 * The Micro liter.
+	 * <div class="en">MicroInternationalUnit [Arbitrary Units]</div>
 	 */
-	MicroLiter,
+	MicroInternationalUnit_Arbitrary_Units("u[iU]",
+			"MicroInternationalUnit [Arbitrary Units]"),
 	/**
-	 * The Micro meter.
+	 * <div class="en">InternationalUnit [Arbitrary Units]</div>
 	 */
-	MicroMeter,
+	InternationalUnit_Arbitrary_Units("[iU]",
+			"InternationalUnit [Arbitrary Units]"),
 	/**
-	 * The Micro mole.
+	 * <div class="en">MillionInternationalUnit [Arbitrary Units]</div>
 	 */
-	MicroMole,
+	MillionInternationalUnit_Arbitrary_Units("10*6.[iU]",
+			"MillionInternationalUnit [Arbitrary Units]"),
 	/**
-	 * The Micro moles per deci liter.
+	 * <div class="en">Inch [English Length Units]</div>
 	 */
-	MicroMolesPerDeciLiter,
+	Inch_English_Length_Units("[in_i]", "Inch [English Length Units]"),
 	/**
-	 * The Micro moles per gram.
+	 * <div class="en">Feet [English Length Units]</div>
 	 */
-	MicroMolesPerGram,
+	Feet_English_Length_Units("[ft_i]", "Feet [English Length Units]"),
 	/**
-	 * The Micro moles per gram creatinine.
+	 * <div class="en">Yard [English Length Units]</div>
 	 */
-	MicroMolesPerGramCreatinine,
+	Yard_English_Length_Units("[yd_i]", "Yard [English Length Units]"),
 	/**
-	 * The Micro moles per gram hemoglobin.
+	 * <div class="en">Fathom [English Length Units]</div>
 	 */
-	MicroMolesPerGramHemoglobin,
+	Fathom_English_Length_Units("[fth_i]", "Fathom [English Length Units]"),
 	/**
-	 * The Micro moles per liter.
+	 * <div class="en">StatuteMile [English Length Units]</div>
 	 */
-	MicroMolesPerLiter,
+	StatuteMile_English_Length_Units("[mi_i]",
+			"StatuteMile [English Length Units]"),
 	/**
-	 * The Micro moles per milli gram.
+	 * <div class="en">NauticalMile [English Length Units]</div>
 	 */
-	MicroMolesPerMilliGram,
+	NauticalMile_English_Length_Units("[nmi_i]",
+			"NauticalMile [English Length Units]"),
 	/**
-	 * The Micro moles per milli gram creatinine.
+	 * <div class="en">French [English Length Units]</div>
 	 */
-	MicroMolesPerMilliGramCreatinine,
+	French_English_Length_Units("[Ch]", "French [English Length Units]"),
 	/**
-	 * The Micro moles per milli liter.
+	 * <div class="en">FemtoMeter [SI Length Units]</div>
 	 */
-	MicroMolesPerMilliLiter,
+	FemtoMeter_SI_Length_Units("fm", "FemtoMeter [SI Length Units]"),
 	/**
-	 * The Micro moles per minute per gram.
+	 * <div class="en">PicoMeter [SI Length Units]</div>
 	 */
-	MicroMolesPerMinutePerGram,
+	PicoMeter_SI_Length_Units("pm", "PicoMeter [SI Length Units]"),
 	/**
-	 * The Micro moles per mole.
+	 * <div class="en">NanoMeter [SI Length Units]</div>
 	 */
-	MicroMolesPerMole,
+	NanoMeter_SI_Length_Units("nm", "NanoMeter [SI Length Units]"),
 	/**
-	 * The Micro moles per mole creatinine.
+	 * <div class="en">MicroMeter [SI Length Units]</div>
 	 */
-	MicroMolesPerMoleCreatinine,
+	MicroMeter_SI_Length_Units("um", "MicroMeter [SI Length Units]"),
 	/**
-	 * The Micro second.
+	 * <div class="en">MilliMeter [SI Length Units]</div>
 	 */
-	MicroSecond,
+	MilliMeter_SI_Length_Units("mm", "MilliMeter [SI Length Units]"),
 	/**
-	 * The Milli equivalent.
+	 * <div class="en">CentiMeter [SI Length Units]</div>
 	 */
-	MilliEquivalent,
+	CentiMeter_SI_Length_Units("cm", "CentiMeter [SI Length Units]"),
 	/**
-	 * The Milli equivalent per milli liter.
+	 * <div class="en">DeciMeter [SI Length Units]</div>
 	 */
-	MilliEquivalentPerMilliLiter,
+	DeciMeter_SI_Length_Units("dm", "DeciMeter [SI Length Units]"),
 	/**
-	 * The Milli equivalents per deci liter.
+	 * <div class="en">Meter [SI Length Units]</div>
 	 */
-	MilliEquivalentsPerDeciLiter,
+	Meter_SI_Length_Units("m", "Meter [SI Length Units]"),
 	/**
-	 * The Milli equivalents per gram.
+	 * <div class="en">KiloMeter [SI Length Units]</div>
 	 */
-	MilliEquivalentsPerGram,
+	KiloMeter_SI_Length_Units("km", "KiloMeter [SI Length Units]"),
 	/**
-	 * The Milli equivalents per gram creatinine.
+	 * <div class="en">Grain [English Mass Units]</div>
 	 */
-	MilliEquivalentsPerGramCreatinine,
+	Grain_English_Mass_Units("[gr]", "Grain [English Mass Units]"),
 	/**
-	 * The Milli equivalents per kilo gram.
+	 * <div class="en">Ounce [English Mass Units]</div>
 	 */
-	MilliEquivalentsPerKiloGram,
+	Ounce_English_Mass_Units("[oz_av]", "Ounce [English Mass Units]"),
 	/**
-	 * The Milli equivalents per liter.
+	 * <div class="en">TroyOunce [English Mass Units]</div>
 	 */
-	MilliEquivalentsPerLiter,
+	TroyOunce_English_Mass_Units("[oz_tr]", "TroyOunce [English Mass Units]"),
 	/**
-	 * The Milli equivalents per specimen.
+	 * <div class="en">Pound [English Mass Units]</div>
 	 */
-	MilliEquivalentsPerSpecimen,
+	Pound_English_Mass_Units("[lb_av]", "Pound [English Mass Units]"),
 	/**
-	 * The Milli equivalents per square meter.
+	 * <div class="en">Ton [English Mass Units]</div>
 	 */
-	MilliEquivalentsPerSquareMeter,
+	Ton_English_Mass_Units("[ston_av]", "Ton [English Mass Units]"),
 	/**
-	 * The Milli gram.
+	 * <div class="en">Dram [English Mass Units]</div>
 	 */
-	MilliGram,
+	Dram_English_Mass_Units("[dr_av]", "Dram [English Mass Units]"),
 	/**
-	 * The Milli gram per gram creatinine.
+	 * <div class="en">FemtoGram [SI Mass Units]</div>
 	 */
-	MilliGramPerGramCreatinine,
+	FemtoGram_SI_Mass_Units("fg", "FemtoGram [SI Mass Units]"),
 	/**
-	 * The Milli gram per total volume.
+	 * <div class="en">PicoGram [SI Mass Units]</div>
 	 */
-	MilliGramPerTotalVolume,
+	PicoGram_SI_Mass_Units("pg", "PicoGram [SI Mass Units]"),
 	/**
-	 * The Milli grams per cubic meter.
+	 * <div class="en">NanoGram [SI Mass Units]</div>
 	 */
-	MilliGramsPerCubicMeter,
+	NanoGram_SI_Mass_Units("ng", "NanoGram [SI Mass Units]"),
 	/**
-	 * The Milli grams per deci liter.
+	 * <div class="en">MicroGram [SI Mass Units]</div>
 	 */
-	MilliGramsPerDeciLiter,
+	MicroGram_SI_Mass_Units("ug", "MicroGram [SI Mass Units]"),
 	/**
-	 * The Milli grams per gram.
+	 * <div class="en">MicroGramsPerTotalVolume [SI Mass Units]</div>
 	 */
-	MilliGramsPerGram,
+	MicroGramsPerTotalVolume_SI_Mass_Units("ug/{TotalVolume}",
+			"MicroGramsPerTotalVolume [SI Mass Units]"),
 	/**
-	 * The Milli grams per kilo gram.
+	 * <div class="en">MicroGramsPerSpecimen [SI Mass Units]</div>
 	 */
-	MilliGramsPerKiloGram,
+	MicroGramsPerSpecimen_SI_Mass_Units("ug/{Specimen}",
+			"MicroGramsPerSpecimen [SI Mass Units]"),
 	/**
-	 * The Milli grams per liter.
+	 * <div class="en">MilliGram [SI Mass Units]</div>
 	 */
-	MilliGramsPerLiter,
+	MilliGram_SI_Mass_Units("mg", "MilliGram [SI Mass Units]"),
 	/**
-	 * The Milli grams per milli gram.
+	 * <div class="en">MilliGramsPerVolume [SI Mass Units]</div>
 	 */
-	MilliGramsPerMilliGram,
+	MilliGramsPerVolume_SI_Mass_Units("mg/{Volume}",
+			"MilliGramsPerVolume [SI Mass Units]"),
 	/**
-	 * The Milligrams per milligram creatinine.
+	 * <div class="en">MilliGramPerTotalVolume [SI Mass Units]</div>
 	 */
-	MilligramsPerMilligramCreatinine,
+	MilliGramPerTotalVolume_SI_Mass_Units("mg/{TotalVolume}",
+			"MilliGramPerTotalVolume [SI Mass Units]"),
 	/**
-	 * The Milli grams per milli liter.
+	 * <div class="en">Gram [SI Mass Units]</div>
 	 */
-	MilliGramsPerMilliLiter,
+	Gram_SI_Mass_Units("g", "Gram [SI Mass Units]"),
 	/**
-	 * The Milli grams per square meter.
+	 * <div class="en">GramsPerTotalWeight [SI Mass Units]</div>
 	 */
-	MilliGramsPerSquareMeter,
+	GramsPerTotalWeight_SI_Mass_Units("g/{TotalWeight}",
+			"GramsPerTotalWeight [SI Mass Units]"),
 	/**
-	 * The Milli grams per volume.
+	 * <div class="en">DeciGram [SI Mass Units]</div>
 	 */
-	MilliGramsPerVolume,
+	DeciGram_SI_Mass_Units("dg", "DeciGram [SI Mass Units]"),
 	/**
-	 * The Milli grams phenylketones per deci liter.
+	 * <div class="en">CentiGram [SI Mass Units]</div>
 	 */
-	MilliGramsPhenylketonesPerDeciLiter,
+	CentiGram_SI_Mass_Units("cg", "CentiGram [SI Mass Units]"),
 	/**
-	 * The Milli international units per liter.
+	 * <div class="en">KiloGram [SI Mass Units]</div>
 	 */
-	MilliInternationalUnitsPerLiter,
+	KiloGram_SI_Mass_Units("kg", "KiloGram [SI Mass Units]"),
 	/**
-	 * The Milli international units per milli liter.
+	 * <div class="en">MetricTon [SI Mass Units]</div>
 	 */
-	MilliInternationalUnitsPerMilliLiter,
+	MetricTon_SI_Mass_Units("t", "MetricTon [SI Mass Units]"),
 	/**
-	 * The Milli liter.
+	 * <div class="en">PicoGramsPerMilliMeter [Lineic Mass Units]</div>
 	 */
-	MilliLiter,
+	PicoGramsPerMilliMeter_Lineic_Mass_Units("pg/mm",
+			"PicoGramsPerMilliMeter [Lineic Mass Units]"),
 	/**
-	 * The Milli liters per deci liter.
+	 * <div class="en">DegreesKelvin [Temperature Units]</div>
 	 */
-	MilliLitersPerDeciLiter,
+	DegreesKelvin_Temperature_Units("K", "DegreesKelvin [Temperature Units]"),
 	/**
-	 * The Milli liters per heartbeat.
+	 * <div class="en">DegreesCelsius [Temperature Units]</div>
 	 */
-	MilliLitersPerHeartbeat,
+	DegreesCelsius_Temperature_Units("Cel",
+			"DegreesCelsius [Temperature Units]"),
 	/**
-	 * The Milli liters per kilo gram.
+	 * <div class="en">DegreesFahrenheit [Temperature Units]</div>
 	 */
-	MilliLitersPerKiloGram,
+	DegreesFahrenheit_Temperature_Units("[degF]",
+			"DegreesFahrenheit [Temperature Units]"),
 	/**
-	 * The Milli meter.
+	 * <div class="en">KelvinPerWatt [Thermal Resistance Units]</div>
 	 */
-	MilliMeter,
+	KelvinPerWatt_Thermal_Resistance_Units("K/W",
+			"KelvinPerWatt [Thermal Resistance Units]"),
 	/**
-	 * The Milli meters of mercury.
+	 * <div class="en">PicoSecond [Time Units]</div>
 	 */
-	MilliMetersOfMercury,
+	PicoSecond_Time_Units("ps", "PicoSecond [Time Units]"),
 	/**
-	 * The Milli mole.
+	 * <div class="en">NanoSecond [Time Units]</div>
 	 */
-	MilliMole,
+	NanoSecond_Time_Units("ns", "NanoSecond [Time Units]"),
 	/**
-	 * The Milli moles per deci liter.
+	 * <div class="en">MicroSecond [Time Units]</div>
 	 */
-	MilliMolesPerDeciLiter,
+	MicroSecond_Time_Units("us", "MicroSecond [Time Units]"),
 	/**
-	 * The Milli moles per gram.
+	 * <div class="en">MilliSecond [Time Units]</div>
 	 */
-	MilliMolesPerGram,
+	MilliSecond_Time_Units("ms", "MilliSecond [Time Units]"),
 	/**
-	 * The Milli moles per kilo gram.
+	 * <div class="en">Second [Time Units]</div>
 	 */
-	MilliMolesPerKiloGram,
+	Second_Time_Units("s", "Second [Time Units]"),
 	/**
-	 * The Milli moles per liter.
+	 * <div class="en">KiloSecond [Time Units]</div>
 	 */
-	MilliMolesPerLiter,
+	KiloSecond_Time_Units("ks", "KiloSecond [Time Units]"),
 	/**
-	 * The Milli moles per mole.
+	 * <div class="en">Megasecond [Time Units]</div>
 	 */
-	MilliMolesPerMole,
+	Megasecond_Time_Units("Ms", "Megasecond [Time Units]"),
 	/**
-	 * The Milli moles per mole creatinine.
+	 * <div class="en">Minute [Time Units]</div>
 	 */
-	MilliMolesPerMoleCreatinine,
+	Minute_Time_Units("min", "Minute [Time Units]"),
 	/**
-	 * The Milli moles per square meter.
+	 * <div class="en">Hour [Time Units]</div>
 	 */
-	MilliMolesPerSquareMeter,
+	Hour_Time_Units("h", "Hour [Time Units]"),
 	/**
-	 * The Milli moles per total volume.
+	 * <div class="en">Day [Time Units]</div>
 	 */
-	MilliMolesPerTotalVolume,
+	Day_Time_Units("d", "Day [Time Units]"),
 	/**
-	 * The Million.
+	 * <div class="en">Week [Time Units]</div>
 	 */
-	Million,
+	Week_Time_Units("wk", "Week [Time Units]"),
 	/**
-	 * The Million equivalents per milli liter.
+	 * <div class="en">Month [Time Units]</div>
 	 */
-	MillionEquivalentsPerMilliLiter,
+	Month_Time_Units("mo", "Month [Time Units]"),
 	/**
-	 * The Million international unit.
+	 * <div class="en">Year [Time Units]</div>
 	 */
-	MillionInternationalUnit,
+	Year_Time_Units("a", "Year [Time Units]"),
 	/**
-	 * The Million per liter.
+	 * <div class="en">Equivalent [Substance Units]</div>
 	 */
-	MillionPerLiter,
+	Equivalent_Substance_Units("eq", "Equivalent [Substance Units]"),
 	/**
-	 * The Million per milli liter.
+	 * <div class="en">MicroEquivalent [Substance Units]</div>
 	 */
-	MillionPerMilliLiter,
+	MicroEquivalent_Substance_Units("ueq", "MicroEquivalent [Substance Units]"),
 	/**
-	 * The Million per specimen.
+	 * <div class="en">MilliEquivalent [Substance Units]</div>
 	 */
-	MillionPerSpecimen,
+	MilliEquivalent_Substance_Units("meq", "MilliEquivalent [Substance Units]"),
 	/**
-	 * The Millions per micro liter.
+	 * <div class="en">MilliEquivalentsPerSpecimen [Substance Units]</div>
 	 */
-	MillionsPerMicroLiter,
+	MilliEquivalentsPerSpecimen_Substance_Units("meq/{Specimen}",
+			"MilliEquivalentsPerSpecimen [Substance Units]"),
 	/**
-	 * The Milli osmole.
+	 * <div class="en">Mole [Substance Units]</div>
 	 */
-	MilliOsmole,
+	Mole_Substance_Units("mol", "Mole [Substance Units]"),
 	/**
-	 * The Milli osmoles per kilo gram.
+	 * <div class="en">MilliMole [Substance Units]</div>
 	 */
-	MilliOsmolesPerKiloGram,
+	MilliMole_Substance_Units("mmol", "MilliMole [Substance Units]"),
 	/**
-	 * The Milli osmoles per liter.
+	 * <div class="en">MilliMolesPerTotalVolume [Substance Units]</div>
 	 */
-	MilliOsmolesPerLiter,
+	MilliMolesPerTotalVolume_Substance_Units("mmol/{TotalVolume}",
+			"MilliMolesPerTotalVolume [Substance Units]"),
 	/**
-	 * The Milli second.
+	 * <div class="en">Femtomole [Substance Units]</div>
 	 */
-	MilliSecond,
+	Femtomole_Substance_Units("fmol", "Femtomole [Substance Units]"),
 	/**
-	 * The Milli units per gram.
+	 * <div class="en">PicoMole [Substance Units]</div>
 	 */
-	MilliUnitsPerGram,
+	PicoMole_Substance_Units("pmol", "PicoMole [Substance Units]"),
 	/**
-	 * The Milli units per gram hemoglobin.
+	 * <div class="en">MicroMole [Substance Units]</div>
 	 */
-	MilliUnitsPerGramHemoglobin,
+	MicroMole_Substance_Units("umol", "MicroMole [Substance Units]"),
 	/**
-	 * The Milli units per milligram.
+	 * <div class="en">NanoMole [Substance Units]</div>
 	 */
-	MilliUnitsPerMilligram,
+	NanoMole_Substance_Units("nmol", "NanoMole [Substance Units]"),
 	/**
-	 * The Milli units per milli gram creatinine.
+	 * <div class="en">MilliOsmole [Substance Units]</div>
 	 */
-	MilliUnitsPerMilliGramCreatinine,
+	MilliOsmole_Substance_Units("mosm", "MilliOsmole [Substance Units]"),
 	/**
-	 * The Minute.
+	 * <div class="en">MilliEquivalentsPerSquareMeter [Areic Substance
+	 * Units]</div>
 	 */
-	Minute,
+	MilliEquivalentsPerSquareMeter_Areic_Substance_Units("meq/m2",
+			"MilliEquivalentsPerSquareMeter [Areic Substance Units]"),
 	/**
-	 * The Mole.
+	 * <div class="en">MilliMolesPerSquareMeter [Areic Substance Units]</div>
 	 */
-	Mole,
+	MilliMolesPerSquareMeter_Areic_Substance_Units("mmol/m2",
+			"MilliMolesPerSquareMeter [Areic Substance Units]"),
 	/**
-	 * The Moles per cubic meter.
+	 * <div class="en">SquareInch [English Area Units]</div>
 	 */
-	MolesPerCubicMeter,
+	SquareInch_English_Area_Units("[sin_i]", "SquareInch [English Area Units]"),
 	/**
-	 * The Moles per kilo gram.
+	 * <div class="en">SquareFeet [English Area Units]</div>
 	 */
-	MolesPerKiloGram,
+	SquareFeet_English_Area_Units("[sft_i]", "SquareFeet [English Area Units]"),
 	/**
-	 * The Moles per liter.
+	 * <div class="en">SquareYard [English Area Units]</div>
 	 */
-	MolesPerLiter,
+	SquareYard_English_Area_Units("[syd_i]", "SquareYard [English Area Units]"),
 	/**
-	 * The Moles per milli liter.
+	 * <div class="en">SquareMilliMeter [SI Area Units]</div>
 	 */
-	MolesPerMilliLiter,
+	SquareMilliMeter_SI_Area_Units("mm2", "SquareMilliMeter [SI Area Units]"),
 	/**
-	 * The Month.
+	 * <div class="en">SquareCentiMeter [SI Area Units]</div>
 	 */
-	Month,
+	SquareCentiMeter_SI_Area_Units("cm2", "SquareCentiMeter [SI Area Units]"),
 	/**
-	 * The Nano gram.
+	 * <div class="en">SquareMeter [SI Area Units]</div>
 	 */
-	NanoGram,
+	SquareMeter_SI_Area_Units("m2", "SquareMeter [SI Area Units]"),
 	/**
-	 * The Nano grams per deci liter.
+	 * <div class="en">FluidOunce [English Volume Units]</div>
 	 */
-	NanoGramsPerDeciLiter,
+	FluidOunce_English_Volume_Units("[foz_us]",
+			"FluidOunce [English Volume Units]"),
 	/**
-	 * The Nano grams per gram.
+	 * <div class="en">CubicInch [English Volume Units]</div>
 	 */
-	NanoGramsPerGram,
+	CubicInch_English_Volume_Units("[cin_i]",
+			"CubicInch [English Volume Units]"),
 	/**
-	 * The Nano grams per gram creatinine.
+	 * <div class="en">Cup [English Volume Units]</div>
 	 */
-	NanoGramsPerGramCreatinine,
+	Cup_English_Volume_Units("[cup_us]", "Cup [English Volume Units]"),
 	/**
-	 * The Nano grams per kilo gram.
+	 * <div class="en">Pint [English Volume Units]</div>
 	 */
-	NanoGramsPerKiloGram,
+	Pint_English_Volume_Units("[pt_us]", "Pint [English Volume Units]"),
 	/**
-	 * The Nano grams per liter.
+	 * <div class="en">Quart [English Volume Units]</div>
 	 */
-	NanoGramsPerLiter,
+	Quart_English_Volume_Units("[qt_us]", "Quart [English Volume Units]"),
 	/**
-	 * The Nano grams per milli gram.
+	 * <div class="en">Gallon [English Volume Units]</div>
 	 */
-	NanoGramsPerMilliGram,
+	Gallon_English_Volume_Units("[gal_us]", "Gallon [English Volume Units]"),
 	/**
-	 * The Nano grams per milli gram protein.
+	 * <div class="en">FluidDram [English Volume Units]</div>
 	 */
-	NanoGramsPerMilliGramProtein,
+	FluidDram_English_Volume_Units("[fdr_us]",
+			"FluidDram [English Volume Units]"),
 	/**
-	 * The Nano grams per milli liter.
+	 * <div class="en">FemtoLiter [SI Volume Units]</div>
 	 */
-	NanoGramsPerMilliLiter,
+	FemtoLiter_SI_Volume_Units("fL", "FemtoLiter [SI Volume Units]"),
 	/**
-	 * The Nano grams per milli liter red blood cells.
+	 * <div class="en">PicoLiter [SI Volume Units]</div>
 	 */
-	NanoGramsPerMilliLiterRedBloodCells,
+	PicoLiter_SI_Volume_Units("pL", "PicoLiter [SI Volume Units]"),
 	/**
-	 * The Nano grams per square meter.
+	 * <div class="en">NanoLiter [SI Volume Units]</div>
 	 */
-	NanoGramsPerSquareMeter,
+	NanoLiter_SI_Volume_Units("nL", "NanoLiter [SI Volume Units]"),
 	/**
-	 * The Nano liter.
+	 * <div class="en">MicroLiter [SI Volume Units]</div>
 	 */
-	NanoLiter,
+	MicroLiter_SI_Volume_Units("uL", "MicroLiter [SI Volume Units]"),
 	/**
-	 * The Nano meter.
+	 * <div class="en">MilliLiter [SI Volume Units]</div>
 	 */
-	NanoMeter,
+	MilliLiter_SI_Volume_Units("mL", "MilliLiter [SI Volume Units]"),
 	/**
-	 * The Nano mole.
+	 * <div class="en">MilliLitersPerHeartbeat [SI Volume Units]</div>
 	 */
-	NanoMole,
+	MilliLitersPerHeartbeat_SI_Volume_Units("mL/{h`b}",
+			"MilliLitersPerHeartbeat [SI Volume Units]"),
 	/**
-	 * The Nano moles per deci liter.
+	 * <div class="en">Liter [SI Volume Units]</div>
 	 */
-	NanoMolesPerDeciLiter,
+	Liter_SI_Volume_Units("L", "Liter [SI Volume Units]"),
 	/**
-	 * The Nano moles per gram.
+	 * <div class="en">DeciLiter [SI Volume Units]</div>
 	 */
-	NanoMolesPerGram,
+	DeciLiter_SI_Volume_Units("dL", "DeciLiter [SI Volume Units]"),
 	/**
-	 * The Nano moles per gram creatinine.
+	 * <div class="en">CentiLiter [SI Volume Units]</div>
 	 */
-	NanoMolesPerGramCreatinine,
+	CentiLiter_SI_Volume_Units("cL", "CentiLiter [SI Volume Units]"),
 	/**
-	 * The Nano moles per liter.
+	 * <div class="en">KiloLiter [SI Volume Units]</div>
 	 */
-	NanoMolesPerLiter,
+	KiloLiter_SI_Volume_Units("kL", "KiloLiter [SI Volume Units]"),
 	/**
-	 * The Nano moles per milli gram.
+	 * <div class="en">HectoLiter [SI Volume Units]</div>
 	 */
-	NanoMolesPerMilliGram,
+	HectoLiter_SI_Volume_Units("hL", "HectoLiter [SI Volume Units]"),
 	/**
-	 * The Nano moles per milli liter.
+	 * <div class="en">LiterSquareSecondPerSecond [Volume Duration Units]</div>
 	 */
-	NanoMolesPerMilliLiter,
+	LiterSquareSecondPerSecond_Volume_Duration_Units("L.s2/s",
+			"LiterSquareSecondPerSecond [Volume Duration Units]"),
 	/**
-	 * The Nano moles per milli mole.
+	 * <div class="en">PerMilliGram [Number Content Units]</div>
 	 */
-	NanoMolesPerMilliMole,
+	PerMilliGram_Number_Content_Units("/mg",
+			"PerMilliGram [Number Content Units]"),
 	/**
-	 * The Nano moles per milli mole creatinine.
+	 * <div class="en">PerGram [Number Content Units]</div>
 	 */
-	NanoMolesPerMilliMoleCreatinine,
+	PerGram_Number_Content_Units("/g", "PerGram [Number Content Units]"),
 	/**
-	 * The Nano moles per mole.
+	 * <div class="en">PerGramCreatinine [Number Content Units]</div>
 	 */
-	NanoMolesPerMole,
+	PerGramCreatinine_Number_Content_Units("/g{creat}",
+			"PerGramCreatinine [Number Content Units]"),
 	/**
-	 * The Nano second.
+	 * <div class="en">PerGramHemoglobin [Number Content Units]</div>
 	 */
-	NanoSecond,
+	PerGramHemoglobin_Number_Content_Units("/g{HGB}",
+			"PerGramHemoglobin [Number Content Units]"),
 	/**
-	 * The Nautical mile.
+	 * <div class="en">PerGramTotalNitrogen [Number Content Units]</div>
 	 */
-	NauticalMile,
+	PerGramTotalNitrogen_Number_Content_Units("/g{tot`nit}",
+			"PerGramTotalNitrogen [Number Content Units]"),
 	/**
-	 * The One hundred thousand.
+	 * <div class="en">PerGramTotalProtein [Number Content Units]</div>
 	 */
-	OneHundredThousand,
+	PerGramTotalProtein_Number_Content_Units("/g{tot`prot}",
+			"PerGramTotalProtein [Number Content Units]"),
 	/**
-	 * The Osmoles per kilo gram.
+	 * <div class="en">PerGramWetTissue [Number Content Units]</div>
 	 */
-	OsmolesPerKiloGram,
+	PerGramWetTissue_Number_Content_Units("/g{wet`tis}",
+			"PerGramWetTissue [Number Content Units]"),
 	/**
-	 * The Osmoles per liter.
+	 * <div class="en">PerKiloGram [Number Content Units]</div>
 	 */
-	OsmolesPerLiter,
+	PerKiloGram_Number_Content_Units("/kg",
+			"PerKiloGram [Number Content Units]"),
 	/**
-	 * The Ounce.
+	 * <div class="en">PerKiloGramBodyWeight [Number Content Units]</div>
 	 */
-	Ounce,
+	PerKiloGramBodyWeight_Number_Content_Units("/kg{body`wt}",
+			"PerKiloGramBodyWeight [Number Content Units]"),
 	/**
-	 * The Per100.
+	 * <div class="en">FemtoMolesPerMilliGram [Substance Content Units]</div>
 	 */
-	Per100,
+	FemtoMolesPerMilliGram_Substance_Content_Units("fmol/mg",
+			"FemtoMolesPerMilliGram [Substance Content Units]"),
 	/**
-	 * The Per100 spermatozoa.
+	 * <div class="en">NanoMolesPerMilliGram [Substance Content Units]</div>
 	 */
-	Per100Spermatozoa,
+	NanoMolesPerMilliGram_Substance_Content_Units("nmol/mg",
+			"NanoMolesPerMilliGram [Substance Content Units]"),
 	/**
-	 * The Per100 wbc.
+	 * <div class="en">MicroMolesPerMilliGram [Substance Content Units]</div>
 	 */
-	Per100WBC,
+	MicroMolesPerMilliGram_Substance_Content_Units("umol/mg",
+			"MicroMolesPerMilliGram [Substance Content Units]"),
 	/**
-	 * The Per arbitrary unit.
+	 * <div class="en">MicroMolesPerMilliGramCreatinine [Substance Content
+	 * Units]</div>
 	 */
-	PerArbitraryUnit,
+	MicroMolesPerMilliGramCreatinine_Substance_Content_Units("umol/mg{Cre}",
+			"MicroMolesPerMilliGramCreatinine [Substance Content Units]"),
 	/**
-	 * The Per billion.
+	 * <div class="en">MolesPerKiloGram [Substance Content Units]</div>
 	 */
-	PerBillion,
+	MolesPerKiloGram_Substance_Content_Units("mol/kg",
+			"MolesPerKiloGram [Substance Content Units]"),
 	/**
-	 * The Percent.
+	 * <div class="en">FemtoMolesPerGram [Substance Content Units]</div>
 	 */
-	Percent,
+	FemtoMolesPerGram_Substance_Content_Units("fmol/g",
+			"FemtoMolesPerGram [Substance Content Units]"),
 	/**
-	 * The Percent0to3 hours.
+	 * <div class="en">NanoMolesPerGram [Substance Content Units]</div>
 	 */
-	Percent0to3Hours,
+	NanoMolesPerGram_Substance_Content_Units("nmol/g",
+			"NanoMolesPerGram [Substance Content Units]"),
 	/**
-	 * The Percent abnormal.
+	 * <div class="en">NanoMolesPerGramCreatinine [Substance Content
+	 * Units]</div>
 	 */
-	PercentAbnormal,
+	NanoMolesPerGramCreatinine_Substance_Content_Units("nmol/g{Cre}",
+			"NanoMolesPerGramCreatinine [Substance Content Units]"),
 	/**
-	 * The Percent activity.
+	 * <div class="en">MicroMolesPerGram [Substance Content Units]</div>
 	 */
-	PercentActivity,
+	MicroMolesPerGram_Substance_Content_Units("umol/g",
+			"MicroMolesPerGram [Substance Content Units]"),
 	/**
-	 * The Percent basal activity.
+	 * <div class="en">MicroMolesPerGramCreatinine [Substance Content
+	 * Units]</div>
 	 */
-	PercentBasalActivity,
+	MicroMolesPerGramCreatinine_Substance_Content_Units("umol/g{Cre}",
+			"MicroMolesPerGramCreatinine [Substance Content Units]"),
 	/**
-	 * The Percent binding.
+	 * <div class="en">MicroMolesPerGramHemoglobin [Substance Content
+	 * Units]</div>
 	 */
-	PercentBinding,
+	MicroMolesPerGramHemoglobin_Substance_Content_Units("umol/g{Hgb}",
+			"MicroMolesPerGramHemoglobin [Substance Content Units]"),
 	/**
-	 * The Percent blockade.
+	 * <div class="en">MilliMolesPerGram [Substance Content Units]</div>
 	 */
-	PercentBlockade,
+	MilliMolesPerGram_Substance_Content_Units("mmol/g",
+			"MilliMolesPerGram [Substance Content Units]"),
 	/**
-	 * The Percent bound.
+	 * <div class="en">MilliMolesPerKiloGram [Substance Content Units]</div>
 	 */
-	PercentBound,
+	MilliMolesPerKiloGram_Substance_Content_Units("mmol/kg",
+			"MilliMolesPerKiloGram [Substance Content Units]"),
 	/**
-	 * The Percent carboxyhemoglobin.
+	 * <div class="en">OsmolesPerKiloGram [Substance Content Units]</div>
 	 */
-	PercentCarboxyhemoglobin,
+	OsmolesPerKiloGram_Substance_Content_Units("osm/kg",
+			"OsmolesPerKiloGram [Substance Content Units]"),
 	/**
-	 * The Percent eosinophils seen.
+	 * <div class="en">MilliOsmolesPerKiloGram [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentEosinophilsSeen,
+	MilliOsmolesPerKiloGram_Substance_Rate_Content_Units("mosm/kg",
+			"MilliOsmolesPerKiloGram [Substance Rate Content Units]"),
 	/**
-	 * The Percent excretion.
+	 * <div class="en">MilliEquivalentsPerGram [Substance Content Units]</div>
 	 */
-	PercentExcretion,
+	MilliEquivalentsPerGram_Substance_Content_Units("meq/g",
+			"MilliEquivalentsPerGram [Substance Content Units]"),
 	/**
-	 * The Percent fetal erythrocytes.
+	 * <div class="en">MilliEquivalentsPerGramCreatinine [Substance Content
+	 * Units]</div>
 	 */
-	PercentFetalErythrocytes,
+	MilliEquivalentsPerGramCreatinine_Substance_Content_Units("meq/g{Cre}",
+			"MilliEquivalentsPerGramCreatinine [Substance Content Units]"),
 	/**
-	 * The Percent hemoglobin.
+	 * <div class="en">MilliEquivalentsPerKiloGram [Substance Content
+	 * Units]</div>
 	 */
-	PercentHemoglobin,
+	MilliEquivalentsPerKiloGram_Substance_Content_Units("meq/kg",
+			"MilliEquivalentsPerKiloGram [Substance Content Units]"),
 	/**
-	 * The Percent hemoglobin a1 c.
+	 * <div class="en">InternationalUnitsPerGram [Arbitrary Concentration
+	 * Content Units]</div>
 	 */
-	PercentHemoglobinA1C,
+	InternationalUnitsPerGram_Arbitrary_Concentration_Content_Units("[iU]/g",
+			"InternationalUnitsPerGram [Arbitrary Concentration Content Units]"),
 	/**
-	 * The Percent hemoglobin saturation.
+	 * <div class="en">InternationalUnitsPerGramHemoglobin [Arbitrary
+	 * Concentration Content Units]</div>
 	 */
-	PercentHemoglobinSaturation,
+	InternationalUnitsPerGramHemoglobin_Arbitrary_Concentration_Content_Units(
+			"[iU]/g{Hgb}",
+			"InternationalUnitsPerGramHemoglobin [Arbitrary Concentration Content Units]"),
 	/**
-	 * The Percent hemolysis.
+	 * <div class="en">EhrlichUnitsPer100Gram [Arbitrary Concentration Content
+	 * Units]</div>
 	 */
-	PercentHemolysis,
+	EhrlichUnitsPer100Gram_Arbitrary_Concentration_Content_Units(
+			"{Ehrlich_U}/100g",
+			"EhrlichUnitsPer100Gram [Arbitrary Concentration Content Units]"),
 	/**
-	 * The Percent inhibition.
+	 * <div class="en">InternationalUnitsPerKilogram [Arbitrary Concentration
+	 * Content Units]</div>
 	 */
-	PercentInhibition,
+	InternationalUnitsPerKilogram_Arbitrary_Concentration_Content_Units(
+			"[iU]/kg",
+			"InternationalUnitsPerKilogram [Arbitrary Concentration Content Units]"),
 	/**
-	 * The Percent normal.
+	 * <div class="en">MicroMolesPerMinutePerGram [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentNormal,
+	MicroMolesPerMinutePerGram_Substance_Rate_Content_Units("umol/min/g",
+			"MicroMolesPerMinutePerGram [Substance Rate Content Units]"),
 	/**
-	 * The Percent normal pooled plasma.
+	 * <div class="en">MilliUnitsPerGram [Substance Rate Content Units]</div>
 	 */
-	PercentNormalPooledPlasma,
+	MilliUnitsPerGram_Substance_Rate_Content_Units("mU/g",
+			"MilliUnitsPerGram [Substance Rate Content Units]"),
 	/**
-	 * The Percentof bacteria.
+	 * <div class="en">MilliUnitsPerGramHemoglobin [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentofBacteria,
+	MilliUnitsPerGramHemoglobin_Substance_Rate_Content_Units("mU/g{Hgb}",
+			"MilliUnitsPerGramHemoglobin [Substance Rate Content Units]"),
 	/**
-	 * The Percent of lymphocytes.
+	 * <div class="en">UnitsPerGram [Substance Rate Content Units]</div>
 	 */
-	PercentOfLymphocytes,
+	UnitsPerGram_Substance_Rate_Content_Units("U/g",
+			"UnitsPerGram [Substance Rate Content Units]"),
 	/**
-	 * The Percent of wb cs.
+	 * <div class="en">UnitsPerGramHemoglobin [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentOfWBCs,
+	UnitsPerGramHemoglobin_Substance_Rate_Content_Units("U/g{Hgb}",
+			"UnitsPerGramHemoglobin [Substance Rate Content Units]"),
 	/**
-	 * The Percent oxygen.
+	 * <div class="en">UnitsPerGramCreatinine [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentOxygen,
+	UnitsPerGramCreatinine_Substance_Rate_Content_Units("U/g{Cre}",
+			"UnitsPerGramCreatinine [Substance Rate Content Units]"),
 	/**
-	 * The Percent per100 wbc.
+	 * <div class="en">MilliUnitsPerMilliGramCreatinine [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentPer100WBC,
+	MilliUnitsPerMilliGramCreatinine_Substance_Rate_Content_Units("mU/mg{Cre}",
+			"MilliUnitsPerMilliGramCreatinine [Substance Rate Content Units]"),
 	/**
-	 * The Percent positive.
+	 * <div class="en">MilliUnitsPerMilligram [Substance Rate Content
+	 * Units]</div>
 	 */
-	PercentPositive,
+	MilliUnitsPerMilligram_Substance_Rate_Content_Units("mU/mg",
+			"MilliUnitsPerMilligram [Substance Rate Content Units]"),
 	/**
-	 * The Percent sperm motility.
+	 * <div class="en">KiloUnitsPerGram [Substance Rate Content Units]</div>
 	 */
-	PercentSpermMotility,
+	KiloUnitsPerGram_Substance_Rate_Content_Units("kU/g",
+			"KiloUnitsPerGram [Substance Rate Content Units]"),
 	/**
-	 * The Percent total.
+	 * <div class="en">KatalPerKilogram [Substance Rate Content Units]</div>
 	 */
-	PercentTotal,
+	KatalPerKilogram_Substance_Rate_Content_Units("kat/kg",
+			"KatalPerKilogram [Substance Rate Content Units]"),
 	/**
-	 * The Percent total protein.
+	 * <div class="en">MilliLitersPerKiloGram [Volume Content Units]</div>
 	 */
-	PercentTotalProtein,
+	MilliLitersPerKiloGram_Volume_Content_Units("mL/kg",
+			"MilliLitersPerKiloGram [Volume Content Units]"),
 	/**
-	 * The Percent uptake.
+	 * <div class="en">LitersPerKilogram [Volume Content Units]</div>
 	 */
-	PercentUptake,
+	LitersPerKilogram_Volume_Content_Units("L/kg",
+			"LitersPerKilogram [Volume Content Units]"),
 	/**
-	 * The Per deci liter.
+	 * <div class="en">KiloCaloriesPerOunce [Energy Content Units]</div>
 	 */
-	PerDeciLiter,
+	KiloCaloriesPerOunce_Energy_Content_Units("kCal/[oz_av]",
+			"KiloCaloriesPerOunce [Energy Content Units]"),
 	/**
-	 * The Per entity.
+	 * <div class="en">PerSquareMeter [Areic Number Units]</div>
 	 */
-	PerEntity,
+	PerSquareMeter_Areic_Number_Units("/m2",
+			"PerSquareMeter [Areic Number Units]"),
 	/**
-	 * The Per gram.
+	 * <div class="en">GramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	PerGram,
+	GramsPerSquareMeter_Areic_Mass_Units("g/m2",
+			"GramsPerSquareMeter [Areic Mass Units]"),
 	/**
-	 * The Per gram creatinine.
+	 * <div class="en">KiloGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	PerGramCreatinine,
+	KiloGramsPerSquareMeter_Areic_Mass_Units("kg/m2",
+			"KiloGramsPerSquareMeter [Areic Mass Units]"),
 	/**
-	 * The Per gram hemoglobin.
+	 * <div class="en">MicroGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	PerGramHemoglobin,
+	MicroGramsPerSquareMeter_Areic_Mass_Units("ug/m2",
+			"MicroGramsPerSquareMeter [Areic Mass Units]"),
 	/**
-	 * The Per gram total nitrogen.
+	 * <div class="en">MilliGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	PerGramTotalNitrogen,
+	MilliGramsPerSquareMeter_Areic_Mass_Units("mg/m2",
+			"MilliGramsPerSquareMeter [Areic Mass Units]"),
 	/**
-	 * The Per gram total protein.
+	 * <div class="en">NanoGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	PerGramTotalProtein,
+	NanoGramsPerSquareMeter_Areic_Mass_Units("ng/m2",
+			"NanoGramsPerSquareMeter [Areic Mass Units]"),
 	/**
-	 * The Per gram wet tissue.
+	 * <div class="en">GramMeter [Massive Distance Units]</div>
 	 */
-	PerGramWetTissue,
+	GramMeter_Massive_Distance_Units("g.m",
+			"GramMeter [Massive Distance Units]"),
 	/**
-	 * The Per kilo gram.
+	 * <div class="en">GramMeterPerHeartbeat [Massive Distance Units]</div>
 	 */
-	PerKiloGram,
+	GramMeterPerHeartbeat_Massive_Distance_Units("g.m/{hb}",
+			"GramMeterPerHeartbeat [Massive Distance Units]"),
 	/**
-	 * The Per kilo gram body weight.
+	 * <div class="en">GramMeterPerHeartbeatPerSquareMeter [Lineic Mass
+	 * Units]</div>
 	 */
-	PerKiloGramBodyWeight,
+	GramMeterPerHeartbeatPerSquareMeter_Lineic_Mass_Units("g.m/({hb}.m2)",
+			"GramMeterPerHeartbeatPerSquareMeter [Lineic Mass Units]"),
 	/**
-	 * The Per liter.
+	 * <div class="en">KiloGramsPerMole [Molar Mass Units]</div>
 	 */
-	PerLiter,
+	KiloGramsPerMole_Molar_Mass_Units("kg/mol",
+			"KiloGramsPerMole [Molar Mass Units]"),
 	/**
-	 * The Per micro liter.
+	 * <div class="en">PerMicroLiter [Number Concentration Units]</div>
 	 */
-	PerMicroLiter,
+	PerMicroLiter_Number_Concentration_Units("/uL",
+			"PerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per milli gram.
+	 * <div class="en">CellsPerMicroLiter [Number Concentration Units]</div>
 	 */
-	PerMilliGram,
+	CellsPerMicroLiter_Number_Concentration_Units("{Cells}/uL",
+			"CellsPerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per milli liter.
+	 * <div class="en">RedBloodCellsPerMicroLiter [Number Concentration
+	 * Units]</div>
 	 */
-	PerMilliLiter,
+	RedBloodCellsPerMicroLiter_Number_Concentration_Units("{rbc}/uL",
+			"RedBloodCellsPerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per million.
+	 * <div class="en">ThousandsPerMicroLiter [Number Concentration Units]</div>
 	 */
-	PerMillion,
+	ThousandsPerMicroLiter_Number_Concentration_Units("10*3/uL",
+			"ThousandsPerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per square meter.
+	 * <div class="en">MillionsPerMicroLiter [Number Concentration Units]</div>
 	 */
-	PerSquareMeter,
+	MillionsPerMicroLiter_Number_Concentration_Units("10*6/uL",
+			"MillionsPerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per ten giga.
+	 * <div class="en">BillionsPerMicroLiter [Number Concentration Units]</div>
 	 */
-	PerTenGiga,
+	BillionsPerMicroLiter_Number_Concentration_Units("10*9/uL",
+			"BillionsPerMicroLiter [Number Concentration Units]"),
 	/**
-	 * The Per total count.
+	 * <div class="en">PerMilliLiter [Number Concentration Units]</div>
 	 */
-	PerTotalCount,
+	PerMilliLiter_Number_Concentration_Units("/mL",
+			"PerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Per trillion.
+	 * <div class="en">SpermatozoaPerMilliLiter [Number Concentration
+	 * Units]</div>
 	 */
-	PerTrillion,
+	SpermatozoaPerMilliLiter_Number_Concentration_Units("{Spermatozoa}/mL",
+			"SpermatozoaPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Per trillion red blood cells.
+	 * <div class="en">CopiesPerMilliLiter [Number Concentration Units]</div>
 	 */
-	PerTrillionRedBloodCells,
+	CopiesPerMilliLiter_Number_Concentration_Units("{Copies}/mL",
+			"CopiesPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The p h.
+	 * <div class="en">ThousandPerMilliLiter [Number Concentration Units]</div>
 	 */
-	pH,
+	ThousandPerMilliLiter_Number_Concentration_Units("10*3/mL",
+			"ThousandPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Pico gram.
+	 * <div class="en">ThousandCopiesPerMilliLiter [Number Concentration
+	 * Units]</div>
 	 */
-	PicoGram,
+	ThousandCopiesPerMilliLiter_Number_Concentration_Units("10*3{Copies}/mL",
+			"ThousandCopiesPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Pico grams.
+	 * <div class="en">MillionPerMilliLiter [Number Concentration Units]</div>
 	 */
-	PicoGrams,
+	MillionPerMilliLiter_Number_Concentration_Units("10*6/mL",
+			"MillionPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Pico grams per deci liter.
+	 * <div class="en">BillionsPerMilliliter [Number Concentration Units]</div>
 	 */
-	PicoGramsPerDeciLiter,
+	BillionsPerMilliliter_Number_Concentration_Units("10*9/mL",
+			"BillionsPerMilliliter [Number Concentration Units]"),
 	/**
-	 * The Pico grams per liter.
+	 * <div class="en">ColonyFormingUnitsPerMilliLiter [Number Concentration
+	 * Units]</div>
 	 */
-	PicoGramsPerLiter,
+	ColonyFormingUnitsPerMilliLiter_Number_Concentration_Units("{cfu}/mL",
+			"ColonyFormingUnitsPerMilliLiter [Number Concentration Units]"),
 	/**
-	 * The Pico grams per milli liter.
+	 * <div class="en">PerDeciLiter [Number Concentration Units]</div>
 	 */
-	PicoGramsPerMilliLiter,
+	PerDeciLiter_Number_Concentration_Units("/dL",
+			"PerDeciLiter [Number Concentration Units]"),
 	/**
-	 * The Pico grams per milli meter.
+	 * <div class="en">PerLiter [Number Concentration Units]</div>
 	 */
-	PicoGramsPerMilliMeter,
+	PerLiter_Number_Concentration_Units("/L",
+			"PerLiter [Number Concentration Units]"),
 	/**
-	 * The Pico liter.
+	 * <div class="en">ThousandPerLiter [Number Concentration Units]</div>
 	 */
-	PicoLiter,
+	ThousandPerLiter_Number_Concentration_Units("10*3/L",
+			"ThousandPerLiter [Number Concentration Units]"),
 	/**
-	 * The Pico meter.
+	 * <div class="en">MillionPerLiter [Number Concentration Units]</div>
 	 */
-	PicoMeter,
+	MillionPerLiter_Number_Concentration_Units("10*6/L",
+			"MillionPerLiter [Number Concentration Units]"),
 	/**
-	 * The Pico mole.
+	 * <div class="en">TrillionPerLiter [Number Concentration Units]</div>
 	 */
-	PicoMole,
+	TrillionPerLiter_Number_Concentration_Units("10*12/L",
+			"TrillionPerLiter [Number Concentration Units]"),
 	/**
-	 * The Pico moles per deci liter.
+	 * <div class="en">BillionPerLiter [Number Concentration Units]</div>
 	 */
-	PicoMolesPerDeciLiter,
+	BillionPerLiter_Number_Concentration_Units("10*9/L",
+			"BillionPerLiter [Number Concentration Units]"),
 	/**
-	 * The Pico moles per liter.
+	 * <div class="en">PicoGramsPerMilliLiter [Mass Concentration Units]</div>
 	 */
-	PicoMolesPerLiter,
+	PicoGramsPerMilliLiter_Mass_Concentration_Units("pg/mL",
+			"PicoGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
-	 * The Pico moles per micro mole.
+	 * <div class="en">NanoGramsPerMilliLiter [Mass Concentration Units]</div>
 	 */
-	PicoMolesPerMicroMole,
+	NanoGramsPerMilliLiter_Mass_Concentration_Units("ng/mL",
+			"NanoGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
-	 * The Pico moles per milli liter.
+	 * <div class="en">NanoGramsPerMilliLiterRedBloodCells [Mass Concentration
+	 * Units]</div>
 	 */
-	PicoMolesPerMilliLiter,
+	NanoGramsPerMilliLiterRedBloodCells_Mass_Concentration_Units("ng/mL{rbc}",
+			"NanoGramsPerMilliLiterRedBloodCells [Mass Concentration Units]"),
 	/**
-	 * The Pico second.
+	 * <div class="en">MicroGramsPerMilliLiter [Mass Concentration Units]</div>
 	 */
-	PicoSecond,
+	MicroGramsPerMilliLiter_Mass_Concentration_Units("ug/mL",
+			"MicroGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
-	 * The Pint.
+	 * <div class="en">MilliGramsPerMilliLiter [Mass Concentration Units]</div>
 	 */
-	Pint,
+	MilliGramsPerMilliLiter_Mass_Concentration_Units("mg/mL",
+			"MilliGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
-	 * The Pound.
+	 * <div class="en">GramsPerMilliLiter [Mass Concentration Units]</div>
 	 */
-	Pound,
+	GramsPerMilliLiter_Mass_Concentration_Units("g/mL",
+			"GramsPerMilliLiter [Mass Concentration Units]"),
 	/**
-	 * The Quart.
+	 * <div class="en">PicoGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	Quart,
+	PicoGramsPerDeciLiter_Mass_Concentration_Units("pg/dL",
+			"PicoGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Red blood cells per micro liter.
+	 * <div class="en">NanoGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	RedBloodCellsPerMicroLiter,
+	NanoGramsPerDeciLiter_Mass_Concentration_Units("ng/dL",
+			"NanoGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Relative percent.
+	 * <div class="en">MicroGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	RelativePercent,
+	MicroGramsPerDeciLiter_Mass_Concentration_Units("ug/dL",
+			"MicroGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Second.
+	 * <div class="en">MicroGramsPerDeciLiterRedBloodCells [Mass Concentration
+	 * Units]</div>
 	 */
-	Second,
+	MicroGramsPerDeciLiterRedBloodCells_Mass_Concentration_Units("ug/dL{rbc}",
+			"MicroGramsPerDeciLiterRedBloodCells [Mass Concentration Units]"),
 	/**
-	 * The Spermatozoa per milli liter.
+	 * <div class="en">MilliGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	SpermatozoaPerMilliLiter,
+	MilliGramsPerDeciLiter_Mass_Concentration_Units("mg/dL",
+			"MilliGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Square centi meter.
+	 * <div class="en">MilliGramsPhenylketonesPerDeciLiter [Mass Concentration
+	 * Units]</div>
 	 */
-	SquareCentiMeter,
+	MilliGramsPhenylketonesPerDeciLiter_Mass_Concentration_Units(
+			"mg{Phenylketones}/dL",
+			"MilliGramsPhenylketonesPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Square feet.
+	 * <div class="en">GramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	SquareFeet,
+	GramsPerDeciLiter_Mass_Concentration_Units("g/dL",
+			"GramsPerDeciLiter [Mass Concentration Units]"),
 	/**
-	 * The Square inch.
+	 * <div class="en">NanoGramsPerLiter [Mass Concentration Units]</div>
 	 */
-	SquareInch,
+	NanoGramsPerLiter_Mass_Concentration_Units("ng/L",
+			"NanoGramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Square meter.
+	 * <div class="en">PicoGramsPerLiter [Mass Concentration Units]</div>
 	 */
-	SquareMeter,
+	PicoGramsPerLiter_Mass_Concentration_Units("pg/L",
+			"PicoGramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Square milli meter.
+	 * <div class="en">MicroGramsPerLiter [Mass Concentration Units]</div>
 	 */
-	SquareMilliMeter,
+	MicroGramsPerLiter_Mass_Concentration_Units("ug/L",
+			"MicroGramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Square yard.
+	 * <div class="en">MilliGramsPerLiter [Mass Concentration Units]</div>
 	 */
-	SquareYard,
+	MilliGramsPerLiter_Mass_Concentration_Units("mg/L",
+			"MilliGramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Statute mile.
+	 * <div class="en">GramsPerLiter [Mass Concentration Units]</div>
 	 */
-	StatuteMile,
+	GramsPerLiter_Mass_Concentration_Units("g/L",
+			"GramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Ten to eighth.
+	 * <div class="en">KiloGramsPerLiter [Mass Concentration Units]</div>
 	 */
-	TenToEighth,
+	KiloGramsPerLiter_Mass_Concentration_Units("kg/L",
+			"KiloGramsPerLiter [Mass Concentration Units]"),
 	/**
-	 * The Thousand.
+	 * <div class="en">MilliGramsPerCubicMeter [Mass Concentration Units]</div>
 	 */
-	Thousand,
+	MilliGramsPerCubicMeter_Mass_Concentration_Units("mg/m3",
+			"MilliGramsPerCubicMeter [Mass Concentration Units]"),
 	/**
-	 * The Thousand copies per milli liter.
+	 * <div class="en">KiloGramsPerCubicMeter [Mass Concentration Units]</div>
 	 */
-	ThousandCopiesPerMilliLiter,
+	KiloGramsPerCubicMeter_Mass_Concentration_Units("kg/m3",
+			"KiloGramsPerCubicMeter [Mass Concentration Units]"),
 	/**
-	 * The Thousand per liter.
+	 * <div class="en">FemtoMolesPerMilliLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	ThousandPerLiter,
+	FemtoMolesPerMilliLiter_Substance_Concentration_Units("fmol/mL",
+			"FemtoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
-	 * The Thousand per milli liter.
+	 * <div class="en">PicoMolesPerMilliLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	ThousandPerMilliLiter,
+	PicoMolesPerMilliLiter_Substance_Concentration_Units("pmol/mL",
+			"PicoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
-	 * The Thousand red blood cells.
+	 * <div class="en">NanoMolesPerMilliLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	ThousandRedBloodCells,
+	NanoMolesPerMilliLiter_Substance_Concentration_Units("nmol/mL",
+			"NanoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
-	 * The Thousands per micro liter.
+	 * <div class="en">MicroMolesPerMilliLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	ThousandsPerMicroLiter,
+	MicroMolesPerMilliLiter_Substance_Concentration_Units("umol/mL",
+			"MicroMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
-	 * The Ton.
+	 * <div class="en">MolesPerMilliLiter [Substance Concentration Units]</div>
 	 */
-	Ton,
+	MolesPerMilliLiter_Substance_Concentration_Units("mol/mL",
+			"MolesPerMilliLiter [Substance Concentration Units]"),
 	/**
-	 * The Trillion per liter.
+	 * <div class="en">PicoMolesPerDeciLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	TrillionPerLiter,
+	PicoMolesPerDeciLiter_Substance_Concentration_Units("pmol/dL",
+			"PicoMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
-	 * The Troy ounce.
+	 * <div class="en">NanoMolesPerDeciLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	TroyOunce,
+	NanoMolesPerDeciLiter_Substance_Concentration_Units("nmol/dL",
+			"NanoMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
-	 * The Units per gram.
+	 * <div class="en">MicroMolesPerDeciLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	UnitsPerGram,
+	MicroMolesPerDeciLiter_Substance_Concentration_Units("umol/dL",
+			"MicroMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
-	 * The Units per gram creatinine.
+	 * <div class="en">MilliMolesPerDeciLiter [Substance Concentration
+	 * Units]</div>
 	 */
-	UnitsPerGramCreatinine,
+	MilliMolesPerDeciLiter_Substance_Concentration_Units("mmol/dL",
+			"MilliMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
-	 * The Units per gram hemoglobin.
+	 * <div class="en">MilliMolesPerLiter [Substance Concentration Units]</div>
 	 */
-	UnitsPerGramHemoglobin,
+	MilliMolesPerLiter_Substance_Concentration_Units("mmol/L",
+			"MilliMolesPerLiter [Substance Concentration Units]"),
 	/**
-	 * The Units per liter.
+	 * <div class="en">PicoMolesPerLiter [Substance Concentration Units]</div>
 	 */
-	UnitsPerLiter,
+	PicoMolesPerLiter_Substance_Concentration_Units("pmol/L",
+			"PicoMolesPerLiter [Substance Concentration Units]"),
 	/**
-	 * The Volume percent.
+	 * <div class="en">NanoMolesPerLiter [Substance Concentration Units]</div>
 	 */
-	VolumePercent,
+	NanoMolesPerLiter_Substance_Concentration_Units("nmol/L",
+			"NanoMolesPerLiter [Substance Concentration Units]"),
 	/**
-	 * The Week.
+	 * <div class="en">MicroMolesPerLiter [Substance Concentration Units]</div>
 	 */
-	Week,
+	MicroMolesPerLiter_Substance_Concentration_Units("umol/L",
+			"MicroMolesPerLiter [Substance Concentration Units]"),
 	/**
-	 * The Yard.
+	 * <div class="en">MolesPerLiter [Substance Concentration Units]</div>
 	 */
-	Yard,
+	MolesPerLiter_Substance_Concentration_Units("mol/L",
+			"MolesPerLiter [Substance Concentration Units]"),
 	/**
-	 * The Year.
+	 * <div class="en">MolesPerCubicMeter [Substance Concentration Units]</div>
 	 */
-	Year
+	MolesPerCubicMeter_Substance_Concentration_Units("mol/m3",
+			"MolesPerCubicMeter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MicroEquivalentsPerMilliLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MicroEquivalentsPerMilliLiter_Substance_Concentration_Units("ueq/mL",
+			"MicroEquivalentsPerMilliLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MilliEquivalentPerMilliLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MilliEquivalentPerMilliLiter_Substance_Concentration_Units("meq/mL",
+			"MilliEquivalentPerMilliLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">EquivalentsPerMilliLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	EquivalentsPerMilliLiter_Substance_Concentration_Units("eq/mL",
+			"EquivalentsPerMilliLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">AHGEquivalentsPerMilliLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	AHGEquivalentsPerMilliLiter_Substance_Concentration_Units("{AHG}eq/mL",
+			"AHGEquivalentsPerMilliLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MillionEquivalentsPerMilliLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MillionEquivalentsPerMilliLiter_Substance_Concentration_Units("10*6.eq/mL",
+			"MillionEquivalentsPerMilliLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MicroEquivalentsPerLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MicroEquivalentsPerLiter_Substance_Concentration_Units("ueq/L",
+			"MicroEquivalentsPerLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MilliEquivalentsPerLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MilliEquivalentsPerLiter_Substance_Concentration_Units("meq/L",
+			"MilliEquivalentsPerLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">EquivalentsPerLiter [Substance Concentration Units]</div>
+	 */
+	EquivalentsPerLiter_Substance_Concentration_Units("eq/L",
+			"EquivalentsPerLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MilliEquivalentsPerDeciLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MilliEquivalentsPerDeciLiter_Substance_Concentration_Units("meq/dL",
+			"MilliEquivalentsPerDeciLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MilliOsmolesPerLiter [Substance Concentration
+	 * Units]</div>
+	 */
+	MilliOsmolesPerLiter_Substance_Concentration_Units("mosm/L",
+			"MilliOsmolesPerLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">OsmolesPerLiter [Substance Concentration Units]</div>
+	 */
+	OsmolesPerLiter_Substance_Concentration_Units("osm/L",
+			"OsmolesPerLiter [Substance Concentration Units]"),
+	/**
+	 * <div class="en">MicroInternationalUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	MicroInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"u[iU]/mL",
+			"MicroInternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">MilliInternationalUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	MilliInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"m[iU]/mL",
+			"MilliInternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">IgGPhospholipidUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	IgGPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"{IgGPhospholipid}U/mL",
+			"IgGPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">IgMPhospholipidUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	IgMPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"{IgMPhospholipid}U/mL",
+			"IgMPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">ComplementCh50UnitsPerMilliLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	ComplementCh50UnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"{ComplementCh50}U/mL",
+			"ComplementCh50UnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">IgAPhospholipidUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	IgAPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"{IgAPhospholipid}U/mL",
+			"IgAPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">ElisaUnitsPerMilliLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	ElisaUnitsPerMilliLiter_Arbitrary_Concentration_Units("{Elisa_U}/mL",
+			"ElisaUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">InternationalUnitsPerMilliLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	InternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units("[iU]/mL",
+			"InternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">KiloInternationalUnitsPerMilliLiter [Arbitrary
+	 * Concentration Units]</div>
+	 */
+	KiloInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units(
+			"k[iU]/mL",
+			"KiloInternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">InternationalUnitsPerDeciLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	InternationalUnitsPerDeciLiter_Arbitrary_Concentration_Units("[iU]/dL",
+			"InternationalUnitsPerDeciLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">EhrlichUnitsPerDeciLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	EhrlichUnitsPerDeciLiter_Arbitrary_Concentration_Units("{Ehrlich_U}/dL",
+			"EhrlichUnitsPerDeciLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">MilliInternationalUnitsPerLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	MilliInternationalUnitsPerLiter_Arbitrary_Concentration_Units("m[iU]/L",
+			"MilliInternationalUnitsPerLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">InternationalUnitsPerLiter [Arbitrary Concentration
+	 * Units]</div>
+	 */
+	InternationalUnitsPerLiter_Arbitrary_Concentration_Units("[iU]/L",
+			"InternationalUnitsPerLiter [Arbitrary Concentration Units]"),
+	/**
+	 * <div class="en">pH [pH Units]</div>
+	 */
+	pH_pH_Units("[pH]", "pH [pH Units]");
+	public static final String Descriptive_Name_CODE = "Code";
+	public static final String Percent_Most_Common_Healthcare_Units_CODE = "%";
+	public static final String PerMicroLiter_Most_Common_Healthcare_Units_CODE = "/uL";
+	public static final String InternationalUnitsPerLiter_Most_Common_Healthcare_Units_CODE = "[iU]/L";
+	public static final String ThousandsPerMicroLiter_Most_Common_Healthcare_Units_CODE = "10*3/uL";
+	public static final String MillionsPerMicroLiter_Most_Common_Healthcare_Units_CODE = "10*6/uL";
+	public static final String FemtoLiter_Most_Common_Healthcare_Units_CODE = "fL";
+	public static final String GramsPerDeciLiter_Most_Common_Healthcare_Units_CODE = "g/dL";
+	public static final String GramsPerLiter_Most_Common_Healthcare_Units_CODE = "g/L";
+	public static final String GramsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "g/mL";
+	public static final String KiloPascal_Most_Common_Healthcare_Units_CODE = "kPa";
+	public static final String MilliInternationalUnitsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "m[iU]/mL";
+	public static final String MilliEquivalentsPerLiter_Most_Common_Healthcare_Units_CODE = "meq/L";
+	public static final String MilliGramsPerDeciLiter_Most_Common_Healthcare_Units_CODE = "mg/dL";
+	public static final String MilliMetersOfMercury_Most_Common_Healthcare_Units_CODE = "mm[Hg]";
+	public static final String MilliMolesPerKiloGram_Most_Common_Healthcare_Units_CODE = "mmol/kg";
+	public static final String MilliMolesPerLiter_Most_Common_Healthcare_Units_CODE = "mmol/L";
+	public static final String MilliOsmolesPerKiloGram_Most_Common_Healthcare_Units_CODE = "mosm/kg";
+	public static final String NanoGramsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "ng/mL";
+	public static final String NanoMolesPerLiter_Most_Common_Healthcare_Units_CODE = "nmol/L";
+	public static final String PicoGrams_Most_Common_Healthcare_Units_CODE = "pg";
+	public static final String PicoGramsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "pg/mL";
+	public static final String PicoMolesPerLiter_Most_Common_Healthcare_Units_CODE = "pmol/L";
+	public static final String UnitsPerLiter_Most_Common_Healthcare_Units_CODE = "U/L";
+	public static final String MicroInternationalUnitsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "u[iU]/mL";
+	public static final String MicroGramsPerDeciLiter_Most_Common_Healthcare_Units_CODE = "ug/dL";
+	public static final String MicroGramsPerLiter_Most_Common_Healthcare_Units_CODE = "ug/L";
+	public static final String MicroGramsPerMilliLiter_Most_Common_Healthcare_Units_CODE = "ug/mL";
+	public static final String MicroMolesPerLiter_Most_Common_Healthcare_Units_CODE = "umol/L";
+	public static final String Log10_Unity_CODE = "[lg]";
+	public static final String MillionPerSpecimen_Unity_CODE = "10*6/{Specimen}";
+	public static final String PerTotalCount_Unity_CODE = "/{tot}";
+	public static final String Thousand_Unity_CODE = "10*3";
+	public static final String ThousandRedBloodCells_Unity_CODE = "10*3.{RBC}";
+	public static final String OneHundredThousand_Unity_CODE = "10*5";
+	public static final String Million_Unity_CODE = "10*6";
+	public static final String TenToEighth_Unity_CODE = "10*8";
+	public static final String Percent_General_Fraction_Unit_CODE = "%";
+	public static final String RelativePercent_General_Fraction_Unit_CODE = "{Relative}%";
+	public static final String PercentTotal_General_Fraction_Unit_CODE = "%{Total}";
+	public static final String Percent0to3Hours_General_Fraction_Unit_CODE = "%{0to3Hours}";
+	public static final String PerTenGiga_Number_Fraction_Units_CODE = "/10*10";
+	public static final String PerMillion_Number_Fraction_Units_CODE = "/10*6";
+	public static final String PerBillion_Number_Fraction_Units_CODE = "/10*9";
+	public static final String PerTrillion_Number_Fraction_Units_CODE = "/10*12";
+	public static final String PercentNormal_Number_Fraction_Units_CODE = "%{Normal}";
+	public static final String PercentSpermMotility_Number_Fraction_Units_CODE = "%{SpermMotility}";
+	public static final String PercentPositive_Number_Fraction_Units_CODE = "%{Positive}";
+	public static final String PercentFetalErythrocytes_Number_Fraction_Units_CODE = "%{FetalErythrocytes}";
+	public static final String PercentOfLymphocytes_Number_Fraction_Units_CODE = "%{OfLymphocytes}";
+	public static final String PercentofBacteria_Number_Fraction_Units_CODE = "%{ofBacteria}";
+	public static final String PercentOfWBCs_Number_Fraction_Units_CODE = "%{OfWBCs}";
+	public static final String PercentAbnormal_Number_Fraction_Units_CODE = "%{Abnormal}";
+	public static final String PercentEosinophilsSeen_Number_Fraction_Units_CODE = "%{EosSeen}";
+	public static final String PercentHemolysis_Number_Fraction_Units_CODE = "%{Hemolysis}";
+	public static final String PercentBlockade_Number_Fraction_Units_CODE = "%{Blockade}";
+	public static final String PercentPer100WBC_Number_Fraction_Units_CODE = "%/100{WBC}";
+	public static final String PercentBinding_Mass_Or_Substance_Fraction_Units_CODE = "%{Binding}";
+	public static final String PercentTotalProtein_Mass_Or_Substance_Fraction_Units_CODE = "%{TotalProtein}";
+	public static final String PercentBound_Mass_Or_Substance_Fraction_Units_CODE = "%{Bound}";
+	public static final String PercentHemoglobin_Mass_Or_Substance_Fraction_Units_CODE = "%{Hemoglobin}";
+	public static final String PercentHemoglobinSaturation_Mass_Or_Substance_Fraction_Units_CODE = "%{HemoglobinSaturation}";
+	public static final String PercentCarboxyhemoglobin_Mass_Or_Substance_Fraction_Units_CODE = "%{Carboxyhemoglobin}";
+	public static final String PercentHemoglobinA1C_Mass_Or_Substance_Fraction_Units_CODE = "%{HemoglobinA1C}";
+	public static final String PercentExcretion_Mass_Or_Substance_Rate_Fraction_Units_CODE = "%{Excretion}";
+	public static final String PercentUptake_Mass_Or_Substance_Rate_Fraction_Units_CODE = "%{Uptake}";
+	public static final String MicroGramsPerNanoGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/ng";
+	public static final String NanoGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ng/mg";
+	public static final String NanoGramsPerMilliGramProtein_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ng/mg{Protein}";
+	public static final String MicroGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/mg";
+	public static final String MicroGramsPerMilliGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/mg{Cre}";
+	public static final String MilliGramsPerMilliGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "mg/mg";
+	public static final String MilligramsPerMilligramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "mg/mg{Cre}";
+	public static final String NanoGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ng/g";
+	public static final String NanoGramsPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ng/g{Cre}";
+	public static final String MicroGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/g";
+	public static final String MicroGramPer100Gram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/[100]g";
+	public static final String MicroGramPerGramDryWeight_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/g{DryWeight}";
+	public static final String MicroGramPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/g{Cre}";
+	public static final String MicroGramsPerGramHemoglobin_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/g{Hgb}";
+	public static final String MilliGramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "mg/g";
+	public static final String MilliGramPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "mg/g{Cre}";
+	public static final String GramsPerGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "g/g";
+	public static final String NanoGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ng/kg";
+	public static final String MicroGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "ug/kg";
+	public static final String MilliGramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "mg/kg";
+	public static final String GramsPerKiloGram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "g/kg";
+	public static final String GramsPer100Gram_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "g/[100]g";
+	public static final String GramsPerGramCreatinine_Mass_Ratio_Or_Mass_Fraction_Or_Mass_Content_Units_CODE = "g/g{Cre}";
+	public static final String PicoMolesPerMicroMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "pmol/umol";
+	public static final String NanoMolesPerMilliMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "nmol/mmol";
+	public static final String NanoMolesPerMilliMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "nmol/mmol{Cre}";
+	public static final String NanoMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "nmol/mol";
+	public static final String MicroMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "umol/mol";
+	public static final String MilliMolesPerMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "mmol/mol";
+	public static final String MilliMolesPerMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "mmol/mol{Cre}";
+	public static final String MicroMolesPerMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "umol/mol{Cre}";
+	public static final String EquivalentsPerMicroMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "eq/umol";
+	public static final String EquivalentsPerMilliMole_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "eq/mmol";
+	public static final String BoneCollagenEquivalentsPerMilliMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "{BoneCollagen}eq/mmol{Cre}";
+	public static final String BoneCollagenEquivalentsPerMicroMoleCreatinine_Substance_Ratio_Or_Substance_Fraction_Units_CODE = "{BoneCollagen}eq/umol{Cre}";
+	public static final String VolumePercent_Volume_Fraction_Units_CODE = "%{vol}";
+	public static final String PercentOxygen_Volume_Fraction_Units_CODE = "%{Oxygen}";
+	public static final String MilliLitersPerDeciLiter_Volume_Fraction_Units_CODE = "mL/dL";
+	public static final String PercentNormalPooledPlasma_Catalytic_Fraction_Or_Arbitrary_Fraction_Units_CODE = "%{NormalPooledPlasma}";
+	public static final String PercentActivity_Catalytic_Fraction_Or_Arbitrary_Fraction_Units_CODE = "%{Activity}";
+	public static final String PercentBasalActivity_Catalytic_Fraction_Or_Arbitrary_Fraction_Units_CODE = "%{BasalActivity}";
+	public static final String PercentInhibition_Catalytic_Fraction_Or_Arbitrary_Fraction_Units_CODE = "%{Inhibition}";
+	public static final String PerEntity_Entitic_Number_Units_CODE = "/{Entity}";
+	public static final String Per100WBC_Entitic_Number_Units_CODE = "/100{WBC}";
+	public static final String Per100_Entitic_Number_Units_CODE = "/100";
+	public static final String Per100Spermatozoa_Entitic_Number_Units_CODE = "/100{Spermatozoa}";
+	public static final String PerTrillionRedBloodCells_Entitic_Number_Units_CODE = "/10*12{rbc}";
+	public static final String DegreesOfArc_Plane_Angle_Units_CODE = "deg";
+	public static final String PerArbitraryUnit_Arbitrary_Number_Units_CODE = "/[arb`U]";
+	public static final String MicroInternationalUnit_Arbitrary_Units_CODE = "u[iU]";
+	public static final String InternationalUnit_Arbitrary_Units_CODE = "[iU]";
+	public static final String MillionInternationalUnit_Arbitrary_Units_CODE = "10*6.[iU]";
+	public static final String Inch_English_Length_Units_CODE = "[in_i]";
+	public static final String Feet_English_Length_Units_CODE = "[ft_i]";
+	public static final String Yard_English_Length_Units_CODE = "[yd_i]";
+	public static final String Fathom_English_Length_Units_CODE = "[fth_i]";
+	public static final String StatuteMile_English_Length_Units_CODE = "[mi_i]";
+	public static final String NauticalMile_English_Length_Units_CODE = "[nmi_i]";
+	public static final String French_English_Length_Units_CODE = "[Ch]";
+	public static final String FemtoMeter_SI_Length_Units_CODE = "fm";
+	public static final String PicoMeter_SI_Length_Units_CODE = "pm";
+	public static final String NanoMeter_SI_Length_Units_CODE = "nm";
+	public static final String MicroMeter_SI_Length_Units_CODE = "um";
+	public static final String MilliMeter_SI_Length_Units_CODE = "mm";
+	public static final String CentiMeter_SI_Length_Units_CODE = "cm";
+	public static final String DeciMeter_SI_Length_Units_CODE = "dm";
+	public static final String Meter_SI_Length_Units_CODE = "m";
+	public static final String KiloMeter_SI_Length_Units_CODE = "km";
+	public static final String Grain_English_Mass_Units_CODE = "[gr]";
+	public static final String Ounce_English_Mass_Units_CODE = "[oz_av]";
+	public static final String TroyOunce_English_Mass_Units_CODE = "[oz_tr]";
+	public static final String Pound_English_Mass_Units_CODE = "[lb_av]";
+	public static final String Ton_English_Mass_Units_CODE = "[ston_av]";
+	public static final String Dram_English_Mass_Units_CODE = "[dr_av]";
+	public static final String FemtoGram_SI_Mass_Units_CODE = "fg";
+	public static final String PicoGram_SI_Mass_Units_CODE = "pg";
+	public static final String NanoGram_SI_Mass_Units_CODE = "ng";
+	public static final String MicroGram_SI_Mass_Units_CODE = "ug";
+	public static final String MicroGramsPerTotalVolume_SI_Mass_Units_CODE = "ug/{TotalVolume}";
+	public static final String MicroGramsPerSpecimen_SI_Mass_Units_CODE = "ug/{Specimen}";
+	public static final String MilliGram_SI_Mass_Units_CODE = "mg";
+	public static final String MilliGramsPerVolume_SI_Mass_Units_CODE = "mg/{Volume}";
+	public static final String MilliGramPerTotalVolume_SI_Mass_Units_CODE = "mg/{TotalVolume}";
+	public static final String Gram_SI_Mass_Units_CODE = "g";
+	public static final String GramsPerTotalWeight_SI_Mass_Units_CODE = "g/{TotalWeight}";
+	public static final String DeciGram_SI_Mass_Units_CODE = "dg";
+	public static final String CentiGram_SI_Mass_Units_CODE = "cg";
+	public static final String KiloGram_SI_Mass_Units_CODE = "kg";
+	public static final String MetricTon_SI_Mass_Units_CODE = "t";
+	public static final String PicoGramsPerMilliMeter_Lineic_Mass_Units_CODE = "pg/mm";
+	public static final String DegreesKelvin_Temperature_Units_CODE = "K";
+	public static final String DegreesCelsius_Temperature_Units_CODE = "Cel";
+	public static final String DegreesFahrenheit_Temperature_Units_CODE = "[degF]";
+	public static final String KelvinPerWatt_Thermal_Resistance_Units_CODE = "K/W";
+	public static final String PicoSecond_Time_Units_CODE = "ps";
+	public static final String NanoSecond_Time_Units_CODE = "ns";
+	public static final String MicroSecond_Time_Units_CODE = "us";
+	public static final String MilliSecond_Time_Units_CODE = "ms";
+	public static final String Second_Time_Units_CODE = "s";
+	public static final String KiloSecond_Time_Units_CODE = "ks";
+	public static final String Megasecond_Time_Units_CODE = "Ms";
+	public static final String Minute_Time_Units_CODE = "min";
+	public static final String Hour_Time_Units_CODE = "h";
+	public static final String Day_Time_Units_CODE = "d";
+	public static final String Week_Time_Units_CODE = "wk";
+	public static final String Month_Time_Units_CODE = "mo";
+	public static final String Year_Time_Units_CODE = "a";
+	public static final String Equivalent_Substance_Units_CODE = "eq";
+	public static final String MicroEquivalent_Substance_Units_CODE = "ueq";
+	public static final String MilliEquivalent_Substance_Units_CODE = "meq";
+	public static final String MilliEquivalentsPerSpecimen_Substance_Units_CODE = "meq/{Specimen}";
+	public static final String Mole_Substance_Units_CODE = "mol";
+	public static final String MilliMole_Substance_Units_CODE = "mmol";
+	public static final String MilliMolesPerTotalVolume_Substance_Units_CODE = "mmol/{TotalVolume}";
+	public static final String Femtomole_Substance_Units_CODE = "fmol";
+	public static final String PicoMole_Substance_Units_CODE = "pmol";
+	public static final String MicroMole_Substance_Units_CODE = "umol";
+	public static final String NanoMole_Substance_Units_CODE = "nmol";
+	public static final String MilliOsmole_Substance_Units_CODE = "mosm";
+	public static final String MilliEquivalentsPerSquareMeter_Areic_Substance_Units_CODE = "meq/m2";
+	public static final String MilliMolesPerSquareMeter_Areic_Substance_Units_CODE = "mmol/m2";
+	public static final String SquareInch_English_Area_Units_CODE = "[sin_i]";
+	public static final String SquareFeet_English_Area_Units_CODE = "[sft_i]";
+	public static final String SquareYard_English_Area_Units_CODE = "[syd_i]";
+	public static final String SquareMilliMeter_SI_Area_Units_CODE = "mm2";
+	public static final String SquareCentiMeter_SI_Area_Units_CODE = "cm2";
+	public static final String SquareMeter_SI_Area_Units_CODE = "m2";
+	public static final String FluidOunce_English_Volume_Units_CODE = "[foz_us]";
+	public static final String CubicInch_English_Volume_Units_CODE = "[cin_i]";
+	public static final String Cup_English_Volume_Units_CODE = "[cup_us]";
+	public static final String Pint_English_Volume_Units_CODE = "[pt_us]";
+	public static final String Quart_English_Volume_Units_CODE = "[qt_us]";
+	public static final String Gallon_English_Volume_Units_CODE = "[gal_us]";
+	public static final String FluidDram_English_Volume_Units_CODE = "[fdr_us]";
+	public static final String FemtoLiter_SI_Volume_Units_CODE = "fL";
+	public static final String PicoLiter_SI_Volume_Units_CODE = "pL";
+	public static final String NanoLiter_SI_Volume_Units_CODE = "nL";
+	public static final String MicroLiter_SI_Volume_Units_CODE = "uL";
+	public static final String MilliLiter_SI_Volume_Units_CODE = "mL";
+	public static final String MilliLitersPerHeartbeat_SI_Volume_Units_CODE = "mL/{h`b}";
+	public static final String Liter_SI_Volume_Units_CODE = "L";
+	public static final String DeciLiter_SI_Volume_Units_CODE = "dL";
+	public static final String CentiLiter_SI_Volume_Units_CODE = "cL";
+	public static final String KiloLiter_SI_Volume_Units_CODE = "kL";
+	public static final String HectoLiter_SI_Volume_Units_CODE = "hL";
+	public static final String LiterSquareSecondPerSecond_Volume_Duration_Units_CODE = "L.s2/s";
+	public static final String PerMilliGram_Number_Content_Units_CODE = "/mg";
+	public static final String PerGram_Number_Content_Units_CODE = "/g";
+	public static final String PerGramCreatinine_Number_Content_Units_CODE = "/g{creat}";
+	public static final String PerGramHemoglobin_Number_Content_Units_CODE = "/g{HGB}";
+	public static final String PerGramTotalNitrogen_Number_Content_Units_CODE = "/g{tot`nit}";
+	public static final String PerGramTotalProtein_Number_Content_Units_CODE = "/g{tot`prot}";
+	public static final String PerGramWetTissue_Number_Content_Units_CODE = "/g{wet`tis}";
+	public static final String PerKiloGram_Number_Content_Units_CODE = "/kg";
+	public static final String PerKiloGramBodyWeight_Number_Content_Units_CODE = "/kg{body`wt}";
+	public static final String FemtoMolesPerMilliGram_Substance_Content_Units_CODE = "fmol/mg";
+	public static final String NanoMolesPerMilliGram_Substance_Content_Units_CODE = "nmol/mg";
+	public static final String MicroMolesPerMilliGram_Substance_Content_Units_CODE = "umol/mg";
+	public static final String MicroMolesPerMilliGramCreatinine_Substance_Content_Units_CODE = "umol/mg{Cre}";
+	public static final String MolesPerKiloGram_Substance_Content_Units_CODE = "mol/kg";
+	public static final String FemtoMolesPerGram_Substance_Content_Units_CODE = "fmol/g";
+	public static final String NanoMolesPerGram_Substance_Content_Units_CODE = "nmol/g";
+	public static final String NanoMolesPerGramCreatinine_Substance_Content_Units_CODE = "nmol/g{Cre}";
+	public static final String MicroMolesPerGram_Substance_Content_Units_CODE = "umol/g";
+	public static final String MicroMolesPerGramCreatinine_Substance_Content_Units_CODE = "umol/g{Cre}";
+	public static final String MicroMolesPerGramHemoglobin_Substance_Content_Units_CODE = "umol/g{Hgb}";
+	public static final String MilliMolesPerGram_Substance_Content_Units_CODE = "mmol/g";
+	public static final String MilliMolesPerKiloGram_Substance_Content_Units_CODE = "mmol/kg";
+	public static final String OsmolesPerKiloGram_Substance_Content_Units_CODE = "osm/kg";
+	public static final String MilliOsmolesPerKiloGram_Substance_Rate_Content_Units_CODE = "mosm/kg";
+	public static final String MilliEquivalentsPerGram_Substance_Content_Units_CODE = "meq/g";
+	public static final String MilliEquivalentsPerGramCreatinine_Substance_Content_Units_CODE = "meq/g{Cre}";
+	public static final String MilliEquivalentsPerKiloGram_Substance_Content_Units_CODE = "meq/kg";
+	public static final String InternationalUnitsPerGram_Arbitrary_Concentration_Content_Units_CODE = "[iU]/g";
+	public static final String InternationalUnitsPerGramHemoglobin_Arbitrary_Concentration_Content_Units_CODE = "[iU]/g{Hgb}";
+	public static final String EhrlichUnitsPer100Gram_Arbitrary_Concentration_Content_Units_CODE = "{Ehrlich_U}/100g";
+	public static final String InternationalUnitsPerKilogram_Arbitrary_Concentration_Content_Units_CODE = "[iU]/kg";
+	public static final String MicroMolesPerMinutePerGram_Substance_Rate_Content_Units_CODE = "umol/min/g";
+	public static final String MilliUnitsPerGram_Substance_Rate_Content_Units_CODE = "mU/g";
+	public static final String MilliUnitsPerGramHemoglobin_Substance_Rate_Content_Units_CODE = "mU/g{Hgb}";
+	public static final String UnitsPerGram_Substance_Rate_Content_Units_CODE = "U/g";
+	public static final String UnitsPerGramHemoglobin_Substance_Rate_Content_Units_CODE = "U/g{Hgb}";
+	public static final String UnitsPerGramCreatinine_Substance_Rate_Content_Units_CODE = "U/g{Cre}";
+	public static final String MilliUnitsPerMilliGramCreatinine_Substance_Rate_Content_Units_CODE = "mU/mg{Cre}";
+	public static final String MilliUnitsPerMilligram_Substance_Rate_Content_Units_CODE = "mU/mg";
+	public static final String KiloUnitsPerGram_Substance_Rate_Content_Units_CODE = "kU/g";
+	public static final String KatalPerKilogram_Substance_Rate_Content_Units_CODE = "kat/kg";
+	public static final String MilliLitersPerKiloGram_Volume_Content_Units_CODE = "mL/kg";
+	public static final String LitersPerKilogram_Volume_Content_Units_CODE = "L/kg";
+	public static final String KiloCaloriesPerOunce_Energy_Content_Units_CODE = "kCal/[oz_av]";
+	public static final String PerSquareMeter_Areic_Number_Units_CODE = "/m2";
+	public static final String GramsPerSquareMeter_Areic_Mass_Units_CODE = "g/m2";
+	public static final String KiloGramsPerSquareMeter_Areic_Mass_Units_CODE = "kg/m2";
+	public static final String MicroGramsPerSquareMeter_Areic_Mass_Units_CODE = "ug/m2";
+	public static final String MilliGramsPerSquareMeter_Areic_Mass_Units_CODE = "mg/m2";
+	public static final String NanoGramsPerSquareMeter_Areic_Mass_Units_CODE = "ng/m2";
+	public static final String GramMeter_Massive_Distance_Units_CODE = "g.m";
+	public static final String GramMeterPerHeartbeat_Massive_Distance_Units_CODE = "g.m/{hb}";
+	public static final String GramMeterPerHeartbeatPerSquareMeter_Lineic_Mass_Units_CODE = "g.m/({hb}.m2)";
+	public static final String KiloGramsPerMole_Molar_Mass_Units_CODE = "kg/mol";
+	public static final String PerMicroLiter_Number_Concentration_Units_CODE = "/uL";
+	public static final String CellsPerMicroLiter_Number_Concentration_Units_CODE = "{Cells}/uL";
+	public static final String RedBloodCellsPerMicroLiter_Number_Concentration_Units_CODE = "{rbc}/uL";
+	public static final String ThousandsPerMicroLiter_Number_Concentration_Units_CODE = "10*3/uL";
+	public static final String MillionsPerMicroLiter_Number_Concentration_Units_CODE = "10*6/uL";
+	public static final String BillionsPerMicroLiter_Number_Concentration_Units_CODE = "10*9/uL";
+	public static final String PerMilliLiter_Number_Concentration_Units_CODE = "/mL";
+	public static final String SpermatozoaPerMilliLiter_Number_Concentration_Units_CODE = "{Spermatozoa}/mL";
+	public static final String CopiesPerMilliLiter_Number_Concentration_Units_CODE = "{Copies}/mL";
+	public static final String ThousandPerMilliLiter_Number_Concentration_Units_CODE = "10*3/mL";
+	public static final String ThousandCopiesPerMilliLiter_Number_Concentration_Units_CODE = "10*3{Copies}/mL";
+	public static final String MillionPerMilliLiter_Number_Concentration_Units_CODE = "10*6/mL";
+	public static final String BillionsPerMilliliter_Number_Concentration_Units_CODE = "10*9/mL";
+	public static final String ColonyFormingUnitsPerMilliLiter_Number_Concentration_Units_CODE = "{cfu}/mL";
+	public static final String PerDeciLiter_Number_Concentration_Units_CODE = "/dL";
+	public static final String PerLiter_Number_Concentration_Units_CODE = "/L";
+	public static final String ThousandPerLiter_Number_Concentration_Units_CODE = "10*3/L";
+	public static final String MillionPerLiter_Number_Concentration_Units_CODE = "10*6/L";
+	public static final String TrillionPerLiter_Number_Concentration_Units_CODE = "10*12/L";
+	public static final String BillionPerLiter_Number_Concentration_Units_CODE = "10*9/L";
+	public static final String PicoGramsPerMilliLiter_Mass_Concentration_Units_CODE = "pg/mL";
+	public static final String NanoGramsPerMilliLiter_Mass_Concentration_Units_CODE = "ng/mL";
+	public static final String NanoGramsPerMilliLiterRedBloodCells_Mass_Concentration_Units_CODE = "ng/mL{rbc}";
+	public static final String MicroGramsPerMilliLiter_Mass_Concentration_Units_CODE = "ug/mL";
+	public static final String MilliGramsPerMilliLiter_Mass_Concentration_Units_CODE = "mg/mL";
+	public static final String GramsPerMilliLiter_Mass_Concentration_Units_CODE = "g/mL";
+	public static final String PicoGramsPerDeciLiter_Mass_Concentration_Units_CODE = "pg/dL";
+	public static final String NanoGramsPerDeciLiter_Mass_Concentration_Units_CODE = "ng/dL";
+	public static final String MicroGramsPerDeciLiter_Mass_Concentration_Units_CODE = "ug/dL";
+	public static final String MicroGramsPerDeciLiterRedBloodCells_Mass_Concentration_Units_CODE = "ug/dL{rbc}";
+	public static final String MilliGramsPerDeciLiter_Mass_Concentration_Units_CODE = "mg/dL";
+	public static final String MilliGramsPhenylketonesPerDeciLiter_Mass_Concentration_Units_CODE = "mg{Phenylketones}/dL";
+	public static final String GramsPerDeciLiter_Mass_Concentration_Units_CODE = "g/dL";
+	public static final String NanoGramsPerLiter_Mass_Concentration_Units_CODE = "ng/L";
+	public static final String PicoGramsPerLiter_Mass_Concentration_Units_CODE = "pg/L";
+	public static final String MicroGramsPerLiter_Mass_Concentration_Units_CODE = "ug/L";
+	public static final String MilliGramsPerLiter_Mass_Concentration_Units_CODE = "mg/L";
+	public static final String GramsPerLiter_Mass_Concentration_Units_CODE = "g/L";
+	public static final String KiloGramsPerLiter_Mass_Concentration_Units_CODE = "kg/L";
+	public static final String MilliGramsPerCubicMeter_Mass_Concentration_Units_CODE = "mg/m3";
+	public static final String KiloGramsPerCubicMeter_Mass_Concentration_Units_CODE = "kg/m3";
+	public static final String FemtoMolesPerMilliLiter_Substance_Concentration_Units_CODE = "fmol/mL";
+	public static final String PicoMolesPerMilliLiter_Substance_Concentration_Units_CODE = "pmol/mL";
+	public static final String NanoMolesPerMilliLiter_Substance_Concentration_Units_CODE = "nmol/mL";
+	public static final String MicroMolesPerMilliLiter_Substance_Concentration_Units_CODE = "umol/mL";
+	public static final String MolesPerMilliLiter_Substance_Concentration_Units_CODE = "mol/mL";
+	public static final String PicoMolesPerDeciLiter_Substance_Concentration_Units_CODE = "pmol/dL";
+	public static final String NanoMolesPerDeciLiter_Substance_Concentration_Units_CODE = "nmol/dL";
+	public static final String MicroMolesPerDeciLiter_Substance_Concentration_Units_CODE = "umol/dL";
+	public static final String MilliMolesPerDeciLiter_Substance_Concentration_Units_CODE = "mmol/dL";
+	public static final String MilliMolesPerLiter_Substance_Concentration_Units_CODE = "mmol/L";
+	public static final String PicoMolesPerLiter_Substance_Concentration_Units_CODE = "pmol/L";
+	public static final String NanoMolesPerLiter_Substance_Concentration_Units_CODE = "nmol/L";
+	public static final String MicroMolesPerLiter_Substance_Concentration_Units_CODE = "umol/L";
+	public static final String MolesPerLiter_Substance_Concentration_Units_CODE = "mol/L";
+	public static final String MolesPerCubicMeter_Substance_Concentration_Units_CODE = "mol/m3";
+	public static final String MicroEquivalentsPerMilliLiter_Substance_Concentration_Units_CODE = "ueq/mL";
+	public static final String MilliEquivalentPerMilliLiter_Substance_Concentration_Units_CODE = "meq/mL";
+	public static final String EquivalentsPerMilliLiter_Substance_Concentration_Units_CODE = "eq/mL";
+	public static final String AHGEquivalentsPerMilliLiter_Substance_Concentration_Units_CODE = "{AHG}eq/mL";
+	public static final String MillionEquivalentsPerMilliLiter_Substance_Concentration_Units_CODE = "10*6.eq/mL";
+	public static final String MicroEquivalentsPerLiter_Substance_Concentration_Units_CODE = "ueq/L";
+	public static final String MilliEquivalentsPerLiter_Substance_Concentration_Units_CODE = "meq/L";
+	public static final String EquivalentsPerLiter_Substance_Concentration_Units_CODE = "eq/L";
+	public static final String MilliEquivalentsPerDeciLiter_Substance_Concentration_Units_CODE = "meq/dL";
+	public static final String MilliOsmolesPerLiter_Substance_Concentration_Units_CODE = "mosm/L";
+	public static final String OsmolesPerLiter_Substance_Concentration_Units_CODE = "osm/L";
+	public static final String MicroInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "u[iU]/mL";
+	public static final String MilliInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "m[iU]/mL";
+	public static final String IgGPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "{IgGPhospholipid}U/mL";
+	public static final String IgMPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "{IgMPhospholipid}U/mL";
+	public static final String ComplementCh50UnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "{ComplementCh50}U/mL";
+	public static final String IgAPhospholipidUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "{IgAPhospholipid}U/mL";
+	public static final String ElisaUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "{Elisa_U}/mL";
+	public static final String InternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "[iU]/mL";
+	public static final String KiloInternationalUnitsPerMilliLiter_Arbitrary_Concentration_Units_CODE = "k[iU]/mL";
+	public static final String InternationalUnitsPerDeciLiter_Arbitrary_Concentration_Units_CODE = "[iU]/dL";
+	public static final String EhrlichUnitsPerDeciLiter_Arbitrary_Concentration_Units_CODE = "{Ehrlich_U}/dL";
+	public static final String MilliInternationalUnitsPerLiter_Arbitrary_Concentration_Units_CODE = "m[iU]/L";
+	public static final String InternationalUnitsPerLiter_Arbitrary_Concentration_Units_CODE = "[iU]/L";
+	public static final String pH_pH_Units_CODE = "[pH]";
+
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.8";
+	public static final String CODE_SYSTEM_NAME = "UCUM - Unified Code for Units of Measure";
+
+	private String code;
+	private String displayName;
+
+	/**
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @param displayName
+	 * <br>
+	 *            <div class="de"> display name</div>
+	 */
+	private Ucum(String code, String displayName) {
+		this.code = code;
+		this.displayName = displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getdisplayName() {
+		return this.displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public Code getCode() {
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		return ehcCode;
+	}
+
+	/**
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
+	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 *
+	 * @return <div class="en">The MDHT Code</div>
+	 */
+	public CD getCD() {
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM_OID);
+		cd.setCode(code);
+		cd.setDisplayName(displayName);
+		return cd;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static Ucum getEnum(String code) {
+		for (Ucum x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 *
+	 * @param enumName
+	 * <br>
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public boolean isEnumOfValueSet(String enumName) {
+		return Arrays.asList(values()).contains(enumName);
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
+	 *
+	 * @param codeValue
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
+	 */
+	public boolean isInValueSet(String codeValue) {
+		for (Ucum x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * code system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
 }
