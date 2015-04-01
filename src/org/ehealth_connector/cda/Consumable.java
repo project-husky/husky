@@ -46,17 +46,16 @@ public class Consumable {
 	private ProductEntry mProductEntry;
 
 	/**
-	 * Erzeugt ein Objekt welches eine Substanz repräsentiert. Dieser
-	 * Konstruktor wird verwendet, wenn ein leeres Object initialisiert werden
-	 * soll (true) oder codiert werden soll, dass die Substanz unbekannt ist
-	 * (false)
+	 * Erzeugt ein Objekt welches eine Substanz repräsentiert. Dieser Konstruktor
+	 * wird verwendet, wenn ein leeres Object initialisiert werden soll (true)
+	 * oder codiert werden soll, dass die Substanz unbekannt ist (false)
 	 * 
 	 * @param consumableKnown
-	 *            true: Erstellung eines leeren Objekts, false: Es sind keine
-	 *            Impfungen bekannt.
+	 *          true: Erstellung eines leeren Objekts, false: Es sind keine
+	 *          Impfungen bekannt.
 	 */
 	public Consumable(boolean consumableKnown) {
-		this("Unbekannt");
+		this("");
 	}
 
 	protected Consumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
@@ -65,11 +64,11 @@ public class Consumable {
 
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer
-	 * Immunization hinzugefügt werden.
+	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
+	 * hinzugefügt werden.
 	 * 
 	 * @param tradeNameOfVaccine
-	 *            Handelsname des Impfstoffes
+	 *          Handelsname des Impfstoffes
 	 */
 	public Consumable(String tradeNameOfVaccine) {
 		this(tradeNameOfVaccine, null);
@@ -77,14 +76,14 @@ public class Consumable {
 
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer
-	 * Immunization hinzugefügt werden.
+	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
+	 * hinzugefügt werden.
 	 * 
 	 * @param tradeNameOfVaccine
-	 *            Handelsname des Impfstoffes
+	 *          Handelsname des Impfstoffes
 	 * @param gtin
-	 *            Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein GTIN,
-	 *            GLN, oder Swiss Index Code sein.
+	 *          Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein GTIN, GLN,
+	 *          oder Swiss Index Code sein.
 	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
@@ -93,24 +92,23 @@ public class Consumable {
 
 	/**
 	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer
-	 * Immunization hinzugefügt werden. Wenn der Impfstoff resp. das Produkt
-	 * nicht bekannt ist (z.B. im Ausland verabreichte Impfung), dann muss das
-	 * Antigen mittels WHO ATC angegeben werden. Wenn in einem Produkt mehrere
-	 * Antigene enthalten sind, MUSS das Immunization Element für jedes Antigen
-	 * je einmal angegeben werden.
-	 *
+	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
+	 * hinzugefügt werden. Wenn der Impfstoff resp. das Produkt nicht bekannt ist
+	 * (z.B. im Ausland verabreichte Impfung), dann muss das Antigen mittels WHO
+	 * ATC angegeben werden. Wenn in einem Produkt mehrere Antigene enthalten
+	 * sind, MUSS das Immunization Element für jedes Antigen je einmal angegeben
+	 * werden.
+	 * 
 	 * @param tradeNameOfVaccine
-	 *            Handelsname des Impfstoffes
+	 *          Handelsname des Impfstoffes
 	 * @param gtinOrPharmacodeOrGln
-	 *            Packungs-GTIN, GLN oder swissINDEX (GLN ist veraltet)
+	 *          Packungs-GTIN, GLN oder swissINDEX (GLN ist veraltet)
 	 * @param whoAtcCode
 	 * <br>
-	 *            <div class="de"> who atc code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de"> who atc code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
-	public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln,
-			Code whoAtcCode) {
+	public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, Code whoAtcCode) {
 
 		mConsumable = CDAFactory.eINSTANCE.createConsumable();
 		mProductEntry = IHEFactory.eINSTANCE.createProductEntry().init();
@@ -121,8 +119,7 @@ public class Consumable {
 
 		// The WhoAtcCode has to be present as code element, otherwise
 		// translations can´t be set
-		setManufacturedProductId(Identificator
-				.convertToIdentificator(gtinOrPharmacodeOrGln));
+		setManufacturedProductId(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln));
 		if (whoAtcCode != null) {
 			setWhoAtcCode(whoAtcCode);
 		} else {
@@ -135,9 +132,9 @@ public class Consumable {
 	/**
 	 * <div class="de">Adds the manufactured material translation.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param codedId
-	 *            das codedId Objekt welches gesetzt wird
+	 *          das codedId Objekt welches gesetzt wird
 	 */
 	public void addManufacturedMaterialTranslation(Code codedId) {
 		mMaterial.getCode().getTranslations().add(codedId.getCD());
@@ -146,7 +143,7 @@ public class Consumable {
 	/**
 	 * <div class="de">Copy mdht consumable.</div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 *
+	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda. consumable
 	 */
 	public org.openhealthtools.mdht.uml.cda.Consumable copyMdhtConsumable() {
@@ -167,7 +164,7 @@ public class Consumable {
 
 	/**
 	 * Gets the manufactured material code.
-	 *
+	 * 
 	 * @return das codedId Objekt
 	 */
 	public Code getManufacturedMaterialCode() {
@@ -177,7 +174,7 @@ public class Consumable {
 
 	/**
 	 * Gets the manufactured material translations.
-	 *
+	 * 
 	 * @return the manufactured material translations
 	 */
 	public EList<CD> getManufacturedMaterialTranslations() {
@@ -187,18 +184,14 @@ public class Consumable {
 	/**
 	 * Gets the product id from the ManufacturedProduct Ids oder the
 	 * ManufacturedMaterial Code or the according translations
-	 *
+	 * 
 	 * @return the gtin or ean or swiss index, null otherwise
 	 */
 	public Identificator getManufacturedProductId() {
 		for (II id : mProductEntry.getIds()) {
-			if (id.getRoot() != null
-					&& id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())
-					|| id.getRoot() != null
-					&& id.getRoot().equals(
-							CodeSystems.SwissINDEX.getCodeSystemId())
-					|| id.getRoot() != null
-					&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+			if (id.getRoot() != null && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())
+					|| id.getRoot() != null && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId())
+					|| id.getRoot() != null && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 				Identificator ide = new Identificator(id);
 				return ide;
 			}
@@ -213,8 +206,7 @@ public class Consumable {
 	 * @return the organization
 	 */
 	public Organization getManufacturer() {
-		if (mProductEntry != null
-				&& mProductEntry.getManufacturerOrganization() != null) {
+		if (mProductEntry != null && mProductEntry.getManufacturerOrganization() != null) {
 			return new Organization(mProductEntry.getManufacturerOrganization());
 		}
 		return null;
@@ -222,7 +214,7 @@ public class Consumable {
 
 	/**
 	 * Gets the mdht consumable.
-	 *
+	 * 
 	 * @return the mdht consumable
 	 */
 	public org.openhealthtools.mdht.uml.cda.Consumable getMdhtConsumable() {
@@ -231,30 +223,28 @@ public class Consumable {
 
 	/**
 	 * Gets the trade name.
-	 *
+	 * 
 	 * @return das tradeNameOfVaccine Objekt
 	 */
 	public String getTradeName() {
-		return mConsumable.getManufacturedProduct().getManufacturedMaterial()
-				.getName().getText();
+		return mConsumable.getManufacturedProduct().getManufacturedMaterial().getName().getText();
 	}
 
 	/**
 	 * <div class="en">Gets the who atc code.</div> <div class="de">Liefert who
 	 * atc code.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return Code <div class="en">the who atc code</div>
 	 */
 	public Code getWhoAtcCode() {
-		return Util.getTranslationOrCode(
-				CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode());
+		return Util.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode());
 	}
 
 	/**
 	 * Sets the Lot Number (Chargennummer)
 	 * 
 	 * @param text
-	 *            the lot number text
+	 *          the lot number text
 	 */
 	public void setLotNr(String text) {
 		if (!text.equals("")) {
@@ -267,10 +257,10 @@ public class Consumable {
 	 * Index Code
 	 * 
 	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
-	 *
+	 * 
 	 * @param gtinOrPharmacodeOrGln
-	 *            the new manufactured product id. If null, a NullFlavor.UNK
-	 *            will be set instead.
+	 *          the new manufactured product id. If null, a NullFlavor.UNK will be
+	 *          set instead.
 	 */
 	public void setManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
@@ -287,18 +277,17 @@ public class Consumable {
 	 * Sets the Organization that manufactured this product
 	 * 
 	 * @param organization
-	 *            the organization
+	 *          the organization
 	 */
 	public void setManufacturer(Organization organization) {
-		mProductEntry.setManufacturerOrganization(organization
-				.copyMdhtOrganization());
+		mProductEntry.setManufacturerOrganization(organization.copyMdhtOrganization());
 	}
 
 	/**
 	 * Sets the trade name.
-	 *
+	 * 
 	 * @param tradeNameOfVaccine
-	 *            das tradeNameOfVaccine Objekt welches gesetzt wird
+	 *          das tradeNameOfVaccine Objekt welches gesetzt wird
 	 */
 	public void setTradeName(String tradeNameOfVaccine) {
 		EN en = DatatypesFactory.eINSTANCE.createEN();
@@ -312,9 +301,9 @@ public class Consumable {
 
 	/**
 	 * Sets the who atc code (Use CodeSystem.WHOATCCode)
-	 *
+	 * 
 	 * @param whoAtcCode
-	 *            das WHOATcCode Objekt welches gesetzt wird
+	 *          das WHOATcCode Objekt welches gesetzt wird
 	 */
 	public void setWhoAtcCode(Code whoAtcCode) {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -326,8 +315,7 @@ public class Consumable {
 		mMaterial.setCode(ce);
 	}
 
-	protected void setMdhtConsumable(
-			org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+	protected void setMdhtConsumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
 		mConsumable = EcoreUtil.copy(consumable);
 		mProductEntry = (ProductEntry) consumable.getManufacturedProduct();
 		mMaterial = mProductEntry.getManufacturedMaterial();

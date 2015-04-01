@@ -110,9 +110,9 @@ public class CdaChVacd extends CdaCh {
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 * 
 	 * @param language
-	 *            Sprache des Dokments
+	 *          Sprache des Dokments
 	 * @param immunization
-	 *            Impfung
+	 *          Impfung
 	 */
 	public CdaChVacd(LanguageCode language, Immunization immunization) {
 		this();
@@ -126,24 +126,21 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param language
 	 * <br>
-	 *            <div class="de">Sprache des Dokments</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Sprache des Dokments</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels ?xml-stylesheet für die
-	 *            menschlich lesbare Darstellung referenziert werden soll (z.B.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
-	 *            Null wird das Standard-Stylesheet verwendet.
+	 *          Stylesheet, welches im CDA mittels ?xml-stylesheet für die
+	 *          menschlich lesbare Darstellung referenziert werden soll (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
+	 *          wird das Standard-Stylesheet verwendet.
 	 * @param cascasingStylesheet
-	 *            Cascasing Stylesheet, welche Designinformationen für die
-	 *            menschlich lesbare Darstellung referenziert (z.B.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
-	 *            Null werden keine zusätzlichen Designinformationen
-	 *            referenziert.
+	 *          Cascasing Stylesheet, welche Designinformationen für die
+	 *          menschlich lesbare Darstellung referenziert (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
+	 *          werden keine zusätzlichen Designinformationen referenziert.
 	 */
-	public CdaChVacd(LanguageCode language, String stylesheet,
-			String cascasingStylesheet) {
-		super(CHFactory.eINSTANCE.createVACD().init(), stylesheet,
-				cascasingStylesheet);
+	public CdaChVacd(LanguageCode language, String stylesheet, String cascasingStylesheet) {
+		super(CHFactory.eINSTANCE.createVACD().init(), stylesheet, cascasingStylesheet);
 		initVacd();
 		setLanguageCode(language);
 	}
@@ -153,26 +150,25 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param language
 	 * <br>
-	 *            <div class="de">Sprache des Dokments</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Sprache des Dokments</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param immunization
 	 * <br>
-	 *            <div class="de">Impfung</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Impfung</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param stylesheet
-	 *            Stylesheet, welches im CDA mittels ?xml-stylesheet für die
-	 *            menschlich lesbare Darstellung referenziert werden soll (z.B.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
-	 *            Null wird das Standard-Stylesheet verwendet.
+	 *          Stylesheet, welches im CDA mittels ?xml-stylesheet für die
+	 *          menschlich lesbare Darstellung referenziert werden soll (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
+	 *          wird das Standard-Stylesheet verwendet.
 	 * @param cascasingStylesheet
-	 *            Cascasing Stylesheet, welche Designinformationen für die
-	 *            menschlich lesbare Darstellung referenziert (z.B.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei
-	 *            Null werden keine zusätzlichen Designinformationen
-	 *            referenziert.
+	 *          Cascasing Stylesheet, welche Designinformationen für die
+	 *          menschlich lesbare Darstellung referenziert (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
+	 *          werden keine zusätzlichen Designinformationen referenziert.
 	 */
-	public CdaChVacd(LanguageCode language, String stylesheet,
-			String cascasingStylesheet, Immunization immunization) {
+	public CdaChVacd(LanguageCode language, String stylesheet, String cascasingStylesheet,
+			Immunization immunization) {
 		this(language, stylesheet, cascasingStylesheet);
 		initVacd();
 		addImmunization(immunization);
@@ -180,11 +176,11 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels
-	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
-	 * <div class="fr"></div>
+	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div> <div
+	 * class="fr"></div>
 	 * 
 	 * @param doc
-	 *            <div class="de">CdaChVacd</div> <div class="fr"></div>
+	 *          <div class="de">CdaChVacd</div> <div class="fr"></div>
 	 */
 	public CdaChVacd(VACD doc) {
 		super(doc);
@@ -193,26 +189,23 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Adds the active problem concern.</div> <div
-	 * class="de">Fügt ein Aktives Leiden hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds the active problem concern.</div> <div class="de">Fügt
+	 * ein Aktives Leiden hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param activeProblemConcern
 	 * <br>
-	 *            <div class="en"> active problem concern</div> <div class="de">
-	 *            Das aktive Leiden</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="en"> active problem concern</div> <div class="de"> Das
+	 *          aktive Leiden</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public void addActiveProblemConcern(
-			ActiveProblemConcern activeProblemConcern) {
+	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection aps;
 
 		// find or create (and add) the Section
 		aps = getDoc().getActiveProblemsSection();
 		if (aps == null) {
 			aps = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-			aps.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS
-					.getSectionTitle(doc.getLanguageCode())));
+			aps.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitle(doc.getLanguageCode())));
 			doc.addSection(aps);
 		}
 
@@ -220,8 +213,7 @@ public class CdaChVacd extends CdaCh {
 		aps.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(aps.getActs(),
-				SectionsVACD.ACTIVE_PROBLEMS)) {
+		if (updateProblemConcernReferences(aps.getActs(), SectionsVACD.ACTIVE_PROBLEMS)) {
 			if (CDALevel2TextGeneration) {
 				// create the CDA level 1 text
 				aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
@@ -230,20 +222,19 @@ public class CdaChVacd extends CdaCh {
 			}
 		} else {
 			aps.createStrucDocText("Keine Angaben");
-			activeProblemConcern.copyMdhtProblemConcernEntry()
-					.getEntryRelationships().get(0).getObservation()
-					.setText(Util.createEd(""));
+			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
 		}
 	}
 
 	/**
-	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param allergyConcern
 	 * <br>
-	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Allergie leiden</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void addAllergyConcern(AllergyConcern allergyConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
@@ -252,8 +243,7 @@ public class CdaChVacd extends CdaCh {
 		ars = getDoc().getAllergiesReactionsSection();
 		if (ars == null) {
 			ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
-			ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS
-					.getSectionTitle(doc.getLanguageCode())));
+			ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS.getSectionTitle(doc.getLanguageCode())));
 			doc.addSection(ars);
 		}
 
@@ -264,8 +254,7 @@ public class CdaChVacd extends CdaCh {
 		// content reference)
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateAllergyConcernReferences(ars.getActs(),
-				SectionsVACD.ALLERGIES_REACTIONS)) {
+		if (updateAllergyConcernReferences(ars.getActs(), SectionsVACD.ALLERGIES_REACTIONS)) {
 			if (CDALevel2TextGeneration) {
 				// create the CDA level 1 text
 				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
@@ -274,8 +263,8 @@ public class CdaChVacd extends CdaCh {
 			}
 		} else {
 			ars.createStrucDocText("Keine Angaben");
-			allergyConcern.copyMdhtAllergyConcern().getEntryRelationships()
-					.get(0).getObservation().setText(Util.createEd(""));
+			allergyConcern.copyMdhtAllergyConcern().getEntryRelationships().get(0).getObservation()
+					.setText(Util.createEd(""));
 		}
 	}
 
@@ -283,7 +272,7 @@ public class CdaChVacd extends CdaCh {
 	 * Setzt das Gestationsalter
 	 * 
 	 * @param codedResults
-	 *            the new gestational age
+	 *          the new gestational age
 	 */
 	public void addCodedResults(CodedResults codedResults) {
 		SimpleTextBuilder sb;
@@ -291,15 +280,12 @@ public class CdaChVacd extends CdaCh {
 		// update the MDHT Object content references to CDA level 1 text
 		if (codedResults instanceof GestationalAge) {
 			GestationalAge gestationalAge = (GestationalAge) codedResults;
-			sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS,
-					gestationalAge.getCodedResultsText());
+			sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS, gestationalAge.getCodedResultsText());
 
 			ED reference = Util.createReference(sb.getNewTextContentIDNr(),
 					SectionsVACD.CODED_RESULTS.getContentIdPrefix());
-			gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(
-					EcoreUtil.copy(reference));
-			gestationalAge.getMdhtGestationalAgeDaysObservation().setText(
-					EcoreUtil.copy(reference));
+			gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(EcoreUtil.copy(reference));
+			gestationalAge.getMdhtGestationalAgeDaysObservation().setText(EcoreUtil.copy(reference));
 
 			// create the CDA level 1 text
 			// gestationalAge.getMdhtCodedResultsSection().createStrucDocText(
@@ -307,8 +293,7 @@ public class CdaChVacd extends CdaCh {
 			gestationalAge.getMdhtCodedResultsSection().createStrucDocText("");
 
 			gestationalAge.getMdhtCodedResultsSection().setTitle(
-					Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc
-							.getLanguageCode())));
+					Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(doc.getLanguageCode())));
 		}
 		doc.addSection(codedResults.copyMdhtCodedResultsSection());
 	}
@@ -319,8 +304,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param comment
 	 * <br>
-	 *            <div class="de">Kommentar</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Kommentar</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void addComment(String comment) {
 		Section rs;
@@ -330,8 +315,12 @@ public class CdaChVacd extends CdaCh {
 		rs = findRemarksSection();
 		if (rs == null) {
 			rs = CHFactory.eINSTANCE.createRemarksSection().init();
-			rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitle(doc
-					.getLanguageCode())));
+			for (II ii : rs.getTemplateIds()) {
+				if (ii.getRoot().equals("2.16.756.5.30.1.1.1.1.1")) {
+					ii.setExtension("CDA-CH.Body.CodedRem");
+				}
+			}
+			rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitle(doc.getLanguageCode())));
 			doc.addSection(rs);
 		}
 
@@ -344,10 +333,8 @@ public class CdaChVacd extends CdaCh {
 		// update the MDHT Object content references to CDA level 1 text
 		if (rs.getText() != null) {
 
-			String oldSectionText = Util
-					.extractStringFromNonQuotedStrucDocText(rs.getText());
-			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment,
-					oldSectionText);
+			String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
+			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
 		} else {
 			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
 		}
@@ -362,43 +349,37 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt eine Impfung hinzu.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="de">Fügt eine Impfung hinzu.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param immunization
 	 * <br>
-	 *            <div class="de">Impfung</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Impfung</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
-	public void addImmunization(
-			org.ehealth_connector.cda.Immunization immunization) {
+	public void addImmunization(org.ehealth_connector.cda.Immunization immunization) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection;
 
 		// find or create (and add) the Section
 		immunizationSection = getDoc().getImmunizationsSection();
 		if (immunizationSection == null) {
-			immunizationSection = CHFactory.eINSTANCE
-					.createImmunizationsSection().init();
-			immunizationSection.setTitle(Util
-					.st(SectionsVACD.HISTORY_OF_IMMUNIZATION
-							.getSectionTitle(doc.getLanguageCode())));
+			immunizationSection = CHFactory.eINSTANCE.createImmunizationsSection().init();
+			immunizationSection.setTitle(Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitle(doc
+					.getLanguageCode())));
 			doc.addSection(immunizationSection);
 		}
 
 		// add the MDHT Object to the section
-		immunizationSection.addSubstanceAdministration(immunization
-				.copyMdhtImmunization());
+		immunizationSection.addSubstanceAdministration(immunization.copyMdhtImmunization());
 
 		// update the MDHT Object content references to CDA level 2 text
-		updateSubstanceAdministrationReferences(
-				immunizationSection.getSubstanceAdministrations(),
+		updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(),
 				SectionsVACD.HISTORY_OF_IMMUNIZATION);
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		if (CDALevel2TextGeneration) {
-			immunizationSection
-					.createStrucDocText(generateNarrativeTextImmunizations());
+			immunizationSection.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
 			if (immunization.getCommentText() != null) {
 				// Aller vorhandenen Kommentare zusammenfügen
@@ -416,46 +397,40 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt eine Impfempfehlung hinzu</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="de">Fügt eine Impfempfehlung hinzu</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param immunizationRecommendation
 	 * <br>
-	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Impfempfehlung</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
-	public void addImmunizationRecommendation(
-			ImmunizationRecommendation immunizationRecommendation) {
+	public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection immunizationRecommendationsSection;
 
 		// find or create (and add) the Section
-		immunizationRecommendationsSection = getDoc()
-				.getImmunizationRecommendationSection();
+		immunizationRecommendationsSection = getDoc().getImmunizationRecommendationSection();
 		if (immunizationRecommendationsSection == null) {
 			immunizationRecommendationsSection = CHFactory.eINSTANCE
 					.createImmunizationRecommendationSection().init();
-			immunizationRecommendationsSection.setTitle(Util
-					.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(doc
-							.getLanguageCode())));
+			immunizationRecommendationsSection.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN
+					.getSectionTitle(doc.getLanguageCode())));
 			doc.addSection(immunizationRecommendationsSection);
 		}
 
 		// add the MDHT Object to the section
-		immunizationRecommendationsSection
-				.addSubstanceAdministration(immunizationRecommendation
-						.copyMdhtImmunizationRecommendation());
+		immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation
+				.copyMdhtImmunizationRecommendation());
 
 		// update the MDHT Object content references to CDA level 1 text
 		updateSubstanceAdministrationReferences(
-				immunizationRecommendationsSection
-						.getSubstanceAdministrations(),
+				immunizationRecommendationsSection.getSubstanceAdministrations(),
 				SectionsVACD.TREATMENT_PLAN);
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		if (CDALevel2TextGeneration) {
-			immunizationRecommendationsSection
-					.createStrucDocText(generateNarrativeTextImmunizations());
+			immunizationRecommendationsSection.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
 			if (immunizationRecommendation.getCommentText() != null) {
 				// Aller vorhandenen Kommentare zusammenfügen
@@ -478,8 +453,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param laboratoryObservation
 	 * <br>
-	 *            <div class="de">Der Laborbefund</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Der Laborbefund</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void addLaboratoryObservation(
 			org.ehealth_connector.cda.LaboratoryObservation laboratoryObservation) {
@@ -493,35 +468,29 @@ public class CdaChVacd extends CdaCh {
 		// find or create (and add) the Section
 		lss = getDoc().getLaboratorySpecialitySection();
 		if (lss == null) {
-			lss = CHFactory.eINSTANCE.createLaboratorySpecialitySection()
-					.init();
-			lrdpe = CHFactory.eINSTANCE
-					.createLaboratoryReportDataProcessingEntry().init();
+			lss = CHFactory.eINSTANCE.createLaboratorySpecialitySection().init();
+			lrdpe = CHFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init();
 			spa = CHFactory.eINSTANCE.createSpecimenAct().init();
 
 			lss.getEntries().add(lrdpe);
 			lrdpe.setAct(spa);
 
-			lss.setTitle(Util.st(SectionsVACD.SEROLOGY_STUDIES
-					.getSectionTitle(doc.getLanguageCode())));
+			lss.setTitle(Util.st(SectionsVACD.SEROLOGY_STUDIES.getSectionTitle(doc.getLanguageCode())));
 			doc.addSection(lss);
 		}
 		// If the section is already present, get instances of the templates
 		else {
-			lrdpe = (LaboratoryReportDataProcessingEntry) lss.getEntries().get(
-					0);
+			lrdpe = (LaboratoryReportDataProcessingEntry) lss.getEntries().get(0);
 			spa = (SpecimenAct) lrdpe.getAct();
 		}
 
 		// Create a new Laboratory Battery Organizer for each Observation that
 		// is added through this constructor and add it to the specimen act.
-		LaboratoryBatteryOrganizer lbo = CHFactory.eINSTANCE
-				.createLaboratoryBatteryOrganizer().init();
+		LaboratoryBatteryOrganizer lbo = CHFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init();
 		spa.addOrganizer(lbo);
 
 		// add the MDHT Object to the section
-		lbo.addObservation(laboratoryObservation
-				.copyMdhtLaboratoryObservation());
+		lbo.addObservation(laboratoryObservation.copyMdhtLaboratoryObservation());
 
 		// Set the Type codes
 		lbo.getComponents().get(lbo.getComponents().size() - 1)
@@ -531,8 +500,7 @@ public class CdaChVacd extends CdaCh {
 
 		// Update the MDHT Object content references to CDA level 1 text
 		// (if necessary)
-		updateLaboratoryObservationReferences(spa,
-				SectionsVACD.SEROLOGY_STUDIES);
+		updateLaboratoryObservationReferences(spa, SectionsVACD.SEROLOGY_STUDIES);
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
@@ -546,8 +514,7 @@ public class CdaChVacd extends CdaCh {
 				for (LaboratoryObservation t : getLaboratoryObservations()) {
 					if (t.getCommentText() != null) {
 						i++;
-						allComments = allComments + "Kommentar " + i + ": "
-								+ t.getCommentText() + " ";
+						allComments = allComments + "Kommentar " + i + ": " + t.getCommentText() + " ";
 					}
 				}
 				setNarrativeTextSectionLaboratorySpecialty(allComments);
@@ -564,8 +531,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param pastProblemConcern
 	 * <br>
-	 *            <div class="de"> past problem concern</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de"> past problem concern</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public void addPastProblemConcern(PastProblemConcern pastProblemConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection hopis;
@@ -573,10 +540,9 @@ public class CdaChVacd extends CdaCh {
 		// find or create (and add) the Section
 		hopis = getDoc().getHistoryOfPastIllnessSection();
 		if (hopis == null) {
-			hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection()
-					.init();
-			hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS
-					.getSectionTitle(doc.getLanguageCode())));
+			hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
+			hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS.getSectionTitle(doc
+					.getLanguageCode())));
 			doc.addSection(hopis);
 		}
 
@@ -584,8 +550,7 @@ public class CdaChVacd extends CdaCh {
 		hopis.addAct(pastProblemConcern.copyMdhtProblemConcernEntry());
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(hopis.getActs(),
-				SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
+		if (updateProblemConcernReferences(hopis.getActs(), SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
 			if (CDALevel2TextGeneration) {
@@ -595,9 +560,8 @@ public class CdaChVacd extends CdaCh {
 			}
 		} else {
 			hopis.createStrucDocText("");
-			pastProblemConcern.copyMdhtProblemConcernEntry()
-					.getEntryRelationships().get(0).getObservation()
-					.setText(Util.createEd(""));
+			pastProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -607,8 +571,8 @@ public class CdaChVacd extends CdaCh {
 	 * 
 	 * @param pregnancy
 	 * <br>
-	 *            <div class="de">Schwangerschaft</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Schwangerschaft</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void addPregnancyHistory(PregnancyHistory pregnancy) {
 		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
@@ -619,8 +583,8 @@ public class CdaChVacd extends CdaCh {
 
 		if (phs == null) {
 			phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
-			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES
-					.getSectionTitle(doc.getLanguageCode())));
+			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES.getSectionTitle(doc
+					.getLanguageCode())));
 			doc.addSection(phs);
 		}
 
@@ -633,13 +597,11 @@ public class CdaChVacd extends CdaCh {
 			String pregnancyText = "Voraussichtlicher Geburtstermin: "
 					+ pregnancy.getEstimatedBirthdate();
 			if (phs.getText() != null) {
-				String oldSectionText = Util
-						.extractStringFromNonQuotedStrucDocText(phs.getText());
-				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES,
-						pregnancyText, oldSectionText);
+				String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(phs.getText());
+				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText,
+						oldSectionText);
 			} else {
-				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES,
-						pregnancyText);
+				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText);
 			}
 
 			reference = Util.createReference(sb.getNewTextContentIDNr(),
@@ -647,16 +609,14 @@ public class CdaChVacd extends CdaCh {
 			phs.createStrucDocText(sb.toString());
 		} else {
 			setNarrativeTextSectionHistoryOfPregnancies("");
-			reference = Util.createReference(1,
-					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
+			reference = Util.createReference(1, SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 		}
 		pregnancy.getMdhtPregnancy().setText(reference);
 		phs.addObservation(pregnancy.copyMdhtPregnancy());
 	}
 
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value) {
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value) {
 		LaboratoryObservation lo = new LaboratoryObservation();
 		Code serCode = serologieCode.getCode();
 		serCode.addTranslation(laboratorySpecificCode);
@@ -667,24 +627,20 @@ public class CdaChVacd extends CdaCh {
 		return lo;
 	}
 
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value,
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
 			ObservationInterpretationForImmunization observationInterpretation) {
-		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
-				laboratorySpecificCode, dateTimeOfResult, performer, value);
+		LaboratoryObservation lo = createLaboratoryObservation(serologieCode, laboratorySpecificCode,
+				dateTimeOfResult, performer, value);
 		lo.setInterpretationCode(observationInterpretation);
 		return lo;
 	}
 
-	public LaboratoryObservation createLaboratoryObservation(
-			SerologieForVACD serologieCode, Code laboratorySpecificCode,
-			Date dateTimeOfResult, Performer performer, Value value,
-			ObservationInterpretationForImmunization observationInterpretation,
-			String comment) {
-		LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
-				laboratorySpecificCode, dateTimeOfResult, performer, value,
-				observationInterpretation);
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
+			ObservationInterpretationForImmunization observationInterpretation, String comment) {
+		LaboratoryObservation lo = createLaboratoryObservation(serologieCode, laboratorySpecificCode,
+				dateTimeOfResult, performer, value, observationInterpretation);
 		lo.setCommentText(comment);
 		return lo;
 	}
@@ -702,8 +658,8 @@ public class CdaChVacd extends CdaCh {
 			problemConcernEntryList.add(prob);
 		}
 
-		ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
+		ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList,
+				SectionsVACD.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
 
@@ -713,15 +669,14 @@ public class CdaChVacd extends CdaCh {
 	 * @return the allergy problem concerns text
 	 */
 	public String generateNarrativeTextAllergyProblemConcerns() {
-		AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(
-				getAllergyProblemConcerns(), SectionsVACD.ALLERGIES_REACTIONS);
+		AllergyConcernTextBuilder b = new AllergyConcernTextBuilder(getAllergyProblemConcerns(),
+				SectionsVACD.ALLERGIES_REACTIONS);
 		return b.toString();
 	}
 
 	/**
 	 * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel
-	 * Impfempfehlungen zurück</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * Impfempfehlungen zurück</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the immunization recommendations text</div>
 	 */
@@ -737,8 +692,7 @@ public class CdaChVacd extends CdaCh {
 	 * @return the immunization text
 	 */
 	public String generateNarrativeTextImmunizations() {
-		ImmunizationTextBuilder b = new ImmunizationTextBuilder(
-				getImmunizations());
+		ImmunizationTextBuilder b = new ImmunizationTextBuilder(getImmunizations());
 		return b.toString();
 	}
 
@@ -766,8 +720,8 @@ public class CdaChVacd extends CdaCh {
 			problemConcernEntryList.add(prob);
 		}
 
-		ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+		ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList,
+				SectionsVACD.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
@@ -878,8 +832,7 @@ public class CdaChVacd extends CdaCh {
 		if (tps == null) {
 			return null;
 		}
-		EList<SubstanceAdministration> substanceAdministrations = tps
-				.getSubstanceAdministrations();
+		EList<SubstanceAdministration> substanceAdministrations = tps.getSubstanceAdministrations();
 
 		ArrayList<ImmunizationRecommendation> immunizations = new ArrayList<ImmunizationRecommendation>();
 		for (SubstanceAdministration substanceAdministration : substanceAdministrations) {
@@ -896,8 +849,8 @@ public class CdaChVacd extends CdaCh {
 	 * @return Liste von Impfungen
 	 */
 	public ArrayList<Immunization> getImmunizations() {
-		EList<org.openhealthtools.mdht.uml.cda.ch.Immunization> il = getDoc()
-				.getImmunizationsSection().getImmunizations();
+		EList<org.openhealthtools.mdht.uml.cda.ch.Immunization> il = getDoc().getImmunizationsSection()
+				.getImmunizations();
 
 		ArrayList<Immunization> immunizations = new ArrayList<Immunization>();
 		for (org.openhealthtools.mdht.uml.cda.ch.Immunization i : il) {
@@ -939,9 +892,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -954,9 +907,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -969,9 +922,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -984,9 +937,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -999,9 +952,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -1014,9 +967,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -1029,9 +982,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -1044,9 +997,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -1059,9 +1012,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Gets the human readable CDA section text for the according
+	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
@@ -1115,28 +1068,25 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD
-	 * Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und
-	 * insbesondere Kapitel "7.4 CDA Header", Regel CH-VACD-HPAT )
+	 * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD Spezifikation
+	 * (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und insbesondere Kapitel
+	 * "7.4 CDA Header", Regel CH-VACD-HPAT )
 	 */
 	public void pseudonymization() {
-		RecordTarget destRecordTarget = CDAFactory.eINSTANCE
-				.createRecordTarget();
+		RecordTarget destRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
 		for (@SuppressWarnings("unused")
 		RecordTarget sourceRecTarget : getDoc().getRecordTargets()) {
 
 			for (PatientRole sourcePatientRole : getDoc().getPatientRoles()) {
 				Patient sourcePatient = sourcePatientRole.getPatient();
 
-				PatientRole destPatientRole = CDAFactory.eINSTANCE
-						.createPatientRole();
+				PatientRole destPatientRole = CDAFactory.eINSTANCE.createPatientRole();
 				Patient destPatient = CDAFactory.eINSTANCE.createPatient();
 				destPatientRole.setPatient(destPatient);
 
 				// Copy the allow attributes from the sourcePatient
 				destPatient.setBirthTime(sourcePatient.getBirthTime());
-				destPatient.setAdministrativeGenderCode(sourcePatient
-						.getAdministrativeGenderCode());
+				destPatient.setAdministrativeGenderCode(sourcePatient.getAdministrativeGenderCode());
 				// Adress
 				for (AD sourceAd : sourcePatientRole.getAddrs()) {
 					AD ad = DatatypesFactory.eINSTANCE.createAD();
@@ -1165,65 +1115,62 @@ public class CdaChVacd extends CdaCh {
 	 * Setzt das MDHT-VACD-Objekt.
 	 * 
 	 * @param doc
-	 *            the new doc
+	 *          the new doc
 	 */
 	public void setDoc(VACD doc) {
 		this.doc = doc;
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionActiveProblems(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ACTIVE_PROBLEMS, text);
 		if (getDoc().getActiveProblemsSection() != null) {
-			getDoc().getActiveProblemsSection().createStrucDocText(
-					sb.toString());
+			getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
-	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(
-			String text) {
+	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.ALLERGIES_REACTIONS, text);
 		if (getDoc().getAllergiesReactionsSection() != null) {
-			getDoc().getAllergiesReactionsSection().createStrucDocText(
-					sb.toString());
+			getDoc().getAllergiesReactionsSection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionCodedResults(String text) {
@@ -1233,120 +1180,115 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionHistoryOfPastIllnes(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PAST_ILLNESS, text);
 		if (getDoc().getHistoryOfPastIllnessSection() != null) {
-			getDoc().getHistoryOfPastIllnessSection().createStrucDocText(
-					sb.toString());
+			getDoc().getHistoryOfPastIllnessSection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionHistoryOfPregnancies(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, text);
 		if (getDoc().getPregnancyHistorySection() != null) {
-			getDoc().getPregnancyHistorySection().createStrucDocText(
-					sb.toString());
+			getDoc().getPregnancyHistorySection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionImmunizationRecommendations(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.TREATMENT_PLAN, text);
 		if (getDoc().getImmunizationRecommendationSection() != null) {
-			getDoc().getImmunizationRecommendationSection().createStrucDocText(
-					sb.toString());
+			getDoc().getImmunizationRecommendationSection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionImmunizations(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_IMMUNIZATION, text);
 		if (getDoc().getImmunizationsSection() != null) {
-			getDoc().getImmunizationsSection()
-					.createStrucDocText(sb.toString());
+			getDoc().getImmunizationsSection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionLaboratorySpecialty(String text) {
 		SimpleTextBuilder sb;
 		sb = new SimpleTextBuilder(SectionsVACD.SEROLOGY_STUDIES, text);
 		if (getDoc().getLaboratorySpecialitySection() != null) {
-			getDoc().getLaboratorySpecialitySection().createStrucDocText(
-					sb.toString());
+			getDoc().getLaboratorySpecialitySection().createStrucDocText(sb.toString());
 		}
 	}
 
 	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
+	 * <div class="en">Sets the human readable CDA section text for the according
+	 * section</div> <div class="de">Setzt den menschenlesbaren CDA Section Text
+	 * für die entsprechende Section</div>
 	 * 
 	 * 
 	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *          <div class="en"> the new text for the human readable part of the
+	 *          cda document</div> <div class="de"> der neue text für den
+	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
 	 * 
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
@@ -1370,8 +1312,7 @@ public class CdaChVacd extends CdaCh {
 
 	private void fixGeneralHeaderConstraintTemplateId() {
 		for (int i = 0; i < doc.getTemplateIds().size(); i++) {
-			if (doc.getTemplateIds().get(i).getRoot()
-					.equals("2.16.840.1.113883.10.20.3")) {
+			if (doc.getTemplateIds().get(i).getRoot().equals("2.16.840.1.113883.10.20.3")) {
 				doc.getTemplateIds().remove(i);
 			}
 		}
@@ -1401,54 +1342,43 @@ public class CdaChVacd extends CdaCh {
 		new Query(doc);
 	}
 
-	private boolean updateAllergyConcernReferences(EList<Act> acts,
-			SectionsVACD loincSectionCode) {
+	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsVACD loincSectionCode) {
 		int i = 0;
 		for (Act act : acts) {
 			int j = 0;
 			i++;
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
-			for (ProblemEntry problemEntry : problemConcernEntry
-					.getAllergyIntolerances()) {
+			for (ProblemEntry problemEntry : problemConcernEntry.getAllergyIntolerances()) {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				Code code = new Code(problemEntry.getCode());
 				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96")
-						&& code.getCode()
-								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-										.getCode())) {
+						&& code.getCode().equals(
+								ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
 					ED reference;
 					if (CDALevel2TextGeneration) {
-						reference = Util.createReference(i,
-								loincSectionCode.getContentIdPrefix());
+						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
-						reference = Util.createReference(1,
-								loincSectionCode.getContentIdPrefix());
+						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
 					}
 					problemEntry.setText(EcoreUtil.copy(reference));
-					problemEntry.getCode().setOriginalText(
-							EcoreUtil.copy(reference));
+					problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
 				}
-				for (EntryRelationship er : problemEntry
-						.getEntryRelationships()) {
+				for (EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					er = Util.updateRefIfComment(er,
-							String.valueOf(i) + String.valueOf(j),
-							loincSectionCode);
+					er = Util.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
 		}
 		return true;
 	}
 
-	private void updateLaboratoryObservationReferences(SpecimenAct spa,
-			SectionsVACD loincSectionCode) {
+	private void updateLaboratoryObservationReferences(SpecimenAct spa, SectionsVACD loincSectionCode) {
 		for (int i = 0; i < spa.getLaboratoryBatteryOrganizers().size(); i++) {
-			LaboratoryBatteryOrganizer lba = spa
-					.getLaboratoryBatteryOrganizers().get(i);
+			LaboratoryBatteryOrganizer lba = spa.getLaboratoryBatteryOrganizers().get(i);
 			for (int j = 0; j < lba.getLaboratoryObservations().size(); j++) {
 				org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation lo = lba
 						.getLaboratoryObservations().get(j);
@@ -1457,8 +1387,7 @@ public class CdaChVacd extends CdaCh {
 					if (Util.isComment(er)) {
 						k++;
 						er = Util.updateRefIfComment(er,
-								String.valueOf(i + 1) + String.valueOf(j + 1)
-										+ String.valueOf(k + 1),
+								String.valueOf(i + 1) + String.valueOf(j + 1) + String.valueOf(k + 1),
 								loincSectionCode);
 					}
 				}
@@ -1466,36 +1395,30 @@ public class CdaChVacd extends CdaCh {
 		}
 	}
 
-	private boolean updateProblemConcernReferences(EList<Act> acts,
-			SectionsVACD loincSectionCode) {
+	private boolean updateProblemConcernReferences(EList<Act> acts, SectionsVACD loincSectionCode) {
 		@SuppressWarnings("unused")
 		int i = 0;
 		for (Act act : acts) {
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
-			for (ProblemEntry problemEntry : problemConcernEntry
-					.getProblemEntries()) {
+			for (ProblemEntry problemEntry : problemConcernEntry.getProblemEntries()) {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				Code code = new Code(problemEntry.getCode());
 				if (code.getCodeSystem().equals("2.16.840.1.113883.6.96")
-						&& code.getCode()
-								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-										.getCode())) {
+						&& code.getCode().equals(
+								ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
 					i++;
 					ED reference;
 					if (CDALevel2TextGeneration) {
-						reference = Util.createReference(i,
-								loincSectionCode.getContentIdPrefix());
+						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
-						reference = Util.createReference(1,
-								loincSectionCode.getContentIdPrefix());
+						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
 					}
 					problemEntry.setText(EcoreUtil.copy(reference));
-					problemEntry.getCode().setOriginalText(
-							EcoreUtil.copy(reference));
+					problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
 				}
 			}
 		}
@@ -1503,34 +1426,27 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	private void updateSubstanceAdministrationReferences(
-			List<SubstanceAdministration> substanceAdministrations,
-			SectionsVACD loincSectionCode) {
+			List<SubstanceAdministration> substanceAdministrations, SectionsVACD loincSectionCode) {
 		ED reference;
 		int i = 0;
 		for (SubstanceAdministration ir : substanceAdministrations) {
 			i++;
 			if (CDALevel2TextGeneration) {
-				reference = Util.createReference(i,
-						loincSectionCode.getContentIdPrefix());
+				reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 			} else {
-				reference = Util.createReference(1,
-						loincSectionCode.getContentIdPrefix());
+				reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
 			}
 
 			ir.setText(reference);
 			if (ir.getConsumable() != null) {
 				if (ir.getConsumable().getManufacturedProduct() != null) {
-					if (ir.getConsumable().getManufacturedProduct()
-							.getManufacturedMaterial() != null) {
-						if (ir.getConsumable().getManufacturedProduct()
-								.getManufacturedMaterial().getCode() != null) {
-							ir.getConsumable().getManufacturedProduct()
-									.getManufacturedMaterial().getCode()
+					if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial() != null) {
+						if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode() != null) {
+							ir.getConsumable().getManufacturedProduct().getManufacturedMaterial().getCode()
 									.setOriginalText(EcoreUtil.copy(reference));
 						}
 						for (EntryRelationship er : ir.getEntryRelationships()) {
-							er = Util.updateRefIfComment(er, String.valueOf(i),
-									loincSectionCode);
+							er = Util.updateRefIfComment(er, String.valueOf(i), loincSectionCode);
 						}
 					}
 				}
