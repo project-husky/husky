@@ -17,12 +17,11 @@
 package org.ehealth_connector.cda.ch;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -1598,7 +1597,7 @@ public class FhirCdaChVacd {
 	}
 
 	/**
-	 * <div class="en">reads the given XML file into a string</div> <div
+	 * <div class="en">reads the given XML file (UTF-8) into a string</div> <div
 	 * class="de"></div> <div class="fr"></div>
 	 * 
 	 * @param fileName
@@ -1609,23 +1608,21 @@ public class FhirCdaChVacd {
 	 */
 	private String getXmlResource(String fileName) {
 		StringBuffer sb = new StringBuffer();
-		InputStream inputStream;
 		try {
-			inputStream = new FileInputStream(new File(fileName));
-			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(
+					fileName), "UTF8"));
 			String line;
 			try {
 				while ((line = bufferedReader.readLine()) != null) {
 					sb.append(line);
 				}
 				bufferedReader.close();
-				inputStreamReader.close();
-				inputStream.close();
 			} catch (IOException e) {
-			} finally {
+				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
 		return sb.toString();
