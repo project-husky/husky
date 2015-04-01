@@ -53,11 +53,11 @@ public class PregnancyHistory {
 
 	/**
 	 * Instantiates a new pregnancy.
-	 *
+	 * 
 	 * @param estimatedBirthDate
 	 * <br>
-	 *            <div class="de">Errechneter Geburtstermin</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Errechneter Geburtstermin</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		this();
@@ -66,21 +66,20 @@ public class PregnancyHistory {
 
 	/**
 	 * Instantiates a new pregnancy.
-	 *
+	 * 
 	 * @param pregnancy
 	 * <br>
-	 *            <div class="de"> pregnancy</div> <div class="fr">
-	 *            pregnancy</div> <div class="it"> pregnancy</div>
+	 *          <div class="de"> pregnancy</div> <div class="fr"> pregnancy</div>
+	 *          <div class="it"> pregnancy</div>
 	 */
-	public PregnancyHistory(
-			org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
+	public PregnancyHistory(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
 		mPregnancy = pregnancy;
 	}
 
 	/**
 	 * <div class="de">Copy mdht pregnancy.</div> <div class="fr">Copy mdht
 	 * pregnancy.</div> <div class="it">Copy mdht pregnancy.</div>
-	 *
+	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. pregnancy observation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
@@ -89,7 +88,7 @@ public class PregnancyHistory {
 
 	/**
 	 * Gibt den errechneten Geburtstermin zurück.
-	 *
+	 * 
 	 * @return the estimated birthdate
 	 */
 	public String getEstimatedBirthdate() {
@@ -103,7 +102,7 @@ public class PregnancyHistory {
 
 	/**
 	 * Gets the mdht pregnancy.
-	 *
+	 * 
 	 * @return the mdht pregnancy
 	 */
 	public PregnancyObservation getMdhtPregnancy() {
@@ -112,9 +111,9 @@ public class PregnancyHistory {
 
 	/**
 	 * Setzt den errechneten Geburtstermin
-	 *
+	 * 
 	 * @param estimatedBirdDate
-	 *            the new estimated birth date
+	 *          the new estimated birth date
 	 */
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
 		TS ts = DateUtil.ts(estimatedBirdDate);

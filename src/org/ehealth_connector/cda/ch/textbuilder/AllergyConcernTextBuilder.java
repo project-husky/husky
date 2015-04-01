@@ -39,13 +39,12 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param problemConcerns
-	 *            a list of problem concerns
+	 *          a list of problem concerns
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
 	public AllergyConcernTextBuilder(
-			ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns,
-			SectionsVACD section) {
+			ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns, SectionsVACD section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
@@ -100,15 +99,12 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 			boolean minOneComment = false;
 			for (AllergyProblem ap : allergyConcern.getAllergyProblems()) {
 				if (ap.getMdhtAllergyProblem().getEntryRelationships() != null) {
-					for (EntryRelationship er : ap.getMdhtAllergyProblem()
-							.getEntryRelationships()) {
+					for (EntryRelationship er : ap.getMdhtAllergyProblem().getEntryRelationships()) {
 						if (Util.isComment(er)) {
 							j++;
 							minOneComment = true;
 							cellStr = cellStr
-									+ ("<content ID='"
-											+ SectionsVACD.ALLERGIES_REACTIONS
-													.getContentIdPrefix()
+									+ ("<content ID='" + SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix()
 											+ "-comment" + i + j + "'>");
 							cellStr = cellStr + (ap.getCommentText());
 							cellStr = cellStr + ("</content>");

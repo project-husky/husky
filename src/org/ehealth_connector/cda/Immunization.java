@@ -70,8 +70,7 @@ public class Immunization {
 
 		// Get the TemplateIds save them, clear the list and add the modified
 		// item again
-		List<II> savedTemplateIds = (List<II>) EcoreUtil.copyAll(mImmunization
-				.getTemplateIds());
+		List<II> savedTemplateIds = (List<II>) EcoreUtil.copyAll(mImmunization.getTemplateIds());
 		mImmunization.getTemplateIds().clear();
 
 		int i = 0;
@@ -103,13 +102,13 @@ public class Immunization {
 	 * nicht erwünschten Impfungen.
 	 * 
 	 * @param consumable
-	 *            Impfstoff
+	 *          Impfstoff
 	 * @param author
-	 *            Die eintragende Person <br>
-	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          Die eintragende Person <br>
+	 *          <div class="de">Autor der Impfung</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param appliedAt
-	 *            Datum der Impfung
+	 *          Datum der Impfung
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
 		this();
@@ -126,17 +125,17 @@ public class Immunization {
 	 * nicht erwünschten Impfungen.
 	 * 
 	 * @param consumable
-	 *            Impfstoff
+	 *          Impfstoff
 	 * @param author
-	 *            Die eintragende Person <br>
-	 *            <div class="de">Autor der Impfung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          Die eintragende Person <br>
+	 *          <div class="de">Autor der Impfung</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param appliedAt
-	 *            Datum der Impfung
+	 *          Datum der Impfung
 	 * @param route
-	 *            Einnahmeart (darf null sein)
+	 *          Einnahmeart (darf null sein)
 	 * @param doseQuantity
-	 *            in milliliters (e.g. 0.5) (darf null sein)
+	 *          in milliliters (e.g. 0.5) (darf null sein)
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt,
 			RouteOfAdministration route, Double doseQuantity) {
@@ -157,10 +156,10 @@ public class Immunization {
 	 * sind.
 	 * 
 	 * @param specialCode
-	 *            the special code that indicates, why no information is present
-	 *            in this element
+	 *          the special code that indicates, why no information is present in
+	 *          this element
 	 * @param author
-	 *            the author of this immunization
+	 *          the author of this immunization
 	 */
 	public Immunization(MedicationsSpecialConditions specialCode, Author author) {
 		this();
@@ -173,11 +172,10 @@ public class Immunization {
 	 * 
 	 * @param immunization
 	 * <br>
-	 *            <div class="de">IHE Impf-Objekt</div> <div class="fr">
-	 *            immunization</div> <div class="it"> immunization</div>
+	 *          <div class="de">IHE Impf-Objekt</div> <div class="fr">
+	 *          immunization</div> <div class="it"> immunization</div>
 	 */
-	public Immunization(
-			org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
+	public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
 		mImmunization = immunization;
 	}
 
@@ -185,7 +183,7 @@ public class Immunization {
 	 * Adds the id.
 	 * 
 	 * @param codedId
-	 *            the new id
+	 *          the new id
 	 */
 	public void addId(Identificator codedId) {
 		II ii = Util.createUuidVacdIdentificator(codedId);
@@ -197,34 +195,14 @@ public class Immunization {
 	 * should prevent)
 	 * 
 	 * @param reason
-	 *            the reason
+	 *          the reason
 	 */
 	public void addReason(Reason reason) {
-		mImmunization.addObservation(reason
-				.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-		mImmunization.getEntryRelationships()
-				.get(mImmunization.getEntryRelationships().size() - 1)
+		mImmunization.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
+		mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size() - 1)
 				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-		mImmunization.getEntryRelationships()
-				.get(mImmunization.getEntryRelationships().size() - 1)
+		mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size() - 1)
 				.setInversionInd(false);
-	}
-
-	/**
-	 * Gets a list of reasons for the immunization (the illness, which the
-	 * immunization should prevent).
-	 * 
-	 * @return A ArrayList of Reasons
-	 * 
-	 */
-	public ArrayList<Reason> getReasons() {
-		ArrayList<Reason> cl = new ArrayList<Reason>();
-		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
-				.getCDACHMSETBodyImmunizationL3Reasons();
-		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
-			cl.add(new Reason(er));
-		}
-		return cl;
 	}
 
 	/**
@@ -242,8 +220,7 @@ public class Immunization {
 	 * @return the apply date
 	 */
 	public Date getApplyDate() {
-		if (mImmunization.getEffectiveTimes() != null
-				&& mImmunization.getEffectiveTimes().size() > 0) {
+		if (mImmunization.getEffectiveTimes() != null && mImmunization.getEffectiveTimes().size() > 0) {
 			SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
 			return DateUtil.parseDateyyyyMMdd(date.getValue());
 		} else
@@ -257,8 +234,8 @@ public class Immunization {
 	 */
 	public Author getAuthor() {
 		try {
-			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil
-					.copy(mImmunization.getAuthors().get(0));
+			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil.copy(mImmunization.getAuthors()
+					.get(0));
 			return new Author(author);
 		} catch (IndexOutOfBoundsException e) {
 			// no author available
@@ -321,6 +298,23 @@ public class Immunization {
 	}
 
 	/**
+	 * <div class="de">Gets the information, if an immunization is intended, but
+	 * not performed, yet. (moodCode:INT).</div> <div class="de">Liefert die
+	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
+	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @return <div class="en"> true, if an immunization is intended. Otherwise:
+	 *         false</div> <div class="de"> true, wenn eine Impfung beabsichtigt,
+	 *         aber noch nicht erfolgt ist. Sonst: false</div>
+	 */
+	public boolean getIntended() {
+		if (mImmunization.getMoodCode().equals(x_DocumentSubstanceMood.INT))
+			return true;
+		else
+			return false;
+	}
+
+	/**
 	 * Returns the encapsulated IHE class.
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
@@ -344,10 +338,9 @@ public class Immunization {
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency
-	 * under which the Act happened, can happen, is happening, is intended to
-	 * happen, or is requested/demanded to happen. Codesystem:
-	 * 2.16.840.1.113883.5.7
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
+	 * which the Act happened, can happen, is happening, is intended to happen, or
+	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
 	 * 
 	 * @return priorityCode
 	 */
@@ -356,20 +349,36 @@ public class Immunization {
 	}
 
 	/**
+	 * Gets a list of reasons for the immunization (the illness, which the
+	 * immunization should prevent).
+	 * 
+	 * @return A ArrayList of Reasons
+	 * 
+	 */
+	public ArrayList<Reason> getReasons() {
+		ArrayList<Reason> cl = new ArrayList<Reason>();
+		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
+				.getCDACHMSETBodyImmunizationL3Reasons();
+		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
+			cl.add(new Reason(er));
+		}
+		return cl;
+	}
+
+	/**
 	 * Gets the route of administration.
 	 * 
 	 * @return the route of administration
 	 */
 	public RouteOfAdministration getRouteOfAdministration() {
-		return RouteOfAdministration.getEnum(mImmunization.getRouteCode()
-				.getCode());
+		return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
 	}
 
 	/**
 	 * Sets the apply date.
 	 * 
 	 * @param appliedAt
-	 *            the new apply date
+	 *          the new apply date
 	 */
 	public void setApplyDate(Date appliedAt) {
 		mImmunization.getEffectiveTimes().clear();
@@ -380,12 +389,11 @@ public class Immunization {
 	 * Sets the author.
 	 * 
 	 * @param author
-	 *            the new author
+	 *          the new author
 	 */
 	public void setAuthor(Author author) {
 		mImmunization.getAuthors().clear();
-		org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author
-				.copyMdhtAuthor();
+		org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
 		// Remove author function Code if present
 		if (immmunizationAuthor.getFunctionCode() != null) {
 			CE ce = null;
@@ -399,7 +407,7 @@ public class Immunization {
 	 * document
 	 * 
 	 * @param specialCode
-	 *            expresses a special condition for this element
+	 *          expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		mImmunization.setCode(specialCode.getCD());
@@ -408,8 +416,7 @@ public class Immunization {
 		ce.setNullFlavor(NullFlavor.UNK);
 		mImmunization.setPriorityCode(ce);
 		mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		mImmunization.getEffectiveTimes().add(
-				DateUtil.createSTCM_TS(new Date()));
+		mImmunization.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
 		mImmunization.getIds().add(Util.createUuidVacd(null));
 		Consumable c = new Consumable(false);
 		setConsumable(c);
@@ -419,7 +426,7 @@ public class Immunization {
 	 * Sets a comment text
 	 * 
 	 * @param text
-	 *            the text
+	 *          the text
 	 */
 	public void setCommentText(String text) {
 		Comment mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -438,7 +445,7 @@ public class Immunization {
 	 * Sets the consumable.
 	 * 
 	 * @param consumable
-	 *            the new consumable
+	 *          the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
 		mImmunization.setConsumable(consumable.copyMdhtConsumable());
@@ -448,7 +455,7 @@ public class Immunization {
 	 * Sets the dosage.
 	 * 
 	 * @param doseQuantity
-	 *            the new dosage (use null, if not known)
+	 *          the new dosage (use null, if not known)
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
@@ -462,25 +469,8 @@ public class Immunization {
 	}
 
 	/**
-	 * <div class="de">Gets the information, if an immunization is intended, but
-	 * not performed, yet. (moodCode:INT).</div> <div class="de">Liefert die
-	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
-	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return <div class="en"> true, if an immunization is intended. Otherwise:
-	 *         false</div> <div class="de"> true, wenn eine Impfung
-	 *         beabsichtigt, aber noch nicht erfolgt ist. Sonst: false</div>
-	 */
-	public boolean getIntended() {
-		if (mImmunization.getMoodCode().equals(x_DocumentSubstanceMood.INT))
-			return true;
-		else
-			return false;
-	}
-
-	/**
-	 * <div class="de">Sets the information that an immunization is intended,
-	 * but not performed, yet. (moodCode:INT).</div> <div class="de">Setzt, die
+	 * <div class="de">Sets the information that an immunization is intended, but
+	 * not performed, yet. (moodCode:INT).</div> <div class="de">Setzt, die
 	 * Information, dass eine Impfung beabsichtigt, aber noch nicht erfolgt ist
 	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
@@ -493,17 +483,16 @@ public class Immunization {
 	 * Sets the Person, who performs the Immunization
 	 * 
 	 * @param performer
-	 *            the new performer (Convenience Author will be converted to a
-	 *            performer)
+	 *          the new performer (Convenience Author will be converted to a
+	 *          performer)
 	 */
 	public void setPerformer(Author performer) {
 		Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
 		mImmunization.getPerformers().clear();
 		mImmunization.getPerformers().add(p2);
 
-		p2.setAssignedEntity(Util
-				.createAssignedEntityFromAssignedAuthor(performer
-						.copyMdhtAuthor().getAssignedAuthor()));
+		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor()
+				.getAssignedAuthor()));
 		try {
 			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
 		} catch (ParseException e) {
@@ -515,7 +504,7 @@ public class Immunization {
 	 * Sets the Person, who performs the Immunization
 	 * 
 	 * @param performer
-	 *            the new performer
+	 *          the new performer
 	 */
 	public void setPerformer(Performer performer) {
 		mImmunization.getPerformers().clear();
@@ -523,13 +512,12 @@ public class Immunization {
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency
-	 * under which the Act happened, can happen, is happening, is intended to
-	 * happen, or is requested/demanded to happen. Codesystem:
-	 * 2.16.840.1.113883.5.7
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
+	 * which the Act happened, can happen, is happening, is intended to happen, or
+	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
 	 * 
 	 * @param priorityCode
-	 *            the priority code
+	 *          the priority code
 	 */
 	public void setPriorityCode(Code priorityCode) {
 		mImmunization.setPriorityCode(priorityCode.getCE());
@@ -540,7 +528,7 @@ public class Immunization {
 	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
 	 * 
 	 * @param routeCode
-	 *            the new route of administration
+	 *          the new route of administration
 	 */
 	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
 		if (routeCode == null) {

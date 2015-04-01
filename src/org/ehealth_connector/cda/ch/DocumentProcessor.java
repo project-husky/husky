@@ -43,12 +43,12 @@ public class DocumentProcessor {
 
 	/**
 	 * Lädt ein Dokument in Form einer XML-Datei aus dem Dateisystem.
-	 *
+	 * 
 	 * @param filePath
-	 *            das File Object
+	 *          das File Object
 	 * @return den DocumentProcessor
 	 * @throws Exception
-	 *             the exception
+	 *           the exception
 	 */
 	public static CdaChVacd loadFromFile(String filePath) throws Exception {
 		InputStream inputstream = new FileInputStream(filePath);
@@ -68,8 +68,7 @@ public class DocumentProcessor {
 			// System.out.println("clinicalDocument is an instance of eVACDOC");
 			evacdocMdht = (VACD) clinicalDocument;
 		} else {
-			System.out
-					.println("clinical document is NOT an instance of eVACDOC");
+			System.out.println("clinical document is NOT an instance of eVACDOC");
 		}
 
 		CdaChVacd evacdoc = new CdaChVacd(evacdocMdht);

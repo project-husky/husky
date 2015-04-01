@@ -51,8 +51,7 @@ public class AllergyProblem {
 	 * Instantiates a new allergy problem.
 	 */
 	public AllergyProblem() {
-		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance()
-				.init();
+		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 	}
 
 	/**
@@ -62,12 +61,11 @@ public class AllergyProblem {
 	 * kann einem ProblemConcernEntry hinzugefügt werden.
 	 * 
 	 * @param allergy
-	 *            <div class="de">Die Art der Allergie</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Die Art der Allergie</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
-		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance()
-				.init();
+		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 		// mAllergyProblem.setEffectiveTime(DateUtil
 		// .createUnknownLowHighTimeNullFlavor());
 		setNotOccured(false);
@@ -86,22 +84,21 @@ public class AllergyProblem {
 	 * 
 	 * @param kindOfAllergy
 	 * <br>
-	 *            <div class="de"> kind of allergy</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de"> kind of allergy</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param problem
-	 *            <div class="de">Code zu Komplikationsrisiken oder
-	 *            Expositionsrisiken.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Code zu Komplikationsrisiken oder
+	 *          Expositionsrisiken.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param startOfProblem
-	 *            <div class="de">Beginn des Problems</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param endOfProblem
-	 *            <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
-			org.ehealth_connector.common.Code problem, Date startOfProblem,
-			Date endOfProblem) {
+			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
 		this(kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
 	}
@@ -114,30 +111,29 @@ public class AllergyProblem {
 	 * 
 	 * @param kindOfAllergy
 	 * <br>
-	 *            <div class="de">Die Art der Allergie</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Die Art der Allergie</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param problem
-	 *            <div class="de">Code zu Komplikationsrisiken oder
-	 *            Expositionsrisiken.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Code zu Komplikationsrisiken oder
+	 *          Expositionsrisiken.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param startOfProblem
-	 *            <div class="de">Beginn des Problems</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param endOfProblem
-	 *            <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param internalProblemId
-	 *            <div class="de">Interne ID des Problems innerhalb der Akte.
-	 *            Steht eine solche nicht zur Verfügung dann kann ein anderer
-	 *            Konstruktor verwendet werden und es wird stattdesssen eine
-	 *            GUID durch die Convenience API generiert.</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Interne ID des Problems innerhalb der Akte. Steht
+	 *          eine solche nicht zur Verfügung dann kann ein anderer Konstruktor
+	 *          verwendet werden und es wird stattdesssen eine GUID durch die
+	 *          Convenience API generiert.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
-			org.ehealth_connector.common.Code problem, Date startOfProblem,
-			Date endOfProblem, Identificator internalProblemId) {
-		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance()
-				.init();
+			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem,
+			Identificator internalProblemId) {
+		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
 		setNotOccured(false);
 		setStartDate(startOfProblem);
 		setEndDate(endOfProblem);
@@ -151,11 +147,10 @@ public class AllergyProblem {
 	 * 
 	 * @param allergyIntolerance
 	 * <br>
-	 *            <div class="de"> allergy intolerance</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de"> allergy intolerance</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
-	public AllergyProblem(
-			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
 		mAllergyProblem = allergyIntolerance;
 	}
 
@@ -163,7 +158,7 @@ public class AllergyProblem {
 	 * Adds the id.
 	 * 
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void addId(Identificator id) {
 		II ii = Util.createUuidVacdIdentificator(id);
@@ -174,7 +169,7 @@ public class AllergyProblem {
 	 * Adds the value.
 	 * 
 	 * @param code
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Code code) {
 		CD mCodedProblem = EcoreUtil.copy(code.getCD());
@@ -185,15 +180,15 @@ public class AllergyProblem {
 	 * Adds the value.
 	 * 
 	 * @param value
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Value value) {
 		mAllergyProblem.getValues().add(value.getValue());
 	}
 
 	/**
-	 * <div class="de">Copy mdht allergy intolerance.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="de">Copy mdht allergy intolerance.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @return the allergy intolerance
 	 */
@@ -240,8 +235,7 @@ public class AllergyProblem {
 	public String getEndDate() {
 		if (mAllergyProblem.getEffectiveTime() != null) {
 			if (mAllergyProblem.getEffectiveTime().getHigh() != null) {
-				return Util.createEurDateStrFromTS(mAllergyProblem
-						.getEffectiveTime().getHigh().getValue());
+				return Util.createEurDateStrFromTS(mAllergyProblem.getEffectiveTime().getHigh().getValue());
 			}
 		}
 		return null;
@@ -256,8 +250,7 @@ public class AllergyProblem {
 	 */
 	public Identificator getId() {
 		if (mAllergyProblem.getIds().size() > 0) {
-			Identificator id = new Identificator(mAllergyProblem.getIds()
-					.get(0));
+			Identificator id = new Identificator(mAllergyProblem.getIds().get(0));
 			return id;
 		}
 		return null;
@@ -290,8 +283,7 @@ public class AllergyProblem {
 	public String getStartDate() {
 		if (mAllergyProblem.getEffectiveTime() != null) {
 			if (mAllergyProblem.getEffectiveTime().getLow() != null) {
-				return Util.createEurDateStrFromTS(mAllergyProblem
-						.getEffectiveTime().getLow().getValue());
+				return Util.createEurDateStrFromTS(mAllergyProblem.getEffectiveTime().getLow().getValue());
 			}
 		}
 		return null;
@@ -303,9 +295,8 @@ public class AllergyProblem {
 	 * If the value is coded, the convenience API will return the Code.
 	 * </p>
 	 * <p>
-	 * If the value is uncoded, the convenience API will return the xml
-	 * reference to the free text description of the document for further
-	 * processing.
+	 * If the value is uncoded, the convenience API will return the xml reference
+	 * to the free text description of the document for further processing.
 	 * </p>
 	 * 
 	 * @return the problem value as string.
@@ -334,7 +325,7 @@ public class AllergyProblem {
 	 * Sets the code.
 	 * 
 	 * @param kindOfAllergy
-	 *            the new code
+	 *          the new code
 	 */
 	public void setCode(AllergiesAndIntolerances kindOfAllergy) {
 		mAllergyProblem.setCode(kindOfAllergy.getCD());
@@ -344,7 +335,7 @@ public class AllergyProblem {
 	 * Sets a comment text
 	 * 
 	 * @param text
-	 *            the text
+	 *          the text
 	 */
 	public void setCommentText(String text) {
 		Comment mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -363,7 +354,7 @@ public class AllergyProblem {
 	 * Sets the end of problem.
 	 * 
 	 * @param endOfProblem
-	 *            End of problem date.
+	 *          End of problem date.
 	 */
 	public void setEndDate(Date endOfProblem) {
 		if (mAllergyProblem.getEffectiveTime() == null) {
@@ -371,8 +362,7 @@ public class AllergyProblem {
 			mAllergyProblem.setEffectiveTime(interval);
 		}
 		try {
-			mAllergyProblem.getEffectiveTime().setHigh(
-					DateUtil.createIVXB_TSFromDate(endOfProblem));
+			mAllergyProblem.getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -382,7 +372,7 @@ public class AllergyProblem {
 	 * Sets the id.
 	 * 
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		II ii = Util.createIdentificator(id);
@@ -393,7 +383,7 @@ public class AllergyProblem {
 	 * Sets the problem not occured (negationId)
 	 * 
 	 * @param notOccured
-	 *            true, if the problem is not occured, false otherwise.
+	 *          true, if the problem is not occured, false otherwise.
 	 */
 	public void setNotOccured(boolean notOccured) {
 		mAllergyProblem.setNegationInd(notOccured);
@@ -403,7 +393,7 @@ public class AllergyProblem {
 	 * Sets the start.
 	 * 
 	 * @param startOfProblem
-	 *            Start of the problem
+	 *          Start of the problem
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (mAllergyProblem.getEffectiveTime() == null) {
@@ -411,8 +401,7 @@ public class AllergyProblem {
 			mAllergyProblem.setEffectiveTime(interval);
 		}
 		try {
-			mAllergyProblem.getEffectiveTime().setLow(
-					DateUtil.createIVXB_TSFromDate(startOfProblem));
+			mAllergyProblem.getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

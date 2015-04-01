@@ -50,11 +50,11 @@ public class Telecoms {
 	 * <div class="en">Instantiates a new telecoms.</div> <div
 	 * class="de">Instantiiert eine neue Liste mit Telcoms</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param telecoms
 	 * <br>
-	 *            <div class="de"> telecoms</div> <div class="fr">
-	 *            telecoms</div> <div class="it"> telecoms</div>
+	 *          <div class="de"> telecoms</div> <div class="fr"> telecoms</div>
+	 *          <div class="it"> telecoms</div>
 	 */
 	public Telecoms(EList<TEL> telecoms) {
 		this();
@@ -65,40 +65,40 @@ public class Telecoms {
 
 	/**
 	 * Weist der Telecoms Liste eine eMail Adresse zu.
-	 *
+	 * 
 	 * @param eMail
-	 *            eMail Adresse
+	 *          eMail Adresse
 	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
+	 *          Verwendungszweck (Privat, Geschäft)
 	 */
 	public void addEMail(String eMail, AddressUse usage) {
 		mTels.add(Util.createEMail(eMail, usage));
 	}
 
 	/**
-	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes
-	 * Format haben: "+41.32.234.66.77"
-	 *
+	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
+	 * haben: "+41.32.234.66.77"
+	 * 
 	 * @param fax
 	 * <br>
-	 *            <div class="de"> fax</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> fax</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
+	 *          Verwendungszweck (Privat, Geschäft)
 	 */
 	public void addFax(String fax, AddressUse usage) {
 		mTels.add(Util.createFax(fax, usage));
 	}
 
 	/**
-	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes
-	 * Format haben: "+41.32.234.66.77"
-	 *
+	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
+	 * haben: "+41.32.234.66.77"
+	 * 
 	 * @param phoneNr
-	 *            Telefonnummer (nur internationale Rufnummer ohne
-	 *            Sonderzeichen: "+41.32.234.66.77"
+	 *          Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen:
+	 *          "+41.32.234.66.77"
 	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft, Mobil)
+	 *          Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
 	public void addPhone(String phoneNr, AddressUse usage) {
 		mTels.add(Util.createTel(phoneNr, usage));
@@ -106,11 +106,11 @@ public class Telecoms {
 
 	/**
 	 * Weist der Telecoms Liste eine Webseite zu.
-	 *
+	 * 
 	 * @param url
-	 *            Webseite (z.B. "http://www.ehealth-connector.org")
+	 *          Webseite (z.B. "http://www.ehealth-connector.org")
 	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
+	 *          Verwendungszweck (Privat, Geschäft)
 	 */
 	public void addWebsite(String url, AddressUse usage) {
 		TEL t = DatatypesFactory.eINSTANCE.createTEL();
@@ -122,7 +122,7 @@ public class Telecoms {
 	/**
 	 * <div class="en">Copy mdht telecoms.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return EList the MDHT EList containing the Telecoms
 	 */
 	public EList<TEL> copyMdhtTelecoms() {
@@ -132,7 +132,7 @@ public class Telecoms {
 	/**
 	 * <div class="en">Gets the e mails.</div> <div class="de">Liefert e
 	 * mails.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return ArrayList <div class="en">the e mails as am ArrayList of Strings
 	 *         and AddressUse</div>
 	 */
@@ -143,7 +143,7 @@ public class Telecoms {
 	/**
 	 * <div class="en">Gets the faxes.</div> <div class="de">Liefert alle Fax
 	 * Nummern</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the faxes</div>
 	 */
 	public HashMap<String, AddressUse> getFaxes() {
@@ -151,9 +151,9 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert
-	 * mdht telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert mdht
+	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @return ArrayList <div class="en">the mdht telecoms</div>
 	 */
 	public ArrayList<TEL> getMdhtTelecoms() {
@@ -163,7 +163,7 @@ public class Telecoms {
 	/**
 	 * <div class="en">Gets the phones.</div> <div class="de">Liefert alle
 	 * Telefonnummern</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the phones</div>
 	 */
 	public HashMap<String, AddressUse> getPhones() {
@@ -171,10 +171,10 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Gets the telecoms as HashMap</div> <div
-	 * class="de">Liefert die Telecoms Liste als HashMap</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Gets the telecoms as HashMap</div> <div class="de">Liefert
+	 * die Telecoms Liste als HashMap</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 * 
 	 * @return <div class="en">the telecoms</div>
 	 */
 	public HashMap<String, TelecommunicationAddressUse> getTelecoms() {
@@ -188,7 +188,7 @@ public class Telecoms {
 	/**
 	 * <div class="en">Gets the Websides</div> <div class="de">Liefert alle
 	 * Websides</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the websides</div>
 	 */
 	public HashMap<String, AddressUse> getWebsites() {

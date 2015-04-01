@@ -60,9 +60,9 @@ public class DocumentMetadata {
 
 	/**
 	 * Instantiates a new document metadata.
-	 *
+	 * 
 	 * @param documentEntryType
-	 *            the document entry type
+	 *          the document entry type
 	 */
 	public DocumentMetadata(DocumentEntryType documentEntryType) {
 		this();
@@ -72,9 +72,9 @@ public class DocumentMetadata {
 	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convencience API Author.
-	 *
+	 * 
 	 * @param author
-	 *            the author
+	 *          the author
 	 */
 	@SuppressWarnings("unchecked")
 	public void addAuthor(Author author) {
@@ -82,8 +82,7 @@ public class DocumentMetadata {
 		// NullpointerException, if no Telecom value is interted and
 		// logger.Debug is set to true
 		if (author.getAuthorMdht().getAssignedAuthor().getTelecoms() == null
-				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms()
-						.isEmpty()) {
+				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
 			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
 		}
@@ -97,9 +96,9 @@ public class DocumentMetadata {
 
 	/**
 	 * Adds the (optional) confidentially code (e.g. 'N' for 'normal')
-	 *
+	 * 
 	 * @param code
-	 *            the code
+	 *          the code
 	 */
 	@SuppressWarnings("unchecked")
 	public void addConfidentiallyCode(Confidentiality code) {
@@ -108,7 +107,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Copy mdht document entry type.
-	 *
+	 * 
 	 * @return the document entry type
 	 */
 	public DocumentEntryType copyMdhtDocumentEntryType() {
@@ -117,7 +116,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the mdht document entry type.
-	 *
+	 * 
 	 * @return the mdht document entry type
 	 */
 	public DocumentEntryType getMdhtDocumentEntryType() {
@@ -125,11 +124,11 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * Sets the (required, but in principle computable) class code, which
-	 * defines the class of the document (e.g. Code for "Consultation")
-	 *
+	 * Sets the (required, but in principle computable) class code, which defines
+	 * the class of the document (e.g. Code for "Consultation")
+	 * 
 	 * @param code
-	 *            the new class code
+	 *          the new class code
 	 */
 	public void setClassCode(Code code) {
 		xDoc.setClassCode(XdsUtil.convertCode(code));
@@ -138,20 +137,20 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) coded language (e.g. "de-CH"). This code can be
 	 * extracted from CDA Document automatically.
-	 *
+	 * 
 	 * @param codedLanguage
-	 *            the new language code
+	 *          the new language code
 	 */
 	public void setCodedLanguage(LanguageCode codedLanguage) {
 		xDoc.setLanguageCode(codedLanguage.getCodeValue());
 	}
 
 	/**
-	 * Sets the (required) creation time of the document. If not set, the
-	 * current time will be used.
-	 *
+	 * Sets the (required) creation time of the document. If not set, the current
+	 * time will be used.
+	 * 
 	 * @param dateAndTime
-	 *            the new creation time
+	 *          the new creation time
 	 */
 	public void setCreationTime(Date dateAndTime) {
 		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
@@ -159,11 +158,11 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * Sets the (required) format code. If not set, the system will try to
-	 * derive it from the Document MimeType.
-	 *
+	 * Sets the (required) format code. If not set, the system will try to derive
+	 * it from the Document MimeType.
+	 * 
 	 * @param code
-	 *            the new format code
+	 *          the new format code
 	 */
 	public void setFormatCode(Code code) {
 		xDoc.setFormatCode(XdsUtil.convertCode(code));
@@ -172,9 +171,9 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) healthcare facility type code (e.g. Code for
 	 * "Hospital")
-	 *
+	 * 
 	 * @param code
-	 *            the new healthcare facility type code
+	 *          the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
 		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
@@ -182,20 +181,20 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (required) mime type (e.g. "text/xml")
-	 *
+	 * 
 	 * @param mimeType
-	 *            the new mime type
+	 *          the new mime type
 	 */
 	public void setMimeType(String mimeType) {
 		xDoc.setMimeType(mimeType);
 	}
 
 	/**
-	 * Sets the (required) patient. All information relevant for the XDS
-	 * Document Metadata will be extracted from the Convencience API Patient.
-	 *
+	 * Sets the (required) patient. All information relevant for the XDS Document
+	 * Metadata will be extracted from the Convencience API Patient.
+	 * 
 	 * @param patient
-	 *            the new patient
+	 *          the new patient
 	 */
 	public void setPatient(Patient patient) {
 		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
@@ -215,9 +214,9 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) patient id, which is used in the affinity domain
 	 * (typically retrieved from a Master Patient Index (MPI))
-	 *
+	 * 
 	 * @param id
-	 *            the new patient id
+	 *          the new patient id
 	 */
 	public void setPatientId(Identificator id) {
 		xDoc.setPatientId(XdsUtil.convertIdentificator(id));
@@ -227,9 +226,9 @@ public class DocumentMetadata {
 	 * Sets the (required) practice setting code. This is the medical speciality
 	 * of the practice where the document was produced (e.g. Code for
 	 * "General Medicine")
-	 *
+	 * 
 	 * @param code
-	 *            the new practice setting code
+	 *          the new practice setting code
 	 */
 	public void setPracticeSettingCode(Code code) {
 		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
@@ -238,9 +237,9 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) source patient id. This is the local patient id, e.g.
 	 * inside a hospital.
-	 *
+	 * 
 	 * @param id
-	 *            the new source patient id
+	 *          the new source patient id
 	 */
 	public void setSourcePatientId(Identificator id) {
 		xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
@@ -248,21 +247,21 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (optional) title.
-	 *
+	 * 
 	 * @param title
-	 *            the title object to set
+	 *          the title object to set
 	 */
 	public void setTitle(String title) {
 		xDoc.setTitle(XdsUtil.createInternationalString(title));
 	}
 
 	/**
-	 * Sets the (required) type code. Specifies the type of the document (like
-	 * the class code, but more specific) (e.g. Code for
+	 * Sets the (required) type code. Specifies the type of the document (like the
+	 * class code, but more specific) (e.g. Code for
 	 * "Summarization of Episode Note")
-	 *
+	 * 
 	 * @param code
-	 *            the new type code
+	 *          the new type code
 	 */
 	public void setTypeCode(Code code) {
 		xDoc.setTypeCode(XdsUtil.convertCode(code));
@@ -270,11 +269,10 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the unique id. The UUID of the document. Will be generated, when the
-	 * instance of class is retrieved from
-	 * ConvenienceCommunication.addDocument()
-	 *
+	 * instance of class is retrieved from ConvenienceCommunication.addDocument()
+	 * 
 	 * @param id
-	 *            the new unique id
+	 *          the new unique id
 	 */
 	public void setUniqueId(String id) {
 		xDoc.setUniqueId(id);

@@ -36,8 +36,7 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 	private String sectionText;
 	private int newId;
 
-	public ActiveProblemConcernTextBuilder(
-			ArrayList<ActiveProblemConcern> problemConcernEntries,
+	public ActiveProblemConcernTextBuilder(ArrayList<ActiveProblemConcern> problemConcernEntries,
 			ActiveProblemConcern newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
 		this.newProblemConcernEntry = newProblemConcernEntry;
@@ -72,8 +71,8 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		sectionText = insertRow(newProblemConcernEntry, newId, sectionText);
 	}
 
-	public String insertRow(ActiveProblemConcern newProblemConcernEntry2,
-			int newId, String sectionText) {
+	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
+			String sectionText) {
 		String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// If there is no element found that could be replaced, then an
 		// error occured (e.g. in a scenario, where an external document is
@@ -83,18 +82,15 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		// - In this case: Generate a new (convennience API conformant) set of
 		// ids, update the text and the objects. For this purpose the other
 		// methods of this and the super class could be useful.
-		String tableStr = sectionText
-				.replace(tableFooter, rowStr + tableFooter);
+		String tableStr = sectionText.replace(tableFooter, rowStr + tableFooter);
 		return tableStr;
 	}
 
-	private String buildRow(ActiveProblemConcern newProblemConcernEntry2,
-			int newId) {
+	private String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
 		StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");
 		rowBuilder.append(buildCell("Komplikationsrisiko"));
-		rowBuilder.append(buildCellWithContent(
-				newProblemConcernEntry2.getConcern(), newId,
+		rowBuilder.append(buildCellWithContent(newProblemConcernEntry2.getConcern(), newId,
 				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();

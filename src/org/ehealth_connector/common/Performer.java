@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
  * A Person or Organization performing an action
- *
+ * 
  */
 public class Performer {
 
@@ -55,26 +55,14 @@ public class Performer {
 		addName(name);
 	}
 
-	public Performer(Organization organization) {
-		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
-		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
-		mPerfomer.setAssignedEntity(mAsEntity);
-
-		// add time
-		setTimeValue(new Date());
-
-		setOrganization(organization);
-		mAsEntity.getIds().addAll(organization.copyMdhtOrganization().getIds());
-	}
-
 	/**
 	 * Erstellt einen neuen Perfomer (Dieser Konstruktor wird oft gebraucht für
 	 * Gesundheitsfachpersonen
 	 * 
 	 * @param name
-	 *            Name
+	 *          Name
 	 * @param gln
-	 *            Global Location Number (GLN)
+	 *          Global Location Number (GLN)
 	 */
 	public Performer(Name name, String gln) {
 		this(name);
@@ -90,9 +78,9 @@ public class Performer {
 	/**
 	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Performer
 	 * Objekts.
-	 *
+	 * 
 	 * @param performerMdht
-	 *            the MDHT Author Object
+	 *          the MDHT Author Object
 	 */
 	public Performer(org.openhealthtools.mdht.uml.cda.Performer2 performerMdht) {
 		mPerfomer = performerMdht;
@@ -100,11 +88,23 @@ public class Performer {
 		mPerson = performerMdht.getAssignedEntity().getAssignedPerson();
 	}
 
+	public Performer(Organization organization) {
+		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
+		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
+		mPerfomer.setAssignedEntity(mAsEntity);
+
+		// add time
+		setTimeValue(new Date());
+
+		setOrganization(organization);
+		mAsEntity.getIds().addAll(organization.copyMdhtOrganization().getIds());
+	}
+
 	/**
 	 * Weist dem Autor eine Postadresse zu.
-	 *
+	 * 
 	 * @param address
-	 *            Die Postadresse des Autors
+	 *          Die Postadresse des Autors
 	 */
 	public void addAddress(Address address) {
 		mAsEntity.getAddrs().add(address.copyMdhtAdress());
@@ -112,10 +112,10 @@ public class Performer {
 
 	/**
 	 * Weist dem Autoren eine ID zu.
-	 *
+	 * 
 	 * @param identificator
-	 *            Kombination von eigentlicher ID und der OID der verwaltenden
-	 *            Domäne
+	 *          Kombination von eigentlicher ID und der OID der verwaltenden
+	 *          Domäne
 	 */
 	public void addId(Identificator identificator) {
 		mAsEntity.getIds().add(identificator.getIi());
@@ -124,9 +124,9 @@ public class Performer {
 	/**
 	 * <div class="en">Adds the name.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param name
-	 *            name
+	 *          name
 	 */
 	public void addName(Name name) {
 		mAsEntity.getAssignedPerson().getNames().add(name.getMdhtPn());
@@ -135,7 +135,7 @@ public class Performer {
 	/**
 	 * <div class="en">Copy mdht author.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.author
 	 */
 	public org.openhealthtools.mdht.uml.cda.Performer2 copyMdhtPerfomer() {
@@ -143,9 +143,9 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
-	 * (erste) Adresse.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Gets the address.</div> <div class="de">Liefert die (erste)
+	 * Adresse.</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
@@ -156,7 +156,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the addresses.</div> <div class="de">Liefert alle
 	 * Adressen.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the addresses</div>
 	 */
 	public ArrayList<Address> getAddresses() {
@@ -172,7 +172,7 @@ public class Performer {
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
 	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
@@ -181,16 +181,12 @@ public class Performer {
 		if (mAsEntity != null) {
 			if (mAsEntity.getAssignedPerson() != null) {
 				if (mAsEntity.getAssignedPerson().getNames() != null) {
-					Name name = new Name(mAsEntity.getAssignedPerson()
-							.getNames().get(0));
+					Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
 					return name.getCompleteName();
 				} else {
 					if (mAsEntity.getRepresentedOrganizations().get(0) != null) {
-						if (mAsEntity.getRepresentedOrganizations().get(0)
-								.getNames() != null) {
-							Name name = new Name(mAsEntity
-									.getRepresentedOrganizations().get(0)
-									.getNames().get(0));
+						if (mAsEntity.getRepresentedOrganizations().get(0).getNames() != null) {
+							Name name = new Name(mAsEntity.getRepresentedOrganizations().get(0).getNames().get(0));
 							return name.getCompleteName();
 						}
 					}
@@ -204,7 +200,7 @@ public class Performer {
 	 * <div class="en">Gets the gln (identification of the author)</div> <div
 	 * class="de">Liefert die GLN (ID des Autors)</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
@@ -217,7 +213,7 @@ public class Performer {
 	 * <div class="en">Gets the gln as identificator.</div> <div
 	 * class="de">Liefert gln (ID des Autoren) als Identificator Objekt.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the gln as identificator</div>
 	 */
 	public Identificator getGlnAsIdentificator() {
@@ -229,7 +225,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
 	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the ids</div>
 	 */
 	public ArrayList<Identificator> getIds() {
@@ -237,10 +233,9 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div> <div
-	 * class="de">Liefert den (ersten) Nachnamen</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
+	 * <div class="en">Gets the (first) family name.</div> <div class="de">Liefert
+	 * den (ersten) Nachnamen</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
@@ -251,7 +246,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the names.</div> <div class="de">Liefert alle
 	 * Nachnamen</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the names</div>
 	 */
 	public ArrayList<Name> getNames() {
@@ -264,28 +259,27 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets the organization (RepresentedOrganization)</div>
-	 * <div class="de">Liefert die Organisation (RepresentedOrganization), der
-	 * der Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the organization (RepresentedOrganization)</div> <div
+	 * class="de">Liefert die Organisation (RepresentedOrganization), der der
+	 * Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @return organization <div class="en">the organization</div> <div
 	 *         class="de">die Organisation</div> <div class="fr"></div> <div
 	 *         class="it"></div>
 	 */
 	public Organization getOrganization() {
-		Organization o = new Organization(mAsEntity
-				.getRepresentedOrganizations().get(0));
+		Organization o = new Organization(mAsEntity.getRepresentedOrganizations().get(0));
 		return o;
 	}
 
 	/**
-	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert
-	 * author mdht.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the
-	 *         author mdht</div>
+	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert author
+	 * mdht.</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the author
+	 *         mdht</div>
 	 */
 	public org.openhealthtools.mdht.uml.cda.Performer2 getPerformerMdht() {
 		return EcoreUtil.copy(mPerfomer);
@@ -294,7 +288,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
@@ -306,31 +300,30 @@ public class Performer {
 	 * <div class="en">Sets the gln.</div> <div class="de">Setzt die GLN (ID des
 	 * Autoren).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param gln
-	 *            <div class="en">the new gln</div> <div class="de">das neue
-	 *            gln.</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the new gln</div> <div class="de">das neue
+	 *          gln.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setGln(String gln) {
 		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 
 	/**
-	 * <div class="en">Sets the organization (RepresentedOrganization)</div>
-	 * <div class="de">Setzt eine Organisation (RepresentedOrganization), der
-	 * der Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Sets the organization (RepresentedOrganization)</div> <div
+	 * class="de">Setzt eine Organisation (RepresentedOrganization), der der Autor
+	 * angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param organization
-	 *            <div class="en">the new organization</div> <div class="de">die
-	 *            neue Organisation</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="en">the new organization</div> <div class="de">die
+	 *          neue Organisation</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
 		mAsEntity.getRepresentedOrganizations().clear();
-		mAsEntity.getRepresentedOrganizations().add(
-				organization.copyMdhtOrganization());
+		mAsEntity.getRepresentedOrganizations().add(organization.copyMdhtOrganization());
 	}
 
 	/**
@@ -338,9 +331,8 @@ public class Performer {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param telecoms
-	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="en">the new telecoms</div> <div class="de">das neue
+	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mAsEntity.getTelecoms().addAll(telecoms.getMdhtTelecoms());
@@ -350,7 +342,7 @@ public class Performer {
 	 * Sets the Time Value
 	 * 
 	 * @param eurDate
-	 *            the date
+	 *          the date
 	 */
 	public void setTimeValue(Date eurDate) {
 		try {

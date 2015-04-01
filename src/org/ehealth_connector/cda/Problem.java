@@ -65,16 +65,15 @@ public class Problem {
 	 * werden soll, dass der Patient keine aktuellen Probleme hat.
 	 * 
 	 * @param currentProblems
-	 *            true: Erstellung eines leeren Objekts, false: Der Patient hat
-	 *            keine aktuellen Probleme.
+	 *          true: Erstellung eines leeren Objekts, false: Der Patient hat
+	 *          keine aktuellen Probleme.
 	 */
 	public Problem(boolean currentProblems) {
 		this();
 		setNotOccured(false);
 		if (!currentProblems) {
 			setCode(ProblemType.PROBLEM.getCode());
-			addValue(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY
-					.getCode());
+			addValue(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY.getCode());
 			setId(null);
 			setStartDate(null);
 			setEndDate(null);
@@ -84,27 +83,26 @@ public class Problem {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
 	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein weiteres Problem (kein
-	 * Komplikations- oder Expositionsrisiko) besteht und dieses als Freitext
-	 * angegeben wird.
+	 * verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations-
+	 * oder Expositionsrisiko) besteht und dieses als Freitext angegeben wird.
 	 * 
 	 * @param code
 	 * <br>
-	 *            <div class="de">Code des Problems (z.B. SNOMED Code für eine
-	 *            Diagnose)</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Code des Problems (z.B. SNOMED Code für eine
+	 *          Diagnose)</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
 	 * <br>
-	 *            <div class="de">Beschreibung des Problems (z.B.
-	 *            Lungenentzündung)</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Beschreibung des Problems (z.B.
+	 *          Lungenentzündung)</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param start
 	 * <br>
-	 *            <div class="de">Beginn des Problems</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param end
 	 * <br>
-	 *            <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Problem(Code code, String value, Date start, Date end) {
 		this();
@@ -120,27 +118,26 @@ public class Problem {
 	/**
 	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
 	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein weiteres Problem (kein
-	 * Komplikations- oder Expositionsrisiko) besteht und dieses codiert
-	 * angegeben wird.
+	 * verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations-
+	 * oder Expositionsrisiko) besteht und dieses codiert angegeben wird.
 	 * 
 	 * @param code
 	 * <br>
-	 *            <div class="de">Code des Problems (z.B. SNOMED Code für eine
-	 *            Diagnose)</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Code des Problems (z.B. SNOMED Code für eine
+	 *          Diagnose)</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
 	 * <br>
-	 *            <div class="de">Wert des Problems (z.B. ICD Code für
-	 *            Lungenentzündung)</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Wert des Problems (z.B. ICD Code für
+	 *          Lungenentzündung)</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param start
 	 * <br>
-	 *            <div class="de">Beginn des Problems</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param end
 	 * <br>
-	 *            <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Problem(Code code, Value value, Date start, Date end) {
 		this();
@@ -158,8 +155,8 @@ public class Problem {
 	 * 
 	 * @param observation
 	 * <br>
-	 *            <div class="de"> observation</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> observation</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Problem(Observation observation) {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
@@ -171,19 +168,18 @@ public class Problem {
 	 * verwendet, wenn für den Patienten ein Komplikationsrisiko besteht.
 	 * 
 	 * @param risc
-	 *            Komplikationsrisiko
+	 *          Komplikationsrisiko
 	 * @param start
 	 * <br>
-	 *            <div class="de"> start</div> <div class="fr"> start</div> <div
-	 *            class="it"> start</div>
+	 *          <div class="de"> start</div> <div class="fr"> start</div> <div
+	 *          class="it"> start</div>
 	 * @param end
 	 * <br>
-	 *            <div class="de"> end</div> <div class="fr"> end</div> <div
-	 *            class="it"> end</div>
+	 *          <div class="de"> end</div> <div class="fr"> end</div> <div
+	 *          class="it"> end</div>
 	 */
 	public Problem(RiscOfComplications risc, Date start, Date end) {
-		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start,
-				end);
+		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
 	}
 
 	/**
@@ -192,26 +188,25 @@ public class Problem {
 	 * verwendet, wenn für den Patienten ein Expositionsrisiko besteht.
 	 * 
 	 * @param risc
-	 *            Expositionsrisiko
+	 *          Expositionsrisiko
 	 * @param start
 	 * <br>
-	 *            <div class="de"> start</div> <div class="fr"> start</div> <div
-	 *            class="it"> start</div>
+	 *          <div class="de"> start</div> <div class="fr"> start</div> <div
+	 *          class="it"> start</div>
 	 * @param end
 	 * <br>
-	 *            <div class="de"> end</div> <div class="fr"> end</div> <div
-	 *            class="it"> end</div>
+	 *          <div class="de"> end</div> <div class="fr"> end</div> <div
+	 *          class="it"> end</div>
 	 */
 	public Problem(RiscOfExposure risc, Date start, Date end) {
-		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start,
-				end);
+		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
 	}
 
 	/**
 	 * Adds the id.
 	 * 
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void addId(Identificator id) {
 		II ii = Util.createUuidVacdIdentificator(id);
@@ -227,7 +222,7 @@ public class Problem {
 	 * class="it"></div>
 	 * 
 	 * @param code
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Code code) {
 		Value value = new Value(code);
@@ -243,7 +238,7 @@ public class Problem {
 	 * class="it"></div>
 	 * 
 	 * @param problemValue
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Value problemValue) {
 		if (problemValue == null) {
@@ -261,8 +256,8 @@ public class Problem {
 	 * 
 	 * @param text
 	 * <br>
-	 *            <div class="de"> value</div> <div class="fr"> value</div> <div
-	 *            class="it"> value</div>
+	 *          <div class="de"> value</div> <div class="fr"> value</div> <div
+	 *          class="it"> value</div>
 	 */
 	public void addValueText(String text) {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
@@ -272,8 +267,8 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Copy mdht problem entry.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="de">Copy mdht problem entry.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem entry
 	 */
@@ -302,8 +297,7 @@ public class Problem {
 	public String getEndDate() {
 		if (mProblemEntry.getEffectiveTime() != null) {
 			if (mProblemEntry.getEffectiveTime().getHigh() != null) {
-				return Util.createEurDateStrFromTS(mProblemEntry
-						.getEffectiveTime().getHigh().getValue());
+				return Util.createEurDateStrFromTS(mProblemEntry.getEffectiveTime().getHigh().getValue());
 			}
 		}
 		return null;
@@ -349,16 +343,14 @@ public class Problem {
 	public String getStartDate() {
 		if (mProblemEntry.getEffectiveTime() != null) {
 			if (mProblemEntry.getEffectiveTime().getLow() != null) {
-				return Util.createEurDateStrFromTS(mProblemEntry
-						.getEffectiveTime().getLow().getValue());
+				return Util.createEurDateStrFromTS(mProblemEntry.getEffectiveTime().getLow().getValue());
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded
-	 * String.
+	 * Get the (first) problem value. The Value may be a coded or uncoded String.
 	 * 
 	 * @return the (first) problem value as string.
 	 */
@@ -386,7 +378,7 @@ public class Problem {
 	 * Sets the code.
 	 * 
 	 * @param codedProblem
-	 *            das codedProblem Objekt welches gesetzt wird
+	 *          das codedProblem Objekt welches gesetzt wird
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
@@ -396,23 +388,22 @@ public class Problem {
 	 * Sets the code.
 	 * 
 	 * @param kindOfProblem
-	 *            the new code
+	 *          the new code
 	 */
 	public void setCode(ProblemType kindOfProblem) {
 		mProblemEntry.setCode(kindOfProblem.getCD());
 	}
 
 	/**
-	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet
-	 * ist</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet ist</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param endOfProblem
-	 *            das endOfProblem Objekt welches gesetzt wird
+	 *          das endOfProblem Objekt welches gesetzt wird
 	 */
 	public void setEndDate(Date endOfProblem) {
 		try {
-			mProblemEntry.getEffectiveTime().setHigh(
-					DateUtil.createIVXB_TSFromDate(endOfProblem));
+			mProblemEntry.getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -424,7 +415,7 @@ public class Problem {
 	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		II ii = Util.createIdentificator(id);
@@ -436,7 +427,7 @@ public class Problem {
 	 * (negationInd)</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param problemNotOccured
-	 *            das problemNotOccured Objekt welches gesetzt wird
+	 *          das problemNotOccured Objekt welches gesetzt wird
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
 		mProblemEntry.setNegationInd(problemNotOccured);
@@ -447,7 +438,7 @@ public class Problem {
 	 * hat</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfProblem
-	 *            das startOfProblem Objekt welches gesetzt wird
+	 *          das startOfProblem Objekt welches gesetzt wird
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (mProblemEntry.getEffectiveTime() == null) {
@@ -455,8 +446,7 @@ public class Problem {
 			mProblemEntry.setEffectiveTime(interval);
 		}
 		try {
-			mProblemEntry.getEffectiveTime().setLow(
-					DateUtil.createIVXB_TSFromDate(startOfProblem));
+			mProblemEntry.getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

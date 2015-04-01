@@ -150,33 +150,20 @@ public class CdaChVacdTest extends TestUtils {
 
 	public Consumable createConsumable() {
 		Consumable c = new Consumable(ts1);
-		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN
-				.getCodeSystemId(), numS1));
+		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
 		c.setTradeName(ts2);
 		c.setWhoAtcCode(code2);
 		c.setLotNr(numS2);
 		return consumable1;
 	}
 
-	public Reason createReason1() {
-		Reason r = new Reason(code1);
-		return r;
-	}
-
-	public Reason createReason2() {
-		Reason r = new Reason(code1, url, numS1);
-		return r;
-	}
-
 	public Consumable createConsumable1() {
-		Consumable c = new Consumable(ts1, new Code(
-				CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
+		Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
 		return c;
 	}
 
 	public Consumable createConsumable2() {
-		Consumable c = new Consumable(ts5, new Code(
-				CodeSystems.GLN.getCodeSystemId(), numS2), code2);
+		Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
 		return c;
 	}
 
@@ -190,10 +177,9 @@ public class CdaChVacdTest extends TestUtils {
 		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
 		arzt.setTelecoms(arztTelecoms);
 
-		Organization arztPraxis = new Organization("Gruppenpraxis CH",
-				"7608888888888");
-		Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888",
-				"Musterhausen", AddressUse.BUSINESS);
+		Organization arztPraxis = new Organization("Gruppenpraxis CH", "7608888888888");
+		Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888", "Musterhausen",
+				AddressUse.BUSINESS);
 		arztPraxis.addAddress(arztPraxisAdresse);
 		arztPraxis.setTelecoms(arztTelecoms);
 
@@ -201,20 +187,19 @@ public class CdaChVacdTest extends TestUtils {
 		Name patientName = new Name("Franzine", "Muster");
 		Patient patient = new Patient(patientName, AdministrativeGender.FEMALE,
 				DateUtil.date("10.02.1967"));
-		Address patientAdresse = new Address("Leidensweg", "10", "9876",
-				"Specimendorf", AddressUse.PRIVATE);
+		Address patientAdresse = new Address("Leidensweg", "10", "9876", "Specimendorf",
+				AddressUse.PRIVATE);
 		Telecoms patientTelecoms = new Telecoms();
 		patientTelecoms.addPhone("+41326851234", AddressUse.PRIVATE);
 		patient.setTelecoms(patientTelecoms);
 
 		// Adding an id using an OID that is already known by the convenience
 		// API (AHV-Nr/No AVS/SSN)
-		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated
-				.getCodeSystemId(), "123.71.332.115"));
+		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(),
+				"123.71.332.115"));
 		// Adding an id using an OID that is not known by the convenience API,
 		// yet
-		patient.addId(new Identificator("2.16.756.5.30.1.123.100.1.1.1",
-				"8077560000000000000000"));
+		patient.addId(new Identificator("2.16.756.5.30.1.123.100.1.1.1", "8077560000000000000000"));
 
 		patient.addAddress(patientAdresse);
 
@@ -294,6 +279,16 @@ public class CdaChVacdTest extends TestUtils {
 		return p;
 	}
 
+	public Reason createReason1() {
+		Reason r = new Reason(code1);
+		return r;
+	}
+
+	public Reason createReason2() {
+		Reason r = new Reason(code1, url, numS1);
+		return r;
+	}
+
 	@Before
 	public void initTestData() {
 
@@ -316,8 +311,7 @@ public class CdaChVacdTest extends TestUtils {
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
 		try {
-			url = new URL(
-					"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
+			url = new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -325,8 +319,7 @@ public class CdaChVacdTest extends TestUtils {
 		// Convenience API Types
 		code1 = createCode1();
 		code2 = createCode2();
-		whoAtcCode = new Code(CodeSystems.WHOATCCode.getCodeSystemId(), numS1,
-				numS2);
+		whoAtcCode = new Code(CodeSystems.WHOATCCode.getCodeSystemId(), numS1, numS2);
 		loincCode = new Code("2.16.840.1.113883.6.1", numS1);
 		problemCode = new Code("2.16.840.1.113883.6.139", numS2);
 		value1 = createValue1();
@@ -400,12 +393,10 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(ts3, a.getConcern());
 
 		a.addAllergyProblem(allergyProblem1);
-		assertTrue(TestUtils.isEqual(allergyProblem1, a.getAllergyProblems()
-				.get(0)));
+		assertTrue(TestUtils.isEqual(allergyProblem1, a.getAllergyProblems().get(0)));
 
 		a.addAllergyProblem(allergyProblem1);
-		assertTrue(TestUtils.isEqual(allergyProblem1, a.getAllergyProblems()
-				.get(1)));
+		assertTrue(TestUtils.isEqual(allergyProblem1, a.getAllergyProblems().get(1)));
 	}
 
 	@Test
@@ -465,8 +456,7 @@ public class CdaChVacdTest extends TestUtils {
 		d.addAllergyConcern(ac1);
 		d.addAllergyConcern(ac2);
 		d.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(ts4);
-		assertTrue(d.getNarrativeTextSectionAllergiesAndOtherAdverseReactions()
-				.contains(ts4));
+		assertTrue(d.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(ts4));
 
 		cr1 = createCodedResults();
 		d.addCodedResults(cr1);
@@ -485,16 +475,14 @@ public class CdaChVacdTest extends TestUtils {
 		d.addPregnancyHistory(ph1);
 		d.addPregnancyHistory(ph2);
 		d.setNarrativeTextSectionHistoryOfPregnancies(ts2);
-		assertTrue(d.getNarrativeTextSectionHistoryOfPregnancies()
-				.contains(ts2));
+		assertTrue(d.getNarrativeTextSectionHistoryOfPregnancies().contains(ts2));
 
 		immunizationRecommendation1 = createImmunizationRecommendation();
 		immunizationRecommendation2 = createImmunizationRecommendation();
 		d.addImmunizationRecommendation(immunizationRecommendation1);
 		d.addImmunizationRecommendation(immunizationRecommendation2);
 		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
-		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations()
-				.contains(ts3));
+		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
 
 		d.addComment(ts1);
 		d.addComment(ts2);
@@ -518,20 +506,20 @@ public class CdaChVacdTest extends TestUtils {
 		immunization2 = createImmunization();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		CS cs = DatatypesFactory.eINSTANCE.createCS();
 
@@ -539,29 +527,29 @@ public class CdaChVacdTest extends TestUtils {
 		d = createHeader();
 		d.getDoc().setLanguageCode(cs);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		cs.setCode("FR");
 		d.getDoc().setLanguageCode(cs);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		cs.setCode("It");
 		d.getDoc().setLanguageCode(cs);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		cs.setCode("eN");
 		d.getDoc().setLanguageCode(cs);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleEn(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleEn(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 	}
 
 	// 6
@@ -603,11 +591,11 @@ public class CdaChVacdTest extends TestUtils {
 	public void testConsumableSetterGetter() {
 		Consumable c = new Consumable(ts1);
 
-		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN
-				.getCodeSystemId(), numS1));
-		assertEquals(true, TestUtils.isEqual(
-				new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1),
-				c.getManufacturedProductId()));
+		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
+		assertEquals(
+				true,
+				TestUtils.isEqual(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1),
+						c.getManufacturedProductId()));
 
 		c.setTradeName(ts2);
 		assertEquals(ts2, c.getTradeName());
@@ -623,13 +611,10 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public void testDocMetadata(String constructorName, CdaChVacd doc) {
-		assertNotNull(constructorName + " Constructor - DocumentRoot is null",
-				doc.getDocRoot());
-		assertNotNull(constructorName + " Constructor - Document is null",
-				doc.getDoc());
-		assertEquals(
-				constructorName + " Constructor - Wrong Language Code set",
-				"de-CH", doc.getDoc().getLanguageCode().getCode());
+		assertNotNull(constructorName + " Constructor - DocumentRoot is null", doc.getDocRoot());
+		assertNotNull(constructorName + " Constructor - Document is null", doc.getDoc());
+		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc.getDoc()
+				.getLanguageCode().getCode());
 	}
 
 	// 11
@@ -652,8 +637,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(false, i.getProposed());
 
 		i.setPossibleAppliance(startDate, endDate);
-		assertEquals(startDateString + " - " + endDateString,
-				i.getPossibleAppliance());
+		assertEquals(startDateString + " - " + endDateString, i.getPossibleAppliance());
 
 		i.setShallNotBeAdministerd(true);
 		assertEquals(true, i.gettShallNotBeAdministerd());
@@ -662,16 +646,14 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(true, TestUtils.isEqual(consumable1, i.getConsumable()));
 
 		i.setDosage(number);
-		assertEquals(number,
-				Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
+		assertEquals(number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
 
 		i.setCommentText(ts2);
 		assertEquals(ts2, i.getCommentText());
 
 		i.addReason(reason2);
 		i.getReasons();
-		assertEquals(
-				"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
 				i.getReasons().get(0).getReference());
 		assertEquals(numS1, i.getReasons().get(0).getReferenceId());
 	}
@@ -691,8 +673,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(true, TestUtils.isEqual(consumable1, i.getConsumable()));
 
 		i.setDosage(number);
-		assertEquals(number,
-				Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
+		assertEquals(number, Double.valueOf(i.getDosage().getPhysicalQuantityValue()));
 
 		i.addId(id1);
 		assertEquals(id1, id1);
@@ -701,8 +682,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(isEqual(code2, i.getPriorityCode()));
 
 		i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
-		assertEquals(RouteOfAdministration.DIFFUSION_TRANSDERMAL,
-				i.getRouteOfAdministration());
+		assertEquals(RouteOfAdministration.DIFFUSION_TRANSDERMAL, i.getRouteOfAdministration());
 
 		i.setPerformer(author1);
 		assertNotNull(i.getPerformer());
@@ -824,9 +804,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(isEqual(code1, r1.getCode()));
 
 		r1.setReference(url);
-		assertEquals(
-				"http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
-				r1.getReference());
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", r1.getReference());
 
 		r1.setReferenceId(numS1);
 		assertEquals(numS1, r1.getReferenceId());

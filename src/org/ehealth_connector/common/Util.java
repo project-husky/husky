@@ -68,38 +68,21 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class Util {
 
 	/**
-	 * <div class="en">Gets the translation or code.</div> <div class="de">Sucht
-	 * in einem CD-Objekt nach einem CodeSystem und liefert den dazugehörigen
-	 * Code zurück.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @param codeSystem
-	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return <div class="en">the translation or code</div>
+	 * The Constant TELECOMS_FAX_PREFIX.
 	 */
-	public static Code getTranslationOrCode(String codeSystem, CD code) {
-		Code eHcCode;
-		if (code.getCode() == null) {
-			return null;
-		}
-		if (code.getCodeSystem().equals(codeSystem)) {
-			eHcCode = new Code(code);
-			return eHcCode;
-		} else {
-			for (CD mCd : code.getTranslations()) {
-				if (mCd.getCodeSystem().equals(codeSystem)) {
-					eHcCode = new Code(mCd);
-					return eHcCode;
-				}
-			}
-		}
-		return null;
-	}
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
+
+	/**
+	 * The Constant TELECOMS_EMAIL_PREFIX.
+	 */
+	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+
+	/**
+	 * The Constant TELECOMS_PHONE_PREFIX.
+	 */
+	public static final String TELECOMS_PHONE_PREFIX = "tel:";
+
+	public static final String TELECOMS_WEBSIDE_PREFIX = "http";
 
 	public static ArrayList<Identificator> convertIds(EList<II> mII) {
 		ArrayList<Identificator> il = new ArrayList<Identificator>();
@@ -113,40 +96,12 @@ public class Util {
 	/**
 	 * Erzeugt eine Adresse.
 	 * 
-	 * @param streetName
-	 *            Contains the StreetName
-	 * @param houseNumber
-	 *            Contains the house number
 	 * @param zip
-	 *            PLZ
+	 *          PLZ
 	 * @param city
-	 *            Ort
+	 *          Ort
 	 * @param usage
-	 *            Verwendungszweck (Privat, GeschÃ¤ft)
-	 * @return the new address
-	 */
-	public static AD createAddress(String streetName, String houseNumber,
-			String zip, String city, AddressUse usage) {
-		final AD ad = createAddress(zip, city, usage);
-
-		if (streetName != null) {
-			ad.addStreetAddressLine(streetName);
-		}
-		if (houseNumber != null) {
-			ad.addHouseNumber(houseNumber);
-		}
-		return ad;
-	}
-
-	/**
-	 * Erzeugt eine Adresse.
-	 * 
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, Geschäft)
+	 *          Verwendungszweck (Privat, Geschäft)
 	 * @return HL7 AD Objekt
 	 */
 	public static AD createAddress(String zip, String city, AddressUse usage) {
@@ -167,20 +122,47 @@ public class Util {
 	/**
 	 * Erzeugt eine Adresse.
 	 * 
+	 * @param streetName
+	 *          Contains the StreetName
+	 * @param houseNumber
+	 *          Contains the house number
+	 * @param zip
+	 *          PLZ
+	 * @param city
+	 *          Ort
+	 * @param usage
+	 *          Verwendungszweck (Privat, GeschÃ¤ft)
+	 * @return the new address
+	 */
+	public static AD createAddress(String streetName, String houseNumber, String zip, String city,
+			AddressUse usage) {
+		final AD ad = createAddress(zip, city, usage);
+
+		if (streetName != null) {
+			ad.addStreetAddressLine(streetName);
+		}
+		if (houseNumber != null) {
+			ad.addHouseNumber(houseNumber);
+		}
+		return ad;
+	}
+
+	/**
+	 * Erzeugt eine Adresse.
+	 * 
 	 * @param addressline
 	 * <br>
-	 *            <div class="de"> addressline</div> <div class="fr">
-	 *            addressline</div> <div class="it"> addressline</div>
+	 *          <div class="de"> addressline</div> <div class="fr">
+	 *          addressline</div> <div class="it"> addressline</div>
 	 * @param zip
-	 *            PLZ
+	 *          PLZ
 	 * @param city
-	 *            Ort
+	 *          Ort
 	 * @param usage
-	 *            Verwendungszweck (Privat, GeschÃ¤ft)
+	 *          Verwendungszweck (Privat, GeschÃ¤ft)
 	 * @return the ad
 	 */
-	public static AD createAdress(String addressline, String zip, String city,
-			AddressUse usage) {
+	public static AD createAdress(String addressline, String zip, String city, AddressUse usage) {
 		final AD ad = createAddress(zip, city, usage);
 
 		if (addressline != null) {
@@ -189,8 +171,7 @@ public class Util {
 		return ad;
 	}
 
-	public static AssignedEntity createAssignedEntityFromAssignedAuthor(
-			AssignedAuthor a) {
+	public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
 		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 		// Copy Addresses
 		if (a.getAddrs() != null) {
@@ -206,12 +187,23 @@ public class Util {
 		}
 		// Copy Represented Organization
 		if (a.getRepresentedOrganization() != null) {
-			asEnt.getRepresentedOrganizations().add(
-					a.getRepresentedOrganization());
+			asEnt.getRepresentedOrganizations().add(a.getRepresentedOrganization());
 		}
 		// Set Assigned Person
 		asEnt.setAssignedPerson(a.getAssignedPerson());
 		return asEnt;
+	}
+
+	/**
+	 * <div class="en">Creates the ce null flavor UNK.</div> <div
+	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @return the ce
+	 */
+	public static CD createCDNullFlavorUNK() {
+		CD ce = DatatypesFactory.eINSTANCE.createCD();
+		ce.setNullFlavor(NullFlavor.UNK);
+		return ce;
 	}
 
 	/**
@@ -239,20 +231,8 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the ce null flavor UNK.</div> <div
-	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return the ce
-	 */
-	public static CD createCDNullFlavorUNK() {
-		CD ce = DatatypesFactory.eINSTANCE.createCD();
-		ce.setNullFlavor(NullFlavor.UNK);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Creates the code null flavor.</div> <div
-	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the code null flavor.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the cd
 	 */
@@ -267,24 +247,21 @@ public class Util {
 	 * CustodianOrganization Objekt.
 	 * 
 	 * @param organization
-	 *            Organisation
+	 *          Organisation
 	 * @return CustodianOrganization
 	 */
 	public static CustodianOrganization createCustodianOrganizationFromOrganization(
 			Organization organization) {
 		// create and set the mdht RepresentedCustodianOrganization Object
-		final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
-				.createCustodianOrganization();
+		final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE.createCustodianOrganization();
 
 		ON on = DatatypesFactory.eINSTANCE.createON();
 		on.addText(organization.getName());
 		mdhtCustOrg.setName(on);
 		// take the first address and set it as CustodianAdress
-		mdhtCustOrg.setAddr(organization.copyMdhtOrganization().getAddrs()
-				.get(0));
+		mdhtCustOrg.setAddr(organization.copyMdhtOrganization().getAddrs().get(0));
 		// take the first telecom and set it as CustodianTelecom
-		mdhtCustOrg.setTelecom(organization.copyMdhtOrganization()
-				.getTelecoms().get(0));
+		mdhtCustOrg.setTelecom(organization.copyMdhtOrganization().getTelecoms().get(0));
 		return mdhtCustOrg;
 	}
 
@@ -294,8 +271,8 @@ public class Util {
 	 * 
 	 * @param text
 	 * <br>
-	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
-	 *            class="it"> text</div>
+	 *          <div class="de"> text</div> <div class="fr"> text</div> <div
+	 *          class="it"> text</div>
 	 * @return the ed
 	 */
 	public static ED createEd(String text) {
@@ -309,12 +286,12 @@ public class Util {
 	 * 
 	 * @param eMail
 	 * <br>
-	 *            <div class="de"> e mail</div> <div class="fr"> e mail</div>
-	 *            <div class="it"> e mail</div>
+	 *          <div class="de"> e mail</div> <div class="fr"> e mail</div> <div
+	 *          class="it"> e mail</div>
 	 * @param usage
 	 * <br>
-	 *            <div class="de"> usage</div> <div class="fr"> usage</div> <div
-	 *            class="it"> usage</div>
+	 *          <div class="de"> usage</div> <div class="fr"> usage</div> <div
+	 *          class="it"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createEMail(String eMail, AddressUse usage) {
@@ -330,13 +307,12 @@ public class Util {
 	 * 
 	 * @param hl7Stimestamp
 	 * <br>
-	 *            <div class="de"> hl7 stimestamp</div> <div class="fr"> hl7
-	 *            stimestamp</div> <div class="it"> hl7 stimestamp</div>
+	 *          <div class="de"> hl7 stimestamp</div> <div class="fr"> hl7
+	 *          stimestamp</div> <div class="it"> hl7 stimestamp</div>
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		String eurDateStr = hl7Stimestamp.substring(6, 8) + "."
-				+ hl7Stimestamp.substring(4, 6) + "."
+		String eurDateStr = hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "."
 				+ hl7Stimestamp.substring(0, 4);
 		return eurDateStr;
 	}
@@ -347,12 +323,12 @@ public class Util {
 	 * 
 	 * @param faxNr
 	 * <br>
-	 *            <div class="de"> fax nr</div> <div class="fr"> fax nr</div>
-	 *            <div class="it"> fax nr</div>
+	 *          <div class="de"> fax nr</div> <div class="fr"> fax nr</div> <div
+	 *          class="it"> fax nr</div>
 	 * @param usage
 	 * <br>
-	 *            <div class="de"> usage</div> <div class="fr"> usage</div> <div
-	 *            class="it"> usage</div>
+	 *          <div class="de"> usage</div> <div class="fr"> usage</div> <div
+	 *          class="it"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createFax(String faxNr, AddressUse usage) {
@@ -416,17 +392,15 @@ public class Util {
 	 * 
 	 * @param author
 	 * <br>
-	 *            <div class="de"> author</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> author</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @return the legal authenticator
 	 */
 	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
 			org.ehealth_connector.common.Author author) {
 		org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
-		LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE
-				.createLegalAuthenticator();
-		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a
-				.getAssignedAuthor()));
+		LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
+		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
 		CS cs = Signature.SIGNED.getCS();
@@ -443,8 +417,8 @@ public class Util {
 	 * 
 	 * @param name
 	 * <br>
-	 *            <div class="de"> name</div> <div class="fr"> name</div> <div
-	 *            class="it"> name</div>
+	 *          <div class="de"> name</div> <div class="fr"> name</div> <div
+	 *          class="it"> name</div>
 	 * @return the enxp
 	 */
 	public static ENXP createName(String name) {
@@ -459,21 +433,19 @@ public class Util {
 	 * 
 	 * @param xmlString
 	 * <br>
-	 *            <div class="de"> xml string</div> <div class="fr"> xml
-	 *            string</div> <div class="it"> xml string</div>
+	 *          <div class="de"> xml string</div> <div class="fr"> xml
+	 *          string</div> <div class="it"> xml string</div>
 	 * @return the struc doc text
 	 */
 	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
 		Resource.Factory factory = new GenericXMLResourceFactoryImpl();
 		XMLResource resource = (XMLResource) factory.createResource(null);
 		try {
-			resource.load(new URIConverter.ReadableInputStream("<text>"
-					+ xmlString + "</text>"), null);
+			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"), null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents()
-				.get(0);
+		XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
 		AnyType value = (AnyType) root.getMixed().getValue(0);
 		StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
 		text.getMixed().addAll(value.getMixed());
@@ -508,12 +480,12 @@ public class Util {
 	 * 
 	 * @param contentId
 	 * <br>
-	 *            <div class="de"> content id</div> <div class="fr"> content
-	 *            id</div> <div class="it"> content id</div>
+	 *          <div class="de"> content id</div> <div class="fr"> content
+	 *          id</div> <div class="it"> content id</div>
 	 * @param prefix
 	 * <br>
-	 *            <div class="de"> prefix</div> <div class="fr"> prefix</div>
-	 *            <div class="it"> prefix</div>
+	 *          <div class="de"> prefix</div> <div class="fr"> prefix</div> <div
+	 *          class="it"> prefix</div>
 	 * @return the ed
 	 */
 	public static ED createReference(int contentId, String prefix) {
@@ -541,19 +513,18 @@ public class Util {
 	 * 
 	 * @param telNr
 	 * <br>
-	 *            <div class="de"> tel nr</div> <div class="fr"> tel nr</div>
-	 *            <div class="it"> tel nr</div>
+	 *          <div class="de"> tel nr</div> <div class="fr"> tel nr</div> <div
+	 *          class="it"> tel nr</div>
 	 * @param usage
 	 * <br>
-	 *            <div class="de"> usage</div> <div class="fr"> usage</div> <div
-	 *            class="it"> usage</div>
+	 *          <div class="de"> usage</div> <div class="fr"> usage</div> <div
+	 *          class="it"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createTel(String telNr, AddressUse usage) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		if (usage != null) {
-			tel.getUses().add(
-					usage.getAddressUseAsTelecommunicationAddressUse());
+			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
 		return tel;
@@ -565,8 +536,8 @@ public class Util {
 	 * 
 	 * @param id
 	 * <br>
-	 *            <div class="de"> id</div> <div class="fr"> id</div> <div
-	 *            class="it"> id</div>
+	 *          <div class="de"> id</div> <div class="fr"> id</div> <div
+	 *          class="it"> id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacd(String id) {
@@ -586,8 +557,8 @@ public class Util {
 	 * 
 	 * @param id
 	 * <br>
-	 *            <div class="de"> id</div> <div class="fr"> id</div> <div
-	 *            class="it"> id</div>
+	 *          <div class="de"> id</div> <div class="fr"> id</div> <div
+	 *          class="it"> id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacdIdentificator(Identificator id) {
@@ -606,12 +577,11 @@ public class Util {
 	 * 
 	 * @param strucDocText
 	 * <br>
-	 *            <div class="de"> struc doc text</div> <div class="fr"> struc
-	 *            doc text</div> <div class="it"> struc doc text</div>
+	 *          <div class="de"> struc doc text</div> <div class="fr"> struc doc
+	 *          text</div> <div class="it"> struc doc text</div>
 	 * @return the string
 	 */
-	public static String extractStringFromNonQuotedStrucDocText(
-			StrucDocText strucDocText) {
+	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
 		StringBuilder sb = new StringBuilder();
 		if (strucDocText != null) {
 			sb = traverse2(strucDocText.getMixed(), sb);
@@ -625,19 +595,18 @@ public class Util {
 	 * 
 	 * @param iis
 	 * <br>
-	 *            <div class="de"> iis</div> <div class="fr"> iis</div> <div
-	 *            class="it"> iis</div>
+	 *          <div class="de"> iis</div> <div class="fr"> iis</div> <div
+	 *          class="it"> iis</div>
 	 * @param ii
 	 * <br>
-	 *            <div class="de"> ii</div> <div class="fr"> ii</div> <div
-	 *            class="it"> ii</div>
+	 *          <div class="de"> ii</div> <div class="fr"> ii</div> <div
+	 *          class="it"> ii</div>
 	 * @return the ii
 	 */
 	public static II findII(EList<II> iis, II ii) {
 		for (II curII : iis) {
 			if (curII.getRoot().equals(ii.getRoot())) {
-				if (ii.getExtension() == null
-						|| curII.getExtension().equals(ii.getExtension())) {
+				if (ii.getExtension() == null || curII.getExtension().equals(ii.getExtension())) {
 					return curII;
 				}
 			}
@@ -649,7 +618,7 @@ public class Util {
 	 * Erzeugt eine Dokumenten ID mit Hilfe einer applicationOidRoot.
 	 * 
 	 * @param appliactionOidRoot
-	 *            identifiziert diese Version des eHCs
+	 *          identifiziert diese Version des eHCs
 	 * @return HL7 II Objekt
 	 */
 	public static II generateDocId(String appliactionOidRoot) {
@@ -661,15 +630,13 @@ public class Util {
 				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 		final Random r = new Random();
-		final II id = DatatypesFactory.eINSTANCE.createII(documentOid,
-				String.valueOf(r.nextInt()));
+		final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(r.nextInt()));
 		return id;
 	}
 
 	public static String getCommentRef(EList<EntryRelationship> e) {
 		for (EntryRelationship er : e) {
-			if (er.getTypeCode()
-					.equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				if (er.getAct().getText() != null) {
 					ED ed = er.getAct().getText();
@@ -684,8 +651,7 @@ public class Util {
 
 	public static String getCommentText(EList<EntryRelationship> e) {
 		for (EntryRelationship er : e) {
-			if (er.getTypeCode()
-					.equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				ED ed = er.getAct().getText();
 				return ed.getText();
@@ -700,8 +666,8 @@ public class Util {
 	 * 
 	 * @param telecoms
 	 * <br>
-	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> telecoms</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @return <div class="en">the e mail</div>
 	 */
 	public static HashMap<String, AddressUse> getEMail(ArrayList<TEL> telecoms) {
@@ -709,13 +675,13 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the fax.</div> <div class="de">Liefert fax.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the fax.</div> <div class="de">Liefert fax.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param telecoms
 	 * <br>
-	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> telecoms</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @return <div class="en">the fax</div>
 	 */
 	public static HashMap<String, AddressUse> getFax(ArrayList<TEL> telecoms) {
@@ -723,17 +689,51 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the phone.</div> <div class="de">Liefert
-	 * phone.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the phone.</div> <div class="de">Liefert phone.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param telecoms
 	 * <br>
-	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> telecoms</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @return <div class="en">the phone</div>
 	 */
 	public static HashMap<String, AddressUse> getPhones(ArrayList<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
+	}
+
+	/**
+	 * <div class="en">Gets the translation or code.</div> <div class="de">Sucht
+	 * in einem CD-Objekt nach einem CodeSystem und liefert den dazugehörigen Code
+	 * zurück.</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param codeSystem
+	 * <br>
+	 *          <div class="de"> code system</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @param code
+	 * <br>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @return <div class="en">the translation or code</div>
+	 */
+	public static Code getTranslationOrCode(String codeSystem, CD code) {
+		Code eHcCode;
+		if (code.getCode() == null) {
+			return null;
+		}
+		if (code.getCodeSystem().equals(codeSystem)) {
+			eHcCode = new Code(code);
+			return eHcCode;
+		} else {
+			for (CD mCd : code.getTranslations()) {
+				if (mCd.getCodeSystem().equals(codeSystem)) {
+					eHcCode = new Code(mCd);
+					return eHcCode;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -742,14 +742,12 @@ public class Util {
 	 * 
 	 * @param telecoms
 	 * <br>
-	 *            <div class="de"> telecoms</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> telecoms</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @return <div class="en">the webside</div>
 	 */
-	public static HashMap<String, AddressUse> getWebsites(
-			ArrayList<TEL> telecoms) {
-		HashMap<String, AddressUse> h = getTelecomType(telecoms,
-				TELECOMS_WEBSIDE_PREFIX);
+	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
+		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
 		return h;
 	}
 
@@ -759,8 +757,8 @@ public class Util {
 	 * 
 	 * @param root
 	 * <br>
-	 *            <div class="de"> root</div> <div class="fr"> root</div> <div
-	 *            class="it"> root</div>
+	 *          <div class="de"> root</div> <div class="fr"> root</div> <div
+	 *          class="it"> root</div>
 	 * @return the ii
 	 */
 	public static II ii(String root) {
@@ -775,12 +773,12 @@ public class Util {
 	 * 
 	 * @param root
 	 * <br>
-	 *            <div class="de"> root</div> <div class="fr"> root</div> <div
-	 *            class="it"> root</div>
+	 *          <div class="de"> root</div> <div class="fr"> root</div> <div
+	 *          class="it"> root</div>
 	 * @param extension
 	 * <br>
-	 *            <div class="de"> extension</div> <div class="fr">
-	 *            extension</div> <div class="it"> extension</div>
+	 *          <div class="de"> extension</div> <div class="fr"> extension</div>
+	 *          <div class="it"> extension</div>
 	 * @return the ii
 	 */
 	public static II ii(String root, String extension) {
@@ -804,12 +802,12 @@ public class Util {
 	 * 
 	 * @param nameList
 	 * <br>
-	 *            <div class="de"> name list</div> <div class="fr"> name
-	 *            list</div> <div class="it"> name list</div>
+	 *          <div class="de"> name list</div> <div class="fr"> name list</div>
+	 *          <div class="it"> name list</div>
 	 * @param delimiter
 	 * <br>
-	 *            <div class="de"> delimiter</div> <div class="fr">
-	 *            delimiter</div> <div class="it"> delimiter</div>
+	 *          <div class="de"> delimiter</div> <div class="fr"> delimiter</div>
+	 *          <div class="it"> delimiter</div>
 	 * @return the string
 	 */
 	public static String join(ArrayList<String> nameList, String delimiter) {
@@ -841,8 +839,8 @@ public class Util {
 	 * 
 	 * @param list
 	 * <br>
-	 *            <div class="de"> list</div> <div class="fr"> list</div> <div
-	 *            class="it"> list</div>
+	 *          <div class="de"> list</div> <div class="fr"> list</div> <div
+	 *          class="it"> list</div>
 	 * @return the string
 	 */
 	public static String joinEListStr(EList<ENXP> list) {
@@ -866,8 +864,8 @@ public class Util {
 	 * 
 	 * @param text
 	 * <br>
-	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
-	 *            class="it"> text</div>
+	 *          <div class="de"> text</div> <div class="fr"> text</div> <div
+	 *          class="it"> text</div>
 	 * @return the st
 	 */
 	public static ST st(String text) {
@@ -876,8 +874,8 @@ public class Util {
 		return value;
 	}
 
-	public static EntryRelationship updateRefIfComment(EntryRelationship er,
-			int i, int j, SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
+			SectionsVACD prefix) {
 		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
 				&& er.getInversionInd().equals(true)) {
 			// Get the ed and update it with the reference
@@ -885,8 +883,7 @@ public class Util {
 			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			ed.setReference(tel);
 			if (CdaChVacd.CDALevel2TextGeneration) {
-				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i
-						+ j);
+				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
 			}
@@ -895,16 +892,15 @@ public class Util {
 		return er;
 	}
 
-	public static EntryRelationship updateRefIfComment(EntryRelationship er,
-			String ref, SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
+			SectionsVACD prefix) {
 		if (isComment(er)) {
 			// Get the ed and update it with the reference
 			ED ed = er.getAct().getText();
 			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			ed.setReference(tel);
 			if (CdaChVacd.CDALevel2TextGeneration) {
-				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment"
-						+ ref);
+				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
 			}
@@ -913,54 +909,30 @@ public class Util {
 		return er;
 	}
 
-	/**
-	 * The Constant TELECOMS_FAX_PREFIX.
-	 */
-	public static final String TELECOMS_FAX_PREFIX = "fax:";
-
-	/**
-	 * The Constant TELECOMS_EMAIL_PREFIX.
-	 */
-	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
-
-	/**
-	 * The Constant TELECOMS_PHONE_PREFIX.
-	 */
-	public static final String TELECOMS_PHONE_PREFIX = "tel:";
-
-	public static final String TELECOMS_WEBSIDE_PREFIX = "http";
-
-	/**
-	 * Erzeugt eine Adresse.
-	 * 
-	 * @param addressline1
-	 *            Adresszeile 1
-	 * @param addressline2
-	 *            Adresszeile 2
-	 * @param addressline3
-	 *            Adresszeile 3
-	 * @param zip
-	 *            PLZ
-	 * @param city
-	 *            Ort
-	 * @param usage
-	 *            Verwendungszweck (Privat, GeschÃ¤ft)
-	 * @return HL7 AD Objekt
-	 */
-	public AD createAddress(String addressline1, String addressline2,
-			String addressline3, String zip, String city, AddressUse usage) {
-		final AD ad = createAddress(zip, city, usage);
-
-		if (addressline1 != null) {
-			ad.addStreetAddressLine(addressline1);
+	private static HashMap<String, AddressUse> getTelecomType(ArrayList<TEL> telecoms, String type) {
+		HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		for (TEL tel : telecoms) {
+			if (tel.getValue().toLowerCase().contains(type)) {
+				tl.put(tel.getValue(),
+						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+			}
 		}
-		if (addressline2 != null) {
-			ad.addStreetAddressLine(addressline2);
+		return tl;
+	}
+
+	@SuppressWarnings("unused")
+	private static String getText(FeatureMap featureMap) {
+		StringBuffer buffer = new StringBuffer("");
+		for (FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
+				}
+			}
 		}
-		if (addressline3 != null) {
-			ad.addStreetAddressLine(addressline3);
-		}
-		return ad;
+		return buffer.toString().trim();
 	}
 
 	@SuppressWarnings("unused")
@@ -973,8 +945,7 @@ public class Util {
 			for (int i = featureMap.size() - 1; i >= 0; i--) {
 				Entry entry = featureMap.get(i);
 				if (entry.getEStructuralFeature() instanceof EReference) {
-					System.out.print("<"
-							+ entry.getEStructuralFeature().getName());
+					System.out.print("<" + entry.getEStructuralFeature().getName());
 					AnyType anyType = (AnyType) entry.getValue();
 					traverseAttributes(anyType.getAnyAttribute());
 					System.out.print(">");
@@ -1000,8 +971,7 @@ public class Util {
 		}
 	}
 
-	private static StringBuilder traverse2(FeatureMap featureMap,
-			StringBuilder sb) {
+	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
 		for (int i = 0; i <= featureMap.size() - 1; i++) {
 			Entry entry = featureMap.get(i);
 			if (entry.getEStructuralFeature() instanceof EReference) {
@@ -1028,46 +998,49 @@ public class Util {
 
 	private static void traverseAttributes(FeatureMap anyAttribute) {
 		for (Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName()
-					+ "=\"" + entry.getValue().toString() + "\"");
+			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
+					+ entry.getValue().toString() + "\"");
 		}
 	}
 
-	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute,
-			StringBuilder sb) {
+	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
 		for (Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
+			sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString()
+					+ "\"");
 		}
 		return sb;
 	}
 
-	private static HashMap<String, AddressUse> getTelecomType(
-			ArrayList<TEL> telecoms, String type) {
-		HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
-		for (TEL tel : telecoms) {
-			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(),
-						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel
-								.getUses().get(0).getName()) : null));
-			}
-		}
-		return tl;
-	}
+	/**
+	 * Erzeugt eine Adresse.
+	 * 
+	 * @param addressline1
+	 *          Adresszeile 1
+	 * @param addressline2
+	 *          Adresszeile 2
+	 * @param addressline3
+	 *          Adresszeile 3
+	 * @param zip
+	 *          PLZ
+	 * @param city
+	 *          Ort
+	 * @param usage
+	 *          Verwendungszweck (Privat, GeschÃ¤ft)
+	 * @return HL7 AD Objekt
+	 */
+	public AD createAddress(String addressline1, String addressline2, String addressline3,
+			String zip, String city, AddressUse usage) {
+		final AD ad = createAddress(zip, city, usage);
 
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		StringBuffer buffer = new StringBuffer("");
-		for (FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName()
-							+ ">");
-				}
-			}
+		if (addressline1 != null) {
+			ad.addStreetAddressLine(addressline1);
 		}
-		return buffer.toString().trim();
+		if (addressline2 != null) {
+			ad.addStreetAddressLine(addressline2);
+		}
+		if (addressline3 != null) {
+			ad.addStreetAddressLine(addressline3);
+		}
+		return ad;
 	}
 }

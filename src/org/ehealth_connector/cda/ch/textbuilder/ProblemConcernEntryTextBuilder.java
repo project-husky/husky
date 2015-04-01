@@ -35,13 +35,12 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param problemConcerns
-	 *            a list of Problem Concerns
+	 *          a list of Problem Concerns
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
 	public ProblemConcernEntryTextBuilder(
-			ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns,
-			SectionsVACD section) {
+			ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns, SectionsVACD section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
@@ -78,8 +77,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
-	private void addRow(
-			org.ehealth_connector.cda.ProblemConcern problemConcern, int i) {
+	private void addRow(org.ehealth_connector.cda.ProblemConcern problemConcern, int i) {
 		append("<tr>");
 		addCell("Komplikationsrisiko");
 		if (problemConcern.getConcern() != null) {

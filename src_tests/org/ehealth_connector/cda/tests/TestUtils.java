@@ -35,6 +35,54 @@ import org.ehealth_connector.common.Value;
 
 public class TestUtils {
 
+	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
+
+	public String startDateString;
+
+	public String endDateString;
+
+	public Date startDate;
+
+	public Date endDate;
+
+	public String ts1;
+
+	public String ts2;
+
+	public String ts3;
+
+	public String ts4;
+
+	public String ts5;
+
+	public String numS1;
+
+	public String numS2;
+	public Double number;
+	public String telS1;
+	public String telS2;
+
+	public Code code1;
+	public Code code2;
+	public Code loincCode;
+	public Code problemCode;
+	public Value value1;
+	public Value value2;
+	public Identificator id1;
+	public Identificator id2;
+	public Name name1;
+	public Name name2;
+	public Author author1;
+	public Author author2;
+	public Organization organization1;
+	public Code gtinCode;
+	public Telecoms telecoms1;
+
+	public Address address1;
+
+	public TestUtils() {
+	}
+
 	public static String generateString(int length) {
 		Random rng = new Random();
 		String characters = "abcëÙdÀÿeŒfúgËÛùhijàÊkÇlŸmœ�?çÚnÔÈoæûèp»ÙÈqùôêîïÆrsâÉtéÎuvwèxylïäüìöÄ�?ÒÜÂÖÌ?ßÓ/òó:#\\í�?~*É'é,´Àà";
@@ -98,11 +146,9 @@ public class TestUtils {
 	}
 
 	public static boolean isEqual(Consumable c1, Consumable c2) {
-		if (!isEqual(c1.getManufacturedMaterialCode(),
-				c2.getManufacturedMaterialCode()))
+		if (!isEqual(c1.getManufacturedMaterialCode(), c2.getManufacturedMaterialCode()))
 			return false;
-		if (!isEqual(c1.getManufacturedProductId(),
-				c2.getManufacturedProductId()))
+		if (!isEqual(c1.getManufacturedProductId(), c2.getManufacturedProductId()))
 			return false;
 		if (!c1.getTradeName().equals(c2.getTradeName()))
 			return false;
@@ -192,73 +238,22 @@ public class TestUtils {
 
 		// Check PQ
 		if (v1.getPhysicalQuantityUnit() != null) {
-			if (!v1.getPhysicalQuantityUnit().equals(
-					v2.getPhysicalQuantityUnit()))
+			if (!v1.getPhysicalQuantityUnit().equals(v2.getPhysicalQuantityUnit()))
 				return false;
 			if (!v1.isPhysicalQuantity() == v2.isPhysicalQuantity())
 				return false;
 		}
 
 		if (v1.getPhysicalQuantityValue() != null) {
-			if (!v1.getPhysicalQuantityValue().equals(
-					v2.getPhysicalQuantityValue()))
+			if (!v1.getPhysicalQuantityValue().equals(v2.getPhysicalQuantityValue()))
 				return false;
 		}
 
 		return true;
 	}
 
-	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
-	public String startDateString;
-	public String endDateString;
-	public Date startDate;
-
-	public Date endDate;
-	public String ts1;
-	public String ts2;
-	public String ts3;
-	public String ts4;
-	public String ts5;
-	public String numS1;
-	public String numS2;
-	public Double number;
-	public String telS1;
-	public String telS2;
-	public Code code1;
-	public Code code2;
-	public Code loincCode;
-	public Code problemCode;
-
-	public Value value1;
-
-	public Value value2;
-
-	public Identificator id1;
-
-	public Identificator id2;
-
-	public Name name1;
-
-	public Name name2;
-
-	public Author author1;
-
-	public Author author2;
-
-	public Organization organization1;
-
-	public Code gtinCode;
-
-	public Telecoms telecoms1;
-
-	public Address address1;
-
-	public TestUtils() {
-	}
-
 	public Address createAddress1() {
-		Address a = new Address("Baurat-Gerber-Str.", "18", "37073",
-				"Göttingen", AddressUse.BUSINESS);
+		Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen", AddressUse.BUSINESS);
 		return a;
 	}
 

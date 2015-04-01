@@ -38,18 +38,16 @@ public class ImmunizationRecommendationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param immunizations
-	 *            the immunization recommendations
+	 *          the immunization recommendations
 	 */
-	public ImmunizationRecommendationTextBuilder(
-			List<ImmunizationRecommendation> immunizations) {
+	public ImmunizationRecommendationTextBuilder(List<ImmunizationRecommendation> immunizations) {
 		this.immunizations = immunizations;
 	}
 
 	public List<ImmunizationRecommendation> getUpdatedImmunizations() {
 		int i = 0;
 		for (ImmunizationRecommendation immunization : immunizations) {
-			ED reference = Util.createReference(i,
-					SectionsVACD.TREATMENT_PLAN.getContentIdPrefix());
+			ED reference = Util.createReference(i, SectionsVACD.TREATMENT_PLAN.getContentIdPrefix());
 			SubstanceAdministration substanceAdminstration = immunization
 					.copyMdhtImmunizationRecommendation();
 			substanceAdminstration.setText(reference);

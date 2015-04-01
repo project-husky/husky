@@ -37,11 +37,12 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param list
-	 *            a list of laboratory observations
-	 * @param section the section
+	 *          a list of laboratory observations
+	 * @param section
+	 *          the section
 	 */
-	public LaboratoryObservationTextBuilder(
-			ArrayList<LaboratoryObservation> list, SectionsVACD section) {
+	public LaboratoryObservationTextBuilder(ArrayList<LaboratoryObservation> list,
+			SectionsVACD section) {
 		laboratoryObservation = list;
 		section.getContentIdPrefix();
 	}
@@ -119,17 +120,14 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		String cellStr = "<td>";
 		int k = 0;
 		boolean minOneComment = false;
-		for (EntryRelationship er : laboratoryObservation
-				.getMdhtLaboratoryObservation().getEntryRelationships()) {
+		for (EntryRelationship er : laboratoryObservation.getMdhtLaboratoryObservation()
+				.getEntryRelationships()) {
 			if (Util.isComment(er)) {
 				k++;
 				minOneComment = true;
 				cellStr = cellStr
-						+ ("<content ID='"
-								+ SectionsVACD.SEROLOGY_STUDIES
-										.getContentIdPrefix() + "-comment"
-								+ String.valueOf(i) + String.valueOf(1)
-								+ String.valueOf(k) + "'>");
+						+ ("<content ID='" + SectionsVACD.SEROLOGY_STUDIES.getContentIdPrefix() + "-comment"
+								+ String.valueOf(i) + String.valueOf(1) + String.valueOf(k) + "'>");
 				cellStr = cellStr + (laboratoryObservation.getCommentText());
 				cellStr = cellStr + ("</content>");
 			}

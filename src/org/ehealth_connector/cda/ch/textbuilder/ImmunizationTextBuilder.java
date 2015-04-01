@@ -39,7 +39,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param immunizations
-	 *            the immunizations
+	 *          the immunizations
 	 */
 	public ImmunizationTextBuilder(List<Immunization> immunizations) {
 		this.immunizations = immunizations;
@@ -50,8 +50,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		for (Immunization immunization : immunizations) {
 			ED reference = Util.createReference(i,
 					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
-			SubstanceAdministration substanceAdminstration = immunization
-					.getMdhtImmunization();
+			SubstanceAdministration substanceAdminstration = immunization.getMdhtImmunization();
 			substanceAdminstration.setText(reference);
 			i++;
 		}
@@ -98,11 +97,9 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
-		if (immunization.getConsumable() != null
-				&& immunization.getConsumable().getTradeName() != null) {
+		if (immunization.getConsumable() != null && immunization.getConsumable().getTradeName() != null) {
 			addCellWithContent(immunization.getConsumable().getTradeName(),
-					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(),
-					i);
+					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
 		} else {
 			addCell("");
 		}
@@ -121,8 +118,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 		}
 		if (immunization.getCommentText() != null) {
 			addCellWithContent(immunization.getCommentText(),
-					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()
-							+ "-comment", i);
+					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix() + "-comment", i);
 		}
 		addCell("");
 		append("</tr>");

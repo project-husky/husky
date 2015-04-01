@@ -56,8 +56,8 @@ public class ConvenienceCommunicationTest {
 			e.printStackTrace();
 		}
 
-		dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE,
-				KEY_STORE_PASS, TRUST_STORE, TRUST_STORE_PASS);
+		dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS, TRUST_STORE,
+				TRUST_STORE_PASS);
 
 		try {
 			c = new ConvenienceCommunication(dest, false);
@@ -69,8 +69,7 @@ public class ConvenienceCommunicationTest {
 	@Test
 	public void testAddDocument() {
 		try {
-			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2,
-					cdaFilePath);
+			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
 			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
 			assertNotNull(c.getTxnData());
 		} catch (Exception e) {
@@ -95,11 +94,8 @@ public class ConvenienceCommunicationTest {
 
 		// Check if the System Properties have been set
 		assertEquals(KEY_STORE, System.getProperty("javax.net.ssl.keyStore"));
-		assertEquals(KEY_STORE_PASS,
-				System.getProperty("javax.net.ssl.keyStorePassword"));
-		assertEquals(TRUST_STORE,
-				System.getProperty("javax.net.ssl.trustStore"));
-		assertEquals(TRUST_STORE_PASS,
-				System.getProperty("javax.net.ssl.trustStorePassword"));
+		assertEquals(KEY_STORE_PASS, System.getProperty("javax.net.ssl.keyStorePassword"));
+		assertEquals(TRUST_STORE, System.getProperty("javax.net.ssl.trustStore"));
+		assertEquals(TRUST_STORE_PASS, System.getProperty("javax.net.ssl.trustStorePassword"));
 	}
 }

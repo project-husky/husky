@@ -24,8 +24,7 @@ public class Reason {
 	private CDACHBodyExtRef mExtRef = null;
 
 	public Reason() {
-		mReason = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason()
-				.init();
+		mReason = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason().init();
 
 		// Fix Template ID
 		for (II i : mReason.getTemplateIds()) {
@@ -62,37 +61,61 @@ public class Reason {
 		setReferenceId(id);
 	}
 
-	public void setCode(Code code) {
-		mReason.setCode(code.getCD());
+	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
+		return EcoreUtil.copy(mExtRef);
+	}
+
+	public CDACHMSETBodyImmunizationL3Reason copyMdhtCDACHMSETBodyImmunizationL3Reason() {
+		return EcoreUtil.copy(mReason);
 	}
 
 	public Code getCode() {
 		return new Code(mReason.getCode());
 	}
 
+	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
+		return mExtRef;
+	}
+
+	public CDACHMSETBodyImmunizationL3Reason getMdhtCDACHMSETBodyImmunizationL3Reason() {
+		return mReason;
+	}
+
+	public String getReference() {
+		if (mExtRef != null && mExtRef.getExternalDocument() != null
+				&& mExtRef.getExternalDocument().getText() != null) {
+			return mExtRef.getExternalDocument().getText().getReference().getValue();
+		} else
+			return null;
+	}
+
+	public String getReferenceId() {
+		if (mExtRef != null && mExtRef.getExternalDocument() != null
+				&& mExtRef.getExternalDocument().getText() != null
+				&& mExtRef.getExternalDocument().getIds().get(0) != null) {
+			return mExtRef.getExternalDocument().getIds().get(0).getExtension();
+		} else {
+			return null;
+		}
+	}
+
+	public void setCode(Code code) {
+		mReason.setCode(code.getCD());
+	}
+
 	/**
 	 * Sets a reference to an external Document.
 	 * 
 	 * @param reference
-	 *            The Reference URL (e.g.
-	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+	 *          The Reference URL (e.g.
+	 *          'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
 	 */
 	public void setReference(URL reference) {
 		if (mExtRef == null) {
 			initExtRef();
 		}
 
-		mExtRef.getExternalDocument().setText(
-				Util.createReference(reference.toString()));
-	}
-
-	public String getReference() {
-		if (mExtRef != null && mExtRef.getExternalDocument() != null
-				&& mExtRef.getExternalDocument().getText() != null) {
-			return mExtRef.getExternalDocument().getText().getReference()
-					.getValue();
-		} else
-			return null;
+		mExtRef.getExternalDocument().setText(Util.createReference(reference.toString()));
 	}
 
 	public void setReferenceId(String id) {
@@ -112,32 +135,6 @@ public class Reason {
 		mExtRef.getExternalDocument().getIds().add(docIi);
 	}
 
-	public String getReferenceId() {
-		if (mExtRef != null && mExtRef.getExternalDocument() != null
-				&& mExtRef.getExternalDocument().getText() != null
-				&& mExtRef.getExternalDocument().getIds().get(0) != null) {
-			return mExtRef.getExternalDocument().getIds().get(0).getExtension();
-		} else {
-			return null;
-		}
-	}
-
-	public CDACHMSETBodyImmunizationL3Reason getMdhtCDACHMSETBodyImmunizationL3Reason() {
-		return mReason;
-	}
-
-	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
-		return mExtRef;
-	}
-
-	public CDACHMSETBodyImmunizationL3Reason copyMdhtCDACHMSETBodyImmunizationL3Reason() {
-		return EcoreUtil.copy(mReason);
-	}
-
-	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
-		return EcoreUtil.copy(mExtRef);
-	}
-
 	private void initExtRef() {
 		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
 		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
@@ -146,8 +143,7 @@ public class Reason {
 
 		// Fix Template ID
 		mExtRef.getTemplateIds().clear();
-		II ii = DatatypesFactory.eINSTANCE.createII(CdaCh.OID_V1,
-				"CDA-CH.Body.ExtRef");
+		II ii = DatatypesFactory.eINSTANCE.createII(CdaCh.OID_V1, "CDA-CH.Body.ExtRef");
 		mExtRef.getTemplateIds().add(ii);
 
 		// Set attributes

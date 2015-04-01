@@ -106,8 +106,7 @@ public class CdaChTests extends TestUtils {
 	@Test
 	public void testLegalAuthenticator() {
 		c.setLegalAuthenticator(author1);
-		assertTrue(isEqual(author1.getName(), c.getLegalAuthenticator()
-				.getName()));
+		assertTrue(isEqual(author1.getName(), c.getLegalAuthenticator().getName()));
 	}
 
 	@Test
@@ -119,8 +118,7 @@ public class CdaChTests extends TestUtils {
 		c.setTimestamp(startDate);
 		assertEquals(startDate.getTime(), c.getTimestamp().getTime());
 		c.setConfidentialityCode(Confidentiality.RESTRICED);
-		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c
-				.getConfidentialityCode().getCode()));
+		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c.getConfidentialityCode().getCode()));
 		// doc id root
 		// assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
 		// set Version
@@ -141,8 +139,7 @@ public class CdaChTests extends TestUtils {
 	public void testTelecoms() {
 		Telecoms t = new Telecoms();
 		t.addEMail("axel.helmer.job@gmail.com", AddressUse.BUSINESS);
-		assertTrue(t.getEMails()
-				.containsKey("mailto:axel.helmer.job@gmail.com"));
+		assertTrue(t.getEMails().containsKey("mailto:axel.helmer.job@gmail.com"));
 		assertTrue(t.getEMails().containsValue(AddressUse.BUSINESS));
 		t.addEMail("test@test.de", AddressUse.PRIVATE);
 		assertTrue(t.getEMails().containsKey("mailto:test@test.de"));

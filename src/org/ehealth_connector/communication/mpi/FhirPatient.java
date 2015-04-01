@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
 import java.util.Date;
@@ -105,36 +105,32 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * org.ehealth_connector.common.patient
 	 * 
 	 * @param patient
-	 *            the patient
+	 *          the patient
 	 */
 	public FhirPatient(Patient patient) {
 
 		if (patient == null) {
 			return;
 		}
-		if (patient.getName() != null
-				&& patient.getName().getGivenNames() != null) {
+		if (patient.getName() != null && patient.getName().getGivenNames() != null) {
 			EList<ENXP> givens = patient.getName().getMdhtPn().getGivens();
 			for (ENXP given : givens) {
 				getNameFirstRep().addGiven(given.getText());
 			}
 		}
-		if (patient.getName() != null
-				&& patient.getName().getFamilyNames() != null) {
+		if (patient.getName() != null && patient.getName().getFamilyNames() != null) {
 			EList<ENXP> givens = patient.getName().getMdhtPn().getFamilies();
 			for (ENXP given : givens) {
 				getNameFirstRep().addFamily(given.getText());
 			}
 		}
-		if (patient.getName() != null
-				&& patient.getName().getPrefixes() != null) {
+		if (patient.getName() != null && patient.getName().getPrefixes() != null) {
 			EList<ENXP> givens = patient.getName().getMdhtPn().getPrefixes();
 			for (ENXP given : givens) {
 				getNameFirstRep().addPrefix(given.getText());
 			}
 		}
-		if (patient.getName() != null
-				&& patient.getName().getSuffixes() != null) {
+		if (patient.getName() != null && patient.getName().getSuffixes() != null) {
 			EList<ENXP> givens = patient.getName().getMdhtPn().getSuffixes();
 			for (ENXP given : givens) {
 				getNameFirstRep().addSuffix(given.getText());
@@ -159,33 +155,27 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			}
 		}
 		for (Identificator ident : patient.getIds()) {
-			this.getIdentifier().add(
-					new IdentifierDt("urn:oid:" + ident.getRoot(), ident
-							.getExtension()));
+			this.getIdentifier()
+					.add(new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
 		}
-		Organization organization = patient.getMdhtPatientRole()
-				.getProviderOrganization();
+		Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
 		if (organization != null) {
 			ca.uhn.fhir.model.dstu2.resource.Organization fhirOrganization = new ca.uhn.fhir.model.dstu2.resource.Organization();
 
-			if (organization != null && organization.getIds() != null
-					&& organization.getIds().size() > 0) {
-				org.openhealthtools.mdht.uml.hl7.datatypes.II ii = organization
-						.getIds().get(0);
+			if (organization != null && organization.getIds() != null && organization.getIds().size() > 0) {
+				org.openhealthtools.mdht.uml.hl7.datatypes.II ii = organization.getIds().get(0);
 				IdentifierDt identifier = new IdentifierDt();
 				identifier.setValue(ii.getExtension());
 				identifier.setSystem("urn:oid:" + ii.getRoot());
 				fhirOrganization.getIdentifier().add(identifier);
 			}
 
-			if (organization.getNames() != null
-					&& organization.getNames().size() > 0) {
+			if (organization.getNames() != null && organization.getNames().size() > 0) {
 				String name = organization.getNames().get(0).getText();
 				fhirOrganization.setName(name);
 			}
 
-			if (organization.getTelecoms() != null
-					&& organization.getTelecoms().size() > 0) {
+			if (organization.getTelecoms() != null && organization.getTelecoms().size() > 0) {
 				TEL tel = organization.getTelecoms().get(0);
 				ContactPointDt fhirTel = fhirOrganization.addTelecom();
 				if (tel.getValue().startsWith("tel:")) {
@@ -201,25 +191,20 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 				String value = null;
 				ContactPointSystemEnum system = null;
 				ContactPointUseEnum use = null;
-				if (tel.getValue().length() > 4
-						&& tel.getValue().startsWith("tel:")) {
+				if (tel.getValue().length() > 4 && tel.getValue().startsWith("tel:")) {
 					value = tel.getValue().substring(4);
 					system = ContactPointSystemEnum.PHONE;
-				} else if (tel.getValue().length() > 4
-						&& tel.getValue().startsWith("mailto:")) {
+				} else if (tel.getValue().length() > 4 && tel.getValue().startsWith("mailto:")) {
 					value = tel.getValue().substring(7);
 					system = ContactPointSystemEnum.EMAIL;
 				}
-				if (tel.getUses().size() > 0
-						&& tel.getUses().get(0) == TelecommunicationAddressUse.HP) {
+				if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.HP) {
 					use = ContactPointUseEnum.HOME;
 				}
-				if (tel.getUses().size() > 0
-						&& tel.getUses().get(0) == TelecommunicationAddressUse.WP) {
+				if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.WP) {
 					use = ContactPointUseEnum.WORK;
 				}
-				if (tel.getUses().size() > 0
-						&& tel.getUses().get(0) == TelecommunicationAddressUse.MC) {
+				if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.MC) {
 					use = ContactPointUseEnum.MOBILE;
 				}
 				contactPointDt.setSystem(system);
@@ -231,20 +216,19 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 		// languageCommunications
 		if (patient.getMdhtPatient().getLanguageCommunications().size() > 0) {
-			for (LanguageCommunication languageCommunication : patient
-					.getMdhtPatient().getLanguageCommunications()) {
+			for (LanguageCommunication languageCommunication : patient.getMdhtPatient()
+					.getLanguageCommunications()) {
 				CodeableConceptDt communication = new CodeableConceptDt();
-				communication.setText(languageCommunication.getLanguageCode()
-						.getCode());
+				communication.setText(languageCommunication.getLanguageCode().getCode());
 				this.getCommunication().add(communication);
 			}
 		}
 
 		// maritalStatus
-		if ((patient.getMdhtPatient().getMaritalStatusCode() != null && patient
-				.getMdhtPatient().getMaritalStatusCode().getCode() != null)) {
-			this.setMaritalStatus(MaritalStatusCodesEnum.valueOf(patient
-					.getMdhtPatient().getMaritalStatusCode().getCode()));
+		if ((patient.getMdhtPatient().getMaritalStatusCode() != null && patient.getMdhtPatient()
+				.getMaritalStatusCode().getCode() != null)) {
+			this.setMaritalStatus(MaritalStatusCodesEnum.valueOf(patient.getMdhtPatient()
+					.getMaritalStatusCode().getCode()));
 		}
 
 		// deceasedBooolean
@@ -264,8 +248,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 		// multipleBirthOrder
 		if (patient.getMultipleBirthOrderNumber() != null) {
-			setMultipleBirth(new IntegerDt(
-					patient.getMultipleBirthOrderNumber()));
+			setMultipleBirth(new IntegerDt(patient.getMultipleBirthOrderNumber()));
 		}
 
 		// mothersMaidenName
@@ -278,8 +261,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		// birthplace
 		if (patient.getMdhtPatient().getBirthplace() != null
 				&& patient.getMdhtPatient().getBirthplace().getPlace() != null) {
-			setBirthPlace(convertAddress(patient.getMdhtPatient()
-					.getBirthplace().getPlace().getAddr()));
+			setBirthPlace(convertAddress(patient.getMdhtPatient().getBirthplace().getPlace().getAddr()));
 		}
 
 		// religiousAffiliation
@@ -303,6 +285,54 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			this.setEmployeeOccupation(employeeOccupationCode);
 		}
 
+	}
+
+	/**
+	 * Gets the birth place.
+	 * 
+	 * @return the birth place
+	 */
+	public AddressDt getBirthPlace() {
+		return birthPlace;
+	}
+
+	/**
+	 * Gets the employee occupation.
+	 * 
+	 * @return the employee occupation
+	 */
+	public CodeableConceptDt getEmployeeOccupation() {
+		return employeeOccupation;
+	}
+
+	/**
+	 * Gets the maiden name, implementation might change, because it is yet an
+	 * open issue how it is stored in pdqm/fhir
+	 * 
+	 * @return mothers maiden name
+	 */
+	public HumanNameDt getMothersMaidenName() {
+		for (Contact contact : getContact()) {
+			for (CodeableConceptDt codeableConceptDt : contact.getRelationship()) {
+				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
+					if ("parent".equals(codingDt.getCode()) && "female".equals(contact.getGender())) {
+						if ((NameUseEnum.MAIDEN.equals(contact.getName().getUseElement().getValueAsEnum()))) {
+							return contact.getName();
+						}
+					}
+				}
+			}
+		}
+		return new HumanNameDt();
+	}
+
+	/**
+	 * Gets the nation.
+	 * 
+	 * @return the nation
+	 */
+	public CodeableConceptDt getNation() {
+		return nation;
 	}
 
 	/**
@@ -345,8 +375,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		patientBirthdate = getBirthDate();
-		Patient patient = new Patient(patientName, patientGender,
-				patientBirthdate);
+		Patient patient = new Patient(patientName, patientGender, patientBirthdate);
 		for (IdentifierDt identDt : getIdentifier()) {
 			String oid = "";
 			if (identDt.getSystem().startsWith("urn:oid:")) {
@@ -363,8 +392,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 		if (getManagingOrganization() != null) {
 			PatientRole patientRole = patient.getMdhtPatientRole();
-			Organization organization = CDAFactory.eINSTANCE
-					.createOrganization();
+			Organization organization = CDAFactory.eINSTANCE.createOrganization();
 			org.ehealth_connector.common.Organization convenienceOrganization = new org.ehealth_connector.common.Organization(
 					organization);
 
@@ -376,14 +404,11 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 				convenienceOrganization.addName(org.getName());
 			}
 
-			if (org != null
-					&& org.getIdentifierFirstRep().getSystem()
-					.startsWith("urn:oid:")) {
+			if (org != null && org.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
 				String oid = "";
 				oid = org.getIdentifierFirstRep().getSystem().substring(8);
 				organization.getIds().add(
-						new Identificator(oid, org.getIdentifierFirstRep()
-								.getValue()).getIi());
+						new Identificator(oid, org.getIdentifierFirstRep().getValue()).getIi());
 			}
 			if (org != null && org.getTelecom().size() > 0) {
 				ContactPointDt contactPointDt = org.getTelecomFirstRep();
@@ -398,29 +423,25 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		if (getTelecom().size() > 0) {
 			Telecoms telecoms = new Telecoms();
 			for (ContactPointDt contactPointDt : getTelecom()) {
-				if (ContactPointSystemEnum.PHONE.equals(contactPointDt
-						.getSystemElement().getValueAsEnum())) {
+				if (ContactPointSystemEnum.PHONE.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
 					AddressUse addressUse = null;
-					if (ContactPointUseEnum.HOME.equals(contactPointDt
-							.getUseElement().getValueAsEnum())) {
+					if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
 						addressUse = AddressUse.PRIVATE;
-					} else if (ContactPointUseEnum.WORK.equals(contactPointDt
-							.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.BUSINESS;
-					} else if (ContactPointUseEnum.MOBILE.equals(contactPointDt
-							.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.MOBILE.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.MOBILE;
 					}
 					telecoms.addPhone(contactPointDt.getValue(), addressUse);
 				}
-				if (ContactPointSystemEnum.EMAIL.equals(contactPointDt
-						.getSystemElement().getValueAsEnum())) {
+				if (ContactPointSystemEnum.EMAIL.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
 					AddressUse addressUse = null;
-					if (ContactPointUseEnum.HOME.equals(contactPointDt
-							.getUseElement().getValueAsEnum())) {
+					if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
 						addressUse = AddressUse.PRIVATE;
-					} else if (ContactPointUseEnum.WORK.equals(contactPointDt
-							.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.BUSINESS;
 					}
 					telecoms.addEMail(contactPointDt.getValue(), addressUse);
@@ -434,8 +455,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		// languageCommunications
 		if (getCommunication().size() > 0) {
 			for (CodeableConceptDt communication : getCommunication()) {
-				LanguageCommunication lang = CDAFactory.eINSTANCE
-						.createLanguageCommunication();
+				LanguageCommunication lang = CDAFactory.eINSTANCE.createLanguageCommunication();
 				CS languageCode = DatatypesFactory.eINSTANCE.createCS();
 				languageCode.setCode(communication.getText());
 				lang.setLanguageCode(languageCode);
@@ -446,8 +466,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		// maritalStatus
 		if (!getMaritalStatus().isEmpty()) {
 			CE maritalStatusCode = DatatypesFactory.eINSTANCE.createCE();
-			maritalStatusCode.setCode(getMaritalStatus().getValueAsEnum()
-					.toArray()[0].toString());
+			maritalStatusCode.setCode(getMaritalStatus().getValueAsEnum().toArray()[0].toString());
 			patient.getMdhtPatient().setMaritalStatusCode(maritalStatusCode);
 		}
 
@@ -490,22 +509,19 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		// mothersName
 		HumanNameDt mothersMaidenName = getMothersMaidenName();
 		if (!mothersMaidenName.isEmpty()) {
-			patient.setMothersMaidenName(mothersMaidenName
-					.getFamilyAsSingleString());
+			patient.setMothersMaidenName(mothersMaidenName.getFamilyAsSingleString());
 		}
 
 		if (getBirthPlace() != null && !getBirthPlace().isEmpty()) {
 			Birthplace birthPlace = CDAFactory.eINSTANCE.createBirthplace();
 			Place place = CDAFactory.eINSTANCE.createPlace();
 			birthPlace.setPlace(place);
-			place.setAddr(this.convertAddress(this.getBirthPlace())
-					.getMdhtAdress());
+			place.setAddr(this.convertAddress(this.getBirthPlace()).getMdhtAdress());
 			patient.getMdhtPatient().setBirthplace(birthPlace);
 		}
 
 		// religiousAffiliation
-		if (getReligiousAffiliation() != null
-				&& !getReligiousAffiliation().isEmpty()) {
+		if (getReligiousAffiliation() != null && !getReligiousAffiliation().isEmpty()) {
 			patient.setReligiousAffiliation(getReligiousAffiliation().getText());
 		}
 
@@ -515,12 +531,76 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		// employeeOccupationCode
-		if (getEmployeeOccupation() != null
-				&& !getEmployeeOccupation().isEmpty()) {
+		if (getEmployeeOccupation() != null && !getEmployeeOccupation().isEmpty()) {
 			patient.setEmployeeOccupation(getEmployeeOccupation().getText());
 		}
 
 		return patient;
+	}
+
+	public CodeableConceptDt getReligiousAffiliation() {
+		return religiousAffiliation;
+	}
+
+	/**
+	 * Sets the birth place.
+	 * 
+	 * @param address
+	 *          the new birth place
+	 */
+	public void setBirthPlace(AddressDt address) {
+		birthPlace = address;
+
+	}
+
+	/**
+	 * Sets the employee occupation.
+	 * 
+	 * @param employeeOccupation
+	 *          the new employee occupation
+	 */
+	public void setEmployeeOccupation(CodeableConceptDt employeeOccupation) {
+		this.employeeOccupation = employeeOccupation;
+	}
+
+	/**
+	 * Sets the maiden name, implementation might change, because it is yet an
+	 * open issue how it is stored in pdqm/fhir
+	 * 
+	 * @param maidenName
+	 *          sets the mothers maiden name
+	 */
+	public void setMothersMaidenName(HumanNameDt maidenName) {
+		maidenName.setUse(NameUseEnum.MAIDEN);
+		for (Contact contact : getContact()) {
+			for (CodeableConceptDt codeableConceptDt : contact.getRelationship()) {
+				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
+					if ("parent".equals(codingDt.getCode()) && "female".equals(contact.getGender())) {
+						if ((NameUseEnum.MAIDEN.equals(contact.getName().getUseElement().getValueAsEnum()))) {
+							contact.setName(maidenName);
+							return;
+						}
+					}
+				}
+			}
+		}
+		Contact mother = addContact().setGender(AdministrativeGenderEnum.FEMALE);
+		mother.addRelationship().addCoding().setCode("parent");
+		mother.setName(maidenName);
+	}
+
+	/**
+	 * Sets the nation.
+	 * 
+	 * @param nation
+	 *          the new nation
+	 */
+	public void setNation(CodeableConceptDt nation) {
+		this.nation = nation;
+	}
+
+	public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
+		this.religiousAffiliation = religiousAffiliation;
 	}
 
 	/**
@@ -535,26 +615,19 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			return null;
 		}
 		AddressDt addressDt = new AddressDt();
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 0) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(0).getText());
+		if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 0) {
+			addressDt.addLine().setValue(address.getStreetAddressLines().get(0).getText());
 		}
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 1) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(1).getText());
+		if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 1) {
+			addressDt.addLine().setValue(address.getStreetAddressLines().get(1).getText());
 		}
-		if (address.getStreetAddressLines() != null
-				&& address.getStreetAddressLines().size() > 2) {
-			addressDt.addLine().setValue(
-					address.getStreetAddressLines().get(2).getText());
+		if (address.getStreetAddressLines() != null && address.getStreetAddressLines().size() > 2) {
+			addressDt.addLine().setValue(address.getStreetAddressLines().get(2).getText());
 		}
 		if (address.getCities() != null && address.getCities().size() > 0) {
 			addressDt.setCity(address.getCities().get(0).getText());
 		}
-		if (address.getPostalCodes() != null
-				&& address.getPostalCodes().size() > 0) {
+		if (address.getPostalCodes() != null && address.getPostalCodes().size() > 0) {
 			addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
 		}
 		if (address.getStates() != null && address.getStates().size() > 0) {
@@ -614,8 +687,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		AddressUse addressUse = null;
-		if (addressDt.getUseElement() != null
-				&& addressDt.getUseElement().getValueAsEnum() != null) {
+		if (addressDt.getUseElement() != null && addressDt.getUseElement().getValueAsEnum() != null) {
 			switch (addressDt.getUseElement().getValueAsEnum()) {
 			case HOME:
 				addressUse = AddressUse.PRIVATE;
@@ -625,8 +697,8 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 				break;
 			}
 		}
-		Address patientAddress = new Address(addressline1, addressline2,
-				addressline3, zip, city, addressUse);
+		Address patientAddress = new Address(addressline1, addressline2, addressline3, zip, city,
+				addressUse);
 		if (addressDt.getState() != null) {
 			patientAddress.getMdhtAdress().addState(addressDt.getState());
 		}
@@ -635,125 +707,6 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		return patientAddress;
-	}
-
-	/**
-	 * Gets the maiden name, implementation might change, because it is yet an
-	 * open issue how it is stored in pdqm/fhir
-	 * 
-	 * @return mothers maiden name
-	 */
-	public HumanNameDt getMothersMaidenName() {
-		for (Contact contact : getContact()) {
-			for (CodeableConceptDt codeableConceptDt : contact
-					.getRelationship()) {
-				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
-					if ("parent".equals(codingDt.getCode())
-							&& "female".equals(contact.getGender())) {
-						if ((NameUseEnum.MAIDEN.equals(contact.getName()
-								.getUseElement().getValueAsEnum()))) {
-							return contact.getName();
-						}
-					}
-				}
-			}
-		}
-		return new HumanNameDt();
-	}
-
-	/**
-	 * Sets the birth place.
-	 * 
-	 * @param address
-	 *            the new birth place
-	 */
-	public void setBirthPlace(AddressDt address) {
-		birthPlace = address;
-
-	}
-
-	/**
-	 * Gets the birth place.
-	 * 
-	 * @return the birth place
-	 */
-	public AddressDt getBirthPlace() {
-		return birthPlace;
-	}
-
-	/**
-	 * Sets the maiden name, implementation might change, because it is yet an
-	 * open issue how it is stored in pdqm/fhir
-	 * 
-	 * @param maidenName sets the mothers maiden name
-	 */
-	public void setMothersMaidenName(HumanNameDt maidenName) {
-		maidenName.setUse(NameUseEnum.MAIDEN);
-		for (Contact contact : getContact()) {
-			for (CodeableConceptDt codeableConceptDt : contact
-					.getRelationship()) {
-				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
-					if ("parent".equals(codingDt.getCode())
-							&& "female".equals(contact.getGender())) {
-						if ((NameUseEnum.MAIDEN.equals(contact.getName()
-								.getUseElement().getValueAsEnum()))) {
-							contact.setName(maidenName);
-							return;
-						}
-					}
-				}
-			}
-		}
-		Contact mother = addContact()
-				.setGender(AdministrativeGenderEnum.FEMALE);
-		mother.addRelationship().addCoding().setCode("parent");
-		mother.setName(maidenName);
-	}
-
-	public CodeableConceptDt getReligiousAffiliation() {
-		return religiousAffiliation;
-	}
-
-	public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
-		this.religiousAffiliation = religiousAffiliation;
-	}
-
-	/**
-	 * Gets the nation.
-	 * 
-	 * @return the nation
-	 */
-	public CodeableConceptDt getNation() {
-		return nation;
-	}
-
-	/**
-	 * Sets the nation.
-	 * 
-	 * @param nation
-	 *            the new nation
-	 */
-	public void setNation(CodeableConceptDt nation) {
-		this.nation = nation;
-	}
-
-	/**
-	 * Gets the employee occupation.
-	 * 
-	 * @return the employee occupation
-	 */
-	public CodeableConceptDt getEmployeeOccupation() {
-		return employeeOccupation;
-	}
-
-	/**
-	 * Sets the employee occupation.
-	 * 
-	 * @param employeeOccupation
-	 *            the new employee occupation
-	 */
-	public void setEmployeeOccupation(CodeableConceptDt employeeOccupation) {
-		this.employeeOccupation = employeeOccupation;
 	}
 
 }

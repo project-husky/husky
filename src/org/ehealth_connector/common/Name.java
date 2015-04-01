@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common;
 
@@ -31,28 +31,27 @@ public class Name {
 	private PN mPn;
 
 	/**
-	 * <div class="en">Instantiates a new name.</div> <div
-	 * class="de">Instantiiert ein neues Name Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new name.</div> <div class="de">Instantiiert
+	 * ein neues Name Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @param organizationName
 	 * <br>
-	 *            <div class="de"> on</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> on</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Name(ON organizationName) {
 		mPn = (PN) organizationName;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new name.</div> <div
-	 * class="de">Instantiiert ein neues Name Objekt mit einem MDHT PN
-	 * Objekt</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new name.</div> <div class="de">Instantiiert
+	 * ein neues Name Objekt mit einem MDHT PN Objekt</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 * 
 	 * @param personName
 	 * <br>
-	 *            <div class="de"> pn</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> pn</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Name(PN personName) {
 		mPn = personName;
@@ -61,11 +60,11 @@ public class Name {
 	/**
 	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für
 	 * Patienten).
-	 *
+	 * 
 	 * @param givenName
-	 *            Vorname
+	 *          Vorname
 	 * @param familyName
-	 *            Nachname
+	 *          Nachname
 	 */
 	public Name(String givenName, String familyName) {
 		// Create and fill Person Name
@@ -81,13 +80,13 @@ public class Name {
 	/**
 	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für
 	 * Behandelnde).
-	 *
+	 * 
 	 * @param givenName
-	 *            Vorname
+	 *          Vorname
 	 * @param familyName
-	 *            Nachname
+	 *          Nachname
 	 * @param title
-	 *            Titel (z.B. Dr. med.)
+	 *          Titel (z.B. Dr. med.)
 	 */
 	public Name(String givenName, String familyName, String title) {
 		this(givenName, familyName);
@@ -96,18 +95,17 @@ public class Name {
 
 	/**
 	 * Erzeugt einen Personennamen.
-	 *
+	 * 
 	 * @param givenName
-	 *            Vorname
+	 *          Vorname
 	 * @param familyName
-	 *            Nachname
+	 *          Nachname
 	 * @param prefix
-	 *            Prefix (z.B. "Dipl. Inf.")
+	 *          Prefix (z.B. "Dipl. Inf.")
 	 * @param suffix
-	 *            Suffix (z.b. "der Dritte")
+	 *          Suffix (z.b. "der Dritte")
 	 */
-	public Name(String givenName, String familyName, String prefix,
-			String suffix) {
+	public Name(String givenName, String familyName, String prefix, String suffix) {
 		this(givenName, familyName, prefix);
 		mPn.addSuffix(suffix);
 	}
@@ -115,7 +113,7 @@ public class Name {
 	/**
 	 * <div class="en">Copy mdht pn.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return PN the pn
 	 */
 	public PN copyMdhtPn() {
@@ -126,7 +124,7 @@ public class Name {
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
 	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return String <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
@@ -145,10 +143,10 @@ public class Name {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div> <div
-	 * class="de">Liefert den (ersten) Familiennamen</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Gets the (first) family name.</div> <div class="de">Liefert
+	 * den (ersten) Familiennamen</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 * 
 	 * @return Nachnamen
 	 */
 	public String getFamilyName() {
@@ -158,7 +156,7 @@ public class Name {
 	/**
 	 * <div class="en">Gets the family names.</div> <div class="de">Liefert alle
 	 * Familiennamen</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return das suffix Objekt
 	 */
 	public String getFamilyNames() {
@@ -168,7 +166,7 @@ public class Name {
 	/**
 	 * <div class="en">Gets the given names.</div> <div class="de">Liefert alle
 	 * Vornamen</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return Vornamen
 	 */
 	public String getGivenNames() {
@@ -178,7 +176,7 @@ public class Name {
 	/**
 	 * <div class="en">Gets the mdht pn.</div> <div class="de">Liefert mdht
 	 * pn.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return PN <div class="en">the mdht pn</div>
 	 */
 	public PN getMdhtPn() {
@@ -189,7 +187,7 @@ public class Name {
 	 * <div class="en">Gets the prefixes.</div> <div class="de">Liefert alle
 	 * Prefixes (z.B. "Dr. med.")</div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 *
+	 * 
 	 * @return das prefix Objekt
 	 */
 	public String getPrefixes() {
@@ -200,7 +198,7 @@ public class Name {
 	 * <div class="en">Gets the suffixes.</div> <div class="de">Liefert alle
 	 * suffixes (z.B. " der Dritte")</div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 *
+	 * 
 	 * @return das suffix Objekt
 	 */
 	public String getSuffixes() {
@@ -211,9 +209,9 @@ public class Name {
 	 * <div class="en">Sets the family name.</div> <div class="de">Setzt family
 	 * name.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param familyName
-	 *            Nachnamen
+	 *          Nachnamen
 	 */
 	public void setFamilyName(String familyName) {
 		if ((familyName != null) && !familyName.equals("")) {
@@ -225,9 +223,9 @@ public class Name {
 	 * <div class="en">Sets the given name.</div> <div class="de">Setzt given
 	 * name.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param givenName
-	 *            Vornamen
+	 *          Vornamen
 	 */
 	public void setGivenName(String givenName) {
 		if ((givenName != null) && !givenName.equals("")) {
@@ -240,8 +238,8 @@ public class Name {
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param mdhtPn
-	 *            <div class="en">the new pn</div> <div class="de">das neue
-	 *            pn.</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the new pn</div> <div class="de">das neue
+	 *          pn.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setPn(PN mdhtPn) {
 		mPn = mdhtPn;
@@ -251,9 +249,9 @@ public class Name {
 	 * <div class="en">Sets the prefix.</div> <div class="de">Setzt ein prefix
 	 * (z.B. "Dr. med.")</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param prefix
-	 *            das prefix Objekt welches gesetzt wird
+	 *          das prefix Objekt welches gesetzt wird
 	 */
 	public void setPrefix(String prefix) {
 		if ((prefix != null) && !prefix.equals("")) {
@@ -266,7 +264,7 @@ public class Name {
 	 * z.B. "der Dritte"</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param suffix
-	 *            das suffix Objekt welches gesetzt wird
+	 *          das suffix Objekt welches gesetzt wird
 	 */
 	public void setSuffix(String suffix) {
 		if ((suffix != null) && !suffix.equals("")) {

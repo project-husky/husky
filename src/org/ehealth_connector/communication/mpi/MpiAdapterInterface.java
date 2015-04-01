@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
 /**
@@ -24,7 +24,7 @@ public interface MpiAdapterInterface {
 	 * adds a patient to the mpi.
 	 * 
 	 * @param patient
-	 *            the patient
+	 *          the patient
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean addPatient(FhirPatient patient);
@@ -34,9 +34,9 @@ public interface MpiAdapterInterface {
 	 * patient.
 	 * 
 	 * @param patient
-	 *            the patient
+	 *          the patient
 	 * @param obsoleteId
-	 *            the obsolete id
+	 *          the obsolete id
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean mergePatient(FhirPatient patient, String obsoleteId);
@@ -46,22 +46,22 @@ public interface MpiAdapterInterface {
 	 * from the mpi.
 	 * 
 	 * @param patient
-	 *            patient with local Id
+	 *          patient with local Id
 	 * @param queryDomainOids
-	 *            if provided oid of queried domain, otherwise id of mpi
+	 *          if provided oid of queried domain, otherwise id of mpi
 	 * @param queryDomainNamespaces
-	 *            the query domain namespaces (optional, must correspont to the
-	 *            queryDomainOids)
+	 *          the query domain namespaces (optional, must correspont to the
+	 *          queryDomainOids)
 	 * @return string array with correspoding identifiers to queryDomainOids
 	 */
-	abstract String[] queryPatientId(FhirPatient patient,
-			String queryDomainOids[], String queryDomainNamespaces[]);
+	abstract String[] queryPatientId(FhirPatient patient, String queryDomainOids[],
+			String queryDomainNamespaces[]);
 
 	/**
 	 * updates the demographic information of the patient in the mpi.
 	 * 
 	 * @param patient
-	 *            the patient
+	 *          the patient
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean updatePatient(FhirPatient patient);

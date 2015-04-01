@@ -87,7 +87,7 @@ public abstract class CdaCh {
 	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
 	 * 
 	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation
+	 *          the CDA-CH Object in its MDHT representation
 	 */
 	public CdaCh(CDACH doc) {
 		// this(doc, null, null);
@@ -101,21 +101,21 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Constructor that includes a stylesheet and a cascasing stylesheet into
-	 * the document processing instructions and initalizes the standard document
+	 * Constructor that includes a stylesheet and a cascasing stylesheet into the
+	 * document processing instructions and initalizes the standard document
 	 * attributes.
 	 * 
 	 * <div class="de">Creates a CdaCh Object (Swiss cda document header)</div>
 	 * <div class="fr"></div>
 	 * 
 	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation
+	 *          the CDA-CH Object in its MDHT representation
 	 * @param stylesheet
-	 *            the stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *          the stylesheet for the document (e.g.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 * @param css
-	 *            the Cascasing stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *          the Cascasing stylesheet for the document (e.g.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
 	public CdaCh(CDACH doc, String stylesheet, String css) {
 		this.doc = doc;
@@ -135,35 +135,25 @@ public abstract class CdaCh {
 	 * Objekts</div> <div class="fr"></div>
 	 * 
 	 * @param root
-	 *            <div class="de">DocumentRoot</div> <div class="fr"></div>
+	 *          <div class="de">DocumentRoot</div> <div class="fr"></div>
 	 */
 	public CdaCh(DocumentRoot root) {
 		docRoot = root;
-	}
-
-	public void setInFulfillmentOf(Identificator id) {
-		InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
-		Order o = CDAFactory.eINSTANCE.createOrder();
-		o.getIds().add(id.getIi());
-
-		ifo.setOrder(o);
-		doc.getInFulfillmentOfs().add(ifo);
 	}
 
 	/**
 	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
 	 * 
 	 * @param authenticator
-	 *            Unterzeichner
+	 *          Unterzeichner
 	 */
-	public void addAuthenticator(
-			org.ehealth_connector.common.Author authenticator) {
+	public void addAuthenticator(org.ehealth_connector.common.Author authenticator) {
 		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		auth.setAssignedEntity(entity);
-		entity.setAssignedPerson(authenticator.copyMdhtAuthor()
-				.getAssignedAuthor().getAssignedPerson());
+		entity
+				.setAssignedPerson(authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
 		doc.getAuthenticators().add(auth);
 	}
@@ -172,7 +162,7 @@ public abstract class CdaCh {
 	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
 	 * 
 	 * @param authenticator
-	 *            Unterzeichner
+	 *          Unterzeichner
 	 */
 	public void addAuthenticator(Person authenticator) {
 		Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
@@ -188,7 +178,7 @@ public abstract class CdaCh {
 	 * Fügt einen Autoren hinzu.
 	 * 
 	 * @param author
-	 *            Der Autor
+	 *          Der Autor
 	 */
 	public void addAuthor(org.ehealth_connector.common.Author author) {
 		Author docAuthor = author.copyMdhtAuthor();
@@ -200,20 +190,20 @@ public abstract class CdaCh {
 	 * hinzu
 	 * 
 	 * @param css
-	 *            path to the CSS file
+	 *          path to the CSS file
 	 */
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
-		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-				"xml-stylesheet", "type=\"text/css\" href=\"" + css + "\"");
+		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet",
+				"type=\"text/css\" href=\"" + css + "\"");
 	}
 
 	/**
 	 * Fügt dem CDA Dokument einen Erfasser hinzu
 	 * 
 	 * @param dataEnterer
-	 *            Erfasser oder Sachbearbeiter/-in, welche(r) das Dokument
-	 *            erstellt oder Beiträge dazu geliefert hat.
+	 *          Erfasser oder Sachbearbeiter/-in, welche(r) das Dokument erstellt
+	 *          oder Beiträge dazu geliefert hat.
 	 */
 	public void addDataEnterer(Person dataEnterer) {
 		DataEnterer enterer = CDAFactory.eINSTANCE.createDataEnterer();
@@ -229,7 +219,7 @@ public abstract class CdaCh {
 	 * Fügt eine Versicherung hinzu
 	 * 
 	 * @param versicherung
-	 *            Die Versicherung als Organization Objekt
+	 *          Die Versicherung als Organization Objekt
 	 */
 	public void addInsurance(Organization versicherung) {
 		addParticipant(versicherung, ParticipantType.Insurance);
@@ -239,18 +229,15 @@ public abstract class CdaCh {
 	 * Fügt dem CDA Dokument eine Partizipation hinzu
 	 * 
 	 * @param organization
-	 *            Organisation
+	 *          Organisation
 	 * @param participantType
-	 *            Art der Partizipation (z.B. Versicherung)
+	 *          Art der Partizipation (z.B. Versicherung)
 	 */
-	public void addParticipant(Organization organization,
-			ParticipantType participantType) {
+	public void addParticipant(Organization organization, ParticipantType participantType) {
 		// Set the given organization as Participant of this document.
-		final Participant1 participant = CDAFactory.eINSTANCE
-				.createParticipant1();
+		final Participant1 participant = CDAFactory.eINSTANCE.createParticipant1();
 		doc.getParticipants().add(participant);
-		final AssociatedEntity assEnt = CDAFactory.eINSTANCE
-				.createAssociatedEntity();
+		final AssociatedEntity assEnt = CDAFactory.eINSTANCE.createAssociatedEntity();
 		participant.setAssociatedEntity(assEnt);
 
 		org.openhealthtools.mdht.uml.cda.Organization docOrganization = CDAFactory.eINSTANCE
@@ -263,15 +250,14 @@ public abstract class CdaCh {
 	 * Fügt ein Stylesheet zu den XML Processing Instructions hinzu
 	 * 
 	 * @param stylesheet
-	 *            Path to the stylesheet (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
+	 *          Path to the stylesheet (e.g.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
 	 */
 	public void addStylesheet(String stylesheet) {
 		if (stylesheet != null) {
 			// Add the stylesheet processing instructions to the document
-			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-					"xml-stylesheet", "type=\"text/xsl\" href=\"" + stylesheet
-							+ "\"");
+			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), "xml-stylesheet",
+					"type=\"text/xsl\" href=\"" + stylesheet + "\"");
 		}
 	}
 
@@ -283,8 +269,8 @@ public abstract class CdaCh {
 	public ArrayList<org.ehealth_connector.common.Person> getAuthenticators() {
 		ArrayList<org.ehealth_connector.common.Person> persons = new ArrayList<org.ehealth_connector.common.Person>();
 		for (Authenticator mAutor : doc.getAuthenticators()) {
-			org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(
-					mAutor.getAssignedEntity().getAssignedPerson());
+			org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(mAutor
+					.getAssignedEntity().getAssignedPerson());
 			persons.add(person);
 		}
 		return persons;
@@ -296,8 +282,8 @@ public abstract class CdaCh {
 	 * @return das eHealthConnector Author Objekt
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
-		org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
-				doc.getAuthors().get(0));
+		org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(doc
+				.getAuthors().get(0));
 		return author;
 	}
 
@@ -309,11 +295,22 @@ public abstract class CdaCh {
 	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
 		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
 		for (Author mAutor : doc.getAuthors()) {
-			org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
-					mAutor);
+			org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(mAutor);
 			authors.add(author);
 		}
 		return authors;
+	}
+
+	/**
+	 * Gets the Confidentially Code
+	 * 
+	 * @return code
+	 */
+	public Confidentiality getConfidentialityCode() {
+		if (doc.getConfidentialityCode() != null) {
+			return Confidentiality.getEnum(doc.getConfidentialityCode().getCode());
+		}
+		return null;
 	}
 
 	/**
@@ -333,16 +330,18 @@ public abstract class CdaCh {
 	public org.ehealth_connector.common.Person getDataEnterer() {
 		if (doc.getDataEnterer() != null) {
 			if (doc.getDataEnterer().getAssignedEntity() != null) {
-				if (doc.getDataEnterer().getAssignedEntity()
-						.getAssignedPerson() != null) {
-					org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(
-							doc.getDataEnterer().getAssignedEntity()
-									.getAssignedPerson());
+				if (doc.getDataEnterer().getAssignedEntity().getAssignedPerson() != null) {
+					org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(doc
+							.getDataEnterer().getAssignedEntity().getAssignedPerson());
 					return person;
 				}
 			}
 		}
 		return null;
+	}
+
+	public DocumentRoot getDocRoot() {
+		return this.docRoot;
 	}
 
 	public Identificator getId() {
@@ -356,15 +355,14 @@ public abstract class CdaCh {
 	 * Gibt alle Versicherungen zurück
 	 * 
 	 * @param versicherung
-	 *            Die Versicherung als Organization Objekt
+	 *          Die Versicherung als Organization Objekt
 	 * @return the arraylist of organizations
 	 */
 	public ArrayList<Organization> getInsurances(Organization versicherung) {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
 		for (Participant1 part : doc.getParticipants()) {
 			if (part.getTypeCode().equals(ParticipantType.Insurance)) {
-				Organization org = new Organization(part.getAssociatedEntity()
-						.getScopingOrganization());
+				Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
 				organizations.add(org);
 			}
 		}
@@ -404,14 +402,13 @@ public abstract class CdaCh {
 	 * Gibt alle Participants zurück
 	 * 
 	 * @param versicherung
-	 *            Die Versicherung als Organization Objekt
+	 *          Die Versicherung als Organization Objekt
 	 * @return the arraylist of organizations
 	 */
 	public ArrayList<Organization> getParticipants(Organization versicherung) {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
 		for (Participant1 part : doc.getParticipants()) {
-			Organization org = new Organization(part.getAssociatedEntity()
-					.getScopingOrganization());
+			Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
 			organizations.add(org);
 		}
 		return organizations;
@@ -429,8 +426,7 @@ public abstract class CdaCh {
 
 	public Identificator getSetId() {
 		if (doc.getSetId() != null) {
-			return new Identificator(doc.getSetId().getRoot(), doc.getSetId()
-					.getExtension());
+			return new Identificator(doc.getSetId().getRoot(), doc.getSetId().getExtension());
 		}
 		return null;
 	}
@@ -453,148 +449,11 @@ public abstract class CdaCh {
 		return null;
 	}
 
-	/**
-	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
-	 */
-	public void printXmlToConsole() {
-		try {
-			CDAUtil.save(doc, System.out);
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Speichert das CDA Dokument als XML Datei
-	 * 
-	 * @param fileName
-	 *            Dateiname (inkl. Pfadangaben)
-	 * @throws Exception
-	 *             the exception
-	 */
-	public void saveToFile(String fileName) throws Exception {
-		File yourFile = new File(fileName);
-		if (!yourFile.exists()) {
-			yourFile.createNewFile();
-		}
-		FileOutputStream oFile = new FileOutputStream(yourFile, false);
-
-		// create emf resource
-		CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE
-				.createResource(URI.createURI(CDAPackage.eNS_URI));
-
-		// add the document root to the resource
-		docRoot.setClinicalDocument(doc);
-		resource.getContents().add(docRoot);
-
-		// save resource to console
-		resource.save(oFile, null);
-	}
-
-	/**
-	 * Gets the Confidentially Code
-	 * 
-	 * @return code
-	 */
-	public Confidentiality getConfidentialityCode() {
-		if (doc.getConfidentialityCode() != null) {
-			return Confidentiality.getEnum(doc.getConfidentialityCode()
-					.getCode());
-		}
-		return null;
-	}
-
-	/**
-	 * Sets Confidentially Code
-	 * 
-	 * @param code
-	 *            If null, "N" for "normal" will be set.
-	 */
-	public void setConfidentialityCode(Confidentiality code) {
-		CE confidentialityCode;
-		if (code == null) {
-			confidentialityCode = Confidentiality.NORMAL.getCE();
-		} else {
-			confidentialityCode = code.getCE();
-		}
-		doc.setConfidentialityCode(confidentialityCode);
-	}
-
-	/**
-	 * Weist dem CDA Dokument die verwaltende Organisation zu
-	 * 
-	 * @param organization
-	 *            verwaltende Organisation
-	 */
-	public void setCustodian(Organization organization) {
-		// create and set the mdht Custodian object
-		final Custodian mdhtCustodian = CDAFactory.eINSTANCE.createCustodian();
-		doc.setCustodian(mdhtCustodian);
-
-		final AssignedCustodian assCust = CDAFactory.eINSTANCE
-				.createAssignedCustodian();
-		mdhtCustodian.setAssignedCustodian(assCust);
-
-		mdhtCustodian
-				.getAssignedCustodian()
-				.setRepresentedCustodianOrganization(
-						Util.createCustodianOrganizationFromOrganization(organization));
-
-		// Setzt die GLN des Arztes
-		II id = DatatypesFactory.eINSTANCE.createII();
-		if (organization.getMdhtOrganization().getIds().size() > 0) {
-			id = organization.getMdhtOrganization().getIds().get(0);
-		}
-		mdhtCustodian.getAssignedCustodian()
-				.getRepresentedCustodianOrganization().getIds().add(id);
-	}
-
-	public void setId(Identificator id) {
-		if (id == null) {
-			II docID = DatatypesFactory.eINSTANCE.createII();
-			docID.setRoot(CdaCh.OID_MAIN);
-			docID.setExtension(UUID.generate());
-			doc.setId(docID);
-		} else {
-			doc.setId(id.getIi());
-		}
-	}
-
-	public void setLanguageCode(LanguageCode language) {
-		// Set language of the document
-		doc.setLanguageCode(language.getCS());
-	}
-
-	/**
-	 * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu
-	 * 
-	 * @param legalAuthenticator
-	 *            rechtsgültiger Unterzeichner
-	 */
-	public void setLegalAuthenticator(
-			org.ehealth_connector.common.Author legalAuthenticator) {
-		doc.setLegalAuthenticator(Util
-				.createLagalAuthenticatorFromAuthor(legalAuthenticator));
-	}
-
-	/**
-	 * Weist dem CDA Dokument den Patienten zu
-	 * 
-	 * @param patient
-	 *            Patient
-	 */
-	public void setPatient(Patient patient) {
-		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
-	}
-
 	public void initCdaCh() {
 		// Set the eHealthConnector comment
-		FeatureMapUtil.addComment(
-				docRoot.getMixed(),
-				"Document based on CDA R2 generated by "
-						+ currentEhcVersion.getSystemVersionName()
-						+ ", Release Date "
-						+ currentEhcVersion.getReleaseDate());
+		FeatureMapUtil.addComment(docRoot.getMixed(),
+				"Document based on CDA R2 generated by " + currentEhcVersion.getSystemVersionName()
+						+ ", Release Date " + currentEhcVersion.getReleaseDate());
 
 		// Add the stylesheet processing instructions to the document root using
 		// featuremaputil
@@ -620,8 +479,128 @@ public abstract class CdaCh {
 		setTypeId();
 	}
 
-	public DocumentRoot getDocRoot() {
-		return this.docRoot;
+	/**
+	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
+	 */
+	public void printXmlToConsole() {
+		try {
+			CDAUtil.save(doc, System.out);
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Speichert das CDA Dokument als XML Datei
+	 * 
+	 * @param fileName
+	 *          Dateiname (inkl. Pfadangaben)
+	 * @throws Exception
+	 *           the exception
+	 */
+	public void saveToFile(String fileName) throws Exception {
+		File yourFile = new File(fileName);
+		if (!yourFile.exists()) {
+			yourFile.createNewFile();
+		}
+		FileOutputStream oFile = new FileOutputStream(yourFile, false);
+
+		// create emf resource
+		CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE.createResource(URI
+				.createURI(CDAPackage.eNS_URI));
+
+		// add the document root to the resource
+		docRoot.setClinicalDocument(doc);
+		resource.getContents().add(docRoot);
+
+		// save resource to console
+		resource.save(oFile, null);
+	}
+
+	/**
+	 * Sets Confidentially Code
+	 * 
+	 * @param code
+	 *          If null, "N" for "normal" will be set.
+	 */
+	public void setConfidentialityCode(Confidentiality code) {
+		CE confidentialityCode;
+		if (code == null) {
+			confidentialityCode = Confidentiality.NORMAL.getCE();
+		} else {
+			confidentialityCode = code.getCE();
+		}
+		doc.setConfidentialityCode(confidentialityCode);
+	}
+
+	/**
+	 * Weist dem CDA Dokument die verwaltende Organisation zu
+	 * 
+	 * @param organization
+	 *          verwaltende Organisation
+	 */
+	public void setCustodian(Organization organization) {
+		// create and set the mdht Custodian object
+		final Custodian mdhtCustodian = CDAFactory.eINSTANCE.createCustodian();
+		doc.setCustodian(mdhtCustodian);
+
+		final AssignedCustodian assCust = CDAFactory.eINSTANCE.createAssignedCustodian();
+		mdhtCustodian.setAssignedCustodian(assCust);
+
+		mdhtCustodian.getAssignedCustodian().setRepresentedCustodianOrganization(
+				Util.createCustodianOrganizationFromOrganization(organization));
+
+		// Setzt die GLN des Arztes
+		II id = DatatypesFactory.eINSTANCE.createII();
+		if (organization.getMdhtOrganization().getIds().size() > 0) {
+			id = organization.getMdhtOrganization().getIds().get(0);
+		}
+		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
+	}
+
+	public void setId(Identificator id) {
+		if (id == null) {
+			II docID = DatatypesFactory.eINSTANCE.createII();
+			docID.setRoot(CdaCh.OID_MAIN);
+			docID.setExtension(UUID.generate());
+			doc.setId(docID);
+		} else {
+			doc.setId(id.getIi());
+		}
+	}
+
+	public void setInFulfillmentOf(Identificator id) {
+		InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		Order o = CDAFactory.eINSTANCE.createOrder();
+		o.getIds().add(id.getIi());
+
+		ifo.setOrder(o);
+		doc.getInFulfillmentOfs().add(ifo);
+	}
+
+	public void setLanguageCode(LanguageCode language) {
+		// Set language of the document
+		doc.setLanguageCode(language.getCS());
+	}
+
+	/**
+	 * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu
+	 * 
+	 * @param legalAuthenticator
+	 *          rechtsgültiger Unterzeichner
+	 */
+	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
+		doc.setLegalAuthenticator(Util.createLagalAuthenticatorFromAuthor(legalAuthenticator));
+	}
+
+	/**
+	 * Weist dem CDA Dokument den Patienten zu
+	 * 
+	 * @param patient
+	 *          Patient
+	 */
+	public void setPatient(Patient patient) {
+		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
 	}
 
 	public void setTimestamp(Date date) {
@@ -675,8 +654,7 @@ public abstract class CdaCh {
 	private void setTypeId() {
 		// Set Type ID
 		// Identifies the Type of the xml document
-		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
+		InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
 		doc.setTypeId(typeId);
 		typeId.setRoot("2.16.840.1.113883.1.3");
 		typeId.setExtension("POCD_HD000040");

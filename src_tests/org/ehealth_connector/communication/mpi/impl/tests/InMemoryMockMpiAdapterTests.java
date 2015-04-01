@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication.mpi.impl.tests;
 
@@ -68,14 +68,12 @@ public class InMemoryMockMpiAdapterTests {
 		FhirPatient patient = TestPatient.getFhirPatientMueller();
 		assertTrue(mpiAdapter.addPatient(patient));
 		String mpiPatientId = mpiAdapter.queryPatientId(patient);
-		FhirPatient patientObsolete = TestPatient
-				.getFhirPatientMuellerObsoleteId();
+		FhirPatient patientObsolete = TestPatient.getFhirPatientMuellerObsoleteId();
 		assertTrue(mpiAdapter.addPatient(patientObsolete));
-		String mpiPatientIdObsolete = mpiAdapter
-				.queryPatientId(patientObsolete);
+		String mpiPatientIdObsolete = mpiAdapter.queryPatientId(patientObsolete);
 		assertTrue(!mpiPatientId.equals(mpiPatientIdObsolete));
-		assertTrue(mpiAdapter.mergePatient(patient,
-				TestPatient.getTestPatientMuellerObsolete().localId));
+		assertTrue(mpiAdapter
+				.mergePatient(patient, TestPatient.getTestPatientMuellerObsolete().localId));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patient));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patientObsolete));
 	}

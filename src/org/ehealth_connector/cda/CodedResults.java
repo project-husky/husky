@@ -55,8 +55,8 @@ public class CodedResults {
 	 * Instantiates a new Simple Observation
 	 * 
 	 * @param so
-	 *            the simple observation
-	 *
+	 *          the simple observation
+	 * 
 	 */
 	public CodedResults(SimpleObservation so) {
 		this();
@@ -76,7 +76,7 @@ public class CodedResults {
 	/**
 	 * <div class="de">Copy mdht coded results section.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return the coded results section
 	 */
 	public CodedResultsSection copyMdhtCodedResultsSection() {

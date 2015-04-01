@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication;
 
@@ -53,16 +53,18 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testClassCode() {
-		d.setClassCode(new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult",
-				"Consultation")); // Just for the NIST-Repository: This code
+		d.setClassCode(new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult", "Consultation")); // Just
+																																													// for
+																																													// the
+																																													// NIST-Repository:
+																																													// This
+																																													// code
 		// should also be optional, but the NIST
 		// repository prevents an automatic
 		// derivation from the typeCode
-		assertEquals("1.3.6.1.4.1.21367.100.1", m.getClassCode()
-				.getSchemeName());
+		assertEquals("1.3.6.1.4.1.21367.100.1", m.getClassCode().getSchemeName());
 		assertEquals("DEMO-Consult", m.getClassCode().getCode());
-		l = (LocalizedStringType) m.getClassCode().getDisplayName()
-				.getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getClassCode().getDisplayName().getLocalizedString().get(0);
 		assertEquals("Consultation", l.getValue());
 	}
 
@@ -74,37 +76,40 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testFormatCode() {
-		d.setFormatCode(new Code("1.3.6.1.4.1.19376.1.2.3",
-				"urn:ihe:iti:xds-sd:pdf:2008",
+		d.setFormatCode(new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
 				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)")); // Can be
 		// extracted
 		// from CDA
-		assertEquals("1.3.6.1.4.1.19376.1.2.3", m.getFormatCode()
-				.getSchemeName());
+		assertEquals("1.3.6.1.4.1.19376.1.2.3", m.getFormatCode().getSchemeName());
 		assertEquals("urn:ihe:iti:xds-sd:pdf:2008", m.getFormatCode().getCode());
-		l = (LocalizedStringType) m.getFormatCode().getDisplayName()
-				.getLocalizedString().get(0);
-		assertEquals("1.3.6.1.4.1.19376.1.2.20 (Scanned Document)",
-				l.getValue());
+		l = (LocalizedStringType) m.getFormatCode().getDisplayName().getLocalizedString().get(0);
+		assertEquals("1.3.6.1.4.1.19376.1.2.20 (Scanned Document)", l.getValue());
 	}
 
 	@Test
 	public void testHealthcareFacilityTypeCode() {
-		d.setHealthcareFacilityTypeCode(new Code("2.16.840.1.113883.5.11",
-				"AMB", "Ambulance")); // The codes here are specific for the
+		d.setHealthcareFacilityTypeCode(new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance")); // The
+																																															// codes
+																																															// here
+																																															// are
+																																															// specific
+																																															// for
+																																															// the
 		// affinity domain
-		assertEquals("2.16.840.1.113883.5.11", m
-				.getHealthCareFacilityTypeCode().getSchemeName());
+		assertEquals("2.16.840.1.113883.5.11", m.getHealthCareFacilityTypeCode().getSchemeName());
 		assertEquals("AMB", m.getHealthCareFacilityTypeCode().getCode());
-		l = (LocalizedStringType) m.getHealthCareFacilityTypeCode()
-				.getDisplayName().getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getHealthCareFacilityTypeCode().getDisplayName()
+				.getLocalizedString().get(0);
 		assertEquals("Ambulance", l.getValue());
 	}
 
 	@Test
 	public void testPatientId() {
-		d.setPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
-				"b8a9a9ad17b5429")); // Can be extracted from CDA
+		d.setPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429")); // Can
+																																																// be
+																																																// extracted
+																																																// from
+																																																// CDA
 		assertEquals("1.3.6.1.4.1.21367.2005.13.20.3000", m.getPatientId()
 				.getAssigningAuthorityUniversalId());
 		assertEquals("b8a9a9ad17b5429", m.getPatientId().getIdNumber());
@@ -112,26 +117,29 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testPracticeSettingCode() {
-		d.setPracticeSettingCode(new Code("2.16.840.1.113883.6.96",
-				"394802001", "General Medicine")); // The codes here are
+		d.setPracticeSettingCode(new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine")); // The
+																																																		// codes
+																																																		// here
+																																																		// are
 		// specific for the affinity
 		// domain
-		assertEquals("2.16.840.1.113883.6.96", m.getPracticeSettingCode()
-				.getSchemeName());
+		assertEquals("2.16.840.1.113883.6.96", m.getPracticeSettingCode().getSchemeName());
 		assertEquals("394802001", m.getPracticeSettingCode().getCode());
-		l = (LocalizedStringType) m.getPracticeSettingCode().getDisplayName()
-				.getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getPracticeSettingCode().getDisplayName().getLocalizedString()
+				.get(0);
 		assertEquals("General Medicine", l.getValue());
 	}
 
 	@Test
 	public void testTypeCode() {
-		d.setTypeCode(new Code("2.16.840.1.113883.6.1", "34133-9",
-				"Summarization of Episode Note")); // Can be extracted from CDA
+		d.setTypeCode(new Code("2.16.840.1.113883.6.1", "34133-9", "Summarization of Episode Note")); // Can
+																																																	// be
+																																																	// extracted
+																																																	// from
+																																																	// CDA
 		assertEquals("2.16.840.1.113883.6.1", m.getTypeCode().getSchemeName());
 		assertEquals("34133-9", m.getTypeCode().getCode());
-		l = (LocalizedStringType) m.getTypeCode().getDisplayName()
-				.getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getTypeCode().getDisplayName().getLocalizedString().get(0);
 		assertEquals("Summarization of Episode Note", l.getValue());
 	}
 }

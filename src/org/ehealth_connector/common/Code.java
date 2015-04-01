@@ -34,31 +34,43 @@ public class Code {
 	private CD mCD;
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new code.</div> <div class="de">Instantiiert
+	 * ein neues Code Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Code(CD code) {
 		mCD = code;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new code.</div> <div class="de">Instantiiert
+	 * ein neues Code Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Code(Code code) {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
+	}
+
+	/**
+	 * Erstellt einen neuen Wert.
+	 * 
+	 * @param codeSystem
+	 *          Die OID des zugehörigen Codesystems
+	 * @param code
+	 *          Der eigentliche Code
+	 */
+	public Code(CodeSystems codeSystem, String code) {
+		mCD = DatatypesFactory.eINSTANCE.createCD();
+		mCD.setCodeSystem(codeSystem.getCodeSystemId());
+		mCD.setCode(code);
 	}
 
 	public Code(org.ehealth_connector.cda.enums.NullFlavor nullFlavor) {
@@ -68,25 +80,11 @@ public class Code {
 
 	/**
 	 * Erstellt einen neuen Wert.
-	 *
-	 * @param codeSystem
-	 *            Die OID des zugehörigen Codesystems
-	 * @param code
-	 *            Der eigentliche Code
-	 */
-	public Code(CodeSystems codeSystem, String code) {
-		mCD = DatatypesFactory.eINSTANCE.createCD();
-		mCD.setCodeSystem(codeSystem.getCodeSystemId());
-		mCD.setCode(code);
-	}
-
-	/**
-	 * Erstellt einen neuen Wert.
-	 *
+	 * 
 	 * @param oid
-	 *            Die OID des zugehörigen Codesystems
+	 *          Die OID des zugehörigen Codesystems
 	 * @param code
-	 *            Der eigentliche Code
+	 *          Der eigentliche Code
 	 */
 	public Code(String oid, String code) {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
@@ -95,22 +93,21 @@ public class Code {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new code.</div> <div class="de">Instantiiert
+	 * ein neues Code Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @param codeSystem
 	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code system</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param displayName
 	 * <br>
-	 *            <div class="de"> display name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de"> display name</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public Code(String codeSystem, String code, String displayName) {
 		this(codeSystem, code);
@@ -118,29 +115,27 @@ public class Code {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * <div class="en">Instantiates a new code.</div> <div class="de">Instantiiert
+	 * ein neues Code Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * 
 	 * @param codeSystem
 	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code system</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param codeSystemName
 	 * <br>
-	 *            <div class="de"> code system name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de"> code system name</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param displayName
 	 * <br>
-	 *            <div class="de"> display name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de"> display name</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
-	public Code(String codeSystem, String code, String codeSystemName,
-			String displayName) {
+	public Code(String codeSystem, String code, String codeSystemName, String displayName) {
 		this(codeSystem, code, displayName);
 		mCD.setCodeSystemName(codeSystemName);
 	}
@@ -149,7 +144,7 @@ public class Code {
 	 * Adds a translation to the code object
 	 * 
 	 * @param code
-	 *            the code
+	 *          the code
 	 */
 	public void addTranslation(Code code) {
 		if (code != null) {
@@ -158,46 +153,9 @@ public class Code {
 	}
 
 	/**
-	 * Gets a list of translations for the code object.
-	 * 
-	 * @return an ArrayList, which contains all translation codes
-	 */
-	public ArrayList<Code> getTranslations() {
-		ArrayList<Code> cl = new ArrayList<Code>();
-		for (CD cd : mCD.getTranslations()) {
-			cl.add(new Code(cd));
-		}
-		return cl;
-	}
-
-	/**
-	 * Gets the name of the code system
-	 * 
-	 * @return the name of the code system. null, if it wasn´t set.
-	 */
-	public String getCodeSystemName() {
-		if (mCD.getCodeSystemName() != null) {
-			return mCD.getCodeSystemName();
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 * Sets the name of the code system
-	 * 
-	 * @param codeSystemName
-	 *            name of the code system.
-	 */
-	public void setCodeSystemName(String codeSystemName) {
-		mCD.unsetNullFlavor();
-		mCD.setCodeSystemName(codeSystemName);
-	}
-
-	/**
 	 * <div class="en">Gets the CD MDHT Object</div> <div class="de">Liefert das
 	 * CD MDHT Objekt</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the cd</div>
 	 */
 	public CD getCD() {
@@ -231,7 +189,7 @@ public class Code {
 	/**
 	 * <div class="en">Gets the code.</div> <div class="de">Liefert code.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return das code Objekt
 	 */
 	public String getCode() {
@@ -249,7 +207,7 @@ public class Code {
 	/**
 	 * <div class="en">Gets the code system.</div> <div class="de">Liefert code
 	 * system.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return das oid Objekt
 	 */
 	public String getCodeSystem() {
@@ -265,35 +223,69 @@ public class Code {
 	}
 
 	/**
+	 * Gets the name of the code system
+	 * 
+	 * @return the name of the code system. null, if it wasn´t set.
+	 */
+	public String getCodeSystemName() {
+		if (mCD.getCodeSystemName() != null) {
+			return mCD.getCodeSystemName();
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return String <div class="en">the display name</div>
 	 */
 	public String getDisplayName() {
 		return mCD.getDisplayName();
 	}
 
+	public NullFlavor getNullFlavor() {
+		return mCD.getNullFlavor();
+	}
+
+	/**
+	 * Gets a list of translations for the code object.
+	 * 
+	 * @return an ArrayList, which contains all translation codes
+	 */
+	public ArrayList<Code> getTranslations() {
+		ArrayList<Code> cl = new ArrayList<Code>();
+		for (CD cd : mCD.getTranslations()) {
+			cl.add(new Code(cd));
+		}
+		return cl;
+	}
+
+	public boolean isNullFlavor() {
+		return mCD.isNullFlavorDefined();
+	}
+
 	/**
 	 * <div class="en">Sets the MDHT CD Object</div> <div class="de">Setzt das
 	 * MDHT CD Objekt</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param cd
-	 *            <div class="en">the new cd</div> <div class="de">das neue
-	 *            cd.</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the new cd</div> <div class="de">das neue
+	 *          cd.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setCD(CD cd) {
 		mCD = cd;
 	}
 
 	/**
-	 * <div class="en">Sets the code.</div> <div class="de">Setzt code.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Sets the code.</div> <div class="de">Setzt code.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param code
-	 *            das code Objekt welches gesetzt wird
+	 *          das code Objekt welches gesetzt wird
 	 */
 	public void setCode(String code) {
 		mCD.unsetNullFlavor();
@@ -304,24 +296,27 @@ public class Code {
 	 * <div class="en">Sets the code system.</div> <div class="de">Setzt code
 	 * system.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 *
+	 * 
 	 * @param oid
-	 *            das oid Objekt welches gesetzt wird
+	 *          das oid Objekt welches gesetzt wird
 	 */
 	public void setCodeSystem(String oid) {
 		mCD.unsetNullFlavor();
 		mCD.setCodeSystem(oid);
 	}
 
+	/**
+	 * Sets the name of the code system
+	 * 
+	 * @param codeSystemName
+	 *          name of the code system.
+	 */
+	public void setCodeSystemName(String codeSystemName) {
+		mCD.unsetNullFlavor();
+		mCD.setCodeSystemName(codeSystemName);
+	}
+
 	public void setNullFlavor(org.ehealth_connector.cda.enums.NullFlavor nf) {
 		mCD.setNullFlavor(NullFlavor.getByName(nf.name()));
-	}
-
-	public NullFlavor getNullFlavor() {
-		return mCD.getNullFlavor();
-	}
-
-	public boolean isNullFlavor() {
-		return mCD.isNullFlavorDefined();
 	}
 }

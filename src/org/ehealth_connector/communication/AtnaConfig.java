@@ -1,18 +1,18 @@
 /*******************************************************************************
-*
-* The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
-* All rights reserved. http://medshare.net
-*
-* Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
-*
-* This code is are made available under the terms of the Eclipse Public License v1.0.
-*
-* Accompanying materials are made available under the terms of the Creative Commons
-* Attribution-ShareAlike 4.0 License.
-*
-* Year of publication: 2015
-*
-*******************************************************************************/
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 /**
@@ -48,7 +48,7 @@ public class AtnaConfig {
 	 * Sets the audit repository uri.
 	 * 
 	 * @param auditRepositoryUri
-	 *            the new audit repository uri
+	 *          the new audit repository uri
 	 */
 	public void setAuditRepositoryUri(String auditRepositoryUri) {
 		this.auditRepositoryUri = auditRepositoryUri;
@@ -58,7 +58,7 @@ public class AtnaConfig {
 	 * Sets the audit source id.
 	 * 
 	 * @param auditSourceId
-	 *            the new audit source id
+	 *          the new audit source id
 	 */
 	public void setAuditSourceId(String auditSourceId) {
 		this.auditSourceId = auditSourceId;

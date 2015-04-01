@@ -61,8 +61,7 @@ public class ImmunizationRecommendation {
 	 * Instantiates a new immunization recommendation.
 	 */
 	public ImmunizationRecommendation() {
-		mImmunizationRecommendation = CHFactory.eINSTANCE
-				.createImmunizationRecommendation().init();
+		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
 
 		// Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
 		List<II> templateIds = mImmunizationRecommendation.getTemplateIds();
@@ -73,64 +72,37 @@ public class ImmunizationRecommendation {
 		}
 
 		// Set the null values
-		mImmunizationRecommendation.setPriorityCode(Util
-				.createCENullFlavorUNK());
+		mImmunizationRecommendation.setPriorityCode(Util.createCENullFlavorUNK());
 		mImmunizationRecommendation.setRouteCode(Util.createCENullFlavorUNK());
-		mImmunizationRecommendation.setDoseQuantity(Util
-				.createIVL_PQNullFlavorUNK());
-		mImmunizationRecommendation.setRateQuantity(Util
-				.createIVL_PQNullFlavorUNK());
+		mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+		mImmunizationRecommendation.setRateQuantity(Util.createIVL_PQNullFlavorUNK());
 
 		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
 		mImmunizationRecommendation.setNegationInd(false);
 	}
 
 	/**
-	 * Sets a special code that explains the absence of immunizations in this
-	 * document
-	 * 
-	 * @param specialCode
-	 *            expresses a special condition for this element
-	 */
-	public void setCode(MedicationsSpecialConditions specialCode) {
-		mImmunizationRecommendation.setCode(specialCode.getCD());
-		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIVE.getCS());
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(NullFlavor.UNK);
-		mImmunizationRecommendation.setPriorityCode(ce);
-		mImmunizationRecommendation.setDoseQuantity(Util
-				.createIVL_PQNullFlavorUNK());
-		mImmunizationRecommendation.getEffectiveTimes().add(
-				DateUtil.createSTCM_TS(new Date()));
-		mImmunizationRecommendation.getIds().add(Util.createUuidVacd(null));
-		Consumable c = new Consumable(false);
-		setConsumable(c);
-	}
-
-	/**
-	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses
-	 * Objekt kann einer ImmunizationRecommendationsSection hinzugefügt werden.
+	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses Objekt
+	 * kann einer ImmunizationRecommendationsSection hinzugefügt werden.
 	 * 
 	 * @param consumable
-	 *            Impfstoff, der empfohlen wird
+	 *          Impfstoff, der empfohlen wird
 	 * @param author
-	 *            Arzt, der diese Eintragung veranlasst hat
+	 *          Arzt, der diese Eintragung veranlasst hat
 	 * @param startOfPossibleAppliance
-	 *            Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
+	 *          Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
 	 * @param endOfPossibleAppliance
-	 *            Ende des Zeitraumes, in dem die Impfung erfolgen sollte
+	 *          Ende des Zeitraumes, in dem die Impfung erfolgen sollte
 	 * @param intendedOrProposed
-	 *            true, bei einer beabsichtigten, aber noch nicht erfolgten
-	 *            Impfung (intended). false bei einer vorgeschlagenen Impfung
-	 *            (proposed).
+	 *          true, bei einer beabsichtigten, aber noch nicht erfolgten Impfung
+	 *          (intended). false bei einer vorgeschlagenen Impfung (proposed).
 	 * @param shallNotBeAdministerd
-	 *            true, wenn die Impfung nicht verabreicht werden soll. false,
-	 *            wenn die Impfung zu verabreichen ist.
+	 *          true, wenn die Impfung nicht verabreicht werden soll. false, wenn
+	 *          die Impfung zu verabreichen ist.
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
-			org.ehealth_connector.common.Author author,
-			Date startOfPossibleAppliance, Date endOfPossibleAppliance,
-			boolean intendedOrProposed, boolean shallNotBeAdministerd) {
+			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
+			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
 
 		this();
 		if (intendedOrProposed) {
@@ -152,8 +124,8 @@ public class ImmunizationRecommendation {
 	 * 
 	 * @param immunizationRecommendation
 	 * <br>
-	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Impfempfehlung</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public ImmunizationRecommendation(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
@@ -164,7 +136,7 @@ public class ImmunizationRecommendation {
 	 * Adds the id.
 	 * 
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void addId(Identificator id) {
 		II ii = Util.createUuidVacdIdentificator(id);
@@ -175,36 +147,15 @@ public class ImmunizationRecommendation {
 	 * Adds the reason for the immunization recommendeation (the BAG Guideline)
 	 * 
 	 * @param reason
-	 *            the reason
+	 *          the reason
 	 */
 	public void addReason(Reason reason) {
-		mImmunizationRecommendation.addObservation(reason
-				.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-		mImmunizationRecommendation
-				.getEntryRelationships()
+		mImmunizationRecommendation.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
+		mImmunizationRecommendation.getEntryRelationships()
 				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
 				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-		mImmunizationRecommendation
-				.getEntryRelationships()
-				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-				.setInversionInd(false);
-	}
-
-	/**
-	 * Gets a list of reasons for the immunizationRecommendation (typically a
-	 * reference to an external BAG document)).
-	 * 
-	 * @return A ArrayList of Resons
-	 * 
-	 */
-	public ArrayList<Reason> getReasons() {
-		ArrayList<Reason> cl = new ArrayList<Reason>();
-		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation
-				.getCDACHMSETBodyImmunizationL3Reasons();
-		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
-			cl.add(new Reason(er));
-		}
-		return cl;
+		mImmunizationRecommendation.getEntryRelationships()
+				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1).setInversionInd(false);
 	}
 
 	/**
@@ -225,8 +176,8 @@ public class ImmunizationRecommendation {
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
 		try {
-			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil
-					.copy(mImmunizationRecommendation.getAuthors().get(0));
+			org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil.copy(mImmunizationRecommendation
+					.getAuthors().get(0));
 			return new Author(author);
 		} catch (IndexOutOfBoundsException e) {
 			// no author available
@@ -241,8 +192,7 @@ public class ImmunizationRecommendation {
 	 *         level 2 text
 	 */
 	public String getCommentRef() {
-		return Util.getCommentRef(mImmunizationRecommendation
-				.getEntryRelationships());
+		return Util.getCommentRef(mImmunizationRecommendation.getEntryRelationships());
 	}
 
 	/**
@@ -252,8 +202,7 @@ public class ImmunizationRecommendation {
 	 * @return the comment text
 	 */
 	public String getCommentText() {
-		return Util.getCommentText(mImmunizationRecommendation
-				.getEntryRelationships());
+		return Util.getCommentText(mImmunizationRecommendation.getEntryRelationships());
 	}
 
 	/**
@@ -263,8 +212,7 @@ public class ImmunizationRecommendation {
 	 */
 	public Consumable getConsumable() {
 		if (mImmunizationRecommendation.getConsumable() != null) {
-			Consumable consumable = new Consumable(
-					mImmunizationRecommendation.getConsumable());
+			Consumable consumable = new Consumable(mImmunizationRecommendation.getConsumable());
 			return consumable;
 		} else {
 			return null;
@@ -278,8 +226,7 @@ public class ImmunizationRecommendation {
 	 */
 	public Value getDosage() {
 		if (mImmunizationRecommendation.getDoseQuantity() != null) {
-			Value value = new Value(
-					mImmunizationRecommendation.getDoseQuantity());
+			Value value = new Value(mImmunizationRecommendation.getDoseQuantity());
 			return value;
 		}
 		return null;
@@ -291,22 +238,20 @@ public class ImmunizationRecommendation {
 	 * @return the id
 	 */
 	public Identificator getId() {
-		Identificator id = new Identificator(mImmunizationRecommendation
-				.getIds().get(0));
+		Identificator id = new Identificator(mImmunizationRecommendation.getIds().get(0));
 		return id;
 	}
 
 	/**
-	 * <div class="de">Liefert die Information, ob eine Impfung beabsichtigt,
-	 * aber noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="de">Liefert die Information, ob eine Impfung beabsichtigt, aber
+	 * noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
-	 * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt
-	 *         ist. Sonst: false
+	 * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist.
+	 *         Sonst: false
 	 */
 	public boolean getIntended() {
-		if (mImmunizationRecommendation.getMoodCode().equals(
-				x_DocumentSubstanceMood.INT))
+		if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT))
 			return true;
 		else
 			return false;
@@ -327,27 +272,41 @@ public class ImmunizationRecommendation {
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div> <div
-	 *         class="it"></div>
+	 *         soll als String</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public String getPossibleAppliance() {
-		List<SXCM_TS> effectiveTimes = mImmunizationRecommendation
-				.getEffectiveTimes();
+		List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
 	/**
-	 * <div class="de">Liefert, die Information, ob eine Impfung vorgeschlagen
-	 * ist (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Liefert, die Information, ob eine Impfung vorgeschlagen ist
+	 * (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return true, wenn eine Impfung vorgeschlagen ist. Sonst: false
 	 */
 	public boolean getProposed() {
-		if (mImmunizationRecommendation.getMoodCode().equals(
-				x_DocumentSubstanceMood.PRP))
+		if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP))
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * Gets a list of reasons for the immunizationRecommendation (typically a
+	 * reference to an external BAG document)).
+	 * 
+	 * @return A ArrayList of Resons
+	 * 
+	 */
+	public ArrayList<Reason> getReasons() {
+		ArrayList<Reason> cl = new ArrayList<Reason>();
+		EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation
+				.getCDACHMSETBodyImmunizationL3Reasons();
+		for (CDACHMSETBodyImmunizationL3Reason er : erl) {
+			cl.add(new Reason(er));
+		}
+		return cl;
 	}
 
 	/**
@@ -364,12 +323,11 @@ public class ImmunizationRecommendation {
 	 * Sets the author.
 	 * 
 	 * @param author
-	 *            the new author
+	 *          the new author
 	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		mImmunizationRecommendation.getAuthors().clear();
-		org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author
-				.copyMdhtAuthor();
+		org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
 		// Remove author function Code if present
 		if (immmunizationAuthor.getFunctionCode() != null) {
 			CE ce = null;
@@ -379,10 +337,30 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
+	 * Sets a special code that explains the absence of immunizations in this
+	 * document
+	 * 
+	 * @param specialCode
+	 *          expresses a special condition for this element
+	 */
+	public void setCode(MedicationsSpecialConditions specialCode) {
+		mImmunizationRecommendation.setCode(specialCode.getCD());
+		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIVE.getCS());
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(NullFlavor.UNK);
+		mImmunizationRecommendation.setPriorityCode(ce);
+		mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+		mImmunizationRecommendation.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+		mImmunizationRecommendation.getIds().add(Util.createUuidVacd(null));
+		Consumable c = new Consumable(false);
+		setConsumable(c);
+	}
+
+	/**
 	 * Sets a comment text
 	 * 
 	 * @param text
-	 *            the text
+	 *          the text
 	 */
 	public void setCommentText(String text) {
 		Comment mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -391,10 +369,8 @@ public class ImmunizationRecommendation {
 		mComment.setText(ed);
 		mImmunizationRecommendation.addAct(mComment);
 
-		EntryRelationship er = mImmunizationRecommendation
-				.getEntryRelationships().get(
-						mImmunizationRecommendation.getEntryRelationships()
-								.size() - 1);
+		EntryRelationship er = mImmunizationRecommendation.getEntryRelationships().get(
+				mImmunizationRecommendation.getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -403,23 +379,21 @@ public class ImmunizationRecommendation {
 	 * Sets the consumable.
 	 * 
 	 * @param consumable
-	 *            the new consumable
+	 *          the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
-		mImmunizationRecommendation.setConsumable(consumable
-				.copyMdhtConsumable());
+		mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());
 	}
 
 	/**
 	 * Sets the dosage.
 	 * 
 	 * @param doseQuantity
-	 *            the new dosage (use null, if not asked)
+	 *          the new dosage (use null, if not asked)
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
-			mImmunizationRecommendation.setDoseQuantity(Util
-					.createIVL_PQNullFlavorNA());
+			mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
 		} else {
 			IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 			ivl_pq.setUnit("ml");
@@ -439,30 +413,27 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht
-	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht werden
+	 * soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfPossibleAppliacne
 	 * <br>
-	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Startpunkt des Zeitraumes, wann die Impfung
+	 *          verabreicht werden soll.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param endOfPossibleAppliance
-	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">Endpunkt des Zeitraumes, wann die Impfung
+	 *          verabreicht werden soll.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
-	public void setPossibleAppliance(Date startOfPossibleAppliacne,
-			Date endOfPossibleAppliance) {
-		mImmunizationRecommendation.getEffectiveTimes().add(
-				0,
-				DateUtil.createSTCM_TS(startOfPossibleAppliacne,
-						endOfPossibleAppliance));
+	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
+		mImmunizationRecommendation.getEffectiveTimes().add(0,
+				DateUtil.createSTCM_TS(startOfPossibleAppliacne, endOfPossibleAppliance));
 	}
 
 	/**
-	 * <div class="de">Setzt, die Information, dass eine Impfung vorgeschlagen
-	 * ist (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Setzt, die Information, dass eine Impfung vorgeschlagen ist
+	 * (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setProposed() {
 		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
@@ -473,9 +444,9 @@ public class ImmunizationRecommendation {
 	 * soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param shallNotBeAdministerd
-	 *            <div class="de">true, wenn die Impfung nicht verabreicht
-	 *            werden soll, sonst false</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <div class="de">true, wenn die Impfung nicht verabreicht werden
+	 *          soll, sonst false</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {

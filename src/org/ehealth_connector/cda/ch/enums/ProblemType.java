@@ -52,24 +52,6 @@ public enum ProblemType {
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 	public static final String CODE_SYSTEM_NAME = "SNOMED CT";
 
-	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * 
-	 * @param code
-	 * <br>
-	 *          <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static ProblemType getEnum(String code) {
-		for (ProblemType x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
 	private String code;
 
 	private String displayName;
@@ -89,6 +71,24 @@ public enum ProblemType {
 	private ProblemType(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * 
+	 * @param code
+	 * <br>
+	 *          <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static ProblemType getEnum(String code) {
+		for (ProblemType x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	/**
