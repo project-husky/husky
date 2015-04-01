@@ -342,7 +342,7 @@ public class Util {
 		II ii;
 		if (id == null) {
 			ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot(EHealthConnectorVersions.EHealthConnectorR201503.oid());
+			ii.setRoot(EHealthConnectorVersions.EHealthConnectorDev.oid());
 			ii.setExtension(UUID.generate());
 		} else {
 			ii = id.getIi();

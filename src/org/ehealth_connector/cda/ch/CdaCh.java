@@ -75,7 +75,7 @@ public abstract class CdaCh {
 	/** OID for CDA-CH V1.* */
 	public static final String OID_V1 = "2.16.756.5.30.1.1.1.1.1";
 
-	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorR201503;
+	public static EHealthConnectorVersions currentEhcVersion = EHealthConnectorVersions.EHealthConnectorDev;
 	protected CDACH doc = null; // The CDA Document
 	private DocumentRoot docRoot = null; // The OHT-Element that helds the
 	// document
