@@ -106,8 +106,7 @@
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar"/>
-        <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2.jar"/>
-        <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.1.jar"/>
+ 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar"/> 
         <pathelement location="lib/fhir/hapi-fhir-base-0.9.jar"/>
         <pathelement location="lib/fhir/hapi-fhir-structures-dstu2-0.9.jar"/>
         <pathelement location="lib/fhir/commons-lang3-3.3.2.jar"/>
@@ -246,8 +245,7 @@
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar" />
-			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2.jar" />
-			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.1.jar" />
+			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-base-0.9.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-structures-dstu2-0.9.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/commons-lang3-3.3.2.jar" />
