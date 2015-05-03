@@ -48,7 +48,7 @@ public class DocumentMetadata {
 	private DocumentEntryType xDoc;
 
 	/** The cda. */
-	private ClinicalDocument cda;
+	private final ClinicalDocument cda;
 
 	/**
 	 * Instantiates a new document metadata.
@@ -95,14 +95,16 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * Adds the (optional) confidentially code (e.g. 'N' for 'normal')
+	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
 	 * 
 	 * @param code
 	 *          the code
 	 */
 	@SuppressWarnings("unchecked")
-	public void addConfidentiallyCode(Confidentiality code) {
-		xDoc.getConfidentialityCode().add(code.getCode());
+	public void addConfidentialityCode(Confidentiality code) {
+		xDoc.getConfidentialityCode().add(
+				XdsUtil.createCodedMetadata(code.getCodeSystemOid(), code.getCodeValue(),
+						code.getDisplayName(), null));
 	}
 
 	/**

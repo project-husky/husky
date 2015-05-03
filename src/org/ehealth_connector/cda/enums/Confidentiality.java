@@ -130,7 +130,7 @@ public enum Confidentiality {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return this.displayName;
 	}
 
