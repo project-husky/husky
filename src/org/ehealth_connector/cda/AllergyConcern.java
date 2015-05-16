@@ -31,8 +31,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * Allergy Concern <div class="de">Dieses Element enthält die Allergien und
- * Unverträglichkeiten des Patienten.</div> <div class="fr"></div>.
+ * <div class="en">This element contains the allergies and intolerances of the
+ * patient</div> Allergy Concern <div class="de">Dieses Element enthält die
+ * Allergien und Unverträglichkeiten des Patienten.</div> <div
+ * class="fr"></div>.
  */
 public class AllergyConcern extends Concern {
 
@@ -51,17 +53,13 @@ public class AllergyConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
-	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
-	 * ajouté dans ActiveProblemsSection.</div>
+	 * <div class="en">Creates an object which represents an allergy concern</div>
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.</div>
+	 * <div class="fr">Crée un objet qui représente un problème.</div>
 	 * 
 	 * @param allergyConcern
-	 * <br>
-	 *          <div class="de"> allergy concern</div> <div class="fr"></div> <div
-	 *          class="it"></div>
-	 */
+	 *          allergy concern
+	 **/
 	public AllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
@@ -70,36 +68,38 @@ public class AllergyConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
-	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
-	 * ajouté dans ActiveProblemsSection.</div>
+	 * <div class="en">Creates an object which represents an allergy concern</div>
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.</div>
+	 * <div class="fr">Crée un objet qui représente un problème.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">The concern (free text)</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de"> Das medizinische Problem</div> <div
-	 *          class="fr"></div> <div class="it"></div>
-	 * @param completed
-	 *          <div class="de">Der Status Code des Leidens
-	 *          (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *          statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">the medical problem</div> <div class="de"> Das
+	 *          medizinische Problem</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @param concernStatus
+	 *          <div class="en">status of the concern
+	 *          (active/suspended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern, AllergyProblem problemEntry,
-			org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode completed) {
+			org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.mConcernEntry;
 		setConcern(concern);
 		addAllergyProblem(problemEntry);
-		setStatus(completed);
+		setStatus(concernStatus);
 		addId(null);
 		setEffectiveTime(null, null);
 	}
 
 	/**
+	 * <div class="en">Creates an object which represents an allergy concern</div>
 	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
 	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
 	 * 
@@ -107,22 +107,25 @@ public class AllergyConcern extends Concern {
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">The concern (free text)</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param begin
-	 *          <div class="de">Beginn des Leidens</div> <div class="fr">Le début
-	 *          du problème</div>
+	 *          <div class="en">begin of concern</div> <div class="de">Beginn des
+	 *          Leidens</div> <div class="fr">Le début du problème</div>
 	 * @param end
-	 *          <div class="de">Ende des Leidens</div> <div class="fr">Le fin du
-	 *          problème</div>
+	 *          <div class="en">end of concern</div> <div class="de">Ende des
+	 *          Leidens</div> <div class="fr">Le fin du problème</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de">Das medizinische Problem</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the medical problem</div> <div class="de"> Das
+	 *          medizinische Problem</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param concernStatus
-	 *          <div class="de">Der Status Code des Leidens
-	 *          (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *          statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">status of the concern
+	 *          (active/suspended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 */
 	public AllergyConcern(String concern, Date begin, Date end, AllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {
@@ -142,7 +145,8 @@ public class AllergyConcern extends Concern {
 	}
 
 	/**
-	 * Fügt dem Leiden ein medizinisches Problem hinzu.
+	 * <div class="en">Adds a medical problem to the concern</div> <div
+	 * class="de">Fügt dem Leiden ein medizinisches Problem hinzu.</div>
 	 * 
 	 * @param problemEntry
 	 *          Das Problem
@@ -156,7 +160,7 @@ public class AllergyConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Copy mdht allergy concern.</div> <div class="fr"></div>
+	 * <div class="en">Copy mdht allergy concern.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. allergy intolerance

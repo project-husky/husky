@@ -69,12 +69,18 @@ public class CodedResults {
 		// crs.addProcedure(createEmptyProcedureEntry());
 	}
 
+	/**
+	 * Adds a Simple Observation
+	 * 
+	 * @param so
+	 *          the simple observation
+	 */
 	public void addSimpleObservation(SimpleObservation so) {
 		crs.addObservation(so);
 	}
 
 	/**
-	 * <div class="de">Copy mdht coded results section.</div> <div
+	 * <div class="en">Copy mdht coded results section.</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the coded results section

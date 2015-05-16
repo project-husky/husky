@@ -82,31 +82,26 @@ public abstract class CdaCh {
 	protected Query query;
 
 	/**
-	 * Constructor for CdaCh documents
-	 * 
-	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
+	 * <div class="en">Constructor for CdaCh documents</div> <div
+	 * class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
 	 * 
 	 * @param doc
 	 *          the CDA-CH Object in its MDHT representation
 	 */
 	public CdaCh(CDACH doc) {
-		// this(doc, null, null);
 		this.doc = doc;
 		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
-		// Add the stylesheet processing instructions to the document root using
-		// featuremaputil
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 		docRoot.setClinicalDocument(doc);
 	}
 
 	/**
-	 * Constructor that includes a stylesheet and a cascasing stylesheet into the
-	 * document processing instructions and initalizes the standard document
-	 * attributes.
-	 * 
-	 * <div class="de">Creates a CdaCh Object (Swiss cda document header)</div>
-	 * <div class="fr"></div>
+	 * <div class="en">Constructor that includes a stylesheet and a cascasing
+	 * stylesheet into the document processing instructions and initalizes the
+	 * standard document attributes.</div> <div class="de">Erzeugt ein CdaCh
+	 * Objekt (CDA Header nach schweizer Spezifikation)</div> <div
+	 * class="fr"></div>
 	 * 
 	 * @param doc
 	 *          the CDA-CH Object in its MDHT representation
@@ -131,18 +126,20 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * <div class="de">Erstellt ein CdaCh Objekt mittels eines IHE DocumentRoot
-	 * Objekts</div> <div class="fr"></div>
+	 * <div class="en">Creates a CdaCh Object on the basis of an IHE document
+	 * root</div> <div class="de">Erstellt ein CdaCh Objekt mittels eines IHE
+	 * DocumentRoot Objekts</div> <div class="fr"></div>
 	 * 
 	 * @param root
-	 *          <div class="de">DocumentRoot</div> <div class="fr"></div>
+	 *          document root
 	 */
 	public CdaCh(DocumentRoot root) {
 		docRoot = root;
 	}
 
 	/**
-	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
+	 * <div class="en">Adds an authenricator to the CDA document</div> <div
+	 * class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
 	 * 
 	 * @param authenticator
 	 *          Unterzeichner
@@ -159,7 +156,8 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt dem CDA Dokument einen Unterzeichner hinzu
+	 * <div class="en">Adds an authenticator to the CDA document</div> <div
+	 * class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
 	 * 
 	 * @param authenticator
 	 *          Unterzeichner
@@ -175,10 +173,11 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt einen Autoren hinzu.
+	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
+	 * hinzu</div>
 	 * 
 	 * @param author
-	 *          Der Autor
+	 *          the autor
 	 */
 	public void addAuthor(org.ehealth_connector.common.Author author) {
 		Author docAuthor = author.copyMdhtAuthor();
@@ -186,11 +185,12 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt ein Cascading Stylesheet (CSS) zu den XML Processing Instructions
-	 * hinzu
+	 * <div class="en">Adds a cascading stylesheet (CSS) to the XML processing
+	 * instructions</div> <div class="de">Fügt ein Cascading Stylesheet (CSS) zu
+	 * den XML Processing Instructions hinzu</div>
 	 * 
 	 * @param css
-	 *          path to the CSS file
+	 *          path of the CSS file
 	 */
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
@@ -199,11 +199,14 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt dem CDA Dokument einen Erfasser hinzu
+	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Erfasser hinzu</div>
 	 * 
 	 * @param dataEnterer
-	 *          Erfasser oder Sachbearbeiter/-in, welche(r) das Dokument erstellt
-	 *          oder Beiträge dazu geliefert hat.
+	 *          <div class="en">a person, which delivered content for this
+	 *          document</div> <div class="de">Erfasser oder Sachbearbeiter/-in,
+	 *          welche(r) das Dokument erstellt oder Beiträge dazu geliefert
+	 *          hat.</div>
 	 */
 	public void addDataEnterer(Person dataEnterer) {
 		DataEnterer enterer = CDAFactory.eINSTANCE.createDataEnterer();
@@ -216,22 +219,25 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt eine Versicherung hinzu
+	 * <div class="en">Adds a insurance organization</div> <div class="de">Fügt
+	 * eine Versicherung hinzu</div>
 	 * 
 	 * @param versicherung
-	 *          Die Versicherung als Organization Objekt
+	 *          the insurance organization
 	 */
 	public void addInsurance(Organization versicherung) {
 		addParticipant(versicherung, ParticipantType.Insurance);
 	}
 
 	/**
-	 * Fügt dem CDA Dokument eine Partizipation hinzu
+	 * <div class="en">Adds a participant</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Teilnehmer hinzu</div>
 	 * 
 	 * @param organization
 	 *          Organisation
 	 * @param participantType
-	 *          Art der Partizipation (z.B. Versicherung)
+	 *          <div class="en">Kind of participation (e.g. insurance)</div> <div
+	 *          class="de">Art der Partizipation (z.B. Versicherung)</div>
 	 */
 	public void addParticipant(Organization organization, ParticipantType participantType) {
 		// Set the given organization as Participant of this document.
@@ -247,7 +253,10 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Fügt ein Stylesheet zu den XML Processing Instructions hinzu
+	 * <div class="en">Adds a stylesheet to the XML processing instructions</div>
+	 * <div class="de">Fügt ein Stylesheet zu den XML Processing Instructions
+	 * hinzu</div>
+	 * 
 	 * 
 	 * @param stylesheet
 	 *          Path to the stylesheet (e.g.
@@ -262,9 +271,11 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt alle Unterzeichner des Dokuments zurück
+	 * <div class="en">Returns a list of authenticators of this document</div>
+	 * <div class="de">Gibt alle Unterzeichner des Dokuments zurück</div>
 	 * 
-	 * @return die rechtlichen Unterzeichner
+	 * @return <div class="en">the authenticators</div> <div class="de">die
+	 *         Unterzeichner</div>
 	 */
 	public ArrayList<org.ehealth_connector.common.Person> getAuthenticators() {
 		ArrayList<org.ehealth_connector.common.Person> persons = new ArrayList<org.ehealth_connector.common.Person>();
@@ -277,9 +288,10 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt den Autor des Dokuments zurück
+	 * <div class="en">Returns the (first) author of the document</div> <div
+	 * class="de">Gibt den (ersten) Autor des Dokuments zurück</div>
 	 * 
-	 * @return das eHealthConnector Author Objekt
+	 * @return the author
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
 		org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(doc
@@ -288,9 +300,11 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt alle Autoren des Dokuments zurück
+	 * <div class="en">Returns all authors of the document</div> <div
+	 * class="de">Gibt alle Autoren des Dokuments zurück</div>
 	 * 
-	 * @return das eHealthConnector Author Objekt
+	 * 
+	 * @return list of authors
 	 */
 	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
 		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
@@ -302,7 +316,7 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gets the Confidentially Code
+	 * <div class="en">Gets the Confidentially Code</div> <div class="de"></div>
 	 * 
 	 * @return code
 	 */
@@ -314,7 +328,8 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt den Verantwortlichen für das Dokument zurück
+	 * <div class="en">Gets the custodian</div> <div class="de">Gibt den
+	 * Verantwortlichen für das Dokument zurück</div>
 	 * 
 	 * @return das openHealthTools Custodian Objekt
 	 */
@@ -323,7 +338,8 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt alle Autoren des Dokuments zurück
+	 * <div class="en">Gets all authors of the document</div> <div class="de">Gibt
+	 * alle Autoren des Dokuments zurück</div>
 	 * 
 	 * @return das eHealthConnector Author Objekt
 	 */
@@ -340,6 +356,11 @@ public abstract class CdaCh {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Gets the document root (which helds the cda document)</div>
+	 * 
+	 * @return the document root
+	 */
 	public DocumentRoot getDocRoot() {
 		return this.docRoot;
 	}
@@ -352,13 +373,12 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt alle Versicherungen zurück
+	 * <div class="en">Gets all insurances</div> <div class="de">Gibt alle
+	 * Versicherungen zurück</div>
 	 * 
-	 * @param versicherung
-	 *          Die Versicherung als Organization Objekt
-	 * @return the arraylist of organizations
+	 * @return arraylist of organizations
 	 */
-	public ArrayList<Organization> getInsurances(Organization versicherung) {
+	public ArrayList<Organization> getInsurances() {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
 		for (Participant1 part : doc.getParticipants()) {
 			if (part.getTypeCode().equals(ParticipantType.Insurance)) {
@@ -369,6 +389,12 @@ public abstract class CdaCh {
 		return organizations;
 	}
 
+	/**
+	 * <div class="en">Gets the language code</div> <div class="de">Gibt die
+	 * Sprache des Dokuments zurück</div>
+	 * 
+	 * @return language code
+	 */
 	public CS getLanuageCode() {
 		if (doc.getLanguageCode() != null) {
 			return doc.getLanguageCode();
@@ -388,6 +414,11 @@ public abstract class CdaCh {
 		return p;
 	}
 
+	/**
+	 * Gets the CDA document as ByteArrayOutputStream
+	 * 
+	 * @return the output stream
+	 */
 	public ByteArrayOutputStream getOutputStream() {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
@@ -399,13 +430,12 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt alle Participants zurück
+	 * <div class="en">Gets all participating organizations</div> <div
+	 * class="de">Gibt alle Teilnehmenden Organisationen zurück</div>
 	 * 
-	 * @param versicherung
-	 *          Die Versicherung als Organization Objekt
 	 * @return the arraylist of organizations
 	 */
-	public ArrayList<Organization> getParticipants(Organization versicherung) {
+	public ArrayList<Organization> getParticipants() {
 		ArrayList<Organization> organizations = new ArrayList<Organization>();
 		for (Participant1 part : doc.getParticipants()) {
 			Organization org = new Organization(part.getAssociatedEntity().getScopingOrganization());
@@ -415,7 +445,8 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Liefert das Patientenobjekt zurück
+	 * <div class="en">Gets the patient</div> <div class="de">Liefert den
+	 * Patienten zurück</div>
 	 * 
 	 * @return the patient
 	 */
@@ -424,6 +455,11 @@ public abstract class CdaCh {
 		return patient;
 	}
 
+	/**
+	 * <div class="en">Gets the set Id</div>
+	 * 
+	 * @return the set id
+	 */
 	public Identificator getSetId() {
 		if (doc.getSetId() != null) {
 			return new Identificator(doc.getSetId().getRoot(), doc.getSetId().getExtension());
@@ -431,6 +467,11 @@ public abstract class CdaCh {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Gets the timestamp</div>
+	 * 
+	 * @return the timestamp
+	 */
 	public Date getTimestamp() {
 		if (doc.getEffectiveTime() != null) {
 			return DateUtil.parseDate(doc.getEffectiveTime());
@@ -438,10 +479,20 @@ public abstract class CdaCh {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Gets the title</div>
+	 * 
+	 * @return the title
+	 */
 	public String getTitle() {
 		return doc.getTitle().getText();
 	}
 
+	/**
+	 * <div class="en">Gets the version</div>
+	 * 
+	 * @return the version
+	 */
 	public Integer getVersion() {
 		if (doc.getVersionNumber() != null) {
 			return doc.getVersionNumber().getValue().intValue();
@@ -449,6 +500,10 @@ public abstract class CdaCh {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Initializes the CdaCh document header defaults</div>
+	 * 
+	 */
 	public void initCdaCh() {
 		// Set the eHealthConnector comment
 		FeatureMapUtil.addComment(docRoot.getMixed(),
@@ -480,7 +535,9 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Gibt die XML-Repräsentation des Dokuments auf der Konsole aus
+	 * <div class="en">prints the XML representation of the document to the
+	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments auf
+	 * der Konsole aus</div>
 	 */
 	public void printXmlToConsole() {
 		try {
@@ -491,10 +548,11 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Speichert das CDA Dokument als XML Datei
+	 * <div class="en">Stores the CDA document as XML file</div> <div
+	 * class="de">Speichert das CDA Dokument als XML Datei</div>
 	 * 
 	 * @param fileName
-	 *          Dateiname (inkl. Pfadangaben)
+	 *          file name (incl. path)
 	 * @throws Exception
 	 *           the exception
 	 */
@@ -534,10 +592,13 @@ public abstract class CdaCh {
 	}
 
 	/**
-	 * Weist dem CDA Dokument die verwaltende Organisation zu
+	 * <div class="en">Sets an organization as the custodian of the document</div>
+	 * <div class="de">Weist dem CDA Dokument die verwaltende Organisation
+	 * zu</div>
 	 * 
 	 * @param organization
-	 *          verwaltende Organisation
+	 *          <div class="en">custodian organization</div> <div
+	 *          class="de">verwaltende Organisation</div>
 	 */
 	public void setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
@@ -558,6 +619,13 @@ public abstract class CdaCh {
 		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
 	}
 
+	/**
+	 * <div class="en">Sets the id of the document</div> <div class="de">Weist dem
+	 * CDA Dokument eine id zu</div>
+	 * 
+	 * @param id
+	 *          the id
+	 */
 	public void setId(Identificator id) {
 		if (id == null) {
 			II docID = DatatypesFactory.eINSTANCE.createII();
@@ -569,6 +637,14 @@ public abstract class CdaCh {
 		}
 	}
 
+	/**
+	 * <div class="en">Sets the in fulfillment of reference to another
+	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
+	 * Dokumentes zu, auf das es sich bezieht</div>
+	 * 
+	 * @param id
+	 *          of the referenced document
+	 */
 	public void setInFulfillmentOf(Identificator id) {
 		InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
 		Order o = CDAFactory.eINSTANCE.createOrder();
@@ -578,23 +654,35 @@ public abstract class CdaCh {
 		doc.getInFulfillmentOfs().add(ifo);
 	}
 
+	/**
+	 * <div class="en">Sets the language of the document</div> <div
+	 * class="de">Weist dem document eine Sprache zu</div>
+	 * 
+	 * @param language
+	 *          code for the language
+	 */
 	public void setLanguageCode(LanguageCode language) {
 		// Set language of the document
 		doc.setLanguageCode(language.getCS());
 	}
 
 	/**
-	 * Weist dem CDA Dokument einen rechtsgültigen Unterzeichner hinzu
+	 * <div class="en">Sets the legal authenticator of the document</div> <div
+	 * class="de">Weist dem CDA Dokument einen rechtsgültigen Unterzeichner
+	 * hinzu</div>
 	 * 
 	 * @param legalAuthenticator
-	 *          rechtsgültiger Unterzeichner
+	 *          <div class="en">legal authenticator</div> <div
+	 *          class="de">rechtsgültiger Unterzeichner</div>
+	 * 
 	 */
 	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
 		doc.setLegalAuthenticator(Util.createLagalAuthenticatorFromAuthor(legalAuthenticator));
 	}
 
 	/**
-	 * Weist dem CDA Dokument den Patienten zu
+	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA Dokument
+	 * einen Patienten zu</div>
 	 * 
 	 * @param patient
 	 *          Patient
@@ -603,6 +691,13 @@ public abstract class CdaCh {
 		doc.getRecordTargets().add(patient.getMdhtRecordTarget());
 	}
 
+	/**
+	 * <div class="en">Sets the timestamp of the document</div> <div
+	 * class="de">Weist dem Dokument einen Zeitstempel zu</div>
+	 * 
+	 * @param date
+	 *          the timestamp
+	 */
 	public void setTimestamp(Date date) {
 		if (date == null) {
 			doc.setEffectiveTime(DateUtil.nowAsTS());
@@ -615,6 +710,15 @@ public abstract class CdaCh {
 		}
 	}
 
+	/**
+	 * <div class="en">Sets the document set Id and version number</div> <div
+	 * class="de">Weist dem Dokument eine Set Id und eine Versionsnummer zu</div>
+	 * 
+	 * @param guidVersion1
+	 *          the set Id (if null, the document ID will be used)
+	 * @param version
+	 *          the version of the document
+	 */
 	public void setVersion(String guidVersion1, Integer version) {
 		setSetId(guidVersion1);
 		setVersionNumber(version);

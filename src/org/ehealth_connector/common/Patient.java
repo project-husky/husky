@@ -179,6 +179,8 @@ public class Patient extends Person {
 	 */
 	public Patient(RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
+		mPatientRole = recordTarget.getPatientRole();
+		mPatient = recordTarget.getPatientRole().getPatient();
 	}
 
 	/**

@@ -79,9 +79,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de"> Ein CDA Dokument, welches der Spezifikation CDA-CH-VACD
- * entspricht.</div> <div class="fr">Class CdaChVacd.</div> <div
- * class="it">Class CdaChVacd.</div>
+ * <div class="en">A CDA document, which is conform to the CDA-CH-VACD
+ * specification</div> <div class="de">Ein CDA Dokument, welches der
+ * Spezifikation CDA-CH-VACD entspricht.</div> <div class="fr">Class
+ * CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
 public class CdaChVacd extends CdaCh {
 
@@ -97,7 +98,8 @@ public class CdaChVacd extends CdaCh {
 	public static final String eVACDOCTitle = "eVACDOC";
 
 	/**
-	 * Erstellt ein neues eVACDOC CDA Dokument.
+	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
+	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 * 
 	 */
 	public CdaChVacd() {
@@ -110,9 +112,9 @@ public class CdaChVacd extends CdaCh {
 	 * Erstellt ein neues eVACDOC CDA Dokument.
 	 * 
 	 * @param language
-	 *          Sprache des Dokments
+	 *          document language
 	 * @param immunization
-	 *          Impfung
+	 *          an immunization
 	 */
 	public CdaChVacd(LanguageCode language, Immunization immunization) {
 		this();
@@ -122,22 +124,27 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Erstellt ein neues eVACDOC CDA Dokument.
+	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
+	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
+	 * 
 	 * 
 	 * @param language
 	 * <br>
-	 *          <div class="de">Sprache des Dokments</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">document language</div> <div class="de">Sprache
+	 *          des Dokments</div> <div class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
-	 *          Stylesheet, welches im CDA mittels ?xml-stylesheet für die
-	 *          menschlich lesbare Darstellung referenziert werden soll (z.B.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
-	 *          wird das Standard-Stylesheet verwendet.
+	 *          <div class="en">stylesheet, which should be referenced to render a
+	 *          human readable representation of the document</div> <div
+	 *          class="de">Stylesheet, welches im CDA mittels ?xml-stylesheet für
+	 *          die menschlich lesbare Darstellung referenziert werden soll (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div>
+	 * 
 	 * @param cascasingStylesheet
-	 *          Cascasing Stylesheet, welche Designinformationen für die
-	 *          menschlich lesbare Darstellung referenziert (z.B.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
-	 *          werden keine zusätzlichen Designinformationen referenziert.
+	 *          <div class="en">Cascading stylesheet, which should be referenced
+	 *          to render a human readable representation of the document</div>
+	 *          <div class="de">Cascasing Stylesheet, welches Designinformationen
+	 *          für die menschlich lesbare Darstellung referenziert (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div>
 	 */
 	public CdaChVacd(LanguageCode language, String stylesheet, String cascasingStylesheet) {
 		super(CHFactory.eINSTANCE.createVACD().init(), stylesheet, cascasingStylesheet);
@@ -146,26 +153,31 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Erstellt ein neues eVACDOC CDA Dokument.
+	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
+	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 * 
 	 * @param language
-	 * <br>
-	 *          <div class="de">Sprache des Dokments</div> <div class="fr"></div>
-	 *          <div class="it"></div>
-	 * @param immunization
-	 * <br>
-	 *          <div class="de">Impfung</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 * 
+	 *          <div class="en">document language</div> <div class="de">Sprache
+	 *          des Dokments</div> <div class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
-	 *          Stylesheet, welches im CDA mittels ?xml-stylesheet für die
-	 *          menschlich lesbare Darstellung referenziert werden soll (z.B.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
-	 *          wird das Standard-Stylesheet verwendet.
+	 *          <div class="en">stylesheet, which should be referenced to render a
+	 *          human readable representation of the document</div> <div
+	 *          class="de">Stylesheet, welches im CDA mittels ?xml-stylesheet für
+	 *          die menschlich lesbare Darstellung referenziert werden soll (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div>
+	 * 
 	 * @param cascasingStylesheet
-	 *          Cascasing Stylesheet, welche Designinformationen für die
-	 *          menschlich lesbare Darstellung referenziert (z.B.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'). Bei Null
-	 *          werden keine zusätzlichen Designinformationen referenziert.
+	 *          <div class="en">Cascading stylesheet, which should be referenced
+	 *          to render a human readable representation of the document</div>
+	 *          <div class="de">Cascasing Stylesheet, welches Designinformationen
+	 *          für die menschlich lesbare Darstellung referenziert (z.B.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div>
+	 * 
+	 * @param immunization
+	 *          <div class="en">the immunization</div> <div
+	 *          class="de">Impfung</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public CdaChVacd(LanguageCode language, String stylesheet, String cascasingStylesheet,
 			Immunization immunization) {
@@ -175,12 +187,14 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels
-	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div> <div
+	 * <div class="en">Creates a new CdaChVacd convenience object on the basis of
+	 * a MDHT-VACD object. Both represent an immunization document</div> <div
+	 * class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines
+	 * MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div> <div
 	 * class="fr"></div>
 	 * 
 	 * @param doc
-	 *          <div class="de">CdaChVacd</div> <div class="fr"></div>
+	 *          MDHT VACD object
 	 */
 	public CdaChVacd(VACD doc) {
 		super(doc);
@@ -228,8 +242,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds the allergy concern</div> <div class="de">Fügt ein
+	 * Allergie-Leiden hinzu</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param allergyConcern
 	 * <br>
@@ -269,7 +283,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Setzt das Gestationsalter
+	 * <div class="en">Sets the gestational age</div> <div class="de">Setzt das
+	 * Gestationsalter</div>
 	 * 
 	 * @param codedResults
 	 *          the new gestational age
@@ -299,13 +314,11 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt einen Kommentar hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds a comment</div> <div class="de">Fügt einen Kommentar
+	 * hinzu</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param comment
-	 * <br>
-	 *          <div class="de">Kommentar</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          the comment
 	 */
 	public void addComment(String comment) {
 		Section rs;
@@ -329,7 +342,6 @@ public class CdaChVacd extends CdaCh {
 		rs.addAct(mComment);
 
 		ED reference;
-		// if (CDALevel2TextGeneration) {
 		// update the MDHT Object content references to CDA level 1 text
 		if (rs.getText() != null) {
 
@@ -345,17 +357,14 @@ public class CdaChVacd extends CdaCh {
 		// create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
 		mComment.setText(reference);
-
 	}
 
 	/**
-	 * <div class="de">Fügt eine Impfung hinzu.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Adds an immunization</div> <div class="de">Fügt eine
+	 * Impfung hinzu.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param immunization
-	 * <br>
-	 *          <div class="de">Impfung</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          the immunization
 	 */
 	public void addImmunization(org.ehealth_connector.cda.Immunization immunization) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection;
@@ -397,13 +406,12 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt eine Impfempfehlung hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds an immunization recommendation</div> <div
+	 * class="de">Fügt eine Impfempfehlung hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param immunizationRecommendation
-	 * <br>
-	 *          <div class="de">Impfempfehlung</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          the immunization recommendation
 	 */
 	public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection immunizationRecommendationsSection;
@@ -448,13 +456,12 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt einen Laborbefund hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds a laboratory observation</div> <div class="de">Fügt
+	 * einen Laborbefund hinzu</div>
 	 * 
 	 * @param laboratoryObservation
-	 * <br>
-	 *          <div class="de">Der Laborbefund</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          the laboratory observation
+	 * 
 	 */
 	public void addLaboratoryObservation(
 			org.ehealth_connector.cda.LaboratoryObservation laboratoryObservation) {
@@ -521,18 +528,16 @@ public class CdaChVacd extends CdaCh {
 			} else {
 				setNarrativeTextSectionLaboratorySpecialty("-");
 			}
-
 		}
 	}
 
 	/**
-	 * <div class="de">Fügt ein vergangenes Leiden hinzu</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds a past problem concern</div> <div class="de">Fügt ein
+	 * vergangenes Leiden hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param pastProblemConcern
-	 * <br>
-	 *          <div class="de"> past problem concern</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          the past problem concern
 	 */
 	public void addPastProblemConcern(PastProblemConcern pastProblemConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection hopis;
@@ -566,13 +571,11 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Fügt eine Schwangerschaft hinzu</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds a pregnancy history</div> <div class="de">Fügt eine
+	 * Schwangerschaft hinzu</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param pregnancy
-	 * <br>
-	 *          <div class="de">Schwangerschaft</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          the pregnancy history
 	 */
 	public void addPregnancyHistory(PregnancyHistory pregnancy) {
 		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
@@ -615,6 +618,21 @@ public class CdaChVacd extends CdaCh {
 		phs.addObservation(pregnancy.copyMdhtPregnancy());
 	}
 
+	/**
+	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * 
+	 * @param serologieCode
+	 *          the VACD specific serologie code
+	 * @param laboratorySpecificCode
+	 *          a code that is used in the laboratory
+	 * @param dateTimeOfResult
+	 *          date and time, when the result was known
+	 * @param performer
+	 *          the performer, who made the observation
+	 * @param value
+	 *          the value of the observation
+	 * @return the laboratory observation
+	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value) {
 		LaboratoryObservation lo = new LaboratoryObservation();
@@ -627,6 +645,23 @@ public class CdaChVacd extends CdaCh {
 		return lo;
 	}
 
+	/**
+	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * 
+	 * @param serologieCode
+	 *          the VACD specific serologie code
+	 * @param laboratorySpecificCode
+	 *          a code that is used in the laboratory
+	 * @param dateTimeOfResult
+	 *          date and time, when the result was known
+	 * @param performer
+	 *          the performer, who made the observation
+	 * @param value
+	 *          the value of the observation
+	 * @param observationInterpretation
+	 *          a VACD related code for the observationInterpretation
+	 * @return the laboratory observation
+	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
 			ObservationInterpretationForImmunization observationInterpretation) {
@@ -636,6 +671,25 @@ public class CdaChVacd extends CdaCh {
 		return lo;
 	}
 
+	/**
+	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * 
+	 * @param serologieCode
+	 *          the VACD specific serologie code
+	 * @param laboratorySpecificCode
+	 *          a code that is used in the laboratory
+	 * @param dateTimeOfResult
+	 *          date and time, when the result was known
+	 * @param performer
+	 *          the performer, who made the observation
+	 * @param value
+	 *          the value of the observation
+	 * @param observationInterpretation
+	 *          a VACD related code for the observationInterpretation
+	 * @param comment
+	 *          a comment for this Laboratory Observation
+	 * @return the laboratory observation
+	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
 			ObservationInterpretationForImmunization observationInterpretation, String comment) {
@@ -646,7 +700,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert den menschenlesbaren Text des Kapitels zu Aktiven Leiden zurück
+	 * <div class="en">Generates the human readable text of the active problems
+	 * chapter</div> <div class="de">Liefert den menschenlesbaren Text des
+	 * Kapitels zu Aktiven Leiden zurück</div>
 	 * 
 	 * @return the active problem concerns text
 	 */
@@ -664,7 +720,10 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert den Text des Kapitels Allergie Leiden zurück
+	 * <div class="en">Generates the human readable text of the allergy concerns
+	 * chapter</div> <div class="de">Liefert den Text des Kapitels Allergie Leiden
+	 * zurück</div>
+	 * 
 	 * 
 	 * @return the allergy problem concerns text
 	 */
@@ -675,8 +734,10 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Liefert den menschenlesbaren Text zu dem Kaptiel
-	 * Impfempfehlungen zurück</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Generates the human readable text of the immunization
+	 * recommendations chapter </div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kaptiel Impfempfehlungen zurück</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @return <div class="en">the immunization recommendations text</div>
 	 */
@@ -697,7 +758,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert den menschenlesbaren Text zu dem Kapitel Laborresultate zurück
+	 * <div class="en">Generates the human readable text of the laboratory
+	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kapitel Laborresultate zurück</div>
 	 * 
 	 * @return the laboratory observations text
 	 */
@@ -708,7 +771,9 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert den menschenlesbaren Text zu allen vergangenen Leiden zurück
+	 * <div class="en">Generates the human readable text of the history of past
+	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text zu
+	 * allen vergangenen Leiden zurück</div>
 	 * 
 	 * @return the past problem concern entries text
 	 */
@@ -726,8 +791,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="de">Liefert alle Aktiven Leiden zurück</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the active problems</div> <div class="de">Liefert alle
+	 * Aktiven Leiden zurück</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the active problem concerns
 	 */
@@ -749,7 +814,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle Allergie Leiden zurück
+	 * <div class="en">Gets the allergy problem concerns</div> <div
+	 * class="de">Liefert alle Allergie Leiden zurück</div>
 	 * 
 	 * @return the allergy problem concerns
 	 */
@@ -771,7 +837,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert das Gestationsalter zurück
+	 * <div class="en">Gets the coded results</div> <div class="de">Liefert die
+	 * Codierten Resultate zurück</div>
 	 * 
 	 * @return the gestational age
 	 */
@@ -779,13 +846,10 @@ public class CdaChVacd extends CdaCh {
 		return new GestationalAge(getDoc().getCodedResultsSection());
 	}
 
-	// public GestationalAge createGestationalAgeCodedResult(int weeks, int
-	// days) {
-	//
-	// }
-
 	/**
-	 * Liefert den menschenlesbaren Text zu dem Gestationsalter zurück
+	 * <div class="en">Gets the human readable text of the coded results
+	 * section</div> <div class="de">Liefert den menschenlesbaren Text zu den
+	 * Codierten Resultaten zurück</div>
 	 * 
 	 * @return the gestational age text
 	 */
@@ -794,7 +858,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert die Kommentare zurück
+	 * <div class="en">Gets the comments</div> <div class="de">Liefert die
+	 * Kommentare zurück</div>
 	 * 
 	 * @return the comment
 	 */
@@ -813,7 +878,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert das MDHT-VACD-Objekt zurück.
+	 * <div class="en">Gets the MDHT-VACD Object</div> <div class="de">Liefert das
+	 * MDHT-VACD-Objekt zurück.</div>
 	 * 
 	 * @return the doc
 	 */
@@ -822,9 +888,10 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle Impfempfehlungen zurück
+	 * <div class="en">Gets the immunization recommendations</div> <div
+	 * class="de">Liefert alle Impfempfehlungen zurück</div>
 	 * 
-	 * @return Liste von Impfempfehlungen
+	 * @return List with immunization recommendations
 	 */
 	public ArrayList<ImmunizationRecommendation> getImmunizationRecommendations() {
 		// Search for the right section
@@ -844,9 +911,10 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle Impfungen zurück
-	 * 
-	 * @return Liste von Impfungen
+	 * <div class="en">Gets all immunizations</div> <div class="de">Liefert alle
+	 * Impfungen zurück</div>
+	 *
+	 * @return List with immunizations
 	 */
 	public ArrayList<Immunization> getImmunizations() {
 		EList<org.openhealthtools.mdht.uml.cda.ch.Immunization> il = getDoc().getImmunizationsSection()
@@ -861,9 +929,10 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle Laborresultate zurück
+	 * <div class="en">Gets the laboratory observations</div> <div
+	 * class="de">Liefert alle Laborresultate zurück</div>
 	 * 
-	 * @return Liste von Laborresultaten
+	 * @return List with laboratory observations
 	 */
 	public ArrayList<org.ehealth_connector.cda.LaboratoryObservation> getLaboratoryObservations() {
 		// Search for the right section
@@ -895,7 +964,6 @@ public class CdaChVacd extends CdaCh {
 	 * <div class="en">Gets the human readable CDA section text for the according
 	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
 	 * für die entsprechende Section</div>
-	 * 
 	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
@@ -1016,7 +1084,6 @@ public class CdaChVacd extends CdaCh {
 	 * section</div> <div class="de">Liefert den menschenlesbaren CDA Section Text
 	 * für die entsprechende Section</div>
 	 * 
-	 * 
 	 * @return <div class="en"> the text of the human readable part of the cda
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
@@ -1027,7 +1094,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle vergangen Leiden zurück
+	 * <div class="en">Gets the past problem concerns</div> <div
+	 * class="de">Liefert alle vergangen Leiden zurück</div>
 	 * 
 	 * @return the past problem concern entries
 	 */
@@ -1049,7 +1117,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Liefert alle Schwangerschaften zurück
+	 * <div class="en">Gets the pregnancies</div> <div class="de">Liefert alle
+	 * Schwangerschaften zurück</div>
 	 * 
 	 * @return Liste von Schwangerschaften
 	 */
@@ -1068,9 +1137,11 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD Spezifikation
-	 * (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und insbesondere Kapitel
-	 * "7.4 CDA Header", Regel CH-VACD-HPAT )
+	 * <div class="en">Pseudonymization of a clinical document according to the
+	 * CDA-CH-VACD specification (Rule CH-VACD-HPAT)</div> <div
+	 * class="de">Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD
+	 * Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und insbesondere
+	 * Kapitel "7.4 CDA Header", Regel CH-VACD-HPAT)</div>
 	 */
 	public void pseudonymization() {
 		RecordTarget destRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
@@ -1112,7 +1183,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * Setzt das MDHT-VACD-Objekt.
+	 * <div class="en">Sets the MDHT-VACD Object</div> <div class="de">Setzt das
+	 * MDHT-VACD-Objekt.</div>
 	 * 
 	 * @param doc
 	 *          the new doc

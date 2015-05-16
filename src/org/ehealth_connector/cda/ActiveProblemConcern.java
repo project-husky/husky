@@ -20,12 +20,17 @@ import java.util.Date;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
 /**
- * <div class="de">Dieses Element bezeichnet das Leiden und dokumentiert die
- * Zeitspanne, in welcher das Leiden für den Patienten aktuell ist. Es enthält
- * zudem eine Sammlung von Verweisen auf Probleme, die zu diesem Leiden gehören.
- * Im Zusammenhang mit Impfungen MUSS für Komplikations- und Expositionsrisiken
- * je ein Problem Concern Entry angegeben werden.</div> <div class="fr">Une
- * souffrance de la santé</div>.
+ * <div class="en">This element contains the active problem concern and
+ * documents the time span in which the concern occured to the patient. It also
+ * contains a collection of references to medical problems which are related to
+ * the concern. In context of immunizations one problem HAS to be provided for
+ * each risc of complication and risc of exposure</div> <div class="de">Dieses
+ * Element bezeichnet das Leiden und dokumentiert die Zeitspanne, in welcher das
+ * Leiden für den Patienten aktuell ist. Es enthält zudem eine Sammlung von
+ * Verweisen auf Probleme, die zu diesem Leiden gehören. Im Zusammenhang mit
+ * Impfungen MUSS für Komplikations- und Expositionsrisiken je ein Problem
+ * Concern Entry angegeben werden.</div> <div class="fr">Une souffrance de la
+ * santé</div>.
  */
 public class ActiveProblemConcern extends ProblemConcern {
 
@@ -37,8 +42,10 @@ public class ActiveProblemConcern extends ProblemConcern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
-	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 * <div class="en">Creates an object which represends an active problem
+	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
+	 * repräsentiert. Dieses Objekt kann einer ActiveProblemsSection hinzugefügt
+	 * werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>
@@ -56,8 +63,10 @@ public class ActiveProblemConcern extends ProblemConcern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
-	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 * <div class="en">Creates an object which represends an active problem
+	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
+	 * repräsentiert. Dieses Objekt kann einer ActiveProblemsSection hinzugefügt
+	 * werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>
@@ -111,8 +120,10 @@ public class ActiveProblemConcern extends ProblemConcern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
-	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 * <div class="en">Creates an object which represends an active problem
+	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
+	 * repräsentiert. Dieses Objekt kann einer ActiveProblemsSection hinzugefügt
+	 * werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>

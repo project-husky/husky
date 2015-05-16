@@ -40,7 +40,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de">Ein allergisches Leiden</div> <div class="fr"></div>.
+ * <div class="en">An Allergy Problem</div> <div class="de">Ein Allergie
+ * Problem</div> <div class="fr"></div>.
  */
 public class AllergyProblem {
 
@@ -55,14 +56,17 @@ public class AllergyProblem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Allergie-Problem repräsentiert. Dieser
-	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
-	 * unbekannt ist, das Problem als Code angegeben werden soll. Dieses Objekt
-	 * kann einem ProblemConcernEntry hinzugefügt werden.
+	 * <div class="en">Creates an object, which represents an allergy problem.
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden.</div>
 	 * 
 	 * @param allergy
-	 *          <div class="de">Die Art der Allergie</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">The allergy</div> <div class="de">Die Art der
+	 *          Allergie</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		mAllergyProblem = IHEFactory.eINSTANCE.createAllergyIntolerance().init();
@@ -77,25 +81,28 @@ public class AllergyProblem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Allergie-Problem repräsentiert. Dieser
-	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
-	 * bekannt ist und das Problem als Code angegeben werden soll. Dieses Objekt
-	 * kann einem ProblemConcernEntry hinzugefügt werden.
+	 * <div class="en">Creates an object, which represents an allergy problem.
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden.</div>
 	 * 
 	 * @param kindOfAllergy
-	 * <br>
-	 *          <div class="de"> kind of allergy</div> <div class="fr"></div> <div
+	 *          <div class="en"> kind of allergy</div> <div class="fr"></div> <div
 	 *          class="it"></div>
 	 * @param problem
-	 *          <div class="de">Code zu Komplikationsrisiken oder
+	 *          <div class="en">code for risc of complication or risc of
+	 *          exposure</div> <div class="de">Code zu Komplikationsrisiken oder
 	 *          Expositionsrisiken.</div> <div class="fr"></div> <div
 	 *          class="it"></div>
 	 * @param startOfProblem
-	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">start of problem</div> <div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param endOfProblem
-	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">end of problem</div> <div class="de">Ende des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
@@ -104,31 +111,36 @@ public class AllergyProblem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Allergie-Problem repräsentiert. Dieser
-	 * Konstruktor wird verwendet, wenn der Zeitraum in dem das Problem bestand
-	 * bekannt ist und das Problem als Code angegeben werden soll. Dieses Objekt
-	 * kann einem ProblemConcernEntry hinzugefügt werden.
-	 * 
+	 * <div class="en">Creates an object, which represents an allergy problem.
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden.</div>
+	 *
 	 * @param kindOfAllergy
-	 * <br>
-	 *          <div class="de">Die Art der Allergie</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">kind of allergy</div> <div class="de">Die Art der
+	 *          Allergie</div> <div class="fr"></div> <div class="it"></div>
 	 * @param problem
-	 *          <div class="de">Code zu Komplikationsrisiken oder
+	 *          <div class="en">code for risc of complication or risc of
+	 *          exposure</div> <div class="de">Code zu Komplikationsrisiken oder
 	 *          Expositionsrisiken.</div> <div class="fr"></div> <div
 	 *          class="it"></div>
 	 * @param startOfProblem
-	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">start of problem</div> <div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param endOfProblem
-	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">end of problem</div> <div class="de">Ende des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param internalProblemId
-	 *          <div class="de">Interne ID des Problems innerhalb der Akte. Steht
-	 *          eine solche nicht zur Verfügung dann kann ein anderer Konstruktor
-	 *          verwendet werden und es wird stattdesssen eine GUID durch die
-	 *          Convenience API generiert.</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="en">internal id of the problem. If you don´t have such
+	 *          an id you can you another constructor and the id will be
+	 *          generated</div> <div class="de">Interne ID des Problems innerhalb
+	 *          der Akte. Steht eine solche nicht zur Verfügung dann kann ein
+	 *          anderer Konstruktor verwendet werden und es wird stattdesssen eine
+	 *          GUID durch die Convenience API generiert.</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem,

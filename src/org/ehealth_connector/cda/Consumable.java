@@ -36,8 +36,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
- * <div class="de">Ein konsumierbares Produkt</div> <div class="fr"></div> <div
- * class="it"></div>
+ * <div class="en">A consumable product</div> <div class="de">Ein konsumierbares
+ * Produkt</div> <div class="fr"></div> <div class="it"></div>
  */
 public class Consumable {
 
@@ -46,9 +46,13 @@ public class Consumable {
 	private ProductEntry mProductEntry;
 
 	/**
-	 * Erzeugt ein Objekt welches eine Substanz repräsentiert. Dieser Konstruktor
-	 * wird verwendet, wenn ein leeres Object initialisiert werden soll (true)
-	 * oder codiert werden soll, dass die Substanz unbekannt ist (false)
+	 * <div class="en">Creates an object, which represents a consumable substance.
+	 * This constructor will be used, if you want to initialize an empty object
+	 * (true) or if you want to code that the substance is unknown
+	 * (false).</div><div class="de"> Erzeugt ein Objekt welches eine Substanz
+	 * repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres Object
+	 * initialisiert werden soll (true) oder codiert werden soll, dass die
+	 * Substanz unbekannt ist (false)</div>
 	 * 
 	 * @param consumableKnown
 	 *          true: Erstellung eines leeren Objekts, false: Es sind keine
@@ -59,9 +63,9 @@ public class Consumable {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
-	 * hinzugefügt werden.
+	 * <div class="en">Creates an object, which represents a consumable
+	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
+	 * verabreichende Substanz repräsentiert.</div>
 	 * 
 	 * @param tradeNameOfVaccine
 	 *          Handelsname des Impfstoffes
@@ -71,15 +75,20 @@ public class Consumable {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
-	 * hinzugefügt werden.
+	 * <div class="en">Creates an object, which represents a consumable
+	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
+	 * verabreichende Substanz repräsentiert. Dieses Objekt kann einer
+	 * ImmunizationRecommendation oder einer Immunization hinzugefügt
+	 * werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          Handelsname des Impfstoffes
+	 *          <div class="en">trade name of vaccine</div> <div
+	 *          class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *          Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein GTIN, GLN,
-	 *          oder Swiss Index Code sein.
+	 *          <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *          class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein
+	 *          GTIN, GLN, oder Swiss Index Code sein.</div>
+	 * 
 	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
@@ -87,24 +96,26 @@ public class Consumable {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches eine verabreichende Substanz repräsentiert.
-	 * Dieses Objekt kann einer ImmunizationRecommendation oder einer Immunization
-	 * hinzugefügt werden. Wenn der Impfstoff resp. das Produkt nicht bekannt ist
-	 * (z.B. im Ausland verabreichte Impfung), dann muss das Antigen mittels WHO
-	 * ATC angegeben werden. Wenn in einem Produkt mehrere Antigene enthalten
-	 * sind, MUSS das Immunization Element für jedes Antigen je einmal angegeben
-	 * werden.
+	 * <div class="en">Creates an object, which represents a consumable
+	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
+	 * verabreichende Substanz repräsentiert. Dieses Objekt kann einer
+	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden. Wenn
+	 * der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland
+	 * verabreichte Impfung), dann muss das Antigen mittels WHO ATC angegeben
+	 * werden. Wenn in einem Produkt mehrere Antigene enthalten sind, MUSS das
+	 * Immunization Element für jedes Antigen je einmal angegeben werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          Handelsname des Impfstoffes
-	 * @param gtinOrPharmacodeOrGln
-	 *          Packungs-GTIN, GLN oder swissINDEX (GLN ist veraltet)
+	 *          <div class="en">trade name of vaccine</div> <div
+	 *          class="de">Handelsname des Impfstoffes</div>
+	 * @param gtin
+	 *          <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *          class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein
+	 *          GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * @param whoAtcCode
-	 * <br>
-	 *          <div class="de"> who atc code</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="en">who atc code</div>
 	 */
-	public Consumable(String tradeNameOfVaccine, Code gtinOrPharmacodeOrGln, Code whoAtcCode) {
+	public Consumable(String tradeNameOfVaccine, Code gtin, Code whoAtcCode) {
 
 		mConsumable = CDAFactory.eINSTANCE.createConsumable();
 		mProductEntry = IHEFactory.eINSTANCE.createProductEntry().init();
@@ -115,7 +126,7 @@ public class Consumable {
 
 		// The WhoAtcCode has to be present as code element, otherwise
 		// translations can´t be set
-		setManufacturedProductId(Identificator.convertToIdentificator(gtinOrPharmacodeOrGln));
+		setManufacturedProductId(Identificator.convertToIdentificator(gtin));
 		if (whoAtcCode != null) {
 			setWhoAtcCode(whoAtcCode);
 		} else {
@@ -130,7 +141,7 @@ public class Consumable {
 	}
 
 	/**
-	 * <div class="de">Adds the manufactured material translation.</div> <div
+	 * <div class="en">Adds the manufactured material translation.</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param codedId
@@ -141,7 +152,7 @@ public class Consumable {
 	}
 
 	/**
-	 * <div class="de">Copy mdht consumable.</div> <div class="fr"></div> <div
+	 * <div class="en">Copy mdht consumable.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda. consumable
@@ -231,8 +242,8 @@ public class Consumable {
 	}
 
 	/**
-	 * <div class="en">Gets the who atc code.</div> <div class="de">Liefert who
-	 * atc code.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the who atc code.</div> <div class="de">Liefert den
+	 * who atc code.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return Code <div class="en">the who atc code</div>
 	 */

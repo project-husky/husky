@@ -53,16 +53,20 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
- * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich nicht
- * erwünschten Impfungen.
+ * <div class="en">This element contains the given immunizations and the
+ * immunizations, which are not wanted.</div><div class="de">Dieses Element
+ * enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten
+ * Impfungen.</div>
  */
 public class Immunization {
 
 	private final org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
 
 	/**
-	 * Erzeugt ein Objekt welches eine Impfung repräsentiert. Dieser Konstruktor
-	 * wird verwendet, wenn ein leeres Object initialisiert werden soll
+	 * <div class="en">Creates an object, which represents an
+	 * immunization.</div><div class="de">Erzeugt ein Objekt welches eine Impfung
+	 * repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres Object
+	 * initialisiert werden soll</div>
 	 */
 	public Immunization() {
 		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
@@ -98,17 +102,20 @@ public class Immunization {
 	}
 
 	/**
-	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
-	 * nicht erwünschten Impfungen.
+	 * <div class="en">This element contains the administered immunizations and
+	 * the immunizations, which are not wanted.</div><div class="de">Dieses
+	 * Element enthält die verabreichten Impfungen und die ausdrücklich nicht
+	 * erwünschten Impfungen.</div>
 	 * 
 	 * @param consumable
-	 *          Impfstoff
+	 *          <div class="en">vaccine</div><div class="de">Impfstoff</div>
+	 * 
 	 * @param author
-	 *          Die eintragende Person <br>
-	 *          <div class="de">Autor der Impfung</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Author of the immunization</div> <div
+	 *          class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *          Datum der Impfung
+	 *          <div class="en">date of the immunization</div><div
+	 *          class="de">Datum der Impfung</div>
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
 		this();
@@ -121,21 +128,26 @@ public class Immunization {
 	}
 
 	/**
-	 * Dieses Element enthält die verabreichten Impfungen und die ausdrücklich
-	 * nicht erwünschten Impfungen.
+	 * <div class="en">This element contains the administered immunizations and
+	 * the immunizations, which are not wanted.</div><div class="de">Dieses
+	 * Element enthält die verabreichten Impfungen und die ausdrücklich nicht
+	 * erwünschten Impfungen.</div>
 	 * 
 	 * @param consumable
-	 *          Impfstoff
+	 *          <div class="en">vaccine</div><div class="de">Impfstoff</div>
+	 * 
 	 * @param author
-	 *          Die eintragende Person <br>
-	 *          <div class="de">Autor der Impfung</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Author of the immunization</div> <div
+	 *          class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *          Datum der Impfung
+	 *          <div class="en">date of the immunization</div><div
+	 *          class="de">Datum der Impfung</div>
 	 * @param route
-	 *          Einnahmeart (darf null sein)
+	 *          <div class="en">route of administration (can be null></div><div
+	 *          class="de">Einnahmeart (darf null sein)</div>
+	 * 
 	 * @param doseQuantity
-	 *          in milliliters (e.g. 0.5) (darf null sein)
+	 *          in milliliters (e.g. 0.5) (can be null)
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt,
 			RouteOfAdministration route, Double doseQuantity) {

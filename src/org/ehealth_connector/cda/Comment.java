@@ -21,8 +21,8 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
- * <div class="de">Die Klasse für Kommentar-Objekte</div> <div class="fr"></div>
- * <div class="it"></div>
+ * <div class="en">Class for Comments</div> <div class="de">Die Klasse für
+ * Kommentar-Objekte</div> <div class="fr"></div> <div class="it"></div>
  */
 public class Comment {
 
@@ -41,8 +41,8 @@ public class Comment {
 	 * 
 	 * @param comment
 	 * <br>
-	 *          <div class="de">Kommentar</div> <div class="fr"> comment</div>
-	 *          <div class="it"> comment</div>
+	 *          <div class="en">Comment</div> <div class="de">Kommentar</div> <div
+	 *          class="fr"> comment</div> <div class="it"> comment</div>
 	 */
 	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		mComment = comment;
@@ -53,8 +53,8 @@ public class Comment {
 	 * 
 	 * @param text
 	 * <br>
-	 *          <div class="de"> Kommentar</div> <div class="fr"> text</div> <div
-	 *          class="it"> text</div>
+	 *          <div class="en">Comment</div> <div class="de"> Kommentar</div>
+	 *          <div class="fr"> text</div> <div class="it"> text</div>
 	 */
 	public Comment(String text) {
 		mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -62,8 +62,7 @@ public class Comment {
 	}
 
 	/**
-	 * <div class="de">Copy mdht comment.</div> <div class="fr">Copy mdht
-	 * comment.</div> <div class="it">Copy mdht comment.</div>
+	 * <div class="en">Copy mdht comment.</div>s
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. comment
 	 */
