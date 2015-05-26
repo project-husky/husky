@@ -46,12 +46,14 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
- * Dieses Element enthält den empfohlenen Impfplan für den Patienten. Zudem kann
- * zur Begründung ein Verweis auf entsprechende Guidelines angegeben werden.
- * Dieses Kapitel ist KONDITIONAL und nur dann erforderlich, wenn es sich beim
- * Dokument um die Antwort aus einem Expertensystem für Impfempfehlungen handelt
- * (Clinical Decision Support System; CDSS) oder wenn beabsichtigte aber noch
- * nicht erfolgte Impfungen dokumentiert werden.
+ * <div class="en">This element contains the recommended immunizations for the
+ * patient. It can also hold a reference to according</div> Dieses Element
+ * enthält den empfohlenen Impfplan für den Patienten. Zudem kann zur Begründung
+ * ein Verweis auf entsprechende Guidelines angegeben werden. Dieses Kapitel ist
+ * KONDITIONAL und nur dann erforderlich, wenn es sich beim Dokument um die
+ * Antwort aus einem Expertensystem für Impfempfehlungen handelt (Clinical
+ * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
+ * erfolgte Impfungen dokumentiert werden.
  */
 public class ImmunizationRecommendation {
 

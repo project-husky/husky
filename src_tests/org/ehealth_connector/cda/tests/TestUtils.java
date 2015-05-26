@@ -306,6 +306,8 @@ public class TestUtils {
 	public Organization createOrganization1() {
 		Organization o = new Organization(ts1, numS1);
 		o.setTelecoms(telecoms1);
+		telecoms1.addEMail("testMail", AddressUse.BUSINESS);
+		telecoms1.addPhone(numS1, AddressUse.PRIVATE);
 		return o;
 	}
 

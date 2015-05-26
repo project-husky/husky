@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
@@ -258,10 +259,17 @@ public class Util {
 		ON on = DatatypesFactory.eINSTANCE.createON();
 		on.addText(organization.getName());
 		mdhtCustOrg.setName(on);
+
 		// take the first address and set it as CustodianAdress
-		mdhtCustOrg.setAddr(organization.copyMdhtOrganization().getAddrs().get(0));
+		if (organization.getMdhtOrganization().getAddrs().size() > 0) {
+			mdhtCustOrg.setAddr(EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+		}
+
 		// take the first telecom and set it as CustodianTelecom
-		mdhtCustOrg.setTelecom(organization.copyMdhtOrganization().getTelecoms().get(0));
+		if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
+			mdhtCustOrg.setTelecom(EcoreUtil
+					.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
+		}
 		return mdhtCustOrg;
 	}
 

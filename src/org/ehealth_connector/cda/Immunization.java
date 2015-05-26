@@ -310,7 +310,7 @@ public class Immunization {
 	}
 
 	/**
-	 * <div class="de">Gets the information, if an immunization is intended, but
+	 * <div class="en">Gets the information, if an immunization is intended, but
 	 * not performed, yet. (moodCode:INT).</div> <div class="de">Liefert die
 	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
 	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
@@ -481,7 +481,7 @@ public class Immunization {
 	}
 
 	/**
-	 * <div class="de">Sets the information that an immunization is intended, but
+	 * <div class="en">Sets the information that an immunization is intended, but
 	 * not performed, yet. (moodCode:INT).</div> <div class="de">Setzt, die
 	 * Information, dass eine Impfung beabsichtigt, aber noch nicht erfolgt ist
 	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
