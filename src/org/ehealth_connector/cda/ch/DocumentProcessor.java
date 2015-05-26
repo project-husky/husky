@@ -33,26 +33,37 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 public class DocumentProcessor {
 
 	/**
-	 * Gibt das Dokument als Objekt zurück
+	 * <div class="en">Loads a CdaChVacd document from a given InputStream.</div>
+	 * <div class="de">Lädt ein CdaChVacd aus einem InputStream</div> <div
+	 * class="fr"></div> <div class="it"></div> <br/>
 	 * 
-	 * @return das ClinicalDocument
-	 */
-	public static ClinicalDocument getDocument() {
-		return null;
-	}
-
-	/**
-	 * Lädt ein Dokument in Form einer XML-Datei aus dem Dateisystem.
+	 * @param input
+	 *          <li><div class="en">InputStream of a CDA-CH-VACD XML
+	 *          structure</div> <div class="de">InputStream einer CDA-CH-VACD
+	 *          XML-Struktur </div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param filePath
-	 *          das File Object
-	 * @return den DocumentProcessor
+	 *          path to the XML file
 	 * @throws Exception
 	 *           the exception
 	 */
 	public static CdaChVacd loadFromFile(String filePath) throws Exception {
 		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument clinicalDocument = CDAUtil.load(inputstream);
+		return loadFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChVacd document from a given InputStream.</div>
+	 * <div class="de">Lädt ein CdaChVacd aus einem InputStream</div> <div
+	 * class="fr"></div> <div class="it"></div> <br/>
+	 * 
+	 * @param input
+	 *          <li><div class="en">InputStream of a CDA-CH-VACD XML
+	 *          structure</div> <div class="de">InputStream einer CDA-CH-VACD
+	 *          XML-Struktur </div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public static CdaChVacd loadFromStream(InputStream input) throws Exception {
+		ClinicalDocument clinicalDocument = CDAUtil.load(input);
 
 		// Implicit initialization
 		// CDAUtil.loadPackages();
@@ -69,6 +80,7 @@ public class DocumentProcessor {
 			evacdocMdht = (VACD) clinicalDocument;
 		} else {
 			System.out.println("clinical document is NOT an instance of eVACDOC");
+			return null;
 		}
 
 		CdaChVacd evacdoc = new CdaChVacd(evacdocMdht);
