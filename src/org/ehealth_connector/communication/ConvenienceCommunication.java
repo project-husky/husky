@@ -19,7 +19,7 @@ package org.ehealth_connector.communication;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
@@ -30,6 +30,8 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
+import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
@@ -204,12 +206,17 @@ public class ConvenienceCommunication {
 	 */
 	public XDSResponseType submit() throws Exception {
 		// generate missing information for all documents
-		for (XDSDocument xdsDoc : txnData.getDocList()) {
+
+		SubmissionSetType subSet = txnData.getSubmissionSet();
+		for (int i = 0; i < txnData.getDocList().size(); ++i) {
+			XDSDocument xdsDoc = txnData.getDocList().get(i);
 			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
+			if (i == 0) {
+				setSubmissionContentTypeCode(subSet, xdsDoc);
+			}
 		}
 
 		// Create SubmissionSet
-		SubmissionSetType subSet = txnData.getSubmissionSet();
 		subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
 
 		// set submission set source id
@@ -224,14 +231,36 @@ public class ConvenienceCommunication {
 		CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
 		subSet.setPatientId(EcoreUtil.copy(testCx));
 
-		// set ContentTypeCode
-		subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1", "34133-9",
-				"Summary of Episode Note", null));
-
 		// txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
 		System.out.println("XDSResponseType: " + xdsr);
 		return xdsr;
+	}
+
+	/**
+	 * Sets the submission content type code from the typeCode of the document
+	 * TODO: verify that this it the right approach
+	 * 
+	 * @param subSet
+	 *          the submisson where the contentTypeCode will beset
+	 * @param xdsDoc
+	 *          the document from which the contetn
+	 */
+	private void setSubmissionContentTypeCode(SubmissionSetType subSet, XDSDocument xdsDoc) {
+		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(xdsDoc
+				.getDocumentEntryUUID()));
+		// note does not work by reference: subSet.setContentTypeCode(docMetadata.getMdhtDocumentEntryType().getTypeCode());
+		CodedMetadataType cmtDoc = docMetadata.getMdhtDocumentEntryType().getTypeCode();
+		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		if (cmtDoc.getDisplayName() != null && cmtDoc.getDisplayName().getLocalizedString() != null
+				&& cmtDoc.getDisplayName().getLocalizedString().size() > 0) {
+			cmt.setDisplayName(XdsUtil.createInternationalString(cmtDoc.getDisplayName()
+					.getLocalizedString().get(0).toString()));
+		}
+		cmt.setCode(cmtDoc.getCode());
+		cmt.setSchemeName(cmtDoc.getSchemeName());
+		cmt.setSchemeUUID(cmtDoc.getSchemeUUID());
+		subSet.setContentTypeCode(cmt);
 	}
 
 	/**
@@ -296,19 +325,10 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 *           the exception
 	 */
-	@SuppressWarnings("unchecked")
 	private void generateMissingDocEntryAttributes(String docEntryUuid) throws Exception {
 
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
 		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
-
-		// Automatically create the formatCode of the Document according to the
-		// DocumentDescriptor
-		if (DocumentDescriptor.PDF.equals(desc)) {
-			Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
-					"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
-			docMetadata.getMdhtDocumentEntryType().setFormatCode(XdsUtil.convertCode(formatCode));
-		}
 
 		// Derive MimeType from DocumentDescriptor
 		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
@@ -322,9 +342,7 @@ public class ConvenienceCommunication {
 
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType().getConfidentialityCode() == null) {
-			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
-			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
-					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25", "N", null, null));
+			docMetadata.addConfidentialityCode(Confidentiality.NORMAL);
 		}
 
 		// Generate Creation Time with the current time
@@ -332,11 +350,5 @@ public class ConvenienceCommunication {
 			docMetadata.setCreationTime(DateUtil.nowAsDate());
 		}
 
-		// Use the TypeCode for ClassCode
-		if (docMetadata.getMdhtDocumentEntryType().getClassCode() == null
-				&& docMetadata.getMdhtDocumentEntryType().getTypeCode() != null) {
-			docMetadata.getMdhtDocumentEntryType().setClassCode(
-					EcoreUtil.copy(docMetadata.getMdhtDocumentEntryType().getTypeCode()));
-		}
 	}
 }
