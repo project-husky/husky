@@ -37,11 +37,6 @@ public class DocumentProcessor {
 	 * <div class="de">Lädt ein CdaChVacd aus einem InputStream</div> <div
 	 * class="fr"></div> <div class="it"></div> <br/>
 	 * 
-	 * @param input
-	 *          <li><div class="en">InputStream of a CDA-CH-VACD XML
-	 *          structure</div> <div class="de">InputStream einer CDA-CH-VACD
-	 *          XML-Struktur </div> <div class="fr"></div> <div class="it"></div>
-	 * 
 	 * @param filePath
 	 *          path to the XML file
 	 * @throws Exception

@@ -40,8 +40,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
- * Medzinisches Problem in strukturierter Angabe (z.B. Symptom, Beschwerde,
- * Diagnose, etc.)
+ * <div class="en">Medical problem in a structured form (e.g. symptom, concern,
+ * diagnosis)</div><div class="de">Medzinisches Problem in strukturierter Angabe
+ * (z.B. Symptom, Beschwerde, Diagnose, etc.)</div>
  */
 public class Problem {
 
@@ -59,14 +60,21 @@ public class Problem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn ein leeres Object initialisiert werden soll oder codiert
-	 * werden soll, dass der Patient keine aktuellen Probleme hat.
+	 * <div class="en">Creates an object, which represents a medical problem. This
+	 * constructor is used, when an empty object should be initialized or it
+	 * should be expressed that the patient has no current problems.</div><div
+	 * class="de">Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses
+	 * Objekt kann einem ProblemConcernEntry hinzugefügt werden. Dieser
+	 * Konstruktor wird verwendet, wenn ein leeres Object initialisiert werden
+	 * soll oder codiert werden soll, dass der Patient keine aktuellen Probleme
+	 * hat.</div>
+	 * 
 	 * 
 	 * @param currentProblems
-	 *          true: Erstellung eines leeren Objekts, false: Der Patient hat
-	 *          keine aktuellen Probleme.
+	 *          <div class="en">true, if an empty object should be initialized.
+	 *          false, if the patient has no current problems</div><div
+	 *          class="de">true: Erstellung eines leeren Objekts, false: Der
+	 *          Patient hat keine aktuellen Probleme.</div>
 	 */
 	public Problem(boolean currentProblems) {
 		this();
@@ -81,28 +89,31 @@ public class Problem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations-
-	 * oder Expositionsrisiko) besteht und dieses als Freitext angegeben wird.
+	 * <div class="en">Creates an object, which represents a medical problem. This
+	 * constructor is used, if it should be expressed that the patient has another
+	 * problem (not a risc of exposure or risc of complication), which is
+	 * expressed as free text.</div><div class="de">Erzeugt ein Objekt welches ein
+	 * Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
+	 * Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko)
+	 * besteht und dieses als Freitext angegeben wird.</div>
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de">Code des Problems (z.B. SNOMED Code für eine
-	 *          Diagnose)</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">code of the problem (e.g. SNOMED Code for
+	 *          diagnosis)</div><div class="de">Code des Problems (z.B. SNOMED
+	 *          Code für eine Diagnose)</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param value
-	 * <br>
-	 *          <div class="de">Beschreibung des Problems (z.B.
+	 *          <div class="en">description (e.g. inflammation of the
+	 *          lungs)</div><div class="de">Beschreibung des Problems (z.B.
 	 *          Lungenentzündung)</div> <div class="fr"></div> <div
 	 *          class="it"></div>
 	 * @param start
-	 * <br>
-	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">start</div><div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param end
-	 * <br>
-	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">end</div><div class="de">Ende des Problems</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public Problem(Code code, String value, Date start, Date end) {
 		this();
@@ -116,28 +127,31 @@ public class Problem {
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein weiteres Problem (kein Komplikations-
-	 * oder Expositionsrisiko) besteht und dieses codiert angegeben wird.
+	 * <div class="en">Creates an object, which represents a medical problem. This
+	 * constructor is used, if it should be expressed that the patient has another
+	 * problem (not a risc of exposure or risc of complication), which is
+	 * expressed as free text.</div><div class="de">Erzeugt ein Objekt welches ein
+	 * Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
+	 * Patienten ein weiteres Problem (kein Komplikations- oder Expositionsrisiko)
+	 * besteht und dieses codiert angegeben wird.</div>
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de">Code des Problems (z.B. SNOMED Code für eine
-	 *          Diagnose)</div> <div class="fr"></div> <div class="it"></div>
-	 * @param value
-	 * <br>
-	 *          <div class="de">Wert des Problems (z.B. ICD Code für
-	 *          Lungenentzündung)</div> <div class="fr"></div> <div
+	 *          <div class="en">code of the kind of problem (e.g. SNOMED Code for
+	 *          diagnosis)</div><div class="de">Code der Art des Problems (z.B.
+	 *          SNOMED Code für eine Diagnose)</div> <div class="fr"></div> <div
 	 *          class="it"></div>
+	 * @param value
+	 *          <div class="en">code for the problem itself (e.g. inflammation of
+	 *          the lungs)</div><div class="de">Code zur Beschreibung des
+	 *          eigentlichen Problems (z.B. Lungenentzündung)</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 * @param start
-	 * <br>
-	 *          <div class="de">Beginn des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">start</div><div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param end
-	 * <br>
-	 *          <div class="de">Ende des Problems</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">end</div><div class="de">Ende des Problems</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public Problem(Code code, Value value, Date start, Date end) {
 		this();
@@ -154,49 +168,55 @@ public class Problem {
 	 * Instantiates a new problem entry.
 	 * 
 	 * @param observation
-	 * <br>
-	 *          <div class="de"> observation</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="en">observation</div><div class="de">Beobachtung</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public Problem(Observation observation) {
 		mProblemEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry) observation;
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein Komplikationsrisiko besteht.
+	 * <div class="en">Creates an object, which represents a medical problem. This
+	 * constructor is used, if a risc of complication or a risc of exposure exists
+	 * for this patient</div><div class="de">Erzeugt ein Objekt welches ein
+	 * Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
+	 * Patienten ein Komplikationsrisiko besteht.</div>
 	 * 
 	 * @param risc
-	 *          Komplikationsrisiko
+	 *          <div class="en">risc of complication</div><div
+	 *          class="de">Komplikationsrisiko</div>
+	 * 
 	 * @param start
-	 * <br>
-	 *          <div class="de"> start</div> <div class="fr"> start</div> <div
-	 *          class="it"> start</div>
+	 *          <div class="en">start</div><div class="de">start</div> <div
+	 *          class="fr"> start</div> <div class="it"> start</div>
 	 * @param end
-	 * <br>
-	 *          <div class="de"> end</div> <div class="fr"> end</div> <div
-	 *          class="it"> end</div>
+	 *          <div class="en">end</div><div class="de"> ende</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public Problem(RiscOfComplications risc, Date start, Date end) {
 		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches ein Problem repräsentiert. Dieses Objekt kann
-	 * einem ProblemConcernEntry hinzugefügt werden. Dieser Konstruktor wird
-	 * verwendet, wenn für den Patienten ein Expositionsrisiko besteht.
+	 * <div class="en">Creates an object, which represents a medical problem. This
+	 * constructor is used, if a risc of complication or a risc of exposure exists
+	 * for this patient</div><div class="de">Erzeugt ein Objekt welches ein
+	 * Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
+	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
+	 * Patienten ein Expositionsrisiko besteht.</div>
+	 * 
 	 * 
 	 * @param risc
-	 *          Expositionsrisiko
+	 *          <div class="en">risc of exposure</div><div
+	 *          class="de">Expositionsrisiko</div>
+	 * 
 	 * @param start
-	 * <br>
-	 *          <div class="de"> start</div> <div class="fr"> start</div> <div
-	 *          class="it"> start</div>
+	 *          <div class="en">start</div><div class="de"> start</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 * @param end
-	 * <br>
-	 *          <div class="de"> end</div> <div class="fr"> end</div> <div
-	 *          class="it"> end</div>
+	 *          <div class="en">end</div><div class="de">ende</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public Problem(RiscOfExposure risc, Date start, Date end) {
 		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
@@ -214,6 +234,10 @@ public class Problem {
 	}
 
 	/**
+	 * <div class="en">In Switzerland the following code systems are allowed to
+	 * express further problem concerns: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
+	 * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
+	 * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96</div>
 	 * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der
 	 * Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen: CHOP
 	 * 2.16.756.5.30.1.126.3.1 ICD-10 2.16.756.5.30.1.126.3.2 ICPC-2
@@ -230,12 +254,16 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Für die Angabe weiterer Leiden des Patienten sind in der
-	 * Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen: CHOP
-	 * 2.16.756.5.30.1.126.3.1 ICD-10 2.16.756.5.30.1.126.3.2 ICPC-2
-	 * 2.16.840.1.113883.6.139 VVK-EDI 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED
-	 * CT 2.16.840.1.113883.6.96 </div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">In Switzerland the following code systems are allowed to
+	 * express further problem concerns: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
+	 * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
+	 * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT
+	 * 2.16.840.1.113883.6.96</div><div class="de">Für die Angabe weiterer Leiden
+	 * des Patienten sind in der Schweiz folgende Codesysteme (oder Unterknoten
+	 * davon) zugelassen: CHOP 2.16.756.5.30.1.126.3.1 ICD-10
+	 * 2.16.756.5.30.1.126.3.2 ICPC-2 2.16.840.1.113883.6.139 VVK-EDI
+	 * 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED CT 2.16.840.1.113883.6.96 </div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param problemValue
 	 *          the new value
@@ -251,8 +279,9 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Fügt dem Wert (Value) einen Text hinzu</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds a text to the value</div> <div class="de">Fügt dem
+	 * Wert (Value) einen Text hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param text
 	 * <br>
@@ -267,7 +296,7 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Copy mdht problem entry.</div> <div class="fr"></div> <div
+	 * <div class="en">Copy mdht problem entry.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem entry
@@ -277,10 +306,11 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Gibt den Code des Problems zurück.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt den
+	 * Code des Problems zurück.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
-	 * @return das codedProblem Objekt
+	 * @return the codedProblem object
 	 */
 	public org.ehealth_connector.common.Code getCode() {
 		org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
@@ -289,10 +319,11 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Gibt das Zeitpunkt zurück, seitdem das Problems beendet
-	 * ist</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the point in time, since the problem is
+	 * terminated</div> <div class="de">Gibt das Zeitpunkt zurück, seitdem das
+	 * Problems beendet ist</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return das endOfProblem Objekt
+	 * @return the endOfProblem Object
 	 */
 	public String getEndDate() {
 		if (mProblemEntry.getEffectiveTime() != null) {
@@ -304,8 +335,10 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte
-	 * bekannte) ID für das Problem. Ist keine ID vorhanden, wird null
+	 * <div class="en">gets the (first) internal id (e.g. known from a medical
+	 * record) for the problem. If no id is known, then null will be
+	 * returned.</div> <div class="de">Liefert die (erste) interne (z.B. aus der
+	 * Krankenakte bekannte) ID für das Problem. Ist keine ID vorhanden, wird null
 	 * zurückgegeben.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the new id
@@ -325,20 +358,22 @@ public class Problem {
 	}
 
 	/**
+	 * <div class="en">gets the information, if the problem is not occured</div>
 	 * <div class="de">Gibt zurück, ob das Problem nicht aufgetreten ist.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return das problemNotOccured Objekt
+	 * @return the problemNotOccured Object
 	 */
 	public boolean getProblemNotOccured() {
 		return mProblemEntry.getNegationInd();
 	}
 
 	/**
-	 * <div class="de">Gibt das Zeitpunkt zurück, seit das Problems angefangen
+	 * <div class="en">gets the point in time, when the problem started</div> <div
+	 * class="de">Gibt den Zeitpunkt zurück, seit das Problems angefangen
 	 * hat</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return das startOfProblem Objekt
+	 * @return the startOfProblem Object
 	 */
 	public String getStartDate() {
 		if (mProblemEntry.getEffectiveTime() != null) {
@@ -360,7 +395,7 @@ public class Problem {
 	}
 
 	/**
-	 * Get a list of all problem values. Each Value may be a coded or uncoded
+	 * Gets a list of all problem values. Each Value may be a coded or uncoded
 	 * String.
 	 * 
 	 * @return all problem values as ArrayList.
@@ -378,7 +413,7 @@ public class Problem {
 	 * Sets the code.
 	 * 
 	 * @param codedProblem
-	 *          das codedProblem Objekt welches gesetzt wird
+	 *          the codedProblem Object which will be set
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		mProblemEntry.setCode(codedProblem.getCD());
@@ -395,11 +430,12 @@ public class Problem {
 	}
 
 	/**
+	 * <div class="en">sets the point in time, when the problem had ended</div>
 	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet ist</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param endOfProblem
-	 *          das endOfProblem Objekt welches gesetzt wird
+	 *          the endOfProblem Object which will be set
 	 */
 	public void setEndDate(Date endOfProblem) {
 		try {
@@ -410,9 +446,11 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">Setzt eine interne (z.B. aus der Krankenakte bekannte) ID
-	 * für das Problem. Wird null angegeben, dann wird eine ID generiert.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en"><div class="en">gets the (first) internal id (e.g. known
+	 * from a medical record) for the problem. If null is provided, a new id will
+	 * be generated.</div></div> <div class="de">Setzt eine interne (z.B. aus der
+	 * Krankenakte bekannte) ID für das Problem. Wird null angegeben, dann wird
+	 * eine ID generiert.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param id
 	 *          the new id
@@ -423,22 +461,25 @@ public class Problem {
 	}
 
 	/**
-	 * <div class="de">true, wenn das Problem nicht aufgetreten ist, false sonst
-	 * (negationInd)</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">true, if the problem is not occured (negationInd), false
+	 * otherwise</div> <div class="de">true, wenn das Problem nicht aufgetreten
+	 * ist, false sonst (negationInd)</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param problemNotOccured
-	 *          das problemNotOccured Objekt welches gesetzt wird
+	 *          the problemNotOccured Object which will be set
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
 		mProblemEntry.setNegationInd(problemNotOccured);
 	}
 
 	/**
-	 * <div class="de">Setzt den Zeitpunkt, an dem das Problems angefangen
-	 * hat</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">point in time, when the problem started</div> <div
+	 * class="de">Setzt den Zeitpunkt, an dem das Problems angefangen hat</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfProblem
-	 *          das startOfProblem Objekt welches gesetzt wird
+	 *          the startOfProblem Object which will be set
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (mProblemEntry.getEffectiveTime() == null) {

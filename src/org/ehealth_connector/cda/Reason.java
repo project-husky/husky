@@ -18,11 +18,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
+/**
+ * Represents a Reason
+ */
 public class Reason {
 
 	private final CDACHMSETBodyImmunizationL3Reason mReason;
 	private CDACHBodyExtRef mExtRef = null;
 
+	/**
+	 * Standard constructor
+	 */
 	public Reason() {
 		mReason = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason().init();
 
@@ -36,6 +42,12 @@ public class Reason {
 		mReason.setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
+	/**
+	 * Instantiates a Reason with a given mdht reason object
+	 * 
+	 * @param reason
+	 *          the reason object
+	 */
 	public Reason(CDACHMSETBodyImmunizationL3Reason reason) {
 		mReason = reason;
 		// Check if there are references to an extern document. If so,
@@ -48,12 +60,28 @@ public class Reason {
 			}
 	}
 
+	/**
+	 * Instantiates a Reason object with a code
+	 * 
+	 * @param code
+	 *          the code
+	 */
 	public Reason(Code code) {
 		this();
 		setCode(code);
 		mReason.setCode(code.getCD());
 	}
 
+	/**
+	 * Instantiates a Reason with a given code, a reference and an ID
+	 * 
+	 * @param code
+	 *          the code
+	 * @param reference
+	 *          the reference
+	 * @param id
+	 *          the id. If null, an ID will be generated
+	 */
 	public Reason(Code code, URL reference, String id) {
 		this(code);
 		initExtRef();
@@ -61,26 +89,56 @@ public class Reason {
 		setReferenceId(id);
 	}
 
+	/**
+	 * Gets a copy of the mdht CDACHBodyExtRef object
+	 * 
+	 * @return the CDACHBodyExtRef
+	 */
 	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
 		return EcoreUtil.copy(mExtRef);
 	}
 
+	/**
+	 * Gets a copy of the mdht CDACHMSETBodyImmunizationL3Reason
+	 * 
+	 * @return the CDACHMSETBodyImmunizationL3Reason
+	 */
 	public CDACHMSETBodyImmunizationL3Reason copyMdhtCDACHMSETBodyImmunizationL3Reason() {
 		return EcoreUtil.copy(mReason);
 	}
 
+	/**
+	 * Gets the code
+	 * 
+	 * @return the code
+	 */
 	public Code getCode() {
 		return new Code(mReason.getCode());
 	}
 
+	/**
+	 * Gets the CDACHBodyExtRef
+	 * 
+	 * @return the CDACHBodyExtRef
+	 */
 	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
 		return mExtRef;
 	}
 
+	/**
+	 * Gets the CDACHMSETBodyImmunizationL3Reason
+	 * 
+	 * @return the CDACHMSETBodyImmunizationL3Reason
+	 */
 	public CDACHMSETBodyImmunizationL3Reason getMdhtCDACHMSETBodyImmunizationL3Reason() {
 		return mReason;
 	}
 
+	/**
+	 * Gets the Reference to an external object as string
+	 * 
+	 * @return the reference
+	 */
 	public String getReference() {
 		if (mExtRef != null && mExtRef.getExternalDocument() != null
 				&& mExtRef.getExternalDocument().getText() != null) {
@@ -89,6 +147,11 @@ public class Reason {
 			return null;
 	}
 
+	/**
+	 * Gets the id of the reference as string
+	 * 
+	 * @return the reference id
+	 */
 	public String getReferenceId() {
 		if (mExtRef != null && mExtRef.getExternalDocument() != null
 				&& mExtRef.getExternalDocument().getText() != null
@@ -118,6 +181,12 @@ public class Reason {
 		mExtRef.getExternalDocument().setText(Util.createReference(reference.toString()));
 	}
 
+	/**
+	 * Sets the reference id
+	 * 
+	 * @param id
+	 *          the if of the reference (if null, an id will be generated)
+	 */
 	public void setReferenceId(String id) {
 		if (mExtRef == null) {
 			initExtRef();

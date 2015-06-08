@@ -27,8 +27,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de">Ein gesundheitliches Leiden</div> <div class="fr">Une
- * souffrance de la santé</div>.
+ * <div class="en">A medical concern</div> <div class="de">Ein gesundheitliches
+ * Leiden</div> <div class="fr">Une souffrance de la santé</div>.
  */
 public class ProblemConcern extends Concern {
 
@@ -44,15 +44,17 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
+	 * <div class="en">Creates a medical concern object</div> <div
+	 * class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
 	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param problemConcernEntry
-	 *          <div class="de">Vorbestehendes Objekt, das geklont werden
-	 *          soll</div>
+	 *          <div class="en">Medical problem concern object, which should be
+	 *          cloned</div> <div class="de">Vorbestehendes Objekt, das geklont
+	 *          werden soll</div>
 	 * 
 	 *          <div class="fr">Objet préexistante à cloner</div>
 	 * 
@@ -63,23 +65,27 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
+	 * <div class="en">Creates a medical concern object</div> <div
+	 * class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
 	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">the concern as free text</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de"> problem entry</div> <div class="fr"> problem
+	 *          <div class="en">problem entry</div> <div class="fr"> problem
 	 *          entry</div> <div class="it"> problem entry</div>
 	 * @param concernStatus
-	 *          <div class="de">Der Status Code des Leidens
-	 *          (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *          statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">Status of the concern
+	 *          (active/supended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 */
 	public ProblemConcern(String concern, Problem problemEntry,
 			org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode concernStatus) {
@@ -93,30 +99,32 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
+	 * <div class="en">Creates a medical concern object</div> <div
+	 * class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
 	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
 	 * 
 	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">the concern as free text</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de"></div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="en">problem entry object</div> <div class="de"></div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param concernStatus
-	 *          <div class="de">Der Status Code des Leidens
-	 *          (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *          statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">status code of the concern
+	 *          (active/suspended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 * @param start
-	 * <br>
-	 *          <div class="de">Beginn des Leidens</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">start of concern</div> <div class="de">Beginn des
+	 *          Leidens</div> <div class="fr"></div> <div class="it"></div>
 	 * @param end
-	 *          <div class="de">Ende des Leidens</div> <div class="fr">Le fin du
-	 *          problème</div>
+	 *          <div class="en">end of concern</div> <div class="de">Ende des
+	 *          Leidens</div> <div class="fr">Le fin du problème</div>
 	 */
 	public ProblemConcern(String concern, Problem problemEntry,
 			ProblemConcernStatusCode concernStatus, Date start, Date end) {
@@ -125,10 +133,11 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * Fügt dem Leiden ein medizinisches Problem hinzu.
+	 * <div class="en">Adds a medical problem to the medical concern</div><div
+	 * class="de">Fügt dem Leiden ein medizinisches Problem hinzu.</div>
 	 * 
 	 * @param problemEntry
-	 *          Das Problem
+	 *          <div class="en">the problem</div>
 	 */
 	public void addProblemEntry(Problem problemEntry) {
 		mProblemConcernEntry.addObservation(problemEntry.copyMdhtProblemEntry());
@@ -139,7 +148,8 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * <div class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets a copy of the mdht problem concern entry</div><div
+	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. problem concern entry
 	 */
@@ -157,7 +167,9 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * Gibt alle zu dem Leiden zugehörigen medizinischen Probleme zurück
+	 * <div class="en">Gets all medical problems related to this problem
+	 * conern</div><div class="de">Gibt alle zu dem Leiden zugehörigen
+	 * medizinischen Probleme zurück</div>
 	 * 
 	 * @return the problem entries
 	 */
@@ -172,9 +184,10 @@ public class ProblemConcern extends Concern {
 	}
 
 	/**
-	 * Gibt das (erste) medizinische Problem zu dem Leiden zurück.
+	 * <div class="en">Gets the first medical problem related to this medical
+	 * concern</div> Gibt das (erste) medizinische Problem zu dem Leiden zurück.
 	 * 
-	 * @return das problemConcern Objekt
+	 * @return the medical problem
 	 */
 	public Problem getProblemEntry() {
 		Problem problemEntry = new Problem(copyMdhtProblemConcernEntry().getObservations().get(0));

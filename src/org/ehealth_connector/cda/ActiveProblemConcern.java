@@ -51,9 +51,8 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param problemConcernEntry
-	 *          <div class="de">Vorbestehendes Objekt, das geklont werden
-	 *          soll</div>
-	 * 
+	 *          <div class="en">existing object, which should be cloned</div> <div
+	 *          class="de">Vorbestehendes Objekt, das geklont werden soll</div>
 	 *          <div class="fr">Objet préexistante à cloner</div>
 	 * 
 	 */
@@ -72,22 +71,23 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">the concern as free text</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param begin
-	 *          <div class="de">Beginn des Leidens</div> <div class="fr">Le début
-	 *          du problème</div>
+	 *          <div class="en">start of concern</div><div class="de">Beginn des
+	 *          Leidens</div> <div class="fr">Le début du problème</div>
 	 * @param end
-	 *          <div class="de">Ende des Leidens</div> <div class="fr">Le fin du
-	 *          problème</div>
+	 *          <div class="en">end of concern</div><div class="de">Ende des
+	 *          Leidens</div> <div class="fr">Le fin du problème</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de">Das medizinische Problem</div> <div class="fr">
-	 *          problem entry</div> <div class="it"> problem entry</div>
+	 *          <div class="en">the medical problem</div> <div class="de">Das
+	 *          medizinische Problem</div> <div class="fr"> problem entry</div>
+	 *          <div class="it"> problem entry</div>
 	 * @param problemConcernStatus
-	 * <br>
-	 *          <div class="de">Status des Leidens</div> <div class="fr"> problem
-	 *          concern status</div> <div class="it"> problem concern status</div>
+	 *          <div class="en">Status of the concern</div> <div class="de">Status
+	 *          des Leidens</div> <div class="fr"> problem concern status</div>
+	 *          <div class="it"> problem concern status</div>
 	 */
 	public ActiveProblemConcern(String concern, Date begin, Date end, Problem problemEntry,
 			ProblemConcernStatusCode problemConcernStatus) {
@@ -98,21 +98,20 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 * Instantiates a new active problem concern entry.
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div> <div class="it">
-	 *          string</div>
+	 *          <div class="en">the concern as free text</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div> <div class="it"> string</div>
 	 * @param date
-	 * <br>
-	 *          <div class="de"> date</div> <div class="fr"> date</div> <div
+	 *          <div class="en">date</div> <div class="fr">date</div> <div
 	 *          class="it"> date</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de">Das medizinische Problem</div> <div class="fr">
-	 *          problem entry</div> <div class="it"> problem entry</div>
+	 *          <div class="en">the medical problem</div><div class="de">Das
+	 *          medizinische Problem</div> <div class="fr"> problem entry</div>
+	 *          <div class="it"> problem entry</div>
 	 * @param problemStatusCode
-	 * <br>
-	 *          <div class="de">Status des Leidens</div> <div class="fr"> problem
-	 *          status code</div> <div class="it"> problem status code</div>
+	 *          <div class="en">status of the concern</div> <div class="de">Status
+	 *          des Leidens</div> <div class="fr"> problem status code</div> <div
+	 *          class="it"> problem status code</div>
 	 */
 	public ActiveProblemConcern(String concern, Date date, Problem problemEntry,
 			ProblemConcernStatusCode problemStatusCode) {
@@ -129,16 +128,17 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 * ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *          <div class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
-	 *          class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">the concern as free text</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div> <div class="it"> string</div>
 	 * @param problemEntry
-	 * <br>
-	 *          <div class="de">Das medizinische Problem</div> <div class="fr">
-	 *          problem entry</div> <div class="it"> problem entry</div>
+	 *          <div class="en">the medical problem</div><div class="de">Das
+	 *          medizinische Problem</div> <div class="fr"> problem entry</div>
+	 *          <div class="it"> problem entry</div>
 	 * @param concernStatus
-	 *          <div class="de">Der Status Code des Leidens
-	 *          (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *          statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">status of the concern</div> <div class="de">Status
+	 *          des Leidens</div> <div class="fr"> problem status code</div> <div
+	 *          class="it"> problem status code</div>
 	 */
 	public ActiveProblemConcern(String concern, Problem problemEntry,
 			ProblemConcernStatusCode concernStatus) {

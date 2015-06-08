@@ -30,9 +30,11 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActMoodDocumentObservation;
 
 /**
- * <div class="de">Bei Frauen KANN mit diesem Element die strukturierte Angabe
- * der Anamnese zu einer Schwangerschaft erfolgen.</div> <div class="fr">Class
- * PregnancyHistory.</div> <div class="it">Class PregnancyHistory.</div>
+ * <div class="en">This element CAN be used to give information about
+ * pregnancies</div> <div class="de">Bei Frauen KANN mit diesem Element die
+ * strukturierte Angabe der Anamnese zu einer Schwangerschaft erfolgen.</div>
+ * <div class="fr">Class PregnancyHistory.</div> <div class="it">Class
+ * PregnancyHistory.</div>
  */
 public class PregnancyHistory {
 
@@ -55,9 +57,9 @@ public class PregnancyHistory {
 	 * Instantiates a new pregnancy.
 	 * 
 	 * @param estimatedBirthDate
-	 * <br>
-	 *          <div class="de">Errechneter Geburtstermin</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="en">calculated due date</div> <div
+	 *          class="de">Errechneter Geburtstermin</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		this();
@@ -68,8 +70,8 @@ public class PregnancyHistory {
 	 * Instantiates a new pregnancy.
 	 * 
 	 * @param pregnancy
-	 * <br>
-	 *          <div class="de"> pregnancy</div> <div class="fr"> pregnancy</div>
+	 *          <div class="en">pregnancy</div> <div
+	 *          class="de">Schwangerschaft</div> <div class="fr"> pregnancy</div>
 	 *          <div class="it"> pregnancy</div>
 	 */
 	public PregnancyHistory(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
@@ -77,19 +79,20 @@ public class PregnancyHistory {
 	}
 
 	/**
-	 * <div class="de">Copy mdht pregnancy.</div> <div class="fr">Copy mdht
-	 * pregnancy.</div> <div class="it">Copy mdht pregnancy.</div>
+	 * <div class="en">Copy mdht pregnancy.</div> <div class="de">kopiert das MDHT
+	 * Schwangerschaftsobjekt</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.ihe. pregnancy observation
+	 * @return the org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
 		return EcoreUtil.copy(mPregnancy);
 	}
 
 	/**
-	 * Gibt den errechneten Geburtstermin zurück.
+	 * <div class="en">Gets the calculated due date</div><div class="de">Gibt den
+	 * errechneten Geburtstermin zurück.</div>
 	 * 
-	 * @return the estimated birthdate
+	 * @return the estimated birthdate (due date)
 	 */
 	public String getEstimatedBirthdate() {
 
@@ -110,7 +113,8 @@ public class PregnancyHistory {
 	}
 
 	/**
-	 * Setzt den errechneten Geburtstermin
+	 * <div class="en">sets the calculated due date</div><div class="de">Setzt den
+	 * errechneten Geburtstermin</div>
 	 * 
 	 * @param estimatedBirdDate
 	 *          the new estimated birth date

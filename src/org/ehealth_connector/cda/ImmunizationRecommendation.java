@@ -190,7 +190,7 @@ public class ImmunizationRecommendation {
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
 	 * 
-	 * @return the reference of the level 3 comment entry, which point to the
+	 * @return the reference of the level 3 comment entry, which points to the
 	 *         level 2 text
 	 */
 	public String getCommentRef() {
@@ -222,9 +222,9 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * Gibt die Dosis der Impfung zurück.
+	 * Gets the dose
 	 * 
-	 * @return Dosis Dosis der Impfung
+	 * @return the dose
 	 */
 	public Value getDosage() {
 		if (mImmunizationRecommendation.getDoseQuantity() != null) {
@@ -245,12 +245,16 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Liefert die Information, ob eine Impfung beabsichtigt, aber
-	 * noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Gets wheater an immuinzation is intented but not
+	 * administered, yet (moodCode:INT).</div> <div class="de">Liefert die
+	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
+	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return true, wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist.
-	 *         Sonst: false
+	 * @return <div class="en">true, if the immunization is intendet, but not
+	 *         administered, yet. false, otherwise</div><div class="de">true, wenn
+	 *         eine Impfung beabsichtigt, aber noch nicht erfolgt ist. Sonst:
+	 *         false</div>
+	 * 
 	 */
 	public boolean getIntended() {
 		if (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT))
@@ -269,8 +273,10 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
-	 * werden soll als String (z.B. "01.01.2015 - 01.03.1015")</div> <div
+	 * <div class="en">Gets the timespan, in which the immunization shall be
+	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div> <div
+	 * class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht werden
+	 * soll als String (z.B. "01.01.2015 - 01.03.2015")</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
@@ -282,8 +288,10 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Liefert, die Information, ob eine Impfung vorgeschlagen ist
-	 * (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the information, if an immunization is proposed
+	 * (moodCode:PRP)</div> <div class="de">Liefert, die Information, ob eine
+	 * Impfung vorgeschlagen ist (moodCode:PRP).</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @return true, wenn eine Impfung vorgeschlagen ist. Sonst: false
 	 */
@@ -296,7 +304,7 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * Gets a list of reasons for the immunizationRecommendation (typically a
-	 * reference to an external BAG document)).
+	 * reference to an external Bundesamt für Gesundheit (BAG) document)).
 	 * 
 	 * @return A ArrayList of Resons
 	 * 
@@ -312,10 +320,14 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden
-	 * soll.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the information, if an immunization should not be
+	 * administered (negationInd).</div> <div class="de">Gibt an, ob eine Impfung
+	 * nicht verabreicht werden soll (negationInd).</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
-	 * @return true, wenn die Impfung nicht verabreicht werden soll, sonst false
+	 * @return <div class="en">true, if the immunization should not be
+	 *         administered. false, otherwise.</div> <div class="de">true, wenn
+	 *         die Impfung nicht verabreicht werden soll, sonst false</div>
 	 */
 	public boolean gettShallNotBeAdministerd() {
 		return mImmunizationRecommendation.getNegationInd();
@@ -434,21 +446,26 @@ public class ImmunizationRecommendation {
 	}
 
 	/**
-	 * <div class="de">Setzt, die Information, dass eine Impfung vorgeschlagen ist
-	 * (moodCode:PRP).</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Sets the information that an immunization is proposed
+	 * (moodCode:PRP)</div> <div class="de">Setzt, die Information, dass eine
+	 * Impfung vorgeschlagen ist (moodCode:PRP).</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 */
 	public void setProposed() {
 		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
 	}
 
 	/**
-	 * <div class="de">Gibt an, ob eine Impfung nicht verabreicht werden
-	 * soll.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Sets the information, wheater an immunization shall not be
+	 * administered</div> <div class="de">Gibt an, ob eine Impfung nicht
+	 * verabreicht werden soll.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param shallNotBeAdministerd
-	 *          <div class="de">true, wenn die Impfung nicht verabreicht werden
-	 *          soll, sonst false</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="en">true, if the immunization shall not be
+	 *          administered. false, otherwise.</div> <div class="de">true, wenn
+	 *          die Impfung nicht verabreicht werden soll, sonst false</div> <div
+	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {

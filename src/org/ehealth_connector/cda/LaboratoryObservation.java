@@ -45,9 +45,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="de">Klasse Laborbefund</div> <div class="fr">Class
- * LaboratoryObservation.</div> <div class="it">Class
- * LaboratoryObservation.</div>
+ * <div class="en">Class LaboratoryObservation.</div> <div class="de">Klasse
+ * Laborbefund</div> <div class="it"></div>
  */
 public class LaboratoryObservation {
 
@@ -65,21 +64,21 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
+	 *          <div class="en">Code for a laboratory observation</div> <div
+	 *          class="de">Code für einen bezüglich einer Impfung relevanten
 	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
 	 * @param immuneProtection
-	 * <br>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div> <div
+	 *          <div class="en">true, if an immune protection exists</div> <div
+	 *          class="de">true, wenn ein Immunschutz besteht.</div> <div
 	 *          class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 * <br>
+	 *          <div class="en">date and time, when the result was known</div>
 	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param laboratory
-	 * <br>
-	 *          <div class="de">Das ausführende Labor.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the performing laboratory</div><div class="de">Das
+	 *          ausführende Labor.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 */
 	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
@@ -94,23 +93,22 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
+	 *          <div class="en">Code for a laboratory observation</div> <div
+	 *          class="de">Code für einen bezüglich einer Impfung relevanten
 	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
+	 * @param laboratory
+	 *          <div class="en">the performing laboratory</div><div class="de">Das
+	 *          ausführende Labor.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param immuneProtection
-	 * <br>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div> <div
+	 *          <div class="en">true, if an immune protection exists</div> <div
+	 *          class="de">true, wenn ein Immunschutz besteht.</div> <div
 	 *          class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 * <br>
+	 *          <div class="en">date and time, when the result was known</div>
 	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
-	 * @param laboratory
-	 * <br>
-	 *          <div class="de">Das ausführende Labor.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
 	 * @param valueCode
-	 * <br>
 	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div> <div
 	 *          class="fr"></div> <div class="it"></div>
 	 */
@@ -125,24 +123,23 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
+	 *          <div class="en">Code for a laboratory observation</div> <div
+	 *          class="de">Code für einen bezüglich einer Impfung relevanten
 	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
 	 * @param laboratory
-	 * <br>
-	 *          <div class="de">Das ausführende Labor.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the performing laboratory</div><div class="de">Das
+	 *          ausführende Labor.</div> <div class="fr"></div> <div
+	 *          class="it"></div>
 	 * @param immuneProtection
-	 * <br>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div> <div
+	 *          <div class="en">true, if an immune protection exists</div> <div
+	 *          class="de">true, wenn ein Immunschutz besteht.</div> <div
 	 *          class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 * <br>
+	 *          <div class="en">date and time, when the result was known</div>
 	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 * <br>
-	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div> <div
+	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div> <div
 	 *          class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
@@ -175,6 +172,16 @@ public class LaboratoryObservation {
 		mLaboratoryObservation.getIds().add(ii);
 	}
 
+	/**
+	 * Adds a performer
+	 * 
+	 * @param performer
+	 *          the performer
+	 * @param dateTimeOfResult
+	 *          <div class="en">date and time, when the result was known</div>
+	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
 	public void addPerformer(Performer performer, Date dateTimeOfResult) {
 		Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
@@ -182,7 +189,7 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Sets the value.
+	 * Sets the value as code.
 	 * 
 	 * @param code
 	 *          the new value
@@ -221,8 +228,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Gibt den Code der Beobachtung zurück.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the code of the observation</div> <div class="de">Gibt
+	 * den Code der Beobachtung zurück.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @return the code
 	 */
@@ -252,8 +260,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Gibt das Datum und die Uhrzeit zurück, wann die
-	 * Untersuchung durchgeführt wurde.</div> <div class="fr"></div> <div
+	 * <div class="en">Gets the date and time, when the examination was
+	 * performed</div> <div class="de">Gibt das Datum und die Uhrzeit zurück, wann
+	 * die Untersuchung durchgeführt wurde.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * @return the date time of result
@@ -268,7 +277,8 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Gibt das Datum und die Uhrzeit zurück, wann die
+	 * <div class="en">Gets the date and time of the performed examination as
+	 * String</div> <div class="de">Gibt das Datum und die Uhrzeit, wann die
 	 * Untersuchung durchgeführt wurde als String zurück (z.B.
 	 * "28.02.2015 16:00")</div> <div class="fr"></div> <div class="it"></div>
 	 * 
@@ -303,7 +313,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (Interpretation
+	 * <div class="en">Gets the (first) interpretation code, which indicates
+	 * wheater an immune protection exists (Interpretation Code)</div> <div
+	 * class="de">Gibt zurück, ob ein Impfschutz besteht (erster Interpretation
 	 * Code).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the interpretation code
@@ -317,8 +329,9 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Gibt das Labor zurück, welches das Ergebnis ermittelt
-	 * hat.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the laboratory organization, which performed the
+	 * examination</div> <div class="de">Gibt das Labor zurück, welches das
+	 * Ergebnis ermittelt hat.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the laboratory
 	 */
@@ -438,16 +451,16 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="de">Sets the laboratory.</div> <div class="fr">Sets the
+	 * <div class="en">Sets the laboratory.</div> <div class="fr">Sets the
 	 * laboratory.</div> <div class="it">Sets the laboratory.</div>
 	 * 
 	 * @param laboratory
 	 * <br>
-	 *          <div class="de"> laboratory</div> <div class="fr">
+	 *          <div class="en"> laboratory</div> <div class="fr">
 	 *          laboratory</div> <div class="it"> laboratory</div>
 	 * @param dateTimeOfResult
 	 * <br>
-	 *          <div class="de"> date time of result</div> <div class="fr"> date
+	 *          <div class="en"> date time of result</div> <div class="fr"> date
 	 *          time of result</div> <div class="it"> date time of result</div>
 	 */
 	public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {
