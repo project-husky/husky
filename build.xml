@@ -4,6 +4,7 @@
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
 	<property name="debuglevel" value="lines,vars,source" />
+	<property name="reports.tests" value="reports-tests" />
 	
     <path id="ehealthconnector.classpath">
         <pathelement location="bin"/>
@@ -116,12 +117,20 @@
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.hl7v3_2.0.2/hl7v3.jar"/>
     </path>	
 	
+    <path id="ehealthconnector.test.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="dist/ehealthconnector.jar"/>
+        <pathelement location="lib_tests/junit.jar"/>
+        <pathelement location="lib_tests/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+     </path>
+	
     <target name="init">
         <mkdir dir="bin"/>
     </target>
 	
     <target name="clean">
         <delete dir="bin"/>
+        <delete dir="reports-tests"/>
     </target>
 	
     <target depends="init" name="build">
@@ -266,4 +275,31 @@
 			<arg value="${basedir}/dist/ehealthconnector.jar" />
 		</exec>
 	</target>
+	
+	<target name="junittest" depends = "clean,init">
+		
+		<mkdir dir="${reports.tests}" />
+		
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}" compiler="javac1.6">
+            <src path="src_tests"/>
+            <classpath refid="ehealthconnector.test.classpath"/>
+        </javac>
+		
+        <jar destfile="${basedir}/dist/ehealthconnectortest.jar" basedir="bin" />
+		<path id="testapplication" location="${basedir}/dist/ehealthconnectortest.jar" />
+		
+		
+        <junit printsummary="yes">
+            <classpath>
+                <path refid="ehealthconnector.test.classpath"/>
+                <path refid="testapplication"/>
+            </classpath>
+    	    <formatter type="xml"/>
+            <batchtest fork="yes" todir="${reports.tests}">
+                <fileset dir="src_tests" includes="**/*Test?.java" />
+            </batchtest>
+        </junit>
+	</target>	
+	
+	
 </project>
