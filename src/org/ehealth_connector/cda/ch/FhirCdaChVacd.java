@@ -87,7 +87,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.ConditionStatusEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
@@ -1075,7 +1075,7 @@ public class FhirCdaChVacd {
 
 		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getStatusElement().getValueAsEnum());
+				.getClinicalStatusElement().getValueAsEnum());
 
 		// Create the ActiveProblemConcern
 		retVal = new org.ehealth_connector.cda.ActiveProblemConcern(concern, date, problemEntry,
@@ -1097,9 +1097,9 @@ public class FhirCdaChVacd {
 
 		String concern = fhirCondition.getNotes();
 		org.ehealth_connector.cda.AllergyProblem problemEntry = getAllergyProblemEntry(fhirCondition);
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getStatusElement().getValueAsEnum());
 
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
+				.getClinicalStatusElement().getValueAsEnum());
 		// // Create the AllergyProblemConcern
 		// retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
 		// problemEntry, problemStatusCode);
@@ -1492,7 +1492,7 @@ public class FhirCdaChVacd {
 		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
 
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getStatusElement().getValueAsEnum());
+				.getClinicalStatusElement().getValueAsEnum());
 
 		// Create the PastProblemConcern
 		retVal = new org.ehealth_connector.cda.PastProblemConcern(concern, problemEntry,
@@ -1520,27 +1520,17 @@ public class FhirCdaChVacd {
 	 *         class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
-			ConditionStatusEnum status) {
+			ConditionClinicalStatusEnum status) {
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
-		if (status == ConditionStatusEnum.CONFIRMED) {
+		if (status == ConditionClinicalStatusEnum.CONFIRMED) {
 			retVal = ProblemConcernStatusCode.COMPLETED;
-		} else if (status == ConditionStatusEnum.PROVISIONAL) {
+		} else if (status == ConditionClinicalStatusEnum.PROVISIONAL) {
 			retVal = ProblemConcernStatusCode.SUSPENDED;
-		} else if (status == ConditionStatusEnum.REFUTED) {
+		} else if (status == ConditionClinicalStatusEnum.REFUTED) {
 			retVal = ProblemConcernStatusCode.ABORTED;
-		} else if (status == ConditionStatusEnum.WORKING) {
+		} else if (status == ConditionClinicalStatusEnum.WORKING) {
 			retVal = ProblemConcernStatusCode.ACTIVE;
 		}
-
-		// if (status.equals("confirmed")) {
-		// retVal = ProblemConcernStatusCode.COMPLETED;
-		// } else if (status.equals("active")) {
-		// retVal = ProblemConcernStatusCode.ACTIVE;
-		// } else if (status.equals("suspended")) {
-		// retVal = ProblemConcernStatusCode.SUSPENDED;
-		// } else if (status.equals("aborted")) {
-		// retVal = ProblemConcernStatusCode.ABORTED;
-		// }
 		return retVal;
 	}
 

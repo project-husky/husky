@@ -43,11 +43,11 @@ import org.w3c.dom.Element;
 
 import ca.uhn.fhir.model.api.IDatatype;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.dstu2.resource.Patient.Communication;
 import ca.uhn.fhir.model.primitive.BooleanDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.IntegerDt;
@@ -547,8 +547,8 @@ public class V3PixAdapter implements MpiAdapterInterface {
 	private void addLanguageCommunications(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getCommunication().size() > 0) {
-			for (CodeableConceptDt communication : patient.getCommunication()) {
-				v3PixSourceMessage.addLanguageCommunication(communication.getText());
+			for (Communication communication : patient.getCommunication()) {
+				v3PixSourceMessage.addLanguageCommunication(communication.getLanguage().getText());
 			}
 		}
 	}

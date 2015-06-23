@@ -54,7 +54,6 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.junit.Before;
@@ -98,8 +97,6 @@ public class CdaChVacdTest extends TestUtils {
 	private Reason reason1;
 	private Reason reason2;
 	private URL url;
-
-	private Performer performer1;
 
 	public CdaChVacdTest() {
 		super();
@@ -332,7 +329,6 @@ public class CdaChVacdTest extends TestUtils {
 		name2 = createName2();
 		author1 = createAuthor1();
 		author2 = createAuthor2();
-		performer1 = createPerformer1();
 		organization1 = createOrganization1();
 		consumable1 = createConsumable1();
 		consumable1 = createConsumable2();

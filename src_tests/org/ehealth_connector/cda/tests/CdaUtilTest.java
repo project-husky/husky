@@ -2,7 +2,6 @@ package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Util;
@@ -11,8 +10,6 @@ import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 
 public class CdaUtilTest extends TestUtils {
-	private CdaChVacd c;
-	private String uuid;
 
 	public CdaUtilTest() {
 		super();
@@ -39,7 +36,6 @@ public class CdaUtilTest extends TestUtils {
 		number = 121241241.212323;
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
-		uuid = "807563C2-5146-11D5-A672-00B0D022E945";
 
 		// Convenience API Types
 		code1 = createCode1();
@@ -58,8 +54,6 @@ public class CdaUtilTest extends TestUtils {
 		author2 = createAuthor2();
 		organization1 = createOrganization1();
 		address1 = createAddress1();
-
-		c = new CdaChVacd();
 	}
 
 	@Test

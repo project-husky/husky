@@ -38,6 +38,7 @@ import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.dstu2.resource.Patient.Communication;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
@@ -177,8 +178,8 @@ public class FhirPatientTests {
 		CodeableConceptDt frCH = new CodeableConceptDt();
 		frCH.setText("fr-CH");
 
-		fhirPatient.getCommunication().add(deCH);
-		fhirPatient.getCommunication().add(frCH);
+		fhirPatient.getCommunication().add(new Communication().setLanguage(deCH));
+		fhirPatient.getCommunication().add(new Communication().setLanguage(frCH));
 
 		Patient patient = fhirPatient.getPatient();
 		assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunications().get(0)
@@ -188,8 +189,8 @@ public class FhirPatientTests {
 
 		FhirPatient fhirPatient2 = new FhirPatient(patient);
 
-		assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getText());
-		assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getText());
+		assertEquals("de-CH", fhirPatient2.getCommunication().get(0).getLanguage().getText());
+		assertEquals("fr-CH", fhirPatient2.getCommunication().get(1).getLanguage().getText());
 	}
 
 	@Test
@@ -490,7 +491,7 @@ public class FhirPatientTests {
 		CodeableConceptDt deCH = new CodeableConceptDt();
 		deCH.setText("de-CH");
 
-		fhirPatient.getCommunication().add(deCH);
+		fhirPatient.getCommunication().add(new Communication().setLanguage(deCH));
 
 		fhirPatient.setMaritalStatus(MaritalStatusCodesEnum.M); // married
 

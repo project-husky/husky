@@ -218,8 +218,10 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		if (patient.getMdhtPatient().getLanguageCommunications().size() > 0) {
 			for (LanguageCommunication languageCommunication : patient.getMdhtPatient()
 					.getLanguageCommunications()) {
-				CodeableConceptDt communication = new CodeableConceptDt();
-				communication.setText(languageCommunication.getLanguageCode().getCode());
+				Communication communication = new Communication();
+				CodeableConceptDt language = new CodeableConceptDt();
+				language.setText(languageCommunication.getLanguageCode().getCode());
+				communication.setLanguage(language);
 				this.getCommunication().add(communication);
 			}
 		}
@@ -454,10 +456,10 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 		// languageCommunications
 		if (getCommunication().size() > 0) {
-			for (CodeableConceptDt communication : getCommunication()) {
+			for (Communication communication : getCommunication()) {
 				LanguageCommunication lang = CDAFactory.eINSTANCE.createLanguageCommunication();
 				CS languageCode = DatatypesFactory.eINSTANCE.createCS();
-				languageCode.setCode(communication.getText());
+				languageCode.setCode(communication.getLanguage().getText());
 				lang.setLanguageCode(languageCode);
 				patient.getMdhtPatient().getLanguageCommunications().add(lang);
 			}
