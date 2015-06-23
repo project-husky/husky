@@ -89,7 +89,6 @@
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/axis2-saaj-api-1.4.1.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/backport-util-concurrent-3.1.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/geronimo-stax-api_1.0_spec-1.0.1.jar"/>
-<!--        <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/httpcore-4.0-beta1.jar"/> -->
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/httpcore-nio-4.0-beta1.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/mail-1.4.jar"/>
         <pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/neethi-2.0.4.jar"/>
@@ -110,6 +109,7 @@
  		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar"/> 
         <pathelement location="lib/fhir/hapi-fhir-base-1.0.jar"/>
         <pathelement location="lib/fhir/hapi-fhir-structures-dstu2-1.0.jar"/>
+        <pathelement location="lib/fhir/commons-io-2.4.jar"/>
         <pathelement location="lib/fhir/commons-lang3-3.3.2.jar"/>
         <pathelement location="lib/fhir/slf4j-api-1.7.9.jar"/>
         <pathelement location="lib/fhir/slf4j-log4j12-1.7.10.jar"/>
@@ -263,6 +263,7 @@
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-base-1.0.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-structures-dstu2-1.0.jar" />
+			<fatjar.jarsource file="${basedir}/lib/fhir/commons-io-2.4.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/commons-lang3-3.3.2.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/slf4j-api-1.7.9.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/slf4j-log4j12-1.7.10.jar" />
@@ -308,7 +309,7 @@
             </classpath>
     	    <formatter type="xml"/>
             <batchtest fork="yes" todir="${reports.tests}">
-                <fileset dir="src_tests" includes="**/*Test?.java" />
+                <fileset dir="src_tests" includes="**/*Test?.java, **/*Test.java" />
             </batchtest>
         </junit>
 	</target>	
