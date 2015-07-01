@@ -22,8 +22,8 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
-import org.ehealth_connector.communication.mpi.impl.V3PixAdapter;
-import org.ehealth_connector.communication.mpi.impl.V3PixAdapterConfig;
+import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
+import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
 
 /**
  * ConvenienceMasterPatientIndexV3
@@ -57,43 +57,43 @@ public class ConvenienceMasterPatientIndexV3 {
 	static private Log log = LogFactory.getLog(ConvenienceMasterPatientIndexV3.class);
 
 	/**
-	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add
-	 * Patient Record
+	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source –
+	 * Add Patient Record
 	 * 
 	 * <div class="de">
 	 * <p>
-	 * Registriert einen neuen Patienten mit demografischen Personendaten an einen
-	 * Master Patient Index (Patient Identity Cross-Reference Manager Akteur
-	 * gemäss IHE PIX).
+	 * Registriert einen neuen Patienten mit demografischen Personendaten an
+	 * einen Master Patient Index (Patient Identity Cross-Reference Manager
+	 * Akteur gemäss IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
-	 * Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
+	 * PIX Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 * 
 	 * @param patient
-	 *          demographic data of the patient
+	 *            demographic data of the patient
 	 * @param homeCommunityOID
-	 *          local patient domain (oid) of the source
+	 *            local patient domain (oid) of the source
 	 * @param dest
-	 *          communication endpoint
+	 *            communication endpoint
 	 * @param atna
-	 *          atna configuration
+	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean addPatientDemographics(Patient patient, String homeCommunityOID,
 			Destination dest, AtnaConfig atna) {
-		V3PixAdapterConfig v3PixAdapterConfig = new V3PixAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null),
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
+				(dest != null ? dest.getPixSourceUri() : null), null,
 				(dest != null ? dest.getSenderApplicationOid() : null),
 				(dest != null ? dest.getSenderFacilityOid() : null),
 				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null, null,
-				(atna != null ? atna.getAuditRepositoryUri() : null),
+				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		log.debug("addPatientDemographics, creating V3PixAdapter");
-		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		log.debug("addPatientDemographics, creating patient");
 		FhirPatient fhirPatient = new FhirPatient(patient);
 		log.debug("addPatientDemographics, add patient");
@@ -103,8 +103,8 @@ public class ConvenienceMasterPatientIndexV3 {
 	}
 
 	/**
-	 * Merge patient. implements ITI-44 Patient Identity Source – Patient Identity
-	 * Merge
+	 * Merge patient. implements ITI-44 Patient Identity Source – Patient
+	 * Identity Merge
 	 * 
 	 * Patient Registry Duplicates Resolved message indicates that the Patient
 	 * Identity Source has done a merge within a specific Patient Identification
@@ -117,35 +117,35 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Cross-Reference Manager Akteur gemäss IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
-	 * Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
+	 * PIX Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 * 
 	 * @param finalPatient
-	 *          the patient with the surviving identifier
+	 *            the patient with the surviving identifier
 	 * @param mergeObsoleteId
-	 *          duplicate patient identifier
+	 *            duplicate patient identifier
 	 * @param homeCommunityOID
-	 *          local patient domain (oid) of the source
+	 *            local patient domain (oid) of the source
 	 * @param dest
-	 *          communication endpoint
+	 *            communication endpoint
 	 * @param atna
-	 *          atna configuration
+	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean mergePatients(Patient finalPatient, String mergeObsoleteId,
 			String homeCommunityOID, Destination dest, AtnaConfig atna) {
 
-		V3PixAdapterConfig v3PixAdapterConfig = new V3PixAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null),
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
+				(dest != null ? dest.getPixSourceUri() : null), null,
 				(dest != null ? dest.getSenderApplicationOid() : null),
 				(dest != null ? dest.getSenderFacilityOid() : null),
 				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null, null,
-				(atna != null ? atna.getAuditRepositoryUri() : null),
+				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
-		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		if (mergeObsoleteId == null) {
 			log.error("no localid specified for oid " + homeCommunityOID);
 			return false;
@@ -168,35 +168,35 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Cross-Reference Manager Akteur gemäss IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
-	 * Patient Identifier Cross-Reference Concumer</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
+	 * PIX Patient Identifier Cross-Reference Concumer</b>
 	 * </p>
 	 * </div>
 	 * 
 	 * @param patient
-	 *          demographic data of the patient
+	 *            demographic data of the patient
 	 * @param homeCommunityOID
-	 *          local patient domain (oid) of the source
+	 *            local patient domain (oid) of the source
 	 * @param requestedCommunityOIDs
-	 *          array of oids for domains to query
+	 *            array of oids for domains to query
 	 * @param dest
-	 *          communication endpoint
+	 *            communication endpoint
 	 * @param atna
-	 *          atna configuration
+	 *            atna configuration
 	 * @return list of ids
 	 */
 	public static ArrayList<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
 			String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna) {
 
-		V3PixAdapterConfig v3PixAdapterConfig = new V3PixAdapterConfig(
-				(dest != null ? dest.getPixQueryUri() : null), null,
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
+				(dest != null ? dest.getPixQueryUri() : null), null, null,
 				(dest != null ? dest.getSenderApplicationOid() : null),
 				(dest != null ? dest.getSenderFacilityOid() : null),
 				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null, null,
-				(atna != null ? atna.getAuditRepositoryUri() : null),
+				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
-		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs,
 				null);
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
@@ -224,32 +224,32 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Index (Patient Identity Cross-Reference Manager Akteur gemäss IHE PIX)
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
-	 * Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
+	 * PIX Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 * 
 	 * @param patient
-	 *          demographic data of the patient
+	 *            demographic data of the patient
 	 * @param homeCommunityOID
-	 *          local patient domain (oid) of the source
+	 *            local patient domain (oid) of the source
 	 * @param dest
-	 *          communication endpoint
+	 *            communication endpoint
 	 * @param atna
-	 *          atna configuration
+	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean updatePatientDemographics(Patient patient, String homeCommunityOID,
 			Destination dest, AtnaConfig atna) {
-		V3PixAdapterConfig v3PixAdapterConfig = new V3PixAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null),
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
+				(dest != null ? dest.getPixSourceUri() : null), null,
 				(dest != null ? dest.getSenderApplicationOid() : null),
 				(dest != null ? dest.getSenderFacilityOid() : null),
 				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null, null,
-				(atna != null ? atna.getAuditRepositoryUri() : null),
+				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
-		V3PixAdapter v3PixAdapter = new V3PixAdapter(v3PixAdapterConfig);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
 		return ret;
 	}

@@ -21,13 +21,16 @@ import java.net.URI;
  * V3PixAdapterConfig configuration parameters for V3PixAdapter
  * 
  */
-public class V3PixAdapterConfig {
+public class V3PixPdqAdapterConfig {
 
 	/** The pix query uri endpoint. */
 	final public URI pixQueryUri;
 
 	/** The pix source uri endpoint. */
 	final public URI pixSourceUri;
+
+	/** The pdq consumer uri endpoint. */
+	final public URI pdqConsumerUri;
 
 	/** The sender application oid. */
 	final public String senderApplicationOid;
@@ -48,8 +51,8 @@ public class V3PixAdapterConfig {
 	final public String homeCommunityNamespace;
 
 	/**
-	 * The oid of the domain to return ids (optional, convenience if not other id
-	 * for other domain oids are necessary) .
+	 * The oid of the domain to return ids (optional, convenience if not other
+	 * id for other domain oids are necessary) .
 	 */
 	final public String domainToReturnOid;
 
@@ -69,41 +72,44 @@ public class V3PixAdapterConfig {
 	 * Instantiates a new v3 pix adapter config.
 	 * 
 	 * @param pixQueryUri
-	 *          the pix query uri endpoint
+	 *            the pix query uri endpoint
 	 * @param pixSourceUri
-	 *          the pix source uri endpoint
+	 *            the pix source uri endpoint
+	 * @param pdqConsumerUri
+	 *            the pdq consumer uri endpoint
 	 * @param senderApplicationOid
-	 *          the sender application oid
+	 *            the sender application oid
 	 * @param senderFacilityOid
-	 *          the sender facility oid
+	 *            the sender facility oid
 	 * @param receiverApplicationOid
-	 *          the receiver application oid
+	 *            the receiver application oid
 	 * @param receiverFacilityOid
-	 *          the receiver facility oid
+	 *            the receiver facility oid
 	 * @param homeCommunityOid
-	 *          the home community oid
+	 *            the home community oid
 	 * @param homeCommunityNamespace
-	 *          home community namespacec
+	 *            home community namespacec
 	 * @param domainToReturnOid
-	 *          The oid of the domain to return ids (optional, convenience if not
-	 *          other id for other domain oids are necessary)
+	 *            The oid of the domain to return ids (optional, convenience if
+	 *            not other id for other domain oids are necessary)
 	 * @param domainToReturnNamespace
-	 *          the domain to return namespace (optional)
+	 *            the domain to return namespace (optional)
 	 * @param auditRepositoryUri
-	 *          the ATNA audit repository uri
+	 *            the ATNA audit repository uri
 	 * @param auditSourceId
-	 *          the ATNA audit source id
+	 *            the ATNA audit source id
 	 * @param otherOidIds
-	 *          oid of id domains which are not medical ids
+	 *            oid of id domains which are not medical ids
 	 */
-	public V3PixAdapterConfig(URI pixQueryUri, URI pixSourceUri, String senderApplicationOid,
-			String senderFacilityOid, String receiverApplicationOid, String receiverFacilityOid,
-			String homeCommunityOid, String homeCommunityNamespace, String domainToReturnOid,
-			String domainToReturnNamespace, String auditRepositoryUri, String auditSourceId,
-			String[] otherOidIds) {
+	public V3PixPdqAdapterConfig(URI pixQueryUri, URI pixSourceUri, URI pdqConsumerUri,
+			String senderApplicationOid, String senderFacilityOid, String receiverApplicationOid,
+			String receiverFacilityOid, String homeCommunityOid, String homeCommunityNamespace,
+			String domainToReturnOid, String domainToReturnNamespace, String auditRepositoryUri,
+			String auditSourceId, String[] otherOidIds) {
 		super();
 		this.pixQueryUri = pixQueryUri;
 		this.pixSourceUri = pixSourceUri;
+		this.pdqConsumerUri = pdqConsumerUri;
 		this.senderApplicationOid = senderApplicationOid;
 		this.senderFacilityOid = senderFacilityOid;
 		this.receiverApplicationOid = receiverApplicationOid;

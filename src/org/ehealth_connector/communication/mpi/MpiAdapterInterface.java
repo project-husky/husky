@@ -18,13 +18,13 @@ package org.ehealth_connector.communication.mpi;
 /**
  * General adapter Inteface for an MPI implementation.
  */
-public interface MpiAdapterInterface {
+public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryResponse> {
 
 	/**
 	 * adds a patient to the mpi.
 	 * 
 	 * @param patient
-	 *          the patient
+	 *            the patient
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean addPatient(FhirPatient patient);
@@ -34,9 +34,9 @@ public interface MpiAdapterInterface {
 	 * patient.
 	 * 
 	 * @param patient
-	 *          the patient
+	 *            the patient
 	 * @param obsoleteId
-	 *          the obsolete id
+	 *            the obsolete id
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean mergePatient(FhirPatient patient, String obsoleteId);
@@ -46,12 +46,12 @@ public interface MpiAdapterInterface {
 	 * from the mpi.
 	 * 
 	 * @param patient
-	 *          patient with local Id
+	 *            patient with local Id
 	 * @param queryDomainOids
-	 *          if provided oid of queried domain, otherwise id of mpi
+	 *            if provided oid of queried domain, otherwise id of mpi
 	 * @param queryDomainNamespaces
-	 *          the query domain namespaces (optional, must correspont to the
-	 *          queryDomainOids)
+	 *            the query domain namespaces (optional, must correspont to the
+	 *            queryDomainOids)
 	 * @return string array with correspoding identifiers to queryDomainOids
 	 */
 	abstract String[] queryPatientId(FhirPatient patient, String queryDomainOids[],
@@ -61,9 +61,25 @@ public interface MpiAdapterInterface {
 	 * updates the demographic information of the patient in the mpi.
 	 * 
 	 * @param patient
-	 *          the patient
+	 *            the patient
 	 * @return if success true, false otherwise
 	 */
 	abstract boolean updatePatient(FhirPatient patient);
+
+	/**
+	 * Gets an empty MpiQuery objects.
+	 * 
+	 * @return the mpiQuery objects
+	 */
+	abstract T getMpiQuery();
+
+	/**
+	 * queries the mpi for patients according to the criteria specified
+	 * 
+	 * @param mpiQuery
+	 *            the mpi query criterias
+	 * @return the mpi query response
+	 */
+	abstract U queryPatients(T mpiQuery);
 
 }
