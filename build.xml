@@ -102,7 +102,7 @@
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-discovery-0.2.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-fileupload-1.2.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-httpclient-3.0.1.jar" />
-		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-io-1.2.jar" />
+<!--		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-io-1.2.jar" /> -->
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar" />
