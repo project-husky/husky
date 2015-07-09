@@ -16,6 +16,7 @@
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,24 +30,13 @@ import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
  * ConvenienceMasterPatientIndexV3
  * 
  * ConvenienceMasterPatientIndexV3 implements the Actor Patient Identity Source
- * from ITI-44 Patient Identity Feed HL7 V3 and the Actor Patient Identifier
- * Cross-reference Consumer from ITI-45 PIXV3 Query to communicate with an MPI.
+ * from ITI-44 Patient Identity Feed HL7 V3, the Actor Patient Identifier
+ * Cross-reference Consumer from ITI-45 PIXV3 Query and as well as the ITI-47
+ * PDQ Consumer to communicate with an MPI.
  * 
- * <div class="de">
- * 
- * Diese Klasse stellt Methoden für die Kommunikation mit einem Master Patient
- * Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse mit HL7 V3 (PIX
- * V3)
- * 
- * Die Klasse implementiert folgende IHE Akteure und Transaktionen:
- * <ul>
- * <li><b>IHE PIX V3 Patient Identity Source Akteur</b></li>
- * <li>[ITI-44] Patient Identity Feed</li>
- * <li><b>IHE PIX V3 Patient Identifier Cross-Reference Consumer Akteur</b></li>
- * <li>[ITI-45] PIX Query</li>
- * </ul>
- * 
- * </div>
+ * <div class="de"> Diese Klasse stellt Methoden für die Kommunikation mit einem
+ * Master Patient Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse
+ * mit HL7 V3 (PIX V3, PDQV3) </div>
  */
 public class ConvenienceMasterPatientIndexV3 {
 
@@ -181,7 +171,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            atna configuration
 	 * @return list of ids
 	 */
-	public static ArrayList<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
+	public static List<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
 			String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna) {
 
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
