@@ -1,9 +1,25 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.mpi.MpiQuery;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerQuery;
+import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
@@ -19,6 +35,12 @@ public class V3PdqQuery implements MpiQuery {
 
 	private final V3PdqConsumerQuery v3PdqConsumerQuery;
 
+	private boolean cancelQuery;
+	private boolean continueQuery;
+	private int pageCount;
+
+	private V3PdqConsumerResponse lastPdqConsumerResponse;
+
 	public V3PdqQuery(String senderApplicationOID, String senderFacilityOID,
 			String receiverApplicationOID, String receiverFacilityOID) {
 		v3PdqConsumerQuery = new V3PdqConsumerQuery(senderApplicationOID, senderFacilityOID,
@@ -26,35 +48,18 @@ public class V3PdqQuery implements MpiQuery {
 	}
 
 	@Override
-	public MpiQuery addPatientIdentifier(IdentifierDt identifierDt) {
-		if (identifierDt != null && identifierDt.getSystem().length() > 8
-				&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
-			String oid = identifierDt.getSystem().substring(8);
-			v3PdqConsumerQuery.addPatientID(identifierDt.getValue(), oid, "");
-		} else {
-			log.error(
-					"identifier system is not starting with urn:oid: " + identifierDt.getSystem());
+	public MpiQuery addDomainToReturn(String organizationOID) {
+		if (organizationOID != null) {
+			v3PdqConsumerQuery.addDomainToReturn(organizationOID);
 		}
 		return this;
 	}
 
 	@Override
-	public MpiQuery addPatientName(boolean useFuzzySearch, HumanNameDt humanDt) {
+	public MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanNameDt humanDt) {
 		v3PdqConsumerQuery.addPatientName(useFuzzySearch, humanDt.getFamilyAsSingleString(),
 				humanDt.getGivenAsSingleString(), null, humanDt.getSuffixAsSingleString(),
 				humanDt.getPrefixAsSingleString());
-		return this;
-	}
-
-	@Override
-	public MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum) {
-		if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.FEMALE.getCode())) {
-			v3PdqConsumerQuery.setPatientSex("F");
-		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.MALE.getCode())) {
-			v3PdqConsumerQuery.setPatientSex("M");
-		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.OTHER.getCode())) {
-			v3PdqConsumerQuery.setPatientSex("U");
-		}
 		return this;
 	}
 
@@ -96,7 +101,20 @@ public class V3PdqQuery implements MpiQuery {
 	}
 
 	@Override
-	public MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanNameDt humanDt) {
+	public MpiQuery addPatientIdentifier(IdentifierDt identifierDt) {
+		if (identifierDt != null && identifierDt.getSystem().length() > 8
+				&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
+			String oid = identifierDt.getSystem().substring(8);
+			v3PdqConsumerQuery.addPatientID(identifierDt.getValue(), oid, "");
+		} else {
+			log.error(
+					"identifier system is not starting with urn:oid: " + identifierDt.getSystem());
+		}
+		return this;
+	}
+
+	@Override
+	public MpiQuery addPatientName(boolean useFuzzySearch, HumanNameDt humanDt) {
 		v3PdqConsumerQuery.addPatientName(useFuzzySearch, humanDt.getFamilyAsSingleString(),
 				humanDt.getGivenAsSingleString(), null, humanDt.getSuffixAsSingleString(),
 				humanDt.getPrefixAsSingleString());
@@ -130,18 +148,57 @@ public class V3PdqQuery implements MpiQuery {
 
 	@Override
 	public MpiQuery cancelQuery() {
-		// TODO Auto-generated method stub
-		return null;
+		this.cancelQuery = true;
+		return this;
 	}
 
 	@Override
-	public MpiQuery setPageCount(int pageCount) {
-		// TODO Auto-generated method stub
-		return null;
+	public MpiQuery continueQuery() {
+		this.continueQuery = true;
+		return this;
+	}
+
+	public boolean doCancelQuery() {
+		return cancelQuery;
+	}
+
+	public boolean doContinueQuery() {
+		return continueQuery;
+	}
+
+	public V3PdqConsumerResponse getLastPdqConsumerResponse() {
+		return lastPdqConsumerResponse;
+	}
+
+	public int getPageCount() {
+		return pageCount;
 	}
 
 	public V3PdqConsumerQuery getV3PdqConsumerQuery() {
 		return v3PdqConsumerQuery;
+	}
+
+	public void setLastPdqConsumerResponse(V3PdqConsumerResponse lastPdqConsumerResponse) {
+		this.lastPdqConsumerResponse = lastPdqConsumerResponse;
+	}
+
+	@Override
+	public MpiQuery setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+		v3PdqConsumerQuery.setInitialQuantity(pageCount);
+		return this;
+	}
+
+	@Override
+	public MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum) {
+		if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.FEMALE)) {
+			v3PdqConsumerQuery.setPatientSex("F");
+		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.MALE)) {
+			v3PdqConsumerQuery.setPatientSex("M");
+		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.OTHER)) {
+			v3PdqConsumerQuery.setPatientSex("U");
+		}
+		return this;
 	}
 
 }

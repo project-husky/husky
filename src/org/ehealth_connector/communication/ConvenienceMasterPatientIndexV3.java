@@ -23,6 +23,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
+import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
 
@@ -196,6 +197,29 @@ public class ConvenienceMasterPatientIndexV3 {
 			}
 		}
 		return list;
+	}
+
+	/**
+	 * queries the mpi for patients according to the criteria specified
+	 * 
+	 * @param mpiQuery
+	 *            the mpi query criterias
+	 * @return the mpi query response
+	 */
+	public static MasterPatientIndexQueryResponse queryPatients(MasterPatientIndexQuery mpiQuery,
+			String homeCommunityOID, Destination dest, AtnaConfig atna) {
+
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
+				(dest != null ? dest.getPdqQueryUri() : null),
+				(dest != null ? dest.getSenderApplicationOid() : null),
+				(dest != null ? dest.getSenderFacilityOid() : null),
+				(dest != null ? dest.getReceiverApplicationOid() : null),
+				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
+				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(atna != null ? atna.getAuditSourceId() : null), null);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+		V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
+		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
 	/**

@@ -24,22 +24,25 @@ import java.net.URI;
  */
 public class Destination {
 
+	private String keyStore = null;
+
+	private String keyStorePassword;
+
+	/** URI for pdq Query ITI-47. */
+	private URI pdqQueryUri;
+	/** URI for pix Query ITI-45. */
+	private URI pixQueryUri;
+	/** URI for pix Source ITI-44. */
+	private URI pixSourceUri;
+	/** The receiver application oid for PIX/PDQ V3 */
+	private String receiverApplicationOid;
+	/** The receiver facility oid for PIX/PDQ V3 */
+	private String receiverFacilityOid;
+
 	/**
 	 * URI for the XDS Registry
 	 */
 	private URI registryUri;
-
-	private String senderOrganizationalOid;
-
-	private String keyStore = null;
-	private String keyStorePassword;
-	private String trustStore;
-	private String trustStorePassword;
-	/** URI for pix Source ITI-44. */
-	private URI pixSourceUri;
-
-	/** URI for pix Query ITI-45. */
-	private URI pixQueryUri;
 
 	/** The sender application oid for PIX/PDQ V3. */
 	private String senderApplicationOid;
@@ -47,11 +50,11 @@ public class Destination {
 	/** The sender facility oid for PIX/PDQ V3 and XDS */
 	private String senderFacilityOid;
 
-	/** The receiver application oid for PIX/PDQ V3 */
-	private String receiverApplicationOid;
+	private String senderOrganizationalOid;
 
-	/** The receiver facility oid for PIX/PDQ V3 */
-	private String receiverFacilityOid;
+	private String trustStore;
+
+	private String trustStorePassword;
 
 	public Destination() {
 
@@ -61,9 +64,9 @@ public class Destination {
 	 * Communication Endpoint for an unsecured XDS-b transaction.
 	 * 
 	 * @param senderOrganizationalOid
-	 *          Oid of the Sender Organization
+	 *            Oid of the Sender Organization
 	 * @param repositoryUri
-	 *          URI of the communication endpoint
+	 *            URI of the communication endpoint
 	 */
 	public Destination(String senderOrganizationalOid, URI repositoryUri) {
 		registryUri = repositoryUri;
@@ -75,13 +78,13 @@ public class Destination {
 	 * keystore that combines keystore and truststore.
 	 * 
 	 * @param senderOrganizationalOid
-	 *          Your OID
+	 *            Your OID
 	 * @param repositoryUri
-	 *          URI of the communication endpoint
+	 *            URI of the communication endpoint
 	 * @param keyStore
-	 *          path to the keystore file
+	 *            path to the keystore file
 	 * @param keyStorePassword
-	 *          the password for the keystore file
+	 *            the password for the keystore file
 	 */
 	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
 			String keyStorePassword) {
@@ -93,22 +96,22 @@ public class Destination {
 	}
 
 	/**
-	 * Communication Endpoint for a TLS-secured XDS-b transaction with a seperate
-	 * keystore and truststore.
+	 * Communication Endpoint for a TLS-secured XDS-b transaction with a
+	 * seperate keystore and truststore.
 	 * 
 	 * 
 	 * @param senderOrganizationalOid
-	 *          Your OID
+	 *            Your OID
 	 * @param repositoryUri
-	 *          URI of the communication endpoint
+	 *            URI of the communication endpoint
 	 * @param keyStore
-	 *          path to the keystore file
+	 *            path to the keystore file
 	 * @param keyStorePassword
-	 *          the password for the keystore file
+	 *            the password for the keystore file
 	 * @param trustStore
-	 *          path to the truststore file
+	 *            path to the truststore file
 	 * @param trustStorePassword
-	 *          the password for the truststore file
+	 *            the password for the truststore file
 	 */
 	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
 			String keyStorePassword, String trustStore, String trustStorePassword) {
@@ -135,6 +138,15 @@ public class Destination {
 	 */
 	public String getKeyStorePassword() {
 		return keyStorePassword;
+	}
+
+	/**
+	 * Gets the pdq query uri.
+	 *
+	 * @return the pdq query uri
+	 */
+	public URI getPdqQueryUri() {
+		return pdqQueryUri;
 	}
 
 	/**
@@ -226,7 +238,7 @@ public class Destination {
 	 * Sets the path to the key store
 	 * 
 	 * @param keyStore
-	 *          path
+	 *            path
 	 */
 	public void setKeyStore(String keyStore) {
 		this.keyStore = keyStore;
@@ -236,17 +248,27 @@ public class Destination {
 	 * Sets the password for the key store
 	 * 
 	 * @param keyStorePassword
-	 *          the password for your keystore
+	 *            the password for your keystore
 	 */
 	public void setKeyStorePassword(String keyStorePassword) {
 		this.keyStorePassword = keyStorePassword;
 	}
 
 	/**
+	 * Sets the pdq query uri.
+	 *
+	 * @param pdqQueryUri
+	 *            the new pdq query uri
+	 */
+	public void setPdqQueryUri(URI pdqQueryUri) {
+		this.pdqQueryUri = pdqQueryUri;
+	}
+
+	/**
 	 * Sets the pix query uri.
 	 * 
 	 * @param pixQueryUri
-	 *          the new pix query uri
+	 *            the new pix query uri
 	 */
 	public void setPixQueryUri(URI pixQueryUri) {
 		this.pixQueryUri = pixQueryUri;
@@ -256,7 +278,7 @@ public class Destination {
 	 * Sets the pix source uri.
 	 * 
 	 * @param pixSourceUri
-	 *          the new pix source uri
+	 *            the new pix source uri
 	 */
 	public void setPixSourceUri(URI pixSourceUri) {
 		this.pixSourceUri = pixSourceUri;
@@ -266,7 +288,7 @@ public class Destination {
 	 * Sets the receiver application oid.
 	 * 
 	 * @param receiverApplicationOid
-	 *          the new receiver application oid
+	 *            the new receiver application oid
 	 */
 	public void setReceiverApplicationOid(String receiverApplicationOid) {
 		this.receiverApplicationOid = receiverApplicationOid;
@@ -276,7 +298,7 @@ public class Destination {
 	 * Sets the receiver facility oid.
 	 * 
 	 * @param receiverFacilityOid
-	 *          the new receiver facility oid
+	 *            the new receiver facility oid
 	 */
 	public void setReceiverFacilityOid(String receiverFacilityOid) {
 		this.receiverFacilityOid = receiverFacilityOid;
@@ -290,7 +312,7 @@ public class Destination {
 	 * Sets the sender application oid.
 	 * 
 	 * @param senderApplicationOid
-	 *          the new sender application oid
+	 *            the new sender application oid
 	 */
 	public void setSenderApplicationOid(String senderApplicationOid) {
 		this.senderApplicationOid = senderApplicationOid;
@@ -300,7 +322,7 @@ public class Destination {
 	 * Sets the sender facility oid.
 	 * 
 	 * @param senderFacilityOid
-	 *          the new sender facility oid
+	 *            the new sender facility oid
 	 */
 	public void setSenderFacilityOid(String senderFacilityOid) {
 		this.senderFacilityOid = senderFacilityOid;
@@ -315,14 +337,15 @@ public class Destination {
 	}
 
 	/**
-	 * <div class="en">Sets the trust store password.</div> <div class="de">Setzt
-	 * trust store password.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Sets the trust store password.</div>
+	 * <div class="de">Setzt trust store password.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * 
 	 * @param trustStorePassword
-	 *          <div class="en">the new trust store password</div> <div
-	 *          class="de">das neue trust store password.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new trust store password</div>
+	 *            <div class="de">das neue trust store password.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTrustStorePassword(String trustStorePassword) {
 		this.trustStorePassword = trustStorePassword;

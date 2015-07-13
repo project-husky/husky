@@ -63,8 +63,11 @@ import org.openhealthtools.ihe.atna.auditor.PDQConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
 import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
+import org.openhealthtools.ihe.common.hl7v3.client.V3GenericAcknowledgement;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumer;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
+import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqContinuationCancel;
+import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqContinuationQuery;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumer;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerQuery;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumerResponse;
@@ -210,9 +213,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	@Override
 	public V3PdqQuery getMpiQuery() {
-		return new V3PdqQuery(this.adapterCfg.senderApplicationOid,
-				this.adapterCfg.senderFacilityOid, this.adapterCfg.receiverApplicationOid,
-				this.adapterCfg.receiverFacilityOid);
+		return new V3PdqQuery(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
+				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
 	}
 
 	/**
@@ -426,14 +428,45 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (!configurePdq()) {
 			return queryResponse;
 		}
+		/** The last pdq consumer response. */
+
 		try {
-			queryResponse.setPatients(getPatientsFromPdqQuery(
-					v3PdqConsumer.sendQuery(mpiQuery.getV3PdqConsumerQuery())));
+			if (!mpiQuery.doCancelQuery()) {
+				if (!mpiQuery.doContinueQuery()) {
+					V3PdqConsumerResponse lastPdqConsumerResponse = v3PdqConsumer
+							.sendQuery(mpiQuery.getV3PdqConsumerQuery());
+					queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
+					mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
+				} else {
+					V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
+							.getLastPdqConsumerResponse();
+					V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(
+							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
+							mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
+							mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
+							mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
+							lastPdqConsumerResponse, mpiQuery.getPageCount());
+					continuationQuery.setProcessingCode("T");
+					lastPdqConsumerResponse = v3PdqConsumer.sendContinuation(continuationQuery);
+					queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
+					mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
+				}
+			} else {
+				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
+						.getLastPdqConsumerResponse();
+				V3PdqContinuationCancel continuationCancel = new V3PdqContinuationCancel(
+						mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
+						mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
+						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
+						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
+						lastPdqConsumerResponse);
+				V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
+				// FIXME: cancel Query return value
+			}
 		} catch (Exception e) {
 			log.error("queryPatient failed", e);
 			return queryResponse;
 		}
-
 		return queryResponse;
 	}
 
