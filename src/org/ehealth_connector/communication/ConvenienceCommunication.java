@@ -17,24 +17,33 @@
 package org.ehealth_connector.communication;
 
 import java.io.InputStream;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.enums.Confidentiality;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
+import org.openhealthtools.ihe.atna.auditor.codes.ihe.IHETransactionEventTypeCodes.RetrieveDocumentSet;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
+import org.openhealthtools.ihe.xds.consumer.B_Consumer;
+import org.openhealthtools.ihe.xds.consumer.retrieve.DocumentRequestType;
+import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
+import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
+import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
+import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
+import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
+import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
@@ -63,36 +72,35 @@ public class ConvenienceCommunication {
 	/** The organizational id. */
 	private String organizationalId;
 
-	/** The transaction data. */
-	private SubmitTransactionData txnData;
+	/** The transaction data to send XDS Documents. */
+	private SubmitTransactionData txnData = null;
+	
+	private boolean auditorEnabled = false;
 
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
 	public ConvenienceCommunication() throws Exception {
-		txnData = new SubmitTransactionData();
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(false);
 	}
 
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
 	 * @param dest
-	 *          the destination
+	 *            the destination
 	 * @param auditorEnabled
-	 *          sets whether the ATNA audit is enable (secure) or disabled
-	 *          (unsecure)
+	 *            sets whether the ATNA audit is enable (secure) or disabled
+	 *            (unsecure)
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
-	public ConvenienceCommunication(Destination dest, boolean auditorEnabled) throws Exception {
-		txnData = new SubmitTransactionData();
+	public ConvenienceCommunication(Destination dest, boolean auditorEnabled)
+			throws Exception {
 		setDestination(dest);
-
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+		auditorEnabled = this.auditorEnabled;
 	}
 
 	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
@@ -102,42 +110,48 @@ public class ConvenienceCommunication {
 	 * Adds a document to the XDS Submission set.
 	 * 
 	 * @param desc
-	 *          the document descriptor (which kind of document do you want to
-	 *          transfer? e.g. PDF, CDA,...)
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
-	 *          The input stream to the document
+	 *            The input stream to the document
 	 * @return the document metadata (which have to be completed)
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream)
-			throws Exception {
+	public DocumentMetadata addDocument(DocumentDescriptor desc,
+			InputStream inputStream) throws Exception {
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-		String docEntryUUID = txnData.addDocument(doc);
-		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
-		if (DocumentDescriptor.CDA_R2.equals(desc)) {
-			cdaFixes(docMetadata);
-		}
-
-		return docMetadata;
+		
+		return addXdsDocument(doc, desc);
 	}
 
 	/**
 	 * Adds a document to the XDS Submission set.
 	 * 
 	 * @param desc
-	 *          the document descriptor (which kind of document do you want to
-	 *          transfer? e.g. PDF, CDA,...)
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
-	 *          the file path
+	 *            the file path
 	 * @return the document metadata (which has to be completed)
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws Exception {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
+			throws Exception {
 		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+		
+		return addXdsDocument(doc, desc);
+	}
+	
+	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
+		if (txnData == null) {
+			txnData = new SubmitTransactionData();
+		}
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
 		String docEntryUUID = txnData.addDocument(doc);
-		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
+		DocumentMetadata docMetadata = new DocumentMetadata(
+				txnData.getDocumentEntry(docEntryUUID));
 		if (DocumentDescriptor.CDA_R2.equals(desc)) {
 			cdaFixes(docMetadata);
 		}
@@ -166,7 +180,7 @@ public class ConvenienceCommunication {
 	 * Sets the destination
 	 * 
 	 * @param dest
-	 *          the destination
+	 *            the destination
 	 */
 	public void setDestination(Destination dest) {
 		destination = dest;
@@ -181,9 +195,11 @@ public class ConvenienceCommunication {
 			System.clearProperty("javax.net.ssl.trustStorePassword");
 		} else {
 			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.keyStorePassword",
+					dest.getKeyStorePassword());
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
+			System.setProperty("javax.net.ssl.trustStorePassword",
+					dest.getTrustStorePassword());
 		}
 	}
 
@@ -191,8 +207,8 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <p>
-	 * Sends the current document to the according receipient (repository actor as
-	 * specified in IHE XDR or IHE XDS). The transmission is performed as
+	 * Sends the current document to the according receipient (repository actor
+	 * as specified in IHE XDR or IHE XDS). The transmission is performed as
 	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
 	 * 
 	 * </p>
@@ -202,21 +218,16 @@ public class ConvenienceCommunication {
 	 * 
 	 * @return XDSResponseType
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
 	public XDSResponseType submit() throws Exception {
 		// generate missing information for all documents
-
-		SubmissionSetType subSet = txnData.getSubmissionSet();
-		for (int i = 0; i < txnData.getDocList().size(); ++i) {
-			XDSDocument xdsDoc = txnData.getDocList().get(i);
+		for (XDSDocument xdsDoc : txnData.getDocList()) {
 			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
-			if (i == 0) {
-				setSubmissionContentTypeCode(subSet, xdsDoc);
-			}
 		}
 
 		// Create SubmissionSet
+		SubmissionSetType subSet = txnData.getSubmissionSet();
 		subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
 
 		// set submission set source id
@@ -231,6 +242,11 @@ public class ConvenienceCommunication {
 		CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
 		subSet.setPatientId(EcoreUtil.copy(testCx));
 
+		// set ContentTypeCode
+		subSet.setContentTypeCode(XdsUtil.createCodedMetadata(
+				"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
+				null));
+
 		// txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
 		System.out.println("XDSResponseType: " + xdsr);
@@ -238,60 +254,38 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Sets the submission content type code from the typeCode of the document
-	 * TODO: verify that this it the right approach
-	 * 
-	 * @param subSet
-	 *          the submisson where the contentTypeCode will beset
-	 * @param xdsDoc
-	 *          the document from which the contetn
-	 */
-	private void setSubmissionContentTypeCode(SubmissionSetType subSet, XDSDocument xdsDoc) {
-		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(xdsDoc
-				.getDocumentEntryUUID()));
-		// note does not work by reference: subSet.setContentTypeCode(docMetadata.getMdhtDocumentEntryType().getTypeCode());
-		CodedMetadataType cmtDoc = docMetadata.getMdhtDocumentEntryType().getTypeCode();
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		if (cmtDoc.getDisplayName() != null && cmtDoc.getDisplayName().getLocalizedString() != null
-				&& cmtDoc.getDisplayName().getLocalizedString().size() > 0) {
-			cmt.setDisplayName(XdsUtil.createInternationalString(cmtDoc.getDisplayName()
-					.getLocalizedString().get(0).toString()));
-		}
-		cmt.setCode(cmtDoc.getCode());
-		cmt.setSchemeName(cmtDoc.getSchemeName());
-		cmt.setSchemeUUID(cmtDoc.getSchemeUUID());
-		subSet.setContentTypeCode(cmt);
-	}
-
-	/**
 	 * Setting up the communication endpoint and the logger
 	 * 
 	 * @param repositoryUri
-	 *          the repository uri
+	 *            the repository uri
 	 * @param auditorEnabled
-	 *          sets whether the ATNA audit is enable (secure) or disabled
-	 *          (unsecure)
+	 *            sets whether the ATNA audit is enable (secure) or disabled
+	 *            (unsecure)
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
-	protected void setUp(Destination dest, boolean auditorEnabled) throws Exception {
+	protected void setUp(Destination dest, boolean auditorEnabled)
+			throws Exception {
 
 		if (dest.getKeyStore() != null) {
 			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.keyStorePassword",
+					dest.getKeyStorePassword());
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
+			System.setProperty("javax.net.ssl.trustStorePassword",
+					dest.getTrustStorePassword());
 		}
 
 		source = new B_Source(dest.getRegistryUri());
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(auditorEnabled);
 	}
 
 	/**
 	 * Cda fixes.
 	 * 
 	 * @param docMetadata
-	 *          the doc metadata
+	 *            the doc metadata
 	 */
 	private void cdaFixes(DocumentMetadata docMetadata) {
 		docMetadata.getMdhtDocumentEntryType().setLanguageCode(null);
@@ -300,7 +294,8 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not
 		// a known Slot for the NIST Registry by deleting all
 		// authorTelecommunications
-		for (Object object : docMetadata.getMdhtDocumentEntryType().getAuthors()) {
+		for (Object object : docMetadata.getMdhtDocumentEntryType()
+				.getAuthors()) {
 			AuthorType at = (AuthorType) object;
 			at.getAuthorTelecommunication().clear();
 		}
@@ -321,14 +316,28 @@ public class ConvenienceCommunication {
 	 * Generate missing doc entry attributes.
 	 * 
 	 * @param docEntryUuid
-	 *          the doc entry uuid
+	 *            the doc entry uuid
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
-	private void generateMissingDocEntryAttributes(String docEntryUuid) throws Exception {
+	@SuppressWarnings("unchecked")
+	private void generateMissingDocEntryAttributes(String docEntryUuid)
+			throws Exception {
 
-		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
-		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
+		DocumentMetadata docMetadata = new DocumentMetadata(
+				txnData.getDocumentEntry(docEntryUuid));
+		DocumentDescriptor desc = txnData.getDocument(docEntryUuid)
+				.getDescriptor();
+
+		// Automatically create the formatCode of the Document according to the
+		// DocumentDescriptor
+		if (DocumentDescriptor.PDF.equals(desc)) {
+			Code formatCode = new Code("1.3.6.1.4.1.19376.1.2.3",
+					"urn:ihe:iti:xds-sd:pdf:2008",
+					"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
+			docMetadata.getMdhtDocumentEntryType().setFormatCode(
+					XdsUtil.convertCode(formatCode));
+		}
 
 		// Derive MimeType from DocumentDescriptor
 		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
@@ -337,12 +346,21 @@ public class ConvenienceCommunication {
 
 		// Generate the UUID
 		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			docMetadata.setUniqueId(OID
+					.createOIDGivenRoot(organizationalId, 64));
 		}
 
-		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
-				|| docMetadata.getMdhtDocumentEntryType().getConfidentialityCode() == null) {
-			docMetadata.addConfidentialityCode(Confidentiality.NORMAL);
+		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
+				.isEmpty()
+				|| docMetadata.getMdhtDocumentEntryType()
+						.getConfidentialityCode() == null) {
+			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
+					.clear();
+			docMetadata
+					.getMdhtDocumentEntryType()
+					.getConfidentialityCode()
+					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
+							"N", null, null));
 		}
 
 		// Generate Creation Time with the current time
@@ -350,5 +368,30 @@ public class ConvenienceCommunication {
 			docMetadata.setCreationTime(DateUtil.nowAsDate());
 		}
 
+		// Use the TypeCode for ClassCode
+		if (docMetadata.getMdhtDocumentEntryType().getClassCode() == null
+				&& docMetadata.getMdhtDocumentEntryType().getTypeCode() != null) {
+			docMetadata.getMdhtDocumentEntryType().setClassCode(
+					EcoreUtil.copy(docMetadata.getMdhtDocumentEntryType()
+							.getTypeCode()));
+		}
+	}
+
+	public XDSQueryResponseType invokeStoredQuery(StoredQuery q, boolean returnReferencesOnly) throws Exception {
+		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+	
+		return consumer.invokeStoredQuery(q, returnReferencesOnly);
+	}
+
+	public XDSRetrieveResponseType retrieveDocumentSet(Identificator patientId, DocumentRequestType documentRequest) {
+		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
+		
+        // Add Document Request 
+        retrieveDocumentSetRequest.getDocumentRequest().add(documentRequest);
+        
+        XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(patientId));
+        
+		return response;
 	}
 }

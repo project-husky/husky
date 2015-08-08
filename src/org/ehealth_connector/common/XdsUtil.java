@@ -16,9 +16,23 @@
 
 package org.ehealth_connector.common;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumÎnterface;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
+import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -152,5 +166,20 @@ public class XdsUtil {
 		lst.setValue(text);
 		ist.getLocalizedString().add(lst);
 		return ist;
+	}
+	
+	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(CodedMetadataEnumÎnterface[] codedMetadataEnum) {
+		if (codedMetadataEnum == null) return null;
+		else {
+			CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
+			
+			int i = 0;
+			for (CodedMetadataEnumÎnterface cme : codedMetadataEnum) {
+				cmtArray[i] = cme.getCodedMetadataType();
+				i++;
+			}
+			
+			return cmtArray;
+		}
 	}
 }
