@@ -98,7 +98,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-fileupload-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-httpclient-3.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/fhir/commons-io-2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-io-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-lang-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar"/>

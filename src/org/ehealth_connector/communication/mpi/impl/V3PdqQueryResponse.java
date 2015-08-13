@@ -9,11 +9,15 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	private List<FhirPatient> patients;
 
-	private final boolean success = false;
+	private boolean success = false;
 
 	@Override
 	public boolean getSuccess() {
 		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 
 	@Override

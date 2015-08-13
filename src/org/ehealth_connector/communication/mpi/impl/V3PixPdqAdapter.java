@@ -423,13 +423,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	@Override
 	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery) {
-
 		V3PdqQueryResponse queryResponse = new V3PdqQueryResponse();
 		if (!configurePdq()) {
 			return queryResponse;
 		}
-		/** The last pdq consumer response. */
-
 		try {
 			if (!mpiQuery.doCancelQuery()) {
 				if (!mpiQuery.doContinueQuery()) {
@@ -461,10 +458,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
 						lastPdqConsumerResponse);
 				V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
-				// FIXME: cancel Query return value
+				queryResponse.setSuccess(!v3Ack.hasError());
 			}
 		} catch (Exception e) {
 			log.error("queryPatient failed", e);
+			queryResponse.setSuccess(false);
 			return queryResponse;
 		}
 		return queryResponse;

@@ -41,7 +41,20 @@ import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
  */
 public class ConvenienceMasterPatientIndexV3 {
 
+	static final private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
+
 	static private Log log = LogFactory.getLog(ConvenienceMasterPatientIndexV3.class);
+
+	static {
+		// org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE needs to be
+		// initialized before org.hl7.v3.impl.V3FactoryImpl, otherwise a
+		// classcast Exception occurs
+		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
+		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
+		if (factory == null) {
+			throw new ExceptionInInitializerError();
+		}
+	}
 
 	/**
 	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source –
