@@ -15,9 +15,16 @@
  *******************************************************************************/
 package org.ehealth_connector.communication.mpi.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.mpi.MpiQuery;
+import org.hl7.v3.PRPAMT201306UV02PatientTelecom;
+import org.hl7.v3.TEL;
+import org.hl7.v3.V3Factory;
+import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerQuery;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 
@@ -57,9 +64,9 @@ public class V3PdqQuery implements MpiQuery {
 
 	@Override
 	public MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanNameDt humanDt) {
-		v3PdqConsumerQuery.addPatientName(useFuzzySearch, humanDt.getFamilyAsSingleString(),
-				humanDt.getGivenAsSingleString(), null, humanDt.getSuffixAsSingleString(),
-				humanDt.getPrefixAsSingleString());
+		v3PdqConsumerQuery.addPatientMothersMaidenName(useFuzzySearch,
+				humanDt.getFamilyAsSingleString(), humanDt.getGivenAsSingleString(), null,
+				humanDt.getSuffixAsSingleString(), humanDt.getPrefixAsSingleString());
 		return this;
 	}
 
@@ -105,7 +112,7 @@ public class V3PdqQuery implements MpiQuery {
 		if (identifierDt != null && identifierDt.getSystem().length() > 8
 				&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
 			String oid = identifierDt.getSystem().substring(8);
-			v3PdqConsumerQuery.addPatientID(identifierDt.getValue(), oid, "");
+			v3PdqConsumerQuery.addPatientID(oid, identifierDt.getValue(), "");
 		} else {
 			log.error(
 					"identifier system is not starting with urn:oid: " + identifierDt.getSystem());
@@ -125,7 +132,7 @@ public class V3PdqQuery implements MpiQuery {
 	public MpiQuery addPatientTelecom(ContactPointDt contactPointDt) {
 		if (contactPointDt == null) {
 			log.error("contactPointDt not specified");
-			return null;
+			return this;
 		}
 		if (ContactPointSystemEnum.PHONE
 				.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
@@ -138,12 +145,29 @@ public class V3PdqQuery implements MpiQuery {
 			} else if (ContactPointUseEnum.MOBILE
 					.equals(contactPointDt.getUseElement().getValueAsEnum())) {
 			}
-			v3PdqConsumerQuery.addPatientTelecom(contactPointDt.getValue(), use);
+			addPatientTelecom(contactPointDt.getValue(), use);
 		} else {
 			log.error("no phone specified as telecom "
 					+ contactPointDt.getSystemElement().getValueAsEnum());
 		}
 		return this;
+	}
+
+	/**
+	 * Add a patient telecom value of the supplied type. OHT method is missing
+	 * <semanticsText>Patient.telecom</semanticsText>
+	 * 
+	 * @param telecom
+	 * @param type
+	 *            ("HP" or "WP"
+	 */
+	private void addPatientTelecom(String telecom, String type) {
+		PRPAMT201306UV02PatientTelecom patientTel = V3Factory.eINSTANCE
+				.createPRPAMT201306UV02PatientTelecom();
+		TEL tel = PixPdqV3Utils.createTEL(telecom, type);
+		patientTel.getValue().add(tel);
+		patientTel.setSemanticsText(PixPdqV3Utils.createST1("Patient.telecom"));
+		v3PdqConsumerQuery.getParameterList().getPatientTelecom().add(patientTel);
 	}
 
 	@Override
@@ -191,6 +215,10 @@ public class V3PdqQuery implements MpiQuery {
 
 	@Override
 	public MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum) {
+		if (adminstrativeGenderEnum == null) {
+			log.error("adminstrativeGenderEnum not specified");
+			return this;
+		}
 		if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.FEMALE)) {
 			v3PdqConsumerQuery.setPatientSex("F");
 		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.MALE)) {
@@ -198,6 +226,17 @@ public class V3PdqQuery implements MpiQuery {
 		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.OTHER)) {
 			v3PdqConsumerQuery.setPatientSex("U");
 		}
+		return this;
+	}
+
+	@Override
+	public MpiQuery setPatientBirthDate(Date date) {
+		if (date == null) {
+			log.error("date not specified");
+			return this;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		v3PdqConsumerQuery.setPatientDateOfBirth(sdf.format(date));
 		return this;
 	}
 

@@ -16,6 +16,8 @@
 
 package org.ehealth_connector.communication;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
@@ -29,6 +31,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 
 public class MasterPatientIndexQuery {
+
+	static final private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 
 	private final Log log = LogFactory.getLog(MasterPatientIndexQuery.class);
 
@@ -98,6 +102,11 @@ public class MasterPatientIndexQuery {
 
 	public MasterPatientIndexQuery setPatientSex(AdministrativeGender adminstrativeGender) {
 		v3PdqQuery.setPatientSex(FhirPatient.convertGender(adminstrativeGender));
+		return this;
+	}
+
+	public MasterPatientIndexQuery setPatientDateOfBirth(Date birthDate) {
+		v3PdqQuery.setPatientBirthDate(birthDate);
 		return this;
 	}
 

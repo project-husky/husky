@@ -15,6 +15,8 @@
  *******************************************************************************/
 package org.ehealth_connector.communication.mpi;
 
+import java.util.Date;
+
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
 import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
 import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
@@ -42,5 +44,7 @@ public interface MpiQuery {
 	public abstract MpiQuery setPageCount(int pageCount);
 
 	public abstract MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum);
+
+	public abstract MpiQuery setPatientBirthDate(Date date);
 
 }
