@@ -154,6 +154,7 @@ public class ConvenienceCommunicationTest {
 				+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/reg/sq";
 		
 		dest.setRegistryUri(URI.create(registryUrl));
+		dest.addXdsRepository(new XdsRepository("1.1.4567332.1.1", new java.net.URI(repositoryUrlRetrieve)));
 		
 		java.net.URI initiatingGatewayUrl = null;
 		HashMap repositoryUriMap = null;

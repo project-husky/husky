@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
@@ -43,6 +44,8 @@ public class Destination {
 	 * URI for the XDS Registry
 	 */
 	private URI registryUri;
+	
+	private ArrayList<XdsRepository> xdsRepositories = new ArrayList<XdsRepository>();
 
 	/** The sender application oid for PIX/PDQ V3. */
 	private String senderApplicationOid;
@@ -65,11 +68,11 @@ public class Destination {
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Oid of the Sender Organization
-	 * @param repositoryUri
+	 * @param registryUri
 	 *            URI of the communication endpoint
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri) {
-		registryUri = repositoryUri;
+	public Destination(String senderOrganizationalOid, URI registryUri) {
+		this.registryUri = registryUri;
 		this.senderOrganizationalOid = senderOrganizationalOid;
 	}
 
@@ -79,16 +82,16 @@ public class Destination {
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Your OID
-	 * @param repositoryUri
+	 * @param registryUri
 	 *            URI of the communication endpoint
 	 * @param keyStore
 	 *            path to the keystore file
 	 * @param keyStorePassword
 	 *            the password for the keystore file
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI registryUri, String keyStore,
 			String keyStorePassword) {
-		this(senderOrganizationalOid, repositoryUri);
+		this(senderOrganizationalOid, registryUri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		trustStore = keyStore;
@@ -102,7 +105,7 @@ public class Destination {
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Your OID
-	 * @param repositoryUri
+	 * @param registryUri
 	 *            URI of the communication endpoint
 	 * @param keyStore
 	 *            path to the keystore file
@@ -113,13 +116,21 @@ public class Destination {
 	 * @param trustStorePassword
 	 *            the password for the truststore file
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI registryUri, String keyStore,
 			String keyStorePassword, String trustStore, String trustStorePassword) {
-		this(senderOrganizationalOid, repositoryUri);
+		this(senderOrganizationalOid, registryUri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		this.trustStore = trustStore;
 		this.trustStorePassword = trustStorePassword;
+	}
+	
+	public void addXdsRepository(XdsRepository xdsReposiory) {
+		this.xdsRepositories.add(xdsReposiory);
+	}
+	
+	public ArrayList<XdsRepository> getXdsRepositoryList() {
+		return this.xdsRepositories;
 	}
 
 	/**
