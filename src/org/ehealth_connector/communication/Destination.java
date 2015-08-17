@@ -18,6 +18,7 @@ package org.ehealth_connector.communication;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
@@ -129,8 +130,18 @@ public class Destination {
 		this.xdsRepositories.add(xdsReposiory);
 	}
 	
-	public ArrayList<XdsRepository> getXdsRepositoryList() {
+	public ArrayList<XdsRepository> getXdsRepositoriesAsList() {
 		return this.xdsRepositories;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public HashMap getXdsRepositoriesAsHashMap() {
+		@SuppressWarnings("rawtypes")
+		HashMap hashMap = new HashMap();
+		for (XdsRepository xdsRepo : xdsRepositories) {
+			hashMap.put(xdsRepo.getId(), xdsRepo.getUri());
+		}
+		return hashMap;
 	}
 
 	/**

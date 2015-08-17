@@ -383,14 +383,20 @@ public class ConvenienceCommunication {
 		return consumer.invokeStoredQuery(q, returnReferencesOnly);
 	}
 
-	public XDSRetrieveResponseType retrieveDocumentSet(Identificator patientId, DocumentRequestType documentRequest) {
-		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+	public XDSRetrieveResponseType retrieveDocumentSet(DocumentRequest docReq, Identificator identificator) {
+		//1. Create B_Consumer with initiatingGateway and repositoryUriMap
+		//2. Create RetrieveSetRequestType
+		//3. Add Document Request
+		//4. invoke retrieve documentSet
+		
+		B_Consumer consumer = new B_Consumer(destination.getRegistryUri(), null, destination.getXdsRepositoriesAsHashMap());
+		consumer.getAuditor().getConfig().setAuditorEnabled(false);
+		
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
 		
-        // Add Document Request 
-        retrieveDocumentSetRequest.getDocumentRequest().add(documentRequest);
+        retrieveDocumentSetRequest.getDocumentRequest().add(docReq.getOhtDocumentRequestType());
         
-        XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(patientId));
+        XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(identificator));
         
 		return response;
 	}

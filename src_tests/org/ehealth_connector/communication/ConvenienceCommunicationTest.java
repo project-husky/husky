@@ -17,6 +17,9 @@ package org.ehealth_connector.communication;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -153,34 +156,89 @@ public class ConvenienceCommunicationTest {
 		String registryUrl = "http://" + host
 				+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/reg/sq";
 		
-		dest.setRegistryUri(URI.create(registryUrl));
-		dest.addXdsRepository(new XdsRepository("1.1.4567332.1.1", new java.net.URI(repositoryUrlRetrieve)));
+		//TODO
+		//1. Create DocumentRequest Object (Convencience Version of DocumentRequestType, without Factory)
+		//2. Set DocumentRequest Parameters
+		//3. Create XdsRepository Object
+		//4. Create Destination Object (Constructor for One and one for more Repositories)
+		//5. Add to Destination Object
+		//6. Create ConvenienceCommunication with Destination Object
+		//7. Use ConvenienceCommunication with (DocumentRequest, PatientId)
+		//8. Check for errors and attachments and print inputStream
 		
-		java.net.URI initiatingGatewayUrl = null;
-		HashMap repositoryUriMap = null;
+		//c.getConfig().setAuditorEnabled(false);
+		
+		//1. & 2.
+		DocumentRequest docReq = new DocumentRequest("1.1.4567332.1.1", "69d1a952-29c8-9024-8ab8-afee90bf9db4", null);
+		
+		//3.
+		XdsRepository xdsRep = null;
 		try {
-			repositoryUriMap = new HashMap();
-			
-			initiatingGatewayUrl = new java.net.URI("http://38.112.155.180:8080/ServicesGE/HS.IHE.XCA.InitiatingGateway.Services.cls");
-			repositoryUriMap.put("1.3.6.1.4.1.21367.2009.1.2.1030", new java.net.URI("http://38.112.155.180:8080/ServicesGE/HS.IHE.XCA.InitiatingGateway.Services.cls"));
-			repositoryUriMap.put("1.19.6.24.109.42.1.6", new java.net.URI("http://localhost:8080/axis2/services/XDSBRepository"));
-			repositoryUriMap.put("1.1.4567332.1.1", new java.net.URI(repositoryUrlRetrieve));
+			xdsRep = new XdsRepository("1.1.4567332.1.1", new URI(repositoryUrlRetrieve));
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//TODO: Konfiguration der Repositories in das Destination Objekt auslagern. Ebenso: Initiating Gateway.
-		B_Consumer d = new B_Consumer(URI.create(registryUrl), initiatingGatewayUrl, repositoryUriMap);
 		
-		DocumentRequestType docReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createDocumentRequestType();
-		docReq.setDocumentUniqueId("69d1a952-29c8-9024-8ab8-afee90bf9db4"); //1.2.3.4.106001060042150156.1436307224604.1
-		docReq.setHomeCommunityId(null);
-		docReq.setRepositoryUniqueId("1.1.4567332.1.1");
-		d.getAuditor().getConfig().setAuditorEnabled(false);
+		//4. TODO
 		
-		RetrieveDocumentSetRequestType retrieveRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
-		XDSRetrieveResponseType rrt = d.retrieveDocumentSet(retrieveRequest, XdsUtil.convertIdentificator(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644")));
-		rrt.getAttachments();
-		//XDSRetrieveResponseType rr = d.retrieveDocumentSet(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), docReq);
+		//5.
+		dest.addXdsRepository(xdsRep);
+		
+		//6.
+		c.setDestination(dest);
+		
+		//7.
+		XDSRetrieveResponseType rrt = c.retrieveDocumentSet(docReq, new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"));
+		System.out.println("Errors: "+rrt.getErrorList()+". Found "+rrt.getAttachments().size()+" Documents.");
+		
+//		BufferedReader reader = new BufferedReader(new InputStreamReader(rrt.getAttachments().get(0).getStream()));
+//        StringBuilder out = new StringBuilder();
+//        String line;
+//        try {
+//			while ((line = reader.readLine()) != null) {
+//			    out.append(line);
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        System.out.println(out.toString());   //Prints the string content read from input stream
+//        try {
+//			reader.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		//d.getAuditor().getConfig().setAuditorEnabled(false);
+		
+		
+//		dest.setRegistryUri(URI.create(registryUrl));
+//		
+//		java.net.URI initiatingGatewayUrl = null;
+//		HashMap repositoryUriMap = null;
+//		try {
+//			dest.addXdsRepository(new XdsRepository("1.1.4567332.1.1", new java.net.URI(repositoryUrlRetrieve)));
+//			
+//			repositoryUriMap = new HashMap();
+//			
+//			initiatingGatewayUrl = new java.net.URI("http://38.112.155.180:8080/ServicesGE/HS.IHE.XCA.InitiatingGateway.Services.cls");
+//			repositoryUriMap.put("1.3.6.1.4.1.21367.2009.1.2.1030", new java.net.URI("http://38.112.155.180:8080/ServicesGE/HS.IHE.XCA.InitiatingGateway.Services.cls"));
+//			repositoryUriMap.put("1.19.6.24.109.42.1.6", new java.net.URI("http://localhost:8080/axis2/services/XDSBRepository"));
+//			repositoryUriMap.put("1.1.4567332.1.1", new java.net.URI(repositoryUrlRetrieve));
+//		} catch (URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		//TODO: Konfiguration der Repositories in das Destination Objekt auslagern. Ebenso: Initiating Gateway.
+//		B_Consumer d = new B_Consumer(URI.create(registryUrl), initiatingGatewayUrl, repositoryUriMap);
+//		
+
+//		
+//		RetrieveDocumentSetRequestType retrieveRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
+//		XDSRetrieveResponseType rrt = d.retrieveDocumentSet(retrieveRequest, XdsUtil.convertIdentificator(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644")));
+//		rrt.getAttachments();
+//		//XDSRetrieveResponseType rr = d.retrieveDocumentSet(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), docReq);
 	}
 }
