@@ -64,7 +64,7 @@ public class ConvenienceCommunicationTest {
 
 	// One PDF and one CDA Document that will be transfered
 	public static final String pdfFileName = "patientconsent.pdf";
-	public static final String cdaFilePath = "CDA-CH-VACD_Impfausweis.xml";
+	public static final String cdaFilePath = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/CDA-CH-VACD_Impfausweis.xml";
 	private final Log log = LogFactory.getLog(ConvenienceCommunicationTest.class);
 	
 	
@@ -277,7 +277,7 @@ public class ConvenienceCommunicationTest {
 		return true;
 	}
 	
-	@Test
+	//@Test
 	public void testXdsConsumerRetrieve() {
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644");
 		String organizationOid = "1.3.6.1.4.1.21367.101";
