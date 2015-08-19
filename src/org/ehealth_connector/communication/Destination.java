@@ -42,9 +42,14 @@ public class Destination {
 	private String receiverFacilityOid;
 
 	/**
+	 * URI for the XDS Repository
+	 */
+	private URI repository;
+	
+	/**
 	 * URI for the XDS Registry
 	 */
-	private URI registryUri;
+	private URI registry;
 	
 	private ArrayList<XdsRepository> xdsRepositories = new ArrayList<XdsRepository>();
 
@@ -69,11 +74,11 @@ public class Destination {
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Oid of the Sender Organization
-	 * @param registryUri
+	 * @param repositoryUri
 	 *            URI of the communication endpoint
 	 */
-	public Destination(String senderOrganizationalOid, URI registryUri) {
-		this.registryUri = registryUri;
+	public Destination(String senderOrganizationalOid, URI repositoryUri) {
+		this.repository = repositoryUri;
 		this.senderOrganizationalOid = senderOrganizationalOid;
 	}
 
@@ -90,9 +95,9 @@ public class Destination {
 	 * @param keyStorePassword
 	 *            the password for the keystore file
 	 */
-	public Destination(String senderOrganizationalOid, URI registryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
 			String keyStorePassword) {
-		this(senderOrganizationalOid, registryUri);
+		this(senderOrganizationalOid, repositoryUri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		trustStore = keyStore;
@@ -117,9 +122,9 @@ public class Destination {
 	 * @param trustStorePassword
 	 *            the password for the truststore file
 	 */
-	public Destination(String senderOrganizationalOid, URI registryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
 			String keyStorePassword, String trustStore, String trustStorePassword) {
-		this(senderOrganizationalOid, registryUri);
+		this(senderOrganizationalOid, repositoryUri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		this.trustStore = trustStore;
@@ -208,7 +213,7 @@ public class Destination {
 	}
 
 	public URI getRegistryUri() {
-		return registryUri;
+		return registry;
 	}
 
 	/**
@@ -326,10 +331,14 @@ public class Destination {
 		this.receiverFacilityOid = receiverFacilityOid;
 	}
 
-	public void setRegistryUri(URI registryUri) {
-		this.registryUri = registryUri;
+	public void setRepositoryUri(URI repositoryUri) {
+		this.repository = repositoryUri;
 	}
-
+	
+	public void setRegistryUri(URI registryUri){
+		this.registry = registryUri;
+	}
+	
 	/**
 	 * Sets the sender application oid.
 	 * 
@@ -371,6 +380,10 @@ public class Destination {
 	 */
 	public void setTrustStorePassword(String trustStorePassword) {
 		this.trustStorePassword = trustStorePassword;
+	}
+
+	public URI getRepositoryUri() {
+		return repository;
 	}
 
 }

@@ -133,7 +133,7 @@ public class ConvenienceCommunicationTest {
 					+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/reg/sq";
 			String repositoryUrl = "http://" + host
 					+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/rep/prb";
-			dest.setRegistryUri(URI.create(registryUrl));
+			dest.setRepositoryUri(URI.create(registryUrl));
 
 			FindDocumentsQuery q = new FindDocumentsQuery(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
 			XDSQueryResponseType qr = c.invokeStoredQuery(q.getOhtStoredQuery(), false);
@@ -211,7 +211,7 @@ public class ConvenienceCommunicationTest {
 		GetDocumentsQuery q;
 		XDSQueryResponseType qr = null;
 		try {
-			dest.setRegistryUri(new URI(registryUrl));
+			dest.setRepositoryUri(new URI(registryUrl));
 			c.setDestination(dest);
 			//q = new FindDocumentsQuery(patientId, null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
 			q = new GetDocumentsQuery(new String[] { docUid }, true);

@@ -45,7 +45,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 public class DocumentMetadata {
 
 	/** The x doc. */
-	private DocumentEntryType xDoc;
+	protected DocumentEntryType xDoc;
 
 	/** The cda. */
 	private final ClinicalDocument cda;

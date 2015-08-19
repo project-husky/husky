@@ -120,6 +120,25 @@ public class ConvenienceCommunication {
 		
 		return addXdsDocument(doc, desc);
 	}
+	
+	/**
+	 * Adds a document to the XDS Submission set.
+	 * 
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param inputStream
+	 *            The input stream to the document
+	 * @return the document metadata (which have to be completed)
+	 * @throws Exception
+	 *             the exception
+	 */
+	public org.ehealth_connector.communication.ch.DocumentMetadata addChDocument(DocumentDescriptor desc,
+			InputStream inputStream) throws Exception {
+		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
+		
+		return (org.ehealth_connector.communication.ch.DocumentMetadata) addXdsDocument(doc, desc);
+	}
 
 	/**
 	 * Adds a document to the XDS Submission set.
@@ -141,6 +160,8 @@ public class ConvenienceCommunication {
 	}
 	
 	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
+		source = new B_Source(destination.getRepositoryUri());
+		
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
@@ -182,7 +203,6 @@ public class ConvenienceCommunication {
 		destination = dest;
 
 		organizationalId = dest.getSenderOrganizationalOid();
-		source = new B_Source(dest.getRegistryUri());
 
 		if (dest.getKeyStore() == null) {
 			System.clearProperty("javax.net.ssl.keyStore");
