@@ -22,7 +22,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	public FindDocumentsQuery(
 			Identificator patientId,
 			org.ehealth_connector.communication.ch.enums.ClassCode[] classCodes,
-			DateTimeRange[] dateTimeRanges,
+			org.ehealth_connector.communication.ch.storedquery.DateTimeRange[] dateTimeRanges,
 			org.ehealth_connector.communication.ch.enums.PracticeSettingCode[] practiceSettingCodes,
 			HealthcareFacilityTypeCode[] healthCareFacilityCodes,
 			
@@ -36,7 +36,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
 				XdsUtil.convertIdentificator(patientId),
 				XdsUtil.convertEhcEnumToCodedMetadataType(classCodes),
-				dateTimeRanges, 
+				XdsUtil.convertEhcDateTimeRangeToOht(dateTimeRanges), 
 				XdsUtil.convertEhcEnumToCodedMetadataType(practiceSettingCodes), 
 				XdsUtil.convertEhcEnumToCodedMetadataType(healthCareFacilityCodes),
 				null, 

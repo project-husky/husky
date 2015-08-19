@@ -19,7 +19,7 @@ public class QueryTests extends XdsTestUtils {
 		//Constructor Test
 		try {
 			//Create a query
-			FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, dateTimeRanges, practiceSettingCodes, healthCareFacilityCodes, confidentialityCodes, formatCodes, authorPerson, avaiabilityStatus);
+			FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, eDateTimeRanges, practiceSettingCodes, healthCareFacilityCodes, confidentialityCodes, formatCodes, authorPerson, avaiabilityStatus);
 			
 			//Check query parameters
 			StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
@@ -29,8 +29,8 @@ public class QueryTests extends XdsTestUtils {
 			
 			assertTrue(sqpl.get("$XDSDocumentEntryStatus").contains(avaiabilityStatus.getCodeValue()));
 
-			assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom").contains(dateTimeRange1.getFrom()));
-			assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo").contains(dateTimeRange1.getTo()));
+			assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom").contains(eDateTimeRange1.getFromAsUsFormattedString()));
+			assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo").contains(eDateTimeRange1.getToAsUsFormattedString()));
 			
 			assertTrue(sqpl.get("$XDSDocumentEntryClassCode").contains(classCodes[0].getCodeValue()));
 			assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode").contains(practiceSettingCodes[0].getCodeSystemName()));

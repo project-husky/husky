@@ -17,8 +17,16 @@ public class DateTimeRange {
 		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
 	}
 	
+	public String getFromAsUsFormattedString() {
+		return ohtDtr.getFrom();
+	}
+	
 	public Date getTo() {
 		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
+	}
+	
+	public String getToAsUsFormattedString() {
+		return ohtDtr.getTo();
 	}
 	
 	public void setFrom(Date from) {

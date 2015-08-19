@@ -182,4 +182,19 @@ public class XdsUtil {
 			return cmtArray;
 		}
 	}
+	
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRangeToOht(org.ehealth_connector.communication.ch.storedquery.DateTimeRange[] dtr) {
+		if (dtr == null) return null;
+		else {
+			org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
+			
+			int i = 0;
+			for (org.ehealth_connector.communication.ch.storedquery.DateTimeRange dt : dtr) {
+				dtrArray[i] = dt.getOhtDateTimeRange();
+				i++;
+			}
+			
+			return dtrArray;
+		}
+	}
 }
