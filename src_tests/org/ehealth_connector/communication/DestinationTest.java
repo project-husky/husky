@@ -62,7 +62,7 @@ public class DestinationTest {
 	public void testKeyStoreConstructor() {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-		assertEquals(repUri, dest.getRegistryUri());
+		assertEquals(repUri, dest.getRepositoryUri());
 		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
 		assertEquals(KEY_STORE, dest.getTrustStore());
@@ -74,7 +74,7 @@ public class DestinationTest {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS,
 				TRUST_STORE, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-		assertEquals(repUri, dest.getRegistryUri());
+		assertEquals(repUri, dest.getRepositoryUri());
 		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
 		assertEquals(TRUST_STORE, dest.getTrustStore());
