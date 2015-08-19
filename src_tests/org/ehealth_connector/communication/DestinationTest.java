@@ -98,7 +98,7 @@ public class DestinationTest {
 		dest.setReceiverFacilityOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getReceiverFacilityOid());
 		dest.setRepositoryUri(repUri);
-		assertEquals(repUri, dest.getRegistryUri());
+		assertEquals(repUri, dest.getRepositoryUri());
 		dest.setSenderApplicationOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderApplicationOid());
 		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);
