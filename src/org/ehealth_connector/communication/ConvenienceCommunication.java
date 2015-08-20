@@ -309,6 +309,7 @@ public class ConvenienceCommunication {
 	 *            the doc metadata
 	 */
 	private void cdaFixes(DocumentMetadata docMetadata) {
+		docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
 		docMetadata.getMdhtDocumentEntryType().setLanguageCode(null);
 		docMetadata.getMdhtDocumentEntryType().setClassCode(null);
 		docMetadata.getMdhtDocumentEntryType().setPatientId(null);
