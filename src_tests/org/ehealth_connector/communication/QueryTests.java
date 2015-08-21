@@ -36,7 +36,7 @@ public class QueryTests extends XdsTestUtils {
 			assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo").contains(eDateTimeRange1.getToAsUsFormattedString()));
 			
 			assertTrue(sqpl.get("$XDSDocumentEntryClassCode").contains(classCodes[0].getCodeValue()));
-			assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode").contains(practiceSettingCodes[0].getCodeSystemName()));
+			assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode").contains(practiceSettingCodes[0].getCodeSystemOid()));
 			assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode").contains(healthCareFacilityCodes[0].getCodeValue()));
 			assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode").contains(confidentialityCodes[1].getCodeValue()));
 			assertTrue(sqpl.get("$XDSDocumentEntryFormatCode").contains(formatCodes[1].getCodeValue()));
@@ -91,7 +91,7 @@ public class QueryTests extends XdsTestUtils {
 			//Check first query
 			assertTrue(sqpl1.get("$XDSFolderEntryUUID").contains("1234"));
 			assertTrue(sqpl1.get("$XDSDocumentEntryFormatCode").contains(formatCodes[1].getCodeValue()));
-			assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode").contains(confidentialityCodes[1].getCodeSystemName()));
+			assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode").contains(confidentialityCodes[1].getCodeSystemOid()));
 			
 			//Check second query
 			assertTrue(q2.getOhtStoredQuery().getHomeCommunityId().contains("9876"));
