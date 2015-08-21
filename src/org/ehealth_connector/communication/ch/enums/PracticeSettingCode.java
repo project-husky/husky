@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser In-formation eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffs-steuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
 *<div class="fr"></div>
 */
-public enum PracticeSettingCode implements CodedMetadataEnumÎnterface {
+public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">Allergologie</div>
@@ -499,8 +499,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

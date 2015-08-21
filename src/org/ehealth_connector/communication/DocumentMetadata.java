@@ -28,6 +28,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
@@ -278,5 +279,9 @@ public class DocumentMetadata {
 	 */
 	public void setUniqueId(String id) {
 		xDoc.setUniqueId(id);
+	}
+	
+	public DocumentMetadata toDocumentMetadataCh() {
+		return new DocumentMetadataCh(this);
 	}
 }

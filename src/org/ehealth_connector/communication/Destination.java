@@ -139,9 +139,8 @@ public class Destination {
 		return this.xdsRepositories;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public HashMap getXdsRepositoriesAsHashMap() {
-		@SuppressWarnings("rawtypes")
 		HashMap hashMap = new HashMap();
 		for (XdsRepository xdsRepo : xdsRepositories) {
 			hashMap.put(xdsRepo.getId(), xdsRepo.getUri());

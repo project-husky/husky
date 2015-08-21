@@ -17,11 +17,15 @@
 package org.ehealth_connector.communication;
 
 import java.io.InputStream;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.communication.ch.DocumentMetadataCh;
+import org.ehealth_connector.communication.ch.enums.AuthorRole;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
@@ -70,7 +74,7 @@ public class ConvenienceCommunication {
 
 	/** The transaction data to send XDS Documents. */
 	private SubmitTransactionData txnData = null;
-	
+
 	private boolean auditorEnabled = false;
 
 	/**
@@ -117,10 +121,10 @@ public class ConvenienceCommunication {
 	public DocumentMetadata addDocument(DocumentDescriptor desc,
 			InputStream inputStream) throws Exception {
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-		
+
 		return addXdsDocument(doc, desc);
 	}
-	
+
 	/**
 	 * Adds a document to the XDS Submission set.
 	 * 
@@ -133,11 +137,11 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public org.ehealth_connector.communication.ch.DocumentMetadata addChDocument(DocumentDescriptor desc,
+	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(DocumentDescriptor desc,
 			InputStream inputStream) throws Exception {
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-		
-		return (org.ehealth_connector.communication.ch.DocumentMetadata) addXdsDocument(doc, desc);
+
+		return new DocumentMetadataCh(addXdsDocument(doc, desc));
 	}
 
 	/**
@@ -155,13 +159,13 @@ public class ConvenienceCommunication {
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws Exception {
 		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
-		
+
 		return addXdsDocument(doc, desc);
 	}
-	
+
 	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
 		source = new B_Source(destination.getRepositoryUri());
-		
+
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
@@ -223,7 +227,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <p>
-	 * Sends the current document to the according receipient (repository actor
+	 * Sends the current document to the according recipient (repository actor
 	 * as specified in IHE XDR or IHE XDS). The transmission is performed as
 	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
 	 * 
@@ -242,36 +246,54 @@ public class ConvenienceCommunication {
 			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
 		}
 
-		// Create SubmissionSet
-		SubmissionSetType subSet = txnData.getSubmissionSet();
-		subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
+		generateMissingSubmissionSetAttributes();
 
-		// set submission set source id
-		subSet.setSourceId(organizationalId);
-
-		// set submission time
-		subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
-		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
-
-		// Use the PatientId of the first Document for the
-		String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
-		CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
-		subSet.setPatientId(EcoreUtil.copy(testCx));
-
-		// set ContentTypeCode
-		if (txnData.getDocumentEntry(uuid).getTypeCode()!=null) {
-			subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid).getTypeCode()));
-		}
-		else {
-			subSet.setContentTypeCode(XdsUtil.createCodedMetadata(
-					"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
-					null));
-		}
-
-		// txnData.saveMetadataToFile("C:/temp/meta.xml");
+		txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
-		System.out.println("XDSResponseType: " + xdsr);
 		return xdsr;
+	}
+	
+	/**
+	 * <p>
+	 * Sends the current document to the according recipient (repository actor
+	 * as specified in IHE XDR or IHE XDS). The AuthorRole is one of the minimal required information according to IHE Suisse for classification of documents in Switzerland. The transmission is performed as
+	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
+	 * 
+	 * </p>
+	 * <p>
+	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
+	 * </p>
+	 * 
+	 * @return XDSResponseType
+	 * @throws Exception
+	 *             the exception
+	 */
+	public XDSResponseType submit(AuthorRole authorRole) throws Exception {
+		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
+		AuthorCh author = new AuthorCh();
+		author.setRoleFunction(authorRole);
+		subSet.setAuthor(author);
+		return submit(subSet);
+	}
+	
+	/**
+	 * <p>
+	 * Sends the current document to the according recipient (repository actor
+	 * as specified in IHE XDR or IHE XDS). The information in the subSet Object will be used to create comprehensive meta data about this submission (e.g. with AuthorRole, AuthorInstitution, ContentType and Title). The transmission is performed as
+	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
+	 * 
+	 * </p>
+	 * <p>
+	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
+	 * </p>
+	 * 
+	 * @return XDSResponseType
+	 * @throws Exception
+	 *             the exception
+	 */
+	public XDSResponseType submit(SubmissionSetMetadata subSet) throws Exception {
+		subSet.toOhtSubmissionSetType(txnData.getSubmissionSet());
+		return submit();
 	}
 
 	/**
@@ -299,7 +321,7 @@ public class ConvenienceCommunication {
 
 		source = new B_Source(dest.getRegistryUri());
 		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(auditorEnabled);
+		.setAuditorEnabled(auditorEnabled);
 	}
 
 	/**
@@ -375,14 +397,14 @@ public class ConvenienceCommunication {
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
 				.isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType()
-						.getConfidentialityCode() == null) {
+				.getConfidentialityCode() == null) {
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
-					.clear();
+			.clear();
 			docMetadata
-					.getMdhtDocumentEntryType()
-					.getConfidentialityCode()
-					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
-							"N", null, null));
+			.getMdhtDocumentEntryType()
+			.getConfidentialityCode()
+			.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25",
+					"N", null, null));
 		}
 
 		// Generate Creation Time with the current time
@@ -399,9 +421,47 @@ public class ConvenienceCommunication {
 		}
 	}
 
+	private void generateMissingSubmissionSetAttributes() {
+		// Create SubmissionSet
+		SubmissionSetType subSet = txnData.getSubmissionSet();
+		if (subSet.getUniqueId() == null) {
+			subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
+		}
+	
+		// set submission set source id
+		if (subSet.getSourceId() == null) {
+			subSet.setSourceId(organizationalId);
+		}
+	
+		// set submission time
+		if (subSet.getSubmissionTime() == null) {
+			subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+		}
+		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+	
+		String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
+		// Use the PatientId of the first Document for the
+		if (subSet.getPatientId() == null) {
+			CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
+			subSet.setPatientId(EcoreUtil.copy(testCx));
+		}
+	
+		// set ContentTypeCode
+		if (subSet.getContentTypeCode() == null) {
+			if (txnData.getDocumentEntry(uuid).getTypeCode()!=null) {
+				subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid).getTypeCode()));
+			}
+			else {
+				subSet.setContentTypeCode(XdsUtil.createCodedMetadata(
+						"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
+						null));
+			}
+		}
+	}
+
 	public XDSQueryResponseType invokeStoredQuery(StoredQuery q, boolean returnReferencesOnly) throws Exception {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
-	
+
 		return consumer.invokeStoredQuery(q, returnReferencesOnly);
 	}
 
@@ -410,19 +470,19 @@ public class ConvenienceCommunication {
 		//2. Create RetrieveSetRequestType
 		//3. Add Document Request
 		//4. invoke retrieve documentSet
-		
+
 		//B_Consumer consumer = new B_Consumer(destination.getRegistryUri(), null, destination.getXdsRepositoriesAsHashMap());
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 		consumer.setRepositoryMap(destination.getXdsRepositoriesAsHashMap());
-		
+
 		consumer.getAuditor().getConfig().setAuditorEnabled(false);
-		
+
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
-		
-        retrieveDocumentSetRequest.getDocumentRequest().add(docReq.getOhtDocumentRequestType());
-        
-        XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(identificator));
-        
+
+		retrieveDocumentSetRequest.getDocumentRequest().add(docReq.getOhtDocumentRequestType());
+
+		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(identificator));
+
 		return response;
 	}
 }

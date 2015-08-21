@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Dieser Code definiert die Rolle des Authors innerhalb der Institution, z.B Arzt, Pflegefachperson, Therapeut, etc. Dieser Wert soll in Kombination mit anderen Attributen eine eindeutige Kategorisierung der Dokumente ermöglichen. Dies ist ein Sub-Attribut von epd_xds_author. Dieses Sub-Attribut ist zwingend erforderlich.</div>
 *<div class="fr"></div>
 */
-public enum AuthorRole implements CodedMetadataEnumÎnterface {
+public enum AuthorRole implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">Apotheker</div>
@@ -170,8 +170,7 @@ public enum AuthorRole implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

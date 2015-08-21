@@ -24,7 +24,10 @@ import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Telecoms;
+import org.ehealth_connector.communication.ch.enums.AuthorRole;
+import org.ehealth_connector.communication.ch.enums.AuthorSpeciality;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -92,6 +95,26 @@ public class CdaChTests extends TestUtils {
 		a.setGln(numS1);
 		a.setGln(numS2);
 		a.setTime(endDate);
+		
+		a.setRoleFunction(code1);
+		assertTrue(isEqual(code1, a.getRoleFunction()));
+		
+		a.setSpeciality(code2);
+		assertTrue(isEqual(code2, a.getSpeciality()));
+	}
+	
+	@Test 
+	public void testAuthorCd() {
+		org.ehealth_connector.cda.ch.AuthorCh b = new org.ehealth_connector.cda.ch.AuthorCh();
+		
+		b.addId(id2);
+		assertTrue(isEqual(id2, b.getIds().get(0)));
+		
+		b.setRoleFunction(AuthorRole.ANDERE);
+		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
+		
+		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b.getSpecialityEnum());
 	}
 
 	@Test

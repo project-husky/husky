@@ -40,8 +40,8 @@ public class Author {
 	/**
 	 * The author.
 	 */
-	private org.openhealthtools.mdht.uml.cda.Author mAuthor;
-	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+	protected org.openhealthtools.mdht.uml.cda.Author mAuthor;
+	protected org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	public Author() {
@@ -213,6 +213,23 @@ public class Author {
 		}
 		return "";
 	}
+	
+	/**
+	 * Gets the author function code. This element specifies in which role or function the author is related to this document (e.g. Code "40001" for "Apotheker"). The code can also be used as author role, when a document is beeing sent (via XDS, XDM, XDR).
+	 * @return code the function code
+	 */
+	public Code getRoleFunction() {
+		return new Code(mAuthor.getFunctionCode());
+	}
+	
+	/**
+	 * Sets the author speciality code. This element specifies the speciality ("Fachrichtung", e.g. "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The code can also be used as author speciality, when a document is beeing sent (via XDS, XDM, XDR).
+	 * @return code the speciality code
+	 */
+	public Code getSpeciality() {
+		return new Code(mAsAuthor.getCode());
+	}
+	
 
 	/**
 	 * <div class="en">Gets the gln (identification of the author)</div> <div
@@ -277,9 +294,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the organization (RepresentedOrganization)</div> <div
+	 * <div class="en">Gets the organization (RepresentedOrganization). This element can also be used as author represented organization, when a document is beeing sent (via XDS, XDM, XDR).</div> <div
 	 * class="de">Liefert die Organisation (RepresentedOrganization), der der
-	 * Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div> <div
+	 * Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als Author Represented Organization Attribut verwendet werden, wenn das Dokument per XDS, XDM oder XDR verschickt wird.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * 
@@ -291,6 +308,7 @@ public class Author {
 		Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
 		return o;
 	}
+	
 
 	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
@@ -324,6 +342,23 @@ public class Author {
 		return null;
 	}
 
+	
+	/**
+	 * Sets the author function code. This element specifies in which role or function the author is related to this document (e.g. Code "40001" for "Apotheker"). The code can also be used as author role, when a document is beeing sent (via XDS, XDM, XDR).
+	 * @param code the function code
+	 */
+	public void setRoleFunction(Code code) {
+		mAuthor.setFunctionCode(code.getCE());
+	}
+	
+	/**
+	 * Sets the author speciality code. This element specifies the speciality ("Fachrichtung", e.g. Code "50001" for "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The code can also be used as author speciality, when a document is beeing sent (via XDS, XDM, XDR).
+	 * @return code the speciality code
+	 */
+	public void setSpeciality(Code code) {
+		mAsAuthor.setCode(code.getCE());
+	}
+	
 	/**
 	 * <div class="en">Sets the gln.</div> <div class="de">Setzt die GLN (ID des
 	 * Autoren).</div> <div class="fr"></div> <div class="it"></div>
@@ -338,9 +373,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Sets the organization (RepresentedOrganization)</div> <div
+	 * <div class="en">Sets the organization (RepresentedOrganization). The code can also be used as author role, when a document is beeing sent (via XDS, XDM, XDR).</div> <div
 	 * class="de">Setzt eine Organisation (RepresentedOrganization), der der Autor
-	 * angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div> <div
+	 * angehört (z.B. ein Krankenhaus). Dieses Element kann auch als Author Represented Organization Attribut verwendet werden, wenn das Dokument per XDS, XDM oder XDR verschickt wird.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * 
@@ -385,6 +420,10 @@ public class Author {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public org.ehealth_connector.cda.ch.AuthorCh toChAuthor() {
+		return new org.ehealth_connector.cda.ch.AuthorCh(getAuthorMdht());
 	}
 
 	private CE createFunctionCode() {

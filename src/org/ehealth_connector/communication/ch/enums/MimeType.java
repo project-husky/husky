@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">MIME Typ des XDS Dokuments in der Dokumentenablage. </div>
 *<div class="fr"></div>
 */
-public enum MimeType implements CodedMetadataEnumÎnterface {
+public enum MimeType implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">CDA Level 1 Multipart</div>
@@ -135,8 +135,7 @@ public enum MimeType implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

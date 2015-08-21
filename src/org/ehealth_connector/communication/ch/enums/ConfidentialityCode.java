@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Dieser Code definiert die Vertraulichkeitsstufe des XDS Dokuments. Dabei finden drei medizinische Stufen Anwendung: Nützliche Daten mit einer breiten Zugänglichkeit, z.B. für den Notfall, medizinische Daten im Sinne von Daten für die Behandelnden und sensible Daten im Sinne von Daten für den Behandelnden des Vertrauens oder die Person des Vertrauens. Diese drei Stufen werden zum Einen ergänzt mit einer Stufe für administrative Daten. Diese ist zwingend notwendig. Zum Anderen werden sie ergänzt mit der Stufe geheim, die zwar möglichst wenig zum Einsatz kommen sollte, aber für die Akzeptanz wichtig ist (mit dieser Stufe ist sichergestellt, dass der Patient seine Daten niemandem offenlegen muss).			</div>
 *<div class="fr"></div>
 */
-public enum ConfidentialityCode implements CodedMetadataEnumÎnterface {
+public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">administrative Daten</div>
@@ -107,8 +107,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

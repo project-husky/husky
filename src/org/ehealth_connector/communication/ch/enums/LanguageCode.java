@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Definiert die Sprache in welcher das Dokument verfasst wurde. Die Werte richten sich nach der IETF RFC 3066 Norm.</div>
 *<div class="fr"></div>
 */
-public enum LanguageCode implements CodedMetadataEnumÎnterface {
+public enum LanguageCode implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">Deutsch</div>
@@ -107,8 +107,7 @@ public enum LanguageCode implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

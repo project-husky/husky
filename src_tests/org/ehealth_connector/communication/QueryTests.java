@@ -3,6 +3,9 @@ package org.ehealth_connector.communication;
 import static org.junit.Assert.*;
 
 import org.ehealth_connector.communication.ch.storedquery.*;
+import org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery;
+import org.ehealth_connector.communication.storedquery.GetDocumentsQuery;
+import org.ehealth_connector.communication.storedquery.GetRelatedDocumentsQuery;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
@@ -50,7 +53,7 @@ public class QueryTests extends XdsTestUtils {
 	@Test
 	public void FindFoldersStoredQueryTest() {
 		 try {
-			FindFoldersStoredQuery q = new org.ehealth_connector.communication.ch.storedquery.FindFoldersStoredQuery(patientId, avaiabilityStatus);
+			FindFoldersStoredQuery q = new org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery(patientId, avaiabilityStatus);
 		
 			StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
 			

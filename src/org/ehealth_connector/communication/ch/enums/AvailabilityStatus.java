@@ -12,7 +12,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Ein XDS Dokument hat immer einen Verfügbarkeitsstatus. Entweder approved (genehmigt) oder deprecated (abgelehnt).</div>
 *<div class="fr"></div>
 */
-public enum AvailabilityStatus implements CodedMetadataEnumÎnterface {
+public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">genehmigt</div>
@@ -88,8 +88,7 @@ public enum AvailabilityStatus implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

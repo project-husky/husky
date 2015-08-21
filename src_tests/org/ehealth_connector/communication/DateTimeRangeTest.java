@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.communication.ch.enums.DateTimeRangeAttributes;
-import org.ehealth_connector.communication.ch.storedquery.DateTimeRange;
+import org.ehealth_connector.communication.storedquery.DateTimeRange;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 

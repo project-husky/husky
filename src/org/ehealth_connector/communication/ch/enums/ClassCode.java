@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Dieser Code definiert die Klasse des Dokumentes und richtet sich nach der CEN 13606 Norm. Unterhalb der Klassen sind Typen definiert im Attribut epd_xds_typeCode.</div>
 *<div class="fr"></div>
 */
-public enum ClassCode implements CodedMetadataEnumÎnterface {
+public enum ClassCode implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">Konsultationseinträge/-Notizen</div>
@@ -184,8 +184,7 @@ public enum ClassCode implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

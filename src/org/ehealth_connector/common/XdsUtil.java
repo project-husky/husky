@@ -28,9 +28,10 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumÎnterface;
+import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumInterface;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
+import org.openhealthtools.ihe.common.hl7v2.XON;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
@@ -168,13 +169,28 @@ public class XdsUtil {
 		return ist;
 	}
 	
-	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(CodedMetadataEnumÎnterface[] codedMetadataEnum) {
+	public static  CodedMetadataType[] convertEhcCodeToCodedMetadataType(Code[] codeList) {
+		if (codeList == null) return null;
+		else {
+			CodedMetadataType[] cmtArray = new CodedMetadataType[codeList.length];
+			
+			int i = 0;
+			for (Code cme : codeList) {
+				cmtArray[i] = XdsUtil.convertCode(cme);
+				i++;
+			}
+			
+			return cmtArray;
+		}
+	}
+	
+	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(CodedMetadataEnumInterface[] codedMetadataEnum) {
 		if (codedMetadataEnum == null) return null;
 		else {
 			CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
 			
 			int i = 0;
-			for (CodedMetadataEnumÎnterface cme : codedMetadataEnum) {
+			for (CodedMetadataEnumInterface cme : codedMetadataEnum) {
 				cmtArray[i] = cme.getCodedMetadataType();
 				i++;
 			}
@@ -183,18 +199,25 @@ public class XdsUtil {
 		}
 	}
 	
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRangeToOht(org.ehealth_connector.communication.ch.storedquery.DateTimeRange[] dtr) {
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRangeToOht(org.ehealth_connector.communication.storedquery.DateTimeRange[] dtr) {
 		if (dtr == null) return null;
 		else {
 			org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
 			
 			int i = 0;
-			for (org.ehealth_connector.communication.ch.storedquery.DateTimeRange dt : dtr) {
+			for (org.ehealth_connector.communication.storedquery.DateTimeRange dt : dtr) {
 				dtrArray[i] = dt.getOhtDateTimeRange();
 				i++;
 			}
 			
 			return dtrArray;
 		}
+	}
+	
+	public static XON convertEhcOrganization(Organization o) {
+		XON xon = Hl7v2Factory.eINSTANCE.createXON();
+		xon.setIdNumber(o.getId());
+		xon.setOrganizationName(o.getName());
+		return xon;
 	}
 }

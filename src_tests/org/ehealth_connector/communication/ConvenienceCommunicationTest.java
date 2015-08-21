@@ -35,6 +35,8 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.storedquery.*;
+import org.ehealth_connector.communication.storedquery.FindDocumentsQuery;
+import org.ehealth_connector.communication.storedquery.GetDocumentsQuery;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;

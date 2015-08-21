@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.ch.storedquery;
+package org.ehealth_connector.communication.storedquery;
 
 import java.util.Date;
 

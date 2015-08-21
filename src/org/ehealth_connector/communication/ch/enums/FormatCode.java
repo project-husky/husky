@@ -10,7 +10,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 *<div class="de">Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem epd_xds_mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
 *<div class="fr"></div>
 */
-public enum FormatCode implements CodedMetadataEnumÎnterface {
+public enum FormatCode implements CodedMetadataEnumInterface {
 
 	/** 
 	*<div class="de">EPD Dokument</div>
@@ -23,7 +23,7 @@ public enum FormatCode implements CodedMetadataEnumÎnterface {
 	*<div class="fr"> </div>
 	*<div class="it"> </div>
 	*/
-	EIMPFDOSSIER ("urn:epd:2015:EPD_ImmunizationContent", "eImpfdossier"),
+	EIMPFDOSSIER ("urn:epd:2015:EPD_Immunization Content", "eImpfdossier"),
 	/** 
 	*<div class="de">KOS Dokument</div>
 	*<div class="fr">KOS Document</div>
@@ -31,7 +31,7 @@ public enum FormatCode implements CodedMetadataEnumÎnterface {
 	*/
 	KOS_DOKUMENT ("urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59", "KOS Dokument");
 	public static final String EPD_DOKUMENT_CODE="urn:epd:2015:EPD_Basic_Document";
-	public static final String EIMPFDOSSIER_CODE="urn:epd:2015:EPD_ImmunizationContent";
+	public static final String EIMPFDOSSIER_CODE="urn:epd:2015:EPD_Immunization Content";
 	public static final String KOS_DOKUMENT_CODE="urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59";
 
 
@@ -93,8 +93,7 @@ public enum FormatCode implements CodedMetadataEnumÎnterface {
 
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeUUID(CODE_SYSTEM_OID);
-		cmt.setSchemeName(CODE_SYSTEM_NAME);
+		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
 		return cmt;

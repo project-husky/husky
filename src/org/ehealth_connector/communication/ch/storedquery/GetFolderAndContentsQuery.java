@@ -3,6 +3,7 @@ package org.ehealth_connector.communication.ch.storedquery;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;
+import org.ehealth_connector.communication.storedquery.StoredQueryInterface;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
