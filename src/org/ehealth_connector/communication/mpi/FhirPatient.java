@@ -78,6 +78,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * converts the mdht AD to the fhir address
 	 * 
 	 * @param address
+	 *            address object
 	 * @return fhir address
 	 */
 	@SuppressWarnings("incomplete-switch")

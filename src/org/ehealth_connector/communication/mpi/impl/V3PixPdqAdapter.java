@@ -47,6 +47,7 @@ import org.hl7.v3.EnPrefix;
 import org.hl7.v3.EnSuffix;
 import org.hl7.v3.HomeAddressUse;
 import org.hl7.v3.II;
+import org.hl7.v3.INT1;
 import org.hl7.v3.ON;
 import org.hl7.v3.PN;
 import org.hl7.v3.PRPAMT201310UV02BirthPlace;
@@ -429,14 +430,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		}
 		try {
 			if (!mpiQuery.doCancelQuery()) {
+				V3PdqConsumerResponse lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
-					V3PdqConsumerResponse lastPdqConsumerResponse = v3PdqConsumer
+					lastPdqConsumerResponse = v3PdqConsumer
 							.sendQuery(mpiQuery.getV3PdqConsumerQuery());
-					queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
-					mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
 				} else {
-					V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
-							.getLastPdqConsumerResponse();
+					lastPdqConsumerResponse = mpiQuery.getLastPdqConsumerResponse();
 					V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(
 							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
 							mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
@@ -445,9 +444,17 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 							lastPdqConsumerResponse, mpiQuery.getPageCount());
 					continuationQuery.setProcessingCode("T");
 					lastPdqConsumerResponse = v3PdqConsumer.sendContinuation(continuationQuery);
-					queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
-					mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
 				}
+				queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
+				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
+				queryResponse.setCurrentNumbers(lastPdqConsumerResponse.getNumRecordsCurrent());
+				queryResponse.setRemainingNumbers(lastPdqConsumerResponse.getNumRecordsRemaining());
+				INT1 totalNumbers = lastPdqConsumerResponse.getPdqResponse().getControlActProcess()
+						.getQueryAck().getResultTotalQuantity();
+				if (totalNumbers != null) {
+					queryResponse.setTotalNumbers(totalNumbers.getValue().intValue());
+				}
+				mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
 			} else {
 				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
 						.getLastPdqConsumerResponse();

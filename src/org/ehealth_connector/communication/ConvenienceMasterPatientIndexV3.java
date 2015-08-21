@@ -213,11 +213,17 @@ public class ConvenienceMasterPatientIndexV3 {
 	}
 
 	/**
-	 * queries the mpi for patients according to the criteria specified
-	 * 
+	 * queries the mpi for patients according to the criteria specified.
+	 *
 	 * @param mpiQuery
 	 *            the mpi query criterias
-	 * @return the mpi query response
+	 * @param homeCommunityOID
+	 *            local patient domain (oid) of the source
+	 * @param dest
+	 *            communication endpoint
+	 * @param atna
+	 *            atna configuration
+	 * @return query response with patients
 	 */
 	public static MasterPatientIndexQueryResponse queryPatients(MasterPatientIndexQuery mpiQuery,
 			String homeCommunityOID, Destination dest, AtnaConfig atna) {

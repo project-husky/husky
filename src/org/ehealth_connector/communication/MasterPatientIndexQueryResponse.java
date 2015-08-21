@@ -23,18 +23,38 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.FhirPatient;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
 
+/**
+ * The Class MasterPatientIndexQueryResponse.
+ */
 public class MasterPatientIndexQueryResponse {
 
-	private boolean success;
-	private int totalNumbers;
-	private int position;
+	/** The currentNumbers of patients in this query step. */
+	private int currentNumbers;
+
+	/** The patients in this query step. */
 	private List<Patient> patients;
 
-	public MasterPatientIndexQueryResponse(MpiQueryResponse mpiQueryResponse) {
+	/** The remaining numbers of patients for this query. */
+	private int remainingNumbers;
+
+	/** query state */
+	private boolean success;
+
+	/** The total numbers of patients for this query. */
+	private int totalNumbers;
+
+	/**
+	 * Instantiates a new master patient index query response.
+	 *
+	 * @param mpiQueryResponse
+	 *            the mpi query response
+	 */
+	protected MasterPatientIndexQueryResponse(MpiQueryResponse mpiQueryResponse) {
 		if (mpiQueryResponse != null) {
 			this.success = mpiQueryResponse.getSuccess();
 			this.totalNumbers = mpiQueryResponse.getTotalNumbers();
-			this.position = mpiQueryResponse.getPosition();
+			this.currentNumbers = mpiQueryResponse.getCurrentNumbers();
+			this.remainingNumbers = mpiQueryResponse.getRemainingNumbers();
 			if (mpiQueryResponse.getPatients() != null
 					&& mpiQueryResponse.getPatients().size() > 0) {
 				patients = new ArrayList<Patient>();
@@ -45,36 +65,49 @@ public class MasterPatientIndexQueryResponse {
 		}
 	}
 
-	public boolean getSuccess() {
-		return success;
+	/**
+	 * Gets the current numbers.
+	 *
+	 * @return the current numbers
+	 */
+	public int getCurrentNumbers() {
+		return currentNumbers;
 	}
 
-	public int getTotalNumbers() {
-		return totalNumbers;
-	}
-
+	/**
+	 * Gets the patients from the query.
+	 *
+	 * @return the patients
+	 */
 	public List<Patient> getPatients() {
 		return patients;
 	}
 
-	public int getPosition() {
-		return position;
+	/**
+	 * Gets the remaining numbers of patients in the query.
+	 *
+	 * @return the remaining numbers
+	 */
+	public int getRemainingNumbers() {
+		return remainingNumbers;
 	}
 
-	public void setPosition(int postion) {
-		this.position = postion;
+	/**
+	 * Query state
+	 *
+	 * @return true if successful
+	 */
+	public boolean getSuccess() {
+		return success;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
-	}
-
-	public void setTotalNumbers(int totalNumbers) {
-		this.totalNumbers = totalNumbers;
-	}
-
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
+	/**
+	 * Gets the total numbers of patients from the query.
+	 *
+	 * @return the total numbers
+	 */
+	public int getTotalNumbers() {
+		return totalNumbers;
 	}
 
 }
