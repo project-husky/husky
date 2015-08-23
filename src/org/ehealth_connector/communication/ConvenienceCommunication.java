@@ -156,6 +156,25 @@ public class ConvenienceCommunication {
 	 * @throws Exception
 	 *             the exception
 	 */
+	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath)
+			throws Exception {
+		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+
+		return new DocumentMetadataCh(addXdsDocument(doc, desc));
+	}
+	
+	/**
+	 * Adds a document to the XDS Submission set.
+	 * 
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param filePath
+	 *            the file path
+	 * @return the document metadata (which has to be completed)
+	 * @throws Exception
+	 *             the exception
+	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws Exception {
 		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
