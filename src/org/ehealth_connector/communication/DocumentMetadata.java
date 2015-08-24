@@ -128,10 +128,13 @@ public class DocumentMetadata {
 		ArrayList<Code> confCodes = new ArrayList<Code>();
 		CodedMetadataType cmt = null;
 		
-		for (int i=0;i<xDoc.getConfidentialityCode().size();i++) {
-			cmt = (CodedMetadataType) xDoc.getAuthors().get(i);
-			confCodes.add(XdsUtil.convertOhtCodedMetadataType(cmt));
+		if (!xDoc.getConfidentialityCode().isEmpty()) {
+			for (int i=0;i<xDoc.getConfidentialityCode().size();i++) {
+				cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
+				confCodes.add(XdsUtil.convertOhtCodedMetadataType(cmt));
+			}
 		}
+		else return null;
 		return confCodes;
 	}
 

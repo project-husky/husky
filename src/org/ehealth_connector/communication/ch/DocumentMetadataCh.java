@@ -19,7 +19,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public DocumentMetadataCh(DocumentMetadata dm) {
 		super.xDoc = dm.getMdhtDocumentEntryType();
 	}
-	
+
 	/**
 	 * Instantiates a new swiss (ch) specific document metadata object.
 	 * 
@@ -29,7 +29,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public DocumentMetadataCh(DocumentEntryType documentEntryType) {
 		super(documentEntryType);
 	}
-	
+
 	/**
 	 * Adds the (optional) confidentialityCode code (e.g. '30001' for 'administrative data')
 	 * 
@@ -40,14 +40,16 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void addConfidentialityCode(ConfidentialityCode code) {
 		xDoc.getConfidentialityCode().add(code.getCodedMetadataType());
 	}
-	
+
 	public ArrayList<ConfidentialityCode> getConfidentialityCodesEnum() {
 		ArrayList<ConfidentialityCode> ccl = new ArrayList<ConfidentialityCode>();
-		
-		for(int i=0;i<xDoc.getConfidentialityCode().size();i++) {
-			CodedMetadataType cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
-			ccl.add(ConfidentialityCode.getEnum(cmt.getCode()));
+		if (!xDoc.getConfidentialityCode().isEmpty()) {
+			for(int i=0;i<xDoc.getConfidentialityCode().size();i++) {
+				CodedMetadataType cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
+				ccl.add(ConfidentialityCode.getEnum(cmt.getCode()));
+			}
 		}
+		else return null;
 		return ccl;
 	}
 
@@ -61,7 +63,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setClassCode(org.ehealth_connector.communication.ch.enums.ClassCode code) {
 		xDoc.setClassCode(code.getCodedMetadataType());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.ClassCode getClassCodeEnum() {
 		return ClassCode.getEnum(xDoc.getClassCode().getCode());
 	}
@@ -76,7 +78,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setCodedLanguage(LanguageCode codedLanguage) {
 		xDoc.setLanguageCode(codedLanguage.getCodeValue());
 	}
-	
+
 	public LanguageCode getLanguageCodeEnum() {
 		return LanguageCode.getEnum(xDoc.getLanguageCode());
 	}
@@ -90,7 +92,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setFormatCode(FormatCode code) {
 		xDoc.setFormatCode(code.getCodedMetadataType());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.FormatCode getFormatCodeEnum() {
 		return FormatCode.getEnum(xDoc.getFormatCode().getCode());
 	}
@@ -105,7 +107,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setHealthcareFacilityTypeCode(HealthcareFacilityTypeCode code) {
 		xDoc.setHealthCareFacilityTypeCode(code.getCodedMetadataType());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
 		return HealthcareFacilityTypeCode.getEnum(xDoc.getHealthCareFacilityTypeCode().getCode());
 	}
@@ -119,7 +121,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setMimeType(MimeType mimeType) {
 		xDoc.setMimeType(mimeType.getCodedMetadataType().getCode());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.MimeType getMimeTypeCodeEnum() {
 		return MimeType.getEnum(xDoc.getMimeType());
 	}
@@ -135,11 +137,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setPracticeSettingCode(PracticeSettingCode code) {
 		xDoc.setPracticeSettingCode(code.getCodedMetadataType());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.PracticeSettingCode getPracticeSettingCodeEnum() {
 		return PracticeSettingCode.getEnum(xDoc.getPracticeSettingCode().getCode());
 	}
-	
+
 
 	/**
 	 * Sets the (required) type code. Specifies the type of the document (like the
@@ -152,7 +154,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	public void setTypeCode(TypeCode code) {
 		xDoc.setTypeCode(code.getCodedMetadataType());
 	}
-	
+
 	public org.ehealth_connector.communication.ch.enums.TypeCode getTypeCodeEnum() {
 		return TypeCode.getEnum(xDoc.getTypeCode().getCode());
 	}

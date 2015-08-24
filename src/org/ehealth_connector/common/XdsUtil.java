@@ -344,7 +344,8 @@ public class XdsUtil {
 			if (ist.getLocalizedString() != null && ist.getLocalizedString().size()>0) {
 				String s = "";
 				for (int i=0; i<ist.getLocalizedString().size();i++) {
-					s = s + (String) ist.getLocalizedString().get(i);
+					LocalizedStringType lst = (LocalizedStringType) ist.getLocalizedString().get(i);
+					s = s + lst.getValue();
 					if (i>0) s = s + "\n";
 				}
 				return s;
