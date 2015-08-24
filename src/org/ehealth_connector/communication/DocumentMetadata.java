@@ -18,22 +18,27 @@ package org.ehealth_connector.communication;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
+import org.openhealthtools.ihe.xds.utils.XDSUtils;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -94,6 +99,17 @@ public class DocumentMetadata {
 		AuthorType xAuthor = extractor.extractAuthors().get(0);
 		xDoc.getAuthors().add(xAuthor);
 	}
+	
+	public ArrayList<Author> getAuthors() {
+		ArrayList<Author> authorList = new ArrayList<Author>();
+		AuthorType at = null;
+		
+		for (int i=0;i<xDoc.getAuthors().size();i++) {
+			at = (AuthorType) xDoc.getAuthors().get(i);
+			authorList.add(XdsUtil.convertOhtAuthorType(at));
+		}
+		return authorList;
+	}
 
 	/**
 	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
@@ -106,6 +122,17 @@ public class DocumentMetadata {
 		xDoc.getConfidentialityCode().add(
 				XdsUtil.createCodedMetadata(code.getCodeSystemOid(), code.getCodeValue(),
 						code.getDisplayName(), null));
+	}
+	
+	public ArrayList<Code> getConfidentialityCodes() {
+		ArrayList<Code> confCodes = new ArrayList<Code>();
+		CodedMetadataType cmt = null;
+		
+		for (int i=0;i<xDoc.getConfidentialityCode().size();i++) {
+			cmt = (CodedMetadataType) xDoc.getAuthors().get(i);
+			confCodes.add(XdsUtil.convertOhtCodedMetadataType(cmt));
+		}
+		return confCodes;
 	}
 
 	/**
@@ -136,16 +163,24 @@ public class DocumentMetadata {
 	public void setClassCode(Code code) {
 		xDoc.setClassCode(XdsUtil.convertCode(code));
 	}
+	
+	public Code getClassCode() {
+		return XdsUtil.convertOhtCodedMetadataType(xDoc.getClassCode());
+	}
 
 	/**
 	 * Sets the (required) coded language (e.g. "de-CH"). This code can be
-	 * extracted from CDA Document automatically.
+	 * extracted from CDA Documents, automatically.
 	 * 
 	 * @param codedLanguage
 	 *          the new language code
 	 */
-	public void setCodedLanguage(LanguageCode codedLanguage) {
-		xDoc.setLanguageCode(codedLanguage.getCodeValue());
+	public void setCodedLanguage(String codedLanguage) {
+		xDoc.setLanguageCode(codedLanguage);
+	}
+	
+	public String getLanguageCode() {
+		return xDoc.getLanguageCode();
 	}
 
 	/**
@@ -159,6 +194,10 @@ public class DocumentMetadata {
 		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
 		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
 	}
+	
+	public Date getCreationTime() {
+		return DateUtil.parseDateyyyyMMddHHmm(xDoc.getCreationTime());
+	}
 
 	/**
 	 * Sets the (required) format code. If not set, the system will try to derive
@@ -169,6 +208,10 @@ public class DocumentMetadata {
 	 */
 	public void setFormatCode(Code code) {
 		xDoc.setFormatCode(XdsUtil.convertCode(code));
+	}
+	
+	public Code getFormatCode() {
+		return XdsUtil.convertOhtCodedMetadataType(xDoc.getFormatCode());
 	}
 
 	/**
@@ -181,6 +224,10 @@ public class DocumentMetadata {
 	public void setHealthcareFacilityTypeCode(Code code) {
 		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
 	}
+	
+	public Code getHealthcareFacilityTypeCode() {
+		return XdsUtil.convertOhtCodedMetadataType(xDoc.getHealthCareFacilityTypeCode());
+	}
 
 	/**
 	 * Sets the (required) mime type (e.g. "text/xml")
@@ -190,6 +237,10 @@ public class DocumentMetadata {
 	 */
 	public void setMimeType(String mimeType) {
 		xDoc.setMimeType(mimeType);
+	}
+	
+	public String getMimeType() {
+		return xDoc.getMimeType();
 	}
 
 	/**
@@ -213,6 +264,10 @@ public class DocumentMetadata {
 			setPatientId(patient.getIds().get(0));
 		}
 	}
+	
+	public Patient getPatient() {
+		return XdsUtil.convertOhtSourcePatientInfoType(xDoc.getSourcePatientInfo());
+	}
 
 	/**
 	 * Sets the (required) patient id, which is used in the affinity domain
@@ -222,7 +277,11 @@ public class DocumentMetadata {
 	 *          the new patient id
 	 */
 	public void setPatientId(Identificator id) {
-		xDoc.setPatientId(XdsUtil.convertIdentificator(id));
+		xDoc.setPatientId(XdsUtil.convertEhcIdentificator(id));
+	}
+	
+	public Identificator getId() {
+		return XdsUtil.convertOhtCx(xDoc.getPatientId());
 	}
 
 	/**
@@ -236,6 +295,10 @@ public class DocumentMetadata {
 	public void setPracticeSettingCode(Code code) {
 		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
 	}
+	
+	public Code getPracticeSettingCode() {
+		return XdsUtil.convertOhtCodedMetadataType(xDoc.getPracticeSettingCode());
+	}
 
 	/**
 	 * Sets the (required) source patient id. This is the local patient id, e.g.
@@ -245,7 +308,11 @@ public class DocumentMetadata {
 	 *          the new source patient id
 	 */
 	public void setSourcePatientId(Identificator id) {
-		xDoc.setSourcePatientId(XdsUtil.convertIdentificator(id));
+		xDoc.setSourcePatientId(XdsUtil.convertEhcIdentificator(id));
+	}
+	
+	public Identificator getSourcePatientId() {
+		return XdsUtil.convertOhtCx(xDoc.getPatientId());
 	}
 
 	/**
@@ -256,6 +323,10 @@ public class DocumentMetadata {
 	 */
 	public void setTitle(String title) {
 		xDoc.setTitle(XdsUtil.createInternationalString(title));
+	}
+	
+	public String getTitle() {
+		return XdsUtil.convertInternationalStringType(xDoc.getTitle());
 	}
 
 	/**
@@ -269,6 +340,10 @@ public class DocumentMetadata {
 	public void setTypeCode(Code code) {
 		xDoc.setTypeCode(XdsUtil.convertCode(code));
 	}
+	
+	public Code getTypeCode() {
+		return XdsUtil.convertOhtCodedMetadataType(xDoc.getTypeCode());
+	}
 
 	/**
 	 * Sets the unique id. The UUID of the document. Will be generated, when the
@@ -279,6 +354,10 @@ public class DocumentMetadata {
 	 */
 	public void setUniqueId(String id) {
 		xDoc.setUniqueId(id);
+	}
+	
+	public String getUniqueId() {
+		return xDoc.getUniqueId();
 	}
 	
 	public DocumentMetadata toDocumentMetadataCh() {

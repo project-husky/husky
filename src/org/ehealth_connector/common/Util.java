@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
@@ -85,6 +86,19 @@ public class Util {
 
 	public static final String TELECOMS_WEBSIDE_PREFIX = "http";
 
+	/**
+	 * Checks to see if the list has at least one element.
+	 * @param l
+	 * @return false if l is null, if l.size() < 1 or if l.get(0) is null. 
+	 * Otherwise, return true.
+	 */
+	protected static boolean atLeastOne(List l){
+		if(l == null) return false;
+		if(l.size() < 1)return false;
+		if(l.get(0) == null)return false;
+		return true;
+	}
+	
 	public static ArrayList<Identificator> convertIds(EList<II> mII) {
 		ArrayList<Identificator> il = new ArrayList<Identificator>();
 		for (II mId : mII) {
@@ -535,6 +549,29 @@ public class Util {
 			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
+		return tel;
+	}
+	
+	/**
+	 * <div class="en">Creates the tel.</div> <div class="de"></div> <div
+	 * class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param endpointIdentifier
+	 * <br>
+	 *          <div class="de">Der Endpunkt der Kommunikation (z.B. eine Telefonnummer)</div> <div class="fr"> tel nr</div> <div
+	 *          class="it"> tel nr</div>
+	 * @param usage
+	 * <br>
+	 *          <div class="de"> usage</div> <div class="fr"> usage</div> <div
+	 *          class="it"> usage</div>
+	 * @return the tel
+	 */
+	public static TEL createUnknownTel(String endpointIdentifier, AddressUse usage) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		if (usage != null) {
+			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		}
+		tel.setValue(endpointIdentifier);
 		return tel;
 	}
 

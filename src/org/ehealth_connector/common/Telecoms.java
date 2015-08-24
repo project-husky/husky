@@ -103,6 +103,38 @@ public class Telecoms {
 	public void addPhone(String phoneNr, AddressUse usage) {
 		mTels.add(Util.createTel(phoneNr, usage));
 	}
+	
+	/**
+	 * Weist der Telecoms Liste einen Eintrag zu. Diese MÜSSEN folgendes Format
+	 * haben: "+41.32.234.66.77"
+	 * 
+	 * @param type
+	 * 			z.B. "tel"
+	 * @param endpointIdentifier
+	 *          z.B. Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen:
+	 *          "+41.32.234.66.77"
+	 * @param usage
+	 *          Verwendungszweck (Privat, Geschäft, Mobil)
+	 */
+	public void add(String type, String endpointIdentifier, AddressUse usage) {
+		TEL tel = null;
+		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(Util.TELECOMS_EMAIL_PREFIX.substring(0, Util.TELECOMS_EMAIL_PREFIX.length()-1)))) {
+			tel = Util.createTel(endpointIdentifier, usage);
+		}
+		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type.equals(Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length()-1)))) {
+			tel = Util.createTel(endpointIdentifier, usage);
+		}
+		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(Util.TELECOMS_PHONE_PREFIX.substring(0, Util.TELECOMS_PHONE_PREFIX.length()-1)))) {
+			tel = Util.createTel(endpointIdentifier, usage);
+		}
+		if (type.equals(Util.TELECOMS_WEBSIDE_PREFIX) || (type.equals(Util.TELECOMS_WEBSIDE_PREFIX.substring(0, Util.TELECOMS_WEBSIDE_PREFIX.length()-1)))) {
+			tel = Util.createTel(endpointIdentifier, usage);
+		}
+		if (tel == null) {
+			tel = Util.createUnknownTel(endpointIdentifier, usage);
+		}
+		mTels.add(tel);
+	}
 
 	/**
 	 * Weist der Telecoms Liste eine Webseite zu.

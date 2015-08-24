@@ -267,7 +267,7 @@ public class ConvenienceCommunication {
 
 		generateMissingSubmissionSetAttributes();
 
-		txnData.saveMetadataToFile("C:/temp/meta.xml");
+		//txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
 		return xdsr;
 	}
@@ -500,7 +500,7 @@ public class ConvenienceCommunication {
 
 		retrieveDocumentSetRequest.getDocumentRequest().add(docReq.getOhtDocumentRequestType());
 
-		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertIdentificator(identificator));
+		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(identificator));
 
 		return response;
 	}

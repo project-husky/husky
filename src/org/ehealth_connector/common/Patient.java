@@ -98,6 +98,20 @@ public class Patient extends Person {
 	/**
 	 * Erstellt einen neuen Patienten.
 	 * 
+	 */
+	public Patient() {
+		// Create the RecordTarget, PatientRole and Patient
+		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
+		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
+		mPatient = CDAFactory.eINSTANCE.createPatient();
+
+		mPatientRole.setPatient(mPatient);
+		mRecordTarget.setPatientRole(mPatientRole);
+	}
+	
+	/**
+	 * Erstellt einen neuen Patienten.
+	 * 
 	 * @param name
 	 *          Name
 	 * @param sex
@@ -106,14 +120,8 @@ public class Patient extends Person {
 	 *          Geburtsdatum
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay) {
-		// Create the RecordTarget, PatientRole and Patient
-		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
-		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
-		mPatient = CDAFactory.eINSTANCE.createPatient();
-
-		mPatientRole.setPatient(mPatient);
-		mRecordTarget.setPatientRole(mPatientRole);
-
+		this();
+		
 		// Create and fill gender
 		if (sex != null) {
 			mPatient.setAdministrativeGenderCode(sex.getCE());

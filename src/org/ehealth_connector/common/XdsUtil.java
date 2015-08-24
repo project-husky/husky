@@ -16,26 +16,25 @@
 
 package org.ehealth_connector.common;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumInterface;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
+import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
+import org.openhealthtools.ihe.common.hl7v2.XAD;
+import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.common.hl7v2.XON;
+import org.openhealthtools.ihe.common.hl7v2.XPN;
+import org.openhealthtools.ihe.common.hl7v2.XTN;
+import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
@@ -68,7 +67,7 @@ public class XdsUtil {
 	 *          class="it"></div>
 	 * @return the cx
 	 */
-	public static CX convertIdentificator(Identificator id) {
+	public static CX convertEhcIdentificator(Identificator id) {
 		return createCx(id.getRoot(), id.getExtension());
 	}
 
@@ -199,7 +198,7 @@ public class XdsUtil {
 		}
 	}
 	
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRangeToOht(org.ehealth_connector.communication.storedquery.DateTimeRange[] dtr) {
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(org.ehealth_connector.communication.storedquery.DateTimeRange[] dtr) {
 		if (dtr == null) return null;
 		else {
 			org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
@@ -219,5 +218,138 @@ public class XdsUtil {
 		xon.setIdNumber(o.getId());
 		xon.setOrganizationName(o.getName());
 		return xon;
+	}
+	
+	public static Author convertOhtAuthorType(AuthorType at) {
+		Author a = new Author();
+		
+		// Author Person
+		XCN ap = null;
+		if (at!=null) {
+			if (at.getAuthorPerson()!=null) {
+				ap = at.getAuthorPerson();
+				//Id
+				a.addId(convertOhtXcnIdToEhc(ap.getIdNumber()));
+				//Name
+				Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(), ap.getSuffix());
+				a.addName(name);
+			}
+		}
+		// Institution
+		XON xon = null;
+		if (Util.atLeastOne(at.getAuthorInstitution())) {
+			for (int i=0; i<at.getAuthorInstitution().size();i++) {
+				xon = (XON) at.getAuthorInstitution().get(i);
+				Organization org = new Organization(xon.getOrganizationName());
+				org.addId(convertOhtXcnIdToEhc(xon.getIdNumber()));
+			}
+		}
+		// Role
+		CE role = null;
+		if (Util.atLeastOne(at.getAuthorRole())) {
+			role = (CE) at.getAuthorRole().get(0);
+			a.setRoleFunction(new Code(role));
+		}
+		// Speciality
+		CE speciality = null;
+		if (Util.atLeastOne(at.getAuthorSpeciality())) {
+			speciality = (CE) at.getAuthorSpeciality().get(0);
+			a.setSpeciality(new Code(speciality));
+		}
+		// Telecoms
+		XTN xtn = null;
+		Telecoms t = new Telecoms();
+		if (Util.atLeastOne(at.getAuthorTelecommunication())) {
+			for (int i=0; i<at.getAuthorTelecommunication().size();i++) {
+				xtn = (XTN) at.getAuthorTelecommunication().get(i);
+				t.add(xtn.getTelecommunicationType(), xtn.getTelecommunicationAddress(), AddressUse.PRIVATE);
+			}
+		}
+		
+		return a;
+	}
+	
+	public static Address convertOhtXad(XAD xad) {
+		return new Address(xad.getStreetAddress(), xad.getZipOrPostalCode(), xad.getCity(), AddressUse.PRIVATE); 
+	}
+	
+	public static Name convertOhtXpn(XPN xpn) {
+		return new Name (xpn.getFamilyName(), xpn.getGivenName(), xpn.getPrefix(), xpn.getSuffix());
+	}
+	
+	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
+		Patient p = new Patient();
+		
+		// Name
+		XPN xpn = null;
+		if (Util.atLeastOne(spit.getPatientName())) {
+			for (int i=0; i<spit.getPatientName().size();i++) {
+				xpn = (XPN) spit.getPatientName().get(i);
+				p.addName(XdsUtil.convertOhtXpn(xpn));
+			}
+		}
+		// Date of birth
+		p.setBirthday(DateUtil.parseDateyyyyMMdd(spit.getPatientDateOfBirth()));
+		// Gender
+		p.setAdministrativeGender(AdministrativeGender.getEnum(spit.getPatientSex()));
+		// Address
+		p.addAddress(XdsUtil.convertOhtXad(spit.getPatientAddress()));
+		// ID
+		CX cx = null;
+		if (Util.atLeastOne(spit.getPatientIdentifier())) {
+			for (int i=0; i<spit.getPatientIdentifier().size();i++) {
+				cx = (CX) spit.getPatientIdentifier().get(i);
+				p.addId(XdsUtil.convertOhtCx(cx));
+			}
+		}
+		// Phone Business
+		Telecoms t = new Telecoms();
+		if (spit.getPatientPhoneBusiness() != null) {
+			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(), spit.getPatientPhoneBusiness().getTelecommunicationAddress(), AddressUse.BUSINESS);
+		}
+		// Phone Home
+		if (spit.getPatientPhoneHome() != null) {
+			t.add(spit.getPatientPhoneHome().getTelecommunicationType(), spit.getPatientPhoneHome().getTelecommunicationAddress(), AddressUse.PRIVATE);
+		}
+		p.setTelecoms(t);
+		
+		return p;
+	}
+	
+	public static Code convertOhtCodedMetadataType(CodedMetadataType cmt) {
+		return new Code(cmt.getSchemeUUID(), cmt.getCode(), convertInternationalStringType(cmt.getDisplayName()));
+	}
+	
+
+//	public static Identificator convertOhtXcnIdToEhc(XCN xcn) {
+//		xcn.get
+//	}
+	
+	//TODO Check if this is right
+	public static Identificator convertOhtXcnIdToEhc(String idStr) {
+		//e.g. b8a9a9ad17b5429^^^&1.3.6.1.4.1.21367.2005.13.20.3000&ISO
+		//e.g. IHERED-1644^^^&1.3.6.1.4.1.21367.13.20.2005.1000&ISO
+		String[] dachSplit = idStr.split("^");
+		String[] andSplit = dachSplit[3].split("&");
+		return new Identificator(andSplit[1], dachSplit[0]);
+	}
+
+	public static Identificator convertOhtCx(CX cx) {
+		return new Identificator(cx.getAssigningAuthorityUniversalId(), cx.getIdNumber());
+	}
+
+
+	public static String convertInternationalStringType(InternationalStringType ist) {
+		if (ist!=null) {
+			if (ist.getLocalizedString() != null && ist.getLocalizedString().size()>0) {
+				String s = "";
+				for (int i=0; i<ist.getLocalizedString().size();i++) {
+					s = s + (String) ist.getLocalizedString().get(i);
+					if (i>0) s = s + "\n";
+				}
+				return s;
+			}
+		}
+		return null;
 	}
 }

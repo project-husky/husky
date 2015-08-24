@@ -6,6 +6,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
+import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
@@ -18,11 +19,15 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 public class SubmissionSetMetadata {
 	/** The cda. */
 	private final ClinicalDocument cda;
-	
 	private SubmissionSetType s;
 	
 	public SubmissionSetMetadata() {
 		s = MetadataFactory.eINSTANCE.createSubmissionSetType();
+		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+	}
+	
+	public SubmissionSetMetadata(SubmissionSetType ohtSubmissionSet) {
+		this.s = ohtSubmissionSet;
 		cda = CDAFactory.eINSTANCE.createClinicalDocument();
 	}
 	
@@ -49,28 +54,56 @@ public class SubmissionSetMetadata {
 		s.setAuthor(xAuthor);
 	}
 	
+	public Author getAuthor() {
+		return XdsUtil.convertOhtAuthorType(s.getAuthor());
+	}
+	
 	public void setAvailabilityStatus(AvailabilityStatus status) {
 		s.setAvailabilityStatus(status.getAsOhtAvailabilityStatusType());
+	}
+	
+	public AvailabilityStatus getAvailabilityStatus() {
+		return AvailabilityStatus.getByOhtAvailabilityStatusType(s.getAvailabilityStatus());
 	}
 	
 	public void setComments(String comments) {
 		s.setComments(XdsUtil.createInternationalString(comments));
 	}
 	
+	public String getComments() {
+		return XdsUtil.convertInternationalStringType(s.getComments());
+	}
+	
 	public void setContentTypeCode(Code code) {
 		s.setContentTypeCode(XdsUtil.convertCode(code));
 	}
 	
+	public Code getContentTypeCode() {
+		return XdsUtil.convertOhtCodedMetadataType(s.getContentTypeCode());
+	}
+	
 	public void setPatientId(Identificator id) {
-		s.setPatientId(XdsUtil.convertIdentificator(id));
+		s.setPatientId(XdsUtil.convertEhcIdentificator(id));
+	}
+	
+	public Identificator getPatientId() {
+		return XdsUtil.convertOhtCx(s.getPatientId());
 	}
 	
 	public void setSourceId(String id) {
 		s.setSourceId(id);
 	}
 	
+	public String getSourceId() {
+		return s.getSourceId();
+	}
+	
 	public void setTitle(String title) {
 		s.setTitle(XdsUtil.createInternationalString(title));
+	}
+	
+	public String getTitle() {
+		return XdsUtil.convertInternationalStringType(s.getTitle());
 	}
 	
 	public SubmissionSetType toOhtSubmissionSetType(SubmissionSetType b) {

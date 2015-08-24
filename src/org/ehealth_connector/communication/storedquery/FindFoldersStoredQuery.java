@@ -9,6 +9,6 @@ import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 public class FindFoldersStoredQuery extends AbstractStoredQuery {
 
 	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(XdsUtil.convertIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
 	}
 }

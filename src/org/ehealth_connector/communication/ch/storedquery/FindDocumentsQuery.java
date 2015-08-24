@@ -17,7 +17,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 
 	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) throws MalformedStoredQueryException {
 		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+				XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
 	}
 
 	public FindDocumentsQuery(
@@ -32,9 +32,9 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			AvailabilityStatus status) throws MalformedStoredQueryException {
 
 		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertIdentificator(patientId),
+				XdsUtil.convertEhcIdentificator(patientId),
 				XdsUtil.convertEhcEnumToCodedMetadataType(classCodes),
-				XdsUtil.convertEhcDateTimeRangeToOht(dateTimeRanges), 
+				XdsUtil.convertEhcDateTimeRange(dateTimeRanges), 
 				XdsUtil.convertEhcEnumToCodedMetadataType(practiceSettingCodes), 
 				XdsUtil.convertEhcEnumToCodedMetadataType(healthCareFacilityCodes),
 				null, //Event Code is currently not used in Switzerland

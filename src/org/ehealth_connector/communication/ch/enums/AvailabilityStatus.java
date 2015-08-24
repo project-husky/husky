@@ -51,6 +51,20 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 		this.code = code;
 		this.displayName = displayName;
 	}
+	
+	/**
+	* <div class="en">Return the OHT Enum Object with a given OHT AvailabilityStatusType. Return null, if the status is not present in this object</div>
+	* <div class="de">Liefert dieses Enum Objekt anhand eines OHT AvailabilityStatusType zurück. Liefert null, wenn der Status in diesem Objekt nicht vorhanden ist.</div>
+	*
+	*@param availabilityStatusType<br>
+	* 	<div class="en">the status of the document</div>
+	*	<div class="de">der Dokumentenstatus</div>
+	*/
+	public static AvailabilityStatus getByOhtAvailabilityStatusType(AvailabilityStatusType availabilityStatusType) {
+		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED)) return AvailabilityStatus.APPROVED;
+		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED)) return AvailabilityStatus.DEPRECATED;
+		return null;
+	}
 
  
 	/**
