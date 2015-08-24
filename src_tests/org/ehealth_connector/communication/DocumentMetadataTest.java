@@ -18,10 +18,10 @@ package org.ehealth_connector.communication;
 
 import static org.junit.Assert.assertEquals;
 
-import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.tests.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.communication.ch.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
@@ -70,8 +70,8 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testCodedLanguage() {
-		d.setCodedLanguage(LanguageCode.GERMAN); // Can be extracted from CDA
-		assertEquals(LanguageCode.GERMAN_CODE, m.getLanguageCode());
+		d.setCodedLanguage(LanguageCode.DEUTSCH_CODE); // Can be extracted from CDA
+		assertEquals(LanguageCode.DEUTSCH_CODE, m.getLanguageCode());
 	}
 
 	@Test

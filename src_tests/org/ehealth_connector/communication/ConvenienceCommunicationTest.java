@@ -166,7 +166,7 @@ public class ConvenienceCommunicationTest {
 		metaData.setSourcePatientId(
 				new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429"));
 
-		metaData.setCodedLanguage(LanguageCode.GERMAN);
+		metaData.setCodedLanguage(LanguageCode.GERMAN_CODE);
 		metaData.setTypeCode(
 				new Code("2.16.756.5.30.1.127.3.10.1.27", "60005", "Medikamentenliste (aktuell)"));
 		metaData.setFormatCode(new Code("2.16.756.5.30.1.127.3.10.1.9",
