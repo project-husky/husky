@@ -229,7 +229,7 @@ public class XdsUtil {
 			if (at.getAuthorPerson()!=null) {
 				ap = at.getAuthorPerson();
 				//Id
-				a.addId(convertOhtXcnIdToEhc(ap.getIdNumber()));
+				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(), ap.getIdNumber()));
 				//Name
 				Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(), ap.getSuffix());
 				a.addName(name);
@@ -241,14 +241,14 @@ public class XdsUtil {
 			for (int i=0; i<at.getAuthorInstitution().size();i++) {
 				xon = (XON) at.getAuthorInstitution().get(i);
 				Organization org = new Organization(xon.getOrganizationName());
-				org.addId(convertOhtXcnIdToEhc(xon.getIdNumber()));
+				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(), xon.getIdNumber()));
 			}
 		}
 		// Role
-		CE role = null;
+		String role = null;
 		if (Util.atLeastOne(at.getAuthorRole())) {
-			role = (CE) at.getAuthorRole().get(0);
-			a.setRoleFunction(new Code(role));
+			role = (String) at.getAuthorRole().get(0);
+			a.setRoleFunction(new Code("", role));
 		}
 		// Speciality
 		CE speciality = null;
@@ -270,11 +270,12 @@ public class XdsUtil {
 	}
 	
 	public static Address convertOhtXad(XAD xad) {
+		if (xad == null) return null;
 		return new Address(xad.getStreetAddress(), xad.getZipOrPostalCode(), xad.getCity(), AddressUse.PRIVATE); 
 	}
 	
 	public static Name convertOhtXpn(XPN xpn) {
-		return new Name (xpn.getFamilyName(), xpn.getGivenName(), xpn.getPrefix(), xpn.getSuffix());
+		return new Name (xpn.getGivenName(), xpn.getFamilyName(), xpn.getPrefix(), xpn.getSuffix());
 	}
 	
 	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
@@ -289,11 +290,17 @@ public class XdsUtil {
 			}
 		}
 		// Date of birth
-		p.setBirthday(DateUtil.parseDateyyyyMMdd(spit.getPatientDateOfBirth()));
+		if (spit.getPatientDateOfBirth()!=null) {
+			p.setBirthday(DateUtil.parseDateyyyyMMdd(spit.getPatientDateOfBirth()));
+		}
 		// Gender
-		p.setAdministrativeGender(AdministrativeGender.getEnum(spit.getPatientSex()));
+		if (spit.getPatientSex() != null) {
+			p.setAdministrativeGender(AdministrativeGender.getEnum(spit.getPatientSex()));
+		}
 		// Address
-		p.addAddress(XdsUtil.convertOhtXad(spit.getPatientAddress()));
+		if (spit.getPatientAddress() != null) {
+			p.addAddress(XdsUtil.convertOhtXad(spit.getPatientAddress()));
+		}
 		// ID
 		CX cx = null;
 		if (Util.atLeastOne(spit.getPatientIdentifier())) {
@@ -317,22 +324,25 @@ public class XdsUtil {
 	}
 	
 	public static Code convertOhtCodedMetadataType(CodedMetadataType cmt) {
-		return new Code(cmt.getSchemeUUID(), cmt.getCode(), convertInternationalStringType(cmt.getDisplayName()));
+		return new Code(cmt.getSchemeName(), cmt.getCode(), convertInternationalStringType(cmt.getDisplayName()));
 	}
 	
-
-//	public static Identificator convertOhtXcnIdToEhc(XCN xcn) {
-//		xcn.get
-//	}
+	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId, String id) {
+		return new Identificator(assigningAuthorityUniversalId, id);
+	}
 	
 	//TODO Check if this is right
-	public static Identificator convertOhtXcnIdToEhc(String idStr) {
-		//e.g. b8a9a9ad17b5429^^^&1.3.6.1.4.1.21367.2005.13.20.3000&ISO
-		//e.g. IHERED-1644^^^&1.3.6.1.4.1.21367.13.20.2005.1000&ISO
-		String[] dachSplit = idStr.split("^");
-		String[] andSplit = dachSplit[3].split("&");
-		return new Identificator(andSplit[1], dachSplit[0]);
-	}
+//	public static Identificator convertOhtXcnIdToEhc(String idStr) {
+//		//e.g. b8a9a9ad17b5429^^^&1.3.6.1.4.1.21367.2005.13.20.3000&ISO
+//		//e.g. IHERED-1644^^^&1.3.6.1.4.1.21367.13.20.2005.1000&ISO
+//		String[] dachSplit = idStr.split("^");
+//		//Check if the id is a HL7v2 ID, if not just return an Identificator Object without code System
+//		if (dachSplit.length<2) {
+//			return new Identificator("", idStr);
+//		}
+//		String[] andSplit = dachSplit[3].split("&");
+//		return new Identificator(andSplit[1], dachSplit[0]);
+//	}
 
 	public static Identificator convertOhtCx(CX cx) {
 		return new Identificator(cx.getAssigningAuthorityUniversalId(), cx.getIdNumber());

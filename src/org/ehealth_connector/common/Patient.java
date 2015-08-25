@@ -198,7 +198,9 @@ public class Patient extends Person {
 	 *          Adresse
 	 */
 	public void addAddress(Address address) {
-		mPatientRole.getAddrs().add(address.copyMdhtAdress());
+		if (mPatientRole.getAddrs()!=null) {
+			mPatientRole.getAddrs().add(address.copyMdhtAdress());
+		}
 	}
 
 	/**

@@ -32,6 +32,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
+import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
@@ -118,6 +119,19 @@ public class DocumentMetadata {
 	 *          the code
 	 */
 	@SuppressWarnings("unchecked")
+	public void addConfidentialityCode(Code code) {
+		xDoc.getConfidentialityCode().add(
+				XdsUtil.createCodedMetadata(code.getCodeSystem(), code.getCode(),
+						code.getDisplayName(), null));
+	}
+	
+	/**
+	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
+	 * 
+	 * @param code
+	 *          the code
+	 */
+	@SuppressWarnings("unchecked")
 	public void addConfidentialityCode(Confidentiality code) {
 		xDoc.getConfidentialityCode().add(
 				XdsUtil.createCodedMetadata(code.getCodeSystemOid(), code.getCodeValue(),
@@ -182,7 +196,7 @@ public class DocumentMetadata {
 		xDoc.setLanguageCode(codedLanguage);
 	}
 	
-	public String getLanguageCode() {
+	public String getCodedLanguage() {
 		return xDoc.getLanguageCode();
 	}
 
@@ -262,8 +276,7 @@ public class DocumentMetadata {
 		xDoc.setSourcePatientInfo(spi);
 
 		// PatientID
-
-		if (patient.getIds() != null) {
+		if (patient.getIds() != null && patient.getIds().size()>0) {
 			setPatientId(patient.getIds().get(0));
 		}
 	}
@@ -283,7 +296,7 @@ public class DocumentMetadata {
 		xDoc.setPatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 	
-	public Identificator getId() {
+	public Identificator getPatientId() {
 		return XdsUtil.convertOhtCx(xDoc.getPatientId());
 	}
 
@@ -315,7 +328,7 @@ public class DocumentMetadata {
 	}
 	
 	public Identificator getSourcePatientId() {
-		return XdsUtil.convertOhtCx(xDoc.getPatientId());
+		return XdsUtil.convertOhtCx(xDoc.getSourcePatientId());
 	}
 
 	/**

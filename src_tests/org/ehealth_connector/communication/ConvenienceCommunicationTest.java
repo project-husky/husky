@@ -177,7 +177,7 @@ public class ConvenienceCommunicationTest {
 				"Institut fuer medizinische Diagnostik"));
 		metaData.setPracticeSettingCode(
 				new Code("2.16.756.5.30.1.127.3.10.1.18", "10002", "Allgemeinmedizin"));
-		metaData.addConfidentialityCode(Confidentiality.CH_30003);
+		metaData.addConfidentialityCode(new Code("2.16.756.5.30.1.127.3.10.1.5", "30003", "medizinische Daten"));
 	}
 
 	private String submitDoc(String organizationOid, String repositoryUrl, String filename) {

@@ -23,12 +23,15 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
@@ -203,6 +206,17 @@ public class TestUtils {
 		return true;
 	}
 
+	
+	public static boolean isEqual(Patient p1, Patient p2) {
+		if (!isEqual(p1.getName(), p2.getName()))
+			return false;
+		if (!isEqual(p1.getAdministrativeGenderCode().getCode(), p2.getAdministrativeGenderCode().getCode()))
+			return false;
+		if (p1.getBirthday().getTime()!=p1.getBirthday().getTime())
+			return false;
+		return true;
+	}
+	
 	public static boolean isEqual(Telecoms t1, Telecoms t2) {
 		if (t1.getEMails() != null) {
 			for (int i = 0; i < t1.getEMails().size(); i++) {
@@ -340,5 +354,13 @@ public class TestUtils {
 	protected Value createValue2() {
 		Value value = new Value(ts1, ts2);
 		return value;
+	}
+	
+	public Date createStartDate() {
+		return DateUtil.date("15.12.2014");
+	}
+	
+	public Patient createPatient() {
+		return new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
 	}
 }

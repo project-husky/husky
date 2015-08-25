@@ -16,11 +16,14 @@
 
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.cda.tests.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.ch.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,12 +56,13 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testClassCode() {
-		d.setClassCode(new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult", "Consultation")); // Just
-																																													// for
-																																													// the
-																																													// NIST-Repository:
-																																													// This
-																																													// code
+		Code cc = new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult", "Consultation");
+		d.setClassCode(cc); // Just
+		// for
+		// the
+		// NIST-Repository:
+		// This
+		// code
 		// should also be optional, but the NIST
 		// repository prevents an automatic
 		// derivation from the typeCode
@@ -66,6 +70,7 @@ public class DocumentMetadataTest extends TestUtils {
 		assertEquals("DEMO-Consult", m.getClassCode().getCode());
 		l = (LocalizedStringType) m.getClassCode().getDisplayName().getLocalizedString().get(0);
 		assertEquals("Consultation", l.getValue());
+		assertTrue(isEqual(cc, d.getClassCode()));
 	}
 
 	@Test
@@ -76,51 +81,58 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testFormatCode() {
-		d.setFormatCode(new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
-				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)")); // Can be
+		Code fc = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
+				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
+		d.setFormatCode(fc); // Can be
 		// extracted
 		// from CDA
 		assertEquals("1.3.6.1.4.1.19376.1.2.3", m.getFormatCode().getSchemeName());
 		assertEquals("urn:ihe:iti:xds-sd:pdf:2008", m.getFormatCode().getCode());
 		l = (LocalizedStringType) m.getFormatCode().getDisplayName().getLocalizedString().get(0);
 		assertEquals("1.3.6.1.4.1.19376.1.2.20 (Scanned Document)", l.getValue());
+		assertTrue(isEqual(fc, d.getFormatCode()));
 	}
 
 	@Test
 	public void testHealthcareFacilityTypeCode() {
-		d.setHealthcareFacilityTypeCode(new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance")); // The
-																																															// codes
-																																															// here
-																																															// are
-																																															// specific
-																																															// for
-																																															// the
+		Code hftc = new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance");
+		d.setHealthcareFacilityTypeCode(hftc); // The
+		// codes
+		// here
+		// are
+		// specific
+		// for
+		// the
 		// affinity domain
 		assertEquals("2.16.840.1.113883.5.11", m.getHealthCareFacilityTypeCode().getSchemeName());
 		assertEquals("AMB", m.getHealthCareFacilityTypeCode().getCode());
 		l = (LocalizedStringType) m.getHealthCareFacilityTypeCode().getDisplayName()
 				.getLocalizedString().get(0);
 		assertEquals("Ambulance", l.getValue());
+		assertTrue(isEqual(hftc, d.getHealthcareFacilityTypeCode()));
 	}
 
 	@Test
 	public void testPatientId() {
-		d.setPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429")); // Can
-																																																// be
-																																																// extracted
-																																																// from
-																																																// CDA
+		Identificator id = new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429");
+		d.setPatientId(id); // Can
+		// be
+		// extracted
+		// from
+		// CDA
 		assertEquals("1.3.6.1.4.1.21367.2005.13.20.3000", m.getPatientId()
 				.getAssigningAuthorityUniversalId());
 		assertEquals("b8a9a9ad17b5429", m.getPatientId().getIdNumber());
+		assertTrue(isEqual(id, d.getPatientId()));
 	}
 
 	@Test
 	public void testPracticeSettingCode() {
-		d.setPracticeSettingCode(new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine")); // The
-																																																		// codes
-																																																		// here
-																																																		// are
+		Code psc = new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine");
+		d.setPracticeSettingCode(psc); // The
+		// codes
+		// here
+		// are
 		// specific for the affinity
 		// domain
 		assertEquals("2.16.840.1.113883.6.96", m.getPracticeSettingCode().getSchemeName());
@@ -128,18 +140,77 @@ public class DocumentMetadataTest extends TestUtils {
 		l = (LocalizedStringType) m.getPracticeSettingCode().getDisplayName().getLocalizedString()
 				.get(0);
 		assertEquals("General Medicine", l.getValue());
+		assertTrue(isEqual(psc, d.getPracticeSettingCode()));
 	}
 
 	@Test
 	public void testTypeCode() {
-		d.setTypeCode(new Code("2.16.840.1.113883.6.1", "34133-9", "Summarization of Episode Note")); // Can
-																																																	// be
-																																																	// extracted
-																																																	// from
-																																																	// CDA
+		Code tc = new Code("2.16.840.1.113883.6.1", "34133-9", "Summarization of Episode Note");
+		d.setTypeCode(tc); // Can
+		// be
+		// extracted
+		// from
+		// CDA
 		assertEquals("2.16.840.1.113883.6.1", m.getTypeCode().getSchemeName());
 		assertEquals("34133-9", m.getTypeCode().getCode());
 		l = (LocalizedStringType) m.getTypeCode().getDisplayName().getLocalizedString().get(0);
 		assertEquals("Summarization of Episode Note", l.getValue());
+		assertTrue(isEqual(tc, d.getTypeCode()));
+	}
+	
+	@Test
+	public void testAuthor() {
+		author1 = createAuthor1();
+		d.addAuthor(author1);
+		assertTrue(isEqual(author1, d.getAuthors().get(0)));
+	}
+	
+	@Test
+	public void testConfidentialityCode() {
+		code1 = createCode1();
+		d.addConfidentialityCode(code1);
+		d.addConfidentialityCode(Confidentiality.CH_30003);
+		assertTrue(isEqual(code1, d.getConfidentialityCodes().get(0)));
+		assertEquals(Confidentiality.CH_30003.getCodeValue(), d.getConfidentialityCodes().get(1).getCode());
+	}
+	
+	@Test
+	public void testCreationTime() {
+		startDate = createStartDate();
+		d.setCreationTime(startDate);
+		assertEquals(startDate.getTime(), d.getCreationTime().getTime());
+	}
+	
+	@Test
+	public void testMimeType() {
+		numS1 = generateString(128);
+		d.setMimeType(numS1);
+		assertEquals(numS1, d.getMimeType());
+	}
+	
+	@Test 
+	public void testPatient() {
+		Patient p = createPatient();
+		d.setPatient(p);
+		assertTrue(isEqual(p, d.getPatient()));
+	}
+	
+	@Test
+	public void testSourcePatientId() {
+		id1 = createIdentificator1();
+		d.setSourcePatientId(id1);
+		assertTrue(isEqual(id1, d.getSourcePatientId()));
+	}
+	
+	@Test
+	public void testTite() {
+		d.setTitle(numS1);
+		assertEquals(numS1, d.getTitle());
+	}
+	
+	@Test
+	public void testUniqueId() {
+		d.setUniqueId(numS2);
+		assertEquals(numS2, d.getUniqueId());
 	}
 }
