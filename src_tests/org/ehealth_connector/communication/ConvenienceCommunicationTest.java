@@ -138,7 +138,7 @@ public class ConvenienceCommunicationTest {
 			dest.setRepositoryUri(URI.create(registryUrl));
 
 			FindDocumentsQuery q = new FindDocumentsQuery(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
-			XDSQueryResponseType qr = c.invokeStoredQuery(q.getOhtStoredQuery(), false);
+			XDSQueryResponseType qr = c.invokeStoredQuery(q, false);
 
 			if (qr.getErrorList() != null) {
 				log.info("ERRORS: "+qr.getErrorList().toString());
@@ -217,7 +217,7 @@ public class ConvenienceCommunicationTest {
 			c.setDestination(dest);
 			//q = new FindDocumentsQuery(patientId, null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
 			q = new GetDocumentsQuery(new String[] { docUid }, true);
-			qr = c.invokeStoredQuery(q.getOhtStoredQuery(), false);
+			qr = c.invokeStoredQuery(q, false);
 		} catch (MalformedStoredQueryException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

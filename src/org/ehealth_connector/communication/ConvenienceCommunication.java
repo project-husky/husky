@@ -26,12 +26,12 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;
+import org.ehealth_connector.communication.storedquery.StoredQueryInterface;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.consumer.B_Consumer;
 import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
@@ -478,10 +478,10 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	public XDSQueryResponseType invokeStoredQuery(StoredQuery q, boolean returnReferencesOnly) throws Exception {
+	public XDSQueryResponseType invokeStoredQuery(StoredQueryInterface q, boolean returnReferencesOnly) throws Exception {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 
-		return consumer.invokeStoredQuery(q, returnReferencesOnly);
+		return consumer.invokeStoredQuery(q.getOhtStoredQuery(), returnReferencesOnly);
 	}
 
 	public XDSRetrieveResponseType retrieveDocumentSet(DocumentRequest docReq, Identificator identificator) {
