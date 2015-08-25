@@ -61,8 +61,8 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	*	<div class="de">der Dokumentenstatus</div>
 	*/
 	public static AvailabilityStatus getByOhtAvailabilityStatusType(AvailabilityStatusType availabilityStatusType) {
-		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED)) return AvailabilityStatus.APPROVED;
-		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED)) return AvailabilityStatus.DEPRECATED;
+		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED_LITERAL)) return AvailabilityStatus.APPROVED;
+		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED_LITERAL)) return AvailabilityStatus.DEPRECATED;
 		return null;
 	}
 
