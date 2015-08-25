@@ -22,7 +22,6 @@ import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.cda.tests.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.ch.enums.LanguageCode;
 import org.junit.Before;

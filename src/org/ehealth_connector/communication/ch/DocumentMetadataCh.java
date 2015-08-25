@@ -16,6 +16,10 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 
 public class DocumentMetadataCh extends org.ehealth_connector.communication.DocumentMetadata {
 
+	public DocumentMetadataCh() {
+		super();
+	}
+	
 	public DocumentMetadataCh(DocumentMetadata dm) {
 		super.xDoc = dm.getMdhtDocumentEntryType();
 	}
