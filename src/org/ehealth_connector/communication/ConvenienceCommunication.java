@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
@@ -26,6 +27,8 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;
+import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
+import org.ehealth_connector.communication.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.storedquery.StoredQueryInterface;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.common.hl7v2.CX;
@@ -459,7 +462,7 @@ public class ConvenienceCommunication {
 		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 	
 		String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
-		// Use the PatientId of the first Document for the
+		// Use the PatientId of the first Document for the Submission set ID
 		if (subSet.getPatientId() == null) {
 			CX testCx = txnData.getDocumentEntry(uuid).getPatientId();
 			subSet.setPatientId(EcoreUtil.copy(testCx));
@@ -478,29 +481,44 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	public XDSQueryResponseType invokeStoredQuery(StoredQueryInterface q, boolean returnReferencesOnly) throws Exception {
+	public XDSQueryResponseType queryDocuments(Identificator patientId) throws Exception {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	}
+	
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) throws Exception {
+		return this.queryDocuments(queryParameter);
+	}
+		
+	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) throws Exception {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 
-		return consumer.invokeStoredQuery(q.getOhtStoredQuery(), returnReferencesOnly);
+		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
 	}
 
-	public XDSRetrieveResponseType retrieveDocumentSet(DocumentRequest docReq, Identificator identificator) {
-		//1. Create B_Consumer with initiatingGateway and repositoryUriMap
-		//2. Create RetrieveSetRequestType
-		//3. Add Document Request
-		//4. invoke retrieve documentSet
-
-		//B_Consumer consumer = new B_Consumer(destination.getRegistryUri(), null, destination.getXdsRepositoriesAsHashMap());
+	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
+		return retrieveDocuments(new DocumentRequest[]{docReq}, auditorEnabled);
+	}
+	
+	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq, boolean auditorEnabled) {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
-		consumer.setRepositoryMap(destination.getXdsRepositoriesAsHashMap());
-
-		consumer.getAuditor().getConfig().setAuditorEnabled(false);
-
+		
+		//Create RetrieveSetRequestType
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
+		
+		//Put the Repository to the OHT Repository HashMap
+		for (int i=0;i<docReq.length;i++) {
+			HashMap repositoryMap = new HashMap();
+			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
+			consumer.setRepositoryMap(repositoryMap);
+			consumer.getAuditor().getConfig().setAuditorEnabled(false);
+			
+			//Add Document Request
+			retrieveDocumentSetRequest.getDocumentRequest().add(docReq[i].getOhtDocumentRequestType());
+		}
 
-		retrieveDocumentSetRequest.getDocumentRequest().add(docReq.getOhtDocumentRequestType());
-
-		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(identificator));
+		//invoke retrieve documentSet
+		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);
+		//XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(patientId));
 
 		return response;
 	}

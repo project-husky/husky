@@ -138,7 +138,7 @@ public class ConvenienceCommunicationTest {
 			dest.setRepositoryUri(URI.create(registryUrl));
 
 			FindDocumentsQuery q = new FindDocumentsQuery(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
-			XDSQueryResponseType qr = c.invokeStoredQuery(q, false);
+			XDSQueryResponseType qr = c.queryDocuments(q);
 
 			if (qr.getErrorList() != null) {
 				log.info("ERRORS: "+qr.getErrorList().toString());

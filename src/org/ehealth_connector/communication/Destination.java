@@ -139,14 +139,14 @@ public class Destination {
 		return this.xdsRepositories;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public HashMap getXdsRepositoriesAsHashMap() {
-		HashMap hashMap = new HashMap();
-		for (XdsRepository xdsRepo : xdsRepositories) {
-			hashMap.put(xdsRepo.getId(), xdsRepo.getUri());
-		}
-		return hashMap;
-	}
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	public HashMap getXdsRepositoriesAsHashMap() {
+//		HashMap hashMap = new HashMap();
+//		for (XdsRepository xdsRepo : xdsRepositories) {
+//			hashMap.put(xdsRepo.getId(), xdsRepo.getUri());
+//		}
+//		return hashMap;
+//	}
 
 	/**
 	 * Gets the path to the keystore

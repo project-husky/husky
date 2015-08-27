@@ -68,6 +68,7 @@ public class XdsUtil {
 	 * @return the cx
 	 */
 	public static CX convertEhcIdentificator(Identificator id) {
+		if (id == null) return null;
 		return createCx(id.getRoot(), id.getExtension());
 	}
 
