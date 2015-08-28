@@ -12,8 +12,6 @@ import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 import org.openhealthtools.ihe.xds.metadata.ParentDocumentRelationshipType;
 import org.openhealthtools.ihe.xds.metadata.constants.DocumentEntryConstants;
 
-import sun.security.krb5.internal.PAEncTSEnc;
-
 public class XdsTestUtils {
 	
 	//Initialize PatientId

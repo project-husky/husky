@@ -142,6 +142,7 @@ public class ConvenienceCommunication {
 	 */
 	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(DocumentDescriptor desc,
 			InputStream inputStream) throws Exception {
+		if (inputStream == null) throw new DocumentNotAccessibleException();
 		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
 
 		return new DocumentMetadataCh(addXdsDocument(doc, desc));
@@ -481,18 +482,18 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	public XDSQueryResponseType queryDocuments(Identificator patientId) throws Exception {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
 	}
 	
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) throws Exception {
-		return this.queryDocuments(queryParameter);
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
+		return this.queryDocuments(queryParameter, returnReferencesOnly);
 	}
 		
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) throws Exception {
+	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) throws Exception {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 
-		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
+		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
 	}
 
 	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
@@ -506,20 +507,27 @@ public class ConvenienceCommunication {
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
 		
 		//Put the Repository to the OHT Repository HashMap
+		HashMap repositoryMap = null;
 		for (int i=0;i<docReq.length;i++) {
-			HashMap repositoryMap = new HashMap();
+			repositoryMap = new HashMap();
 			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
-			consumer.setRepositoryMap(repositoryMap);
-			consumer.getAuditor().getConfig().setAuditorEnabled(false);
 			
 			//Add Document Request
 			retrieveDocumentSetRequest.getDocumentRequest().add(docReq[i].getOhtDocumentRequestType());
 		}
+		consumer.setRepositoryMap(repositoryMap);
+		consumer.getAuditor().getConfig().setAuditorEnabled(false);
 
 		//invoke retrieve documentSet
 		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);
 		//XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(patientId));
 
 		return response;
+	}
+	
+	public class DocumentNotAccessibleException extends Exception {
+		DocumentNotAccessibleException() {
+			super("The Document could not be found. Is the path correct?");
+		}
 	}
 }
