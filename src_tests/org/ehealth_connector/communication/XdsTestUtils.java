@@ -38,7 +38,6 @@ public class XdsTestUtils {
 	public static ParentDocumentRelationshipType[] parentRelation = new ParentDocumentRelationshipType[]{ParentDocumentRelationshipType.APND_LITERAL, ParentDocumentRelationshipType.RPLC_LITERAL};
 	
 	//Date Time Ranges
-	//TODO Evtl. Wrapper Objekt mit deutscher Datumsschreibweise erstellen.
 	public static DateTimeRange dateTimeRange1;
 	public static DateTimeRange dateTimeRange2;
 	public static DateTimeRange[] dateTimeRanges;

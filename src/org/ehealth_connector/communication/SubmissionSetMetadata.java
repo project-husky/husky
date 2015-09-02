@@ -6,7 +6,6 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
-import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
@@ -106,6 +105,7 @@ public class SubmissionSetMetadata {
 		return XdsUtil.convertInternationalStringType(s.getTitle());
 	}
 	
+	@SuppressWarnings("unchecked")
 	public SubmissionSetType toOhtSubmissionSetType(SubmissionSetType b) {
 		b.setAuthor(EcoreUtil.copy(s.getAuthor()));
 		b.setAvailabilityStatus(s.getAvailabilityStatus());

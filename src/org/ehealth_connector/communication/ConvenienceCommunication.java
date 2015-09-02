@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.util.HashMap;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -67,6 +68,14 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class ConvenienceCommunication {
 
+	public class DocumentNotAccessibleException extends Exception{
+		private static final long serialVersionUID = 1L;
+
+		DocumentNotAccessibleException() {
+			super("The Document could not be found. Is the path correct?");
+		}
+	}
+
 	private Destination destination = null;
 
 	/** The source. */
@@ -89,6 +98,9 @@ public class ConvenienceCommunication {
 	public ConvenienceCommunication() throws Exception {
 	}
 
+	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
+	// A11
+
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
@@ -104,28 +116,6 @@ public class ConvenienceCommunication {
 			throws Exception {
 		setDestination(dest);
 		auditorEnabled = this.auditorEnabled;
-	}
-
-	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
-	// A11
-
-	/**
-	 * Adds a document to the XDS Submission set.
-	 * 
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param inputStream
-	 *            The input stream to the document
-	 * @return the document metadata (which have to be completed)
-	 * @throws Exception
-	 *             the exception
-	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc,
-			InputStream inputStream) throws Exception {
-		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-
-		return addXdsDocument(doc, desc);
 	}
 
 	/**
@@ -173,6 +163,25 @@ public class ConvenienceCommunication {
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
+	 * @param inputStream
+	 *            The input stream to the document
+	 * @return the document metadata (which have to be completed)
+	 * @throws Exception
+	 *             the exception
+	 */
+	public DocumentMetadata addDocument(DocumentDescriptor desc,
+			InputStream inputStream) throws Exception {
+		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
+
+		return addXdsDocument(doc, desc);
+	}
+
+	/**
+	 * Adds a document to the XDS Submission set.
+	 * 
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which has to be completed)
@@ -184,23 +193,6 @@ public class ConvenienceCommunication {
 		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
 
 		return addXdsDocument(doc, desc);
-	}
-
-	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
-		source = new B_Source(destination.getRepositoryUri());
-
-		if (txnData == null) {
-			txnData = new SubmitTransactionData();
-		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
-		String docEntryUUID = txnData.addDocument(doc);
-		DocumentMetadata docMetadata = new DocumentMetadata(
-				txnData.getDocumentEntry(docEntryUUID));
-		if (DocumentDescriptor.CDA_R2.equals(desc)) {
-			cdaFixes(docMetadata);
-		}
-
-		return docMetadata;
 	}
 
 	public void clearDocuments() {
@@ -220,6 +212,52 @@ public class ConvenienceCommunication {
 		return this.txnData;
 	}
 
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
+		return this.queryDocuments(queryParameter, returnReferencesOnly);
+	}
+
+	// XDS: Interaktion mit einer IHE Registry - A8
+
+	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
+	}
+	
+	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) throws Exception {
+		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+
+		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
+	}
+	
+	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
+		return retrieveDocuments(new DocumentRequest[]{docReq}, auditorEnabled);
+	}
+
+	@SuppressWarnings("unchecked")
+	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq, boolean auditorEnabled) {
+		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+		
+		//Create RetrieveSetRequestType
+		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
+		
+		//Put the Repository to the OHT Repository HashMap
+		HashMap<String, URI> repositoryMap = null;
+		for (int i=0;i<docReq.length;i++) {
+			repositoryMap = new HashMap<String, URI>();
+			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
+			
+			//Add Document Request
+			retrieveDocumentSetRequest.getDocumentRequest().add(docReq[i].getOhtDocumentRequestType());
+		}
+		consumer.setRepositoryMap(repositoryMap);
+		consumer.getAuditor().getConfig().setAuditorEnabled(false);
+
+		//invoke retrieve documentSet
+		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);
+		//XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(patientId));
+
+		return response;
+	}
+
 	/**
 	 * Sets the destination
 	 * 
@@ -228,7 +266,6 @@ public class ConvenienceCommunication {
 	 */
 	public void setDestination(Destination dest) {
 		destination = dest;
-
 		organizationalId = dest.getSenderOrganizationalOid();
 
 		if (dest.getKeyStore() == null) {
@@ -246,7 +283,11 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	// XDS: Interaktion mit einer IHE Registry - A8
+	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
+
+	// Anfrage einer Immunization Recommendation (Senden der Anfrage und
+	// Empfangen
+	// der Antwort) - A4, A5, A6
 
 	/**
 	 * <p>
@@ -275,7 +316,7 @@ public class ConvenienceCommunication {
 		XDSResponseType xdsr = source.submit(txnData);
 		return xdsr;
 	}
-	
+
 	/**
 	 * <p>
 	 * Sends the current document to the according recipient (repository actor
@@ -298,7 +339,7 @@ public class ConvenienceCommunication {
 		subSet.setAuthor(author);
 		return submit(subSet);
 	}
-	
+
 	/**
 	 * <p>
 	 * Sends the current document to the according recipient (repository actor
@@ -318,7 +359,7 @@ public class ConvenienceCommunication {
 		subSet.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit();
 	}
-
+	
 	/**
 	 * Setting up the communication endpoint and the logger
 	 * 
@@ -346,6 +387,23 @@ public class ConvenienceCommunication {
 		XDSSourceAuditor.getAuditor().getConfig()
 		.setAuditorEnabled(auditorEnabled);
 	}
+		
+	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
+		source = new B_Source(destination.getRepositoryUri());
+
+		if (txnData == null) {
+			txnData = new SubmitTransactionData();
+		}
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+		String docEntryUUID = txnData.addDocument(doc);
+		DocumentMetadata docMetadata = new DocumentMetadata(
+				txnData.getDocumentEntry(docEntryUUID));
+		if (DocumentDescriptor.CDA_R2.equals(desc)) {
+			cdaFixes(docMetadata);
+		}
+
+		return docMetadata;
+	}
 
 	/**
 	 * Cda fixes.
@@ -372,13 +430,7 @@ public class ConvenienceCommunication {
 		// characters)
 		docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
 	}
-
-	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
-
-	// Anfrage einer Immunization Recommendation (Senden der Anfrage und
-	// Empfangen
-	// der Antwort) - A4, A5, A6
-
+	
 	/**
 	 * Generate missing doc entry attributes.
 	 * 
@@ -443,7 +495,7 @@ public class ConvenienceCommunication {
 							.getTypeCode()));
 		}
 	}
-
+	
 	private void generateMissingSubmissionSetAttributes() {
 		// Create SubmissionSet
 		SubmissionSetType subSet = txnData.getSubmissionSet();
@@ -479,55 +531,6 @@ public class ConvenienceCommunication {
 						"2.16.840.1.113883.6.1", "34133-9", "Summary of Episode Note",
 						null));
 			}
-		}
-	}
-
-	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
-	}
-	
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
-		return this.queryDocuments(queryParameter, returnReferencesOnly);
-	}
-		
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) throws Exception {
-		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
-
-		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
-	}
-
-	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
-		return retrieveDocuments(new DocumentRequest[]{docReq}, auditorEnabled);
-	}
-	
-	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq, boolean auditorEnabled) {
-		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
-		
-		//Create RetrieveSetRequestType
-		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createRetrieveDocumentSetRequestType();
-		
-		//Put the Repository to the OHT Repository HashMap
-		HashMap repositoryMap = null;
-		for (int i=0;i<docReq.length;i++) {
-			repositoryMap = new HashMap();
-			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
-			
-			//Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest().add(docReq[i].getOhtDocumentRequestType());
-		}
-		consumer.setRepositoryMap(repositoryMap);
-		consumer.getAuditor().getConfig().setAuditorEnabled(false);
-
-		//invoke retrieve documentSet
-		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);
-		//XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(patientId));
-
-		return response;
-	}
-	
-	public class DocumentNotAccessibleException extends Exception {
-		DocumentNotAccessibleException() {
-			super("The Document could not be found. Is the path correct?");
 		}
 	}
 }

@@ -92,6 +92,7 @@ public class Util {
 	 * @return false if l is null, if l.size() < 1 or if l.get(0) is null. 
 	 * Otherwise, return true.
 	 */
+	@SuppressWarnings("rawtypes")
 	protected static boolean atLeastOne(List l){
 		if(l == null) return false;
 		if(l.size() < 1)return false;

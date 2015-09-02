@@ -16,8 +16,6 @@
 
 package org.ehealth_connector.common;
 
-import java.util.Date;
-
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumInterface;

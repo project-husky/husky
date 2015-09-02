@@ -6,8 +6,6 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 
 public class DocumentConsumer {
-	private Destination destination;
-	private String organizationalId;
 	private B_Consumer consumer;
 
 	/**
@@ -37,9 +35,7 @@ public class DocumentConsumer {
 	 *            the destination
 	 */
 	public void setDestination(Destination dest) {
-		destination = dest;
-
-		organizationalId = dest.getSenderOrganizationalOid();
+		dest.getSenderOrganizationalOid();
 		consumer = new B_Consumer(dest.getRegistryUri());
 
 		if (dest.getKeyStore() == null) {

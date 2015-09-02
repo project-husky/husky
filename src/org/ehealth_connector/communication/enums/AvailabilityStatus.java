@@ -2,12 +2,6 @@ package org.ehealth_connector.communication.enums;
 
 import java.util.Arrays;
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-
-
 import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;

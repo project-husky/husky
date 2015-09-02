@@ -18,7 +18,6 @@ package org.ehealth_connector.communication;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
