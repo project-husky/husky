@@ -353,7 +353,7 @@ public class Author {
 	
 	/**
 	 * Sets the author speciality code. This element specifies the speciality ("Fachrichtung", e.g. Code "50001" for "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The code can also be used as author speciality, when a document is beeing sent (via XDS, XDM, XDR).
-	 * @return code the speciality code
+	 * @param code the speciality code
 	 */
 	public void setSpeciality(Code code) {
 		mAsAuthor.setCode(code.getCE());

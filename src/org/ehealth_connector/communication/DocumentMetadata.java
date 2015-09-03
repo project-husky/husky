@@ -100,7 +100,7 @@ public class DocumentMetadata {
 	 * Returns an (optional) author element. All information contained in the XDS
 	 * Document Metadata will be extracted to the Convenience API Author.
 	 * 
-	 * @returns ArrayList with Author objects
+	 * @return ArrayList with Author objects
 	 */
 	public ArrayList<Author> getAuthors() {
 		ArrayList<Author> authorList = new ArrayList<Author>();

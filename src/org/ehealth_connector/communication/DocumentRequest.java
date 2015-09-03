@@ -66,7 +66,7 @@ public class DocumentRequest {
 	/**
 	 * Sets the repository URI.
 	 * 
-	 * @param repositoryURI Typically you will find this id in the object that you get after using ConvenienceCommunication.queryForDocuments. (Using XDSQueryResponseType.getDocumentEntryResponses().getDocumentEntry().getUniqueId())
+	 * @param repositoryUri Typically you will find this id in the object that you get after using ConvenienceCommunication.queryForDocuments. (Using XDSQueryResponseType.getDocumentEntryResponses().getDocumentEntry().getUniqueId())
 	 */
 	public void setRepositoryUri(URI repositoryUri) {
 		this.xdsRepositoryUri = repositoryUri;
