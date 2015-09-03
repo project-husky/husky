@@ -5,6 +5,8 @@
 	<property name="source" value="1.6" />
 	<property name="debuglevel" value="lines,vars,source" />
 	<property name="reports.tests" value="reports-tests" />
+	<property name="ehcPath" value="../../../ehealthconnector/" />
+	<property name="demoPath" value="../../../demo/"/>
 
 	<path id="ehealthconnector.classpath">
 		<pathelement location="bin" />
@@ -289,6 +291,10 @@
 			<arg value="-out:${basedir}/dist/ehealthconnector.dll" />
 			<arg value="${basedir}/dist/ehealthconnector.jar" />
 		</exec>
+	</target>
+	
+	<target depends="build" name="copy2DotNetDemo" description="Copy the ehealthconnector .NET library to the .NET Demo">
+		<copy file="${basedir}/dist/ehealthconnector.dll" tofile="${basedir}../../demo/dotnet/eHealthConnectorDemo/lib/ehealthconnector.dll" />
 	</target>
 
 	<target name="junittest" depends="clean,init">
