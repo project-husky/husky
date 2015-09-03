@@ -73,7 +73,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
-	 * Document Metadata will be extracted from the Convencience API Author.
+	 * Document Metadata will be extracted from the Convenience API Author.
 	 * 
 	 * @param author
 	 *          the author
@@ -96,6 +96,12 @@ public class DocumentMetadata {
 		xDoc.getAuthors().add(xAuthor);
 	}
 	
+	/**
+	 * Returns an (optional) author element. All information contained in the XDS
+	 * Document Metadata will be extracted to the Convenience API Author.
+	 * 
+	 * @returns ArrayList with Author objects
+	 */
 	public ArrayList<Author> getAuthors() {
 		ArrayList<Author> authorList = new ArrayList<Author>();
 		AuthorType at = null;
@@ -133,6 +139,11 @@ public class DocumentMetadata {
 						code.getDisplayName(), null));
 	}
 	
+	/**
+	 * Gets the confidentialityCode list
+	 * 
+	 * @return the ArrayList with ConfidentialityCodes
+	 */
 	public ArrayList<Code> getConfidentialityCodes() {
 		ArrayList<Code> confCodes = new ArrayList<Code>();
 		CodedMetadataType cmt = null;
@@ -176,6 +187,11 @@ public class DocumentMetadata {
 		xDoc.setClassCode(XdsUtil.convertCode(code));
 	}
 	
+	/**
+	 * Gets the classCode
+	 * 
+	 * @return Code element with classCode
+	 */
 	public Code getClassCode() {
 		return XdsUtil.convertOhtCodedMetadataType(xDoc.getClassCode());
 	}
@@ -191,6 +207,11 @@ public class DocumentMetadata {
 		xDoc.setLanguageCode(codedLanguage);
 	}
 	
+	/**
+	 * Gets the codedLanguage
+	 * 
+	 * @return codedLanguage as String
+	 */
 	public String getCodedLanguage() {
 		return xDoc.getLanguageCode();
 	}
@@ -207,6 +228,11 @@ public class DocumentMetadata {
 		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
 	}
 	
+	/**
+	 * Gets the creationTime
+	 * 
+	 * @return creationTime as Date
+	 */
 	public Date getCreationTime() {
 		return DateUtil.parseDateyyyyMMddHHmm(xDoc.getCreationTime());
 	}
@@ -222,6 +248,11 @@ public class DocumentMetadata {
 		xDoc.setFormatCode(XdsUtil.convertCode(code));
 	}
 	
+	/**
+	 * Gets the formatCode
+	 * 
+	 * @return formatCode as Code
+	 */
 	public Code getFormatCode() {
 		return XdsUtil.convertOhtCodedMetadataType(xDoc.getFormatCode());
 	}
@@ -237,6 +268,11 @@ public class DocumentMetadata {
 		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
 	}
 	
+	/**
+	 * Gets the healthcareFacilityTypeCode
+	 * 
+	 * @return healthcareFacilityTypeCode as Code
+	 */
 	public Code getHealthcareFacilityTypeCode() {
 		return XdsUtil.convertOhtCodedMetadataType(xDoc.getHealthCareFacilityTypeCode());
 	}
@@ -251,6 +287,11 @@ public class DocumentMetadata {
 		xDoc.setMimeType(mimeType);
 	}
 	
+	/**
+	 * Gets the mimeType
+	 * 
+	 * @return mimeType as String
+	 */
 	public String getMimeType() {
 		return xDoc.getMimeType();
 	}
@@ -276,6 +317,12 @@ public class DocumentMetadata {
 		}
 	}
 	
+	/**
+	 * Gets the patient. All information from the XDS Document
+	 * Metadata will be extracted to the Convenience API Patient object.
+	 * 
+	 * @return patient
+	 */
 	public Patient getPatient() {
 		return XdsUtil.convertOhtSourcePatientInfoType(xDoc.getSourcePatientInfo());
 	}
@@ -291,6 +338,11 @@ public class DocumentMetadata {
 		xDoc.setPatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 	
+	/**
+	 * Gets the patient id.
+	 * 
+	 * @return patientId as Identificator
+	 */
 	public Identificator getPatientId() {
 		return XdsUtil.convertOhtCx(xDoc.getPatientId());
 	}
@@ -307,6 +359,13 @@ public class DocumentMetadata {
 		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
 	}
 	
+	/**
+	 * Gets the practice setting code. This is the medical speciality
+	 * of the practice where the document was produced (e.g. Code for
+	 * "General Medicine")
+	 * 
+	 * @return the practiceSettingCode as Code
+	 */
 	public Code getPracticeSettingCode() {
 		return XdsUtil.convertOhtCodedMetadataType(xDoc.getPracticeSettingCode());
 	}
@@ -322,6 +381,12 @@ public class DocumentMetadata {
 		xDoc.setSourcePatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 	
+	/**
+	 * Gets the source patient id. This is the local patient id, e.g.
+	 * inside a hospital.
+	 * 
+	 * @return the sourcePatientId as Identificator
+	 */
 	public Identificator getSourcePatientId() {
 		return XdsUtil.convertOhtCx(xDoc.getSourcePatientId());
 	}
@@ -336,6 +401,11 @@ public class DocumentMetadata {
 		xDoc.setTitle(XdsUtil.createInternationalString(title));
 	}
 	
+	/**
+	 * Gets the title.
+	 * 
+	 * @return the title as String
+	 */
 	public String getTitle() {
 		return XdsUtil.convertInternationalStringType(xDoc.getTitle());
 	}
@@ -352,6 +422,13 @@ public class DocumentMetadata {
 		xDoc.setTypeCode(XdsUtil.convertCode(code));
 	}
 	
+	/**
+	 * Gets the typeCode. Specifies the type of the document (like the
+	 * class code, but more specific) (e.g. Code for
+	 * "Summarization of Episode Note")
+	 * 
+	 * @return the typeCode as Code
+	 */
 	public Code getTypeCode() {
 		return XdsUtil.convertOhtCodedMetadataType(xDoc.getTypeCode());
 	}
@@ -367,10 +444,20 @@ public class DocumentMetadata {
 		xDoc.setUniqueId(id);
 	}
 	
+	/**
+	 * Gets the unique id. The UUID of the document.
+	 * 
+	 * @return the uniqueId
+	 */
 	public String getUniqueId() {
 		return xDoc.getUniqueId();
 	}
 	
+	/**
+	 * Converts this (more general) DocumentMetadata object to a more specific swiss DocumentMetadataCh object.
+	 * 
+	 * @return the uniqueId
+	 */
 	public DocumentMetadata toDocumentMetadataCh() {
 		return new DocumentMetadataCh(this);
 	}

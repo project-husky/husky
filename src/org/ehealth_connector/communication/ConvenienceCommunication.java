@@ -18,8 +18,13 @@ package org.ehealth_connector.communication;
 
 import java.io.InputStream;
 import java.net.URI;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+import javax.crypto.Cipher;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
@@ -76,6 +81,8 @@ public class ConvenienceCommunication {
 		}
 	}
 
+	private final Log log = LogFactory.getLog(ConvenienceCommunication.class);
+	
 	private Destination destination = null;
 
 	/** The source. */
@@ -195,6 +202,9 @@ public class ConvenienceCommunication {
 		return addXdsDocument(doc, desc);
 	}
 
+	/**
+	 * Resets the transaction data (SubmissionSet and DocumentMetadata)
+	 */
 	public void clearDocuments() {
 		txnData = new SubmitTransactionData();
 	}
@@ -208,30 +218,71 @@ public class ConvenienceCommunication {
 		return destination;
 	}
 
+	/**
+	 * Gets the OHT transaction data (SubmissionSet and DocumentMetadata)
+	 * 
+	 * @return the transaction data object
+	 */
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
 	}
 
+	/**
+	 * Query a registry for documents, using a find documents query.
+	 * 
+	 * @param queryParameter a findDocumentsQuery object filled with your query parameters
+	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
+	 * @return the XDSQueryResponseType
+	 * @throws Exception
+	 */
 	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
 		return this.queryDocuments(queryParameter, returnReferencesOnly);
 	}
 
-	// XDS: Interaktion mit einer IHE Registry - A8
-
+	/**
+	 * Query a registry for all documents of one patient.
+	 *
+	 * @param patientId the ID of the patient
+	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
+	 * @return the XDSQueryResponseType
+	 * @throws Exception
+	 */
 	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
 		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
 	}
 	
+	/**
+	 * Query a registry for documents, using a query at will.
+	 * 
+	 * @param query one of the given queries (@see org.ehealth_connector.communication.storedquery and org.ehealth_connector.communication.storedquery.ch)
+	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
+	 * @return the XDSQueryResponseType
+	 * @throws Exception
+	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) throws Exception {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 
 		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
 	}
 	
+	/**
+	 * Retrieves a document from a Repository
+	 * 
+	 * @param docReq the document request
+	 * @param auditorEnabled sets whether the ATNA audit is enable (secure) or disabled
+	 * @return the XDSRetrieveResponseType
+	 */
 	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
 		return retrieveDocuments(new DocumentRequest[]{docReq}, auditorEnabled);
 	}
 
+	/**
+	 * Retrieves multiple documents from one or more Repositories
+	 * 
+	 * @param docReq an array of document requests
+	 * @param auditorEnabled sets whether the ATNA audit is enable (secure) or disabled
+	 * @return the XDSRetrieveResponseType
+	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq, boolean auditorEnabled) {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
@@ -267,6 +318,14 @@ public class ConvenienceCommunication {
 	public void setDestination(Destination dest) {
 		destination = dest;
 		organizationalId = dest.getSenderOrganizationalOid();
+		try {
+			boolean unlimited = Cipher.getMaxAllowedKeyLength("RC5") >= 256;
+			 log.debug("Unlimited cryptography enabled: " + unlimited);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		if (dest.getKeyStore() == null) {
 			System.clearProperty("javax.net.ssl.keyStore");
@@ -280,6 +339,12 @@ public class ConvenienceCommunication {
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
 			System.setProperty("javax.net.ssl.trustStorePassword",
 					dest.getTrustStorePassword());
+			
+			System.setProperty("javax.net.debug", "all");
+			//System.setProperty("https.protocols", "TLSv1.2");
+			//System.setProperty("https.ciphersuites", "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
+			
+			
 		}
 	}
 
@@ -328,6 +393,7 @@ public class ConvenienceCommunication {
 	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
 	 * </p>
 	 * 
+	 * @param authorRole the role of the author of the document. This is part of the submission set metadata and required for switzerland.
 	 * @return XDSResponseType
 	 * @throws Exception
 	 *             the exception
@@ -351,6 +417,7 @@ public class ConvenienceCommunication {
 	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
 	 * </p>
 	 * 
+	 * @param subSet the metadata object for the submission set. Although, some of this information can be derived automatically, some may be required in your country (e.g. AuthorRole in switzerland)
 	 * @return XDSResponseType
 	 * @throws Exception
 	 *             the exception

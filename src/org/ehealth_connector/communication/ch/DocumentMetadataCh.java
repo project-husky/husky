@@ -45,6 +45,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.getConfidentialityCode().add(code.getCodedMetadataType());
 	}
 
+	/**
+	 * Gets the confidentialityCode list
+	 * 
+	 * @return the ArrayList with ConfidentialityCodes as Enums
+	 */
 	public ArrayList<ConfidentialityCode> getConfidentialityCodesEnum() {
 		ArrayList<ConfidentialityCode> ccl = new ArrayList<ConfidentialityCode>();
 		if (!xDoc.getConfidentialityCode().isEmpty()) {
@@ -68,6 +73,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.setClassCode(code.getCodedMetadataType());
 	}
 
+	/**
+	 * Gets the classCode 
+	 * 
+	 * @return Code element with classCode as Enum
+	 */
 	public org.ehealth_connector.communication.ch.enums.ClassCode getClassCodeEnum() {
 		return ClassCode.getEnum(xDoc.getClassCode().getCode());
 	}
@@ -83,6 +93,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.setLanguageCode(codedLanguage.getCodeValue());
 	}
 
+	/**
+	 * Gets the languageCode
+	 * 
+	 * @return codedLanguage as Enum
+	 */
 	public LanguageCode getLanguageCodeEnum() {
 		return LanguageCode.getEnum(xDoc.getLanguageCode());
 	}
@@ -97,6 +112,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.setFormatCode(code.getCodedMetadataType());
 	}
 
+	/**
+	 * Gets the formatCode
+	 * 
+	 * @return formatCode as Enum
+	 */
 	public org.ehealth_connector.communication.ch.enums.FormatCode getFormatCodeEnum() {
 		return FormatCode.getEnum(xDoc.getFormatCode().getCode());
 	}
@@ -112,6 +132,11 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.setHealthCareFacilityTypeCode(code.getCodedMetadataType());
 	}
 
+	/**
+	 * Gets the healthcareFacilityTypeCode
+	 * 
+	 * @return healthcareFacilityTypeCode as Enum
+	 */
 	public org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
 		return HealthcareFacilityTypeCode.getEnum(xDoc.getHealthCareFacilityTypeCode().getCode());
 	}
@@ -146,7 +171,6 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		return PracticeSettingCode.getEnum(xDoc.getPracticeSettingCode().getCode());
 	}
 
-
 	/**
 	 * Sets the (required) type code. Specifies the type of the document (like the
 	 * class code, but more specific) (e.g. Code for
@@ -159,6 +183,12 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 		xDoc.setTypeCode(code.getCodedMetadataType());
 	}
 
+	/**
+	 * Gets the practice setting code. This is the medical speciality
+	 * of the practice where the document was produced
+	 * 
+	 * @return the practiceSettingCode as Enum
+	 */
 	public org.ehealth_connector.communication.ch.enums.TypeCode getTypeCodeEnum() {
 		return TypeCode.getEnum(xDoc.getTypeCode().getCode());
 	}
