@@ -55,14 +55,4 @@ public class CdaUtilTest extends TestUtils {
 		organization1 = createOrganization1();
 		address1 = createAddress1();
 	}
-
-	@Test
-	public void testCreateCustodianOrganizationFromOrganization() {
-		// Organisation with Telecoms
-		CustodianOrganization c = Util.createCustodianOrganizationFromOrganization(organization1);
-		assertTrue(organization1.getMdhtOrganization().getNames().get(0).getText()
-				.equals(c.getNames().get(0).getText()));
-		assertTrue(organization1.getMdhtOrganization().getTelecoms().get(0).getValue()
-				.equals(c.getTelecom().getValue()));
-	}
 }

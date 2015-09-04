@@ -125,35 +125,4 @@ public class ConvenienceCommunicationTest {
 		assertEquals(TRUST_STORE, System.getProperty("javax.net.ssl.trustStore"));
 		assertEquals(TRUST_STORE_PASS, System.getProperty("javax.net.ssl.trustStorePassword"));
 	}
-
-	//@Test
-	public void testXdsConsumerQueries() {
-		//Create query
-		try {
-			String host = "ahdis-ihetest.cloudapp.net:8100/";
-			String registryUrl = "http://" + host
-					+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/reg/sq";
-			String repositoryUrl = "http://" + host
-					+ "/xdstools2/sim/305cd4eb-1724-45ae-b489-d10678342c97/rep/prb";
-			dest.setRepositoryUri(URI.create(registryUrl));
-
-			FindDocumentsQuery q = new FindDocumentsQuery(new Identificator("1.3.6.1.4.1.21367.13.20.2005.1000", "IHERED-1644"), null, null, null, null, null, null, null, AvailabilityStatus.APPROVED);
-			XDSQueryResponseType qr = c.queryDocuments(q, false);
-
-			if (qr.getErrorList() != null) {
-				log.info("ERRORS: "+qr.getErrorList().toString());
-			}
-			else {
-				log.info("No Errors.");
-			}
-			log.info("Found Documents: "+qr.getDocumentEntryResponses().size());
-			assertEquals(qr.getErrorList(),null);
-		} catch (MalformedStoredQueryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

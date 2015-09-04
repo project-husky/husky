@@ -226,19 +226,7 @@ public class ConvenienceCommunication {
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
 	}
-
-	/**
-	 * Query a registry for documents, using a find documents query.
-	 * 
-	 * @param queryParameter a findDocumentsQuery object filled with your query parameters
-	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
-	 * @return the XDSQueryResponseType
-	 * @throws Exception
-	 */
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
-		return this.queryDocuments(queryParameter, returnReferencesOnly);
-	}
-
+	
 	/**
 	 * Query a registry for all documents of one patient.
 	 *
@@ -249,6 +237,18 @@ public class ConvenienceCommunication {
 	 */
 	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
 		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
+	}
+
+	/**
+	 * Query a registry for documents, using a find documents query.
+	 * 
+	 * @param queryParameter a findDocumentsQuery object filled with your query parameters
+	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
+	 * @return the XDSQueryResponseType
+	 * @throws Exception
+	 */
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
+		return this.queryDocuments((StoredQueryInterface)queryParameter, returnReferencesOnly);
 	}
 	
 	/**
@@ -304,7 +304,6 @@ public class ConvenienceCommunication {
 
 		//invoke retrieve documentSet
 		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);
-		//XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, XdsUtil.convertEhcIdentificator(patientId));
 
 		return response;
 	}
@@ -342,6 +341,9 @@ public class ConvenienceCommunication {
 			
 			System.setProperty("javax.net.debug", "all");
 			//System.setProperty("https.protocols", "TLSv1.2");
+			//System.setProperty("https.protocols", "TLSv1.2");
+			//System.setProperty("https.ciphersuites", "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
+			
 			//System.setProperty("https.ciphersuites", "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
 			
 			
