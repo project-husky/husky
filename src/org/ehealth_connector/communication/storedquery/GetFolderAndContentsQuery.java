@@ -19,10 +19,13 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 * @param isUUID set to true if folderID is the entryUUID (internal registry identifier) of the folder and set to false if it is the uniqueID (external to registry) of the folder. In most user cases, this should be set to false
 	 * @param formatCodes array of formatCodes to query for (can be null)
 	 * @param confidentialityCodes array of confidentiality codes to query for (can be null)
-	 * @throws MalformedStoredQueryException
 	 */
-	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -33,10 +36,13 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 * @param formatCodes array of formatCodes to query for (can be null)
 	 * @param confidentialityCodes array of confidentiality codes to query for (can be null)
 	 * @param homeCommunityId  this is the id of the home community as specified by the XCA profile. Value may be null or empty, in which case it is not added to the query.
-	 * @throws MalformedStoredQueryException
 	 */
-	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes, String homeCommunityId) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), homeCommunityId);
+	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes, String homeCommunityId) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), homeCommunityId);
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -48,20 +54,26 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 * @param confidentialityCodes array of confidentiality codes to query for (can be null)
 	 * @param homeCommunityId  this is the id of the home community as specified by the XCA profile. Value may be null or empty, in which case it is not added to the query.
 	 * @param objectType  for the OnDemand document feature. Tells whether you want static docs, on demand docs, or both
-	 * @throws MalformedStoredQueryException
 	 */
-	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes, String homeCommunityId, ObjectType objectType) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), homeCommunityId, objectType);
+	public GetFolderAndContentsQuery (String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes, String homeCommunityId, ObjectType objectType) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(folderId, isUUID, XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), homeCommunityId, objectType);
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Adds an additional disjunctive clause of confidentiality codes to the query. Per IHE 2008-2009 ITI CP 228, codes with in the parameter will be interpreted with OR semantics. The resultant disjunctive clause will be AND-ed together with any confidentialityCode clauses previously added. Calling this method sequentially will result in the AND-ing of multiple clauses.
 	 * 
 	 * @param confidentialityCodes  array of confidentialityCodes, interpreted as a disjunctive clause in which each confidentialityCodes[i] will be a literal of that clause, to add to the query.
-	 * @throws MalformedStoredQueryException
 	 */
-	public void addConfidentialityCodes(Code[] confidentialityCodes) throws MalformedStoredQueryException {
-		ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+	public void addConfidentialityCodes(Code[] confidentialityCodes) {
+		try {
+			ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* 

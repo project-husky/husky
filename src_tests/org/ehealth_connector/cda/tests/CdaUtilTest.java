@@ -1,13 +1,8 @@
 package org.ehealth_connector.cda.tests;
 
-import static org.junit.Assert.assertTrue;
-
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.common.Util;
 import org.junit.Before;
-import org.junit.Test;
-import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 
 public class CdaUtilTest extends TestUtils {
 

@@ -17,33 +17,12 @@ package org.ehealth_connector.communication;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.ch.enums.LanguageCode;
-import org.ehealth_connector.cda.enums.Confidentiality;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
-import org.ehealth_connector.communication.ch.storedquery.*;
-import org.ehealth_connector.communication.storedquery.FindDocumentsQuery;
-import org.ehealth_connector.communication.storedquery.GetDocumentsQuery;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
-import org.openhealthtools.ihe.xds.response.XDSResponseType;
-import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 
 public class ConvenienceCommunicationTest {
 
@@ -67,8 +46,6 @@ public class ConvenienceCommunicationTest {
 	// One PDF and one CDA Document that will be transfered
 	public static final String pdfFileName = "patientconsent.pdf";
 	public static final String cdaFilePath = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/CDA-CH-VACD_Impfausweis.xml";
-	private final Log log = LogFactory.getLog(ConvenienceCommunicationTest.class);
-	
 	
 	java.net.URI repUri;
 	Destination dest;

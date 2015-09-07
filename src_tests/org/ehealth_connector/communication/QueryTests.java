@@ -1,15 +1,15 @@
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.communication.ch.storedquery.*;
+import org.ehealth_connector.communication.ch.storedquery.FindDocumentsQuery;
+import org.ehealth_connector.communication.ch.storedquery.GetFolderAndContentsQuery;
 import org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery;
 import org.ehealth_connector.communication.storedquery.GetDocumentsQuery;
 import org.ehealth_connector.communication.storedquery.GetRelatedDocumentsQuery;
 import org.junit.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
+import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 
 public class QueryTests extends XdsTestUtils {
 	
@@ -20,7 +20,6 @@ public class QueryTests extends XdsTestUtils {
 	@Test
 	public void FindDocumentsQueryTest() {
 		//Constructor Test
-		try {
 			//Create a query
 			FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, eDateTimeRanges, practiceSettingCodes, healthCareFacilityCodes, confidentialityCodes, formatCodes, authorPerson, avaiabilityStatus);
 			
@@ -45,38 +44,26 @@ public class QueryTests extends XdsTestUtils {
 			assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getFamilyName()));
 			assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
 			assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
-		} catch (MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
 	public void FindFoldersStoredQueryTest() {
-		 try {
 			FindFoldersStoredQuery q = new org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery(patientId, avaiabilityStatus);
 		
 			StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
 			
 			assertTrue(sqpl.get("$XDSFolderPatientId").contains(patientId.getRoot()));
 			assertTrue(sqpl.get("$XDSFolderStatus").contains(avaiabilityStatus.getCodeValue()));
-		 } catch (MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
 	public void GetDocumentsQueryTest() {
-		try {
 			GetDocumentsQuery q = new GetDocumentsQuery(docIds, true);
 			
 			StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
 			
 			assertTrue(sqpl.get("$XDSDocumentEntryEntryUUID").contains(docIds[0]));
 			assertTrue(sqpl.get("$XDSDocumentEntryEntryUUID").contains(docIds[1]));
-		} catch (MalformedStoredQueryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@Test
@@ -106,7 +93,6 @@ public class QueryTests extends XdsTestUtils {
 	
 	@Test
 	public void GetRelatedDocumentsQueryTest() {
-		try {
 			GetRelatedDocumentsQuery q1 = new GetRelatedDocumentsQuery("1234", true, parentRelation);
 			GetRelatedDocumentsQuery q2 = new GetRelatedDocumentsQuery("1234", true, parentRelation, "9876");
 			GetRelatedDocumentsQuery q3 = new GetRelatedDocumentsQuery("1234", true, parentRelation, "6789", ObjectType.STATIC);
@@ -120,9 +106,5 @@ public class QueryTests extends XdsTestUtils {
 			assertTrue(q2.getOhtStoredQuery().getHomeCommunityId().contains("9876"));
 			
 			assertTrue(q3.getOhtStoredQuery().getQueryParameters().get("$XDSDocumentEntryType").contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1"));
-		} catch (MalformedStoredQueryException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

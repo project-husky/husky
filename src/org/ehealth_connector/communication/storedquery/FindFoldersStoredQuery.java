@@ -15,9 +15,13 @@ public class FindFoldersStoredQuery extends AbstractStoredQuery {
 	 * 
 	 * @param patientId ID of the patient (required)
 	 * @param status status the availability status of the document (required)
-	 * @throws MalformedStoredQueryException
 	 */
-	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		} catch (MalformedStoredQueryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

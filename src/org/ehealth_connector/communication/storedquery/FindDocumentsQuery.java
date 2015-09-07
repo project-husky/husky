@@ -20,11 +20,14 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 * 
 	 * @param patientId ID of the patient
 	 * @param status Status of the document
-	 * @throws MalformedStoredQueryException 
 	 */
-	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+					XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -39,7 +42,6 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 * @param formatCodes an array of codes, which classify the format of the document (can be null)
 	 * @param authorPerson information about the author of the document (can be null)
 	 * @param status the availability status of the document (required)
-	 * @throws MalformedStoredQueryException
 	 */
 	public FindDocumentsQuery(
 			Identificator patientId,
@@ -50,29 +52,37 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			Code[] confidentialityCodes,
 			Code[] formatCodes,
 			XCN authorPerson,
-			AvailabilityStatus status) throws MalformedStoredQueryException {
+			AvailabilityStatus status) {
 
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertEhcIdentificator(patientId),
-				XdsUtil.convertEhcCodeToCodedMetadataType(classCodes),
-				XdsUtil.convertEhcDateTimeRange(dateTimeRanges), 
-				XdsUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes), 
-				XdsUtil.convertEhcCodeToCodedMetadataType(healthCareFacilityCodes),
-				null, //Event code is currently not used in Switzerland
-				XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), 
-				XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), 
-				authorPerson, 
-				new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+					XdsUtil.convertEhcIdentificator(patientId),
+					XdsUtil.convertEhcCodeToCodedMetadataType(classCodes),
+					XdsUtil.convertEhcDateTimeRange(dateTimeRanges), 
+					XdsUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes), 
+					XdsUtil.convertEhcCodeToCodedMetadataType(healthCareFacilityCodes),
+					null, //Event code is currently not used in Switzerland
+					XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes), 
+					XdsUtil.convertEhcCodeToCodedMetadataType(formatCodes), 
+					authorPerson, 
+					new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Adds an additional disjunctive clause of confidentiality codes to the query. Per IHE 2008-2009 ITI CP 228, codes with in the parameter will be interpreted with OR semantics. The resultant disjunctive clause will be AND-ed together with any confidentialityCode clauses previously added. Calling this method sequentially will result in the AND-ing of multiple clauses.
 	 * 
 	 * @param confidentialityCodes array of confidentiality codes
-	 * @throws MalformedStoredQueryException
 	 */
-	public void addConfidentialityCodes (Code[] confidentialityCodes) throws MalformedStoredQueryException {
-		ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+	public void addConfidentialityCodes (Code[] confidentialityCodes) {
+		try {
+			ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+		} catch (MalformedStoredQueryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/* 

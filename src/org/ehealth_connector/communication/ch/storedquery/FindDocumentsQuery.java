@@ -24,9 +24,13 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 * @param status Status of the document
 	 * @throws MalformedStoredQueryException 
 	 */
-	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) throws MalformedStoredQueryException {
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) {
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+					XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -51,19 +55,23 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			org.ehealth_connector.communication.ch.enums.ConfidentialityCode[] confidentialityCodes,
 			org.ehealth_connector.communication.ch.enums.FormatCode[] formatCodes,
 			XCN authorPerson,
-			AvailabilityStatus status) throws MalformedStoredQueryException {
+			AvailabilityStatus status) {
 
-		ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-				XdsUtil.convertEhcIdentificator(patientId),
-				XdsUtil.convertEhcEnumToCodedMetadataType(classCodes),
-				XdsUtil.convertEhcDateTimeRange(dateTimeRanges), 
-				XdsUtil.convertEhcEnumToCodedMetadataType(practiceSettingCodes), 
-				XdsUtil.convertEhcEnumToCodedMetadataType(healthCareFacilityCodes),
-				null, //Event Code is currently not used in Switzerland
-				XdsUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes), 
-				XdsUtil.convertEhcEnumToCodedMetadataType(formatCodes), 
-				authorPerson, 
-				new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		try {
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+					XdsUtil.convertEhcIdentificator(patientId),
+					XdsUtil.convertEhcEnumToCodedMetadataType(classCodes),
+					XdsUtil.convertEhcDateTimeRange(dateTimeRanges), 
+					XdsUtil.convertEhcEnumToCodedMetadataType(practiceSettingCodes), 
+					XdsUtil.convertEhcEnumToCodedMetadataType(healthCareFacilityCodes),
+					null, //Event Code is currently not used in Switzerland
+					XdsUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes), 
+					XdsUtil.convertEhcEnumToCodedMetadataType(formatCodes), 
+					authorPerson, 
+					new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -72,8 +80,12 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 * @param confidentialityCodes array of confidentiality codes
 	 * @throws MalformedStoredQueryException
 	 */
-	public void addConfidentialityCodes (ConfidentialityCode[] confidentialityCodes) throws MalformedStoredQueryException {
-		ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes));
+	public void addConfidentialityCodes (ConfidentialityCode[] confidentialityCodes) {
+		try {
+			ohtStoredQuery.addConfidentialityCodes(XdsUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes));
+		} catch (MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* 

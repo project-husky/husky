@@ -24,7 +24,6 @@ import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;
 import org.ehealth_connector.communication.ch.enums.AuthorSpeciality;

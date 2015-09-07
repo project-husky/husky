@@ -18,10 +18,13 @@ public class DateTimeRange {
 	 * @param name The XDS metadata attribute to which this DateTimeRange belongs to (CreationTime, ServiceStartTime, ServiceStopTime)
 	 * @param from The point in time where this range starts
 	 * @param to The point in time where this range ends
-	 * @throws MalformedQueryException
 	 */
-	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) throws MalformedQueryException {
-		ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(), DateUtil.format(from), DateUtil.format(to));
+	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) {
+		try {
+			ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(), DateUtil.format(from), DateUtil.format(to));
+		} catch (MalformedQueryException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -16,6 +16,7 @@
 
 package org.ehealth_connector.communication;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
@@ -46,7 +47,6 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
@@ -100,10 +100,8 @@ public class ConvenienceCommunication {
 	/**
 	 * Instantiates a new convenience communication.
 	 * 
-	 * @throws Exception
-	 *             the exception
 	 */
-	public ConvenienceCommunication() throws Exception {
+	public ConvenienceCommunication() {
 	}
 
 	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
@@ -117,11 +115,8 @@ public class ConvenienceCommunication {
 	 * @param auditorEnabled
 	 *            sets whether the ATNA audit is enable (secure) or disabled
 	 *            (unsecure)
-	 * @throws Exception
-	 *             the exception
 	 */
-	public ConvenienceCommunication(Destination dest, boolean auditorEnabled)
-			throws Exception {
+	public ConvenienceCommunication(Destination dest, boolean auditorEnabled) {
 		setDestination(dest);
 		auditorEnabled = this.auditorEnabled;
 	}
@@ -135,15 +130,23 @@ public class ConvenienceCommunication {
 	 * @param inputStream
 	 *            The input stream to the document
 	 * @return the document metadata (which have to be completed)
-	 * @throws Exception
-	 *             the exception
 	 */
 	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(DocumentDescriptor desc,
-			InputStream inputStream) throws Exception {
-		if (inputStream == null) throw new DocumentNotAccessibleException();
-		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-
-		return new DocumentMetadataCh(addXdsDocument(doc, desc));
+			InputStream inputStream) {
+		if (inputStream == null)
+			try {
+				throw new DocumentNotAccessibleException();
+			} catch (DocumentNotAccessibleException e) {
+				e.printStackTrace();
+			}
+		XDSDocument doc;
+		try {
+			doc = new XDSDocumentFromStream(desc, inputStream);
+			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -155,14 +158,17 @@ public class ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which has to be completed)
-	 * @throws Exception
-	 *             the exception
 	 */
-	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath)
-			throws Exception {
-		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath) {
+		XDSDocument doc;
+		try {
+			doc = new XDSDocumentFromFile(desc, filePath);
+			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
 
-		return new DocumentMetadataCh(addXdsDocument(doc, desc));
+		return null;
 	}
 	
 	/**
@@ -174,14 +180,17 @@ public class ConvenienceCommunication {
 	 * @param inputStream
 	 *            The input stream to the document
 	 * @return the document metadata (which have to be completed)
-	 * @throws Exception
-	 *             the exception
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc,
-			InputStream inputStream) throws Exception {
-		XDSDocument doc = new XDSDocumentFromStream(desc, inputStream);
-
-		return addXdsDocument(doc, desc);
+			InputStream inputStream) {
+		XDSDocument doc;
+		try {
+			doc = new XDSDocumentFromStream(desc, inputStream);
+			return addXdsDocument(doc, desc);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -193,14 +202,17 @@ public class ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which has to be completed)
-	 * @throws Exception
-	 *             the exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
-			throws Exception {
-		XDSDocument doc = new XDSDocumentFromFile(desc, filePath);
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
+		XDSDocument doc;
+		try {
+			doc = new XDSDocumentFromFile(desc, filePath);
+			return addXdsDocument(doc, desc);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		return addXdsDocument(doc, desc);
+		return null;
 	}
 
 	/**
@@ -234,9 +246,8 @@ public class ConvenienceCommunication {
 	 * @param patientId the ID of the patient
 	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
 	 * @return the XDSQueryResponseType
-	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) throws Exception {
+	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) {
 		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), returnReferencesOnly);
 	}
 
@@ -246,9 +257,8 @@ public class ConvenienceCommunication {
 	 * @param queryParameter a findDocumentsQuery object filled with your query parameters
 	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
 	 * @return the XDSQueryResponseType
-	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) throws Exception {
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter, boolean returnReferencesOnly) {
 		return this.queryDocuments((StoredQueryInterface)queryParameter, returnReferencesOnly);
 	}
 	
@@ -258,12 +268,16 @@ public class ConvenienceCommunication {
 	 * @param query one of the given queries (@see org.ehealth_connector.communication.storedquery and org.ehealth_connector.communication.storedquery.ch)
 	 * @param returnReferencesOnly if set to false, the registry response will contain the document metadata. If set to true, the response will contain references instead of the complete document metadata. This is useful if the number of results is limited in the registry and your query would exceed this limit. In this case, precise your query or do a query for references first, choose the possible matches (e.g. the last 10 results) and then query for metadata.  
 	 * @return the XDSQueryResponseType
-	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) throws Exception {
+	public XDSQueryResponseType queryDocuments(StoredQueryInterface query, boolean returnReferencesOnly) {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 
-		return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
+		try {
+			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**
@@ -369,25 +383,25 @@ public class ConvenienceCommunication {
 	 * </p>
 	 * 
 	 * @return XDSResponseType
-	 * @throws Exception
-	 *             the exception
 	 */
-	public XDSResponseType submit() throws Exception {
+	public XDSResponseType submit() {
 		// generate missing information for all documents
 		for (XDSDocument xdsDoc : txnData.getDocList()) {
-			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
-//			LocalizedStringType test = (LocalizedStringType) txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).getFormatCode().getDisplayName().getLocalizedString().get(0);
-//			LocalizedStringType test2 = (LocalizedStringType) txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).getTitle().getLocalizedString().get(0);
-//			System.out.println("XYZ: FORMAT CODE:"+test.getLang());
-//			if (test2 != null) System.out.println(" TITLE:"+test2.getLang());
+			try {
+				generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
+				
+				generateMissingSubmissionSetAttributes();
+
+				//txnData.saveMetadataToFile("C:/temp/meta.xml");
+				XDSResponseType xdsr = source.submit(txnData);
+				
+				return xdsr;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
-		generateMissingSubmissionSetAttributes();
-
-		//txnData.saveMetadataToFile("C:/temp/meta.xml");
-		XDSResponseType xdsr = source.submit(txnData);
-
-		return xdsr;
+		return null;
 	}
 
 	/**
@@ -403,10 +417,8 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param authorRole the role of the author of the document. This is part of the submission set metadata and required for switzerland.
 	 * @return XDSResponseType
-	 * @throws Exception
-	 *             the exception
 	 */
-	public XDSResponseType submit(AuthorRole authorRole) throws Exception {
+	public XDSResponseType submit(AuthorRole authorRole) {
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		AuthorCh author = new AuthorCh();
 		author.setRoleFunction(authorRole);
@@ -427,10 +439,8 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param subSet the metadata object for the submission set. Although, some of this information can be derived automatically, some may be required in your country (e.g. AuthorRole in Switzerland)
 	 * @return XDSResponseType
-	 * @throws Exception
-	 *             the exception
 	 */
-	public XDSResponseType submit(SubmissionSetMetadata subSet) throws Exception {
+	public XDSResponseType submit(SubmissionSetMetadata subSet) {
 		subSet.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit();
 	}
@@ -443,11 +453,8 @@ public class ConvenienceCommunication {
 	 * @param auditorEnabled
 	 *            sets whether the ATNA audit is enable (secure) or disabled
 	 *            (unsecure)
-	 * @throws Exception
-	 *             the exception
 	 */
-	protected void setUp(Destination dest, boolean auditorEnabled)
-			throws Exception {
+	protected void setUp(Destination dest, boolean auditorEnabled) {
 
 		if (dest.getKeyStore() != null) {
 			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
@@ -463,21 +470,30 @@ public class ConvenienceCommunication {
 		.setAuditorEnabled(auditorEnabled);
 	}
 		
-	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) throws MetadataExtractionException, SubmitTransactionCompositionException {
+	private DocumentMetadata addXdsDocument (XDSDocument doc, DocumentDescriptor desc) {
 		source = new B_Source(destination.getRepositoryUri());
 
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
 		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
-		String docEntryUUID = txnData.addDocument(doc);
-		DocumentMetadata docMetadata = new DocumentMetadata(
-				txnData.getDocumentEntry(docEntryUUID));
-		if (DocumentDescriptor.CDA_R2.equals(desc)) {
-			cdaFixes(docMetadata);
-		}
+		String docEntryUUID;
+		try {
+			docEntryUUID = txnData.addDocument(doc);
+			
+			DocumentMetadata docMetadata = new DocumentMetadata(
+					txnData.getDocumentEntry(docEntryUUID));
+			if (DocumentDescriptor.CDA_R2.equals(desc)) {
+				cdaFixes(docMetadata);
+			}
 
-		return docMetadata;
+			return docMetadata;
+		} catch (MetadataExtractionException e) {
+			e.printStackTrace();
+		} catch (SubmitTransactionCompositionException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -511,12 +527,9 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param docEntryUuid
 	 *            the doc entry uuid
-	 * @throws Exception
-	 *             the exception
 	 */
 	@SuppressWarnings("unchecked")
-	private void generateMissingDocEntryAttributes(String docEntryUuid)
-			throws Exception {
+	private void generateMissingDocEntryAttributes(String docEntryUuid) {
 
 		DocumentMetadata docMetadata = new DocumentMetadata(
 				txnData.getDocumentEntry(docEntryUuid));
