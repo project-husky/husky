@@ -36,8 +36,8 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 	
 	@Test
 	public void testHealthcareFacilityEnum() {
-		m.setHealthcareFacilityTypeCode(HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL__AMBULATORIUM);
-		assertEquals(HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL__AMBULATORIUM, m.getHealthcareFacilityTypeCodeEnum());
+		m.setHealthcareFacilityTypeCode(HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM);
+		assertEquals(HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM, m.getHealthcareFacilityTypeCodeEnum());
 	}
 	
 	@Test

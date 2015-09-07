@@ -284,22 +284,20 @@ public class ConvenienceCommunication {
 	 * Retrieves a document from a Repository
 	 * 
 	 * @param docReq the document request
-	 * @param auditorEnabled sets whether the ATNA audit is enable (secure) or disabled
 	 * @return the XDSRetrieveResponseType
 	 */
-	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq, boolean auditorEnabled) {
-		return retrieveDocuments(new DocumentRequest[]{docReq}, auditorEnabled);
+	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq) {
+		return retrieveDocuments(new DocumentRequest[]{docReq});
 	}
 
 	/**
 	 * Retrieves multiple documents from one or more Repositories
 	 * 
 	 * @param docReq an array of document requests
-	 * @param auditorEnabled sets whether the ATNA audit is enable (secure) or disabled
 	 * @return the XDSRetrieveResponseType
 	 */
 	@SuppressWarnings("unchecked")
-	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq, boolean auditorEnabled) {
+	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
 		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
 		
 		//Create RetrieveSetRequestType
@@ -315,7 +313,6 @@ public class ConvenienceCommunication {
 			retrieveDocumentSetRequest.getDocumentRequest().add(docReq[i].getOhtDocumentRequestType());
 		}
 		consumer.setRepositoryMap(repositoryMap);
-		consumer.getAuditor().getConfig().setAuditorEnabled(false);
 
 		//invoke retrieve documentSet
 		XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false, retrieveDocumentSetRequest, null);

@@ -27,7 +27,7 @@ public class XdsTestUtils {
 	public static ClassCode[] classCodes = new ClassCode[]{ClassCode.ALERTS, ClassCode.CARE_PLANS};
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[]{ConfidentialityCode.ADMINISTRATIVE_DATEN, ConfidentialityCode.GEHEIME_DATEN};
 	public static FormatCode[] formatCodes = new FormatCode[]{FormatCode.EIMPFDOSSIER, FormatCode.EPD_DOKUMENT};
-	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[]{HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL__AMBULATORIUM, HealthcareFacilityTypeCode.ANDERE_GESUNDHEITS_ORGANISATION};
+	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[]{HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM, HealthcareFacilityTypeCode.ANDERE_GESUNDHEITS_ORGANISATION};
 	public static LanguageCode[] languageCodes = new LanguageCode[]{LanguageCode.DEUTSCH, LanguageCode.ENGLISCH};
 	public static MimeType[] mimeTypes = new MimeType[]{MimeType.CDA_LEVEL_1_MULTIPART, MimeType.DICOM};
 	public static PracticeSettingCode[] practiceSettingCodes = new PracticeSettingCode[]{PracticeSettingCode.ALLERGOLOGIE, PracticeSettingCode.ALLGEMEINMEDIZIN};
