@@ -23,7 +23,7 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Service d'urgence et de sauvetage</div>
 	*<div class="it">Servizio di pronto soccorso e di salvataggio</div>
 	*/
-	NOTFALL___RETTUNGSDIENSTE ("20002", "Notfall- / Rettungsdienste"),
+	NOTFALL_RETTUNGSDIENSTE ("20002", "Notfall- / Rettungsdienste"),
 	/** 
 	*<div class="de">Gesundheitsbehörde</div>
 	*<div class="fr">Autorité de santé</div>
@@ -41,7 +41,7 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Hôpital</div>
 	*<div class="it">Ospedale</div>
 	*/
-	STATIONÄRE_EINRICHTUNG__SPITAL ("20005", "stationäre Einrichtung / Spital"),
+	STATIONÄRE_EINRICHTUNG_SPITAL ("20005", "stationäre Einrichtung / Spital"),
 	/** 
 	*<div class="de">Armeeärztliche Dienste</div>
 	*<div class="fr">Service sanitaire </div>
@@ -71,7 +71,7 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Cabinet médical</div>
 	*<div class="it">Studio medico</div>
 	*/
-	AMBULANTE_EINRICHTUNG_INKL__AMBULATORIUM ("20010", "Ambulante Einrichtung, inkl. Ambulatorium"),
+	AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM ("20010", "Ambulante Einrichtung, inkl. Ambulatorium"),
 	/** 
 	*<div class="de">Organisation für stationäre Rehabilitation</div>
 	*<div class="fr">Organisation de réhabilitation stationnaire</div>
@@ -97,15 +97,15 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	*/
 	ANDERE_GESUNDHEITS_ORGANISATION ("20999", "Andere Gesundheits-Organisation");
 	public static final String INSTITUT_FÜR_MEDIZINISCHE_DIAGNOSTIK_CODE="20001";
-	public static final String NOTFALL___RETTUNGSDIENSTE_CODE="20002";
+	public static final String NOTFALL_RETTUNGSDIENSTE_CODE="20002";
 	public static final String GESUNDHEITSBEHÖRDE_CODE="20003";
 	public static final String ORGANISATION_FÜR_PFLEGE_ZU_HAUSE_CODE="20004";
-	public static final String STATIONÄRE_EINRICHTUNG__SPITAL_CODE="20005";
+	public static final String STATIONÄRE_EINRICHTUNG_SPITAL_CODE="20005";
 	public static final String ARMEEÄRZTLICHE_DIENSTE_CODE="20006";
 	public static final String GESUNDHEITSEINRICHTUNG_IN_DER_HAFTANSTALT_CODE="20007";
 	public static final String SOZIO_MEDIZINISCHE_INSTITUTION_CODE="20008";
 	public static final String APOTHEKE_CODE="20009";
-	public static final String AMBULANTE_EINRICHTUNG_INKL__AMBULATORIUM_CODE="20010";
+	public static final String AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM_CODE="20010";
 	public static final String ORGANISATION_FÜR_STATIONÄRE_REHABILITATION_CODE="20011";
 	public static final String ZU_HAUSE_CODE="20012";
 	public static final String UNBEKANNT_CODE="20900";

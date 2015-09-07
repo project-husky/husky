@@ -95,7 +95,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	*<div class="fr"></div>
 	*<div class="it"></div>
 	*/
-	VERLAUFS___AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE ("60014", "Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"),
+	VERLAUFS_AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE ("60014", "Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"),
 	/** 
 	*<div class="de">Pflegeplan (allgemein)</div>
 	*<div class="fr"></div>
@@ -325,7 +325,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	public static final String KURZ_AUSTRITTSBERICHT_PFLEGERISCH_CODE="60011";
 	public static final String AUSTRITTSBERICHT_LANG_PFLEGERISCH_CODE="60012";
 	public static final String VERLEGUNGSBERICHT_CODE="60013";
-	public static final String VERLAUFS___AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="60014";
+	public static final String VERLAUFS_AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="60014";
 	public static final String PFLEGEPLAN_ALLGEMEIN_CODE="60015";
 	public static final String PFLEGEBERICHT_CODE="60016";
 	public static final String KONSILAUFTRAG_ALLGEMEIN_CODE="60017";

@@ -107,7 +107,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Chirurgie cardiovasculaire</div>
 	*<div class="it">Chirurgia cardiovascolare</div>
 	*/
-	HERZ__UND_GEFÄSSCHIRURGIE ("10016", "Herz- und Gefässchirurgie"),
+	HERZ_UND_GEFÄSSCHIRURGIE ("10016", "Herz- und Gefässchirurgie"),
 	/** 
 	*<div class="de">Infektiologie</div>
 	*<div class="fr">Infectiologie</div>
@@ -173,7 +173,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Chirurgie dento-maxillo-faciale</div>
 	*<div class="it">Chirurgia maxillo-facciale</div>
 	*/
-	MUND__KIEFER__UND_GESICHTSCHIRURGIE ("10027", "Mund-, Kiefer- und Gesichtschirurgie"),
+	MUND_KIEFER_UND_GESICHTSCHIRURGIE ("10027", "Mund-, Kiefer- und Gesichtschirurgie"),
 	/** 
 	*<div class="de">Nephrologie</div>
 	*<div class="fr">Néphrologie</div>
@@ -341,7 +341,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecine tropicale et des voyages</div>
 	*<div class="it">Medicina tropicale e di viaggio</div>
 	*/
-	TROPEN__UND_REISEMEDIZIN ("10055", "Tropen- und Reisemedizin"),
+	TROPEN_UND_REISEMEDIZIN ("10055", "Tropen- und Reisemedizin"),
 	/** 
 	*<div class="de">Urologie</div>
 	*<div class="fr">Urologie</div>
@@ -393,7 +393,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	public static final String GERIATRIE_CODE="10013";
 	public static final String GASTROENTEROLOGIE_CODE="10014";
 	public static final String GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="10015";
-	public static final String HERZ__UND_GEFÄSSCHIRURGIE_CODE="10016";
+	public static final String HERZ_UND_GEFÄSSCHIRURGIE_CODE="10016";
 	public static final String INFEKTIOLOGIE_CODE="10017";
 	public static final String INNERE_MEDIZIN_CODE="10018";
 	public static final String INTENSIVMEDIZIN_CODE="10019";
@@ -404,7 +404,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	public static final String LABORMEDIZIN_CODE="10024";
 	public static final String LOGOPÄDIE_CODE="10025";
 	public static final String MEDIZINISCHE_GENETIK_CODE="10026";
-	public static final String MUND__KIEFER__UND_GESICHTSCHIRURGIE_CODE="10027";
+	public static final String MUND_KIEFER_UND_GESICHTSCHIRURGIE_CODE="10027";
 	public static final String NEPHROLOGIE_CODE="10028";
 	public static final String NEUROCHIRURGIE_CODE="10029";
 	public static final String NEUROLOGIE_CODE="10030";
@@ -432,7 +432,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	public static final String RHEUMATOLOGIE_CODE="10052";
 	public static final String THORAXCHIRURGIE_CODE="10053";
 	public static final String TRANSFUSIONSMEDIZIN_CODE="10054";
-	public static final String TROPEN__UND_REISEMEDIZIN_CODE="10055";
+	public static final String TROPEN_UND_REISEMEDIZIN_CODE="10055";
 	public static final String UROLOGIE_CODE="10056";
 	public static final String ZAHNHEILKUNDE_CODE="10057";
 	public static final String HÄMATOLOGIE_CODE="10058";

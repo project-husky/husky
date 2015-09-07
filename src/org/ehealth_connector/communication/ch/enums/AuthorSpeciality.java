@@ -7,7 +7,7 @@ import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
 /*
-*<div class="de">Dieses Attribut ist ein beschreibendes Sub-Attribut von author" und dient der Beschreibung der Medizinischen Fachrichtung der Person, welche ein Dokument verfasst hat. Diese Information kann für die Suche und Filterung benutzt werden. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
+*<div class="de">Dieses Attribut ist ein beschreibendes Sub-Attribut von author und dient der Beschreibung der Medizinischen Fachrichtung der Person, welche ein Dokument verfasst hat. Diese Information kann für die Suche und Filterung benutzt werden. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
 *<div class="fr"></div>
 */
 public enum AuthorSpeciality implements CodedMetadataEnumInterface {
@@ -47,7 +47,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en endocrinologie / diabétologie</div>
 	*<div class="it">Medico specializzato/a in endocrinologia / diabetologia</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_ENDOKRINOLOGIE__DIABETOLOGIE ("50006", "Fachärztin/Facharzt für Endokrinologie / Diabetologie"),
+	FACHÄRZTINFACHARZT_FÜR_ENDOKRINOLOGIE_DIABETOLOGIE ("50006", "Fachärztin/Facharzt für Endokrinologie / Diabetologie"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Gastroenterologie</div>
 	*<div class="fr">Médecin spécialiste en gastroentérologie</div>
@@ -71,7 +71,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en chirurgie cardio-vasculaire et thoracique</div>
 	*<div class="it">Medico specializzato/a in chirurgia toracica e cardiovascolare</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_HERZ__UND_THORAKALE_GEFÄSSCHIRURGIE ("50010", "Fachärztin/Facharzt für Herz- und thorakale Gefässchirurgie"),
+	FACHÄRZTINFACHARZT_FÜR_HERZ_UND_THORAKALE_GEFÄSSCHIRURGIE ("50010", "Fachärztin/Facharzt für Herz- und thorakale Gefässchirurgie"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Infektiologie</div>
 	*<div class="fr">Médecin spécialiste en infectiologie</div>
@@ -89,13 +89,13 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en pédiatrie</div>
 	*<div class="it">Medico specializzato/a in pediatria</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_KINDER__UND_JUGENDMEDIZIN ("50013", "Fachärztin/Facharzt für Kinder- und Jugendmedizin"),
+	FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDMEDIZIN ("50013", "Fachärztin/Facharzt für Kinder- und Jugendmedizin"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Kinder- und Jugendpsychiatrie und -psychotherapie</div>
 	*<div class="fr">Médecin spécialiste en pédopsychiatrie et pédopsychothérapie</div>
 	*<div class="it">Medico specializzato/a in pedopsichiatria e pedopsicoterapia</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_KINDER__UND_JUGENDPSYCHIATRIE_UND__PSYCHOTHERAPIE ("50014", "Fachärztin/Facharzt für Kinder- und Jugendpsychiatrie und -psychotherapie"),
+	FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDPSYCHIATRIE_UND_PSYCHOTHERAPIE ("50014", "Fachärztin/Facharzt für Kinder- und Jugendpsychiatrie und -psychotherapie"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Kinderchirurgie</div>
 	*<div class="fr">Médecin spécialiste en pédochirurgie</div>
@@ -113,7 +113,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en chirurgie dento-maxillo-faciale</div>
 	*<div class="it">Medico specializzato/a in chirurgia maxillo-facciale</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_MUND__KIEFER__UND_GESICHTSCHIRURGIE ("50017", "Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie"),
+	FACHÄRZTINFACHARZT_FÜR_MUND_KIEFER_UND_GESICHTSCHIRURGIE ("50017", "Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Nephrologie</div>
 	*<div class="fr">Médecin spécialiste en néphrologie</div>
@@ -203,7 +203,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en radio-oncologie/ radiothérapie</div>
 	*<div class="it">Medico specializzato/a in radio-oncologia / radioterapia</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_RADIO_ONKOLOGIE__STRAHLENTHERAPIE ("50032", "Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie"),
+	FACHÄRZTINFACHARZT_FÜR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE ("50032", "Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Rheumatologie</div>
 	*<div class="fr">Médecin spécialiste en rhumatologie</div>
@@ -215,7 +215,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Médecin spécialiste en médecine tropicale et des voyages</div>
 	*<div class="it">Medico specializzato/a in medicina tropicale e di viaggio</div>
 	*/
-	FACHÄRZTINFACHARZT_FÜR_TROPEN__UND_REISEMEDIZIN ("50034", "Fachärztin/Facharzt für Tropen- und Reisemedizin"),
+	FACHÄRZTINFACHARZT_FÜR_TROPEN_UND_REISEMEDIZIN ("50034", "Fachärztin/Facharzt für Tropen- und Reisemedizin"),
 	/** 
 	*<div class="de">Fachärztin/Facharzt für Urologie</div>
 	*<div class="fr">Médecin spécialiste en urologie</div>
@@ -401,7 +401,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Infirmière diplômée / Infirmier diplômé avec une function supplémentaire ou spécial, p.ex. soins intensiv, anesthésie</div>
 	*<div class="it">Infermiere/a diplomato/a con funzione supplementare o speciale, p. es. reparto cure intense (RCI), anestesia (SPD)</div>
 	*/
-	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ__ODER_SPEZIALFUNKTION_Z_B__IPS_ANÄSTHESIE_NDS ("50065", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit Zusatz- oder Spezialfunktion, z.B. IPS, Anästhesie (NDS)"),
+	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANÄSTHESIE_NDS ("50065", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit Zusatz- oder Spezialfunktion, z.B. IPS, Anästhesie (NDS)"),
 	/** 
 	*<div class="de">diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie Diabetesberaterin, Stillberaterin etc.</div>
 	*<div class="fr">Infirmière diplômée / Infirmier diplômé avec un cours de spécialisation postgrades et des formation spéciale supplémentaires comme Conseiller/Conseillère aux diabétiques, conseiller/Coonseillère en cas d’allaitement</div>
@@ -419,7 +419,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">assistante/assistant en soins et santé communautaire (ASSC) avec certificat fédéral de capacité</div>
 	*<div class="it">Operatore/trice sociosanitario AFC con attestato federale di capacità</div>
 	*/
-	FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG__FÄHIGKEITSZEUGNIS ("50068", "Fachfrau/Fachmann Gesundheit, FaGe mit eidg. Fähigkeitszeugnis"),
+	FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FÄHIGKEITSZEUGNIS ("50068", "Fachfrau/Fachmann Gesundheit, FaGe mit eidg. Fähigkeitszeugnis"),
 	/** 
 	*<div class="de">Heilmasseurin/Heilmasseur</div>
 	*<div class="fr">Masseur thérapeute</div>
@@ -437,7 +437,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Conseiller sanitaire et social</div>
 	*<div class="it">Consulenza sociosanitaria</div>
 	*/
-	GESUNDHEITS__UND_SOZIALBERATUNG ("50071", "Gesundheits- und Sozialberatung"),
+	GESUNDHEITS_UND_SOZIALBERATUNG ("50071", "Gesundheits- und Sozialberatung"),
 	/** 
 	*<div class="de">Hörgeräteakustiker/in</div>
 	*<div class="fr">Audioprothésiste</div>
@@ -461,7 +461,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="fr">Assistant en pharmacie</div>
 	*<div class="it">assistente di farmacia</div>
 	*/
-	PHARMA_ASSISTENTIN__PHARMA_ASSISTENT ("50075", "Pharma-Assistentin / Pharma-Assistent"),
+	PHARMA_ASSISTENTIN_PHARMA_ASSISTENT ("50075", "Pharma-Assistentin / Pharma-Assistent"),
 	/** 
 	*<div class="de">Unbekannt</div>
 	*<div class="fr">Inconnu</div>
@@ -479,18 +479,18 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String FACHÄRZTINFACHARZT_FÜR_ARBEITSMEDIZIN_CODE="50003";
 	public static final String FACHÄRZTINFACHARZT_FÜR_CHIRURGIE_CODE="50004";
 	public static final String FACHÄRZTINFACHARZT_FÜR_DERMATOLOGIE_UND_VENEROLOGIE_CODE="50005";
-	public static final String FACHÄRZTINFACHARZT_FÜR_ENDOKRINOLOGIE__DIABETOLOGIE_CODE="50006";
+	public static final String FACHÄRZTINFACHARZT_FÜR_ENDOKRINOLOGIE_DIABETOLOGIE_CODE="50006";
 	public static final String FACHÄRZTINFACHARZT_FÜR_GASTROENTEROLOGIE_CODE="50007";
 	public static final String FACHÄRZTINFACHARZT_FÜR_GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="50008";
 	public static final String FACHÄRZTINFACHARZT_FÜR_HÄMATOLOGIE_CODE="50009";
-	public static final String FACHÄRZTINFACHARZT_FÜR_HERZ__UND_THORAKALE_GEFÄSSCHIRURGIE_CODE="50010";
+	public static final String FACHÄRZTINFACHARZT_FÜR_HERZ_UND_THORAKALE_GEFÄSSCHIRURGIE_CODE="50010";
 	public static final String FACHÄRZTINFACHARZT_FÜR_INFEKTIOLOGIE_CODE="50011";
 	public static final String FACHÄRZTINFACHARZT_FÜR_KARDIOLOGIE_CODE="50012";
-	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER__UND_JUGENDMEDIZIN_CODE="50013";
-	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER__UND_JUGENDPSYCHIATRIE_UND__PSYCHOTHERAPIE_CODE="50014";
+	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDMEDIZIN_CODE="50013";
+	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDPSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE="50014";
 	public static final String FACHÄRZTINFACHARZT_FÜR_KINDERCHIRURGIE_CODE="50015";
 	public static final String FACHÄRZTINFACHARZT_FÜR_KLINISCHE_PHARMAKOLOGIE_UND_TOXIKOLOGIE_CODE="50016";
-	public static final String FACHÄRZTINFACHARZT_FÜR_MUND__KIEFER__UND_GESICHTSCHIRURGIE_CODE="50017";
+	public static final String FACHÄRZTINFACHARZT_FÜR_MUND_KIEFER_UND_GESICHTSCHIRURGIE_CODE="50017";
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEPHROLOGIE_CODE="50018";
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEUROCHIRURGIE_CODE="50019";
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEUROLOGIE_CODE="50020";
@@ -505,9 +505,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String FACHÄRZTINFACHARZT_FÜR_PRÄVENTION_UND_GESUNDHEITSWESEN_CODE="50029";
 	public static final String FACHÄRZTINFACHARZT_FÜR_PSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE="50030";
 	public static final String FACHÄRZTINFACHARZT_FÜR_RADIOLOGIE_CODE="50031";
-	public static final String FACHÄRZTINFACHARZT_FÜR_RADIO_ONKOLOGIE__STRAHLENTHERAPIE_CODE="50032";
+	public static final String FACHÄRZTINFACHARZT_FÜR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE_CODE="50032";
 	public static final String FACHÄRZTINFACHARZT_FÜR_RHEUMATOLOGIE_CODE="50033";
-	public static final String FACHÄRZTINFACHARZT_FÜR_TROPEN__UND_REISEMEDIZIN_CODE="50034";
+	public static final String FACHÄRZTINFACHARZT_FÜR_TROPEN_UND_REISEMEDIZIN_CODE="50034";
 	public static final String FACHÄRZTINFACHARZT_FÜR_UROLOGIE_CODE="50035";
 	public static final String FACHÄRZTINFACHARZT_FÜR_ANGIOLOGIE_CODE="50036";
 	public static final String FACHÄRZTINFACHARZT_FÜR_INTENSIVMEDIZIN_CODE="50037";
@@ -538,17 +538,17 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_CODE="50062";
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR_CODE="50063";
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER_CODE="50064";
-	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ__ODER_SPEZIALFUNKTION_Z_B__IPS_ANÄSTHESIE_NDS_CODE="50065";
+	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANÄSTHESIE_NDS_CODE="50065";
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_FACHVERTIEFENDEM_NDK_UND_WEITEREN_ZUSATZAUSBILDUNGEN_WIE_DIABETESBERATERIN_STILLBERATERIN_ETC_CODE="50066";
 	public static final String PFLEGEFACHFRAUPFLEGEFACHMANN_MIT_ATTESTABSCHLUSS_CODE="50067";
-	public static final String FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG__FÄHIGKEITSZEUGNIS_CODE="50068";
+	public static final String FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FÄHIGKEITSZEUGNIS_CODE="50068";
 	public static final String HEILMASSEURINHEILMASSEUR_CODE="50069";
 	public static final String KARDIOTECHNIKERINKARDIOTECHNIKER_CODE="50070";
-	public static final String GESUNDHEITS__UND_SOZIALBERATUNG_CODE="50071";
+	public static final String GESUNDHEITS_UND_SOZIALBERATUNG_CODE="50071";
 	public static final String HÖRGERÄTEAKUSTIKERIN_CODE="50072";
 	public static final String FACHÄRZTINFACHARZT_FÜR_ALLERGOLOGIE_UND_IMMUNOLOGIE_CODE="50073";
 	public static final String FACHÄRZTINFACHARZT_FÜR_ALLERGOLOGIE_CODE="50074";
-	public static final String PHARMA_ASSISTENTIN__PHARMA_ASSISTENT_CODE="50075";
+	public static final String PHARMA_ASSISTENTIN_PHARMA_ASSISTENT_CODE="50075";
 	public static final String UNBEKANNT_CODE="50900";
 	public static final String ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG_CODE="50999";
 
