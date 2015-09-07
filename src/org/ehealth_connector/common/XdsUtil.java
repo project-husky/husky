@@ -54,6 +54,10 @@ public class XdsUtil {
 	public static CodedMetadataType convertCode(Code code) {
 		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(), null);
 	}
+	
+	public static CodedMetadataType convertCode(Code code, String language) {
+		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(), null, language);
+	}
 
 	/**
 	 * <div class="en">Convert identificator.</div> <div class="de"></div> <div
@@ -123,6 +127,49 @@ public class XdsUtil {
 
 		return cmt;
 	}
+	
+	/**
+	 * <div class="en">Creates the coded metadata.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param schemeName
+	 * <br>
+	 *          <div class="de"> scheme name</div> <div class="fr"></div> <div
+	 *          class="it"> scheme name</div>
+	 * @param code
+	 * <br>
+	 *          <div class="de"> code</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @param displayName
+	 * <br>
+	 *          <div class="de"> display name</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @param schemeUuid
+	 * <br>
+	 *          <div class="de"> scheme uuid</div> <div class="fr"></div> <div
+	 *          class="it"></div>
+	 * @param language
+	 * <br>
+	 *          language
+	 * @return the coded metadata type
+	 */
+	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
+			String displayName, String schemeUuid, String language) {
+		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+
+		cmt.setCode(code);
+		if (displayName != null) {
+			cmt.setDisplayName(createInternationalString(displayName, language));
+		}
+		if (schemeName != null) {
+			cmt.setSchemeName(schemeName);
+		}
+		if (schemeUuid != null) {
+			cmt.setSchemeUUID(schemeUuid);
+		}
+
+		return cmt;
+	}
 
 	/**
 	 * <div class="en">Creates the cx.</div> <div class="de"></div> <div
@@ -163,6 +210,31 @@ public class XdsUtil {
 				.createInternationalStringType();
 		LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
 		lst.setValue(text);
+		ist.getLocalizedString().add(lst);
+		return ist;
+	}
+	
+	/**
+	 * <div class="en">Creates the international string.</div> <div
+	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param text
+	 * <br>
+	 *          <div class="de"> text</div> <div class="fr"> text</div> <div
+	 *          class="it"> text</div>
+ 	 * @param language
+	 * <br>
+	 *          the language
+	 * @return the org.openhealthtools.ihe.xds.metadata. international string type
+	 */
+	@SuppressWarnings("unchecked")
+	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString(
+			String text, String language) {
+		org.openhealthtools.ihe.xds.metadata.InternationalStringType ist = MetadataFactory.eINSTANCE
+				.createInternationalStringType();
+		LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
+		lst.setValue(text);
+		lst.setLang(language);
 		ist.getLocalizedString().add(lst);
 		return ist;
 	}

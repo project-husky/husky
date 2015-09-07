@@ -46,6 +46,7 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
@@ -375,12 +376,17 @@ public class ConvenienceCommunication {
 		// generate missing information for all documents
 		for (XDSDocument xdsDoc : txnData.getDocList()) {
 			generateMissingDocEntryAttributes(xdsDoc.getDocumentEntryUUID());
+//			LocalizedStringType test = (LocalizedStringType) txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).getFormatCode().getDisplayName().getLocalizedString().get(0);
+//			LocalizedStringType test2 = (LocalizedStringType) txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).getTitle().getLocalizedString().get(0);
+//			System.out.println("XYZ: FORMAT CODE:"+test.getLang());
+//			if (test2 != null) System.out.println(" TITLE:"+test2.getLang());
 		}
 
 		generateMissingSubmissionSetAttributes();
 
 		//txnData.saveMetadataToFile("C:/temp/meta.xml");
 		XDSResponseType xdsr = source.submit(txnData);
+
 		return xdsr;
 	}
 
@@ -419,7 +425,7 @@ public class ConvenienceCommunication {
 	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
 	 * </p>
 	 * 
-	 * @param subSet the metadata object for the submission set. Although, some of this information can be derived automatically, some may be required in your country (e.g. AuthorRole in switzerland)
+	 * @param subSet the metadata object for the submission set. Although, some of this information can be derived automatically, some may be required in your country (e.g. AuthorRole in Switzerland)
 	 * @return XDSResponseType
 	 * @throws Exception
 	 *             the exception

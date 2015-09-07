@@ -16,10 +16,19 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 
 public class DocumentMetadataCh extends org.ehealth_connector.communication.DocumentMetadata {
 
+	/**
+	 * Instantiates a new document metadata.
+	 */
 	public DocumentMetadataCh() {
-		super();
+		super("de-ch");
 	}
 	
+	/**
+	 * Instantiates a new swiss (ch) specific document metadata object.
+	 * 
+	 * @param dm
+	 *          the DocumentMetadata object
+	 */
 	public DocumentMetadataCh(DocumentMetadata dm) {
 		super.xDoc = dm.getMdhtDocumentEntryType();
 	}

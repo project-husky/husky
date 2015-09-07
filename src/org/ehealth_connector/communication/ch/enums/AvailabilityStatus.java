@@ -99,12 +99,18 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
-
+	
+	/**
+	* <div class="en">Gets the OHT CodedMetadataType Object</div>
+	* <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
+	*
+	* @return <div class="en">the codedMetadataType</div>
+	*/
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName()));
+		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName(), "de-ch"));
 		return cmt;
 	}
 	

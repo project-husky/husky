@@ -51,6 +51,9 @@ public class DocumentMetadata {
 
 	/** The cda. */
 	private final ClinicalDocument cda;
+	
+	/** The language of the meta data. */
+	private String language;
 
 	/**
 	 * Instantiates a new document metadata.
@@ -58,6 +61,18 @@ public class DocumentMetadata {
 	public DocumentMetadata() {
 		xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
 		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		language = "en-us";
+	}
+	
+	/**
+	 * Instantiates a new document meta data.
+	 * 
+	 * @param language
+	 * language of the meta data
+	 */
+	public DocumentMetadata(String language) {
+		this();
+		this.language = language;
 	}
 
 	/**
@@ -184,7 +199,7 @@ public class DocumentMetadata {
 	 *          the new class code
 	 */
 	public void setClassCode(Code code) {
-		xDoc.setClassCode(XdsUtil.convertCode(code));
+		xDoc.setClassCode(XdsUtil.convertCode(code, language));
 	}
 	
 	/**
@@ -245,7 +260,7 @@ public class DocumentMetadata {
 	 *          the new format code
 	 */
 	public void setFormatCode(Code code) {
-		xDoc.setFormatCode(XdsUtil.convertCode(code));
+		xDoc.setFormatCode(XdsUtil.convertCode(code, language));
 	}
 	
 	/**
@@ -265,7 +280,7 @@ public class DocumentMetadata {
 	 *          the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
-		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code));
+		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code, language));
 	}
 	
 	/**
@@ -318,6 +333,16 @@ public class DocumentMetadata {
 	}
 	
 	/**
+	 * Sets the language of the document meta data
+	 * 
+	 * @param language
+	 * the language
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+	/**
 	 * Gets the patient. All information from the XDS Document
 	 * Metadata will be extracted to the Convenience API Patient object.
 	 * 
@@ -356,7 +381,7 @@ public class DocumentMetadata {
 	 *          the new practice setting code
 	 */
 	public void setPracticeSettingCode(Code code) {
-		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code));
+		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code, language));
 	}
 	
 	/**
@@ -398,7 +423,7 @@ public class DocumentMetadata {
 	 *          the title object to set
 	 */
 	public void setTitle(String title) {
-		xDoc.setTitle(XdsUtil.createInternationalString(title));
+		xDoc.setTitle(XdsUtil.createInternationalString(title, language));
 	}
 	
 	/**
@@ -419,7 +444,7 @@ public class DocumentMetadata {
 	 *          the new type code
 	 */
 	public void setTypeCode(Code code) {
-		xDoc.setTypeCode(XdsUtil.convertCode(code));
+		xDoc.setTypeCode(XdsUtil.convertCode(code, language));
 	}
 	
 	/**
