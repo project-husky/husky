@@ -108,37 +108,151 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	*<div class="it">Altro</div>
 	*/
 	OTHER_COMPOSITION ("DTC90", "Other Composition");
+
+	/** 
+	*<div class="de">Code für Konsultationseinträge/-Notizen</div>
+	*<div class="fr">Code de Notes de consultation</div>
+	*<div class="it">Code per Rapporti e note di consultazione</div>
+	*/
 	public static final String NOTES_ON_CONSULTATIONS_CODE="DTC01";
+
+	/** 
+	*<div class="de">Code für Verlaufseinträge/-Notizen</div>
+	*<div class="fr">Code de Notes de suivi</div>
+	*<div class="it">Code per Note di evoluzione</div>
+	*/
 	public static final String PROGRESS_NOTES_CODE="DTC02";
+
+	/** 
+	*<div class="de">Code für Interventionseinträge/-Notizen</div>
+	*<div class="fr">Code de Notes d'interventions</div>
+	*<div class="it">Code per Rapporti e note d'intervento</div>
+	*/
 	public static final String NOTES_ON_PROCEDURES_CODE="DTC03";
+
+	/** 
+	*<div class="de">Code für Untersuchungs-/ Prozedur-Anforderungen</div>
+	*<div class="fr">Code de Demandes d'examen / procédure</div>
+	*<div class="it">Code per Richieste d'esame</div>
+	*/
 	public static final String TESTSPROCEDURE_REQUESTS_CODE="DTC04";
+
+	/** 
+	*<div class="de">Code für Zuweisungen/Überweisungen</div>
+	*<div class="fr">Code de Demandes de prise en charge</div>
+	*<div class="it">Code per Richieste di presa a carico</div>
+	*/
 	public static final String CLINICAL_CARE_REFERRALS_CODE="DTC05";
+
+	/** 
+	*<div class="de">Code für Zusammenfassende Berichte</div>
+	*<div class="fr">Code de Résumés d'épisode</div>
+	*<div class="it">Code per Riassunti di episodio</div>
+	*/
 	public static final String EPISODE_SUMMARY_REPORTS_CODE="DTC06";
+
+	/** 
+	*<div class="de">Code für Verlaufs-Berichte</div>
+	*<div class="fr">Code de Rapports d'évolution</div>
+	*<div class="it">Code per Rapporti di evoluzione</div>
+	*/
 	public static final String PROGRESS_REPORTS_CODE="DTC07";
+
+	/** 
+	*<div class="de">Code für Diagnostische Untersuchungsbefunde</div>
+	*<div class="fr">Code de Résultats d'examen diagnostic</div>
+	*<div class="it">Code per Risultati di esame diagnostico</div>
+	*/
 	public static final String DIAGNOSTIC_TEST_RESULTS_CODE="DTC08";
+
+	/** 
+	*<div class="de">Code für Meldungen</div>
+	*<div class="fr">Code de "Notifications/Déclarations"</div>
+	*<div class="it">Code per Notifiche/dichiarazioni</div>
+	*/
 	public static final String NOTIFICATIONS_CODE="DTC09";
+
+	/** 
+	*<div class="de">Code für Zusammenfassungen der Krankengeschichte</div>
+	*<div class="fr">Code de Résumés d'antécédents</div>
+	*<div class="it">Code per Riassunti della storia clinica</div>
+	*/
 	public static final String HISTORIC_OVERVIEWS_CODE="DTC10";
+
+	/** 
+	*<div class="de">Code für Zusammenfassungen aktueller Zustand</div>
+	*<div class="fr">Code de Résumés de l'état actuel</div>
+	*<div class="it">Code per Riassunti dello stato attuale</div>
+	*/
 	public static final String PRESENT_STATE_SUMMARIES_CODE="DTC11";
+
+	/** 
+	*<div class="de">Code für Behandlungspläne, Behandlungsschemata</div>
+	*<div class="fr">Code de Plans de soins</div>
+	*<div class="it">Code per Schema di terapia</div>
+	*/
 	public static final String CARE_PLANS_CODE="DTC12";
+
+	/** 
+	*<div class="de">Code für Warnungen /Risiken</div>
+	*<div class="fr">Code de Alertes</div>
+	*<div class="it">Code per Allertamenti</div>
+	*/
 	public static final String ALERTS_CODE="DTC13";
+
+	/** 
+	*<div class="de">Code für Gescannte Dokumente</div>
+	*<div class="fr">Code de Documents scannés</div>
+	*<div class="it">Code per Documenti scansionati</div>
+	*/
 	public static final String SCANNED_DOCUMENTS_CODE="DTC20";
+
+	/** 
+	*<div class="de">Code für Eigene Daten des Patienten</div>
+	*<div class="fr">Code de Documents introduits par le patients</div>
+	*<div class="it">Code per Documenti inseriti dal paziente</div>
+	*/
 	public static final String DATA_FROM_PATIENT_CODE="DTC21";
+
+	/** 
+	*<div class="de">Code für anderweitige Dokumente</div>
+	*<div class="fr">Code de Autre</div>
+	*<div class="it">Code per Altro</div>
+	*/
 	public static final String OTHER_COMPOSITION_CODE="DTC90";
 
 
+
+	/**
+	* <div class="en">Identifier of the Code System</div>
+	* <div class="de">Identifikator für das Code System</div>
+	*/
 	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.127.3.10.1.3";
+
+	/**
+	* <div class="en">Name of the Code System</div>
+	* <div class="de">Name des Codes Systems</div>
+	*/
 	public static final String CODE_SYSTEM_NAME="epd_xds_classCode";
 
 
+	/**
+	* <div class="en">Machine interpretable and (inside this class) unique code</div>
+	* <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
+	*/
 	protected String code;
-	protected String displayName;
 
+	/**
+	* <div class="en">Human readable name</div>
+	* <div class="de">Menschenlesbarer Name</div>
+	*/
+	protected String displayName;
 	
 	/**
 	* <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
 	* <div class="de">Instantiiert dieses Enum Object mittels eines Codes und einem Display Name</div>
 	*
-	*@param code <br>
+	* @param code <br>
 	*	<div class="de"> code</div>
 	* @param displayName <br>
 	*	<div class="de"> display name</div>
@@ -147,29 +261,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 		this.code = code;
 		this.displayName = displayName;
 	}
-
- 
-	/**
-	* <div class="en">Gets the actual Code as string</div>
-	* <div class="de">Liefert den eigentlichen Code als String</div>
-	*
-	* @return <div class="en">the code</div>
-	*/
-	public String getCodeValue() {
-		return this.code;
-	}
-
-
-	/**
-	* <div class="en">Gets the display name.</div>
-	* <div class="de">Liefert display name.</div>
-	*
-	* @return <div class="en">the display name</div>
-	*/
-	public String getdisplayName() {
-		return this.displayName;
-	}
-
 
 	/**
 	* <div class="en">Gets the ehealthconnector Code Object</div>
@@ -182,7 +273,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 		return ehcCode;
 	}
 
-
 	/**
 	* <div class="en">Gets the OHT CodedMetadataType Object</div>
 	* <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
@@ -193,10 +283,49 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
+	/**
+	* <div class="en">Gets the code system name.</div>
+	* <div class="de">Liefert code system name.</div>
+	*
+	* @return <div class="en">the code system name</div>
+	*/
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	* <div class="en">Gets the code system id.</div>
+	* <div class="de">Liefert die code system id.</div>
+	*
+	* @return <div class="en">the code system id</div>
+	*/
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+ 
+	/**
+	* <div class="en">Gets the actual Code as string</div>
+	* <div class="de">Liefert den eigentlichen Code als String</div>
+	*
+	* @return <div class="en">the code</div>
+	*/
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	* <div class="en">Gets the display name.</div>
+	* <div class="de">Liefert display name.</div>
+	*
+	* @return <div class="en">the display name</div>
+	*/
+	public String getDisplayName() {
+		return this.displayName;
+	}
  
 	/**
 	* <div class="en">Gets the Enum with a given code</div>
@@ -214,7 +343,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 		}
 		return null;
 	}
-
   
 	/**
 	* <div class="en">Checks if a given enum is part of this value set.</div>
@@ -228,7 +356,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	public boolean isEnumOfValueSet(String enumName) {
 		return Arrays.asList(values()).contains(enumName);
 	}
-
 
 	/**
 	* <div class="en">Checks if a given code value is in this value set.</div>
@@ -245,27 +372,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 			}
 		}
 		return false;
-	}
-
-
-	/**
-	* <div class="en">Gets the code system id.</div>
-	* <div class="de">Liefert die code system id.</div>
-	*
-	* @return <div class="en">the code system id</div>
-	*/
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
-	}
-
-	/**
-	* <div class="en">Gets the code system name.</div>
-	* <div class="de">Liefert code system name.</div>
-	*
-	* @return <div class="en">the code system name</div>
-	*/
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
 	}
 
 }

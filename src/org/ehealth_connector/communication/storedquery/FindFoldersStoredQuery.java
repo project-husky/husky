@@ -7,18 +7,22 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryExce
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 /**
- * Represents a query to find XDS folders 
+ * Represents a query to find XDS folders
  */
 public class FindFoldersStoredQuery extends AbstractStoredQuery {
 
 	/**
-	 * 
-	 * @param patientId ID of the patient (required)
-	 * @param status status the availability status of the document (required)
+	 *
+	 * @param patientId
+	 *            ID of the patient (required)
+	 * @param status
+	 *            status the availability status of the document (required)
 	 */
 	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) {
 		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(XdsUtil.convertEhcIdentificator(patientId), new AvailabilityStatusType[]{status.getAsOhtAvailabilityStatusType()});
+			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(
+					XdsUtil.convertEhcIdentificator(patientId),
+					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() });
 		} catch (MalformedStoredQueryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

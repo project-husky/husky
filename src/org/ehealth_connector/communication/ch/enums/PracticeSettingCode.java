@@ -378,82 +378,466 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	*<div class="it">Altri rami specialistici della medicina non meglio precisati</div>
 	*/
 	ANDERE_NICHT_NÄHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG ("10999", "Andere nicht näher spezifizierte medzinische Fachrichtung");
+
+	/** 
+	*<div class="de">Code für Allergologie</div>
+	*<div class="fr">Code de Allergologie</div>
+	*<div class="it">Code per Allergologia</div>
+	*/
 	public static final String ALLERGOLOGIE_CODE="10001";
+
+	/** 
+	*<div class="de">Code für Allgemeinmedizin </div>
+	*<div class="fr">Code de Médecine générale </div>
+	*<div class="it">Code per Medicina generale </div>
+	*/
 	public static final String ALLGEMEINMEDIZIN_CODE="10002";
+
+	/** 
+	*<div class="de">Code für Anästhesiologie</div>
+	*<div class="fr">Code de Anesthésiologie</div>
+	*<div class="it">Code per Anestesiologia</div>
+	*/
 	public static final String ANÄSTHESIOLOGIE_CODE="10003";
+
+	/** 
+	*<div class="de">Code für Angiologie</div>
+	*<div class="fr">Code de Angiologie</div>
+	*<div class="it">Code per Angiologia</div>
+	*/
 	public static final String ANGIOLOGIE_CODE="10004";
+
+	/** 
+	*<div class="de">Code für Pharmakologie</div>
+	*<div class="fr">Code de Pharmacologie</div>
+	*<div class="it">Code per Farmacologia</div>
+	*/
 	public static final String PHARMAKOLOGIE_CODE="10005";
+
+	/** 
+	*<div class="de">Code für Arbeitsmedizin</div>
+	*<div class="fr">Code de Médecine du travail</div>
+	*<div class="it">Code per Medicina del lavoro</div>
+	*/
 	public static final String ARBEITSMEDIZIN_CODE="10006";
+
+	/** 
+	*<div class="de">Code für Chiropraktik</div>
+	*<div class="fr">Code de Chiropractie</div>
+	*<div class="it">Code per Chiropratica</div>
+	*/
 	public static final String CHIROPRAKTIK_CODE="10007";
+
+	/** 
+	*<div class="de">Code für Chirurgie</div>
+	*<div class="fr">Code de Chirurgie</div>
+	*<div class="it">Code per Chirurgia</div>
+	*/
 	public static final String CHIRURGIE_CODE="10008";
+
+	/** 
+	*<div class="de">Code für Dermatologie und Venerologie</div>
+	*<div class="fr">Code de Dermatologie et vénéréologie</div>
+	*<div class="it">Code per Dermatologia e venereologia</div>
+	*/
 	public static final String DERMATOLOGIE_UND_VENEROLOGIE_CODE="10009";
+
+	/** 
+	*<div class="de">Code für Endokrinologie/Diabetologie</div>
+	*<div class="fr">Code de Endocrinologie/diabétologie</div>
+	*<div class="it">Code per Endocrinologia/diabetologia</div>
+	*/
 	public static final String ENDOKRINOLOGIEDIABETOLOGIE_CODE="10010";
+
+	/** 
+	*<div class="de">Code für Ergotherapie</div>
+	*<div class="fr">Code de Ergothérapie</div>
+	*<div class="it">Code per Ergoterapia</div>
+	*/
 	public static final String ERGOTHERAPIE_CODE="10011";
+
+	/** 
+	*<div class="de">Code für Ernährungsberatung</div>
+	*<div class="fr">Code de Conseil en nutrition</div>
+	*<div class="it">Code per Dietetica</div>
+	*/
 	public static final String ERNÄHRUNGSBERATUNG_CODE="10012";
+
+	/** 
+	*<div class="de">Code für Geriatrie</div>
+	*<div class="fr">Code de Gériatrie</div>
+	*<div class="it">Code per Geriatria</div>
+	*/
 	public static final String GERIATRIE_CODE="10013";
+
+	/** 
+	*<div class="de">Code für Gastroenterologie</div>
+	*<div class="fr">Code de Gastroentérologie</div>
+	*<div class="it">Code per Gastroenterologia</div>
+	*/
 	public static final String GASTROENTEROLOGIE_CODE="10014";
+
+	/** 
+	*<div class="de">Code für Gynäkologie und Geburtshilfe</div>
+	*<div class="fr">Code de Gynécologie et obstétrique</div>
+	*<div class="it">Code per Ginecologia e ostetricia</div>
+	*/
 	public static final String GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="10015";
+
+	/** 
+	*<div class="de">Code für Herz- und Gefässchirurgie</div>
+	*<div class="fr">Code de Chirurgie cardiovasculaire</div>
+	*<div class="it">Code per Chirurgia cardiovascolare</div>
+	*/
 	public static final String HERZ_UND_GEFÄSSCHIRURGIE_CODE="10016";
+
+	/** 
+	*<div class="de">Code für Infektiologie</div>
+	*<div class="fr">Code de Infectiologie</div>
+	*<div class="it">Code per Infettivologia</div>
+	*/
 	public static final String INFEKTIOLOGIE_CODE="10017";
+
+	/** 
+	*<div class="de">Code für Innere Medizin</div>
+	*<div class="fr">Code de Médecine interne</div>
+	*<div class="it">Code per Medicina interna</div>
+	*/
 	public static final String INNERE_MEDIZIN_CODE="10018";
+
+	/** 
+	*<div class="de">Code für Intensivmedizin</div>
+	*<div class="fr">Code de Médecine intensive</div>
+	*<div class="it">Code per Medicina intensiva</div>
+	*/
 	public static final String INTENSIVMEDIZIN_CODE="10019";
+
+	/** 
+	*<div class="de">Code für Kardiologie</div>
+	*<div class="fr">Code de Cardiologie</div>
+	*<div class="it">Code per Cardiologia</div>
+	*/
 	public static final String KARDIOLOGIE_CODE="10020";
+
+	/** 
+	*<div class="de">Code für Komplementärmedizin</div>
+	*<div class="fr">Code de Médecine alternative et complémentaire</div>
+	*<div class="it">Code per Medicina complementare</div>
+	*/
 	public static final String KOMPLEMENTÄRMEDIZIN_CODE="10021";
+
+	/** 
+	*<div class="de">Code für Pädiatrie</div>
+	*<div class="fr">Code de Pédiatrie</div>
+	*<div class="it">Code per Pediatria</div>
+	*/
 	public static final String PÄDIATRIE_CODE="10022";
+
+	/** 
+	*<div class="de">Code für Psychologie</div>
+	*<div class="fr">Code de Psychologie</div>
+	*<div class="it">Code per Psicologia</div>
+	*/
 	public static final String PSYCHOLOGIE_CODE="10023";
+
+	/** 
+	*<div class="de">Code für Labormedizin</div>
+	*<div class="fr">Code de Diagnostic de laboratoire</div>
+	*<div class="it">Code per Medicina di laboratorio</div>
+	*/
 	public static final String LABORMEDIZIN_CODE="10024";
+
+	/** 
+	*<div class="de">Code für Logopädie</div>
+	*<div class="fr">Code de Orthophonie</div>
+	*<div class="it">Code per Logopedia</div>
+	*/
 	public static final String LOGOPÄDIE_CODE="10025";
+
+	/** 
+	*<div class="de">Code für Medizinische Genetik</div>
+	*<div class="fr">Code de Génétique médicale</div>
+	*<div class="it">Code per Genetica medica</div>
+	*/
 	public static final String MEDIZINISCHE_GENETIK_CODE="10026";
+
+	/** 
+	*<div class="de">Code für Mund-, Kiefer- und Gesichtschirurgie</div>
+	*<div class="fr">Code de Chirurgie dento-maxillo-faciale</div>
+	*<div class="it">Code per Chirurgia maxillo-facciale</div>
+	*/
 	public static final String MUND_KIEFER_UND_GESICHTSCHIRURGIE_CODE="10027";
+
+	/** 
+	*<div class="de">Code für Nephrologie</div>
+	*<div class="fr">Code de Néphrologie</div>
+	*<div class="it">Code per Nefrologia</div>
+	*/
 	public static final String NEPHROLOGIE_CODE="10028";
+
+	/** 
+	*<div class="de">Code für Neurochirurgie</div>
+	*<div class="fr">Code de Neurochirurgie</div>
+	*<div class="it">Code per Neurochirurgia</div>
+	*/
 	public static final String NEUROCHIRURGIE_CODE="10029";
+
+	/** 
+	*<div class="de">Code für Neurologie</div>
+	*<div class="fr">Code de Neurologie</div>
+	*<div class="it">Code per Neurologia</div>
+	*/
 	public static final String NEUROLOGIE_CODE="10030";
+
+	/** 
+	*<div class="de">Code für Nuklearmedizin</div>
+	*<div class="fr">Code de Médecine nucléaire</div>
+	*<div class="it">Code per Medicina nucleare</div>
+	*/
 	public static final String NUKLEARMEDIZIN_CODE="10031";
+
+	/** 
+	*<div class="de">Code für Ophthalmologie</div>
+	*<div class="fr">Code de Ophtalmologie</div>
+	*<div class="it">Code per Oftalmologia</div>
+	*/
 	public static final String OPHTHALMOLOGIE_CODE="10032";
+
+	/** 
+	*<div class="de">Code für Orthopädie und Traumatologie</div>
+	*<div class="fr">Code de Chirurgie orthopédique et traumatologie de l'appareil locomoteur</div>
+	*<div class="it">Code per Chirurgia ortopedica e traumatologia dell'apparato locomotore</div>
+	*/
 	public static final String ORTHOPÄDIE_UND_TRAUMATOLOGIE_CODE="10033";
+
+	/** 
+	*<div class="de">Code für Osteopathie</div>
+	*<div class="fr">Code de Ostéopathie</div>
+	*<div class="it">Code per Osteopatia</div>
+	*/
 	public static final String OSTEOPATHIE_CODE="10034";
+
+	/** 
+	*<div class="de">Code für Oto-Rhino-Laryngologie</div>
+	*<div class="fr">Code de Oto-Rhino-Laryngologie</div>
+	*<div class="it">Code per Otorinolaringoiatria</div>
+	*/
 	public static final String OTO_RHINO_LARYNGOLOGIE_CODE="10035";
+
+	/** 
+	*<div class="de">Code für Palliativmedizin</div>
+	*<div class="fr">Code de Médecine palliative</div>
+	*<div class="it">Code per Medicina palliativa</div>
+	*/
 	public static final String PALLIATIVMEDIZIN_CODE="10036";
+
+	/** 
+	*<div class="de">Code für Pathologie </div>
+	*<div class="fr">Code de Pathologie</div>
+	*<div class="it">Code per Patologia </div>
+	*/
 	public static final String PATHOLOGIE_CODE="10037";
+
+	/** 
+	*<div class="de">Code für Pflege</div>
+	*<div class="fr">Code de Soins</div>
+	*<div class="it">Code per Cure</div>
+	*/
 	public static final String PFLEGE_CODE="10038";
+
+	/** 
+	*<div class="de">Code für Physikalische Medizin </div>
+	*<div class="fr">Code de Kinésithérapie </div>
+	*<div class="it">Code per Medicina fisica </div>
+	*/
 	public static final String PHYSIKALISCHE_MEDIZIN_CODE="10039";
+
+	/** 
+	*<div class="de">Code für Physiotherapie</div>
+	*<div class="fr">Code de Physiothérapie</div>
+	*<div class="it">Code per Fisioterapia</div>
+	*/
 	public static final String PHYSIOTHERAPIE_CODE="10040";
+
+	/** 
+	*<div class="de">Code für Plastische, Rekonstruktive und Ästhetische Chirurgie</div>
+	*<div class="fr">Code de Chirurgie plastique, reconstructrice et esthétique</div>
+	*<div class="it">Code per Chirurgia plastica, ricostruttiva ed estetica</div>
+	*/
 	public static final String PLASTISCHE_REKONSTRUKTIVE_UND_ÄSTHETISCHE_CHIRURGIE_CODE="10041";
+
+	/** 
+	*<div class="de">Code für Pneumologie</div>
+	*<div class="fr">Code de Pneumologie</div>
+	*<div class="it">Code per Pneumologia</div>
+	*/
 	public static final String PNEUMOLOGIE_CODE="10042";
+
+	/** 
+	*<div class="de">Code für Podologie</div>
+	*<div class="fr">Code de Podologie</div>
+	*<div class="it">Code per Podologia</div>
+	*/
 	public static final String PODOLOGIE_CODE="10043";
+
+	/** 
+	*<div class="de">Code für Prävention </div>
+	*<div class="fr">Code de Prévention </div>
+	*<div class="it">Code per Prevenzione </div>
+	*/
 	public static final String PRÄVENTION_CODE="10044";
+
+	/** 
+	*<div class="de">Code für Psychiatrie und Psychotherapie</div>
+	*<div class="fr">Code de Psychiatrie et psychothérapie</div>
+	*<div class="it">Code per Psichiatria e psicoterapia</div>
+	*/
 	public static final String PSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE="10045";
+
+	/** 
+	*<div class="de">Code für Psychosomatik</div>
+	*<div class="fr">Code de Psychosomatique</div>
+	*<div class="it">Code per Psicosomatica</div>
+	*/
 	public static final String PSYCHOSOMATIK_CODE="10046";
+
+	/** 
+	*<div class="de">Code für Radiologie</div>
+	*<div class="fr">Code de Radiologie</div>
+	*<div class="it">Code per Radiologia</div>
+	*/
 	public static final String RADIOLOGIE_CODE="10047";
+
+	/** 
+	*<div class="de">Code für Radio-Onkologie/Strahlentherapie</div>
+	*<div class="fr">Code de Radio-oncologie / radiothérapie</div>
+	*<div class="it">Code per Radio-oncologia / radioterapia</div>
+	*/
 	public static final String RADIO_ONKOLOGIESTRAHLENTHERAPIE_CODE="10048";
+
+	/** 
+	*<div class="de">Code für Rechtsmedizin</div>
+	*<div class="fr">Code de Médecine légale</div>
+	*<div class="it">Code per Medicina legale</div>
+	*/
 	public static final String RECHTSMEDIZIN_CODE="10049";
+
+	/** 
+	*<div class="de">Code für Rehabilitation</div>
+	*<div class="fr">Code de Réhabilitation</div>
+	*<div class="it">Code per Riabilitazione</div>
+	*/
 	public static final String REHABILITATION_CODE="10050";
+
+	/** 
+	*<div class="de">Code für Notfall und Rettungsmedizin</div>
+	*<div class="fr">Code de Médecine d'urgence</div>
+	*<div class="it">Code per Medicina d'urgenza e di salvataggio</div>
+	*/
 	public static final String NOTFALL_UND_RETTUNGSMEDIZIN_CODE="10051";
+
+	/** 
+	*<div class="de">Code für Rheumatologie</div>
+	*<div class="fr">Code de Rhumatologie</div>
+	*<div class="it">Code per Reumatologia</div>
+	*/
 	public static final String RHEUMATOLOGIE_CODE="10052";
+
+	/** 
+	*<div class="de">Code für Thoraxchirurgie</div>
+	*<div class="fr">Code de Chirurgie thoracique</div>
+	*<div class="it">Code per Chirurgia toracica</div>
+	*/
 	public static final String THORAXCHIRURGIE_CODE="10053";
+
+	/** 
+	*<div class="de">Code für Transfusionsmedizin</div>
+	*<div class="fr">Code de Médecine transfusionnelle</div>
+	*<div class="it">Code per Medicina trasfusionale</div>
+	*/
 	public static final String TRANSFUSIONSMEDIZIN_CODE="10054";
+
+	/** 
+	*<div class="de">Code für Tropen- und Reisemedizin</div>
+	*<div class="fr">Code de Médecine tropicale et des voyages</div>
+	*<div class="it">Code per Medicina tropicale e di viaggio</div>
+	*/
 	public static final String TROPEN_UND_REISEMEDIZIN_CODE="10055";
+
+	/** 
+	*<div class="de">Code für Urologie</div>
+	*<div class="fr">Code de Urologie</div>
+	*<div class="it">Code per Urologia</div>
+	*/
 	public static final String UROLOGIE_CODE="10056";
+
+	/** 
+	*<div class="de">Code für Zahnheilkunde</div>
+	*<div class="fr">Code de Odontologie</div>
+	*<div class="it">Code per Odontoiatria</div>
+	*/
 	public static final String ZAHNHEILKUNDE_CODE="10057";
+
+	/** 
+	*<div class="de">Code für Hämatologie</div>
+	*<div class="fr">Code de Hématologie</div>
+	*<div class="it">Code per Ematologia</div>
+	*/
 	public static final String HÄMATOLOGIE_CODE="10058";
+
+	/** 
+	*<div class="de">Code für Immunologie</div>
+	*<div class="fr">Code de Immunologie</div>
+	*<div class="it">Code per Immunologia</div>
+	*/
 	public static final String IMMUNOLOGIE_CODE="10059";
+
+	/** 
+	*<div class="de">Code für Unbekannt</div>
+	*<div class="fr">Code de Inconnu</div>
+	*<div class="it">Code per Ignoto</div>
+	*/
 	public static final String UNBEKANNT_CODE="10900";
+
+	/** 
+	*<div class="de">Code für Andere nicht näher spezifizierte medzinische Fachrichtung</div>
+	*<div class="fr">Code de Autres sans spécification</div>
+	*<div class="it">Code per Altri rami specialistici della medicina non meglio precisati</div>
+	*/
 	public static final String ANDERE_NICHT_NÄHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG_CODE="10999";
 
 
+
+	/**
+	* <div class="en">Identifier of the Code System</div>
+	* <div class="de">Identifikator für das Code System</div>
+	*/
 	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.127.3.10.1.18";
+
+	/**
+	* <div class="en">Name of the Code System</div>
+	* <div class="de">Name des Codes Systems</div>
+	*/
 	public static final String CODE_SYSTEM_NAME="epd_xds_practiceSettingCode";
 
 
+	/**
+	* <div class="en">Machine interpretable and (inside this class) unique code</div>
+	* <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
+	*/
 	protected String code;
-	protected String displayName;
 
+	/**
+	* <div class="en">Human readable name</div>
+	* <div class="de">Menschenlesbarer Name</div>
+	*/
+	protected String displayName;
 	
 	/**
 	* <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
 	* <div class="de">Instantiiert dieses Enum Object mittels eines Codes und einem Display Name</div>
 	*
-	*@param code <br>
+	* @param code <br>
 	*	<div class="de"> code</div>
 	* @param displayName <br>
 	*	<div class="de"> display name</div>
@@ -462,29 +846,6 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		this.code = code;
 		this.displayName = displayName;
 	}
-
- 
-	/**
-	* <div class="en">Gets the actual Code as string</div>
-	* <div class="de">Liefert den eigentlichen Code als String</div>
-	*
-	* @return <div class="en">the code</div>
-	*/
-	public String getCodeValue() {
-		return this.code;
-	}
-
-
-	/**
-	* <div class="en">Gets the display name.</div>
-	* <div class="de">Liefert display name.</div>
-	*
-	* @return <div class="en">the display name</div>
-	*/
-	public String getdisplayName() {
-		return this.displayName;
-	}
-
 
 	/**
 	* <div class="en">Gets the ehealthconnector Code Object</div>
@@ -497,7 +858,6 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		return ehcCode;
 	}
 
-
 	/**
 	* <div class="en">Gets the OHT CodedMetadataType Object</div>
 	* <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
@@ -508,10 +868,49 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
+	/**
+	* <div class="en">Gets the code system name.</div>
+	* <div class="de">Liefert code system name.</div>
+	*
+	* @return <div class="en">the code system name</div>
+	*/
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	* <div class="en">Gets the code system id.</div>
+	* <div class="de">Liefert die code system id.</div>
+	*
+	* @return <div class="en">the code system id</div>
+	*/
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+ 
+	/**
+	* <div class="en">Gets the actual Code as string</div>
+	* <div class="de">Liefert den eigentlichen Code als String</div>
+	*
+	* @return <div class="en">the code</div>
+	*/
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	* <div class="en">Gets the display name.</div>
+	* <div class="de">Liefert display name.</div>
+	*
+	* @return <div class="en">the display name</div>
+	*/
+	public String getDisplayName() {
+		return this.displayName;
+	}
  
 	/**
 	* <div class="en">Gets the Enum with a given code</div>
@@ -529,7 +928,6 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		}
 		return null;
 	}
-
   
 	/**
 	* <div class="en">Checks if a given enum is part of this value set.</div>
@@ -543,7 +941,6 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	public boolean isEnumOfValueSet(String enumName) {
 		return Arrays.asList(values()).contains(enumName);
 	}
-
 
 	/**
 	* <div class="en">Checks if a given code value is in this value set.</div>
@@ -560,27 +957,6 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 			}
 		}
 		return false;
-	}
-
-
-	/**
-	* <div class="en">Gets the code system id.</div>
-	* <div class="de">Liefert die code system id.</div>
-	*
-	* @return <div class="en">the code system id</div>
-	*/
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
-	}
-
-	/**
-	* <div class="en">Gets the code system name.</div>
-	* <div class="de">Liefert code system name.</div>
-	*
-	* @return <div class="en">the code system name</div>
-	*/
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
 	}
 
 }

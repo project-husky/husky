@@ -7,7 +7,7 @@ import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
 /*
-*<div class="de">Dieses Attribut ist ein beschreibendes Sub-Attribut von author und dient der Beschreibung der Medizinischen Fachrichtung der Person, welche ein Dokument verfasst hat. Diese Information kann für die Suche und Filterung benutzt werden. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
+*<div class="de">Dieses Attribut ist ein beschreibendes Sub-Attribut von author" und dient der Beschreibung der Medizinischen Fachrichtung der Person, welche ein Dokument verfasst hat. Diese Information kann für die Suche und Filterung benutzt werden. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
 *<div class="fr"></div>
 */
 public enum AuthorSpeciality implements CodedMetadataEnumInterface {
@@ -474,98 +474,578 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	*<div class="it">Altri rami specialistici in ambito sanitario</div>
 	*/
 	ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG ("50999", "andere Gesundheitsbezogene Fachrichtung");
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Allgemeine Innere Medizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine interne générale</div>
+	*<div class="it">Code per Medico specializzato/a in medicina generale e interna</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ALLGEMEINE_INNERE_MEDIZIN_CODE="50001";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Anästhesiologie</div>
+	*<div class="fr">Code de Médecin spécialiste en anesthésiologie</div>
+	*<div class="it">Code per Medico specializzato/a in anestesiologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ANÄSTHESIOLOGIE_CODE="50002";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Arbeitsmedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine du travail</div>
+	*<div class="it">Code per Medico specializzato/a in medicina del lavoro</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ARBEITSMEDIZIN_CODE="50003";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Chirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_CHIRURGIE_CODE="50004";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Dermatologie und Venerologie</div>
+	*<div class="fr">Code de Médecin spécialiste en dermatologie et vénéréologie</div>
+	*<div class="it">Code per Medico specializzato/a in dermatologia e venereologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_DERMATOLOGIE_UND_VENEROLOGIE_CODE="50005";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Endokrinologie / Diabetologie</div>
+	*<div class="fr">Code de Médecin spécialiste en endocrinologie / diabétologie</div>
+	*<div class="it">Code per Medico specializzato/a in endocrinologia / diabetologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ENDOKRINOLOGIE_DIABETOLOGIE_CODE="50006";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Gastroenterologie</div>
+	*<div class="fr">Code de Médecin spécialiste en gastroentérologie</div>
+	*<div class="it">Code per Medico specializzato/a in gastroenterologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_GASTROENTEROLOGIE_CODE="50007";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Gynäkologie und Geburtshilfe</div>
+	*<div class="fr">Code de Médecin spécialiste en gynécologie et obstétrique</div>
+	*<div class="it">Code per Medico specializzato/a in ginecologia e ostetricia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE="50008";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Hämatologie</div>
+	*<div class="fr">Code de Médecin spécialiste en hématologie</div>
+	*<div class="it">Code per Medico specializzato/a in ematologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_HÄMATOLOGIE_CODE="50009";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Herz- und thorakale Gefässchirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie cardio-vasculaire et thoracique</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia toracica e cardiovascolare</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_HERZ_UND_THORAKALE_GEFÄSSCHIRURGIE_CODE="50010";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Infektiologie</div>
+	*<div class="fr">Code de Médecin spécialiste en infectiologie</div>
+	*<div class="it">Code per Medico specializzato/a in infeziologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_INFEKTIOLOGIE_CODE="50011";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Kardiologie</div>
+	*<div class="fr">Code de Médecin spécialiste en cardiologie</div>
+	*<div class="it">Code per Medico specializzato/a in cardiologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_KARDIOLOGIE_CODE="50012";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Kinder- und Jugendmedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en pédiatrie</div>
+	*<div class="it">Code per Medico specializzato/a in pediatria</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDMEDIZIN_CODE="50013";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Kinder- und Jugendpsychiatrie und -psychotherapie</div>
+	*<div class="fr">Code de Médecin spécialiste en pédopsychiatrie et pédopsychothérapie</div>
+	*<div class="it">Code per Medico specializzato/a in pedopsichiatria e pedopsicoterapia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_KINDER_UND_JUGENDPSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE="50014";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Kinderchirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en pédochirurgie</div>
+	*<div class="it">Code per Medico specializzato/a in cardiologia pediatrica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_KINDERCHIRURGIE_CODE="50015";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Klinische Pharmakologie und Toxikologie</div>
+	*<div class="fr">Code de Médecin spécialiste en pharmacologie clinique et toxicologie</div>
+	*<div class="it">Code per Medico specializzato/a in farmacologia clinica e tossicologica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_KLINISCHE_PHARMAKOLOGIE_UND_TOXIKOLOGIE_CODE="50016";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie dento-maxillo-faciale</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia maxillo-facciale</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_MUND_KIEFER_UND_GESICHTSCHIRURGIE_CODE="50017";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Nephrologie</div>
+	*<div class="fr">Code de Médecin spécialiste en néphrologie</div>
+	*<div class="it">Code per Medico specializzato/a in nefrologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEPHROLOGIE_CODE="50018";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Neurochirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en neurochirurgie</div>
+	*<div class="it">Code per Medico specializzato/a in neurochirurgia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEUROCHIRURGIE_CODE="50019";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Neurologie</div>
+	*<div class="fr">Code de Médecin spécialiste en neurologie</div>
+	*<div class="it">Code per Medico specializzato/a in neurologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEUROLOGIE_CODE="50020";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Nuklearmedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine nucléaire</div>
+	*<div class="it">Code per Medico specializzato/a in medicina nucleare</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_NUKLEARMEDIZIN_CODE="50021";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Ophthalmologie</div>
+	*<div class="fr">Code de Médecin spécialiste en ophtalmologie</div>
+	*<div class="it">Code per Medico specializzato/a in oftalmologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_OPHTHALMOLOGIE_CODE="50022";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie orthopédique et traumatologie de l'appareil locomoteur</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia ortopedica e traumatologia dell'apparato motorio</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ORTHOPÄDISCHE_CHIRURGIE_UND_TRAUMATOLOGIE_DES_BEWEGUNGSAPPARATES_CODE="50023";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Oto-Rhino-Laryngologie</div>
+	*<div class="fr">Code de Médecin spécialiste en oto-rhino-laryngologie</div>
+	*<div class="it">Code per Medico specializzato/a in otorinolaringoiatria</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_OTO_RHINO_LARYNGOLOGIE_CODE="50024";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Pathologie</div>
+	*<div class="fr">Code de Médecin spécialiste en pathologie</div>
+	*<div class="it">Code per Medico specializzato/a in patologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PATHOLOGIE_CODE="50025";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Physikalische Medizin und Rehabiliation</div>
+	*<div class="fr">Code de Médecin spécialiste en kinésithérapie et réhabilitation</div>
+	*<div class="it">Code per Medico specializzato/a in medicina fisica e in riabilitazione</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PHYSIKALISCHE_MEDIZIN_UND_REHABILIATION_CODE="50026";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Plastische, Rekonstruktive und Ästhetische Chirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie plastique, reconstructrice et esthétique</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia plastica, ricostruttiva ed estetica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PLASTISCHE_REKONSTRUKTIVE_UND_ÄSTHETISCHE_CHIRURGIE_CODE="50027";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Pneumologie</div>
+	*<div class="fr">Code de Médecin spécialiste en pneumologie</div>
+	*<div class="it">Code per Medico specializzato/a in pneumologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PNEUMOLOGIE_CODE="50028";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Prävention und Gesundheitswesen</div>
+	*<div class="fr">Code de Médecin spécialiste en prévention et santé</div>
+	*<div class="it">Code per Medico specializzato/a in medicina preventiva e in sanità pubblica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PRÄVENTION_UND_GESUNDHEITSWESEN_CODE="50029";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Psychiatrie und Psychotherapie</div>
+	*<div class="fr">Code de Médecin spécialiste en psychiatrie et psychothérapie</div>
+	*<div class="it">Code per Medico specializzato/a in psichiatria e in psicoterapia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE="50030";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Radiologie</div>
+	*<div class="fr">Code de Médecin spécialiste en radiologie</div>
+	*<div class="it">Code per Medico specializzato/a in radiologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_RADIOLOGIE_CODE="50031";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie</div>
+	*<div class="fr">Code de Médecin spécialiste en radio-oncologie/ radiothérapie</div>
+	*<div class="it">Code per Medico specializzato/a in radio-oncologia / radioterapia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE_CODE="50032";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Rheumatologie</div>
+	*<div class="fr">Code de Médecin spécialiste en rhumatologie</div>
+	*<div class="it">Code per Medico specializzato/a in reumatologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_RHEUMATOLOGIE_CODE="50033";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Tropen- und Reisemedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine tropicale et des voyages</div>
+	*<div class="it">Code per Medico specializzato/a in medicina tropicale e di viaggio</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_TROPEN_UND_REISEMEDIZIN_CODE="50034";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Urologie</div>
+	*<div class="fr">Code de Médecin spécialiste en urologie</div>
+	*<div class="it">Code per Medico specializzato/a in urologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_UROLOGIE_CODE="50035";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Angiologie</div>
+	*<div class="fr">Code de Médecin spécialiste en angiologie</div>
+	*<div class="it">Code per Medico specializzato/a in angiologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ANGIOLOGIE_CODE="50036";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Intensivmedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine intensive</div>
+	*<div class="it">Code per Medico specializzato/a in medicina intensiva</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_INTENSIVMEDIZIN_CODE="50037";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Medizinische Genetik</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine génétique</div>
+	*<div class="it">Code per Medico specializzato/a in genetica medica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_MEDIZINISCHE_GENETIK_CODE="50038";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Medizinische Onkologie</div>
+	*<div class="fr">Code de Médecin spécialiste en oncologie médicale</div>
+	*<div class="it">Code per Medico specializzato/a in oncologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_MEDIZINISCHE_ONKOLOGIE_CODE="50039";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Pharmazeutische Medizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine pharmaceutique</div>
+	*<div class="it">Code per Medico specializzato/a in medicina farmaceutica</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_PHARMAZEUTISCHE_MEDIZIN_CODE="50040";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Rechtsmedizin</div>
+	*<div class="fr">Code de Médecin spécialiste en médecine légale</div>
+	*<div class="it">Code per Medico specializzato/a in medicina legale</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_RECHTSMEDIZIN_CODE="50041";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Handchirurgie</div>
+	*<div class="fr">Code de Médecin spécialiste en chirurgie de la main</div>
+	*<div class="it">Code per Medico specializzato/a in chirurgia della mano</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_HANDCHIRURGIE_CODE="50042";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Neuropathologie</div>
+	*<div class="fr">Code de Médecin spécialiste en neuropathologie</div>
+	*<div class="it">Code per Medico specializzato/a in neuropatologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_NEUROPATHOLOGIE_CODE="50043";
+
+	/** 
+	*<div class="de">Code für Zahnärztin/Zahnarzt</div>
+	*<div class="fr">Code de Dentiste</div>
+	*<div class="it">Code per Dentista</div>
+	*/
 	public static final String ZAHNÄRZTINZAHNARZT_CODE="50044";
+
+	/** 
+	*<div class="de">Code für Apothekerin/Apotheker in Offizinpharmazie </div>
+	*<div class="fr">Code de Pharmacien d’officine </div>
+	*<div class="it">Code per Farmacista in una farmacia d’officina</div>
+	*/
 	public static final String APOTHEKERINAPOTHEKER_IN_OFFIZINPHARMAZIE_CODE="50045";
+
+	/** 
+	*<div class="de">Code für Apothekerin/Apotheker in Spitalpharmazie</div>
+	*<div class="fr">Code de Pharmacien d’officine en hôpital</div>
+	*<div class="it">Code per Farmacista in una farmacia d'ospedale</div>
+	*/
 	public static final String APOTHEKERINAPOTHEKER_IN_SPITALPHARMAZIE_CODE="50046";
+
+	/** 
+	*<div class="de">Code für Ernährungsberaterin/Ernährungsberater</div>
+	*<div class="fr">Code de Nutritionniste</div>
+	*<div class="it">Code per Dietista</div>
+	*/
 	public static final String ERNÄHRUNGSBERATERINERNÄHRUNGSBERATER_CODE="50047";
+
+	/** 
+	*<div class="de">Code für Rettungssanitäterin/Rettungssanitäter</div>
+	*<div class="fr">Code de Urgentiste</div>
+	*<div class="it">Code per Soccorritore/trice</div>
+	*/
 	public static final String RETTUNGSSANITÄTERINRETTUNGSSANITÄTER_CODE="50048";
+
+	/** 
+	*<div class="de">Code für Chiropraktorin/Chiropraktiker</div>
+	*<div class="fr">Code de Chiropracteur</div>
+	*<div class="it">Code per Chiropratico/a</div>
+	*/
 	public static final String CHIROPRAKTORINCHIROPRAKTIKER_CODE="50049";
+
+	/** 
+	*<div class="de">Code für Psychotherapeutin/Psychotherapeut</div>
+	*<div class="fr">Code de Psychothérapeute</div>
+	*<div class="it">Code per Psicoterapeuta</div>
+	*/
 	public static final String PSYCHOTHERAPEUTINPSYCHOTHERAPEUT_CODE="50050";
+
+	/** 
+	*<div class="de">Code für Klinischer Psychologe/Klinische Psychologin</div>
+	*<div class="fr">Code de Psychologue clinicien</div>
+	*<div class="it">Code per Psicologo/a clinico/a</div>
+	*/
 	public static final String KLINISCHER_PSYCHOLOGEKLINISCHE_PSYCHOLOGIN_CODE="50051";
+
+	/** 
+	*<div class="de">Code für Gesundheitspsychologin/Gesundheitspsychologe</div>
+	*<div class="fr">Code de Psychologue de la santé</div>
+	*<div class="it">Code per Psicologo/a della salute</div>
+	*/
 	public static final String GESUNDHEITSPSYCHOLOGINGESUNDHEITSPSYCHOLOGE_CODE="50052";
+
+	/** 
+	*<div class="de">Code für Musiktherapeutin/Musiktherapeut</div>
+	*<div class="fr">Code de Musicothérapeute</div>
+	*<div class="it">Code per Musicoterapeuta</div>
+	*/
 	public static final String MUSIKTHERAPEUTINMUSIKTHERAPEUT_CODE="50053";
+
+	/** 
+	*<div class="de">Code für Hebamme</div>
+	*<div class="fr">Code de Sage-femme</div>
+	*<div class="it">Code per Ostetrico/a / levatrice</div>
+	*/
 	public static final String HEBAMME_CODE="50054";
+
+	/** 
+	*<div class="de">Code für Physiotherapeutin/Physiotherapeut</div>
+	*<div class="fr">Code de Physiothérapeute</div>
+	*<div class="it">Code per Psicoterapeuta</div>
+	*/
 	public static final String PHYSIOTHERAPEUTINPHYSIOTHERAPEUT_CODE="50055";
+
+	/** 
+	*<div class="de">Code für Biomedizinische Analytikerin/Biomedizinischer Analytiker</div>
+	*<div class="fr">Code de Analyste biomédical</div>
+	*<div class="it">Code per Tecnico in analisi biomediche </div>
+	*/
 	public static final String BIOMEDIZINISCHE_ANALYTIKERINBIOMEDIZINISCHER_ANALYTIKER_CODE="50056";
+
+	/** 
+	*<div class="de">Code für Radiologietechnologin/Radiologietechnologe</div>
+	*<div class="fr">Code de Technicien en radiologie</div>
+	*<div class="it">Code per Tecnico in radiologia</div>
+	*/
 	public static final String RADIOLOGIETECHNOLOGINRADIOLOGIETECHNOLOGE_CODE="50057";
+
+	/** 
+	*<div class="de">Code für Diätologin/Diätologe</div>
+	*<div class="fr">Code de Diabétologue</div>
+	*<div class="it">Code per Dietologo/a</div>
+	*/
 	public static final String DIÄTOLOGINDIÄTOLOGE_CODE="50058";
+
+	/** 
+	*<div class="de">Code für Ergotherapeutin/Ergotherapeut</div>
+	*<div class="fr">Code de Ergothérapeute</div>
+	*<div class="it">Code per Ergoterapista</div>
+	*/
 	public static final String ERGOTHERAPEUTINERGOTHERAPEUT_CODE="50059";
+
+	/** 
+	*<div class="de">Code für Logopädin/Logopäde</div>
+	*<div class="fr">Code de Orthophoniste</div>
+	*<div class="it">Code per Logopedista</div>
+	*/
 	public static final String LOGOPÄDINLOGOPÄDE_CODE="50060";
+
+	/** 
+	*<div class="de">Code für Orthoptistin/Orthoptist</div>
+	*<div class="fr">Code de Orthoptiste</div>
+	*<div class="it">Code per Ortottista</div>
+	*/
 	public static final String ORTHOPTISTINORTHOPTIST_CODE="50061";
+
+	/** 
+	*<div class="de">Code für diplomierte Pflegefachfrau/diplomierter Pflegefachmann</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé</div>
+	*<div class="it">Code per Infermiere/a diplomato/a</div>
+	*/
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_CODE="50062";
+
+	/** 
+	*<div class="de">Code für diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec un Bachelor de Science en soins infirmiers</div>
+	*<div class="it">Code per Infermiere/a con titolo accademico (Bachelor)</div>
+	*/
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR_CODE="50063";
+
+	/** 
+	*<div class="de">Code für diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Master)</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec un Master de Science en soins infirmiers</div>
+	*<div class="it">Code per Infermiere/a con titolo accademico (Master)</div>
+	*/
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER_CODE="50064";
+
+	/** 
+	*<div class="de">Code für diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit Zusatz- oder Spezialfunktion, z.B. IPS, Anästhesie (NDS)</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec une function supplémentaire ou spécial, p.ex. soins intensiv, anesthésie</div>
+	*<div class="it">Code per Infermiere/a diplomato/a con funzione supplementare o speciale, p. es. reparto cure intense (RCI), anestesia (SPD)</div>
+	*/
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANÄSTHESIE_NDS_CODE="50065";
+
+	/** 
+	*<div class="de">Code für diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie Diabetesberaterin, Stillberaterin etc.</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec un cours de spécialisation postgrades et des formation spéciale supplémentaires comme Conseiller/Conseillère aux diabétiques, conseiller/Coonseillère en cas d’allaitement</div>
+	*<div class="it">Code per Infermiere/a diplomato/a con corso post-diploma di approfondimento della materia e altre formazioni supplementari, come consulente per il diabete, consulente per l'allattamento al seno ecc.</div>
+	*/
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_FACHVERTIEFENDEM_NDK_UND_WEITEREN_ZUSATZAUSBILDUNGEN_WIE_DIABETESBERATERIN_STILLBERATERIN_ETC_CODE="50066";
+
+	/** 
+	*<div class="de">Code für Pflegefachfrau/Pflegefachmann mit Attestabschluss</div>
+	*<div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec une attestation de formation</div>
+	*<div class="it">Code per Infermiere con attestato</div>
+	*/
 	public static final String PFLEGEFACHFRAUPFLEGEFACHMANN_MIT_ATTESTABSCHLUSS_CODE="50067";
+
+	/** 
+	*<div class="de">Code für Fachfrau/Fachmann Gesundheit, FaGe mit eidg. Fähigkeitszeugnis</div>
+	*<div class="fr">Code de assistante/assistant en soins et santé communautaire (ASSC) avec certificat fédéral de capacité</div>
+	*<div class="it">Code per Operatore/trice sociosanitario AFC con attestato federale di capacità</div>
+	*/
 	public static final String FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FÄHIGKEITSZEUGNIS_CODE="50068";
+
+	/** 
+	*<div class="de">Code für Heilmasseurin/Heilmasseur</div>
+	*<div class="fr">Code de Masseur thérapeute</div>
+	*<div class="it">Code per Massaggiatore/trice curativo/a</div>
+	*/
 	public static final String HEILMASSEURINHEILMASSEUR_CODE="50069";
+
+	/** 
+	*<div class="de">Code für Kardiotechnikerin/Kardiotechniker</div>
+	*<div class="fr">Code de Technicien en cardiologie</div>
+	*<div class="it">Code per Cardiotecnico</div>
+	*/
 	public static final String KARDIOTECHNIKERINKARDIOTECHNIKER_CODE="50070";
+
+	/** 
+	*<div class="de">Code für Gesundheits- und Sozialberatung</div>
+	*<div class="fr">Code de Conseiller sanitaire et social</div>
+	*<div class="it">Code per Consulenza sociosanitaria</div>
+	*/
 	public static final String GESUNDHEITS_UND_SOZIALBERATUNG_CODE="50071";
+
+	/** 
+	*<div class="de">Code für Hörgeräteakustiker/in</div>
+	*<div class="fr">Code de Audioprothésiste</div>
+	*<div class="it">Code per Specialista di apparecchi acustici</div>
+	*/
 	public static final String HÖRGERÄTEAKUSTIKERIN_CODE="50072";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Allergologie und Immunologie</div>
+	*<div class="fr">Code de Médecin spécialiste en allergologie et immunologie</div>
+	*<div class="it">Code per Medico specializzato/a in allergologia e immunologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ALLERGOLOGIE_UND_IMMUNOLOGIE_CODE="50073";
+
+	/** 
+	*<div class="de">Code für Fachärztin/Facharzt für Allergologie</div>
+	*<div class="fr">Code de Médecin spécialiste en allergologie</div>
+	*<div class="it">Code per Medico specializzato/a in allergologia</div>
+	*/
 	public static final String FACHÄRZTINFACHARZT_FÜR_ALLERGOLOGIE_CODE="50074";
+
+	/** 
+	*<div class="de">Code für Pharma-Assistentin / Pharma-Assistent</div>
+	*<div class="fr">Code de Assistant en pharmacie</div>
+	*<div class="it">Code per assistente di farmacia</div>
+	*/
 	public static final String PHARMA_ASSISTENTIN_PHARMA_ASSISTENT_CODE="50075";
+
+	/** 
+	*<div class="de">Code für Unbekannt</div>
+	*<div class="fr">Code de Inconnu</div>
+	*<div class="it">Code per Ignoto</div>
+	*/
 	public static final String UNBEKANNT_CODE="50900";
+
+	/** 
+	*<div class="de">Code für andere Gesundheitsbezogene Fachrichtung</div>
+	*<div class="fr">Code de autre spécialisation du domaine de la santé</div>
+	*<div class="it">Code per Altri rami specialistici in ambito sanitario</div>
+	*/
 	public static final String ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG_CODE="50999";
 
 
+
+	/**
+	* <div class="en">Identifier of the Code System</div>
+	* <div class="de">Identifikator für das Code System</div>
+	*/
 	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.127.3.10.1.1.4";
+
+	/**
+	* <div class="en">Name of the Code System</div>
+	* <div class="de">Name des Codes Systems</div>
+	*/
 	public static final String CODE_SYSTEM_NAME="epd_xds_authorSpeciality";
 
 
+	/**
+	* <div class="en">Machine interpretable and (inside this class) unique code</div>
+	* <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
+	*/
 	protected String code;
-	protected String displayName;
 
+	/**
+	* <div class="en">Human readable name</div>
+	* <div class="de">Menschenlesbarer Name</div>
+	*/
+	protected String displayName;
 	
 	/**
 	* <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
 	* <div class="de">Instantiiert dieses Enum Object mittels eines Codes und einem Display Name</div>
 	*
-	*@param code <br>
+	* @param code <br>
 	*	<div class="de"> code</div>
 	* @param displayName <br>
 	*	<div class="de"> display name</div>
@@ -574,29 +1054,6 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		this.code = code;
 		this.displayName = displayName;
 	}
-
- 
-	/**
-	* <div class="en">Gets the actual Code as string</div>
-	* <div class="de">Liefert den eigentlichen Code als String</div>
-	*
-	* @return <div class="en">the code</div>
-	*/
-	public String getCodeValue() {
-		return this.code;
-	}
-
-
-	/**
-	* <div class="en">Gets the display name.</div>
-	* <div class="de">Liefert display name.</div>
-	*
-	* @return <div class="en">the display name</div>
-	*/
-	public String getdisplayName() {
-		return this.displayName;
-	}
-
 
 	/**
 	* <div class="en">Gets the ehealthconnector Code Object</div>
@@ -609,7 +1066,6 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		return ehcCode;
 	}
 
-
 	/**
 	* <div class="en">Gets the OHT CodedMetadataType Object</div>
 	* <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
@@ -620,10 +1076,49 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsUtil.createInternationalString(this.getdisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
+	/**
+	* <div class="en">Gets the code system name.</div>
+	* <div class="de">Liefert code system name.</div>
+	*
+	* @return <div class="en">the code system name</div>
+	*/
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	* <div class="en">Gets the code system id.</div>
+	* <div class="de">Liefert die code system id.</div>
+	*
+	* @return <div class="en">the code system id</div>
+	*/
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+ 
+	/**
+	* <div class="en">Gets the actual Code as string</div>
+	* <div class="de">Liefert den eigentlichen Code als String</div>
+	*
+	* @return <div class="en">the code</div>
+	*/
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	* <div class="en">Gets the display name.</div>
+	* <div class="de">Liefert display name.</div>
+	*
+	* @return <div class="en">the display name</div>
+	*/
+	public String getDisplayName() {
+		return this.displayName;
+	}
  
 	/**
 	* <div class="en">Gets the Enum with a given code</div>
@@ -641,7 +1136,6 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		}
 		return null;
 	}
-
   
 	/**
 	* <div class="en">Checks if a given enum is part of this value set.</div>
@@ -655,7 +1149,6 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public boolean isEnumOfValueSet(String enumName) {
 		return Arrays.asList(values()).contains(enumName);
 	}
-
 
 	/**
 	* <div class="en">Checks if a given code value is in this value set.</div>
@@ -672,27 +1165,6 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 			}
 		}
 		return false;
-	}
-
-
-	/**
-	* <div class="en">Gets the code system id.</div>
-	* <div class="de">Liefert die code system id.</div>
-	*
-	* @return <div class="en">the code system id</div>
-	*/
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
-	}
-
-	/**
-	* <div class="en">Gets the code system name.</div>
-	* <div class="de">Liefert code system name.</div>
-	*
-	* @return <div class="en">the code system name</div>
-	*/
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
 	}
 
 }

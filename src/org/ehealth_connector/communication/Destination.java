@@ -214,6 +214,10 @@ public class Destination {
 		return registry;
 	}
 
+	public URI getRepositoryUri() {
+		return repository;
+	}
+
 	/**
 	 * Gets the sender application oid.
 	 * 
@@ -378,10 +382,6 @@ public class Destination {
 	 */
 	public void setTrustStorePassword(String trustStorePassword) {
 		this.trustStorePassword = trustStorePassword;
-	}
-
-	public URI getRepositoryUri() {
-		return repository;
 	}
 
 }
