@@ -16,7 +16,7 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
@@ -32,19 +32,18 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
  */
 public class AllergyConcernTextBuilder extends TextBuilder {
 
-	private ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns;
+	private List<org.ehealth_connector.cda.AllergyConcern> problemConcerns;
 	private String contentIdPrefix;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param problemConcerns
-	 *          a list of problem concerns
+	 *            a list of problem concerns
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
-	public AllergyConcernTextBuilder(
-			ArrayList<org.ehealth_connector.cda.AllergyConcern> problemConcerns, SectionsVACD section) {
+	public AllergyConcernTextBuilder(List<AllergyConcern> problemConcerns, SectionsVACD section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
@@ -104,7 +103,8 @@ public class AllergyConcernTextBuilder extends TextBuilder {
 							j++;
 							minOneComment = true;
 							cellStr = cellStr
-									+ ("<content ID='" + SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix()
+									+ ("<content ID='"
+											+ SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix()
 											+ "-comment" + i + j + "'>");
 							cellStr = cellStr + (ap.getCommentText());
 							cellStr = cellStr + ("</content>");

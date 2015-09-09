@@ -16,8 +16,9 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.ehealth_connector.cda.ProblemConcern;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
@@ -28,19 +29,18 @@ import org.ehealth_connector.cda.ch.enums.SectionsVACD;
  */
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-	private ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns;
+	private List<org.ehealth_connector.cda.ProblemConcern> problemConcerns;
 	private String contentIdPrefix;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param problemConcerns
-	 *          a list of Problem Concerns
+	 *            a list of Problem Concerns
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
-	public ProblemConcernEntryTextBuilder(
-			ArrayList<org.ehealth_connector.cda.ProblemConcern> problemConcerns, SectionsVACD section) {
+	public ProblemConcernEntryTextBuilder(List<ProblemConcern> problemConcerns, SectionsVACD section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}

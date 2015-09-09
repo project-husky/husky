@@ -19,7 +19,7 @@ package org.ehealth_connector.common;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.enums.CodeSystems;
+import org.ehealth_connector.common.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -29,17 +29,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  */
 public class Identificator {
 
-	II mII;
+	private II mII;
 
 	/**
 	 * Erstellt einen neuen Identifikator.
-	 * 
+	 *
 	 * @param oid
-	 *          OID der Domäne, in welcher die lokale ID eindeutig ist
+	 *            OID der Domäne, in welcher die lokale ID eindeutig ist
 	 * @param id
-	 *          lokale ID
+	 *            lokale ID
 	 */
-	public Identificator(CodeSystems oid, String id) {
+	public Identificator(IdentityDomain oid, String id) {
 		mII = DatatypesFactory.eINSTANCE.createII();
 		setRoot(oid.getCodeSystemId());
 		setExtension(id);
@@ -49,11 +49,11 @@ public class Identificator {
 	 * <div class="en">Instantiates a new identificator.</div> <div
 	 * class="de">Instantiiert </div> <div class="fr"></div> <div
 	 * class="it"></div>
-	 * 
+	 *
 	 * @param ii
 	 * <br>
-	 *          <div class="de"> ii</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> ii</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Identificator(II ii) {
 		mII = ii;
@@ -61,11 +61,11 @@ public class Identificator {
 
 	/**
 	 * Erstellt einen neuen Identifikator.
-	 * 
+	 *
 	 * @param oid
-	 *          OID der Domäne, in welcher die lokale ID eindeutig ist
+	 *            OID der Domäne, in welcher die lokale ID eindeutig ist
 	 * @param id
-	 *          lokale ID
+	 *            lokale ID
 	 */
 	public Identificator(String oid, String id) {
 		mII = DatatypesFactory.eINSTANCE.createII();
@@ -77,16 +77,16 @@ public class Identificator {
 	 * <div class="en">Converts to identificator.</div> <div
 	 * class="de">Konvertiert einen Code in ein Identificator Objekt</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param code
 	 * <br>
-	 *          <div class="de"> code</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @return the identificator
 	 */
 	public static Identificator convertToIdentificator(Code code) {
 		if (code != null) {
-			Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
+			final Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
 			return id;
 		}
 		return null;
@@ -95,21 +95,21 @@ public class Identificator {
 	/**
 	 * <div class="en">Gets the identificator.</div> <div class="de">Liefert
 	 * identificator.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param iiList
 	 * <br>
-	 *          <div class="de"> ii list</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> ii list</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @param root
 	 * <br>
-	 *          <div class="de"> root</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> root</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @return <div class="en">the identificator</div>
 	 */
 	public static Identificator getIdentificator(List<II> iiList, String root) {
-		for (II i : iiList) {
+		for (final II i : iiList) {
 			if (i.getRoot().equals(root)) {
-				Identificator id = new Identificator(i);
+				final Identificator id = new Identificator(i);
 				return id;
 			}
 		}
@@ -118,7 +118,7 @@ public class Identificator {
 
 	/**
 	 * Liefert die ID.
-	 * 
+	 *
 	 * @return ID
 	 */
 	public String getExtension() {
@@ -128,7 +128,7 @@ public class Identificator {
 	/**
 	 * <div class="en">Gets the ii.</div> <div class="de">Liefert ii.</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return II <div class="en">the ii</div>
 	 */
 	public II getIi() {
@@ -137,7 +137,7 @@ public class Identificator {
 
 	/**
 	 * Liefert die OID (der Domäne).
-	 * 
+	 *
 	 * @return OID
 	 */
 	public String getRoot() {
@@ -146,25 +146,32 @@ public class Identificator {
 
 	/**
 	 * Setzt die OID.
-	 * 
+	 *
 	 * @param extension
-	 *          Extension ID
+	 *            Extension ID
 	 */
 	public void setExtension(String extension) {
-		if (extension != null && !extension.equals("")) {
+		if ((extension != null) && !"".equals(extension)) {
 			mII.setExtension(extension);
 		}
 	}
 
 	/**
 	 * Setzt die OID.
-	 * 
+	 *
 	 * @param root
-	 *          OID einer Domäne
+	 *            OID einer Domäne
 	 */
 	public void setRoot(String root) {
-		if (root != null && !root.equals("")) {
+		if ((root != null) && !"".equals(root)) {
 			mII.setRoot(root);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Identificator [extension=" + getExtension() + ", II=" + getIi() + ", root=" + getRoot() + "]";
+	}
+	
+	
 }

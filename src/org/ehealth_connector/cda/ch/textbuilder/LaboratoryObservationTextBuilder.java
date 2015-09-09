@@ -16,7 +16,7 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
@@ -31,18 +31,18 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
  */
 public class LaboratoryObservationTextBuilder extends TextBuilder {
 
-	private ArrayList<org.ehealth_connector.cda.LaboratoryObservation> laboratoryObservation;
+	private List<org.ehealth_connector.cda.LaboratoryObservation> laboratoryObservation;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param list
-	 *          a list of laboratory observations
+	 *            a list of laboratory observations
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
-	public LaboratoryObservationTextBuilder(ArrayList<LaboratoryObservation> list,
-			SectionsVACD section) {
+	public LaboratoryObservationTextBuilder(
+			List<org.ehealth_connector.cda.LaboratoryObservation> list, SectionsVACD section) {
 		laboratoryObservation = list;
 		section.getContentIdPrefix();
 	}
@@ -126,8 +126,9 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 				k++;
 				minOneComment = true;
 				cellStr = cellStr
-						+ ("<content ID='" + SectionsVACD.SEROLOGY_STUDIES.getContentIdPrefix() + "-comment"
-								+ String.valueOf(i) + String.valueOf(1) + String.valueOf(k) + "'>");
+						+ ("<content ID='" + SectionsVACD.SEROLOGY_STUDIES.getContentIdPrefix()
+								+ "-comment" + String.valueOf(i) + String.valueOf(1)
+								+ String.valueOf(k) + "'>");
 				cellStr = cellStr + (laboratoryObservation.getCommentText());
 				cellStr = cellStr + ("</content>");
 			}
