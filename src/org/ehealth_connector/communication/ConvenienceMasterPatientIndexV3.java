@@ -76,21 +76,21 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            demographic data of the patient
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param dest
+	 * @param pixSource
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean addPatientDemographics(Patient patient, String homeCommunityOID,
-			Destination dest, AtnaConfig atna) {
+			Destination pixSource, AtnaConfig atna) {
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null), null,
-				(dest != null ? dest.getSenderApplicationOid() : null),
-				(dest != null ? dest.getSenderFacilityOid() : null),
-				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(pixSource != null ? pixSource.getUri() : null), null,
+				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
+				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
+				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
+				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		log.debug("addPatientDemographics, creating V3PixAdapter");
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
@@ -128,22 +128,22 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            duplicate patient identifier
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param dest
+	 * @param pixSource
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean mergePatients(Patient finalPatient, String mergeObsoleteId,
-			String homeCommunityOID, Destination dest, AtnaConfig atna) {
+			String homeCommunityOID, Destination pixSource, AtnaConfig atna) {
 
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null), null,
-				(dest != null ? dest.getSenderApplicationOid() : null),
-				(dest != null ? dest.getSenderFacilityOid() : null),
-				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(pixSource != null ? pixSource.getUri() : null), null,
+				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
+				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
+				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
+				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		if (mergeObsoleteId == null) {
@@ -179,26 +179,26 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            local patient domain (oid) of the source
 	 * @param requestedCommunityOIDs
 	 *            array of oids for domains to query
-	 * @param dest
+	 * @param pixQuery
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return list of ids
 	 */
 	public static List<Identificator> queryPatientID(Patient patient, String homeCommunityOID,
-			String[] requestedCommunityOIDs, Destination dest, AtnaConfig atna) {
+			String[] requestedCommunityOIDs, Destination pixQuery, AtnaConfig atna) {
 
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
-				(dest != null ? dest.getPixQueryUri() : null), null, null,
-				(dest != null ? dest.getSenderApplicationOid() : null),
-				(dest != null ? dest.getSenderFacilityOid() : null),
-				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(pixQuery != null ? pixQuery.getUri() : null), null, null,
+				(pixQuery != null ? pixQuery.getSenderApplicationOid() : null),
+				(pixQuery != null ? pixQuery.getSenderFacilityOid() : null),
+				(pixQuery != null ? pixQuery.getReceiverApplicationOid() : null),
+				(pixQuery != null ? pixQuery.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs,
-				null);
+		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient),
+				requestedCommunityOIDs, null);
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		if (requestedCommunityOIDs != null) {
 			for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
@@ -214,27 +214,27 @@ public class ConvenienceMasterPatientIndexV3 {
 
 	/**
 	 * queries the mpi for patients according to the criteria specified.
-	 *
+	 * 
 	 * @param mpiQuery
 	 *            the mpi query criterias
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param dest
+	 * @param pdqQuery
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return query response with patients
 	 */
 	public static MasterPatientIndexQueryResponse queryPatients(MasterPatientIndexQuery mpiQuery,
-			String homeCommunityOID, Destination dest, AtnaConfig atna) {
+			String homeCommunityOID, Destination pdqQuery, AtnaConfig atna) {
 
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
-				(dest != null ? dest.getPdqQueryUri() : null),
-				(dest != null ? dest.getSenderApplicationOid() : null),
-				(dest != null ? dest.getSenderFacilityOid() : null),
-				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(pdqQuery != null ? pdqQuery.getUri() : null),
+				(pdqQuery != null ? pdqQuery.getSenderApplicationOid() : null),
+				(pdqQuery != null ? pdqQuery.getSenderFacilityOid() : null),
+				(pdqQuery != null ? pdqQuery.getReceiverApplicationOid() : null),
+				(pdqQuery != null ? pdqQuery.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
@@ -262,21 +262,21 @@ public class ConvenienceMasterPatientIndexV3 {
 	 *            demographic data of the patient
 	 * @param homeCommunityOID
 	 *            local patient domain (oid) of the source
-	 * @param dest
+	 * @param pixSource
 	 *            communication endpoint
 	 * @param atna
 	 *            atna configuration
 	 * @return true, if successful
 	 */
 	public static boolean updatePatientDemographics(Patient patient, String homeCommunityOID,
-			Destination dest, AtnaConfig atna) {
+			Destination pixSource, AtnaConfig atna) {
 		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(dest != null ? dest.getPixSourceUri() : null), null,
-				(dest != null ? dest.getSenderApplicationOid() : null),
-				(dest != null ? dest.getSenderFacilityOid() : null),
-				(dest != null ? dest.getReceiverApplicationOid() : null),
-				(dest != null ? dest.getReceiverFacilityOid() : null), homeCommunityOID, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(pixSource != null ? pixSource.getUri() : null), null,
+				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
+				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
+				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
+				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));

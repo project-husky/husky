@@ -20,6 +20,22 @@ package org.ehealth_connector.communication;
  */
 public class AtnaConfig {
 
+	/**
+	 * <div class="en">ATNA configuration mode (secure or unsecure)</div>
+	 */
+	public enum AtnaConfigMode {
+
+		/**
+		 * <div class="en">ATNA is enabled for secure applications</div>
+		 */
+		SECURE,
+
+		/**
+		 * <div class="en">ATNA is disabled (no audit trail)</div>
+		 */
+		UNSECURE
+	}
+
 	/** The audit repository uri. */
 	private String auditRepositoryUri;
 
@@ -48,7 +64,7 @@ public class AtnaConfig {
 	 * Sets the audit repository uri.
 	 * 
 	 * @param auditRepositoryUri
-	 *          the new audit repository uri
+	 *            the new audit repository uri
 	 */
 	public void setAuditRepositoryUri(String auditRepositoryUri) {
 		this.auditRepositoryUri = auditRepositoryUri;
@@ -58,7 +74,7 @@ public class AtnaConfig {
 	 * Sets the audit source id.
 	 * 
 	 * @param auditSourceId
-	 *          the new audit source id
+	 *            the new audit source id
 	 */
 	public void setAuditSourceId(String auditSourceId) {
 		this.auditSourceId = auditSourceId;

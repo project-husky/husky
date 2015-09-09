@@ -62,7 +62,7 @@ public class DestinationTest {
 	public void testKeyStoreConstructor() {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-		assertEquals(repUri, dest.getRepositoryUri());
+		assertEquals(repUri, dest.getUri());
 		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
 		assertEquals(KEY_STORE, dest.getTrustStore());
@@ -74,7 +74,7 @@ public class DestinationTest {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS,
 				TRUST_STORE, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-		assertEquals(repUri, dest.getRepositoryUri());
+		assertEquals(repUri, dest.getUri());
 		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
 		assertEquals(TRUST_STORE, dest.getTrustStore());
@@ -89,16 +89,16 @@ public class DestinationTest {
 		assertEquals(KEY_STORE, dest.getKeyStore());
 		dest.setKeyStorePassword(KEY_STORE_PASS);
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
-		dest.setPixQueryUri(u1);
-		assertEquals(u1, dest.getPixQueryUri());
-		dest.setPixSourceUri(u2);
-		assertEquals(u2, dest.getPixSourceUri());
+		dest.setUri(u1);
+		assertEquals(u1, dest.getUri());
+		dest.setUri(u2);
+		assertEquals(u2, dest.getUri());
 		dest.setReceiverApplicationOid("1");
 		assertEquals("1", dest.getReceiverApplicationOid());
 		dest.setReceiverFacilityOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getReceiverFacilityOid());
-		dest.setRepositoryUri(repUri);
-		assertEquals(repUri, dest.getRepositoryUri());
+		dest.setUri(repUri);
+		assertEquals(repUri, dest.getUri());
 		dest.setSenderApplicationOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderApplicationOid());
 		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);

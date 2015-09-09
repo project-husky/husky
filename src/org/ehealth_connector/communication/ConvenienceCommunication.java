@@ -19,19 +19,16 @@ package org.ehealth_connector.communication;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.crypto.Cipher;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
@@ -47,6 +44,7 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
@@ -57,23 +55,32 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
- * <p>
- * The ConvenienceCommunication class provides methods to realize the
- * transmission of documents to different destinations
- *
- * The class implements the following profiles and actors <b>IHE ITI Document
- * Source Actor</b>
- *
- * [ITI-41] Provide and Register Document Set – b
- *
- * <b>IHE ITI Document Consumer Akteur</b> [ITI-18] Registry Stored Query // *
- * [ITI-43] Retrieve Document Set // * <b>IHE ITI Portable Media Creator und
- * Media Importer Akteur</b> // * [ITI-32] Distribute Document Set on Media // *
- * <b>IHE PCC Care Manager und Decision Support Service Akteur</b> // * [PCC-12]
- * Request for Clinical Guidance
+ * <div class="en">The ConvenienceCommunication class provides a convenience API
+ * for transactions to different destinations such as registries and
+ * repositories.<br/>
+ * <br/>
+ * It implements the following IHE actors:
+ * <ul>
+ * <li>IHE ITI Document Consumer</li>
+ * <li>IHE ITI Document Source</li>
+ * <li>IHE ITI Portable Media Creator</li>
+ * <li>IHE ITI Portable Media Importer</li>
+ * </ul>
+ * <br/>
+ * It implements the following IHE transactions:
+ * <ul>
+ * <li>[ITI-18] Registry Stored Query</li>
+ * <li>[ITI-32] Distribute Document Set on Media</li>
+ * <li>[ITI-41] Provide and Register Document Set – b</li>
+ * <li>[ITI-43] Retrieve Document Set</li>
+ * </ul>
+ * </div>
  */
 public class ConvenienceCommunication {
 
+	/**
+	 * <div class="en">Exception in case when no document found</div>
+	 */
 	public class DocumentNotAccessibleException extends Exception {
 		private static final long serialVersionUID = 1L;
 
@@ -82,57 +89,76 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	private final Log log = LogFactory.getLog(ConvenienceCommunication.class);
+	/**
+	 * <div class="en">The affinity domain set-up</div>
+	 */
+	private AffinityDomain affinityDomain = null;
 
-	private Destination destination = null;
-
-	/** The source. */
+	/**
+	 * <div class="en">The OHT source</div>
+	 */
 	private B_Source source = null;
 
-	/** The organizational id. */
-	private String organizationalId;
-
-	/** The transaction data to send XDS Documents. */
+	/**
+	 * <div class="en">The OHT transaction data to send XDS Documents</div>
+	 */
 	private SubmitTransactionData txnData = null;
 
-	private boolean auditorEnabled = false;
+	/**
+	 * <div class="en">The ATNA config mode (secure or unsecure)</div>
+	 */
+	private AtnaConfig.AtnaConfigMode atnaConfigMode = AtnaConfigMode.UNSECURE;
 
 	/**
-	 * Instantiates a new convenience communication.
-	 *
+	 * <div class="en">Instantiates a new convenience communication without
+	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
+	 * 
 	 */
 	public ConvenienceCommunication() {
+		this.affinityDomain = null;
+		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
 	}
 
-	// Übermittlung per XDM (Speichern und Laden von einem Datenträger) - A10,
-	// A11
-
 	/**
-	 * Instantiates a new convenience communication.
-	 *
-	 * @param dest
-	 *            the destination
-	 * @param auditorEnabled
-	 *            sets whether the ATNA audit is enable (secure) or disabled
-	 *            (unsecure)
+	 * <div class="en">Instantiates a new convenience communication with the
+	 * given affinity domain set-up. ATNA audit is disabled (unsecure) </div>
+	 * 
+	 * @param affinityDomain
+	 *            the affinity domain configuration
 	 */
-	public ConvenienceCommunication(Destination dest, boolean auditorEnabled) {
-		setDestination(dest);
-		auditorEnabled = this.auditorEnabled;
+	public ConvenienceCommunication(AffinityDomain affinityDomain) {
+		this.affinityDomain = affinityDomain;
+		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
 	}
 
 	/**
-	 * Adds a document to the XDS Submission set.
-	 *
+	 * <div class="en">Instantiates a new convenience communication with the
+	 * given affinity domain set-up.
+	 * 
+	 * @param affinityDomain
+	 *            the affinity domain configuration
+	 * @param atnaConfigMode
+	 *            the ATNA config mode (secure or unsecure) </div>
+	 */
+	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
+		this.affinityDomain = affinityDomain;
+		this.atnaConfigMode = atnaConfigMode;
+	}
+
+	/**
+	 * <div class="en">Adds a document to the XDS Submission set.
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
-	 *            The input stream to the document
-	 * @return the document metadata (which have to be completed)
+	 *            the input stream to the document
+	 * @param repository
+	 *            the destination repository
+	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(
-			DocumentDescriptor desc, InputStream inputStream) {
+			DocumentDescriptor desc, InputStream inputStream, Destination repository) {
 		if (inputStream == null)
 			try {
 				throw new DocumentNotAccessibleException();
@@ -142,7 +168,7 @@ public class ConvenienceCommunication {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+			return new DocumentMetadataCh(addXdsDocument(doc, desc, repository));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -150,20 +176,23 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Adds a document to the XDS Submission set.
-	 *
+	 * <div class="en">Adds a document to the XDS Submission set.
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
-	 * @return the document metadata (which has to be completed)
+	 * @param repository
+	 *            the destination repository
+	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath) {
+	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath,
+			Destination repository) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+			return new DocumentMetadataCh(addXdsDocument(doc, desc, repository));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -172,20 +201,23 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Adds a document to the XDS Submission set.
-	 *
+	 * <div class="en">Adds a document to the XDS Submission set.
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
 	 *            The input stream to the document
-	 * @return the document metadata (which have to be completed)
+	 * @param repository
+	 *            the destination repository
+	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
+			Destination repository) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return addXdsDocument(doc, desc);
+			return addXdsDocument(doc, desc, repository);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -193,20 +225,23 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Adds a document to the XDS Submission set.
-	 *
+	 * <div class="en"> Adds a document to the XDS Submission set.
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
-	 * @return the document metadata (which has to be completed)
+	 * @param repository
+	 *            the destination repository
+	 * @return the document metadata (which have to be completed) </div>
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath,
+			Destination repository) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return addXdsDocument(doc, desc);
+			return addXdsDocument(doc, desc, repository);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -215,25 +250,29 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Resets the transaction data (SubmissionSet and DocumentMetadata)
+	 * <div class="en">Resets the transaction data (SubmissionSet and
+	 * DocumentMetadata)</div>
 	 */
 	public void clearDocuments() {
 		txnData = new SubmitTransactionData();
 	}
 
 	/**
-	 * Returns the current destination
-	 *
-	 * @return the destination
+	 * <div class="en">Returns the current affinity domain
+	 * 
+	 * @return the affinity domain </div>
 	 */
-	public Destination getDestination() {
-		return destination;
+	public AffinityDomain getAffinityDomain() {
+		if (affinityDomain == null)
+			affinityDomain = new AffinityDomain(null, null, new ArrayList<Destination>());
+		return affinityDomain;
 	}
 
 	/**
-	 * Gets the OHT transaction data (SubmissionSet and DocumentMetadata)
-	 *
-	 * @return the transaction data object
+	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
+	 * DocumentMetadata)
+	 * 
+	 * @return the transaction data object </div>
 	 */
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
@@ -241,70 +280,91 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Query a registry for documents, using a find documents query.
-	 *
+	 * 
 	 * @param queryParameter
 	 *            a findDocumentsQuery object filled with your query parameters
 	 * @param returnReferencesOnly
 	 *            if set to false, the registry response will contain the
 	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata. This is
-	 *            useful if the number of results is limited in the registry and
-	 *            your query would exceed this limit. In this case, precise your
-	 *            query or do a query for references first, choose the possible
-	 *            matches (e.g. the last 10 results) and then query for
-	 *            metadata.
+	 *            references instead of the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter,
-			boolean returnReferencesOnly) {
-		return this.queryDocuments((StoredQueryInterface) queryParameter, returnReferencesOnly);
+
+	/**
+	 * <div class="en">Queries the document registry of the affinity domain for
+	 * documents, using a find documents query.
+	 * 
+	 * @param queryParameter
+	 *            a findDocumentsQuery object filled with your query parameters
+	 * @return the OHT XDSQueryResponseType containing full document
+	 *         metadata</div>
+	 */
+	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) {
+		return this.queryDocuments((StoredQueryInterface) queryParameter);
 	}
 
 	/**
-	 * Query a registry for all documents of one patient.
-	 *
+	 * <div class="en">Queries the document registry of the affinity domain for
+	 * documents, using a find documents query. This is useful if the number of
+	 * results is limited in the registry and your query would exceed this
+	 * limit. In this case, precise your query or do a query for references
+	 * first, choose the possible matches (e.g. the last 10 results) and then
+	 * query for metadata.
+	 * 
+	 * @param queryParameter
+	 *            a findDocumentsQuery object filled with your query parameters
+	 * @return the OHT XDSQueryResponseType containing references instead of the
+	 *         complete document metadata</div>
+	 */
+	public XDSQueryResponseType queryDocumentReferencesOnly(FindDocumentsQuery queryParameter) {
+		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	}
+
+	/**
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents of one patient.
+	 * 
 	 * @param patientId
 	 *            the ID of the patient
-	 * @param returnReferencesOnly
-	 *            if set to false, the registry response will contain the
-	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata. This is
-	 *            useful if the number of results is limited in the registry and
-	 *            your query would exceed this limit. In this case, precise your
-	 *            query or do a query for references first, choose the possible
-	 *            matches (e.g. the last 10 results) and then query for
-	 *            metadata.
-	 * @return the XDSQueryResponseType
+	 * @return the OHT XDSQueryResponseType containing full document
+	 *         metadata</div>
 	 */
-	public XDSQueryResponseType queryDocuments(Identificator patientId, boolean returnReferencesOnly) {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED),
-				returnReferencesOnly);
+	public XDSQueryResponseType queryDocuments(Identificator patientId) {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
 	}
 
 	/**
-	 * Query a registry for documents, using a query at will.
-	 *
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents of one patient. This is useful if the number of results is
+	 * limited in the registry and your query would exceed this limit. In this
+	 * case, precise your query or do a query for references first, choose the
+	 * possible matches (e.g. the last 10 results) and then query for metadata.
+	 * 
+	 * @param patientId
+	 *            the ID of the patient
+	 * @return the OHT XDSQueryResponseType containing references instead of the
+	 *         complete document metadata</div>
+	 */
+	public XDSQueryResponseType queryDocumentReferencesOnly(Identificator patientId) {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	}
+
+	/**
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents satisfying the given query parameters.
+	 * 
 	 * @param query
 	 *            one of the given queries (@see
 	 *            org.ehealth_connector.communication.storedquery and
 	 *            org.ehealth_connector.communication.storedquery.ch)
-	 * @param returnReferencesOnly
-	 *            if set to false, the registry response will contain the
-	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata. This is
-	 *            useful if the number of results is limited in the registry and
-	 *            your query would exceed this limit. In this case, precise your
-	 *            query or do a query for references first, choose the possible
-	 *            matches (e.g. the last 10 results) and then query for
-	 *            metadata.
-	 * @return the XDSQueryResponseType
+	 * @return the OHT XDSQueryResponseType containing full document
+	 *         metadata</div>
 	 */
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query,
-			boolean returnReferencesOnly) {
-		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		try {
-			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), returnReferencesOnly);
+			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -312,26 +372,53 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Retrieves a document from a Repository
-	 *
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents satisfying the given query parameters. This is useful if the
+	 * number of results is limited in the registry and your query would exceed
+	 * this limit. In this case, precise your query or do a query for references
+	 * first, choose the possible matches (e.g. the last 10 results) and then
+	 * query for metadata.
+	 * 
+	 * @param query
+	 *            one of the given queries (@see
+	 *            org.ehealth_connector.communication.storedquery and
+	 *            org.ehealth_connector.communication.storedquery.ch)
+	 * @return the OHT XDSQueryResponseType containing references instead of the
+	 *         complete document metadata</div>
+	 */
+	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+
+		try {
+			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Retrieves a document from a Repository
+	 * 
 	 * @param docReq
 	 *            the document request
-	 * @return the XDSRetrieveResponseType
+	 * @return the OHT XDSRetrieveResponseType </div>
 	 */
 	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq) {
 		return retrieveDocuments(new DocumentRequest[] { docReq });
 	}
 
 	/**
-	 * Retrieves multiple documents from one or more Repositories
-	 *
+	 * <div class="en">Retrieves multiple documents from one or more
+	 * Repositories
+	 * 
 	 * @param docReq
 	 *            an array of document requests
-	 * @return the XDSRetrieveResponseType
+	 * @return the OHT XDSRetrieveResponseType </div>
 	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		B_Consumer consumer = new B_Consumer(destination.getRegistryUri());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		// Create RetrieveSetRequestType
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
@@ -357,63 +444,22 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Sets the destination
-	 *
-	 * @param dest
-	 *            the destination
+	 * <div class="en">Sets the affinity domain set-up
+	 * 
+	 * @param affinityDomain
+	 *            the affinity domain set-up </div>
 	 */
-	public void setDestination(Destination dest) {
-		destination = dest;
-		organizationalId = dest.getSenderOrganizationalOid();
-		try {
-			boolean unlimited = Cipher.getMaxAllowedKeyLength("RC5") >= 256;
-			log.debug("Unlimited cryptography enabled: " + unlimited);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (dest.getKeyStore() == null) {
-			System.clearProperty("javax.net.ssl.keyStore");
-			System.clearProperty("javax.net.ssl.keyStorePassword");
-			System.clearProperty("javax.net.ssl.trustStore");
-			System.clearProperty("javax.net.ssl.trustStorePassword");
-		} else {
-			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
-			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
-
-			System.setProperty("javax.net.debug", "all");
-			// System.setProperty("https.protocols", "TLSv1.2");
-			// System.setProperty("https.protocols", "TLSv1.2");
-			// System.setProperty("https.ciphersuites",
-			// "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
-
-			// System.setProperty("https.ciphersuites",
-			// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
-
-		}
+	public void setAffinityDomain(AffinityDomain affinityDomain) {
+		this.affinityDomain = affinityDomain;
 	}
 
-	// XDS: Herunterladen eines Impfdokuments von einem IHE XDS Repository - A9
-
-	// Anfrage einer Immunization Recommendation (Senden der Anfrage und
-	// Empfangen
-	// der Antwort) - A4, A5, A6
-
 	/**
-	 * <p>
-	 * Sends the current document to the according recipient (repository actor
-	 * as specified in IHE XDR or IHE XDS). The transmission is performed as
-	 * specified in <b>IHE [ITI-41] Provide and Register Document Set – b</b>
-	 *
-	 * </p>
-	 * <p>
-	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
-	 * </p>
-	 *
-	 * @return XDSResponseType
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository<br />
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
+	 * ITI Document Source actor
+	 * 
+	 * @return the OHT XDSResponseType</div>
 	 */
 	public XDSResponseType submit() {
 		// generate missing information for all documents
@@ -428,7 +474,6 @@ public class ConvenienceCommunication {
 
 				return xdsr;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -436,22 +481,16 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <p>
-	 * Sends the current document to the according recipient (repository actor
-	 * as specified in IHE XDR or IHE XDS). The AuthorRole is one of the minimal
-	 * required information according to IHE Suisse for classification of
-	 * documents in Switzerland. The transmission is performed as specified in
-	 * <b>IHE [ITI-41] Provide and Register Document Set – b</b>
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository<br />
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
+	 * ITI Document Source actor
 	 * 
-	 * </p>
-	 * <p>
-	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
-	 * </p>
-	 *
 	 * @param authorRole
-	 *            the role of the author of the document. This is part of the
-	 *            submission set metadata and required for switzerland.
-	 * @return XDSResponseType
+	 *            The AuthorRole is one of the minimal required information
+	 *            according to IHE Suisse for classification of documents in
+	 *            Switzerland.
+	 * @return the OHT XDSResponseType</div>
 	 */
 	public XDSResponseType submit(AuthorRole authorRole) {
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
@@ -462,59 +501,56 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <p>
-	 * Sends the current document to the according recipient (repository actor
-	 * as specified in IHE XDR or IHE XDS). The information in the subSet Object
-	 * will be used to create comprehensive meta data about this submission
-	 * (e.g. with AuthorRole, AuthorInstitution, ContentType and Title). The
-	 * transmission is performed as specified in <b>IHE [ITI-41] Provide and
-	 * Register Document Set – b</b>
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository<br />
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
+	 * ITI Document Source actor
 	 * 
-	 * </p>
-	 * <p>
-	 * Role of the API or the application: <b>IHE ITI Document Source Actor</b>
-	 * </p>
-	 *
-	 * @param subSet
-	 *            the metadata object for the submission set. Although, some of
-	 *            this information can be derived automatically, some may be
-	 *            required in your country (e.g. AuthorRole in Switzerland)
-	 * @return XDSResponseType
+	 * @param submissionSetMetadata
+	 *            The information in this object will be used to create
+	 *            comprehensive meta data about this submission (e.g. with
+	 *            AuthorRole, AuthorInstitution, ContentType and Title).
+	 *            Although, some of this information can be derived
+	 *            automatically, some may be required in your country (e.g.
+	 *            AuthorRole in Switzerland)
+	 * @return the OHT XDSResponseType</div>
 	 */
-	public XDSResponseType submit(SubmissionSetMetadata subSet) {
-		subSet.toOhtSubmissionSetType(txnData.getSubmissionSet());
+	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) {
+		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit();
 	}
 
 	/**
-	 * Setting up the communication endpoint and the logger
-	 *
-	 * @param repositoryUri
-	 *            the repository uri
-	 * @param auditorEnabled
-	 *            sets whether the ATNA audit is enable (secure) or disabled
-	 *            (unsecure)
+	 * <div class="en">Setting up the communication endpoints for the affinity
+	 * domain and the logger
+	 * 
+	 * @param affinityDomain
+	 *            the affinity domain
+	 * @param atnaConfigMode
+	 *            the ATNA config mode (secure or unsecure) </div> </div>
 	 */
-	protected void setUp(Destination dest, boolean auditorEnabled) {
-
-		if (dest.getKeyStore() != null) {
-			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
-			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
-		}
-
-		source = new B_Source(dest.getRegistryUri());
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
 	}
 
-	private DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
-		source = new B_Source(destination.getRepositoryUri());
+	/**
+	 * <div class="en">TODO Axel
+	 * 
+	 * @param doc
+	 * @param desc
+	 * @param repository
+	 * @return </div>
+	 */
+	private DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc,
+			Destination repository) {
+		source = new B_Source(repository.getUri());
 
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(auditorEnabled);
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 		String docEntryUUID;
 		try {
 			docEntryUUID = txnData.addDocument(doc);
@@ -535,10 +571,10 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Cda fixes.
-	 *
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs(?).
+	 * 
 	 * @param docMetadata
-	 *            the doc metadata
+	 *            the doc metadata </div>
 	 */
 	private void cdaFixes(DocumentMetadata docMetadata) {
 		docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
@@ -556,14 +592,15 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
 		// to long for the registry (EXT part is larger than the allowed 16
 		// characters)
-		docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+		docMetadata.setUniqueId(OID.createOIDGivenRoot(
+				docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	/**
-	 * Generate missing doc entry attributes.
-	 *
+	 * <div class="en">Generate missing doc entry attributes.
+	 * 
 	 * @param docEntryUuid
-	 *            the doc entry uuid
+	 *            the doc entry uuid </div>
 	 */
 	@SuppressWarnings("unchecked")
 	private void generateMissingDocEntryAttributes(String docEntryUuid) {
@@ -587,7 +624,8 @@ public class ConvenienceCommunication {
 
 		// Generate the UUID
 		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(
+					docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
@@ -610,16 +648,32 @@ public class ConvenienceCommunication {
 		}
 	}
 
+	/**
+	 * <div class="en">TODO Axel</div>
+	 */
 	private void generateMissingSubmissionSetAttributes() {
 		// Create SubmissionSet
 		SubmissionSetType subSet = txnData.getSubmissionSet();
-		if (subSet.getUniqueId() == null) {
-			subSet.setUniqueId(OID.createOIDGivenRoot((organizationalId), 64));
-		}
 
-		// set submission set source id
-		if (subSet.getSourceId() == null) {
-			subSet.setSourceId(organizationalId);
+		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+			// This is the eHealth Connector Root OID
+			// default value just in case...
+			String organizationalId = "2.16.756.5.30.1.139.1.1";
+
+			if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
+				DocumentEntryType docEntry = (DocumentEntryType) txnData.getMetadata()
+						.getDocumentEntry().get(0);
+				organizationalId = docEntry.getPatientId().getAssigningAuthorityUniversalId();
+			}
+			if (subSet.getUniqueId() == null) {
+				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			}
+
+			// set submission set source id
+			if (subSet.getSourceId() == null) {
+				subSet.setSourceId(organizationalId);
+			}
 		}
 
 		// set submission time

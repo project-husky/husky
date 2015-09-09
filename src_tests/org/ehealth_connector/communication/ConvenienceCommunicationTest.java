@@ -15,10 +15,12 @@
  *******************************************************************************/
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.net.URISyntaxException;
 
+import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
@@ -46,9 +48,10 @@ public class ConvenienceCommunicationTest {
 	// One PDF and one CDA Document that will be transfered
 	public static final String pdfFileName = "patientconsent.pdf";
 	public static final String cdaFilePath = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/CDA-CH-VACD_Impfausweis.xml";
-	
+
 	java.net.URI repUri;
-	Destination dest;
+	AffinityDomain affinityDomain;
+	Destination repo;
 	ConvenienceCommunication c;
 	XDSQueryResponseType qr;
 
@@ -60,11 +63,14 @@ public class ConvenienceCommunicationTest {
 			e.printStackTrace();
 		}
 
-		dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS, TRUST_STORE,
+		repo = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS, TRUST_STORE,
 				TRUST_STORE_PASS);
 
+		affinityDomain = new AffinityDomain(null, null, repo);
+
 		try {
-			c = new ConvenienceCommunication(dest, false);
+
+			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,7 +79,7 @@ public class ConvenienceCommunicationTest {
 	@Test
 	public void testAddDocument() {
 		try {
-			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
+			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath, repo);
 			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
 			assertNotNull(c.getTxnData());
 		} catch (Exception e) {
@@ -91,7 +97,7 @@ public class ConvenienceCommunicationTest {
 		System.setProperty("javax.net.ssl.trustStorePassword", "Null");
 
 		try {
-			c = new ConvenienceCommunication(dest, false);
+			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

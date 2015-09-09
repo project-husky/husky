@@ -17,7 +17,6 @@
 package org.ehealth_connector.communication;
 
 import java.net.URI;
-import java.util.ArrayList;
 
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
@@ -25,92 +24,102 @@ import java.util.ArrayList;
  */
 public class Destination {
 
+	/**
+	 * <div class="en">The key store for TLS</div>
+	 */
 	private String keyStore = null;
 
+	/**
+	 * <div class="en">The key store password for TLS</div>
+	 */
 	private String keyStorePassword;
 
-	/** URI for pdq Query ITI-47. */
-	private URI pdqQueryUri;
-	/** URI for pix Query ITI-45. */
-	private URI pixQueryUri;
-	/** URI for pix Source ITI-44. */
-	private URI pixSourceUri;
-	/** The receiver application oid for PIX/PDQ V3 */
+	/**
+	 * <div class="en">The receiver application oid</div>
+	 */
 	private String receiverApplicationOid;
-	/** The receiver facility oid for PIX/PDQ V3 */
+
+	/**
+	 * <div class="en">The receiver facility oid</div>
+	 */
 	private String receiverFacilityOid;
 
 	/**
-	 * URI for the XDS Repository
+	 * <div class="en">The senders application oid</div>
 	 */
-	private URI repository;
-	
-	/**
-	 * URI for the XDS Registry
-	 */
-	private URI registry;
-	
-	private ArrayList<XdsRepository> xdsRepositories = new ArrayList<XdsRepository>();
-
-	/** The sender application oid for PIX/PDQ V3. */
 	private String senderApplicationOid;
 
-	/** The sender facility oid for PIX/PDQ V3 and XDS */
+	/**
+	 * <div class="en">The sender facility oid</div>
+	 */
 	private String senderFacilityOid;
 
+	/**
+	 * <div class="en">The sender organizational oid</div>
+	 */
 	private String senderOrganizationalOid;
 
+	/**
+	 * <div class="en">The trust store for TLS</div>
+	 */
 	private String trustStore;
 
+	/**
+	 * <div class="en">The trust store password for TLS</div>
+	 */
 	private String trustStorePassword;
 
-	public Destination() {
+	/**
+	 * URI for the destination
+	 */
+	private URI uri;
 
+	/**
+	 * <div class="en">Communication Endpoint for any transaction.</div>
+	 */
+	public Destination() {
 	}
 
 	/**
-	 * Communication Endpoint for an unsecured XDS-b transaction.
+	 * Communication Endpoint for an unsecured transaction.
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Oid of the Sender Organization
-	 * @param repositoryUri
+	 * @param uri
 	 *            URI of the communication endpoint
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri) {
-		this.repository = repositoryUri;
+	public Destination(String senderOrganizationalOid, URI uri) {
+		this.uri = uri;
 		this.senderOrganizationalOid = senderOrganizationalOid;
 	}
 
 	/**
-	 * Communication Endpoint for a TLS-secured XDS-b transaction with a single
+	 * Communication Endpoint for a TLS-secured transaction with a single
 	 * keystore that combines keystore and truststore.
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Your OID
-	 * @param registryUri
+	 * @param uri
 	 *            URI of the communication endpoint
 	 * @param keyStore
 	 *            path to the keystore file
 	 * @param keyStorePassword
 	 *            the password for the keystore file
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
 			String keyStorePassword) {
-		this(senderOrganizationalOid, repositoryUri);
-		this.keyStore = keyStore;
-		this.keyStorePassword = keyStorePassword;
-		trustStore = keyStore;
-		trustStorePassword = keyStorePassword;
+		this(senderOrganizationalOid, uri);
+		setKeyStore(keyStore, keyStorePassword);
 	}
 
 	/**
-	 * Communication Endpoint for a TLS-secured XDS-b transaction with a
-	 * seperate keystore and truststore.
+	 * Communication Endpoint for a TLS-secured transaction with a seperate
+	 * keystore and truststore.
 	 * 
 	 * 
 	 * @param senderOrganizationalOid
 	 *            Your OID
-	 * @param registryUri
+	 * @param uri
 	 *            URI of the communication endpoint
 	 * @param keyStore
 	 *            path to the keystore file
@@ -121,31 +130,14 @@ public class Destination {
 	 * @param trustStorePassword
 	 *            the password for the truststore file
 	 */
-	public Destination(String senderOrganizationalOid, URI repositoryUri, String keyStore,
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
 			String keyStorePassword, String trustStore, String trustStorePassword) {
-		this(senderOrganizationalOid, repositoryUri);
+		this(senderOrganizationalOid, uri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		this.trustStore = trustStore;
 		this.trustStorePassword = trustStorePassword;
 	}
-	
-	public void addXdsRepository(XdsRepository xdsReposiory) {
-		this.xdsRepositories.add(xdsReposiory);
-	}
-	
-	public ArrayList<XdsRepository> getXdsRepositoriesAsList() {
-		return this.xdsRepositories;
-	}
-	
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
-//	public HashMap getXdsRepositoriesAsHashMap() {
-//		HashMap hashMap = new HashMap();
-//		for (XdsRepository xdsRepo : xdsRepositories) {
-//			hashMap.put(xdsRepo.getId(), xdsRepo.getUri());
-//		}
-//		return hashMap;
-//	}
 
 	/**
 	 * Gets the path to the keystore
@@ -166,33 +158,6 @@ public class Destination {
 	}
 
 	/**
-	 * Gets the pdq query uri.
-	 *
-	 * @return the pdq query uri
-	 */
-	public URI getPdqQueryUri() {
-		return pdqQueryUri;
-	}
-
-	/**
-	 * Gets the pix query uri.
-	 * 
-	 * @return the pix query uri
-	 */
-	public URI getPixQueryUri() {
-		return pixQueryUri;
-	}
-
-	/**
-	 * Gets the pix source uri.
-	 * 
-	 * @return the pix source uri
-	 */
-	public URI getPixSourceUri() {
-		return pixSourceUri;
-	}
-
-	/**
 	 * Gets the receiver application oid.
 	 * 
 	 * @return the receiver application oid
@@ -208,14 +173,6 @@ public class Destination {
 	 */
 	public String getReceiverFacilityOid() {
 		return receiverFacilityOid;
-	}
-
-	public URI getRegistryUri() {
-		return registry;
-	}
-
-	public URI getRepositoryUri() {
-		return repository;
 	}
 
 	/**
@@ -263,6 +220,10 @@ public class Destination {
 		return trustStorePassword;
 	}
 
+	public URI getUri() {
+		return uri;
+	}
+
 	/**
 	 * Sets the path to the key store
 	 * 
@@ -281,36 +242,6 @@ public class Destination {
 	 */
 	public void setKeyStorePassword(String keyStorePassword) {
 		this.keyStorePassword = keyStorePassword;
-	}
-
-	/**
-	 * Sets the pdq query uri.
-	 *
-	 * @param pdqQueryUri
-	 *            the new pdq query uri
-	 */
-	public void setPdqQueryUri(URI pdqQueryUri) {
-		this.pdqQueryUri = pdqQueryUri;
-	}
-
-	/**
-	 * Sets the pix query uri.
-	 * 
-	 * @param pixQueryUri
-	 *            the new pix query uri
-	 */
-	public void setPixQueryUri(URI pixQueryUri) {
-		this.pixQueryUri = pixQueryUri;
-	}
-
-	/**
-	 * Sets the pix source uri.
-	 * 
-	 * @param pixSourceUri
-	 *            the new pix source uri
-	 */
-	public void setPixSourceUri(URI pixSourceUri) {
-		this.pixSourceUri = pixSourceUri;
 	}
 
 	/**
@@ -333,14 +264,6 @@ public class Destination {
 		this.receiverFacilityOid = receiverFacilityOid;
 	}
 
-	public void setRepositoryUri(URI repositoryUri) {
-		this.repository = repositoryUri;
-	}
-	
-	public void setRegistryUri(URI registryUri){
-		this.registry = registryUri;
-	}
-	
 	/**
 	 * Sets the sender application oid.
 	 * 
@@ -370,18 +293,43 @@ public class Destination {
 	}
 
 	/**
-	 * <div class="en">Sets the trust store password.</div>
-	 * <div class="de">Setzt trust store password.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Sets the trust store password.</div> <div
+	 * class="de">Setzt trust store password.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * 
 	 * @param trustStorePassword
-	 *            <div class="en">the new trust store password</div>
-	 *            <div class="de">das neue trust store password.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new trust store password</div> <div
+	 *            class="de">das neue trust store password.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setTrustStorePassword(String trustStorePassword) {
 		this.trustStorePassword = trustStorePassword;
+	}
+
+	public void setUri(URI uri) {
+		this.uri = uri;
+	}
+
+	/**
+	 * <div class="en">Sets the key store for TLS communication
+	 * 
+	 * @param keyStore
+	 * @param keyStorePassword
+	 *            </div>
+	 */
+	private void setKeyStore(String keyStore, String keyStorePassword) {
+		this.keyStore = keyStore;
+		this.keyStorePassword = keyStorePassword;
+		trustStore = keyStore;
+		trustStorePassword = keyStorePassword;
+
+		if (keyStore != null) {
+			System.setProperty("javax.net.ssl.keyStore", keyStore);
+			System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+			System.setProperty("javax.net.ssl.trustStore", trustStore);
+			System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+		}
 	}
 
 }
