@@ -38,7 +38,6 @@ import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
-import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
@@ -56,6 +55,7 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -155,12 +155,14 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public Consumable createConsumable1() {
-		Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
+		Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1),
+				code1);
 		return c;
 	}
 
 	public Consumable createConsumable2() {
-		Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
+		Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2),
+				code2);
 		return c;
 	}
 
@@ -609,8 +611,8 @@ public class CdaChVacdTest extends TestUtils {
 	public void testDocMetadata(String constructorName, CdaChVacd doc) {
 		assertNotNull(constructorName + " Constructor - DocumentRoot is null", doc.getDocRoot());
 		assertNotNull(constructorName + " Constructor - Document is null", doc.getDoc());
-		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc.getDoc()
-				.getLanguageCode().getCode());
+		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc
+				.getDoc().getLanguageCode().getCode());
 	}
 
 	// 11
@@ -649,8 +651,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		i.addReason(reason2);
 		i.getReasons();
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
-				i.getReasons().get(0).getReference());
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", i.getReasons()
+				.get(0).getReference());
 		assertEquals(numS1, i.getReasons().get(0).getReferenceId());
 	}
 
@@ -800,7 +802,8 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(isEqual(code1, r1.getCode()));
 
 		r1.setReference(url);
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de", r1.getReference());
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
+				r1.getReference());
 
 		r1.setReferenceId(numS1);
 		assertEquals(numS1, r1.getReferenceId());

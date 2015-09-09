@@ -17,7 +17,7 @@
 package org.ehealth_connector.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.enums.CodeSystems;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -42,8 +42,8 @@ public class Organization {
 	 * 
 	 * @param organization
 	 * <br>
-	 *          <div class="de"> organization</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> organization</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
 		mOrganization = organization;
@@ -53,7 +53,7 @@ public class Organization {
 	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
 	 * 
 	 * @param name
-	 *          Name der Organisation
+	 *            Name der Organisation
 	 */
 	public Organization(String name) {
 		mOrganization = CDAFactory.eINSTANCE.createOrganization();
@@ -61,15 +61,15 @@ public class Organization {
 	}
 
 	/**
-	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene
-	 * ID (GLN) verfügt.
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine
+	 * eigene ID (GLN) verfügt.
 	 * 
 	 * @param name
-	 *          Name der Organisation
+	 *            Name der Organisation
 	 * @param gln
 	 * <br>
-	 *          <div class="de"> gln</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> gln</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Organization(String name, String gln) {
 		this(name);
@@ -83,7 +83,7 @@ public class Organization {
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
 	 * 
 	 * @param address
-	 *          Adresse
+	 *            Adresse
 	 */
 	public void addAddress(Address address) {
 		getMdhtOrganization().getAddrs().add(address.copyMdhtAdress());
@@ -93,7 +93,7 @@ public class Organization {
 	 * Weist der Organisation eine ID zu.
 	 * 
 	 * @param id
-	 *          Der neue Identificator
+	 *            Der neue Identificator
 	 */
 	public void addId(Identificator id) {
 		mOrganization.getIds().add(id.getIi());
@@ -103,7 +103,7 @@ public class Organization {
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
 	 * 
 	 * @param name
-	 *          Name
+	 *            Name
 	 */
 	public void addName(String name) {
 		ON orgaName = DatatypesFactory.eINSTANCE.createON();
@@ -115,7 +115,7 @@ public class Organization {
 	 * Weist der Organisation eine Webseite zu.
 	 * 
 	 * @param url
-	 *          URL der Webseite
+	 *            URL der Webseite
 	 */
 	public void addWebsite(String url) {
 		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -183,8 +183,9 @@ public class Organization {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param telecoms
-	 *          <div class="en">the new telecoms</div> <div class="de">das neue
-	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new telecoms</div> <div class="de">das
+	 *            neue telecoms.</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));

@@ -18,11 +18,11 @@ package org.ehealth_connector.cda;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.enums.CodeSystems;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Util;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -46,17 +46,17 @@ public class Consumable {
 	private ProductEntry mProductEntry;
 
 	/**
-	 * <div class="en">Creates an object, which represents a consumable substance.
-	 * This constructor will be used, if you want to initialize an empty object
-	 * (true) or if you want to code that the substance is unknown
+	 * <div class="en">Creates an object, which represents a consumable
+	 * substance. This constructor will be used, if you want to initialize an
+	 * empty object (true) or if you want to code that the substance is unknown
 	 * (false).</div><div class="de"> Erzeugt ein Objekt welches eine Substanz
 	 * repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres Object
 	 * initialisiert werden soll (true) oder codiert werden soll, dass die
 	 * Substanz unbekannt ist (false)</div>
 	 * 
 	 * @param consumableKnown
-	 *          true: Erstellung eines leeren Objekts, false: Es sind keine
-	 *          Impfungen bekannt.
+	 *            true: Erstellung eines leeren Objekts, false: Es sind keine
+	 *            Impfungen bekannt.
 	 */
 	public Consumable(boolean consumableKnown) {
 		this("");
@@ -68,7 +68,7 @@ public class Consumable {
 	 * verabreichende Substanz repräsentiert.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          Handelsname des Impfstoffes
+	 *            Handelsname des Impfstoffes
 	 */
 	public Consumable(String tradeNameOfVaccine) {
 		this(tradeNameOfVaccine, null);
@@ -82,12 +82,12 @@ public class Consumable {
 	 * werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          <div class="en">trade name of vaccine</div> <div
-	 *          class="de">Handelsname des Impfstoffes</div>
+	 *            <div class="en">trade name of vaccine</div> <div
+	 *            class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *          <div class="en">GTIN, GLN or swissINDEX.</div> <div
-	 *          class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein
-	 *          GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *            <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *            class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *            ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * 
 	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 */
@@ -99,21 +99,21 @@ public class Consumable {
 	 * <div class="en">Creates an object, which represents a consumable
 	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
 	 * verabreichende Substanz repräsentiert. Dieses Objekt kann einer
-	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden. Wenn
-	 * der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland
+	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
+	 * Wenn der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland
 	 * verabreichte Impfung), dann muss das Antigen mittels WHO ATC angegeben
 	 * werden. Wenn in einem Produkt mehrere Antigene enthalten sind, MUSS das
 	 * Immunization Element für jedes Antigen je einmal angegeben werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          <div class="en">trade name of vaccine</div> <div
-	 *          class="de">Handelsname des Impfstoffes</div>
+	 *            <div class="en">trade name of vaccine</div> <div
+	 *            class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *          <div class="en">GTIN, GLN or swissINDEX.</div> <div
-	 *          class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS ein
-	 *          GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *            <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *            class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *            ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * @param whoAtcCode
-	 *          <div class="en">who atc code</div>
+	 *            <div class="en">who atc code</div>
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin, Code whoAtcCode) {
 
@@ -145,7 +145,7 @@ public class Consumable {
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param codedId
-	 *          das codedId Objekt welches gesetzt wird
+	 *            das codedId Objekt welches gesetzt wird
 	 */
 	public void addManufacturedMaterialTranslation(Code codedId) {
 		mMaterial.getCode().getTranslations().add(codedId.getCD());
@@ -201,8 +201,10 @@ public class Consumable {
 	public Identificator getManufacturedProductId() {
 		for (II id : mProductEntry.getIds()) {
 			if (id.getRoot() != null && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())
-					|| id.getRoot() != null && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId())
-					|| id.getRoot() != null && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+					|| id.getRoot() != null
+					&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId())
+					|| id.getRoot() != null
+					&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 				Identificator ide = new Identificator(id);
 				return ide;
 			}
@@ -248,14 +250,15 @@ public class Consumable {
 	 * @return Code <div class="en">the who atc code</div>
 	 */
 	public Code getWhoAtcCode() {
-		return Util.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(), mMaterial.getCode());
+		return Util.getTranslationOrCode(CodeSystems.WHOATCCode.getCodeSystemId(),
+				mMaterial.getCode());
 	}
 
 	/**
 	 * Sets the Lot Number (Chargennummer)
 	 * 
 	 * @param text
-	 *          the lot number text
+	 *            the lot number text
 	 */
 	public void setLotNr(String text) {
 		if (!text.equals("")) {
@@ -270,8 +273,8 @@ public class Consumable {
 	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
 	 * 
 	 * @param gtinOrPharmacodeOrGln
-	 *          the new manufactured product id. If null, a NullFlavor.UNK will be
-	 *          set instead.
+	 *            the new manufactured product id. If null, a NullFlavor.UNK
+	 *            will be set instead.
 	 */
 	public void setManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
@@ -288,7 +291,7 @@ public class Consumable {
 	 * Sets the Organization that manufactured this product
 	 * 
 	 * @param organization
-	 *          the organization
+	 *            the organization
 	 */
 	public void setManufacturer(Organization organization) {
 		mProductEntry.setManufacturerOrganization(organization.copyMdhtOrganization());
@@ -298,7 +301,7 @@ public class Consumable {
 	 * Sets the trade name.
 	 * 
 	 * @param tradeNameOfVaccine
-	 *          das tradeNameOfVaccine Objekt welches gesetzt wird
+	 *            das tradeNameOfVaccine Objekt welches gesetzt wird
 	 */
 	public void setTradeName(String tradeNameOfVaccine) {
 		EN en = DatatypesFactory.eINSTANCE.createEN();
@@ -314,7 +317,7 @@ public class Consumable {
 	 * Sets the who atc code (Use CodeSystem.WHOATCCode)
 	 * 
 	 * @param whoAtcCode
-	 *          das WHOATcCode Objekt welches gesetzt wird
+	 *            das WHOATcCode Objekt welches gesetzt wird
 	 */
 	public void setWhoAtcCode(Code whoAtcCode) {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
