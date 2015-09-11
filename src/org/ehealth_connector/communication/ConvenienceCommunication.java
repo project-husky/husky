@@ -158,7 +158,7 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(
-			DocumentDescriptor desc, InputStream inputStream, Destination repository) {
+			DocumentDescriptor desc, InputStream inputStream) {
 		if (inputStream == null)
 			try {
 				throw new DocumentNotAccessibleException();
@@ -168,7 +168,7 @@ public class ConvenienceCommunication {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc, repository));
+			return new DocumentMetadataCh(addXdsDocument(doc, desc));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -187,12 +187,11 @@ public class ConvenienceCommunication {
 	 *            the destination repository
 	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath,
-			Destination repository) {
+	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc, repository));
+			return new DocumentMetadataCh(addXdsDocument(doc, desc));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -212,12 +211,11 @@ public class ConvenienceCommunication {
 	 *            the destination repository
 	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
-			Destination repository) {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return addXdsDocument(doc, desc, repository);
+			return addXdsDocument(doc, desc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -236,12 +234,11 @@ public class ConvenienceCommunication {
 	 *            the destination repository
 	 * @return the document metadata (which have to be completed) </div>
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath,
-			Destination repository) {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return addXdsDocument(doc, desc, repository);
+			return addXdsDocument(doc, desc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -361,6 +358,7 @@ public class ConvenienceCommunication {
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
+		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
 		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		try {
@@ -387,6 +385,7 @@ public class ConvenienceCommunication {
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
+		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
 		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		try {
@@ -452,7 +451,7 @@ public class ConvenienceCommunication {
 	public void setAffinityDomain(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 	}
-
+	
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br />
@@ -461,7 +460,9 @@ public class ConvenienceCommunication {
 	 * 
 	 * @return the OHT XDSResponseType</div>
 	 */
-	public XDSResponseType submit() {
+	public XDSResponseType submit() {	
+		setDefaultKeystoreTruststore(affinityDomain.getRepository());
+		source = new B_Source(affinityDomain.getRepository().getUri());
 		// generate missing information for all documents
 		for (XDSDocument xdsDoc : txnData.getDocList()) {
 			try {
@@ -539,13 +540,9 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param doc
 	 * @param desc
-	 * @param repository
 	 * @return </div>
 	 */
-	private DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc,
-			Destination repository) {
-		source = new B_Source(repository.getUri());
-
+	private DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
@@ -699,5 +696,31 @@ public class ConvenienceCommunication {
 						"34133-9", "Summary of Episode Note", null));
 			}
 		}
+	}
+
+	private void setDefaultKeystoreTruststore(Destination dest) {
+		//TODO: When transmitting to registry / repository use this member to set the right keystore truststore as default
+		//FIXME: Look, if the code works without the organizational ID
+		//organizationalId = dest.getSenderOrganizationalOid();
+		
+		if (dest.getKeyStore() == null) {
+			System.clearProperty("javax.net.ssl.keyStore");
+			System.clearProperty("javax.net.ssl.keyStorePassword");
+			System.clearProperty("javax.net.ssl.trustStore");
+			System.clearProperty("javax.net.ssl.trustStorePassword");
+		} else {
+			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
+			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
+			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
+		}
+			System.setProperty("javax.net.debug", "all");
+			// System.setProperty("https.protocols", "TLSv1.2");
+			// System.setProperty("https.protocols", "TLSv1.2");
+			// System.setProperty("https.ciphersuites",
+			// "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
+	
+			// System.setProperty("https.ciphersuites",
+			// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
 	}
 }

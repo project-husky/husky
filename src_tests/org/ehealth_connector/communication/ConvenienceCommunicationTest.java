@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URISyntaxException;
@@ -79,33 +78,11 @@ public class ConvenienceCommunicationTest {
 	@Test
 	public void testAddDocument() {
 		try {
-			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath, repo);
+			DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
 			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
 			assertNotNull(c.getTxnData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	@Test
-	public void testConstructors() {
-		// Set System Properties to null
-		System.setProperty("javax.net.ssl.keyStore", "Null");
-		System.setProperty("javax.net.ssl.keyStorePassword", "Null");
-		System.setProperty("javax.net.ssl.trustStore", "Null");
-		System.setProperty("javax.net.ssl.trustStorePassword", "Null");
-
-		try {
-			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// Check if the System Properties have been set
-		assertEquals(KEY_STORE, System.getProperty("javax.net.ssl.keyStore"));
-		assertEquals(KEY_STORE_PASS, System.getProperty("javax.net.ssl.keyStorePassword"));
-		assertEquals(TRUST_STORE, System.getProperty("javax.net.ssl.trustStore"));
-		assertEquals(TRUST_STORE_PASS, System.getProperty("javax.net.ssl.trustStorePassword"));
 	}
 }
