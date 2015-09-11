@@ -142,7 +142,7 @@ public class CdaChVacd extends CdaCh {
 	 *            referenziert werden soll (z.B.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
 	 *            >
-	 * @param cascasingStylesheet
+	 * @param cascadingStylesheet
 	 *            <div class="en">Cascading stylesheet, which should be
 	 *            referenced to render a human readable representation of the
 	 *            document</div> <div class="de">Cascasing Stylesheet, welches

@@ -319,7 +319,7 @@ public class Immunization {
 	/**
 	 * Gets the specified id value based on its code system.
 	 * 
-	 * @param The
+	 * @param codeSystem
 	 *            id's identity domain
 	 * @return the id or null if it doesn't exist
 	 */

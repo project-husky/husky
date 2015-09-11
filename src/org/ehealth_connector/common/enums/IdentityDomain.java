@@ -1,28 +1,24 @@
-/* **********************************************************************
- * Author: pkistler
- * Date  : Jul 14, 2015
- * File  : IndentityDomain.java
- * **********************************************************************
- * ehealth_connector-common
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * 
- * This code is made available under the terms of the Eclipse Public License v1.0.
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- * **********************************************************************
- */
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.common.enums;
 
 /**
  * Interface for CodeSystems
  * 
- * @author pkistler 
- * @version 1.0
- * @created Jul 14, 2015 3:28:44 PM
- *
  */
 public interface IdentityDomain {
 	/**

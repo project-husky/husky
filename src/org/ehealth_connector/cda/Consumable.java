@@ -89,7 +89,7 @@ public class Consumable {
 	 *            class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
 	 *            ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * 
-	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
+	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
 		this(tradeNameOfVaccine, gtin, null);
@@ -270,7 +270,7 @@ public class Consumable {
 	 * Sets the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss
 	 * Index Code
 	 * 
-	 * @see org.ehealth_connector.cda.ch.enums.CodeSystems
+	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 * 
 	 * @param gtinOrPharmacodeOrGln
 	 *            the new manufactured product id. If null, a NullFlavor.UNK

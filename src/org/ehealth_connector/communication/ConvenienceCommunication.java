@@ -153,8 +153,6 @@ public class ConvenienceCommunication {
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
 	 *            the input stream to the document
-	 * @param repository
-	 *            the destination repository
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(
@@ -183,8 +181,6 @@ public class ConvenienceCommunication {
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
-	 * @param repository
-	 *            the destination repository
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath) {
@@ -207,8 +203,6 @@ public class ConvenienceCommunication {
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
 	 *            The input stream to the document
-	 * @param repository
-	 *            the destination repository
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
@@ -230,8 +224,6 @@ public class ConvenienceCommunication {
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
-	 * @param repository
-	 *            the destination repository
 	 * @return the document metadata (which have to be completed) </div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
