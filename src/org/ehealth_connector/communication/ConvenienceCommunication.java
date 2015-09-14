@@ -528,11 +528,11 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">TODO Axel
+	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
 	 * 
-	 * @param doc
-	 * @param desc
-	 * @return </div>
+	 * @param doc the document
+	 * @param desc the Document descriptor
+	 * @return the DocumentMetadata
 	 */
 	private DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
 		if (txnData == null) {
@@ -560,7 +560,7 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs(?).
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs(?).</div>
 	 * 
 	 * @param docMetadata
 	 *            the doc metadata </div>
@@ -586,7 +586,7 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Generate missing doc entry attributes.
+	 * <div class="en">Generate missing doc entry attributes.</div>
 	 * 
 	 * @param docEntryUuid
 	 *            the doc entry uuid </div>
@@ -638,7 +638,7 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">TODO Axel</div>
+	 * <div class="en">Generate missing Submission Set attributes</div>
 	 */
 	private void generateMissingSubmissionSetAttributes() {
 		// Create SubmissionSet
@@ -690,11 +690,12 @@ public class ConvenienceCommunication {
 		}
 	}
 
-	private void setDefaultKeystoreTruststore(Destination dest) {
-		//TODO: When transmitting to registry / repository use this member to set the right keystore truststore as default
-		//FIXME: Look, if the code works without the organizational ID
-		//organizationalId = dest.getSenderOrganizationalOid();
-		
+	/**
+	 * Sets the key- and truststore for the default security domain
+	 * 
+	 * @param dest the Destination Object
+	 */
+	private void setDefaultKeystoreTruststore(Destination dest) {	
 		if (dest.getKeyStore() == null) {
 			System.clearProperty("javax.net.ssl.keyStore");
 			System.clearProperty("javax.net.ssl.keyStorePassword");
