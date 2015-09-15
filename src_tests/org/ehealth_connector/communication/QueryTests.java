@@ -2,11 +2,11 @@ package org.ehealth_connector.communication;
 
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.communication.ch.storedquery.FindDocumentsQuery;
-import org.ehealth_connector.communication.ch.storedquery.GetFolderAndContentsQuery;
-import org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery;
-import org.ehealth_connector.communication.storedquery.GetDocumentsQuery;
-import org.ehealth_connector.communication.storedquery.GetRelatedDocumentsQuery;
+import org.ehealth_connector.communication.ch.xd.storedquery.FindDocumentsQuery;
+import org.ehealth_connector.communication.ch.xd.storedquery.GetFolderAndContentsQuery;
+import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
+import org.ehealth_connector.communication.xd.storedquery.GetDocumentsQuery;
+import org.ehealth_connector.communication.xd.storedquery.GetRelatedDocumentsQuery;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
@@ -48,7 +48,7 @@ public class QueryTests extends XdsTestUtils {
 	
 	@Test
 	public void FindFoldersStoredQueryTest() {
-			FindFoldersStoredQuery q = new org.ehealth_connector.communication.storedquery.FindFoldersStoredQuery(patientId, avaiabilityStatus);
+			FindFoldersStoredQuery q = new org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery(patientId, avaiabilityStatus);
 		
 			StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
 			

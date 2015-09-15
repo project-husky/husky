@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.storedquery;
+package org.ehealth_connector.communication.xd.storedquery;
 
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;

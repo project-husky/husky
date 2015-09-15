@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.storedquery;
+package org.ehealth_connector.communication.xd.storedquery;
 
 /**
  * Interface for convenience stored queries

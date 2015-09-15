@@ -269,13 +269,13 @@ public class XdsUtil {
 		}
 	}
 	
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(org.ehealth_connector.communication.storedquery.DateTimeRange[] dtr) {
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dtr) {
 		if (dtr == null) return null;
 		else {
 			org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
 			
 			int i = 0;
-			for (org.ehealth_connector.communication.storedquery.DateTimeRange dt : dtr) {
+			for (org.ehealth_connector.communication.xd.storedquery.DateTimeRange dt : dtr) {
 				dtrArray[i] = dt.getOhtDateTimeRange();
 				i++;
 			}

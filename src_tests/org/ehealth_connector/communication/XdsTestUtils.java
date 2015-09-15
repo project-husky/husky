@@ -41,9 +41,9 @@ public class XdsTestUtils {
 	public static DateTimeRange dateTimeRange1;
 	public static DateTimeRange dateTimeRange2;
 	public static DateTimeRange[] dateTimeRanges;
-	public static org.ehealth_connector.communication.storedquery.DateTimeRange eDateTimeRange1;
-	public static org.ehealth_connector.communication.storedquery.DateTimeRange eDateTimeRange2;
-	public static org.ehealth_connector.communication.storedquery.DateTimeRange eDateTimeRanges[];
+	public static org.ehealth_connector.communication.xd.storedquery.DateTimeRange eDateTimeRange1;
+	public static org.ehealth_connector.communication.xd.storedquery.DateTimeRange eDateTimeRange2;
+	public static org.ehealth_connector.communication.xd.storedquery.DateTimeRange eDateTimeRanges[];
 	
 	public static Date d1;
 	public static Date d2;
@@ -58,9 +58,9 @@ public class XdsTestUtils {
 			
 			d1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
 			d2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
-			eDateTimeRange1 = new org.ehealth_connector.communication.storedquery.DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, d1, d2);
-			eDateTimeRange2 = new org.ehealth_connector.communication.storedquery.DateTimeRange(DateTimeRangeAttributes.SERVICE_START_TIME, d1, d2);
-			eDateTimeRanges = new org.ehealth_connector.communication.storedquery.DateTimeRange[]{eDateTimeRange1, eDateTimeRange2};
+			eDateTimeRange1 = new org.ehealth_connector.communication.xd.storedquery.DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, d1, d2);
+			eDateTimeRange2 = new org.ehealth_connector.communication.xd.storedquery.DateTimeRange(DateTimeRangeAttributes.SERVICE_START_TIME, d1, d2);
+			eDateTimeRanges = new org.ehealth_connector.communication.xd.storedquery.DateTimeRange[]{eDateTimeRange1, eDateTimeRange2};
 		} catch (MalformedQueryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

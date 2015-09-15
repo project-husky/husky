@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.storedquery;
+package org.ehealth_connector.communication.xd.storedquery;
 
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
