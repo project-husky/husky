@@ -10,12 +10,11 @@ public abstract class AbstractStoredQuery implements StoredQueryInterface {
 	 */
 	protected org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery ohtStoredQuery = null;
 
-	/*
+	/**
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
 	 * 
-	 * @see
-	 * org.ehealth_connector.communication.storedquery.StoredQueryInterface#
-	 * getOhtStoredQuery()
+	 * @see org.ehealth_connector.communication.storedquery.StoredQueryInterface#
+	 *      getOhtStoredQuery()
 	 * 
 	 * @returns the OHT StoredQuery
 	 */

@@ -12,6 +12,7 @@ import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 public class FindFoldersStoredQuery extends AbstractStoredQuery {
 
 	/**
+	 * Construct a find folders stored query.
 	 *
 	 * @param patientId
 	 *            ID of the patient (required)
@@ -24,7 +25,6 @@ public class FindFoldersStoredQuery extends AbstractStoredQuery {
 					XdsUtil.convertEhcIdentificator(patientId),
 					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() });
 		} catch (MalformedStoredQueryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
