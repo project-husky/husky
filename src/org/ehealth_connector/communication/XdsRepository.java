@@ -8,23 +8,25 @@ import java.net.URI;
 public class XdsRepository {
 	private String id;
 	private URI uri;
-	
+
 	/**
 	 * Standard constructor.
 	 */
 	public XdsRepository() {
 	}
-	
+
 	/**
 	 * Constructor.
 	 * 
-	 * @param id repository ID
-	 * @param uri repository URI
+	 * @param id
+	 *            repository ID
+	 * @param uri
+	 *            repository URI
 	 */
 	public XdsRepository(String id, URI uri) {
 		this.setRepository(id, uri);
 	}
-	
+
 	/**
 	 * Gets the repository ID
 	 * 
@@ -46,8 +48,10 @@ public class XdsRepository {
 	/**
 	 * Set the necessary connection details for a repository.
 	 * 
-	 * @param id repository ID
-	 * @param uri repository URI
+	 * @param id
+	 *            repository ID
+	 * @param uri
+	 *            repository URI
 	 */
 	public void setRepository(String id, URI uri) {
 		this.id = id;
