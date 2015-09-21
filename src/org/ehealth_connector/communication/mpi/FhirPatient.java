@@ -75,6 +75,11 @@ import ca.uhn.fhir.model.primitive.StringDt;
 public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1520681931095452610L;
+
+	/**
 	 * converts the mdht AD to the fhir address
 	 * 
 	 * @param address

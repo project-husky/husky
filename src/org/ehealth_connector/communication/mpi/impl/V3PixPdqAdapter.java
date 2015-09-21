@@ -644,10 +644,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					case WORK:
 						addressType = "WP";
 						break;
-					case TEMP:
+					case TEMPORARY:
 						addressType = "TMP";
 						break;
-					case OLD:
+					case OLD___INCORRECT:
 						addressType = "OLD";
 						break;
 					}
@@ -999,10 +999,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				addressDt.setUse(AddressUseEnum.WORK);
 			}
 			if (ad.getUse().size() > 0 && "TMP".equals(ad.getUse().get(0).getName())) {
-				addressDt.setUse(AddressUseEnum.TEMP);
+				addressDt.setUse(AddressUseEnum.TEMPORARY);
 			}
 			if (ad.getUse().size() > 0 && "OLD".equals(ad.getUse().get(0).getName())) {
-				addressDt.setUse(AddressUseEnum.OLD);
+				addressDt.setUse(AddressUseEnum.OLD___INCORRECT);
 			}
 		}
 		if (ad.getStreetAddressLine() != null && ad.getStreetAddressLine().size() > 0) {

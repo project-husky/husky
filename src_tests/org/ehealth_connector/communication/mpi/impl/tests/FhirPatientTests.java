@@ -528,6 +528,7 @@ public class FhirPatientTests {
 			// We failed validation!
 			System.out.println("Validation failed");
 			// The result contains an OperationOutcome outlining the failures
+			@SuppressWarnings("deprecation")
 			String results = ctx.newXmlParser().setPrettyPrint(true)
 					.encodeResourceToString(result.getOperationOutcome());
 			System.out.println(results);

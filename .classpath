@@ -115,7 +115,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/fhir/stax-api-1.0-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/fhir/stax2-api-3.1.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/fhir/woodstox-core-asl-4.4.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-base-1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-structures-dstu2-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-base-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fhir/hapi-fhir-structures-dstu2-1.2.jar"/>
+	<classpathentry kind="lib" path="lib_tests/hapi-fhir-validation-resources-dstu2-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

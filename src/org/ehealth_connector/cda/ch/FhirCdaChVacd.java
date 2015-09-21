@@ -72,6 +72,7 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.RatioDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
+import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
 import ca.uhn.fhir.model.dstu2.resource.Condition;
@@ -82,12 +83,11 @@ import ca.uhn.fhir.model.dstu2.resource.MedicationStatement.Dosage;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Observation.Related;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
-import ca.uhn.fhir.model.dstu2.resource.Other;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
 import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
@@ -109,8 +109,8 @@ public class FhirCdaChVacd {
 
 	/**
 	 * <div class="en">Type of the bundle to define wheter the resulting CDA
-	 * document contains full or masked patient demographics</div><div
-	 * class="de"></div><div class="fr"></div>
+	 * document contains full or masked patient demographics</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static enum DocTypeCode {
 		/**
@@ -118,10 +118,10 @@ public class FhirCdaChVacd {
 		 * demographics</div><div class="de"></div><div class="fr"></div>
 		 */
 		PATIENT, /**
-		 * <div class="en">the resulting CDA document contains masked
-		 * patient demographics</div><div class="de"></div><div
-		 * class="fr"></div>
-		 */
+					 * <div class="en">the resulting CDA document contains
+					 * masked patient demographics</div><div class="de"></div>
+					 * <div class="fr"></div>
+					 */
 		PSEUDONYMIZED
 	}
 
@@ -141,8 +141,13 @@ public class FhirCdaChVacd {
 	public static class MyMedicationStatement extends MedicationStatement {
 
 		/**
-		 * <div class="en">Person who documented the medication
-		 * statement</div><div class="de"></div><div class="fr"></div>
+		 * 
+		 */
+		private static final long serialVersionUID = -2062272744006946538L;
+
+		/**
+		 * <div class="en">Person who documented the medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "author")
 		@Extension(url = urnUseAsAuthor, definedLocally = false, isModifier = false)
@@ -150,8 +155,8 @@ public class FhirCdaChVacd {
 		private ResourceReferenceDt author;
 
 		/**
-		 * <div class="en">Code of the medication administration</div><div
-		 * class="de"></div><div class="fr"></div>
+		 * <div class="en">Code of the medication administration</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "code")
 		@Extension(url = urnUseAsCode, definedLocally = false, isModifier = false)
@@ -159,8 +164,8 @@ public class FhirCdaChVacd {
 		private CodingDt code;
 
 		/**
-		 * <div class="en">Remark for this medication statement</div><div
-		 * class="de"></div><div class="fr"></div>
+		 * <div class="en">Remark for this medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "comment")
 		@Extension(url = urnUseAsComment, definedLocally = false, isModifier = false)
@@ -168,8 +173,8 @@ public class FhirCdaChVacd {
 		private StringDt comment;
 
 		/**
-		 * <div class="en">LotNumber for this medication statement</div><div
-		 * class="de"></div><div class="fr"></div>
+		 * <div class="en">LotNumber for this medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "lot")
 		@Extension(url = urnUseAsLotNumbertext, definedLocally = false, isModifier = false)
@@ -186,8 +191,8 @@ public class FhirCdaChVacd {
 		private ResourceReferenceDt performer;
 
 		/**
-		 * <div class="en">List of reasons for this medication
-		 * statement</div><div class="de"></div><div class="fr"></div>
+		 * <div class="en">List of reasons for this medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "reasons")
 		@Extension(url = urnUseAsReason, definedLocally = false, isModifier = false)
@@ -195,17 +200,17 @@ public class FhirCdaChVacd {
 		private ResourceReferenceDt reasons;
 
 		/**
-		 * <div class="en">Empty constructor (default)</div><div
-		 * class="de"></div><div class="fr"></div>
+		 * <div class="en">Empty constructor (default)</div>
+		 * <div class="de"></div><div class="fr"></div>
 		 */
 		public MyMedicationStatement() {
 			super();
 		}
 
 		/**
-		 * @return <div class="en">author of this MedicationStatement</div><div
-		 *         class="de">Autor dieses MedicationStatements</div><div
-		 *         class="fr">auteur de ce MedicationStatement</div>
+		 * @return <div class="en">author of this MedicationStatement</div>
+		 *         <div class="de">Autor dieses MedicationStatements</div>
+		 *         <div class="fr">auteur de ce MedicationStatement</div>
 		 */
 		public ResourceReferenceDt getAuthor() {
 			if (this.author == null) {
@@ -215,18 +220,18 @@ public class FhirCdaChVacd {
 		}
 
 		/**
-		 * @return <div class="en">code of this MedicationStatement</div><div
-		 *         class="de">Code für dieses MedicationStatement</div><div
-		 *         class="fr">code de ce MedicationStatement</div>
+		 * @return <div class="en">code of this MedicationStatement</div>
+		 *         <div class="de">Code für dieses MedicationStatement</div>
+		 *         <div class="fr">code de ce MedicationStatement</div>
 		 */
 		public CodingDt getCode() {
 			return code;
 		}
 
 		/**
-		 * @return <div class="en">comment for this medication</div><div
-		 *         class="de">Kommentar zu diesem Medikament</div><div
-		 *         class="fr">commentaire tu médicament</div>
+		 * @return <div class="en">comment for this medication</div>
+		 *         <div class="de">Kommentar zu diesem Medikament</div>
+		 *         <div class="fr">commentaire tu médicament</div>
 		 */
 		public StringDt getComment() {
 			if (this.comment == null) {
@@ -236,9 +241,9 @@ public class FhirCdaChVacd {
 		}
 
 		/**
-		 * @return <div class="en">lot number of this medication</div><div
-		 *         class="de">Lotnummer des Medikaments</div><div
-		 *         class="fr">numero lot du médicament</div>
+		 * @return <div class="en">lot number of this medication</div>
+		 *         <div class="de">Lotnummer des Medikaments</div>
+		 *         <div class="fr">numero lot du médicament</div>
 		 */
 		public StringDt getLot() {
 			if (this.lot == null) {
@@ -261,9 +266,9 @@ public class FhirCdaChVacd {
 		}
 
 		/**
-		 * @return <div class="en">reason for this medication</div> <div
-		 *         class="de">Begründung für dieses Medikament</div><div
-		 *         class="fr">Justification de ce médicament</div>
+		 * @return <div class="en">reason for this medication</div>
+		 *         <div class="de">Begründung für dieses Medikament</div>
+		 *         <div class="fr">Justification de ce médicament</div>
 		 */
 		public ResourceReferenceDt getReasons() {
 			if (this.reasons == null) {
@@ -286,10 +291,9 @@ public class FhirCdaChVacd {
 
 		/**
 		 * @param author
-		 *            <div class="en">author of this
-		 *            MedicationStatement</div><div class="de">Autor dieses
-		 *            MedicationStatements</div><div class="fr">auteur de ce
-		 *            MedicationStatement</div>
+		 *            <div class="en">author of this MedicationStatement</div>
+		 *            <div class="de">Autor dieses MedicationStatements</div>
+		 *            <div class="fr">auteur de ce MedicationStatement</div>
 		 */
 		public void setAuthor(ResourceReferenceDt author) {
 			this.author = author;
@@ -297,9 +301,9 @@ public class FhirCdaChVacd {
 
 		/**
 		 * @param code
-		 *            <div class="en">code of this MedicationStatement</div><div
-		 *            class="de">Code für dieses MedicationStatement</div><div
-		 *            class="fr">code de ce MedicationStatement</div>
+		 *            <div class="en">code of this MedicationStatement</div>
+		 *            <div class="de">Code für dieses MedicationStatement</div>
+		 *            <div class="fr">code de ce MedicationStatement</div>
 		 */
 		public void setCode(CodingDt code) {
 			this.code = code;
@@ -307,9 +311,9 @@ public class FhirCdaChVacd {
 
 		/**
 		 * @param comment
-		 *            <div class="en">comment for this medication</div><div
-		 *            class="de">Kommentar zu diesem Medikament</div><div
-		 *            class="fr">commentaire tu médicament</div>
+		 *            <div class="en">comment for this medication</div>
+		 *            <div class="de">Kommentar zu diesem Medikament</div>
+		 *            <div class="fr">commentaire tu médicament</div>
 		 */
 		public void setComment(StringDt comment) {
 			this.comment = comment;
@@ -317,9 +321,9 @@ public class FhirCdaChVacd {
 
 		/**
 		 * @param lot
-		 *            <div class="en">lot number of this medication</div><div
-		 *            class="de">Lotnummer des Medikaments</div><div
-		 *            class="fr">numero lot du médicament</div>
+		 *            <div class="en">lot number of this medication</div>
+		 *            <div class="de">Lotnummer des Medikaments</div>
+		 *            <div class="fr">numero lot du médicament</div>
 		 */
 		public void setLot(StringDt lot) {
 			this.lot = lot;
@@ -338,9 +342,9 @@ public class FhirCdaChVacd {
 
 		/**
 		 * @param reasons
-		 *            <div class="en">reason for this medication</div> <div
-		 *            class="de">Begründung für dieses Medikament</div><div
-		 *            class="fr">Justification de ce médicament</div>
+		 *            <div class="en">reason for this medication</div>
+		 *            <div class="de">Begründung für dieses Medikament</div>
+		 *            <div class="fr">Justification de ce médicament</div>
 		 */
 		public void setReasons(ResourceReferenceDt reasons) {
 			this.reasons = reasons;
@@ -349,126 +353,126 @@ public class FhirCdaChVacd {
 	};
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div><div
-	 * class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this OID</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String oidConfidentialityCode = "urn:oid:"
 			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div><div
-	 * class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this OID</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String oidLanguage = "urn:oid:"
 			+ CodeSystems.LanguageCode.getCodeSystemId();
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div><div
-	 * class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this OID</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String oidVACD = "urn:oid:" + CdaChVacd.OID_MAIN;
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsActiveProblemConcern = "urn:ehealth_connector:FhirExtension:useAsActiveProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsAllergyProblemConcern = "urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsAuthor = "urn:ehealth_connector:FhirExtension:useAsAuthor";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsCode = "urn:ehealth_connector:FhirExtension:urnUseAsCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsComment = "urn:ehealth_connector:FhirExtension:useAsComment";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsCustodian = "urn:ehealth_connector:FhirExtension:useAsCustodian";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsIdentifier = "urn:ehealth_connector:FhirExtension:useAsIdentifier";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsImmunization = "urn:ehealth_connector:FhirExtension:useAsImmunization";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsImmunizationRecommendation = "urn:ehealth_connector:FhirExtension:useAsImmunizationRecommendation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsLaboratoryObservation = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsLegalAuthenticator = "urn:ehealth_connector:FhirExtension:useAsLegalAuthenticator";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsLotNumbertext = "urn:ehealth_connector:FhirExtension:urnUseAsLotNumbertext";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsPastProblemConcern = "urn:ehealth_connector:FhirExtension:useAsPastProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsPerformer = "urn:ehealth_connector:FhirExtension:useAsPerformer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsPregnancyObservation = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR
-	 * extension</div><div class="de"></div><div class="fr"></div>
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsReason = "urn:ehealth_connector:FhirExtension:useAsReason";
 
 	private final FhirContext mFhirCtx = new FhirContext();
 
 	/**
-	 * <div class="en">Empty constructor (default)</div><div
-	 * class="de"></div><div class="fr"></div>
+	 * <div class="en">Empty constructor (default)</div><div class="de"></div>
+	 * <div class="fr"></div>
 	 */
 	public FhirCdaChVacd() {
 	}
@@ -484,11 +488,11 @@ public class FhirCdaChVacd {
 	 *            <div class="en">desired stylesheet for the CDA document</div>
 	 *            <div class="de"></div> <div class="fr"></div>
 	 * @param css
-	 *            <div class="en">desired CSS for the CDA document</div> <div
-	 *            class="de"></div> <div class="fr"></div>
+	 *            <div class="en">desired CSS for the CDA document</div>
+	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC CdaChVacd instance containing payload of the
-	 *         given FHIR Bundle resource</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *         given FHIR Bundle resource</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public org.ehealth_connector.cda.ch.CdaChVacd createCdaChVacdFromFHIRBundle(Bundle bundle,
 			String xsl, String css) {
@@ -515,7 +519,8 @@ public class FhirCdaChVacd {
 		}
 
 		// Active Problems / Problemliste
-		for (ActiveProblemConcern activeProblemConcernEntry : getActiveProblemConcernEntries(bundle)) {
+		for (ActiveProblemConcern activeProblemConcernEntry : getActiveProblemConcernEntries(
+				bundle)) {
 			doc.addActiveProblemConcern(activeProblemConcernEntry);
 		}
 
@@ -524,7 +529,7 @@ public class FhirCdaChVacd {
 			doc.addPastProblemConcern(pastProblemConcern);
 		}
 
-		// Allergies and Other Adverse Reactions / Allergien und
+		// Allergies and Basic Adverse Reactions / Allergien und
 		// Unverträglichkeiten
 		for (AllergyConcern allergyProblemConcern : getAllergyProblemConcernEntries(bundle)) {
 			doc.addAllergyConcern(allergyProblemConcern);
@@ -550,7 +555,8 @@ public class FhirCdaChVacd {
 			doc.addPregnancyHistory(ph);
 		}
 
-		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(bundle)) {
+		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(
+				bundle)) {
 			doc.addImmunizationRecommendation(immunizationRecommendation);
 		}
 
@@ -563,8 +569,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">list of eHC ActiveProblemConcerns</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">list of eHC ActiveProblemConcerns</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public ArrayList<org.ehealth_connector.cda.ActiveProblemConcern> getActiveProblemConcernEntries(
 			Bundle bundle) {
@@ -599,12 +605,13 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(MedicationStatement fhirMedicationStatement) {
+	public org.ehealth_connector.common.Author getAuthor(
+			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.common.Author retVal = null;
 		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(urnUseAsAuthor).isEmpty()) {
 			ResourceReferenceDt refAuthor = (ResourceReferenceDt) fhirMedicationStatement
@@ -636,8 +643,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the comment as string</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">the comment as string</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public String getComment(Bundle bundle) {
 		String retVal = "";
@@ -660,9 +667,9 @@ public class FhirCdaChVacd {
 	public Confidentiality getConfidentialityCode(Bundle bundle) {
 		Confidentiality retVal = Confidentiality.NORMAL; // default
 		for (Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Other) {
-				Other fhirOther = (Other) entry.getResource();
-				CodingDt langCode = fhirOther.getCode().getCodingFirstRep();
+			if (entry.getResource() instanceof Basic) {
+				Basic fhirBasic = (Basic) entry.getResource();
+				CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
 				if (langCode.getSystem().equals(oidConfidentialityCode)) {
 					if (langCode.getCode().toLowerCase().equals("veryrestricted")) {
 						retVal = Confidentiality.VERY_RESTRICTED;
@@ -708,9 +715,9 @@ public class FhirCdaChVacd {
 	public LanguageCode getDocLanguage(Bundle bundle) {
 		LanguageCode retVal = LanguageCode.GERMAN; // default
 		for (Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Other) {
-				Other fhirOther = (Other) entry.getResource();
-				CodingDt langCode = fhirOther.getCode().getCodingFirstRep();
+			if (entry.getResource() instanceof Basic) {
+				Basic fhirBasic = (Basic) entry.getResource();
+				CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
 				if (langCode.getSystem().equals(oidLanguage)) {
 					if (langCode.getCode().toLowerCase().startsWith("de")) {
 						retVal = LanguageCode.GERMAN;
@@ -738,9 +745,9 @@ public class FhirCdaChVacd {
 	public DocTypeCode getDocType(Bundle bundle) {
 		DocTypeCode retVal = DocTypeCode.PATIENT; // default
 		for (Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Other) {
-				Other fhirOther = (Other) entry.getResource();
-				CodingDt langCode = fhirOther.getCode().getCodingFirstRep();
+			if (entry.getResource() instanceof Basic) {
+				Basic fhirBasic = (Basic) entry.getResource();
+				CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
 				if (langCode.getSystem().equals(oidVACD)) {
 					if (langCode.getCode().toLowerCase().equals("patient")) {
 						retVal = DocTypeCode.PATIENT;
@@ -801,7 +808,8 @@ public class FhirCdaChVacd {
 		for (Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(urnUseAsImmunizationRecommendation).isEmpty()
 					&& (entry.getResource() instanceof MedicationStatement)) {
-				retVal.add(getImmunizationRecommendation((MedicationStatement) entry.getResource()));
+				retVal.add(
+						getImmunizationRecommendation((MedicationStatement) entry.getResource()));
 			}
 		}
 		return retVal;
@@ -811,8 +819,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">list of eHC Immunizations</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">list of eHC Immunizations</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public ArrayList<org.ehealth_connector.cda.Immunization> getImmunizations(Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.Immunization>();
@@ -829,8 +837,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">list of eHC LaboratoryObservations</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">list of eHC LaboratoryObservations</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public ArrayList<org.ehealth_connector.cda.LaboratoryObservation> getLaboratoryObservations(
 			Bundle bundle) {
@@ -848,8 +856,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public org.ehealth_connector.common.Author getLegalAuthenticator(Bundle bundle) {
 		org.ehealth_connector.common.Author retVal = null;
@@ -864,12 +872,13 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirOrganization
-	 *            <div class="en">FHIR Organization resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR Organization resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC Organization</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Organization getOrganization(Organization fhirOrganization) {
+	public org.ehealth_connector.common.Organization getOrganization(
+			Organization fhirOrganization) {
 		org.ehealth_connector.common.Organization retVal = null;
 		// Create the organization
 		retVal = new org.ehealth_connector.common.Organization(fhirOrganization.getName());
@@ -900,8 +909,8 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param orgRef
-	 *            <div class="en">FHIR ResourceReferenceDt resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR ResourceReferenceDt resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC Organization</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -917,8 +926,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">list of eHC PastProblemConcerns</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">list of eHC PastProblemConcerns</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public ArrayList<org.ehealth_connector.cda.PastProblemConcern> getPastProblemConcernEntries(
 			Bundle bundle) {
@@ -936,8 +945,8 @@ public class FhirCdaChVacd {
 	 * @param bundle
 	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Patient</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 * @return <div class="en">eHC Patient</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public org.ehealth_connector.common.Patient getPatient(Bundle bundle) {
 		Patient fhirPatient = null;
@@ -951,7 +960,8 @@ public class FhirCdaChVacd {
 		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 			gender = AdministrativeGender.FEMALE;
-		} else if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+		} else
+			if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
 			gender = AdministrativeGender.MALE;
 		}
 
@@ -984,10 +994,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public org.ehealth_connector.common.Author getPerformer(
 			MedicationStatement fhirMedicationStatement) {
@@ -1031,14 +1041,15 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">list of FHIR ListResource resources</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">list of FHIR ListResource resources</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public ListResource getReasons(MedicationStatement fhirMedicationStatement) {
 		ListResource retVal = null;
-		for (ExtensionDt ext : fhirMedicationStatement.getUndeclaredExtensionsByUrl(urnUseAsReason)) {
+		for (ExtensionDt ext : fhirMedicationStatement
+				.getUndeclaredExtensionsByUrl(urnUseAsReason)) {
 			retVal = (ListResource) ((ResourceReferenceDt) ext.getValue()).getResource();
 		}
 		if (retVal == null)
@@ -1051,8 +1062,8 @@ public class FhirCdaChVacd {
 	 * resource</div> <div class="de"></div> <div class="fr"></div>
 	 * 
 	 * @param fileName
-	 *            <div class="en">file to read</div> <div class="de"></div> <div
-	 *            class="fr"></div>
+	 *            <div class="en">file to read</div> <div class="de"></div>
+	 *            <div class="fr"></div>
 	 * @return <div class="en">FHIR Bundle resource containing the XML file
 	 *         content</div> <div class="de"></div> <div class="fr"></div>
 	 */
@@ -1065,21 +1076,21 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirCondition
-	 *            <div class="en">FHIR Condition resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC ActiveProblemConcern</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR Condition resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC ActiveProblemConcern</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ActiveProblemConcern getActiveProblemConcern(
 			Condition fhirCondition) {
 		org.ehealth_connector.cda.ActiveProblemConcern retVal = null;
 
 		String concern = fhirCondition.getNotes();
-		Date date = fhirCondition.getDateAsserted();
+		Date date = fhirCondition.getDateRecorded();
 
 		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getClinicalStatusElement().getValueAsEnum());
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
 
 		// Create the ActiveProblemConcern
 		retVal = new org.ehealth_connector.cda.ActiveProblemConcern(concern, date, problemEntry,
@@ -1091,8 +1102,8 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirCondition
-	 *            <div class="en">FHIR Condition resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR Condition resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC AllergyConcern</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -1101,10 +1112,11 @@ public class FhirCdaChVacd {
 		org.ehealth_connector.cda.AllergyConcern retVal = null;
 
 		String concern = fhirCondition.getNotes();
-		org.ehealth_connector.cda.AllergyProblem problemEntry = getAllergyProblemEntry(fhirCondition);
+		org.ehealth_connector.cda.AllergyProblem problemEntry = getAllergyProblemEntry(
+				fhirCondition);
 
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getClinicalStatusElement().getValueAsEnum());
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
 		// // Create the AllergyProblemConcern
 		// retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
 		// problemEntry, problemStatusCode);
@@ -1113,13 +1125,14 @@ public class FhirCdaChVacd {
 		// retVal.setStartDate(fhirCondition.getDateAsserted());
 
 		retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
-				fhirCondition.getDateAsserted(), null, problemEntry, problemStatusCode);
+				fhirCondition.getDateRecorded(), null, problemEntry, problemStatusCode);
 
 		return retVal;
 
 	}
 
-	private org.ehealth_connector.cda.AllergyProblem getAllergyProblemEntry(Condition fhirCondition) {
+	private org.ehealth_connector.cda.AllergyProblem getAllergyProblemEntry(
+			Condition fhirCondition) {
 
 		org.ehealth_connector.cda.AllergyProblem retVal = new org.ehealth_connector.cda.AllergyProblem();
 		CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
@@ -1134,7 +1147,7 @@ public class FhirCdaChVacd {
 		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
 
 		// Date
-		retVal.setStartDate(fhirCondition.getDateAsserted());
+		retVal.setStartDate(fhirCondition.getDateRecorded());
 
 		// Value
 		retVal.addValue(new Code(removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
@@ -1145,10 +1158,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirPerson
-	 *            <div class="en">FHIR Person resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR Person resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	private org.ehealth_connector.common.Author getAuthor(Person fhirPerson) {
 		org.ehealth_connector.common.Author retVal = null;
@@ -1188,10 +1201,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Code</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Code</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	private Code getCode(MedicationStatement fhirMedicationStatement) {
 		Code retVal = null;
@@ -1206,10 +1219,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the comment as string</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">the comment as string</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private String getComment(MedicationStatement fhirMedicationStatement) {
 		String retVal = "";
@@ -1223,18 +1236,18 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Consumable</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Consumable</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.Consumable getConsumable(
 			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.cda.Consumable retVal = null;
 
-		Medication fhirMedi = (Medication) fhirMedicationStatement.getMedication().getResource();
+		Medication fhirMedi = (Medication) fhirMedicationStatement.getMedication();
 		// Create the consumable
-		retVal = new org.ehealth_connector.cda.Consumable(fhirMedi.getName());
+		retVal = new org.ehealth_connector.cda.Consumable(fhirMedi.getCode().getText());
 
 		// Set id
 		if (!fhirMedi.getUndeclaredExtensionsByUrl(urnUseAsIdentifier).isEmpty()) {
@@ -1262,8 +1275,8 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC Immunization</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -1295,7 +1308,7 @@ public class FhirCdaChVacd {
 			// doseQuantity
 			Double doseQuantity = null;
 			for (Dosage dosage : fhirMedicationStatement.getDosage()) {
-				doseQuantity = dosage.getQuantity().getValue().doubleValue();
+				doseQuantity = ((QuantityDt) dosage.getQuantity()).getValue().doubleValue();
 				retVal.setDosage(doseQuantity);
 				break; // currently only support for one doseQuantity
 			}
@@ -1330,10 +1343,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC ImmunizationRecommendation</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC ImmunizationRecommendation</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ImmunizationRecommendation getImmunizationRecommendation(
 			MedicationStatement fhirMedicationStatement) {
@@ -1351,12 +1364,12 @@ public class FhirCdaChVacd {
 
 		// code
 		Code code = getCode(fhirMedicationStatement);
-		MedicationsSpecialConditions specialConditions = MedicationsSpecialConditions.getEnum(code
-				.getCode());
+		MedicationsSpecialConditions specialConditions = MedicationsSpecialConditions
+				.getEnum(code.getCode());
 		if (specialConditions != null) {
 			retVal.setCode(specialConditions);
 		} else {
-			retVal.setShallNotBeAdministerd(fhirMedicationStatement.getWasNotGiven());
+			retVal.setShallNotBeAdministerd(fhirMedicationStatement.getWasNotTaken());
 
 			// effectiveTime
 			// not yet implemented: effectiveTime highValue
@@ -1365,7 +1378,7 @@ public class FhirCdaChVacd {
 			// doseQuantity
 			Double doseQuantity = null;
 			for (Dosage dosage : fhirMedicationStatement.getDosage()) {
-				doseQuantity = dosage.getQuantity().getValue().doubleValue();
+				doseQuantity = ((QuantityDt) dosage.getQuantity()).getValue().doubleValue();
 				retVal.setDosage(doseQuantity);
 				break; // currently only support for one doseQuantity
 			}
@@ -1408,18 +1421,18 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirObservation
-	 *            <div class="en">FHIR Observation resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC LaboratoryObservation</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR Observation resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC LaboratoryObservation</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.LaboratoryObservation getLaboratoryObservation(
 			Observation fhirObservation) {
 		org.ehealth_connector.cda.LaboratoryObservation retVal = new LaboratoryObservation();
 
 		CodingDt fhirCode = fhirObservation.getCode().getCodingFirstRep();
-		retVal.setCode(new Code(removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(), fhirCode
-				.getDisplay()));
+		retVal.setCode(new Code(removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
+				fhirCode.getDisplay()));
 		retVal.setEffectiveTime(fhirObservation.getIssued());
 		if (!fhirObservation.getPerformer().isEmpty()) {
 			ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
@@ -1430,9 +1443,8 @@ public class FhirCdaChVacd {
 		if (fhirObservation.getValue() instanceof QuantityDt) {
 			// type PQ
 			QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
-			retVal.addValue(new Value(fhirQuantity.getValue().toString(), Ucum.getEnum(fhirQuantity
-					.getUnits())));
-
+			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
+					Ucum.getEnum(fhirQuantity.getUnit())));
 		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
 			// type CD
 			CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
@@ -1450,9 +1462,9 @@ public class FhirCdaChVacd {
 		CodingDt fhirInterpretationCode = fhirObservation.getInterpretation().getCodingFirstRep();
 		if (fhirInterpretationCode != null) {
 			if (fhirInterpretationCode.getSystem() != null) {
-				retVal.setInterpretationCode(new Code(removeURIPrefix(fhirInterpretationCode
-						.getSystem()), fhirInterpretationCode.getCode(), fhirInterpretationCode
-						.getDisplay()));
+				retVal.setInterpretationCode(new Code(
+						removeURIPrefix(fhirInterpretationCode.getSystem()),
+						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
 			}
 		}
 
@@ -1464,14 +1476,15 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirMedicationStatement
-	 *            <div class="en">FHIR MedicationStatement resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">lotnumber text</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 *            <div class="en">FHIR MedicationStatement resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">lotnumber text</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	private String getLot(MedicationStatement fhirMedicationStatement) {
 		String retVal = "";
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(urnUseAsLotNumbertext).isEmpty()) {
+		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(urnUseAsLotNumbertext)
+				.isEmpty()) {
 			StringDt lot = (StringDt) fhirMedicationStatement
 					.getUndeclaredExtensionsByUrl(urnUseAsLotNumbertext).get(0).getValue();
 			retVal = lot.toString();
@@ -1481,10 +1494,10 @@ public class FhirCdaChVacd {
 
 	/**
 	 * @param fhirCondition
-	 *            <div class="en">FHIR Condition resource</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC PastProblemConcern</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR Condition resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC PastProblemConcern</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.PastProblemConcern getPastProblemConcern(
 			Condition fhirCondition) {
@@ -1499,8 +1512,8 @@ public class FhirCdaChVacd {
 
 		org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
 
-		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(fhirCondition
-				.getClinicalStatusElement().getValueAsEnum());
+		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
 
 		// Create the PastProblemConcern
 		retVal = new org.ehealth_connector.cda.PastProblemConcern(concern, problemEntry,
@@ -1528,15 +1541,14 @@ public class FhirCdaChVacd {
 	 *         class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
-			ConditionClinicalStatusEnum status) {
+	Condition condition)
+
+	{
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
-		if (status == ConditionClinicalStatusEnum.CONFIRMED) {
+		ConditionClinicalStatusCodesEnum status = condition.getClinicalStatusElement().getValueAsEnum();
+		if (status == ConditionClinicalStatusCodesEnum.RESOLVED) {
 			retVal = ProblemConcernStatusCode.COMPLETED;
-		} else if (status == ConditionClinicalStatusEnum.PROVISIONAL) {
-			retVal = ProblemConcernStatusCode.SUSPENDED;
-		} else if (status == ConditionClinicalStatusEnum.REFUTED) {
-			retVal = ProblemConcernStatusCode.ABORTED;
-		} else if (status == ConditionClinicalStatusEnum.WORKING) {
+		} else if (status == ConditionClinicalStatusCodesEnum.ACTIVE) {
 			retVal = ProblemConcernStatusCode.ACTIVE;
 		}
 		return retVal;
@@ -1557,7 +1569,7 @@ public class FhirCdaChVacd {
 		retVal.setCode(ProblemType.PROBLEM);
 
 		// Date
-		retVal.setStartDate(fhirCondition.getDateAsserted());
+		retVal.setStartDate(fhirCondition.getDateRecorded());
 
 		// Value
 		retVal.addValue(new Code(removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
@@ -1570,8 +1582,8 @@ public class FhirCdaChVacd {
 	 * @param fhirContactPoints
 	 *            <div class="en">list of FHIR ContactPointDt resources</div>
 	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Telecoms</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 * @return <div class="en">eHC Telecoms</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	private Telecoms getTelecoms(List<ContactPointDt> fhirContactPoints) {
 		Telecoms eHCTelecoms = new Telecoms();
@@ -1595,20 +1607,20 @@ public class FhirCdaChVacd {
 	}
 
 	/**
-	 * <div class="en">reads the given XML file (UTF-8) into a string</div> <div
-	 * class="de"></div> <div class="fr"></div>
+	 * <div class="en">reads the given XML file (UTF-8) into a string</div>
+	 * <div class="de"></div> <div class="fr"></div>
 	 * 
 	 * @param fileName
-	 *            <div class="en">file to read</div> <div class="de"></div> <div
-	 *            class="fr"></div>
-	 * @return <div class="en">string containing the XML file content</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">file to read</div> <div class="de"></div>
+	 *            <div class="fr"></div>
+	 * @return <div class="en">string containing the XML file content</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private String getXmlResource(String fileName) {
 		StringBuffer sb = new StringBuffer();
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(fileName), "UTF8"));
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 			String line;
 			try {
 				while ((line = bufferedReader.readLine()) != null) {
@@ -1627,13 +1639,14 @@ public class FhirCdaChVacd {
 	}
 
 	/**
-	 * <div class="en">removes urn:oid: prefix of the given string</div> <div
-	 * class="de"></div> <div class="fr"></div>
+	 * <div class="en">removes urn:oid: prefix of the given string</div>
+	 * <div class="de"></div> <div class="fr"></div>
 	 * 
-	 * @param <div class="en">value string beginning with the urn:oid:
-	 *        prefix</div> <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">string without the prefix</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @param <div
+	 *            class="en">value string beginning with the urn:oid:
+	 *            prefix</div> <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">string without the prefix</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private String removeURIPrefix(String value) {
 		String retVal = "";

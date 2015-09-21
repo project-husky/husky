@@ -11,7 +11,6 @@
 	<path id="ehealthconnector.classpath">
 		<pathelement location="bin" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar" />
-<!--		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0.jar" /> -->
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.log4j_1.2.15.v201005080500.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.eclipse.emf.common_2.6.0.v20100914-1218.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar" />
@@ -108,8 +107,8 @@
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar" />
 		<pathelement location="lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar" />
-		<pathelement location="lib/fhir/hapi-fhir-base-1.0.jar" />
-		<pathelement location="lib/fhir/hapi-fhir-structures-dstu2-1.0.jar" />
+		<pathelement location="lib/fhir/hapi-fhir-base-1.2.jar" />
+		<pathelement location="lib/fhir/hapi-fhir-structures-dstu2-1.2.jar" />
 		<pathelement location="lib/fhir/commons-io-2.4.jar" />
 		<pathelement location="lib/fhir/commons-lang3-3.3.2.jar" />
 		<pathelement location="lib/fhir/slf4j-api-1.7.9.jar" />
@@ -129,6 +128,7 @@
 		<pathelement location="dist/ehealthconnector.jar" />
 		<pathelement location="lib_tests/junit.jar" />
 		<pathelement location="lib_tests/org.hamcrest.core_1.1.0.v20090501071000.jar" />
+		<pathelement location="lib_tests/hapi-fhir-validation-resources-dstu2-1.2.jar" />
 	</path>
 
 	<target name="init">
@@ -260,8 +260,8 @@
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-1.1.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-logging-api-1.1.jar" />
 			<fatjar.jarsource file="${basedir}/lib/org.openhealthtools.ihe_2.0.2/org.openhealthtools.ihe.common.ws.axis2_2.0.2p.jar" />
-			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-base-1.0.jar" />
-			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-structures-dstu2-1.0.jar" />
+			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-base-1.2.jar" />
+			<fatjar.jarsource file="${basedir}/lib/fhir/hapi-fhir-structures-dstu2-1.2.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/commons-io-2.4.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/commons-lang3-3.3.2.jar" />
 			<fatjar.jarsource file="${basedir}/lib/fhir/slf4j-api-1.7.9.jar" />
