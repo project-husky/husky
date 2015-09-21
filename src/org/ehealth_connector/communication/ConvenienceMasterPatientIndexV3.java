@@ -155,6 +155,37 @@ public class ConvenienceMasterPatientIndexV3 {
 	}
 
 	/**
+	 * queries the mpi for patient according to the demographics criteria
+	 * specified.
+	 * 
+	 * @param mpiQuery
+	 *            the mpi query criterias
+	 * @param homeCommunityOID
+	 *            local patient domain (oid) of the source
+	 * @param pdqQuery
+	 *            communication endpoint
+	 * @param atna
+	 *            atna configuration
+	 * @return query response with patients
+	 */
+	public static MasterPatientIndexQueryResponse queryPatientDemographics(
+			MasterPatientIndexQuery mpiQuery, String homeCommunityOID, Destination pdqQuery,
+			AtnaConfig atna) {
+
+		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
+				(pdqQuery != null ? pdqQuery.getUri() : null),
+				(pdqQuery != null ? pdqQuery.getSenderApplicationOid() : null),
+				(pdqQuery != null ? pdqQuery.getSenderFacilityOid() : null),
+				(pdqQuery != null ? pdqQuery.getReceiverApplicationOid() : null),
+				(pdqQuery != null ? pdqQuery.getReceiverFacilityOid() : null), homeCommunityOID,
+				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
+				(atna != null ? atna.getAuditSourceId() : null), null);
+		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+		V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
+		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
+	}
+
+	/**
 	 * query the mpi with patient id and return the ids in the queried domains
 	 * from the mpi.
 	 * 
@@ -197,8 +228,8 @@ public class ConvenienceMasterPatientIndexV3 {
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), null);
 		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient),
-				requestedCommunityOIDs, null);
+		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs,
+				null);
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		if (requestedCommunityOIDs != null) {
 			for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
@@ -210,35 +241,6 @@ public class ConvenienceMasterPatientIndexV3 {
 			}
 		}
 		return list;
-	}
-
-	/**
-	 * queries the mpi for patients according to the criteria specified.
-	 * 
-	 * @param mpiQuery
-	 *            the mpi query criterias
-	 * @param homeCommunityOID
-	 *            local patient domain (oid) of the source
-	 * @param pdqQuery
-	 *            communication endpoint
-	 * @param atna
-	 *            atna configuration
-	 * @return query response with patients
-	 */
-	public static MasterPatientIndexQueryResponse queryPatients(MasterPatientIndexQuery mpiQuery,
-			String homeCommunityOID, Destination pdqQuery, AtnaConfig atna) {
-
-		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
-				(pdqQuery != null ? pdqQuery.getUri() : null),
-				(pdqQuery != null ? pdqQuery.getSenderApplicationOid() : null),
-				(pdqQuery != null ? pdqQuery.getSenderFacilityOid() : null),
-				(pdqQuery != null ? pdqQuery.getReceiverApplicationOid() : null),
-				(pdqQuery != null ? pdqQuery.getReceiverFacilityOid() : null), homeCommunityOID,
-				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null), null);
-		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
-		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
 	/**

@@ -23,32 +23,14 @@ import java.net.URI;
  */
 public class V3PixPdqAdapterConfig {
 
-	/** The pix query uri endpoint. */
-	final public URI pixQueryUri;
+	/** The ATNA audit repository uri. */
+	final public String auditRepositoryUri;
 
-	/** The pix source uri endpoint. */
-	final public URI pixSourceUri;
+	/** The ATNA audit source id. */
+	final public String auditSourceId;
 
-	/** The pdq consumer uri endpoint. */
-	final public URI pdqConsumerUri;
-
-	/** The sender application oid. */
-	final public String senderApplicationOid;
-
-	/** The sender facility oid. */
-	final public String senderFacilityOid;
-
-	/** The receiver application oid. */
-	final public String receiverApplicationOid;
-
-	/** The receiver facility oid. */
-	final public String receiverFacilityOid;
-
-	/** The home community oid. */
-	final public String homeCommunityOid;
-
-	/** The home community namespace (optional). */
-	final public String homeCommunityNamespace;
+	/** The domain to return namespace (optional). */
+	final public String domainToReturnNamespace;
 
 	/**
 	 * The oid of the domain to return ids (optional, convenience if not other
@@ -56,17 +38,35 @@ public class V3PixPdqAdapterConfig {
 	 */
 	final public String domainToReturnOid;
 
-	/** The domain to return namespace (optional). */
-	final public String domainToReturnNamespace;
+	/** The home community namespace (optional). */
+	final public String homeCommunityNamespace;
 
-	/** The ATNA audit repository uri. */
-	final public String auditRepositoryUri;
-
-	/** The ATNA audit source id. */
-	final public String auditSourceId;
+	/** The home community oid. */
+	final public String homeCommunityOid;
 
 	/** oid of id domains which are not medical ids */
 	final public String[] otherOidIds;
+
+	/** The pdq consumer uri endpoint. */
+	final public URI pdqConsumerUri;
+
+	/** The pix query uri endpoint. */
+	final public URI pixQueryUri;
+
+	/** The pix source uri endpoint. */
+	final public URI pixSourceUri;
+
+	/** The receiver application oid. */
+	final public String receiverApplicationOid;
+
+	/** The receiver facility oid. */
+	final public String receiverFacilityOid;
+
+	/** The sender application oid. */
+	final public String senderApplicationOid;
+
+	/** The sender facility oid. */
+	final public String senderFacilityOid;
 
 	/**
 	 * Instantiates a new v3 pix adapter config.

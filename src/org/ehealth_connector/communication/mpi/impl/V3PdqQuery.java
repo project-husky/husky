@@ -249,6 +249,15 @@ public class V3PdqQuery implements MpiQuery {
 	}
 
 	/**
+	 * Gets the v3 consumer query object.
+	 *
+	 * @return the v3 pdq consumer query
+	 */
+	public V3PdqConsumerQuery getV3PdqConsumerQuery() {
+		return v3PdqConsumerQuery;
+	}
+
+	/**
 	 * Sets the page count for partial lists of search results
 	 * (QueryByParameter.initialQuantity).
 	 *
@@ -339,15 +348,6 @@ public class V3PdqQuery implements MpiQuery {
 	 */
 	protected int getPageCount() {
 		return pageCount;
-	}
-
-	/**
-	 * Gets the v3 consumer query object.
-	 *
-	 * @return the v3 pdq consumer query
-	 */
-	public V3PdqConsumerQuery getV3PdqConsumerQuery() {
-		return v3PdqConsumerQuery;
 	}
 
 	/**

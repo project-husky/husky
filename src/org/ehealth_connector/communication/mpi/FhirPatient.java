@@ -79,148 +79,6 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 */
 	private static final long serialVersionUID = -1520681931095452610L;
 
-	/**
-	 * converts the mdht AD to the fhir address
-	 * 
-	 * @param address
-	 *            address object
-	 * @return fhir address
-	 */
-	@SuppressWarnings("incomplete-switch")
-	static public AddressDt convertAddress(AD address) {
-		if (address == null) {
-			return null;
-		}
-		AddressDt addressDt = new AddressDt();
-		if (address.getStreetAddressLines() != null) {
-			for (ADXP street : address.getStreetAddressLines()) {
-				addressDt.addLine().setValue(street.getText());
-			}
-		}
-		if (address.getCities() != null && address.getCities().size() > 0) {
-			addressDt.setCity(address.getCities().get(0).getText());
-		}
-		if (address.getPostalCodes() != null && address.getPostalCodes().size() > 0) {
-			addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
-		}
-		if (address.getStates() != null && address.getStates().size() > 0) {
-			addressDt.setState(address.getStates().get(0).getText());
-		}
-		if (address.getCountries() != null && address.getCountries().size() > 0) {
-			addressDt.setCountry(address.getCountries().get(0).getText());
-		}
-		if (address.getUses() != null && address.getCountries().size() > 0) {
-			switch (address.getUses().get(0)) {
-			case H:
-			case HP:
-				addressDt.setUse(AddressUseEnum.HOME);
-				break;
-			case WP:
-				addressDt.setUse(AddressUseEnum.WORK);
-				break;
-			}
-
-		}
-		return addressDt;
-
-	}
-
-	/**
-	 * Convert the cda gender to the fhir gender.
-	 *
-	 * @param gender
-	 *            the gender
-	 * @return the administrative gender enum
-	 */
-	static public AdministrativeGenderEnum convertGender(AdministrativeGender gender) {
-		if (gender != null) {
-			if (gender.equals(AdministrativeGender.FEMALE)) {
-				return AdministrativeGenderEnum.FEMALE;
-			} else if (gender.equals(AdministrativeGender.MALE)) {
-				return AdministrativeGenderEnum.MALE;
-			} else if (gender.equals(AdministrativeGender.UNDIFFERENTIATED)) {
-				return AdministrativeGenderEnum.OTHER;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Converts the convenience name to the fhir name
-	 *
-	 * @param name
-	 *            the name
-	 * @return converted name
-	 */
-	static public HumanNameDt convertName(Name name) {
-		if (name != null) {
-			HumanNameDt humanName = new HumanNameDt();
-			if (name.getGivenNames() != null) {
-				EList<ENXP> givens = name.getMdhtPn().getGivens();
-				for (ENXP given : givens) {
-					humanName.addGiven(given.getText());
-				}
-			}
-			if (name.getFamilyNames() != null) {
-				EList<ENXP> givens = name.getMdhtPn().getFamilies();
-				for (ENXP given : givens) {
-					humanName.addFamily(given.getText());
-				}
-			}
-			if (name.getPrefixes() != null) {
-				EList<ENXP> givens = name.getMdhtPn().getPrefixes();
-				for (ENXP given : givens) {
-					humanName.addPrefix(given.getText());
-				}
-			}
-			if (name.getSuffixes() != null) {
-				EList<ENXP> givens = name.getMdhtPn().getSuffixes();
-				for (ENXP given : givens) {
-					humanName.addSuffix(given.getText());
-				}
-			}
-			return humanName;
-		}
-		return null;
-	}
-
-	/**
-	 * Convert telecom from hl7 datatype to fhir datatpye.
-	 *
-	 * @param tel
-	 *            hl7 data type
-	 * @return the fhir data type
-	 */
-	public static ContactPointDt convertTelecom(TEL tel) {
-		if (tel == null) {
-			return null;
-		}
-		ContactPointDt contactPointDt = new ContactPointDt();
-		String value = null;
-		ContactPointSystemEnum system = null;
-		ContactPointUseEnum use = null;
-		if (tel.getValue().length() > 4 && tel.getValue().startsWith("tel:")) {
-			value = tel.getValue().substring(4);
-			system = ContactPointSystemEnum.PHONE;
-		} else if (tel.getValue().length() > 4 && tel.getValue().startsWith("mailto:")) {
-			value = tel.getValue().substring(7);
-			system = ContactPointSystemEnum.EMAIL;
-		}
-		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.HP) {
-			use = ContactPointUseEnum.HOME;
-		}
-		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.WP) {
-			use = ContactPointUseEnum.WORK;
-		}
-		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.MC) {
-			use = ContactPointUseEnum.MOBILE;
-		}
-		contactPointDt.setSystem(system);
-		contactPointDt.setUse(use);
-		contactPointDt.setValue(value);
-		return contactPointDt;
-	}
-
 	@Child(name = "birthPlace")
 	@Extension(url = "http://hl7.org/fhir/ExtensionDefinition/birthPlace", definedLocally = false, isModifier = false)
 	@Description(shortDefinition = "The birtplace of the patientt")
@@ -392,6 +250,148 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			this.setEmployeeOccupation(employeeOccupationCode);
 		}
 
+	}
+
+	/**
+	 * converts the mdht AD to the fhir address
+	 * 
+	 * @param address
+	 *            address object
+	 * @return fhir address
+	 */
+	@SuppressWarnings("incomplete-switch")
+	static public AddressDt convertAddress(AD address) {
+		if (address == null) {
+			return null;
+		}
+		AddressDt addressDt = new AddressDt();
+		if (address.getStreetAddressLines() != null) {
+			for (ADXP street : address.getStreetAddressLines()) {
+				addressDt.addLine().setValue(street.getText());
+			}
+		}
+		if (address.getCities() != null && address.getCities().size() > 0) {
+			addressDt.setCity(address.getCities().get(0).getText());
+		}
+		if (address.getPostalCodes() != null && address.getPostalCodes().size() > 0) {
+			addressDt.setPostalCode(address.getPostalCodes().get(0).getText());
+		}
+		if (address.getStates() != null && address.getStates().size() > 0) {
+			addressDt.setState(address.getStates().get(0).getText());
+		}
+		if (address.getCountries() != null && address.getCountries().size() > 0) {
+			addressDt.setCountry(address.getCountries().get(0).getText());
+		}
+		if (address.getUses() != null && address.getCountries().size() > 0) {
+			switch (address.getUses().get(0)) {
+			case H:
+			case HP:
+				addressDt.setUse(AddressUseEnum.HOME);
+				break;
+			case WP:
+				addressDt.setUse(AddressUseEnum.WORK);
+				break;
+			}
+
+		}
+		return addressDt;
+
+	}
+
+	/**
+	 * Convert the cda gender to the fhir gender.
+	 *
+	 * @param gender
+	 *            the gender
+	 * @return the administrative gender enum
+	 */
+	static public AdministrativeGenderEnum convertGender(AdministrativeGender gender) {
+		if (gender != null) {
+			if (gender.equals(AdministrativeGender.FEMALE)) {
+				return AdministrativeGenderEnum.FEMALE;
+			} else if (gender.equals(AdministrativeGender.MALE)) {
+				return AdministrativeGenderEnum.MALE;
+			} else if (gender.equals(AdministrativeGender.UNDIFFERENTIATED)) {
+				return AdministrativeGenderEnum.OTHER;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Converts the convenience name to the fhir name
+	 *
+	 * @param name
+	 *            the name
+	 * @return converted name
+	 */
+	static public HumanNameDt convertName(Name name) {
+		if (name != null) {
+			HumanNameDt humanName = new HumanNameDt();
+			if (name.getGivenNames() != null) {
+				EList<ENXP> givens = name.getMdhtPn().getGivens();
+				for (ENXP given : givens) {
+					humanName.addGiven(given.getText());
+				}
+			}
+			if (name.getFamilyNames() != null) {
+				EList<ENXP> givens = name.getMdhtPn().getFamilies();
+				for (ENXP given : givens) {
+					humanName.addFamily(given.getText());
+				}
+			}
+			if (name.getPrefixes() != null) {
+				EList<ENXP> givens = name.getMdhtPn().getPrefixes();
+				for (ENXP given : givens) {
+					humanName.addPrefix(given.getText());
+				}
+			}
+			if (name.getSuffixes() != null) {
+				EList<ENXP> givens = name.getMdhtPn().getSuffixes();
+				for (ENXP given : givens) {
+					humanName.addSuffix(given.getText());
+				}
+			}
+			return humanName;
+		}
+		return null;
+	}
+
+	/**
+	 * Convert telecom from hl7 datatype to fhir datatpye.
+	 *
+	 * @param tel
+	 *            hl7 data type
+	 * @return the fhir data type
+	 */
+	public static ContactPointDt convertTelecom(TEL tel) {
+		if (tel == null) {
+			return null;
+		}
+		ContactPointDt contactPointDt = new ContactPointDt();
+		String value = null;
+		ContactPointSystemEnum system = null;
+		ContactPointUseEnum use = null;
+		if (tel.getValue().length() > 4 && tel.getValue().startsWith("tel:")) {
+			value = tel.getValue().substring(4);
+			system = ContactPointSystemEnum.PHONE;
+		} else if (tel.getValue().length() > 4 && tel.getValue().startsWith("mailto:")) {
+			value = tel.getValue().substring(7);
+			system = ContactPointSystemEnum.EMAIL;
+		}
+		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.HP) {
+			use = ContactPointUseEnum.HOME;
+		}
+		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.WP) {
+			use = ContactPointUseEnum.WORK;
+		}
+		if (tel.getUses().size() > 0 && tel.getUses().get(0) == TelecommunicationAddressUse.MC) {
+			use = ContactPointUseEnum.MOBILE;
+		}
+		contactPointDt.setSystem(system);
+		contactPointDt.setUse(use);
+		contactPointDt.setValue(value);
+		return contactPointDt;
 	}
 
 	/**
@@ -651,6 +651,11 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		return patient;
 	}
 
+	/**
+	 * Gets the religious Affiliation
+	 * 
+	 * @return
+	 */
 	public CodeableConceptDt getReligiousAffiliation() {
 		return religiousAffiliation;
 	}
@@ -714,6 +719,11 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		this.nation = nation;
 	}
 
+	/**
+	 * Set the religious Affiliation
+	 * 
+	 * @param religiousAffiliation
+	 */
 	public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
 		this.religiousAffiliation = religiousAffiliation;
 	}

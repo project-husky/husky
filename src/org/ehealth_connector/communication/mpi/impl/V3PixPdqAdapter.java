@@ -109,17 +109,23 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  */
 public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQueryResponse> {
 
-	/** The log. */
-	protected final Log log = LogFactory.getLog(V3PixPdqAdapter.class);
-
 	/** The adapter cfg. */
 	protected V3PixPdqAdapterConfig adapterCfg;
 
 	/** The home community oid. */
 	protected String homeCommunityOid;
 
-	/** If the pix source is configured. */
-	protected boolean pixSourceConfigured;
+	/** The log. */
+	protected final Log log = LogFactory.getLog(V3PixPdqAdapter.class);
+
+	/**
+	 * Used to capture additional oid identifiers for the person such as a
+	 * Drivers’ license or Social Security Number.
+	 */
+	protected Set<String> otherIdsOidSet;
+
+	/** if the pdq consumer is configured. */
+	protected boolean pdqConsumerConfigured;
 
 	/** If the pix consumer is configured. */
 	protected boolean pixConsumerConfigured;
@@ -127,20 +133,14 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	/** The pix source. */
 	protected V3PixSource pixSource;
 
-	/** The v3 pix consumer. */
-	protected V3PixConsumer v3PixConsumer;
-
-	/** if the pdq consumer is configured. */
-	protected boolean pdqConsumerConfigured;
+	/** If the pix source is configured. */
+	protected boolean pixSourceConfigured;
 
 	/** The v3 pdq consumer. */
 	protected V3PdqConsumer v3PdqConsumer;
 
-	/**
-	 * Used to capture additional oid identifiers for the person such as a
-	 * Drivers’ license or Social Security Number.
-	 */
-	protected Set<String> otherIdsOidSet;
+	/** The v3 pix consumer. */
+	protected V3PixConsumer v3PixConsumer;
 
 	/**
 	 * Instantiates a new v3 pix adapter.
@@ -1118,7 +1118,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			AD patientAddress = PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(),
 					addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
 					addressDt.getPostalCode(), adressOtherDesignation, null);
-			v3PixSourceMessage.setPatienttBirthPlace(patientAddress);
+			v3PixSourceMessage.setPatientBirthPlace(patientAddress);
 		}
 	}
 

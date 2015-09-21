@@ -85,6 +85,11 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 		map = new HashMap<String, FhirPatient>();
 	}
 
+	@Override
+	public MpiQuery getMpiQuery() {
+		return null;
+	}
+
 	/**
 	 * Merge patient.
 	 * 
@@ -158,6 +163,11 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 		} else {
 			log.error("no patient id provided " + patient);
 		}
+		return null;
+	}
+
+	@Override
+	public MpiQueryResponse queryPatients(MpiQuery mpiQuery) {
 		return null;
 	}
 
@@ -281,16 +291,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				throw new IllegalStateException("homeCommunityId has to be specified");
 			}
 		}
-	}
-
-	@Override
-	public MpiQuery getMpiQuery() {
-		return null;
-	}
-
-	@Override
-	public MpiQueryResponse queryPatients(MpiQuery mpiQuery) {
-		return null;
 	}
 
 }

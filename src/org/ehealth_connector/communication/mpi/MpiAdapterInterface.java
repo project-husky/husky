@@ -30,6 +30,13 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	abstract boolean addPatient(FhirPatient patient);
 
 	/**
+	 * Gets an empty MpiQuery objects.
+	 * 
+	 * @return the mpiQuery objects
+	 */
+	abstract T getMpiQuery();
+
+	/**
 	 * a patient referenced with the obsolete id will be merged into supplied
 	 * patient.
 	 * 
@@ -58,22 +65,6 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 			String queryDomainNamespaces[]);
 
 	/**
-	 * updates the demographic information of the patient in the mpi.
-	 * 
-	 * @param patient
-	 *            the patient
-	 * @return if success true, false otherwise
-	 */
-	abstract boolean updatePatient(FhirPatient patient);
-
-	/**
-	 * Gets an empty MpiQuery objects.
-	 * 
-	 * @return the mpiQuery objects
-	 */
-	abstract T getMpiQuery();
-
-	/**
 	 * queries the mpi for patients according to the criteria specified
 	 * 
 	 * @param mpiQuery
@@ -81,5 +72,14 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 * @return the mpi query response
 	 */
 	abstract U queryPatients(T mpiQuery);
+
+	/**
+	 * updates the demographic information of the patient in the mpi.
+	 * 
+	 * @param patient
+	 *            the patient
+	 * @return if success true, false otherwise
+	 */
+	abstract boolean updatePatient(FhirPatient patient);
 
 }

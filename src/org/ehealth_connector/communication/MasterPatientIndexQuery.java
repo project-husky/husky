@@ -85,9 +85,6 @@ public class MasterPatientIndexQuery {
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
-	 *
-	 * @param useFuzzySearch
-	 *            the use fuzzy search
 	 * @param name
 	 *            the name
 	 * @return the query object

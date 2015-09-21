@@ -76,26 +76,6 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	}
 
 	/**
-	 * Sets the patients from the query.
-	 *
-	 * @param patients
-	 *            the new patients
-	 */
-	protected void setPatients(List<FhirPatient> patients) {
-		this.patients = patients;
-	}
-
-	/**
-	 * Sets the success return value of the query.
-	 *
-	 * @param success
-	 *            the new success
-	 */
-	protected void setSuccess(boolean success) {
-		this.success = success;
-	}
-
-	/**
 	 * Sets the current numbers of patient returned in this query step.
 	 *
 	 * @param currentNumbers
@@ -106,6 +86,16 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	}
 
 	/**
+	 * Sets the patients from the query.
+	 *
+	 * @param patients
+	 *            the new patients
+	 */
+	protected void setPatients(List<FhirPatient> patients) {
+		this.patients = patients;
+	}
+
+	/**
 	 * Sets the remaining numbers of patients for this query.
 	 *
 	 * @param remainingNumbers
@@ -113,6 +103,16 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 */
 	protected void setRemainingNumbers(int remainingNumbers) {
 		this.remainingNumbers = remainingNumbers;
+	}
+
+	/**
+	 * Sets the success return value of the query.
+	 *
+	 * @param success
+	 *            the new success
+	 */
+	protected void setSuccess(boolean success) {
+		this.success = success;
 	}
 
 	/**

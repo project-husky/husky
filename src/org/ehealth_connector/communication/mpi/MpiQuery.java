@@ -115,15 +115,6 @@ public interface MpiQuery {
 	public abstract MpiQuery setPageCount(int pageCount);
 
 	/**
-	 * Sets the patient sex for the query.
-	 *
-	 * @param adminstrativeGenderEnum
-	 *            gender
-	 * @return the query object
-	 */
-	public abstract MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum);
-
-	/**
 	 * Sets the patient birth date for the query.
 	 *
 	 * @param date
@@ -131,5 +122,14 @@ public interface MpiQuery {
 	 * @return the query object
 	 */
 	public abstract MpiQuery setPatientBirthDate(Date date);
+
+	/**
+	 * Sets the patient sex for the query.
+	 *
+	 * @param adminstrativeGenderEnum
+	 *            gender
+	 * @return the query object
+	 */
+	public abstract MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum);
 
 }

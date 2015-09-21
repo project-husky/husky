@@ -57,9 +57,9 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
  */
 public class V3PixSourceMessageHelper {
 
+	private V3PixSourceMergePatients v3MergePatientsMessage;
 	private V3PixSourceRecordAdded v3RecordAddedMessage;
 	private V3PixSourceRecordRevised v3RecordRevisedMessage;
-	private V3PixSourceMergePatients v3MergePatientsMessage;
 
 	/**
 	 * create a V3PixSourceMessageHelper with the supplied sender and receiver.
@@ -459,6 +459,43 @@ public class V3PixSourceMessageHelper {
 	}
 
 	/**
+	 * sets the birth place
+	 * 
+	 * @param addressBirthPlace
+	 *            the birth place address
+	 */
+	public void setPatientBirthPlace(AD addressBirthPlace) {
+		if (v3RecordAddedMessage != null) {
+			PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
+			PRPAMT201301UV02BirthPlace birthplace = V3Factory.eINSTANCE
+					.createPRPAMT201301UV02BirthPlace();
+			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			place.setAddr(addressBirthPlace);
+			birthplace.setBirthplace(place);
+			patientPerson.setBirthPlace(birthplace);
+		}
+		if (v3RecordRevisedMessage != null) {
+			PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
+			PRPAMT201302UV02BirthPlace birthplace = V3Factory.eINSTANCE
+					.createPRPAMT201302UV02BirthPlace();
+			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			place.setAddr(addressBirthPlace);
+			birthplace.setBirthplace(place);
+			patientPerson.setBirthPlace(birthplace);
+		}
+		if (v3MergePatientsMessage != null) {
+			PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
+			PRPAMT201303UV02BirthPlace birthplace = V3Factory.eINSTANCE
+					.createPRPAMT201303UV02BirthPlace();
+			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			place.setAddr(addressBirthPlace);
+			birthplace.setBirthplace(place);
+			patientPerson.setBirthPlace(birthplace);
+		}
+	}
+
+	/**
 	 * sets the patient birth time.
 	 * 
 	 * @param birthTime
@@ -628,43 +665,6 @@ public class V3PixSourceMessageHelper {
 		}
 		if (v3MergePatientsMessage != null) {
 			v3MergePatientsMessage.setPatientReligiousAffiliation(religiousAffiliation);
-		}
-	}
-
-	/**
-	 * sets the birth place
-	 * 
-	 * @param addressBirthPlace
-	 *            the birth place address
-	 */
-	public void setPatienttBirthPlace(AD addressBirthPlace) {
-		if (v3RecordAddedMessage != null) {
-			PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			PRPAMT201301UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02BirthPlace();
-			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
-			place.setAddr(addressBirthPlace);
-			birthplace.setBirthplace(place);
-			patientPerson.setBirthPlace(birthplace);
-		}
-		if (v3RecordRevisedMessage != null) {
-			PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
-					v3RecordRevisedMessage);
-			PRPAMT201302UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02BirthPlace();
-			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
-			place.setAddr(addressBirthPlace);
-			birthplace.setBirthplace(place);
-			patientPerson.setBirthPlace(birthplace);
-		}
-		if (v3MergePatientsMessage != null) {
-			PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			PRPAMT201303UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02BirthPlace();
-			COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
-			place.setAddr(addressBirthPlace);
-			birthplace.setBirthplace(place);
-			patientPerson.setBirthPlace(birthplace);
 		}
 	}
 
