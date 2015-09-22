@@ -18,6 +18,7 @@ package org.ehealth_connector.common;
 
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
+import org.ehealth_connector.communication.DocDescriptor;
 import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumInterface;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
@@ -27,6 +28,7 @@ import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.common.hl7v2.XON;
 import org.openhealthtools.ihe.common.hl7v2.XPN;
 import org.openhealthtools.ihe.common.hl7v2.XTN;
+import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
@@ -237,6 +239,15 @@ public class XdsUtil {
 		lst.setLang(language);
 		ist.getLocalizedString().add(lst);
 		return ist;
+	}
+	
+	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
+		//compile the path and filename for the zip file
+		String fileNameExtension = DocDescriptor.getFileExtension(xdsDoc.getDescriptor());
+		String filePath = "IHE_XDM/SUBSET01/DOC";
+		filePath = filePath.concat(String.format("%5s", docNr).replace(' ', '0'));
+		filePath = filePath.concat("."+fileNameExtension.toUpperCase());
+		return filePath;
 	}
 	
 	public static  CodedMetadataType[] convertEhcCodeToCodedMetadataType(Code[] codeList) {
