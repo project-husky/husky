@@ -515,7 +515,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		Organization org = new Organization();
 		IdentifierDt identifier = new IdentifierDt();
 		identifier.setValue("OHT");
-		identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.2");
+		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		org.getIdentifier().add(identifier);
 		return org;
 	}

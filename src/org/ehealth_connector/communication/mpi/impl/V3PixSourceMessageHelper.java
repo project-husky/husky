@@ -63,6 +63,9 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * create a V3PixSourceMessageHelper with the supplied sender and receiver.
+	 * OHT does not set the conduction Indicator value in the
+	 * MFMI_MT700701UV01/subject control act wrapper to false this is fixed in
+	 * the constructor
 	 *
 	 * @param addMessage
 	 *            true use V3PixSourceRecordAdded for message generation
@@ -85,14 +88,20 @@ public class V3PixSourceMessageHelper {
 		if (addMessage) {
 			v3RecordAddedMessage = new V3PixSourceRecordAdded(senderApplicationOid,
 					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3RecordAddedMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
 		}
 		if (revisedMessage) {
 			v3RecordRevisedMessage = new V3PixSourceRecordRevised(senderApplicationOid,
 					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3RecordRevisedMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
 		}
 		if (mergeMessage) {
 			v3MergePatientsMessage = new V3PixSourceMergePatients(senderApplicationOid,
 					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3MergePatientsMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
 		}
 	}
 
