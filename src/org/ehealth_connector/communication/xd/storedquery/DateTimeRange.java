@@ -88,12 +88,12 @@ public class DateTimeRange {
 	}
 
 	/**
-	 * Sets the point in time where this range starts
+	 * Sets the point in time where this range ends
 	 *
 	 * @param to
 	 *            the end point
 	 */
 	public void setTo(Date to) {
-		ohtDtr.setFrom(DateUtil.format(to));
+		ohtDtr.setTo(DateUtil.format(to));
 	}
 }
