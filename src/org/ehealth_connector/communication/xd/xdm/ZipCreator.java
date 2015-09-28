@@ -1,80 +1,78 @@
 package org.ehealth_connector.communication.xd.xdm;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.log4j.Logger;
 
 /**
- * This class provides the possibility to zip files and create a new filecontainer
+ * This class provides the possibility to zip files and create a new
+ * filecontainer
  *
  */
 public class ZipCreator {
-	
+
 	private static Logger logService = Logger.getLogger(ZipCreator.class.getName());
-	
+	byte[] buffer = new byte[1024];
+
 	private ZipOutputStream out = null;
-	private ByteArrayOutputStream bOS = null;
-	
+
 	/**
 	 * Creates a new Object which provides the needed methods
 	 */
-	public ZipCreator(){
+	public ZipCreator(OutputStream outputStream) {
 		logService.debug("creating zipfile");
-		
-		bOS = new ByteArrayOutputStream();
-		out = new ZipOutputStream(bOS);
+
+		out = new ZipOutputStream(outputStream);
 	}
-	
+
 	/**
-	 * Adds a file as a ZipItem
+	 * Adds an InputStream as ZipEntry to the ZipFile
+	 * 
 	 * @param data
-	 * 		Contains the file to compress as a bytearray
+	 *            Contains the file to compress as a bytearray
 	 * @param pathInZipFile
-	 * 		Contains the relative path only in that zip file
+	 *            Contains the relative path only in that zip file
 	 */
-	public void addZipItem(byte[] data, String pathInZipFile){
-		
-		logService.info("Adding to Zip-file: " + pathInZipFile);
-		
+	public void addZipItem(InputStream data, String pathInZipFile) {
+
+		logService.debug("Adding to Zip-file: " + pathInZipFile);
+
 		try {
-			if(data == null){
+			if (data == null) {
 				out.putNextEntry(new ZipEntry(pathInZipFile));
 				out.closeEntry();
-			}
-			else{
+			} else {
 				out.putNextEntry(new ZipEntry(pathInZipFile));
-				out.write(data);
+
+				int length;
+				while ((length = data.read(buffer)) > 0) {
+					out.write(buffer, 0, length);
+				}
+
 				out.closeEntry();
 			}
-			
+
 		} catch (IOException e) {
-			logService.error("An Error occured while adding a ZipItem");
+			logService.error("An Error occured while adding the ZipItem");
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Closes the inputstream. It only has to be called when no more entries will be added.
+	 * Closes the stream. It only has to be called when no more entries will be
+	 * added.
 	 */
-	public void closeZip(){
+	public void closeZip() {
 		try {
-			
 			out.close();
-			
+
 		} catch (IOException e) {
 			logService.error("ZipFile could not be closed");
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Provides the compressed files
-	 * @return the compressed files as bytearray 
-	 */
-	public byte[] getZippedFiles(){
-		return bOS.toByteArray();
 	}
 }

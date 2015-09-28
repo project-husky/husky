@@ -16,19 +16,15 @@
 
 package org.ehealth_connector.communication;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.apache.axiom.attachments.utils.IOUtils;
-import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -40,14 +36,11 @@ import org.ehealth_connector.communication.ch.enums.AuthorRole;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
-import org.ehealth_connector.communication.xd.xdm.IndexHTM;
-import org.ehealth_connector.communication.xd.xdm.ReadmeTXT;
-import org.ehealth_connector.communication.xd.xdm.ZipCreator;
+import org.ehealth_connector.communication.xd.xdm.IndexHtm;
+import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
+import org.ehealth_connector.communication.xd.xdm.VendorInformation;
+import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.SubmitObjectsRequestType;
 //import org.eclipse.emf.common.util.URI;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
@@ -101,6 +94,24 @@ public class ConvenienceCommunication {
 		DocumentNotAccessibleException() {
 			super("The Document could not be found. Is the path correct?");
 		}
+	}
+
+	@SuppressWarnings("unused")
+	private static File createTempDir() {
+		final int TEMP_DIR_ATTEMPTS = 10000;
+
+		File baseDir = new File(System.getProperty("java.io.tmpdir"));
+		String baseName = System.currentTimeMillis() + "-";
+
+		for (int counter = 0; counter < TEMP_DIR_ATTEMPTS; counter++) {
+			File tempDir = new File(baseDir, baseName + counter);
+			if (tempDir.mkdir()) {
+				return tempDir;
+			}
+		}
+		throw new IllegalStateException("Failed to create directory within " + TEMP_DIR_ATTEMPTS
+				+ " attempts (tried " + baseName + "0 to " + baseName + (TEMP_DIR_ATTEMPTS - 1)
+				+ ')');
 	}
 
 	/**
@@ -260,18 +271,16 @@ public class ConvenienceCommunication {
 		txnData = new SubmitTransactionData();
 	}
 
-	public byte[] createXdmZipToByteArray() {
+	public void createXdm(OutputStream outputStream) {
 		completeMetadata();
-		return createZip();
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData),
+				new VendorInformation());
+		xdmContents.createZip(outputStream, txnData);
 	}
 
-	public boolean createXdmZipToFile(File file) {
-		try {
-			FileUtils.writeByteArrayToFile(file, createXdmZipToByteArray());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return true;
+	public void createXdm(OutputStream outputStream, XdmContents xdmContents) {
+		completeMetadata();
+		xdmContents.createZip(outputStream, txnData);
 	}
 
 	/**
@@ -286,16 +295,6 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
-	 * DocumentMetadata)
-	 * 
-	 * @return the transaction data object </div>
-	 */
-	public SubmitTransactionData getTxnData() {
-		return this.txnData;
-	}
-
-	/**
 	 * Query a registry for documents, using a find documents query.
 	 * 
 	 * @param queryParameter
@@ -306,6 +305,16 @@ public class ConvenienceCommunication {
 	 *            references instead of the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
+
+	/**
+	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
+	 * DocumentMetadata)
+	 * 
+	 * @return the transaction data object </div>
+	 */
+	public SubmitTransactionData getTxnData() {
+		return this.txnData;
+	}
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
@@ -486,7 +495,7 @@ public class ConvenienceCommunication {
 		source.getAuditor().getConfig().setOption("https.protocols", "TLSv1, TLSv1.2");
 
 		completeMetadata();
-		
+
 		try {
 			// txnData.saveMetadataToFile("C:/temp/meta.xml");
 			return source.submit(txnData);
@@ -547,7 +556,7 @@ public class ConvenienceCommunication {
 	 */
 	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
 		XDSSourceAuditor.getAuditor().getConfig()
-		.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
+				.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
 	}
 
 	/**
@@ -564,7 +573,7 @@ public class ConvenienceCommunication {
 			txnData = new SubmitTransactionData();
 		}
 		XDSSourceAuditor.getAuditor().getConfig()
-		.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
+				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 		String docEntryUUID;
 		try {
 			docEntryUUID = txnData.addDocument(doc);
@@ -622,108 +631,6 @@ public class ConvenienceCommunication {
 		generateMissingSubmissionSetAttributes();
 	}
 
-	@SuppressWarnings("unused")
-	private static File createTempDir() {
-		final int TEMP_DIR_ATTEMPTS = 10000;
-
-		File baseDir = new File(System.getProperty("java.io.tmpdir"));
-		String baseName = System.currentTimeMillis() + "-";
-
-		for (int counter = 0; counter < TEMP_DIR_ATTEMPTS; counter++) {
-			File tempDir = new File(baseDir, baseName + counter);
-			if (tempDir.mkdir()) {
-				return tempDir;
-			}
-		}
-		throw new IllegalStateException("Failed to create directory within "
-				+ TEMP_DIR_ATTEMPTS + " attempts (tried "
-				+ baseName + "0 to " + baseName + (TEMP_DIR_ATTEMPTS - 1) + ')');
-	}
-
-	private byte[] createZip() {
-		//Creating temp directory
-		//File tempDir = createTempDir();
-
-		//Creating the ZipFileHelper Class
-		ZipCreator zip = new ZipCreator();
-
-		//Add the path structure for documents in the Zip File
-		zip.addZipItem(null, "IHE_XDM/");
-		zip.addZipItem(null, "IHE_XDM/SUBSET01/");
-
-		//Add each XdsDocument to the Zip File
-		int i = 0;
-		List<XDSDocument> docList = txnData.getDocList();
-		byte[] fileByteArray = null;
-		for (XDSDocument xdsDoc : docList) {
-			i++;
-			try {
-				fileByteArray = IOUtils.getStreamAsByteArray(xdsDoc.getStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			String filePath = XdsUtil.createXdmDocName(xdsDoc, i);
-
-			//add the document
-			zip.addZipItem(fileByteArray, filePath);
-		}
-
-		//create the other files of the volume
-		byte[] xdmMetadata = createMetadataXmlByteArray();
-		IndexHTM indexHTM = new IndexHTM(txnData);
-		ReadmeTXT readmeTXT = new ReadmeTXT(txnData);
-
-		//Add them to the zip container
-		zip.addZipItem(indexHTM.getIndexHTM(), "INDEX.HTM");
-		zip.addZipItem(readmeTXT.getReadmeTxt(), "README.TXT");
-		zip.addZipItem(xdmMetadata, "IHE_XDM/SUBSET01/METADATA.XML");
-
-		zip.closeZip();
-
-		return zip.getZippedFiles();
-	}
-
-	private XMLResource createMetadataXml() {
-		org.openhealthtools.ihe.xdm.creator.PortableMediaCreator pmc = new org.openhealthtools.ihe.xdm.creator.PortableMediaCreator();
-		SubmitObjectsRequestType submit = null;
-		try {
-			submit = pmc.extractXDMMetadata(txnData);
-		} catch (Exception e2) {
-			e2.printStackTrace();
-		}
-
-		DocumentRoot docRoot = LCMFactory.eINSTANCE.createDocumentRoot();
-		docRoot.setSubmitObjectsRequest(submit);
-                  
-		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
-
-		xml.getContents().add(docRoot);
-		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
-		// xml.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING,
-		// "UTF-8");
-		xml.setEncoding("UTF-8");
-
-		return xml;
-	}
-
-	private byte[] createMetadataXmlByteArray() {
-		XMLResource xml = createMetadataXml();
-
-		try {
-			ByteArrayOutputStream bOS = new ByteArrayOutputStream();
-			xml.save(bOS, null);
-
-			bOS.close();
-
-			return bOS.toByteArray();
-
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-	}
-
 	/**
 	 * <div class="en">Generate missing doc entry attributes.</div>
 	 * 
@@ -760,7 +667,7 @@ public class ConvenienceCommunication {
 				|| docMetadata.getMdhtDocumentEntryType().getConfidentialityCode() == null) {
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode()
-			.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25", "N", null, null));
+					.add(XdsUtil.createCodedMetadata("2.16.840.1.113883.5.25", "N", null, null));
 		}
 
 		// Generate Creation Time with the current time
