@@ -1,11 +1,9 @@
 package org.ehealth_connector.communication.xd.xdm;
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.MessageFormat;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
@@ -13,9 +11,13 @@ public class ReadmeTxt {
 
 	private static Logger logService = Logger.getLogger(ReadmeTxt.class.getName());
 
-	private String str = new String();
+	private InputStream is = null;
 	public static final String TEMPLATE_EN = "Vendor: {0}\n" + "Application: {1}\n"
 			+ "Contact info: {2}\n\n" + "Created for Patient with ID: {3}\n";
+
+	public ReadmeTxt(InputStream readmeTxtStream) {
+		is = readmeTxtStream;
+	}
 
 	/**
 	 * Creates a new README.TXT Object
@@ -37,33 +39,26 @@ public class ReadmeTxt {
 		Object[] values = new Object[] { vendorInfo.getName(), vendorInfo.getApplicationName(),
 				vendorInfo.getContactInformation(),
 				txnData.getSubmissionSet().getPatientId().getIdNumber() };
-		str = MessageFormat.format(TEMPLATE_EN, values);
+		String str = MessageFormat.format(TEMPLATE_EN, values);
+		is = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
 	 * Writes the index.htm contents to an OutputStream
 	 */
 	public InputStream getInputStream() {
-		return IOUtils.toInputStream(str);
+		return is;
 	}
 
-	/**
-	 * Provides the readme.txt as a bytearray
-	 * 
-	 * @return The readme.txt as a bytearray
-	 */
-	public byte[] getReadmeTxt() {
-		return str.toString().getBytes();
-	}
-
-	/**
-	 * Writes the index.htm contents to an OutputStream
-	 */
-	public void writeToOutputStream(OutputStream outputStream) {
-		try {
-			outputStream.write(str.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	// /**
+	// * Writes the index.htm contents to an OutputStream
+	// */
+	// public void writeToOutputStream(OutputStream outputStream) {
+	// try {
+	// // outputStream.write(str.getBytes());
+	// IOUtils.copy(is, outputStream);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
 }

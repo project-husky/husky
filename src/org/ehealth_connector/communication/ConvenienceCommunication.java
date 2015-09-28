@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
@@ -38,7 +39,6 @@ import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
-import org.ehealth_connector.communication.xd.xdm.VendorInformation;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 //import org.eclipse.emf.common.util.URI;
@@ -273,8 +273,7 @@ public class ConvenienceCommunication {
 
 	public void createXdm(OutputStream outputStream) {
 		completeMetadata();
-		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData),
-				new VendorInformation());
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 	}
 
@@ -295,6 +294,16 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
+	 * DocumentMetadata)
+	 * 
+	 * @return the transaction data object </div>
+	 */
+	public SubmitTransactionData getTxnData() {
+		return this.txnData;
+	}
+
+	/**
 	 * Query a registry for documents, using a find documents query.
 	 * 
 	 * @param queryParameter
@@ -306,14 +315,8 @@ public class ConvenienceCommunication {
 	 * @return the XDSQueryResponseType
 	 */
 
-	/**
-	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
-	 * DocumentMetadata)
-	 * 
-	 * @return the transaction data object </div>
-	 */
-	public SubmitTransactionData getTxnData() {
-		return this.txnData;
+	public XdmContents getXdm(ZipFile zipFile) {
+		return new XdmContents(zipFile);
 	}
 
 	/**

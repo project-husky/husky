@@ -1,10 +1,9 @@
 package org.ehealth_connector.communication.xd.xdm;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.zip.ZipEntry;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
@@ -13,7 +12,7 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 public class IndexHtm {
 
 	private static Logger logService = Logger.getLogger(IndexHtm.class.getName());
-	private String str = null;
+	private InputStream is = null;
 	public static final String TEMPLATE_EN = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
 			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
@@ -32,6 +31,10 @@ public class IndexHtm {
 			+ "<h3>README File</h3>\n"
 			+ "<p>For technical details about this volume and vendor information, see: <a href=\"README.TXT\">README.TXT</a>.</p>\n"
 			+ "</body>\n" + "</html>";
+
+	public IndexHtm(InputStream indexHtmStream) {
+		this.is = indexHtmStream;
+	}
 
 	public IndexHtm(SubmitTransactionData txnData) {
 		this(txnData, new VendorInformation());
@@ -54,19 +57,15 @@ public class IndexHtm {
 		Object[] values = new Object[] { vendorInfo.getName(),
 				txnData.getSubmissionSet().getPatientId().getIdNumber(),
 				vendorInfo.getContactInformation(), createContents(txnData) };
-		str = MessageFormat.format(TEMPLATE_EN, values);
-	}
-
-	public IndexHtm(ZipEntry zipEntry) {
-		// Deserialize the zipEntry
-
+		String str = MessageFormat.format(TEMPLATE_EN, values);
+		is = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
 	 * Writes the index.htm contents to an InputStream
 	 */
 	public InputStream getInputStream() {
-		return IOUtils.toInputStream(str);
+		return is;
 	}
 
 	private String createContents(SubmitTransactionData txnData) {
@@ -78,8 +77,8 @@ public class IndexHtm {
 		for (XDSDocument xdsDoc : txnData.getDocList()) {
 			i++;
 			contentsStr = contentsStr.concat("Document " + i + "<br/>" + "<a href=\""
-					+ XdsUtil.createXdmDocName(xdsDoc, i) + "\">"
-					+ XdsUtil.createXdmDocName(xdsDoc, i) + "</a>\n" + "DocumentEntryId: \n<code>"
+					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">"
+					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "</a>\n" + "DocumentEntryId: \n<code>"
 					+ xdsDoc.getDocumentEntryUUID() + "</code>\n" + "</p>\n");
 		}
 		return contentsStr;
