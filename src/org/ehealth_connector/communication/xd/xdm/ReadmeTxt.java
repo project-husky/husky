@@ -7,32 +7,51 @@ import java.text.MessageFormat;
 import org.apache.log4j.Logger;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
+/**
+ * The Class ReadmeTxt represents the README.TXT file, which is part of the
+ * contents of an XDM volume. The File contains information about the vendor,
+ * who build the system that created the XDM volume.
+ */
 public class ReadmeTxt {
 
+	/** The log service. */
 	private static Logger logService = Logger.getLogger(ReadmeTxt.class.getName());
 
+	/** The InputStream */
 	private InputStream is = null;
+
+	/** The Constant TEMPLATE_EN. */
 	public static final String TEMPLATE_EN = "Vendor: {0}\n" + "Application: {1}\n"
 			+ "Contact info: {2}\n\n" + "Created for Patient with ID: {3}\n";
 
+	/**
+	 * Instantiates a new readme txt.
+	 *
+	 * @param readmeTxtStream
+	 *            the readme txt stream
+	 */
 	public ReadmeTxt(InputStream readmeTxtStream) {
 		is = readmeTxtStream;
 	}
 
 	/**
 	 * Creates a new README.TXT Object
-	 * 
-	 * @param patientID
-	 *            Contains the PatientID as a string
-	 * @param documentID
-	 *            Contains the DocumentID as a string
-	 * @param submissionSetID
-	 *            Contains the submissionSetID as a string
+	 *
+	 * @param txnData
+	 *            the SubmitTransactionData
 	 */
 	public ReadmeTxt(SubmitTransactionData txnData) {
 		this(txnData, new VendorInformation());
 	}
 
+	/**
+	 * Instantiates a new readme txt.
+	 *
+	 * @param txnData
+	 *            the SubmitTransactionData data
+	 * @param vendorInfo
+	 *            the vendor info
+	 */
 	public ReadmeTxt(SubmitTransactionData txnData, VendorInformation vendorInfo) {
 		logService.debug("Creating the README.TXT file");
 
@@ -44,21 +63,11 @@ public class ReadmeTxt {
 	}
 
 	/**
-	 * Writes the index.htm contents to an OutputStream
+	 * Gets the index.htm contents as InputStream
+	 *
+	 * @return the input stream
 	 */
 	public InputStream getInputStream() {
 		return is;
 	}
-
-	// /**
-	// * Writes the index.htm contents to an OutputStream
-	// */
-	// public void writeToOutputStream(OutputStream outputStream) {
-	// try {
-	// // outputStream.write(str.getBytes());
-	// IOUtils.copy(is, outputStream);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
 }

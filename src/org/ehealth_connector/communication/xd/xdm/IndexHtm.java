@@ -9,10 +9,21 @@ import org.ehealth_connector.common.XdsUtil;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
+/**
+ * The Class IndexHtm represents the INDEX.HTM file, which is part of the
+ * contents of an XDM volume. The File contains information about the contents
+ * of the volume and the vendor, who build the system that created the XDM
+ * volume.
+ */
 public class IndexHtm {
 
+	/** The log service. */
 	private static Logger logService = Logger.getLogger(IndexHtm.class.getName());
+
+	/** The inputStream. */
 	private InputStream is = null;
+
+	/** The Constant TEMPLATE_EN. */
 	public static final String TEMPLATE_EN = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
 			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
@@ -32,23 +43,33 @@ public class IndexHtm {
 			+ "<p>For technical details about this volume and vendor information, see: <a href=\"README.TXT\">README.TXT</a>.</p>\n"
 			+ "</body>\n" + "</html>";
 
+	/**
+	 * Instantiates a new indexHtm.
+	 *
+	 * @param indexHtmStream
+	 *            the indexHtm stream
+	 */
 	public IndexHtm(InputStream indexHtmStream) {
 		this.is = indexHtmStream;
 	}
 
+	/**
+	 * Instantiates a new index htm.
+	 *
+	 * @param txnData
+	 *            the SubmitTransactionData data
+	 */
 	public IndexHtm(SubmitTransactionData txnData) {
 		this(txnData, new VendorInformation());
 	}
 
 	/**
 	 * Creates a new INDEX.HTM Object
-	 * 
-	 * @param patientID
-	 *            Contains the PatientID as a String
-	 * @param documentID
-	 *            Contains the DocumentID as a String
-	 * @param documentName
-	 *            Contains the DocuementName as a String
+	 *
+	 * @param txnData
+	 *            the SubmitTransactionData data
+	 * @param vendorInfo
+	 *            the vendor info
 	 */
 	public IndexHtm(SubmitTransactionData txnData, VendorInformation vendorInfo) {
 
@@ -63,11 +84,20 @@ public class IndexHtm {
 
 	/**
 	 * Writes the index.htm contents to an InputStream
+	 *
+	 * @return the input stream
 	 */
 	public InputStream getInputStream() {
 		return is;
 	}
 
+	/**
+	 * Creates the contents.
+	 *
+	 * @param SubmitTransactionData
+	 *            the txn data
+	 * @return the IndexHtm contents as string
+	 */
 	private String createContents(SubmitTransactionData txnData) {
 		// Number of Items
 		String contentsStr = "<p>This volume contains " + +txnData.getDocList().size()
@@ -78,8 +108,9 @@ public class IndexHtm {
 			i++;
 			contentsStr = contentsStr.concat("Document " + i + "<br/>" + "<a href=\""
 					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">"
-					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "</a>\n" + "DocumentEntryId: \n<code>"
-					+ xdsDoc.getDocumentEntryUUID() + "</code>\n" + "</p>\n");
+					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "</a>\n"
+					+ "DocumentEntryId: \n<code>" + xdsDoc.getDocumentEntryUUID() + "</code>\n"
+					+ "</p>\n");
 		}
 		return contentsStr;
 	}

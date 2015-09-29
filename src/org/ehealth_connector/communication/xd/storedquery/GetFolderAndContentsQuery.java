@@ -133,10 +133,7 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	/**
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
 	 * 
-	 * @see org.ehealth_connector.communication.storedquery.StoredQueryInterface#
-	 *      getOhtStoredQuery()
-	 * 
-	 * @returns the OHT StoredQuery
+	 * @return the OHT StoredQuery
 	 */
 	@Override
 	public StoredQuery getOhtStoredQuery() {

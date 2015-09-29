@@ -10,28 +10,62 @@ public class VendorInformation {
 	private String applicationName;
 	private String contactInformation;
 
+	/**
+	 * Constructor. eHealthConnector default values will be used.
+	 */
 	public VendorInformation() {
 		this(null, null, null);
 	}
 
+	/**
+	 * Constructor. Individual values can be provided.
+	 * 
+	 * @param name
+	 *            Vendors (company) name
+	 * @param applicationName
+	 *            name of the application
+	 * @param contactInformation
+	 *            contact information
+	 */
 	public VendorInformation(String name, String applicationName, String contactInformation) {
 		setName(name);
 		setApplicationName(applicationName);
 		setContactInformation(contactInformation);
 	}
 
+	/**
+	 * Gets the application name.
+	 * 
+	 * @return application name
+	 */
 	public String getApplicationName() {
 		return applicationName;
 	}
 
+	/**
+	 * Gets the contact information
+	 * 
+	 * @return contact information
+	 */
 	public String getContactInformation() {
 		return contactInformation;
 	}
 
+	/**
+	 * Gets the vendor name
+	 * 
+	 * @return the vendors name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the application name
+	 * 
+	 * @param applicationName
+	 *            name of the application
+	 */
 	public void setApplicationName(String applicationName) {
 		if (applicationName == null) {
 			this.applicationName = DEFAULT_APPLICATION_NAME;
@@ -40,6 +74,12 @@ public class VendorInformation {
 		}
 	}
 
+	/**
+	 * Sets the contact information
+	 * 
+	 * @param contactInformation
+	 *            the contact information
+	 */
 	public void setContactInformation(String contactInformation) {
 		if (contactInformation == null) {
 			this.contactInformation = DEFAULT_CONTACT_INFORMATION;
@@ -48,6 +88,12 @@ public class VendorInformation {
 		}
 	}
 
+	/**
+	 * Sets the vendors name.
+	 *
+	 * @param name
+	 *            name of the vendor
+	 */
 	public void setName(String name) {
 		if (name == null) {
 			this.name = DEFAULT_NAME;

@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.communication;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,10 +23,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -43,11 +40,6 @@ import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
-import org.openhealthtools.ihe.common.ebxml._3._0.lcm.SubmitObjectsRequestType;
-//import org.eclipse.emf.common.util.URI;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.consumer.B_Consumer;
@@ -259,19 +251,33 @@ public class ConvenienceCommunication {
 		txnData = new SubmitTransactionData();
 	}
 
+	/**
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
+	 * 
+	 * @param outputStream
+	 *            The outputStream object where the contents will be written to.
+	 */
 	public XdmContents createXdm(OutputStream outputStream) {
 		XdmContents xdmContents = new XdmContents();
 		return createXdm(outputStream, xdmContents);
 	}
 
+	/**
+	 * <div class="en">creates an XDM volume with a given XDMContents. This
+	 * method will be used, if you want to create your own INDEX.HTM and
+	 * README.TXT for your XDM volume. You have to add a document to this class
+	 * first.</div>
+	 * 
+	 * @param outputStream
+	 *            The outputStream object where the contents will be written to.
+	 * @param xdmContents
+	 *            The existing xdmContents object
+	 */
 	public XdmContents createXdm(OutputStream outputStream, XdmContents xdmContents) {
 		completeMetadata();
 		xdmContents.createZip(outputStream, txnData, new IndexHtm(txnData), new ReadmeTxt(txnData));
 		return xdmContents;
-	}
-	
-	public XdmContents getXdmContents(ZipFile zipFile) {
-		return new XdmContents(zipFile);
 	}
 
 	/**
@@ -293,6 +299,17 @@ public class ConvenienceCommunication {
 	 */
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
+	}
+
+	/**
+	 * Returns the contents of an existing XDM volume.
+	 * 
+	 * @param zipFile
+	 *            the XDM volume as ZipFile
+	 * @return the XDMContents
+	 */
+	public XdmContents getXdmContents(ZipFile zipFile) {
+		return new XdmContents(zipFile);
 	}
 
 	/**
@@ -620,47 +637,6 @@ public class ConvenienceCommunication {
 			}
 		}
 		generateMissingSubmissionSetAttributes();
-	}
-
-	private XMLResource createMetadataXml() {
-		org.openhealthtools.ihe.xdm.creator.PortableMediaCreator pmc = new org.openhealthtools.ihe.xdm.creator.PortableMediaCreator();
-		SubmitObjectsRequestType submit = null;
-		try {
-			submit = pmc.extractXDMMetadata(txnData);
-		} catch (Exception e2) {
-			e2.printStackTrace();
-		}
-
-		DocumentRoot docRoot = LCMFactory.eINSTANCE.createDocumentRoot();
-		docRoot.setSubmitObjectsRequest(submit);
-
-		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
-
-		xml.getContents().add(docRoot);
-		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
-		// xml.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING,
-		// "UTF-8");
-		xml.setEncoding("UTF-8");
-
-		return xml;
-	}
-
-	private byte[] createMetadataXmlByteArray() {
-		XMLResource xml = createMetadataXml();
-
-		try {
-			ByteArrayOutputStream bOS = new ByteArrayOutputStream();
-			xml.save(bOS, null);
-
-			bOS.close();
-
-			return bOS.toByteArray();
-
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
 	}
 
 	/**

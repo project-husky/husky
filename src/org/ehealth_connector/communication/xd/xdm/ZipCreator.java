@@ -9,8 +9,7 @@ import java.util.zip.ZipOutputStream;
 import org.apache.log4j.Logger;
 
 /**
- * This class provides the possibility to zip files and create a new
- * filecontainer
+ * This class provides the functions to create zip files
  *
  */
 public class ZipCreator {
