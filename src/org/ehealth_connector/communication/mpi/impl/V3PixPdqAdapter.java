@@ -174,7 +174,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            oid for the domain to add as otherId in the pix v3 message
 	 */
 	public void addOtherIdsOid(String oid) {
-		otherIdsOidSet.add("urn:oid:" + oid);
+		otherIdsOidSet.add(oid);
 	}
 
 	/**
@@ -686,13 +686,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void addPatientIds(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		for (IdentifierDt identifierDt : patient.getIdentifier()) {
-			if (this.otherIdsOidSet.contains(identifierDt.getSystem())) {
-				v3PixSourceMessage.addPatientOtherID(identifierDt.getValue(),
-						identifierDt.getSystem().substring(8));
-			} else {
-				if (identifierDt.getSystem().length() > 8
-						&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
-					String oid = identifierDt.getSystem().substring(8);
+			if (identifierDt.getSystem().length() > 8
+					&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
+				String oid = identifierDt.getSystem().substring(8);
+				if (this.otherIdsOidSet.contains(oid)) {
+					v3PixSourceMessage.addPatientOtherID(identifierDt.getValue(), oid);
+				} else {
 					if (homeCommunityOid.equals(oid)) {
 						v3PixSourceMessage.addPatientID(identifierDt.getValue(), homeCommunityOid,
 								adapterCfg.homeCommunityNamespace);

@@ -46,7 +46,8 @@ import ca.uhn.fhir.model.primitive.DateDt;
  * IP Address: provided by test tool Port Number: V3 Message (Non Secure: 9090 )
  * 
  * ATTENTION: You need to start the testtool and need to get the parameters from
- * webpage otherwise the test will not run through
+ * webpage otherwise the test will not run through, you need also to remove
+ * the @Ignore to perform the tests directly
  */
 @Ignore
 public class V3PixAdapterPixPdqNistPreCatTests {
@@ -58,7 +59,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 	// TODO: fill below in from test tool before running test and remove @Ignore
 	// Annotation above to run the tests manual
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.940";
+	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1454";
 	final private String ipAddress = "129.6.24.79";
 	final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
 

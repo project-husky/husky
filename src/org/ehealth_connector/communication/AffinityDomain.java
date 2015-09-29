@@ -1,46 +1,168 @@
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+/**
+ * The Class AffinityDomain represents the configuration of an IHE Affinity
+ * Domain.
+ */
 public class AffinityDomain {
 
-	private Destination mPidSource = null;
-	private Destination mRegistry = null;
+	/** The atna config. */
+	private AtnaConfig atnaConfig;
+
+	/** The patient identification oid within this affinity Domain. */
+	private String mpiPid;
+
+	/** The repositories Destination. */
 	private List<Destination> mRepositories = new ArrayList<Destination>();
 
+	/** Identities like SSN. */
+	private Set<String> otherIdsOidSet;
+
+	/** The destination to for the pdq of the mpi. */
+	private Destination pdqDestination = null;
+
+	/** The destination to the pix Source of the mpi. */
+	private Destination pixDestination = null;
+
+	/** The destination to the registry. */
+	private Destination registryDestination = null;
+
+	/**
+	 * Instantiates a new affinity domain.
+	 */
+	public AffinityDomain() {
+		otherIdsOidSet = new HashSet<String>();
+	}
+
+	/**
+	 * Instantiates a new affinity domain.
+	 *
+	 * @param destPidSource
+	 *            the dest pid source
+	 * @param destRegistry
+	 *            the dest registry
+	 * @param destRepository
+	 *            the dest repository
+	 */
 	public AffinityDomain(Destination destPidSource, Destination destRegistry,
 			Destination destRepository) {
-		mPidSource = destPidSource;
-		mRegistry = destRegistry;
+		pixDestination = destPidSource;
+		registryDestination = destRegistry;
 		mRepositories = new ArrayList<Destination>();
+		mRepositories.add(destRepository);
+		otherIdsOidSet = new HashSet<String>();
+	}
+
+	/**
+	 * Instantiates a new affinity domain.
+	 *
+	 * @param destPidSource
+	 *            the dest pid source
+	 * @param destRegistry
+	 *            the dest registry
+	 * @param destRepositories
+	 *            the dest repositories
+	 */
+	public AffinityDomain(Destination destPidSource, Destination destRegistry,
+			List<Destination> destRepositories) {
+		pixDestination = destPidSource;
+		registryDestination = destRegistry;
+		mRepositories = destRepositories;
+		otherIdsOidSet = new HashSet<String>();
+	}
+
+	/**
+	 * Adds an other Identificator (like a SSN) ot the affinity Domain.
+	 *
+	 * @param oid
+	 *            the oid
+	 */
+	public void addOtherId(String oid) {
+		otherIdsOidSet.add(oid);
+	}
+
+	/**
+	 * Adds the repository.
+	 *
+	 * @param destRepository
+	 *            the dest repository
+	 */
+	public void addRepository(Destination destRepository) {
 		mRepositories.add(destRepository);
 	}
 
-	public AffinityDomain(Destination destPidSource, Destination destRegistry,
-			List<Destination> destRepositories) {
-		mPidSource = destPidSource;
-		mRegistry = destRegistry;
-		mRepositories = destRepositories;
+	/**
+	 * Clear repositories.
+	 */
+	public void clearRepositories() {
+		mRepositories = new ArrayList<Destination>();
 	}
 
-	public Destination getPidSource() {
-		return mPidSource;
+	/**
+	 * Gets the atna config.
+	 *
+	 * @return the atna config
+	 */
+	public AtnaConfig getAtnaConfig() {
+		return atnaConfig;
 	}
 
-	public void setPidSource(Destination destPidSource) {
-		mPidSource = destPidSource;
+	/**
+	 * Gets the mpi pid.
+	 *
+	 * @return the mpi pid
+	 */
+	public String getMpiPid() {
+		return mpiPid;
 	}
 
-	public Destination getRegistry() {
-		return mRegistry;
+	/**
+	 * Gets the other ids oid set.
+	 *
+	 * @return the other ids oid set
+	 */
+	public Set<String> getOtherIdsOidSet() {
+		return otherIdsOidSet;
 	}
 
-	public void setRegistry(Destination destRegistry) {
-		mRegistry = destRegistry;
+	/**
+	 * Gets the pdq destination.
+	 *
+	 * @return the pdq destination
+	 */
+	public Destination getPdqDestination() {
+		return pdqDestination;
 	}
 
-	public Destination getRepository() {
+	/**
+	 * Gets the pid source.
+	 *
+	 * @return the pid source
+	 */
+	public Destination getPixDestination() {
+		return pixDestination;
+	}
+
+	/**
+	 * Gets the registry.
+	 *
+	 * @return the registry
+	 */
+	public Destination getRegistryDestination() {
+		return registryDestination;
+	}
+
+	/**
+	 * Gets the repository.
+	 *
+	 * @return the repository
+	 */
+	public Destination getRepositoryDestination() {
 		Destination retVal = null;
 		if (!mRepositories.isEmpty()) {
 			retVal = mRepositories.get(0);
@@ -48,7 +170,14 @@ public class AffinityDomain {
 		return retVal;
 	}
 
-	public Destination getRepository(int index) {
+	/**
+	 * Gets the repository.
+	 *
+	 * @param index
+	 *            the index
+	 * @return the repository
+	 */
+	public Destination getRepositoryDestination(int index) {
 		Destination retVal = null;
 		if (!mRepositories.isEmpty()) {
 			retVal = mRepositories.get(index);
@@ -56,15 +185,73 @@ public class AffinityDomain {
 		return retVal;
 	}
 
-	public void clearRepositories() {
-		mRepositories = new ArrayList<Destination>();
+	/**
+	 * Sets the atna config.
+	 *
+	 * @param atnaConfig
+	 *            the new atna config
+	 */
+	public void setAtnaConfig(AtnaConfig atnaConfig) {
+		this.atnaConfig = atnaConfig;
 	}
 
-	public void addRepository(Destination destRepository) {
-		mRepositories.add(destRepository);
+	/**
+	 * Sets the mpi pid.
+	 *
+	 * @param mpiPid
+	 *            the new mpi pid
+	 */
+	public void setMpiPid(String mpiPid) {
+		this.mpiPid = mpiPid;
 	}
 
-	public void setRepository(Destination destRepository) {
+	/**
+	 * Sets the other ids oid set.
+	 *
+	 * @param otherIdsOidSet
+	 *            the new other ids oid set
+	 */
+	public void setOtherIdsOidSet(Set<String> otherIdsOidSet) {
+		this.otherIdsOidSet = otherIdsOidSet;
+	}
+
+	/**
+	 * Sets the pdq destination.
+	 *
+	 * @param pdqDestination
+	 *            the new pdq destination
+	 */
+	public void setPdqDestination(Destination pdqDestination) {
+		this.pdqDestination = pdqDestination;
+	}
+
+	/**
+	 * Sets the pix source.
+	 *
+	 * @param destPidSource
+	 *            the new pid source
+	 */
+	public void setPixDestination(Destination destPidSource) {
+		pixDestination = destPidSource;
+	}
+
+	/**
+	 * Sets the registry.
+	 *
+	 * @param destRegistry
+	 *            the new registry
+	 */
+	public void setRegistryDestination(Destination destRegistry) {
+		registryDestination = destRegistry;
+	}
+
+	/**
+	 * Sets the repository.
+	 *
+	 * @param destRepository
+	 *            the new repository
+	 */
+	public void setRepositoryDestination(Destination destRepository) {
 		mRepositories = new ArrayList<Destination>();
 		mRepositories.add(destRepository);
 	}

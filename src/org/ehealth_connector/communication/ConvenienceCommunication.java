@@ -109,9 +109,9 @@ public class ConvenienceCommunication {
 				return tempDir;
 			}
 		}
-		throw new IllegalStateException("Failed to create directory within " + TEMP_DIR_ATTEMPTS
-				+ " attempts (tried " + baseName + "0 to " + baseName + (TEMP_DIR_ATTEMPTS - 1)
-				+ ')');
+		throw new IllegalStateException(
+				"Failed to create directory within " + TEMP_DIR_ATTEMPTS + " attempts (tried "
+						+ baseName + "0 to " + baseName + (TEMP_DIR_ATTEMPTS - 1) + ')');
 	}
 
 	/**
@@ -390,8 +390,8 @@ public class ConvenienceCommunication {
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
@@ -417,8 +417,8 @@ public class ConvenienceCommunication {
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
@@ -449,7 +449,7 @@ public class ConvenienceCommunication {
 	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		// Create RetrieveSetRequestType
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
@@ -462,8 +462,8 @@ public class ConvenienceCommunication {
 			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
 
 			// Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest().add(
-					docReq[i].getOhtDocumentRequestType());
+			retrieveDocumentSetRequest.getDocumentRequest()
+					.add(docReq[i].getOhtDocumentRequestType());
 		}
 		consumer.setRepositoryMap(repositoryMap);
 
@@ -493,8 +493,8 @@ public class ConvenienceCommunication {
 	 * @return the OHT XDSResponseType</div>
 	 */
 	public XDSResponseType submit() {
-		setDefaultKeystoreTruststore(affinityDomain.getRepository());
-		source = new B_Source(affinityDomain.getRepository().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
 		source.getAuditor().getConfig().setOption("https.protocols", "TLSv1, TLSv1.2");
 
 		completeMetadata();
@@ -618,8 +618,8 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
 		// to long for the registry (EXT part is larger than the allowed 16
 		// characters)
-		docMetadata.setUniqueId(OID.createOIDGivenRoot(
-				docMetadata.getDocSourceActorOrganizationId(), 64));
+		docMetadata.setUniqueId(
+				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	private void completeMetadata() {
@@ -662,8 +662,8 @@ public class ConvenienceCommunication {
 
 		// Generate the UUID
 		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(
-					docMetadata.getDocSourceActorOrganizationId(), 64));
+			docMetadata.setUniqueId(
+					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
@@ -730,8 +730,8 @@ public class ConvenienceCommunication {
 		// set ContentTypeCode
 		if (subSet.getContentTypeCode() == null) {
 			if (txnData.getDocumentEntry(uuid).getTypeCode() != null) {
-				subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid)
-						.getTypeCode()));
+				subSet.setContentTypeCode(
+						EcoreUtil.copy(txnData.getDocumentEntry(uuid).getTypeCode()));
 			} else {
 				subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1",
 						"34133-9", "Summary of Episode Note", null));
