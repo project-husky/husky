@@ -372,8 +372,8 @@ public class ConvenienceCommunication {
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
@@ -399,8 +399,8 @@ public class ConvenienceCommunication {
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
@@ -431,7 +431,7 @@ public class ConvenienceCommunication {
 	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
 
 		// Create RetrieveSetRequestType
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
@@ -475,8 +475,8 @@ public class ConvenienceCommunication {
 	 * @return the OHT XDSResponseType</div>
 	 */
 	public XDSResponseType submit() {
-		setDefaultKeystoreTruststore(affinityDomain.getRepository());
-		source = new B_Source(affinityDomain.getRepository().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
 		source.getAuditor().getConfig().setOption("https.protocols", "TLSv1, TLSv1.2");
 
 		completeMetadata();
