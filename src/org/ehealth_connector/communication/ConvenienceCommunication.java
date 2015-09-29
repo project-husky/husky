@@ -16,16 +16,16 @@
 
 package org.ehealth_connector.communication;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -41,6 +41,10 @@ import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
+import org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot;
+import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
+import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
+import org.openhealthtools.ihe.common.ebxml._3._0.lcm.SubmitObjectsRequestType;
 //import org.eclipse.emf.common.util.URI;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
@@ -94,24 +98,6 @@ public class ConvenienceCommunication {
 		DocumentNotAccessibleException() {
 			super("The Document could not be found. Is the path correct?");
 		}
-	}
-
-	@SuppressWarnings("unused")
-	private static File createTempDir() {
-		final int TEMP_DIR_ATTEMPTS = 10000;
-
-		File baseDir = new File(System.getProperty("java.io.tmpdir"));
-		String baseName = System.currentTimeMillis() + "-";
-
-		for (int counter = 0; counter < TEMP_DIR_ATTEMPTS; counter++) {
-			File tempDir = new File(baseDir, baseName + counter);
-			if (tempDir.mkdir()) {
-				return tempDir;
-			}
-		}
-		throw new IllegalStateException(
-				"Failed to create directory within " + TEMP_DIR_ATTEMPTS + " attempts (tried "
-						+ baseName + "0 to " + baseName + (TEMP_DIR_ATTEMPTS - 1) + ')');
 	}
 
 	/**
@@ -271,15 +257,15 @@ public class ConvenienceCommunication {
 		txnData = new SubmitTransactionData();
 	}
 
-	public void createXdm(OutputStream outputStream) {
-		completeMetadata();
-		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
-		xdmContents.createZip(outputStream, txnData);
+	public XdmContents createXdm(OutputStream outputStream) {
+		XdmContents xdmContents = new XdmContents();
+		return createXdm(outputStream, xdmContents);
 	}
 
-	public void createXdm(OutputStream outputStream, XdmContents xdmContents) {
+	public XdmContents createXdm(OutputStream outputStream, XdmContents xdmContents) {
 		completeMetadata();
-		xdmContents.createZip(outputStream, txnData);
+		xdmContents.createZip(outputStream, txnData, new IndexHtm(txnData), new ReadmeTxt(txnData));
+		return xdmContents;
 	}
 
 	/**
@@ -314,10 +300,6 @@ public class ConvenienceCommunication {
 	 *            references instead of the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
-
-	public XdmContents getXdm(ZipFile zipFile) {
-		return new XdmContents(zipFile);
-	}
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
@@ -390,8 +372,8 @@ public class ConvenienceCommunication {
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
@@ -417,8 +399,8 @@ public class ConvenienceCommunication {
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRegistry());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
@@ -449,7 +431,7 @@ public class ConvenienceCommunication {
 	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		B_Consumer consumer = new B_Consumer(affinityDomain.getRegistry().getUri());
 
 		// Create RetrieveSetRequestType
 		RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
@@ -462,8 +444,8 @@ public class ConvenienceCommunication {
 			repositoryMap.put(docReq[i].getRepositoryId(), docReq[i].getRepositoryUri());
 
 			// Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest()
-					.add(docReq[i].getOhtDocumentRequestType());
+			retrieveDocumentSetRequest.getDocumentRequest().add(
+					docReq[i].getOhtDocumentRequestType());
 		}
 		consumer.setRepositoryMap(repositoryMap);
 
@@ -493,8 +475,8 @@ public class ConvenienceCommunication {
 	 * @return the OHT XDSResponseType</div>
 	 */
 	public XDSResponseType submit() {
-		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
-		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
+		setDefaultKeystoreTruststore(affinityDomain.getRepository());
+		source = new B_Source(affinityDomain.getRepository().getUri());
 		source.getAuditor().getConfig().setOption("https.protocols", "TLSv1, TLSv1.2");
 
 		completeMetadata();
@@ -618,8 +600,8 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
 		// to long for the registry (EXT part is larger than the allowed 16
 		// characters)
-		docMetadata.setUniqueId(
-				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		docMetadata.setUniqueId(OID.createOIDGivenRoot(
+				docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	private void completeMetadata() {
@@ -632,6 +614,47 @@ public class ConvenienceCommunication {
 			}
 		}
 		generateMissingSubmissionSetAttributes();
+	}
+
+	private XMLResource createMetadataXml() {
+		org.openhealthtools.ihe.xdm.creator.PortableMediaCreator pmc = new org.openhealthtools.ihe.xdm.creator.PortableMediaCreator();
+		SubmitObjectsRequestType submit = null;
+		try {
+			submit = pmc.extractXDMMetadata(txnData);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+
+		DocumentRoot docRoot = LCMFactory.eINSTANCE.createDocumentRoot();
+		docRoot.setSubmitObjectsRequest(submit);
+
+		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
+				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
+
+		xml.getContents().add(docRoot);
+		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
+		// xml.getDefaultSaveOptions().put(XMLResource.OPTION_ENCODING,
+		// "UTF-8");
+		xml.setEncoding("UTF-8");
+
+		return xml;
+	}
+
+	private byte[] createMetadataXmlByteArray() {
+		XMLResource xml = createMetadataXml();
+
+		try {
+			ByteArrayOutputStream bOS = new ByteArrayOutputStream();
+			xml.save(bOS, null);
+
+			bOS.close();
+
+			return bOS.toByteArray();
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
 	/**
@@ -662,8 +685,8 @@ public class ConvenienceCommunication {
 
 		// Generate the UUID
 		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(
-					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(
+					docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
@@ -730,8 +753,8 @@ public class ConvenienceCommunication {
 		// set ContentTypeCode
 		if (subSet.getContentTypeCode() == null) {
 			if (txnData.getDocumentEntry(uuid).getTypeCode() != null) {
-				subSet.setContentTypeCode(
-						EcoreUtil.copy(txnData.getDocumentEntry(uuid).getTypeCode()));
+				subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid)
+						.getTypeCode()));
 			} else {
 				subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1",
 						"34133-9", "Summary of Episode Note", null));

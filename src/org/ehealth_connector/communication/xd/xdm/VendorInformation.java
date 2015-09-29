@@ -4,7 +4,7 @@ public class VendorInformation {
 	public static final String DEFAULT_NAME = "The eHealthconnector Open Source Projekt";
 	public static final String DEFAULT_APPLICATION_NAME = org.ehealth_connector.common.EHealthConnectorVersions.EHealthConnectorR201503
 			.getSystemVersionName();
-	public static final String DEFAULT_CONTACT_INFORMATION = "Oliver Egger, Tony Schaller, Axel Helmer. See http://sourceforge.net/p/ehealthconnector/wiki/Team";
+	public static final String DEFAULT_CONTACT_INFORMATION = "See http://sourceforge.net/p/ehealthconnector/wiki/Team";
 
 	private String name;
 	private String applicationName;

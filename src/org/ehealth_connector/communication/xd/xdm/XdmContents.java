@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -43,33 +44,20 @@ public class XdmContents {
 	private XMLResource metadataXml;
 
 	private ZipFile zipFile;
+	private SubmitTransactionData[] txnData;
 
-	public XdmContents(IndexHtm indexHtm, ReadmeTxt readmeTxt) {
-		this.indexHtm = indexHtm;
-		this.readmeTxt = readmeTxt;
+	public XdmContents() {
 	}
 
 	public XdmContents(ZipFile zipFile) {
-		// Find and initalize ReadmeTxt and IndexHtm
-		try {
-			readmeTxt = new ReadmeTxt(zipFile.getInputStream(getXDMZipEntry(zipFile, "",
-					XDM_README, true)));
-			indexHtm = new IndexHtm(zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_INDEX,
-					true)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// Find and initialize all SubmissionSets
-		try {
-			loadXDMArchive(zipFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		this.zipFile = zipFile;
 	}
 
-	public void createZip(OutputStream outputStream, SubmitTransactionData txnData) {
+	public void createZip(OutputStream outputStream, SubmitTransactionData txnData,
+			IndexHtm indexHtm, ReadmeTxt readmeTxt) {
+		this.indexHtm = indexHtm;
+		this.readmeTxt = readmeTxt;
+
 		// Creating the ZipFileHelper Class
 		ZipCreator zip = new ZipCreator(outputStream);
 
@@ -99,8 +87,8 @@ public class XdmContents {
 		zip.closeZip();
 	}
 
-	public IndexHtm getIndexHtm() {
-		return indexHtm;
+	public List<XDSDocument> getDocuments() {
+		return getDocuments(0);
 	}
 
 	// public List<XDSDocument> getDocuments() {
@@ -137,119 +125,36 @@ public class XdmContents {
 	//
 	// }
 
-	public ReadmeTxt getReadmeTxt() {
-		return readmeTxt;
+	public List<XDSDocument> getDocuments(int submissionSetNumber) {
+		return txnData[submissionSetNumber].getDocList();
 	}
 
-	public SubmitTransactionData[] getXdmContents() {
-		try {
-			return loadXDMArchive(zipFile);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public List<DocumentAndMetadata> getDocumentsAndMetadata(int submissionSetNumber) {
+		SubmitTransactionData std = txnData[submissionSetNumber];
+		List<DocumentAndMetadata> docAndMetaList = new ArrayList<DocumentAndMetadata>();
+
+		for (XDSDocument xdsDoc : std.getDocList()) {
+			// DocumentAndMetadata
+			//
+			// docAndMetaList.add(e)
 		}
 		return null;
 	}
 
-	/**
-	 * Reads an XDM ZIP archive and returns a set of XDS submissions.
-	 */
-	public SubmitTransactionData[] loadXDMArchive(ZipFile zipFile) throws Exception {
-		Map<String, SubmitTransactionData> results = new HashMap<String, SubmitTransactionData>();
+	public IndexHtm getIndexHtm() {
+		return indexHtm;
+	}
 
-		try {
-			Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
-			ZipEntry zipEntry = null;
+	public ReadmeTxt getReadmeTxt() {
+		return readmeTxt;
+	}
 
-			// load the ZIP archive into memory
-			while (zipEntries.hasMoreElements()) {
-				zipEntry = zipEntries.nextElement();
-				if (!zipEntry.isDirectory()
-						&& zipEntry.getName().startsWith(XDM_DIRSPEC_SUBMISSIONROOT)) {
-					String subsetDirspec = getSubmissionSetDirspec(zipEntry.getName());
+	public int getSubmissionSetArrayLenght() {
+		return txnData.length;
+	}
 
-					// we've found a new submission set
-					if (!results.containsKey(subsetDirspec)) {
-
-						// extract METADATA.XML
-						ZipEntry metadataEntry = getXDMZipEntry(zipFile, subsetDirspec,
-								XDM_METADATA, false);
-						if (metadataEntry == null) {
-							log.warn("XDM submission set folder '" + subsetDirspec
-									+ "' has no metadata file: " + XDM_METADATA);
-						} else {
-							InputStream in = zipFile.getInputStream(metadataEntry);
-							ByteArrayOutputStream baos = new ByteArrayOutputStream();
-							int bytesRead = 0;
-							byte[] buffer = new byte[2048];
-							while ((bytesRead = in.read(buffer)) != -1) {
-								baos.write(buffer, 0, bytesRead);
-							}
-							in.close();
-
-							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
-							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-									.createResource(URI
-											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
-							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-							resources.load(bais, null);
-							EList list = resources.getContents();
-							Object o = list.get(0);
-
-							if (o instanceof org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot) {
-								org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot docRoot = (org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot) o;
-								SubmitObjectsRequestType soRequestType = docRoot
-										.getSubmitObjectsRequest();
-
-								PortableMediaImporter importer = new PortableMediaImporter();
-								ProvideAndRegisterDocumentSetType prType = importer
-										.importXDMMetadata(soRequestType);
-								SubmitTransactionData txnData = new SubmitTransactionData();
-								txnData.getMetadata().setSubmissionSet(
-										EcoreUtil.copy(prType.getSubmissionSet()));
-
-								for (int i = 0; i < prType.getDocumentEntry().size(); i++) {
-									DocumentEntryType xdsDocumentEntry = (DocumentEntryType) prType
-											.getDocumentEntry().get(i);
-									String subsetFilespec = xdsDocumentEntry.getUri();
-									// xdsDocumentEntry.setUri(null); // is not
-									// a valid 'URI' value for a repository
-									// submission
-
-									ZipEntry docZipEntry = getXDMZipEntry(zipFile, subsetDirspec,
-											subsetFilespec, false);
-									if (docZipEntry != null) {
-										InputStream docStream = zipFile.getInputStream(docZipEntry);
-										XDSDocument xdsDocument = new XDSDocumentFromStream(
-												DocumentDescriptor.getDocumentDescriptorForMimeType(xdsDocumentEntry
-														.getMimeType()), docStream);
-										xdsDocument.setDocumentEntryUUID(xdsDocumentEntry
-												.getEntryUUID());
-										xdsDocument.setDocumentUniqueId(xdsDocumentEntry
-												.getUniqueId());
-										xdsDocument.setRepositoryUniqueId(xdsDocumentEntry
-												.getRepositoryUniqueId());
-										txnData.getDocList().add(xdsDocument);
-										txnData.getMetadata().getDocumentEntry()
-												.add(EcoreUtil.copy(xdsDocumentEntry));
-									} else {
-										log.error(XDM_METADATA + " in XDM submission folder "
-												+ subsetDirspec + " has XDSDocumentEntry.URI '"
-												+ xdsDocumentEntry.getUri()
-												+ "' that cannot be found in ZIP");
-									}
-								}
-
-								results.put(subsetDirspec, txnData);
-							}
-
-						}
-					}
-				}
-			}
-		} finally {
-		}
-
-		return results.values().toArray(new SubmitTransactionData[] {});
+	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
+		return txnData;
 	}
 
 	private XMLResource createMetadataXml(SubmitTransactionData txnData) {
@@ -321,6 +226,117 @@ public class XdmContents {
 			result = zipFile.getEntry(zipFilespec);
 		}
 		return result;
+	}
+
+	/**
+	 * Reads an XDM ZIP archive and returns a set of XDS submissions.
+	 */
+	@SuppressWarnings("unchecked")
+	private void loadXDMArchive() throws Exception {
+		Map<String, SubmitTransactionData> results = new HashMap<String, SubmitTransactionData>();
+
+		try {
+			Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+			ZipEntry zipEntry = null;
+
+			// load the descriptive files
+			readmeTxt = new ReadmeTxt(zipFile.getInputStream(getXDMZipEntry(zipFile, "",
+					XDM_README, true)));
+			indexHtm = new IndexHtm(zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_INDEX,
+					true)));
+
+			// load the ZIP archive into memory
+			while (zipEntries.hasMoreElements()) {
+				zipEntry = zipEntries.nextElement();
+				if (!zipEntry.isDirectory()
+						&& zipEntry.getName().startsWith(XDM_DIRSPEC_SUBMISSIONROOT)) {
+					String subsetDirspec = getSubmissionSetDirspec(zipEntry.getName());
+
+					// we've found a new submission set
+					if (!results.containsKey(subsetDirspec)) {
+
+						// extract METADATA.XML
+						ZipEntry metadataEntry = getXDMZipEntry(zipFile, subsetDirspec,
+								XDM_METADATA, false);
+						if (metadataEntry == null) {
+							log.warn("XDM submission set folder '" + subsetDirspec
+									+ "' has no metadata file: " + XDM_METADATA);
+						} else {
+							InputStream in = zipFile.getInputStream(metadataEntry);
+							ByteArrayOutputStream baos = new ByteArrayOutputStream();
+							int bytesRead = 0;
+							byte[] buffer = new byte[2048];
+							while ((bytesRead = in.read(buffer)) != -1) {
+								baos.write(buffer, 0, bytesRead);
+							}
+							in.close();
+
+							@SuppressWarnings("unused")
+							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
+							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
+									.createResource(URI
+											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
+							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+							resources.load(bais, null);
+							@SuppressWarnings("rawtypes")
+							EList list = resources.getContents();
+							Object o = list.get(0);
+
+							if (o instanceof org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot) {
+								org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot docRoot = (org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot) o;
+								SubmitObjectsRequestType soRequestType = docRoot
+										.getSubmitObjectsRequest();
+
+								PortableMediaImporter importer = new PortableMediaImporter();
+								ProvideAndRegisterDocumentSetType prType = importer
+										.importXDMMetadata(soRequestType);
+								SubmitTransactionData txnData = new SubmitTransactionData();
+								txnData.getMetadata().setSubmissionSet(
+										EcoreUtil.copy(prType.getSubmissionSet()));
+
+								for (int i = 0; i < prType.getDocumentEntry().size(); i++) {
+									DocumentEntryType xdsDocumentEntry = (DocumentEntryType) prType
+											.getDocumentEntry().get(i);
+									String subsetFilespec = xdsDocumentEntry.getUri();
+									// xdsDocumentEntry.setUri(null); // is not
+									// a valid 'URI' value for a repository
+									// submission
+
+									ZipEntry docZipEntry = getXDMZipEntry(zipFile, subsetDirspec,
+											subsetFilespec, false);
+									if (docZipEntry != null) {
+										InputStream docStream = zipFile.getInputStream(docZipEntry);
+										XDSDocument xdsDocument = new XDSDocumentFromStream(
+												DocumentDescriptor.getDocumentDescriptorForMimeType(xdsDocumentEntry
+														.getMimeType()), docStream);
+										xdsDocument.setDocumentEntryUUID(xdsDocumentEntry
+												.getEntryUUID());
+										xdsDocument.setDocumentUniqueId(xdsDocumentEntry
+												.getUniqueId());
+										xdsDocument.setRepositoryUniqueId(xdsDocumentEntry
+												.getRepositoryUniqueId());
+										txnData.getDocList().add(xdsDocument);
+										txnData.getMetadata().getDocumentEntry()
+												.add(EcoreUtil.copy(xdsDocumentEntry));
+									} else {
+										log.error(XDM_METADATA + " in XDM submission folder "
+												+ subsetDirspec + " has XDSDocumentEntry.URI '"
+												+ xdsDocumentEntry.getUri()
+												+ "' that cannot be found in ZIP");
+									}
+								}
+
+								results.put(subsetDirspec, txnData);
+							}
+
+						}
+					}
+				}
+			}
+		} finally {
+		}
+
+		this.txnData = results.values().toArray(new SubmitTransactionData[] {});
 	}
 
 	// private InputStream getFileInputStreamFromZip(ZipFile zipFile, String
