@@ -654,7 +654,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	/**
 	 * Gets the religious Affiliation
 	 * 
-	 * @return
+	 * @return religious affiliation
 	 */
 	public CodeableConceptDt getReligiousAffiliation() {
 		return religiousAffiliation;
@@ -723,6 +723,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 	 * Set the religious Affiliation
 	 * 
 	 * @param religiousAffiliation
+	 *            the religious affiliation
 	 */
 	public void setReligiousAffiliation(CodeableConceptDt religiousAffiliation) {
 		this.religiousAffiliation = religiousAffiliation;
