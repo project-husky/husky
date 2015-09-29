@@ -23,6 +23,8 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -266,6 +268,10 @@ public class ConvenienceCommunication {
 		completeMetadata();
 		xdmContents.createZip(outputStream, txnData, new IndexHtm(txnData), new ReadmeTxt(txnData));
 		return xdmContents;
+	}
+	
+	public XdmContents getXdmContents(ZipFile zipFile) {
+		return new XdmContents(zipFile);
 	}
 
 	/**

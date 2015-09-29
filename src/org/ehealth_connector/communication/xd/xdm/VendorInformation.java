@@ -1,7 +1,7 @@
 package org.ehealth_connector.communication.xd.xdm;
 
 public class VendorInformation {
-	public static final String DEFAULT_NAME = "The eHealthconnector Open Source Projekt";
+	public static final String DEFAULT_NAME = "the eHealthConnector Open Source Projekt";
 	public static final String DEFAULT_APPLICATION_NAME = org.ehealth_connector.common.EHealthConnectorVersions.EHealthConnectorR201503
 			.getSystemVersionName();
 	public static final String DEFAULT_CONTACT_INFORMATION = "See http://sourceforge.net/p/ehealthconnector/wiki/Team";

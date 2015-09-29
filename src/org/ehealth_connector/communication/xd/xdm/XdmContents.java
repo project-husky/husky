@@ -88,7 +88,7 @@ public class XdmContents {
 	}
 
 	public List<XDSDocument> getDocuments() {
-		return getDocuments(0);
+		return getDocumentList(0);
 	}
 
 	// public List<XDSDocument> getDocuments() {
@@ -125,20 +125,23 @@ public class XdmContents {
 	//
 	// }
 
-	public List<XDSDocument> getDocuments(int submissionSetNumber) {
+	public List<XDSDocument> getDocumentList(int submissionSetNumber) {
 		return txnData[submissionSetNumber].getDocList();
 	}
 
-	public List<DocumentAndMetadata> getDocumentsAndMetadata(int submissionSetNumber) {
+	public List<DocumentAndMetadata> getDocumentAndMetadataList() {
+		return getDocumentAndMetadataList(0);
+	}
+	
+	public List<DocumentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
 		SubmitTransactionData std = txnData[submissionSetNumber];
 		List<DocumentAndMetadata> docAndMetaList = new ArrayList<DocumentAndMetadata>();
 
 		for (XDSDocument xdsDoc : std.getDocList()) {
-			// DocumentAndMetadata
-			//
-			// docAndMetaList.add(e)
+			 DocumentAndMetadata docAndMetadataEntry = new DocumentAndMetadata(xdsDoc, txnData[submissionSetNumber].getDocumentEntry(xdsDoc.getDocumentEntryUUID()));		
+			 docAndMetaList.add(docAndMetadataEntry);
 		}
-		return null;
+		return docAndMetaList;
 	}
 
 	public IndexHtm getIndexHtm() {
@@ -232,7 +235,7 @@ public class XdmContents {
 	 * Reads an XDM ZIP archive and returns a set of XDS submissions.
 	 */
 	@SuppressWarnings("unchecked")
-	private void loadXDMArchive() throws Exception {
+	public void loadXDMArchive() throws Exception {
 		Map<String, SubmitTransactionData> results = new HashMap<String, SubmitTransactionData>();
 
 		try {
