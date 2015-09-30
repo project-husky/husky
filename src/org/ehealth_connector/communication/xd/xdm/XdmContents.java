@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -24,7 +26,6 @@ import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.SubmitObjectsRequestType;
 import org.openhealthtools.ihe.xdm.importer.PortableMediaImporter;
-import org.openhealthtools.ihe.xds.consumer.response.GenericXDSRepositoryRetrieveResponseType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
@@ -72,13 +73,13 @@ public class XdmContents {
 	private SubmitTransactionData[] txnData;
 
 	/** The OHT response object. */
-	private GenericXDSRepositoryRetrieveResponseType resp;
+	private XdmRetrieveResponseTypeImpl resp;
 
 	/**
 	 * Instantiates a new xdm contents.
 	 */
 	public XdmContents() {
-		this.resp = new GenericXDSRepositoryRetrieveResponseType();
+		this.resp = new XdmRetrieveResponseTypeImpl();
 		this.txnData = new SubmitTransactionData[] {};
 	}
 
@@ -262,10 +263,9 @@ public class XdmContents {
 	 * 
 	 * @return The OHT XDSResponseType
 	 */
-	public GenericXDSRepositoryRetrieveResponseType getXdmContentsAsOhtXdsResponseType() {
-		GenericXDSRepositoryRetrieveResponseType resp = new GenericXDSRepositoryRetrieveResponseType();
+	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
 		for (int i = 0; i < txnData.length; i++) {
-			resp.getAttachments().addAll(txnData[i].getDocList());
+			resp.setAttachments(txnData[i].getDocList());
 		}
 		return resp;
 	}
@@ -377,10 +377,10 @@ public class XdmContents {
 				}
 			}
 		} catch (IOException e) {
-			log.error("IO Error during loading of ZIP File" + e.getMessage());
+			log.error("IO Error during loading of ZIP File. " + e.getMessage());
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		} catch (Exception e) {
-			log.error("Exception during loading of ZIP File" + e.getMessage());
+			log.error("Exception during loading of ZIP File. " + e.getMessage());
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		}
 
@@ -398,6 +398,27 @@ public class XdmContents {
 	private XMLResource createMetadataXml(SubmitTransactionData txnData) {
 		org.openhealthtools.ihe.xdm.creator.PortableMediaCreator pmc = new org.openhealthtools.ihe.xdm.creator.PortableMediaCreator();
 		SubmitObjectsRequestType submit = null;
+
+		DocumentEntryType docEntry;
+		String hash;
+		String size;
+
+		// Calculate Hash and Size for each document and set the information to
+		// the DocumentMetadata
+		for (XDSDocument xdsDoc : txnData.getDocList()) {
+			try {
+				docEntry = txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID());
+
+				hash = DigestUtils.sha1Hex(xdsDoc.getStream());
+				docEntry.setHash(hash);
+
+				size = Integer.toString(IOUtils.toByteArray(xdsDoc.getStream()).length);
+				docEntry.setSize(size);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		try {
 			submit = pmc.extractXDMMetadata(txnData);
 		} catch (Exception e2) {

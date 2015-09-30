@@ -68,6 +68,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.mdht.uml.cda.hitsp.runtime.201212071459/1.2.0_Runtime/org.openhealthtools.mdht.uml.hl7.vocab_1.2.0.201212201425.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xerces/org.apache.xerces_2.9.0.v201101211617.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.mdht.uml.cda.ch.runtime/org.openhealthtools.mdht.uml.cda.ch.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.10/commons-codec-1.10.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/activation-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/annogen-0.1.0.jar"/>
