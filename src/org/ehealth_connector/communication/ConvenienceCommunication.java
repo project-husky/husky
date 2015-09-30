@@ -259,8 +259,10 @@ public class ConvenienceCommunication {
 	 *            The outputStream object where the contents will be written to.
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
-		XdmContents xdmContents = new XdmContents();
-		return createXdmContents(outputStream, xdmContents);
+		completeMetadata();
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		xdmContents.createZip(outputStream, txnData);
+		return xdmContents;
 	}
 
 	/**
@@ -276,7 +278,7 @@ public class ConvenienceCommunication {
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
 		completeMetadata();
-		xdmContents.createZip(outputStream, txnData, new IndexHtm(txnData), new ReadmeTxt(txnData));
+		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
 

@@ -79,6 +79,20 @@ public class XdmContents {
 	 */
 	public XdmContents() {
 		this.resp = new GenericXDSRepositoryRetrieveResponseType();
+		this.txnData = new SubmitTransactionData[] {};
+	}
+
+	/**
+	 * Instantiates a new xdm contents with a given XDM volume as single zip
+	 * file.
+	 * 
+	 * @param indexHtm
+	 * @param readmeTxt
+	 */
+	public XdmContents(IndexHtm indexHtm, ReadmeTxt readmeTxt) {
+		this();
+		this.indexHtm = indexHtm;
+		this.readmeTxt = readmeTxt;
 	}
 
 	/**
@@ -107,11 +121,8 @@ public class XdmContents {
 	 * @param readmeTxt
 	 *            the readme txt
 	 */
-	public void createZip(OutputStream outputStream, SubmitTransactionData txnData,
-			IndexHtm indexHtm, ReadmeTxt readmeTxt) {
-		this.indexHtm = indexHtm;
-		this.readmeTxt = readmeTxt;
-		this.txnData[0] = txnData;
+	public void createZip(OutputStream outputStream, SubmitTransactionData txnData) {
+		this.txnData = new SubmitTransactionData[] { txnData };
 
 		// Creating the ZipFileHelper Class
 		ZipCreator zip = new ZipCreator(outputStream);
