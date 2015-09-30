@@ -36,28 +36,22 @@ public class ZipCreator {
 	 * @param pathInZipFile
 	 *            Contains the relative path only in that zip file
 	 */
-	public void addZipItem(InputStream data, String pathInZipFile) {
+	public void addZipItem(InputStream data, String pathInZipFile) throws IOException {
 
 		logService.debug("Adding to Zip-file: " + pathInZipFile);
 
-		try {
-			if (data == null) {
-				out.putNextEntry(new ZipEntry(pathInZipFile));
-				out.closeEntry();
-			} else {
-				out.putNextEntry(new ZipEntry(pathInZipFile));
+		if (data == null) {
+			out.putNextEntry(new ZipEntry(pathInZipFile));
+			out.closeEntry();
+		} else {
+			out.putNextEntry(new ZipEntry(pathInZipFile));
 
-				int length;
-				while ((length = data.read(buffer)) > 0) {
-					out.write(buffer, 0, length);
-				}
-
-				out.closeEntry();
+			int length;
+			while ((length = data.read(buffer)) > 0) {
+				out.write(buffer, 0, length);
 			}
 
-		} catch (IOException e) {
-			logService.error("An Error occured while adding the ZipItem");
-			e.printStackTrace();
+			out.closeEntry();
 		}
 	}
 
@@ -65,13 +59,7 @@ public class ZipCreator {
 	 * Closes the stream. It only has to be called when no more entries will be
 	 * added.
 	 */
-	public void closeZip() {
-		try {
-			out.close();
-
-		} catch (IOException e) {
-			logService.error("ZipFile could not be closed");
-			e.printStackTrace();
-		}
+	public void closeZip() throws IOException {
+		out.close();
 	}
 }

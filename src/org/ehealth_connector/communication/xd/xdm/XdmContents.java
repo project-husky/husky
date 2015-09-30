@@ -24,17 +24,23 @@ import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.SubmitObjectsRequestType;
 import org.openhealthtools.ihe.xdm.importer.PortableMediaImporter;
+import org.openhealthtools.ihe.xds.consumer.response.GenericXDSRepositoryRetrieveResponseType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.ProvideAndRegisterDocumentSetType;
+import org.openhealthtools.ihe.xds.response.XDSStatusType;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
  * The Class XdmContents represents all content of an XDM volume. This includes
  * human readable informative files like README.TXT or INDEX.HTM and also
  * machine readable files like METADATA.XML
+ */
+/**
+ * @author ahel
+ *
  */
 public class XdmContents {
 
@@ -59,19 +65,20 @@ public class XdmContents {
 	/** The readme txt. */
 	private ReadmeTxt readmeTxt;
 
-	/** The metadata xml. */
-	private XMLResource metadataXml;
-
 	/** The zip file. */
 	private ZipFile zipFile;
 
 	/** The txn data. */
 	private SubmitTransactionData[] txnData;
 
+	/** The OHT response object. */
+	private GenericXDSRepositoryRetrieveResponseType resp;
+
 	/**
 	 * Instantiates a new xdm contents.
 	 */
 	public XdmContents() {
+		this.resp = new GenericXDSRepositoryRetrieveResponseType();
 	}
 
 	/**
@@ -82,6 +89,7 @@ public class XdmContents {
 	 *            the zip file
 	 */
 	public XdmContents(ZipFile zipFile) {
+		this();
 		this.zipFile = zipFile;
 	}
 
@@ -103,34 +111,43 @@ public class XdmContents {
 			IndexHtm indexHtm, ReadmeTxt readmeTxt) {
 		this.indexHtm = indexHtm;
 		this.readmeTxt = readmeTxt;
+		this.txnData[0] = txnData;
 
 		// Creating the ZipFileHelper Class
 		ZipCreator zip = new ZipCreator(outputStream);
 
 		// Add the path structure for documents in the Zip File
-		zip.addZipItem(null, "IHE_XDM/");
-		zip.addZipItem(null, "IHE_XDM/SUBSET01/");
+		try {
+			zip.addZipItem(null, "IHE_XDM/");
+			zip.addZipItem(null, "IHE_XDM/SUBSET01/");
 
-		// Add each XdsDocument to the Zip File
-		int i = 0;
-		List<XDSDocument> docList = txnData.getDocList();
-		for (XDSDocument xdsDoc : docList) {
-			i++;
-			String filePath = XdsUtil.createXdmDocPathAndName(xdsDoc, i);
-			txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).setUri(
-					XdsUtil.createXdmDocName(xdsDoc, i));
+			// Add each XdsDocument to the Zip File
+			int i = 0;
+			List<XDSDocument> docList = txnData.getDocList();
+			for (XDSDocument xdsDoc : docList) {
+				i++;
+				String filePath = XdsUtil.createXdmDocPathAndName(xdsDoc, i);
+				txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID()).setUri(
+						XdsUtil.createXdmDocName(xdsDoc, i));
 
-			// add the document
-			zip.addZipItem(xdsDoc.getStream(), filePath);
+				// add the document
+				zip.addZipItem(xdsDoc.getStream(), filePath);
+			}
+
+			// Add the necessary files to the zip container
+			zip.addZipItem(indexHtm.getInputStream(), "INDEX.HTM");
+			zip.addZipItem(readmeTxt.getInputStream(), "README.TXT");
+
+			XMLResource metadataXml = createMetadataXml(txnData);
+			zip.addZipItem(this.getMetadataXmlInputStream(metadataXml),
+					"IHE_XDM/SUBSET01/METADATA.XML");
+
+			zip.closeZip();
+		} catch (IOException e) {
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("IO Exception during zip creation. " + e.getMessage());
 		}
-
-		// Add the necessary files to the zip container
-		zip.addZipItem(indexHtm.getInputStream(), "INDEX.HTM");
-		zip.addZipItem(readmeTxt.getInputStream(), "README.TXT");
-		metadataXml = createMetadataXml(txnData);
-		zip.addZipItem(this.getMetadataXmlInputStream(), "IHE_XDM/SUBSET01/METADATA.XML");
-
-		zip.closeZip();
+		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
 	}
 
 	/**
@@ -165,6 +182,15 @@ public class XdmContents {
 	}
 
 	/**
+	 * Gets a list of documents (the actual payload of the XDM volume)
+	 *
+	 * @return the documents
+	 */
+	public List<XDSDocument> getDocumentList() {
+		return getDocumentList(0);
+	}
+
+	/**
 	 * Gets a list of documents (the actual payload of the XDM volume) for a
 	 * specific submission set.
 	 *
@@ -174,15 +200,6 @@ public class XdmContents {
 	 */
 	public List<XDSDocument> getDocumentList(int submissionSetNumber) {
 		return txnData[submissionSetNumber].getDocList();
-	}
-
-	/**
-	 * Gets a list of documents (the actual payload of the XDM volume)
-	 *
-	 * @return the documents
-	 */
-	public List<XDSDocument> getDocuments() {
-		return getDocumentList(0);
 	}
 
 	/**
@@ -224,6 +241,22 @@ public class XdmContents {
 	 */
 	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
 		return txnData;
+	}
+
+	/**
+	 * Gets the XDM contents as OHT XDSResponseType. This Object contains a flat
+	 * list of all documents from all submission sets. It does not contain the
+	 * full XDS Metadata for each document. If you want to get this data, please
+	 * use the getDocumentAndMetadata method.
+	 * 
+	 * @return The OHT XDSResponseType
+	 */
+	public GenericXDSRepositoryRetrieveResponseType getXdmContentsAsOhtXdsResponseType() {
+		GenericXDSRepositoryRetrieveResponseType resp = new GenericXDSRepositoryRetrieveResponseType();
+		for (int i = 0; i < txnData.length; i++) {
+			resp.getAttachments().addAll(txnData[i].getDocList());
+		}
+		return resp;
 	}
 
 	/**
@@ -333,12 +366,15 @@ public class XdmContents {
 				}
 			}
 		} catch (IOException e) {
-			log.error(e.getMessage());
+			log.error("IO Error during loading of ZIP File" + e.getMessage());
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error("Exception during loading of ZIP File" + e.getMessage());
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		}
 
 		this.txnData = results.values().toArray(new SubmitTransactionData[] {});
+		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
 	}
 
 	/**
@@ -354,7 +390,8 @@ public class XdmContents {
 		try {
 			submit = pmc.extractXDMMetadata(txnData);
 		} catch (Exception e2) {
-			e2.printStackTrace();
+			log.error("Error during Metadata Extraction " + e2.getMessage());
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		}
 
 		DocumentRoot docRoot = LCMFactory.eINSTANCE.createDocumentRoot();
@@ -372,16 +409,19 @@ public class XdmContents {
 
 	/**
 	 * Gets the metadata xml input stream.
+	 * 
+	 * @param metadataXml
 	 *
 	 * @return the metadata xml input stream
 	 */
-	private InputStream getMetadataXmlInputStream() {
+	private InputStream getMetadataXmlInputStream(XMLResource metadataXml) {
 		try {
 			ByteArrayOutputStream bOS = new ByteArrayOutputStream();
 			metadataXml.save(bOS, null);
 			return new ByteArrayInputStream(bOS.toByteArray());
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			log.error("IOException during reading the Metadata.xml InputStream " + e.getMessage());
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		}
 		return null;
 	}

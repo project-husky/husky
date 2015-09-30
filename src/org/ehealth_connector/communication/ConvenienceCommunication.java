@@ -258,9 +258,9 @@ public class ConvenienceCommunication {
 	 * @param outputStream
 	 *            The outputStream object where the contents will be written to.
 	 */
-	public XdmContents createXdm(OutputStream outputStream) {
+	public XdmContents createXdmContents(OutputStream outputStream) {
 		XdmContents xdmContents = new XdmContents();
-		return createXdm(outputStream, xdmContents);
+		return createXdmContents(outputStream, xdmContents);
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class ConvenienceCommunication {
 	 * @param xdmContents
 	 *            The existing xdmContents object
 	 */
-	public XdmContents createXdm(OutputStream outputStream, XdmContents xdmContents) {
+	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
 		completeMetadata();
 		xdmContents.createZip(outputStream, txnData, new IndexHtm(txnData), new ReadmeTxt(txnData));
 		return xdmContents;
