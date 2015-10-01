@@ -103,7 +103,9 @@ public class XdmContents {
 	 * file.
 	 * 
 	 * @param indexHtm
+	 *            the index htm
 	 * @param readmeTxt
+	 *            the readme txt
 	 */
 	public XdmContents(IndexHtm indexHtm, ReadmeTxt readmeTxt) {
 		this();
@@ -132,10 +134,6 @@ public class XdmContents {
 	 * @param txnData
 	 *            the SubmitTransactionData data (containing Metadata and the
 	 *            payload files themselves)
-	 * @param indexHtm
-	 *            the index htm
-	 * @param readmeTxt
-	 *            the readme txt
 	 */
 	public void createZip(OutputStream outputStream, SubmitTransactionData txnData) {
 		this.txnData = new SubmitTransactionData[] { txnData };
@@ -543,8 +541,10 @@ public class XdmContents {
 	 * Checks, if the zipFile was already loaded
 	 */
 	private void lazyLoadCheck() {
-		if (zipFile != null && txnData == null) {
-			loadXDMArchive();
+		if (txnData != null) {
+			if (zipFile != null && txnData.length < 1) {
+				loadXDMArchive();
+			}
 		}
 	}
 

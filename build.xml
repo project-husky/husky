@@ -129,6 +129,8 @@
 		<pathelement location="lib_tests/junit.jar" />
 		<pathelement location="lib_tests/org.hamcrest.core_1.1.0.v20090501071000.jar" />
 		<pathelement location="lib_tests/hapi-fhir-validation-resources-dstu2-1.2.jar" />
+		<pathelement location="lib/commons-codec-1.10/commons-codec-1.10.jar" />
+		<pathelement location="lib/fhir/commons-io-2.4.jar" />
 	</path>
 
 	<target name="init">
@@ -308,13 +310,16 @@
 
 		<copy todir="bin">
 			<fileset dir="src_tests">
-				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		
+		<copy todir="bin">
+			<fileset dir="src_tests/rsc">
 			</fileset>
 		</copy>
 
 		<jar destfile="${basedir}/dist/ehealthconnectortest.jar" basedir="bin" />
 		<path id="testapplication" location="${basedir}/dist/ehealthconnectortest.jar" />
-
 
 		<junit printsummary="yes">
 			<classpath>
