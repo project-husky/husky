@@ -95,7 +95,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/wstx-asl-3.2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/xalan-2.7.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.axis2_1.4.1/XmlSchema-1.4.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-codec-1.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-discovery-0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-fileupload-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0/commons-httpclient-3.0.1.jar"/>
