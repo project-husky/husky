@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.xd.xdm;
 
 import java.io.ByteArrayInputStream;
@@ -157,7 +172,8 @@ public class XdmContents {
 			zip.closeZip();
 		} catch (IOException e) {
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
-			log.error("IO Exception during zip creation. " + e.getMessage());
+			log.error("IO Exception during zip creation. ", e);
+			return;
 		}
 		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
 	}
@@ -182,6 +198,9 @@ public class XdmContents {
 	 * @return the document and metadata list
 	 */
 	public List<DocumentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
+		lazyLoadCheck();
+		submissionSetRangeCheck(submissionSetNumber);
+
 		SubmitTransactionData std = txnData[submissionSetNumber];
 		List<DocumentAndMetadata> docAndMetaList = new ArrayList<DocumentAndMetadata>();
 
@@ -211,6 +230,7 @@ public class XdmContents {
 	 * @return the document list
 	 */
 	public List<XDSDocument> getDocumentList(int submissionSetNumber) {
+		lazyLoadCheck();
 		return txnData[submissionSetNumber].getDocList();
 	}
 
@@ -220,6 +240,7 @@ public class XdmContents {
 	 * @return the index htm
 	 */
 	public IndexHtm getIndexHtm() {
+		lazyLoadCheck();
 		return indexHtm;
 	}
 
@@ -229,6 +250,7 @@ public class XdmContents {
 	 * @return the readme txt
 	 */
 	public ReadmeTxt getReadmeTxt() {
+		lazyLoadCheck();
 		return readmeTxt;
 	}
 
@@ -240,6 +262,7 @@ public class XdmContents {
 	 * @return the submission set array lenght
 	 */
 	public int getSubmissionSetArrayLenght() {
+		lazyLoadCheck();
 		if (txnData != null) {
 			return txnData.length;
 		} else
@@ -252,6 +275,7 @@ public class XdmContents {
 	 * @return the XDM contents as OHT submit transaction data
 	 */
 	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
+		lazyLoadCheck();
 		return txnData;
 	}
 
@@ -264,6 +288,7 @@ public class XdmContents {
 	 * @return The OHT XDSResponseType
 	 */
 	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
+		lazyLoadCheck();
 		for (int i = 0; i < txnData.length; i++) {
 			resp.setAttachments(txnData[i].getDocList());
 		}
@@ -377,11 +402,13 @@ public class XdmContents {
 				}
 			}
 		} catch (IOException e) {
-			log.error("IO Error during loading of ZIP File. " + e.getMessage());
+			log.error("IO Error during loading of ZIP File. ", e);
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			return;
 		} catch (Exception e) {
-			log.error("Exception during loading of ZIP File. " + e.getMessage());
+			log.error("Exception during loading of ZIP File. ", e);
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			return;
 		}
 
 		this.txnData = results.values().toArray(new SubmitTransactionData[] {});
@@ -415,15 +442,17 @@ public class XdmContents {
 				size = Integer.toString(IOUtils.toByteArray(xdsDoc.getStream()).length);
 				docEntry.setSize(size);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error("Error calculating hash and size. ", e);
+				return null;
 			}
 		}
 
 		try {
 			submit = pmc.extractXDMMetadata(txnData);
 		} catch (Exception e2) {
-			log.error("Error during Metadata Extraction " + e2.getMessage());
+			log.error("Error during Metadata Extraction ", e2);
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			return null;
 		}
 
 		DocumentRoot docRoot = LCMFactory.eINSTANCE.createDocumentRoot();
@@ -452,7 +481,7 @@ public class XdmContents {
 			metadataXml.save(bOS, null);
 			return new ByteArrayInputStream(bOS.toByteArray());
 		} catch (IOException e) {
-			log.error("IOException during reading the Metadata.xml InputStream " + e.getMessage());
+			log.error("IOException during reading the Metadata.xml InputStream ", e);
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 		}
 		return null;
@@ -508,5 +537,20 @@ public class XdmContents {
 			result = zipFile.getEntry(zipFilespec);
 		}
 		return result;
+	}
+
+	/**
+	 * Checks, if the zipFile was already loaded
+	 */
+	private void lazyLoadCheck() {
+		if (zipFile != null && txnData == null) {
+			loadXDMArchive();
+		}
+	}
+
+	private void submissionSetRangeCheck(int submissionSetNumber) {
+		if (submissionSetNumber > txnData.length || submissionSetNumber < 0) {
+			throw new ArrayIndexOutOfBoundsException(submissionSetNumber);
+		}
 	}
 }
