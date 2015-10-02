@@ -33,14 +33,15 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 public class DocumentProcessor {
 
 	/**
-	 * <div class="en">Loads a CdaChVacd document from a given InputStream.</div>
-	 * <div class="de">Lädt ein CdaChVacd aus einem InputStream</div> <div
-	 * class="fr"></div> <div class="it"></div> <br/>
+	 * <div class="en">Loads a CdaChVacd document from a given
+	 * InputStream.</div> <div class="de">Lädt ein CdaChVacd aus einem
+	 * InputStream</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param filePath
-	 *          path to the XML file
+	 *            path to the XML file
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
+	 * @return the CdaChVacd Document
 	 */
 	public static CdaChVacd loadFromFile(String filePath) throws Exception {
 		InputStream inputstream = new FileInputStream(filePath);
@@ -48,14 +49,18 @@ public class DocumentProcessor {
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChVacd document from a given InputStream.</div>
-	 * <div class="de">Lädt ein CdaChVacd aus einem InputStream</div> <div
-	 * class="fr"></div> <div class="it"></div> <br/>
+	 * <div class="en">Loads a CdaChVacd document from a given
+	 * InputStream.</div> <div class="de">Lädt ein CdaChVacd aus einem
+	 * InputStream</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param input
-	 *          <li><div class="en">InputStream of a CDA-CH-VACD XML
-	 *          structure</div> <div class="de">InputStream einer CDA-CH-VACD
-	 *          XML-Struktur </div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">InputStream of a CDA-CH-VACD XML
+	 *            structure</div> <div class="de">InputStream einer CDA-CH-VACD
+	 *            XML-Struktur </div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 * @return the CdaChVacd Document
+	 * @throws Exception
+	 *             if the document could not be loaded
 	 */
 	public static CdaChVacd loadFromStream(InputStream input) throws Exception {
 		ClinicalDocument clinicalDocument = CDAUtil.load(input);
