@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipFile;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.Code;
@@ -52,12 +53,15 @@ import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
+import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -103,6 +107,9 @@ public class ConvenienceCommunication {
 	 * <div class="en">The OHT source</div>
 	 */
 	private B_Source source = null;
+
+	/** The loger. */
+	private static Logger log = Logger.getLogger(ConvenienceCommunication.class.getName());
 
 	/**
 	 * <div class="en">The OHT transaction data to send XDS Documents</div>
@@ -641,6 +648,94 @@ public class ConvenienceCommunication {
 		generateMissingSubmissionSetAttributes();
 	}
 
+	@SuppressWarnings("unchecked")
+	private void extractDocMetadataFromCda(DocumentMetadata docMetadata) {
+		DocumentEntryType extracted = null;
+		DocumentEntryType docEntry = docMetadata.getMdhtDocumentEntryType();
+		InputStream is = txnData.getDocument(docMetadata.getMdhtDocumentEntryType().getEntryUUID())
+				.getStream();
+
+		try {
+			ClinicalDocument clinicalDocument = CDAUtil.load(is);
+			CDAR2Extractor cdaExtractor = new CDAR2Extractor(clinicalDocument);
+
+			extracted = cdaExtractor.extract();
+			is.close();
+		} catch (IOException e1) {
+			log.warn("IOException while extracting Metadata from CDA Document", e1);
+			return;
+		} catch (MetadataExtractionException e) {
+			log.warn("MetadataExtractionException while extracting Metadata from CDA Document", e);
+			return;
+		} catch (Exception e) {
+			log.warn("Exception while extracting Metadata from CDA Document", e);
+			return;
+		}
+
+		// Check for each attribute, if it´s has been set by the user. In this
+		// case do not use the extracted element
+
+		// Language Code
+		if (docEntry.getLanguageCode() == null && extracted.getLanguageCode() != null) {
+			docEntry.setLanguageCode(extracted.getLanguageCode());
+		}
+		// Class Code
+		if (docEntry.getClassCode() == null && extracted.getClassCode() != null) {
+			docEntry.setClassCode(extracted.getClassCode());
+		}
+		// Confidentiality Codes
+		if (docEntry.getConfidentialityCode() == null
+				|| (docEntry.getConfidentialityCode().isEmpty())) {
+			if (extracted.getConfidentialityCode() != null
+					|| !extracted.getConfidentialityCode().isEmpty()) {
+				docEntry.getConfidentialityCode().addAll(extracted.getConfidentialityCode());
+			}
+		}
+		// Creation Time
+		if (docEntry.getCreationTime() == null && extracted.getCreationTime() != null) {
+			docEntry.setCreationTime(extracted.getCreationTime());
+		}
+		// Healthcare Factility Type Code
+		if (docEntry.getHealthCareFacilityTypeCode() == null
+				&& extracted.getHealthCareFacilityTypeCode() != null) {
+			docEntry.setHealthCareFacilityTypeCode(extracted.getHealthCareFacilityTypeCode());
+		}
+		// Legal Authenticator
+		if (docEntry.getLegalAuthenticator() == null && extracted.getLegalAuthenticator() != null) {
+			docEntry.setLegalAuthenticator(extracted.getLegalAuthenticator());
+		}
+		// Service Start Time
+		if (docEntry.getServiceStartTime() == null && extracted.getServiceStartTime() != null) {
+			docEntry.setServiceStartTime(extracted.getServiceStartTime());
+		}
+		// Service Stop Time
+		if (docEntry.getServiceStopTime() == null && extracted.getServiceStopTime() != null) {
+			docEntry.setServiceStopTime(extracted.getServiceStopTime());
+		}
+		// Source Patient Id
+		if (docEntry.getSourcePatientId() == null && extracted.getSourcePatientId() != null) {
+			docEntry.setSourcePatientId(extracted.getSourcePatientId());
+		}
+		// Source Patient Info
+		if (docEntry.getSourcePatientInfo() == null && extracted.getSourcePatientInfo() != null) {
+			docEntry.setSourcePatientInfo(extracted.getSourcePatientInfo());
+		}
+		// Title
+		if (docEntry.getTitle() == null && extracted.getTitle() != null) {
+			docEntry.setTitle(extracted.getTitle());
+		}
+		// Type Code
+		if (docEntry.getTypeCode() == null && extracted.getTypeCode() != null) {
+			docEntry.setTypeCode(extracted.getTypeCode());
+		}
+		// Unique Id
+		if (docEntry.getUniqueId() == null && extracted.getUniqueId() != null) {
+			docEntry.setUniqueId(extracted.getUniqueId());
+		}
+
+		log.debug("Done extracting and setting metadata for: " + docEntry.toString());
+	}
+
 	/**
 	 * <div class="en">Generate missing doc entry attributes.</div>
 	 * 
@@ -652,6 +747,10 @@ public class ConvenienceCommunication {
 
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
 		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
+
+		if (desc.equals(DocumentDescriptor.CDA_R2)) {
+			extractDocMetadataFromCda(docMetadata);
+		}
 
 		// Automatically create the formatCode of the Document according to the
 		// DocumentDescriptor
@@ -673,6 +772,7 @@ public class ConvenienceCommunication {
 					docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
+		// Convidentiality Code
 		if (docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()
 				|| docMetadata.getMdhtDocumentEntryType().getConfidentialityCode() == null) {
 			docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
