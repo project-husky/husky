@@ -125,7 +125,7 @@ public class IndexHtm {
 					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">"
 					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "</a>\n"
 					+ "DocumentEntryId: \n<code>" + xdsDoc.getDocumentEntryUUID() + "</code>\n"
-					+ "</p>\n");
+					+ "\n");
 		}
 		return contentsStr;
 	}

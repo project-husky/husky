@@ -152,6 +152,42 @@ public class DocumentMetadata {
 		return EcoreUtil.copy(xDoc);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof DocumentMetadata)) {
+			return false; // different class
+		}
+		DocumentMetadata other = (DocumentMetadata) obj;
+		if (this.xDoc == other.xDoc && this.cda == other.cda && this.language == other.language) {
+			return true;
+		}
+		if (!this.getAuthors().equals(other.getAuthors())
+				&& this.getPatientId().equals(other.getPatientId())
+				&& this.getSourcePatientId().equals(other.getSourcePatientId())
+				&& this.getClassCode().equals(other.getClassCode())
+				&& this.getConfidentialityCodes().equals(other.getConfidentialityCodes())
+				&& this.getCodedLanguage().equals(other.getCodedLanguage())
+				&& this.getCreationTime().getTime() == other.getCreationTime().getTime()
+				&& this.getFormatCode().equals(other.getFormatCode())
+				&& this.getDocSourceActorOrganizationId().equals(
+						other.getDocSourceActorOrganizationId())
+				&& this.getHealthcareFacilityTypeCode().equals(
+						other.getHealthcareFacilityTypeCode())
+				&& this.getMimeType().equals(other.getMimeType())
+				&& this.getPracticeSettingCode().equals(other.getPracticeSettingCode())
+				&& this.getTitle().equals(other.getTitle())
+				&& this.getTypeCode().equals(other.getTypeCode())
+				&& this.getUniqueId().equals(other.getUniqueId()))
+			return false;
+		return true;
+	}
+
 	/**
 	 * Returns an (optional) author element. All information contained in the
 	 * XDS Document Metadata will be extracted to the Convenience API Author.
@@ -326,6 +362,36 @@ public class DocumentMetadata {
 	 */
 	public String getUniqueId() {
 		return xDoc.getUniqueId();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		if (this.xDoc == null)
+			return prime;
+		result = result + getAuthors().hashCode();
+		result = result + getPatientId().hashCode();
+		result = result + getSourcePatientId().hashCode();
+		result = result + getClassCode().hashCode();
+		result = result + getConfidentialityCodes().hashCode();
+		result = result + getCodedLanguage().hashCode();
+		result = result + getCreationTime().hashCode();
+		result = result + getFormatCode().hashCode();
+		result = result + getDocSourceActorOrganizationId().hashCode();
+		result = result + getHealthcareFacilityTypeCode().hashCode();
+		result = result + getMimeType().hashCode();
+		result = result + getPracticeSettingCode().hashCode();
+		result = result + getTitle().hashCode();
+		result = result + getTypeCode().hashCode();
+		result = result + getUniqueId().hashCode();
+		result = result * prime;
+		return result;
 	}
 
 	/**

@@ -124,25 +124,6 @@ public class XdmTestUtils extends TestUtils {
 		return conCom.getXdmContents(zipFile);
 	}
 
-	public boolean isEqual(DocumentMetadata should, DocumentMetadata is) {
-		if (!isEqual(should.getPatientId(), is.getPatientId()))
-			return false;
-		if (!isEqual(should.getSourcePatientId(), is.getSourcePatientId()))
-			return false;
-		if (!isEqual(should.getTypeCode(), is.getTypeCode()))
-			return false;
-		if (!isEqual(should.getFormatCode(), is.getFormatCode()))
-			return false;
-		if (!isEqual(should.getClassCode(), is.getClassCode()))
-			return false;
-		if (!isEqual(should.getHealthcareFacilityTypeCode(), is.getHealthcareFacilityTypeCode()))
-			return false;
-		if (!isEqual(should.getConfidentialityCodes().get(0), is.getConfidentialityCodes().get(0)))
-			return false;
-
-		return true;
-	}
-
 	public boolean isEqualHash(InputStream is1, InputStream is2) {
 		try {
 			if (!DigestUtils.sha1Hex(is1).equals(DigestUtils.sha1Hex(is2)))

@@ -148,6 +148,25 @@ public class Author {
 		return EcoreUtil.copy(mAuthor);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Author)) {
+			return false; // different class
+		}
+		Author other = (Author) obj;
+		if (this.mAsAuthor == other.mAsAuthor && this.mAuthor == other.mAuthor
+				&& this.mPerson == other.mPerson) {
+			return true;
+		}
+		return true;
+	}
+
 	/**
 	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
 	 * (erste) Adresse.</div> <div class="fr"></div> <div class="it"></div>
@@ -213,31 +232,6 @@ public class Author {
 			}
 		}
 		return "";
-	}
-
-	/**
-	 * Gets the author function code. This element specifies in which role or
-	 * function the author is related to this document (e.g. Code "40001" for
-	 * "Apotheker"). The code can also be used as author role, when a document
-	 * is beeing sent (via XDS, XDM, XDR).
-	 * 
-	 * @return code the function code
-	 */
-	public Code getRoleFunction() {
-		return new Code(mAuthor.getFunctionCode());
-	}
-
-	/**
-	 * Sets the author speciality code. This element specifies the speciality
-	 * ("Fachrichtung", e.g.
-	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
-	 * code can also be used as author speciality, when a document is beeing
-	 * sent (via XDS, XDM, XDR).
-	 * 
-	 * @return code the speciality code
-	 */
-	public Code getSpeciality() {
-		return new Code(mAsAuthor.getCode());
 	}
 
 	/**
@@ -324,6 +318,31 @@ public class Author {
 	}
 
 	/**
+	 * Gets the author function code. This element specifies in which role or
+	 * function the author is related to this document (e.g. Code "40001" for
+	 * "Apotheker"). The code can also be used as author role, when a document
+	 * is beeing sent (via XDS, XDM, XDR).
+	 * 
+	 * @return code the function code
+	 */
+	public Code getRoleFunction() {
+		return new Code(mAuthor.getFunctionCode());
+	}
+
+	/**
+	 * Sets the author speciality code. This element specifies the speciality
+	 * ("Fachrichtung", e.g.
+	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
+	 * code can also be used as author speciality, when a document is beeing
+	 * sent (via XDS, XDM, XDR).
+	 * 
+	 * @return code the speciality code
+	 */
+	public Code getSpeciality() {
+		return new Code(mAsAuthor.getCode());
+	}
+
+	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
@@ -356,33 +375,6 @@ public class Author {
 	}
 
 	/**
-	 * Sets the author function code. This element specifies in which role or
-	 * function the author is related to this document (e.g. Code "40001" for
-	 * "Apotheker"). The code can also be used as author role, when a document
-	 * is beeing sent (via XDS, XDM, XDR).
-	 * 
-	 * @param code
-	 *            the function code
-	 */
-	public void setRoleFunction(Code code) {
-		mAuthor.setFunctionCode(code.getCE());
-	}
-
-	/**
-	 * Sets the author speciality code. This element specifies the speciality
-	 * ("Fachrichtung", e.g. Code "50001" for
-	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
-	 * code can also be used as author speciality, when a document is beeing
-	 * sent (via XDS, XDM, XDR).
-	 * 
-	 * @param code
-	 *            the speciality code
-	 */
-	public void setSpeciality(Code code) {
-		mAsAuthor.setCode(code.getCE());
-	}
-
-	/**
 	 * <div class="en">Sets the gln.</div> <div class="de">Setzt die GLN (ID des
 	 * Autoren).</div> <div class="fr"></div> <div class="it"></div>
 	 * 
@@ -412,6 +404,33 @@ public class Author {
 	 */
 	public void setOrganization(Organization organization) {
 		mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
+	}
+
+	/**
+	 * Sets the author function code. This element specifies in which role or
+	 * function the author is related to this document (e.g. Code "40001" for
+	 * "Apotheker"). The code can also be used as author role, when a document
+	 * is beeing sent (via XDS, XDM, XDR).
+	 * 
+	 * @param code
+	 *            the function code
+	 */
+	public void setRoleFunction(Code code) {
+		mAuthor.setFunctionCode(code.getCE());
+	}
+
+	/**
+	 * Sets the author speciality code. This element specifies the speciality
+	 * ("Fachrichtung", e.g. Code "50001" for
+	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
+	 * code can also be used as author speciality, when a document is beeing
+	 * sent (via XDS, XDM, XDR).
+	 * 
+	 * @param code
+	 *            the speciality code
+	 */
+	public void setSpeciality(Code code) {
+		mAsAuthor.setCode(code.getCE());
 	}
 
 	/**

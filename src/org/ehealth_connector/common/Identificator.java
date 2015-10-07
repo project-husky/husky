@@ -29,6 +29,49 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  */
 public class Identificator {
 
+	/**
+	 * <div class="en">Converts to identificator.</div> <div
+	 * class="de">Konvertiert einen Code in ein Identificator Objekt</div> <div
+	 * class="fr"></div> <div class="it"></div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 * @return the identificator
+	 */
+	public static Identificator convertToIdentificator(Code code) {
+		if (code != null) {
+			final Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
+			return id;
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the identificator.</div> <div class="de">Liefert
+	 * identificator.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param iiList
+	 * <br>
+	 *            <div class="de"> ii list</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 * @param root
+	 * <br>
+	 *            <div class="de"> root</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 * @return <div class="en">the identificator</div>
+	 */
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (final II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				final Identificator id = new Identificator(i);
+				return id;
+			}
+		}
+		return null;
+	}
+
 	private II mII;
 
 	/**
@@ -73,47 +116,27 @@ public class Identificator {
 		setExtension(id);
 	}
 
-	/**
-	 * <div class="en">Converts to identificator.</div> <div
-	 * class="de">Konvertiert einen Code in ein Identificator Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return the identificator
-	 */
-	public static Identificator convertToIdentificator(Code code) {
-		if (code != null) {
-			final Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
-			return id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
 		}
-		return null;
-	}
-
-	/**
-	 * <div class="en">Gets the identificator.</div> <div class="de">Liefert
-	 * identificator.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param iiList
-	 * <br>
-	 *            <div class="de"> ii list</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @param root
-	 * <br>
-	 *            <div class="de"> root</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return <div class="en">the identificator</div>
-	 */
-	public static Identificator getIdentificator(List<II> iiList, String root) {
-		for (final II i : iiList) {
-			if (i.getRoot().equals(root)) {
-				final Identificator id = new Identificator(i);
-				return id;
-			}
+		if (obj == null) {
+			return false;
 		}
-		return null;
+		if (!(obj instanceof Identificator)) {
+			return false; // different class
+		}
+		Identificator other = (Identificator) obj;
+		if (this.mII == other.mII)
+			return true;
+		if (!this.mII.getDisplayable().equals(other.mII.getDisplayable())
+				&& this.mII.getExtension().equals(other.mII.getExtension())
+				&& this.mII.getRoot().equals(other.mII.getRoot())
+				&& this.mII.getNullFlavor().getName().equals(other.mII.getNullFlavor().getName())
+				&& this.mII.getNullFlavor().getValue() == other.mII.getNullFlavor().getValue())
+			return false;
+		return true;
 	}
 
 	/**
@@ -144,6 +167,22 @@ public class Identificator {
 		return mII.getRoot();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		if (mII == null)
+			return prime;
+
+		int result = 1;
+		result = result + (mII.getDisplayable() ? 0 : 1);
+		result = result + mII.getExtension().hashCode();
+		result = result + mII.getRoot().hashCode();
+		result = result + mII.getNullFlavor().getName().hashCode();
+		result = result + mII.getNullFlavor().getValue();
+		result = prime * result;
+		return result;
+	}
+
 	/**
 	 * Setzt die OID.
 	 *
@@ -170,8 +209,7 @@ public class Identificator {
 
 	@Override
 	public String toString() {
-		return "Identificator [extension=" + getExtension() + ", II=" + getIi() + ", root=" + getRoot() + "]";
+		return "Identificator [extension=" + getExtension() + ", II=" + getIi() + ", root="
+				+ getRoot() + "]";
 	}
-	
-	
 }

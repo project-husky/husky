@@ -57,13 +57,14 @@ public class XdmExportImportTest extends XdmTestUtils {
 		assertTrue(targetFile.exists());
 
 		XdmContents importContents = importSamples(conCom, targetFile);
+		// XdmContents importContents2 = importSamples(conCom, targetFile);
 		assertNotNull(importContents);
 
 		// Check if metadata are equal
-		assertTrue(isEqual(exportContents.getDocumentAndMetadataList().get(0).getDocEntry(),
-				importContents.getDocumentAndMetadataList().get(0).getDocEntry()));
-		assertTrue(isEqual(exportContents.getDocumentAndMetadataList().get(1).getDocEntry(),
-				importContents.getDocumentAndMetadataList().get(1).getDocEntry()));
+		assertTrue(exportContents.getDocumentAndMetadataList().get(0).getDocEntry()
+				.equals(importContents.getDocumentAndMetadataList().get(0).getDocEntry()));
+		assertTrue(exportContents.getDocumentAndMetadataList().get(1).getDocEntry()
+				.equals(importContents.getDocumentAndMetadataList().get(1).getDocEntry()));
 
 		// Check if sample files got equal hash and size values compared to the
 		// deserialized files in the zip

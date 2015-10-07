@@ -173,7 +173,6 @@ public class XdmContents {
 			log.error("IO Exception during zip creation. ", e);
 			return;
 		}
-		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
 	}
 
 	/**
@@ -336,6 +335,48 @@ public class XdmContents {
 	}
 
 	/**
+	 * Checks if the integritiy values (hash and size) for the documents are the
+	 * same as in the metadata.
+	 * 
+	 * @return false, if the values don´t match, true otherwise
+	 */
+	private boolean documentsIntegrityCheck() {
+		if (isSubmitTransactionDataNull(0))
+			return false;
+
+		DocumentEntryType docMetadata = null;
+		String docHash = null;
+		long docSize = 0;
+
+		for (int i = 0; i < txnData.length; i++) {
+			for (XDSDocument doc : txnData[i].getDocList()) {
+				docMetadata = txnData[i].getDocumentEntry(doc.getDocumentEntryUUID());
+
+				try {
+					docHash = DigestUtils.sha1Hex(doc.getStream());
+					docSize = IOUtils.toByteArray(doc.getStream()).length;
+				} catch (IOException e) {
+					log.error("IO Exception during zip document integrity check. ", e);
+				}
+
+				if (!docMetadata.getHash().equals(docHash)) {
+					log.warn("Integrity check failed for document hash in Submission Set: " + i
+							+ " DocumentEntry with UUID: " + doc.getDocumentEntryUUID());
+					this.resp.setStatus(XDSStatusType.WARNING_LITERAL);
+					return false;
+				}
+				if (!docMetadata.getSize().equals(docSize)) {
+					log.warn("Integrity check failed for document size in Submission Set: " + i
+							+ " DocumentEntry with UUID: " + doc.getDocumentEntryUUID());
+					this.resp.setStatus(XDSStatusType.WARNING_LITERAL);
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Gets the metadata xml input stream.
 	 * 
 	 * @param metadataXml
@@ -431,7 +472,7 @@ public class XdmContents {
 	private void lazyLoadCheck() {
 		if (txnData != null) {
 			if (zipFile != null && txnData.length < 1) {
-				loadXDMArchive();
+				loadXdmArchive();
 			}
 		}
 	}
@@ -442,7 +483,8 @@ public class XdmContents {
 	 * contents.
 	 */
 	@SuppressWarnings("unchecked")
-	private void loadXDMArchive() {
+	private void loadXdmArchive() {
+		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
 		Map<String, SubmitTransactionData> results = new HashMap<String, SubmitTransactionData>();
 
 		try {
@@ -553,6 +595,6 @@ public class XdmContents {
 		}
 
 		this.txnData = results.values().toArray(new SubmitTransactionData[] {});
-		this.resp.setStatus(XDSStatusType.SUCCESS_LITERAL);
+		documentsIntegrityCheck();
 	}
 }

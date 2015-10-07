@@ -158,6 +158,31 @@ public class Code {
 		}
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Code)) {
+			return false; // different class
+		}
+		Code other = (Code) obj;
+		if (this.mCD == other.mCD)
+			return true;
+		if (!this.mCD.getCode().equals(other.mCD.getCode())
+				&& this.mCD.getCodeSystem().equals(other.mCD.getCodeSystem())
+				&& this.mCD.getCodeSystemVersion().equals(other.mCD.getCodeSystemVersion())
+				&& this.mCD.getNullFlavor().getName().equals(other.mCD.getNullFlavor().getName())
+				&& this.mCD.getNullFlavor().getValue() == other.mCD.getNullFlavor().getValue()
+				&& this.mCD.getTranslations().equals(other.mCD.getTranslations()))
+			return false;
+
+		return true;
+	}
+
 	/**
 	 * <div class="en">Gets the CD MDHT Object</div> <div class="de">Liefert das
 	 * CD MDHT Objekt</div> <div class="fr"></div> <div class="it"></div>
@@ -266,6 +291,23 @@ public class Code {
 			cl.add(new Code(cd));
 		}
 		return cl;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+
+		if (mCD == null)
+			return prime;
+		int result = 1;
+		result = result + mCD.getCode().hashCode();
+		result = result + mCD.getCodeSystem().hashCode();
+		result = result + mCD.getCodeSystemVersion().hashCode();
+		result = result + mCD.getCodeSystemName().hashCode();
+		result = result + mCD.getNullFlavor().getName().hashCode();
+		result = result + mCD.getNullFlavor().getValue();
+		result = result + mCD.getTranslations().hashCode();
+		return prime * result;
 	}
 
 	public boolean isNullFlavor() {
