@@ -167,23 +167,96 @@ public class DocumentMetadata {
 		if (this.xDoc == other.xDoc && this.cda == other.cda && this.language == other.language) {
 			return true;
 		}
-		if (!this.getAuthors().equals(other.getAuthors())
-				&& this.getPatientId().equals(other.getPatientId())
-				&& this.getSourcePatientId().equals(other.getSourcePatientId())
-				&& this.getClassCode().equals(other.getClassCode())
-				&& this.getConfidentialityCodes().equals(other.getConfidentialityCodes())
-				&& this.getCodedLanguage().equals(other.getCodedLanguage())
-				&& this.getCreationTime().getTime() == other.getCreationTime().getTime()
-				&& this.getFormatCode().equals(other.getFormatCode())
-				&& this.getDocSourceActorOrganizationId().equals(
-						other.getDocSourceActorOrganizationId())
-				&& this.getHealthcareFacilityTypeCode().equals(
-						other.getHealthcareFacilityTypeCode())
-				&& this.getMimeType().equals(other.getMimeType())
-				&& this.getPracticeSettingCode().equals(other.getPracticeSettingCode())
-				&& this.getTitle().equals(other.getTitle())
-				&& this.getTypeCode().equals(other.getTypeCode())
-				&& this.getUniqueId().equals(other.getUniqueId()))
+		if (this.getAuthors() == null) {
+			if (other.getAuthors() != null)
+				return false;
+		} else if (!(this.getAuthors().size() == other.getAuthors().size()))
+			return false;
+
+		if (this.getPatientId() == null) {
+			if (other.getPatientId() != null)
+				return false;
+		} else if (!this.getPatientId().equals(other.getPatientId()))
+			return false;
+
+		if (this.getSourcePatientId() == null) {
+			if (other.getSourcePatientId() != null)
+				return false;
+		} else if (!this.getSourcePatientId().equals(other.getSourcePatientId()))
+			return false;
+
+		if (this.getClassCode() == null) {
+			if (other.getClassCode() != null)
+				return false;
+		} else if (!this.getClassCode().equals(other.getClassCode()))
+			return false;
+
+		if (this.getConfidentialityCodes() == null) {
+			if (other.getConfidentialityCodes() != null)
+				return false;
+		} else if (!this.getConfidentialityCodes().equals(other.getConfidentialityCodes()))
+			return false;
+
+		if (this.getCodedLanguage() == null) {
+			if (other.getCodedLanguage() != null)
+				return false;
+		} else if (!this.getCodedLanguage().equals(other.getCodedLanguage()))
+			return false;
+
+		if (this.getCreationTime() == null) {
+			if (other.getCreationTime() != null)
+				return false;
+		} else if (!this.getCreationTime().equals(other.getCreationTime()))
+			return false;
+
+		if (this.getFormatCode() == null) {
+			if (other.getFormatCode() != null)
+				return false;
+		} else if (!this.getFormatCode().equals(other.getFormatCode()))
+			return false;
+
+		if (this.getDocSourceActorOrganizationId() == null) {
+			if (other.getDocSourceActorOrganizationId() != null)
+				return false;
+		} else if (!this.getDocSourceActorOrganizationId().equals(
+				other.getDocSourceActorOrganizationId()))
+			return false;
+
+		if (this.getHealthcareFacilityTypeCode() == null) {
+			if (other.getHealthcareFacilityTypeCode() != null)
+				return false;
+		} else if (!this.getHealthcareFacilityTypeCode().equals(
+				other.getHealthcareFacilityTypeCode()))
+			return false;
+
+		if (this.getMimeType() == null) {
+			if (other.getMimeType() != null)
+				return false;
+		} else if (!this.getMimeType().equals(other.getMimeType()))
+			return false;
+
+		if (this.getPracticeSettingCode() == null) {
+			if (other.getPracticeSettingCode() != null)
+				return false;
+		} else if (!this.getPracticeSettingCode().equals(other.getPracticeSettingCode()))
+			return false;
+
+		if (this.getTitle() == null) {
+			if (other.getTitle() != null)
+				return false;
+		} else if (!this.getTitle().equals(other.getTitle()))
+			return false;
+
+		if (this.getTypeCode() == null) {
+			if (other.getTypeCode() != null)
+				return false;
+		} else if (!this.getTypeCode().equals(other.getTypeCode()))
+			return false;
+
+		if (this.getUniqueId() == null) {
+			if (other.getUniqueId() != null)
+				return false;
+		} else if (!this.getUniqueId().equals(other.getUniqueId()))
 			return false;
 		return true;
 	}
@@ -248,7 +321,7 @@ public class DocumentMetadata {
 	 * @return creationTime as Date
 	 */
 	public Date getCreationTime() {
-		return DateUtil.parseDateyyyyMMddHHmm(xDoc.getCreationTime());
+		return DateUtil.parseDates(xDoc.getCreationTime());
 	}
 
 	/**

@@ -130,11 +130,35 @@ public class Identificator {
 		Identificator other = (Identificator) obj;
 		if (this.mII == other.mII)
 			return true;
-		if (!this.mII.getDisplayable().equals(other.mII.getDisplayable())
-				&& this.mII.getExtension().equals(other.mII.getExtension())
-				&& this.mII.getRoot().equals(other.mII.getRoot())
-				&& this.mII.getNullFlavor().getName().equals(other.mII.getNullFlavor().getName())
-				&& this.mII.getNullFlavor().getValue() == other.mII.getNullFlavor().getValue())
+
+		if (this.mII.getDisplayable() == null) {
+			if (other.mII.getDisplayable() != null)
+				return false;
+		} else if (!this.mII.getDisplayable().equals(other.mII.getDisplayable()))
+			return false;
+
+		if (this.mII.getExtension() == null) {
+			if (other.mII.getExtension() != null)
+				return false;
+		} else if (!this.mII.getExtension().equals(other.mII.getExtension()))
+			return false;
+
+		if (this.mII.getRoot() == null) {
+			if (other.mII.getRoot() != null)
+				return false;
+		} else if (!this.mII.getRoot().equals(other.mII.getRoot()))
+			return false;
+
+		if (this.mII.getNullFlavor().getName() == null) {
+			if (other.mII.getNullFlavor().getName() != null)
+				return false;
+		} else if (!this.mII.getNullFlavor().getName().equals(other.mII.getNullFlavor().getName()))
+			return false;
+
+		if (this.mII.getNullFlavor().getValue() == 0) {
+			if (other.mII.getNullFlavor().getValue() != 0)
+				return false;
+		} else if (!(this.mII.getNullFlavor().getValue() == other.mII.getNullFlavor().getValue()))
 			return false;
 		return true;
 	}

@@ -172,12 +172,35 @@ public class Code {
 		Code other = (Code) obj;
 		if (this.mCD == other.mCD)
 			return true;
-		if (!this.mCD.getCode().equals(other.mCD.getCode())
-				&& this.mCD.getCodeSystem().equals(other.mCD.getCodeSystem())
-				&& this.mCD.getCodeSystemVersion().equals(other.mCD.getCodeSystemVersion())
-				&& this.mCD.getNullFlavor().getName().equals(other.mCD.getNullFlavor().getName())
-				&& this.mCD.getNullFlavor().getValue() == other.mCD.getNullFlavor().getValue()
-				&& this.mCD.getTranslations().equals(other.mCD.getTranslations()))
+
+		if (this.mCD.getCode() == null) {
+			if (other.mCD.getCode() != null)
+				return false;
+		} else if (!this.mCD.getCode().equals(other.mCD.getCode()))
+			return false;
+
+		if (this.mCD.getCodeSystemVersion() == null) {
+			if (other.mCD.getCodeSystemVersion() != null)
+				return false;
+		} else if (!this.mCD.getCodeSystemVersion().equals(other.mCD.getCodeSystemVersion()))
+			return false;
+
+		if (this.mCD.getNullFlavor().getName() == null) {
+			if (other.mCD.getNullFlavor().getName() != null)
+				return false;
+		} else if (!this.mCD.getNullFlavor().getName().equals(other.mCD.getNullFlavor().getName()))
+			return false;
+
+		if (this.mCD.getNullFlavor().getValue() == 0) {
+			if (other.mCD.getNullFlavor().getValue() != 0)
+				return false;
+		} else if (!(this.mCD.getNullFlavor().getValue() == other.mCD.getNullFlavor().getValue()))
+			return false;
+
+		if (this.mCD.getTranslations() == null) {
+			if (other.mCD.getTranslations() != null)
+				return false;
+		} else if (!this.mCD.getTranslations().equals(other.mCD.getTranslations()))
 			return false;
 
 		return true;
