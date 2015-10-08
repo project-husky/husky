@@ -150,20 +150,28 @@ public class Author {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof Author)) {
-			return false; // different class
-		}
+		if (getClass() != obj.getClass())
+			return false;
 		Author other = (Author) obj;
-		if (this.mAsAuthor == other.mAsAuthor && this.mAuthor == other.mAuthor
-				&& this.mPerson == other.mPerson) {
-			return true;
-		}
+		if (mAsAuthor == null) {
+			if (other.mAsAuthor != null)
+				return false;
+		} else if (!mAsAuthor.equals(other.mAsAuthor))
+			return false;
+		if (mAuthor == null) {
+			if (other.mAuthor != null)
+				return false;
+		} else if (!mAuthor.equals(other.mAuthor))
+			return false;
+		if (mPerson == null) {
+			if (other.mPerson != null)
+				return false;
+		} else if (!mPerson.equals(other.mPerson))
+			return false;
 		return true;
 	}
 
@@ -372,6 +380,16 @@ public class Author {
 			return DateUtil.parseDateToStr(mAuthor.getTime());
 		}
 		return null;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mAsAuthor == null) ? 0 : mAsAuthor.hashCode());
+		result = prime * result + ((mAuthor == null) ? 0 : mAuthor.hashCode());
+		result = prime * result + ((mPerson == null) ? 0 : mPerson.hashCode());
+		return result;
 	}
 
 	/**

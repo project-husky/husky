@@ -273,8 +273,8 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with a given XDMContents. This
-	 * method will be used, if you want to create your own INDEX.HTM and
+	 * <div class="en">creates an XDM volume with a given XdmContents object.
+	 * This method will be used, if you want to create your own INDEX.HTM and
 	 * README.TXT for your XDM volume. You have to add a document to this class
 	 * first.</div>
 	 * 

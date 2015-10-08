@@ -174,12 +174,11 @@ public class Identificator {
 			return prime;
 
 		int result = 1;
-		result = result + (mII.getDisplayable() ? 0 : 1);
-		result = result + mII.getExtension().hashCode();
-		result = result + mII.getRoot().hashCode();
-		result = result + mII.getNullFlavor().getName().hashCode();
-		result = result + mII.getNullFlavor().getValue();
-		result = prime * result;
+		result = prime * result + (mII.getDisplayable() ? 0 : 1);
+		result = prime * result + mII.getExtension().hashCode();
+		result = prime * result + mII.getRoot().hashCode();
+		result = prime * result + mII.getNullFlavor().getName().hashCode();
+		result = prime * result + mII.getNullFlavor().getValue();
 		return result;
 	}
 

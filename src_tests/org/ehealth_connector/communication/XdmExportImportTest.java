@@ -60,7 +60,7 @@ public class XdmExportImportTest extends XdmTestUtils {
 		// XdmContents importContents2 = importSamples(conCom, targetFile);
 		assertNotNull(importContents);
 
-		// Check if metadata are equal
+		// Check if document metadata is equal
 		assertTrue(exportContents.getDocumentAndMetadataList().get(0).getDocEntry()
 				.equals(importContents.getDocumentAndMetadataList().get(0).getDocEntry()));
 		assertTrue(exportContents.getDocumentAndMetadataList().get(1).getDocEntry()

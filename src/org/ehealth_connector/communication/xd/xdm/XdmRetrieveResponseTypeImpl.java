@@ -21,9 +21,10 @@ import java.util.Map;
 
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
-import org.openhealthtools.ihe.xds.response.impl.XDSResponseTypeImpl;
+import org.openhealthtools.ihe.xds.response.impl.XDSRetrieveResponseTypeImpl;
 
-public class XdmRetrieveResponseTypeImpl extends XDSResponseTypeImpl implements XDSRetrieveResponseType {
+public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl implements
+		XDSRetrieveResponseType {
 
 	private List<XDSDocument> attachments;
 
@@ -71,6 +72,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSResponseTypeImpl implements 
 	 * @param attachments
 	 *            List of attachments for this responect
 	 */
+	@Override
 	protected void setAttachments(List<XDSDocument> attachments) {
 		this.attachments = attachments;
 	}

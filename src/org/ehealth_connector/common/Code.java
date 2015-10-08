@@ -300,14 +300,14 @@ public class Code {
 		if (mCD == null)
 			return prime;
 		int result = 1;
-		result = result + mCD.getCode().hashCode();
-		result = result + mCD.getCodeSystem().hashCode();
-		result = result + mCD.getCodeSystemVersion().hashCode();
-		result = result + mCD.getCodeSystemName().hashCode();
-		result = result + mCD.getNullFlavor().getName().hashCode();
-		result = result + mCD.getNullFlavor().getValue();
-		result = result + mCD.getTranslations().hashCode();
-		return prime * result;
+		result = prime * result + mCD.getCode().hashCode();
+		result = prime * result + mCD.getCodeSystem().hashCode();
+		result = prime * result + mCD.getCodeSystemVersion().hashCode();
+		result = prime * result + mCD.getCodeSystemName().hashCode();
+		result = prime * result + mCD.getNullFlavor().getName().hashCode();
+		result = prime * result + mCD.getNullFlavor().getValue();
+		result = prime * result + mCD.getTranslations().hashCode();
+		return result;
 	}
 
 	public boolean isNullFlavor() {

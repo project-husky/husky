@@ -46,7 +46,12 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.ProvideAndRegisterDocumentSetType;
+import org.openhealthtools.ihe.xds.response.XDSErrorCode;
+import org.openhealthtools.ihe.xds.response.XDSErrorListType;
+import org.openhealthtools.ihe.xds.response.XDSErrorType;
 import org.openhealthtools.ihe.xds.response.XDSStatusType;
+import org.openhealthtools.ihe.xds.response.impl.XDSErrorListTypeImpl;
+import org.openhealthtools.ihe.xds.response.impl.XDSErrorTypeImpl;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
@@ -359,16 +364,41 @@ public class XdmContents {
 					log.error("IO Exception during zip document integrity check. ", e);
 				}
 
-				if (!docMetadata.getHash().equals(docHash)) {
+				if (docMetadata.getHash() == null || !docMetadata.getHash().equals(docHash)) {
 					log.warn("Integrity check failed for document hash in Submission Set: " + i
 							+ " DocumentEntry with UUID: " + doc.getDocumentEntryUUID());
 					this.resp.setStatus(XDSStatusType.WARNING_LITERAL);
+
+					XDSErrorType error = new XDSErrorTypeImpl();
+					error.setErrorCode(XDSErrorCode.XDS_NON_IDENTICAL_HASH_LITERAL);
+					error.setLocation("Document in submission set: " + i + " with Entry UUID: "
+							+ docMetadata.getEntryUUID());
+					error.setValue("The hash value of the document does not match the hash value, which is provided in the document metadata.");
+					error.setSeverity(XDSStatusType.WARNING_LITERAL);
+					if (this.resp.getErrorList() == null) {
+						XDSErrorListType errorList = new XDSErrorListTypeImpl();
+						this.resp.setErrorList(errorList);
+					}
+					this.resp.getErrorList().getError().add(error);
 					return false;
 				}
-				if (!docMetadata.getSize().equals(docSize)) {
+				if (docMetadata.getSize() == null
+						|| !docMetadata.getSize().equals(Long.toString(docSize))) {
 					log.warn("Integrity check failed for document size in Submission Set: " + i
 							+ " DocumentEntry with UUID: " + doc.getDocumentEntryUUID());
 					this.resp.setStatus(XDSStatusType.WARNING_LITERAL);
+
+					XDSErrorType error = new XDSErrorTypeImpl();
+					error.setErrorCode(XDSErrorCode.XDS_NON_IDENTICAL_SIZE_LITERAL);
+					error.setLocation("Document in submission set: " + i + " with Entry UUID: "
+							+ docMetadata.getEntryUUID());
+					error.setValue("The size value of the document does not match the size value, which is provided in the document metadata.");
+					error.setSeverity(XDSStatusType.WARNING_LITERAL);
+					if (this.resp.getErrorList() == null) {
+						XDSErrorListType errorList = new XDSErrorListTypeImpl();
+						this.resp.setErrorList(errorList);
+					}
+					this.resp.getErrorList().getError().add(error);
 					return false;
 				}
 			}
