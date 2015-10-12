@@ -69,7 +69,7 @@ public class ConvenienceCommunicationTest {
 
 		try {
 
-			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE);
+			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

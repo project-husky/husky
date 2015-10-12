@@ -144,6 +144,59 @@ public class DocumentMetadata {
 	}
 
 	/**
+	 * Clears all the metadata attributes and lists (except the
+	 * documentEntyUuid)
+	 */
+	public void clear() {
+		xDoc.setAvailabilityStatus(null);
+		xDoc.setClassCode(null);
+		xDoc.setComments(null);
+		xDoc.setCreationTime(null);
+		xDoc.setFormatCode(null);
+		xDoc.setHash(null);
+		xDoc.setLanguageCode(null);
+		xDoc.setLegalAuthenticator(null);
+		xDoc.setMimeType(null);
+		xDoc.setParentDocument(null);
+		xDoc.setPatientId(null);
+		xDoc.setPracticeSettingCode(null);
+		xDoc.setRepositoryUniqueId(null);
+		xDoc.setServiceStartTime(null);
+		xDoc.setServiceStopTime(null);
+		xDoc.setSize(null);
+		xDoc.setSourcePatientId(null);
+		xDoc.setSourcePatientInfo(null);
+
+		xDoc.setTypeCode(null);
+		xDoc.setHealthCareFacilityTypeCode(null);
+		xDoc.setTitle(null);
+
+		xDoc.getAuthors().clear();
+		xDoc.getConfidentialityCode().clear();
+		xDoc.getEventCode().clear();
+		xDoc.getExtension().clear();
+	}
+
+	/**
+	 * Clears all (unsafe) automatically extracted metadata attributes and lists
+	 */
+	public void clearExtracted() {
+		xDoc.setAvailabilityStatus(null);
+		xDoc.setClassCode(null);
+		xDoc.setComments(null);
+		xDoc.setFormatCode(null);
+		xDoc.setHash(null);
+		xDoc.setMimeType(null);
+		xDoc.setParentDocument(null);
+		xDoc.setPatientId(null);
+		xDoc.setPracticeSettingCode(null);
+		xDoc.setRepositoryUniqueId(null);
+
+		xDoc.getAuthors().clear();
+		xDoc.getConfidentialityCode().clear();
+	}
+
+	/**
 	 * Copy mdht document entry type.
 	 * 
 	 * @return the document entry type

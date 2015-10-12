@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipFile;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.DateUtil;
@@ -104,9 +103,6 @@ public class ConvenienceCommunication {
 	 */
 	private B_Source source = null;
 
-	/** The loger. */
-	private static Logger log = Logger.getLogger(ConvenienceCommunication.class.getName());
-
 	/**
 	 * <div class="en">The OHT transaction data to send XDS Documents</div>
 	 */
@@ -116,6 +112,12 @@ public class ConvenienceCommunication {
 	 * <div class="en">The ATNA config mode (secure or unsecure)</div>
 	 */
 	private AtnaConfig.AtnaConfigMode atnaConfigMode = AtnaConfigMode.UNSECURE;
+
+	/**
+	 * <div class="en">Determines if XDS metadata will be extraced automatically
+	 * (e.g. for CDA documents)</div>
+	 */
+	private boolean automaticExtractionEnabled = true;
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
@@ -147,10 +149,17 @@ public class ConvenienceCommunication {
 	 *            the affinity domain configuration
 	 * @param atnaConfigMode
 	 *            the ATNA config mode (secure or unsecure) </div>
+	 * @param automaticExtractionEnabled
+	 *            if set to true, metadata for the submission set and according
+	 *            documents will be extracted as far as this is possible. if set
+	 *            to false the user of this API has to set all data by
+	 *            himself.</div>
 	 */
-	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
+	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
+			boolean automaticExtractionEnabled) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = atnaConfigMode;
+		this.automaticExtractionEnabled = automaticExtractionEnabled;
 	}
 
 	/**
@@ -297,6 +306,16 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * Gets the status of the automatic metadata extraction
+	 * 
+	 * @return true, if metadata will be extracted as far as possible)
+	 *         automatically, false otherwise
+	 */
+	public boolean getAutomaticExtractionEnabled() {
+		return automaticExtractionEnabled;
+	}
+
+	/**
 	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
 	 * DocumentMetadata)
 	 * 
@@ -318,18 +337,6 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Query a registry for documents, using a find documents query.
-	 * 
-	 * @param queryParameter
-	 *            a findDocumentsQuery object filled with your query parameters
-	 * @param returnReferencesOnly
-	 *            if set to false, the registry response will contain the
-	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata.
-	 * @return the XDSQueryResponseType
-	 */
-
-	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query. This is useful if the number of
 	 * results is limited in the registry and your query would exceed this
@@ -345,6 +352,18 @@ public class ConvenienceCommunication {
 	public XDSQueryResponseType queryDocumentReferencesOnly(FindDocumentsQuery queryParameter) {
 		return this.queryDocuments((StoredQueryInterface) queryParameter);
 	}
+
+	/**
+	 * Query a registry for documents, using a find documents query.
+	 * 
+	 * @param queryParameter
+	 *            a findDocumentsQuery object filled with your query parameters
+	 * @param returnReferencesOnly
+	 *            if set to false, the registry response will contain the
+	 *            document metadata. If set to true, the response will contain
+	 *            references instead of the complete document metadata.
+	 * @return the XDSQueryResponseType
+	 */
 
 	/**
 	 * <div class="en">Queries the registry of the affinity domain for all
@@ -495,6 +514,16 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * Sets the status of the automatic metadata extraction
+	 * 
+	 * @return true, if metadata will be extracted as far as possible)
+	 *         automatically, false otherwise
+	 */
+	public void setAutomaticExtractionEnabled(boolean automaticExtractionEnabled) {
+		this.automaticExtractionEnabled = automaticExtractionEnabled;
+	}
+
+	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br />
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
@@ -589,16 +618,21 @@ public class ConvenienceCommunication {
 				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 		String docEntryUUID;
 		try {
+
 			docEntryUUID = txnData.addDocument(doc);
 
 			DocumentMetadata docMetadata = new DocumentMetadata(
 					txnData.getDocumentEntry(docEntryUUID));
 
-			if (DocumentDescriptor.CDA_R2.equals(desc)) {
-				// extractDocMetadataFromCda(docMetadata);
-				cdaFixes(docMetadata);
+			if (automaticExtractionEnabled == true) {
+				if (DocumentDescriptor.CDA_R2.equals(desc)) {
+					// extractDocMetadataFromCda(docMetadata);
+					cdaExtractionFixes(docMetadata);
+				}
+				generateMissingDocEntryAttributes(doc.getDocumentEntryUUID());
+			} else {
+				docMetadata.clear();
 			}
-			generateMissingDocEntryAttributes(doc.getDocumentEntryUUID());
 
 			return docMetadata;
 		} catch (MetadataExtractionException e) {
@@ -610,20 +644,19 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs(?). This method
-	 * corrects the OHT behavior of extracting author telecommunication values,
-	 * which are not XDS compliant.</div>
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
+	 * methods, which are unsafe, because an XDS registry might use another
+	 * value set.</div>
 	 * 
 	 * @param docMetadata
 	 *            the doc metadata </div>
 	 */
-	private void cdaFixes(DocumentMetadata docMetadata) {
-		// Removes unwanted attributes after the automatic extraction of XDM
-		// Metadata from CDA Documents
-		docMetadata.getMdhtDocumentEntryType().getConfidentialityCode().clear();
-		docMetadata.getMdhtDocumentEntryType().setClassCode(null);
-		docMetadata.getMdhtDocumentEntryType().setTypeCode(null);
-		docMetadata.getMdhtDocumentEntryType().setHealthCareFacilityTypeCode(null);
+	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
+		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
+		// code from the cda for the XDS metadata. This leads to an error in the
+		// swiss repository, where the value set is differnt. As procausion we
+		// clean the list.
+		docMetadata.clearExtracted();
 
 		// Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not
 		// a known Slot for the NIST Registry by deleting all
