@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;
@@ -61,8 +60,8 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
  * for transactions to different destinations such as registries and
- * repositories.<br/>
- * <br/>
+ * repositories.<br>
+ * <br>
  * It implements the following IHE actors:
  * <ul>
  * <li>IHE ITI Document Consumer</li>
@@ -70,7 +69,7 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * <li>IHE ITI Portable Media Creator</li>
  * <li>IHE ITI Portable Media Importer</li>
  * </ul>
- * <br/>
+ * <br>
  * It implements the following IHE transactions:
  * <ul>
  * <li>[ITI-18] Registry Stored Query</li>
@@ -148,12 +147,133 @@ public class ConvenienceCommunication {
 	 * @param affinityDomain
 	 *            the affinity domain configuration
 	 * @param atnaConfigMode
-	 *            the ATNA config mode (secure or unsecure) </div>
+	 *            the ATNA config mode (secure or unsecure)
 	 * @param automaticExtractionEnabled
 	 *            if set to true, metadata for the submission set and according
-	 *            documents will be extracted as far as this is possible. if set
-	 *            to false the user of this API has to set all data by
-	 *            himself.</div>
+	 *            document entries will be extracted as far as this is possible.
+	 *            if set to false the user of this API has to set all data by
+	 *            himself. Extraction from CDA Documents to Document Entries
+	 *            uses the following mapping (for more details see
+	 *            CDAR2Extractor.pdf in
+	 *            org.openhealthtools.ihe.xds.metadata.extract.cdar2):
+	 *            <table summary="CDA Metadata to XDS Metadata mapping">
+	 *            <thead>
+	 *            <tr>
+	 *            <th>XDS Metadata Attribute</th>
+	 *            <th>XDS Element</th>
+	 *            </tr>
+	 *            </thead> <tbody>
+	 *            <tr>
+	 *            <td>creationTime</td>
+	 *            <td>ClinicalDocument/effectiveTime</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>languageCode</td>
+	 *            <td>ClinicalDocument/languageCode/@code</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>legalAuthenticator</td>
+	 *            <td>ClinicalDocument/legalAuthenticator/assignedEntity/id and
+	 *            ClinicalDocument
+	 *            /legalAuthenticator/assignedEntity/assignedPerson/name</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>serviceStartTime</td>
+	 *            <td>
+	 *            ClinicalDocument/documentationOf/serviceEvent/effectiveTime
+	 *            This time is to be in UTC, but without the timezone offset or
+	 *            fractional seconds: [[[[[YYYY]MM]DD]HH]mm]ss].</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>serviceStopTime</td>
+	 *            <td>
+	 *            ClinicalDocument/documentationOf/serviceEvent/effectiveTime
+	 *            This time is to be in UTC, but without the timezone offset or
+	 *            fractional seconds: [[[[[YYYY]MM]DD]HH]mm]ss]</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>sourcePatientId</td>
+	 *            <td>ClinicalDocument/recordTarget/patientRole/id</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>sourcePatientInfo</td>
+	 *            <td>ClinicalDocument/recordTarget/patientRole</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>title</td>
+	 *            <td>ClinicalDocument/title</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>uniqueId</td>
+	 *            <td>ClinicalDocument/id@extension and ClinicalDocument/id@root
+	 *            </td>
+	 *            </tr>
+	 *            </tbody>
+	 *            </table>
+	 * 
+	 * <br>
+	 *            The following attributes will be generated as described, if
+	 *            they are not present in the document entries:
+	 * 
+	 *            <table summary="Empty document entries attributes generation">
+	 *            <thead>
+	 *            <tr>
+	 *            <th>XDS Metadata Attribute</th>
+	 *            <th>Generated from</th>
+	 *            </tr>
+	 *            </thead> <tbody>
+	 *            <tr>
+	 *            <td>mimeType</td>
+	 *            <td>the DocumentDescriptor, which has been provided by adding
+	 *            the document</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>creationTime</td>
+	 *            <td>current time</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>uniqueId</td>
+	 *            <td>the docSourceActorOrgId attribute from the
+	 *            DocumentMetadata</td>
+	 *            </tr>
+	 *            </tbody>
+	 *            </table>
+	 * <br>
+	 *            Extraction from the first Document Entry to the Submission Set
+	 *            uses the following mapping:
+	 * 
+	 *            <table summary="Submission set attributes generation">
+	 *            <thead>
+	 *            <tr>
+	 *            <th>Submission set attribute</th>
+	 *            <th>Generated from</th>
+	 *            </tr>
+	 *            </thead><tbody>
+	 *            <tr>
+	 *            <td>uniqueId</td>
+	 *            <td>the eHealthConnector OID as base and a random part</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>sourceId</td>
+	 *            <td>DocumentEntry/Patient/AssigningAuthorityUniversalId or (if
+	 *            empty) from the eHealthConnector OID as base and a random part
+	 *            </td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>submissionTime</td>
+	 *            <td>current time</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>patientId</td>
+	 *            <td>DocumentEntry/PatientId</td>
+	 *            </tr>
+	 *            <tr>
+	 *            <td>contentTypeCode</td>
+	 *            <td>DocumentEntry/TypeCode</td>
+	 *            </tr>
+	 *            </tbody>
+	 *            </table>
+	 *            </div>
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			boolean automaticExtractionEnabled) {
@@ -269,6 +389,7 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param outputStream
 	 *            The outputStream object where the contents will be written to.
+	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
 		generateMissingSubmissionSetAttributes();
@@ -287,6 +408,7 @@ public class ConvenienceCommunication {
 	 *            The outputStream object where the contents will be written to.
 	 * @param xdmContents
 	 *            The existing xdmContents object
+	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
 		generateMissingSubmissionSetAttributes();
@@ -516,8 +638,9 @@ public class ConvenienceCommunication {
 	/**
 	 * Sets the status of the automatic metadata extraction
 	 * 
-	 * @return true, if metadata will be extracted as far as possible)
-	 *         automatically, false otherwise
+	 * @param automaticExtractionEnabled
+	 *            true, if metadata will be extracted as far as possible)
+	 *            automatically, false otherwise
 	 */
 	public void setAutomaticExtractionEnabled(boolean automaticExtractionEnabled) {
 		this.automaticExtractionEnabled = automaticExtractionEnabled;
@@ -525,7 +648,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br />
+	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
 	 * 
@@ -549,7 +672,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br />
+	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
 	 * 
@@ -569,7 +692,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br />
+	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
 	 * 
@@ -714,15 +837,15 @@ public class ConvenienceCommunication {
 			// default value just in case...
 			String organizationalId = "2.16.756.5.30.1.139.1.1";
 
+			if (subSet.getUniqueId() == null) {
+				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			}
+
 			if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
 				DocumentEntryType docEntry = (DocumentEntryType) txnData.getMetadata()
 						.getDocumentEntry().get(0);
 				organizationalId = docEntry.getPatientId().getAssigningAuthorityUniversalId();
 			}
-			if (subSet.getUniqueId() == null) {
-				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-			}
-
 			// set submission set source id
 			if (subSet.getSourceId() == null) {
 				subSet.setSourceId(organizationalId);
@@ -747,10 +870,11 @@ public class ConvenienceCommunication {
 			if (txnData.getDocumentEntry(uuid).getTypeCode() != null) {
 				subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid)
 						.getTypeCode()));
-			} else {
-				subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1",
-						"34133-9", "Summary of Episode Note", null));
 			}
+			// } else {
+			// subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1",
+			// "34133-9", "Summary of Episode Note", null));
+			// }
 		}
 	}
 

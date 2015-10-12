@@ -170,6 +170,7 @@ public class DocumentMetadata {
 		xDoc.setTypeCode(null);
 		xDoc.setHealthCareFacilityTypeCode(null);
 		xDoc.setTitle(null);
+		xDoc.setUniqueId(null);
 
 		xDoc.getAuthors().clear();
 		xDoc.getConfidentialityCode().clear();
