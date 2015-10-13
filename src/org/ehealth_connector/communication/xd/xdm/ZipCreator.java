@@ -36,6 +36,9 @@ public class ZipCreator {
 
 	/**
 	 * Creates a new Object which provides the needed methods
+	 * 
+	 * @param outputStream
+	 *            the outputStream, which is used to write the contents to
 	 */
 	public ZipCreator(OutputStream outputStream) {
 		logService.debug("creating zipfile");
@@ -50,6 +53,8 @@ public class ZipCreator {
 	 *            Contains the file to compress as a bytearray
 	 * @param pathInZipFile
 	 *            Contains the relative path only in that zip file
+	 * @throws IOException
+	 *             if the file could not be read
 	 */
 	public void addZipItem(InputStream data, String pathInZipFile) throws IOException {
 
@@ -73,6 +78,9 @@ public class ZipCreator {
 	/**
 	 * Closes the stream. It only has to be called when no more entries will be
 	 * added.
+	 * 
+	 * @throws IOException
+	 *             if the file could not be read
 	 */
 	public void closeZip() throws IOException {
 		out.close();

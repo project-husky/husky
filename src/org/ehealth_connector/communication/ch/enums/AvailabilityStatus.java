@@ -26,6 +26,47 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	DEPRECATED("urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated", "Deprecated");
 
 	/**
+	 * <div class="en">Return the OHT Enum Object with a given OHT
+	 * AvailabilityStatusType. Return null, if the status is not present in this
+	 * object</div> <div class="de">Liefert dieses Enum Objekt anhand eines OHT
+	 * AvailabilityStatusType zurück. Liefert null, wenn der Status in diesem
+	 * Objekt nicht vorhanden ist.</div>
+	 *
+	 * @param availabilityStatusType
+	 *            <div class="en">the status of the document as OHT
+	 *            AvailabilityStatusType </div> <div class="de">der
+	 *            Dokumentenstatus als OHT AvailabilityStatusType</div>
+	 * @return <div class="en">the status of the document</div> <div
+	 *         class="de">der Dokumentenstatus</div>
+	 */
+	public static AvailabilityStatus getByOhtAvailabilityStatusType(
+			AvailabilityStatusType availabilityStatusType) {
+		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED_LITERAL))
+			return AvailabilityStatus.APPROVED;
+		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED_LITERAL))
+			return AvailabilityStatus.DEPRECATED;
+		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static AvailabilityStatus getEnum(String code) {
+		for (AvailabilityStatus x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="de">Code für genehmigt</div> <div class="fr">Code de
 	 * approuvé</div> <div class="it">Code per approvato</div>
 	 */
@@ -98,26 +139,6 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Return the OHT Enum Object with a given OHT
-	 * AvailabilityStatusType. Return null, if the status is not present in this
-	 * object</div> <div class="de">Liefert dieses Enum Objekt anhand eines OHT
-	 * AvailabilityStatusType zurück. Liefert null, wenn der Status in diesem
-	 * Objekt nicht vorhanden ist.</div>
-	 *
-	 * @param availabilityStatusType
-	 *            <div class="en">the status of the document</div> <div
-	 *            class="de">der Dokumentenstatus</div>
-	 */
-	public static AvailabilityStatus getByOhtAvailabilityStatusType(
-			AvailabilityStatusType availabilityStatusType) {
-		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED_LITERAL))
-			return AvailabilityStatus.APPROVED;
-		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED_LITERAL))
-			return AvailabilityStatus.DEPRECATED;
-		return null;
-	}
-
-	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
 	 * class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
@@ -134,6 +155,7 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 *
 	 * @return <div class="en">the codedMetadataType</div>
 	 */
+	@Override
 	public CodedMetadataType getCodedMetadataType() {
 		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
@@ -180,24 +202,6 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 */
 	public String getDisplayName() {
 		return this.displayName;
-	}
-
-	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static AvailabilityStatus getEnum(String code) {
-		for (AvailabilityStatus x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 
 	/**

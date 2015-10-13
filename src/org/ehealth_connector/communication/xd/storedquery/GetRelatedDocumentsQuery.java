@@ -86,7 +86,6 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	 * @param objectType
 	 *            for the OnDemand document feature. Tells whether you want
 	 *            static docs, on demand docs, or both
-	 * @throws MalformedStoredQueryException
 	 */
 	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
 			ParentDocumentRelationshipType[] relationshipTypes, String homeCommunityId,

@@ -124,7 +124,6 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 *            array of confidentialityCodes, interpreted as a disjunctive
 	 *            clause in which each confidentialityCodes[i] will be a literal
 	 *            of that clause, to add to the query.
-	 * @throws MalformedStoredQueryException
 	 */
 	public void addConfidentialityCodes(ConfidentialityCode[] confidentialityCodes) {
 		try {
@@ -146,6 +145,6 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 */
 	@Override
 	public StoredQuery getOhtStoredQuery() {
-		return (StoredQuery) ohtStoredQuery;
+		return ohtStoredQuery;
 	}
 }

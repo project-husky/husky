@@ -26,7 +26,6 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 *            ID of the patient
 	 * @param status
 	 *            Status of the document
-	 * @throws MalformedStoredQueryException
 	 */
 	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) {
 		try {
@@ -100,7 +99,6 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 *
 	 * @param confidentialityCodes
 	 *            array of confidentiality codes
-	 * @throws MalformedStoredQueryException
 	 */
 	public void addConfidentialityCodes(ConfidentialityCode[] confidentialityCodes) {
 		try {

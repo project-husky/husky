@@ -207,6 +207,7 @@ public class SubmissionSetMetadata {
 	 * submission set class
 	 *
 	 * @param ohtSubmissionSetType
+	 *            the SubmissionSetType
 	 * @return the filled ohtSubmissionSetType
 	 */
 	@SuppressWarnings("unchecked")

@@ -19,7 +19,6 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 *            this is the id of the home community as specified by the XCA
 	 *            profile. Value may be null or empty, in which case it is not
 	 *            added to the query.
-	 * @throws MalformedStoredQueryException
 	 */
 	public GetDocumentsQuery(String docIds[], boolean isUUID, String homeCommunityId) {
 		try {
