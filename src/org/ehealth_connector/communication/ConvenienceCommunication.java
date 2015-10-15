@@ -113,8 +113,8 @@ public class ConvenienceCommunication {
 	private AtnaConfig.AtnaConfigMode atnaConfigMode = AtnaConfigMode.UNSECURE;
 
 	/**
-	 * <div class="en">Determines if XDS metadata will be extraced automatically
-	 * (e.g. for CDA documents)</div>
+	 * <div class="en">Determines if XDS metadata will be extracted
+	 * automatically (e.g. for CDA documents)</div>
 	 */
 	private boolean automaticExtractionEnabled = true;
 
