@@ -32,12 +32,12 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns a list of XDSDocuments
 	 * 
-	 * @see
-	 * org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType#getAttachments
-	 * ()
+	 * @return List of XDSDocuments in the XDM Zip File
+	 * @see org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType#getAttachments
+	 *      ()
 	 */
 	@Override
 	public List<XDSDocument> getAttachments() {
@@ -50,17 +50,33 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 		return Collections.unmodifiableList(attachments);
 	}
 
+	/**
+	 * Contains a map of exceptions thrown. Not used in the XDM implementation.
+	 * 
+	 * @see org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType#getCaughtExceptions()
+	 */
 	@Override
 	public Map<XDSRetrieveResponseType, Throwable> getCaughtExceptions() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Determines whether or not the transfer is complete. Note used in the XDM
+	 * implementation.
+	 * 
+	 * @see org.openhealthtools.ihe.xds.response.XDSResponseType#isComplete()
+	 */
 	@Override
 	public boolean isComplete() {
 		return true;
 	}
 
+	/**
+	 * Determines whether or not the processing is complete. Not used in the XDM
+	 * implementation.
+	 * 
+	 * @see org.openhealthtools.ihe.xds.response.impl.XDSResponseTypeImpl#isProcessed()
+	 */
 	@Override
 	protected boolean isProcessed() {
 		return true;
