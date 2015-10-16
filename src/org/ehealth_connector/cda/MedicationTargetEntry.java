@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda;
 
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
-import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -79,10 +78,10 @@ public class MedicationTargetEntry
 	 *
 	 * @return the immunization target
 	 */
-	public CdaChVacdRecCategories getImmunizationTarget() {
+	public CdaChVacdImmunizations getImmunizationTarget() {
 		Code code = this.getImmunizationTargetCode();
-		if (code != null && CdaChVacdRecCategories.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
-			return CdaChVacdRecCategories.getEnum(code.getCode());
+		if (code != null && CdaChVacdImmunizations.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			return CdaChVacdImmunizations.getEnum(code.getCode());
 		}
 		return null;
 	}
