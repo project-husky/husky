@@ -4,14 +4,11 @@ import java.net.URL;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
-import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ExternalDocument;
-import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -19,68 +16,38 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
 /**
- * Represents a Reason
+ * @deprecated replaced by MedicationTargetEntry
  */
-public class Reason {
+public class Reason extends MedicationTargetEntry {
 
-	private final CDACHMSETBodyImmunizationL3Reason mReason;
 	private CDACHBodyExtRef mExtRef = null;
 
 	/**
 	 * Standard constructor
 	 */
 	public Reason() {
-		mReason = CHFactory.eINSTANCE.createCDACHMSETBodyImmunizationL3Reason().init();
-
-		// Fix Template ID
-		for (II i : mReason.getTemplateIds()) {
-			if (i.getRoot().equals("2.16.756.5.30.1.1.1.1.3.2.1")) {
-				i.setExtension("CDA-CH.VACD.Body.MediL3.Reason");
-			}
-		}
-		// Set Status Code
-		mReason.setStatusCode(StatusCode.COMPLETED.getCS());
-	}
-
-	/**
-	 * Instantiates a Reason with a given mdht reason object
-	 * 
-	 * @param reason
-	 *          the reason object
-	 */
-	public Reason(CDACHMSETBodyImmunizationL3Reason reason) {
-		mReason = reason;
-		// Check if there are references to an extern document. If so,
-		// initalialize the class member.
-		for (Reference r : reason.getReferences())
-			for (II id : r.getTemplateIds()) {
-				if (id.getRoot().equals(CdaCh.OID_V1)) {
-					mExtRef = (CDACHBodyExtRef) r;
-				}
-			}
 	}
 
 	/**
 	 * Instantiates a Reason object with a code
 	 * 
 	 * @param code
-	 *          the code
+	 *            the code
 	 */
 	public Reason(Code code) {
 		this();
 		setCode(code);
-		mReason.setCode(code.getCD());
 	}
 
 	/**
 	 * Instantiates a Reason with a given code, a reference and an ID
 	 * 
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param reference
-	 *          the reference
+	 *            the reference
 	 * @param id
-	 *          the id. If null, an ID will be generated
+	 *            the id. If null, an ID will be generated
 	 */
 	public Reason(Code code, URL reference, String id) {
 		this(code);
@@ -99,21 +66,12 @@ public class Reason {
 	}
 
 	/**
-	 * Gets a copy of the mdht CDACHMSETBodyImmunizationL3Reason
-	 * 
-	 * @return the CDACHMSETBodyImmunizationL3Reason
-	 */
-	public CDACHMSETBodyImmunizationL3Reason copyMdhtCDACHMSETBodyImmunizationL3Reason() {
-		return EcoreUtil.copy(mReason);
-	}
-
-	/**
 	 * Gets the code
 	 * 
 	 * @return the code
 	 */
 	public Code getCode() {
-		return new Code(mReason.getCode());
+		return super.getImmunizationTargetCode();
 	}
 
 	/**
@@ -123,15 +81,6 @@ public class Reason {
 	 */
 	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
 		return mExtRef;
-	}
-
-	/**
-	 * Gets the CDACHMSETBodyImmunizationL3Reason
-	 * 
-	 * @return the CDACHMSETBodyImmunizationL3Reason
-	 */
-	public CDACHMSETBodyImmunizationL3Reason getMdhtCDACHMSETBodyImmunizationL3Reason() {
-		return mReason;
 	}
 
 	/**
@@ -163,15 +112,15 @@ public class Reason {
 	}
 
 	public void setCode(Code code) {
-		mReason.setCode(code.getCD());
+		super.setImmunizationTargetCode(code);
 	}
 
 	/**
 	 * Sets a reference to an external Document.
 	 * 
 	 * @param reference
-	 *          The Reference URL (e.g.
-	 *          'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+	 *            The Reference URL (e.g.
+	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
 	 */
 	public void setReference(URL reference) {
 		if (mExtRef == null) {
@@ -185,7 +134,7 @@ public class Reason {
 	 * Sets the reference id
 	 * 
 	 * @param id
-	 *          the if of the reference (if null, an id will be generated)
+	 *            the if of the reference (if null, an id will be generated)
 	 */
 	public void setReferenceId(String id) {
 		if (mExtRef == null) {
@@ -207,7 +156,7 @@ public class Reason {
 	private void initExtRef() {
 		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
 		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
-		mReason.getReferences().add(mExtRef);
+		// FIXME mReason.getReferences().add(mExtRef);
 		mExtRef.setExternalDocument(e);
 
 		// Fix Template ID

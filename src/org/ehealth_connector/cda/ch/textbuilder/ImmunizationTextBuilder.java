@@ -21,9 +21,6 @@ import java.util.List;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.common.Util;
-import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
  * Builds the &lt;text&gt; part of the History of immunzations.
@@ -39,7 +36,7 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	 * Constructor.
 	 * 
 	 * @param immunizations
-	 *          the immunizations
+	 *            the immunizations
 	 */
 	public ImmunizationTextBuilder(List<Immunization> immunizations) {
 		this.immunizations = immunizations;
@@ -48,10 +45,8 @@ public class ImmunizationTextBuilder extends TextBuilder {
 	public List<Immunization> getUpdatedImmunizations() {
 		int i = 0;
 		for (Immunization immunization : immunizations) {
-			ED reference = Util.createReference(i,
+			immunization.createReference(i,
 					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix());
-			SubstanceAdministration substanceAdminstration = immunization.getMdhtImmunization();
-			substanceAdminstration.setText(reference);
 			i++;
 		}
 		return immunizations;
@@ -97,7 +92,8 @@ public class ImmunizationTextBuilder extends TextBuilder {
 
 	private void addRow(Immunization immunization, int i) {
 		append("<tr>");
-		if (immunization.getConsumable() != null && immunization.getConsumable().getTradeName() != null) {
+		if (immunization.getConsumable() != null
+				&& immunization.getConsumable().getTradeName() != null) {
 			addCellWithContent(immunization.getConsumable().getTradeName(),
 					SectionsVACD.HISTORY_OF_IMMUNIZATION.getContentIdPrefix(), i);
 		} else {

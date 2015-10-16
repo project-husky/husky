@@ -16,11 +16,9 @@
 
 package org.ehealth_connector.cda;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
@@ -32,7 +30,6 @@ import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -106,7 +103,8 @@ public class ImmunizationRecommendation {
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
-			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
+			Date endOfPossibleAppliance, boolean intendedOrProposed,
+			boolean shallNotBeAdministerd) {
 
 		this();
 		if (intendedOrProposed) {
@@ -127,7 +125,7 @@ public class ImmunizationRecommendation {
 	 * Instantiates a new immunization recommendation.
 	 * 
 	 * @param immunizationRecommendation
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -154,19 +152,21 @@ public class ImmunizationRecommendation {
 	 *            the reason
 	 */
 	public void addReason(Reason reason) {
-		mImmunizationRecommendation.addObservation(reason
-				.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-		mImmunizationRecommendation.getEntryRelationships()
-				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-		mImmunizationRecommendation.getEntryRelationships()
-				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-				.setInversionInd(false);
+		/*
+		 * FIXME mImmunizationRecommendation
+		 * .addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
+		 * mImmunizationRecommendation.getEntryRelationships()
+		 * .get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
+		 * .setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+		 * mImmunizationRecommendation.getEntryRelationships()
+		 * .get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
+		 * .setInversionInd(false);
+		 */
 	}
 
 	/**
-	 * <div class="de">Copy mdht immunization recommendation.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="de">Copy mdht immunization recommendation.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. immunization
 	 *         recommendation
@@ -301,14 +301,14 @@ public class ImmunizationRecommendation {
 
 	/**
 	 * <div class="en">Gets the timespan, in which the immunization shall be
-	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div> <div
-	 * class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht werden
-	 * soll als String (z.B. "01.01.2015 - 01.03.2015")</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div>
+	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
+	 * werden soll als String (z.B. "01.01.2015 - 01.03.2015")</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div> <div
-	 *         class="it"></div>
+	 *         soll als String</div> <div class="fr"></div>
+	 *         <div class="it"></div>
 	 */
 	public String getPossibleAppliance() {
 		final List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
@@ -339,20 +339,21 @@ public class ImmunizationRecommendation {
 	 * @return A ArrayList of Resons
 	 */
 	public List<Reason> getReasons() {
-		final List<Reason> cl = new ArrayList<Reason>();
-		final EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunizationRecommendation
-				.getCDACHMSETBodyImmunizationL3Reasons();
-		for (final CDACHMSETBodyImmunizationL3Reason er : erl) {
-			cl.add(new Reason(er));
-		}
-		return cl;
+		/*
+		 * FIXME final List<Reason> cl = new ArrayList<Reason>(); final
+		 * EList<CDACHMSETBodyImmunizationL3Reason> erl =
+		 * mImmunizationRecommendation .getCDACHMSETBodyImmunizationL3Reasons();
+		 * for (final CDACHMSETBodyImmunizationL3Reason er : erl) { cl.add(new
+		 * Reason(er)); } return cl;
+		 */
+		return null;
 	}
 
 	/**
 	 * <div class="en">Gets the information, if an immunization should not be
 	 * administered (negationInd).</div> <div class="de">Gibt an, ob eine
-	 * Impfung nicht verabreicht werden soll (negationInd).</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * Impfung nicht verabreicht werden soll (negationInd).</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">true, if the immunization should not be
 	 *         administered. false, otherwise.</div> <div class="de">true, wenn
@@ -412,8 +413,8 @@ public class ImmunizationRecommendation {
 		mComment.setText(ed);
 		mImmunizationRecommendation.addAct(mComment);
 
-		final EntryRelationship er = mImmunizationRecommendation.getEntryRelationships().get(
-				mImmunizationRecommendation.getEntryRelationships().size() - 1);
+		final EntryRelationship er = mImmunizationRecommendation.getEntryRelationships()
+				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -459,14 +460,14 @@ public class ImmunizationRecommendation {
 	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfPossibleAppliacne
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param endOfPossibleAppliance
 	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
 		mImmunizationRecommendation.getEffectiveTimes().add(0,
@@ -486,8 +487,8 @@ public class ImmunizationRecommendation {
 	/**
 	 * <div class="en">Sets the information, wheater an immunization shall not
 	 * be administered</div> <div class="de">Gibt an, ob eine Impfung nicht
-	 * verabreicht werden soll.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * verabreicht werden soll.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param shallNotBeAdministerd
 	 *            <div class="en">true, if the immunization shall not be

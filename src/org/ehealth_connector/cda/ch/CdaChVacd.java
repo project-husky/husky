@@ -28,6 +28,7 @@ import org.ehealth_connector.cda.CodedResults;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.ImmunizationSection;
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.PregnancyHistory;
@@ -101,9 +102,14 @@ public class CdaChVacd extends CdaCh {
 	public static final String eVACDOCTitle = "eVACDOC";
 
 	/**
-	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
-	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
+	 * <div class="en">Creates a new eVACDOC CDA document</div>
+	 * <div class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 */
+
+	static {
+		CHFactory.eINSTANCE.createVACD().init();
+	}
+
 	public CdaChVacd() {
 		super(CHFactory.eINSTANCE.createVACD().init());
 		super.initCdaCh();
@@ -126,14 +132,14 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
-	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
+	 * <div class="en">Creates a new eVACDOC CDA document</div>
+	 * <div class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 * 
 	 * @param language
-	 * <br>
-	 *            <div class="en">document language</div> <div
-	 *            class="de">Sprache des Dokments</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            <br>
+	 *            <div class="en">document language</div>
+	 *            <div class="de">Sprache des Dokments</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
 	 *            <div class="en">stylesheet, which should be referenced to
 	 *            render a human readable representation of the document</div>
@@ -158,13 +164,13 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Creates a new eVACDOC CDA document</div> <div
-	 * class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
+	 * <div class="en">Creates a new eVACDOC CDA document</div>
+	 * <div class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 * 
 	 * @param language
-	 *            <div class="en">document language</div> <div
-	 *            class="de">Sprache des Dokments</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            <div class="en">document language</div>
+	 *            <div class="de">Sprache des Dokments</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
 	 *            <div class="en">stylesheet, which should be referenced to
 	 *            render a human readable representation of the document</div>
@@ -182,9 +188,9 @@ public class CdaChVacd extends CdaCh {
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
 	 *            >
 	 * @param immunization
-	 *            <div class="en">the immunization</div> <div
-	 *            class="de">Impfung</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en">the immunization</div>
+	 *            <div class="de">Impfung</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public CdaChVacd(LanguageCode language, String stylesheet, String cascasingStylesheet,
 			Immunization immunization) {
@@ -195,10 +201,10 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * <div class="en">Creates a new CdaChVacd convenience object on the basis
-	 * of a MDHT-VACD object. Both represent an immunization document</div> <div
-	 * class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels eines
-	 * MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div> <div
-	 * class="fr"></div>
+	 * of a MDHT-VACD object. Both represent an immunization document</div>
+	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels
+	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
+	 * <div class="fr"></div>
 	 * 
 	 * @param doc
 	 *            MDHT VACD object
@@ -210,15 +216,15 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Adds the active problem concern.</div> <div
-	 * class="de">Fügt ein Aktives Leiden hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds the active problem concern.</div>
+	 * <div class="de">Fügt ein Aktives Leiden hinzu</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param activeProblemConcern
-	 * <br>
-	 *            <div class="en"> active problem concern</div> <div class="de">
-	 *            Das aktive Leiden</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="en"> active problem concern</div>
+	 *            <div class="de"> Das aktive Leiden</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection aps;
@@ -227,8 +233,8 @@ public class CdaChVacd extends CdaCh {
 		aps = getDoc().getActiveProblemsSection();
 		if (aps == null) {
 			aps = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-			aps.setTitle(Util.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitle(getDoc()
-					.getLanguageCode())));
+			aps.setTitle(Util
+					.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(aps);
 		}
 
@@ -255,7 +261,7 @@ public class CdaChVacd extends CdaCh {
 	 * Allergie-Leiden hinzu</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param allergyConcern
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -266,8 +272,8 @@ public class CdaChVacd extends CdaCh {
 		ars = getDoc().getAllergiesReactionsSection();
 		if (ars == null) {
 			ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
-			ars.setTitle(Util.st(SectionsVACD.ALLERGIES_REACTIONS.getSectionTitle(getDoc()
-					.getLanguageCode())));
+			ars.setTitle(Util.st(
+					SectionsVACD.ALLERGIES_REACTIONS.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(ars);
 		}
 
@@ -310,8 +316,8 @@ public class CdaChVacd extends CdaCh {
 
 			final ED reference = Util.createReference(sb.getNewTextContentIDNr(),
 					SectionsVACD.CODED_RESULTS.getContentIdPrefix());
-			gestationalAge.getMdhtGestationalAgeWeeksObservation().setText(
-					EcoreUtil.copy(reference));
+			gestationalAge.getMdhtGestationalAgeWeeksObservation()
+					.setText(EcoreUtil.copy(reference));
 			gestationalAge.getMdhtGestationalAgeDaysObservation()
 					.setText(EcoreUtil.copy(reference));
 
@@ -320,10 +326,8 @@ public class CdaChVacd extends CdaCh {
 			// sb.toString());
 			gestationalAge.getMdhtCodedResultsSection().createStrucDocText("");
 
-			gestationalAge.getMdhtCodedResultsSection()
-					.setTitle(
-							Util.st(SectionsVACD.CODED_RESULTS.getSectionTitle(getDoc()
-									.getLanguageCode())));
+			gestationalAge.getMdhtCodedResultsSection().setTitle(Util
+					.st(SectionsVACD.CODED_RESULTS.getSectionTitle(getDoc().getLanguageCode())));
 		}
 		getDoc().addSection(codedResults.copyMdhtCodedResultsSection());
 	}
@@ -384,6 +388,8 @@ public class CdaChVacd extends CdaCh {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection;
 
 		// find or create (and add) the Section
+
+		// FIXME oe needs refactoring
 		immunizationSection = getDoc().getImmunizationsSection();
 		if (immunizationSection == null) {
 			immunizationSection = CHFactory.eINSTANCE.createImmunizationsSection().init();
@@ -392,8 +398,11 @@ public class CdaChVacd extends CdaCh {
 			getDoc().addSection(immunizationSection);
 		}
 
-		// add the MDHT Object to the section
-		immunizationSection.addSubstanceAdministration(immunization.copyMdhtImmunization());
+		ImmunizationSection immunSection = new ImmunizationSection(immunizationSection);
+		if (immunization != null) {
+			// add the MDHT Object to the section
+			immunSection.addImmunization(immunization);
+		}
 
 		// update the MDHT Object content references to CDA level 2 text
 		updateSubstanceAdministrationReferences(immunizationSection.getSubstanceAdministrations(),
@@ -404,7 +413,7 @@ public class CdaChVacd extends CdaCh {
 		if (CDALevel2TextGeneration) {
 			immunizationSection.createStrucDocText(generateNarrativeTextImmunizations());
 		} else {
-			if (immunization.getCommentText() != null) {
+			if (immunization != null && immunization.getCommentText() != null) {
 				// Aller vorhandenen Kommentare zusammenfügen
 				String allComments = "";
 				for (final Immunization t : getImmunizations()) {
@@ -420,14 +429,15 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Adds an immunization recommendation</div> <div
-	 * class="de">Fügt eine Impfempfehlung hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Adds an immunization recommendation</div>
+	 * <div class="de">Fügt eine Impfempfehlung hinzu</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param immunizationRecommendation
 	 *            the immunization recommendation
 	 */
-	public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
+	public void addImmunizationRecommendation(
+			ImmunizationRecommendation immunizationRecommendation) {
 		org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection immunizationRecommendationsSection;
 
 		// find or create (and add) the Section
@@ -435,14 +445,14 @@ public class CdaChVacd extends CdaCh {
 		if (immunizationRecommendationsSection == null) {
 			immunizationRecommendationsSection = CHFactory.eINSTANCE
 					.createImmunizationRecommendationSection().init();
-			immunizationRecommendationsSection.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN
-					.getSectionTitle(getDoc().getLanguageCode())));
+			immunizationRecommendationsSection.setTitle(Util
+					.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(immunizationRecommendationsSection);
 		}
 
 		// add the MDHT Object to the section
-		immunizationRecommendationsSection.addSubstanceAdministration(immunizationRecommendation
-				.copyMdhtImmunizationRecommendation());
+		immunizationRecommendationsSection.addSubstanceAdministration(
+				immunizationRecommendation.copyMdhtImmunizationRecommendation());
 
 		// update the MDHT Object content references to CDA level 1 text
 		updateSubstanceAdministrationReferences(
@@ -496,8 +506,8 @@ public class CdaChVacd extends CdaCh {
 			lss.getEntries().add(lrdpe);
 			lrdpe.setAct(spa);
 
-			lss.setTitle(Util.st(SectionsVACD.SEROLOGY_STUDIES.getSectionTitle(getDoc()
-					.getLanguageCode())));
+			lss.setTitle(Util
+					.st(SectionsVACD.SEROLOGY_STUDIES.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(lss);
 		}
 		// If the section is already present, get instances of the templates
@@ -550,8 +560,8 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * <div class="en">Adds a past problem concern</div> <div class="de">Fügt
-	 * ein vergangenes Leiden hinzu</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * ein vergangenes Leiden hinzu</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param pastProblemConcern
 	 *            the past problem concern
@@ -563,8 +573,8 @@ public class CdaChVacd extends CdaCh {
 		hopis = getDoc().getHistoryOfPastIllnessSection();
 		if (hopis == null) {
 			hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
-			hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS.getSectionTitle(getDoc()
-					.getLanguageCode())));
+			hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS
+					.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(hopis);
 		}
 
@@ -603,8 +613,8 @@ public class CdaChVacd extends CdaCh {
 
 		if (phs == null) {
 			phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
-			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES.getSectionTitle(getDoc()
-					.getLanguageCode())));
+			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES
+					.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(phs);
 		}
 
@@ -617,8 +627,8 @@ public class CdaChVacd extends CdaCh {
 			final String pregnancyText = "Voraussichtlicher Geburtstermin: "
 					+ pregnancy.getEstimatedBirthdate();
 			if (phs.getText() != null) {
-				final String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(phs
-						.getText());
+				final String oldSectionText = Util
+						.extractStringFromNonQuotedStrucDocText(phs.getText());
 				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText,
 						oldSectionText);
 			} else {
@@ -711,7 +721,8 @@ public class CdaChVacd extends CdaCh {
 	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
-			final ObservationInterpretationForImmunization observationInterpretation, String comment) {
+			final ObservationInterpretationForImmunization observationInterpretation,
+			String comment) {
 		final LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
 				laboratorySpecificCode, dateTimeOfResult, performer, value,
 				observationInterpretation);
@@ -755,8 +766,8 @@ public class CdaChVacd extends CdaCh {
 	/**
 	 * <div class="en">Generates the human readable text of the immunization
 	 * recommendations chapter </div> <div class="de">Liefert den
-	 * menschenlesbaren Text zu dem Kaptiel Impfempfehlungen zurück</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * menschenlesbaren Text zu dem Kaptiel Impfempfehlungen zurück</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the immunization recommendations text</div>
 	 */
@@ -811,8 +822,8 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * <div class="en">Gets the active problems</div> <div class="de">Liefert
-	 * alle Aktiven Leiden zurück</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * alle Aktiven Leiden zurück</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @return the active problem concerns
 	 */
@@ -852,8 +863,8 @@ public class CdaChVacd extends CdaCh {
 				if (value != null && value.getCode() != null
 						&& !StringUtils.isEmptyOrNull(value.getCode().getCode())
 						&& !StringUtils.isEmptyOrNull(value.getCode().getDisplayName())) {
-					if (RiscOfExposure.isRiscOfExposure(value.getCode().getCode(), value.getCode()
-							.getDisplayName())) {
+					if (RiscOfExposure.isRiscOfExposure(value.getCode().getCode(),
+							value.getCode().getDisplayName())) {
 						riscOfExposures.add(aConcern);
 					}
 				}
@@ -881,8 +892,8 @@ public class CdaChVacd extends CdaCh {
 				if (value != null && value.getCode() != null
 						&& !StringUtils.isEmptyOrNull(value.getCode().getCode())
 						&& !StringUtils.isEmptyOrNull(value.getCode().getDisplayName())) {
-					if (RiscOfComplications.isRiscOfComplication(value.getCode().getCode(), value
-							.getCode().getDisplayName())) {
+					if (RiscOfComplications.isRiscOfComplication(value.getCode().getCode(),
+							value.getCode().getDisplayName())) {
 						riscOfComplications.add(aConcern);
 					}
 				}
@@ -892,8 +903,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the allergy problem concerns</div> <div
-	 * class="de">Liefert alle Allergie Leiden zurück</div>
+	 * <div class="en">Gets the allergy problem concerns</div>
+	 * <div class="de">Liefert alle Allergie Leiden zurück</div>
 	 * 
 	 * @return the allergy problem concerns
 	 */
@@ -947,8 +958,8 @@ public class CdaChVacd extends CdaCh {
 		if (rs == null) {
 			return null;
 		}
-		final org.ehealth_connector.cda.Comment comment = new org.ehealth_connector.cda.Comment(rs
-				.getText().getText());
+		final org.ehealth_connector.cda.Comment comment = new org.ehealth_connector.cda.Comment(
+				rs.getText().getText());
 		return comment.getText();
 	}
 
@@ -964,8 +975,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the immunization recommendations</div> <div
-	 * class="de">Liefert alle Impfempfehlungen zurück</div>
+	 * <div class="en">Gets the immunization recommendations</div>
+	 * <div class="de">Liefert alle Impfempfehlungen zurück</div>
 	 * 
 	 * @return List with immunization recommendations
 	 */
@@ -988,8 +999,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Get the immunizations defined by the filter</div> <div
-	 * class="de">Gibt alle Impfungen gemäss filter zurück</div>
+	 * <div class="en">Get the immunizations defined by the filter</div>
+	 * <div class="de">Gibt alle Impfungen gemäss filter zurück</div>
 	 * 
 	 * @return List with filtered immunizations
 	 */
@@ -1001,10 +1012,9 @@ public class CdaChVacd extends CdaCh {
 
 			for (final org.openhealthtools.mdht.uml.cda.ch.Immunization i : il) {
 				final Immunization immunization = new Immunization(i);
-
-				if (undesired && immunization.getMdhtImmunization().getNegationInd() == true) {
+				if (undesired && immunization.isUndesired()) {
 					immunizations.add(immunization);
-				} else if (desired && immunization.getMdhtImmunization().getNegationInd() == false) {
+				} else if (desired && !immunization.isUndesired()) {
 					immunizations.add(immunization);
 				}
 			}
@@ -1023,8 +1033,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets all applied immunizations</div> <div
-	 * class="de">Liefert alle durchgeführten Impfungen zurück</div>
+	 * <div class="en">Gets all applied immunizations</div>
+	 * <div class="de">Liefert alle durchgeführten Impfungen zurück</div>
 	 * 
 	 * @return List with only applied immunizations
 	 */
@@ -1033,8 +1043,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets all immunizations (applied and unwanted)</div> <div
-	 * class="de">Liefert alle Impfungen zurück (durchgeführte und
+	 * <div class="en">Gets all immunizations (applied and unwanted)</div>
+	 * <div class="de">Liefert alle Impfungen zurück (durchgeführte und
 	 * unerwünschte)</div>
 	 * 
 	 * @return List with all immunizations
@@ -1044,8 +1054,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the laboratory observations</div> <div
-	 * class="de">Liefert alle Laborresultate zurück</div>
+	 * <div class="en">Gets the laboratory observations</div>
+	 * <div class="de">Liefert alle Laborresultate zurück</div>
 	 * 
 	 * @return List with laboratory observations
 	 */
@@ -1193,8 +1203,8 @@ public class CdaChVacd extends CdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the past problem concerns</div> <div
-	 * class="de">Liefert alle vergangen Leiden zurück</div>
+	 * <div class="en">Gets the past problem concerns</div>
+	 * <div class="de">Liefert alle vergangen Leiden zurück</div>
 	 * 
 	 * @return the past problem concern entries
 	 */
@@ -1237,9 +1247,9 @@ public class CdaChVacd extends CdaCh {
 
 	/**
 	 * <div class="en">Pseudonymization of a clinical document according to the
-	 * CDA-CH-VACD specification (Rule CH-VACD-HPAT)</div> <div
-	 * class="de">Pseudonymisierung eines ClinicalDocument nach der CDA-CH-VACD
-	 * Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und
+	 * CDA-CH-VACD specification (Rule CH-VACD-HPAT)</div>
+	 * <div class="de">Pseudonymisierung eines ClinicalDocument nach der
+	 * CDA-CH-VACD Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und
 	 * insbesondere Kapitel "7.4 CDA Header", Regel CH-VACD-HPAT)</div>
 	 */
 	public void pseudonymization() {
@@ -1502,10 +1512,8 @@ public class CdaChVacd extends CdaCh {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				final Code code = new Code(problemEntry.getCode());
-				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem())
-						&& code.getCode()
-								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-										.getCode())) {
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
+						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -1556,10 +1564,8 @@ public class CdaChVacd extends CdaCh {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				final Code code = new Code(problemEntry.getCode());
-				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem())
-						&& code.getCode()
-								.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN
-										.getCode())) {
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
+						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -1593,7 +1599,8 @@ public class CdaChVacd extends CdaCh {
 			ir.setText(reference);
 			if (ir.getConsumable() != null) {
 				if (ir.getConsumable().getManufacturedProduct() != null) {
-					if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial() != null) {
+					if (ir.getConsumable().getManufacturedProduct()
+							.getManufacturedMaterial() != null) {
 						if (ir.getConsumable().getManufacturedProduct().getManufacturedMaterial()
 								.getCode() != null) {
 							ir.getConsumable().getManufacturedProduct().getManufacturedMaterial()

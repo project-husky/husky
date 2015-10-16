@@ -38,7 +38,6 @@ import org.ehealth_connector.common.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHMSETBodyImmunizationL3Reason;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -59,9 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten
  * Impfungen.</div>
  */
-public class Immunization {
-
-	private final org.openhealthtools.mdht.uml.cda.ch.Immunization mImmunization;
+public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Immunization> {
 
 	/**
 	 * <div class="en">Creates an object, which represents an
@@ -70,37 +67,32 @@ public class Immunization {
 	 * Object initialisiert werden soll</div>
 	 */
 	public Immunization() {
-		mImmunization = CHFactory.eINSTANCE.createImmunization().init();
-		mImmunization.setNegationInd(Boolean.FALSE);
-
-		// Get the TemplateIds save them, clear the list and add the modified
-		// item again
-		final List<II> savedTemplateIds = (List<II>) EcoreUtil.copyAll(mImmunization
-				.getTemplateIds());
-		mImmunization.getTemplateIds().clear();
-
-		int i = 0;
-		for (final II templateId : savedTemplateIds) {
-			// Fix the extension for the swiss template id
-			if (templateId.getRoot().equals(CdaCh.OID_V1)) {
-				templateId.setExtension("CDA-CH.Body.MediL3");
-			}
-			// Add every template that is not Immunization
-			if (!"1.3.6.1.4.1.19376.1.5.3.1.4.12".equals(templateId.getRoot())) {
-				mImmunization.getTemplateIds().add(templateId);
-			} else {
-				i++;
-				// Add only the first Immunization Template Id
-				if (i < 2) {
-					mImmunization.getTemplateIds().add(templateId);
+		super(CHFactory.eINSTANCE.createImmunization().init(), CdaCh.OID_V1, "CDA-CH.Body.MediL3");
+		EList<II> templateIds = this.getMdht().getTemplateIds();
+		boolean foundFirst = false;
+		// <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12"/> appears twice
+		for (II ii : templateIds) {
+			if ("1.3.6.1.4.1.19376.1.5.3.1.4.12".equals(ii.getRoot())) {
+				if (foundFirst) {
+					templateIds.remove(ii);
+				} else {
+					foundFirst = true;
 				}
 			}
-
 		}
-
 		setRouteOfAdministration(null);
 		setDosage(null);
 		setPriorityCode(createPriorityCode());
+	}
+
+	/**
+	 * Instantiates a new immunization.
+	 *
+	 * @param immunization
+	 *            the immunization
+	 */
+	public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
+		super(immunization, null, null);
 	}
 
 	/**
@@ -113,16 +105,14 @@ public class Immunization {
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div> <div
-	 *            class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div>
+	 *            <div class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div> <div
-	 *            class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div>
+	 *            <div class="de">Datum der Impfung</div>
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
 		this();
-		mImmunization.setNegationInd(Boolean.FALSE);
-
 		setApplyDate(appliedAt);
 		addId(null);
 		setConsumable(consumable);
@@ -139,11 +129,11 @@ public class Immunization {
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div> <div
-	 *            class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div>
+	 *            <div class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div> <div
-	 *            class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div>
+	 *            <div class="de">Datum der Impfung</div>
 	 * @param route
 	 *            <div class="en">route of administration (can be null)</div>
 	 *            <div class="de">Einnahmeart (darf null sein)</div>
@@ -154,8 +144,6 @@ public class Immunization {
 	public Immunization(Consumable consumable, Author author, Date appliedAt,
 			RouteOfAdministration route, Double doseQuantity) {
 		this();
-		mImmunization.setNegationInd(Boolean.FALSE);
-
 		setApplyDate(appliedAt);
 		setRouteOfAdministration(route);
 		setDosage(doseQuantity);
@@ -182,18 +170,6 @@ public class Immunization {
 	}
 
 	/**
-	 * Constructor.
-	 * 
-	 * @param immunization
-	 * <br>
-	 *            <div class="de">IHE Impf-Objekt</div> <div class="fr">
-	 *            immunization</div> <div class="it"> immunization</div>
-	 */
-	public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
-		mImmunization = immunization;
-	}
-
-	/**
 	 * Adds the id.
 	 * 
 	 * @param codedId
@@ -201,31 +177,47 @@ public class Immunization {
 	 */
 	public void addId(Identificator codedId) {
 		final II ii = Util.createUuidVacdIdentificator(codedId);
-		mImmunization.getIds().add(ii);
+		this.getMdht().getIds().add(ii);
 	}
 
 	/**
 	 * Adds the reason for the immunization (the illness, which the immunization
-	 * should prevent)
-	 * 
+	 * should prevent).
+	 *
 	 * @param reason
 	 *            the reason
 	 */
+	@Deprecated
 	public void addReason(Reason reason) {
-		mImmunization.addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-		mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size() - 1)
-				.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-		mImmunization.getEntryRelationships().get(mImmunization.getEntryRelationships().size() - 1)
-				.setInversionInd(false);
+		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
-	 * Returns the encapsulated IHE class.
-	 * 
-	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
+	 * Adds the medication target entry.
+	 *
+	 * @param medicationTargetEntry
+	 *            the medication target entry
 	 */
-	public org.openhealthtools.mdht.uml.cda.ch.Immunization copyMdhtImmunization() {
-		return EcoreUtil.copy(mImmunization);
+	public void addMedicationTargetEntry(MedicationTargetEntry medicationTargetEntry) {
+
+		this.getMdht().addObservation(medicationTargetEntry.getMdht());
+		// need to add the the RSON and inversionInd, cannot do this
+		// automatically with mdht
+		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
+				entryRelationShip.setNegationInd(false);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+			}
+		}
+	}
+
+	public List<MedicationTargetEntry> getMedicationTargetEntries() {
+		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
+		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
+			medicationTargetEntries.add(new MedicationTargetEntry(mte));
+		}
+		return medicationTargetEntries;
 	}
 
 	/**
@@ -234,9 +226,8 @@ public class Immunization {
 	 * @return the apply date
 	 */
 	public Date getApplyDate() {
-		if (mImmunization.getEffectiveTimes() != null
-				&& mImmunization.getEffectiveTimes().size() > 0) {
-			final SXCM_TS date = mImmunization.getEffectiveTimes().get(0);
+		if (getMdht().getEffectiveTimes() != null && getMdht().getEffectiveTimes().size() > 0) {
+			final SXCM_TS date = getMdht().getEffectiveTimes().get(0);
 			return DateUtil.parseDateyyyyMMdd(date.getValue());
 		} else {
 			return null;
@@ -250,8 +241,8 @@ public class Immunization {
 	 */
 	public Author getAuthor() {
 		try {
-			final org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil.copy(mImmunization
-					.getAuthors().get(0));
+			final org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil
+					.copy(getMdht().getAuthors().get(0));
 			return new Author(author);
 		} catch (final IndexOutOfBoundsException e) {
 			// no author available
@@ -267,17 +258,17 @@ public class Immunization {
 	 *         level 2 text
 	 */
 	public String getCommentRef() {
-		return Util.getCommentRef(mImmunization.getEntryRelationships());
+		return Util.getCommentRef(getMdht().getEntryRelationships());
 	}
 
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
-	 * comment itself)
-	 * 
+	 * comment itself).
+	 *
 	 * @return the comment text
 	 */
 	public String getCommentText() {
-		return Util.getCommentText(mImmunization.getEntryRelationships());
+		return Util.getCommentText(getMdht().getEntryRelationships());
 	}
 
 	/**
@@ -286,7 +277,7 @@ public class Immunization {
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
-		final Consumable consumable = new Consumable(mImmunization.getConsumable());
+		final Consumable consumable = new Consumable(getMdht().getConsumable());
 		return consumable;
 	}
 
@@ -296,8 +287,8 @@ public class Immunization {
 	 * @return Dosis Dosis der Impfung
 	 */
 	public Value getDosage() {
-		if (mImmunization.getDoseQuantity() != null) {
-			final Value value = new Value(mImmunization.getDoseQuantity());
+		if (getMdht().getDoseQuantity() != null) {
+			final Value value = new Value(getMdht().getDoseQuantity());
 			return value;
 		}
 		return null;
@@ -310,8 +301,8 @@ public class Immunization {
 	 */
 	public Identificator getId() {
 		Identificator id = null;
-		if (mImmunization.getIds() != null && mImmunization.getIds().size() > 0) {
-			id = new Identificator(mImmunization.getIds().get(0));
+		if (getMdht().getIds() != null && getMdht().getIds().size() > 0) {
+			id = new Identificator(getMdht().getIds().get(0));
 		}
 		return id;
 	}
@@ -325,7 +316,7 @@ public class Immunization {
 	 */
 	public Identificator getId(IdentityDomain codeSystem) {
 		Identificator ident = null;
-		for (final II id : mImmunization.getIds()) {
+		for (final II id : getMdht().getIds()) {
 			if (id.getRoot().equalsIgnoreCase(codeSystem.getCodeSystemId())) {
 				ident = new Identificator(id);
 			}
@@ -344,31 +335,22 @@ public class Immunization {
 	 *         beabsichtigt, aber noch nicht erfolgt ist. Sonst: false</div>
 	 */
 	public boolean getIntended() {
-		// if (mImmunization.getMoodCode().equals(x_DocumentSubstanceMood.INT))
+		// if (getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT))
 		// return true;
 		// else
 		// return false;
-		return mImmunization.getMoodCode().equals(x_DocumentSubstanceMood.INT);
+		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT);
 	}
 
 	/**
-	 * Returns the encapsulated IHE class.
-	 * 
-	 * @return org.openhealthtools.mdht.uml.cda.ihe.Immunization
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.Immunization getMdhtImmunization() {
-		return mImmunization;
-	}
-
-	/**
-	 * Gets the Performer (Person, die die Impfung durchgeführt hat)
-	 * 
+	 * Gets the Performer (Person, die die Impfung durchgeführt hat).
+	 *
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
-		if (mImmunization.getPerformers() != null) {
-			if (mImmunization.getPerformers().get(0) != null) {
-				return new Performer(mImmunization.getPerformers().get(0));
+		if (getMdht().getPerformers() != null) {
+			if (getMdht().getPerformers().get(0) != null) {
+				return new Performer(getMdht().getPerformers().get(0));
 			}
 		}
 		return null;
@@ -383,7 +365,7 @@ public class Immunization {
 	 * @return priorityCode
 	 */
 	public Code getPriorityCode() {
-		return new Code(mImmunization.getPriorityCode());
+		return new Code(getMdht().getPriorityCode());
 	}
 
 	/**
@@ -393,13 +375,15 @@ public class Immunization {
 	 * @return A List of Reasons
 	 */
 	public List<Reason> getReasons() {
-		final List<Reason> cl = new ArrayList<Reason>();
-		final EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
-				.getCDACHMSETBodyImmunizationL3Reasons();
-		for (final CDACHMSETBodyImmunizationL3Reason er : erl) {
-			cl.add(new Reason(er));
-		}
-		return cl;
+		/*
+		 * FIXME OE final List<Reason> cl = new ArrayList<Reason>();
+		 * 
+		 * final EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
+		 * .getCDACHMSETBodyImmunizationL3Reasons(); for (final
+		 * CDACHMSETBodyImmunizationL3Reason er : erl) { cl.add(new Reason(er));
+		 * } return cl;
+		 */
+		return null;
 	}
 
 	/**
@@ -408,7 +392,7 @@ public class Immunization {
 	 * @return the route of administration
 	 */
 	public RouteOfAdministration getRouteOfAdministration() {
-		return RouteOfAdministration.getEnum(mImmunization.getRouteCode().getCode());
+		return RouteOfAdministration.getEnum(getMdht().getRouteCode().getCode());
 	}
 
 	/**
@@ -418,8 +402,8 @@ public class Immunization {
 	 *            the new apply date
 	 */
 	public void setApplyDate(Date appliedAt) {
-		mImmunization.getEffectiveTimes().clear();
-		mImmunization.getEffectiveTimes().add(convertDate(appliedAt));
+		getMdht().getEffectiveTimes().clear();
+		getMdht().getEffectiveTimes().add(convertDate(appliedAt));
 	}
 
 	/**
@@ -429,39 +413,39 @@ public class Immunization {
 	 *            the new author
 	 */
 	public void setAuthor(Author author) {
-		mImmunization.getAuthors().clear();
+		getMdht().getAuthors().clear();
 		final org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
 		// Remove author function Code if present
 		if (immmunizationAuthor.getFunctionCode() != null) {
 			final CE ce = null;
 			immmunizationAuthor.setFunctionCode(ce);
 		}
-		mImmunization.getAuthors().add(immmunizationAuthor);
+		getMdht().getAuthors().add(immmunizationAuthor);
 	}
 
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
-	 * document
-	 * 
+	 * document.
+	 *
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
-		mImmunization.setCode(specialCode.getCD());
-		mImmunization.setStatusCode(StatusCode.COMPLETED.getCS());
+		getMdht().setCode(specialCode.getCD());
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.UNK);
-		mImmunization.setPriorityCode(ce);
-		mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		mImmunization.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		mImmunization.getIds().add(Util.createUuidVacd(null));
+		getMdht().setPriorityCode(ce);
+		getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+		getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+		getMdht().getIds().add(Util.createUuidVacd(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}
 
 	/**
-	 * Sets a comment text
-	 * 
+	 * Sets a comment text.
+	 *
 	 * @param text
 	 *            the text
 	 */
@@ -470,10 +454,10 @@ public class Immunization {
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		ed.addText(text);
 		mComment.setText(ed);
-		mImmunization.addAct(mComment);
+		getMdht().addAct(mComment);
 
-		final EntryRelationship er = mImmunization.getEntryRelationships().get(
-				mImmunization.getEntryRelationships().size() - 1);
+		final EntryRelationship er = getMdht().getEntryRelationships()
+				.get(getMdht().getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -485,7 +469,7 @@ public class Immunization {
 	 *            the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
-		mImmunization.setConsumable(consumable.copyMdhtConsumable());
+		getMdht().setConsumable(consumable.copyMdhtConsumable());
 	}
 
 	/**
@@ -496,12 +480,12 @@ public class Immunization {
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
-			mImmunization.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+			getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		} else {
 			final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 			ivl_pq.setUnit("ml");
 			ivl_pq.setValue(doseQuantity);
-			mImmunization.setDoseQuantity(ivl_pq);
+			getMdht().setDoseQuantity(ivl_pq);
 		}
 	}
 
@@ -513,23 +497,23 @@ public class Immunization {
 	 * 
 	 */
 	public void setIntended() {
-		mImmunization.setMoodCode(x_DocumentSubstanceMood.INT);
+		getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
 	}
 
 	/**
-	 * Sets the Person, who performs the Immunization
-	 * 
+	 * Sets the Person, who performs the Immunization.
+	 *
 	 * @param performer
 	 *            the new performer (Convenience Author will be converted to a
 	 *            performer)
 	 */
 	public void setPerformer(Author performer) {
 		final Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
-		mImmunization.getPerformers().clear();
-		mImmunization.getPerformers().add(p2);
+		getMdht().getPerformers().clear();
+		getMdht().getPerformers().add(p2);
 
-		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor()
-				.getAssignedAuthor()));
+		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(
+				performer.copyMdhtAuthor().getAssignedAuthor()));
 		try {
 			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
 		} catch (final ParseException e) {
@@ -538,14 +522,14 @@ public class Immunization {
 	}
 
 	/**
-	 * Sets the Person, who performs the Immunization
-	 * 
+	 * Sets the Person, who performs the Immunization.
+	 *
 	 * @param performer
 	 *            the new performer
 	 */
 	public void setPerformer(Performer performer) {
-		mImmunization.getPerformers().clear();
-		mImmunization.getPerformers().add(performer.copyMdhtPerfomer());
+		getMdht().getPerformers().clear();
+		getMdht().getPerformers().add(performer.copyMdhtPerfomer());
 	}
 
 	/**
@@ -558,7 +542,7 @@ public class Immunization {
 	 *            the priority code
 	 */
 	public void setPriorityCode(Code priorityCode) {
-		mImmunization.setPriorityCode(priorityCode.getCE());
+		getMdht().setPriorityCode(priorityCode.getCE());
 	}
 
 	/**
@@ -572,22 +556,62 @@ public class Immunization {
 		if (routeCode == null) {
 			final CE ce = DatatypesFactory.eINSTANCE.createCE();
 			ce.setNullFlavor(NullFlavor.UNK);
-			mImmunization.setRouteCode(ce);
+			getMdht().setRouteCode(ce);
 		} else {
-			mImmunization.setRouteCode(routeCode.getCE());
+			getMdht().setRouteCode(routeCode.getCE());
 		}
 	}
 
+	/**
+	 * Convert date.
+	 *
+	 * @param appliedAt
+	 *            the applied at
+	 * @return the sxcm ts
+	 */
 	private SXCM_TS convertDate(Date appliedAt) {
 		final SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
 		timestamp.setValue(DateUtil.formatDate(appliedAt));
 		return timestamp;
 	}
 
+	/**
+	 * Creates the priority code.
+	 *
+	 * @return the code
+	 */
 	private Code createPriorityCode() {
 		final CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
 		priorityCode.setNullFlavor(NullFlavor.UNK);
 		return new Code(priorityCode);
+	}
+
+	/**
+	 * Sets if the immunization is not desired.
+	 */
+	public void setUndesired() {
+		this.getMdht().setNegationInd(true);
+	}
+
+	/**
+	 * Checks if is the immunization is not desired
+	 *
+	 * @return true, if is undesired
+	 */
+	public boolean isUndesired() {
+		return this.getMdht().getNegationInd().booleanValue();
+	}
+
+	/**
+	 * Creates the reference to the section.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @param prefix
+	 *            the prefix
+	 */
+	public void createReference(int contentId, String prefix) {
+		this.getMdht().setText(Util.createReference(contentId, prefix));
 	}
 
 }
