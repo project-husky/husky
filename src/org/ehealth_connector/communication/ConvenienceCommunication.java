@@ -156,11 +156,11 @@ public class ConvenienceCommunication {
 	 *            uses the following mapping (for more details see
 	 *            CDAR2Extractor.pdf in
 	 *            org.openhealthtools.ihe.xds.metadata.extract.cdar2):
-	 *            <table summary="CDA Metadata to XDS Metadata mapping">
+	 *            <table summary="CDA Metadata to XDS Metadata mapping" width="100%">
 	 *            <thead>
 	 *            <tr>
-	 *            <th>XDS Metadata Attribute</th>
-	 *            <th>XDS Element</th>
+	 *            <th width="20%">XDS Metadata Attribute</th>
+	 *            <th width="80%">XDS Element</th>
 	 *            </tr>
 	 *            </thead> <tbody>
 	 *            <tr>
@@ -215,11 +215,11 @@ public class ConvenienceCommunication {
 	 *            The following attributes will be generated as described, if
 	 *            they are not present in the document entries:
 	 * 
-	 *            <table summary="Empty document entries attributes generation">
+	 *            <table summary="Empty document entries attributes generation"  width="100%">
 	 *            <thead>
 	 *            <tr>
-	 *            <th>XDS Metadata Attribute</th>
-	 *            <th>Generated from</th>
+	 *            <th width="20%">XDS Metadata Attribute</th>
+	 *            <th width="80%">Generated from</th>
 	 *            </tr>
 	 *            </thead> <tbody>
 	 *            <tr>
@@ -242,11 +242,11 @@ public class ConvenienceCommunication {
 	 *            Extraction from the first Document Entry to the Submission Set
 	 *            uses the following mapping:
 	 * 
-	 *            <table summary="Submission set attributes generation">
+	 *            <table summary="Submission set attributes generation" width="100%">
 	 *            <thead>
 	 *            <tr>
-	 *            <th>Submission set attribute</th>
-	 *            <th>Generated from</th>
+	 *            <th width="20%">Submission set attribute</th>
+	 *            <th width="80%">Generated from</th>
 	 *            </tr>
 	 *            </thead><tbody>
 	 *            <tr>
