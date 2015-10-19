@@ -52,6 +52,10 @@ public enum EHealthConnectorVersions {
 		this.releaseDate = releaseDate;
 	}
 
+	public static EHealthConnectorVersions getCurrentVersion(){
+		return EHealthConnectorDev;
+	}
+
 	public String getReleaseDate() {
 		return releaseDate;
 	}
@@ -63,4 +67,5 @@ public enum EHealthConnectorVersions {
 	public String oid() {
 		return oid;
 	}
+	
 }
