@@ -33,9 +33,14 @@ public enum EHealthConnectorVersions {
 	EHealthConnectorR201503("2.16.756.5.30.1.139.1.1.2", "eHealthConnector R201503", "20150401"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.3 eHealthConnector Rxxxxxx
+	 * OID: 2.16.756.5.30.1.139.1.1.3 eHealthConnector R201510
 	 */
-	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.3", "eHealthConnector trunk", "xxxxxxxx");
+	EHealthConnectorR201510("2.16.756.5.30.1.139.1.1.3", "eHealthConnector R201510", "R20151030"),
+
+	/**
+	 * OID: 2.16.756.5.30.1.139.1.1.4 eHealthConnector Rxxxxxx
+	 */
+	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.4", "eHealthConnector trunk", "xxxxxxxx");
 
 	private String oid;
 	private String systemVersionName;
