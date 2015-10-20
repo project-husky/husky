@@ -21,6 +21,7 @@ import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
 import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.util.VendorInformation;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 

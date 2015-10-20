@@ -69,7 +69,9 @@ public class ConvenienceCommunicationTest {
 
 		try {
 
-			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE, true);
+			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE,
+					DocumentMetadataExtractionMode.defaultExtraction,
+					SubmissionSetMetadataExtractionMode.defaultExtraction);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

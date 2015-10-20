@@ -26,10 +26,10 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 public class DocumentAndMetadata {
 
 	/** The xds document. */
-	XDSDocument xdsDocument;
+	private XDSDocument xdsDocument;
 
 	/** The doc entry. */
-	DocumentEntryType docEntry;
+	private DocumentEntryType docEntry;
 
 	/**
 	 * Instantiates a new document and metadata.

@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
+import org.ehealth_connector.util.VendorInformation;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**

@@ -113,10 +113,15 @@ public class ConvenienceCommunication {
 	private AtnaConfig.AtnaConfigMode atnaConfigMode = AtnaConfigMode.UNSECURE;
 
 	/**
-	 * <div class="en">Determines if XDS metadata will be extracted
-	 * automatically (e.g. for CDA documents)</div>
+	 * <div class="en">Determines if XDS document metadata will be extracted
+	 * automatically (e.g. from CDA documents)</div>
 	 */
-	private boolean automaticExtractionEnabled = true;
+	private DocumentMetadataExtractionMode automaticDocumentMetadataExtractionMode = DocumentMetadataExtractionMode.defaultExtraction;
+	/**
+	 * <div class="en">Determines if SubmissionSet metadata will be extracted
+	 * automatically (e.g. from CDA documents)</div>
+	 */
+	private DocumentMetadataExtractionMode automaticSubSetMetadataExtractionMode = DocumentMetadataExtractionMode.defaultExtraction;
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
@@ -148,138 +153,21 @@ public class ConvenienceCommunication {
 	 *            the affinity domain configuration
 	 * @param atnaConfigMode
 	 *            the ATNA config mode (secure or unsecure)
-	 * @param automaticExtractionEnabled
-	 *            if set to true, metadata for the submission set and according
-	 *            document entries will be extracted as far as this is possible.
-	 *            if set to false the user of this API has to set all data by
-	 *            himself. Extraction from CDA Documents to Document Entries
-	 *            uses the following mapping (for more details see
-	 *            CDAR2Extractor.pdf in
-	 *            org.openhealthtools.ihe.xds.metadata.extract.cdar2):
-	 *            <table summary="CDA Metadata to XDS Metadata mapping" width="100%">
-	 *            <thead>
-	 *            <tr>
-	 *            <th width="20%">XDS Metadata Attribute</th>
-	 *            <th width="80%">XDS Element</th>
-	 *            </tr>
-	 *            </thead> <tbody>
-	 *            <tr>
-	 *            <td>creationTime</td>
-	 *            <td>ClinicalDocument/effectiveTime</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>languageCode</td>
-	 *            <td>ClinicalDocument/languageCode/@code</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>legalAuthenticator</td>
-	 *            <td>ClinicalDocument/legalAuthenticator/assignedEntity/id and
-	 *            ClinicalDocument
-	 *            /legalAuthenticator/assignedEntity/assignedPerson/name</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>serviceStartTime</td>
-	 *            <td>
-	 *            ClinicalDocument/documentationOf/serviceEvent/effectiveTime
-	 *            This time is to be in UTC, but without the timezone offset or
-	 *            fractional seconds: [[[[[YYYY]MM]DD]HH]mm]ss].</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>serviceStopTime</td>
-	 *            <td>
-	 *            ClinicalDocument/documentationOf/serviceEvent/effectiveTime
-	 *            This time is to be in UTC, but without the timezone offset or
-	 *            fractional seconds: [[[[[YYYY]MM]DD]HH]mm]ss]</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>sourcePatientId</td>
-	 *            <td>ClinicalDocument/recordTarget/patientRole/id</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>sourcePatientInfo</td>
-	 *            <td>ClinicalDocument/recordTarget/patientRole</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>title</td>
-	 *            <td>ClinicalDocument/title</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>uniqueId</td>
-	 *            <td>ClinicalDocument/id@extension and ClinicalDocument/id@root
-	 *            </td>
-	 *            </tr>
-	 *            </tbody>
-	 *            </table>
-	 * 
-	 * <br>
-	 *            The following attributes will be generated as described, if
-	 *            they are not present in the document entries:
-	 * 
-	 *            <table summary="Empty document entries attributes generation"  width="100%">
-	 *            <thead>
-	 *            <tr>
-	 *            <th width="20%">XDS Metadata Attribute</th>
-	 *            <th width="80%">Generated from</th>
-	 *            </tr>
-	 *            </thead> <tbody>
-	 *            <tr>
-	 *            <td>mimeType</td>
-	 *            <td>the DocumentDescriptor, which has been provided by adding
-	 *            the document</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>creationTime</td>
-	 *            <td>current time</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>uniqueId</td>
-	 *            <td>the docSourceActorOrgId attribute from the
-	 *            DocumentMetadata</td>
-	 *            </tr>
-	 *            </tbody>
-	 *            </table>
-	 * <br>
-	 *            Extraction from the first Document Entry to the Submission Set
-	 *            uses the following mapping:
-	 * 
-	 *            <table summary="Submission set attributes generation" width="100%">
-	 *            <thead>
-	 *            <tr>
-	 *            <th width="20%">Submission set attribute</th>
-	 *            <th width="80%">Generated from</th>
-	 *            </tr>
-	 *            </thead><tbody>
-	 *            <tr>
-	 *            <td>uniqueId</td>
-	 *            <td>the eHealthConnector OID as base and a random part</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>sourceId</td>
-	 *            <td>DocumentEntry/Patient/AssigningAuthorityUniversalId or (if
-	 *            empty) from the eHealthConnector OID as base and a random part
-	 *            </td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>submissionTime</td>
-	 *            <td>current time</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>patientId</td>
-	 *            <td>DocumentEntry/PatientId</td>
-	 *            </tr>
-	 *            <tr>
-	 *            <td>contentTypeCode</td>
-	 *            <td>DocumentEntry/TypeCode</td>
-	 *            </tr>
-	 *            </tbody>
-	 *            </table>
-	 *            </div>
+	 * @param documentMetadataExtractionMode
+	 *            determines, if and how document metadata should be extracted
+	 *            automatically. Extracted metadata attributes will not
+	 *            overwrite attributes that have been set, manually.
+	 * @param submissionSetMetadataExtractionMode
+	 *            determines, if and how submission set metadata should be
+	 *            extracted, automatically. Extracted metadata attributes will
+	 *            not overwrite attributes that have been set, manually.
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
-			boolean automaticExtractionEnabled) {
+			DocumentMetadataExtractionMode documentMetadataExtractionMode,
+			SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = atnaConfigMode;
-		this.automaticExtractionEnabled = automaticExtractionEnabled;
+		this.automaticDocumentMetadataExtractionMode = documentMetadataExtractionMode;
 	}
 
 	/**
@@ -392,7 +280,9 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
-		generateMissingSubmissionSetAttributes();
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			generateDefaultSubmissionSetAttributes();
+		}
 		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
@@ -411,8 +301,43 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
-		generateMissingSubmissionSetAttributes();
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			generateDefaultSubmissionSetAttributes();
+		}
 		xdmContents.createZip(outputStream, txnData);
+		return xdmContents;
+	}
+
+	/**
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
+	 * 
+	 * @param filePath
+	 *            The filePath where the contents will be written to.
+	 * @return the XdmContents object
+	 */
+	public XdmContents createXdmContents(String filePath) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			generateDefaultSubmissionSetAttributes();
+		}
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		xdmContents.createZip(filePath, txnData);
+		return xdmContents;
+	}
+
+	/**
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
+	 * 
+	 * @param filePath
+	 *            The filePath where the contents will be written to.
+	 * @return the XdmContents object
+	 */
+	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			generateDefaultSubmissionSetAttributes();
+		}
+		xdmContents.createZip(filePath, txnData);
 		return xdmContents;
 	}
 
@@ -433,8 +358,8 @@ public class ConvenienceCommunication {
 	 * @return true, if metadata will be extracted as far as possible)
 	 *         automatically, false otherwise
 	 */
-	public boolean getAutomaticExtractionEnabled() {
-		return automaticExtractionEnabled;
+	public DocumentMetadataExtractionMode getAutomaticExtractionEnabled() {
+		return automaticDocumentMetadataExtractionMode;
 	}
 
 	/**
@@ -445,6 +370,17 @@ public class ConvenienceCommunication {
 	 */
 	public SubmitTransactionData getTxnData() {
 		return this.txnData;
+	}
+
+	/**
+	 * Returns the contents of an existing XDM volume.
+	 * 
+	 * @param filePath
+	 *            the XDM volume as ZipFile
+	 * @return the XDMContents
+	 */
+	public XdmContents getXdmContents(String filePath) {
+		return new XdmContents(filePath);
 	}
 
 	/**
@@ -642,8 +578,9 @@ public class ConvenienceCommunication {
 	 *            true, if metadata will be extracted as far as possible)
 	 *            automatically, false otherwise
 	 */
-	public void setAutomaticExtractionEnabled(boolean automaticExtractionEnabled) {
-		this.automaticExtractionEnabled = automaticExtractionEnabled;
+	public void setAutomaticExtractionEnabled(
+			DocumentMetadataExtractionMode automaticExtractionEnabled) {
+		this.automaticDocumentMetadataExtractionMode = automaticExtractionEnabled;
 	}
 
 	/**
@@ -657,9 +594,12 @@ public class ConvenienceCommunication {
 	public XDSResponseType submit() {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
-		source.getAuditor().getConfig().setOption("https.protocols", "TLSv1, TLSv1.2");
+		// source.getAuditor().getConfig().setOption("https.protocols",
+		// "TLSv1, TLSv1.2");
 
-		generateMissingSubmissionSetAttributes();
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			generateDefaultSubmissionSetAttributes();
+		}
 
 		try {
 			// txnData.saveMetadataToFile("C:/temp/meta.xml");
@@ -747,12 +687,12 @@ public class ConvenienceCommunication {
 			DocumentMetadata docMetadata = new DocumentMetadata(
 					txnData.getDocumentEntry(docEntryUUID));
 
-			if (automaticExtractionEnabled == true) {
+			if (automaticDocumentMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
 					// extractDocMetadataFromCda(docMetadata);
 					cdaExtractionFixes(docMetadata);
 				}
-				generateMissingDocEntryAttributes(doc.getDocumentEntryUUID());
+				generateDefaultDocEntryAttributes(doc.getDocumentEntryUUID());
 			} else {
 				docMetadata.clear();
 			}
@@ -802,7 +742,7 @@ public class ConvenienceCommunication {
 	 * @param docEntryUuid
 	 *            the doc entry uuid </div>
 	 */
-	private void generateMissingDocEntryAttributes(String docEntryUuid) {
+	private void generateDefaultDocEntryAttributes(String docEntryUuid) {
 
 		DocumentMetadata docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUuid));
 		DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
@@ -827,7 +767,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Generate missing Submission Set attributes</div>
 	 */
-	private void generateMissingSubmissionSetAttributes() {
+	private void generateDefaultSubmissionSetAttributes() {
 		// Create SubmissionSet
 		SubmissionSetType subSet = txnData.getSubmissionSet();
 

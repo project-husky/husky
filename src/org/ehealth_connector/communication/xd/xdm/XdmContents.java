@@ -17,6 +17,9 @@ package org.ehealth_connector.communication.xd.xdm;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -36,6 +39,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.util.ZipCreator;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage;
@@ -68,17 +72,17 @@ public class XdmContents {
 	/** The log. */
 	private static Logger log = Logger.getLogger(XdmContents.class.getName());
 
-	/** The xdm payload root. */
-	static private String XDM_PAYLOAD_ROOT = "IHE_XDM";
-
-	/** The xdm readme. */
-	static private String XDM_README = "README.TXT";
-
 	/** The xdm index. */
 	static private String XDM_INDEX = "INDEX.HTM";
 
 	/** The xdm metadata. */
 	static private String XDM_METADATA = "METADATA.XML";
+
+	/** The xdm payload root. */
+	static private String XDM_PAYLOAD_ROOT = "IHE_XDM";
+
+	/** The xdm readme. */
+	static private String XDM_README = "README.TXT";
 
 	/** The index htm. */
 	private IndexHtm indexHtm;
@@ -86,14 +90,14 @@ public class XdmContents {
 	/** The readme txt. */
 	private ReadmeTxt readmeTxt;
 
-	/** The zip file. */
-	private ZipFile zipFile;
+	/** The OHT response object. */
+	private XdmRetrieveResponseTypeImpl resp;
 
 	/** The txn data. */
 	private SubmitTransactionData[] txnData;
 
-	/** The OHT response object. */
-	private XdmRetrieveResponseTypeImpl resp;
+	/** The zip file. */
+	private ZipFile zipFile;
 
 	/**
 	 * Instantiates a new xdm contents.
@@ -116,6 +120,16 @@ public class XdmContents {
 		this();
 		this.indexHtm = indexHtm;
 		this.readmeTxt = readmeTxt;
+	}
+
+	public XdmContents(String filePath) {
+		this();
+		try {
+			this.zipFile = new ZipFile(filePath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -177,6 +191,26 @@ public class XdmContents {
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 			log.error("IO Exception during zip creation. ", e);
 			return;
+		}
+	}
+
+	/**
+	 * Creates the XDM volume contents and writes them to the given File(path)
+	 *
+	 * @param filePath
+	 *            the path to the file, in which the contents will be written.
+	 * @param txnData
+	 *            the SubmitTransactionData data (containing Metadata and the
+	 *            payload files themselves)
+	 */
+	public void createZip(String filePath, SubmitTransactionData txnData) {
+		File targetFile = new File(filePath);
+		try {
+			FileOutputStream outputStream = new FileOutputStream(targetFile);
+			createZip(outputStream, txnData);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
