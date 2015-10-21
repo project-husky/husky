@@ -60,7 +60,7 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
  * for transactions to different destinations such as registries and
- * repositories.<br>
+ * repositories over media.<br>
  * <br>
  * It implements the following IHE actors:
  * <ul>
@@ -147,7 +147,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication with the
-	 * given affinity domain set-up.
+	 * given affinity domain set-up.</div>
 	 * 
 	 * @param affinityDomain
 	 *            the affinity domain configuration
@@ -297,7 +297,8 @@ public class ConvenienceCommunication {
 	 * @param outputStream
 	 *            The outputStream object where the contents will be written to.
 	 * @param xdmContents
-	 *            The existing xdmContents object
+	 *            The xdmContents object containing your own INDEX.HTM and
+	 *            README.TXT
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
@@ -331,6 +332,10 @@ public class ConvenienceCommunication {
 	 * 
 	 * @param filePath
 	 *            The filePath where the contents will be written to.
+	 * @param xdmContents
+	 *            The xdmContents object containing your own INDEX.HTM and
+	 *            README.TXT
+	 * 
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {

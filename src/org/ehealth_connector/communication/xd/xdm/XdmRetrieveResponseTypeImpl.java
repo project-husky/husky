@@ -23,11 +23,19 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.response.impl.XDSRetrieveResponseTypeImpl;
 
+/**
+ * Class that holds the extracted documents and submission sets from a given xdm
+ * volume. It also contains errors, which might occur during the import process.
+ *
+ */
 public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl implements
 		XDSRetrieveResponseType {
 
 	private List<XDSDocument> attachments;
 
+	/**
+	 * Creates a new XdmRetrieveResponseTypeImpl object
+	 */
 	public XdmRetrieveResponseTypeImpl() {
 		super();
 	}
@@ -61,7 +69,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 	}
 
 	/**
-	 * Determines whether or not the transfer is complete. Note used in the XDM
+	 * Determines whether or not the transfer is complete. Not used in the XDM
 	 * implementation.
 	 * 
 	 * @see org.openhealthtools.ihe.xds.response.XDSResponseType#isComplete()

@@ -18,6 +18,7 @@ package org.ehealth_connector.communication.xd.xdm;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -63,10 +64,6 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * human readable informative files like README.TXT or INDEX.HTM and also
  * machine readable files like METADATA.XML
  */
-/**
- * @author ahel
- *
- */
 public class XdmContents {
 
 	/** The log. */
@@ -108,13 +105,15 @@ public class XdmContents {
 	}
 
 	/**
-	 * Instantiates a new xdm contents with a given XDM volume as single zip
-	 * file.
+	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT files
+	 * as according objects
 	 * 
 	 * @param indexHtm
-	 *            the index htm
+	 *            the IndexHtm object (contains information about the contents
+	 *            of the volume)
 	 * @param readmeTxt
-	 *            the readme txt
+	 *            the ReadmeTxt object (contains information about the vendor
+	 *            and system that created the volume)
 	 */
 	public XdmContents(IndexHtm indexHtm, ReadmeTxt readmeTxt) {
 		this();
@@ -122,6 +121,14 @@ public class XdmContents {
 		this.readmeTxt = readmeTxt;
 	}
 
+	/**
+	 * Instantiates a new xdm contents with a given filePath, pointing to an
+	 * existing zip file.
+	 * 
+	 * @param filePath
+	 *            the file path to an existing zip file, which holds the
+	 *            contents of an xdm volume
+	 */
 	public XdmContents(String filePath) {
 		this();
 		try {
@@ -129,6 +136,28 @@ public class XdmContents {
 		} catch (IOException e) {
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 			log.error("IO Exception during zip creation. ", e);
+		}
+	}
+
+	/**
+	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT
+	 * files, which will be read from given files paths.
+	 * 
+	 * @param indexHtm
+	 *            the IndexHtm object (contains information about the contents
+	 *            of the volume)
+	 * @param readmeTxt
+	 *            the ReadmeTxt object (contains information about the vendor
+	 *            and system that created the volume)
+	 */
+	public XdmContents(String indexHtm, String readmeTxt) {
+		this();
+		try {
+			this.indexHtm = new IndexHtm(new FileInputStream(indexHtm));
+			this.readmeTxt = new ReadmeTxt(new FileInputStream(readmeTxt));
+		} catch (FileNotFoundException e) {
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("IO Exception during reading of INDEX.HTM and README.TXT. ", e);
 		}
 	}
 
@@ -216,7 +245,6 @@ public class XdmContents {
 
 	/**
 	 * Gets a list containing the documents together with the Document Metadata.
-	 * This will be sufficient for most of the installations.
 	 *
 	 * @return the document and metadata list
 	 */
@@ -226,8 +254,7 @@ public class XdmContents {
 
 	/**
 	 * Gets a list containing the documents together with the Document Metadata
-	 * for a specific submission set. This will be sufficient for most of the
-	 * installations.
+	 * for a specific submission set.
 	 *
 	 * @param submissionSetNumber
 	 *            the submission set number

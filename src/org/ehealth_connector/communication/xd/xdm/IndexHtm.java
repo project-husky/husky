@@ -23,13 +23,13 @@ import org.apache.log4j.Logger;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.util.VendorInformation;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
+import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
  * The Class IndexHtm represents the INDEX.HTM file, which is part of the
- * contents of an XDM volume. The File contains information about the contents
- * of the volume and the vendor, who build the system that created the XDM
- * volume.
+ * contents of an XDM volume. The file contains information about the contents
+ * of the volume.
  */
 public class IndexHtm {
 
@@ -48,29 +48,30 @@ public class IndexHtm {
 			+ "</head>\n"
 			+ "<body bgcolor=\"#F1FFFE\">\n"
 			+ "<div align=\"center\">\n"
-			+ "<h2>eHealthConnector - XDM Cross-Enterprise Document Media Interchange</h2>\n"
+			+ "<h1>eHealthConnector - XDM Cross-Enterprise Document Media Interchange</h1>\n"
 			+ "</div>\n"
-			+ "<h3>Institution</h3>\n"
-			+ "<p>This XDM volume was created by {0}"
-			+ " for the patient with ID: {1}</p>\n"
-			+ "<p>\n {2}</p>\n"
-			+ "<h3>Contents</h3>\n {3} "
+			+ "<h2>Institution</h2>\n"
+			+ "<p>Information about this XDM volume in english.<br/>\n"
+			+ "This XDM volume was created by {0}. </p>\n"
+			+ "<p><a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
+			+ "<h2>Contents</h2>\n{2}"
 			+ "<h3>README File</h3>\n"
-			+ "<p>For technical details about this volume and vendor information, see: <a href=\"README.TXT\">README.TXT</a>.</p>\n"
+			+ "<p>For technical details about this volume and vendor information, see: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n"
 			+ "</body>\n" + "</html>";
 
 	/**
 	 * Instantiates a new indexHtm.
 	 *
 	 * @param indexHtmStream
-	 *            the indexHtm stream
+	 *            the INDEX.HTM file as InputStream object. The file contains
+	 *            information about the contents of the volume.
 	 */
 	public IndexHtm(InputStream indexHtmStream) {
 		this.is = indexHtmStream;
 	}
 
 	/**
-	 * Instantiates a new index htm.
+	 * Creates a new INDEX.HTM based on the given txnData.
 	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
@@ -80,7 +81,7 @@ public class IndexHtm {
 	}
 
 	/**
-	 * Creates a new INDEX.HTM Object
+	 * Creates a new INDEX.HTM based on the given txnData and vendorInfo.
 	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
@@ -92,14 +93,13 @@ public class IndexHtm {
 		logService.debug("Creating the Index.htm file");
 
 		Object[] values = new Object[] { vendorInfo.getVendorName(),
-				txnData.getSubmissionSet().getPatientId().getIdNumber(),
 				vendorInfo.getContactInformation(), createContents(txnData) };
 		String str = MessageFormat.format(TEMPLATE_EN, values);
 		is = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
-	 * Writes the index.htm contents to an InputStream
+	 * Returns the content of the INDEX.HTM as InputStream object
 	 *
 	 * @return the input stream
 	 */
@@ -117,17 +117,25 @@ public class IndexHtm {
 	private String createContents(SubmitTransactionData txnData) {
 		// Number of Items
 		String contentsStr = "<p>This volume contains " + +txnData.getDocList().size()
-				+ " Documents in 1 Submission Sets:</p>\n<br/><br/>\n";
+				+ " Documents in 1 Submission Set:</p>\n" + "<h3>Submission-Set 1</h3>\n"
+				+ "<p>Patient ID: " + txnData.getSubmissionSet().getPatientId().getIdNumber()
+				+ "</p>\n" + "<ul>\n";
 
 		int i = 0;
 		for (XDSDocument xdsDoc : txnData.getDocList()) {
 			i++;
-			contentsStr = contentsStr.concat("Document " + i + "<br/>" + "<a href=\""
-					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">"
-					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "</a>\n"
-					+ "DocumentEntryId: \n<code>" + xdsDoc.getDocumentEntryUUID() + "</code>\n"
-					+ "\n");
+			DocumentEntryType docMetadata = txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID());
+			String title = XdsUtil.convertInternationalStringType(docMetadata.getTitle());
+			if (title == null || title.equals("")) {
+				title = XdsUtil.createXdmDocName(xdsDoc, i);
+			}
+			contentsStr = contentsStr + "<li>\n";
+			contentsStr = contentsStr.concat("Document " + i + ": "
+					+ "<a target=\"_blank\" href=\"" + XdsUtil.createXdmDocPathAndName(xdsDoc, i)
+					+ "\">" + title + "</a>\n");
+			contentsStr = contentsStr + "</li>\n";
 		}
+		contentsStr = contentsStr + "</ul>\n";
 		return contentsStr;
 	}
 }

@@ -44,7 +44,7 @@ public class ReadmeTxt {
 			+ "Creation timestamp: {5}\n";
 
 	/**
-	 * Instantiates a new readme txt.
+	 * Creates a new README.TXT based on the given InputStream.
 	 *
 	 * @param readmeTxtStream
 	 *            the readme txt stream
@@ -54,7 +54,8 @@ public class ReadmeTxt {
 	}
 
 	/**
-	 * Creates a new README.TXT Object
+	 * Creates a new README.TXT Object based on the given txnData (default
+	 * values will be used for vendor information).
 	 *
 	 * @param txnData
 	 *            the SubmitTransactionData
@@ -64,7 +65,8 @@ public class ReadmeTxt {
 	}
 
 	/**
-	 * Instantiates a new readme txt.
+	 * Creates a new README.TXT Object based on the given txnData and the given
+	 * vendor information.
 	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
@@ -83,7 +85,7 @@ public class ReadmeTxt {
 	}
 
 	/**
-	 * Gets the index.htm contents as InputStream
+	 * Gets the INDEX.HTM contents as InputStream
 	 *
 	 * @return the input stream
 	 */

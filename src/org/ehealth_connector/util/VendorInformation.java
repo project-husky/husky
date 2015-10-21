@@ -17,7 +17,14 @@ package org.ehealth_connector.util;
 
 import org.ehealth_connector.common.EHealthConnectorVersions;
 
+/**
+ * Class that contains information about the vendor of an information system.
+ *
+ */
 public class VendorInformation {
+
+	// Default values, will be used, if the user does not provide his own
+	// information.
 	public static final String DEFAULT_APPLICATION_NAME = EHealthConnectorVersions
 			.getCurrentVersion().getSystemVersionName();
 	public static final String DEFAULT_MODULE_NAME = "Convenience API";
@@ -30,7 +37,8 @@ public class VendorInformation {
 	private String contactInformation;
 
 	/**
-	 * Constructor. eHealthConnector default values will be used.
+	 * Constructor. eHealthConnector default values will be used (see DEFAULT_*
+	 * constants of this class, accordingly).
 	 */
 	public VendorInformation() {
 		this(null, null, null, null);
@@ -43,6 +51,8 @@ public class VendorInformation {
 	 *            Vendors (company) name
 	 * @param applicationName
 	 *            name of the application
+	 * @param moduleName
+	 *            name of the module, which was used inside the application
 	 * @param contactInformation
 	 *            contact information
 	 */
@@ -121,7 +131,7 @@ public class VendorInformation {
 	/**
 	 * Sets the module name.
 	 *
-	 * @param name
+	 * @param moduleName
 	 *            name of the module
 	 */
 	public void setModuleName(String moduleName) {
