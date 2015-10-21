@@ -811,10 +811,6 @@ public class ConvenienceCommunication {
 				subSet.setContentTypeCode(EcoreUtil.copy(txnData.getDocumentEntry(uuid)
 						.getTypeCode()));
 			}
-			// } else {
-			// subSet.setContentTypeCode(XdsUtil.createCodedMetadata("2.16.840.1.113883.6.1",
-			// "34133-9", "Summary of Episode Note", null));
-			// }
 		}
 	}
 

@@ -127,8 +127,8 @@ public class XdmContents {
 		try {
 			this.zipFile = new ZipFile(filePath);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("IO Exception during zip creation. ", e);
 		}
 	}
 
