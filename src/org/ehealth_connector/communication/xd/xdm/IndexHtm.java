@@ -91,7 +91,7 @@ public class IndexHtm {
 
 		logService.debug("Creating the Index.htm file");
 
-		Object[] values = new Object[] { vendorInfo.getName(),
+		Object[] values = new Object[] { vendorInfo.getVendorName(),
 				txnData.getSubmissionSet().getPatientId().getIdNumber(),
 				vendorInfo.getContactInformation(), createContents(txnData) };
 		String str = MessageFormat.format(TEMPLATE_EN, values);

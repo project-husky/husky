@@ -18,8 +18,10 @@ package org.ehealth_connector.communication.xd.xdm;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.util.VendorInformation;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
@@ -37,8 +39,9 @@ public class ReadmeTxt {
 	private InputStream is = null;
 
 	/** The Constant TEMPLATE_EN. */
-	public static final String TEMPLATE_EN = "Vendor: {0}\n" + "Application: {1}\n"
-			+ "Contact info: {2}\n\n" + "Created for Patient with ID: {3}\n";
+	public static final String TEMPLATE_EN = "Vendor name: {0}\n" + "Product: {1}\n"
+			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: {4}\n"
+			+ "Creation timestamp: {5}\n";
 
 	/**
 	 * Instantiates a new readme txt.
@@ -71,9 +74,10 @@ public class ReadmeTxt {
 	public ReadmeTxt(SubmitTransactionData txnData, VendorInformation vendorInfo) {
 		logService.debug("Creating the README.TXT file");
 
-		Object[] values = new Object[] { vendorInfo.getName(), vendorInfo.getApplicationName(),
-				vendorInfo.getContactInformation(),
-				txnData.getSubmissionSet().getPatientId().getIdNumber() };
+		Object[] values = new Object[] { vendorInfo.getVendorName(),
+				vendorInfo.getApplicationName(), vendorInfo.getModuleName(),
+				EHealthConnectorVersions.getCurrentVersion(), vendorInfo.getContactInformation(),
+				new Date().toString() };
 		String str = MessageFormat.format(TEMPLATE_EN, values);
 		is = new ByteArrayInputStream(str.getBytes());
 	}

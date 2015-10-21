@@ -18,34 +18,39 @@ package org.ehealth_connector.util;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 
 public class VendorInformation {
-	public static final String DEFAULT_APPLICATION_NAME = EHealthConnectorVersions.getCurrentVersion().getSystemVersionName();
+	public static final String DEFAULT_APPLICATION_NAME = EHealthConnectorVersions
+			.getCurrentVersion().getSystemVersionName();
+	public static final String DEFAULT_MODULE_NAME = "Convenience API";
 	public static final String DEFAULT_CONTACT_INFORMATION = "See http://sourceforge.net/p/ehealthconnector/wiki/Team";
-	public static final String DEFAULT_NAME = "the eHealthConnector Open Source Projekt";
+	public static final String DEFAULT_VENDOR_NAME = "The eHealthConnector Open Source Projekt";
 
+	private String vendorName;
 	private String applicationName;
+	private String moduleName;
 	private String contactInformation;
-	private String name;
 
 	/**
 	 * Constructor. eHealthConnector default values will be used.
 	 */
 	public VendorInformation() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 
 	/**
 	 * Constructor. Individual values can be provided.
 	 * 
-	 * @param name
+	 * @param vendorName
 	 *            Vendors (company) name
 	 * @param applicationName
 	 *            name of the application
 	 * @param contactInformation
 	 *            contact information
 	 */
-	public VendorInformation(String name, String applicationName, String contactInformation) {
-		setName(name);
+	public VendorInformation(String vendorName, String applicationName, String moduleName,
+			String contactInformation) {
+		setVendorName(vendorName);
 		setApplicationName(applicationName);
+		setModuleName(moduleName);
 		setContactInformation(contactInformation);
 	}
 
@@ -68,12 +73,21 @@ public class VendorInformation {
 	}
 
 	/**
+	 * Gets the module name
+	 * 
+	 * @return the modules name
+	 */
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	/**
 	 * Gets the vendor name
 	 * 
 	 * @return the vendors name
 	 */
-	public String getName() {
-		return name;
+	public String getVendorName() {
+		return vendorName;
 	}
 
 	/**
@@ -105,16 +119,30 @@ public class VendorInformation {
 	}
 
 	/**
+	 * Sets the module name.
+	 *
+	 * @param name
+	 *            name of the module
+	 */
+	public void setModuleName(String moduleName) {
+		if (moduleName == null) {
+			this.moduleName = DEFAULT_MODULE_NAME;
+		} else {
+			this.moduleName = moduleName;
+		}
+	}
+
+	/**
 	 * Sets the vendors name.
 	 *
 	 * @param name
 	 *            name of the vendor
 	 */
-	public void setName(String name) {
+	public void setVendorName(String name) {
 		if (name == null) {
-			this.name = DEFAULT_NAME;
+			this.vendorName = DEFAULT_VENDOR_NAME;
 		} else {
-			this.name = name;
+			this.vendorName = name;
 		}
 	}
 }
