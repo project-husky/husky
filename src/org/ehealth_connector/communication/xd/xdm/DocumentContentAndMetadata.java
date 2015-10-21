@@ -23,7 +23,7 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
  * The Class DocumentAndMetadata represents a Document together with the
  * Document Metadata
  */
-public class DocumentAndMetadata {
+public class DocumentContentAndMetadata {
 
 	/** The xds document. */
 	private XDSDocument xdsDocument;
@@ -39,7 +39,7 @@ public class DocumentAndMetadata {
 	 * @param docEntry
 	 *            the doc entry
 	 */
-	public DocumentAndMetadata(XDSDocument xdsDocument, DocumentEntryType docEntry) {
+	public DocumentContentAndMetadata(XDSDocument xdsDocument, DocumentEntryType docEntry) {
 		this.xdsDocument = xdsDocument;
 		this.docEntry = docEntry;
 	}

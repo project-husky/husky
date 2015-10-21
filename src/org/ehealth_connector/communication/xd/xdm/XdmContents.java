@@ -220,7 +220,7 @@ public class XdmContents {
 	 *
 	 * @return the document and metadata list
 	 */
-	public List<DocumentAndMetadata> getDocumentAndMetadataList() {
+	public List<DocumentContentAndMetadata> getDocumentAndMetadataList() {
 		return getDocumentAndMetadataList(0);
 	}
 
@@ -233,16 +233,16 @@ public class XdmContents {
 	 *            the submission set number
 	 * @return the document and metadata list
 	 */
-	public List<DocumentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
+	public List<DocumentContentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
 		lazyLoadCheck();
 		if (isSubmitTransactionDataNull(submissionSetNumber))
 			return null;
 
 		SubmitTransactionData std = txnData[submissionSetNumber];
-		List<DocumentAndMetadata> docAndMetaList = new ArrayList<DocumentAndMetadata>();
+		List<DocumentContentAndMetadata> docAndMetaList = new ArrayList<DocumentContentAndMetadata>();
 
 		for (XDSDocument xdsDoc : std.getDocList()) {
-			DocumentAndMetadata docAndMetadataEntry = new DocumentAndMetadata(xdsDoc,
+			DocumentContentAndMetadata docAndMetadataEntry = new DocumentContentAndMetadata(xdsDoc,
 					txnData[submissionSetNumber].getDocumentEntry(xdsDoc.getDocumentEntryUUID()));
 			docAndMetaList.add(docAndMetadataEntry);
 		}
