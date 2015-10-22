@@ -13,9 +13,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * <div class="fr">Remarque : Ce tableau est adapté chaque année par la CFV (cf. également [plan de vaccination
  * suisse]). eHealth Suisse publiera une version actualisée chaque année de ce Value Set au format électronique. (Source
  * : [Plan de vaccination suisse], 7.1 Risque accru de complications)</div>
- *
+ * @deprecated use org.ehealth_connector.cda.ch.enums.CdaChVacdExpRisks
  * @see <a href="https://svn.code.sf.net/p/hl7ch/code/trunk/schematrons/HL7.ch/CDA-CH/v1.2/">HL7.ch Schematrons</a>
  */
+@Deprecated
 public enum RiscOfComplications {
 
 	/**
@@ -37,9 +38,7 @@ public enum RiscOfComplications {
 	 */
 	DEFEKTE_BEI_DER_KOMPLEMENTAKTIVIERUNG_DES_ALTERNATIVEN_WEGS_ODER_DEFIZITE_DER_TERMINALFAKTOREN_DES_KOMPLEMENTSYSTEMS("3", "Defekte bei der Komplementaktivierung des alternativen Wegs oder Defizite der Terminalfaktoren des Komplementsystems"),
 	/**
-	 * <div class="de">Frühgeborene (< 33 Wochen oder Geburtsgewicht < 1500
-	 * g)</div> <div class="fr">Prématurés (< 33 semaines ou poids à la naissance
-	 * < 1500 g)</div>
+	 * <div class="de">Frühgeborene </div> <div class="fr">Prématurés</div>
 	 */
 	FRUEHGEBORENE_kleiner_33_WOCHEN_ODER_GEBURTSGEWICHT_kleiner_1500_G("4", "Frühgeborene (< 33 Wochen oder Geburtsgewicht < 1500 g)"),
 	/**
@@ -118,9 +117,7 @@ public enum RiscOfComplications {
 	 * <div class="de">Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit
 	 * hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren
 	 * (in ihrem ersten Lebensjahr)</div> <div class="fr">Nouveau-nés et
-	 * nourrissons < 12 mois originaires d’un pays à taux élevé de prévalence de
-	 * la tuberculose et susceptibles d’y retourner (dans leur 1re année de
-	 * vie)</div>
+	 * nourrissons </div>
 	 */
 	NEUGEBORENE_UND_SAEUGLINGE_UNTER_12_MONATEN_AUS_LAENDERN_MIT_HOHER_TUBERKULOSE_PRAEVALENZ_DIE_WAHRSCHEINLICH_WIEDER_DORTHIN_ZURUECKKEHREN_IN_IHREM_ERSTEN_LEBENSJAHR("19", "Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)"),
 	/**
@@ -141,8 +138,8 @@ public enum RiscOfComplications {
 	 */
 	NEUROLOGISCHE_ODER_MUSKULOSKELETTALE_ERKRANKUNG_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN("22", "Neurologische oder muskuloskelettale Erkrankung mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren"),
 	/**
-	 * <div class="de">Schwerer Nierenschaden (Clearance<30ml/min oder Verschlechterung)</div>
-	 * <div class="fr">Insuffisance rénale avancée (clearance <30ml/min ou en diminution)</div>
+	 * <div class="de">Schwerer Nierenschaden (Clearance &lt; 30ml/min oder Verschlechterung)</div>
+	 * <div class="fr">Insuffisance rénale avancée (clearance &lt; 30ml/min ou en diminution)</div>
 	 */
 	SCHWERER_NIERENSCHADEN_CLEARANCE_KLEINER_30ML_PRO_MIN_ODER_VERSCHLECHTERUNG("23", "schwerer Nierenschaden (Clearance<30ml/min oder Verschlechterung)"),
 	/**

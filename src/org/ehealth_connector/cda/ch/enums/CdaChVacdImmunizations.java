@@ -1,8 +1,25 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.DateUtil;
 
 /**
  * Value Set valid from 20130101 Codesystem: SNOMED CT (OID:
@@ -12,67 +29,69 @@ import org.ehealth_connector.common.Code;
 public enum CdaChVacdImmunizations {
 
 	/** The bcg. */
-	BCG("42284007", "BCG vaccination"),
+	BCG("42284007", "BCG vaccination", "20130101", ""),
 
 	/** The diphtheria. */
-	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)"),
+	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)", "20130101", ""),
 
 	/** The haemophilus. */
-	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)"),
+	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)", "20130101",
+			""),
 
 	/** The hepa. */
-	HEPA("243789007", "Hepatitis A immunization (procedure)"),
+	HEPA("243789007", "Hepatitis A immunization (procedure)", "20130101", ""),
 
 	/** The hepb. */
-	HEPB("16584000", "Hepatitis B vaccination (procedure)"),
+	HEPB("16584000", "Hepatitis B vaccination (procedure)", "20130101", ""),
 
 	/** The influenza. */
-	INFLUENZA("86198006", "Influenza vaccination (procedure)"),
+	INFLUENZA("86198006", "Influenza vaccination (procedure)", "20130101", ""),
 
 	/** The japanese. */
-	JAPANESEENCEPHALITIS("314759000", "Japanese encephalitis vaccination (procedure)"),
+	JAPANESE("314759000", "Japanese encephalitis vaccination (procedure)", "20130101", ""),
 
 	/** The measles. */
-	MEASLES("47435007", "Measles vaccination (procedure)"),
+	MEASLES("47435007", "Measles vaccination (procedure)", "20130101", ""),
 
 	/** The meningococcus. */
-	MENINGOCOCCUS("41088001", "Meningococcus vaccination (procedure)"),
+	MENINGOCOCCUS("41088001", "Meningococcus vaccination (procedure)", "20130101", ""),
 
 	/** The mumps. */
-	MUMPS("50583002", "Mumps vaccination (procedure)"),
+	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", ""),
 
 	/** The pertussis. */
-	PERTUSSIS("39343008", "Pertussis vaccination (procedure)"),
+	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", ""),
 
 	/** The pneumococcal. */
-	PNEUMOCOCCAL("12866006", "Pneumococcal vaccination (procedure)"),
+	PNEUMOCOCCAL("12866006", "Pneumococcal vaccination (procedure)", "20130101", ""),
 
 	/** The poliomyelitis. */
-	POLIOMYELITIS("72093006", "Poliomyelitis vaccination (procedure)"),
+	POLIOMYELITIS("72093006", "Poliomyelitis vaccination (procedure)", "20130101", ""),
 
 	/** The rabies. */
-	RABIES("34631000", "Rabies vaccination (procedure)"),
+	RABIES("34631000", "Rabies vaccination (procedure)", "20130101", ""),
 
 	/** The rubella. */
-	RUBELLA("82314000", "Rubella vaccination (procedure)"),
+	RUBELLA("82314000", "Rubella vaccination (procedure)", "20130101", ""),
 
 	/** The tetanus. */
-	TETANUS("127786006", "Tetanus vaccination (procedure)"),
+	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", ""),
 
 	/** The tickbornencephalitis. */
-	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)"),
+	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101",
+			""),
 
 	/** The typhus. */
-	TYPHUS("30338008", "Typhus vaccination (procedure)"),
+	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", ""),
 
 	/** The papillomavirus. */
-	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)"),
+	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", ""),
 
 	/** The varicella. */
-	VARICELLA("68525005", "Varicella vaccination (procedure)"),
+	VARICELLA("68525005", "Varicella vaccination (procedure)", "20130101", ""),
 
 	/** The yellofever. */
-	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)");
+	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "");
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.3";
@@ -86,6 +105,12 @@ public enum CdaChVacdImmunizations {
 	/** The display name. */
 	private String displayName;
 
+	/** The valid from Date. */
+	private Date validFrom;
+
+	/** The valid to Date. */
+	private Date validTo;
+
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
@@ -98,9 +123,16 @@ public enum CdaChVacdImmunizations {
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	private CdaChVacdImmunizations(String code, String displayName) {
+	private CdaChVacdImmunizations(String code, String displayName, String validFrom,
+			String validTo) {
 		this.code = code;
 		this.displayName = displayName;
+		if (validFrom != null && !"".equals(validFrom)) {
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+		}
+		if (validTo != null && !"".equals(validTo)) {
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+		}
 	}
 
 	/**
@@ -204,6 +236,35 @@ public enum CdaChVacdImmunizations {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Checks if the code is valid now.
+	 *
+	 * @return true, if is valid
+	 */
+	public boolean isValid() {
+		return isValid(null);
+	}
+
+	/**
+	 * Checks if the code is valid for the specified date
+	 *
+	 * @param date
+	 *            the date
+	 * @return true, if is valid
+	 */
+	public boolean isValid(Date date) {
+		if (date == null) {
+			date = new Date();
+		}
+		if (this.validFrom != null && validFrom.after(date)) {
+			return false;
+		}
+		if (this.validTo != null && validTo.before(date)) {
+			return false;
+		}
+		return true;
 	}
 
 }

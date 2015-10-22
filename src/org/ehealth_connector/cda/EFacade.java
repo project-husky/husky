@@ -20,6 +20,11 @@ import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +33,7 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.rim.InfrastructureRoot;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -76,6 +82,62 @@ public class EFacade<E extends InfrastructureRoot> {
 				}
 			}
 		}
+	}
+
+	/**
+	 * returns the text of a Level2 section specified by a contendId
+	 *
+	 * @param section
+	 *            the section
+	 * @param reference
+	 *            the content id the section should be searched for by the
+	 *            reference, reference has to start with a # (relative)
+	 * @return the string
+	 */
+	public String getContentIdText(EFacade<?> section, String reference) {
+		Document document = section.getDocument();
+
+		String contentId = null;
+
+		if (reference == null || !reference.startsWith("#")) {
+			log.error("reference has to be relative (#)");
+			return null;
+		}
+
+		contentId = reference.substring(1);
+
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+		String xpathExpr = "//content[@ID='" + contentId + "']";
+		XPathExpression expr;
+		try {
+			expr = xpath.compile(xpathExpr);
+		} catch (XPathExpressionException e) {
+			log.error("XPathExpression Error", e);
+			return null;
+		}
+
+		NodeList nodes = null;
+		try {
+			nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			log.error("XPathExpression Error", e);
+			return null;
+		}
+
+		if (nodes == null || nodes.getLength() == 0) {
+			return null;
+		}
+
+		if (nodes.getLength() > 1) {
+			log.error("multiple content IDs found with: " + xpathExpr);
+		}
+
+		String textContent = nodes.item(0).getTextContent();
+		if (textContent != null) {
+			return textContent.trim();
+		}
+		return null;
 	}
 
 	/**

@@ -29,6 +29,16 @@ public class Reason extends MedicationTargetEntry {
 	}
 
 	/**
+	 * Instantiates a new reason.
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	protected Reason(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
+		super(entry);
+	}
+
+	/**
 	 * Instantiates a Reason object with a code
 	 * 
 	 * @param code

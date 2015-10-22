@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.IdentityDomain;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -29,50 +30,15 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  */
 public class Identificator {
 
-	/**
-	 * <div class="en">Converts to identificator.</div> <div
-	 * class="de">Konvertiert einen Code in ein Identificator Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return the identificator
-	 */
-	public static Identificator convertToIdentificator(Code code) {
-		if (code != null) {
-			final Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
-			return id;
-		}
-		return null;
-	}
-
-	/**
-	 * <div class="en">Gets the identificator.</div> <div class="de">Liefert
-	 * identificator.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param iiList
-	 * <br>
-	 *            <div class="de"> ii list</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @param root
-	 * <br>
-	 *            <div class="de"> root</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return <div class="en">the identificator</div>
-	 */
-	public static Identificator getIdentificator(List<II> iiList, String root) {
-		for (final II i : iiList) {
-			if (i.getRoot().equals(root)) {
-				final Identificator id = new Identificator(i);
-				return id;
-			}
-		}
-		return null;
-	}
-
 	private II mII;
+
+	/**
+	 * Instantiates a new identificator with a guid.
+	 */
+	public Identificator() {
+		mII = DatatypesFactory.eINSTANCE.createII();
+		mII.setRoot(UUID.generate());
+	}
 
 	/**
 	 * Erstellt einen neuen Identifikator.
@@ -89,14 +55,14 @@ public class Identificator {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new identificator.</div> <div
-	 * class="de">Instantiiert </div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Instantiates a new identificator.</div>
+	 * <div class="de">Instantiiert </div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param ii
-	 * <br>
-	 *            <div class="de"> ii</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> ii</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Identificator(II ii) {
 		mII = ii;
@@ -114,6 +80,49 @@ public class Identificator {
 		mII = DatatypesFactory.eINSTANCE.createII();
 		setRoot(oid);
 		setExtension(id);
+	}
+
+	/**
+	 * <div class="en">Converts to identificator.</div>
+	 * <div class="de">Konvertiert einen Code in ein Identificator Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @return the identificator
+	 */
+	public static Identificator convertToIdentificator(Code code) {
+		if (code != null) {
+			final Identificator id = new Identificator(code.getCodeSystem(), code.getCode());
+			return id;
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the identificator.</div> <div class="de">Liefert
+	 * identificator.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param iiList
+	 *            <br>
+	 *            <div class="de"> ii list</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @param root
+	 *            <br>
+	 *            <div class="de"> root</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @return <div class="en">the identificator</div>
+	 */
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (final II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				final Identificator id = new Identificator(i);
+				return id;
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -173,8 +182,8 @@ public class Identificator {
 	}
 
 	/**
-	 * <div class="en">Gets the ii.</div> <div class="de">Liefert ii.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the ii.</div> <div class="de">Liefert ii.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return II <div class="en">the ii</div>
 	 */

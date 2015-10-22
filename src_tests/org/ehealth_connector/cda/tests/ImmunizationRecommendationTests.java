@@ -30,7 +30,8 @@ import javax.xml.xpath.XPathFactory;
 import org.ehealth_connector.cda.CommentEntry;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.CriterionEntry;
-import org.ehealth_connector.cda.Immunization;
+import org.ehealth_connector.cda.ExternalDocumentEntry;
+import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
@@ -47,39 +48,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * The Class ImmunizationTests.
+ * The Class ImmunizationRecommendationRecommondationTests.
  */
-public class ImmunizationTests {
+public class ImmunizationRecommendationTests {
 
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-	// <substanceadministration xmlns="urn:hl7-org:v3" classCode="SBADM"
-	// moodCode="EVN" negationInd="false">
-	// <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12"/>
-	// <templateId root="2.16.840.1.113883.10.20.1.24"/>
-	// <templateId root="2.16.756.5.30.1.1.1.1.1"
-	// extension="CDA-CH.Body.MediL3"/>
-	// <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4"
-	// codeSystemName="HL7ActCode"/>
-	// <statusCode code="completed"/>
-	// <priorityCode nullFlavor="UNK"/>
-	// <routeCode nullFlavor="UNK"/>
-	// <doseQuantity nullFlavor="UNK"/>
-	// </substanceadministration>
-
 	@Test
 	public void testSerializeEmpty() throws Exception {
-		Immunization immunization = new Immunization();
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 
 		Document document = immunization.getDocument();
 
 		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12']");
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.24']");
+		expr = xpath.compile("substanceadministration[@moodCode='PRP' and @negationInd='false']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.25']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -88,33 +79,28 @@ public class ImmunizationTests {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/routeCode[@nullFlavor='NA']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("substanceadministration[@negationInd='false']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
 		expr = xpath.compile(
 				"substanceadministration/code[@code='IMMUNIZ' and @codeSystem='2.16.840.1.113883.5.4']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/statusCode[@code='completed']");
+		expr = xpath.compile("substanceadministration/statusCode[@code='active']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("substanceadministration/routeCode[@nullFlavor='NA']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		expr = xpath.compile("substanceadministration/priorityCode[@nullFlavor='UNK']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-
 	}
 
 	@Test
 	public void testAddMedicationTarget() throws Exception {
 
-		Immunization immunization = new Immunization();
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 
 		assertEquals(0, immunization.getMedicationTargetEntries().size());
 
@@ -141,7 +127,7 @@ public class ImmunizationTests {
 	@Test
 	public void testAddCriterionEntry() throws Exception {
 
-		Immunization immunization = new Immunization();
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 		assertEquals(null, immunization.getCriterionEntry());
 
 		CriterionEntry entry = new CriterionEntry();
@@ -166,7 +152,7 @@ public class ImmunizationTests {
 
 	@Test
 	public void testAuthorAsDoctor() throws Exception {
-		Immunization immunization = new Immunization();
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 
 		Name name = new Name("Pieks", "Ratschlag", "Prof.", "Immunologin");
 		Author author = new Author(name, "7607777777777");
@@ -194,7 +180,7 @@ public class ImmunizationTests {
 
 	@Test
 	public void testAuthorAsPatient() throws Exception {
-		Immunization immunization = new Immunization();
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 
 		Name name = new Name("Muster", "Franz");
 
@@ -216,27 +202,8 @@ public class ImmunizationTests {
 	}
 
 	@Test
-	public void testImmunizationUndesired() throws Exception {
-		Immunization immunization = new Immunization();
-
-		assertTrue(immunization.isAdministered());
-		assertTrue(!immunization.isUndesired());
-
-		immunization.setUndesired();
-		assertTrue(!immunization.isAdministered());
-		assertTrue(immunization.isUndesired());
-
-		Document document = immunization.getDocument();
-
-		XPathExpression expr = xpath.compile("substanceadministration[@negationInd='true']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-	}
-
-	@Test
-	public void testImmunizationSofwareId() throws Exception {
-		Immunization immunization = new Immunization();
+	public void testImmunizationRecommendationSofwareId() throws Exception {
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
 
 		Identificator identificator = new Identificator("oid", "id");
 		immunization.setId(identificator);
@@ -255,7 +222,7 @@ public class ImmunizationTests {
 
 	@Test
 	public void testTextReference() throws XPathExpressionException {
-		Immunization entry = new Immunization();
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
 
 		entry.setTextReference("#reference1");
 
@@ -271,26 +238,8 @@ public class ImmunizationTests {
 	}
 
 	@Test
-	public void testEffectiveTime() throws XPathExpressionException {
-		Immunization entry = new Immunization();
-
-		Date appliedAt = DateUtil.parseDateyyyyMMdd("20151019");
-		entry.setApplyDate(appliedAt);
-
-		assertEquals(appliedAt, entry.getApplyDate());
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath
-				.compile("substanceadministration/effectiveTime[@value='20151019']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
 	public void testPriorityCode() throws XPathExpressionException {
-		Immunization entry = new Immunization();
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
 
 		Code priorityCode = new Code("2.16.840.1.113883.5.7", "UR");
 		entry.setPriorityCode(priorityCode);
@@ -307,7 +256,7 @@ public class ImmunizationTests {
 
 	@Test
 	public void testRouteCode() throws XPathExpressionException {
-		Immunization entry = new Immunization();
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
 		entry.setRouteOfAdministration(RouteOfAdministration.INJECTION_SUBCUTANEOUS);
 		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS,
 				entry.getRouteOfAdministration());
@@ -320,22 +269,6 @@ public class ImmunizationTests {
 		assertEquals(1, nodes.getLength());
 	}
 
-	// <consumable typeCode='CSM'>
-	// <manufacturedProduct>
-	// <templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
-	// <templateId root='2.16.840.1.113883.10.20.1.53'/> <id root='1.3.160'
-	// extension='7680006370012' />
-	// <manufacturedMaterial>
-	// <code code='J07CA02' codeSystem='2.16.840.1.113883.6.73' > <originalText>
-	// diphtheria-pertussis-poliomyelitis-tetanus
-	// <reference value='#ii1'/>
-	// </originalText>
-	// </code>
-	// <name>BOOSTRIX Polio Inj Susp</name> </manufacturedMaterial>
-	// <manufacturerOrganization>
-	// <name>GlaxoSmithKline AG</name> </manufacturerOrganization>
-	// </manufacturedProduct>
-	// </consumable>
 	@Test
 	public void testConsumable() throws XPathExpressionException {
 		Consumable consumable = new Consumable("BOOSTRIX Polio Inj Susp");
@@ -349,7 +282,7 @@ public class ImmunizationTests {
 		consumable.setLotNr("lotNr");
 		consumable.setWhoAtcCode(whoAtc);
 
-		Immunization entry = new Immunization();
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
 		entry.setConsumable(consumable);
 
 		assertEquals(whoAtc, entry.getConsumable().getWhoAtcCode());
@@ -378,7 +311,7 @@ public class ImmunizationTests {
 		CommentEntry commentEntry = new CommentEntry();
 		commentEntry.setTextReference("#reference");
 
-		Immunization entry = new Immunization();
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
 		entry.setCommentEntry(commentEntry);
 
 		assertEquals(commentEntry, entry.getCommentEntry());
@@ -387,6 +320,88 @@ public class ImmunizationTests {
 
 		XPathExpression expr = xpath.compile(
 				"substanceadministration/entryRelationship[@typeCode='SUBJ' and @negationInd='true']/act/text/reference[@value='#reference']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testPossibleAppliance() throws XPathExpressionException {
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
+
+		Date appliedAt = DateUtil.parseDateyyyyMMdd("20151019");
+
+		entry.setPossibleAppliance(appliedAt);
+
+		assertEquals(appliedAt, entry.getPossibleAppliance());
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("substanceadministration/effectiveTime[@value='20151019']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testPossibleApplianceStartEndDate() throws XPathExpressionException {
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
+
+		Date appliedStartAt = DateUtil.parseDateyyyyMMdd("20151019");
+		Date appliedEndAt = DateUtil.parseDateyyyyMMdd("20161019");
+
+		entry.setPossibleAppliance(appliedStartAt, appliedEndAt);
+
+		assertEquals(appliedStartAt, entry.getPossibleApplianceStartDate());
+		assertEquals(appliedEndAt, entry.getPossibleApplianceEndDate());
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("substanceadministration/effectiveTime/low[@value='20151019']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("substanceadministration/effectiveTime/high[@value='20161019']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testImmunizationUndesired() throws Exception {
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
+
+		assertTrue(immunization.isAdministered());
+		assertTrue(!immunization.isUndesired());
+
+		immunization.setUndesired();
+		assertTrue(!immunization.isAdministered());
+		assertTrue(immunization.isUndesired());
+
+		Document document = immunization.getDocument();
+
+		XPathExpression expr = xpath.compile("substanceadministration[@negationInd='true']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void textExternalDocumentEntry() throws XPathExpressionException {
+		ImmunizationRecommendation entry = new ImmunizationRecommendation();
+
+		ExternalDocumentEntry externalDocEntry = new ExternalDocumentEntry();
+		externalDocEntry.setTextReference("http://www.bag.admin.ch/ekif/04423/04428/index.html");
+		entry.setExternalDocumentEntry(externalDocEntry);
+
+		assertEquals(externalDocEntry, entry.getExternalDocumentEntry());
+
+		Document document = entry.getDocument();
+
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		XPath xpath = xpathFactory.newXPath();
+
+		XPathExpression expr = xpath.compile(
+				"substanceadministration/reference[@typeCode='REFR']/externalDocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}

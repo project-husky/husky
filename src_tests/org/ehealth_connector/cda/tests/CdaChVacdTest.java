@@ -20,24 +20,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.Comment;
+import org.ehealth_connector.cda.CdaChVacd;
+import org.ehealth_connector.cda.CommentEntry;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.GestationalAge;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
+import org.ehealth_connector.cda.MedicationTargetEntry;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Problem;
-import org.ehealth_connector.cda.Reason;
-import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
+import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
@@ -59,8 +57,6 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * 
@@ -95,9 +91,6 @@ public class CdaChVacdTest extends TestUtils {
 	private PregnancyHistory ph2;
 	private ImmunizationRecommendation immunizationRecommendation2;
 	private Code whoAtcCode;
-	private Reason reason1;
-	private Reason reason2;
-	private URL url;
 
 	public CdaChVacdTest() {
 		super();
@@ -139,11 +132,10 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 12
-	public Comment createComment() {
-		org.ehealth_connector.cda.Comment c = new org.ehealth_connector.cda.Comment();
-
-		c.setText(ts1);
-		return c;
+	public CommentEntry createComment() {
+		CommentEntry commentEntry = new CommentEntry();
+		commentEntry.setText(ts1);
+		return commentEntry;
 	}
 
 	public Consumable createConsumable() {
@@ -169,19 +161,13 @@ public class CdaChVacdTest extends TestUtils {
 
 	public CdaChVacd createHeader() {
 		// Physician
-		Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
-		Author arzt = new Author(arztName, "7608888888888");
-
-		Telecoms arztTelecoms = new Telecoms();
-		arztTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
-		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
-		arzt.setTelecoms(arztTelecoms);
+		Author arzt = getArztAllzeitBereit();
 
 		Organization arztPraxis = new Organization("Gruppenpraxis CH", "7608888888888");
 		Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888", "Musterhausen",
 				AddressUse.BUSINESS);
 		arztPraxis.addAddress(arztPraxisAdresse);
-		arztPraxis.setTelecoms(arztTelecoms);
+		arztPraxis.setTelecoms(arzt.getTelecoms());
 
 		// Patient
 		Name patientName = new Name("Franzine", "Muster");
@@ -212,6 +198,46 @@ public class CdaChVacdTest extends TestUtils {
 		return doc;
 	}
 
+	public static Author getArztAllzeitBereit() {
+		Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
+		Author arzt = new Author(arztName, "7608888888888");
+		Telecoms arztTelecoms = new Telecoms();
+		arztTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
+		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
+		arzt.setTelecoms(arztTelecoms);
+		return arzt;
+	}
+
+	public static Consumable getConsumableBoostrix() {
+		Consumable consumable = new Consumable("BOOSTRIX Polio Inj Susp");
+		Code whoAtc = new Code("2.16.840.1.113883.6.73", "J07CA02");
+		Organization organization = new Organization("GlaxoSmithKline");
+		consumable.setManufacturer(organization);
+		Identificator gtin = new Identificator("1.3.160", "7680006370012");
+		consumable.setManufacturedProductId(gtin);
+		consumable.setLotNr("lotNr");
+		consumable.setWhoAtcCode(whoAtc);
+		return consumable;
+	}
+
+	public static Identificator getSoftwareIdentificator() {
+		return new Identificator("1.2.3.4", "1.2.3.4");
+	}
+
+	public static MedicationTargetEntry getMedTargetEntryHepA() {
+		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
+		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPA);
+		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		return medicationTargetEntry;
+	}
+
+	public static MedicationTargetEntry getMedTargetEntryHepB() {
+		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
+		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPB);
+		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		return medicationTargetEntry;
+	}
+
 	// 1
 	public Immunization createImmunization() {
 		Immunization i = new Immunization();
@@ -223,8 +249,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setRouteOfAdministration(RouteOfAdministration.DIFFUSION_TRANSDERMAL);
 		i.setCommentText(ts1);
 		i.setPerformer(author1);
-		i.addReason(reason1);
-		i.addReason(reason1);
 		i.setIntended();
 		return i;
 	}
@@ -242,8 +266,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setDosage(number);
 		i.setCommentText(ts1);
 		i.setIntended();
-		i.addReason(reason2);
-		// i.addReason(reason2);
 		return i;
 	}
 
@@ -280,16 +302,6 @@ public class CdaChVacdTest extends TestUtils {
 		return p;
 	}
 
-	public Reason createReason1() {
-		Reason r = new Reason(code1);
-		return r;
-	}
-
-	public Reason createReason2() {
-		Reason r = new Reason(code1, url, numS1);
-		return r;
-	}
-
 	@Before
 	public void initTestData() {
 
@@ -311,11 +323,6 @@ public class CdaChVacdTest extends TestUtils {
 		number = 121241241.212323;
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
-		try {
-			url = new URL("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de");
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
 
 		// Convenience API Types
 		code1 = createCode1();
@@ -338,8 +345,6 @@ public class CdaChVacdTest extends TestUtils {
 		consumable1 = createConsumable2();
 		problem1 = createProblemEntry();
 		problem2 = createProblemEntry();
-		reason1 = createReason1();
-		reason2 = createReason2();
 
 		allergyProblem1 = createAllergyProblem();
 
@@ -479,8 +484,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		immunizationRecommendation1 = createImmunizationRecommendation();
 		immunizationRecommendation2 = createImmunizationRecommendation();
-		d.addImmunizationRecommendation(immunizationRecommendation1);
-		d.addImmunizationRecommendation(immunizationRecommendation2);
+		d.addImmunizationRecommendation(immunizationRecommendation1, false);
+		d.addImmunizationRecommendation(immunizationRecommendation2, false);
 		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
 		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
 
@@ -521,35 +526,24 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
-
-		cs.setCode("de");
 		d = createHeader();
-		d.getDoc().setLanguageCode(cs);
+		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
 		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
-		cs.setCode("FR");
-		d.getDoc().setLanguageCode(cs);
+		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
 		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
-		cs.setCode("It");
-		d.getDoc().setLanguageCode(cs);
+		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
 		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
-		d = createHeader();
-		cs.setCode("eN");
-		d.getDoc().setLanguageCode(cs);
-		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleEn(),
-				d.getDoc().getImmunizationsSection().getTitle().getText());
 	}
 
 	// 6
@@ -576,15 +570,6 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(0, g.getWeeksOfWeeksAndDays());
 		assertEquals(2, g.getDaysOfWeeksAndDays());
 		assertEquals(2, g.getAbsoluteDays());
-	}
-
-	// 12
-	@Test
-	public void testCommentSetterGetter() {
-		org.ehealth_connector.cda.Comment c = new org.ehealth_connector.cda.Comment();
-
-		c.setText(ts1);
-		assertEquals(ts1, c.getText());
 	}
 
 	@Test
@@ -618,7 +603,6 @@ public class CdaChVacdTest extends TestUtils {
 
 	// 11
 	@Test
-	@Ignore
 	public void testImmunizationRecommendationSetterGetter() {
 		ImmunizationRecommendation i = new ImmunizationRecommendation();
 
@@ -637,10 +621,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(false, i.getProposed());
 
 		i.setPossibleAppliance(startDate, endDate);
-		assertEquals(startDateString + " - " + endDateString, i.getPossibleAppliance());
-
-		i.setShallNotBeAdministerd(true);
-		assertEquals(true, i.gettShallNotBeAdministerd());
+		assertEquals(startDateString + " - " + endDateString, i.getPossibleApplianceString());
 
 		i.setConsumable(consumable1);
 		assertEquals(true, TestUtils.isEqual(consumable1, i.getConsumable()));
@@ -651,11 +632,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setCommentText(ts2);
 		assertEquals(ts2, i.getCommentText());
 
-		i.addReason(reason2);
-		i.getReasons();
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
-				i.getReasons().get(0).getReference());
-		assertEquals(numS1, i.getReasons().get(0).getReferenceId());
 	}
 
 	// 1
@@ -688,16 +664,6 @@ public class CdaChVacdTest extends TestUtils {
 		i.setPerformer(author1);
 		assertNotNull(i.getPerformer());
 		assertTrue(isEqual(author1.getName(), i.getPerformer().getName()));
-
-		i.addReason(reason1);
-		assertNotNull(i.getReasons());
-		assertTrue(isEqual(code1, i.getReasons().get(0).getCode()));
-
-		i.addReason(reason1);
-		assertTrue(isEqual(code1, i.getReasons().get(1).getCode()));
-
-		i.setCommentText(ts1);
-		assertEquals(ts1, i.getCommentText());
 
 		assertFalse(i.getIntended());
 		i.setIntended();
@@ -784,9 +750,6 @@ public class CdaChVacdTest extends TestUtils {
 		p.setId(id1);
 		assertEquals(true, TestUtils.isEqual(id1, p.getId()));
 
-		p.setStartDate(startDate);
-		assertEquals(startDateString, p.getStartDate());
-
 		p.setNotOccured(true);
 		assertEquals(true, p.getProblemNotOccured());
 
@@ -798,20 +761,6 @@ public class CdaChVacdTest extends TestUtils {
 
 		p.addValue(value2);
 		assertEquals(true, TestUtils.isEqual(value2, p.getValues().get(2)));
-	}
-
-	@Test
-	public void testReasonSetterGetter() {
-		Reason r1 = new Reason();
-		r1.setCode(code1);
-		assertTrue(isEqual(code1, r1.getCode()));
-
-		r1.setReference(url);
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de",
-				r1.getReference());
-
-		r1.setReferenceId(numS1);
-		assertEquals(numS1, r1.getReferenceId());
 	}
 
 	private AllergyProblem createAllergyProblem() {

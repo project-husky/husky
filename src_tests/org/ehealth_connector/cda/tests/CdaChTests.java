@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.cda.ch.CdaChVacd;
+import org.ehealth_connector.cda.CdaChVacd;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.common.Author;

@@ -19,6 +19,7 @@ package org.ehealth_connector.cda;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
@@ -33,8 +34,11 @@ public class MedicationTargetEntry
 	 * Instantiates a new medication target entry.
 	 */
 	public MedicationTargetEntry() {
-		super(CHFactory.eINSTANCE.createMedicationTargetEntry().init(),
-				"2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason");
+		super(CHFactory.eINSTANCE.createMedicationTargetEntry().init(), null, null);
+		// cannot add it in the model because VACD has the same templateId
+		this.getMdht().getTemplateIds().add(
+				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason")
+						.getIi());
 	}
 
 	/**
@@ -110,6 +114,18 @@ public class MedicationTargetEntry
 		return null;
 	}
 
+	/**
+	 * Gets the text reference.
+	 *
+	 * @return the text reference
+	 */
+	public String getTextReference() {
+		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
+			return this.getMdht().getText().getReference().getValue();
+		}
+		return null;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -154,6 +170,17 @@ public class MedicationTargetEntry
 	public void setSoftwareCreatedId(Identificator identifier) {
 		getMdht().getIds().clear();
 		getMdht().getIds().add(identifier.getIi());
+	}
+
+	/**
+	 * Sets the text reference.
+	 *
+	 * @param value
+	 *            the new text reference, # for local reference has to be
+	 *            included
+	 */
+	public void setTextReference(String value) {
+		this.getMdht().setText(Util.createReference(value));
 	}
 
 }

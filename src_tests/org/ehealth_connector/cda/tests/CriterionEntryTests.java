@@ -36,14 +36,14 @@ import org.w3c.dom.NodeList;
  */
 public class CriterionEntryTests {
 
+	private XPathFactory xpathFactory = XPathFactory.newInstance();
+	private XPath xpath = xpathFactory.newXPath();
+
 	@Test
 	public void testSerializeEmpty() throws Exception {
 		CriterionEntry entry = new CriterionEntry();
 
 		Document document = entry.getDocument();
-
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
 
 		XPathExpression expr = xpath.compile(
 				"criterion/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Category']");
@@ -63,9 +63,6 @@ public class CriterionEntryTests {
 		entry.setRecCategoryCode(CdaChVacdRecCategories.REC_BASE.getCode(LanguageCode.GERMAN));
 
 		Document document = entry.getDocument();
-
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
 
 		XPathExpression expr = xpath.compile(
 				"criterion/code[@code='41501' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
@@ -87,15 +84,28 @@ public class CriterionEntryTests {
 		entry.setRecCategory(CdaChVacdRecCategories.NO_REC, LanguageCode.FRENCH);
 		Document document = entry.getDocument();
 
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
-
 		XPathExpression expr = xpath.compile(
 				"criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		assertEquals(CdaChVacdRecCategories.NO_REC, entry.getRecCategory());
+	}
+
+	@Test
+	public void testTextReference() throws XPathExpressionException {
+		CriterionEntry entry = new CriterionEntry();
+
+		entry.setTextReference("#reference1");
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("criterion/text/reference[@value='#reference1']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("#reference1", entry.getTextReference());
 	}
 
 }

@@ -20,8 +20,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -30,20 +30,30 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * Ein Autor (meist ein Arzt).
+ * Author
  */
 public class Author {
 
+	final private static Code functionCodeAuthorDoctor = new Code("2.16.840.1.113883.2.9.6.2.7",
+			"221", "ISCO-08", "Medical doctors");
+	final private static Code functionCodeAuthorPatient = new Code(NullFlavor.NOT_APPLICABLE);
+
+	/** assigned Author */
+	protected org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+
 	/**
-	 * The author.
+	 * author.
 	 */
 	protected org.openhealthtools.mdht.uml.cda.Author mAuthor;
-	protected org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+
+	/** person */
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
+	/**
+	 * Instantiates a new author.
+	 */
 	public Author() {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
 		mPerson = CDAFactory.eINSTANCE.createPerson();
@@ -53,23 +63,29 @@ public class Author {
 		mAuthor.setAssignedAuthor(mAsAuthor);
 
 		// add functionCode and time
-		mAuthor.setFunctionCode(createFunctionCode());
+		mAuthor.setFunctionCode(functionCodeAuthorDoctor.getCE());
 		mAuthor.setTime(DateUtil.nowAsTS());
 	}
 
 	/**
-	 * <div class="en">Instantiates a new author.</div> <div
-	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Instantiates a new author.</div>
+	 * <div class="de">Instantiiert a neuen Autor</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param iAuthor
-	 * <br>
+	 *            <br>
 	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
 	public Author(AuthorType iAuthor) {
 	}
 
+	/**
+	 * Instantiates a new author.
+	 *
+	 * @param name
+	 *            the name
+	 */
 	public Author(Name name) {
 		this();
 		addName(name);
@@ -128,8 +144,8 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Adds the name.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds the name.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param name
 	 *            name
@@ -139,8 +155,8 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Copy mdht author.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Copy mdht author.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.author
 	 */
@@ -148,6 +164,11 @@ public class Author {
 		return EcoreUtil.copy(mAuthor);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -214,8 +235,8 @@ public class Author {
 
 	/**
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
-	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the complete name</div>
 	 */
@@ -225,12 +246,13 @@ public class Author {
 		if (mAuthor.getAssignedAuthor() != null) {
 			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
 				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
-					Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-							.get(0));
+					Name name = new Name(
+							mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 					return name.getCompleteName();
 				} else {
 					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+						if (mAuthor.getAssignedAuthor().getRepresentedOrganization()
+								.getNames() != null) {
 							Name name = new Name(mAuthor.getAssignedAuthor()
 									.getRepresentedOrganization().getNames().get(0));
 							return name.getCompleteName();
@@ -243,10 +265,10 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the gln (identification of the author)</div> <div
-	 * class="de">Liefert die GLN (ID des Autors)</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 * 
+	 * <div class="en">Gets the gln (identification of the author)</div>
+	 * <div class="de">Liefert die GLN (ID des Autors)</div>
+	 * <div class="fr"></div> <div class="it"></div>.
+	 *
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
@@ -256,9 +278,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the gln as identificator.</div> <div
-	 * class="de">Liefert gln (ID des Autoren) als Identificator Objekt.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the gln as identificator.</div>
+	 * <div class="de">Liefert gln (ID des Autoren) als Identificator
+	 * Objekt.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the gln as identificator</div>
 	 */
@@ -270,8 +292,8 @@ public class Author {
 
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
-	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>.
+	 *
 	 * @return <div class="en">the ids</div>
 	 */
 	public ArrayList<Identificator> getIds() {
@@ -279,9 +301,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div> <div
-	 * class="de">Liefert den (ersten) Nachnamen</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the (first) family name.</div>
+	 * <div class="de">Liefert den (ersten) Nachnamen</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the name</div>
 	 */
@@ -308,17 +330,17 @@ public class Author {
 	/**
 	 * <div class="en">Gets the organization (RepresentedOrganization). This
 	 * element can also be used as author represented organization, when a
-	 * document is beeing sent (via XDS, XDM, XDR).</div> <div
-	 * class="de">Liefert die Organisation (RepresentedOrganization), der der
-	 * Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als
+	 * document is beeing sent (via XDS, XDM, XDR).</div>
+	 * <div class="de">Liefert die Organisation (RepresentedOrganization), der
+	 * der Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als
 	 * Author Represented Organization Attribut verwendet werden, wenn das
-	 * Dokument per XDS, XDM oder XDR verschickt wird.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * Dokument per XDS, XDM oder XDR verschickt wird.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * 
-	 * @return organization <div class="en">the organization</div> <div
-	 *         class="de">die Organisation</div> <div class="fr"></div> <div
-	 *         class="it"></div>
+	 * @return organization <div class="en">the organization</div>
+	 *         <div class="de">die Organisation</div> <div class="fr"></div>
+	 *         <div class="it"></div>
 	 */
 	public Organization getOrganization() {
 		Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
@@ -339,10 +361,9 @@ public class Author {
 
 	/**
 	 * Sets the author speciality code. This element specifies the speciality
-	 * ("Fachrichtung", e.g.
-	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
-	 * code can also be used as author speciality, when a document is beeing
-	 * sent (via XDS, XDM, XDR).
+	 * ("Fachrichtung", e.g. "Fachärztin/Facharzt für Allgemeine Innere Medizin"
+	 * ) of the author. The code can also be used as author speciality, when a
+	 * document is beeing sent (via XDS, XDM, XDR).
 	 * 
 	 * @return code the speciality code
 	 */
@@ -357,9 +378,7 @@ public class Author {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms((EList<TEL>) EcoreUtil.copyAll(mAuthor.getAssignedAuthor()
-				.getTelecoms()));
-		return telecoms;
+		return new Telecoms(mAuthor.getAssignedAuthor().getTelecoms());
 	}
 
 	/**
@@ -367,8 +386,8 @@ public class Author {
 	 * the start time of the author’s participation in the creation of the
 	 * clinical document </div> <div class="de">Liefert die Zeit für den Autor.
 	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
-	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * 
 	 * @return date <div class="en">the start time of the participation as
@@ -382,6 +401,11 @@ public class Author {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -390,6 +414,33 @@ public class Author {
 		result = prime * result + ((mAuthor == null) ? 0 : mAuthor.hashCode());
 		result = prime * result + ((mPerson == null) ? 0 : mPerson.hashCode());
 		return result;
+	}
+
+	/**
+	 * Checks if is author patient.
+	 *
+	 * @return true, if is author patient
+	 */
+	public boolean isAuthorPatient() {
+		CE functionCode = mAuthor.getFunctionCode();
+		if (functionCode != null) {
+			return functionCodeAuthorPatient.equals(new Code(functionCode));
+		}
+		return false;
+	}
+
+	/**
+	 * Sets the author patient.
+	 *
+	 * @param isAuthorPatient
+	 *            true if the author ist not a doctor but the patient itself
+	 */
+	public void setAuthorPatient(boolean isAuthorPatient) {
+		if (isAuthorPatient) {
+			mAuthor.setFunctionCode(functionCodeAuthorPatient.getCE());
+		} else {
+			mAuthor.setFunctionCode(functionCodeAuthorDoctor.getCE());
+		}
 	}
 
 	/**
@@ -417,8 +468,8 @@ public class Author {
 	 * 
 	 * @param organization
 	 *            <div class="en">the new organization</div> <div class="de">die
-	 *            neue Organisation</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            neue Organisation</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
 		mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
@@ -457,8 +508,8 @@ public class Author {
 	 * 
 	 * @param telecoms
 	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mAuthor.getAssignedAuthor().getTelecoms()
@@ -470,15 +521,15 @@ public class Author {
 	 * the start time of the author’s participation in the creation of the
 	 * clinical document </div> <div class="de">Setzt die Zeit für den Autor.
 	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
-	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * 
 	 * @param date
 	 *            <div class="en">the start time of the participation as
 	 *            date</div> <div class="de">den Startzeitpunkt der
-	 *            Partizipation als Date</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            Partizipation als Date</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTime(Date date) {
 		try {
@@ -488,16 +539,13 @@ public class Author {
 		}
 	}
 
+	/**
+	 * To ch author.
+	 *
+	 * @return the org.ehealth_connector.cda.ch. author ch
+	 */
 	public org.ehealth_connector.cda.ch.AuthorCh toChAuthor() {
 		return new org.ehealth_connector.cda.ch.AuthorCh(getAuthorMdht());
 	}
 
-	private CE createFunctionCode() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode("221");
-		ce.setCodeSystem("2.16.840.1.113883.2.9.6.2.7");
-		ce.setCodeSystemName("ISCO-08");
-		ce.setDisplayName("Medical doctors");
-		return ce;
-	}
 }

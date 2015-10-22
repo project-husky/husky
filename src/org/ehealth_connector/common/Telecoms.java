@@ -18,6 +18,7 @@ package org.ehealth_connector.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,25 +39,26 @@ public class Telecoms {
 	private ArrayList<TEL> mTels;
 
 	/**
-	 * <div class="en">Instantiates a new telecoms.</div> <div
-	 * class="de">Instantiiert eine neue Liste mit Telcoms</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new telecoms.</div>
+	 * <div class="de">Instantiiert eine neue Liste mit Telcoms</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
 	public Telecoms() {
 		mTels = new ArrayList<TEL>();
 	}
 
 	/**
-	 * <div class="en">Instantiates a new telecoms.</div> <div
-	 * class="de">Instantiiert eine neue Liste mit Telcoms</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new telecoms.</div>
+	 * <div class="de">Instantiiert eine neue Liste mit Telcoms</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param telecoms
-	 * <br>
-	 *          <div class="de"> telecoms</div> <div class="fr"> telecoms</div>
-	 *          <div class="it"> telecoms</div>
+	 *            <br>
+	 *            <div class="de"> telecoms</div>
+	 *            <div class="fr"> telecoms</div>
+	 *            <div class="it"> telecoms</div>
 	 */
-	public Telecoms(EList<TEL> telecoms) {
+	public Telecoms(List<TEL> telecoms) {
 		this();
 		for (TEL tel : telecoms) {
 			mTels.add(tel);
@@ -64,70 +66,33 @@ public class Telecoms {
 	}
 
 	/**
-	 * Weist der Telecoms Liste eine eMail Adresse zu.
-	 * 
-	 * @param eMail
-	 *          eMail Adresse
-	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addEMail(String eMail, AddressUse usage) {
-		mTels.add(Util.createEMail(eMail, usage));
-	}
-
-	/**
-	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
-	 * haben: "+41.32.234.66.77"
-	 * 
-	 * @param fax
-	 * <br>
-	 *          <div class="de"> fax</div> <div class="fr"></div> <div
-	 *          class="it"></div>
-	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
-	 */
-	public void addFax(String fax, AddressUse usage) {
-		mTels.add(Util.createFax(fax, usage));
-	}
-
-	/**
-	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
-	 * haben: "+41.32.234.66.77"
-	 * 
-	 * @param phoneNr
-	 *          Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen:
-	 *          "+41.32.234.66.77"
-	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft, Mobil)
-	 */
-	public void addPhone(String phoneNr, AddressUse usage) {
-		mTels.add(Util.createTel(phoneNr, usage));
-	}
-	
-	/**
 	 * Weist der Telecoms Liste einen Eintrag zu. Diese MÜSSEN folgendes Format
 	 * haben: "+41.32.234.66.77"
 	 * 
 	 * @param type
-	 * 			z.B. "tel"
+	 *            z.B. "tel"
 	 * @param endpointIdentifier
-	 *          z.B. Telefonnummer (nur internationale Rufnummer ohne Sonderzeichen:
-	 *          "+41.32.234.66.77"
+	 *            z.B. Telefonnummer (nur internationale Rufnummer ohne
+	 *            Sonderzeichen: "+41.32.234.66.77"
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            Verwendungszweck (Privat, Geschäft, Mobil)
 	 */
 	public void add(String type, String endpointIdentifier, AddressUse usage) {
 		TEL tel = null;
-		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(Util.TELECOMS_EMAIL_PREFIX.substring(0, Util.TELECOMS_EMAIL_PREFIX.length()-1)))) {
+		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(Util.TELECOMS_EMAIL_PREFIX
+				.substring(0, Util.TELECOMS_EMAIL_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type.equals(Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length()-1)))) {
+		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type.equals(
+				Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(Util.TELECOMS_PHONE_PREFIX.substring(0, Util.TELECOMS_PHONE_PREFIX.length()-1)))) {
+		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(Util.TELECOMS_PHONE_PREFIX
+				.substring(0, Util.TELECOMS_PHONE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_WEBSIDE_PREFIX) || (type.equals(Util.TELECOMS_WEBSIDE_PREFIX.substring(0, Util.TELECOMS_WEBSIDE_PREFIX.length()-1)))) {
+		if (type.equals(Util.TELECOMS_WEBSIDE_PREFIX) || (type.equals(Util.TELECOMS_WEBSIDE_PREFIX
+				.substring(0, Util.TELECOMS_WEBSIDE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
 		if (tel == null) {
@@ -137,12 +102,53 @@ public class Telecoms {
 	}
 
 	/**
+	 * Weist der Telecoms Liste eine eMail Adresse zu.
+	 * 
+	 * @param eMail
+	 *            eMail Adresse
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addEMail(String eMail, AddressUse usage) {
+		mTels.add(Util.createEMail(eMail, usage));
+	}
+
+	/**
+	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes
+	 * Format haben: "+41.32.234.66.77"
+	 * 
+	 * @param fax
+	 *            <br>
+	 *            <div class="de"> fax</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft)
+	 */
+	public void addFax(String fax, AddressUse usage) {
+		mTels.add(Util.createFax(fax, usage));
+	}
+
+	/**
+	 * Weist der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes
+	 * Format haben: "+41.32.234.66.77"
+	 * 
+	 * @param phoneNr
+	 *            Telefonnummer (nur internationale Rufnummer ohne
+	 *            Sonderzeichen: "+41.32.234.66.77"
+	 * @param usage
+	 *            Verwendungszweck (Privat, Geschäft, Mobil)
+	 */
+	public void addPhone(String phoneNr, AddressUse usage) {
+		mTels.add(Util.createTel(phoneNr, usage));
+	}
+
+	/**
 	 * Weist der Telecoms Liste eine Webseite zu.
 	 * 
 	 * @param url
-	 *          Webseite (z.B. "http://www.ehealth-connector.org")
+	 *            Webseite (z.B. "http://www.ehealth-connector.org")
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public void addWebsite(String url, AddressUse usage) {
 		TEL t = DatatypesFactory.eINSTANCE.createTEL();
@@ -152,8 +158,8 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Copy mdht telecoms.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Copy mdht telecoms.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return EList the MDHT EList containing the Telecoms
 	 */
@@ -183,8 +189,8 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert mdht
-	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the mdht telecoms.</div> <div class="de">Liefert
+	 * mdht telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return ArrayList <div class="en">the mdht telecoms</div>
 	 */
@@ -203,9 +209,9 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Gets the telecoms as HashMap</div> <div class="de">Liefert
-	 * die Telecoms Liste als HashMap</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Gets the telecoms as HashMap</div>
+	 * <div class="de">Liefert die Telecoms Liste als HashMap</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the telecoms</div>
 	 */

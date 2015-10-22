@@ -35,28 +35,28 @@ public class Code {
 	private CD mCD;
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new code.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Code(CD code) {
 		mCD = code;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new code.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Code(Code code) {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
@@ -79,7 +79,7 @@ public class Code {
 
 	public Code(org.ehealth_connector.cda.enums.NullFlavor nullFlavor) {
 		mCD = DatatypesFactory.eINSTANCE.createCD();
-		mCD.setNullFlavor(NullFlavor.getByName(nullFlavor.name()));
+		mCD.setNullFlavor(NullFlavor.getByName(nullFlavor.getCodeValue()));
 	}
 
 	/**
@@ -97,20 +97,20 @@ public class Code {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new code.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param codeSystem
-	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code system</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -120,24 +120,24 @@ public class Code {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new code.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param codeSystem
-	 * <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code system</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param codeSystemName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code system name</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -387,6 +387,12 @@ public class Code {
 		mCD.setCodeSystemName(codeSystemName);
 	}
 
+	/**
+	 * Sets the null flavor.
+	 *
+	 * @param nf
+	 *            the new null flavor
+	 */
 	public void setNullFlavor(org.ehealth_connector.cda.enums.NullFlavor nf) {
 		mCD.setNullFlavor(NullFlavor.getByName(nf.name()));
 	}

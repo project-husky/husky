@@ -16,58 +16,45 @@
 
 package org.ehealth_connector.cda;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Util;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
  * <div class="en">Class for Comments</div> <div class="de">Die Klasse für
  * Kommentar-Objekte</div> <div class="fr"></div> <div class="it"></div>
+ * 
+ * @deprecated use CommentEntry
  */
-public class Comment {
-
-	/** The m comment. */
-	org.openhealthtools.mdht.uml.cda.ihe.Comment mComment;
+@Deprecated
+public class Comment extends CommentEntry {
 
 	/**
 	 * Instantiates a new comment.
 	 */
 	public Comment() {
-		mComment = IHEFactory.eINSTANCE.createComment().init();
 	}
 
 	/**
 	 * Instantiates a new comment.
 	 * 
 	 * @param comment
-	 * <br>
-	 *          <div class="en">Comment</div> <div class="de">Kommentar</div> <div
-	 *          class="fr"> comment</div> <div class="it"> comment</div>
+	 *            <br>
+	 *            <div class="en">Comment</div> <div class="de">Kommentar</div>
+	 *            <div class="fr"> comment</div> <div class="it"> comment</div>
 	 */
 	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
-		mComment = comment;
+		super(comment);
 	}
 
 	/**
 	 * Instantiates a new comment.
 	 * 
 	 * @param text
-	 * <br>
-	 *          <div class="en">Comment</div> <div class="de"> Kommentar</div>
-	 *          <div class="fr"> text</div> <div class="it"> text</div>
+	 *            <br>
+	 *            <div class="en">Comment</div> <div class="de"> Kommentar</div>
+	 *            <div class="fr"> text</div> <div class="it"> text</div>
 	 */
 	public Comment(String text) {
-		mComment = IHEFactory.eINSTANCE.createComment().init();
 		setText(text);
-	}
-
-	/**
-	 * <div class="en">Copy mdht comment.</div>s
-	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.ihe. comment
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.Comment copyMdhtComment() {
-		return EcoreUtil.copy(mComment);
 	}
 
 	/**
@@ -76,7 +63,7 @@ public class Comment {
 	 * @return the mdht comment
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.Comment getMdhtComment() {
-		return mComment;
+		return this.getMdht();
 	}
 
 	/**
@@ -85,16 +72,16 @@ public class Comment {
 	 * @return the text
 	 */
 	public String getText() {
-		return mComment.getText().getText();
+		return this.getMdht().getText().getText();
 	}
 
 	/**
 	 * Sets the text.
 	 * 
 	 * @param text
-	 *          the new text
+	 *            the new text
 	 */
 	public void setText(String text) {
-		mComment.setText(Util.createEd(text));
+		this.getMdht().setText(Util.createEd(text));
 	}
 }

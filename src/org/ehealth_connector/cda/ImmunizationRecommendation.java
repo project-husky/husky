@@ -16,29 +16,34 @@
 
 package org.ehealth_connector.cda;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
+import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.Precondition;
+import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.Comment;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.cda.ch.PreconditionEntry;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
@@ -53,32 +58,19 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
  * erfolgte Impfungen dokumentiert werden.
  */
-public class ImmunizationRecommendation {
-
-	private final org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation mImmunizationRecommendation;
+public class ImmunizationRecommendation
+		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 
 	/**
 	 * Instantiates a new immunization recommendation.
 	 */
 	public ImmunizationRecommendation() {
-		mImmunizationRecommendation = CHFactory.eINSTANCE.createImmunizationRecommendation().init();
+		super(CHFactory.eINSTANCE.createImmunizationRecommendation().init(), CdaCh.OID_V1,
+				"CDA-CH.Body.MediL3");
 
-		// Fix the TemplateID Extension of the CDA-CH.Body.MediL3 Template
-		final List<II> templateIds = mImmunizationRecommendation.getTemplateIds();
-		for (final II templateId : templateIds) {
-			if (templateId.getRoot().equals(CdaCh.OID_V1)) {
-				templateId.setExtension("CDA-CH.Body.MediL3");
-			}
-		}
-
-		// Set the null values
-		mImmunizationRecommendation.setPriorityCode(Util.createCENullFlavorUNK());
-		mImmunizationRecommendation.setRouteCode(Util.createCENullFlavorUNK());
-		mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		mImmunizationRecommendation.setRateQuantity(Util.createIVL_PQNullFlavorUNK());
-
-		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
-		mImmunizationRecommendation.setNegationInd(false);
+		setRouteOfAdministration(null);
+		setDosage(null);
+		setPriorityCode(createPriorityCode());
 	}
 
 	/**
@@ -131,7 +123,7 @@ public class ImmunizationRecommendation {
 	 */
 	public ImmunizationRecommendation(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
-		mImmunizationRecommendation = immunizationRecommendation;
+		super(immunizationRecommendation);
 	}
 
 	/**
@@ -142,37 +134,38 @@ public class ImmunizationRecommendation {
 	 */
 	public void addId(Identificator id) {
 		final II ii = Util.createUuidVacdIdentificator(id);
-		mImmunizationRecommendation.getIds().add(ii);
+		this.getMdht().getIds().add(ii);
 	}
 
 	/**
-	 * Adds the reason for the immunization recommendeation (the BAG Guideline)
-	 * 
+	 * Adds the medication target entry.
+	 *
+	 * @param medicationTargetEntry
+	 *            the medication target entry
+	 */
+	public void addMedicationTargetEntry(MedicationTargetEntry medicationTargetEntry) {
+
+		this.getMdht().addObservation(medicationTargetEntry.getMdht());
+		// need to add the the RSON and inversionInd, cannot do this
+		// automatically with mdht
+		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
+				entryRelationShip.setNegationInd(false);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
+			}
+		}
+	}
+
+	/**
+	 * Adds the reason for the immunization recommendeation (the BAG Guideline).
+	 *
 	 * @param reason
 	 *            the reason
+	 * @deprecated use addMedicationTargetEnry
 	 */
+	@Deprecated
 	public void addReason(Reason reason) {
-		/*
-		 * FIXME mImmunizationRecommendation
-		 * .addObservation(reason.copyMdhtCDACHMSETBodyImmunizationL3Reason());
-		 * mImmunizationRecommendation.getEntryRelationships()
-		 * .get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-		 * .setTypeCode(x_ActRelationshipEntryRelationship.RSON);
-		 * mImmunizationRecommendation.getEntryRelationships()
-		 * .get(mImmunizationRecommendation.getEntryRelationships().size() - 1)
-		 * .setInversionInd(false);
-		 */
-	}
-
-	/**
-	 * <div class="de">Copy mdht immunization recommendation.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.ch. immunization
-	 *         recommendation
-	 */
-	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation copyMdhtImmunizationRecommendation() {
-		return EcoreUtil.copy(mImmunizationRecommendation);
+		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
@@ -181,14 +174,22 @@ public class ImmunizationRecommendation {
 	 * @return the author
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
-		try {
-			final org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil
-					.copy(mImmunizationRecommendation.getAuthors().get(0));
-			return new Author(author);
-		} catch (final IndexOutOfBoundsException e) {
-			// no author available
-			return null;
+		if (getMdht().getAuthors().size() > 0) {
+			return new Author(this.getMdht().getAuthors().get(0));
 		}
+		return null;
+	}
+
+	/**
+	 * Gets the comment entry.
+	 *
+	 * @return the comment entry
+	 */
+	public CommentEntry getCommentEntry() {
+		if (this.getMdht().getComment() != null) {
+			return new CommentEntry(this.getMdht().getComment());
+		}
+		return null;
 	}
 
 	/**
@@ -198,17 +199,17 @@ public class ImmunizationRecommendation {
 	 *         level 2 text
 	 */
 	public String getCommentRef() {
-		return Util.getCommentRef(mImmunizationRecommendation.getEntryRelationships());
+		return Util.getCommentRef(getMdht().getEntryRelationships());
 	}
 
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
-	 * comment itself)
-	 * 
+	 * comment itself).
+	 *
 	 * @return the comment text
 	 */
 	public String getCommentText() {
-		return Util.getCommentText(mImmunizationRecommendation.getEntryRelationships());
+		return Util.getCommentText(getMdht().getEntryRelationships());
 	}
 
 	/**
@@ -217,57 +218,66 @@ public class ImmunizationRecommendation {
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
-		if (mImmunizationRecommendation.getConsumable() != null) {
-			final Consumable consumable = new Consumable(
-					mImmunizationRecommendation.getConsumable());
+		if (this.getMdht().getConsumable() != null) {
+			final Consumable consumable = new Consumable(getMdht().getConsumable());
 			return consumable;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
-	 * Gets the dose
-	 * 
+	 * gets the criterion entry.
+	 *
+	 * @return the criterion entry
+	 */
+	public CriterionEntry getCriterionEntry() {
+		EList<Precondition> preconditions = getMdht().getPreconditions();
+		if (preconditions.size() > 0) {
+			return new CriterionEntry(preconditions.get(0).getCriterion());
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the dose.
+	 *
 	 * @return the dose
 	 */
 	public Value getDosage() {
-		if (mImmunizationRecommendation.getDoseQuantity() != null) {
-			final Value value = new Value(mImmunizationRecommendation.getDoseQuantity());
+		if (getMdht().getDoseQuantity() != null) {
+			final Value value = new Value(getMdht().getDoseQuantity());
 			return value;
 		}
 		return null;
 	}
 
 	/**
-	 * Gets the first id in the list.
+	 * Gets the external document entry.
+	 *
+	 * @return the external document entry
+	 */
+	public ExternalDocumentEntry getExternalDocumentEntry() {
+		if (getMdht().getReferences().size() > 0) {
+			Reference reference = this.getMdht().getReferences().get(0);
+			return new ExternalReferenceEntry(
+					(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference)
+							.getExternalDocumentEntry();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the id of immunization of the software which registred it (see
+	 * evadoc 7.5.8.5/7.5.1.5)
 	 * 
 	 * @return the id
 	 */
 	public Identificator getId() {
 		Identificator id = null;
-		if (mImmunizationRecommendation.getIds() != null
-				&& mImmunizationRecommendation.getIds().size() > 0) {
-			id = new Identificator(mImmunizationRecommendation.getIds().get(0));
+		if (getMdht().getIds() != null && getMdht().getIds().size() > 0) {
+			id = new Identificator(getMdht().getIds().get(0));
 		}
 		return id;
-	}
-
-	/**
-	 * Gets the specified id value based on its code system.
-	 * 
-	 * @param codeSystem
-	 *            id's identity domain
-	 * @return the id or null if it doesn't exist
-	 */
-	public Identificator getId(IdentityDomain codeSystem) {
-		Identificator ident = null;
-		for (final II id : mImmunizationRecommendation.getIds()) {
-			if (id.getRoot().equalsIgnoreCase(codeSystem.getCodeSystemId())) {
-				ident = new Identificator(id);
-			}
-		}
-		return ident;
 	}
 
 	/**
@@ -282,21 +292,79 @@ public class ImmunizationRecommendation {
 	 *         Sonst: false</div>
 	 */
 	public boolean getIntended() {
-		// if
-		// (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT))
-		// return true;
-		// else
-		// return false;
-		return mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.INT);
+		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT);
 	}
 
 	/**
-	 * Gets the mdht immunization recommendation.
-	 * 
-	 * @return the mdht immunization recommendation
+	 * Gets the medication target entries.
+	 *
+	 * @return the medication target entries
 	 */
-	public org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation getMdhtImmunizationRecommendation() {
-		return mImmunizationRecommendation;
+	public List<MedicationTargetEntry> getMedicationTargetEntries() {
+		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
+		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
+			medicationTargetEntries.add(new MedicationTargetEntry(mte));
+		}
+		return medicationTargetEntries;
+	}
+
+	/**
+	 * Gets the possible appliance.
+	 *
+	 * @return the possible appliance YYYYmmdd resolution
+	 */
+	public Date getPossibleAppliance() {
+		return this.getPossibleApplianceStartDate();
+	}
+
+	/**
+	 * Gets the possible appliance end date.
+	 *
+	 * @return the possible appliance end date YYYYmmdd resolution
+	 */
+	public Date getPossibleApplianceEndDate() {
+		if (getMdht().getEffectiveTimes().size() > 0) {
+			SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
+			if (effectiveTime instanceof IVL_TS) {
+				IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
+				if (effectiveTimeInterval.getHigh() != null
+						&& effectiveTimeInterval.getHigh().getValue() != null) {
+					Date tsHigh = DateUtil
+							.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
+					return tsHigh;
+				}
+			} else {
+				if (effectiveTime instanceof TS) {
+					Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					return ts;
+				}
+			}
+		}
+		return null;
+
+	}
+
+	/**
+	 * Gets the possible appliance start date.
+	 *
+	 * @return the possible appliance start date YYYYmmdd resolution
+	 */
+	public Date getPossibleApplianceStartDate() {
+		if (getMdht().getEffectiveTimes().size() > 0) {
+			SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
+			if (effectiveTime instanceof IVL_TS) {
+				IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
+				Date tsLow = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+				return tsLow;
+			} else {
+				if (effectiveTime instanceof TS) {
+					Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					return ts;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -310,9 +378,21 @@ public class ImmunizationRecommendation {
 	 *         soll als String</div> <div class="fr"></div>
 	 *         <div class="it"></div>
 	 */
-	public String getPossibleAppliance() {
-		final List<SXCM_TS> effectiveTimes = mImmunizationRecommendation.getEffectiveTimes();
+	public String getPossibleApplianceString() {
+		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
 		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
+	}
+
+	/**
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency
+	 * under which the Act happened, can happen, is happening, is intended to
+	 * happen, or is requested/demanded to happen. Codesystem:
+	 * 2.16.840.1.113883.5.7
+	 * 
+	 * @return priorityCode
+	 */
+	public Code getPriorityCode() {
+		return new Code(getMdht().getPriorityCode());
 	}
 
 	/**
@@ -324,43 +404,70 @@ public class ImmunizationRecommendation {
 	 * @return true, wenn eine Impfung vorgeschlagen ist. Sonst: false
 	 */
 	public boolean getProposed() {
-		// if
-		// (mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP))
-		// return true;
-		// else
-		// return false;
-		return mImmunizationRecommendation.getMoodCode().equals(x_DocumentSubstanceMood.PRP);
+		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.PRP);
 	}
 
 	/**
 	 * Gets a list of reasons for the immunizationRecommendation (typically a
 	 * reference to an external Bundesamt für Gesundheit (BAG) document)).
-	 * 
+	 *
 	 * @return A ArrayList of Resons
+	 * @deprecated use getMedicationTargetEntries
 	 */
+	@Deprecated
 	public List<Reason> getReasons() {
-		/*
-		 * FIXME final List<Reason> cl = new ArrayList<Reason>(); final
-		 * EList<CDACHMSETBodyImmunizationL3Reason> erl =
-		 * mImmunizationRecommendation .getCDACHMSETBodyImmunizationL3Reasons();
-		 * for (final CDACHMSETBodyImmunizationL3Reason er : erl) { cl.add(new
-		 * Reason(er)); } return cl;
-		 */
+		List<Reason> medicationTargetEntries = new ArrayList<Reason>();
+		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
+			medicationTargetEntries.add(new Reason(mte));
+		}
+		return medicationTargetEntries;
+	}
+
+	/**
+	 * Gets the route of administration.
+	 * 
+	 * @return the route of administration
+	 */
+	public RouteOfAdministration getRouteOfAdministration() {
+		return RouteOfAdministration.getEnum(getMdht().getRouteCode().getCode());
+	}
+
+	/**
+	 * Gets the text reference.
+	 *
+	 * @return the text reference
+	 */
+	public String getTextReference() {
+		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
+			return this.getMdht().getText().getReference().getValue();
+		}
 		return null;
 	}
 
 	/**
-	 * <div class="en">Gets the information, if an immunization should not be
-	 * administered (negationInd).</div> <div class="de">Gibt an, ob eine
-	 * Impfung nicht verabreicht werden soll (negationInd).</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return <div class="en">true, if the immunization should not be
-	 *         administered. false, otherwise.</div> <div class="de">true, wenn
-	 *         die Impfung nicht verabreicht werden soll, sonst false</div>
+	 * returns if is the immunization was administered
+	 *
+	 * @return true, if is undesired
 	 */
-	public boolean gettShallNotBeAdministerd() {
-		return mImmunizationRecommendation.getNegationInd();
+	public boolean isAdministered() {
+		return !getMdht().getNegationInd().booleanValue();
+	}
+
+	/**
+	 * Checks if is the immunization is not desired
+	 *
+	 * @return true, if is undesired
+	 */
+	public boolean isUndesired() {
+		return this.getMdht().getNegationInd().booleanValue();
+	}
+
+	/**
+	 * Sets the administered.
+	 */
+	public void setAdministered() {
+		this.getMdht().setNegationInd(false);
 	}
 
 	/**
@@ -370,53 +477,59 @@ public class ImmunizationRecommendation {
 	 *            the new author
 	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
-		mImmunizationRecommendation.getAuthors().clear();
-		final org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
-		// Remove author function Code if present
-		if (immmunizationAuthor.getFunctionCode() != null) {
-			// CE ce = null;
-			immmunizationAuthor.setFunctionCode(null);
-		}
-		mImmunizationRecommendation.getAuthors().add(immmunizationAuthor);
+		getMdht().getAuthors().clear();
+		getMdht().getAuthors().add(author.getAuthorMdht());
+
 	}
 
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
-	 * document
-	 * 
+	 * document.
+	 *
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
-		mImmunizationRecommendation.setCode(specialCode.getCD());
-		mImmunizationRecommendation.setStatusCode(StatusCode.ACTIVE.getCS());
+		this.getMdht().setCode(specialCode.getCD());
+		this.getMdht().setStatusCode(StatusCode.ACTIVE.getCS());
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.UNK);
-		mImmunizationRecommendation.setPriorityCode(ce);
-		mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		mImmunizationRecommendation.getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		mImmunizationRecommendation.getIds().add(Util.createUuidVacd(null));
+		this.getMdht().setPriorityCode(ce);
+		this.getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
+		this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+		this.getMdht().getIds().add(Util.createUuidVacd(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}
 
 	/**
-	 * Sets a comment text
-	 * 
+	 * Sets the comment entry.
+	 *
+	 * @param commentEntry
+	 *            the new comment entry
+	 */
+	public void setCommentEntry(CommentEntry commentEntry) {
+		this.getMdht().addAct(commentEntry.getMdht());
+		// need to add the the Subj and negationIns, cannot do this
+		// automatically with mdht
+		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
+				entryRelationShip.setNegationInd(true);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			}
+		}
+	}
+
+	/**
+	 * Sets a comment text.
+	 *
 	 * @param text
 	 *            the text
 	 */
 	public void setCommentText(String text) {
-		final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		ed.addText(text);
-		mComment.setText(ed);
-		mImmunizationRecommendation.addAct(mComment);
-
-		final EntryRelationship er = mImmunizationRecommendation.getEntryRelationships()
-				.get(mImmunizationRecommendation.getEntryRelationships().size() - 1);
-		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		er.setInversionInd(true);
+		CommentEntry commentEntry = new CommentEntry();
+		commentEntry.setText(text);
+		this.setCommentEntry(commentEntry);
 	}
 
 	/**
@@ -426,24 +539,61 @@ public class ImmunizationRecommendation {
 	 *            the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
-		mImmunizationRecommendation.setConsumable(consumable.copyMdhtConsumable());
+		getMdht().setConsumable(consumable.getMdht());
+	}
+
+	/**
+	 * Sets the criterion entry.
+	 *
+	 * @param citerionEntry
+	 *            the new criterion entry
+	 */
+	public void setCriterionEntry(CriterionEntry citerionEntry) {
+		this.getMdht().getPreconditions().clear();
+		PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry().init();
+		preconditionEntry.setCriterion(citerionEntry.getMdht());
+		this.getMdht().getPreconditions().add(preconditionEntry);
 	}
 
 	/**
 	 * Sets the dosage.
 	 * 
 	 * @param doseQuantity
-	 *            the new dosage (use null, if not asked)
+	 *            the new dosage (use null, if not known)
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
-			mImmunizationRecommendation.setDoseQuantity(Util.createIVL_PQNullFlavorNA());
+			getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		} else {
 			final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 			ivl_pq.setUnit("ml");
 			ivl_pq.setValue(doseQuantity);
-			mImmunizationRecommendation.setDoseQuantity(ivl_pq);
+			getMdht().setDoseQuantity(ivl_pq);
 		}
+	}
+
+	/**
+	 * Sets the external document entry.
+	 *
+	 * @param externalDocumentEntry
+	 *            the new external document entry
+	 */
+	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
+		getMdht().getReferences().clear();
+		ExternalReferenceEntry externalReference = new ExternalReferenceEntry();
+		externalReference.setExternalDocumentEntry(externalDocumentEntry);
+		getMdht().getReferences().add(externalReference.getMdht());
+	}
+
+	/**
+	 * Sets the id of immunization from the software which created it.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(Identificator id) {
+		this.getMdht().getIds().clear();
+		this.getMdht().getIds().add(id.getIi());
 	}
 
 	/**
@@ -452,14 +602,27 @@ public class ImmunizationRecommendation {
 	 * <div class="it"></div>
 	 */
 	public void setIntended() {
-		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.INT);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+	}
+
+	/**
+	 * Sets the possible appliance.
+	 *
+	 * @param startOfPossibleAppliance
+	 *            the new possible appliance date YYYYmmdd resolution
+	 */
+	public void setPossibleAppliance(Date startOfPossibleAppliance) {
+		getMdht().getEffectiveTimes().clear();
+		final SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
+		timestamp.setValue(DateUtil.formatDate(startOfPossibleAppliance));
+		getMdht().getEffectiveTimes().add(timestamp);
 	}
 
 	/**
 	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht
 	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
-	 * @param startOfPossibleAppliacne
+	 * @param startOfPossibleAppliance
 	 *            <br>
 	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
 	 *            verabreicht werden soll.</div> <div class="fr"></div>
@@ -469,9 +632,23 @@ public class ImmunizationRecommendation {
 	 *            verabreicht werden soll.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setPossibleAppliance(Date startOfPossibleAppliacne, Date endOfPossibleAppliance) {
-		mImmunizationRecommendation.getEffectiveTimes().add(0,
-				DateUtil.createSTCM_TS(startOfPossibleAppliacne, endOfPossibleAppliance));
+	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
+		getMdht().getEffectiveTimes().clear();
+		this.getMdht().getEffectiveTimes().add(0,
+				DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+	}
+
+	/**
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency
+	 * under which the Act happened, can happen, is happening, is intended to
+	 * happen, or is requested/demanded to happen. Codesystem:
+	 * 2.16.840.1.113883.5.7
+	 * 
+	 * @param priorityCode
+	 *            the priority code
+	 */
+	public void setPriorityCode(Code priorityCode) {
+		getMdht().setPriorityCode(priorityCode.getCE());
 	}
 
 	/**
@@ -481,7 +658,24 @@ public class ImmunizationRecommendation {
 	 * <div class="it"></div>
 	 */
 	public void setProposed() {
-		mImmunizationRecommendation.setMoodCode(x_DocumentSubstanceMood.PRP);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.PRP);
+	}
+
+	/**
+	 * Optionally, one can set the route code (Einnahmearten). If not set,
+	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
+	 * 
+	 * @param routeCode
+	 *            the new route of administration
+	 */
+	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
+		if (routeCode == null) {
+			final CE ce = DatatypesFactory.eINSTANCE.createCE();
+			ce.setNullFlavor(NullFlavor.NA);
+			getMdht().setRouteCode(ce);
+		} else {
+			getMdht().setRouteCode(routeCode.getCE());
+		}
 	}
 
 	/**
@@ -498,10 +692,38 @@ public class ImmunizationRecommendation {
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {
-			mImmunizationRecommendation.setNegationInd(true);
+			this.getMdht().setNegationInd(true);
 		} else {
-			mImmunizationRecommendation.setNegationInd(false);
+			this.getMdht().setNegationInd(false);
 		}
+	}
+
+	/**
+	 * Creates the reference to the section.
+	 *
+	 * @param prefix
+	 *            the prefix
+	 */
+	public void setTextReference(String prefix) {
+		this.getMdht().setText(Util.createReference(prefix));
+	}
+
+	/**
+	 * Sets if the immunization is not desired.
+	 */
+	public void setUndesired() {
+		this.getMdht().setNegationInd(true);
+	}
+
+	/**
+	 * Creates the priority code.
+	 *
+	 * @return the code
+	 */
+	private Code createPriorityCode() {
+		final CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
+		priorityCode.setNullFlavor(NullFlavor.UNK);
+		return new Code(priorityCode);
 	}
 
 }

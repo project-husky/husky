@@ -6,10 +6,12 @@ import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
+/**
  *<div class="de">Hinweis: Diese Tabelle wird jährliche durch die EKIF angepasst (siehe auch [Impfplan 2013]). eHealth Suisse wird eine jährlich aktualisierte Version dieses Value-Sets in elektronischer Form publizieren. (Quelle: Schweizerischer [Impfplan], 7.2 Erhöhtes Expositionsrisiko und/oder Übertragungsrisiko)</div>
  *<div class="fr">Remarque : Ce tableau est adapté chaque année par la CFV (cf. également [plan de vaccination suisse 2013]). eHealth Suisse publiera une version actualisée chaque année de ce Value Set au format électronique. (Source : [Plan de vaccination suisse], 7.2 Risque accru dexposition et/ou de transmission)</div>
+ * @deprecated use org.ehealth_connector.cda.ch.enum.CdaChVacdExpRisks 
  */
+@Deprecated
 public enum RiscOfExposure {
 
 	/**
@@ -23,6 +25,7 @@ public enum RiscOfExposure {
 	 */
 	ENGE_KONTAKTPERSONEN_VON_HEPATITIS_B_ERKRANKTEN("2", "Enge Kontaktpersonen von Hepatitis-B Erkrankten"),
 	/**
+	 * 
 	 * <div class="de">Erwachsene und Kinder ab 6 Jahren, die in Endemiegebieten wohnen oder sich teilweise dort aufhalten</div>
 	 * <div class="fr">Adultes et enfants dès 6 ans qui résident ou séjournent temporairement dans des territoires endémiques</div>
 	 */
@@ -113,8 +116,8 @@ public enum RiscOfExposure {
 	PERSONEN_MIT_HAEUFIG_WECHSELNDEN_SEXUALPARTNERN("19", "Personen mit häufig wechselnden Sexualpartnern"),
 	/**
 	 * <div class="de">Personen mit regelmässigem Kontakt (beruflich/familiär) zu
-	 * Säuglingen < 6 Monaten, schwangere Frauen</div> <div class="fr">Personnes
-	 * en contact professionnel ou familial régulier avec des nourrissons < 6
+	 * Säuglingen &lt; 6 Monaten, schwangere Frauen</div> <div class="fr">Personnes
+	 * en contact professionnel ou familial régulier avec des nourrissons &lt; 6
 	 * mois, femmes enceintes</div>
 	 */
 	PERSONEN_MIT_REGELMAESSIGEM_KONTAKT_BERUFLICHFAMILIAER_ZU_SAEUGLINGEN_KLEINER_6_MONATEN_SCHWANGERE_FRAUEN("20","Personen mit regelmässigem Kontakt (beruflich/familiär) zu Säuglingen < 6 Monaten, schwangere Frauen"),

@@ -37,14 +37,14 @@ import org.w3c.dom.NodeList;
  */
 public class MedicationTargetEntryTests {
 
+	private XPathFactory xpathFactory = XPathFactory.newInstance();
+	private XPath xpath = xpathFactory.newXPath();
+
 	@Test
 	public void testSerializeEmpty() throws XPathExpressionException {
 		MedicationTargetEntry entry = new MedicationTargetEntry();
 
 		Document document = entry.getDocument();
-
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
 
 		XPathExpression expr = xpath.compile("observation[@classCode='OBS' and @moodCode='EVN']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
@@ -70,9 +70,6 @@ public class MedicationTargetEntryTests {
 
 		Document document = entry.getDocument();
 
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
-
 		XPathExpression expr = xpath.compile(
 				"observation/code[@code='68525005' and @codeSystem='2.16.756.5.30.1.127.3.3.3']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
@@ -90,9 +87,6 @@ public class MedicationTargetEntryTests {
 		entry.setImmunizationTarget(CdaChVacdImmunizations.DIPHTHERIA);
 
 		Document document = entry.getDocument();
-
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
 
 		XPathExpression expr = xpath.compile(
 				"observation/code[@code='76668005' and @codeSystem='2.16.756.5.30.1.127.3.3.3']");
@@ -112,9 +106,6 @@ public class MedicationTargetEntryTests {
 		entry.setSoftwareCreatedId(softwareId);
 
 		Document document = entry.getDocument();
-
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
 
 		XPathExpression expr = xpath
 				.compile("observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='"
@@ -163,6 +154,22 @@ public class MedicationTargetEntryTests {
 		assertEquals(false, diptheria.equals(varicella));
 		assertEquals(false, empty.equals(software1));
 		assertEquals(false, empty.equals(varicella));
+	}
+
+	@Test
+	public void testTextReference() throws XPathExpressionException {
+		MedicationTargetEntry entry = new MedicationTargetEntry();
+
+		entry.setTextReference("#reference1");
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("observation/text/reference[@value='#reference1']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("#reference1", entry.getTextReference());
 	}
 
 }

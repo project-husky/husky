@@ -6,42 +6,47 @@ import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Codesystem: HL7 nullFlavor Tabelle (OID: 2.16.840.1.113883.5.1008). Dieses Subset ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
- *<div class="fr">Source du sous-ensemble : [IHE PCC TF-2],Table 6.3.4.16.7-1</div>
+/**
+ * <div class="de">Codesystem: HL7 nullFlavor Tabelle (OID:
+ * 2.16.840.1.113883.5.1008). Dieses Subset ist für den vorliegenden
+ * Implementierungsleitfaden abschliessend. Andere Codes sind NICHT
+ * ERLAUBT.</div> <div class="fr">Source du sous-ensemble : [IHE PCC TF-2],Table
+ * 6.3.4.16.7-1</div>
  */
 public enum NullFlavor {
 
 	/**
-	 * <div class="de">Gefragt, aber keine Antwort erhalten</div> <div
-	 * class="fr">Question posée, mais aucune réponse reçue</div>
+	 * <div class="de">Gefragt, aber keine Antwort erhalten</div>
+	 * <div class="fr">Question posée, mais aucune réponse reçue</div>
 	 */
 	ASKED_BUT_UNKNOWN("ASKU", "asked but unknown"),
+
 	/**
 	 * <div class="de">Patient wünscht keine Weitergabe dieser Information</div>
 	 * <div class="fr">Le patient ne souhaite pas que cette information soit
 	 * transmise.</div>
 	 */
 	MASKED("MSK", "masked"),
+
 	/**
 	 * <div class="de">Nicht gefragt</div> <div class="fr">Non demandé</div>
 	 */
 	NOT_ASKED("NASK", "not asked"),
+
 	/**
-	 * <div class="de">Vorübergehend unbekannt, wird später ausgefüllt</div> <div
-	 * class="fr">Actuellement non connu, sera rempli plus tard.</div>
+	 * <div class="de">Vorübergehend unbekannt, wird später ausgefüllt</div>
+	 * <div class="fr">Actuellement non connu, sera rempli plus tard.</div>
 	 */
 	TEMPORARILY_UNAVAILABLE("NAV", "temporarily unavailable"),
+
 	/**
-	 * <div class="de">Unbekannt, ohne weitere Präzisierung</div> <div
-	 * class="fr">Non connu, sans autre précision</div>
+	 * <div class="de">Unbekannt, ohne weitere Präzisierung</div>
+	 * <div class="fr">Non connu, sans autre précision</div>
 	 */
-	UNKNOWN("UNK", "unknown");
-	public static final String ASKED_BUT_UNKNOWN_CODE = "ASKU";
-	public static final String MASKED_CODE = "MSK";
-	public static final String NOT_ASKED_CODE = "NASK";
-	public static final String TEMPORARILY_UNAVAILABLE_CODE = "NAV";
-	public static final String UNKNOWN_CODE = "UNK";
+	UNKNOWN("UNK", "unknown"),
+
+	/** Known to have no proper value */
+	NOT_APPLICABLE("NA", "not applicable");
 
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1008";
 	public static final String CODE_SYSTEM_NAME = "HL7nullFlavor ";
@@ -50,16 +55,16 @@ public enum NullFlavor {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private NullFlavor(String code, String displayName) {
 		this.code = code;
@@ -67,12 +72,12 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static NullFlavor getEnum(String code) {
@@ -85,8 +90,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -99,8 +104,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -120,8 +125,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 * 
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -130,8 +135,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -156,8 +161,8 @@ public enum NullFlavor {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -166,12 +171,12 @@ public enum NullFlavor {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {

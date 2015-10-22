@@ -1,8 +1,25 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.DateUtil;
 
 /**
  * Value Set valid from 20150101 Value-Set: CDA-CH-VACD rec-categories (OID:
@@ -12,20 +29,21 @@ public enum CdaChVacdRecCategories {
 
 	/** The rec base. */
 	REC_BASE("41501", "Empfohlene Basisimpfungen", "Vaccinations recommandées de base",
-			"Vaccinazioni raccomandate di base"),
+			"Vaccinazioni raccomandate di base", "20150101", ""),
 
 	/** The rec compl. */
 	REC_COMPL("41502", "Empfohlene ergänzende Impfungen",
-			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari"),
+			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari",
+			"20150101", ""),
 
 	/** The rec risk. */
 	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen",
 			"Vaccinations recommandées à des groupes à risque",
-			"Vaccinazioni raccomandate a die gruppi a rischio"),
+			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", ""),
 
 	/** The no rec. */
 	NO_REC("41504", "Impfungen ohne Empfehlungen", "Vaccinations sans recommandation d’utilisation",
-			"Vaccinazioni senza raccomandazione d’utilizzo");
+			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", "");
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.4";
@@ -45,6 +63,12 @@ public enum CdaChVacdRecCategories {
 	/** The display name. */
 	private String displayNameIt;
 
+	/** The valid from Date. */
+	private Date validFrom;
+
+	/** The valid to Date. */
+	private Date validTo;
+
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
@@ -61,11 +85,17 @@ public enum CdaChVacdRecCategories {
 	 *            the display name it
 	 */
 	private CdaChVacdRecCategories(String code, String displayNameDe, String displayNameFr,
-			String displayNameIt) {
+			String displayNameIt, String validFrom, String validTo) {
 		this.code = code;
 		this.displayNameDe = displayNameDe;
 		this.displayNameFr = displayNameFr;
 		this.displayNameIt = displayNameIt;
+		if (validFrom != null && !"".equals(validFrom)) {
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+		}
+		if (validTo != null && !"".equals(validTo)) {
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+		}
 	}
 
 	/**
@@ -90,6 +120,8 @@ public enum CdaChVacdRecCategories {
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
+	 * @param languageCode
+	 *            the language code
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode(LanguageCode languageCode) {
@@ -173,6 +205,35 @@ public enum CdaChVacdRecCategories {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Checks if the code is valid now.
+	 *
+	 * @return true, if is valid
+	 */
+	public boolean isValid() {
+		return isValid(null);
+	}
+
+	/**
+	 * Checks if the code is valid for the specified date
+	 *
+	 * @param date
+	 *            the date
+	 * @return true, if is valid
+	 */
+	public boolean isValid(Date date) {
+		if (date == null) {
+			date = new Date();
+		}
+		if (this.validFrom != null && validFrom.after(date)) {
+			return false;
+		}
+		if (this.validTo != null && validTo.before(date)) {
+			return false;
+		}
+		return true;
 	}
 
 }

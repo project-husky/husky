@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda.ch;
+package org.ehealth_connector.cda;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -29,16 +29,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ActiveProblemConcern;
-import org.ehealth_connector.cda.AllergyConcern;
-import org.ehealth_connector.cda.CodedResults;
-import org.ehealth_connector.cda.GestationalAge;
-import org.ehealth_connector.cda.Immunization;
-import org.ehealth_connector.cda.ImmunizationRecommendation;
-import org.ehealth_connector.cda.LaboratoryObservation;
-import org.ehealth_connector.cda.PastProblemConcern;
-import org.ehealth_connector.cda.PregnancyHistory;
-import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
@@ -494,7 +484,7 @@ public class FhirCdaChVacd {
 	 *         given FHIR Bundle resource</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.cda.ch.CdaChVacd createCdaChVacdFromFHIRBundle(Bundle bundle,
+	public org.ehealth_connector.cda.CdaChVacd createCdaChVacdFromFHIRBundle(Bundle bundle,
 			String xsl, String css) {
 
 		// Header
@@ -557,7 +547,7 @@ public class FhirCdaChVacd {
 
 		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(
 				bundle)) {
-			doc.addImmunizationRecommendation(immunizationRecommendation);
+			doc.addImmunizationRecommendation(immunizationRecommendation, true);
 		}
 
 		doc.addComment(getComment(bundle));
@@ -1531,21 +1521,22 @@ public class FhirCdaChVacd {
 
 	/**
 	 * <div class="en">Maps the FHIR status code to an eHC
-	 * ProblemConcernStatusCode</div> <div class="de"></div> <div
-	 * class="fr"></div>
+	 * ProblemConcernStatusCode</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 * 
 	 * @param status
-	 *            <div class="en">FHIR status</div> <div class="de"></div> <div
-	 *            class="fr"></div>
-	 * @return <div class="en">eHC ProblemConcernStatusCode</div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 *            <div class="en">FHIR status</div> <div class="de"></div>
+	 *            <div class="fr"></div>
+	 * @return <div class="en">eHC ProblemConcernStatusCode</div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
-	Condition condition)
+			Condition condition)
 
 	{
 		org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
-		ConditionClinicalStatusCodesEnum status = condition.getClinicalStatusElement().getValueAsEnum();
+		ConditionClinicalStatusCodesEnum status = condition.getClinicalStatusElement()
+				.getValueAsEnum();
 		if (status == ConditionClinicalStatusCodesEnum.RESOLVED) {
 			retVal = ProblemConcernStatusCode.COMPLETED;
 		} else if (status == ConditionClinicalStatusCodesEnum.ACTIVE) {
@@ -1562,7 +1553,7 @@ public class FhirCdaChVacd {
 		// Add Problem Entry Identifiers
 		for (IdentifierDt id : fhirCondition.getIdentifier()) {
 			String codeSystem = removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
+			retVal.setId(new Identificator(codeSystem, id.getValue()));
 		}
 
 		// currently only Problems supported

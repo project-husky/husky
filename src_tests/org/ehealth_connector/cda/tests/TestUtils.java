@@ -20,7 +20,7 @@ import java.util.Random;
 
 import org.ehealth_connector.cda.AllergyProblem;
 import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.Problem;
+import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;
@@ -190,27 +190,18 @@ public class TestUtils {
 		return true;
 	}
 
-	public static boolean isEqual(Problem p1, Problem p2) {
-		if (!isEqual(p1.getCode(), p2.getCode()))
+	public static boolean isEqual(ProblemEntry p1, ProblemEntry p2) {
+		if (p1 == null) {
 			return false;
-		if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
-			return false;
-		if (p1.getStartDate() != null && !p1.getStartDate().equals(p2.getStartDate()))
-			return false;
-		if (!isEqual(p1.getId(), p2.getId()))
-			return false;
-		for (int i = 0; i < p1.getValues().size(); i++) {
-			if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
-				return false;
 		}
-		return true;
+		return p1.equals(p2);
 	}
 
 	public static boolean isEqual(Patient p1, Patient p2) {
 		if (!isEqual(p1.getName(), p2.getName()))
 			return false;
-		if (!isEqual(p1.getAdministrativeGenderCode().getCode(), p2.getAdministrativeGenderCode()
-				.getCode()))
+		if (!isEqual(p1.getAdministrativeGenderCode().getCode(),
+				p2.getAdministrativeGenderCode().getCode()))
 			return false;
 		if (p1.getBirthday().getTime() != p1.getBirthday().getTime())
 			return false;

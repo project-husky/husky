@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import org.ehealth_connector.cda.CdaChVacd;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
@@ -56,20 +57,19 @@ public class DocumentProcessor {
 	 * @param input
 	 *            <div class="en">InputStream of a CDA-CH-VACD XML
 	 *            structure</div> <div class="de">InputStream einer CDA-CH-VACD
-	 *            XML-Struktur </div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            XML-Struktur </div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @return the CdaChVacd Document
 	 * @throws Exception
 	 *             if the document could not be loaded
 	 */
 	public static CdaChVacd loadFromStream(InputStream input) throws Exception {
+		// Explicit initialization
+		CHPackage.eINSTANCE.eClass();
+
 		ClinicalDocument clinicalDocument = CDAUtil.load(input);
 
 		// Implicit initialization
-		// CDAUtil.loadPackages();
-
-		// Explicit initialization
-		CHPackage.eINSTANCE.eClass();
 
 		VACD evacdocMdht = null;
 		if (clinicalDocument instanceof CDACH) {
@@ -83,8 +83,6 @@ public class DocumentProcessor {
 			return null;
 		}
 
-		CdaChVacd evacdoc = new CdaChVacd(evacdocMdht);
-
-		return evacdoc;
+		return new CdaChVacd(evacdocMdht);
 	}
 }

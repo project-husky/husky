@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
@@ -34,17 +33,15 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.Comment;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.cda.ch.PreconditionEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
@@ -83,16 +80,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 		setRouteOfAdministration(null);
 		setDosage(null);
 		setPriorityCode(createPriorityCode());
-	}
-
-	/**
-	 * Instantiates a new immunization.
-	 *
-	 * @param immunization
-	 *            the immunization
-	 */
-	public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
-		super(immunization, null, null);
 	}
 
 	/**
@@ -170,6 +157,16 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	}
 
 	/**
+	 * Instantiates a new immunization.
+	 *
+	 * @param immunization
+	 *            the immunization
+	 */
+	public Immunization(org.openhealthtools.mdht.uml.cda.ch.Immunization immunization) {
+		super(immunization, null, null);
+	}
+
+	/**
 	 * Adds the id.
 	 * 
 	 * @param codedId
@@ -178,18 +175,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	public void addId(Identificator codedId) {
 		final II ii = Util.createUuidVacdIdentificator(codedId);
 		this.getMdht().getIds().add(ii);
-	}
-
-	/**
-	 * Adds the reason for the immunization (the illness, which the immunization
-	 * should prevent).
-	 *
-	 * @param reason
-	 *            the reason
-	 */
-	@Deprecated
-	public void addReason(Reason reason) {
-		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
@@ -211,19 +196,22 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 		}
 	}
 
-	public List<MedicationTargetEntry> getMedicationTargetEntries() {
-		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
-		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
-				.getMedicalTargets()) {
-			medicationTargetEntries.add(new MedicationTargetEntry(mte));
-		}
-		return medicationTargetEntries;
+	/**
+	 * Adds the reason for the immunization (the illness, which the immunization
+	 * should prevent).
+	 *
+	 * @param reason
+	 *            the reason
+	 */
+	@Deprecated
+	public void addReason(Reason reason) {
+		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
 	 * Gets the apply date.
 	 * 
-	 * @return the apply date
+	 * @return the apply date YYYYmmdd resolution
 	 */
 	public Date getApplyDate() {
 		if (getMdht().getEffectiveTimes() != null && getMdht().getEffectiveTimes().size() > 0) {
@@ -240,15 +228,22 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 * @return Author
 	 */
 	public Author getAuthor() {
-		try {
-			final org.openhealthtools.mdht.uml.cda.Author author = EcoreUtil
-					.copy(getMdht().getAuthors().get(0));
-			return new Author(author);
-		} catch (final IndexOutOfBoundsException e) {
-			// no author available
-			return null;
+		if (getMdht().getAuthors().size() > 0) {
+			return new Author(this.getMdht().getAuthors().get(0));
 		}
+		return null;
+	}
 
+	/**
+	 * Gets the comment entry.
+	 *
+	 * @return the comment entry
+	 */
+	public CommentEntry getCommentEntry() {
+		if (this.getMdht().getComment() != null) {
+			return new CommentEntry(this.getMdht().getComment());
+		}
+		return null;
 	}
 
 	/**
@@ -256,7 +251,9 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 * 
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
+	 * @deprecated uses setCommentEntry
 	 */
+	@Deprecated
 	public String getCommentRef() {
 		return Util.getCommentRef(getMdht().getEntryRelationships());
 	}
@@ -264,9 +261,11 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself).
-	 *
+	 * 
+	 * @deprecated use getCommentEntry
 	 * @return the comment text
 	 */
+	@Deprecated
 	public String getCommentText() {
 		return Util.getCommentText(getMdht().getEntryRelationships());
 	}
@@ -277,8 +276,24 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
-		final Consumable consumable = new Consumable(getMdht().getConsumable());
-		return consumable;
+		if (this.getMdht().getConsumable() != null) {
+			final Consumable consumable = new Consumable(getMdht().getConsumable());
+			return consumable;
+		}
+		return null;
+	}
+
+	/**
+	 * gets the criterion entry.
+	 *
+	 * @return citerionEntry the new criterion entry
+	 */
+	public CriterionEntry getCriterionEntry() {
+		EList<Precondition> preconditions = getMdht().getPreconditions();
+		if (preconditions.size() > 0) {
+			return new CriterionEntry(preconditions.get(0).getCriterion());
+		}
+		return null;
 	}
 
 	/**
@@ -295,7 +310,8 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	}
 
 	/**
-	 * Gets the first id in the list.
+	 * Gets the id of immunization of the software which registred it (see
+	 * evadoc 7.5.1.5)
 	 * 
 	 * @return the id
 	 */
@@ -305,23 +321,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 			id = new Identificator(getMdht().getIds().get(0));
 		}
 		return id;
-	}
-
-	/**
-	 * Gets the specified id value based on its code system.
-	 * 
-	 * @param codeSystem
-	 *            id's identity domain
-	 * @return the id or null if it doesn't exist
-	 */
-	public Identificator getId(IdentityDomain codeSystem) {
-		Identificator ident = null;
-		for (final II id : getMdht().getIds()) {
-			if (id.getRoot().equalsIgnoreCase(codeSystem.getCodeSystemId())) {
-				ident = new Identificator(id);
-			}
-		}
-		return ident;
 	}
 
 	/**
@@ -335,11 +334,21 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 *         beabsichtigt, aber noch nicht erfolgt ist. Sonst: false</div>
 	 */
 	public boolean getIntended() {
-		// if (getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT))
-		// return true;
-		// else
-		// return false;
 		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT);
+	}
+
+	/**
+	 * Gets the medication target entries.
+	 *
+	 * @return the medication target entries
+	 */
+	public List<MedicationTargetEntry> getMedicationTargetEntries() {
+		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
+		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
+			medicationTargetEntries.add(new MedicationTargetEntry(mte));
+		}
+		return medicationTargetEntries;
 	}
 
 	/**
@@ -348,10 +357,8 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
-		if (getMdht().getPerformers() != null) {
-			if (getMdht().getPerformers().get(0) != null) {
-				return new Performer(getMdht().getPerformers().get(0));
-			}
+		if (getMdht().getPerformers() != null && this.getMdht().getPerformers().size() > 0) {
+			return new Performer(getMdht().getPerformers().get(0));
 		}
 		return null;
 	}
@@ -374,16 +381,14 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 * 
 	 * @return A List of Reasons
 	 */
+	@Deprecated
 	public List<Reason> getReasons() {
-		/*
-		 * FIXME OE final List<Reason> cl = new ArrayList<Reason>();
-		 * 
-		 * final EList<CDACHMSETBodyImmunizationL3Reason> erl = mImmunization
-		 * .getCDACHMSETBodyImmunizationL3Reasons(); for (final
-		 * CDACHMSETBodyImmunizationL3Reason er : erl) { cl.add(new Reason(er));
-		 * } return cl;
-		 */
-		return null;
+		List<Reason> medicationTargetEntries = new ArrayList<Reason>();
+		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
+			medicationTargetEntries.add(new Reason(mte));
+		}
+		return medicationTargetEntries;
 	}
 
 	/**
@@ -396,7 +401,44 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	}
 
 	/**
-	 * Sets the apply date.
+	 * Gets the text reference.
+	 *
+	 * @return the text reference
+	 */
+	public String getTextReference() {
+		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
+			return this.getMdht().getText().getReference().getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * returns if is the immunization was administered
+	 *
+	 * @return true, if is undesired
+	 */
+	public boolean isAdministered() {
+		return !getMdht().getNegationInd().booleanValue();
+	}
+
+	/**
+	 * Checks if is the immunization is not desired
+	 *
+	 * @return true, if is undesired
+	 */
+	public boolean isUndesired() {
+		return this.getMdht().getNegationInd().booleanValue();
+	}
+
+	/**
+	 * Sets the administered.
+	 */
+	public void setAdministered() {
+		this.getMdht().setNegationInd(false);
+	}
+
+	/**
+	 * Sets the apply date YYYYmmdd resolution
 	 * 
 	 * @param appliedAt
 	 *            the new apply date
@@ -414,13 +456,7 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 */
 	public void setAuthor(Author author) {
 		getMdht().getAuthors().clear();
-		final org.openhealthtools.mdht.uml.cda.Author immmunizationAuthor = author.copyMdhtAuthor();
-		// Remove author function Code if present
-		if (immmunizationAuthor.getFunctionCode() != null) {
-			final CE ce = null;
-			immmunizationAuthor.setFunctionCode(ce);
-		}
-		getMdht().getAuthors().add(immmunizationAuthor);
+		getMdht().getAuthors().add(author.getAuthorMdht());
 	}
 
 	/**
@@ -444,22 +480,33 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	}
 
 	/**
-	 * Sets a comment text.
+	 * Sets the comment entry.
+	 *
+	 * @param commentEntry
+	 *            the new comment entry
+	 */
+	public void setCommentEntry(CommentEntry commentEntry) {
+		this.getMdht().addAct(commentEntry.getMdht());
+		// need to add the the Subj and negationIns, cannot do this
+		// automatically with mdht
+		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
+				entryRelationShip.setNegationInd(true);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			}
+		}
+	}
+
+	/**
+	 * Sets a comment text (not a reference).
 	 *
 	 * @param text
 	 *            the text
 	 */
 	public void setCommentText(String text) {
-		final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		ed.addText(text);
-		mComment.setText(ed);
-		getMdht().addAct(mComment);
-
-		final EntryRelationship er = getMdht().getEntryRelationships()
-				.get(getMdht().getEntryRelationships().size() - 1);
-		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		er.setInversionInd(true);
+		CommentEntry commentEntry = new CommentEntry();
+		commentEntry.setText(text);
+		this.setCommentEntry(commentEntry);
 	}
 
 	/**
@@ -469,7 +516,20 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 *            the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
-		getMdht().setConsumable(consumable.copyMdhtConsumable());
+		getMdht().setConsumable(consumable.getMdht());
+	}
+
+	/**
+	 * Sets the criterion entry.
+	 *
+	 * @param citerionEntry
+	 *            the new criterion entry
+	 */
+	public void setCriterionEntry(CriterionEntry citerionEntry) {
+		this.getMdht().getPreconditions().clear();
+		PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry().init();
+		preconditionEntry.setCriterion(citerionEntry.getMdht());
+		this.getMdht().getPreconditions().add(preconditionEntry);
 	}
 
 	/**
@@ -487,6 +547,17 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 			ivl_pq.setValue(doseQuantity);
 			getMdht().setDoseQuantity(ivl_pq);
 		}
+	}
+
+	/**
+	 * Sets the id of immunization from the software which created it
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(Identificator id) {
+		this.getMdht().getIds().clear();
+		this.getMdht().getIds().add(id.getIi());
 	}
 
 	/**
@@ -555,11 +626,28 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
 		if (routeCode == null) {
 			final CE ce = DatatypesFactory.eINSTANCE.createCE();
-			ce.setNullFlavor(NullFlavor.UNK);
+			ce.setNullFlavor(NullFlavor.NA);
 			getMdht().setRouteCode(ce);
 		} else {
 			getMdht().setRouteCode(routeCode.getCE());
 		}
+	}
+
+	/**
+	 * Creates the reference to the section.
+	 *
+	 * @param prefix
+	 *            the prefix
+	 */
+	public void setTextReference(String prefix) {
+		this.getMdht().setText(Util.createReference(prefix));
+	}
+
+	/**
+	 * Sets if the immunization is not desired.
+	 */
+	public void setUndesired() {
+		this.getMdht().setNegationInd(true);
 	}
 
 	/**
@@ -584,34 +672,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 		final CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
 		priorityCode.setNullFlavor(NullFlavor.UNK);
 		return new Code(priorityCode);
-	}
-
-	/**
-	 * Sets if the immunization is not desired.
-	 */
-	public void setUndesired() {
-		this.getMdht().setNegationInd(true);
-	}
-
-	/**
-	 * Checks if is the immunization is not desired
-	 *
-	 * @return true, if is undesired
-	 */
-	public boolean isUndesired() {
-		return this.getMdht().getNegationInd().booleanValue();
-	}
-
-	/**
-	 * Creates the reference to the section.
-	 *
-	 * @param contentId
-	 *            the content id
-	 * @param prefix
-	 *            the prefix
-	 */
-	public void createReference(int contentId, String prefix) {
-		this.getMdht().setText(Util.createReference(contentId, prefix));
 	}
 
 }
