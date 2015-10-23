@@ -33,52 +33,50 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class IndexHtm {
 
+	/** The HTML Footer */
+	public static final String HTML_FOOTER = "</body>\n" + "</html>";
+	/** The HTML Header (including headline) */
+	public static final String HTML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
+			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + "<head>\n"
+			+ "<title>eHealthConnector XDM Cross-Enterprise Document Media Interchange</title>\n"
+			+ "</head>\n" + "<body bgcolor=\"#F1FFFE\">\n" + "<div align=\"center\">\n"
+			+ "<h1>eHealthConnector - XDM Cross-Enterprise Document Media Interchange</h1>\n"
+			+ "</div>\n";
+	/** The HTML Separator for different languages inside this file */
+	public static final String HTML_SEPARATOR = "<hr />";
 	/** The log service. */
 	private static Logger logService = Logger.getLogger(IndexHtm.class.getName());
 
-	/** The inputStream. */
-	private InputStream is = null;
-
-	/** The HTML Header (including headline) */
-	public static final String HTML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-					+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
-					+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + "<head>\n"
-					+ "<title>eHealthConnector XDM Cross-Enterprise Document Media Interchange</title>\n"
-					+ "</head>\n" + "<body bgcolor=\"#F1FFFE\">\n" + "<div align=\"center\">\n"
-					+ "<h1>eHealthConnector - XDM Cross-Enterprise Document Media Interchange</h1>\n"
-					+ "</div>\n";
-	/** The HTML Footer */
-	public static final String HTML_FOOTER = "</body>\n" + "</html>";
-	/** The HTML Separator for different languages inside this file */
-	public static final String HTML_SEPARATOR = "<hr />";
-
-	/** The Constant TEMPLATE_EN. */
-	public static final String TEMPLATE_EN = "<h2>Institution</h2>\n"
-					+ "<p>Information about this XDM volume in english.<br/>\n"
-					+ "This XDM volume was created by {0}. </p>\n"
-					+ "<p><a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
-					+ "<h2>Contents</h2>\n{2}"
-					+ "<p>This volume contains {3} Documents in 1 Submission Set.</p>\n"
-					+ "<h3>README File</h3>\n"
-					+ "<p>For technical details about this volume and vendor information, see: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
 	/** The Constant TEMPLATE_DE. */
 	public static final String TEMPLATE_DE = "<h2>Verwaltende Organisation</h2>\n"
-					+ "<p>Informationen zu diesem XDM Paket in Deutsch.<br/>\n"
-					+ "Dieses XDM Paket wurde erstellt von: {0}. </p>\n"
-					+ "<p><a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
-					+ "<h2>Inhalt</h2>\n{2}"
-					+ "<p>Dieses Paket enthält {3} Dokumente in 1 Submission Set.</p>\n"
-					+ "<h3>README Datei</h3>\n"
-					+ "<p>Technische Details zu diesem XDM Paket und dessen Hersteller befinden sich hier: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
+			+ "<p>Informationen zu diesem XDM Paket in Deutsch.<br/>\n"
+			+ "Dieses XDM Paket wurde erstellt von: {0}. </p>\n"
+			+ "<p>Siehe <a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
+			+ "<h2>Inhalt</h2>\n{2}"
+			+ "<p>Dieses Paket enthält {3} Dokumente in 1 Submission Set.</p>\n"
+			+ "<h3>README Datei</h3>\n"
+			+ "<p>Technische Details zu diesem XDM Paket und dessen Hersteller befinden sich hier: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
+	/** The Constant TEMPLATE_EN. */
+	public static final String TEMPLATE_EN = "<h2>Institution</h2>\n"
+			+ "<p>Information about this XDM volume in english.<br/>\n"
+			+ "This XDM volume was created by {0}. </p>\n"
+			+ "<p>See <a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
+			+ "<h2>Contents</h2>\n{2}"
+			+ "<p>This volume contains {3} Documents in 1 Submission Set.</p>\n"
+			+ "<h3>README File</h3>\n"
+			+ "<p>For technical details about this volume and vendor information, see: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
 	/** The Constant TEMPLATE_FR. */
 	public static final String TEMPLATE_FR = "<h2>Organisme de gestion</h2>\n"
-					+ "<p>Informations sur ce volume XDM en français.<br/>\n"
-					+ "Ce volume XDM a été créée par {0}. </p>\n"
-					+ "<p><a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
-					+ "<h2>Contenu</h2>\n{2}"
-					+ "<p>Ce volume contient {3} Dokumente en 1 Submission Set.</p>\n"
-					+ "<h3>Fichier README</h3>\n"
-					+ "<p>Pour plus de informations techniques au sujet de ce volume et le fournisseur, voir: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
+			+ "<p>Informations sur ce volume XDM en français.<br/>\n"
+			+ "Ce volume XDM a été créée par {0}. </p>\n"
+			+ "<p>Voir <a target=\"_blank\" href=\"http://sourceforge.net/p/ehealthconnector/wiki/Team\">{1}</a></p>\n"
+			+ "<h2>Contenu</h2>\n{2}"
+			+ "<p>Ce volume contient {3} Dokumente en 1 Submission Set.</p>\n"
+			+ "<h3>Fichier README</h3>\n"
+			+ "<p>Pour plus de informations techniques au sujet de ce volume et le fournisseur, voir: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
+	/** The inputStream. */
+	private InputStream inputStream = null;
 
 	/**
 	 * Instantiates a new indexHtm.
@@ -88,7 +86,7 @@ public class IndexHtm {
 	 *            information about the contents of the volume.
 	 */
 	public IndexHtm(InputStream indexHtmStream) {
-		this.is = indexHtmStream;
+		this.inputStream = indexHtmStream;
 	}
 
 	/**
@@ -129,16 +127,7 @@ public class IndexHtm {
 
 		str = str + HTML_FOOTER;
 
-		is = new ByteArrayInputStream(str.getBytes());
-	}
-
-	/**
-	 * Returns the content of the INDEX.HTM as InputStream object
-	 *
-	 * @return the input stream
-	 */
-	public InputStream getInputStream() {
-		return is;
+		inputStream = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
@@ -162,12 +151,20 @@ public class IndexHtm {
 				title = XdsUtil.createXdmDocName(xdsDoc, i);
 			}
 			contentsStr = contentsStr + "<li>\n";
-			contentsStr = contentsStr.concat("Document " + i + ": "
-					+ "<a target=\"_blank\" href=\"" + XdsUtil.createXdmDocPathAndName(xdsDoc, i)
-					+ "\">" + title + "</a>\n");
+			contentsStr = contentsStr.concat("Document " + i + ": " + "<a target=\"_blank\" href=\""
+					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">" + title + "</a>\n");
 			contentsStr = contentsStr + "</li>\n";
 		}
 		contentsStr = contentsStr + "</ul>\n";
 		return contentsStr;
+	}
+
+	/**
+	 * Returns the content of the INDEX.HTM as InputStream object
+	 *
+	 * @return the input stream
+	 */
+	public InputStream getInputStream() {
+		return inputStream;
 	}
 }

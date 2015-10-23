@@ -30,8 +30,7 @@ import org.apache.log4j.Logger;
 public class ZipCreator {
 
 	private static Logger logService = Logger.getLogger(ZipCreator.class.getName());
-	byte[] buffer = new byte[1024];
-
+	private byte[] buffer = new byte[1024];
 	private ZipOutputStream out = null;
 
 	/**

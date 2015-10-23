@@ -18,23 +18,23 @@ package org.ehealth_connector.util;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 
 /**
- * Class that contains information about the vendor of an information system.
+ * Class that contains information about a vendor and its applications.
  *
  */
 public class VendorInformation {
 
 	// Default values, will be used, if the user does not provide his own
 	// information.
-	public static final String DEFAULT_APPLICATION_NAME = EHealthConnectorVersions
+	public static final String DEFAULT_PRODUCT_NAME = EHealthConnectorVersions
 			.getCurrentVersion().getSystemVersionName();
+	public static final String DEFAULT_CONTACT_INFORMATION = "http://sourceforge.net/p/ehealthconnector/wiki/Team";
 	public static final String DEFAULT_MODULE_NAME = "Convenience API";
-	public static final String DEFAULT_CONTACT_INFORMATION = "See http://sourceforge.net/p/ehealthconnector/wiki/Team";
-	public static final String DEFAULT_VENDOR_NAME = "The eHealthConnector Open Source Projekt";
+	public static final String DEFAULT_VENDOR_NAME = "the eHealthConnector Open Source Projekt";
 
-	private String vendorName;
-	private String applicationName;
-	private String moduleName;
 	private String contactInformation;
+	private String moduleName;
+	private String productName;
+	private String vendorName;
 
 	/**
 	 * Constructor. eHealthConnector default values will be used (see DEFAULT_*
@@ -49,28 +49,19 @@ public class VendorInformation {
 	 * 
 	 * @param vendorName
 	 *            Vendors (company) name
-	 * @param applicationName
-	 *            name of the application
+	 * @param productName
+	 *            name of the product
 	 * @param moduleName
 	 *            name of the module, which was used inside the application
 	 * @param contactInformation
 	 *            contact information
 	 */
-	public VendorInformation(String vendorName, String applicationName, String moduleName,
+	public VendorInformation(String vendorName, String productName, String moduleName,
 			String contactInformation) {
 		setVendorName(vendorName);
-		setApplicationName(applicationName);
+		setProductName(productName);
 		setModuleName(moduleName);
 		setContactInformation(contactInformation);
-	}
-
-	/**
-	 * Gets the application name.
-	 * 
-	 * @return application name
-	 */
-	public String getApplicationName() {
-		return applicationName;
 	}
 
 	/**
@@ -92,26 +83,21 @@ public class VendorInformation {
 	}
 
 	/**
+	 * Gets the application name.
+	 * 
+	 * @return application name
+	 */
+	public String getProductName() {
+		return productName;
+	}
+
+	/**
 	 * Gets the vendor name
 	 * 
 	 * @return the vendors name
 	 */
 	public String getVendorName() {
 		return vendorName;
-	}
-
-	/**
-	 * Sets the application name
-	 * 
-	 * @param applicationName
-	 *            name of the application
-	 */
-	public void setApplicationName(String applicationName) {
-		if (applicationName == null) {
-			this.applicationName = DEFAULT_APPLICATION_NAME;
-		} else {
-			this.applicationName = applicationName;
-		}
 	}
 
 	/**
@@ -139,6 +125,20 @@ public class VendorInformation {
 			this.moduleName = DEFAULT_MODULE_NAME;
 		} else {
 			this.moduleName = moduleName;
+		}
+	}
+
+	/**
+	 * Sets the application name
+	 * 
+	 * @param productName
+	 *            name of the application
+	 */
+	public void setProductName(String productName) {
+		if (productName == null) {
+			this.productName = DEFAULT_PRODUCT_NAME;
+		} else {
+			this.productName = productName;
 		}
 	}
 

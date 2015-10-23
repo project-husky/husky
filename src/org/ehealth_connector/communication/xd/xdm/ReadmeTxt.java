@@ -35,13 +35,13 @@ public class ReadmeTxt {
 	/** The log service. */
 	private static Logger logService = Logger.getLogger(ReadmeTxt.class.getName());
 
-	/** The InputStream */
-	private InputStream is = null;
-
 	/** The Constant TEMPLATE_EN. */
 	public static final String TEMPLATE_EN = "Vendor name: {0}\n" + "Product: {1}\n"
-			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: {4}\n"
+			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: See {4}\n"
 			+ "Creation timestamp: {5}\n";
+
+	/** The InputStream */
+	private InputStream inputStream = null;
 
 	/**
 	 * Creates a new README.TXT based on the given InputStream.
@@ -50,7 +50,7 @@ public class ReadmeTxt {
 	 *            the readme txt stream
 	 */
 	public ReadmeTxt(InputStream readmeTxtStream) {
-		is = readmeTxtStream;
+		inputStream = readmeTxtStream;
 	}
 
 	/**
@@ -77,11 +77,11 @@ public class ReadmeTxt {
 		logService.debug("Creating the README.TXT file");
 
 		Object[] values = new Object[] { vendorInfo.getVendorName(),
-				vendorInfo.getApplicationName(), vendorInfo.getModuleName(),
+				vendorInfo.getProductName(), vendorInfo.getModuleName(),
 				EHealthConnectorVersions.getCurrentVersion(), vendorInfo.getContactInformation(),
 				new Date().toString() };
 		String str = MessageFormat.format(TEMPLATE_EN, values);
-		is = new ByteArrayInputStream(str.getBytes());
+		inputStream = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
@@ -90,6 +90,6 @@ public class ReadmeTxt {
 	 * @return the input stream
 	 */
 	public InputStream getInputStream() {
-		return is;
+		return inputStream;
 	}
 }

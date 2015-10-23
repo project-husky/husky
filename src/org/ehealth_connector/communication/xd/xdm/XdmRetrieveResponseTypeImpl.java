@@ -28,8 +28,8 @@ import org.openhealthtools.ihe.xds.response.impl.XDSRetrieveResponseTypeImpl;
  * volume. It also contains errors, which might occur during the import process.
  *
  */
-public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl implements
-XDSRetrieveResponseType {
+public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
+		implements XDSRetrieveResponseType {
 
 	private List<XDSDocument> attachments;
 

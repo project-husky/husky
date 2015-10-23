@@ -66,20 +66,20 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class XdmContents {
 
-	/** The log. */
+	/** The logger. */
 	private static Logger log = Logger.getLogger(XdmContents.class.getName());
 
 	/** The xdm index. */
-	static private String XDM_INDEX = "INDEX.HTM";
+	private static String XDM_INDEX = "INDEX.HTM";
 
 	/** The xdm metadata. */
-	static private String XDM_METADATA = "METADATA.XML";
+	private static String XDM_METADATA = "METADATA.XML";
 
 	/** The xdm payload root. */
-	static private String XDM_PAYLOAD_ROOT = "IHE_XDM";
+	private static String XDM_PAYLOAD_ROOT = "IHE_XDM";
 
 	/** The xdm readme. */
-	static private String XDM_README = "README.TXT";
+	private static String XDM_README = "README.TXT";
 
 	/** The index htm. */
 	private IndexHtm indexHtm;
@@ -238,8 +238,8 @@ public class XdmContents {
 			FileOutputStream outputStream = new FileOutputStream(targetFile);
 			createZip(outputStream, txnData);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("FileNotFoundException during target file creation. ", e);
 		}
 	}
 
@@ -391,7 +391,7 @@ public class XdmContents {
 		docRoot.setSubmitObjectsRequest(submit);
 
 		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-		.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
+				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
 
 		xml.getContents().add(docRoot);
 		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
@@ -616,8 +616,8 @@ public class XdmContents {
 							@SuppressWarnings("unused")
 							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
 							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-							.createResource(URI
-									.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
+									.createResource(URI
+											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
 							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 							resources.load(bais, null);
 							@SuppressWarnings("rawtypes")
@@ -659,7 +659,7 @@ public class XdmContents {
 												.getRepositoryUniqueId());
 										txnData.getDocList().add(xdsDocument);
 										txnData.getMetadata().getDocumentEntry()
-										.add(EcoreUtil.copy(xdsDocumentEntry));
+												.add(EcoreUtil.copy(xdsDocumentEntry));
 									} else {
 										log.error(XDM_METADATA + " in XDM submission folder "
 												+ subsetDirspec + " has XDSDocumentEntry.URI '"

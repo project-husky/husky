@@ -109,6 +109,9 @@ public class DocumentMetadata {
 			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
 		}
+		// There is another bug in the extractAuthorPerson Member. When the
+		// author has no id, the authorPerson object is not extracted. No
+		// workaround yet.
 
 		cda.getAuthors().add(author.copyMdhtAuthor());
 
