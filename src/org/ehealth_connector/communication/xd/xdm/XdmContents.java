@@ -107,7 +107,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT files
 	 * as according objects
-	 * 
+	 *
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -124,7 +124,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with a given filePath, pointing to an
 	 * existing zip file.
-	 * 
+	 *
 	 * @param filePath
 	 *            the file path to an existing zip file, which holds the
 	 *            contents of an xdm volume
@@ -142,7 +142,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT
 	 * files, which will be read from given files paths.
-	 * 
+	 *
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -336,7 +336,7 @@ public class XdmContents {
 	 * list of all documents from all submission sets. It does not contain the
 	 * full XDS Metadata for each document. If you want to get this data, please
 	 * use the getDocumentAndMetadata method.
-	 * 
+	 *
 	 * @return The OHT XDSResponseType
 	 */
 	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
@@ -391,7 +391,7 @@ public class XdmContents {
 		docRoot.setSubmitObjectsRequest(submit);
 
 		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
+		.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
 
 		xml.getContents().add(docRoot);
 		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
@@ -403,7 +403,7 @@ public class XdmContents {
 	/**
 	 * Checks if the integritiy values (hash and size) for the documents are the
 	 * same as in the metadata.
-	 * 
+	 *
 	 * @return false, if the values don´t match, true otherwise
 	 */
 	private boolean documentsIntegrityCheck() {
@@ -469,7 +469,7 @@ public class XdmContents {
 
 	/**
 	 * Gets the metadata xml input stream.
-	 * 
+	 *
 	 * @param metadataXml
 	 *
 	 * @return the metadata xml input stream
@@ -540,7 +540,7 @@ public class XdmContents {
 
 	/**
 	 * Checks if Submit Transaction Data contains a valid dataset
-	 * 
+	 *
 	 * @param submissionSetNumber
 	 *            number of the dataset that should be checked
 	 * @return true, if SubmitTransactionData has no valid data. false
@@ -616,8 +616,8 @@ public class XdmContents {
 							@SuppressWarnings("unused")
 							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
 							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-									.createResource(URI
-											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
+							.createResource(URI
+									.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
 							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 							resources.load(bais, null);
 							@SuppressWarnings("rawtypes")
@@ -659,7 +659,7 @@ public class XdmContents {
 												.getRepositoryUniqueId());
 										txnData.getDocList().add(xdsDocument);
 										txnData.getMetadata().getDocumentEntry()
-												.add(EcoreUtil.copy(xdsDocumentEntry));
+										.add(EcoreUtil.copy(xdsDocumentEntry));
 									} else {
 										log.error(XDM_METADATA + " in XDM submission folder "
 												+ subsetDirspec + " has XDSDocumentEntry.URI '"
