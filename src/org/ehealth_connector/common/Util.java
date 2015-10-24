@@ -256,25 +256,28 @@ public class Util {
 	public static CustodianOrganization createCustodianOrganizationFromOrganization(
 			Organization organization) {
 		// create and set the mdht RepresentedCustodianOrganization Object
-		final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
-				.createCustodianOrganization();
+		if (organization != null) {
+			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
+					.createCustodianOrganization();
 
-		ON on = DatatypesFactory.eINSTANCE.createON();
-		on.addText(organization.getName());
-		mdhtCustOrg.setName(on);
+			ON on = DatatypesFactory.eINSTANCE.createON();
+			on.addText(organization.getName());
+			mdhtCustOrg.setName(on);
 
-		// take the first address and set it as CustodianAdress
-		if (organization.getMdhtOrganization().getAddrs().size() > 0) {
-			mdhtCustOrg
-					.setAddr(EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+			// take the first address and set it as CustodianAdress
+			if (organization.getMdhtOrganization().getAddrs().size() > 0) {
+				mdhtCustOrg.setAddr(
+						EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+			}
+
+			// take the first telecom and set it as CustodianTelecom
+			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
+				mdhtCustOrg.setTelecom(
+						EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
+			}
+			return mdhtCustOrg;
 		}
-
-		// take the first telecom and set it as CustodianTelecom
-		if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
-			mdhtCustOrg.setTelecom(
-					EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
-		}
-		return mdhtCustOrg;
+		return null;
 	}
 
 	/**

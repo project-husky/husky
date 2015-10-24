@@ -20,6 +20,7 @@ import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Util;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
@@ -35,10 +36,14 @@ public class MedicationTargetEntry
 	 */
 	public MedicationTargetEntry() {
 		super(CHFactory.eINSTANCE.createMedicationTargetEntry().init(), null, null);
+		this.getMdht().getTemplateIds().clear();
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().add(
 				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason")
 						.getIi());
+
+		Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", UUID.generate());
+		this.setSoftwareCreatedId(id);
 	}
 
 	/**
