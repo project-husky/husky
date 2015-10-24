@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.fhir;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -29,6 +29,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.ActiveProblemConcern;
+import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.AllergyProblem;
+import org.ehealth_connector.cda.CdaChVacd;
+import org.ehealth_connector.cda.CodedResults;
+import org.ehealth_connector.cda.Consumable;
+import org.ehealth_connector.cda.GestationalAge;
+import org.ehealth_connector.cda.Immunization;
+import org.ehealth_connector.cda.ImmunizationRecommendation;
+import org.ehealth_connector.cda.LaboratoryObservation;
+import org.ehealth_connector.cda.PastProblemConcern;
+import org.ehealth_connector.cda.PregnancyHistory;
+import org.ehealth_connector.cda.Problem;
+import org.ehealth_connector.cda.Reason;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
@@ -85,10 +99,10 @@ import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
 
 /**
- * FhirCdaChVacd supports the creation of a CDA-CH-CH document from HL7 FHIR
- * Resource The content of these resources is not currently documented and are
- * dervived resources from FHIR. These resources may be created by the class
- * org.ehealth_connector.demo.cda.VACDResources. This is currently the one any
+ * FhirCdaChVacd supports the creation of a CDA-CH-CH document from a HL7 FHIR
+ * Resource. The content of these resources is not currently documented and they are
+ * derived resources from FHIR. These resources may be created by the class
+ * org.ehealth_connector.demo.fhir.VACDResources. This is currently the one any
  * only way to create valid FHIR document resources for CDA-CH-VACD. You may
  * edit these FHIR resources in a text editor in order to change the payload of
  * the resulting CdaChVacd object on your own risk.
