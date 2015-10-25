@@ -35,6 +35,7 @@ public class CriterionEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ch.
 	public CriterionEntry() {
 		super(CHFactory.eINSTANCE.createCriterionEntry().init());
 		// cannot add it in the model because VACD has the same templateId
+		this.getMdht().getTemplateIds().clear();
 		this.getMdht().getTemplateIds().add(
 				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category")
 						.getIi());

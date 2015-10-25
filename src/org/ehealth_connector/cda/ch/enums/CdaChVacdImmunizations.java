@@ -94,7 +94,7 @@ public enum CdaChVacdImmunizations {
 	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "");
 
 	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.3";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD immunizations";

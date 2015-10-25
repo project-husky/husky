@@ -166,7 +166,6 @@ public class Reason extends MedicationTargetEntry {
 	private void initExtRef() {
 		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
 		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
-		// FIXME mReason.getReferences().add(mExtRef);
 		mExtRef.setExternalDocument(e);
 
 		// Fix Template ID

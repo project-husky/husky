@@ -150,7 +150,7 @@ public class ImmunizationRecommendation
 		// automatically with mdht
 		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
-				entryRelationShip.setNegationInd(false);
+				entryRelationShip.setInversionInd(false);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 			}
 		}
@@ -510,7 +510,7 @@ public class ImmunizationRecommendation
 	 */
 	public void setCommentEntry(CommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
-		// need to add the the Subj and negationIns, cannot do this
+		// need to add the the Subj and inversiond, cannot do this
 		// automatically with mdht
 		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getAct() == commentEntry.getMdht()) {

@@ -133,7 +133,7 @@ public class ImmunizationTests {
 		assertEquals(1, nodes.getLength());
 
 		expr = xpath.compile(
-				"substanceadministration/entryRelationship[@typeCode='RSON' and @negationInd='false']/observation[@classCode='OBS' and @moodCode='EVN']/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
+				"substanceadministration/entryRelationship[@typeCode='RSON' and @inversionInd='false']/observation[@classCode='OBS' and @moodCode='EVN']/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}

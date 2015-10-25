@@ -323,14 +323,8 @@ public class Consumable extends EFacade<org.openhealthtools.mdht.uml.cda.Consuma
 			CE ce = DatatypesFactory.eINSTANCE.createCE();
 			if (whoAtcCode != null) {
 				ce = whoAtcCode.getCE();
-				// FIXME schematron to strong? cda-ch-vacd_ru00119 /
-				// cda-ch-vacd_as00447
-				ce.setOriginalText(Util.createReference(""));
 			} else {
 				ce.setNullFlavor(NullFlavor.UNK);
-				// FIXME schematron to strong? cda-ch-vacd_ru00119 /
-				// cda-ch-vacd_as00447
-				ce.setOriginalText(Util.createReference(""));
 			}
 			getManufacturedMaterial().setCode(ce);
 		}

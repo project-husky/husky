@@ -71,7 +71,7 @@ public class MedicationTargetEntryTests {
 		Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile(
-				"observation/code[@code='68525005' and @codeSystem='2.16.756.5.30.1.127.3.3.3']");
+				"observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -89,7 +89,7 @@ public class MedicationTargetEntryTests {
 		Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile(
-				"observation/code[@code='76668005' and @codeSystem='2.16.756.5.30.1.127.3.3.3']");
+				"observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

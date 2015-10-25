@@ -190,7 +190,7 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 		// automatically with mdht
 		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
-				entryRelationShip.setNegationInd(false);
+				entryRelationShip.setInversionInd(false);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 			}
 		}
