@@ -29,17 +29,16 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Composition;
-import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.HealthcareService;
 
 /**
- * FhirXdTransaction supports the creation of destination and submission-set from a HL7 FHIR
- * Resource. The content of these resources is not currently documented. They are
- * derived resources from FHIR. These resources may be created by the class
- * org.ehealth_connector.demo.fhir.XDResources. This is currently the one any
- * only way to create valid FHIR document resources for XD Transactions. You may
- * edit these FHIR resources in a text editor in order to change the payload of
- * the resulting objects on your own risk.
+ * FhirXdTransaction supports the creation of destination and submission-set
+ * from a HL7 FHIR Resource. The content of these resources is not currently
+ * documented. They are derived resources from FHIR. These resources may be
+ * created by the class org.ehealth_connector.demo.fhir.XDResources. This is
+ * currently the one any only way to create valid FHIR document resources for XD
+ * Transactions. You may edit these FHIR resources in a text editor in order to
+ * change the payload of the resulting objects on your own risk.
  * 
  * @see "https://www.hl7.org/fhir/"
  */
@@ -52,7 +51,7 @@ public class FhirXdTransaction {
 	public static class Transaction extends Basic {
 
 		/** The Constant serialVersionUID. */
-		//TODO: Neue Konstante, da diese gleich ist wie VacdDocument
+		// TODO: Neue Konstante, da diese gleich ist wie VacdDocument
 		private static final long serialVersionUID = -1316775746486313864L;
 
 		/** The Constant urnUseAsAffinityDomain. */
@@ -74,44 +73,12 @@ public class FhirXdTransaction {
 		private List<ResourceReferenceDt> submissionSets;
 
 		/**
-		 * Sets the affinityDomain.
-		 *
-		 * @param affinityDomain
-		 *            the affinityDomain
-		 */
-		public void setAffinityDomain(HealthcareService affinityDomain) {
-			//TODO
-//			if (activeProblemConcernEntries == null) {
-//				activeProblemConcernEntries = new ArrayList<ResourceReferenceDt>();
-//			}
-//			ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-//			resourceRef.setResource(activeProbemlConcernEntry);
-//			this.activeProblemConcernEntries.add(resourceRef);
-		}
-
-		/**
-		 * Gets the affinityDomain.
-		 *
-		 * @return the affinity domain
-		 */
-		public HealthcareService getAffinityDomain() {
-//			ArrayList<Condition> list = new ArrayList<Condition>();
-//			if (this.activeProblemConcernEntries != null) {
-//				for (ResourceReferenceDt resource : this.activeProblemConcernEntries) {
-//					list.add((Condition) resource.getResource());
-//				}
-//			}
-//			return list;
-			return null;
-		}
-		
-		/**
 		 * Adds a submission-set.
-		 *
-		 * @param submission-set
-		 *            the submission-set
+		 * 
+		 * @param submission
+		 *            -set the submission-set
 		 */
-		public void addSubmissionSet(Composition submissionSet){
+		public void addSubmissionSet(Composition submissionSet) {
 			if (submissionSets == null) {
 				submissionSets = new ArrayList<ResourceReferenceDt>();
 			}
@@ -120,7 +87,40 @@ public class FhirXdTransaction {
 			this.submissionSets.add(resourceRef);
 		}
 
-		
+		/**
+		 * Gets the affinityDomain.
+		 * 
+		 * @return the affinity domain
+		 */
+		public HealthcareService getAffinityDomain() {
+			// ArrayList<Condition> list = new ArrayList<Condition>();
+			// if (this.activeProblemConcernEntries != null) {
+			// for (ResourceReferenceDt resource :
+			// this.activeProblemConcernEntries) {
+			// list.add((Condition) resource.getResource());
+			// }
+			// }
+			// return list;
+			return null;
+		}
+
+		/**
+		 * Sets the affinityDomain.
+		 * 
+		 * @param affinityDomain
+		 *            the affinityDomain
+		 */
+		public void setAffinityDomain(HealthcareService affinityDomain) {
+			// TODO
+			// if (activeProblemConcernEntries == null) {
+			// activeProblemConcernEntries = new
+			// ArrayList<ResourceReferenceDt>();
+			// }
+			// ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			// resourceRef.setResource(activeProbemlConcernEntry);
+			// this.activeProblemConcernEntries.add(resourceRef);
+		}
+
 	};
 
 	/** The m fhir ctx. */
@@ -135,15 +135,16 @@ public class FhirXdTransaction {
 
 	/**
 	 * Creates the affinity domain setting from fhir bundle.
-	 *
+	 * 
 	 * @param fhirDoc
 	 *            the fhir doc
 	 * @return the affinity domain setting
 	 */
-	public org.ehealth_connector.communication.AffinityDomain createAffinityDomainFromFHIRBundle(Transaction fhirDoc) {
+	public org.ehealth_connector.communication.AffinityDomain createAffinityDomainFromFHIRBundle(
+			Transaction fhirDoc) {
 
 		AffinityDomain ad = new AffinityDomain();
-		//TODO
+		// TODO
 
 		return ad;
 	}
