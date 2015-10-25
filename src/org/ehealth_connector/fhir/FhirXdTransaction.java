@@ -16,9 +16,7 @@
 
 package org.ehealth_connector.fhir;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.eclipse.ohf.utilities.UUID;
 import org.ehealth_connector.communication.AffinityDomain;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -27,9 +25,11 @@ import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
-import ca.uhn.fhir.model.dstu2.resource.Basic;
-import ca.uhn.fhir.model.dstu2.resource.Composition;
+import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.DocumentManifest;
+import ca.uhn.fhir.model.dstu2.resource.DocumentReference;
 import ca.uhn.fhir.model.dstu2.resource.HealthcareService;
+import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 
 /**
  * FhirXdTransaction supports the creation of destination and submission-set
@@ -47,8 +47,8 @@ public class FhirXdTransaction {
 	/**
 	 * The Class VacdDocument.
 	 */
-	@ResourceDef(name = "Transaction")
-	public static class Transaction extends Basic {
+	@ResourceDef(name = "Bundle")
+	public static class Transaction extends Bundle {
 
 		/** The Constant serialVersionUID. */
 		// TODO: Neue Konstante, da diese gleich ist wie VacdDocument
@@ -58,7 +58,7 @@ public class FhirXdTransaction {
 		public static final String urnUseAsAffinityDomain = "urn:ehealth_connector:FhirExtension:useAsAffinityDomain";
 
 		/** The Constant urnUseAsSubmissionSets. */
-		public static final String urnUseAsSubmissionSets = "urn:ehealth_connector:FhirExtension:useAsSubmissionSets";
+		public static final String urnUseAsSubmissionSet = "urn:ehealth_connector:FhirExtension:useAsSubmissionSet";
 
 		/** The affinity domain setting. */
 		@Child(name = "affinityDomain", max = 1)
@@ -67,24 +67,37 @@ public class FhirXdTransaction {
 		private ResourceReferenceDt affinityDomain;
 
 		/** The submission-sets. */
-		@Child(name = "submissionSets", max = Child.MAX_UNLIMITED)
-		@Extension(url = urnUseAsSubmissionSets, definedLocally = false, isModifier = true)
-		@Description(shortDefinition = "submissionSets")
-		private List<ResourceReferenceDt> submissionSets;
+		@Child(name = "submissionSet", max = Child.MAX_UNLIMITED)
+		@Extension(url = urnUseAsSubmissionSet, definedLocally = false, isModifier = true)
+		@Description(shortDefinition = "submissionSet")
+		private ResourceReferenceDt submissionSet;
+
+		public Transaction() {
+			setType(BundleTypeEnum.COLLECTION);
+		}
 
 		/**
 		 * Adds a submission-set.
 		 * 
 		 * @param submission
-		 *            -set the submission-set
+		 *            - add the submission-set
 		 */
-		public void addSubmissionSet(Composition submissionSet) {
-			if (submissionSets == null) {
-				submissionSets = new ArrayList<ResourceReferenceDt>();
-			}
-			ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(submissionSet);
-			this.submissionSets.add(resourceRef);
+		public void addSubmissionSet(DocumentManifest submissionSet) {
+			Entry entry = this.addEntry();
+			entry.setResource(submissionSet);
+			entry.setFullUrl(UUID.generateURN());
+		}
+
+		/**
+		 * Adds a document
+		 * 
+		 * @param document
+		 *            - add the document
+		 */
+		public void addDocument(DocumentReference document) {
+			Entry entry = this.addEntry();
+			entry.setResource(document);
+			entry.setFullUrl(UUID.generateURN());
 		}
 
 		/**
