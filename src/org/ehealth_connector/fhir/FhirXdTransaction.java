@@ -45,7 +45,7 @@ import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 public class FhirXdTransaction {
 
 	/**
-	 * The Class VacdDocument.
+	 * The Class Transaction.
 	 */
 	@ResourceDef(name = "Bundle")
 	public static class Transaction extends Bundle {
@@ -125,13 +125,6 @@ public class FhirXdTransaction {
 		 */
 		public void setAffinityDomain(HealthcareService affinityDomain) {
 			// TODO
-			// if (activeProblemConcernEntries == null) {
-			// activeProblemConcernEntries = new
-			// ArrayList<ResourceReferenceDt>();
-			// }
-			// ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			// resourceRef.setResource(activeProbemlConcernEntry);
-			// this.activeProblemConcernEntries.add(resourceRef);
 		}
 
 	};
