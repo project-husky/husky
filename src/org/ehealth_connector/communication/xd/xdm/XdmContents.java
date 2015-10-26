@@ -133,9 +133,11 @@ public class XdmContents {
 		this();
 		try {
 			this.zipFile = new ZipFile(filePath);
+			if (zipFile == null)
+				throw new IOException();
 		} catch (IOException e) {
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
-			log.error("IO Exception during zip creation. ", e);
+			log.error("IO Exception during read of " + filePath, e);
 		}
 	}
 
@@ -170,7 +172,13 @@ public class XdmContents {
 	 */
 	public XdmContents(ZipFile zipFile) {
 		this();
-		this.zipFile = zipFile;
+		try {
+			if (zipFile == null)
+				throw new IOException();
+		} catch (IOException e) {
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("IO Exception during read of ZipFile", e);
+		}
 	}
 
 	/**
@@ -550,8 +558,16 @@ public class XdmContents {
 		if (submissionSetNumber > txnData.length || submissionSetNumber < 0) {
 			return true;
 		} else {
-			if (txnData[submissionSetNumber] == null) {
+			if (txnData == null) {
 				return true;
+			} else {
+				if (txnData.length < 0) {
+					return true;
+				} else {
+					if (txnData[submissionSetNumber] == null) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;
