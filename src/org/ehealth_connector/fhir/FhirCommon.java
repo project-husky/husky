@@ -18,6 +18,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsReason = "urn:ehealth_connector:FhirExtension:useAsReason";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsMimeType = "urn:ehealth_connector:FhirExtension:useAsMimeType";
 
 	/**

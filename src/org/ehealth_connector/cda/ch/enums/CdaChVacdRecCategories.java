@@ -42,7 +42,8 @@ public enum CdaChVacdRecCategories {
 			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", ""),
 
 	/** The no rec. */
-	NO_REC("41504", "Impfungen ohne Empfehlungen", "Vaccinations sans recommandation d’utilisation",
+	NO_REC("41504", "Impfungen ohne Empfehlungen",
+			"Vaccinations sans recommandation d’utilisation",
 			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", "");
 
 	/** The Constant CODE_SYSTEM_OID. */
@@ -73,9 +74,9 @@ public enum CdaChVacdRecCategories {
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
-	 *
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayNameDe
 	 *            the display name de
@@ -99,11 +100,11 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
-	 *
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -117,9 +118,9 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
-	 *
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * 
 	 * @param languageCode
 	 *            the language code
 	 * @return <div class="en">the code</div>
@@ -164,13 +165,43 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>.
-	 *
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>.
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
 		return code;
+	}
+
+	/**
+	 * <div class="en">Gets the german display name.</div> <div
+	 * class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameDe() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the french display name.</div> <div
+	 * class="de">Liefert display name in französischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameFr() {
+		return displayNameFr;
+	}
+
+	/**
+	 * <div class="en">Gets the italian display name.</div> <div
+	 * class="de">Liefert display name in italienischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameIt() {
+		return displayNameIt;
 	}
 
 	/**
@@ -180,7 +211,7 @@ public enum CdaChVacdRecCategories {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -194,7 +225,7 @@ public enum CdaChVacdRecCategories {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -209,7 +240,7 @@ public enum CdaChVacdRecCategories {
 
 	/**
 	 * Checks if the code is valid now.
-	 *
+	 * 
 	 * @return true, if is valid
 	 */
 	public boolean isValid() {
@@ -218,7 +249,7 @@ public enum CdaChVacdRecCategories {
 
 	/**
 	 * Checks if the code is valid for the specified date
-	 *
+	 * 
 	 * @param date
 	 *            the date
 	 * @return true, if is valid
