@@ -51,8 +51,7 @@ public class FhirXdTransaction {
 	public static class Transaction extends Bundle {
 
 		/** The Constant serialVersionUID. */
-		// TODO: Neue Konstante, da diese gleich ist wie VacdDocument
-		private static final long serialVersionUID = -1316775746486313864L;
+		private static final long serialVersionUID = -928980987511039196L;
 
 		/** The Constant urnUseAsAffinityDomain. */
 		public static final String urnUseAsAffinityDomain = "urn:ehealth_connector:FhirExtension:useAsAffinityDomain";
