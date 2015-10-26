@@ -175,6 +175,9 @@ public class XdmContents {
 		try {
 			if (zipFile == null)
 				throw new IOException();
+			else {
+				this.zipFile = zipFile;
+			}
 		} catch (IOException e) {
 			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
 			log.error("IO Exception during read of ZipFile", e);
