@@ -70,8 +70,8 @@ public class ConvenienceCommunicationTest {
 		try {
 
 			c = new ConvenienceCommunication(affinityDomain, AtnaConfigMode.UNSECURE,
-					DocumentMetadataExtractionMode.defaultExtraction,
-					SubmissionSetMetadataExtractionMode.defaultExtraction);
+					DocumentMetadataExtractionMode.DEFAULT_EXTRACTION,
+					SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

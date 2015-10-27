@@ -15,6 +15,9 @@
  *******************************************************************************/
 package org.ehealth_connector.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -35,19 +38,33 @@ public class ZipCreator {
 
 	/**
 	 * Creates a new Object which provides the needed methods
-	 * 
+	 *
 	 * @param outputStream
 	 *            the outputStream, which is used to write the contents to
 	 */
 	public ZipCreator(OutputStream outputStream) {
-		logService.debug("creating zipfile");
-
 		out = new ZipOutputStream(outputStream);
 	}
 
 	/**
+	 * Creates a new Object which provides the needed methods
+	 *
+	 * @param filePath
+	 *            the path to the file, which is used to write the contents to
+	 */
+	public ZipCreator(String filePath) {
+		OutputStream outputStream;
+		try {
+			outputStream = new FileOutputStream(new File(filePath));
+			out = new ZipOutputStream(outputStream);
+		} catch (FileNotFoundException e) {
+			logService.error("Failed to create target file for zip outputstream.", e);
+		}
+	}
+
+	/**
 	 * Adds an InputStream as ZipEntry to the ZipFile
-	 * 
+	 *
 	 * @param data
 	 *            Contains the file to compress as a bytearray
 	 * @param pathInZipFile
@@ -77,7 +94,7 @@ public class ZipCreator {
 	/**
 	 * Closes the stream. It only has to be called when no more entries will be
 	 * added.
-	 * 
+	 *
 	 * @throws IOException
 	 *             if the file could not be read
 	 */

@@ -42,10 +42,10 @@ public enum SubmissionSetMetadataExtractionMode {
 	 * </table>
 	 * </div>
 	 */
-	defaultExtraction,
+	DEFAULT_EXTRACTION,
 
 	/**
 	 * <div class="en">No metadata will be extracted, automatically</div>
 	 */
-	noMetadataExtraction
+	NO_METADATA_EXTRACTION
 }

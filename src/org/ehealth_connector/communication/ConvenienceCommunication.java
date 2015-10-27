@@ -116,12 +116,12 @@ public class ConvenienceCommunication {
 	 * <div class="en">Determines if XDS document metadata will be extracted
 	 * automatically (e.g. from CDA documents)</div>
 	 */
-	private DocumentMetadataExtractionMode automaticDocumentMetadataExtractionMode = DocumentMetadataExtractionMode.defaultExtraction;
+	private DocumentMetadataExtractionMode automaticDocumentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 	/**
 	 * <div class="en">Determines if SubmissionSet metadata will be extracted
 	 * automatically (e.g. from CDA documents)</div>
 	 */
-	private DocumentMetadataExtractionMode automaticSubSetMetadataExtractionMode = DocumentMetadataExtractionMode.defaultExtraction;
+	private DocumentMetadataExtractionMode automaticSubSetMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
@@ -286,7 +286,7 @@ public class ConvenienceCommunication {
 			DocumentMetadata docMetadata = new DocumentMetadata(
 					txnData.getDocumentEntry(docEntryUUID));
 
-			if (automaticDocumentMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+			if (automaticDocumentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
 					// extractDocMetadataFromCda(docMetadata);
 					cdaExtractionFixes(docMetadata);
@@ -352,7 +352,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
@@ -374,7 +374,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		xdmContents.createZip(outputStream, txnData);
@@ -390,7 +390,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
@@ -411,7 +411,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		xdmContents.createZip(filePath, txnData);
@@ -794,7 +794,7 @@ public class ConvenienceCommunication {
 		// source.getAuditor().getConfig().setOption("https.protocols",
 		// "TLSv1, TLSv1.2");
 
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.defaultExtraction) {
+		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 

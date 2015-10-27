@@ -15,18 +15,17 @@
  *******************************************************************************/
 package org.ehealth_connector.util;
 
-
 /**
  * Class that contains information about a vendor and its applications.
- * 
+ *
  */
 public class VendorInformation {
 
 	// Default values, will be used, if the user does not provide his own
 	// information.
-	public static final String DEFAULT_PRODUCT_NAME = "eHealth Connector - http://ehealth-connector.org";
 	public static final String DEFAULT_CONTACT_INFORMATION = "http://sourceforge.net/p/ehealthconnector/wiki/Team";
 	public static final String DEFAULT_MODULE_NAME = "Convenience API";
+	public static final String DEFAULT_PRODUCT_NAME = "eHealth Connector - http://ehealth-connector.org";
 	public static final String DEFAULT_VENDOR_NAME = "Open Source";
 
 	private String contactInformation;
@@ -44,7 +43,7 @@ public class VendorInformation {
 
 	/**
 	 * Constructor. Individual values can be provided.
-	 * 
+	 *
 	 * @param vendorName
 	 *            Vendors (company) name
 	 * @param productName
@@ -64,7 +63,7 @@ public class VendorInformation {
 
 	/**
 	 * Gets the contact information
-	 * 
+	 *
 	 * @return contact information
 	 */
 	public String getContactInformation() {
@@ -73,7 +72,7 @@ public class VendorInformation {
 
 	/**
 	 * Gets the module name
-	 * 
+	 *
 	 * @return the modules name
 	 */
 	public String getModuleName() {
@@ -82,7 +81,7 @@ public class VendorInformation {
 
 	/**
 	 * Gets the application name.
-	 * 
+	 *
 	 * @return application name
 	 */
 	public String getProductName() {
@@ -91,7 +90,7 @@ public class VendorInformation {
 
 	/**
 	 * Gets the vendor name
-	 * 
+	 *
 	 * @return the vendors name
 	 */
 	public String getVendorName() {
@@ -100,7 +99,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the contact information
-	 * 
+	 *
 	 * @param contactInformation
 	 *            the contact information
 	 */
@@ -114,7 +113,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the module name.
-	 * 
+	 *
 	 * @param moduleName
 	 *            name of the module
 	 */
@@ -128,7 +127,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the application name
-	 * 
+	 *
 	 * @param productName
 	 *            name of the application
 	 */
@@ -142,7 +141,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the vendors name.
-	 * 
+	 *
 	 * @param name
 	 *            name of the vendor
 	 */
