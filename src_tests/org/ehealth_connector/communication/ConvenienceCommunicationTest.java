@@ -20,6 +20,8 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URISyntaxException;
 
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
+import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
