@@ -45,7 +45,7 @@ public class ReadmeTxt {
 
 	/**
 	 * Creates a new README.TXT based on the given InputStream.
-	 *
+	 * 
 	 * @param readmeTxtStream
 	 *            the readme txt stream
 	 */
@@ -56,7 +56,7 @@ public class ReadmeTxt {
 	/**
 	 * Creates a new README.TXT Object based on the given txnData (default
 	 * values will be used for vendor information).
-	 *
+	 * 
 	 * @param txnData
 	 *            the SubmitTransactionData
 	 */
@@ -67,7 +67,7 @@ public class ReadmeTxt {
 	/**
 	 * Creates a new README.TXT Object based on the given txnData and the given
 	 * vendor information.
-	 *
+	 * 
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 * @param vendorInfo
@@ -76,17 +76,20 @@ public class ReadmeTxt {
 	public ReadmeTxt(SubmitTransactionData txnData, VendorInformation vendorInfo) {
 		logService.debug("Creating the README.TXT file");
 
-		Object[] values = new Object[] { vendorInfo.getVendorName(),
-				vendorInfo.getProductName(), vendorInfo.getModuleName(),
-				EHealthConnectorVersions.getCurrentVersion(), vendorInfo.getContactInformation(),
-				new Date().toString() };
+		Object[] values = new Object[] {
+				vendorInfo.getVendorName(),
+				vendorInfo.getProductName(),
+				vendorInfo.getModuleName(),
+				EHealthConnectorVersions.getCurrentVersion() + ", Release Date "
+						+ EHealthConnectorVersions.getCurrentVersion().getReleaseDate(),
+				vendorInfo.getContactInformation(), new Date().toString() };
 		String str = MessageFormat.format(TEMPLATE_EN, values);
 		inputStream = new ByteArrayInputStream(str.getBytes());
 	}
 
 	/**
 	 * Gets the INDEX.HTM contents as InputStream
-	 *
+	 * 
 	 * @return the input stream
 	 */
 	public InputStream getInputStream() {

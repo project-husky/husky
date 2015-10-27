@@ -15,21 +15,19 @@
  *******************************************************************************/
 package org.ehealth_connector.util;
 
-import org.ehealth_connector.common.EHealthConnectorVersions;
 
 /**
  * Class that contains information about a vendor and its applications.
- *
+ * 
  */
 public class VendorInformation {
 
 	// Default values, will be used, if the user does not provide his own
 	// information.
-	public static final String DEFAULT_PRODUCT_NAME = EHealthConnectorVersions
-			.getCurrentVersion().getSystemVersionName();
+	public static final String DEFAULT_PRODUCT_NAME = "eHealth Connector - http://ehealth-connector.org";
 	public static final String DEFAULT_CONTACT_INFORMATION = "http://sourceforge.net/p/ehealthconnector/wiki/Team";
 	public static final String DEFAULT_MODULE_NAME = "Convenience API";
-	public static final String DEFAULT_VENDOR_NAME = "the eHealthConnector Open Source Projekt";
+	public static final String DEFAULT_VENDOR_NAME = "Open Source";
 
 	private String contactInformation;
 	private String moduleName;
@@ -116,7 +114,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the module name.
-	 *
+	 * 
 	 * @param moduleName
 	 *            name of the module
 	 */
@@ -144,7 +142,7 @@ public class VendorInformation {
 
 	/**
 	 * Sets the vendors name.
-	 *
+	 * 
 	 * @param name
 	 *            name of the vendor
 	 */
