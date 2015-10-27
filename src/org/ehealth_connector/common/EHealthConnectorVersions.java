@@ -33,14 +33,14 @@ public enum EHealthConnectorVersions {
 	EHealthConnectorR201503("2.16.756.5.30.1.139.1.1.2", "eHealthConnector R201503", "20150401"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.3 eHealthConnector R201510
+	 * OID: 2.16.756.5.30.1.139.1.1.3 eHealthConnector Rxxxxxx
 	 */
-	EHealthConnectorR201510("2.16.756.5.30.1.139.1.1.3", "eHealthConnector R201510", "R20151030"),
+	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.3", "eHealthConnector trunk", "xxxxxxxx"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.4 eHealthConnector Rxxxxxx
+	 * OID: 2.16.756.5.30.1.139.1.1.4 eHealthConnector R201510
 	 */
-	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.4", "eHealthConnector trunk", "xxxxxxxx");
+	EHealthConnectorR201510("2.16.756.5.30.1.139.1.1.4", "eHealthConnector R201510", "R20151030");
 
 	private String oid;
 	private String systemVersionName;
@@ -52,7 +52,7 @@ public enum EHealthConnectorVersions {
 		this.releaseDate = releaseDate;
 	}
 
-	public static EHealthConnectorVersions getCurrentVersion(){
+	public static EHealthConnectorVersions getCurrentVersion() {
 		return EHealthConnectorDev;
 	}
 
@@ -67,5 +67,5 @@ public enum EHealthConnectorVersions {
 	public String oid() {
 		return oid;
 	}
-	
+
 }
