@@ -597,24 +597,18 @@ public class ConvenienceCommunication {
 	 * ITI Document Source actor
 	 *
 	 * @return the OHT XDSResponseType</div>
+	 * @throws Exception
+	 *             if the transfer is not successful
 	 */
-	public XDSResponseType submit() {
+	public XDSResponseType submit() throws Exception {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
-		// source.getAuditor().getConfig().setOption("https.protocols",
-		// "TLSv1, TLSv1.2");
 
 		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 
-		try {
-			// txnData.saveMetadataToFile("C:/temp/meta.xml");
-			return source.submit(txnData);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		return source.submit(txnData);
 	}
 
 	/**
@@ -628,8 +622,10 @@ public class ConvenienceCommunication {
 	 *            according to IHE Suisse for classification of documents in
 	 *            Switzerland.
 	 * @return the OHT XDSResponseType</div>
+	 * @throws Exception
+	 *             if the transfer is not successful
 	 */
-	public XDSResponseType submit(AuthorRole authorRole) {
+	public XDSResponseType submit(AuthorRole authorRole) throws Exception {
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		AuthorCh author = new AuthorCh();
 		author.setRoleFunction(authorRole);
@@ -651,8 +647,10 @@ public class ConvenienceCommunication {
 	 *            automatically, some may be required in your country (e.g.
 	 *            AuthorRole in Switzerland)
 	 * @return the OHT XDSResponseType</div>
+	 * @throws Exception
+	 *             if the transfer is not successful
 	 */
-	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) {
+	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit();
 	}
@@ -839,7 +837,7 @@ public class ConvenienceCommunication {
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
 			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
 		}
-		System.setProperty("javax.net.debug", "all");
+		// System.setProperty("javax.net.debug", "all");
 		// System.setProperty("https.protocols", "TLSv1.2");
 		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 		// System.setProperty("https.ciphersuites",
