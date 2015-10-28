@@ -50,6 +50,14 @@ public class MedicationTargetEntry
 	/**
 	 * Instantiates a new medication target entry.
 	 */
+	public MedicationTargetEntry(CdaChVacdImmunizations targetImmunization) {
+		this();
+		this.setImmunizationTarget(targetImmunization);
+	}
+
+	/**
+	 * Instantiates a new medication target entry.
+	 */
 	protected MedicationTargetEntry(
 			org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry, "2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason");
