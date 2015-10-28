@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch;
+package org.ehealth_connector.common.ch;
 
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.communication.ch.enums.AuthorRole;

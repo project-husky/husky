@@ -544,8 +544,8 @@ public class Author {
 	 *
 	 * @return the org.ehealth_connector.cda.ch. author ch
 	 */
-	public org.ehealth_connector.cda.ch.AuthorCh toChAuthor() {
-		return new org.ehealth_connector.cda.ch.AuthorCh(getAuthorMdht());
+	public org.ehealth_connector.common.ch.AuthorCh toChAuthor() {
+		return new org.ehealth_connector.common.ch.AuthorCh(getAuthorMdht());
 	}
 
 }

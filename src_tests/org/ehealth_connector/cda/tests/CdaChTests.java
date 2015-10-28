@@ -104,7 +104,7 @@ public class CdaChTests extends TestUtils {
 	
 	@Test 
 	public void testAuthorCd() {
-		org.ehealth_connector.cda.ch.AuthorCh b = new org.ehealth_connector.cda.ch.AuthorCh();
+		org.ehealth_connector.common.ch.AuthorCh b = new org.ehealth_connector.common.ch.AuthorCh();
 		
 		b.addId(id2);
 		assertTrue(isEqual(id2, b.getIds().get(0)));

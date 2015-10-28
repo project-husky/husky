@@ -25,9 +25,9 @@ import java.util.HashMap;
 import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.AuthorCh;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
