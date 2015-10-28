@@ -16,11 +16,14 @@
 
 package org.ehealth_connector.cda;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
@@ -39,6 +42,7 @@ import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ParentDocument;
@@ -48,6 +52,7 @@ import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.RelatedDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
+import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
@@ -60,6 +65,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
+import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil.Query;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
@@ -1113,17 +1119,35 @@ public class CdaChVacd extends CdaCh<VACD> {
 		getDoc().getRecordTargets().add(destRecordTarget);
 	}
 
-	// /**
-	// * <div class="en">Sets the MDHT-VACD Object</div> <div class="de">Setzt
-	// das
-	// * MDHT-VACD-Objekt.</div>
-	// *
-	// * @param doc
-	// * the new doc
-	// */
-	// public void setDoc(VACD doc) {
-	// super.setDoc(doc);
-	// }
+	/**
+	 * <div class="en">Stores the CDA document as XML file</div> <div
+	 * class="de">Speichert das CDA Dokument als XML Datei</div>
+	 *
+	 * @param fileName
+	 *            file name (incl. path)
+	 * @throws Exception
+	 *             the exception
+	 */
+	@Override
+	public void saveToFile(String fileName) throws Exception {
+		final File file = new File(fileName);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		final FileOutputStream oFile = new FileOutputStream(file, false);
+
+		// create emf resource
+		final CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE.createResource(URI
+				.createURI(CDAPackage.eNS_URI));
+
+		// add the document root to the resource
+		docRoot = EcoreUtil.copy(super.getDocRoot());
+		docRoot.setClinicalDocument(correctSectionSequence());
+		resource.getContents().add(docRoot);
+
+		// save resource to console
+		resource.save(oFile, null);
+	}
 
 	/**
 	 * specify the document which should be replaced by this document, see
@@ -1158,6 +1182,18 @@ public class CdaChVacd extends CdaCh<VACD> {
 			getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
 		}
 	}
+
+	// /**
+	// * <div class="en">Sets the MDHT-VACD Object</div> <div class="de">Setzt
+	// das
+	// * MDHT-VACD-Objekt.</div>
+	// *
+	// * @param doc
+	// * the new doc
+	// */
+	// public void setDoc(VACD doc) {
+	// super.setDoc(doc);
+	// }
 
 	/**
 	 * <div class="en">Sets the human readable CDA section text for the
@@ -1295,6 +1331,29 @@ public class CdaChVacd extends CdaCh<VACD> {
 		if (findRemarksSection() != null) {
 			findRemarksSection().createStrucDocText(sb.toString());
 		}
+	}
+
+	protected VACD correctSectionSequence() {
+		// Correct the order of the body sections
+		// Create a copy of the current document
+		VACD newVacd = EcoreUtil.copy(this.getMdht());
+
+		// Create a new structured body
+		StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+		newVacd.getComponent().setStructuredBody(sb);
+
+		// Copy all sections from the original document in the right order
+		VACD oldVacd = this.getMdht();
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getImmunizationsSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getActiveProblemsSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getHistoryOfPastIllnessSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getAllergiesReactionsSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getCodedResultsSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getLaboratorySpecialitySection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getPregnancyHistorySection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getImmunizationRecommendationSection());
+		Util.addSectionToStructuredBodyAsCopy(sb, oldVacd.getRemarksSection());
+		return newVacd;
 	}
 
 	/**
