@@ -16,6 +16,7 @@
 package org.ehealth_connector.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -66,7 +67,7 @@ public class ZipCreator {
 	 * Adds an InputStream as ZipEntry to the ZipFile
 	 *
 	 * @param data
-	 *            Contains the file to compress as a bytearray
+	 *            Contains the file to compress as InputStream
 	 * @param pathInZipFile
 	 *            Contains the relative path only in that zip file
 	 * @throws IOException
@@ -89,6 +90,34 @@ public class ZipCreator {
 
 			out.closeEntry();
 		}
+	}
+
+	/**
+	 * Adds a directory as ZipEntry to the ZipFile
+	 *
+	 * @param pathInZipFile
+	 *            Contains the relative path only in that zip file
+	 * @throws IOException
+	 *             if the file could not be read
+	 */
+	public void addZipItem(String pathInZipFile) throws IOException {
+		out.putNextEntry(new ZipEntry(pathInZipFile));
+		out.closeEntry();
+	}
+
+	/**
+	 * Adds an InputStream as ZipEntry to the ZipFile
+	 *
+	 * @param filePath
+	 *            Contains the path to the file to add as zip item
+	 * @param pathInZipFile
+	 *            Contains the relative path only in that zip file
+	 * @throws IOException
+	 *             if the file could not be read
+	 */
+	public void addZipItem(String filePath, String pathInZipFile) throws IOException {
+		InputStream inputStream = new FileInputStream(filePath);
+		this.addZipItem(inputStream, pathInZipFile);
 	}
 
 	/**

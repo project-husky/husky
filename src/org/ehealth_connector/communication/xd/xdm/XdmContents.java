@@ -202,8 +202,8 @@ public class XdmContents {
 
 		// Add the path structure for documents in the Zip File
 		try {
-			zip.addZipItem(null, "IHE_XDM/");
-			zip.addZipItem(null, "IHE_XDM/SUBSET01/");
+			zip.addZipItem("IHE_XDM/");
+			zip.addZipItem("IHE_XDM/SUBSET01/");
 
 			// Add each XdsDocument to the Zip File
 			int i = 0;
@@ -402,7 +402,7 @@ public class XdmContents {
 		docRoot.setSubmitObjectsRequest(submit);
 
 		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
+		.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
 
 		xml.getContents().add(docRoot);
 		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
@@ -635,8 +635,8 @@ public class XdmContents {
 							@SuppressWarnings("unused")
 							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
 							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-									.createResource(URI
-											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
+							.createResource(URI
+									.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
 							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 							resources.load(bais, null);
 							@SuppressWarnings("rawtypes")
@@ -678,7 +678,7 @@ public class XdmContents {
 												.getRepositoryUniqueId());
 										txnData.getDocList().add(xdsDocument);
 										txnData.getMetadata().getDocumentEntry()
-												.add(EcoreUtil.copy(xdsDocumentEntry));
+										.add(EcoreUtil.copy(xdsDocumentEntry));
 									} else {
 										log.error(XDM_METADATA + " in XDM submission folder "
 												+ subsetDirspec + " has XDSDocumentEntry.URI '"
