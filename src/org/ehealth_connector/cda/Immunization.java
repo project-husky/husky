@@ -487,11 +487,11 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 */
 	public void setCommentEntry(CommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
-		// need to add the the Subj and negationIns, cannot do this
+		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
 		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
-				entryRelationShip.setNegationInd(true);
+				entryRelationShip.setInversionInd(true);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 			}
 		}

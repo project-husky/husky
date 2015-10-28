@@ -514,7 +514,7 @@ public class ImmunizationRecommendation
 		// automatically with mdht
 		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
-				entryRelationShip.setNegationInd(true);
+				entryRelationShip.setInversionInd(true);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 			}
 		}

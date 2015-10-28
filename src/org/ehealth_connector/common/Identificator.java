@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.IdentityDomain;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -31,14 +30,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 public class Identificator {
 
 	private II mII;
-
-	/**
-	 * Instantiates a new identificator with a guid.
-	 */
-	public Identificator() {
-		mII = DatatypesFactory.eINSTANCE.createII();
-		mII.setRoot(UUID.generate());
-	}
 
 	/**
 	 * Erstellt einen neuen Identifikator.

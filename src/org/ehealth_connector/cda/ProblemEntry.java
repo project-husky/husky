@@ -30,6 +30,7 @@ import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
@@ -48,7 +49,7 @@ public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.P
 		// codeSystemName="SNOMEDCT"/>
 		this.getMdht().setCode(Util.createCENullFlavorUNK());
 		this.setNotOccured(false);
-		this.setId(new Identificator());
+		this.setId(new Identificator("2.16.756.5.30.1.1.1.1.3.5", UUID.generate()));
 	}
 
 	/**

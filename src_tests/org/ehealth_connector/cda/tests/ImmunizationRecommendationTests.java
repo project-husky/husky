@@ -319,7 +319,7 @@ public class ImmunizationRecommendationTests {
 		Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile(
-				"substanceadministration/entryRelationship[@typeCode='SUBJ' and @negationInd='true']/act/text/reference[@value='#reference']");
+				"substanceadministration/entryRelationship[@typeCode='SUBJ' and @inversionInd='true']/act/text/reference[@value='#reference']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
