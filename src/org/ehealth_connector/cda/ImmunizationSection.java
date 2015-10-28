@@ -16,6 +16,7 @@
 
 package org.ehealth_connector.cda;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -153,6 +154,10 @@ public class ImmunizationSection
 				.getMedicationTargetEntries();
 		if (medicationTargetEntries != null) {
 			int i = 0;
+
+			// Sort List according to
+			Collections.sort(medicationTargetEntries);
+
 			for (MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {
 				CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
 				if (vacdImmun != null) {

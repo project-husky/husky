@@ -29,7 +29,8 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * the entry and an an immunization target code
  */
 public class MedicationTargetEntry
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry> {
+		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry>
+		implements Comparable<MedicationTargetEntry> {
 
 	/**
 	 * Instantiates a new medication target entry.
@@ -186,6 +187,31 @@ public class MedicationTargetEntry
 	 */
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
+	}
+
+	@Override
+	public int compareTo(MedicationTargetEntry o) {
+
+		CdaChVacdImmunizations immunizationTarget = getImmunizationTarget();
+		CdaChVacdImmunizations otherImmunizationTarget = o.getImmunizationTarget();
+
+		if (immunizationTarget != null && otherImmunizationTarget != null) {
+			return new Integer(immunizationTarget.getSortOrder())
+					.compareTo(otherImmunizationTarget.getSortOrder());
+		}
+
+		if (immunizationTarget != null && otherImmunizationTarget == null) {
+			return -1;
+		}
+
+		if (immunizationTarget == null && otherImmunizationTarget != null) {
+			return 1;
+		}
+
+		if (immunizationTarget == null && otherImmunizationTarget == null) {
+			return 0;
+		}
+		return 0;
 	}
 
 }

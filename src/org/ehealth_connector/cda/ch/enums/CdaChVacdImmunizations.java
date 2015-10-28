@@ -29,69 +29,70 @@ import org.ehealth_connector.common.DateUtil;
 public enum CdaChVacdImmunizations {
 
 	/** The bcg. */
-	BCG("42284007", "BCG vaccination", "20130101", ""),
+	BCG("42284007", "BCG vaccination", "20130101", "", 25),
 
 	/** The diphtheria. */
-	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)", "20130101", ""),
+	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)", "20130101", "", 1),
 
 	/** The haemophilus. */
 	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)", "20130101",
-			""),
+			"", 5),
 
 	/** The hepa. */
-	HEPA("243789007", "Hepatitis A immunization (procedure)", "20130101", ""),
+	HEPA("243789007", "Hepatitis A immunization (procedure)", "20130101", "", 7),
 
 	/** The hepb. */
-	HEPB("16584000", "Hepatitis B vaccination (procedure)", "20130101", ""),
+	HEPB("16584000", "Hepatitis B vaccination (procedure)", "20130101", "", 6),
 
 	/** The influenza. */
-	INFLUENZA("86198006", "Influenza vaccination (procedure)", "20130101", ""),
+	INFLUENZA("86198006", "Influenza vaccination (procedure)", "20130101", "", 31),
 
 	/** The japanese. */
-	JAPANESE("314759000", "Japanese encephalitis vaccination (procedure)", "20130101", ""),
+	JAPANESE("314759000", "Japanese encephalitis vaccination (procedure)", "20130101", "", 32),
 
 	/** The measles. */
-	MEASLES("47435007", "Measles vaccination (procedure)", "20130101", ""),
+	MEASLES("47435007", "Measles vaccination (procedure)", "20130101", "", 8),
 
 	/** The meningococcus. */
-	MENINGOCOCCUS("41088001", "Meningococcus vaccination (procedure)", "20130101", ""),
+	MENINGOCOCCUS("41088001", "Meningococcus vaccination (procedure)", "20130101", "", 23),
 
 	/** The mumps. */
-	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", ""),
+	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", "", 9),
 
 	/** The pertussis. */
-	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", ""),
+	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", "", 3),
 
 	/** The pneumococcal. */
-	PNEUMOCOCCAL("12866006", "Pneumococcal vaccination (procedure)", "20130101", ""),
+	PNEUMOCOCCAL("12866006", "Pneumococcal vaccination (procedure)", "20130101", "", 21),
 
 	/** The poliomyelitis. */
-	POLIOMYELITIS("72093006", "Poliomyelitis vaccination (procedure)", "20130101", ""),
+	POLIOMYELITIS("72093006", "Poliomyelitis vaccination (procedure)", "20130101", "", 4),
 
 	/** The rabies. */
-	RABIES("34631000", "Rabies vaccination (procedure)", "20130101", ""),
+	RABIES("34631000", "Rabies vaccination (procedure)", "20130101", "", 33),
 
 	/** The rubella. */
-	RUBELLA("82314000", "Rubella vaccination (procedure)", "20130101", ""),
+	RUBELLA("82314000", "Rubella vaccination (procedure)", "20130101", "", 10),
 
 	/** The tetanus. */
-	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", ""),
+	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", "", 2),
 
 	/** The tickbornencephalitis. */
 	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101",
-			""),
+			"", 24),
 
 	/** The typhus. */
-	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", ""),
+	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", "", 34),
 
 	/** The papillomavirus. */
-	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", ""),
+	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "",
+			12),
 
 	/** The varicella. */
-	VARICELLA("68525005", "Varicella vaccination (procedure)", "20130101", ""),
+	VARICELLA("68525005", "Varicella vaccination (procedure)", "20130101", "", 20),
 
 	/** The yellofever. */
-	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "");
+	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "", 35);
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
@@ -111,6 +112,9 @@ public enum CdaChVacdImmunizations {
 	/** The valid to Date. */
 	private Date validTo;
 
+	/** The sort order. */
+	private int sortOrder;
+
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
@@ -124,7 +128,7 @@ public enum CdaChVacdImmunizations {
 	 *            <div class="de"> display name</div>
 	 */
 	private CdaChVacdImmunizations(String code, String displayName, String validFrom,
-			String validTo) {
+			String validTo, int sortOrder) {
 		this.code = code;
 		this.displayName = displayName;
 		if (validFrom != null && !"".equals(validFrom)) {
@@ -133,6 +137,7 @@ public enum CdaChVacdImmunizations {
 		if (validTo != null && !"".equals(validTo)) {
 			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
+		this.sortOrder = sortOrder;
 	}
 
 	/**
@@ -202,6 +207,10 @@ public enum CdaChVacdImmunizations {
 	 */
 	public String getDisplayName() {
 		return displayName;
+	}
+
+	public int getSortOrder() {
+		return sortOrder;
 	}
 
 	/**

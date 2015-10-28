@@ -91,9 +91,11 @@ public class ImmunizationSectionTests {
 
 		MedicationTargetEntry hepA = CdaChVacdTest.getMedTargetEntryHepA();
 		MedicationTargetEntry hepB = CdaChVacdTest.getMedTargetEntryHepB();
+		MedicationTargetEntry diphterie = CdaChVacdTest.getMedTargetEntryDiptherie();
 
 		immunization.addMedicationTargetEntry(hepA);
 		immunization.addMedicationTargetEntry(hepB);
+		immunization.addMedicationTargetEntry(diphterie);
 
 		CommentEntry commentEntry = new CommentEntry();
 		String comment = "Genereller Kommentar";
@@ -113,8 +115,11 @@ public class ImmunizationSectionTests {
 		immunizationSection.addImmunization(immunization, LanguageCode.GERMAN, true);
 
 		assertEquals("#is10", immunization.getTextReference());
-		assertEquals("#is13", criterionEntry.getTextReference());
-		assertEquals("#is14", commentEntry.getTextReference());
+		assertEquals("#is11", diphterie.getTextReference());
+		assertEquals("#is12", hepB.getTextReference());
+		assertEquals("#is13", hepA.getTextReference());
+		assertEquals("#is14", criterionEntry.getTextReference());
+		assertEquals("#is15", commentEntry.getTextReference());
 
 		assertEquals(comment, commentEntry.getContentIdText(immunizationSection,
 				commentEntry.getTextReference()));

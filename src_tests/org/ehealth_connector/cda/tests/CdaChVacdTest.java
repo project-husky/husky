@@ -96,6 +96,53 @@ public class CdaChVacdTest extends TestUtils {
 		super();
 	}
 
+	public static Author getArztAllzeitBereit() {
+		Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
+		Author arzt = new Author(arztName, "7608888888888");
+		Telecoms arztTelecoms = new Telecoms();
+		arztTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
+		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
+		arzt.setTelecoms(arztTelecoms);
+		return arzt;
+	}
+
+	public static Consumable getConsumableBoostrix() {
+		Consumable consumable = new Consumable("BOOSTRIX Polio Inj Susp");
+		Code whoAtc = new Code("2.16.840.1.113883.6.73", "J07CA02");
+		Organization organization = new Organization("GlaxoSmithKline");
+		consumable.setManufacturer(organization);
+		Identificator gtin = new Identificator("1.3.160", "7680006370012");
+		consumable.setManufacturedProductId(gtin);
+		consumable.setLotNr("lotNr");
+		consumable.setWhoAtcCode(whoAtc);
+		return consumable;
+	}
+
+	public static MedicationTargetEntry getMedTargetEntryDiptherie() {
+		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
+		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.DIPHTHERIA);
+		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		return medicationTargetEntry;
+	}
+
+	public static MedicationTargetEntry getMedTargetEntryHepA() {
+		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
+		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPA);
+		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		return medicationTargetEntry;
+	}
+
+	public static MedicationTargetEntry getMedTargetEntryHepB() {
+		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
+		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPB);
+		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		return medicationTargetEntry;
+	}
+
+	public static Identificator getSoftwareIdentificator() {
+		return new Identificator("1.2.3.4", "1.2.3.4");
+	}
+
 	// 2
 	public ActiveProblemConcern createActiveProblems() {
 		ActiveProblemConcern a = new ActiveProblemConcern();
@@ -196,46 +243,6 @@ public class CdaChVacdTest extends TestUtils {
 		doc.setCustodian(arztPraxis);
 		doc.addAuthor(arzt);
 		return doc;
-	}
-
-	public static Author getArztAllzeitBereit() {
-		Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
-		Author arzt = new Author(arztName, "7608888888888");
-		Telecoms arztTelecoms = new Telecoms();
-		arztTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
-		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
-		arzt.setTelecoms(arztTelecoms);
-		return arzt;
-	}
-
-	public static Consumable getConsumableBoostrix() {
-		Consumable consumable = new Consumable("BOOSTRIX Polio Inj Susp");
-		Code whoAtc = new Code("2.16.840.1.113883.6.73", "J07CA02");
-		Organization organization = new Organization("GlaxoSmithKline");
-		consumable.setManufacturer(organization);
-		Identificator gtin = new Identificator("1.3.160", "7680006370012");
-		consumable.setManufacturedProductId(gtin);
-		consumable.setLotNr("lotNr");
-		consumable.setWhoAtcCode(whoAtc);
-		return consumable;
-	}
-
-	public static Identificator getSoftwareIdentificator() {
-		return new Identificator("1.2.3.4", "1.2.3.4");
-	}
-
-	public static MedicationTargetEntry getMedTargetEntryHepA() {
-		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
-		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPA);
-		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
-		return medicationTargetEntry;
-	}
-
-	public static MedicationTargetEntry getMedTargetEntryHepB() {
-		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
-		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPB);
-		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
-		return medicationTargetEntry;
 	}
 
 	// 1
