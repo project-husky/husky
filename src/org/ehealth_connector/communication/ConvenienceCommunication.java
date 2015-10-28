@@ -128,7 +128,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
 	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
-	 *
+	 * 
 	 */
 	public ConvenienceCommunication() {
 		this.affinityDomain = null;
@@ -138,7 +138,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Instantiates a new convenience communication with the
 	 * given affinity domain set-up. ATNA audit is disabled (unsecure) </div>
-	 *
+	 * 
 	 * @param affinityDomain
 	 *            the affinity domain configuration
 	 */
@@ -150,7 +150,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Instantiates a new convenience communication with the
 	 * given affinity domain set-up.</div>
-	 *
+	 * 
 	 * @param affinityDomain
 	 *            the affinity domain configuration
 	 * @param atnaConfigMode
@@ -174,7 +174,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
-	 *
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -182,8 +182,7 @@ public class ConvenienceCommunication {
 	 *            the input stream to the document
 	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public org.ehealth_connector.communication.ch.DocumentMetadataCh addChDocument(
-			DocumentDescriptor desc, InputStream inputStream) {
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream) {
 		if (inputStream == null)
 			try {
 				throw new DocumentNotAccessibleException();
@@ -202,7 +201,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
-	 *
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -210,7 +209,7 @@ public class ConvenienceCommunication {
 	 *            the file path
 	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addChDocument(DocumentDescriptor desc, String filePath) {
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath) {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
@@ -224,7 +223,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
-	 *
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -245,7 +244,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en"> Adds a document to the XDS Submission set.
-	 *
+	 * 
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -276,7 +275,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">creates an XDM volume with default values. You have to
 	 * add a document to this class first.</div>
-	 *
+	 * 
 	 * @param outputStream
 	 *            The outputStream object where the contents will be written to.
 	 * @return the XdmContents object
@@ -295,7 +294,7 @@ public class ConvenienceCommunication {
 	 * This method will be used, if you want to create your own INDEX.HTM and
 	 * README.TXT for your XDM volume. You have to add a document to this class
 	 * first.</div>
-	 *
+	 * 
 	 * @param outputStream
 	 *            The outputStream object where the contents will be written to.
 	 * @param xdmContents
@@ -314,7 +313,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">creates an XDM volume with default values. You have to
 	 * add a document to this class first.</div>
-	 *
+	 * 
 	 * @param filePath
 	 *            The filePath where the contents will be written to.
 	 * @return the XdmContents object
@@ -331,13 +330,13 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">creates an XDM volume with default values. You have to
 	 * add a document to this class first.</div>
-	 *
+	 * 
 	 * @param filePath
 	 *            The filePath where the contents will be written to.
 	 * @param xdmContents
 	 *            The xdmContents object containing your own INDEX.HTM and
 	 *            README.TXT
-	 *
+	 * 
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
@@ -350,7 +349,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Returns the current affinity domain
-	 *
+	 * 
 	 * @return the affinity domain </div>
 	 */
 	public AffinityDomain getAffinityDomain() {
@@ -361,7 +360,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Gets the status of the automatic metadata extraction
-	 *
+	 * 
 	 * @return true, if metadata will be extracted as far as possible)
 	 *         automatically, false otherwise
 	 */
@@ -372,7 +371,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
 	 * DocumentMetadata)
-	 *
+	 * 
 	 * @return the transaction data object </div>
 	 */
 	public SubmitTransactionData getTxnData() {
@@ -381,7 +380,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Returns the contents of an existing XDM volume.
-	 *
+	 * 
 	 * @param filePath
 	 *            the XDM volume as ZipFile
 	 * @return the XDMContents
@@ -392,7 +391,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Returns the contents of an existing XDM volume.
-	 *
+	 * 
 	 * @param zipFile
 	 *            the XDM volume as ZipFile
 	 * @return the XDMContents
@@ -408,7 +407,7 @@ public class ConvenienceCommunication {
 	 * limit. In this case, precise your query or do a query for references
 	 * first, choose the possible matches (e.g. the last 10 results) and then
 	 * query for metadata.
-	 *
+	 * 
 	 * @param queryParameter
 	 *            a findDocumentsQuery object filled with your query parameters
 	 * @return the OHT XDSQueryResponseType containing references instead of the
@@ -420,7 +419,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Query a registry for documents, using a find documents query.
-	 *
+	 * 
 	 * @param queryParameter
 	 *            a findDocumentsQuery object filled with your query parameters
 	 * @param returnReferencesOnly
@@ -436,7 +435,7 @@ public class ConvenienceCommunication {
 	 * limited in the registry and your query would exceed this limit. In this
 	 * case, precise your query or do a query for references first, choose the
 	 * possible matches (e.g. the last 10 results) and then query for metadata.
-	 *
+	 * 
 	 * @param patientId
 	 *            the ID of the patient
 	 * @return the OHT XDSQueryResponseType containing references instead of the
@@ -449,7 +448,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query.
-	 *
+	 * 
 	 * @param queryParameter
 	 *            a findDocumentsQuery object filled with your query parameters
 	 * @return the OHT XDSQueryResponseType containing full document
@@ -462,7 +461,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Queries the registry of the affinity domain for all
 	 * documents of one patient.
-	 *
+	 * 
 	 * @param patientId
 	 *            the ID of the patient
 	 * @return the OHT XDSQueryResponseType containing full document
@@ -475,7 +474,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Queries the registry of the affinity domain for all
 	 * documents satisfying the given query parameters.
-	 *
+	 * 
 	 * @param query
 	 *            one of the given queries (@see
 	 *            org.ehealth_connector.communication.storedquery and
@@ -502,7 +501,7 @@ public class ConvenienceCommunication {
 	 * this limit. In this case, precise your query or do a query for references
 	 * first, choose the possible matches (e.g. the last 10 results) and then
 	 * query for metadata.
-	 *
+	 * 
 	 * @param query
 	 *            one of the given queries (@see
 	 *            org.ehealth_connector.communication.storedquery and
@@ -524,7 +523,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Retrieves a document from a Repository
-	 *
+	 * 
 	 * @param docReq
 	 *            the document request
 	 * @return the OHT XDSRetrieveResponseType </div>
@@ -536,7 +535,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Retrieves multiple documents from one or more
 	 * Repositories
-	 *
+	 * 
 	 * @param docReq
 	 *            an array of document requests
 	 * @return the OHT XDSRetrieveResponseType </div>
@@ -570,7 +569,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Sets the affinity domain set-up
-	 *
+	 * 
 	 * @param affinityDomain
 	 *            the affinity domain set-up </div>
 	 */
@@ -580,7 +579,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Sets the status of the automatic metadata extraction
-	 *
+	 * 
 	 * @param automaticExtractionEnabled
 	 *            true, if metadata will be extracted as far as possible)
 	 *            automatically, false otherwise
@@ -595,7 +594,7 @@ public class ConvenienceCommunication {
 	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
-	 *
+	 * 
 	 * @return the OHT XDSResponseType</div>
 	 * @throws Exception
 	 *             if the transfer is not successful
@@ -616,7 +615,7 @@ public class ConvenienceCommunication {
 	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
-	 *
+	 * 
 	 * @param authorRole
 	 *            The AuthorRole is one of the minimal required information
 	 *            according to IHE Suisse for classification of documents in
@@ -638,7 +637,7 @@ public class ConvenienceCommunication {
 	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
 	 * ITI Document Source actor
-	 *
+	 * 
 	 * @param submissionSetMetadata
 	 *            The information in this object will be used to create
 	 *            comprehensive meta data about this submission (e.g. with
@@ -658,7 +657,7 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Setting up the communication endpoints for the affinity
 	 * domain and the logger
-	 *
+	 * 
 	 * @param affinityDomain
 	 *            the affinity domain
 	 * @param atnaConfigMode
@@ -671,7 +670,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
-	 *
+	 * 
 	 * @param doc
 	 *            the document
 	 * @param desc
@@ -715,7 +714,7 @@ public class ConvenienceCommunication {
 	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
 	 * methods, which are unsafe, because an XDS registry might use another
 	 * value set.</div>
-	 *
+	 * 
 	 * @param docMetadata
 	 *            the doc metadata </div>
 	 */
@@ -743,7 +742,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Generate missing doc entry attributes.</div>
-	 *
+	 * 
 	 * @param docEntryUuid
 	 *            the doc entry uuid </div>
 	 */
@@ -821,7 +820,7 @@ public class ConvenienceCommunication {
 
 	/**
 	 * Sets the key- and truststore for the default security domain
-	 *
+	 * 
 	 * @param dest
 	 *            the Destination Object
 	 */
