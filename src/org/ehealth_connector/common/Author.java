@@ -68,12 +68,12 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new author.</div>
-	 * <div class="de">Instantiiert a neuen Autor</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new author.</div> <div
+	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param iAuthor
-	 *            <br>
+	 * <br>
 	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -144,8 +144,8 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Adds the name.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds the name.</div> <div class="de"></div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param name
 	 *            name
@@ -155,8 +155,8 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Copy mdht author.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Copy mdht author.</div> <div class="de"></div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return org.openhealthtools.mdht.uml.cda.author
 	 */
@@ -235,8 +235,8 @@ public class Author {
 
 	/**
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
-	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the complete name</div>
 	 */
@@ -246,13 +246,12 @@ public class Author {
 		if (mAuthor.getAssignedAuthor() != null) {
 			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
 				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
-					Name name = new Name(
-							mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+					Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
+							.get(0));
 					return name.getCompleteName();
 				} else {
 					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-						if (mAuthor.getAssignedAuthor().getRepresentedOrganization()
-								.getNames() != null) {
+						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
 							Name name = new Name(mAuthor.getAssignedAuthor()
 									.getRepresentedOrganization().getNames().get(0));
 							return name.getCompleteName();
@@ -265,9 +264,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the gln (identification of the author)</div>
-	 * <div class="de">Liefert die GLN (ID des Autors)</div>
-	 * <div class="fr"></div> <div class="it"></div>.
+	 * <div class="en">Gets the gln (identification of the author)</div> <div
+	 * class="de">Liefert die GLN (ID des Autors)</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return <div class="en">the gln</div>
 	 */
@@ -278,9 +277,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the gln as identificator.</div>
-	 * <div class="de">Liefert gln (ID des Autoren) als Identificator
-	 * Objekt.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the gln as identificator.</div> <div
+	 * class="de">Liefert gln (ID des Autoren) als Identificator Objekt.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="en">the gln as identificator</div>
 	 */
@@ -292,7 +291,7 @@ public class Author {
 
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
-	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>.
+	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the ids</div>
 	 */
@@ -301,9 +300,9 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div>
-	 * <div class="de">Liefert den (ersten) Nachnamen</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the (first) family name.</div> <div
+	 * class="de">Liefert den (ersten) Nachnamen</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @return <div class="en">the name</div>
 	 */
@@ -330,17 +329,17 @@ public class Author {
 	/**
 	 * <div class="en">Gets the organization (RepresentedOrganization). This
 	 * element can also be used as author represented organization, when a
-	 * document is beeing sent (via XDS, XDM, XDR).</div>
-	 * <div class="de">Liefert die Organisation (RepresentedOrganization), der
-	 * der Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als
+	 * document is beeing sent (via XDS, XDM, XDR).</div> <div
+	 * class="de">Liefert die Organisation (RepresentedOrganization), der der
+	 * Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als
 	 * Author Represented Organization Attribut verwendet werden, wenn das
-	 * Dokument per XDS, XDM oder XDR verschickt wird.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * Dokument per XDS, XDM oder XDR verschickt wird.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * 
-	 * @return organization <div class="en">the organization</div>
-	 *         <div class="de">die Organisation</div> <div class="fr"></div>
-	 *         <div class="it"></div>
+	 * @return organization <div class="en">the organization</div> <div
+	 *         class="de">die Organisation</div> <div class="fr"></div> <div
+	 *         class="it"></div>
 	 */
 	public Organization getOrganization() {
 		Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
@@ -386,8 +385,8 @@ public class Author {
 	 * the start time of the author’s participation in the creation of the
 	 * clinical document </div> <div class="de">Liefert die Zeit für den Autor.
 	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
-	 * Dokument mitgewirkt hat.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * 
 	 * @return date <div class="en">the start time of the participation as
@@ -468,8 +467,8 @@ public class Author {
 	 * 
 	 * @param organization
 	 *            <div class="en">the new organization</div> <div class="de">die
-	 *            neue Organisation</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            neue Organisation</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
 		mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
@@ -508,8 +507,8 @@ public class Author {
 	 * 
 	 * @param telecoms
 	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            neue telecoms.</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mAuthor.getAssignedAuthor().getTelecoms()
@@ -521,15 +520,15 @@ public class Author {
 	 * the start time of the author’s participation in the creation of the
 	 * clinical document </div> <div class="de">Setzt die Zeit für den Autor.
 	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
-	 * Dokument mitgewirkt hat.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * 
 	 * @param date
 	 *            <div class="en">the start time of the participation as
 	 *            date</div> <div class="de">den Startzeitpunkt der
-	 *            Partizipation als Date</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            Partizipation als Date</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public void setTime(Date date) {
 		try {
