@@ -25,7 +25,7 @@ import org.ehealth_connector.common.DateUtil;
  * Value Set valid from 20150101 Value-Set: CDA-CH-VACD exp-risks (OID:
  * 2.16.756.5.30.1.127.3.3.2)
  */
-public enum CdaChVacdExpRisks {
+public enum RiskOfExposure {
 
 	/** Beschäftigte im Gesundheitswesen */
 	BESCHÄFTIGTE_IM_GESUNDHEITSWESEN("213001", "Beschäftigte im Gesundheitswesen",
@@ -236,7 +236,7 @@ public enum CdaChVacdExpRisks {
 	 * @param validTo
 	 *            the valid to
 	 */
-	private CdaChVacdExpRisks(String code, String displayNameDe, String displayNameFr,
+	private RiskOfExposure(String code, String displayNameDe, String displayNameFr,
 			String displayNameIt, String validFrom, String validTo) {
 		this.code = code;
 		this.displayNameDe = displayNameDe;
@@ -259,8 +259,8 @@ public enum CdaChVacdExpRisks {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static CdaChVacdExpRisks getEnum(String code) {
-		for (CdaChVacdExpRisks x : values()) {
+	public static RiskOfExposure getEnum(String code) {
+		for (RiskOfExposure x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -391,7 +391,7 @@ public enum CdaChVacdExpRisks {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (CdaChVacdExpRisks x : values()) {
+		for (RiskOfExposure x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

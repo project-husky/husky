@@ -28,8 +28,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.AllergiesSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.CdaChVacdComplRisks;
-import org.ehealth_connector.cda.ch.enums.CdaChVacdExpRisks;
+import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
+import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.common.DateUtil;
@@ -187,7 +187,7 @@ public class ProblemEntryTests {
 		ProblemEntry entry = new ProblemEntry();
 
 		entry.setComplicationRisk(
-				CdaChVacdComplRisks.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
 				null);
 
 		Document document = entry.getDocument();
@@ -206,7 +206,7 @@ public class ProblemEntryTests {
 		assertEquals(1, nodes.getLength());
 
 		assertEquals(
-				CdaChVacdComplRisks.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
 				entry.getComplicationRisk());
 	}
 
@@ -215,7 +215,7 @@ public class ProblemEntryTests {
 		ProblemEntry entry = new ProblemEntry();
 
 		entry.setExposureRisk(
-				CdaChVacdExpRisks.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
 				null);
 
 		Document document = entry.getDocument();
@@ -234,7 +234,7 @@ public class ProblemEntryTests {
 		assertEquals(1, nodes.getLength());
 
 		assertEquals(
-				CdaChVacdExpRisks.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
 				entry.getExposureRisk());
 	}
 

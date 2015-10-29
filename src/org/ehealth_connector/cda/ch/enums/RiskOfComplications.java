@@ -25,7 +25,7 @@ import org.ehealth_connector.common.DateUtil;
  * Value Set valid from 20150101 Value-Set: CDA-CH-VACD copml-risks (OID:
  * 2.16.756.5.30.1.127.3.3.1)
  */
-public enum CdaChVacdComplRisks {
+public enum RiskOfComplications {
 
 	/** Anatomische oder funktionelle Asplenie */
 	ANATOMISCHE_ODER_FUNKTIONELLE_ASPLENIE("113001", "Anatomische oder funktionelle Asplenie",
@@ -382,7 +382,7 @@ public enum CdaChVacdComplRisks {
 	 * @param validTo
 	 *            the valid to
 	 */
-	private CdaChVacdComplRisks(String code, String displayNameDe, String displayNameFr,
+	private RiskOfComplications(String code, String displayNameDe, String displayNameFr,
 			String displayNameIt, String validFrom, String validTo) {
 		this.code = code;
 		this.displayNameDe = displayNameDe;
@@ -405,8 +405,8 @@ public enum CdaChVacdComplRisks {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static CdaChVacdComplRisks getEnum(String code) {
-		for (CdaChVacdComplRisks x : values()) {
+	public static RiskOfComplications getEnum(String code) {
+		for (RiskOfComplications x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -497,7 +497,7 @@ public enum CdaChVacdComplRisks {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (CdaChVacdComplRisks x : values()) {
+		for (RiskOfComplications x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

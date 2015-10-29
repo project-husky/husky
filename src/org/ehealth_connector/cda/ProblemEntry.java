@@ -20,8 +20,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.AllergiesSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.CdaChVacdComplRisks;
-import org.ehealth_connector.cda.ch.enums.CdaChVacdExpRisks;
+import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
+import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
@@ -146,12 +146,12 @@ public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.P
 	 *
 	 * @return the compl risk
 	 */
-	public CdaChVacdComplRisks getComplicationRisk() {
+	public RiskOfComplications getComplicationRisk() {
 		Value value = this.getValue();
 		if (value != null) {
 			Code code = value.getCode();
-			if (code != null && CdaChVacdComplRisks.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
-				return CdaChVacdComplRisks.getEnum(code.getCode());
+			if (code != null && RiskOfComplications.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+				return RiskOfComplications.getEnum(code.getCode());
 			}
 		}
 		return null;
@@ -178,12 +178,12 @@ public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.P
 	 *
 	 * @return the exposure risk
 	 */
-	public CdaChVacdExpRisks getExposureRisk() {
+	public RiskOfExposure getExposureRisk() {
 		Value value = this.getValue();
 		if (value != null) {
 			Code code = value.getCode();
-			if (code != null && CdaChVacdExpRisks.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
-				return CdaChVacdExpRisks.getEnum(code.getCode());
+			if (code != null && RiskOfExposure.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+				return RiskOfExposure.getEnum(code.getCode());
 			}
 		}
 		return null;
@@ -332,7 +332,7 @@ public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.P
 	 * @param languageCode
 	 *            the language code
 	 */
-	public void setComplicationRisk(CdaChVacdComplRisks complRisk, LanguageCode languageCode) {
+	public void setComplicationRisk(RiskOfComplications complRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);
 		setValue(new Value(complRisk.getCode(languageCode)));
 	}
@@ -365,7 +365,7 @@ public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.P
 	 * @param languageCode
 	 *            the language code
 	 */
-	public void setExposureRisk(CdaChVacdExpRisks expRisk, LanguageCode languageCode) {
+	public void setExposureRisk(RiskOfExposure expRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);
 		setValue(new Value(expRisk.getCode(languageCode)));
 	}
