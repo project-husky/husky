@@ -16,16 +16,8 @@
 
 package org.ehealth_connector.cda.ch;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.Immunization;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
-import org.ehealth_connector.cda.ch.enums.RiscOfComplications;
-import org.ehealth_connector.cda.ch.enums.RiscOfExposure;
-import org.ehealth_connector.common.Value;
-import org.openhealthtools.ihe.utils.StringUtils;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 
 /**
@@ -131,64 +123,6 @@ public class CdaChVacd extends org.ehealth_connector.cda.CdaChVacd {
 	 */
 	public CdaChVacd(VACD doc) {
 		super(doc);
-	}
-
-	/**
-	 * <div class="en">Collects all ActiveProblemConcerns from the List from
-	 * {@link #getActiveProblemConcerns()} which are of type
-	 * {@link RiscOfComplications}</div> <div class="de">Sammelt alle Einträge
-	 * des Typs {@link ActiveProblemConcern} aus der Liste von
-	 * {@link #getActiveProblemConcerns()} welche vom Typ
-	 * {@link RiscOfComplications} sind</div>
-	 * 
-	 * @return the allergy problem concerns
-	 */
-	public List<ActiveProblemConcern> getRiscOfComplications() {
-		final List<ActiveProblemConcern> problemConcerns = getActiveProblemConcerns();
-		final List<ActiveProblemConcern> riscOfComplications = new ArrayList<ActiveProblemConcern>();
-		if (problemConcerns != null) {
-			for (final ActiveProblemConcern aConcern : problemConcerns) {
-				final Value value = aConcern.getProblemEntry().getValue();
-				if (value != null && value.getCode() != null
-						&& !StringUtils.isEmptyOrNull(value.getCode().getCode())
-						&& !StringUtils.isEmptyOrNull(value.getCode().getDisplayName())) {
-					if (RiscOfComplications.isRiscOfComplication(value.getCode().getCode(),
-							value.getCode().getDisplayName())) {
-						riscOfComplications.add(aConcern);
-					}
-				}
-			}
-		}
-		return riscOfComplications;
-	}
-
-	/**
-	 * <div class="en">Collects all ActiveProblemConcerns from the List from
-	 * {@link #getActiveProblemConcerns()} which are of type
-	 * {@link RiscOfExposure}</div> <div class="de">Sammelt alle Einträge des
-	 * Typs {@link ActiveProblemConcern} aus der Liste von
-	 * {@link #getActiveProblemConcerns()} welche vom Typ {@link RiscOfExposure}
-	 * sind</div>
-	 * 
-	 * @return the allergy problem concerns
-	 */
-	public List<ActiveProblemConcern> getRiscOfExposure() {
-		final List<ActiveProblemConcern> problemConcerns = getActiveProblemConcerns();
-		final List<ActiveProblemConcern> riscOfExposures = new ArrayList<ActiveProblemConcern>();
-		if (problemConcerns != null) {
-			for (final ActiveProblemConcern aConcern : problemConcerns) {
-				final Value value = aConcern.getProblemEntry().getValue();
-				if (value != null && value.getCode() != null
-						&& !StringUtils.isEmptyOrNull(value.getCode().getCode())
-						&& !StringUtils.isEmptyOrNull(value.getCode().getDisplayName())) {
-					if (RiscOfExposure.isRiscOfExposure(value.getCode().getCode(),
-							value.getCode().getDisplayName())) {
-						riscOfExposures.add(aConcern);
-					}
-				}
-			}
-		}
-		return riscOfExposures;
 	}
 
 }

@@ -22,8 +22,6 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.RiscOfComplications;
-import org.ehealth_connector.cda.ch.enums.RiscOfExposure;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
 import org.ehealth_connector.common.Value;
@@ -39,7 +37,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * 
  * use org.ehealth_connector.cda.ProblemEntry whenever possible
  */
-@SuppressWarnings("deprecation")
 public class Problem extends ProblemEntry {
 
 	/**
@@ -163,54 +160,6 @@ public class Problem extends ProblemEntry {
 	 */
 	public Problem(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry observation) {
 		super(observation);
-	}
-
-	/**
-	 * <div class="en">Creates an object, which represents a medical problem.
-	 * This constructor is used, if a risc of complication or a risc of exposure
-	 * exists for this patient</div><div class="de">Erzeugt ein Objekt welches
-	 * ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
-	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
-	 * Patienten ein Komplikationsrisiko besteht.</div>
-	 * 
-	 * @param risc
-	 *            <div class="en">risc of complication</div>
-	 *            <div class="de">Komplikationsrisiko</div>
-	 * @param start
-	 *            <div class="en">start</div><div class="de">start</div>
-	 *            <div class="fr"> start</div> <div class="it"> start</div>
-	 * @param end
-	 *            <div class="en">end</div><div class="de"> ende</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 * @deprecated use CdaChVacdComplRisks instead
-	 */
-	@Deprecated
-	public Problem(RiscOfComplications risc, Date start, Date end) {
-		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
-	}
-
-	/**
-	 * <div class="en">Creates an object, which represents a medical problem.
-	 * This constructor is used, if a risc of complication or a risc of exposure
-	 * exists for this patient</div><div class="de">Erzeugt ein Objekt welches
-	 * ein Problem repräsentiert. Dieses Objekt kann einem ProblemConcernEntry
-	 * hinzugefügt werden. Dieser Konstruktor wird verwendet, wenn für den
-	 * Patienten ein Expositionsrisiko besteht.</div>
-	 * 
-	 * @param risc
-	 *            <div class="en">risc of exposure</div>
-	 *            <div class="de">Expositionsrisiko</div>
-	 * @param start
-	 *            <div class="en">start</div><div class="de"> start</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 * @param end
-	 *            <div class="en">end</div><div class="de">ende</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 * @deprecated use CdaChVacdExpRisks instead
-	 */
-	@Deprecated
-	public Problem(RiscOfExposure risc, Date start, Date end) {
-		this(ProblemType.PROBLEM.getCode(), new Value(risc.getCode()), start, end);
 	}
 
 	/**
