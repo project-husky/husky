@@ -73,24 +73,20 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * Erzeugt ein Objekt welches eine Impfempfehlung repräsentiert. Dieses
-	 * Objekt kann einer ImmunizationRecommendationsSection hinzugefügt werden.
+	 * Instantiates a new immunization recommendation.
 	 * 
 	 * @param consumable
-	 *            Impfstoff, der empfohlen wird
+	 *            recommended vaccine
 	 * @param author
-	 *            Arzt, der diese Eintragung veranlasst hat
+	 *            author of this entry
 	 * @param startOfPossibleAppliance
-	 *            Beginn des Zeitraumes, in dem die Impfung erfolgen sollte
+	 *            start of applicance for this immunization
 	 * @param endOfPossibleAppliance
-	 *            Ende des Zeitraumes, in dem die Impfung erfolgen sollte
+	 *            end of applicance for this immunization
 	 * @param intendedOrProposed
-	 *            true, bei einer beabsichtigten, aber noch nicht erfolgten
-	 *            Impfung (intended). false bei einer vorgeschlagenen Impfung
-	 *            (proposed).
+	 *            if immunization is intended and or proposed
 	 * @param shallNotBeAdministerd
-	 *            true, wenn die Impfung nicht verabreicht werden soll. false,
-	 *            wenn die Impfung zu verabreichen ist.
+	 *            if immunization should not be administred
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
@@ -567,9 +563,8 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * <div class="de">Setzt, die Information, dass eine Impfung beabsichtigt,
-	 * aber noch nicht erfolgt ist (moodCode:INT).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * Sets the information that the immunization is intended but not yed
+	 * administred
 	 */
 	public void setIntended() {
 		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);

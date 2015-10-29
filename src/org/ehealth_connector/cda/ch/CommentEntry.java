@@ -20,19 +20,20 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
- * CommentEntry.
+ * Implements the CDA Body Level3 Comment Entry of CHACH-VACD, see chapter
+ * 7.5.9.5 used to set an annotation comment text for a section.
  */
 public class CommentEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.Comment> {
 
 	/**
-	 * Instantiates a new criterion entry.
+	 * Instantiates a new CommentEntry.
 	 */
 	public CommentEntry() {
 		super(IHEFactory.eINSTANCE.createComment().init());
 	}
 
 	/**
-	 * Instantiates a new criterion entry.
+	 * Instantiates a new CommentEntry.
 	 */
 	protected CommentEntry(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		super(comment);

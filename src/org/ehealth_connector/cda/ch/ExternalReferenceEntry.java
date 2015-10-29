@@ -19,7 +19,10 @@ package org.ehealth_connector.cda.ch;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * ExternalDocumentEntry.
+ * ExternalDocumentEntry implements the relationship for holding an External
+ * Document Entry to the immunization recommendation in switzerland, see chapter
+ * 7.5.8.5 Spezifikation CDA Body Level 3 – Immunization Recommendation Entry
+ * CDA-CH-VACD, entryRelationship, guidelines
  */
 public class ExternalReferenceEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef> {

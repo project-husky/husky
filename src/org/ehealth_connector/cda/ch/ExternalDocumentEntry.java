@@ -24,7 +24,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
 /**
- * ExternalDocumentEntry.
+ * ExternalDocumentEntry implements the External Document Entry for providing
+ * the reference to the immunization recommendation in switzerland, see chapter
+ * 7.5.8.7 CDA-CH-VACD
  */
 public class ExternalDocumentEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {

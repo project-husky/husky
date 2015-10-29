@@ -20,8 +20,7 @@ import org.ehealth_connector.cda.ch.CommentEntry;
 import org.ehealth_connector.common.Util;
 
 /**
- * <div class="en">Class for Comments</div> <div class="de">Die Klasse für
- * Kommentar-Objekte</div> <div class="fr"></div> <div class="it"></div>
+ * Class for Commment, please use CommentEntry instead
  * 
  * @deprecated use CommentEntry
  */
@@ -38,9 +37,6 @@ public class Comment extends CommentEntry {
 	 * Instantiates a new comment.
 	 * 
 	 * @param comment
-	 *            <br>
-	 *            <div class="en">Comment</div> <div class="de">Kommentar</div>
-	 *            <div class="fr"> comment</div> <div class="it"> comment</div>
 	 */
 	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		super(comment);
@@ -50,9 +46,6 @@ public class Comment extends CommentEntry {
 	 * Instantiates a new comment.
 	 * 
 	 * @param text
-	 *            <br>
-	 *            <div class="en">Comment</div> <div class="de"> Kommentar</div>
-	 *            <div class="fr"> text</div> <div class="it"> text</div>
 	 */
 	public Comment(String text) {
 		setCommentText(text);

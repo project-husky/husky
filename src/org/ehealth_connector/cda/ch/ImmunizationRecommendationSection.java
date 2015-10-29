@@ -28,7 +28,9 @@ import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class ImmunizationRecommendation.
+ * The Class ImmunizationRecommendationSection provides the support for
+ * immunizaition recommondation section see CDA-CH-VACD 7.5.8.2 Spezifikation
+ * CDA Body Level 1.
  */
 public class ImmunizationRecommendationSection
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection> {
