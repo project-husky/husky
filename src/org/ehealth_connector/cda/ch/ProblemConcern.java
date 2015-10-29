@@ -14,13 +14,14 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.Concern;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;

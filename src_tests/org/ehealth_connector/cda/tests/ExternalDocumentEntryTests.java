@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ExternalDocumentEntry;
+import org.ehealth_connector.cda.ch.ExternalDocumentEntry;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

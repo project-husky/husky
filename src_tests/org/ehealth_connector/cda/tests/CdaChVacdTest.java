@@ -23,17 +23,17 @@ import static org.junit.Assert.assertTrue;
 import org.ehealth_connector.cda.ActiveProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.CdaChVacd;
-import org.ehealth_connector.cda.CommentEntry;
-import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.GestationalAge;
-import org.ehealth_connector.cda.Immunization;
-import org.ehealth_connector.cda.ImmunizationRecommendation;
 import org.ehealth_connector.cda.LaboratoryObservation;
-import org.ehealth_connector.cda.MedicationTargetEntry;
 import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Problem;
+import org.ehealth_connector.cda.ch.CdaChVacd;
+import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.Consumable;
+import org.ehealth_connector.cda.ch.Immunization;
+import org.ehealth_connector.cda.ch.ImmunizationRecommendation;
+import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
@@ -121,21 +121,21 @@ public class CdaChVacdTest extends TestUtils {
 	public static MedicationTargetEntry getMedTargetEntryDiptherie() {
 		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
 		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.DIPHTHERIA);
-		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		medicationTargetEntry.setId(getSoftwareIdentificator());
 		return medicationTargetEntry;
 	}
 
 	public static MedicationTargetEntry getMedTargetEntryHepA() {
 		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
 		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPA);
-		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		medicationTargetEntry.setId(getSoftwareIdentificator());
 		return medicationTargetEntry;
 	}
 
 	public static MedicationTargetEntry getMedTargetEntryHepB() {
 		MedicationTargetEntry medicationTargetEntry = new MedicationTargetEntry();
 		medicationTargetEntry.setImmunizationTarget(CdaChVacdImmunizations.HEPB);
-		medicationTargetEntry.setSoftwareCreatedId(getSoftwareIdentificator());
+		medicationTargetEntry.setId(getSoftwareIdentificator());
 		return medicationTargetEntry;
 	}
 
@@ -181,7 +181,7 @@ public class CdaChVacdTest extends TestUtils {
 	// 12
 	public CommentEntry createComment() {
 		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setText(ts1);
+		commentEntry.setCommentText(ts1);
 		return commentEntry;
 	}
 

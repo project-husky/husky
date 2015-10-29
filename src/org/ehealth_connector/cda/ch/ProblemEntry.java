@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 /**
  * ProblemEntry convenience functionality for the CDA Body Level 3 -Problem
  */
-public class ProblemEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
+public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
 
 	/**
 	 * Instantiates a new problem entry.

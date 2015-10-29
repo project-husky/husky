@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -22,7 +22,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 /**
  * CommentEntry.
  */
-public class CommentEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.Comment> {
+public class CommentEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.Comment> {
 
 	/**
 	 * Instantiates a new criterion entry.
@@ -91,12 +91,15 @@ public class CommentEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ihe.C
 	}
 
 	/**
-	 * Sets the text.
+	 * Sets the comment text. This is the text element of the level3 object. If
+	 * this object is added to a section with narrative generation enabled this
+	 * text will copied to the section and the text can then be referenced by
+	 * getTextReference / getContentIdText.
 	 *
 	 * @param text
-	 *            the new text
+	 *            the new comment text
 	 */
-	public void setText(String text) {
+	public void setCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
 	}
 

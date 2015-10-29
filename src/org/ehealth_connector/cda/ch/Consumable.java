@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.common.Code;
@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * <div class="en">A consumable product</div> <div class="de">Ein konsumierbares
  * Produkt</div> <div class="fr"></div> <div class="it"></div>
  */
-public class Consumable extends EFacade<org.openhealthtools.mdht.uml.cda.Consumable> {
+public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Consumable> {
 
 	/**
 	 * <div class="en">Creates an object, which represents a consumable

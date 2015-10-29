@@ -24,12 +24,12 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.CommentEntry;
-import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.CriterionEntry;
-import org.ehealth_connector.cda.Immunization;
-import org.ehealth_connector.cda.ImmunizationSection;
-import org.ehealth_connector.cda.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.Consumable;
+import org.ehealth_connector.cda.ch.CriterionEntry;
+import org.ehealth_connector.cda.ch.Immunization;
+import org.ehealth_connector.cda.ch.ImmunizationSection;
+import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
@@ -100,7 +100,7 @@ public class ImmunizationSectionTests {
 		CommentEntry commentEntry = new CommentEntry();
 		String comment = "Genereller Kommentar";
 
-		commentEntry.setText("Genereller Kommentar");
+		commentEntry.setCommentText("Genereller Kommentar");
 		immunization.setCommentEntry(commentEntry);
 
 		CriterionEntry criterionEntry = new CriterionEntry();

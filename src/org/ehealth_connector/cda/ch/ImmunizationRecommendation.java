@@ -14,14 +14,13 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
@@ -59,7 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * erfolgte Impfungen dokumentiert werden.
  */
 public class ImmunizationRecommendation
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 
 	/**
 	 * Instantiates a new immunization recommendation.
@@ -154,18 +153,6 @@ public class ImmunizationRecommendation
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 			}
 		}
-	}
-
-	/**
-	 * Adds the reason for the immunization recommendeation (the BAG Guideline).
-	 *
-	 * @param reason
-	 *            the reason
-	 * @deprecated use addMedicationTargetEnry
-	 */
-	@Deprecated
-	public void addReason(Reason reason) {
-		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
@@ -408,23 +395,6 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * Gets a list of reasons for the immunizationRecommendation (typically a
-	 * reference to an external Bundesamt für Gesundheit (BAG) document)).
-	 *
-	 * @return A ArrayList of Resons
-	 * @deprecated use getMedicationTargetEntries
-	 */
-	@Deprecated
-	public List<Reason> getReasons() {
-		List<Reason> medicationTargetEntries = new ArrayList<Reason>();
-		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
-				.getMedicalTargets()) {
-			medicationTargetEntries.add(new Reason(mte));
-		}
-		return medicationTargetEntries;
-	}
-
-	/**
 	 * Gets the route of administration.
 	 * 
 	 * @return the route of administration
@@ -528,7 +498,7 @@ public class ImmunizationRecommendation
 	 */
 	public void setCommentText(String text) {
 		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setText(text);
+		commentEntry.setCommentText(text);
 		this.setCommentEntry(commentEntry);
 	}
 

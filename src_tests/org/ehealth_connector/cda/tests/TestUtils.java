@@ -19,8 +19,8 @@ import java.util.Date;
 import java.util.Random;
 
 import org.ehealth_connector.cda.AllergyProblem;
-import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.ProblemEntry;
+import org.ehealth_connector.cda.ch.Consumable;
+import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.AdministrativeGender;
 import org.ehealth_connector.common.Address;

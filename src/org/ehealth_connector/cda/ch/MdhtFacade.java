@@ -13,7 +13,7 @@
  * Year of publication: 2015
  *
  *******************************************************************************/
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
@@ -42,10 +42,10 @@ import org.xml.sax.InputSource;
  * @param <E>
  *            the element type
  */
-public class EFacade<E extends InfrastructureRoot> {
+public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/** The log. */
-	private final Log log = LogFactory.getLog(EFacade.class);
+	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
 	/** The mdht. */
 	private E mdht;
@@ -56,7 +56,7 @@ public class EFacade<E extends InfrastructureRoot> {
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected EFacade(E mdht) {
+	protected MdhtFacade(E mdht) {
 		this.mdht = mdht;
 	}
 
@@ -73,7 +73,7 @@ public class EFacade<E extends InfrastructureRoot> {
 	 *            siwss templates can now be added during for the specified root
 	 *            during constructing the facade
 	 */
-	protected EFacade(E mdht, String templateIdRoot, String templateIdExtension) {
+	protected MdhtFacade(E mdht, String templateIdRoot, String templateIdExtension) {
 		this.mdht = mdht;
 		if (mdht != null) {
 			for (II ii : mdht.getTemplateIds()) {
@@ -94,7 +94,7 @@ public class EFacade<E extends InfrastructureRoot> {
 	 *            reference, reference has to start with a # (relative)
 	 * @return the string
 	 */
-	public String getContentIdText(EFacade<?> section, String reference) {
+	public String getContentIdText(MdhtFacade<?> section, String reference) {
 		Document document = section.getDocument();
 
 		String contentId = null;

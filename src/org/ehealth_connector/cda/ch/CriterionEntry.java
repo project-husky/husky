@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 /**
  * CriterionEntry.
  */
-public class CriterionEntry extends EFacade<org.openhealthtools.mdht.uml.cda.ch.CriterionEntry> {
+public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CriterionEntry> {
 
 	/**
 	 * Instantiates a new criterion entry.

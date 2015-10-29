@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.ehealth_connector.cda.CdaChVacd;
+import org.ehealth_connector.cda.ch.CdaChVacd;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;

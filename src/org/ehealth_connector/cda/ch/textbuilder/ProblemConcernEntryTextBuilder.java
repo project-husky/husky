@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.List;
 
-import org.ehealth_connector.cda.ProblemConcern;
+import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 
 /**
@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.ch.enums.SectionsVACD;
  */
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-	private List<org.ehealth_connector.cda.ProblemConcern> problemConcerns;
+	private List<org.ehealth_connector.cda.ch.ProblemConcern> problemConcerns;
 	private String contentIdPrefix;
 
 	/**
@@ -62,7 +62,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
-		for (org.ehealth_connector.cda.ProblemConcern problemConcern : problemConcerns) {
+		for (org.ehealth_connector.cda.ch.ProblemConcern problemConcern : problemConcerns) {
 			addRow(problemConcern, i++);
 		}
 		append("</tbody>");
@@ -77,7 +77,7 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
-	private void addRow(org.ehealth_connector.cda.ProblemConcern problemConcern, int i) {
+	private void addRow(org.ehealth_connector.cda.ch.ProblemConcern problemConcern, int i) {
 		append("<tr>");
 		addCell("Komplikationsrisiko");
 		if (problemConcern.getConcern() != null) {

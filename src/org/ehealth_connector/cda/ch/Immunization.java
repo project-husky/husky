@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
@@ -55,7 +54,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten
  * Impfungen.</div>
  */
-public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Immunization> {
+public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.Immunization> {
 
 	/**
 	 * <div class="en">Creates an object, which represents an
@@ -194,18 +193,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 			}
 		}
-	}
-
-	/**
-	 * Adds the reason for the immunization (the illness, which the immunization
-	 * should prevent).
-	 *
-	 * @param reason
-	 *            the reason
-	 */
-	@Deprecated
-	public void addReason(Reason reason) {
-		this.addMedicationTargetEntry(reason);
 	}
 
 	/**
@@ -376,22 +363,6 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	}
 
 	/**
-	 * Gets a list of reasons for the immunization (the illness, which the
-	 * immunization should prevent).
-	 * 
-	 * @return A List of Reasons
-	 */
-	@Deprecated
-	public List<Reason> getReasons() {
-		List<Reason> medicationTargetEntries = new ArrayList<Reason>();
-		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
-				.getMedicalTargets()) {
-			medicationTargetEntries.add(new Reason(mte));
-		}
-		return medicationTargetEntries;
-	}
-
-	/**
 	 * Gets the route of administration.
 	 * 
 	 * @return the route of administration
@@ -505,7 +476,7 @@ public class Immunization extends EFacade<org.openhealthtools.mdht.uml.cda.ch.Im
 	 */
 	public void setCommentText(String text) {
 		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setText(text);
+		commentEntry.setCommentText(text);
 		this.setCommentEntry(commentEntry);
 	}
 

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.common.Code;

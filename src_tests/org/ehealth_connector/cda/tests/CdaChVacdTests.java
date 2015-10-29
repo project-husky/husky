@@ -32,8 +32,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.CdaChVacd;
-import org.ehealth_connector.cda.EFacade;
+import org.ehealth_connector.cda.ch.CdaChVacd;
+import org.ehealth_connector.cda.ch.MdhtFacade;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -49,7 +49,7 @@ import org.xml.sax.InputSource;
  */
 public class CdaChVacdTests {
 
-	private final Log log = LogFactory.getLog(EFacade.class);
+	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();

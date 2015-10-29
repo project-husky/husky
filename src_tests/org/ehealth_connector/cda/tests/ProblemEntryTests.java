@@ -26,7 +26,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ProblemEntry;
+import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.AllergiesSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;

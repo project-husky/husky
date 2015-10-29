@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
@@ -29,7 +29,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * the entry and an an immunization target code
  */
 public class MedicationTargetEntry
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry>
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry>
 		implements Comparable<MedicationTargetEntry> {
 
 	/**
@@ -44,7 +44,7 @@ public class MedicationTargetEntry
 						.getIi());
 
 		Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", UUID.generate());
-		this.setSoftwareCreatedId(id);
+		this.setId(id);
 	}
 
 	/**
@@ -61,6 +61,31 @@ public class MedicationTargetEntry
 	protected MedicationTargetEntry(
 			org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry, "2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason");
+	}
+
+	@Override
+	public int compareTo(MedicationTargetEntry o) {
+
+		CdaChVacdImmunizations immunizationTarget = getImmunizationTarget();
+		CdaChVacdImmunizations otherImmunizationTarget = o.getImmunizationTarget();
+
+		if (immunizationTarget != null && otherImmunizationTarget != null) {
+			return new Integer(immunizationTarget.getSortOrder())
+					.compareTo(otherImmunizationTarget.getSortOrder());
+		}
+
+		if (immunizationTarget != null && otherImmunizationTarget == null) {
+			return -1;
+		}
+
+		if (immunizationTarget == null && otherImmunizationTarget != null) {
+			return 1;
+		}
+
+		if (immunizationTarget == null && otherImmunizationTarget == null) {
+			return 0;
+		}
+		return 0;
 	}
 
 	@Override
@@ -82,13 +107,25 @@ public class MedicationTargetEntry
 			return false;
 		}
 
-		Identificator id = getSoftwareCreatedId();
-		if ((id != null && !id.equals(other.getSoftwareCreatedId()))
-				|| (id == null && other.getSoftwareCreatedId() != null)) {
+		Identificator id = getId();
+		if ((id != null && !id.equals(other.getId()))
+				|| (id == null && other.getId() != null)) {
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * Gets the software created id.
+	 *
+	 * @return the software created id
+	 */
+	public Identificator getId() {
+		if (getMdht().getIds().size() > 0) {
+			return new Identificator(this.getMdht().getIds().get(0));
+		}
+		return null;
 	}
 
 	/**
@@ -117,18 +154,6 @@ public class MedicationTargetEntry
 	}
 
 	/**
-	 * Gets the software created id.
-	 *
-	 * @return the software created id
-	 */
-	public Identificator getSoftwareCreatedId() {
-		if (getMdht().getIds().size() > 0) {
-			return new Identificator(this.getMdht().getIds().get(0));
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the text reference.
 	 *
 	 * @return the text reference
@@ -144,11 +169,22 @@ public class MedicationTargetEntry
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (this.getSoftwareCreatedId() != null
-				? this.getSoftwareCreatedId().hashCode() : 0);
+		result = prime * result + (this.getId() != null
+				? this.getId().hashCode() : 0);
 		result = prime * result + (this.getImmunizationTargetCode() != null
 				? this.getImmunizationTargetCode().hashCode() : 0);
 		return result;
+	}
+
+	/**
+	 * Sets the software created id.
+	 *
+	 * @param identifier
+	 *            the new software created id
+	 */
+	public void setId(Identificator identifier) {
+		getMdht().getIds().clear();
+		getMdht().getIds().add(identifier.getIi());
 	}
 
 	/**
@@ -176,17 +212,6 @@ public class MedicationTargetEntry
 	}
 
 	/**
-	 * Sets the software created id.
-	 *
-	 * @param identifier
-	 *            the new software created id
-	 */
-	public void setSoftwareCreatedId(Identificator identifier) {
-		getMdht().getIds().clear();
-		getMdht().getIds().add(identifier.getIi());
-	}
-
-	/**
 	 * Sets the text reference.
 	 *
 	 * @param value
@@ -195,31 +220,6 @@ public class MedicationTargetEntry
 	 */
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
-	}
-
-	@Override
-	public int compareTo(MedicationTargetEntry o) {
-
-		CdaChVacdImmunizations immunizationTarget = getImmunizationTarget();
-		CdaChVacdImmunizations otherImmunizationTarget = o.getImmunizationTarget();
-
-		if (immunizationTarget != null && otherImmunizationTarget != null) {
-			return new Integer(immunizationTarget.getSortOrder())
-					.compareTo(otherImmunizationTarget.getSortOrder());
-		}
-
-		if (immunizationTarget != null && otherImmunizationTarget == null) {
-			return -1;
-		}
-
-		if (immunizationTarget == null && otherImmunizationTarget != null) {
-			return 1;
-		}
-
-		if (immunizationTarget == null && otherImmunizationTarget == null) {
-			return 0;
-		}
-		return 0;
 	}
 
 }

@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Util;
@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
  * ExternalDocumentEntry.
  */
 public class ExternalDocumentEntry
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
 
 	/**
 	 * Instantiates a new criterion entry.

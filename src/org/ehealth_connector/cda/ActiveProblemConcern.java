@@ -17,6 +17,8 @@ package org.ehealth_connector.cda;
 
 import java.util.Date;
 
+import org.ehealth_connector.cda.ch.ProblemConcern;
+import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
 
 /**

@@ -27,7 +27,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.ehealth_connector.cda.EFacade;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.Confidentiality;
 import org.ehealth_connector.cda.enums.ParticipantType;
@@ -68,7 +67,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
  */
-public abstract class CdaCh<E extends ClinicalDocument> extends EFacade<E> {
+public abstract class CdaCh<EClinicalDocument extends ClinicalDocument>
+		extends MdhtFacade<EClinicalDocument> {
 
 	/** main OID for CDA-CH */
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1";
@@ -85,7 +85,7 @@ public abstract class CdaCh<E extends ClinicalDocument> extends EFacade<E> {
 	 * @param doc
 	 *            the CDA-CH Object in its MDHT representation
 	 */
-	public CdaCh(E doc) {
+	public CdaCh(EClinicalDocument doc) {
 		super(doc);
 		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
 		// set xml namespace
@@ -109,7 +109,7 @@ public abstract class CdaCh<E extends ClinicalDocument> extends EFacade<E> {
 	 *            the Cascasing stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
-	public CdaCh(E doc, String stylesheet, String css) {
+	public CdaCh(EClinicalDocument doc, String stylesheet, String css) {
 		this(doc);
 		if (css != null) {
 			addCss(css);

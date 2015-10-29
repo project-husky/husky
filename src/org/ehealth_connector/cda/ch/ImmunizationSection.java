@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * The Class ImmunizationSection.
  */
 public class ImmunizationSection
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
 
 	/**
 	 * Instantiates a new immunization section.
@@ -71,7 +71,7 @@ public class ImmunizationSection
 	 * @param createSectionText
 	 *            if the section text should be created
 	 */
-	public void addImmunization(org.ehealth_connector.cda.Immunization immunization,
+	public void addImmunization(org.ehealth_connector.cda.ch.Immunization immunization,
 			LanguageCode languageCode, boolean createSectionText) {
 		if (immunization != null) {
 			getMdht().addSubstanceAdministration(immunization.getMdht());

@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda;
+package org.ehealth_connector.cda.ch;
 
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
@@ -22,7 +22,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * ExternalDocumentEntry.
  */
 public class ExternalReferenceEntry
-		extends EFacade<org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef> {
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef> {
 
 	/**
 	 * Instantiates a new external reference entry.

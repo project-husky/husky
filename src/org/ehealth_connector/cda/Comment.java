@@ -16,6 +16,7 @@
 
 package org.ehealth_connector.cda;
 
+import org.ehealth_connector.cda.ch.CommentEntry;
 import org.ehealth_connector.common.Util;
 
 /**
@@ -54,7 +55,7 @@ public class Comment extends CommentEntry {
 	 *            <div class="fr"> text</div> <div class="it"> text</div>
 	 */
 	public Comment(String text) {
-		setText(text);
+		setCommentText(text);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public class Comment extends CommentEntry {
 	 * @param text
 	 *            the new text
 	 */
-	public void setText(String text) {
+	public void setCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
 	}
 }

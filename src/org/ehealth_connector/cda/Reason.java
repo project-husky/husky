@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
+import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -18,6 +19,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 /**
  * @deprecated replaced by MedicationTargetEntry
  */
+@Deprecated
 public class Reason extends MedicationTargetEntry {
 
 	private CDACHBodyExtRef mExtRef = null;

@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.CriterionEntry;
+import org.ehealth_connector.cda.ch.CriterionEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.junit.Test;

@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
@@ -103,7 +103,7 @@ public class MedicationTargetEntryTests {
 
 		String uuid = UUID.generate();
 		Identificator softwareId = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", uuid);
-		entry.setSoftwareCreatedId(softwareId);
+		entry.setId(softwareId);
 
 		Document document = entry.getDocument();
 
@@ -113,7 +113,7 @@ public class MedicationTargetEntryTests {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(softwareId, entry.getSoftwareCreatedId());
+		assertEquals(softwareId, entry.getId());
 	}
 
 	@Test
@@ -131,18 +131,18 @@ public class MedicationTargetEntryTests {
 		varicella.setImmunizationTarget(CdaChVacdImmunizations.VARICELLA);
 
 		MedicationTargetEntry software1 = new MedicationTargetEntry();
-		software1.setSoftwareCreatedId(softwareId1);
+		software1.setId(softwareId1);
 
 		MedicationTargetEntry software2 = new MedicationTargetEntry();
-		software2.setSoftwareCreatedId(softwareId2);
+		software2.setId(softwareId2);
 
 		MedicationTargetEntry varicellaSoft1 = new MedicationTargetEntry();
 		varicellaSoft1.setImmunizationTarget(CdaChVacdImmunizations.VARICELLA);
-		varicellaSoft1.setSoftwareCreatedId(softwareId1);
+		varicellaSoft1.setId(softwareId1);
 
 		MedicationTargetEntry varicellaSoft1Duply = new MedicationTargetEntry();
 		varicellaSoft1Duply.setImmunizationTarget(CdaChVacdImmunizations.VARICELLA);
-		varicellaSoft1Duply.setSoftwareCreatedId(softwareId1);
+		varicellaSoft1Duply.setId(softwareId1);
 
 		assertEquals(varicellaSoft1, varicellaSoft1);
 		assertEquals(varicellaSoft1, varicellaSoft1Duply);

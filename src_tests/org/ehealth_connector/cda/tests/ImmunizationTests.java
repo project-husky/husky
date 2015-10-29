@@ -27,11 +27,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.CommentEntry;
-import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.CriterionEntry;
-import org.ehealth_connector.cda.Immunization;
-import org.ehealth_connector.cda.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.Consumable;
+import org.ehealth_connector.cda.ch.CriterionEntry;
+import org.ehealth_connector.cda.ch.Immunization;
+import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
