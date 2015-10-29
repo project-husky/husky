@@ -27,252 +27,323 @@ import org.ehealth_connector.common.DateUtil;
  */
 public enum CdaChVacdComplRisks {
 
-	/** CR113001. */
-	CR113001("113001", "Anatomische oder funktionelle Asplenie",
+	/** Anatomische oder funktionelle Asplenie */
+	ANATOMISCHE_ODER_FUNKTIONELLE_ASPLENIE("113001", "Anatomische oder funktionelle Asplenie",
 			"Asplénie anatomique ou fonctionnelle", "Asplenia anatomica o funzionale", "20130101",
 			""),
 
-	/** CR113002. */
-	CR113002("113002", "Cochleaimplantat, in situ oder geplant",
-			"Implant cochléaire, in situ ou planifié", "Impianto cocleare, in situ o pianificato",
-			"20130101", ""),
-
-	/** CR113003. */
-	@Deprecated CR113003("113003",
-			"Defekte bei der Komplementaktivierung des alternativen Wegs oder Defizite der Terminalfaktoren des Komplementsystems",
-			"Déficit en facteurs de la voie alterne ou terminale du complément",
-			"Deficit di fattori della via alterna o terminale del complemento", "20130101",
-			"20131231"),
-
-	/** CR113004. */
-	CR113004("113004", "Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht < 1500g",
-			"Naissance avant la 33e semaine de grossesse ou poids de naissance <1500 g",
-			"Nascita prima della 33a settimana di gravidanza o peso alla nascita <1500 g",
-			"20130101", ""),
-
-	/** CR113005. */
-	@Deprecated CR113005("113005", "Hämoglobinopathie", "Hémoglobinopathie", "Emoglobinopatie",
-			"20130101", "20131231"),
-
-	/** CR113006. */
-	@Deprecated CR113006("113006", "Hepatopathien (chronische)", "Hépatopathies chroniques",
-			"Epatopatie croniche", "20130101", "20131231"),
-
-	/** CR113007. */
-	@Deprecated CR113007("113007", "Herzkrankheiten (chronische, kongenitale Missbildungen)",
-			"Cardiopathies chroniques, malformations congénitales",
-			"Cardiopatie croniche, malformazioni congenite", "20130101", "20131231"),
-
-	/** CR113008. */
-	CR113008("113008", "HIV Infektion mit CD4-Zellen >= 15 % (Erwachsene: >= 200 / µl)",
-			" Infection à VIH avec CD4 >= 15% (Adultes : >= 200 / µl)",
-			"Infezione HIV con CD4 >= 15% (Adulti : >= 200 / µl)", "20130101", ""),
-
-	/** CR113009. */
-	CR113009("113009", "HIV Infektion mit CD4-Zellen < 15 % (Erwachsene: < 200 / µl)",
-			"Infection à VIH avec CD4 < 15% (Adultes : < 200 / µl)",
-			"Infezione HIV con CD4 < 15% (Adulti : < 200 / µl)", "20130101", ""),
-
-	/** CR113010. */
-	@Deprecated CR113010("113010",
-			"Immuninsuffizienz jeder Art (medikamentös, Transplantation, chron. Erkrankungen)",
-			"Immunodéficiences (toutes situations) y. c. immunosuppression, immunosuppression médicamenteuse (transplantation, maladies chroniques) ",
-			"Immunodeficienze (tutte le situazioni) compreso immunosoppressione e immunosoppressione medicamentosa (trapianto, malattie croniche)",
-			"20130101", "20131231"),
-
-	/** CR113011. */
-	@Deprecated CR113011("113011",
-			"Kongenitales Immunmangelsyndrom (mangelnde Immunantwort auf Polysaccharide, Antikörpermangel)",
-			"Immunodéficience congénitale (défaut de réponses aux polysaccharides, déficiences en anticorps)",
-			"Immunodeficienza congenita (difetto di risposta ai polisaccaridi, deficienze in anticorpi)",
-			"20130101", "20131231"),
-
-	/** CR113012. */
-	CR113012("113012", "Lymphom, Leukämie, Myelom", "Lymphome, leucémie, myélome",
-			"Linfoma, leucemia, mieloma", "20130101", ""),
-
-	/** CR113013. */
-	@Deprecated CR113013("113013", "Liquorfistel", "Fistule de LCR", "Fistola di LCR", "20130101",
-			"20131231"),
-
-	/** CR113014. */
-	CR113014("113014", "Mangel an Mannose-bindendem Lektin", "Déficit en lectine liant le mannose",
-			"Deficit di lectina legante il mannosio", "20130101", ""),
-
-	/** CR113015. */
-	@Deprecated CR113015("113015",
-			"Metabolische Erkrankungen mit Auswirkungen auf Herz, Lungen, Nieren und/oder Immunsystem (Diabetes, morbide Adipositas BMI >= 40 )",
-			"Maladies métaboliques chroniques affectant coeur, poumons et/ou défenses immunitaires (diabète, obésité morbide IMC >= 40)",
-			"Malattie metaboliche croniche che colpiscono cuore, polmoni e/o difese immunitarie (diabete, obesità patologica con BMI >= 40) ",
-			"20130101", "20131231"),
-
-	/** CR113016. */
-	@Deprecated CR113016("113016", "Missbildungen der Schädelbasis",
-			"Malformations de la base du crâne", "Malformazioni della base del cranio", "20130101",
-			"20131231"),
-
-	/** CR113017. */
-	@Deprecated CR113017("113017", "Myelome", "Myélome", "Mieloma", "20130101", "20131231"),
-
-	/** CR113018. */
-	CR113018("113018", "Nephrotisches Syndrom", "Syndrome néphrotique", "Sindrome nefrosica",
-			"20130101", ""),
-
-	/** CR113019. */
-	@Deprecated CR113019("113019",
-			"Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)",
-			"Nouveau-nés ou nourrissons < 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie",
-			"Neonati o lattanti < 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ",
-			"20130101", "20131231"),
-
-	/** CR113020. */
-	@Deprecated CR113020("113020", "Neugeborene von HBsAg-positiven Müttern",
-			"Nouveau-nés de mères HBsAg positives", "Neonati di madri HBsAg positive", "20130101",
-			"20131231"),
-
-	/** CR113021. */
-	CR113021("113021", "Schwere Neurodermitis beim Kind", "Eczema sévère chez l’enfant",
-			"Eczema severo nel bambino", "20130101", ""),
-
-	/** CR113022. */
-	@Deprecated CR113022("113022",
-			"Neurologische oder muskuloskelettale Erkrankung mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren",
-			"Affection neurologique ou musculo-squelettique avec répercussion sur la fonction cardiaque, pulmonaire ou rénale",
-			"Affezione neurologica o muscolo-scheletrica con ripercussioni sulla funzione cardiaca, polmonare o renale",
-			"20130101", "20131231"),
-
-	/** CR113023. */
-	CR113023("113023", "Niereninsuffizienz", "Insuffisance rénale", "Insufficienza renale",
-			"20130101", ""),
-
-	/** CR113024. */
-	@Deprecated CR113024("113024", "Pneumopathien (chronische)", "Pneumopathies chroniques",
-			"Pneumopatie croniche", "20130101", "20131231"),
-
-	/** CR113025. */
-	@Deprecated CR113025("113025",
-			"Schwangere Frauen und Frauen, die in den letzten 4 Wochen entbunden haben ",
-			"Femmes enceintes ou ayant accouchées au cours des 4 semaines précédentes",
-			"Donne incite o che hanno partorito nelle 4 settimane precedenti", "20130101",
-			"20131231"),
-
-	/** CR114001. */
-	CR114001("114001", "Herzinsuffizienz", "Insuffisance cardiaque", "Insufficienza cardiaca",
-			"20140101", ""),
-
-	/** CR114002. */
-	CR114002("114002", "Kardiopathie, angeborene Fehlbildung",
-			"Cardiopathie, malformation congénitale", "Cardiopatia, malformazione congenita",
-			"20140101", ""),
-
-	/** CR114003. */
-	CR114003("114003", "Chronisch obstruktive Pneumopathie", "Pneumopathie chronique obstructive",
-			"Pneumopatia cronica ostruttiva", "20140101", ""),
-
-	/** CR114004. */
-	CR114004("114004",
-			"Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen Steroiden",
-			"Asthme sévère : si traitement prolongé ou fréquent par des corticoïdes oraux",
-			"Asma severa : se trattamento prolungato o frequente con corticoidi orali", "20140101",
-			""),
-
-	/** CR114005. */
-	CR114005("114005", "Bronchiektasen durch Antikörpermangel",
-			"Bronchiectasies sur carence en anticorps", "Bronchiettasie su carenza in anticorpi",
-			"20140101", ""),
-
-	/** CR114006. */
-	CR114006("114006", "Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)",
+	/**
+	 * Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)
+	 */
+	ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC("114006",
+			"Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)",
 			"Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)",
 			"Altre malattie polmonari (p.es. mucoviscidosi, asma trattata con aerosol, ecc.)",
 			"20140101", ""),
 
-	/** CR114007. */
-	CR114007("114007", "Chronische Lebererkrankung", "Maladie hépatique chronique",
-			"Malattia epatica cronica", "20140101", ""),
-
-	/** CR114008. */
-	CR114008("114008", "Leberzirrhose", "Cirrhose hépatique", "Cirrosi epatica", "20140101", ""),
-
-	/** CR114012. */
-	CR114012("114012",
-			"Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder Nierenfunktion)",
-			"Maladie neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)",
-			"Malattia neuromuscolare (Se ripercussione sulla funzione cardiaca, polmonare o renale)",
-			"20140101", ""),
-
-	/** CR114014. */
-	CR114014("114014", "Sichelzellanämie", "Anémie falciforme", "Anemia falciforme", "20140101",
-			""),
-
-	/** CR114015. */
-	CR114015("114015", "Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren",
-			"Diabète avec répercussion sur la fonction cardiaque, pulmonaire ou rénale",
-			"Diabete con ripercussioni sulla funzione cardiopolmonare o renale", "20140101", ""),
-
-	/** CR114016. */
-	CR114016("114016", "Morbide Adipositas (BMI >= 40)", "Obésité morbide (IMC >= 40)",
-			"Obesità patologica (IMC >= 40)", "20140101", ""),
-
-	/** CR114018. */
-	CR114018("114018", "Kandidaten für eine Solidorgantransplantation",
-			"Candidats à une transplantation d&apos;organe solide",
-			"Candidati a un trapianto d&apos;organo solido", "20140101", ""),
-
-	/** CR114019. */
-	CR114019("114019", "Empfänger einer Solidorgantransplantation",
-			"Receveurs d&apos;une transplantation d&apos;organe solide",
-			"Riceventi di un trapianto d&apos;organo solido", "20140101", ""),
-
-	/** CR114020. */
-	CR114020("114020", "Empfänger einer Stammzelltransplantation",
-			"Receveurs de cellules souches hématopoïétiques",
-			"Riceventi di cellule staminali ematopoietiche", "20140101", ""),
-
-	/** CR114021. */
-	CR114021("114021", "Autoimmunkrankheit, welche eine Immunsuppression erfordert",
-			"Maladie auto-immune exigeant vraisemblablement une immunosuppression",
-			"Malattia autoimmune che richiede probabilmente una immunosoppressione", "20140101",
-			""),
-
-	/** CR114022. */
-	CR114022("114022",
-			"Medikamentöse Immunosuppression (inkl. systemische Langzeitkortikoidtherapie und Radiotherapie)",
-			"Immunosuppression médicamenteuse (y c. corticothérapie de longue durée par voie générale et radiothérapie)",
-			"Immunosoppressione medicamentosa (compresa una corticoterapia di lunga durata per via generale e una radioterapia)",
-			"20140101", ""),
-
-	/** CR114025. */
-	CR114025("114025",
+	/**
+	 * Angeborene Immundefizienz, variables Immundefektsyndrom, defizitäre
+	 * Antwort auf Polysaccharide
+	 */
+	ANGEBORENE_IMMUNDEFIZIENZ_VARIABLES_IMMUNDEFEKTSYNDROM_DEFIZITÄRE_ANTWORT_AUF_POLYSACCHARIDE(
+			"114025",
 			"Angeborene Immundefizienz, variables Immundefektsyndrom, defizitäre Antwort auf Polysaccharide",
 			"Immunodéficience congénitale, immunodéficience commune variable, déficit réponse aux polysaccharidiques",
 			"Immunodeficienza congenita, immunodeficienza comune variabile, deficit di risposta ai polisaccaridi",
 			"20140101", ""),
 
-	/** CR114026. */
-	CR114026("114026", "Mangel im klassischen oder alternativen Weg der Komplementaktivierung",
+	/**
+	 * Autoimmunkrankheit, welche eine Immunsuppression erfordert
+	 */
+	AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_ERFORDERT("114021",
+			"Autoimmunkrankheit, welche eine Immunsuppression erfordert",
+			"Maladie auto-immune exigeant vraisemblablement une immunosuppression",
+			"Malattia autoimmune che richiede probabilmente una immunosoppressione", "20140101",
+			""),
+
+	/** Bronchiektasen durch Antikörpermangel */
+	BRONCHIEKTASEN_DURCH_ANTIKÖRPERMANGEL("114005", "Bronchiektasen durch Antikörpermangel",
+			"Bronchiectasies sur carence en anticorps", "Bronchiettasie su carenza in anticorpi",
+			"20140101", ""),
+
+	/** Chronisch obstruktive Pneumopathie */
+	CHRONISCH_OBSTRUKTIVE_PNEUMOPATHIE("114003", "Chronisch obstruktive Pneumopathie",
+			"Pneumopathie chronique obstructive", "Pneumopatia cronica ostruttiva", "20140101", ""),
+
+	/** Chronische Lebererkrankung */
+	CHRONISCHE_LEBERERKRANKUNG("114007", "Chronische Lebererkrankung",
+			"Maladie hépatique chronique", "Malattia epatica cronica", "20140101", ""),
+
+	/** Cochleaimplantat, in situ oder geplant */
+	COCHLEAIMPLANTAT_IN_SITU_ODER_GEPLANT("113002", "Cochleaimplantat, in situ oder geplant",
+			"Implant cochléaire, in situ ou planifié", "Impianto cocleare, in situ o pianificato",
+			"20130101", ""),
+
+	/**
+	 * Defekte bei der Komplementaktivierung des alternativen Wegs oder Defizite
+	 * der Terminalfaktoren des Komplementsystems
+	 */
+	@Deprecated DEFEKTE_BEI_DER_KOMPLEMENTAKTIVIERUNG_DES_ALTERNATIVEN_WEGS_ODER_DEFIZITE_DER_TERMINALFAKTOREN_DES_KOMPLEMENTSYSTEMS(
+			"113003",
+			"Defekte bei der Komplementaktivierung des alternativen Wegs oder Defizite der Terminalfaktoren des Komplementsystems",
+			"Déficit en facteurs de la voie alterne ou terminale du complément",
+			"Deficit di fattori della via alterna o terminale del complemento", "20130101",
+			"20131231"),
+
+	/**
+	 * Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren
+	 */
+	DIABETES_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN("114015",
+			"Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren",
+			"Diabète avec répercussion sur la fonction cardiaque, pulmonaire ou rénale",
+			"Diabete con ripercussioni sulla funzione cardiopolmonare o renale", "20140101", ""),
+
+	/** Empfänger einer Solidorgantransplantation */
+	EMPFÄNGER_EINER_SOLIDORGANTRANSPLANTATION("114019", "Empfänger einer Solidorgantransplantation",
+			"Receveurs d&apos;une transplantation d&apos;organe solide",
+			"Riceventi di un trapianto d&apos;organo solido", "20140101", ""),
+
+	/** Empfänger einer Stammzelltransplantation */
+	EMPFÄNGER_EINER_STAMMZELLTRANSPLANTATION("114020", "Empfänger einer Stammzelltransplantation",
+			"Receveurs de cellules souches hématopoïétiques",
+			"Riceventi di cellule staminali ematopoietiche", "20140101", ""),
+
+	/**
+	 * Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht &lt; 1500g
+	 */
+	GEBURT_VOR_DER_33_SCHWANGERSCHAFTSWOCHE_ODER_GEBURTSGEWICHT_LT_1500G("113004",
+			"Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht < 1500g",
+			"Naissance avant la 33e semaine de grossesse ou poids de naissance <1500 g",
+			"Nascita prima della 33a settimana di gravidanza o peso alla nascita <1500 g",
+			"20130101", ""),
+
+	/** Hämoglobinopathie */
+	@Deprecated HÄMOGLOBINOPATHIE("113005", "Hämoglobinopathie", "Hémoglobinopathie",
+			"Emoglobinopatie", "20130101", "20131231"),
+
+	/** Hepatopathien (chronische) */
+	@Deprecated HEPATOPATHIEN_CHRONISCHE("113006", "Hepatopathien (chronische)",
+			"Hépatopathies chroniques", "Epatopatie croniche", "20130101", "20131231"),
+
+	/** Herzinsuffizienz */
+	HERZINSUFFIZIENZ("114001", "Herzinsuffizienz", "Insuffisance cardiaque",
+			"Insufficienza cardiaca", "20140101", ""),
+
+	/**
+	 * Herzkrankheiten (chronische, kongenitale Missbildungen)
+	 */
+	@Deprecated HERZKRANKHEITEN_CHRONISCHE_KONGENITALE_MISSBILDUNGEN("113007",
+			"Herzkrankheiten (chronische, kongenitale Missbildungen)",
+			"Cardiopathies chroniques, malformations congénitales",
+			"Cardiopatie croniche, malformazioni congenite", "20130101", "20131231"),
+
+	/**
+	 * HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene: &gt;= 200 / µl)
+	 */
+	HIV_INFEKTION_MIT_CD4_ZELLEN_GTEQ_15_P_ERWACHSENE_GTEQ_200_µL("113008",
+			"HIV Infektion mit CD4-Zellen >= 15 % (Erwachsene: >= 200 / µl)",
+			" Infection à VIH avec CD4 >= 15% (Adultes : >= 200 / µl)",
+			"Infezione HIV con CD4 >= 15% (Adulti : >= 200 / µl)", "20130101", ""),
+
+	/**
+	 * HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt; 200 / µl)
+	 */
+	HIV_INFEKTION_MIT_CD4_ZELLEN_LT_15_P_ERWACHSENE_LT_200_µL("113009",
+			"HIV Infektion mit CD4-Zellen < 15 % (Erwachsene: < 200 / µl)",
+			"Infection à VIH avec CD4 < 15% (Adultes : < 200 / µl)",
+			"Infezione HIV con CD4 < 15% (Adulti : < 200 / µl)", "20130101", ""),
+
+	/**
+	 * Immuninsuffizienz jeder Art (medikamentös, Transplantation, chron.
+	 * Erkrankungen)
+	 */
+	@Deprecated IMMUNINSUFFIZIENZ_JEDER_ART_MEDIKAMENTÖS_TRANSPLANTATION_CHRON_ERKRANKUNGEN(
+			"113010",
+			"Immuninsuffizienz jeder Art (medikamentös, Transplantation, chron. Erkrankungen)",
+			"Immunodéficiences (toutes situations) y. c. immunosuppression, immunosuppression médicamenteuse (transplantation, maladies chroniques) ",
+			"Immunodeficienze (tutte le situazioni) compreso immunosoppressione e immunosoppressione medicamentosa (trapianto, malattie croniche)",
+			"20130101", "20131231"),
+
+	/** Kandidaten für eine Solidorgantransplantation */
+	KANDIDATEN_FÜR_EINE_SOLIDORGANTRANSPLANTATION("114018",
+			"Kandidaten für eine Solidorgantransplantation",
+			"Candidats à une transplantation d&apos;organe solide",
+			"Candidati a un trapianto d&apos;organo solido", "20140101", ""),
+
+	/** Kardiopathie, angeborene Fehlbildung */
+	KARDIOPATHIE_ANGEBORENE_FEHLBILDUNG("114002", "Kardiopathie, angeborene Fehlbildung",
+			"Cardiopathie, malformation congénitale", "Cardiopatia, malformazione congenita",
+			"20140101", ""),
+
+	/**
+	 * Kongenitales Immunmangelsyndrom (mangelnde Immunantwort auf
+	 * Polysaccharide, Antikörpermangel)
+	 */
+	@Deprecated KONGENITALES_IMMUNMANGELSYNDROM_MANGELNDE_IMMUNANTWORT_AUF_POLYSACCHARIDE_ANTIKÖRPERMANGEL(
+			"113011",
+			"Kongenitales Immunmangelsyndrom (mangelnde Immunantwort auf Polysaccharide, Antikörpermangel)",
+			"Immunodéficience congénitale (défaut de réponses aux polysaccharides, déficiences en anticorps)",
+			"Immunodeficienza congenita (difetto di risposta ai polisaccaridi, deficienze in anticorpi)",
+			"20130101", "20131231"),
+
+	/** Leberzirrhose */
+	LEBERZIRRHOSE("114008", "Leberzirrhose", "Cirrhose hépatique", "Cirrosi epatica", "20140101",
+			""),
+
+	/** Liquorfistel */
+	LIQUORFISTEL("113013", "Liquorfistel", "Fistule de LCR", "Fistola di LCR", "20130101",
+			"20131231"),
+
+	/** Lymphom, Leukämie, Myelom */
+	LYMPHOM_LEUKÄMIE_MYELOM("113012", "Lymphom, Leukämie, Myelom", "Lymphome, leucémie, myélome",
+			"Linfoma, leucemia, mieloma", "20130101", ""),
+
+	/** Mangel an Mannose-bindendem Lektin */
+	MANGEL_AN_MANNOSE_BINDENDEM_LEKTIN("113014", "Mangel an Mannose-bindendem Lektin",
+			"Déficit en lectine liant le mannose", "Deficit di lectina legante il mannosio",
+			"20130101", ""),
+
+	/**
+	 * Mangel im klassischen oder alternativen Weg der Komplementaktivierung
+	 */
+	MANGEL_IM_KLASSISCHEN_ODER_ALTERNATIVEN_WEG_DER_KOMPLEMENTAKTIVIERUNG("114026",
+			"Mangel im klassischen oder alternativen Weg der Komplementaktivierung",
 			"Déficit en facteurs de la voie alterne ou terminale du complément",
 			"Deficit in fattori della via alterna o terminale del complemento", "20140101", ""),
 
-	/** CR114028. */
-	CR114028("114028", "Schwangerschaft und post-partum Periode", "Grossesse et post-partum",
-			"Gravidanza e post-parto", "20140101", ""),
-
-	/** CR114030. */
-	CR114030("114030", "Mutter HBsAg positiv", "Mère HBsAg positive", "Madre HBsAg positiva",
+	/**
+	 * Medikamentöse Immunosuppression (inkl. systemische
+	 * Langzeitkortikoidtherapie und Radiotherapie)
+	 */
+	MEDIKAMENTÖSE_IMMUNOSUPPRESSION_INKL_SYSTEMISCHE_LANGZEITKORTIKOIDTHERAPIE_UND_RADIOTHERAPIE(
+			"114022",
+			"Medikamentöse Immunosuppression (inkl. systemische Langzeitkortikoidtherapie und Radiotherapie)",
+			"Immunosuppression médicamenteuse (y c. corticothérapie de longue durée par voie générale et radiothérapie)",
+			"Immunosoppressione medicamentosa (compresa una corticoterapia di lunga durata per via generale e una radioterapia)",
 			"20140101", ""),
 
-	/** CR114032. */
-	CR114032("114032", "Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel",
+	/**
+	 * Metabolische Erkrankungen mit Auswirkungen auf Herz, Lungen, Nieren
+	 * und/oder Immunsystem (Diabetes, morbide Adipositas BMI &gt;= 40 )
+	 */
+	@Deprecated METABOLISCHE_ERKRANKUNGEN_MIT_AUSWIRKUNGEN_AUF_HERZ_LUNGEN_NIEREN_UND_ODER_IMMUNSYSTEM_DIABETES_MORBIDE_ADIPOSITAS_BMI_GTEQ_40_(
+			"113015",
+			"Metabolische Erkrankungen mit Auswirkungen auf Herz, Lungen, Nieren und/oder Immunsystem (Diabetes, morbide Adipositas BMI >= 40 )",
+			"Maladies métaboliques chroniques affectant coeur, poumons et/ou défenses immunitaires (diabète, obésité morbide IMC >= 40)",
+			"Malattie metaboliche croniche che colpiscono cuore, polmoni e/o difese immunitarie (diabete, obesità patologica con BMI >= 40) ",
+			"20130101", "20131231"),
+
+	/** Missbildungen der Schädelbasis */
+	MISSBILDUNGEN_DER_SCHÄDELBASIS("113016", "Missbildungen der Schädelbasis",
+			"Malformations de la base du crâne", "Malformazioni della base del cranio", "20130101",
+			"20131231"),
+
+	/** Morbide Adipositas (BMI &gt;= 40) */
+	MORBIDE_ADIPOSITAS_BMI_GTEQ_40("114016", "Morbide Adipositas (BMI >= 40)",
+			"Obésité morbide (IMC >= 40)", "Obesità patologica (IMC >= 40)", "20140101", ""),
+
+	/** Mutter HBsAg positiv */
+	MUTTER_HBSAG_POSITIV("114030", "Mutter HBsAg positiv", "Mère HBsAg positive",
+			"Madre HBsAg positiva", "20140101", ""),
+
+	/** Myelome */
+	@Deprecated MYELOME("113017", "Myelome", "Myélome", "Mieloma", "20130101", "20131231"),
+
+	/** Nephrotisches Syndrom */
+	NEPHROTISCHES_SYNDROM("113018", "Nephrotisches Syndrom", "Syndrome néphrotique",
+			"Sindrome nefrosica", "20130101", ""),
+
+	/**
+	 * Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher
+	 * Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in
+	 * ihrem ersten Lebensjahr)
+	 */
+	@Deprecated NEUGEBORENE_UND_SÄUGLINGE_UNTER_12_MONATEN_AUS_LÄNDERN_MIT_HOHER_TUBERKULOSE_PRÄVALENZ_DIE_WAHRSCHEINLICH_WIEDER_DORTHIN_ZURÜCKKEHREN_IN_IHREM_ERSTEN_LEBENSJAHR(
+			"113019",
+			"Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)",
+			"Nouveau-nés ou nourrissons < 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie",
+			"Neonati o lattanti < 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ",
+			"20130101", "20131231"),
+
+	/** Neugeborene von HBsAg-positiven Müttern */
+	@Deprecated NEUGEBORENE_VON_HBSAG_POSITIVEN_MÜTTERN("113020",
+			"Neugeborene von HBsAg-positiven Müttern", "Nouveau-nés de mères HBsAg positives",
+			"Neonati di madri HBsAg positive", "20130101", "20131231"),
+
+	/**
+	 * Neurologische oder muskuloskelettale Erkrankung mit Auswirkung auf die
+	 * Funktion von Herz, Lungen oder Nieren
+	 */
+	@Deprecated NEUROLOGISCHE_ODER_MUSKULOSKELETTALE_ERKRANKUNG_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN(
+			"113022",
+			"Neurologische oder muskuloskelettale Erkrankung mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren",
+			"Affection neurologique ou musculo-squelettique avec répercussion sur la fonction cardiaque, pulmonaire ou rénale",
+			"Affezione neurologica o muscolo-scheletrica con ripercussioni sulla funzione cardiaca, polmonare o renale",
+			"20130101", "20131231"),
+
+	/**
+	 * Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder
+	 * Nierenfunktion)
+	 */
+	NEUROMUSKULÄRE_KRANKHEIT_FALLS_AUSWIRKUNGEN_AUF_HERZ_LUNGEN_ODER_NIERENFUNKTION("114012",
+			"Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder Nierenfunktion)",
+			"Maladie neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)",
+			"Malattia neuromuscolare (Se ripercussione sulla funzione cardiaca, polmonare o renale)",
+			"20140101", ""),
+
+	/** Niereninsuffizienz */
+	NIERENINSUFFIZIENZ("113023", "Niereninsuffizienz", "Insuffisance rénale",
+			"Insufficienza renale", "20130101", ""),
+
+	/** Pneumopathien (chronische) */
+	@Deprecated PNEUMOPATHIEN_CHRONISCHE("113024", "Pneumopathien (chronische)",
+			"Pneumopathies chroniques", "Pneumopatie croniche", "20130101", "20131231"),
+
+	/**
+	 * Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel
+	 */
+	SCHÄDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL("114032",
+			"Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel",
 			"Fracture ou malformation de la base du crâne, fistule de liquide céphalo-rachidien",
 			"Frattura o malformazione della base del cranio, fistola di liquido cerebrospinale",
-			"20140101", "");
+			"20140101", ""),
 
-	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.1";
+	/**
+	 * Schwangere Frauen und Frauen, die in den letzten 4 Wochen entbunden haben
+	 */
+	@Deprecated SCHWANGERE_FRAUEN_UND_FRAUEN_DIE_IN_DEN_LETZTEN_4_WOCHEN_ENTBUNDEN_HABEN_("113025",
+			"Schwangere Frauen und Frauen, die in den letzten 4 Wochen entbunden haben ",
+			"Femmes enceintes ou ayant accouchées au cours des 4 semaines précédentes",
+			"Donne incite o che hanno partorito nelle 4 settimane precedenti", "20130101",
+			"20131231"),
+
+	/** Schwangerschaft und post-partum Periode */
+	SCHWANGERSCHAFT_UND_POST_PARTUM_PERIODE("114028", "Schwangerschaft und post-partum Periode",
+			"Grossesse et post-partum", "Gravidanza e post-parto", "20140101", ""),
+
+	/** Schwere Neurodermitis beim Kind */
+	SCHWERE_NEURODERMITIS_BEIM_KIND("113021", "Schwere Neurodermitis beim Kind",
+			"Eczema sévère chez l’enfant", "Eczema severo nel bambino", "20130101", ""),
+
+	/**
+	 * Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen
+	 * Steroiden
+	 */
+	SCHWERES_ASTHMA_BEI_VERLÄNGERTER_ODER_HÄUFIGER_BEHANDLUNG_MIT_ORALEN_STEROIDEN("114004",
+			"Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen Steroiden",
+			"Asthme sévère : si traitement prolongé ou fréquent par des corticoïdes oraux",
+			"Asma severa : se trattamento prolungato o frequente con corticoidi orali", "20140101",
+			""),
+
+	/** Sichelzellanämie */
+	SICHELZELLANÄMIE("114014", "Sichelzellanämie", "Anémie falciforme", "Anemia falciforme",
+			"20140101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD compl-risks";
+
+	/** The Constant CODE_SYSTEM_OID. */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.1";
 
 	/** The code. */
 	private String code;

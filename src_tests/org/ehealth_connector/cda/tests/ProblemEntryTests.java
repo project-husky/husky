@@ -186,7 +186,9 @@ public class ProblemEntryTests {
 	public void testComplicationRisks() throws XPathExpressionException {
 		ProblemEntry entry = new ProblemEntry();
 
-		entry.setComplicationRisk(CdaChVacdComplRisks.CR114006, null);
+		entry.setComplicationRisk(
+				CdaChVacdComplRisks.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				null);
 
 		Document document = entry.getDocument();
 
@@ -203,7 +205,9 @@ public class ProblemEntryTests {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(CdaChVacdComplRisks.CR114006, entry.getComplicationRisk());
+		assertEquals(
+				CdaChVacdComplRisks.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				entry.getComplicationRisk());
 	}
 
 	@Test
