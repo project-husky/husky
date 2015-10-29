@@ -25,7 +25,10 @@ import org.openhealthtools.mdht.uml.cda.Criterion;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * CriterionEntry.
+ * CriterionEntry implements the structured recommendation category for
+ * immunization in switzerland, see chapter 7.5.1.8. CDA-CH-VACD Valueset
+ * defined for recommondation see
+ * org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories
  */
 public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CriterionEntry> {
 
@@ -72,7 +75,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	}
 
 	/**
-	 * Gets the rec category.
+	 * Gets the recommendation category for the immunization
 	 *
 	 * @return the rec category
 	 */
@@ -97,7 +100,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	}
 
 	/**
-	 * Gets the text reference.
+	 * Gets the text reference pointing to the narrative text in the section.
 	 *
 	 * @return the text reference
 	 */
@@ -118,10 +121,10 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	}
 
 	/**
-	 * Sets the rec category.
+	 * Sets the recommendation category.
 	 *
 	 * @param recCategory
-	 *            the rec category
+	 *            the recommendation category
 	 * @param languageCode
 	 *            the language code
 	 */
@@ -134,10 +137,10 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	}
 
 	/**
-	 * Sets the rec category code.
+	 * Sets the recommendation code.
 	 *
 	 * @param code
-	 *            the new rec category code
+	 *            the new recommendation category code
 	 */
 	public void setRecCategoryCode(Code code) {
 		getMdht().setCode(code.getCD());

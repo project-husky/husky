@@ -22,77 +22,79 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 
 /**
- * Value Set valid from 20130101 Codesystem: SNOMED CT (OID:
- * 2.16.840.1.113883.6.96) Value-Set: CDA-CH-VACD immunizations (OID:
- * 2.16.756.5.30.1.127.3.3.3)
+ * This subset contains immunization for which an vaccine can be given in
+ * switzerland. The sortorder is equivalent to the ordering of the vaccines in
+ * the offical document for immunization recording. Value Set valid from
+ * 20130101 Codesystem: SNOMED CT (OID: 2.16.840.1.113883.6.96) Value-Set:
+ * CDA-CH-VACD immunizations (OID: 2.16.756.5.30.1.127.3.3.3)
  */
 public enum CdaChVacdImmunizations {
 
-	/** The bcg. */
+	/** BCG vaccination */
 	BCG("42284007", "BCG vaccination", "20130101", "", 25),
 
-	/** The diphtheria. */
+	/** Diphtheria vaccination (procedure) */
 	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)", "20130101", "", 1),
 
-	/** The haemophilus. */
+	/** Haemophilus influenzae type b vaccination (procedure) */
 	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)", "20130101",
 			"", 5),
 
-	/** The hepa. */
+	/** Hepatitis A immunization (procedure) */
 	HEPA("243789007", "Hepatitis A immunization (procedure)", "20130101", "", 7),
 
-	/** The hepb. */
+	/** Hepatitis B vaccination (procedure) */
 	HEPB("16584000", "Hepatitis B vaccination (procedure)", "20130101", "", 6),
 
-	/** The influenza. */
+	/** Influenza vaccination (procedure) */
 	INFLUENZA("86198006", "Influenza vaccination (procedure)", "20130101", "", 31),
 
-	/** The japanese. */
+	/** Japanese encephalitis vaccination (procedure) */
 	JAPANESE("314759000", "Japanese encephalitis vaccination (procedure)", "20130101", "", 32),
 
-	/** The measles. */
+	/** Measles vaccination (procedure) */
 	MEASLES("47435007", "Measles vaccination (procedure)", "20130101", "", 8),
 
-	/** The meningococcus. */
+	/** Meningococcus vaccination (procedure) */
 	MENINGOCOCCUS("41088001", "Meningococcus vaccination (procedure)", "20130101", "", 23),
 
-	/** The mumps. */
+	/** Mumps vaccination (procedure) */
 	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", "", 9),
 
-	/** The pertussis. */
+	/** Pertussis vaccination (procedure) */
 	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", "", 3),
 
-	/** The pneumococcal. */
+	/** Pneumococcal vaccination (procedure) */
 	PNEUMOCOCCAL("12866006", "Pneumococcal vaccination (procedure)", "20130101", "", 21),
 
-	/** The poliomyelitis. */
+	/** Poliomyelitis vaccination (procedure) */
 	POLIOMYELITIS("72093006", "Poliomyelitis vaccination (procedure)", "20130101", "", 4),
 
-	/** The rabies. */
+	/** Rabies vaccination (procedure) */
 	RABIES("34631000", "Rabies vaccination (procedure)", "20130101", "", 33),
 
-	/** The rubella. */
+	/** Rubella vaccination (procedure) */
 	RUBELLA("82314000", "Rubella vaccination (procedure)", "20130101", "", 10),
 
-	/** The tetanus. */
+	/** Tetanus vaccination (procedure) */
 	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", "", 2),
 
-	/** The tickbornencephalitis. */
+	/** Tick-borne encephalitis vaccination (procedure) */
 	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101",
 			"", 24),
 
-	/** The typhus. */
+	/** Typhus vaccination (procedure) */
 	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", "", 34),
 
-	/** The papillomavirus. */
+	/** Vaccination for human papillomavirus (procedure) */
 	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "",
 			12),
 
-	/** The varicella. */
+	/** Varicella vaccination (procedure) */
 	VARICELLA("68525005", "Varicella vaccination (procedure)", "20130101", "", 20),
 
-	/** The yellofever. */
-	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "", 35);
+	/** Yellow fever vaccination (procedure) */
+	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "", 25);
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";

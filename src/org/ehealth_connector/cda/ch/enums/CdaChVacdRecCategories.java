@@ -22,25 +22,43 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 
 /**
- * Value Set valid from 20150101 Value-Set: CDA-CH-VACD rec-categories (OID:
+ * These enum contains the recommendation category for immunization in
+ * switzerland valid from 20150101 Value-Set: CDA-CH-VACD rec-categories (OID:
  * 2.16.756.5.30.1.127.3.3.4)
  */
 public enum CdaChVacdRecCategories {
 
-	/** The rec base. */
+	/**
+	 * <div class="de"> Empfohlene Basisimpfungen</div>
+	 * <div class="fr">Vaccinations recommandées de base</div>
+	 * <div class="it">Vaccinazioni raccomandate di base</div>
+	 */
 	REC_BASE("41501", "Empfohlene Basisimpfungen", "Vaccinations recommandées de base",
 			"Vaccinazioni raccomandate di base", "20150101", ""),
 
-	/** The rec compl. */
+	/**
+	 * <div class="de"> Empfohlene ergänzende Impfungen</div>
+	 * <div class="fr">Vaccinations recommandées complémentaires</div>
+	 * <div class="it">Vaccinazioni raccomandate complementari</div>
+	 */
 	REC_COMPL("41502", "Empfohlene ergänzende Impfungen",
 			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari",
 			"20150101", ""),
 
-	/** The no rec. */
-	REC_NONE("41504", "Impfungen ohne Empfehlungen", "Vaccinations sans recommandation d’utilisation",
+	/**
+	 * <div class="de"> Impfungen ohne Empfehlungen</div>
+	 * <div class="fr">Vaccinations sans recommandation d’utilisation</div>
+	 * <div class="it">Vaccinazioni senza raccomandazione d’utilizzo</div>
+	 */
+	REC_NONE("41504", "Impfungen ohne Empfehlungen",
+			"Vaccinations sans recommandation d’utilisation",
 			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", ""),
 
-	/** The rec risk. */
+	/**
+	 * <div class="de"> Empfohlene Impfungen für Risikogruppen</div>
+	 * <div class="fr">Vaccinations recommandées à des groupes à risque</div>
+	 * <div class="it">Vaccinazioni raccomandate a die gruppi a rischio</div>
+	 */
 	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen",
 			"Vaccinations recommandées à des groupes à risque",
 			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", "");
