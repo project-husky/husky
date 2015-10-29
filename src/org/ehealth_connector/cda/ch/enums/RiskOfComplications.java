@@ -136,13 +136,12 @@ public enum RiskOfComplications {
 
 	/**
 	 * <div class="de"> Empfänger einer Solidorgantransplantation</div>
-	 * <div class="fr">Receveurs d&apos;une transplantation d&apos;organe
-	 * solide</div> <div class="it">Riceventi di un trapianto d&apos;organo
-	 * solido</div>
+	 * <div class="fr">Receveurs d'une transplantation d'organe solide</div>
+	 * <div class="it">Riceventi di un trapianto d'organo solido</div>
 	 */
 	EMPFÄNGER_EINER_SOLIDORGANTRANSPLANTATION("114019", "Empfänger einer Solidorgantransplantation",
-			"Receveurs d&apos;une transplantation d&apos;organe solide",
-			"Riceventi di un trapianto d&apos;organo solido", "20140101", ""),
+			"Receveurs d'une transplantation d'organe solide",
+			"Riceventi di un trapianto d'organo solido", "20140101", ""),
 
 	/**
 	 * <div class="de"> Empfänger einer Stammzelltransplantation</div>
@@ -240,14 +239,13 @@ public enum RiskOfComplications {
 
 	/**
 	 * <div class="de"> Kandidaten für eine Solidorgantransplantation</div>
-	 * <div class="fr">Candidats à une transplantation d&apos;organe
-	 * solide</div> <div class="it">Candidati a un trapianto d&apos;organo
-	 * solido</div>
+	 * <div class="fr">Candidats à une transplantation d'organe solide</div>
+	 * <div class="it">Candidati a un trapianto d'organo solido</div>
 	 */
 	KANDIDATEN_FÜR_EINE_SOLIDORGANTRANSPLANTATION("114018",
 			"Kandidaten für eine Solidorgantransplantation",
-			"Candidats à une transplantation d&apos;organe solide",
-			"Candidati a un trapianto d&apos;organo solido", "20140101", ""),
+			"Candidats à une transplantation d'organe solide",
+			"Candidati a un trapianto d'organo solido", "20140101", ""),
 
 	/**
 	 * <div class="de"> Kardiopathie, angeborene Fehlbildung</div>

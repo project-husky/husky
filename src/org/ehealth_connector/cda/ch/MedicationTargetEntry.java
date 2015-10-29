@@ -49,6 +49,9 @@ public class MedicationTargetEntry
 
 	/**
 	 * Instantiates a new medication target entry.
+	 *
+	 * @param targetImmunization
+	 *            the target immunization
 	 */
 	public MedicationTargetEntry(CdaChVacdImmunizations targetImmunization) {
 		this();
@@ -108,8 +111,7 @@ public class MedicationTargetEntry
 		}
 
 		Identificator id = getId();
-		if ((id != null && !id.equals(other.getId()))
-				|| (id == null && other.getId() != null)) {
+		if ((id != null && !id.equals(other.getId())) || (id == null && other.getId() != null)) {
 			return false;
 		}
 
@@ -169,8 +171,7 @@ public class MedicationTargetEntry
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (this.getId() != null
-				? this.getId().hashCode() : 0);
+		result = prime * result + (this.getId() != null ? this.getId().hashCode() : 0);
 		result = prime * result + (this.getImmunizationTargetCode() != null
 				? this.getImmunizationTargetCode().hashCode() : 0);
 		return result;

@@ -37,6 +37,7 @@ public class Comment extends CommentEntry {
 	 * Instantiates a new comment.
 	 * 
 	 * @param comment
+	 *            the mdht comment object
 	 */
 	public Comment(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		super(comment);
@@ -46,6 +47,7 @@ public class Comment extends CommentEntry {
 	 * Instantiates a new comment.
 	 * 
 	 * @param text
+	 *            text which should appear in t
 	 */
 	public Comment(String text) {
 		setCommentText(text);
