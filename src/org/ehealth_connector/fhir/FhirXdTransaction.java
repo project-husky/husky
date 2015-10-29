@@ -29,6 +29,7 @@ import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.DocumentManifest;
 import ca.uhn.fhir.model.dstu2.resource.DocumentReference;
 import ca.uhn.fhir.model.dstu2.resource.HealthcareService;
+import ca.uhn.fhir.model.dstu2.resource.MessageHeader;
 import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
 
 /**
@@ -76,10 +77,22 @@ public class FhirXdTransaction {
 		}
 
 		/**
+		 * Adds a destination.
+		 * 
+		 * @param destination
+		 *            - add the destination (FHIR MessageHeader)
+		 */
+		public void addDestination(MessageHeader destination) {
+			Entry entry = this.addEntry();
+			entry.setResource(destination);
+			entry.setFullUrl(UUID.generateURN());
+		}
+
+		/**
 		 * Adds a submission-set.
 		 * 
 		 * @param submission
-		 *            - add the submission-set
+		 *            - add the submission-set (FHIR DocumentManifest)
 		 */
 		public void addSubmissionSet(DocumentManifest submissionSet) {
 			Entry entry = this.addEntry();
@@ -91,7 +104,7 @@ public class FhirXdTransaction {
 		 * Adds a document
 		 * 
 		 * @param document
-		 *            - add the document
+		 *            - add the document (FHIR DocumentReference)
 		 */
 		public void addDocument(DocumentReference document) {
 			Entry entry = this.addEntry();
