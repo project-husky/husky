@@ -145,7 +145,7 @@ public class ImmunizationTests {
 		assertEquals(null, immunization.getCriterionEntry());
 
 		CriterionEntry entry = new CriterionEntry();
-		entry.setRecCategory(CdaChVacdRecCategories.NO_REC, LanguageCode.ITALIAN);
+		entry.setRecCategory(CdaChVacdRecCategories.REC_NONE, LanguageCode.ITALIAN);
 
 		immunization.setCriterionEntry(entry);
 

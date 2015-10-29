@@ -534,4 +534,44 @@ public enum CdaChVacdComplRisks {
 		return true;
 	}
 
+	/**
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameDe() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the french display name.</div>
+	 * <div class="de">Liefert display name in französischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameFr() {
+		return displayNameFr;
+	}
+
+	/**
+	 * <div class="en">Gets the italian display name.</div>
+	 * <div class="de">Liefert display name in italienischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameIt() {
+		return displayNameIt;
+	}
+
 }

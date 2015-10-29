@@ -27,136 +27,177 @@ import org.ehealth_connector.common.DateUtil;
  */
 public enum CdaChVacdExpRisks {
 
-	/** ER_13001. */
-	ER213001("213001", "Beschäftigte im Gesundheitswesen", "Personnel médical et soignant",
-			"Personale medico e di cura", "20130101", ""),
+	/** Beschäftigte im Gesundheitswesen */
+	BESCHÄFTIGTE_IM_GESUNDHEITSWESEN("213001", "Beschäftigte im Gesundheitswesen",
+			"Personnel médical et soignant", "Personale medico e di cura", "20130101", ""),
 
-	/** ER_13002. */
-	ER213002("213002", "Enge Kontaktpersonen von Erkrankten",
+	/** Enge Kontaktpersonen von Erkrankten */
+	ENGE_KONTAKTPERSONEN_VON_ERKRANKTEN("213002", "Enge Kontaktpersonen von Erkrankten",
 			"Entourage familial d’une personne infectée",
 			"Entourage famigliare di una persona infetta", "20130101", ""),
 
-	/** ER_13003. */
-	ER213003("213003",
+	/**
+	 * Erwachsene und Kinder ab 6 Jahren, die in Endemiegebieten wohnen oder
+	 * sich teilweise dort aufhalten
+	 */
+	ERWACHSENE_UND_KINDER_AB_6_JAHREN_DIE_IN_ENDEMIEGEBIETEN_WOHNEN_ODER_SICH_TEILWEISE_DORT_AUFHALTEN(
+			"213003",
 			"Erwachsene und Kinder ab 6 Jahren, die in Endemiegebieten wohnen oder sich teilweise dort aufhalten",
 			"Adultes et enfants dès 6 ans qui résident ou séjournent temporairement dans des territoires endémiques ",
 			"Adulti e bambini a partire dai 6 anni che risiedono o soggiornano in regioni endemiche",
 			"20130101", ""),
 
-	/** ER_13004. */
-	ER213004("213004", "Tierpfleger, -händler, -seuchenpolizisten",
-			"Personnes exposées qui soignent des animaux, marchands d’animaux : personnel engagé dans la lutte contre les épizooties",
-			"Persone esposte che curano animali, commercianti di animali, personale impiegato nella lotta contro le epizoozie",
-			"20130101", ""),
-
-	/** ER_13005. */
-	ER213005("213005", "Familienangehörige von Personen mit einem erhöhten Risiko",
+	/**
+	 * Familienangehörige von Personen mit einem erhöhten Risiko
+	 */
+	FAMILIENANGEHÖRIGE_VON_PERSONEN_MIT_EINEM_ERHÖHTEN_RISIKO("213005",
+			"Familienangehörige von Personen mit einem erhöhten Risiko",
 			"Entourage familial des personnes à risque accru de complications",
 			"Entourage famigliare di persone a maggiore rischio di complicazioni", "20130101", ""),
 
-	/** ER_13006. */
-	ER213006("213006", "Fledermausforscher und -schützer",
+	/** Fledermausforscher und -schützer */
+	FLEDERMAUSFORSCHER_UND_SCHÜTZER("213006", "Fledermausforscher und -schützer",
 			"Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
 			"Ricercatori che svolgono ricerche sui chirotteri, protettori o appassionati di pipistrelli",
 			"20130101", ""),
 
-	/** ER_13007. */
-	ER213007("213007", "Geistig behinderte Personen in Heimen und deren BetreuerInnen",
+	/**
+	 * Geistig behinderte Personen in Heimen und deren BetreuerInnen
+	 */
+	GEISTIG_BEHINDERTE_PERSONEN_IN_HEIMEN_UND_DEREN_BETREUERINNEN("213007",
+			"Geistig behinderte Personen in Heimen und deren BetreuerInnen",
 			"Personnes handicapées mentales et personnel des institutions pour handicapés mentaux ",
 			"Persone disabili mentali e personale degli istituti per disabili mentali", "20130101",
 			""),
 
-	/** ER_13008. */
-	ER213008("213008", "Hämodialysepatienten", "Personnes dialysées", "Persone in dialisi",
-			"20130101", ""),
+	/** Hämodialysepatienten */
+	HÄMODIALYSEPATIENTEN("213008", "Hämodialysepatienten", "Personnes dialysées",
+			"Persone in dialisi", "20130101", ""),
 
-	/** ER_13009. */
-	ER213009("213009", "Hämophile Personen", "Personnes hémophiles", "Persone affette da emofilia",
-			"20130101", ""),
+	/** Hämophile Personen */
+	HÄMOPHILE_PERSONEN("213009", "Hämophile Personen", "Personnes hémophiles",
+			"Persone affette da emofilia", "20130101", ""),
 
-	/** ER_13010. */
-	ER213010("213010", "Kanalisationsarbeiter und Angestellte von Kläranlagen",
+	/** Kanalisationsarbeiter und Angestellte von Kläranlagen */
+	KANALISATIONSARBEITER_UND_ANGESTELLTE_VON_KLÄRANLAGEN("213010",
+			"Kanalisationsarbeiter und Angestellte von Kläranlagen",
 			"Travailleurs des canalisations et des stations d’épuration",
 			"Personale addetto alla manutenzione delle fognature e delle stazioni di depurazione",
 			"20130101", ""),
 
-	/** ER_13011. */
-	ER213011("213011",
+	/**
+	 * Kinder aus Ländern mit mittlerer und hoher Endemizität, die in der
+	 * Schweiz leben und für einen vorübergehenden Aufenthalt in ihr
+	 * Herkunftsland zurückkehren
+	 */
+	KINDER_AUS_LÄNDERN_MIT_MITTLERER_UND_HOHER_ENDEMIZITÄT_DIE_IN_DER_SCHWEIZ_LEBEN_UND_FÜR_EINEN_VORÜBERGEHENDEN_AUFENTHALT_IN_IHR_HERKUNFTSLAND_ZURÜCKKEHREN(
+			"213011",
 			"Kinder aus Ländern mit mittlerer und hoher Endemizität, die in der Schweiz leben und für einen vorübergehenden Aufenthalt in ihr Herkunftsland zurückkehren",
 			"Enfants originaires de pays de moyenne et haute endémicité vivant en Suisse et retournant dans leurs pays pour des séjours temporaires",
 			"Bambini originari di paesi di media ed elevata endemicità che vivono in Svizzera e che ritornano nel loro paese per dei soggiorni temporanei",
 			"20130101", ""),
 
-	/** ER_13012. */
-	ER213012("213012", "Konsumenten von injizierbaren Drogen und deren Kontaktpersonen",
+	/**
+	 * Konsumenten von injizierbaren Drogen und deren Kontaktpersonen
+	 */
+	KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN("213012",
+			"Konsumenten von injizierbaren Drogen und deren Kontaktpersonen",
 			"Consommateurs de drogues injectables et personnes à leur contact",
 			"Consumatori di droghe iniettabili e persone a loro contatto", "20130101", ""),
 
-	/** ER_13013. */
-	ER213013("213013", "Laborpersonal", "Personnel de laboratoire susceptible d’être exposé",
+	/** Laborpersonal */
+	LABORPERSONAL("213013", "Laborpersonal", "Personnel de laboratoire susceptible d’être exposé",
 			"Personale di laboratorio suscettibile di essere esposto", "20130101", ""),
 
-	/** ER_13014. */
-	ER213014("213014", "Männer, die mit Männern Geschlechtsverkehr haben",
+	/** Männer, die mit Männern Geschlechtsverkehr haben */
+	MÄNNER_DIE_MIT_MÄNNERN_GESCHLECHTSVERKEHR_HABEN("213014",
+			"Männer, die mit Männern Geschlechtsverkehr haben",
 			"Hommes ayant des relations sexuelles avec d’autres hommes",
 			"Uomini che hanno rapporti sessuali con altri uomini", "20130101", ""),
 
-	/** ER_13015. */
-	ER213015("213015",
+	/**
+	 * Patientinnen und Patienten in Pflegeheimen und in Einrichtungen für
+	 * Personen mit chronischen Erkrankungen
+	 */
+	PATIENTINNEN_UND_PATIENTEN_IN_PFLEGEHEIMEN_UND_IN_EINRICHTUNGEN_FÜR_PERSONEN_MIT_CHRONISCHEN_ERKRANKUNGEN(
+			"213015",
 			"Patientinnen und Patienten in Pflegeheimen und in Einrichtungen für Personen mit chronischen Erkrankungen",
 			"Patients résidant dans une maison de soins ou dans un établissement pour malades chroniques",
 			"Ospiti di una casa di cura o di un istituto per malati cronici", "20130101", ""),
 
-	/** ER_13016. */
-	ER213016("213016", "Personen aus Ländern mit hoher oder intermediärer Hepatitis-B-Endemizität",
+	/**
+	 * Personen aus Ländern mit hoher oder intermediärer Hepatitis-B-Endemizität
+	 */
+	PERSONEN_AUS_LÄNDERN_MIT_HOHER_ODER_INTERMEDIÄRER_HEPATITIS_B_ENDEMIZITÄT("213016",
+			"Personen aus Ländern mit hoher oder intermediärer Hepatitis-B-Endemizität",
 			"Personnes provenant de zones d’endémie haute ou intermédiaire pour l’hépatite B",
 			"Persone provenienti da zone di endemicità elevata o intermedia per l’epatite B",
 			"20130101", ""),
 
-	/** ER_13017. */
-	ER213017("213017", "Personen mit einer sexuell übertragbaren Krankheit",
+	/** Personen mit einer sexuell übertragbaren Krankheit */
+	PERSONEN_MIT_EINER_SEXUELL_ÜBERTRAGBAREN_KRANKHEIT("213017",
+			"Personen mit einer sexuell übertragbaren Krankheit",
 			"Personnes consultant pour une maladie sexuellement transmissible",
 			"Persone che consultano per una malattia sessualmente trasmissibile", "20130101", ""),
 
-	/** ER_13018. */
-	ER213018("213018", "Personen mit engem Kontakt zu Personen aus Ländern mit hoher Endemizität",
+	/**
+	 * Personen mit engem Kontakt zu Personen aus Ländern mit hoher Endemizität
+	 */
+	PERSONEN_MIT_ENGEM_KONTAKT_ZU_PERSONEN_AUS_LÄNDERN_MIT_HOHER_ENDEMIZITÄT("213018",
+			"Personen mit engem Kontakt zu Personen aus Ländern mit hoher Endemizität",
 			"Personnes en contact étroit avec des personnes en provenance de pays de haute endémicité",
 			"Persone a stretto contatto con delle persone provenienti da paesi di endemicità elevata",
 			"20130101", ""),
 
-	/** ER_13019. */
-	ER213019("213019", "Personen mit häufig wechselnden Sexualpartnern",
+	/** Personen mit häufig wechselnden Sexualpartnern */
+	PERSONEN_MIT_HÄUFIG_WECHSELNDEN_SEXUALPARTNERN("213019",
+			"Personen mit häufig wechselnden Sexualpartnern",
 			"Personnes changeant souvent de partenaires sexuels",
 			"Persone che cambiano spesso partner sessuale", "20130101", ""),
 
-	/** ER_13020. */
-	ER213020("213020",
+	/**
+	 * Personen mit regelmässigem Kontakt (beruflich / familiär) zu Säuglingen
+	 * &lt; 6 Monaten, schwangere Frauen
+	 */
+	PERSONEN_MIT_REGELMÄSSIGEM_KONTAKT_BERUFLICH_FAMILIÄR_ZU_SÄUGLINGEN_LT_6_MONATEN_SCHWANGERE_FRAUEN(
+			"213020",
 			"Personen mit regelmässigem Kontakt (beruflich / familiär) zu Säuglingen &lt; 6 Monaten, schwangere Frauen",
 			"Personnes en contact professionnel ou familial régulier avec des nourrissons &lt; 6 mois, femmes enceintes",
 			"Personale in contatto professionale o famigliare con dei lattanti di meno di 6 mesi o con donne incinte",
 			"20130101", ""),
 
-	/** ER_13021. */
-	ER213021("213021", "Rekruten (Militär)", "Recrues (militaires)", "Reclute (militari)",
+	/** Rekruten (Militär) */
+	REKRUTEN_MILITÄR("213021", "Rekruten (Militär)", "Recrues (militaires)", "Reclute (militari)",
 			"20130101", ""),
 
-	/** ER_13022. */
-	ER213022("213022",
+	/**
+	 * Sozialarbeiter, Gefängnispersonal und Polizeiangestellte mit häufigem
+	 * Kontakt zu Konsumenten von injizierbaren Drogen
+	 */
+	SOZIALARBEITER_GEFÄNGNISPERSONAL_UND_POLIZEIANGESTELLTE_MIT_HÄUFIGEM_KONTAKT_ZU_KONSUMENTEN_VON_INJIZIERBAREN_DROGEN(
+			"213022",
 			"Sozialarbeiter, Gefängnispersonal und Polizeiangestellte mit häufigem Kontakt zu Konsumenten von injizierbaren Drogen",
 			"Travailleurs sociaux, personnel des prisons et de la police en contact fréquent avec des consommateurs de drogues injectables",
 			"Lavoratori nel campo socio-educativo o della sicurezza (carceri, polizia) a contatto frequente con dei consumatori di droghe iniettabili",
 			"20130101", ""),
 
-	/** ER_13023. */
-	ER213023("213023", "Tierärzte (inkl. Studenten, Praxisangestellte)",
+	/** Tierärzte (inkl. Studenten, Praxisangestellte) */
+	TIERÄRZTE_INKL_STUDENTEN_PRAXISANGESTELLTE("213023",
+			"Tierärzte (inkl. Studenten, Praxisangestellte)",
 			"Vétérinaires (étudiants : assistants vétérinaires)",
-			"Veterinari (studenti, assistenti veterinari)", "20130101", "");
+			"Veterinari (studenti, assistenti veterinari)", "20130101", ""),
 
-	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.2";
+	/** Tierpfleger, -händler, -seuchenpolizisten */
+	TIERPFLEGER_HÄNDLER_SEUCHENPOLIZISTEN("213004", "Tierpfleger, -händler, -seuchenpolizisten",
+			"Personnes exposées qui soignent des animaux, marchands d’animaux : personnel engagé dans la lutte contre les épizooties",
+			"Persone esposte che curano animali, commercianti di animali, personale impiegato nella lotta contro le epizoozie",
+			"20130101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD exp-risks";
+
+	/** The Constant CODE_SYSTEM_OID. */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.2";
 
 	/** The code. */
 	private String code;
@@ -282,6 +323,46 @@ public enum CdaChVacdExpRisks {
 	 */
 	public String getCodeValue() {
 		return code;
+	}
+
+	/**
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameDe() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the french display name.</div>
+	 * <div class="de">Liefert display name in französischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameFr() {
+		return displayNameFr;
+	}
+
+	/**
+	 * <div class="en">Gets the italian display name.</div>
+	 * <div class="de">Liefert display name in italienischer Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayNameIt() {
+		return displayNameIt;
 	}
 
 	/**

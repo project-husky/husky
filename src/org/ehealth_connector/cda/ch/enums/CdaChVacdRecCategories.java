@@ -36,21 +36,20 @@ public enum CdaChVacdRecCategories {
 			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari",
 			"20150101", ""),
 
+	/** The no rec. */
+	REC_NONE("41504", "Impfungen ohne Empfehlungen", "Vaccinations sans recommandation d’utilisation",
+			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", ""),
+
 	/** The rec risk. */
 	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen",
 			"Vaccinations recommandées à des groupes à risque",
-			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", ""),
-
-	/** The no rec. */
-	NO_REC("41504", "Impfungen ohne Empfehlungen",
-			"Vaccinations sans recommandation d’utilisation",
-			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", "");
-
-	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.4";
+			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD rec-categories";
+
+	/** The Constant CODE_SYSTEM_OID. */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.3.4";
 
 	/** The code. */
 	private String code;
@@ -76,7 +75,7 @@ public enum CdaChVacdRecCategories {
 	 * mittels eines Codes und einem Display Name</div>.
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayNameDe
 	 *            the display name de
@@ -100,11 +99,11 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -118,8 +117,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 * 
 	 * @param languageCode
 	 *            the language code
@@ -165,8 +164,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>.
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -175,8 +174,18 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div> <div
-	 * class="de">Liefert display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * 
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return displayNameDe;
+	}
+
+	/**
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -185,8 +194,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the french display name.</div> <div
-	 * class="de">Liefert display name in französischer Sprache.</div>
+	 * <div class="en">Gets the french display name.</div>
+	 * <div class="de">Liefert display name in französischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -195,8 +204,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the italian display name.</div> <div
-	 * class="de">Liefert display name in italienischer Sprache.</div>
+	 * <div class="en">Gets the italian display name.</div>
+	 * <div class="de">Liefert display name in italienischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -211,7 +220,7 @@ public enum CdaChVacdRecCategories {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -225,7 +234,7 @@ public enum CdaChVacdRecCategories {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */

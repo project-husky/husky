@@ -209,6 +209,11 @@ public enum CdaChVacdImmunizations {
 		return displayName;
 	}
 
+	/**
+	 * Gets the sort order.
+	 *
+	 * @return the sort order
+	 */
 	public int getSortOrder() {
 		return sortOrder;
 	}

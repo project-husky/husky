@@ -214,7 +214,9 @@ public class ProblemEntryTests {
 	public void testExposureRisks() throws XPathExpressionException {
 		ProblemEntry entry = new ProblemEntry();
 
-		entry.setExposureRisk(CdaChVacdExpRisks.ER213012, null);
+		entry.setExposureRisk(
+				CdaChVacdExpRisks.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				null);
 
 		Document document = entry.getDocument();
 
@@ -231,7 +233,9 @@ public class ProblemEntryTests {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(CdaChVacdExpRisks.ER213012, entry.getExposureRisk());
+		assertEquals(
+				CdaChVacdExpRisks.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				entry.getExposureRisk());
 	}
 
 	@Test

@@ -81,7 +81,7 @@ public class CriterionEntryTests {
 	public void testRecCatgoryEnum() throws XPathExpressionException {
 		CriterionEntry entry = new CriterionEntry();
 
-		entry.setRecCategory(CdaChVacdRecCategories.NO_REC, LanguageCode.FRENCH);
+		entry.setRecCategory(CdaChVacdRecCategories.REC_NONE, LanguageCode.FRENCH);
 		Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile(
@@ -89,7 +89,7 @@ public class CriterionEntryTests {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(CdaChVacdRecCategories.NO_REC, entry.getRecCategory());
+		assertEquals(CdaChVacdRecCategories.REC_NONE, entry.getRecCategory());
 	}
 
 	@Test
