@@ -181,7 +181,7 @@ public class DateUtil {
 	/**
 	 * Creates an IVL_TS object
 	 * 
-	 * @param eurDateBegin
+	 * @param eurDateTime
 	 *            <div class="en">start of an interval in the european format
 	 *            dd.MM.yyyy</div> <div class="de">der Begin des Intervals in
 	 *            dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>

@@ -160,7 +160,8 @@ public class Telecoms {
 	 * @param url
 	 *            <div class="en">website e.g.
 	 *            "http://www.ehealth-connector.org")</div><div
-	 *            class="de">Webseite (z.B. "http://www.ehealth-connector.org")
+	 *            class="de">Webseite (z.B.
+	 *            "http://www.ehealth-connector.org")</div>
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div><div
 	 *            class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
