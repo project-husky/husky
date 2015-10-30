@@ -2066,9 +2066,6 @@ public class FhirCdaChVacd {
 		// comment
 		retVal.setCommentText(getComment(fhirMedicationStatement));
 
-		// externalDocument
-		retVal.setExternalDocumentEntry(getExternalDocument(fhirMedicationStatement));
-
 		return retVal;
 
 	}
