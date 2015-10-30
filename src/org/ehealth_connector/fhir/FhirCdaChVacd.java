@@ -207,6 +207,37 @@ public class FhirCdaChVacd {
 		private ResourceReferenceDt reasons;
 
 		/**
+		 * <div class="en">List of reasons for this medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
+		 */
+		@Child(name = "externalDocument")
+		@Extension(url = FhirCommon.urnUseAsExternalDocument, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "reference to the guidline for the immunization recommendation")
+		private ResourceReferenceDt externalDocument;
+
+		/**
+		 * Gets the external document.
+		 *
+		 * @return the external document
+		 */
+		public ResourceReferenceDt getExternalDocument() {
+			if (this.externalDocument == null) {
+				this.externalDocument = new ResourceReferenceDt();
+			}
+			return externalDocument;
+		}
+
+		/**
+		 * Sets the external document.
+		 *
+		 * @param externalDocument
+		 *            the new external document
+		 */
+		public void setExternalDocument(ResourceReferenceDt externalDocument) {
+			this.externalDocument = externalDocument;
+		}
+
+		/**
 		 * <div class="en">Empty constructor (default)</div>
 		 * <div class="de"></div><div class="fr"></div>
 		 */
@@ -2034,6 +2065,9 @@ public class FhirCdaChVacd {
 
 		// comment
 		retVal.setCommentText(getComment(fhirMedicationStatement));
+
+		// externalDocument
+		retVal.setExternalDocumentEntry(getExternalDocument(fhirMedicationStatement));
 
 		return retVal;
 

@@ -95,7 +95,9 @@ public class ExternalReferenceEntry
 	 *            the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
-		this.getMdht().setExternalDocument(externalDocumentEntry.getMdht());
+		if (externalDocumentEntry != null) {
+			this.getMdht().setExternalDocument(externalDocumentEntry.getMdht());
+		}
 	}
 
 }
