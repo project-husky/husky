@@ -29,26 +29,32 @@ import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class ImmunizationSection.
+ * The Class ImmunizationSection provides the support for immunization section
+ * for IHE Immunization Content (IC) profiles. E.g. CDA-CH-VACD 7.5.8.2
  */
-public class ImmunizationSection
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
+public class ImmunizationSection extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
+
+	// default language is German
+	private LanguageCode languageCode = LanguageCode.GERMAN;
 
 	/**
 	 * Instantiates a new immunization section.
-	 *
+	 * 
 	 * @param languageCode
 	 *            the language code
 	 */
 	public ImmunizationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationsSection().init(), null, null);
-		this.getMdht().setTitle(Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION
-				.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
+		this.languageCode = languageCode;
+		this.getMdht().setTitle(
+				Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION
+						.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
 	}
 
 	/**
 	 * Instantiates a new immunization section.
-	 *
+	 * 
 	 * @param immunizationSection
 	 *            the immunization section
 	 */
@@ -58,21 +64,19 @@ public class ImmunizationSection
 	}
 
 	/**
-	 * Adds the immunization. If the text is created in the section based on the
-	 * immunization object the level3 obects immunization,
+	 * Adds the immunization to the section. If the text is created in the
+	 * section based on the immunization object the level3 obects immunization,
 	 * medicationTargetEntry, commentEntry and criterionEntry will be linked
 	 * with a text reference (If the CommentEntry in immunization has a text it
 	 * will be replaced by the reference)
 	 * 
 	 * @param immunization
 	 *            the immunization
-	 * @param languageCode
-	 *            the language code
 	 * @param createSectionText
 	 *            if the section text should be created
 	 */
 	public void addImmunization(org.ehealth_connector.cda.ch.Immunization immunization,
-			LanguageCode languageCode, boolean createSectionText) {
+			boolean createSectionText) {
 		if (immunization != null) {
 			getMdht().addSubstanceAdministration(immunization.getMdht());
 		}
@@ -86,7 +90,7 @@ public class ImmunizationSection
 			}
 			String prefix = "is" + StringUtils.countMatches(text, "<tr>");
 			int pos = text.lastIndexOf("</tr>") + 5;
-			String row = this.getTableRow(languageCode, immunization, prefix);
+			String row = this.getTableRow(immunization, prefix);
 			String newText = text.substring(0, pos) + row + text.substring(pos);
 			getMdht().createStrucDocText(newText);
 		}
@@ -94,26 +98,28 @@ public class ImmunizationSection
 
 	/**
 	 * Gets the default section table.
-	 *
+	 * 
 	 * @return the table
 	 */
 	public String getTable() {
-		return "<table><tbody><tr><th>Impfstoff Handelsname</th><th>Hersteller</th><th>Lot-Nr</th><th>Datum</th><th>Impfung gegen</th><th>Impfung erfolgt durch</th><th>Impfung dokumentiert durch</th><th>EKIF Empfehlungskategorie</th><th>Bemerkung</th></tr></tbody></table>";
+		if (languageCode == LanguageCode.GERMAN)
+			return "<table><tbody><tr><th>Impfstoff Handelsname</th><th>Hersteller</th><th>Lot-Nr</th><th>Datum</th><th>Impfung gegen</th><th>Impfung erfolgt durch</th><th>Impfung dokumentiert durch</th><th>EKIF Empfehlungskategorie</th><th>Bemerkung</th></tr></tbody></table>";
+		else
+			return "<table><tbody><tr><th>"
+					+ languageCode.getCodeValue()
+					+ " not yet implemented</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tbody></table>";
 	}
 
 	/**
 	 * adds a section the table for an immunization.
-	 *
-	 * @param languageCode
-	 *            the language code
+	 * 
 	 * @param immunization
 	 *            the immunization
 	 * @param contendIdPrefix
 	 *            the contend id prefix
 	 * @return the table row
 	 */
-	public String getTableRow(LanguageCode languageCode, Immunization immunization,
-			String contendIdPrefix) {
+	public String getTableRow(Immunization immunization, String contendIdPrefix) {
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("<tr><td>");
 		// Impfstoff Handelsname

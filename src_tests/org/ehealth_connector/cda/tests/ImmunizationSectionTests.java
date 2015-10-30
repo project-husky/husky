@@ -24,12 +24,12 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.Consumable;
 import org.ehealth_connector.cda.ch.CriterionEntry;
 import org.ehealth_connector.cda.ch.Immunization;
 import org.ehealth_connector.cda.ch.ImmunizationSection;
 import org.ehealth_connector.cda.ch.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
@@ -72,7 +72,7 @@ public class ImmunizationSectionTests {
 	public void testAddImmunizationEmpty() throws Exception {
 		ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
 		Immunization immunization = new Immunization();
-		immunizationSection.addImmunization(immunization, LanguageCode.GERMAN, true);
+		immunizationSection.addImmunization(immunization, true);
 		Document document = immunizationSection.getDocument();
 		XPathExpression expr = xpath.compile("//tr");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
@@ -112,7 +112,7 @@ public class ImmunizationSectionTests {
 
 		assertEquals(null, immunization.getTextReference());
 
-		immunizationSection.addImmunization(immunization, LanguageCode.GERMAN, true);
+		immunizationSection.addImmunization(immunization, true);
 
 		assertEquals("#is10", immunization.getTextReference());
 		assertEquals("#is11", diphterie.getTextReference());
@@ -121,8 +121,10 @@ public class ImmunizationSectionTests {
 		assertEquals("#is14", criterionEntry.getTextReference());
 		assertEquals("#is15", commentEntry.getContentIdReference());
 
-		assertEquals(comment, commentEntry.getContentIdText(immunizationSection,
-				commentEntry.getContentIdReference()));
+		assertEquals(
+				comment,
+				commentEntry.getContentIdText(immunizationSection,
+						commentEntry.getContentIdReference()));
 
 		assertEquals("Hepatitis A immunization (procedure)",
 				hepB.getContentIdText(immunizationSection, hepA.getTextReference()));
@@ -132,7 +134,7 @@ public class ImmunizationSectionTests {
 		Immunization immunization2 = new Immunization();
 		Consumable boostrix2 = CdaChVacdTest.getConsumableBoostrix();
 		immunization2.setConsumable(boostrix2);
-		immunizationSection.addImmunization(immunization2, LanguageCode.GERMAN, true);
+		immunizationSection.addImmunization(immunization2, true);
 
 		immunizationSection.getDocument();
 

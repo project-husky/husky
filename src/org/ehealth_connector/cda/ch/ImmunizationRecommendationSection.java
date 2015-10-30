@@ -29,27 +29,31 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
  * The Class ImmunizationRecommendationSection provides the support for
- * immunizaition recommondation section see CDA-CH-VACD 7.5.8.2 Spezifikation
- * CDA Body Level 1.
+ * immunization recommendation section for IHE Immunization Content (IC)
+ * profiles. E.g. CDA-CH-VACD 7.5.8.2
  */
-public class ImmunizationRecommendationSection
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection> {
+public class ImmunizationRecommendationSection extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection> {
+
+	// default language is German
+	private LanguageCode languageCode = LanguageCode.GERMAN;
 
 	/**
 	 * Instantiates a new immunization section.
-	 *
+	 * 
 	 * @param languageCode
 	 *            the language code
 	 */
 	public ImmunizationRecommendationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationRecommendationSection().init(), null, null);
+		this.languageCode = languageCode;
 		this.getMdht().setTitle(
 				Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(languageCode.getCS())));
 	}
 
 	/**
 	 * Instantiates a new immunization section.
-	 *
+	 * 
 	 * @param ImmunizationRecommendation
 	 *            the immunization section
 	 */
@@ -59,11 +63,12 @@ public class ImmunizationRecommendationSection
 	}
 
 	/**
-	 * Adds the immunizationRecommendation. If the text is created in the
-	 * section based on the immunizationRecommendation object the level3 obects
-	 * immunizationRecommendation, medicationTargetEntry, commentEntry and
-	 * criterionEntry will be linked with a text reference (If the CommentEntry
-	 * in immunizationRecommendation has a text it will be replaced by the
+	 * Adds the immunization recommendation to the section. If the text is
+	 * created in the section based on the immunizationRecommendation object the
+	 * level3 obects immunizationRecommendation, medicationTargetEntry,
+	 * SectionAnnotationCommentEntry and criterionEntry will be linked with a
+	 * text reference (If the SectionAnnotationCommentEntry in
+	 * immunizationRecommendation has a text it will be replaced by the
 	 * reference)
 	 * 
 	 * @param immunizationRecommendation
@@ -97,16 +102,21 @@ public class ImmunizationRecommendationSection
 
 	/**
 	 * Gets the default section table.
-	 *
+	 * 
 	 * @return the table
 	 */
 	public String getTable() {
-		return "<table><tbody><tr><th>Impfstoff Handelsname</th><th>Hersteller</th><th>Zeitraum</th><th>Impfung gegen</th><th>Impfempfehlung vom</th><th>Impfempfehlung durch</th><th>EKIF Empfehlungskategorie</th><th>Kommentar</th><th>Referenz</th></tr></tbody></table>";
+		if (languageCode == LanguageCode.GERMAN)
+			return "<table><tbody><tr><th>Impfstoff Handelsname</th><th>Hersteller</th><th>Zeitraum</th><th>Impfung gegen</th><th>Impfempfehlung vom</th><th>Impfempfehlung durch</th><th>EKIF Empfehlungskategorie</th><th>Kommentar</th><th>Referenz</th></tr></tbody></table>";
+		else
+			return "<table><tbody><tr><th>"
+					+ languageCode.getCodeValue()
+					+ " not yet implemented</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tbody></table>";
 	}
 
 	/**
 	 * adds a section the table for an immunizationRecommendation.
-	 *
+	 * 
 	 * @param languageCode
 	 *            the language code
 	 * @param immunizationRecommendation
@@ -138,8 +148,8 @@ public class ImmunizationRecommendationSection
 		if (immunizationRecommendation.getConsumable() != null
 				&& immunizationRecommendation.getConsumable().getManufacturer() != null
 				&& immunizationRecommendation.getConsumable().getManufacturer().getName() != null) {
-			stringBuffer
-					.append(immunizationRecommendation.getConsumable().getManufacturer().getName());
+			stringBuffer.append(immunizationRecommendation.getConsumable().getManufacturer()
+					.getName());
 		}
 		stringBuffer.append("</td><td>");
 		// <th>Zeitraum</th>
@@ -191,7 +201,8 @@ public class ImmunizationRecommendationSection
 		// <th>Kommentar</th>
 		stringBuffer.append("</td><td>");
 		if (immunizationRecommendation.getCommentEntry() != null) {
-			SectionAnnotationCommentEntry commentEntry = immunizationRecommendation.getCommentEntry();
+			SectionAnnotationCommentEntry commentEntry = immunizationRecommendation
+					.getCommentEntry();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
 			stringBuffer.append(commentEntry.getAnnotationCommentText());

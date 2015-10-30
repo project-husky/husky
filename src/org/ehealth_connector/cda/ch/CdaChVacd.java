@@ -384,7 +384,7 @@ public class CdaChVacd extends CdaCh<VACD> {
 		} else {
 			section = new ImmunizationSection(getMdht().getImmunizationsSection());
 		}
-		section.addImmunization(immunization, getLanguageCode(), true);
+		section.addImmunization(immunization, true);
 	}
 
 	/**
@@ -818,7 +818,7 @@ public class CdaChVacd extends CdaCh<VACD> {
 	/**
 	 * Gets the identifier of the document which has to be replace, see
 	 * &lt;CH-VACD-REPL&gt;
-	 *
+	 * 
 	 * @return document identificator
 	 */
 	public Identificator getDocumentToReplaceIdentifier() {

@@ -497,8 +497,8 @@ public abstract class CdaCh<EClinicalDocument extends ClinicalDocument> extends
 	 * <div class="en">Initializes the CdaCh document header defaults</div>
 	 */
 	public void initCdaCh() {
-		// Set the eHealthConnector comment
-		FeatureMapUtil.addComment(docRoot.getMixed(), 0, generateComment());
+		// // Set the eHealthConnector comment
+		// FeatureMapUtil.addComment(docRoot.getMixed(), 0, generateComment());
 
 		// Add the stylesheet processing instructions to the document root using
 		// featuremaputil
