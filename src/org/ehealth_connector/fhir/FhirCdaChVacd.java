@@ -1763,7 +1763,7 @@ public class FhirCdaChVacd {
 				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 				MedicationTargetEntry entry = new MedicationTargetEntry();
 				entry.setImmunizationTargetCode(new Code(FhirCommon.removeURIPrefix(fhirCode
-						.getSystem()), fhirCode.getCode()));
+						.getSystem()), fhirCode.getCode(), fhirCode.getDisplay()));
 				retVal.addMedicationTargetEntry(entry);
 			}
 
@@ -1775,7 +1775,7 @@ public class FhirCdaChVacd {
 				CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 				CriterionEntry entry = new CriterionEntry();
 				entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-						fhirCode.getCode()));
+						fhirCode.getCode(), fhirCode.getDisplay()));
 				retVal.setCriterionEntry(entry);
 			}
 
@@ -1852,7 +1852,7 @@ public class FhirCdaChVacd {
 			CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 			MedicationTargetEntry entry = new MedicationTargetEntry();
 			entry.setImmunizationTargetCode(new Code(FhirCommon.removeURIPrefix(fhirCode
-					.getSystem()), fhirCode.getCode()));
+					.getSystem()), fhirCode.getCode(), fhirCode.getDisplay()));
 			retVal.addMedicationTargetEntry(entry);
 		}
 
@@ -1864,7 +1864,7 @@ public class FhirCdaChVacd {
 			CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 			CriterionEntry entry = new CriterionEntry();
 			entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-					fhirCode.getCode()));
+					fhirCode.getCode(), fhirCode.getDisplay()));
 			retVal.setCriterionEntry(entry);
 		}
 
