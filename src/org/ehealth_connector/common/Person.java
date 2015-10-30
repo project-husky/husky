@@ -17,6 +17,7 @@
 package org.ehealth_connector.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -47,8 +48,8 @@ public class Person {
 	 * 
 	 * @param name
 	 * <br>
-	 *          <div class="de"> name</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> name</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Person(Name name) {
 		mPerson = CDAFactory.eINSTANCE.createPerson();
@@ -63,8 +64,8 @@ public class Person {
 	 * 
 	 * @param person
 	 * <br>
-	 *          <div class="de"> person</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> person</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
 		mPerson = person;
@@ -74,7 +75,8 @@ public class Person {
 	 * <div class="en">Copy mdht person.</div> <div class="de"></div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person object
+	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person
+	 *         object
 	 */
 	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
 		return EcoreUtil.copy(mPerson);
@@ -108,7 +110,7 @@ public class Person {
 	 * 
 	 * @return <div class="en">the names</div>
 	 */
-	public ArrayList<Name> getNames() {
+	public List<Name> getNames() {
 		ArrayList<Name> nl = new ArrayList<Name>();
 		for (PN mName : mPerson.getNames()) {
 			Name name = new Name(mName);

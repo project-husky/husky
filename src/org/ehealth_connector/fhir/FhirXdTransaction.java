@@ -159,7 +159,7 @@ public class FhirXdTransaction {
 		afinityDomain.setRegistryDestination(getRegistry(transaction));
 
 		// set the repositories
-		ArrayList<org.ehealth_connector.communication.Destination> repos = getRepositories(transaction);
+		List<org.ehealth_connector.communication.Destination> repos = getRepositories(transaction);
 		// TODO support of multiple repos as soon as this will be asked
 		if (!repos.isEmpty())
 			afinityDomain.setRepositoryDestination(repos.get(0));
@@ -167,9 +167,9 @@ public class FhirXdTransaction {
 		return afinityDomain;
 	}
 
-	public ArrayList<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
+	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
 			String receiverFacilityOid, String senderFacilityOid) {
-		ArrayList<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
+		List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
 
 		for (Entry entry : transaction.getEntry()) {
 			if (entry.getResource() instanceof DocumentReference) {
@@ -244,8 +244,8 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
-	public ArrayList<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
-		ArrayList<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
+	public List<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
+		List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
 
 		for (Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof MessageHeader) {

@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.Confidentiality;
@@ -433,8 +434,8 @@ public class DocumentMetadata {
 	 * 
 	 * @return ArrayList with Author objects
 	 */
-	public ArrayList<Author> getAuthors() {
-		ArrayList<Author> authorList = new ArrayList<Author>();
+	public List<Author> getAuthors() {
+		List<Author> authorList = new ArrayList<Author>();
 		AuthorType at = null;
 
 		for (int i = 0; i < xDoc.getAuthors().size(); i++) {
@@ -467,8 +468,8 @@ public class DocumentMetadata {
 	 * 
 	 * @return the ArrayList with ConfidentialityCodes
 	 */
-	public ArrayList<Code> getConfidentialityCodes() {
-		ArrayList<Code> confCodes = new ArrayList<Code>();
+	public List<Code> getConfidentialityCodes() {
+		List<Code> confCodes = new ArrayList<Code>();
 		CodedMetadataType cmt = null;
 
 		if (!xDoc.getConfidentialityCode().isEmpty()) {
@@ -768,7 +769,8 @@ public class DocumentMetadata {
 	 *            the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
-		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
+		xDoc.setHealthCareFacilityTypeCode(XdsUtil
+				.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**

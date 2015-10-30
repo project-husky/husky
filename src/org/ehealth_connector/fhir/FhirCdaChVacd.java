@@ -1015,7 +1015,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC ActiveProblemConcerns</div> <div
 	 *         class="de"></div> <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.ActiveProblemConcern> getActiveProblemConcernEntries(
+	public List<org.ehealth_connector.cda.ActiveProblemConcern> getActiveProblemConcernEntries(
 			Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.ActiveProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ActiveProblemConcern>();
 		for (Entry entry : bundle.getEntry()) {
@@ -1034,7 +1034,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">eHC AllergyConcern</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.AllergyConcern> getAllergyProblemConcernEntries(
+	public List<org.ehealth_connector.cda.AllergyConcern> getAllergyProblemConcernEntries(
 			Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.AllergyConcern> retVal = new ArrayList<org.ehealth_connector.cda.AllergyConcern>();
 		for (Entry entry : bundle.getEntry()) {
@@ -1071,7 +1071,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC Authors</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
+	public List<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
 		ArrayList<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 		for (Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor).isEmpty()
@@ -1263,7 +1263,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC ImmunizationRecommendations</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.ch.ImmunizationRecommendation> getImmunizationRecommendations(
+	public List<org.ehealth_connector.cda.ch.ImmunizationRecommendation> getImmunizationRecommendations(
 			Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.ch.ImmunizationRecommendation> retVal = new ArrayList<org.ehealth_connector.cda.ch.ImmunizationRecommendation>();
 		for (Entry entry : bundle.getEntry()) {
@@ -1282,7 +1282,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC Immunizations</div> <div
 	 *         class="de"></div> <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.ch.Immunization> getImmunizations(Bundle bundle) {
+	public List<org.ehealth_connector.cda.ch.Immunization> getImmunizations(Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.ch.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.ch.Immunization>();
 		for (Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()
@@ -1300,7 +1300,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC LaboratoryObservations</div> <div
 	 *         class="de"></div> <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.LaboratoryObservation> getLaboratoryObservations(
+	public List<org.ehealth_connector.cda.LaboratoryObservation> getLaboratoryObservations(
 			Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.LaboratoryObservation> retVal = new ArrayList<org.ehealth_connector.cda.LaboratoryObservation>();
 		for (Entry entry : bundle.getEntry()) {
@@ -1419,7 +1419,7 @@ public class FhirCdaChVacd {
 	 * @return <div class="en">list of eHC PastProblemConcerns</div> <div
 	 *         class="de"></div> <div class="fr"></div>
 	 */
-	public ArrayList<org.ehealth_connector.cda.PastProblemConcern> getPastProblemConcernEntries(
+	public List<org.ehealth_connector.cda.PastProblemConcern> getPastProblemConcernEntries(
 			Bundle bundle) {
 		ArrayList<org.ehealth_connector.cda.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.PastProblemConcern>();
 		for (Entry entry : bundle.getEntry()) {

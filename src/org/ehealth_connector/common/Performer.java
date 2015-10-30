@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
@@ -160,8 +161,8 @@ public class Performer {
 	 * 
 	 * @return <div class="en">the addresses</div>
 	 */
-	public ArrayList<Address> getAddresses() {
-		ArrayList<Address> al = new ArrayList<Address>();
+	public List<Address> getAddresses() {
+		List<Address> al = new ArrayList<Address>();
 		for (AD mAddress : mAsEntity.getAddrs()) {
 			Address address = new Address(mAddress);
 			al.add(address);
@@ -230,7 +231,7 @@ public class Performer {
 	 * 
 	 * @return <div class="en">the ids</div>
 	 */
-	public ArrayList<Identificator> getIds() {
+	public List<Identificator> getIds() {
 		return Util.convertIds(mAsEntity.getIds());
 	}
 
@@ -252,8 +253,8 @@ public class Performer {
 	 * 
 	 * @return <div class="en">the names</div>
 	 */
-	public ArrayList<Name> getNames() {
-		ArrayList<Name> nl = new ArrayList<Name>();
+	public List<Name> getNames() {
+		List<Name> nl = new ArrayList<Name>();
 		for (PN mName : mAsEntity.getAssignedPerson().getNames()) {
 			Name name = new Name(mName);
 			nl.add(name);

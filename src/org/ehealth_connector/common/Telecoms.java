@@ -210,7 +210,7 @@ public class Telecoms {
 	 * 
 	 * @return ArrayList <div class="en">the mdht telecoms</div>
 	 */
-	public ArrayList<TEL> getMdhtTelecoms() {
+	public List<TEL> getMdhtTelecoms() {
 		return mTels;
 	}
 

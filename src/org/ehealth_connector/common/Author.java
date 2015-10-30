@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.NullFlavor;
@@ -83,7 +84,7 @@ public class Author {
 
 	/**
 	 * Instantiates a new author.
-	 *
+	 * 
 	 * @param name
 	 *            the name
 	 */
@@ -214,8 +215,8 @@ public class Author {
 	 * 
 	 * @return <div class="en">the addresses</div>
 	 */
-	public ArrayList<Address> getAddresses() {
-		ArrayList<Address> al = new ArrayList<Address>();
+	public List<Address> getAddresses() {
+		List<Address> al = new ArrayList<Address>();
 		for (AD mAddress : mAuthor.getAssignedAuthor().getAddrs()) {
 			Address address = new Address(mAddress);
 			al.add(address);
@@ -268,7 +269,7 @@ public class Author {
 	 * <div class="en">Gets the gln (identification of the author)</div> <div
 	 * class="de">Liefert die GLN (ID des Autors)</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
@@ -293,10 +294,10 @@ public class Author {
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
 	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @return <div class="en">the ids</div>
 	 */
-	public ArrayList<Identificator> getIds() {
+	public List<Identificator> getIds() {
 		return Util.convertIds(mAuthor.getAssignedAuthor().getIds());
 	}
 
@@ -318,8 +319,8 @@ public class Author {
 	 * 
 	 * @return <div class="en">the names</div>
 	 */
-	public ArrayList<Name> getNames() {
-		ArrayList<Name> nl = new ArrayList<Name>();
+	public List<Name> getNames() {
+		List<Name> nl = new ArrayList<Name>();
 		for (PN mName : mAuthor.getAssignedAuthor().getAssignedPerson().getNames()) {
 			Name name = new Name(mName);
 			nl.add(name);
@@ -418,7 +419,7 @@ public class Author {
 
 	/**
 	 * Checks if is author patient.
-	 *
+	 * 
 	 * @return true, if is author patient
 	 */
 	public boolean isAuthorPatient() {
@@ -431,7 +432,7 @@ public class Author {
 
 	/**
 	 * Sets the author patient.
-	 *
+	 * 
 	 * @param isAuthorPatient
 	 *            true if the author ist not a doctor but the patient itself
 	 */
@@ -541,7 +542,7 @@ public class Author {
 
 	/**
 	 * To ch author.
-	 *
+	 * 
 	 * @return the org.ehealth_connector.cda.ch. author ch
 	 */
 	public org.ehealth_connector.common.ch.AuthorCh toChAuthor() {

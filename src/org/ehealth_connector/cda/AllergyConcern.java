@@ -19,6 +19,7 @@ package org.ehealth_connector.cda;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
@@ -179,8 +180,8 @@ public class AllergyConcern extends Concern {
 	 * 
 	 * @return the allergy problems
 	 */
-	public ArrayList<AllergyProblem> getAllergyProblems() {
-		ArrayList<AllergyProblem> apl = new ArrayList<AllergyProblem>();
+	public List<AllergyProblem> getAllergyProblems() {
+		List<AllergyProblem> apl = new ArrayList<AllergyProblem>();
 		for (AllergyIntolerance mAllergy : mAllergyConcern.getAllergyIntolerances()) {
 			AllergyProblem allergy = new AllergyProblem(mAllergy);
 			apl.add(allergy);

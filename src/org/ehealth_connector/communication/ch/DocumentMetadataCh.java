@@ -1,6 +1,7 @@
 package org.ehealth_connector.communication.ch;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
@@ -69,8 +70,8 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	 * 
 	 * @return the ArrayList with ConfidentialityCodes as Enums
 	 */
-	public ArrayList<ConfidentialityCode> getConfidentialityCodesEnum() {
-		ArrayList<ConfidentialityCode> ccl = new ArrayList<ConfidentialityCode>();
+	public List<ConfidentialityCode> getConfidentialityCodesEnum() {
+		List<ConfidentialityCode> ccl = new ArrayList<ConfidentialityCode>();
 		if (!xDoc.getConfidentialityCode().isEmpty()) {
 			for (int i = 0; i < xDoc.getConfidentialityCode().size(); i++) {
 				CodedMetadataType cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
