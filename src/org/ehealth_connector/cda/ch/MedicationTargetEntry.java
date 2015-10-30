@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 

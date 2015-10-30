@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 
 /**

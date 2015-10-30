@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**

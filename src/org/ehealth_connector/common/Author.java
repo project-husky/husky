@@ -23,6 +23,7 @@ import java.util.Date;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;

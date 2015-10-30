@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaCh;
 import org.ehealth_connector.cda.ch.MedicationTargetEntry;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ExternalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef;

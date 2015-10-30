@@ -1,8 +1,9 @@
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
+
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 

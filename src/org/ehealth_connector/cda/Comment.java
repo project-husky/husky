@@ -17,7 +17,7 @@
 package org.ehealth_connector.cda;
 
 import org.ehealth_connector.cda.ch.CommentEntry;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 
 /**
  * Class for Commment, please use CommentEntry instead

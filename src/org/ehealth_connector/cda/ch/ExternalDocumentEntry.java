@@ -17,7 +17,7 @@
 package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;

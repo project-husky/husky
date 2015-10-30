@@ -39,7 +39,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.ehealth_connector.common.XdsUtil;
+import org.ehealth_connector.util.XdsUtil;
 import org.ehealth_connector.util.ZipCreator;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.DocumentRoot;
 import org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMFactory;

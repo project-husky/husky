@@ -16,7 +16,7 @@
 
 package org.ehealth_connector.cda.ch;
 
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**

@@ -19,7 +19,7 @@ package org.ehealth_connector.cda;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.StatusCode;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.common.Util;
+import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CodedResultsSection;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
