@@ -444,20 +444,6 @@ public class XdsUtil {
 		return ist;
 	}
 
-	// TODO Check if this is right
-	// public static Identificator convertOhtXcnIdToEhc(String idStr) {
-	// //e.g. b8a9a9ad17b5429^^^&1.3.6.1.4.1.21367.2005.13.20.3000&ISO
-	// //e.g. IHERED-1644^^^&1.3.6.1.4.1.21367.13.20.2005.1000&ISO
-	// String[] dachSplit = idStr.split("^");
-	// //Check if the id is a HL7v2 ID, if not just return an Identificator
-	// Object without code System
-	// if (dachSplit.length<2) {
-	// return new Identificator("", idStr);
-	// }
-	// String[] andSplit = dachSplit[3].split("&");
-	// return new Identificator(andSplit[1], dachSplit[0]);
-	// }
-
 	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
 		String fileName = "DOC";
