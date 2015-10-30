@@ -16,6 +16,7 @@
 
 package org.ehealth_connector.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +25,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -684,6 +688,41 @@ public class Util {
 	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
 		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
 		return h;
+	}
+
+	/**
+	 * <div class="en">Gets a temp folder for output files. If you set an
+	 * environment variable with the name 'eHCTempPath' the eHealth Connector
+	 * will use the path specified in this environment variable. If no such
+	 * environment variable is set, it will try to use /temp. If the path is not
+	 * writable the eHealth Connector will use the system temp folder.
+	 * 
+	 * @return path to temp folder</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public static String getTempDirectory() {
+		final String envVariable = "eHCTempPath";
+		String tempDirectoryPath = null;
+		Log log = LogFactory.getLog(Util.class);
+		try {
+			String env = System.getenv(envVariable);
+			if (env != null) {
+				tempDirectoryPath = env;
+				log.debug("Trying to use temp folder set by environment variable '" + envVariable
+						+ "': " + tempDirectoryPath);
+			} else {
+				tempDirectoryPath = "/temp";
+				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
+			}
+			File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
+			FileUtils.writeStringToFile(uniqueFile, "write check");
+			FileUtils.deleteQuietly(uniqueFile);
+		} catch (Exception e) {
+			tempDirectoryPath = FileUtils.getTempDirectoryPath();
+			log.debug("failed... Will use system temp folder: " + tempDirectoryPath);
+		}
+		log.info("Temp folder: " + tempDirectoryPath);
+		return tempDirectoryPath;
 	}
 
 	/**
