@@ -703,7 +703,7 @@ public class DocumentMetadata {
 	 *            the new class code
 	 */
 	public void setClassCode(Code code) {
-		xDoc.setClassCode(XdsUtil.convertCode(code, language));
+		xDoc.setClassCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**
@@ -757,7 +757,7 @@ public class DocumentMetadata {
 	 *            the new format code
 	 */
 	public void setFormatCode(Code code) {
-		xDoc.setFormatCode(XdsUtil.convertCode(code, language));
+		xDoc.setFormatCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**
@@ -768,7 +768,7 @@ public class DocumentMetadata {
 	 *            the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
-		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertCode(code, language));
+		xDoc.setHealthCareFacilityTypeCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**
@@ -832,7 +832,7 @@ public class DocumentMetadata {
 	 *            the new practice setting code
 	 */
 	public void setPracticeSettingCode(Code code) {
-		xDoc.setPracticeSettingCode(XdsUtil.convertCode(code, language));
+		xDoc.setPracticeSettingCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**
@@ -865,7 +865,7 @@ public class DocumentMetadata {
 	 *            the new type code
 	 */
 	public void setTypeCode(Code code) {
-		xDoc.setTypeCode(XdsUtil.convertCode(code, language));
+		xDoc.setTypeCode(XdsUtil.convertEhcCodeToCodedMetadataType(code, language));
 	}
 
 	/**

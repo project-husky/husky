@@ -222,7 +222,7 @@ public class SubmissionSetMetadata {
 	 *            the contentTypeCode
 	 */
 	public void setContentTypeCode(Code code) {
-		s.setContentTypeCode(XdsUtil.convertCode(code));
+		s.setContentTypeCode(XdsUtil.convertEhcCodeToCodedMetadataType(code));
 	}
 
 	/**

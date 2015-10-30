@@ -36,34 +36,47 @@ import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * <div class="de">Class XdsUtil.</div> <div class="fr"></div> <div
- * class="it"></div>
+ * <div class="de">Class XdsUtil provides helper methods for the IHE XDS
+ * Context.</div>
  */
 public class XdsUtil {
 
 	/**
-	 * <div class="en">Convert code.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
 	 * 
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> the code</div>
 	 * @return the coded metadata type
 	 */
-	public static CodedMetadataType convertCode(Code code) {
+	public static CodedMetadataType convertEhcCodeToCodedMetadataType(Code code) {
 		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(),
 				null);
 	}
 
-	public static CodedMetadataType convertCode(Code code, String language) {
+	/**
+	 * Converts eHC Code and a given language to OHT CodedMetadataType.
+	 * 
+	 * @param code
+	 *            the code
+	 * @param language
+	 *            the language
+	 * @return the coded metadata type
+	 */
+	public static CodedMetadataType convertEhcCodeToCodedMetadataType(Code code, String language) {
 		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(),
 				null, language);
 	}
 
+	/**
+	 * Converts a list of eHC Code to a list of OHT CodedMetadataType.
+	 * 
+	 * @param codeList
+	 *            the list of Code
+	 * @return the CodedMetadataType Array
+	 */
 	public static CodedMetadataType[] convertEhcCodeToCodedMetadataType(Code[] codeList) {
 		if (codeList == null)
 			return null;
@@ -72,7 +85,7 @@ public class XdsUtil {
 
 			int i = 0;
 			for (Code cme : codeList) {
-				cmtArray[i] = XdsUtil.convertCode(cme);
+				cmtArray[i] = XdsUtil.convertEhcCodeToCodedMetadataType(cme);
 				i++;
 			}
 
@@ -80,6 +93,13 @@ public class XdsUtil {
 		}
 	}
 
+	/**
+	 * Converts a list of eHC DateTimeRange to a list of OHT DateTimeRange.
+	 * 
+	 * @param dtr
+	 *            the OHT DateTimeRange
+	 * @return the DateTimeRange Array
+	 */
 	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(
 			org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dtr) {
 		if (dtr == null)
@@ -97,6 +117,14 @@ public class XdsUtil {
 		}
 	}
 
+	/**
+	 * Converts a list of eHC Enums to a given language to a list of OHT
+	 * CodedMetadataType.
+	 * 
+	 * @param codedMetadataEnum
+	 *            the eHC Enums
+	 * @return the CodedMetadataType array
+	 */
 	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(
 			CodedMetadataEnumInterface[] codedMetadataEnum) {
 		if (codedMetadataEnum == null)
@@ -115,13 +143,11 @@ public class XdsUtil {
 	}
 
 	/**
-	 * <div class="en">Convert identificator.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Convert identificator to OHT CX</div>
 	 * 
 	 * @param id
 	 * <br>
-	 *            <div class="de"> id</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> id</div>
 	 * @return the cx
 	 */
 	public static CX convertEhcIdentificator(Identificator id) {
@@ -130,27 +156,13 @@ public class XdsUtil {
 		return createCx(id.getRoot(), id.getExtension());
 	}
 
-	public static XON convertEhcOrganization(Organization o) {
-		XON xon = Hl7v2Factory.eINSTANCE.createXON();
-		xon.setIdNumber(o.getId());
-		xon.setOrganizationName(o.getName());
-		return xon;
-	}
-
 	/**
-	 * <div class="en">Convert ii.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * Converts an OHT InternationalStringType to String
 	 * 
-	 * @param ii
-	 * <br>
-	 *            <div class="de"> ii</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 * @return the cx
+	 * @param ist
+	 *            the InternationalStringType
+	 * @return the String
 	 */
-	public static CX convertII(II ii) {
-		return createCx(ii.getRoot(), ii.getExtension());
-	}
-
 	public static String convertInternationalStringType(InternationalStringType ist) {
 		if (ist != null) {
 			if (ist.getLocalizedString() != null && ist.getLocalizedString().size() > 0) {
@@ -167,6 +179,13 @@ public class XdsUtil {
 		return null;
 	}
 
+	/**
+	 * Converts an OHT AuthorType to eHC Author
+	 * 
+	 * @param at
+	 *            the OHT AuthorType
+	 * @return the eHC Author
+	 */
 	public static Author convertOhtAuthorType(AuthorType at) {
 		Author a = new Author();
 
@@ -220,15 +239,36 @@ public class XdsUtil {
 		return a;
 	}
 
+	/**
+	 * Converts an OHT CodedMetadataType to eHC Code
+	 * 
+	 * @param cmt
+	 *            the CodedMetadataType
+	 * @return the eHC Code
+	 */
 	public static Code convertOhtCodedMetadataType(CodedMetadataType cmt) {
 		return new Code(cmt.getSchemeName(), cmt.getCode(),
 				convertInternationalStringType(cmt.getDisplayName()));
 	}
 
+	/**
+	 * Converts an OHT CX to an eHC Identificator
+	 * 
+	 * @param cx
+	 *            the OHT CX
+	 * @return the Identificator
+	 */
 	public static Identificator convertOhtCx(CX cx) {
 		return new Identificator(cx.getAssigningAuthorityUniversalId(), cx.getIdNumber());
 	}
 
+	/**
+	 * Converts an OHT SourcePatientInfoType to an eHC Patient
+	 * 
+	 * @param spit
+	 *            the SourcePatientInfoType
+	 * @return the eHC Patient
+	 */
 	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
 		Patient p = new Patient();
 
@@ -276,6 +316,13 @@ public class XdsUtil {
 		return p;
 	}
 
+	/**
+	 * Converts an OHT XAD to an eHC Address
+	 * 
+	 * @param xad
+	 *            the XAD
+	 * @return the Address
+	 */
 	public static Address convertOhtXad(XAD xad) {
 		if (xad == null)
 			return null;
@@ -283,34 +330,45 @@ public class XdsUtil {
 				AddressUse.PRIVATE);
 	}
 
+	/**
+	 * Converts the parts of an OHC XCN to an eHC Identificator
+	 * 
+	 * @param assigningAuthorityUniversalId
+	 *            the assigningAuthorityUniversalId
+	 * @param id
+	 *            the ID part
+	 * @return the Identificator
+	 */
 	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId, String id) {
 		return new Identificator(assigningAuthorityUniversalId, id);
 	}
 
+	/**
+	 * Converts an OHT XPN (Name) to an eHC Name
+	 * 
+	 * @param xpn
+	 *            the OHT XPN
+	 * @return the OHT Name
+	 */
 	public static Name convertOhtXpn(XPN xpn) {
 		return new Name(xpn.getGivenName(), xpn.getFamilyName(), xpn.getPrefix(), xpn.getSuffix());
 	}
 
 	/**
-	 * <div class="en">Creates the coded metadata.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the OHT coded metadata.</div>
 	 * 
 	 * @param schemeName
 	 * <br>
-	 *            <div class="de"> scheme name</div> <div class="fr"></div> <div
-	 *            class="it"> scheme name</div>
+	 *            <div class="en"> scheme name</div>
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> code</div>
 	 * @param displayName
 	 * <br>
-	 *            <div class="de"> display name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            <div class="en"> display name</div>
 	 * @param schemeUuid
 	 * <br>
-	 *            <div class="de"> scheme uuid</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> scheme uuid</div>
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
@@ -332,25 +390,20 @@ public class XdsUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the coded metadata.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the OHT coded metadata.</div>
 	 * 
 	 * @param schemeName
 	 * <br>
-	 *            <div class="de"> scheme name</div> <div class="fr"></div> <div
-	 *            class="it"> scheme name</div>
+	 *            <div class="en"> scheme name</div>
 	 * @param code
 	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> code</div>
 	 * @param displayName
 	 * <br>
-	 *            <div class="de"> display name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            <div class="en"> display name</div>
 	 * @param schemeUuid
 	 * <br>
-	 *            <div class="de"> scheme uuid</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <div class="en"> scheme uuid</div>
 	 * @param language
 	 * <br>
 	 *            language
@@ -375,17 +428,14 @@ public class XdsUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the cx.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the OHT CX.</div>
 	 * 
 	 * @param authorityId
 	 * <br>
-	 *            <div class="de"> authority id</div> <div class="fr"> authority
-	 *            id</div> <div class="it"> authority id</div>
+	 *            <div class="en"> authority id</div>
 	 * @param id
 	 * <br>
-	 *            <div class="de"> id</div> <div class="fr"> id</div> <div
-	 *            class="it"> id</div>
+	 *            <div class="en"> id</div>
 	 * @return the cx
 	 */
 	public static CX createCx(String authorityId, String id) {
@@ -397,15 +447,12 @@ public class XdsUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the international string.</div> <div
-	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the OHT InternationalStringType.</div>
 	 * 
 	 * @param text
 	 * <br>
-	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
-	 *            class="it"> text</div>
-	 * @return the org.openhealthtools.ihe.xds.metadata. international string
-	 *         type
+	 *            <div class="en"> text</div>
+	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
 	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString(
@@ -419,18 +466,15 @@ public class XdsUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the international string.</div> <div
-	 * class="de"></div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Creates the OHT InternationalStringType</div>
 	 * 
 	 * @param text
 	 * <br>
-	 *            <div class="de"> text</div> <div class="fr"> text</div> <div
-	 *            class="it"> text</div>
+	 *            <div class="en">the text</div>
 	 * @param language
 	 * <br>
 	 *            the language
-	 * @return the org.openhealthtools.ihe.xds.metadata. international string
-	 *         type
+	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
 	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString(
@@ -444,6 +488,16 @@ public class XdsUtil {
 		return ist;
 	}
 
+	/**
+	 * Creates a document name in conformance with the XDM document naming
+	 * scheme
+	 * 
+	 * @param xdsDoc
+	 *            the OHT XDSDocument
+	 * @param docNr
+	 *            the number of the document
+	 * @return the name of the document
+	 */
 	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
 		String fileName = "DOC";
@@ -464,6 +518,16 @@ public class XdsUtil {
 		return fileName;
 	}
 
+	/**
+	 * Creates a document path and name in conformance with the XDM document
+	 * naming scheme
+	 * 
+	 * @param xdsDoc
+	 *            the OHT XDSDocument
+	 * @param docNr
+	 *            the number of the document
+	 * @return the path and name of the document
+	 */
 	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
 		String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
 		return filePath;
