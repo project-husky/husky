@@ -226,9 +226,9 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *
 	 * @return the comment entry
 	 */
-	public CommentEntry getCommentEntry() {
+	public SectionAnnotationCommentEntry getCommentEntry() {
 		if (this.getMdht().getComment() != null) {
-			return new CommentEntry(this.getMdht().getComment());
+			return new SectionAnnotationCommentEntry(this.getMdht().getComment());
 		}
 		return null;
 	}
@@ -456,7 +456,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @param commentEntry
 	 *            the new comment entry
 	 */
-	public void setCommentEntry(CommentEntry commentEntry) {
+	public void setCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
 		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
@@ -475,8 +475,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            the text
 	 */
 	public void setCommentText(String text) {
-		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setCommentText(text);
+		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
+		commentEntry.setAnnotationCommentText(text);
 		this.setCommentEntry(commentEntry);
 	}
 

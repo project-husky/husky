@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.Consumable;
 import org.ehealth_connector.cda.ch.CriterionEntry;
 import org.ehealth_connector.cda.ch.Immunization;
@@ -97,10 +97,10 @@ public class ImmunizationSectionTests {
 		immunization.addMedicationTargetEntry(hepB);
 		immunization.addMedicationTargetEntry(diphterie);
 
-		CommentEntry commentEntry = new CommentEntry();
+		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
 		String comment = "Genereller Kommentar";
 
-		commentEntry.setCommentText("Genereller Kommentar");
+		commentEntry.setAnnotationCommentText("Genereller Kommentar");
 		immunization.setCommentEntry(commentEntry);
 
 		CriterionEntry criterionEntry = new CriterionEntry();
@@ -119,10 +119,10 @@ public class ImmunizationSectionTests {
 		assertEquals("#is12", hepB.getTextReference());
 		assertEquals("#is13", hepA.getTextReference());
 		assertEquals("#is14", criterionEntry.getTextReference());
-		assertEquals("#is15", commentEntry.getTextReference());
+		assertEquals("#is15", commentEntry.getContentIdReference());
 
 		assertEquals(comment, commentEntry.getContentIdText(immunizationSection,
-				commentEntry.getTextReference()));
+				commentEntry.getContentIdReference()));
 
 		assertEquals("Hepatitis A immunization (procedure)",
 				hepB.getContentIdText(immunizationSection, hepA.getTextReference()));

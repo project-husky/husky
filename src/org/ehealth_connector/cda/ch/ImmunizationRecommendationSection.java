@@ -191,12 +191,12 @@ public class ImmunizationRecommendationSection
 		// <th>Kommentar</th>
 		stringBuffer.append("</td><td>");
 		if (immunizationRecommendation.getCommentEntry() != null) {
-			CommentEntry commentEntry = immunizationRecommendation.getCommentEntry();
+			SectionAnnotationCommentEntry commentEntry = immunizationRecommendation.getCommentEntry();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
-			stringBuffer.append(commentEntry.getText());
+			stringBuffer.append(commentEntry.getAnnotationCommentText());
 			stringBuffer.append("</content>");
-			commentEntry.setTextReference("#" + contentId);
+			commentEntry.setContentIdReference("#" + contentId);
 		}
 		stringBuffer.append("</td><td>");
 		// <th>Referenz</th>

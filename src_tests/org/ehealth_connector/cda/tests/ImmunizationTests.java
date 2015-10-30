@@ -27,7 +27,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.Consumable;
 import org.ehealth_connector.cda.ch.CriterionEntry;
 import org.ehealth_connector.cda.ch.Immunization;
@@ -375,8 +375,8 @@ public class ImmunizationTests {
 
 	@Test
 	public void testCommentEntry() throws XPathExpressionException {
-		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setTextReference("#reference");
+		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
+		commentEntry.setContentIdReference("#reference");
 
 		Immunization entry = new Immunization();
 		entry.setCommentEntry(commentEntry);

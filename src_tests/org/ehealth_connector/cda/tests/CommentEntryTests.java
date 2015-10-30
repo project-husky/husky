@@ -24,7 +24,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -39,7 +39,7 @@ public class CommentEntryTests {
 
 	@Test
 	public void testSerializeEmpty() throws Exception {
-		CommentEntry entry = new CommentEntry();
+		SectionAnnotationCommentEntry entry = new SectionAnnotationCommentEntry();
 
 		Document document = entry.getDocument();
 
@@ -64,9 +64,9 @@ public class CommentEntryTests {
 
 	@Test
 	public void testTextReference() throws XPathExpressionException {
-		CommentEntry entry = new CommentEntry();
+		SectionAnnotationCommentEntry entry = new SectionAnnotationCommentEntry();
 
-		entry.setTextReference("#reference1");
+		entry.setContentIdReference("#reference1");
 
 		Document document = entry.getDocument();
 
@@ -75,7 +75,7 @@ public class CommentEntryTests {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals("#reference1", entry.getTextReference());
+		assertEquals("#reference1", entry.getContentIdReference());
 	}
 
 }

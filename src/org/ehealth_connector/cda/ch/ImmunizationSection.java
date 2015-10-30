@@ -196,12 +196,12 @@ public class ImmunizationSection
 		}
 		stringBuffer.append("</td><td>");
 		if (immunization.getCommentEntry() != null) {
-			CommentEntry commentEntry = immunization.getCommentEntry();
+			SectionAnnotationCommentEntry commentEntry = immunization.getCommentEntry();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
-			stringBuffer.append(commentEntry.getText());
+			stringBuffer.append(commentEntry.getAnnotationCommentText());
 			stringBuffer.append("</content>");
-			commentEntry.setTextReference("#" + contentId);
+			commentEntry.setContentIdReference("#" + contentId);
 		}
 		// Bemerkung
 		stringBuffer.append("</td></tr>");

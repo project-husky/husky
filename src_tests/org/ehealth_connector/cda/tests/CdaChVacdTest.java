@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.PastProblemConcern;
 import org.ehealth_connector.cda.PregnancyHistory;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.ch.CdaChVacd;
-import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.Consumable;
 import org.ehealth_connector.cda.ch.Immunization;
 import org.ehealth_connector.cda.ch.ImmunizationRecommendation;
@@ -179,9 +179,9 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 12
-	public CommentEntry createComment() {
-		CommentEntry commentEntry = new CommentEntry();
-		commentEntry.setCommentText(ts1);
+	public SectionAnnotationCommentEntry createComment() {
+		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
+		commentEntry.setAnnotationCommentText(ts1);
 		return commentEntry;
 	}
 

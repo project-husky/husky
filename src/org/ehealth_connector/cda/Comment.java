@@ -16,7 +16,7 @@
 
 package org.ehealth_connector.cda;
 
-import org.ehealth_connector.cda.ch.CommentEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.util.Util;
 
 /**
@@ -25,7 +25,7 @@ import org.ehealth_connector.util.Util;
  * @deprecated use CommentEntry
  */
 @Deprecated
-public class Comment extends CommentEntry {
+public class Comment extends SectionAnnotationCommentEntry {
 
 	/**
 	 * Instantiates a new comment.
@@ -50,7 +50,7 @@ public class Comment extends CommentEntry {
 	 *            text which should appear in t
 	 */
 	public Comment(String text) {
-		setCommentText(text);
+		setAnnotationCommentText(text);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Comment extends CommentEntry {
 	 * 
 	 * @return the text
 	 */
-	public String getText() {
+	public String getAnnotationCommentText() {
 		return this.getMdht().getText().getText();
 	}
 
@@ -77,7 +77,7 @@ public class Comment extends CommentEntry {
 	 * @param text
 	 *            the new text
 	 */
-	public void setCommentText(String text) {
+	public void setAnnotationCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
 	}
 }
