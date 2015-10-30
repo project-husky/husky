@@ -31,27 +31,28 @@ public class Name {
 	private PN mPn;
 
 	/**
-	 * <div class="en">Instantiates a new name.</div> <div class="de">Instantiiert
-	 * ein neues Name Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new name.</div> <div
+	 * class="de">Instantiiert ein neues Name Objekt</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param organizationName
 	 * <br>
-	 *          <div class="de"> on</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> on</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Name(ON organizationName) {
 		mPn = (PN) organizationName;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new name.</div> <div class="de">Instantiiert
-	 * ein neues Name Objekt mit einem MDHT PN Objekt</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new name.</div> <div
+	 * class="de">Instantiiert ein neues Name Objekt mit einem MDHT PN
+	 * Objekt</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param personName
 	 * <br>
-	 *          <div class="de"> pn</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> pn</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Name(PN personName) {
 		mPn = personName;
@@ -62,9 +63,9 @@ public class Name {
 	 * Patienten).
 	 * 
 	 * @param givenName
-	 *          Vorname
+	 *            Vorname
 	 * @param familyName
-	 *          Nachname
+	 *            Nachname
 	 */
 	public Name(String givenName, String familyName) {
 		// Create and fill Person Name
@@ -82,11 +83,11 @@ public class Name {
 	 * Behandelnde).
 	 * 
 	 * @param givenName
-	 *          Vorname
+	 *            Vorname
 	 * @param familyName
-	 *          Nachname
+	 *            Nachname
 	 * @param title
-	 *          Titel (z.B. Dr. med.)
+	 *            Titel (z.B. Dr. med.)
 	 */
 	public Name(String givenName, String familyName, String title) {
 		this(givenName, familyName);
@@ -97,17 +98,19 @@ public class Name {
 	 * Erzeugt einen Personennamen.
 	 * 
 	 * @param givenName
-	 *          Vorname
+	 *            Vorname
 	 * @param familyName
-	 *          Nachname
+	 *            Nachname
 	 * @param prefix
-	 *          Prefix (z.B. "Dipl. Inf.")
+	 *            Prefix (z.B. "Dipl. Inf.")
 	 * @param suffix
-	 *          Suffix (z.b. "der Dritte")
+	 *            Suffix (z.b. "der Dritte")
 	 */
 	public Name(String givenName, String familyName, String prefix, String suffix) {
-		this(givenName, familyName, prefix);
-		mPn.addSuffix(suffix);
+		this((givenName == null ? "" : givenName), (familyName == null ? "" : familyName),
+				(prefix == null ? "" : prefix));
+		if (prefix != null)
+			mPn.addSuffix(suffix);
 	}
 
 	/**
@@ -143,9 +146,9 @@ public class Name {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div> <div class="de">Liefert
-	 * den (ersten) Familiennamen</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Gets the (first) family name.</div> <div
+	 * class="de">Liefert den (ersten) Familiennamen</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return Nachnamen
 	 */
@@ -211,7 +214,7 @@ public class Name {
 	 * 
 	 * 
 	 * @param familyName
-	 *          Nachnamen
+	 *            Nachnamen
 	 */
 	public void setFamilyName(String familyName) {
 		if ((familyName != null) && !familyName.equals("")) {
@@ -225,7 +228,7 @@ public class Name {
 	 * 
 	 * 
 	 * @param givenName
-	 *          Vornamen
+	 *            Vornamen
 	 */
 	public void setGivenName(String givenName) {
 		if ((givenName != null) && !givenName.equals("")) {
@@ -238,8 +241,8 @@ public class Name {
 	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param mdhtPn
-	 *          <div class="en">the new pn</div> <div class="de">das neue
-	 *          pn.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new pn</div> <div class="de">das neue
+	 *            pn.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setPn(PN mdhtPn) {
 		mPn = mdhtPn;
@@ -251,7 +254,7 @@ public class Name {
 	 * 
 	 * 
 	 * @param prefix
-	 *          das prefix Objekt welches gesetzt wird
+	 *            das prefix Objekt welches gesetzt wird
 	 */
 	public void setPrefix(String prefix) {
 		if ((prefix != null) && !prefix.equals("")) {
@@ -264,7 +267,7 @@ public class Name {
 	 * z.B. "der Dritte"</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param suffix
-	 *          das suffix Objekt welches gesetzt wird
+	 *            das suffix Objekt welches gesetzt wird
 	 */
 	public void setSuffix(String suffix) {
 		if ((suffix != null) && !suffix.equals("")) {

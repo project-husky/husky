@@ -61,7 +61,7 @@ public class SubmissionSetTest extends TestUtils {
 	
 	@Test
 	public void testPatientId() {
-		s.setPatientId(id1);
+		s.setDestinationPatientId(id1);
 		assertTrue(isEqual(id1, s.getPatientId()));
 	}
 	

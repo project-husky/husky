@@ -32,7 +32,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="de"> code</div>
@@ -51,7 +51,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für eImpfdossier</div> <div class="fr">Code de
 	 * </div> <div class="it">Code per </div>
 	 */
-	public static final String EIMPFDOSSIER_CODE = "urn:epd:2015:EPD_Immunization Content";
+	public static final String EIMPFDOSSIER_CODE = "urn:epd:2015:EPD_ImmunizationContent";
 
 	/**
 	 * <div class="de">Code für EPD Dokument</div>
@@ -93,7 +93,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="de"> code</div>
@@ -109,7 +109,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
 	 * class="de">Liefert das ehealthconnector Code Objekt</div>
-	 *
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
@@ -120,7 +120,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the OHT CodedMetadataType Object</div> <div
 	 * class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 *
+	 * 
 	 * @return <div class="en">the codedMetadataType</div>
 	 */
 	@Override
@@ -135,7 +135,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
-	 *
+	 * 
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
@@ -145,7 +145,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
 	 * die code system id.</div>
-	 *
+	 * 
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
@@ -155,7 +155,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the actual Code as string</div> <div
 	 * class="de">Liefert den eigentlichen Code als String</div>
-	 *
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -165,7 +165,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div>
-	 *
+	 * 
 	 * @return <div class="en">the display name</div>
 	 */
 	public String getDisplayName() {
@@ -176,8 +176,8 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 *
-	 *
+	 * 
+	 * 
 	 * @param enumName
 	 * <br>
 	 *            <div class="de"> enumName</div>
@@ -191,7 +191,7 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	 * <div class="en">Checks if a given code value is in this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
 	 * vorhanden ist.</div>
-	 *
+	 * 
 	 * @param codeValue
 	 * <br>
 	 *            <div class="de"> code</div>

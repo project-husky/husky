@@ -20,12 +20,12 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	 * Instantiates a new document meta data.
 	 */
 	public DocumentMetadataCh() {
-		super("de-ch");
+		super("de-CH");
 	}
 
 	/**
 	 * Instantiates a new swiss (ch) specific document meta data object.
-	 *
+	 * 
 	 * @param documentEntryType
 	 *            the document entry type
 	 */
@@ -35,7 +35,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Instantiates a new swiss (ch) specific document meta data object.
-	 *
+	 * 
 	 * @param dm
 	 *            the DocumentMetadata object
 	 */
@@ -46,7 +46,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	/**
 	 * Adds the (optional) confidentialityCode code (e.g. '30001' for
 	 * 'administrative data')
-	 *
+	 * 
 	 * @param code
 	 *            the code
 	 */
@@ -57,7 +57,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Gets the classCode
-	 *
+	 * 
 	 * @return Code element with classCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.ClassCode getClassCodeEnum() {
@@ -66,7 +66,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Gets the confidentialityCode list
-	 *
+	 * 
 	 * @return the ArrayList with ConfidentialityCodes as Enums
 	 */
 	public ArrayList<ConfidentialityCode> getConfidentialityCodesEnum() {
@@ -83,7 +83,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Gets the formatCode
-	 *
+	 * 
 	 * @return formatCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.FormatCode getFormatCodeEnum() {
@@ -92,7 +92,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Gets the healthcareFacilityTypeCode
-	 *
+	 * 
 	 * @return healthcareFacilityTypeCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
@@ -101,7 +101,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Gets the languageCode
-	 *
+	 * 
 	 * @return codedLanguage as Enum
 	 */
 	public LanguageCode getLanguageCodeEnum() {
@@ -119,7 +119,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	/**
 	 * Gets the practice setting code. This is the medical speciality of the
 	 * practice where the document was produced
-	 *
+	 * 
 	 * @return the practiceSettingCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.TypeCode getTypeCodeEnum() {
@@ -130,7 +130,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	 * Sets the (required, but in principle computable) class code, which
 	 * defines the class of the document (e.g. 'DCT01' for
 	 * "Notes on Consultations")
-	 *
+	 * 
 	 * @param code
 	 *            the new class code
 	 */
@@ -141,7 +141,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	/**
 	 * Sets the (required) coded language (e.g. "de-CH"). This code can be
 	 * extracted from CDA Document automatically.
-	 *
+	 * 
 	 * @param codedLanguage
 	 *            the new language code
 	 */
@@ -152,7 +152,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	/**
 	 * Sets the (required) format code (e.g. 'urn:epd:2015:EPD_Basic_Document'
 	 * for an 'EDP Document')
-	 *
+	 * 
 	 * @param code
 	 *            the new format code
 	 */
@@ -163,7 +163,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	/**
 	 * Sets the (required) healthcare facility type code (e.g. '20001' for
 	 * 'Institut für medizinische Diagnostik')
-	 *
+	 * 
 	 * @param code
 	 *            the new healthcare facility type code
 	 */
@@ -173,7 +173,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 
 	/**
 	 * Sets the (required) mime type (e.g. "text/xml")
-	 *
+	 * 
 	 * @param mimeType
 	 *            the new mime type
 	 */
@@ -185,7 +185,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	 * Sets the (required) practice setting code. This is the medical speciality
 	 * of the practice where the document was produced (e.g. '10001' for
 	 * 'Allergologie')
-	 *
+	 * 
 	 * @param code
 	 *            the new practice setting code
 	 */
@@ -197,7 +197,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.communication.Docu
 	 * Sets the (required) type code. Specifies the type of the document (like
 	 * the class code, but more specific) (e.g. Code for
 	 * 'Patienteneinwilligung')
-	 *
+	 * 
 	 * @param code
 	 *            the new type code
 	 */

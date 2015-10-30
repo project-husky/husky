@@ -1,6 +1,57 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
+
 package org.ehealth_connector.fhir;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+import org.ehealth_connector.cda.enums.AddressUse;
+import org.ehealth_connector.cda.enums.AdministrativeGender;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
+
+import ca.uhn.fhir.model.api.ExtensionDt;
+import ca.uhn.fhir.model.dstu2.composite.AddressDt;
+import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
+import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
+import ca.uhn.fhir.model.dstu2.resource.Bundle;
+import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
+import ca.uhn.fhir.model.dstu2.resource.DocumentReference;
+import ca.uhn.fhir.model.dstu2.resource.Organization;
+import ca.uhn.fhir.model.dstu2.resource.Patient;
+import ca.uhn.fhir.model.dstu2.resource.Person;
+import ca.uhn.fhir.model.dstu2.resource.Practitioner;
+import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
+import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
+import ca.uhn.fhir.model.primitive.StringDt;
 
 /**
  * <div class="en">Common material for Fhir package</div> <div
@@ -8,11 +59,23 @@ import org.ehealth_connector.common.enums.CodeSystems;
  */
 public class FhirCommon {
 
+	public static String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
+	public static String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
+
+	public static String AHDIS_COMMUNITY_OID = "2.16.756.5.37";
+	public static String AHDIS_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
+
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
 	public static final String urnUseAsComment = "urn:ehealth_connector:FhirExtension:useAsComment";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsMetadataLanguage = "urn:ehealth_connector:FhirExtension:useAsMetadataLanguage";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
@@ -205,6 +268,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsDocumentDescriptor = "urn:ehealth_connector:FhirExtension:useAsDocumentDescriptor";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsFormatCode = "urn:ehealth_connector:FhirExtension:useAsFormatCode";
 
 	/**
@@ -214,10 +283,467 @@ public class FhirCommon {
 	public static final String urnUseAsPracticeSettingCode = "urn:ehealth_connector:FhirExtension:useAsPracticeSettingCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div> <div
-	 * class="de"></div><div class="fr"></div>.
+	 * <div class="en">reads the given XML file (UTF-8) into a string</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @param fileName
+	 *            <div class="en">file to read</div> <div class="de"></div> <div
+	 *            class="fr"></div>
+	 * @return <div class="en">string containing the XML file content</div> <div
+	 *         class="de"></div> <div class="fr"></div>
 	 */
-	public static final String oidConfidentialityCode = "urn:oid:"
-			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
+	public static String getXmlResource(String fileName) {
+		StringBuffer sb = new StringBuffer();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+					new FileInputStream(fileName), "UTF8"));
+			String line;
+			try {
+				while ((line = bufferedReader.readLine()) != null) {
+					sb.append(line);
+				}
+				bufferedReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		return sb.toString();
+	}
 
+	/**
+	 * <div class="en">removes urn:oid: prefix of the given string</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @param <div class="en">value string beginning with the urn:oid:
+	 *        prefix</div> <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">string without the prefix</div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
+	public static String removeURIPrefix(String value) {
+		String retVal = "";
+		if (value.toLowerCase().startsWith("urn:oid:"))
+			retVal = value.substring(8, value.length());
+		return retVal;
+	}
+
+	public static ExtensionDt getExtensionAuthor() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsAuthor, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionComment() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsComment, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMetadataLanguage() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMetadataLanguage, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionRepositoryDestination() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsRepositoryDestination, new StringDt(
+				"dummy"));
+	}
+
+	public static ExtensionDt getExtensionCriterion() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsCriterion, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionCustodian() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsCustodian, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionExternalDocument() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsExternalDocument, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionFormatCode() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsFormatCode, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMedicationTarget() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMedicationTarget, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMimeType() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMimeType, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionDocumentDescriptor() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsDocumentDescriptor, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionPerformer() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsPerformer, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionPracticeSettingCode() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsPracticeSettingCode, new CodingDt());
+	}
+
+	public static ExtensionDt getExtensionReason() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsReason, new StringDt("dummy"));
+	}
+
+	/**
+	 * Gets an eHC Author from FHIR Person
+	 * 
+	 * @param fhirObject
+	 *            <div class="en">FHIR Person resource</div> <div
+	 *            class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public static org.ehealth_connector.common.Author getAuthor(Person fhirObject) {
+		org.ehealth_connector.common.Author retVal = null;
+		Name personName = new Name(fhirObject.getNameFirstRep().getGivenAsSingleString(),
+				fhirObject.getNameFirstRep().getFamilyAsSingleString());
+
+		// Create the author
+		retVal = new org.ehealth_connector.common.Author(personName);
+
+		// Add Identifiers
+		for (IdentifierDt id : fhirObject.getIdentifier()) {
+			String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// Add Addresses
+		for (AddressDt addr : fhirObject.getAddress()) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			Address eHCAddr = new Address(addr.getLineFirstRep().toString(), addr.getPostalCode(),
+					addr.getCity(), usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.addAddress(eHCAddr);
+		}
+
+		// Add Telecoms
+		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
+
+		// Add organization
+		retVal.setOrganization(getOrganization((Organization) fhirObject.getManagingOrganization()
+				.getResource()));
+
+		return retVal;
+
+	}
+
+	/**
+	 * Gets an eHC Author from FHIR Practitioner
+	 * 
+	 * @param fhirObject
+	 *            <div class="en">FHIR Person resource</div> <div
+	 *            class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Author</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public static org.ehealth_connector.common.Author getAuthor(Practitioner fhirObject) {
+		org.ehealth_connector.common.Author retVal = null;
+		Name personName = new Name(fhirObject.getName().getGivenAsSingleString(), fhirObject
+				.getName().getFamilyAsSingleString());
+
+		// Create the author
+		retVal = new org.ehealth_connector.common.Author(personName);
+
+		// Add Identifiers
+		for (IdentifierDt id : fhirObject.getIdentifier()) {
+			String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// Add Addresses
+		for (AddressDt addr : fhirObject.getAddress()) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			Address eHCAddr = new Address(addr.getLineFirstRep().toString(), addr.getPostalCode(),
+					addr.getCity(), usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.addAddress(eHCAddr);
+		}
+
+		// Add Telecoms
+		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
+
+		// Add organization
+		// not supported by FHIR Practitioner
+
+		return retVal;
+
+	}
+
+	/**
+	 * @param fhirContactPoints
+	 *            <div class="en">list of FHIR ContactPointDt resources</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Telecoms</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public static Telecoms getTelecoms(List<ContactPointDt> fhirContactPoints) {
+		Telecoms eHCTelecoms = new Telecoms();
+		for (ContactPointDt telco : fhirContactPoints) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (telco.getUseElement().getValueAsEnum() == ContactPointUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			String value = telco.getValue();
+			if (value.toLowerCase().startsWith("tel:")) {
+				eHCTelecoms.addPhone(value.substring(4, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("fax:")) {
+				eHCTelecoms.addFax(value.substring(4, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("mailto:")) {
+				eHCTelecoms.addEMail(value.substring(7, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("http:")) {
+				eHCTelecoms.addWebsite(value, usage);
+			}
+		}
+		return eHCTelecoms;
+	}
+
+	/**
+	 * Gets the organization.
+	 * 
+	 * @param fhirOrganization
+	 *            <div class="en">FHIR Organization resource</div> <div
+	 *            class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Organization</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public static org.ehealth_connector.common.Organization getOrganization(
+			Organization fhirOrganization) {
+		org.ehealth_connector.common.Organization retVal = null;
+		// Create the organization
+		retVal = new org.ehealth_connector.common.Organization(fhirOrganization.getName());
+
+		// Add Identifiers
+		for (IdentifierDt id : fhirOrganization.getIdentifier()) {
+			String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// Add Addresses
+		for (AddressDt addr : fhirOrganization.getAddress()) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			Address eHCAddr = new Address(addr.getLineFirstRep().toString(), addr.getPostalCode(),
+					addr.getCity(), usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.addAddress(eHCAddr);
+		}
+
+		// Add Telecoms
+		retVal.setTelecoms(FhirCommon.getTelecoms(fhirOrganization.getTelecom()));
+
+		return retVal;
+	}
+
+	public static org.ehealth_connector.common.Organization getOrganization(
+			ResourceReferenceDt orgRef) {
+		return getOrganization(orgRef.getResource());
+	}
+
+	public static org.ehealth_connector.common.Organization getOrganization(IBaseResource res) {
+		org.ehealth_connector.common.Organization retVal = null;
+		if (res instanceof Organization) {
+			retVal = FhirCommon.getOrganization((Organization) res);
+		}
+		return retVal;
+	}
+
+	public static org.ehealth_connector.common.Author getAuthor(ResourceReferenceDt ref) {
+		return getAuthor(ref.getResource());
+	}
+
+	public static org.ehealth_connector.common.Author getAuthor(IBaseResource res) {
+		org.ehealth_connector.common.Author retVal = null;
+		if (res instanceof Person) {
+			retVal = FhirCommon.getAuthor((Person) res);
+		}
+		if (res instanceof Practitioner) {
+			retVal = FhirCommon.getAuthor((Practitioner) res);
+		}
+		return retVal;
+	}
+
+	// /**
+	// * @param bundle
+	// * <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// * @return <div class="en">eHC Patient</div> <div class="de"></div> <div
+	// * class="fr"></div>
+	// */
+	public static org.ehealth_connector.common.Patient getPatient(Bundle bundle) {
+		Patient fhirPatient = null;
+		org.ehealth_connector.common.Patient retVal = null;
+		for (Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof Patient)
+				fhirPatient = (Patient) entry.getResource();
+		}
+		Name patientName = new Name(fhirPatient.getNameFirstRep().getGivenAsSingleString(),
+				fhirPatient.getNameFirstRep().getFamilyAsSingleString());
+		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
+		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
+			gender = AdministrativeGender.FEMALE;
+		} else if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+			gender = AdministrativeGender.MALE;
+		}
+
+		// Create eHC Patient
+		retVal = new org.ehealth_connector.common.Patient(patientName, gender,
+				fhirPatient.getBirthDate());
+
+		// Add Identifiers
+		for (IdentifierDt id : fhirPatient.getIdentifier()) {
+			String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// Add Addresses
+		for (AddressDt addr : fhirPatient.getAddress()) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			Address eHCAddr = new Address(addr.getLineFirstRep().toString(), addr.getPostalCode(),
+					addr.getCity(), usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.addAddress(eHCAddr);
+		}
+
+		// Add Telecoms
+		retVal.setTelecoms(FhirCommon.getTelecoms(fhirPatient.getTelecom()));
+		return retVal;
+	}
+
+	public static org.ehealth_connector.common.Patient getPatient(Patient fhirPatient) {
+		org.ehealth_connector.common.Patient retVal = null;
+		Name patientName = new Name(fhirPatient.getNameFirstRep().getGivenAsSingleString(),
+				fhirPatient.getNameFirstRep().getFamilyAsSingleString());
+		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
+		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
+			gender = AdministrativeGender.FEMALE;
+		} else if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+			gender = AdministrativeGender.MALE;
+		}
+
+		// Create eHC Patient
+		retVal = new org.ehealth_connector.common.Patient(patientName, gender,
+				fhirPatient.getBirthDate());
+
+		// Add Identifiers
+		for (IdentifierDt id : fhirPatient.getIdentifier()) {
+			String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// Add Addresses
+		for (AddressDt addr : fhirPatient.getAddress()) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			Address eHCAddr = new Address(addr.getLineFirstRep().toString(), addr.getPostalCode(),
+					addr.getCity(), usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.addAddress(eHCAddr);
+		}
+
+		// Add Telecoms
+		retVal.setTelecoms(FhirCommon.getTelecoms(fhirPatient.getTelecom()));
+		return retVal;
+	}
+
+	public static org.ehealth_connector.common.Patient getPatient(ResourceReferenceDt orgRef) {
+		return getPatient(orgRef.getResource());
+	}
+
+	public static org.ehealth_connector.common.Patient getPatient(IBaseResource res) {
+		org.ehealth_connector.common.Patient retVal = null;
+		if (res instanceof Patient) {
+			retVal = FhirCommon.getPatient((Patient) res);
+		}
+		return retVal;
+	}
+
+	public static DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
+		String mimeType = "";
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
+			if (!extensions.isEmpty()) {
+				mimeType = item.getCode();
+				break;
+			}
+		}
+		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
+	}
+
+	public static String getDocumentFilepath(DocumentReference fhirObject) {
+		return fhirObject.getContentFirstRep().getAttachment().getUrl();
+	}
+
+	public static Code getFormatCode(DocumentReference fhirObject) {
+		Code retVal = null;
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsFormatCode);
+			if (!extensions.isEmpty()) {
+				retVal = new Code(item);
+				break;
+			}
+		}
+		return retVal;
+	}
+
+	public static Code getPracticeSettingCode(DocumentReference fhirObject) {
+		Code retVal = null;
+		List<ExtensionDt> extensions = fhirObject
+				.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPracticeSettingCode);
+		if (!extensions.isEmpty())
+			retVal = new Code((CodingDt) extensions.get(0).getValue());
+		return retVal;
+	}
+
+	public static String getMetadataLanguage(DocumentReference fhirObject) {
+		String retVal = "";
+		List<ExtensionDt> extensions = fhirObject
+				.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMetadataLanguage);
+		if (!extensions.isEmpty())
+			retVal = ((StringDt) extensions.get(0).getValue()).getValueAsString();
+		return retVal;
+	}
+
+	public static String getMimeType(DocumentReference fhirObject) {
+		String retVal = "";
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMimeType);
+			if (!extensions.isEmpty()) {
+				retVal = item.getCode();
+				break;
+			}
+		}
+		return retVal;
+	}
+
+	public static Identificator getCommunityPatientId(org.ehealth_connector.common.Patient patient,
+			String communityOid) {
+		Identificator retVal = null;
+		for (Identificator item : patient.getIds()) {
+
+			if (item.getRoot().replace("urn:oid:", "").equals(communityOid.replace("urn:oid:", ""))) {
+				retVal = new Identificator(item.getRoot(), item.getExtension());
+				break;
+			}
+		}
+		return retVal;
+	}
 }

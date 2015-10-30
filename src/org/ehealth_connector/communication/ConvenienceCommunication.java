@@ -26,6 +26,7 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.DateUtil;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
@@ -118,12 +119,12 @@ public class ConvenienceCommunication {
 	 * <div class="en">Determines if XDS document metadata will be extracted
 	 * automatically (e.g. from CDA documents)</div>
 	 */
-	private DocumentMetadataExtractionMode automaticDocumentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
+	private DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 	/**
 	 * <div class="en">Determines if SubmissionSet metadata will be extracted
 	 * automatically (e.g. from CDA documents)</div>
 	 */
-	private DocumentMetadataExtractionMode automaticSubSetMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
+	private SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode = SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION;
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
@@ -169,7 +170,8 @@ public class ConvenienceCommunication {
 			SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = atnaConfigMode;
-		this.automaticDocumentMetadataExtractionMode = documentMetadataExtractionMode;
+		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
+		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
 	}
 
 	/**
@@ -183,6 +185,7 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream) {
+		DocumentMetadataCh retVal = null;
 		if (inputStream == null)
 			try {
 				throw new DocumentNotAccessibleException();
@@ -192,11 +195,13 @@ public class ConvenienceCommunication {
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		if (retVal != null)
+			retVal.setDocumentDescriptor(desc);
+		return retVal;
 	}
 
 	/**
@@ -210,15 +215,20 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath) {
+		DocumentMetadataCh retVal = null;
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return new DocumentMetadataCh(addXdsDocument(doc, desc));
+			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		if (retVal != null) {
+			retVal.setDocumentDescriptor(desc);
+			retVal.setUri(filePath);
+		}
+		return retVal;
 	}
 
 	/**
@@ -232,14 +242,17 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
+		DocumentMetadata retVal = null;
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			return addXdsDocument(doc, desc);
+			retVal = addXdsDocument(doc, desc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		if (retVal != null)
+			retVal.setDocumentDescriptor(desc);
+		return retVal;
 	}
 
 	/**
@@ -253,15 +266,20 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed) </div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
+		DocumentMetadata retVal = null;
 		XDSDocument doc;
 		try {
 			doc = new XDSDocumentFromFile(desc, filePath);
-			return addXdsDocument(doc, desc);
+			retVal = addXdsDocument(doc, desc);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		if (retVal != null) {
+			retVal.setDocumentDescriptor(desc);
+			retVal.setUri(filePath);
+		}
+		return retVal;
 	}
 
 	/**
@@ -281,9 +299,27 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		xdmContents.createZip(outputStream, txnData);
+		return xdmContents;
+	}
+
+	/**
+	 * <div class="en">creates an XDM volume with the given submission set
+	 * metadata. You have to add a document to this class first.</div>
+	 * 
+	 * @param submissionSetMetadata
+	 *            The metadata of the submission set
+	 * @param outputStream
+	 *            The outputStream object where the contents will be written to.
+	 * @return the XdmContents object
+	 */
+	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata,
+			OutputStream outputStream) {
+		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
@@ -303,7 +339,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		xdmContents.createZip(outputStream, txnData);
@@ -319,7 +355,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
@@ -340,7 +376,7 @@ public class ConvenienceCommunication {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
 		xdmContents.createZip(filePath, txnData);
@@ -365,7 +401,7 @@ public class ConvenienceCommunication {
 	 *         automatically, false otherwise
 	 */
 	public DocumentMetadataExtractionMode getAutomaticExtractionEnabled() {
-		return automaticDocumentMetadataExtractionMode;
+		return documentMetadataExtractionMode;
 	}
 
 	/**
@@ -586,7 +622,7 @@ public class ConvenienceCommunication {
 	 */
 	public void setAutomaticExtractionEnabled(
 			DocumentMetadataExtractionMode automaticExtractionEnabled) {
-		this.automaticDocumentMetadataExtractionMode = automaticExtractionEnabled;
+		this.documentMetadataExtractionMode = automaticExtractionEnabled;
 	}
 
 	/**
@@ -603,10 +639,10 @@ public class ConvenienceCommunication {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
 
-		if (automaticSubSetMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
-
+		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 		return source.submit(txnData);
 	}
 
@@ -651,6 +687,7 @@ public class ConvenienceCommunication {
 	 */
 	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
+		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit();
 	}
 
@@ -691,7 +728,7 @@ public class ConvenienceCommunication {
 			DocumentMetadata docMetadata = new DocumentMetadata(
 					txnData.getDocumentEntry(docEntryUUID));
 
-			if (automaticDocumentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
 					// extractDocMetadataFromCda(docMetadata);
 					cdaExtractionFixes(docMetadata);
@@ -779,7 +816,7 @@ public class ConvenienceCommunication {
 
 			// This is the eHealth Connector Root OID
 			// default value just in case...
-			String organizationalId = "2.16.756.5.30.1.139.1.1";
+			String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
 
 			if (subSet.getUniqueId() == null) {
 				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));

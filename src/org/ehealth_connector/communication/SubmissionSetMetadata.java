@@ -3,9 +3,12 @@ package org.ehealth_connector.communication;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.DateUtil;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.XdsUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
+import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
@@ -29,7 +32,7 @@ public class SubmissionSetMetadata {
 		 * <div class="en">Minimal (secure) metadata will be extracted *
 		 * Extraction from the first Document Entry to the Submission Set uses
 		 * the following mapping:
-		 *
+		 * 
 		 * <table summary="Submission set attributes generation" width="100%">
 		 * <thead>
 		 * <tr>
@@ -84,7 +87,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Constructor with OHT SubmissionSet object.
-	 *
+	 * 
 	 * @param ohtSubmissionSet
 	 *            the OHT submission set object
 	 */
@@ -95,7 +98,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the Author of this Submission
-	 *
+	 * 
 	 * @return the Author as Convenience API Object
 	 */
 	public Author getAuthor() {
@@ -104,7 +107,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the Availability Status of the Document
-	 *
+	 * 
 	 * @return status the AvailabilityStatus
 	 */
 	public AvailabilityStatus getAvailabilityStatus() {
@@ -113,7 +116,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets comments for this submission
-	 *
+	 * 
 	 * @return comments the comments
 	 */
 	public String getComments() {
@@ -123,7 +126,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Gets the contentTypeCode, which defines the type of the submission set
 	 * content
-	 *
+	 * 
 	 * @return code the contentTypeCode
 	 */
 	public Code getContentTypeCode() {
@@ -132,7 +135,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the OHT SubmissionSet Object, which is wrapped by this class.
-	 *
+	 * 
 	 * @return the OHT SubmissionSet Object
 	 */
 	public SubmissionSetType getOhtSubmissionSetType() {
@@ -141,7 +144,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the ID of the patient
-	 *
+	 * 
 	 * @return id the patientId
 	 */
 	public Identificator getPatientId() {
@@ -150,7 +153,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the ID of the sending facility (e.g. a hospital id)
-	 *
+	 * 
 	 * @return id the SourceId
 	 */
 	public String getSourceId() {
@@ -159,7 +162,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the title of the submission set
-	 *
+	 * 
 	 * @return the title
 	 */
 	public String getTitle() {
@@ -168,7 +171,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the Author of this submission
-	 *
+	 * 
 	 * @param author
 	 *            the Author
 	 */
@@ -193,7 +196,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the Availability Status of the Document
-	 *
+	 * 
 	 * @param status
 	 *            the AvailabilityStatus
 	 */
@@ -203,7 +206,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets comments for this submission
-	 *
+	 * 
 	 * @param comments
 	 *            the comments
 	 */
@@ -214,7 +217,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Sets the contentTypeCode, which defines the type of the submission set
 	 * content
-	 *
+	 * 
 	 * @param code
 	 *            the contentTypeCode
 	 */
@@ -223,18 +226,18 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
-	 * Sets the ID for the patient
-	 *
+	 * Sets the ID for the patient in the destination
+	 * 
 	 * @param id
 	 *            the patientId
 	 */
-	public void setPatientId(Identificator id) {
+	public void setDestinationPatientId(Identificator id) {
 		s.setPatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 
 	/**
 	 * Sets the ID of the sending facility (e.g. a hospital id)
-	 *
+	 * 
 	 * @param id
 	 *            the SourceId
 	 */
@@ -244,7 +247,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the title of the submission set
-	 *
+	 * 
 	 * @param title
 	 *            the title
 	 */
@@ -255,7 +258,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Fills a given OHT SubmissionSetType object with the data of this
 	 * submission set class
-	 *
+	 * 
 	 * @param ohtSubmissionSetType
 	 *            the SubmissionSetType
 	 * @return the filled ohtSubmissionSetType
@@ -272,6 +275,20 @@ public class SubmissionSetMetadata {
 		ohtSubmissionSetType.setUniqueId(s.getUniqueId());
 		ohtSubmissionSetType.getIntendedRecipient().clear();
 		ohtSubmissionSetType.getIntendedRecipient().addAll(s.getIntendedRecipient());
+		if (ohtSubmissionSetType.getSubmissionTime() == null) {
+			ohtSubmissionSetType.setSubmissionTime(DateUtil.nowAsTS().getValue());
+		}
+		if ((ohtSubmissionSetType.getUniqueId() == null)
+				|| (ohtSubmissionSetType.getSourceId() == null)) {
+
+			// This is the eHealth Connector Root OID
+			// default value just in case...
+			String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
+
+			if (ohtSubmissionSetType.getUniqueId() == null) {
+				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			}
+		}
 		return ohtSubmissionSetType;
 	}
 }

@@ -204,7 +204,7 @@ public class XdmTestUtils extends TestUtils {
 	}
 
 	protected void setNistMetadata(DocumentMetadata metaData) {
-		metaData.setPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
+		metaData.setDestinationPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
 				"b8a9a9ad17b5429"));
 		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
 		metaData.setCodedLanguage(LanguageCode.FRENCH_CODE);
@@ -223,7 +223,7 @@ public class XdmTestUtils extends TestUtils {
 	}
 
 	protected void setNistMetadata2(DocumentMetadata metaData) {
-		metaData.setPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
+		metaData.setDestinationPatientId(new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
 				"b8a9a9ad17b5429"));
 		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
 

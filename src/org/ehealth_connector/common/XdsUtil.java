@@ -28,6 +28,7 @@ import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.common.hl7v2.XON;
 import org.openhealthtools.ihe.common.hl7v2.XPN;
 import org.openhealthtools.ihe.common.hl7v2.XTN;
+import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
@@ -460,7 +461,18 @@ public class XdsUtil {
 	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
 		String fileName = "DOC";
-		String fileNameExtension = DocDescriptor.getFileExtension(xdsDoc.getDescriptor());
+
+		// Fix DocumentDescriptor problem...
+		DocumentDescriptor dd = xdsDoc.getDescriptor();
+		if (dd.toString().startsWith("UNKNOWN!")) {
+			String mimeType = dd.toString().replace("UNKNOWN!", "");
+			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
+			dd = DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
+		}
+		// if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
+		// dd = DocumentDescriptor.CDA_R2;
+
+		String fileNameExtension = DocDescriptor.getFileExtension(dd);
 		fileName = fileName.concat(String.format("%5s", docNr).replace(' ', '0'));
 		fileName = fileName.concat("." + fileNameExtension.toUpperCase());
 		return fileName;

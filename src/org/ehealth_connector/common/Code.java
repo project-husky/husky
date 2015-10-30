@@ -26,6 +26,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
+import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+
 /**
  * <div class="en">Class Code. A Code consists of the code itself and an
  * according code system.</div> <div class="de">Ein Code bestehend aus
@@ -61,6 +64,35 @@ public class Code {
 	 */
 	public Code(Code code) {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
+	}
+
+	/**
+	 * <div class="en">Instantiates a new code from FHIR Coding.</div> <div
+	 * class="de">Instantiiert ein neues Code Objekt von FHIR Coding</div> <div
+	 * class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
+	public Code(CodingDt code) {
+		this(code.getSystem().replace("urn:oid:", ""), code.getCode(), code.getDisplay());
+	}
+
+	/**
+	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR
+	 * CodeableConcept</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
+	public Code(CodeableConceptDt code) {
+		this(code.getCodingFirstRep().getSystem().replace("urn:oid:", ""), code.getCodingFirstRep()
+				.getCode(), code.getText());
 	}
 
 	/**
@@ -411,7 +443,7 @@ public class Code {
 
 	/**
 	 * Sets the null flavor.
-	 *
+	 * 
 	 * @param nf
 	 *            the new null flavor
 	 */

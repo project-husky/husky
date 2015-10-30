@@ -154,7 +154,7 @@ public class DocumentMetadataTest extends TestUtils {
 	@Test
 	public void testPatientId() {
 		Identificator id = new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429");
-		d.setPatientId(id); // Can
+		d.setDestinationPatientId(id); // Can
 		// be
 		// extracted
 		// from
