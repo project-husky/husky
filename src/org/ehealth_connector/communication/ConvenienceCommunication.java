@@ -16,6 +16,9 @@
 
 package org.ehealth_connector.communication;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,7 +50,6 @@ import org.openhealthtools.ihe.xds.consumer.B_Consumer;
 import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.document.XDSDocumentFromFile;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
@@ -213,22 +215,11 @@ public class ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which have to be completed)</div>
+	 * @throws FileNotFoundException
 	 */
-	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath) {
-		DocumentMetadataCh retVal = null;
-		XDSDocument doc;
-		try {
-			doc = new XDSDocumentFromFile(desc, filePath);
-			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (retVal != null) {
-			retVal.setDocumentDescriptor(desc);
-			retVal.setUri(filePath);
-		}
-		return retVal;
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
+			throws FileNotFoundException {
+		return addChDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
 	/**
@@ -264,22 +255,11 @@ public class ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which have to be completed) </div>
+	 * @throws FileNotFoundException
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) {
-		DocumentMetadata retVal = null;
-		XDSDocument doc;
-		try {
-			doc = new XDSDocumentFromFile(desc, filePath);
-			retVal = addXdsDocument(doc, desc);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (retVal != null) {
-			retVal.setDocumentDescriptor(desc);
-			retVal.setUri(filePath);
-		}
-		return retVal;
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
+			throws FileNotFoundException {
+		return addDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
 	/**
