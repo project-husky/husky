@@ -75,7 +75,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * Helper methods for CDA
+ * Helper methods for the eHealth Connector and CDA
  */
 public class Util {
 
@@ -94,7 +94,10 @@ public class Util {
 	 */
 	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
-	public static final String TELECOMS_WEBSIDE_PREFIX = "http";
+	/**
+	 * The Constant TELECOMS_WEBSITE_PREFIX.
+	 */
+	public static final String TELECOMS_WEBSITE_PREFIX = "http:";
 
 	/**
 	 * Adds the copy of a given section to a given structured body
@@ -130,6 +133,13 @@ public class Util {
 		return true;
 	}
 
+	/**
+	 * <div class="en"> Converts a list of II int a list of Identificators
+	 * 
+	 * @param mII
+	 *            the list to convert
+	 * @return </div> <div class="de"></div> <div class="fr"></div>
+	 */
 	public static ArrayList<Identificator> convertIds(EList<II> mII) {
 		ArrayList<Identificator> il = new ArrayList<Identificator>();
 		for (II mId : mII) {
@@ -299,8 +309,8 @@ public class Util {
 	 * 
 	 * @param hl7Stimestamp
 	 * <br>
-	 *            <div class="de"> hl7 stimestamp</div> <div class="fr"> hl7
-	 *            stimestamp</div> <div class="it"> hl7 stimestamp</div>
+	 *            <div class="en"> hl7 stimestamp</div><div class="de"></div>
+	 *            <div class="fr"> </div> <div class="it"></div>
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
@@ -686,7 +696,7 @@ public class Util {
 	 * @return <div class="en">the webside</div>
 	 */
 	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
-		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSIDE_PREFIX);
+		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
 		return h;
 	}
 

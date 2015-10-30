@@ -60,8 +60,8 @@ public class DateUtil {
 	 * 
 	 * @param effectiveTimes
 	 * <br>
-	 *            <div class="de"> effective times</div> <div class="fr">
-	 *            effective times</div> <div class="it"> effective times</div>
+	 *            <div class="en"> effective times</div> <div class="de">
+	 *            </div><div class="fr"> </div> <div class="it"> </div>
 	 * @return the string
 	 */
 	public static String convertSXCM_TSToEurString(List<SXCM_TS> effectiveTimes) {
@@ -202,12 +202,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * Creates an IVXB_TS Object.
+	 * <div class="en">Creates an IVXB_TS Object.
 	 * 
 	 * @param date
-	 * <br>
-	 *            <div class="de"> date</div> <div class="fr"> date</div> <div
-	 *            class="it"> date</div>
+	 *            date</div> <div class="de"></div><div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @return HL7 IVXB_TS Objekt
 	 * @throws ParseException
 	 *             the parse exception

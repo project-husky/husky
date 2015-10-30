@@ -94,9 +94,9 @@ public class Telecoms {
 						Util.TELECOMS_PHONE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_WEBSIDE_PREFIX)
-				|| (type.equals(Util.TELECOMS_WEBSIDE_PREFIX.substring(0,
-						Util.TELECOMS_WEBSIDE_PREFIX.length() - 1)))) {
+		if (type.equals(Util.TELECOMS_WEBSITE_PREFIX)
+				|| (type.equals(Util.TELECOMS_WEBSITE_PREFIX.substring(0,
+						Util.TELECOMS_WEBSITE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
 		if (tel == null) {

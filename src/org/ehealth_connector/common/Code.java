@@ -353,6 +353,12 @@ public class Code {
 		return mCD.getDisplayName();
 	}
 
+	/**
+	 * <div class="en"> Gets the null flavor
+	 * 
+	 * @return the null flavor </div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	public NullFlavor getNullFlavor() {
 		return mCD.getNullFlavor();
 	}
@@ -387,6 +393,12 @@ public class Code {
 		return result;
 	}
 
+	/**
+	 * <div class="en">Returns true if the code has a null flavor
+	 * 
+	 * @return true if the code has a null flavor; false otherwise </div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
 	public boolean isNullFlavor() {
 		return mCD.isNullFlavorDefined();
 	}

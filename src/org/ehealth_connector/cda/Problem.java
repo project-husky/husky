@@ -89,13 +89,13 @@ public class Problem extends ProblemEntry {
 	 * @param code
 	 *            <div class="en">code of the problem (e.g. SNOMED Code for
 	 *            diagnosis)</div><div class="de">Code des Problems (z.B. SNOMED
-	 *            Code für eine Diagnose)</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            Code für eine Diagnose)</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @param value
 	 *            <div class="en">description (e.g. inflammation of the
 	 *            lungs)</div><div class="de">Beschreibung des Problems (z.B.
-	 *            Lungenentzündung)</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            Lungenentzündung)</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @param start
 	 *            <div class="en">start</div><div class="de">Beginn des
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
@@ -127,13 +127,13 @@ public class Problem extends ProblemEntry {
 	 * @param code
 	 *            <div class="en">code of the kind of problem (e.g. SNOMED Code
 	 *            for diagnosis)</div><div class="de">Code der Art des Problems
-	 *            (z.B. SNOMED Code für eine Diagnose)</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            (z.B. SNOMED Code für eine Diagnose)</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *            <div class="en">code for the problem itself (e.g. inflammation
 	 *            of the lungs)</div><div class="de">Code zur Beschreibung des
-	 *            eigentlichen Problems (z.B. Lungenentzündung)</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            eigentlichen Problems (z.B. Lungenentzündung)</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param start
 	 *            <div class="en">start</div><div class="de">Beginn des
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
@@ -155,9 +155,9 @@ public class Problem extends ProblemEntry {
 	 * Instantiates a new problem entry.
 	 * 
 	 * @param observation
-	 *            <div class="en">observation</div>
-	 *            <div class="de">Beobachtung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            <div class="en">observation</div> <div
+	 *            class="de">Beobachtung</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Problem(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry observation) {
 		super(observation);
@@ -172,8 +172,8 @@ public class Problem extends ProblemEntry {
 	 * Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen: CHOP
 	 * 2.16.756.5.30.1.126.3.1 ICD-10 2.16.756.5.30.1.126.3.2 ICPC-2
 	 * 2.16.840.1.113883.6.139 VVK-EDI 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED
-	 * CT 2.16.840.1.113883.6.96 </div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * CT 2.16.840.1.113883.6.96 </div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param code
 	 *            the new value
@@ -192,8 +192,8 @@ public class Problem extends ProblemEntry {
 	 * Schweiz folgende Codesysteme (oder Unterknoten davon) zugelassen: CHOP
 	 * 2.16.756.5.30.1.126.3.1 ICD-10 2.16.756.5.30.1.126.3.2 ICPC-2
 	 * 2.16.840.1.113883.6.139 VVK-EDI 2.16.756.5.30.1.127.3.1.20080401.1 SNOMED
-	 * CT 2.16.840.1.113883.6.96 </div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * CT 2.16.840.1.113883.6.96 </div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param problemValue
 	 *            the new value
@@ -210,13 +210,13 @@ public class Problem extends ProblemEntry {
 
 	/**
 	 * <div class="en">Adds a text to the value</div> <div class="de">Fügt dem
-	 * Wert (Value) einen Text hinzu</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * Wert (Value) einen Text hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param text
-	 *            <br>
-	 *            <div class="de"> value</div> <div class="fr"> value</div>
-	 *            <div class="it"> value</div>
+	 * <br>
+	 *            <div class="de">the text</div><div class="de">der Text</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void addValueText(String text) {
 		final CD cd = DatatypesFactory.eINSTANCE.createCD();
