@@ -50,19 +50,22 @@ import ca.uhn.fhir.parser.IParser;
 
 /**
  * FhirXdTransaction supports the creation of destination and submission-set
- * from a HL7 FHIR Resource. The content of these resources is not currently
- * documented. They are derived resources from FHIR. These resources may be
- * created by the class org.ehealth_connector.demo.fhir.XDResources. This is
- * currently the one any only way to create valid FHIR document resources for XD
- * Transactions. You may edit these FHIR resources in a text editor in order to
- * change the payload of the resulting objects on your own risk.
+ * including documents from a HL7 FHIR Resource. The content of these resources
+ * is not currently documented. They are derived resources from FHIR. These
+ * resources may be created by the class
+ * org.ehealth_connector.demo.fhir.XDResources. This is currently the one any
+ * only way to create valid FHIR document resources for XD Transactions. You may
+ * edit these FHIR resources in a text editor in order to change the payload of
+ * the resulting transaction on your own risk.
  * 
  * @see "https://www.hl7.org/fhir/"
  */
 public class FhirXdTransaction {
 
 	/**
-	 * The Class Transaction.
+	 * The class Transaction is a derived FHIR Bundle containing all information
+	 * about destination and submission-set including documents for a
+	 * transaction (e.g. IHE XDS submission or IHE XDM portable media creation)
 	 */
 	@ResourceDef(name = "Bundle")
 	public static class Transaction extends Bundle {
@@ -93,7 +96,7 @@ public class FhirXdTransaction {
 		}
 
 		/**
-		 * Adds a destination.
+		 * Adds an endpoint (destination) to the FHIR bundle
 		 * 
 		 * @param destination
 		 *            - add the destination (FHIR MessageHeader)
@@ -105,7 +108,7 @@ public class FhirXdTransaction {
 		}
 
 		/**
-		 * Adds a document
+		 * Adds an document to the FHIR bundle
 		 * 
 		 * @param document
 		 *            - add the document (FHIR DocumentReference)
@@ -117,7 +120,7 @@ public class FhirXdTransaction {
 		}
 
 		/**
-		 * Adds a submission-set.
+		 * Adds an submission-set to the FHIR bundle
 		 * 
 		 * @param submission
 		 *            - add the submission-set (FHIR DocumentManifest)
@@ -130,8 +133,7 @@ public class FhirXdTransaction {
 
 	};
 
-	/** The m fhir ctx. */
-	private final FhirContext mFhirCtx = new FhirContext();
+	private final FhirContext fhirCtx = new FhirContext();
 
 	/**
 	 * <div class="en">Empty constructor (default)</div><div class="de"></div>
@@ -140,6 +142,14 @@ public class FhirXdTransaction {
 	public FhirXdTransaction() {
 	}
 
+	/**
+	 * <div class="en"> Gets the eHC affinity domain object from the FHIR bundle
+	 * 
+	 * @param transaction
+	 *            the FHIR bundle
+	 * @return the eHC affinity domain object </div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	public AffinityDomain getAffinityDomain(Transaction transaction) {
 		AffinityDomain afinityDomain = new AffinityDomain();
 		// set the registry
@@ -154,6 +164,15 @@ public class FhirXdTransaction {
 		return afinityDomain;
 	}
 
+	/**
+	 * <div class="en">Gets an eHC author object from the FHIR DocumentManifest
+	 * object
+	 * 
+	 * @param fhirObject
+	 *            the FHIR object
+	 * @return eHC author object </div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
@@ -161,6 +180,15 @@ public class FhirXdTransaction {
 			return null;
 	}
 
+	/**
+	 * <div class="en">Gets an eHC author object from the FHIR DocumentReference
+	 * object
+	 * 
+	 * @param fhirObject
+	 *            the FHIR object
+	 * @return eHC author object </div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
@@ -168,6 +196,21 @@ public class FhirXdTransaction {
 			return null;
 	}
 
+	/**
+	 * <div class="en">Gets a list containing all document metadatas from the
+	 * FHIR bundle
+	 * 
+	 * @param transaction
+	 *            the FHIR bundle
+	 * @param receiverFacilityOid
+	 *            the receiverFacilityOid will be used to determine which of the
+	 *            patient ids is the destination patient id
+	 * @param senderFacilityOid
+	 *            the senderFacilityOid will be used to determine which of the
+	 *            patient ids is the source patient id
+	 * @return list containing all document metadatas </div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
 	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
 			String receiverFacilityOid, String senderFacilityOid) {
 		List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
@@ -209,6 +252,15 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
+	/**
+	 * <div class="en"> Gets the registry as eHC Destination object from the
+	 * FHIR bundle
+	 * 
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return the registry as eHC Destination object </div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
 	public org.ehealth_connector.communication.Destination getRegistry(Bundle bundle) {
 		org.ehealth_connector.communication.Destination retVal = null;
 
@@ -225,6 +277,15 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
+	/**
+	 * <div class="en"> Gets a list of repositories as eHC Destination objects
+	 * from the FHIR bundle
+	 * 
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of repositories</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	public List<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
 		List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
 
@@ -240,6 +301,17 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
+	/**
+	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR
+	 * bundle
+	 * 
+	 * @param transaction
+	 *            the FHIR bundle
+	 * @param receiverFacilityOid
+	 *            the receiverFacilityOid will be used to determine which of the
+	 *            patient ids is the destination patient id
+	 * @return </div> <div class="de"></div> <div class="fr"></div>
+	 */
 	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction,
 			String receiverFacilityOid) {
 		SubmissionSetMetadata retVal = new SubmissionSetMetadata();
@@ -277,7 +349,7 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * Read transaction from file.
+	 * Read the transaction object from the FHIR bundle file
 	 * 
 	 * @param fileName
 	 *            the file name
@@ -285,10 +357,19 @@ public class FhirXdTransaction {
 	 */
 	public Transaction readTransactionFromFile(String fileName) {
 		String resourceString = FhirCommon.getXmlResource(fileName);
-		IParser parser = mFhirCtx.newXmlParser();
+		IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(Transaction.class, resourceString);
 	}
 
+	/**
+	 * <div class="en"> Gets an eHC Destination object from the given FHIR
+	 * MessageHeader object
+	 * 
+	 * @param fhirObject
+	 *            the FHIR object
+	 * @return the eHC Destination </div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
 	private org.ehealth_connector.communication.Destination getDestination(MessageHeader fhirObject) {
 		org.ehealth_connector.communication.Destination retVal = null;
 
