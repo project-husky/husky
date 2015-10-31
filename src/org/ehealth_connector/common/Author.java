@@ -436,7 +436,7 @@ public class Author {
 	 * @param isAuthorPatient
 	 *            true if the author ist not a doctor but the patient itself
 	 */
-	public void setAuthorPatient(boolean isAuthorPatient) {
+	public void setAuthorIsPatient(boolean isAuthorPatient) {
 		if (isAuthorPatient) {
 			mAuthor.setFunctionCode(functionCodeAuthorPatient.getCE());
 		} else {
