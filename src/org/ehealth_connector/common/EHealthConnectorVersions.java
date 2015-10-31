@@ -53,7 +53,7 @@ public enum EHealthConnectorVersions {
 	}
 
 	public static EHealthConnectorVersions getCurrentVersion() {
-		return EHealthConnectorR201510;
+		return EHealthConnectorDev;
 	}
 
 	public String getReleaseDate() {
