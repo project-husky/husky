@@ -125,10 +125,21 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt einen neuen Autor der dem übergebenden Patienten entspricht.
+	 * 
 	 * 
 	 * @param patientAsAuthor
 	 *            the patient, who acts as author
+	 */
+
+	/**
+	 * <div class="en"> Creates a new Author based on the given Patient object
+	 * 
+	 * @param patientAsAuthor
+	 *            this Patient is used as Author</div><div class="de"> Erstellt
+	 *            einen neuen Autor der dem übergebenden Patienten entspricht.
+	 * @param patientAsAuthor
+	 *            dieser Patient wird als Autor verwendet</div><div
+	 *            class="fr">@param patientAsAuthor</div>
 	 */
 	public Author(Patient patientAsAuthor) {
 		this();
@@ -136,9 +147,11 @@ public class Author {
 			mPerson = patientAsAuthor.copyMdhtPerson();
 			mAsAuthor.setAssignedPerson(mPerson);
 		}
-		if (patientAsAuthor.getMdhtPatient().getNames() != null
-				&& patientAsAuthor.getMdhtPatient().getNames().size() > 0) {
-			mPerson.getNames().addAll(patientAsAuthor.getMdhtPatient().getNames());
+
+		if (patientAsAuthor.getMdhtPatient().getNames() != null) {
+			for (Name name : patientAsAuthor.getNames()) {
+				mPerson.getNames().add(name.copyMdhtPn());
+			}
 		}
 
 		if (patientAsAuthor.getIds() != null && patientAsAuthor.getIds().size() > 0) {
