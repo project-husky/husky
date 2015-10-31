@@ -67,14 +67,14 @@ public class FhirXdTransaction {
 	@ResourceDef(name = "Bundle")
 	public static class Transaction extends Bundle {
 
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = -928980987511039196L;
-
 		/** The Constant urnUseAsAffinityDomain. */
 		public static final String urnUseAsAffinityDomain = "urn:ehealth_connector:FhirExtension:useAsAffinityDomain";
 
 		/** The Constant urnUseAsSubmissionSets. */
 		public static final String urnUseAsSubmissionSet = "urn:ehealth_connector:FhirExtension:useAsSubmissionSet";
+
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = -928980987511039196L;
 
 		/** The affinity domain setting. */
 		@Child(name = "affinityDomain", max = 1)
@@ -105,18 +105,6 @@ public class FhirXdTransaction {
 		}
 
 		/**
-		 * Adds a submission-set.
-		 * 
-		 * @param submission
-		 *            - add the submission-set (FHIR DocumentManifest)
-		 */
-		public void addSubmissionSet(DocumentManifest submissionSet) {
-			Entry entry = this.addEntry();
-			entry.setResource(submissionSet);
-			entry.setFullUrl(UUID.generateURN());
-		}
-
-		/**
 		 * Adds a document
 		 * 
 		 * @param document
@@ -125,6 +113,18 @@ public class FhirXdTransaction {
 		public void addDocument(DocumentReference document) {
 			Entry entry = this.addEntry();
 			entry.setResource(document);
+			entry.setFullUrl(UUID.generateURN());
+		}
+
+		/**
+		 * Adds a submission-set.
+		 * 
+		 * @param submission
+		 *            - add the submission-set (FHIR DocumentManifest)
+		 */
+		public void addSubmissionSet(DocumentManifest submissionSet) {
+			Entry entry = this.addEntry();
+			entry.setResource(submissionSet);
 			entry.setFullUrl(UUID.generateURN());
 		}
 
@@ -140,19 +140,6 @@ public class FhirXdTransaction {
 	public FhirXdTransaction() {
 	}
 
-	/**
-	 * Read transaction from file.
-	 * 
-	 * @param fileName
-	 *            the file name
-	 * @return the transaction
-	 */
-	public Transaction readTransactionFromFile(String fileName) {
-		String resourceString = FhirCommon.getXmlResource(fileName);
-		IParser parser = mFhirCtx.newXmlParser();
-		return parser.parseResource(Transaction.class, resourceString);
-	}
-
 	public AffinityDomain getAffinityDomain(Transaction transaction) {
 		AffinityDomain afinityDomain = new AffinityDomain();
 		// set the registry
@@ -165,6 +152,20 @@ public class FhirXdTransaction {
 			afinityDomain.setRepositoryDestination(repos.get(0));
 
 		return afinityDomain;
+	}
+
+	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
+		if (!fhirObject.getAuthor().isEmpty())
+			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
+		else
+			return null;
+	}
+
+	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
+		if (!fhirObject.getAuthor().isEmpty())
+			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
+		else
+			return null;
 	}
 
 	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
@@ -208,6 +209,37 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
+	public org.ehealth_connector.communication.Destination getRegistry(Bundle bundle) {
+		org.ehealth_connector.communication.Destination retVal = null;
+
+		for (Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof MessageHeader) {
+				MessageHeader fhirObject = (MessageHeader) entry.getResource();
+				if (!fhirObject
+						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
+						.isEmpty())
+					retVal = getDestination((MessageHeader) entry.getResource());
+			}
+		}
+
+		return retVal;
+	}
+
+	public List<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
+		List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
+
+		for (Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof MessageHeader) {
+				MessageHeader fhirObject = (MessageHeader) entry.getResource();
+				if (!fhirObject.getUndeclaredExtensionsByUrl(
+						FhirCommon.urnUseAsRepositoryDestination).isEmpty())
+					retVal.add(getDestination((MessageHeader) entry.getResource()));
+			}
+		}
+
+		return retVal;
+	}
+
 	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction,
 			String receiverFacilityOid) {
 		SubmissionSetMetadata retVal = new SubmissionSetMetadata();
@@ -244,49 +276,17 @@ public class FhirXdTransaction {
 		return retVal;
 	}
 
-	public List<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
-		List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
-
-		for (Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof MessageHeader) {
-				MessageHeader fhirObject = (MessageHeader) entry.getResource();
-				if (!fhirObject.getUndeclaredExtensionsByUrl(
-						FhirCommon.urnUseAsRepositoryDestination).isEmpty())
-					retVal.add(getDestination((MessageHeader) entry.getResource()));
-			}
-		}
-
-		return retVal;
-	}
-
-	public org.ehealth_connector.communication.Destination getRegistry(Bundle bundle) {
-		org.ehealth_connector.communication.Destination retVal = null;
-
-		for (Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof MessageHeader) {
-				MessageHeader fhirObject = (MessageHeader) entry.getResource();
-				if (!fhirObject
-						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
-						.isEmpty())
-					retVal = getDestination((MessageHeader) entry.getResource());
-			}
-		}
-
-		return retVal;
-	}
-
-	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
-		if (!fhirObject.getAuthor().isEmpty())
-			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
-		else
-			return null;
-	}
-
-	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
-		if (!fhirObject.getAuthor().isEmpty())
-			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
-		else
-			return null;
+	/**
+	 * Read transaction from file.
+	 * 
+	 * @param fileName
+	 *            the file name
+	 * @return the transaction
+	 */
+	public Transaction readTransactionFromFile(String fileName) {
+		String resourceString = FhirCommon.getXmlResource(fileName);
+		IParser parser = mFhirCtx.newXmlParser();
+		return parser.parseResource(Transaction.class, resourceString);
 	}
 
 	private org.ehealth_connector.communication.Destination getDestination(MessageHeader fhirObject) {

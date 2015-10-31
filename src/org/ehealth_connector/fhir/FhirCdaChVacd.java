@@ -93,12 +93,6 @@ import ca.uhn.fhir.util.ElementUtil;
 public class FhirCdaChVacd {
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div> <div
-	 * class="de"></div><div class="fr"></div>
-	 */
-	public static final String oidVACD = "urn:oid:" + CdaChVacd.OID_MAIN;
-
-	/**
 	 * <div class="en">Type of the bundle to define wheter the resulting CDA
 	 * document contains full or masked patient demographics</div> <div
 	 * class="de"></div><div class="fr"></div>
@@ -164,6 +158,15 @@ public class FhirCdaChVacd {
 		private StringDt comment;
 
 		/**
+		 * <div class="en">List of reasons for this medication statement</div>
+		 * <div class="de"></div><div class="fr"></div>
+		 */
+		@Child(name = "externalDocument")
+		@Extension(url = FhirCommon.urnUseAsExternalDocument, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "reference to the guidline for the immunization recommendation")
+		private ResourceReferenceDt externalDocument;
+
+		/**
 		 * <div class="en">LotNumber for this medication statement</div> <div
 		 * class="de"></div><div class="fr"></div>
 		 */
@@ -189,37 +192,6 @@ public class FhirCdaChVacd {
 		@Extension(url = FhirCommon.urnUseAsReason, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "List of reasons for this medication statement")
 		private ResourceReferenceDt reasons;
-
-		/**
-		 * <div class="en">List of reasons for this medication statement</div>
-		 * <div class="de"></div><div class="fr"></div>
-		 */
-		@Child(name = "externalDocument")
-		@Extension(url = FhirCommon.urnUseAsExternalDocument, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "reference to the guidline for the immunization recommendation")
-		private ResourceReferenceDt externalDocument;
-
-		/**
-		 * Gets the external document.
-		 * 
-		 * @return the external document
-		 */
-		public ResourceReferenceDt getExternalDocument() {
-			if (this.externalDocument == null) {
-				this.externalDocument = new ResourceReferenceDt();
-			}
-			return externalDocument;
-		}
-
-		/**
-		 * Sets the external document.
-		 * 
-		 * @param externalDocument
-		 *            the new external document
-		 */
-		public void setExternalDocument(ResourceReferenceDt externalDocument) {
-			this.externalDocument = externalDocument;
-		}
 
 		/**
 		 * <div class="en">Empty constructor (default)</div> <div
@@ -260,6 +232,18 @@ public class FhirCdaChVacd {
 				this.comment = new StringDt();
 			}
 			return comment;
+		}
+
+		/**
+		 * Gets the external document.
+		 * 
+		 * @return the external document
+		 */
+		public ResourceReferenceDt getExternalDocument() {
+			if (this.externalDocument == null) {
+				this.externalDocument = new ResourceReferenceDt();
+			}
+			return externalDocument;
 		}
 
 		/**
@@ -341,6 +325,16 @@ public class FhirCdaChVacd {
 		}
 
 		/**
+		 * Sets the external document.
+		 * 
+		 * @param externalDocument
+		 *            the new external document
+		 */
+		public void setExternalDocument(ResourceReferenceDt externalDocument) {
+			this.externalDocument = externalDocument;
+		}
+
+		/**
 		 * @param lot
 		 *            <div class="en">lot number of this medication</div> <div
 		 *            class="de">Lotnummer des Medikaments</div> <div
@@ -371,7 +365,7 @@ public class FhirCdaChVacd {
 			this.reasons = reasons;
 		}
 
-	};
+	}
 
 	/**
 	 * The Class VacdDocument.
@@ -911,7 +905,13 @@ public class FhirCdaChVacd {
 	 * class="de"></div><div class="fr"></div>
 	 */
 	public static final String oidConfidentialityCode = "urn:oid:"
-			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
+			+ CodeSystems.ConfidentialityCode.getCodeSystemId();;
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this OID</div> <div
+	 * class="de"></div><div class="fr"></div>
+	 */
+	public static final String oidVACD = "urn:oid:" + CdaChVacd.OID_MAIN;
 
 	private final FhirContext mFhirCtx = new FhirContext();
 

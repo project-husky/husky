@@ -59,47 +59,11 @@ import ca.uhn.fhir.model.primitive.StringDt;
  */
 public class FhirCommon {
 
-	public static String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
-	public static String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
-
 	public static String AHDIS_COMMUNITY_OID = "2.16.756.5.37";
 	public static String AHDIS_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsComment = "urn:ehealth_connector:FhirExtension:useAsComment";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsMetadataLanguage = "urn:ehealth_connector:FhirExtension:useAsMetadataLanguage";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsRepositoryDestination = "urn:ehealth_connector:FhirExtension:useAsRepositoryDestination";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsRegistryDestination = "urn:ehealth_connector:FhirExtension:useAsRegistryDestination";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsLaboratoryObservations = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservations";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsLanguage = "urn:ehealth_connector:FhirExtension:useAsLanguage";
+	public static String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
+	public static String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div> <div
@@ -152,6 +116,12 @@ public class FhirCommon {
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsComment = "urn:ehealth_connector:FhirExtension:useAsComment";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsConfidentiality = "urn:ehealth_connector:FhirExtension:useAsConfidentiality";
@@ -178,7 +148,19 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsDocumentDescriptor = "urn:ehealth_connector:FhirExtension:useAsDocumentDescriptor";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsExternalDocument = "urn:ehealth_connector:FhirExtension:useAsExternalDocument";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsFormatCode = "urn:ehealth_connector:FhirExtension:useAsFormatCode";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
@@ -206,6 +188,18 @@ public class FhirCommon {
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsLaboratoryObservations = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservations";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsLanguage = "urn:ehealth_connector:FhirExtension:useAsLanguage";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsLegalAuthenticator = "urn:ehealth_connector:FhirExtension:useAsLegalAuthenticator";
@@ -221,6 +215,18 @@ public class FhirCommon {
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
 	public static final String urnUseAsMedicationTarget = "urn:ehealth_connector:FhirExtension:useAsMedicationTarget";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsMetadataLanguage = "urn:ehealth_connector:FhirExtension:useAsMetadataLanguage";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsMimeType = "urn:ehealth_connector:FhirExtension:useAsMimeType";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
@@ -248,6 +254,12 @@ public class FhirCommon {
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsPracticeSettingCode = "urn:ehealth_connector:FhirExtension:useAsPracticeSettingCode";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String urnUseAsPregnancyObservation = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
@@ -262,129 +274,23 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
-	public static final String urnUseAsMimeType = "urn:ehealth_connector:FhirExtension:useAsMimeType";
+	public static final String urnUseAsRegistryDestination = "urn:ehealth_connector:FhirExtension:useAsRegistryDestination";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
-	public static final String urnUseAsDocumentDescriptor = "urn:ehealth_connector:FhirExtension:useAsDocumentDescriptor";
+	public static final String urnUseAsRepositoryDestination = "urn:ehealth_connector:FhirExtension:useAsRepositoryDestination";
 
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsFormatCode = "urn:ehealth_connector:FhirExtension:useAsFormatCode";
-
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
-	 */
-	public static final String urnUseAsPracticeSettingCode = "urn:ehealth_connector:FhirExtension:useAsPracticeSettingCode";
-
-	/**
-	 * <div class="en">reads the given XML file (UTF-8) into a string</div> <div
-	 * class="de"></div> <div class="fr"></div>
-	 * 
-	 * @param fileName
-	 *            <div class="en">file to read</div> <div class="de"></div> <div
-	 *            class="fr"></div>
-	 * @return <div class="en">string containing the XML file content</div> <div
-	 *         class="de"></div> <div class="fr"></div>
-	 */
-	public static String getXmlResource(String fileName) {
-		StringBuffer sb = new StringBuffer();
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(fileName), "UTF8"));
-			String line;
-			try {
-				while ((line = bufferedReader.readLine()) != null) {
-					sb.append(line);
-				}
-				bufferedReader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
+	public static org.ehealth_connector.common.Author getAuthor(IBaseResource res) {
+		org.ehealth_connector.common.Author retVal = null;
+		if (res instanceof Person) {
+			retVal = FhirCommon.getAuthor((Person) res);
 		}
-		return sb.toString();
-	}
-
-	/**
-	 * <div class="en">removes urn:oid: prefix of the given string</div> <div
-	 * class="de"></div> <div class="fr"></div>
-	 * 
-	 * @param <div class="en">value string beginning with the urn:oid:
-	 *        prefix</div> <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">string without the prefix</div> <div
-	 *         class="de"></div> <div class="fr"></div>
-	 */
-	public static String removeURIPrefix(String value) {
-		String retVal = "";
-		if (value.toLowerCase().startsWith("urn:oid:"))
-			retVal = value.substring(8, value.length());
+		if (res instanceof Practitioner) {
+			retVal = FhirCommon.getAuthor((Practitioner) res);
+		}
 		return retVal;
-	}
-
-	public static ExtensionDt getExtensionAuthor() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsAuthor, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionComment() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsComment, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionMetadataLanguage() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsMetadataLanguage, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionRepositoryDestination() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsRepositoryDestination, new StringDt(
-				"dummy"));
-	}
-
-	public static ExtensionDt getExtensionCriterion() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsCriterion, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionCustodian() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsCustodian, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionExternalDocument() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsExternalDocument, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionFormatCode() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsFormatCode, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionMedicationTarget() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsMedicationTarget, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionMimeType() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsMimeType, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionDocumentDescriptor() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsDocumentDescriptor, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionPerformer() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsPerformer, new StringDt("dummy"));
-	}
-
-	public static ExtensionDt getExtensionPracticeSettingCode() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsPracticeSettingCode, new CodingDt());
-	}
-
-	public static ExtensionDt getExtensionReason() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsReason, new StringDt("dummy"));
 	}
 
 	/**
@@ -478,32 +384,138 @@ public class FhirCommon {
 
 	}
 
-	/**
-	 * @param fhirContactPoints
-	 *            <div class="en">list of FHIR ContactPointDt resources</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC Telecoms</div> <div class="de"></div> <div
-	 *         class="fr"></div>
-	 */
-	public static Telecoms getTelecoms(List<ContactPointDt> fhirContactPoints) {
-		Telecoms eHCTelecoms = new Telecoms();
-		for (ContactPointDt telco : fhirContactPoints) {
-			AddressUse usage = AddressUse.BUSINESS;
-			if (telco.getUseElement().getValueAsEnum() == ContactPointUseEnum.HOME) {
-				usage = AddressUse.PRIVATE;
-			}
-			String value = telco.getValue();
-			if (value.toLowerCase().startsWith("tel:")) {
-				eHCTelecoms.addPhone(value.substring(4, value.length()), usage);
-			} else if (value.toLowerCase().startsWith("fax:")) {
-				eHCTelecoms.addFax(value.substring(4, value.length()), usage);
-			} else if (value.toLowerCase().startsWith("mailto:")) {
-				eHCTelecoms.addEMail(value.substring(7, value.length()), usage);
-			} else if (value.toLowerCase().startsWith("http:")) {
-				eHCTelecoms.addWebsite(value, usage);
+	public static org.ehealth_connector.common.Author getAuthor(ResourceReferenceDt ref) {
+		return getAuthor(ref.getResource());
+	}
+
+	public static Identificator getCommunityPatientId(org.ehealth_connector.common.Patient patient,
+			String communityOid) {
+		Identificator retVal = null;
+		for (Identificator item : patient.getIds()) {
+
+			if (item.getRoot().replace("urn:oid:", "").equals(communityOid.replace("urn:oid:", ""))) {
+				retVal = new Identificator(item.getRoot(), item.getExtension());
+				break;
 			}
 		}
-		return eHCTelecoms;
+		return retVal;
+	}
+
+	public static DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
+		String mimeType = "";
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
+			if (!extensions.isEmpty()) {
+				mimeType = item.getCode();
+				break;
+			}
+		}
+		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
+	}
+
+	public static String getDocumentFilepath(DocumentReference fhirObject) {
+		return fhirObject.getContentFirstRep().getAttachment().getUrl();
+	}
+
+	public static ExtensionDt getExtensionAuthor() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsAuthor, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionComment() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsComment, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionCriterion() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsCriterion, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionCustodian() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsCustodian, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionDocumentDescriptor() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsDocumentDescriptor, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionExternalDocument() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsExternalDocument, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionFormatCode() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsFormatCode, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMedicationTarget() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMedicationTarget, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMetadataLanguage() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMetadataLanguage, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionMimeType() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsMimeType, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionPerformer() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsPerformer, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionPracticeSettingCode() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsPracticeSettingCode, new CodingDt());
+	}
+
+	public static ExtensionDt getExtensionReason() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsReason, new StringDt("dummy"));
+	}
+
+	public static ExtensionDt getExtensionRepositoryDestination() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsRepositoryDestination, new StringDt(
+				"dummy"));
+	}
+
+	public static Code getFormatCode(DocumentReference fhirObject) {
+		Code retVal = null;
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsFormatCode);
+			if (!extensions.isEmpty()) {
+				retVal = new Code(item);
+				break;
+			}
+		}
+		return retVal;
+	}
+
+	public static String getMetadataLanguage(DocumentReference fhirObject) {
+		String retVal = "";
+		List<ExtensionDt> extensions = fhirObject
+				.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMetadataLanguage);
+		if (!extensions.isEmpty())
+			retVal = ((StringDt) extensions.get(0).getValue()).getValueAsString();
+		return retVal;
+	}
+
+	public static String getMimeType(DocumentReference fhirObject) {
+		String retVal = "";
+		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
+			List<ExtensionDt> extensions = item
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMimeType);
+			if (!extensions.isEmpty()) {
+				retVal = item.getCode();
+				break;
+			}
+		}
+		return retVal;
+	}
+
+	public static org.ehealth_connector.common.Organization getOrganization(IBaseResource res) {
+		org.ehealth_connector.common.Organization retVal = null;
+		if (res instanceof Organization) {
+			retVal = FhirCommon.getOrganization((Organization) res);
+		}
+		return retVal;
 	}
 
 	/**
@@ -548,29 +560,6 @@ public class FhirCommon {
 	public static org.ehealth_connector.common.Organization getOrganization(
 			ResourceReferenceDt orgRef) {
 		return getOrganization(orgRef.getResource());
-	}
-
-	public static org.ehealth_connector.common.Organization getOrganization(IBaseResource res) {
-		org.ehealth_connector.common.Organization retVal = null;
-		if (res instanceof Organization) {
-			retVal = FhirCommon.getOrganization((Organization) res);
-		}
-		return retVal;
-	}
-
-	public static org.ehealth_connector.common.Author getAuthor(ResourceReferenceDt ref) {
-		return getAuthor(ref.getResource());
-	}
-
-	public static org.ehealth_connector.common.Author getAuthor(IBaseResource res) {
-		org.ehealth_connector.common.Author retVal = null;
-		if (res instanceof Person) {
-			retVal = FhirCommon.getAuthor((Person) res);
-		}
-		if (res instanceof Practitioner) {
-			retVal = FhirCommon.getAuthor((Practitioner) res);
-		}
-		return retVal;
 	}
 
 	// /**
@@ -623,6 +612,14 @@ public class FhirCommon {
 		return retVal;
 	}
 
+	public static org.ehealth_connector.common.Patient getPatient(IBaseResource res) {
+		org.ehealth_connector.common.Patient retVal = null;
+		if (res instanceof Patient) {
+			retVal = FhirCommon.getPatient((Patient) res);
+		}
+		return retVal;
+	}
+
 	public static org.ehealth_connector.common.Patient getPatient(Patient fhirPatient) {
 		org.ehealth_connector.common.Patient retVal = null;
 		Name patientName = new Name(fhirPatient.getNameFirstRep().getGivenAsSingleString(),
@@ -665,44 +662,6 @@ public class FhirCommon {
 		return getPatient(orgRef.getResource());
 	}
 
-	public static org.ehealth_connector.common.Patient getPatient(IBaseResource res) {
-		org.ehealth_connector.common.Patient retVal = null;
-		if (res instanceof Patient) {
-			retVal = FhirCommon.getPatient((Patient) res);
-		}
-		return retVal;
-	}
-
-	public static DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
-		String mimeType = "";
-		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
-			List<ExtensionDt> extensions = item
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
-			if (!extensions.isEmpty()) {
-				mimeType = item.getCode();
-				break;
-			}
-		}
-		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
-	}
-
-	public static String getDocumentFilepath(DocumentReference fhirObject) {
-		return fhirObject.getContentFirstRep().getAttachment().getUrl();
-	}
-
-	public static Code getFormatCode(DocumentReference fhirObject) {
-		Code retVal = null;
-		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
-			List<ExtensionDt> extensions = item
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsFormatCode);
-			if (!extensions.isEmpty()) {
-				retVal = new Code(item);
-				break;
-			}
-		}
-		return retVal;
-	}
-
 	public static Code getPracticeSettingCode(DocumentReference fhirObject) {
 		Code retVal = null;
 		List<ExtensionDt> extensions = fhirObject
@@ -712,38 +671,79 @@ public class FhirCommon {
 		return retVal;
 	}
 
-	public static String getMetadataLanguage(DocumentReference fhirObject) {
-		String retVal = "";
-		List<ExtensionDt> extensions = fhirObject
-				.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMetadataLanguage);
-		if (!extensions.isEmpty())
-			retVal = ((StringDt) extensions.get(0).getValue()).getValueAsString();
-		return retVal;
-	}
-
-	public static String getMimeType(DocumentReference fhirObject) {
-		String retVal = "";
-		for (CodingDt item : fhirObject.getContentFirstRep().getFormat()) {
-			List<ExtensionDt> extensions = item
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMimeType);
-			if (!extensions.isEmpty()) {
-				retVal = item.getCode();
-				break;
+	/**
+	 * @param fhirContactPoints
+	 *            <div class="en">list of FHIR ContactPointDt resources</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC Telecoms</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public static Telecoms getTelecoms(List<ContactPointDt> fhirContactPoints) {
+		Telecoms eHCTelecoms = new Telecoms();
+		for (ContactPointDt telco : fhirContactPoints) {
+			AddressUse usage = AddressUse.BUSINESS;
+			if (telco.getUseElement().getValueAsEnum() == ContactPointUseEnum.HOME) {
+				usage = AddressUse.PRIVATE;
+			}
+			String value = telco.getValue();
+			if (value.toLowerCase().startsWith("tel:")) {
+				eHCTelecoms.addPhone(value.substring(4, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("fax:")) {
+				eHCTelecoms.addFax(value.substring(4, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("mailto:")) {
+				eHCTelecoms.addEMail(value.substring(7, value.length()), usage);
+			} else if (value.toLowerCase().startsWith("http:")) {
+				eHCTelecoms.addWebsite(value, usage);
 			}
 		}
-		return retVal;
+		return eHCTelecoms;
 	}
 
-	public static Identificator getCommunityPatientId(org.ehealth_connector.common.Patient patient,
-			String communityOid) {
-		Identificator retVal = null;
-		for (Identificator item : patient.getIds()) {
-
-			if (item.getRoot().replace("urn:oid:", "").equals(communityOid.replace("urn:oid:", ""))) {
-				retVal = new Identificator(item.getRoot(), item.getExtension());
-				break;
+	/**
+	 * <div class="en">reads the given XML file (UTF-8) into a string</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @param fileName
+	 *            <div class="en">file to read</div> <div class="de"></div> <div
+	 *            class="fr"></div>
+	 * @return <div class="en">string containing the XML file content</div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
+	public static String getXmlResource(String fileName) {
+		StringBuffer sb = new StringBuffer();
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+					new FileInputStream(fileName), "UTF8"));
+			String line;
+			try {
+				while ((line = bufferedReader.readLine()) != null) {
+					sb.append(line);
+				}
+				bufferedReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
 		}
+		return sb.toString();
+	}
+
+	/**
+	 * <div class="en">removes urn:oid: prefix of the given string</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @param <div class="en">value string beginning with the urn:oid:
+	 *        prefix</div> <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">string without the prefix</div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
+	public static String removeURIPrefix(String value) {
+		String retVal = "";
+		if (value.toLowerCase().startsWith("urn:oid:"))
+			retVal = value.substring(8, value.length());
 		return retVal;
 	}
 }

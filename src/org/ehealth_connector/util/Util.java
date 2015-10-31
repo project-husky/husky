@@ -17,7 +17,10 @@
 package org.ehealth_connector.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,6 +29,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
@@ -80,14 +84,14 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class Util {
 
 	/**
-	 * The Constant TELECOMS_FAX_PREFIX.
-	 */
-	public static final String TELECOMS_FAX_PREFIX = "fax:";
-
-	/**
 	 * The Constant TELECOMS_EMAIL_PREFIX.
 	 */
 	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+
+	/**
+	 * The Constant TELECOMS_FAX_PREFIX.
+	 */
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
 
 	/**
 	 * The Constant TELECOMS_PHONE_PREFIX.
@@ -570,6 +574,43 @@ public class Util {
 	}
 
 	/**
+	 * <div class="en"> Extracts a file from embedded resources in the Jar as
+	 * temporary file on the local filesystem
+	 * 
+	 * @param rscPath
+	 *            path to the desired file in the Jar
+	 * @return Full path and file name of the created temporary file </div> <div
+	 *         class="de"></div> <div class="fr"></div>
+	 */
+	public static String extractFileFromResource(String rscPath) {
+		String filename = FilenameUtils.getName(rscPath);
+		String targetPath = null;
+
+		if (!rscPath.startsWith("/"))
+			rscPath = "/" + rscPath;
+
+		try {
+			targetPath = File.createTempFile(filename, "").getAbsolutePath();
+			InputStream input = Util.class.getResourceAsStream(rscPath);
+			if (input == null) {
+				throw new IOException("File '" + filename + "' not found.");
+			}
+			OutputStream output = new FileOutputStream(targetPath);
+			byte[] buffer = new byte[2048];
+			int bytesRead;
+			while ((bytesRead = input.read(buffer)) != -1) {
+				output.write(buffer, 0, bytesRead);
+			}
+			input.close();
+			output.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return targetPath;
+	}
+
+	/**
 	 * <div class="en">Extract string from a non quoted MDHT StrucDocText.</div>
 	 * 
 	 * @param strucDocText
@@ -687,20 +728,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the website from an ArrayList of TEL.</div> <div
-	 * class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
-	 * 
-	 * @param telecoms
-	 * <br>
-	 *            <div class="en">the telecoms</div>
-	 * @return <div class="en">the webside</div>
-	 */
-	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
-		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
-		return h;
-	}
-
-	/**
 	 * <div class="en">Gets a temp folder for output files. If you set an
 	 * environment variable with the name 'eHCTempPath' the eHealth Connector
 	 * will use the path specified in this environment variable. If no such
@@ -733,6 +760,20 @@ public class Util {
 		}
 		log.info("Temp folder: " + tempDirectoryPath);
 		return tempDirectoryPath;
+	}
+
+	/**
+	 * <div class="en">Gets the website from an ArrayList of TEL.</div> <div
+	 * class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
+	 * 
+	 * @param telecoms
+	 * <br>
+	 *            <div class="en">the telecoms</div>
+	 * @return <div class="en">the webside</div>
+	 */
+	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
+		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
+		return h;
 	}
 
 	/**
