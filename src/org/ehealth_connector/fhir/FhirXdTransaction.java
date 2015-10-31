@@ -122,7 +122,7 @@ public class FhirXdTransaction {
 		/**
 		 * Adds an submission-set to the FHIR bundle
 		 * 
-		 * @param submission
+		 * @param submissionSet
 		 *            - add the submission-set (FHIR DocumentManifest)
 		 */
 		public void addSubmissionSet(DocumentManifest submissionSet) {

@@ -1400,7 +1400,7 @@ public class FhirCdaChVacd {
 	 * Gets an eHC Author object containing the performer from the given FHIR
 	 * MedicationStatement object
 	 * 
-	 * @param bundle
+	 * @param fhirMedicationStatement
 	 *            the FHIR bundle
 	 * @return eHC Author object containing the performer </div> <div
 	 *         class="de"></div> <div class="fr"></div>

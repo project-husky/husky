@@ -910,8 +910,10 @@ public class FhirCommon {
 	 * <div class="en">removes urn:oid: prefix of the given string</div> <div
 	 * class="de"></div> <div class="fr"></div>
 	 * 
-	 * @param <div class="en">value string beginning with the urn:oid:
-	 *        prefix</div> <div class="de"></div> <div class="fr"></div>
+	 * @param value
+	 *            <div class="en">value string beginning with the
+	 *            urn:oid:prefix</div> <div class="de"></div> <div
+	 *            class="fr"></div>
 	 * @return <div class="en">string without the prefix</div> <div
 	 *         class="de"></div> <div class="fr"></div>
 	 */

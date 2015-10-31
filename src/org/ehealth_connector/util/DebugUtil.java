@@ -239,7 +239,7 @@ public class DebugUtil {
 	 * Creates a string with the submission-set metadata (for debugging purposes
 	 * only)
 	 * 
-	 * @param txnData
+	 * @param txnDatas
 	 *            <div class="en">the submit transaction data</div>
 	 * @return <div class="en">string with the submission-set metadata (for
 	 *         debugging purposes only)</div>

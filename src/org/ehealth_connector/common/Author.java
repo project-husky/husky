@@ -125,21 +125,14 @@ public class Author {
 	}
 
 	/**
-	 * 
-	 * 
-	 * @param patientAsAuthor
-	 *            the patient, who acts as author
-	 */
-
-	/**
-	 * <div class="en"> Creates a new Author based on the given Patient object
+	 * <div class="en"> Creates a new Author based on the given Patient
+	 * object</div> <div class="de"> Erstellt einen neuen Autor der dem
+	 * übergebenden Patienten entspricht.</div>
 	 * 
 	 * @param patientAsAuthor
-	 *            this Patient is used as Author</div><div class="de"> Erstellt
-	 *            einen neuen Autor der dem übergebenden Patienten entspricht.
-	 * @param patientAsAuthor
-	 *            dieser Patient wird als Autor verwendet</div><div
-	 *            class="fr">@param patientAsAuthor</div>
+	 *            <div class="en"> this Patient is used as Author</div> <div
+	 *            class="de"> dieser Patient wird als Autor verwendet</div> <div
+	 *            class="fr"></div>
 	 */
 	public Author(Patient patientAsAuthor) {
 		this();
