@@ -87,6 +87,15 @@ public class Concern {
 	}
 
 	/**
+	 * Method to get
+	 * 
+	 * @return the mConcernEntry
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getConcernEntry() {
+		return mConcernEntry;
+	}
+
+	/**
 	 * <div class="en">Gets the end of the concern</div> <div class="de">Gibt
 	 * das Ende des Leidens zurück.</div>
 	 * 
@@ -95,15 +104,6 @@ public class Concern {
 	public String getEnd() {
 		return Util.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getHigh()
 				.getValue());
-	}
-
-	/**
-	 * <div class="en">Gets the ids.</div>
-	 * 
-	 * @return the id
-	 */
-	public List<Identificator> getIds() {
-		return Util.convertIds(getConcernEntry().getIds());
 	}
 
 	/**
@@ -121,6 +121,15 @@ public class Concern {
 			}
 		}
 		return ident;
+	}
+
+	/**
+	 * <div class="en">Gets the ids.</div>
+	 * 
+	 * @return the id
+	 */
+	public List<Identificator> getIds() {
+		return Util.convertIds(getConcernEntry().getIds());
 	}
 
 	/**
@@ -167,6 +176,16 @@ public class Concern {
 		// Create and set the concern as freetext
 		final ED concernText = DatatypesFactory.eINSTANCE.createED(concern);
 		getConcernEntry().setText(concernText);
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param mConcernEntry
+	 *            the mConcernEntry to set
+	 */
+	public void setConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry) {
+		this.mConcernEntry = mConcernEntry;
 	}
 
 	/**
@@ -242,25 +261,6 @@ public class Concern {
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the mConcernEntry
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getConcernEntry() {
-		return mConcernEntry;
-	}
-
-	/**
-	 * Method to set
-	 * 
-	 * @param mConcernEntry
-	 *            the mConcernEntry to set
-	 */
-	public void setConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry) {
-		this.mConcernEntry = mConcernEntry;
 	}
 
 	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {

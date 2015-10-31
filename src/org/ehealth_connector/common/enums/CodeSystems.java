@@ -27,10 +27,12 @@ public enum CodeSystems implements IdentityDomain {
 
 	/**
 	 * OID: 2.16.756.5.30.1.127.3.1.20080401.1 <div class="de">Krankheiten und
-	 * Unfallfolgen (VVK-EDI, Kapitel 2.1.1)</div> <div class="fr">Désignation de
-	 * la maladie ou de la séquelle d’accident (OCA-DFI, chapitre 2.1.1)</div>
+	 * Unfallfolgen (VVK-EDI, Kapitel 2.1.1)</div> <div class="fr">Désignation
+	 * de la maladie ou de la séquelle d’accident (OCA-DFI, chapitre
+	 * 2.1.1)</div>
 	 */
-	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1", "diseaseName (ICR-DHA, chapter 2.1.1)"),
+	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
+			"diseaseName (ICR-DHA, chapter 2.1.1)"),
 	/**
 	 * OID: 1.3.88 <div class="en">Global Location Number</div>
 	 */
@@ -62,13 +64,14 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	SwissSSNDeprecated("2.16.756.5.31", "AHV Nummer (die Alte)"),
 	/**
-	 * OID: 2.16.756.5.30.1.123.100.1.1.1 <div class="en">Insurance Card Number (VeKa)</div><div
-	 * class="de">Kartennummern für die Versichertenkarte (VeKa)</div> <div class="fr">No carte d insurance (VeKa)</div>
+	 * OID: 2.16.756.5.30.1.123.100.1.1.1 <div class="en">Insurance Card Number
+	 * (VeKa)</div><div class="de">Kartennummern für die Versichertenkarte
+	 * (VeKa)</div> <div class="fr">No carte d insurance (VeKa)</div>
 	 */
 	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1", "Kartennummern für die Versichertenkarte (VeKa)"),
 	/**
-	 * OID: 2.16.756.5.31 <div class="en">ICD-10</div><div class="de">ICD-10</div>
-	 * <div class="fr">ICD-10</div>
+	 * OID: 2.16.756.5.31 <div class="en">ICD-10</div><div
+	 * class="de">ICD-10</div> <div class="fr">ICD-10</div>
 	 */
 	ICD10("2.16.756.5.30.1.126.3.2", "ICD-10"),
 	/**
@@ -122,12 +125,14 @@ public enum CodeSystems implements IdentityDomain {
 	HL7ActCode("2.16.840.1.113883.5.4", "HL7ActCode"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.1063 <div class="en">HL7SeverityObservation</div>
+	 * OID: 2.16.840.1.113883.5.1063 <div
+	 * class="en">HL7SeverityObservation</div>
 	 */
 	HL7SeverityObservation("2.16.840.1.113883.5.1063", "HL7SeverityObservation"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.112 <div class="en">HL7RouteOfAdministration</div>
+	 * OID: 2.16.840.1.113883.5.112 <div
+	 * class="en">HL7RouteOfAdministration</div>
 	 */
 	HL7RouteOfAdministration("2.16.840.1.113883.5.112", "HL7RouteOfAdministration"),
 

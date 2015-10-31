@@ -39,22 +39,6 @@ public class ExternalReferenceEntryTests {
 	private XPath xpath = xpathFactory.newXPath();
 
 	@Test
-	public void testSerializeEmpty() throws Exception {
-		ExternalReferenceEntry entry = new ExternalReferenceEntry();
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"reference/templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.ExtRef']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("reference[@typeCode='REFR']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
 	public void testExternalDocument() throws XPathExpressionException {
 		ExternalReferenceEntry entry = new ExternalReferenceEntry();
 
@@ -66,12 +50,28 @@ public class ExternalReferenceEntryTests {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile(
-				"reference/externalDocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
+		XPathExpression expr = xpath
+				.compile("reference/externalDocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
 
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
+	}
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		ExternalReferenceEntry entry = new ExternalReferenceEntry();
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("reference/templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.ExtRef']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("reference[@typeCode='REFR']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
 	}
 
 }

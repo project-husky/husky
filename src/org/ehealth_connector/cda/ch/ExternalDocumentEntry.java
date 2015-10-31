@@ -28,8 +28,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
  * the reference to the immunization recommendation in switzerland, see chapter
  * 7.5.8.7 CDA-CH-VACD
  */
-public class ExternalDocumentEntry
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
+public class ExternalDocumentEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
 
 	/**
 	 * Instantiates a new criterion entry.
@@ -93,7 +93,7 @@ public class ExternalDocumentEntry
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -128,7 +128,7 @@ public class ExternalDocumentEntry
 
 	/**
 	 * Sets the text reference.
-	 *
+	 * 
 	 * @param value
 	 *            the new text reference, # for local reference has to be
 	 *            included

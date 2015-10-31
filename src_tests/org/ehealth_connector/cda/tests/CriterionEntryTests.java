@@ -39,18 +39,6 @@ public class CriterionEntryTests {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-	@Test
-	public void testSerializeEmpty() throws Exception {
-		CriterionEntry entry = new CriterionEntry();
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"criterion/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Category']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
 	/*
 	 * REC_BASE("41501", "Empfohlene Basisimpfungen",
 	 * "Vaccinations recommandées de base", "Vaccinazioni raccomandate di base"
@@ -64,8 +52,8 @@ public class CriterionEntryTests {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile(
-				"criterion/code[@code='41501' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
+		XPathExpression expr = xpath
+				.compile("criterion/code[@code='41501' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -84,12 +72,24 @@ public class CriterionEntryTests {
 		entry.setRecCategory(CdaChVacdRecCategories.REC_NONE, LanguageCode.FRENCH);
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile(
-				"criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
+		XPathExpression expr = xpath
+				.compile("criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		assertEquals(CdaChVacdRecCategories.REC_NONE, entry.getRecCategory());
+	}
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		CriterionEntry entry = new CriterionEntry();
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("criterion/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Category']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
 	}
 
 	@Test

@@ -31,7 +31,7 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 
 	/**
 	 * Creates the query
-	 *
+	 * 
 	 * @param docIds
 	 *            list of ids of the documents (either uniqueId or entryUUID)
 	 * @param isUUID

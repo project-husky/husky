@@ -24,8 +24,8 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * 7.5.8.5 Spezifikation CDA Body Level 3 – Immunization Recommendation Entry
  * CDA-CH-VACD, entryRelationship, guidelines
  */
-public class ExternalReferenceEntry
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef> {
+public class ExternalReferenceEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef> {
 
 	/**
 	 * Instantiates a new external reference entry.
@@ -67,7 +67,7 @@ public class ExternalReferenceEntry
 
 	/**
 	 * Gets the external document entry.
-	 *
+	 * 
 	 * @return the external document entry
 	 */
 	public ExternalDocumentEntry getExternalDocumentEntry() {
@@ -82,15 +82,17 @@ public class ExternalReferenceEntry
 		final int prime = 31;
 		int result = 1;
 
-		result = prime * result + (this.getExternalDocumentEntry() != null
-				? this.getExternalDocumentEntry().hashCode() : 0);
+		result = prime
+				* result
+				+ (this.getExternalDocumentEntry() != null ? this.getExternalDocumentEntry()
+						.hashCode() : 0);
 
 		return result;
 	}
 
 	/**
 	 * Sets the external document entry.
-	 *
+	 * 
 	 * @param externalDocumentEntry
 	 *            the new external document entry
 	 */

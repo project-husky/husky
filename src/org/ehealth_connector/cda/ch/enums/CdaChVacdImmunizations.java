@@ -80,8 +80,8 @@ public enum CdaChVacdImmunizations {
 	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", "", 2),
 
 	/** Tick-borne encephalitis vaccination (procedure) */
-	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101",
-			"", 24),
+	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)",
+			"20130101", "", 24),
 
 	/** Typhus vaccination (procedure) */
 	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", "", 34),
@@ -121,12 +121,12 @@ public enum CdaChVacdImmunizations {
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
-	 *
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private CdaChVacdImmunizations(String code, String displayName, String validFrom,
@@ -143,11 +143,11 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
-	 *
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -161,9 +161,9 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
-	 *
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
@@ -192,9 +192,9 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>.
-	 *
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>.
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -213,7 +213,7 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Gets the sort order.
-	 *
+	 * 
 	 * @return the sort order
 	 */
 	public int getSortOrder() {
@@ -227,7 +227,7 @@ public enum CdaChVacdImmunizations {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -241,7 +241,7 @@ public enum CdaChVacdImmunizations {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -256,7 +256,7 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Checks if the code is valid now.
-	 *
+	 * 
 	 * @return true, if is valid
 	 */
 	public boolean isValid() {
@@ -265,7 +265,7 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Checks if the code is valid for the specified date
-	 *
+	 * 
 	 * @param date
 	 *            the date
 	 * @return true, if is valid

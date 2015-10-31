@@ -28,17 +28,17 @@ import org.ehealth_connector.common.DateUtil;
 public enum RiskOfExposure {
 
 	/**
-	 * <div class="de"> Beschäftigte im Gesundheitswesen</div>
-	 * <div class="fr">Personnel médical et soignant</div>
-	 * <div class="it">Personale medico e di cura</div>
+	 * <div class="de"> Beschäftigte im Gesundheitswesen</div> <div
+	 * class="fr">Personnel médical et soignant</div> <div class="it">Personale
+	 * medico e di cura</div>
 	 */
 	BESCHÄFTIGTE_IM_GESUNDHEITSWESEN("213001", "Beschäftigte im Gesundheitswesen",
 			"Personnel médical et soignant", "Personale medico e di cura", "20130101", ""),
 
 	/**
-	 * <div class="de"> Enge Kontaktpersonen von Erkrankten</div>
-	 * <div class="fr">Entourage familial d’une personne infectée</div>
-	 * <div class="it">Entourage famigliare di una persona infetta</div>
+	 * <div class="de"> Enge Kontaktpersonen von Erkrankten</div> <div
+	 * class="fr">Entourage familial d’une personne infectée</div> <div
+	 * class="it">Entourage famigliare di una persona infetta</div>
 	 */
 	ENGE_KONTAKTPERSONEN_VON_ERKRANKTEN("213002", "Enge Kontaktpersonen von Erkrankten",
 			"Entourage familial d’une personne infectée",
@@ -46,10 +46,10 @@ public enum RiskOfExposure {
 
 	/**
 	 * <div class="de"> Erwachsene und Kinder ab 6 Jahren, die in
-	 * Endemiegebieten wohnen oder sich teilweise dort aufhalten</div>
-	 * <div class="fr">Adultes et enfants dès 6 ans qui résident ou séjournent
-	 * temporairement dans des territoires endémiques </div>
-	 * <div class="it">Adulti e bambini a partire dai 6 anni che risiedono o
+	 * Endemiegebieten wohnen oder sich teilweise dort aufhalten</div> <div
+	 * class="fr">Adultes et enfants dès 6 ans qui résident ou séjournent
+	 * temporairement dans des territoires endémiques </div> <div
+	 * class="it">Adulti e bambini a partire dai 6 anni che risiedono o
 	 * soggiornano in regioni endemiche</div>
 	 */
 	ERWACHSENE_UND_KINDER_AB_6_JAHREN_DIE_IN_ENDEMIEGEBIETEN_WOHNEN_ODER_SICH_TEILWEISE_DORT_AUFHALTEN(
@@ -71,13 +71,15 @@ public enum RiskOfExposure {
 			"Entourage famigliare di persone a maggiore rischio di complicazioni", "20130101", ""),
 
 	/**
-	 * <div class="de"> Fledermausforscher und -schützer</div>
-	 * <div class="fr">Scientifiques effectuant des recherches sur les
-	 * chiroptères, protecteurs ou amateurs de chauves-souris</div>
-	 * <div class="it">Ricercatori che svolgono ricerche sui chirotteri,
-	 * protettori o appassionati di pipistrelli</div>
+	 * <div class="de"> Fledermausforscher und -schützer</div> <div
+	 * class="fr">Scientifiques effectuant des recherches sur les chiroptères,
+	 * protecteurs ou amateurs de chauves-souris</div> <div
+	 * class="it">Ricercatori che svolgono ricerche sui chirotteri, protettori o
+	 * appassionati di pipistrelli</div>
 	 */
-	FLEDERMAUSFORSCHER_UND_SCHÜTZER("213006", "Fledermausforscher und -schützer",
+	FLEDERMAUSFORSCHER_UND_SCHÜTZER(
+			"213006",
+			"Fledermausforscher und -schützer",
 			"Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
 			"Ricercatori che svolgono ricerche sui chirotteri, protettori o appassionati di pipistrelli",
 			"20130101", ""),
@@ -85,11 +87,12 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="de"> Geistig behinderte Personen in Heimen und deren
 	 * BetreuerInnen</div><div class="fr">Personnes handicapées mentales et
-	 * personnel des institutions pour handicapés mentaux </div>
-	 * <div class="it">Persone disabili mentali e personale degli istituti per
+	 * personnel des institutions pour handicapés mentaux </div> <div
+	 * class="it">Persone disabili mentali e personale degli istituti per
 	 * disabili mentali</div>
 	 */
-	GEISTIG_BEHINDERTE_PERSONEN_IN_HEIMEN_UND_DEREN_BETREUERINNEN("213007",
+	GEISTIG_BEHINDERTE_PERSONEN_IN_HEIMEN_UND_DEREN_BETREUERINNEN(
+			"213007",
 			"Geistig behinderte Personen in Heimen und deren BetreuerInnen",
 			"Personnes handicapées mentales et personnel des institutions pour handicapés mentaux ",
 			"Persone disabili mentali e personale degli istituti per disabili mentali", "20130101",
@@ -169,8 +172,8 @@ public enum RiskOfExposure {
 
 	/**
 	 * <div class="de"> Patientinnen und Patienten in Pflegeheimen und in
-	 * Einrichtungen für Personen mit chronischen Erkrankungen</div>
-	 * <div class="fr">Patients résidant dans une maison de soins ou dans un
+	 * Einrichtungen für Personen mit chronischen Erkrankungen</div> <div
+	 * class="fr">Patients résidant dans une maison de soins ou dans un
 	 * établissement pour malades chroniques</div><div class="it">Ospiti di una
 	 * casa di cura o di un istituto per malati cronici</div>
 	 */
@@ -183,9 +186,9 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="de"> Personen aus Ländern mit hoher oder intermediärer
 	 * Hepatitis-B-Endemizität</div> <div class="fr">Personnes provenant de
-	 * zones d’endémie haute ou intermédiaire pour l’hépatite B</div>
-	 * <div class="it">Persone provenienti da zone di endemicità elevata o
-	 * intermedia per l’epatite B</div>
+	 * zones d’endémie haute ou intermédiaire pour l’hépatite B</div> <div
+	 * class="it">Persone provenienti da zone di endemicità elevata o intermedia
+	 * per l’epatite B</div>
 	 */
 	PERSONEN_AUS_LÄNDERN_MIT_HOHER_ODER_INTERMEDIÄRER_HEPATITIS_B_ENDEMIZITÄT("213016",
 			"Personen aus Ländern mit hoher oder intermediärer Hepatitis-B-Endemizität",
@@ -207,11 +210,12 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="de"> Personen mit engem Kontakt zu Personen aus Ländern mit
 	 * hoher Endemizität</div> <div class="fr">Personnes en contact étroit avec
-	 * des personnes en provenance de pays de haute endémicité</div>
-	 * <div class="it">Persone a stretto contatto con delle persone provenienti
-	 * da paesi di endemicità elevata</div>
+	 * des personnes en provenance de pays de haute endémicité</div> <div
+	 * class="it">Persone a stretto contatto con delle persone provenienti da
+	 * paesi di endemicità elevata</div>
 	 */
-	PERSONEN_MIT_ENGEM_KONTAKT_ZU_PERSONEN_AUS_LÄNDERN_MIT_HOHER_ENDEMIZITÄT("213018",
+	PERSONEN_MIT_ENGEM_KONTAKT_ZU_PERSONEN_AUS_LÄNDERN_MIT_HOHER_ENDEMIZITÄT(
+			"213018",
 			"Personen mit engem Kontakt zu Personen aus Ländern mit hoher Endemizität",
 			"Personnes en contact étroit avec des personnes en provenance de pays de haute endémicité",
 			"Persone a stretto contatto con delle persone provenienti da paesi di endemicità elevata",
@@ -229,10 +233,10 @@ public enum RiskOfExposure {
 
 	/**
 	 * <div class="de"> Personen mit regelmässigem Kontakt (beruflich /
-	 * familiär) zu Säuglingen &lt; 6 Monaten, schwangere Frauen</div>
-	 * <div class="fr">Personnes en contact professionnel ou familial régulier
-	 * avec des nourrissons &lt; 6 mois, femmes enceintes</div>
-	 * <div class="it">Personale in contatto professionale o famigliare con dei
+	 * familiär) zu Säuglingen &lt; 6 Monaten, schwangere Frauen</div> <div
+	 * class="fr">Personnes en contact professionnel ou familial régulier avec
+	 * des nourrissons &lt; 6 mois, femmes enceintes</div> <div
+	 * class="it">Personale in contatto professionale o famigliare con dei
 	 * lattanti di meno di 6 mesi o con donne incinte</div>
 	 */
 	PERSONEN_MIT_REGELMÄSSIGEM_KONTAKT_BERUFLICH_FAMILIÄR_ZU_SÄUGLINGEN_LT_6_MONATEN_SCHWANGERE_FRAUEN(
@@ -251,12 +255,12 @@ public enum RiskOfExposure {
 
 	/**
 	 * <div class="de"> Sozialarbeiter, Gefängnispersonal und Polizeiangestellte
-	 * mit häufigem Kontakt zu Konsumenten von injizierbaren Drogen</div>
-	 * <div class="fr">Travailleurs sociaux, personnel des prisons et de la
-	 * police en contact fréquent avec des consommateurs de drogues
-	 * injectables</div> <div class="it">Lavoratori nel campo socio-educativo o
-	 * della sicurezza (carceri, polizia) a contatto frequente con dei
-	 * consumatori di droghe iniettabili</div>
+	 * mit häufigem Kontakt zu Konsumenten von injizierbaren Drogen</div> <div
+	 * class="fr">Travailleurs sociaux, personnel des prisons et de la police en
+	 * contact fréquent avec des consommateurs de drogues injectables</div> <div
+	 * class="it">Lavoratori nel campo socio-educativo o della sicurezza
+	 * (carceri, polizia) a contatto frequente con dei consumatori di droghe
+	 * iniettabili</div>
 	 */
 	SOZIALARBEITER_GEFÄNGNISPERSONAL_UND_POLIZEIANGESTELLTE_MIT_HÄUFIGEM_KONTAKT_ZU_KONSUMENTEN_VON_INJIZIERBAREN_DROGEN(
 			"213022",
@@ -276,13 +280,15 @@ public enum RiskOfExposure {
 			"Veterinari (studenti, assistenti veterinari)", "20130101", ""),
 
 	/**
-	 * <div class="de"> Tierpfleger, -händler, -seuchenpolizisten</div>
-	 * <div class="fr">Personnes exposées qui soignent des animaux, marchands
+	 * <div class="de"> Tierpfleger, -händler, -seuchenpolizisten</div> <div
+	 * class="fr">Personnes exposées qui soignent des animaux, marchands
 	 * d’animaux : personnel engagé dans la lutte contre les épizooties</div>
 	 * <div class="it">Persone esposte che curano animali, commercianti di
 	 * animali, personale impiegato nella lotta contro le epizoozie</div>
 	 */
-	TIERPFLEGER_HÄNDLER_SEUCHENPOLIZISTEN("213004", "Tierpfleger, -händler, -seuchenpolizisten",
+	TIERPFLEGER_HÄNDLER_SEUCHENPOLIZISTEN(
+			"213004",
+			"Tierpfleger, -händler, -seuchenpolizisten",
 			"Personnes exposées qui soignent des animaux, marchands d’animaux : personnel engagé dans la lutte contre les épizooties",
 			"Persone esposte che curano animali, commercianti di animali, personale impiegato nella lotta contro le epizoozie",
 			"20130101", "");
@@ -315,9 +321,9 @@ public enum RiskOfExposure {
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantsiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
-	 *
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayNameDe
 	 *            the display name de
@@ -345,11 +351,11 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
-	 *
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -363,9 +369,9 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
-	 *
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * 
 	 * @param languageCode
 	 *            the language code
 	 * @return <div class="en">the code</div>
@@ -410,9 +416,9 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>.
-	 *
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>.
+	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -420,8 +426,8 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div> <div
+	 * class="de">Liefert display name in deutscher Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -430,8 +436,8 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div> <div
+	 * class="de">Liefert display name in deutscher Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -440,8 +446,8 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the french display name.</div>
-	 * <div class="de">Liefert display name in französischer Sprache.</div>
+	 * <div class="en">Gets the french display name.</div> <div
+	 * class="de">Liefert display name in französischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -450,8 +456,8 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the italian display name.</div>
-	 * <div class="de">Liefert display name in italienischer Sprache.</div>
+	 * <div class="en">Gets the italian display name.</div> <div
+	 * class="de">Liefert display name in italienischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -466,7 +472,7 @@ public enum RiskOfExposure {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -480,7 +486,7 @@ public enum RiskOfExposure {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -495,7 +501,7 @@ public enum RiskOfExposure {
 
 	/**
 	 * Checks if the code is valid now.
-	 *
+	 * 
 	 * @return true, if is valid
 	 */
 	public boolean isValid() {
@@ -504,7 +510,7 @@ public enum RiskOfExposure {
 
 	/**
 	 * Checks if the code is valid for the specified date
-	 *
+	 * 
 	 * @param date
 	 *            the date
 	 * @return true, if is valid

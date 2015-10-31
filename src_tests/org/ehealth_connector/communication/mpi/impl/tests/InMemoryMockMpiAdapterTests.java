@@ -72,8 +72,8 @@ public class InMemoryMockMpiAdapterTests {
 		assertTrue(mpiAdapter.addPatient(patientObsolete));
 		String mpiPatientIdObsolete = mpiAdapter.queryPatientId(patientObsolete);
 		assertTrue(!mpiPatientId.equals(mpiPatientIdObsolete));
-		assertTrue(mpiAdapter
-				.mergePatient(patient, TestPatient.getTestPatientMuellerObsolete().localId));
+		assertTrue(mpiAdapter.mergePatient(patient,
+				TestPatient.getTestPatientMuellerObsolete().localId));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patient));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patientObsolete));
 	}

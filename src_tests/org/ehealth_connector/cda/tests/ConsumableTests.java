@@ -41,22 +41,6 @@ public class ConsumableTests {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-	@Test
-	public void testSerializeEmpty() throws Exception {
-		Consumable consumable = new Consumable(false);
-
-		Document document = consumable.getDocument();
-
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.53']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
 	// <consumable typeCode='CSM'>
 	// <manufacturedProduct>
 	// <templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
@@ -92,19 +76,35 @@ public class ConsumableTests {
 
 		Document document = consumable.getDocument();
 
-		XPathExpression expr = xpath.compile(
-				"consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		XPathExpression expr = xpath
+				.compile("consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile(
-				"consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
+		expr = xpath
+				.compile("consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile(
-				"consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
+		expr = xpath
+				.compile("consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
+	}
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		Consumable consumable = new Consumable(false);
+
+		Document document = consumable.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.53']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
 	}
 
 }

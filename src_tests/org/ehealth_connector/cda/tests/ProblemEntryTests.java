@@ -28,10 +28,10 @@ import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.AllergiesSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
-import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
+import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
+import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.common.DateUtil;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -44,6 +44,160 @@ public class ProblemEntryTests {
 
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
+
+	@Test
+	public void testAllergiesSpecialConditions() throws XPathExpressionException {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setAllergySpecialCondition(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/value[@type='CD' and @code='160244002' and @codeSystem='2.16.840.1.113883.6.96']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES,
+				entry.getAllergySpecialCondition());
+	}
+
+	@Test
+	public void testComplicationRisks() throws XPathExpressionException {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setComplicationRisk(
+				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				null);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// note, does not check xsi:prefix in attribute value, output
+		// xsi:type="CD"
+		expr = xpath
+				.compile("observation/value[@type='CD' and @code='114006' and @codeSystem='2.16.756.5.30.1.127.3.3.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(
+				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				entry.getComplicationRisk());
+	}
+
+	@Test
+	public void testEndDate() throws Exception {
+		ProblemEntry entry = new ProblemEntry();
+
+		assertEquals(null, entry.getEndDate());
+		Date date = DateUtil.parseDateyyyyMMdd("20161019");
+		entry.setEndDate(date);
+		assertEquals(date, entry.getEndDate());
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("observation/effectiveTime/high[@value='20161019']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testEndDateNotSet() throws Exception {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setEndDate(null);
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("observation/effectiveTime/high[@nullFlavor='UNK']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testExposureRisks() throws XPathExpressionException {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setExposureRisk(
+				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN, null);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// note, does not check xsi:prefix in attribute value, output
+		// xsi:type="CD"
+		expr = xpath
+				.compile("observation/value[@type='CD' and @code='213012' and @codeSystem='2.16.756.5.30.1.127.3.3.2']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				entry.getExposureRisk());
+	}
+
+	@Test
+	public void testProblemOccured() throws Exception {
+		ProblemEntry entry = new ProblemEntry();
+
+		assertEquals(false, entry.getProblemNotOccured());
+		entry.setNotOccured(true);
+		assertEquals(true, entry.getProblemNotOccured());
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("observation[@negationInd='true']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+	}
+
+	@Test
+	public void testProblemSpecialConditions() throws XPathExpressionException {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setProblemSpecialCondition(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/value[@type='CD' and @code='160245001' and @codeSystem='2.16.840.1.113883.6.96']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY,
+				entry.getProblemSpecialCondition());
+	}
+
+	/*
+	 * PROBLEM("55607006", "Problem"),
+	 */
+	@Test
+	public void testProblemTypEnum() throws XPathExpressionException {
+		ProblemEntry entry = new ProblemEntry();
+
+		entry.setProblemType(ProblemType.PROBLEM);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(ProblemType.PROBLEM, entry.getProblemType());
+	}
 
 	@Test
 	public void testSerializeEmpty() throws Exception {
@@ -70,22 +224,6 @@ public class ProblemEntryTests {
 
 		expr = xpath.compile("observation/id");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-	}
-
-	@Test
-	public void testProblemOccured() throws Exception {
-		ProblemEntry entry = new ProblemEntry();
-
-		assertEquals(false, entry.getProblemNotOccured());
-		entry.setNotOccured(true);
-		assertEquals(true, entry.getProblemNotOccured());
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("observation[@negationInd='true']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 	}
@@ -119,54 +257,6 @@ public class ProblemEntryTests {
 	}
 
 	@Test
-	public void testEndDate() throws Exception {
-		ProblemEntry entry = new ProblemEntry();
-
-		assertEquals(null, entry.getEndDate());
-		Date date = DateUtil.parseDateyyyyMMdd("20161019");
-		entry.setEndDate(date);
-		assertEquals(date, entry.getEndDate());
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("observation/effectiveTime/high[@value='20161019']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
-	public void testEndDateNotSet() throws Exception {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setEndDate(null);
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("observation/effectiveTime/high[@nullFlavor='UNK']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	/*
-	 * PROBLEM("55607006", "Problem"),
-	 */
-	@Test
-	public void testProblemTypEnum() throws XPathExpressionException {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setProblemType(ProblemType.PROBLEM);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(ProblemType.PROBLEM, entry.getProblemType());
-	}
-
-	@Test
 	public void testTextReference() throws XPathExpressionException {
 		ProblemEntry entry = new ProblemEntry();
 
@@ -180,99 +270,6 @@ public class ProblemEntryTests {
 		assertEquals(1, nodes.getLength());
 
 		assertEquals("#reference1", entry.getTextReference());
-	}
-
-	@Test
-	public void testComplicationRisks() throws XPathExpressionException {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setComplicationRisk(
-				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
-				null);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		// note, does not check xsi:prefix in attribute value, output
-		// xsi:type="CD"
-		expr = xpath.compile(
-				"observation/value[@type='CD' and @code='114006' and @codeSystem='2.16.756.5.30.1.127.3.3.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(
-				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
-				entry.getComplicationRisk());
-	}
-
-	@Test
-	public void testExposureRisks() throws XPathExpressionException {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setExposureRisk(
-				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
-				null);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		// note, does not check xsi:prefix in attribute value, output
-		// xsi:type="CD"
-		expr = xpath.compile(
-				"observation/value[@type='CD' and @code='213012' and @codeSystem='2.16.756.5.30.1.127.3.3.2']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(
-				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
-				entry.getExposureRisk());
-	}
-
-	@Test
-	public void testAllergiesSpecialConditions() throws XPathExpressionException {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setAllergySpecialCondition(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/value[@type='CD' and @code='160244002' and @codeSystem='2.16.840.1.113883.6.96']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES,
-				entry.getAllergySpecialCondition());
-	}
-
-	@Test
-	public void testProblemSpecialConditions() throws XPathExpressionException {
-		ProblemEntry entry = new ProblemEntry();
-
-		entry.setProblemSpecialCondition(
-				ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/value[@type='CD' and @code='160245001' and @codeSystem='2.16.840.1.113883.6.96']");
-
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY,
-				entry.getProblemSpecialCondition());
 	}
 
 }

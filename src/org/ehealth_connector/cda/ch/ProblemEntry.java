@@ -20,11 +20,11 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.AllergiesSpecialConditions;
-import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
-import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.ProblemType;
 import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
+import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
+import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
@@ -96,8 +96,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 			return false;
 		}
 		if (getValue() != null) {
-			if (!this.getValue().isCode() || other.getValue() == null
-					|| !other.getValue().isCode()) {
+			if (!this.getValue().isCode() || other.getValue() == null || !other.getValue().isCode()) {
 				return false;
 			}
 			if (!getValue().getCode().equals(other.getValue().getCode())) {
@@ -113,7 +112,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Gets the allergie special condition.
-	 *
+	 * 
 	 * @return the allergie special condition
 	 */
 	public AllergiesSpecialConditions getAllergySpecialCondition() {
@@ -130,8 +129,8 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
-	 * den Code des Problems zurück.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * den Code des Problems zurück.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @return the codedProblem object
 	 */
@@ -143,7 +142,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Gets the compl risk.
-	 *
+	 * 
 	 * @return the compl risk
 	 */
 	public RiskOfComplications getComplicationRisk() {
@@ -175,7 +174,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Gets the exposure risk.
-	 *
+	 * 
 	 * @return the exposure risk
 	 */
 	public RiskOfExposure getExposureRisk() {
@@ -218,7 +217,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Gets the allergie special condition.
-	 *
+	 * 
 	 * @return the allergie special condition
 	 */
 	public ProblemsSpecialConditions getProblemSpecialCondition() {
@@ -235,8 +234,8 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
-	 * den Code des Problems zurück.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * den Code des Problems zurück.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @return the codedProblem object
 	 */
@@ -267,7 +266,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -298,14 +297,16 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 		result = prime * result + (this.getStartDate() != null ? getStartDate().hashCode() : 0);
 		result = prime * result + (this.getEndDate() != null ? getEndDate().hashCode() : 0);
 		result = prime * result + (this.getCode() != null ? getCode().hashCode() : 0);
-		result = prime * result + (this.getValue() != null && this.getValue().isCode()
-				? getValue().getCode().hashCode() : 0);
+		result = prime
+				* result
+				+ (this.getValue() != null && this.getValue().isCode() ? getValue().getCode()
+						.hashCode() : 0);
 		return result;
 	}
 
 	/**
 	 * Sets the allergies special condition.
-	 *
+	 * 
 	 * @param condition
 	 *            the new allergies special condition
 	 */
@@ -326,7 +327,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 	/**
 	 * Sets the complication Risk and in addition sets the ProblemType to
 	 * PROBLEM
-	 *
+	 * 
 	 * @param complRisk
 	 *            the compl risk
 	 * @param languageCode
@@ -359,7 +360,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Sets the exposure risk and in addition sets the ProblemType to PROBLEM.
-	 *
+	 * 
 	 * @param expRisk
 	 *            the exp risk
 	 * @param languageCode
@@ -386,8 +387,8 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 	/**
 	 * <div class="en">true, if the problem is not occured (negationInd), false
 	 * otherwise</div> <div class="de">true, wenn das Problem nicht aufgetreten
-	 * ist, false sonst (negationInd)</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * ist, false sonst (negationInd)</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param problemNotOccured
 	 *            the problemNotOccured Object which will be set
@@ -398,7 +399,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Sets the problem special condition.
-	 *
+	 * 
 	 * @param condition
 	 *            the new problem special condition
 	 */
@@ -417,9 +418,9 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 	}
 
 	/**
-	 * <div class="en">point in time, when the problem started</div>
-	 * <div class="de">Setzt den Zeitpunkt, an dem das Problems angefangen
-	 * hat</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">point in time, when the problem started</div> <div
+	 * class="de">Setzt den Zeitpunkt, an dem das Problems angefangen hat</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfProblem
 	 *            the startOfProblem Object which will be set
@@ -439,7 +440,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Sets the text reference.
-	 *
+	 * 
 	 * @param value
 	 *            the new text reference, # for local reference has to be
 	 *            included
@@ -450,7 +451,7 @@ public class ProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ih
 
 	/**
 	 * Sets the value.
-	 *
+	 * 
 	 * @param value
 	 *            the new value
 	 */

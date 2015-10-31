@@ -492,21 +492,21 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * <div class="en">Gets the document descriptor of the document
-	 * 
-	 * @return the document descriptor of the document</div>
-	 */
-	public DocumentDescriptor getDocumentDescriptor() {
-		return documentDescriptor;
-	}
-
-	/**
 	 * <div class="en">Gets the document source actors organization id
 	 * 
 	 * @return the document source actors organization id </div>
 	 */
 	public String getDocSourceActorOrganizationId() {
 		return docSourceActorOrgId;
+	}
+
+	/**
+	 * <div class="en">Gets the document descriptor of the document
+	 * 
+	 * @return the document descriptor of the document</div>
+	 */
+	public DocumentDescriptor getDocumentDescriptor() {
+		return documentDescriptor;
 	}
 
 	/**
@@ -528,15 +528,6 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * Gets the meta data language
-	 * 
-	 * @return the meta data language
-	 */
-	public String getMetadataLanguage() {
-		return language;
-	}
-
-	/**
 	 * Gets the mdht document entry type.
 	 * 
 	 * @return the mdht document entry type
@@ -545,36 +536,13 @@ public class DocumentMetadata {
 		return xDoc;
 	}
 
-	public void setMetadata(DocumentMetadata metaData) {
-		clear();
-		for (Author item : metaData.getAuthors()) {
-			addAuthor(item);
-		}
-
-		for (Code item : metaData.getConfidentialityCodes()) {
-			addConfidentialityCode(item);
-		}
-
-		setClassCode(metaData.getClassCode());
-		setCodedLanguage(metaData.getCodedLanguage());
-		setCreationTime(metaData.getCreationTime());
-		setDocumentDescriptor(metaData.getDocumentDescriptor());
-		setDocSourceActorOrganizationId(metaData.getDocSourceActorOrganizationId());
-		setFormatCode(metaData.getFormatCode());
-		setHealthcareFacilityTypeCode(metaData.getHealthcareFacilityTypeCode());
-		setMetadataLanguage(metaData.getMetadataLanguage());
-		setMimeType(metaData.getMimeType());
-		setPatient(metaData.getPatient());
-		setPracticeSettingCode(metaData.getPracticeSettingCode());
-		setTitle(metaData.getTitle());
-		setTypeCode(metaData.getTypeCode());
-		setUniqueId(metaData.getUniqueId());
-		setUri(metaData.getUri());
-
-		// Overwrite defaults done by setPatient:
-		setSourcePatientId(metaData.getSourcePatientId());
-		setDestinationPatientId(metaData.getPatientId());
-
+	/**
+	 * Gets the meta data language
+	 * 
+	 * @return the meta data language
+	 */
+	public String getMetadataLanguage() {
+		return language;
 	}
 
 	/**
@@ -731,13 +699,14 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * <div class="en">Sets the document descriptor of the document
+	 * Sets the (required) destination patient id, which is used in the affinity
+	 * domain (typically retrieved from a Master Patient Index (MPI))
 	 * 
-	 * @param documentDescriptor
-	 *            the document descriptor of the document</div>
+	 * @param id
+	 *            the new patient id
 	 */
-	public void setDocumentDescriptor(DocumentDescriptor documentDescriptor) {
-		this.documentDescriptor = documentDescriptor;
+	public void setDestinationPatientId(Identificator id) {
+		xDoc.setPatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 
 	/**
@@ -748,6 +717,16 @@ public class DocumentMetadata {
 	 */
 	public void setDocSourceActorOrganizationId(String docSourceActorOrgId) {
 		this.docSourceActorOrgId = docSourceActorOrgId;
+	}
+
+	/**
+	 * <div class="en">Sets the document descriptor of the document
+	 * 
+	 * @param documentDescriptor
+	 *            the document descriptor of the document</div>
+	 */
+	public void setDocumentDescriptor(DocumentDescriptor documentDescriptor) {
+		this.documentDescriptor = documentDescriptor;
 	}
 
 	/**
@@ -771,6 +750,38 @@ public class DocumentMetadata {
 	public void setHealthcareFacilityTypeCode(Code code) {
 		xDoc.setHealthCareFacilityTypeCode(XdsUtil
 				.convertEhcCodeToCodedMetadataType(code, language));
+	}
+
+	public void setMetadata(DocumentMetadata metaData) {
+		clear();
+		for (Author item : metaData.getAuthors()) {
+			addAuthor(item);
+		}
+
+		for (Code item : metaData.getConfidentialityCodes()) {
+			addConfidentialityCode(item);
+		}
+
+		setClassCode(metaData.getClassCode());
+		setCodedLanguage(metaData.getCodedLanguage());
+		setCreationTime(metaData.getCreationTime());
+		setDocumentDescriptor(metaData.getDocumentDescriptor());
+		setDocSourceActorOrganizationId(metaData.getDocSourceActorOrganizationId());
+		setFormatCode(metaData.getFormatCode());
+		setHealthcareFacilityTypeCode(metaData.getHealthcareFacilityTypeCode());
+		setMetadataLanguage(metaData.getMetadataLanguage());
+		setMimeType(metaData.getMimeType());
+		setPatient(metaData.getPatient());
+		setPracticeSettingCode(metaData.getPracticeSettingCode());
+		setTitle(metaData.getTitle());
+		setTypeCode(metaData.getTypeCode());
+		setUniqueId(metaData.getUniqueId());
+		setUri(metaData.getUri());
+
+		// Overwrite defaults done by setPatient:
+		setSourcePatientId(metaData.getSourcePatientId());
+		setDestinationPatientId(metaData.getPatientId());
+
 	}
 
 	/**
@@ -812,17 +823,6 @@ public class DocumentMetadata {
 		if (patient.getIds() != null && patient.getIds().size() > 0) {
 			setDestinationPatientId(patient.getIds().get(0));
 		}
-	}
-
-	/**
-	 * Sets the (required) destination patient id, which is used in the affinity
-	 * domain (typically retrieved from a Master Patient Index (MPI))
-	 * 
-	 * @param id
-	 *            the new patient id
-	 */
-	public void setDestinationPatientId(Identificator id) {
-		xDoc.setPatientId(XdsUtil.convertEhcIdentificator(id));
 	}
 
 	/**

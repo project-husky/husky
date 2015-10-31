@@ -57,8 +57,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
  * erfolgte Impfungen dokumentiert werden.
  */
-public class ImmunizationRecommendation
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
+public class ImmunizationRecommendation extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 
 	/**
 	 * Instantiates a new immunization recommendation.
@@ -90,8 +90,7 @@ public class ImmunizationRecommendation
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
-			Date endOfPossibleAppliance, boolean intendedOrProposed,
-			boolean shallNotBeAdministerd) {
+			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
 
 		this();
 		if (intendedOrProposed) {
@@ -112,7 +111,7 @@ public class ImmunizationRecommendation
 	 * Instantiates a new immunization recommendation.
 	 * 
 	 * @param immunizationRecommendation
-	 *            <br>
+	 * <br>
 	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -134,7 +133,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Adds the medication target entry.
-	 *
+	 * 
 	 * @param medicationTargetEntry
 	 *            the medication target entry
 	 */
@@ -165,7 +164,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the comment entry.
-	 *
+	 * 
 	 * @return the comment entry
 	 */
 	public SectionAnnotationCommentEntry getCommentEntry() {
@@ -188,7 +187,7 @@ public class ImmunizationRecommendation
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself).
-	 *
+	 * 
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -210,7 +209,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * gets the criterion entry.
-	 *
+	 * 
 	 * @return the criterion entry
 	 */
 	public CriterionEntry getCriterionEntry() {
@@ -223,7 +222,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the dose.
-	 *
+	 * 
 	 * @return the dose
 	 */
 	public Value getDosage() {
@@ -236,7 +235,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the external document entry.
-	 *
+	 * 
 	 * @return the external document entry
 	 */
 	public ExternalDocumentEntry getExternalDocumentEntry() {
@@ -244,7 +243,7 @@ public class ImmunizationRecommendation
 			Reference reference = this.getMdht().getReferences().get(0);
 			return new ExternalReferenceEntry(
 					(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference)
-							.getExternalDocumentEntry();
+					.getExternalDocumentEntry();
 		}
 		return null;
 	}
@@ -280,7 +279,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the medication target entries.
-	 *
+	 * 
 	 * @return the medication target entries
 	 */
 	public List<MedicationTargetEntry> getMedicationTargetEntries() {
@@ -294,7 +293,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the possible appliance.
-	 *
+	 * 
 	 * @return the possible appliance YYYYmmdd resolution
 	 */
 	public Date getPossibleAppliance() {
@@ -303,7 +302,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the possible appliance end date.
-	 *
+	 * 
 	 * @return the possible appliance end date YYYYmmdd resolution
 	 */
 	public Date getPossibleApplianceEndDate() {
@@ -313,8 +312,8 @@ public class ImmunizationRecommendation
 				IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
 				if (effectiveTimeInterval.getHigh() != null
 						&& effectiveTimeInterval.getHigh().getValue() != null) {
-					Date tsHigh = DateUtil
-							.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
+					Date tsHigh = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh()
+							.getValue());
 					return tsHigh;
 				}
 			} else {
@@ -330,7 +329,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the possible appliance start date.
-	 *
+	 * 
 	 * @return the possible appliance start date YYYYmmdd resolution
 	 */
 	public Date getPossibleApplianceStartDate() {
@@ -352,14 +351,14 @@ public class ImmunizationRecommendation
 
 	/**
 	 * <div class="en">Gets the timespan, in which the immunization shall be
-	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div>
-	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
-	 * werden soll als String (z.B. "01.01.2015 - 01.03.2015")</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div> <div
+	 * class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht werden
+	 * soll als String (z.B. "01.01.2015 - 01.03.2015")</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div>
-	 *         <div class="it"></div>
+	 *         soll als String</div> <div class="fr"></div> <div
+	 *         class="it"></div>
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
@@ -401,7 +400,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -413,7 +412,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * returns if is the immunization was administered
-	 *
+	 * 
 	 * @return true, if is undesired
 	 */
 	public boolean isAdministered() {
@@ -422,7 +421,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Checks if is the immunization is not desired
-	 *
+	 * 
 	 * @return true, if is undesired
 	 */
 	public boolean isUndesired() {
@@ -451,7 +450,7 @@ public class ImmunizationRecommendation
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document.
-	 *
+	 * 
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
@@ -470,7 +469,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets the comment entry.
-	 *
+	 * 
 	 * @param commentEntry
 	 *            the new comment entry
 	 */
@@ -488,7 +487,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets a comment text.
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -510,7 +509,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets the criterion entry.
-	 *
+	 * 
 	 * @param citerionEntry
 	 *            the new criterion entry
 	 */
@@ -540,7 +539,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets the external document entry.
-	 *
+	 * 
 	 * @param externalDocumentEntry
 	 *            the new external document entry
 	 */
@@ -553,7 +552,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets the id of immunization from the software which created it.
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -572,7 +571,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Sets the possible appliance.
-	 *
+	 * 
 	 * @param startOfPossibleAppliance
 	 *            the new possible appliance date YYYYmmdd resolution
 	 */
@@ -588,19 +587,19 @@ public class ImmunizationRecommendation
 	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfPossibleAppliance
-	 *            <br>
+	 * <br>
 	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @param endOfPossibleAppliance
 	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
-		this.getMdht().getEffectiveTimes().add(0,
-				DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+		this.getMdht().getEffectiveTimes()
+				.add(0, DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
 	}
 
 	/**
@@ -646,8 +645,8 @@ public class ImmunizationRecommendation
 	/**
 	 * <div class="en">Sets the information, wheater an immunization shall not
 	 * be administered</div> <div class="de">Gibt an, ob eine Impfung nicht
-	 * verabreicht werden soll.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * verabreicht werden soll.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param shallNotBeAdministerd
 	 *            <div class="en">true, if the immunization shall not be
@@ -665,7 +664,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Creates the reference to the section.
-	 *
+	 * 
 	 * @param prefix
 	 *            the prefix
 	 */
@@ -682,7 +681,7 @@ public class ImmunizationRecommendation
 
 	/**
 	 * Creates the priority code.
-	 *
+	 * 
 	 * @return the code
 	 */
 	private Code createPriorityCode() {

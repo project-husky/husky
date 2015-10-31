@@ -91,11 +91,11 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div>
-	 *            <div class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div> <div
+	 *            class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div>
-	 *            <div class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div> <div
+	 *            class="de">Datum der Impfung</div>
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
 		this();
@@ -115,11 +115,11 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div>
-	 *            <div class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div> <div
+	 *            class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div>
-	 *            <div class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div> <div
+	 *            class="de">Datum der Impfung</div>
 	 * @param route
 	 *            <div class="en">route of administration (can be null)</div>
 	 *            <div class="de">Einnahmeart (darf null sein)</div>
@@ -157,7 +157,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Instantiates a new immunization.
-	 *
+	 * 
 	 * @param immunization
 	 *            the immunization
 	 */
@@ -178,7 +178,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Adds the medication target entry.
-	 *
+	 * 
 	 * @param medicationTargetEntry
 	 *            the medication target entry
 	 */
@@ -223,7 +223,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Gets the comment entry.
-	 *
+	 * 
 	 * @return the comment entry
 	 */
 	public SectionAnnotationCommentEntry getCommentEntry() {
@@ -272,7 +272,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * gets the criterion entry.
-	 *
+	 * 
 	 * @return citerionEntry the new criterion entry
 	 */
 	public CriterionEntry getCriterionEntry() {
@@ -326,7 +326,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Gets the medication target entries.
-	 *
+	 * 
 	 * @return the medication target entries
 	 */
 	public List<MedicationTargetEntry> getMedicationTargetEntries() {
@@ -340,7 +340,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Gets the Performer (Person, die die Impfung durchgeführt hat).
-	 *
+	 * 
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
@@ -373,7 +373,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -385,7 +385,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * returns if is the immunization was administered
-	 *
+	 * 
 	 * @return true, if is undesired
 	 */
 	public boolean isAdministered() {
@@ -394,7 +394,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Checks if is the immunization is not desired
-	 *
+	 * 
 	 * @return true, if is undesired
 	 */
 	public boolean isUndesired() {
@@ -433,7 +433,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document.
-	 *
+	 * 
 	 * @param specialCode
 	 *            expresses a special condition for this element
 	 */
@@ -452,7 +452,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets the comment entry.
-	 *
+	 * 
 	 * @param commentEntry
 	 *            the new comment entry
 	 */
@@ -470,7 +470,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets a comment text (not a reference).
-	 *
+	 * 
 	 * @param text
 	 *            the text
 	 */
@@ -492,7 +492,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets the criterion entry.
-	 *
+	 * 
 	 * @param citerionEntry
 	 *            the new criterion entry
 	 */
@@ -522,7 +522,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets the id of immunization from the software which created it
-	 *
+	 * 
 	 * @param id
 	 *            the new id
 	 */
@@ -544,7 +544,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets the Person, who performs the Immunization.
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer (Convenience Author will be converted to a
 	 *            performer)
@@ -554,8 +554,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		getMdht().getPerformers().clear();
 		getMdht().getPerformers().add(p2);
 
-		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(
-				performer.copyMdhtAuthor().getAssignedAuthor()));
+		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor()
+				.getAssignedAuthor()));
 		try {
 			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
 		} catch (final ParseException e) {
@@ -565,7 +565,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Sets the Person, who performs the Immunization.
-	 *
+	 * 
 	 * @param performer
 	 *            the new performer
 	 */
@@ -606,7 +606,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Creates the reference to the section.
-	 *
+	 * 
 	 * @param prefix
 	 *            the prefix
 	 */
@@ -623,7 +623,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Convert date.
-	 *
+	 * 
 	 * @param appliedAt
 	 *            the applied at
 	 * @return the sxcm ts
@@ -636,7 +636,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 
 	/**
 	 * Creates the priority code.
-	 *
+	 * 
 	 * @return the code
 	 */
 	private Code createPriorityCode() {

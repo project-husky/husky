@@ -32,7 +32,7 @@ public interface MpiQuery {
 
 	/**
 	 * Returned patient identifiers will include the added domain if available
-	 *
+	 * 
 	 * @param organizationOID
 	 *            the organization oid
 	 * @return the query object
@@ -41,7 +41,7 @@ public interface MpiQuery {
 
 	/**
 	 * Adds the mothers maiden name to the query
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -53,7 +53,7 @@ public interface MpiQuery {
 
 	/**
 	 * Adds a patient address to the query.
-	 *
+	 * 
 	 * @param addressDt
 	 *            the address to be queried for
 	 * @return the query object
@@ -62,7 +62,7 @@ public interface MpiQuery {
 
 	/**
 	 * Adds a patient identifier to be queried for.
-	 *
+	 * 
 	 * @param identifierDt
 	 *            patient identifier
 	 * @return the query object
@@ -71,7 +71,7 @@ public interface MpiQuery {
 
 	/**
 	 * Adds a patient name to the query.
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -83,7 +83,7 @@ public interface MpiQuery {
 
 	/**
 	 * Adds a patient telecom to be queried for.
-	 *
+	 * 
 	 * @param contactPointDt
 	 *            telecom
 	 * @return the query object
@@ -92,14 +92,14 @@ public interface MpiQuery {
 
 	/**
 	 * Cancels the next query.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	public abstract MpiQuery cancelQuery();
 
 	/**
 	 * Continues query for the next pageCount results.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	public abstract MpiQuery continueQuery();
@@ -107,7 +107,7 @@ public interface MpiQuery {
 	/**
 	 * Sets the page count for partial lists of search results
 	 * (QueryByParameter.initialQuantity).
-	 *
+	 * 
 	 * @param pageCount
 	 *            the page count
 	 * @return the query object
@@ -116,7 +116,7 @@ public interface MpiQuery {
 
 	/**
 	 * Sets the patient birth date for the query.
-	 *
+	 * 
 	 * @param date
 	 *            the date
 	 * @return the query object
@@ -125,7 +125,7 @@ public interface MpiQuery {
 
 	/**
 	 * Sets the patient sex for the query.
-	 *
+	 * 
 	 * @param adminstrativeGenderEnum
 	 *            gender
 	 * @return the query object

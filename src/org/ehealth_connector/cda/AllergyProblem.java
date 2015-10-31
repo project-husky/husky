@@ -214,6 +214,15 @@ public class AllergyProblem {
 	}
 
 	/**
+	 * Method to get
+	 * 
+	 * @return the mAllergyProblem
+	 */
+	public AllergyIntolerance getAllergyProblem() {
+		return mAllergyProblem;
+	}
+
+	/**
 	 * Gets the code.
 	 * 
 	 * @return das codedProblem Objekt
@@ -359,6 +368,16 @@ public class AllergyProblem {
 	}
 
 	/**
+	 * Method to set
+	 * 
+	 * @param aAllergyProblem
+	 *            the mAllergyProblem to set
+	 */
+	public void setAllergyProblem(AllergyIntolerance aAllergyProblem) {
+		mAllergyProblem = aAllergyProblem;
+	}
+
+	/**
 	 * Sets the code.
 	 * 
 	 * @param kindOfAllergy
@@ -444,24 +463,5 @@ public class AllergyProblem {
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the mAllergyProblem
-	 */
-	public AllergyIntolerance getAllergyProblem() {
-		return mAllergyProblem;
-	}
-
-	/**
-	 * Method to set
-	 * 
-	 * @param aAllergyProblem
-	 *            the mAllergyProblem to set
-	 */
-	public void setAllergyProblem(AllergyIntolerance aAllergyProblem) {
-		mAllergyProblem = aAllergyProblem;
 	}
 }

@@ -28,9 +28,9 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * Medication Target Element. Required is the ID of the software which created
  * the entry and an an immunization target code
  */
-public class MedicationTargetEntry
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry>
-		implements Comparable<MedicationTargetEntry> {
+public class MedicationTargetEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry> implements
+		Comparable<MedicationTargetEntry> {
 
 	/**
 	 * Instantiates a new medication target entry.
@@ -39,9 +39,10 @@ public class MedicationTargetEntry
 		super(CHFactory.eINSTANCE.createMedicationTargetEntry().init(), null, null);
 		this.getMdht().getTemplateIds().clear();
 		// cannot add it in the model because VACD has the same templateId
-		this.getMdht().getTemplateIds().add(
-				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason")
-						.getIi());
+		this.getMdht()
+				.getTemplateIds()
+				.add(new Identificator("2.16.756.5.30.1.1.1.1.3.5.1",
+						"CDA-CH.VACD.Body.MediL3.Reason").getIi());
 
 		Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", UUID.generate());
 		this.setId(id);
@@ -49,7 +50,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Instantiates a new medication target entry.
-	 *
+	 * 
 	 * @param targetImmunization
 	 *            the target immunization
 	 */
@@ -61,8 +62,7 @@ public class MedicationTargetEntry
 	/**
 	 * Instantiates a new medication target entry.
 	 */
-	protected MedicationTargetEntry(
-			org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
+	protected MedicationTargetEntry(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry, "2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason");
 	}
 
@@ -73,8 +73,8 @@ public class MedicationTargetEntry
 		CdaChVacdImmunizations otherImmunizationTarget = o.getImmunizationTarget();
 
 		if (immunizationTarget != null && otherImmunizationTarget != null) {
-			return new Integer(immunizationTarget.getSortOrder())
-					.compareTo(otherImmunizationTarget.getSortOrder());
+			return new Integer(immunizationTarget.getSortOrder()).compareTo(otherImmunizationTarget
+					.getSortOrder());
 		}
 
 		if (immunizationTarget != null && otherImmunizationTarget == null) {
@@ -120,7 +120,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Gets the software created id.
-	 *
+	 * 
 	 * @return the software created id
 	 */
 	public Identificator getId() {
@@ -132,7 +132,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Gets the immunization target.
-	 *
+	 * 
 	 * @return the immunization target
 	 */
 	public CdaChVacdImmunizations getImmunizationTarget() {
@@ -145,7 +145,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Gets the immunization target code.
-	 *
+	 * 
 	 * @return the immunization target code
 	 */
 	public Code getImmunizationTargetCode() {
@@ -157,7 +157,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -172,14 +172,16 @@ public class MedicationTargetEntry
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (this.getId() != null ? this.getId().hashCode() : 0);
-		result = prime * result + (this.getImmunizationTargetCode() != null
-				? this.getImmunizationTargetCode().hashCode() : 0);
+		result = prime
+				* result
+				+ (this.getImmunizationTargetCode() != null ? this.getImmunizationTargetCode()
+						.hashCode() : 0);
 		return result;
 	}
 
 	/**
 	 * Sets the software created id.
-	 *
+	 * 
 	 * @param identifier
 	 *            the new software created id
 	 */
@@ -190,7 +192,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Sets the immunization target.
-	 *
+	 * 
 	 * @param targetImmunization
 	 *            the new immunization target
 	 */
@@ -204,7 +206,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Sets the immunization target code.
-	 *
+	 * 
 	 * @param code
 	 *            the new immunization target code
 	 */
@@ -214,7 +216,7 @@ public class MedicationTargetEntry
 
 	/**
 	 * Sets the text reference.
-	 *
+	 * 
 	 * @param value
 	 *            the new text reference, # for local reference has to be
 	 *            included

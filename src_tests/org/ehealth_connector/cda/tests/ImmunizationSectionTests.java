@@ -46,40 +46,6 @@ public class ImmunizationSectionTests {
 	private XPath xpath = xpathFactory.newXPath();
 
 	@Test
-	public void testSerializeEmpty() throws Exception {
-		ImmunizationSection immunization = new ImmunizationSection(LanguageCode.GERMAN);
-
-		Document document = immunization.getDocument();
-
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.3.23']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.6']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//code[@code='11369-6' and @codeSystem='2.16.840.1.113883.6.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("section/title='Impfungen'");
-		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
-	}
-
-	@Test
-	public void testAddImmunizationEmpty() throws Exception {
-		ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
-		Immunization immunization = new Immunization();
-		immunizationSection.addImmunization(immunization, true);
-		Document document = immunizationSection.getDocument();
-		XPathExpression expr = xpath.compile("//tr");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(2, nodes.getLength());
-	}
-
-	@Test
 	public void testAddImmunizationContentIdCheck() throws Exception {
 
 		ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
@@ -140,6 +106,40 @@ public class ImmunizationSectionTests {
 
 		assertEquals("#is20", immunization2.getTextReference());
 
+	}
+
+	@Test
+	public void testAddImmunizationEmpty() throws Exception {
+		ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
+		Immunization immunization = new Immunization();
+		immunizationSection.addImmunization(immunization, true);
+		Document document = immunizationSection.getDocument();
+		XPathExpression expr = xpath.compile("//tr");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(2, nodes.getLength());
+	}
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		ImmunizationSection immunization = new ImmunizationSection(LanguageCode.GERMAN);
+
+		Document document = immunization.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.3.23']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.6']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//code[@code='11369-6' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("section/title='Impfungen'");
+		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 	}
 
 }

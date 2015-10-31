@@ -67,20 +67,6 @@ public class Code {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new code from FHIR Coding.</div> <div
-	 * class="de">Instantiiert ein neues Code Objekt von FHIR Coding</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 */
-	public Code(CodingDt code) {
-		this(code.getSystem().replace("urn:oid:", ""), code.getCode(), code.getDisplay());
-	}
-
-	/**
 	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
 	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR
 	 * CodeableConcept</div> <div class="fr"></div> <div class="it"></div>
@@ -93,6 +79,20 @@ public class Code {
 	public Code(CodeableConceptDt code) {
 		this(code.getCodingFirstRep().getSystem().replace("urn:oid:", ""), code.getCodingFirstRep()
 				.getCode(), code.getText());
+	}
+
+	/**
+	 * <div class="en">Instantiates a new code from FHIR Coding.</div> <div
+	 * class="de">Instantiiert ein neues Code Objekt von FHIR Coding</div> <div
+	 * class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
+	public Code(CodingDt code) {
+		this(code.getSystem().replace("urn:oid:", ""), code.getCode(), code.getDisplay());
 	}
 
 	/**

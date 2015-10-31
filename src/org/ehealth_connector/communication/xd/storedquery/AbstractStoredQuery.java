@@ -2,7 +2,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 /**
  * Represents a convenience stored query object
- *
+ * 
  */
 public abstract class AbstractStoredQuery implements StoredQueryInterface {
 	/**

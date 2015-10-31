@@ -62,7 +62,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Instantiates a new v3 pdq query.
-	 *
+	 * 
 	 * @param senderApplicationOID
 	 *            the sender application oid
 	 * @param senderFacilityOID
@@ -80,7 +80,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Returned patient identifiers will include the added domain if available
-	 *
+	 * 
 	 * @param organizationOID
 	 *            the organization oid
 	 * @return the query object
@@ -95,7 +95,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Adds the mothers maiden name the query
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -113,7 +113,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Adds a patient address to the query.
-	 *
+	 * 
 	 * @param addressDt
 	 *            the address to be queried for
 	 * @return the query object
@@ -137,8 +137,7 @@ public class V3PdqQuery implements MpiQuery {
 
 		// H, W WP
 		String addressType = null;
-		if (addressDt.getUseElement() != null
-				&& addressDt.getUseElement().getValueAsEnum() != null) {
+		if (addressDt.getUseElement() != null && addressDt.getUseElement().getValueAsEnum() != null) {
 			switch (addressDt.getUseElement().getValueAsEnum()) {
 			case HOME:
 				addressType = "H";
@@ -158,7 +157,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Adds a patient identifier to be queried for
-	 *
+	 * 
 	 * @param identifierDt
 	 *            patient identifier
 	 * @return the query object
@@ -170,15 +169,14 @@ public class V3PdqQuery implements MpiQuery {
 			String oid = identifierDt.getSystem().substring(8);
 			v3PdqConsumerQuery.addPatientID(oid, identifierDt.getValue(), "");
 		} else {
-			log.error(
-					"identifier system is not starting with urn:oid: " + identifierDt.getSystem());
+			log.error("identifier system is not starting with urn:oid: " + identifierDt.getSystem());
 		}
 		return this;
 	}
 
 	/**
 	 * Adds a patient name to the query.
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -196,7 +194,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Adds a patient telecom to be queried for.
-	 *
+	 * 
 	 * @param contactPointDt
 	 *            telecom
 	 * @return the query object
@@ -207,16 +205,15 @@ public class V3PdqQuery implements MpiQuery {
 			log.error("contactPointDt not specified");
 			return this;
 		}
-		if (ContactPointSystemEnum.PHONE
-				.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+		if (ContactPointSystemEnum.PHONE.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
 			String use = "";
 			if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
 				use = "HP";
-			} else if (ContactPointUseEnum.WORK
-					.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+			} else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement()
+					.getValueAsEnum())) {
 				use = "WP";
-			} else if (ContactPointUseEnum.MOBILE
-					.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+			} else if (ContactPointUseEnum.MOBILE.equals(contactPointDt.getUseElement()
+					.getValueAsEnum())) {
 			}
 			addPatientTelecom(contactPointDt.getValue(), use);
 		} else {
@@ -228,7 +225,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Cancels the next query.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	@Override
@@ -239,7 +236,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Continues query for the next pageCount results.
-	 *
+	 * 
 	 * @return continues the query for the next batch
 	 */
 	@Override
@@ -250,7 +247,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Gets the v3 consumer query object.
-	 *
+	 * 
 	 * @return the v3 pdq consumer query
 	 */
 	public V3PdqConsumerQuery getV3PdqConsumerQuery() {
@@ -260,7 +257,7 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Sets the page count for partial lists of search results
 	 * (QueryByParameter.initialQuantity).
-	 *
+	 * 
 	 * @param pageCount
 	 *            the page count
 	 * @return the query object
@@ -274,7 +271,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Sets the patient birth date for the query.
-	 *
+	 * 
 	 * @param date
 	 *            the date
 	 * @return the query object
@@ -292,7 +289,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Sets the patient sex for the query.
-	 *
+	 * 
 	 * @param adminstrativeGenderEnum
 	 *            gender
 	 * @return the query object
@@ -315,7 +312,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * if query should be canceled
-	 *
+	 * 
 	 * @return true cancel next query
 	 */
 	protected boolean doCancelQuery() {
@@ -324,7 +321,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * if query should be continued
-	 *
+	 * 
 	 * @return true continue next query
 	 */
 	protected boolean doContinueQuery() {
@@ -333,7 +330,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Gets the last pdq consumer response.
-	 *
+	 * 
 	 * @return the last pdq consumer response
 	 */
 	protected V3PdqConsumerResponse getLastPdqConsumerResponse() {
@@ -352,7 +349,7 @@ public class V3PdqQuery implements MpiQuery {
 
 	/**
 	 * Sets the pdq consumer response.
-	 *
+	 * 
 	 * @param lastPdqConsumerResponse
 	 *            the new last pdq consumer response
 	 */
@@ -363,7 +360,7 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Add a patient telecom value of the supplied type. OHT method is missing
 	 * <semanticsText>Patient.telecom</semanticsText>
-	 *
+	 * 
 	 * @param telecom
 	 *            the telecom
 	 * @param type

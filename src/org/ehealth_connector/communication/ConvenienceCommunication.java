@@ -288,24 +288,6 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with the given submission set
-	 * metadata. You have to add a document to this class first.</div>
-	 * 
-	 * @param submissionSetMetadata
-	 *            The metadata of the submission set
-	 * @param outputStream
-	 *            The outputStream object where the contents will be written to.
-	 * @return the XdmContents object
-	 */
-	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata,
-			OutputStream outputStream) {
-		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
-		xdmContents.createZip(outputStream, txnData);
-		return xdmContents;
-	}
-
-	/**
 	 * <div class="en">creates an XDM volume with a given XdmContents object.
 	 * This method will be used, if you want to create your own INDEX.HTM and
 	 * README.TXT for your XDM volume. You have to add a document to this class
@@ -360,6 +342,24 @@ public class ConvenienceCommunication {
 			generateDefaultSubmissionSetAttributes();
 		}
 		xdmContents.createZip(filePath, txnData);
+		return xdmContents;
+	}
+
+	/**
+	 * <div class="en">creates an XDM volume with the given submission set
+	 * metadata. You have to add a document to this class first.</div>
+	 * 
+	 * @param submissionSetMetadata
+	 *            The metadata of the submission set
+	 * @param outputStream
+	 *            The outputStream object where the contents will be written to.
+	 * @return the XdmContents object
+	 */
+	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata,
+			OutputStream outputStream) {
+		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
+		XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
 

@@ -139,8 +139,8 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 			}
 		}
 		for (Identificator ident : patient.getIds()) {
-			this.getIdentifier()
-					.add(new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
+			this.getIdentifier().add(
+					new IdentifierDt("urn:oid:" + ident.getRoot(), ident.getExtension()));
 		}
 		Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
 		if (organization != null) {
@@ -189,10 +189,10 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		// maritalStatus
-		if ((patient.getMdhtPatient().getMaritalStatusCode() != null
-				&& patient.getMdhtPatient().getMaritalStatusCode().getCode() != null)) {
-			this.setMaritalStatus(MaritalStatusCodesEnum
-					.valueOf(patient.getMdhtPatient().getMaritalStatusCode().getCode()));
+		if ((patient.getMdhtPatient().getMaritalStatusCode() != null && patient.getMdhtPatient()
+				.getMaritalStatusCode().getCode() != null)) {
+			this.setMaritalStatus(MaritalStatusCodesEnum.valueOf(patient.getMdhtPatient()
+					.getMaritalStatusCode().getCode()));
 		}
 
 		// deceasedBooolean
@@ -225,8 +225,8 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		// birthplace
 		if (patient.getMdhtPatient().getBirthplace() != null
 				&& patient.getMdhtPatient().getBirthplace().getPlace() != null) {
-			setBirthPlace(
-					convertAddress(patient.getMdhtPatient().getBirthplace().getPlace().getAddr()));
+			setBirthPlace(convertAddress(patient.getMdhtPatient().getBirthplace().getPlace()
+					.getAddr()));
 		}
 
 		// religiousAffiliation
@@ -300,7 +300,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 	/**
 	 * Convert the cda gender to the fhir gender.
-	 *
+	 * 
 	 * @param gender
 	 *            the gender
 	 * @return the administrative gender enum
@@ -320,7 +320,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 	/**
 	 * Converts the convenience name to the fhir name
-	 *
+	 * 
 	 * @param name
 	 *            the name
 	 * @return converted name
@@ -359,7 +359,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 
 	/**
 	 * Convert telecom from hl7 datatype to fhir datatpye.
-	 *
+	 * 
 	 * @param tel
 	 *            hl7 data type
 	 * @return the fhir data type
@@ -422,10 +422,9 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		for (Contact contact : getContact()) {
 			for (CodeableConceptDt codeableConceptDt : contact.getRelationship()) {
 				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
-					if ("parent".equals(codingDt.getCode())
-							&& "female".equals(contact.getGender())) {
-						if ((NameUseEnum.MAIDEN
-								.equals(contact.getName().getUseElement().getValueAsEnum()))) {
+					if ("parent".equals(codingDt.getCode()) && "female".equals(contact.getGender())) {
+						if ((NameUseEnum.MAIDEN.equals(contact.getName().getUseElement()
+								.getValueAsEnum()))) {
 							return contact.getName();
 						}
 					}
@@ -532,29 +531,29 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		if (getTelecom().size() > 0) {
 			Telecoms telecoms = new Telecoms();
 			for (ContactPointDt contactPointDt : getTelecom()) {
-				if (ContactPointSystemEnum.PHONE
-						.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+				if (ContactPointSystemEnum.PHONE.equals(contactPointDt.getSystemElement()
+						.getValueAsEnum())) {
 					AddressUse addressUse = null;
-					if (ContactPointUseEnum.HOME
-							.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+					if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.PRIVATE;
-					} else if (ContactPointUseEnum.WORK
-							.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.BUSINESS;
-					} else if (ContactPointUseEnum.MOBILE
-							.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.MOBILE.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.MOBILE;
 					}
 					telecoms.addPhone(contactPointDt.getValue(), addressUse);
 				}
-				if (ContactPointSystemEnum.EMAIL
-						.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+				if (ContactPointSystemEnum.EMAIL.equals(contactPointDt.getSystemElement()
+						.getValueAsEnum())) {
 					AddressUse addressUse = null;
-					if (ContactPointUseEnum.HOME
-							.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+					if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.PRIVATE;
-					} else if (ContactPointUseEnum.WORK
-							.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+					} else if (ContactPointUseEnum.WORK.equals(contactPointDt.getUseElement()
+							.getValueAsEnum())) {
 						addressUse = AddressUse.BUSINESS;
 					}
 					telecoms.addEMail(contactPointDt.getValue(), addressUse);
@@ -693,10 +692,9 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		for (Contact contact : getContact()) {
 			for (CodeableConceptDt codeableConceptDt : contact.getRelationship()) {
 				for (CodingDt codingDt : codeableConceptDt.getCoding()) {
-					if ("parent".equals(codingDt.getCode())
-							&& "female".equals(contact.getGender())) {
-						if ((NameUseEnum.MAIDEN
-								.equals(contact.getName().getUseElement().getValueAsEnum()))) {
+					if ("parent".equals(codingDt.getCode()) && "female".equals(contact.getGender())) {
+						if ((NameUseEnum.MAIDEN.equals(contact.getName().getUseElement()
+								.getValueAsEnum()))) {
 							contact.setName(maidenName);
 							return;
 						}
@@ -765,8 +763,7 @@ public class FhirPatient extends ca.uhn.fhir.model.dstu2.resource.Patient {
 		}
 
 		AddressUse addressUse = null;
-		if (addressDt.getUseElement() != null
-				&& addressDt.getUseElement().getValueAsEnum() != null) {
+		if (addressDt.getUseElement() != null && addressDt.getUseElement().getValueAsEnum() != null) {
 			switch (addressDt.getUseElement().getValueAsEnum()) {
 			case HOME:
 				addressUse = AddressUse.PRIVATE;

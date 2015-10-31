@@ -34,13 +34,13 @@ public class Address {
 
 	/**
 	 * <div class="en">Instantiates a new address.</div> <div
-	 * class="de">Instantiiert eine neue Adresse</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * class="de">Instantiiert eine neue Adresse</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param adress
 	 * <br>
-	 *          <div class="de">Adresse</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de">Adresse</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Address(AD adress) {
 		mAd = adress;
@@ -50,13 +50,13 @@ public class Address {
 	 * Erstellt ein Adress-Objekt.
 	 * 
 	 * @param addressline
-	 *          Strasse und Hausnummer
+	 *            Strasse und Hausnummer
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public Address(String addressline, String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
@@ -69,13 +69,13 @@ public class Address {
 	 * benötigt).
 	 * 
 	 * @param street
-	 *          Strasse (ohne Hausnummer)
+	 *            Strasse (ohne Hausnummer)
 	 * @param houseNumber
-	 *          Hausnummer
+	 *            Hausnummer
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 */
 	public Address(String street, String houseNumber, String zip, String city) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
@@ -88,15 +88,15 @@ public class Address {
 	 * Erstellt ein Adress-Objekt.
 	 * 
 	 * @param street
-	 *          Strasse (ohne Hausnummer)
+	 *            Strasse (ohne Hausnummer)
 	 * @param houseNumber
-	 *          Hausnummer
+	 *            Hausnummer
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public Address(String street, String houseNumber, String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
@@ -109,17 +109,17 @@ public class Address {
 	 * Erstellt ein Adress-Objekt.
 	 * 
 	 * @param addressline1
-	 *          Adresszeile 1
+	 *            Adresszeile 1
 	 * @param addressline2
-	 *          Adresszeile 2
+	 *            Adresszeile 2
 	 * @param addressline3
-	 *          Adresszeile 3
+	 *            Adresszeile 3
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	public Address(String addressline1, String addressline2, String addressline3, String zip,
 			String city, AddressUse usage) {
@@ -133,11 +133,11 @@ public class Address {
 	 * Erstellt ein Adress-Objekt
 	 * 
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
+	 *            Verwendungszweck (Privat, Geschäft)
 	 */
 	private Address(String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
@@ -254,7 +254,7 @@ public class Address {
 	 * Setzt die Adress-Zeile 1.
 	 * 
 	 * @param addressline
-	 *          Adress-Zeile 1
+	 *            Adress-Zeile 1
 	 */
 	public void setAddressline1(String addressline) {
 		mAd.addStreetAddressLine(addressline);
@@ -264,7 +264,7 @@ public class Address {
 	 * Setzt die Adress-Zeile 2.
 	 * 
 	 * @param addressline
-	 *          Adress-Zeile 2
+	 *            Adress-Zeile 2
 	 */
 	public void setAddressline2(String addressline) {
 		mAd.addStreetAddressLine(addressline);
@@ -274,7 +274,7 @@ public class Address {
 	 * Setzt die Adress-Zeile 3.
 	 * 
 	 * @param addressline
-	 *          Adress-Zeile 3
+	 *            Adress-Zeile 3
 	 */
 	public void setAddressline3(String addressline) {
 		mAd.addStreetAddressLine(addressline);
@@ -284,7 +284,7 @@ public class Address {
 	 * Setzt den Ort.
 	 * 
 	 * @param city
-	 *          Ort
+	 *            Ort
 	 */
 	public void setCity(String city) {
 		mAd.addCity(city);
@@ -294,7 +294,7 @@ public class Address {
 	 * Sets the country <div class="de">Setzt den Ort</div>
 	 * 
 	 * @param country
-	 *          the country
+	 *            the country
 	 */
 	public void setCountry(String country) {
 		mAd.addCountry(country);
@@ -304,7 +304,7 @@ public class Address {
 	 * Setzt die Hausnummer.
 	 * 
 	 * @param HouseNumber
-	 *          Hausnummer
+	 *            Hausnummer
 	 */
 	public void setHouseNumber(String HouseNumber) {
 		mAd.addHouseNumber(HouseNumber);
@@ -314,7 +314,7 @@ public class Address {
 	 * Setzt die Strasse.
 	 * 
 	 * @param street
-	 *          Strasse
+	 *            Strasse
 	 */
 	public void setStreet(String street) {
 		mAd.addStreetName(street);
@@ -324,7 +324,7 @@ public class Address {
 	 * Setzt die PLZ.
 	 * 
 	 * @param zip
-	 *          PLZ
+	 *            PLZ
 	 */
 	public void setZip(String zip) {
 		mAd.addPostalCode(zip);

@@ -24,13 +24,13 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.Consumable;
 import org.ehealth_connector.cda.ch.CriterionEntry;
 import org.ehealth_connector.cda.ch.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ch.ImmunizationRecommendation;
 import org.ehealth_connector.cda.ch.ImmunizationRecommendationSection;
 import org.ehealth_connector.cda.ch.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
@@ -45,39 +45,6 @@ public class ImmunizationRecommendationSectionTests {
 
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
-
-	@Test
-	public void testSerializeEmpty() throws Exception {
-		ImmunizationRecommendationSection immunization = new ImmunizationRecommendationSection(
-				LanguageCode.GERMAN);
-
-		Document document = immunization.getDocument();
-
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.18.3.1']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//code[@code='18776-5' and @codeSystem='2.16.840.1.113883.6.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("section/title='Impfplan'");
-		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
-	}
-
-	@Test
-	public void testAddImmunizationRecommendationEmpty() throws Exception {
-		ImmunizationRecommendationSection ImmunizationRecommendationSection = new ImmunizationRecommendationSection(
-				LanguageCode.GERMAN);
-		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
-		ImmunizationRecommendationSection.addImmunizationRecommendation(immunization,
-				LanguageCode.GERMAN, true);
-		Document document = ImmunizationRecommendationSection.getDocument();
-		XPathExpression expr = xpath.compile("//tr");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(2, nodes.getLength());
-	}
 
 	@Test
 	public void testAddImmunizationRecommendationContentIdCheck() throws Exception {
@@ -123,8 +90,10 @@ public class ImmunizationRecommendationSectionTests {
 		assertEquals("#irs13", criterionEntry.getTextReference());
 		assertEquals("#irs14", commentEntry.getContentIdReference());
 
-		assertEquals(comment, commentEntry.getContentIdText(immunizationRecommendationSection,
-				commentEntry.getContentIdReference()));
+		assertEquals(
+				comment,
+				commentEntry.getContentIdText(immunizationRecommendationSection,
+						commentEntry.getContentIdReference()));
 
 		assertEquals("Hepatitis A immunization (procedure)",
 				hepB.getContentIdText(immunizationRecommendationSection, hepA.getTextReference()));
@@ -139,6 +108,39 @@ public class ImmunizationRecommendationSectionTests {
 
 		assertEquals("#irs20", immunization2.getTextReference());
 
+	}
+
+	@Test
+	public void testAddImmunizationRecommendationEmpty() throws Exception {
+		ImmunizationRecommendationSection ImmunizationRecommendationSection = new ImmunizationRecommendationSection(
+				LanguageCode.GERMAN);
+		ImmunizationRecommendation immunization = new ImmunizationRecommendation();
+		ImmunizationRecommendationSection.addImmunizationRecommendation(immunization,
+				LanguageCode.GERMAN, true);
+		Document document = ImmunizationRecommendationSection.getDocument();
+		XPathExpression expr = xpath.compile("//tr");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(2, nodes.getLength());
+	}
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		ImmunizationRecommendationSection immunization = new ImmunizationRecommendationSection(
+				LanguageCode.GERMAN);
+
+		Document document = immunization.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.18.3.1']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//code[@code='18776-5' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("section/title='Impfplan'");
+		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 	}
 
 }

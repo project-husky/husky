@@ -55,8 +55,8 @@ public class DocumentProcessor {
 	 * @param input
 	 *            <div class="en">InputStream of a CDA-CH-VACD XML
 	 *            structure</div> <div class="de">InputStream einer CDA-CH-VACD
-	 *            XML-Struktur </div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *            XML-Struktur </div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @return the CdaChVacd Document
 	 * @throws Exception
 	 *             if the document could not be loaded

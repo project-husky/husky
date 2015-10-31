@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
 
 /**
  * This class provides the functions to create zip files
- *
+ * 
  */
 public class ZipCreator {
 
@@ -39,7 +39,7 @@ public class ZipCreator {
 
 	/**
 	 * Creates a new Object which provides the needed methods
-	 *
+	 * 
 	 * @param outputStream
 	 *            the outputStream, which is used to write the contents to
 	 */
@@ -49,7 +49,7 @@ public class ZipCreator {
 
 	/**
 	 * Creates a new Object which provides the needed methods
-	 *
+	 * 
 	 * @param filePath
 	 *            the path to the file, which is used to write the contents to
 	 */
@@ -65,7 +65,7 @@ public class ZipCreator {
 
 	/**
 	 * Adds an InputStream as ZipEntry to the ZipFile
-	 *
+	 * 
 	 * @param data
 	 *            Contains the file to compress as InputStream
 	 * @param pathInZipFile
@@ -94,7 +94,7 @@ public class ZipCreator {
 
 	/**
 	 * Adds a directory as ZipEntry to the ZipFile
-	 *
+	 * 
 	 * @param pathInZipFile
 	 *            Contains the relative path only in that zip file
 	 * @throws IOException
@@ -107,7 +107,7 @@ public class ZipCreator {
 
 	/**
 	 * Adds an InputStream as ZipEntry to the ZipFile
-	 *
+	 * 
 	 * @param filePath
 	 *            Contains the path to the file to add as zip item
 	 * @param pathInZipFile
@@ -123,7 +123,7 @@ public class ZipCreator {
 	/**
 	 * Closes the stream. It only has to be called when no more entries will be
 	 * added.
-	 *
+	 * 
 	 * @throws IOException
 	 *             if the file could not be read
 	 */

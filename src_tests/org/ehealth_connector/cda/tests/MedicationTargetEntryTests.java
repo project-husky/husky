@@ -41,82 +41,6 @@ public class MedicationTargetEntryTests {
 	private XPath xpath = xpathFactory.newXPath();
 
 	@Test
-	public void testSerializeEmpty() throws XPathExpressionException {
-		MedicationTargetEntry entry = new MedicationTargetEntry();
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("observation[@classCode='OBS' and @moodCode='EVN']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("observation/statusCode[@code='completed']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile(
-				"observation/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	/*
-	 * VARICELLA("68525005", "Varicella vaccination (procedure)")
-	 */
-	@Test
-	public void testImmunizationTargetCode() throws XPathExpressionException {
-		MedicationTargetEntry entry = new MedicationTargetEntry();
-		entry.setImmunizationTargetCode(CdaChVacdImmunizations.VARICELLA.getCode());
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(CdaChVacdImmunizations.VARICELLA.getCode(), entry.getImmunizationTargetCode());
-	}
-
-	/*
-	 * DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)")
-	 */
-	@Test
-	public void testImmunizationTargetEnum() throws XPathExpressionException {
-		MedicationTargetEntry entry = new MedicationTargetEntry();
-		entry.setImmunizationTarget(CdaChVacdImmunizations.DIPHTHERIA);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile(
-				"observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(CdaChVacdImmunizations.DIPHTHERIA, entry.getImmunizationTarget());
-	}
-
-	@Test
-	public void testSoftwareCreatedId() throws XPathExpressionException {
-
-		MedicationTargetEntry entry = new MedicationTargetEntry();
-
-		String uuid = UUID.generate();
-		Identificator softwareId = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", uuid);
-		entry.setId(softwareId);
-
-		Document document = entry.getDocument();
-
-		XPathExpression expr = xpath
-				.compile("observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='"
-						+ uuid + "']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(softwareId, entry.getId());
-	}
-
-	@Test
 	public void testEquals() {
 
 		Identificator softwareId1 = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "1");
@@ -154,6 +78,82 @@ public class MedicationTargetEntryTests {
 		assertEquals(false, diptheria.equals(varicella));
 		assertEquals(false, empty.equals(software1));
 		assertEquals(false, empty.equals(varicella));
+	}
+
+	/*
+	 * VARICELLA("68525005", "Varicella vaccination (procedure)")
+	 */
+	@Test
+	public void testImmunizationTargetCode() throws XPathExpressionException {
+		MedicationTargetEntry entry = new MedicationTargetEntry();
+		entry.setImmunizationTargetCode(CdaChVacdImmunizations.VARICELLA.getCode());
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(CdaChVacdImmunizations.VARICELLA.getCode(), entry.getImmunizationTargetCode());
+	}
+
+	/*
+	 * DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)")
+	 */
+	@Test
+	public void testImmunizationTargetEnum() throws XPathExpressionException {
+		MedicationTargetEntry entry = new MedicationTargetEntry();
+		entry.setImmunizationTarget(CdaChVacdImmunizations.DIPHTHERIA);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(CdaChVacdImmunizations.DIPHTHERIA, entry.getImmunizationTarget());
+	}
+
+	@Test
+	public void testSerializeEmpty() throws XPathExpressionException {
+		MedicationTargetEntry entry = new MedicationTargetEntry();
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("observation[@classCode='OBS' and @moodCode='EVN']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("observation/statusCode[@code='completed']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath
+				.compile("observation/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testSoftwareCreatedId() throws XPathExpressionException {
+
+		MedicationTargetEntry entry = new MedicationTargetEntry();
+
+		String uuid = UUID.generate();
+		Identificator softwareId = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", uuid);
+		entry.setId(softwareId);
+
+		Document document = entry.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='"
+						+ uuid + "']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(softwareId, entry.getId());
 	}
 
 	@Test

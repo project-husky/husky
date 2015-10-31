@@ -58,7 +58,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Instantiates a new master patient index query.
-	 *
+	 * 
 	 * @param dest
 	 *            the dest
 	 */
@@ -69,7 +69,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Returned patient identifiers will include the added domain if available
-	 *
+	 * 
 	 * @param organizationOID
 	 *            the organization oid
 	 * @return the query object
@@ -81,7 +81,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Adds the mothers maiden name to the query
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -96,7 +96,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Adds a patient address to the query.
-	 *
+	 * 
 	 * @param address
 	 *            the address to be queried for
 	 * @return the query object
@@ -108,7 +108,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Adds a patient identifier to be queried for.
-	 *
+	 * 
 	 * @param identificator
 	 *            patient identifier
 	 * @return the query object
@@ -121,7 +121,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Adds a patient name to the query.
-	 *
+	 * 
 	 * @param useFuzzySearch
 	 *            if true does not require an exact match, see Table
 	 *            3.47.4.1.2-1: Model Attributes (ITI TF-2b)
@@ -136,7 +136,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Adds a patient telecom to be queried for.
-	 *
+	 * 
 	 * @param tel
 	 *            telecom
 	 * @return the query object
@@ -148,7 +148,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Cancels the next query.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery cancelQuery() {
@@ -158,7 +158,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Continues query for the next pageCount results.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery continueQuery() {
@@ -169,7 +169,7 @@ public class MasterPatientIndexQuery {
 	/**
 	 * Special test preperation IHE PIX and PDQ Pre-Connectathon Test Tool
 	 * ITI-47-Consumer Query Continuation Option.
-	 *
+	 * 
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setNistContinuationQueryId() {
@@ -180,7 +180,7 @@ public class MasterPatientIndexQuery {
 	/**
 	 * Sets the page count for partial lists of search results
 	 * (QueryByParameter.initialQuantity).
-	 *
+	 * 
 	 * @param pageCount
 	 *            the page count
 	 * @return the query object
@@ -192,7 +192,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Sets the patient birth date for the query.
-	 *
+	 * 
 	 * @param birthDate
 	 *            the birth date
 	 * @return the query object
@@ -204,7 +204,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * Sets the patient sex for the query.
-	 *
+	 * 
 	 * @param adminstrativeGender
 	 *            gender
 	 * @return the query object
@@ -216,7 +216,7 @@ public class MasterPatientIndexQuery {
 
 	/**
 	 * gets the pdq query object
-	 *
+	 * 
 	 * @return query object
 	 */
 	protected V3PdqQuery getV3PdqQuery() {

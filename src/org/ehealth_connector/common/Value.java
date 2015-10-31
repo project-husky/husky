@@ -36,32 +36,34 @@ public class Value {
 	private ANY mValue;
 
 	/**
-	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt</div>
-	 * <div class="de">Instantiiert ein neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT ANY Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given MDHT ANY
+	 * Objekt</div> <div class="de">Instantiiert ein neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY
+	 * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param value
 	 * <br>
-	 *          <div class="de"> value</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> value</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Value(ANY value) {
 		mValue = value;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a give MDHT CD Objekt.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT CD (Code) Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a give MDHT CD
+	 * Objekt.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT CD (Code)
+	 * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
+	 * class="it"></div>
 	 * 
 	 * @param cd
 	 * <br>
-	 *          <div class="de"> cd</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> cd</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Value(CD cd) {
 		mValue = cd;
@@ -76,29 +78,29 @@ public class Value {
 	 * 
 	 * @param code
 	 * <br>
-	 *          <div class="de"> code</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Value(Code code) {
 		mValue = code.getCD();
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT RTO
-	 * Objekt (A quantity constructed as the quotient of a numerator quantity
-	 * divided by a denominator quantity.).</div> <div class="de">Instantiiert
-	 * eine neues Value RTO Objekt. Dieses wird häufig für die Angabe von Titer
-	 * verwendet. Mit diesem Konstruktor wird ein Value Objekt auf Basis eines
-	 * MDHT RTO Datenobjekts initialisiert.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * RTO Objekt (A quantity constructed as the quotient of a numerator
+	 * quantity divided by a denominator quantity.).</div> <div
+	 * class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird häufig
+	 * für die Angabe von Titer verwendet. Mit diesem Konstruktor wird ein Value
+	 * Objekt auf Basis eines MDHT RTO Datenobjekts initialisiert.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param numerator
-	 *          The nominator value (nominator/denominator)
+	 *            The nominator value (nominator/denominator)
 	 * 
 	 * @param denominator
-	 *          The denominator value (nominator/denominator)
+	 *            The denominator value (nominator/denominator)
 	 * @param ucumUnit
-	 *          the UCUM Unit
+	 *            the UCUM Unit
 	 */
 	public Value(double numerator, double denominator, Ucum ucumUnit) {
 		RTO rto = DatatypesFactory.eINSTANCE.createRTO();
@@ -124,8 +126,8 @@ public class Value {
 	 * 
 	 * @param pq
 	 * <br>
-	 *          <div class="de"> pq</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> pq</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Value(PQ pq) {
 		mValue = pq;
@@ -134,14 +136,14 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with a give MDHT RTO Objekt (A
 	 * quantity constructed as the quotient of a numerator quantity divided by a
-	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues Value
-	 * RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
+	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues
+	 * Value RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet.
+	 * Mit diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
 	 * Datenobjekts initialisiert.</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 * 
 	 * @param rto
-	 *          The RTO object
+	 *            The RTO object
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
@@ -156,12 +158,12 @@ public class Value {
 	 * 
 	 * @param codeSystem
 	 * <br>
-	 *          <div class="de"> code system</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> code system</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 * @param code
 	 * <br>
-	 *          <div class="de"> code</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="de"> code</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public Value(String codeSystem, String code) {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
@@ -174,9 +176,9 @@ public class Value {
 	 * Erstellt einen neuen Wert.
 	 * 
 	 * @param value
-	 *          Der eigentliche Wert
+	 *            Der eigentliche Wert
 	 * @param unit
-	 *          Die Einheit
+	 *            Die Einheit
 	 */
 	public Value(String value, Ucum unit) {
 		this(DatatypesFactory.eINSTANCE.createPQ());
@@ -247,8 +249,8 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Gets the value.</div> <div class="de">Liefert value.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the value.</div> <div class="de">Liefert
+	 * value.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return ANY <div class="en">the value as MDHT ANY object</div>
 	 */
@@ -286,8 +288,8 @@ public class Value {
 	}
 
 	/**
-	 * Checks if the Value object is a RTO (A quantity constructed as the quotient
-	 * of a numerator quantity divided by a denominator quantity.).
+	 * Checks if the Value object is a RTO (A quantity constructed as the
+	 * quotient of a numerator quantity divided by a denominator quantity.).
 	 * 
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */

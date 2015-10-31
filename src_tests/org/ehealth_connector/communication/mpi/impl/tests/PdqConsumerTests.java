@@ -25,7 +25,7 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
 /**
  * Perform Mockup tests of the V3PixPdqApater with the supplied ITI Sample
  * Material PDQ Response 02_PDQQuery1Response.xml
- *
+ * 
  */
 public class PdqConsumerTests {
 
@@ -83,24 +83,24 @@ public class PdqConsumerTests {
 		assertEquals("+1-765-555-4352", james.getTelecom().get(1).getValue());
 		assertEquals("male", james.getGender());
 		assertEquals("1963-08-04", james.getBirthDateElement().getValueAsString());
-		assertEquals("3443 North Arctic Avenue",
-				james.getAddressFirstRep().getLineFirstRep().getValue());
+		assertEquals("3443 North Arctic Avenue", james.getAddressFirstRep().getLineFirstRep()
+				.getValue());
 		assertEquals("Some City", james.getAddressFirstRep().getCity());
 		assertEquals("IL", james.getAddressFirstRep().getState());
 
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
-				james.getIdentifierFirstRep().getSystem());
+		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734", james.getIdentifierFirstRep()
+				.getSystem());
 		assertEquals("34827K410", james.getIdentifierFirstRep().getValue());
-		assertEquals("urn:oid:1.2.840.114350.1.13.99997.2.3412",
-				james.getIdentifier().get(1).getSystem());
+		assertEquals("urn:oid:1.2.840.114350.1.13.99997.2.3412", james.getIdentifier().get(1)
+				.getSystem());
 		assertEquals("38273D433", james.getIdentifier().get(1).getValue());
 		assertEquals("urn:oid:2.16.840.1.113883.4.1", james.getIdentifier().get(2).getSystem());
 		assertEquals("999-88-6345", james.getIdentifier().get(2).getValue());
 
 		assertNotNull(james.getManagingOrganization().getResource());
 		Organization organization = (Organization) james.getManagingOrganization().getResource();
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
-				organization.getIdentifier().get(0).getValue());
+		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734", organization.getIdentifier().get(0)
+				.getValue());
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
@@ -110,19 +110,19 @@ public class PdqConsumerTests {
 		assertEquals("home", jim.getTelecom().get(0).getUse());
 		assertEquals("+1-795-555-4745", jim.getTelecom().get(0).getValue());
 		assertEquals("1963-07-13", jim.getBirthDateElement().getValueAsString());
-		assertEquals("8734 Blue Ocean Street",
-				jim.getAddressFirstRep().getLineFirstRep().getValue());
+		assertEquals("8734 Blue Ocean Street", jim.getAddressFirstRep().getLineFirstRep()
+				.getValue());
 		assertEquals("Other City", jim.getAddressFirstRep().getCity());
 		assertEquals("IL", jim.getAddressFirstRep().getState());
 
 		organization = (Organization) jim.getManagingOrganization().getResource();
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
-				organization.getIdentifier().get(0).getValue());
+		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734", organization.getIdentifier().get(0)
+				.getValue());
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
-				jim.getIdentifierFirstRep().getSystem());
+		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734", jim.getIdentifierFirstRep()
+				.getSystem());
 		assertEquals("34827R534", jim.getIdentifierFirstRep().getValue());
 
 	}

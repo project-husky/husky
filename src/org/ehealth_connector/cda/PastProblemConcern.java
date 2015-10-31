@@ -70,12 +70,12 @@ public class PastProblemConcern extends ProblemConcern {
 	 * problème. L'objet peut être ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *            <div class="en">the concern as free text</div>
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 *            <div class="en">the concern as free text</div> <div
+	 *            class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
+	 *            class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry
-	 *            <div class="en">problem entry object</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">problem entry object</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param concernStatus
 	 *            <div class="en">Status of the concern
 	 *            (active/supended/aborted/completed)</div> <div class="de">Der
@@ -98,12 +98,12 @@ public class PastProblemConcern extends ProblemConcern {
 	 * être ajouté dans ActiveProblemsSection.</div>
 	 * 
 	 * @param concern
-	 *            <div class="en">the concern as free text</div>
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 *            <div class="en">the concern as free text</div> <div
+	 *            class="de">Die Bezeichnung des Leidens (Freitext)</div> <div
+	 *            class="fr">Le nom du problème (texte libre)</div>
 	 * @param problemEntry
-	 *            <div class="en">problem entry object</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">problem entry object</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param concernStatus
 	 *            <div class="en">Status of the concern
 	 *            (active/supended/aborted/completed)</div> <div class="de">Der

@@ -281,16 +281,16 @@ public class FhirPatientTests {
 		assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
 
 		Patient patient = fhirPatient.getPatient();
-		assertEquals("Test", patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0)
-				.getText());
+		assertEquals("Test",
+				patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
 		assertEquals("1234", patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0)
 				.getRoot());
 		assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization()
 				.getTelecoms().get(0).getValue());
 
 		FhirPatient fhirPatient2 = new FhirPatient(patient);
-		org = (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization()
-				.getResource();
+		org = (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2
+				.getManagingOrganization().getResource();
 
 		assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
 		assertEquals("Test", org.getName());
@@ -358,26 +358,26 @@ public class FhirPatientTests {
 
 		assertEquals(ContactPointUseEnum.HOME, fhirPatient2.getTelecom().get(0).getUseElement()
 				.getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0).getSystemElement()
-				.getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0)
+				.getSystemElement().getValueAsEnum());
 		assertEquals("+4144000000000", fhirPatient2.getTelecom().get(0).getValue());
 
 		assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(1).getUseElement()
 				.getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1).getSystemElement()
-				.getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1)
+				.getSystemElement().getValueAsEnum());
 		assertEquals("+4188000000000", fhirPatient2.getTelecom().get(1).getValue());
 
 		assertEquals(ContactPointUseEnum.MOBILE, fhirPatient2.getTelecom().get(2).getUseElement()
 				.getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2).getSystemElement()
-				.getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2)
+				.getSystemElement().getValueAsEnum());
 		assertEquals("+4176000000000", fhirPatient2.getTelecom().get(2).getValue());
 
 		assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(3).getUseElement()
 				.getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3).getSystemElement()
-				.getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3)
+				.getSystemElement().getValueAsEnum());
 		assertEquals("xyz@abc.ch", fhirPatient2.getTelecom().get(3).getValue());
 	}
 
@@ -386,8 +386,8 @@ public class FhirPatientTests {
 		Name name = new Name("given", "family", "prefix", "suffix");
 		Patient conveniencePatient = new Patient(name, AdministrativeGender.MALE, new Date());
 
-		Address address = new Address("addressline1", "addressline2", "addressline3", "zip", "city",
-				AddressUse.PRIVATE);
+		Address address = new Address("addressline1", "addressline2", "addressline3", "zip",
+				"city", AddressUse.PRIVATE);
 
 		address.getMdhtAdress().addCountry("cty");
 		address.getMdhtAdress().addState("state");
@@ -540,7 +540,8 @@ public class FhirPatientTests {
 		log.debug(stringPatient);
 
 		IParser parser = ctx.newXmlParser();
-		FhirPatient fhirPatientDeserialized = parser.parseResource(FhirPatient.class, stringPatient);
+		FhirPatient fhirPatientDeserialized = parser
+				.parseResource(FhirPatient.class, stringPatient);
 		assertTrue(fhirPatientDeserialized != null);
 
 	}

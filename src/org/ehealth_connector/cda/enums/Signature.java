@@ -18,12 +18,13 @@ public enum Signature {
 	 */
 	INTENDED("I", "intended"),
 	/**
-	 * <div class="de">Eine Unterschrift ist erfolgt</div> <div class="fr"></div>
+	 * <div class="de">Eine Unterschrift ist erfolgt</div> <div
+	 * class="fr"></div>
 	 */
 	SIGNED("S", "signed"),
 	/**
-	 * <div class="de">Eine Unterschrift ist für diesen Akteur erforderlich</div>
-	 * <div class="fr"></div>
+	 * <div class="de">Eine Unterschrift ist für diesen Akteur
+	 * erforderlich</div> <div class="fr"></div>
 	 */
 	REQUIRED("X", "required");
 	public static final String INTENDED_CODE = "I";
@@ -37,16 +38,16 @@ public enum Signature {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
 	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <div class="de"> code</div>
 	 * @param displayName
 	 * <br>
-	 *          <div class="de"> display name</div>
+	 *            <div class="de"> display name</div>
 	 */
 	private Signature(String code, String displayName) {
 		this.code = code;
@@ -59,7 +60,7 @@ public enum Signature {
 	 * 
 	 * @param code
 	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Signature getEnum(String code) {
@@ -93,8 +94,8 @@ public enum Signature {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 * 
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -142,7 +143,7 @@ public enum Signature {
 	 * 
 	 * @param enumName
 	 * <br>
-	 *          <div class="de"> enumName</div>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -151,12 +152,12 @@ public enum Signature {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
 	 * <br>
-	 *          <div class="de"> code</div>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {

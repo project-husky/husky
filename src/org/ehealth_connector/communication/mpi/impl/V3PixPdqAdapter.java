@@ -197,8 +197,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		addDemographicData(patient, v3RecordAddedMessage);
 		try {
 			printMessage("addPatient", v3RecordAddedMessage.getV3RecordAddedMessage().getRequest());
-			V3PixSourceAcknowledgement v3pixack = pixSource
-					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage());
+			V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordAdded(v3RecordAddedMessage
+					.getV3RecordAddedMessage());
 			printMessage("sendRecordAdded", v3pixack.getRequest());
 			return checkResponse(v3pixack);
 		} catch (Exception e) {
@@ -209,7 +209,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Returns a confgure V3PdqQuery Object which can be used to perfom a query
-	 *
+	 * 
 	 * @return the mpi query
 	 */
 	@Override
@@ -229,9 +229,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	public String getPatientDomainId(V3PixConsumerResponse v3PixConsumerResponse, String rootOid) {
 
-		if (rootOid != null && v3PixConsumerResponse != null
-				&& ((v3PixConsumerResponse.getNumPatientIds() > 0)
-						|| (v3PixConsumerResponse.getNumAsOtherIds() > 0))) {
+		if (rootOid != null
+				&& v3PixConsumerResponse != null
+				&& ((v3PixConsumerResponse.getNumPatientIds() > 0) || (v3PixConsumerResponse
+						.getNumAsOtherIds() > 0))) {
 
 			for (int i = 0; i < v3PixConsumerResponse.getNumPatientIds(); i++) {
 				String id[] = v3PixConsumerResponse.getPatientID(i);
@@ -251,7 +252,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Gets the patients from pdq query.
-	 *
+	 * 
 	 * @param response
 	 *            the response
 	 * @return the patients from pdq query
@@ -306,10 +307,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId,
 				this.homeCommunityOid, this.adapterCfg.homeCommunityNamespace);
 		try {
-			printMessage("sourceMerge",
-					v3pixSourceMsgMerge.getV3MergePatientsMessage().getRequest());
-			V3PixSourceAcknowledgement v3pixack = pixSource
-					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage());
+			printMessage("sourceMerge", v3pixSourceMsgMerge.getV3MergePatientsMessage()
+					.getRequest());
+			V3PixSourceAcknowledgement v3pixack = pixSource.sendMergePatients(v3pixSourceMsgMerge
+					.getV3MergePatientsMessage());
 			printMessage("sourceMerge", v3pixack.getRequest());
 			return checkResponse(v3pixack);
 		} catch (Exception e) {
@@ -389,8 +390,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
 						domainToReturnNamespace = domainToReturnNamespaces[i];
 					}
-					v3PixConsumerQuery.addDomainToReturn(domainToReturnOid,
-							domainToReturnNamespace);
+					v3PixConsumerQuery
+							.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
 				}
 			}
 			V3PixConsumerResponse v3PixConsumerResponse = null;
@@ -417,7 +418,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Perfoms a PDQ Query
-	 *
+	 * 
 	 * @param mpiQuery
 	 *            the mpi query object
 	 * @return the v3 pdq query response
@@ -432,15 +433,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			if (!mpiQuery.doCancelQuery()) {
 				V3PdqConsumerResponse lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
-					lastPdqConsumerResponse = v3PdqConsumer
-							.sendQuery(mpiQuery.getV3PdqConsumerQuery());
+					lastPdqConsumerResponse = v3PdqConsumer.sendQuery(mpiQuery
+							.getV3PdqConsumerQuery());
 				} else {
 					lastPdqConsumerResponse = mpiQuery.getLastPdqConsumerResponse();
-					V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(
-							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
-							mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
-							mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
-							mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
+					V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(mpiQuery
+							.getV3PdqConsumerQuery().getSendingApplication(), mpiQuery
+							.getV3PdqConsumerQuery().getSendingFacility(), mpiQuery
+							.getV3PdqConsumerQuery().getReceivingApplication(0), mpiQuery
+							.getV3PdqConsumerQuery().getReceivingFacility(0),
 							lastPdqConsumerResponse, mpiQuery.getPageCount());
 					continuationQuery.setProcessingCode("T");
 					lastPdqConsumerResponse = v3PdqConsumer.sendContinuation(continuationQuery);
@@ -458,12 +459,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			} else {
 				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
 						.getLastPdqConsumerResponse();
-				V3PdqContinuationCancel continuationCancel = new V3PdqContinuationCancel(
-						mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
-						mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
-						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
-						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
-						lastPdqConsumerResponse);
+				V3PdqContinuationCancel continuationCancel = new V3PdqContinuationCancel(mpiQuery
+						.getV3PdqConsumerQuery().getSendingApplication(), mpiQuery
+						.getV3PdqConsumerQuery().getSendingFacility(), mpiQuery
+						.getV3PdqConsumerQuery().getReceivingApplication(0), mpiQuery
+						.getV3PdqConsumerQuery().getReceivingFacility(0), lastPdqConsumerResponse);
 				V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
 				queryResponse.setSuccess(!v3Ack.hasError());
 			}
@@ -496,8 +496,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
 		addDemographicData(patient, v3RecordRevisedMessage);
 		try {
-			printMessage("sourceUpdate",
-					v3RecordRevisedMessage.getV3RecordRevisedMessage().getRequest());
+			printMessage("sourceUpdate", v3RecordRevisedMessage.getV3RecordRevisedMessage()
+					.getRequest());
 			V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage());
 			printMessage("sourceUpdate", v3pixack.getRequest());
@@ -593,14 +593,13 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Adds the language communications from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
 	 *            the patient
 	 */
-	protected void addLanguageCommunications(PRPAMT201310UV02Patient pdqPatient,
-			FhirPatient patient) {
+	protected void addLanguageCommunications(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null
 				&& pdqPatient.getPatientPerson().getLanguageCommunication() != null) {
 			for (PRPAMT201310UV02LanguageCommunication languageCommmunication : pdqPatient
@@ -661,7 +660,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Adds the patient addresses from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -705,7 +704,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Adds the patient ids from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -723,8 +722,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 		if (pdqPatient.getPatientPerson() != null
 				&& pdqPatient.getPatientPerson().getAsOtherIDs() != null) {
-			for (PRPAMT201310UV02OtherIDs asOtherId : pdqPatient.getPatientPerson()
-					.getAsOtherIDs()) {
+			for (PRPAMT201310UV02OtherIDs asOtherId : pdqPatient.getPatientPerson().getAsOtherIDs()) {
 				if (asOtherId.getId() != null && asOtherId.getId().size() > 0) {
 					II patientId = asOtherId.getId().get(0);
 					if (patientId != null) {
@@ -746,8 +744,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param v3PixSourceMessage
 	 *            the v3 pix source message
 	 */
-	protected void addPatientName(FhirPatient patient,
-			V3PixSourceMessageHelper v3PixSourceMessage) {
+	protected void addPatientName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		// Name
 		String familyName = patient.getName().get(0).getFamilyAsSingleString();
 		String givenName = patient.getName().get(0).getGivenAsSingleString();
@@ -760,7 +757,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Adds the patient name from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -842,7 +839,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Adds the patient telecoms from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -862,8 +859,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					} else if (tel.getUse().contains(HomeAddressUse.H)
 							|| tel.getUse().contains(HomeAddressUse.HP)) {
 						contactPointDt.setUse(ContactPointUseEnum.HOME);
-					} else
-						if (tel.getUse().size() > 0 && "MC".equals(tel.getUse().get(0).getName())) {
+					} else if (tel.getUse().size() > 0
+							&& "MC".equals(tel.getUse().get(0).getName())) {
 						contactPointDt.setUse(ContactPointUseEnum.MOBILE);
 					}
 					patient.getTelecom().add(contactPointDt);
@@ -983,7 +980,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	/**
 	 * Helper function to convert the HL7 PDQ AD type to the coressponding FHIR
 	 * type
-	 *
+	 * 
 	 * @param ad
 	 *            the ad
 	 * @return the address dt from ad
@@ -1065,8 +1062,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @return PRPAMT201310UV02Patient - the patient object at the specified
 	 *         index.
 	 */
-	protected PRPAMT201310UV02Patient getPatientByIndex(V3PdqConsumerResponse v3PdqConsumerResponse,
-			int patientIndex) {
+	protected PRPAMT201310UV02Patient getPatientByIndex(
+			V3PdqConsumerResponse v3PdqConsumerResponse, int patientIndex) {
 		return v3PdqConsumerResponse.getPdqResponse().getControlActProcess().getSubject()
 				.get(patientIndex).getRegistrationEvent().getSubject1().getPatient();
 	}
@@ -1123,7 +1120,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the birth place from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1169,7 +1166,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the deceased status from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1206,7 +1203,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the employee from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1237,8 +1234,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param v3PixSourceMessage
 	 *            the v3 pix source message
 	 */
-	protected void setMultipeBirth(FhirPatient patient,
-			V3PixSourceMessageHelper v3PixSourceMessage) {
+	protected void setMultipeBirth(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		IDatatype iMultipleBirth = patient.getMultipleBirth();
 		if (iMultipleBirth instanceof IntegerDt) {
 			IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
@@ -1257,7 +1253,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the multipe birth from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1295,7 +1291,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the nation from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1328,13 +1324,13 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setPatientBirthTime(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
-		v3PixSourceMessage.setPatientBirthTime(
-				patient.getBirthDateElement().getValueAsString().replaceAll("-", ""));
+		v3PixSourceMessage.setPatientBirthTime(patient.getBirthDateElement().getValueAsString()
+				.replaceAll("-", ""));
 	}
 
 	/**
 	 * Sets the patient birth time from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1367,8 +1363,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param v3PixSourceMessage
 	 *            the v3 pix source message
 	 */
-	protected void setPatientGender(FhirPatient patient,
-			V3PixSourceMessageHelper v3PixSourceMessage) {
+	protected void setPatientGender(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		// Gender
 		if (patient.getGender() != null) {
 			String gender = "";
@@ -1385,7 +1380,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the patient gender from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1418,8 +1413,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void setPatientMaritalStatus(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (!patient.getMaritalStatus().isEmpty()) {
-			v3PixSourceMessage.setPatientMaritalStatus(
-					patient.getMaritalStatus().getValueAsEnum().toArray()[0].toString());
+			v3PixSourceMessage.setPatientMaritalStatus(patient.getMaritalStatus().getValueAsEnum()
+					.toArray()[0].toString());
 		}
 	}
 
@@ -1428,21 +1423,19 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * in an implementation: is the coding of marital status of fhir equivalent
 	 * to HL7 V3? http://hl7.org/implement/standards/FHIR-Develop/valueset
 	 * -marital-status.html
-	 *
-	 *
+	 * 
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
 	 *            the patient
 	 */
-	protected void setPatientMaritalStatus(PRPAMT201310UV02Patient pdqPatient,
-			FhirPatient patient) {
+	protected void setPatientMaritalStatus(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null
 				&& pdqPatient.getPatientPerson().getMaritalStatusCode() != null) {
 			CE maritalStatusCode = pdqPatient.getPatientPerson().getMaritalStatusCode();
 			if (maritalStatusCode.getCode() != null) {
-				patient.setMaritalStatus(
-						MaritalStatusCodesEnum.valueOf(maritalStatusCode.getCode()));
+				patient.setMaritalStatus(MaritalStatusCodesEnum.valueOf(maritalStatusCode.getCode()));
 			}
 		}
 	}
@@ -1472,7 +1465,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the patient mothers maiden name from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1486,8 +1479,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					.getPatientPerson().getPersonalRelationship()) {
 				if (personalRelationship.getCode() != null
 						&& "MTH".equals(personalRelationship.getCode().getCode())
-						&& "2.16.840.1.113883.5.111"
-								.equals(personalRelationship.getCode().getCodeSystem())) {
+						&& "2.16.840.1.113883.5.111".equals(personalRelationship.getCode()
+								.getCodeSystem())) {
 					COCTMT030007UVPerson motherRelationShipHolder = personalRelationship
 							.getRelationshipHolder1();
 					if (motherRelationShipHolder != null
@@ -1544,15 +1537,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getReligiousAffiliation() != null
 				&& !patient.getReligiousAffiliation().isEmpty()) {
-			v3PixSourceMessage
-					.setPatientReligiousAffiliation(patient.getReligiousAffiliation().getText());
+			v3PixSourceMessage.setPatientReligiousAffiliation(patient.getReligiousAffiliation()
+					.getText());
 		}
 	}
 
 	/**
 	 * Sets the patient religious affiliation from the pdq message to the
 	 * patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient
@@ -1614,7 +1607,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Sets the scoping organization from the pdq message to the patient.
-	 *
+	 * 
 	 * @param pdqPatient
 	 *            the pdq patient
 	 * @param patient

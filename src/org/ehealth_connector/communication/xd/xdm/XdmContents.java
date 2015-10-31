@@ -107,7 +107,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT files
 	 * as according objects
-	 *
+	 * 
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -124,7 +124,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with a given filePath, pointing to an
 	 * existing zip file.
-	 *
+	 * 
 	 * @param filePath
 	 *            the file path to an existing zip file, which holds the
 	 *            contents of an xdm volume
@@ -144,7 +144,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT
 	 * files, which will be read from given files paths.
-	 *
+	 * 
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -166,7 +166,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with a given XDM volume as single zip
 	 * file.
-	 *
+	 * 
 	 * @param zipFile
 	 *            the zip file
 	 */
@@ -187,7 +187,7 @@ public class XdmContents {
 	/**
 	 * Creates the XDM volume contents and writes them to the given
 	 * outputStream.
-	 *
+	 * 
 	 * @param outputStream
 	 *            the output stream, in which the contents will be written.
 	 * @param txnData
@@ -236,7 +236,7 @@ public class XdmContents {
 
 	/**
 	 * Creates the XDM volume contents and writes them to the given File(path)
-	 *
+	 * 
 	 * @param filePath
 	 *            the path to the file, in which the contents will be written.
 	 * @param txnData
@@ -256,7 +256,7 @@ public class XdmContents {
 
 	/**
 	 * Gets a list containing the documents together with the Document Metadata.
-	 *
+	 * 
 	 * @return the document and metadata list
 	 */
 	public List<DocumentContentAndMetadata> getDocumentAndMetadataList() {
@@ -266,7 +266,7 @@ public class XdmContents {
 	/**
 	 * Gets a list containing the documents together with the Document Metadata
 	 * for a specific submission set.
-	 *
+	 * 
 	 * @param submissionSetNumber
 	 *            the submission set number
 	 * @return the document and metadata list
@@ -289,7 +289,7 @@ public class XdmContents {
 
 	/**
 	 * Gets a list of documents (the actual payload of the XDM volume)
-	 *
+	 * 
 	 * @return the documents
 	 */
 	public List<XDSDocument> getDocumentList() {
@@ -299,7 +299,7 @@ public class XdmContents {
 	/**
 	 * Gets a list of documents (the actual payload of the XDM volume) for a
 	 * specific submission set.
-	 *
+	 * 
 	 * @param submissionSetNumber
 	 *            the submission set number
 	 * @return the document list
@@ -314,7 +314,7 @@ public class XdmContents {
 
 	/**
 	 * Gets the index htm.
-	 *
+	 * 
 	 * @return the index htm
 	 */
 	public IndexHtm getIndexHtm() {
@@ -324,7 +324,7 @@ public class XdmContents {
 
 	/**
 	 * Gets the readme txt.
-	 *
+	 * 
 	 * @return the readme txt
 	 */
 	public ReadmeTxt getReadmeTxt() {
@@ -334,7 +334,7 @@ public class XdmContents {
 
 	/**
 	 * Gets the XDM contents as OHT submit transaction data.
-	 *
+	 * 
 	 * @return the XDM contents as OHT submit transaction data
 	 */
 	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
@@ -347,7 +347,7 @@ public class XdmContents {
 	 * list of all documents from all submission sets. It does not contain the
 	 * full XDS Metadata for each document. If you want to get this data, please
 	 * use the getDocumentAndMetadata method.
-	 *
+	 * 
 	 * @return The OHT XDSResponseType
 	 */
 	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
@@ -360,7 +360,7 @@ public class XdmContents {
 
 	/**
 	 * Creates the metadata xml.
-	 *
+	 * 
 	 * @param txnData
 	 *            the txn data
 	 * @return the XML resource
@@ -402,7 +402,7 @@ public class XdmContents {
 		docRoot.setSubmitObjectsRequest(submit);
 
 		XMLResource xml = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-		.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
+				.createResource(org.eclipse.emf.common.util.URI.createURI(LCMPackage.eNS_URI)));
 
 		xml.getContents().add(docRoot);
 		xml.getDefaultSaveOptions().put(XMLResource.OPTION_DECLARE_XML, Boolean.valueOf(true));
@@ -414,7 +414,7 @@ public class XdmContents {
 	/**
 	 * Checks if the integritiy values (hash and size) for the documents are the
 	 * same as in the metadata.
-	 *
+	 * 
 	 * @return false, if the values don´t match, true otherwise
 	 */
 	private boolean documentsIntegrityCheck() {
@@ -480,9 +480,9 @@ public class XdmContents {
 
 	/**
 	 * Gets the metadata xml input stream.
-	 *
+	 * 
 	 * @param metadataXml
-	 *
+	 * 
 	 * @return the metadata xml input stream
 	 */
 	private InputStream getMetadataXmlInputStream(XMLResource metadataXml) {
@@ -500,7 +500,7 @@ public class XdmContents {
 	/**
 	 * Given a full ZipEntry filespec, extracts the name of the folder (if
 	 * present) under the IHE_XDM root specified by IHE XDM.
-	 *
+	 * 
 	 * @param zipEntryName
 	 *            the zip entry name
 	 * @return the submission set dirspec
@@ -519,7 +519,7 @@ public class XdmContents {
 	/**
 	 * Tries accessing an XDM file inside ZIP using both MS-DOS and UNIX
 	 * separators.
-	 *
+	 * 
 	 * @param zipFile
 	 *            the zip file
 	 * @param subsetDirspec
@@ -551,7 +551,7 @@ public class XdmContents {
 
 	/**
 	 * Checks if Submit Transaction Data contains a valid dataset
-	 *
+	 * 
 	 * @param submissionSetNumber
 	 *            number of the dataset that should be checked
 	 * @return true, if SubmitTransactionData has no valid data. false
@@ -635,8 +635,8 @@ public class XdmContents {
 							@SuppressWarnings("unused")
 							LCMPackage pkg = org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE;
 							XMLResource resources = (XMLResource) (new org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-							.createResource(URI
-									.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
+									.createResource(URI
+											.createURI(org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI)));
 							ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 							resources.load(bais, null);
 							@SuppressWarnings("rawtypes")
@@ -678,7 +678,7 @@ public class XdmContents {
 												.getRepositoryUniqueId());
 										txnData.getDocList().add(xdsDocument);
 										txnData.getMetadata().getDocumentEntry()
-										.add(EcoreUtil.copy(xdsDocumentEntry));
+												.add(EcoreUtil.copy(xdsDocumentEntry));
 									} else {
 										log.error(XDM_METADATA + " in XDM submission folder "
 												+ subsetDirspec + " has XDSDocumentEntry.URI '"

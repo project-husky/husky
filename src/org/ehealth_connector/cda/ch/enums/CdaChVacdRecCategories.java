@@ -29,35 +29,35 @@ import org.ehealth_connector.common.DateUtil;
 public enum CdaChVacdRecCategories {
 
 	/**
-	 * <div class="de"> Empfohlene Basisimpfungen</div>
-	 * <div class="fr">Vaccinations recommandées de base</div>
-	 * <div class="it">Vaccinazioni raccomandate di base</div>
+	 * <div class="de"> Empfohlene Basisimpfungen</div> <div
+	 * class="fr">Vaccinations recommandées de base</div> <div
+	 * class="it">Vaccinazioni raccomandate di base</div>
 	 */
 	REC_BASE("41501", "Empfohlene Basisimpfungen", "Vaccinations recommandées de base",
 			"Vaccinazioni raccomandate di base", "20150101", ""),
 
 	/**
-	 * <div class="de"> Empfohlene ergänzende Impfungen</div>
-	 * <div class="fr">Vaccinations recommandées complémentaires</div>
-	 * <div class="it">Vaccinazioni raccomandate complementari</div>
+	 * <div class="de"> Empfohlene ergänzende Impfungen</div> <div
+	 * class="fr">Vaccinations recommandées complémentaires</div> <div
+	 * class="it">Vaccinazioni raccomandate complementari</div>
 	 */
 	REC_COMPL("41502", "Empfohlene ergänzende Impfungen",
 			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari",
 			"20150101", ""),
 
 	/**
-	 * <div class="de"> Impfungen ohne Empfehlungen</div>
-	 * <div class="fr">Vaccinations sans recommandation d’utilisation</div>
-	 * <div class="it">Vaccinazioni senza raccomandazione d’utilizzo</div>
+	 * <div class="de"> Impfungen ohne Empfehlungen</div> <div
+	 * class="fr">Vaccinations sans recommandation d’utilisation</div> <div
+	 * class="it">Vaccinazioni senza raccomandazione d’utilizzo</div>
 	 */
 	REC_NONE("41504", "Impfungen ohne Empfehlungen",
 			"Vaccinations sans recommandation d’utilisation",
 			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", ""),
 
 	/**
-	 * <div class="de"> Empfohlene Impfungen für Risikogruppen</div>
-	 * <div class="fr">Vaccinations recommandées à des groupes à risque</div>
-	 * <div class="it">Vaccinazioni raccomandate a die gruppi a rischio</div>
+	 * <div class="de"> Empfohlene Impfungen für Risikogruppen</div> <div
+	 * class="fr">Vaccinations recommandées à des groupes à risque</div> <div
+	 * class="it">Vaccinazioni raccomandate a die gruppi a rischio</div>
 	 */
 	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen",
 			"Vaccinations recommandées à des groupes à risque",
@@ -93,7 +93,7 @@ public enum CdaChVacdRecCategories {
 	 * mittels eines Codes und einem Display Name</div>.
 	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayNameDe
 	 *            the display name de
@@ -117,11 +117,11 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 * 
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -135,8 +135,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 * 
 	 * @param languageCode
 	 *            the language code
@@ -182,8 +182,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>.
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>.
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -192,8 +192,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div> <div
+	 * class="de">Liefert display name in deutscher Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -202,8 +202,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div> <div
+	 * class="de">Liefert display name in deutscher Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -212,8 +212,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the french display name.</div>
-	 * <div class="de">Liefert display name in französischer Sprache.</div>
+	 * <div class="en">Gets the french display name.</div> <div
+	 * class="de">Liefert display name in französischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -222,8 +222,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the italian display name.</div>
-	 * <div class="de">Liefert display name in italienischer Sprache.</div>
+	 * <div class="en">Gets the italian display name.</div> <div
+	 * class="de">Liefert display name in italienischer Sprache.</div>
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
@@ -238,7 +238,7 @@ public enum CdaChVacdRecCategories {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -252,7 +252,7 @@ public enum CdaChVacdRecCategories {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */

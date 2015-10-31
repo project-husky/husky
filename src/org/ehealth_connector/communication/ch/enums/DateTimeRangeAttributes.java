@@ -2,7 +2,7 @@ package org.ehealth_connector.communication.ch.enums;
 
 /**
  * Represents the XDS metadata attributes, which are related to DateTimeRanges
- *
+ * 
  */
 public enum DateTimeRangeAttributes {
 

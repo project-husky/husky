@@ -80,7 +80,7 @@ public class IndexHtm {
 
 	/**
 	 * Instantiates a new indexHtm.
-	 *
+	 * 
 	 * @param indexHtmStream
 	 *            the INDEX.HTM file as InputStream object. The file contains
 	 *            information about the contents of the volume.
@@ -91,7 +91,7 @@ public class IndexHtm {
 
 	/**
 	 * Creates a new INDEX.HTM based on the given txnData.
-	 *
+	 * 
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 */
@@ -101,7 +101,7 @@ public class IndexHtm {
 
 	/**
 	 * Creates a new INDEX.HTM based on the given txnData and vendorInfo.
-	 *
+	 * 
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 * @param vendorInfo
@@ -131,8 +131,17 @@ public class IndexHtm {
 	}
 
 	/**
+	 * Returns the content of the INDEX.HTM as InputStream object
+	 * 
+	 * @return the input stream
+	 */
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	/**
 	 * Creates the contents.
-	 *
+	 * 
 	 * @param SubmitTransactionData
 	 *            the txn data
 	 * @return the IndexHtm contents as string
@@ -151,20 +160,12 @@ public class IndexHtm {
 				title = XdsUtil.createXdmDocName(xdsDoc, i);
 			}
 			contentsStr = contentsStr + "<li>\n";
-			contentsStr = contentsStr.concat("Document " + i + ": " + "<a target=\"_blank\" href=\""
-					+ XdsUtil.createXdmDocPathAndName(xdsDoc, i) + "\">" + title + "</a>\n");
+			contentsStr = contentsStr.concat("Document " + i + ": "
+					+ "<a target=\"_blank\" href=\"" + XdsUtil.createXdmDocPathAndName(xdsDoc, i)
+					+ "\">" + title + "</a>\n");
 			contentsStr = contentsStr + "</li>\n";
 		}
 		contentsStr = contentsStr + "</ul>\n";
 		return contentsStr;
-	}
-
-	/**
-	 * Returns the content of the INDEX.HTM as InputStream object
-	 *
-	 * @return the input stream
-	 */
-	public InputStream getInputStream() {
-		return inputStream;
 	}
 }

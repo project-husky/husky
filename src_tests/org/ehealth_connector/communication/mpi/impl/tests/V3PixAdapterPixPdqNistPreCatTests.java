@@ -46,8 +46,8 @@ import ca.uhn.fhir.model.primitive.DateDt;
  * IP Address: provided by test tool Port Number: V3 Message (Non Secure: 9090 )
  * 
  * ATTENTION: You need to start the testtool and need to get the parameters from
- * webpage otherwise the test will not run through, you need also to remove
- * the @Ignore to perform the tests directly
+ * webpage otherwise the test will not run through, you need also to remove the @Ignore
+ * to perform the tests directly
  */
 @Ignore
 public class V3PixAdapterPixPdqNistPreCatTests {
@@ -86,10 +86,9 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	public void ITI44SourceFeedTest() {
 
 		log.debug("ITI44SourceFeedTest with ipAdress Target " + ipAddress);
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress
+				+ ":9090"), null, senderApplicationOid, null, applicationName, facilityName,
+				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		// ALPHA ALAN
@@ -128,10 +127,9 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	public void ITI44SourceMergeTest() {
 		log.debug("ITI44SourceMergeTest with ipAdress Target " + ipAddress);
 
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress
+				+ ":9090"), null, senderApplicationOid, null, applicationName, facilityName,
+				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		// LINCOLN MARY
@@ -220,10 +218,9 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 	@Test
 	public void ITI44SourceUpdateTest() {
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress
+				+ ":9090"), null, senderApplicationOid, null, applicationName, facilityName,
+				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		// TAU TERI

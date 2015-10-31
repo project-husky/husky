@@ -77,12 +77,12 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *            <div class="en">trade name of vaccine</div>
-	 *            <div class="de">Handelsname des Impfstoffes</div>
+	 *            <div class="en">trade name of vaccine</div> <div
+	 *            class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *            <div class="en">GTIN, GLN or swissINDEX.</div>
-	 *            <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID
-	 *            MUSS ein GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *            <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *            class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *            ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * 
 	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 */
@@ -101,12 +101,12 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * Immunization Element für jedes Antigen je einmal angegeben werden.</div>
 	 * 
 	 * @param tradeNameOfVaccine
-	 *            <div class="en">trade name of vaccine</div>
-	 *            <div class="de">Handelsname des Impfstoffes</div>
+	 *            <div class="en">trade name of vaccine</div> <div
+	 *            class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *            <div class="en">GTIN, GLN or swissINDEX.</div>
-	 *            <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID
-	 *            MUSS ein GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *            <div class="en">GTIN, GLN or swissINDEX.</div> <div
+	 *            class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *            ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * @param whoAtcCode
 	 *            <div class="en">who atc code</div>
 	 */
@@ -134,8 +134,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	}
 
 	/**
-	 * <div class="en">Adds the manufactured material translation.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Adds the manufactured material translation.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param codedId
 	 *            das codedId Objekt welches gesetzt wird
@@ -195,9 +195,9 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 			for (II id : getManufacturedProduct().getIds()) {
 				if (id.getRoot() != null && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())
 						|| id.getRoot() != null
-								&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId())
+						&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId())
 						|| id.getRoot() != null
-								&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+						&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 					Identificator ide = new Identificator(id);
 					return ide;
 				}
@@ -289,8 +289,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 */
 	public void setManufacturer(Organization organization) {
 		if (this.getManufacturedProduct() != null) {
-			getManufacturedProduct()
-					.setManufacturerOrganization(organization.copyMdhtOrganization());
+			getManufacturedProduct().setManufacturerOrganization(
+					organization.copyMdhtOrganization());
 		}
 	}
 
@@ -332,7 +332,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured material.
-	 *
+	 * 
 	 * @return the manufactured material
 	 */
 	private Material getManufacturedMaterial() {
@@ -344,7 +344,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured product.
-	 *
+	 * 
 	 * @return the manufactured product
 	 */
 	private ManufacturedProduct getManufacturedProduct() {

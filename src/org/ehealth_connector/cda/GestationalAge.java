@@ -72,10 +72,10 @@ public class GestationalAge extends CodedResults {
 	 * Instantiates a new gestational age.
 	 * 
 	 * @param codedResultsSection
-	 *          <div class="en">Instantiates the object on the basis of an MDHT
-	 *          CodedResultsSection</div><div class="de">Instantiiert das Objekt
-	 *          auf Basis einer MDHT CodedResultsSection</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Instantiates the object on the basis of an
+	 *            MDHT CodedResultsSection</div><div class="de">Instantiiert das
+	 *            Objekt auf Basis einer MDHT CodedResultsSection</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public GestationalAge(CodedResultsSection codedResultsSection) {
 		crs = codedResultsSection;
@@ -89,10 +89,10 @@ public class GestationalAge extends CodedResults {
 	 * Instantiates a new gestational age.
 	 * 
 	 * @param days
-	 *          <div class="en">gestation age in days (not in weeks AND
-	 *          days)</div> <div class="de">Gestationsalter in Tagen (nicht in
-	 *          Wochen UND Tagen)</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *            <div class="en">gestation age in days (not in weeks AND
+	 *            days)</div> <div class="de">Gestationsalter in Tagen (nicht in
+	 *            Wochen UND Tagen)</div> <div class="fr"></div> <div
+	 *            class="it"></div>
 	 */
 	public GestationalAge(int days) {
 		this(days / 7, days % 7);
@@ -102,15 +102,17 @@ public class GestationalAge extends CodedResults {
 	 * Instantiates a new gestational age.
 	 * 
 	 * @param weeks
-	 *          <div class="en">gestational age in weeks and days. This parameter
-	 *          represents the weeks.</div> <div class="de">Gestationsalter in
-	 *          Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen
-	 *          an.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">gestational age in weeks and days. This
+	 *            parameter represents the weeks.</div> <div
+	 *            class="de">Gestationsalter in Wochen und Tagen. Dieser
+	 *            Parameter gibt die Anzahl der Wochen an.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param weeksDays
-	 *          <div class="en">gestational age in weeks and days. This parameter
-	 *          represents the days.</div> <div class="de">Gestationsalter in
-	 *          Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage
-	 *          an.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">gestational age in weeks and days. This
+	 *            parameter represents the days.</div> <div
+	 *            class="de">Gestationsalter in Wochen und Tagen. Dieser
+	 *            Parameter gibt die Anzahl der Tage an.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public GestationalAge(int weeks, int weeksDays) {
 		// create and add the MDHT Objects to the section
@@ -154,10 +156,10 @@ public class GestationalAge extends CodedResults {
 	/**
 	 * Gets the absolute days.
 	 * 
-	 * @return <div class="en">Gets the gestational age in absolute days (without
-	 *         weeks)</div><div class="de">Gibt das Gestationsalter in absoluten
-	 *         Tagen (ohne Wochen) zurück.</div> <div class="fr"></div> <div
-	 *         class="it"></div>
+	 * @return <div class="en">Gets the gestational age in absolute days
+	 *         (without weeks)</div><div class="de">Gibt das Gestationsalter in
+	 *         absoluten Tagen (ohne Wochen) zurück.</div> <div
+	 *         class="fr"></div> <div class="it"></div>
 	 */
 	public int getAbsoluteDays() {
 		return (getWeeksOfWeeksAndDays() * 7) + getDaysOfWeeksAndDays();
@@ -182,8 +184,8 @@ public class GestationalAge extends CodedResults {
 	 * Gets the days of weeks and days.
 	 * 
 	 * @return <div class="en">the gestational age in weeks and days. Gets the
-	 *         days.</div><div class="de">Das Gestationsalter in Wochen und Tagen.
-	 *         Hier wird die Anzahl der Tage zurückgegeben.</div> <div
+	 *         days.</div><div class="de">Das Gestationsalter in Wochen und
+	 *         Tagen. Hier wird die Anzahl der Tage zurückgegeben.</div> <div
 	 *         class="fr"></div> <div class="it"></div>
 	 */
 	public int getDaysOfWeeksAndDays() {
@@ -245,10 +247,10 @@ public class GestationalAge extends CodedResults {
 	 * Sets the asbolute days.
 	 * 
 	 * @param days
-	 *          <div class="en">sets the gestational age in absolute days (not in
-	 *          weeks AND days)</div> <div class="de">Setzt das Gestationsalter in
-	 *          absoluten Tagen (nicht in Wochen UND Tagen).</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">sets the gestational age in absolute days (not
+	 *            in weeks AND days)</div> <div class="de">Setzt das
+	 *            Gestationsalter in absoluten Tagen (nicht in Wochen UND
+	 *            Tagen).</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setAsboluteDays(int days) {
 		setWeeksAndDays(days / 7, days % 7);
@@ -258,16 +260,16 @@ public class GestationalAge extends CodedResults {
 	 * Sets the days of weeks and days.
 	 * 
 	 * @param weeks
-	 *          <div class="en">the gestational age in weeks and days. Sets the
-	 *          weeks.</div> <div class="de">Das Gestationsalter in Wochen und
-	 *          Tagen. Hier wird die Anzahl der Wochen gesetzt.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the gestational age in weeks and days. Sets
+	 *            the weeks.</div> <div class="de">Das Gestationsalter in Wochen
+	 *            und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param days
-	 *          <div class="en">the gestational age in weeks and days. Sets the
-	 *          days.</div> <div class="de">Das Gestationsalter in Wochen und
-	 *          Tagen. Hier wird die Anzahl der Tage gesetzt.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the gestational age in weeks and days. Sets
+	 *            the days.</div> <div class="de">Das Gestationsalter in Wochen
+	 *            und Tagen. Hier wird die Anzahl der Tage gesetzt.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setWeeksAndDays(int weeks, int days) {
 		mDays.getValues().clear();
@@ -301,10 +303,10 @@ public class GestationalAge extends CodedResults {
 	 * Sets the days of weeks and days.
 	 * 
 	 * @param days
-	 *          <div class="en">the gestational age in weeks and days. Sets the
-	 *          days.</div> <div class="de">Das Gestationsalter in Wochen und
-	 *          Tagen. Hier wird die Anzahl der Tage gesetzt.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the gestational age in weeks and days. Sets
+	 *            the days.</div> <div class="de">Das Gestationsalter in Wochen
+	 *            und Tagen. Hier wird die Anzahl der Tage gesetzt.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	private void setDaysOfWeeksAndDays(int days) {
 		PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
@@ -317,10 +319,10 @@ public class GestationalAge extends CodedResults {
 	 * Sets the weeks of weeks and days.
 	 * 
 	 * @param weeks
-	 *          <div class="en">the gestational age in weeks and days. Sets the
-	 *          weeks.</div> <div class="de">Das Gestationsalter in Wochen und
-	 *          Tagen. Hier wird die Anzahl der Wochen gesetzt.</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the gestational age in weeks and days. Sets
+	 *            the weeks.</div> <div class="de">Das Gestationsalter in Wochen
+	 *            und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	private void setWeeksOfWeeksAndDays(int weeks) {
 		// create and the values, ids and effectiveTime for weeks and days

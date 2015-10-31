@@ -41,7 +41,7 @@ import org.xml.sax.InputSource;
  * The design enables that all derived convenience objects can use the
  * underlying mdht model but the exposing api of the classes is independent of
  * the mdht implementation
- *
+ * 
  * @param <E>
  *            the model type to provide for implemting the facade to it
  */
@@ -55,7 +55,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
-	 *
+	 * 
 	 * @param mdht
 	 *            the mdht model object
 	 */
@@ -65,7 +65,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/**
 	 * Instantiates a new facade object for the provided model.
-	 *
+	 * 
 	 * @param mdht
 	 *            the mdht object which a facade is provided
 	 * @param templateIdRoot
@@ -89,7 +89,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/**
 	 * returns the text of a Level2 section specified by a contendId
-	 *
+	 * 
 	 * @param section
 	 *            the section
 	 * @param reference
@@ -146,7 +146,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	/**
 	 * returns the object serialized as a DOM document which can be used in
 	 * testing for correct xml model generation
-	 *
+	 * 
 	 * @return the document
 	 */
 	public Document getDocument() {
@@ -167,7 +167,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/**
 	 * Copy.
-	 *
+	 * 
 	 * @return copies the object.
 	 */
 	protected E copy() {
@@ -176,7 +176,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/**
 	 * Gets the mdht object.
-	 *
+	 * 
 	 * @return the mdht
 	 */
 	protected E getMdht() {

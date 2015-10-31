@@ -1,6 +1,6 @@
 package org.ehealth_connector.cda.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -53,7 +53,7 @@ public class CdaUtilTest extends TestUtils {
 		organization1 = createOrganization1();
 		address1 = createAddress1();
 	}
-	
+
 	@Test
 	public void setTest() {
 		assertEquals(code1, this.code1);

@@ -31,11 +31,60 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  */
 public class Identificator {
 
+	private II mII;
+
+	/**
+	 * <div class="de">Creates a new Identificator</div> <div
+	 * class="de">Erstellt einen neuen Identifikator.</div>
+	 * 
+	 * @param oid
+	 *            <div class="en">OID of the domain, in which the local id is
+	 *            uniqu</div><div class="de">OID der Domäne, in welcher die
+	 *            lokale ID eindeutig ist</div>
+	 * @param id
+	 *            lokale ID
+	 */
+	public Identificator(IdentityDomain oid, String id) {
+		mII = DatatypesFactory.eINSTANCE.createII();
+		setRoot(oid.getCodeSystemId());
+		setExtension(id);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new identificator.</div> <div
+	 * class="de">Instantiiert einen neuen Identificator</div>
+	 * 
+	 * @param ii
+	 * <br>
+	 *            <div class="de"> ii</div> <div class="fr"></div> <div
+	 *            class="it"></div>
+	 */
+	public Identificator(II ii) {
+		mII = ii;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new identificator.</div> <div
+	 * class="de">Instantiiert einen neuen Identificator</div>
+	 * 
+	 * @param oid
+	 *            <div class="en">OID of the domain, in which the local id is
+	 *            uniqu</div><div class="de">OID der Domäne, in welcher die
+	 *            lokale ID eindeutig ist</div>
+	 * @param id
+	 *            local id
+	 */
+	public Identificator(String oid, String id) {
+		mII = DatatypesFactory.eINSTANCE.createII();
+		setRoot(oid);
+		setExtension(id);
+	}
+
 	/**
 	 * <div class="en">Converts a code to an identificator.</div> <div
 	 * class="de">Konvertiert einen Code in ein Identificator Objekt</div> <div
 	 * class="fr"></div> <div class="it"></div>
-	 *
+	 * 
 	 * @param code
 	 * <br>
 	 *            <div class="en"> code</div>
@@ -53,7 +102,7 @@ public class Identificator {
 	 * <div class="en">Gets the identificator with the given root id from a list
 	 * of ids.</div> <div class="de">Liefert identificator mit der gegebenen
 	 * root id aus der liste der Ids.</div>
-	 *
+	 * 
 	 * @param iiList
 	 * <br>
 	 *            <div class="de"> ii list</div>
@@ -70,55 +119,6 @@ public class Identificator {
 			}
 		}
 		return null;
-	}
-
-	private II mII;
-
-	/**
-	 * <div class="de">Creates a new Identificator</div> <div
-	 * class="de">Erstellt einen neuen Identifikator.</div>
-	 *
-	 * @param oid
-	 *            <div class="en">OID of the domain, in which the local id is
-	 *            uniqu</div><div class="de">OID der Domäne, in welcher die
-	 *            lokale ID eindeutig ist</div>
-	 * @param id
-	 *            lokale ID
-	 */
-	public Identificator(IdentityDomain oid, String id) {
-		mII = DatatypesFactory.eINSTANCE.createII();
-		setRoot(oid.getCodeSystemId());
-		setExtension(id);
-	}
-
-	/**
-	 * <div class="en">Instantiates a new identificator.</div> <div
-	 * class="de">Instantiiert einen neuen Identificator</div>
-	 *
-	 * @param ii
-	 * <br>
-	 *            <div class="de"> ii</div> <div class="fr"></div> <div
-	 *            class="it"></div>
-	 */
-	public Identificator(II ii) {
-		mII = ii;
-	}
-
-	/**
-	 * <div class="en">Instantiates a new identificator.</div> <div
-	 * class="de">Instantiiert einen neuen Identificator</div>
-	 *
-	 * @param oid
-	 *            <div class="en">OID of the domain, in which the local id is
-	 *            uniqu</div><div class="de">OID der Domäne, in welcher die
-	 *            lokale ID eindeutig ist</div>
-	 * @param id
-	 *            local id
-	 */
-	public Identificator(String oid, String id) {
-		mII = DatatypesFactory.eINSTANCE.createII();
-		setRoot(oid);
-		setExtension(id);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class Identificator {
 
 	/**
 	 * Gets the extension of the id
-	 *
+	 * 
 	 * @return ID
 	 */
 	public String getExtension() {
@@ -180,7 +180,7 @@ public class Identificator {
 	/**
 	 * <div class="en">Gets the MDHT II object.</div> <div class="de">Liefert
 	 * das MDHT II Objekt.</div>
-	 *
+	 * 
 	 * @return II <div class="en">the II object</div>
 	 */
 	public II getIi() {
@@ -189,7 +189,7 @@ public class Identificator {
 
 	/**
 	 * Gets the OID (the domain id)
-	 *
+	 * 
 	 * @return OID
 	 */
 	public String getRoot() {
@@ -213,7 +213,7 @@ public class Identificator {
 
 	/**
 	 * Sets the extension
-	 *
+	 * 
 	 * @param extension
 	 *            Extension ID
 	 */
@@ -225,7 +225,7 @@ public class Identificator {
 
 	/**
 	 * Sets the OID of the domain
-	 *
+	 * 
 	 * @param root
 	 *            OID of the domain
 	 */

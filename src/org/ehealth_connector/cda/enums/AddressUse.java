@@ -43,24 +43,6 @@ public enum AddressUse {
 	/** <div class="de">Mobil</div> <div class="fr"></div>. */
 	MOBILE("MC", "Mobile");
 
-	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * 
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static AddressUse getEnum(String code) {
-		for (AddressUse x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
 	/** The Constant PRIVATE_CODE. */
 	public static final String PRIVATE_CODE = "HP";
 
@@ -75,8 +57,8 @@ public enum AddressUse {
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "AddressUse";
-	private String code;
 
+	private String code;
 	private String displayName;
 
 	/**
@@ -94,6 +76,24 @@ public enum AddressUse {
 	AddressUse(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * 
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static AddressUse getEnum(String code) {
+		for (AddressUse x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	/**

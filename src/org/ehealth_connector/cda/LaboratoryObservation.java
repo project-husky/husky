@@ -310,15 +310,6 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * Get the ids.
-	 * 
-	 * @return the ids
-	 */
-	public List<Identificator> getIds() {
-		return Util.convertIds(mLaboratoryObservation.getIds());
-	}
-
-	/**
 	 * Gets the specified id value based on its code system.
 	 * 
 	 * @param codeSystem
@@ -333,6 +324,15 @@ public class LaboratoryObservation {
 			}
 		}
 		return ident;
+	}
+
+	/**
+	 * Get the ids.
+	 * 
+	 * @return the ids
+	 */
+	public List<Identificator> getIds() {
+		return Util.convertIds(mLaboratoryObservation.getIds());
 	}
 
 	/**

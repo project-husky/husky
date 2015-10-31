@@ -30,24 +30,6 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	KOS_DOKUMENT("urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59", "KOS Dokument");
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * 
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static FormatCode getEnum(String code) {
-		for (FormatCode x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * <div class="de">Code für eImpfdossier</div> <div class="fr">Code de
 	 * </div> <div class="it">Code per </div>
 	 */
@@ -104,6 +86,24 @@ public enum FormatCode implements CodedMetadataEnumInterface {
 	private FormatCode(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * 
+	 * @param code
+	 * <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static FormatCode getEnum(String code) {
+		for (FormatCode x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 	/**

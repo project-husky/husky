@@ -55,7 +55,7 @@ public class CodedResults {
 	 * Instantiates a new Simple Observation
 	 * 
 	 * @param so
-	 *          the simple observation
+	 *            the simple observation
 	 * 
 	 */
 	public CodedResults(SimpleObservation so) {
@@ -73,7 +73,7 @@ public class CodedResults {
 	 * Adds a Simple Observation
 	 * 
 	 * @param so
-	 *          the simple observation
+	 *            the simple observation
 	 */
 	public void addSimpleObservation(SimpleObservation so) {
 		crs.addObservation(so);

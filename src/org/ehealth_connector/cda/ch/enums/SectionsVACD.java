@@ -19,16 +19,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum SectionsVACD {
 	HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni",
-			"Immunizations"), ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste", "Liste des problèmes",
-			"Elenco dei problemi", "Active Problems"), HISTORY_OF_PAST_ILLNESS("11348-0", "hipi",
-			"Bisherige Krankheiten", "Antécédants médicaux", "Storia medica", "History of Past Illness"), ALLERGIES_REACTIONS(
-			"48765-2", "ar", "Allergien und Unverträglichkeiten",
-			"Allergies et autres réactions indésirables", "Allergie e altre reazioni avverse",
-			"Allergies and Other Adverse Reactions"), CODED_RESULTS("30954-2", "cr",
-			"Codierte Resultate", "fr: TOTRANSLATE", "it: TOTRANSLATE", "Coded Results"), SEROLOGY_STUDIES(
-			"18727-8", "sst", "Laborbefund", "fr: TOTRANSLATE", "it: TOTRANSLATE",
-			"Laboratory Specialty Section"), HISTORY_OF_PREGNANCIES("10162-6", "hop",
-			"Schwangerschaften", "Grossesses", "Gravidanze", "Pregnancy History"), TREATMENT_PLAN(
+			"Immunizations"), ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste",
+			"Liste des problèmes", "Elenco dei problemi", "Active Problems"), HISTORY_OF_PAST_ILLNESS(
+			"11348-0", "hipi", "Bisherige Krankheiten", "Antécédants médicaux", "Storia medica",
+			"History of Past Illness"), ALLERGIES_REACTIONS("48765-2", "ar",
+			"Allergien und Unverträglichkeiten", "Allergies et autres réactions indésirables",
+			"Allergie e altre reazioni avverse", "Allergies and Other Adverse Reactions"), CODED_RESULTS(
+			"30954-2", "cr", "Codierte Resultate", "fr: TOTRANSLATE", "it: TOTRANSLATE",
+			"Coded Results"), SEROLOGY_STUDIES("18727-8", "sst", "Laborbefund", "fr: TOTRANSLATE",
+			"it: TOTRANSLATE", "Laboratory Specialty Section"), HISTORY_OF_PREGNANCIES("10162-6",
+			"hop", "Schwangerschaften", "Grossesses", "Gravidanze", "Pregnancy History"), TREATMENT_PLAN(
 			"18776-5", "tp", "Impfplan", "fr: TOTRANSLATE", "it: TOTRANSLATE",
 			"Immunization Recommendations"), REMARKS("48767-8", "k", "Kommentar", "Commentaire",
 			"Osservazione", "Comment");

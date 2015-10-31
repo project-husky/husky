@@ -54,6 +54,16 @@ public class Comment extends SectionAnnotationCommentEntry {
 	}
 
 	/**
+	 * Gets the text.
+	 * 
+	 * @return the text
+	 */
+	@Override
+	public String getAnnotationCommentText() {
+		return this.getMdht().getText().getText();
+	}
+
+	/**
 	 * Gets the mdht comment.
 	 * 
 	 * @return the mdht comment
@@ -63,20 +73,12 @@ public class Comment extends SectionAnnotationCommentEntry {
 	}
 
 	/**
-	 * Gets the text.
-	 * 
-	 * @return the text
-	 */
-	public String getAnnotationCommentText() {
-		return this.getMdht().getText().getText();
-	}
-
-	/**
 	 * Sets the text.
 	 * 
 	 * @param text
 	 *            the new text
 	 */
+	@Override
 	public void setAnnotationCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
 	}

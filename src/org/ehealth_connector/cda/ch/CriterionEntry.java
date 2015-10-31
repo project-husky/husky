@@ -39,9 +39,10 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 		super(CHFactory.eINSTANCE.createCriterionEntry().init());
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().clear();
-		this.getMdht().getTemplateIds().add(
-				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category")
-						.getIi());
+		this.getMdht()
+				.getTemplateIds()
+				.add(new Identificator("2.16.756.5.30.1.1.1.1.3.5.1",
+						"CDA-CH.VACD.Body.MediL3.Category").getIi());
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Gets the recommendation category for the immunization
-	 *
+	 * 
 	 * @return the rec category
 	 */
 	public CdaChVacdRecCategories getRecCategory() {
@@ -89,7 +90,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Gets the rec category code.
-	 *
+	 * 
 	 * @return the rec category code
 	 */
 	public Code getRecCategoryCode() {
@@ -101,7 +102,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Gets the text reference pointing to the narrative text in the section.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	public String getTextReference() {
@@ -122,7 +123,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Sets the recommendation category.
-	 *
+	 * 
 	 * @param recCategory
 	 *            the recommendation category
 	 * @param languageCode
@@ -138,7 +139,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Sets the recommendation code.
-	 *
+	 * 
 	 * @param code
 	 *            the new recommendation category code
 	 */
@@ -148,7 +149,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Sets the text reference.
-	 *
+	 * 
 	 * @param value
 	 *            the new text reference, # for local reference has to be
 	 *            included

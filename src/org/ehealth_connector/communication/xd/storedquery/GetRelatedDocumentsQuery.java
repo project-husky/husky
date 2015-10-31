@@ -11,7 +11,7 @@ import org.openhealthtools.ihe.xds.metadata.ParentDocumentRelationshipType;
 public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor.
-	 *
+	 * 
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
@@ -37,7 +37,7 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA profile extension of this query.
-	 *
+	 * 
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
@@ -67,7 +67,7 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA profile extension of this query.
-	 *
+	 * 
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
