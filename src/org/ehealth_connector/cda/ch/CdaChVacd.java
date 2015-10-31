@@ -1162,7 +1162,7 @@ public class CdaChVacd extends CdaCh<VACD> {
 		RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
 		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
 		ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
-		parentDocument.setSetId(documentId.getIi());
+		parentDocument.getIds().add(documentId.getIi());
 		relatedDocument.setParentDocument(parentDocument);
 		this.getMdht().getRelatedDocuments().add(relatedDocument);
 	}
