@@ -124,7 +124,8 @@ public class Util {
 	 * Checks to see if the list has at least one element.
 	 * 
 	 * @param l
-	 * @return false if l is null, if l.size() < 1 or if l.get(0) is null.
+	 *            the list
+	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
 	@SuppressWarnings("rawtypes")

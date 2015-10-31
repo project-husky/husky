@@ -827,7 +827,7 @@ public class CdaChVacd extends CdaCh<VACD> {
 			RelatedDocument relatedDocument = getMdht().getRelatedDocuments().get(0);
 			if (relatedDocument != null && relatedDocument.getParentDocument() != null) {
 				ParentDocument parentDocument = relatedDocument.getParentDocument();
-				return new Identificator(parentDocument.getSetId());
+				return new Identificator(parentDocument.getIds().get(0));
 			}
 		}
 		return null;

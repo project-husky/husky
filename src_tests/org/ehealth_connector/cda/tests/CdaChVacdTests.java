@@ -23,7 +23,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -101,8 +100,8 @@ public class CdaChVacdTests {
 		assertEquals(identificator, vacd.getDocumentToReplaceIdentifier());
 
 		Document document = vacd.getDocument();
-		XPathExpression expr = xpath.compile(
-				"clinicaldocument/relatedDocument[@typeCode='RPLC']/parentDocument/setId[@root='root' and @extension='ext']");
+		XPathExpression expr = xpath
+				.compile("clinicaldocument/relatedDocument[@typeCode='RPLC']/parentDocument/id[@root='root' and @extension='ext']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -119,7 +118,7 @@ public class CdaChVacdTests {
 	}
 
 	private VACD deserializeVacDirect(String document) throws Exception {
-		InputStream stream = new ByteArrayInputStream(document.getBytes(StandardCharsets.UTF_8));
+		InputStream stream = new ByteArrayInputStream(document.getBytes());
 		ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getVACD());
 		return (VACD) clinicalDocument;
 	}
