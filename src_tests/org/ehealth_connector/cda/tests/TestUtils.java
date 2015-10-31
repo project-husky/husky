@@ -40,52 +40,6 @@ public class TestUtils {
 
 	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
 
-	public String startDateString;
-
-	public String endDateString;
-
-	public Date startDate;
-
-	public Date endDate;
-
-	public String ts1;
-
-	public String ts2;
-
-	public String ts3;
-
-	public String ts4;
-
-	public String ts5;
-
-	public String numS1;
-
-	public String numS2;
-	public Double number;
-	public String telS1;
-	public String telS2;
-
-	public Code code1;
-	public Code code2;
-	public Code loincCode;
-	public Code problemCode;
-	public Value value1;
-	public Value value2;
-	public Identificator id1;
-	public Identificator id2;
-	public Name name1;
-	public Name name2;
-	public Author author1;
-	public Author author2;
-	public Organization organization1;
-	public Code gtinCode;
-	public Telecoms telecoms1;
-
-	public Address address1;
-
-	public TestUtils() {
-	}
-
 	public static String generateString(int length) {
 		Random rng = new Random();
 		String characters = "abcëÙdÀÿeŒfúgËÛùhijàÊkÇlŸmœ�?çÚnÔÈoæûèp»ÙÈqùôêîïÆrsâÉtéÎuvwèxylïäüìöÄ�?ÒÜÂÖÌ?ßÓ/òó:#\\í�?~*É'é,´Àà";
@@ -190,22 +144,22 @@ public class TestUtils {
 		return true;
 	}
 
+	public static boolean isEqual(Patient p1, Patient p2) {
+		if (!isEqual(p1.getName(), p2.getName()))
+			return false;
+		if (!isEqual(p1.getAdministrativeGenderCode().getCode(), p2.getAdministrativeGenderCode()
+				.getCode()))
+			return false;
+		if (p1.getBirthday().getTime() != p1.getBirthday().getTime())
+			return false;
+		return true;
+	}
+
 	public static boolean isEqual(ProblemEntry p1, ProblemEntry p2) {
 		if (p1 == null) {
 			return false;
 		}
 		return p1.equals(p2);
-	}
-
-	public static boolean isEqual(Patient p1, Patient p2) {
-		if (!isEqual(p1.getName(), p2.getName()))
-			return false;
-		if (!isEqual(p1.getAdministrativeGenderCode().getCode(),
-				p2.getAdministrativeGenderCode().getCode()))
-			return false;
-		if (p1.getBirthday().getTime() != p1.getBirthday().getTime())
-			return false;
-		return true;
 	}
 
 	public static boolean isEqual(Telecoms t1, Telecoms t2) {
@@ -255,6 +209,55 @@ public class TestUtils {
 		}
 
 		return true;
+	}
+
+	public String startDateString;
+	public String endDateString;
+
+	public Date startDate;
+	public Date endDate;
+	public String ts1;
+	public String ts2;
+	public String ts3;
+	public String ts4;
+	public String ts5;
+	public String numS1;
+	public String numS2;
+	public Double number;
+	public String telS1;
+	public String telS2;
+	public Code code1;
+	public Code code2;
+	public Code loincCode;
+	public Code problemCode;
+
+	public Value value1;
+
+	public Value value2;
+
+	public Identificator id1;
+
+	public Identificator id2;
+
+	public Name name1;
+
+	public Name name2;
+
+	public Author author1;
+
+	public Author author2;
+
+	public Patient patient1;
+
+	public Organization organization1;
+
+	public Code gtinCode;
+
+	public Telecoms telecoms1;
+
+	public Address address1;
+
+	public TestUtils() {
 	}
 
 	public Address createAddress1() {
@@ -317,6 +320,10 @@ public class TestUtils {
 		return o;
 	}
 
+	public Patient createPatient() {
+		return new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
+	}
+
 	public Performer createPerformer1() {
 		Performer p = new Performer(createName1(), numS1);
 		return p;
@@ -325,6 +332,10 @@ public class TestUtils {
 	public Performer createPerformer2() {
 		Performer p = new Performer(createName2(), numS2);
 		return p;
+	}
+
+	public Date createStartDate() {
+		return DateUtil.date("15.12.2014");
 	}
 
 	public Telecoms createTelecoms1() {
@@ -346,13 +357,5 @@ public class TestUtils {
 	protected Value createValue2() {
 		Value value = new Value(ts1, ts2);
 		return value;
-	}
-
-	public Date createStartDate() {
-		return DateUtil.date("15.12.2014");
-	}
-
-	public Patient createPatient() {
-		return new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
 	}
 }

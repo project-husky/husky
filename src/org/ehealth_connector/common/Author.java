@@ -125,6 +125,29 @@ public class Author {
 	}
 
 	/**
+	 * Erstellt einen neuen Autor der dem übergebenden Patienten entspricht.
+	 * 
+	 * @param patientAsAuthor
+	 *            the patient, who acts as author
+	 */
+	public Author(Patient patientAsAuthor) {
+		this();
+		if (patientAsAuthor.getMdhtPerson() != null) {
+			mPerson = patientAsAuthor.copyMdhtPerson();
+			mAsAuthor.setAssignedPerson(mPerson);
+		}
+		if (patientAsAuthor.getMdhtPatient().getNames() != null
+				&& patientAsAuthor.getMdhtPatient().getNames().size() > 0) {
+			mPerson.getNames().addAll(patientAsAuthor.getMdhtPatient().getNames());
+		}
+
+		if (patientAsAuthor.getIds() != null && patientAsAuthor.getIds().size() > 0) {
+			mAsAuthor.getIds().addAll(patientAsAuthor.copyMdhtPatientRole().getIds());
+		}
+		this.setAuthorIsPatient(true);
+	}
+
+	/**
 	 * Weist dem Autor eine Postadresse zu.
 	 * 
 	 * @param address
@@ -434,7 +457,7 @@ public class Author {
 	 * Sets the author patient.
 	 * 
 	 * @param isAuthorPatient
-	 *            true if the author ist not a doctor but the patient itself
+	 *            true if the author is not a doctor but the patient himself
 	 */
 	public void setAuthorIsPatient(boolean isAuthorPatient) {
 		if (isAuthorPatient) {

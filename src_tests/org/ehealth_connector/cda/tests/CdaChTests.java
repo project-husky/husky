@@ -74,6 +74,7 @@ public class CdaChTests extends TestUtils {
 		telecoms1 = createTelecoms1();
 		name1 = createName1();
 		name2 = createName2();
+		patient1 = createPatient();
 		author1 = createAuthor1();
 		author2 = createAuthor2();
 		organization1 = createOrganization1();
@@ -94,26 +95,30 @@ public class CdaChTests extends TestUtils {
 		a.setGln(numS1);
 		a.setGln(numS2);
 		a.setTime(endDate);
-		
+
 		a.setRoleFunction(code1);
 		assertTrue(isEqual(code1, a.getRoleFunction()));
-		
+
 		a.setSpeciality(code2);
 		assertTrue(isEqual(code2, a.getSpeciality()));
+
+		Author b = new Author(patient1);
+		assertTrue(isEqual(name1, b.getName()));
 	}
-	
-	@Test 
+
+	@Test
 	public void testAuthorCd() {
 		org.ehealth_connector.common.ch.AuthorCh b = new org.ehealth_connector.common.ch.AuthorCh();
-		
+
 		b.addId(id2);
 		assertTrue(isEqual(id2, b.getIds().get(0)));
-		
+
 		b.setRoleFunction(AuthorRole.ANDERE);
 		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
-		
+
 		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
-		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b.getSpecialityEnum());
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
+				b.getSpecialityEnum());
 	}
 
 	@Test
@@ -140,7 +145,8 @@ public class CdaChTests extends TestUtils {
 		c.setTimestamp(startDate);
 		assertEquals(startDate.getTime(), c.getTimestamp().getTime());
 		c.setConfidentialityCode(Confidentiality.RESTRICED);
-		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c.getConfidentialityCode().getCode()));
+		assertTrue(isEqual(Confidentiality.RESTRICED.getCode(), c.getConfidentialityCode()
+				.getCode()));
 		// doc id root
 		// assertEquals("2.16.756.5.30.1.1.1.1", c.getId().getRoot());
 		// set Version
