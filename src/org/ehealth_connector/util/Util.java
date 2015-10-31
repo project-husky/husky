@@ -99,9 +99,10 @@ public class Util {
 	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
-	 * The Constant TELECOMS_WEBSITE_PREFIX.
+	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order
+	 * to support http and https
 	 */
-	public static final String TELECOMS_WEBSITE_PREFIX = "http:";
+	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
 	/**
 	 * Adds the copy of a given section to a given structured body
