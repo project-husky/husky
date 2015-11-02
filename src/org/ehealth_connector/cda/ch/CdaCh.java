@@ -53,7 +53,9 @@ import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.Order;
+import org.openhealthtools.mdht.uml.cda.ParentDocument;
 import org.openhealthtools.mdht.uml.cda.Participant1;
+import org.openhealthtools.mdht.uml.cda.RelatedDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
@@ -63,6 +65,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
@@ -763,6 +766,45 @@ public abstract class CdaCh<EClinicalDocument extends ClinicalDocument> extends
 		getDoc().setTypeId(typeId);
 		typeId.setRoot("2.16.840.1.113883.1.3");
 		typeId.setExtension("POCD_HD000040");
+	}
+
+	/**
+	 * <div class="en">Specify the document which is replaced by this current
+	 * document (see e.g. &lt;CH-VACD-REPL&gt;)</div><div class="de"></div> <div
+	 * class="fr"></div>
+	 * 
+	 * @param documentId
+	 *            <div class="en">Identificator of replaced document</div>
+	 */
+	public void setDocumentToReplaceIdentifier(Identificator documentId) {
+		this.getMdht().getRelatedDocuments().clear();
+		RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
+		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
+		ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
+		parentDocument.getIds().add(documentId.getIi());
+		relatedDocument.setParentDocument(parentDocument);
+		this.getMdht().getRelatedDocuments().add(relatedDocument);
+	}
+
+	/**
+	 * <div class="en">Gets the identifier of the document which was replaced by
+	 * the current one (see e.g. &lt;CH-VACD-REPL&gt;)</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @return <div class="en">identifier of the document which was replaced by
+	 *         the current one</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public Identificator getDocumentToReplaceIdentifier() {
+		if (this.getMdht().getRelatedDocuments() != null
+				&& getMdht().getRelatedDocuments().size() > 0) {
+			RelatedDocument relatedDocument = getMdht().getRelatedDocuments().get(0);
+			if (relatedDocument != null && relatedDocument.getParentDocument() != null) {
+				ParentDocument parentDocument = relatedDocument.getParentDocument();
+				return new Identificator(parentDocument.getIds().get(0));
+			}
+		}
+		return null;
 	}
 
 }

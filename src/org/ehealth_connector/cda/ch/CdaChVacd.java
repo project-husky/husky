@@ -39,7 +39,6 @@ import org.ehealth_connector.cda.ch.textbuilder.LaboratoryObservationTextBuilder
 import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.util.Util;
@@ -47,11 +46,9 @@ import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.ParentDocument;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
-import org.openhealthtools.mdht.uml.cda.RelatedDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
@@ -75,7 +72,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -816,24 +812,6 @@ public class CdaChVacd extends CdaCh<VACD> {
 	}
 
 	/**
-	 * Gets the identifier of the document which has to be replace, see
-	 * &lt;CH-VACD-REPL&gt;
-	 * 
-	 * @return document identificator
-	 */
-	public Identificator getDocumentToReplaceIdentifier() {
-		if (this.getMdht().getRelatedDocuments() != null
-				&& getMdht().getRelatedDocuments().size() > 0) {
-			RelatedDocument relatedDocument = getMdht().getRelatedDocuments().get(0);
-			if (relatedDocument != null && relatedDocument.getParentDocument() != null) {
-				ParentDocument parentDocument = relatedDocument.getParentDocument();
-				return new Identificator(parentDocument.getIds().get(0));
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * <div class="en">Gets the immunization recommendations</div> <div
 	 * class="de">Liefert alle Impfempfehlungen zurück</div>
 	 * 
@@ -1118,53 +1096,6 @@ public class CdaChVacd extends CdaCh<VACD> {
 		}
 		getDoc().getRecordTargets().clear();
 		getDoc().getRecordTargets().add(destRecordTarget);
-	}
-
-	// /**
-	// * <div class="en">Stores the CDA document as XML file</div>
-	// * <div class="de">Speichert das CDA Dokument als XML Datei</div>
-	// *
-	// * @param fileName
-	// * file name (incl. path)
-	// * @throws Exception
-	// * the exception
-	// */
-	// @Override
-	// public void saveToFile(String fileName) throws Exception {
-	// final File file = new File(fileName);
-	// if (!file.exists()) {
-	// file.createNewFile();
-	// }
-	// final FileOutputStream oFile = new FileOutputStream(file, false);
-	//
-	// // create emf resource
-	// final CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE
-	// .createResource(URI.createURI(CDAPackage.eNS_URI));
-	//
-	// // add the document root to the resource
-	// docRoot = EcoreUtil.copy(super.getDocRoot());
-	// docRoot.setClinicalDocument(correctSectionSequence());
-	// resource.getContents().add(docRoot);
-	//
-	// // save resource to console
-	// resource.save(oFile, null);
-	// }
-
-	/**
-	 * specify the document which should be replaced by this document, see
-	 * &lt;CH-VACD-REPL&gt;
-	 * 
-	 * @param documentId
-	 *            Identificator of replaced document
-	 */
-	public void setDocumentToReplaceIdentifier(Identificator documentId) {
-		this.getMdht().getRelatedDocuments().clear();
-		RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
-		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
-		ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
-		parentDocument.getIds().add(documentId.getIi());
-		relatedDocument.setParentDocument(parentDocument);
-		this.getMdht().getRelatedDocuments().add(relatedDocument);
 	}
 
 	/**
