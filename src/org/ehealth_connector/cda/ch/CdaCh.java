@@ -362,6 +362,27 @@ public abstract class CdaCh<EClinicalDocument extends ClinicalDocument> extends
 		return this.docRoot;
 	}
 
+	/**
+	 * <div class="en">Gets the identifier of the document which was replaced by
+	 * the current one (see e.g. &lt;CH-VACD-REPL&gt;)</div> <div
+	 * class="de"></div> <div class="fr"></div>
+	 * 
+	 * @return <div class="en">identifier of the document which was replaced by
+	 *         the current one</div> <div class="de"></div> <div
+	 *         class="fr"></div>
+	 */
+	public Identificator getDocumentToReplaceIdentifier() {
+		if (this.getMdht().getRelatedDocuments() != null
+				&& getMdht().getRelatedDocuments().size() > 0) {
+			RelatedDocument relatedDocument = getMdht().getRelatedDocuments().get(0);
+			if (relatedDocument != null && relatedDocument.getParentDocument() != null) {
+				ParentDocument parentDocument = relatedDocument.getParentDocument();
+				return new Identificator(parentDocument.getIds().get(0));
+			}
+		}
+		return null;
+	}
+
 	public Identificator getId() {
 		if (getDoc().getId() != null) {
 			return new Identificator(getDoc().getId());
@@ -613,6 +634,24 @@ public abstract class CdaCh<EClinicalDocument extends ClinicalDocument> extends
 	}
 
 	/**
+	 * <div class="en">Specify the document which is replaced by this current
+	 * document (see e.g. &lt;CH-VACD-REPL&gt;)</div><div class="de"></div> <div
+	 * class="fr"></div>
+	 * 
+	 * @param documentId
+	 *            <div class="en">Identificator of replaced document</div>
+	 */
+	public void setDocumentToReplaceIdentifier(Identificator documentId) {
+		this.getMdht().getRelatedDocuments().clear();
+		RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
+		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
+		ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
+		parentDocument.getIds().add(documentId.getIi());
+		relatedDocument.setParentDocument(parentDocument);
+		this.getMdht().getRelatedDocuments().add(relatedDocument);
+	}
+
+	/**
 	 * <div class="en">Sets the id of the document</div> <div class="de">Weist
 	 * dem CDA Dokument eine id zu</div>
 	 * 
@@ -766,45 +805,6 @@ public abstract class CdaCh<EClinicalDocument extends ClinicalDocument> extends
 		getDoc().setTypeId(typeId);
 		typeId.setRoot("2.16.840.1.113883.1.3");
 		typeId.setExtension("POCD_HD000040");
-	}
-
-	/**
-	 * <div class="en">Specify the document which is replaced by this current
-	 * document (see e.g. &lt;CH-VACD-REPL&gt;)</div><div class="de"></div> <div
-	 * class="fr"></div>
-	 * 
-	 * @param documentId
-	 *            <div class="en">Identificator of replaced document</div>
-	 */
-	public void setDocumentToReplaceIdentifier(Identificator documentId) {
-		this.getMdht().getRelatedDocuments().clear();
-		RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
-		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
-		ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
-		parentDocument.getIds().add(documentId.getIi());
-		relatedDocument.setParentDocument(parentDocument);
-		this.getMdht().getRelatedDocuments().add(relatedDocument);
-	}
-
-	/**
-	 * <div class="en">Gets the identifier of the document which was replaced by
-	 * the current one (see e.g. &lt;CH-VACD-REPL&gt;)</div> <div
-	 * class="de"></div> <div class="fr"></div>
-	 * 
-	 * @return <div class="en">identifier of the document which was replaced by
-	 *         the current one</div> <div class="de"></div> <div
-	 *         class="fr"></div>
-	 */
-	public Identificator getDocumentToReplaceIdentifier() {
-		if (this.getMdht().getRelatedDocuments() != null
-				&& getMdht().getRelatedDocuments().size() > 0) {
-			RelatedDocument relatedDocument = getMdht().getRelatedDocuments().get(0);
-			if (relatedDocument != null && relatedDocument.getParentDocument() != null) {
-				ParentDocument parentDocument = relatedDocument.getParentDocument();
-				return new Identificator(parentDocument.getIds().get(0));
-			}
-		}
-		return null;
 	}
 
 }
