@@ -24,6 +24,7 @@ import org.ehealth_connector.cda.ch.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.enums.LanguageCode;
 import org.ehealth_connector.cda.ch.enums.SectionsVACD;
+import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
@@ -168,18 +169,25 @@ public class ImmunizationRecommendationSection extends
 				CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
 				if (vacdImmun != null) {
 					if (i > 0) {
-						stringBuffer.append(",");
+						stringBuffer.append(", ");
 					}
 					++i;
 					contentId = contendIdPrefix + colIndex++;
 					stringBuffer.append("<content ID=\"" + contentId + "\">");
-					stringBuffer.append(vacdImmun.getDisplayName());
+					stringBuffer.append(medicationTargetEntry.getImmunizationTargetCode()
+							.getDisplayName());
 					stringBuffer.append("</content>");
 					medicationTargetEntry.setTextReference("#" + contentId);
 				}
 			}
 		}
 		stringBuffer.append("</td><td>");
+		// Impfempfehlung vom
+		if (immunizationRecommendation.getAuthor() != null
+				&& immunizationRecommendation.getAuthor().getTimeAsDate() != null) {
+			stringBuffer.append(DateUtil.formatDateCH(immunizationRecommendation.getAuthor()
+					.getTimeAsDate()));
+		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung dokumentiert durch
 		if (immunizationRecommendation.getAuthor() != null
@@ -214,10 +222,10 @@ public class ImmunizationRecommendationSection extends
 		if (immunizationRecommendation.getExternalDocumentEntry() != null) {
 			ExternalDocumentEntry documentEntry = immunizationRecommendation
 					.getExternalDocumentEntry();
-			stringBuffer.append("<linkHtml href=\"" + documentEntry.getTextReference() + "\"/>");
+			stringBuffer.append("<linkHtml href=\"" + documentEntry.getReferenceUrl() + "\">"
+					+ documentEntry.getReferenceNarrativeText() + "</linkHtml>");
 		}
 		stringBuffer.append("</td></tr>");
 		return stringBuffer.toString();
 	}
-
 }

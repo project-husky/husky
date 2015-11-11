@@ -202,6 +202,24 @@ public class DateUtil {
 	}
 
 	/**
+	 * Creates an IVL_TS object
+	 * 
+	 * @param yyyyMMdd
+	 *            <div class="en">start of an interval in the format
+	 *            yyyyMMdd</div> <div class="de">der Begin des Intervals im
+	 *            Format yyyyMMdd</div>
+	 * @return HL7 IVL_TS Objekt
+	 * @throws ParseException
+	 *             the parse exception
+	 */
+	public static IVL_TS createIVL_TSFromHL7Date(String yyyyMMdd) throws ParseException {
+		// Create OHT Data structure
+		IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
+		ohtInterval.setValue(yyyyMMdd);
+		return ohtInterval;
+	}
+
+	/**
 	 * <div class="en">Creates an IVXB_TS Object.
 	 * 
 	 * @param date

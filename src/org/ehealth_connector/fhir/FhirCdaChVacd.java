@@ -999,7 +999,7 @@ public class FhirCdaChVacd {
 		}
 
 		for (ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(bundle)) {
-			doc.addImmunizationRecommendation(immunizationRecommendation, true);
+			doc.addImmunizationRecommendation(immunizationRecommendation);
 		}
 
 		doc.addComment(getComment(bundle));

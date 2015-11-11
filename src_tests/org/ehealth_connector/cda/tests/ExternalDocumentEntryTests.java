@@ -57,7 +57,8 @@ public class ExternalDocumentEntryTests {
 	public void testTextReference() throws XPathExpressionException {
 		ExternalDocumentEntry entry = new ExternalDocumentEntry();
 
-		entry.setTextReference("http://www.bag.admin.ch/ekif/04423/04428/index.html");
+		entry.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				"Schweizerischer Impfplan");
 
 		Document document = entry.getDocument();
 
@@ -67,8 +68,10 @@ public class ExternalDocumentEntryTests {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html",
-				entry.getTextReference());
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html", entry.getReferenceUrl());
+
+		assertEquals("Schweizerischer Impfplan", entry.getReferenceNarrativeText());
+
 	}
 
 }

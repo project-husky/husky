@@ -454,6 +454,18 @@ public class Code {
 	}
 
 	/**
+	 * <div class="en">Sets the display name.</div> <div class="de"></div> <div
+	 * class="fr"></div> <div class="it"></div>
+	 * 
+	 * 
+	 * @param oid
+	 *            the oid object which will be set
+	 */
+	public void setDisplayName(String displayName) {
+		mCD.setDisplayName(displayName);
+	}
+
+	/**
 	 * Sets the null flavor.
 	 * 
 	 * @param nf

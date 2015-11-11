@@ -168,12 +168,13 @@ public class ImmunizationSection extends
 				CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
 				if (vacdImmun != null) {
 					if (i > 0) {
-						stringBuffer.append(",");
+						stringBuffer.append(", ");
 					}
 					++i;
 					contentId = contendIdPrefix + colIndex++;
 					stringBuffer.append("<content ID=\"" + contentId + "\">");
-					stringBuffer.append(vacdImmun.getDisplayName());
+					stringBuffer.append(medicationTargetEntry.getImmunizationTargetCode()
+							.getDisplayName());
 					stringBuffer.append("</content>");
 					medicationTargetEntry.setTextReference("#" + contentId);
 				}

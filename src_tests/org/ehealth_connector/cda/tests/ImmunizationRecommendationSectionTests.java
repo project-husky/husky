@@ -78,7 +78,8 @@ public class ImmunizationRecommendationSectionTests {
 		assertEquals(null, immunization.getTextReference());
 
 		ExternalDocumentEntry entry = new ExternalDocumentEntry();
-		entry.setTextReference("http://www.bag.admin.ch/ekif/04423/04428/index.html");
+		entry.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				"Schweizerischer Impfplan");
 		immunization.setExternalDocumentEntry(entry);
 
 		immunizationRecommendationSection.addImmunizationRecommendation(immunization,

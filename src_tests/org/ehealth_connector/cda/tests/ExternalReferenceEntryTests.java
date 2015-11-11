@@ -43,7 +43,8 @@ public class ExternalReferenceEntryTests {
 		ExternalReferenceEntry entry = new ExternalReferenceEntry();
 
 		ExternalDocumentEntry doc = new ExternalDocumentEntry();
-		doc.setTextReference("http://www.bag.admin.ch/ekif/04423/04428/index.html");
+		doc.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				"Schweizerischer Impfplan");
 		entry.setExternalDocumentEntry(doc);
 
 		assertEquals(doc, entry.getExternalDocumentEntry());

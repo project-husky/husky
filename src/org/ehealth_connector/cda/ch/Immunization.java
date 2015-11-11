@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda.ch;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -552,14 +551,12 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	public void setPerformer(Author performer) {
 		final Performer2 p2 = CDAFactory.eINSTANCE.createPerformer2();
 		getMdht().getPerformers().clear();
-		getMdht().getPerformers().add(p2);
+		if (performer != null) {
+			getMdht().getPerformers().add(p2);
 
-		p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer.copyMdhtAuthor()
-				.getAssignedAuthor()));
-		try {
-			p2.setTime(DateUtil.createIVL_TSFromEuroDate(new Date()));
-		} catch (final ParseException e) {
-			e.printStackTrace();
+			p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer
+					.copyMdhtAuthor().getAssignedAuthor()));
+			p2.setTime(performer.getTimeAsIVL_TS());
 		}
 	}
 

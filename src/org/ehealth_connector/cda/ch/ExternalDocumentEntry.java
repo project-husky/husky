@@ -69,9 +69,9 @@ public class ExternalDocumentEntry extends
 			return false;
 		}
 
-		String reference = this.getTextReference();
-		if ((reference != null && !reference.equals(other.getTextReference()))
-				|| (reference == null && other.getTextReference() != null)) {
+		String reference = this.getReferenceUrl();
+		if ((reference != null && !reference.equals(other.getReferenceUrl()))
+				|| (reference == null && other.getReferenceUrl() != null)) {
 			return false;
 		}
 
@@ -92,11 +92,23 @@ public class ExternalDocumentEntry extends
 	}
 
 	/**
-	 * Gets the text reference.
+	 * Gets the narrative text for the reference.
 	 * 
-	 * @return the text reference
+	 * @return the narrative text for the reference.
 	 */
-	public String getTextReference() {
+	public String getReferenceNarrativeText() {
+		if (this.getMdht().getText() != null && this.getMdht().getText().getText() != null) {
+			return this.getMdht().getText().getText();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the url for the reference.
+	 * 
+	 * @return the url for the reference
+	 */
+	public String getReferenceUrl() {
 		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
 			return this.getMdht().getText().getReference().getValue();
 		}
@@ -109,7 +121,7 @@ public class ExternalDocumentEntry extends
 		int result = 1;
 		result = prime * result + (this.getId() != null ? this.getId().hashCode() : 0);
 		result = prime * result
-				+ (this.getTextReference() != null ? this.getTextReference().hashCode() : 0);
+				+ (this.getReferenceUrl() != null ? this.getReferenceUrl().hashCode() : 0);
 		return result;
 	}
 
@@ -132,9 +144,13 @@ public class ExternalDocumentEntry extends
 	 * @param value
 	 *            the new text reference, # for local reference has to be
 	 *            included
+	 * 
+	 * @param narrativeText
+	 *            the narrative Text to be used for the link in the CDA body
+	 *            level 1 text generation
 	 */
-	public void setTextReference(String value) {
-		this.getMdht().setText(Util.createReference(value));
+	public void setReference(String value, String narrativeText) {
+		this.getMdht().setText(Util.createReference(value, narrativeText));
 	}
 
 }

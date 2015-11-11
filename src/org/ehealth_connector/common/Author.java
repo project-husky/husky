@@ -31,6 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
@@ -424,7 +425,51 @@ public class Author {
 	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation
 	 *         als String</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public String getTime() {
+	public Date getTimeAsDate() {
+		if (mAuthor.getTime() != null) {
+			return DateUtil.parseDate(mAuthor.getTime());
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the author time. The author/time element represents
+	 * the start time of the author’s participation in the creation of the
+	 * clinical document </div> <div class="de">Liefert die Zeit für den Autor.
+	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 * 
+	 * 
+	 * @return date <div class="en">the start time of the participation as
+	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation
+	 *         als String</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public IVL_TS getTimeAsIVL_TS() {
+		if (mAuthor.getTime() != null) {
+			try {
+				return DateUtil.createIVL_TSFromHL7Date(mAuthor.getTime().getValue());
+			} catch (ParseException e) {
+				return null;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the author time. The author/time element represents
+	 * the start time of the author’s participation in the creation of the
+	 * clinical document </div> <div class="de">Liefert die Zeit für den Autor.
+	 * Diese gibt den Startzeitpunkt an, an dem der Autor bei der Erstellung des
+	 * Dokument mitgewirkt hat.</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 * 
+	 * 
+	 * @return date <div class="en">the start time of the participation as
+	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation
+	 *         als String</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public String getTimeAsString() {
 		if (mAuthor.getTime() != null) {
 			return DateUtil.parseDateToStr(mAuthor.getTime());
 		}

@@ -490,8 +490,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		immunizationRecommendation1 = createImmunizationRecommendation();
 		immunizationRecommendation2 = createImmunizationRecommendation();
-		d.addImmunizationRecommendation(immunizationRecommendation1, false);
-		d.addImmunizationRecommendation(immunizationRecommendation2, false);
+		d.addImmunizationRecommendation(immunizationRecommendation1);
+		d.addImmunizationRecommendation(immunizationRecommendation2);
 		d.setNarrativeTextSectionImmunizationRecommendations(ts3);
 		assertTrue(d.getNarrativeTextSectionImmunizationRecommendations().contains(ts3));
 

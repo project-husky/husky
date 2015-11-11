@@ -493,6 +493,24 @@ public class Util {
 	}
 
 	/**
+	 * Creates an MDHT ED reference from a given String
+	 * 
+	 * @param url
+	 *            the reference url
+	 * @param narrativeText
+	 *            the reference narrative text
+	 * @return the MDHT ED
+	 */
+	public static ED createReference(String url, String narrativeText) {
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		ED ed = DatatypesFactory.eINSTANCE.createED();
+		tel.setValue(url);
+		ed.setReference(tel);
+		ed.addText(narrativeText);
+		return ed;
+	}
+
+	/**
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
 	 * 
 	 * @param telNr
@@ -828,11 +846,7 @@ public class Util {
 			return "";
 		Iterator<String> iter = nameList.iterator();
 		string = iter.next();
-		if (string.equals("")) {
-			builder = new StringBuilder(iter.next());
-		} else {
-			builder = new StringBuilder(iter.next());
-		}
+		builder = new StringBuilder(string);
 		while (iter.hasNext()) {
 			string = iter.next();
 			if (string.equals("")) {

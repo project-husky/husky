@@ -390,11 +390,8 @@ public class CdaChVacd extends CdaCh<VACD> {
 	 * 
 	 * @param immunizationRecommendation
 	 *            the immunization recommendation * the language code
-	 * @param createSectionText
-	 *            if the section text should be created
 	 */
-	public void addImmunizationRecommendation(
-			ImmunizationRecommendation immunizationRecommendation, boolean createSectionText) {
+	public void addImmunizationRecommendation(ImmunizationRecommendation immunizationRecommendation) {
 		ImmunizationRecommendationSection section = null;
 		if (getMdht().getImmunizationRecommendationSection() == null) {
 			section = new ImmunizationRecommendationSection(getLanguageCode());
@@ -403,8 +400,7 @@ public class CdaChVacd extends CdaCh<VACD> {
 			section = new ImmunizationRecommendationSection(getMdht()
 					.getImmunizationRecommendationSection());
 		}
-		section.addImmunizationRecommendation(immunizationRecommendation, getLanguageCode(),
-				createSectionText);
+		section.addImmunizationRecommendation(immunizationRecommendation, getLanguageCode(), true);
 	}
 
 	/**
@@ -1114,18 +1110,6 @@ public class CdaChVacd extends CdaCh<VACD> {
 			getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
 		}
 	}
-
-	// /**
-	// * <div class="en">Sets the MDHT-VACD Object</div> <div class="de">Setzt
-	// das
-	// * MDHT-VACD-Objekt.</div>
-	// *
-	// * @param doc
-	// * the new doc
-	// */
-	// public void setDoc(VACD doc) {
-	// super.setDoc(doc);
-	// }
 
 	/**
 	 * <div class="en">Sets the human readable CDA section text for the
