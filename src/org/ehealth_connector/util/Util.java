@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -44,8 +45,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
-import org.ehealth_connector.cda.ch.CdaChVacd;
-import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AddressUse;
 import org.ehealth_connector.cda.enums.Signature;
 import org.ehealth_connector.common.EHealthConnectorVersions;
@@ -104,21 +103,21 @@ public class Util {
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
-	/**
-	 * Adds the copy of a given section to a given structured body
-	 * 
-	 * @param sb
-	 *            the StructuredBody
-	 * @param s
-	 *            the Section
-	 */
-	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
-		if (sb != null && s != null) {
-			Component3 c = CDAFactory.eINSTANCE.createComponent3();
-			c.setSection(EcoreUtil.copy(s));
-			sb.getComponents().add(c);
-		}
-	}
+//	/**
+//	 * Adds the copy of a given section to a given structured body
+//	 * 
+//	 * @param sb
+//	 *            the StructuredBody
+//	 * @param s
+//	 *            the Section
+//	 */
+//	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
+//		if ((sb != null) && (s != null)) {
+//			final Component3 c = CDAFactory.eINSTANCE.createComponent3();
+//			c.setSection(EcoreUtil.copy(s));
+//			sb.getComponents().add(c);
+//		}
+//	}
 
 	/**
 	 * Checks to see if the list has at least one element.
@@ -147,9 +146,9 @@ public class Util {
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
 	public static ArrayList<Identificator> convertIds(EList<II> mII) {
-		ArrayList<Identificator> il = new ArrayList<Identificator>();
-		for (II mId : mII) {
-			Identificator id = new Identificator(mId);
+		final ArrayList<Identificator> il = new ArrayList<Identificator>();
+		for (final II mId : mII) {
+			final Identificator id = new Identificator(mId);
 			il.add(id);
 		}
 		return il;
@@ -189,7 +188,7 @@ public class Util {
 	 * @return the assignedEntity
 	 */
 	public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
-		AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
+		final AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 		// Copy Addresses
 		if (a.getAddrs() != null) {
 			asEnt.getAddrs().addAll(a.getAddrs());
@@ -217,7 +216,7 @@ public class Util {
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorNASK() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NASK);
 		return ce;
 	}
@@ -228,7 +227,7 @@ public class Util {
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorUNK() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.UNK);
 		return ce;
 	}
@@ -239,7 +238,7 @@ public class Util {
 	 * @return the CD
 	 */
 	public static CD createCodeNullFlavorNA() {
-		CD code = DatatypesFactory.eINSTANCE.createCD();
+		final CD code = DatatypesFactory.eINSTANCE.createCD();
 		code.setNullFlavor(NullFlavor.NA);
 		return code;
 	}
@@ -259,20 +258,20 @@ public class Util {
 			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
 					.createCustodianOrganization();
 
-			ON on = DatatypesFactory.eINSTANCE.createON();
+			final ON on = DatatypesFactory.eINSTANCE.createON();
 			on.addText(organization.getName());
 			mdhtCustOrg.setName(on);
 
 			// take the first address and set it as CustodianAdress
 			if (organization.getMdhtOrganization().getAddrs().size() > 0) {
-				mdhtCustOrg.setAddr(EcoreUtil.copy(organization.getMdhtOrganization().getAddrs()
-						.get(0)));
+				mdhtCustOrg.setAddr(
+						EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
 			}
 
 			// take the first telecom and set it as CustodianTelecom
 			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
-				mdhtCustOrg.setTelecom(EcoreUtil.copy(organization.getMdhtOrganization()
-						.getTelecoms().get(0)));
+				mdhtCustOrg.setTelecom(
+						EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
 			}
 			return mdhtCustOrg;
 		}
@@ -283,12 +282,12 @@ public class Util {
 	 * <div class="en">Creates the ED.</div>
 	 * 
 	 * @param text
-	 * <br>
+	 *            <br>
 	 *            <div class="en">text</div>
 	 * @return the ED
 	 */
 	public static ED createEd(String text) {
-		ED ed = DatatypesFactory.eINSTANCE.createED();
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		return (ed.addText(text));
 	}
 
@@ -296,15 +295,15 @@ public class Util {
 	 * <div class="en">Creates the MDHT email TEL object.</div>
 	 * 
 	 * @param eMail
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> e mail</div>
 	 * @param usage
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createEMail(String eMail, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
@@ -314,14 +313,14 @@ public class Util {
 	 * <div class="en">Creates the eur date str from ts.</div>
 	 * 
 	 * @param hl7Stimestamp
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> hl7 stimestamp</div><div class="de"></div>
 	 *            <div class="fr"> </div> <div class="it"></div>
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		String eurDateStr = hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6)
-				+ "." + hl7Stimestamp.substring(0, 4);
+		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "."
+				+ hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
 		return eurDateStr;
 	}
 
@@ -329,15 +328,15 @@ public class Util {
 	 * <div class="en">Creates the MDHT fax TEL object.</div>
 	 * 
 	 * @param faxNr
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> fax nr</div>
 	 * @param usage
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createFax(String faxNr, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
 		return tel;
@@ -369,7 +368,7 @@ public class Util {
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNA() {
-		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NA);
 		return ivlpq;
 	}
@@ -380,7 +379,7 @@ public class Util {
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNASK() {
-		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.NASK);
 		return ivlpq;
 	}
@@ -391,7 +390,7 @@ public class Util {
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorUNK() {
-		IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivlpq.setNullFlavor(NullFlavor.UNK);
 		return ivlpq;
 	}
@@ -401,19 +400,19 @@ public class Util {
 	 * Signature Code will be set to fixed 's'
 	 * 
 	 * @param author
-	 * <br>
+	 *            <br>
 	 *            <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
 	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
 			org.ehealth_connector.common.Author author) {
-		org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
-		LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
+		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
+		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
 		mdhtLegAuth
 				.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
-		CS cs = Signature.SIGNED.getCS();
+		final CS cs = Signature.SIGNED.getCS();
 		mdhtLegAuth.setSignatureCode(cs);
 		// Copy Time
 		mdhtLegAuth.setTime(a.getTime());
@@ -425,22 +424,22 @@ public class Util {
 	 * <div class="en">Creates the non quoted MDHT StrucDocText.</div>
 	 * 
 	 * @param xmlString
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> xml string</div>
 	 * @return the StrucDocText
 	 */
 	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
-		Resource.Factory factory = new GenericXMLResourceFactoryImpl();
-		XMLResource resource = (XMLResource) factory.createResource(null);
+		final Resource.Factory factory = new GenericXMLResourceFactoryImpl();
+		final XMLResource resource = (XMLResource) factory.createResource(null);
 		try {
 			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"),
 					null);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
-		AnyType value = (AnyType) root.getMixed().getValue(0);
-		StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
+		final XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
+		final AnyType value = (AnyType) root.getMixed().getValue(0);
+		final StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
 		text.getMixed().addAll(value.getMixed());
 		return text;
 	}
@@ -451,7 +450,7 @@ public class Util {
 	 * @return the ivxb ts
 	 */
 	public static IVXB_TS createNullFlavorUnknown() {
-		IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		final IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		ts.setNullFlavor(NullFlavor.UNK);
 		return ts;
 	}
@@ -460,16 +459,16 @@ public class Util {
 	 * <div class="en">Creates the reference.</div>
 	 * 
 	 * @param contentId
-	 * <br>
+	 *            <br>
 	 *            <div class="en">content id</div>
 	 * @param prefix
-	 * <br>
+	 *            <br>
 	 *            <div class="en">prefix</div>
 	 * @return the ed
 	 */
 	public static ED createReference(int contentId, String prefix) {
-		ED text = DatatypesFactory.eINSTANCE.createED();
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED text = DatatypesFactory.eINSTANCE.createED();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 
 		// Dirty BugFix for missing addReference method.
 		tel.setValue("#" + prefix + String.valueOf(contentId));
@@ -485,8 +484,8 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String value) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		ED ed = DatatypesFactory.eINSTANCE.createED();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		tel.setValue(value);
 		ed.setReference(tel);
 		return ed;
@@ -502,8 +501,8 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String url, String narrativeText) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		ED ed = DatatypesFactory.eINSTANCE.createED();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		tel.setValue(url);
 		ed.setReference(tel);
 		ed.addText(narrativeText);
@@ -514,15 +513,15 @@ public class Util {
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
 	 * 
 	 * @param telNr
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> tel nr</div>
 	 * @param usage
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createTel(String telNr, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		if (usage != null) {
 			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		}
@@ -536,16 +535,16 @@ public class Util {
 	 * unknown).</div>
 	 * 
 	 * @param endpointIdentifier
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> tel nr</div><div class="de">Der Endpunkt der
 	 *            Kommunikation (z.B. eine Telefonnummer)</div>
 	 * @param usage
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createUnknownTel(String endpointIdentifier, AddressUse usage) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		if (usage != null) {
 			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		}
@@ -553,45 +552,45 @@ public class Util {
 		return tel;
 	}
 
-	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	 * and a generated extension.</div>
-	 * 
-	 * @param id
-	 * <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static II createUuidVacd(String id) {
-		II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(CdaChVacd.OID_MAIN);
-		if (id == null) {
-			ii.setExtension(UUID.generate());
-		} else {
-			ii.setRoot(id);
-		}
-		return ii;
-	}
-
-	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	 * (if the root id is null, otherwise the provided id will be used) and a
-	 * generated extension.</div>
-	 * 
-	 * @param id
-	 * <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static II createUuidVacdIdentificator(Identificator id) {
-		II ii;
-		if (id == null) {
-			ii = Util.createUuidVacd(null);
-		} else {
-			ii = id.getIi();
-		}
-		return ii;
-	}
+	// /**
+	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
+	// * and a generated extension.</div>
+	// *
+	// * @param id
+	// * <br>
+	// * <div class="en"> the id</div>
+	// * @return the ii
+	// */
+	// public static II createUuidVacd(String id) {
+	// final II ii = DatatypesFactory.eINSTANCE.createII();
+	// ii.setRoot(CdaChVacd.OID_MAIN);
+	// if (id == null) {
+	// ii.setExtension(UUID.generate());
+	// } else {
+	// ii.setRoot(id);
+	// }
+	// return ii;
+	// }
+	//
+	// /**
+	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
+	// * (if the root id is null, otherwise the provided id will be used) and a
+	// * generated extension.</div>
+	// *
+	// * @param id
+	// * <br>
+	// * <div class="en"> the id</div>
+	// * @return the ii
+	// */
+	// public static II createUuidVacdIdentificator(Identificator id) {
+	// II ii;
+	// if (id == null) {
+	// ii = Util.createUuidVacd(null);
+	// } else {
+	// ii = id.getIi();
+	// }
+	// return ii;
+	// }
 
 	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
@@ -599,11 +598,11 @@ public class Util {
 	 * 
 	 * @param rscPath
 	 *            path to the desired file in the Jar
-	 * @return Full path and file name of the created temporary file </div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return Full path and file name of the created temporary file </div>
+	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public static String extractFileFromResource(String rscPath) {
-		String filename = FilenameUtils.getName(rscPath);
+		final String filename = FilenameUtils.getName(rscPath);
 		String targetPath = null;
 
 		if (!rscPath.startsWith("/"))
@@ -611,19 +610,19 @@ public class Util {
 
 		try {
 			targetPath = File.createTempFile(filename, "").getAbsolutePath();
-			InputStream input = Util.class.getResourceAsStream(rscPath);
+			final InputStream input = Util.class.getResourceAsStream(rscPath);
 			if (input == null) {
 				throw new IOException("File '" + filename + "' not found.");
 			}
-			OutputStream output = new FileOutputStream(targetPath);
-			byte[] buffer = new byte[2048];
+			final OutputStream output = new FileOutputStream(targetPath);
+			final byte[] buffer = new byte[2048];
 			int bytesRead;
 			while ((bytesRead = input.read(buffer)) != -1) {
 				output.write(buffer, 0, bytesRead);
 			}
 			input.close();
 			output.close();
-		} catch (IOException e1) {
+		} catch (final IOException e1) {
 			e1.printStackTrace();
 		}
 
@@ -634,7 +633,7 @@ public class Util {
 	 * <div class="en">Extract string from a non quoted MDHT StrucDocText.</div>
 	 * 
 	 * @param strucDocText
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the StrucDocText</div>
 	 * @return the string
 	 */
@@ -675,11 +674,11 @@ public class Util {
 	 * @return the reference to the comment
 	 */
 	public static String getCommentRef(EList<EntryRelationship> e) {
-		for (EntryRelationship er : e) {
+		for (final EntryRelationship er : e) {
 			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				if (er.getAct().getText() != null) {
-					ED ed = er.getAct().getText();
+					final ED ed = er.getAct().getText();
 					if (ed.getReference() != null) {
 						return ed.getReference().getValue();
 					}
@@ -698,10 +697,10 @@ public class Util {
 	 * @return the tet of the comment
 	 */
 	public static String getCommentText(EList<EntryRelationship> e) {
-		for (EntryRelationship er : e) {
+		for (final EntryRelationship er : e) {
 			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
-				ED ed = er.getAct().getText();
+				final ED ed = er.getAct().getText();
 				return ed.getText();
 			}
 		}
@@ -709,41 +708,41 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div> <div
-	 * class="de">Liefert e mail aus einer ArrayList of TEL.</div>
+	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
+	 * <div class="de">Liefert e mail aus einer ArrayList of TEL.</div>
 	 * 
 	 * @param telecoms
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> the telecoms</div>
 	 * @return <div class="en">the e mail</div>
 	 */
-	public static HashMap<String, AddressUse> getEMail(ArrayList<TEL> telecoms) {
+	public static Map<String, AddressUse> getEMail(List<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_EMAIL_PREFIX);
 	}
 
 	/**
-	 * <div class="en">Gets the fax from an ArrayList of TEL.</div> <div
-	 * class="de">Liefert cax aus einer ArrayList von TEL.</div>
+	 * <div class="en">Gets the fax from an ArrayList of TEL.</div>
+	 * <div class="de">Liefert cax aus einer ArrayList von TEL.</div>
 	 * 
 	 * @param telecoms
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the telecoms</div>
 	 * @return <div class="en">the fax</div>
 	 */
-	public static HashMap<String, AddressUse> getFax(ArrayList<TEL> telecoms) {
+	public static Map<String, AddressUse> getFax(List<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_FAX_PREFIX);
 	}
 
 	/**
-	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div> <div
-	 * class="de">Liefert e mail aus einer ArrayList von TEL.</div>
+	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
+	 * <div class="de">Liefert e mail aus einer ArrayList von TEL.</div>
 	 * 
 	 * @param telecoms
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the telecoms</div>
 	 * @return <div class="en">the phone</div>
 	 */
-	public static HashMap<String, AddressUse> getPhones(ArrayList<TEL> telecoms) {
+	public static Map<String, AddressUse> getPhones(List<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
 	}
 
@@ -754,15 +753,15 @@ public class Util {
 	 * environment variable is set, it will try to use /temp. If the path is not
 	 * writable the eHealth Connector will use the system temp folder.
 	 * 
-	 * @return path to temp folder</div> <div class="de"></div> <div
-	 *         class="fr"></div>
+	 * @return path to temp folder</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public static String getTempDirectory() {
 		final String envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
-		Log log = LogFactory.getLog(Util.class);
+		final Log log = LogFactory.getLog(Util.class);
 		try {
-			String env = System.getenv(envVariable);
+			final String env = System.getenv(envVariable);
 			if (env != null) {
 				tempDirectoryPath = env;
 				log.debug("Trying to use temp folder set by environment variable '" + envVariable
@@ -771,10 +770,10 @@ public class Util {
 				tempDirectoryPath = "/temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
-			File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
+			final File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
 			FileUtils.writeStringToFile(uniqueFile, "write check");
 			FileUtils.deleteQuietly(uniqueFile);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			tempDirectoryPath = FileUtils.getTempDirectoryPath();
 			log.debug("failed... Will use system temp folder: " + tempDirectoryPath);
 		}
@@ -783,16 +782,16 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the website from an ArrayList of TEL.</div> <div
-	 * class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
+	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
+	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
 	 * 
 	 * @param telecoms
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the telecoms</div>
 	 * @return <div class="en">the webside</div>
 	 */
-	public static HashMap<String, AddressUse> getWebsites(ArrayList<TEL> telecoms) {
-		HashMap<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
+	public static Map<String, AddressUse> getWebsites(List<TEL> telecoms) {
+		final Map<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
 		return h;
 	}
 
@@ -800,12 +799,12 @@ public class Util {
 	 * <div class="en">Creates an MDHT II object.</div>
 	 * 
 	 * @param root
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the root</div>
 	 * @return the II
 	 */
 	public static II ii(String root) {
-		II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(root);
 		return ii;
 	}
@@ -819,7 +818,7 @@ public class Util {
 	 */
 	public static boolean isComment(EntryRelationship er) {
 		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd().equals(true))
+				&& er.getInversionInd())
 			return true;
 		else {
 			return false;
@@ -831,25 +830,28 @@ public class Util {
 	 * name</div>
 	 * 
 	 * @param nameList
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> name list</div>
 	 * @param delimiter
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> delimiter</div>
 	 * @return the string
 	 */
-	public static String join(ArrayList<String> nameList, String delimiter) {
-		String string;
-		StringBuilder builder;
+	public static String join(List<String> nameList, String delimiter) {
+		StringBuilder builder = null;
 
-		if (nameList == null || nameList.isEmpty())
+		if ((nameList == null) || nameList.isEmpty())
 			return "";
-		Iterator<String> iter = nameList.iterator();
-		string = iter.next();
-		builder = new StringBuilder(string);
+		final Iterator<String> iter = nameList.iterator();
+		String string = iter.next();
+		if ("".equals(string)) {
+			builder = new StringBuilder(iter.next());
+		} else {
+			builder = new StringBuilder(iter.next());
+		}
 		while (iter.hasNext()) {
 			string = iter.next();
-			if (string.equals("")) {
+			if ("".equals(string)) {
 			} else {
 				builder.append(delimiter).append(string);
 			}
@@ -862,7 +864,7 @@ public class Util {
 	 * name</div>
 	 * 
 	 * @param list
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the list</div>
 	 * @return the string
 	 */
@@ -870,9 +872,9 @@ public class Util {
 		if (list.size() == 0) {
 			return "";
 		}
-		String names = list.get(0).getText();
+		final String names = list.get(0).getText();
 		if (list.size() > 1) {
-			ArrayList<String> nameList = new ArrayList<String>();
+			final List<String> nameList = new ArrayList<String>();
 			for (int i = 0; i < list.size(); i++) {
 				nameList.add(list.get(i).getText());
 			}
@@ -885,74 +887,76 @@ public class Util {
 	 * <div class="en">Creates an MDHT ST</div>
 	 * 
 	 * @param text
-	 * <br>
+	 *            <br>
 	 *            <div class="de">the text</div>
 	 * @return the st
 	 */
 	public static ST st(String text) {
-		ST value = DatatypesFactory.eINSTANCE.createST();
+		final ST value = DatatypesFactory.eINSTANCE.createST();
 		value.addText(text);
 		return value;
 	}
 
-	/**
-	 * Updates a Reference if it is a comment (in a deph of two counters)
-	 * 
-	 * @param er
-	 *            the EntryRelationship
-	 * @param i
-	 *            first counter
-	 * @param j
-	 *            second counter
-	 * @param prefix
-	 *            the prefix of the reference
-	 * @return the EntryRelationship
-	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
-			SectionsVACD prefix) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd().equals(true)) {
-			// Get the ed and update it with the reference
-			ED ed = er.getAct().getText();
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			ed.setReference(tel);
-			if (CdaChVacd.CDALevel2TextGeneration) {
-				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
-			} else {
-				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-			}
-			er.getAct().setText(ed);
-		}
-		return er;
-	}
-
-	/**
-	 * Updates a Reference if it is a comment
-	 * 
-	 * @param er
-	 *            the EntryRelationship
-	 * @param ref
-	 *            the reference
-	 * @param prefix
-	 *            the prefix of the reference
-	 * @return the EntryRelationship
-	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
-			SectionsVACD prefix) {
-		if (isComment(er)) {
-			// Get the ed and update it with the reference
-			ED ed = er.getAct().getText();
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			ed.setReference(tel);
-			if (CdaChVacd.CDALevel2TextGeneration) {
-				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
-			} else {
-				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-			}
-			er.getAct().setText(ed);
-		}
-		return er;
-	}
+	// /**
+	// * Updates a Reference if it is a comment (in a deph of two counters)
+	// *
+	// * @param er
+	// * the EntryRelationship
+	// * @param i
+	// * first counter
+	// * @param j
+	// * second counter
+	// * @param prefix
+	// * the prefix of the reference
+	// * @return the EntryRelationship
+	// */
+	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
+	// int i, int j,
+	// SectionsVACD prefix) {
+	// if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+	// && er.getInversionInd().equals(true)) {
+	// // Get the ed and update it with the reference
+	// final ED ed = er.getAct().getText();
+	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+	// ed.setReference(tel);
+	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
+	// } else {
+	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
+	// }
+	// er.getAct().setText(ed);
+	// }
+	// return er;
+	// }
+	//
+	// /**
+	// * Updates a Reference if it is a comment
+	// *
+	// * @param er
+	// * the EntryRelationship
+	// * @param ref
+	// * the reference
+	// * @param prefix
+	// * the prefix of the reference
+	// * @return the EntryRelationship
+	// */
+	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
+	// String ref,
+	// SectionsVACD prefix) {
+	// if (isComment(er)) {
+	// // Get the ed and update it with the reference
+	// final ED ed = er.getAct().getText();
+	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+	// ed.setReference(tel);
+	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
+	// } else {
+	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
+	// }
+	// er.getAct().setText(ed);
+	// }
+	// return er;
+	// }
 
 	/**
 	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
@@ -965,13 +969,12 @@ public class Util {
 	 *            extracted
 	 * @return the HashMap with TEL objects of the given type
 	 */
-	private static HashMap<String, AddressUse> getTelecomType(ArrayList<TEL> telecoms, String type) {
-		HashMap<String, AddressUse> tl = new HashMap<String, AddressUse>();
-		for (TEL tel : telecoms) {
+	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
+		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(),
-						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel.getUses().get(0)
-								.getName()) : null));
+				tl.put(tel.getValue(), (tel.getUses().size() > 0
+						? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
 			}
 		}
 		return tl;
@@ -986,8 +989,8 @@ public class Util {
 	 */
 	@SuppressWarnings("unused")
 	private static String getText(FeatureMap featureMap) {
-		StringBuffer buffer = new StringBuffer("");
-		for (FeatureMap.Entry entry : featureMap) {
+		final StringBuffer buffer = new StringBuffer("");
+		for (final FeatureMap.Entry entry : featureMap) {
 			if (FeatureMapUtil.isText(entry)) {
 				buffer.append(entry.getValue().toString());
 			} else {
@@ -1008,16 +1011,16 @@ public class Util {
 	 */
 	@SuppressWarnings("unused")
 	private static void traverse(FeatureMap root) {
-		Stack<FeatureMap> stack = new Stack<FeatureMap>();
-		Stack<String> stack2 = new Stack<String>();
+		final Stack<FeatureMap> stack = new Stack<FeatureMap>();
+		final Stack<String> stack2 = new Stack<String>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
-			FeatureMap featureMap = stack.pop();
+			final FeatureMap featureMap = stack.pop();
 			for (int i = featureMap.size() - 1; i >= 0; i--) {
-				Entry entry = featureMap.get(i);
+				final Entry entry = featureMap.get(i);
 				if (entry.getEStructuralFeature() instanceof EReference) {
 					System.out.print("<" + entry.getEStructuralFeature().getName());
-					AnyType anyType = (AnyType) entry.getValue();
+					final AnyType anyType = (AnyType) entry.getValue();
 					traverseAttributes(anyType.getAnyAttribute());
 					System.out.print(">");
 					stack.push(anyType.getMixed());
@@ -1027,7 +1030,7 @@ public class Util {
 					// System.out.print("</"+stack2.pop()+">");}
 					// //Text between the Elements
 					if (entry.getValue() != null) {
-						String value = entry.getValue().toString();
+						final String value = entry.getValue().toString();
 						if (value.trim().length() > 0) {
 							System.out.print(value);
 						}
@@ -1035,7 +1038,7 @@ public class Util {
 						System.out.println(" }");
 					}
 				}
-				if (entry.getValue() != null && !stack2.isEmpty()) {
+				if ((entry.getValue() != null) && !stack2.isEmpty()) {
 					System.out.print("</" + stack2.pop() + ">");
 				}
 			}
@@ -1053,19 +1056,20 @@ public class Util {
 	 * @return the updated StringBuilder
 	 */
 	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
-		for (int i = 0; i <= featureMap.size() - 1; i++) {
-			Entry entry = featureMap.get(i);
+		for (int i = 0; i <= (featureMap.size() - 1); i++) {
+			final Entry entry = featureMap.get(i);
 			if (entry.getEStructuralFeature() instanceof EReference) {
 				sb.append("<" + entry.getEStructuralFeature().getName());
-				AnyType anyType = (AnyType) entry.getValue();
-				sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
+				final AnyType anyType = (AnyType) entry.getValue();
+				// sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
+				traverseAttributes2(anyType.getAnyAttribute(), sb);
 				sb.append(">");
 				traverse2(anyType.getMixed(), sb);
 				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
 			} else {
 				// //Text between the Elements
 				if (entry.getValue() != null) {
-					String value = entry.getValue().toString();
+					final String value = entry.getValue().toString();
 					if (value.trim().length() > 0) {
 						sb.append(value);
 					}
@@ -1085,7 +1089,7 @@ public class Util {
 	 *            the Ecore FeatureMap
 	 */
 	private static void traverseAttributes(FeatureMap anyAttribute) {
-		for (Entry entry : anyAttribute) {
+		for (final Entry entry : anyAttribute) {
 			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
 					+ entry.getValue().toString() + "\"");
 		}
@@ -1102,7 +1106,7 @@ public class Util {
 	 * @return the updated StringBuilder
 	 */
 	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
-		for (Entry entry : anyAttribute) {
+		for (final Entry entry : anyAttribute) {
 			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
 					+ entry.getValue().toString() + "\"");
 		}

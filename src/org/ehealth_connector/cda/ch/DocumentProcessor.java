@@ -43,7 +43,7 @@ public class DocumentProcessor {
 	 * @return the CdaChVacd Document
 	 */
 	public static CdaChVacd loadFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
+		final InputStream inputstream = new FileInputStream(filePath);
 		return loadFromStream(inputstream);
 	}
 
@@ -65,7 +65,7 @@ public class DocumentProcessor {
 		// Explicit initialization
 		CHPackage.eINSTANCE.eClass();
 
-		ClinicalDocument clinicalDocument = CDAUtil.load(input);
+		final ClinicalDocument clinicalDocument = CDAUtil.load(input);
 
 		// Implicit initialization
 

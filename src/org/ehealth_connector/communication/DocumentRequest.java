@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 import java.net.URI;
@@ -8,15 +23,14 @@ import org.openhealthtools.ihe.xds.consumer.retrieve.DocumentRequestType;
  * Represents request information for one Document
  */
 public class DocumentRequest {
-	DocumentRequestType ohtDocReq;
-	URI xdsRepositoryUri;
+	private DocumentRequestType ohtDocReq;
+	private URI xdsRepositoryUri;
 
 	/**
 	 * Standard constructor.
 	 */
 	public DocumentRequest() {
-		this.ohtDocReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
-				.createDocumentRequestType();
+		this.ohtDocReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createDocumentRequestType();
 	}
 
 	/**
@@ -77,8 +91,7 @@ public class DocumentRequest {
 	 *            XDSQueryResponseType
 	 *            .getDocumentEntryResponses().getHomeCommunityId())
 	 */
-	public DocumentRequest(String repositoryId, URI repositoryUri, String documentId,
-			String homeCommunityId) {
+	public DocumentRequest(String repositoryId, URI repositoryUri, String documentId, String homeCommunityId) {
 		this();
 		setRepositoryId(repositoryId);
 		setRepositoryUri(repositoryUri);

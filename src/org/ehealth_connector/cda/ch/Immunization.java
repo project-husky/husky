@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -63,10 +64,10 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 */
 	public Immunization() {
 		super(CHFactory.eINSTANCE.createImmunization().init(), CdaCh.OID_V1, "CDA-CH.Body.MediL3");
-		EList<II> templateIds = this.getMdht().getTemplateIds();
+		final EList<II> templateIds = this.getMdht().getTemplateIds();
 		boolean foundFirst = false;
 		// <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12"/> appears twice
-		for (II ii : templateIds) {
+		for (final II ii : templateIds) {
 			if ("1.3.6.1.4.1.19376.1.5.3.1.4.12".equals(ii.getRoot())) {
 				if (foundFirst) {
 					templateIds.remove(ii);
@@ -90,11 +91,11 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div> <div
-	 *            class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div>
+	 *            <div class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div> <div
-	 *            class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div>
+	 *            <div class="de">Datum der Impfung</div>
 	 */
 	public Immunization(Consumable consumable, Author author, Date appliedAt) {
 		this();
@@ -114,11 +115,11 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            <div class="en">vaccine</div><div class="de">Impfstoff</div>
 	 * 
 	 * @param author
-	 *            <div class="en">Author of the immunization</div> <div
-	 *            class="de">Autor der Impfung</div>
+	 *            <div class="en">Author of the immunization</div>
+	 *            <div class="de">Autor der Impfung</div>
 	 * @param appliedAt
-	 *            <div class="en">date of the immunization</div> <div
-	 *            class="de">Datum der Impfung</div>
+	 *            <div class="en">date of the immunization</div>
+	 *            <div class="de">Datum der Impfung</div>
 	 * @param route
 	 *            <div class="en">route of administration (can be null)</div>
 	 *            <div class="de">Einnahmeart (darf null sein)</div>
@@ -171,7 +172,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            the new id
 	 */
 	public void addId(Identificator codedId) {
-		final II ii = Util.createUuidVacdIdentificator(codedId);
+		final II ii = CdaUtil.createUuidVacdIdentificator(codedId);
 		this.getMdht().getIds().add(ii);
 	}
 
@@ -186,7 +187,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		this.getMdht().addObservation(medicationTargetEntry.getMdht());
 		// need to add the the RSON and inversionInd, cannot do this
 		// automatically with mdht
-		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
 				entryRelationShip.setInversionInd(false);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
@@ -200,7 +201,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @return the apply date YYYYmmdd resolution
 	 */
 	public Date getApplyDate() {
-		if (getMdht().getEffectiveTimes() != null && getMdht().getEffectiveTimes().size() > 0) {
+		if ((getMdht().getEffectiveTimes() != null) && (getMdht().getEffectiveTimes().size() > 0)) {
 			final SXCM_TS date = getMdht().getEffectiveTimes().get(0);
 			return DateUtil.parseDateyyyyMMdd(date.getValue());
 		} else {
@@ -275,7 +276,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @return citerionEntry the new criterion entry
 	 */
 	public CriterionEntry getCriterionEntry() {
-		EList<Precondition> preconditions = getMdht().getPreconditions();
+		final EList<Precondition> preconditions = getMdht().getPreconditions();
 		if (preconditions.size() > 0) {
 			return new CriterionEntry(preconditions.get(0).getCriterion());
 		}
@@ -303,7 +304,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 */
 	public Identificator getId() {
 		Identificator id = null;
-		if (getMdht().getIds() != null && getMdht().getIds().size() > 0) {
+		if ((getMdht().getIds() != null) && (getMdht().getIds().size() > 0)) {
 			id = new Identificator(getMdht().getIds().get(0));
 		}
 		return id;
@@ -329,8 +330,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @return the medication target entries
 	 */
 	public List<MedicationTargetEntry> getMedicationTargetEntries() {
-		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
-		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+		final List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
 				.getMedicalTargets()) {
 			medicationTargetEntries.add(new MedicationTargetEntry(mte));
 		}
@@ -343,7 +344,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @return the performer
 	 */
 	public Performer getPerformer() {
-		if (getMdht().getPerformers() != null && this.getMdht().getPerformers().size() > 0) {
+		if ((getMdht().getPerformers() != null) && (this.getMdht().getPerformers().size() > 0)) {
 			return new Performer(getMdht().getPerformers().get(0));
 		}
 		return null;
@@ -376,7 +377,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 * @return the text reference
 	 */
 	public String getTextReference() {
-		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -444,7 +446,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		getMdht().setPriorityCode(ce);
 		getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		getMdht().getIds().add(Util.createUuidVacd(null));
+		getMdht().getIds().add(CdaUtil.createUuidVacd(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}
@@ -459,7 +461,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		this.getMdht().addAct(commentEntry.getMdht());
 		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
-		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
 				entryRelationShip.setInversionInd(true);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
@@ -474,7 +476,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *            the text
 	 */
 	public void setCommentText(String text) {
-		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
+		final SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
 		commentEntry.setAnnotationCommentText(text);
 		this.setCommentEntry(commentEntry);
 	}
@@ -497,7 +499,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 */
 	public void setCriterionEntry(CriterionEntry citerionEntry) {
 		this.getMdht().getPreconditions().clear();
-		PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry().init();
+		final PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry()
+				.init();
 		preconditionEntry.setCriterion(citerionEntry.getMdht());
 		this.getMdht().getPreconditions().add(preconditionEntry);
 	}
@@ -554,8 +557,8 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		if (performer != null) {
 			getMdht().getPerformers().add(p2);
 
-			p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(performer
-					.copyMdhtAuthor().getAssignedAuthor()));
+			p2.setAssignedEntity(Util.createAssignedEntityFromAssignedAuthor(
+					performer.copyMdhtAuthor().getAssignedAuthor()));
 			p2.setTime(performer.getTimeAsIVL_TS());
 		}
 	}

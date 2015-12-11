@@ -132,7 +132,7 @@ public class Identificator {
 		if (!(obj instanceof Identificator)) {
 			return false; // different class
 		}
-		Identificator other = (Identificator) obj;
+		final Identificator other = (Identificator) obj;
 		if (this.mII == other.mII)
 			return true;
 

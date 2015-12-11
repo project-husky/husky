@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -181,14 +196,14 @@ public class SubmissionSetMetadata {
 		// logger.Debug is set to true
 		if (author.getAuthorMdht().getAssignedAuthor().getTelecoms() == null
 				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
 		}
 
 		cda.getAuthors().clear();
 		cda.getAuthors().add(author.copyMdhtAuthor());
-		CDAR2Extractor extractor = new CDAR2Extractor(cda);
-		AuthorType xAuthor = extractor.extractAuthors().get(0);
+		final CDAR2Extractor extractor = new CDAR2Extractor(cda);
+		final AuthorType xAuthor = extractor.extractAuthors().get(0);
 
 		// Set the extracted author person object
 		s.setAuthor(xAuthor);
@@ -283,7 +298,7 @@ public class SubmissionSetMetadata {
 
 			// This is the eHealth Connector Root OID
 			// default value just in case...
-			String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
+			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
 
 			if (ohtSubmissionSetType.getUniqueId() == null) {
 				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));

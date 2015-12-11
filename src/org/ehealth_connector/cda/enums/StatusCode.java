@@ -81,7 +81,7 @@ public enum StatusCode {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static StatusCode getEnum(String code) {
-		for (StatusCode x : values()) {
+		for (final StatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -96,7 +96,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -137,7 +137,7 @@ public enum StatusCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}
@@ -145,10 +145,10 @@ public enum StatusCode {
 	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return this.displayName;
 	}
 
@@ -178,7 +178,7 @@ public enum StatusCode {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (StatusCode x : values()) {
+		for (final StatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

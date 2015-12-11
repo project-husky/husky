@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -7,7 +22,7 @@ import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
+/**
  *<div class="de">Definiert die Sprache in welcher das Dokument verfasst wurde. Die Werte richten sich nach der IETF RFC 3066 Norm.</div>
  *<div class="fr"></div>
  */
@@ -27,7 +42,7 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Französisch</div> <div class="fr">Français </div> <div
 	 * class="it">Francese</div>
 	 */
-	FRANZÖSISCH("fr-CH", "Französisch"),
+	FRANZOSISCH("fr-CH", "Französisch"),
 	/**
 	 * <div class="de">Italienisch</div> <div class="fr">Italien</div> <div
 	 * class="it">Italiano</div>
@@ -37,7 +52,7 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Rätoromanisch</div> <div class="fr">Rhéto-roman</div>
 	 * <div class="it">Romancio</div>
 	 */
-	RÄTOROMANISCH("rm", "Rätoromanisch");
+	RATOROMANISCH("rm", "Rätoromanisch");
 
 	/**
 	 * <div class="de">Code für Deutsch</div> <div class="fr">Code de
@@ -55,7 +70,7 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Französisch</div> <div class="fr">Code de
 	 * Français </div> <div class="it">Code per Francese</div>
 	 */
-	public static final String FRANZÖSISCH_CODE = "fr-CH";
+	public static final String FRANZOSISCH_CODE = "fr-CH";
 
 	/**
 	 * <div class="de">Code für Italienisch</div> <div class="fr">Code de
@@ -67,7 +82,7 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Rätoromanisch</div> <div class="fr">Code de
 	 * Rhéto-roman</div> <div class="it">Code per Romancio</div>
 	 */
-	public static final String RÄTOROMANISCH_CODE = "rm";
+	public static final String RATOROMANISCH_CODE = "rm";
 
 	/**
 	 * <div class="en">Identifier of the Code System</div> <div
@@ -86,13 +101,13 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div
 	 * class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -136,19 +151,19 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
 	/**
 	 * <div class="en">Gets the OHT CodedMetadataType Object</div> <div
 	 * class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 * 
+	 *
 	 * @return <div class="en">the codedMetadataType</div>
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -221,7 +236,7 @@ public enum LanguageCode implements CodedMetadataEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (LanguageCode x : values()) {
+		for (final LanguageCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

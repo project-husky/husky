@@ -25,8 +25,8 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testCodedLanguageEnum() {
-		m.setCodedLanguage(LanguageCode.FRANZÖSISCH);
-		assertEquals(LanguageCode.FRANZÖSISCH, m.getLanguageCodeEnum());
+		m.setCodedLanguage(LanguageCode.FRANZOSISCH);
+		assertEquals(LanguageCode.FRANZOSISCH, m.getLanguageCodeEnum());
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testTypeCodeEnum() {
-		m.setTypeCode(TypeCode.ANDERE_NICHT_NÄHER_SPEZIFIZIERT);
-		assertEquals(TypeCode.ANDERE_NICHT_NÄHER_SPEZIFIZIERT, m.getTypeCodeEnum());
+		m.setTypeCode(TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT);
+		assertEquals(TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT, m.getTypeCodeEnum());
 	}
 }

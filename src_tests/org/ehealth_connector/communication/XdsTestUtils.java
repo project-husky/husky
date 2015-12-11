@@ -56,8 +56,8 @@ public class XdsTestUtils {
 			PracticeSettingCode.ALLERGOLOGIE, PracticeSettingCode.ALLGEMEINMEDIZIN };
 	public static SourcePatientInfo[] sourcePatientInfos = new SourcePatientInfo[] {
 			SourcePatientInfo.AMBIGUOUS, SourcePatientInfo.FEMALE };
-	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.ANDERE_NICHT_NÄHER_SPEZIFIZIERT,
-			TypeCode.ANÄSTHESIE_BERICHT };
+	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT,
+			TypeCode.ANASTHESIE_BERICHT };
 
 	public static String[] docIds = new String[] { "123455.235234", "1.2.3.4.5.6.7.8" };
 	public static ParentDocumentRelationshipType[] parentRelation = new ParentDocumentRelationshipType[] {

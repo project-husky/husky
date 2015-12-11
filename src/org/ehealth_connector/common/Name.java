@@ -17,6 +17,7 @@
 package org.ehealth_connector.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.util.Util;
@@ -71,10 +72,10 @@ public class Name {
 	public Name(String givenName, String familyName) {
 		// Create and fill Person Name
 		mPn = DatatypesFactory.eINSTANCE.createPN();
-		if ((givenName != null) && !givenName.equals("")) {
+		if ((givenName != null) && !"".equals(givenName)) {
 			setGivenName(givenName);
 		}
-		if ((familyName != null) && !familyName.equals("")) {
+		if ((familyName != null) && !"".equals(familyName)) {
 			setFamilyName(familyName);
 		}
 	}
@@ -132,12 +133,12 @@ public class Name {
 	 * @return String <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
-		String prefixes = getPrefixes();
-		String givens = getGivenNames();
-		String families = getFamilyNames();
-		String suffixes = getSuffixes();
+		final String prefixes = getPrefixes();
+		final String givens = getGivenNames();
+		final String families = getFamilyNames();
+		final String suffixes = getSuffixes();
 
-		ArrayList<String> nameList = new ArrayList<String>();
+		final List<String> nameList = new ArrayList<String>();
 		nameList.add(prefixes);
 		nameList.add(givens);
 		nameList.add(families);
@@ -218,7 +219,7 @@ public class Name {
 	 *            Nachnamen
 	 */
 	public void setFamilyName(String familyName) {
-		if ((familyName != null) && !familyName.equals("")) {
+		if ((familyName != null) && !"".equals(familyName)) {
 			mPn.addFamily(familyName);
 		}
 	}
@@ -232,7 +233,7 @@ public class Name {
 	 *            Vornamen
 	 */
 	public void setGivenName(String givenName) {
-		if ((givenName != null) && !givenName.equals("")) {
+		if ((givenName != null) && !"".equals(givenName)) {
 			mPn.addGiven(givenName);
 		}
 	}
@@ -258,7 +259,7 @@ public class Name {
 	 *            das prefix Objekt welches gesetzt wird
 	 */
 	public void setPrefix(String prefix) {
-		if ((prefix != null) && !prefix.equals("")) {
+		if ((prefix != null) && !"".equals(prefix)) {
 			mPn.addPrefix(prefix);
 		}
 	}
@@ -271,7 +272,7 @@ public class Name {
 	 *            das suffix Objekt welches gesetzt wird
 	 */
 	public void setSuffix(String suffix) {
-		if ((suffix != null) && !suffix.equals("")) {
+		if ((suffix != null) && !"".equals(suffix)) {
 			mPn.addSuffix(suffix);
 		}
 	}

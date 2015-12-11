@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.util.Util;
-import org.openhealthtools.ihe.xds.metadata.AuthorType;
+//import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -39,17 +39,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Author {
 
-	final private static Code functionCodeAuthorDoctor = new Code("2.16.840.1.113883.2.9.6.2.7",
+	final private static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7",
 			"221", "ISCO-08", "Medical doctors");
-	final private static Code functionCodeAuthorPatient = new Code(NullFlavor.NOT_APPLICABLE);
+	final private static Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
 
 	/** assigned Author */
-	protected org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
+	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
 
 	/**
 	 * author.
 	 */
-	protected org.openhealthtools.mdht.uml.cda.Author mAuthor;
+	private org.openhealthtools.mdht.uml.cda.Author mAuthor;
 
 	/** person */
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
@@ -66,22 +66,22 @@ public class Author {
 		mAuthor.setAssignedAuthor(mAsAuthor);
 
 		// add functionCode and time
-		mAuthor.setFunctionCode(functionCodeAuthorDoctor.getCE());
+		mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
 		mAuthor.setTime(DateUtil.nowAsTS());
 	}
 
-	/**
-	 * <div class="en">Instantiates a new author.</div> <div
-	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
-	 * class="it"></div>
-	 * 
-	 * @param iAuthor
-	 * <br>
-	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 */
-	public Author(AuthorType iAuthor) {
-	}
+//	/**
+//	 * <div class="en">Instantiates a new author.</div> <div
+//	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
+//	 * class="it"></div>
+//	 * 
+//	 * @param iAuthor
+//	 * <br>
+//	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
+//	 *            <div class="it"></div>
+//	 */
+//	public Author(AuthorType iAuthor) {
+//	}
 
 	/**
 	 * Instantiates a new author.
@@ -107,7 +107,7 @@ public class Author {
 		this(name);
 
 		// Create and fill Person Name and GLN
-		II id = DatatypesFactory.eINSTANCE.createII();
+		final II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 
@@ -143,12 +143,12 @@ public class Author {
 		}
 
 		if (patientAsAuthor.getMdhtPatient().getNames() != null) {
-			for (Name name : patientAsAuthor.getNames()) {
+			for (final Name name : patientAsAuthor.getNames()) {
 				mPerson.getNames().add(name.copyMdhtPn());
 			}
 		}
 
-		if (patientAsAuthor.getIds() != null && patientAsAuthor.getIds().size() > 0) {
+		if ((patientAsAuthor.getIds() != null) && (patientAsAuthor.getIds().size() > 0)) {
 			mAsAuthor.getIds().addAll(patientAsAuthor.copyMdhtPatientRole().getIds());
 		}
 		this.setAuthorIsPatient(true);
@@ -209,7 +209,7 @@ public class Author {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Author other = (Author) obj;
+		final Author other = (Author) obj;
 		if (mAsAuthor == null) {
 			if (other.mAsAuthor != null)
 				return false;
@@ -235,20 +235,20 @@ public class Author {
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
-		Address address = new Address(mAuthor.getAssignedAuthor().getAddrs().get(0));
+		final Address address = new Address(mAuthor.getAssignedAuthor().getAddrs().get(0));
 		return address;
 	}
 
 	/**
 	 * <div class="en">Gets the addresses.</div> <div class="de">Liefert alle
 	 * Adressen.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
-		List<Address> al = new ArrayList<Address>();
-		for (AD mAddress : mAuthor.getAssignedAuthor().getAddrs()) {
-			Address address = new Address(mAddress);
+		final List<Address> al = new ArrayList<Address>();
+		for (final AD mAddress : mAuthor.getAssignedAuthor().getAddrs()) {
+			final Address address = new Address(mAddress);
 			al.add(address);
 		}
 		return al;
@@ -273,26 +273,26 @@ public class Author {
 	 * @return <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
+		String retVal = "";
 		// Search for the author name. If it isn´t there, try to use the
 		// organisation name.
 		if (mAuthor.getAssignedAuthor() != null) {
 			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
 				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
-					Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames()
-							.get(0));
-					return name.getCompleteName();
+					final Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+					retVal = name.getCompleteName();
 				} else {
 					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
 						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
-							Name name = new Name(mAuthor.getAssignedAuthor()
+							final Name name = new Name(mAuthor.getAssignedAuthor()
 									.getRepresentedOrganization().getNames().get(0));
-							return name.getCompleteName();
+							retVal = name.getCompleteName();
 						}
 					}
 				}
 			}
 		}
-		return "";
+		return retVal;
 	}
 
 	/**
@@ -303,7 +303,7 @@ public class Author {
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
-		Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(),
+		final Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(),
 				CodeSystems.GLN.getCodeSystemId());
 		return gln.getExtension();
 	}
@@ -316,8 +316,8 @@ public class Author {
 	 * @return <div class="en">the gln as identificator</div>
 	 */
 	public Identificator getGlnAsIdentificator() {
-		II ii = mAuthor.getAssignedAuthor().getIds().get(0);
-		Identificator id = new Identificator(ii);
+		final II ii = mAuthor.getAssignedAuthor().getIds().get(0);
+		final Identificator id = new Identificator(ii);
 		return id;
 	}
 
@@ -339,7 +339,7 @@ public class Author {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+		final Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 		return name;
 	}
 
@@ -350,9 +350,9 @@ public class Author {
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		List<Name> nl = new ArrayList<Name>();
-		for (PN mName : mAuthor.getAssignedAuthor().getAssignedPerson().getNames()) {
-			Name name = new Name(mName);
+		final List<Name> nl = new ArrayList<Name>();
+		for (final PN mName : mAuthor.getAssignedAuthor().getAssignedPerson().getNames()) {
+			final Name name = new Name(mName);
 			nl.add(name);
 		}
 		return nl;
@@ -374,7 +374,7 @@ public class Author {
 	 *         class="it"></div>
 	 */
 	public Organization getOrganization() {
-		Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
+		final Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
 		return o;
 	}
 
@@ -449,7 +449,7 @@ public class Author {
 		if (mAuthor.getTime() != null) {
 			try {
 				return DateUtil.createIVL_TSFromHL7Date(mAuthor.getTime().getValue());
-			} catch (ParseException e) {
+			} catch (final ParseException e) {
 				return null;
 			}
 		}
@@ -497,9 +497,9 @@ public class Author {
 	 * @return true, if is author patient
 	 */
 	public boolean isAuthorPatient() {
-		CE functionCode = mAuthor.getFunctionCode();
+		final CE functionCode = mAuthor.getFunctionCode();
 		if (functionCode != null) {
-			return functionCodeAuthorPatient.equals(new Code(functionCode));
+			return FUNCTION_CODE_AUTHOR_PATIENT.equals(new Code(functionCode));
 		}
 		return false;
 	}
@@ -512,9 +512,9 @@ public class Author {
 	 */
 	public void setAuthorIsPatient(boolean isAuthorPatient) {
 		if (isAuthorPatient) {
-			mAuthor.setFunctionCode(functionCodeAuthorPatient.getCE());
+			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHOR_PATIENT.getCE());
 		} else {
-			mAuthor.setFunctionCode(functionCodeAuthorDoctor.getCE());
+			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
 		}
 	}
 
@@ -609,7 +609,7 @@ public class Author {
 	public void setTime(Date date) {
 		try {
 			mAuthor.setTime(DateUtil.createTSFromEuroDate(date));
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
 	}
@@ -621,6 +621,57 @@ public class Author {
 	 */
 	public org.ehealth_connector.common.ch.AuthorCh toChAuthor() {
 		return new org.ehealth_connector.common.ch.AuthorCh(getAuthorMdht());
+	}
+	
+	/**
+	 * Method to get
+	 * 
+	 * @return the asAuthor
+	 */
+	public org.openhealthtools.mdht.uml.cda.AssignedAuthor getAsAuthor() {
+		return mAsAuthor;
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param asAuthor
+	 *            the asAuthor to set
+	 */
+	public void setAsAuthor(org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor) {
+		mAsAuthor = asAuthor;
+	}
+
+	/**
+	 * Method to get
+	 * @return the author
+	 */
+	public org.openhealthtools.mdht.uml.cda.Author getAuthor() {
+		return mAuthor;
+	}
+
+	/**
+	 * Method to set
+	 * @param author the author to set
+	 */
+	public void setAuthor(org.openhealthtools.mdht.uml.cda.Author author) {
+		mAuthor = author;
+	}
+
+	/**
+	 * Method to get
+	 * @return the person
+	 */
+	public org.openhealthtools.mdht.uml.cda.Person getPerson() {
+		return mPerson;
+	}
+
+	/**
+	 * Method to set
+	 * @param person the person to set
+	 */
+	public void setPerson(org.openhealthtools.mdht.uml.cda.Person person) {
+		mPerson = person;
 	}
 
 }

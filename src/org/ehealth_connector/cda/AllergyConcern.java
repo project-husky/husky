@@ -42,7 +42,7 @@ public class AllergyConcern extends Concern {
 	/**
 	 * The MDHT allergy concern.
 	 */
-	protected org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
+	private org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mAllergyConcern;
 
 	/**
 	 * Instantiates a new allergy concern.
@@ -138,7 +138,7 @@ public class AllergyConcern extends Concern {
 		if (end != null) {
 			setEffectiveTime(begin, end);
 		} else {
-			IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
+			final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
 			try {
 				ivlts.setLow(DateUtil.createIVXB_TSFromDate(begin));
 				mAllergyConcern.setEffectiveTime(ivlts);
@@ -181,9 +181,9 @@ public class AllergyConcern extends Concern {
 	 * @return the allergy problems
 	 */
 	public List<AllergyProblem> getAllergyProblems() {
-		List<AllergyProblem> apl = new ArrayList<AllergyProblem>();
+		final List<AllergyProblem> apl = new ArrayList<AllergyProblem>();
 		for (AllergyIntolerance mAllergy : mAllergyConcern.getAllergyIntolerances()) {
-			AllergyProblem allergy = new AllergyProblem(mAllergy);
+			final AllergyProblem allergy = new AllergyProblem(mAllergy);
 			apl.add(allergy);
 		}
 		return apl;

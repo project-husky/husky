@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.xd.storedquery;
 
 import org.ehealth_connector.common.Identificator;
@@ -21,10 +36,10 @@ public class FindFoldersStoredQuery extends AbstractStoredQuery {
 	 */
 	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) {
 		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(
+			setOhtStoredQuery( new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(
 					XdsUtil.convertEhcIdentificator(patientId),
-					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() });
-		} catch (MalformedStoredQueryException e) {
+					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() }));
+		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
 	}

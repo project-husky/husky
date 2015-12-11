@@ -41,7 +41,7 @@ import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
  */
 public class ConvenienceMasterPatientIndexV3 {
 
-	static final private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
+	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 
 	static private Log log = LogFactory.getLog(ConvenienceMasterPatientIndexV3.class);
 
@@ -51,7 +51,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		// classcast Exception occurs
 		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
 		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
-		if (factory == null) {
+		if (FACTORY == null) {
 			throw new ExceptionInInitializerError();
 		}
 	}
@@ -103,7 +103,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		log.debug("addPatientDemographics, creating patient");
 		FhirPatient fhirPatient = new FhirPatient(patient);
 		log.debug("addPatientDemographics, add patient");
-		boolean ret = v3PixAdapter.addPatient(fhirPatient);
+		final boolean ret = v3PixAdapter.addPatient(fhirPatient);
 		log.debug("addPatientDemographics, add patient finished");
 		return ret;
 	}
@@ -185,10 +185,10 @@ public class ConvenienceMasterPatientIndexV3 {
 			log.error("affinityDomain has to be specified");
 			return null;
 		}
-		Destination pdqQuery = affinityDomain.getPdqDestination();
-		AtnaConfig atna = affinityDomain.getAtnaConfig();
+		final Destination pdqQuery = affinityDomain.getPdqDestination();
+		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
+		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
 				(pdqQuery != null ? pdqQuery.getUri() : null),
 				(pdqQuery != null ? pdqQuery.getSenderApplicationOid() : null),
 				(pdqQuery != null ? pdqQuery.getSenderFacilityOid() : null),
@@ -197,8 +197,8 @@ public class ConvenienceMasterPatientIndexV3 {
 				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), affinityDomain.getOtherIdsOidSet()
 						.toArray(new String[0]));
-		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
+		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+		final V3PdqQueryResponse pdqQueryRespones = v3PixAdapter.queryPatients(mpiQuery.getV3PdqQuery());
 		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
@@ -242,7 +242,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		Destination pixQuery = affinityDomain.getPixDestination();
 		AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
+		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
 				(pixQuery != null ? pixQuery.getUri() : null), null, null,
 				(pixQuery != null ? pixQuery.getSenderApplicationOid() : null),
 				(pixQuery != null ? pixQuery.getSenderFacilityOid() : null),
@@ -251,10 +251,10 @@ public class ConvenienceMasterPatientIndexV3 {
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), affinityDomain.getOtherIdsOidSet()
 						.toArray(new String[0]));
-		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient),
+		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+		final String ids[] = v3PixAdapter.queryPatientId(new FhirPatient(patient),
 				requestedCommunityOIDs, null);
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		final List<Identificator> list = new ArrayList<Identificator>();
 		if (requestedCommunityOIDs != null) {
 			for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
 				String id = "";
@@ -300,10 +300,10 @@ public class ConvenienceMasterPatientIndexV3 {
 			log.error("affinityDomain has to be specified");
 			return false;
 		}
-		Destination pixSource = affinityDomain.getPixDestination();
-		AtnaConfig atna = affinityDomain.getAtnaConfig();
+		final Destination pixSource = affinityDomain.getPixDestination();
+		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
+		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
 				(pixSource != null ? pixSource.getUri() : null), null,
 				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
 				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
@@ -312,7 +312,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null), affinityDomain.getOtherIdsOidSet()
 						.toArray(new String[0]));
-		V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
 		return ret;
 	}

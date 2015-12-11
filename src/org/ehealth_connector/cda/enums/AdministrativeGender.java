@@ -61,7 +61,7 @@ public enum AdministrativeGender {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AdministrativeGender getEnum(String code) {
-		for (AdministrativeGender x : values()) {
+		for (final AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -76,7 +76,7 @@ public enum AdministrativeGender {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -90,7 +90,7 @@ public enum AdministrativeGender {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -127,10 +127,10 @@ public enum AdministrativeGender {
 	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return this.displayName;
 	}
 
@@ -160,7 +160,7 @@ public enum AdministrativeGender {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (AdministrativeGender x : values()) {
+		for (final AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

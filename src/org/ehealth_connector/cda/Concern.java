@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.IdentityDomain;
@@ -32,9 +33,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * <div class="en">(Internal) class for concern entries</div> <div
- * class="de">Klasse ConcernEntry.</div> <div class="fr"></div> <div
- * class="it"></div>
+ * <div class="en">(Internal) class for concern entries</div>
+ * <div class="de">Klasse ConcernEntry.</div> <div class="fr"></div>
+ * <div class="it"></div>
  */
 public class Concern {
 
@@ -53,7 +54,7 @@ public class Concern {
 	 * Instantiates a new concern entry.
 	 * 
 	 * @param concernEntry
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> concern entry</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -68,7 +69,7 @@ public class Concern {
 	 *            the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = Util.createUuidVacdIdentificator(id);
+		final II ii = CdaUtil.createUuidVacdIdentificator(id);
 		getConcernEntry().getIds().add(ii);
 	}
 
@@ -102,8 +103,8 @@ public class Concern {
 	 * @return Ende des Leidens
 	 */
 	public String getEnd() {
-		return Util.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getHigh()
-				.getValue());
+		return Util.createEurDateStrFromTS(
+				copyMdhtConcernEntry().getEffectiveTime().getHigh().getValue());
 	}
 
 	/**
@@ -149,8 +150,8 @@ public class Concern {
 	 *         Leidens</div>
 	 */
 	public String getStart() {
-		return Util.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getLow()
-				.getValue());
+		return Util.createEurDateStrFromTS(
+				copyMdhtConcernEntry().getEffectiveTime().getLow().getValue());
 	}
 
 	/**
@@ -199,11 +200,11 @@ public class Concern {
 	public void setEnd(Date endOfConcern) {
 		try {
 			if (getConcernEntry().getEffectiveTime() == null) {
-				getConcernEntry().setEffectiveTime(
-						DateUtil.createIVL_TSFromEuroDateTime(endOfConcern));
+				getConcernEntry()
+						.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(endOfConcern));
 			}
-			getConcernEntry().getEffectiveTime().setHigh(
-					DateUtil.createIVXB_TSFromDate(endOfConcern));
+			getConcernEntry().getEffectiveTime()
+					.setHigh(DateUtil.createIVXB_TSFromDate(endOfConcern));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -220,11 +221,11 @@ public class Concern {
 	public void setStart(Date startOfConcern) {
 		try {
 			if (getConcernEntry().getEffectiveTime() == null) {
-				getConcernEntry().setEffectiveTime(
-						DateUtil.createIVL_TSFromEuroDateTime(startOfConcern));
+				getConcernEntry()
+						.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(startOfConcern));
 			}
-			getConcernEntry().getEffectiveTime().setLow(
-					DateUtil.createIVXB_TSFromDate(startOfConcern));
+			getConcernEntry().getEffectiveTime()
+					.setLow(DateUtil.createIVXB_TSFromDate(startOfConcern));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -237,8 +238,8 @@ public class Concern {
 	 * completed, aborted, active, suspended and you HAVE to use the setEnd
 	 * method. In case of a past problem conern (@see
 	 * org.ehealth_connector.cda.PastProblemConcern) you HAVE to set completed
-	 * or aborted and you HAVE to use the setEnd Method </div> <div class="de">
-	 * Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
+	 * or aborted and you HAVE to use the setEnd Method </div>
+	 * <div class="de"> Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
 	 * Bei einem Aktiven Leiden (@see
 	 * org.ehealth_connector.cda.ActiveProblemConcern) muss entweder completed,
 	 * aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS

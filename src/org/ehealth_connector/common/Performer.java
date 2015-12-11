@@ -40,6 +40,9 @@ public class Performer {
 	private org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
+	/**
+	 * Default constructor to instanciate the object
+	 */
 	public Performer() {
 		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
 		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
@@ -52,6 +55,11 @@ public class Performer {
 		setTimeValue(new Date());
 	}
 
+	/**
+	 * Default constructor to instanciate the object
+	 *
+	 * @param name the name of the performer
+	 */
 	public Performer(Name name) {
 		this();
 		addName(name);
@@ -70,7 +78,7 @@ public class Performer {
 		this(name);
 
 		// Create and fill Person Name and GLN
-		II id = DatatypesFactory.eINSTANCE.createII();
+		final II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 
@@ -90,6 +98,11 @@ public class Performer {
 		mPerson = performerMdht.getAssignedEntity().getAssignedPerson();
 	}
 
+	/**
+	 * Default constructor to instanciate the object
+	 *
+	 * @param organization the organization of the performer
+	 */
 	public Performer(Organization organization) {
 		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
 		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
@@ -151,7 +164,7 @@ public class Performer {
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
-		Address address = new Address(mAsEntity.getAddrs().get(0));
+		final Address address = new Address(mAsEntity.getAddrs().get(0));
 		return address;
 	}
 
@@ -162,9 +175,9 @@ public class Performer {
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
-		List<Address> al = new ArrayList<Address>();
-		for (AD mAddress : mAsEntity.getAddrs()) {
-			Address address = new Address(mAddress);
+		final List<Address> al = new ArrayList<Address>();
+		for (final AD mAddress : mAsEntity.getAddrs()) {
+			final Address address = new Address(mAddress);
 			al.add(address);
 		}
 		return al;
@@ -180,23 +193,19 @@ public class Performer {
 	public String getCompleteName() {
 		// Search for the author name. If it isn´t there, try to use the
 		// organisation name.
-		if (mAsEntity != null) {
-			if (mAsEntity.getAssignedPerson() != null) {
-				if (mAsEntity.getAssignedPerson().getNames() != null) {
-					Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
-					return name.getCompleteName();
-				} else {
-					if (mAsEntity.getRepresentedOrganizations().get(0) != null) {
-						if (mAsEntity.getRepresentedOrganizations().get(0).getNames() != null) {
-							Name name = new Name(mAsEntity.getRepresentedOrganizations().get(0)
-									.getNames().get(0));
-							return name.getCompleteName();
-						}
-					}
+		String retVal = "";
+		if ((mAsEntity != null) && (mAsEntity.getAssignedPerson() != null)) {
+			if (mAsEntity.getAssignedPerson().getNames() != null) {
+				final Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
+				retVal = name.getCompleteName();
+			} else {
+				if ((mAsEntity.getRepresentedOrganizations().get(0) != null)&&  (mAsEntity.getRepresentedOrganizations().get(0).getNames() != null)) {
+					final Name name = new Name(mAsEntity.getRepresentedOrganizations().get(0).getNames().get(0));
+					retVal = name.getCompleteName();
 				}
 			}
 		}
-		return "";
+		return retVal;
 	}
 
 	/**
@@ -207,7 +216,7 @@ public class Performer {
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
-		Identificator gln = Identificator.getIdentificator(mAsEntity.getIds(),
+		final Identificator gln = Identificator.getIdentificator(mAsEntity.getIds(),
 				CodeSystems.GLN.getCodeSystemId());
 		return gln.getExtension();
 	}
@@ -220,8 +229,8 @@ public class Performer {
 	 * @return <div class="en">the gln as identificator</div>
 	 */
 	public Identificator getGlnAsIdentificator() {
-		II ii = mAsEntity.getIds().get(0);
-		Identificator id = new Identificator(ii);
+		final II ii = mAsEntity.getIds().get(0);
+		final Identificator id = new Identificator(ii);
 		return id;
 	}
 
@@ -243,7 +252,7 @@ public class Performer {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
+		final Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
 		return name;
 	}
 
@@ -254,9 +263,9 @@ public class Performer {
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		List<Name> nl = new ArrayList<Name>();
-		for (PN mName : mAsEntity.getAssignedPerson().getNames()) {
-			Name name = new Name(mName);
+		final List<Name> nl = new ArrayList<Name>();
+		for (final PN mName : mAsEntity.getAssignedPerson().getNames()) {
+			final Name name = new Name(mName);
 			nl.add(name);
 		}
 		return nl;
@@ -274,7 +283,7 @@ public class Performer {
 	 *         class="it"></div>
 	 */
 	public Organization getOrganization() {
-		Organization o = new Organization(mAsEntity.getRepresentedOrganizations().get(0));
+		final Organization o = new Organization(mAsEntity.getRepresentedOrganizations().get(0));
 		return o;
 	}
 
@@ -296,7 +305,7 @@ public class Performer {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mAsEntity.getTelecoms());
+		final Telecoms telecoms = new Telecoms(mAsEntity.getTelecoms());
 		return telecoms;
 	}
 
@@ -352,7 +361,7 @@ public class Performer {
 	public void setTimeValue(Date eurDate) {
 		try {
 			mPerfomer.setTime(DateUtil.createIVL_TSFromEuroDate(eurDate));
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
 	}

@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.AllergiesAndIntolerances;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.common.Identificator;
@@ -97,12 +98,12 @@ public class AllergyProblem {
 	 * @param problem
 	 *            <div class="en">code for risc of complication or risc of
 	 *            exposure</div> <div class="de">Code zu Komplikationsrisiken
-	 *            oder Expositionsrisiken.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            oder Expositionsrisiken.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param startOfProblem
 	 *            <div class="en">start of problem</div> <div class="de">Beginn
-	 *            des Problems</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            des Problems</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param endOfProblem
 	 *            <div class="en">end of problem</div> <div class="de">Ende des
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
@@ -124,17 +125,17 @@ public class AllergyProblem {
 	 * 
 	 * @param kindOfAllergy
 	 *            <div class="en">kind of allergy</div> <div class="de">Die Art
-	 *            der Allergie</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            der Allergie</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param problem
 	 *            <div class="en">code for risc of complication or risc of
 	 *            exposure</div> <div class="de">Code zu Komplikationsrisiken
-	 *            oder Expositionsrisiken.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            oder Expositionsrisiken.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param startOfProblem
 	 *            <div class="en">start of problem</div> <div class="de">Beginn
-	 *            des Problems</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            des Problems</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param endOfProblem
 	 *            <div class="en">end of problem</div> <div class="de">Ende des
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
@@ -163,11 +164,12 @@ public class AllergyProblem {
 	 * Instantiates a new allergy problem.
 	 * 
 	 * @param allergyIntolerance
-	 * <br>
-	 *            <div class="de"> allergy intolerance</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> allergy intolerance</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public AllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+	public AllergyProblem(
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
 		setAllergyProblem(allergyIntolerance);
 	}
 
@@ -178,7 +180,7 @@ public class AllergyProblem {
 	 *            the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = Util.createUuidVacdIdentificator(id);
+		final II ii = CdaUtil.createUuidVacdIdentificator(id);
 		getAllergyProblem().getIds().add(ii);
 	}
 
@@ -204,8 +206,8 @@ public class AllergyProblem {
 	}
 
 	/**
-	 * <div class="de">Copy mdht allergy intolerance.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="de">Copy mdht allergy intolerance.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the allergy intolerance
 	 */
@@ -261,8 +263,8 @@ public class AllergyProblem {
 	public String getEndDate() {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getHigh() != null) {
-				return Util.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getHigh()
-						.getValue());
+				return Util.createEurDateStrFromTS(
+						getAllergyProblem().getEffectiveTime().getHigh().getValue());
 			}
 		}
 		return null;
@@ -327,8 +329,8 @@ public class AllergyProblem {
 	public String getStartDate() {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getLow() != null) {
-				return Util.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getLow()
-						.getValue());
+				return Util.createEurDateStrFromTS(
+						getAllergyProblem().getEffectiveTime().getLow().getValue());
 			}
 		}
 		return null;
@@ -400,8 +402,8 @@ public class AllergyProblem {
 		mComment.setText(ed);
 		getAllergyProblem().addAct(mComment);
 
-		final EntryRelationship er = getAllergyProblem().getEntryRelationships().get(
-				getAllergyProblem().getEntryRelationships().size() - 1);
+		final EntryRelationship er = getAllergyProblem().getEntryRelationships()
+				.get(getAllergyProblem().getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -418,8 +420,8 @@ public class AllergyProblem {
 			getAllergyProblem().setEffectiveTime(interval);
 		}
 		try {
-			getAllergyProblem().getEffectiveTime().setHigh(
-					DateUtil.createIVXB_TSFromDate(endOfProblem));
+			getAllergyProblem().getEffectiveTime()
+					.setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -458,8 +460,8 @@ public class AllergyProblem {
 			getAllergyProblem().setEffectiveTime(interval);
 		}
 		try {
-			getAllergyProblem().getEffectiveTime().setLow(
-					DateUtil.createIVXB_TSFromDate(startOfProblem));
+			getAllergyProblem().getEffectiveTime()
+					.setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

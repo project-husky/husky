@@ -103,12 +103,12 @@ public class Value {
 	 *            the UCUM Unit
 	 */
 	public Value(double numerator, double denominator, Ucum ucumUnit) {
-		RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+		final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
 
-		PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+		final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
 		pq1.setUnit(ucumUnit.getCodeValue());
 		pq1.setValue(numerator);
-		PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+		final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
 		pq2.setUnit(ucumUnit.getCodeValue());
 		pq2.setValue(denominator);
 
@@ -166,7 +166,7 @@ public class Value {
 	 *            class="it"></div>
 	 */
 	public Value(String codeSystem, String code) {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(codeSystem);
 		cd.setCode(code);
 		mValue = cd;
@@ -206,6 +206,11 @@ public class Value {
 		return EcoreUtil.copy((PQ) mValue);
 	}
 
+	/**
+	 * Method to copy the RTO value
+	 *
+	 * @return RTO represeting the value
+	 */
 	public RTO copyMdhtRto() {
 		return EcoreUtil.copy((RTO) mValue);
 	}
@@ -217,7 +222,7 @@ public class Value {
 	 * @return Code <div class="en">the convenience API Code object</div>
 	 */
 	public Code getCode() {
-		Code code = new Code((CD) mValue);
+		final Code code = new Code((CD) mValue);
 		return code;
 	}
 
@@ -228,7 +233,7 @@ public class Value {
 	 */
 	public String getPhysicalQuantityUnit() {
 		if (isPhysicalQuantity()) {
-			PQ pq = (PQ) mValue;
+			final PQ pq = (PQ) mValue;
 			return pq.getUnit();
 		} else {
 			return null;
@@ -242,7 +247,7 @@ public class Value {
 	 */
 	public String getPhysicalQuantityValue() {
 		if (isPhysicalQuantity()) {
-			PQ pq = (PQ) mValue;
+			final PQ pq = (PQ) mValue;
 			return String.valueOf(pq.getValue());
 		}
 		return null;
@@ -267,11 +272,12 @@ public class Value {
 	 * @return boolean true, if the Value is a code, false otherwise
 	 */
 	public boolean isCode() {
-		if (mValue instanceof CD) {
-			return true;
-		} else {
-			return false;
-		}
+		//		if (mValue instanceof CD) {
+		//			return true;
+		//		} else {
+		//			return false;
+		//		}
+		return (mValue instanceof CD);
 	}
 
 	/**
@@ -280,11 +286,12 @@ public class Value {
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
 	public boolean isPhysicalQuantity() {
-		if (mValue instanceof PQ) {
-			return true;
-		} else {
-			return false;
-		}
+		//		if (mValue instanceof PQ) {
+		//			return true;
+		//		} else {
+		//			return false;
+		//		}
+		return (mValue instanceof PQ);
 	}
 
 	/**
@@ -294,11 +301,12 @@ public class Value {
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
 	public boolean isRto() {
-		if (mValue instanceof RTO) {
-			return true;
-		} else {
-			return false;
-		}
+		//		if (mValue instanceof RTO) {
+		//			return true;
+		//		} else {
+		//			return false;
+		//		}
+		return (mValue instanceof RTO);
 	}
 
 	/**
@@ -310,17 +318,16 @@ public class Value {
 	 */
 	@Override
 	public String toString() {
-		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit()
-				+ "]";
+		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit() + "]";
 	}
 
 	private void setPqValue(String value) {
-		PQ pq = (PQ) mValue;
+		final PQ pq = (PQ) mValue;
 		pq.setValue(Double.valueOf(value));
 	}
 
 	private void setUcumUnit(Ucum unit) {
-		PQ pq = (PQ) mValue;
+		final PQ pq = (PQ) mValue;
 		pq.setUnit(unit.getCodeValue());
 	}
 

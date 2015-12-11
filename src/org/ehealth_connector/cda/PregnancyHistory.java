@@ -20,8 +20,8 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.enums.Pregnancies;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.DateUtil;
-import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -57,9 +57,9 @@ public class PregnancyHistory {
 	 * Instantiates a new pregnancy.
 	 * 
 	 * @param estimatedBirthDate
-	 *            <div class="en">calculated due date</div> <div
-	 *            class="de">Errechneter Geburtstermin</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *            <div class="en">calculated due date</div>
+	 *            <div class="de">Errechneter Geburtstermin</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		this();
@@ -70,9 +70,10 @@ public class PregnancyHistory {
 	 * Instantiates a new pregnancy.
 	 * 
 	 * @param pregnancy
-	 *            <div class="en">pregnancy</div> <div
-	 *            class="de">Schwangerschaft</div> <div class="fr">
-	 *            pregnancy</div> <div class="it"> pregnancy</div>
+	 *            <div class="en">pregnancy</div>
+	 *            <div class="de">Schwangerschaft</div>
+	 *            <div class="fr"> pregnancy</div>
+	 *            <div class="it"> pregnancy</div>
 	 */
 	public PregnancyHistory(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
 		mPregnancy = pregnancy;
@@ -80,8 +81,8 @@ public class PregnancyHistory {
 
 	/**
 	 * <div class="en">Copy mdht pregnancy.</div> <div class="de">kopiert das
-	 * MDHT Schwangerschaftsobjekt</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * MDHT Schwangerschaftsobjekt</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation
 	 */
@@ -98,7 +99,7 @@ public class PregnancyHistory {
 	public String getEstimatedBirthdate() {
 
 		if (mPregnancy.getValues().size() > 0) {
-			TS ts = (TS) copyMdhtPregnancy().getValues().get(0);
+			final TS ts = (TS) copyMdhtPregnancy().getValues().get(0);
 			return DateUtil.parseDateToStr(ts);
 		} else
 			return null;
@@ -121,12 +122,12 @@ public class PregnancyHistory {
 	 *            the new estimated birth date
 	 */
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
-		TS ts = DateUtil.ts(estimatedBirdDate);
+		final TS ts = DateUtil.ts(estimatedBirdDate);
 		mPregnancy.getValues().add(ts);
 	}
 
 	private void setInternalId(String id) {
-		II ii = Util.createUuidVacd(id);
+		final II ii = CdaUtil.createUuidVacd(id);
 		mPregnancy.getIds().add(ii);
 	}
 }

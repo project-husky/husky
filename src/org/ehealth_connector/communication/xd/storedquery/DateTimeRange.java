@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.xd.storedquery;
 
 import java.util.Date;
@@ -10,7 +25,9 @@ import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
  * This class represents a date and time range
  */
 public class DateTimeRange {
-	org.openhealthtools.ihe.xds.consumer.query.DateTimeRange ohtDtr;
+	
+	/** the oht date time range */
+	private org.openhealthtools.ihe.xds.consumer.query.DateTimeRange ohtDtr;
 
 	/**
 	 * Constructs a new DateTimeRange
@@ -27,7 +44,7 @@ public class DateTimeRange {
 		try {
 			ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(),
 					DateUtil.format(from), DateUtil.format(to));
-		} catch (MalformedQueryException e) {
+		} catch (final MalformedQueryException e) {
 			e.printStackTrace();
 		}
 	}

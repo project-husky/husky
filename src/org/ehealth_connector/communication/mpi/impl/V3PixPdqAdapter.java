@@ -109,38 +109,41 @@ import ca.uhn.fhir.model.primitive.IntegerDt;
  */
 public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQueryResponse> {
 
+	/** Field referencing the String */
+	private static final String URN_OID = "urn:oid:";
+	
 	/** The adapter cfg. */
-	protected V3PixPdqAdapterConfig adapterCfg;
+	private V3PixPdqAdapterConfig adapterCfg;
 
 	/** The home community oid. */
-	protected String homeCommunityOid;
+	private String homeCommunityOid;
 
 	/** The log. */
-	protected final Log log = LogFactory.getLog(V3PixPdqAdapter.class);
+	private final Log log = LogFactory.getLog(V3PixPdqAdapter.class);
 
 	/**
 	 * Used to capture additional oid identifiers for the person such as a
 	 * Drivers’ license or Social Security Number.
 	 */
-	protected Set<String> otherIdsOidSet;
+	private Set<String> otherIdsOidSet;
 
 	/** if the pdq consumer is configured. */
-	protected boolean pdqConsumerConfigured;
+	private boolean pdqConsumerConfigured;
 
 	/** If the pix consumer is configured. */
-	protected boolean pixConsumerConfigured;
+	private boolean pixConsumerConfigured;
 
 	/** The pix source. */
-	protected V3PixSource pixSource;
+	private V3PixSource pixSource;
 
 	/** If the pix source is configured. */
-	protected boolean pixSourceConfigured;
+	private boolean pixSourceConfigured;
 
 	/** The v3 pdq consumer. */
-	protected V3PdqConsumer v3PdqConsumer;
+	private V3PdqConsumer v3PdqConsumer;
 
 	/** The v3 pix consumer. */
-	protected V3PixConsumer v3PixConsumer;
+	private V3PixConsumer v3PixConsumer;
 
 	/**
 	 * Instantiates a new v3 pix adapter.
@@ -158,9 +161,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	public V3PixPdqAdapter(V3PixPdqAdapterConfig adapterConfig) {
 		otherIdsOidSet = new HashSet<String>();
 		adapterCfg = adapterConfig;
-		homeCommunityOid = adapterCfg.homeCommunityOid;
-		if (adapterConfig.otherOidIds != null) {
-			for (String oid : adapterConfig.otherOidIds) {
+		homeCommunityOid = adapterCfg.getHomeCommunityOid();
+		if (adapterConfig.getOtherOidIds() != null) {
+			for (final String oid : adapterConfig.getOtherOidIds()) {
 				otherIdsOidSet.add(oid);
 			}
 		}
@@ -174,7 +177,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            oid for the domain to add as otherId in the pix v3 message
 	 */
 	public void addOtherIdsOid(String oid) {
-		otherIdsOidSet.add(oid);
+		otherIdsOidSet.add(URN_OID + oid);
 	}
 
 	/**
@@ -190,18 +193,16 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	public boolean addPatient(FhirPatient patient) {
 		configurePix(true);
 		log.debug("creating v3RecordAddedMessage");
-		V3PixSourceMessageHelper v3RecordAddedMessage = new V3PixSourceMessageHelper(true, false,
-				false, adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+		final V3PixSourceMessageHelper v3RecordAddedMessage = new V3PixSourceMessageHelper(true, false, false, adapterCfg.getSenderApplicationOid(), adapterCfg.getSenderFacilityOid(),
+			adapterCfg.getReceiverApplicationOid(), adapterCfg.getReceiverFacilityOid());
 		log.debug("add demographic data");
 		addDemographicData(patient, v3RecordAddedMessage);
 		try {
 			printMessage("addPatient", v3RecordAddedMessage.getV3RecordAddedMessage().getRequest());
-			V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordAdded(v3RecordAddedMessage
-					.getV3RecordAddedMessage());
+			final V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage());
 			printMessage("sendRecordAdded", v3pixack.getRequest());
 			return checkResponse(v3pixack);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("addPatient failed", e);
 			return false;
 		}
@@ -214,8 +215,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	@Override
 	public V3PdqQuery getMpiQuery() {
-		return new V3PdqQuery(adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+		return new V3PdqQuery(adapterCfg.getSenderApplicationOid(), adapterCfg.getSenderFacilityOid(), adapterCfg.getReceiverApplicationOid(), adapterCfg.getReceiverFacilityOid());
 	}
 
 	/**
@@ -228,26 +228,28 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @return the patient domain id
 	 */
 	public String getPatientDomainId(V3PixConsumerResponse v3PixConsumerResponse, String rootOid) {
-
+		String retVal = null;
 		if (rootOid != null
 				&& v3PixConsumerResponse != null
 				&& ((v3PixConsumerResponse.getNumPatientIds() > 0) || (v3PixConsumerResponse
 						.getNumAsOtherIds() > 0))) {
 
 			for (int i = 0; i < v3PixConsumerResponse.getNumPatientIds(); i++) {
-				String id[] = v3PixConsumerResponse.getPatientID(i);
-				if (id[2] != null && id[2].equals(rootOid)) {
-					return id[0];
+				final String[] id = v3PixConsumerResponse.getPatientID(i);
+				if ((id[2] != null) && id[2].equals(rootOid)) {
+					retVal = id[0];
 				}
 			}
-			for (int i = 0; i < v3PixConsumerResponse.getNumAsOtherIds(); i++) {
-				String id[] = v3PixConsumerResponse.getPatientAsOtherID(i);
-				if (id[2] != null && id[2].equals(rootOid)) {
-					return id[0];
+			if (retVal == null) {
+				for (int i = 0; i < v3PixConsumerResponse.getNumAsOtherIds(); i++) {
+					final String[] id = v3PixConsumerResponse.getPatientAsOtherID(i);
+					if ((id[2] != null) && id[2].equals(rootOid)) {
+						retVal = id[0];
+					}
 				}
 			}
 		}
-		return null;
+		return retVal;
 	}
 
 	/**
@@ -262,10 +264,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (response != null) {
 			success = !response.hasError();
 			if (success) {
-				ArrayList<FhirPatient> listFhirPatients = new ArrayList<FhirPatient>(
-						response.getNumRecordsCurrent());
+				final List<FhirPatient> listFhirPatients = new ArrayList<FhirPatient>(response.getNumRecordsCurrent());
 				for (int i = 0; i < response.getNumRecordsCurrent(); ++i) {
-					FhirPatient fhirPatient = new FhirPatient();
+					final FhirPatient fhirPatient = new FhirPatient();
 					addDemographicData(getPatientByIndex(response, i), fhirPatient);
 					listFhirPatients.add(fhirPatient);
 				}
@@ -299,21 +300,17 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			return false;
 		}
 
-		V3PixSourceMessageHelper v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false, false,
-				true, adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+		final V3PixSourceMessageHelper v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false, false, true, adapterCfg.getSenderApplicationOid(), adapterCfg.getSenderFacilityOid(),
+			adapterCfg.getReceiverApplicationOid(), adapterCfg.getReceiverFacilityOid());
 		addDemographicData(patient, v3pixSourceMsgMerge);
 
-		v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId,
-				this.homeCommunityOid, this.adapterCfg.homeCommunityNamespace);
+		v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId, this.homeCommunityOid, this.adapterCfg.getHomeCommunityNamespace());
 		try {
-			printMessage("sourceMerge", v3pixSourceMsgMerge.getV3MergePatientsMessage()
-					.getRequest());
-			V3PixSourceAcknowledgement v3pixack = pixSource.sendMergePatients(v3pixSourceMsgMerge
-					.getV3MergePatientsMessage());
+			printMessage("sourceMerge", v3pixSourceMsgMerge.getV3MergePatientsMessage().getRequest());
+			final V3PixSourceAcknowledgement v3pixack = pixSource.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage());
 			printMessage("sourceMerge", v3pixack.getRequest());
 			return checkResponse(v3pixack);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("mergePatient failed", e);
 			return false;
 		}
@@ -355,58 +352,54 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (!configurePix(false)) {
 			return null;
 		}
-		String domainToReturnOids[] = null;
-		String domainToReturnNamespaces[] = null;
+		String[] domainToReturnOids = null;
+		String[] domainToReturnNamespaces = null;
 
 		if (queryDomainOids != null) {
 			domainToReturnOids = queryDomainOids;
 		} else {
-			if (adapterCfg.domainToReturnOid != null) {
+			if (adapterCfg.getDomainToReturnOid() != null) {
 				domainToReturnOids = new String[1];
-				domainToReturnOids[0] = adapterCfg.domainToReturnOid;
+				domainToReturnOids[0] = adapterCfg.getDomainToReturnOid();
 			}
 		}
 		if (queryDomainNamespaces != null) {
 			domainToReturnNamespaces = queryDomainNamespaces;
-		} else if (adapterCfg.domainToReturnNamespace != null) {
+		} else if (adapterCfg.getDomainToReturnNamespace() != null) {
 			domainToReturnNamespaces = new String[1];
-			domainToReturnNamespaces[0] = adapterCfg.domainToReturnNamespace;
+			domainToReturnNamespaces[0] = adapterCfg.getDomainToReturnNamespace();
 		}
 
-		V3PixConsumerQuery v3PixConsumerQuery = new V3PixConsumerQuery(
-				adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+		final V3PixConsumerQuery v3PixConsumerQuery = new V3PixConsumerQuery(adapterCfg.getSenderApplicationOid(), adapterCfg.getSenderFacilityOid(), adapterCfg.getReceiverApplicationOid(),
+			adapterCfg.getReceiverFacilityOid());
 
 		// add the patient identifier
-		String homeCommunityPatientId = this.getHomeCommunityPatientId(patient);
+		final String homeCommunityPatientId = this.getHomeCommunityPatientId(patient);
 		if (homeCommunityPatientId != null) {
-			v3PixConsumerQuery.addPatientIdToQuery(homeCommunityPatientId, homeCommunityOid,
-					adapterCfg.homeCommunityNamespace);
+			v3PixConsumerQuery.addPatientIdToQuery(homeCommunityPatientId, homeCommunityOid, adapterCfg.getHomeCommunityNamespace());
 
 			if (domainToReturnOids != null) {
 				for (int i = 0; i < domainToReturnOids.length; ++i) {
-					String domainToReturnOid = domainToReturnOids[i];
+					final String domainToReturnOid = domainToReturnOids[i];
 					String domainToReturnNamespace = null;
-					if (domainToReturnNamespaces != null && i < domainToReturnNamespaces.length) {
+					if ((domainToReturnNamespaces != null) && (i < domainToReturnNamespaces.length)) {
 						domainToReturnNamespace = domainToReturnNamespaces[i];
 					}
-					v3PixConsumerQuery
-							.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
+					v3PixConsumerQuery.addDomainToReturn(domainToReturnOid, domainToReturnNamespace);
 				}
 			}
 			V3PixConsumerResponse v3PixConsumerResponse = null;
 			try {
 				v3PixConsumerResponse = v3PixConsumer.sendQuery(v3PixConsumerQuery);
 				if (domainToReturnOids != null) {
-					String returnIds[] = new String[domainToReturnOids.length];
+					final String[] returnIds = new String[domainToReturnOids.length];
 					for (int i = 0; i < returnIds.length; ++i) {
-						returnIds[i] = getPatientDomainId(v3PixConsumerResponse,
-								domainToReturnOids[i]);
+						returnIds[i] = getPatientDomainId(v3PixConsumerResponse, domainToReturnOids[i]);
 					}
 					return returnIds;
 				}
 				return null;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				log.error("exception queryPatient", e);
 				return null;
 			}
@@ -425,19 +418,20 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	@Override
 	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery) {
-		V3PdqQueryResponse queryResponse = new V3PdqQueryResponse();
+		final V3PdqQueryResponse queryResponse = new V3PdqQueryResponse();
 		if (!configurePdq()) {
 			return queryResponse;
 		}
+		/** The last pdq consumer response. */
+
 		try {
 			if (!mpiQuery.doCancelQuery()) {
 				V3PdqConsumerResponse lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
-					lastPdqConsumerResponse = v3PdqConsumer.sendQuery(mpiQuery
-							.getV3PdqConsumerQuery());
+					lastPdqConsumerResponse = v3PdqConsumer.sendQuery(mpiQuery.getV3PdqConsumerQuery());
 				} else {
 					lastPdqConsumerResponse = mpiQuery.getLastPdqConsumerResponse();
-					V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(mpiQuery
+					final V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(mpiQuery
 							.getV3PdqConsumerQuery().getSendingApplication(), mpiQuery
 							.getV3PdqConsumerQuery().getSendingFacility(), mpiQuery
 							.getV3PdqConsumerQuery().getReceivingApplication(0), mpiQuery
@@ -450,24 +444,24 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
 				queryResponse.setCurrentNumbers(lastPdqConsumerResponse.getNumRecordsCurrent());
 				queryResponse.setRemainingNumbers(lastPdqConsumerResponse.getNumRecordsRemaining());
-				INT1 totalNumbers = lastPdqConsumerResponse.getPdqResponse().getControlActProcess()
+				final INT1 totalNumbers = lastPdqConsumerResponse.getPdqResponse().getControlActProcess()
 						.getQueryAck().getResultTotalQuantity();
 				if (totalNumbers != null) {
 					queryResponse.setTotalNumbers(totalNumbers.getValue().intValue());
 				}
 				mpiQuery.setLastPdqConsumerResponse(lastPdqConsumerResponse);
 			} else {
-				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
+				final V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
 						.getLastPdqConsumerResponse();
-				V3PdqContinuationCancel continuationCancel = new V3PdqContinuationCancel(mpiQuery
+				final V3PdqContinuationCancel continuationCancel = new V3PdqContinuationCancel(mpiQuery
 						.getV3PdqConsumerQuery().getSendingApplication(), mpiQuery
 						.getV3PdqConsumerQuery().getSendingFacility(), mpiQuery
 						.getV3PdqConsumerQuery().getReceivingApplication(0), mpiQuery
 						.getV3PdqConsumerQuery().getReceivingFacility(0), lastPdqConsumerResponse);
-				V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
+				final V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
 				queryResponse.setSuccess(!v3Ack.hasError());
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("queryPatient failed", e);
 			queryResponse.setSuccess(false);
 			return queryResponse;
@@ -484,25 +478,23 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
+	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.mpi.FhirPatient)
 	 */
 	@Override
 	public boolean updatePatient(FhirPatient patient) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(adapterCfg.pixSourceUri);
+			pixSource = new V3PixSource(adapterCfg.getPixSourceUri());
 		}
-		V3PixSourceMessageHelper v3RecordRevisedMessage = new V3PixSourceMessageHelper(false, true,
-				false, adapterCfg.senderApplicationOid, adapterCfg.senderFacilityOid,
-				adapterCfg.receiverApplicationOid, adapterCfg.receiverFacilityOid);
+		final V3PixSourceMessageHelper v3RecordRevisedMessage = new V3PixSourceMessageHelper(false, true,
+				false, adapterCfg.getSenderApplicationOid(), adapterCfg.getSenderFacilityOid(),
+				adapterCfg.getReceiverApplicationOid(), adapterCfg.getReceiverFacilityOid());
 		addDemographicData(patient, v3RecordRevisedMessage);
 		try {
-			printMessage("sourceUpdate", v3RecordRevisedMessage.getV3RecordRevisedMessage()
-					.getRequest());
-			V3PixSourceAcknowledgement v3pixack = pixSource
-					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage());
+			printMessage("sourceUpdate", v3RecordRevisedMessage.getV3RecordRevisedMessage().getRequest());
+			final V3PixSourceAcknowledgement v3pixack = pixSource.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage());
 			printMessage("sourceUpdate", v3pixack.getRequest());
 			return checkResponse(v3pixack);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("updatePatient failed", e);
 			return false;
 		}
@@ -585,7 +577,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void addLanguageCommunications(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getCommunication().size() > 0) {
-			for (Communication communication : patient.getCommunication()) {
+			for (final Communication communication : patient.getCommunication()) {
 				v3PixSourceMessage.addLanguageCommunication(communication.getLanguage().getText());
 			}
 		}
@@ -602,12 +594,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void addLanguageCommunications(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null
 				&& pdqPatient.getPatientPerson().getLanguageCommunication() != null) {
-			for (PRPAMT201310UV02LanguageCommunication languageCommmunication : pdqPatient
+			for (final PRPAMT201310UV02LanguageCommunication languageCommmunication : pdqPatient
 					.getPatientPerson().getLanguageCommunication()) {
 				if (languageCommmunication.getLanguageCode() != null
 						&& languageCommmunication.getLanguageCode().getCode() != null) {
-					Communication communication = new Communication();
-					CodeableConceptDt languageCode = new CodeableConceptDt();
+					final Communication communication = new Communication();
+					final CodeableConceptDt languageCode = new CodeableConceptDt();
 					languageCode.setText(languageCommmunication.getLanguageCode().getCode());
 					communication.setLanguage(languageCode);
 					patient.getCommunication().add(communication);
@@ -627,7 +619,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void addPatientAddresses(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getAddress().size() > 0) {
-			for (AddressDt addressDt : patient.getAddress()) {
+			for (final AddressDt addressDt : patient.getAddress()) {
 
 				String adressOtherDesignation = null;
 				if (addressDt.getLine().size() > 1) {
@@ -649,6 +641,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					case OLD___INCORRECT:
 						addressType = "OLD";
 						break;
+					default:
+						break;
 					}
 				}
 				v3PixSourceMessage.addPatientAddress(addressDt.getLineFirstRep().getValue(),
@@ -667,9 +661,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void addPatientAddresses(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getAddr() != null) {
-			for (AD ad : pdqPatient.getPatientPerson().getAddr()) {
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getAddr() != null)) {
+			for (final AD ad : pdqPatient.getPatientPerson().getAddr()) {
 				patient.getAddress().add(getAddressDtFromAD(ad));
 			}
 		}
@@ -684,16 +678,16 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the v3 pix source message
 	 */
 	protected void addPatientIds(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		for (IdentifierDt identifierDt : patient.getIdentifier()) {
+		for (final IdentifierDt identifierDt : patient.getIdentifier()) {
 			if (identifierDt.getSystem().length() > 8
 					&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
-				String oid = identifierDt.getSystem().substring(8);
+				final String oid = identifierDt.getSystem().substring(8);
 				if (this.otherIdsOidSet.contains(oid)) {
 					v3PixSourceMessage.addPatientOtherID(identifierDt.getValue(), oid);
 				} else {
 					if (homeCommunityOid.equals(oid)) {
 						v3PixSourceMessage.addPatientID(identifierDt.getValue(), homeCommunityOid,
-								adapterCfg.homeCommunityNamespace);
+								adapterCfg.getHomeCommunityNamespace());
 					} else {
 						v3PixSourceMessage.addPatientID(identifierDt.getValue(), oid, "");
 					}
@@ -712,22 +706,22 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void addPatientIds(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getId() != null) {
-			for (II patientId : pdqPatient.getId()) {
-				IdentifierDt identifierDt = new IdentifierDt();
-				identifierDt.setSystem("urn:oid:" + patientId.getRoot());
+			for (final II patientId : pdqPatient.getId()) {
+				final IdentifierDt identifierDt = new IdentifierDt();
+				identifierDt.setSystem(URN_OID + patientId.getRoot());
 				identifierDt.setValue(patientId.getExtension());
 				patient.getIdentifier().add(identifierDt);
 			}
 		}
 
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getAsOtherIDs() != null) {
-			for (PRPAMT201310UV02OtherIDs asOtherId : pdqPatient.getPatientPerson().getAsOtherIDs()) {
-				if (asOtherId.getId() != null && asOtherId.getId().size() > 0) {
-					II patientId = asOtherId.getId().get(0);
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getAsOtherIDs() != null)) {
+			for (final PRPAMT201310UV02OtherIDs asOtherId : pdqPatient.getPatientPerson().getAsOtherIDs()) {
+				if ((asOtherId.getId() != null) && (asOtherId.getId().size() > 0)) {
+					final II patientId = asOtherId.getId().get(0);
 					if (patientId != null) {
-						IdentifierDt identifierDt = new IdentifierDt();
-						identifierDt.setSystem("urn:oid:" + patientId.getRoot());
+						final IdentifierDt identifierDt = new IdentifierDt();
+						identifierDt.setSystem(URN_OID + patientId.getRoot());
 						identifierDt.setValue(patientId.getExtension());
 						patient.getIdentifier().add(identifierDt);
 					}
@@ -746,12 +740,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void addPatientName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		// Name
-		String familyName = patient.getName().get(0).getFamilyAsSingleString();
-		String givenName = patient.getName().get(0).getGivenAsSingleString();
-		String otherName = ""; // other is resolved into given in addPatientName
+		final String familyName = patient.getName().get(0).getFamilyAsSingleString();
+		final String givenName = patient.getName().get(0).getGivenAsSingleString();
+		final String otherName = ""; // other is resolved into given in addPatientName
 		// below, we have that already with above lines
-		String prefixName = patient.getName().get(0).getPrefixAsSingleString();
-		String suffixName = patient.getName().get(0).getSuffixAsSingleString();
+		final String prefixName = patient.getName().get(0).getPrefixAsSingleString();
+		final String suffixName = patient.getName().get(0).getSuffixAsSingleString();
 		v3PixSourceMessage.addPatientName(familyName, givenName, otherName, prefixName, suffixName);
 	}
 
@@ -764,27 +758,27 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void addPatientName(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		EList<PN> pns = pdqPatient.getPatientPerson().getName();
+		final EList<PN> pns = pdqPatient.getPatientPerson().getName();
 		for (int i = 0; i < pns.size(); ++i) {
-			PN pn = pns.get(i);
-			HumanNameDt humanNameDt = new HumanNameDt();
+			final PN pn = pns.get(i);
+			final HumanNameDt humanNameDt = new HumanNameDt();
 			if (pn.getGiven() != null) {
-				for (EnGiven given : pn.getGiven()) {
+				for (final EnGiven given : pn.getGiven()) {
 					humanNameDt.addGiven(getMixedValue(given.getMixed()));
 				}
 			}
 			if (pn.getFamily() != null) {
-				for (EnFamily family : pn.getFamily()) {
+				for (final EnFamily family : pn.getFamily()) {
 					humanNameDt.addFamily(getMixedValue(family.getMixed()));
 				}
 			}
 			if (pn.getPrefix() != null) {
-				for (EnPrefix prefix : pn.getPrefix()) {
+				for (final EnPrefix prefix : pn.getPrefix()) {
 					humanNameDt.addPrefix(getMixedValue(prefix.getMixed()));
 				}
 			}
 			if (pn.getSuffix() != null) {
-				for (EnSuffix suffix : pn.getSuffix()) {
+				for (final EnSuffix suffix : pn.getSuffix()) {
 					humanNameDt.addPrefix(getMixedValue(suffix.getMixed()));
 				}
 			}
@@ -804,8 +798,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		// telecommunication addresses (only phone and email will be added to
 		// source)
-		if (patient.getTelecom() != null && patient.getTelecom().size() > 0) {
-			for (ContactPointDt contactPointDt : patient.getTelecom()) {
+		if ((patient.getTelecom() != null) && (patient.getTelecom().size() > 0)) {
+			for (final ContactPointDt contactPointDt : patient.getTelecom()) {
 				// system I 0..1 code phone | fax | email | url
 				// use M 0..1 code home | work | temp | old | mobile - purpose
 				// of this contact point
@@ -846,12 +840,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void addPatientTelecoms(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getTelecom() != null
-				&& pdqPatient.getPatientPerson().getTelecom().size() > 0) {
-			for (TEL tel : pdqPatient.getPatientPerson().getTelecom()) {
-				ContactPointDt contactPointDt = new ContactPointDt();
-				if (tel.getValue() != null && tel.getValue().startsWith("tel:")) {
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getTelecom() != null)
+				&& (pdqPatient.getPatientPerson().getTelecom().size() > 0)) {
+			for (final TEL tel : pdqPatient.getPatientPerson().getTelecom()) {
+				final ContactPointDt contactPointDt = new ContactPointDt();
+				if ((tel.getValue() != null) && tel.getValue().startsWith("tel:")) {
 					contactPointDt.setValue(tel.getValue().substring(4));
 					contactPointDt.setSystem(ContactPointSystemEnum.PHONE);
 					if (tel.getUse().contains(WorkPlaceAddressUse.WP)) {
@@ -859,13 +853,13 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					} else if (tel.getUse().contains(HomeAddressUse.H)
 							|| tel.getUse().contains(HomeAddressUse.HP)) {
 						contactPointDt.setUse(ContactPointUseEnum.HOME);
-					} else if (tel.getUse().size() > 0
+					} else if ((tel.getUse().size() > 0)
 							&& "MC".equals(tel.getUse().get(0).getName())) {
 						contactPointDt.setUse(ContactPointUseEnum.MOBILE);
 					}
 					patient.getTelecom().add(contactPointDt);
 				}
-				if (tel.getValue() != null && tel.getValue().startsWith("mailto:")) {
+				if ((tel.getValue() != null) && tel.getValue().startsWith("mailto:")) {
 					contactPointDt.setValue(tel.getValue().substring(7));
 					contactPointDt.setSystem(ContactPointSystemEnum.EMAIL);
 					if (tel.getUse().contains(WorkPlaceAddressUse.WP)) {
@@ -909,19 +903,19 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			log.debug("pdq configure start");
 			if (!pdqConsumerConfigured) {
 				this.pdqConsumerConfigured = true;
-				if (adapterCfg.auditSourceId != null) {
+				if (adapterCfg.getAuditSourceId() != null) {
 					PDQConsumerAuditor.getAuditor().getConfig()
-							.setAuditSourceId(adapterCfg.auditSourceId);
+							.setAuditSourceId(adapterCfg.getAuditSourceId());
 				}
-				if (adapterCfg.auditRepositoryUri != null) {
+				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PDQConsumerAuditor.getAuditor().getConfig()
-							.setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
+							.setAuditRepositoryUri(adapterCfg.getAuditRepositoryUri());
 				}
 				if (v3PdqConsumer == null) {
-					v3PdqConsumer = new V3PdqConsumer(adapterCfg.pdqConsumerUri);
+					v3PdqConsumer = new V3PdqConsumer(adapterCfg.getPdqConsumerUri());
 				}
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("configuring not successful", e);
 			return false;
 		}
@@ -942,34 +936,34 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			log.debug("pix configure start");
 			if (source && !pixSourceConfigured) {
 				this.pixSourceConfigured = true;
-				if (adapterCfg.auditSourceId != null) {
+				if (adapterCfg.getAuditSourceId() != null) {
 					PIXSourceAuditor.getAuditor().getConfig()
-							.setAuditSourceId(adapterCfg.auditSourceId);
+							.setAuditSourceId(adapterCfg.getAuditSourceId());
 				}
-				if (adapterCfg.auditRepositoryUri != null) {
+				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PIXSourceAuditor.getAuditor().getConfig()
-							.setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
+							.setAuditRepositoryUri(adapterCfg.getAuditRepositoryUri());
 				}
 				if (pixSource == null) {
-					pixSource = new V3PixSource(adapterCfg.pixSourceUri);
+					pixSource = new V3PixSource(adapterCfg.getPixSourceUri());
 				}
 			}
 			if (!source && !pixConsumerConfigured) {
 				this.pixConsumerConfigured = true;
-				if (adapterCfg.auditSourceId != null) {
+				if (adapterCfg.getAuditSourceId() != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
-							.setAuditSourceId(adapterCfg.auditSourceId);
+							.setAuditSourceId(adapterCfg.getAuditSourceId());
 				}
-				if (adapterCfg.auditRepositoryUri != null) {
+				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
-							.setAuditRepositoryUri(adapterCfg.auditRepositoryUri);
+							.setAuditRepositoryUri(adapterCfg.getAuditRepositoryUri());
 				}
 				if (v3PixConsumer == null) {
-					v3PixConsumer = new V3PixConsumer(adapterCfg.pixQueryUri);
+					v3PixConsumer = new V3PixConsumer(adapterCfg.getPixQueryUri());
 				}
 
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.error("configuring not successful", e);
 			return false;
 		}
@@ -986,36 +980,36 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @return the address dt from ad
 	 */
 	protected AddressDt getAddressDtFromAD(AD ad) {
-		AddressDt addressDt = new AddressDt();
+		final AddressDt addressDt = new AddressDt();
 		if (ad.getUse() != null) {
-			if (ad.getUse().size() > 0 && "H".equals(ad.getUse().get(0).getName())) {
+			if ((ad.getUse().size() > 0) && "H".equals(ad.getUse().get(0).getName())) {
 				addressDt.setUse(AddressUseEnum.HOME);
 			}
-			if (ad.getUse().size() > 0 && "WP".equals(ad.getUse().get(0).getName())) {
+			if ((ad.getUse().size() > 0) && "WP".equals(ad.getUse().get(0).getName())) {
 				addressDt.setUse(AddressUseEnum.WORK);
 			}
-			if (ad.getUse().size() > 0 && "TMP".equals(ad.getUse().get(0).getName())) {
+			if ((ad.getUse().size() > 0) && "TMP".equals(ad.getUse().get(0).getName())) {
 				addressDt.setUse(AddressUseEnum.TEMPORARY);
 			}
-			if (ad.getUse().size() > 0 && "OLD".equals(ad.getUse().get(0).getName())) {
+			if ((ad.getUse().size() > 0) && "OLD".equals(ad.getUse().get(0).getName())) {
 				addressDt.setUse(AddressUseEnum.OLD___INCORRECT);
 			}
 		}
-		if (ad.getStreetAddressLine() != null && ad.getStreetAddressLine().size() > 0) {
-			for (AdxpStreetAddressLine addressStreetLine : ad.getStreetAddressLine()) {
+		if ((ad.getStreetAddressLine() != null) && (ad.getStreetAddressLine().size() > 0)) {
+			for (final AdxpStreetAddressLine addressStreetLine : ad.getStreetAddressLine()) {
 				addressDt.addLine().setValue(getMixedValue(addressStreetLine.getMixed()));
 			}
 		}
-		if (ad.getCity() != null && ad.getCity().size() > 0) {
+		if ((ad.getCity() != null) && (ad.getCity().size() > 0)) {
 			addressDt.setCity(getMixedValue(ad.getCity().get(0).getMixed()));
 		}
-		if (ad.getState() != null && ad.getState().size() > 0) {
+		if ((ad.getState() != null) && (ad.getState().size() > 0)) {
 			addressDt.setState(getMixedValue(ad.getState().get(0).getMixed()));
 		}
-		if (ad.getPostalCode() != null && ad.getPostalCode().size() > 0) {
+		if ((ad.getPostalCode() != null) && (ad.getPostalCode().size() > 0)) {
 			addressDt.setPostalCode(getMixedValue(ad.getPostalCode().get(0).getMixed()));
 		}
-		if (ad.getCountry() != null && ad.getCountry().size() > 0) {
+		if ((ad.getCountry() != null) && (ad.getCountry().size() > 0)) {
 			addressDt.setCountry(getMixedValue(ad.getCountry().get(0).getMixed()));
 		}
 		return addressDt;
@@ -1029,8 +1023,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @return the home community patient id
 	 */
 	protected String getHomeCommunityPatientId(FhirPatient patient) {
-		for (IdentifierDt identifierDt : patient.getIdentifier()) {
-			if (identifierDt.getSystem().startsWith("urn:oid:")) {
+		for (final IdentifierDt identifierDt : patient.getIdentifier()) {
+			if (identifierDt.getSystem().startsWith(URN_OID)) {
 				if (identifierDt.getSystem().substring(8).equals(this.homeCommunityOid)) {
 					return identifierDt.getValue();
 				}
@@ -1057,13 +1051,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/**
 	 * Get the specified patient object
-	 * 
+	 *
+	 * @param v3PdqConsumerResponse
+	 *            the consumer response
 	 * @param patientIndex
 	 * @return PRPAMT201310UV02Patient - the patient object at the specified
 	 *         index.
 	 */
-	protected PRPAMT201310UV02Patient getPatientByIndex(
-			V3PdqConsumerResponse v3PdqConsumerResponse, int patientIndex) {
+	protected PRPAMT201310UV02Patient getPatientByIndex(V3PdqConsumerResponse v3PdqConsumerResponse,
+			int patientIndex) {
 		return v3PdqConsumerResponse.getPdqResponse().getControlActProcess().getSubject()
 				.get(patientIndex).getRegistrationEvent().getSubject1().getPatient();
 	}
@@ -1080,18 +1076,18 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 		try {
 			// use a transformer to improve the output of the xml
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
 			// initialize StreamResult with File object to save to file
-			StreamResult result = new StreamResult(new StringWriter());
-			DOMSource source = new DOMSource(element);
+			final StreamResult result = new StreamResult(new StringWriter());
+			final DOMSource source = new DOMSource(element);
 			transformer.transform(source, result);
 
-			String xmlString = result.getWriter().toString();
+			final String xmlString = result.getWriter().toString();
 
 			log.debug(test + "\r" + xmlString);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			log.debug(test + " problem encountered in printMessage");
 		}
 	}
@@ -1106,12 +1102,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setBirthPlace(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getBirthPlace() != null) {
-			AddressDt addressDt = patient.getBirthPlace();
+			final AddressDt addressDt = patient.getBirthPlace();
 			String adressOtherDesignation = null;
 			if (addressDt.getLine().size() > 1) {
 				adressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
 			}
-			AD patientAddress = PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(),
+			final AD patientAddress = PixPdqV3Utils.createAD(addressDt.getLineFirstRep().getValue(),
 					addressDt.getCity(), null, addressDt.getState(), addressDt.getCountry(),
 					addressDt.getPostalCode(), adressOtherDesignation, null);
 			v3PixSourceMessage.setPatientBirthPlace(patientAddress);
@@ -1127,10 +1123,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setBirthPlace(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getBirthPlace() != null) {
-			PRPAMT201310UV02BirthPlace birthplace = pdqPatient.getPatientPerson().getBirthPlace();
-			AD addr = birthplace.getAddr();
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getBirthPlace() != null)) {
+			final PRPAMT201310UV02BirthPlace birthplace = pdqPatient.getPatientPerson()
+					.getBirthPlace();
+			final AD addr = birthplace.getAddr();
 			if (addr != null) {
 				patient.setBirthPlace(getAddressDtFromAD(addr));
 			}
@@ -1147,17 +1144,17 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the v3 pix source message
 	 */
 	protected void setDeceased(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		IDatatype idDeceased = patient.getDeceased();
+		final IDatatype idDeceased = patient.getDeceased();
 		if (idDeceased instanceof DateTimeDt) {
-			DateTimeDt deceased = (DateTimeDt) idDeceased;
+			final DateTimeDt deceased = (DateTimeDt) idDeceased;
 			if (deceased.getValue() != null) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 				v3PixSourceMessage.setPatientDeceasedTime(dateFormat.format(deceased.getValue()));
 				v3PixSourceMessage.setPatientDeceased(true);
 			}
 		}
 		if (idDeceased instanceof BooleanDt) {
-			BooleanDt deceased = (BooleanDt) idDeceased;
+			final BooleanDt deceased = (BooleanDt) idDeceased;
 			if (deceased.getValue() != null) {
 				v3PixSourceMessage.setPatientDeceased(deceased.getValue());
 			}
@@ -1174,14 +1171,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setDeceased(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
-			if (pdqPatient.getPatientPerson().getDeceasedInd() != null
+			if ((pdqPatient.getPatientPerson().getDeceasedInd() != null)
 					&& pdqPatient.getPatientPerson().getDeceasedInd().isSetValue()) {
-				BooleanDt dt = new BooleanDt();
+				final BooleanDt dt = new BooleanDt();
 				dt.setValue(pdqPatient.getPatientPerson().getDeceasedInd().isValue());
 				patient.setDeceased(dt);
 			}
 			if (pdqPatient.getPatientPerson().getDeceasedTime() != null) {
-				String deceasedTime = pdqPatient.getPatientPerson().getDeceasedTime().getValue();
+				final String deceasedTime = pdqPatient.getPatientPerson().getDeceasedTime()
+						.getValue();
 				patient.setDeceased(new DateTimeDt(deceasedTime));
 			}
 		}
@@ -1196,7 +1194,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the v3 pix source message
 	 */
 	protected void setEmployee(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		if (patient.getEmployeeOccupation() != null && !patient.getEmployeeOccupation().isEmpty()) {
+		if ((patient.getEmployeeOccupation() != null)
+				&& !patient.getEmployeeOccupation().isEmpty()) {
 			v3PixSourceMessage.addEmployeeCode(patient.getEmployeeOccupation().getText());
 		}
 	}
@@ -1210,15 +1209,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setEmployee(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient != null && pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getAsEmployee() != null) {
-			List<PRPAMT201310UV02Employee> employees = pdqPatient.getPatientPerson()
+		if ((pdqPatient != null) && (pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getAsEmployee() != null)) {
+			final List<PRPAMT201310UV02Employee> employees = pdqPatient.getPatientPerson()
 					.getAsEmployee();
 			if (employees.size() > 0) {
-				PRPAMT201310UV02Employee employee = employees.get(0);
-				if (employee.getOccupationCode() != null
-						&& employee.getOccupationCode().getCode() != null) {
-					CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();
+				final PRPAMT201310UV02Employee employee = employees.get(0);
+				if ((employee.getOccupationCode() != null)
+						&& (employee.getOccupationCode().getCode() != null)) {
+					final CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();
 					employeeOccupationCode.setText(employee.getOccupationCode().getCode());
 					patient.setEmployeeOccupation(employeeOccupationCode);
 				}
@@ -1235,16 +1234,16 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the v3 pix source message
 	 */
 	protected void setMultipeBirth(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		IDatatype iMultipleBirth = patient.getMultipleBirth();
+		final IDatatype iMultipleBirth = patient.getMultipleBirth();
 		if (iMultipleBirth instanceof IntegerDt) {
-			IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
+			final IntegerDt multipleBirth = (IntegerDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage.setPatientMultipleBirthOrderNumber(multipleBirth.getValue());
 				v3PixSourceMessage.setPatientMultipleBirthIndicator(true);
 			}
 		}
 		if (iMultipleBirth instanceof BooleanDt) {
-			BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
+			final BooleanDt multipleBirth = (BooleanDt) iMultipleBirth;
 			if (multipleBirth.getValue() != null) {
 				v3PixSourceMessage.setPatientMultipleBirthIndicator(multipleBirth.getValue());
 			}
@@ -1261,14 +1260,14 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setMultipeBirth(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
-			if (pdqPatient.getPatientPerson().getMultipleBirthInd() != null
+			if ((pdqPatient.getPatientPerson().getMultipleBirthInd() != null)
 					&& pdqPatient.getPatientPerson().getMultipleBirthInd().isSetValue()) {
-				BooleanDt dt = new BooleanDt();
+				final BooleanDt dt = new BooleanDt();
 				dt.setValue(pdqPatient.getPatientPerson().getMultipleBirthInd().isValue());
 				patient.setMultipleBirth(dt);
 			}
 			if (pdqPatient.getPatientPerson().getMultipleBirthOrderNumber() != null) {
-				BigInteger birthOrderNumber = pdqPatient.getPatientPerson()
+				final BigInteger birthOrderNumber = pdqPatient.getPatientPerson()
 						.getMultipleBirthOrderNumber().getValue();
 				patient.setMultipleBirth(new IntegerDt(birthOrderNumber.intValue()));
 			}
@@ -1284,7 +1283,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the v3 pix source message
 	 */
 	protected void setNation(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		if (patient.getNation() != null && !patient.getNation().isEmpty()) {
+		if ((patient.getNation() != null) && !patient.getNation().isEmpty()) {
 			v3PixSourceMessage.addPatientNation(patient.getNation().getText());
 		}
 	}
@@ -1298,15 +1297,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setNation(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getAsCitizen() != null) {
-			List<org.hl7.v3.PRPAMT201310UV02Citizen> citizens = pdqPatient.getPatientPerson()
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getAsCitizen() != null)) {
+			final List<org.hl7.v3.PRPAMT201310UV02Citizen> citizens = pdqPatient.getPatientPerson()
 					.getAsCitizen();
 			if (citizens.size() > 0) {
-				PRPAMT201310UV02Nation nation = citizens.get(0).getPoliticalNation();
-				if (nation != null && nation.getCode() != null
-						&& nation.getCode().getCode() != null) {
-					CodeableConceptDt nationCode = new CodeableConceptDt();
+				final PRPAMT201310UV02Nation nation = citizens.get(0).getPoliticalNation();
+				if ((nation != null) && (nation.getCode() != null)
+						&& (nation.getCode().getCode() != null)) {
+					final CodeableConceptDt nationCode = new CodeableConceptDt();
 					nationCode.setText(nation.getCode().getCode());
 					patient.setNation(nationCode);
 				}
@@ -1337,11 +1336,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setPatientBirthTime(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getBirthTime() != null) {
-			TS1 ts = pdqPatient.getPatientPerson().getBirthTime();
-			String date = ts.getValue();
-			if (date != null && date.length() >= 4) {
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getBirthTime() != null)) {
+			final TS1 ts = pdqPatient.getPatientPerson().getBirthTime();
+			final String date = ts.getValue();
+			if ((date != null) && (date.length() >= 4)) {
 				String dateFhir = date.substring(0, 4);
 				if (date.length() >= 6) {
 					dateFhir += "-" + date.substring(4, 6);
@@ -1387,9 +1386,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setPatientGender(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getAdministrativeGenderCode() != null) {
-			CE gender = pdqPatient.getPatientPerson().getAdministrativeGenderCode();
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getAdministrativeGenderCode() != null)) {
+			final CE gender = pdqPatient.getPatientPerson().getAdministrativeGenderCode();
 			if ("M".equals(gender.getCode())) {
 				patient.setGender(AdministrativeGenderEnum.MALE);
 			} else if ("F".equals(gender.getCode())) {
@@ -1431,9 +1430,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void setPatientMaritalStatus(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getMaritalStatusCode() != null) {
-			CE maritalStatusCode = pdqPatient.getPatientPerson().getMaritalStatusCode();
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getMaritalStatusCode() != null)) {
+			final CE maritalStatusCode = pdqPatient.getPatientPerson().getMaritalStatusCode();
 			if (maritalStatusCode.getCode() != null) {
 				patient.setMaritalStatus(MaritalStatusCodesEnum.valueOf(maritalStatusCode.getCode()));
 			}
@@ -1450,14 +1449,14 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setPatientMothersMaidenName(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
-		HumanNameDt maidenName = patient.getMothersMaidenName();
+		final HumanNameDt maidenName = patient.getMothersMaidenName();
 		if (maidenName.isEmpty()) {
-			String familyName = maidenName.getFamilyAsSingleString();
-			String givenName = maidenName.getGivenAsSingleString();
-			String otherName = ""; // other is resolved into given in
+			final String familyName = maidenName.getFamilyAsSingleString();
+			final String givenName = maidenName.getGivenAsSingleString();
+			final String otherName = ""; // other is resolved into given in
 			// addPatientName
-			String prefixName = maidenName.getPrefixAsSingleString();
-			String suffixName = maidenName.getSuffixAsSingleString();
+			final String prefixName = maidenName.getPrefixAsSingleString();
+			final String suffixName = maidenName.getSuffixAsSingleString();
 			v3PixSourceMessage.setPatientMothersMaidenName(familyName, givenName, otherName,
 					suffixName, prefixName);
 		}
@@ -1473,20 +1472,20 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setPatientMothersMaidenName(PRPAMT201310UV02Patient pdqPatient,
 			FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getPersonalRelationship() != null) {
-			for (PRPAMT201310UV02PersonalRelationship personalRelationship : pdqPatient
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getPersonalRelationship() != null)) {
+			for (final PRPAMT201310UV02PersonalRelationship personalRelationship : pdqPatient
 					.getPatientPerson().getPersonalRelationship()) {
-				if (personalRelationship.getCode() != null
+				if ((personalRelationship.getCode() != null)
 						&& "MTH".equals(personalRelationship.getCode().getCode())
-						&& "2.16.840.1.113883.5.111".equals(personalRelationship.getCode()
-								.getCodeSystem())) {
-					COCTMT030007UVPerson motherRelationShipHolder = personalRelationship
+						&& "2.16.840.1.113883.5.111"
+								.equals(personalRelationship.getCode().getCodeSystem())) {
+					final COCTMT030007UVPerson motherRelationShipHolder = personalRelationship
 							.getRelationshipHolder1();
-					if (motherRelationShipHolder != null
-							&& motherRelationShipHolder.getName() != null) {
-						List<EN> names = motherRelationShipHolder.getName();
-						if (names != null && names.size() > 0) {
+					if ((motherRelationShipHolder != null)
+							&& (motherRelationShipHolder.getName() != null)) {
+						final List<EN> names = motherRelationShipHolder.getName();
+						if ((names != null) && (names.size() > 0)) {
 							// ITI 2b Rev. 11.0 Final Text – 2014-09-23
 							// MothersMaidenName Parameter (approx 6645)
 							// This optional parameter specifies the maiden name
@@ -1494,25 +1493,25 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 							// information is being queried. For this parameter
 							// item, a single person name (PN) data item shall
 							// be specified in the Person.value attribute.
-							EN pn = names.get(0);
-							HumanNameDt humanNameDt = new HumanNameDt();
+							final EN pn = names.get(0);
+							final HumanNameDt humanNameDt = new HumanNameDt();
 							if (pn.getGiven() != null) {
-								for (EnGiven given : pn.getGiven()) {
+								for (final EnGiven given : pn.getGiven()) {
 									humanNameDt.addGiven(getMixedValue(given.getMixed()));
 								}
 							}
 							if (pn.getFamily() != null) {
-								for (EnFamily family : pn.getFamily()) {
+								for (final EnFamily family : pn.getFamily()) {
 									humanNameDt.addFamily(getMixedValue(family.getMixed()));
 								}
 							}
 							if (pn.getPrefix() != null) {
-								for (EnPrefix prefix : pn.getPrefix()) {
+								for (final EnPrefix prefix : pn.getPrefix()) {
 									humanNameDt.addPrefix(getMixedValue(prefix.getMixed()));
 								}
 							}
 							if (pn.getSuffix() != null) {
-								for (EnSuffix suffix : pn.getSuffix()) {
+								for (final EnSuffix suffix : pn.getSuffix()) {
 									humanNameDt.addPrefix(getMixedValue(suffix.getMixed()));
 								}
 							}
@@ -1535,7 +1534,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setPatientReligiousAffiliation(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
-		if (patient.getReligiousAffiliation() != null
+		if ((patient.getReligiousAffiliation() != null)
 				&& !patient.getReligiousAffiliation().isEmpty()) {
 			v3PixSourceMessage.setPatientReligiousAffiliation(patient.getReligiousAffiliation()
 					.getText());
@@ -1553,11 +1552,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setPatientReligiousAffiliation(PRPAMT201310UV02Patient pdqPatient,
 			FhirPatient patient) {
-		if (pdqPatient.getPatientPerson() != null
-				&& pdqPatient.getPatientPerson().getReligiousAffiliationCode() != null) {
-			CE religiousAffiliation = pdqPatient.getPatientPerson().getReligiousAffiliationCode();
+		if ((pdqPatient.getPatientPerson() != null)
+				&& (pdqPatient.getPatientPerson().getReligiousAffiliationCode() != null)) {
+			final CE religiousAffiliation = pdqPatient.getPatientPerson().getReligiousAffiliationCode();
 			if (religiousAffiliation.getCode() != null) {
-				CodeableConceptDt religion = new CodeableConceptDt();
+				final CodeableConceptDt religion = new CodeableConceptDt();
 				religion.setText(religiousAffiliation.getCode());
 				patient.setReligiousAffiliation(religion);
 			}
@@ -1579,22 +1578,22 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		String organizationName = "";
 		String organizationTelecomValue = "";
 
-		Organization organization = (Organization) patient.getManagingOrganization().getResource();
+		final Organization organization = (Organization) patient.getManagingOrganization().getResource();
 
-		if (organization != null && organization.getIdentifier().size() > 0) {
-			IdentifierDt organizationId = organization.getIdentifier().get(0);
-			if (organizationId.getSystem().startsWith("urn:oid:")) {
+		if ((organization != null) && (organization.getIdentifier().size() > 0)) {
+			final IdentifierDt organizationId = organization.getIdentifier().get(0);
+			if (organizationId.getSystem().startsWith(URN_OID)) {
 				organizationOid = organizationId.getSystem().substring(8);
 			}
 		}
 
-		if (organization != null && organization.getName() != null) {
+		if ((organization != null) && (organization.getName() != null)) {
 			organizationName = organization.getName();
 		}
 
-		if (organization != null && organization.getTelecom().size() > 0) {
+		if ((organization != null) && (organization.getTelecom().size() > 0)) {
 			if (organization.getTelecom().size() > 0) {
-				ContactPointDt contactPoint = organization.getTelecomFirstRep();
+				final ContactPointDt contactPoint = organization.getTelecomFirstRep();
 				if (contactPoint != null) {
 					organizationTelecomValue = contactPoint.getValue();
 				}
@@ -1615,31 +1614,31 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected void setScopingOrganization(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getProviderOrganization() != null) {
-			Organization organization = new Organization();
+			final Organization organization = new Organization();
 			patient.getManagingOrganization().setResource(organization);
 
-			if (pdqPatient.getProviderOrganization().getId() != null
-					&& pdqPatient.getProviderOrganization().getId().size() > 0) {
-				for (II id : pdqPatient.getProviderOrganization().getId()) {
-					IdentifierDt identifierDt = new IdentifierDt();
-					identifierDt.setValue("urn:oid:" + id.getRoot());
+			if ((pdqPatient.getProviderOrganization().getId() != null)
+					&& (pdqPatient.getProviderOrganization().getId().size() > 0)) {
+				for (final II id : pdqPatient.getProviderOrganization().getId()) {
+					final IdentifierDt identifierDt = new IdentifierDt();
+					identifierDt.setValue(URN_OID + id.getRoot());
 					organization.getIdentifier().add(identifierDt);
 				}
 			}
 
-			EList<ON> ons = pdqPatient.getProviderOrganization().getName();
-			if (ons != null && ons.size() > 0) {
+			final EList<ON> ons = pdqPatient.getProviderOrganization().getName();
+			if ((ons != null) && (ons.size() > 0)) {
 				organization.setName(getMixedValue(ons.get(0).getMixed()));
 			}
 
-			EList<COCTMT150003UV03ContactParty> contactParties = pdqPatient
+			final EList<COCTMT150003UV03ContactParty> contactParties = pdqPatient
 					.getProviderOrganization().getContactParty();
-			if (contactParties != null && contactParties.size() > 0) {
-				EList<TEL> tels = contactParties.get(0).getTelecom();
-				if (tels != null && tels.size() > 0) {
-					TEL tel = tels.get(0);
-					if (tel.getValue() != null && tel.getValue().startsWith("tel:")) {
-						ContactPointDt contactPointDt = new ContactPointDt();
+			if ((contactParties != null) && (contactParties.size() > 0)) {
+				final EList<TEL> tels = contactParties.get(0).getTelecom();
+				if ((tels != null) && (tels.size() > 0)) {
+					final TEL tel = tels.get(0);
+					if ((tel.getValue() != null) && tel.getValue().startsWith("tel:")) {
+						final ContactPointDt contactPointDt = new ContactPointDt();
 						contactPointDt.setValue(tel.getValue().substring(4));
 						contactPointDt.setSystem(ContactPointSystemEnum.PHONE);
 						organization.getTelecom().add(contactPointDt);

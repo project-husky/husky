@@ -76,7 +76,7 @@ public enum LanguageCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -117,7 +117,7 @@ public enum LanguageCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}
@@ -128,7 +128,7 @@ public enum LanguageCode {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return displayName;
 	}
 

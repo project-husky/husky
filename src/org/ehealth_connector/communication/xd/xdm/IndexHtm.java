@@ -156,7 +156,7 @@ public class IndexHtm {
 			i++;
 			DocumentEntryType docMetadata = txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID());
 			String title = XdsUtil.convertInternationalStringType(docMetadata.getTitle());
-			if (title == null || title.equals("")) {
+			if (title == null || "".equals(title)) {
 				title = XdsUtil.createXdmDocName(xdsDoc, i);
 			}
 			contentsStr = contentsStr + "<li>\n";

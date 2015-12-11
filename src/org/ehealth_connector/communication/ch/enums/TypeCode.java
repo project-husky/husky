@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -7,7 +22,7 @@ import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
+/**
  *<div class="de">Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.</div>
  *<div class="fr"></div>
  */
@@ -18,12 +33,12 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * class="fr">Autres sans spécification</div> <div class="it">Altri non
 	 * meglio precisati</div>
 	 */
-	ANDERE_NICHT_NÄHER_SPEZIFIZIERT("60999", "Andere nicht näher spezifiziert"),
+	ANDERE_NICHT_NAHER_SPEZIFIZIERT("60999", "Andere nicht näher spezifiziert"),
 	/**
 	 * <div class="de">Anästhesie Bericht</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 */
-	ANÄSTHESIE_BERICHT("60032", "Anästhesie Bericht"),
+	ANASTHESIE_BERICHT("60032", "Anästhesie Bericht"),
 	/**
 	 * <div class="de">Austrittsbericht (lang-pflegerisch)</div> <div
 	 * class="fr"></div> <div class="it"></div>
@@ -33,7 +48,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Austrittsbericht (lang-ärztlich)</div> <div
 	 * class="fr">Lettre de sortie</div> <div class="it"></div>
 	 */
-	AUSTRITTSBERICHT_LANG_ÄRZTLICH("60010", "Austrittsbericht (lang-ärztlich)"),
+	AUSTRITTSBERICHT_LANG_ARZTLICH("60010", "Austrittsbericht (lang-ärztlich)"),
 	/**
 	 * <div class="de">Behandlungsschema</div> <div class="fr"></div> <div
 	 * class="it"></div>
@@ -48,7 +63,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Dokument mit Kontraindikationen,
 	 * Unverträglichkeiten….</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRÄGLICHKEITEN("60046",
+	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN("60046",
 			"Dokument mit Kontraindikationen, Unverträglichkeiten…."),
 	/**
 	 * <div class="de">Echokardiographie-Befund</div> <div class="fr"></div>
@@ -129,7 +144,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Kurz-Austrittsbericht (ärztlich)</div> <div
 	 * class="fr">Avis de sortie</div> <div class="it"></div>
 	 */
-	KURZ_AUSTRITTSBERICHT_ÄRZTLICH("60009", "Kurz-Austrittsbericht (ärztlich)"),
+	KURZ_AUSTRITTSBERICHT_ARZTLICH("60009", "Kurz-Austrittsbericht (ärztlich)"),
 	/**
 	 * <div class="de">Laborauftrag</div> <div class="fr"></div> <div
 	 * class="it"></div>
@@ -154,7 +169,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Meldung übertragbare Erkrankung</div> <div
 	 * class="fr"></div> <div class="it"></div>
 	 */
-	MELDUNG_ÜBERTRAGBARE_ERKRANKUNG("60042", "Meldung übertragbare Erkrankung"),
+	MELDUNG_UBERTRAGBARE_ERKRANKUNG("60042", "Meldung übertragbare Erkrankung"),
 	/**
 	 * <div class="de">Nicht spezifizierte Bilddaten</div> <div
 	 * class="fr"></div> <div class="it"></div>
@@ -195,13 +210,13 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * elektronischen Daten</div> <div class="fr">Consentement du patient au
 	 * dossier électronique</div> <div class="it"></div>
 	 */
-	PATIENTENEINWILLIGUNG_FÜR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN("60001",
+	PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN("60001",
 			"Patienteneinwilligung für die Verwendung der elektronischen Daten"),
 	/**
 	 * <div class="de">Patientenverfügung</div> <div class="fr"></div> <div
 	 * class="it"></div>
 	 */
-	PATIENTENVERFÜGUNG("60003", "Patientenverfügung"),
+	PATIENTENVERFUGUNG("60003", "Patientenverfügung"),
 	/**
 	 * <div class="de">Patient Summary (medizinische Zusammenfassung)</div> <div
 	 * class="fr">Résumé d'un patient</div> <div class="it"></div>
@@ -253,7 +268,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Verlaufs- / Austrittsbericht Gynäkologie und
 	 * Geburtshilfe</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	VERLAUFS_AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE("60014",
+	VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE("60014",
 			"Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"),
 	/**
 	 * <div class="de">Verlegungsbericht</div> <div class="fr"></div> <div
@@ -276,12 +291,12 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * class="fr">Code de Autres sans spécification</div> <div class="it">Code
 	 * per Altri non meglio precisati</div>
 	 */
-	public static final String ANDERE_NICHT_NÄHER_SPEZIFIZIERT_CODE = "60999";
+	public static final String ANDERE_NICHT_NAHER_SPEZIFIZIERT_CODE = "60999";
 
 	/**
 	 * <div class="de">Code für Anästhesie Bericht</div>
 	 */
-	public static final String ANÄSTHESIE_BERICHT_CODE = "60032";
+	public static final String ANASTHESIE_BERICHT_CODE = "60032";
 
 	/**
 	 * <div class="de">Code für Austrittsbericht (lang-pflegerisch)</div>
@@ -292,7 +307,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Austrittsbericht (lang-ärztlich)</div> <div
 	 * class="fr">Code de Lettre de sortie</div>
 	 */
-	public static final String AUSTRITTSBERICHT_LANG_ÄRZTLICH_CODE = "60010";
+	public static final String AUSTRITTSBERICHT_LANG_ARZTLICH_CODE = "60010";
 
 	/**
 	 * <div class="de">Code für Behandlungsschema</div>
@@ -308,7 +323,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Dokument mit Kontraindikationen,
 	 * Unverträglichkeiten….</div>
 	 */
-	public static final String DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRÄGLICHKEITEN_CODE = "60046";
+	public static final String DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN_CODE = "60046";
 
 	/**
 	 * <div class="de">Code für Echokardiographie-Befund</div>
@@ -393,7 +408,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Kurz-Austrittsbericht (ärztlich)</div> <div
 	 * class="fr">Code de Avis de sortie</div>
 	 */
-	public static final String KURZ_AUSTRITTSBERICHT_ÄRZTLICH_CODE = "60009";
+	public static final String KURZ_AUSTRITTSBERICHT_ARZTLICH_CODE = "60009";
 
 	/**
 	 * <div class="de">Code für Laborauftrag</div>
@@ -420,7 +435,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Meldung übertragbare Erkrankung</div>
 	 */
-	public static final String MELDUNG_ÜBERTRAGBARE_ERKRANKUNG_CODE = "60042";
+	public static final String MELDUNG_UBERTRAGBARE_ERKRANKUNG_CODE = "60042";
 
 	/**
 	 * <div class="de">Code für Nicht spezifizierte Bilddaten</div>
@@ -466,12 +481,12 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * elektronischen Daten</div> <div class="fr">Code de Consentement du
 	 * patient au dossier électronique</div>
 	 */
-	public static final String PATIENTENEINWILLIGUNG_FÜR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN_CODE = "60001";
+	public static final String PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN_CODE = "60001";
 
 	/**
 	 * <div class="de">Code für Patientenverfügung</div>
 	 */
-	public static final String PATIENTENVERFÜGUNG_CODE = "60003";
+	public static final String PATIENTENVERFUGUNG_CODE = "60003";
 
 	/**
 	 * <div class="de">Code für Patient Summary (medizinische
@@ -526,7 +541,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Verlaufs- / Austrittsbericht Gynäkologie und
 	 * Geburtshilfe</div>
 	 */
-	public static final String VERLAUFS_AUSTRITTSBERICHT_GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE = "60014";
+	public static final String VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE_CODE = "60014";
 
 	/**
 	 * <div class="de">Code für Verlegungsbericht</div>
@@ -561,13 +576,13 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div
 	 * class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -611,7 +626,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -623,7 +638,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -696,7 +711,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (TypeCode x : values()) {
+		for (final TypeCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

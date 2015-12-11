@@ -18,6 +18,7 @@ package org.ehealth_connector.cda;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.StatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.DateUtil;
 import org.ehealth_connector.util.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -40,8 +41,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class CodedResults {
 
-	protected CodedResultsSection crs;
-	protected II mIi;
+	private CodedResultsSection crs;
+	private II mIi;
 
 	public CodedResults() {
 		crs = CHFactory.eINSTANCE.createCodedResultsSection().init();
@@ -63,7 +64,7 @@ public class CodedResults {
 		crs.addObservation(so);
 
 		// Create Id
-		mIi = Util.createUuidVacdIdentificator(null);
+		mIi = CdaUtil.createUuidVacdIdentificator(null);
 
 		// CreateEmpty Procedure Entry
 		// crs.addProcedure(createEmptyProcedureEntry());
@@ -80,8 +81,8 @@ public class CodedResults {
 	}
 
 	/**
-	 * <div class="en">Copy mdht coded results section.</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Copy mdht coded results section.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the coded results section
 	 */
@@ -92,14 +93,14 @@ public class CodedResults {
 	@SuppressWarnings("unused")
 	private ProcedureEntry createEmptyProcedureEntry() {
 		// Create and add an empty procedureEntry
-		ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
+		final ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
 				.createProcedureEntryProcedureActivityProcedure().init();
-		pe.getIds().add(Util.createUuidVacd(null));
+		pe.getIds().add(CdaUtil.createUuidVacd(null));
 		pe.setCode(Util.createCodeNullFlavorNA());
 
 		// Create NullFlavor Reference
-		ED text = DatatypesFactory.eINSTANCE.createED();
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED text = DatatypesFactory.eINSTANCE.createED();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.NA);
 		text.setReference(tel);
 
@@ -107,5 +108,43 @@ public class CodedResults {
 		pe.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
 		pe.setStatusCode(StatusCode.COMPLETED.getCS());
 		return pe;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the crs
+	 */
+	public CodedResultsSection getCrs() {
+		return crs;
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param crs
+	 *            the crs to set
+	 */
+	public void setCrs(CodedResultsSection crs) {
+		this.crs = crs;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the mIi
+	 */
+	public II getIi() {
+		return mIi;
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param mIi
+	 *            the mIi to set
+	 */
+	public void setIi(II mIi) {
+		this.mIi = mIi;
 	}
 }

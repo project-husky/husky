@@ -98,7 +98,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * @return the string
 	 */
 	public String getContentIdText(MdhtFacade<?> section, String reference) {
-		Document document = section.getDocument();
+		final Document document = section.getDocument();
 
 		String contentId = null;
 
@@ -109,9 +109,9 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 
 		contentId = reference.substring(1);
 
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
-		String xpathExpr = "//content[@ID='" + contentId + "']";
+		final XPathFactory xpathFactory = XPathFactory.newInstance();
+		final XPath xpath = xpathFactory.newXPath();
+		final String xpathExpr = "//content[@ID='" + contentId + "']";
 		XPathExpression expr;
 		try {
 			expr = xpath.compile(xpathExpr);
@@ -136,7 +136,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 			log.error("multiple content IDs found with: " + xpathExpr);
 		}
 
-		String textContent = nodes.item(0).getTextContent();
+		final String textContent = nodes.item(0).getTextContent();
 		if (textContent != null) {
 			return textContent.trim();
 		}
@@ -150,14 +150,14 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * @return the document
 	 */
 	public Document getDocument() {
-		ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		try {
 			CDAUtil.saveSnippet(this.getMdht(), boas);
 			log.debug(boas.toString());
-			InputSource source = new InputSource(new StringReader(boas.toString()));
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document document = db.parse(source);
+			final InputSource source = new InputSource(new StringReader(boas.toString()));
+			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			final DocumentBuilder db = dbf.newDocumentBuilder();
+			final Document document = db.parse(source);
 			return document;
 		} catch (Exception e1) {
 			log.error("exception", e1);

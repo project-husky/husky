@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -7,7 +22,7 @@ import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
+/**
  *<div class="de">Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser In-formation eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffs-steuerung. Passende internationale Codes werden in einem nächsten Schritt definiert und können später in den IT-Systemen entsprechend abgeglichen werden.</div>
  *<div class="fr"></div>
  */
@@ -29,7 +44,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * class="it">Altri rami specialistici della medicina non meglio
 	 * precisati</div>
 	 */
-	ANDERE_NICHT_NÄHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG("10999",
+	ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG("10999",
 			"Andere nicht näher spezifizierte medzinische Fachrichtung"),
 	/**
 	 * <div class="de">Angiologie</div> <div class="fr">Angiologie</div> <div
@@ -40,7 +55,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Anästhesiologie</div> <div
 	 * class="fr">Anesthésiologie</div> <div class="it">Anestesiologia</div>
 	 */
-	ANÄSTHESIOLOGIE("10003", "Anästhesiologie"),
+	ANASTHESIOLOGIE("10003", "Anästhesiologie"),
 	/**
 	 * <div class="de">Arbeitsmedizin</div> <div class="fr">Médecine du
 	 * travail</div> <div class="it">Medicina del lavoro</div>
@@ -77,7 +92,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Ernährungsberatung</div> <div class="fr">Conseil en
 	 * nutrition</div> <div class="it">Dietetica</div>
 	 */
-	ERNÄHRUNGSBERATUNG("10012", "Ernährungsberatung"),
+	ERNAHRUNGSBERATUNG("10012", "Ernährungsberatung"),
 	/**
 	 * <div class="de">Gastroenterologie</div> <div
 	 * class="fr">Gastroentérologie</div> <div
@@ -94,17 +109,17 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * class="fr">Gynécologie et obstétrique</div> <div class="it">Ginecologia e
 	 * ostetricia</div>
 	 */
-	GYNÄKOLOGIE_UND_GEBURTSHILFE("10015", "Gynäkologie und Geburtshilfe"),
+	GYNAKOLOGIE_UND_GEBURTSHILFE("10015", "Gynäkologie und Geburtshilfe"),
 	/**
 	 * <div class="de">Herz- und Gefässchirurgie</div> <div class="fr">Chirurgie
 	 * cardiovasculaire</div> <div class="it">Chirurgia cardiovascolare</div>
 	 */
-	HERZ_UND_GEFÄSSCHIRURGIE("10016", "Herz- und Gefässchirurgie"),
+	HERZ_UND_GEFASSCHIRURGIE("10016", "Herz- und Gefässchirurgie"),
 	/**
 	 * <div class="de">Hämatologie</div> <div class="fr">Hématologie</div> <div
 	 * class="it">Ematologia</div>
 	 */
-	HÄMATOLOGIE("10058", "Hämatologie"),
+	HAMATOLOGIE("10058", "Hämatologie"),
 	/**
 	 * <div class="de">Immunologie</div> <div class="fr">Immunologie</div> <div
 	 * class="it">Immunologia</div>
@@ -135,7 +150,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * alternative et complémentaire</div> <div class="it">Medicina
 	 * complementare</div>
 	 */
-	KOMPLEMENTÄRMEDIZIN("10021", "Komplementärmedizin"),
+	KOMPLEMENTARMEDIZIN("10021", "Komplementärmedizin"),
 	/**
 	 * <div class="de">Labormedizin</div> <div class="fr">Diagnostic de
 	 * laboratoire</div> <div class="it">Medicina di laboratorio</div>
@@ -145,7 +160,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Logopädie</div> <div class="fr">Orthophonie</div> <div
 	 * class="it">Logopedia</div>
 	 */
-	LOGOPÄDIE("10025", "Logopädie"),
+	LOGOPADIE("10025", "Logopädie"),
 	/**
 	 * <div class="de">Medizinische Genetik</div> <div class="fr">Génétique
 	 * médicale</div> <div class="it">Genetica medica</div>
@@ -194,7 +209,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * locomoteur</div> <div class="it">Chirurgia ortopedica e traumatologia
 	 * dell'apparato locomotore</div>
 	 */
-	ORTHOPÄDIE_UND_TRAUMATOLOGIE("10033", "Orthopädie und Traumatologie"),
+	ORTHOPADIE_UND_TRAUMATOLOGIE("10033", "Orthopädie und Traumatologie"),
 	/**
 	 * <div class="de">Osteopathie</div> <div class="fr">Ostéopathie</div> <div
 	 * class="it">Osteopatia</div>
@@ -237,13 +252,13 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 */
 	PHYSIOTHERAPIE("10040", "Physiotherapie"),
 	/**
-	 * <div class="de">Plastische, Rekonstruktive und Ästhetische
+	 * <div class="de">Plastische, Rekonstruktive und Asthetische
 	 * Chirurgie</div> <div class="fr">Chirurgie plastique, reconstructrice et
 	 * esthétique</div> <div class="it">Chirurgia plastica, ricostruttiva ed
 	 * estetica</div>
 	 */
-	PLASTISCHE_REKONSTRUKTIVE_UND_ÄSTHETISCHE_CHIRURGIE("10041",
-			"Plastische, Rekonstruktive und Ästhetische Chirurgie"),
+	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE("10041",
+			"Plastische, Rekonstruktive und Asthetische Chirurgie"),
 	/**
 	 * <div class="de">Pneumologie</div> <div class="fr">Pneumologie</div> <div
 	 * class="it">Pneumologia</div>
@@ -258,7 +273,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Prävention </div> <div class="fr">Prévention </div> <div
 	 * class="it">Prevenzione </div>
 	 */
-	PRÄVENTION("10044", "Prävention "),
+	PRAVENTION("10044", "Prävention "),
 	/**
 	 * <div class="de">Psychiatrie und Psychotherapie</div> <div
 	 * class="fr">Psychiatrie et psychothérapie</div> <div
@@ -279,7 +294,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Pädiatrie</div> <div class="fr">Pédiatrie</div> <div
 	 * class="it">Pediatria</div>
 	 */
-	PÄDIATRIE("10022", "Pädiatrie"),
+	PADIATRIE("10022", "Pädiatrie"),
 	/**
 	 * <div class="de">Radiologie</div> <div class="fr">Radiologie</div> <div
 	 * class="it">Radiologia</div>
@@ -357,7 +372,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * spécification</div> <div class="it">Code per Altri rami specialistici
 	 * della medicina non meglio precisati</div>
 	 */
-	public static final String ANDERE_NICHT_NÄHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG_CODE = "10999";
+	public static final String ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG_CODE = "10999";
 
 	/**
 	 * <div class="de">Code für Angiologie</div> <div class="fr">Code de
@@ -369,7 +384,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Anästhesiologie</div> <div class="fr">Code de
 	 * Anesthésiologie</div> <div class="it">Code per Anestesiologia</div>
 	 */
-	public static final String ANÄSTHESIOLOGIE_CODE = "10003";
+	public static final String ANASTHESIOLOGIE_CODE = "10003";
 
 	/**
 	 * <div class="de">Code für Arbeitsmedizin</div> <div class="fr">Code de
@@ -414,7 +429,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Ernährungsberatung</div> <div class="fr">Code de
 	 * Conseil en nutrition</div> <div class="it">Code per Dietetica</div>
 	 */
-	public static final String ERNÄHRUNGSBERATUNG_CODE = "10012";
+	public static final String ERNAHRUNGSBERATUNG_CODE = "10012";
 
 	/**
 	 * <div class="de">Code für Gastroenterologie</div> <div class="fr">Code de
@@ -433,20 +448,20 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * class="fr">Code de Gynécologie et obstétrique</div> <div class="it">Code
 	 * per Ginecologia e ostetricia</div>
 	 */
-	public static final String GYNÄKOLOGIE_UND_GEBURTSHILFE_CODE = "10015";
+	public static final String GYNAKOLOGIE_UND_GEBURTSHILFE_CODE = "10015";
 
 	/**
 	 * <div class="de">Code für Herz- und Gefässchirurgie</div> <div
 	 * class="fr">Code de Chirurgie cardiovasculaire</div> <div class="it">Code
 	 * per Chirurgia cardiovascolare</div>
 	 */
-	public static final String HERZ_UND_GEFÄSSCHIRURGIE_CODE = "10016";
+	public static final String HERZ_UND_GEFASSCHIRURGIE_CODE = "10016";
 
 	/**
 	 * <div class="de">Code für Hämatologie</div> <div class="fr">Code de
 	 * Hématologie</div> <div class="it">Code per Ematologia</div>
 	 */
-	public static final String HÄMATOLOGIE_CODE = "10058";
+	public static final String HAMATOLOGIE_CODE = "10058";
 
 	/**
 	 * <div class="de">Code für Immunologie</div> <div class="fr">Code de
@@ -484,7 +499,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * de Médecine alternative et complémentaire</div> <div class="it">Code per
 	 * Medicina complementare</div>
 	 */
-	public static final String KOMPLEMENTÄRMEDIZIN_CODE = "10021";
+	public static final String KOMPLEMENTARMEDIZIN_CODE = "10021";
 
 	/**
 	 * <div class="de">Code für Labormedizin</div> <div class="fr">Code de
@@ -497,7 +512,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Logopädie</div> <div class="fr">Code de
 	 * Orthophonie</div> <div class="it">Code per Logopedia</div>
 	 */
-	public static final String LOGOPÄDIE_CODE = "10025";
+	public static final String LOGOPADIE_CODE = "10025";
 
 	/**
 	 * <div class="de">Code für Medizinische Genetik</div> <div class="fr">Code
@@ -556,7 +571,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * locomoteur</div> <div class="it">Code per Chirurgia ortopedica e
 	 * traumatologia dell'apparato locomotore</div>
 	 */
-	public static final String ORTHOPÄDIE_UND_TRAUMATOLOGIE_CODE = "10033";
+	public static final String ORTHOPADIE_UND_TRAUMATOLOGIE_CODE = "10033";
 
 	/**
 	 * <div class="de">Code für Osteopathie</div> <div class="fr">Code de
@@ -610,12 +625,12 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	public static final String PHYSIOTHERAPIE_CODE = "10040";
 
 	/**
-	 * <div class="de">Code für Plastische, Rekonstruktive und Ästhetische
+	 * <div class="de">Code für Plastische, Rekonstruktive und Asthetische
 	 * Chirurgie</div> <div class="fr">Code de Chirurgie plastique,
 	 * reconstructrice et esthétique</div> <div class="it">Code per Chirurgia
 	 * plastica, ricostruttiva ed estetica</div>
 	 */
-	public static final String PLASTISCHE_REKONSTRUKTIVE_UND_ÄSTHETISCHE_CHIRURGIE_CODE = "10041";
+	public static final String PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE_CODE = "10041";
 
 	/**
 	 * <div class="de">Code für Pneumologie</div> <div class="fr">Code de
@@ -633,7 +648,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Prävention </div> <div class="fr">Code de
 	 * Prévention </div> <div class="it">Code per Prevenzione </div>
 	 */
-	public static final String PRÄVENTION_CODE = "10044";
+	public static final String PRAVENTION_CODE = "10044";
 
 	/**
 	 * <div class="de">Code für Psychiatrie und Psychotherapie</div> <div
@@ -658,7 +673,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Pädiatrie</div> <div class="fr">Code de
 	 * Pédiatrie</div> <div class="it">Code per Pediatria</div>
 	 */
-	public static final String PÄDIATRIE_CODE = "10022";
+	public static final String PADIATRIE_CODE = "10022";
 
 	/**
 	 * <div class="de">Code für Radiologie</div> <div class="fr">Code de
@@ -747,13 +762,13 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div
 	 * class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -797,7 +812,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -809,7 +824,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -882,7 +897,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (PracticeSettingCode x : values()) {
+		for (final PracticeSettingCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

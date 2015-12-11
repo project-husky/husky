@@ -24,49 +24,49 @@ import java.net.URI;
 public class V3PixPdqAdapterConfig {
 
 	/** The ATNA audit repository uri. */
-	final public String auditRepositoryUri;
+	final private String auditRepositoryUri;
 
 	/** The ATNA audit source id. */
-	final public String auditSourceId;
+	final private String auditSourceId;
 
 	/** The domain to return namespace (optional). */
-	final public String domainToReturnNamespace;
+	final private String domainToReturnNamespace;
 
 	/**
 	 * The oid of the domain to return ids (optional, convenience if not other
 	 * id for other domain oids are necessary) .
 	 */
-	final public String domainToReturnOid;
+	final private String domainToReturnOid;
 
 	/** The home community namespace (optional). */
-	final public String homeCommunityNamespace;
+	final private String homeCommunityNamespace;
 
 	/** The home community oid. */
-	final public String homeCommunityOid;
+	final private String homeCommunityOid;
 
 	/** oid of id domains which are not medical ids */
-	final public String[] otherOidIds;
+	final private String[] otherOidIds;
 
 	/** The pdq consumer uri endpoint. */
-	final public URI pdqConsumerUri;
+	final private URI pdqConsumerUri;
 
 	/** The pix query uri endpoint. */
-	final public URI pixQueryUri;
+	final private URI pixQueryUri;
 
 	/** The pix source uri endpoint. */
-	final public URI pixSourceUri;
+	final private URI pixSourceUri;
 
 	/** The receiver application oid. */
-	final public String receiverApplicationOid;
+	final private String receiverApplicationOid;
 
 	/** The receiver facility oid. */
-	final public String receiverFacilityOid;
+	final private String receiverFacilityOid;
 
 	/** The sender application oid. */
-	final public String senderApplicationOid;
+	final private String senderApplicationOid;
 
 	/** The sender facility oid. */
-	final public String senderFacilityOid;
+	final private String senderFacilityOid;
 
 	/**
 	 * Instantiates a new v3 pix adapter config.
@@ -121,6 +121,132 @@ public class V3PixPdqAdapterConfig {
 		this.auditRepositoryUri = auditRepositoryUri;
 		this.auditSourceId = auditSourceId;
 		this.otherOidIds = otherOidIds;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the pixQueryUri
+	 */
+	public URI getPixQueryUri() {
+		return pixQueryUri;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the pixSourceUri
+	 */
+	public URI getPixSourceUri() {
+		return pixSourceUri;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the pdqConsumerUri
+	 */
+	public URI getPdqConsumerUri() {
+		return pdqConsumerUri;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the senderApplicationOid
+	 */
+	public String getSenderApplicationOid() {
+		return senderApplicationOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the senderFacilityOid
+	 */
+	public String getSenderFacilityOid() {
+		return senderFacilityOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the receiverApplicationOid
+	 */
+	public String getReceiverApplicationOid() {
+		return receiverApplicationOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the receiverFacilityOid
+	 */
+	public String getReceiverFacilityOid() {
+		return receiverFacilityOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the homeCommunityOid
+	 */
+	public String getHomeCommunityOid() {
+		return homeCommunityOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the homeCommunityNamespace
+	 */
+	public String getHomeCommunityNamespace() {
+		return homeCommunityNamespace;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the domainToReturnOid
+	 */
+	public String getDomainToReturnOid() {
+		return domainToReturnOid;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the domainToReturnNamespace
+	 */
+	public String getDomainToReturnNamespace() {
+		return domainToReturnNamespace;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the auditRepositoryUri
+	 */
+	public String getAuditRepositoryUri() {
+		return auditRepositoryUri;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the auditSourceId
+	 */
+	public String getAuditSourceId() {
+		return auditSourceId;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the otherOidIds
+	 */
+	public String[] getOtherOidIds() {
+		return otherOidIds;
 	}
 
 }

@@ -59,7 +59,7 @@ public enum SerologieForVACD {
 	public static final String YELLOW_FEVER_VIRUS_AB_CODE = "6589-6";
 	public static final String CLOSTRIDIUM_TETANI_TOXIN_AB_IGG_CODE = "58770-9";
 
-	public static final String CODE_SYSTEM = "2.16.840.1.113883.6.1";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.1";
 	public static final String CODE_SYSTEM_NAME = "LOINC";
 
 	private String code;
@@ -107,8 +107,9 @@ public enum SerologieForVACD {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM);
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		cd.setCodeSystem(CODE_SYSTEM_OID);
+		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -121,7 +122,7 @@ public enum SerologieForVACD {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -132,7 +133,7 @@ public enum SerologieForVACD {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemId() {
-		return CODE_SYSTEM;
+		return CODE_SYSTEM_OID;
 	}
 
 	/**
@@ -161,7 +162,7 @@ public enum SerologieForVACD {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return displayName;
 	}
 

@@ -154,7 +154,7 @@ public class Reason extends MedicationTargetEntry {
 		}
 
 		// Set the id or generate if null
-		II docIi = DatatypesFactory.eINSTANCE.createII();
+		final II docIi = DatatypesFactory.eINSTANCE.createII();
 		docIi.setRoot("2.16.756.5.30.1.1.1.1.3.6.21");
 		if (id == null) {
 			docIi.setExtension(org.openhealthtools.ihe.utils.UUID.generate());
@@ -167,12 +167,12 @@ public class Reason extends MedicationTargetEntry {
 
 	private void initExtRef() {
 		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
-		ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
+		final ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
 		mExtRef.setExternalDocument(e);
 
 		// Fix Template ID
 		mExtRef.getTemplateIds().clear();
-		II ii = DatatypesFactory.eINSTANCE.createII(CdaCh.OID_V1, "CDA-CH.Body.ExtRef");
+		final II ii = DatatypesFactory.eINSTANCE.createII(CdaCh.OID_V1, "CDA-CH.Body.ExtRef");
 		mExtRef.getTemplateIds().add(ii);
 
 		// Set attributes

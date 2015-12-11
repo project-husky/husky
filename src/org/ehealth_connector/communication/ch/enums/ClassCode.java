@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -7,11 +22,12 @@ import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
+/**
  *<div class="de">Dieser Code definiert die Klasse des Dokumentes und richtet sich nach der CEN 13606 Norm. Unterhalb der Klassen sind Typen definiert im Attribut epd_xds_typeCode.</div>
  *<div class="fr"></div>
  */
-public enum ClassCode implements CodedMetadataEnumInterface {
+public enum ClassCode
+		implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Warnungen /Risiken</div> <div class="fr">Alertes</div>
@@ -230,13 +246,13 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div
 	 * class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -280,7 +296,7 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -292,7 +308,7 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -365,7 +381,7 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ClassCode x : values()) {
+		for (final ClassCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

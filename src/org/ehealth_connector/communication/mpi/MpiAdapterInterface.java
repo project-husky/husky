@@ -17,6 +17,9 @@ package org.ehealth_connector.communication.mpi;
 
 /**
  * General adapter Inteface for an MPI implementation.
+ * 
+ * @param <T> a MpiQuery type implementation
+ * @param <U> a MpiQueryResponse type implementation
  */
 public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryResponse> {
 

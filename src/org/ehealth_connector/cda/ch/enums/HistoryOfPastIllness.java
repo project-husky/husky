@@ -106,8 +106,9 @@ public enum HistoryOfPastIllness {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
+		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		return cd;
@@ -120,7 +121,7 @@ public enum HistoryOfPastIllness {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -160,7 +161,7 @@ public enum HistoryOfPastIllness {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return displayName;
 	}
 

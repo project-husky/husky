@@ -36,7 +36,7 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  */
 public class MasterPatientIndexQuery {
 
-	static final private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
+	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 
 	static {
 		// org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE needs to be
@@ -44,7 +44,7 @@ public class MasterPatientIndexQuery {
 		// classcast Exception occurs
 		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
 		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
-		if (factory == null) {
+		if (FACTORY == null) {
 			throw new ExceptionInInitializerError();
 		}
 	}
@@ -63,8 +63,7 @@ public class MasterPatientIndexQuery {
 	 *            the dest
 	 */
 	public MasterPatientIndexQuery(Destination dest) {
-		v3PdqQuery = new V3PdqQuery(dest.getSenderApplicationOid(), dest.getSenderFacilityOid(),
-				dest.getReceiverApplicationOid(), dest.getReceiverFacilityOid());
+		v3PdqQuery = new V3PdqQuery(dest.getSenderApplicationOid(), dest.getSenderFacilityOid(), dest.getReceiverApplicationOid(), dest.getReceiverFacilityOid());
 	}
 
 	/**
@@ -114,8 +113,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
-		v3PdqQuery.addPatientIdentifier(new IdentifierDt("urn:oid:" + identificator.getRoot(),
-				identificator.getExtension()));
+		v3PdqQuery.addPatientIdentifier(new IdentifierDt("urn:oid:" + identificator.getRoot(), identificator.getExtension()));
 		return this;
 	}
 

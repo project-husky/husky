@@ -253,7 +253,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 *            the lot number text
 	 */
 	public void setLotNr(String text) {
-		if (!text.equals("") && this.getManufacturedMaterial() != null) {
+		if (!"".equals(text) && this.getManufacturedMaterial() != null) {
 			getManufacturedMaterial().setLotNumberText(Util.st(text));
 		}
 	}

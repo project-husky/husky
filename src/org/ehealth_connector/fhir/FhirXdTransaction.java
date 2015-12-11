@@ -102,7 +102,7 @@ public class FhirXdTransaction {
 		 *            - add the destination (FHIR MessageHeader)
 		 */
 		public void addDestination(MessageHeader destination) {
-			Entry entry = this.addEntry();
+			final Entry entry = this.addEntry();
 			entry.setResource(destination);
 			entry.setFullUrl(UUID.generateURN());
 		}
@@ -114,7 +114,7 @@ public class FhirXdTransaction {
 		 *            - add the document (FHIR DocumentReference)
 		 */
 		public void addDocument(DocumentReference document) {
-			Entry entry = this.addEntry();
+			final Entry entry = this.addEntry();
 			entry.setResource(document);
 			entry.setFullUrl(UUID.generateURN());
 		}
@@ -126,7 +126,7 @@ public class FhirXdTransaction {
 		 *            - add the submission-set (FHIR DocumentManifest)
 		 */
 		public void addSubmissionSet(DocumentManifest submissionSet) {
-			Entry entry = this.addEntry();
+			final Entry entry = this.addEntry();
 			entry.setResource(submissionSet);
 			entry.setFullUrl(UUID.generateURN());
 		}
@@ -151,12 +151,12 @@ public class FhirXdTransaction {
 	 *         class="fr"></div>
 	 */
 	public AffinityDomain getAffinityDomain(Transaction transaction) {
-		AffinityDomain afinityDomain = new AffinityDomain();
+		final AffinityDomain afinityDomain = new AffinityDomain();
 		// set the registry
 		afinityDomain.setRegistryDestination(getRegistry(transaction));
 
 		// set the repositories
-		List<org.ehealth_connector.communication.Destination> repos = getRepositories(transaction);
+		final List<org.ehealth_connector.communication.Destination> repos = getRepositories(transaction);
 		// TODO support of multiple repos as soon as this will be asked
 		if (!repos.isEmpty())
 			afinityDomain.setRepositoryDestination(repos.get(0));
@@ -213,13 +213,13 @@ public class FhirXdTransaction {
 	 */
 	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
 			String receiverFacilityOid, String senderFacilityOid) {
-		List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
+		final List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
 
 		for (Entry entry : transaction.getEntry()) {
 			if (entry.getResource() instanceof DocumentReference) {
-				DocumentReference fhirObject = (DocumentReference) entry.getResource();
+				final DocumentReference fhirObject = (DocumentReference) entry.getResource();
 
-				DocumentMetadata metaData = new DocumentMetadata(
+				final DocumentMetadata metaData = new DocumentMetadata(
 						FhirCommon.getMetadataLanguage(fhirObject));
 				metaData.addAuthor(getAuthor(fhirObject));
 				metaData.addConfidentialityCode(new Code(fhirObject.getSecurityLabelFirstRep()));
@@ -266,7 +266,7 @@ public class FhirXdTransaction {
 
 		for (Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof MessageHeader) {
-				MessageHeader fhirObject = (MessageHeader) entry.getResource();
+				final MessageHeader fhirObject = (MessageHeader) entry.getResource();
 				if (!fhirObject
 						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
 						.isEmpty())
@@ -291,7 +291,7 @@ public class FhirXdTransaction {
 
 		for (Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof MessageHeader) {
-				MessageHeader fhirObject = (MessageHeader) entry.getResource();
+				final MessageHeader fhirObject = (MessageHeader) entry.getResource();
 				if (!fhirObject.getUndeclaredExtensionsByUrl(
 						FhirCommon.urnUseAsRepositoryDestination).isEmpty())
 					retVal.add(getDestination((MessageHeader) entry.getResource()));
@@ -314,11 +314,11 @@ public class FhirXdTransaction {
 	 */
 	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction,
 			String receiverFacilityOid) {
-		SubmissionSetMetadata retVal = new SubmissionSetMetadata();
+		final SubmissionSetMetadata retVal = new SubmissionSetMetadata();
 
 		for (Entry entry : transaction.getEntry()) {
 			if (entry.getResource() instanceof DocumentManifest) {
-				DocumentManifest fhirObject = (DocumentManifest) entry.getResource();
+				final DocumentManifest fhirObject = (DocumentManifest) entry.getResource();
 
 				retVal.setAuthor(getAuthor(fhirObject));
 
@@ -327,14 +327,14 @@ public class FhirXdTransaction {
 					availabilityStatus = AvailabilityStatus.DEPRECATED;
 				retVal.setAvailabilityStatus(availabilityStatus);
 
-				List<ExtensionDt> extensions = fhirObject
+				final List<ExtensionDt> extensions = fhirObject
 						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment);
 				if (!extensions.isEmpty())
 					retVal.setComments(((StringDt) extensions.get(0).getValue()).getValueAsString());
 
 				retVal.setContentTypeCode(new Code(fhirObject.getType()));
 
-				Patient pat = FhirCommon.getPatient(fhirObject.getSubject());
+				final Patient pat = FhirCommon.getPatient(fhirObject.getSubject());
 				if (!pat.getIds().isEmpty())
 					retVal.setDestinationPatientId(FhirCommon.getCommunityPatientId(pat,
 							receiverFacilityOid));
@@ -356,8 +356,8 @@ public class FhirXdTransaction {
 	 * @return the transaction
 	 */
 	public Transaction readTransactionFromFile(String fileName) {
-		String resourceString = FhirCommon.getXmlResource(fileName);
-		IParser parser = fhirCtx.newXmlParser();
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(Transaction.class, resourceString);
 	}
 
@@ -373,17 +373,17 @@ public class FhirXdTransaction {
 	private org.ehealth_connector.communication.Destination getDestination(MessageHeader fhirObject) {
 		org.ehealth_connector.communication.Destination retVal = null;
 
-		String senderOrganizationalOid = fhirObject.getSource().getSoftware();
+		final String senderOrganizationalOid = fhirObject.getSource().getSoftware();
 		String receiverFacilityOid = null;
 		String sourceFacilityOid = null;
 		URI uri = null;
 
 		// Create the Destination
 		try {
-			Source source = fhirObject.getSource();
+			final Source source = fhirObject.getSource();
 			sourceFacilityOid = source.getName();
 
-			Destination destination = fhirObject.getDestinationFirstRep();
+			final Destination destination = fhirObject.getDestinationFirstRep();
 			receiverFacilityOid = destination.getName();
 			uri = new URI(destination.getEndpoint());
 		} catch (URISyntaxException e) {

@@ -11,19 +11,19 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 		super();
 	}
 
-	/**
-	 * <div class="en">Instantiates a new author.</div> <div
-	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
-	 * class="it"></div>
-	 * 
-	 * @param iAuthor
-	 * <br>
-	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 */
-	public AuthorCh(AuthorType iAuthor) {
-		super(iAuthor);
-	}
+//	/**
+//	 * <div class="en">Instantiates a new author.</div> <div
+//	 * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
+//	 * class="it"></div>
+//	 * 
+//	 * @param iAuthor
+//	 * <br>
+//	 *            <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
+//	 *            <div class="it"></div>
+//	 */
+//	public AuthorCh(AuthorType iAuthor) {
+//		super(iAuthor);
+//	}
 
 	public AuthorCh(Name name) {
 		super(name);
@@ -62,7 +62,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 * @return code the function code
 	 */
 	public AuthorRole getRoleFunctionEnum() {
-		return AuthorRole.getEnum(mAuthor.getFunctionCode().getCode());
+		return AuthorRole.getEnum(getAuthor().getFunctionCode().getCode());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 * @return code the speciality code
 	 */
 	public AuthorSpeciality getSpecialityEnum() {
-		return AuthorSpeciality.getEnum(mAsAuthor.getCode().getCode());
+		return AuthorSpeciality.getEnum(getAsAuthor().getCode().getCode());
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 *            the function code
 	 */
 	public void setRoleFunction(AuthorRole code) {
-		mAuthor.setFunctionCode(code.getCode().getCE());
+		getAuthor().setFunctionCode(code.getCode().getCE());
 	}
 
 	/**
@@ -102,6 +102,6 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 *            the speciality code
 	 */
 	public void setSpeciality(AuthorSpeciality code) {
-		mAsAuthor.setCode(code.getCode().getCE());
+		getAsAuthor().setCode(code.getCode().getCE());
 	}
 }

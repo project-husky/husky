@@ -88,7 +88,7 @@ public enum AddressUse {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AddressUse getEnum(String code) {
-		for (AddressUse x : values()) {
+		for (final AddressUse x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -144,7 +144,7 @@ public enum AddressUse {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -158,7 +158,7 @@ public enum AddressUse {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -195,10 +195,10 @@ public enum AddressUse {
 	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return displayName;
 	}
 
@@ -228,7 +228,7 @@ public enum AddressUse {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (AddressUse x : values()) {
+		for (final AddressUse x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

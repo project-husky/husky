@@ -34,7 +34,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class ProblemConcern extends Concern {
 
-	protected org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry;
+	private org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry mProblemConcernEntry;
 
 	/**
 	 * Instantiates a new problem concern entry.
@@ -148,7 +148,7 @@ public class ProblemConcern extends Concern {
 	 */
 	public void addProblemEntry(ProblemEntry problemEntry) {
 		mProblemConcernEntry.addObservation(problemEntry.copy());
-		EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships();
+		final EList<EntryRelationship> entryRel = mProblemConcernEntry.getEntryRelationships();
 		// Set the Attributes of the last added element
 		entryRel.get(entryRel.size() - 1).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		entryRel.get(entryRel.size() - 1).setInversionInd(false);
@@ -181,10 +181,10 @@ public class ProblemConcern extends Concern {
 	 * @return the problem entries
 	 */
 	public List<ProblemEntry> getProblemEntries() {
-		List<ProblemEntry> pel = new ArrayList<ProblemEntry>();
+		final List<ProblemEntry> pel = new ArrayList<ProblemEntry>();
 		for (org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy : mProblemConcernEntry
 				.getProblemEntries()) {
-			ProblemEntry problem = new ProblemEntry(mAllergy);
+			final ProblemEntry problem = new ProblemEntry(mAllergy);
 			pel.add(problem);
 		}
 		return pel;
@@ -198,7 +198,7 @@ public class ProblemConcern extends Concern {
 	 * @return the medical problem
 	 */
 	public ProblemEntry getProblemEntry() {
-		ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
+		final ProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry()
 				.getProblemEntries().get(0));
 		return problemEntry;
 	}

@@ -13,7 +13,6 @@
  * Year of publication: 2015
  *
  *******************************************************************************/
-
 package org.ehealth_connector.communication;
 
 import java.io.File;

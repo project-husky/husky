@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,7 +39,7 @@ public class Telecoms {
 	/**
 	 * The mdht tels.
 	 */
-	private ArrayList<TEL> mTels;
+	private List<TEL> mTels;
 
 	/**
 	 * <div class="en">Instantiates a new telecoms object.</div> <div
@@ -58,7 +59,7 @@ public class Telecoms {
 	 */
 	public Telecoms(List<TEL> telecoms) {
 		this();
-		for (TEL tel : telecoms) {
+		for (final TEL tel : telecoms) {
 			mTels.add(tel);
 		}
 	}
@@ -168,7 +169,7 @@ public class Telecoms {
 	 *            class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
 	 */
 	public void addWebsite(String url, AddressUse usage) {
-		TEL t = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL t = DatatypesFactory.eINSTANCE.createTEL();
 		t.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		t.setValue(url);
 		mTels.add(t);
@@ -190,7 +191,7 @@ public class Telecoms {
 	 * @return ArrayList <div class="en">the e mails as am ArrayList of Strings
 	 *         and AddressUse</div>
 	 */
-	public HashMap<String, AddressUse> getEMails() {
+	public Map<String, AddressUse> getEMails() {
 		return Util.getEMail(mTels);
 	}
 
@@ -200,7 +201,7 @@ public class Telecoms {
 	 * 
 	 * @return <div class="en">the faxes</div>
 	 */
-	public HashMap<String, AddressUse> getFaxes() {
+	public Map<String, AddressUse> getFaxes() {
 		return Util.getFax(mTels);
 	}
 
@@ -220,7 +221,7 @@ public class Telecoms {
 	 * 
 	 * @return <div class="en">the phones</div>
 	 */
-	public HashMap<String, AddressUse> getPhones() {
+	public Map<String, AddressUse> getPhones() {
 		return Util.getPhones(mTels);
 	}
 
@@ -230,9 +231,9 @@ public class Telecoms {
 	 * 
 	 * @return <div class="en">the telecoms</div>
 	 */
-	public HashMap<String, TelecommunicationAddressUse> getTelecoms() {
-		HashMap<String, TelecommunicationAddressUse> pm = new HashMap<String, TelecommunicationAddressUse>();
-		for (TEL mName : mTels) {
+	public Map<String, TelecommunicationAddressUse> getTelecoms() {
+		final Map<String, TelecommunicationAddressUse> pm = new HashMap<String, TelecommunicationAddressUse>();
+		for (final TEL mName : mTels) {
 			pm.put(mName.getValue(), mName.getUses().get(0));
 		}
 		return pm;
@@ -244,7 +245,7 @@ public class Telecoms {
 	 * 
 	 * @return <div class="en">the websides</div>
 	 */
-	public HashMap<String, AddressUse> getWebsites() {
+	public Map<String, AddressUse> getWebsites() {
 		return Util.getWebsites(mTels);
 	}
 }

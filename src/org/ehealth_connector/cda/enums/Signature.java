@@ -6,9 +6,9 @@ import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Die Codes beschreiben ob und wie ein Teilnehmer das Dokument unterschreibt</div>
- *<div class="fr"></div>
+/**
+ * <div class="de">Die Codes beschreiben ob und wie ein Teilnehmer das Dokument unterschreibt</div>
+ * <div class="fr"></div>
  */
 public enum Signature {
 
@@ -64,7 +64,7 @@ public enum Signature {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Signature getEnum(String code) {
-		for (Signature x : values()) {
+		for (final Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -79,7 +79,7 @@ public enum Signature {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -116,11 +116,11 @@ public enum Signature {
 	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
 	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 * 
+	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}
@@ -131,7 +131,7 @@ public enum Signature {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return this.displayName;
 	}
 
@@ -161,7 +161,7 @@ public enum Signature {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (Signature x : values()) {
+		for (final Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

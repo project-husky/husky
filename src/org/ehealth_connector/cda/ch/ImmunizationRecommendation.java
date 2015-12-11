@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ch.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.enums.StatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
@@ -57,8 +58,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
  * erfolgte Impfungen dokumentiert werden.
  */
-public class ImmunizationRecommendation extends
-		MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
+public class ImmunizationRecommendation
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 
 	/**
 	 * Instantiates a new immunization recommendation.
@@ -90,7 +91,8 @@ public class ImmunizationRecommendation extends
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
-			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
+			Date endOfPossibleAppliance, boolean intendedOrProposed,
+			boolean shallNotBeAdministerd) {
 
 		this();
 		if (intendedOrProposed) {
@@ -111,7 +113,7 @@ public class ImmunizationRecommendation extends
 	 * Instantiates a new immunization recommendation.
 	 * 
 	 * @param immunizationRecommendation
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -127,7 +129,7 @@ public class ImmunizationRecommendation extends
 	 *            the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = Util.createUuidVacdIdentificator(id);
+		final II ii = CdaUtil.createUuidVacdIdentificator(id);
 		this.getMdht().getIds().add(ii);
 	}
 
@@ -142,7 +144,7 @@ public class ImmunizationRecommendation extends
 		this.getMdht().addObservation(medicationTargetEntry.getMdht());
 		// need to add the the RSON and inversionInd, cannot do this
 		// automatically with mdht
-		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getObservation() == medicationTargetEntry.getMdht()) {
 				entryRelationShip.setInversionInd(false);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
@@ -213,7 +215,7 @@ public class ImmunizationRecommendation extends
 	 * @return the criterion entry
 	 */
 	public CriterionEntry getCriterionEntry() {
-		EList<Precondition> preconditions = getMdht().getPreconditions();
+		final EList<Precondition> preconditions = getMdht().getPreconditions();
 		if (preconditions.size() > 0) {
 			return new CriterionEntry(preconditions.get(0).getCriterion());
 		}
@@ -240,10 +242,10 @@ public class ImmunizationRecommendation extends
 	 */
 	public ExternalDocumentEntry getExternalDocumentEntry() {
 		if (getMdht().getReferences().size() > 0) {
-			Reference reference = this.getMdht().getReferences().get(0);
+			final Reference reference = this.getMdht().getReferences().get(0);
 			return new ExternalReferenceEntry(
 					(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference)
-					.getExternalDocumentEntry();
+							.getExternalDocumentEntry();
 		}
 		return null;
 	}
@@ -256,7 +258,7 @@ public class ImmunizationRecommendation extends
 	 */
 	public Identificator getId() {
 		Identificator id = null;
-		if (getMdht().getIds() != null && getMdht().getIds().size() > 0) {
+		if ((getMdht().getIds() != null) && (getMdht().getIds().size() > 0)) {
 			id = new Identificator(getMdht().getIds().get(0));
 		}
 		return id;
@@ -283,8 +285,8 @@ public class ImmunizationRecommendation extends
 	 * @return the medication target entries
 	 */
 	public List<MedicationTargetEntry> getMedicationTargetEntries() {
-		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
-		for (org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+		final List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
 				.getMedicalTargets()) {
 			medicationTargetEntries.add(new MedicationTargetEntry(mte));
 		}
@@ -307,18 +309,18 @@ public class ImmunizationRecommendation extends
 	 */
 	public Date getPossibleApplianceEndDate() {
 		if (getMdht().getEffectiveTimes().size() > 0) {
-			SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
+			final SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
 			if (effectiveTime instanceof IVL_TS) {
-				IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-				if (effectiveTimeInterval.getHigh() != null
-						&& effectiveTimeInterval.getHigh().getValue() != null) {
-					Date tsHigh = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh()
-							.getValue());
+				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
+				if ((effectiveTimeInterval.getHigh() != null)
+						&& (effectiveTimeInterval.getHigh().getValue() != null)) {
+					final Date tsHigh = DateUtil
+							.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
 					return tsHigh;
 				}
 			} else {
 				if (effectiveTime instanceof TS) {
-					Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					final Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
 					return ts;
 				}
 			}
@@ -334,14 +336,15 @@ public class ImmunizationRecommendation extends
 	 */
 	public Date getPossibleApplianceStartDate() {
 		if (getMdht().getEffectiveTimes().size() > 0) {
-			SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
+			final SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
 			if (effectiveTime instanceof IVL_TS) {
-				IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-				Date tsLow = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
+				final Date tsLow = DateUtil
+						.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
 				return tsLow;
 			} else {
 				if (effectiveTime instanceof TS) {
-					Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					final Date ts = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
 					return ts;
 				}
 			}
@@ -351,14 +354,14 @@ public class ImmunizationRecommendation extends
 
 	/**
 	 * <div class="en">Gets the timespan, in which the immunization shall be
-	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div> <div
-	 * class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht werden
-	 * soll als String (z.B. "01.01.2015 - 01.03.2015")</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * administered as String (e.g. "01.01.2015 - 01.03.2015")</div>
+	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
+	 * werden soll als String (z.B. "01.01.2015 - 01.03.2015")</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div> <div
-	 *         class="it"></div>
+	 *         soll als String</div> <div class="fr"></div>
+	 *         <div class="it"></div>
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
@@ -404,7 +407,8 @@ public class ImmunizationRecommendation extends
 	 * @return the text reference
 	 */
 	public String getTextReference() {
-		if (this.getMdht().getText() != null && this.getMdht().getText().getReference() != null) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -462,7 +466,7 @@ public class ImmunizationRecommendation extends
 		this.getMdht().setPriorityCode(ce);
 		this.getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		this.getMdht().getIds().add(Util.createUuidVacd(null));
+		this.getMdht().getIds().add(CdaUtil.createUuidVacd(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}
@@ -477,7 +481,7 @@ public class ImmunizationRecommendation extends
 		this.getMdht().addAct(commentEntry.getMdht());
 		// need to add the the Subj and inversiond, cannot do this
 		// automatically with mdht
-		for (EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
 			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
 				entryRelationShip.setInversionInd(true);
 				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
@@ -492,7 +496,7 @@ public class ImmunizationRecommendation extends
 	 *            the text
 	 */
 	public void setCommentText(String text) {
-		SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
+		final SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
 		commentEntry.setAnnotationCommentText(text);
 		this.setCommentEntry(commentEntry);
 	}
@@ -515,7 +519,8 @@ public class ImmunizationRecommendation extends
 	 */
 	public void setCriterionEntry(CriterionEntry citerionEntry) {
 		this.getMdht().getPreconditions().clear();
-		PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry().init();
+		final PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry()
+				.init();
 		preconditionEntry.setCriterion(citerionEntry.getMdht());
 		this.getMdht().getPreconditions().add(preconditionEntry);
 	}
@@ -545,7 +550,7 @@ public class ImmunizationRecommendation extends
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		getMdht().getReferences().clear();
-		ExternalReferenceEntry externalReference = new ExternalReferenceEntry();
+		final ExternalReferenceEntry externalReference = new ExternalReferenceEntry();
 		externalReference.setExternalDocumentEntry(externalDocumentEntry);
 		getMdht().getReferences().add(externalReference.getMdht());
 	}
@@ -587,19 +592,19 @@ public class ImmunizationRecommendation extends
 	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param startOfPossibleAppliance
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param endOfPossibleAppliance
 	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
-		this.getMdht().getEffectiveTimes()
-				.add(0, DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+		this.getMdht().getEffectiveTimes().add(0,
+				DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
 	}
 
 	/**
@@ -645,8 +650,8 @@ public class ImmunizationRecommendation extends
 	/**
 	 * <div class="en">Sets the information, wheater an immunization shall not
 	 * be administered</div> <div class="de">Gibt an, ob eine Impfung nicht
-	 * verabreicht werden soll.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * verabreicht werden soll.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * @param shallNotBeAdministerd
 	 *            <div class="en">true, if the immunization shall not be

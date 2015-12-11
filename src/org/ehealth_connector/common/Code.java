@@ -216,7 +216,7 @@ public class Code {
 		if (!(obj instanceof Code)) {
 			return false; // different class
 		}
-		Code other = (Code) obj;
+		final Code other = (Code) obj;
 		if (this.mCD == other.mCD)
 			return true;
 
@@ -370,7 +370,7 @@ public class Code {
 	 */
 	public List<Code> getTranslations() {
 		final List<Code> cl = new ArrayList<Code>();
-		for (CD cd : mCD.getTranslations()) {
+		for (final CD cd : mCD.getTranslations()) {
 			cl.add(new Code(cd));
 		}
 		return cl;

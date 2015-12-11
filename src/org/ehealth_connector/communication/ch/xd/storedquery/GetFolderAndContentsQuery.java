@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
 import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
@@ -14,7 +29,7 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
  * specified by eHealth Suisse for the usage in Switzerland.
  */
 public class GetFolderAndContentsQuery implements StoredQueryInterface {
-	org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery ohtStoredQuery;
+	private org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery ohtStoredQuery;
 
 	/**
 	 * Constructor. All arrays of codes are interpreted with as a disjunction

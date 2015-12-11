@@ -68,7 +68,7 @@ public enum Confidentiality {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Confidentiality getEnum(String code) {
-		for (Confidentiality x : values()) {
+		for (final Confidentiality x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -83,7 +83,7 @@ public enum Confidentiality {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(oid);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -97,7 +97,7 @@ public enum Confidentiality {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(oid, code, displayName);
+		final Code ehcCode = new Code(oid, code, displayName);
 		return ehcCode;
 	}
 
@@ -167,7 +167,7 @@ public enum Confidentiality {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (Confidentiality x : values()) {
+		for (final Confidentiality x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

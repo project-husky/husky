@@ -52,6 +52,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  */
 public class XdsUtil {
 
+	private XdsUtil() {
+
+	}
+
 	/**
 	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
 	 * 
@@ -90,10 +94,10 @@ public class XdsUtil {
 		if (codeList == null)
 			return null;
 		else {
-			CodedMetadataType[] cmtArray = new CodedMetadataType[codeList.length];
+			final CodedMetadataType[] cmtArray = new CodedMetadataType[codeList.length];
 
 			int i = 0;
-			for (Code cme : codeList) {
+			for (final Code cme : codeList) {
 				cmtArray[i] = XdsUtil.convertEhcCodeToCodedMetadataType(cme);
 				i++;
 			}
@@ -139,10 +143,10 @@ public class XdsUtil {
 		if (codedMetadataEnum == null)
 			return null;
 		else {
-			CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
+			final CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
 
 			int i = 0;
-			for (CodedMetadataEnumInterface cme : codedMetadataEnum) {
+			for (final CodedMetadataEnumInterface cme : codedMetadataEnum) {
 				cmtArray[i] = cme.getCodedMetadataType();
 				i++;
 			}
@@ -196,19 +200,17 @@ public class XdsUtil {
 	 * @return the eHC Author
 	 */
 	public static Author convertOhtAuthorType(AuthorType at) {
-		Author a = new Author();
+		final Author a = new Author();
 
 		// Author Person
 		XCN ap = null;
 		if (at != null) {
 			if (at.getAuthorPerson() != null) {
 				ap = at.getAuthorPerson();
-				// Id
-				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(),
-						ap.getIdNumber()));
-				// Name
-				Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(),
-						ap.getSuffix());
+				//Id
+				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(), ap.getIdNumber()));
+				//Name
+				final Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(), ap.getSuffix());
 				a.addName(name);
 			}
 		}
@@ -217,9 +219,8 @@ public class XdsUtil {
 		if (Util.atLeastOne(at.getAuthorInstitution())) {
 			for (int i = 0; i < at.getAuthorInstitution().size(); i++) {
 				xon = (XON) at.getAuthorInstitution().get(i);
-				Organization org = new Organization(xon.getOrganizationName());
-				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(),
-						xon.getIdNumber()));
+				final Organization org = new Organization(xon.getOrganizationName());
+				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(), xon.getIdNumber()));
 			}
 		}
 		// Role
@@ -236,7 +237,7 @@ public class XdsUtil {
 		}
 		// Telecoms
 		XTN xtn = null;
-		Telecoms t = new Telecoms();
+		final Telecoms t = new Telecoms();
 		if (Util.atLeastOne(at.getAuthorTelecommunication())) {
 			for (int i = 0; i < at.getAuthorTelecommunication().size(); i++) {
 				xtn = (XTN) at.getAuthorTelecommunication().get(i);
@@ -279,13 +280,12 @@ public class XdsUtil {
 	 * @return the eHC Patient
 	 */
 	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
-		Patient p = new Patient();
+		final Patient p = new Patient();
 
 		// Name
-		XPN xpn = null;
 		if (Util.atLeastOne(spit.getPatientName())) {
 			for (int i = 0; i < spit.getPatientName().size(); i++) {
-				xpn = (XPN) spit.getPatientName().get(i);
+				final XPN xpn = (XPN) spit.getPatientName().get(i);
 				p.addName(XdsUtil.convertOhtXpn(xpn));
 			}
 		}
@@ -302,15 +302,14 @@ public class XdsUtil {
 			p.addAddress(XdsUtil.convertOhtXad(spit.getPatientAddress()));
 		}
 		// ID
-		CX cx = null;
 		if (Util.atLeastOne(spit.getPatientIdentifier())) {
 			for (int i = 0; i < spit.getPatientIdentifier().size(); i++) {
-				cx = (CX) spit.getPatientIdentifier().get(i);
+				final CX cx = (CX) spit.getPatientIdentifier().get(i);
 				p.addId(XdsUtil.convertOhtCx(cx));
 			}
 		}
 		// Phone Business
-		Telecoms t = new Telecoms();
+		final Telecoms t = new Telecoms();
 		if (spit.getPatientPhoneBusiness() != null) {
 			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(), spit
 					.getPatientPhoneBusiness().getTelecommunicationAddress(), AddressUse.BUSINESS);

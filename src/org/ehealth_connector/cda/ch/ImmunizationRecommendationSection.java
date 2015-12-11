@@ -90,13 +90,13 @@ public class ImmunizationRecommendationSection extends
 			if (this.getMdht().getText() != null) {
 				text = Util.extractStringFromNonQuotedStrucDocText(getMdht().getText());
 			}
-			if (text == null || "".equals(text)) {
+			if ((text == null) || "".equals(text)) {
 				text = this.getTable();
 			}
-			String prefix = "irs" + StringUtils.countMatches(text, "<tr>");
-			int pos = text.lastIndexOf("</tr>") + 5;
-			String row = this.getTableRow(languageCode, immunizationRecommendation, prefix);
-			String newText = text.substring(0, pos) + row + text.substring(pos);
+			final String prefix = "irs" + StringUtils.countMatches(text, "<tr>");
+			final int pos = text.lastIndexOf("</tr>") + 5;
+			final String row = this.getTableRow(languageCode, immunizationRecommendation, prefix);
+			final String newText = text.substring(0, pos) + row + text.substring(pos);
 			getMdht().createStrucDocText(newText);
 		}
 	}
@@ -129,7 +129,7 @@ public class ImmunizationRecommendationSection extends
 	public String getTableRow(LanguageCode languageCode,
 			ImmunizationRecommendation immunizationRecommendation, String contendIdPrefix) {
 
-		StringBuffer stringBuffer = new StringBuffer();
+		final StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("<tr><td>");
 		// <th>Impfstoff Handelsname</th>
 		int colIndex = 0;
@@ -159,14 +159,15 @@ public class ImmunizationRecommendationSection extends
 		}
 		stringBuffer.append("</td><td>");
 		// <th>Impfung gegen</th>
-		List<MedicationTargetEntry> medicationTargetEntries = immunizationRecommendation
+		final List<MedicationTargetEntry> medicationTargetEntries = immunizationRecommendation
 				.getMedicationTargetEntries();
 		if (medicationTargetEntries != null) {
 			int i = 0;
 			// Sort List according to
 			Collections.sort(medicationTargetEntries);
-			for (MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {
-				CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
+			for (final MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {
+				final CdaChVacdImmunizations vacdImmun = medicationTargetEntry
+						.getImmunizationTarget();
 				if (vacdImmun != null) {
 					if (i > 0) {
 						stringBuffer.append(", ");
@@ -198,7 +199,7 @@ public class ImmunizationRecommendationSection extends
 		// EKIF Empfehlungskategorie
 		if (immunizationRecommendation.getCriterionEntry() != null
 				&& immunizationRecommendation.getCriterionEntry().getRecCategory() != null) {
-			CdaChVacdRecCategories recCategory = immunizationRecommendation.getCriterionEntry()
+			final CdaChVacdRecCategories recCategory = immunizationRecommendation.getCriterionEntry()
 					.getRecCategory();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
@@ -209,7 +210,7 @@ public class ImmunizationRecommendationSection extends
 		// <th>Kommentar</th>
 		stringBuffer.append("</td><td>");
 		if (immunizationRecommendation.getCommentEntry() != null) {
-			SectionAnnotationCommentEntry commentEntry = immunizationRecommendation
+			final SectionAnnotationCommentEntry commentEntry = immunizationRecommendation
 					.getCommentEntry();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
@@ -220,7 +221,7 @@ public class ImmunizationRecommendationSection extends
 		stringBuffer.append("</td><td>");
 		// <th>Referenz</th>
 		if (immunizationRecommendation.getExternalDocumentEntry() != null) {
-			ExternalDocumentEntry documentEntry = immunizationRecommendation
+			final ExternalDocumentEntry documentEntry = immunizationRecommendation
 					.getExternalDocumentEntry();
 			stringBuffer.append("<linkHtml href=\"" + documentEntry.getReferenceUrl() + "\">"
 					+ documentEntry.getReferenceNarrativeText() + "</linkHtml>");

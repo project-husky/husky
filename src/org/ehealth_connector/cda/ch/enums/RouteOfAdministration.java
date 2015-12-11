@@ -97,8 +97,9 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCodeSystemName(CODE_SYSTEM_NAME);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -111,7 +112,7 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -151,7 +152,7 @@ public enum RouteOfAdministration {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return displayName;
 	}
 

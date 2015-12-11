@@ -214,7 +214,7 @@ public class Patient extends Person {
 	 *            Identificator
 	 */
 	public void addId(Identificator identificator) {
-		II id = DatatypesFactory.eINSTANCE.createII();
+		final II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(identificator.getRoot());
 		id.setExtension(identificator.getExtension());
 		mPatientRole.getIds().add(id);
@@ -271,8 +271,8 @@ public class Patient extends Person {
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
-		AD mAd = mPatientRole.getAddrs().get(0);
-		Address address = new Address(mAd);
+		final AD mAd = mPatientRole.getAddrs().get(0);
+		final Address address = new Address(mAd);
 		return address;
 	}
 
@@ -283,9 +283,9 @@ public class Patient extends Person {
 	 * @return <div class="en">the adresses</div>
 	 */
 	public List<Address> getAddresses() {
-		List<Address> al = new ArrayList<Address>();
+		final List<Address> al = new ArrayList<Address>();
 		for (AD mAddress : mPatientRole.getAddrs()) {
-			Address address = new Address(mAddress);
+			final Address address = new Address(mAddress);
 			al.add(address);
 		}
 		return al;
@@ -298,7 +298,7 @@ public class Patient extends Person {
 	 * @return <div class="en">the gender code</div>
 	 */
 	public AdministrativeGender getAdministrativeGenderCode() {
-		CE code = getMdhtPatient().getAdministrativeGenderCode();
+		final CE code = getMdhtPatient().getAdministrativeGenderCode();
 		if (code == null) {
 			return null;
 		}
@@ -313,11 +313,11 @@ public class Patient extends Person {
 	 */
 	public Date getBirthday() {
 		try {
-			TS birthTime = getMdhtPatient().getBirthTime();
+			final TS birthTime = getMdhtPatient().getBirthTime();
 			if (birthTime == null) {
 				return null;
 			}
-			String value = birthTime.getValue();
+			final String value = birthTime.getValue();
 			return parseDate(value);
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("Cannot convert birthdate", e);
@@ -427,7 +427,7 @@ public class Patient extends Person {
 	 */
 	@Override
 	public Name getName() {
-		Name name = new Name(mPatient.getNames().get(0));
+		final Name name = new Name(mPatient.getNames().get(0));
 		return name;
 	}
 
@@ -438,9 +438,9 @@ public class Patient extends Person {
 	 */
 	@Override
 	public List<Name> getNames() {
-		List<Name> nl = new ArrayList<Name>();
+		final List<Name> nl = new ArrayList<Name>();
 		for (PN mName : mPatient.getNames()) {
-			Name name = new Name(mName);
+			final Name name = new Name(mName);
 			nl.add(name);
 		}
 		return nl;
@@ -471,7 +471,7 @@ public class Patient extends Person {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
+		final Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
 		return telecoms;
 	}
 
@@ -601,7 +601,7 @@ public class Patient extends Person {
 	}
 
 	private Date parseDate(String value) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.parse(value);
 	}
 }

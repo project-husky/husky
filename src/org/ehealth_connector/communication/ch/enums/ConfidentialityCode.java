@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -7,7 +22,7 @@ import org.ehealth_connector.util.XdsUtil;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
+/**
  *<div class="de">Dieser Code definiert die Vertraulichkeitsstufe des XDS Dokuments. Dabei finden drei medizinische Stufen Anwendung: Nützliche Daten mit einer breiten Zugänglichkeit, z.B. für den Notfall, medizinische Daten im Sinne von Daten für die Behandelnden und sensible Daten im Sinne von Daten für den Behandelnden des Vertrauens oder die Person des Vertrauens. Diese drei Stufen werden zum Einen ergänzt mit einer Stufe für administrative Daten. Diese ist zwingend notwendig. Zum Anderen werden sie ergänzt mit der Stufe geheim, die zwar möglichst wenig zum Einsatz kommen sollte, aber für die Akzeptanz wichtig ist (mit dieser Stufe ist sichergestellt, dass der Patient seine Daten niemandem offenlegen muss).			</div>
  *<div class="fr"></div>
  */
@@ -32,7 +47,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * <div class="de">nützliche Daten</div> <div class="fr">données
 	 * utiles</div> <div class="it">dati utilitari</div>
 	 */
-	NÜTZLICHE_DATEN("30002", "nützliche Daten"),
+	NUTZLICHE_DATEN("30002", "nützliche Daten"),
 	/**
 	 * <div class="de">sensible Daten</div> <div class="fr">données
 	 * sensibles</div> <div class="it">dati stigmatizzanti</div>
@@ -62,7 +77,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für nützliche Daten</div> <div class="fr">Code de
 	 * données utiles</div> <div class="it">Code per dati utilitari</div>
 	 */
-	public static final String NÜTZLICHE_DATEN_CODE = "30002";
+	public static final String NUTZLICHE_DATEN_CODE = "30002";
 
 	/**
 	 * <div class="de">Code für sensible Daten</div> <div class="fr">Code de
@@ -88,13 +103,13 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div
 	 * class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -138,7 +153,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -150,7 +165,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -223,7 +238,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ConfidentialityCode x : values()) {
+		for (final ConfidentialityCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

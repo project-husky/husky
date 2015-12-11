@@ -100,7 +100,7 @@ public class Person {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		Name name = new Name(mPerson.getNames().get(0));
+		final Name name = new Name(mPerson.getNames().get(0));
 		return name;
 	}
 
@@ -111,9 +111,9 @@ public class Person {
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		ArrayList<Name> nl = new ArrayList<Name>();
+		final List<Name> nl = new ArrayList<Name>();
 		for (PN mName : mPerson.getNames()) {
-			Name name = new Name(mName);
+			final Name name = new Name(mName);
 			nl.add(name);
 		}
 		return nl;

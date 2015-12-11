@@ -25,7 +25,8 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This class provides the functions to create zip files
@@ -33,7 +34,7 @@ import org.apache.log4j.Logger;
  */
 public class ZipCreator {
 
-	private static Logger logService = Logger.getLogger(ZipCreator.class.getName());
+	private static Log logService = LogFactory.getLog(ZipCreator.class);
 	private byte[] buffer = new byte[1024];
 	private ZipOutputStream out = null;
 

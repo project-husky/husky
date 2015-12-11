@@ -303,11 +303,11 @@ public class Address {
 	/**
 	 * Setzt die Hausnummer.
 	 * 
-	 * @param HouseNumber
+	 * @param aHouseNumber
 	 *            Hausnummer
 	 */
-	public void setHouseNumber(String HouseNumber) {
-		mAd.addHouseNumber(HouseNumber);
+	public void setHouseNumber(String aHouseNumber) {
+		mAd.addHouseNumber(aHouseNumber);
 	}
 
 	/**
@@ -347,4 +347,10 @@ public class Address {
 			}
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Address [mAd=" + mAd + "]";
+	}
+
 }

@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
 import java.util.Arrays;
@@ -8,21 +23,23 @@ import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
-/*
- *<div class="de">Ein XDS Dokument hat immer einen Verfügbarkeitsstatus. Entweder approved (genehmigt) oder deprecated (abgelehnt).</div>
- *<div class="fr"></div>
+/**
+ * <div class="de">Ein XDS Dokument hat immer einen Verfügbarkeitsstatus.
+ * Entweder approved (genehmigt) oder deprecated (abgelehnt).</div>
+ * <div class="fr"></div>
  */
 public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 
 	/**
-	 * <div class="de">genehmigt</div> <div class="fr">approuvé</div> <div
-	 * class="it">approvato</div>
+	 * <div class="de">genehmigt</div> <div class="fr">approuvé</div>
+	 * <div class="it">approvato</div>
 	 */
-	APPROVED("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved", "Approved"),
-	/**
-	 * <div class="de">abgelehnt</div> <div class="fr">refusé</div> <div
-	 * class="it">respinto</div>
-	 */
+	APPROVED("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved",
+			"Approved"), /**
+							 * <div class="de">abgelehnt</div>
+							 * <div class="fr">refusé</div>
+							 * <div class="it">respinto</div>
+							 */
 	DEPRECATED("urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated", "Deprecated");
 
 	/**
@@ -38,8 +55,8 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	public static final String DEPRECATED_CODE = "urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div> <div
-	 * class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.2";
 
@@ -54,13 +71,13 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div
-	 * class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -68,10 +85,10 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private AvailabilityStatus(String code, String displayName) {
@@ -90,8 +107,8 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 *            <div class="en">the status of the document as OHT
 	 *            AvailabilityStatusType </div> <div class="de">der
 	 *            Dokumentenstatus als OHT AvailabilityStatusType</div>
-	 * @return <div class="en">the status of the document</div> <div
-	 *         class="de">der Dokumentenstatus</div>
+	 * @return <div class="en">the status of the document</div>
+	 *         <div class="de">der Dokumentenstatus</div>
 	 */
 	public static AvailabilityStatus getByOhtAvailabilityStatusType(
 			AvailabilityStatusType availabilityStatusType) {
@@ -103,16 +120,16 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AvailabilityStatus getEnum(String code) {
-		for (AvailabilityStatus x : values()) {
+		for (final AvailabilityStatus x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -139,25 +156,25 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
 	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div> <div
-	 * class="de">Liefert das OHT CodedMetadataType Objekt</div>
+	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
+	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
 	 * 
 	 * @return <div class="en">the codedMetadataType</div>
 	 */
 	@Override
 	public CodedMetadataType getCodedMetadataType() {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
 		cmt.setDisplayName(XdsUtil.createInternationalString(this.getDisplayName(), "de-ch"));
@@ -185,8 +202,8 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -211,7 +228,7 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -225,12 +242,12 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (AvailabilityStatus x : values()) {
+		for (final AvailabilityStatus x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

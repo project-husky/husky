@@ -13,7 +13,6 @@
  * Year of publication: 2015
  *
  *******************************************************************************/
-
 package org.ehealth_connector.communication;
 
 import java.text.DateFormat;
@@ -154,7 +153,7 @@ public class DocumentMetadata {
 	}
 
 	/** The x doc. */
-	protected DocumentEntryType xDoc;
+	private DocumentEntryType xDoc;
 
 	/** The CDA document. */
 	private final ClinicalDocument cda;
@@ -330,7 +329,7 @@ public class DocumentMetadata {
 		if (!(obj instanceof DocumentMetadata)) {
 			return false; // different class
 		}
-		DocumentMetadata other = (DocumentMetadata) obj;
+		final DocumentMetadata other = (DocumentMetadata) obj;
 		if (this.xDoc == other.xDoc && this.cda == other.cda && this.language == other.language) {
 			return true;
 		}
@@ -435,11 +434,10 @@ public class DocumentMetadata {
 	 * @return ArrayList with Author objects
 	 */
 	public List<Author> getAuthors() {
-		List<Author> authorList = new ArrayList<Author>();
-		AuthorType at = null;
+		final List<Author> authorList = new ArrayList<Author>();
 
 		for (int i = 0; i < xDoc.getAuthors().size(); i++) {
-			at = (AuthorType) xDoc.getAuthors().get(i);
+			final AuthorType at = (AuthorType) xDoc.getAuthors().get(i);
 			authorList.add(XdsUtil.convertOhtAuthorType(at));
 		}
 		return authorList;
@@ -469,16 +467,16 @@ public class DocumentMetadata {
 	 * @return the ArrayList with ConfidentialityCodes
 	 */
 	public List<Code> getConfidentialityCodes() {
-		List<Code> confCodes = new ArrayList<Code>();
-		CodedMetadataType cmt = null;
+		final List<Code> confCodes = new ArrayList<Code>();
 
 		if (!xDoc.getConfidentialityCode().isEmpty()) {
 			for (int i = 0; i < xDoc.getConfidentialityCode().size(); i++) {
-				cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
+				final CodedMetadataType cmt = (CodedMetadataType) xDoc.getConfidentialityCode().get(i);
 				confCodes.add(XdsUtil.convertOhtCodedMetadataType(cmt));
 			}
-		} else
+		} else {
 			return null;
+		}
 		return confCodes;
 	}
 
@@ -593,8 +591,9 @@ public class DocumentMetadata {
 	public Identificator getSourcePatientId() {
 		if (xDoc.getSourcePatientId() != null) {
 			return XdsUtil.convertOhtCx(xDoc.getSourcePatientId());
-		} else
+		} else {
 			return null;
+		}
 	}
 
 	/**
@@ -815,8 +814,8 @@ public class DocumentMetadata {
 		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
 
 		// Source Patient Info (Adress etc.)
-		CDAR2Extractor extractor = new CDAR2Extractor(cda);
-		SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
+		final CDAR2Extractor extractor = new CDAR2Extractor(cda);
+		final SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
 		xDoc.setSourcePatientInfo(spi);
 
 		// PatientID

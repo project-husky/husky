@@ -1848,7 +1848,7 @@ public enum Ucum {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Ucum getEnum(String code) {
-		for (Ucum x : values()) {
+		for (final Ucum x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -1863,7 +1863,7 @@ public enum Ucum {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
@@ -1877,7 +1877,7 @@ public enum Ucum {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -1917,7 +1917,7 @@ public enum Ucum {
 	 * 
 	 * @return <div class="en">the display name</div>
 	 */
-	public String getdisplayName() {
+	public String getDisplayName() {
 		return this.displayName;
 	}
 
@@ -1947,7 +1947,7 @@ public enum Ucum {
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (Ucum x : values()) {
+		for (final Ucum x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}

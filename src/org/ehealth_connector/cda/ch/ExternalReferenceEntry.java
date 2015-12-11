@@ -54,9 +54,9 @@ public class ExternalReferenceEntry extends
 		if (!(obj instanceof ExternalReferenceEntry)) {
 			return false;
 		}
-		ExternalReferenceEntry other = (ExternalReferenceEntry) obj;
+		final ExternalReferenceEntry other = (ExternalReferenceEntry) obj;
 
-		ExternalDocumentEntry documentEntry = getExternalDocumentEntry();
+		final ExternalDocumentEntry documentEntry = getExternalDocumentEntry();
 		if ((documentEntry != null && !documentEntry.equals(other.getExternalDocumentEntry()))
 				|| (documentEntry == null && other.getExternalDocumentEntry() != null)) {
 			return false;

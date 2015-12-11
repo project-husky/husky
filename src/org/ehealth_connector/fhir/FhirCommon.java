@@ -59,11 +59,11 @@ import ca.uhn.fhir.model.primitive.StringDt;
  */
 public class FhirCommon {
 
-	public static String AHDIS_COMMUNITY_OID = "2.16.756.5.37";
-	public static String AHDIS_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
+	public static final String AHDIS_COMMUNITY_OID = "2.16.756.5.37";
+	public static final String AHDIS_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
-	public static String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
-	public static String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
+	public static final String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
+	public static final String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div> <div
