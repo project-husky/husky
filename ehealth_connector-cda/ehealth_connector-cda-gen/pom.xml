@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ehealth_connector-cda-gen</artifactId>
+	<name>eHealthConnector CDA Generic</name>
+
+	<parent>
+		<groupId>org.ehealth_connector.cda</groupId>
+		<artifactId>ehealth_connector-cda</artifactId>
+		<version>1.3-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ehealth_connector.common</groupId>
+			<artifactId>ehealth_connector-common-gen</artifactId>
+			<version>1.3-SNAPSHOT</version>
+		</dependency>
+
+		<!-- open health tools mdht -->
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ihe</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ccd</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.cdt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.hitsp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.emf.runtime</artifactId>
+		</dependency>
+
+		<!-- open health tools mdht cda-ch -->
+		<dependency>
+			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
+		</dependency>
+
+		<!-- open health tools ihe utils -->
+		<dependency>
+			<groupId>org.openhealthtools.ihe.utils</groupId>
+			<artifactId>org.openhealthtools.ihe.utils</artifactId>
+		</dependency>
+
+		<!-- commons stuff -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+
+		<!-- test stuff -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+</project>

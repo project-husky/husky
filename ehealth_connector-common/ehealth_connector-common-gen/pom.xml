@@ -1,0 +1,146 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ehealth_connector-common-gen</artifactId>
+  <name>eHealthConnector Common Generic</name>
+  <description>All classes building commmon functionality should be added here independent of country specific stuff.
+Restrictions to 3rd party libraries have to be respected.
+Dependencies to:
+- org.openhealthtools.mdht
+- org.openhealthtools.ihe.xds.metadata
+are ok.</description>
+
+  <parent>
+    <groupId>org.ehealth_connector.common</groupId>
+    <artifactId>ehealth_connector-common</artifactId>
+    <version>1.3-SNAPSHOT</version>
+  </parent>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- eclipse stuff -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl.ecore</artifactId>
+		</dependency>
+		<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
+		<dependency>
+			<groupId>net.sourceforge.lpg</groupId>
+			<artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-structures-dstu2</artifactId>
+		</dependency>
+
+		<!-- open health tools mdht -->
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.hl7.datatypes</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.hl7.rim</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.mdht</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.hl7.vocab</artifactId>
+		</dependency>
+
+		<!-- open health tools ihe -->
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.metadata</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.metadata.transform</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.metadata.extract</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.metadata.extract.cdar2</artifactId>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds</groupId>
+			<artifactId>org.openhealthtools.ihe.xds</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.soap</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openhealthtools.ihe.xds</groupId>
+			<artifactId>org.openhealthtools.ihe.xds.consumer</artifactId>
+		</dependency>
+		 -->
+		<!-- open health tools ihe utils -->
+		<dependency>
+			<groupId>org.openhealthtools.ihe.utils</groupId>
+			<artifactId>org.openhealthtools.ihe.utils</artifactId>
+		</dependency>
+
+		<!-- open health tools ihe hl7v2 -->
+		<dependency>
+			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
+			<artifactId>org.openhealthtools.ihe.common.hl7v2</artifactId>
+		</dependency>
+
+		<!-- loggin stuff -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+
+		<!-- test stuff -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>
