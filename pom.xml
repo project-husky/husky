@@ -367,6 +367,12 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				</exclusions>
 			</dependency>
 			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-validation-resources-dstu2</artifactId>
+				<version>${hapi.fhir.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<version>4.4.1</version>
 				<artifactId>httpclient</artifactId>
@@ -432,6 +438,11 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
 				<version>1.10</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
 			</dependency>
 
 			<dependency>

@@ -16,8 +16,7 @@
 
 package org.ehealth_connector.common;
 
-import org.ehealth_connector.cda.enums.AddressUse;
-import org.ehealth_connector.cda.enums.AdministrativeGender;
+import org.apache.commons.httpclient.util.DateUtil;
 import org.ehealth_connector.communication.DocDescriptor;
 import org.ehealth_connector.communication.ch.enums.CodedMetadataEnumInterface;
 import org.openhealthtools.ihe.common.hl7v2.CX;
@@ -35,19 +34,23 @@ import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.InternationalStringType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 /**
  * <div class="de">Class XdsUtil provides helper methods for the IHE XDS
  * Context.</div>
  */
+@Deprecated
 public class XdsUtil {
 
 	/**
 	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> the code</div>
 	 * @return the coded metadata type
 	 */
@@ -81,10 +84,10 @@ public class XdsUtil {
 		if (codeList == null)
 			return null;
 		else {
-			CodedMetadataType[] cmtArray = new CodedMetadataType[codeList.length];
+			final CodedMetadataType[] cmtArray = new CodedMetadataType[codeList.length];
 
 			int i = 0;
-			for (Code cme : codeList) {
+			for (final Code cme : codeList) {
 				cmtArray[i] = XdsUtil.convertEhcCodeToCodedMetadataType(cme);
 				i++;
 			}
@@ -105,10 +108,10 @@ public class XdsUtil {
 		if (dtr == null)
 			return null;
 		else {
-			org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
+			final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
 
 			int i = 0;
-			for (org.ehealth_connector.communication.xd.storedquery.DateTimeRange dt : dtr) {
+			for (final org.ehealth_connector.communication.xd.storedquery.DateTimeRange dt : dtr) {
 				dtrArray[i] = dt.getOhtDateTimeRange();
 				i++;
 			}
@@ -130,10 +133,10 @@ public class XdsUtil {
 		if (codedMetadataEnum == null)
 			return null;
 		else {
-			CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
+			final CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
 
 			int i = 0;
-			for (CodedMetadataEnumInterface cme : codedMetadataEnum) {
+			for (final CodedMetadataEnumInterface cme : codedMetadataEnum) {
 				cmtArray[i] = cme.getCodedMetadataType();
 				i++;
 			}
@@ -146,7 +149,7 @@ public class XdsUtil {
 	 * <div class="en">Convert identificator to OHT CX</div>
 	 * 
 	 * @param id
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> id</div>
 	 * @return the cx
 	 */
@@ -165,10 +168,11 @@ public class XdsUtil {
 	 */
 	public static String convertInternationalStringType(InternationalStringType ist) {
 		if (ist != null) {
-			if (ist.getLocalizedString() != null && ist.getLocalizedString().size() > 0) {
+			if ((ist.getLocalizedString() != null) && (ist.getLocalizedString().size() > 0)) {
 				String s = "";
 				for (int i = 0; i < ist.getLocalizedString().size(); i++) {
-					LocalizedStringType lst = (LocalizedStringType) ist.getLocalizedString().get(i);
+					final LocalizedStringType lst = (LocalizedStringType) ist.getLocalizedString()
+							.get(i);
 					s = s + lst.getValue();
 					if (i > 0)
 						s = s + "\n";
@@ -187,7 +191,7 @@ public class XdsUtil {
 	 * @return the eHC Author
 	 */
 	public static Author convertOhtAuthorType(AuthorType at) {
-		Author a = new Author();
+		final Author a = new Author();
 
 		// Author Person
 		XCN ap = null;
@@ -198,7 +202,7 @@ public class XdsUtil {
 				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(),
 						ap.getIdNumber()));
 				// Name
-				Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(),
+				final Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(),
 						ap.getSuffix());
 				a.addName(name);
 			}
@@ -208,7 +212,7 @@ public class XdsUtil {
 		if (Util.atLeastOne(at.getAuthorInstitution())) {
 			for (int i = 0; i < at.getAuthorInstitution().size(); i++) {
 				xon = (XON) at.getAuthorInstitution().get(i);
-				Organization org = new Organization(xon.getOrganizationName());
+				final Organization org = new Organization(xon.getOrganizationName());
 				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(),
 						xon.getIdNumber()));
 			}
@@ -227,7 +231,7 @@ public class XdsUtil {
 		}
 		// Telecoms
 		XTN xtn = null;
-		Telecoms t = new Telecoms();
+		final Telecoms t = new Telecoms();
 		if (Util.atLeastOne(at.getAuthorTelecommunication())) {
 			for (int i = 0; i < at.getAuthorTelecommunication().size(); i++) {
 				xtn = (XTN) at.getAuthorTelecommunication().get(i);
@@ -270,7 +274,7 @@ public class XdsUtil {
 	 * @return the eHC Patient
 	 */
 	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
-		Patient p = new Patient();
+		final Patient p = new Patient();
 
 		// Name
 		XPN xpn = null;
@@ -301,15 +305,16 @@ public class XdsUtil {
 			}
 		}
 		// Phone Business
-		Telecoms t = new Telecoms();
+		final Telecoms t = new Telecoms();
 		if (spit.getPatientPhoneBusiness() != null) {
-			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(), spit
-					.getPatientPhoneBusiness().getTelecommunicationAddress(), AddressUse.BUSINESS);
+			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(),
+					spit.getPatientPhoneBusiness().getTelecommunicationAddress(),
+					AddressUse.BUSINESS);
 		}
 		// Phone Home
 		if (spit.getPatientPhoneHome() != null) {
-			t.add(spit.getPatientPhoneHome().getTelecommunicationType(), spit.getPatientPhoneHome()
-					.getTelecommunicationAddress(), AddressUse.PRIVATE);
+			t.add(spit.getPatientPhoneHome().getTelecommunicationType(),
+					spit.getPatientPhoneHome().getTelecommunicationAddress(), AddressUse.PRIVATE);
 		}
 		p.setTelecoms(t);
 
@@ -339,7 +344,8 @@ public class XdsUtil {
 	 *            the ID part
 	 * @return the Identificator
 	 */
-	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId, String id) {
+	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId,
+			String id) {
 		return new Identificator(assigningAuthorityUniversalId, id);
 	}
 
@@ -358,22 +364,22 @@ public class XdsUtil {
 	 * <div class="en">Creates the OHT coded metadata.</div>
 	 * 
 	 * @param schemeName
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> scheme name</div>
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> display name</div>
 	 * @param schemeUuid
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> scheme uuid</div>
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
 			String displayName, String schemeUuid) {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 
 		cmt.setCode(code);
 		if (displayName != null) {
@@ -393,25 +399,25 @@ public class XdsUtil {
 	 * <div class="en">Creates the OHT coded metadata.</div>
 	 * 
 	 * @param schemeName
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> scheme name</div>
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> display name</div>
 	 * @param schemeUuid
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> scheme uuid</div>
 	 * @param language
-	 * <br>
+	 *            <br>
 	 *            language
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
 			String displayName, String schemeUuid, String language) {
-		CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 
 		cmt.setCode(code);
 		if (displayName != null) {
@@ -431,15 +437,15 @@ public class XdsUtil {
 	 * <div class="en">Creates the OHT CX.</div>
 	 * 
 	 * @param authorityId
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> authority id</div>
 	 * @param id
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> id</div>
 	 * @return the cx
 	 */
 	public static CX createCx(String authorityId, String id) {
-		CX cx = Hl7v2Factory.eINSTANCE.createCX();
+		final CX cx = Hl7v2Factory.eINSTANCE.createCX();
 		cx.setAssigningAuthorityUniversalId(authorityId);
 		cx.setIdNumber(id);
 		cx.setAssigningAuthorityUniversalIdType("ISO");
@@ -450,16 +456,16 @@ public class XdsUtil {
 	 * <div class="en">Creates the OHT InternationalStringType.</div>
 	 * 
 	 * @param text
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> text</div>
 	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
 	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString(
 			String text) {
-		org.openhealthtools.ihe.xds.metadata.InternationalStringType ist = MetadataFactory.eINSTANCE
+		final org.openhealthtools.ihe.xds.metadata.InternationalStringType ist = MetadataFactory.eINSTANCE
 				.createInternationalStringType();
-		LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
+		final LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
 		lst.setValue(text);
 		ist.getLocalizedString().add(lst);
 		return ist;
@@ -469,19 +475,19 @@ public class XdsUtil {
 	 * <div class="en">Creates the OHT InternationalStringType</div>
 	 * 
 	 * @param text
-	 * <br>
+	 *            <br>
 	 *            <div class="en">the text</div>
 	 * @param language
-	 * <br>
+	 *            <br>
 	 *            the language
 	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
 	public static org.openhealthtools.ihe.xds.metadata.InternationalStringType createInternationalString(
 			String text, String language) {
-		org.openhealthtools.ihe.xds.metadata.InternationalStringType ist = MetadataFactory.eINSTANCE
+		final org.openhealthtools.ihe.xds.metadata.InternationalStringType ist = MetadataFactory.eINSTANCE
 				.createInternationalStringType();
-		LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
+		final LocalizedStringType lst = MetadataFactory.eINSTANCE.createLocalizedStringType();
 		lst.setValue(text);
 		lst.setLang(language);
 		ist.getLocalizedString().add(lst);
@@ -512,7 +518,7 @@ public class XdsUtil {
 		// if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
 		// dd = DocumentDescriptor.CDA_R2;
 
-		String fileNameExtension = DocDescriptor.getFileExtension(dd);
+		final String fileNameExtension = DocDescriptor.getFileExtension(dd);
 		fileName = fileName.concat(String.format("%5s", docNr).replace(' ', '0'));
 		fileName = fileName.concat("." + fileNameExtension.toUpperCase());
 		return fileName;
@@ -529,7 +535,7 @@ public class XdsUtil {
 	 * @return the path and name of the document
 	 */
 	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
-		String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
+		final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
 		return filePath;
 	}
 }

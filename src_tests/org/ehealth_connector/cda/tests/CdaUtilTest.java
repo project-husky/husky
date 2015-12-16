@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.tests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.ehealth_connector.cda.ch.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.DateUtil;
 import org.junit.Before;

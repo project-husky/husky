@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="rsc/docConsumer/|rsc/" kind="src" path="src_tests"/>
-	<classpathentry kind="src" path="src_tests/rsc"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/lpg.runtime.java_2.0.17.v201004271640.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.commons_1.0.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.openhealthtools.ihe_2.0.2/org.apache.log4j_1.2.15.v201005080500.jar"/>
