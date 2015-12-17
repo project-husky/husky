@@ -40,10 +40,8 @@ public class DebugUtil {
 	public static String debugAuthorString(AuthorType data) {
 		final StringBuffer retVal = new StringBuffer();
 		if (data != null) {
-			retVal.append("    " + data.getAuthorPerson().getFamilyName() + " "
-					+ data.getAuthorPerson().getGivenName() + " "
-					+ data.getAuthorPerson().getIdNumber() + " "
-					+ data.getAuthorPerson().getAssigningAuthorityName() + "\n");
+			retVal.append("    " + data.getAuthorPerson().getFamilyName() + " " + data.getAuthorPerson().getGivenName() + " "
+					+ data.getAuthorPerson().getIdNumber() + " " + data.getAuthorPerson().getAssigningAuthorityName() + "\n");
 
 			if (data.getAuthorRole().isEmpty()) {
 				retVal.append("    AuthorRole: " + null + "\n");
@@ -70,8 +68,7 @@ public class DebugUtil {
 			} else {
 				retVal.append("    AuthorTelecommunication: ");
 				for (final Object item2 : data.getAuthorTelecommunication()) {
-					retVal.append("    TODO AuthorTelecommunication " + item2.getClass().getName()
-							+ "\n");
+					retVal.append("    TODO AuthorTelecommunication " + item2.getClass().getName() + "\n");
 				}
 				retVal.append("\n");
 			}
@@ -82,8 +79,7 @@ public class DebugUtil {
 				retVal.append("    AuthorInstitution: ");
 				for (final Object item2 : data.getAuthorInstitution()) {
 					final org.openhealthtools.ihe.common.hl7v2.impl.XONImpl data2 = (org.openhealthtools.ihe.common.hl7v2.impl.XONImpl) item2;
-					retVal.append(data2.getOrganizationName() + " " + data2.getIdNumber() + " "
-							+ data2.getAssigningAuthorityName());
+					retVal.append(data2.getOrganizationName() + " " + data2.getIdNumber() + " " + data2.getAssigningAuthorityName());
 				}
 				retVal.append("\n");
 			}
@@ -168,45 +164,36 @@ public class DebugUtil {
 		}
 
 		retVal.append("  AvailabilityStatus:         " + docEntry.getAvailabilityStatus() + "\n");
-		retVal.append("  Comments:                   "
-				+ debugLocalizedString(docEntry.getComments().getLocalizedString()) + "\n");
+		retVal.append("  Comments:                   " + debugLocalizedString(docEntry.getComments().getLocalizedString()) + "\n");
 
 		if (docEntry.getConfidentialityCode().isEmpty()) {
 			retVal.append("  ConfidentialityCode:        " + null + "\n");
 		} else {
 			retVal.append("  ConfidentialityCode:        ");
 			for (final Object item : docEntry.getConfidentialityCode()) {
-				retVal.append(debugCodeString(
-						(org.openhealthtools.ihe.xds.metadata.impl.CodedMetadataTypeImpl) item));
+				retVal.append(debugCodeString((org.openhealthtools.ihe.xds.metadata.impl.CodedMetadataTypeImpl) item));
 				retVal.append("\n");
 			}
 		}
 
-		retVal.append("  EventCode:                  " + debugCodesString(docEntry.getEventCode())
-				+ "\n");
+		retVal.append("  EventCode:                  " + debugCodesString(docEntry.getEventCode()) + "\n");
 		retVal.append("  Extension:                  " + docEntry.getExtension() + "\n");
-		retVal.append("  FormatCode:                 " + debugCodeString(docEntry.getFormatCode())
-				+ "\n");
+		retVal.append("  FormatCode:                 " + debugCodeString(docEntry.getFormatCode()) + "\n");
 
-		retVal.append("  HealthCareFacilityTypeCode: "
-				+ debugCodeString(docEntry.getHealthCareFacilityTypeCode()) + "\n");
+		retVal.append("  HealthCareFacilityTypeCode: " + debugCodeString(docEntry.getHealthCareFacilityTypeCode()) + "\n");
 
 		retVal.append("  LegalAuthenticator:         " + docEntry.getLegalAuthenticator() + "\n");
 		retVal.append("  ParentDocument:             " + docEntry.getParentDocument() + "\n");
-		retVal.append("  PatientId:                  " + docEntry.getPatientId().getIdNumber()
-				+ " / " + docEntry.getPatientId().getAssigningAuthorityUniversalId() + "\n");
-		retVal.append("  PracticeSettingCode:        "
-				+ debugCodeString(docEntry.getPracticeSettingCode()) + "\n");
+		retVal.append("  PatientId:                  " + docEntry.getPatientId().getIdNumber() + " / "
+				+ docEntry.getPatientId().getAssigningAuthorityUniversalId() + "\n");
+		retVal.append("  PracticeSettingCode:        " + debugCodeString(docEntry.getPracticeSettingCode()) + "\n");
 
-		retVal.append("  SourcePatientId:            " + docEntry.getSourcePatientId().getIdNumber()
-				+ " / " + docEntry.getSourcePatientId().getAssigningAuthorityUniversalId() + "\n");
+		retVal.append("  SourcePatientId:            " + docEntry.getSourcePatientId().getIdNumber() + " / "
+				+ docEntry.getSourcePatientId().getAssigningAuthorityUniversalId() + "\n");
 		retVal.append("  SourcePatientInfo:          " + docEntry.getSourcePatientInfo() + "\n");
-		retVal.append("  Title:                      "
-				+ debugLocalizedString(docEntry.getTitle().getLocalizedString()) + "\n");
-		retVal.append(
-				"  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
-		retVal.append(
-				"  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
+		retVal.append("  Title:                      " + debugLocalizedString(docEntry.getTitle().getLocalizedString()) + "\n");
+		retVal.append("  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
+		retVal.append("  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
 		return retVal.toString();
 	}
 
@@ -247,73 +234,5 @@ public class DebugUtil {
 		} else
 			return "null";
 	}
-
-	// /**
-	// * Creates a string with the submission-set metadata (for debugging
-	// purposes
-	// * only)
-	// *
-	// * @param txnDatas
-	// * <div class="en">the submit transaction data</div>
-	// * @return <div class="en">string with the submission-set metadata (for
-	// * debugging purposes only)</div>
-	// */
-	// public static String debugSubmissionSetMetaData(SubmitTransactionData[]
-	// txnDatas) {
-	// final StringBuffer retVal = new StringBuffer();
-	// Integer i = 0;
-	// for (final SubmitTransactionData txnData : txnDatas) {
-	// i++;
-	//
-	// retVal.append("\nSubmission-Set " + i + "\n");
-	// // txnData.getDocList();
-	// // ProvideAndRegisterDocumentSetType metadata =
-	// // txnData.getMetadata();
-	// final SubmissionSetType ss = txnData.getSubmissionSet();
-	// retVal.append(" EntryUUID: " + ss.getEntryUUID() + "\n");
-	// retVal.append(" SourceId: " + ss.getSourceId() + "\n");
-	// retVal.append(" SubmissionTime: " + ss.getSubmissionTime() + "\n");
-	// retVal.append(" UniqueId: " + ss.getUniqueId() + "\n");
-	// retVal.append(" Title: " + ss.getTitle() + "\n");
-	// retVal.append(" PatientId: " + ss.getPatientId() + "\n");
-	// retVal.append(
-	// " ContentTypeCode: " + debugCodeString(ss.getContentTypeCode()) + "\n");
-	// retVal.append(" Author: " + debugAuthorString(ss.getAuthor()) + "\n");
-	// retVal.append(" AvailabilityStatus: " + ss.getAvailabilityStatus() +
-	// "\n");
-	// retVal.append(
-	// " Comments: " + debugInternationalString(ss.getComments()) + "\n");
-	// retVal.append(" IntendedRecipient: ");
-	// if (ss.getIntendedRecipient().isEmpty()) {
-	// retVal.append("null");
-	// } else {
-	// for (final Object item2 : ss.getIntendedRecipient()) {
-	// retVal.append("\n TODO IntendedRecipient " + item2.getClass().getName());
-	// }
-	// }
-	// retVal.append("\n");
-	//
-	// retVal.append(" AssociatedFolders: ");
-	// if (ss.getAssociatedFolders().isEmpty()) {
-	// retVal.append("null");
-	// } else {
-	// for (final Object item2 : ss.getAssociatedFolders()) {
-	// retVal.append("\n TODO AssociatedFolders " + item2.getClass().getName());
-	// }
-	// }
-	// retVal.append("\n");
-	//
-	// retVal.append(" AssociatedDocuments: ");
-	// if (ss.getAssociatedDocuments().isEmpty()) {
-	// retVal.append("null");
-	// } else {
-	// for (final Object item2 : ss.getAssociatedDocuments()) {
-	// retVal.append("\n " + (String) item2);
-	// }
-	// }
-	// retVal.append("\n");
-	// }
-	// return retVal.toString();
-	// }
 
 }
