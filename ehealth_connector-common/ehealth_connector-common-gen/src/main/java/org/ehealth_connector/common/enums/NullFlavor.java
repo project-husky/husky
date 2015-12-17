@@ -31,8 +31,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum NullFlavor {
 
 	/**
-	 * <div class="de">Gefragt, aber keine Antwort erhalten</div> <div
-	 * class="fr">Question posée, mais aucune réponse reçue</div>
+	 * <div class="de">Gefragt, aber keine Antwort erhalten</div>
+	 * <div class="fr">Question posée, mais aucune réponse reçue</div>
 	 */
 	ASKED_BUT_UNKNOWN("ASKU", "asked but unknown"),
 
@@ -55,8 +55,8 @@ public enum NullFlavor {
 	TEMPORARILY_UNAVAILABLE("NAV", "temporarily unavailable"),
 
 	/**
-	 * <div class="de">Unbekannt, ohne weitere Präzisierung</div> <div
-	 * class="fr">Non connu, sans autre précision</div>
+	 * <div class="de">Unbekannt, ohne weitere Präzisierung</div>
+	 * <div class="fr">Non connu, sans autre précision</div>
 	 */
 	UNKNOWN("UNK", "unknown"),
 
@@ -75,9 +75,11 @@ public enum NullFlavor {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 *            <br> <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br> <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private NullFlavor(String code, String displayName) {
 		this.code = code;
@@ -85,11 +87,12 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 *            <br> <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static NullFlavor getEnum(String code) {
@@ -102,8 +105,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -116,8 +119,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -147,8 +150,8 @@ public enum NullFlavor {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -173,7 +176,8 @@ public enum NullFlavor {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br> <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -186,7 +190,8 @@ public enum NullFlavor {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br> <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
@@ -197,5 +202,4 @@ public enum NullFlavor {
 		}
 		return false;
 	}
-
 }

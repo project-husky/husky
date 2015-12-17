@@ -68,8 +68,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            queryDomainOids)
 	 * @return string array with correspoding identifiers to queryDomainOids
 	 */
-	abstract String[] queryPatientId(FhirPatient patient, String queryDomainOids[],
-			String queryDomainNamespaces[]);
+	abstract String[] queryPatientId(FhirPatient patient, String[] queryDomainOids, String[] queryDomainNamespaces);
 
 	/**
 	 * queries the mpi for patients according to the criteria specified

@@ -16,31 +16,39 @@ public enum RouteOfAdministration {
 	 * <div class="de">Injektion, intradermal</div> <div class="fr">Injection
 	 * intradermique</div>
 	 */
-	INJECTION_INTRADERMAL("IDINJ", "Injection, intradermal"),
-	/**
-	 * <div class="de">Inhalation, Vernebelung, nasal</div> <div
-	 * class="fr">Inhalation par nébulisation nasale</div>
-	 */
-	INHALATION_NEBULIZATION_NASAL("NASNEB", "Inhalation, nebulization, nasal"),
-	/**
-	 * <div class="de">Schlucken, oral</div> <div class="fr">Prendre par la
-	 * bouche</div>
-	 */
-	SWALLOW_ORAL("PO", "Swallow, oral "),
-	/**
-	 * <div class="de">Injektion, subkutan</div> <div class="fr">Injection
-	 * sous-cutanée</div>
-	 */
-	INJECTION_SUBCUTANEOUS("SQ", "Injection, subcutaneous"),
-	/**
-	 * <div class="de">Diffusion, transdermal</div> <div class="fr">Diffusion
-	 * transdermique</div>
-	 */
-	DIFFUSION_TRANSDERMAL("TRNSDERMD", "Diffusion, transdermal"),
-	/**
-	 * <div class="de">Injektion, intramuskulär</div> <div class="fr">Injection
-	 * intra-musculaire</div>
-	 */
+	INJECTION_INTRADERMAL("IDINJ",
+			"Injection, intradermal"), /**
+										 * <div class="de">Inhalation,
+										 * Vernebelung, nasal</div>
+										 * <div class="fr">Inhalation par
+										 * nébulisation nasale</div>
+										 */
+	INHALATION_NEBULIZATION_NASAL("NASNEB",
+			"Inhalation, nebulization, nasal"), /**
+												 * <div class="de">Schlucken,
+												 * oral</div>
+												 * <div class="fr">Prendre par
+												 * la bouche</div>
+												 */
+	SWALLOW_ORAL("PO",
+			"Swallow, oral "), /**
+								 * <div class="de">Injektion, subkutan</div>
+								 * <div class="fr">Injection sous-cutanée</div>
+								 */
+	INJECTION_SUBCUTANEOUS("SQ",
+			"Injection, subcutaneous"), /**
+										 * <div class="de">Diffusion,
+										 * transdermal</div>
+										 * <div class="fr">Diffusion
+										 * transdermique</div>
+										 */
+	DIFFUSION_TRANSDERMAL("TRNSDERMD",
+			"Diffusion, transdermal"), /**
+										 * <div class="de">Injektion,
+										 * intramuskulär</div>
+										 * <div class="fr">Injection
+										 * intra-musculaire</div>
+										 */
 	INJECTION_INTRAMUSCULAR("IM", "Injection, intramuscular");
 	public static final String INJECTION_INTRADERMAL_CODE = "IDINJ";
 	public static final String INHALATION_NEBULIZATION_NASAL_CODE = "NASNEB";
@@ -61,10 +69,10 @@ public enum RouteOfAdministration {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private RouteOfAdministration(String code, String displayName) {
@@ -73,16 +81,16 @@ public enum RouteOfAdministration {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static RouteOfAdministration getEnum(String code) {
-		for (RouteOfAdministration x : values()) {
+		for (final RouteOfAdministration x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -91,8 +99,8 @@ public enum RouteOfAdministration {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -106,8 +114,8 @@ public enum RouteOfAdministration {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -137,8 +145,8 @@ public enum RouteOfAdministration {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -163,7 +171,7 @@ public enum RouteOfAdministration {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -177,17 +185,16 @@ public enum RouteOfAdministration {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (RouteOfAdministration x : values()) {
+		for (final RouteOfAdministration x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

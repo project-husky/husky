@@ -40,8 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Author {
 
-	final private static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7",
-			"221", "ISCO-08", "Medical doctors");
+	final private static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7", "221", "ISCO-08", "Medical doctors");
 	final private static Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
 
 	/** assigned Author */
@@ -280,15 +279,12 @@ public class Author {
 		if (mAuthor.getAssignedAuthor() != null) {
 			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
 				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
-					final Name name = new Name(
-							mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+					final Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 					retVal = name.getCompleteName();
 				} else {
 					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-						if (mAuthor.getAssignedAuthor().getRepresentedOrganization()
-								.getNames() != null) {
-							final Name name = new Name(mAuthor.getAssignedAuthor()
-									.getRepresentedOrganization().getNames().get(0));
+						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+							final Name name = new Name(mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
 							retVal = name.getCompleteName();
 						}
 					}
@@ -306,8 +302,7 @@ public class Author {
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
-		final Identificator gln = Identificator.getIdentificator(
-				mAuthor.getAssignedAuthor().getIds(), CodeSystems.GLN.getCodeSystemId());
+		final Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(), CodeSystems.GLN.getCodeSystemId());
 		return gln.getExtension();
 	}
 
@@ -342,8 +337,7 @@ public class Author {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		final Name name = new Name(
-				mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+		final Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 		return name;
 	}
 
@@ -450,14 +444,14 @@ public class Author {
 	 *         als String</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public IVL_TS getTimeAsIVL_TS() {
+		IVL_TS retVal = null;
 		if (mAuthor.getTime() != null) {
 			try {
-				return DateUtil.createIVL_TSFromHL7Date(mAuthor.getTime().getValue());
+				retVal = DateUtil.createIVL_TSFromHL7Date(mAuthor.getTime().getValue());
 			} catch (final ParseException e) {
-				return null;
 			}
 		}
-		return null;
+		return retVal;
 	}
 
 	/**
@@ -591,8 +585,7 @@ public class Author {
 	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
-		mAuthor.getAssignedAuthor().getTelecoms()
-				.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+		mAuthor.getAssignedAuthor().getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 
 	/**

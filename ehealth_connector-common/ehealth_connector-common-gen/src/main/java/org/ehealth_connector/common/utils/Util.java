@@ -127,12 +127,9 @@ public class Util {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean atLeastOne(List l) {
-		if (l == null)
+		if ((l == null) || (l.size() < 1) || (l.get(0) == null)) {
 			return false;
-		if (l.size() < 1)
-			return false;
-		if (l.get(0) == null)
-			return false;
+		}
 		return true;
 	}
 
@@ -249,12 +246,10 @@ public class Util {
 	 *            the Organization
 	 * @return CustodianOrganization the CustodianOrganization
 	 */
-	public static CustodianOrganization createCustodianOrganizationFromOrganization(
-			Organization organization) {
+	public static CustodianOrganization createCustodianOrganizationFromOrganization(Organization organization) {
 		// create and set the mdht RepresentedCustodianOrganization Object
 		if (organization != null) {
-			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
-					.createCustodianOrganization();
+			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE.createCustodianOrganization();
 
 			final ON on = DatatypesFactory.eINSTANCE.createON();
 			on.addText(organization.getName());
@@ -262,14 +257,12 @@ public class Util {
 
 			// take the first address and set it as CustodianAdress
 			if (organization.getMdhtOrganization().getAddrs().size() > 0) {
-				mdhtCustOrg.setAddr(
-						EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+				mdhtCustOrg.setAddr(EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
 			}
 
 			// take the first telecom and set it as CustodianTelecom
 			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
-				mdhtCustOrg.setTelecom(
-						EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
+				mdhtCustOrg.setTelecom(EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
 			}
 			return mdhtCustOrg;
 		}
@@ -317,8 +310,7 @@ public class Util {
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "."
-				+ hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
+		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
 		return eurDateStr;
 	}
 
@@ -402,12 +394,10 @@ public class Util {
 	 *            <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
-	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
-			org.ehealth_connector.common.Author author) {
+	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehealth_connector.common.Author author) {
 		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
 		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
-		mdhtLegAuth
-				.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
+		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
 		final CS cs = Signature.SIGNED.getCS();
@@ -430,8 +420,7 @@ public class Util {
 		final Resource.Factory factory = new GenericXMLResourceFactoryImpl();
 		final XMLResource resource = (XMLResource) factory.createResource(null);
 		try {
-			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"),
-					null);
+			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"), null);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -655,8 +644,7 @@ public class Util {
 		// application instance, the extension part identifies the document
 		// instance.
 
-		final String documentOid = org.openhealthtools.ihe.utils.OID
-				.createOIDGivenRoot("ehealthconnctor");
+		final String documentOid = org.openhealthtools.ihe.utils.OID.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 		final Random r = new Random();
 		final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(r.nextInt()));
@@ -762,8 +750,7 @@ public class Util {
 			final String env = System.getenv(envVariable);
 			if (env != null) {
 				tempDirectoryPath = env;
-				log.debug("Trying to use temp folder set by environment variable '" + envVariable
-						+ "': " + tempDirectoryPath);
+				log.debug("Trying to use temp folder set by environment variable '" + envVariable + "': " + tempDirectoryPath);
 			} else {
 				tempDirectoryPath = "/temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
@@ -815,8 +802,7 @@ public class Util {
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
 	public static boolean isComment(EntryRelationship er) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd())
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd())
 			return true;
 		else {
 			return false;
@@ -836,22 +822,24 @@ public class Util {
 	 * @return the string
 	 */
 	public static String join(List<String> nameList, String delimiter) {
-		StringBuilder builder = null;
-
-		if ((nameList == null) || nameList.isEmpty())
+		if ((nameList == null) || nameList.isEmpty()) {
 			return "";
-		final Iterator<String> iter = nameList.iterator();
-		String string = iter.next();
-		if ("".equals(string)) {
-			builder = new StringBuilder(iter.next());
-		} else {
-			builder = new StringBuilder(iter.next());
 		}
+
+		final StringBuilder builder = new StringBuilder();
+		final Iterator<String> iter = nameList.iterator();
+		// String string = iter.next();
+		// if ("".equals(string)) {
+		// builder = new StringBuilder(iter.next());
+		// } else {
+		// builder = new StringBuilder(iter.next());
+		// }
 		while (iter.hasNext()) {
-			string = iter.next();
-			if ("".equals(string)) {
-			} else {
+			final String string = iter.next();
+			if (builder.length() > 0) {
 				builder.append(delimiter).append(string);
+			} else {
+				builder.append(string);
 			}
 		}
 		return builder.toString();
@@ -971,8 +959,7 @@ public class Util {
 		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
 		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(), (tel.getUses().size() > 0
-						? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+				tl.put(tel.getValue(), (tel.getUses().size() > 0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
 			}
 		}
 		return tl;
@@ -1088,8 +1075,7 @@ public class Util {
 	 */
 	private static void traverseAttributes(FeatureMap anyAttribute) {
 		for (final Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
+			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString() + "\"");
 		}
 	}
 
@@ -1105,8 +1091,7 @@ public class Util {
 	 */
 	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
 		for (final Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
+			sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString() + "\"");
 		}
 		return sb;
 	}

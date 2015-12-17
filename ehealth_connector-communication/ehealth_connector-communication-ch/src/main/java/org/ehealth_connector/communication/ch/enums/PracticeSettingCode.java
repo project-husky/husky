@@ -53,27 +53,26 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 									 * <div class="it">Altri rami specialistici
 									 * della medicina non meglio precisati</div>
 									 */
-	ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG("10999",
-			"Andere nicht näher spezifizierte medzinische Fachrichtung"), /**
-																			 * <div
-																			 * class
-																			 * =
-																			 * "de">
-																			 * Angiologie
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "fr">
-																			 * Angiologie
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "it">
-																			 * Angiologia
-																			 * </div>
-																			 */
+	ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG("10999", "Andere nicht näher spezifizierte medzinische Fachrichtung"), /**
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "de">
+																																		 * Angiologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "fr">
+																																		 * Angiologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "it">
+																																		 * Angiologia
+																																		 * </div>
+																																		 */
 	ANGIOLOGIE("10004", "Angiologie"), /**
 										 * <div class="de">Anästhesiologie</div>
 										 * <div class="fr">Anesthésiologie</div>
@@ -336,27 +335,26 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 								 * <div class="it">Chirurgia plastica,
 								 * ricostruttiva ed estetica</div>
 								 */
-	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE("10041",
-			"Plastische, Rekonstruktive und Asthetische Chirurgie"), /**
-																		 * <div
-																		 * class
-																		 * =
-																		 * "de">
-																		 * Pneumologie
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "fr">
-																		 * Pneumologie
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "it">
-																		 * Pneumologia
-																		 * </div>
-																		 */
+	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE("10041", "Plastische, Rekonstruktive und Asthetische Chirurgie"), /**
+																															 * <div
+																															 * class
+																															 * =
+																															 * "de">
+																															 * Pneumologie
+																															 * </div>
+																															 * <div
+																															 * class
+																															 * =
+																															 * "fr">
+																															 * Pneumologie
+																															 * </div>
+																															 * <div
+																															 * class
+																															 * =
+																															 * "it">
+																															 * Pneumologia
+																															 * </div>
+																															 */
 	PNEUMOLOGIE("10042", "Pneumologie"), /**
 											 * <div class="de">Podologie</div>
 											 * <div class="fr">Podologie</div>
@@ -942,8 +940,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -1020,5 +1017,4 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 		}
 		return false;
 	}
-
 }

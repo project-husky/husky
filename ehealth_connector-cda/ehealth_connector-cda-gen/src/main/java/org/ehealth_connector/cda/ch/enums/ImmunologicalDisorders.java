@@ -16,57 +16,77 @@ public enum ImmunologicalDisorders {
 	 * <div class="de">Autoimunkrankheit</div> <div class="fr">Maladie
 	 * auto-immune</div>
 	 */
-	AUTOIMMUNE_DISEASE("85828009", "Autoimmune disease"),
-	/**
-	 * <div class="de">Rheumatismus</div> <div class="fr">Rhumatisme</div>
-	 */
-	RHEUMATISM("396332003", "Rheumatism"),
-	/**
-	 * <div class="de">Medikamentöse Immunsuppression</div> <div
-	 * class="fr">Immunosuppression médicamenteuse</div>
-	 */
-	DRUG_INDUCED_IMMUNODEFICIENCY("234645009", "Drug-induced immunodeficiency"),
-	/**
-	 * <div class="de">HIV-Infektion</div> <div class="fr">Infection VIH</div>
-	 */
-	HUMAN_IMMUNODEFICIENCY_VIRUS_INFECTION("86406008", "Human immunodeficiency virus infection"),
-	/**
-	 * <div class="de">Splenektomie</div> <div class="fr">Splénectomie</div>
-	 */
-	HO_SPLENECTOMY("161626009", "H/O: splenectomy"),
-	/**
-	 * <div class="de">Asplenie</div> <div class="fr">Asplénie</div>
-	 */
-	FUNCTIONAL_ASPLENIA("38096003", "Functional asplenia"),
-	/**
-	 * <div class="de">Antikörpermangel</div> <div class="fr">Déficience en
-	 * anticorps</div>
-	 */
-	SPECIFIC_ANTIBODY_DEFICIENCY("234556002", "Specific antibody deficiency"),
-	/**
-	 * <div class="de">Defizite des Komplementsystems</div> <div
-	 * class="fr">Déficits du système du complément</div>
-	 */
-	COMPLEMENT_DEFICIENCY_DISEASE("24743004", "Complement deficiency disease"),
-	/**
-	 * <div class="de">Sichelzellenanämie</div> <div class="fr">Anémie
-	 * falciforme</div>
-	 */
-	SICKLE_CELL_ANEMIA("160320002", "Sickle cell anemia"),
-	/**
-	 * <div class="de">Defizite im Mannan-bindenden Lektin</div> <div
-	 * class="fr">Déficits de la lectine de liaison des mannanes</div>
-	 */
-	MANNAN_BINDING_PROTEIN_DEFICIENCY("234579001", "Mannan-binding protein deficiency"),
-	/**
-	 * <div class="de">Protein-C-Defizit</div> <div class="fr"> Déficit en
-	 * protéine C</div>
-	 */
-	PROTEIN_C_DEFICIENCY_DISEASE("76407009", "Protein C deficiency disease"),
-	/**
-	 * <div class="de">Protein-S-Defizit</div> <div class="fr"> Déficit en
-	 * protéine S</div>
-	 */
+	AUTOIMMUNE_DISEASE("85828009",
+			"Autoimmune disease"), /**
+									 * <div class="de">Rheumatismus</div>
+									 * <div class="fr">Rhumatisme</div>
+									 */
+	RHEUMATISM("396332003", "Rheumatism"), /**
+											 * <div class="de">Medikamentöse
+											 * Immunsuppression</div>
+											 * <div class="fr">Immunosuppression
+											 * médicamenteuse</div>
+											 */
+	DRUG_INDUCED_IMMUNODEFICIENCY("234645009",
+			"Drug-induced immunodeficiency"), /**
+												 * <div class="de">HIV-Infektion
+												 * </div>
+												 * <div class="fr">Infection
+												 * VIH</div>
+												 */
+	HUMAN_IMMUNODEFICIENCY_VIRUS_INFECTION("86406008",
+			"Human immunodeficiency virus infection"), /**
+														 * <div class="de">
+														 * Splenektomie</div>
+														 * <div class="fr">
+														 * Splénectomie</div>
+														 */
+	HO_SPLENECTOMY("161626009",
+			"H/O: splenectomy"), /**
+									 * <div class="de">Asplenie</div>
+									 * <div class="fr">Asplénie</div>
+									 */
+	FUNCTIONAL_ASPLENIA("38096003",
+			"Functional asplenia"), /**
+									 * <div class="de">Antikörpermangel</div>
+									 * <div class="fr">Déficience en
+									 * anticorps</div>
+									 */
+	SPECIFIC_ANTIBODY_DEFICIENCY("234556002",
+			"Specific antibody deficiency"), /**
+												 * <div class="de">Defizite des
+												 * Komplementsystems</div>
+												 * <div class="fr">Déficits du
+												 * système du complément</div>
+												 */
+	COMPLEMENT_DEFICIENCY_DISEASE("24743004",
+			"Complement deficiency disease"), /**
+												 * <div class="de">
+												 * Sichelzellenanämie</div>
+												 * <div class="fr">Anémie
+												 * falciforme</div>
+												 */
+	SICKLE_CELL_ANEMIA("160320002",
+			"Sickle cell anemia"), /**
+									 * <div class="de">Defizite im
+									 * Mannan-bindenden Lektin</div>
+									 * <div class="fr">Déficits de la lectine de
+									 * liaison des mannanes</div>
+									 */
+	MANNAN_BINDING_PROTEIN_DEFICIENCY("234579001",
+			"Mannan-binding protein deficiency"), /**
+													 * <div class="de">Protein-C
+													 * -Defizit</div>
+													 * <div class="fr"> Déficit
+													 * en protéine C</div>
+													 */
+	PROTEIN_C_DEFICIENCY_DISEASE("76407009",
+			"Protein C deficiency disease"), /**
+												 * <div class="de">Protein-S-
+												 * Defizit</div>
+												 * <div class="fr"> Déficit en
+												 * protéine S</div>
+												 */
 	PROTEIN_S_DEFICIENCY_DISEASE("1563006", "Protein S deficiency disease ");
 	public static final String AUTOIMMUNE_DISEASE_CODE = "85828009";
 	public static final String RHEUMATISM_CODE = "396332003";
@@ -93,10 +113,10 @@ public enum ImmunologicalDisorders {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ImmunologicalDisorders(String code, String displayName) {
@@ -105,16 +125,16 @@ public enum ImmunologicalDisorders {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ImmunologicalDisorders getEnum(String code) {
-		for (ImmunologicalDisorders x : values()) {
+		for (final ImmunologicalDisorders x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -123,8 +143,8 @@ public enum ImmunologicalDisorders {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -138,8 +158,8 @@ public enum ImmunologicalDisorders {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -169,8 +189,8 @@ public enum ImmunologicalDisorders {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -195,7 +215,7 @@ public enum ImmunologicalDisorders {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -209,17 +229,16 @@ public enum ImmunologicalDisorders {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ImmunologicalDisorders x : values()) {
+		for (final ImmunologicalDisorders x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

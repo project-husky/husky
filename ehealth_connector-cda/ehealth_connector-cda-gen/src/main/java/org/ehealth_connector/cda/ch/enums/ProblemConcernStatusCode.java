@@ -13,32 +13,38 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum ProblemConcernStatusCode {
 
 	/**
-	 * <div class="de">Ein Leiden, das noch aktuell ist</div> <div
-	 * class="fr">Affectation encore actuelle suspended</div>
+	 * <div class="de">Ein Leiden, das noch aktuell ist</div>
+	 * <div class="fr">Affectation encore actuelle suspended</div>
 	 */
-	ACTIVE("active", "active"),
-	/**
-	 * <div class="de">Das Leiden wurde geheilt. Es wird nicht weiter behandelt.
-	 * Der Eintrag wird nur noch zwecks Historisierung geführt.</div> <div
-	 * class="fr">Affectation guérie. Traitement terminé. L’entrée n'est
-	 * effectuée qu’afin de compléter l’historique.</div>
-	 */
-	COMPLETED("completed", "completed"),
-	/**
-	 * <div class="de">Ein Leiden, das nicht geheilt wurde, aber derzeit nicht
-	 * aktuell ist</div> <div class="fr">Affectation guérie. Traitement terminé.
-	 * L’entrée n'est effectuée qu’afin de compléter l’historique.</div>
-	 */
-	SUSPENDED("suspended", "suspended"),
-	/**
-	 * <div class="de">Ein Leiden, das nicht geheilt wurde, aber nicht mehr
-	 * weiter behandelt wird. Dieser Wert kann z.B. dann eingesetzt werden, wenn
-	 * der Patient gegen den ärztlichen Rat eine Behandlung abgebrochen
-	 * hat.</div> <div class="fr">Affectation qui n’a pas été guérie, mais dont
-	 * le traitement n’est plus poursuivi. Cette valeur peut par exemple être
-	 * utilisée si le patient a interrompu un traitement contre l’avis du
-	 * médecin.</div>
-	 */
+	ACTIVE("active", "active"), /**
+								 * <div class="de">Das Leiden wurde geheilt. Es
+								 * wird nicht weiter behandelt. Der Eintrag wird
+								 * nur noch zwecks Historisierung geführt.</div>
+								 * <div class="fr">Affectation guérie.
+								 * Traitement terminé. L’entrée n'est effectuée
+								 * qu’afin de compléter l’historique.</div>
+								 */
+	COMPLETED("completed",
+			"completed"), /**
+							 * <div class="de">Ein Leiden, das nicht geheilt
+							 * wurde, aber derzeit nicht aktuell ist</div>
+							 * <div class="fr">Affectation guérie. Traitement
+							 * terminé. L’entrée n'est effectuée qu’afin de
+							 * compléter l’historique.</div>
+							 */
+	SUSPENDED("suspended",
+			"suspended"), /**
+							 * <div class="de">Ein Leiden, das nicht geheilt
+							 * wurde, aber nicht mehr weiter behandelt wird.
+							 * Dieser Wert kann z.B. dann eingesetzt werden,
+							 * wenn der Patient gegen den ärztlichen Rat eine
+							 * Behandlung abgebrochen hat.</div>
+							 * <div class="fr">Affectation qui n’a pas été
+							 * guérie, mais dont le traitement n’est plus
+							 * poursuivi. Cette valeur peut par exemple être
+							 * utilisée si le patient a interrompu un traitement
+							 * contre l’avis du médecin.</div>
+							 */
 	ABORTED("aborted", "aborted");
 	public static final String ACTIVE_CODE = "active";
 	public static final String COMPLETED_CODE = "completed";
@@ -57,10 +63,10 @@ public enum ProblemConcernStatusCode {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ProblemConcernStatusCode(String code, String displayName) {
@@ -69,16 +75,16 @@ public enum ProblemConcernStatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ProblemConcernStatusCode getEnum(String code) {
-		for (ProblemConcernStatusCode x : values()) {
+		for (final ProblemConcernStatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -87,8 +93,8 @@ public enum ProblemConcernStatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -118,8 +124,8 @@ public enum ProblemConcernStatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -128,8 +134,8 @@ public enum ProblemConcernStatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -156,7 +162,7 @@ public enum ProblemConcernStatusCode {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -170,17 +176,16 @@ public enum ProblemConcernStatusCode {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ProblemConcernStatusCode x : values()) {
+		for (final ProblemConcernStatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

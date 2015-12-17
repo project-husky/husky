@@ -35,10 +35,9 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 *            profile. Value may be null or empty, in which case it is not
 	 *            added to the query.
 	 */
-	public GetDocumentsQuery(String docIds[], boolean isUUID, String homeCommunityId) {
+	public GetDocumentsQuery(String[] docIds, boolean isUUID, String homeCommunityId) {
 		try {
-			setOhtStoredQuery( new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(
-					docIds, isUUID, homeCommunityId));
+			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds, isUUID, homeCommunityId));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -57,8 +56,7 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 */
 	public GetDocumentsQuery(String[] docIds, boolean isUUID) {
 		try {
-			setOhtStoredQuery( new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(
-					docIds, isUUID));
+			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds, isUUID));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}

@@ -67,9 +67,11 @@ public enum AddressUse {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 *            <br> <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br> <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	AddressUse(String code, String displayName) {
 		this.code = code;
@@ -77,11 +79,12 @@ public enum AddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 *            <br> <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AddressUse getEnum(String code) {
@@ -94,22 +97,27 @@ public enum AddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the address use as postal address use.</div> <div
-	 * class="de">Liefert address use as postal address use.</div>
+	 * <div class="en">Gets the address use as postal address use.</div>
+	 * <div class="de">Liefert address use as postal address use.</div>
 	 * 
 	 * @return <div class="en">the address use as postal address use</div>
 	 */
 	public PostalAddressUse getAddressUseAsPostalAddressUse() {
+		PostalAddressUse retVal = null;
 		switch (this) {
 		case PRIVATE:
-			return PostalAddressUse.HP;
+			retVal = PostalAddressUse.HP;
+			break;
 		case BUSINESS:
-			return PostalAddressUse.WP;
+			retVal = PostalAddressUse.WP;
+			break;
 		case MOBILE:
-			return PostalAddressUse.TMP;
+			retVal = PostalAddressUse.TMP;
+			break;
 		default:
-			return PostalAddressUse.HP;
+			retVal = PostalAddressUse.HP;
 		}
+		return retVal;
 	}
 
 	// Special for this enum: Return the Use Code in different HL7 enum types
@@ -122,21 +130,26 @@ public enum AddressUse {
 	 *         use</div>
 	 */
 	public TelecommunicationAddressUse getAddressUseAsTelecommunicationAddressUse() {
+		TelecommunicationAddressUse retVal = null;
 		switch (this) {
 		case PRIVATE:
-			return TelecommunicationAddressUse.HP;
+			retVal = TelecommunicationAddressUse.HP;
+			break;
 		case BUSINESS:
-			return TelecommunicationAddressUse.WP;
+			retVal = TelecommunicationAddressUse.WP;
+			break;
 		case MOBILE:
-			return TelecommunicationAddressUse.MC;
+			retVal = TelecommunicationAddressUse.MC;
+			break;
 		default:
-			return TelecommunicationAddressUse.HP;
+			retVal = TelecommunicationAddressUse.HP;
 		}
+		return retVal;
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -149,8 +162,8 @@ public enum AddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -180,8 +193,8 @@ public enum AddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -206,7 +219,8 @@ public enum AddressUse {
 	 * 
 	 * 
 	 * @param enumName
-	 *            <br> <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -219,7 +233,8 @@ public enum AddressUse {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 *            <br> <div class="de">codeValue</div>
+	 *            <br>
+	 *            <div class="de">codeValue</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {

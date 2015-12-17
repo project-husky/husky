@@ -33,25 +33,23 @@ public enum CdaChVacdRecCategories {
 	 * <div class="fr">Vaccinations recommandées de base</div>
 	 * <div class="it">Vaccinazioni raccomandate di base</div>
 	 */
-	REC_BASE("41501", "Empfohlene Basisimpfungen", "Vaccinations recommandées de base",
-			"Vaccinazioni raccomandate di base", "20150101", ""),
+	REC_BASE("41501", "Empfohlene Basisimpfungen", "Vaccinations recommandées de base", "Vaccinazioni raccomandate di base", "20150101",
+			""),
 
 	/**
 	 * <div class="de"> Empfohlene ergänzende Impfungen</div>
 	 * <div class="fr">Vaccinations recommandées complémentaires</div>
 	 * <div class="it">Vaccinazioni raccomandate complementari</div>
 	 */
-	REC_COMPL("41502", "Empfohlene ergänzende Impfungen",
-			"Vaccinations recommandées complémentaires", "Vaccinazioni raccomandate complementari",
-			"20150101", ""),
+	REC_COMPL("41502", "Empfohlene ergänzende Impfungen", "Vaccinations recommandées complémentaires",
+			"Vaccinazioni raccomandate complementari", "20150101", ""),
 
 	/**
 	 * <div class="de"> Impfungen ohne Empfehlungen</div>
 	 * <div class="fr">Vaccinations sans recommandation d’utilisation</div>
 	 * <div class="it">Vaccinazioni senza raccomandazione d’utilizzo</div>
 	 */
-	REC_NONE("41504", "Impfungen ohne Empfehlungen",
-			"Vaccinations sans recommandation d’utilisation",
+	REC_NONE("41504", "Impfungen ohne Empfehlungen", "Vaccinations sans recommandation d’utilisation",
 			"Vaccinazioni senza raccomandazione d’utilizzo", "20150101", ""),
 
 	/**
@@ -59,8 +57,7 @@ public enum CdaChVacdRecCategories {
 	 * <div class="fr">Vaccinations recommandées à des groupes à risque</div>
 	 * <div class="it">Vaccinazioni raccomandate a die gruppi a rischio</div>
 	 */
-	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen",
-			"Vaccinations recommandées à des groupes à risque",
+	REC_RISK("41503", "Empfohlene Impfungen für Risikogruppen", "Vaccinations recommandées à des groupes à risque",
 			"Vaccinazioni raccomandate a die gruppi a rischio", "20150101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
@@ -102,8 +99,8 @@ public enum CdaChVacdRecCategories {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	private CdaChVacdRecCategories(String code, String displayNameDe, String displayNameFr,
-			String displayNameIt, String validFrom, String validTo) {
+	private CdaChVacdRecCategories(String code, String displayNameDe, String displayNameFr, String displayNameIt, String validFrom,
+			String validTo) {
 		this.code = code;
 		this.displayNameDe = displayNameDe;
 		this.displayNameFr = displayNameFr;
@@ -293,5 +290,4 @@ public enum CdaChVacdRecCategories {
 		}
 		return true;
 	}
-
 }

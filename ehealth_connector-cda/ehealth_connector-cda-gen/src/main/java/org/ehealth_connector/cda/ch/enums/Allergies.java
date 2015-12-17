@@ -16,11 +16,12 @@ public enum Allergies {
 	 * <div class="de">Hühnereiweiss</div> <div class="fr">Protéine d’œufs de
 	 * poule</div>
 	 */
-	EGG_PROTEIN_SUBSTANCE("303300008", "Egg protein (substance)"),
-	/**
-	 * <div class="de">Atopisches Ekzem</div> <div class="fr">Eczéma
-	 * atopique</div>
-	 */
+	EGG_PROTEIN_SUBSTANCE("303300008",
+			"Egg protein (substance)"), /**
+										 * <div class="de">Atopisches
+										 * Ekzem</div> <div class="fr">Eczéma
+										 * atopique</div>
+										 */
 	ATOPIC_DERMATITIS("24079001", "Atopic dermatitis");
 	public static final String EGG_PROTEIN_SUBSTANCE_CODE = "303300008";
 	public static final String ATOPIC_DERMATITIS_CODE = "24079001";
@@ -37,10 +38,10 @@ public enum Allergies {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private Allergies(String code, String displayName) {
@@ -49,16 +50,16 @@ public enum Allergies {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Allergies getEnum(String code) {
-		for (Allergies x : values()) {
+		for (final Allergies x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -67,8 +68,8 @@ public enum Allergies {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -82,8 +83,8 @@ public enum Allergies {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -113,8 +114,8 @@ public enum Allergies {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -139,7 +140,7 @@ public enum Allergies {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -153,17 +154,16 @@ public enum Allergies {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (Allergies x : values()) {
+		for (final Allergies x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

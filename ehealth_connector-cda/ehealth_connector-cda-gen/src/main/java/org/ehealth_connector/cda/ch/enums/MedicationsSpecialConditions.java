@@ -13,24 +13,32 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum MedicationsSpecialConditions {
 
 	/**
-	 * <div class="de">Medikamentöse Therapie unbekannt</div> <div
-	 * class="fr">Traitement médicamenteux inconnu</div>
+	 * <div class="de">Medikamentöse Therapie unbekannt</div>
+	 * <div class="fr">Traitement médicamenteux inconnu</div>
 	 */
-	DRUG_TREATMENT_UNKNOWN("182904002", "Drug Treatment Unknown"),
-	/**
-	 * <div class="de">Keine medikamentöse Therapie verschrieben</div> <div
-	 * class="fr">Aucun traitement médicamenteux prescrit</div>
-	 */
-	NO_DRUG_THERAPY_PRESCRIBED("182849000", "No Drug Therapy Prescribed"),
-	/**
-	 * <div class="de">Patient gibt an, keine Medikamente einzunehmen</div> <div
-	 * class="fr">Le patient indique qu’il ne prend pas de médicaments.</div>
-	 */
-	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003", "Patient Not On Self-Medications"),
-	/**
-	 * <div class="de">Patient lehnt die Impfung ab</div> <div class="fr">Le
-	 * patient refuse la vaccination.</div>
-	 */
+	DRUG_TREATMENT_UNKNOWN("182904002",
+			"Drug Treatment Unknown"), /**
+										 * <div class="de">Keine medikamentöse
+										 * Therapie verschrieben</div>
+										 * <div class="fr">Aucun traitement
+										 * médicamenteux prescrit</div>
+										 */
+	NO_DRUG_THERAPY_PRESCRIBED("182849000",
+			"No Drug Therapy Prescribed"), /**
+											 * <div class="de">Patient gibt an,
+											 * keine Medikamente
+											 * einzunehmen</div>
+											 * <div class="fr">Le patient
+											 * indique qu’il ne prend pas de
+											 * médicaments.</div>
+											 */
+	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003",
+			"Patient Not On Self-Medications"), /**
+												 * <div class="de">Patient lehnt
+												 * die Impfung ab</div>
+												 * <div class="fr">Le patient
+												 * refuse la vaccination.</div>
+												 */
 	MEDICATION_REFUSED_PATIENT_OBJECTIVE("406149000", "Medication refused, Patient Objective");
 	public static final String DRUG_TREATMENT_UNKNOWN_CODE = "182904002";
 	public static final String NO_DRUG_THERAPY_PRESCRIBED_CODE = "182849000";
@@ -49,10 +57,10 @@ public enum MedicationsSpecialConditions {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private MedicationsSpecialConditions(String code, String displayName) {
@@ -61,16 +69,16 @@ public enum MedicationsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static MedicationsSpecialConditions getEnum(String code) {
-		for (MedicationsSpecialConditions x : values()) {
+		for (final MedicationsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -79,8 +87,8 @@ public enum MedicationsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -94,8 +102,8 @@ public enum MedicationsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -125,8 +133,8 @@ public enum MedicationsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -151,7 +159,7 @@ public enum MedicationsSpecialConditions {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -165,17 +173,16 @@ public enum MedicationsSpecialConditions {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (MedicationsSpecialConditions x : values()) {
+		for (final MedicationsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

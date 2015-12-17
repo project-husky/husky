@@ -16,21 +16,30 @@ public enum ProblemsSpecialConditions {
 	 * <div class="de">Keine relevante Anamnese</div> <div class="fr">Aucune
 	 * anamnèse pertinente</div>
 	 */
-	NO_SIGNIFICANT_MEDICAL_HISTORY("160243008", "No Significant Medical History"),
-	/**
-	 * <div class="de">Patient hat keine aktuellen Probleme</div> <div
-	 * class="fr">Aucun problème actuel</div>
-	 */
-	NO_CURRENT_PROBLEMS_OR_DISABILITY("160245001", "No current problems or disability"),
-	/**
-	 * <div class="de">Keine Anamnese bekannt</div> <div class="fr">Aucune
-	 * anamnèse connue</div>
-	 */
-	HISTORY_OF_PAST_ILLNESS_UNKNOWN("396782006", "History of Past Illness unknown"),
-	/**
-	 * <div class="de">Keine Familienanamnese bekannt</div> <div
-	 * class="fr">Aucun antécédent familial connu</div>
-	 */
+	NO_SIGNIFICANT_MEDICAL_HISTORY("160243008",
+			"No Significant Medical History"), /**
+												 * <div class="de">Patient hat
+												 * keine aktuellen
+												 * Probleme</div>
+												 * <div class="fr">Aucun
+												 * problème actuel</div>
+												 */
+	NO_CURRENT_PROBLEMS_OR_DISABILITY("160245001",
+			"No current problems or disability"), /**
+													 * <div class="de">Keine
+													 * Anamnese bekannt</div>
+													 * <div class="fr">Aucune
+													 * anamnèse connue</div>
+													 */
+	HISTORY_OF_PAST_ILLNESS_UNKNOWN("396782006",
+			"History of Past Illness unknown"), /**
+												 * <div class="de">Keine
+												 * Familienanamnese
+												 * bekannt</div>
+												 * <div class="fr">Aucun
+												 * antécédent familial
+												 * connu</div>
+												 */
 	FAMILY_HISTORY_UNKNOWN("407559004", "Family History Unknown");
 	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE = "160243008";
 	public static final String NO_CURRENT_PROBLEMS_OR_DISABILITY_CODE = "160245001";
@@ -49,10 +58,10 @@ public enum ProblemsSpecialConditions {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ProblemsSpecialConditions(String code, String displayName) {
@@ -61,16 +70,16 @@ public enum ProblemsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ProblemsSpecialConditions getEnum(String code) {
-		for (ProblemsSpecialConditions x : values()) {
+		for (final ProblemsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -79,8 +88,8 @@ public enum ProblemsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -94,8 +103,8 @@ public enum ProblemsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -125,8 +134,8 @@ public enum ProblemsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -151,7 +160,7 @@ public enum ProblemsSpecialConditions {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -165,17 +174,16 @@ public enum ProblemsSpecialConditions {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ProblemsSpecialConditions x : values()) {
+		for (final ProblemsSpecialConditions x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

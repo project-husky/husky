@@ -86,31 +86,30 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 															 * analisi
 															 * biomediche </div>
 															 */
-	BIOMEDIZINISCHE_ANALYTIKERINBIOMEDIZINISCHER_ANALYTIKER("50056",
-			"Biomedizinische Analytikerin/Biomedizinischer Analytiker"), /**
-																			 * <div
-																			 * class
-																			 * =
-																			 * "de">
-																			 * Chiropraktorin
-																			 * /
-																			 * Chiropraktiker
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "fr">
-																			 * Chiropracteur
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "it">
-																			 * Chiropratico
-																			 * /
-																			 * a
-																			 * </div>
-																			 */
+	BIOMEDIZINISCHE_ANALYTIKERINBIOMEDIZINISCHER_ANALYTIKER("50056", "Biomedizinische Analytikerin/Biomedizinischer Analytiker"), /**
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "de">
+																																	 * Chiropraktorin
+																																	 * /
+																																	 * Chiropraktiker
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "fr">
+																																	 * Chiropracteur
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "it">
+																																	 * Chiropratico
+																																	 * /
+																																	 * a
+																																	 * </div>
+																																	 */
 	CHIROPRAKTORINCHIROPRAKTIKER("50049",
 			"Chiropraktorin/Chiropraktiker"), /**
 												 * <div class="de">diplomierte
@@ -122,55 +121,53 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 												 * <div class="it">Infermiere/a
 												 * diplomato/a</div>
 												 */
-	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN("50062",
-			"diplomierte Pflegefachfrau/diplomierter Pflegefachmann"), /**
-																		 * <div
-																		 * class
-																		 * =
-																		 * "de">
-																		 * diplomierte
-																		 * Pflegefachfrau
-																		 * /
-																		 * diplomierter
-																		 * Pflegefachmann
-																		 * mit
-																		 * akademischem
-																		 * pflegefachlichem
-																		 * Abschluss
-																		 * (Bachelor)
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "fr">
-																		 * Infirmière
-																		 * diplômée
-																		 * /
-																		 * Infirmier
-																		 * diplômé
-																		 * avec
-																		 * un
-																		 * Bachelor
-																		 * de
-																		 * Science
-																		 * en
-																		 * soins
-																		 * infirmiers
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "it">
-																		 * Infermiere
-																		 * /a
-																		 * con
-																		 * titolo
-																		 * accademico
-																		 * (Bachelor)
-																		 * </div>
-																		 */
-	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR(
-			"50063",
+	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN("50062", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann"), /**
+																																 * <div
+																																 * class
+																																 * =
+																																 * "de">
+																																 * diplomierte
+																																 * Pflegefachfrau
+																																 * /
+																																 * diplomierter
+																																 * Pflegefachmann
+																																 * mit
+																																 * akademischem
+																																 * pflegefachlichem
+																																 * Abschluss
+																																 * (Bachelor)
+																																 * </div>
+																																 * <div
+																																 * class
+																																 * =
+																																 * "fr">
+																																 * Infirmière
+																																 * diplômée
+																																 * /
+																																 * Infirmier
+																																 * diplômé
+																																 * avec
+																																 * un
+																																 * Bachelor
+																																 * de
+																																 * Science
+																																 * en
+																																 * soins
+																																 * infirmiers
+																																 * </div>
+																																 * <div
+																																 * class
+																																 * =
+																																 * "it">
+																																 * Infermiere
+																																 * /a
+																																 * con
+																																 * titolo
+																																 * accademico
+																																 * (Bachelor)
+																																 * </div>
+																																 */
+	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR("50063",
 			"diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)"), /**
 																																 * <div
 																																 * class
@@ -218,8 +215,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 																																 * (Master)
 																																 * </div>
 																																 */
-	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER(
-			"50064",
+	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER("50064",
 			"diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Master)"), /**
 																															 * <div
 																															 * class
@@ -386,8 +382,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 																																											 * (SPD)
 																																											 * </div>
 																																											 */
-	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANASTHESIE_NDS(
-			"50065",
+	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANASTHESIE_NDS("50065",
 			"diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit Zusatz- oder Spezialfunktion, z.B. IPS, Anästhesie (NDS)"), /**
 																																	 * <div
 																																	 * class
@@ -761,39 +756,38 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 														 * chirurgia toracica e
 														 * cardiovascolare</div>
 														 */
-	FACHARZTINFACHARZT_FUR_HERZ_UND_THORAKALE_GEFASSCHIRURGIE("50010",
-			"Fachärztin/Facharzt für Herz- und thorakale Gefässchirurgie"), /**
-																			 * <div
-																			 * class
-																			 * =
-																			 * "de">
-																			 * Fachärztin
-																			 * /
-																			 * Facharzt
-																			 * für
-																			 * Hämatologie
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "fr">
-																			 * Médecin
-																			 * spécialiste
-																			 * en
-																			 * hématologie
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "it">
-																			 * Medico
-																			 * specializzato
-																			 * /
-																			 * a
-																			 * in
-																			 * ematologia
-																			 * </div>
-																			 */
+	FACHARZTINFACHARZT_FUR_HERZ_UND_THORAKALE_GEFASSCHIRURGIE("50010", "Fachärztin/Facharzt für Herz- und thorakale Gefässchirurgie"), /**
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "de">
+																																		 * Fachärztin
+																																		 * /
+																																		 * Facharzt
+																																		 * für
+																																		 * Hämatologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "fr">
+																																		 * Médecin
+																																		 * spécialiste
+																																		 * en
+																																		 * hématologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "it">
+																																		 * Medico
+																																		 * specializzato
+																																		 * /
+																																		 * a
+																																		 * in
+																																		 * ematologia
+																																		 * </div>
+																																		 */
 	FACHARZTINFACHARZT_FUR_HAMATOLOGIE("50009",
 			"Fachärztin/Facharzt für Hämatologie"), /**
 													 * <div class="de">
@@ -1023,39 +1017,38 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 																 * facciale
 																 * </div>
 																 */
-	FACHARZTINFACHARZT_FUR_MUND_KIEFER_UND_GESICHTSCHIRURGIE("50017",
-			"Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie"), /**
-																				 * <div
-																				 * class
-																				 * =
-																				 * "de">
-																				 * Fachärztin
-																				 * /
-																				 * Facharzt
-																				 * für
-																				 * Nephrologie
-																				 * </div>
-																				 * <div
-																				 * class
-																				 * =
-																				 * "fr">
-																				 * Médecin
-																				 * spécialiste
-																				 * en
-																				 * néphrologie
-																				 * </div>
-																				 * <div
-																				 * class
-																				 * =
-																				 * "it">
-																				 * Medico
-																				 * specializzato
-																				 * /
-																				 * a
-																				 * in
-																				 * nefrologia
-																				 * </div>
-																				 */
+	FACHARZTINFACHARZT_FUR_MUND_KIEFER_UND_GESICHTSCHIRURGIE("50017", "Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie"), /**
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "de">
+																																		 * Fachärztin
+																																		 * /
+																																		 * Facharzt
+																																		 * für
+																																		 * Nephrologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "fr">
+																																		 * Médecin
+																																		 * spécialiste
+																																		 * en
+																																		 * néphrologie
+																																		 * </div>
+																																		 * <div
+																																		 * class
+																																		 * =
+																																		 * "it">
+																																		 * Medico
+																																		 * specializzato
+																																		 * /
+																																		 * a
+																																		 * in
+																																		 * nefrologia
+																																		 * </div>
+																																		 */
 	FACHARZTINFACHARZT_FUR_NEPHROLOGIE("50018",
 			"Fachärztin/Facharzt für Nephrologie"), /**
 													 * <div class="de">
@@ -1425,41 +1418,40 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 													 * radio-oncologia /
 													 * radioterapia</div>
 													 */
-	FACHARZTINFACHARZT_FUR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE("50032",
-			"Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie"), /**
-																			 * <div
-																			 * class
-																			 * =
-																			 * "de">
-																			 * Fachärztin
-																			 * /
-																			 * Facharzt
-																			 * für
-																			 * Rechtsmedizin
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "fr">
-																			 * Médecin
-																			 * spécialiste
-																			 * en
-																			 * médecine
-																			 * légale
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "it">
-																			 * Medico
-																			 * specializzato
-																			 * /
-																			 * a
-																			 * in
-																			 * medicina
-																			 * legale
-																			 * </div>
-																			 */
+	FACHARZTINFACHARZT_FUR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE("50032", "Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie"), /**
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "de">
+																																	 * Fachärztin
+																																	 * /
+																																	 * Facharzt
+																																	 * für
+																																	 * Rechtsmedizin
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "fr">
+																																	 * Médecin
+																																	 * spécialiste
+																																	 * en
+																																	 * médecine
+																																	 * légale
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "it">
+																																	 * Medico
+																																	 * specializzato
+																																	 * /
+																																	 * a
+																																	 * in
+																																	 * medicina
+																																	 * legale
+																																	 * </div>
+																																	 */
 	FACHARZTINFACHARZT_FUR_RECHTSMEDIZIN("50041",
 			"Fachärztin/Facharzt für Rechtsmedizin"), /**
 														 * <div class="de">
@@ -2383,8 +2375,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -2461,5 +2452,4 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		}
 		return false;
 	}
-
 }

@@ -36,14 +36,14 @@ public class SimpleTextBuilder extends TextBuilder {
 		contentIdPrefix = section.getContentIdPrefix();
 
 		// Calculate the current content ID
-		int contentTagOccurences = countMatches(oldText, contentTagStr);
+		final int contentTagOccurences = countMatches(oldText, contentTagStr);
 		currentContentId = contentTagOccurences + 1;
 		append(oldText);
 		addContent(newText, contentIdPrefix, currentContentId);
 	}
 
 	public static int countMatches(final String str, final String sub) {
-		if (str.equals("") || sub.equals("")) {
+		if ("".equals(str) || "".equals(sub)) {
 			return 0;
 		}
 		int count = 0;

@@ -99,17 +99,13 @@ public class DebugUtil {
 	 */
 	public static String debugCodesString(EList<Object> data) {
 		final StringBuffer retVal = new StringBuffer();
-		if (data != null) {
-			if (data.isEmpty()) {
-				return "null";
-			} else {
-				for (final Object item : data) {
-					retVal.append(debugCodeString((CodedMetadataType) item) + "\n");
-				}
-				return retVal.toString();
+		if ((data != null) && (!data.isEmpty())) {
+			for (final Object item : data) {
+				retVal.append(debugCodeString((CodedMetadataType) item) + "\n");
 			}
-		} else
-			return "null";
+			return retVal.toString();
+		}
+		return "null";
 	}
 
 	/**
@@ -220,19 +216,15 @@ public class DebugUtil {
 	 *         <div class="fr"></div>
 	 */
 	public static String debugLocalizedString(EList<Object> data) {
-		final StringBuffer retVal = new StringBuffer();
-		if (data != null) {
-			if (data.isEmpty()) {
-				return "null";
-			} else {
-				for (final Object item : data) {
-					final LocalizedStringType str = (LocalizedStringType) item;
-					retVal.append(str.getValue() + " (" + str.getLang() + ") ");
-				}
-				return retVal.toString();
+		if ((data != null) && (!data.isEmpty())) {
+			final StringBuffer retVal = new StringBuffer();
+			for (final Object item : data) {
+				final LocalizedStringType str = (LocalizedStringType) item;
+				retVal.append(str.getValue() + " (" + str.getLang() + ") ");
 			}
-		} else
-			return "null";
+			return retVal.toString();
+		}
+		return "null";
 	}
 
 }

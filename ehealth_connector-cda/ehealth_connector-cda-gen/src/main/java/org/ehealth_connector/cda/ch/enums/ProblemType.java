@@ -15,31 +15,32 @@ public enum ProblemType {
 	/**
 	 * <div class="de">Problem</div> <div class="fr">Problème</div>
 	 */
-	PROBLEM("55607006", "Problem"),
-	/**
-	 * <div class="de">Krankheit</div> <div class="fr">Maladie</div>
-	 */
-	CONDITION("64572001", "Condition"),
-	/**
-	 * <div class="de">Funktionale Einschränkung</div> <div
-	 * class="fr">Limitation fonctionnelle</div>
-	 */
-	FUNCTIONAL_LIMITATION("248536006", "Functional limitation "),
-	/**
-	 * <div class="de">Diagnose</div> <div class="fr">Diagnostic</div>
-	 */
-	DIAGNOSIS("282291009", "Diagnosis"),
-	/**
-	 * <div class="de">Befund</div> <div class="fr">Résultat</div>
-	 */
-	FINDING("404684003", "Finding "),
-	/**
-	 * <div class="de">Beschwerde</div> <div class="fr">Plainte</div>
-	 */
-	COMPLAINT("409586006", "Complaint "),
-	/**
-	 * <div class="de">Symptom</div> <div class="fr">Symptôme</div>
-	 */
+	PROBLEM("55607006", "Problem"), /**
+									 * <div class="de">Krankheit</div>
+									 * <div class="fr">Maladie</div>
+									 */
+	CONDITION("64572001",
+			"Condition"), /**
+							 * <div class="de">Funktionale Einschränkung</div>
+							 * <div class="fr">Limitation fonctionnelle</div>
+							 */
+	FUNCTIONAL_LIMITATION("248536006",
+			"Functional limitation "), /**
+										 * <div class="de">Diagnose</div>
+										 * <div class="fr">Diagnostic</div>
+										 */
+	DIAGNOSIS("282291009", "Diagnosis"), /**
+											 * <div class="de">Befund</div>
+											 * <div class="fr">Résultat</div>
+											 */
+	FINDING("404684003", "Finding "), /**
+										 * <div class="de">Beschwerde</div>
+										 * <div class="fr">Plainte</div>
+										 */
+	COMPLAINT("409586006", "Complaint "), /**
+											 * <div class="de">Symptom</div>
+											 * <div class="fr">Symptôme</div>
+											 */
 	SYMPTOM("418799008", "Symptom ");
 	public static final String PROBLEM_CODE = "55607006";
 	public static final String CONDITION_CODE = "64572001";
@@ -62,10 +63,10 @@ public enum ProblemType {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ProblemType(String code, String displayName) {
@@ -74,16 +75,16 @@ public enum ProblemType {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ProblemType getEnum(String code) {
-		for (ProblemType x : values()) {
+		for (final ProblemType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -92,8 +93,8 @@ public enum ProblemType {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -107,8 +108,8 @@ public enum ProblemType {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -138,8 +139,8 @@ public enum ProblemType {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -164,7 +165,7 @@ public enum ProblemType {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -178,17 +179,16 @@ public enum ProblemType {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ProblemType x : values()) {
+		for (final ProblemType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

@@ -36,12 +36,12 @@ public class Organization {
 	private org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
 	/**
-	 * <div class="en">Instantiates a new organization.</div> <div
-	 * class="de">Instantiiert ein neues Organization Objekt</div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new organization.</div>
+	 * <div class="de">Instantiiert ein neues Organization Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param organization
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> organization</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
@@ -67,13 +67,13 @@ public class Organization {
 	 * @param name
 	 *            Name der Organisation
 	 * @param gln
-	 * <br>
-	 *            <div class="de"> gln</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> gln</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Organization(String name, String gln) {
 		this(name);
-		II id = DatatypesFactory.eINSTANCE.createII();
+		final II id = DatatypesFactory.eINSTANCE.createII();
 		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 		mOrganization.getIds().add(id);
@@ -106,7 +106,7 @@ public class Organization {
 	 *            Name
 	 */
 	public void addName(String name) {
-		ON orgaName = DatatypesFactory.eINSTANCE.createON();
+		final ON orgaName = DatatypesFactory.eINSTANCE.createON();
 		getMdhtOrganization().getNames().add(orgaName);
 		orgaName.addText(name);
 	}
@@ -118,15 +118,15 @@ public class Organization {
 	 *            URL der Webseite
 	 */
 	public void addWebsite(String url) {
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("http://" + url);
 		getMdhtOrganization().getTelecoms().add(tel);
 	}
 
 	/**
-	 * <div class="en">Copy mdht organization.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Copy mdht organization.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @return the org.openhealthtools.mdht.uml.cda.Organization
 	 */
@@ -174,7 +174,7 @@ public class Organization {
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
-		Telecoms telecoms = new Telecoms(mOrganization.getTelecoms());
+		final Telecoms telecoms = new Telecoms(mOrganization.getTelecoms());
 		return telecoms;
 	}
 
@@ -184,8 +184,8 @@ public class Organization {
 	 * 
 	 * @param telecoms
 	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));

@@ -79,27 +79,26 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 									 * <div class="fr"></div>
 									 * <div class="it"></div>
 									 */
-	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN("60046",
-			"Dokument mit Kontraindikationen, Unverträglichkeiten…."), /**
-																		 * <div
-																		 * class
-																		 * =
-																		 * "de">
-																		 * Echokardiographie
-																		 * -
-																		 * Befund
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "fr">
-																		 * </div>
-																		 * <div
-																		 * class
-																		 * =
-																		 * "it">
-																		 * </div>
-																		 */
+	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN("60046", "Dokument mit Kontraindikationen, Unverträglichkeiten…."), /**
+																															 * <div
+																															 * class
+																															 * =
+																															 * "de">
+																															 * Echokardiographie
+																															 * -
+																															 * Befund
+																															 * </div>
+																															 * <div
+																															 * class
+																															 * =
+																															 * "fr">
+																															 * </div>
+																															 * <div
+																															 * class
+																															 * =
+																															 * "it">
+																															 * </div>
+																															 */
 	ECHOKARDIOGRAPHIE_BEFUND("60029",
 			"Echokardiographie-Befund"), /**
 											 * <div class="de">Eintrittsbericht
@@ -375,25 +374,24 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 												 * <div class="fr"></div>
 												 * <div class="it"></div>
 												 */
-	VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE("60014",
-			"Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"), /**
-																			 * <div
-																			 * class
-																			 * =
-																			 * "de">
-																			 * Verlegungsbericht
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "fr">
-																			 * </div>
-																			 * <div
-																			 * class
-																			 * =
-																			 * "it">
-																			 * </div>
-																			 */
+	VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE("60014", "Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"), /**
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "de">
+																																	 * Verlegungsbericht
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "fr">
+																																	 * </div>
+																																	 * <div
+																																	 * class
+																																	 * =
+																																	 * "it">
+																																	 * </div>
+																																	 */
 	VERLEGUNGSBERICHT("60013",
 			"Verlegungsbericht"), /**
 									 * <div class="de">Wundbefund</div>
@@ -764,8 +762,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -842,5 +839,4 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 		}
 		return false;
 	}
-
 }

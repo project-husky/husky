@@ -13,17 +13,23 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum ObservationInterpretationForImmunization {
 
 	/**
-	 * <div class="de">Positiv Erreger in Probe nachgewiesen</div> <div
-	 * class="fr">Positif: Agent pathogène dépisté dans l’échantillon</div>
+	 * <div class="de">Positiv Erreger in Probe nachgewiesen</div>
+	 * <div class="fr">Positif: Agent pathogène dépisté dans l’échantillon</div>
 	 */
-	POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN("POS", "Positive: Pathogen found in specimen"),
-	/**
-	 * <div class="de">Negativ: Erreger konnte in Probe nicht nachgewiesen
-	 * werden</div> <div class="fr">Négatif: L’agent pathogène n’a pas pu être
-	 * dépisté dans l’échantillon</div>
-	 */
-	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN("NEG",
-			"Negative: Pathogen couldn't be determined in specimen");
+	POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN("POS",
+			"Positive: Pathogen found in specimen"), /**
+														 * <div class="de">
+														 * Negativ: Erreger
+														 * konnte in Probe nicht
+														 * nachgewiesen
+														 * werden</div>
+														 * <div class="fr">
+														 * Négatif: L’agent
+														 * pathogène n’a pas pu
+														 * être dépisté dans
+														 * l’échantillon</div>
+														 */
+	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN("NEG", "Negative: Pathogen couldn't be determined in specimen");
 	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
 	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
 
@@ -39,10 +45,10 @@ public enum ObservationInterpretationForImmunization {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ObservationInterpretationForImmunization(String code, String displayName) {
@@ -51,16 +57,16 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretationForImmunization getEnum(String code) {
-		for (ObservationInterpretationForImmunization x : values()) {
+		for (final ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -69,8 +75,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -84,8 +90,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -115,8 +121,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -141,7 +147,7 @@ public enum ObservationInterpretationForImmunization {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -155,17 +161,16 @@ public enum ObservationInterpretationForImmunization {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (ObservationInterpretationForImmunization x : values()) {
+		for (final ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

@@ -15,39 +15,52 @@ public enum SerologieForVACD {
 	/**
 	 * <div class="de">Windpocken</div> <div class="fr">Varicelle</div>
 	 */
-	VARICELLA_ZOSTER_VIRUS_AB_IGG("22602-7", "Varicella zoster virus Ab.IgG"),
-	/**
-	 * <div class="de">Masern</div> <div class="fr">Rougeole</div>
-	 */
-	MEASLES_VIRUS_AB_IGG("22502-9", "Measles virus Ab.IgG"),
-	/**
-	 * <div class="de">Mumps</div> <div class="fr">Oreillons</div>
-	 */
-	MUMPS_VIRUS_AB_IGG("22417-0", "Mumps virus Ab.IgG"),
-	/**
-	 * <div class="de">Röteln</div> <div class="fr">Rubéole</div>
-	 */
-	RUBELLA_VIRUS_AB_IGG("41763-4", "Rubella virus Ab.IgG"),
-	/**
-	 * <div class="de">Hepatitis A</div> <div class="fr">Hépatite A</div>
-	 */
-	HEPATITIS_A_VIRUS_AB_IGG("22313-1", "Hepatitis A virus Ab.IgG"),
-	/**
-	 * <div class="de">Hepatitis B</div> <div class="fr">Hépatite B</div>
-	 */
-	HEPATITIS_B_VIRUS_SURFACE_AB_IGG("16935-9", "Hepatitis B virus surface Ab.IgG"),
-	/**
-	 * <div class="de">FSME</div> <div class="fr">Encéphalite à tiques</div>
-	 */
+	VARICELLA_ZOSTER_VIRUS_AB_IGG("22602-7",
+			"Varicella zoster virus Ab.IgG"), /**
+												 * <div class="de">Masern</div>
+												 * <div class="fr">Rougeole
+												 * </div>
+												 */
+	MEASLES_VIRUS_AB_IGG("22502-9",
+			"Measles virus Ab.IgG"), /**
+										 * <div class="de">Mumps</div>
+										 * <div class="fr">Oreillons</div>
+										 */
+	MUMPS_VIRUS_AB_IGG("22417-0",
+			"Mumps virus Ab.IgG"), /**
+									 * <div class="de">Röteln</div>
+									 * <div class="fr">Rubéole</div>
+									 */
+	RUBELLA_VIRUS_AB_IGG("41763-4",
+			"Rubella virus Ab.IgG"), /**
+										 * <div class="de">Hepatitis A</div>
+										 * <div class="fr">Hépatite A</div>
+										 */
+	HEPATITIS_A_VIRUS_AB_IGG("22313-1",
+			"Hepatitis A virus Ab.IgG"), /**
+											 * <div class="de">Hepatitis B</div>
+											 * <div class="fr">Hépatite B</div>
+											 */
+	HEPATITIS_B_VIRUS_SURFACE_AB_IGG("16935-9",
+			"Hepatitis B virus surface Ab.IgG"), /**
+													 * <div class="de">FSME
+													 * </div> <div class="fr">
+													 * Encéphalite à
+													 * tiques</div>
+													 */
 	EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB("26061-2",
-			"European tick borne encephalitis virus Ab"),
-	/**
-	 * <div class="de">Gelbfieber</div> <div class="fr">Fièvre jaune</div>
-	 */
-	YELLOW_FEVER_VIRUS_AB("6589-6", "Yellow fever virus Ab"),
-	/**
-	 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
-	 */
+			"European tick borne encephalitis virus Ab"), /**
+															 * <div class="de">
+															 * Gelbfieber</div>
+															 * <div class="fr">
+															 * Fièvre
+															 * jaune</div>
+															 */
+	YELLOW_FEVER_VIRUS_AB("6589-6",
+			"Yellow fever virus Ab"), /**
+										 * <div class="de">Tetanus</div>
+										 * <div class="fr">Tétanos</div>
+										 */
 	CLOSTRIDIUM_TETANI_TOXIN_AB_IGG("58770-9", "Clostridium tetani toxin Ab.IgG");
 	public static final String VARICELLA_ZOSTER_VIRUS_AB_IGG_CODE = "22602-7";
 	public static final String MEASLES_VIRUS_AB_IGG_CODE = "22502-9";
@@ -71,10 +84,10 @@ public enum SerologieForVACD {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	SerologieForVACD(String code, String displayName) {
@@ -83,16 +96,16 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static SerologieForVACD getEnum(String code) {
-		for (SerologieForVACD x : values()) {
+		for (final SerologieForVACD x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -101,8 +114,8 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -116,8 +129,8 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -147,8 +160,8 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -173,7 +186,7 @@ public enum SerologieForVACD {
 	 * 
 	 * 
 	 * @param enumStr
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enum str</div>
 	 * @return true, if is enum of value set
 	 */
@@ -182,22 +195,21 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code is in this value set.</div> <div
-	 * class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="en">Checks if a given code is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String code) {
-		for (SerologieForVACD x : values()) {
+		for (final SerologieForVACD x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

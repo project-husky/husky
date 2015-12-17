@@ -13,8 +13,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum Pregnancies {
 
 	/**
-	 * <div class="de">Entbindungsdatum (klinische Schätzung)</div> <div
-	 * class="fr">Date de l’accouchement (estimation clinique)</div>
+	 * <div class="de">Entbindungsdatum (klinische Schätzung)</div>
+	 * <div class="fr">Date de l’accouchement (estimation clinique)</div>
 	 */
 	DELIVERY_DATE_CLINICAL_ESTIMATE("11778-8", "DELIVERY DATE (CLINICAL ESTIMATE)");
 	public static final String DELIVERY_DATE_CLINICAL_ESTIMATE_CODE = "11778-8";
@@ -31,10 +31,10 @@ public enum Pregnancies {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private Pregnancies(String code, String displayName) {
@@ -43,16 +43,16 @@ public enum Pregnancies {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Pregnancies getEnum(String code) {
-		for (Pregnancies x : values()) {
+		for (final Pregnancies x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -61,8 +61,8 @@ public enum Pregnancies {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -76,8 +76,8 @@ public enum Pregnancies {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -107,8 +107,8 @@ public enum Pregnancies {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -133,7 +133,7 @@ public enum Pregnancies {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -147,17 +147,16 @@ public enum Pregnancies {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (Pregnancies x : values()) {
+		for (final Pregnancies x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

@@ -14,28 +14,37 @@ public enum AllergiesAndIntolerances {
 
 	/**
 	 * <div class="de">Überempfindlichkeit des Immunsystems auf bestimmte
-	 * pharmazeutische Produkte (Arzneimittel).</div> <div
-	 * class="fr">Hyperréactivité du système immunitaire à certains produits
-	 * pharmaceutiques (médicaments)</div>
+	 * pharmazeutische Produkte (Arzneimittel).</div>
+	 * <div class="fr">Hyperréactivité du système immunitaire à certains
+	 * produits pharmaceutiques (médicaments)</div>
 	 */
-	DRUG_ALLERGY("DALG", "Drug Allergy"),
-	/**
-	 * <div class="de">Unerwünschte Reaktion des Immunsystems bei Anwendung
-	 * bestimmter Arzneimittel.</div> <div class="fr">Réaction indésirable du
-	 * système immunitaire lors de l’utilisation de certains médicaments</div>
-	 */
-	DRUG_INTOLERANCE("DINT", "Drug Intolerance"),
-	/**
-	 * <div class="de">Überempfindlichkeit des Immunsystems auf bestimmte Stoffe
-	 * in Nahrungsmitteln</div> <div class="fr">Hyperréactivité du système
-	 * immunitaire à certaines substances contenues dans des aliments</div>
-	 */
-	FOOD_ALLERGY("FALG", "Food Allergy"),
-	/**
-	 * <div class="de">Unerwünschte Reaktion des Immunsystems bei Einnahme
-	 * bestimmter Nahrungsmittel.</div> <div class="fr">Réaction indésirable du
-	 * système immunitaire en cas d’absorption de certains aliments.</div>
-	 */
+	DRUG_ALLERGY("DALG",
+			"Drug Allergy"), /**
+								 * <div class="de">Unerwünschte Reaktion des
+								 * Immunsystems bei Anwendung bestimmter
+								 * Arzneimittel.</div> <div class="fr">Réaction
+								 * indésirable du système immunitaire lors de
+								 * l’utilisation de certains médicaments</div>
+								 */
+	DRUG_INTOLERANCE("DINT",
+			"Drug Intolerance"), /**
+									 * <div class="de">Überempfindlichkeit des
+									 * Immunsystems auf bestimmte Stoffe in
+									 * Nahrungsmitteln</div>
+									 * <div class="fr">Hyperréactivité du
+									 * système immunitaire à certaines
+									 * substances contenues dans des
+									 * aliments</div>
+									 */
+	FOOD_ALLERGY("FALG",
+			"Food Allergy"), /**
+								 * <div class="de">Unerwünschte Reaktion des
+								 * Immunsystems bei Einnahme bestimmter
+								 * Nahrungsmittel.</div>
+								 * <div class="fr">Réaction indésirable du
+								 * système immunitaire en cas d’absorption de
+								 * certains aliments.</div>
+								 */
 	FOOD_INTOLERANCE("FINT", "Food Intolerance");
 	public static final String DRUG_ALLERGY_CODE = "DALG";
 	public static final String DRUG_INTOLERANCE_CODE = "DINT";
@@ -54,10 +63,10 @@ public enum AllergiesAndIntolerances {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private AllergiesAndIntolerances(String code, String displayName) {
@@ -66,16 +75,16 @@ public enum AllergiesAndIntolerances {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AllergiesAndIntolerances getEnum(String code) {
-		for (AllergiesAndIntolerances x : values()) {
+		for (final AllergiesAndIntolerances x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -84,8 +93,8 @@ public enum AllergiesAndIntolerances {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -99,8 +108,8 @@ public enum AllergiesAndIntolerances {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -130,8 +139,8 @@ public enum AllergiesAndIntolerances {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -156,7 +165,7 @@ public enum AllergiesAndIntolerances {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -170,17 +179,16 @@ public enum AllergiesAndIntolerances {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (AllergiesAndIntolerances x : values()) {
+		for (final AllergiesAndIntolerances x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

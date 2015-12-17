@@ -15,38 +15,42 @@ public enum HistoryOfPastIllness {
 	/**
 	 * <div class="de">Windpocken</div> <div class="fr">Varicelle</div>
 	 */
-	HO_CHICKENPOX("38907003", "H/O: chickenpox"),
-	/**
-	 * <div class="de">Masern</div> <div class="fr">Rougeole</div>
-	 */
-	HO_MEASLES("14189004", "H/O: measles"),
-	/**
-	 * <div class="de">Mumps</div> <div class="fr">Oreillons</div>
-	 */
-	HO_MUMPS("36989005", "H/O: mumps"),
-	/**
-	 * <div class="de">Röteln</div> <div class="fr">Rubéole</div>
-	 */
-	HO_RUBELLA("36653000", "H/O: rubella"),
-	/**
-	 * <div class="de">Hepatitis A</div> <div class="fr">Hépatite A</div>
-	 */
-	HEPATITIS_A("40468003", "Hepatitis A"),
-	/**
-	 * <div class="de">Hepatitis B</div> <div class="fr">Hépatite B</div>
-	 */
-	HEPATITIS_B("66071002", "Hepatitis B"),
-	/**
-	 * <div class="de">FSM</div> <div class="fr">Encéphalite à tiques</div>
-	 */
-	CENTRAL_EUROPEAN_ENCEPHALITIS("16901001", "Central European encephalitis"),
-	/**
-	 * <div class="de">Gelbfieber</div> <div class="fr">Fièvre jaune</div>
-	 */
-	YELLOW_FEVER("16541001", "Yellow Fever"),
-	/**
-	 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
-	 */
+	HO_CHICKENPOX("38907003",
+			"H/O: chickenpox"), /**
+								 * <div class="de">Masern</div>
+								 * <div class="fr">Rougeole</div>
+								 */
+	HO_MEASLES("14189004", "H/O: measles"), /**
+											 * <div class="de">Mumps</div>
+											 * <div class="fr">Oreillons</div>
+											 */
+	HO_MUMPS("36989005", "H/O: mumps"), /**
+										 * <div class="de">Röteln</div>
+										 * <div class="fr">Rubéole</div>
+										 */
+	HO_RUBELLA("36653000", "H/O: rubella"), /**
+											 * <div class="de">Hepatitis A</div>
+											 * <div class="fr">Hépatite A</div>
+											 */
+	HEPATITIS_A("40468003", "Hepatitis A"), /**
+											 * <div class="de">Hepatitis B</div>
+											 * <div class="fr">Hépatite B</div>
+											 */
+	HEPATITIS_B("66071002",
+			"Hepatitis B"), /**
+							 * <div class="de">FSM</div>
+							 * <div class="fr">Encéphalite à tiques</div>
+							 */
+	CENTRAL_EUROPEAN_ENCEPHALITIS("16901001",
+			"Central European encephalitis"), /**
+												 * <div class="de">Gelbfieber
+												 * </div> <div class="fr">Fièvre
+												 * jaune</div>
+												 */
+	YELLOW_FEVER("16541001", "Yellow Fever"), /**
+												 * <div class="de">Tetanus</div>
+												 * <div class="fr">Tétanos</div>
+												 */
 	TETANUS("76902006", "Tetanus");
 	public static final String HO_CHICKENPOX_CODE = "38907003";
 	public static final String HO_MEASLES_CODE = "14189004";
@@ -70,10 +74,10 @@ public enum HistoryOfPastIllness {
 	 * mittels eines Codes und einem Display Name</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private HistoryOfPastIllness(String code, String displayName) {
@@ -82,16 +86,16 @@ public enum HistoryOfPastIllness {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 * 
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static HistoryOfPastIllness getEnum(String code) {
-		for (HistoryOfPastIllness x : values()) {
+		for (final HistoryOfPastIllness x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -100,8 +104,8 @@ public enum HistoryOfPastIllness {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 * 
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -115,8 +119,8 @@ public enum HistoryOfPastIllness {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -146,8 +150,8 @@ public enum HistoryOfPastIllness {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 * 
 	 * @return <div class="en">the code</div>
 	 */
@@ -172,7 +176,7 @@ public enum HistoryOfPastIllness {
 	 * 
 	 * 
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -186,17 +190,16 @@ public enum HistoryOfPastIllness {
 	 * vorhanden ist.</div>
 	 * 
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
-		for (HistoryOfPastIllness x : values()) {
+		for (final HistoryOfPastIllness x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

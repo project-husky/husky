@@ -111,13 +111,14 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 	 * @return <div class="en">the status of the document</div>
 	 *         <div class="de">der Dokumentenstatus</div>
 	 */
-	public static AvailabilityStatus getByOhtAvailabilityStatusType(
-			AvailabilityStatusType availabilityStatusType) {
-		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED_LITERAL))
-			return AvailabilityStatus.APPROVED;
-		if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED_LITERAL))
-			return AvailabilityStatus.DEPRECATED;
-		return null;
+	public static AvailabilityStatus getByOhtAvailabilityStatusType(AvailabilityStatusType availabilityStatusType) {
+		AvailabilityStatus retVal = null;
+		if (availabilityStatusType.equals(AvailabilityStatusType.APPROVED_LITERAL)) {
+			retVal = AvailabilityStatus.APPROVED;
+		} else if (availabilityStatusType.equals(AvailabilityStatusType.DEPRECATED_LITERAL)) {
+			retVal = AvailabilityStatus.DEPRECATED;
+		}
+		return retVal;
 	}
 
 	/**
@@ -178,8 +179,7 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -256,5 +256,4 @@ public enum AvailabilityStatus implements CodedMetadataEnumInterface {
 		}
 		return false;
 	}
-
 }
