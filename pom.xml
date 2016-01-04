@@ -597,6 +597,33 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					</reportPlugins>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<useDefaultManifestFile>true</useDefaultManifestFile>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+						</manifestEntries>
+						<manifestSections>
+							<manifestSection>
+								<name>ProjektInfos</name>
+								<manifestEntries>
+									<Projekt>${project.name}</Projekt>
+									<Version>${project.version}</Version>
+									<GroupId>${project.groupId}</GroupId>
+									<ArtifactId>${project.artifactId}</ArtifactId>
+									<Url>https://sourceforge.net/projects/ehealthconnector/</Url>
+								</manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 
 	</build>
