@@ -3,7 +3,7 @@
 	<groupId>org.ehealth_connector.communication.ch</groupId>
 	<artifactId>ehealth_connector-communication-ch</artifactId>
 	<name>eHealthConnector Communication CH</name>
-	
+
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>
 		<artifactId>ehealth_connector-communication</artifactId>
@@ -21,7 +21,7 @@
 			<artifactId>ehealth_connector-common-ch</artifactId>
 			<version>1.3-SNAPSHOT</version>
 		</dependency>
-		
+
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -57,4 +57,44 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>ehc4dotnet</id>
+			<!-- activation> 
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation -->
+			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+
+						<configuration>
+							<target>
+								<exec executable="ikvmc">
+									<arg value="-target:library" />
+									<arg value="-out:${project.build.directory}/${artifactId}-${version}.dll" />
+									<arg value="${project.build.directory}/${artifactId}-${version}.jar" />
+								</exec>
+							</target>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>

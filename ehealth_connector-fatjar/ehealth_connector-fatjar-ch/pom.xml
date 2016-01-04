@@ -37,7 +37,7 @@
 					<descriptors>
 						<descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
 					</descriptors>
-					<finalName>ehealthconnector</finalName>
+					<finalName>ehealthconnector-ch</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
@@ -77,6 +77,11 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet</id>
+			<!-- activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>
 				<plugins>
@@ -88,14 +93,20 @@
 							<target>
 								<exec executable="ikvmc">
 									<arg value="-target:library" />
-									<arg value="-out:${project.build.directory}/ehealthconnector.dll" />
-									<arg value="${project.build.directory}/ehealthconnector.jar" />
+									<arg value="-debug" />
+									<arg value="-out:${project.build.directory}/ehealthconnector-ch.dll" />
+									<arg value="${project.build.directory}/ehealthconnector-ch.jar" />
 								</exec>
 							</target>
 						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
+						<executions>
+							<execution>
+							<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
