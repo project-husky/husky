@@ -27,7 +27,7 @@ public class Destination {
 	/**
 	 * <div class="en">The key store for TLS</div>
 	 */
-	private String keyStore = null;
+	private String keyStore;
 
 	/**
 	 * <div class="en">The key store password for TLS</div>
@@ -70,14 +70,26 @@ public class Destination {
 	private String trustStorePassword;
 
 	/**
-	 * URI for the destination
+	 * <div class="en">URI for the destination</div>
 	 */
 	private URI uri;
+
+	/**
+	 * <div class="en">The key store type</div>
+	 */
+	private String keyStoreType;
+
+	/**
+	 * <div class="en">The trust store type</div>
+	 */
+	private String trustStoreType;
 
 	/**
 	 * <div class="en">Communication Endpoint for any transaction.</div>
 	 */
 	public Destination() {
+		keyStoreType = "jks";
+		trustStoreType = "jks";
 	}
 
 	/**
@@ -91,6 +103,8 @@ public class Destination {
 	public Destination(String senderOrganizationalOid, URI uri) {
 		this.uri = uri;
 		this.senderOrganizationalOid = senderOrganizationalOid;
+		keyStoreType = "jks";
+		trustStoreType = "jks";
 	}
 
 	/**
@@ -106,10 +120,39 @@ public class Destination {
 	 * @param keyStorePassword
 	 *            the password for the keystore file
 	 */
-	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
-			String keyStorePassword) {
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore, String keyStorePassword) {
 		this(senderOrganizationalOid, uri);
-		setKeyStore(keyStore, keyStorePassword);
+		this.keyStore = keyStore;
+		this.keyStorePassword = keyStorePassword;
+		this.trustStore = keyStore;
+		this.trustStorePassword = keyStorePassword;
+		setKeyStore();
+	}
+
+	/**
+	 * Communication Endpoint for a TLS-secured transaction with a single
+	 * keystore that combines keystore and truststore.
+	 * 
+	 * @param senderOrganizationalOid
+	 *            Your OID
+	 * @param uri
+	 *            URI of the communication endpoint
+	 * @param keyStore
+	 *            path to the keystore file
+	 * @param keyStorePassword
+	 *            the password for the keystore file
+	 * @param trustStoreType
+	 *            the type of the truststore file (default: jks)
+	 */
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore, String keyStorePassword, String keyStoreType) {
+		this(senderOrganizationalOid, uri);
+		this.keyStore = keyStore;
+		this.keyStorePassword = keyStorePassword;
+		this.keyStoreType = keyStoreType;
+		this.trustStore = keyStore;
+		this.trustStorePassword = keyStorePassword;
+		this.trustStoreType = keyStoreType;
+		setKeyStore();
 	}
 
 	/**
@@ -130,13 +173,47 @@ public class Destination {
 	 * @param trustStorePassword
 	 *            the password for the truststore file
 	 */
-	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
-			String keyStorePassword, String trustStore, String trustStorePassword) {
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore, String keyStorePassword, String trustStore,
+			String trustStorePassword) {
 		this(senderOrganizationalOid, uri);
 		this.keyStore = keyStore;
 		this.keyStorePassword = keyStorePassword;
 		this.trustStore = trustStore;
 		this.trustStorePassword = trustStorePassword;
+		setKeyStore();
+	}
+
+	/**
+	 * Communication Endpoint for a TLS-secured transaction with a seperate
+	 * keystore and truststore.
+	 * 
+	 * @param senderOrganizationalOid
+	 *            Your OID
+	 * @param uri
+	 *            URI of the communication endpoint
+	 * @param keyStore
+	 *            path to the keystore file
+	 * @param keyStorePassword
+	 *            the password for the keystore file
+	 * @param keyStoreType
+	 *            the type of the keystore file (default: jks)
+	 * @param trustStore
+	 *            path to the truststore file
+	 * @param trustStorePassword
+	 *            the password for the truststore file
+	 * @param trustStoreType
+	 *            the type of the truststore file (default: jks)
+	 */
+	public Destination(String senderOrganizationalOid, URI uri, String keyStore, String keyStorePassword, String keyStoreType,
+			String trustStore, String trustStorePassword, String trustStoreType) {
+		this(senderOrganizationalOid, uri);
+		this.keyStore = keyStore;
+		this.keyStorePassword = keyStorePassword;
+		this.keyStoreType = keyStoreType;
+		this.trustStore = trustStore;
+		this.trustStorePassword = trustStorePassword;
+		this.trustStoreType = trustStoreType;
+		setKeyStore();
 	}
 
 	/**
@@ -225,6 +302,24 @@ public class Destination {
 	}
 
 	/**
+	 * Method to get
+	 * 
+	 * @return the keyStoreType
+	 */
+	public String getKeyStoreType() {
+		return keyStoreType;
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the trustStoreType
+	 */
+	public String getTrustStoreType() {
+		return trustStoreType;
+	}
+
+	/**
 	 * Sets the path to the key store
 	 * 
 	 * @param keyStore
@@ -293,15 +388,15 @@ public class Destination {
 	}
 
 	/**
-	 * <div class="en">Sets the trust store password.</div> <div
-	 * class="de">Setzt trust store password.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * <div class="en">Sets the trust store password.</div>
+	 * <div class="de">Setzt trust store password.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 * 
 	 * 
 	 * @param trustStorePassword
-	 *            <div class="en">the new trust store password</div> <div
-	 *            class="de">das neue trust store password.</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new trust store password</div>
+	 *            <div class="de">das neue trust store password.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTrustStorePassword(String trustStorePassword) {
 		this.trustStorePassword = trustStorePassword;
@@ -312,23 +407,37 @@ public class Destination {
 	}
 
 	/**
-	 * <div class="en">Sets the key store for TLS communication
+	 * Method to set
 	 * 
-	 * @param keyStore
-	 * @param keyStorePassword
-	 *            </div>
+	 * @param keyStoreType
+	 *            the keyStoreType to set
 	 */
-	private void setKeyStore(String keyStore, String keyStorePassword) {
-		this.keyStore = keyStore;
-		this.keyStorePassword = keyStorePassword;
-		trustStore = keyStore;
-		trustStorePassword = keyStorePassword;
+	public void setKeyStoreType(String keyStoreType) {
+		this.keyStoreType = keyStoreType;
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param trustStoreType
+	 *            the trustStoreType to set
+	 */
+	public void setTrustStoreType(String trustStoreType) {
+		this.trustStoreType = trustStoreType;
+	}
+
+	/**
+	 * <div class="en">Sets the key and trust store for TLS communication</div>
+	 */
+	private void setKeyStore() {
 
 		if (keyStore != null) {
 			System.setProperty("javax.net.ssl.keyStore", keyStore);
 			System.setProperty("javax.net.ssl.keyStorePassword", keyStorePassword);
+			System.setProperty("javax.net.ssl.keyStoreType", keyStoreType);
 			System.setProperty("javax.net.ssl.trustStore", trustStore);
 			System.setProperty("javax.net.ssl.trustStorePassword", trustStorePassword);
+			System.setProperty("javax.net.ssl.trustStoreType", trustStoreType);
 		}
 	}
 
