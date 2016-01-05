@@ -11,18 +11,19 @@
 
 
 	<dependencies>
+	
+	<!-- hl7 -->
+		<dependency>
+			<groupId>org.hl7.v3</groupId>
+			<artifactId>hl7v3-core</artifactId>
+		</dependency>
+		
+	
 
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
 			<version>1.3-SNAPSHOT</version>
-		</dependency>
-
-
-		<!-- hl7 -->
-		<dependency>
-			<groupId>org.hl7.v3</groupId>
-			<artifactId>hl7v3-core</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe xds -->
@@ -174,7 +175,6 @@
 			<type>mar</type>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
@@ -300,8 +300,8 @@
 							<target>
 								<exec executable="ikvmc">
 									<arg value="-target:library" />
-									<arg value="-out:${project.build.directory}/${artifactId}-${version}.dll" />
-									<arg value="${project.build.directory}/${artifactId}-${version}.jar" />
+									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
 								</exec>
 							</target>
 						</configuration>

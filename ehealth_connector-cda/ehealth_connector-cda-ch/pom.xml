@@ -41,8 +41,8 @@
 							<target>
 								<exec executable="ikvmc">
 									<arg value="-target:library" />
-									<arg value="-out:${project.build.directory}/${artifactId}-${version}.dll" />
-									<arg value="${project.build.directory}/${artifactId}-${version}.jar" />
+									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
 								</exec>
 							</target>
 						</configuration>
