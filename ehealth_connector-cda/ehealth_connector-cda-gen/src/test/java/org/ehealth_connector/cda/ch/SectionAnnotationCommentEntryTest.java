@@ -20,6 +20,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -73,7 +74,7 @@ public class SectionAnnotationCommentEntryTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry#setContentIdReference(java.lang.String)}
+	 * {@link org.ehealth_connector.cda.SectionAnnotationCommentEntry#setContentIdReference(java.lang.String)}
 	 * .
 	 * 
 	 * @throws XPathExpressionException

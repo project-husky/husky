@@ -20,9 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.ProblemEntry;
-import org.ehealth_connector.cda.ch.enums.ProblemType;
-import org.ehealth_connector.cda.ch.enums.ProblemsSpecialConditions;
+import org.ehealth_connector.cda.enums.ProblemType;
+import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.Util;
@@ -38,7 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * 
  * use org.ehealth_connector.cda.ProblemEntry whenever possible
  */
-public class Problem extends ProblemEntry {
+public class Problem extends AbstractProblemEntry {
 
 	/**
 	 * Instantiates a new problem entry.

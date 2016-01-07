@@ -12,12 +12,7 @@
  */
 package org.ehealth_connector.cda.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.ch.enums.SectionsVACD;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
@@ -30,8 +25,6 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -43,16 +36,15 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public class CdaUtilTest {
 
-	private String testId;
-	private Identificator testIdentiicator;
-	private EntryRelationship testEr;
-	private String testRef;
-	private SectionsVACD testPrefix;
-	private int testI;
-	private int testJ;
-	private StructuredBody testSb;
-	private Section testS;
-	private String testText;
+	protected String testId;
+	protected Identificator testIdentiicator;
+	protected EntryRelationship testEr;
+	protected String testRef;
+	protected int testI;
+	protected int testJ;
+	protected StructuredBody testSb;
+	protected Section testS;
+	protected String testText;
 
 	/**
 	 * Method implementing
@@ -73,18 +65,15 @@ public class CdaUtilTest {
 		act.setText(ed);
 		testEr.setAct(act);
 		testRef = "ABCDEFGHIJKL";
-		testPrefix = SectionsVACD.ALLERGIES_REACTIONS;
 
 		testSb = CDAFactory.eINSTANCE.createStructuredBody();
 		testSb.setLanguageCode(DatatypesFactory.eINSTANCE.createCS("de-CH"));
-		final InfrastructureRootTypeId irtid1 = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
+		final InfrastructureRootTypeId irtid1 = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
 		irtid1.setRoot("1.2.3.4.5.6.7");
 		irtid1.setExtension("1234567890");
 		testSb.setTypeId(irtid1);
 		testS = CDAFactory.eINSTANCE.createSection();
-		final InfrastructureRootTypeId irtid2 = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
+		final InfrastructureRootTypeId irtid2 = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
 		irtid2.setRoot("7.6.5.4.3.2.1");
 		irtid2.setExtension("0987654321");
 		testS.setTypeId(irtid2);
@@ -93,64 +82,6 @@ public class CdaUtilTest {
 
 		testI = 1111;
 		testJ = 2222;
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUuidVacd(java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testCreateUuidVacd() {
-		final II ref = CdaUtil.createUuidVacd(testId);
-
-		assertEquals(testId, ref.getExtension());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUuidVacdIdentificator(org.ehealth_connector.common.Identificator)}
-	 * .
-	 */
-	@Test
-	public void testCreateUuidVacdIdentificator() {
-		final II ref = CdaUtil.createUuidVacdIdentificator(testIdentiicator);
-		assertEquals(CodeSystems.GLN.getCodeSystemId(), ref.getRoot());
-		assertEquals(testId, ref.getExtension());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, int, int, org.ehealth_connector.cda.ch.enums.SectionsVACD)}
-	 * .
-	 */
-	@Test
-	public void testUpdateRefIfCommentEntryRelationshipIntIntSectionsVACD() {
-		final EntryRelationship ref = CdaUtil.updateRefIfComment(testEr, testI, testJ, testPrefix);
-		assertNotNull(ref);
-		assertTrue(ref.getInversionInd());
-		assertNotNull(ref.getAct());
-		final ED ed = ref.getAct().getText();
-		assertNotNull(ed);
-		assertEquals(testText, ed.getText());
-		final TEL refRef = ed.getReference();
-		assertNotNull(refRef);
-		final String refVal = refRef.getValue();
-		assertTrue(refVal.startsWith("#"));
-		assertTrue(refVal.endsWith("1"));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, java.lang.String, org.ehealth_connector.cda.ch.enums.SectionsVACD)}
-	 * .
-	 */
-	@Test
-	public void testUpdateRefIfCommentEntryRelationshipStringSectionsVACD() {
-		final EntryRelationship ref = CdaUtil.updateRefIfComment(testEr, testRef, testPrefix);
-		assertNotNull(ref);
-		assertTrue(ref.getInversionInd());
-
 	}
 
 	/**

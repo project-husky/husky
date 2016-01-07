@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda;
 
-import org.ehealth_connector.cda.ch.SectionAnnotationCommentEntry;
 import org.ehealth_connector.common.utils.Util;
 
 /**

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.ehealth_connector.cda.ch.testhelper.TestUtils;
+import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 
