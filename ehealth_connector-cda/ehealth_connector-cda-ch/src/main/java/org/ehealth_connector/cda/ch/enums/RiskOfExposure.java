@@ -17,6 +17,8 @@ package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
@@ -273,14 +275,8 @@ public enum RiskOfExposure {
 	/** The code. */
 	private String code;
 
-	/** The display name german. */
-	private String displayNameDe;
-
-	/** The display name french. */
-	private String displayNameFr;
-
-	/** The display name italian. */
-	private String displayNameIt;
+	/** The display names per language */
+	private Map<LanguageCode, String> displayNames;
 
 	/** The Code valid from. */
 	private Date validFrom;
@@ -292,7 +288,7 @@ public enum RiskOfExposure {
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantsiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
-	 * 
+	 *
 	 * @param code
 	 *            <br>
 	 *            <div class="de"> code</div>
@@ -310,9 +306,12 @@ public enum RiskOfExposure {
 	private RiskOfExposure(String code, String displayNameDe, String displayNameFr, String displayNameIt, String validFrom,
 			String validTo) {
 		this.code = code;
-		this.displayNameDe = displayNameDe;
-		this.displayNameFr = displayNameFr;
-		this.displayNameIt = displayNameIt;
+
+		displayNames = new HashMap<>();
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+
 		if ((validFrom != null) && !"".equals(validFrom)) {
 			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
@@ -324,7 +323,7 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
-	 * 
+	 *
 	 * @param code
 	 *            <br>
 	 *            <div class="de"> code</div>
@@ -342,25 +341,17 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
-	 * 
+	 *
 	 * @param languageCode
 	 *            the language code
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode(LanguageCode languageCode) {
 		String displayName = null;
-		if (languageCode != null) {
-			switch (languageCode) {
-			case GERMAN:
-				displayName = displayNameDe;
-				break;
-			case FRENCH:
-				displayName = displayNameFr;
-				break;
-			case ITALIAN:
-				displayName = displayNameIt;
-				break;
-			}
+		if ((languageCode != null) && (displayNames.get(languageCode) != null)) {
+			displayName = displayNames.get(languageCode);
+		} else {
+			displayName = displayNames.get(LanguageCode.GERMAN);
 		}
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
@@ -369,7 +360,7 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
@@ -379,7 +370,7 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
 	 * die code system id.</div>
-	 * 
+	 *
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
@@ -389,7 +380,7 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>.
-	 * 
+	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -397,51 +388,34 @@ public enum RiskOfExposure {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
-	 * 
-	 * @return <div class="en">the display name</div>
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * language is unknow, german name is returned</div> <div class="de">Liefert
+	 * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
+	 * standartmässig deutsch geliefert.</div> @param <div class="en">The
+	 * language code.</div> @return <div class="en">the display name in the
+	 * defined language</div>
+	 *
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
 	 */
-	public String getDisplayName() {
-		return displayNameDe;
-	}
-
-	/**
-	 * <div class="en">Gets the german display name.</div>
-	 * <div class="de">Liefert display name in deutscher Sprache.</div>
-	 * 
-	 * @return <div class="en">the display name</div>
-	 */
-	public String getDisplayNameDe() {
-		return displayNameDe;
-	}
-
-	/**
-	 * <div class="en">Gets the french display name.</div>
-	 * <div class="de">Liefert display name in französischer Sprache.</div>
-	 * 
-	 * @return <div class="en">the display name</div>
-	 */
-	public String getDisplayNameFr() {
-		return displayNameFr;
-	}
-
-	/**
-	 * <div class="en">Gets the italian display name.</div>
-	 * <div class="de">Liefert display name in italienischer Sprache.</div>
-	 * 
-	 * @return <div class="en">the display name</div>
-	 */
-	public String getDisplayNameIt() {
-		return displayNameIt;
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = null;
+		if ((languageCode != null) && (displayNames.get(languageCode) != null)) {
+			displayName = displayNames.get(languageCode);
+		} else {
+			displayName = displayNames.get(LanguageCode.GERMAN);
+		}
+		return displayName;
 	}
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param enumName
 	 *            <br>
 	 *            <div class="de"> enumName</div>
@@ -455,7 +429,7 @@ public enum RiskOfExposure {
 	 * <div class="en">Checks if a given code value is in this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
 	 * vorhanden ist.</div>
-	 * 
+	 *
 	 * @param codeValue
 	 *            <br>
 	 *            <div class="de"> code</div>
@@ -472,7 +446,7 @@ public enum RiskOfExposure {
 
 	/**
 	 * Checks if the code is valid now.
-	 * 
+	 *
 	 * @return true, if is valid
 	 */
 	public boolean isValid() {
@@ -481,7 +455,7 @@ public enum RiskOfExposure {
 
 	/**
 	 * Checks if the code is valid for the specified date
-	 * 
+	 *
 	 * @param date
 	 *            the date
 	 * @return true, if is valid
