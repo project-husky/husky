@@ -158,7 +158,7 @@ are ok.</description>
 
 	<profiles>
 		<profile>
-			<id>ehc4dotnet</id>
+			<id>ehc4dotnet-disabled</id>
 			<!-- activation> <os> <family>Windows</family> </os> </activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>

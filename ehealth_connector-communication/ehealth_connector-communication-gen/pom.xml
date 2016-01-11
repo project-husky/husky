@@ -282,7 +282,7 @@
 	
 	<profiles>
 		<profile>
-			<id>ehc4dotnet</id>
+			<id>ehc4dotnet-disabled</id>
 			<!-- activation>
 				<os>
 					<family>Windows</family>
