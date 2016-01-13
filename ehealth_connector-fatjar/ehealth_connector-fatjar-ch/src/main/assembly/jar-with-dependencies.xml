@@ -25,10 +25,12 @@
 		<dependencySet>
 			<useProjectArtifact>false</useProjectArtifact>
 			<useTransitiveDependencies>true</useTransitiveDependencies>
-			<unpack>false</unpack>
+			<unpack>true</unpack>
 			<scope>runtime</scope>
 			<outputDirectory>/</outputDirectory>
-			<includes></includes>
+			<includes>
+				<include>*:jar</include>
+			</includes>
 		</dependencySet>
 	</dependencySets>
 

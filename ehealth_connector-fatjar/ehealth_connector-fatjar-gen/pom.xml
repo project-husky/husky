@@ -108,6 +108,7 @@
 								<exec executable="ikvmc">
 									<arg value="-version:${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.0" />
 									<arg value="-target:library" />
+									<arg value="-nowarn:warning" />
 									<arg value="-out:${project.build.directory}/ehealthconnector.dll" />
 									<arg value="${project.build.directory}/ehealthconnector.jar" />
 								</exec>
