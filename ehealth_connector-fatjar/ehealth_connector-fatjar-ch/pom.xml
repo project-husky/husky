@@ -14,6 +14,13 @@
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.ehealth_connector.communication.ch</groupId>
+			<artifactId>ehealth_connector-communication-ch</artifactId>
+			<version>1.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<resources>
@@ -77,31 +84,41 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet</id>
-			<!-- activation>
-				<os>
-					<family>Windows</family>
-				</os>
-			</activation -->
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>
 				<plugins>
-
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>parse-version</id>
+								<goals>
+									<goal>parse-version</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
 						<configuration>
+							<property name="mvnValue" value="${project.version}" />
 							<target>
 								<exec executable="ikvmc">
+								    <arg value="-version:${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.0" />
 									<arg value="-target:library" />
 									<arg value="-debug" />
 									<arg value="-out:${project.build.directory}/ehealthconnector-ch.dll" />
 									<arg value="${project.build.directory}/ehealthconnector-ch.jar" />
 								</exec>
+								<copy failonerror="false" file="${project.build.directory}/ehealthconnector-ch.dll" tofile="${basedir}../../../../demo/dotnet/eHealthConnectorDemo/lib/ehealthconnector-ch.dll" />
 							</target>
 						</configuration>
 						<executions>
 							<execution>
-							<phase>package</phase>
+								<phase>package</phase>
 								<goals>
 									<goal>run</goal>
 								</goals>
@@ -113,11 +130,4 @@
 		</profile>
 	</profiles>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.ehealth_connector.communication.ch</groupId>
-			<artifactId>ehealth_connector-communication-ch</artifactId>
-			<version>1.3-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
 </project>

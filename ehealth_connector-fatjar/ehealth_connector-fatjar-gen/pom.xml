@@ -83,31 +83,41 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet</id>
-			<!-- activation>
-				<os>
-					<family>Windows</family>
-				</os>
-			</activation -->
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>parse-version</id>
+								<goals>
+									<goal>parse-version</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-
 						<configuration>
 							<target>
 								<exec executable="ikvmc">
+									<arg value="-version:${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.0" />
 									<arg value="-target:library" />
 									<arg value="-out:${project.build.directory}/ehealthconnector.dll" />
 									<arg value="${project.build.directory}/ehealthconnector.jar" />
 								</exec>
+								<copy failonerror="false" file="${project.build.directory}/ehealthconnector.dll" tofile="${basedir}../../../../demo/dotnet/eHealthConnectorDemo/lib/ehealthconnector.dll" />
 							</target>
 						</configuration>
 						<executions>
 							<execution>
-							<phase>package</phase>
+								<id>1</id>
+								<phase>package</phase>
 								<goals>
 									<goal>run</goal>
 								</goals>
