@@ -6,7 +6,7 @@
 	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.EnhancedPatternLayout">
 			<param name="ConversionPattern" value="%p %c{1.} %x - %m%n" />
-		</layout> />
+		</layout>
 	</appender>
 
 	<!-- Root Logger -->
