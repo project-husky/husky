@@ -1294,9 +1294,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		CHPackage.eINSTANCE.eClass();
 		// fix missing extension values in MDHT model.
 		for (final II templateId : getDoc().getTemplateIds()) {
-			if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH-VACD");
-			}
+//			if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
+//				templateId.setExtension("CDA-CH-VACD");
+//			}
 			if (AbstractCdaCh.OID_MAIN.equals(templateId.getRoot())) {
 				templateId.setExtension("CDA-CH");
 			}

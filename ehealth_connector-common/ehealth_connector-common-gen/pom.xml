@@ -21,27 +21,6 @@ are ok.</description>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		<!-- eclipse stuff -->
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.common</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl.ecore</artifactId>
-		</dependency>
 		<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
 		<dependency>
 			<groupId>net.sourceforge.lpg</groupId>
@@ -53,22 +32,9 @@ are ok.</description>
 			<artifactId>hapi-fhir-structures-dstu2</artifactId>
 		</dependency>
 
-		<!-- open health tools mdht -->
 		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.hl7.datatypes</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.hl7.rim</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.mdht</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.hl7.vocab</artifactId>
+				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
+				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe -->
