@@ -16,10 +16,12 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractAllergyConcern;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
+import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
@@ -42,8 +44,14 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 	 * @param section
 	 *            the section
 	 */
-	public AllergyConcernChTextBuilder(List<AbstractAllergyConcern> problemConcerns, ContentIdPrefix section) {
-		super(problemConcerns, section);
+	public AllergyConcernChTextBuilder(List<AllergyConcern> problemConcerns, ContentIdPrefix section) {
+		super(toAbstracAllergyConcernList(problemConcerns), section);
+	}
+
+	private static List<AbstractAllergyConcern> toAbstracAllergyConcernList(List<AllergyConcern> allergyProblemConcerns) {
+		final List<AbstractAllergyConcern> retVal = new ArrayList<>();
+		retVal.addAll(allergyProblemConcerns);
+		return retVal;
 	}
 
 	/**

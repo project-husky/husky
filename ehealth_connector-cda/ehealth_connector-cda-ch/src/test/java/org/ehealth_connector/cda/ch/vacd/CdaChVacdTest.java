@@ -98,20 +98,20 @@ public class CdaChVacdTest extends TestUtils {
 	private Immunization immunization1;
 	private ActiveProblemConcern apce1;
 	private PastProblemConcern ppc1;
-	private AbstractAllergyConcern ac1;
+	private AllergyConcern ac1;
 	private ImmunizationRecommendation immunizationRecommendation1;
 	private Problem problem2;
 	private AbstractAllergyProblem allergyProblem1;
 
 	private GestationalAge cr1;
 	private LaboratoryObservation lss1;
-	private AbstractPregnancyHistory ph1;
+	private PregnancyHistory ph1;
 	private Immunization immunization2;
 	private PastProblemConcern ppc2;
 	private ActiveProblemConcern apce2;
-	private AbstractAllergyConcern ac2;
+	private AllergyConcern ac2;
 	private LaboratoryObservation lss2;
-	private AbstractPregnancyHistory ph2;
+	private PregnancyHistory ph2;
 	private ImmunizationRecommendation immunizationRecommendation2;
 	private Code whoAtcCode;
 
@@ -179,8 +179,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 4
-	public AbstractAllergyConcern createAllergyConcern() {
-		final AbstractAllergyConcern a = new AllergyConcern();
+	public AllergyConcern createAllergyConcern() {
+		final AllergyConcern a = new AllergyConcern();
 		a.addId(id1);
 		a.setStart(startDate);
 		a.setEnd(endDate);
@@ -307,8 +307,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	// 9
-	public AbstractPregnancyHistory createPregnancy() {
-		final AbstractPregnancyHistory p = new PregnancyHistory();
+	public PregnancyHistory createPregnancy() {
+		final PregnancyHistory p = new PregnancyHistory();
 		p.setEstimatedBirthDate(startDate);
 		return p;
 	}

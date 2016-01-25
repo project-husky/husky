@@ -16,6 +16,8 @@
 
 package org.ehealth_connector.common.enums;
 
+import org.ehealth_connector.valueset.enums.IdentityDomain;
+
 /**
  * Bekannte und häufig gebrauchte Identifikationsdomänen
  * <ul>

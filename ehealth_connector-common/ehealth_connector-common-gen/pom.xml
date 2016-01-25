@@ -22,10 +22,6 @@ are ok.</description>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
-		<dependency>
-			<groupId>net.sourceforge.lpg</groupId>
-			<artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
@@ -94,6 +90,11 @@ are ok.</description>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ehealth_connector</groupId>
+			<artifactId>ehealth_connector-valueset-api</artifactId>
+			<version>1.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

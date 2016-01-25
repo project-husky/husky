@@ -22,9 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.AbstractAllergyConcern;
 import org.ehealth_connector.cda.AbstractCodedResults;
-import org.ehealth_connector.cda.AbstractPregnancyHistory;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -252,7 +250,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void addAllergyConcern(AbstractAllergyConcern allergyConcern) {
+	public void addAllergyConcern(AllergyConcern allergyConcern) {
 		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
 
 		// find or create (and add) the Section
@@ -507,7 +505,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * @param pregnancy
 	 *            the pregnancy history
 	 */
-	public void addPregnancyHistory(AbstractPregnancyHistory pregnancy) {
+	public void addPregnancyHistory(PregnancyHistory pregnancy) {
 		org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection phs;
 		SimpleTextBuilder sb;
 
@@ -635,11 +633,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	public String generateNarrativeTextActiveProblemConcerns() {
 		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
 		// Convert from the specific PastProblemConcern Type to the more
-		// genearal PastProblemConcern
-		for (final ActiveProblemConcern prob : getActiveProblemConcerns()) {
-			problemConcernEntryList.add(prob);
-		}
-
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(getActiveProblemConcerns());
 		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
@@ -679,12 +674,10 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 */
 	public String generateNarrativeTextPastProblemConcernEntries() {
 		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
-		// Convert from the specific PastProblemConcern Type to the more
-		// genearal PastProblemConcern
-		for (final PastProblemConcern prob : getPastProblemConcerns()) {
-			problemConcernEntryList.add(prob);
-		}
 
+		// Convert from the specific PastProblemConcern Type to the more
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(getPastProblemConcerns());
 		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(problemConcernEntryList,
 				SectionsVACD.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
@@ -720,7 +713,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * 
 	 * @return the allergy problem concerns
 	 */
-	public List<AbstractAllergyConcern> getAllergyProblemConcerns() {
+	public List<AllergyConcern> getAllergyProblemConcerns() {
 		// Search for the right section
 		final Section ars = getDoc().getAllergiesReactionsSection();
 		if (ars == null) {
@@ -728,9 +721,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		}
 		final EList<Act> acts = ars.getActs();
 
-		final List<AbstractAllergyConcern> problemConcernEntries = new ArrayList<AbstractAllergyConcern>();
+		final List<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
 		for (final Act act : acts) {
-			final AbstractAllergyConcern problemConcernEntry = new AllergyConcern(
+			final AllergyConcern problemConcernEntry = new AllergyConcern(
 					(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
 			problemConcernEntries.add(problemConcernEntry);
 		}
@@ -992,15 +985,15 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * 
 	 * @return Liste von Schwangerschaften
 	 */
-	public List<AbstractPregnancyHistory> getPregnancies() {
+	public List<PregnancyHistory> getPregnancies() {
 		// Search for the right section
 		final PregnancyHistorySection phs = getDoc().getPregnancyHistorySection();
 		if (phs == null) {
 			return null;
 		}
-		final List<AbstractPregnancyHistory> pregnancies = new ArrayList<AbstractPregnancyHistory>();
+		final List<PregnancyHistory> pregnancies = new ArrayList<PregnancyHistory>();
 		for (final PregnancyObservation mPregnancy : phs.getPregnancyObservations()) {
-			final AbstractPregnancyHistory immunization = new PregnancyHistory(mPregnancy);
+			final PregnancyHistory immunization = new PregnancyHistory(mPregnancy);
 			pregnancies.add(immunization);
 		}
 		return pregnancies;
@@ -1294,9 +1287,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		CHPackage.eINSTANCE.eClass();
 		// fix missing extension values in MDHT model.
 		for (final II templateId : getDoc().getTemplateIds()) {
-//			if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
-//				templateId.setExtension("CDA-CH-VACD");
-//			}
+			// if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
+			// templateId.setExtension("CDA-CH-VACD");
+			// }
 			if (AbstractCdaCh.OID_MAIN.equals(templateId.getRoot())) {
 				templateId.setExtension("CDA-CH");
 			}

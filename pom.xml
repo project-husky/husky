@@ -39,6 +39,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<module>ehealth_connector-cda</module>
 		<module>ehealth_connector-fatjar</module>
 		<module>ehealth_connector-communication</module>
+		<module>ehealth_connector-valueset-api</module>
 	</modules>
 
 	<repositories>
@@ -97,11 +98,11 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<!-- eclipse stuff -->
 
 			<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
-			<dependency>
+			<!-- dependency>
 				<groupId>net.sourceforge.lpg</groupId>
 				<artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId>
 				<version>1.1.0.v200803061910</version>
-			</dependency>
+			</dependency -->
 
 			<!-- hl7 -->
 			<dependency>
@@ -116,206 +117,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<version>0.2.0.200812311053</version>
 			</dependency>
 
-			<!-- open health tools mdht cda-ch -->
-			<!-- lpg.runtime.java-2.0.17.v201004271640.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>lpg.runtime</groupId>
-				<artifactId>java</artifactId>
-				<version>2.0.17-v201004271640</version>
-			</dependency>
-
-			<!-- org.eclipse.core.contenttype-3.4.200.v20130326-1255.jar (Standard 
-				maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.core</groupId>
-				<artifactId>contenttype</artifactId>
-				<version>3.4.200-v20130326-1255</version>
-			</dependency>
-
-			<!-- org.eclipse.core.jobs-3.5.300.v20130429-1813.jar (Standard maven 
-				repo) -->
-			<dependency>
-				<groupId>org.eclipse.core</groupId>
-				<artifactId>jobs</artifactId>
-				<version>3.5.300-v20130429-1813</version>
-			</dependency>
-
-			<!-- org.eclipse.core.runtime-3.9.100.v20131218-1515.jar (Standard maven 
-				repo) -->
-			<dependency>
-				<groupId>org.eclipse.core</groupId>
-				<artifactId>runtime</artifactId>
-				<version>3.9.100-v20131218-1515</version>
-			</dependency>
-
-			<!-- org.eclipse.equinox.app-1.3.100.v20130327-1442.jar (Standard maven 
-				repo) -->
-			<dependency>
-				<groupId>org.eclipse.equinox</groupId>
-				<artifactId>org.eclipse.equinox.app</artifactId>
-				<version>1.3.100</version>
-			</dependency>
-
-			<!-- org.eclipse.equinox.common-3.6.200.v20130402-1505.jar (Standard maven 
-				repo) -->
-			<dependency>
-				<groupId>org.eclipse.equinox</groupId>
-				<artifactId>common</artifactId>
-				<version>3.6.200-v20130402-1505</version>
-			</dependency>
-
-			<!-- org.eclipse.equinox.preferences-3.5.100.v20130422-1538.jar (Standard 
-				maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.equinox</groupId>
-				<artifactId>preferences</artifactId>
-				<version>3.5.100-v20130422-1538</version>
-			</dependency>
-
-			<!-- org.eclipse.equinox.registry-3.5.301.v20130717-1549.jar (Standard 
-				maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.equinox</groupId>
-				<artifactId>registry</artifactId>
-				<version>3.5.301-v20130717-1549</version>
-			</dependency>
-
-			<!-- org.eclipse.ocl.common-1.1.0.v20130531-0544.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.ocl</groupId>
-				<artifactId>common</artifactId>
-				<version>1.1.0-v20130531-0544</version>
-			</dependency>
-
-			<!-- org.eclipse.ocl.ecore-3.3.0.v20130520-1222.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.ocl</groupId>
-				<artifactId>ecore</artifactId>
-				<version>3.3.0-v20130520-1222</version>
-			</dependency>
-
-			<!-- org.eclipse.ocl-3.3.0.v20140120-1508.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>org.eclipse</groupId>
-				<artifactId>ocl</artifactId>
-				<version>3.3.0-v20140120-1508</version>
-			</dependency>
-
-			<!-- org.eclipse.osgi-3.9.1.v20140110-1610.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>org.eclipse</groupId>
-				<artifactId>osgi</artifactId>
-				<version>3.9.1-v20140110-1610</version>
-			</dependency>
-
-			<!-- org.eclipse.uml2.common-1.8.2.v20140202-2055.jar (Standard maven 
-				repo) -->
-			<dependency>
-				<groupId>org.eclipse.uml2</groupId>
-				<artifactId>common</artifactId>
-				<version>1.8.2-v20140202-2055</version>
-			</dependency>
-
-			<!-- org.eclipse.uml2.types-1.1.0.v20140202-2055.jar (Standard maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.uml2</groupId>
-				<artifactId>types</artifactId>
-				<version>1.1.0-v20140202-2055</version>
-			</dependency>
-
-			<!-- org.eclipse.emf.ecore-2.9.2.v20131212-0545.jar (SOE Maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.emf</groupId>
-				<artifactId>ecore</artifactId>
-				<version>2.9.2.v20131212</version>
-			</dependency>
-
-			<!-- org.eclipse.emf.common-2.9.2.v20131212-0545.jar (SOE Maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.emf</groupId>
-				<artifactId>common</artifactId>
-				<version>2.9.2.v20131212</version>
-			</dependency>
-
-			<!-- org.eclipse.emf.ecore.xmi-2.9.1.v20131212-0545.jar (SOE Maven repo) -->
-			<dependency>
-				<groupId>org.eclipse.emf.ecore</groupId>
-				<artifactId>xmi</artifactId>
-				<version>2.9.1.v20131212</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.emf.runtime-2.5.16.201512191940.jar (SOE 
-				Maven repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.emf</groupId>
-				<artifactId>runtime</artifactId>
-				<version>2.5.16.201512191940</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.cda.consol-2.5.16-SNAPSHOT.jar (SOE 
-				Maven repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.cda</groupId>
-				<artifactId>consol</artifactId>
-				<version>2.5.16.201512201649</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.cda-2.5.16.201512191940.jar (SOE Maven 
-				repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht</groupId>
-				<artifactId>cda</artifactId>
-				<version>2.5.16.201512191940</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.hl7.datatypes-2.5.16.201512191940.jar 
-				(SOE Maven repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-				<artifactId>datatypes</artifactId>
-				<version>2.5.16.201512191940</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.hl7.rim-2.5.16.201512191940.jar (SOE 
-				Maven repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-				<artifactId>rim</artifactId>
-				<version>2.5.16.201512191940</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.hl7.vocab-2.5.16.201512191940.jar (SOE 
-				Maven repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-				<artifactId>vocab</artifactId>
-				<version>2.5.16.201512191940</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.cda.ccd-2.5.16-SNAPSHOT.jar (SOE Maven 
-				repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda</groupId>
-				<artifactId>ccd</artifactId>
-				<version>2.5.16.201512201649</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.cda.cdt-2.5.16-SNAPSHOT.jar (SOE Maven 
-				repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda</groupId>
-				<artifactId>cdt</artifactId>
-				<version>2.5.16.201512201649</version>
-			</dependency>
-
-			<!-- org.openhealthtools.mdht.uml.cda.ihe-2.5.16-SNAPSHOT.jar (SOE Maven 
-				repo) -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda</groupId>
-				<artifactId>ihe</artifactId>
-				<version>2.5.16.201512201649</version>
-			</dependency>
-
 
 			<!--  build from maven model project -->
 			<dependency>
@@ -323,14 +124,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 				<version>1.1-SNAPSHOT</version>
 			</dependency>
-			
-			<!--  build from maven model project -->
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda.ihe.pharm</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.pharm</artifactId>
-				<version>1.1-SNAPSHOT</version>
-			</dependency>
-
 
 			<!-- open health tools ihe utils -->
 			<dependency>

@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.common.enums;
+package org.ehealth_connector.valueset.enums;
 
 /**
  * Interface for CodeSystems
