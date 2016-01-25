@@ -458,8 +458,8 @@ public class Code {
 	 * <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * 
-	 * @param oid
-	 *            the oid object which will be set
+	 * @param displayName
+	 *            the displayName which will be set
 	 */
 	public void setDisplayName(String displayName) {
 		mCD.setDisplayName(displayName);

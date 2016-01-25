@@ -25,6 +25,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Criterion;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
+// TODO: Auto-generated Javadoc
 /**
  * CriterionEntry implements the structured recommendation category for
  * immunization in switzerland, see chapter 7.5.1.8. CDA-CH-VACD Valueset
@@ -47,12 +48,20 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 
 	/**
 	 * Instantiates a new criterion entry.
+	 *
+	 * @param criterion the criterion
 	 */
 	protected CriterionEntry(Criterion criterion) {
 		super((org.openhealthtools.mdht.uml.cda.ch.CriterionEntry) criterion,
 				"2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category");
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -76,8 +85,8 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	}
 
 	/**
-	 * Gets the recommendation category for the immunization
-	 * 
+	 * Gets the recommendation category for the immunization.
+	 *
 	 * @return the rec category
 	 */
 	public CdaChVacdRecCategories getRecCategory() {
@@ -113,6 +122,11 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 		return null;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;

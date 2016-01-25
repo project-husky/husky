@@ -57,19 +57,19 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	/**
 	 * Default constructor to instanciate the object
 	 * 
-	 * @param affinityDomain
+	 * @param affinityDomain the affinity Domain
 	 */
 	public ConvenienceCommunicationCh(AffinityDomain affinityDomain) {
 		super(affinityDomain);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param affinityDomain
-	 * @param atnaConfigMode
-	 * @param documentMetadataExtractionMode
-	 * @param submissionSetMetadataExtractionMode
+	 * Instantiates a new convenience communication ch.
+	 *
+	 * @param affinityDomain the affinity domain
+	 * @param atnaConfigMode the atna config mode
+	 * @param documentMetadataExtractionMode the document metadata extraction mode
+	 * @param submissionSetMetadataExtractionMode the submission set metadata extraction mode
 	 */
 	public ConvenienceCommunicationCh(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode,
@@ -117,7 +117,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which have to be completed)</div>
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException exception
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
 			throws FileNotFoundException {

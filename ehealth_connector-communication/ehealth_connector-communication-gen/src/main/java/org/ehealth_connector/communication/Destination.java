@@ -141,7 +141,7 @@ public class Destination {
 	 *            path to the keystore file
 	 * @param keyStorePassword
 	 *            the password for the keystore file
-	 * @param trustStoreType
+	 * @param keyStoreType
 	 *            the type of the truststore file (default: jks)
 	 */
 	public Destination(String senderOrganizationalOid, URI uri, String keyStore, String keyStorePassword, String keyStoreType) {

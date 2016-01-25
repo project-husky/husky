@@ -18,11 +18,20 @@ package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection;
+import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
 public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis> {
+	
+	private final String formatCode = "urn:ihe:pharm:dis:2010";
 
 	public CdaChMtpsDis() {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
+		super.initCda();
+		getDoc().getRealmCodes().get(0).setCode("CHE");
+		
+		DispenseSection dispenseSection = PHARMFactory.eINSTANCE.createDispenseSection().init();
+		this.getDoc().addSection(dispenseSection);
 	}
 	
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {

@@ -85,13 +85,6 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		return tableStr;
 	}
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.textbuilder.ActiveProblemConcernTextBuilder#buildRow(org.ehealth_connector.cda.ActiveProblemConcern,
-	 *      int)
-	 */
 	protected String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
 		final StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");

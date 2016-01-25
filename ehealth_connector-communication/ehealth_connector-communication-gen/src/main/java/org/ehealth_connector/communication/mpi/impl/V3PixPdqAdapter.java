@@ -187,7 +187,6 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.communication.mpi.FhirPatient)
 	 */
 	@Override
 	public boolean addPatient(FhirPatient patient) {
@@ -295,8 +294,6 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param obsoleteId
 	 *            the obsolete id (duplicate patient identifier)
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(org.ehealth_connector.communication.mpi.FhirPatient,
-	 *      java.lang.String)
 	 */
 	@Override
 	public boolean mergePatient(FhirPatient patient, String obsoleteId) {
@@ -352,8 +349,6 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param queryDomainNamespaces
 	 *            the query domain namespaces
 	 * @return the string[]
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.communication.mpi.FhirPatient,
-	 *      java.lang.String[], java.lang.String[])
 	 */
 	@Override
 	public String[] queryPatientId(org.ehealth_connector.fhir.FhirPatient patient,
@@ -495,7 +490,6 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.mpi.FhirPatient)
 	 */
 	@Override
 	public boolean updatePatient(FhirPatient patient) {
@@ -556,11 +550,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * adds the demographic data from the pdq query to the fhir patient, can be
 	 * overloaded if additional information of the patient needs to be providied
 	 * for the mpi.
-	 * 
-	 * @param patient
-	 *            the patient
-	 * @param v3PixSourceMessage
-	 *            the v3 add message
+	 *
+	 * @param pdqPatient the pdq patient
+	 * @param patient            the patient
 	 */
 	protected void addDemographicData(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient == null) {
@@ -1074,11 +1066,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	}
 
 	/**
-	 * Get the specified patient object
+	 * Get the specified patient object.
 	 *
-	 * @param v3PdqConsumerResponse
-	 *            the consumer response
-	 * @param patientIndex
+	 * @param v3PdqConsumerResponse            the consumer response
+	 * @param patientIndex the patient index
 	 * @return PRPAMT201310UV02Patient - the patient object at the specified
 	 *         index.
 	 */

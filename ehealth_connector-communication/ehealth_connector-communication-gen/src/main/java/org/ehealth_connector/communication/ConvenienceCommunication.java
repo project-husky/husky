@@ -196,7 +196,7 @@ public class ConvenienceCommunication {
 	 * @param filePath
 	 *          the file path
 	 * @return the document metadata (which have to be completed) </div>
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException exception
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 		throws FileNotFoundException {
@@ -560,13 +560,13 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Setting up the communication endpoints for the affinity
+	 * Setting up the communication endpoints for the affinity
 	 * domain and the logger
 	 * 
 	 * @param affinityDomain
 	 *          the affinity domain
 	 * @param atnaConfigMode
-	 *          the ATNA config mode (secure or unsecure) </div> </div>
+	 *          the ATNA config mode (secure or unsecure)
 	 */
 	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
 	XDSSourceAuditor.getAuditor().getConfig()

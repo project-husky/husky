@@ -35,6 +35,8 @@ public class ExternalReferenceEntry extends org.ehealth_connector.cda.AbstractEx
 
 	/**
 	 * Instantiates a new external reference entry.
+	 *
+	 * @param externalReference the external reference
 	 */
 	public ExternalReferenceEntry(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef externalReference) {
 		super(externalReference);

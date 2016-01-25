@@ -39,9 +39,9 @@ public class ProblemEntry extends AbstractProblemEntry {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param entry
+	 * Instantiates a new problem entry.
+	 *
+	 * @param entry the entry
 	 */
 	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry) {
 		super(entry);

@@ -25,51 +25,52 @@ import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class AllergyProblem.
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 6, 2016 5:08:32 PM
- *
  */
 public class AllergyProblem extends AbstractAllergyProblem {
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Default constructor to instanciate the object.
 	 */
 	public AllergyProblem() {
 
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param allergy
+	 * Instantiates a new allergy problem.
+	 *
+	 * @param allergy the allergy
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		super(allergy);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param kindOfAllergy
-	 * @param problem
-	 * @param startOfProblem
-	 * @param endOfProblem
+	 * Instantiates a new allergy problem.
+	 *
+	 * @param kindOfAllergy the kind of allergy
+	 * @param problem the problem
+	 * @param startOfProblem the start of problem
+	 * @param endOfProblem the end of problem
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy, Code problem, Date startOfProblem, Date endOfProblem) {
 		super(kindOfAllergy, problem, startOfProblem, endOfProblem);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param kindOfAllergy
-	 * @param problem
-	 * @param startOfProblem
-	 * @param endOfProblem
-	 * @param internalProblemId
+	 * Instantiates a new allergy problem.
+	 *
+	 * @param kindOfAllergy the kind of allergy
+	 * @param problem the problem
+	 * @param startOfProblem the start of problem
+	 * @param endOfProblem the end of problem
+	 * @param internalProblemId the internal problem id
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy, Code problem, Date startOfProblem, Date endOfProblem,
 			Identificator internalProblemId) {
@@ -77,9 +78,9 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param allergyIntolerance
+	 * Instantiates a new allergy problem.
+	 *
+	 * @param allergyIntolerance the allergy intolerance
 	 */
 	public AllergyProblem(AllergyIntolerance allergyIntolerance) {
 		super(allergyIntolerance);

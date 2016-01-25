@@ -41,10 +41,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-
 /**
  * Test cases
- *
  */
 public class CdaChMtpsDisTest extends TestUtils {
 
@@ -53,21 +51,66 @@ public class CdaChMtpsDisTest extends TestUtils {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-
 	public CdaChMtpsDisTest() {
 		super();
 	}
-	
+
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
 		final Document document = cda.getDocument();
 
-		final XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.11']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		// realmCode
+		XPathExpression expr = xpath.compile("//realmCode[@code='CHE']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// typeId
+		xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and extension='POCD_HD000040']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// CH Dispense
+		xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.11']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm dis
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.3']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm dis code
+		expr = xpath.compile("//code[@code='60593-1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-	
+
+	@Test
+	public void testDocumentSection() throws XPathExpressionException {
+		final CdaChMtpsDis cda = new CdaChMtpsDis();
+		final Document document = cda.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.3']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		xpath.compile("//*/section/templateId[@root='2.16.840.1.113883.10.20.1.8']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+		
+		expr = xpath.compile("//code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+
+	}
+
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -103,8 +146,7 @@ public class CdaChMtpsDisTest extends TestUtils {
 		final CdaChMtpsDis cdaDeserialized = deserializeCda(deserialized);
 		assertTrue(cdaDeserialized != null);
 	}
-	
-	
+
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return CDAUtil.load(source);
@@ -112,13 +154,16 @@ public class CdaChMtpsDisTest extends TestUtils {
 
 	private CdaChMtpsDis deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsDis((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) CDAUtil.load(source));
+		return new CdaChMtpsDis(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) CDAUtil.load(source));
 	}
 
 	private CdaChMtpsDis deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getCdaChMtpsDis());
-		return new CdaChMtpsDis((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis)clinicalDocument);
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChMtpsDis());
+		return new CdaChMtpsDis(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) clinicalDocument);
 	}
 
 	private String serializeDocument(CdaChMtpsDis doc) throws Exception {
@@ -126,7 +171,5 @@ public class CdaChMtpsDisTest extends TestUtils {
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
 	}
-
-
 
 }

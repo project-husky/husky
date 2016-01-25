@@ -44,33 +44,33 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param allergyConcern
+	 * Instantiates a new allergy concern.
+	 *
+	 * @param allergyConcern the allergy concern
 	 */
 	public AllergyConcern(AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param concern
-	 * @param problemEntry
-	 * @param concernStatus
+	 * Instantiates a new allergy concern.
+	 *
+	 * @param concern the concern
+	 * @param problemEntry the problem entry
+	 * @param concernStatus the concern status
 	 */
 	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param concern
-	 * @param begin
-	 * @param end
-	 * @param problemEntry
-	 * @param concernStatus
+	 * Instantiates a new allergy concern.
+	 *
+	 * @param concern the concern
+	 * @param begin the begin
+	 * @param end the end
+	 * @param problemEntry the problem entry
+	 * @param concernStatus the concern status
 	 */
 	public AllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {

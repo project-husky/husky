@@ -22,34 +22,35 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class PregnancyHistory.
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 6, 2016 5:46:18 PM
- *
  */
 public class PregnancyHistory extends AbstractPregnancyHistory {
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Default constructor to instanciate the object.
 	 */
 	public PregnancyHistory() {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param estimatedBirthDate
+	 * Instantiates a new pregnancy history.
+	 *
+	 * @param estimatedBirthDate the estimated birth date
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		super(estimatedBirthDate);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param pregnancy
+	 * Instantiates a new pregnancy history.
+	 *
+	 * @param pregnancy the pregnancy
 	 */
 	public PregnancyHistory(PregnancyObservation pregnancy) {
 		super(pregnancy);

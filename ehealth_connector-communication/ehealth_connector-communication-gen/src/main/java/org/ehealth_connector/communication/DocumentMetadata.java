@@ -60,11 +60,11 @@ public class DocumentMetadata {
 		 * Entries uses the following mapping (for more details see
 		 * CDAR2Extractor.pdf in
 		 * org.openhealthtools.ihe.xds.metadata.extract.cdar2):
-		 * <table summary="CDA Metadata to XDS Metadata mapping" width="100%">
+		 * <table summary="CDA Metadata to XDS Metadata mapping">
 		 * <thead>
 		 * <tr>
-		 * <th width="20%">XDS Metadata Attribute</th>
-		 * <th width="80%">XDS Element</th>
+		 * <th>XDS Metadata Attribute</th>
+		 * <th>XDS Element</th>
 		 * </tr>
 		 * </thead> <tbody>
 		 * <tr>
@@ -120,8 +120,8 @@ public class DocumentMetadata {
 		 * "Empty document entries attributes generation" width="100%">
 		 * <thead>
 		 * <tr>
-		 * <th width="20%">XDS Metadata Attribute</th>
-		 * <th width="80%">Generated from</th>
+		 * <th>XDS Metadata Attribute</th>
+		 * <th>Generated from</th>
 		 * </tr>
 		 * </thead> <tbody>
 		 * <tr>

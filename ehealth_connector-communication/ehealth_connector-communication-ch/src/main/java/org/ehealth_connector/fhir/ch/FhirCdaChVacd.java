@@ -1334,8 +1334,7 @@ public class FhirCdaChVacd {
 	 * 
 	 * @param bundle
 	 *            the FHIR bundle
-	 * @return eHC Author object containing the legal authenticator </div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return eHC Author object containing the legal authenticator 
 	 */
 	public org.ehealth_connector.common.Author getLegalAuthenticator(Bundle bundle) {
 		org.ehealth_connector.common.Author retVal = null;
@@ -1394,8 +1393,7 @@ public class FhirCdaChVacd {
 	 * 
 	 * @param fhirMedicationStatement
 	 *            the FHIR bundle
-	 * @return eHC Author object containing the performer </div> <div
-	 *         class="de"></div> <div class="fr"></div>
+	 * @return eHC Author object containing the performer 
 	 */
 	public org.ehealth_connector.common.Author getPerformer(MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.common.Author retVal = null;

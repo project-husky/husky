@@ -49,8 +49,10 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	private String homeCommunityOid;
 
 	/**
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#addPatient(org.ehealth_connector.communication.mpi.FhirPatient)
-	 *      note: no demographic information is stored
+	 * Adds the patient.
+	 *
+	 * @param patient the patient
+	 * @return true, if successful
 	 */
 	@Override
 	public boolean addPatient(FhirPatient patient) {
@@ -105,8 +107,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 * @param obsoleteId
 	 *            the obsolete id
 	 * @return true, if successful
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#mergePatient(FhirPatient
-	 *      patient, String obsoleteId)
 	 */
 	@Override
 	public boolean mergePatient(FhirPatient patient, String obsoleteId) {
@@ -139,8 +139,12 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	}
 
 	/**
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#queryPatientId(org.ehealth_connector.communication.mpi.FhirPatient,
-	 *      java.lang.String[], java.lang.String[])
+	 * Query patient id.
+	 *
+	 * @param patient the patient
+	 * @param queryDomainOids the query domain oids
+	 * @param queryDomainNamespaces the query domain namespaces
+	 * @return the string[]
 	 */
 	@Override
 	public String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
@@ -173,13 +177,22 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 		return null;
 	}
 
+	/**
+	 * Query patients.
+	 *
+	 * @param mpiQuery the mpi query
+	 * @return the mpi query response
+	 */
 	@Override
 	public MpiQueryResponse queryPatients(MpiQuery mpiQuery) {
 		return null;
 	}
 
 	/**
-	 * @see org.ehealth_connector.communication.mpi.MpiAdapterInterface#updatePatient(org.ehealth_connector.communication.mpi.FhirPatient)
+	 * Update patient.
+	 *
+	 * @param patient the patient
+	 * @return true, if successful
 	 */
 	@Override
 	public boolean updatePatient(FhirPatient patient) {

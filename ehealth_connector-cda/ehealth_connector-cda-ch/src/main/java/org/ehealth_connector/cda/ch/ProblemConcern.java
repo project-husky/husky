@@ -27,49 +27,50 @@ import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class ProblemConcern.
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 6, 2016 5:37:24 PM
- *
  */
 public class ProblemConcern extends AbstractProblemConcern {
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Default constructor to instanciate the object.
 	 */
 	public ProblemConcern() {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param problemConcernEntry
+	 * Instantiates a new problem concern.
+	 *
+	 * @param problemConcernEntry the problem concern entry
 	 */
 	public ProblemConcern(ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param concern
-	 * @param problemEntry
-	 * @param concernStatus
+	 * Instantiates a new problem concern.
+	 *
+	 * @param concern the concern
+	 * @param problemEntry the problem entry
+	 * @param concernStatus the concern status
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 
 	/**
-	 * Default constructor to instanciate the object
-	 * 
-	 * @param concern
-	 * @param problemEntry
-	 * @param concernStatus
-	 * @param start
-	 * @param end
+	 * Instantiates a new problem concern.
+	 *
+	 * @param concern the concern
+	 * @param problemEntry the problem entry
+	 * @param concernStatus the concern status
+	 * @param start the start
+	 * @param end the end
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		super(concern, problemEntry, concernStatus, start, end);
