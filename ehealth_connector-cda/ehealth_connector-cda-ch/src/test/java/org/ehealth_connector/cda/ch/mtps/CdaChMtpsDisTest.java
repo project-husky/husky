@@ -104,9 +104,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		
-		expr = xpath.compile("//code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
+//		expr = xpath.compile("//code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
+//		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+//		assertEquals(1, nodes.getLength());
 
 
 	}
