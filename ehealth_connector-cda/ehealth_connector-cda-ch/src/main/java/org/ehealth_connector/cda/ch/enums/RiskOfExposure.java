@@ -312,10 +312,10 @@ public enum RiskOfExposure {
 		displayNames.put(LanguageCode.FRENCH, displayNameFr);
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 
-		if ((validFrom != null) && !"".equals(validFrom)) {
+		if (validFrom != null && !"".equals(validFrom)) {
 			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
-		if ((validTo != null) && !"".equals(validTo)) {
+		if (validTo != null && !"".equals(validTo)) {
 			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
@@ -348,7 +348,7 @@ public enum RiskOfExposure {
 	 */
 	public Code getCode(LanguageCode languageCode) {
 		String displayName = null;
-		if ((languageCode != null) && (displayNames.get(languageCode) != null)) {
+		if (languageCode != null && displayNames.get(languageCode) != null) {
 			displayName = displayNames.get(languageCode);
 		} else {
 			displayName = displayNames.get(LanguageCode.GERMAN);
@@ -402,7 +402,7 @@ public enum RiskOfExposure {
 	 */
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = null;
-		if ((languageCode != null) && (displayNames.get(languageCode) != null)) {
+		if (languageCode != null && displayNames.get(languageCode) != null) {
 			displayName = displayNames.get(languageCode);
 		} else {
 			displayName = displayNames.get(LanguageCode.GERMAN);
@@ -435,9 +435,9 @@ public enum RiskOfExposure {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(String codeValue) {
 		for (final RiskOfExposure x : values()) {
-			if (x.getCodeValue().equals(code)) {
+			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}
@@ -464,10 +464,10 @@ public enum RiskOfExposure {
 		if (date == null) {
 			date = new Date();
 		}
-		if ((this.validFrom != null) && validFrom.after(date)) {
+		if (validFrom != null && validFrom.after(date)) {
 			return false;
 		}
-		if ((this.validTo != null) && validTo.before(date)) {
+		if (validTo != null && validTo.before(date)) {
 			return false;
 		}
 		return true;
