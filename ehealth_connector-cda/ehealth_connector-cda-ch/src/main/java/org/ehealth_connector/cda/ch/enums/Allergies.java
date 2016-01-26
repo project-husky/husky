@@ -1,7 +1,6 @@
 package org.ehealth_connector.cda.ch.enums;
 
-import java.util.Arrays;
-
+import org.apache.commons.lang3.EnumUtils;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -18,10 +17,10 @@ public enum Allergies {
 	 */
 	EGG_PROTEIN_SUBSTANCE("303300008",
 			"Egg protein (substance)"), /**
-										 * <div class="de">Atopisches
-										 * Ekzem</div> <div class="fr">Eczéma
-										 * atopique</div>
-										 */
+			 * <div class="de">Atopisches
+			 * Ekzem</div> <div class="fr">Eczéma
+			 * atopique</div>
+			 */
 	ATOPIC_DERMATITIS("24079001", "Atopic dermatitis");
 	public static final String EGG_PROTEIN_SUBSTANCE_CODE = "303300008";
 	public static final String ATOPIC_DERMATITIS_CODE = "24079001";
@@ -49,22 +48,36 @@ public enum Allergies {
 		this.displayName = displayName;
 	}
 
+
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
 	 * 
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * 
+	 * @param enumName <br> <div class="de"> enumName</div> @return true, if enum
+	 * is in this value set
 	 */
-	public static Allergies getEnum(String code) {
-		for (final Allergies x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
+
+	public static boolean isEnumOfValueSet(String enumName) {
+		return EnumUtils.isValidEnum(Allergies.class, enumName);
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue <br> <div class="de"> code</div> @return true, if is in
+	 * value set
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (final Allergies allergies : EnumUtils.getEnumList(Allergies.class)) {
+			if (allergies.getCodeValue().equals(codeValue)) {
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 
 	/**
@@ -131,39 +144,5 @@ public enum Allergies {
 	 */
 	public String getDisplayName() {
 		return displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 * 
-	 * 
-	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public boolean isEnumOfValueSet(String enumName) {
-		return Arrays.asList(values()).contains(enumName);
-	}
-
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
-	 * 
-	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public boolean isInValueSet(String codeValue) {
-		for (final Allergies x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
