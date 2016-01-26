@@ -40,8 +40,8 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 	/**
 	 * Instantiates a new vital signs section.
 	 * 
-	 * @param immunizationSection
-	 *            the immunization section
+	 * @param section
+	 *            the vital signs section
 	 */
 	protected CodedVitalSigns(VitalSignsSection section) {
 		super(section, null, null);
