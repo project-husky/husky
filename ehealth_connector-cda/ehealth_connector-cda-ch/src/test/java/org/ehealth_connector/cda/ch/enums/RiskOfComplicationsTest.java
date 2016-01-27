@@ -56,14 +56,18 @@ public class RiskOfComplicationsTest {
 	public void testGetDisplayNameLanguageCode() {
 		final String displNameFrench = testRiskOfCom.getDisplayName(testLanguage);
 		assertNotNull(displNameFrench);
-		assertEquals("Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)", displNameFrench);
+		assertEquals(
+				"Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)",
+				displNameFrench);
 	}
 
 	@Test
 	public void testGetCode() {
 		final Code ref = testRiskOfCom.getCode(testLanguage);
 		assertNotNull(ref);
-		assertEquals("Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)", ref.getDisplayName());
+		assertEquals(
+				"Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)",
+				ref.getDisplayName());
 	}
 
 }
