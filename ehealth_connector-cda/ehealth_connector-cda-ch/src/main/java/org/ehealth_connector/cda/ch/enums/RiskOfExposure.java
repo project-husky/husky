@@ -252,8 +252,7 @@ public enum RiskOfExposure {
 	/**
 	 * <div class="de">Neugeborene von HBsAg - positiven Müttern </div>
 	 * <div class="fr">Nouveau - nés de mères HBsAg positives</div>
-	 * <div class="it">Neonati di madri HBsAg positive <
-	 * / div>
+	 * <div class="it">Neonati di madri HBsAg positive </div>
 	 */
 	NEUGEBORENE_VON_HBSAG_POSITIVEN_MUETTERN(
 			"213025",
@@ -286,7 +285,8 @@ public enum RiskOfExposure {
 			"20150101",
 			""),
 	/**
-	 * <div class="de">enge Kontaktpersonen von Meningokokken-Erkrankten</div>
+	 * <div class="de">Enge Kontaktpersonen von
+	 * Meningokokken-Erkrankten</div>
 	 * <div class="fr">Méningocoques dans l'entourage</div>
 	 * <div class="it">Meningococco nell'entourage </div>
 	 */

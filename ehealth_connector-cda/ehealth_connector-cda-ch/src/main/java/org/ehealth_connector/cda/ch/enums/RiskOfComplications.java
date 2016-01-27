@@ -236,10 +236,9 @@ public enum RiskOfComplications {
 			"20140101",
 			""),
 	/**
-	 * <div class="de">Morbide Adipositas (BMI &gt;=
-	 * 40)</div><div
-	 * class="fr">Obésité morbide (IMC &gt;= 40)</div><div
-	 * class="it">Obesità patologica (IMC &gt;= 40)</div>
+	 * <div class="de">Morbide Adipositas (BMI &gt;= 40)</div>
+	 * <div class="fr">Obésité morbide (IMC &gt;= 40)</div>
+	 * <div class="it">Obesità patologica (IMC &gt;= 40)</div>
 	 */
 	MORBIDE_ADIPOSITAS_BMI_GROESSER_40(
 			"114016",
@@ -250,26 +249,26 @@ public enum RiskOfComplications {
 			""),
 	/**
 	 * <div class="de">Kandidaten für eine Solidorgantransplantation</div>
-	 * <div class="fr">Candidats à une transplantation d&apos;organe solide</div>
-	 * <div class="it">Candidati a un trapianto d&apos;organo solido</div>
+	 * <div class="fr">Candidats à une transplantation d'organe solide</div>
+	 * <div class="it">Candidati a un trapianto d'organo solido</div>
 	 */
 	KANDIDATEN_FUER_EINE_SOLIDORGANTRANSPLANTATION(
 			"114018",
 			"Kandidaten für eine Solidorgantransplantation",
-			"Candidats à une transplantation d&apos;organe solide",
-			"Candidati a un trapianto d&apos;organo solido",
+			"Candidats à une transplantation d'organe solide",
+			"Candidati a un trapianto d'organo solido",
 			"20140101",
 			""),
 	/**
 	 * <div class="de">Empfänger einer Solidorgantransplantation</div>
-	 * <div class="fr">Receveurs d&apos;une transplantation d&apos;organe solide</div>
-	 * <div class="it">Riceventi di un trapianto d&apos;organo solido</div>
+	 * <div class="fr">Receveurs d&apos;une transplantation d'organe solide</div>
+	 * <div class="it">Riceventi di un trapianto d'organo solido</div>
 	 */
 	EMPFAENGER_EINER_SOLIDORGANTRANSPLANTATION(
 			"114019",
 			"Empfänger einer Solidorgantransplantation",
-			"Receveurs d&apos;une transplantation d&apos;organe solide",
-			"Riceventi di un trapianto d&apos;organo solido",
+			"Receveurs d&apos;une transplantation d'organe solide",
+			"Riceventi di un trapianto d'organo solido",
 			"20140101",
 			""),
 	/**
@@ -448,23 +447,23 @@ public enum RiskOfComplications {
 	private Date validTo;
 
 	/**
- * <div class="en">Instantiates this Enum Object with a given Code and
- * Display Name</div>
- * <div class="de">Instantsiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
- * @param code
- * <br>
- * <div class="de"> code</div>
- * @param displayNameDe
- * the display name de
- * @param displayNameFr
- * the display name fr
- * @param displayNameIt
- * the display name it
- * @param validFrom
- * the valid from
- * @param validTo
- * the valid to
- */
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div>
+	 * <div class="de">Instantsiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
+	 * @param code
+	 * <br>
+	 * <div class="de"> code</div>
+	 * @param displayNameDe
+	 * the display name de
+	 * @param displayNameFr
+	 * the display name fr
+	 * @param displayNameIt
+	 * the display name it
+	 * @param validFrom
+	 * the valid from
+	 * @param validTo
+	 * the valid to
+	 */
 	private RiskOfComplications(String code, String displayNameDe, String displayNameFr,
 			String displayNameIt, String validFrom, String validTo) {
 		this.code = code;
@@ -575,13 +574,12 @@ public enum RiskOfComplications {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
-	 * @param codeValue	 * <br>
-	 * <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
+ * <div class="en">Checks if a given code value is in this value set.</div>
+ * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+ * vorhanden ist.</div>
+ * @param codeValue <br><div class="de"> code</div>
+ * @return true, if is in value set
+ */
 	public static boolean isInValueSet(String codeValue) {
 		for (final RiskOfComplications x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
@@ -600,11 +598,10 @@ public enum RiskOfComplications {
 	}
 
 	/**
-	 * Checks if the code is valid for the specified date.
-	 * @param date
-	 * the date
-	 * @return true, if is valid
-	 */
+ * Checks if the code is valid for the specified date.
+ * @param date the date
+ * @return true, if is valid
+ */
 	public boolean isValid(Date date) {
 		if (date == null) {
 			date = new Date();

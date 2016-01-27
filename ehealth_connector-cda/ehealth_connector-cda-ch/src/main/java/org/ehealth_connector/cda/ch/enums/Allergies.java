@@ -50,27 +50,27 @@ public enum Allergies {
 
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 * 
-	 * 
-	 * @param enumName <br> <div class="de"> enumName</div> @return true, if enum
-	 * is in this value set
-	 */
+ * <div class="en">Checks if a given enum is part of this value set.</div>
+ * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+ * ist.</div>
+ * 
+ * 
+ * @param enumName <br> <div class="de"> enumName</div>
+ * @return true, if enum is in this value set
+ */
 
 	public static boolean isEnumOfValueSet(String enumName) {
 		return EnumUtils.isValidEnum(Allergies.class, enumName);
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
-	 *
-	 * @param codeValue <br> <div class="de"> code</div> @return true, if is in
-	 * value set
-	 */
+ * <div class="en">Checks if a given code value is in this value set.</div>
+ * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+ * ist.</div>
+ *
+ * @param codeValue <br> <div class="de"> code</div>
+ * @return true, if is in value set
+ */
 	public static boolean isInValueSet(String codeValue) {
 		for (final Allergies allergies : EnumUtils.getEnumList(Allergies.class)) {
 			if (allergies.getCodeValue().equals(codeValue)) {

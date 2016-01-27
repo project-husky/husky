@@ -236,7 +236,7 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
 	 * Dokument ein</div>
 	 * 
-	 * @param sign
+	 * @param sign The vital sign observation
 	 */
 	public void addCodedVitalSign(VitalSignObservation sign) {
 		if (mCodedVitalSigns == null) {
@@ -258,7 +258,7 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 */
 	public List<VitalSignObservation> getCodedVitalSignObservations() {
 		if (mCodedVitalSigns == null) {
-			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
+			final CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
 			if (section == null) {
 				return Collections.emptyList();
 			}

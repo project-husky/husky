@@ -205,7 +205,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
 	 * Dokument ein</div>
 	 * 
-	 * @param sign
+	 * @param sign VitalSign
 	 */
 	public void addCodedVitalSign(VitalSignObservation sign) {
 		if (mCodedVitalSigns == null) {
