@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation.VitalSignCodes;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
@@ -141,6 +142,38 @@ public class CdaChEdesCtnnTest extends TestUtils {
 	}
 
 	@Test
+	public void narrativeSectionsSerializationTest() throws Exception {
+		String testText = "Narrative ...\nText.";
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+
+		cda.setNarrativeTextSectionAcuityAssessment(testText);
+		cda.setNarrativeTextSectionModeOfArrival(testText);
+		// cda.setNarrativeTextSectionRemarks(testText);
+		// cda.setNarrativeTextSectionAbilityToWork(testText);
+
+		final String deserialized = serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(
+				SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(
+				SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
+
+		// assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
+		// assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(
+		// SectionsEDES.REMARKS.getContentIdPrefix()));
+		//
+		// assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
+		// assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(
+		// SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
+
+	}
+
+	@Test
 	public void codedVitalSignsTest() {
 		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
 
@@ -152,9 +185,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
 				new Value("80", Ucum.KiloGram)));
 
-		// TODO add correct Ucum unit 1/min
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.HEART_BEAT, effectiveTime,
-				new Value("62", Ucum.Minute)));
+				new Value("62", Ucum.PerMinute)));
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
 				effectiveTime, new Value("120", Ucum.MilliMetersOfMercury)));

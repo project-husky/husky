@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -27,8 +28,39 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	}
 
 	/**
-	 * <div class="en">Gets the MDHT-CdaChEdesCtnn Object</div> <div
-	 * class="de">Liefert das MDHT-CdaChEdesCtnn-Objekt zurück.</div>
+	 * <div class="en">Creates a new EDES EDPN CDA document</div> <div
+	 * class="de">Erstellt ein neues EDED EDPN CDA Dokument.</div>
+	 * 
+	 * @param language
+	 * <br>
+	 *            <div class="en">document language</div> <div
+	 *            class="de">Sprache des Dokments</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @param stylesheet
+	 *            <div class="en">stylesheet, which should be referenced to
+	 *            render a human readable representation of the document</div>
+	 *            <div class="de">Stylesheet, welches im CDA mittels
+	 *            ?xml-stylesheet für die menschlich lesbare Darstellung
+	 *            referenziert werden soll (z.B.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
+	 *            >
+	 * @param cascadingStylesheet
+	 *            <div class="en">Cascading stylesheet, which should be
+	 *            referenced to render a human readable representation of the
+	 *            document</div> <div class="de">Cascasing Stylesheet, welches
+	 *            Designinformationen für die menschlich lesbare Darstellung
+	 *            referenziert (z.B.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
+	 *            >
+	 */
+	public CdaChEdesEdpn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
+		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init(), stylesheet, cascadingStylesheet);
+		setLanguageCode(language);
+	}
+
+	/**
+	 * <div class="en">Gets the MDHT-CdaChEdesEdpn Object</div> <div
+	 * class="de">Liefert das MDHT-CdaChEdesEdpn-Objekt zurück.</div>
 	 * 
 	 * @return the doc
 	 */
@@ -71,9 +103,71 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionAbilityToWork(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ABILITY_TO_WORK, text);
 		if (getDoc().getAbilityToWorkSection() == null) {
-			getDoc().addSection(CHFactory.eINSTANCE.createAbilityToWorkSection());
+			getDoc().addSection(CHFactory.eINSTANCE.createAbilityToWorkSection().init());
 		}
 		getDoc().getAbilityToWorkSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionActiveProblems() {
+		return getNarrativeText(getDoc().getActiveProblemsSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionActiveProblems(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ACTIVE_PROBLEMS, text);
+		if (getDoc().getActiveProblemsSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createActiveProblemsSection().init());
+		}
+		getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionAdvanceDirectives() {
+		return getNarrativeText(getDoc().getAdvanceDirectivesSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionAdvanceDirectives(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ADVANCE_DIRECTIVES, text);
+		if (getDoc().getAdvanceDirectivesSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createAdvanceDirectivesSection().init());
+		}
+		getDoc().getAdvanceDirectivesSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -102,9 +196,40 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionAllergiesReactions(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ALLERGIES_REACTIONS, text);
 		if (getDoc().getAllergiesReactionsSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createAllergiesReactionsSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createAllergiesReactionsSection().init());
 		}
 		getDoc().getAllergiesReactionsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionAssessmentAndPlan() {
+		return getNarrativeText(getDoc().getAssessmentAndPlanSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionAssessmentAndPlan(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ASSESSMENT_AND_PLAN, text);
+		if (getDoc().getAssessmentAndPlanSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createAssessmentAndPlanSection().init());
+		}
+		getDoc().getAssessmentAndPlanSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -133,9 +258,40 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionAssessments(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ASSESSMENTS, text);
 		if (getDoc().getAssessmentsSection() == null) {
-			getDoc().addSection(PCCFactory.eINSTANCE.createAssessmentsSection());
+			getDoc().addSection(PCCFactory.eINSTANCE.createAssessmentsSection().init());
 		}
 		getDoc().getAssessmentsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionCarePlan() {
+		return getNarrativeText(getDoc().getCarePlanSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionCarePlan(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.CARE_PLAN, text);
+		if (getDoc().getCarePlanSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createCarePlanSection().init());
+		}
+		getDoc().getCarePlanSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -164,7 +320,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionChiefComplaint(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.CHIEF_COMPLAINT, text);
 		if (getDoc().getChiefComplaintSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createChiefComplaintSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createChiefComplaintSection().init());
 		}
 		getDoc().getChiefComplaintSection().createStrucDocText(sb.toString());
 	}
@@ -195,7 +351,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionCodedVitalSigns(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.CODED_VITAL_SIGNS, text);
 		if (getDoc().getCodedVitalSignsSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createCodedVitalSignsSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 		}
 		getDoc().getCodedVitalSignsSection().createStrucDocText(sb.toString());
 	}
@@ -205,7 +361,10 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
 	 * Dokument ein</div>
 	 * 
-	 * @param sign VitalSign
+	 * @param sign
+	 *            VitalSign <div class="en">The coded vital sign observation to
+	 *            add</div> <div class="de">Das hinzuzufügende codierte
+	 *            Vitalzeichen</div>
 	 */
 	public void addCodedVitalSign(VitalSignObservation sign) {
 		if (mCodedVitalSigns == null) {
@@ -245,6 +404,68 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
+	public String getNarrativeTextSectionConsultations() {
+		return getNarrativeText(getDoc().getConsultationsSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionConsultations(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ED_CONSULTATIONS, text);
+		if (getDoc().getConsultationsSection() == null) {
+			getDoc().addSection(PCCFactory.eINSTANCE.createConsultationsSection().init());
+		}
+		getDoc().getConsultationsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionEDDiagnoses() {
+		return getNarrativeText(getDoc().getEDDiagnosesSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionEDDiagnoses(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ED_DIAGNOSIS, text);
+		if (getDoc().getEDDiagnosesSection() == null) {
+			getDoc().addSection(PCCFactory.eINSTANCE.createEDDiagnosesSection().init());
+		}
+		getDoc().getEDDiagnosesSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
 	public String getNarrativeTextSectionEDDisposition() {
 		return getNarrativeText(getDoc().getEDDispositionSection());
 	}
@@ -262,7 +483,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionEDDisposition(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ED_DISPOSITION, text);
 		if (getDoc().getEDDispositionSection() == null) {
-			getDoc().addSection(PCCFactory.eINSTANCE.createEDDispositionSection());
+			getDoc().addSection(PCCFactory.eINSTANCE.createEDDispositionSection().init());
 		}
 		getDoc().getEDDispositionSection().createStrucDocText(sb.toString());
 	}
@@ -294,7 +515,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.FAMILY_MEDICAL_HISTORY,
 				text);
 		if (getDoc().getFamilyMedicalHistorySection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createFamilyMedicalHistorySection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createFamilyMedicalHistorySection().init());
 		}
 		getDoc().getFamilyMedicalHistorySection().createStrucDocText(sb.toString());
 	}
@@ -326,7 +547,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.HISTORY_OF_PAST_ILLNESS,
 				text);
 		if (getDoc().getHistoryOfPastIllnessSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init());
 		}
 		getDoc().getHistoryOfPastIllnessSection().createStrucDocText(sb.toString());
 	}
@@ -358,9 +579,42 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.HISTORY_OF_PRESENT_ILLNESS,
 				text);
 		if (getDoc().getHistoryOfPresentIllness() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createHistoryOfPresentIllness());
+			getDoc().addSection(IHEFactory.eINSTANCE.createHistoryOfPresentIllness().init());
 		}
 		getDoc().getHistoryOfPresentIllness().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionHospitalDischargeMedications() {
+		return getNarrativeText(getDoc().getHospitalDischargeMedicationsSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionHospitalDischargeMedications(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(
+				SectionsEDES.HOSPITAL_DISCHARGE_MEDICATIONS, text);
+		if (getDoc().getHospitalDischargeMedicationsSection() == null) {
+			getDoc().addSection(
+					IHEFactory.eINSTANCE.createHospitalDischargeMedicationsSection().init());
+		}
+		getDoc().getHospitalDischargeMedicationsSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -390,7 +644,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.HISTORY_OF_IMMUNIZATION,
 				text);
 		if (getDoc().getImmunizationsSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createImmunizationsSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createImmunizationsSection().init());
 		}
 		getDoc().getImmunizationsSection().createStrucDocText(sb.toString());
 	}
@@ -422,7 +676,8 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(
 				SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED, text);
 		if (getDoc().getIntravenousFluidsAdministeredSection() == null) {
-			getDoc().addSection(PCCFactory.eINSTANCE.createIntravenousFluidsAdministeredSection());
+			getDoc().addSection(
+					PCCFactory.eINSTANCE.createIntravenousFluidsAdministeredSection().init());
 		}
 		getDoc().getIntravenousFluidsAdministeredSection().createStrucDocText(sb.toString());
 	}
@@ -454,7 +709,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.MEDICATIONS_ADMINISTERED,
 				text);
 		if (getDoc().getMedicationsAdministeredSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createMedicationsAdministeredSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createMedicationsAdministeredSection().init());
 		}
 		getDoc().getMedicationsAdministeredSection().createStrucDocText(sb.toString());
 	}
@@ -485,7 +740,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionMedications(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.CURRENT_MEDICATIONS, text);
 		if (getDoc().getMedicationsSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createMedicationsSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createMedicationsSection().init());
 		}
 		getDoc().getMedicationsSection().createStrucDocText(sb.toString());
 	}
@@ -516,9 +771,40 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionModeOfArrival(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.MODE_OF_ARRIVAL, text);
 		if (getDoc().getModeOfArrivalSection() == null) {
-			getDoc().addSection(PCCFactory.eINSTANCE.createModeOfArrivalSection());
+			getDoc().addSection(PCCFactory.eINSTANCE.createModeOfArrivalSection().init());
 		}
 		getDoc().getModeOfArrivalSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionPhysicalExam() {
+		return getNarrativeText(getDoc().getPhysicalExamSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionPhysicalExam(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.PHYSICAL_EXAMINATION, text);
+		if (getDoc().getPhysicalExamSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createPhysicalExamSection().init());
+		}
+		getDoc().getPhysicalExamSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -548,7 +834,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.HISTORY_OF_PREGNANCIES,
 				text);
 		if (getDoc().getPregnancyHistorySection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createPregnancyHistorySection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createPregnancyHistorySection().init());
 		}
 		getDoc().getPregnancyHistorySection().createStrucDocText(sb.toString());
 	}
@@ -579,9 +865,41 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionProceduresAndInterventions(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.PROCEDURES, text);
 		if (getDoc().getProceduresAndInterventionsSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createProceduresAndInterventionsSection());
+			getDoc().addSection(
+					IHEFactory.eINSTANCE.createProceduresAndInterventionsSection().init());
 		}
 		getDoc().getProceduresAndInterventionsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionProgressNote() {
+		return getNarrativeText(getDoc().getProgressNoteSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionProgressNote(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.PROGRESS_NOTE, text);
+		if (getDoc().getProgressNoteSection() == null) {
+			getDoc().addSection(PCCFactory.eINSTANCE.createProgressNoteSection().init());
+		}
+		getDoc().getProgressNoteSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -610,9 +928,102 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionReasonForVisit(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.REASON_FOR_VISIT, text);
 		if (getDoc().getReasonForVisitSection() == null) {
-			getDoc().addSection(PCCFactory.eINSTANCE.createReasonForVisitSection());
+			getDoc().addSection(PCCFactory.eINSTANCE.createReasonForVisitSection().init());
 		}
 		getDoc().getReasonForVisitSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionReferralSource() {
+		return getNarrativeText(getDoc().getReferralSourceSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionReferralSource(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.REFERRAL_SOURCE, text);
+		if (getDoc().getReferralSourceSection() == null) {
+			getDoc().addSection(PCCFactory.eINSTANCE.createReferralSourceSection().init());
+		}
+		getDoc().getReferralSourceSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionCodedResults() {
+		return getNarrativeText(getDoc().getCodedResultsSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionCodedResults(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.RESULTS, text);
+		if (getDoc().getCodedResultsSection() == null) {
+			getDoc().addSection(CHFactory.eINSTANCE.createCodedResultsSection().init());
+		}
+		getDoc().getCodedResultsSection().createStrucDocText(sb.toString());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionReviewOfSystems() {
+		return getNarrativeText(getDoc().getReviewOfSystemsSection());
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 * 
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionReviewOfSystems(String text) {
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.REVIEW_OF_SYSTEMS, text);
+		if (getDoc().getReviewOfSystemsSection() == null) {
+			getDoc().addSection(IHEFactory.eINSTANCE.createReviewOfSystemsSection().init());
+		}
+		getDoc().getReviewOfSystemsSection().createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -641,7 +1052,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionRemarks(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.REMARKS, text);
 		if (getDoc().getRemarksSection() == null) {
-			getDoc().addSection(CHFactory.eINSTANCE.createRemarksSection());
+			getDoc().addSection(CHFactory.eINSTANCE.createRemarksSection().init());
 		}
 		getDoc().getRemarksSection().createStrucDocText(sb.toString());
 	}
@@ -672,7 +1083,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionSocialHistory(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.SOCIAL_HISTORY, text);
 		if (getDoc().getSocialHistorySection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createSocialHistorySection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createSocialHistorySection().init());
 		}
 		getDoc().getSocialHistorySection().createStrucDocText(sb.toString());
 	}
@@ -703,7 +1114,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	public void setNarrativeTextSectionSurgeriesSection(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.LIST_OF_SURGERIES, text);
 		if (getDoc().getSurgeriesSection() == null) {
-			getDoc().addSection(IHEFactory.eINSTANCE.createSurgeriesSection());
+			getDoc().addSection(IHEFactory.eINSTANCE.createSurgeriesSection().init());
 		}
 		getDoc().getSurgeriesSection().createStrucDocText(sb.toString());
 	}
