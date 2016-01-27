@@ -548,7 +548,7 @@ public enum RiskOfComplications {
 	 * <div class="de">Liefert display name gemäss Parameter, falls die Sprache unbekannt ist, wird
 	 * standartmässig deutsch geliefert.</div> 
 	 * 
-	 * @param the language code to get the display name for
+	 * @param languageCode the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not found, display name in german will returned
 	 */
 	public String getDisplayName(LanguageCode languageCode) {

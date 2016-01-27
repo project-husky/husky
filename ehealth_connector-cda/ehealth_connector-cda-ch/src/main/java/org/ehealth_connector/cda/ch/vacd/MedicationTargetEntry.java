@@ -58,7 +58,7 @@ public class MedicationTargetEntry extends MdhtFacade<org.openhealthtools.mdht.u
 
 	/**
 	 * Instantiates a new medication target entry.
-	 * @param target
+	 * @param entry
 	 *            the target entry
 	 */
 	public MedicationTargetEntry(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
