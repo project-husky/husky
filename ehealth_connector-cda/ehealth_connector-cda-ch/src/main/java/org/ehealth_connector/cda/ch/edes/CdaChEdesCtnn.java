@@ -231,6 +231,13 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		getDoc().getCodedVitalSignsSection().createStrucDocText(sb.toString());
 	}
 
+	/**
+	 * <div class="en">Add the coded vital sign observation to the
+	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
+	 * Dokument ein</div>
+	 * 
+	 * @param sign
+	 */
 	public void addCodedVitalSign(VitalSignObservation sign) {
 		if (mCodedVitalSigns == null) {
 			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
