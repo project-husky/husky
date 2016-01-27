@@ -246,12 +246,12 @@ public enum RiskOfExposure {
 	NEUGEBORENE_UND_SAEUGLINGE_UNTER_12_MONATEN_AUS_LAENDERN_MIT_HOHER_TUBERKULOSE_PRAEVALENZ_DIE_WAHRSCHEINLICH_WIEDER_DORTHIN_ZURUECKKEHREN_IN_IHREM_ERSTEN_LEBENSJAHR(
 			"213024",
 			"Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)",
-			"Nouveau-nés ou nourrissons &lt; 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie",
-			"Neonati o lattanti &lt; 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ",
+			"Nouveau-nés ou nourrissons < 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie",
+			"Neonati o lattanti < 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ",
 			"20150101", ""),
 	/**
-	 * <div class="de">Neugeborene von HBsAg - positiven Müttern </div>
-	 * <div class="fr">Nouveau - nés de mères HBsAg positives</div>
+	 * <div class="de">Neugeborene von HBsAg-positiven Müttern </div>
+	 * <div class="fr">Nouveau-nés de mères HBsAg positives</div>
 	 * <div class="it">Neonati di madri HBsAg positive </div>
 	 */
 	NEUGEBORENE_VON_HBSAG_POSITIVEN_MUETTERN(

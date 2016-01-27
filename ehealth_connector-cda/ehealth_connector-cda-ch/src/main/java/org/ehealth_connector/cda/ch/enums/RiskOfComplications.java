@@ -261,13 +261,13 @@ public enum RiskOfComplications {
 			""),
 	/**
 	 * <div class="de">Empfänger einer Solidorgantransplantation</div>
-	 * <div class="fr">Receveurs d&apos;une transplantation d'organe solide</div>
+	 * <div class="fr">Receveurs d'une transplantation d'organe solide</div>
 	 * <div class="it">Riceventi di un trapianto d'organo solido</div>
 	 */
 	EMPFAENGER_EINER_SOLIDORGANTRANSPLANTATION(
 			"114019",
 			"Empfänger einer Solidorgantransplantation",
-			"Receveurs d&apos;une transplantation d'organe solide",
+			"Receveurs d'une transplantation d'organe solide",
 			"Riceventi di un trapianto d'organo solido",
 			"20140101",
 			""),
@@ -544,11 +544,10 @@ public enum RiskOfComplications {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * language is unknow, german name is returned</div> <div class="de">Liefert
-	 * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
+	 * language is unknow, german name is returned</div> 
+	 * <div class="de">Liefert display name gemäss Parameter, falls die Sprache unbekannt ist, wird
 	 * standartmässig deutsch geliefert.</div> 
 	 * 
-	 * @param languageCode The language code.
 	 * @param the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not found, display name in german will returned
 	 */
