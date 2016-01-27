@@ -44,7 +44,7 @@ public class RiskOfExposureTest {
 	@Before
 	public void setUp() throws Exception {
 		testLanguage = LanguageCode.FRENCH;
-		testRiskOfExp = RiskOfExposure.FLEDERMAUSFORSCHER_UND_SCHÜTZER;
+		testRiskOfExp = RiskOfExposure.FLEDERMAUSFORSCHER_UND_SCHUETZER;
 	}
 
 	/**
