@@ -17,24 +17,64 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection;
-import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
+/**
+ * The Class CdaChMtpsDis.
+ */
 public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis> {
-	
-	private final String formatCode = "urn:ihe:pharm:dis:2010";
 
-	public CdaChMtpsDis() {
+	/**
+	 * Instantiates a new cda ch mtps dis.
+	 *
+	 * @param languageCode the language code
+	 */
+	public CdaChMtpsDis(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
+		this.setLanguageCode(languageCode);
 		super.initCda();
-		getDoc().getRealmCodes().get(0).setCode("CHE");
-		
-		DispenseSection dispenseSection = PHARMFactory.eINSTANCE.createDispenseSection().init();
-		this.getDoc().addSection(dispenseSection);
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			setTitle("Dispensation des médicaments"); // CDA CH MTPS 7.4.2.5
+			break;
+		case GERMAN:
+			this.setTitle("Abgabe von Medikamenten"); // CDA CH MTPS 7.4.2.5
+			break;
+		case ITALIAN:
+			setTitle("Dispensazioni di farmaci"); // CDA CH MTPS 7.4.2.5
+			break;
+		case ENGLISH:
+			setTitle("Medication dispensed"); // IHE PHARM DIS L350
+			break;
+		}
+		DispenseSection dispenseSection = new DispenseSection(languageCode);
+		this.getDoc().addSection(dispenseSection.getMdht());
 	}
-	
+
+	/**
+	 * Instantiates a new cda ch mtps dis.
+	 */
+	public CdaChMtpsDis() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps dis.
+	 *
+	 * @param doc mdht model document
+	 */
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {
 		super(doc);
+	}
+
+	/**
+	 * Gets the dispense section.
+	 *
+	 * @return the dispense section
+	 */
+	public DispenseSection getDispenseSection() {
+		return new DispenseSection(this.getMdht().getDispenseSection());
 	}
 }

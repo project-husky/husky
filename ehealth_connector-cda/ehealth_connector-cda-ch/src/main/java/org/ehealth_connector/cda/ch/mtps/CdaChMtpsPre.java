@@ -17,15 +17,68 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
+/**
+ * The Class CdaChMtpsPre.
+ */
 public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
-
-	public CdaChMtpsPre() {
-		super(CHFactory.eINSTANCE.createCdaChMtpsPre().init());
-	}
 	
+	/**
+	 * Instantiates a new cda ch mtps pre.
+	 *
+	 * @param languageCode the language code
+	 */
+	public CdaChMtpsPre(LanguageCode languageCode) {
+		super(CHFactory.eINSTANCE.createCdaChMtpsPre().init());
+		this.setLanguageCode(languageCode);
+		super.initCda();
+		switch (this.getLanguageCode()) {
+		case GERMAN:
+			this.setTitle("Verordnung von Medikamenten"); // CDA CH MTPS 7.4.2.4
+			break;
+		case FRENCH:
+			setTitle("Prescriptions des médicaments"); // CDA CH MTPS 7.4.2.4
+			break;
+		case ITALIAN:
+			setTitle("Prescrizione farmacologica"); // CDA CH MTPS 7.4.2.4
+			break;
+		case ENGLISH:
+			setTitle("Pharmacy Prescription"); 
+			break;
+		}
+		PrescriptionSection section = new PrescriptionSection(getLanguageCode());
+		this.getDoc().addSection(section.getMdht());
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps pre.
+	 */
+	public CdaChMtpsPre() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps pre.
+	 *
+	 * @param doc the doc
+	 */
 	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre doc) {
 		super(doc);
 	}
+
+	/**
+	 * Gets the prescription section.
+	 *
+	 * @return the prescription section
+	 */
+	public PrescriptionSection getPrescriptionSection() {
+		if (this.getMdht().getPrescriptionSection()!=null) {
+			return new PrescriptionSection(this.getMdht().getPrescriptionSection());
+		}
+		return null;
+	}
+	
 }

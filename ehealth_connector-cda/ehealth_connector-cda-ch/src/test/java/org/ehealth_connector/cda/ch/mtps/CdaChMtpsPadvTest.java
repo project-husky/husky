@@ -63,10 +63,58 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
 		final Document document = cda.getDocument();
 
-		final XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.13']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		// realmCode
+		XPathExpression expr = xpath.compile("//realmCode[@code='CH']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// typeId
+		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// CH Dispense
+		expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.13']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm padv
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.2']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm padv code
+		expr = xpath.compile("//code[@code='61356-2']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
+
+	@Test
+	public void testDocumentSection() throws XPathExpressionException {
+		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
+		final Document document = cda.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.2']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//*/section/title[text()='Pharmaceutical Advice']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//*/section/templateId[@root='2.16.840.1.113883.10.20.1.8']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+		
+		expr = xpath.compile("//*/code[@code='61357-0' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}	
 	
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
@@ -93,17 +141,8 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChMtpsPadv cdaDeserialized = deserializeCda(deserialized);
 		assertTrue(cdaDeserialized != null);
+		assertEquals("Pharmaceutical Advice", cdaDeserialized.getPharmaceuticalAdviceSection().getTitle());
 	}
-
-	@Test
-	public void deserializeCdaTestTemplateId() throws Exception {
-		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPadv cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-	
 	
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));

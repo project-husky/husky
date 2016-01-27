@@ -32,10 +32,12 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -61,21 +63,21 @@ public class CdaChMtpsDisTest extends TestUtils {
 		final Document document = cda.getDocument();
 
 		// realmCode
-		XPathExpression expr = xpath.compile("//realmCode[@code='CHE']");
+		XPathExpression expr = xpath.compile("//realmCode[@code='CH']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and extension='POCD_HD000040']");
+		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		// CH Dispense
-		xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.11']");
+		expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.11']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -100,14 +102,44 @@ public class CdaChMtpsDisTest extends TestUtils {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		xpath.compile("//*/section/templateId[@root='2.16.840.1.113883.10.20.1.8']");
+		expr = xpath.compile("//*/section/title[text()='Pharmacy Dispense']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//*/section/templateId[@root='2.16.840.1.113883.10.20.1.8']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		
-//		expr = xpath.compile("//code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
+		expr = xpath.compile("//*/code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+	
+	@Test
+	public void failedModellingTest() throws XPathExpressionException {
+		org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection cda = PHARMFactory.eINSTANCE.createDispenseSection().init();
+		DispenseSection dispenseSection = new DispenseSection(cda);
+
+		final Document document = dispenseSection.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.3']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+//		expr = xpath.compile("//*/code[@code='60590-7' and @codeSystem='2.16.840.1.113883.6.1']");
+//		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+//		assertEquals(1, nodes.getLength());
+//      should be blowe		
+		
+//		expr = xpath.compile("//*/section/title[text()='Pharmacy Dispense']");
 //		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 //		assertEquals(1, nodes.getLength());
 
+
+		expr = xpath.compile("//*/code[@code='10160-0' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
 
 	}
 
@@ -136,6 +168,7 @@ public class CdaChMtpsDisTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChMtpsDis cdaDeserialized = deserializeCda(deserialized);
 		assertTrue(cdaDeserialized != null);
+		assertEquals("Pharmacy Dispense", cdaDeserialized.getDispenseSection().getTitle());
 	}
 
 	@Test

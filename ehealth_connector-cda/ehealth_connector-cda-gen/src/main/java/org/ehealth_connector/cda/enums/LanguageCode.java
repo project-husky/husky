@@ -15,17 +15,20 @@ public enum LanguageCode {
 	 * <div class="de">deutsch</div> <div class="fr"></div>
 	 */
 	GERMAN("de-CH", "german"), /**
-	 * <div class="de">französisch</div>
-	 * <div class="fr"></div>
-	 */
+								 * <div class="de">französisch</div>
+								 * <div class="fr"></div>
+								 */
 	FRENCH("fr-CH", "french"), /**
-	 * <div class="de">italienisch</div>
-	 * <div class="fr"></div>
-	 */
-	ITALIAN("it-CH", "italian");
+								 * <div class="de">italienisch</div>
+								 * <div class="fr"></div>
+								 */
+	ITALIAN("it-CH", "italian"),
+	
+	ENGLISH("en", "english");
 	public static final String GERMAN_CODE = "de-CH";
 	public static final String FRENCH_CODE = "fr-CH";
 	public static final String ITALIAN_CODE = "it-CH";
+	public static final String ENGLISH_CODE = "en";
 
 	public static final String CODE_SYSTEM_OID = "ISO 3166";
 	public static final String CODE_SYSTEM_NAME = "";

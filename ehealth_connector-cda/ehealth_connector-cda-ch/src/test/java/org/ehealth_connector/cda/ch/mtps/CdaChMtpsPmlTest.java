@@ -15,8 +15,7 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.mtps;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -63,9 +62,52 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final CdaChMtpsPml cda = new CdaChMtpsPml();
 		final Document document = cda.getDocument();
 
-		final XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.14']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		// realmCode
+		XPathExpression expr = xpath.compile("//realmCode[@code='CH']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
+
+		// typeId
+		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// CH PML
+		expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.8.1.14']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm pmö
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.5']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		// ihe pharm dis code
+		expr = xpath.compile("//code[@code='56445-0']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testDocumentSection() throws XPathExpressionException {
+		final CdaChMtpsPml cda = new CdaChMtpsPml();
+		final Document document = cda.getDocument();
+
+		XPathExpression expr = xpath
+				.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.5']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//*/code[@code='10160-0' and @codeSystem='2.16.840.1.113883.6.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+		
+		assertNotNull(cda.getMedicationListSection());
+		assertEquals("Medication List", cda.getMedicationListSection().getTitle());
 	}
 	
 	@Test
@@ -84,6 +126,12 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChMtpsPml cdaDeserialized = deserializeCdaDirect(deserialized);
 		assertTrue(cdaDeserialized != null);
+
+		final String deserialized2 = this.serializeDocument(cda);
+		log.debug(deserialized2);
+		
+		assertNotNull(cdaDeserialized.getMedicationListSection());
+		assertEquals("Medication List", cdaDeserialized.getMedicationListSection().getTitle());
 	}
 
 	@Test
