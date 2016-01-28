@@ -44,12 +44,12 @@ import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.AllergyProblem;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Address;
@@ -299,7 +299,7 @@ public class CdaChVacdTest extends TestUtils {
 		l.setCode(loincCode);
 		l.setLaboratory(organization1, endDate);
 		l.setEffectiveTime(startDate);
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		l.addValue(code2);
 		l.addValue(value1);
 		l.setCommentText(ts1);
@@ -699,8 +699,8 @@ public class CdaChVacdTest extends TestUtils {
 		// assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
 		assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
 
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
-		assertEquals(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN.getCodeValue(),
+		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		assertEquals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN.getCodeValue(),
 				l.getInterpretationCode());
 
 		l.addValue(code2);

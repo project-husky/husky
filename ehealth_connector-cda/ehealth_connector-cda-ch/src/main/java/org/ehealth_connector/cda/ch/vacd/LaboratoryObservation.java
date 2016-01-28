@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -461,7 +461,7 @@ public class LaboratoryObservation {
 	 * @param code
 	 *            the new interpretation code
 	 */
-	public void setInterpretationCode(ObservationInterpretationForImmunization code) {
+	public void setInterpretationCode(ObservationInterpretation code) {
 		mLaboratoryObservation.getInterpretationCodes().clear();
 		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}

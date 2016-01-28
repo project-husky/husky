@@ -30,7 +30,6 @@ import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
-import org.ehealth_connector.cda.ch.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
@@ -39,6 +38,7 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.ch.vacd.enums.SerologieForVACD;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.cda.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
@@ -591,7 +591,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode, Code laboratorySpecificCode,
 			Date dateTimeOfResult, Performer performer, Value value,
-			final ObservationInterpretationForImmunization observationInterpretation) {
+			final ObservationInterpretation observationInterpretation) {
 		final LaboratoryObservation lo = createLaboratoryObservation(serologieCode, laboratorySpecificCode, dateTimeOfResult, performer,
 				value);
 		lo.setInterpretationCode(observationInterpretation);
@@ -619,7 +619,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 */
 	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode, Code laboratorySpecificCode,
 			Date dateTimeOfResult, Performer performer, Value value,
-			final ObservationInterpretationForImmunization observationInterpretation, String comment) {
+			final ObservationInterpretation observationInterpretation, String comment) {
 		final LaboratoryObservation lo = createLaboratoryObservation(serologieCode, laboratorySpecificCode, dateTimeOfResult, performer,
 				value, observationInterpretation);
 		lo.setCommentText(comment);
