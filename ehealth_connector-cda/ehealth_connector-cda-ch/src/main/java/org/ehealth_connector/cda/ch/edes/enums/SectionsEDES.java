@@ -17,11 +17,13 @@ package org.ehealth_connector.cda.ch.edes.enums;
 
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChEdes;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum SectionsEDES implements ContentIdPrefix {
 	//@formatter:off
-	ABILITY_TO_WORK("X-­‐ATWRK", "atw", "Arbeitsfähigkeit", "Capacité de travail", "Abilità lavorativa", "Ability to Work"),
+	ABILITY_TO_WORK("X-ATWRK", "atw", "Arbeitsfähigkeit", "Capacité de travail", "Abilità lavorativa", "Ability to Work"),
 	ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste", "Liste des problèmes", "Elenco dei problemi", "Active Problems"),
 	ACUITY_ASSESSMENT("11283-9", "acas", "Triage Beurteilung", "Evaluation du triage", "Valutazione del triage", "Acuity Assessment"),
 	ADVANCE_DIRECTIVES("42348-3", "ad", "Patientenverfügungen", "Directives anticipées", "Direttive anticipate", "Advance Directives"),
@@ -84,6 +86,17 @@ public enum SectionsEDES implements ContentIdPrefix {
 
 	public String getLoincCode() {
 		return loincCode;
+	}
+
+	public Section findSection(CdaChEdes edesDocument) {
+		for (final Section section : edesDocument.getSections()) {
+			if (section.getCode() != null) {
+				if (loincCode.equals(section.getCode().getCode())) {
+					return section;
+				}
+			}
+		}
+		return null;
 	}
 
 	public String getSectionTitle(CS lc) {

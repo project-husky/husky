@@ -148,8 +148,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		cda.setNarrativeTextSectionAcuityAssessment(testText);
 		cda.setNarrativeTextSectionModeOfArrival(testText);
-		// cda.setNarrativeTextSectionRemarks(testText);
-		// cda.setNarrativeTextSectionAbilityToWork(testText);
+		cda.setNarrativeTextSectionRemarks(testText);
+		cda.setNarrativeTextSectionAbilityToWork(testText);
 
 		final String deserialized = serializeDocument(cda);
 		log.debug(deserialized);
@@ -163,14 +163,13 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(
 				SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
 
-		// assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
-		// assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(
-		// SectionsEDES.REMARKS.getContentIdPrefix()));
-		//
-		// assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
-		// assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(
-		// SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(
+				SectionsEDES.REMARKS.getContentIdPrefix()));
 
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(
+				SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
 	}
 
 	@Test

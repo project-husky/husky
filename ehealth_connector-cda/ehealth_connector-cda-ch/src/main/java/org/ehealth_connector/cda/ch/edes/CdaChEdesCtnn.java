@@ -87,7 +87,7 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *         Teils des CDA-Dokuments</div>
 	 */
 	public String getNarrativeTextSectionAbilityToWork() {
-		return getNarrativeText(getDoc().getAbilityToWorkSection());
+		return getNarrativeText(SectionsEDES.ABILITY_TO_WORK.findSection(getDoc()));
 	}
 
 	/**
@@ -102,10 +102,10 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 */
 	public void setNarrativeTextSectionAbilityToWork(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.ABILITY_TO_WORK, text);
-		if (getDoc().getAbilityToWorkSection() == null) {
+		if (SectionsEDES.ABILITY_TO_WORK.findSection(getDoc()) == null) {
 			getDoc().addSection(CHFactory.eINSTANCE.createAbilityToWorkSection().init());
 		}
-		getDoc().getAbilityToWorkSection().createStrucDocText(sb.toString());
+		SectionsEDES.ABILITY_TO_WORK.findSection(getDoc()).createStrucDocText(sb.toString());
 	}
 
 	/**
@@ -693,7 +693,7 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *         Teils des CDA-Dokuments</div>
 	 */
 	public String getNarrativeTextSectionRemarks() {
-		return getNarrativeText(getDoc().getRemarksSection());
+		return getNarrativeText(SectionsEDES.REMARKS.findSection(getDoc()));
 	}
 
 	/**
@@ -708,10 +708,10 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
 		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsEDES.REMARKS, text);
-		if (getDoc().getRemarksSection() == null) {
+		if (SectionsEDES.REMARKS.findSection(getDoc()) == null) {
 			getDoc().addSection(CHFactory.eINSTANCE.createRemarksSection().init());
 		}
-		getDoc().getRemarksSection().createStrucDocText(sb.toString());
+		SectionsEDES.REMARKS.findSection(getDoc()).createStrucDocText(sb.toString());
 	}
 
 	/**
