@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xsi:schemaLocation="urn:hl7-org:v3 infrastructure/cda/CDA_SDTC.xsd">
+  <realmCode code="CH"/>
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+  <templateId root="2.16.756.5.30.1.1.1.1.3.5.1"/>
+  <templateId root="2.16.756.5.30.1.1.1.1" extension="CDA-CH"/>
+  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"/>
+  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+  <id root="2.16.756.5.30.1.1.1.1" extension="51c4d94c-51c2-1950-aeba-13b0b1958ec8"/>
+  <code code="11369-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF IMMUNIZATIONS"/>
+  <title>eVACDOC</title>
+  <effectiveTime value="20160128"/>
+  <confidentialityCode code="R" codeSystem="2.16.840.1.113883.5.25" displayName="Restriced"/>
+  <languageCode code="de-CH"/>
+  <setId root="2.16.756.5.30.1.1.1.1" extension="51c4d94c-51c2-1950-aeba-13b0b1958ec8"/>
+  <versionNumber value="1"/>
+  <recordTarget>
+    <patientRole>
+      <id root="2.16.756.5.31"/>
+      <id root="2.16.756.5.30.1.147.1.1" extension="1448838753736001"/>
+      <addr use="HP"><streetName>Mustergasse</streetName><houseNumber>1</houseNumber><city>Musterhausen</city><postalCode>9999</postalCode></addr>
+      <patient>
+        <name><given>Max</given><family>Muster</family></name>
+        <administrativeGenderCode code="M" codeSystem="2.16.840.1.113883.5.1" displayName="Male"/>
+        <birthTime value="19470611"/>
+      </patient>
+    </patientRole>
+  </recordTarget>
+  <author>
+    <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+    <time value="20160128"/>
+    <assignedAuthor>
+      <id root="1.3.88" extension="7601000000001"/>
+      <telecom value="tel:+41555500000" use="HP"/>
+      <assignedPerson>
+        <name><given>Test_1</given><family>Test_1</family></name>
+      </assignedPerson>
+      <representedOrganization>
+        <id root="1.3.88" extension="7601000000001"/>
+        <name>Test_1</name>
+        <telecom value="tel:+41555500000" use="HP"/>
+        <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+      </representedOrganization>
+    </assignedAuthor>
+  </author>
+  <custodian>
+    <assignedCustodian>
+      <representedCustodianOrganization>
+        <id root="1.3.88" extension="7601000000001"/>
+        <name>Test_1</name>
+        <telecom value="tel:+41555500000" use="HP"/>
+        <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+      </representedCustodianOrganization>
+    </assignedCustodian>
+  </custodian>
+  <legalAuthenticator>
+    <time value="20160128"/>
+    <signatureCode code="S"/>
+    <assignedEntity>
+      <id root="1.3.88" extension="7601000000001"/>
+      <telecom value="tel:+41555500000" use="HP"/>
+      <assignedPerson>
+        <name><given>Test_1</given><family>Test_1</family></name>
+      </assignedPerson>
+      <representedOrganization>
+        <id root="1.3.88" extension="7601000000001"/>
+        <name>Test_1</name>
+        <telecom value="tel:+41555500000" use="HP"/>
+        <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+      </representedOrganization>
+    </assignedEntity>
+  </legalAuthenticator>
+  <component>
+    <structuredBody>
+      <component>
+        <section>
+          <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.18.3.1"/>
+          <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+          <title>Impfplan</title>
+          <text><content ID="tp1">
+Recommendations calculated by meineimpfungen.ch</content></text>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4db2c-51c2-1950-9169-49ee3b65ab5f"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs10"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Revaxis</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4db72-51c2-1950-e86e-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs20"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>HBVAXPRO 10</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dbb8-51c2-1950-2092-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs30"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Engerix-B 20</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dbf4-51c2-1950-d1cd-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs40"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Agrippal</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dc4e-51c2-1950-66e6-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs50"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Fluad</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dca8-51c2-1950-4224-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs60"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Fluarix</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dd02-51c2-1950-7c07-c7e8f2f5661a"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs70"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Inflexal V</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dd5c-51c2-1950-c2ec-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs80"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Influvac</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4ddb6-51c2-1950-04c0-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs90"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160128"/>
+                <high value="20160128"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Mutagrip</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4de10-51c2-1950-d66d-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs100"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160228"/>
+                <high value="20160228"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>HBVAXPRO 10</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4de60-51c2-1950-f36f-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs110"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160228"/>
+                <high value="20160228"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Engerix-B 20</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dec4-51c2-1950-9a99-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs120"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160328"/>
+                <high value="20160328"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Revaxis</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4df14-51c2-1950-a2aa-5600716de484"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs130"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160728"/>
+                <high value="20160728"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>HBVAXPRO 10</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4df78-51c2-1950-34a3-0a0558ec576b"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs140"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160728"/>
+                <high value="20160728"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Engerix-B 20</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+          <entry>
+            <substanceAdministration classCode="SBADM" moodCode="PRP" negationInd="true">
+              <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12.2"/>
+              <templateId root="2.16.840.1.113883.10.20.1.25"/>
+              <templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.MediL3"/>
+              <id root="2.16.756.5.30.1.1.1.1.3.5" extension="51c4dfc8-51c2-1950-5a05-0a0558ec576b"/>
+              <code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7ActCode"/>
+              <text><reference value="#irs150"/></text>
+              <statusCode code="active"/>
+              <effectiveTime xsi:type="IVL_TS">
+                <low value="20160928"/>
+                <high value="20160928"/>
+              </effectiveTime>
+              <priorityCode nullFlavor="UNK"/>
+              <routeCode nullFlavor="NA"/>
+              <doseQuantity nullFlavor="UNK"/>
+              <consumable typeCode="CSM">
+                <manufacturedProduct>
+                  <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                  <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                  <id nullFlavor="UNK"/>
+                  <manufacturedMaterial>
+                    <code nullFlavor="UNK"/>
+                    <name>Revaxis</name>
+                  </manufacturedMaterial>
+                </manufacturedProduct>
+              </consumable>
+              <author>
+                <functionCode code="221" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Medical doctors"/>
+                <time value="20160128"/>
+                <assignedAuthor>
+                  <id root="1.3.88" extension="7601000000001"/>
+                  <telecom value="tel:+41555500000" use="HP"/>
+                  <assignedPerson>
+                    <name><given>Test_1</given><family>Test_1</family></name>
+                  </assignedPerson>
+                  <representedOrganization>
+                    <id root="1.3.88" extension="7601000000001"/>
+                    <name>Test_1</name>
+                    <telecom value="tel:+41555500000" use="HP"/>
+                    <addr use="WP"><streetName>Tobelweg 4</streetName><houseNumber/><city>Küsnacht</city><postalCode>8700</postalCode></addr>
+                  </representedOrganization>
+                </assignedAuthor>
+              </author>
+            </substanceAdministration>
+          </entry>
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>
