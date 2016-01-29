@@ -46,10 +46,10 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Address;
@@ -218,12 +218,14 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public Consumable createConsumable1() {
-		final Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
+		final Consumable c = new Consumable(ts1,
+				new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
 		return c;
 	}
 
 	public Consumable createConsumable2() {
-		final Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
+		final Consumable c = new Consumable(ts5,
+				new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
 		return c;
 	}
 
@@ -232,21 +234,25 @@ public class CdaChVacdTest extends TestUtils {
 		final Author arzt = getArztAllzeitBereit();
 
 		final Organization arztPraxis = new Organization("Gruppenpraxis CH", "7608888888888");
-		final Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888", "Musterhausen", AddressUse.BUSINESS);
+		final Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888", "Musterhausen",
+				AddressUse.BUSINESS);
 		arztPraxis.addAddress(arztPraxisAdresse);
 		arztPraxis.setTelecoms(arzt.getTelecoms());
 
 		// Patient
 		final Name patientName = new Name("Franzine", "Muster");
-		final Patient patient = new Patient(patientName, AdministrativeGender.FEMALE, DateUtil.date("10.02.1967"));
-		final Address patientAdresse = new Address("Leidensweg", "10", "9876", "Specimendorf", AddressUse.PRIVATE);
+		final Patient patient = new Patient(patientName, AdministrativeGender.FEMALE,
+				DateUtil.date("10.02.1967"));
+		final Address patientAdresse = new Address("Leidensweg", "10", "9876", "Specimendorf",
+				AddressUse.PRIVATE);
 		final Telecoms patientTelecoms = new Telecoms();
 		patientTelecoms.addPhone("+41326851234", AddressUse.PRIVATE);
 		patient.setTelecoms(patientTelecoms);
 
 		// Adding an id using an OID that is already known by the convenience
 		// API (AHV-Nr/No AVS/SSN)
-		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(), "123.71.332.115"));
+		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(),
+				"123.71.332.115"));
 		// Adding an id using an OID that is not known by the convenience API,
 		// yet
 		patient.addId(new Identificator("2.16.756.5.30.1.123.100.1.1.1", "8077560000000000000000"));
@@ -299,7 +305,7 @@ public class CdaChVacdTest extends TestUtils {
 		l.setCode(loincCode);
 		l.setLaboratory(organization1, endDate);
 		l.setEffectiveTime(startDate);
-		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		l.addValue(code2);
 		l.addValue(value1);
 		l.setCommentText(ts1);
@@ -533,32 +539,38 @@ public class CdaChVacdTest extends TestUtils {
 		immunization2 = createImmunization();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc().getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
+				.getImmunizationsSection().getTitle().getText());
 
 	}
 
@@ -593,7 +605,10 @@ public class CdaChVacdTest extends TestUtils {
 		final Consumable c = new Consumable(ts1);
 
 		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
-		assertEquals(true, TestUtils.isEqual(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1), c.getManufacturedProductId()));
+		assertEquals(
+				true,
+				TestUtils.isEqual(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1),
+						c.getManufacturedProductId()));
 
 		c.setTradeName(ts2);
 		assertEquals(ts2, c.getTradeName());
@@ -611,7 +626,8 @@ public class CdaChVacdTest extends TestUtils {
 	public void testDocMetadata(String constructorName, CdaChVacd doc) {
 		assertNotNull(constructorName + " Constructor - DocumentRoot is null", doc.getDocRoot());
 		assertNotNull(constructorName + " Constructor - Document is null", doc.getDoc());
-		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc.getDoc().getLanguageCode().getCode());
+		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc
+				.getDoc().getLanguageCode().getCode());
 	}
 
 	// 11
@@ -699,9 +715,10 @@ public class CdaChVacdTest extends TestUtils {
 		// assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
 		assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
 
-		l.setInterpretationCode(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
-		assertEquals(ObservationInterpretation.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN.getCodeValue(),
-				l.getInterpretationCode());
+		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		assertEquals(
+				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN
+						.getCodeValue(), l.getInterpretationCode());
 
 		l.addValue(code2);
 		assertTrue(TestUtils.isEqual(code2, l.getValue().getCode()));
@@ -865,7 +882,8 @@ public class CdaChVacdTest extends TestUtils {
 
 	private VACD deserializeVacDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getVACD());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getVACD());
 		return (VACD) clinicalDocument;
 	}
 

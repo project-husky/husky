@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.cda.enums.ObservationInterpretation;
+import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -84,7 +84,8 @@ public class LaboratoryObservation {
 	 *            class="de">Das ausführende Labor.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult, Organization laboratory) {
+	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
+			Organization laboratory) {
 		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
 
 		setCode(code);
@@ -116,7 +117,8 @@ public class LaboratoryObservation {
 	 *            <div class="de">Wert des Resultats (als Code-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Code valueCode) {
+	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
+			Date dateTimeOfResult, Code valueCode) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.addValue(valueCode);
@@ -146,7 +148,8 @@ public class LaboratoryObservation {
 	 *            <div class="de">Wert des Resultats (als Code-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection, Date dateTimeOfResult, Value value) {
+	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
+			Date dateTimeOfResult, Value value) {
 		this(code, immuneProtection, dateTimeOfResult, laboratory);
 
 		this.addValue(value);
@@ -156,8 +159,9 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 * 
 	 * @param labObs
-	 *            <br> <div class="de"> lab obs</div> <div class="fr"> lab
-	 *            obs</div> <div class="it"> lab obs</div>
+	 * <br>
+	 *            <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
+	 *            <div class="it"> lab obs</div>
 	 */
 	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
 		mLaboratoryObservation = labObs;
@@ -271,7 +275,8 @@ public class LaboratoryObservation {
 	 */
 	public Date getDateTimeOfResult() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime());
+			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0)
+					.getTime());
 		} else {
 			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
 		}
@@ -287,9 +292,12 @@ public class LaboratoryObservation {
 	 */
 	public String getDateTimeOfResultStr() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtil.formatDateTimeCh(DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime()));
+			return DateUtil.formatDateTimeCh(DateUtil
+					.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0)
+							.getTime()));
 		} else {
-			return DateUtil.formatDateTimeCh(DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime()));
+			return DateUtil.formatDateTimeCh(DateUtil
+					.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime()));
 		}
 	}
 
@@ -355,9 +363,10 @@ public class LaboratoryObservation {
 	public Organization getLaboratory() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
 			if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity() != null) {
-				if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().size() > 0) {
-					return new Organization(
-							mLaboratoryObservation.getPerformers().get(0).getAssignedEntity().getRepresentedOrganizations().get(0));
+				if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity()
+						.getRepresentedOrganizations().size() > 0) {
+					return new Organization(mLaboratoryObservation.getPerformers().get(0)
+							.getAssignedEntity().getRepresentedOrganizations().get(0));
 				}
 			}
 		}
@@ -424,8 +433,8 @@ public class LaboratoryObservation {
 		mComment.setText(ed);
 		mLaboratoryObservation.addAct(mComment);
 
-		final EntryRelationship er = mLaboratoryObservation.getEntryRelationships()
-				.get(mLaboratoryObservation.getEntryRelationships().size() - 1);
+		final EntryRelationship er = mLaboratoryObservation.getEntryRelationships().get(
+				mLaboratoryObservation.getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
 	}
@@ -438,7 +447,8 @@ public class LaboratoryObservation {
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
-			mLaboratoryObservation.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+			mLaboratoryObservation.setEffectiveTime(DateUtil
+					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -461,7 +471,7 @@ public class LaboratoryObservation {
 	 * @param code
 	 *            the new interpretation code
 	 */
-	public void setInterpretationCode(ObservationInterpretation code) {
+	public void setInterpretationCode(ObservationInterpretationForImmunization code) {
 		mLaboratoryObservation.getInterpretationCodes().clear();
 		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}
@@ -471,19 +481,22 @@ public class LaboratoryObservation {
 	 * laboratory.</div> <div class="it">Sets the laboratory.</div>
 	 * 
 	 * @param laboratory
-	 *            <br> <div class="en"> laboratory</div> <div class="fr">
+	 * <br>
+	 *            <div class="en"> laboratory</div> <div class="fr">
 	 *            laboratory</div> <div class="it"> laboratory</div>
 	 * @param dateTimeOfResult
-	 *            <br> <div class="en"> date time of result</div> <div
-	 *            class="fr"> date time of result</div> <div class="it"> date
-	 *            time of result</div>
+	 * <br>
+	 *            <div class="en"> date time of result</div> <div class="fr">
+	 *            date time of result</div> <div class="it"> date time of
+	 *            result</div>
 	 */
 	public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {
 		final Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
 		final AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		if (laboratory.getId() != null) {
-			final II ii = DatatypesFactory.eINSTANCE.createII(CodeSystems.GLN.getCodeSystemId(), laboratory.getId());
+			final II ii = DatatypesFactory.eINSTANCE.createII(CodeSystems.GLN.getCodeSystemId(),
+					laboratory.getId());
 			asEnt.getIds().add(ii);
 		}
 

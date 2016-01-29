@@ -1,36 +1,40 @@
-package org.ehealth_connector.cda.enums;
+package org.ehealth_connector.cda.ch.vacd.enums;
 
+import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Codesystem: HL7 ObservationInterpretation (OID: 2.16.840.1.113883.5.83). Das folgende Subset (siehe auch OID 2.16.756.5.30.1.127.3.2.20121101.3) ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
- *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
- */
-public enum ObservationInterpretation {
+public enum ObservationInterpretationForImmunization {
+
 	//@formatter:off
-	ABNORMAL("A", "Abnormal"),
-	ABNORMAL_ALERT("AA", "Abnormal alert"),
-	HIGH("H", "High"),
-	HIGH_ALERT("HH", "High alert"),
-	LOW("L", "Low"),
-	LOW_ALERT("LL", "Low alert"),
-	NORMAL("N",	"Normal"),
-	POS("POS", "Positiv"),
-	NEG("NEG", "Negativ");
+	/**
+	 * <div class="de">Negativ: Erreger konnte in Probe nicht nachgewiesen
+	 * werden</div> <div class="fr">Négatif: L’agent pathogène n’a pas pu être
+	 * dépisté dans l’échantillon</div> <div class="it"></div>
+	 */
+	NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN(ObservationInterpretation.NEG,
+			"Negative: Pathogen couldn't be determined in specimen"),
+	/**
+	 * <div class="de">Positiv Erreger in Probe nachgewiesen</div>
+	 * <div class="fr">Positif: Agent pathogène dépisté dans l’échantillon</div>
+	 * <div class="it"></div>
+	 */
+	POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN(ObservationInterpretation.POS, "Positive: Pathogen found in specimen");
 	//@formatter:on
 
-	/**
-	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
-	 */
-	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
-	/**
-	 * <div class="en">Identifier of the Code System</div> <div
-	 * class="de">Identifikator für das Code System</div>
-	 */
-	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.83";
+	public static final String NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN_CODE = "NEG";
+
+	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
+
+	private ObservationInterpretation root;
+
+	private String displayName;
+
+	private ObservationInterpretationForImmunization(ObservationInterpretation root,
+			String displayName) {
+		this.root = root;
+		this.displayName = displayName;
+	}
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div> <div
@@ -41,8 +45,8 @@ public enum ObservationInterpretation {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ObservationInterpretation getEnum(String code) {
-		for (ObservationInterpretation x : values()) {
+	public static ObservationInterpretationForImmunization getEnum(String code) {
+		for (ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -66,7 +70,7 @@ public enum ObservationInterpretation {
 			return false;
 		}
 		try {
-			Enum.valueOf(ObservationInterpretation.class, enumName);
+			Enum.valueOf(ObservationInterpretationForImmunization.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -84,42 +88,12 @@ public enum ObservationInterpretation {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (ObservationInterpretation x : values()) {
+		for (ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
-	 */
-	private String code;
-
-	/**
-	 * <div class="en">Human readable name</div> <div
-	 * class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
-	 *
-	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
-	 * @param displayName
-	 * <br>
-	 *            <div class="de"> display name</div>
-	 */
-	private ObservationInterpretation(String code, String displayName) {
-		this.code = code;
-		this.displayName = displayName;
 	}
 
 	/**
@@ -129,9 +103,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCode(code);
+		CE ce = root.getCE();
 		ce.setDisplayName(displayName);
 		return ce;
 	}
@@ -143,7 +115,8 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = root.getCode();
+		ehcCode.setDisplayName(displayName);
 		return ehcCode;
 	}
 
@@ -154,7 +127,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
+		return root.getCodeSystemName();
 	}
 
 	/**
@@ -164,7 +137,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
+		return root.getCodeSystemOid();
 	}
 
 	/**
@@ -174,7 +147,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
-		return this.code;
+		return root.getCodeValue();
 	}
 
 	/**
@@ -186,5 +159,4 @@ public enum ObservationInterpretation {
 	public String getDisplayName() {
 		return this.displayName;
 	}
-
 }
