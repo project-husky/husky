@@ -4,6 +4,10 @@ import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
+/*
+ *<div class="de">Das folgende Subset (siehe auch OID 2.16.756.5.30.1.127.3.2.20121101.3) ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
+ *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
+ */
 public enum ObservationInterpretationForImmunization {
 
 	//@formatter:off
