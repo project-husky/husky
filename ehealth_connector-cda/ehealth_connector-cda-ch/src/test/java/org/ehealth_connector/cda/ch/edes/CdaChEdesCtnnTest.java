@@ -21,7 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation.VitalSignCodes;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
@@ -188,10 +190,12 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				new Value("62", Ucum.PerMinute)));
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, new Value("120", Ucum.MilliMetersOfMercury)));
+				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				new Value("120", Ucum.MilliMetersOfMercury)));
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, new Value("80", Ucum.MilliMetersOfMercury)));
+				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				new Value("80", Ucum.MilliMetersOfMercury)));
 
 		List<VitalSignObservation> observations = cda.getCodedVitalSignObservations();
 		assertFalse(observations.isEmpty());
@@ -207,6 +211,10 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				.getCode().getCode());
 		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(), observations.get(4).getValue()
 				.getPhysicalQuantityUnit());
+		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(), observations.get(4)
+				.getInterpretationCode().getCode());
+		assertEquals(ActSite.LEFT_ARM.getCodeValue(), observations.get(4).getTargetSiteCode()
+				.getCode());
 	}
 
 	@Test

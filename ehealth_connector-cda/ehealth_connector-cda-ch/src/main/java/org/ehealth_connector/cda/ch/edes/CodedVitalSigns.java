@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -112,6 +114,20 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 				String signDescription = vitalSignObservation.getCode().getDisplayName();
 				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue()
 						+ " " + vitalSignObservation.getValue().getPhysicalQuantityUnit();
+				Code code = vitalSignObservation.getInterpretationCode();
+				if (code != null
+						&& !ObservationInterpretationVitalSign.NORMAL.getCodeValue().equals(
+								code.getCode())) {
+					String signInterpretation = "["
+							+ vitalSignObservation.getInterpretationCode().getDisplayName() + "]";
+					signResult += " " + signInterpretation;
+				}
+				Code target = vitalSignObservation.getTargetSiteCode();
+				if (target != null) {
+					String signTarget = "["
+							+ vitalSignObservation.getTargetSiteCode().getDisplayName() + "]";
+					signDescription += " " + signTarget;
+				}
 				sb.append("<tr><td>" + signDateTime + "</td><td>" + signDescription + "</td><td>"
 						+ signResult + "</td></tr>");
 			}

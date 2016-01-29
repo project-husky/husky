@@ -3,13 +3,17 @@ package org.ehealth_connector.cda.ch.edes;
 import java.text.ParseException;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
 public class VitalSignObservation {
 
@@ -89,17 +93,70 @@ public class VitalSignObservation {
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
 	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
+	 * @param interpretation
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param targetSite
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public VitalSignObservation(VitalSignCodes code, Date effectiveTime,
+			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
+		this(code.getCode(), effectiveTime, interpretation, targetSite, value);
+	}
+
+	/**
+	 * Instantiates a new vital sign observation.
+	 * 
+	 * @param code
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param effectiveTime
+	 *            <div class="en">clinically or operationally relevant
+	 *            time</div> <div class="de">klinisch relevantes Datum und
+	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
+		this(code, effectiveTime, null, null, value);
+	}
+
+	/**
+	 * Instantiates a new vital sign observation.
+	 * 
+	 * @param code
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param effectiveTime
+	 *            <div class="en">clinically or operationally relevant
+	 *            time</div> <div class="de">klinisch relevantes Datum und
+	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
+	 * @param interpretation
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param targetSite
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public VitalSignObservation(Code code, Date effectiveTime,
+			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
 		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
 
 		setCode(code);
 		setEffectiveTime(effectiveTime);
+		setInterpretationCode(interpretation);
+		setTargetSite(targetSite);
 		addValue(value);
-		setInterpretationCode(ObservationInterpretationVitalSign.NORMAL);
 	}
 
 	/**
@@ -190,8 +247,47 @@ public class VitalSignObservation {
 		}
 	}
 
+	/**
+	 * Set a new interpretations of the vital sign observation.
+	 * 
+	 * @param code
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 */
 	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
 		mVitalSignObservation.getInterpretationCodes().clear();
-		mVitalSignObservation.getInterpretationCodes().add(code.getCE());
+		if (code != null) {
+			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
+		}
+	}
+
+	public Code getInterpretationCode() {
+		EList<CE> codes = mVitalSignObservation.getInterpretationCodes();
+		if (!codes.isEmpty()) {
+			return new Code(codes.get(0));
+		}
+		return null;
+	}
+
+	/**
+	 * Set a new act site of the vital sign observation.
+	 * 
+	 * @param code
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
+	 */
+	public void setTargetSite(ActSite code) {
+		mVitalSignObservation.getTargetSiteCodes().clear();
+		if (code != null) {
+			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
+		}
+	}
+
+	public Code getTargetSiteCode() {
+		EList<CD> codes = mVitalSignObservation.getTargetSiteCodes();
+		if (!codes.isEmpty()) {
+			return new Code(codes.get(0));
+		}
+		return null;
 	}
 }
