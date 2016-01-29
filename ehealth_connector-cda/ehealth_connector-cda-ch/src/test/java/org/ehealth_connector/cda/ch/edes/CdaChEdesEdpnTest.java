@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation.VitalSignCodes;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
@@ -241,6 +242,7 @@ public class CdaChEdesEdpnTest extends TestUtils {
 	@Test
 	public void codedVitalSignsSerializationTest() throws Exception {
 		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
+		cda.setLanguageCode(LanguageCode.GERMAN);
 
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
@@ -254,6 +256,7 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChEdesEdpn cdaDeserialized = deserializeCdaDirect(deserialized);
 
+		assertEquals(LanguageCode.GERMAN_CODE, cdaDeserialized.getLanguageCode().getCodeValue());
 		List<VitalSignObservation> observations = cdaDeserialized.getCodedVitalSignObservations();
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
@@ -25,7 +26,9 @@ public class VitalSignObservation {
 		}
 
 		public Code getCode() {
-			return new Code(CodeSystems.LOINC, loinc);
+			Code ret = new Code(CodeSystems.LOINC, loinc);
+			ret.setDisplayName(toString());
+			return ret;
 		}
 
 		public Object getLoinc() {
@@ -96,6 +99,7 @@ public class VitalSignObservation {
 		setCode(code);
 		setEffectiveTime(effectiveTime);
 		addValue(value);
+		setInterpretationCode(ObservationInterpretationVitalSign.NORMAL);
 	}
 
 	/**
@@ -184,5 +188,10 @@ public class VitalSignObservation {
 		if (value.isRto()) {
 			mVitalSignObservation.getValues().add(value.copyMdhtRto());
 		}
+	}
+
+	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
+		mVitalSignObservation.getInterpretationCodes().clear();
+		mVitalSignObservation.getInterpretationCodes().add(code.getCE());
 	}
 }

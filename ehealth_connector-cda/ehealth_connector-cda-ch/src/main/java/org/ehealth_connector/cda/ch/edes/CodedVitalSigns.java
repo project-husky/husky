@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.ch.edes;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 	public void add(VitalSignObservation sign) {
 		VitalSignsOrganizer organizer = getOrganizerForDate(sign.getEffectiveTime());
 		organizer.addObservation(sign.getMdhtCopy());
+
+		getMdht().createStrucDocText(getTable());
 	}
 
 	private VitalSignsOrganizer getOrganizerForDate(Date effectiveTime) {
@@ -83,6 +86,38 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 				}
 			}
 		}
+		ret.sort(new Comparator<VitalSignObservation>() {
+			@Override
+			public int compare(VitalSignObservation left, VitalSignObservation right) {
+				return right.getEffectiveTime().compareTo(left.getEffectiveTime());
+			}
+		});
 		return ret;
+	}
+
+	private String getTable() {
+		StringBuilder sb = new StringBuilder();
+		List<VitalSignObservation> observations = getCodedVitalSignObservations();
+
+		if (!observations.isEmpty()) {
+			sb.append("<table><tbody>");
+			if (languageCode == LanguageCode.GERMAN) {
+				sb.append("<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
+			} else {
+				sb.append("<tr><th>Date / Time</th><th>Description</th><th>Result</th></tr>");
+			}
+			for (VitalSignObservation vitalSignObservation : observations) {
+				String signDateTime = DateUtil.formatDateTimeCh(vitalSignObservation
+						.getEffectiveTime());
+				String signDescription = vitalSignObservation.getCode().getDisplayName();
+				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue()
+						+ " " + vitalSignObservation.getValue().getPhysicalQuantityUnit();
+				sb.append("<tr><td>" + signDateTime + "</td><td>" + signDescription + "</td><td>"
+						+ signResult + "</td></tr>");
+			}
+			sb.append("</tbody></table>");
+		}
+
+		return sb.toString();
 	}
 }
