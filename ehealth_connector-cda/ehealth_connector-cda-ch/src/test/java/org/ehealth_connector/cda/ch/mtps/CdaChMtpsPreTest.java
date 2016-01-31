@@ -33,6 +33,10 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -112,7 +116,23 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals("Prescription for medication", cda.getPrescriptionSection().getTitle());
 	}
 	
-	
+	@Test
+	public void testDocumentSectionDeserializeWithEntries() throws Exception {
+		final CdaChMtpsPre cda = new CdaChMtpsPre();
+
+		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
+		preEntry.setTextReference("#pre");
+		cda.getPrescriptionSection().addPrescriptionItemEntry(preEntry);
+		
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
+
+		assertTrue(cdaDeserialized != null);
+
+		assertEquals("#pre", cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
+				.get(0).getTextReference());
+	}
 	
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {

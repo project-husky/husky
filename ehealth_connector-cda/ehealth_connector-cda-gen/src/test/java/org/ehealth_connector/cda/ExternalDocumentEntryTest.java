@@ -14,7 +14,7 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda.ch;
+package org.ehealth_connector.cda;
 
 import static org.junit.Assert.assertEquals;
 

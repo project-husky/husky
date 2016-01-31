@@ -32,6 +32,8 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -115,6 +117,25 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}	
+	
+	@Test
+	public void testDocumentSectionDeserializeWithEntries() throws Exception {
+
+		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
+
+		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
+		padvEntry.setTextReference("#padv");
+		cda.getPharmaceuticalAdviceSection().setPharmaceuticalAdviceItemEntry(padvEntry);
+
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPadv cdaDeserialized = deserializeCda(deserialized);
+
+		assertTrue(cdaDeserialized != null);
+
+		assertEquals("#padv", cdaDeserialized.getPharmaceuticalAdviceSection().getPharmaceuticalAdviceItemEntry().getTextReference());
+	}
+
 	
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {

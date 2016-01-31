@@ -16,6 +16,9 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
@@ -87,6 +90,28 @@ public class PrescriptionSection extends MdhtFacade<org.openhealthtools.mdht.uml
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
+	}
+
+	/**
+	 * Adds the prescription item entry.
+	 *
+	 * @param entry the entry
+	 */
+	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
+		this.getMdht().addSubstanceAdministration(entry.getMdht());
+	}
+
+	/**
+	 * Gets the prescription item entries.
+	 *
+	 * @return the prescription item entries
+	 */
+	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
+		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht().getPrescriptionItemEntries()) {
+			entries.add(new PrescriptionItemEntry(entry));
+		}
+		return entries;
 	}
 
 

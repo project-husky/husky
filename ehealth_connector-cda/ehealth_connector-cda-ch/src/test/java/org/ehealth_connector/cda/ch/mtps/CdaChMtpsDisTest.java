@@ -32,7 +32,11 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
+import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -141,6 +145,25 @@ public class CdaChMtpsDisTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
+	}
+	
+	@Test
+	public void testDocumentSectionDeserializeWithEntries() throws Exception {
+
+		final CdaChMtpsDis cda = new CdaChMtpsDis();
+
+		
+		final DispenseItemEntry disEntry = new DispenseItemEntry();
+		disEntry.setTextReference("#dis");
+		cda.getDispenseSection().setDispenseItemEntry(disEntry);
+
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsDis cdaDeserialized = deserializeCda(deserialized);
+
+		assertTrue(cdaDeserialized != null);
+
+		assertEquals("#dis", cdaDeserialized.getDispenseSection().getDispenseItemEntry().getTextReference());
 	}
 
 	@Test

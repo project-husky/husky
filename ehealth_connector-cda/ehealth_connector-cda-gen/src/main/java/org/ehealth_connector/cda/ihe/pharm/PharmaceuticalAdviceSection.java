@@ -16,9 +16,11 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
+import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Entry;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
 /**
@@ -91,5 +93,34 @@ public class PharmaceuticalAdviceSection
 		}
 		return null;
 	}
+	
+	/**
+	 * Gets the pharmaceutical advice item entry.
+	 *
+	 * @return the pharmaceutical advice item entry
+	 */
+	public PharmaceuticalAdviceItemEntry getPharmaceuticalAdviceItemEntry() {
+		if (this.getMdht().getPharmaceuticalAdviceItemEntry()!=null) {
+			return new PharmaceuticalAdviceItemEntry(getMdht().getPharmaceuticalAdviceItemEntry());
+		}
+		return null;
+	}
+	
+	/**
+	 * Sets the pharmaceutical advice item entry.
+	 *
+	 * @param entry the new pharmaceutical advice item entry
+	 */
+	public void setPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
+		if (this.getMdht().getPharmaceuticalAdviceItemEntry()!=null) {
+			EList<Entry> entries = this.getMdht().getEntries();
+			if (entries!=null && entries.size()>0) {
+				entries.get(0).setObservation(entry.getMdht());
+				return ;
+			} 
+		} 
+		this.getMdht().addObservation(entry.getMdht());
+	}
+
 
 }

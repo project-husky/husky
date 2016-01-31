@@ -383,13 +383,13 @@ public class Code {
 		if (mCD == null)
 			return prime;
 		int result = 1;
-		result = (prime * result) + mCD.getCode().hashCode();
-		result = (prime * result) + mCD.getCodeSystem().hashCode();
-		result = (prime * result) + mCD.getCodeSystemVersion().hashCode();
-		result = (prime * result) + mCD.getCodeSystemName().hashCode();
-		result = (prime * result) + mCD.getNullFlavor().getName().hashCode();
-		result = (prime * result) + mCD.getNullFlavor().getValue();
-		result = (prime * result) + mCD.getTranslations().hashCode();
+		result = (prime * result) + (mCD.getCode()!=null ? mCD.getCode().hashCode() : 0);
+		result = (prime * result) + (mCD.getCodeSystem() !=null ? mCD.getCodeSystem().hashCode(): 0);
+		result = (prime * result) + (mCD.getCodeSystemVersion()!=null ? mCD.getCodeSystemVersion().hashCode() : 0);
+		result = (prime * result) + (mCD.getCodeSystemName()!=null ? mCD.getCodeSystemName().hashCode(): 0);
+		result = (prime * result) + (mCD.getNullFlavor()!=null ? mCD.getNullFlavor().getName().hashCode(): 0);
+		result = (prime * result) + (mCD.getNullFlavor()!=null ? mCD.getNullFlavor().getValue(): 0);
+		result = (prime * result) + (mCD.getTranslations()!=null ? mCD.getTranslations().hashCode(): 0);
 		return result;
 	}
 
