@@ -153,5 +153,40 @@ public class PharmaceuticalAdviceItemEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
+	
+	@Test
+	public void testReferenceEntries() throws Exception {
+
+		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
+		
+		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
+		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
+		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
+		
+		PrescriptionItemReferenceEntry prescriptionItemReferenceEntry = new PrescriptionItemReferenceEntry();
+		prescriptionItemReferenceEntry.setId(new Identificator("oid2", "id2"));
+		entry.setPrescriptionItemReferenceEntry(prescriptionItemReferenceEntry);
+
+		DispenseItemReferenceEntry dispenseItemReferenceEntry = new DispenseItemReferenceEntry();
+		dispenseItemReferenceEntry.setId(new Identificator("oid3", "id3"));
+		entry.setDispenseItemReferenceEntry(dispenseItemReferenceEntry);
+
+		
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(3, nodes.getLength());
+
+		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
+		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+		
+		assertEquals("oid2", entry.getPrescriptionItemReferenceEntry().getId().getRoot());
+		assertEquals("id2", entry.getPrescriptionItemReferenceEntry().getId().getExtension());
+
+		assertEquals("oid3", entry.getDispenseItemReferenceEntry().getId().getRoot());
+		assertEquals("id3", entry.getDispenseItemReferenceEntry().getId().getExtension());
+
+	}
 
 }

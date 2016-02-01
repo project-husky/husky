@@ -133,12 +133,8 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 			setEffectiveTime(begin, end);
 		} else {
 			final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
-			try {
-				ivlts.setLow(DateUtil.createIVXB_TSFromDate(begin));
-				mAllergyConcern.setEffectiveTime(ivlts);
-			} catch (final ParseException e) {
-				e.printStackTrace();
-			}
+			ivlts.setLow(DateUtil.createIVXB_TSFromDate(begin));
+			mAllergyConcern.setEffectiveTime(ivlts);
 		}
 	}
 

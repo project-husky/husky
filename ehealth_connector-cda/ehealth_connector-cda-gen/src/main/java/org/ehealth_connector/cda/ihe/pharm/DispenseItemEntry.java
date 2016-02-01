@@ -31,30 +31,29 @@ import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * Implements the Base Class DispenseItemEntry from the IHE PHARM Model
- *
  */
-public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry> {
-
-	/**
-	 * Instantiates a new dispense item entry.
-	 *
-	 * @param languageCode the language code
-	 */
-	public DispenseItemEntry(LanguageCode languageCode) {
-		super(PHARMFactory.eINSTANCE.createDispenseItemEntry().init());
-	}
+public class DispenseItemEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry> {
 
 	/**
 	 * Instantiates a new dispense item entry.
 	 */
 	public DispenseItemEntry() {
 		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new dispense item entry.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
+	public DispenseItemEntry(LanguageCode languageCode) {
+		super(PHARMFactory.eINSTANCE.createDispenseItemEntry().init());
 	}
 
 	/**
@@ -70,12 +69,20 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	/**
 	 * Adds the precondition entry.
 	 *
-	 * @param entry the entry
+	 * @param entry
+	 *            the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
 		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
 		precondition.setCriterion(entry.getMdht());
 		getMdht().getPreconditions().add(precondition);
+	}
+
+	public Code getDispenseCode() {
+		if (this.getMdht().getCode() != null) {
+			return new Code(this.getMdht().getCode());
+		}
+		return null;
 	}
 
 	/**
@@ -123,7 +130,7 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	 * @return the medications special conditions
 	 */
 	public MedicationsSpecialConditions getMedicationsSpecialConditions() {
-		if (this.getMdht().getCode()!=null) {
+		if (this.getMdht().getCode() != null) {
 			final Code code = new Code(this.getMdht().getCode());
 			if ((code != null)
 					&& MedicationsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
@@ -134,14 +141,43 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	}
 
 	/**
+	 * Gets the medication treatment plan item reference entry.
+	 *
+	 * @return the medication treatment plan item reference entry
+	 */
+	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
+		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+				.getMedicationTreatmentPlanItemReferenceEntry() != null) {
+			return new MedicationTreatmentPlanItemReferenceEntry(
+					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+							.getMedicationTreatmentPlanItemReferenceEntry());
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the patient medical instructions.
 	 *
 	 * @return the patient medical instructions
 	 */
 	public PatientMedicalInstructionsEntry getPatientMedicalInstructions() {
-		if (getMdht().getPatientMedicalInstructions()!=null) {
-			return new PatientMedicalInstructionsEntry(
-					getMdht().getPatientMedicalInstructions());
+		if (getMdht().getPatientMedicalInstructions() != null) {
+			return new PatientMedicalInstructionsEntry(getMdht().getPatientMedicalInstructions());
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the pharmaceutical advice item reference entry.
+	 *
+	 * @return the pharmaceutical advice item reference entry
+	 */
+	public PharmaceuticalAdviceItemReferenceEntry getPharmaceuticalAdviceItemReferenceEntry() {
+		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+				.getPharmaceuticalAdviceItemReferenceEntry() != null) {
+			return new PharmaceuticalAdviceItemReferenceEntry(
+					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+							.getPharmaceuticalAdviceItemReferenceEntry());
 		}
 		return null;
 	}
@@ -160,6 +196,21 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	}
 
 	/**
+	 * Gets the prescription item reference entry.
+	 *
+	 * @return the prescription item reference entry
+	 */
+	public PrescriptionItemReferenceEntry getPrescriptionItemReferenceEntry() {
+		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+				.getPrescriptionItemReferenceEntry() != null) {
+			return new PrescriptionItemReferenceEntry(
+					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
+							.getPrescriptionItemReferenceEntry());
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the text reference.
 	 * 
 	 * @return the text reference
@@ -173,6 +224,10 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 		return null;
 	}
 
+	public void setDispenseCode(Code code) {
+		this.getMdht().setCode(code.getCD());
+	}
+
 	/**
 	 * Sets the external document entry.
 	 *
@@ -183,7 +238,7 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 		// note PCC Template only for REFR not for XCRPT
 		ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef().init();
 		reference.getTemplateIds().clear();
-		externalDocumentEntry.getMdht().getTemplateIds().clear(); 
+		externalDocumentEntry.getMdht().getTemplateIds().clear();
 		reference.setExternalDocument(externalDocumentEntry.getMdht());
 		getMdht().getReferences().clear();
 		getMdht().getReferences().add(reference);
@@ -205,13 +260,14 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	/**
 	 * Sets the medication fullfillment instructions.
 	 *
-	 * @param entry the new medication fullfillment instructions
+	 * @param entry
+	 *            the new medication fullfillment instructions
 	 */
 	public void setMedicationFullfillmentInstructions(
 			MedicationFullfillmentInstructionsEntry entry) {
 		MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
-		if (old!=null) {
-			for(EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
@@ -243,14 +299,40 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	}
 
 	/**
+	 * Sets the medication treatment plan item reference entry.
+	 *
+	 * @param entry
+	 *            the new medication treatment plan item reference entry
+	 */
+	public void setMedicationTreatmentPlanItemReferenceEntry(
+			MedicationTreatmentPlanItemReferenceEntry entry) {
+		MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSubstanceAdministration(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationship = null;
+			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+			entryRelationship.setSubstanceAdministration(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+
+	/**
 	 * Sets the patient medical instructions.
 	 *
-	 * @param entry the new patient medical instructions
+	 * @param entry
+	 *            the new patient medical instructions
 	 */
 	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
 		PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
-		if (old!=null) {
-			for(EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
@@ -265,6 +347,54 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 		}
 	}
 
+	/**
+	 * Sets the pharmaceutical advice item reference entry.
+	 *
+	 * @param entry
+	 *            the new pharmaceutical advice item reference entry
+	 */
+	public void setPharmaceuticalAdviceItemReferenceEntry(
+			PharmaceuticalAdviceItemReferenceEntry entry) {
+		PharmaceuticalAdviceItemReferenceEntry old = getPharmaceuticalAdviceItemReferenceEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setObservation(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationship = null;
+			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+			entryRelationship.setObservation(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+
+	/**
+	 * Sets the prescription item reference entry.
+	 *
+	 * @param entry
+	 *            the new prescription item reference entry
+	 */
+	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
+		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSubstanceAdministration(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationship = null;
+			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+			entryRelationship.setSubstanceAdministration(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
 
 	/**
 	 * Sets the text reference.
@@ -275,17 +405,6 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	@Override
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
-	}
-	
-	public void setDispenseCode(Code code) {
-		this.getMdht().setCode(code.getCD());
-	}
-	
-	public Code getDispenseCode() {
-		if (this.getMdht().getCode()!=null) {
-			return new Code(this.getMdht().getCode());
-		}
-		return null;
 	}
 
 }

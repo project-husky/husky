@@ -216,9 +216,38 @@ public class PrescriptionItemEntryTest {
 	}
 	
 	@Test
+	public void testMedicationTreatmentPlanItemReferenceEntry() throws Exception {
+
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
+		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
+		
+		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
+		
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//id[@root='oid' and @extension='id']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//code[@code='MTPItem']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+
+		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
+		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+	}
+	
+	@Test
 	public void testSetReasonForPrescription() throws Exception {
 
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
 		entry.setReasonFor(new Identificator("oid", "id"));
 
 		final Document document = entry.getDocument();
@@ -248,6 +277,7 @@ public class PrescriptionItemEntryTest {
 
 	}
 
+
 	@Test
 	public void testTextReference() throws XPathExpressionException {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
@@ -263,5 +293,7 @@ public class PrescriptionItemEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
+	
+	
 
 }

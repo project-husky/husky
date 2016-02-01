@@ -223,16 +223,14 @@ public class DateUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an IVXB_TS Object.
+	 * <div class="en">Creates an IVXB_TS Object day resolution.
 	 * 
 	 * @param date
 	 *            date</div> <div class="de"></div><div class="fr"></div>
 	 *            <div class="it"></div>
 	 * @return HL7 IVXB_TS Objekt
-	 * @throws ParseException
-	 *             the parse exception
 	 */
-	public static IVXB_TS createIVXB_TSFromDate(Date date) throws ParseException {
+	public static IVXB_TS createIVXB_TSFromDate(Date date) {
 		// Create IVXB_TS
 		final IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		if (date == null) {
@@ -242,6 +240,26 @@ public class DateUtil {
 		}
 		return ohtIntervalPoint;
 	}
+	
+	/**
+	 * <div class="en">Creates an IVXB_TS Object day/time resolution.
+	 * 
+	 * @param date
+	 *            date</div> <div class="de"></div><div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @return HL7 IVXB_TS Objekt
+	 */
+	public static IVXB_TS createIVXB_TSFromDateTime(Date date) {
+		// Create IVXB_TS
+		final IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		if (date == null) {
+			ohtIntervalPoint.setNullFlavor(NullFlavor.UNK);
+		} else {
+			ohtIntervalPoint.setValue(DateUtil.format(date));
+		}
+		return ohtIntervalPoint;
+	}
+
 
 	/**
 	 * Creates an IVXB_TS Objekt.

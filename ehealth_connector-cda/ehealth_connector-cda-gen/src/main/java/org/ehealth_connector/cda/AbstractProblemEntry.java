@@ -34,7 +34,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 /**
  * ProblemEntry convenience functionality for the CDA Body Level 3 -Problem
  */
-public abstract class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
+public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
 
 	/**
 	 * Instantiates a new problem entry.
@@ -292,11 +292,7 @@ public abstract class AbstractProblemEntry extends MdhtFacade<org.openhealthtool
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			this.getMdht().setEffectiveTime(interval);
 		}
-		try {
-			getMdht().getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		getMdht().getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
 	}
 
 	/**
@@ -358,11 +354,7 @@ public abstract class AbstractProblemEntry extends MdhtFacade<org.openhealthtool
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			this.getMdht().setEffectiveTime(interval);
 		}
-		try {
-			this.getMdht().getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		this.getMdht().getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
 	}
 
 	/**

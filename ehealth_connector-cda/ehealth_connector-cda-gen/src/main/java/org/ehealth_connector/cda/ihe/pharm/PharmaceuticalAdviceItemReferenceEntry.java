@@ -17,14 +17,9 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.common.Identificator;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
-import org.openhealthtools.mdht.uml.cda.Material;
-import org.openhealthtools.mdht.uml.cda.Product;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Implements the IHE PharmaceuticalAdviceItemReferenceEntry.
@@ -54,6 +49,7 @@ public class PharmaceuticalAdviceItemReferenceEntry extends PharmaceuticalAdvice
 		cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
 		this.getMdht().setCode(cd);
 	}
+	
 	
 
 }

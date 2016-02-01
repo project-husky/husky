@@ -410,11 +410,7 @@ public abstract class AbstractAllergyProblem {
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			getAllergyProblem().setEffectiveTime(interval);
 		}
-		try {
-			getAllergyProblem().getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		getAllergyProblem().getEffectiveTime().setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
 	}
 
 	/**
@@ -449,10 +445,6 @@ public abstract class AbstractAllergyProblem {
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			getAllergyProblem().setEffectiveTime(interval);
 		}
-		try {
-			getAllergyProblem().getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		getAllergyProblem().getEffectiveTime().setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
 	}
 }
