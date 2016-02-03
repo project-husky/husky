@@ -21,6 +21,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLDecoder;
 
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.junit.Before;
@@ -49,8 +50,8 @@ public class DocumentProcessorTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		final URL test1Url = this.getClass().getResource("/vacd/vacDoc_Test1.xml");
-		testFile = new File(test1Url.getFile());
+		final URL test1Url = new URL(this.getClass().getResource("/vacd/vacDoc_Test1.xml").toString());
+		testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		testStream = this.getClass().getResourceAsStream("/vacd/vacDoc_Test2.xml");
 	}
 
