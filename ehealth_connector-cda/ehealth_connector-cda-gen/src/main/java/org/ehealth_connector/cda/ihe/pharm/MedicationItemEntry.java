@@ -42,11 +42,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
+// TODO: Auto-generated Javadoc
 /**
- * Implements the Base Class MedicationItemEntry from the IHE PHARM Model
- *
+ * Implements the Base Class MedicationItemEntry from the IHE PHARM Model.
  */
-public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry> {
+public class MedicationItemEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry> {
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
@@ -54,7 +55,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @param mdht
 	 *            the mdht model object
 	 */
-	protected MedicationItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
+	protected MedicationItemEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
 		super(mdht, null, null);
 		// adding missing template pcc id
 		mdht.getTemplateIds()
@@ -67,7 +69,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	/**
 	 * Adds the precondition entry.
 	 *
-	 * @param entry the entry
+	 * @param entry
+	 *            the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
 		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
@@ -120,12 +123,25 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @return the medications special conditions
 	 */
 	public MedicationsSpecialConditions getMedicationsSpecialConditions() {
-		if (this.getMdht().getCode()!=null) {
+		if (this.getMdht().getCode() != null) {
 			final Code code = new Code(this.getMdht().getCode());
 			if ((code != null)
 					&& MedicationsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 				return MedicationsSpecialConditions.getEnum(code.getCode());
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the pharm substitution handling entry.
+	 *
+	 * @return the pharm substitution handling entry
+	 */
+	public PharmSubstitutionHandlingEntry getPharmSubstitutionHandlingEntry() {
+		if (getMdht().getPharmSubstitutionHandlingEntry() != null) {
+			return new PharmSubstitutionHandlingEntry(
+					getMdht().getPharmSubstitutionHandlingEntry());
 		}
 		return null;
 	}
@@ -177,7 +193,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @return the route of administration
 	 */
 	public Code getRouteOfAdministration() {
-		if (this.getMdht().getRouteCode()!=null) {
+		if (this.getMdht().getRouteCode() != null) {
 			return new Code(this.getMdht().getRouteCode());
 		}
 		return null;
@@ -221,7 +237,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 		// note PCC Template only for REFR not for XCRPT
 		ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef().init();
 		reference.getTemplateIds().clear();
-		externalDocumentEntry.getMdht().getTemplateIds().clear(); 
+		externalDocumentEntry.getMdht().getTemplateIds().clear();
 		reference.setExternalDocument(externalDocumentEntry.getMdht());
 		getMdht().getReferences().clear();
 		getMdht().getReferences().add(reference);
@@ -243,13 +259,14 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	/**
 	 * Sets the medication fullfillment instructions.
 	 *
-	 * @param entry the new medication fullfillment instructions
+	 * @param entry
+	 *            the new medication fullfillment instructions
 	 */
 	public void setMedicationFullfillmentInstructions(
 			MedicationFullfillmentInstructionsEntry entry) {
 		MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
-		if (old!=null) {
-			for(EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
@@ -281,14 +298,38 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
+	 * Sets the pharm substitution handling entry.
+	 *
+	 * @param entry
+	 *            the new pharm substitution handling entry
+	 */
+	public void setPharmSubstitutionHandlingEntry(PharmSubstitutionHandlingEntry entry) {
+		PharmSubstitutionHandlingEntry old = this.getPharmSubstitutionHandlingEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSupply(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationShip.setSupply(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationShip);
+		}
+	}
+
+	/**
 	 * Sets the patient medical instructions.
 	 *
-	 * @param entry the new patient medical instructions
+	 * @param entry
+	 *            the new patient medical instructions
 	 */
 	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
 		PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
-		if (old!=null) {
-			for(EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
@@ -306,15 +347,18 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	/**
 	 * Sets the reason for.
 	 *
-	 * @param internalReferenceIdentificator the new reason for
+	 * @param internalReferenceIdentificator
+	 *            the new reason for
 	 */
 	public void setReasonFor(Identificator internalReferenceIdentificator) {
-		if (getMdht().getInternalReferences()!=null && getMdht().getInternalReferences().size()>0) {
+		if (getMdht().getInternalReferences() != null
+				&& getMdht().getInternalReferences().size() > 0) {
 			InternalReference internalReference = getMdht().getInternalReferences().get(0);
 			internalReference.getIds().clear();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 		} else {
-			InternalReference internalReference = IHEFactory.eINSTANCE.createInternalReference().init();
+			InternalReference internalReference = IHEFactory.eINSTANCE.createInternalReference()
+					.init();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 			internalReference.setMoodCode(x_DocumentActMood.EVN);
 			internalReference.setClassCode(x_ActClassDocumentEntryAct.ACT);
@@ -340,7 +384,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	/**
 	 * Sets the supply quantity value.
 	 *
-	 * @param value the new supply quantity value
+	 * @param value
+	 *            the new supply quantity value
 	 */
 	public void setSupplyQuantityValue(BigDecimal value) {
 		PQ pq = DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), "1");

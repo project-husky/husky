@@ -26,7 +26,9 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
@@ -313,6 +315,19 @@ public class PharmaceuticalAdviceItemEntry extends MdhtFacade<org.openhealthtool
 	
 	
 	/**
+	 * Gets the new medication treatment plan item entry.
+	 *
+	 * @return the new medication treatment plan item entry
+	 */
+	public MedicationTreatmentPlanItemEntry getNewMedicationTreatmentPlanItemEntry() {
+		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht()).getNewMedicationTreatmentPlanItemEntry() != null) {
+			return new MedicationTreatmentPlanItemEntry(
+					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht()).getNewMedicationTreatmentPlanItemEntry());
+		}
+		return null;
+	}
+	
+	/**
 	 * Gets the dispense item reference entry.
 	 *
 	 * @return the dispense item reference entry
@@ -349,6 +364,77 @@ public class PharmaceuticalAdviceItemEntry extends MdhtFacade<org.openhealthtool
 			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
 	}
+	
+	
+	/**
+	 * Sets the new medication treatment plan item entry.
+	 *
+	 * @param entry the new new medication treatment plan item entry
+	 */
+	public void setNewMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry entry) {
+		MedicationTreatmentPlanItemEntry old = getNewMedicationTreatmentPlanItemEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSubstanceAdministration(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationship = null;
+			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setSubstanceAdministration(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+	
+	
+	/**
+	 * Gets the new presciption entry.
+	 *
+	 * @return the new presciption entry
+	 */
+	public PrescriptionItemEntry getNewPresciptionEntry() {
+		if (this.getMdht().getNewPrescription()!=null) {
+			Organizer organizer = (Organizer) getMdht().getNewPrescription();
+			if (organizer.getComponents()!=null && organizer.getComponents().size()>0) {
+				if (organizer.getComponents().get(0).getSubstanceAdministration()!=null) {
+					return new PrescriptionItemEntry(((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) organizer.getComponents().get(0).getSubstanceAdministration()));
+				}
+			}
+		}
+		return null;
+	}
+	
+
+	/**
+	 * Sets the new presciption entry.
+	 *
+	 * @param entry the new new presciption entry
+	 */
+	public void setNewPresciptionEntry(PrescriptionItemEntry entry) {
+		PrescriptionItemEntry old = getNewPresciptionEntry();
+		if (old != null) {
+			Organizer organizer = (Organizer) getMdht().getNewPrescription();
+			organizer.getComponents().get(0).setSubstanceAdministration(entry.getMdht());
+		} else {
+			Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
+			Component4 component = CDAFactory.eINSTANCE.createComponent4();
+			component.setSubstanceAdministration(entry.getMdht());
+			organizer.getComponents().add(component);
+			EntryRelationship entryRelationship = null;
+			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setOrganizer(organizer);
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+
+	
+	
 
 
 }

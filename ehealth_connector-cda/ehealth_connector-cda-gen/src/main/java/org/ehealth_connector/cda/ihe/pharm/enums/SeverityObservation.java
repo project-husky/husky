@@ -24,14 +24,14 @@ import org.ehealth_connector.common.Code;
  */
 public enum SeverityObservation {
 
-	/** <div class="en"> High</div><div class="fr">Sévère</div> */ 
-	H("H","High","Sévère"),
-	
-	/** <div class="en"> Moderate</div><div class="fr">Modéré</div> */ 
-	M("M","Moderate","Modéré"),
-	
-	/** <div class="en"> Low</div><div class="fr">Peu sévère</div> */ 
-	L("L","Low","Peu sévère");
+	/** <div class="en"> High</div><div class="fr">Sévère</div> */
+	HIGH("H", "High", "Sévère"),
+
+	/** <div class="en"> Moderate</div><div class="fr">Modéré</div> */
+	MODERATE("M", "Moderate", "Modéré"),
+
+	/** <div class="en"> Low</div><div class="fr">Peu sévère</div> */
+	LOW("L", "Low", "Peu sévère");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "SeverityObservation";
@@ -47,13 +47,16 @@ public enum SeverityObservation {
 
 	/** The display name. */
 	private String displayNameFr;
-	
+
 	/**
 	 * Instantiates a new SeverityObservation.
 	 *
-	 * @param code the code
-	 * @param displayNameEn the display name en
-	 * @param displayNameFr the display name fr
+	 * @param code
+	 *            the code
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameFr
+	 *            the display name fr
 	 */
 	private SeverityObservation(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -61,12 +64,11 @@ public enum SeverityObservation {
 		this.displayNameFr = displayNameFr;
 	}
 
-
-
 	/**
 	 * Gets the code.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {
@@ -85,12 +87,12 @@ public enum SeverityObservation {
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
-	
 
 	/**
 	 * Gets the enum.
 	 *
-	 * @param code the code
+	 * @param code
+	 *            the code
 	 * @return the enum
 	 */
 	public static SeverityObservation getEnum(String code) {
@@ -101,5 +103,5 @@ public enum SeverityObservation {
 		}
 		return null;
 	}
-	
+
 }

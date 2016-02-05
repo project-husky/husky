@@ -156,6 +156,18 @@ public class DispenseItemEntry
 	}
 
 	/**
+	 * Gets the dosage instructions.
+	 *
+	 * @return the dosage instructions
+	 */
+	public DosageInstructionsEntry getDosageInstructions() {
+		if (getMdht().getDosageInstructionsEntry() != null) {
+			return new DosageInstructionsEntry(getMdht().getDosageInstructionsEntry());
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the patient medical instructions.
 	 *
 	 * @return the patient medical instructions
@@ -346,6 +358,29 @@ public class DispenseItemEntry
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
 		}
 	}
+	
+	/**
+	 * Sets the dosage instructions.
+	 *
+	 * @param entry the new dosage instructions
+	 */
+	public void setDosageInstructions(DosageInstructionsEntry entry) {
+		DosageInstructionsEntry old = this.getDosageInstructions();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSubstanceAdministration((entry.getMdht()));
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationShip.setSubstanceAdministration(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationShip);
+		}
+	}
+
 
 	/**
 	 * Sets the pharmaceutical advice item reference entry.

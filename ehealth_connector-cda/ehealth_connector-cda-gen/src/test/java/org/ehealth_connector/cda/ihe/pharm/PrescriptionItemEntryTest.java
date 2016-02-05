@@ -65,6 +65,29 @@ public class PrescriptionItemEntryTest {
 		assertEquals("oid", entry.getExternalDocumentEntry().getId().getRoot());
 		assertEquals("id", entry.getExternalDocumentEntry().getId().getExtension());
 	}
+	
+	@Test
+	public void testSubstitutionHandlingEntry() throws Exception {
+
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+		
+		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
+		entry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='COMP']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//independentInd[@value='false']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+		
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.24']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
 
 	@Test
 	public void testIdentifier() throws Exception {

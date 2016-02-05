@@ -191,6 +191,21 @@ public class DispenseItemEntryTest {
 	}
 	
 	@Test
+	public void testDosageInstructions() throws Exception {
+
+		final DispenseItemEntry entry = new DispenseItemEntry();
+		DosageInstructionsEntry dosageInstructions = new DosageInstructionsEntry();
+		entry.setDosageInstructions(dosageInstructions);
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='COMP']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	
+	@Test
 	public void testReferenceEntries() throws Exception {
 
 		final DispenseItemEntry entry = new DispenseItemEntry();

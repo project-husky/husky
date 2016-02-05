@@ -154,6 +154,31 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals("#reference1", entry.getTextReference());
 	}
 	
+	
+	@Test
+	public void testNewPresciption() throws Exception {
+
+		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
+		
+		assertEquals(null, entry.getNewPresciptionEntry());
+		
+		PrescriptionItemEntry newPresriptionEntry = new PrescriptionItemEntry();
+		newPresriptionEntry.setId(new Identificator("oid", "id"));
+		entry.setNewPresciptionEntry(newPresriptionEntry);
+		
+		
+		final Document document = entry.getDocument();
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("oid", entry.getNewPresciptionEntry().getId().getRoot());
+		assertEquals("id", entry.getNewPresciptionEntry().getId().getExtension());
+
+
+
+	}
+	
 	@Test
 	public void testReferenceEntries() throws Exception {
 
@@ -170,6 +195,11 @@ public class PharmaceuticalAdviceItemEntryTest {
 		DispenseItemReferenceEntry dispenseItemReferenceEntry = new DispenseItemReferenceEntry();
 		dispenseItemReferenceEntry.setId(new Identificator("oid3", "id3"));
 		entry.setDispenseItemReferenceEntry(dispenseItemReferenceEntry);
+		
+//      FIXME doesn't work returns also MedicationTreatmentPlanItemReferenceEntry from above
+//		MedicationTreatmentPlanItemEntry newMedicationTreatmentPlanItemEntry = new MedicationTreatmentPlanItemEntry();
+//		newMedicationTreatmentPlanItemEntry.setId(new Identificator("oid4", "id4"));
+//		entry.setNewMedicationTreatmentPlanItemEntry(newMedicationTreatmentPlanItemEntry);
 
 		
 		final Document document = entry.getDocument();
@@ -186,6 +216,9 @@ public class PharmaceuticalAdviceItemEntryTest {
 
 		assertEquals("oid3", entry.getDispenseItemReferenceEntry().getId().getRoot());
 		assertEquals("id3", entry.getDispenseItemReferenceEntry().getId().getExtension());
+//
+//		assertEquals("oid4", entry.getNewMedicationTreatmentPlanItemEntry().getId().getRoot());
+//		assertEquals("id4", entry.getNewMedicationTreatmentPlanItemEntry().getId().getExtension());
 
 	}
 

@@ -83,14 +83,14 @@ public class SeverityOfConcernEntryTest {
 	@Test
 	public void testSeverityObservation() throws XPathExpressionException {
 		final SeverityOfConcernEntry entry = new SeverityOfConcernEntry();
-		entry.setSeverityObservation(SeverityObservation.L);
+		entry.setSeverityObservation(SeverityObservation.LOW);
 
 		final Document document = entry.getDocument();
 		final XPathExpression expr = xpath.compile("//code[@code='L' and @codeSystem='2.16.840.1.113883.5.1063']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(SeverityObservation.L, entry.getSeverityObservation());
+		assertEquals(SeverityObservation.LOW, entry.getSeverityObservation());
 		
 	}
 

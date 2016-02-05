@@ -43,7 +43,7 @@ public class DispenseItemEntryTest {
 		
 		final DispenseItemEntry entry = new DispenseItemEntry();
 		
-		entry.setDispenseCode(DispenseCodeList.RFC.getCode(LanguageCode.FRENCH));
+		entry.setDispenseCode(DispenseCodeList.REFILL_COMPLETE.getCode(LanguageCode.FRENCH));
 		
 		final Document document = entry.getDocument();
 		
@@ -51,7 +51,7 @@ public class DispenseItemEntryTest {
 				.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		assertEquals(DispenseCodeList.RFC, DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
+		assertEquals(DispenseCodeList.REFILL_COMPLETE, DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
 	}
 
 
