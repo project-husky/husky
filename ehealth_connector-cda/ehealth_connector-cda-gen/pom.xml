@@ -21,6 +21,8 @@
 			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 		</dependency>
+		
+
 
 		<!-- open health tools ihe utils -->
 		<dependency>
@@ -61,6 +63,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.openhealthtools.mdht.uml.cda.ihe.lab</groupId>
+			<artifactId>
+				org.openhealthtools.mdht.uml.cda.ihe.lab
+			</artifactId>
+		</dependency>
 	</dependencies>
 
 
