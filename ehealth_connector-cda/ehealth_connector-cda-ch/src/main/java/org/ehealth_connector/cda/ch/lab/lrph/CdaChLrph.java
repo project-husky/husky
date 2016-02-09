@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
@@ -54,6 +55,33 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	 */
 	public CdaChLrph(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph doc) {
 		super(doc);
+	}
+
+	// Convenience function
+	// Creates LaboratorySpecialtySection
+	// Creates SpecimenAct
+	// adds the Laboratory Battery to the SpecimenAct
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
+
+	}
+
+	// Convenience Function
+	// - Scan Observations for pseudonymization / anonymization related
+	// NotifiableObservationLoinc or NotifiableObservationSnomed
+	// - If such an element exists, use getPrivacyFilter() to determine
+	// anonymization function
+	// - Apply Anonymization function
+	public void applyPrivacyFilter() {
+
+	}
+
+	// Convenience function
+	// gets the LaboratorySpecialtySection
+	// gets the SpecimenAct
+	// gets the Laboratory Batteries from the SpecimenAct
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
+		return null;
+
 	}
 
 	/**
