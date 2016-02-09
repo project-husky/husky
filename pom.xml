@@ -130,6 +130,12 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
 				<version>1.1-SNAPSHOT</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.openhealthtools.mdht.uml.cda.ihe</groupId>
+				<artifactId>org.openhealthtools.mdht.uml.cda.ihe</artifactId>
+				<version>1.1-SNAPSHOT</version>
+			</dependency>
 
 			<!-- open health tools ihe utils -->
 			<dependency>

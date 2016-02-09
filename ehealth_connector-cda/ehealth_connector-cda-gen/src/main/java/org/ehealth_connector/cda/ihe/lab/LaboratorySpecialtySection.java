@@ -56,6 +56,10 @@ public class LaboratorySpecialtySection
 		getMdht().setCode(code.getCE());
 	}
 
+	public void setLaboratoryReportDataProcessingEntry(LaboratoryReportDataProcessingEntry entry) {
+		//
+	}
+
 	public void setTitle(String title) {
 		getMdht().setTitle(Util.st(title));
 	}

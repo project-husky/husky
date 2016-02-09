@@ -14,4 +14,13 @@ public class LaboratoryReportDataProcessingEntry extends
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
 	}
+
+	protected SpecimenAct getSpecimenAct() {
+		return null;
+		//
+	}
+
+	protected void setSpecimenAct(SpecimenAct specimenAct) {
+
+	}
 }

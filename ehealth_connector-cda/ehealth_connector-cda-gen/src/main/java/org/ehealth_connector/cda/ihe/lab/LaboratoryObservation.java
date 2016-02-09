@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +38,6 @@ import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -206,6 +204,7 @@ public class LaboratoryObservation
 	 * @param value
 	 *          the new value
 	 */
+	@Override
 	public void addValue(Value value) {
 		if (value.isPhysicalQuantity()) {
 			getMdht().getValues().add(value.copyMdhtPhysicalQuantity());
@@ -358,33 +357,6 @@ public class LaboratoryObservation
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded String.
-	 *
-	 * @return the (first) problem value as string.
-	 */
-	public Value getValue() {
-		if (!getMdht().getValues().isEmpty()) {
-			return new Value(getMdht().getValues().get(0));
-		}
-		return null;
-	}
-
-	/**
-	 * Get a list of all problem values. Each Value may be a coded or uncoded
-	 * String.
-	 *
-	 * @return all problem values as ArrayList.
-	 */
-	public List<Value> getValues() {
-		final List<Value> vl = new ArrayList<Value>();
-		for (final ANY a : getMdht().getValues()) {
-			final Value v = new Value(a);
-			vl.add(v);
-		}
-		return vl;
 	}
 
 	/**

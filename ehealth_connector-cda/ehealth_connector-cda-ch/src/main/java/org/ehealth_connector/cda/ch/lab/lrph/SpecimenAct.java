@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openhealthtools.mdht.uml.cda.Organizer;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.OutbreakIdentification;
 
 public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
 
@@ -27,5 +28,24 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
 			return laboratoryOrganizerList;
 		}
 		return null;
+	}
+
+	protected NotificationOrganizer getNotificationOragnizer() {
+		return null;
+
+	}
+
+	public OutbreakIdentification getOutbreakIdentification() {
+		return null;
+
+	}
+
+	protected void setNotificationOrganizer(NotificationOrganizer notificationOrganizer) {
+
+	}
+
+	// Convenience Method that creates the NotificationOrganizer automatically
+	public void setOutbreakIdentification(OutbreakIdentification outbreakIdentification) {
+
 	}
 }

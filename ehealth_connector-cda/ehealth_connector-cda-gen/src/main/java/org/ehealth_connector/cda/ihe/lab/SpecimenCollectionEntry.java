@@ -18,12 +18,16 @@ public class SpecimenCollectionEntry
 		super(LABFactory.eINSTANCE.createSpecimenCollection().init());
 	}
 
-	protected SpecimenCollectionEntry(SpecimenCollection mdht) {
+	public SpecimenCollectionEntry(SpecimenCollection mdht) {
 		super(mdht);
 	}
 
 	protected void addParticipant(Participant participant) {
 		// getMdht().getParticipants().add(participant);
+	}
+
+	public void addSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
+		//
 	}
 
 	protected Date getEffectiveTime() {
@@ -37,6 +41,10 @@ public class SpecimenCollectionEntry
 			return participantsList;
 		}
 		return null;
+	}
+
+	public SpecimenReceivedEntry getSpecimenReceivedEntry() {
+		return new SpecimenReceivedEntry(getMdht().getSpecimenReceived());
 	}
 
 	protected void setEffectiveTime(Date date) {
