@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab.lrph;
+package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.List;
 
@@ -9,24 +9,30 @@ import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
-public class CdaChLrph
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
+public class CdaChLrtp
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+
+	// TODO Add two constructors:
+	// one with the LabObsListLoinc, which uses the getGroup (Befundgruppe) Method
+	// to determine the type of the section
+	// the other uses a Sections Enum, which contains two Elements (LRTP Spec.
+	// 5.6.1)
 
 	/**
-	 * Instantiates a new cda ch mtps dis.
+	 * Instantiates a new cda ch lrtp.
 	 */
-	public CdaChLrph(Code code) {
+	public CdaChLrtp(Code code) {
 		this(code, LanguageCode.ENGLISH);
 	}
 
 	/**
-	 * Instantiates a new cda ch lrph.
+	 * Instantiates a new cda ch lrtp.
 	 *
 	 * @param languageCode
 	 *          the language code
 	 */
-	public CdaChLrph(Code code, LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChLrph().init());
+	public CdaChLrtp(Code code, LanguageCode languageCode) {
+		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode);
 		super.initCda();
 		LaboratorySpecialtySection specialtySection = new LaboratorySpecialtySection(code,
 				languageCode);
@@ -34,12 +40,12 @@ public class CdaChLrph
 	}
 
 	/**
-	 * Instantiates a new cda ch lrph.
+	 * Instantiates a new cda ch lrtp.
 	 *
 	 * @param doc
 	 *          mdht model document
 	 */
-	public CdaChLrph(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph doc) {
+	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
 		super(doc);
 	}
 

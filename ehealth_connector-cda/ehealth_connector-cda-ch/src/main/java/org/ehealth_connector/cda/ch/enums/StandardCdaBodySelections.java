@@ -10,14 +10,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 */
 public enum StandardCdaBodySelections {
 
-	/**
-	 * <div class="en">Brucella abortus</div>
-	 */
-	NO("N", "No"),
-	/**
-	 * <div class="en">Brucella</div>
-	 */
-	YES("Y", "Yes");
+	NO("N", "No"), YES("Y", "Yes");
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -117,18 +110,6 @@ public enum StandardCdaBodySelections {
 	 * @param displayName
 	 *          <br>
 	 *          <div class="en">the display name</div>
-	 * @param sectionCode
-	 *          <br>
-	 *          <div class="en">the specialty section code</div>
-	 * @param patientPrivacyFilter
-	 *          <br>
-	 *          <div class="en">the patient privacy filter</div>
-	 * @param validFrom
-	 *          <br>
-	 *          <div class="en">the valid from</div>
-	 * @param validTo
-	 *          <br>
-	 *          <div class="en">the valid to</div>
 	 */
 	private StandardCdaBodySelections(String code, String displayName) {
 		this.code = code;

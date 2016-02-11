@@ -11,11 +11,7 @@ public class LaboratoryObservation
 
 	}
 
-	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListLoinc getCodeAsLoincEnum() {
-		return null;
-	}
-
-	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListSnomed getCodeAsSnomedEnum() {
+	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList getCodeAsLoincEnum() {
 		return null;
 	}
 
@@ -28,11 +24,7 @@ public class LaboratoryObservation
 
 	}
 
-	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListLoinc code) {
-
-	}
-
-	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListSnomed code) {
+	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList code) {
 
 	}
 

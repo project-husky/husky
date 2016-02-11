@@ -7,7 +7,7 @@ public class LaboratoryObservation
 		return null;
 	}
 
-	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListSnomed getCodeAsSnomedEnum() {
+	public org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed getCodeAsSnomedEnum() {
 		return null;
 	}
 
@@ -15,7 +15,7 @@ public class LaboratoryObservation
 
 	}
 
-	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsListSnomed code) {
+	public void setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed code) {
 
 	}
 }

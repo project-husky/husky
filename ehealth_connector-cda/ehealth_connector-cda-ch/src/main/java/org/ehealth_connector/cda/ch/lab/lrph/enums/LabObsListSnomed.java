@@ -16,436 +16,415 @@ public enum LabObsListSnomed {
 	/**
 	 * <div class="en">Brucella</div>
 	 */
-	BRUCELLA("26250004", "Brucella", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA("26250004", "Brucella", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Brucella abortus</div>
 	 */
-	BRUCELLA_ABORTUS("24224000", "Brucella abortus", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA_ABORTUS("24224000", "Brucella abortus", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Brucella canis</div>
 	 */
-	BRUCELLA_CANIS("38025008", "Brucella canis", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA_CANIS("38025008", "Brucella canis", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Brucella melitensis</div>
 	 */
-	BRUCELLA_MELITENSIS("72829003", "Brucella melitensis", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA_MELITENSIS("72829003", "Brucella melitensis", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Brucella species</div>
 	 */
-	BRUCELLA_SPECIES("116505000", "Brucella species", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA_SPECIES("116505000", "Brucella species", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Brucella suis</div>
 	 */
-	BRUCELLA_SUIS("48317004", "Brucella suis", "18725-2", "initials", "20130527", "N/A"),
+	BRUCELLA_SUIS("48317004", "Brucella suis", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter</div>
 	 */
-	CAMPYLOBACTER("35408001", "Campylobacter", "18725-2", "initials", "20130527", "N/A"),
+	CAMPYLOBACTER("35408001", "Campylobacter", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter coli</div>
 	 */
-	CAMPYLOBACTER_COLI("40614002", "Campylobacter coli", "18725-2", "initials", "20130527", "N/A"),
+	CAMPYLOBACTER_COLI("40614002", "Campylobacter coli", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter curvus</div>
 	 */
-	CAMPYLOBACTER_CURVUS("116037008", "Campylobacter curvus", "18725-2", "initials", "20130527",
-			"N/A"),
+	CAMPYLOBACTER_CURVUS("116037008", "Campylobacter curvus", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter fetus</div>
 	 */
-	CAMPYLOBACTER_FETUS("84210007", "Campylobacter fetus", "18725-2", "initials", "20130527", "N/A"),
+	CAMPYLOBACTER_FETUS("84210007", "Campylobacter fetus", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter hyointestinalis</div>
 	 */
 	CAMPYLOBACTER_HYOINTESTINALIS("9041007", "Campylobacter hyointestinalis", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Campylobacter jejuni</div>
 	 */
-	CAMPYLOBACTER_JEJUNI("66543000", "Campylobacter jejuni", "18725-2", "initials", "20130527",
-			"N/A"),
+	CAMPYLOBACTER_JEJUNI("66543000", "Campylobacter jejuni", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter lari</div>
 	 */
-	CAMPYLOBACTER_LARI("116386003", "Campylobacter lari", "18725-2", "initials", "20130527", "N/A"),
+	CAMPYLOBACTER_LARI("116386003", "Campylobacter lari", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter rectus</div>
 	 */
-	CAMPYLOBACTER_RECTUS("113525005", "Campylobacter rectus", "18725-2", "initials", "20130527",
-			"N/A"),
+	CAMPYLOBACTER_RECTUS("113525005", "Campylobacter rectus", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Campylobacter species</div>
 	 */
 	CAMPYLOBACTER_SPECIES("116457002", "Campylobacter species", "18725-2", "initials", "20130527",
-			"N/A"),
+			""),
 	/**
 	 * <div class="en">Campylobacter sputorum</div>
 	 */
 	CAMPYLOBACTER_SPUTORUM("91524009", "Campylobacter sputorum", "18725-2", "initials", "20130527",
-			"N/A"),
+			""),
 	/**
 	 * <div class="en">Campylobacter upsaliensis</div>
 	 */
 	CAMPYLOBACTER_UPSALIENSIS("103427005", "Campylobacter upsaliensis", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Chlamydia trachomatis</div>
 	 */
-	CHLAMYDIA_TRACHOMATIS("63938009", "Chlamydia trachomatis", "18725-2", "initials", "20130527",
-			"N/A"),
+	CHLAMYDIA_TRACHOMATIS("63938009", "Chlamydia trachomatis", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Corynebacterium diphtheriae</div>
 	 */
 	CORYNEBACTERIUM_DIPHTHERIAE("5851001", "Corynebacterium diphtheriae", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Corynebacterium diphtheriae type gravis</div>
 	 */
 	CORYNEBACTERIUM_DIPHTHERIAE_TYPE_GRAVIS("83675005", "Corynebacterium diphtheriae type gravis",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Corynebacterium diphtheriae type intermedius</div>
 	 */
 	CORYNEBACTERIUM_DIPHTHERIAE_TYPE_INTERMEDIUS("70876001",
-			"Corynebacterium diphtheriae type intermedius", "18725-2", "none", "20130527", "N/A"),
+			"Corynebacterium diphtheriae type intermedius", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Corynebacterium diphtheriae type mitis</div>
 	 */
 	CORYNEBACTERIUM_DIPHTHERIAE_TYPE_MITIS("13755001", "Corynebacterium diphtheriae type mitis",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Corynebacterium diphtheriae var belfanti</div>
 	 */
 	CORYNEBACTERIUM_DIPHTHERIAE_VAR_BELFANTI("243255007", "Corynebacterium diphtheriae var belfanti",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Dengue virus</div>
 	 */
-	DENGUE_VIRUS("34348001", "Dengue virus", "18725-2", "none", "20130527", "N/A"),
+	DENGUE_VIRUS("34348001", "Dengue virus", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Dengue virus, type 1</div>
 	 */
-	DENGUE_VIRUS_TYPE_1("60588009", "Dengue virus, type 1", "18725-2", "none", "20130527", "N/A"),
+	DENGUE_VIRUS_TYPE_1("60588009", "Dengue virus, type 1", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Dengue virus, type 2</div>
 	 */
-	DENGUE_VIRUS_TYPE_2("41328007", "Dengue virus, type 2", "18725-2", "none", "20130527", "N/A"),
+	DENGUE_VIRUS_TYPE_2("41328007", "Dengue virus, type 2", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Dengue virus, type 3</div>
 	 */
-	DENGUE_VIRUS_TYPE_3("8467002", "Dengue virus, type 3", "18725-2", "none", "20130527", "N/A"),
+	DENGUE_VIRUS_TYPE_3("8467002", "Dengue virus, type 3", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Dengue virus, type 4</div>
 	 */
-	DENGUE_VIRUS_TYPE_4("36700002", "Dengue virus, type 4", "18725-2", "none", "20130527", "N/A"),
-	/**
-	 * <div class="en">displayName</div>
-	 */
-	DISPLAYNAME("code value", "displayName", "specialtySection", "patientPrivacyFilter", "validFrom",
-			"validTo"),
+	DENGUE_VIRUS_TYPE_4("36700002", "Dengue virus, type 4", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Francisella tularensis</div>
 	 */
-	FRANCISELLA_TULARENSIS("51526001", "Francisella tularensis", "18725-2", "none", "20130527",
-			"N/A"),
+	FRANCISELLA_TULARENSIS("51526001", "Francisella tularensis", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Francisella tularensis ss. holarctica</div>
 	 */
 	FRANCISELLA_TULARENSIS_SS_HOLARCTICA("60502008", "Francisella tularensis ss. holarctica",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Francisella tularensis ss. mediasiatica</div>
 	 */
 	FRANCISELLA_TULARENSIS_SS_MEDIASIATICA("23930001", "Francisella tularensis ss. mediasiatica",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Francisella tularensis ss. tularensis</div>
 	 */
 	FRANCISELLA_TULARENSIS_SS_TULARENSIS("91508008", "Francisella tularensis ss. tularensis",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE("44470000", "Haemophilus influenzae", "18725-2", "initials", "20130527",
-			"N/A"),
+			""),
 	/**
 	 * <div class="en">Haemophilus influenzae, not B</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_NOT_B("115407004", "Haemophilus influenzae, not B", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type A</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_A("103441001", "Haemophilus influenzae type A", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type B</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_B("103442008", "Haemophilus influenzae type B", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type C</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_C("103443003", "Haemophilus influenzae type C", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type D</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_D("103444009", "Haemophilus influenzae type D", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type E</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_E("103445005", "Haemophilus influenzae type E", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Haemophilus influenzae type F</div>
 	 */
 	HAEMOPHILUS_INFLUENZAE_TYPE_F("103446006", "Haemophilus influenzae type F", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Legionella bozemanii</div>
 	 */
-	LEGIONELLA_BOZEMANII("37835001", "Legionella bozemanii", "18725-2", "none", "20130527", "N/A"),
+	LEGIONELLA_BOZEMANII("37835001", "Legionella bozemanii", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella longbeachae</div>
 	 */
-	LEGIONELLA_LONGBEACHAE("89605004", "Legionella longbeachae", "18725-2", "none", "20130527",
-			"N/A"),
+	LEGIONELLA_LONGBEACHAE("89605004", "Legionella longbeachae", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella longbeachae, serogroup 1</div>
 	 */
 	LEGIONELLA_LONGBEACHAE_SEROGROUP_1("115515003", "Legionella longbeachae, serogroup 1", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella longbeachae, serogroup 2</div>
 	 */
 	LEGIONELLA_LONGBEACHAE_SEROGROUP_2("115516002", "Legionella longbeachae, serogroup 2", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella pneumophila</div>
 	 */
-	LEGIONELLA_PNEUMOPHILA("80897008", "Legionella pneumophila", "18725-2", "none", "20130527",
-			"N/A"),
+	LEGIONELLA_PNEUMOPHILA("80897008", "Legionella pneumophila", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella pneumophila serogroup 1</div>
 	 */
 	LEGIONELLA_PNEUMOPHILA_SEROGROUP_1("103463005", "Legionella pneumophila serogroup 1", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella pneumophila serogroup 4</div>
 	 */
 	LEGIONELLA_PNEUMOPHILA_SEROGROUP_4("103466002", "Legionella pneumophila serogroup 4", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella pneumophila serogroup 6</div>
 	 */
 	LEGIONELLA_PNEUMOPHILA_SEROGROUP_6("103468001", "Legionella pneumophila serogroup 6", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Legionella pneumophila ss. pneumophila</div>
 	 */
 	LEGIONELLA_PNEUMOPHILA_SS_PNEUMOPHILA("103458006", "Legionella pneumophila ss. pneumophila",
-			"18725-2", "none", "20130527", "N/A"),
+			"18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Listeria</div>
 	 */
-	LISTERIA("23566007", "Listeria", "18725-2", "initials", "20130527", "N/A"),
+	LISTERIA("23566007", "Listeria", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Listeria monocytogenes</div>
 	 */
 	LISTERIA_MONOCYTOGENES("36094007", "Listeria monocytogenes", "18725-2", "initials", "20130527",
-			"N/A"),
+			""),
 	/**
 	 * <div class="en">Mycobacterium africanum</div>
 	 */
-	MYCOBACTERIUM_AFRICANUM("51320008", "Mycobacterium africanum", "18725-2", "none", "20130527",
-			"N/A"),
+	MYCOBACTERIUM_AFRICANUM("51320008", "Mycobacterium africanum", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Mycobacterium bovis</div>
 	 */
-	MYCOBACTERIUM_BOVIS("27142009", "Mycobacterium bovis", "18725-2", "none", "20130527", "N/A"),
+	MYCOBACTERIUM_BOVIS("27142009", "Mycobacterium bovis", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Mycobacterium caprae</div>
 	 */
-	MYCOBACTERIUM_CAPRAE("430579009", "Mycobacterium caprae", "18725-2", "none", "20130527", "N/A"),
+	MYCOBACTERIUM_CAPRAE("430579009", "Mycobacterium caprae", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Mycobacterium tuberculosis</div>
 	 */
 	MYCOBACTERIUM_TUBERCULOSIS("113861009", "Mycobacterium tuberculosis", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Mycobacterium tuberculosis complex</div>
 	 */
 	MYCOBACTERIUM_TUBERCULOSIS_COMPLEX("113858008", "Mycobacterium tuberculosis complex", "18725-2",
-			"none", "20130527", "N/A"),
+			"none", "20130527", ""),
 	/**
 	 * <div class="en">Neisseria gonorrhoeae</div>
 	 */
-	NEISSERIA_GONORRHOEAE("68704007", "Neisseria gonorrhoeae", "18725-2", "initials", "20130527",
-			"N/A"),
+	NEISSERIA_GONORRHOEAE("68704007", "Neisseria gonorrhoeae", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis</div>
 	 */
-	NEISSERIA_MENINGITIDIS("17872004", "Neisseria meningitidis", "18725-2", "none", "20130527",
-			"N/A"),
+	NEISSERIA_MENINGITIDIS("17872004", "Neisseria meningitidis", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group A</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_A("103479006", "Neisseria meningitidis group A", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group B</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_B("103480009", "Neisseria meningitidis group B", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group C</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_C("103481008", "Neisseria meningitidis group C", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group X</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_X("125041003", "Neisseria meningitidis group X", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group Y</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_Y("103482001", "Neisseria meningitidis group Y", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis group Z</div>
 	 */
 	NEISSERIA_MENINGITIDIS_GROUP_Z("125042005", "Neisseria meningitidis group Z", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Neisseria meningitidis W135</div>
 	 */
 	NEISSERIA_MENINGITIDIS_W135("103483006", "Neisseria meningitidis W135", "18725-2", "none",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Salmonella</div>
 	 */
-	SALMONELLA("27268008", "Salmonella", "18725-2", "none", "20130527", "N/A"),
+	SALMONELLA("27268008", "Salmonella", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella enteritidis</div>
 	 */
-	SALMONELLA_ENTERITIDIS("73525009", "Salmonella enteritidis", "18725-2", "none", "20130527",
-			"N/A"),
+	SALMONELLA_ENTERITIDIS("73525009", "Salmonella enteritidis", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella paratyphi A</div>
 	 */
-	SALMONELLA_PARATYPHI_A("79128009", "Salmonella paratyphi A", "18725-2", "none", "20130527",
-			"N/A"),
+	SALMONELLA_PARATYPHI_A("79128009", "Salmonella paratyphi A", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella paratyphi B</div>
 	 */
-	SALMONELLA_PARATYPHI_B("85908006", "Salmonella paratyphi B", "18725-2", "none", "20130527",
-			"N/A"),
+	SALMONELLA_PARATYPHI_B("85908006", "Salmonella paratyphi B", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella paratyphi C</div>
 	 */
-	SALMONELLA_PARATYPHI_C("32488009", "Salmonella paratyphi C", "18725-2", "none", "20130527",
-			"N/A"),
+	SALMONELLA_PARATYPHI_C("32488009", "Salmonella paratyphi C", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella species</div>
 	 */
-	SALMONELLA_SPECIES("372342007", "Salmonella species", "18725-2", "none", "20130527", "N/A"),
+	SALMONELLA_SPECIES("372342007", "Salmonella species", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella typhi</div>
 	 */
-	SALMONELLA_TYPHI("5595000", "Salmonella typhi", "18725-2", "none", "20130527", "N/A"),
+	SALMONELLA_TYPHI("5595000", "Salmonella typhi", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Salmonella typhimurium</div>
 	 */
-	SALMONELLA_TYPHIMURIUM("50136005", "Salmonella typhimurium", "18725-2", "none", "20130527",
-			"N/A"),
+	SALMONELLA_TYPHIMURIUM("50136005", "Salmonella typhimurium", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Shigella boydii</div>
 	 */
-	SHIGELLA_BOYDII("55462008", "Shigella boydii", "18725-2", "initials", "20130527", "N/A"),
+	SHIGELLA_BOYDII("55462008", "Shigella boydii", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Shigella dysenteriae</div>
 	 */
-	SHIGELLA_DYSENTERIAE("43612004", "Shigella dysenteriae", "18725-2", "initials", "20130527",
-			"N/A"),
+	SHIGELLA_DYSENTERIAE("43612004", "Shigella dysenteriae", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Shigella flexneri</div>
 	 */
-	SHIGELLA_FLEXNERI("85729005", "Shigella flexneri", "18725-2", "initials", "20130527", "N/A"),
+	SHIGELLA_FLEXNERI("85729005", "Shigella flexneri", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Shigella sonnei</div>
 	 */
-	SHIGELLA_SONNEI("4298009", "Shigella sonnei", "18725-2", "initials", "20130527", "N/A"),
+	SHIGELLA_SONNEI("4298009", "Shigella sonnei", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Shigella species</div>
 	 */
-	SHIGELLA_SPECIES("116498009", "Shigella species", "18725-2", "initials", "20130527", "N/A"),
+	SHIGELLA_SPECIES("116498009", "Shigella species", "18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus penumoniae 3</div>
 	 */
 	STREPTOCOCCUS_PENUMONIAE_3("103497003", "Streptococcus penumoniae 3", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Streptococcus penumoniae, serotype 29</div>
 	 */
 	STREPTOCOCCUS_PENUMONIAE_SEROTYPE_29("131363003", "Streptococcus penumoniae, serotype 29",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE("9861002", "Streptococcus pneumoniae", "18725-2", "initials", "20130527",
-			"N/A"),
+			""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae 14</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_14("103498008", "Streptococcus pneumoniae 14", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae 7F</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_7F("103499000", "Streptococcus pneumoniae 7F", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae 9N</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_9N("103500009", "Streptococcus pneumoniae 9N", "18725-2", "initials",
-			"20130527", "N/A"),
+			"20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 11</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_11("363768008", "Streptococcus pneumoniae, serotype 11",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 12</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_12("116500005", "Streptococcus pneumoniae, serotype 12",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 16</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_16("131362008", "Streptococcus pneumoniae, serotype 16",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 17</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_17("131361001", "Streptococcus pneumoniae, serotype 17",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 19</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_19("127541006", "Streptococcus pneumoniae, serotype 19",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Streptococcus pneumoniae, serotype 22</div>
 	 */
 	STREPTOCOCCUS_PNEUMONIAE_SEROTYPE_22("363767003", "Streptococcus pneumoniae, serotype 22",
-			"18725-2", "initials", "20130527", "N/A"),
+			"18725-2", "initials", "20130527", ""),
 	/**
 	 * <div class="en">Vibrio cholerae</div>
 	 */
-	VIBRIO_CHOLERAE("75953000", "Vibrio cholerae", "18725-2", "initials", "20130527", "N/A");
+	VIBRIO_CHOLERAE("75953000", "Vibrio cholerae", "18725-2", "initials", "20130527", "");
 
 	/**
 	 * <div class="en">Code for Brucella abortus</div>
@@ -598,11 +577,6 @@ public enum LabObsListSnomed {
 	 * <div class="en">Code for Dengue virus, type 4</div>
 	 */
 	public static final String DENGUE_VIRUS_TYPE_4_CODE = "36700002";
-
-	/**
-	 * <div class="en">Code for displayName</div>
-	 */
-	public static final String DISPLAYNAME_CODE = "code value";
 
 	/**
 	 * <div class="en">Code for Francisella tularensis</div>
@@ -1035,9 +1009,6 @@ public enum LabObsListSnomed {
 	 *          <div class="en">the display name</div>
 	 * @param sectionCode
 	 *          <br>
-	 *          <div class="en">the specialty section code</div>
-	 * @param patientPrivacyFilter
-	 *          <br>
 	 *          <div class="en">the patient privacy filter</div>
 	 * @param validFrom
 	 *          <br>
@@ -1055,8 +1026,8 @@ public enum LabObsListSnomed {
 		if (validFrom != null && !"".equals(validFrom)) {
 			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
-		if (validFrom != null && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+		if (validTo != null && !"".equals(validTo)) {
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
 
