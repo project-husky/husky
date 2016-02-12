@@ -19,12 +19,12 @@ public class CdaChLrph
 	 *          the language code
 	 */
 	protected CdaChLrph(LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChLrph().init());
+		this(null, null, null);
+	}
+
+	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
+		super(CHFactory.eINSTANCE.createCdaChLrph().init(), languageCode, styleSheet, css);
 		super.initCda();
-		// LaboratorySpecialtySection specialtySection = new
-		// LaboratorySpecialtySection(code,
-		// languageCode);
-		// this.getDoc().addSection(specialtySection.getMdht());
 	}
 
 	/**
