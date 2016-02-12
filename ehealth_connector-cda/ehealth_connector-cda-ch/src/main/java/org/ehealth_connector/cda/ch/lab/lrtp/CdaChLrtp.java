@@ -2,8 +2,13 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
+import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.LrtpSections;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
@@ -31,12 +36,20 @@ public class CdaChLrtp
 	 * @param languageCode
 	 *          the language code
 	 */
-	public CdaChLrtp(Code code, LanguageCode languageCode) {
+	protected CdaChLrtp(Code code, LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode);
 		super.initCda();
 		LaboratorySpecialtySection specialtySection = new LaboratorySpecialtySection(code,
 				languageCode);
 		this.getDoc().addSection(specialtySection.getMdht());
+	}
+
+	// Internal Convenience function to initialize a Vital Signs or BloodGroup
+	// Section with
+	// the
+	// LRTP enum
+	protected CdaChLrtp(LrtpSections code, LanguageCode languageCode) {
+		this(code.getCode(), languageCode);
 	}
 
 	/**
@@ -49,11 +62,25 @@ public class CdaChLrtp
 		super(doc);
 	}
 
+	// Convenience function to initialize the LaboratorySpecialtySection with the
+	// LRTP enum
+	public CdaChLrtp(SpecialtySections code, LanguageCode languageCode) {
+		this(code.getCode(), languageCode);
+	}
+
 	// Convenience function
 	// Creates LaboratorySpecialtySection
 	// Creates SpecimenAct
 	// adds the Laboratory Battery to the SpecimenAct
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
+
+	}
+
+	// Convenience function
+	// - Create VitalSignsSection
+	// - Create VitalSignsOrganizer
+	// - Add VitalSignObservation
+	public void addVitalSignObservation(VitalSignObservation observation) {
 
 	}
 
@@ -64,6 +91,16 @@ public class CdaChLrtp
 	// anonymization function
 	// - Apply Anonymization function
 	public void applyPrivacyFilter() {
+
+	}
+
+	public BloodGroupObservation getBloodGroup() {
+		return null;
+
+	}
+
+	public ReportScopes getDocumentationOf() {
+		return null;
 
 	}
 
@@ -83,5 +120,22 @@ public class CdaChLrtp
 	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySection() {
 		return null;
+	}
+
+	// Convenience function
+	public List<VitalSignObservation> getVitalSignObservationList() {
+		return null;
+	}
+
+	// Convenience function to set the blood group
+	// - create Studies Summary
+	// - set blood group observation
+	public void setBloodGroup(BloodGroupObservation observation) {
+
+	}
+
+	// Convenience function to set the kind of donor
+	public void setDocumentationOf(ReportScopes scope) {
+
 	}
 }

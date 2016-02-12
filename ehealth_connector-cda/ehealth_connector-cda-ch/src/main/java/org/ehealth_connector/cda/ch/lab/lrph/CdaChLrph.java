@@ -6,18 +6,11 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
-import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
-
-	/**
-	 * Instantiates a new cda ch mtps dis.
-	 */
-	public CdaChLrph(Code code) {
-		this(code, LanguageCode.ENGLISH);
-	}
 
 	/**
 	 * Instantiates a new cda ch lrph.
@@ -25,12 +18,13 @@ public class CdaChLrph
 	 * @param languageCode
 	 *          the language code
 	 */
-	public CdaChLrph(Code code, LanguageCode languageCode) {
+	protected CdaChLrph(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChLrph().init());
 		super.initCda();
-		LaboratorySpecialtySection specialtySection = new LaboratorySpecialtySection(code,
-				languageCode);
-		this.getDoc().addSection(specialtySection.getMdht());
+		// LaboratorySpecialtySection specialtySection = new
+		// LaboratorySpecialtySection(code,
+		// languageCode);
+		// this.getDoc().addSection(specialtySection.getMdht());
 	}
 
 	/**
@@ -48,6 +42,11 @@ public class CdaChLrph
 	// Creates SpecimenAct
 	// adds the Laboratory Battery to the SpecimenAct
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
+
+	}
+
+	// Convenience function
+	public void addLaboratoryIsolateOrganizer(LaboratoryIsolateOrganizer organizer) {
 
 	}
 
@@ -70,6 +69,12 @@ public class CdaChLrph
 
 	}
 
+	// Convenience function
+	public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizerList() {
+		return null;
+
+	}
+
 	/**
 	 * Gets the laboratory specialty section.
 	 *
@@ -77,5 +82,27 @@ public class CdaChLrph
 	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySection() {
 		return null;
+	}
+
+	// Convenience function
+	public NotificationOrganizer getNotificationOrganizer() {
+		return null;
+
+	}
+
+	// Convenience function
+	public SpecimenCollection getSpecimenCollection() {
+		return null;
+
+	}
+
+	// Convenience function
+	public void setNotificationOrganizer(NotificationOrganizer organizer) {
+
+	}
+
+	// Convenience function
+	public void setSpecimenCollection(SpecimenCollection procedure) {
+
 	}
 }
