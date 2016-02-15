@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,10 +66,6 @@ public class LaboratoryObservation
 	 *          <div class="en">Code for a laboratory observation</div>
 	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
 	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
-	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
 	 *          <div class="en">date and time, when the result was known</div>
 	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
@@ -78,8 +75,7 @@ public class LaboratoryObservation
 	 *          <div class="de">Das ausführende Labor.</div>
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
-			Organization laboratory) {
+	public LaboratoryObservation(Code code, Date dateTimeOfResult, Organization laboratory) {
 		this();
 
 		setCode(code);
@@ -94,55 +90,21 @@ public class LaboratoryObservation
 	 *          <div class="en">Code for a laboratory observation</div>
 	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
 	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
-	 * @param laboratory
-	 *          <div class="en">the performing laboratory</div>
-	 *          <div class="de">Das ausführende Labor.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
-	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
 	 *          <div class="en">date and time, when the result was known</div>
 	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
-	 * @param valueCode
-	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div>
-	 *          <div class="fr"></div> <div class="it"></div>
-	 */
-	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
-			Date dateTimeOfResult, Code valueCode) {
-		this(code, immuneProtection, dateTimeOfResult, laboratory);
-
-		this.addValue(valueCode);
-	}
-
-	/**
-	 * Instantiates a new laboratory observation.
-	 *
-	 * @param code
-	 *          <div class="en">Code for a laboratory observation</div>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
-	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
 	 * @param laboratory
 	 *          <div class="en">the performing laboratory</div>
 	 *          <div class="de">Das ausführende Labor.</div>
 	 *          <div class="fr"></div> <div class="it"></div>
-	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
-	 * @param dateTimeOfResult
-	 *          <div class="en">date and time, when the result was known</div>
-	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
-	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div>
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
-			Date dateTimeOfResult, Value value) {
-		this(code, immuneProtection, dateTimeOfResult, laboratory);
+	public LaboratoryObservation(Code code, Date dateTimeOfResult, Organization laboratory,
+			Value value) {
+		this(code, dateTimeOfResult, laboratory);
 
 		this.addValue(value);
 	}
@@ -185,6 +147,11 @@ public class LaboratoryObservation
 	public void addPerformer(Performer performer, Date dateTimeOfResult) {
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		try {
+			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfResult));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		getMdht().getPerformers().add(mPerformer);
 	}
 
@@ -239,16 +206,6 @@ public class LaboratoryObservation
 		return Util.getCommentRef(getMdht().getEntryRelationships());
 	}
 
-	// /**
-	// * Gets the text of the comment text element (this is not necessarily the
-	// * comment itself)
-	// *
-	// * @return the comment text
-	// */
-	// public String getCommentText() {
-	// return Util.getCommentText(getMdht().getEntryRelationships());
-	// }
-
 	/**
 	 * <div class="en">Gets the date and time, when the examination was
 	 * performed</div> <div class="de">Gibt das Datum und die Uhrzeit zurück, wann
@@ -264,6 +221,16 @@ public class LaboratoryObservation
 			return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 		}
 	}
+
+	// /**
+	// * Gets the text of the comment text element (this is not necessarily the
+	// * comment itself)
+	// *
+	// * @return the comment text
+	// */
+	// public String getCommentText() {
+	// return Util.getCommentText(getMdht().getEntryRelationships());
+	// }
 
 	/**
 	 * <div class="en">Gets the date and time of the performed examination as
@@ -335,7 +302,9 @@ public class LaboratoryObservation
 	}
 
 	public ObservationInterpretation getInterpretationCodeEnum() {
-		// TODO
+		if (this.getInterpretationCode() != null) {
+			return ObservationInterpretation.getEnum(this.getInterpretationCode());
+		}
 		return null;
 	}
 
@@ -357,6 +326,15 @@ public class LaboratoryObservation
 			}
 		}
 		return null;
+	}
+
+	public List<Performer> getPerformerList() {
+		final List<Performer> list = new ArrayList<Performer>();
+		for (final Performer2 mdht : getMdht().getPerformers()) {
+			final Performer eHC = new Performer(mdht);
+			list.add(eHC);
+		}
+		return list;
 	}
 
 	/**

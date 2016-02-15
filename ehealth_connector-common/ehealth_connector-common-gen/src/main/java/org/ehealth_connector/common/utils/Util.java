@@ -95,8 +95,8 @@ public class Util {
 	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
-	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order
-	 * to support http and https
+	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order to
+	 * support http and https
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
@@ -119,9 +119,9 @@ public class Util {
 
 	/**
 	 * Checks to see if the list has at least one element.
-	 * 
+	 *
 	 * @param l
-	 *            the list
+	 *          the list
 	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
@@ -135,9 +135,9 @@ public class Util {
 
 	/**
 	 * <div class="en"> Converts a list of II int a list of Identificators
-	 * 
+	 *
 	 * @param mII
-	 *            the list to convert
+	 *          the list to convert
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
 	public static ArrayList<Identificator> convertIds(EList<II> mII) {
@@ -151,13 +151,13 @@ public class Util {
 
 	/**
 	 * Creates an address
-	 * 
+	 *
 	 * @param zip
-	 *            ZIP code
+	 *          ZIP code
 	 * @param city
-	 *            the city
+	 *          the city
 	 * @param usage
-	 *            usage of this address
+	 *          usage of this address
 	 * @return HL7 AD Object
 	 */
 	public static AD createAddress(String zip, String city, AddressUse usage) {
@@ -177,9 +177,9 @@ public class Util {
 
 	/**
 	 * Creates an MDHT assignedEntity object from an MDHT AssignedAuthor object
-	 * 
+	 *
 	 * @param a
-	 *            the assignedAuthor
+	 *          the assignedAuthor
 	 * @return the assignedEntity
 	 */
 	public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
@@ -207,7 +207,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT CE null flavor NASK.</div>
-	 * 
+	 *
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorNASK() {
@@ -218,7 +218,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT CE null flavor UNK.</div>
-	 * 
+	 *
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorUNK() {
@@ -229,7 +229,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT CD null flavor NA.</div>
-	 * 
+	 *
 	 * @return the CD
 	 */
 	public static CD createCodeNullFlavorNA() {
@@ -241,12 +241,13 @@ public class Util {
 	/**
 	 * Creates a new MDHT CustodianOrganization object from an eHC Organization
 	 * object
-	 * 
+	 *
 	 * @param organization
-	 *            the Organization
+	 *          the Organization
 	 * @return CustodianOrganization the CustodianOrganization
 	 */
-	public static CustodianOrganization createCustodianOrganizationFromOrganization(Organization organization) {
+	public static CustodianOrganization createCustodianOrganizationFromOrganization(
+			Organization organization) {
 		// create and set the mdht RepresentedCustodianOrganization Object
 		if (organization != null) {
 			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE.createCustodianOrganization();
@@ -262,7 +263,8 @@ public class Util {
 
 			// take the first telecom and set it as CustodianTelecom
 			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
-				mdhtCustOrg.setTelecom(EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
+				mdhtCustOrg
+						.setTelecom(EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
 			}
 			return mdhtCustOrg;
 		}
@@ -271,10 +273,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the ED.</div>
-	 * 
+	 *
 	 * @param text
-	 *            <br>
-	 *            <div class="en">text</div>
+	 *          <br>
+	 *          <div class="en">text</div>
 	 * @return the ED
 	 */
 	public static ED createEd(String text) {
@@ -284,13 +286,13 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT email TEL object.</div>
-	 * 
+	 *
 	 * @param eMail
-	 *            <br>
-	 *            <div class="en"> e mail</div>
+	 *          <br>
+	 *          <div class="en"> e mail</div>
 	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 *          <br>
+	 *          <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createEMail(String eMail, AddressUse usage) {
@@ -302,27 +304,28 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the eur date str from ts.</div>
-	 * 
+	 *
 	 * @param hl7Stimestamp
-	 *            <br>
-	 *            <div class="en"> hl7 stimestamp</div><div class="de"></div>
-	 *            <div class="fr"> </div> <div class="it"></div>
+	 *          <br>
+	 *          <div class="en"> hl7 stimestamp</div><div class="de"></div>
+	 *          <div class="fr"> </div> <div class="it"></div>
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
+		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6)
+				+ "." + hl7Stimestamp.substring(0, 4);
 		return eurDateStr;
 	}
 
 	/**
 	 * <div class="en">Creates the MDHT fax TEL object.</div>
-	 * 
+	 *
 	 * @param faxNr
-	 *            <br>
-	 *            <div class="en"> fax nr</div>
+	 *          <br>
+	 *          <div class="en"> fax nr</div>
 	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 *          <br>
+	 *          <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createFax(String faxNr, AddressUse usage) {
@@ -335,9 +338,9 @@ public class Util {
 	/**
 	 * Creates an MDHT II object with the eHealthConnector root OID from an eHC
 	 * Identificator object
-	 * 
+	 *
 	 * @param id
-	 *            the Identificator
+	 *          the Identificator
 	 * @return the MDHT II
 	 */
 	public static II createIdentificator(Identificator id) {
@@ -354,7 +357,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT IVL_PQ null flavor NA object.</div>
-	 * 
+	 *
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNA() {
@@ -365,7 +368,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the IVL_PQ null flavor NASK object.</div>
-	 * 
+	 *
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorNASK() {
@@ -376,7 +379,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the IVL_PQ null flavor UNK object.</div>
-	 * 
+	 *
 	 * @return the IVL_PQ
 	 */
 	public static IVL_PQ createIVL_PQNullFlavorUNK() {
@@ -386,15 +389,16 @@ public class Util {
 	}
 
 	/**
-	 * Creates a new MDHT LegalAuthor object from an MDHT Author object.
-	 * Signature Code will be set to fixed 's'
-	 * 
+	 * Creates a new MDHT LegalAuthor object from an MDHT Author object. Signature
+	 * Code will be set to fixed 's'
+	 *
 	 * @param author
-	 *            <br>
-	 *            <div class="de">the author</div>
+	 *          <br>
+	 *          <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
-	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(org.ehealth_connector.common.Author author) {
+	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
+			org.ehealth_connector.common.Author author) {
 		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
 		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
 		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
@@ -410,10 +414,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the non quoted MDHT StrucDocText.</div>
-	 * 
+	 *
 	 * @param xmlString
-	 *            <br>
-	 *            <div class="de"> xml string</div>
+	 *          <br>
+	 *          <div class="de"> xml string</div>
 	 * @return the StrucDocText
 	 */
 	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
@@ -433,7 +437,7 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT IVXB_TS null flavor UNK.</div>
-	 * 
+	 *
 	 * @return the ivxb ts
 	 */
 	public static IVXB_TS createNullFlavorUnknown() {
@@ -444,13 +448,13 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the reference.</div>
-	 * 
+	 *
 	 * @param contentId
-	 *            <br>
-	 *            <div class="en">content id</div>
+	 *          <br>
+	 *          <div class="en">content id</div>
 	 * @param prefix
-	 *            <br>
-	 *            <div class="en">prefix</div>
+	 *          <br>
+	 *          <div class="en">prefix</div>
 	 * @return the ed
 	 */
 	public static ED createReference(int contentId, String prefix) {
@@ -465,9 +469,9 @@ public class Util {
 
 	/**
 	 * Creates an MDHT ED reference from a given String
-	 * 
+	 *
 	 * @param value
-	 *            the reference value
+	 *          the reference value
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String value) {
@@ -480,11 +484,11 @@ public class Util {
 
 	/**
 	 * Creates an MDHT ED reference from a given String
-	 * 
+	 *
 	 * @param url
-	 *            the reference url
+	 *          the reference url
 	 * @param narrativeText
-	 *            the reference narrative text
+	 *          the reference narrative text
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String url, String narrativeText) {
@@ -498,13 +502,13 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
-	 * 
+	 *
 	 * @param telNr
-	 *            <br>
-	 *            <div class="en"> tel nr</div>
+	 *          <br>
+	 *          <div class="en"> tel nr</div>
 	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 *          <br>
+	 *          <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createTel(String telNr, AddressUse usage) {
@@ -517,17 +521,16 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT phone TEL object, without knowing the
-	 * type of TEL object (id the endpoint is a fax, phone etc. is
-	 * unknown).</div>
-	 * 
+	 * <div class="en">Creates the MDHT phone TEL object, without knowing the type
+	 * of TEL object (id the endpoint is a fax, phone etc. is unknown).</div>
+	 *
 	 * @param endpointIdentifier
-	 *            <br>
-	 *            <div class="en"> tel nr</div><div class="de">Der Endpunkt der
-	 *            Kommunikation (z.B. eine Telefonnummer)</div>
+	 *          <br>
+	 *          <div class="en"> tel nr</div><div class="de">Der Endpunkt der
+	 *          Kommunikation (z.B. eine Telefonnummer)</div>
 	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 *          <br>
+	 *          <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createUnknownTel(String endpointIdentifier, AddressUse usage) {
@@ -582,9 +585,9 @@ public class Util {
 	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem
-	 * 
+	 *
 	 * @param rscPath
-	 *            path to the desired file in the Jar
+	 *          path to the desired file in the Jar
 	 * @return Full path and file name of the created temporary file </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
@@ -618,10 +621,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Extract string from a non quoted MDHT StrucDocText.</div>
-	 * 
+	 *
 	 * @param strucDocText
-	 *            <br>
-	 *            <div class="en">the StrucDocText</div>
+	 *          <br>
+	 *          <div class="en">the StrucDocText</div>
 	 * @return the string
 	 */
 	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
@@ -634,9 +637,9 @@ public class Util {
 
 	/**
 	 * Creates a document ID with the eHC root ID
-	 * 
+	 *
 	 * @param applicationOidRoot
-	 *            identifiziert diese Version des eHCs
+	 *          identifiziert diese Version des eHCs
 	 * @return HL7 II Objekt
 	 */
 	public static II generateDocId(String applicationOidRoot) {
@@ -644,7 +647,8 @@ public class Util {
 		// application instance, the extension part identifies the document
 		// instance.
 
-		final String documentOid = org.openhealthtools.ihe.utils.OID.createOIDGivenRoot("ehealthconnctor");
+		final String documentOid = org.openhealthtools.ihe.utils.OID
+				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 		final Random r = new Random();
 		final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(r.nextInt()));
@@ -654,9 +658,9 @@ public class Util {
 	/**
 	 * Extracts the reference to a comment from a given list of MDHT
 	 * EntryRelationship objects
-	 * 
+	 *
 	 * @param e
-	 *            the EntryRelationship list
+	 *          the EntryRelationship list
 	 * @return the reference to the comment
 	 */
 	public static String getCommentRef(EList<EntryRelationship> e) {
@@ -677,9 +681,9 @@ public class Util {
 	/**
 	 * Returns the text of a comment from a given list of MDHT EntryRelationship
 	 * objects
-	 * 
+	 *
 	 * @param e
-	 *            the EntryRelationship list
+	 *          the EntryRelationship list
 	 * @return the tet of the comment
 	 */
 	public static String getCommentText(EList<EntryRelationship> e) {
@@ -696,10 +700,10 @@ public class Util {
 	/**
 	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert e mail aus einer ArrayList of TEL.</div>
-	 * 
+	 *
 	 * @param telecoms
-	 *            <br>
-	 *            <div class="en"> the telecoms</div>
+	 *          <br>
+	 *          <div class="en"> the telecoms</div>
 	 * @return <div class="en">the e mail</div>
 	 */
 	public static Map<String, AddressUse> getEMail(List<TEL> telecoms) {
@@ -709,10 +713,10 @@ public class Util {
 	/**
 	 * <div class="en">Gets the fax from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert cax aus einer ArrayList von TEL.</div>
-	 * 
+	 *
 	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 *          <br>
+	 *          <div class="en">the telecoms</div>
 	 * @return <div class="en">the fax</div>
 	 */
 	public static Map<String, AddressUse> getFax(List<TEL> telecoms) {
@@ -722,10 +726,10 @@ public class Util {
 	/**
 	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert e mail aus einer ArrayList von TEL.</div>
-	 * 
+	 *
 	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 *          <br>
+	 *          <div class="en">the telecoms</div>
 	 * @return <div class="en">the phone</div>
 	 */
 	public static Map<String, AddressUse> getPhones(List<TEL> telecoms) {
@@ -733,12 +737,33 @@ public class Util {
 	}
 
 	/**
+	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
+	 * ArrayList<TEL>
+	 *
+	 * @param telecoms
+	 *          the List with unsorted MDHT TEL objects
+	 * @param type
+	 *          the type of telecommunication endpoint that should be extracted
+	 * @return the HashMap with TEL objects of the given type
+	 */
+	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
+		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		for (final TEL tel : telecoms) {
+			if (tel.getValue().toLowerCase().contains(type)) {
+				tl.put(tel.getValue(),
+						(tel.getUses().size() > 0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+			}
+		}
+		return tl;
+	}
+
+	/**
 	 * <div class="en">Gets a temp folder for output files. If you set an
-	 * environment variable with the name 'eHCTempPath' the eHealth Connector
-	 * will use the path specified in this environment variable. If no such
-	 * environment variable is set, it will try to use /temp. If the path is not
-	 * writable the eHealth Connector will use the system temp folder.
-	 * 
+	 * environment variable with the name 'eHCTempPath' the eHealth Connector will
+	 * use the path specified in this environment variable. If no such environment
+	 * variable is set, it will try to use /temp. If the path is not writable the
+	 * eHealth Connector will use the system temp folder.
+	 *
 	 * @return path to temp folder</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -750,7 +775,8 @@ public class Util {
 			final String env = System.getenv(envVariable);
 			if (env != null) {
 				tempDirectoryPath = env;
-				log.debug("Trying to use temp folder set by environment variable '" + envVariable + "': " + tempDirectoryPath);
+				log.debug("Trying to use temp folder set by environment variable '" + envVariable + "': "
+						+ tempDirectoryPath);
 			} else {
 				tempDirectoryPath = "/temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
@@ -767,12 +793,34 @@ public class Util {
 	}
 
 	/**
+	 * Extract text from an Ecore FeatureMap
+	 *
+	 * @param featureMap
+	 *          the featureMap
+	 * @return the text as String
+	 */
+	@SuppressWarnings("unused")
+	private static String getText(FeatureMap featureMap) {
+		final StringBuffer buffer = new StringBuffer("");
+		for (final FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
+				}
+			}
+		}
+		return buffer.toString().trim();
+	}
+
+	/**
 	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
-	 * 
+	 *
 	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 *          <br>
+	 *          <div class="en">the telecoms</div>
 	 * @return <div class="en">the webside</div>
 	 */
 	public static Map<String, AddressUse> getWebsites(List<TEL> telecoms) {
@@ -782,10 +830,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Creates an MDHT II object.</div>
-	 * 
+	 *
 	 * @param root
-	 *            <br>
-	 *            <div class="en">the root</div>
+	 *          <br>
+	 *          <div class="en">the root</div>
 	 * @return the II
 	 */
 	public static II ii(String root) {
@@ -796,9 +844,9 @@ public class Util {
 
 	/**
 	 * Checks if an EntryRelationship is a comment
-	 * 
+	 *
 	 * @param er
-	 *            the EntryRelationship
+	 *          the EntryRelationship
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
 	public static boolean isComment(EntryRelationship er) {
@@ -812,13 +860,13 @@ public class Util {
 	/**
 	 * <div class="en">Join an ArrayList of String with person names to a whole
 	 * name</div>
-	 * 
+	 *
 	 * @param nameList
-	 *            <br>
-	 *            <div class="en"> name list</div>
+	 *          <br>
+	 *          <div class="en"> name list</div>
 	 * @param delimiter
-	 *            <br>
-	 *            <div class="en"> delimiter</div>
+	 *          <br>
+	 *          <div class="en"> delimiter</div>
 	 * @return the string
 	 */
 	public static String join(List<String> nameList, String delimiter) {
@@ -843,44 +891,6 @@ public class Util {
 			}
 		}
 		return builder.toString();
-	}
-
-	/**
-	 * <div class="en">Join a list of MDHT ENXP (name parts) to a whole person
-	 * name</div>
-	 * 
-	 * @param list
-	 *            <br>
-	 *            <div class="en">the list</div>
-	 * @return the string
-	 */
-	public static String joinEListStr(EList<ENXP> list) {
-		if (list.size() == 0) {
-			return "";
-		}
-		final String names = list.get(0).getText();
-		if (list.size() > 1) {
-			final List<String> nameList = new ArrayList<String>();
-			for (int i = 0; i < list.size(); i++) {
-				nameList.add(list.get(i).getText());
-			}
-			return Util.join(nameList, " ");
-		}
-		return names;
-	}
-
-	/**
-	 * <div class="en">Creates an MDHT ST</div>
-	 * 
-	 * @param text
-	 *            <br>
-	 *            <div class="de">the text</div>
-	 * @return the st
-	 */
-	public static ST st(String text) {
-		final ST value = DatatypesFactory.eINSTANCE.createST();
-		value.addText(text);
-		return value;
 	}
 
 	// /**
@@ -945,54 +955,49 @@ public class Util {
 	// }
 
 	/**
-	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
-	 * ArrayList<TEL>
-	 * 
-	 * @param telecoms
-	 *            the List with unsorted MDHT TEL objects
-	 * @param type
-	 *            the type of telecommunication endpoint that should be
-	 *            extracted
-	 * @return the HashMap with TEL objects of the given type
+	 * <div class="en">Join a list of MDHT ENXP (name parts) to a whole person
+	 * name</div>
+	 *
+	 * @param list
+	 *          <br>
+	 *          <div class="en">the list</div>
+	 * @return the string
 	 */
-	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
-		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
-		for (final TEL tel : telecoms) {
-			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(), (tel.getUses().size() > 0 ? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
-			}
+	public static String joinEListStr(EList<ENXP> list) {
+		if (list.size() == 0) {
+			return "";
 		}
-		return tl;
+		final String names = list.get(0).getText();
+		if (list.size() > 1) {
+			final List<String> nameList = new ArrayList<String>();
+			for (int i = 0; i < list.size(); i++) {
+				nameList.add(list.get(i).getText());
+			}
+			return Util.join(nameList, " ");
+		}
+		return names;
 	}
 
 	/**
-	 * Extract text from an Ecore FeatureMap
-	 * 
-	 * @param featureMap
-	 *            the featureMap
-	 * @return the text as String
+	 * <div class="en">Creates an MDHT ST</div>
+	 *
+	 * @param text
+	 *          <br>
+	 *          <div class="de">the text</div>
+	 * @return the st
 	 */
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		final StringBuffer buffer = new StringBuffer("");
-		for (final FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
+	public static ST st(String text) {
+		final ST value = DatatypesFactory.eINSTANCE.createST();
+		value.addText(text);
+		return value;
 	}
 
 	/**
-	 * Tranverses through a given FeatureMap and prints an XML representations
-	 * of this map (only for test purposes)
-	 * 
+	 * Tranverses through a given FeatureMap and prints an XML representations of
+	 * this map (only for test purposes)
+	 *
 	 * @param root
-	 *            the root of the FeatureMap
+	 *          the root of the FeatureMap
 	 */
 	@SuppressWarnings("unused")
 	private static void traverse(FeatureMap root) {
@@ -1033,11 +1038,11 @@ public class Util {
 	/**
 	 * Tranverses through a given FeatureMap and updates a given StringBuilder
 	 * with the XML representation of the map
-	 * 
+	 *
 	 * @param featureMap
-	 *            the Ecore FeatureMap
+	 *          the Ecore FeatureMap
 	 * @param sb
-	 *            the StringBuilder
+	 *          the StringBuilder
 	 * @return the updated StringBuilder
 	 */
 	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
@@ -1067,31 +1072,33 @@ public class Util {
 	}
 
 	/**
-	 * Recursive function to tranverse all attributes and print the contents
-	 * (only for test purposes)
-	 * 
+	 * Recursive function to tranverse all attributes and print the contents (only
+	 * for test purposes)
+	 *
 	 * @param anyAttribute
-	 *            the Ecore FeatureMap
+	 *          the Ecore FeatureMap
 	 */
 	private static void traverseAttributes(FeatureMap anyAttribute) {
 		for (final Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString() + "\"");
+			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
+					+ entry.getValue().toString() + "\"");
 		}
 	}
 
 	/**
 	 * Recursive function to tranverse all attributes and update the given
 	 * StringBuilder with an XML representation of the attributes
-	 * 
+	 *
 	 * @param anyAttribute
-	 *            the Ecore FeatureMap
+	 *          the Ecore FeatureMap
 	 * @param sb
-	 *            the StringBuilder
+	 *          the StringBuilder
 	 * @return the updated StringBuilder
 	 */
 	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
 		for (final Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString() + "\"");
+			sb.append(" " + entry.getEStructuralFeature().getName() + "=\"" + entry.getValue().toString()
+					+ "\"");
 		}
 		return sb;
 	}

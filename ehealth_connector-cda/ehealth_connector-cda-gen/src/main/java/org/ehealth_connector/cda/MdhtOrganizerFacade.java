@@ -20,7 +20,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 		return null;
 	}
 
-	protected StatusCode getStatusCode() {
+	public StatusCode getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
 			return StatusCode.getEnum(getMdht().getStatusCode().getCode());
 		}
@@ -35,7 +35,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 		}
 	}
 
-	protected void setStatusCode(StatusCode statusCode) {
+	public void setStatusCode(StatusCode statusCode) {
 		getMdht().setStatusCode(statusCode.getCS());
 	}
 }

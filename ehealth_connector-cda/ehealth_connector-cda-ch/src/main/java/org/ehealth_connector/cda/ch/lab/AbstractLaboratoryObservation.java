@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public abstract class AbstractLaboratoryObservation
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
+
+	public AbstractLaboratoryObservation() {
+		super();
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
+	}
 
 	/**
 	 * Add a comment entry.
@@ -43,5 +51,14 @@ public abstract class AbstractLaboratoryObservation
 			return comments;
 		}
 		return null;
+	}
+
+	// Convenience function to set a new code, which is not in the value set for
+	// LRXX
+	public void setNewCode(Code code, SectionAnnotationCommentEntry commentEntry) {
+		this.addCommentEntry(commentEntry);
+		Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
+		nullCode.addTranslation(code);
+		this.setCode(nullCode);
 	}
 }

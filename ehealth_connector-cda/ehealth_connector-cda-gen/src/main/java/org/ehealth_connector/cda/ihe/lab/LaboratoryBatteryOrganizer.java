@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ihe.lab;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 public class LaboratoryBatteryOrganizer extends
@@ -10,6 +11,7 @@ public class LaboratoryBatteryOrganizer extends
 
 	public LaboratoryBatteryOrganizer() {
 		super(LABFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init());
+		setStatusCode(StatusCode.COMPLETED);
 	}
 
 	protected LaboratoryBatteryOrganizer(

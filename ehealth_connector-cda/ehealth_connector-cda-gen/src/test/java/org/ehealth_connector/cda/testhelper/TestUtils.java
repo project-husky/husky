@@ -19,9 +19,15 @@ import java.io.File;
 import java.util.Date;
 import java.util.Random;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -36,99 +42,12 @@ import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 public class TestUtils {
 
 	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
-
-	public String startDateString;
-
-	public String endDateString;
-
-	public Date startDate;
-
-	public Date endDate;
-
-	public String ts1;
-
-	public String ts2;
-
-	public String ts3;
-
-	public String ts4;
-
-	public String ts5;
-
-	public String numS1;
-
-	public String numS2;
-
-	public Double number;
-
-	public String telS1;
-	public String telS2;
-
-	public Code code1;
-	public Code code2;
-	public Code loincCode;
-	public Code problemCode;
-	public Value value1;
-	public Value value2;
-	public Identificator id1;
-	public Identificator id2;
-	public Name name1;
-	public Name name2;
-	public Author author1;
-	public Author author2;
-	public Patient patient1;
-	public Organization organization1;
-	public Code gtinCode;
-	public Telecoms telecoms1;
-
-	public Address address1;
-
-	public TestUtils() {
-	}
-
-	public void init() {
-
-		// Dates
-		startDateString = "28.02.2015";
-		endDateString = "28.02.2018";
-
-		startDate = DateUtil.date("28.02.2015");
-		endDate = DateUtil.date("28.02.2018");
-
-		// Test String with German, French and Italic special characters
-		ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-		ts2 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-		ts3 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-		ts4 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-		ts5 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
-		numS1 = "1231425352";
-		numS2 = "987653";
-		number = 121241241.212323;
-		telS1 = "+41.32.234.66.77";
-		telS2 = "+44.32.234.66.99";
-
-		// Convenience API Types
-		code1 = createCode1();
-		code2 = createCode2();
-		loincCode = new Code("2.16.840.1.113883.6.1", numS1);
-		problemCode = new Code("2.16.840.1.113883.6.139", numS2);
-		value1 = createValue1();
-		value2 = createValue2();
-		gtinCode = createGtinCode();
-		id1 = createIdentificator1();
-		id2 = createIdentificator2();
-		telecoms1 = createTelecoms1();
-		name1 = createName1();
-		name2 = createName2();
-		author1 = createAuthor1();
-		author2 = createAuthor2();
-		organization1 = createOrganization1();
-		address1 = createAddress1();
-	}
 
 	public static String generateString(int length) {
 		final Random rng = new Random();
@@ -155,6 +74,13 @@ public class TestUtils {
 				return false;
 		}
 		return true;
+	}
+
+	public static boolean isEqual(AbstractProblemEntry p1, AbstractProblemEntry p2) {
+		if (p1 == null) {
+			return false;
+		}
+		return p1.equals(p2);
 	}
 
 	public static boolean isEqual(Author a1, Author a2) {
@@ -245,13 +171,6 @@ public class TestUtils {
 		return true;
 	}
 
-	public static boolean isEqual(AbstractProblemEntry p1, AbstractProblemEntry p2) {
-		if (p1 == null) {
-			return false;
-		}
-		return p1.equals(p2);
-	}
-
 	public static boolean isEqual(Telecoms t1, Telecoms t2) {
 		if (t1.getEMails() != null) {
 			for (int i = 0; i < t1.getEMails().size(); i++) {
@@ -299,6 +218,60 @@ public class TestUtils {
 		}
 
 		return true;
+	}
+
+	public Address address1;
+	public Author author1;
+
+	public Author author2;
+	public Code code1;
+	public Code code2;
+	public Date endDate;
+	public String endDateString;
+	public Code gtinCode;
+	public Identificator id1;
+	public Identificator id2;
+	public Code loincCode;
+	public Name name1;
+	public Name name2;
+	public Double number;
+	public String numS1;
+	public String numS2;
+	public Organization organization1;
+	public Patient patient1;
+
+	public Code problemCode;
+
+	public Date startDate;
+	public String startDateString;
+
+	public Telecoms telecoms1;
+
+	public String telS1;
+
+	public String telS2;
+
+	public String ts1;
+
+	public String ts2;
+
+	public String ts3;
+
+	public String ts4;
+
+	public String ts5;
+
+	public Value value1;
+
+	public Value value2;
+
+	protected XPath xpath;
+
+	protected XPathFactory xpathFactory;
+
+	public TestUtils() {
+		xpathFactory = XPathFactory.newInstance();
+		xpath = xpathFactory.newXPath();
 	}
 
 	public Address createAddress1() {
@@ -411,5 +384,54 @@ public class TestUtils {
 		}
 		tmpPath += File.separator + aFileName;
 		return tmpPath;
+	}
+
+	public void init() {
+
+		// Dates
+		startDateString = "28.02.2015";
+		endDateString = "28.02.2018";
+
+		startDate = DateUtil.date("28.02.2015");
+		endDate = DateUtil.date("28.02.2018");
+
+		// Test String with German, French and Italic special characters
+		ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+		ts2 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+		ts3 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+		ts4 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+		ts5 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
+		numS1 = "1231425352";
+		numS2 = "987653";
+		number = 121241241.212323;
+		telS1 = "+41.32.234.66.77";
+		telS2 = "+44.32.234.66.99";
+
+		// Convenience API Types
+		code1 = createCode1();
+		code2 = createCode2();
+		loincCode = new Code("2.16.840.1.113883.6.1", numS1);
+		problemCode = new Code("2.16.840.1.113883.6.139", numS2);
+		value1 = createValue1();
+		value2 = createValue2();
+		gtinCode = createGtinCode();
+		id1 = createIdentificator1();
+		id2 = createIdentificator2();
+		telecoms1 = createTelecoms1();
+		name1 = createName1();
+		name2 = createName2();
+		author1 = createAuthor1();
+		author2 = createAuthor2();
+		organization1 = createOrganization1();
+		address1 = createAddress1();
+	}
+
+	public boolean xExist(Document document, String xPath) throws XPathExpressionException {
+		XPathExpression expr = xpath.compile(xPath);
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		if (nodes.getLength() == 1)
+			return true;
+		else
+			return false;
 	}
 }

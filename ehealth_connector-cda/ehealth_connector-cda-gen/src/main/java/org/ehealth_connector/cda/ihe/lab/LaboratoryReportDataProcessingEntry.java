@@ -16,11 +16,14 @@ public class LaboratoryReportDataProcessingEntry extends
 	}
 
 	protected SpecimenAct getSpecimenAct() {
+		if (getMdht().getAct() != null) {
+			return new SpecimenAct(
+					(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) getMdht().getAct());
+		}
 		return null;
-		//
 	}
 
 	protected void setSpecimenAct(SpecimenAct specimenAct) {
-
+		getMdht().setAct(specimenAct.getMdht());
 	}
 }

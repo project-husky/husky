@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.Ucum;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
+import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -49,6 +50,24 @@ public class Value {
 	 */
 	public Value(ANY value) {
 		mValue = value;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with a given boolean Object.</div>
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
+	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
+	 * wird ein Value Objekt auf Basis eines Java boolean initialisiert (CDA
+	 * Datentyp: BL)</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param code
+	 *          <br>
+	 *          <div class="de"> code</div> <div class="fr"></div>
+	 *          <div class="it"></div>
+	 */
+	public Value(boolean code) {
+		BL bl = DatatypesFactory.eINSTANCE.createBL();
+		bl.setValue(code);
+		mValue = bl;
 	}
 
 	/**
@@ -186,6 +205,15 @@ public class Value {
 	}
 
 	/**
+	 * Method to copy the BL value
+	 *
+	 * @return BL representing the value
+	 */
+	public BL copyMdhtBl() {
+		return EcoreUtil.copy((BL) mValue);
+	}
+
+	/**
 	 * <div class="en">Copy mdht code.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
@@ -266,6 +294,15 @@ public class Value {
 	}
 
 	/**
+	 * Checks if the Value object is a BL (Boolean).
+	 *
+	 * @return boolean true, if it is Boolean, false otherwise
+	 */
+	public boolean isBl() {
+		return (mValue instanceof BL);
+	}
+
+	/**
 	 * Checks if the Value Object is a code.
 	 *
 	 * @return boolean true, if the Value is a code, false otherwise
@@ -285,11 +322,6 @@ public class Value {
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
 	public boolean isPhysicalQuantity() {
-		// if (mValue instanceof PQ) {
-		// return true;
-		// } else {
-		// return false;
-		// }
 		return (mValue instanceof PQ);
 	}
 
@@ -300,11 +332,6 @@ public class Value {
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
 	public boolean isRto() {
-		// if (mValue instanceof RTO) {
-		// return true;
-		// } else {
-		// return false;
-		// }
 		return (mValue instanceof RTO);
 	}
 

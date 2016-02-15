@@ -12,6 +12,10 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
 
+	public CdaChLrph() {
+		this(LanguageCode.ENGLISH);
+	}
+
 	/**
 	 * Instantiates a new cda ch lrph.
 	 *
@@ -19,12 +23,12 @@ public class CdaChLrph
 	 *          the language code
 	 */
 	protected CdaChLrph(LanguageCode languageCode) {
-		this(null, null, null);
+		this(languageCode, null, null);
 	}
 
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrph().init(), languageCode, styleSheet, css);
-		super.initCda();
+		// super.initCda();
 	}
 
 	/**
