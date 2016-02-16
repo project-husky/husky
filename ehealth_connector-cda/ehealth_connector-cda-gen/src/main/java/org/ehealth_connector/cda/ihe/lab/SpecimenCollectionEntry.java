@@ -5,16 +5,19 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtProcedureFacade;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Participant;
+import org.ehealth_connector.common.utils.DateUtil;
+import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class SpecimenCollectionEntry
 		extends MdhtProcedureFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection> {
 
-	Date effectiveTime;
-
-	protected SpecimenCollectionEntry() {
+	public SpecimenCollectionEntry() {
 		super(LABFactory.eINSTANCE.createSpecimenCollection().init());
 	}
 
@@ -23,24 +26,21 @@ public class SpecimenCollectionEntry
 	}
 
 	protected void addParticipant(Participant participant) {
-		// getMdht().getParticipants().add(participant);
-	}
-
-	public void addSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
-		//
+		getMdht().getParticipants().add(participant.copy());
 	}
 
 	protected Date getEffectiveTime() {
-		return effectiveTime;
+		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
 	protected List<Participant> getParticipants() {
-		if (getMdht().getParticipants() != null) {
-			List<Participant> participantsList;
-			participantsList = new ArrayList<Participant>();
-			return participantsList;
+		ArrayList<Participant> list = new ArrayList<Participant>();
+		if (getMdht() != null && getMdht().getParticipants() != null) {
+			for (Participant2 p : this.getMdht().getParticipants()) {
+				list.add(new Participant(p));
+			}
 		}
-		return null;
+		return list;
 	}
 
 	public SpecimenReceivedEntry getSpecimenReceivedEntry() {
@@ -48,7 +48,23 @@ public class SpecimenCollectionEntry
 	}
 
 	protected void setEffectiveTime(Date date) {
+		getMdht().setEffectiveTime(DateUtil.convertDate(date));
+	}
 
+	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
+		// Check if the element already exist, if so, replace it, if not add it
+		boolean added = false;
+		for (Act o : getMdht().getActs()) {
+			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived) {
+				o = (Act) entry;
+				added = true;
+			}
+		}
+		if (added == false) {
+			getMdht().addAct(entry.copy());
+		}
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
 	}
 
 }

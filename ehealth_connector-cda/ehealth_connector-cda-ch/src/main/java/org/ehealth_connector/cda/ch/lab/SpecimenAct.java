@@ -1,11 +1,19 @@
 package org.ehealth_connector.cda.ch.lab;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.StatusCode;
+import org.openhealthtools.mdht.uml.cda.Organizer;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-public abstract class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.SpecimenAct {
+public class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.SpecimenAct {
+
+	public SpecimenAct() {
+		super();
+	}
 
 	public SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
 		super(mdht);
@@ -13,11 +21,23 @@ public abstract class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.Spec
 	}
 
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
+		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
+		// Set the right type for the entryRelationship
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
 	}
 
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
-		getMdht().getLaboratoryBatteryOrganizers();
-		return null;
+		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
+		if (getMdht() != null && getMdht().getLaboratoryBatteryOrganizers() != null) {
+			for (Organizer organizer : this.getMdht().getOrganizers()) {
+				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
+					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
+					list.add(new LaboratoryBatteryOrganizer(iheOrganizer));
+				}
+			}
+		}
+		return list;
 	}
 
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
@@ -25,6 +45,8 @@ public abstract class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.Spec
 	}
 
 	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
-		getMdht().getSpecimenCollections().add(entry.copy());
+		getMdht().addProcedure(entry.copy());
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
 	}
 }

@@ -10,10 +10,10 @@ import org.openhealthtools.mdht.uml.cda.Organizer;
 public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 
 	protected MdhtOrganizerFacade(E mdht) {
-		super(mdht, null, null);
+		super(mdht);
 	}
 
-	protected Date getEffectiveTime() {
+	public Date getEffectiveTime() {
 		if (getMdht() != null && getMdht().getEffectiveTime() != null) {
 			return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 		}
@@ -27,7 +27,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 		return null;
 	}
 
-	protected void setEffectiveTime(Date date) {
+	public void setEffectiveTime(Date date) {
 		try {
 			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(date));
 		} catch (ParseException e) {

@@ -41,6 +41,7 @@ public class LaboratorySpecialtySection
 		return null;
 	}
 
+	@Override
 	public void setLaboratoryReportDataProcessingEntry(
 			LaboratoryReportDataProcessingEntry labReportDataProcessingEntry) {
 		getMdht().getEntries().add((Entry) labReportDataProcessingEntry);

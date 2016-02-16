@@ -26,7 +26,7 @@ public abstract class AbstractLaboratoryObservation
 	 *          the new comment entry
 	 */
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
-		this.getMdht().addAct(commentEntry.getMdht());
+		this.getMdht().addAct(commentEntry.copy());
 		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
 		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {

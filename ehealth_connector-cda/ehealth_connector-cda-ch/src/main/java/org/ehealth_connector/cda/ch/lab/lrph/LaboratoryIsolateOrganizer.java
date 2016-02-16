@@ -1,18 +1,26 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
-import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Participant;
 import org.ehealth_connector.common.Specimen;
+import org.ehealth_connector.common.enums.StatusCode;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
 
 public class LaboratoryIsolateOrganizer
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
 
+	public LaboratoryIsolateOrganizer() {
+		super();
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
+	}
+
 	public LaboratoryIsolateOrganizer(
-			org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer iheLabIsolateOrganizer) {
-		super(iheLabIsolateOrganizer.getMdht());
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer mdht) {
+		super(mdht);
 	}
 
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
@@ -20,15 +28,6 @@ public class LaboratoryIsolateOrganizer
 	}
 
 	public void addParticipant(Participant participant) {
-
-	}
-
-	public void addSubject(Specimen specimen) {
-
-	}
-
-	public Date getEffectiveTime() {
-		return null;
 
 	}
 
@@ -42,11 +41,19 @@ public class LaboratoryIsolateOrganizer
 
 	}
 
-	public Specimen getSubject() {
+	public Specimen getSpecimen() {
+		if (getMdht().getSpecimens() != null && !getMdht().getSpecimens().isEmpty()) {
+			return new Specimen(getMdht().getSpecimens().get(0));
+		}
 		return null;
 	}
 
-	public void setEffectiveTime(Date date) {
-
+	public void setSpecimen(Specimen specimen) {
+		getMdht().getSpecimens().clear();
+		specimen.getMdht().setTypeCode(ParticipationType.PRD);
+		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
+		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
+				.setClassCode(EntityClassRoot.MIC);
+		getMdht().getSpecimens().add(specimen.getMdht());
 	}
 }

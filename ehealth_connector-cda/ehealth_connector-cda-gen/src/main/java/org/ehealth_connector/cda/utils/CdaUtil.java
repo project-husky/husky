@@ -15,11 +15,14 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.utils;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Component3;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * @author roeland
@@ -30,11 +33,11 @@ public abstract class CdaUtil {
 
 	/**
 	 * Adds the copy of a given section to a given structured body
-	 * 
+	 *
 	 * @param sb
-	 *            the StructuredBody
+	 *          the StructuredBody
 	 * @param s
-	 *            the Section
+	 *          the Section
 	 */
 	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
 		if ((sb != null) && (s != null)) {
@@ -44,44 +47,10 @@ public abstract class CdaUtil {
 		}
 	}
 
-	// /**
-	// * <div class="en">Creates a UUID and a generated extension.</div>
-	// *
-	// * @param id
-	// * <br>
-	// * <div class="en"> the id</div>
-	// * @return the ii
-	// */
-	// public static II createUuidIdentificator(Identificator id) {
-	// II ii;
-	// if (id == null) {
-	// ii = createUuid(null);
-	// } else {
-	// ii = id.getIi();
-	// }
-	// return ii;
-	// }
-	//
-	// /**
-	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	// * and a generated extension.</div>
-	// *
-	// * @param id
-	// * <br>
-	// * <div class="en"> the id</div>
-	// * @return the ii
-	// */
-	// public static II createUuid(String id) {
-	// final II ii = DatatypesFactory.eINSTANCE.createII();
-	// // ii.setRoot(CdaChVacd.OID_MAIN);
-	// if (id == null) {
-	// ii.setExtension(UUID.generate());
-	// } else {
-	// // TODO should this not be ii.setExtension(id) ?
-	// // ii.setRoot(id);
-	// ii.setExtension(id);
-	// }
-	// return ii;
-	// }
+	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
+			x_ActRelationshipEntryRelationship typeCode) {
+		int nb = erList.size() - 1;
+		erList.get(nb).setTypeCode(typeCode);
+	}
 
 }

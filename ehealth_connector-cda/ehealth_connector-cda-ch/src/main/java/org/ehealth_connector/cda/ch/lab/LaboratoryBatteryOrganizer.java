@@ -6,4 +6,9 @@ public class LaboratoryBatteryOrganizer
 	public LaboratoryBatteryOrganizer() {
 		super();
 	}
+
+	public LaboratoryBatteryOrganizer(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
+		super(mdht);
+	}
 }

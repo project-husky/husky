@@ -426,6 +426,16 @@ public class TestUtils {
 		address1 = createAddress1();
 	}
 
+	public boolean xCount(Document document, String xPath, int numberOfElements)
+			throws XPathExpressionException {
+		XPathExpression expr = xpath.compile(xPath);
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		if (nodes.getLength() == numberOfElements)
+			return true;
+		else
+			return false;
+	}
+
 	public boolean xExist(Document document, String xPath) throws XPathExpressionException {
 		XPathExpression expr = xpath.compile(xPath);
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
