@@ -240,6 +240,24 @@ public class CdaChEdesEdpnTest extends TestUtils {
 	}
 
 	@Test
+	public void sectionsLanguageCodeTest() {
+		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
+		cda.setLanguageCode(LanguageCode.GERMAN);
+
+		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
+				new Value("180", Ucum.CentiMeter)));
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
+				new Value("80", Ucum.KiloGram)));
+
+		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
+		assertTrue(narrativeGerman.contains("Körpergewicht"));
+		assertTrue(narrativeGerman.contains("Körpergrösse"));
+	}
+
+	@Test
 	public void codedVitalSignsSerializationTest() throws Exception {
 		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
 		cda.setLanguageCode(LanguageCode.GERMAN);

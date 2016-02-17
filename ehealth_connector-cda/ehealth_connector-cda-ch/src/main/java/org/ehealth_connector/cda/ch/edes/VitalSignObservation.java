@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.enums.ActSite;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
@@ -14,29 +15,113 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public class VitalSignObservation {
 
 	public enum VitalSignCodes {
-		RESPIRATION_RATE("9279-1"), HEART_BEAT("8867-4"), OXYGEN_SATURATION_PERCENT("2710-2"), INTRAVASCULAR_SYSTOLIC(
-				"8480-6"), INTRAVASCULAR_DIASTOLIC("8462-4"), BODY_TEMPERATURE_CEL("8310-5"), BODY_HEIGHT(
-				"8302-2"), BODY_HEIGHT_LYING("8306-3"), CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5"), BODY_WEIGHT(
-				"3141-9");
+		//@formatter:off
+		RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate"),
+		HEART_BEAT("8867-4", "Herzfrequenz", null, null, "heart beat"),
+		OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", null, null, "oxygen saturation"),
+		INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", null, null, "intravascular systolic"),
+		INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", null, null, "intravascular diastolic"),
+		BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", null, null, "body temperature"),
+		BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
+		BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null, null, "body height lying"),
+		CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", null, null, "circumfence occipital frontal"),
+		BODY_WEIGHT("3141-9", "Körpergewicht (gewogen)", null, null, "body weight (measured)");
+		//@formatter:on
 
 		private String loinc;
+		private String descriptionDe;
+		private String descriptionFr;
+		private String descriptionIt;
+		private String descriptionEn;
 
-		private VitalSignCodes(String loinc) {
+		private VitalSignCodes(String loinc, String descriptionDe, String descriptionFr,
+				String descriptionIt, String descriptionEn) {
 			this.loinc = loinc;
+			this.descriptionDe = descriptionDe;
+			this.descriptionFr = descriptionFr;
+			this.descriptionIt = descriptionIt;
+			this.descriptionEn = descriptionEn;
 		}
 
 		public Code getCode() {
 			Code ret = new Code(CodeSystems.LOINC, loinc);
-			ret.setDisplayName(toString());
+			ret.setDisplayName(getDescription(null));
+			return ret;
+		}
+
+		public Code getCode(CS languageCode) {
+			Code ret = new Code(CodeSystems.LOINC, loinc);
+			ret.setDisplayName(getDescription(languageCode));
 			return ret;
 		}
 
 		public Object getLoinc() {
 			return loinc;
+		}
+
+		public String getDescription(CS lc) {
+			String lcStr = LanguageCode.ENGLISH.getCodeValue();
+			if (lc != null) {
+				lcStr = lc.getCode().toLowerCase();
+			}
+			if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
+				return getDescriptionDe();
+			if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
+				return getDescriptionFr();
+			if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
+				return getDescriptionIt();
+			if ("de".equals(lcStr))
+				return getDescriptionDe();
+			if ("fr".equals(lcStr))
+				return getDescriptionFr();
+			if ("it".equals(lcStr))
+				return getDescriptionIt();
+			if ("en".equals(lcStr))
+				return getDescriptionEn();
+			return getDescriptionDe();
+		}
+
+		private String getDescriptionEn() {
+			if (descriptionEn != null) {
+				return descriptionEn;
+			}
+			return name();
+		}
+
+		private String getDescriptionFr() {
+			if (descriptionFr != null) {
+				return descriptionFr;
+			}
+			return getDescriptionEn();
+		}
+
+		private String getDescriptionIt() {
+			if (descriptionIt != null) {
+				return descriptionIt;
+			}
+			return getDescriptionEn();
+		}
+
+		private String getDescriptionDe() {
+			if (descriptionDe != null) {
+				return descriptionDe;
+			}
+			return getDescriptionEn();
+		}
+
+		public static VitalSignCodes getVitalSignCode(String loincCode) {
+			VitalSignCodes[] values = values();
+			for (VitalSignCodes vitalSignCodes : values) {
+				if (vitalSignCodes.getLoinc().equals(loincCode)) {
+					return vitalSignCodes;
+				}
+			}
+			return null;
 		}
 	}
 
@@ -289,5 +374,14 @@ public class VitalSignObservation {
 			return new Code(codes.get(0));
 		}
 		return null;
+	}
+
+	public void setLanguageCode(CS languageCode) {
+		mVitalSignObservation.setLanguageCode(languageCode);
+		VitalSignCodes vsCode = VitalSignCodes.getVitalSignCode(mVitalSignObservation.getCode()
+				.getCode());
+		if (vsCode != null) {
+			setCode(vsCode.getCode(languageCode));
+		}
 	}
 }

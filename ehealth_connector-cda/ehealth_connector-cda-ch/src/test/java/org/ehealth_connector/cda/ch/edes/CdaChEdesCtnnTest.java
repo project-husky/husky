@@ -24,6 +24,7 @@ import org.ehealth_connector.cda.ch.edes.VitalSignObservation.VitalSignCodes;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.ActSite;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
@@ -141,6 +142,24 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		cda.setNarrativeTextSectionSurgeriesSection(testText);
 		assertTrue(cda.getNarrativeTextSectionSurgeriesSection().contains(testText));
+	}
+
+	@Test
+	public void sectionsLanguageCodeTest() {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		cda.setLanguageCode(LanguageCode.GERMAN);
+
+		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
+				new Value("180", Ucum.CentiMeter)));
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
+				new Value("80", Ucum.KiloGram)));
+
+		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
+		assertTrue(narrativeGerman.contains("Körpergewicht"));
+		assertTrue(narrativeGerman.contains("Körpergrösse"));
 	}
 
 	@Test

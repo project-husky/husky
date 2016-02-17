@@ -3,12 +3,14 @@ package org.ehealth_connector.cda.ch.edes;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 
@@ -340,6 +342,8 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 			}
 			mCodedVitalSigns = new CodedVitalSigns(section);
 		}
+		CS language = mCodedVitalSigns.getMdht().getLanguageCode();
+		sign.setLanguageCode(EcoreUtil.copy(language));
 		mCodedVitalSigns.add(sign);
 	}
 
