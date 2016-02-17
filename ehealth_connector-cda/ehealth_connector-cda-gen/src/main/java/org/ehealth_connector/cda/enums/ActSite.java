@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
@@ -9,61 +10,61 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public enum ActSite {
 	//@formatter:off
-	BILATERAL_EARS("BE", "bilateral ears"),
-	BILATERAL_NARES("BN", "bilateral nares"),
-	BUTTOCK("BU", "buttock"),
+	BILATERAL_EARS("BE", "Ohren beidseits", null, null, "bilateral ears"),
+	BILATERAL_NARES("BN", "Nasenlöcher beidseits", null, null, "bilateral nares"),
+	BUTTOCK("BU", "Gesässbacke", null, null, "buttock"),
 	
-	LEFT_ARM("LA", "left arm"),
-	LEFT_ANTERIOR_CHEST("LAC", "left anterior chest"),
-	LEFT_ANTECUBITAL_FOSSA("LACF", "left antecubital fossa"),
-	LEFT_DELTOID("LD", "left deltoid"),
-	LEFT_EAR("LE", "left ear"),
-	LEFT_EXTERNAL_JUGULAR("LEJ", "left external jugular"),
-	LEFT_FOOT("LF", "left foot"),
-	LEFT_GLUTEUS_MEDIUS("LG", "left gluteus medius"),
-	LEFT_HAND("LH", "left hand"),
-	LEFT_INTERNAL_JUGULAR("LIJ", "left internal jugular"),
-	LEFT_LOWER_ABD_QUARANT("LLAQ", "left lower abd quadrant"),
-	LEFT_LOWER_FOREARM("LLFA", "left lower forearm"),
-	LEFT_MID_FOREARM("LMFA", "left mid forearm"),
-	LEFT_NARIS("LN", "left naris"),
-	LEFT_POSTERIOR_CHEST("LPC", "left posterior chest"),
-	LEFT_SUBCLAVIAN("LSC", "left subclavian"),
-	LEFT_TIGH("LT", "left tigh"),
-	LEFT_UPPER_ARM("LUA", "left upper arm"),
-	LEFT_UPPER_ABD_QUARANT("LUAQ", "left upper abd quadrant"),
-	LEFT_UPPER_FOREARM("LUFA", "left upper forearm"),
-	LEFT_VENTRAGLUTEAL("LVG", "left ventragluteal"),
-	LEFT_VASTUS_LATERALIS("LVL", "left vastus lateralis"),
+	LEFT_ARM("LA", "Linker Arm", null, null, "left arm"),
+	LEFT_ANTERIOR_CHEST("LAC", "Linker vorderer Thorax", null, null, "left anterior chest"),
+	LEFT_ANTECUBITAL_FOSSA("LACF", "Linke Fossa antecubitalis", null, null, "left antecubital fossa"),
+	LEFT_DELTOID("LD", "Linker Deltoideus", null, null, "left deltoid"),
+	LEFT_EAR("LE", "Linkes Ohr", null, null, "left ear"),
+	LEFT_EXTERNAL_JUGULAR("LEJ", "Linke Jugularis externa", null, null, "left external jugular"),
+	LEFT_FOOT("LF", "Linker Fuss", null, null, "left foot"),
+	LEFT_GLUTEUS_MEDIUS("LG", "Linker Glutaeus medius", null, null, "left gluteus medius"),
+	LEFT_HAND("LH", "Linke Hand", null, null, "left hand"),
+	LEFT_INTERNAL_JUGULAR("LIJ", "Linke Jugularis interna", null, null, "left internal jugular"),
+	LEFT_LOWER_ABD_QUARANT("LLAQ", "Linker unterer Abdominal-Quadrant", null, null, "left lower abd quadrant"),
+	LEFT_LOWER_FOREARM("LLFA", "Linker distaler Unterarm", null, null, "left lower forearm"),
+	LEFT_MID_FOREARM("LMFA", "Linker mittlerer Unterarm", null, null, "left mid forearm"),
+	LEFT_NARIS("LN", "Linkes Nasenloch", null, null, "left naris"),
+	LEFT_POSTERIOR_CHEST("LPC", "Linke hinterer Thorax", null, null, "left posterior chest"),
+	LEFT_SUBCLAVIAN("LSC", "Linke Subclavia", null, null, "left subclavian"),
+	LEFT_TIGH("LT", "Linker Oberschenkel", null, null, "left tigh"),
+	LEFT_UPPER_ARM("LUA", "Linker Obararm", null, null, "left upper arm"),
+	LEFT_UPPER_ABD_QUARANT("LUAQ", "Linker oberer Abdominal‐Quadrant", null, null, "left upper abd quadrant"),
+	LEFT_UPPER_FOREARM("LUFA", "Linker proximaler Unterarm", null, null, "left upper forearm"),
+	LEFT_VENTRAGLUTEAL("LVG", "Links ventragluteal", null, null, "left ventragluteal"),
+	LEFT_VASTUS_LATERALIS("LVL", "Linker Vastus lateralis", null, null, "left vastus lateralis"),
 	
-	RIGHT_EYE("OD", "right eye"),
-	LEFT_EYE("OS", "left eye"),
-	BILITERAL_EYES("OU", "biliteral eyes"),
-	PERIANAL("PA", "perianal"),
-	PERINEAL("PERIN", "perineal"),
+	RIGHT_EYE("OD", "Rechtes Auge", null, null, "right eye"),
+	LEFT_EYE("OS", "Linkes Auge", null, null, "left eye"),
+	BILITERAL_EYES("OU", "Augen beidseits", null, null, "biliteral eyes"),
+	PERIANAL("PA", "perianal", null, null, "perianal"),
+	PERINEAL("PERIN", "perineal", null, null, "perineal"),
 	
-	RIGHT_ARM("RA", "right arm"),
-	RIGHT_ANTERIOR_CHEST("RAC", "right anterior chest"),
-	RIGHT_ANTECUBITAL_FOSSA("RACF", "right antecubital fossa"),
-	RIGHT_DELTOID("RD", "right deltoid"),
-	RIGHT_EAR("RE", "right ear"),
-	RIGHT_EXTERNAL_JUGULAR("REJ", "right external jugular"),
-	RIGHT_FOOT("RF", "right foot"),
-	RIGHT_GLUTEUS_MEDIUS("RG", "right gluteus medius"),
-	RIGHT_HAND("RH", "right hand"),
-	RIGHT_INTERNAL_JUGULAR("RIJ", "right internal jugular"),
-	RIGHT_LOWER_ABD_QUARANT("RLAQ", "right lower abd quadrant"),
-	RIGHT_LOWER_FOREARM("RLFA", "right lower forearm"),
-	RIGHT_MID_FOREARM("RMFA", "right mid forearm"),
-	RIGHT_NARIS("RN", "right naris"),
-	RIGHT_POSTERIOR_CHEST("RPC", "right posterior chest"),
-	RIGHT_SUBCLAVIAN("RSC", "right subclavian"),
-	RIGHT_TIGH("RT", "right tigh"),
-	RIGHT_UPPER_ARM("RUA", "right upper arm"),
-	RIGHT_UPPER_ABD_QUARANT("RUAQ", "right upper abd quadrant"),
-	RIGHT_UPPER_FOREARM("RUFA", "right upper forearm"),
-	RIGHT_VENTRAGLUTEAL("RVG", "right ventragluteal"),
-	RIGHT_VASTUS_LATERALIS("RVL", "right vastus lateralis");
+	RIGHT_ARM("RA", "Rechter Arm", null, null, "right arm"),
+	RIGHT_ANTERIOR_CHEST("RAC", "Rechter vorderer Thorax", null, null, "right anterior chest"),
+	RIGHT_ANTECUBITAL_FOSSA("RACF", "Rechte Fossa antecubitalis", null, null, "right antecubital fossa"),
+	RIGHT_DELTOID("RD", "Rechter Deltoideus", null, null, "right deltoid"),
+	RIGHT_EAR("RE", "Rechtes Ohr", null, null, "right ear"),
+	RIGHT_EXTERNAL_JUGULAR("REJ", "Rechte Jugularis externa", null, null, "right external jugular"),
+	RIGHT_FOOT("RF", "Rechter Fuss", null, null, "right foot"),
+	RIGHT_GLUTEUS_MEDIUS("RG", "Rechter Gluaeus medius", null, null, "right gluteus medius"),
+	RIGHT_HAND("RH", "Rechte Hand", null, null, "right hand"),
+	RIGHT_INTERNAL_JUGULAR("RIJ", "Rechte Jugularis interna", null, null, "right internal jugular"),
+	RIGHT_LOWER_ABD_QUARANT("RLAQ", "Rechter unterer Abdominal-Quadrant", null, null, "right lower abd quadrant"),
+	RIGHT_LOWER_FOREARM("RLFA", "Rechter distaler Unterarm", null, null, "right lower forearm"),
+	RIGHT_MID_FOREARM("RMFA", "Rechter mittlerer Unterarm", null, null, "right mid forearm"),
+	RIGHT_NARIS("RN", "Rechtes Nasenloch", null, null, "right naris"),
+	RIGHT_POSTERIOR_CHEST("RPC", "Rechter hinterer Thorax", null, null, "right posterior chest"),
+	RIGHT_SUBCLAVIAN("RSC", "Rechte Subclavia", null, null, "right subclavian"),
+	RIGHT_TIGH("RT", "Rechter Oberschenkel", null, null, "right tigh"),
+	RIGHT_UPPER_ARM("RUA", "Rechter Oberarm", null, null, "right upper arm"),
+	RIGHT_UPPER_ABD_QUARANT("RUAQ", "Rechter oberer Abdominal‐Quadrant", null, null, "right upper abd quadrant"),
+	RIGHT_UPPER_FOREARM("RUFA", "Rechter proximaler Unterarm", null, null, "right upper forearm"),
+	RIGHT_VENTRAGLUTEAL("RVG", "Rechts ventragluteal", null, null, "right ventragluteal"),
+	RIGHT_VASTUS_LATERALIS("RVL", "Rechter Vastus lateralis", null, null, "right vastus lateralis");
 	//@formatter:on
 
 	/**
@@ -93,6 +94,62 @@ public enum ActSite {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Gets the display name for the language code.</div> <div
+	 * class="de">Liefert den display name für den language code.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getDisplayName(CS lc) {
+		String lcStr = LanguageCode.ENGLISH.getCodeValue();
+		if (lc != null) {
+			lcStr = lc.getCode().toLowerCase();
+		}
+		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
+			return getDisplayNameDe();
+		if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
+			return getDisplayNameFr();
+		if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
+			return getDisplayNameIt();
+		if ("de".equals(lcStr))
+			return getDisplayNameDe();
+		if ("fr".equals(lcStr))
+			return getDisplayNameFr();
+		if ("it".equals(lcStr))
+			return getDisplayNameIt();
+		if ("en".equals(lcStr))
+			return getDisplayNameEn();
+		return getDisplayNameDe();
+	}
+
+	private String getDisplayNameEn() {
+		if (displayNameEn != null) {
+			return displayNameEn;
+		}
+		return name();
+	}
+
+	private String getDisplayNameFr() {
+		if (displayNameFr != null) {
+			return displayNameFr;
+		}
+		return getDisplayNameEn();
+	}
+
+	private String getDisplayNameIt() {
+		if (displayNameIt != null) {
+			return displayNameIt;
+		}
+		return getDisplayNameEn();
+	}
+
+	private String getDisplayNameDe() {
+		if (displayNameDe != null) {
+			return displayNameDe;
+		}
+		return getDisplayNameEn();
 	}
 
 	/**
@@ -150,6 +207,11 @@ public enum ActSite {
 	 */
 	private String displayName;
 
+	private String displayNameEn;
+	private String displayNameDe;
+	private String displayNameFr;
+	private String displayNameIt;
+
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
@@ -162,9 +224,14 @@ public enum ActSite {
 	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
-	private ActSite(String code, String displayName) {
+	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
+			String displayNameEn) {
 		this.code = code;
-		this.displayName = displayName;
+		this.displayNameEn = displayNameEn;
+		this.displayNameDe = displayNameDe;
+		this.displayNameFr = displayNameFr;
+		this.displayNameIt = displayNameIt;
+		this.displayName = displayNameEn;
 	}
 
 	/**
