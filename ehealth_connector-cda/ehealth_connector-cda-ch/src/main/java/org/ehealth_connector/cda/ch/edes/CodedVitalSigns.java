@@ -119,7 +119,7 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 						&& !ObservationInterpretationVitalSign.NORMAL.getCodeValue().equals(
 								code.getCode())) {
 					String signInterpretation = "["
-							+ vitalSignObservation.getInterpretationCode().getDisplayName() + "]";
+							+ vitalSignObservation.getInterpretationCode().getCode() + "]";
 					signResult += " " + signInterpretation;
 				}
 				Code target = vitalSignObservation.getTargetSiteCode();

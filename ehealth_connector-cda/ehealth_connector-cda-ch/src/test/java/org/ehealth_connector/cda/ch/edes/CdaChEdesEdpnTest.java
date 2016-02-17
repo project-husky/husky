@@ -21,7 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation.VitalSignCodes;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
@@ -252,9 +254,18 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
 				new Value("80", Ucum.KiloGram)));
 
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
+				new Value("140", Ucum.MilliMetersOfMercury)));
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
+				new Value("90", Ucum.MilliMetersOfMercury)));
+
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));
 		assertTrue(narrativeGerman.contains("Körpergrösse"));
+		assertTrue(narrativeGerman.contains("Linker Arm"));
 	}
 
 	@Test

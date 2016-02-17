@@ -157,9 +157,18 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
 				new Value("80", Ucum.KiloGram)));
 
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				new Value("140", Ucum.MilliMetersOfMercury)));
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				new Value("90", Ucum.MilliMetersOfMercury)));
+
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));
 		assertTrue(narrativeGerman.contains("Körpergrösse"));
+		assertTrue(narrativeGerman.contains("Rechter Fuss"));
 	}
 
 	@Test

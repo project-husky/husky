@@ -50,13 +50,13 @@ public class VitalSignObservation {
 
 		public Code getCode() {
 			Code ret = new Code(CodeSystems.LOINC, loinc);
-			ret.setDisplayName(getDescription(null));
+			ret.setDisplayName(getDisplayName(null));
 			return ret;
 		}
 
 		public Code getCode(CS languageCode) {
 			Code ret = new Code(CodeSystems.LOINC, loinc);
-			ret.setDisplayName(getDescription(languageCode));
+			ret.setDisplayName(getDisplayName(languageCode));
 			return ret;
 		}
 
@@ -64,57 +64,57 @@ public class VitalSignObservation {
 			return loinc;
 		}
 
-		public String getDescription(CS lc) {
+		public String getDisplayName(CS lc) {
 			String lcStr = LanguageCode.ENGLISH.getCodeValue();
 			if (lc != null) {
 				lcStr = lc.getCode().toLowerCase();
 			}
 			if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
-				return getDescriptionDe();
+				return getDisplayNameDe();
 			if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
-				return getDescriptionFr();
+				return getDisplayNameFr();
 			if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
-				return getDescriptionIt();
+				return getDisplayNameIt();
 			if ("de".equals(lcStr))
-				return getDescriptionDe();
+				return getDisplayNameDe();
 			if ("fr".equals(lcStr))
-				return getDescriptionFr();
+				return getDisplayNameFr();
 			if ("it".equals(lcStr))
-				return getDescriptionIt();
+				return getDisplayNameIt();
 			if ("en".equals(lcStr))
-				return getDescriptionEn();
-			return getDescriptionDe();
+				return getDisplayNameEn();
+			return getDisplayNameDe();
 		}
 
-		private String getDescriptionEn() {
+		private String getDisplayNameEn() {
 			if (descriptionEn != null) {
 				return descriptionEn;
 			}
 			return name();
 		}
 
-		private String getDescriptionFr() {
+		private String getDisplayNameFr() {
 			if (descriptionFr != null) {
 				return descriptionFr;
 			}
-			return getDescriptionEn();
+			return getDisplayNameEn();
 		}
 
-		private String getDescriptionIt() {
+		private String getDisplayNameIt() {
 			if (descriptionIt != null) {
 				return descriptionIt;
 			}
-			return getDescriptionEn();
+			return getDisplayNameEn();
 		}
 
-		private String getDescriptionDe() {
+		private String getDisplayNameDe() {
 			if (descriptionDe != null) {
 				return descriptionDe;
 			}
-			return getDescriptionEn();
+			return getDisplayNameEn();
 		}
 
-		public static VitalSignCodes getVitalSignCode(String loincCode) {
+		public static VitalSignCodes getEnum(String loincCode) {
 			VitalSignCodes[] values = values();
 			for (VitalSignCodes vitalSignCodes : values) {
 				if (vitalSignCodes.getLoinc().equals(loincCode)) {
@@ -346,6 +346,11 @@ public class VitalSignObservation {
 		}
 	}
 
+	/**
+	 * Gets the interpretation of the vital sign observation.
+	 * 
+	 * @return the interpretation as code or null.
+	 */
 	public Code getInterpretationCode() {
 		EList<CE> codes = mVitalSignObservation.getInterpretationCodes();
 		if (!codes.isEmpty()) {
@@ -368,6 +373,11 @@ public class VitalSignObservation {
 		}
 	}
 
+	/**
+	 * Gets the target site of the vital sign observation.
+	 * 
+	 * @return the target site as code or null.
+	 */
 	public Code getTargetSiteCode() {
 		EList<CD> codes = mVitalSignObservation.getTargetSiteCodes();
 		if (!codes.isEmpty()) {
@@ -376,12 +386,28 @@ public class VitalSignObservation {
 		return null;
 	}
 
+	/**
+	 * Set a new language code of the vital sign observation, and its codes.
+	 * 
+	 * @param languageCode
+	 *            <div class="de">Language code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
 	public void setLanguageCode(CS languageCode) {
 		mVitalSignObservation.setLanguageCode(languageCode);
-		VitalSignCodes vsCode = VitalSignCodes.getVitalSignCode(mVitalSignObservation.getCode()
-				.getCode());
-		if (vsCode != null) {
-			setCode(vsCode.getCode(languageCode));
+		CD code = mVitalSignObservation.getCode();
+		if (code != null) {
+			VitalSignCodes vsCode = VitalSignCodes.getEnum(code.getCode());
+			if (vsCode != null) {
+				code.setDisplayName(vsCode.getDisplayName(languageCode));
+			}
+		}
+		if (!mVitalSignObservation.getTargetSiteCodes().isEmpty()) {
+			CD tsCode = mVitalSignObservation.getTargetSiteCodes().get(0);
+			ActSite aSite = ActSite.getEnum(tsCode.getCode());
+			if (aSite != null) {
+				tsCode.setDisplayName(aSite.getDisplayName(languageCode));
+			}
 		}
 	}
 }
