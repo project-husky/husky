@@ -16,9 +16,13 @@
 
 package org.ehealth_connector.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
@@ -35,15 +39,19 @@ public class Organization {
 	 */
 	private org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
+	public Organization() {
+		mOrganization = CDAFactory.eINSTANCE.createOrganization();
+	}
+
 	/**
 	 * <div class="en">Instantiates a new organization.</div>
 	 * <div class="de">Instantiiert ein neues Organization Objekt</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param organization
-	 *            <br>
-	 *            <div class="de"> organization</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <br>
+	 *          <div class="de"> organization</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Organization(org.openhealthtools.mdht.uml.cda.Organization organization) {
 		mOrganization = organization;
@@ -51,9 +59,9 @@ public class Organization {
 
 	/**
 	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
-	 * 
+	 *
 	 * @param name
-	 *            Name der Organisation
+	 *          Name der Organisation
 	 */
 	public Organization(String name) {
 		mOrganization = CDAFactory.eINSTANCE.createOrganization();
@@ -61,15 +69,15 @@ public class Organization {
 	}
 
 	/**
-	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine
-	 * eigene ID (GLN) verfügt.
-	 * 
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine eigene
+	 * ID (GLN) verfügt.
+	 *
 	 * @param name
-	 *            Name der Organisation
+	 *          Name der Organisation
 	 * @param gln
-	 *            <br>
-	 *            <div class="de"> gln</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <br>
+	 *          <div class="de"> gln</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Organization(String name, String gln) {
 		this(name);
@@ -81,9 +89,9 @@ public class Organization {
 
 	/**
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
-	 * 
+	 *
 	 * @param address
-	 *            Adresse
+	 *          Adresse
 	 */
 	public void addAddress(Address address) {
 		getMdhtOrganization().getAddrs().add(address.copyMdhtAdress());
@@ -91,9 +99,9 @@ public class Organization {
 
 	/**
 	 * Weist der Organisation eine ID zu.
-	 * 
+	 *
 	 * @param id
-	 *            Der neue Identificator
+	 *          Der neue Identificator
 	 */
 	public void addId(Identificator id) {
 		mOrganization.getIds().add(id.getIi());
@@ -101,9 +109,9 @@ public class Organization {
 
 	/**
 	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
-	 * 
+	 *
 	 * @param name
-	 *            Name
+	 *          Name
 	 */
 	public void addName(String name) {
 		final ON orgaName = DatatypesFactory.eINSTANCE.createON();
@@ -113,9 +121,9 @@ public class Organization {
 
 	/**
 	 * Weist der Organisation eine Webseite zu.
-	 * 
+	 *
 	 * @param url
-	 *            URL der Webseite
+	 *          URL der Webseite
 	 */
 	public void addWebsite(String url) {
 		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -127,7 +135,7 @@ public class Organization {
 	/**
 	 * <div class="en">Copy mdht organization.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.Organization
 	 */
 	public org.openhealthtools.mdht.uml.cda.Organization copyMdhtOrganization() {
@@ -135,14 +143,29 @@ public class Organization {
 	}
 
 	/**
+	 * <div class="en">Gets the addresses.</div> <div class="de">Liefert alle
+	 * Adressen.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return <div class="en">the addresses</div>
+	 */
+	public List<Address> getAddresses() {
+		final List<Address> al = new ArrayList<Address>();
+		for (final AD mAddress : mOrganization.getAddrs()) {
+			final Address address = new Address(mAddress);
+			al.add(address);
+		}
+		return al;
+	}
+
+	/**
 	 * Gibt die (erste) ID der Organisation zurück (wenn z.B. eine GLN vorhanden
 	 * ist)
-	 * 
+	 *
 	 * @return ID der Organisation
 	 */
-	public String getId() {
+	public Identificator getId() {
 		if (getMdhtOrganization().getIds().size() > 0) {
-			return getMdhtOrganization().getIds().get(0).getExtension();
+			return new Identificator(getMdhtOrganization().getIds().get(0));
 		}
 		return null;
 	}
@@ -150,7 +173,7 @@ public class Organization {
 	/**
 	 * <div class="en">Gets the mdht organization.</div> <div class="de">Liefert
 	 * mdht organization.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return org.openhealthtools.mdht.uml.cda.Organization <div class="en">the
 	 *         mdht organization</div>
 	 */
@@ -160,17 +183,20 @@ public class Organization {
 
 	/**
 	 * Gibt den (ersten) Namen der Organisation zurück.
-	 * 
+	 *
 	 * @return Namen der Organisation
 	 */
 	public String getName() {
-		return getMdhtOrganization().getNames().get(0).getText();
+		if (!getMdhtOrganization().getNames().isEmpty()) {
+			return getMdhtOrganization().getNames().get(0).getText();
+		}
+		return null;
 	}
 
 	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
@@ -181,11 +207,10 @@ public class Organization {
 	/**
 	 * <div class="en">Sets the telecoms.</div> <div class="de">Setzt
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param telecoms
-	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">the new telecoms</div> <div class="de">das neue
+	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));

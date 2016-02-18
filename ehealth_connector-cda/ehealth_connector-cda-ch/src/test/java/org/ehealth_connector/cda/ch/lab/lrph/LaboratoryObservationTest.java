@@ -8,7 +8,6 @@ import javax.xml.xpath.XPathExpression;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.enums.StandardCdaBodySelections;
-import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.testhelper.TestUtils;
@@ -37,7 +36,7 @@ public class LaboratoryObservationTest extends TestUtils {
 		SectionAnnotationCommentEntry sce = new SectionAnnotationCommentEntry();
 		sce.setContentIdReference("testRef1");
 		observation.addCommentEntry(sce);
-		assertEquals("#testRef1", observation.getCommentEntry().get(0).getContentIdReference());
+		assertEquals("#testRef1", observation.getCommentEntryList().get(0).getContentIdReference());
 		document = observation.getDocument();
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']"));
 		assertTrue(xExist(document, "//templateId[@root='2.16.840.1.113883.10.20.1.40']"));

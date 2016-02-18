@@ -422,7 +422,7 @@ public class LaboratoryObservation
 
 		if (laboratory.getId() != null) {
 			final II ii = DatatypesFactory.eINSTANCE.createII(CodeSystems.GLN.getCodeSystemId(),
-					laboratory.getId());
+					laboratory.getId().getExtension());
 			asEnt.getIds().add(ii);
 		}
 

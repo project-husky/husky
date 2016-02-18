@@ -48,6 +48,9 @@ import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Participant;
+import org.ehealth_connector.common.ParticipantRole;
+import org.ehealth_connector.common.PlayingEntity;
 import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.Signature;
 import org.openhealthtools.ihe.utils.UUID;
@@ -69,6 +72,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -444,6 +448,58 @@ public class Util {
 		final IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		ts.setNullFlavor(NullFlavor.UNK);
 		return ts;
+	}
+
+	private static ON createOnFromPn(PN pn) {
+		ON on = DatatypesFactory.eINSTANCE.createON();
+		on.addText(pn.getText());
+		return on;
+	}
+
+	public static Organization createOrganizationFromParticipant(Participant p) {
+		Organization o = new Organization();
+
+		// id, addrs, names, telecoms
+		o.getMdhtOrganization().getIds()
+				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getIds()));
+		o.getMdhtOrganization().getAddrs()
+				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getAddrs()));
+		if (p.getMdht().getParticipantRole().getPlayingEntity().getNames() != null
+				&& !p.getMdht().getParticipantRole().getPlayingEntity().getNames().isEmpty()) {
+			o.getMdhtOrganization().getNames().add(EcoreUtil.copy(
+					createOnFromPn(p.getMdht().getParticipantRole().getPlayingEntity().getNames().get(0))));
+		}
+		o.getMdhtOrganization().getTelecoms().addAll(p.getMdht().getParticipantRole().getTelecoms());
+
+		return o;
+	}
+
+	public static Participant createParticipantFromOrganization(Organization o) {
+		PlayingEntity pe = new PlayingEntity();
+		ParticipantRole pr = new ParticipantRole();
+		pr.setPlayingEntity(pe);
+		Participant p = new Participant();
+		p.setParticipantRole(pr);
+
+		// id, addrs, names, telecoms
+		p.getMdht().getParticipantRole().getIds()
+				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getIds()));
+		p.getMdht().getParticipantRole().getAddrs()
+				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getAddrs()));
+		if (o.getMdhtOrganization().getNames() != null
+				&& !o.getMdhtOrganization().getNames().isEmpty()) {
+			p.getMdht().getParticipantRole().getPlayingEntity().getNames()
+					.add(EcoreUtil.copy(createPnFromOn(o.getMdhtOrganization().getNames().get(0))));
+		}
+		p.getMdht().getParticipantRole().getTelecoms().addAll(o.getMdhtOrganization().getTelecoms());
+
+		return p;
+	}
+
+	public static PN createPnFromOn(ON on) {
+		PN pn = DatatypesFactory.eINSTANCE.createPN();
+		pn.addText(on.getText());
+		return pn;
 	}
 
 	/**

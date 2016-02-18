@@ -42,7 +42,7 @@ public abstract class AbstractLaboratoryObservation
 	 *
 	 * @return the comment entry
 	 */
-	public List<SectionAnnotationCommentEntry> getCommentEntry() {
+	public List<SectionAnnotationCommentEntry> getCommentEntryList() {
 		if (this.getMdht().getComments() != null) {
 			ArrayList<SectionAnnotationCommentEntry> comments = new ArrayList<SectionAnnotationCommentEntry>();
 			for (Comment comment : this.getMdht().getComments()) {
