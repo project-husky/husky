@@ -12,14 +12,20 @@ import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSig
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.ccd.VitalSignsOrganizer;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsSection;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 
@@ -50,14 +56,29 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		super(section, null, null);
 	}
 
-	public void add(VitalSignObservation sign) {
-		VitalSignsOrganizer organizer = getOrganizerForDate(sign.getEffectiveTime());
+	public void add(VitalSignObservation sign, Author author) {
+		if (author == null) {
+			// default to author of document
+			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
+				author = new Author(getMdht().getClinicalDocument().getAuthors().get(0));
+			} else {
+				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE
+						.createAuthor();
+				mdhtAuthor.setNullFlavor(NullFlavor.UNK);
+				author = new Author(mdhtAuthor);
+			}
+		}
+
+		VitalSignsOrganizer organizer = getOrganizerForDate(sign.getEffectiveTime(), author);
 		organizer.addObservation(sign.getMdhtCopy());
+		// update the component type
+		EList<Component4> components = organizer.getComponents();
+		components.get(components.size() - 1).setTypeCode(ActRelationshipHasComponent.COMP);
 
 		getMdht().createStrucDocText(getTable());
 	}
 
-	private VitalSignsOrganizer getOrganizerForDate(Date effectiveTime) {
+	private VitalSignsOrganizer getOrganizerForDate(Date effectiveTime, Author author) {
 		VitalSignsSection section = getMdht();
 		EList<VitalSignsOrganizer> organizers = section.getVitalSignsOrganizers();
 		for (VitalSignsOrganizer organizer : organizers) {
@@ -70,6 +91,9 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		try {
 			organizer.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(effectiveTime));
 			organizer.getIds().add(CdaChUtil.createUuidEdes(null));
+			org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = author.copyMdhtAuthor();
+			mdhtAuthor.setTypeCode(ParticipationType.AUT);
+			organizer.getAuthors().add(mdhtAuthor);
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

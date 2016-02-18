@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.ch.edes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -152,18 +153,18 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)));
+				new Value("180", Ucum.CentiMeter)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)));
+				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
-				new Value("140", Ucum.MilliMetersOfMercury)));
+				new Value("140", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
-				new Value("90", Ucum.MilliMetersOfMercury)));
+				new Value("90", Ucum.MilliMetersOfMercury)), null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));
@@ -209,40 +210,47 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)));
+				new Value("180", Ucum.CentiMeter)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)));
+				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.HEART_BEAT, effectiveTime,
-				new Value("62", Ucum.PerMinute)));
+				new Value("62", Ucum.PerMinute)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
-				new Value("120", Ucum.MilliMetersOfMercury)));
+				new Value("120", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
-				new Value("80", Ucum.MilliMetersOfMercury)));
+				new Value("80", Ucum.MilliMetersOfMercury)), null);
 
 		List<VitalSignObservation> observations = cda.getCodedVitalSignObservations();
 		assertFalse(observations.isEmpty());
 		assertEquals(5, observations.size());
 
-		assertEquals("LOINC", observations.get(0).getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), observations.get(0).getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), observations.get(0).getValue()
+		VitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
+		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
 				.getPhysicalQuantityUnit());
 
-		assertEquals("LOINC", observations.get(4).getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(), observations.get(4)
-				.getCode().getCode());
-		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(), observations.get(4).getValue()
-				.getPhysicalQuantityUnit());
-		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(), observations.get(4)
-				.getInterpretationCode().getCode());
-		assertEquals(ActSite.LEFT_ARM.getCodeValue(), observations.get(4).getTargetSiteCode()
+		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
+				observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(), vsObservation.getCode()
 				.getCode());
+		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(), vsObservation.getValue()
+				.getPhysicalQuantityUnit());
+		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(), vsObservation
+				.getInterpretationCode().getCode());
+		assertEquals(ActSite.LEFT_ARM.getCodeValue(), vsObservation.getTargetSiteCode().getCode());
 	}
 
 	@Test
@@ -252,10 +260,10 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)));
+				new Value("180", Ucum.CentiMeter)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)));
+				new Value("80", Ucum.KiloGram)), null);
 
 		final String deserialized = serializeDocument(cda);
 		log.debug(deserialized);
@@ -265,10 +273,24 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
-		assertEquals("LOINC", observations.get(0).getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), observations.get(0).getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), observations.get(0).getValue()
+		VitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
+		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
 				.getPhysicalQuantityUnit());
+	}
+
+	private VitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
+			List<VitalSignObservation> observations) {
+		for (VitalSignObservation vitalSignObservation : observations) {
+			if (vitalSignObservation.getCode().getCode().equals(vsCode.getLoinc())) {
+				return vitalSignObservation;
+			}
+		}
+		return null;
 	}
 
 	@Test

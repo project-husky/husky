@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -333,7 +334,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *            add</div> <div class="de">Das hinzuzufügende codierte
 	 *            Vitalzeichen</div>
 	 */
-	public void addCodedVitalSign(VitalSignObservation sign) {
+	public void addCodedVitalSign(VitalSignObservation sign, Author author) {
 		if (mCodedVitalSigns == null) {
 			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
 			if (section == null) {
@@ -344,7 +345,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		}
 		CS language = mCodedVitalSigns.getMdht().getLanguageCode();
 		sign.setLanguageCode(EcoreUtil.copy(language));
-		mCodedVitalSigns.add(sign);
+		mCodedVitalSigns.add(sign, author);
 	}
 
 	/**

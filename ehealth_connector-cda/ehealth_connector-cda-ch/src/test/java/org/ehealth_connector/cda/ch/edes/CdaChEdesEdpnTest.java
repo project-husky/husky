@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.ch.edes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -249,18 +250,18 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)));
+				new Value("180", Ucum.CentiMeter)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)));
+				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
-				new Value("140", Ucum.MilliMetersOfMercury)));
+				new Value("140", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
 				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
-				new Value("90", Ucum.MilliMetersOfMercury)));
+				new Value("90", Ucum.MilliMetersOfMercury)), null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));
@@ -276,10 +277,10 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)));
+				new Value("180", Ucum.CentiMeter)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)));
+				new Value("80", Ucum.KiloGram)), null);
 
 		final String deserialized = serializeDocument(cda);
 		log.debug(deserialized);
@@ -290,10 +291,23 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
-		assertEquals("LOINC", observations.get(0).getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), observations.get(0).getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), observations.get(0).getValue()
+		VitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
+		assertNotNull(vsObservation);
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
+		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
 				.getPhysicalQuantityUnit());
+	}
+
+	private VitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
+			List<VitalSignObservation> observations) {
+		for (VitalSignObservation vitalSignObservation : observations) {
+			if (vitalSignObservation.getCode().getCode().equals(vsCode.getLoinc())) {
+				return vitalSignObservation;
+			}
+		}
+		return null;
 	}
 
 	@Test

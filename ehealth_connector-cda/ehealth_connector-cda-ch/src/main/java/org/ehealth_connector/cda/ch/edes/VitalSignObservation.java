@@ -5,16 +5,21 @@ import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class VitalSignObservation {
 
@@ -25,7 +30,7 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 */
 	public VitalSignObservation() {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
+		mVitalSignObservation = initMdht();
 	}
 
 	/**
@@ -128,13 +133,35 @@ public class VitalSignObservation {
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime,
 			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
+		mVitalSignObservation = initMdht();
 
 		setCode(code);
 		setEffectiveTime(effectiveTime);
 		setInterpretationCode(interpretation);
 		setTargetSite(targetSite);
 		addValue(value);
+	}
+
+	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation initMdht() {
+		org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht = IHEFactory.eINSTANCE
+				.createVitalSignObservation().init();
+		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		mdht.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mdht.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mdht.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+
+		mdht.setText(Util.createReference("#TODO"));
+
+		II ii = DatatypesFactory.eINSTANCE
+				.createII(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
+		mdht.getTemplateIds().add(ii);
+
+		return mdht;
 	}
 
 	/**
@@ -233,8 +260,8 @@ public class VitalSignObservation {
 	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
-		mVitalSignObservation.getInterpretationCodes().clear();
 		if (code != null) {
+			mVitalSignObservation.getInterpretationCodes().clear();
 			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
 		}
 	}
@@ -260,8 +287,8 @@ public class VitalSignObservation {
 	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
-		mVitalSignObservation.getTargetSiteCodes().clear();
 		if (code != null) {
+			mVitalSignObservation.getTargetSiteCodes().clear();
 			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
 		}
 	}
