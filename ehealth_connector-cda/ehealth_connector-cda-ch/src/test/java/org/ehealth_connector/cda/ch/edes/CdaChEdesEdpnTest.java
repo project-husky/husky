@@ -320,7 +320,7 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		final CdaChEdesEdpn cdaDeserialized = deserializeCdaDirect(deserialized);
 
 		assertEquals(LanguageCode.GERMAN_CODE, cdaDeserialized.getLanguageCode().getCodeValue());
-		List<VitalSignObservation> observations = cdaDeserialized.getCodedVitalSignObservations();
+		List<VitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 

@@ -100,7 +100,7 @@ public class CdaChEdesCtnn
 	 *
 	 * @return List with coded vital sign observations
 	 */
-	public List<VitalSignObservation> getCodedVitalSignObservations() {
+	public List<VitalSignObservation> getCodedVitalSigns() {
 		if (mCodedVitalSigns == null) {
 			final CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
 			if (section == null) {

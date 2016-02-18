@@ -5,28 +5,16 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum VitalSignCodes {
-	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null,
-			"body height (measured)"), BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null,
-					null, "body height lying"), BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur",
-							null, null, "body temperature"), BODY_WEIGHT("3141-9",
-									"Körpergewicht (gewogen)", null, null,
-									"body weight (measured)"), CIRCUMFRENCE_OCCIPITAL_FRONTAL(
-											"8287-5", "Kopfumfang okzipitofrontal", null, null,
-											"circumfence occipital frontal"), HEART_BEAT("8867-4",
-													"Herzfrequenz", null, null,
-													"heart beat"), INTRAVASCULAR_DIASTOLIC("8462-4",
-															"Intrvaskulärer diastolischer Druck",
-															null, null,
-															"intravascular diastolic"), INTRAVASCULAR_SYSTOLIC(
-																	"8480-6",
-																	"Intravaskulärer systolischer Druck",
-																	null, null,
-																	"intravascular systolic"), OXYGEN_SATURATION_PERCENT(
-																			"2710-2",
-																			"Sauerstoffsättigung",
-																			null, null,
-																			"oxygen saturation"),
 	//@formatter:off
+	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
+	BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null, null, "body height lying"),
+	BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", null, null, "body temperature"),
+	BODY_WEIGHT("3141-9", "Körpergewicht (gewogen)", null, null, "body weight (measured)"),
+	CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", null, null, "circumfence occipital frontal"),
+	HEART_BEAT("8867-4", "Herzfrequenz", null, null, "heart beat"),
+	INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", null, null,"intravascular diastolic"),
+	INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", null, null, "intravascular systolic"),
+	OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", null, null, "oxygen saturation"),
 	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate");
 	//@formatter:on
 
@@ -90,10 +78,6 @@ public enum VitalSignCodes {
 		return getDisplayNameDe();
 	}
 
-	public Object getLoinc() {
-		return loinc;
-	}
-
 	private String getDisplayNameDe() {
 		if (descriptionDe != null) {
 			return descriptionDe;
@@ -120,6 +104,10 @@ public enum VitalSignCodes {
 			return descriptionIt;
 		}
 		return getDisplayNameEn();
+	}
+
+	public Object getLoinc() {
+		return loinc;
 	}
 
 }

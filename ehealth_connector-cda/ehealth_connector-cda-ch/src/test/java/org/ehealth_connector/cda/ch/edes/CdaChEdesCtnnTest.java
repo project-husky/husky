@@ -248,7 +248,7 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
 				new Value("80", Ucum.MilliMetersOfMercury)), null);
 
-		List<VitalSignObservation> observations = cda.getCodedVitalSignObservations();
+		List<VitalSignObservation> observations = cda.getCodedVitalSigns();
 		assertFalse(observations.isEmpty());
 		assertEquals(5, observations.size());
 
@@ -291,7 +291,7 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
 
-		List<VitalSignObservation> observations = cdaDeserialized.getCodedVitalSignObservations();
+		List<VitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
