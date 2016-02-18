@@ -12,6 +12,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public class CdaChEdesCommon {
 
+	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
+
 	private static final String DOCTITLE_GER = "Notfallaustrittsbericht";
 	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
 

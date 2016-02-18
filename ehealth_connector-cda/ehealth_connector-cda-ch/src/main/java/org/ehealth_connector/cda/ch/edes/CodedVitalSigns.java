@@ -16,7 +16,6 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
-import org.openhealthtools.mdht.uml.cda.ccd.CCDFactory;
 import org.openhealthtools.mdht.uml.cda.ccd.VitalSignsOrganizer;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsSection;
@@ -66,7 +65,7 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 				return organizer;
 			}
 		}
-		VitalSignsOrganizer organizer = CCDFactory.eINSTANCE.createVitalSignsOrganizer();
+		VitalSignsOrganizer organizer = IHEFactory.eINSTANCE.createVitalSignsOrganizer().init();
 		try {
 			organizer.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(effectiveTime));
 		} catch (final ParseException e) {

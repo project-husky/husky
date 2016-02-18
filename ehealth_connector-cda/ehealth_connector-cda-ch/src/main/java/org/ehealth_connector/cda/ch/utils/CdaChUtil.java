@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.utils;
 
+import org.ehealth_connector.cda.ch.edes.CdaChEdesCommon;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.utils.CdaUtil;
@@ -40,7 +41,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * and a generated extension.</div>
 	 * 
 	 * @param id
-	 *            <br> <div class="en"> the id</div>
+	 * <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacd(String id) {
@@ -57,12 +59,33 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
+	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID
+	 * and a generated extension.</div>
+	 * 
+	 * @param id
+	 * <br>
+	 *            <div class="en"> the id</div>
+	 * @return the ii
+	 */
+	public static II createUuidEdes(String id) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(CdaChEdesCommon.OID_MAIN);
+		if (id == null) {
+			ii.setExtension(UUID.generate());
+		} else {
+			ii.setExtension(id);
+		}
+		return ii;
+	}
+
+	/**
 	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	 * (if the root id is null, otherwise the provided id will be used) and a
 	 * generated extension.</div>
 	 * 
 	 * @param id
-	 *            <br> <div class="en"> the id</div>
+	 * <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacdIdentificator(Identificator id) {
@@ -88,8 +111,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j, SectionsVACD prefix) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd()) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
+			SectionsVACD prefix) {
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+				&& er.getInversionInd()) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -115,7 +140,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref, SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
+			SectionsVACD prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
