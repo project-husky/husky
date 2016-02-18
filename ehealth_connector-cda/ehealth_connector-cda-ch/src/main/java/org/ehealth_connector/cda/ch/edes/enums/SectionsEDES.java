@@ -42,10 +42,10 @@ public enum SectionsEDES implements ContentIdPrefix {
 	ED_DIAGNOSIS("11301-9", "eddia", "Notfalldiagnosen", "Diagnostics aux urgences", "Diagnosi in urgenza", "ED Diagnoses"),
 	ED_DISPOSITION("11302-7", "eddis", "Angaben zum Austritt", "Données de sortie", "Indicazioni all'uscita", "ED Disposition"),
 	FAMILY_MEDICAL_HISTORY("10157-6", "fahi", "Familien Anamnese", "Anamnèse familiale", "Anamnesi familiare", "Family Medical History"),
-	HISTORY_OF_PAST_ILLNESS("11348-0","hipai", "Bisherige Krankheiten", "Antécédants médicaux", "Storia medica","History of Past Illness"), 
-	HISTORY_OF_PREGNANCIES("10162-6", "hop", "Schwangerschaften", "Grossesses", "Gravidanze", "Pregnancy History"), 
+	HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni", "Immunizations"),
+	HISTORY_OF_PAST_ILLNESS("11348-0","hipai", "Bisherige Krankheiten", "Antécédants médicaux", "Storia medica","History of Past Illness"),
+	HISTORY_OF_PREGNANCIES("10162-6", "hop", "Schwangerschaften", "Grossesses", "Gravidanze", "Pregnancy History"),
 	HISTORY_OF_PRESENT_ILLNESS("10164-2", "hipri", "Notfallanamnese", "Anamnèse actuelle", "Anamnesi del caso d'urgenza", "History of Present Illness"),
-	HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni", "Immunizations"), 
 	HOSPITAL_DISCHARGE_MEDICATIONS("10183-2", "hodm", "Medikamente bei Austritt", "Médicaments à la sortie", "Medicamenti all'uscita", "Medications at Discharge"),
 	INTRAVENOUS_FLUIDS_ADMINISTERED("57072-1", "ifa", "Verabreichte Infusionen", "Liquides intraveineux administrés", "Infusioni somministrate", "Intravenous Fluids Administered"),
 	LIST_OF_SURGERIES("47519-4", "los", "Frühere Operationen", "Antécédents chirurgicaux", "Operazioni precedenti", "List of Surgeries"),
@@ -57,10 +57,44 @@ public enum SectionsEDES implements ContentIdPrefix {
 	REASON_FOR_VISIT("29299-5", "rfv", "Grund des Patienten für Besuch", "Motif de consultation du patient", "Motivo della visita del paziente", "Reason for visit"),
 	REFERRAL_SOURCE("11293-8", "rs", "Einweisung durch", "Admission par", "Ricovero tramite", "Referral Source"),
 	REMARKS("48767-8", "k", "Kommentar", "Commentaire", "Osservazione", "Comment"),
-	RESULTS("30954-2", "res", "Diagnostische Zusammenfassung","Résultats d'examens", "Riassunto degli esami diagnostici", "Test Results"), 
+	RESULTS("30954-2", "res", "Diagnostische Zusammenfassung","Résultats d'examens", "Riassunto degli esami diagnostici", "Test Results"),
 	REVIEW_OF_SYSTEMS("10187-3", "ros", "Systemanamnese", "Anamnèse systématique", "Anamnesi sistemica", "Pertinent Review of Systems"),
 	SOCIAL_HISTORY("29762-2", "sohi", "Sozial Anamnese", "Anamnèse sociale", "Anamnesi sociale", "Social History");
 	//@formatter:on
+
+	public static SectionsEDES getEnum(Section section) {
+		CE code = section.getCode();
+		if (code != null) {
+			for (SectionsEDES sectionsEDES : values()) {
+				if (code.getCode().equals(sectionsEDES.getLoincCode())) {
+					return sectionsEDES;
+				}
+			}
+		}
+		return null;
+	}
+
+	private String contentIdPrefix;
+
+	private String loincCode;
+
+	private String sectionTitleDe;
+
+	private String sectionTitleEn;
+
+	private String sectionTitleFr;
+
+	private String sectionTitleIt;
+
+	SectionsEDES(String loincCode, String contentIdPrefix, String sectionTitleDe,
+			String sectionTitleFr, String sectionTitleIt, String sectionTitleEn) {
+		this.loincCode = loincCode;
+		this.contentIdPrefix = contentIdPrefix;
+		this.sectionTitleDe = sectionTitleDe;
+		this.sectionTitleFr = sectionTitleFr;
+		this.sectionTitleIt = sectionTitleIt;
+		this.sectionTitleEn = sectionTitleEn;
+	}
 
 	public Section createSection() {
 		switch (name()) {
@@ -134,36 +168,6 @@ public enum SectionsEDES implements ContentIdPrefix {
 		return null;
 	}
 
-	private String loincCode;
-
-	private String contentIdPrefix;
-
-	private String sectionTitleDe;
-
-	private String sectionTitleFr;
-
-	private String sectionTitleIt;
-
-	private String sectionTitleEn;
-
-	SectionsEDES(String loincCode, String contentIdPrefix, String sectionTitleDe,
-			String sectionTitleFr, String sectionTitleIt, String sectionTitleEn) {
-		this.loincCode = loincCode;
-		this.contentIdPrefix = contentIdPrefix;
-		this.sectionTitleDe = sectionTitleDe;
-		this.sectionTitleFr = sectionTitleFr;
-		this.sectionTitleIt = sectionTitleIt;
-		this.sectionTitleEn = sectionTitleEn;
-	}
-
-	public String getContentIdPrefix() {
-		return contentIdPrefix;
-	}
-
-	public String getLoincCode() {
-		return loincCode;
-	}
-
 	public Section findSection(CdaChEdes edesDocument) {
 		for (final Section section : edesDocument.getSections()) {
 			if (section.getCode() != null) {
@@ -173,6 +177,15 @@ public enum SectionsEDES implements ContentIdPrefix {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public String getContentIdPrefix() {
+		return contentIdPrefix;
+	}
+
+	public String getLoincCode() {
+		return loincCode;
 	}
 
 	public String getSectionTitle(CS lc) {
@@ -211,17 +224,5 @@ public enum SectionsEDES implements ContentIdPrefix {
 
 	public String getSectionTitleIt() {
 		return sectionTitleIt;
-	}
-
-	public static SectionsEDES getEnum(Section section) {
-		CE code = section.getCode();
-		if (code != null) {
-			for (SectionsEDES sectionsEDES : values()) {
-				if (code.getCode().equals(sectionsEDES.getLoincCode())) {
-					return sectionsEDES;
-				}
-			}
-		}
-		return null;
 	}
 }

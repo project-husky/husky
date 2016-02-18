@@ -5,24 +5,47 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum VitalSignCodes {
+	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null,
+			"body height (measured)"), BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null,
+					null, "body height lying"), BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur",
+							null, null, "body temperature"), BODY_WEIGHT("3141-9",
+									"Körpergewicht (gewogen)", null, null,
+									"body weight (measured)"), CIRCUMFRENCE_OCCIPITAL_FRONTAL(
+											"8287-5", "Kopfumfang okzipitofrontal", null, null,
+											"circumfence occipital frontal"), HEART_BEAT("8867-4",
+													"Herzfrequenz", null, null,
+													"heart beat"), INTRAVASCULAR_DIASTOLIC("8462-4",
+															"Intrvaskulärer diastolischer Druck",
+															null, null,
+															"intravascular diastolic"), INTRAVASCULAR_SYSTOLIC(
+																	"8480-6",
+																	"Intravaskulärer systolischer Druck",
+																	null, null,
+																	"intravascular systolic"), OXYGEN_SATURATION_PERCENT(
+																			"2710-2",
+																			"Sauerstoffsättigung",
+																			null, null,
+																			"oxygen saturation"),
 	//@formatter:off
-	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate"),
-	HEART_BEAT("8867-4", "Herzfrequenz", null, null, "heart beat"),
-	OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", null, null, "oxygen saturation"),
-	INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", null, null, "intravascular systolic"),
-	INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", null, null, "intravascular diastolic"),
-	BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", null, null, "body temperature"),
-	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
-	BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null, null, "body height lying"),
-	CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", null, null, "circumfence occipital frontal"),
-	BODY_WEIGHT("3141-9", "Körpergewicht (gewogen)", null, null, "body weight (measured)");
+	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate");
 	//@formatter:on
 
-	private String loinc;
+	public static VitalSignCodes getEnum(String loincCode) {
+		VitalSignCodes[] values = values();
+		for (VitalSignCodes vitalSignCodes : values) {
+			if (vitalSignCodes.getLoinc().equals(loincCode)) {
+				return vitalSignCodes;
+			}
+		}
+		return null;
+	}
+
 	private String descriptionDe;
+	private String descriptionEn;
 	private String descriptionFr;
 	private String descriptionIt;
-	private String descriptionEn;
+
+	private String loinc;
 
 	private VitalSignCodes(String loinc, String descriptionDe, String descriptionFr,
 			String descriptionIt, String descriptionEn) {
@@ -43,10 +66,6 @@ public enum VitalSignCodes {
 		Code ret = new Code(CodeSystems.LOINC, loinc);
 		ret.setDisplayName(getDisplayName(languageCode));
 		return ret;
-	}
-
-	public Object getLoinc() {
-		return loinc;
 	}
 
 	public String getDisplayName(CS lc) {
@@ -71,6 +90,17 @@ public enum VitalSignCodes {
 		return getDisplayNameDe();
 	}
 
+	public Object getLoinc() {
+		return loinc;
+	}
+
+	private String getDisplayNameDe() {
+		if (descriptionDe != null) {
+			return descriptionDe;
+		}
+		return getDisplayNameEn();
+	}
+
 	private String getDisplayNameEn() {
 		if (descriptionEn != null) {
 			return descriptionEn;
@@ -92,20 +122,4 @@ public enum VitalSignCodes {
 		return getDisplayNameEn();
 	}
 
-	private String getDisplayNameDe() {
-		if (descriptionDe != null) {
-			return descriptionDe;
-		}
-		return getDisplayNameEn();
-	}
-
-	public static VitalSignCodes getEnum(String loincCode) {
-		VitalSignCodes[] values = values();
-		for (VitalSignCodes vitalSignCodes : values) {
-			if (vitalSignCodes.getLoinc().equals(loincCode)) {
-				return vitalSignCodes;
-			}
-		}
-		return null;
-	}
 }

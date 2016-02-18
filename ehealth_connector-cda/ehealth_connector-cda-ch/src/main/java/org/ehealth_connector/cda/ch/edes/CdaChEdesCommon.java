@@ -12,15 +12,22 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public class CdaChEdesCommon {
 
-	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
+	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
 
 	private static final String DOCTITLE_GER = "Notfallaustrittsbericht";
-	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
+	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
 
 	private ClinicalDocument document;
 
 	public CdaChEdesCommon(ClinicalDocument document) {
 		this.document = document;
+	}
+
+	public void addSection(Section section) {
+		section.setLanguageCode(EcoreUtil.copy(document.getLanguageCode()));
+		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
+		section.setTitle(Util.st(sectionEnum.getSectionTitle(section.getLanguageCode())));
+		document.addSection(section);
 	}
 
 	public String getDocumentTitle() {
@@ -52,12 +59,5 @@ public class CdaChEdesCommon {
 			addSection(section);
 		}
 		section.createStrucDocText(new SimpleTextBuilder(sectionEdes, text).toString());
-	}
-
-	public void addSection(Section section) {
-		section.setLanguageCode(EcoreUtil.copy(document.getLanguageCode()));
-		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
-		section.setTitle(Util.st(sectionEnum.getSectionTitle(section.getLanguageCode())));
-		document.addSection(section);
 	}
 }

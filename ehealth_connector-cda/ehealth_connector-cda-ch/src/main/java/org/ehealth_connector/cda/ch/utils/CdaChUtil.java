@@ -37,11 +37,31 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public abstract class CdaChUtil extends CdaUtil {
 
 	/**
+	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID
+	 * and a generated extension.</div>
+	 *
+	 * @param id
+	 *            <br>
+	 *            <div class="en"> the id</div>
+	 * @return the ii
+	 */
+	public static II createUuidEdes(String id) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(CdaChEdesCommon.OID_MAIN);
+		if (id == null) {
+			ii.setExtension(UUID.generate());
+		} else {
+			ii.setExtension(id);
+		}
+		return ii;
+	}
+
+	/**
 	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	 * and a generated extension.</div>
-	 * 
+	 *
 	 * @param id
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
@@ -59,32 +79,12 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID
-	 * and a generated extension.</div>
-	 * 
-	 * @param id
-	 * <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static II createUuidEdes(String id) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(CdaChEdesCommon.OID_MAIN);
-		if (id == null) {
-			ii.setExtension(UUID.generate());
-		} else {
-			ii.setExtension(id);
-		}
-		return ii;
-	}
-
-	/**
 	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	 * (if the root id is null, otherwise the provided id will be used) and a
 	 * generated extension.</div>
-	 * 
+	 *
 	 * @param id
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
@@ -100,7 +100,7 @@ public abstract class CdaChUtil extends CdaUtil {
 
 	/**
 	 * Updates a Reference if it is a comment (in a deph of two counters)
-	 * 
+	 *
 	 * @param er
 	 *            the EntryRelationship
 	 * @param i
@@ -131,7 +131,7 @@ public abstract class CdaChUtil extends CdaUtil {
 
 	/**
 	 * Updates a Reference if it is a comment
-	 * 
+	 *
 	 * @param er
 	 *            the EntryRelationship
 	 * @param ref

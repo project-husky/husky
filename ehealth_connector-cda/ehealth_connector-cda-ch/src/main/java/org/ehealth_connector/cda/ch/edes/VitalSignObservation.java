@@ -35,98 +35,21 @@ public class VitalSignObservation {
 
 	/**
 	 * Instantiates a new vital sign observation.
-	 * 
-	 * @param observation
-	 *            <div class="en">Existing vital sign observation</div> <div
-	 *            class="de">Existierende vital sign observation</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 */
-	public VitalSignObservation(
-			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
-		mVitalSignObservation = observation;
-	}
-
-	/**
-	 * Instantiates a new vital sign observation.
-	 * 
+	 *
 	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div> <div
-	 *            class="de">Code für ein Vitalzeichen</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 * @param effectiveTime
-	 *            <div class="en">clinically or operationally relevant
-	 *            time</div> <div class="de">klinisch relevantes Datum und
-	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
-	 * @param value
-	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="en">Code for a vital sign observation</div>
+	 *            <div class="de">Code für ein Vitalzeichen</div>
 	 *            <div class="fr"></div> <div class="it"></div>
-	 */
-	public VitalSignObservation(VitalSignCodes code, Date effectiveTime, Value value) {
-		this(code.getCode(), effectiveTime, value);
-	}
-
-	/**
-	 * Instantiates a new vital sign observation.
-	 * 
-	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div> <div
-	 *            class="de">Code für ein Vitalzeichen</div> <div
-	 *            class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
 	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
 	 * @param interpretation
-	 *            <div class="de">Beurteilung des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 * @param targetSite
-	 *            <div class="de">Anatomische Lage des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 * @param value
-	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="de">Beurteilung des Resultats</div>
 	 *            <div class="fr"></div> <div class="it"></div>
-	 */
-	public VitalSignObservation(VitalSignCodes code, Date effectiveTime,
-			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
-		this(code.getCode(), effectiveTime, interpretation, targetSite, value);
-	}
-
-	/**
-	 * Instantiates a new vital sign observation.
-	 * 
-	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div> <div
-	 *            class="de">Code für ein Vitalzeichen</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 * @param effectiveTime
-	 *            <div class="en">clinically or operationally relevant
-	 *            time</div> <div class="de">klinisch relevantes Datum und
-	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
-	 * @param value
-	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 */
-	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
-		this(code, effectiveTime, null, null, value);
-	}
-
-	/**
-	 * Instantiates a new vital sign observation.
-	 * 
-	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div> <div
-	 *            class="de">Code für ein Vitalzeichen</div> <div
-	 *            class="fr"></div> <div class="it"></div>
-	 * @param effectiveTime
-	 *            <div class="en">clinically or operationally relevant
-	 *            time</div> <div class="de">klinisch relevantes Datum und
-	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
-	 * @param interpretation
-	 *            <div class="de">Beurteilung des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
 	 * @param targetSite
-	 *            <div class="de">Anatomische Lage des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
@@ -142,101 +65,86 @@ public class VitalSignObservation {
 		addValue(value);
 	}
 
-	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation initMdht() {
-		org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht = IHEFactory.eINSTANCE
-				.createVitalSignObservation().init();
-		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
-		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
-		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		mdht.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mdht.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mdht.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
-
-		mdht.setText(Util.createReference("#TODO"));
-
-		II ii = DatatypesFactory.eINSTANCE
-				.createII(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
-		mdht.getTemplateIds().add(ii);
-
-		return mdht;
-	}
-
 	/**
-	 * <div class="de">Get a copy mdht vital sign observation.</div> <div
-	 * class="de">Gibt eine Kopie der mdth vital sign observation zurück.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.ch. vital sign observation
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getMdhtCopy() {
-		return EcoreUtil.copy(mVitalSignObservation);
-	}
-
-	/**
-	 * Sets the code.
-	 * 
+	 * Instantiates a new vital sign observation.
+	 *
 	 * @param code
-	 *            the new code
+	 *            <div class="en">Code for a vital sign observation</div>
+	 *            <div class="de">Code für ein Vitalzeichen</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param effectiveTime
+	 *            <div class="en">clinically or operationally relevant
+	 *            time</div> <div class="de">klinisch relevantes Datum und
+	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public void setCode(Code code) {
-		mVitalSignObservation.setCode(code.getCD());
+	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
+		this(code, effectiveTime, null, null, value);
 	}
 
 	/**
-	 * <div class="en">Gets the code of the observation</div> <div
-	 * class="de">Gibt den Code der Beobachtung zurück.</div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return the code
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param observation
+	 *            <div class="en">Existing vital sign observation</div>
+	 *            <div class="de">Existierende vital sign observation</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public Code getCode() {
-		final Code code = new Code(mVitalSignObservation.getCode());
-		return code;
+	public VitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
+		mVitalSignObservation = observation;
 	}
 
 	/**
-	 * Sets the date time of result.
-	 * 
-	 * @param dateTimeOfResult
-	 *            the new date time of result
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="en">Code for a vital sign observation</div>
+	 *            <div class="de">Code für ein Vitalzeichen</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param effectiveTime
+	 *            <div class="en">clinically or operationally relevant
+	 *            time</div> <div class="de">klinisch relevantes Datum und
+	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
+	 * @param interpretation
+	 *            <div class="de">Beurteilung des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param targetSite
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public void setEffectiveTime(Date dateTimeOfResult) {
-		try {
-			mVitalSignObservation.setEffectiveTime(DateUtil
-					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+	public VitalSignObservation(VitalSignCodes code, Date effectiveTime,
+			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
+		this(code.getCode(), effectiveTime, interpretation, targetSite, value);
 	}
 
 	/**
-	 * Gets the Effective Time
-	 * 
-	 * @return the effective time as date
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="en">Code for a vital sign observation</div>
+	 *            <div class="de">Code für ein Vitalzeichen</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param effectiveTime
+	 *            <div class="en">clinically or operationally relevant
+	 *            time</div> <div class="de">klinisch relevantes Datum und
+	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(mVitalSignObservation.getEffectiveTime());
-	}
-
-	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded
-	 * String.
-	 * 
-	 * @return the (first) problem value as string.
-	 */
-	public Value getValue() {
-		if (!mVitalSignObservation.getValues().isEmpty()) {
-			return new Value(mVitalSignObservation.getValues().get(0));
-		}
-		return null;
+	public VitalSignObservation(VitalSignCodes code, Date effectiveTime, Value value) {
+		this(code.getCode(), effectiveTime, value);
 	}
 
 	/**
 	 * Adds the value.
-	 * 
+	 *
 	 * @param value
 	 *            the new value
 	 */
@@ -253,22 +161,29 @@ public class VitalSignObservation {
 	}
 
 	/**
-	 * Set a new interpretations of the vital sign observation.
-	 * 
-	 * @param code
-	 *            <div class="de">Beurteilung des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the code of the observation</div>
+	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the code
 	 */
-	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
-		if (code != null) {
-			mVitalSignObservation.getInterpretationCodes().clear();
-			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
-		}
+	public Code getCode() {
+		final Code code = new Code(mVitalSignObservation.getCode());
+		return code;
+	}
+
+	/**
+	 * Gets the Effective Time
+	 *
+	 * @return the effective time as date
+	 */
+	public Date getEffectiveTime() {
+		return DateUtil.parseIVL_TSVDateTimeValue(mVitalSignObservation.getEffectiveTime());
 	}
 
 	/**
 	 * Gets the interpretation of the vital sign observation.
-	 * 
+	 *
 	 * @return the interpretation as code or null.
 	 */
 	public Code getInterpretationCode() {
@@ -280,22 +195,19 @@ public class VitalSignObservation {
 	}
 
 	/**
-	 * Set a new act site of the vital sign observation.
-	 * 
-	 * @param code
-	 *            <div class="de">Anatomische Lage des Resultats</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 * <div class="de">Get a copy mdht vital sign observation.</div>
+	 * <div class="de">Gibt eine Kopie der mdth vital sign observation
+	 * zurück.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.ch. vital sign observation
 	 */
-	public void setTargetSite(ActSite code) {
-		if (code != null) {
-			mVitalSignObservation.getTargetSiteCodes().clear();
-			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
-		}
+	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getMdhtCopy() {
+		return EcoreUtil.copy(mVitalSignObservation);
 	}
 
 	/**
 	 * Gets the target site of the vital sign observation.
-	 * 
+	 *
 	 * @return the target site as code or null.
 	 */
 	public Code getTargetSiteCode() {
@@ -307,8 +219,60 @@ public class VitalSignObservation {
 	}
 
 	/**
+	 * Get the (first) problem value. The Value may be a coded or uncoded
+	 * String.
+	 *
+	 * @return the (first) problem value as string.
+	 */
+	public Value getValue() {
+		if (!mVitalSignObservation.getValues().isEmpty()) {
+			return new Value(mVitalSignObservation.getValues().get(0));
+		}
+		return null;
+	}
+
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	public void setCode(Code code) {
+		mVitalSignObservation.setCode(code.getCD());
+	}
+
+	/**
+	 * Sets the date time of result.
+	 *
+	 * @param dateTimeOfResult
+	 *            the new date time of result
+	 */
+	public void setEffectiveTime(Date dateTimeOfResult) {
+		try {
+			mVitalSignObservation
+					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Set a new interpretations of the vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="de">Beurteilung des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
+		if (code != null) {
+			mVitalSignObservation.getInterpretationCodes().clear();
+			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
+		}
+	}
+
+	/**
 	 * Set a new language code of the vital sign observation, and its codes.
-	 * 
+	 *
 	 * @param languageCode
 	 *            <div class="de">Language code</div> <div class="fr"></div>
 	 *            <div class="it"></div>
@@ -330,4 +294,41 @@ public class VitalSignObservation {
 			}
 		}
 	}
+
+	/**
+	 * Set a new act site of the vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public void setTargetSite(ActSite code) {
+		if (code != null) {
+			mVitalSignObservation.getTargetSiteCodes().clear();
+			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
+		}
+	}
+
+	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation initMdht() {
+		org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht = IHEFactory.eINSTANCE
+				.createVitalSignObservation().init();
+		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		mdht.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mdht.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mdht.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+
+		mdht.setText(Util.createReference("#TODO"));
+
+		II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaCh.OID_V1,
+				"CDA-CH.Body.VitalSignL3");
+		mdht.getTemplateIds().add(ii);
+
+		return mdht;
+	}
+
 }

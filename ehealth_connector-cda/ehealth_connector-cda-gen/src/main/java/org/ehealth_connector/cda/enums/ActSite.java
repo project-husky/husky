@@ -12,14 +12,16 @@ public enum ActSite {
 	//@formatter:off
 	BILATERAL_EARS("BE", "Ohren beidseits", null, null, "bilateral ears"),
 	BILATERAL_NARES("BN", "Nasenlöcher beidseits", null, null, "bilateral nares"),
+	BILITERAL_EYES("OU", "Augen beidseits", null, null, "biliteral eyes"),
+
 	BUTTOCK("BU", "Gesässbacke", null, null, "buttock"),
-	
-	LEFT_ARM("LA", "Linker Arm", null, null, "left arm"),
-	LEFT_ANTERIOR_CHEST("LAC", "Linker vorderer Thorax", null, null, "left anterior chest"),
 	LEFT_ANTECUBITAL_FOSSA("LACF", "Linke Fossa antecubitalis", null, null, "left antecubital fossa"),
+	LEFT_ANTERIOR_CHEST("LAC", "Linker vorderer Thorax", null, null, "left anterior chest"),
+	LEFT_ARM("LA", "Linker Arm", null, null, "left arm"),
 	LEFT_DELTOID("LD", "Linker Deltoideus", null, null, "left deltoid"),
 	LEFT_EAR("LE", "Linkes Ohr", null, null, "left ear"),
 	LEFT_EXTERNAL_JUGULAR("LEJ", "Linke Jugularis externa", null, null, "left external jugular"),
+	LEFT_EYE("OS", "Linkes Auge", null, null, "left eye"),
 	LEFT_FOOT("LF", "Linker Fuss", null, null, "left foot"),
 	LEFT_GLUTEUS_MEDIUS("LG", "Linker Glutaeus medius", null, null, "left gluteus medius"),
 	LEFT_HAND("LH", "Linke Hand", null, null, "left hand"),
@@ -31,24 +33,22 @@ public enum ActSite {
 	LEFT_POSTERIOR_CHEST("LPC", "Linke hinterer Thorax", null, null, "left posterior chest"),
 	LEFT_SUBCLAVIAN("LSC", "Linke Subclavia", null, null, "left subclavian"),
 	LEFT_TIGH("LT", "Linker Oberschenkel", null, null, "left tigh"),
-	LEFT_UPPER_ARM("LUA", "Linker Obararm", null, null, "left upper arm"),
 	LEFT_UPPER_ABD_QUARANT("LUAQ", "Linker oberer Abdominal‐Quadrant", null, null, "left upper abd quadrant"),
+	LEFT_UPPER_ARM("LUA", "Linker Obararm", null, null, "left upper arm"),
 	LEFT_UPPER_FOREARM("LUFA", "Linker proximaler Unterarm", null, null, "left upper forearm"),
-	LEFT_VENTRAGLUTEAL("LVG", "Links ventragluteal", null, null, "left ventragluteal"),
+
 	LEFT_VASTUS_LATERALIS("LVL", "Linker Vastus lateralis", null, null, "left vastus lateralis"),
-	
-	RIGHT_EYE("OD", "Rechtes Auge", null, null, "right eye"),
-	LEFT_EYE("OS", "Linkes Auge", null, null, "left eye"),
-	BILITERAL_EYES("OU", "Augen beidseits", null, null, "biliteral eyes"),
+	LEFT_VENTRAGLUTEAL("LVG", "Links ventragluteal", null, null, "left ventragluteal"),
 	PERIANAL("PA", "perianal", null, null, "perianal"),
 	PERINEAL("PERIN", "perineal", null, null, "perineal"),
-	
-	RIGHT_ARM("RA", "Rechter Arm", null, null, "right arm"),
-	RIGHT_ANTERIOR_CHEST("RAC", "Rechter vorderer Thorax", null, null, "right anterior chest"),
 	RIGHT_ANTECUBITAL_FOSSA("RACF", "Rechte Fossa antecubitalis", null, null, "right antecubital fossa"),
+
+	RIGHT_ANTERIOR_CHEST("RAC", "Rechter vorderer Thorax", null, null, "right anterior chest"),
+	RIGHT_ARM("RA", "Rechter Arm", null, null, "right arm"),
 	RIGHT_DELTOID("RD", "Rechter Deltoideus", null, null, "right deltoid"),
 	RIGHT_EAR("RE", "Rechtes Ohr", null, null, "right ear"),
 	RIGHT_EXTERNAL_JUGULAR("REJ", "Rechte Jugularis externa", null, null, "right external jugular"),
+	RIGHT_EYE("OD", "Rechtes Auge", null, null, "right eye"),
 	RIGHT_FOOT("RF", "Rechter Fuss", null, null, "right foot"),
 	RIGHT_GLUTEUS_MEDIUS("RG", "Rechter Gluaeus medius", null, null, "right gluteus medius"),
 	RIGHT_HAND("RH", "Rechte Hand", null, null, "right hand"),
@@ -60,11 +60,11 @@ public enum ActSite {
 	RIGHT_POSTERIOR_CHEST("RPC", "Rechter hinterer Thorax", null, null, "right posterior chest"),
 	RIGHT_SUBCLAVIAN("RSC", "Rechte Subclavia", null, null, "right subclavian"),
 	RIGHT_TIGH("RT", "Rechter Oberschenkel", null, null, "right tigh"),
-	RIGHT_UPPER_ARM("RUA", "Rechter Oberarm", null, null, "right upper arm"),
 	RIGHT_UPPER_ABD_QUARANT("RUAQ", "Rechter oberer Abdominal‐Quadrant", null, null, "right upper abd quadrant"),
+	RIGHT_UPPER_ARM("RUA", "Rechter Oberarm", null, null, "right upper arm"),
 	RIGHT_UPPER_FOREARM("RUFA", "Rechter proximaler Unterarm", null, null, "right upper forearm"),
-	RIGHT_VENTRAGLUTEAL("RVG", "Rechts ventragluteal", null, null, "right ventragluteal"),
-	RIGHT_VASTUS_LATERALIS("RVL", "Rechter Vastus lateralis", null, null, "right vastus lateralis");
+	RIGHT_VASTUS_LATERALIS("RVL", "Rechter Vastus lateralis", null, null, "right vastus lateralis"),
+	RIGHT_VENTRAGLUTEAL("RVG", "Rechts ventragluteal", null, null, "right ventragluteal");
 	//@formatter:on
 
 	/**
@@ -73,17 +73,17 @@ public enum ActSite {
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ActSite ";
 	/**
-	 * <div class="en">Identifier of the Code System</div> <div
-	 * class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1052";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -97,69 +97,13 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the display name for the language code.</div> <div
-	 * class="de">Liefert den display name für den language code.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	public String getDisplayName(CS lc) {
-		String lcStr = LanguageCode.ENGLISH.getCodeValue();
-		if (lc != null) {
-			lcStr = lc.getCode().toLowerCase();
-		}
-		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
-			return getDisplayNameDe();
-		if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
-			return getDisplayNameFr();
-		if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
-			return getDisplayNameIt();
-		if ("de".equals(lcStr))
-			return getDisplayNameDe();
-		if ("fr".equals(lcStr))
-			return getDisplayNameFr();
-		if ("it".equals(lcStr))
-			return getDisplayNameIt();
-		if ("en".equals(lcStr))
-			return getDisplayNameEn();
-		return getDisplayNameDe();
-	}
-
-	private String getDisplayNameEn() {
-		if (displayNameEn != null) {
-			return displayNameEn;
-		}
-		return name();
-	}
-
-	private String getDisplayNameFr() {
-		if (displayNameFr != null) {
-			return displayNameFr;
-		}
-		return getDisplayNameEn();
-	}
-
-	private String getDisplayNameIt() {
-		if (displayNameIt != null) {
-			return displayNameIt;
-		}
-		return getDisplayNameEn();
-	}
-
-	private String getDisplayNameDe() {
-		if (displayNameDe != null) {
-			return displayNameDe;
-		}
-		return getDisplayNameEn();
-	}
-
-	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 *
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -181,7 +125,7 @@ public enum ActSite {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -202,14 +146,17 @@ public enum ActSite {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div
-	 * class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
-	private String displayNameEn;
 	private String displayNameDe;
+
+	private String displayNameEn;
+
 	private String displayNameFr;
+
 	private String displayNameIt;
 
 	/**
@@ -218,10 +165,10 @@ public enum ActSite {
 	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
@@ -235,8 +182,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -249,8 +196,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -280,8 +227,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -297,5 +244,61 @@ public enum ActSite {
 	 */
 	public String getDisplayName() {
 		return this.displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the display name for the language code.</div>
+	 * <div class="de">Liefert den display name für den language code.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getDisplayName(CS lc) {
+		String lcStr = LanguageCode.ENGLISH.getCodeValue();
+		if (lc != null) {
+			lcStr = lc.getCode().toLowerCase();
+		}
+		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
+			return getDisplayNameDe();
+		if (lcStr.equals(LanguageCode.FRENCH.getCodeValue().toLowerCase()))
+			return getDisplayNameFr();
+		if (lcStr.equals(LanguageCode.ITALIAN.getCodeValue().toLowerCase()))
+			return getDisplayNameIt();
+		if ("de".equals(lcStr))
+			return getDisplayNameDe();
+		if ("fr".equals(lcStr))
+			return getDisplayNameFr();
+		if ("it".equals(lcStr))
+			return getDisplayNameIt();
+		if ("en".equals(lcStr))
+			return getDisplayNameEn();
+		return getDisplayNameDe();
+	}
+
+	private String getDisplayNameDe() {
+		if (displayNameDe != null) {
+			return displayNameDe;
+		}
+		return getDisplayNameEn();
+	}
+
+	private String getDisplayNameEn() {
+		if (displayNameEn != null) {
+			return displayNameEn;
+		}
+		return name();
+	}
+
+	private String getDisplayNameFr() {
+		if (displayNameFr != null) {
+			return displayNameFr;
+		}
+		return getDisplayNameEn();
+	}
+
+	private String getDisplayNameIt() {
+		if (displayNameIt != null) {
+			return displayNameIt;
+		}
+		return getDisplayNameEn();
 	}
 }
