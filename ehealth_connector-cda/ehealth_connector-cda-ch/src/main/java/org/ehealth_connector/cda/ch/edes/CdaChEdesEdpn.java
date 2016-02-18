@@ -329,12 +329,12 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
 	 * Dokument ein</div>
 	 * 
-	 * @param sign
+	 * @param vitalSign
 	 *            VitalSign <div class="en">The coded vital sign observation to
 	 *            add</div> <div class="de">Das hinzuzufügende codierte
 	 *            Vitalzeichen</div>
 	 */
-	public void addCodedVitalSign(VitalSignObservation sign, Author author) {
+	public void addCodedVitalSign(VitalSignObservation vitalSign, Author author) {
 		if (mCodedVitalSigns == null) {
 			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
 			if (section == null) {
@@ -344,8 +344,8 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 			mCodedVitalSigns = new CodedVitalSigns(section);
 		}
 		CS language = mCodedVitalSigns.getMdht().getLanguageCode();
-		sign.setLanguageCode(EcoreUtil.copy(language));
-		mCodedVitalSigns.add(sign, author);
+		vitalSign.setLanguageCode(EcoreUtil.copy(language));
+		mCodedVitalSigns.add(vitalSign, author);
 	}
 
 	/**

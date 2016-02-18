@@ -56,7 +56,7 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		super(section, null, null);
 	}
 
-	public void add(VitalSignObservation sign, Author author) {
+	public void add(VitalSignObservation vitalSign, Author author) {
 		if (author == null) {
 			// default to author of document
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
@@ -69,8 +69,8 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 			}
 		}
 
-		VitalSignsOrganizer organizer = getOrganizerForDate(sign.getEffectiveTime(), author);
-		organizer.addObservation(sign.getMdhtCopy());
+		VitalSignsOrganizer organizer = getOrganizer(vitalSign.getEffectiveTime(), author);
+		organizer.addObservation(vitalSign.getMdhtCopy());
 		// update the component type
 		EList<Component4> components = organizer.getComponents();
 		components.get(components.size() - 1).setTypeCode(ActRelationshipHasComponent.COMP);
@@ -78,7 +78,7 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		getMdht().createStrucDocText(getTable());
 	}
 
-	private VitalSignsOrganizer getOrganizerForDate(Date effectiveTime, Author author) {
+	private VitalSignsOrganizer getOrganizer(Date effectiveTime, Author author) {
 		VitalSignsSection section = getMdht();
 		EList<VitalSignsOrganizer> organizers = section.getVitalSignsOrganizers();
 		for (VitalSignsOrganizer organizer : organizers) {
