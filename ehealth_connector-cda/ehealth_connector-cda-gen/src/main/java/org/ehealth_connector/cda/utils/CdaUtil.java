@@ -47,6 +47,13 @@ public abstract class CdaUtil {
 		}
 	}
 
+	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
+			EList<EntryRelationship> entryRelationships) {
+		int erNb = entryRelationships.size() - 1;
+		entryRelationships.get(erNb).setInversionInd(true);
+		entryRelationships.get(erNb).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+	}
+
 	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
 			x_ActRelationshipEntryRelationship typeCode) {
 		int nb = erList.size() - 1;

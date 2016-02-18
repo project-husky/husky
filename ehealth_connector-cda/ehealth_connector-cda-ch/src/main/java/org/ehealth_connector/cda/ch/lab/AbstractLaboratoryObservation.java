@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public abstract class AbstractLaboratoryObservation
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
@@ -27,14 +26,7 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.copy());
-		// need to add the the Subj and setInversionInd, cannot do this
-		// automatically with mdht
-		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
-			if (entryRelationShip.getAct() == commentEntry.getMdht()) {
-				entryRelationShip.setInversionInd(true);
-				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-			}
-		}
+		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(getMdht().getEntryRelationships());
 	}
 
 	/**

@@ -41,6 +41,7 @@ public class LaboratoryObservationTest extends TestUtils {
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']"));
 		assertTrue(xExist(document, "//templateId[@root='2.16.840.1.113883.10.20.1.40']"));
 		assertTrue(xExist(document, "//reference[@value='#testRef1']"));
+		assertTrue(xExist(document, "//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']"));
 
 		// Performer
 		Performer performer = new Performer(organization1);
