@@ -10,6 +10,7 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -68,6 +69,7 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		VitalSignsOrganizer organizer = IHEFactory.eINSTANCE.createVitalSignsOrganizer().init();
 		try {
 			organizer.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(effectiveTime));
+			organizer.getIds().add(CdaChUtil.createUuidEdes(null));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
