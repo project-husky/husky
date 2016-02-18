@@ -78,71 +78,93 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 	@Test
 	public void narrativeSectionsTest() {
-		String testText = "Narrative ...\nText.";
+		String testText = "";
 		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
 
+		testText = "setNarrativeTextSectionAbilityToWork";
 		cda.setNarrativeTextSectionAbilityToWork(testText);
 		assertTrue(cda.getNarrativeTextSectionAbilityToWork().contains(testText));
 
+		testText = "setNarrativeTextSectionAcuityAssessment";
 		cda.setNarrativeTextSectionAcuityAssessment(testText);
 		assertTrue(cda.getNarrativeTextSectionAcuityAssessment().contains(testText));
 
-		cda.setNarrativeTextSectionAllergiesReactions(testText);
-		assertTrue(cda.getNarrativeTextSectionAllergiesReactions().contains(testText));
+		testText = "setNarrativeTextSectionAllergiesAndOtherAdverseReactions";
+		cda.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(testText);
+		assertTrue(
+				cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
 
+		testText = "setNarrativeTextSectionAssessments";
 		cda.setNarrativeTextSectionAssessments(testText);
 		assertTrue(cda.getNarrativeTextSectionAssessments().contains(testText));
 
+		testText = "setNarrativeTextSectionChiefComplaint";
 		cda.setNarrativeTextSectionChiefComplaint(testText);
 		assertTrue(cda.getNarrativeTextSectionChiefComplaint().contains(testText));
 
+		testText = "setNarrativeTextSectionCodedVitalSigns";
 		cda.setNarrativeTextSectionCodedVitalSigns(testText);
 		assertTrue(cda.getNarrativeTextSectionCodedVitalSigns().contains(testText));
 
-		cda.setNarrativeTextSectionEDDisposition(testText);
-		assertTrue(cda.getNarrativeTextSectionEDDisposition().contains(testText));
+		testText = "setNarrativeTextSectionEdDisposition";
+		cda.setNarrativeTextSectionEdDisposition(testText);
+		assertTrue(cda.getNarrativeTextSectionEdDisposition().contains(testText));
 
+		testText = "setNarrativeTextSectionFamilyMedicalHistory";
 		cda.setNarrativeTextSectionFamilyMedicalHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionFamilyMedicalHistory().contains(testText));
 
+		testText = "setNarrativeTextSectionHistoryOfPastIllness";
 		cda.setNarrativeTextSectionHistoryOfPastIllness(testText);
 		assertTrue(cda.getNarrativeTextSectionHistoryOfPastIllness().contains(testText));
 
+		testText = "setNarrativeTextSectionHistoryOfPresentIllness";
 		cda.setNarrativeTextSectionHistoryOfPresentIllness(testText);
 		assertTrue(cda.getNarrativeTextSectionHistoryOfPresentIllness().contains(testText));
 
+		testText = "setNarrativeTextSectionImmunizations";
 		cda.setNarrativeTextSectionImmunizations(testText);
 		assertTrue(cda.getNarrativeTextSectionImmunizations().contains(testText));
 
+		testText = "setNarrativeTextSectionIntravenousFluidsAdministered";
 		cda.setNarrativeTextSectionIntravenousFluidsAdministered(testText);
 		assertTrue(cda.getNarrativeTextSectionIntravenousFluidsAdministered().contains(testText));
 
+		testText = "setNarrativeTextSectionMedicationsAdministered";
 		cda.setNarrativeTextSectionMedicationsAdministered(testText);
 		assertTrue(cda.getNarrativeTextSectionMedicationsAdministered().contains(testText));
 
+		testText = "setNarrativeTextSectionMedications";
 		cda.setNarrativeTextSectionMedications(testText);
 		assertTrue(cda.getNarrativeTextSectionMedications().contains(testText));
 
+		testText = "setNarrativeTextSectionModeOfArrival";
 		cda.setNarrativeTextSectionModeOfArrival(testText);
 		assertTrue(cda.getNarrativeTextSectionModeOfArrival().contains(testText));
 
+		testText = "setNarrativeTextSectionPregnancyHistory";
 		cda.setNarrativeTextSectionPregnancyHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionPregnancyHistory().contains(testText));
 
+		testText = "setNarrativeTextSectionProceduresAndInterventions";
 		cda.setNarrativeTextSectionProceduresAndInterventions(testText);
 		assertTrue(cda.getNarrativeTextSectionProceduresAndInterventions().contains(testText));
 
+		testText = "setNarrativeTextSectionReasonForVisit";
 		cda.setNarrativeTextSectionReasonForVisit(testText);
 		assertTrue(cda.getNarrativeTextSectionReasonForVisit().contains(testText));
 
+		testText = "setNarrativeTextSectionRemarks";
 		cda.setNarrativeTextSectionRemarks(testText);
 		assertTrue(cda.getNarrativeTextSectionRemarks().contains(testText));
 
+		testText = "setNarrativeTextSectionSocialHistory";
 		cda.setNarrativeTextSectionSocialHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionSocialHistory().contains(testText));
 
-		cda.setNarrativeTextSectionSurgeriesSection(testText);
-		assertTrue(cda.getNarrativeTextSectionSurgeriesSection().contains(testText));
+		testText = "setNarrativeTextSectionListOfSurgeries";
+		cda.setNarrativeTextSectionListOfSurgeries(testText);
+		assertTrue(cda.getNarrativeTextSectionListOfSurgeries().contains(testText));
 	}
 
 	@Test
@@ -187,20 +209,20 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(
-				SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival()
+				.contains(SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(
-				SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment()
+				.contains(SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(
-				SectionsEDES.REMARKS.getContentIdPrefix()));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks()
+				.contains(SectionsEDES.REMARKS.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(
-				SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork()
+				.contains(SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
 	}
 
 	@Test
@@ -236,20 +258,20 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
 		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
-				.getPhysicalQuantityUnit());
+		assertEquals(Ucum.CentiMeter.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
 
 		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
 				observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(), vsObservation.getCode()
-				.getCode());
-		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(), vsObservation.getValue()
-				.getPhysicalQuantityUnit());
-		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(), vsObservation
-				.getInterpretationCode().getCode());
+		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(),
+				vsObservation.getCode().getCode());
+		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
+		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(),
+				vsObservation.getInterpretationCode().getCode());
 		assertEquals(ActSite.LEFT_ARM.getCodeValue(), vsObservation.getTargetSiteCode().getCode());
 	}
 
@@ -279,8 +301,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
 		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
-				.getPhysicalQuantityUnit());
+		assertEquals(Ucum.CentiMeter.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
 	}
 
 	private VitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,

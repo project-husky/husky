@@ -31,11 +31,12 @@ public enum SectionsEDES implements ContentIdPrefix {
 	ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste", "Liste des problèmes", "Elenco dei problemi", "Active Problems"),
 	ACUITY_ASSESSMENT("11283-9", "acas", "Triage Beurteilung", "Evaluation du triage", "Valutazione del triage", "Acuity Assessment"),
 	ADVANCE_DIRECTIVES("42348-3", "ad", "Patientenverfügungen", "Directives anticipées", "Direttive anticipate", "Advance Directives"),
-	ALLERGIES_REACTIONS("48765-2", "ar", "Allergien und Unverträglichkeiten","Allergies et autres réactions indésirables", "Allergie e altre reazioni avverse", "Allergies and Other Adverse Reactions"),
+	ALLERGIES_AND_OTHER_ADVERSE_REACTIONS("48765-2", "ar", "Allergien und Unverträglichkeiten","Allergies et autres réactions indésirables", "Allergie e altre reazioni avverse", "Allergies and Other Adverse Reactions"),
 	ASSESSMENT_AND_PLAN("51847-2", "aspl", "Beurteilung und Behandlungsplan", "Evaluation et attitude", "Valutazione e piano di trattamento", "Assessment and care plan"),
 	ASSESSMENTS("51848-0", "as", "Beurteilung", "Evaluation", "Valutazione", "Assessments"),
 	CARE_PLAN("18776-5", "cp", "Behandlungsplan", "Attitude", "Piano di trattamento", "Care plan"),
 	CHIEF_COMPLAINT("10154-3", "cc", "Hauptbeschwerden des Patienten", "Plainte principale", "Disturbi principali del paziente", "Chief complaint"),
+	CODED_PHYSICAL_EXAM("29545-1", "phex", "Diagnostische Untersuchungen", "Examen physique", "Esami diagnostici", "Physical Examination"),
 	CODED_VITAL_SIGNS("8716-3", "cvit", "Codierte Vitalzeichenliste", "Signes vitaux codifiés", "Elenco codificato dei segni vitali", "Coded Vital Signs"),
 	CURRENT_MEDICATIONS("10160-0", "cmed", "Aktuelle Medikation", "Médicaments actuels", "Medicamenti attuali", "Current Medications"),
 	ED_CONSULTATIONS("18693-2", "edcon", "Konsultationen in der Notfallstation", "Consultations aux urgences", "Consultazioni al pronto soccorso", "Consultations"),
@@ -51,7 +52,6 @@ public enum SectionsEDES implements ContentIdPrefix {
 	LIST_OF_SURGERIES("47519-4", "los", "Frühere Operationen", "Antécédents chirurgicaux", "Operazioni precedenti", "List of Surgeries"),
 	MEDICATIONS_ADMINISTERED("18610-6", "mad", "Verabreichte Medikamente", "Médicaments administrés", "Medicamenti somministrati", "Medications administered"),
 	MODE_OF_ARRIVAL("11459-5", "moa", "Angaben zum Eintritt", "Mode de transport", "Indicazioni sull'entrata", "Transport Mode"),
-	PHYSICAL_EXAMINATION("29545-1", "phex", "Diagnostische Untersuchungen", "Examen physique", "Esami diagnostici", "Physical Examination"),
 	PROCEDURES("29544-3", "pr", "Prozedere", "Interventions effectuées", "Trattamenti eseguiti", "Procedures Performed"),
 	PROGRESS_NOTE("18733-6", "pn", "Genesungsfortschritt", "Notes de suite", "Decorso", "Progress Note"),
 	REASON_FOR_VISIT("29299-5", "rfv", "Grund des Patienten für Besuch", "Motif de consultation du patient", "Motivo della visita del paziente", "Reason for visit"),
@@ -106,7 +106,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 			return PCCFactory.eINSTANCE.createAcuityAssessmentSection().init();
 		case "ADVANCE_DIRECTIVES":
 			return IHEFactory.eINSTANCE.createAdvanceDirectivesSection().init();
-		case "ALLERGIES_REACTIONS":
+		case "ALLERGIES_AND_OTHER_ADVERSE_REACTIONS":
 			return IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
 		case "ASSESSMENT_AND_PLAN":
 			return IHEFactory.eINSTANCE.createAssessmentAndPlanSection().init();
@@ -146,7 +146,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 			return IHEFactory.eINSTANCE.createMedicationsAdministeredSection().init();
 		case "MODE_OF_ARRIVAL":
 			return PCCFactory.eINSTANCE.createModeOfArrivalSection().init();
-		case "PHYSICAL_EXAMINATION":
+		case "CODED_PHYSICAL_EXAM":
 			return IHEFactory.eINSTANCE.createPhysicalExamSection().init();
 		case "PROCEDURES":
 			return IHEFactory.eINSTANCE.createProceduresAndInterventionsSection().init();

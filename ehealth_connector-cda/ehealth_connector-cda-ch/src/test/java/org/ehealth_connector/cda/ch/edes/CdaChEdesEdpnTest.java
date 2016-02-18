@@ -78,168 +78,201 @@ public class CdaChEdesEdpnTest extends TestUtils {
 
 	@Test
 	public void narrativeSectionsTest() {
-		String testText = "Narrative ...\nText.";
+		String testText = "";
 		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
 
+		testText = "setNarrativeTextSectionAbilityToWork";
 		cda.setNarrativeTextSectionAbilityToWork(testText);
 		assertTrue(cda.getNarrativeTextSectionAbilityToWork().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionAbilityToWork().contains(
-				SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionAbilityToWork()
+				.contains(SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionActiveProblems";
 		cda.setNarrativeTextSectionActiveProblems(testText);
 		assertTrue(cda.getNarrativeTextSectionActiveProblems().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionActiveProblems().contains(
-				SectionsEDES.ACTIVE_PROBLEMS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionActiveProblems()
+				.contains(SectionsEDES.ACTIVE_PROBLEMS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionAdvanceDirectives";
 		cda.setNarrativeTextSectionAdvanceDirectives(testText);
 		assertTrue(cda.getNarrativeTextSectionAdvanceDirectives().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionAdvanceDirectives().contains(
-				SectionsEDES.ADVANCE_DIRECTIVES.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionAdvanceDirectives()
+				.contains(SectionsEDES.ADVANCE_DIRECTIVES.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionAllergiesReactions(testText);
-		assertTrue(cda.getNarrativeTextSectionAllergiesReactions().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionAllergiesReactions().contains(
-				SectionsEDES.ALLERGIES_REACTIONS.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionAllergiesAndOtherAdverseReactions";
+		cda.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(testText);
+		assertTrue(
+				cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions()
+				.contains(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionAssessmentAndPlan";
 		cda.setNarrativeTextSectionAssessmentAndPlan(testText);
 		assertTrue(cda.getNarrativeTextSectionAssessmentAndPlan().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionAssessmentAndPlan().contains(
-				SectionsEDES.ASSESSMENT_AND_PLAN.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionAssessmentAndPlan()
+				.contains(SectionsEDES.ASSESSMENT_AND_PLAN.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionAssessments";
 		cda.setNarrativeTextSectionAssessments(testText);
 		assertTrue(cda.getNarrativeTextSectionAssessments().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionAssessments().contains(
-				SectionsEDES.ASSESSMENTS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionAssessments()
+				.contains(SectionsEDES.ASSESSMENTS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionCarePlan";
 		cda.setNarrativeTextSectionCarePlan(testText);
 		assertTrue(cda.getNarrativeTextSectionCarePlan().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionCarePlan().contains(
-				SectionsEDES.CARE_PLAN.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionCarePlan()
+				.contains(SectionsEDES.CARE_PLAN.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionChiefComplaint";
 		cda.setNarrativeTextSectionChiefComplaint(testText);
 		assertTrue(cda.getNarrativeTextSectionChiefComplaint().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionChiefComplaint().contains(
-				SectionsEDES.CHIEF_COMPLAINT.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionChiefComplaint()
+				.contains(SectionsEDES.CHIEF_COMPLAINT.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionCodedVitalSigns";
 		cda.setNarrativeTextSectionCodedVitalSigns(testText);
 		assertTrue(cda.getNarrativeTextSectionCodedVitalSigns().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionCodedVitalSigns().contains(
-				SectionsEDES.CODED_VITAL_SIGNS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionCodedVitalSigns()
+				.contains(SectionsEDES.CODED_VITAL_SIGNS.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionConsultations(testText);
-		assertTrue(cda.getNarrativeTextSectionConsultations().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionConsultations().contains(
-				SectionsEDES.ED_CONSULTATIONS.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionEdConsultations";
+		cda.setNarrativeTextSectionEdConsultations(testText);
+		assertTrue(cda.getNarrativeTextSectionEdConsultations().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionEdConsultations()
+				.contains(SectionsEDES.ED_CONSULTATIONS.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionEDDiagnoses(testText);
-		assertTrue(cda.getNarrativeTextSectionEDDiagnoses().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionEDDiagnoses().contains(
-				SectionsEDES.ED_DIAGNOSIS.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionEdDiagnosis";
+		cda.setNarrativeTextSectionEdDiagnosis(testText);
+		assertTrue(cda.getNarrativeTextSectionEdDiagnosis().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionEdDiagnosis()
+				.contains(SectionsEDES.ED_DIAGNOSIS.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionEDDisposition(testText);
-		assertTrue(cda.getNarrativeTextSectionEDDisposition().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionEDDisposition().contains(
-				SectionsEDES.ED_DISPOSITION.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionEdDisposition";
+		cda.setNarrativeTextSectionEdDisposition(testText);
+		assertTrue(cda.getNarrativeTextSectionEdDisposition().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionEdDisposition()
+				.contains(SectionsEDES.ED_DISPOSITION.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionFamilyMedicalHistory";
 		cda.setNarrativeTextSectionFamilyMedicalHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionFamilyMedicalHistory().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionFamilyMedicalHistory().contains(
-				SectionsEDES.FAMILY_MEDICAL_HISTORY.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionFamilyMedicalHistory()
+				.contains(SectionsEDES.FAMILY_MEDICAL_HISTORY.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionHistoryOfPastIllness";
 		cda.setNarrativeTextSectionHistoryOfPastIllness(testText);
 		assertTrue(cda.getNarrativeTextSectionHistoryOfPastIllness().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionHistoryOfPastIllness().contains(
-				SectionsEDES.HISTORY_OF_PAST_ILLNESS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionHistoryOfPastIllness()
+				.contains(SectionsEDES.HISTORY_OF_PAST_ILLNESS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionHistoryOfPresentIllness";
 		cda.setNarrativeTextSectionHistoryOfPresentIllness(testText);
 		assertTrue(cda.getNarrativeTextSectionHistoryOfPresentIllness().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionHistoryOfPresentIllness().contains(
-				SectionsEDES.HISTORY_OF_PRESENT_ILLNESS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionHistoryOfPresentIllness()
+				.contains(SectionsEDES.HISTORY_OF_PRESENT_ILLNESS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionHospitalDischargeMedications";
 		cda.setNarrativeTextSectionHospitalDischargeMedications(testText);
 		assertTrue(cda.getNarrativeTextSectionHospitalDischargeMedications().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionHospitalDischargeMedications().contains(
-				SectionsEDES.HOSPITAL_DISCHARGE_MEDICATIONS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionHospitalDischargeMedications()
+				.contains(SectionsEDES.HOSPITAL_DISCHARGE_MEDICATIONS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionImmunizations";
 		cda.setNarrativeTextSectionImmunizations(testText);
 		assertTrue(cda.getNarrativeTextSectionImmunizations().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionImmunizations().contains(
-				SectionsEDES.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionImmunizations()
+				.contains(SectionsEDES.HISTORY_OF_IMMUNIZATION.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionIntravenousFluidsAdministered";
 		cda.setNarrativeTextSectionIntravenousFluidsAdministered(testText);
 		assertTrue(cda.getNarrativeTextSectionIntravenousFluidsAdministered().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionIntravenousFluidsAdministered().contains(
-				SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionIntravenousFluidsAdministered()
+				.contains(SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionMedicationsAdministered";
 		cda.setNarrativeTextSectionMedicationsAdministered(testText);
 		assertTrue(cda.getNarrativeTextSectionMedicationsAdministered().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionMedicationsAdministered().contains(
-				SectionsEDES.MEDICATIONS_ADMINISTERED.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionMedicationsAdministered()
+				.contains(SectionsEDES.MEDICATIONS_ADMINISTERED.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionMedications";
 		cda.setNarrativeTextSectionMedications(testText);
 		assertTrue(cda.getNarrativeTextSectionMedications().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionMedications().contains(
-				SectionsEDES.CURRENT_MEDICATIONS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionMedications()
+				.contains(SectionsEDES.CURRENT_MEDICATIONS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionModeOfArrival";
 		cda.setNarrativeTextSectionModeOfArrival(testText);
 		assertTrue(cda.getNarrativeTextSectionModeOfArrival().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionModeOfArrival().contains(
-				SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionModeOfArrival()
+				.contains(SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionPhysicalExam(testText);
-		assertTrue(cda.getNarrativeTextSectionPhysicalExam().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionPhysicalExam().contains(
-				SectionsEDES.PHYSICAL_EXAMINATION.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionCodedPhysicalExam";
+		cda.setNarrativeTextSectionCodedPhysicalExam(testText);
+		assertTrue(cda.getNarrativeTextSectionCodedPhysicalExam().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionCodedPhysicalExam()
+				.contains(SectionsEDES.CODED_PHYSICAL_EXAM.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionPregnancyHistory";
 		cda.setNarrativeTextSectionPregnancyHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionPregnancyHistory().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionPregnancyHistory().contains(
-				SectionsEDES.HISTORY_OF_PREGNANCIES.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionPregnancyHistory()
+				.contains(SectionsEDES.HISTORY_OF_PREGNANCIES.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionProceduresAndInterventions";
 		cda.setNarrativeTextSectionProceduresAndInterventions(testText);
 		assertTrue(cda.getNarrativeTextSectionProceduresAndInterventions().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionProceduresAndInterventions().contains(
-				SectionsEDES.PROCEDURES.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionProceduresAndInterventions()
+				.contains(SectionsEDES.PROCEDURES.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionProgressNote";
 		cda.setNarrativeTextSectionProgressNote(testText);
 		assertTrue(cda.getNarrativeTextSectionProgressNote().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionProgressNote().contains(
-				SectionsEDES.PROGRESS_NOTE.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionProgressNote()
+				.contains(SectionsEDES.PROGRESS_NOTE.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionReasonForVisit";
 		cda.setNarrativeTextSectionReasonForVisit(testText);
 		assertTrue(cda.getNarrativeTextSectionReasonForVisit().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionReasonForVisit().contains(
-				SectionsEDES.REASON_FOR_VISIT.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionReasonForVisit()
+				.contains(SectionsEDES.REASON_FOR_VISIT.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionReferralSource";
 		cda.setNarrativeTextSectionReferralSource(testText);
 		assertTrue(cda.getNarrativeTextSectionReferralSource().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionReferralSource().contains(
-				SectionsEDES.REFERRAL_SOURCE.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionReferralSource()
+				.contains(SectionsEDES.REFERRAL_SOURCE.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionCodedResults(testText);
-		assertTrue(cda.getNarrativeTextSectionCodedResults().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionCodedResults().contains(
-				SectionsEDES.RESULTS.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionResults";
+		cda.setNarrativeTextSectionResults(testText);
+		assertTrue(cda.getNarrativeTextSectionResults().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionResults()
+				.contains(SectionsEDES.RESULTS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionReviewOfSystems";
 		cda.setNarrativeTextSectionReviewOfSystems(testText);
 		assertTrue(cda.getNarrativeTextSectionReviewOfSystems().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionReviewOfSystems().contains(
-				SectionsEDES.REVIEW_OF_SYSTEMS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionReviewOfSystems()
+				.contains(SectionsEDES.REVIEW_OF_SYSTEMS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionRemarks";
 		cda.setNarrativeTextSectionRemarks(testText);
 		assertTrue(cda.getNarrativeTextSectionRemarks().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionRemarks().contains(
-				SectionsEDES.REMARKS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionRemarks()
+				.contains(SectionsEDES.REMARKS.getContentIdPrefix()));
 
+		testText = "setNarrativeTextSectionSocialHistory";
 		cda.setNarrativeTextSectionSocialHistory(testText);
 		assertTrue(cda.getNarrativeTextSectionSocialHistory().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionSocialHistory().contains(
-				SectionsEDES.SOCIAL_HISTORY.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionSocialHistory()
+				.contains(SectionsEDES.SOCIAL_HISTORY.getContentIdPrefix()));
 
-		cda.setNarrativeTextSectionSurgeriesSection(testText);
-		assertTrue(cda.getNarrativeTextSectionSurgeriesSection().contains(testText));
-		assertTrue(cda.getNarrativeTextSectionSurgeriesSection().contains(
-				SectionsEDES.LIST_OF_SURGERIES.getContentIdPrefix()));
+		testText = "setNarrativeTextSectionListOfSurgeries";
+		cda.setNarrativeTextSectionListOfSurgeries(testText);
+		assertTrue(cda.getNarrativeTextSectionListOfSurgeries().contains(testText));
+		assertTrue(cda.getNarrativeTextSectionListOfSurgeries()
+				.contains(SectionsEDES.LIST_OF_SURGERIES.getContentIdPrefix()));
 	}
 
 	@Test
@@ -296,8 +329,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		assertNotNull(vsObservation);
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
 		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue()
-				.getPhysicalQuantityUnit());
+		assertEquals(Ucum.CentiMeter.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
 	}
 
 	private VitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,

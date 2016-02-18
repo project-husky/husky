@@ -13,6 +13,13 @@ import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
+/**
+ * <div class="en">This class represents a EDES EDPN CDA document. Note that for
+ * the section naming, the data element index of IHE EDES was used. See also
+ * CDA-CH-EDES, Tabelle 25: Überblick Datenelemente in EDES
+ * Inhaltsprofilen </div>
+ *
+ */
 public class CdaChEdesEdpn
 		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 
@@ -163,7 +170,7 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionAllergiesReactions() {
+	public String getNarrativeTextSectionAllergiesAndOtherAdverseReactions() {
 		return common.getNarrativeText(getDoc().getAllergiesReactionsSection());
 	}
 
@@ -228,8 +235,8 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionCodedResults() {
-		return common.getNarrativeText(getDoc().getCodedResultsSection());
+	public String getNarrativeTextSectionCodedPhysicalExam() {
+		return common.getNarrativeText(getDoc().getPhysicalExamSection());
 	}
 
 	/**
@@ -254,7 +261,7 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionConsultations() {
+	public String getNarrativeTextSectionEdConsultations() {
 		return common.getNarrativeText(getDoc().getConsultationsSection());
 	}
 
@@ -267,7 +274,7 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionEDDiagnoses() {
+	public String getNarrativeTextSectionEdDiagnosis() {
 		return common.getNarrativeText(getDoc().getEDDiagnosesSection());
 	}
 
@@ -280,7 +287,7 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionEDDisposition() {
+	public String getNarrativeTextSectionEdDisposition() {
 		return common.getNarrativeText(getDoc().getEDDispositionSection());
 	}
 
@@ -371,6 +378,19 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
+	public String getNarrativeTextSectionListOfSurgeries() {
+		return common.getNarrativeText(getDoc().getSurgeriesSection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
 	public String getNarrativeTextSectionMedications() {
 		return common.getNarrativeText(getDoc().getMedicationsSection());
 	}
@@ -399,19 +419,6 @@ public class CdaChEdesEdpn
 	 */
 	public String getNarrativeTextSectionModeOfArrival() {
 		return common.getNarrativeText(getDoc().getModeOfArrivalSection());
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 */
-	public String getNarrativeTextSectionPhysicalExam() {
-		return common.getNarrativeText(getDoc().getPhysicalExamSection());
 	}
 
 	/**
@@ -501,6 +508,19 @@ public class CdaChEdesEdpn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
+	public String getNarrativeTextSectionResults() {
+		return common.getNarrativeText(getDoc().getCodedResultsSection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
 	public String getNarrativeTextSectionReviewOfSystems() {
 		return common.getNarrativeText(getDoc().getReviewOfSystemsSection());
 	}
@@ -516,19 +536,6 @@ public class CdaChEdesEdpn
 	 */
 	public String getNarrativeTextSectionSocialHistory() {
 		return common.getNarrativeText(getDoc().getSocialHistorySection());
-	}
-
-	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 */
-	public String getNarrativeTextSectionSurgeriesSection() {
-		return common.getNarrativeText(getDoc().getSurgeriesSection());
 	}
 
 	/**
@@ -586,8 +593,8 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionAllergiesReactions(String text) {
-		common.setNarrativeTextSection(SectionsEDES.ALLERGIES_REACTIONS,
+	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
+		common.setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS,
 				getDoc().getAllergiesReactionsSection(), text);
 	}
 
@@ -660,9 +667,9 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionCodedResults(String text) {
-		common.setNarrativeTextSection(SectionsEDES.RESULTS, getDoc().getCodedResultsSection(),
-				text);
+	public void setNarrativeTextSectionCodedPhysicalExam(String text) {
+		common.setNarrativeTextSection(SectionsEDES.CODED_PHYSICAL_EXAM,
+				getDoc().getPhysicalExamSection(), text);
 	}
 
 	/**
@@ -690,7 +697,7 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionConsultations(String text) {
+	public void setNarrativeTextSectionEdConsultations(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_CONSULTATIONS,
 				getDoc().getConsultationsSection(), text);
 	}
@@ -705,7 +712,7 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionEDDiagnoses(String text) {
+	public void setNarrativeTextSectionEdDiagnosis(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_DIAGNOSIS, getDoc().getEDDiagnosesSection(),
 				text);
 	}
@@ -720,7 +727,7 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionEDDisposition(String text) {
+	public void setNarrativeTextSectionEdDisposition(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_DISPOSITION,
 				getDoc().getEDDispositionSection(), text);
 	}
@@ -825,6 +832,21 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
+	public void setNarrativeTextSectionListOfSurgeries(String text) {
+		common.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES,
+				getDoc().getSurgeriesSection(), text);
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
 	public void setNarrativeTextSectionMedications(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CURRENT_MEDICATIONS,
 				getDoc().getMedicationsSection(), text);
@@ -858,21 +880,6 @@ public class CdaChEdesEdpn
 	public void setNarrativeTextSectionModeOfArrival(String text) {
 		common.setNarrativeTextSection(SectionsEDES.MODE_OF_ARRIVAL,
 				getDoc().getModeOfArrivalSection(), text);
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 */
-	public void setNarrativeTextSectionPhysicalExam(String text) {
-		common.setNarrativeTextSection(SectionsEDES.PHYSICAL_EXAMINATION,
-				getDoc().getPhysicalExamSection(), text);
 	}
 
 	/**
@@ -975,6 +982,21 @@ public class CdaChEdesEdpn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
+	public void setNarrativeTextSectionResults(String text) {
+		common.setNarrativeTextSection(SectionsEDES.RESULTS, getDoc().getCodedResultsSection(),
+				text);
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
 	public void setNarrativeTextSectionReviewOfSystems(String text) {
 		common.setNarrativeTextSection(SectionsEDES.REVIEW_OF_SYSTEMS,
 				getDoc().getReviewOfSystemsSection(), text);
@@ -993,20 +1015,5 @@ public class CdaChEdesEdpn
 	public void setNarrativeTextSectionSocialHistory(String text) {
 		common.setNarrativeTextSection(SectionsEDES.SOCIAL_HISTORY,
 				getDoc().getSocialHistorySection(), text);
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 */
-	public void setNarrativeTextSectionSurgeriesSection(String text) {
-		common.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES,
-				getDoc().getSurgeriesSection(), text);
 	}
 }

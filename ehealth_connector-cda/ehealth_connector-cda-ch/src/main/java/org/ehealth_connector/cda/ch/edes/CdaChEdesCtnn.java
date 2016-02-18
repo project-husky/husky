@@ -13,6 +13,13 @@ import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
+/**
+ * <div class="en">This class represents a EDES CTNN CDA document. Note that for
+ * the section naming, the data element index of IHE EDES was used. See also
+ * CDA-CH-EDES, Tabelle 25: Überblick Datenelemente in EDES
+ * Inhaltsprofilen </div>
+ *
+ */
 public class CdaChEdesCtnn
 		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 
@@ -150,7 +157,7 @@ public class CdaChEdesCtnn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionAllergiesReactions() {
+	public String getNarrativeTextSectionAllergiesAndOtherAdverseReactions() {
 		return common.getNarrativeText(getDoc().getAllergiesReactionsSection());
 	}
 
@@ -202,7 +209,7 @@ public class CdaChEdesCtnn
 	 *         document</div> <div class="de"> der text des menschlenlesbaren
 	 *         Teils des CDA-Dokuments</div>
 	 */
-	public String getNarrativeTextSectionEDDisposition() {
+	public String getNarrativeTextSectionEdDisposition() {
 		return common.getNarrativeText(getDoc().getEDDispositionSection());
 	}
 
@@ -269,6 +276,19 @@ public class CdaChEdesCtnn
 	 */
 	public String getNarrativeTextSectionIntravenousFluidsAdministered() {
 		return common.getNarrativeText(getDoc().getIntravenousFluidsAdministeredSection());
+	}
+
+	/**
+	 * <div class="en">Gets the human readable CDA section text for the
+	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @return <div class="en"> the text of the human readable part of the cda
+	 *         document</div> <div class="de"> der text des menschlenlesbaren
+	 *         Teils des CDA-Dokuments</div>
+	 */
+	public String getNarrativeTextSectionListOfSurgeries() {
+		return common.getNarrativeText(getDoc().getSurgeriesSection());
 	}
 
 	/**
@@ -376,19 +396,6 @@ public class CdaChEdesCtnn
 	}
 
 	/**
-	 * <div class="en">Gets the human readable CDA section text for the
-	 * according section</div> <div class="de">Liefert den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @return <div class="en"> the text of the human readable part of the cda
-	 *         document</div> <div class="de"> der text des menschlenlesbaren
-	 *         Teils des CDA-Dokuments</div>
-	 */
-	public String getNarrativeTextSectionSurgeriesSection() {
-		return common.getNarrativeText(getDoc().getSurgeriesSection());
-	}
-
-	/**
 	 * <div class="en">Sets the human readable CDA section text for the
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
@@ -428,8 +435,8 @@ public class CdaChEdesCtnn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionAllergiesReactions(String text) {
-		common.setNarrativeTextSection(SectionsEDES.ALLERGIES_REACTIONS,
+	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
+		common.setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS,
 				getDoc().getAllergiesReactionsSection(), text);
 	}
 
@@ -488,7 +495,7 @@ public class CdaChEdesCtnn
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionEDDisposition(String text) {
+	public void setNarrativeTextSectionEdDisposition(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_DISPOSITION,
 				getDoc().getEDDispositionSection(), text);
 	}
@@ -566,6 +573,21 @@ public class CdaChEdesCtnn
 	public void setNarrativeTextSectionIntravenousFluidsAdministered(String text) {
 		common.setNarrativeTextSection(SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED,
 				getDoc().getIntravenousFluidsAdministeredSection(), text);
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 */
+	public void setNarrativeTextSectionListOfSurgeries(String text) {
+		common.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES,
+				getDoc().getSurgeriesSection(), text);
 	}
 
 	/**
@@ -686,20 +708,5 @@ public class CdaChEdesCtnn
 	public void setNarrativeTextSectionSocialHistory(String text) {
 		common.setNarrativeTextSection(SectionsEDES.SOCIAL_HISTORY,
 				getDoc().getSocialHistorySection(), text);
-	}
-
-	/**
-	 * <div class="en">Sets the human readable CDA section text for the
-	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
-	 * Section Text für die entsprechende Section</div>
-	 *
-	 * @param text
-	 *            <div class="en"> the new text for the human readable part of
-	 *            the cda document</div> <div class="de"> der neue text für den
-	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
-	 */
-	public void setNarrativeTextSectionSurgeriesSection(String text) {
-		common.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES,
-				getDoc().getSurgeriesSection(), text);
 	}
 }
