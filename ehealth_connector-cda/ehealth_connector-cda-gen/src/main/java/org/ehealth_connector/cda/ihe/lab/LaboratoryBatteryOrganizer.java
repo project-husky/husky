@@ -1,5 +1,6 @@
 package org.ehealth_connector.cda.ihe.lab;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
@@ -20,11 +21,30 @@ public class LaboratoryBatteryOrganizer extends
 	}
 
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
-		//
+		// getMdht().getLaboratoryObservations().add(observation.copy());
+		getMdht().addObservation(observation.copy());
 	}
 
+	// public List<LaboratoryObservation> getLaboratoryObservations() {
+	// List<LaboratoryObservation> ol = new ArrayList<LaboratoryObservation>();
+	// for (Observation o : getMdht().getObservations()) {
+	// if (o instanceof LaboratoryObservation) {
+	// org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation
+	// mdhtLabObservation =
+	// (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) o;
+	// ol.add(new LaboratoryObservation(mdhtLabObservation));
+	// }
+	// }
+	// return ol;
+	// }
+
 	public List<LaboratoryObservation> getLaboratoryObservations() {
-		return null;
+		List<LaboratoryObservation> ol = new ArrayList<LaboratoryObservation>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation o : getMdht()
+				.getLaboratoryObservations()) {
+			ol.add(new LaboratoryObservation(o));
+		}
+		return ol;
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathConstants;
@@ -42,10 +43,16 @@ public class LaboratoryBatteryOrganizerTest extends TestUtils {
 		assertTrue(xExist(document, "//statusCode[@code='completed']"));
 		// reset status code for HIV
 		organizer.setStatusCode(StatusCode.ABORTED);
-		String test = organizer.getStatusCode().getCodeValue();
-		String test2 = StatusCode.ABORTED.getCodeValue();
 		assertEquals(StatusCode.ABORTED.getCodeValue(), organizer.getStatusCode().getCodeValue());
 		document = organizer.getDocument();
 		assertTrue(xExist(document, "//statusCode[@code='aborted']"));
+
+		// add Laboratory Observation
+		LaboratoryObservation obs = new LaboratoryObservation();
+		organizer.addLaboratoryObservation(obs);
+		document = organizer.getDocument();
+		assertFalse(organizer.getLaboratoryObservations().isEmpty());
+		document = organizer.getDocument();
+		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.6']"));
 	}
 }

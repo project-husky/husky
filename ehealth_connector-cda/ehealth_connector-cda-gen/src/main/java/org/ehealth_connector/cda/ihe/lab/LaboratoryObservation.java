@@ -109,6 +109,14 @@ public class LaboratoryObservation
 		this.addValue(value);
 	}
 
+	/**
+	 * Instantiates a new laboratory observation.
+	 */
+	public LaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
+		super(mdht);
+	}
+
 	// /**
 	// * Instantiates a new laboratory observation.
 	// *
@@ -251,15 +259,6 @@ public class LaboratoryObservation
 	}
 
 	/**
-	 * Gets the Effective Time
-	 *
-	 * @return the effective time as date
-	 */
-	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
-	}
-
-	/**
 	 * Gets the specified id value based on its code system.
 	 *
 	 * @param codeSystem
@@ -364,20 +363,6 @@ public class LaboratoryObservation
 				.get(getMdht().getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
-	}
-
-	/**
-	 * Sets the date time of result.
-	 *
-	 * @param dateTimeOfResult
-	 *          the new date time of result
-	 */
-	public void setEffectiveTime(Date dateTimeOfResult) {
-		try {
-			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
