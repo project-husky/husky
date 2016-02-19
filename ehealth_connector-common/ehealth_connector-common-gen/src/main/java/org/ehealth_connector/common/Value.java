@@ -64,22 +64,22 @@ public class Value {
 	 * physikalischen Messgrößen).</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param lowerBound
+	 * @param low
 	 *          The lower bound
 	 *
-	 * @param denominator
+	 * @param high
 	 *          The upper bound
 	 */
-	public Value(BigDecimal lowerBound, BigDecimal upperBound) {
+	public Value(BigDecimal low, BigDecimal high) {
 		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		final IVXB_PQ low = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		final IVXB_PQ high = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
 
-		low.setValue(lowerBound);
-		ivlPq.setLow(low);
+		mlow.setValue(low);
+		ivlPq.setLow(mlow);
 
-		high.setValue(upperBound);
-		ivlPq.setHigh(high);
+		mhigh.setValue(high);
+		ivlPq.setHigh(mhigh);
 
 		mValue = ivlPq;
 	}
