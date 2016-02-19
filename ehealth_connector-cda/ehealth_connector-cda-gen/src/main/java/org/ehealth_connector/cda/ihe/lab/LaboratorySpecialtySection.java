@@ -45,6 +45,17 @@ public class LaboratorySpecialtySection
 		return new Code(getMdht().getCode());
 	}
 
+	public LaboratoryReportDataProcessingEntry getLaboratoryReportDataProcessingEntry() {
+		if (getMdht().getEntries() != null && !getMdht().getEntries().isEmpty()
+				&& getMdht().getEntries().get(
+						0) instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) {
+			return new org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry(
+					(org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) getMdht()
+							.getEntries().get(0));
+		}
+		return null;
+	}
+
 	public String getTitle() {
 		if (this.getMdht().getTitle() != null) {
 			return this.getMdht().getTitle().getText();
@@ -57,7 +68,7 @@ public class LaboratorySpecialtySection
 	}
 
 	public void setLaboratoryReportDataProcessingEntry(LaboratoryReportDataProcessingEntry entry) {
-		//
+		getMdht().getEntries().add(entry.getMdht());
 	}
 
 	public void setTitle(String title) {

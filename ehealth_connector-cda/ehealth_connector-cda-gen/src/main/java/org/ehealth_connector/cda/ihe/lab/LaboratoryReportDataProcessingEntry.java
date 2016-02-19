@@ -6,11 +6,11 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 public class LaboratoryReportDataProcessingEntry extends
 		MdhtEntryFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry> {
 
-	protected LaboratoryReportDataProcessingEntry() {
+	public LaboratoryReportDataProcessingEntry() {
 		super(LABFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init());
 	}
 
-	protected LaboratoryReportDataProcessingEntry(
+	public LaboratoryReportDataProcessingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
 	}
