@@ -16,12 +16,16 @@
 
 package org.ehealth_connector.common;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.Ucum;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -50,6 +54,34 @@ public class Value {
 	 */
 	public Value(ANY value) {
 		mValue = value;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
+	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
+	 * physikalischen Messgrößen).</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param lowerBound
+	 *          The lower bound
+	 *
+	 * @param denominator
+	 *          The upper bound
+	 */
+	public Value(BigDecimal lowerBound, BigDecimal upperBound) {
+		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVXB_PQ low = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final IVXB_PQ high = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+
+		low.setValue(lowerBound);
+		ivlPq.setLow(low);
+
+		high.setValue(upperBound);
+		ivlPq.setHigh(high);
+
+		mValue = ivlPq;
 	}
 
 	/**
@@ -254,6 +286,36 @@ public class Value {
 	}
 
 	/**
+	 * <div class="en">Returns the higher bound of an interval of physical
+	 * measurements</div> Gibt den oberen Wert eines Intervals physikalischer
+	 * Größen zurück.
+	 *
+	 * @return the measurement
+	 */
+	public BigDecimal getPhysicalQuantityIntervalHighValue() {
+		if (isPhysicalQuantityInterval()) {
+			IVL_PQ ivlPq = (IVL_PQ) mValue;
+			return ivlPq.getHigh().getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Returns the lower bound of an interval of physical
+	 * measurements</div> <div class="de">Gibt den unteren Wert eines Intervals
+	 * physikalischer Größen zurück.</div>
+	 *
+	 * @return the measurement
+	 */
+	public BigDecimal getPhysicalQuantityIntervalLowValue() {
+		if (isPhysicalQuantityInterval()) {
+			IVL_PQ ivlPq = (IVL_PQ) mValue;
+			return ivlPq.getLow().getValue();
+		}
+		return null;
+	}
+
+	/**
 	 * Gibt die Einheit zurück.
 	 *
 	 * @return Die Einheit
@@ -323,6 +385,10 @@ public class Value {
 	 */
 	public boolean isPhysicalQuantity() {
 		return (mValue instanceof PQ);
+	}
+
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
 	}
 
 	/**

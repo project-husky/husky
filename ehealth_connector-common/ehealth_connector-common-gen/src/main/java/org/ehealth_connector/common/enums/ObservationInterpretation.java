@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.enums;
+package org.ehealth_connector.common.enums;
 
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -16,9 +16,9 @@ public enum ObservationInterpretation {
 	HIGH_ALERT("HH", "High alert"),
 	LOW("L", "Low"),
 	LOW_ALERT("LL", "Low alert"),
-	NEG("NEG", "Negativ"),
 	NORMAL("N",	"Normal"),
-	POS("POS", "Positiv");
+	POS("POS", "Positiv"),
+	NEG("NEG", "Negativ");
 	//@formatter:on
 
 	/**
@@ -27,17 +27,17 @@ public enum ObservationInterpretation {
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div> <div
+	 * class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.83";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -57,7 +57,7 @@ public enum ObservationInterpretation {
 	 *
 	 *
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -79,7 +79,7 @@ public enum ObservationInterpretation {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -100,8 +100,8 @@ public enum ObservationInterpretation {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div> <div
+	 * class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
@@ -111,10 +111,10 @@ public enum ObservationInterpretation {
 	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ObservationInterpretation(String code, String displayName) {
@@ -123,8 +123,8 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
+	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -137,8 +137,8 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -168,8 +168,8 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */

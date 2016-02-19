@@ -9,24 +9,27 @@ import javax.xml.xpath.XPathExpression;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.enums.StandardCdaBodySelections;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
-import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Performer;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 public class LaboratoryObservationTest extends TestUtils {
+	final LaboratoryObservation observation;
+
+	public LaboratoryObservationTest() {
+		super.init();
+		observation = new LaboratoryObservation();
+	}
 
 	@Test
 	public void testAbstractLaboratoryObservation() throws Exception {
 
-		super.init();
-
 		// Constructors
-		final LaboratoryObservation observation = new LaboratoryObservation();
 		Document document = observation.getDocument();
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.6']"));
 		assertTrue(xExist(document, "//statusCode[@code='completed']"));
@@ -88,7 +91,6 @@ public class LaboratoryObservationTest extends TestUtils {
 	@Test
 	public void testLaboratoryObservationLrph() {
 		// Code Valueset
-		LaboratoryObservation observation = new LaboratoryObservation();
 		observation.setCode(LabObsListSnomed.BRUCELLA);
 		assertEquals(LabObsListSnomed.BRUCELLA, observation.getCodeAsSnomedEnum());
 

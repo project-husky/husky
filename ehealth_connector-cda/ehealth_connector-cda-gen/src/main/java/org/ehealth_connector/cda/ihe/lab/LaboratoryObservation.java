@@ -22,13 +22,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
-import org.ehealth_connector.cda.enums.ObservationInterpretation;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
