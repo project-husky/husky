@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Dec 15, 2015
- * File  : CdaUtilTest.java
- * **********************************************************************
- * ehealth_connector-cda-gen
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.utils;
 
 import org.apache.commons.logging.LogFactory;
@@ -28,11 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 9:10:22 AM
- *
+ * Test of CdaUtil
  */
 public class CdaUtilTest {
 

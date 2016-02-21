@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Dec 15, 2015
- * File  : FindDocumentsQueryTest.java
- * **********************************************************************
- * ehealth_connector-communication-ch
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
 import static org.junit.Assert.assertTrue;
@@ -25,11 +28,7 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 3:15:07 PM
- *
+ * Test of class FindDocumentsQuery
  */
 public class FindDocumentsQueryTest extends XdsChTestUtils {
 

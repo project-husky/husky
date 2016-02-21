@@ -29,11 +29,9 @@ import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 5:14:46 PM
- *
+ * <div class="en">A class representing the allergy concern information.</div>
+ * <div class="de">Eine Klasse die die Informationen zu Allergiebelangen
+ * representiert.</div>
  */
 public class AllergyConcern extends AbstractAllergyConcern {
 
@@ -46,7 +44,8 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	/**
 	 * Instantiates a new allergy concern.
 	 *
-	 * @param allergyConcern the allergy concern
+	 * @param allergyConcern
+	 *            the allergy concern
 	 */
 	public AllergyConcern(AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
@@ -55,9 +54,12 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	/**
 	 * Instantiates a new allergy concern.
 	 *
-	 * @param concern the concern
-	 * @param problemEntry the problem entry
-	 * @param concernStatus the concern status
+	 * @param concern
+	 *            the concern
+	 * @param problemEntry
+	 *            the problem entry
+	 * @param concernStatus
+	 *            the concern status
 	 */
 	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
@@ -66,11 +68,16 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	/**
 	 * Instantiates a new allergy concern.
 	 *
-	 * @param concern the concern
-	 * @param begin the begin
-	 * @param end the end
-	 * @param problemEntry the problem entry
-	 * @param concernStatus the concern status
+	 * @param concern
+	 *            the concern
+	 * @param begin
+	 *            the begin
+	 * @param end
+	 *            the end
+	 * @param problemEntry
+	 *            the problem entry
+	 * @param concernStatus
+	 *            the concern status
 	 */
 	public AllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {

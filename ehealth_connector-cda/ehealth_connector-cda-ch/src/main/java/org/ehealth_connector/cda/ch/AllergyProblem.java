@@ -25,13 +25,11 @@ import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AllergyProblem.
+ * <div class="en">A class representing the allergy problem information.</div>
+ * <div class="de">Eine Klasse die die Informationen zu Allergieprobleme
+ * representiert.</div>
  *
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 5:08:32 PM
  */
 public class AllergyProblem extends AbstractAllergyProblem {
 
@@ -45,7 +43,8 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 *
-	 * @param allergy the allergy
+	 * @param allergy
+	 *            the allergy
 	 */
 	public AllergyProblem(AllergiesAndIntolerances allergy) {
 		super(allergy);
@@ -54,10 +53,14 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 *
-	 * @param kindOfAllergy the kind of allergy
-	 * @param problem the problem
-	 * @param startOfProblem the start of problem
-	 * @param endOfProblem the end of problem
+	 * @param kindOfAllergy
+	 *            the kind of allergy
+	 * @param problem
+	 *            the problem
+	 * @param startOfProblem
+	 *            the start of problem
+	 * @param endOfProblem
+	 *            the end of problem
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy, Code problem, Date startOfProblem, Date endOfProblem) {
 		super(kindOfAllergy, problem, startOfProblem, endOfProblem);
@@ -66,11 +69,16 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 *
-	 * @param kindOfAllergy the kind of allergy
-	 * @param problem the problem
-	 * @param startOfProblem the start of problem
-	 * @param endOfProblem the end of problem
-	 * @param internalProblemId the internal problem id
+	 * @param kindOfAllergy
+	 *            the kind of allergy
+	 * @param problem
+	 *            the problem
+	 * @param startOfProblem
+	 *            the start of problem
+	 * @param endOfProblem
+	 *            the end of problem
+	 * @param internalProblemId
+	 *            the internal problem id
 	 */
 	public AllergyProblem(AllergiesAndIntolerances kindOfAllergy, Code problem, Date startOfProblem, Date endOfProblem,
 			Identificator internalProblemId) {
@@ -80,7 +88,8 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 *
-	 * @param allergyIntolerance the allergy intolerance
+	 * @param allergyIntolerance
+	 *            the allergy intolerance
 	 */
 	public AllergyProblem(AllergyIntolerance allergyIntolerance) {
 		super(allergyIntolerance);

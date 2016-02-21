@@ -25,9 +25,7 @@ import org.junit.Test;
 
 /**
  * 
- * @author roeland
- * @version 1.0
- * @since Jan 8, 2016 3:05:42 PM
+ * Test of RiskOfExposure
  *
  */
 public class RiskOfExposureTest {

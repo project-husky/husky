@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:58:49 PM
+ * Test of class Person
  */
 @Ignore
 public class PersonTest {
@@ -47,7 +45,9 @@ public class PersonTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Person#Person(org.ehealth_connector.common.Name)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Person#Person(org.ehealth_connector.common.Name)}
+	 * .
 	 */
 	@Test
 	public void testPersonName() {
@@ -55,7 +55,9 @@ public class PersonTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}
+	 * .
 	 */
 	@Test
 	public void testPersonPerson() {

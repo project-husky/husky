@@ -30,9 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 15, 2015 8:23:58 AM
+ * Test of class Address
  */
 public class AddressTest {
 
@@ -129,8 +127,7 @@ public class AddressTest {
 	 */
 	@Test
 	public void testAddressStringStringStringStringAddressUse() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testStreet_1, adr.getStreet());
 		assertEquals(testHouseNumber_1, adr.getHouseNumber());
@@ -147,8 +144,7 @@ public class AddressTest {
 	 */
 	@Test
 	public void testAddressStringStringStringStringStringAddressUse() {
-		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
-				testZip_1, testCity_1, testUsage_1);
+		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testAddressline1_1, adr.getAddressline1());
 		assertEquals(testAddressline2_1, adr.getAddressline2());
@@ -164,8 +160,7 @@ public class AddressTest {
 	 */
 	@Test
 	public void testCopyMdhtAdress() {
-		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
-				testZip_1, testCity_1, testUsage_1);
+		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		final AD ref = adr.copyMdhtAdress();
 		assertNotNull(ref);
@@ -184,8 +179,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetAddressline1() {
-		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
-				testZip_1, testCity_1, testUsage_1);
+		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testAddressline1_1, adr.getAddressline1());
 		adr.setAddressline1(testAddressline1_2);
@@ -200,8 +194,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetAddressline2() {
-		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
-				testZip_1, testCity_1, testUsage_1);
+		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testAddressline2_1, adr.getAddressline1());
 		adr.setAddressline1(testAddressline2_2);
@@ -216,8 +209,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetAddressline3() {
-		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
-				testZip_1, testCity_1, testUsage_1);
+		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testAddressline3_1, adr.getAddressline1());
 		adr.setAddressline1(testAddressline3_2);
@@ -231,8 +223,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetCity() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testCity_1, adr.getCity());
 		adr.setCity(testCity_2);
@@ -247,8 +238,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error out of bound")
 	public void testSetCountry() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertNull(adr.getCountry());
 		assertEquals(testCountry_1, adr.getCountry());
@@ -264,8 +254,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetHouseNumber() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testHouseNumber_1, adr.getHouseNumber());
 		adr.setHouseNumber(testHouseNumber_2);
@@ -279,8 +268,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetStreet() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testStreet_1, adr.getStreet());
 		adr.setStreet(testStreet_2);
@@ -294,8 +282,7 @@ public class AddressTest {
 	@Test
 	@Ignore("Error within setter and getter")
 	public void testSetZip() {
-		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
-				testUsage_1);
+		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1, testUsage_1);
 		LOG.info(adr);
 		assertEquals(testZip_1, adr.getZip());
 		adr.setZip(testZip_2);

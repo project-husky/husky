@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 9:00:55 PM
+ * Test of class Value
  */
 @Ignore
 public class ValueTest {
@@ -39,7 +37,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.ANY)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.ANY)}
+	 * .
 	 */
 	@Test
 	public void testValueANY() {
@@ -47,7 +47,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
+	 * .
 	 */
 	@Test
 	public void testValueCD() {
@@ -55,7 +57,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(org.ehealth_connector.common.Code)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(org.ehealth_connector.common.Code)}
+	 * .
 	 */
 	@Test
 	public void testValueCode() {
@@ -64,7 +68,8 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Value#Value(double, double, org.ehealth_connector.common.enums.Ucum)}.
+	 * {@link org.ehealth_connector.common.Value#Value(double, double, org.ehealth_connector.common.enums.Ucum)}
+	 * .
 	 */
 	@Test
 	public void testValueDoubleDoubleUcum() {
@@ -72,7 +77,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.PQ)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.PQ)}
+	 * .
 	 */
 	@Test
 	public void testValuePQ() {
@@ -80,7 +87,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.RTO)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.RTO)}
+	 * .
 	 */
 	@Test
 	public void testValueRTO() {
@@ -88,7 +97,9 @@ public class ValueTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Value#Value(java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Value#Value(java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testValueStringString() {
@@ -97,7 +108,8 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Value#Value(java.lang.String, org.ehealth_connector.common.enums.Ucum)}.
+	 * {@link org.ehealth_connector.common.Value#Value(java.lang.String, org.ehealth_connector.common.enums.Ucum)}
+	 * .
 	 */
 	@Test
 	public void testValueStringUcum() {

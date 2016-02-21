@@ -35,9 +35,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.impl.DatatypesFactoryImpl;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:42:51 PM
+ * Test of class Author
  */
 
 public class AuthorTest {
@@ -392,8 +390,7 @@ public class AuthorTest {
 		final Organization ref = auth.getOrganization();
 		assertNotNull(ref);
 		assertEquals(testOrgcanization1.getName(), ref.getName());
-		assertEquals(testOrgcanization1.getTelecoms().getPhones().get(testOrgPhone1),
-				ref.getTelecoms().getPhones().get(testOrgPhone1));
+		assertEquals(testOrgcanization1.getTelecoms().getPhones().get(testOrgPhone1), ref.getTelecoms().getPhones().get(testOrgPhone1));
 	}
 
 	/**
@@ -407,8 +404,7 @@ public class AuthorTest {
 
 		final Telecoms ref = auth.getTelecoms();
 		assertNotNull(ref);
-		assertEquals(testTelecoms.getPhones().get(testOrgPhone1),
-				ref.getPhones().get(testOrgPhone1));
+		assertEquals(testTelecoms.getPhones().get(testOrgPhone1), ref.getPhones().get(testOrgPhone1));
 	}
 
 	/**

@@ -31,10 +31,7 @@ import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- *
- * @author roeland
- * @version 1.0
- * @since Jan 28, 2016 1:30:52 PM
+ * Test of DocumentProcessor
  *
  */
 public class DocumentProcessorTest {

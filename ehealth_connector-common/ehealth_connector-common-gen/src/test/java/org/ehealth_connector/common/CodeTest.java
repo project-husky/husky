@@ -24,9 +24,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:44:30 PM
+ * Test of class Code
  */
 public class CodeTest {
 
@@ -40,7 +38,9 @@ public class CodeTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Code#Code(java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Code#Code(java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Ignore
 	@Test
@@ -50,7 +50,8 @@ public class CodeTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Code#Code(java.lang.String, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Code#Code(java.lang.String, java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Ignore
 	@Test
@@ -70,7 +71,9 @@ public class CodeTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Code#setCD(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Code#setCD(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
+	 * .
 	 */
 	@Ignore
 	@Test
@@ -79,7 +82,8 @@ public class CodeTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Code#setCode(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Code#setCode(java.lang.String)}.
 	 */
 	@Ignore
 	@Test
@@ -88,7 +92,9 @@ public class CodeTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Code#setCodeSystem(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Code#setCodeSystem(java.lang.String)}
+	 * .
 	 */
 	@Ignore
 	@Test
@@ -97,7 +103,9 @@ public class CodeTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Code#setCodeSystemName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Code#setCodeSystemName(java.lang.String)}
+	 * .
 	 */
 	@Ignore
 	@Test
@@ -107,7 +115,8 @@ public class CodeTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Code#setNullFlavor(org.ehealth_connector.common.enums.NullFlavor)}.
+	 * {@link org.ehealth_connector.common.Code#setNullFlavor(org.ehealth_connector.common.enums.NullFlavor)}
+	 * .
 	 */
 	@Ignore
 	@Test

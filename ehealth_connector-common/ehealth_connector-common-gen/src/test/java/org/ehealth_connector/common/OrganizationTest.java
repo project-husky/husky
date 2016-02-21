@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:52:46 PM
+ * Test of class Organization
  */
 @Ignore
 public class OrganizationTest {
@@ -40,7 +38,8 @@ public class OrganizationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#Organization(org.openhealthtools.mdht.uml.cda.Organization)}.
+	 * {@link org.ehealth_connector.common.Organization#Organization(org.openhealthtools.mdht.uml.cda.Organization)}
+	 * .
 	 */
 	@Test
 	public void testOrganizationOrganization() {
@@ -48,7 +47,9 @@ public class OrganizationTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Organization#Organization(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testOrganizationString() {
@@ -57,7 +58,8 @@ public class OrganizationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testOrganizationStringString() {
@@ -65,7 +67,8 @@ public class OrganizationTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Organization#copyMdhtOrganization()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#copyMdhtOrganization()}.
 	 */
 	@Test
 	public void testCopyMdhtOrganization() {
@@ -73,7 +76,8 @@ public class OrganizationTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Organization#getId()}.
+	 * Test method for {@link org.ehealth_connector.common.Organization#getId()}
+	 * .
 	 */
 	@Test
 	public void testGetId() {
@@ -81,7 +85,8 @@ public class OrganizationTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Organization#getMdhtOrganization()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#getMdhtOrganization()}.
 	 */
 	@Test
 	public void testGetMdhtOrganization() {
@@ -89,7 +94,8 @@ public class OrganizationTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Organization#getName()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#getName()}.
 	 */
 	@Test
 	public void testGetName() {
@@ -98,7 +104,8 @@ public class OrganizationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#setTelecoms(org.ehealth_connector.common.Telecoms)}.
+	 * {@link org.ehealth_connector.common.Organization#setTelecoms(org.ehealth_connector.common.Telecoms)}
+	 * .
 	 */
 	@Test
 	public void testSetTelecoms() {

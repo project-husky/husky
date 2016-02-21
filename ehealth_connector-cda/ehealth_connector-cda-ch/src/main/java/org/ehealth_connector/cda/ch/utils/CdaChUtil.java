@@ -30,9 +30,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 16, 2015 6:34:53 AM
+ * <div class="en">A util class with helper functions.</div>
+ * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtil {
 
@@ -111,10 +110,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
-			SectionsVACD prefix) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd()) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j, SectionsVACD prefix) {
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd()) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -140,8 +137,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
-			SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref, SectionsVACD prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();

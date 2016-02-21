@@ -22,13 +22,11 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class PregnancyHistory.
  *
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 5:46:18 PM
+ * <div class="en">A class representing the pregnancy history.</div>
+ * <div class="de">Eine Klasse die die Schwangerschaftsgeschichte
+ * representiert.</div>
  */
 public class PregnancyHistory extends AbstractPregnancyHistory {
 
@@ -41,7 +39,8 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	/**
 	 * Instantiates a new pregnancy history.
 	 *
-	 * @param estimatedBirthDate the estimated birth date
+	 * @param estimatedBirthDate
+	 *            the estimated birth date
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		super(estimatedBirthDate);
@@ -50,7 +49,8 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	/**
 	 * Instantiates a new pregnancy history.
 	 *
-	 * @param pregnancy the pregnancy
+	 * @param pregnancy
+	 *            the pregnancy
 	 */
 	public PregnancyHistory(PregnancyObservation pregnancy) {
 		super(pregnancy);

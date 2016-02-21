@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Nov 20, 2015
- * File  : DebugXdsUtil.java
- * **********************************************************************
- * ehealth_connector-communication
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 package org.ehealth_connector.communication.utils;
 
 import org.ehealth_connector.common.utils.DebugUtil;
@@ -17,10 +20,7 @@ import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Nov 20, 2015 3:52:18 PM
+ * Debug xds util class
  *
  */
 public class DebugXdsUtil extends DebugUtil {
@@ -50,12 +50,10 @@ public class DebugXdsUtil extends DebugUtil {
 			retVal.append("  UniqueId:             " + ss.getUniqueId() + "\n");
 			retVal.append("  Title:                " + ss.getTitle() + "\n");
 			retVal.append("  PatientId:            " + ss.getPatientId() + "\n");
-			retVal.append(
-					"  ContentTypeCode:      " + debugCodeString(ss.getContentTypeCode()) + "\n");
+			retVal.append("  ContentTypeCode:      " + debugCodeString(ss.getContentTypeCode()) + "\n");
 			retVal.append("  Author:               " + debugAuthorString(ss.getAuthor()) + "\n");
 			retVal.append("  AvailabilityStatus:   " + ss.getAvailabilityStatus() + "\n");
-			retVal.append(
-					"  Comments:             " + debugInternationalString(ss.getComments()) + "\n");
+			retVal.append("  Comments:             " + debugInternationalString(ss.getComments()) + "\n");
 			retVal.append("  IntendedRecipient:    ");
 			if (ss.getIntendedRecipient().isEmpty()) {
 				retVal.append("null");

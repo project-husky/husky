@@ -27,11 +27,7 @@ import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 2:34:47 PM
- *
+ * Test of class DateTimeRange
  */
 public class DateTimeRangeTest {
 
@@ -62,8 +58,7 @@ public class DateTimeRangeTest {
 	@Test
 	public void testDateTimeRange() throws MalformedQueryException {
 
-		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
-				testDate2);
+		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1, testDate2);
 		assertTrue(d.getFrom().getTime() == testDate1.getTime());
 		assertTrue(d.getTo().getTime() == testDate2.getTime());// 201401012300
 
@@ -77,8 +72,7 @@ public class DateTimeRangeTest {
 
 	@Test
 	public void testSetGetTo() throws MalformedQueryException {
-		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
-				testDate2);
+		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1, testDate2);
 
 		d.setTo(testDateTo1);
 
@@ -89,8 +83,7 @@ public class DateTimeRangeTest {
 
 	@Test
 	public void testSetGetFrom() throws MalformedQueryException {
-		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
-				testDate2);
+		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1, testDate2);
 		d.setFrom(testDateTo2);
 		assertEquals(testDateTo2, d.getFrom());
 	}

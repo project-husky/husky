@@ -30,10 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 6:23:04 PM
+ * Test of CdaChUtil
  *
  */
 public class CdaChUtilTest extends CdaUtilTest {

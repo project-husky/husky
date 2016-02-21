@@ -29,11 +29,7 @@ import org.ehealth_connector.communication.testhelper.XdmTestUtils;
 import org.junit.Test;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Dec 16, 2015 2:32:54 PM
- *
+ * Test of class XdmContents
  */
 public class XdmContentsTest extends XdmTestUtils {
 
@@ -52,12 +48,10 @@ public class XdmContentsTest extends XdmTestUtils {
 	public void exportForValidationTest() {
 		// log.info("Export for Validation test. An XDM ZIP File will be
 		// exported for online validation)");
-		final File targetFile = new File(filePath + "/xdm_"
-				+ dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "")
-				+ ".zip");
+		final File targetFile = new File(
+				filePath + "/xdm_" + dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "") + ".zip");
 
-		final XdmContents exportContents = exportSamples(conCom, targetFile, CDA_FILE_PATH,
-				PDF_FILE_PATH);
+		final XdmContents exportContents = exportSamples(conCom, targetFile, CDA_FILE_PATH, PDF_FILE_PATH);
 		assertNotNull(exportContents);
 		assertTrue(targetFile.exists());
 
@@ -75,12 +69,10 @@ public class XdmContentsTest extends XdmTestUtils {
 		// log.info("Export / Import Test. An XDM ZIP File will be exported.
 		// After this, the file will be imported again and the metadata as well
 		// as the file hash and size will be compared.");
-		final File targetFile = new File(filePath + "/xdm_"
-				+ dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "")
-				+ ".zip");
+		final File targetFile = new File(
+				filePath + "/xdm_" + dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "") + ".zip");
 
-		final XdmContents exportContents = exportSamples(conCom, targetFile, CDA_FILE_PATH,
-				PDF_FILE_PATH);
+		final XdmContents exportContents = exportSamples(conCom, targetFile, CDA_FILE_PATH, PDF_FILE_PATH);
 		assertNotNull(exportContents);
 		assertTrue(targetFile.exists());
 

@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:51:15 PM
+ * Test of class Name
  */
 @Ignore
 public class NameTest {
@@ -39,7 +37,9 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.ON)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.ON)}
+	 * .
 	 */
 	@Test
 	public void testNameON() {
@@ -47,7 +47,9 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
+	 * .
 	 */
 	@Test
 	public void testNamePN() {
@@ -55,7 +57,9 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#Name(java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#Name(java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testNameStringString() {
@@ -64,7 +68,8 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Name#Name(java.lang.String, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Name#Name(java.lang.String, java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testNameStringStringString() {
@@ -90,7 +95,8 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#getCompleteName()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -106,7 +112,9 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#setFamilyName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#setFamilyName(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetFamilyName() {
@@ -114,7 +122,8 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#setGivenName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#setGivenName(java.lang.String)}.
 	 */
 	@Test
 	public void testSetGivenName() {
@@ -122,7 +131,9 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#setPn(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#setPn(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
+	 * .
 	 */
 	@Test
 	public void testSetPn() {
@@ -130,7 +141,8 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#setPrefix(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#setPrefix(java.lang.String)}.
 	 */
 	@Test
 	public void testSetPrefix() {
@@ -138,7 +150,8 @@ public class NameTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#setSuffix(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#setSuffix(java.lang.String)}.
 	 */
 	@Test
 	public void testSetSuffix() {

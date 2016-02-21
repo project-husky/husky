@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:48:41 PM
+ * Test of class Identificator
  */
 @Ignore
 public class IdentificatorTest {
@@ -50,7 +48,8 @@ public class IdentificatorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#Identificator(org.openhealthtools.mdht.uml.hl7.datatypes.II)}.
+	 * {@link org.ehealth_connector.common.Identificator#Identificator(org.openhealthtools.mdht.uml.hl7.datatypes.II)}
+	 * .
 	 */
 	@Test
 	public void testIdentificatorII() {
@@ -59,7 +58,8 @@ public class IdentificatorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#Identificator(java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Identificator#Identificator(java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testIdentificatorStringString() {
@@ -68,7 +68,8 @@ public class IdentificatorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#convertToIdentificator(org.ehealth_connector.common.Code)}.
+	 * {@link org.ehealth_connector.common.Identificator#convertToIdentificator(org.ehealth_connector.common.Code)}
+	 * .
 	 */
 	@Test
 	public void testConvertToIdentificator() {
@@ -77,7 +78,8 @@ public class IdentificatorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#getIdentificator(java.util.List, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Identificator#getIdentificator(java.util.List, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testGetIdentificator() {
@@ -85,7 +87,8 @@ public class IdentificatorTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Identificator#getIi()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#getIi()}.
 	 */
 	@Test
 	public void testGetIi() {
@@ -93,7 +96,9 @@ public class IdentificatorTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Identificator#setExtension(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#setExtension(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetGetExtension() {
@@ -101,7 +106,9 @@ public class IdentificatorTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Identificator#setRoot(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#setRoot(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetGetRoot() {

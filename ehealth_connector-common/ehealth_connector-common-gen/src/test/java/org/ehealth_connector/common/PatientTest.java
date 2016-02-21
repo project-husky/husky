@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:55:14 PM
+ * Test of class Patient
  */
 @Ignore
 public class PatientTest {
@@ -76,7 +74,8 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}.
+	 * {@link org.ehealth_connector.common.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
+	 * .
 	 */
 	@Test
 	public void testPatientRecordTarget() {
@@ -84,7 +83,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#addAddress(org.ehealth_connector.common.Address)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#addAddress(org.ehealth_connector.common.Address)}
+	 * .
 	 */
 	@Test
 	public void testAddAddress() {
@@ -92,7 +93,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#addId(org.ehealth_connector.common.Identificator)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#addId(org.ehealth_connector.common.Identificator)}
+	 * .
 	 */
 	@Test
 	public void testAddId() {
@@ -100,7 +103,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#addName(org.ehealth_connector.common.Name)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#addName(org.ehealth_connector.common.Name)}
+	 * .
 	 */
 	@Test
 	public void testAddName() {
@@ -108,7 +113,8 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#copyMdhtPatient()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#copyMdhtPatient()}.
 	 */
 	@Test
 	public void testCopyMdhtPatient() {
@@ -116,7 +122,8 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#copyMdhtPatientRole()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#copyMdhtPatientRole()}.
 	 */
 	@Test
 	public void testCopyMdhtPatientRole() {
@@ -124,7 +131,8 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#copyMdhtRecordTarget()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#copyMdhtRecordTarget()}.
 	 */
 	@Test
 	public void testCopyMdhtRecordTarget() {
@@ -142,7 +150,8 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setBirthday(java.util.Date)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setBirthday(java.util.Date)}.
 	 */
 	@Test
 	public void testSetBirthday() {
@@ -150,7 +159,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setDeceasedInd(java.lang.Boolean)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setDeceasedInd(java.lang.Boolean)}
+	 * .
 	 */
 	@Test
 	public void testSetDeceasedInd() {
@@ -158,7 +169,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setDeceasedTime(java.util.Date)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setDeceasedTime(java.util.Date)}
+	 * .
 	 */
 	@Test
 	public void testSetDeceasedTime() {
@@ -166,7 +179,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setEmployeeOccupation(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setEmployeeOccupation(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetEmployeeOccupation() {
@@ -174,7 +189,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setMothersMaidenName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setMothersMaidenName(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetMothersMaidenName() {
@@ -182,7 +199,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setMultipleBirthInd(java.lang.Boolean)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setMultipleBirthInd(java.lang.Boolean)}
+	 * .
 	 */
 	@Test
 	public void testSetMultipleBirthInd() {
@@ -190,7 +209,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setMultipleBirthOrderNumber(java.lang.Integer)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setMultipleBirthOrderNumber(java.lang.Integer)}
+	 * .
 	 */
 	@Test
 	public void testSetMultipleBirthOrderNumber() {
@@ -198,7 +219,8 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setNation(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setNation(java.lang.String)}.
 	 */
 	@Test
 	public void testSetNation() {
@@ -206,7 +228,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setReligiousAffiliation(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setReligiousAffiliation(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testSetReligiousAffiliation() {
@@ -214,7 +238,9 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#setTelecoms(org.ehealth_connector.common.Telecoms)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#setTelecoms(org.ehealth_connector.common.Telecoms)}
+	 * .
 	 */
 	@Test
 	public void testSetTelecoms() {

@@ -1,23 +1,22 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Jan 6, 2016
- * File  : ContentIdPrefix.java
- * **********************************************************************
- * ehealth_connector-cda-ch
+/*******************************************************************************
  *
- * Copyright (c) 2016
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.enums;
 
 /**
- * 
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 3:35:58 PM
- *
+ * Interface for enum classes with the method ContentIdPrefix
  */
 public interface ContentIdPrefix {
 	/**

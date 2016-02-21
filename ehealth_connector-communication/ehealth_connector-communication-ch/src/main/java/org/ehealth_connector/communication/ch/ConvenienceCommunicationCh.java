@@ -41,9 +41,7 @@ import org.openhealthtools.ihe.xds.response.XDSResponseType;
 
 /**
  * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 11:21:55 AM
+ * Implementation of ch specific convenience communication
  *
  */
 public class ConvenienceCommunicationCh extends ConvenienceCommunication {
@@ -57,7 +55,8 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	/**
 	 * Default constructor to instanciate the object
 	 * 
-	 * @param affinityDomain the affinity Domain
+	 * @param affinityDomain
+	 *            the affinity Domain
 	 */
 	public ConvenienceCommunicationCh(AffinityDomain affinityDomain) {
 		super(affinityDomain);
@@ -66,16 +65,19 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	/**
 	 * Instantiates a new convenience communication ch.
 	 *
-	 * @param affinityDomain the affinity domain
-	 * @param atnaConfigMode the atna config mode
-	 * @param documentMetadataExtractionMode the document metadata extraction mode
-	 * @param submissionSetMetadataExtractionMode the submission set metadata extraction mode
+	 * @param affinityDomain
+	 *            the affinity domain
+	 * @param atnaConfigMode
+	 *            the atna config mode
+	 * @param documentMetadataExtractionMode
+	 *            the document metadata extraction mode
+	 * @param submissionSetMetadataExtractionMode
+	 *            the submission set metadata extraction mode
 	 */
 	public ConvenienceCommunicationCh(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode,
 			SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
-		super(affinityDomain, atnaConfigMode, documentMetadataExtractionMode,
-				submissionSetMetadataExtractionMode);
+		super(affinityDomain, atnaConfigMode, documentMetadataExtractionMode, submissionSetMetadataExtractionMode);
 	}
 
 	/**
@@ -117,18 +119,17 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @param filePath
 	 *            the file path
 	 * @return the document metadata (which have to be completed)</div>
-	 * @throws FileNotFoundException exception
+	 * @throws FileNotFoundException
+	 *             exception
 	 */
-	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
-			throws FileNotFoundException {
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath) throws FileNotFoundException {
 		return addChDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
-	 * ITI Document Source actor
+	 * repository<br> IHE [ITI-41] Provide and Register Document Set – b in the
+	 * role of the IHE ITI Document Source actor
 	 * 
 	 * @param authorRole
 	 *            The AuthorRole is one of the minimal required information

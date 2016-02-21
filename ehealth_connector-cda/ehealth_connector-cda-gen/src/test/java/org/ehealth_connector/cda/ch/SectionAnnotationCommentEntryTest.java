@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Dec 15, 2015
- * File  : SectionAnnotationCommentEntryTest.java
- * **********************************************************************
- * ehealth_connector-cda-gen
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch;
 
 import static org.junit.Assert.assertEquals;
@@ -28,9 +31,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 9:07:53 AM
+ * Test of SectionAnnotationCommentEntry
  *
  */
 public class SectionAnnotationCommentEntryTest {
@@ -53,8 +54,7 @@ public class SectionAnnotationCommentEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("act/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']");
+		XPathExpression expr = xpath.compile("act/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

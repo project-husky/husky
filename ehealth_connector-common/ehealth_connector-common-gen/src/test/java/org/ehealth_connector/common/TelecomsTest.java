@@ -24,9 +24,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:59:36 PM
+ * Test of class Telecoms
  */
 public class TelecomsTest {
 
@@ -54,7 +52,9 @@ public class TelecomsTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}
+	 * .
 	 */
 	@Test
 	@Ignore

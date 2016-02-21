@@ -22,9 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 18, 2015 8:57:03 PM
+ * Test of class Performer
  */
 @Ignore
 public class PerformerTest {
@@ -39,7 +37,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#Performer()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer()}.
 	 */
 	@Test
 	public void testPerformer() {
@@ -47,7 +46,9 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name)}
+	 * .
 	 */
 	@Test
 	public void testPerformerName() {
@@ -56,7 +57,8 @@ public class PerformerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name, java.lang.String)}.
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testPerformerNameString() {
@@ -65,7 +67,8 @@ public class PerformerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.openhealthtools.mdht.uml.cda.Performer2)}.
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.openhealthtools.mdht.uml.cda.Performer2)}
+	 * .
 	 */
 	@Test
 	public void testPerformerPerformer2() {
@@ -74,7 +77,8 @@ public class PerformerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Organization)}.
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Organization)}
+	 * .
 	 */
 	@Test
 	public void testPerformerOrganization() {
@@ -82,7 +86,9 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#addAddress(org.ehealth_connector.common.Address)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#addAddress(org.ehealth_connector.common.Address)}
+	 * .
 	 */
 	@Test
 	public void testAddAddress() {
@@ -90,7 +96,9 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#addId(org.ehealth_connector.common.Identificator)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#addId(org.ehealth_connector.common.Identificator)}
+	 * .
 	 */
 	@Test
 	public void testAddId() {
@@ -98,7 +106,9 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#addName(org.ehealth_connector.common.Name)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#addName(org.ehealth_connector.common.Name)}
+	 * .
 	 */
 	@Test
 	public void testAddName() {
@@ -106,7 +116,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#copyMdhtPerfomer()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#copyMdhtPerfomer()}.
 	 */
 	@Test
 	public void testCopyMdhtPerfomer() {
@@ -114,7 +125,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#getCompleteName()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -130,7 +142,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#getGlnAsIdentificator()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#getGlnAsIdentificator()}.
 	 */
 	@Test
 	public void testGetGlnAsIdentificator() {
@@ -138,7 +151,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#setGln(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#setGln(java.lang.String)}.
 	 */
 	@Test
 	public void testSetGln() {
@@ -147,7 +161,8 @@ public class PerformerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#setOrganization(org.ehealth_connector.common.Organization)}.
+	 * {@link org.ehealth_connector.common.Performer#setOrganization(org.ehealth_connector.common.Organization)}
+	 * .
 	 */
 	@Test
 	public void testSetOrganization() {
@@ -155,7 +170,8 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#setTelecoms(org.ehealth_connector.common.Telecoms)}
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#setTelecoms(org.ehealth_connector.common.Telecoms)}
 	 * .
 	 */
 	@Test
@@ -164,7 +180,9 @@ public class PerformerTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Performer#setTimeValue(java.util.Date)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#setTimeValue(java.util.Date)}
+	 * .
 	 */
 	@Test
 	public void testSetTimeValue() {

@@ -27,13 +27,9 @@ import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ProblemConcern.
- *
- * @author roeland
- * @version 1.0
- * @since Jan 6, 2016 5:37:24 PM
+ * <div class="en">A class representing the problemconcern.</div>
+ * <div class="de">Eine Klasse die die Problembelange representiert.</div>
  */
 public class ProblemConcern extends AbstractProblemConcern {
 
@@ -46,7 +42,8 @@ public class ProblemConcern extends AbstractProblemConcern {
 	/**
 	 * Instantiates a new problem concern.
 	 *
-	 * @param problemConcernEntry the problem concern entry
+	 * @param problemConcernEntry
+	 *            the problem concern entry
 	 */
 	public ProblemConcern(ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
@@ -55,9 +52,12 @@ public class ProblemConcern extends AbstractProblemConcern {
 	/**
 	 * Instantiates a new problem concern.
 	 *
-	 * @param concern the concern
-	 * @param problemEntry the problem entry
-	 * @param concernStatus the concern status
+	 * @param concern
+	 *            the concern
+	 * @param problemEntry
+	 *            the problem entry
+	 * @param concernStatus
+	 *            the concern status
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
@@ -66,11 +66,16 @@ public class ProblemConcern extends AbstractProblemConcern {
 	/**
 	 * Instantiates a new problem concern.
 	 *
-	 * @param concern the concern
-	 * @param problemEntry the problem entry
-	 * @param concernStatus the concern status
-	 * @param start the start
-	 * @param end the end
+	 * @param concern
+	 *            the concern
+	 * @param problemEntry
+	 *            the problem entry
+	 * @param concernStatus
+	 *            the concern status
+	 * @param start
+	 *            the start
+	 * @param end
+	 *            the end
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		super(concern, problemEntry, concernStatus, start, end);

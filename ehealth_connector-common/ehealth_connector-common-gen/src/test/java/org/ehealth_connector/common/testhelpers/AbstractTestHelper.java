@@ -1,16 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Sep 7, 2015
- * File  : TestHelper.java
- * **********************************************************************
- * ehealth_connector-common
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
-
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.common.testhelpers;
 
 import java.util.Random;
@@ -25,9 +27,7 @@ import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Sep 7, 2015 7:14:35 AM
+ * Helper Class for Tests
  */
 public abstract class AbstractTestHelper {
 
@@ -44,21 +44,22 @@ public abstract class AbstractTestHelper {
 		return new String(text);
 	}
 
-	//	public static boolean isEqual(AllergyProblem p1, AllergyProblem p2) {
-	//		if (!isEqual(p1.getCode(), p2.getCode()))
-	//			return false;
-	//		if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
-	//			return false;
-	//		if (p1.getStartDate() != null && !p1.getStartDate().equals(p2.getStartDate()))
-	//			return false;
-	//		if (!isEqual(p1.getId(), p2.getId()))
-	//			return false;
-	//		for (int i = 0; i < p1.getValues().size(); i++) {
-	//			if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
-	//				return false;
-	//		}
-	//		return true;
-	//	}
+	// public static boolean isEqual(AllergyProblem p1, AllergyProblem p2) {
+	// if (!isEqual(p1.getCode(), p2.getCode()))
+	// return false;
+	// if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
+	// return false;
+	// if (p1.getStartDate() != null &&
+	// !p1.getStartDate().equals(p2.getStartDate()))
+	// return false;
+	// if (!isEqual(p1.getId(), p2.getId()))
+	// return false;
+	// for (int i = 0; i < p1.getValues().size(); i++) {
+	// if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
+	// return false;
+	// }
+	// return true;
+	// }
 
 	public static boolean isEqual(Author a1, Author a2) {
 		if (!a1.getGln().equals(a2.getGln()))
@@ -95,17 +96,19 @@ public abstract class AbstractTestHelper {
 		return true;
 	}
 
-	//	public static boolean isEqual(Consumable c1, Consumable c2) {
-	//		if (!isEqual(c1.getManufacturedMaterialCode(), c2.getManufacturedMaterialCode()))
-	//			return false;
-	//		if (!isEqual(c1.getManufacturedProductId(), c2.getManufacturedProductId()))
-	//			return false;
-	//		if (!c1.getTradeName().equals(c2.getTradeName()))
-	//			return false;
-	//		if (!isEqual(c1.getWhoAtcCode(), c2.getWhoAtcCode()))
-	//			return false;
-	//		return true;
-	//	}
+	// public static boolean isEqual(Consumable c1, Consumable c2) {
+	// if (!isEqual(c1.getManufacturedMaterialCode(),
+	// c2.getManufacturedMaterialCode()))
+	// return false;
+	// if (!isEqual(c1.getManufacturedProductId(),
+	// c2.getManufacturedProductId()))
+	// return false;
+	// if (!c1.getTradeName().equals(c2.getTradeName()))
+	// return false;
+	// if (!isEqual(c1.getWhoAtcCode(), c2.getWhoAtcCode()))
+	// return false;
+	// return true;
+	// }
 
 	public static boolean isEqual(Identificator i1, Identificator i2) {
 		if (!i1.getRoot().equals(i2.getRoot()))
@@ -137,21 +140,22 @@ public abstract class AbstractTestHelper {
 		return true;
 	}
 
-	//	public static boolean isEqual(Problem p1, Problem p2) {
-	//		if (!isEqual(p1.getCode(), p2.getCode()))
-	//			return false;
-	//		if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
-	//			return false;
-	//		if (p1.getStartDate() != null && !p1.getStartDate().equals(p2.getStartDate()))
-	//			return false;
-	//		if (!isEqual(p1.getId(), p2.getId()))
-	//			return false;
-	//		for (int i = 0; i < p1.getValues().size(); i++) {
-	//			if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
-	//				return false;
-	//		}
-	//		return true;
-	//	}
+	// public static boolean isEqual(Problem p1, Problem p2) {
+	// if (!isEqual(p1.getCode(), p2.getCode()))
+	// return false;
+	// if (p1.getEndDate() != null && !p1.getEndDate().equals(p2.getEndDate()))
+	// return false;
+	// if (p1.getStartDate() != null &&
+	// !p1.getStartDate().equals(p2.getStartDate()))
+	// return false;
+	// if (!isEqual(p1.getId(), p2.getId()))
+	// return false;
+	// for (int i = 0; i < p1.getValues().size(); i++) {
+	// if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
+	// return false;
+	// }
+	// return true;
+	// }
 
 	public static boolean isEqual(Patient p1, Patient p2) {
 		if (!isEqual(p1.getName(), p2.getName()))
@@ -212,102 +216,104 @@ public abstract class AbstractTestHelper {
 		return true;
 	}
 
-	//	public Address createAddress1() {
-	//		Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen", AddressUse.BUSINESS);
-	//		return a;
-	//	}
+	// public Address createAddress1() {
+	// Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen",
+	// AddressUse.BUSINESS);
+	// return a;
+	// }
 	//
-	//	public Author createAuthor1() {
-	//		Author a = new Author(createName1(), numS1);
-	//		return a;
-	//	}
+	// public Author createAuthor1() {
+	// Author a = new Author(createName1(), numS1);
+	// return a;
+	// }
 	//
-	//	public Author createAuthor2() {
-	//		Author a = new Author(createName2(), numS2);
-	//		return a;
-	//	}
+	// public Author createAuthor2() {
+	// Author a = new Author(createName2(), numS2);
+	// return a;
+	// }
 	//
-	//	// Create Test Objects
-	//	public Code createCode1() {
-	//		Code code = new Code(ts1, ts2, ts3, ts4);
-	//		return code;
-	//	}
+	// // Create Test Objects
+	// public Code createCode1() {
+	// Code code = new Code(ts1, ts2, ts3, ts4);
+	// return code;
+	// }
 	//
-	//	public Code createCode2() {
-	//		Code code = new Code(ts5, ts4, ts3, ts2);
-	//		return code;
-	//	}
+	// public Code createCode2() {
+	// Code code = new Code(ts5, ts4, ts3, ts2);
+	// return code;
+	// }
 	//
-	//	public Code createGtinCode() {
-	//		Code code = new Code(CodeSystems.GTIN, ts3);
-	//		return code;
-	//	}
+	// public Code createGtinCode() {
+	// Code code = new Code(CodeSystems.GTIN, ts3);
+	// return code;
+	// }
 	//
-	//	public Identificator createIdentificator1() {
-	//		Identificator id = new Identificator(CodeSystems.GLN, numS1);
-	//		return id;
-	//	}
+	// public Identificator createIdentificator1() {
+	// Identificator id = new Identificator(CodeSystems.GLN, numS1);
+	// return id;
+	// }
 	//
-	//	public Identificator createIdentificator2() {
-	//		Identificator id = new Identificator(CodeSystems.ICD10, numS2);
-	//		return id;
-	//	}
+	// public Identificator createIdentificator2() {
+	// Identificator id = new Identificator(CodeSystems.ICD10, numS2);
+	// return id;
+	// }
 	//
-	//	public Name createName1() {
-	//		Name n = new Name(ts1, ts2, ts3, ts4);
-	//		return n;
-	//	}
+	// public Name createName1() {
+	// Name n = new Name(ts1, ts2, ts3, ts4);
+	// return n;
+	// }
 	//
-	//	public Name createName2() {
-	//		Name n = new Name(ts5, ts4, ts3, ts2);
-	//		return n;
-	//	}
+	// public Name createName2() {
+	// Name n = new Name(ts5, ts4, ts3, ts2);
+	// return n;
+	// }
 	//
-	//	public Organization createOrganization1() {
-	//		Organization o = new Organization(ts1, numS1);
-	//		o.setTelecoms(telecoms1);
-	//		telecoms1.addEMail("testMail", AddressUse.BUSINESS);
-	//		telecoms1.addPhone(numS1, AddressUse.PRIVATE);
-	//		return o;
-	//	}
+	// public Organization createOrganization1() {
+	// Organization o = new Organization(ts1, numS1);
+	// o.setTelecoms(telecoms1);
+	// telecoms1.addEMail("testMail", AddressUse.BUSINESS);
+	// telecoms1.addPhone(numS1, AddressUse.PRIVATE);
+	// return o;
+	// }
 	//
-	//	public Performer createPerformer1() {
-	//		Performer p = new Performer(createName1(), numS1);
-	//		return p;
-	//	}
+	// public Performer createPerformer1() {
+	// Performer p = new Performer(createName1(), numS1);
+	// return p;
+	// }
 	//
-	//	public Performer createPerformer2() {
-	//		Performer p = new Performer(createName2(), numS2);
-	//		return p;
-	//	}
+	// public Performer createPerformer2() {
+	// Performer p = new Performer(createName2(), numS2);
+	// return p;
+	// }
 	//
-	//	public Telecoms createTelecoms1() {
-	//		Telecoms t = new Telecoms();
-	//		t.addEMail(telS1, AddressUse.BUSINESS);
-	//		t.addEMail(telS2, AddressUse.PRIVATE);
-	//		t.addFax(telS1, AddressUse.BUSINESS);
-	//		t.addFax(telS2, AddressUse.PRIVATE);
-	//		t.addPhone(telS1, AddressUse.BUSINESS);
-	//		t.addPhone(telS2, AddressUse.PRIVATE);
-	//		return t;
-	//	}
+	// public Telecoms createTelecoms1() {
+	// Telecoms t = new Telecoms();
+	// t.addEMail(telS1, AddressUse.BUSINESS);
+	// t.addEMail(telS2, AddressUse.PRIVATE);
+	// t.addFax(telS1, AddressUse.BUSINESS);
+	// t.addFax(telS2, AddressUse.PRIVATE);
+	// t.addPhone(telS1, AddressUse.BUSINESS);
+	// t.addPhone(telS2, AddressUse.PRIVATE);
+	// return t;
+	// }
 	//
-	//	protected Value createValue1() {
-	//		Value value = new Value("500", "ml");
-	//		return value;
-	//	}
+	// protected Value createValue1() {
+	// Value value = new Value("500", "ml");
+	// return value;
+	// }
 	//
-	//	protected Value createValue2() {
-	//		Value value = new Value(ts1, ts2);
-	//		return value;
-	//	}
+	// protected Value createValue2() {
+	// Value value = new Value(ts1, ts2);
+	// return value;
+	// }
 	//
-	//	public Date createStartDate() {
-	//		return DateUtil.date("15.12.2014");
-	//	}
+	// public Date createStartDate() {
+	// return DateUtil.date("15.12.2014");
+	// }
 	//
-	//	public Patient createPatient() {
-	//		return new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
-	//	}
+	// public Patient createPatient() {
+	// return new Patient(createName1(), AdministrativeGender.FEMALE,
+	// createStartDate());
+	// }
 
 }

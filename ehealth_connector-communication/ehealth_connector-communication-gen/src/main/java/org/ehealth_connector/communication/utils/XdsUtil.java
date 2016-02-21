@@ -22,9 +22,7 @@ import org.openhealthtools.ihe.xds.document.XDSDocument;
 
 /**
  * 
- * @author roeland
- * @version 1.0
- * @since Dec 15, 2015 11:54:47 AM
+ * xds util class
  *
  */
 public class XdsUtil {
@@ -40,24 +38,23 @@ public class XdsUtil {
 	 * Converts a list of eHC DateTimeRange to a list of OHT DateTimeRange.
 	 * 
 	 * @param dtr
-	 *          the OHT DateTimeRange
+	 *            the OHT DateTimeRange
 	 * @return the DateTimeRange Array
 	 */
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(
-		DateTimeRange[] dtr) {
-	if (dtr == null)
-		return null;
-	else {
-		final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(DateTimeRange[] dtr) {
+		if (dtr == null)
+			return null;
+		else {
+			final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
 
-		int i = 0;
-		for (final DateTimeRange dt : dtr) {
-		dtrArray[i] = dt.getOhtDateTimeRange();
-		i++;
+			int i = 0;
+			for (final DateTimeRange dt : dtr) {
+				dtrArray[i] = dt.getOhtDateTimeRange();
+				i++;
+			}
+
+			return dtrArray;
 		}
-
-		return dtrArray;
-	}
 	}
 
 	/**
@@ -65,29 +62,29 @@ public class XdsUtil {
 	 * scheme
 	 * 
 	 * @param xdsDoc
-	 *          the OHT XDSDocument
+	 *            the OHT XDSDocument
 	 * @param docNr
-	 *          the number of the document
+	 *            the number of the document
 	 * @return the name of the document
 	 */
 	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
-	// compile the path and filename for the zip file
-	String fileName = "DOC";
+		// compile the path and filename for the zip file
+		String fileName = "DOC";
 
-	// Fix DocumentDescriptor problem...
-	DocumentDescriptor dd = xdsDoc.getDescriptor();
-	if (dd.toString().startsWith("UNKNOWN!")) {
-		String mimeType = dd.toString().replace("UNKNOWN!", "");
-		mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
-		dd = DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
-	}
-	// if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
-	// dd = DocumentDescriptor.CDA_R2;
+		// Fix DocumentDescriptor problem...
+		DocumentDescriptor dd = xdsDoc.getDescriptor();
+		if (dd.toString().startsWith("UNKNOWN!")) {
+			String mimeType = dd.toString().replace("UNKNOWN!", "");
+			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
+			dd = DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
+		}
+		// if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
+		// dd = DocumentDescriptor.CDA_R2;
 
-	final String fileNameExtension = DocDescriptor.getFileExtension(dd);
-	fileName = fileName.concat(String.format("%5s", docNr).replace(' ', '0'));
-	fileName = fileName.concat("." + fileNameExtension.toUpperCase());
-	return fileName;
+		final String fileNameExtension = DocDescriptor.getFileExtension(dd);
+		fileName = fileName.concat(String.format("%5s", docNr).replace(' ', '0'));
+		fileName = fileName.concat("." + fileNameExtension.toUpperCase());
+		return fileName;
 	}
 
 	/**
@@ -95,13 +92,13 @@ public class XdsUtil {
 	 * naming scheme
 	 * 
 	 * @param xdsDoc
-	 *          the OHT XDSDocument
+	 *            the OHT XDSDocument
 	 * @param docNr
-	 *          the number of the document
+	 *            the number of the document
 	 * @return the path and name of the document
 	 */
 	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
-	final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
-	return filePath;
+		final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
+		return filePath;
 	}
 }

@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Sep 7, 2015
- * File  : GetDocumentsQueryTest.java
- * **********************************************************************
- * ehealth_connector-communication
+/*******************************************************************************
  *
- * Copyright (c) 2015
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
 
 package org.ehealth_connector.communication.xd.storedquery;
 
@@ -22,9 +25,7 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryExce
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Sep 7, 2015 6:28:46 AM
+ * Test of class GetDocumentsQuery
  */
 public class GetDocumentsQueryTest extends XdsTestUtils {
 

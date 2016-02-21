@@ -25,9 +25,8 @@ import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * @author roeland
- * @version 1.0
- * @since Jun 16, 2015 6:34:53 AM
+ * <div class="en">A util class with helper functions.</div>
+ * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaUtil {
 
@@ -35,9 +34,9 @@ public abstract class CdaUtil {
 	 * Adds the copy of a given section to a given structured body
 	 *
 	 * @param sb
-	 *          the StructuredBody
+	 *            the StructuredBody
 	 * @param s
-	 *          the Section
+	 *            the Section
 	 */
 	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
 		if ((sb != null) && (s != null)) {
@@ -47,16 +46,14 @@ public abstract class CdaUtil {
 		}
 	}
 
-	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
-			EList<EntryRelationship> entryRelationships) {
-		int erNb = entryRelationships.size() - 1;
+	public static void setEntryRelationshipCommentInversionIdAndTypeCode(EList<EntryRelationship> entryRelationships) {
+		final int erNb = entryRelationships.size() - 1;
 		entryRelationships.get(erNb).setInversionInd(true);
 		entryRelationships.get(erNb).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 	}
 
-	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
-			x_ActRelationshipEntryRelationship typeCode) {
-		int nb = erList.size() - 1;
+	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList, x_ActRelationshipEntryRelationship typeCode) {
+		final int nb = erList.size() - 1;
 		erList.get(nb).setTypeCode(typeCode);
 	}
 
