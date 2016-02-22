@@ -2,7 +2,6 @@ package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum VitalSignCodes {
 	//@formatter:off
@@ -50,16 +49,10 @@ public enum VitalSignCodes {
 		return ret;
 	}
 
-	public Code getCode(CS languageCode) {
-		Code ret = new Code(CodeSystems.LOINC, loinc);
-		ret.setDisplayName(getDisplayName(languageCode));
-		return ret;
-	}
-
-	public String getDisplayName(CS lc) {
+	public String getDisplayName(LanguageCode lc) {
 		String lcStr = LanguageCode.ENGLISH.getCodeValue();
 		if (lc != null) {
-			lcStr = lc.getCode().toLowerCase();
+			lcStr = lc.getCodeValue().toLowerCase();
 		}
 		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
 			return getDisplayNameDe();

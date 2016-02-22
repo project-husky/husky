@@ -2,7 +2,6 @@ package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
@@ -73,17 +72,17 @@ public enum ActSite {
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ActSite ";
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div> <div
+	 * class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1052";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div> <div
+	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -103,7 +102,7 @@ public enum ActSite {
 	 *
 	 *
 	 * @param enumName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -125,7 +124,7 @@ public enum ActSite {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -146,8 +145,8 @@ public enum ActSite {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div> <div
+	 * class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
@@ -165,10 +164,10 @@ public enum ActSite {
 	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
+	 * <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
@@ -182,8 +181,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
+	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -196,8 +195,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
+	 * class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -227,8 +226,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div> <div
+	 * class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -247,15 +246,15 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the display name for the language code.</div>
-	 * <div class="de">Liefert den display name für den language code.</div>
+	 * <div class="en">Gets the display name for the language code.</div> <div
+	 * class="de">Liefert den display name für den language code.</div>
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
-	public String getDisplayName(CS lc) {
+	public String getDisplayName(LanguageCode lc) {
 		String lcStr = LanguageCode.ENGLISH.getCodeValue();
 		if (lc != null) {
-			lcStr = lc.getCode().toLowerCase();
+			lcStr = lc.getCodeValue().toLowerCase();
 		}
 		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
 			return getDisplayNameDe();
