@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ihe.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Participant;
 import org.ehealth_connector.common.Specimen;
@@ -35,7 +36,8 @@ public class LaboratoryIsolateOrganizer
 		this.addParticipant(p);
 	}
 
-	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
+	public void addLaboratoryBatteryOrganizer(
+			AbstractLaboratoryBatteryOrganizer labBatteryOrganizer) {
 		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
 	}
 

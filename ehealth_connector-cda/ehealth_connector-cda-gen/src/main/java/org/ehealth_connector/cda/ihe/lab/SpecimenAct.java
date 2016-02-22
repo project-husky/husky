@@ -1,19 +1,18 @@
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
-public class SpecimenAct extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct> {
+public class SpecimenAct extends AbstractSpecimenAct {
 
 	protected SpecimenAct() {
-		super(LABFactory.eINSTANCE.createSpecimenAct().init());
+		super();
 	}
 
 	protected SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
 		super(mdht);
 	}
 
+	@Override
 	protected Code getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
 			return new Code(getMdht().getStatusCode());
@@ -21,6 +20,7 @@ public class SpecimenAct extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe
 		return null;
 	}
 
+	@Override
 	protected void setStatusCode(Code code) {
 		getMdht().setStatusCode(code.getCS());
 	}

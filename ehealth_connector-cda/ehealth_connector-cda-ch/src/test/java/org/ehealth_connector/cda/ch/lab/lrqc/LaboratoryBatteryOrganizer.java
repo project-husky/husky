@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
+import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
 
-public class LaboratoryBatteryOrganizer
-		extends org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer {
+public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer() {
 		super();
 	}

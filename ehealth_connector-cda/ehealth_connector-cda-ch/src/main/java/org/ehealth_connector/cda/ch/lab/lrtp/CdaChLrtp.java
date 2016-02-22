@@ -5,7 +5,6 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
-import org.ehealth_connector.cda.ch.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LrtpSections;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
@@ -39,9 +38,10 @@ public class CdaChLrtp
 	protected CdaChLrtp(Code code, LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode);
 		super.initCda();
-		LaboratorySpecialtySection specialtySection = new LaboratorySpecialtySection(code,
-				languageCode);
-		this.getDoc().addSection(specialtySection.getMdht());
+		// LaboratorySpecialtySection specialtySection = new
+		// LaboratorySpecialtySection(code,
+		// languageCode);
+		// this.getDoc().addSection(specialtySection.getMdht());
 	}
 
 	// Internal Convenience function to initialize a Vital Signs or BloodGroup

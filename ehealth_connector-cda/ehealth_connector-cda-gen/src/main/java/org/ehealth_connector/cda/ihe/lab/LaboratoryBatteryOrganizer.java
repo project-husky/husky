@@ -3,23 +3,22 @@ package org.ehealth_connector.cda.ihe.lab;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
-public class LaboratoryBatteryOrganizer extends
-		MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer> {
+public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
 
 	public LaboratoryBatteryOrganizer() {
 		super(LABFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init());
 		setStatusCode(StatusCode.COMPLETED);
 	}
 
-	protected LaboratoryBatteryOrganizer(
+	public LaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
 	}
 
+	@Override
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
 		// getMdht().getLaboratoryObservations().add(observation.copy());
 		getMdht().addObservation(observation.copy());

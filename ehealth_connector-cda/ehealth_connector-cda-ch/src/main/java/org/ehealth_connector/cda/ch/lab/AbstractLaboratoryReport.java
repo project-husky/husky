@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 
 public abstract class AbstractLaboratoryReport<EClinicalDocument> extends AbstractCdaCh<CDACH> {
@@ -32,7 +33,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument> extends Abstra
 	// LRTP: 1
 	// LRQC: 1..*
 	// Daher protected. In den jeweiligen Templates verfeinern.
-	protected void addLaboratorySpecialtySection(LaboratorySpecialtySection section) {
+	protected void addLaboratorySpecialtySection(AbstractLaboratorySpecialtySection section) {
 		getMdht().addSection(section.getMdht());
 	}
 

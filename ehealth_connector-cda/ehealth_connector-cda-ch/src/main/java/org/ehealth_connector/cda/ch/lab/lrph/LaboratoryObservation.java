@@ -6,6 +6,15 @@ import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
+	public LaboratoryObservation() {
+		super();
+	}
+
+	public LaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
+		super(mdht);
+	}
+
 	public org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc getCodeAsEnum() {
 		return null;
 	}

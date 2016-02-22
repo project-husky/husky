@@ -5,6 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.NotificationOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation;
+import org.ehealth_connector.cda.ch.lab.lrph.SpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;

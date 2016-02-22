@@ -22,9 +22,8 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createVitalSignsSection().init());
 		this.languageCode = languageCode;
-		this.getMdht().setTitle(
-				Util.st(SectionsEDES.CODED_VITAL_SIGNS.getSectionTitle((languageCode != null ? languageCode
-						: null))));
+		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
+				.getSectionTitle((languageCode != null ? languageCode : null))));
 	}
 
 	/**
@@ -38,13 +37,12 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	}
 
 	@Override
-	protected Identificator getUuid() {
-		return CdaChUtil.createUuidEdes(null);
-	}
-
-	@Override
 	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
 		return new org.ehealth_connector.cda.ch.edes.VitalSignObservation(mdht);
 	}
 
+	@Override
+	protected Identificator getUuid() {
+		return CdaChUtil.createUuidEdes(null);
+	}
 }

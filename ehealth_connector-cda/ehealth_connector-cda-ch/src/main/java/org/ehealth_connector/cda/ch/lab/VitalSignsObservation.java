@@ -9,7 +9,6 @@ public class VitalSignsObservation extends VitalSignObservation {
 	// verwendet werden (siehe Kapitel 5.6.5 Liste der Vitalzeichen“ auf Seite 52)
 	public VitalSignList getCodeEnum() {
 		return null;
-
 	}
 
 	public void setCode(VitalSignList code) {

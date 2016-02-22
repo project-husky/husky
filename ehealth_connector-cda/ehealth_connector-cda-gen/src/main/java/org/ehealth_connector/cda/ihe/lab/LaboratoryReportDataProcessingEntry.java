@@ -1,11 +1,9 @@
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.cda.MdhtEntryFacade;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
-public class LaboratoryReportDataProcessingEntry extends
-		MdhtEntryFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry> {
-
+public class LaboratoryReportDataProcessingEntry
+		extends AbstractLaboratoryReportDataProcessingEntry {
 	public LaboratoryReportDataProcessingEntry() {
 		super(LABFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init());
 	}
@@ -31,7 +29,7 @@ public class LaboratoryReportDataProcessingEntry extends
 		return null;
 	}
 
-	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.SpecimenAct specimenAct) {
+	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
 		getMdht().setAct(specimenAct.getMdht());
 	}
 }

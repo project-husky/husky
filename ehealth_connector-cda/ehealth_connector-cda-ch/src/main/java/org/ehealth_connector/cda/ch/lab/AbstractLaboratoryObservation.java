@@ -18,6 +18,12 @@ public abstract class AbstractLaboratoryObservation
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
+	public AbstractLaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
+		super(mdht);
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
+	}
+
 	/**
 	 * Add a comment entry.
 	 *
