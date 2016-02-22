@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.edes;
 import java.util.Collections;
 import java.util.List;
 
+import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -94,7 +95,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *
 	 * @return List with coded vital sign observations
 	 */
-	public List<VitalSignObservation> getCodedVitalSigns() {
+	public List<AbstractVitalSignObservation> getCodedVitalSigns() {
 		if (mCodedVitalSigns == null) {
 			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
 			if (section == null) {
