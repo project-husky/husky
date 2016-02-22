@@ -30,8 +30,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="en">A util class with helper functions.</div> <div
- * class="de">Eine Klasse mit Hilfsfunktionen.</div>
+ * <div class="en">A util class with helper functions.</div>
+ * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtil {
 
@@ -40,7 +40,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * a generated extension.</div>
 	 *
 	 * @param id
-	 * <br>
+	 *          <br>
 	 *          <div class="en"> the id</div>
 	 * @return the ii
 	 */
@@ -60,7 +60,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * a generated extension.</div>
 	 *
 	 * @param id
-	 * <br>
+	 *          <br>
 	 *          <div class="en"> the id</div>
 	 * @return the ii
 	 */
@@ -83,7 +83,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * generated extension.</div>
 	 *
 	 * @param id
-	 * <br>
+	 *          <br>
 	 *          <div class="en"> the id</div>
 	 * @return the ii
 	 */

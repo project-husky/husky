@@ -8,11 +8,37 @@ import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Identificator;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
+
+	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.3.1";
+
+	/**
+	 * <div class="en">Creates a UUID for LRPH documents with the LRPH root ID and
+	 * a generated extension.</div>
+	 *
+	 * @param id
+	 *          <br>
+	 *          <div class="en"> the id</div>
+	 * @return the ii
+	 */
+	protected static Identificator createUuidLrph(String id) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(OID_MAIN);
+		if (id == null) {
+			ii.setExtension(UUID.generate());
+		} else {
+			ii.setExtension(id);
+		}
+		return new Identificator(ii);
+	}
 
 	public CdaChLrph() {
 		this(LanguageCode.ENGLISH);
