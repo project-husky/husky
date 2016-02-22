@@ -24,6 +24,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -342,6 +343,40 @@ public class Code {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * <div class="en">Gets the code as MDHT CE Object</div>
+	 * <div class="de">Liefert das MDHT CD Objekt</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the code as CE object
+	 */
+	public CS getCS() {
+		final CS ce = DatatypesFactory.eINSTANCE.createCS();
+		final CD mCD2 = EcoreUtil.copy(mCD);
+		if (mCD2.getCodeSystem() != null) {
+			ce.setCodeSystem(mCD2.getCodeSystem());
+		}
+		if (mCD2.getCode() != null) {
+			ce.setCode(mCD2.getCode());
+		}
+		if (mCD2.getCodeSystemName() != null) {
+			ce.setCodeSystemName(mCD2.getCodeSystemName());
+		}
+		if (mCD2.getDisplayName() != null) {
+			ce.setDisplayName(mCD2.getDisplayName());
+		}
+		if (mCD2.getCodeSystemVersion() != null) {
+			ce.setCodeSystemVersion(mCD2.getCodeSystemVersion());
+		}
+		if (mCD2.isNullFlavorDefined()) {
+			ce.setNullFlavor(mCD2.getNullFlavor());
+		}
+		if (mCD2.getOriginalText() != null) {
+			ce.setOriginalText(mCD2.getOriginalText());
+		}
+		return ce;
 	}
 
 	/**

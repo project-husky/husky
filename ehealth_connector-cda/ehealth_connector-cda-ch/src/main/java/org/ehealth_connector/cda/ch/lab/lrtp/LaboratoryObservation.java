@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.common.ReferenceRange;
 import org.openhealthtools.mdht.uml.cda.Observation;

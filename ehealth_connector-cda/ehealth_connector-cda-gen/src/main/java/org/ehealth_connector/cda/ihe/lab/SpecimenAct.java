@@ -3,7 +3,6 @@ package org.ehealth_connector.cda.ihe.lab;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public class SpecimenAct extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct> {
 
@@ -23,7 +22,7 @@ public class SpecimenAct extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe
 	}
 
 	protected void setStatusCode(Code code) {
-		getMdht().setStatusCode((CS) code.getCE());
+		getMdht().setStatusCode(code.getCS());
 	}
 
 }

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.ReferenceRange;

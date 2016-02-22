@@ -68,6 +68,7 @@ public class LaboratorySpecialtySection
 	}
 
 	public void setLaboratoryReportDataProcessingEntry(LaboratoryReportDataProcessingEntry entry) {
+		getMdht().getEntries().clear();
 		getMdht().getEntries().add(entry.getMdht());
 	}
 

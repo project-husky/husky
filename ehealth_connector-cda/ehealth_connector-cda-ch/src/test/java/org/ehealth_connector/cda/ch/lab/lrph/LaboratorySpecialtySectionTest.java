@@ -22,6 +22,7 @@ public class LaboratorySpecialtySectionTest extends TestUtils {
 		lss.setCode(code1);
 		assertTrue(code1.equals(lss.getCode()));
 
+		// LaboratoryReportDataProcessingEntry
 		org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry lrdpe = new org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry();
 		lss.setLaboratoryReportDataProcessingEntry(lrdpe);
 		assertNotNull(lss.getLaboratoryReportDataProcessingEntry());

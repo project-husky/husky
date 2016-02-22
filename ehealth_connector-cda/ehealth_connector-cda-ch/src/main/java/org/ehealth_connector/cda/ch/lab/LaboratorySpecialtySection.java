@@ -6,6 +6,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Entry;
 
+//TODO Check if this class is really needed (also in den MDHT Model)
 public class LaboratorySpecialtySection
 		extends org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection {
 
@@ -34,6 +35,7 @@ public class LaboratorySpecialtySection
 		super(mdht);
 	}
 
+	@Override
 	public LaboratoryReportDataProcessingEntry getLaboratoryReportDataProcessingEntry() {
 		if (getMdht() != null && getMdht().getEntries() != null && !getMdht().getEntries().isEmpty()) {
 			return (LaboratoryReportDataProcessingEntry) getMdht().getEntries().get(0);

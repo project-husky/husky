@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab.lrtp;
+package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.enums.NullFlavor;
@@ -15,12 +15,12 @@ public class SoasInfoEntry
 			"001");
 	public static final Code PREVIOUS_TX = new Code("2.16.756.5.30.1.129.1.1.2", "002");
 
-	protected SoasInfoEntry() {
+	public SoasInfoEntry() {
 		super(CHFactory.eINSTANCE.createSoasInfoEntry().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH.LRTP.SOASInfo");
 	}
 
-	protected SoasInfoEntry(org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry mdht) {
+	public SoasInfoEntry(org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry mdht) {
 		super(mdht);
 	}
 

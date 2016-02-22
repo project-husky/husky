@@ -2,24 +2,20 @@ package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 
-public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
-		extends AbstractCdaCh<EClinicalDocument> {
+public abstract class AbstractLaboratoryReport<EClinicalDocument> extends AbstractCdaCh<CDACH> {
 
-	protected AbstractLaboratoryReport(EClinicalDocument doc) {
+	protected AbstractLaboratoryReport(CDACH doc) {
 		this(doc, null, null, null);
 	}
 
-	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode) {
+	protected AbstractLaboratoryReport(CDACH doc, LanguageCode languageCode) {
 		this(doc, languageCode, null, null);
 	}
 
-	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
-			String styleSheet, String css) {
+	protected AbstractLaboratoryReport(CDACH doc, LanguageCode languageCode, String styleSheet,
+			String css) {
 		super(doc, styleSheet, css);
 		// If the language code is null use default ENGLISH
 		if (languageCode == null) {
@@ -27,20 +23,20 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		} else {
 			this.setLanguageCode(languageCode);
 		}
+		// TODO Check if this work as expected
 		super.initCda();
-		setTitle(getDocumentAndSpecialitySectionTitle());
+		setTitle(getSpecialitySectionTitle());
 	}
 
-	protected org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection createSpecialtySection(
-			Code code) {
-		org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection section = LABFactory.eINSTANCE
-				.createLaboratorySpecialtySection().init();
-		section.setTitle(Util.st(getDocumentAndSpecialitySectionTitle()));
-		section.setCode(code.getCE());
-		return section;
+	// LRPH: 1
+	// LRTP: 1
+	// LRQC: 1..*
+	// Daher protected. In den jeweiligen Templates verfeinern.
+	protected void addLaboratorySpecialtySection(LaboratorySpecialtySection section) {
+		getMdht().addSection(section.getMdht());
 	}
 
-	private String getDocumentAndSpecialitySectionTitle() {
+	private String getSpecialitySectionTitle() {
 		switch (this.getLanguageCode()) {
 		case FRENCH:
 			return ("Rapport de laboratoire");

@@ -1,10 +1,11 @@
-package org.ehealth_connector.cda.ch.lab.lrph;
+package org.ehealth_connector.cda.ch.lab;
 
 import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.ch.lab.OutbreakIdentificationObservation;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;

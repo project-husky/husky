@@ -444,4 +444,14 @@ public class TestUtils {
 		else
 			return false;
 	}
+
+	public boolean xExistTemplateId(Document document, String templateIdRoot,
+			String templateIdExtension) throws XPathExpressionException {
+		if (templateIdExtension == null) {
+			return xExist(document, "//templateId[@root='" + templateIdRoot + "']");
+		} else {
+			return xExist(document, "//templateId[@root='" + templateIdRoot + "' and @extension='"
+					+ templateIdExtension + "']");
+		}
+	}
 }

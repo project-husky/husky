@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab.lrph;
+package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.common.enums.StatusCode;

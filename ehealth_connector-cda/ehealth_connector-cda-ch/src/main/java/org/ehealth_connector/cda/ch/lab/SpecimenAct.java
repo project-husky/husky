@@ -27,6 +27,10 @@ public class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.SpecimenAct {
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
+	public void addLaboratoryIsolateOrganizer(LaboratoryIsolateOrganizer labIsolateOrganizer) {
+		getMdht().addOrganizer(labIsolateOrganizer.copy());
+	}
+
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
 		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
 		if (getMdht() != null && getMdht().getLaboratoryBatteryOrganizers() != null) {
@@ -40,8 +44,53 @@ public class SpecimenAct extends org.ehealth_connector.cda.ihe.lab.SpecimenAct {
 		return list;
 	}
 
+	public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizers() {
+		if (getMdht() != null && getMdht().getLaboratoryIsolateOrganizers() != null) {
+			ArrayList<LaboratoryIsolateOrganizer> laboratoryOrganizerList = new ArrayList<LaboratoryIsolateOrganizer>();
+			for (Organizer organizer : this.getMdht().getOrganizers()) {
+				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) {
+					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer iheLabIsolateOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) organizer;
+					laboratoryOrganizerList.add(new LaboratoryIsolateOrganizer(iheLabIsolateOrganizer));
+				}
+			}
+			return laboratoryOrganizerList;
+		}
+		return null;
+	}
+
+	public org.ehealth_connector.cda.ch.lab.NotificationOrganizer getNotificationOrganizer() {
+		return new org.ehealth_connector.cda.ch.lab.NotificationOrganizer(
+				getMdht().getNotificationOrganizers().get(0));
+	}
+
+	public OutbreakIdentificationObservation getOutbreakIdentification() {
+		return this.getNotificationOrganizer().getOutbreakIdentificationObservation();
+	}
+
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
 		return new SpecimenCollectionEntry(getMdht().getSpecimenCollections().get(0));
+	}
+
+	public void setNotificationOrganizer(
+			org.ehealth_connector.cda.ch.lab.NotificationOrganizer notificationOrganizer) {
+		// Check if the element already exist, if so, replace it, if not add it
+		boolean added = false;
+		for (Organizer o : getMdht().getOrganizers()) {
+			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.NotificationOrganizer) {
+				o = notificationOrganizer.copy();
+				added = true;
+			}
+		}
+		if (added == false) {
+			getMdht().addOrganizer(notificationOrganizer.copy());
+		}
+	}
+
+	// Convenience Method that creates the NotificationOrganizer automatically
+	public void setOutbreakIdentification(
+			org.ehealth_connector.cda.ch.lab.OutbreakIdentificationObservation outbreakIdentification) {
+		this.setNotificationOrganizer(new org.ehealth_connector.cda.ch.lab.NotificationOrganizer());
+		this.getNotificationOrganizer().setOutbreakIdentification(outbreakIdentification);
 	}
 
 	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
