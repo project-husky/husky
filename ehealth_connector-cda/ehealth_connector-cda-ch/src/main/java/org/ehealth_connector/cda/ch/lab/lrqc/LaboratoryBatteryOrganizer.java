@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab.lrtp;
+package org.ehealth_connector.cda.ch.lab.lrqc;
 
 import java.util.ArrayList;
 import java.util.List;

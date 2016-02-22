@@ -22,6 +22,10 @@ public class LaboratoryBatteryOrganizer
 		getMdht().getIds().add(id.getIi());
 	}
 
+	public void addLaboratoryObservation(LaboratoryObservation observation) {
+		getMdht().addObservation(observation.copy());
+	}
+
 	public List<Identificator> getIdForHivList() {
 		return Util.convertIds(getMdht().getIds());
 	}

@@ -12,6 +12,15 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
+	public LaboratoryObservation() {
+		super();
+	}
+
+	public LaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
+		super(mdht);
+	}
+
 	public void addSoasInfoEntry(SoasInfoEntry entry) {
 		getMdht().addObservation(entry.copy());
 	}
