@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab;
+package org.ehealth_connector.cda.ch.lab.lrph;
 
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;

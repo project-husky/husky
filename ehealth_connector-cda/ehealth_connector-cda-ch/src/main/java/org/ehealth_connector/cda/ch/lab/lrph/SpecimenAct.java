@@ -3,9 +3,12 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.Organizer;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
+public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct {
 
 	public SpecimenAct() {
 		super();
@@ -15,8 +18,29 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
 		super(mdht);
 	}
 
-	public void addLaboratoryIsolateOrganizer(LaboratoryIsolateOrganizer labIsolateOrganizer) {
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
+		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
+		// Set the right type for the entryRelationship
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
+	}
+
+	public void addLaboratoryIsolateOrganizer(
+			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer labIsolateOrganizer) {
 		getMdht().addOrganizer(labIsolateOrganizer.copy());
+	}
+
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
+		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
+		if (getMdht() != null && getMdht().getLaboratoryBatteryOrganizers() != null) {
+			for (Organizer organizer : this.getMdht().getOrganizers()) {
+				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
+					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
+					list.add(new LaboratoryBatteryOrganizer(iheOrganizer));
+				}
+			}
+		}
+		return list;
 	}
 
 	public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizers() {
@@ -42,6 +66,10 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
 		return this.getNotificationOrganizer().getOutbreakIdentificationObservation();
 	}
 
+	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
+		return new SpecimenCollectionEntry(getMdht().getSpecimenCollections().get(0));
+	}
+
 	protected void setNotificationOrganizer(
 			org.ehealth_connector.cda.ch.lab.lrph.NotificationOrganizer notificationOrganizer) {
 		// Check if the element already exist, if so, replace it, if not add it
@@ -64,4 +92,11 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.SpecimenAct {
 				new org.ehealth_connector.cda.ch.lab.lrph.NotificationOrganizer());
 		this.getNotificationOrganizer().setOutbreakIdentification(outbreakIdentification);
 	}
+
+	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
+		getMdht().addProcedure(entry.copy());
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
+	}
+
 }

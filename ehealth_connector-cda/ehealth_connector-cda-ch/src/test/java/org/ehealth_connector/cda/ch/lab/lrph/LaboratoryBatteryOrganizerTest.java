@@ -8,6 +8,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.junit.Test;
