@@ -41,8 +41,9 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createVitalSignsSection().init(), null, null);
 		this.languageCode = languageCode;
-		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
-				.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
+		this.getMdht().setTitle(
+				Util.st(SectionsEDES.CODED_VITAL_SIGNS
+						.getSectionTitle((languageCode != null ? languageCode : null))));
 	}
 
 	/**
@@ -128,26 +129,27 @@ public class CodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 		if (!observations.isEmpty()) {
 			sb.append("<table><tbody>");
 			if (languageCode == LanguageCode.GERMAN) {
-				sb.append(
-						"<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
+				sb.append("<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
 			} else {
 				sb.append("<tr><th>Date / Time</th><th>Description</th><th>Result</th></tr>");
 			}
 			for (VitalSignObservation vitalSignObservation : observations) {
-				String signDateTime = DateUtil
-						.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
+				String signDateTime = DateUtil.formatDateTimeCh(vitalSignObservation
+						.getEffectiveTime());
 				String signDescription = vitalSignObservation.getCode().getDisplayName();
-				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue() + " "
-						+ vitalSignObservation.getValue().getPhysicalQuantityUnit();
+				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue()
+						+ " " + vitalSignObservation.getValue().getPhysicalQuantityUnit();
 				Code code = vitalSignObservation.getInterpretationCode();
-				if (code != null && !ObservationInterpretationVitalSign.NORMAL.getCodeValue()
-						.equals(code.getCode())) {
+				if (code != null
+						&& !code.isNullFlavor()
+						&& !ObservationInterpretationVitalSign.NORMAL.getCodeValue().equals(
+								code.getCode())) {
 					String signInterpretation = "["
 							+ vitalSignObservation.getInterpretationCode().getCode() + "]";
 					signResult += " " + signInterpretation;
 				}
 				Code target = vitalSignObservation.getTargetSiteCode();
-				if (target != null) {
+				if (target != null && !target.isNullFlavor()) {
 					String signTarget = "["
 							+ vitalSignObservation.getTargetSiteCode().getDisplayName() + "]";
 					signDescription += " " + signTarget;

@@ -23,7 +23,6 @@ import org.openhealthtools.mdht.uml.cda.ch.CdaChEdes;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.PCCFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 public enum SectionsEDES implements ContentIdPrefix {
 	//@formatter:off
@@ -188,10 +187,10 @@ public enum SectionsEDES implements ContentIdPrefix {
 		return loincCode;
 	}
 
-	public String getSectionTitle(CS lc) {
+	public String getSectionTitle(LanguageCode languageCode) {
 		String lcStr = LanguageCode.ENGLISH.getCodeValue();
-		if (lc != null) {
-			lcStr = lc.getCode().toLowerCase();
+		if (languageCode != null) {
+			lcStr = languageCode.getCodeValue().toLowerCase();
 		}
 		if (lcStr.equals(LanguageCode.GERMAN.getCodeValue().toLowerCase()))
 			return getSectionTitleDe();

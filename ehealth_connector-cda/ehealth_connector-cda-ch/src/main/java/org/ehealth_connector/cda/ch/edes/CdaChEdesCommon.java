@@ -1,6 +1,5 @@
 package org.ehealth_connector.cda.ch.edes;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
@@ -24,9 +23,11 @@ public class CdaChEdesCommon {
 	}
 
 	public void addSection(Section section) {
-		section.setLanguageCode(EcoreUtil.copy(document.getLanguageCode()));
 		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
-		section.setTitle(Util.st(sectionEnum.getSectionTitle(section.getLanguageCode())));
+		if (document.getLanguageCode() != null) {
+			section.setTitle(Util.st(sectionEnum.getSectionTitle(LanguageCode.getEnum(document
+					.getLanguageCode().getCode()))));
+		}
 		document.addSection(section);
 	}
 

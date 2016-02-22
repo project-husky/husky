@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.enums.ActSite;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
@@ -16,7 +17,6 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -37,19 +37,19 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div>
-	 *            <div class="de">Code für ein Vitalzeichen</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
 	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
 	 * @param interpretation
-	 *            <div class="de">Beurteilung des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param targetSite
-	 *            <div class="de">Anatomische Lage des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
@@ -69,9 +69,9 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div>
-	 *            <div class="de">Code für ein Vitalzeichen</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
@@ -88,9 +88,9 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param observation
-	 *            <div class="en">Existing vital sign observation</div>
-	 *            <div class="de">Existierende vital sign observation</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Existing vital sign observation</div> <div
+	 *            class="de">Existierende vital sign observation</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
@@ -101,19 +101,19 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div>
-	 *            <div class="de">Code für ein Vitalzeichen</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
 	 *            Uhrzeit</div> <div class="fr"></div> <div class="it"></div>
 	 * @param interpretation
-	 *            <div class="de">Beurteilung des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param targetSite
-	 *            <div class="de">Anatomische Lage des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
@@ -127,9 +127,9 @@ public class VitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="en">Code for a vital sign observation</div>
-	 *            <div class="de">Code für ein Vitalzeichen</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a vital sign observation</div> <div
+	 *            class="de">Code für ein Vitalzeichen</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *            <div class="en">clinically or operationally relevant
 	 *            time</div> <div class="de">klinisch relevantes Datum und
@@ -161,9 +161,9 @@ public class VitalSignObservation {
 	}
 
 	/**
-	 * <div class="en">Gets the code of the observation</div>
-	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the code of the observation</div> <div
+	 * class="de">Gibt den Code der Beobachtung zurück.</div> <div
+	 * class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the code
 	 */
@@ -195,9 +195,9 @@ public class VitalSignObservation {
 	}
 
 	/**
-	 * <div class="de">Get a copy mdht vital sign observation.</div>
-	 * <div class="de">Gibt eine Kopie der mdth vital sign observation
-	 * zurück.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Get a copy mdht vital sign observation.</div> <div
+	 * class="de">Gibt eine Kopie der mdth vital sign observation zurück.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. vital sign observation
 	 */
@@ -249,8 +249,8 @@ public class VitalSignObservation {
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
-			mVitalSignObservation
-					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+			mVitalSignObservation.setEffectiveTime(DateUtil
+					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -260,8 +260,8 @@ public class VitalSignObservation {
 	 * Set a new interpretations of the vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="de">Beurteilung des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Beurteilung des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
 		if (code != null) {
@@ -277,8 +277,7 @@ public class VitalSignObservation {
 	 *            <div class="de">Language code</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setLanguageCode(CS languageCode) {
-		mVitalSignObservation.setLanguageCode(languageCode);
+	public void setLanguageCode(LanguageCode languageCode) {
 		CD code = mVitalSignObservation.getCode();
 		if (code != null) {
 			VitalSignCodes vsCode = VitalSignCodes.getEnum(code.getCode());
@@ -299,8 +298,8 @@ public class VitalSignObservation {
 	 * Set a new act site of the vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="de">Anatomische Lage des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div> <div
+	 *            class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
@@ -324,8 +323,8 @@ public class VitalSignObservation {
 
 		mdht.setText(Util.createReference("#TODO"));
 
-		II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaCh.OID_V1,
-				"CDA-CH.Body.VitalSignL3");
+		II ii = DatatypesFactory.eINSTANCE
+				.createII(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
 		mdht.getTemplateIds().add(ii);
 
 		return mdht;
