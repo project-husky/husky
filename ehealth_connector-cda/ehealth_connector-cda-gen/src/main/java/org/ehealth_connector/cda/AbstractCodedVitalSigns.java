@@ -29,8 +29,12 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 	// default language is German
 	protected LanguageCode languageCode = LanguageCode.GERMAN;
 
+	public AbstractCodedVitalSigns() {
+		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
+	}
+
 	protected AbstractCodedVitalSigns(VitalSignsSection mdht) {
-		super(mdht, null, null);
+		super(mdht);
 	}
 
 	public void add(AbstractVitalSignObservation vitalSign, Author author) {
@@ -54,6 +58,9 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		getMdht().createStrucDocText(getTable());
 	}
 
+	protected abstract AbstractVitalSignObservation createVitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
+
 	public List<AbstractVitalSignObservation> getCodedVitalSignObservations() {
 		List<AbstractVitalSignObservation> ret = new ArrayList<AbstractVitalSignObservation>();
 		EList<Organizer> organizers = getMdht().getOrganizers();
@@ -61,7 +68,8 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			EList<Observation> observations = organizer.getObservations();
 			for (Observation observation : observations) {
 				if (observation instanceof org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation) {
-					ret.add(createVitalSignObservation((org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation) observation));
+					ret.add(createVitalSignObservation(
+							(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation) observation));
 				}
 			}
 		}
@@ -96,11 +104,6 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		section.addOrganizer(organizer);
 		return organizer;
 	}
-
-	protected abstract Identificator getUuid();
-
-	protected abstract AbstractVitalSignObservation createVitalSignObservation(
-			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
 
 	private String getTable() {
 		StringBuilder sb = new StringBuilder();
@@ -138,4 +141,6 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 		return sb.toString();
 	}
+
+	protected abstract Identificator getUuid();
 }

@@ -16,6 +16,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public abstract class AbstractVitalSignObservation {
@@ -43,8 +44,8 @@ public abstract class AbstractVitalSignObservation {
 
 	/**
 	 * <div class="en">Gets the code of the observation</div> <div class="de">Gibt
-	 * den Code der Beobachtung zurück.</div> <div class="fr"></div> <div
-	 * class="it"></div>
+	 * den Code der Beobachtung zurück.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the code
 	 */
@@ -76,9 +77,9 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
-	 * <div class="de">Get a copy mdht vital sign observation.</div> <div
-	 * class="de">Gibt eine Kopie der mdth vital sign observation zurück.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Get a copy mdht vital sign observation.</div>
+	 * <div class="de">Gibt eine Kopie der mdth vital sign observation
+	 * zurück.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. vital sign observation
 	 */
@@ -105,10 +106,29 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the (first) problem value as string.
 	 */
 	public Value getValue() {
-		if (!mVitalSignObservation.getValues().isEmpty()) {
+		if (!mVitalSignObservation.getValues().isEmpty()
+				&& mVitalSignObservation.getValues().get(0) instanceof PQ) {
 			return new Value(mVitalSignObservation.getValues().get(0));
 		}
 		return null;
+	}
+
+	/**
+	 * Initialize the MDHT VitalSignObservation model object.
+	 */
+	protected void initMdht() {
+		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
+		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+
+		mVitalSignObservation.setText(Util.createReference("#TODO"));
 	}
 
 	/**
@@ -129,8 +149,8 @@ public abstract class AbstractVitalSignObservation {
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
-			mVitalSignObservation.setEffectiveTime(DateUtil
-					.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+			mVitalSignObservation
+					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -140,8 +160,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new language code of the vital sign observation, and its codes.
 	 *
 	 * @param languageCode
-	 *          <div class="de">Language code</div> <div class="fr"></div> <div
-	 *          class="it"></div>
+	 *          <div class="de">Language code</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
 		CD code = mVitalSignObservation.getCode();
@@ -164,31 +184,13 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new act site of the vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="de">Anatomische Lage des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Anatomische Lage des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
 			mVitalSignObservation.getTargetSiteCodes().clear();
 			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
 		}
-	}
-
-	/**
-	 * Initialize the MDHT VitalSignObservation model object.
-	 */
-	protected void initMdht() {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
-		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
-		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
-		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
-
-		mVitalSignObservation.setText(Util.createReference("#TODO"));
 	}
 }

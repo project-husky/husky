@@ -11,10 +11,34 @@ import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+
+	/**
+	 * <div class="en">Creates a UUID for LRPH documents with the LRPH root ID and
+	 * a generated extension.</div>
+	 *
+	 * @param id
+	 *          <br>
+	 *          <div class="en"> the id</div>
+	 * @return the ii
+	 */
+	protected static Identificator createUuidLrtp(String id) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(OID_MAIN);
+		if (id == null) {
+			ii.setExtension(UUID.generate());
+		} else {
+			ii.setExtension(id);
+		}
+		return new Identificator(ii);
+	}
 
 	// TODO Add two constructors:
 	// one with the LabObsListLoinc, which uses the getGroup (Befundgruppe) Method
