@@ -10,7 +10,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived;
 public class SpecimenReceivedEntry
 		extends MdhtEntryActFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived> {
 
-	protected SpecimenReceivedEntry() {
+	public SpecimenReceivedEntry() {
 		super(LABFactory.eINSTANCE.createSpecimenReceived().init());
 	}
 
