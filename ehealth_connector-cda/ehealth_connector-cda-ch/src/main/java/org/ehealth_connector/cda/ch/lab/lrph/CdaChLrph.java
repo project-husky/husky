@@ -184,10 +184,15 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 
 	public void setLaboratorySpecialtySection(LaboratorySpecialtySection lss) {
 		// Create a new structured body
-		StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
-
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, lss.copy());
-		getMdht().setStructuredBody(sb);
+		if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
+			getMdht().addSection(lss.copy());
+		} else {
+			// We need to create a new Structured Body element, as the section list is
+			// not modifiable
+			StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+			CdaUtil.addSectionToStructuredBodyAsCopy(sb, lss.copy());
+			getMdht().setStructuredBody(sb);
+		}
 	}
 
 	// // Convenience function

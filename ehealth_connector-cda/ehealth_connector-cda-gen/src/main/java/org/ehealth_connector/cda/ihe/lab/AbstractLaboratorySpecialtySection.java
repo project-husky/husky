@@ -10,6 +10,7 @@ public abstract class AbstractLaboratorySpecialtySection
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection> {
 	public AbstractLaboratorySpecialtySection() {
 		super(LABFactory.eINSTANCE.createLaboratorySpecialtySection().init());
+		setTitle(LanguageCode.ENGLISH);
 	}
 
 	public AbstractLaboratorySpecialtySection(Code code) {
@@ -19,20 +20,7 @@ public abstract class AbstractLaboratorySpecialtySection
 
 	public AbstractLaboratorySpecialtySection(Code code, LanguageCode languageCode) {
 		this(code);
-		switch (languageCode) {
-		case FRENCH:
-			setTitle("Rapport de laboratoire");
-			break;
-		case GERMAN:
-			this.setTitle("Laborbefund");
-			break;
-		case ITALIAN:
-			setTitle("Rapporto di laboratorio");
-			break;
-		case ENGLISH:
-			setTitle("Laboratory Specialty Section");
-			break;
-		}
+		setTitle(languageCode);
 	}
 
 	public AbstractLaboratorySpecialtySection(
@@ -58,6 +46,23 @@ public abstract class AbstractLaboratorySpecialtySection
 	public void setLaboratoryReportDataProcessingEntry(LaboratoryReportDataProcessingEntry entry) {
 		getMdht().getEntries().clear();
 		getMdht().getEntries().add(entry.getMdht());
+	}
+
+	public void setTitle(LanguageCode languageCode) {
+		switch (languageCode) {
+		case FRENCH:
+			setTitle("Rapport de laboratoire");
+			break;
+		case GERMAN:
+			this.setTitle("Laborbefund");
+			break;
+		case ITALIAN:
+			setTitle("Rapporto di laboratorio");
+			break;
+		case ENGLISH:
+			setTitle("Laboratory Specialty Section");
+			break;
+		}
 	}
 
 	public void setTitle(String title) {

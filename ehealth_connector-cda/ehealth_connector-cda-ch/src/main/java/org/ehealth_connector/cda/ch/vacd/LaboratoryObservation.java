@@ -30,6 +30,7 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
@@ -37,9 +38,9 @@ import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
@@ -54,13 +55,14 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public class LaboratoryObservation {
 
 	/** The m laboratory observation. */
-	private final org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation mLaboratoryObservation;
+	private final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLaboratoryObservation;
 
 	/**
 	 * Instantiates a new laboratory observation.
 	 */
 	public LaboratoryObservation() {
-		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
+		mLaboratoryObservation = LABFactory.eINSTANCE.createLaboratoryObservation().init();
+		mLaboratoryObservation.setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
 	/**
@@ -85,11 +87,12 @@ public class LaboratoryObservation {
 	 */
 	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
-		mLaboratoryObservation = CHFactory.eINSTANCE.createLaboratoryObservation().init();
+		mLaboratoryObservation = LABFactory.eINSTANCE.createLaboratoryObservation().init();
 
 		setCode(code);
 		setEffectiveTime(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
+		mLaboratoryObservation.setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
 	/**
@@ -160,7 +163,8 @@ public class LaboratoryObservation {
 	 *          <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
 	 *          <div class="it"> lab obs</div>
 	 */
-	public LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation labObs) {
+	public LaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation labObs) {
 		mLaboratoryObservation = labObs;
 	}
 
@@ -226,7 +230,7 @@ public class LaboratoryObservation {
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. laboratory observation
 	 */
-	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation copyMdhtLaboratoryObservation() {
+	public org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation copyMdhtLaboratoryObservation() {
 		return EcoreUtil.copy(mLaboratoryObservation);
 	}
 
@@ -373,7 +377,7 @@ public class LaboratoryObservation {
 	 *
 	 * @return the mdht laboratory observation
 	 */
-	public org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation getMdhtLaboratoryObservation() {
+	public org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation getMdhtLaboratoryObservation() {
 		return mLaboratoryObservation;
 	}
 

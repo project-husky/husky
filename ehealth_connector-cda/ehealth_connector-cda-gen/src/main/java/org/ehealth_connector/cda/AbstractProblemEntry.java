@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import org.ehealth_connector.cda.enums.AllergiesSpecialConditions;
@@ -34,7 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 /**
  * ProblemEntry convenience functionality for the CDA Body Level 3 -Problem
  */
-public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
+public class AbstractProblemEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
 
 	/**
 	 * Instantiates a new problem entry.
@@ -86,7 +86,8 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 			return false;
 		}
 
-		if (((getCode() != null) && !getCode().equals(other.getCode())) || ((getCode() == null) && (other.getCode() != null))) {
+		if (((getCode() != null) && !getCode().equals(other.getCode()))
+				|| ((getCode() == null) && (other.getCode() != null))) {
 			return false;
 		}
 		if (getValue() != null) {
@@ -106,14 +107,15 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the allergie special condition.
-	 * 
+	 *
 	 * @return the allergie special condition
 	 */
 	public AllergiesSpecialConditions getAllergySpecialCondition() {
 		final Value value = this.getValue();
 		if (value != null) {
 			final Code code = value.getCode();
-			if ((code != null) && AllergiesSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			if ((code != null)
+					&& AllergiesSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 				return AllergiesSpecialConditions.getEnum(code.getCode());
 			}
 		}
@@ -121,14 +123,15 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	}
 
 	/**
-	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
-	 * den Code des Problems zurück.</div> <div class="fr"></div>
+	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt den
+	 * Code des Problems zurück.</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @return the codedProblem object
 	 */
 	public org.ehealth_connector.common.Code getCode() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(getMdht().getCode());
+		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+				getMdht().getCode());
 		return code;
 	}
 
@@ -136,7 +139,7 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	 * <div class="en">Gets the point in time, since the problem is
 	 * terminated</div> <div class="de">Gibt das Zeitpunkt zurück, seitdem das
 	 * Problems beendet ist</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the endOfProblem Object
 	 */
 	public Date getEndDate() {
@@ -150,7 +153,7 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * one id can be provided for retraceability (evacdoc 7.5.2.5)
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Identificator getId() {
@@ -165,7 +168,7 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	 * <div class="en">gets the information, if the problem is not occured</div>
 	 * <div class="de">Gibt zurück, ob das Problem nicht aufgetreten ist.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the problemNotOccured Object
 	 */
 	public boolean getProblemNotOccured() {
@@ -177,14 +180,15 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the allergie special condition.
-	 * 
+	 *
 	 * @return the allergie special condition
 	 */
 	public ProblemsSpecialConditions getProblemSpecialCondition() {
 		final Value value = this.getValue();
 		if (value != null) {
 			final Code code = value.getCode();
-			if ((code != null) && ProblemsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			if ((code != null)
+					&& ProblemsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 				return ProblemsSpecialConditions.getEnum(code.getCode());
 			}
 		}
@@ -192,14 +196,15 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	}
 
 	/**
-	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
-	 * den Code des Problems zurück.</div> <div class="fr"></div>
+	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt den
+	 * Code des Problems zurück.</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @return the codedProblem object
 	 */
 	public ProblemType getProblemType() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(getMdht().getCode());
+		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+				getMdht().getCode());
 		if ((code != null) && ProblemType.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 			return ProblemType.getEnum(code.getCode());
 		}
@@ -210,7 +215,7 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	 * <div class="en">gets the point in time, when the problem started</div>
 	 * <div class="de">Gibt den Zeitpunkt zurück, seit das Problems angefangen
 	 * hat</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the startOfProblem Object
 	 */
 	public Date getStartDate() {
@@ -224,9 +229,10 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the text reference.
-	 * 
+	 *
 	 * @return the text reference
 	 */
+	@Override
 	public String getTextReference() {
 		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
@@ -236,7 +242,7 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the problem value. The Value may be a coded or uncoded String.
-	 * 
+	 *
 	 * @return the (first) problem value as string.
 	 */
 	public Value getValue() {
@@ -255,15 +261,16 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 		result = (prime * result) + (this.getStartDate() != null ? getStartDate().hashCode() : 0);
 		result = (prime * result) + (this.getEndDate() != null ? getEndDate().hashCode() : 0);
 		result = (prime * result) + (this.getCode() != null ? getCode().hashCode() : 0);
-		result = (prime * result) + ((this.getValue() != null) && this.getValue().isCode() ? getValue().getCode().hashCode() : 0);
+		result = (prime * result) + ((this.getValue() != null) && this.getValue().isCode()
+				? getValue().getCode().hashCode() : 0);
 		return result;
 	}
 
 	/**
 	 * Sets the allergies special condition.
-	 * 
+	 *
 	 * @param condition
-	 *            the new allergies special condition
+	 *          the new allergies special condition
 	 */
 	public void setAllergySpecialCondition(AllergiesSpecialConditions condition) {
 		setValue(new Value(condition.getCode()));
@@ -271,9 +278,9 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the code.
-	 * 
+	 *
 	 * @param codedProblem
-	 *            the codedProblem Object which will be set
+	 *          the codedProblem Object which will be set
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		getMdht().setCode(codedProblem.getCD());
@@ -281,11 +288,11 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * <div class="en">sets the point in time, when the problem had ended</div>
-	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet
-	 * ist</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet ist</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @param endOfProblem
-	 *            the endOfProblem Object which will be set
+	 *          the endOfProblem Object which will be set
 	 */
 	public void setEndDate(Date endOfProblem) {
 		if (this.getMdht().getEffectiveTime() == null) {
@@ -297,14 +304,17 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * one id can be provided for retraceability (evacdoc 7.5.2.5)
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
 		if (id != null) {
 			this.getMdht().getIds().add(id.getIi());
+			if (!this.getMdht().getObservations().isEmpty()) {
+				this.getMdht().getObservations().get(0).getIds().add(id.getIi());
+			}
 		}
 	}
 
@@ -313,9 +323,9 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	 * otherwise</div> <div class="de">true, wenn das Problem nicht aufgetreten
 	 * ist, false sonst (negationInd)</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param problemNotOccured
-	 *            the problemNotOccured Object which will be set
+	 *          the problemNotOccured Object which will be set
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
 		this.getMdht().setNegationInd(problemNotOccured);
@@ -323,9 +333,9 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the problem special condition.
-	 * 
+	 *
 	 * @param condition
-	 *            the new problem special condition
+	 *          the new problem special condition
 	 */
 	public void setProblemSpecialCondition(ProblemsSpecialConditions condition) {
 		setValue(new Value(condition.getCode()));
@@ -333,9 +343,9 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the code.
-	 * 
+	 *
 	 * @param kindOfProblem
-	 *            the new code
+	 *          the new code
 	 */
 	public void setProblemType(ProblemType kindOfProblem) {
 		getMdht().setCode(kindOfProblem.getCD());
@@ -345,9 +355,9 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 	 * <div class="en">point in time, when the problem started</div>
 	 * <div class="de">Setzt den Zeitpunkt, an dem das Problems angefangen
 	 * hat</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param startOfProblem
-	 *            the startOfProblem Object which will be set
+	 *          the startOfProblem Object which will be set
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (this.getMdht().getEffectiveTime() == null) {
@@ -359,20 +369,20 @@ public class AbstractProblemEntry extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the text reference.
-	 * 
+	 *
 	 * @param value
-	 *            the new text reference, # for local reference has to be
-	 *            included
+	 *          the new text reference, # for local reference has to be included
 	 */
+	@Override
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
 	}
 
 	/**
 	 * Sets the value.
-	 * 
+	 *
 	 * @param value
-	 *            the new value
+	 *          the new value
 	 */
 	public void setValue(Value value) {
 		getMdht().getValues().clear();

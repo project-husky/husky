@@ -1,12 +1,11 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySection {
 
 	public LaboratorySpecialtySection() {
-		super(LABFactory.eINSTANCE.createLaboratorySpecialtySection().init());
+		super();
 	}
 
 	public LaboratorySpecialtySection(Code code) {

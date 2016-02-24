@@ -1,36 +1,85 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringReader;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
+import org.ehealth_connector.common.Code;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
+	private final Log log = LogFactory.getLog(MdhtFacade.class);
+
 	private CdaChLrph deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) CDAUtil.load(source));
+		CHPackage.eINSTANCE.eClass();
+		LABPackage.eINSTANCE.eClass();
+		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) {
+			CdaChLrph test = new CdaChLrph(
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+			return test;
+		} else
+			return null;
 	}
 
 	private CdaChLrph deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChMtpsDis());
+				CHPackage.eINSTANCE.getCdaChLrph());
 		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+	}
+
+	@Test
+	public void deserializeCdaDirectTest() throws Exception {
+		final CdaChLrph cda = new CdaChLrph();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChLrph cdaDeserialized = deserializeCdaDirect(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	@Test
+	public void deserializeCdaTest() throws Exception {
+		final CdaChLrph cda = new CdaChLrph();
+		cda.setLaboratorySpecialtySection(
+				new LaboratorySpecialtySection(new Code("TestRoot", "TestExtension")));
+		LaboratorySpecialtySection test = cda.getLaboratorySpecialtySection();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChLrph cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+		assertEquals("Laboratory Specialty Section",
+				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
+	}
+
+	@Test
+	public void deserializeCdaTestTemplateId() throws Exception {
+		final CdaChLrph cda = new CdaChLrph();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChLrph cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
 	}
 
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
@@ -38,9 +87,20 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		return CDAUtil.load(source);
 	}
 
-	// private String serializeDocument(CdaChLrph doc) throws Exception {
-	// final ByteArrayOutputStream boas = n
-	// }
+	@Test
+	public void deserializeClinicalDocumentTest() throws Exception {
+		final CdaChLrph cda = new CdaChLrph();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private String serializeDocument(CdaChLrph doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
+	}
 
 	@Test
 	public void testContentModules() throws XPathExpressionException {
@@ -58,7 +118,6 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		assertFalse(doc.getLaboratoryBatteryOrganizerList().isEmpty());
 		document = doc.getDocument();
-
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));

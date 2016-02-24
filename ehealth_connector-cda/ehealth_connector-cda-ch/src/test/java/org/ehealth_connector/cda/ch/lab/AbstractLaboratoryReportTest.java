@@ -6,8 +6,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
@@ -15,8 +13,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 public class AbstractLaboratoryReportTest extends TestUtils {
-
-	private final Log log = LogFactory.getLog(AbstractLaboratoryReportTest.class);
 
 	@Test
 	public void testDocumentHeader() throws XPathExpressionException {
