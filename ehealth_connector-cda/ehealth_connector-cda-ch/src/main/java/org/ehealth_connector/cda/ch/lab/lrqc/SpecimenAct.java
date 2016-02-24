@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -27,7 +28,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
 		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
-		if (getMdht() != null && getMdht().getLaboratoryBatteryOrganizers() != null) {
+		if (getMdht() != null && getMdht().getOrganizers() != null) {
 			for (Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
 					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
@@ -39,7 +40,13 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
-		return new SpecimenCollectionEntry(getMdht().getSpecimenCollections().get(0));
+		for (EntryRelationship e : getMdht().getEntryRelationships()) {
+			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
+				return new SpecimenCollectionEntry(
+						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e.getProcedure());
+			}
+		}
+		return null;
 	}
 
 	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {

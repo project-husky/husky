@@ -26,7 +26,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
 		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
-		if (getMdht() != null && getMdht().getLaboratoryBatteryOrganizers() != null) {
+		if (getMdht() != null && getMdht().getOrganizers() != null) {
 			for (Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
 					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;

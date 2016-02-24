@@ -16,8 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
-import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
@@ -62,15 +61,54 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 	@Test
 	public void deserializeCdaTest() throws Exception {
 		final CdaChLrph cda = new CdaChLrph();
-		cda.setLaboratorySpecialtySection(
-				new LaboratorySpecialtySection(new Code("TestRoot", "TestExtension")));
-		LaboratorySpecialtySection test = cda.getLaboratorySpecialtySection();
+		LaboratorySpecialtySection sps = new LaboratorySpecialtySection();
+		LaboratoryReportDataProcessingEntry lrd = new LaboratoryReportDataProcessingEntry();
+		SpecimenAct spa = new SpecimenAct();
+		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
+		LaboratoryObservation lo = new LaboratoryObservation();
+
+		lo.setCode(LabObsListSnomed.BRUCELLA);
+		lbo.addLaboratoryObservation(lo);
+		spa.addLaboratoryBatteryOrganizer(lbo);
+		lrd.setSpecimenAct(spa);
+		sps.setLaboratoryReportDataProcessingEntry(lrd);
+		cda.setLaboratorySpecialtySection(sps);
+
+		assertNotNull(cda.getLaboratorySpecialtySection());
+		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+				.getSpecimenAct());
+		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
+		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
+				.get(0));
+
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChLrph cdaDeserialized = deserializeCda(deserialized);
+
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection());
+		assertNotNull(
+				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
+		assertNotNull(
+				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
+				.get(0).getLaboratoryObservations().get(0));
+
 		assertTrue(cdaDeserialized != null);
 		assertEquals("Laboratory Specialty Section",
 				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
+		assertTrue(
+				LabObsListSnomed.BRUCELLA.getCode()
+						.equals(cdaDeserialized.getLaboratorySpecialtySection()
+								.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+								.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+								.getCodeAsSnomedEnum().getCode()));
 	}
 
 	@Test

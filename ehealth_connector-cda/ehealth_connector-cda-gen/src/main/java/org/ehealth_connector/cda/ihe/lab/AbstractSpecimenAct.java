@@ -1,17 +1,17 @@
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.MdhtActFacade;
 import org.ehealth_connector.common.Code;
+import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
-public abstract class AbstractSpecimenAct
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct> {
+public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 
 	protected AbstractSpecimenAct() {
 		super(LABFactory.eINSTANCE.createSpecimenAct().init());
 	}
 
-	protected AbstractSpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
+	protected AbstractSpecimenAct(Act mdht) {
 		super(mdht);
 	}
 

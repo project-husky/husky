@@ -1,12 +1,9 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry;
-import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
@@ -52,7 +49,7 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
 		// TODO Determine the right code from the Observation
 
-		LaboratorySpecialtySection laboratorySpecialtySection;
+		org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection;
 		if (getLaboratorySpecialtySection() == null) {
 			laboratorySpecialtySection = new LaboratorySpecialtySection();
 		} else {
@@ -89,6 +86,34 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 
 	}
 
+	// Convenience function
+	// gets the LaboratorySpecialtySection
+	// gets the SpecimenAct
+	// gets the Laboratory Batteries from the SpecimenAct
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct().getLaboratoryBatteryOrganizers();
+			//
+			// // We have to cast the list to deliver the LRPH specific
+			// // LaboratoryBatteryOrganizer
+			// List<LaboratoryBatteryOrganizer> lboList = new
+			// ArrayList<LaboratoryBatteryOrganizer>();
+			// for
+			// (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer
+			// lbo : spa.getMdht()
+			// .getLaboratoryBatteryOrganizers()) {
+			// LaboratoryBatteryOrganizer lb = new LaboratoryBatteryOrganizer(lbo);
+			// lboList.add(lb);
+			// }
+			// return lboList;
+		}
+		return null;
+	}
+
 	// protected
 	// org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection
 	// createSpecialtySection(
@@ -110,31 +135,6 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	//
 	// }
 
-	// Convenience function
-	// gets the LaboratorySpecialtySection
-	// gets the SpecimenAct
-	// gets the Laboratory Batteries from the SpecimenAct
-	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
-			SpecimenAct spa = new SpecimenAct(getLaboratorySpecialtySection()
-					.getLaboratoryReportDataProcessingEntry().getSpecimenAct().copy());
-
-			// We have to cast the list to deliver the LRPH specific
-			// LaboratoryBatteryOrganizer
-			List<LaboratoryBatteryOrganizer> lboList = new ArrayList<LaboratoryBatteryOrganizer>();
-			for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer lbo : spa.getMdht()
-					.getLaboratoryBatteryOrganizers()) {
-				LaboratoryBatteryOrganizer lb = new LaboratoryBatteryOrganizer(lbo);
-				lboList.add(lb);
-			}
-			return lboList;
-		}
-		return null;
-	}
-
 	/**
 	 * Gets the laboratory specialty section.
 	 *
@@ -143,6 +143,23 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	public LaboratorySpecialtySection getLaboratorySpecialtySection() {
 		if (!getMdht().getLaboratorySpecialtySections().isEmpty()) {
 			return new LaboratorySpecialtySection(getMdht().getLaboratorySpecialtySections().get(0));
+		}
+		return null;
+	}
+
+	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
+			LaboratoryBatteryOrganizer organizer) {
+		if (!organizer.getLaboratoryObservations().isEmpty()) {
+			if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+				// if present return LOINC Enum
+				return organizer.getLaboratoryObservations().get(0).getCodeAsEnum().getSectionCode();
+			} else {
+				// if present return SNOMED Enum
+				if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() != null) {
+					return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
+							.getSectionCode();
+				}
+			}
 		}
 		return null;
 	}
@@ -182,15 +199,16 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	//
 	// }
 
-	public void setLaboratorySpecialtySection(LaboratorySpecialtySection lss) {
+	public void setLaboratorySpecialtySection(
+			org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection) {
 		// Create a new structured body
 		if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
-			getMdht().addSection(lss.copy());
+			getMdht().addSection(laboratorySpecialtySection.copy());
 		} else {
 			// We need to create a new Structured Body element, as the section list is
 			// not modifiable
 			StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
-			CdaUtil.addSectionToStructuredBodyAsCopy(sb, lss.copy());
+			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
 			getMdht().setStructuredBody(sb);
 		}
 	}
