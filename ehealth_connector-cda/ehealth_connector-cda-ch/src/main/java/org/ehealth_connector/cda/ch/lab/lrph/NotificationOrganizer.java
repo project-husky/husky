@@ -18,6 +18,11 @@ public class NotificationOrganizer extends org.ehealth_connector.cda.ihe.lab.Not
 	}
 
 	public void setOutbreakIdentification(OutbreakIdentificationObservation outbreakIdentification) {
-		getMdht().addObservation(outbreakIdentification.copy());
+		if (!getMdht().getOutbreakIdentifications().isEmpty()) {
+			getMdht().getComponents().clear();
+			getMdht().addObservation(outbreakIdentification.copy());
+		} else {
+			getMdht().addObservation(outbreakIdentification.copy());
+		}
 	}
 }

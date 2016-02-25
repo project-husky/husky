@@ -9,6 +9,7 @@ import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
@@ -18,6 +19,10 @@ public class BloodGroupObservation
 	protected BloodGroupObservation() {
 		super(CHFactory.eINSTANCE.createBloodgroupObservation().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup");
+	}
+
+	public BloodGroupObservation(BloodgroupObservation mdht) {
+		super(mdht);
 	}
 
 	public void addAuthor(Author author) {

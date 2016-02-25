@@ -30,6 +30,7 @@ public class CodedVitalSignsTest extends TestUtils {
 
 		// VitalSignsOrganizer
 		v.setVitalSignsOrganizer(new VitalSignsOrganizer());
+		v.setVitalSignsOrganizer(new VitalSignsOrganizer());
 		assertNotNull(v.getVitalSignsOrganizer());
 		document = v.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.4.13.1", null));

@@ -24,6 +24,7 @@ public class SpecimenCollectionEntryTest extends TestUtils {
 		// SpecimenReceivedEntry
 		SpecimenReceivedEntry sre = new SpecimenReceivedEntry();
 		entry.setSpecimenReceivedEntry(sre);
+		entry.setSpecimenReceivedEntry(new SpecimenReceivedEntry());
 
 		assertNotNull(entry.getSpecimenReceivedEntry());
 		Document document = entry.getDocument();

@@ -62,6 +62,7 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	}
 
 	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
+		getMdht().getEntries().clear();
 		getMdht().addOrganizer(organizer.copy());
 	}
 }

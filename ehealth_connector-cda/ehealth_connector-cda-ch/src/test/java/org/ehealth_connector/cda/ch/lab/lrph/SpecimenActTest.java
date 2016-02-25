@@ -5,11 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
-import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer;
-import org.ehealth_connector.cda.ch.lab.lrph.NotificationOrganizer;
-import org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation;
-import org.ehealth_connector.cda.ch.lab.lrph.SpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
@@ -33,6 +28,7 @@ public class SpecimenActTest extends TestUtils {
 		// NotificationOrganizer
 		NotificationOrganizer notificationOrganizer = new NotificationOrganizer();
 		act.setNotificationOrganizer(notificationOrganizer);
+		act.setNotificationOrganizer(new NotificationOrganizer());
 
 		assertNotNull(act.getNotificationOrganizer());
 		document = act.getDocument();
@@ -41,6 +37,7 @@ public class SpecimenActTest extends TestUtils {
 		// OutbreakIdentification
 		OutbreakIdentificationObservation oio = new OutbreakIdentificationObservation();
 		act.setOutbreakIdentification(oio);
+		act.setOutbreakIdentification(new OutbreakIdentificationObservation());
 
 		assertNotNull(act.getOutbreakIdentification());
 		document = act.getDocument();

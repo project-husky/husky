@@ -50,6 +50,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
+		getMdht().getProcedures().clear();
 		getMdht().addProcedure(entry.copy());
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);

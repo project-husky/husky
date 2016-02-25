@@ -19,6 +19,7 @@ public class LaboratoryReportDataProcessingEntryTest extends TestUtils {
 		// set SpecimenAct
 		SpecimenAct act = new SpecimenAct();
 		entry.setSpecimenAct(act);
+		entry.setSpecimenAct(new SpecimenAct());
 		assertTrue(entry.getSpecimenAct() != null);
 
 		document = entry.getDocument();

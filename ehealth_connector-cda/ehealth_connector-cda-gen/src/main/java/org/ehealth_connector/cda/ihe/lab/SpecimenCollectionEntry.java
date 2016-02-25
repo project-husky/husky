@@ -56,7 +56,7 @@ public class SpecimenCollectionEntry
 		boolean added = false;
 		for (Act o : getMdht().getActs()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived) {
-				o = (Act) entry;
+				o = entry.getMdht();
 				added = true;
 			}
 		}

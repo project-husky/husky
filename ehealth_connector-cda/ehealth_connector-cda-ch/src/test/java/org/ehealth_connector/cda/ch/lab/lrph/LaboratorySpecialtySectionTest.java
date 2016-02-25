@@ -24,6 +24,8 @@ public class LaboratorySpecialtySectionTest extends TestUtils {
 		// LaboratoryReportDataProcessingEntry
 		org.ehealth_connector.cda.ch.lab.lrph.LaboratoryReportDataProcessingEntry lrdpe = new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryReportDataProcessingEntry();
 		lss.setLaboratoryReportDataProcessingEntry(lrdpe);
+		lss.setLaboratoryReportDataProcessingEntry(
+				new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryReportDataProcessingEntry());
 		assertNotNull(lss.getLaboratoryReportDataProcessingEntry());
 		document = lss.getDocument();
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1']"));

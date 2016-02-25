@@ -1,15 +1,15 @@
 package org.ehealth_connector.cda.ch.lab;
 
-import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.MdhtSectionFacade;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 public class StudiesSummarySection
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection> {
+		extends MdhtSectionFacade<org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection> {
 
 	public StudiesSummarySection() {
-		super(CHFactory.eINSTANCE.createStudiesSummarySection().init());
+		super(CHFactory.eINSTANCE.createStudiesSummarySection().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
+				"CDA-CH.LRTP.Body.StudiesSummaryL2");
 	}
 
 	public StudiesSummarySection(LanguageCode languageCode) {
@@ -35,21 +35,18 @@ public class StudiesSummarySection
 	}
 
 	public BloodGroupObservation getBloodGroup() {
-		return null;
-	}
-
-	public String getTitle() {
-		if (this.getMdht().getTitle() != null) {
-			return this.getMdht().getTitle().getText();
+		if (!getMdht().getBloodgroupObservations().isEmpty()) {
+			return new BloodGroupObservation(getMdht().getBloodgroupObservations().get(0));
 		}
 		return null;
 	}
 
 	public void setBloodGroup(BloodGroupObservation bloodGroup) {
-
-	}
-
-	public void setTitle(String title) {
-		getMdht().setTitle(Util.st(title));
+		if (!getMdht().getBloodgroupObservations().isEmpty()) {
+			getMdht().getEntries().clear();
+			getMdht().addObservation(bloodGroup.copy());
+		} else {
+			getMdht().addObservation(bloodGroup.copy());
+		}
 	}
 }
