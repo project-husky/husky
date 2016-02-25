@@ -18,7 +18,6 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		super(mdht);
 	}
 
-	@Override
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
 		// getMdht().getLaboratoryObservations().add(observation.copy());
 		getMdht().addObservation(observation.copy());

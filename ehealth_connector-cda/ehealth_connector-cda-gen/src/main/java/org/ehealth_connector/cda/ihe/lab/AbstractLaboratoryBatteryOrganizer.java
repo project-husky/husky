@@ -16,9 +16,4 @@ public abstract class AbstractLaboratoryBatteryOrganizer extends
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
 	}
-
-	public void addLaboratoryObservation(LaboratoryObservation observation) {
-		// getMdht().getLaboratoryObservations().add(observation.copy());
-		getMdht().addObservation(observation.copy());
-	}
 }

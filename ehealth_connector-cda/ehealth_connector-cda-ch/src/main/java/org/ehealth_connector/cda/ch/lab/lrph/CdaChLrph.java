@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LrphSections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -47,11 +48,17 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	// Creates SpecimenAct
 	// adds the Laboratory Battery to the SpecimenAct
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
-		// TODO Determine the right code from the Observation
-
 		org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection;
+		// Try to determine the right code from the LaboratoryObservation and set it
+		// in the Section
 		if (getLaboratorySpecialtySection() == null) {
-			laboratorySpecialtySection = new LaboratorySpecialtySection();
+			String sectionCode = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
+			if (sectionCode != null) {
+				laboratorySpecialtySection = new LaboratorySpecialtySection(
+						LrphSections.getEnum(sectionCode).getCode());
+			} else {
+				laboratorySpecialtySection = new LaboratorySpecialtySection();
+			}
 		} else {
 			laboratorySpecialtySection = getLaboratorySpecialtySection();
 		}
@@ -147,6 +154,14 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 		return null;
 	}
 
+	public String getNarrativeTextSectionLaboratorySpeciality() {
+		if (this.getLaboratorySpecialtySection() != null
+				&& this.getLaboratorySpecialtySection().getText() != null) {
+			return this.getLaboratorySpecialtySection().getText();
+		}
+		return null;
+	}
+
 	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
 			LaboratoryBatteryOrganizer organizer) {
 		if (!organizer.getLaboratoryObservations().isEmpty()) {
@@ -163,13 +178,6 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 		}
 		return null;
 	}
-
-	// // Convenience function
-	// public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizerList()
-	// {
-	// return null;
-	//
-	// }
 
 	// protected List<LaboratorySpecialtySection> getLaboratorySpecialtySections()
 	// {
@@ -212,6 +220,18 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 			getMdht().setStructuredBody(sb);
 		}
 	}
+
+	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
+		if (this.getLaboratorySpecialtySection() != null) {
+			this.getLaboratorySpecialtySection().setText(text);
+		}
+	}
+	// // Convenience function
+	// public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizerList()
+	// {
+	// return null;
+	//
+	// }
 
 	// // Convenience function
 	// // TODO In die SpecilatySection verschieben, da in dieser der zur

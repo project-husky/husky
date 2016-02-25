@@ -32,6 +32,13 @@ public abstract class AbstractLaboratorySpecialtySection
 		return new Code(getMdht().getCode());
 	}
 
+	public String getText() {
+		if (getMdht().getText() != null) {
+			return getMdht().getText().getText();
+		}
+		return null;
+	}
+
 	public String getTitle() {
 		if (this.getMdht().getTitle() != null) {
 			return this.getMdht().getTitle().getText();
@@ -46,6 +53,10 @@ public abstract class AbstractLaboratorySpecialtySection
 	public void setLaboratoryReportDataProcessingEntry(LaboratoryReportDataProcessingEntry entry) {
 		getMdht().getEntries().clear();
 		getMdht().getEntries().add(entry.getMdht());
+	}
+
+	public void setText(String value) {
+		getMdht().createStrucDocText(value);
 	}
 
 	public void setTitle(LanguageCode languageCode) {

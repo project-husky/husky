@@ -188,8 +188,29 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 	}
 
 	@Test
+	public void testComment() throws XPathExpressionException {
+		SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
+		sac.setContentIdReference("TestContentIdRef");
+
+		LaboratoryObservation lo = new LaboratoryObservation();
+		lo.addCommentEntry(sac);
+
+		LaboratoryBatteryOrganizer org = new LaboratoryBatteryOrganizer();
+		org.addLaboratoryObservation(lo);
+
+		final CdaChLrph cda = new CdaChLrph();
+		cda.addLaboratoryBatteryOrganizer(org);
+
+		cda.getLaboratorySpecialtySection().setTextReference(
+				"<table><tr><td>Dies ist ein Test<content ID=\"TestContentIdRef\">Hier steht der menschenlesbare Text</content></td></tr></table>");
+		Document document = cda.getDocument();
+		xExist(document, "//reference[@value='#TestContentIdRef']");
+		xExist(document, "//content[@ID='TestContentIdRef']");
+	}
+
+	@Test
 	public void testContentModules() throws XPathExpressionException {
-		final CdaChLrph doc = new CdaChLrph();
+		CdaChLrph doc = new CdaChLrph();
 
 		// Specialty Section
 		LaboratorySpecialtySection lss = new LaboratorySpecialtySection();
@@ -198,14 +219,20 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		Document document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 
-		// Convenience LaboratoryBatteryOrganizer
+		// Convenience LaboratoryBatteryOrganizer (automatic section creation)
+		doc = new CdaChLrph();
+		LaboratoryObservation lo = new LaboratoryObservation();
+		lo.setCode(LabObsListSnomed.BRUCELLA);
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
+		lbo.addLaboratoryObservation(lo);
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		assertFalse(doc.getLaboratoryBatteryOrganizerList().isEmpty());
 		document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));
+		assertTrue(xExist(document,
+				"/clinicaldocument/component/structuredBody/component/section/code[@code='18725-2']"));
 		// a second Laboratory Battery Organizer
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		document = doc.getDocument();
@@ -220,7 +247,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// assertFalse(doc.getLaboratoryIsolateOrganizerList().isEmpty());
 		// document = doc.getDocument();
 		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.5",
-		// null));
+		// nullt));
 		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4",
 		// null));
 		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1",
@@ -239,5 +266,16 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 		// LRPH
 		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.3.1", null));
+	}
+
+	@Test
+	public void testNarrativeText() {
+		super.init();
+		CdaChLrph doc = new CdaChLrph();
+
+		LaboratorySpecialtySection lss = new LaboratorySpecialtySection();
+		doc.setLaboratorySpecialtySection(lss);
+		doc.setNarrativeTextSectionLaboratorySpeciality(ts1);
+		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
 	}
 }
