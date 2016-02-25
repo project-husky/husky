@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
-import org.ehealth_connector.common.ReferenceRange;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -48,13 +47,6 @@ public class LaboratoryObservation
 		return null;
 	}
 
-	public ReferenceRange getReferenceRange() {
-		if (getMdht().getReferenceRanges() != null && !getMdht().getReferenceRanges().isEmpty()) {
-			return new ReferenceRange(getMdht().getReferenceRanges().get(0));
-		}
-		return null;
-	}
-
 	// public boolean getSoasInfoCenterSpecificAvoid() {
 	// // Problem: Was ist, wenn das Element nicht da ist? Bei einem boolean kann
 	// // man kein null zurückgeben...
@@ -77,11 +69,6 @@ public class LaboratoryObservation
 
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList code) {
 		getMdht().setCode(code.getCD());
-	}
-
-	public void setReferenceRange(ReferenceRange referenceRange) {
-		getMdht().getReferenceRanges().clear();
-		getMdht().getReferenceRanges().add(referenceRange.getMdht());
 	}
 
 	// Problem: What should be returned, if a nullflavor is used or if the

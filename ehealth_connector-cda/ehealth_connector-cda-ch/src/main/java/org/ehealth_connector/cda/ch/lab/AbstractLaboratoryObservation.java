@@ -6,6 +6,7 @@ import java.util.List;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -51,6 +52,13 @@ public abstract class AbstractLaboratoryObservation
 		return null;
 	}
 
+	public ReferenceRange getReferenceRange() {
+		if (getMdht().getReferenceRanges() != null && !getMdht().getReferenceRanges().isEmpty()) {
+			return new ReferenceRange(getMdht().getReferenceRanges().get(0));
+		}
+		return null;
+	}
+
 	// Convenience function to set a new code, which is not in the value set for
 	// LRXX
 	public void setNewCode(Code code, SectionAnnotationCommentEntry commentEntry) {
@@ -58,5 +66,10 @@ public abstract class AbstractLaboratoryObservation
 		Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
 		nullCode.addTranslation(code);
 		this.setCode(nullCode);
+	}
+
+	public void setReferenceRange(ReferenceRange referenceRange) {
+		getMdht().getReferenceRanges().clear();
+		getMdht().getReferenceRanges().add(referenceRange.getMdht());
 	}
 }
