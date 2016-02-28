@@ -96,17 +96,18 @@ public enum SectionsEDES implements ContentIdPrefix {
 	}
 
 	public Section createSection() {
+		SectionsDefaultInitializer initializer = new SectionsDefaultInitializer();
 		switch (name()) {
 		case "ABILITY_TO_WORK":
 			return CHFactory.eINSTANCE.createAbilityToWorkSection().init();
 		case "ACTIVE_PROBLEMS":
 			return IHEFactory.eINSTANCE.createActiveProblemsSection().init();
 		case "ACUITY_ASSESSMENT":
-			return PCCFactory.eINSTANCE.createAcuityAssessmentSection().init();
+			return initializer.init(PCCFactory.eINSTANCE.createAcuityAssessmentSection().init());
 		case "ADVANCE_DIRECTIVES":
 			return IHEFactory.eINSTANCE.createAdvanceDirectivesSection().init();
 		case "ALLERGIES_AND_OTHER_ADVERSE_REACTIONS":
-			return IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
+			return initializer.init(IHEFactory.eINSTANCE.createAllergiesReactionsSection().init());
 		case "ASSESSMENT_AND_PLAN":
 			return IHEFactory.eINSTANCE.createAssessmentAndPlanSection().init();
 		case "ASSESSMENTS":
@@ -118,13 +119,13 @@ public enum SectionsEDES implements ContentIdPrefix {
 		case "CODED_VITAL_SIGNS":
 			return IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
 		case "CURRENT_MEDICATIONS":
-			return IHEFactory.eINSTANCE.createMedicationsSection().init();
+			return initializer.init(IHEFactory.eINSTANCE.createMedicationsSection().init());
 		case "ED_CONSULTATIONS":
 			return PCCFactory.eINSTANCE.createConsultationsSection().init();
 		case "ED_DIAGNOSIS":
-			return PCCFactory.eINSTANCE.createEDDiagnosesSection().init();
+			return initializer.init(PCCFactory.eINSTANCE.createEDDiagnosesSection().init());
 		case "ED_DISPOSITION":
-			return PCCFactory.eINSTANCE.createEDDispositionSection().init();
+			return initializer.init(PCCFactory.eINSTANCE.createEDDispositionSection().init());
 		case "FAMILY_MEDICAL_HISTORY":
 			return IHEFactory.eINSTANCE.createFamilyMedicalHistorySection().init();
 		case "HISTORY_OF_PAST_ILLNESS":
@@ -134,7 +135,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 		case "HISTORY_OF_PRESENT_ILLNESS":
 			return IHEFactory.eINSTANCE.createHistoryOfPresentIllness().init();
 		case "HISTORY_OF_IMMUNIZATION":
-			return IHEFactory.eINSTANCE.createImmunizationsSection().init();
+			return initializer.init(IHEFactory.eINSTANCE.createImmunizationsSection().init());
 		case "HOSPITAL_DISCHARGE_MEDICATIONS":
 			return IHEFactory.eINSTANCE.createHospitalDischargeMedicationsSection().init();
 		case "INTRAVENOUS_FLUIDS_ADMINISTERED":
@@ -144,11 +145,12 @@ public enum SectionsEDES implements ContentIdPrefix {
 		case "MEDICATIONS_ADMINISTERED":
 			return IHEFactory.eINSTANCE.createMedicationsAdministeredSection().init();
 		case "MODE_OF_ARRIVAL":
-			return PCCFactory.eINSTANCE.createModeOfArrivalSection().init();
+			return initializer.init(PCCFactory.eINSTANCE.createModeOfArrivalSection().init());
 		case "CODED_PHYSICAL_EXAM":
 			return IHEFactory.eINSTANCE.createPhysicalExamSection().init();
 		case "PROCEDURES":
-			return IHEFactory.eINSTANCE.createProceduresAndInterventionsSection().init();
+			return initializer
+					.init(IHEFactory.eINSTANCE.createProceduresAndInterventionsSection().init());
 		case "PROGRESS_NOTE":
 			return PCCFactory.eINSTANCE.createProgressNoteSection().init();
 		case "REASON_FOR_VISIT":
