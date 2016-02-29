@@ -70,16 +70,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
-		<repository>
-			<id>repo.openehealth.org</id>
-			<name>Open eHealth Repo</name>
-			<url>http://repo.openehealth.org/maven2/releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -122,18 +112,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-				<version>1.1-SNAPSHOT</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda.ihe.lab</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
-				<version>1.1-SNAPSHOT</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda.ihe</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda.ihe</artifactId>
 				<version>1.1-SNAPSHOT</version>
 			</dependency>
 
@@ -354,6 +332,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<type>mar</type>
 				<version>1.41</version>
 			</dependency>
+
 
 			<dependency>
 				<groupId>commons-logging</groupId>
