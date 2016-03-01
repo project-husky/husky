@@ -79,6 +79,6 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 *          the date
 	 */
 	public void setTime(Date date) {
-		getMdht().setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
+		getMdht().setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 }

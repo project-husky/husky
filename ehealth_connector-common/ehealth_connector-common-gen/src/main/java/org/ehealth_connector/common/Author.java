@@ -472,7 +472,7 @@ public class Author {
 	 */
 	public Date getTimeAsDate() {
 		if (mAuthor.getTime() != null) {
-			return DateUtil.parseDate(mAuthor.getTime());
+			return DateUtil.parseDates(mAuthor.getTime().getValue());
 		}
 		return null;
 	}
@@ -687,9 +687,9 @@ public class Author {
 	 */
 	public void setTime(Date date) {
 		if (date != null) {
-			mAuthor.setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
+			mAuthor.setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 		} else {
-			mAuthor.setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(new Date()));
+			mAuthor.setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(new Date()));
 		}
 	}
 

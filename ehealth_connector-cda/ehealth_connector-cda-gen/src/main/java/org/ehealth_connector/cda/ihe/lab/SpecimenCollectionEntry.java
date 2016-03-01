@@ -54,7 +54,7 @@ public class SpecimenCollectionEntry
 	}
 
 	protected void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
+		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 
 	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {

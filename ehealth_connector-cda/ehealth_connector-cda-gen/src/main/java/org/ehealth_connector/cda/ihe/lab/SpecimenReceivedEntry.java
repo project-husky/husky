@@ -29,6 +29,6 @@ public class SpecimenReceivedEntry
 	}
 
 	protected void setEffectiveTime(Date effectiveTime) {
-		getMdht().setEffectiveTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(effectiveTime));
+		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(effectiveTime));
 	}
 }

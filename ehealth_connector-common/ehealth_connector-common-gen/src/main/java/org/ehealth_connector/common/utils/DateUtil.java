@@ -61,7 +61,7 @@ public class DateUtil {
 	 *          <div class="en"> date</div>
 	 * @return the ivl ts
 	 */
-	public static IVL_TS convertDateYYYYMMDDHHMMSSHHMM(Date date) {
+	public static IVL_TS convertDateyyyyMMddHHmmssZZZZ(Date date) {
 		if (date == null) {
 			return createUnknownTime(null);
 		} else {
@@ -538,7 +538,8 @@ public class DateUtil {
 	}
 
 	public static Date parseDates(String value) {
-		final String[] formatStrings = { "yyyyMMddHHmm", "yyyyMMdd", "yyyyMMddHHmm" };
+		final String[] formatStrings = { "yyyyMMddHHmmssZZZZ", "yyyyMMddHHmm", "yyyyMMdd",
+				"yyyyMMddHHmm" };
 
 		for (final String formatString : formatStrings) {
 			try {
@@ -614,6 +615,24 @@ public class DateUtil {
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
 					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.", e);
+		}
+	}
+
+	/**
+	 * Parse date in format yyyyMMddHHmmZ.
+	 *
+	 * @param value
+	 *          <br>
+	 *          <div class="de"> value</div>
+	 * @return java.util.Date
+	 */
+	public static Date parseDateyyyyMMddHHmmssZZZZ(String value) {
+		try {
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException(
+					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmssZZZZ.", e);
 		}
 	}
 
