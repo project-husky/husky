@@ -55,7 +55,7 @@ public class AssociatedEntity
 	 *
 	 * @param name
 	 *          the persons name
-	 * @param adress
+	 * @param address
 	 *          the address
 	 * @param telecoms
 	 *          the telecoms

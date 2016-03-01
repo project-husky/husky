@@ -71,19 +71,6 @@ public class Author {
 		mAuthor.setTime(DateUtil.nowAsTS());
 	}
 
-	// /**
-	// * <div class="en">Instantiates a new author.</div> <div
-	// * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
-	// * class="it"></div>
-	// *
-	// * @param iAuthor
-	// * <br>
-	// * <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
-	// * <div class="it"></div>
-	// */
-	// public Author(AuthorType iAuthor) {
-	// }
-
 	/**
 	 * Instantiates a new author.
 	 *

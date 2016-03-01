@@ -209,6 +209,21 @@ public class Util {
 		return asEnt;
 	}
 
+	public static AssignedAuthor createAuthorFromOrganization(Organization organization) {
+		org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
+		AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
+		if (!o.getAddrs().isEmpty()) {
+			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+		}
+		if (!o.getTelecoms().isEmpty()) {
+			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		}
+		if (!o.getIds().isEmpty()) {
+			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		}
+		return a;
+	}
+
 	/**
 	 * <div class="en">Creates the MDHT CE null flavor NASK.</div>
 	 *
@@ -576,28 +591,6 @@ public class Util {
 		return tel;
 	}
 
-	/**
-	 * <div class="en">Creates the MDHT phone TEL object, without knowing the type
-	 * of TEL object (id the endpoint is a fax, phone etc. is unknown).</div>
-	 *
-	 * @param endpointIdentifier
-	 *          <br>
-	 *          <div class="en"> tel nr</div><div class="de">Der Endpunkt der
-	 *          Kommunikation (z.B. eine Telefonnummer)</div>
-	 * @param usage
-	 *          <br>
-	 *          <div class="en"> usage</div>
-	 * @return the tel
-	 */
-	public static TEL createUnknownTel(String endpointIdentifier, AddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		if (usage != null) {
-			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		}
-		tel.setValue(endpointIdentifier);
-		return tel;
-	}
-
 	// /**
 	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	// * and a generated extension.</div>
@@ -637,6 +630,28 @@ public class Util {
 	// }
 	// return ii;
 	// }
+
+	/**
+	 * <div class="en">Creates the MDHT phone TEL object, without knowing the type
+	 * of TEL object (id the endpoint is a fax, phone etc. is unknown).</div>
+	 *
+	 * @param endpointIdentifier
+	 *          <br>
+	 *          <div class="en"> tel nr</div><div class="de">Der Endpunkt der
+	 *          Kommunikation (z.B. eine Telefonnummer)</div>
+	 * @param usage
+	 *          <br>
+	 *          <div class="en"> usage</div>
+	 * @return the tel
+	 */
+	public static TEL createUnknownTel(String endpointIdentifier, AddressUse usage) {
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		if (usage != null) {
+			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		}
+		tel.setValue(endpointIdentifier);
+		return tel;
+	}
 
 	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
@@ -913,42 +928,6 @@ public class Util {
 		}
 	}
 
-	/**
-	 * <div class="en">Join an ArrayList of String with person names to a whole
-	 * name</div>
-	 *
-	 * @param nameList
-	 *          <br>
-	 *          <div class="en"> name list</div>
-	 * @param delimiter
-	 *          <br>
-	 *          <div class="en"> delimiter</div>
-	 * @return the string
-	 */
-	public static String join(List<String> nameList, String delimiter) {
-		if ((nameList == null) || nameList.isEmpty()) {
-			return "";
-		}
-
-		final StringBuilder builder = new StringBuilder();
-		final Iterator<String> iter = nameList.iterator();
-		// String string = iter.next();
-		// if ("".equals(string)) {
-		// builder = new StringBuilder(iter.next());
-		// } else {
-		// builder = new StringBuilder(iter.next());
-		// }
-		while (iter.hasNext()) {
-			final String string = iter.next();
-			if (builder.length() > 0) {
-				builder.append(delimiter).append(string);
-			} else {
-				builder.append(string);
-			}
-		}
-		return builder.toString();
-	}
-
 	// /**
 	// * Updates a Reference if it is a comment (in a deph of two counters)
 	// *
@@ -1009,6 +988,42 @@ public class Util {
 	// }
 	// return er;
 	// }
+
+	/**
+	 * <div class="en">Join an ArrayList of String with person names to a whole
+	 * name</div>
+	 *
+	 * @param nameList
+	 *          <br>
+	 *          <div class="en"> name list</div>
+	 * @param delimiter
+	 *          <br>
+	 *          <div class="en"> delimiter</div>
+	 * @return the string
+	 */
+	public static String join(List<String> nameList, String delimiter) {
+		if ((nameList == null) || nameList.isEmpty()) {
+			return "";
+		}
+
+		final StringBuilder builder = new StringBuilder();
+		final Iterator<String> iter = nameList.iterator();
+		// String string = iter.next();
+		// if ("".equals(string)) {
+		// builder = new StringBuilder(iter.next());
+		// } else {
+		// builder = new StringBuilder(iter.next());
+		// }
+		while (iter.hasNext()) {
+			final String string = iter.next();
+			if (builder.length() > 0) {
+				builder.append(delimiter).append(string);
+			} else {
+				builder.append(string);
+			}
+		}
+		return builder.toString();
+	}
 
 	/**
 	 * <div class="en">Join a list of MDHT ENXP (name parts) to a whole person

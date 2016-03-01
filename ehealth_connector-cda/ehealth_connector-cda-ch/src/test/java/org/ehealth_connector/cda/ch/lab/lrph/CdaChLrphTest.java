@@ -19,6 +19,7 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
+import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -266,6 +267,10 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 		// LRPH
 		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.3.1", null));
+
+		// Referral Ordering Physician
+		cda.addReferralOrderingPhysician(new ReferralOrderingPhysician());
+		assertNotNull(cda.getReferralOrderingPhysicians());
 	}
 
 	@Test
