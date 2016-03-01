@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
@@ -29,7 +30,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
  */
-public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> extends AbstractCda<EClinicalDocument> {
+public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
+		extends AbstractCda<EClinicalDocument> {
 
 	/** main OID for CDA-CH */
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1";
@@ -38,9 +40,9 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> 
 	public static final String OID_V1 = "2.16.756.5.30.1.1.1.1.1";
 
 	/**
-	 * <div class="en">Constructor for CdaCh documents</div> <div
-	 * class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
-	 * 
+	 * <div class="en">Constructor for CdaCh documents</div>
+	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
+	 *
 	 * @param doc
 	 *            the CDA-CH Object in its MDHT representation
 	 */
@@ -52,9 +54,9 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> 
 	 * <div class="en">Constructor that includes a stylesheet and a cascasing
 	 * stylesheet into the document processing instructions and initalizes the
 	 * standard document attributes.</div> <div class="de">Erzeugt ein CdaCh
-	 * Objekt (CDA Header nach schweizer Spezifikation)</div> <div
-	 * class="fr"></div>
-	 * 
+	 * Objekt (CDA Header nach schweizer Spezifikation)</div>
+	 * <div class="fr"></div>
+	 *
 	 * @param doc
 	 *            the CDA-CH Object in its MDHT representation
 	 * @param stylesheet
@@ -69,7 +71,18 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> 
 	}
 
 	/**
-	 * 
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.AbstractCda#getLanguageCode()
+	 */
+	@Override
+	public LanguageCode getLanguageCode() {
+		return LanguageCode.getEnum(super.getDoc().getLanguageCode().getCode());
+	}
+
+	/**
+	 *
 	 * Method implementing
 	 *
 	 */
@@ -103,7 +116,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> 
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractCda#setId(org.ehealth_connector.common.Identificator)
@@ -121,7 +134,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument> 
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractCda#setSetId(java.lang.String)
