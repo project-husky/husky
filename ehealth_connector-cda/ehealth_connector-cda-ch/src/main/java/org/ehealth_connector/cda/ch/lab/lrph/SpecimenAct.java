@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
@@ -20,6 +21,15 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		super(mdht);
 	}
 
+	// Required Elements
+	public SpecimenAct(Code code, org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry,
+			LaboratoryBatteryOrganizer organizer) {
+		this();
+		setCode(code);
+		setSpecimenCollectionEntry(entry);
+		addLaboratoryBatteryOrganizer(organizer);
+	}
+
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
@@ -30,6 +40,8 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	public void addLaboratoryIsolateOrganizer(
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer labIsolateOrganizer) {
 		getMdht().addOrganizer(labIsolateOrganizer.copy());
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
 	}
 
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
@@ -79,7 +91,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
 		for (EntryRelationship e : getMdht().getEntryRelationships()) {
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
-				return new SpecimenCollectionEntry(
+				return new org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e.getProcedure());
 			}
 		}
@@ -109,7 +121,8 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		this.getNotificationOrganizer().setOutbreakIdentification(outbreakIdentification);
 	}
 
-	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
+	public void setSpecimenCollectionEntry(
+			org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry) {
 		getMdht().addProcedure(entry.copy());
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);

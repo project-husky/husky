@@ -12,6 +12,8 @@ import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class SpecimenCollectionEntry
@@ -25,7 +27,11 @@ public class SpecimenCollectionEntry
 		super(mdht);
 	}
 
-	protected void addParticipant(Participant participant) {
+	public void addParticipant(Participant participant) {
+		// set ParticipantionType and ParticipantClassRole
+		participant.setTypeCode(ParticipationType.PRD);
+		participant.getParticipantRole().setClassCode(RoleClassRoot.SPEC);
+
 		getMdht().getParticipants().add(participant.copy());
 	}
 
@@ -33,7 +39,7 @@ public class SpecimenCollectionEntry
 		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
-	protected List<Participant> getParticipants() {
+	public List<Participant> getParticipants() {
 		ArrayList<Participant> list = new ArrayList<Participant>();
 		if (getMdht() != null && getMdht().getParticipants() != null) {
 			for (Participant2 p : this.getMdht().getParticipants()) {
@@ -48,7 +54,7 @@ public class SpecimenCollectionEntry
 	}
 
 	protected void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDate(date));
+		getMdht().setEffectiveTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
 	}
 
 	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {

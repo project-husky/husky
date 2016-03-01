@@ -50,6 +50,19 @@ public class Code {
 	 *          <div class="de"> code</div> <div class="fr"></div>
 	 *          <div class="it"></div>
 	 */
+	public Code() {
+		mCD = DatatypesFactory.eINSTANCE.createCD();
+	}
+
+	/**
+	 * <div class="en">Instantiates a new code.</div> <div class="de">Instantiiert
+	 * ein neues Code Objekt</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param code
+	 *          <br>
+	 *          <div class="de"> code</div> <div class="fr"></div>
+	 *          <div class="it"></div>
+	 */
 	public Code(CD code) {
 		mCD = code;
 	}

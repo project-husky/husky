@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -58,7 +57,7 @@ public class SpecimenActTest extends TestUtils {
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']"));
 
 		// SpecimenCollectionEntry
-		SpecimenCollectionEntry entry = new SpecimenCollectionEntry();
+		org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry = new org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry();
 		act.setSpecimenCollectionEntry(entry);
 		assertNotNull(act.getSpecimenCollectionEntry());
 		document = act.getDocument();

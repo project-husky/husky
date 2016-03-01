@@ -14,6 +14,12 @@ public class SpecimenReceivedEntry
 		super(LABFactory.eINSTANCE.createSpecimenReceived().init());
 	}
 
+	// Required Elements
+	public SpecimenReceivedEntry(Date effectiveTime) {
+		this();
+		setEffectiveTime(effectiveTime);
+	}
+
 	protected SpecimenReceivedEntry(SpecimenReceived mdht) {
 		super(mdht);
 	}
@@ -23,6 +29,6 @@ public class SpecimenReceivedEntry
 	}
 
 	protected void setEffectiveTime(Date effectiveTime) {
-		getMdht().setEffectiveTime(DateUtil.convertDate(effectiveTime));
+		getMdht().setEffectiveTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(effectiveTime));
 	}
 }

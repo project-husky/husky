@@ -13,6 +13,12 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 		super(code);
 	}
 
+	// Required Elements
+	public LaboratorySpecialtySection(Code code, LaboratoryReportDataProcessingEntry entry) {
+		this(code);
+		setLaboratoryReportDataProcessingEntry(entry);
+	}
+
 	public LaboratorySpecialtySection(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection mdht) {
 		super(mdht);

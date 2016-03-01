@@ -24,6 +24,12 @@ public class OutbreakIdentificationObservation
 		super(mdht);
 	}
 
+	// Required Elements
+	public OutbreakIdentificationObservation(SectionAnnotationCommentEntry comment) {
+		this();
+		setCommentEntry(comment);
+	}
+
 	/**
 	 * Gets the comment entry.
 	 *

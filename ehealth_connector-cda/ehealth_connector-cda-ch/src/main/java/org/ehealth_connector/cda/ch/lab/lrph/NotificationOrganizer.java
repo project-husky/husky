@@ -13,6 +13,12 @@ public class NotificationOrganizer extends org.ehealth_connector.cda.ihe.lab.Not
 		super(mdht);
 	}
 
+	// Required Elements
+	public NotificationOrganizer(OutbreakIdentificationObservation observation) {
+		this();
+		setOutbreakIdentification(observation);
+	}
+
 	public OutbreakIdentificationObservation getOutbreakIdentificationObservation() {
 		return new OutbreakIdentificationObservation(getMdht().getOutbreakIdentifications().get(0));
 	}

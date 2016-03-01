@@ -54,6 +54,28 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Convert date.</div>
+	 *
+	 * @param date
+	 *          <br>
+	 *          <div class="en"> date</div>
+	 * @return the ivl ts
+	 */
+	public static IVL_TS convertDateYYYYMMDDHHMMSSHHMM(Date date) {
+		if (date == null) {
+			return createUnknownTime(null);
+		} else {
+			final IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
+
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
+			final String tsStr = sdf.format(date);
+
+			ts.setValue(tsStr);
+			return ts;
+		}
+	}
+
+	/**
 	 * <div class="en">Convert sxc m_ ts to eur string.</div>
 	 * <div class="de"></div> <div class="fr"></div> <div class="it"></div>
 	 *

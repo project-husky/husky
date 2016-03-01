@@ -23,7 +23,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
  * Implements the CDA Body Level3 Comment Entry used to set an annotation
  * comment text for a section. e.g. CHA-CH-VACD, see chapter 7.5.9.5
  */
-public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.Comment> {
+public class SectionAnnotationCommentEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.Comment> {
 
 	/**
 	 * Instantiates an empty SectionAnnotationCommentEntry.
@@ -33,11 +34,19 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 	}
 
 	/**
-	 * Instantiates a new SectionAnnotationCommentEntry based on the MDHT
-	 * element.
+	 * Instantiates a new SectionAnnotationCommentEntry based on the MDHT element.
 	 */
 	public SectionAnnotationCommentEntry(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		super(comment);
+	}
+
+	/**
+	 * Instantiates an SectionAnnotationCommentEntry with a given
+	 * ContentIdReference.
+	 */
+	public SectionAnnotationCommentEntry(String reference) {
+		this();
+		setContentIdReference(reference);
 	}
 
 	@Override
@@ -64,7 +73,7 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 
 	/**
 	 * Gets the text of the annotation comment.
-	 * 
+	 *
 	 * @return the text of the annotation comment
 	 */
 	public String getAnnotationCommentText() {
@@ -72,9 +81,9 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 	}
 
 	/**
-	 * Gets the reference to the content element. It is the value of the ID in
-	 * the &lt;content ID="xxx"&gt; element prefixed with #.
-	 * 
+	 * Gets the reference to the content element. It is the value of the ID in the
+	 * &lt;content ID="xxx"&gt; element prefixed with #.
+	 *
 	 * @return the content ID reference
 	 */
 	public String getContentIdReference() {
@@ -88,7 +97,8 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + (this.getContentIdReference() != null ? this.getContentIdReference().hashCode() : 0);
+		result = (prime * result)
+				+ (this.getContentIdReference() != null ? this.getContentIdReference().hashCode() : 0);
 		return result;
 	}
 
@@ -97,9 +107,9 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 	 * level3 object. If this object is added to a section with narrative
 	 * generation enabled this text will copied to the section text and the text
 	 * can then be referenced by the &lt;content ID="xxx"&gt; element.
-	 * 
+	 *
 	 * @param text
-	 *            the new comment text
+	 *          the new comment text
 	 */
 	public void setAnnotationCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
@@ -107,11 +117,11 @@ public class SectionAnnotationCommentEntry extends MdhtFacade<org.openhealthtool
 
 	/**
 	 * Sets the reference to the content element. This is the value of the ID in
-	 * the &lt;content ID="xxx"&gt; element. If not provided it will
-	 * automatically be prefixed with #.
-	 * 
+	 * the &lt;content ID="xxx"&gt; element. If not provided it will automatically
+	 * be prefixed with #.
+	 *
 	 * @param value
-	 *            the content ID reference
+	 *          the content ID reference
 	 */
 	public void setContentIdReference(String value) {
 		if (!value.startsWith("#"))

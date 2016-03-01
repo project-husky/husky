@@ -17,7 +17,7 @@ package org.ehealth_connector.cda;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.Participant1;
 
 /**
  * MdhtEntryObservationFacade is a facade for extending the mdht objects
@@ -27,9 +27,9 @@ import org.openhealthtools.mdht.uml.cda.Act;
  *
  * @param <E>
  *          the model type to provide for implementing the facade to it,
- *          extending an Participant
+ *          extending an Act
  */
-public class MdhtActFacade<E extends Act> extends MdhtFacade<E> {
+public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E> {
 
 	/** The log. */
 	private final Log log = LogFactory.getLog(MdhtFacade.class);
@@ -40,7 +40,7 @@ public class MdhtActFacade<E extends Act> extends MdhtFacade<E> {
 	 * @param mdht
 	 *          the mdht model object
 	 */
-	protected MdhtActFacade(E mdht) {
+	protected MdhtParticipant1Facade(E mdht) {
 		super(mdht, null, null);
 	}
 }

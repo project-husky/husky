@@ -13,6 +13,12 @@ public class LaboratoryReportDataProcessingEntry
 		super(mdht);
 	}
 
+	// Required Elements
+	public LaboratoryReportDataProcessingEntry(SpecimenAct act) {
+		this();
+		setSpecimenAct(act);
+	}
+
 	public org.ehealth_connector.cda.ch.lab.lrph.SpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
 			return new org.ehealth_connector.cda.ch.lab.lrph.SpecimenAct(getMdht().getAct());

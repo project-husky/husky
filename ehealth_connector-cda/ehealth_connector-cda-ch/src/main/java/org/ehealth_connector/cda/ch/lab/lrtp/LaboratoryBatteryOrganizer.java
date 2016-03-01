@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 
 public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer() {
@@ -17,6 +18,10 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
 		getMdht().addObservation(observation.copy());
+
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
+
 	}
 
 	public List<LaboratoryObservation> getLaboratoryObservations() {

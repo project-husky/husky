@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
+import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 
 public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer() {
@@ -17,8 +19,25 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		super(mdht);
 	}
 
+	public void addLaboratoryObservation(LaboratoryObservation observation) {
+		getMdht().addObservation(observation.copy());
+
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
+
+	}
+
 	public void addObservationMediaEntry(ObservationMediaEntry observationMedia) {
 		getMdht().addObservationMedia(observationMedia.copy());
+	}
+
+	public List<LaboratoryObservation> getLaboratoryObservations() {
+		List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
+				.getLaboratoryObservations()) {
+			loList.add(new LaboratoryObservation(lo));
+		}
+		return loList;
 	}
 
 	public List<ObservationMediaEntry> getObservationMediaEntries() {
@@ -28,5 +47,4 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		}
 		return ol;
 	}
-
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ihe.lab.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Participant;
 import org.ehealth_connector.common.Specimen;
@@ -13,6 +14,7 @@ import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
@@ -30,6 +32,31 @@ public class LaboratoryIsolateOrganizer
 		super(mdht);
 	}
 
+	// Required Elements
+	public LaboratoryIsolateOrganizer(Specimen specimen) {
+		this();
+		setSpecimen(specimen);
+	}
+
+	/**
+	 *
+	 * Creates a new Laboratory Isolate Organizer. One specimen element (specimen,
+	 * specimenRole, and specimenPlayingEntity) will be created with the given
+	 * reference.
+	 *
+	 * @param reference
+	 *          the reference will be set into
+	 *          specimen/specimenRole/specimenPlayingEntity/originalText/reference
+	 */
+	public LaboratoryIsolateOrganizer(String reference) {
+		this();
+		Code code = new Code();
+		code.setOriginalTextReference("testRef");
+		Specimen specimen = new Specimen();
+		specimen.setCode(code);
+		setSpecimen(specimen);
+	}
+
 	public void addLaboratory(Organization organization, Date time) {
 		Participant p = Util.createParticipantFromOrganization(organization);
 		p.setTime(time);
@@ -39,6 +66,8 @@ public class LaboratoryIsolateOrganizer
 	public void addLaboratoryBatteryOrganizer(
 			AbstractLaboratoryBatteryOrganizer labBatteryOrganizer) {
 		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
 
 	public void addParticipant(Participant participant) {
@@ -83,7 +112,7 @@ public class LaboratoryIsolateOrganizer
 
 	public void setSpecimen(Specimen specimen) {
 		getMdht().getSpecimens().clear();
-		specimen.getMdht().setTypeCode(ParticipationType.PRD);
+		specimen.getMdht().setTypeCode(ParticipationType.SPC);
 		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
 		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
 				.setClassCode(EntityClassRoot.MIC);

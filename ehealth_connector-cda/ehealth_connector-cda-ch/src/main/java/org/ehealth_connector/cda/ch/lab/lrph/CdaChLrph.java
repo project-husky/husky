@@ -6,6 +6,7 @@ import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LrphSections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -51,11 +52,11 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 		org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection;
 		// Try to determine the right code from the LaboratoryObservation and set it
 		// in the Section
+		final String section = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
+		Code sectionCode = LrphSections.getEnum(section).getCode();
 		if (getLaboratorySpecialtySection() == null) {
-			String sectionCode = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
 			if (sectionCode != null) {
-				laboratorySpecialtySection = new LaboratorySpecialtySection(
-						LrphSections.getEnum(sectionCode).getCode());
+				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
@@ -73,6 +74,7 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 		SpecimenAct se;
 		if (lrdpe.getSpecimenAct() == null) {
 			se = new SpecimenAct();
+			se.setCode(sectionCode);
 		} else {
 			se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
@@ -207,6 +209,17 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 	//
 	// }
 
+	public SpecimenAct getSpecimenAct() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct();
+		}
+		return null;
+	}
+
 	public void setLaboratorySpecialtySection(
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection) {
 		// Create a new structured body
@@ -226,6 +239,7 @@ public class CdaChLrph extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch
 			this.getLaboratorySpecialtySection().setText(text);
 		}
 	}
+
 	// // Convenience function
 	// public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizerList()
 	// {

@@ -17,8 +17,8 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
-import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -70,7 +70,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		LaboratoryObservation lo = new LaboratoryObservation();
 
-		SpecimenCollectionEntry sc = new SpecimenCollectionEntry();
+		org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry sc = new org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry();
 		SpecimenReceivedEntry sr = new SpecimenReceivedEntry();
 		LaboratoryIsolateOrganizer lio = new LaboratoryIsolateOrganizer();
 		SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
@@ -222,7 +222,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Convenience LaboratoryBatteryOrganizer (automatic section creation)
 		doc = new CdaChLrph();
 		LaboratoryObservation lo = new LaboratoryObservation();
-		lo.setCode(LabObsListSnomed.BRUCELLA);
+		lo.setCode(LabObsListLoinc.BRUCELLA);
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		lbo.addLaboratoryObservation(lo);
 		doc.addLaboratoryBatteryOrganizer(lbo);
@@ -232,7 +232,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));
 		assertTrue(xExist(document,
-				"/clinicaldocument/component/structuredBody/component/section/code[@code='18725-2']"));
+				"/clinicaldocument/component/structuredBody/component/section/code[@code='18769-0']"));
 		// a second Laboratory Battery Organizer
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		document = doc.getDocument();
