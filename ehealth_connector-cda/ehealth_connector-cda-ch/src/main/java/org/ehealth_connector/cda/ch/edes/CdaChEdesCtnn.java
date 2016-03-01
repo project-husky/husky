@@ -1,15 +1,22 @@
 package org.ehealth_connector.cda.ch.edes;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AllergyConcern;
+import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
+import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
+import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
@@ -107,6 +114,95 @@ public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		return mCodedVitalSigns.getCodedVitalSignObservations();
 	}
 
+	/**
+	 * <div class="en">Adds the AllergiesOrOtherAdverseReaction</div> <div class="de">Fügt ein
+	 * Allergie-Leiden hinzu</div> <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param AllergiesOrOtherAdverseReaction
+	 * <br>
+	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
+	public void addAllergiesOrOtherAdverseReaction(AllergyConcern AllergiesOrOtherAdverseReaction) {
+		
+		// find or create (and add) the Section
+		AllergiesReactionsSection section = getDoc().getAllergiesReactionsSection();
+		if (section == null) {
+			section = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
+			common.addSection(section);
+		}
+
+		// add the MDHT Object to the section
+		section.addAct(AllergiesOrOtherAdverseReaction.copyMdhtAllergyConcern());
+	}
+		
+    /**
+	 * <div class="en">Gets AllergiesAndOtherAdverseReactions</div> <div
+	 * class="de">Liefert alle Allergie Leiden zurück</div>
+	 * 
+	 * @return the AllergiesAndOtherAdverseReactions
+	 */
+	public List<AllergyConcern> getAllergiesAndOtherAdverseReactions() {
+		// Get the right section
+		AllergiesReactionsSection section = getDoc().getAllergiesReactionsSection();
+		if (section == null) {
+			return Collections.emptyList();
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
+		for (final Act act : acts) {
+			final AllergyConcern problemConcernEntry = new AllergyConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
+	}
+	
+    /**
+	 * <div class="en">Adds a PastIllness</div> <div class="de">Fügt
+	 * ein vergangenes Leiden hinzu</div> <div class="fr"></div> <div
+	 * class="it"></div>
+	 * 
+	 * @param PastIllness
+	 *            the past problem concern
+	 */
+	public void addPastIllness(PastProblemConcern PastIllness) {
+		
+		// find or create (and add) the Section
+		HistoryOfPastIllnessSection section = getDoc().getHistoryOfPastIllnessSection();
+		if (section == null) {
+			section = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
+			common.addSection(section);
+		}
+		
+		// add the MDHT Object to the section
+		section.addAct(PastIllness.copyMdhtProblemConcernEntry());
+	}
+	
+	/**
+	 * <div class="en">Gets HistoryOfPastIllness</div> <div
+	 * class="de">Liefert alle vergangen Leiden zurück</div>
+	 * 
+	 * @return the HistoryOfPastIllness
+	 */
+	public List<PastProblemConcern> getHistoryOfPastIllness() {
+		// Get the right section
+		HistoryOfPastIllnessSection section = getDoc().getHistoryOfPastIllnessSection();
+		if (section == null) {
+			return Collections.emptyList();
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<PastProblemConcern> problemConcernEntries = new ArrayList<PastProblemConcern>();
+		for (final Act act : acts) {
+			final PastProblemConcern problemConcernEntry = new PastProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
+	}
+	
 	/**
 	 * <div class="en">Gets the MDHT-CdaChEdesCtnn Object</div> <div
 	 * class="de">Liefert das MDHT-CdaChEdesCtnn-Objekt zurück.</div>
