@@ -70,6 +70,7 @@ public class Participant {
 	 * Sets the type code for this participation
 	 *
 	 * @param typeCode
+	 *          the typeCode
 	 */
 	public void setTypeCode(ParticipationType typeCode) {
 		mParticipant.setTypeCode(typeCode);

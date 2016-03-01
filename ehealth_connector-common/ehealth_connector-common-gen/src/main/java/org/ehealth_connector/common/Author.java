@@ -120,7 +120,7 @@ public class Author {
 	 * object</div> <div class="de"> Erstellt einen neuen Autor der der
 	 * übergebenen Organisation entspricht.</div>
 	 *
-	 * @param patientAsAuthor
+	 * @param organizationAsAuthor
 	 *          <div class="en"> this Organization is used as Author</div>
 	 *          <div class="de"> diese Organisation wird als Autor verwendet</div>
 	 */
