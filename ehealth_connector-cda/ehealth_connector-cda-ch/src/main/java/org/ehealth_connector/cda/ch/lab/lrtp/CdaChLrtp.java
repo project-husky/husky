@@ -48,6 +48,9 @@ public class CdaChLrtp
 
 	/**
 	 * Instantiates a new cda ch lrtp.
+	 *
+	 * @param code
+	 *          the section code
 	 */
 	public CdaChLrtp(Code code) {
 		this(code, LanguageCode.ENGLISH);
@@ -55,7 +58,9 @@ public class CdaChLrtp
 
 	/**
 	 * Instantiates a new cda ch lrtp.
-	 *
+	 * 
+	 * @param code
+	 *          the section code
 	 * @param languageCode
 	 *          the language code
 	 */

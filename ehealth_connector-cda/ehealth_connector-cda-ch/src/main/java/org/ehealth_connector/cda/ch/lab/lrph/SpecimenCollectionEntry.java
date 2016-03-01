@@ -21,7 +21,7 @@ public class SpecimenCollectionEntry
 	 *
 	 * @param effectiveTime
 	 *          time of the day, when the sample extraction took place
-	 * @param The
+	 * @param id
 	 *          Id of your lab (as root) with the id of the specimen inside your
 	 *          lab as extension
 	 */
