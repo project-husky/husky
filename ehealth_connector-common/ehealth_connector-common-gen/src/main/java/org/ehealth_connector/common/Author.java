@@ -69,6 +69,8 @@ public class Author {
 		// add functionCode and time
 		mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
 		mAuthor.setTime(DateUtil.nowAsTS());
+
+		setTime(null);
 	}
 
 	/**
@@ -111,6 +113,24 @@ public class Author {
 	 */
 	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
 		mAuthor = authorMdht;
+	}
+
+	/**
+	 * <div class="en"> Creates a new Author based on the given Organization
+	 * object</div> <div class="de"> Erstellt einen neuen Autor der der
+	 * übergebenen Organisation entspricht.</div>
+	 *
+	 * @param patientAsAuthor
+	 *          <div class="en"> this Organization is used as Author</div>
+	 *          <div class="de"> diese Organisation wird als Autor verwendet</div>
+	 */
+	public Author(Organization organizationAsAuthor) {
+		mAuthor = CDAFactory.eINSTANCE.createAuthor();
+		if (organizationAsAuthor.getMdhtOrganization() != null) {
+			mAsAuthor = Util.createAuthorFromOrganization(organizationAsAuthor);
+			mAuthor.setAssignedAuthor(mAsAuthor);
+		}
+		setTime(null);
 	}
 
 	/**
@@ -284,22 +304,33 @@ public class Author {
 		// organisation name.
 		if (mAuthor.getAssignedAuthor() != null) {
 			if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
-				if (mAuthor.getAssignedAuthor().getAssignedPerson().getNames() != null) {
+				if (!mAuthor.getAssignedAuthor().getAssignedPerson().getNames().isEmpty()) {
 					final Name name = new Name(
 							mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 					retVal = name.getCompleteName();
-				} else {
-					if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-						if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
-							final Name name = new Name(
-									mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
-							retVal = name.getCompleteName();
-						}
-					}
 				}
 			}
 		}
+		// If the Author has no name, try the represented organization
+		if (retVal.equals("")) {
+			if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
+				if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+					final Name name = new Name(
+							mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
+					retVal = name.getCompleteName();
+				}
+			}
+		}
+		// If the Represented Organization has no Name try the Authoring Device
+		if (retVal.equals("")) {
+			if (mAuthor.getAssignedAuthor() != null
+					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice() != null
+					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName() != null) {
+				return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName().getText();
+			}
+		}
 		return retVal;
+
 	}
 
 	/**
@@ -528,6 +559,13 @@ public class Author {
 		mAsAuthor = asAuthor;
 	}
 
+	public void setAssignedAuthoringDevice(AuthoringDevice device) {
+		if (mAsAuthor == null) {
+			mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+		}
+		mAsAuthor.setAssignedAuthoringDevice(device.copy());
+	}
+
 	/**
 	 * Method to set
 	 *
@@ -564,16 +602,6 @@ public class Author {
 	public void setGln(String gln) {
 		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
-
-	// TODO Method should go to util of ch package
-	// /**
-	// * To ch author.
-	// *
-	// * @return the org.ehealth_connector.cda.ch. author ch
-	// */
-	// public org.ehealth_connector.common.ch.AuthorCh toChAuthor() {
-	// return new org.ehealth_connector.common.ch.AuthorCh(getAuthorMdht());
-	// }
 
 	/**
 	 * <div class="en">Sets the organization (RepresentedOrganization). The code
@@ -658,10 +686,10 @@ public class Author {
 	 *          Date</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTime(Date date) {
-		try {
-			mAuthor.setTime(DateUtil.createTSFromEuroDate(date));
-		} catch (final ParseException e) {
-			e.printStackTrace();
+		if (date != null) {
+			mAuthor.setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
+		} else {
+			mAuthor.setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(new Date()));
 		}
 	}
 

@@ -58,6 +58,7 @@ public class CdaChLrph
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
+				getMdht().setCode(sectionCode.getCE());
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}

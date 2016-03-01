@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.Participant1;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
 
 /**
  * MdhtEntryObservationFacade is a facade for extending the mdht objects
@@ -68,6 +69,7 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 
 	public void setAssociatedEntity(AssociatedEntity entity) {
 		getMdht().setAssociatedEntity(entity.getMdht());
+		getMdht().getAssociatedEntity().setClassCode(RoleClassAssociative.PROV);
 	}
 
 	/**

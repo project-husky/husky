@@ -364,26 +364,11 @@ public class Code {
 	public CS getCS() {
 		final CS ce = DatatypesFactory.eINSTANCE.createCS();
 		final CD mCD2 = EcoreUtil.copy(mCD);
-		if (mCD2.getCodeSystem() != null) {
-			ce.setCodeSystem(mCD2.getCodeSystem());
-		}
 		if (mCD2.getCode() != null) {
 			ce.setCode(mCD2.getCode());
 		}
-		if (mCD2.getCodeSystemName() != null) {
-			ce.setCodeSystemName(mCD2.getCodeSystemName());
-		}
-		if (mCD2.getDisplayName() != null) {
-			ce.setDisplayName(mCD2.getDisplayName());
-		}
-		if (mCD2.getCodeSystemVersion() != null) {
-			ce.setCodeSystemVersion(mCD2.getCodeSystemVersion());
-		}
 		if (mCD2.isNullFlavorDefined()) {
 			ce.setNullFlavor(mCD2.getNullFlavor());
-		}
-		if (mCD2.getOriginalText() != null) {
-			ce.setOriginalText(mCD2.getOriginalText());
 		}
 		return ce;
 	}

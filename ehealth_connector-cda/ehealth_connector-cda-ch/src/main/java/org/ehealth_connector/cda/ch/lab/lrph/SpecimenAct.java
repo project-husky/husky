@@ -110,6 +110,9 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		}
 		if (added == false) {
 			getMdht().addOrganizer(notificationOrganizer.copy());
+			int nb = getMdht().getEntryRelationships().size() - 1;
+			getMdht().getEntryRelationships().get(nb)
+					.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 		}
 	}
 

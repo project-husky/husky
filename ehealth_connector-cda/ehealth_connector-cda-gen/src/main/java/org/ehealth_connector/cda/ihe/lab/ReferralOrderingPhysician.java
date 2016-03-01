@@ -18,7 +18,7 @@ public class ReferralOrderingPhysician extends
 	 */
 	public ReferralOrderingPhysician(AssociatedEntity entity) {
 		this();
-		getMdht().setAssociatedEntity(entity.copy());
+		setAssociatedEntity(entity);
 	}
 
 	public ReferralOrderingPhysician(

@@ -6,8 +6,11 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.AuthoringDevice;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Author;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 
@@ -34,9 +37,10 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		setTitle(getSpecialitySectionTitle());
 	}
 
-	public void addOrganizationAsAuthor(Organization organization) {
+	public void addAuthorOrganization(Organization organization, AuthoringDevice device) {
+		Author author = CDAFactory.eINSTANCE.createAuthor();
+		author.setAssignedAuthor(Util.createAuthorFromOrganization(organization));
 		// TODO
-		Util.createAuthorFromOrganization(organization);
 	}
 
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
