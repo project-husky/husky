@@ -32,6 +32,11 @@ public class Participant {
 		return new org.ehealth_connector.common.ParticipantRole(mParticipant.getParticipantRole());
 	}
 
+	/**
+	 * Gets the time as Java Date Object
+	 *
+	 * @return the time
+	 */
 	public Date getTime() {
 		if (mParticipant.getTime() != null) {
 			return DateUtil.parseIVL_TSVDateTimeValue(mParticipant.getTime());
@@ -47,6 +52,12 @@ public class Participant {
 		mParticipant.setParticipantRole(p.copy());
 	}
 
+	/**
+	 * Sets the time as Data object
+	 *
+	 * @param date
+	 *          the date
+	 */
 	public void setTime(Date date) {
 		try {
 			mParticipant.setTime(DateUtil.createIVL_TSFromEuroDate(date));
@@ -55,6 +66,11 @@ public class Participant {
 		}
 	}
 
+	/**
+	 * Sets the type code for this participation
+	 *
+	 * @param typeCode
+	 */
 	public void setTypeCode(ParticipationType typeCode) {
 		mParticipant.setTypeCode(typeCode);
 	}

@@ -31,7 +31,7 @@ public class CdaChLrtp
 	 */
 	protected static Identificator createUuidLrtp(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(OID_MAIN);
+		// ii.setRoot(OID_MAIN);
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {
@@ -58,7 +58,7 @@ public class CdaChLrtp
 
 	/**
 	 * Instantiates a new cda ch lrtp.
-	 * 
+	 *
 	 * @param code
 	 *          the section code
 	 * @param languageCode
@@ -66,7 +66,7 @@ public class CdaChLrtp
 	 */
 	protected CdaChLrtp(Code code, LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode);
-		super.initCda();
+		// super.initCda();
 		// LaboratorySpecialtySection specialtySection = new
 		// LaboratorySpecialtySection(code,
 		// languageCode);
@@ -154,6 +154,11 @@ public class CdaChLrtp
 	// Convenience function
 	public List<VitalSignObservation> getVitalSignObservationList() {
 		return null;
+	}
+
+	@Override
+	public void initCda() {
+
 	}
 
 	// Convenience function to set the blood group

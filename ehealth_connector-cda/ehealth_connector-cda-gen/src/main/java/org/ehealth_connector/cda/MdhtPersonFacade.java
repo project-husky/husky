@@ -15,12 +15,13 @@
 	 *******************************************************************************/
 package org.ehealth_connector.cda;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.common.utils.DateUtil;
-import org.openhealthtools.mdht.uml.cda.Participant1;
+import org.ehealth_connector.common.Name;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
  * MdhtEntryObservationFacade is a facade for extending the mdht objects
@@ -30,9 +31,10 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
  *
  * @param <E>
  *          the model type to provide for implementing the facade to it,
- *          extending an Act
+ *          extending an Participant
  */
-public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E> {
+public class MdhtPersonFacade<E extends org.openhealthtools.mdht.uml.cda.Person>
+		extends MdhtFacade<E> {
 
 	/** The log. */
 	private final Log log = LogFactory.getLog(MdhtFacade.class);
@@ -43,40 +45,37 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 * @param mdht
 	 *          the mdht model object
 	 */
-	protected MdhtParticipant1Facade(E mdht) {
+	protected MdhtPersonFacade(E mdht) {
 		super(mdht, null, null);
 	}
 
-	public AssociatedEntity getAssociatedEntity() {
-		if (getMdht().getAssociatedEntity() != null) {
-			return new AssociatedEntity(getMdht().getAssociatedEntity());
+	/**
+	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
+	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return <div class="en">the complete name</div>
+	 */
+	public String getCompleteName() {
+		if (!getMdht().getNames().isEmpty()) {
+			final Name name = new Name(getMdht().getNames().get(0));
+			return name.getCompleteName();
 		}
 		return null;
 	}
 
 	/**
-	 * Gets the time as Java Date Object
+	 * <div class="en">Gets the names.</div> <div class="de">Liefert alle
+	 * Nachnamen</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return the time
+	 * @return <div class="en">the names</div>
 	 */
-	public Date getTime() {
-		if (getMdht().getTime() != null) {
-			return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getTime());
+	public List<Name> getNames() {
+		final List<Name> nl = new ArrayList<Name>();
+		for (final PN mName : getMdht().getNames()) {
+			final Name name = new Name(mName);
+			nl.add(name);
 		}
-		return null;
-	}
-
-	public void setAssociatedEntity(AssociatedEntity entity) {
-		getMdht().setAssociatedEntity(entity.getMdht());
-	}
-
-	/**
-	 * Sets the time as Data object
-	 *
-	 * @param date
-	 *          the date
-	 */
-	public void setTime(Date date) {
-		getMdht().setTime(DateUtil.convertDateYYYYMMDDHHMMSSHHMM(date));
+		return nl;
 	}
 }

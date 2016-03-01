@@ -1,22 +1,25 @@
 package org.ehealth_connector.cda.ch.lab;
 
+import java.util.List;
+
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
-import org.openhealthtools.mdht.uml.cda.ch.CDACH;
+import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 
-public abstract class AbstractLaboratoryReport<EClinicalDocument> extends AbstractCdaCh<CDACH> {
+public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
+		extends AbstractCdaCh<EClinicalDocument> {
 
-	protected AbstractLaboratoryReport(CDACH doc) {
+	protected AbstractLaboratoryReport(EClinicalDocument doc) {
 		this(doc, null, null, null);
 	}
 
-	protected AbstractLaboratoryReport(CDACH doc, LanguageCode languageCode) {
+	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode) {
 		this(doc, languageCode, null, null);
 	}
 
-	protected AbstractLaboratoryReport(CDACH doc, LanguageCode languageCode, String styleSheet,
-			String css) {
+	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
+			String styleSheet, String css) {
 		super(doc, styleSheet, css);
 		// If the language code is null use default ENGLISH
 		if (languageCode == null) {
@@ -24,17 +27,16 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument> extends Abstra
 		} else {
 			this.setLanguageCode(languageCode);
 		}
-		// TODO Check if this work as expected
-		super.initCda();
 		setTitle(getSpecialitySectionTitle());
 	}
 
-	// LRPH: 1
-	// LRTP: 1
-	// LRQC: 1..*
-	// Daher protected. In den jeweiligen Templates verfeinern.
-	protected void addLaboratorySpecialtySection(AbstractLaboratorySpecialtySection section) {
-		getMdht().addSection(section.getMdht());
+	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
+		getMdht().getParticipants().add(physician.copy());
+	}
+
+	public List<ReferralOrderingPhysician> getReferralOrderingPhysicians() {
+		// TODO
+		return null;
 	}
 
 	private String getSpecialitySectionTitle() {
