@@ -48,8 +48,8 @@ public class CdaChLrph
 	 * @param styleSheet
 	 *          an extensible style sheet (XSLT) to transform and render the
 	 *          document
-	 * @param cascading
-	 *          style sheet (CSS) to add style information for rendering
+	 * @param css
+	 *          cascading style sheet (CSS) to add style information for rendering
 	 */
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrph().init(), languageCode, styleSheet, css);
