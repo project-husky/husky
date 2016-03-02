@@ -335,7 +335,11 @@ public class TestUtils {
 	}
 
 	public Patient createPatient() {
-		return new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
+		Patient patient = new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
+		patient.addAddress(createAddress1());
+		patient.setBirthday(createStartDate());
+		patient.setTelecoms(createTelecoms1());
+		return patient;
 	}
 
 	public Performer createPerformer1() {
@@ -424,6 +428,9 @@ public class TestUtils {
 		author2 = createAuthor2();
 		organization1 = createOrganization1();
 		address1 = createAddress1();
+
+		// Patient
+		patient1 = createPatient();
 	}
 
 	public boolean xCount(Document document, String xPath, int numberOfElements)

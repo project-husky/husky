@@ -48,42 +48,37 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  */
 public class XdsMetadataUtil {
 
-	private XdsMetadataUtil() {
-
-	}
-
 	/**
 	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
-	 * 
+	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="en"> the code</div>
+	 *          <br>
+	 *          <div class="en"> the code</div>
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType convertEhcCodeToCodedMetadataType(Code code) {
-		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(),
-				null);
+		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(), null);
 	}
 
 	/**
 	 * Converts eHC Code and a given language to OHT CodedMetadataType.
-	 * 
+	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param language
-	 *            the language
+	 *          the language
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType convertEhcCodeToCodedMetadataType(Code code, String language) {
-		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(),
-				null, language);
+		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName(), null,
+				language);
 	}
 
 	/**
 	 * Converts a list of eHC Code to a list of OHT CodedMetadataType.
-	 * 
+	 *
 	 * @param codeList
-	 *            the list of Code
+	 *          the list of Code
 	 * @return the CodedMetadataType Array
 	 */
 	public static CodedMetadataType[] convertEhcCodeToCodedMetadataType(Code[] codeList) {
@@ -95,6 +90,31 @@ public class XdsMetadataUtil {
 			int i = 0;
 			for (final Code cme : codeList) {
 				cmtArray[i] = XdsMetadataUtil.convertEhcCodeToCodedMetadataType(cme);
+				i++;
+			}
+
+			return cmtArray;
+		}
+	}
+
+	/**
+	 * Converts a list of eHC Enums to a given language to a list of OHT
+	 * CodedMetadataType.
+	 *
+	 * @param codedMetadataEnum
+	 *          the eHC Enums
+	 * @return the CodedMetadataType array
+	 */
+	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(
+			CodedMetadataEnumInterface[] codedMetadataEnum) {
+		if (codedMetadataEnum == null)
+			return null;
+		else {
+			final CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
+
+			int i = 0;
+			for (final CodedMetadataEnumInterface cme : codedMetadataEnum) {
+				cmtArray[i] = cme.getCodedMetadataType();
 				i++;
 			}
 
@@ -132,36 +152,11 @@ public class XdsMetadataUtil {
 	// }
 
 	/**
-	 * Converts a list of eHC Enums to a given language to a list of OHT
-	 * CodedMetadataType.
-	 * 
-	 * @param codedMetadataEnum
-	 *            the eHC Enums
-	 * @return the CodedMetadataType array
-	 */
-	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(
-			CodedMetadataEnumInterface[] codedMetadataEnum) {
-		if (codedMetadataEnum == null)
-			return null;
-		else {
-			final CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
-
-			int i = 0;
-			for (final CodedMetadataEnumInterface cme : codedMetadataEnum) {
-				cmtArray[i] = cme.getCodedMetadataType();
-				i++;
-			}
-
-			return cmtArray;
-		}
-	}
-
-	/**
 	 * <div class="en">Convert identificator to OHT CX</div>
-	 * 
+	 *
 	 * @param id
-	 *            <br>
-	 *            <div class="en"> id</div>
+	 *          <br>
+	 *          <div class="en"> id</div>
 	 * @return the cx
 	 */
 	public static CX convertEhcIdentificator(Identificator id) {
@@ -172,9 +167,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT InternationalStringType to String
-	 * 
+	 *
 	 * @param ist
-	 *            the InternationalStringType
+	 *          the InternationalStringType
 	 * @return the String
 	 */
 	public static String convertInternationalStringType(InternationalStringType ist) {
@@ -182,8 +177,7 @@ public class XdsMetadataUtil {
 			if ((ist.getLocalizedString() != null) && (ist.getLocalizedString().size() > 0)) {
 				String s = "";
 				for (int i = 0; i < ist.getLocalizedString().size(); i++) {
-					final LocalizedStringType lst = (LocalizedStringType) ist.getLocalizedString()
-							.get(i);
+					final LocalizedStringType lst = (LocalizedStringType) ist.getLocalizedString().get(i);
 					s = s + lst.getValue();
 					if (i > 0)
 						s = s + "\n";
@@ -196,9 +190,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT AuthorType to eHC Author
-	 * 
+	 *
 	 * @param at
-	 *            the OHT AuthorType
+	 *          the OHT AuthorType
 	 * @return the eHC Author
 	 */
 	public static Author convertOhtAuthorType(AuthorType at) {
@@ -210,8 +204,7 @@ public class XdsMetadataUtil {
 			if (at.getAuthorPerson() != null) {
 				ap = at.getAuthorPerson();
 				// Id
-				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(),
-						ap.getIdNumber()));
+				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(), ap.getIdNumber()));
 				// Name
 				final Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(),
 						ap.getSuffix());
@@ -224,8 +217,7 @@ public class XdsMetadataUtil {
 			for (int i = 0; i < at.getAuthorInstitution().size(); i++) {
 				xon = (XON) at.getAuthorInstitution().get(i);
 				final Organization org = new Organization(xon.getOrganizationName());
-				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(),
-						xon.getIdNumber()));
+				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(), xon.getIdNumber()));
 			}
 		}
 		// Role
@@ -256,9 +248,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT CodedMetadataType to eHC Code
-	 * 
+	 *
 	 * @param cmt
-	 *            the CodedMetadataType
+	 *          the CodedMetadataType
 	 * @return the eHC Code
 	 */
 	public static Code convertOhtCodedMetadataType(CodedMetadataType cmt) {
@@ -268,9 +260,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT CX to an eHC Identificator
-	 * 
+	 *
 	 * @param cx
-	 *            the OHT CX
+	 *          the OHT CX
 	 * @return the Identificator
 	 */
 	public static Identificator convertOhtCx(CX cx) {
@@ -279,9 +271,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT SourcePatientInfoType to an eHC Patient
-	 * 
+	 *
 	 * @param spit
-	 *            the SourcePatientInfoType
+	 *          the SourcePatientInfoType
 	 * @return the eHC Patient
 	 */
 	public static Patient convertOhtSourcePatientInfoType(SourcePatientInfoType spit) {
@@ -317,8 +309,7 @@ public class XdsMetadataUtil {
 		final Telecoms t = new Telecoms();
 		if (spit.getPatientPhoneBusiness() != null) {
 			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(),
-					spit.getPatientPhoneBusiness().getTelecommunicationAddress(),
-					AddressUse.BUSINESS);
+					spit.getPatientPhoneBusiness().getTelecommunicationAddress(), AddressUse.BUSINESS);
 		}
 		// Phone Home
 		if (spit.getPatientPhoneHome() != null) {
@@ -332,25 +323,34 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT XAD to an eHC Address
-	 * 
+	 *
 	 * @param xad
-	 *            the XAD
+	 *          the XAD
 	 * @return the Address
 	 */
 	public static Address convertOhtXad(XAD xad) {
 		if (xad == null)
 			return null;
-		return new Address(xad.getStreetAddress(), xad.getZipOrPostalCode(), xad.getCity(),
-				AddressUse.PRIVATE);
+		else {
+			Address address = new Address();
+			if (xad.getStreetAddress() != null && !xad.getStreetAddress().equals("")) {
+				address.setAddressline1(xad.getStreetAddress());
+			}
+			if (xad.getZipOrPostalCode() != null) {
+				address.setZip(xad.getZipOrPostalCode());
+			}
+			address.setUsage(AddressUse.PRIVATE);
+			return address;
+		}
 	}
 
 	/**
 	 * Converts the parts of an OHC XCN to an eHC Identificator
-	 * 
+	 *
 	 * @param assigningAuthorityUniversalId
-	 *            the assigningAuthorityUniversalId
+	 *          the assigningAuthorityUniversalId
 	 * @param id
-	 *            the ID part
+	 *          the ID part
 	 * @return the Identificator
 	 */
 	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId,
@@ -360,9 +360,9 @@ public class XdsMetadataUtil {
 
 	/**
 	 * Converts an OHT XPN (Name) to an eHC Name
-	 * 
+	 *
 	 * @param xpn
-	 *            the OHT XPN
+	 *          the OHT XPN
 	 * @return the OHT Name
 	 */
 	public static Name convertOhtXpn(XPN xpn) {
@@ -371,19 +371,19 @@ public class XdsMetadataUtil {
 
 	/**
 	 * <div class="en">Creates the OHT coded metadata.</div>
-	 * 
+	 *
 	 * @param schemeName
-	 *            <br>
-	 *            <div class="en"> scheme name</div>
+	 *          <br>
+	 *          <div class="en"> scheme name</div>
 	 * @param code
-	 *            <br>
-	 *            <div class="en"> code</div>
+	 *          <br>
+	 *          <div class="en"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="en"> display name</div>
+	 *          <br>
+	 *          <div class="en"> display name</div>
 	 * @param schemeUuid
-	 *            <br>
-	 *            <div class="en"> scheme uuid</div>
+	 *          <br>
+	 *          <div class="en"> scheme uuid</div>
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
@@ -406,22 +406,22 @@ public class XdsMetadataUtil {
 
 	/**
 	 * <div class="en">Creates the OHT coded metadata.</div>
-	 * 
+	 *
 	 * @param schemeName
-	 *            <br>
-	 *            <div class="en"> scheme name</div>
+	 *          <br>
+	 *          <div class="en"> scheme name</div>
 	 * @param code
-	 *            <br>
-	 *            <div class="en"> code</div>
+	 *          <br>
+	 *          <div class="en"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="en"> display name</div>
+	 *          <br>
+	 *          <div class="en"> display name</div>
 	 * @param schemeUuid
-	 *            <br>
-	 *            <div class="en"> scheme uuid</div>
+	 *          <br>
+	 *          <div class="en"> scheme uuid</div>
 	 * @param language
-	 *            <br>
-	 *            language
+	 *          <br>
+	 *          language
 	 * @return the coded metadata type
 	 */
 	public static CodedMetadataType createCodedMetadata(String schemeName, String code,
@@ -444,13 +444,13 @@ public class XdsMetadataUtil {
 
 	/**
 	 * <div class="en">Creates the OHT CX.</div>
-	 * 
+	 *
 	 * @param authorityId
-	 *            <br>
-	 *            <div class="en"> authority id</div>
+	 *          <br>
+	 *          <div class="en"> authority id</div>
 	 * @param id
-	 *            <br>
-	 *            <div class="en"> id</div>
+	 *          <br>
+	 *          <div class="en"> id</div>
 	 * @return the cx
 	 */
 	public static CX createCx(String authorityId, String id) {
@@ -463,10 +463,10 @@ public class XdsMetadataUtil {
 
 	/**
 	 * <div class="en">Creates the OHT InternationalStringType.</div>
-	 * 
+	 *
 	 * @param text
-	 *            <br>
-	 *            <div class="en"> text</div>
+	 *          <br>
+	 *          <div class="en"> text</div>
 	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
@@ -482,13 +482,13 @@ public class XdsMetadataUtil {
 
 	/**
 	 * <div class="en">Creates the OHT InternationalStringType</div>
-	 * 
+	 *
 	 * @param text
-	 *            <br>
-	 *            <div class="en">the text</div>
+	 *          <br>
+	 *          <div class="en">the text</div>
 	 * @param language
-	 *            <br>
-	 *            the language
+	 *          <br>
+	 *          the language
 	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
 	 */
 	@SuppressWarnings("unchecked")
@@ -501,6 +501,10 @@ public class XdsMetadataUtil {
 		lst.setLang(language);
 		ist.getLocalizedString().add(lst);
 		return ist;
+	}
+
+	private XdsMetadataUtil() {
+
 	}
 
 	// /**

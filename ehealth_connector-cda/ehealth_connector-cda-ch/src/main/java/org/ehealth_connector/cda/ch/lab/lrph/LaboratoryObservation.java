@@ -60,8 +60,7 @@ public class LaboratoryObservation
 	}
 
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc code) {
-		// TODO
-		// super.setCode(code.);
+		setCode(code.getCode());
 	}
 
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed code) {

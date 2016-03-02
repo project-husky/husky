@@ -2,14 +2,26 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LrphSections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.Patient;
+import org.openhealthtools.mdht.uml.cda.PatientRole;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
@@ -28,10 +40,20 @@ public class CdaChLrph
 		this(languageCode, null, null);
 	}
 
+	/**
+	 * Instantiates a new cda ch lrph.
+	 *
+	 * @param languageCode
+	 *          language of the document contents
+	 * @param styleSheet
+	 *          an extensible style sheet (XSLT) to transform and render the
+	 *          document
+	 * @param cascading
+	 *          style sheet (CSS) to add style information for rendering
+	 */
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrph().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
-		// super.initCda();
 	}
 
 	/**
@@ -44,17 +66,29 @@ public class CdaChLrph
 		super(doc);
 	}
 
-	// Convenience function
-	// Creates LaboratorySpecialtySection if not existing
-	// Creates LaboratoryReportProcessingEntry if not existing
-	// Creates SpecimenAct
-	// adds the Laboratory Battery to the SpecimenAct
+	/**
+	 * Convenience function to add a Laboratory Battery Organizer and create the
+	 * necessary elements, if they do not exist. If the elements exist, their
+	 * contents will not be overwritten.
+	 *
+	 * These elements are: LaboratorySpecialtySection (section code is derived
+	 * automatically from the LaboratoryObservation enum)
+	 * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	 * Battery Organizer
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer holding at least one
+	 *          LaboratoryObservation
+	 */
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
 		org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection;
 		// Try to determine the right code from the LaboratoryObservation and set it
 		// in the Section
 		final String section = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
-		Code sectionCode = LrphSections.getEnum(section).getCode();
+		Code sectionCode = null;
+		if (section != null) {
+			sectionCode = LrphSections.getEnum(section).getCode();
+		}
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
@@ -76,7 +110,9 @@ public class CdaChLrph
 		SpecimenAct se;
 		if (lrdpe.getSpecimenAct() == null) {
 			se = new SpecimenAct();
-			se.setCode(sectionCode);
+			if (sectionCode != null) {
+				se.setCode(sectionCode);
+			}
 		} else {
 			se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
@@ -93,14 +129,175 @@ public class CdaChLrph
 	// - If such an element exists, use getPrivacyFilter() to determine
 	// anonymization function
 	// - Apply Anonymization function
-	public void applyPrivacyFilter() {
-		// TODO
+	/**
+	 * Convenience function which applies the right privacy protection algorithm,
+	 * depending on an existing LaboratoryObservation element. This element has to
+	 * be added to this document before. If different privacy filter related
+	 * observations exist, this function will apply the most restrictive privacy
+	 * filter.
+	 *
+	 * @throws IllegalArgumentException
+	 *           when the needed element for applying the anonymization does not
+	 *           exist in the current instance of the document.
+	 */
+	public void applyPrivacyFilter() throws IllegalArgumentException {
+		for (LaboratoryBatteryOrganizer lbo : getLaboratoryBatteryOrganizerList()) {
+			String privacyFilter = getPrivacyFilterFromLaboratoryObservationEnum(lbo);
+			if (privacyFilter == null)
+				throw new IllegalArgumentException();
+			switch (privacyFilter) {
+			case "none":
+				break;
+			case "initials":
+				applyPrivacyFilterInitials(getMdht());
+				break;
+			case "conditional":
+				// TODO
+				break;
+			case "hiv":
+				// TODO
+				break;
+			}
+		}
 	}
 
-	// Convenience function
-	// gets the LaboratorySpecialtySection
-	// gets the SpecimenAct
-	// gets the Laboratory Batteries from the SpecimenAct
+	/**
+	 * Applies the 'initials' privacy filter to all given record target elements.
+	 *
+	 * <table summary="Elements which will be kept">
+	 * <thead>
+	 * <tr>
+	 * <th>Element name (english)</th>
+	 * <th>Element name (german)</th>
+	 * <th>CDA element</th>
+	 * </tr>
+	 * </thead><tbody>
+	 * <tr>
+	 * <td>First letter of the given and the family name</td>
+	 * <td>Erster Buchstabe des Vor- und Nachnamens</td>
+	 * <td>recordTarget/patientRole/patient/name/given[0] && family[0]</td>
+	 * </tr>
+	 * <tr>
+	 * <td>City</td>
+	 * <td>Wohnort</td>
+	 * <td>/recordTarget/patientRole/addr[0]/city[0]</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Date of birth</td>
+	 * <td>Geburtsdatum</td>
+	 * <td>recordTarget/patientRole/patient/birthTime</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Gender</td>
+	 * <td>Geschlecht</td>
+	 * <td>recordTarget/patientRole/patient/administrativeGenderCode</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Nationality</td>
+	 * <td>Staatsangehörigkeit</td>
+	 * <td></td>
+	 * </tr>
+	 * <tr>
+	 * <td>Job</td>
+	 * <td>berufliche Tätigkeit</td>
+	 * <td></td>
+	 * </tr>
+	 * <tr>
+	 * <td>Country of origin</td>
+	 * <td>Herkunftsland</td>
+	 * <td></td>
+	 * </tr>
+	 *
+	 * @param recordTargets
+	 */
+	private void applyPrivacyFilterInitials(ClinicalDocument document) {
+		byte index = 0;
+		for (RecordTarget originalRt : document.getRecordTargets()) {
+			// Get original elements
+			PatientRole originalPr = null;
+			if (originalRt.getPatientRole() != null) {
+				originalPr = originalRt.getPatientRole();
+			}
+			Patient originalP = null;
+			if (originalPr != null && originalPr.getPatient() != null) {
+				originalP = originalPr.getPatient();
+			}
+
+			// Initialize new elements
+			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			processedRt.setPatientRole(processedPr);
+			processedPr.setPatient(processedP);
+
+			// Copy all necessary elements from the original to the processed
+			// recordTarget
+			// Patient Name
+			if (originalP != null && !originalP.getNames().isEmpty()) {
+				if (originalP.getNames().get(0) != null) {
+					// First letter of first given and family name
+					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					pn.setNullFlavor(NullFlavor.MSK);
+					if (!originalP.getNames().get(0).getGivens().isEmpty()) {
+						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText().substring(0, 1));
+					}
+					if (!originalP.getNames().get(0).getFamilies().isEmpty()) {
+						pn.addFamily(
+								originalP.getNames().get(0).getFamilies().get(0).getText().substring(0, 1));
+					}
+					processedP.getNames().add(pn);
+				}
+			}
+
+			if (originalPr != null && !originalPr.getAddrs().isEmpty()
+					&& originalPr.getAddrs().get(0).getCities() != null
+					&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
+				AD ad = DatatypesFactory.eINSTANCE.createAD();
+				// Street Name = MSK
+				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
+				streetName.setNullFlavor(NullFlavor.MSK);
+				ad.getStreetNames().add(streetName);
+				// City
+				ad.addCity(EcoreUtil.copy(originalPr.getAddrs().get(0).getCities().get(0)).getText());
+				processedPr.getAddrs().add(ad);
+			}
+
+			// Birth time
+			if (originalP != null && originalP.getBirthTime() != null) {
+				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
+			}
+
+			// Gender
+			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+				processedP
+						.setAdministrativeGenderCode(EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
+			}
+
+			// Telecom (MSK)
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			tel.setNullFlavor(NullFlavor.MSK);
+			processedPr.getTelecoms().add(tel);
+
+			// ID (MSK)
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setNullFlavor(NullFlavor.MSK);
+			processedPr.getIds().add(ii);
+
+			// TODO Nationality, Job, Country of origin
+			document.getRecordTargets().set(index, processedRt);
+			index++;
+		}
+	}
+
+	/**
+	 * Convenience function to return all LaboratoryBatteryOrganizers directly
+	 * from the underlying
+	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
+	 * element.
+	 *
+	 * @return a list of LaboratoryBatteryOrganizers. returns null, if this list
+	 *         does not exist.
+	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
 		if (getLaboratorySpecialtySection() != null
 				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
@@ -124,6 +321,11 @@ public class CdaChLrph
 		return null;
 	}
 
+	/**
+	 * Returns the narrative Text of the LaboratorySpecialtySection.
+	 *
+	 * @return the narrative Text. Returns null, if this text does not exist.
+	 */
 	public String getNarrativeTextSectionLaboratorySpeciality() {
 		if (this.getLaboratorySpecialtySection() != null
 				&& this.getLaboratorySpecialtySection().getText() != null) {
@@ -132,6 +334,43 @@ public class CdaChLrph
 		return null;
 	}
 
+	/**
+	 * Convenience function to return the
+	 * PatientPrivacyFilter(none,initials,conditional,hiv) from a
+	 * LaboratoryObservation, which is hold in the given
+	 * LaboratoryBatteryOrganizer.
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 * @return the section code
+	 */
+	private String getPrivacyFilterFromLaboratoryObservationEnum(
+			LaboratoryBatteryOrganizer organizer) {
+		if (!organizer.getLaboratoryObservations().isEmpty()) {
+			if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+				// if present return LOINC Enum
+				return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
+						.getPatientPrivacyFilter();
+			} else {
+				// if present return SNOMED Enum
+				if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() != null) {
+					return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
+							.getPatientPrivacyFilter();
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Convenience function to return the (LOINC) section code from a given
+	 * LaboratoryObservation, which is hold in the given
+	 * LaboratoryBatteryOrganizer.
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 * @return the section code
+	 */
 	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
 			LaboratoryBatteryOrganizer organizer) {
 		if (!organizer.getLaboratoryObservations().isEmpty()) {
@@ -149,6 +388,13 @@ public class CdaChLrph
 		return null;
 	}
 
+	/**
+	 * Convenience function, which returns the SpecimenAct directly from the
+	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
+	 * element
+	 *
+	 * @return the SpecimenAct. Returns null, if this element does not exist.
+	 */
 	public SpecimenAct getSpecimenAct() {
 		if (getLaboratorySpecialtySection() != null
 				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
@@ -160,6 +406,12 @@ public class CdaChLrph
 		return null;
 	}
 
+	/**
+	 * Sets a LaboratorySpecialtySection
+	 *
+	 * @param laboratorySpecialtySection
+	 *          the section
+	 */
 	public void setLaboratorySpecialtySection(
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection) {
 		// Create a new structured body
@@ -174,6 +426,12 @@ public class CdaChLrph
 		}
 	}
 
+	/**
+	 * Sets the section/text element for the LaboratorySpecialtySection.
+	 *
+	 * @param text
+	 *          the text
+	 */
 	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
 		if (this.getLaboratorySpecialtySection() != null) {
 			this.getLaboratorySpecialtySection().setText(text);

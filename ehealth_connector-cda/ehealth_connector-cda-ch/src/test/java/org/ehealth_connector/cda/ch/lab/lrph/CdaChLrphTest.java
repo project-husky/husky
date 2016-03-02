@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.Date;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -21,17 +22,25 @@ import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 	private final Log log = LogFactory.getLog(MdhtFacade.class);
+
+	public CdaChLrphTest() {
+		super.init();
+
+	}
 
 	private CdaChLrph deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
@@ -223,7 +232,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Convenience LaboratoryBatteryOrganizer (automatic section creation)
 		doc = new CdaChLrph();
 		LaboratoryObservation lo = new LaboratoryObservation();
-		lo.setCode(LabObsListLoinc.BRUCELLA);
+		lo.setCode(LabObsListLoinc.ABNORMAL_PRION_PROTEIN_PRESENCE_IN_BRAIN_BY_ELECTRON_MICROSCOPY);
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		lbo.addLaboratoryObservation(lo);
 		doc.addLaboratoryBatteryOrganizer(lbo);
@@ -233,7 +242,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));
 		assertTrue(xExist(document,
-				"/clinicaldocument/component/structuredBody/component/section/code[@code='18769-0']"));
+				"/clinicaldocument/component/structuredBody/component/section/code[@code='18725-2']"));
 		// a second Laboratory Battery Organizer
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		document = doc.getDocument();
@@ -275,12 +284,58 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 	@Test
 	public void testNarrativeText() {
-		super.init();
 		CdaChLrph doc = new CdaChLrph();
 
 		LaboratorySpecialtySection lss = new LaboratorySpecialtySection();
 		doc.setLaboratorySpecialtySection(lss);
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts1);
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
+	}
+
+	@Test
+	public void testPrivayFilterInitials() {
+		// Create a new Lrph document and add a record target to it
+		CdaChLrph doc = new CdaChLrph();
+		doc.setPatient(patient1);
+
+		// Create a Laboratory Observation with a Code that has the privacyFilter =
+		// initials
+		LaboratoryObservation lo = new LaboratoryObservation(LabObsListSnomed.BRUCELLA,
+				ObservationInterpretation.POS, new Date());
+		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer(StatusCode.COMPLETED, lo);
+		doc.addLaboratoryBatteryOrganizer(lbo);
+
+		// Apply the Privacy Filter and check the results
+		doc.applyPrivacyFilter();
+
+		Document document = doc.getDocument();
+
+		// Name length 1
+		assertTrue(doc.getPatient().getName().getGivenNames().length() == 1);
+		assertTrue(doc.getPatient().getName().getFamilyName().length() == 1);
+		// Name first letter equal
+		assertEquals(patient1.getName().getGivenNames().charAt(0),
+				doc.getPatient().getName().getGivenNames().charAt(0));
+		assertEquals(patient1.getName().getFamilyName().charAt(0),
+				doc.getPatient().getName().getFamilyName().charAt(0));
+		// Name MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getPatient().getNames().get(0).getNullFlavor());
+		// Street Name MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole().getAddrs()
+				.get(0).getStreetNames().get(0).getNullFlavor());
+		// City equal
+		assertEquals(patient1.getAddress().getCity(), doc.getPatient().getAddress().getCity());
+		// Birth time equal
+		assertEquals(patient1.getBirthday(), doc.getPatient().getBirthday());
+		// Gender equal
+		assertEquals(patient1.getAdministrativeGenderCode(),
+				doc.getPatient().getAdministrativeGenderCode());
+		// Telecom MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getTelecoms().get(0).getNullFlavor());
+		// ID MSK
+		assertEquals(NullFlavor.MSK,
+				doc.getMdht().getRecordTargets().get(0).getPatientRole().getIds().get(0).getNullFlavor());
 	}
 }
