@@ -95,10 +95,10 @@ public enum ObservationInterpretationVitalSign {
 		return false;
 	}
 
-	private ObservationInterpretation root;
+	private ObservationInterpretation commonInterpretation;
 
-	private ObservationInterpretationVitalSign(ObservationInterpretation root) {
-		this.root = root;
+	private ObservationInterpretationVitalSign(ObservationInterpretation commonInterpretation) {
+		this.commonInterpretation = commonInterpretation;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		return root.getCE();
+		return commonInterpretation.getCE();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		return root.getCode();
+		return commonInterpretation.getCode();
 	}
 
 	/**
@@ -128,7 +128,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
-		return root.getCodeSystemName();
+		return commonInterpretation.getCodeSystemName();
 	}
 
 	/**
@@ -138,7 +138,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
-		return root.getCodeSystemOid();
+		return commonInterpretation.getCodeSystemOid();
 	}
 
 	/**
@@ -148,7 +148,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
-		return root.getCodeValue();
+		return commonInterpretation.getCodeValue();
 	}
 
 	/**
@@ -158,6 +158,6 @@ public enum ObservationInterpretationVitalSign {
 	 * @return <div class="en">the display name</div>
 	 */
 	public String getDisplayName() {
-		return root.getDisplayName();
+		return commonInterpretation.getDisplayName();
 	}
 }
