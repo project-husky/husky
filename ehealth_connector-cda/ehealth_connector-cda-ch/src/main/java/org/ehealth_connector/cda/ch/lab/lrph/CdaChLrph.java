@@ -7,7 +7,10 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
+import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -17,6 +20,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -114,6 +118,134 @@ public class CdaChLrph
 		lrdpe.setSpecimenAct(se);
 		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
+	}
+
+	/**
+	 * Applies the 'initials' privacy filter to all given record target elements.
+	 *
+	 * <table summary="Elements which will be kept">
+	 * <thead>
+	 * <tr>
+	 * <th>Element name (english)</th>
+	 * <th>Element name (german)</th>
+	 * <th>CDA element</th>
+	 * </tr>
+	 * </thead><tbody>
+	 * <tr>
+	 * <td>First letter of the given and the family name</td>
+	 * <td>Erster Buchstabe des Vor- und Nachnamens</td>
+	 * <td>recordTarget/patientRole/patient/name/given[0] and family[0]</td>
+	 * </tr>
+	 * <tr>
+	 * <td>City</td>
+	 * <td>Wohnort</td>
+	 * <td>/recordTarget/patientRole/addr[0]/city[0]</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Date of birth</td>
+	 * <td>Geburtsdatum</td>
+	 * <td>recordTarget/patientRole/patient/birthTime</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Gender</td>
+	 * <td>Geschlecht</td>
+	 * <td>recordTarget/patientRole/patient/administrativeGenderCode</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Nationality</td>
+	 * <td>Staatsangehörigkeit</td>
+	 * <td></td>
+	 * </tr>
+	 * <tr>
+	 * <td>Job</td>
+	 * <td>berufliche Tätigkeit</td>
+	 * <td></td>
+	 * </tr>
+	 * <tr>
+	 * <td>Country of origin</td>
+	 * <td>Herkunftsland</td>
+	 * <td></td>
+	 * </tr>
+	 * </tbody>
+	 * </table>
+	 */
+	public void applyPrivacyFilterInitials() {
+		byte index = 0;
+		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
+			// Get original elements
+			PatientRole originalPr = null;
+			if (originalRt.getPatientRole() != null) {
+				originalPr = originalRt.getPatientRole();
+			}
+			Patient originalP = null;
+			if (originalPr != null && originalPr.getPatient() != null) {
+				originalP = originalPr.getPatient();
+			}
+
+			// Initialize new elements
+			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			processedRt.setPatientRole(processedPr);
+			processedPr.setPatient(processedP);
+
+			// Copy all necessary elements from the original to the processed
+			// recordTarget
+			// Patient Name
+			if (originalP != null && !originalP.getNames().isEmpty()) {
+				if (originalP.getNames().get(0) != null) {
+					// First letter of first given and family name
+					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					pn.setNullFlavor(NullFlavor.MSK);
+					if (!originalP.getNames().get(0).getGivens().isEmpty()) {
+						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText().substring(0, 1));
+					}
+					if (!originalP.getNames().get(0).getFamilies().isEmpty()) {
+						pn.addFamily(
+								originalP.getNames().get(0).getFamilies().get(0).getText().substring(0, 1));
+					}
+					processedP.getNames().add(pn);
+				}
+			}
+
+			if (originalPr != null && !originalPr.getAddrs().isEmpty()
+					&& originalPr.getAddrs().get(0).getCities() != null
+					&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
+				AD ad = DatatypesFactory.eINSTANCE.createAD();
+				// Street Name = MSK
+				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
+				streetName.setNullFlavor(NullFlavor.MSK);
+				ad.getStreetNames().add(streetName);
+				// City
+				ad.addCity(EcoreUtil.copy(originalPr.getAddrs().get(0).getCities().get(0)).getText());
+				processedPr.getAddrs().add(ad);
+			}
+
+			// Birth time
+			if (originalP != null && originalP.getBirthTime() != null) {
+				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
+			}
+
+			// Gender
+			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+				processedP
+						.setAdministrativeGenderCode(EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
+			}
+
+			// Telecom (MSK)
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			tel.setNullFlavor(NullFlavor.MSK);
+			processedPr.getTelecoms().add(tel);
+
+			// ID (MSK)
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setNullFlavor(NullFlavor.MSK);
+			processedPr.getIds().add(ii);
+
+			// TODO Nationality, Job, Country of origin
+			getMdht().getRecordTargets().set(index, processedRt);
+			index++;
+		}
 	}
 
 	// /**
@@ -215,134 +347,6 @@ public class CdaChLrph
 	// }
 
 	/**
-	 * Applies the 'initials' privacy filter to all given record target elements.
-	 *
-	 * <table summary="Elements which will be kept">
-	 * <thead>
-	 * <tr>
-	 * <th>Element name (english)</th>
-	 * <th>Element name (german)</th>
-	 * <th>CDA element</th>
-	 * </tr>
-	 * </thead><tbody>
-	 * <tr>
-	 * <td>First letter of the given and the family name</td>
-	 * <td>Erster Buchstabe des Vor- und Nachnamens</td>
-	 * <td>recordTarget/patientRole/patient/name/given[0] && family[0]</td>
-	 * </tr>
-	 * <tr>
-	 * <td>City</td>
-	 * <td>Wohnort</td>
-	 * <td>/recordTarget/patientRole/addr[0]/city[0]</td>
-	 * </tr>
-	 * <tr>
-	 * <td>Date of birth</td>
-	 * <td>Geburtsdatum</td>
-	 * <td>recordTarget/patientRole/patient/birthTime</td>
-	 * </tr>
-	 * <tr>
-	 * <td>Gender</td>
-	 * <td>Geschlecht</td>
-	 * <td>recordTarget/patientRole/patient/administrativeGenderCode</td>
-	 * </tr>
-	 * <tr>
-	 * <td>Nationality</td>
-	 * <td>Staatsangehörigkeit</td>
-	 * <td></td>
-	 * </tr>
-	 * <tr>
-	 * <td>Job</td>
-	 * <td>berufliche Tätigkeit</td>
-	 * <td></td>
-	 * </tr>
-	 * <tr>
-	 * <td>Country of origin</td>
-	 * <td>Herkunftsland</td>
-	 * <td></td>
-	 * </tr>
-	 *
-	 * @param recordTargets
-	 */
-	public void applyPrivacyFilterInitials() {
-		byte index = 0;
-		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
-			// Get original elements
-			PatientRole originalPr = null;
-			if (originalRt.getPatientRole() != null) {
-				originalPr = originalRt.getPatientRole();
-			}
-			Patient originalP = null;
-			if (originalPr != null && originalPr.getPatient() != null) {
-				originalP = originalPr.getPatient();
-			}
-
-			// Initialize new elements
-			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
-			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
-			Patient processedP = CDAFactory.eINSTANCE.createPatient();
-			processedRt.setPatientRole(processedPr);
-			processedPr.setPatient(processedP);
-
-			// Copy all necessary elements from the original to the processed
-			// recordTarget
-			// Patient Name
-			if (originalP != null && !originalP.getNames().isEmpty()) {
-				if (originalP.getNames().get(0) != null) {
-					// First letter of first given and family name
-					PN pn = DatatypesFactory.eINSTANCE.createPN();
-					pn.setNullFlavor(NullFlavor.MSK);
-					if (!originalP.getNames().get(0).getGivens().isEmpty()) {
-						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText().substring(0, 1));
-					}
-					if (!originalP.getNames().get(0).getFamilies().isEmpty()) {
-						pn.addFamily(
-								originalP.getNames().get(0).getFamilies().get(0).getText().substring(0, 1));
-					}
-					processedP.getNames().add(pn);
-				}
-			}
-
-			if (originalPr != null && !originalPr.getAddrs().isEmpty()
-					&& originalPr.getAddrs().get(0).getCities() != null
-					&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
-				AD ad = DatatypesFactory.eINSTANCE.createAD();
-				// Street Name = MSK
-				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
-				streetName.setNullFlavor(NullFlavor.MSK);
-				ad.getStreetNames().add(streetName);
-				// City
-				ad.addCity(EcoreUtil.copy(originalPr.getAddrs().get(0).getCities().get(0)).getText());
-				processedPr.getAddrs().add(ad);
-			}
-
-			// Birth time
-			if (originalP != null && originalP.getBirthTime() != null) {
-				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
-			}
-
-			// Gender
-			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
-				processedP
-						.setAdministrativeGenderCode(EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
-			}
-
-			// Telecom (MSK)
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			tel.setNullFlavor(NullFlavor.MSK);
-			processedPr.getTelecoms().add(tel);
-
-			// ID (MSK)
-			II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setNullFlavor(NullFlavor.MSK);
-			processedPr.getIds().add(ii);
-
-			// TODO Nationality, Job, Country of origin
-			getMdht().getRecordTargets().set(index, processedRt);
-			index++;
-		}
-	}
-
-	/**
 	 * Convenience function to return all LaboratoryBatteryOrganizers directly
 	 * from the underlying
 	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
@@ -383,6 +387,24 @@ public class CdaChLrph
 		if (this.getLaboratorySpecialtySection() != null
 				&& this.getLaboratorySpecialtySection().getText() != null) {
 			return this.getLaboratorySpecialtySection().getText();
+		}
+		return null;
+	}
+
+	/**
+	 * Convenience function, which returns the SpecimenAct directly from the
+	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
+	 * element
+	 *
+	 * @return the SpecimenAct. Returns null, if this element does not exist.
+	 */
+	public SpecimenAct getSpecimenAct() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct();
 		}
 		return null;
 	}
@@ -444,22 +466,38 @@ public class CdaChLrph
 	// return null;
 	// }
 
-	/**
-	 * Convenience function, which returns the SpecimenAct directly from the
-	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
-	 * element
-	 *
-	 * @return the SpecimenAct. Returns null, if this element does not exist.
-	 */
-	public SpecimenAct getSpecimenAct() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
-			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-					.getSpecimenAct();
-		}
-		return null;
+	public void setEmtpyCustodian() {
+		Custodian c = CDAFactory.eINSTANCE.createCustodian();
+		AssignedCustodian ac = CDAFactory.eINSTANCE.createAssignedCustodian();
+		CustodianOrganization co = CDAFactory.eINSTANCE.createCustodianOrganization();
+
+		c.setAssignedCustodian(ac);
+		ac.setRepresentedCustodianOrganization(co);
+
+		// Id
+		II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setNullFlavor(NullFlavor.NASK);
+		co.getIds().add(ii);
+
+		// Name
+		ON on = DatatypesFactory.eINSTANCE.createON();
+		on.setNullFlavor(NullFlavor.NASK);
+		co.setName(on);
+
+		// Telecom
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.setNullFlavor(NullFlavor.NASK);
+		co.setTelecom(tel);
+
+		// Addr
+		AD ad = DatatypesFactory.eINSTANCE.createAD();
+		ad.setNullFlavor(NullFlavor.NASK);
+		ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+		adxp.setNullFlavor(NullFlavor.NASK);
+		ad.getStreetNames().add(adxp);
+		co.setAddr(ad);
+
+		getMdht().setCustodian(c);
 	}
 
 	/**
