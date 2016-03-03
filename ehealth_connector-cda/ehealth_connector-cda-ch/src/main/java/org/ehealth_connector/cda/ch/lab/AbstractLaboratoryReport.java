@@ -7,11 +7,13 @@ import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.AuthoringDevice;
+import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
@@ -43,8 +45,32 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		// TODO
 	}
 
+	public void addIntendedRecipient(IntendedRecipient recipient) {
+		// InformationRecipient ir =
+		// CDAFactory.eINSTANCE.createInformationRecipient();
+		//
+		// ir.setTypeCode(x_InformationRecipient.PRCP);
+		// ir.setIntendedRecipient(recipient.copy());
+		// getMdht().getInformationRecipients().add(ir);
+		getMdht().getInformationRecipients().add(recipient.getIntendedRecipient());
+	}
+
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
 		getMdht().getParticipants().add(physician.copy());
+	}
+
+	public List<IntendedRecipient> getIntendedRecipients() {
+		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
+		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
+			if (ir.getIntendedRecipient() != null) {
+				org.openhealthtools.mdht.uml.cda.IntendedRecipient mdht = ir.getIntendedRecipient();
+				if (mdht instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
+					org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) mdht;
+					il.add(new IntendedRecipient(iheIr));
+				}
+			}
+		}
+		return il;
 	}
 
 	public List<ReferralOrderingPhysician> getReferralOrderingPhysicians() {

@@ -33,11 +33,12 @@ import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 public class DocumentMetadataTest extends TestUtils {
 
 	private DocumentMetadata d = new DocumentMetadata();
-	private DocumentEntryType m = d.getMdhtDocumentEntryType();
 	private LocalizedStringType l;
+	private DocumentEntryType m = d.getMdhtDocumentEntryType();
 
 	@Before
 	public void initTestData() {
+		super.init();
 		// Test String with German, French and Italic special characters
 		ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
 		ts2 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
@@ -83,7 +84,7 @@ public class DocumentMetadataTest extends TestUtils {
 	@Test
 	public void testCodedLanguage() {
 		d.setCodedLanguage(LanguageCode.GERMAN_CODE); // Can be extracted from
-														// CDA
+		// CDA
 		assertEquals(LanguageCode.GERMAN_CODE, m.getLanguageCode());
 	}
 
@@ -93,7 +94,8 @@ public class DocumentMetadataTest extends TestUtils {
 		d.addConfidentialityCode(code1);
 		d.addConfidentialityCode(Confidentiality.CH_30003);
 		assertTrue(isEqual(code1, d.getConfidentialityCodes().get(0)));
-		assertEquals(Confidentiality.CH_30003.getCodeValue(), d.getConfidentialityCodes().get(1).getCode());
+		assertEquals(Confidentiality.CH_30003.getCodeValue(),
+				d.getConfidentialityCodes().get(1).getCode());
 	}
 
 	@Test
@@ -105,7 +107,8 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testFormatCode() {
-		final Code fc = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
+		final Code fc = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
+				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
 		d.setFormatCode(fc); // Can be
 		// extracted
 		// from CDA
@@ -129,7 +132,8 @@ public class DocumentMetadataTest extends TestUtils {
 		// affinity domain
 		assertEquals("2.16.840.1.113883.5.11", m.getHealthCareFacilityTypeCode().getSchemeName());
 		assertEquals("AMB", m.getHealthCareFacilityTypeCode().getCode());
-		l = (LocalizedStringType) m.getHealthCareFacilityTypeCode().getDisplayName().getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getHealthCareFacilityTypeCode().getDisplayName()
+				.getLocalizedString().get(0);
 		assertEquals("Ambulance", l.getValue());
 		assertTrue(isEqual(hftc, d.getHealthcareFacilityTypeCode()));
 	}
@@ -150,13 +154,15 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testPatientId() {
-		final Identificator id = new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000", "b8a9a9ad17b5429");
+		final Identificator id = new Identificator("1.3.6.1.4.1.21367.2005.13.20.3000",
+				"b8a9a9ad17b5429");
 		d.setDestinationPatientId(id); // Can
 		// be
 		// extracted
 		// from
 		// CDA
-		assertEquals("1.3.6.1.4.1.21367.2005.13.20.3000", m.getPatientId().getAssigningAuthorityUniversalId());
+		assertEquals("1.3.6.1.4.1.21367.2005.13.20.3000",
+				m.getPatientId().getAssigningAuthorityUniversalId());
 		assertEquals("b8a9a9ad17b5429", m.getPatientId().getIdNumber());
 		assertTrue(isEqual(id, d.getPatientId()));
 	}
@@ -172,7 +178,8 @@ public class DocumentMetadataTest extends TestUtils {
 		// domain
 		assertEquals("2.16.840.1.113883.6.96", m.getPracticeSettingCode().getSchemeName());
 		assertEquals("394802001", m.getPracticeSettingCode().getCode());
-		l = (LocalizedStringType) m.getPracticeSettingCode().getDisplayName().getLocalizedString().get(0);
+		l = (LocalizedStringType) m.getPracticeSettingCode().getDisplayName().getLocalizedString()
+				.get(0);
 		assertEquals("General Medicine", l.getValue());
 		assertTrue(isEqual(psc, d.getPracticeSettingCode()));
 	}

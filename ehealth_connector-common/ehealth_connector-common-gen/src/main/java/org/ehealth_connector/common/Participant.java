@@ -12,22 +12,46 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 public class Participant {
 	Participant2 mParticipant;
 
+	/**
+	 * Standard constructor
+	 */
 	public Participant() {
 		mParticipant = CDAFactory.eINSTANCE.createParticipant2();
 	}
 
+	/**
+	 * Standard mdht constructor
+	 *
+	 * @param mdht
+	 *          the mdht object
+	 */
 	public Participant(Participant2 mdht) {
 		this.mParticipant = mdht;
 	}
 
+	/**
+	 * Returns a copy of the underlying mdht element
+	 *
+	 * @return the copy of the mdht element
+	 */
 	public Participant2 copy() {
 		return EcoreUtil.copy(mParticipant);
 	}
 
+	/**
+	 * Returns the underlying mdht element
+	 *
+	 * @return the mdht element
+	 */
 	public Participant2 getMdht() {
 		return this.mParticipant;
 	}
 
+	/**
+	 * Gets the ParticipantRole
+	 *
+	 * @return the partcipantRole
+	 */
 	public org.ehealth_connector.common.ParticipantRole getParticipantRole() {
 		return new org.ehealth_connector.common.ParticipantRole(mParticipant.getParticipantRole());
 	}
@@ -44,10 +68,21 @@ public class Participant {
 		return null;
 	}
 
+	/**
+	 * Gets the ParticipationTypeCode
+	 *
+	 * @return the participationTypeCode
+	 */
 	public ParticipationType getTypeCode() {
 		return mParticipant.getTypeCode();
 	}
 
+	/**
+	 * Sets the ParticipantRole
+	 *
+	 * @param p
+	 *          the participantRole
+	 */
 	public void setParticipantRole(org.ehealth_connector.common.ParticipantRole p) {
 		mParticipant.setParticipantRole(p.copy());
 	}

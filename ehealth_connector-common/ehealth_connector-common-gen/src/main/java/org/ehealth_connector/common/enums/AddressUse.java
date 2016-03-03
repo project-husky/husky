@@ -34,57 +34,43 @@ import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
  */
 public enum AddressUse {
 
-	/** <div class="de">Privat</div> <div class="fr"></div>. */
-	PRIVATE("HP", "Private"),
-
 	/** <div class="de">Geschäft</div> <div class="fr"></div>. */
 	BUSINESS("WP", "Business"),
 
 	/** <div class="de">Mobil</div> <div class="fr"></div>. */
-	MOBILE("MC", "Mobile");
+	MOBILE("MC", "Mobile"),
 
-	/** The Constant PRIVATE_CODE. */
-	public static final String PRIVATE_CODE = "HP";
+	/** <div class="de">Privat</div> <div class="fr"></div>. */
+	PRIVATE("HP", "Private"),
+
+	/** <div class="de">Öffentlich</div> <div class="fr"></div>. */
+	PUBLIC("PUB", "Public");
 
 	/** The Constant BUSINESS_CODE. */
 	public static final String BUSINESS_CODE = "WP";
 
-	/** The Constant MOBILE_CODE. */
-	public static final String MOBILE_CODE = "MC";
+	/** The Constant CODE_SYSTEM_NAME. */
+	public static final String CODE_SYSTEM_NAME = "AddressUse";
 
 	/** The Constant CODE_SYSTEM. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1119";
 
-	/** The Constant CODE_SYSTEM_NAME. */
-	public static final String CODE_SYSTEM_NAME = "AddressUse";
+	/** The Constant MOBILE_CODE. */
+	public static final String MOBILE_CODE = "MC";
 
-	private String code;
-	private String displayName;
+	/** The Constant PRIVATE_CODE. */
+	public static final String PRIVATE_CODE = "HP";
 
-	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
-	 * 
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
-	 */
-	AddressUse(String code, String displayName) {
-		this.code = code;
-		this.displayName = displayName;
-	}
+	/** The Constant PUBLIC_CODE. */
+	public static final String PUBLIC_CODE = "PUB";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * 
+	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AddressUse getEnum(String code) {
@@ -96,10 +82,31 @@ public enum AddressUse {
 		return null;
 	}
 
+	private String code;
+
+	private String displayName;
+
+	/**
+	 * <div class="en">Instantiates this Enum Object with a given Code and Display
+	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
+	 * Codes und einem Display Name</div>
+	 *
+	 * @param code
+	 *          <br>
+	 *          <div class="de"> code</div>
+	 * @param displayName
+	 *          <br>
+	 *          <div class="de"> display name</div>
+	 */
+	AddressUse(String code, String displayName) {
+		this.code = code;
+		this.displayName = displayName;
+	}
+
 	/**
 	 * <div class="en">Gets the address use as postal address use.</div>
 	 * <div class="de">Liefert address use as postal address use.</div>
-	 * 
+	 *
 	 * @return <div class="en">the address use as postal address use</div>
 	 */
 	public PostalAddressUse getAddressUseAsPostalAddressUse() {
@@ -123,9 +130,9 @@ public enum AddressUse {
 	// Special for this enum: Return the Use Code in different HL7 enum types
 	/**
 	 * <div class="en">Gets the address use as telecommunication address
-	 * use.</div> <div class="de">Liefert address use as telecommunication
-	 * address use.</div>
-	 * 
+	 * use.</div> <div class="de">Liefert address use as telecommunication address
+	 * use.</div>
+	 *
 	 * @return <div class="en">the address use as telecommunication address
 	 *         use</div>
 	 */
@@ -150,7 +157,7 @@ public enum AddressUse {
 	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
 	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 * 
+	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
@@ -164,7 +171,7 @@ public enum AddressUse {
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-	 * 
+	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
@@ -175,7 +182,7 @@ public enum AddressUse {
 	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
@@ -183,9 +190,9 @@ public enum AddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 * 
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
+	 *
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
@@ -195,7 +202,7 @@ public enum AddressUse {
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * 
+	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -216,11 +223,11 @@ public enum AddressUse {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -229,12 +236,12 @@ public enum AddressUse {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
-	 * 
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * ist.</div>
+	 *
 	 * @param codeValue
-	 *            <br>
-	 *            <div class="de">codeValue</div>
+	 *          <br>
+	 *          <div class="de">codeValue</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {

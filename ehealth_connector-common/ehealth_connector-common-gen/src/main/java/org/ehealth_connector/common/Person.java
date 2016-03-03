@@ -34,22 +34,22 @@ public class Person {
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	/**
-	 * <div class="en">Instantiates a new person.</div> <div
-	 * class="de">Instantiiert ein neues Personen Objekt </div> <div
-	 * class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new person.</div>
+	 * <div class="de">Instantiiert ein neues Personen Objekt </div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
 	public Person() {
-
+		mPerson = CDAFactory.eINSTANCE.createPerson();
 	}
 
 	/**
 	 * Erstellt eine neue Person (Dieser Konstruktor wird oft gebraucht für
 	 * Behandelnde).
-	 * 
+	 *
 	 * @param name
-	 * <br>
-	 *            <div class="de"> name</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <br>
+	 *          <div class="de"> name</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Person(Name name) {
 		mPerson = CDAFactory.eINSTANCE.createPerson();
@@ -58,25 +58,24 @@ public class Person {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new person.</div> <div
-	 * class="de">Instantiiert eine neues Personen Objekt </div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="en">Instantiates a new person.</div>
+	 * <div class="de">Instantiiert eine neues Personen Objekt </div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @param person
-	 * <br>
-	 *            <div class="de"> person</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *          <br>
+	 *          <div class="de"> person</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
 		mPerson = person;
 	}
 
 	/**
-	 * <div class="en">Copy mdht person.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
-	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person
-	 *         object
+	 * <div class="en">Copy mdht person.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person object
 	 */
 	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
 		return EcoreUtil.copy(mPerson);
@@ -85,7 +84,7 @@ public class Person {
 	/**
 	 * <div class="en">Gets the mdht person.</div> <div class="de">Liefert mdht
 	 * person.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return org.openhealthtools.mdht.uml.cda.Person <div class="en">the mdht
 	 *         person</div>
 	 */
@@ -96,7 +95,7 @@ public class Person {
 	/**
 	 * <div class="en">Gets the (first) name.</div> <div class="de">Liefert den
 	 * (ersten) Namen.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
@@ -107,7 +106,7 @@ public class Person {
 	/**
 	 * <div class="en">Gets the names.</div> <div class="de">Liefert alle
 	 * Namen.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {

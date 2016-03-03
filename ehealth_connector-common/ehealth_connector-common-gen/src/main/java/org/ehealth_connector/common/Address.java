@@ -339,6 +339,9 @@ public class Address {
 			case PRIVATE:
 				mAd.getUses().add(PostalAddressUse.HP);
 				break;
+			case PUBLIC:
+				mAd.getUses().add(PostalAddressUse.PUB);
+				break;
 			default:
 				mAd.getUses().add(PostalAddressUse.WP);
 				break;

@@ -587,7 +587,7 @@ public class Util {
 		if (usage != null) {
 			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
 		}
-		tel.setValue(TELECOMS_PHONE_PREFIX + telNr);
+		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
 		return tel;
 	}
 
