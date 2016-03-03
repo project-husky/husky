@@ -10,9 +10,10 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * Year of publication: 2015
+ * Year of publication: 2016
  *
  *******************************************************************************/
+
 package org.ehealth_connector.cda.ch.edes.enums;
 
 import org.ehealth_connector.cda.enums.ContentIdPrefix;

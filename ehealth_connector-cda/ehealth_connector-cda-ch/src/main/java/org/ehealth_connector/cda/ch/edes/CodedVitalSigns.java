@@ -1,3 +1,19 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
+
 package org.ehealth_connector.cda.ch.edes;
 
 import org.ehealth_connector.cda.AbstractCodedVitalSigns;
@@ -17,7 +33,7 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * Instantiates a new vital signs section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createVitalSignsSection().init());
@@ -30,7 +46,7 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * Instantiates a new vital signs section.
 	 *
 	 * @param section
-	 *          the vital signs section
+	 *            the vital signs section
 	 */
 	protected CodedVitalSigns(VitalSignsSection section) {
 		super(section);

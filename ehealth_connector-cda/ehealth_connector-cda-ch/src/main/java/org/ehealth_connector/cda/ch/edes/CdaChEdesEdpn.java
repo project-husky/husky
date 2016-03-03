@@ -1,3 +1,19 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
+
 package org.ehealth_connector.cda.ch.edes;
 
 import java.util.ArrayList;
@@ -48,7 +64,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * class="de">Erstellt ein neues EDED EDPN CDA Dokument.</div>
 	 *
 	 * @param language
-	 * <br>
+	 *            <br>
 	 *          <div class="en">document language</div> <div class="de">Sprache
 	 *          des Dokments</div> <div class="fr"></div> <div class="it"></div>
 	 * @param stylesheet
@@ -81,9 +97,9 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * <div class="de">Fügt das codierte Vitalzeichen in das Dokument ein</div>
 	 *
 	 * @param vitalSign
-	 *          VitalSign <div class="en">The coded vital sign observation to
-	 *          add</div> <div class="de">Das hinzuzufügende codierte
-	 *          Vitalzeichen</div>
+	 *            VitalSign <div class="en">The coded vital sign observation to
+	 *            add</div> <div class="de">Das hinzuzufügende codierte
+	 *            Vitalzeichen</div>
 	 */
 	public void addCodedVitalSign(VitalSignObservation vitalSign, Author author) {
 		if (mCodedVitalSigns == null) {
@@ -124,14 +140,14 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * <div class="it"></div>
 	 * 
 	 * @param edDiagnosis
-	 * <br>
+	 *            <br>
 	 *            <div class="en">ED Diagnosis</div> <div class="de">
 	 *            Das Notfalldiagnose</div> <div class="fr"></div> <div
 	 *            class="it"></div>
-	 */	
-    public void addEdDiagnosis(ProblemConcern edDiagnosis) {
-		
-    	// find or create (and add) the Section
+	 */
+	public void addEdDiagnosis(ProblemConcern edDiagnosis) {
+
+		// find or create (and add) the Section
 		EDDiagnosesSection section = getDoc().getEDDiagnosesSection();
 		if (section == null) {
 			section = PCCFactory.eINSTANCE.createEDDiagnosesSection().init();
@@ -142,14 +158,14 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		section.addAct(edDiagnosis.copyMdhtProblemConcernEntry());
 	}
 
-    /**
+	/**
      * <div class="en">Gets the ED Diagnoses</div> <div class="de">Liefert
      * alle Notfalldiagnosen zurück</div> <div class="fr"></div> <div
      * class="it"></div>
-     * 
-     * @return the ED Diagnoses
- 	 */
-    public List<ProblemConcern> getEdDiagnoses() {
+	 * 
+	 * @return the ED Diagnoses
+	 */
+	public List<ProblemConcern> getEdDiagnoses() {
 		// Get the right section
 		EDDiagnosesSection section = getDoc().getEDDiagnosesSection();
 		if (section == null) {
@@ -165,20 +181,20 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		}
 		return problemConcernEntries;
 	}
-    
-    /**
+
+	/**
 	 * <div class="en">Adds the active problem concern.</div> <div
 	 * class="de">Fügt ein Aktives Leiden hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 * 
 	 * @param activeProblemConcern
-	 * <br>
+	 *            <br>
 	 *            <div class="en"> active problem concern</div> <div class="de">
 	 *            Das aktive Leiden</div> <div class="fr"></div> <div
 	 *            class="it"></div>
 	 */
 	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
-		
+
 		// find or create (and add) the Section
 		ActiveProblemsSection section = getDoc().getActiveProblemsSection();
 		if (section == null) {
@@ -213,18 +229,18 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		}
 		return problemConcernEntries;
 	}
-	
+
 	/**
 	 * <div class="en">Adds the AllergiesOrOtherAdverseReaction</div> <div class="de">Fügt ein
 	 * Allergie-Leiden hinzu</div> <div class="fr"></div> <div class="it"></div>
 	 * 
 	 * @param AllergiesOrOtherAdverseReaction
-	 * <br>
+	 *            <br>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
 	public void addAllergiesOrOtherAdverseReaction(AllergyConcern AllergiesOrOtherAdverseReaction) {
-		
+
 		// find or create (and add) the Section
 		AllergiesReactionsSection section = getDoc().getAllergiesReactionsSection();
 		if (section == null) {
@@ -235,8 +251,8 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		// add the MDHT Object to the section
 		section.addAct(AllergiesOrOtherAdverseReaction.copyMdhtAllergyConcern());
 	}
-		
-    /**
+
+	/**
 	 * <div class="en">Gets AllergiesAndOtherAdverseReactions</div> <div
 	 * class="de">Liefert alle Allergie Leiden zurück</div>
 	 * 
@@ -258,8 +274,8 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		}
 		return problemConcernEntries;
 	}
-	
-    /**
+
+	/**
 	 * <div class="en">Adds a PastIllness</div> <div class="de">Fügt
 	 * ein vergangenes Leiden hinzu</div> <div class="fr"></div> <div
 	 * class="it"></div>
@@ -268,18 +284,18 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 *            the past problem concern
 	 */
 	public void addPastIllness(PastProblemConcern PastIllness) {
-		
+
 		// find or create (and add) the Section
 		HistoryOfPastIllnessSection section = getDoc().getHistoryOfPastIllnessSection();
 		if (section == null) {
 			section = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
 			common.addSection(section);
 		}
-		
+
 		// add the MDHT Object to the section
 		section.addAct(PastIllness.copyMdhtProblemConcernEntry());
 	}
-	
+
 	/**
 	 * <div class="en">Gets HistoryOfPastIllness</div> <div
 	 * class="de">Liefert alle vergangen Leiden zurück</div>
@@ -302,7 +318,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 		}
 		return problemConcernEntries;
 	}
-	
+
 	/**
 	 * <div class="en">Gets the MDHT-CdaChEdesEdpn Object</div> <div
 	 * class="de">Liefert das MDHT-CdaChEdesEdpn-Objekt zurück.</div>
@@ -738,7 +754,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAbilityToWork(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ABILITY_TO_WORK,
@@ -753,7 +769,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionActiveProblems(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS, getDoc()
@@ -768,7 +784,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAdvanceDirectives(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ADVANCE_DIRECTIVES, getDoc()
@@ -783,7 +799,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS, getDoc()
@@ -798,7 +814,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAssessmentAndPlan(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ASSESSMENT_AND_PLAN, getDoc()
@@ -813,7 +829,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAssessments(String text) {
 		common
@@ -828,7 +844,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCarePlan(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CARE_PLAN, getDoc().getCarePlanSection(), text);
@@ -842,7 +858,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionChiefComplaint(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CHIEF_COMPLAINT, getDoc()
@@ -857,7 +873,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCodedPhysicalExam(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CODED_PHYSICAL_EXAM, getDoc()
@@ -872,7 +888,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCodedVitalSigns(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CODED_VITAL_SIGNS, getDoc()
@@ -887,7 +903,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdConsultations(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_CONSULTATIONS, getDoc()
@@ -902,7 +918,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdDiagnosis(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_DIAGNOSIS, getDoc().getEDDiagnosesSection(),
@@ -917,7 +933,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdDisposition(String text) {
 		common.setNarrativeTextSection(SectionsEDES.ED_DISPOSITION, getDoc().getEDDispositionSection(),
@@ -932,7 +948,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionFamilyMedicalHistory(String text) {
 		common.setNarrativeTextSection(SectionsEDES.FAMILY_MEDICAL_HISTORY, getDoc()
@@ -947,7 +963,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPastIllness(String text) {
 		common.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS, getDoc()
@@ -962,7 +978,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPresentIllness(String text) {
 		common.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PRESENT_ILLNESS, getDoc()
@@ -977,7 +993,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHospitalDischargeMedications(String text) {
 		common.setNarrativeTextSection(SectionsEDES.HOSPITAL_DISCHARGE_MEDICATIONS, getDoc()
@@ -992,7 +1008,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionImmunizations(String text) {
 		common.setNarrativeTextSection(SectionsEDES.HISTORY_OF_IMMUNIZATION, getDoc()
@@ -1007,7 +1023,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionIntravenousFluidsAdministered(String text) {
 		common.setNarrativeTextSection(SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED, getDoc()
@@ -1022,7 +1038,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionListOfSurgeries(String text) {
 		common.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES, getDoc().getSurgeriesSection(),
@@ -1037,7 +1053,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionMedications(String text) {
 		common.setNarrativeTextSection(SectionsEDES.CURRENT_MEDICATIONS, getDoc()
@@ -1052,7 +1068,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionMedicationsAdministered(String text) {
 		common.setNarrativeTextSection(SectionsEDES.MEDICATIONS_ADMINISTERED, getDoc()
@@ -1067,7 +1083,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionModeOfArrival(String text) {
 		common.setNarrativeTextSection(SectionsEDES.MODE_OF_ARRIVAL,
@@ -1082,7 +1098,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionPregnancyHistory(String text) {
 		common.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PREGNANCIES, getDoc()
@@ -1097,7 +1113,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionProceduresAndInterventions(String text) {
 		common.setNarrativeTextSection(SectionsEDES.PROCEDURES, getDoc()
@@ -1112,7 +1128,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionProgressNote(String text) {
 		common.setNarrativeTextSection(SectionsEDES.PROGRESS_NOTE, getDoc().getProgressNoteSection(),
@@ -1127,7 +1143,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReasonForVisit(String text) {
 		common.setNarrativeTextSection(SectionsEDES.REASON_FOR_VISIT, getDoc()
@@ -1142,7 +1158,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReferralSource(String text) {
 		common.setNarrativeTextSection(SectionsEDES.REFERRAL_SOURCE, getDoc()
@@ -1157,7 +1173,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
 		common.setNarrativeTextSection(SectionsEDES.REMARKS,
@@ -1172,7 +1188,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionResults(String text) {
 		common.setNarrativeTextSection(SectionsEDES.RESULTS, getDoc().getCodedResultsSection(), text);
@@ -1186,7 +1202,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReviewOfSystems(String text) {
 		common.setNarrativeTextSection(SectionsEDES.REVIEW_OF_SYSTEMS, getDoc()
@@ -1201,7 +1217,7 @@ public class CdaChEdesEdpn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 	 * @param text
 	 *          <div class="en"> the new text for the human readable part of the
 	 *          cda document</div> <div class="de"> der neue text für den
-	 *          menschlenlesbaren Teil des CDA-Dokuments</div>
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionSocialHistory(String text) {
 		common.setNarrativeTextSection(SectionsEDES.SOCIAL_HISTORY, getDoc().getSocialHistorySection(),
