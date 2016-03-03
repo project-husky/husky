@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
-import org.ehealth_connector.cda.ch.lab.lrph.enums.LrphSections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -71,24 +69,19 @@ public class CdaChLrph
 	 * necessary elements, if they do not exist. If the elements exist, their
 	 * contents will not be overwritten.
 	 *
-	 * These elements are: LaboratorySpecialtySection (section code is derived
-	 * automatically from the LaboratoryObservation enum)
-	 * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	 * These elements are: LaboratorySpecialtySection,
+	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given Laboratory
 	 * Battery Organizer
 	 *
 	 * @param organizer
 	 *          the LaboratoryBatteryOrganizer holding at least one
 	 *          LaboratoryObservation
+	 * @param sectionCode
+	 *          the LOINC code for the LaboratorySpecialtySection
 	 */
-	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
-		org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection laboratorySpecialtySection;
-		// Try to determine the right code from the LaboratoryObservation and set it
-		// in the Section
-		final String section = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
-		Code sectionCode = null;
-		if (section != null) {
-			sectionCode = LrphSections.getEnum(section).getCode();
-		}
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
+			Code sectionCode) {
+		LaboratorySpecialtySection laboratorySpecialtySection;
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
@@ -123,43 +116,103 @@ public class CdaChLrph
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
 
-	// Convenience Function
-	// - Scan Observations for pseudonymization / anonymization related
-	// NotifiableObservationLoinc or NotifiableObservationSnomed
-	// - If such an element exists, use getPrivacyFilter() to determine
-	// anonymization function
-	// - Apply Anonymization function
-	/**
-	 * Convenience function which applies the right privacy protection algorithm,
-	 * depending on an existing LaboratoryObservation element. This element has to
-	 * be added to this document before. If different privacy filter related
-	 * observations exist, this function will apply the most restrictive privacy
-	 * filter.
-	 *
-	 * @throws IllegalArgumentException
-	 *           when the needed element for applying the anonymization does not
-	 *           exist in the current instance of the document.
-	 */
-	public void applyPrivacyFilter() throws IllegalArgumentException {
-		for (LaboratoryBatteryOrganizer lbo : getLaboratoryBatteryOrganizerList()) {
-			String privacyFilter = getPrivacyFilterFromLaboratoryObservationEnum(lbo);
-			if (privacyFilter == null)
-				throw new IllegalArgumentException();
-			switch (privacyFilter) {
-			case "none":
-				break;
-			case "initials":
-				applyPrivacyFilterInitials(getMdht());
-				break;
-			case "conditional":
-				// TODO
-				break;
-			case "hiv":
-				// TODO
-				break;
-			}
-		}
-	}
+	// /**
+	// * Convenience function to add a Laboratory Battery Organizer and create the
+	// * necessary elements, if they do not exist. If the elements exist, their
+	// * contents will not be overwritten.
+	// *
+	// * These elements are: LaboratorySpecialtySection (section code is derived
+	// * automatically from the LaboratoryObservation enum)
+	// * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	// * Battery Organizer
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer holding at least one
+	// * LaboratoryObservation
+	// */
+	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
+	// organizer) {
+	// org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection
+	// laboratorySpecialtySection;
+	// // Try to determine the right code from the LaboratoryObservation and set
+	// it
+	// // in the Section
+	// final String section =
+	// getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
+	// Code sectionCode = null;
+	// if (section != null) {
+	// sectionCode = LrphSections.getEnum(section).getCode();
+	// }
+	// if (getLaboratorySpecialtySection() == null) {
+	// if (sectionCode != null) {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
+	// getMdht().setCode(sectionCode.getCE());
+	// } else {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection();
+	// }
+	// } else {
+	// laboratorySpecialtySection = getLaboratorySpecialtySection();
+	// }
+	//
+	// LaboratoryReportDataProcessingEntry lrdpe;
+	// if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry() ==
+	// null) {
+	// lrdpe = new LaboratoryReportDataProcessingEntry();
+	// } else {
+	// lrdpe =
+	// laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
+	// }
+	//
+	// SpecimenAct se;
+	// if (lrdpe.getSpecimenAct() == null) {
+	// se = new SpecimenAct();
+	// if (sectionCode != null) {
+	// se.setCode(sectionCode);
+	// }
+	// } else {
+	// se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
+	// }
+	//
+	// se.addLaboratoryBatteryOrganizer(organizer);
+	// lrdpe.setSpecimenAct(se);
+	// laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+	// setLaboratorySpecialtySection(laboratorySpecialtySection);
+	// }
+
+	// /**
+	// * Convenience function which applies the right privacy protection
+	// algorithm,
+	// * depending on an existing LaboratoryObservation element. This element has
+	// to
+	// * be added to this document before. If different privacy filter related
+	// * observations exist, this function will apply the most restrictive privacy
+	// * filter.
+	// *
+	// * @throws IllegalArgumentException
+	// * when the needed element for applying the anonymization does not
+	// * exist in the current instance of the document.
+	// */
+	// public void applyPrivacyFilter() throws IllegalArgumentException {
+	// for (LaboratoryBatteryOrganizer lbo : getLaboratoryBatteryOrganizerList())
+	// {
+	// String privacyFilter = getPrivacyFilterFromLaboratoryObservationEnum(lbo);
+	// if (privacyFilter == null)
+	// throw new IllegalArgumentException();
+	// switch (privacyFilter) {
+	// case "none":
+	// break;
+	// case "initials":
+	// applyPrivacyFilterInitials(getMdht());
+	// break;
+	// case "conditional":
+	// // TODO
+	// break;
+	// case "hiv":
+	// // TODO
+	// break;
+	// }
+	// }
+	// }
 
 	/**
 	 * Applies the 'initials' privacy filter to all given record target elements.
@@ -210,9 +263,9 @@ public class CdaChLrph
 	 *
 	 * @param recordTargets
 	 */
-	private void applyPrivacyFilterInitials(ClinicalDocument document) {
+	public void applyPrivacyFilterInitials() {
 		byte index = 0;
-		for (RecordTarget originalRt : document.getRecordTargets()) {
+		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
 			// Get original elements
 			PatientRole originalPr = null;
 			if (originalRt.getPatientRole() != null) {
@@ -284,7 +337,7 @@ public class CdaChLrph
 			processedPr.getIds().add(ii);
 
 			// TODO Nationality, Job, Country of origin
-			document.getRecordTargets().set(index, processedRt);
+			getMdht().getRecordTargets().set(index, processedRt);
 			index++;
 		}
 	}
@@ -334,59 +387,62 @@ public class CdaChLrph
 		return null;
 	}
 
-	/**
-	 * Convenience function to return the
-	 * PatientPrivacyFilter(none,initials,conditional,hiv) from a
-	 * LaboratoryObservation, which is hold in the given
-	 * LaboratoryBatteryOrganizer.
-	 *
-	 * @param organizer
-	 *          the LaboratoryBatteryOrganizer
-	 * @return the section code
-	 */
-	private String getPrivacyFilterFromLaboratoryObservationEnum(
-			LaboratoryBatteryOrganizer organizer) {
-		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
-				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
-						.getPatientPrivacyFilter();
-			} else {
-				// if present return SNOMED Enum
-				if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() != null) {
-					return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
-							.getPatientPrivacyFilter();
-				}
-			}
-		}
-		return null;
-	}
+	// /**
+	// * Convenience function to return the
+	// * PatientPrivacyFilter(none,initials,conditional,hiv) from a
+	// * LaboratoryObservation, which is hold in the given
+	// * LaboratoryBatteryOrganizer.
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer
+	// * @return the section code
+	// */
+	// private String getPrivacyFilterFromLaboratoryObservationEnum(
+	// LaboratoryBatteryOrganizer organizer) {
+	// if (!organizer.getLaboratoryObservations().isEmpty()) {
+	// if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+	// // if present return LOINC Enum
+	// return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
+	// .getPatientPrivacyFilter();
+	// } else {
+	// // if present return SNOMED Enum
+	// if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() !=
+	// null) {
+	// return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
+	// .getPatientPrivacyFilter();
+	// }
+	// }
+	// }
+	// return null;
+	// }
 
-	/**
-	 * Convenience function to return the (LOINC) section code from a given
-	 * LaboratoryObservation, which is hold in the given
-	 * LaboratoryBatteryOrganizer.
-	 *
-	 * @param organizer
-	 *          the LaboratoryBatteryOrganizer
-	 * @return the section code
-	 */
-	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
-			LaboratoryBatteryOrganizer organizer) {
-		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
-				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsEnum().getSectionCode();
-			} else {
-				// if present return SNOMED Enum
-				if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() != null) {
-					return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
-							.getSectionCode();
-				}
-			}
-		}
-		return null;
-	}
+	// /**
+	// * Convenience function to return the (LOINC) section code from a given
+	// * LaboratoryObservation, which is hold in the given
+	// * LaboratoryBatteryOrganizer.
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer
+	// * @return the section code
+	// */
+	// private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
+	// LaboratoryBatteryOrganizer organizer) {
+	// if (!organizer.getLaboratoryObservations().isEmpty()) {
+	// if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+	// // if present return LOINC Enum
+	// return
+	// organizer.getLaboratoryObservations().get(0).getCodeAsEnum().getSectionCode();
+	// } else {
+	// // if present return SNOMED Enum
+	// if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() !=
+	// null) {
+	// return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
+	// .getSectionCode();
+	// }
+	// }
+	// }
+	// return null;
+	// }
 
 	/**
 	 * Convenience function, which returns the SpecimenAct directly from the

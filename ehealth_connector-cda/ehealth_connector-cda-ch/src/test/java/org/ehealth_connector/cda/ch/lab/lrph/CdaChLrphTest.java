@@ -18,10 +18,10 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
-import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.junit.Test;
@@ -209,7 +209,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		org.addLaboratoryObservation(lo);
 
 		final CdaChLrph cda = new CdaChLrph();
-		cda.addLaboratoryBatteryOrganizer(org);
+		cda.addLaboratoryBatteryOrganizer(org, null);
 
 		cda.getLaboratorySpecialtySection().setTextReference(
 				"<table><tr><td>Dies ist ein Test<content ID=\"TestContentIdRef\">Hier steht der menschenlesbare Text</content></td></tr></table>");
@@ -232,10 +232,11 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Convenience LaboratoryBatteryOrganizer (automatic section creation)
 		doc = new CdaChLrph();
 		LaboratoryObservation lo = new LaboratoryObservation();
-		lo.setCode(LabObsListLoinc.ABNORMAL_PRION_PROTEIN_PRESENCE_IN_BRAIN_BY_ELECTRON_MICROSCOPY);
+		// lo.setCode(LabObsListLoinc.ABNORMAL_PRION_PROTEIN_PRESENCE_IN_BRAIN_BY_ELECTRON_MICROSCOPY);
+		lo.setCode(new Code("2.16.840.1.113883.6.1", "23381-7"));
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		lbo.addLaboratoryObservation(lo);
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo, new Code("2.16.840.1.113883.6.1", "18725-2"));
 		assertFalse(doc.getLaboratoryBatteryOrganizerList().isEmpty());
 		document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
@@ -244,7 +245,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(xExist(document,
 				"/clinicaldocument/component/structuredBody/component/section/code[@code='18725-2']"));
 		// a second Laboratory Battery Organizer
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo, null);
 		document = doc.getDocument();
 		// there must be two Laboratory Battery Organizer
 		assertFalse(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
@@ -303,10 +304,10 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		LaboratoryObservation lo = new LaboratoryObservation(LabObsListSnomed.BRUCELLA,
 				ObservationInterpretation.POS, new Date());
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer(StatusCode.COMPLETED, lo);
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo, null);
 
 		// Apply the Privacy Filter and check the results
-		doc.applyPrivacyFilter();
+		doc.applyPrivacyFilterInitials();
 
 		Document document = doc.getDocument();
 

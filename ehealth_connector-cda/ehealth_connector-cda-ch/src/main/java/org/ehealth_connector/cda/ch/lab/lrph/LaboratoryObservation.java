@@ -3,8 +3,8 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.StandardCdaBodySelections;
-import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 
 public class LaboratoryObservation
@@ -15,7 +15,7 @@ public class LaboratoryObservation
 	}
 
 	// Required Elements with Loinc Code
-	public LaboratoryObservation(LabObsListLoinc code, ObservationInterpretation interpretationCode,
+	public LaboratoryObservation(Code code, ObservationInterpretation interpretationCode,
 			Date effectiveTime) {
 		this();
 		setCode(code);
@@ -37,12 +37,13 @@ public class LaboratoryObservation
 		super(mdht);
 	}
 
-	public org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc getCodeAsEnum() {
-		if (getCode() != null) {
-			return LabObsListLoinc.getEnum(getCode().getCode());
-		}
-		return null;
-	}
+	// public org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc
+	// getCodeAsEnum() {
+	// if (getCode() != null) {
+	// return LabObsListLoinc.getEnum(getCode().getCode());
+	// }
+	// return null;
+	// }
 
 	public org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed getCodeAsSnomedEnum() {
 		if (getCode() != null) {
@@ -59,9 +60,10 @@ public class LaboratoryObservation
 		return null;
 	}
 
-	public void setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc code) {
-		setCode(code.getCode());
-	}
+	// public void
+	// setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc code) {
+	// setCode(code.getCode());
+	// }
 
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed code) {
 		setCode(code.getCode());
