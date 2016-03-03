@@ -65,7 +65,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		setEffectiveTime(effectiveTime);
 		setInterpretationCode(interpretation);
 		setTargetSite(targetSite);
-		addValue(value);
+		setValue(value);
 	}
 
 	/**

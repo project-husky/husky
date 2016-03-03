@@ -34,7 +34,7 @@ public class VitalSignsObservationTest extends TestUtils {
 
 		// Value
 		Value v = new Value("182", Ucum.CentiMeter);
-		o.addValue(v);
+		o.setValue(v);
 		assertEquals(v.copyMdhtPhysicalQuantity().getValue(),
 				o.getValue().copyMdhtPhysicalQuantity().getValue());
 		assertEquals("182.0", o.getValue().getPhysicalQuantityValue());

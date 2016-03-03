@@ -47,7 +47,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @param value
 	 *            the new value
 	 */
-	public void addValue(Value value) {
+	public void setValue(Value value) {
 		if (value.isPhysicalQuantity()) {
 			mVitalSignObservation.getValues().add(value.copyMdhtPhysicalQuantity());
 		}

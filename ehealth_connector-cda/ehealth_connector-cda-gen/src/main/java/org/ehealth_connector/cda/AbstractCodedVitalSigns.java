@@ -11,6 +11,7 @@ import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -98,6 +99,11 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = author.copyMdhtAuthor();
 			mdhtAuthor.setTypeCode(ParticipationType.AUT);
 			organizer.getAuthors().add(mdhtAuthor);
+			// fix the code system name for schematron validation
+			if (CodeSystems.SNOMEDCT.getCodeSystemId().equals(organizer.getCode().getCodeSystem())
+					&& !organizer.getCode().getCodeSystemName().equals("SNOMED CT")) {
+				organizer.getCode().setCodeSystemName("SNOMED CT");
+			}
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
