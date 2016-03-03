@@ -19,6 +19,23 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by
+ * medshare GmbH, Switzerland. All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License
+ * v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative
+ * Commons Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
+
 public abstract class AbstractVitalSignObservation {
 
 	/** The m vital sign observation. */
@@ -28,7 +45,7 @@ public abstract class AbstractVitalSignObservation {
 	 * Adds the value.
 	 *
 	 * @param value
-	 *          the new value
+	 *            the new value
 	 */
 	public void addValue(Value value) {
 		if (value.isPhysicalQuantity()) {
@@ -135,7 +152,7 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the code.
 	 *
 	 * @param code
-	 *          the new code
+	 *            the new code
 	 */
 	public void setCode(Code code) {
 		mVitalSignObservation.setCode(code.getCD());
@@ -145,7 +162,7 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the date time of result.
 	 *
 	 * @param dateTimeOfResult
-	 *          the new date time of result
+	 *            the new date time of result
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
@@ -160,8 +177,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new language code of the vital sign observation, and its codes.
 	 *
 	 * @param languageCode
-	 *          <div class="de">Language code</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <div class="de">Language code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
 		CD code = mVitalSignObservation.getCode();
@@ -184,8 +201,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new act site of the vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="de">Anatomische Lage des Resultats</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {

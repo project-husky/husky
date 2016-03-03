@@ -1,3 +1,19 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
+
 package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
@@ -82,7 +98,7 @@ public enum ActSite {
 	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -102,7 +118,7 @@ public enum ActSite {
 	 *
 	 *
 	 * @param enumName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -124,7 +140,7 @@ public enum ActSite {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -164,10 +180,10 @@ public enum ActSite {
 	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @param displayName
-	 * <br>
+	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
 	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
