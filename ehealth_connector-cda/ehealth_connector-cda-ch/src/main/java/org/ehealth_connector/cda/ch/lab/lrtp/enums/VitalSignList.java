@@ -9,7 +9,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import java.util.Date;
 import org.ehealth_connector.common.utils.DateUtil;
 /*
-*<div class="de"></div>
+*<div class="de">Liste der Vitalzeichen</div>
 *<div class="fr"></div>
 */
 public enum VitalSignList {
@@ -81,7 +81,7 @@ public enum VitalSignList {
 	* <div class="en">Name of the Code System</div>
 	* <div class="de">Name des Codes Systems</div>
 	*/
-	public static final String CODE_SYSTEM_NAME="";
+	public static final String CODE_SYSTEM_NAME="Liste der Vitalzeichen";
 
 
 	/**

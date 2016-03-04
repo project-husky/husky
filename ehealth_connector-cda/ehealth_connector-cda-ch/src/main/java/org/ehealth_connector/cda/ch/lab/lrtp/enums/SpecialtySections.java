@@ -17,43 +17,43 @@ public enum SpecialtySections {
 	/** 
 	*<div class="en">Blood bank studies</div>
 	*/
-	BLOOD_BANK_STUDIES ("18717-9", "Blood bank studies", "20140101", "N/A"),
+	BLOOD_BANK_STUDIES ("18717-9", "Blood bank studies", "20140101", ""),
 	/** 
 	*<div class="en">Blood gas studies</div>
 	*/
-	BLOOD_GAS_STUDIES ("18767-4", "Blood gas studies", "20140101", "N/A"),
+	BLOOD_GAS_STUDIES ("18767-4", "Blood gas studies", "20140101", ""),
 	/** 
 	*<div class="en">Cell counts+Differential studies</div>
 	*/
-	CELL_COUNTS_DIFFERENTIAL_STUDIES ("18768-2", "Cell counts+Differential studies", "20140101", "N/A"),
+	CELL_COUNTS_DIFFERENTIAL_STUDIES ("18768-2", "Cell counts+Differential studies", "20140101", ""),
 	/** 
 	*<div class="en">Chemistry studies</div>
 	*/
-	CHEMISTRY_STUDIES ("18719-5", "Chemistry studies", "20140101", "N/A"),
+	CHEMISTRY_STUDIES ("18719-5", "Chemistry studies", "20140101", ""),
 	/** 
 	*<div class="en">Coagulation studies</div>
 	*/
-	COAGULATION_STUDIES ("18720-3", "Coagulation studies", "20140101", "N/A"),
+	COAGULATION_STUDIES ("18720-3", "Coagulation studies", "20140101", ""),
 	/** 
 	*<div class="en">Hematology studies</div>
 	*/
-	HEMATOLOGY_STUDIES ("18723-7", "Hematology studies", "20140101", "N/A"),
+	HEMATOLOGY_STUDIES ("18723-7", "Hematology studies", "20140101", ""),
 	/** 
 	*<div class="en">HLA studies</div>
 	*/
-	HLA_STUDIES ("18724-5", "HLA studies", "20140101", "N/A"),
+	HLA_STUDIES ("18724-5", "HLA studies", "20140101", ""),
 	/** 
 	*<div class="en">Microbiology studies</div>
 	*/
-	MICROBIOLOGY_STUDIES ("18725-2", "Microbiology studies", "20140101", "N/A"),
+	MICROBIOLOGY_STUDIES ("18725-2", "Microbiology studies", "20140101", ""),
 	/** 
 	*<div class="en">Serology studies</div>
 	*/
-	SEROLOGY_STUDIES ("18727-8", "Serology studies", "20140101", "N/A"),
+	SEROLOGY_STUDIES ("18727-8", "Serology studies", "20140101", ""),
 	/** 
 	*<div class="en">Urinalysis studies</div>
 	*/
-	URINALYSIS_STUDIES ("18729-4", "Urinalysis studies", "20140101", "N/A");
+	URINALYSIS_STUDIES ("18729-4", "Urinalysis studies", "20140101", "");
 
 	/** 
 	*<div class="en">Code for Blood bank studies</div>

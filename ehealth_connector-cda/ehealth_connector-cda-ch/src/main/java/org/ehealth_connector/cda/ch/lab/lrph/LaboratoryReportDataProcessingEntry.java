@@ -32,6 +32,6 @@ public class LaboratoryReportDataProcessingEntry
 	}
 
 	public void setSpecimenAct(org.ehealth_connector.cda.ch.lab.lrph.SpecimenAct specimenAct) {
-		getMdht().setAct(specimenAct.getMdht());
+		getMdht().setAct(specimenAct.copy());
 	}
 }

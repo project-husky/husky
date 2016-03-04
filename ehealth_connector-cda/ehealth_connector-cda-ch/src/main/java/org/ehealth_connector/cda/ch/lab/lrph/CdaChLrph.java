@@ -27,6 +27,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
 
+	/**
+	 * Standard constructor
+	 */
 	public CdaChLrph() {
 		this(LanguageCode.ENGLISH);
 	}

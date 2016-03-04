@@ -325,7 +325,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Apply the Privacy Filter and check the results
 		doc.applyPrivacyFilterInitials();
 
-		Document document = doc.getDocument();
+		// Document document = doc.getDocument();
 
 		// Name length 1
 		assertTrue(doc.getPatient().getName().getGivenNames().length() == 1);

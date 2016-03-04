@@ -24,15 +24,14 @@ public class LaboratoryReportDataProcessingEntry
 		setSpecimenAct(act);
 	}
 
-	public org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct getSpecimenAct() {
+	public SpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
-			return new org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct(
-					(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) getMdht().getAct());
+			return new SpecimenAct(getMdht().getAct());
 		}
 		return null;
 	}
 
-	public void setSpecimenAct(org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct specimenAct) {
-		getMdht().setAct(specimenAct.getMdht());
+	public void setSpecimenAct(SpecimenAct specimenAct) {
+		getMdht().setAct(specimenAct.copy());
 	}
 }

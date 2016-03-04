@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -12,6 +13,16 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 
 	public SpecimenAct() {
 		super();
+	}
+
+	/**
+	 * Instantiates this class with the underlying MDHT object
+	 *
+	 * @param mdht
+	 *          the MDHT object
+	 */
+	public SpecimenAct(Act mdht) {
+		super(mdht);
 	}
 
 	public SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {

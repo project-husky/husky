@@ -13,10 +13,19 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 
 public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct {
 
+	/**
+	 * Standard constructor
+	 */
 	public SpecimenAct() {
 		super();
 	}
 
+	/**
+	 * Instantiates this class with the underlying MDHT object
+	 *
+	 * @param mdht
+	 *          the MDHT object
+	 */
 	public SpecimenAct(Act mdht) {
 		super(mdht);
 	}

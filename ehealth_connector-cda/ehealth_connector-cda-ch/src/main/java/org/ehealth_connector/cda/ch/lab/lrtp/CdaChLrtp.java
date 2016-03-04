@@ -1,17 +1,19 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
-import org.ehealth_connector.cda.ch.lab.lrtp.enums.LrtpSections;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.enums.LanguageCode;
-import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -40,45 +42,66 @@ public class CdaChLrtp
 		return new Identificator(ii);
 	}
 
-	// TODO Add two constructors:
-	// one with the LabObsListLoinc, which uses the getGroup (Befundgruppe) Method
-	// to determine the type of the section
-	// the other uses a Sections Enum, which contains two Elements (LRTP Spec.
-	// 5.6.1)
-
 	/**
-	 * Instantiates a new cda ch lrtp.
-	 *
-	 * @param code
-	 *          the section code
+	 * Standard constructor
 	 */
-	public CdaChLrtp(Code code) {
-		this(code, LanguageCode.ENGLISH);
+	public CdaChLrtp() {
+		this(LanguageCode.ENGLISH);
 	}
 
 	/**
 	 * Instantiates a new cda ch lrtp.
 	 *
-	 * @param code
-	 *          the section code
 	 * @param languageCode
 	 *          the language code
 	 */
-	protected CdaChLrtp(Code code, LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode);
-		// super.initCda();
-		// LaboratorySpecialtySection specialtySection = new
-		// LaboratorySpecialtySection(code,
-		// languageCode);
-		// this.getDoc().addSection(specialtySection.getMdht());
+	protected CdaChLrtp(LanguageCode languageCode) {
+		this(languageCode, null, null);
 	}
 
-	// Internal Convenience function to initialize a Vital Signs or BloodGroup
-	// Section with
-	// the
-	// LRTP enum
-	protected CdaChLrtp(LrtpSections code, LanguageCode languageCode) {
-		this(code.getCode(), languageCode);
+	// TODO Add one constructor:
+	// one with the LabObsListLoinc, which uses the getSpecialtySection Method
+	// to determine the type of the section via the getEnum(code) method in the
+	// SpecialtySections Enum
+
+	/**
+	 * Constructor with the recommended elements for the LRTP document Header.
+	 *
+	 * @param languageCode
+	 *          the language code
+	 * @param author
+	 *          the author of the document (a laboratory)
+	 * @param refOrderingPhysician
+	 *          a physician
+	 * @param patient
+	 *          the patient
+	 * @param recipient
+	 *          the recipient (e.g. the Bundesamt für Gesundheit)
+	 */
+	public CdaChLrtp(LanguageCode languageCode, Author author,
+			ReferralOrderingPhysician refOrderingPhysician, org.ehealth_connector.common.Patient patient,
+			IntendedRecipient recipient) {
+		this(languageCode);
+		setPatient(patient);
+		setEmtpyCustodian();
+		addAuthor(author);
+		addReferralOrderingPhysician(refOrderingPhysician);
+	}
+
+	/**
+	 * Instantiates a new cda ch lrtp.
+	 *
+	 * @param languageCode
+	 *          language of the document contents
+	 * @param styleSheet
+	 *          an extensible style sheet (XSLT) to transform and render the
+	 *          document
+	 * @param css
+	 *          cascading style sheet (CSS) to add style information for rendering
+	 */
+	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
+		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
+		this.setLanguageCode(languageCode);
 	}
 
 	/**
@@ -91,18 +114,60 @@ public class CdaChLrtp
 		super(doc);
 	}
 
-	// Convenience function to initialize the LaboratorySpecialtySection with the
-	// LRTP enum
-	public CdaChLrtp(SpecialtySections code, LanguageCode languageCode) {
-		this(code.getCode(), languageCode);
+	/**
+	 * Convenience function to add a Laboratory Battery Organizer and create the
+	 * necessary elements.
+	 *
+	 * These elements are: LaboratorySpecialtySection (section code is derived
+	 * automatically from the first LaboratoryObservation enum)
+	 * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	 * Battery Organizer
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer holding at least one
+	 *          LaboratoryObservation
+	 */
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
+		LaboratorySpecialtySection laboratorySpecialtySection;
+		// Try to determine the right code from the LaboratoryObservation and set it
+		// in the Section
+		final String section = getSectionCodeFromLaboratoryObservationEnum(organizer);
+		Code sectionCode = null;
+		if (section != null) {
+			sectionCode = SpecialtySections.getEnum(section).getCode();
+		}
+
+		if (sectionCode != null) {
+			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
+			getMdht().setCode(sectionCode.getCE());
+		} else {
+			laboratorySpecialtySection = new LaboratorySpecialtySection();
+		}
+		LaboratoryReportDataProcessingEntry lrdpe;
+		lrdpe = new LaboratoryReportDataProcessingEntry();
+
+		SpecimenAct se;
+		se = new SpecimenAct();
+		if (sectionCode != null) {
+			se.setCode(sectionCode);
+		}
+
+		se.addLaboratoryBatteryOrganizer(organizer);
+		lrdpe.setSpecimenAct(se);
+		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+
+		addLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
 
-	// Convenience function
-	// Creates LaboratorySpecialtySection
-	// Creates SpecimenAct
-	// adds the Laboratory Battery to the SpecimenAct
-	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
-
+	/**
+	 * Sets a LaboratorySpecialtySection
+	 *
+	 * @param laboratorySpecialtySection
+	 *          the section
+	 */
+	public void addLaboratorySpecialtySection(
+			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
+		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
 
 	// Convenience function
@@ -133,13 +198,24 @@ public class CdaChLrtp
 
 	}
 
-	// Convenience function
-	// gets the LaboratorySpecialtySection
-	// gets the SpecimenAct
-	// gets the Laboratory Batteries from the SpecimenAct
+	/**
+	 * Convenience function to return all LaboratoryBatteryOrganizers directly
+	 * from the underlying
+	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
+	 * element.
+	 *
+	 * @return a list of LaboratoryBatteryOrganizers. returns null, if this list
+	 *         does not exist.
+	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct().getLaboratoryBatteryOrganizers();
+		}
 		return null;
-
 	}
 
 	/**
@@ -148,6 +224,30 @@ public class CdaChLrtp
 	 * @return the laboratory specialty section
 	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySection() {
+		List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
+				.getLaboratorySpecialtySections()) {
+			ls.add(new LaboratorySpecialtySection(lss));
+		}
+		return ls;
+	}
+
+	/**
+	 * Convenience function to return the (LOINC) section code from a given
+	 * LaboratoryObservation, which is hold in the given
+	 * LaboratoryBatteryOrganizer.
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 * @return the section code
+	 */
+	private String getSectionCodeFromLaboratoryObservationEnum(LaboratoryBatteryOrganizer organizer) {
+		if (!organizer.getLaboratoryObservations().isEmpty()) {
+			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
+				// if present return LOINC Enum
+				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum().getSectionCode();
+			}
+		}
 		return null;
 	}
 
