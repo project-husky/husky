@@ -85,7 +85,11 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	public OutbreakIdentificationObservation getOutbreakIdentification() {
-		return this.getNotificationOrganizer().getOutbreakIdentificationObservation();
+		if (this.getNotificationOrganizer() != null
+				&& this.getNotificationOrganizer().getOutbreakIdentificationObservation() != null) {
+			return this.getNotificationOrganizer().getOutbreakIdentificationObservation();
+		}
+		return null;
 	}
 
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {

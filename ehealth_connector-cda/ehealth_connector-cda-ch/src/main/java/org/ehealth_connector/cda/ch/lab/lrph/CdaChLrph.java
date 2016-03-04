@@ -5,8 +5,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Custodian;
@@ -40,6 +43,30 @@ public class CdaChLrph
 	 */
 	protected CdaChLrph(LanguageCode languageCode) {
 		this(languageCode, null, null);
+	}
+
+	/**
+	 * Constructor with the recommended elements for the LRPH document Header.
+	 *
+	 * @param languageCode
+	 *          the language code
+	 * @param author
+	 *          the author of the document (a laboratory)
+	 * @param refOrderingPhysician
+	 *          a physician
+	 * @param patient
+	 *          the patient
+	 * @param recipient
+	 *          the recipient (e.g. the Bundesamt für Gesundheit)
+	 */
+	public CdaChLrph(LanguageCode languageCode, Author author,
+			ReferralOrderingPhysician refOrderingPhysician, org.ehealth_connector.common.Patient patient,
+			IntendedRecipient recipient) {
+		this(languageCode);
+		setPatient(patient);
+		setEmtpyCustodian();
+		addAuthor(author);
+		addReferralOrderingPhysician(refOrderingPhysician);
 	}
 
 	/**

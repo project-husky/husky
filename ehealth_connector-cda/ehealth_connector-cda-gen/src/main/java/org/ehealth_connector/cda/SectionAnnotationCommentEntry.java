@@ -49,6 +49,35 @@ public class SectionAnnotationCommentEntry
 		setContentIdReference(reference);
 	}
 
+	/**
+	 * Instantiates an SectionAnnotationCommentEntry with a given
+	 * ContentIdReference and an according text, which will be added after the
+	 * reference element.
+	 */
+	public SectionAnnotationCommentEntry(String reference, String text) {
+		this();
+		setContentIdReference(reference);
+		addAnnotationCommentText(text);
+	}
+
+	/**
+	 * Adds the given text after the existing text of the annotation comment. This
+	 * is the text element of the level3 object. If this object is added to a
+	 * section with narrative generation enabled this text will copied to the
+	 * section text and the text can then be referenced by the &lt;content
+	 * ID="xxx"&gt; element.
+	 *
+	 * @param text
+	 *          the new comment text
+	 */
+	public void addAnnotationCommentText(String text) {
+		if (getMdht().getText() != null && getMdht().getText().getText() != null) {
+			getMdht().getText().addText(text);
+		} else {
+			getMdht().setText(Util.createEd(text));
+		}
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
