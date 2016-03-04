@@ -19,6 +19,7 @@ import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.ccd.VitalSignsOrganizer;
+import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsSection;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
@@ -34,7 +35,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 	}
 
-	protected AbstractCodedVitalSigns(VitalSignsSection mdht) {
+	protected AbstractCodedVitalSigns(CodedVitalSignsSection mdht) {
 		super(mdht);
 	}
 

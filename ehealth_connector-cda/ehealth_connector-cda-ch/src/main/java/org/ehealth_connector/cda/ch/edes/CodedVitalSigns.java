@@ -23,33 +23,33 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
-import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsSection;
 
 public class CodedVitalSigns extends AbstractCodedVitalSigns {
 
 	/**
 	 * Instantiates a new vital signs section.
 	 *
-	 * @param languageCode
-	 *            the language code
+	 * @param section
+	 *          the vital signs section
 	 */
-	public CodedVitalSigns(LanguageCode languageCode) {
-		super(IHEFactory.eINSTANCE.createVitalSignsSection().init());
-		this.languageCode = languageCode;
-		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
-				.getSectionTitle((languageCode != null ? languageCode : null))));
+	protected CodedVitalSigns(CodedVitalSignsSection section) {
+		super(section);
 	}
 
 	/**
 	 * Instantiates a new vital signs section.
 	 *
-	 * @param section
-	 *            the vital signs section
+	 * @param languageCode
+	 *          the language code
 	 */
-	protected CodedVitalSigns(VitalSignsSection section) {
-		super(section);
+	public CodedVitalSigns(LanguageCode languageCode) {
+		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
+		this.languageCode = languageCode;
+		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
+				.getSectionTitle((languageCode != null ? languageCode : null))));
 	}
 
 	@Override

@@ -99,6 +99,9 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+
+		// TODO add LRTP specific body elements here
+
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChLrtp cdaDeserialized = deserializeCda(deserialized);
@@ -126,6 +129,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 						.getCodeAsLoincEnum().getCode()));
+
+		// TODO add LRTP specific body elements here
 	}
 
 	@Test
@@ -212,6 +217,14 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']", 2));
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.3.2.1']", 2));
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1']", 2));
+
+		// Convenience VitalSignsOrganizer
+		doc.setVitalSignOrganizer(new VitalSignsOrganizer());
+		assertNotNull(doc.getCodedVitalSignsSection());
+		assertNotNull(doc.getVitalSignsOrganizer());
+		document = doc.getDocument();
+		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2", null));
+		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.4.13.1", null));
 	}
 
 	@Override

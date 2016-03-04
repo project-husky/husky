@@ -3,7 +3,6 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
@@ -15,6 +14,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.ihe.utils.UUID;
+import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -33,7 +33,6 @@ public class CdaChLrtp
 	 */
 	protected static Identificator createUuidLrtp(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		// ii.setRoot(OID_MAIN);
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {
@@ -170,14 +169,6 @@ public class CdaChLrtp
 		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
 
-	// Convenience function
-	// - Create VitalSignsSection
-	// - Create VitalSignsOrganizer
-	// - Add VitalSignObservation
-	public void addVitalSignObservation(VitalSignObservation observation) {
-
-	}
-
 	// Convenience Function
 	// - Scan Observations for pseudonymization / anonymization related
 	// NotifiableObservationLoinc or NotifiableObservationSnomed
@@ -191,6 +182,21 @@ public class CdaChLrtp
 	public BloodGroupObservation getBloodGroup() {
 		return null;
 
+	}
+
+	/**
+	 * Gets the CodedVitalSignsSection
+	 *
+	 * @return the CodedVitalSignsSection
+	 */
+	public CodedVitalSignsSection getCodedVitalSignsSection() {
+		for (Section s : getMdht().getAllSections()) {
+			if (s instanceof org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) {
+				return new CodedVitalSignsSection(
+						(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) s);
+			}
+		}
+		return null;
 	}
 
 	public ReportScopes getDocumentationOf() {
@@ -251,8 +257,17 @@ public class CdaChLrtp
 		return null;
 	}
 
-	// Convenience function
-	public List<VitalSignObservation> getVitalSignObservationList() {
+	/**
+	 * Gets the VitalSignsOrganizer
+	 *
+	 * @return the VitalSignsOrganizer
+	 */
+	public VitalSignsOrganizer getVitalSignsOrganizer() {
+		if (getCodedVitalSignsSection() != null
+				&& getCodedVitalSignsSection().getVitalSignsOrganizer() != null) {
+			return new VitalSignsOrganizer(
+					getCodedVitalSignsSection().getVitalSignsOrganizer().getMdht());
+		}
 		return null;
 	}
 
@@ -268,8 +283,40 @@ public class CdaChLrtp
 
 	}
 
+	/**
+	 * Sets the VitalSignsSection
+	 *
+	 * @param codedVitalSigns
+	 *          the VitalSignsSection
+	 */
+	public void setCodedVitalSignsSection(CodedVitalSignsSection codedVitalSigns) {
+		if (getCodedVitalSignsSection() == null) {
+			getMdht().addSection(codedVitalSigns.copy());
+		}
+	}
+
 	// Convenience function to set the kind of donor
 	public void setDocumentationOf(ReportScopes scope) {
 
+	}
+
+	/**
+	 * Convenience function, which adds a Vital Sign Organizer and creates the
+	 * Vital Sign Section automatically with the current LanguageCode of the
+	 * document.
+	 *
+	 * @param organizer
+	 *          the organizer
+	 */
+	public void setVitalSignOrganizer(VitalSignsOrganizer organizer) {
+		// Check if this section already exists. If so, get it, else create it.
+		CodedVitalSignsSection cvs;
+		if (getCodedVitalSignsSection() != null) {
+			cvs = getCodedVitalSignsSection();
+		} else {
+			cvs = new CodedVitalSignsSection(getLanguageCode());
+		}
+		cvs.setVitalSignsOrganizer(organizer);
+		setCodedVitalSignsSection(cvs);
 	}
 }

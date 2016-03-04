@@ -8,9 +8,8 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
-import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsSection;
 
-public class CodedVitalSigns extends AbstractCodedVitalSigns {
+public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 
 	/**
 	 * Instantiates a new vital signs section.
@@ -18,18 +17,11 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * @param languageCode
 	 *          the language code
 	 */
-	public CodedVitalSigns(LanguageCode languageCode) {
-		// VitalSignsSection test =
-		// IHEFactory.eINSTANCE.createVitalSignsSection().init();
-		super(IHEFactory.eINSTANCE.createVitalSignsSection().init());
+	public CodedVitalSignsSection(LanguageCode languageCode) {
+		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 		this.languageCode = languageCode;
 		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
 				.getSectionTitle((languageCode != null ? languageCode : null))));
-		// TODO Check, why the IHE templateId: 2.16.840.1.113883.10.20.1.16 is
-		// missing here
-		// II ii = DatatypesFactory.eINSTANCE.createII();
-		// ii.setRoo
-		// getMdht().getTemplateIds().add();
 	}
 
 	/**
@@ -40,7 +32,7 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * @param organizer
 	 *          the VitalSignsOrganizer
 	 */
-	public CodedVitalSigns(LanguageCode languageCode, VitalSignsOrganizer organizer) {
+	public CodedVitalSignsSection(LanguageCode languageCode, VitalSignsOrganizer organizer) {
 		this(languageCode);
 		setVitalSignsOrganizer(organizer);
 	}
@@ -51,7 +43,8 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * @param section
 	 *          the vital signs section
 	 */
-	protected CodedVitalSigns(VitalSignsSection section) {
+	protected CodedVitalSignsSection(
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section) {
 		super(section);
 	}
 
