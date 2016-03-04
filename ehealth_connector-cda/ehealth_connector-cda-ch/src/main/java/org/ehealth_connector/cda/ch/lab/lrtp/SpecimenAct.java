@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -15,6 +16,20 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 
 	public SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code for the SpecimenAct
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 */
+	public SpecimenAct(SpecialtySections code, LaboratoryBatteryOrganizer organizer) {
+		this();
+		setCode(code);
+		addLaboratoryBatteryOrganizer(organizer);
 	}
 
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
@@ -35,5 +50,9 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 			}
 		}
 		return list;
+	}
+
+	public void setCode(SpecialtySections code) {
+		getMdht().setCode(code.getCD());
 	}
 }

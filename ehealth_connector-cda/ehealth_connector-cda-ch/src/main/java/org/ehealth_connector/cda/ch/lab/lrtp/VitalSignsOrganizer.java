@@ -1,6 +1,7 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignsOrganizer;
@@ -14,6 +15,23 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	public VitalSignsOrganizer() {
 		super();
 		setEffectiveTimeNullFlavor(NullFlavor.NOT_APPLICABLE);
+	}
+
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param effectiveTime
+	 *          point in time of the measurement.
+	 * @param author
+	 *          the author
+	 * @param observation
+	 *          the observation
+	 */
+	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignsObservation observation) {
+		this();
+		setEffectiveTime(effectiveTime);
+		addAuthor(author);
+		addVitalSignsObservation(observation);
 	}
 
 	public VitalSignsOrganizer(org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer mdht) {
@@ -49,5 +67,4 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 		}
 		return vsl;
 	}
-
 }

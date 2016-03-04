@@ -21,10 +21,16 @@ public class LaboratoryBatteryOrganizer
 		super(mdht);
 	}
 
-	// Required Elements
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param status
+	 *          of the underlying observations (completed, aborted)
+	 * @param observation
+	 *          the observation
+	 */
 	public LaboratoryBatteryOrganizer(StatusCode status, LaboratoryObservation observation) {
 		this();
-		setStatusCode(status);
 		addLaboratoryObservation(observation);
 	}
 

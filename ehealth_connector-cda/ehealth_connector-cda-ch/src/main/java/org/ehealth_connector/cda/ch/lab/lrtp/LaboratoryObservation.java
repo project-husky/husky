@@ -1,10 +1,12 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -13,6 +15,28 @@ public class LaboratoryObservation
 
 	public LaboratoryObservation() {
 		super();
+	}
+
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code
+	 * @param interpretationCode
+	 *          the interpretation code
+	 * @param effectiveTime
+	 *          <div class="en">point in time of the result (physiological
+	 *          relevant point in time). Precision: Date with hour and
+	 *          minute</div> <div class="de">Zeitpunkt des Resultats
+	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
+	 *          und Tageszeit mit Stunde und Minute </div>
+	 */
+	public LaboratoryObservation(LabObsList code, ObservationInterpretation interpretationCode,
+			Date effectiveTime) {
+		this();
+		setCode(code);
+		setInterpretationCode(interpretationCode);
+		setEffectiveTime(effectiveTime);
 	}
 
 	public LaboratoryObservation(

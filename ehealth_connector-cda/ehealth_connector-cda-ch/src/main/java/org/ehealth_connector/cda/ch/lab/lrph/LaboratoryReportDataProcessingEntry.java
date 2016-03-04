@@ -13,7 +13,12 @@ public class LaboratoryReportDataProcessingEntry
 		super(mdht);
 	}
 
-	// Required Elements
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param act
+	 *          the SpecimentAct
+	 */
 	public LaboratoryReportDataProcessingEntry(SpecimenAct act) {
 		this();
 		setSpecimenAct(act);

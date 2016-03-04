@@ -13,6 +13,17 @@ public class LaboratoryReportDataProcessingEntry
 		super(mdht);
 	}
 
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param act
+	 *          the SpecimentAct
+	 */
+	public LaboratoryReportDataProcessingEntry(SpecimenAct act) {
+		this();
+		setSpecimenAct(act);
+	}
+
 	public org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
 			return new org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct(

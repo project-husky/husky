@@ -21,7 +21,9 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.junit.Test;
@@ -281,6 +283,18 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Referral Ordering Physician
 		cda.addReferralOrderingPhysician(new ReferralOrderingPhysician());
 		assertNotNull(cda.getReferralOrderingPhysicians());
+
+		// Intended Recipient
+		cda.addIntendedRecipient(new IntendedRecipient());
+		assertFalse(cda.getIntendedRecipients().isEmpty());
+
+		// Empty Custodian
+		cda.setEmtpyCustodian();
+		assertNotNull(cda.getCustodian());
+
+		// Author
+		cda.addAuthor(new Author());
+		assertFalse(cda.getAuthors().isEmpty());
 	}
 
 	@Test
@@ -291,6 +305,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		doc.setLaboratorySpecialtySection(lss);
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts1);
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
+		doc.setNarrativeTextSectionLaboratorySpeciality(ts2);
+		assertEquals(ts2, doc.getNarrativeTextSectionLaboratorySpeciality());
 	}
 
 	@Test

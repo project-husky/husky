@@ -29,6 +29,17 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 		mVitalSignObservation = observation;
 	}
 
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code
+	 */
+	public VitalSignsObservation(VitalSignList code) {
+		this();
+		setCode(code);
+	}
+
 	// Swiss specific VitalSignObserations
 	// Es MUSS ein LOINC Code aus dem Value Set CDA-CH-LRTP vitalSignList
 	// verwendet werden (siehe Kapitel 5.6.5 Liste der Vitalzeichen“ auf Seite 52)

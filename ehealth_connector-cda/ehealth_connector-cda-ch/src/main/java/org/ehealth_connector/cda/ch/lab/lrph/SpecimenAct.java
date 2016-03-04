@@ -3,9 +3,9 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LrphSections;
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
@@ -21,8 +21,18 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		super(mdht);
 	}
 
-	// Required Elements
-	public SpecimenAct(Code code, org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry,
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code for the SpecimenAct
+	 * @param entry
+	 *          the SpecimenCollectionEntry
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 */
+	public SpecimenAct(LrphSections code,
+			org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry,
 			LaboratoryBatteryOrganizer organizer) {
 		this();
 		setCode(code);
@@ -100,6 +110,10 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 			}
 		}
 		return null;
+	}
+
+	public void setCode(LrphSections code) {
+		getMdht().setCode(code.getCD());
 	}
 
 	protected void setNotificationOrganizer(

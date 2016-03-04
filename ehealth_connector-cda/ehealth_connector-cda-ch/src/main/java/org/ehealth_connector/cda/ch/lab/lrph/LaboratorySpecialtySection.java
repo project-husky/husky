@@ -13,7 +13,14 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 		super(code);
 	}
 
-	// Required Elements
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code for this section
+	 * @param entry
+	 *          the LaboratoryReportDataProcessingEntry
+	 */
 	public LaboratorySpecialtySection(Code code, LaboratoryReportDataProcessingEntry entry) {
 		this(code);
 		setLaboratoryReportDataProcessingEntry(entry);

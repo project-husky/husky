@@ -10,10 +10,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.IntendedRecipient;
-import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Custodian;
-import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -23,7 +20,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -406,19 +402,6 @@ public class CdaChLrph
 	}
 
 	/**
-	 * Returns the narrative Text of the LaboratorySpecialtySection.
-	 *
-	 * @return the narrative Text. Returns null, if this text does not exist.
-	 */
-	public String getNarrativeTextSectionLaboratorySpeciality() {
-		if (this.getLaboratorySpecialtySection() != null
-				&& this.getLaboratorySpecialtySection().getText() != null) {
-			return this.getLaboratorySpecialtySection().getText();
-		}
-		return null;
-	}
-
-	/**
 	 * Convenience function, which returns the SpecimenAct directly from the
 	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
 	 * element
@@ -493,40 +476,6 @@ public class CdaChLrph
 	// return null;
 	// }
 
-	public void setEmtpyCustodian() {
-		Custodian c = CDAFactory.eINSTANCE.createCustodian();
-		AssignedCustodian ac = CDAFactory.eINSTANCE.createAssignedCustodian();
-		CustodianOrganization co = CDAFactory.eINSTANCE.createCustodianOrganization();
-
-		c.setAssignedCustodian(ac);
-		ac.setRepresentedCustodianOrganization(co);
-
-		// Id
-		II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setNullFlavor(NullFlavor.NASK);
-		co.getIds().add(ii);
-
-		// Name
-		ON on = DatatypesFactory.eINSTANCE.createON();
-		on.setNullFlavor(NullFlavor.NASK);
-		co.setName(on);
-
-		// Telecom
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.setNullFlavor(NullFlavor.NASK);
-		co.setTelecom(tel);
-
-		// Addr
-		AD ad = DatatypesFactory.eINSTANCE.createAD();
-		ad.setNullFlavor(NullFlavor.NASK);
-		ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
-		adxp.setNullFlavor(NullFlavor.NASK);
-		ad.getStreetNames().add(adxp);
-		co.setAddr(ad);
-
-		getMdht().setCustodian(c);
-	}
-
 	/**
 	 * Sets a LaboratorySpecialtySection
 	 *
@@ -544,18 +493,6 @@ public class CdaChLrph
 			StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
 			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
 			getMdht().setStructuredBody(sb);
-		}
-	}
-
-	/**
-	 * Sets the section/text element for the LaboratorySpecialtySection.
-	 *
-	 * @param text
-	 *          the text
-	 */
-	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
-		if (this.getLaboratorySpecialtySection() != null) {
-			this.getLaboratorySpecialtySection().setText(text);
 		}
 	}
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
-import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
@@ -12,6 +11,19 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer() {
 		super();
+	}
+
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param the
+	 *          status of the underlying observations (completed, aborted)
+	 * @param observation
+	 *          the observation
+	 */
+	public LaboratoryBatteryOrganizer(LaboratoryObservation observation) {
+		this();
+		addLaboratoryObservation(observation);
 	}
 
 	public LaboratoryBatteryOrganizer(

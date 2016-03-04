@@ -14,7 +14,20 @@ public class LaboratoryObservation
 		super();
 	}
 
-	// Required Elements with Loinc Code
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code
+	 * @param interpretationCode
+	 *          the interpretation code
+	 * @param effectiveTime
+	 *          <div class="en">point in time of the result (physiological
+	 *          relevant point in time). Precision: Date with hour and
+	 *          minute</div> <div class="de">Zeitpunkt des Resultats
+	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
+	 *          und Tageszeit mit Stunde und Minute </div>
+	 */
 	public LaboratoryObservation(Code code, ObservationInterpretation interpretationCode,
 			Date effectiveTime) {
 		this();
@@ -23,7 +36,20 @@ public class LaboratoryObservation
 		setEffectiveTime(effectiveTime);
 	}
 
-	// Required Elements with Snomed Code
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param code
+	 *          the code
+	 * @param interpretationCode
+	 *          the interpretation code
+	 * @param effectiveTime
+	 *          <div class="en">point in time of the result (physiological
+	 *          relevant point in time). Precision: Date with hour and
+	 *          minute</div> <div class="de">Zeitpunkt des Resultats
+	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
+	 *          und Tageszeit mit Stunde und Minute </div>
+	 */
 	public LaboratoryObservation(LabObsListSnomed code, ObservationInterpretation interpretationCode,
 			Date effectiveTime) {
 		this();

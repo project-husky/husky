@@ -11,6 +11,17 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		super();
 	}
 
+	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param observation
+	 *          the observation
+	 */
+	public LaboratoryBatteryOrganizer(LaboratoryObservation observation) {
+		this();
+		addLaboratoryObservation(observation);
+	}
+
 	public LaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);

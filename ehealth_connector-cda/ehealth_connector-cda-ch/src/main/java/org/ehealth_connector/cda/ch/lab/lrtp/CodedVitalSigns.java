@@ -33,6 +33,19 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	}
 
 	/**
+	 * Instantiates the class with the required elements
+	 *
+	 * @param languageCode
+	 *          the language code
+	 * @param organizer
+	 *          the VitalSignsOrganizer
+	 */
+	public CodedVitalSigns(LanguageCode languageCode, VitalSignsOrganizer organizer) {
+		this(languageCode);
+		setVitalSignsOrganizer(organizer);
+	}
+
+	/**
 	 * Instantiates a new vital signs section.
 	 *
 	 * @param section

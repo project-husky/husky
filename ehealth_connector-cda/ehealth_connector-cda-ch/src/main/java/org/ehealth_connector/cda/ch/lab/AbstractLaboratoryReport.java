@@ -6,15 +6,23 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
-import org.ehealth_connector.common.AuthoringDevice;
 import org.ehealth_connector.common.IntendedRecipient;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.Author;
+import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
+import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaCh<EClinicalDocument> {
@@ -39,19 +47,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		setTitle(getSpecialitySectionTitle());
 	}
 
-	public void addAuthorOrganization(Organization organization, AuthoringDevice device) {
-		Author author = CDAFactory.eINSTANCE.createAuthor();
-		author.setAssignedAuthor(Util.createAuthorFromOrganization(organization));
-		// TODO
-	}
-
 	public void addIntendedRecipient(IntendedRecipient recipient) {
-		// InformationRecipient ir =
-		// CDAFactory.eINSTANCE.createInformationRecipient();
-		//
-		// ir.setTypeCode(x_InformationRecipient.PRCP);
-		// ir.setIntendedRecipient(recipient.copy());
-		// getMdht().getInformationRecipients().add(ir);
 		getMdht().getInformationRecipients().add(recipient.getIntendedRecipient());
 	}
 
@@ -62,15 +58,34 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	public List<IntendedRecipient> getIntendedRecipients() {
 		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
 		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
-			if (ir.getIntendedRecipient() != null) {
-				org.openhealthtools.mdht.uml.cda.IntendedRecipient mdht = ir.getIntendedRecipient();
-				if (mdht instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
-					org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) mdht;
-					il.add(new IntendedRecipient(iheIr));
-				}
+			if (ir instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
+				org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
+				il.add(new IntendedRecipient(iheIr));
 			}
 		}
 		return il;
+	}
+
+	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
+		for (Section s : getMdht().getAllSections()) {
+			if (s instanceof LaboratorySpecialtySection) {
+				return (LaboratorySpecialtySection) s;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the narrative Text of the LaboratorySpecialtySection.
+	 *
+	 * @return the narrative Text. Returns null, if this text does not exist.
+	 */
+	public String getNarrativeTextSectionLaboratorySpeciality() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().getText() != null) {
+			return getLaboratorySpecialtySection().getText().getText();
+		}
+		return null;
 	}
 
 	public List<ReferralOrderingPhysician> getReferralOrderingPhysicians() {
@@ -97,5 +112,54 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			return ("Laboratory Specialty Section");
 		}
 		return "";
+	}
+
+	/**
+	 * Creates an empty Custodian element, according to the LRXX specification.
+	 */
+	public void setEmtpyCustodian() {
+		Custodian c = CDAFactory.eINSTANCE.createCustodian();
+		AssignedCustodian ac = CDAFactory.eINSTANCE.createAssignedCustodian();
+		CustodianOrganization co = CDAFactory.eINSTANCE.createCustodianOrganization();
+
+		c.setAssignedCustodian(ac);
+		ac.setRepresentedCustodianOrganization(co);
+
+		// Id
+		II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setNullFlavor(NullFlavor.NASK);
+		co.getIds().add(ii);
+
+		// Name
+		ON on = DatatypesFactory.eINSTANCE.createON();
+		on.setNullFlavor(NullFlavor.NASK);
+		co.setName(on);
+
+		// Telecom
+		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.setNullFlavor(NullFlavor.NASK);
+		co.setTelecom(tel);
+
+		// Addr
+		AD ad = DatatypesFactory.eINSTANCE.createAD();
+		ad.setNullFlavor(NullFlavor.NASK);
+		ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+		adxp.setNullFlavor(NullFlavor.NASK);
+		ad.getStreetNames().add(adxp);
+		co.setAddr(ad);
+
+		getMdht().setCustodian(c);
+	}
+
+	/**
+	 * Sets the section/text element for the LaboratorySpecialtySection.
+	 *
+	 * @param text
+	 *          the text
+	 */
+	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
+		if (getLaboratorySpecialtySection() != null) {
+			getLaboratorySpecialtySection().createStrucDocText(text);
+		}
 	}
 }
