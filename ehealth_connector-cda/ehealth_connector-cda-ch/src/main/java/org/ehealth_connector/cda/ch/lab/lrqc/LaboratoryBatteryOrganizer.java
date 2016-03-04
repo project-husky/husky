@@ -16,8 +16,6 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	/**
 	 * Instantiates the class with the required elements
 	 *
-	 * @param the
-	 *          status of the underlying observations (completed, aborted)
 	 * @param observation
 	 *          the observation
 	 */
