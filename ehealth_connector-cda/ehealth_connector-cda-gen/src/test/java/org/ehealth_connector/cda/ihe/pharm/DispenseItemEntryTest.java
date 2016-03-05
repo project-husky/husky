@@ -16,17 +16,18 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
+import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -37,8 +38,7 @@ import org.w3c.dom.NodeList;
  */
 public class DispenseItemEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
 	public void testExternalDocumentEntry() throws Exception {
@@ -239,5 +239,25 @@ public class DispenseItemEntryTest {
 		assertEquals("id3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getExtension());
 
 	}
+	
+	@Test
+	public void testSubstitutionHandlingEntry() throws Exception {
+
+		final DispenseItemEntry entry = new DispenseItemEntry();
+		entry.setSubstanceAdminSubstitutionMade(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
+		
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, entry.getSubstanceAdminSubstitutionMade());
+
+		final Document document = entry.getDocument(true);
+
+		XPathExpression expr = xpath.compile("//pharm:component1[@moodCode='EVN' and @classCode='SUBST']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//pharm:code[@code='TE' and @codeSystem='2.16.840.1.113883.5.1070']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
 
 }

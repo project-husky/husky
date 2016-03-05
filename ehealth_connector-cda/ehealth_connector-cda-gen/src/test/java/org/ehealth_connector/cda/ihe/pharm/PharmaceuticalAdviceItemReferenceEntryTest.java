@@ -21,7 +21,6 @@ import static org.junit.Assert.assertEquals;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
@@ -33,8 +32,7 @@ import org.w3c.dom.NodeList;
  */
 public class PharmaceuticalAdviceItemReferenceEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
 	public void testSerializeEmpty() throws Exception {

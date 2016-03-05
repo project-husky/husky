@@ -22,7 +22,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
@@ -36,8 +35,7 @@ import org.w3c.dom.NodeList;
  */
 public class PharmaceuticalAdviceItemEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
 	public void testExternalDocumentEntry() throws Exception {

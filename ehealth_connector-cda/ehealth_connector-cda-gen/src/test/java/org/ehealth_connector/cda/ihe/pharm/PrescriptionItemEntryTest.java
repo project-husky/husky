@@ -24,11 +24,11 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
+import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -39,8 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class PrescriptionItemEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
 	public void testExternalDocumentEntry() throws Exception {
@@ -72,19 +71,31 @@ public class PrescriptionItemEntryTest {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
 		
 		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
 		entry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
+		
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, substitutionHandlingEntry.getSubstanceAdminSubstitution());
 
-		final Document document = entry.getDocument();
+		final Document document = entry.getDocument(true);
 
-		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='COMP']");
+		XPathExpression expr = xpath.compile("//cda:entryRelationship[@typeCode='COMP']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//independentInd[@value='false']");
+		expr = xpath.compile("//cda:independentInd[@value='false']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		
-		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.24']");
+		expr = xpath.compile("//cda:templateId[@root='2.16.840.1.113883.10.20.1.24']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+	
+		expr = xpath.compile("//pharm:subjectOf4[@moodCode='PERM' and @classCode='SUBST']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//pharm:code[@code='TE' and @codeSystem='2.16.840.1.113883.5.1070']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}

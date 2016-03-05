@@ -22,15 +22,20 @@ import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
+import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.PharmSubstitutionMade;
+import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClassRoot;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -440,6 +445,43 @@ public class DispenseItemEntry
 	@Override
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
+	}
+	
+	/**
+	 * Sets the substance admin substitution.
+	 *
+	 * @param substanceAdminSubstitution the substance admin substitution
+	 * @param languageCode the language code
+	 */
+	public void setSubstanceAdminSubstitutionMade(SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
+		if (substanceAdminSubstitution!=null) {
+			if (this.getMdht().getComponent1()==null) {
+				PharmSubstitutionMade pharmSubstitution = CDAFactory.eINSTANCE.createPharmSubstitutionMade();
+				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
+				pharmSubstitution.setMoodCode(ActMood.EVN);
+				this.getMdht().setComponent1(pharmSubstitution);
+			}
+			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			pharmSubstitution.setCode(substanceAdminSubstitution.getCode(languageCode).getCE());
+		} else {
+			this.getMdht().setComponent1(null);
+		}
+		
+	}
+	
+	/**
+	 * Gets the substance admin substitution.
+	 *
+	 * @return the substance admin substitution
+	 */
+	public SubstanceAdminSubstitution getSubstanceAdminSubstitutionMade() {
+		if (this.getMdht().getComponent1()!=null) {
+			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			if (pharmSubstitution.getCode()!=null) {
+				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
+			}
+		}
+		return null;
 	}
 
 }
