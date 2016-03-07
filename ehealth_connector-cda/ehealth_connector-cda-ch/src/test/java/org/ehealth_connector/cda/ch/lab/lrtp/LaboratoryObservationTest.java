@@ -55,5 +55,13 @@ public class LaboratoryObservationTest extends TestUtils {
 		lo.setCode(LabObsList.A11_HLA_ANTIGENE);
 		assertNotNull(lo.getCode());
 		assertEquals(LabObsList.A11_HLA_ANTIGENE, lo.getCodeAsLoincEnum());
+
+		// Convenience SoasInfoEntry (creates two SoasInfoEntries)
+		LaboratoryObservation lo2 = new LaboratoryObservation();
+		lo2.addSoasInfoEnties(true, true);
+		document = lo2.getDocument();
+		assertTrue(xCount(document,
+				"//observation/entryRelationship/observation/templateId[@root='2.16.756.5.30.1.1.1.1.3.4.1' and @extension='CDA-CH.LRTP.SOASInfo']",
+				2));
 	}
 }

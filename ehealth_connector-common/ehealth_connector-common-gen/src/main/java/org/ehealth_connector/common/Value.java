@@ -275,6 +275,20 @@ public class Value {
 	}
 
 	/**
+	 * Return if this Value of the underlying MDHT type BL (boolean) is true or
+	 * false
+	 *
+	 * @return the value of the underlying type BL
+	 */
+	public boolean getBoolean() {
+		if (isBl()) {
+			BL bl = (BL) mValue;
+			return bl.getValue();
+		}
+		return false;
+	}
+
+	/**
 	 * <div class="en">Gets the code.</div> <div class="de">Liefert code.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *

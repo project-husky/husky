@@ -44,9 +44,37 @@ public class LaboratoryObservation
 		super(mdht);
 	}
 
+	/**
+	 * Convenience function to add the two required SoasInfoEntries.
+	 *
+	 * @param centerSpecificAvoid
+	 *          <div class="en">Center specific Avoid=true means that a
+	 *          transplantation should not be performed, because of the
+	 *          HLA-Antibody even if the MFI-value is in the acceptable
+	 *          range.</div><div class="de"> Center specific Avoid=true
+	 *          bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
+	 *          Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
+	 *          noch im akzeptablen Bereich liegt.</div>
+	 * @param previousTx
+	 *          <div class="en">Prev-Tx=true means that the HLA-antibody has been
+	 *          build due to a former transplantation.</div>
+	 *          <div class="de">Prev-Tx=true bedeutet, dass der betreffende
+	 *          HLA-Antikörper aufgrund einer früheren Transplantation gebildet
+	 *          wurde.</div>
+	 */
+	public void addSoasInfoEnties(boolean centerSpecificAvoid, boolean previousTx) {
+		SoasInfoEntry csa = new SoasInfoEntry(centerSpecificAvoid);
+		SoasInfoEntry ptx = new SoasInfoEntry();
+		ptx.setPreviousTx(previousTx);
+
+		getMdht().addObservation(csa.copy());
+		getMdht().addObservation(ptx.copy());
+	}
+
 	public void addSoasInfoEntry(SoasInfoEntry entry) {
 		getMdht().addObservation(entry.copy());
 	}
+
 	//
 	// private byte findSoasInfoEntryIndex(Code code) {
 	// if (this.getSoasInfoEnties() != null &&

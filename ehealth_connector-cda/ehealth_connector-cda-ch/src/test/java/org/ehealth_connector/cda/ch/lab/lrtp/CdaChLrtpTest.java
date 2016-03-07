@@ -18,6 +18,7 @@ import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
+import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
@@ -79,14 +80,26 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		LaboratoryObservation lo = new LaboratoryObservation();
 
+		// LRTP specific
+		SoasInfoEntry sie = new SoasInfoEntry();
+		VitalSignsObservation vs = new VitalSignsObservation();
+		VitalSignsOrganizer vso = new VitalSignsOrganizer();
+		BloodGroupObservation bgo = new BloodGroupObservation();
+
 		lo.setCode(LabObsList.A11_HLA_ANTIGENE);
 		SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
 		lo.addCommentEntry(sac);
+		lo.addSoasInfoEntry(sie);
 		lbo.addLaboratoryObservation(lo);
 		spa.addLaboratoryBatteryOrganizer(lbo);
 		lrd.setSpecimenAct(spa);
 		sps.setLaboratoryReportDataProcessingEntry(lrd);
 		cda.addLaboratorySpecialtySection(sps);
+
+		// LRTP specific
+		vso.addVitalSignsObservation(vs);
+		cda.setVitalSignOrganizer(vso);
+		cda.setBloodGroupObservation(bgo);
 
 		assertNotNull(cda.getLaboratorySpecialtySection());
 		assertNotNull(
@@ -103,7 +116,12 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
-		// TODO add LRTP specific body elements here
+		// LRTP specific
+		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
+				.getSoasInfoEnties().get(0));
+		assertNotNull(cda.getVitalSignsOrganizer());
+		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
+		assertNotNull(cda.getBloodGroupObservation());
 
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
@@ -123,6 +141,11 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
+				.getSoasInfoEnties().get(0));
+		assertNotNull(cda.getVitalSignsOrganizer());
+		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
+		assertNotNull(cda.getBloodGroupObservation());
 
 		assertTrue(cdaDeserialized != null);
 		assertEquals("Laboratory Specialty Section",

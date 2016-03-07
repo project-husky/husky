@@ -20,6 +20,25 @@ public class SoasInfoEntry
 				"CDA-CH.LRTP.SOASInfo");
 	}
 
+	/**
+	 * Creates the SoasInfoEntry class with the required centerSpecificAvpid
+	 * element. If you want to create a SoasInfoEntry with the required PreviousTx
+	 * Element, please use the default constructor and the setPreviousTx method.
+	 *
+	 * @param centerSpecificAvoid
+	 *          <div class="en">Center specific Avoid=true means that a
+	 *          transplantation should not be performed, because of the
+	 *          HLA-Antibody even if the MFI-value is in the acceptable
+	 *          range.</div><div class="de"> Center specific Avoid=true
+	 *          bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
+	 *          Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
+	 *          noch im akzeptablen Bereich liegt.</div>
+	 */
+	public SoasInfoEntry(boolean centerSpecificAvoid) {
+		this();
+		setCenterSpecificAvoid(centerSpecificAvoid);
+	}
+
 	public SoasInfoEntry(org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry mdht) {
 		super(mdht);
 	}
@@ -49,7 +68,20 @@ public class SoasInfoEntry
 		return (PREVIOUS_TX.equals(this.getCode()));
 	}
 
-	// Convenience function to set Code and value for centerSpecificAvoid
+	//
+	/**
+	 * <div class="en">Convenience function to set Code and value for
+	 * centerSpecificAvoid</div>
+	 *
+	 * @param centerSpecificAvoid
+	 *          <div class="en">Center specific Avoid=true means that a
+	 *          transplantation should not be performed, because of the
+	 *          HLA-Antibody even if the MFI-value is in the acceptable
+	 *          range.</div><div class="de"> Center specific Avoid=true
+	 *          bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
+	 *          Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
+	 *          noch im akzeptablen Bereich liegt.</div>
+	 */
 	public void setCenterSpecificAvoid(boolean centerSpecificAvoid) {
 		this.setCode(CENTER_SPECIFIC_AVOID_CODE);
 		this.setValue(new Value(centerSpecificAvoid));
@@ -59,7 +91,16 @@ public class SoasInfoEntry
 		getMdht().setCode(code.getCD());
 	}
 
-	// Convenience function to set Code and value for previosTx
+	/**
+	 * Convenience function to set Code and value for previosTx
+	 *
+	 * @param previousTx
+	 *          <div class="en">Prev-Tx=true means that the HLA-antibody has been
+	 *          build due to a former transplantation.</div>
+	 *          <div class="de">Prev-Tx=true bedeutet, dass der betreffende
+	 *          HLA-Antikörper aufgrund einer früheren Transplantation gebildet
+	 *          wurde.</div>
+	 */
 	public void setPreviousTx(boolean previousTx) {
 		this.setCode(PREVIOUS_TX);
 		getMdht().getValues().clear();
