@@ -558,6 +558,15 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
 		</plugins>
 
 	</build>
@@ -580,6 +589,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<version>2.10.3</version>
 				<configuration>
 					<additionalparam>-Xdoclint:none</additionalparam>
+					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
 			<plugin>
