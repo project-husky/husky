@@ -37,7 +37,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-// TODO: Auto-generated Javadoc
 /**
  * Implements the Base Class DispenseItemEntry from the IHE PHARM Model.
  */
