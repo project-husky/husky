@@ -26,21 +26,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 /**
  * Implements the IHE MedicationFullfillmentInstructionsEntry.
  */
-public class MedicationFullfillmentInstructionsEntry extends MdhtEntryActFacade<MedicationFullfillmentInstructions> {
-	
-	/**
-	 * Instantiates a new medication fullfillment instructions entry.
-	 *
-	 * @param languageCode the language code
-	 */
-	public MedicationFullfillmentInstructionsEntry(LanguageCode languageCode) {
-		super(IHEFactory.eINSTANCE.createMedicationFullfillmentInstructions().init());
-		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
-		statusCodeCompleted.setCode("completed");
-		this.getMdht().setStatusCode(statusCodeCompleted);
-
-	}
-	
+public class MedicationFullfillmentInstructionsEntry
+		extends MdhtEntryActFacade<MedicationFullfillmentInstructions> {
 
 	/**
 	 * Instantiates a new medication fullfillment instructions entry.
@@ -52,11 +39,25 @@ public class MedicationFullfillmentInstructionsEntry extends MdhtEntryActFacade<
 	/**
 	 * Instantiates a new medication fullfillment instructions entry.
 	 *
-	 * @param mdht the mdht
+	 * @param languageCode
+	 *            the language code
+	 */
+	public MedicationFullfillmentInstructionsEntry(LanguageCode languageCode) {
+		super(IHEFactory.eINSTANCE.createMedicationFullfillmentInstructions().init());
+		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
+		statusCodeCompleted.setCode("completed");
+		this.getMdht().setStatusCode(statusCodeCompleted);
+
+	}
+
+	/**
+	 * Instantiates a new medication fullfillment instructions entry.
+	 *
+	 * @param mdht
+	 *            the mdht
 	 */
 	public MedicationFullfillmentInstructionsEntry(MedicationFullfillmentInstructions mdht) {
 		super(mdht);
 	}
-
 
 }

@@ -23,7 +23,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
  * Implements the IHE MedicationTreatmentPlanItemEntry.
  */
 public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
-	
+
 	/**
 	 * Instantiates a new medication treatment plan item entry.
 	 */
@@ -34,7 +34,8 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	/**
 	 * Instantiates a new medication treatment plan item entry.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public MedicationTreatmentPlanItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemEntry().init());
@@ -43,11 +44,12 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	/**
 	 * Instantiates a new medication treatment plan item entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
-	public MedicationTreatmentPlanItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry mdht) {
+	public MedicationTreatmentPlanItemEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry mdht) {
 		super(mdht);
 	}
-	
 
 }

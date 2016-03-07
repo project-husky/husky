@@ -26,8 +26,9 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 /**
  * Implements the IHE Pharm DispenseSection.
  */
-public class DispenseSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection> {
-	
+public class DispenseSection
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection> {
+
 	/** The language code. */
 	private LanguageCode languageCode;
 
@@ -37,18 +38,19 @@ public class DispenseSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda
 	public DispenseSection() {
 		this(LanguageCode.ENGLISH);
 	}
-	
+
 	/**
 	 * Instantiates a new dispense section.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public DispenseSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseSection().init());
 		this.languageCode = languageCode;
-		
+
 		// mdht bug? dispense sections defines own code but is not honored in modelling
-        // <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
+		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
 		if ("10160-0".equals(getMdht().getCode().getCode())) {
 			getMdht().getCode().setCode("60590-7");
 			getMdht().getCode().setDisplayName("MEDICATION DISPENSED.BRIEF");
@@ -69,55 +71,55 @@ public class DispenseSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda
 		}
 	}
 
-
 	/**
 	 * Instantiates a new dispense section.
 	 *
-	 * @param section the section
+	 * @param section
+	 *            the section
 	 */
 	public DispenseSection(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection section) {
 		super(section);
 	}
-	
+
 	/**
 	 * Gets the dispense item entry.
 	 *
 	 * @return the dispense item entry
 	 */
 	public DispenseItemEntry getDispenseItemEntry() {
-		if (this.getMdht().getDispenseItemEntry()!=null) {
+		if (this.getMdht().getDispenseItemEntry() != null) {
 			return new DispenseItemEntry(getMdht().getDispenseItemEntry());
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the title.
 	 *
 	 * @return the title
 	 */
 	public String getTitle() {
-		if (this.getMdht().getTitle()!=null) {
+		if (this.getMdht().getTitle() != null) {
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Sets the dispense item entry.
 	 *
-	 * @param entry the new dispense item entry
+	 * @param entry
+	 *            the new dispense item entry
 	 */
 	public void setDispenseItemEntry(DispenseItemEntry entry) {
-		if (this.getMdht().getDispenseItemEntry()!=null) {
+		if (this.getMdht().getDispenseItemEntry() != null) {
 			EList<Entry> entries = this.getMdht().getEntries();
-			if (entries!=null && entries.size()>0) {
+			if (entries != null && entries.size() > 0) {
 				entries.get(0).setSupply(entry.getMdht());
-				return ;
-			} 
-		} 
+				return;
+			}
+		}
 		this.getMdht().addSupply(entry.getMdht());
 	}
-
 
 }

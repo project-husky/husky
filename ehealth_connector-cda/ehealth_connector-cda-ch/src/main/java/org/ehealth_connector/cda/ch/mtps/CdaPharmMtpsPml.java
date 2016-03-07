@@ -20,8 +20,14 @@ import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.CdaPharmPml;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;;
 
+/**
+ * The Class CdaPharmMtpsPml. See also CDA CH MTPS 7.4.2.2
+ */
 public class CdaPharmMtpsPml extends AbstractCdaCh<CdaPharmPml> {
 
+	/**
+	 * Instantiates a new cda pharm mtps pml.
+	 */
 	public CdaPharmMtpsPml() {
 		super(PHARMFactory.eINSTANCE.createCdaPharmPml());
 	}

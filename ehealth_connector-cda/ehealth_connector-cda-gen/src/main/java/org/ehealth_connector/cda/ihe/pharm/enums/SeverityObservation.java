@@ -27,17 +27,33 @@ public enum SeverityObservation {
 	/** <div class="en"> High</div><div class="fr">Sévère</div> */
 	HIGH("H", "High", "Sévère"),
 
-	/** <div class="en"> Moderate</div><div class="fr">Modéré</div> */
-	MODERATE("M", "Moderate", "Modéré"),
-
 	/** <div class="en"> Low</div><div class="fr">Peu sévère</div> */
-	LOW("L", "Low", "Peu sévère");
+	LOW("L", "Low", "Peu sévère"),
+
+	/** <div class="en"> Moderate</div><div class="fr">Modéré</div> */
+	MODERATE("M", "Moderate", "Modéré");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "SeverityObservation";
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1063";
+
+	/**
+	 * Gets the enum.
+	 *
+	 * @param code
+	 *            the code
+	 * @return the enum
+	 */
+	public static SeverityObservation getEnum(String code) {
+		for (final SeverityObservation x : values()) {
+			if (x.code.equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 
 	/** The code. */
 	private String code;
@@ -86,22 +102,6 @@ public enum SeverityObservation {
 		}
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
-	}
-
-	/**
-	 * Gets the enum.
-	 *
-	 * @param code
-	 *            the code
-	 * @return the enum
-	 */
-	public static SeverityObservation getEnum(String code) {
-		for (final SeverityObservation x : values()) {
-			if (x.code.equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 
 }

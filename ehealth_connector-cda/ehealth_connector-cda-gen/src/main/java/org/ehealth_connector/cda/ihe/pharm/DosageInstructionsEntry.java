@@ -27,21 +27,22 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Implements the IHE DosageInstructionsEntry.
  */
 public class DosageInstructionsEntry extends MedicationItemEntry {
-	
+
 	/**
 	 * Instantiates a new dispense item reference entry.
 	 */
 	public DosageInstructionsEntry() {
-		this(PHARMFactory.eINSTANCE.createDosageInstructionsEntry().init());		
+		this(PHARMFactory.eINSTANCE.createDosageInstructionsEntry().init());
 	}
-
 
 	/**
 	 * Instantiates a new dispense item reference entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
-	public DosageInstructionsEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.DosageInstructionsEntry mdht) {
+	public DosageInstructionsEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.DosageInstructionsEntry mdht) {
 		super(mdht);
 		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
 		ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE.createManufacturedProduct();
@@ -51,6 +52,5 @@ public class DosageInstructionsEntry extends MedicationItemEntry {
 		consumable.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setConsumable(consumable);
 	}
-	
 
 }

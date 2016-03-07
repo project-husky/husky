@@ -24,16 +24,24 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 /**
  * Implements the IHE Pharm MedicationTreatmentPlanSection.
  */
-public class MedicationTreatmentPlanSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection> {
-	
+public class MedicationTreatmentPlanSection extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection> {
+
 	/** The language code. */
 	private LanguageCode languageCode;
 
+	/**
+	 * Instantiates a new medication treatment plan section.
+	 */
+	public MedicationTreatmentPlanSection() {
+		this(LanguageCode.ENGLISH);
+	}
 
 	/**
 	 * Instantiates a new medication treatment plan section.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public MedicationTreatmentPlanSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanSection().init());
@@ -53,36 +61,28 @@ public class MedicationTreatmentPlanSection extends MdhtFacade<org.openhealthtoo
 			break;
 		}
 	}
-	
-	/**
-	 * Instantiates a new medication treatment plan section.
-	 */
-	public MedicationTreatmentPlanSection() {
-		this(LanguageCode.ENGLISH);
-	}
-
 
 	/**
 	 * Instantiates a new medication treatment plan section.
 	 *
-	 * @param section the section
+	 * @param section
+	 *            the section
 	 */
-	public MedicationTreatmentPlanSection(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection section) {
+	public MedicationTreatmentPlanSection(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection section) {
 		super(section);
 	}
-	
+
 	/**
 	 * Gets the title.
 	 *
 	 * @return the title
 	 */
 	public String getTitle() {
-		if (this.getMdht().getTitle()!=null) {
+		if (this.getMdht().getTitle() != null) {
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
 	}
-	
-
 
 }

@@ -22,14 +22,22 @@ import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsDis.
+ * The Class CdaChMtpsDis. see also CDA CH MTPS 7.4.2.5
  */
 public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis> {
 
 	/**
 	 * Instantiates a new cda ch mtps dis.
+	 */
+	public CdaChMtpsDis() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps dis.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public CdaChMtpsDis(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
@@ -55,15 +63,9 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 
 	/**
 	 * Instantiates a new cda ch mtps dis.
-	 */
-	public CdaChMtpsDis() {
-		this(LanguageCode.ENGLISH);
-	}
-
-	/**
-	 * Instantiates a new cda ch mtps dis.
 	 *
-	 * @param doc mdht model document
+	 * @param doc
+	 *            mdht model document
 	 */
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {
 		super(doc);

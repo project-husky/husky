@@ -33,6 +33,13 @@ public class PharmaceuticalAdviceSection
 	private LanguageCode languageCode;
 
 	/**
+	 * Instantiates a new pharmaceutical advice section.
+	 */
+	public PharmaceuticalAdviceSection() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
@@ -66,13 +73,6 @@ public class PharmaceuticalAdviceSection
 
 	/**
 	 * Instantiates a new pharmaceutical advice section.
-	 */
-	public PharmaceuticalAdviceSection() {
-		this(LanguageCode.ENGLISH);
-	}
-
-	/**
-	 * Instantiates a new pharmaceutical advice section.
 	 *
 	 * @param section
 	 *            the section
@@ -80,6 +80,18 @@ public class PharmaceuticalAdviceSection
 	public PharmaceuticalAdviceSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceSection section) {
 		super(section);
+	}
+
+	/**
+	 * Gets the pharmaceutical advice item entry.
+	 *
+	 * @return the pharmaceutical advice item entry
+	 */
+	public PharmaceuticalAdviceItemEntry getPharmaceuticalAdviceItemEntry() {
+		if (this.getMdht().getPharmaceuticalAdviceItemEntry() != null) {
+			return new PharmaceuticalAdviceItemEntry(getMdht().getPharmaceuticalAdviceItemEntry());
+		}
+		return null;
 	}
 
 	/**
@@ -93,34 +105,22 @@ public class PharmaceuticalAdviceSection
 		}
 		return null;
 	}
-	
-	/**
-	 * Gets the pharmaceutical advice item entry.
-	 *
-	 * @return the pharmaceutical advice item entry
-	 */
-	public PharmaceuticalAdviceItemEntry getPharmaceuticalAdviceItemEntry() {
-		if (this.getMdht().getPharmaceuticalAdviceItemEntry()!=null) {
-			return new PharmaceuticalAdviceItemEntry(getMdht().getPharmaceuticalAdviceItemEntry());
-		}
-		return null;
-	}
-	
+
 	/**
 	 * Sets the pharmaceutical advice item entry.
 	 *
-	 * @param entry the new pharmaceutical advice item entry
+	 * @param entry
+	 *            the new pharmaceutical advice item entry
 	 */
 	public void setPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
-		if (this.getMdht().getPharmaceuticalAdviceItemEntry()!=null) {
+		if (this.getMdht().getPharmaceuticalAdviceItemEntry() != null) {
 			EList<Entry> entries = this.getMdht().getEntries();
-			if (entries!=null && entries.size()>0) {
+			if (entries != null && entries.size() > 0) {
 				entries.get(0).setObservation(entry.getMdht());
-				return ;
-			} 
-		} 
+				return;
+			}
+		}
 		this.getMdht().addObservation(entry.getMdht());
 	}
-
 
 }

@@ -36,12 +36,13 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	/**
 	 * Instantiates a new criterion entry.
 	 *
-	 * @param criterion the criterion
+	 * @param criterion
+	 *            the criterion
 	 */
 	protected CriterionEntry(Criterion criterion) {
 		super(criterion);
 	}
-	
+
 	/**
 	 * Gets the text reference pointing to the narrative text in the section.
 	 * 
@@ -60,8 +61,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Sets the text reference.
 	 * 
 	 * @param value
-	 *            the new text reference, # for local reference has to be
-	 *            included
+	 *            the new text reference, # for local reference has to be included
 	 */
 	@Override
 	public void setTextReference(String value) {

@@ -26,20 +26,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 /**
  * Implements the IHE PatientMedicalInstructionsEntry.
  */
-public class PatientMedicalInstructionsEntry extends MdhtEntryActFacade<PatientMedicalInstructions> {
-	
-	/**
-	 * Instantiates a new patient medical instructions entry.
-	 *
-	 * @param languageCode the language code
-	 */
-	public PatientMedicalInstructionsEntry(LanguageCode languageCode) {
-		super(IHEFactory.eINSTANCE.createPatientMedicalInstructions().init());
-		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
-		statusCodeCompleted.setCode("completed");
-		this.getMdht().setStatusCode(statusCodeCompleted);
-	}
-	
+public class PatientMedicalInstructionsEntry
+		extends MdhtEntryActFacade<PatientMedicalInstructions> {
+
 	/**
 	 * Instantiates a new patient medical instructions entry.
 	 */
@@ -47,15 +36,27 @@ public class PatientMedicalInstructionsEntry extends MdhtEntryActFacade<PatientM
 		this(LanguageCode.ENGLISH);
 	}
 
+	/**
+	 * Instantiates a new patient medical instructions entry.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
+	public PatientMedicalInstructionsEntry(LanguageCode languageCode) {
+		super(IHEFactory.eINSTANCE.createPatientMedicalInstructions().init());
+		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
+		statusCodeCompleted.setCode("completed");
+		this.getMdht().setStatusCode(statusCodeCompleted);
+	}
 
 	/**
 	 * Instantiates a new patient medical instructions entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
 	public PatientMedicalInstructionsEntry(PatientMedicalInstructions mdht) {
 		super(mdht);
 	}
-
 
 }

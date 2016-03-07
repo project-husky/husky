@@ -25,21 +25,22 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * Implements the IHE PharmaceuticalAdviceItemReferenceEntry.
  */
 public class PharmaceuticalAdviceItemReferenceEntry extends PharmaceuticalAdviceItemEntry {
-	
+
 	/**
 	 * Instantiates a new pharmaceutical advice item reference entry.
 	 */
 	public PharmaceuticalAdviceItemReferenceEntry() {
-		this(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceItemReferenceEntry().init());		
+		this(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceItemReferenceEntry().init());
 	}
-
 
 	/**
 	 * Instantiates a new pharmaceutical advice item reference entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
-	public PharmaceuticalAdviceItemReferenceEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemReferenceEntry mdht) {
+	public PharmaceuticalAdviceItemReferenceEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemReferenceEntry mdht) {
 		super(mdht);
 		String templateId = this.getTemplateId();
 		this.getMdht().getTemplateIds().clear();
@@ -49,7 +50,5 @@ public class PharmaceuticalAdviceItemReferenceEntry extends PharmaceuticalAdvice
 		cd.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
 		this.getMdht().setCode(cd);
 	}
-	
-	
 
 }

@@ -19,18 +19,26 @@ package org.ehealth_connector.cda.ch.mtps;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceSection;
-import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPadv.
+ * The Class CdaChMtpsPadv. see also CDA CH MTPS 7.4.2.6
  */
-public class CdaChMtpsPadv extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
+public class CdaChMtpsPadv
+		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
+
+	/**
+	 * Instantiates a new cda ch mtps padv.
+	 */
+	public CdaChMtpsPadv() {
+		this(LanguageCode.ENGLISH);
+	}
 
 	/**
 	 * Instantiates a new cda ch mtps padv.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public CdaChMtpsPadv(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPadv().init());
@@ -56,20 +64,14 @@ public class CdaChMtpsPadv extends AbstractCdaCh<org.openhealthtools.mdht.uml.cd
 
 	/**
 	 * Instantiates a new cda ch mtps padv.
-	 */
-	public CdaChMtpsPadv() {
-		this(LanguageCode.ENGLISH);
-	}
-
-	/**
-	 * Instantiates a new cda ch mtps padv.
 	 *
-	 * @param doc the doc
+	 * @param doc
+	 *            the doc
 	 */
 	public CdaChMtpsPadv(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv doc) {
 		super(doc);
 	}
-	
+
 	/**
 	 * Gets the pharmaceutical advice section.
 	 *

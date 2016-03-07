@@ -42,7 +42,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
-// TODO: Auto-generated Javadoc
 /**
  * Implements the Base Class MedicationItemEntry from the IHE PHARM Model.
  */
@@ -134,19 +133,6 @@ public class MedicationItemEntry
 	}
 
 	/**
-	 * Gets the pharm substitution handling entry.
-	 *
-	 * @return the pharm substitution handling entry
-	 */
-	public PharmSubstitutionHandlingEntry getPharmSubstitutionHandlingEntry() {
-		if (getMdht().getPharmSubstitutionHandlingEntry() != null) {
-			return new PharmSubstitutionHandlingEntry(
-					getMdht().getPharmSubstitutionHandlingEntry());
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the patient medical instructions.
 	 *
 	 * @return the patient medical instructions
@@ -155,6 +141,19 @@ public class MedicationItemEntry
 		if (getMdht().getPharmPatientMedicalInstructions() != null) {
 			return new PatientMedicalInstructionsEntry(
 					getMdht().getPharmPatientMedicalInstructions());
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the pharm substitution handling entry.
+	 *
+	 * @return the pharm substitution handling entry
+	 */
+	public PharmSubstitutionHandlingEntry getPharmSubstitutionHandlingEntry() {
+		if (getMdht().getPharmSubstitutionHandlingEntry() != null) {
+			return new PharmSubstitutionHandlingEntry(
+					getMdht().getPharmSubstitutionHandlingEntry());
 		}
 		return null;
 	}
@@ -298,29 +297,6 @@ public class MedicationItemEntry
 	}
 
 	/**
-	 * Sets the pharm substitution handling entry.
-	 *
-	 * @param entry
-	 *            the new pharm substitution handling entry
-	 */
-	public void setPharmSubstitutionHandlingEntry(PharmSubstitutionHandlingEntry entry) {
-		PharmSubstitutionHandlingEntry old = this.getPharmSubstitutionHandlingEntry();
-		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setSupply(entry.getMdht());
-					break;
-				}
-			}
-		} else {
-			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
-			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
-			entryRelationShip.setSupply(entry.getMdht());
-			this.getMdht().getEntryRelationships().add(entryRelationShip);
-		}
-	}
-
-	/**
 	 * Sets the patient medical instructions.
 	 *
 	 * @param entry
@@ -340,6 +316,29 @@ public class MedicationItemEntry
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationShip.setAct(entry.getMdht());
 			entryRelationShip.setInversionInd(Boolean.TRUE);
+			this.getMdht().getEntryRelationships().add(entryRelationShip);
+		}
+	}
+
+	/**
+	 * Sets the pharm substitution handling entry.
+	 *
+	 * @param entry
+	 *            the new pharm substitution handling entry
+	 */
+	public void setPharmSubstitutionHandlingEntry(PharmSubstitutionHandlingEntry entry) {
+		PharmSubstitutionHandlingEntry old = this.getPharmSubstitutionHandlingEntry();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSupply(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationShip.setSupply(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
 		}
 	}

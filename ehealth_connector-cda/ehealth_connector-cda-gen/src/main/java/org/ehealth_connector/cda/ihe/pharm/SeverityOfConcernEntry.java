@@ -30,7 +30,14 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 
 	/** The language code. */
 	private LanguageCode languageCode;
-	
+
+	/**
+	 * Instantiates a new severity of concern entry.
+	 */
+	public SeverityOfConcernEntry() {
+		this(LanguageCode.ENGLISH);
+	}
+
 	/**
 	 * Instantiates a new severity of concern entry.
 	 *
@@ -44,13 +51,6 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 
 	/**
 	 * Instantiates a new severity of concern entry.
-	 */
-	public SeverityOfConcernEntry() {
-		this(LanguageCode.ENGLISH);
-	}
-
-	/**
-	 * Instantiates a new severity of concern entry.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -60,14 +60,15 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 	}
 
 	/**
-	 * Sets the text reference.
+	 * Gets the severity observation.
 	 *
-	 * @param value
-	 *            the new text reference
+	 * @return the severity observation
 	 */
-	@Override
-	public void setTextReference(String value) {
-		this.getMdht().setText(Util.createReference(value));
+	public SeverityObservation getSeverityObservation() {
+		if (this.getMdht().getCode() != null) {
+			return SeverityObservation.getEnum(this.getMdht().getCode().getCode());
+		}
+		return null;
 	}
 
 	/**
@@ -83,27 +84,26 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Sets the severity observation.
 	 *
-	 * @param severityObservation the new severity observation
+	 * @param severityObservation
+	 *            the new severity observation
 	 */
 	public void setSeverityObservation(SeverityObservation severityObservation) {
 		this.getMdht().setCode(severityObservation.getCode(languageCode).getCD());
 	}
-	
-	/**
-	 * Gets the severity observation.
-	 *
-	 * @return the severity observation
-	 */
-	public SeverityObservation getSeverityObservation() {
-		if (this.getMdht().getCode()!=null) {
-			return SeverityObservation.getEnum(this.getMdht().getCode().getCode());
-		}
-		return null;
-	}
 
+	/**
+	 * Sets the text reference.
+	 *
+	 * @param value
+	 *            the new text reference
+	 */
+	@Override
+	public void setTextReference(String value) {
+		this.getMdht().setText(Util.createReference(value));
+	}
 
 }

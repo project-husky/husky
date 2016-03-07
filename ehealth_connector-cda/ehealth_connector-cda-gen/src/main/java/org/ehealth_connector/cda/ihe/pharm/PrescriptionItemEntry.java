@@ -26,15 +26,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * Implements the IHE PrescriptionItemEntry.
  */
 public class PrescriptionItemEntry extends MedicationItemEntry {
-	
-	/**
-	 * Instantiates a new prescription item entry.
-	 *
-	 * @param languageCode the language code
-	 */
-	public PrescriptionItemEntry(LanguageCode languageCode) {
-		super(PHARMFactory.eINSTANCE.createPrescriptionItemEntry().init());
-	}
 
 	/**
 	 * Instantiates a new prescription item entry.
@@ -42,26 +33,54 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	public PrescriptionItemEntry() {
 		this(LanguageCode.ENGLISH);
 	}
-	
 
 	/**
 	 * Instantiates a new prescription item entry.
 	 *
-	 * @param mdht the mdht
+	 * @param languageCode
+	 *            the language code
 	 */
-	public PrescriptionItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry mdht) {
+	public PrescriptionItemEntry(LanguageCode languageCode) {
+		super(PHARMFactory.eINSTANCE.createPrescriptionItemEntry().init());
+	}
+
+	/**
+	 * Instantiates a new prescription item entry.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public PrescriptionItemEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry mdht) {
 		super(mdht);
 	}
-	
+
+	/**
+	 * Gets the medication treatment plan item reference entry.
+	 *
+	 * @return the medication treatment plan item reference entry
+	 */
+	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
+		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) getMdht())
+				.getMedicationTreatmentPlanItemReferenceEntry() != null) {
+			return new MedicationTreatmentPlanItemReferenceEntry(
+					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) getMdht())
+							.getMedicationTreatmentPlanItemReferenceEntry());
+		}
+		return null;
+	}
+
 	/**
 	 * Sets the medication treatment plan item reference entry.
 	 *
-	 * @param entry the new medication treatment plan item reference entry
+	 * @param entry
+	 *            the new medication treatment plan item reference entry
 	 */
-	public void setMedicationTreatmentPlanItemReferenceEntry(MedicationTreatmentPlanItemReferenceEntry entry) {
+	public void setMedicationTreatmentPlanItemReferenceEntry(
+			MedicationTreatmentPlanItemReferenceEntry entry) {
 		MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
-		if (old!=null) {
-			for(EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
@@ -75,18 +94,5 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
 	}
-	
-	/**
-	 * Gets the medication treatment plan item reference entry.
-	 *
-	 * @return the medication treatment plan item reference entry
-	 */
-	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) getMdht()).getMedicationTreatmentPlanItemReferenceEntry()!=null) {
-			return new MedicationTreatmentPlanItemReferenceEntry(((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) getMdht()).getMedicationTreatmentPlanItemReferenceEntry());
-		}
-		return null;
-	}
-		
 
 }

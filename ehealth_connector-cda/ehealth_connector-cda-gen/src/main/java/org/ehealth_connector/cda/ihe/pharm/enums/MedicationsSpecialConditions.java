@@ -42,6 +42,22 @@ public enum MedicationsSpecialConditions {
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 
+	/**
+	 * Gets the enum.
+	 *
+	 * @param code
+	 *            the code
+	 * @return the enum
+	 */
+	public static MedicationsSpecialConditions getEnum(String code) {
+		for (final MedicationsSpecialConditions x : values()) {
+			if (x.code.equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
 	/** The code. */
 	private String code;
 
@@ -50,13 +66,16 @@ public enum MedicationsSpecialConditions {
 
 	/** The display name. */
 	private String displayNameFr;
-	
+
 	/**
 	 * Instantiates a new medications special conditions.
 	 *
-	 * @param code the code
-	 * @param displayNameEn the display name en
-	 * @param displayNameFr the display name fr
+	 * @param code
+	 *            the code
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameFr
+	 *            the display name fr
 	 */
 	private MedicationsSpecialConditions(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -64,12 +83,11 @@ public enum MedicationsSpecialConditions {
 		this.displayNameFr = displayNameFr;
 	}
 
-
-
 	/**
 	 * Gets the code.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {
@@ -87,22 +105,6 @@ public enum MedicationsSpecialConditions {
 		}
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
-	}
-	
-
-	/**
-	 * Gets the enum.
-	 *
-	 * @param code the code
-	 * @return the enum
-	 */
-	public static MedicationsSpecialConditions getEnum(String code) {
-		for (final MedicationsSpecialConditions x : values()) {
-			if (x.code.equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 
 }

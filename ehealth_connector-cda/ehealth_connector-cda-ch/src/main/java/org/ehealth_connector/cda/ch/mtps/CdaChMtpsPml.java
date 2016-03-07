@@ -22,35 +22,9 @@ import org.ehealth_connector.cda.ihe.pharm.MedicationListSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPml.
+ * The Class CdaChMtpsPml. See also CDA CH MTPS 7.4.2.2
  */
 public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml> {
-
-	/**
-	 * Instantiates a new cda ch mtps pml.
-	 *
-	 * @param languageCode the language code
-	 */
-	public CdaChMtpsPml(LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsPml().init());
-		this.setLanguageCode(languageCode);
-		super.initCda();
-		switch (this.getLanguageCode()) {
-		case GERMAN:
-			this.setTitle("Medikamentenliste"); 
-			break;
-		case FRENCH:
-			setTitle("Liste de médicaments"); 
-			break;
-		case ITALIAN:
-			setTitle("Lista farmaci"); 
-			break;
-		case ENGLISH:
-			setTitle("Medication List"); 
-		}
-		MedicationListSection section = new MedicationListSection(getLanguageCode());
-		this.getDoc().addSection(section.getMdht());
-	}
 
 	/**
 	 * Instantiates a new cda ch mtps pml.
@@ -62,19 +36,47 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	/**
 	 * Instantiates a new cda ch mtps pml.
 	 *
-	 * @param doc the doc
+	 * @param languageCode
+	 *            the language code
+	 */
+	public CdaChMtpsPml(LanguageCode languageCode) {
+		super(CHFactory.eINSTANCE.createCdaChMtpsPml().init());
+		this.setLanguageCode(languageCode);
+		super.initCda();
+		switch (this.getLanguageCode()) {
+		case GERMAN:
+			this.setTitle("Medikamentenliste");
+			break;
+		case FRENCH:
+			setTitle("Liste de médicaments");
+			break;
+		case ITALIAN:
+			setTitle("Lista farmaci");
+			break;
+		case ENGLISH:
+			setTitle("Medication List");
+		}
+		MedicationListSection section = new MedicationListSection(getLanguageCode());
+		this.getDoc().addSection(section.getMdht());
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps pml.
+	 *
+	 * @param doc
+	 *            the doc
 	 */
 	public CdaChMtpsPml(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml doc) {
 		super(doc);
 	}
-	
+
 	/**
 	 * Gets the medication list section.
 	 *
 	 * @return the medication list section
 	 */
 	public MedicationListSection getMedicationListSection() {
-		if (this.getMdht().getMedicationListSection()!=null) {
+		if (this.getMdht().getMedicationListSection() != null) {
 			return new MedicationListSection(this.getMdht().getMedicationListSection());
 		}
 		return null;

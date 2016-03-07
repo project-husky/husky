@@ -25,24 +25,33 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
 /**
- * Implements the IHE Pharm PrescriptionSection 
+ * Implements the IHE Pharm PrescriptionSection
  */
-public class PrescriptionSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionSection> {
-	
+public class PrescriptionSection
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionSection> {
+
 	/** The language code. */
 	private LanguageCode languageCode;
 
 	/**
 	 * Instantiates a new dispense section.
+	 */
+	public PrescriptionSection() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new dispense section.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *            the language code
 	 */
 	public PrescriptionSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPrescriptionSection().init());
 		this.languageCode = languageCode;
-		
+
 		// mdht bug? prescription sections defines own code but is not honored in modelling
-        // <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
+		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
 		if ("10160-0".equals(getMdht().getCode().getCode())) {
 			getMdht().getCode().setCode("57828-6");
 			getMdht().getCode().setDisplayName("PRESCRIPTIONS");
@@ -62,40 +71,23 @@ public class PrescriptionSection extends MdhtFacade<org.openhealthtools.mdht.uml
 			break;
 		}
 	}
-	
-	/**
-	 * Instantiates a new dispense section.
-	 */
-	public PrescriptionSection() {
-		this(LanguageCode.ENGLISH);
-	}
-
 
 	/**
 	 * Instantiates a new dispense section.
 	 *
-	 * @param section the section
+	 * @param section
+	 *            the section
 	 */
-	public PrescriptionSection(org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionSection section) {
+	public PrescriptionSection(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionSection section) {
 		super(section);
-	}
-	
-	/**
-	 * Gets the title.
-	 *
-	 * @return the title
-	 */
-	public String getTitle() {
-		if (this.getMdht().getTitle()!=null) {
-			return this.getMdht().getTitle().getText();
-		}
-		return null;
 	}
 
 	/**
 	 * Adds the prescription item entry.
 	 *
-	 * @param entry the entry
+	 * @param entry
+	 *            the entry
 	 */
 	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
 		this.getMdht().addSubstanceAdministration(entry.getMdht());
@@ -108,11 +100,23 @@ public class PrescriptionSection extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
 		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();
-		for (org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht().getPrescriptionItemEntries()) {
+		for (org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht()
+				.getPrescriptionItemEntries()) {
 			entries.add(new PrescriptionItemEntry(entry));
 		}
 		return entries;
 	}
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
+		if (this.getMdht().getTitle() != null) {
+			return this.getMdht().getTitle().getText();
+		}
+		return null;
+	}
 
 }

@@ -29,7 +29,6 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionMade;
-import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
@@ -38,8 +37,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
+// TODO: Auto-generated Javadoc
 /**
- * Implements the Base Class DispenseItemEntry from the IHE PHARM Model
+ * Implements the Base Class DispenseItemEntry from the IHE PHARM Model.
  */
 public class DispenseItemEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry> {
@@ -83,9 +83,26 @@ public class DispenseItemEntry
 		getMdht().getPreconditions().add(precondition);
 	}
 
+	/**
+	 * Gets the dispense code.
+	 *
+	 * @return the dispense code
+	 */
 	public Code getDispenseCode() {
 		if (this.getMdht().getCode() != null) {
 			return new Code(this.getMdht().getCode());
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the dosage instructions.
+	 *
+	 * @return the dosage instructions
+	 */
+	public DosageInstructionsEntry getDosageInstructions() {
+		if (getMdht().getDosageInstructionsEntry() != null) {
+			return new DosageInstructionsEntry(getMdht().getDosageInstructionsEntry());
 		}
 		return null;
 	}
@@ -161,18 +178,6 @@ public class DispenseItemEntry
 	}
 
 	/**
-	 * Gets the dosage instructions.
-	 *
-	 * @return the dosage instructions
-	 */
-	public DosageInstructionsEntry getDosageInstructions() {
-		if (getMdht().getDosageInstructionsEntry() != null) {
-			return new DosageInstructionsEntry(getMdht().getDosageInstructionsEntry());
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the patient medical instructions.
 	 *
 	 * @return the patient medical instructions
@@ -228,6 +233,21 @@ public class DispenseItemEntry
 	}
 
 	/**
+	 * Gets the substance admin substitution.
+	 *
+	 * @return the substance admin substitution
+	 */
+	public SubstanceAdminSubstitution getSubstanceAdminSubstitutionMade() {
+		if (this.getMdht().getComponent1() != null) {
+			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			if (pharmSubstitution.getCode() != null) {
+				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the text reference.
 	 * 
 	 * @return the text reference
@@ -241,8 +261,37 @@ public class DispenseItemEntry
 		return null;
 	}
 
+	/**
+	 * Sets the dispense code.
+	 *
+	 * @param code
+	 *            the new dispense code
+	 */
 	public void setDispenseCode(Code code) {
 		this.getMdht().setCode(code.getCD());
+	}
+
+	/**
+	 * Sets the dosage instructions.
+	 *
+	 * @param entry
+	 *            the new dosage instructions
+	 */
+	public void setDosageInstructions(DosageInstructionsEntry entry) {
+		DosageInstructionsEntry old = this.getDosageInstructions();
+		if (old != null) {
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setSubstanceAdministration((entry.getMdht()));
+					break;
+				}
+			}
+		} else {
+			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationShip.setSubstanceAdministration(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationShip);
+		}
 	}
 
 	/**
@@ -363,29 +412,6 @@ public class DispenseItemEntry
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
 		}
 	}
-	
-	/**
-	 * Sets the dosage instructions.
-	 *
-	 * @param entry the new dosage instructions
-	 */
-	public void setDosageInstructions(DosageInstructionsEntry entry) {
-		DosageInstructionsEntry old = this.getDosageInstructions();
-		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setSubstanceAdministration((entry.getMdht()));
-					break;
-				}
-			}
-		} else {
-			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
-			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
-			entryRelationShip.setSubstanceAdministration(entry.getMdht());
-			this.getMdht().getEntryRelationships().add(entryRelationShip);
-		}
-	}
-
 
 	/**
 	 * Sets the pharmaceutical advice item reference entry.
@@ -437,26 +463,19 @@ public class DispenseItemEntry
 	}
 
 	/**
-	 * Sets the text reference.
-	 *
-	 * @param value
-	 *            the new text reference
-	 */
-	@Override
-	public void setTextReference(String value) {
-		this.getMdht().setText(Util.createReference(value));
-	}
-	
-	/**
 	 * Sets the substance admin substitution.
 	 *
-	 * @param substanceAdminSubstitution the substance admin substitution
-	 * @param languageCode the language code
+	 * @param substanceAdminSubstitution
+	 *            the substance admin substitution
+	 * @param languageCode
+	 *            the language code
 	 */
-	public void setSubstanceAdminSubstitutionMade(SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
-		if (substanceAdminSubstitution!=null) {
-			if (this.getMdht().getComponent1()==null) {
-				PharmSubstitutionMade pharmSubstitution = CDAFactory.eINSTANCE.createPharmSubstitutionMade();
+	public void setSubstanceAdminSubstitutionMade(
+			SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
+		if (substanceAdminSubstitution != null) {
+			if (this.getMdht().getComponent1() == null) {
+				PharmSubstitutionMade pharmSubstitution = CDAFactory.eINSTANCE
+						.createPharmSubstitutionMade();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.EVN);
 				this.getMdht().setComponent1(pharmSubstitution);
@@ -466,22 +485,18 @@ public class DispenseItemEntry
 		} else {
 			this.getMdht().setComponent1(null);
 		}
-		
+
 	}
-	
+
 	/**
-	 * Gets the substance admin substitution.
+	 * Sets the text reference.
 	 *
-	 * @return the substance admin substitution
+	 * @param value
+	 *            the new text reference
 	 */
-	public SubstanceAdminSubstitution getSubstanceAdminSubstitutionMade() {
-		if (this.getMdht().getComponent1()!=null) {
-			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
-			if (pharmSubstitution.getCode()!=null) {
-				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
-			}
-		}
-		return null;
+	@Override
+	public void setTextReference(String value) {
+		this.getMdht().setText(Util.createReference(value));
 	}
 
 }

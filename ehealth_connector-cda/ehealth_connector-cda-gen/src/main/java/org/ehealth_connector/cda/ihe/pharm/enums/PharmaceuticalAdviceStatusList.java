@@ -23,35 +23,13 @@ import org.ehealth_connector.common.Code;
  */
 public enum PharmaceuticalAdviceStatusList {
 
-	OK("OK"), CHANGE("CHANGE"), REFUSE("REFUSE"), CANCEL("CANCEL"), SUSPEND("SUSPEND");
+	CANCEL("CANCEL"), CHANGE("CHANGE"), OK("OK"), REFUSE("REFUSE"), SUSPEND("SUSPEND");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "IHE Pharmaceutical Advice Status List";
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "1.3.6.1.4.1.19376.1.9.2.1";
-
-	/** The code. */
-	private String code;
-
-	/**
-	 * Instantiates a new pharmaceutical advice status list.
-	 *
-	 * @param code the code
-	 */
-	private PharmaceuticalAdviceStatusList(String code) {
-		this.code = code;
-	}
-
-	/**
-	 * Gets the code.
-	 *
-	 * @return the code
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, null);
-		return ehcCode;
-	}
 
 	/**
 	 * Gets the enum.
@@ -67,6 +45,29 @@ public enum PharmaceuticalAdviceStatusList {
 			}
 		}
 		return null;
+	}
+
+	/** The code. */
+	private String code;
+
+	/**
+	 * Instantiates a new pharmaceutical advice status list.
+	 *
+	 * @param code
+	 *            the code
+	 */
+	private PharmaceuticalAdviceStatusList(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * Gets the code.
+	 *
+	 * @return the code
+	 */
+	public Code getCode() {
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, null);
+		return ehcCode;
 	}
 
 }

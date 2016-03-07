@@ -19,8 +19,14 @@ package org.ehealth_connector.cda.ch.mtps;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
+/**
+ * The Class IheMedicalDocument.
+ */
 public class IheMedicalDocument extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ihe.MedicalDocument> {
 
+	/**
+	 * Instantiates a new ihe medical document.
+	 */
 	public IheMedicalDocument() {
 		super(IHEFactory.eINSTANCE.createMedicalDocument());
 	}

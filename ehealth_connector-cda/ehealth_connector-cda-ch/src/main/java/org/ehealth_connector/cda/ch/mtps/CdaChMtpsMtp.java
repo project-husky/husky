@@ -21,41 +21,66 @@ import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
+/**
+ * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
+ */
 public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp> {
 
+	/**
+	 * Instantiates a new cda ch mtps mtp.
+	 */
+	public CdaChMtpsMtp() {
+		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new cda ch mtps mtp.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
 	public CdaChMtpsMtp(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init());
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case GERMAN:
-			this.setTitle("Medikamentöser Behandlungsplan"); 
+			this.setTitle("Medikamentöser Behandlungsplan");
 			break;
 		case FRENCH:
-			setTitle("Plan de traitement médicamenteux"); 
+			setTitle("Plan de traitement médicamenteux");
 			break;
 		case ITALIAN:
-			setTitle("Piano terapeutico farmacologico"); 
+			setTitle("Piano terapeutico farmacologico");
 			break;
 		case ENGLISH:
-			setTitle("Medication Treatment Plan"); 
+			setTitle("Medication Treatment Plan");
 			break;
 		}
-		MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(getLanguageCode());
+		MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(
+				getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 
-	public CdaChMtpsMtp() {
-		this(LanguageCode.ENGLISH);
-	}
-
+	/**
+	 * Instantiates a new cda ch mtps mtp document
+	 *
+	 * @param doc
+	 *            the document
+	 */
 	public CdaChMtpsMtp(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp doc) {
 		super(doc);
 	}
-	
+
+	/**
+	 * Gets the medication treatment plan section.
+	 *
+	 * @return the medication treatment plan section
+	 */
 	public MedicationTreatmentPlanSection getMedicationTreatmentPlanSection() {
-		if (this.getMdht().getMedicationTreatmentPlanSection()!=null) {
-			return new MedicationTreatmentPlanSection(this.getMdht().getMedicationTreatmentPlanSection());
+		if (this.getMdht().getMedicationTreatmentPlanSection() != null) {
+			return new MedicationTreatmentPlanSection(
+					this.getMdht().getMedicationTreatmentPlanSection());
 		}
 		return null;
 	}

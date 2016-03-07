@@ -22,7 +22,7 @@ import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPre.
+ * The Class CdaChMtpsPre. See also CDA CH MTPS 7.4.2.4
  */
 public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
 	

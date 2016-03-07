@@ -25,22 +25,12 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 
 /**
  * Implements the IHE PharmSubstitutionHandlingEntry.
  */
-public class PharmSubstitutionHandlingEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry> {
-
-	/**
-	 * Instantiates a new pharm substitution handling entry.
-	 *
-	 * @param languageCode the language code
-	 */
-	public PharmSubstitutionHandlingEntry(LanguageCode languageCode) {
-		super(PHARMFactory.eINSTANCE.createPharmSubstitutionHandlingEntry().init());
-		this.getMdht().setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-	}
+public class PharmSubstitutionHandlingEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry> {
 
 	/**
 	 * Instantiates a new pharm substitution handling entry.
@@ -52,22 +42,54 @@ public class PharmSubstitutionHandlingEntry extends MdhtFacade<org.openhealthtoo
 	/**
 	 * Instantiates a new pharm substitution handling entry.
 	 *
-	 * @param mdht the mdht
+	 * @param languageCode
+	 *            the language code
 	 */
-	public PharmSubstitutionHandlingEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry mdht) {
+	public PharmSubstitutionHandlingEntry(LanguageCode languageCode) {
+		super(PHARMFactory.eINSTANCE.createPharmSubstitutionHandlingEntry().init());
+		this.getMdht().setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
+	}
+
+	/**
+	 * Instantiates a new pharm substitution handling entry.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public PharmSubstitutionHandlingEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry mdht) {
 		super(mdht);
 	}
-	
+
+	/**
+	 * Gets the substance admin substitution.
+	 *
+	 * @return the substance admin substitution
+	 */
+	public SubstanceAdminSubstitution getSubstanceAdminSubstitution() {
+		if (this.getMdht().getSubjectOf4() != null) {
+			PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4();
+			if (pharmSubstitution.getCode() != null) {
+				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Sets the substance admin substitution.
 	 *
-	 * @param substanceAdminSubstitution the substance admin substitution
-	 * @param languageCode the language code
+	 * @param substanceAdminSubstitution
+	 *            the substance admin substitution
+	 * @param languageCode
+	 *            the language code
 	 */
-	public void setSubstanceAdminSubstitution(SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
-		if (substanceAdminSubstitution!=null) {
-			if (this.getMdht().getSubjectOf4()==null) {
-				PharmSubstitutionPermission pharmSubstitution = CDAFactory.eINSTANCE.createPharmSubstitutionPermission();
+	public void setSubstanceAdminSubstitution(SubstanceAdminSubstitution substanceAdminSubstitution,
+			LanguageCode languageCode) {
+		if (substanceAdminSubstitution != null) {
+			if (this.getMdht().getSubjectOf4() == null) {
+				PharmSubstitutionPermission pharmSubstitution = CDAFactory.eINSTANCE
+						.createPharmSubstitutionPermission();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.PERM);
 				this.getMdht().setSubjectOf4(pharmSubstitution);
@@ -77,23 +99,7 @@ public class PharmSubstitutionHandlingEntry extends MdhtFacade<org.openhealthtoo
 		} else {
 			this.getMdht().setSubjectOf4(null);
 		}
-		
+
 	}
-	
-	/**
-	 * Gets the substance admin substitution.
-	 *
-	 * @return the substance admin substitution
-	 */
-	public SubstanceAdminSubstitution getSubstanceAdminSubstitution() {
-		if (this.getMdht().getSubjectOf4()!=null) {
-			PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4();
-			if (pharmSubstitution.getCode()!=null) {
-				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
-			}
-		}
-		return null;
-	}
-	
 
 }

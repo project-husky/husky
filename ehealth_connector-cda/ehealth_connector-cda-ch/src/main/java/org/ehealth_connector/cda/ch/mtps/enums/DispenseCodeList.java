@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.mtps.enums;
 
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -14,14 +29,30 @@ public enum DispenseCodeList {
 	/** <div class="en"> First fill – Part fill</div><div class="fr">Première dispensation partielle</div> */
 	FIRST_FILL_PART_FILL("FFP", "First fill – Part fill", "Première dispensation partielle"),
 
-	/** <div class="en"> Refill – Part fill</div><div class="fr">Dispensation suivante – partielle</div> */
-	REFILL_PART_FILL("RFP", "Refill – Part fill", "Dispensation suivante – partielle"),
-
 	/** <div class="en"> Refill – Complete</div><div class="fr">Dispensation suivante - complète</div> */
-	REFILL_COMPLETE("RFC", "Refill – Complete", "Dispensation suivante - complète");
+	REFILL_COMPLETE("RFC", "Refill – Complete", "Dispensation suivante - complète"),
 
-	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.4";
+	/** <div class="en"> Refill – Part fill</div><div class="fr">Dispensation suivante – partielle</div> */
+	REFILL_PART_FILL("RFP", "Refill – Part fill", "Dispensation suivante – partielle");
+
 	public static final String CODE_SYSTEM_NAME = "DispenseCodeList";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.4";
+
+	/**
+	 * Gets the enum.
+	 *
+	 * @param code
+	 *            the code
+	 * @return the enum
+	 */
+	public static DispenseCodeList getEnum(String code) {
+		for (final DispenseCodeList x : values()) {
+			if (x.code.equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 
 	/** The code. */
 	private String code;
@@ -70,21 +101,5 @@ public enum DispenseCodeList {
 		}
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
-	}
-
-	/**
-	 * Gets the enum.
-	 *
-	 * @param code
-	 *            the code
-	 * @return the enum
-	 */
-	public static DispenseCodeList getEnum(String code) {
-		for (final DispenseCodeList x : values()) {
-			if (x.code.equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 }

@@ -24,17 +24,23 @@ import org.ehealth_connector.common.Code;
  */
 public enum SubstanceAdminSubstitution {
 
+	/** <div class="en"> brand composition</div><div class="fr">marque équivalente</div> */
+	BRAND_COMPOSITION("BC", "brand composition", "marque équivalente"),
+
 	/** <div class="en"> equivalent</div><div class="fr">équivalent</div> */
 	EQUIVALENT("E", "equivalent", "équivalent"),
 
 	/** <div class="en"> equivalent composition</div><div class="fr">composition équivalente</div> */
 	EQUIVALENT_COMPOSITION("EC", "equivalent composition", "composition équivalente"),
 
-	/** <div class="en"> brand composition</div><div class="fr">marque équivalente</div> */
-	BRAND_COMPOSITION("BC", "brand composition", "marque équivalente"),
+	/** <div class="en"> formulary</div><div class="fr">formulaire guidelines</div> */
+	FORMULARY("F", "formulary", "formulaire guidelines"),
 
 	/** <div class="en"> generic composition</div><div class="fr">générique équivalent</div> */
 	GENERIC_COMPOSITION("G", "generic composition", "générique équivalent"),
+
+	/** <div class="en"> none</div><div class="fr">aucune</div> */
+	NONE("N", "none", "aucune"),
 
 	/** <div class="en"> therapeutic alternative</div><div class="fr">alternative thérapeutique</div> */
 	THERAPEUTIC_ALTERNATIVE("TE", "therapeutic alternative", "alternative thérapeutique"),
@@ -43,19 +49,29 @@ public enum SubstanceAdminSubstitution {
 	THERAPEUTIC_BRAND("TB", "therapeutic brand", "marque thérapeutiquement équivalente"),
 
 	/** <div class="en"> therapeutic generic</div><div class="fr">générique thérapeutique</div> */
-	THERAPEUTIC_GENERIC("TG", "therapeutic generic", "générique thérapeutique"),
-
-	/** <div class="en"> formulary</div><div class="fr">formulaire guidelines</div> */
-	FORMULARY("F", "formulary", "formulaire guidelines"),
-
-	/** <div class="en"> none</div><div class="fr">aucune</div> */
-	NONE("N", "none", "aucune");
+	THERAPEUTIC_GENERIC("TG", "therapeutic generic", "générique thérapeutique");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "HL7 SubstanceAdminSubstitution";
 
 	/** The Constant CODE_SYSTEM_OID. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1070";
+
+	/**
+	 * Gets the enum.
+	 *
+	 * @param code
+	 *            the code
+	 * @return the enum
+	 */
+	public static SubstanceAdminSubstitution getEnum(String code) {
+		for (final SubstanceAdminSubstitution x : values()) {
+			if (x.code.equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 
 	/** The code. */
 	private String code;
@@ -104,22 +120,6 @@ public enum SubstanceAdminSubstitution {
 		}
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
-	}
-
-	/**
-	 * Gets the enum.
-	 *
-	 * @param code
-	 *            the code
-	 * @return the enum
-	 */
-	public static SubstanceAdminSubstitution getEnum(String code) {
-		for (final SubstanceAdminSubstitution x : values()) {
-			if (x.code.equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 
 }

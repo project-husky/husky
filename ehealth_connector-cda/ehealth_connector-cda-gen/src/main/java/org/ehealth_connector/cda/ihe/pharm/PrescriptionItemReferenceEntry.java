@@ -28,20 +28,22 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Implements the IHE PrescriptionItemReferenceEntry.
  */
 public class PrescriptionItemReferenceEntry extends PrescriptionItemEntry {
-	
+
 	/**
 	 * Instantiates a new prescription item reference entry.
 	 */
 	public PrescriptionItemReferenceEntry() {
-		this(PHARMFactory.eINSTANCE.createPrescriptionItemReferenceEntry().init());		
+		this(PHARMFactory.eINSTANCE.createPrescriptionItemReferenceEntry().init());
 	}
 
 	/**
 	 * Instantiates a new prescription item reference entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
-	public PrescriptionItemReferenceEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemReferenceEntry mdht) {
+	public PrescriptionItemReferenceEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemReferenceEntry mdht) {
 		super(mdht);
 		String templateId = this.getTemplateId();
 		this.getMdht().getTemplateIds().clear();
@@ -60,6 +62,5 @@ public class PrescriptionItemReferenceEntry extends PrescriptionItemEntry {
 		consumable.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setConsumable(consumable);
 	}
-	
 
 }

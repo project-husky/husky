@@ -33,17 +33,18 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 	 * Instantiates a new medication treatment plan item reference entry.
 	 */
 	public MedicationTreatmentPlanItemReferenceEntry() {
-		this(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemReferenceEntry().init());		
-		
-		
+		this(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemReferenceEntry().init());
+
 	}
-	
+
 	/**
 	 * Instantiates a new medication treatment plan item reference entry.
 	 *
-	 * @param mdht the mdht
+	 * @param mdht
+	 *            the mdht
 	 */
-	public MedicationTreatmentPlanItemReferenceEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry mdht) {
+	public MedicationTreatmentPlanItemReferenceEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry mdht) {
 		super(mdht);
 		String templateId = this.getTemplateId();
 		this.getMdht().getTemplateIds().clear();
@@ -62,6 +63,5 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 		consumable.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setConsumable(consumable);
 	}
-	
 
 }
