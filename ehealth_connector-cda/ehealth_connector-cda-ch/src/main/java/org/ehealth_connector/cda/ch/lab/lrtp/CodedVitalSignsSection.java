@@ -11,6 +11,10 @@ import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
 
 public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 
+	public CodedVitalSignsSection() {
+		super();
+	}
+
 	/**
 	 * Instantiates a new vital signs section.
 	 *

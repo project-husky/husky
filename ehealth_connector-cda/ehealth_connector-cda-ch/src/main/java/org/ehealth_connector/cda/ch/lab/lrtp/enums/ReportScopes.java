@@ -105,12 +105,12 @@ public enum ReportScopes {
 	*
 	* @return <div class="en">The MDHT Code</div>
 	*/
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM_OID);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
 	/**

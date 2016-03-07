@@ -16,7 +16,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 public class BloodGroupObservation
 		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
 
-	protected BloodGroupObservation() {
+	public BloodGroupObservation() {
 		super(CHFactory.eINSTANCE.createBloodgroupObservation().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup");
 	}

@@ -17,7 +17,10 @@ import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
+import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.IntendedRecipient;
@@ -218,13 +221,25 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.3.2.1']", 2));
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1']", 2));
 
-		// Convenience VitalSignsOrganizer
+		// Convenience VitalSignsOrganizer (includes CodedVitalSignsSection)
 		doc.setVitalSignOrganizer(new VitalSignsOrganizer());
 		assertNotNull(doc.getCodedVitalSignsSection());
 		assertNotNull(doc.getVitalSignsOrganizer());
 		document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.4.13.1", null));
+
+		// Convenience BloodGroupObservation (includes StudiesSummarySection)
+		doc.setBloodGroupObservation(new BloodGroupObservation());
+		assertNotNull(doc.getStudiesSummarySection());
+		assertNotNull(doc.getBloodGroupObservation());
+		document = doc.getDocument();
+		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1",
+				"CDA-CH.LRTP.Body.StudiesSummaryL2"));
+		assertTrue(xExist(document, "//component/section/code[@code='30954-2']"));
+		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1",
+				"CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup"));
+
 	}
 
 	@Override
@@ -251,6 +266,10 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		// Author
 		cda.addAuthor(new Author());
 		assertFalse(cda.getAuthors().isEmpty());
+
+		// DocumentationOf
+		cda.addDocumentationOf(ReportScopes.DECEASED_DONOR);
+		assertEquals(ReportScopes.DECEASED_DONOR, cda.getDocumentationOfs().get(0));
 	}
 
 	@Test
@@ -263,5 +282,16 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts2);
 		assertEquals(ts2, doc.getNarrativeTextSectionLaboratorySpeciality());
+
+		StudiesSummarySection sss = new StudiesSummarySection();
+		doc.setStudiesSummary(sss);
+		doc.setNarrativeTextSectionStudiesSummarySection(ts3);
+		assertEquals(ts3, doc.getNarrativeTextSectionStudiesSummarySection());
+
+		CodedVitalSignsSection cvs = new CodedVitalSignsSection();
+		doc.setCodedVitalSignsSection(cvs);
+		doc.setNarrativeTextSectionCodedVitalSignsSection(ts4);
+		assertEquals(ts4, doc.getNarrativeTextSectionCodedVitalSignsSection());
+
 	}
 }

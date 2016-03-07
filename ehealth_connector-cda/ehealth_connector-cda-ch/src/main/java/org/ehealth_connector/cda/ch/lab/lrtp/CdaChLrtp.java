@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
+import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -14,7 +15,10 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.ihe.utils.UUID;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.DocumentationOf;
 import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.ServiceEvent;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -23,7 +27,7 @@ public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
 
 	/**
-	 * <div class="en">Creates a UUID for LRPH documents with the LRPH root ID and
+	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID and
 	 * a generated extension.</div>
 	 *
 	 * @param id
@@ -33,6 +37,7 @@ public class CdaChLrtp
 	 */
 	protected static Identificator createUuidLrtp(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot("2.16.756.5.30.1.1.1.1.3.4.1");
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {
@@ -57,11 +62,6 @@ public class CdaChLrtp
 	protected CdaChLrtp(LanguageCode languageCode) {
 		this(languageCode, null, null);
 	}
-
-	// TODO Add one constructor:
-	// one with the LabObsListLoinc, which uses the getSpecialtySection Method
-	// to determine the type of the section via the getEnum(code) method in the
-	// SpecialtySections Enum
 
 	/**
 	 * Constructor with the recommended elements for the LRTP document Header.
@@ -111,6 +111,26 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
 		super(doc);
+	}
+
+	/**
+	 * <div class="en">Convenience function to add the DocumentationOf element. In
+	 * case of LRTP it determines the case of organ donor. </div>
+	 * <div class="de">Convenience Funktion um das documentationOf element
+	 * hinzuzufügen. Die Fallunterscheidung der untersuchten Person resp. der
+	 * Geltungsbereich des Befundes (Leichenspender, Lebendspender,
+	 * Organempfänger) wird im CDA Header mit dem documentationOf Element
+	 * dokumentiert.</div>
+	 *
+	 * @param scope
+	 *          the scope of this organ donor.
+	 */
+	public void addDocumentationOf(ReportScopes scope) {
+		DocumentationOf dof = CDAFactory.eINSTANCE.createDocumentationOf();
+		ServiceEvent se = CDAFactory.eINSTANCE.createServiceEvent();
+		se.setCode(scope.getCE());
+		dof.setServiceEvent(se);
+		getMdht().getDocumentationOfs().add(dof);
 	}
 
 	/**
@@ -179,9 +199,16 @@ public class CdaChLrtp
 
 	}
 
-	public BloodGroupObservation getBloodGroup() {
+	/**
+	 * Gets the BloodGroupObservation
+	 *
+	 * @return the BloodGroupObservation
+	 */
+	public BloodGroupObservation getBloodGroupObservation() {
+		if (getStudiesSummarySection() != null && getStudiesSummarySection().getBloodGroup() != null) {
+			return new BloodGroupObservation(getStudiesSummarySection().getBloodGroup().getMdht());
+		}
 		return null;
-
 	}
 
 	/**
@@ -199,9 +226,28 @@ public class CdaChLrtp
 		return null;
 	}
 
-	public ReportScopes getDocumentationOf() {
-		return null;
-
+	/**
+	 * <div class="en">Convenience function to get the LRTP relevant
+	 * DocumentationOf elements. In case of LRTP it determines the case of organ
+	 * donor. </div> <div class="de">Convenience Funktion um die LRTP-relevanten
+	 * documentationOf Elemente zu erhalten. Die Fallunterscheidung der
+	 * untersuchten Person resp. der Geltungsbereich des Befundes (Leichenspender,
+	 * Lebendspender, Organempfänger) wird im CDA Header mit dem documentationOf
+	 * Element dokumentiert.</div>
+	 *
+	 * @return the scope of this organ donor.
+	 */
+	public List<ReportScopes> getDocumentationOfs() {
+		List<ReportScopes> rl = new ArrayList<ReportScopes>();
+		for (DocumentationOf dof : getMdht().getDocumentationOfs()) {
+			if (dof.getServiceEvent() != null && dof.getServiceEvent().getCode() != null) {
+				ReportScopes rs = ReportScopes.getEnum(dof.getServiceEvent().getCode().getCode());
+				if (rs != null) {
+					rl.add(rs);
+				}
+			}
+		}
+		return rl;
 	}
 
 	/**
@@ -239,6 +285,32 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Returns the narrative Text of the CodedVitalSignsSection.
+	 *
+	 * @return the narrative Text. Returns null, if this text does not exist.
+	 */
+	public String getNarrativeTextSectionCodedVitalSignsSection() {
+		if (getCodedVitalSignsSection() != null
+				&& getCodedVitalSignsSection().getMdht().getText() != null
+				&& getCodedVitalSignsSection().getMdht().getText().getText() != null) {
+			return getCodedVitalSignsSection().getMdht().getText().getText();
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the narrative Text of the StudiesSummarySection.
+	 *
+	 * @return the narrative Text. Returns null, if this text does not exist.
+	 */
+	public String getNarrativeTextSectionStudiesSummarySection() {
+		if (getStudiesSummarySection() != null && getStudiesSummarySection().getText() != null) {
+			return getStudiesSummarySection().getText();
+		}
+		return null;
+	}
+
+	/**
 	 * Convenience function to return the (LOINC) section code from a given
 	 * LaboratoryObservation, which is hold in the given
 	 * LaboratoryBatteryOrganizer.
@@ -258,6 +330,21 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Gets the StudiesSummarySection
+	 *
+	 * @return the StudiesSummarySection
+	 */
+	public StudiesSummarySection getStudiesSummarySection() {
+		for (Section s : getMdht().getAllSections()) {
+			if (s instanceof org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) {
+				return new StudiesSummarySection(
+						(org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) s);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the VitalSignsOrganizer
 	 *
 	 * @return the VitalSignsOrganizer
@@ -271,23 +358,31 @@ public class CdaChLrtp
 		return null;
 	}
 
-	@Override
-	public void initCda() {
-
-	}
-
-	// Convenience function to set the blood group
-	// - create Studies Summary
-	// - set blood group observation
-	public void setBloodGroup(BloodGroupObservation observation) {
-
+	/**
+	 * Convenience function, which adds a BloodGroupObservation and creates the
+	 * StudiesSummarySection automatically with the current LanguageCode of the
+	 * document.
+	 *
+	 * @param observation
+	 *          the observation
+	 */
+	public void setBloodGroupObservation(BloodGroupObservation observation) {
+		// Check if this section already exists. If so, get it, else create it.
+		StudiesSummarySection sss;
+		if (getStudiesSummarySection() != null) {
+			sss = getStudiesSummarySection();
+		} else {
+			sss = new StudiesSummarySection(getLanguageCode());
+		}
+		sss.setBloodGroup(observation);
+		setStudiesSummary(sss);
 	}
 
 	/**
-	 * Sets the VitalSignsSection
+	 * Sets the CodedVitalSignsSection
 	 *
 	 * @param codedVitalSigns
-	 *          the VitalSignsSection
+	 *          the CodedVitalSignsSection
 	 */
 	public void setCodedVitalSignsSection(CodedVitalSignsSection codedVitalSigns) {
 		if (getCodedVitalSignsSection() == null) {
@@ -295,9 +390,40 @@ public class CdaChLrtp
 		}
 	}
 
-	// Convenience function to set the kind of donor
-	public void setDocumentationOf(ReportScopes scope) {
+	/**
+	 * Sets the section/text element for the CodedVitalSignsSection.
+	 *
+	 * @param text
+	 *          the text
+	 */
+	public void setNarrativeTextSectionCodedVitalSignsSection(String text) {
+		if (getCodedVitalSignsSection() != null) {
+			getCodedVitalSignsSection().getMdht().createStrucDocText(text);
+		}
+	}
 
+	/**
+	 * Sets the section/text element for the StudiesSummarySection.
+	 *
+	 * @param text
+	 *          the text
+	 */
+	public void setNarrativeTextSectionStudiesSummarySection(String text) {
+		if (getStudiesSummarySection() != null) {
+			getStudiesSummarySection().getMdht().createStrucDocText(text);
+		}
+	}
+
+	/**
+	 * Sets the StudiesSummarySection
+	 *
+	 * @param section
+	 *          the StudiesSummarySection
+	 */
+	public void setStudiesSummary(StudiesSummarySection section) {
+		if (getStudiesSummarySection() == null) {
+			getMdht().addSection(section.copy());
+		}
 	}
 
 	/**
