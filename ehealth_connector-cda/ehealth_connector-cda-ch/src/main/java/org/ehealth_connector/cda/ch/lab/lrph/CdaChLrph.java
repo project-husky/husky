@@ -114,7 +114,7 @@ public class CdaChLrph
 		LaboratorySpecialtySection laboratorySpecialtySection;
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {
-				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
+				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode, getLanguageCode());
 				getMdht().setCode(sectionCode.getCE());
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();

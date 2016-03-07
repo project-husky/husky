@@ -42,24 +42,6 @@ public abstract class AbstractVitalSignObservation {
 	protected org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
 
 	/**
-	 * Adds the value.
-	 *
-	 * @param value
-	 *            the new value
-	 */
-	public void setValue(Value value) {
-		if (value.isPhysicalQuantity()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtPhysicalQuantity());
-		}
-		if (value.isCode()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtCode());
-		}
-		if (value.isRto()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtRto());
-		}
-	}
-
-	/**
 	 * <div class="en">Gets the code of the observation</div> <div class="de">Gibt
 	 * den Code der Beobachtung zurück.</div> <div class="fr"></div>
 	 * <div class="it"></div>
@@ -69,6 +51,20 @@ public abstract class AbstractVitalSignObservation {
 	public Code getCode() {
 		final Code code = new Code(mVitalSignObservation.getCode());
 		return code;
+	}
+
+	/**
+	 * Gets the reference to the content element. It is the value of the ID in the
+	 * &lt;content ID="xxx"&gt; element prefixed with #.
+	 *
+	 * @return the content ID reference
+	 */
+	public String getContentIdReference() {
+		if ((mVitalSignObservation.getText() != null)
+				&& (mVitalSignObservation.getText().getReference() != null)) {
+			return mVitalSignObservation.getText().getReference().getValue();
+		}
+		return null;
 	}
 
 	/**
@@ -118,6 +114,20 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
+	 * Sets the text of this element.
+	 *
+	 * @param text
+	 *          the new text
+	 */
+	public String getText(String text) {
+		if (mVitalSignObservation.getText() != null
+				&& mVitalSignObservation.getText().getText() != null) {
+			return mVitalSignObservation.getText().getText();
+		}
+		return null;
+	}
+
+	/**
 	 * Get the (first) problem value. The Value may be a coded or uncoded String.
 	 *
 	 * @return the (first) problem value as string.
@@ -152,17 +162,31 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the code.
 	 *
 	 * @param code
-	 *            the new code
+	 *          the new code
 	 */
 	public void setCode(Code code) {
 		mVitalSignObservation.setCode(code.getCD());
 	}
 
 	/**
+	 * Sets the reference to the content element. This is the value of the ID in
+	 * the &lt;content ID="xxx"&gt; element. If not provided it will automatically
+	 * be prefixed with #.
+	 *
+	 * @param value
+	 *          the content ID reference
+	 */
+	public void setContentIdReference(String value) {
+		if (!value.startsWith("#"))
+			value = "#" + value;
+		mVitalSignObservation.setText(Util.createReference(value));
+	}
+
+	/**
 	 * Sets the date time of result.
 	 *
 	 * @param dateTimeOfResult
-	 *            the new date time of result
+	 *          the new date time of result
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
@@ -177,8 +201,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new language code of the vital sign observation, and its codes.
 	 *
 	 * @param languageCode
-	 *            <div class="de">Language code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Language code</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
 		CD code = mVitalSignObservation.getCode();
@@ -201,13 +225,41 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new act site of the vital sign observation.
 	 *
 	 * @param code
-	 *            <div class="de">Anatomische Lage des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Anatomische Lage des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
 			mVitalSignObservation.getTargetSiteCodes().clear();
 			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
+		}
+	}
+
+	/**
+	 * Sets the text of this element.
+	 *
+	 * @param text
+	 *          the new text
+	 */
+	public void setText(String text) {
+		mVitalSignObservation.setText(Util.createEd(text));
+	}
+
+	/**
+	 * Adds the value.
+	 *
+	 * @param value
+	 *          the new value
+	 */
+	public void setValue(Value value) {
+		if (value.isPhysicalQuantity()) {
+			mVitalSignObservation.getValues().add(value.copyMdhtPhysicalQuantity());
+		}
+		if (value.isCode()) {
+			mVitalSignObservation.getValues().add(value.copyMdhtCode());
+		}
+		if (value.isRto()) {
+			mVitalSignObservation.getValues().add(value.copyMdhtRto());
 		}
 	}
 }

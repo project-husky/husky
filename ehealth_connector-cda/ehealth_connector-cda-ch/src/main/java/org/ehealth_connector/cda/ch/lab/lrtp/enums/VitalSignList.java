@@ -75,7 +75,7 @@ public enum VitalSignList {
 	* <div class="en">Identifier of the Code System</div>
 	* <div class="de">Identifikator für das Code System</div>
 	*/
-	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.129.1.1.5.201401";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.1";
 
 	/**
 	* <div class="en">Name of the Code System</div>

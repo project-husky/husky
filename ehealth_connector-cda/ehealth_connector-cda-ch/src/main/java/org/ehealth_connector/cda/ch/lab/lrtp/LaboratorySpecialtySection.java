@@ -1,5 +1,6 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
 
@@ -14,15 +15,30 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	}
 
 	/**
+	 * Instantiates the class
+	 *
+	 * @param code
+	 *          the code for this section
+	 * @param languageCode
+	 *          the language code
+	 */
+	public LaboratorySpecialtySection(Code code, LanguageCode languageCode) {
+		super(code, languageCode);
+	}
+
+	/**
 	 * Instantiates the class with the required elements
 	 *
 	 * @param code
 	 *          the code for this section
+	 * @param languageCode
+	 *          the language code
 	 * @param entry
 	 *          the LaboratoryReportDataProcessingEntry
 	 */
-	public LaboratorySpecialtySection(Code code, LaboratoryReportDataProcessingEntry entry) {
-		this(code);
+	public LaboratorySpecialtySection(Code code, LanguageCode languageCode,
+			LaboratoryReportDataProcessingEntry entry) {
+		this(code, languageCode);
 		setLaboratoryReportDataProcessingEntry(entry);
 	}
 

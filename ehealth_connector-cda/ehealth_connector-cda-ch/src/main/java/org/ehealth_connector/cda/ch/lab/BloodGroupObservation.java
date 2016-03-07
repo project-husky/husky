@@ -25,6 +25,24 @@ public class BloodGroupObservation
 		super(mdht);
 	}
 
+	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param referenceValue
+	 *          reference to the section level text with the description of the
+	 *          blood group
+	 * @param value
+	 *          the BloodGroup value
+	 * @param author
+	 *          the author
+	 */
+	public BloodGroupObservation(String referenceValue, BloodGroup value, Author author) {
+		this();
+		setContentIdReference(referenceValue);
+		setValue(value);
+		addAuthor(author);
+	}
+
 	public void addAuthor(Author author) {
 		getMdht().getAuthors().add(author.copyMdhtAuthor());
 	}

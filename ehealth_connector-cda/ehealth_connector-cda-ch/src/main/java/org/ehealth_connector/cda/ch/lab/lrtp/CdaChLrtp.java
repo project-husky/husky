@@ -35,7 +35,7 @@ public class CdaChLrtp
 	 *          <div class="en"> the id</div>
 	 * @return the ii
 	 */
-	protected static Identificator createUuidLrtp(String id) {
+	public static Identificator createUuidLrtp(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot("2.16.756.5.30.1.1.1.1.3.4.1");
 		if (id == null) {
@@ -157,7 +157,7 @@ public class CdaChLrtp
 		}
 
 		if (sectionCode != null) {
-			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
+			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode, getLanguageCode());
 			getMdht().setCode(sectionCode.getCE());
 		} else {
 			laboratorySpecialtySection = new LaboratorySpecialtySection();

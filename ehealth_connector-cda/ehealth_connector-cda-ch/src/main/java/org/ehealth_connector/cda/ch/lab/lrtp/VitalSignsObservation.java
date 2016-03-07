@@ -5,6 +5,7 @@ import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSig
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -33,11 +34,15 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 	 * Instantiates the class with the required elements
 	 *
 	 * @param code
-	 *          the code
+	 *          the code according to Lrtp specification chap. 5.6.5
+	 * @param value
+	 *          the value according to [IHE PCC TF-2] 6.3.4.22.3
 	 */
-	public VitalSignsObservation(VitalSignList code) {
+	public VitalSignsObservation(VitalSignList code, Value value) {
 		this();
 		setCode(code);
+		setValue(value);
+		super.mVitalSignObservation.getInterpretationCodes().clear();
 	}
 
 	// Swiss specific VitalSignObserations

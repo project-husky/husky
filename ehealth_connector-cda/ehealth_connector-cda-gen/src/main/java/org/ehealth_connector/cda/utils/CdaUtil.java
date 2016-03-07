@@ -17,11 +17,15 @@ package org.ehealth_connector.cda.utils;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Identificator;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Component3;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -34,9 +38,9 @@ public abstract class CdaUtil {
 	 * Adds the copy of a given section to a given structured body
 	 *
 	 * @param sb
-	 *            the StructuredBody
+	 *          the StructuredBody
 	 * @param s
-	 *            the Section
+	 *          the Section
 	 */
 	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
 		if ((sb != null) && (s != null)) {
@@ -46,13 +50,35 @@ public abstract class CdaUtil {
 		}
 	}
 
-	public static void setEntryRelationshipCommentInversionIdAndTypeCode(EList<EntryRelationship> entryRelationships) {
+	/**
+	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID and
+	 * a generated extension.</div>
+	 *
+	 * @param id
+	 *          <br>
+	 *          <div class="en"> the id</div>
+	 * @return the ii
+	 */
+	public static Identificator createUuidLrtp(String id) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot("2.16.756.5.30.1.1.1.1.3.4.1");
+		if (id == null) {
+			ii.setExtension(UUID.generate());
+		} else {
+			ii.setExtension(id);
+		}
+		return new Identificator(ii);
+	}
+
+	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
+			EList<EntryRelationship> entryRelationships) {
 		final int erNb = entryRelationships.size() - 1;
 		entryRelationships.get(erNb).setInversionInd(true);
 		entryRelationships.get(erNb).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 	}
 
-	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList, x_ActRelationshipEntryRelationship typeCode) {
+	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
+			x_ActRelationshipEntryRelationship typeCode) {
 		final int nb = erList.size() - 1;
 		erList.get(nb).setTypeCode(typeCode);
 	}

@@ -111,13 +111,13 @@ public enum SpecialtySections {
 	* <div class="en">Identifier of the Code System</div>
 	* <div class="de">Identifikator für das Code System</div>
 	*/
-	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.129.1.1.7.201401";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.1";
 
 	/**
 	* <div class="en">Name of the Code System</div>
 	* <div class="de">Name des Codes Systems</div>
 	*/
-	public static final String CODE_SYSTEM_NAME="LRTP Specialty Sections";
+	public static final String CODE_SYSTEM_NAME="LOINC";
 
 
 	/**
@@ -175,7 +175,7 @@ public enum SpecialtySections {
 	* @return <div class="en">the code</div>
 	*/
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -190,6 +190,7 @@ public enum SpecialtySections {
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
+		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		return cd;
 	}
 

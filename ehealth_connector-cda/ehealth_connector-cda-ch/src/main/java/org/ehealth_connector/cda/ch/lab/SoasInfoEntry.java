@@ -4,6 +4,7 @@ import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -18,6 +19,7 @@ public class SoasInfoEntry
 	public SoasInfoEntry() {
 		super(CHFactory.eINSTANCE.createSoasInfoEntry().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH.LRTP.SOASInfo");
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
 	/**

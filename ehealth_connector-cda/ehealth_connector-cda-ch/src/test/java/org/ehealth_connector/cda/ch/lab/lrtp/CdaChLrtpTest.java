@@ -155,8 +155,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 						.getCodeAsLoincEnum().getCode()));
-
-		// TODO add LRTP specific body elements here
 	}
 
 	@Test

@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
@@ -67,12 +69,14 @@ public class LaboratoryObservation
 		SoasInfoEntry ptx = new SoasInfoEntry();
 		ptx.setPreviousTx(previousTx);
 
-		getMdht().addObservation(csa.copy());
-		getMdht().addObservation(ptx.copy());
+		addSoasInfoEntry(csa);
+		addSoasInfoEntry(ptx);
 	}
 
 	public void addSoasInfoEntry(SoasInfoEntry entry) {
 		getMdht().addObservation(entry.copy());
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
 	}
 
 	//
