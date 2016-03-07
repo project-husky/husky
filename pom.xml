@@ -26,6 +26,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<eclipse.ocl.version>1.3.0.v200905271400</eclipse.ocl.version>
 		<slf4j.version>1.7.12</slf4j.version>
 		<axis2.version>1.4.1</axis2.version>
+		<oht.mdht.cda.ch.version>1.1-SNAPSHOT</oht.mdht.cda.ch.version>
 	</properties>
 
 	<scm>
@@ -112,19 +113,19 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-				<version>1.1-SNAPSHOT</version>
+				<version>${oht.mdht.cda.ch.version}</version>
 			</dependency>
 						
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ihe.lab</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
-				<version>1.1-SNAPSHOT</version>
+				<version>${oht.mdht.cda.ch.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ihe</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ihe</artifactId>
-				<version>1.1-SNAPSHOT</version>
+				<version>${oht.mdht.cda.ch.version}</version>
 			</dependency>
 			
 
