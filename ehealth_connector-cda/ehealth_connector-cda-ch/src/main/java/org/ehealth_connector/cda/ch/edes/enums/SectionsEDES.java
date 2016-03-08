@@ -102,7 +102,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 		case "ABILITY_TO_WORK":
 			return CHFactory.eINSTANCE.createAbilityToWorkSection().init();
 		case "ACTIVE_PROBLEMS":
-			return IHEFactory.eINSTANCE.createActiveProblemsSection().init();
+			return initializer.init(IHEFactory.eINSTANCE.createActiveProblemsSection().init());
 		case "ACUITY_ASSESSMENT":
 			return initializer.init(PCCFactory.eINSTANCE.createAcuityAssessmentSection().init());
 		case "ADVANCE_DIRECTIVES":

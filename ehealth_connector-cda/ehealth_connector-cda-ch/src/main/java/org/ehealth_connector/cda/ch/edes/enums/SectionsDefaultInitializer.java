@@ -27,6 +27,7 @@ import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Procedure;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
+import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.ImmunizationsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.MedicationsSection;
@@ -332,4 +333,45 @@ public class SectionsDefaultInitializer {
 		return section;
 	}
 
+	public ActiveProblemsSection init(ActiveProblemsSection section) {
+		Act act = CDAFactory.eINSTANCE.createAct();
+		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
+		act.setMoodCode(x_DocumentActMood.EVN);
+		act.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5.2", "").getIi());
+		act.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.27", "").getIi());
+		act.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5.1", "").getIi());
+		act.setCode(getNullFlavorCd());
+		act.setStatusCode(getCS("completed"));
+		act.getIds().add(getNullFlavorIi());
+		act.setText(getTodoText());
+		act.setEffectiveTime(getNullFlavorIVL_TSLowHigh());
+
+		Observation observation = CDAFactory.eINSTANCE.createObservation();
+		observation.setClassCode(ActClassObservation.OBS);
+		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
+		observation.setNegationInd(false);
+
+		observation.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+		observation.getTemplateIds()
+				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+
+		observation.getIds().add(getNullFlavorIi());
+		observation.setText(getTodoText());
+		observation.setStatusCode(getCS("completed"));
+		observation.setEffectiveTime(getNullFlavorIVL_TSLow());
+		observation.getValues().add(getNullFlavorCd());
+
+		EntryRelationship relationship = CDAFactory.eINSTANCE.createEntryRelationship();
+		relationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		relationship.setInversionInd(false);
+		relationship.setAct(act);
+		relationship.setObservation(observation);
+
+		act.getEntryRelationships().add(relationship);
+
+		section.addAct(act);
+		return section;
+	}
 }
