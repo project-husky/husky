@@ -45,6 +45,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
  */
 public class CdaChEdesCtnn extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 
+	/** main OID for CDA-CH-EDES CTNN */
+	public static final String OID_MAIN = "1.3.6.1.4.1.19376.1.5.3.1.1.13.1.3";
+
 	private CdaChEdesCommon common;
 
 	private CodedVitalSigns mCodedVitalSigns;
