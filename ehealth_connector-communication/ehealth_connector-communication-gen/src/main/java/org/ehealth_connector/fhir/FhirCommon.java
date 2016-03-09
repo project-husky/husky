@@ -83,6 +83,12 @@ public class FhirCommon {
 	public static final String urnUseAsActiveProblemConcernEntries = "urn:ehealth_connector:FhirExtension:uAsActiveProblemConcernEntries";
 
 	/** <div class="en">uniform resource name (urn) of this FHIR extension</div> <div class="de"></div><div class="fr"></div>. */
+	public static final String urnUseAsAdvanceDirectives = "urn:ehealth_connector:FhirExtension:useAsAdvanceDirectives";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsAllergyProblemConcern = "urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcern";
 
 	/** <div class="en">uniform resource name (urn) of this FHIR extension</div> <div class="de"></div><div class="fr"></div>. */
@@ -92,10 +98,21 @@ public class FhirCommon {
 	public static final String urnUseAsAuthor = "urn:ehealth_connector:FhirExtension:useAsAuthor";
 
 	/** <div class="en">uniform resource name (urn) of this FHIR extension</div> <div class="de"></div><div class="fr"></div>. */
+	public static final String urnUseAsChiefComplaint = "urn:ehealth_connector:FhirExtension:useAsChiefComplaint";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div> <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsCode = "urn:ehealth_connector:FhirExtension:urnUseAsCode";
 
 	/** <div class="en">uniform resource name (urn) of this FHIR extension</div> <div class="de"></div><div class="fr"></div>. */
 	public static final String urnUseAsCodedResultObservations = "urn:ehealth_connector:FhirExtension:useAsCodedResultObservations";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsCodedVitalSignObservation = "urn:ehealth_connector:FhirExtension:useAsCodedVitalSignObservation";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
