@@ -76,11 +76,22 @@ public class CdaChLrtp
 	 *          the patient
 	 * @param recipient
 	 *          the recipient (e.g. the Bundesamt für Gesundheit)
+	 * @param soasCode
+	 *          <div class="en">the SOAS code (will be set in
+	 *          recordTarget/patientRole/id/extension). Other Ids will be
+	 *          deleted.</div> <div class="de">Die Spender- resp. Empfänger-ID
+	 *          (der sogenannte SOAS-Code wird gesetzt in
+	 *          recordTarget/patientRole/id/extension). Andere Ids werden
+	 *          gelöscht.</div>
+	 *
 	 */
 	public CdaChLrtp(LanguageCode languageCode, Author author,
 			ReferralOrderingPhysician refOrderingPhysician, org.ehealth_connector.common.Patient patient,
-			IntendedRecipient recipient) {
+			IntendedRecipient recipient, String soasCode) {
 		this(languageCode);
+		// set SOAS ID
+		patient.getIds().clear();
+		patient.getIds().add(new Identificator("2.16.756.5.30.1.129.1.1.1", soasCode));
 		setPatient(patient);
 		setEmtpyCustodian();
 		addAuthor(author);
