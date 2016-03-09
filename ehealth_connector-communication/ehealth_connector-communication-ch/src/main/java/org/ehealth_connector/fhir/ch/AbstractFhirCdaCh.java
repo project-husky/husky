@@ -226,7 +226,7 @@ public abstract class AbstractFhirCdaCh {
 	 * @return eHC Author object containing the legal authenticator
 	 */
 	public String getNarrative(Bundle bundle, String extensionUrl) {
-		String retVal = null;
+		String retVal = "";
 		for (final Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(extensionUrl).isEmpty()
 					&& (entry.getResource() instanceof Basic)) {

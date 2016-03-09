@@ -96,14 +96,67 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 
 		// Body
 		String narrative = getNarrative(bundle, FhirCommon.urnUseAsActiveProblemConcern);
-		if(narrative != null && ! narrative.isEmpty()) {
-			doc.setNarrativeTextSectionActiveProblems(narrative);
-		}
+		doc.setNarrativeTextSectionActiveProblems(narrative);
 
 		narrative = getNarrative(bundle, FhirCommon.urnUseAsAdvanceDirectives);
-		if (narrative != null && !narrative.isEmpty()) {
-			doc.setNarrativeTextSectionAdvanceDirectives(narrative);
-		}
+		doc.setNarrativeTextSectionAdvanceDirectives(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsAllergyProblemConcern);
+		doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsChiefComplaint);
+		doc.setNarrativeTextSectionChiefComplaint(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsFamilyMedicalHistory);
+		doc.setNarrativeTextSectionFamilyMedicalHistory(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsHistoryOfImmunization);
+		doc.setNarrativeTextSectionImmunizations(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsListOfSurgeries);
+		doc.setNarrativeTextSectionListOfSurgeries(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsSocialHistory);
+		doc.setNarrativeTextSectionSocialHistory(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsCodedPhysicalExam);
+		doc.setNarrativeTextSectionCodedPhysicalExam(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdConsultations);
+		doc.setNarrativeTextSectionEdConsultations(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdDiagnosis);
+		doc.setNarrativeTextSectionEdDiagnosis(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsProgressNote);
+		doc.setNarrativeTextSectionProgressNote(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdDisposition);
+		doc.setNarrativeTextSectionEdDisposition(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsHistoryOfPresentIllness);
+		doc.setNarrativeTextSectionHistoryOfPresentIllness(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsCurrentMedications);
+		doc.setNarrativeTextSectionMedications(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsProcedures);
+		doc.setNarrativeTextSectionProceduresAndInterventions(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsReasonForVisit);
+		doc.setNarrativeTextSectionReasonForVisit(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsModeOfArrival);
+		doc.setNarrativeTextSectionModeOfArrival(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsReferralSource);
+		doc.setNarrativeTextSectionReferralSource(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsResults);
+		doc.setNarrativeTextSectionResults(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsAssessmentAndPlan);
+		doc.setNarrativeTextSectionAssessmentAndPlan(narrative);
 
 		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
 		if (vitalSigns != null && !vitalSigns.isEmpty()) {

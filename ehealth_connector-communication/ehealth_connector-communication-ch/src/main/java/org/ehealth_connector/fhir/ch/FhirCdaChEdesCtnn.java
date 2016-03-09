@@ -96,14 +96,31 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		// Body
 		String narrative = getNarrative(bundle, FhirCommon.urnUseAsAllergyProblemConcern);
-		if(narrative != null && ! narrative.isEmpty()) {
-			doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
-		}
+		doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
 
 		narrative = getNarrative(bundle, FhirCommon.urnUseAsChiefComplaint);
-		if (narrative != null && !narrative.isEmpty()) {
-			doc.setNarrativeTextSectionChiefComplaint(narrative);
-		}
+		doc.setNarrativeTextSectionChiefComplaint(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdDisposition);
+		doc.setNarrativeTextSectionEdDisposition(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsHistoryOfPresentIllness);
+		doc.setNarrativeTextSectionHistoryOfPresentIllness(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsCurrentMedications);
+		doc.setNarrativeTextSectionMedications(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsProcedures);
+		doc.setNarrativeTextSectionProceduresAndInterventions(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsReasonForVisit);
+		doc.setNarrativeTextSectionReasonForVisit(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsModeOfArrival);
+		doc.setNarrativeTextSectionModeOfArrival(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsAcuityAssessment);
+		doc.setNarrativeTextSectionAcuityAssessment(narrative);
 
 		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
 		if (vitalSigns != null && !vitalSigns.isEmpty()) {
