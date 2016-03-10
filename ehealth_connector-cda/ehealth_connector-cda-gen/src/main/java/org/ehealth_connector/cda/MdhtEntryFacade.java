@@ -15,8 +15,6 @@
 	 *******************************************************************************/
 package org.ehealth_connector.cda;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openhealthtools.mdht.uml.cda.Entry;
 
 /**
@@ -30,9 +28,6 @@ import org.openhealthtools.mdht.uml.cda.Entry;
  *          an Act
  */
 public class MdhtEntryFacade<E extends Entry> extends MdhtFacade<E> {
-
-	/** The log. */
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.

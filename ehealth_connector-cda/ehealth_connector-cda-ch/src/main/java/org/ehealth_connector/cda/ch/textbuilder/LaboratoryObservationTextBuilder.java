@@ -26,9 +26,9 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
- * 
+ *
  * Always builds the whole part (not only adds one immunization recommendation).
- * 
+ *
  */
 public class LaboratoryObservationTextBuilder extends TextBuilder {
 
@@ -36,29 +36,16 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param list
-	 *            a list of laboratory observations
+	 *          a list of laboratory observations
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
-	public LaboratoryObservationTextBuilder(List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> list, SectionsVACD section) {
+	public LaboratoryObservationTextBuilder(
+			List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> list, SectionsVACD section) {
 		laboratoryObservation = list;
 		section.getContentIdPrefix();
-	}
-
-	/**
-	 * Returns HTML formatted string.
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
 	}
 
 	private void addBody() {
@@ -120,12 +107,13 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 		String cellStr = "<td>";
 		int k = 0;
 		boolean minOneComment = false;
-		for (final EntryRelationship er : laboratoryObservation.getMdhtLaboratoryObservation().getEntryRelationships()) {
+		for (final EntryRelationship er : laboratoryObservation.getMdhtLaboratoryObservation()
+				.getEntryRelationships()) {
 			if (Util.isComment(er)) {
 				k++;
 				minOneComment = true;
-				cellStr = cellStr + ("<content ID='" + SectionsVACD.SEROLOGY_STUDIES.getContentIdPrefix() + "-comment" + String.valueOf(i)
-						+ String.valueOf(1) + String.valueOf(k) + "'>");
+				cellStr = cellStr + ("<content ID='" + SectionsVACD.SEROLOGY_STUDIES.getContentIdPrefix()
+						+ "-comment" + String.valueOf(i) + String.valueOf(1) + String.valueOf(k) + "'>");
 				cellStr = cellStr + (laboratoryObservation.getCommentText());
 				cellStr = cellStr + ("</content>");
 			}
@@ -135,5 +123,19 @@ public class LaboratoryObservationTextBuilder extends TextBuilder {
 			append(cellStr);
 		}
 		append("</tr>");
+	}
+
+	/**
+	 * Returns HTML formatted string.
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
 	}
 }

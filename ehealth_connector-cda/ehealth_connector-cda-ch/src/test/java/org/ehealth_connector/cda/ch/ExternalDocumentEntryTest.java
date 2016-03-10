@@ -62,8 +62,8 @@ public class ExternalDocumentEntryTest {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("externaldocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
+		XPathExpression expr = xpath.compile(
+				"externaldocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
 
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

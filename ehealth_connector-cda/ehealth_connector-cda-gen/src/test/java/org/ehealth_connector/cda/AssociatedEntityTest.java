@@ -5,8 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
+import org.ehealth_connector.common.Person;
 import org.junit.Test;
-import org.w3c.dom.Document;
 
 public class AssociatedEntityTest extends TestUtils {
 	@Test
@@ -38,7 +38,5 @@ public class AssociatedEntityTest extends TestUtils {
 		ae.addId(id2);
 		assertTrue(isEqual(id1, ae.getIds().get(0)));
 		assertTrue(isEqual(id2, ae.getIds().get(1)));
-
-		Document document = ae.getDocument();
 	}
 }

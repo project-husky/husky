@@ -77,7 +77,7 @@ public class DocumentProcessorTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.ch.DocumentProcessor#loadFromStream(java.io.InputStream)}
 	 * .
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

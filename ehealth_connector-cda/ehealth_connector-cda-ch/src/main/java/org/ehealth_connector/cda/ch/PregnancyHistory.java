@@ -40,7 +40,7 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	 * Instantiates a new pregnancy history.
 	 *
 	 * @param estimatedBirthDate
-	 *            the estimated birth date
+	 *          the estimated birth date
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		super(estimatedBirthDate);
@@ -50,7 +50,7 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	 * Instantiates a new pregnancy history.
 	 *
 	 * @param pregnancy
-	 *            the pregnancy
+	 *          the pregnancy
 	 */
 	public PregnancyHistory(PregnancyObservation pregnancy) {
 		super(pregnancy);

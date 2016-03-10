@@ -77,47 +77,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
- * 
+ *
  *
  */
 public class CdaChVacdTest extends TestUtils {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
-
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
-
 	public static final int NUMBER_OF_CONTENT_MODULE_TESTS = 50;
-
-	// Test data
-	private CdaChVacd d;
-
-	private Consumable consumable1;
-	private Problem problem1;
-
-	private Immunization immunization1;
-	private ActiveProblemConcern apce1;
-	private PastProblemConcern ppc1;
-	private AllergyConcern ac1;
-	private ImmunizationRecommendation immunizationRecommendation1;
-	private Problem problem2;
-	private AbstractAllergyProblem allergyProblem1;
-
-	private GestationalAge cr1;
-	private LaboratoryObservation lss1;
-	private PregnancyHistory ph1;
-	private Immunization immunization2;
-	private PastProblemConcern ppc2;
-	private ActiveProblemConcern apce2;
-	private AllergyConcern ac2;
-	private LaboratoryObservation lss2;
-	private PregnancyHistory ph2;
-	private ImmunizationRecommendation immunizationRecommendation2;
-	private Code whoAtcCode;
-
-	public CdaChVacdTest() {
-		super();
-	}
 
 	public static Author getArztAllzeitBereit() {
 		final Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
@@ -166,6 +131,43 @@ public class CdaChVacdTest extends TestUtils {
 		return new Identificator("1.2.3.4", "1.2.3.4");
 	}
 
+	private final Log log = LogFactory.getLog(MdhtFacade.class);
+	private XPathFactory xpathFactory = XPathFactory.newInstance();
+	private XPath xpath = xpathFactory.newXPath();
+	// Test data
+	private CdaChVacd d;
+	private Consumable consumable1;
+	private Problem problem1;
+	private Immunization immunization1;
+
+	private ActiveProblemConcern apce1;
+	private PastProblemConcern ppc1;
+	private AllergyConcern ac1;
+	private ImmunizationRecommendation immunizationRecommendation1;
+	private Problem problem2;
+	private AbstractAllergyProblem allergyProblem1;
+	private GestationalAge cr1;
+	private LaboratoryObservation lss1;
+	private PregnancyHistory ph1;
+	private Immunization immunization2;
+	private PastProblemConcern ppc2;
+
+	private ActiveProblemConcern apce2;
+
+	private AllergyConcern ac2;
+
+	private LaboratoryObservation lss2;
+
+	private PregnancyHistory ph2;
+
+	private ImmunizationRecommendation immunizationRecommendation2;
+
+	private Code whoAtcCode;
+
+	public CdaChVacdTest() {
+		super();
+	}
+
 	// 2
 	public ActiveProblemConcern createActiveProblems() {
 		final ActiveProblemConcern a = new ActiveProblemConcern();
@@ -189,6 +191,19 @@ public class CdaChVacdTest extends TestUtils {
 		a.addAllergyProblem(allergyProblem1);
 		a.addAllergyProblem(allergyProblem1);
 		return a;
+	}
+
+	private AbstractAllergyProblem createAllergyProblem() {
+		final AbstractAllergyProblem p = new AllergyProblem();
+		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
+		p.setId(id1);
+		p.setStartDate(startDate);
+		p.setNotOccured(true);
+		p.addValue(problemCode);
+		p.addValue(new Value(problemCode));
+		p.addValue(new Value(problemCode));
+		p.setCommentText(ts1);
+		return p;
 	}
 
 	// 6
@@ -218,14 +233,14 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public Consumable createConsumable1() {
-		final Consumable c = new Consumable(ts1,
-				new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
+		final Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1),
+				code1);
 		return c;
 	}
 
 	public Consumable createConsumable2() {
-		final Consumable c = new Consumable(ts5,
-				new Code(CodeSystems.GLN.getCodeSystemId(), numS2), code2);
+		final Consumable c = new Consumable(ts5, new Code(CodeSystems.GLN.getCodeSystemId(), numS2),
+				code2);
 		return c;
 	}
 
@@ -251,8 +266,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		// Adding an id using an OID that is already known by the convenience
 		// API (AHV-Nr/No AVS/SSN)
-		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(),
-				"123.71.332.115"));
+		patient.addId(
+				new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(), "123.71.332.115"));
 		// Adding an id using an OID that is not known by the convenience API,
 		// yet
 		patient.addId(new Identificator("2.16.756.5.30.1.123.100.1.1.1", "8077560000000000000000"));
@@ -305,11 +320,25 @@ public class CdaChVacdTest extends TestUtils {
 		l.setCode(loincCode);
 		l.setLaboratory(organization1, endDate);
 		l.setEffectiveTime(startDate);
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		l.setInterpretationCode(
+				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		l.addValue(code2);
 		l.addValue(value1);
 		l.setCommentText(ts1);
 		return l;
+	}
+
+	// 3
+	private PastProblemConcern createPastProblemConcern() {
+		final PastProblemConcern p = new PastProblemConcern();
+		p.addId(id1);
+		p.setStart(startDate);
+		p.setEnd(endDate);
+		p.setStatus(ProblemConcernStatusCode.COMPLETED);
+		p.setConcern(ts1);
+		p.addProblemEntry(problem1);
+		p.addProblemEntry(problem2);
+		return p;
 	}
 
 	// 9
@@ -329,6 +358,60 @@ public class CdaChVacdTest extends TestUtils {
 		p.addValue(new Value(problemCode));
 		p.addValue(new Value(problemCode));
 		return p;
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	@Test
+	public void deserializeClinicalDocumentTest() throws Exception {
+		final CdaChVacd vacd = new CdaChVacd();
+		final String deserialized = this.serializeDocument(vacd);
+		log.debug(deserialized);
+		final ClinicalDocument vacdDeserialized = deserializeClinicalDocument(deserialized);
+		assertTrue(vacdDeserialized != null);
+	}
+
+	private VACD deserializeVacd(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return (VACD) CDAUtil.load(source);
+	}
+
+	private VACD deserializeVacDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getVACD());
+		return (VACD) clinicalDocument;
+	}
+
+	@Test
+	public void deserializeVacDirectTest() throws Exception {
+		final CdaChVacd vacd = new CdaChVacd();
+		final String deserialized = this.serializeDocument(vacd);
+		log.debug(deserialized);
+		final VACD vacdDeserialized = deserializeVacDirect(deserialized);
+		assertTrue(vacdDeserialized != null);
+	}
+
+	@Test
+	public void deserializeVacdTest() throws Exception {
+		final CdaChVacd vacd = new CdaChVacd();
+		final String deserialized = this.serializeDocument(vacd);
+		log.debug(deserialized);
+		final VACD vacdDeserialized = deserializeVacd(deserialized);
+		assertTrue(vacdDeserialized != null);
+	}
+
+	@Test
+	public void deserializeVacdTestTemplateId() throws Exception {
+		CHPackage.eINSTANCE.eClass();
+		CHPackage.eINSTANCE.getVACD();
+		final CdaChVacd vacd = new CdaChVacd();
+		final String deserialized = this.serializeDocument(vacd);
+		log.debug(deserialized);
+		final VACD vacdDeserialized = deserializeVacd(deserialized);
+		assertTrue(vacdDeserialized != null);
 	}
 
 	@Before
@@ -376,6 +459,12 @@ public class CdaChVacdTest extends TestUtils {
 		problem2 = createProblemEntry();
 
 		allergyProblem1 = createAllergyProblem();
+	}
+
+	private String serializeDocument(CdaChVacd vacd) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(vacd.getDoc(), boas);
+		return boas.toString();
 	}
 
 	// 2
@@ -539,38 +628,38 @@ public class CdaChVacdTest extends TestUtils {
 		immunization2 = createImmunization();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(), d.getDoc()
-				.getImmunizationsSection().getTitle().getText());
+		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
+				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 	}
 
@@ -605,8 +694,7 @@ public class CdaChVacdTest extends TestUtils {
 		final Consumable c = new Consumable(ts1);
 
 		c.setManufacturedProductId(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1));
-		assertEquals(
-				true,
+		assertEquals(true,
 				TestUtils.isEqual(new Identificator(CodeSystems.GTIN.getCodeSystemId(), numS1),
 						c.getManufacturedProductId()));
 
@@ -626,8 +714,24 @@ public class CdaChVacdTest extends TestUtils {
 	public void testDocMetadata(String constructorName, CdaChVacd doc) {
 		assertNotNull(constructorName + " Constructor - DocumentRoot is null", doc.getDocRoot());
 		assertNotNull(constructorName + " Constructor - Document is null", doc.getDoc());
-		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH", doc
-				.getDoc().getLanguageCode().getCode());
+		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH",
+				doc.getDoc().getLanguageCode().getCode());
+	}
+
+	@Test
+	public void testDocumentReplaceIdentifier() throws Exception {
+		final CdaChVacd vacd = new CdaChVacd();
+		assertEquals(null, vacd.getDocumentToReplaceIdentifier());
+		final Identificator identificator = new Identificator("root", "ext");
+		vacd.setDocumentToReplaceIdentifier(identificator);
+		assertEquals(identificator, vacd.getDocumentToReplaceIdentifier());
+
+		final Document document = vacd.getDocument();
+		final XPathExpression expr = xpath.compile(
+				"clinicaldocument/relatedDocument[@typeCode='RPLC']/parentDocument/id[@root='root' and @extension='ext']");
+		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
 	}
 
 	// 11
@@ -715,10 +819,12 @@ public class CdaChVacdTest extends TestUtils {
 		// assertEquals(startDate.getTime(), l.getDateTimeOfResult().getTime());
 		assertEquals(startDate.getTime(), l.getEffectiveTime().getTime());
 
-		l.setInterpretationCode(ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
+		l.setInterpretationCode(
+				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN);
 		assertEquals(
 				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN
-						.getCodeValue(), l.getInterpretationCode());
+						.getCodeValue(),
+				l.getInterpretationCode());
 
 		l.addValue(code2);
 		assertTrue(TestUtils.isEqual(code2, l.getValue().getCode()));
@@ -788,109 +894,6 @@ public class CdaChVacdTest extends TestUtils {
 
 		p.addValue(value2);
 		assertEquals(true, TestUtils.isEqual(value2, p.getValues().get(2)));
-	}
-
-	private AbstractAllergyProblem createAllergyProblem() {
-		final AbstractAllergyProblem p = new AllergyProblem();
-		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
-		p.setId(id1);
-		p.setStartDate(startDate);
-		p.setNotOccured(true);
-		p.addValue(problemCode);
-		p.addValue(new Value(problemCode));
-		p.addValue(new Value(problemCode));
-		p.setCommentText(ts1);
-		return p;
-	}
-
-	// 3
-	private PastProblemConcern createPastProblemConcern() {
-		final PastProblemConcern p = new PastProblemConcern();
-		p.addId(id1);
-		p.setStart(startDate);
-		p.setEnd(endDate);
-		p.setStatus(ProblemConcernStatusCode.COMPLETED);
-		p.setConcern(ts1);
-		p.addProblemEntry(problem1);
-		p.addProblemEntry(problem2);
-		return p;
-	}
-
-	@Test
-	public void deserializeClinicalDocumentTest() throws Exception {
-		final CdaChVacd vacd = new CdaChVacd();
-		final String deserialized = this.serializeDocument(vacd);
-		log.debug(deserialized);
-		final ClinicalDocument vacdDeserialized = deserializeClinicalDocument(deserialized);
-		assertTrue(vacdDeserialized != null);
-	}
-
-	@Test
-	public void deserializeVacDirectTest() throws Exception {
-		final CdaChVacd vacd = new CdaChVacd();
-		final String deserialized = this.serializeDocument(vacd);
-		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacDirect(deserialized);
-		assertTrue(vacdDeserialized != null);
-	}
-
-	@Test
-	public void deserializeVacdTest() throws Exception {
-		final CdaChVacd vacd = new CdaChVacd();
-		final String deserialized = this.serializeDocument(vacd);
-		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacd(deserialized);
-		assertTrue(vacdDeserialized != null);
-	}
-
-	@Test
-	public void deserializeVacdTestTemplateId() throws Exception {
-		CHPackage.eINSTANCE.eClass();
-		CHPackage.eINSTANCE.getVACD();
-		final CdaChVacd vacd = new CdaChVacd();
-		final String deserialized = this.serializeDocument(vacd);
-		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacd(deserialized);
-		assertTrue(vacdDeserialized != null);
-	}
-
-	@Test
-	public void testDocumentReplaceIdentifier() throws Exception {
-		final CdaChVacd vacd = new CdaChVacd();
-		assertEquals(null, vacd.getDocumentToReplaceIdentifier());
-		final Identificator identificator = new Identificator("root", "ext");
-		vacd.setDocumentToReplaceIdentifier(identificator);
-		assertEquals(identificator, vacd.getDocumentToReplaceIdentifier());
-
-		final Document document = vacd.getDocument();
-		final XPathExpression expr = xpath
-				.compile("clinicaldocument/relatedDocument[@typeCode='RPLC']/parentDocument/id[@root='root' and @extension='ext']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-	}
-
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
-	private VACD deserializeVacd(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return (VACD) CDAUtil.load(source);
-	}
-
-	private VACD deserializeVacDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getVACD());
-		return (VACD) clinicalDocument;
-	}
-
-	private String serializeDocument(CdaChVacd vacd) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(vacd.getDoc(), boas);
-		return boas.toString();
 	}
 
 }

@@ -60,6 +60,63 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		super();
 	}
 
+	private CdaChMtpsPml deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return new CdaChMtpsPml(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) CDAUtil.load(source));
+	}
+
+	private CdaChMtpsPml deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChMtpsPml());
+		return new CdaChMtpsPml((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) clinicalDocument);
+	}
+
+	@Test
+	public void deserializeCdaDirectTest() throws Exception {
+		final CdaChMtpsPml cda = new CdaChMtpsPml();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPml cdaDeserialized = deserializeCdaDirect(deserialized);
+		assertTrue(cdaDeserialized != null);
+
+		final String deserialized2 = this.serializeDocument(cda);
+		log.debug(deserialized2);
+
+		assertNotNull(cdaDeserialized.getMedicationListSection());
+		assertEquals("Medication List", cdaDeserialized.getMedicationListSection().getTitle());
+	}
+
+	@Test
+	public void deserializeCdaTest() throws Exception {
+		final CdaChMtpsPml cda = new CdaChMtpsPml();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPml cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	@Test
+	public void deserializeClinicalDocumentTest() throws Exception {
+		final CdaChMtpsPml cda = new CdaChMtpsPml();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private String serializeDocument(CdaChMtpsPml doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
+	}
+
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsPml cda = new CdaChMtpsPml();
@@ -71,8 +128,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath
-				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -126,7 +182,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
 		preEntry.setTextReference("#pre");
 		cda.getMedicationListSection().addPrescriptionItemEntry(preEntry);
-		
+
 		final DispenseItemEntry disEntry = new DispenseItemEntry();
 		disEntry.setTextReference("#dis");
 		cda.getMedicationListSection().addDispenseItemEntry(disEntry);
@@ -134,7 +190,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
 		padvEntry.setTextReference("#padv");
 		cda.getMedicationListSection().addPharmaceuticalAdviceItemEntry(padvEntry);
-		
+
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChMtpsPml cdaDeserialized = deserializeCda(deserialized);
@@ -145,69 +201,11 @@ public class CdaChMtpsPmlTest extends TestUtils {
 				.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
 		assertEquals("#pre", cdaDeserialized.getMedicationListSection().getPrescriptionItemEntries()
 				.get(0).getTextReference());
-		assertEquals("#dis", cdaDeserialized.getMedicationListSection().getDispenseItemEntries()
-				.get(0).getTextReference());
-		assertEquals("#padv", cdaDeserialized.getMedicationListSection().getPharmaceuticalAdviceItemEntries()
-				.get(0).getTextReference());
+		assertEquals("#dis", cdaDeserialized.getMedicationListSection().getDispenseItemEntries().get(0)
+				.getTextReference());
+		assertEquals("#padv", cdaDeserialized.getMedicationListSection()
+				.getPharmaceuticalAdviceItemEntries().get(0).getTextReference());
 
-	}
-
-	@Test
-	public void deserializeClinicalDocumentTest() throws Exception {
-		final CdaChMtpsPml cda = new CdaChMtpsPml();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaDirectTest() throws Exception {
-		final CdaChMtpsPml cda = new CdaChMtpsPml();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPml cdaDeserialized = deserializeCdaDirect(deserialized);
-		assertTrue(cdaDeserialized != null);
-
-		final String deserialized2 = this.serializeDocument(cda);
-		log.debug(deserialized2);
-
-		assertNotNull(cdaDeserialized.getMedicationListSection());
-		assertEquals("Medication List", cdaDeserialized.getMedicationListSection().getTitle());
-	}
-
-	@Test
-	public void deserializeCdaTest() throws Exception {
-		final CdaChMtpsPml cda = new CdaChMtpsPml();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPml cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
-	private CdaChMtpsPml deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsPml(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) CDAUtil.load(source));
-	}
-
-	private CdaChMtpsPml deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChMtpsPml());
-		return new CdaChMtpsPml(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) clinicalDocument);
-	}
-
-	private String serializeDocument(CdaChMtpsPml doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
 	}
 
 }

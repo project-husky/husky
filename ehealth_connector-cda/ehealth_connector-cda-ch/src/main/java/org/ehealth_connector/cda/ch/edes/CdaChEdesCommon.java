@@ -41,8 +41,8 @@ public class CdaChEdesCommon {
 	public void addSection(Section section) {
 		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
 		if (document.getLanguageCode() != null) {
-			section.setTitle(Util.st(sectionEnum.getSectionTitle(LanguageCode.getEnum(document
-					.getLanguageCode().getCode()))));
+			section.setTitle(Util.st(
+					sectionEnum.getSectionTitle(LanguageCode.getEnum(document.getLanguageCode().getCode()))));
 		}
 		document.addSection(section);
 	}

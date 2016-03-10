@@ -29,19 +29,19 @@ import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 public class DebugUtil {
 
 	/**
-	 * Creates a debug string for the given Author (for debugging purposes
-	 * only!)
-	 * 
+	 * Creates a debug string for the given Author (for debugging purposes only!)
+	 *
 	 * @param data
-	 *            the author
+	 *          the author
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
 	public static String debugAuthorString(AuthorType data) {
 		final StringBuffer retVal = new StringBuffer();
 		if (data != null) {
-			retVal.append("    " + data.getAuthorPerson().getFamilyName() + " " + data.getAuthorPerson().getGivenName() + " "
-					+ data.getAuthorPerson().getIdNumber() + " " + data.getAuthorPerson().getAssigningAuthorityName() + "\n");
+			retVal.append("    " + data.getAuthorPerson().getFamilyName() + " "
+					+ data.getAuthorPerson().getGivenName() + " " + data.getAuthorPerson().getIdNumber() + " "
+					+ data.getAuthorPerson().getAssigningAuthorityName() + "\n");
 
 			if (data.getAuthorRole().isEmpty()) {
 				retVal.append("    AuthorRole: " + null + "\n");
@@ -79,7 +79,8 @@ public class DebugUtil {
 				retVal.append("    AuthorInstitution: ");
 				for (final Object item2 : data.getAuthorInstitution()) {
 					final org.openhealthtools.ihe.common.hl7v2.impl.XONImpl data2 = (org.openhealthtools.ihe.common.hl7v2.impl.XONImpl) item2;
-					retVal.append(data2.getOrganizationName() + " " + data2.getIdNumber() + " " + data2.getAssigningAuthorityName());
+					retVal.append(data2.getOrganizationName() + " " + data2.getIdNumber() + " "
+							+ data2.getAssigningAuthorityName());
 				}
 				retVal.append("\n");
 			}
@@ -89,11 +90,11 @@ public class DebugUtil {
 	}
 
 	/**
-	 * Creates a debug string for the given list of codes (for debugging
-	 * purposes only!)
-	 * 
+	 * Creates a debug string for the given list of codes (for debugging purposes
+	 * only!)
+	 *
 	 * @param data
-	 *            the list of codes
+	 *          the list of codes
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -110,9 +111,9 @@ public class DebugUtil {
 
 	/**
 	 * Creates a debug string for the given code (for debugging purposes only!)
-	 * 
+	 *
 	 * @param data
-	 *            the code
+	 *          the code
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -131,12 +132,13 @@ public class DebugUtil {
 
 	/**
 	 * Creates a string with the document metadata (for debugging purposes only)
-	 * 
+	 *
 	 * @param docEntry
-	 *            <div class="en">the document metadata</div>
+	 *          <div class="en">the document metadata</div>
 	 * @return <div class="en">string with the document metadata (for debugging
 	 *         purposes only)</div>
 	 */
+	@SuppressWarnings("unchecked")
 	public static String debugDocumentMetaData(DocumentEntryType docEntry) {
 		final StringBuffer retVal = new StringBuffer();
 		retVal.append("  CreationTime:               " + docEntry.getCreationTime() + "\n");
@@ -160,48 +162,58 @@ public class DebugUtil {
 		}
 
 		retVal.append("  AvailabilityStatus:         " + docEntry.getAvailabilityStatus() + "\n");
-		retVal.append("  Comments:                   " + debugLocalizedString(docEntry.getComments().getLocalizedString()) + "\n");
+		retVal.append("  Comments:                   "
+				+ debugLocalizedString(docEntry.getComments().getLocalizedString()) + "\n");
 
 		if (docEntry.getConfidentialityCode().isEmpty()) {
 			retVal.append("  ConfidentialityCode:        " + null + "\n");
 		} else {
 			retVal.append("  ConfidentialityCode:        ");
 			for (final Object item : docEntry.getConfidentialityCode()) {
-				retVal.append(debugCodeString((org.openhealthtools.ihe.xds.metadata.impl.CodedMetadataTypeImpl) item));
+				retVal.append(debugCodeString(
+						(org.openhealthtools.ihe.xds.metadata.impl.CodedMetadataTypeImpl) item));
 				retVal.append("\n");
 			}
 		}
 
-		retVal.append("  EventCode:                  " + debugCodesString(docEntry.getEventCode()) + "\n");
+		retVal.append(
+				"  EventCode:                  " + debugCodesString(docEntry.getEventCode()) + "\n");
 		retVal.append("  Extension:                  " + docEntry.getExtension() + "\n");
-		retVal.append("  FormatCode:                 " + debugCodeString(docEntry.getFormatCode()) + "\n");
+		retVal.append(
+				"  FormatCode:                 " + debugCodeString(docEntry.getFormatCode()) + "\n");
 
-		retVal.append("  HealthCareFacilityTypeCode: " + debugCodeString(docEntry.getHealthCareFacilityTypeCode()) + "\n");
+		retVal.append("  HealthCareFacilityTypeCode: "
+				+ debugCodeString(docEntry.getHealthCareFacilityTypeCode()) + "\n");
 
 		retVal.append("  LegalAuthenticator:         " + docEntry.getLegalAuthenticator() + "\n");
 		retVal.append("  ParentDocument:             " + docEntry.getParentDocument() + "\n");
 		retVal.append("  PatientId:                  " + docEntry.getPatientId().getIdNumber() + " / "
 				+ docEntry.getPatientId().getAssigningAuthorityUniversalId() + "\n");
-		retVal.append("  PracticeSettingCode:        " + debugCodeString(docEntry.getPracticeSettingCode()) + "\n");
+		retVal.append("  PracticeSettingCode:        "
+				+ debugCodeString(docEntry.getPracticeSettingCode()) + "\n");
 
-		retVal.append("  SourcePatientId:            " + docEntry.getSourcePatientId().getIdNumber() + " / "
-				+ docEntry.getSourcePatientId().getAssigningAuthorityUniversalId() + "\n");
+		retVal.append("  SourcePatientId:            " + docEntry.getSourcePatientId().getIdNumber()
+				+ " / " + docEntry.getSourcePatientId().getAssigningAuthorityUniversalId() + "\n");
 		retVal.append("  SourcePatientInfo:          " + docEntry.getSourcePatientInfo() + "\n");
-		retVal.append("  Title:                      " + debugLocalizedString(docEntry.getTitle().getLocalizedString()) + "\n");
-		retVal.append("  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
-		retVal.append("  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
+		retVal.append("  Title:                      "
+				+ debugLocalizedString(docEntry.getTitle().getLocalizedString()) + "\n");
+		retVal
+				.append("  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
+		retVal
+				.append("  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
 		return retVal.toString();
 	}
 
 	/**
-	 * Creates a debug string for the given InternationalStringType (for
-	 * debugging purposes only!)
-	 * 
+	 * Creates a debug string for the given InternationalStringType (for debugging
+	 * purposes only!)
+	 *
 	 * @param data
-	 *            the InternationalStringType
+	 *          the InternationalStringType
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
+	@SuppressWarnings("unchecked")
 	public static String debugInternationalString(InternationalStringType data) {
 		return debugLocalizedString(data.getLocalizedString());
 	}
@@ -209,9 +221,9 @@ public class DebugUtil {
 	/**
 	 * Creates a debug string for the given list of localized strings (for
 	 * debugging purposes only!)
-	 * 
+	 *
 	 * @param data
-	 *            the list of localized strings
+	 *          the list of localized strings
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */

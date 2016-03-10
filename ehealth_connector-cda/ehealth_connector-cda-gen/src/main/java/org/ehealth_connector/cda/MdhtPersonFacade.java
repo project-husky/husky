@@ -18,8 +18,6 @@ package org.ehealth_connector.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Name;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
@@ -35,9 +33,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class MdhtPersonFacade<E extends org.openhealthtools.mdht.uml.cda.Person>
 		extends MdhtFacade<E> {
-
-	/** The log. */
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.

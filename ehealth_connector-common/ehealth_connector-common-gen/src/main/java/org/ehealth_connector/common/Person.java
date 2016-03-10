@@ -72,6 +72,17 @@ public class Person {
 	}
 
 	/**
+	 * <div class="en">Adds the name.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param name
+	 *          name
+	 */
+	public void addName(Name name) {
+		mPerson.getNames().add(name.getMdhtPn());
+	}
+
+	/**
 	 * <div class="en">Copy mdht person.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *

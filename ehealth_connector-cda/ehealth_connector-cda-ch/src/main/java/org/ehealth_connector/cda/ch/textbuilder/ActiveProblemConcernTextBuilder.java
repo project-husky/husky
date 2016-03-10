@@ -25,9 +25,9 @@ import org.ehealth_connector.cda.textbuilder.TextBuilder;
 
 /**
  * Builds the &lt; text &gt; part of the Treatment plan section.
- * 
+ *
  * Always builds the whole part (not only adds one recommendation).
- * 
+ *
  */
 public class ActiveProblemConcernTextBuilder extends TextBuilder {
 
@@ -45,6 +45,16 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		init();
 	}
 
+	protected String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
+		final StringBuilder rowBuilder = new StringBuilder();
+		rowBuilder.append("<tr>");
+		rowBuilder.append(buildCell("Komplikationsrisiko"));
+		rowBuilder.append(buildCellWithContent(newProblemConcernEntry2.getConcern(), newId,
+				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
+		rowBuilder.append("</tr>");
+		return rowBuilder.toString();
+	}
+
 	public ActiveProblemConcern getProblemConcernEntry() {
 		return newProblemConcernEntry;
 	}
@@ -59,7 +69,8 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 			newId = problemConcernEntries.size() + 1;
 			if ("".equals(sectionText) || (sectionText == null))
 				try {
-					throw new Exception("If there is more than zero elements, the sectionText can´t be empty.");
+					throw new Exception(
+							"If there is more than zero elements, the sectionText can´t be empty.");
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
@@ -71,7 +82,8 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		sectionText = insertRow(newProblemConcernEntry, newId, sectionText);
 	}
 
-	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId, String sectionText) {
+	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
+			String sectionText) {
 		final String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// If there is no element found that could be replaced, then an
 		// error occured (e.g. in a scenario, where an external document is
@@ -83,16 +95,6 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		// methods of this and the super class could be useful.
 		final String tableStr = sectionText.replace(tableFooter, rowStr + tableFooter);
 		return tableStr;
-	}
-
-	protected String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
-		final StringBuilder rowBuilder = new StringBuilder();
-		rowBuilder.append("<tr>");
-		rowBuilder.append(buildCell("Komplikationsrisiko"));
-		rowBuilder.append(
-				buildCellWithContent(newProblemConcernEntry2.getConcern(), newId, SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
-		rowBuilder.append("</tr>");
-		return rowBuilder.toString();
 	}
 
 }

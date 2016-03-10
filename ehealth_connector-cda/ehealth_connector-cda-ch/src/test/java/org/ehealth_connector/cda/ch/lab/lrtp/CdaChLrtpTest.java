@@ -18,7 +18,6 @@ import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
-import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
@@ -81,7 +80,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		LaboratoryObservation lo = new LaboratoryObservation();
 
 		// LRTP specific
-		SoasInfoEntry sie = new SoasInfoEntry();
 		VitalSignsObservation vs = new VitalSignsObservation();
 		VitalSignsOrganizer vso = new VitalSignsOrganizer();
 		BloodGroupObservation bgo = new BloodGroupObservation();

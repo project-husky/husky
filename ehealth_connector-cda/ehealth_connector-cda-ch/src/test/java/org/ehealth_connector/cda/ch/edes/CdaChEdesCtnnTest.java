@@ -51,6 +51,139 @@ public class CdaChEdesCtnnTest extends TestUtils {
 	}
 
 	@Test
+	public void codedVitalSignsSerializationTest() throws Exception {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+
+		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
+				new Value("180", Ucum.CentiMeter)), null);
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
+				new Value("80", Ucum.KiloGram)), null);
+
+		final String deserialized = serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
+
+		List<AbstractVitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
+		assertFalse(observations.isEmpty());
+		assertEquals(2, observations.size());
+
+		AbstractVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
+		assertEquals(Ucum.CentiMeter.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
+	}
+
+	@Test
+	public void codedVitalSignsTest() {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+
+		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
+				new Value("180", Ucum.CentiMeter)), null);
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
+				new Value("80", Ucum.KiloGram)), null);
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.HEART_BEAT, effectiveTime,
+				new Value("62", Ucum.PerMinute)), null);
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				new Value("120", Ucum.MilliMetersOfMercury)), null);
+
+		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
+				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				new Value("80", Ucum.MilliMetersOfMercury)), null);
+
+		List<AbstractVitalSignObservation> observations = cda.getCodedVitalSigns();
+		assertFalse(observations.isEmpty());
+		assertEquals(5, observations.size());
+
+		AbstractVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
+		assertEquals(Ucum.CentiMeter.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
+
+		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC, observations);
+		assertNotNull(vsObservation);
+
+		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
+		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(),
+				vsObservation.getCode().getCode());
+		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(),
+				vsObservation.getValue().getPhysicalQuantityUnit());
+		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(),
+				vsObservation.getInterpretationCode().getCode());
+		assertEquals(ActSite.LEFT_ARM.getCodeValue(), vsObservation.getTargetSiteCode().getCode());
+	}
+
+	private CdaChEdesCtnn deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return new CdaChEdesCtnn(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) CDAUtil.load(source));
+	}
+
+	private CdaChEdesCtnn deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChEdesCtnn());
+		return new CdaChEdesCtnn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) clinicalDocument);
+	}
+
+	@Test
+	public void deserializeCdaDirectTest() throws Exception {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	@Test
+	public void deserializeCdaTest() throws Exception {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	@Test
+	public void deserializeCdaTestTemplateId() throws Exception {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	@Test
+	public void deserializeClinicalDocumentTest() throws Exception {
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	@Test
 	public void documenHeaderTest() throws XPathExpressionException {
 		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
 		final Document document = cda.getDocument();
@@ -74,6 +207,47 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
+	}
+
+	private AbstractVitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
+			List<AbstractVitalSignObservation> observations) {
+		for (AbstractVitalSignObservation vitalSignObservation : observations) {
+			if (vitalSignObservation.getCode().getCode().equals(vsCode.getLoinc())) {
+				return vitalSignObservation;
+			}
+		}
+		return null;
+	}
+
+	@Test
+	public void narrativeSectionsSerializationTest() throws Exception {
+		String testText = "Narrative ...\nText.";
+		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+
+		cda.setNarrativeTextSectionAcuityAssessment(testText);
+		cda.setNarrativeTextSectionModeOfArrival(testText);
+		cda.setNarrativeTextSectionRemarks(testText);
+		cda.setNarrativeTextSectionAbilityToWork(testText);
+
+		final String deserialized = serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival()
+				.contains(SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment()
+				.contains(SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks()
+				.contains(SectionsEDES.REMARKS.getContentIdPrefix()));
+
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
+		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork()
+				.contains(SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
 	}
 
 	@Test
@@ -180,189 +354,17 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT, new Value(
-						"140", Ucum.MilliMetersOfMercury)), null);
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				new Value("140", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT, new Value("90",
-						Ucum.MilliMetersOfMercury)), null);
+				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				new Value("90", Ucum.MilliMetersOfMercury)), null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));
 		assertTrue(narrativeGerman.contains("Körpergrösse"));
 		assertTrue(narrativeGerman.contains("Rechter Fuss"));
-	}
-
-	@Test
-	public void narrativeSectionsSerializationTest() throws Exception {
-		String testText = "Narrative ...\nText.";
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-
-		cda.setNarrativeTextSectionAcuityAssessment(testText);
-		cda.setNarrativeTextSectionModeOfArrival(testText);
-		cda.setNarrativeTextSectionRemarks(testText);
-		cda.setNarrativeTextSectionAbilityToWork(testText);
-
-		final String deserialized = serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
-
-		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(
-				SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
-
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(
-				SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
-
-		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(
-				SectionsEDES.REMARKS.getContentIdPrefix()));
-
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
-		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(
-				SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
-	}
-
-	@Test
-	public void codedVitalSignsTest() {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-
-		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)), null);
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)), null);
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.HEART_BEAT, effectiveTime,
-				new Value("62", Ucum.PerMinute)), null);
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM, new Value(
-						"120", Ucum.MilliMetersOfMercury)), null);
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM, new Value("80",
-						Ucum.MilliMetersOfMercury)), null);
-
-		List<AbstractVitalSignObservation> observations = cda.getCodedVitalSigns();
-		assertFalse(observations.isEmpty());
-		assertEquals(5, observations.size());
-
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
-				VitalSignCodes.BODY_HEIGHT, observations);
-		assertNotNull(vsObservation);
-
-		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue().getPhysicalQuantityUnit());
-
-		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC, observations);
-		assertNotNull(vsObservation);
-
-		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.INTRAVASCULAR_DIASTOLIC.getLoinc(), vsObservation.getCode()
-				.getCode());
-		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(), vsObservation.getValue()
-				.getPhysicalQuantityUnit());
-		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(), vsObservation
-				.getInterpretationCode().getCode());
-		assertEquals(ActSite.LEFT_ARM.getCodeValue(), vsObservation.getTargetSiteCode().getCode());
-	}
-
-	@Test
-	public void codedVitalSignsSerializationTest() throws Exception {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-
-		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)), null);
-
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)), null);
-
-		final String deserialized = serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
-
-		List<AbstractVitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
-		assertFalse(observations.isEmpty());
-		assertEquals(2, observations.size());
-
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
-				VitalSignCodes.BODY_HEIGHT, observations);
-		assertNotNull(vsObservation);
-
-		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
-		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
-		assertEquals(Ucum.CentiMeter.getCodeValue(), vsObservation.getValue().getPhysicalQuantityUnit());
-	}
-
-	private AbstractVitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
-			List<AbstractVitalSignObservation> observations) {
-		for (AbstractVitalSignObservation vitalSignObservation : observations) {
-			if (vitalSignObservation.getCode().getCode().equals(vsCode.getLoinc())) {
-				return vitalSignObservation;
-			}
-		}
-		return null;
-	}
-
-	@Test
-	public void deserializeClinicalDocumentTest() throws Exception {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaDirectTest() throws Exception {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaTest() throws Exception {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChEdesCtnn cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaTestTemplateId() throws Exception {
-		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChEdesCtnn cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
-	private CdaChEdesCtnn deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChEdesCtnn(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) CDAUtil.load(source));
-	}
-
-	private CdaChEdesCtnn deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChEdesCtnn());
-		return new CdaChEdesCtnn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) clinicalDocument);
 	}
 
 	private String serializeDocument(CdaChEdesCtnn doc) throws Exception {

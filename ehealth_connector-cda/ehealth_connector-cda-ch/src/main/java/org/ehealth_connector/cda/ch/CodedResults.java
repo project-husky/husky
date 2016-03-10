@@ -50,10 +50,10 @@ public class CodedResults extends AbstractCodedResults {
 
 	/**
 	 * Instantiates a new Simple Observation
-	 * 
+	 *
 	 * @param so
-	 *            the simple observation
-	 * 
+	 *          the simple observation
+	 *
 	 */
 	public CodedResults(SimpleObservation so) {
 		super(so);
@@ -63,7 +63,7 @@ public class CodedResults extends AbstractCodedResults {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractCodedResults#createEmptyProcedureEntry()
@@ -71,7 +71,8 @@ public class CodedResults extends AbstractCodedResults {
 	@Override
 	protected ProcedureEntry createEmptyProcedureEntry() {
 		// Create and add an empty procedureEntry
-		final ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE.createProcedureEntryProcedureActivityProcedure().init();
+		final ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
+				.createProcedureEntryProcedureActivityProcedure().init();
 		pe.getIds().add(CdaChUtil.createUuidVacd(null));
 		pe.setCode(Util.createCodeNullFlavorNA());
 

@@ -74,10 +74,12 @@ public class ImmunizationRecommendationSectionTest {
 		assertEquals(null, immunization.getTextReference());
 
 		final ExternalDocumentEntry entry = new ExternalDocumentEntry();
-		entry.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html", "Schweizerischer Impfplan");
+		entry.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				"Schweizerischer Impfplan");
 		immunization.setExternalDocumentEntry(entry);
 
-		immunizationRecommendationSection.addImmunizationRecommendation(immunization, LanguageCode.GERMAN, true);
+		immunizationRecommendationSection.addImmunizationRecommendation(immunization,
+				LanguageCode.GERMAN, true);
 
 		immunizationRecommendationSection.getDocument();
 
@@ -85,7 +87,8 @@ public class ImmunizationRecommendationSectionTest {
 		assertEquals("#irs13", criterionEntry.getTextReference());
 		assertEquals("#irs14", commentEntry.getContentIdReference());
 
-		assertEquals(comment, commentEntry.getContentIdText(immunizationRecommendationSection, commentEntry.getContentIdReference()));
+		assertEquals(comment, commentEntry.getContentIdText(immunizationRecommendationSection,
+				commentEntry.getContentIdReference()));
 
 		assertEquals("Hepatitis A immunization (procedure)",
 				hepB.getContentIdText(immunizationRecommendationSection, hepA.getTextReference()));
@@ -95,7 +98,8 @@ public class ImmunizationRecommendationSectionTest {
 		final ImmunizationRecommendation immunization2 = new ImmunizationRecommendation();
 		final Consumable boostrix2 = CdaChVacdTest.getConsumableBoostrix();
 		immunization2.setConsumable(boostrix2);
-		immunizationRecommendationSection.addImmunizationRecommendation(immunization2, LanguageCode.GERMAN, true);
+		immunizationRecommendationSection.addImmunizationRecommendation(immunization2,
+				LanguageCode.GERMAN, true);
 
 		assertEquals("#irs20", immunization2.getTextReference());
 
@@ -106,7 +110,8 @@ public class ImmunizationRecommendationSectionTest {
 		final ImmunizationRecommendationSection ImmunizationRecommendationSection = new ImmunizationRecommendationSection(
 				LanguageCode.GERMAN);
 		final ImmunizationRecommendation immunization = new ImmunizationRecommendation();
-		ImmunizationRecommendationSection.addImmunizationRecommendation(immunization, LanguageCode.GERMAN, true);
+		ImmunizationRecommendationSection.addImmunizationRecommendation(immunization,
+				LanguageCode.GERMAN, true);
 		final Document document = ImmunizationRecommendationSection.getDocument();
 		final XPathExpression expr = xpath.compile("//tr");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
@@ -115,11 +120,13 @@ public class ImmunizationRecommendationSectionTest {
 
 	@Test
 	public void testSerializeEmpty() throws Exception {
-		final ImmunizationRecommendationSection immunization = new ImmunizationRecommendationSection(LanguageCode.GERMAN);
+		final ImmunizationRecommendationSection immunization = new ImmunizationRecommendationSection(
+				LanguageCode.GERMAN);
 
 		final Document document = immunization.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.18.3.1']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.1.18.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

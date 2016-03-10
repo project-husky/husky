@@ -46,7 +46,7 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Instantiates a new gestational age.
-	 * 
+	 *
 	 */
 	public GestationalAge() {
 		super(CHFactory.eINSTANCE.createCodedResultsSection().init());
@@ -65,27 +65,29 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Instantiates a new gestational age.
-	 * 
+	 *
 	 * @param codedResultsSection
-	 *            <div class="en">Instantiates the object on the basis of an
-	 *            MDHT CodedResultsSection</div><div class="de">Instantiiert das
-	 *            Objekt auf Basis einer MDHT CodedResultsSection</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">Instantiates the object on the basis of an MDHT
+	 *          CodedResultsSection</div><div class="de">Instantiiert das Objekt
+	 *          auf Basis einer MDHT CodedResultsSection</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public GestationalAge(CodedResultsSection codedResultsSection) {
 		setCrs(codedResultsSection);
-		mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection.getGestationalAgeWeeksSimpleObservations();
-		mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection.getGestationalAgeDaysSimpleObservations();
+		mWeeks = (GestationalAgeWeeksSimpleObservation) codedResultsSection
+				.getGestationalAgeWeeksSimpleObservations();
+		mDays = (GestationalAgeDaysSimpleObservation) codedResultsSection
+				.getGestationalAgeDaysSimpleObservations();
 	}
 
 	/**
 	 * Instantiates a new gestational age.
-	 * 
+	 *
 	 * @param days
-	 *            <div class="en">gestation age in days (not in weeks AND
-	 *            days)</div> <div class="de">Gestationsalter in Tagen (nicht in
-	 *            Wochen UND Tagen)</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">gestation age in days (not in weeks AND
+	 *          days)</div> <div class="de">Gestationsalter in Tagen (nicht in
+	 *          Wochen UND Tagen)</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public GestationalAge(int days) {
 		this(days / 7, days % 7);
@@ -93,19 +95,17 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Instantiates a new gestational age.
-	 * 
+	 *
 	 * @param weeks
-	 *            <div class="en">gestational age in weeks and days. This
-	 *            parameter represents the weeks.</div>
-	 *            <div class="de">Gestationsalter in Wochen und Tagen. Dieser
-	 *            Parameter gibt die Anzahl der Wochen an.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">gestational age in weeks and days. This parameter
+	 *          represents the weeks.</div> <div class="de">Gestationsalter in
+	 *          Wochen und Tagen. Dieser Parameter gibt die Anzahl der Wochen
+	 *          an.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param weeksDays
-	 *            <div class="en">gestational age in weeks and days. This
-	 *            parameter represents the days.</div>
-	 *            <div class="de">Gestationsalter in Wochen und Tagen. Dieser
-	 *            Parameter gibt die Anzahl der Tage an.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">gestational age in weeks and days. This parameter
+	 *          represents the days.</div> <div class="de">Gestationsalter in
+	 *          Wochen und Tagen. Dieser Parameter gibt die Anzahl der Tage
+	 *          an.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public GestationalAge(int weeks, int weeksDays) {
 		// create and add the MDHT Objects to the section
@@ -118,7 +118,7 @@ public class GestationalAge extends CodedResults {
 	/**
 	 * <div class="en">Copy mdht gestational age days observation.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the gestational age days simple observation
 	 */
 	public GestationalAgeDaysSimpleObservation copyMdhtGestationalAgeDaysObservation() {
@@ -128,7 +128,7 @@ public class GestationalAge extends CodedResults {
 	/**
 	 * <div class="en">Copy mdht gestational age weeks observation.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the gestational age weeks simple observation
 	 */
 	public GestationalAgeWeeksSimpleObservation copyMdhtGestationalAgeWeeksObservation() {
@@ -137,11 +137,11 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Gets the absolute days.
-	 * 
-	 * @return <div class="en">Gets the gestational age in absolute days
-	 *         (without weeks)</div><div class="de">Gibt das Gestationsalter in
-	 *         absoluten Tagen (ohne Wochen) zurück.</div>
-	 *         <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return <div class="en">Gets the gestational age in absolute days (without
+	 *         weeks)</div><div class="de">Gibt das Gestationsalter in absoluten
+	 *         Tagen (ohne Wochen) zurück.</div> <div class="fr"></div>
+	 *         <div class="it"></div>
 	 */
 	public int getAbsoluteDays() {
 		return (getWeeksOfWeeksAndDays() * 7) + getDaysOfWeeksAndDays();
@@ -149,24 +149,25 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Gets the gestational age text.
-	 * 
+	 *
 	 * @return <div class="en">the gestational age text</div><div class="de">Das
 	 *         Gestationsalter in Satz-form:
 	 *         "Das Gestationsalter beträgt: X Wochen und Y Tage"</div>
 	 *         <div class="fr"></div> <div class="it"></div>
 	 */
 	public String getCodedResultsText() {
-		final String gestationalText = "Das Gestationsalter beträgt: " + String.valueOf(getWeeksOfWeeksAndDays()) + " Wochen und "
+		final String gestationalText = "Das Gestationsalter beträgt: "
+				+ String.valueOf(getWeeksOfWeeksAndDays()) + " Wochen und "
 				+ String.valueOf(getDaysOfWeeksAndDays()) + " Tage";
 		return gestationalText;
 	}
 
 	/**
 	 * Gets the days of weeks and days.
-	 * 
+	 *
 	 * @return <div class="en">the gestational age in weeks and days. Gets the
-	 *         days.</div><div class="de">Das Gestationsalter in Wochen und
-	 *         Tagen. Hier wird die Anzahl der Tage zurückgegeben.</div>
+	 *         days.</div><div class="de">Das Gestationsalter in Wochen und Tagen.
+	 *         Hier wird die Anzahl der Tage zurückgegeben.</div>
 	 *         <div class="fr"></div> <div class="it"></div>
 	 */
 	public int getDaysOfWeeksAndDays() {
@@ -181,7 +182,7 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Gets the mdht gestational age days observation.
-	 * 
+	 *
 	 * @return the mdht gestational age days observation
 	 */
 	public GestationalAgeDaysSimpleObservation getMdhtGestationalAgeDaysObservation() {
@@ -190,7 +191,7 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Gets the mdht gestational age weeks observation.
-	 * 
+	 *
 	 * @return the mdht gestational age weeks observation
 	 */
 	public GestationalAgeWeeksSimpleObservation getMdhtGestationalAgeWeeksObservation() {
@@ -199,7 +200,7 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Gets the weeks of weeks and days.
-	 * 
+	 *
 	 * @return <div class="en">the gestational age in weeks and days. Gets the
 	 *         weeks.</div><div class="de">Das Gestationsalter in Wochen und
 	 *         Tagen. Hier wird die Anzahl der Wochen zurückgegeben.</div>
@@ -217,12 +218,12 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Sets the asbolute days.
-	 * 
+	 *
 	 * @param days
-	 *            <div class="en">sets the gestational age in absolute days (not
-	 *            in weeks AND days)</div> <div class="de">Setzt das
-	 *            Gestationsalter in absoluten Tagen (nicht in Wochen UND
-	 *            Tagen).</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">sets the gestational age in absolute days (not in
+	 *          weeks AND days)</div> <div class="de">Setzt das Gestationsalter in
+	 *          absoluten Tagen (nicht in Wochen UND Tagen).</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setAsboluteDays(int days) {
 		setWeeksAndDays(days / 7, days % 7);
@@ -230,18 +231,34 @@ public class GestationalAge extends CodedResults {
 
 	/**
 	 * Sets the days of weeks and days.
-	 * 
-	 * @param weeks
-	 *            <div class="en">the gestational age in weeks and days. Sets
-	 *            the weeks.</div> <div class="de">Das Gestationsalter in Wochen
-	 *            und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param days
-	 *            <div class="en">the gestational age in weeks and days. Sets
-	 *            the days.</div> <div class="de">Das Gestationsalter in Wochen
-	 *            und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the gestational age in weeks and days. Sets the
+	 *          days.</div> <div class="de">Das Gestationsalter in Wochen und
+	 *          Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
+	 */
+	private void setDaysOfWeeksAndDays(int days) {
+		final PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
+		mDays.getValues().add(mDaysValue);
+		mDays.getIds().add(EcoreUtil.copy(mIi));
+		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+	}
+
+	/**
+	 * Sets the days of weeks and days.
+	 *
+	 * @param weeks
+	 *          <div class="en">the gestational age in weeks and days. Sets the
+	 *          weeks.</div> <div class="de">Das Gestationsalter in Wochen und
+	 *          Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param days
+	 *          <div class="en">the gestational age in weeks and days. Sets the
+	 *          days.</div> <div class="de">Das Gestationsalter in Wochen und
+	 *          Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setWeeksAndDays(int weeks, int days) {
 		mDays.getValues().clear();
@@ -253,29 +270,13 @@ public class GestationalAge extends CodedResults {
 	}
 
 	/**
-	 * Sets the days of weeks and days.
-	 * 
-	 * @param days
-	 *            <div class="en">the gestational age in weeks and days. Sets
-	 *            the days.</div> <div class="de">Das Gestationsalter in Wochen
-	 *            und Tagen. Hier wird die Anzahl der Tage gesetzt.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 */
-	private void setDaysOfWeeksAndDays(int days) {
-		final PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
-		mDays.getValues().add(mDaysValue);
-		mDays.getIds().add(EcoreUtil.copy(mIi));
-		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
-	}
-
-	/**
 	 * Sets the weeks of weeks and days.
-	 * 
+	 *
 	 * @param weeks
-	 *            <div class="en">the gestational age in weeks and days. Sets
-	 *            the weeks.</div> <div class="de">Das Gestationsalter in Wochen
-	 *            und Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the gestational age in weeks and days. Sets the
+	 *          weeks.</div> <div class="de">Das Gestationsalter in Wochen und
+	 *          Tagen. Hier wird die Anzahl der Wochen gesetzt.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	private void setWeeksOfWeeksAndDays(int weeks) {
 		// create and the values, ids and effectiveTime for weeks and days

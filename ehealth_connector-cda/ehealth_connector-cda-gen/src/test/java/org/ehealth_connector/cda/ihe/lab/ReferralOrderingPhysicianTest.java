@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
-import org.w3c.dom.Document;
 
 public class ReferralOrderingPhysicianTest extends TestUtils {
 	@Test
@@ -21,7 +20,5 @@ public class ReferralOrderingPhysicianTest extends TestUtils {
 
 		rop.setTime(endDate);
 		assertEquals(endDate, rop.getTime());
-
-		Document document = rop.getDocument();
 	}
 }

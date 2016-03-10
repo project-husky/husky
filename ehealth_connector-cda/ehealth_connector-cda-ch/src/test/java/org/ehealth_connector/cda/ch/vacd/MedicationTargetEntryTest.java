@@ -89,7 +89,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
+		final XPathExpression expr = xpath
+				.compile("observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -106,7 +107,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
+		final XPathExpression expr = xpath
+				.compile("observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -127,7 +129,8 @@ public class MedicationTargetEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("observation/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
+		expr = xpath.compile(
+				"observation/templateId[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='CDA-CH.VACD.Body.MediL3.Reason']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -143,7 +146,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='" + uuid + "']");
+		final XPathExpression expr = xpath.compile(
+				"observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='" + uuid + "']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

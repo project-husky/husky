@@ -30,32 +30,34 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
- * 
+ *
  * Always builds the whole part (not only adds one immunization recommendation).
- * 
+ *
  */
 public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param problemConcerns
-	 *            a list of problem concerns
-	 * @param section
-	 *            the section
-	 */
-	public AllergyConcernChTextBuilder(List<AllergyConcern> problemConcerns, ContentIdPrefix section) {
-		super(toAbstracAllergyConcernList(problemConcerns), section);
-	}
-
-	private static List<AbstractAllergyConcern> toAbstracAllergyConcernList(List<AllergyConcern> allergyProblemConcerns) {
+	private static List<AbstractAllergyConcern> toAbstracAllergyConcernList(
+			List<AllergyConcern> allergyProblemConcerns) {
 		final List<AbstractAllergyConcern> retVal = new ArrayList<>();
 		retVal.addAll(allergyProblemConcerns);
 		return retVal;
 	}
 
 	/**
-	 * 
+	 * Constructor.
+	 *
+	 * @param problemConcerns
+	 *          a list of problem concerns
+	 * @param section
+	 *          the section
+	 */
+	public AllergyConcernChTextBuilder(List<AllergyConcern> problemConcerns,
+			ContentIdPrefix section) {
+		super(toAbstracAllergyConcernList(problemConcerns), section);
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder#addRow(org.ehealth_connector.cda.AbstractAllergyConcern,
@@ -84,7 +86,8 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 							j++;
 							minOneComment = true;
 							cellStr = cellStr
-									+ ("<content ID='" + SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix() + "-comment" + i + j + "'>");
+									+ ("<content ID='" + SectionsVACD.ALLERGIES_REACTIONS.getContentIdPrefix()
+											+ "-comment" + i + j + "'>");
 							cellStr = cellStr + (ap.getCommentText());
 							cellStr = cellStr + ("</content>");
 						}

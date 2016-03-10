@@ -37,7 +37,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * Instantiates a new cda ch mtps mtp.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public CdaChMtpsMtp(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init());
@@ -57,8 +57,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			setTitle("Medication Treatment Plan");
 			break;
 		}
-		MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(
-				getLanguageCode());
+		MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 
@@ -66,7 +65,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * Instantiates a new cda ch mtps mtp document
 	 *
 	 * @param doc
-	 *            the document
+	 *          the document
 	 */
 	public CdaChMtpsMtp(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp doc) {
 		super(doc);
@@ -79,8 +78,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 */
 	public MedicationTreatmentPlanSection getMedicationTreatmentPlanSection() {
 		if (this.getMdht().getMedicationTreatmentPlanSection() != null) {
-			return new MedicationTreatmentPlanSection(
-					this.getMdht().getMedicationTreatmentPlanSection());
+			return new MedicationTreatmentPlanSection(this.getMdht().getMedicationTreatmentPlanSection());
 		}
 		return null;
 	}

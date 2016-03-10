@@ -83,10 +83,13 @@ public class ImmunizationSectionTest {
 		assertEquals("#is14", criterionEntry.getTextReference());
 		assertEquals("#is15", commentEntry.getContentIdReference());
 
-		assertEquals(comment, commentEntry.getContentIdText(immunizationSection, commentEntry.getContentIdReference()));
+		assertEquals(comment,
+				commentEntry.getContentIdText(immunizationSection, commentEntry.getContentIdReference()));
 
-		assertEquals("Hepatitis A immunization (procedure)", hepB.getContentIdText(immunizationSection, hepA.getTextReference()));
-		assertEquals("Hepatitis B vaccination (procedure)", hepA.getContentIdText(immunizationSection, hepB.getTextReference()));
+		assertEquals("Hepatitis A immunization (procedure)",
+				hepB.getContentIdText(immunizationSection, hepA.getTextReference()));
+		assertEquals("Hepatitis B vaccination (procedure)",
+				hepA.getContentIdText(immunizationSection, hepB.getTextReference()));
 
 		final Immunization immunization2 = new Immunization();
 		final Consumable boostrix2 = CdaChVacdTest.getConsumableBoostrix();

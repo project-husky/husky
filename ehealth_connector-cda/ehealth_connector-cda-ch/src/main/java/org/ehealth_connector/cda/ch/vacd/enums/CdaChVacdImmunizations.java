@@ -99,6 +99,24 @@ public enum CdaChVacdImmunizations {
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD immunizations";
 
+	/**
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 *
+	 * @param code
+	 *          <br>
+	 *          <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static CdaChVacdImmunizations getEnum(String code) {
+		for (final CdaChVacdImmunizations x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
 	/** The code. */
 	private String code;
 
@@ -115,18 +133,19 @@ public enum CdaChVacdImmunizations {
 	private int sortOrder;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
-	 * 
+	 * <div class="en">Instantiates this Enum Object with a given Code and Display
+	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
+	 * Codes und einem Display Name</div>.
+	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *          <br>
+	 *          <div class="de"> display name</div>
 	 */
-	private CdaChVacdImmunizations(String code, String displayName, String validFrom, String validTo, int sortOrder) {
+	private CdaChVacdImmunizations(String code, String displayName, String validFrom, String validTo,
+			int sortOrder) {
 		this.code = code;
 		this.displayName = displayName;
 		if ((validFrom != null) && !"".equals(validFrom)) {
@@ -139,27 +158,9 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
-	 * 
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static CdaChVacdImmunizations getEnum(String code) {
-		for (final CdaChVacdImmunizations x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
-	 * 
+	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
@@ -170,7 +171,7 @@ public enum CdaChVacdImmunizations {
 	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the code system name</div>
 	 */
 	public String getCodeSystemName() {
@@ -178,9 +179,9 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 * 
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
+	 *
 	 * @return <div class="en">the code system id</div>
 	 */
 	public String getCodeSystemOid() {
@@ -190,7 +191,7 @@ public enum CdaChVacdImmunizations {
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>.
-	 * 
+	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public String getCodeValue() {
@@ -200,7 +201,7 @@ public enum CdaChVacdImmunizations {
 	/**
 	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
 	 * display name.</div>
-	 * 
+	 *
 	 * @return <div class="en">the display name</div>
 	 */
 	public String getDisplayName() {
@@ -209,7 +210,7 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Gets the sort order.
-	 * 
+	 *
 	 * @return the sort order
 	 */
 	public int getSortOrder() {
@@ -220,11 +221,11 @@ public enum CdaChVacdImmunizations {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public boolean isEnumOfValueSet(String enumName) {
@@ -233,12 +234,12 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
-	 * 
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * ist.</div>
+	 *
 	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {
@@ -252,7 +253,7 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Checks if the code is valid now.
-	 * 
+	 *
 	 * @return true, if is valid
 	 */
 	public boolean isValid() {
@@ -261,9 +262,9 @@ public enum CdaChVacdImmunizations {
 
 	/**
 	 * Checks if the code is valid for the specified date
-	 * 
+	 *
 	 * @param date
-	 *            the date
+	 *          the date
 	 * @return true, if is valid
 	 */
 	public boolean isValid(Date date) {

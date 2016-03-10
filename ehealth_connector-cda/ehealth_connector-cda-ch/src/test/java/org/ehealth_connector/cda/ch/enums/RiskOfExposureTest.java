@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
+ *
  * Test of RiskOfExposure
  *
  */
@@ -54,7 +54,8 @@ public class RiskOfExposureTest {
 	public void testGetCode() {
 		final Code ref = testRiskOfExp.getCode(testLanguage);
 		assertNotNull(ref);
-		assertEquals("Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
+		assertEquals(
+				"Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
 				ref.getDisplayName());
 
 	}
@@ -68,7 +69,8 @@ public class RiskOfExposureTest {
 	public void testGetDisplayName() {
 		final String displNameFrench = testRiskOfExp.getDisplayName(testLanguage);
 		assertNotNull(displNameFrench);
-		assertEquals("Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
+		assertEquals(
+				"Scientifiques effectuant des recherches sur les chiroptères, protecteurs ou amateurs de chauves-souris",
 				displNameFrench);
 	}
 

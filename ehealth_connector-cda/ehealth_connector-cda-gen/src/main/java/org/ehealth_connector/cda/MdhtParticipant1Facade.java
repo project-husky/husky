@@ -17,8 +17,6 @@ package org.ehealth_connector.cda;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
@@ -34,9 +32,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
  *          extending an Act
  */
 public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E> {
-
-	/** The log. */
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.

@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -51,39 +50,38 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	}
 
 	/**
-	 * <div class="en">Creates an object which represents an allergy
-	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
-	 * repräsentiert.</div> <div class="fr">Crée un objet qui représente un
-	 * problème.</div>
-	 * 
+	 * <div class="en">Creates an object which represents an allergy concern</div>
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.</div>
+	 * <div class="fr">Crée un objet qui représente un problème.</div>
+	 *
 	 * @param allergyConcern
-	 *            allergy concern
+	 *          allergy concern
 	 **/
-	public AbstractAllergyConcern(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
+	public AbstractAllergyConcern(
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
 	}
 
 	/**
-	 * <div class="en">Creates an object which represents an allergy
-	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
-	 * repräsentiert.</div> <div class="fr">Crée un objet qui représente un
-	 * problème.</div>
-	 * 
+	 * <div class="en">Creates an object which represents an allergy concern</div>
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert.</div>
+	 * <div class="fr">Crée un objet qui représente un problème.</div>
+	 *
 	 * @param concern
-	 *            <div class="en">The concern (free text)</div>
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">The concern (free text)</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param problemEntry
-	 *            <div class="en">the medical problem</div> <div class="de"> Das
-	 *            medizinische Problem</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">the medical problem</div> <div class="de"> Das
+	 *          medizinische Problem</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param concernStatus
-	 *            <div class="en">status of the concern
-	 *            (active/suspended/aborted/completed)</div> <div class="de">Der
-	 *            Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">status of the concern
+	 *          (active/suspended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 */
 	public AbstractAllergyConcern(String concern, AbstractAllergyProblem problemEntry,
 			org.ehealth_connector.cda.enums.ProblemConcernStatusCode concernStatus) {
@@ -97,37 +95,36 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	}
 
 	/**
-	 * <div class="en">Creates an object which represents an allergy
-	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
-	 * repräsentiert. Dieses Objekt kann einer ActiveProblemsSection hinzugefügt
-	 * werden.</div>
-	 * 
-	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut
-	 * être ajouté dans ActiveProblemsSection.</div>
-	 * 
+	 * <div class="en">Creates an object which represents an allergy concern</div>
+	 * <div class="de">Erzeugt ein Objekt welches ein Leiden repräsentiert. Dieses
+	 * Objekt kann einer ActiveProblemsSection hinzugefügt werden.</div>
+	 *
+	 * <div class="fr">Crée un objet qui représente un problème. L'objet peut être
+	 * ajouté dans ActiveProblemsSection.</div>
+	 *
 	 * @param concern
-	 *            <div class="en">The concern (free text)</div>
-	 *            <div class="de">Die Bezeichnung des Leidens (Freitext)</div>
-	 *            <div class="fr">Le nom du problème (texte libre)</div>
+	 *          <div class="en">The concern (free text)</div> <div class="de">Die
+	 *          Bezeichnung des Leidens (Freitext)</div> <div class="fr">Le nom du
+	 *          problème (texte libre)</div>
 	 * @param begin
-	 *            <div class="en">begin of concern</div> <div class="de">Beginn
-	 *            des Leidens</div> <div class="fr">Le début du problème</div>
+	 *          <div class="en">begin of concern</div> <div class="de">Beginn des
+	 *          Leidens</div> <div class="fr">Le début du problème</div>
 	 * @param end
-	 *            <div class="en">end of concern</div> <div class="de">Ende des
-	 *            Leidens</div> <div class="fr">Le fin du problème</div>
+	 *          <div class="en">end of concern</div> <div class="de">Ende des
+	 *          Leidens</div> <div class="fr">Le fin du problème</div>
 	 * @param problemEntry
-	 *            <div class="en">the medical problem</div> <div class="de"> Das
-	 *            medizinische Problem</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">the medical problem</div> <div class="de"> Das
+	 *          medizinische Problem</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param concernStatus
-	 *            <div class="en">status of the concern
-	 *            (active/suspended/aborted/completed)</div> <div class="de">Der
-	 *            Status Code des Leidens
-	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
-	 *            statut du problème (active/suspended/aborted/completed)</div>
+	 *          <div class="en">status of the concern
+	 *          (active/suspended/aborted/completed)</div> <div class="de">Der
+	 *          Status Code des Leidens (active/suspended/aborted/completed)</div>
+	 *          <div class="fr">Le statut du problème
+	 *          (active/suspended/aborted/completed)</div>
 	 */
-	public AbstractAllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
-			ProblemConcernStatusCode concernStatus) {
+	public AbstractAllergyConcern(String concern, Date begin, Date end,
+			AbstractAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
 		if (end != null) {
 			setEffectiveTime(begin, end);
@@ -141,21 +138,22 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	/**
 	 * <div class="en">Adds a medical problem to the concern</div>
 	 * <div class="de">Fügt dem Leiden ein medizinisches Problem hinzu.</div>
-	 * 
+	 *
 	 * @param problemEntry
-	 *            Das Problem
+	 *          Das Problem
 	 */
 	public void addAllergyProblem(AbstractAllergyProblem problemEntry) {
 		mAllergyConcern.addObservation(EcoreUtil.copy(problemEntry.getAllergyProblem()));
 		mAllergyConcern.getEntryRelationships().get(mAllergyConcern.getEntryRelationships().size() - 1)
 				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		mAllergyConcern.getEntryRelationships().get(mAllergyConcern.getEntryRelationships().size() - 1).setInversionInd(false);
+		mAllergyConcern.getEntryRelationships().get(mAllergyConcern.getEntryRelationships().size() - 1)
+				.setInversionInd(false);
 	}
 
 	/**
 	 * <div class="en">Copy mdht allergy concern.</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe. allergy intolerance
 	 *         concern
 	 */
@@ -165,14 +163,14 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 
 	/**
 	 * Gets the allergy problems.
-	 * 
+	 *
 	 * @return the allergy problems
 	 */
 	public abstract List<AbstractAllergyProblem> getAllergyProblems();
 
 	/**
 	 * Gets the mdht allergy concern.
-	 * 
+	 *
 	 * @return the mdht allergy concern
 	 */
 	public AllergyIntoleranceConcern getMdhtAllergyConcern() {

@@ -30,23 +30,13 @@ public enum ObservationInterpretationForImmunization {
 
 	public static final String POSITIVE_PATHOGEN_FOUND_IN_SPECIMEN_CODE = "POS";
 
-	private ObservationInterpretation root;
-
-	private String displayName;
-
-	private ObservationInterpretationForImmunization(ObservationInterpretation root,
-			String displayName) {
-		this.root = root;
-		this.displayName = displayName;
-	}
-
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 * <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretationForImmunization getEnum(String code) {
@@ -65,8 +55,8 @@ public enum ObservationInterpretationForImmunization {
 	 *
 	 *
 	 * @param enumName
-	 * <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -87,8 +77,8 @@ public enum ObservationInterpretationForImmunization {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 * <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -100,9 +90,19 @@ public enum ObservationInterpretationForImmunization {
 		return false;
 	}
 
+	private ObservationInterpretation root;
+
+	private String displayName;
+
+	private ObservationInterpretationForImmunization(ObservationInterpretation root,
+			String displayName) {
+		this.root = root;
+		this.displayName = displayName;
+	}
+
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -113,8 +113,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -135,8 +135,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -145,8 +145,8 @@ public enum ObservationInterpretationForImmunization {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */

@@ -23,16 +23,28 @@ import org.ehealth_connector.common.Code;
  */
 public enum DispenseCodeList {
 
-	/** <div class="en"> First fill – Complete</div><div class="fr">Première dispensation - complète</div> */
+	/**
+	 * <div class="en"> First fill – Complete</div><div class="fr">Première
+	 * dispensation - complète</div>
+	 */
 	FIRST_FILL_COMPLETE("FFC", "First fill – Complete", "Première dispensation - complète"),
 
-	/** <div class="en"> First fill – Part fill</div><div class="fr">Première dispensation partielle</div> */
+	/**
+	 * <div class="en"> First fill – Part fill</div><div class="fr">Première
+	 * dispensation partielle</div>
+	 */
 	FIRST_FILL_PART_FILL("FFP", "First fill – Part fill", "Première dispensation partielle"),
 
-	/** <div class="en"> Refill – Complete</div><div class="fr">Dispensation suivante - complète</div> */
+	/**
+	 * <div class="en"> Refill – Complete</div><div class="fr">Dispensation
+	 * suivante - complète</div>
+	 */
 	REFILL_COMPLETE("RFC", "Refill – Complete", "Dispensation suivante - complète"),
 
-	/** <div class="en"> Refill – Part fill</div><div class="fr">Dispensation suivante – partielle</div> */
+	/**
+	 * <div class="en"> Refill – Part fill</div><div class="fr">Dispensation
+	 * suivante – partielle</div>
+	 */
 	REFILL_PART_FILL("RFP", "Refill – Part fill", "Dispensation suivante – partielle");
 
 	public static final String CODE_SYSTEM_NAME = "DispenseCodeList";
@@ -42,7 +54,7 @@ public enum DispenseCodeList {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static DispenseCodeList getEnum(String code) {
@@ -67,11 +79,11 @@ public enum DispenseCodeList {
 	 * Instantiates a new route of administration.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param displayNameEn
-	 *            the display name en
+	 *          the display name en
 	 * @param displayNameFr
-	 *            the display name fr
+	 *          the display name fr
 	 */
 	private DispenseCodeList(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -83,7 +95,7 @@ public enum DispenseCodeList {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

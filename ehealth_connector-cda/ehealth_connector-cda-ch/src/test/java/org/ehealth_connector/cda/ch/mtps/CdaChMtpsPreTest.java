@@ -33,9 +33,6 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
-import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
-import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
@@ -45,7 +42,6 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 
 /**
  * Test cases
@@ -58,11 +54,73 @@ public class CdaChMtpsPreTest extends TestUtils {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-
 	public CdaChMtpsPreTest() {
 		super();
 	}
-	
+
+	private CdaChMtpsPre deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return new CdaChMtpsPre(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
+	}
+
+	private CdaChMtpsPre deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChMtpsPre());
+		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
+	}
+
+	@Test
+	public void deserializeCdaDirectTest() throws Exception {
+		final CdaChMtpsPre cda = new CdaChMtpsPre();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPre cdaDeserialized = deserializeCdaDirect(deserialized);
+		assertTrue(cdaDeserialized != null);
+		assertEquals("Prescription for medication",
+				cdaDeserialized.getPrescriptionSection().getTitle());
+
+	}
+
+	@Test
+	public void deserializeCdaTest() throws Exception {
+		final CdaChMtpsPre cda = new CdaChMtpsPre();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	@Test
+	public void deserializeCdaTestTemplateId() throws Exception {
+		final CdaChMtpsPre cda = new CdaChMtpsPre();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	@Test
+	public void deserializeClinicalDocumentTest() throws Exception {
+		final CdaChMtpsPre cda = new CdaChMtpsPre();
+		final String deserialized = this.serializeDocument(cda);
+		log.debug(deserialized);
+		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
+		assertTrue(cdaDeserialized != null);
+	}
+
+	private String serializeDocument(CdaChMtpsPre doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
+	}
+
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -108,14 +166,15 @@ public class CdaChMtpsPreTest extends TestUtils {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
+		expr = xpath
+				.compile("//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
+
 		assertNotNull(cda.getPrescriptionSection());
 		assertEquals("Prescription for medication", cda.getPrescriptionSection().getTitle());
 	}
-	
+
 	@Test
 	public void testDocumentSectionDeserializeWithEntries() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -123,7 +182,7 @@ public class CdaChMtpsPreTest extends TestUtils {
 		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
 		preEntry.setTextReference("#pre");
 		cda.getPrescriptionSection().addPrescriptionItemEntry(preEntry);
-		
+
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
@@ -133,68 +192,5 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals("#pre", cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
 				.get(0).getTextReference());
 	}
-	
-	@Test
-	public void deserializeClinicalDocumentTest() throws Exception {
-		final CdaChMtpsPre cda = new CdaChMtpsPre();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaDirectTest() throws Exception {
-		final CdaChMtpsPre cda = new CdaChMtpsPre();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPre cdaDeserialized = deserializeCdaDirect(deserialized);
-		assertTrue(cdaDeserialized != null);
-		assertEquals("Prescription for medication", cdaDeserialized.getPrescriptionSection().getTitle());
-
-	}
-
-	@Test
-	public void deserializeCdaTest() throws Exception {
-		final CdaChMtpsPre cda = new CdaChMtpsPre();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-
-	@Test
-	public void deserializeCdaTestTemplateId() throws Exception {
-		final CdaChMtpsPre cda = new CdaChMtpsPre();
-		final String deserialized = this.serializeDocument(cda);
-		log.debug(deserialized);
-		final CdaChMtpsPre cdaDeserialized = deserializeCda(deserialized);
-		assertTrue(cdaDeserialized != null);
-	}
-	
-	
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
-	private CdaChMtpsPre deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
-	}
-
-	private CdaChMtpsPre deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getCdaChMtpsPre());
-		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre)clinicalDocument);
-	}
-
-	private String serializeDocument(CdaChMtpsPre doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
-	}
-
-
 
 }

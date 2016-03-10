@@ -43,7 +43,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param problemConcernEntry
-	 *            the problem concern entry
+	 *          the problem concern entry
 	 */
 	public ProblemConcern(ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
@@ -53,13 +53,14 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param concern
-	 *            the concern
+	 *          the concern
 	 * @param problemEntry
-	 *            the problem entry
+	 *          the problem entry
 	 * @param concernStatus
-	 *            the concern status
+	 *          the concern status
 	 */
-	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus) {
+	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
+			ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 
@@ -67,17 +68,18 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param concern
-	 *            the concern
+	 *          the concern
 	 * @param problemEntry
-	 *            the problem entry
+	 *          the problem entry
 	 * @param concernStatus
-	 *            the concern status
+	 *          the concern status
 	 * @param start
-	 *            the start
+	 *          the start
 	 * @param end
-	 *            the end
+	 *          the end
 	 */
-	public ProblemConcern(String concern, AbstractProblemEntry problemEntry, ProblemConcernStatusCode concernStatus, Date start, Date end) {
+	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
+			ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		super(concern, problemEntry, concernStatus, start, end);
 	}
 
@@ -93,7 +95,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractProblemConcern#getProblemEntries()
@@ -101,7 +103,8 @@ public class ProblemConcern extends AbstractProblemConcern {
 	@Override
 	public List<AbstractProblemEntry> getProblemEntries() {
 		final List<AbstractProblemEntry> pel = new ArrayList<AbstractProblemEntry>();
-		for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy : getMdhtProblemConcernEntry().getProblemEntries()) {
+		for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy : getMdhtProblemConcernEntry()
+				.getProblemEntries()) {
 			final AbstractProblemEntry problem = new ProblemEntry(mAllergy);
 			pel.add(problem);
 		}
@@ -109,14 +112,15 @@ public class ProblemConcern extends AbstractProblemConcern {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractProblemConcern#getProblemEntry()
 	 */
 	@Override
 	public AbstractProblemEntry getProblemEntry() {
-		final AbstractProblemEntry problemEntry = new ProblemEntry(copyMdhtProblemConcernEntry().getProblemEntries().get(0));
+		final AbstractProblemEntry problemEntry = new ProblemEntry(
+				copyMdhtProblemConcernEntry().getProblemEntries().get(0));
 		return problemEntry;
 	}
 

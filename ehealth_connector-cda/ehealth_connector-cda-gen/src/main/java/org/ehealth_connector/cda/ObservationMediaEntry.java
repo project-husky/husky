@@ -96,8 +96,10 @@ public class ObservationMediaEntry
 		Base64OutputStream os = new Base64OutputStream(outputStream, false);
 		if (getMdht().getValue() != null) {
 			os.write(getMdht().getValue().getText().getBytes());
+			os.close();
 			return true;
 		}
+		os.close();
 		return false;
 	}
 

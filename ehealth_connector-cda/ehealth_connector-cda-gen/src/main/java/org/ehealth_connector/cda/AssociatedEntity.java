@@ -8,6 +8,7 @@ import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -169,7 +170,7 @@ public class AssociatedEntity
 	}
 
 	public void setPerson(Person person) {
-		getMdht().setAssociatedPerson(person.getMdht());
+		getMdht().setAssociatedPerson(person.getMdhtPerson());
 	}
 
 	/**

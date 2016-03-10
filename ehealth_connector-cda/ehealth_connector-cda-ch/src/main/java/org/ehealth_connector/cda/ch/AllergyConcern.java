@@ -45,7 +45,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param allergyConcern
-	 *            the allergy concern
+	 *          the allergy concern
 	 */
 	public AllergyConcern(AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
@@ -55,13 +55,14 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param concern
-	 *            the concern
+	 *          the concern
 	 * @param problemEntry
-	 *            the problem entry
+	 *          the problem entry
 	 * @param concernStatus
-	 *            the concern status
+	 *          the concern status
 	 */
-	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
+	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry,
+			ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
 
@@ -69,15 +70,15 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param concern
-	 *            the concern
+	 *          the concern
 	 * @param begin
-	 *            the begin
+	 *          the begin
 	 * @param end
-	 *            the end
+	 *          the end
 	 * @param problemEntry
-	 *            the problem entry
+	 *          the problem entry
 	 * @param concernStatus
-	 *            the concern status
+	 *          the concern status
 	 */
 	public AllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {

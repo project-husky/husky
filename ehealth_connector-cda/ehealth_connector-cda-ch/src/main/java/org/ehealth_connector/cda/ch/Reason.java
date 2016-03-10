@@ -46,9 +46,9 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Instantiates a Reason object with a code
-	 * 
+	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 */
 	public Reason(Code code) {
 		this();
@@ -57,13 +57,13 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Instantiates a Reason with a given code, a reference and an ID
-	 * 
+	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param reference
-	 *            the reference
+	 *          the reference
 	 * @param id
-	 *            the id. If null, an ID will be generated
+	 *          the id. If null, an ID will be generated
 	 */
 	public Reason(Code code, URL reference, String id) {
 		this(code);
@@ -74,9 +74,9 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Instantiates a new reason.
-	 * 
+	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	protected Reason(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry);
@@ -84,7 +84,7 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Gets a copy of the mdht CDACHBodyExtRef object
-	 * 
+	 *
 	 * @return the CDACHBodyExtRef
 	 */
 	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
@@ -93,7 +93,7 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Gets the code
-	 * 
+	 *
 	 * @return the code
 	 */
 	public Code getCode() {
@@ -102,7 +102,7 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Gets the CDACHBodyExtRef
-	 * 
+	 *
 	 * @return the CDACHBodyExtRef
 	 */
 	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
@@ -111,7 +111,7 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Gets the Reference to an external object as string
-	 * 
+	 *
 	 * @return the reference
 	 */
 	public String getReference() {
@@ -124,7 +124,7 @@ public class Reason extends MedicationTargetEntry {
 
 	/**
 	 * Gets the id of the reference as string
-	 * 
+	 *
 	 * @return the reference id
 	 */
 	public String getReferenceId() {
@@ -135,48 +135,6 @@ public class Reason extends MedicationTargetEntry {
 		} else {
 			return null;
 		}
-	}
-
-	public void setCode(Code code) {
-		super.setImmunizationTargetCode(code);
-	}
-
-	/**
-	 * Sets a reference to an external Document.
-	 * 
-	 * @param reference
-	 *            The Reference URL (e.g.
-	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
-	 */
-	public void setReference(URL reference) {
-		if (mExtRef == null) {
-			initExtRef();
-		}
-
-		mExtRef.getExternalDocument().setText(Util.createReference(reference.toString()));
-	}
-
-	/**
-	 * Sets the reference id
-	 * 
-	 * @param id
-	 *            the if of the reference (if null, an id will be generated)
-	 */
-	public void setReferenceId(String id) {
-		if (mExtRef == null) {
-			initExtRef();
-		}
-
-		// Set the id or generate if null
-		final II docIi = DatatypesFactory.eINSTANCE.createII();
-		docIi.setRoot("2.16.756.5.30.1.1.1.1.3.6.21");
-		if (id == null) {
-			docIi.setExtension(org.openhealthtools.ihe.utils.UUID.generate());
-		} else {
-			docIi.setExtension(id);
-		}
-		mExtRef.getExternalDocument().getIds().clear();
-		mExtRef.getExternalDocument().getIds().add(docIi);
 	}
 
 	private void initExtRef() {
@@ -193,5 +151,47 @@ public class Reason extends MedicationTargetEntry {
 		e.setClassCode(ActClassDocument.DOC);
 		e.setMoodCode(ActMood.EVN);
 		setReferenceId(null);
+	}
+
+	public void setCode(Code code) {
+		super.setImmunizationTargetCode(code);
+	}
+
+	/**
+	 * Sets a reference to an external Document.
+	 *
+	 * @param reference
+	 *          The Reference URL (e.g.
+	 *          'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+	 */
+	public void setReference(URL reference) {
+		if (mExtRef == null) {
+			initExtRef();
+		}
+
+		mExtRef.getExternalDocument().setText(Util.createReference(reference.toString()));
+	}
+
+	/**
+	 * Sets the reference id
+	 *
+	 * @param id
+	 *          the if of the reference (if null, an id will be generated)
+	 */
+	public void setReferenceId(String id) {
+		if (mExtRef == null) {
+			initExtRef();
+		}
+
+		// Set the id or generate if null
+		final II docIi = DatatypesFactory.eINSTANCE.createII();
+		docIi.setRoot("2.16.756.5.30.1.1.1.1.3.6.21");
+		if (id == null) {
+			docIi.setExtension(org.openhealthtools.ihe.utils.UUID.generate());
+		} else {
+			docIi.setExtension(id);
+		}
+		mExtRef.getExternalDocument().getIds().clear();
+		mExtRef.getExternalDocument().getIds().add(docIi);
 	}
 }

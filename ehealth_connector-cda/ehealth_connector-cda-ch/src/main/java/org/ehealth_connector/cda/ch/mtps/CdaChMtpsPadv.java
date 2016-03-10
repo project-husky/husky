@@ -38,7 +38,7 @@ public class CdaChMtpsPadv
 	 * Instantiates a new cda ch mtps padv.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public CdaChMtpsPadv(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPadv().init());
@@ -66,7 +66,7 @@ public class CdaChMtpsPadv
 	 * Instantiates a new cda ch mtps padv.
 	 *
 	 * @param doc
-	 *            the doc
+	 *          the doc
 	 */
 	public CdaChMtpsPadv(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv doc) {
 		super(doc);

@@ -42,30 +42,28 @@ public class PharmaceuticalAdviceConcernEntryTest {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
-
 	@Test
 	public void testProblemConcernEntry() throws Exception {
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
-		
+
 		final ProblemEntry pastProblem = new ProblemEntry();
 		pastProblem.setExposureRisk(RiskOfExposure.BESCHAEFTIGTE_IM_GESUNDHEITSWESEN,
 				LanguageCode.ENGLISH);
 		pastProblem.setStartDate(DateUtil.date("08.10.2014"));
 		pastProblem.setEndDate(DateUtil.date("31.12.2014"));
-		
+
 		final PastProblemConcern leiden = new PastProblemConcern("Ehemalige GFP", pastProblem,
 				ProblemConcernStatusCode.COMPLETED, DateUtil.date("15.12.1999"),
 				DateUtil.date("20.06.2002"));
 
 		entry.addProblemConcernEntry(leiden);
-		
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("/act/entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
+		XPathExpression expr = xpath
+				.compile("/act/entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-
 
 }

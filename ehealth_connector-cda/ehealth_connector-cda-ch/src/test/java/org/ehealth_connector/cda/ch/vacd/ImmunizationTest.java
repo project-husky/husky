@@ -85,8 +85,8 @@ public class ImmunizationTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("substanceadministration/precondition/criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
+		expr = xpath.compile(
+				"substanceadministration/precondition/criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -107,7 +107,8 @@ public class ImmunizationTest {
 
 		final Document document = immunization.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.MediL3']");
+		XPathExpression expr = xpath.compile(
+				"//templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.MediL3']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -134,11 +135,13 @@ public class ImmunizationTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/author/assignedAuthor/id[@root='1.3.88' and @extension='7607777777777']");
+		expr = xpath.compile(
+				"substanceadministration/author/assignedAuthor/id[@root='1.3.88' and @extension='7607777777777']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
+		expr = xpath
+				.compile("substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 
 	}
@@ -160,7 +163,8 @@ public class ImmunizationTest {
 
 		final Document document = immunization.getDocument();
 
-		final XPathExpression expr = xpath.compile("substanceadministration/author/functionCode[@nullFlavor='NA']");
+		final XPathExpression expr = xpath
+				.compile("substanceadministration/author/functionCode[@nullFlavor='NA']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -221,16 +225,18 @@ public class ImmunizationTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("substanceadministration/consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		XPathExpression expr = xpath.compile(
+				"substanceadministration/consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
+		expr = xpath.compile(
+				"substanceadministration/consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
+		expr = xpath.compile(
+				"substanceadministration/consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 	}
 
@@ -245,7 +251,8 @@ public class ImmunizationTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("substanceadministration/effectiveTime[@value='20151019']");
+		final XPathExpression expr = xpath
+				.compile("substanceadministration/effectiveTime[@value='20151019']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -262,7 +269,8 @@ public class ImmunizationTest {
 
 		final Document document = immunization.getDocument();
 
-		final XPathExpression expr = xpath.compile("substanceadministration/id[@root='oid' and @extension='id']");
+		final XPathExpression expr = xpath
+				.compile("substanceadministration/id[@root='oid' and @extension='id']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -298,8 +306,8 @@ public class ImmunizationTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("substanceadministration/priorityCode[@code='UR' and @codeSystem='2.16.840.1.113883.5.7']");
+		final XPathExpression expr = xpath.compile(
+				"substanceadministration/priorityCode[@code='UR' and @codeSystem='2.16.840.1.113883.5.7']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -312,8 +320,8 @@ public class ImmunizationTest {
 		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS, entry.getRouteOfAdministration());
 
 		final Document document = entry.getDocument();
-		final XPathExpression expr = xpath
-				.compile("substanceadministration/routeCode[@code='SQ' and @codeSystem='2.16.840.1.113883.5.112']");
+		final XPathExpression expr = xpath.compile(
+				"substanceadministration/routeCode[@code='SQ' and @codeSystem='2.16.840.1.113883.5.112']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -333,7 +341,8 @@ public class ImmunizationTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.MediL3']");
+		expr = xpath.compile(
+				"//templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.MediL3']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -345,7 +354,8 @@ public class ImmunizationTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("substanceadministration/code[@code='IMMUNIZ' and @codeSystem='2.16.840.1.113883.5.4']");
+		expr = xpath.compile(
+				"substanceadministration/code[@code='IMMUNIZ' and @codeSystem='2.16.840.1.113883.5.4']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -367,7 +377,8 @@ public class ImmunizationTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("substanceadministration/text/reference[@value='#reference1']");
+		final XPathExpression expr = xpath
+				.compile("substanceadministration/text/reference[@value='#reference1']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

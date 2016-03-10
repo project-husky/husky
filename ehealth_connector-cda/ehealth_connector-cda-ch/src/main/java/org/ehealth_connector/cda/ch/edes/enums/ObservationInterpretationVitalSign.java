@@ -40,8 +40,8 @@ public enum ObservationInterpretationVitalSign {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretationVitalSign getEnum(String code) {
@@ -60,8 +60,8 @@ public enum ObservationInterpretationVitalSign {
 	 *
 	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -82,8 +82,8 @@ public enum ObservationInterpretationVitalSign {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -132,8 +132,8 @@ public enum ObservationInterpretationVitalSign {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

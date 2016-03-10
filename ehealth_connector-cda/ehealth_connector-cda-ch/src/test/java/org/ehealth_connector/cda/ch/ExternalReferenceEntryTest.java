@@ -42,15 +42,16 @@ public class ExternalReferenceEntryTest {
 		final ExternalReferenceEntry entry = new ExternalReferenceEntry();
 
 		final ExternalDocumentEntry doc = new ExternalDocumentEntry();
-		doc.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html", "Schweizerischer Impfplan");
+		doc.setReference("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				"Schweizerischer Impfplan");
 		entry.setExternalDocumentEntry(doc);
 
 		assertEquals(doc, entry.getExternalDocumentEntry());
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("reference/externalDocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
+		final XPathExpression expr = xpath.compile(
+				"reference/externalDocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -63,7 +64,8 @@ public class ExternalReferenceEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("reference/templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.ExtRef']");
+		XPathExpression expr = xpath.compile(
+				"reference/templateId[@root='2.16.756.5.30.1.1.1.1.1' and @extension='CDA-CH.Body.ExtRef']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

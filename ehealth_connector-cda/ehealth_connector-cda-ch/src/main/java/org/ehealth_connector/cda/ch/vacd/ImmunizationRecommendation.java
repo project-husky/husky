@@ -64,13 +64,15 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
  * erfolgte Impfungen dokumentiert werden.
  */
-public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
+public class ImmunizationRecommendation
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 
 	/**
 	 * Instantiates a new immunization recommendation.
 	 */
 	public ImmunizationRecommendation() {
-		super(CHFactory.eINSTANCE.createImmunizationRecommendation().init(), AbstractCdaCh.OID_V1, "CDA-CH.Body.MediL3");
+		super(CHFactory.eINSTANCE.createImmunizationRecommendation().init(), AbstractCdaCh.OID_V1,
+				"CDA-CH.Body.MediL3");
 
 		setRouteOfAdministration(null);
 		setDosage(null);
@@ -79,21 +81,22 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Instantiates a new immunization recommendation.
-	 * 
+	 *
 	 * @param consumable
-	 *            recommended vaccine
+	 *          recommended vaccine
 	 * @param author
-	 *            author of this entry
+	 *          author of this entry
 	 * @param startOfPossibleAppliance
-	 *            start of applicance for this immunization
+	 *          start of applicance for this immunization
 	 * @param endOfPossibleAppliance
-	 *            end of applicance for this immunization
+	 *          end of applicance for this immunization
 	 * @param intendedOrProposed
-	 *            if immunization is intended and or proposed
+	 *          if immunization is intended and or proposed
 	 * @param shallNotBeAdministerd
-	 *            if immunization should not be administred
+	 *          if immunization should not be administred
 	 */
-	public ImmunizationRecommendation(Consumable consumable, org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
+	public ImmunizationRecommendation(Consumable consumable,
+			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
 			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
 
 		this();
@@ -113,21 +116,22 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Instantiates a new immunization recommendation.
-	 * 
+	 *
 	 * @param immunizationRecommendation
-	 *            <br>
-	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <br>
+	 *          <div class="de">Impfempfehlung</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
-	public ImmunizationRecommendation(org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
+	public ImmunizationRecommendation(
+			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
 		super(immunizationRecommendation);
 	}
 
 	/**
 	 * Adds the id.
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void addId(Identificator id) {
 		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
@@ -136,9 +140,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Adds the medication target entry.
-	 * 
+	 *
 	 * @param medicationTargetEntry
-	 *            the medication target entry
+	 *          the medication target entry
 	 */
 	public void addMedicationTargetEntry(MedicationTargetEntry medicationTargetEntry) {
 
@@ -154,8 +158,19 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	}
 
 	/**
+	 * Creates the priority code.
+	 *
+	 * @return the code
+	 */
+	private Code createPriorityCode() {
+		final CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
+		priorityCode.setNullFlavor(NullFlavor.UNK);
+		return new Code(priorityCode);
+	}
+
+	/**
 	 * Gets the author.
-	 * 
+	 *
 	 * @return the author
 	 */
 	public org.ehealth_connector.common.Author getAuthor() {
@@ -167,7 +182,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the comment entry.
-	 * 
+	 *
 	 * @return the comment entry
 	 */
 	public SectionAnnotationCommentEntry getCommentEntry() {
@@ -179,7 +194,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
-	 * 
+	 *
 	 * @return the reference of the level 3 comment entry, which points to the
 	 *         level 2 text
 	 */
@@ -190,7 +205,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself).
-	 * 
+	 *
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -199,7 +214,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the consumable.
-	 * 
+	 *
 	 * @return the consumable
 	 */
 	public Consumable getConsumable() {
@@ -212,7 +227,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * gets the criterion entry.
-	 * 
+	 *
 	 * @return the criterion entry
 	 */
 	public CriterionEntry getCriterionEntry() {
@@ -225,7 +240,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the dose.
-	 * 
+	 *
 	 * @return the dose
 	 */
 	public Value getDosage() {
@@ -238,21 +253,23 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the external document entry.
-	 * 
+	 *
 	 * @return the external document entry
 	 */
 	public ExternalDocumentEntry getExternalDocumentEntry() {
 		if (getMdht().getReferences().size() > 0) {
 			final Reference reference = this.getMdht().getReferences().get(0);
-			return new ExternalReferenceEntry((org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference).getExternalDocumentEntry();
+			return new ExternalReferenceEntry(
+					(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference)
+							.getExternalDocumentEntry();
 		}
 		return null;
 	}
 
 	/**
-	 * Gets the id of immunization of the software which registred it (see
-	 * evadoc 7.5.8.5/7.5.1.5)
-	 * 
+	 * Gets the id of immunization of the software which registred it (see evadoc
+	 * 7.5.8.5/7.5.1.5)
+	 *
 	 * @return the id
 	 */
 	public Identificator getId() {
@@ -268,11 +285,11 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	 * administered, yet (moodCode:INT).</div> <div class="de">Liefert die
 	 * Information, ob eine Impfung beabsichtigt, aber noch nicht erfolgt ist
 	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">true, if the immunization is intendet, but not
-	 *         administered, yet. false, otherwise</div><div class="de">true,
-	 *         wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist.
-	 *         Sonst: false</div>
+	 *         administered, yet. false, otherwise</div><div class="de">true, wenn
+	 *         eine Impfung beabsichtigt, aber noch nicht erfolgt ist. Sonst:
+	 *         false</div>
 	 */
 	public boolean getIntended() {
 		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT);
@@ -280,12 +297,13 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the medication target entries.
-	 * 
+	 *
 	 * @return the medication target entries
 	 */
 	public List<MedicationTargetEntry> getMedicationTargetEntries() {
 		final List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
-		for (final org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht().getMedicalTargets()) {
+		for (final org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry mte : getMdht()
+				.getMedicalTargets()) {
 			medicationTargetEntries.add(new MedicationTargetEntry(mte));
 		}
 		return medicationTargetEntries;
@@ -293,7 +311,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the possible appliance.
-	 * 
+	 *
 	 * @return the possible appliance YYYYmmdd resolution
 	 */
 	public Date getPossibleAppliance() {
@@ -302,7 +320,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the possible appliance end date.
-	 * 
+	 *
 	 * @return the possible appliance end date YYYYmmdd resolution
 	 */
 	public Date getPossibleApplianceEndDate() {
@@ -311,7 +329,8 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 			final SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
 			if (effectiveTime instanceof IVL_TS) {
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-				if ((effectiveTimeInterval.getHigh() != null) && (effectiveTimeInterval.getHigh().getValue() != null)) {
+				if ((effectiveTimeInterval.getHigh() != null)
+						&& (effectiveTimeInterval.getHigh().getValue() != null)) {
 					retVal = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
 				}
 			} else {
@@ -325,7 +344,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the possible appliance start date.
-	 * 
+	 *
 	 * @return the possible appliance start date YYYYmmdd resolution
 	 */
 	public Date getPossibleApplianceStartDate() {
@@ -350,10 +369,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	 * <div class="de">Liefert, den Zeitraum, in dem die Impfung verabreicht
 	 * werden soll als String (z.B. "01.01.2015 - 01.03.2015")</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div>
-	 *         <div class="it"></div>
+	 *         soll als String</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
@@ -361,11 +379,10 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency
-	 * under which the Act happened, can happen, is happening, is intended to
-	 * happen, or is requested/demanded to happen. Codesystem:
-	 * 2.16.840.1.113883.5.7
-	 * 
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
+	 * which the Act happened, can happen, is happening, is intended to happen, or
+	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
+	 *
 	 * @return priorityCode
 	 */
 	public Code getPriorityCode() {
@@ -377,7 +394,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	 * (moodCode:PRP)</div> <div class="de">Liefert, die Information, ob eine
 	 * Impfung vorgeschlagen ist (moodCode:PRP).</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @return true, wenn eine Impfung vorgeschlagen ist. Sonst: false
 	 */
 	public boolean getProposed() {
@@ -386,7 +403,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the route of administration.
-	 * 
+	 *
 	 * @return the route of administration
 	 */
 	public RouteOfAdministration getRouteOfAdministration() {
@@ -395,9 +412,10 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Gets the text reference.
-	 * 
+	 *
 	 * @return the text reference
 	 */
+	@Override
 	public String getTextReference() {
 		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
@@ -407,7 +425,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * returns if is the immunization was administered
-	 * 
+	 *
 	 * @return true, if is undesired
 	 */
 	public boolean isAdministered() {
@@ -416,7 +434,7 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Checks if is the immunization is not desired
-	 * 
+	 *
 	 * @return true, if is undesired
 	 */
 	public boolean isUndesired() {
@@ -432,9 +450,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the author.
-	 * 
+	 *
 	 * @param author
-	 *            the new author
+	 *          the new author
 	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		getMdht().getAuthors().clear();
@@ -445,9 +463,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	/**
 	 * Sets a special code that explains the absence of immunizations in this
 	 * document.
-	 * 
+	 *
 	 * @param specialCode
-	 *            expresses a special condition for this element
+	 *          expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		this.getMdht().setCode(specialCode.getCD());
@@ -464,9 +482,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the comment entry.
-	 * 
+	 *
 	 * @param commentEntry
-	 *            the new comment entry
+	 *          the new comment entry
 	 */
 	public void setCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
@@ -482,9 +500,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets a comment text.
-	 * 
+	 *
 	 * @param text
-	 *            the text
+	 *          the text
 	 */
 	public void setCommentText(String text) {
 		final SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
@@ -494,9 +512,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the consumable.
-	 * 
+	 *
 	 * @param consumable
-	 *            the new consumable
+	 *          the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
 		getMdht().setConsumable(consumable.getMdht());
@@ -504,22 +522,23 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the criterion entry.
-	 * 
+	 *
 	 * @param citerionEntry
-	 *            the new criterion entry
+	 *          the new criterion entry
 	 */
 	public void setCriterionEntry(CriterionEntry citerionEntry) {
 		this.getMdht().getPreconditions().clear();
-		final PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry().init();
+		final PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry()
+				.init();
 		preconditionEntry.setCriterion(citerionEntry.getMdht());
 		this.getMdht().getPreconditions().add(preconditionEntry);
 	}
 
 	/**
 	 * Sets the dosage.
-	 * 
+	 *
 	 * @param doseQuantity
-	 *            the new dosage (use null, if not known)
+	 *          the new dosage (use null, if not known)
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
@@ -534,9 +553,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the external document entry.
-	 * 
+	 *
 	 * @param externalDocumentEntry
-	 *            the new external document entry
+	 *          the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		getMdht().getReferences().clear();
@@ -547,9 +566,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the id of immunization from the software which created it.
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -566,9 +585,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Sets the possible appliance.
-	 * 
+	 *
 	 * @param startOfPossibleAppliance
-	 *            the new possible appliance date YYYYmmdd resolution
+	 *          the new possible appliance date YYYYmmdd resolution
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
@@ -578,32 +597,32 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	}
 
 	/**
-	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht
-	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht werden
+	 * soll.</div> <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @param startOfPossibleAppliance
-	 *            <br>
-	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <br>
+	 *          <div class="de">Startpunkt des Zeitraumes, wann die Impfung
+	 *          verabreicht werden soll.</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param endOfPossibleAppliance
-	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *            verabreicht werden soll.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="de">Endpunkt des Zeitraumes, wann die Impfung
+	 *          verabreicht werden soll.</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
-		this.getMdht().getEffectiveTimes().add(0, DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+		this.getMdht().getEffectiveTimes().add(0,
+				DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency
-	 * under which the Act happened, can happen, is happening, is intended to
-	 * happen, or is requested/demanded to happen. Codesystem:
-	 * 2.16.840.1.113883.5.7
-	 * 
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
+	 * which the Act happened, can happen, is happening, is intended to happen, or
+	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
+	 *
 	 * @param priorityCode
-	 *            the priority code
+	 *          the priority code
 	 */
 	public void setPriorityCode(Code priorityCode) {
 		getMdht().setPriorityCode(priorityCode.getCE());
@@ -622,9 +641,9 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	/**
 	 * Optionally, one can set the route code (Einnahmearten). If not set,
 	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
-	 * 
+	 *
 	 * @param routeCode
-	 *            the new route of administration
+	 *          the new route of administration
 	 */
 	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
 		if (routeCode == null) {
@@ -637,16 +656,16 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	}
 
 	/**
-	 * <div class="en">Sets the information, wheater an immunization shall not
-	 * be administered</div> <div class="de">Gibt an, ob eine Impfung nicht
+	 * <div class="en">Sets the information, wheater an immunization shall not be
+	 * administered</div> <div class="de">Gibt an, ob eine Impfung nicht
 	 * verabreicht werden soll.</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param shallNotBeAdministerd
-	 *            <div class="en">true, if the immunization shall not be
-	 *            administered. false, otherwise.</div> <div class="de">true,
-	 *            wenn die Impfung nicht verabreicht werden soll, sonst
-	 *            false</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">true, if the immunization shall not be
+	 *          administered. false, otherwise.</div> <div class="de">true, wenn
+	 *          die Impfung nicht verabreicht werden soll, sonst false</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {
@@ -658,10 +677,11 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 
 	/**
 	 * Creates the reference to the section.
-	 * 
+	 *
 	 * @param prefix
-	 *            the prefix
+	 *          the prefix
 	 */
+	@Override
 	public void setTextReference(String prefix) {
 		this.getMdht().setText(Util.createReference(prefix));
 	}
@@ -671,17 +691,6 @@ public class ImmunizationRecommendation extends MdhtFacade<org.openhealthtools.m
 	 */
 	public void setUndesired() {
 		this.getMdht().setNegationInd(true);
-	}
-
-	/**
-	 * Creates the priority code.
-	 * 
-	 * @return the code
-	 */
-	private Code createPriorityCode() {
-		final CD priorityCode = DatatypesFactory.eINSTANCE.createCD();
-		priorityCode.setNullFlavor(NullFlavor.UNK);
-		return new Code(priorityCode);
 	}
 
 }

@@ -40,20 +40,19 @@ public class DispenseItemEntryTest {
 
 	@Test
 	public void testDispenseCodeList() throws Exception {
-		
+
 		final DispenseItemEntry entry = new DispenseItemEntry();
-		
+
 		entry.setDispenseCode(DispenseCodeList.REFILL_COMPLETE.getCode(LanguageCode.FRENCH));
-		
+
 		final Document document = entry.getDocument();
-		
+
 		XPathExpression expr = xpath
 				.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		assertEquals(DispenseCodeList.REFILL_COMPLETE, DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
+		assertEquals(DispenseCodeList.REFILL_COMPLETE,
+				DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
 	}
-
-
 
 }

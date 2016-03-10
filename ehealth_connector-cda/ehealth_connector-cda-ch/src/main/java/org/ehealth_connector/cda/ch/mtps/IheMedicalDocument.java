@@ -22,7 +22,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 /**
  * The Class IheMedicalDocument.
  */
-public class IheMedicalDocument extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ihe.MedicalDocument> {
+public class IheMedicalDocument
+		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ihe.MedicalDocument> {
 
 	/**
 	 * Instantiates a new ihe medical document.

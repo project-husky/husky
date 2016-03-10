@@ -41,7 +41,8 @@ public class ProblemEntry extends AbstractProblemEntry {
 	/**
 	 * Instantiates a new problem entry.
 	 *
-	 * @param entry the entry
+	 * @param entry
+	 *          the entry
 	 */
 	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry) {
 		super(entry);
@@ -49,7 +50,7 @@ public class ProblemEntry extends AbstractProblemEntry {
 
 	/**
 	 * Gets the compl risk.
-	 * 
+	 *
 	 * @return the compl risk
 	 */
 	public RiskOfComplications getComplicationRisk() {
@@ -65,7 +66,7 @@ public class ProblemEntry extends AbstractProblemEntry {
 
 	/**
 	 * Gets the exposure risk.
-	 * 
+	 *
 	 * @return the exposure risk
 	 */
 	public RiskOfExposure getExposureRisk() {
@@ -80,13 +81,12 @@ public class ProblemEntry extends AbstractProblemEntry {
 	}
 
 	/**
-	 * Sets the complication Risk and in addition sets the ProblemType to
-	 * PROBLEM
-	 * 
+	 * Sets the complication Risk and in addition sets the ProblemType to PROBLEM
+	 *
 	 * @param complRisk
-	 *            the compl risk
+	 *          the compl risk
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setComplicationRisk(RiskOfComplications complRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);
@@ -95,11 +95,11 @@ public class ProblemEntry extends AbstractProblemEntry {
 
 	/**
 	 * Sets the exposure risk and in addition sets the ProblemType to PROBLEM.
-	 * 
+	 *
 	 * @param expRisk
-	 *            the exp risk
+	 *          the exp risk
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setExposureRisk(RiskOfExposure expRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);

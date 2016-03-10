@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
-import org.ehealth_connector.cda.ihe.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Participant;
@@ -63,8 +61,7 @@ public class LaboratoryIsolateOrganizer
 		this.addParticipant(p);
 	}
 
-	public void addLaboratoryBatteryOrganizer(
-			AbstractLaboratoryBatteryOrganizer labBatteryOrganizer) {
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
 		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);

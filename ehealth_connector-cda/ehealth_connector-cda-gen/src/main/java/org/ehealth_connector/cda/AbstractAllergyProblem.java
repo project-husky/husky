@@ -16,7 +16,6 @@
 
 package org.ehealth_connector.cda;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,16 +58,16 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * <div class="en">Creates an object, which represents an allergy problem.
-	 * This constructor will be used, when the time span in which the problem
-	 * has been present</div> <div class="de">Erzeugt ein Objekt welches ein
-	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn
-	 * der Zeitraum in dem das Problem bestand unbekannt ist, das Problem als
-	 * Code angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand unbekannt ist, das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
 	 * hinzugefügt werden.</div>
-	 * 
+	 *
 	 * @param allergy
-	 *            <div class="en">The allergy</div> <div class="de">Die Art der
-	 *            Allergie</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">The allergy</div> <div class="de">Die Art der
+	 *          Allergie</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public AbstractAllergyProblem(AllergiesAndIntolerances allergy) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
@@ -84,71 +83,69 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * <div class="en">Creates an object, which represents an allergy problem.
-	 * This constructor will be used, when the time span in which the problem
-	 * has been present</div> <div class="de">Erzeugt ein Objekt welches ein
-	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn
-	 * der Zeitraum in dem das Problem bestand bekannt ist und das Problem als
-	 * Code angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
 	 * hinzugefügt werden.</div>
-	 * 
+	 *
 	 * @param kindOfAllergy
-	 *            <div class="en"> kind of allergy</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en"> kind of allergy</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param problem
-	 *            <div class="en">code for risc of complication or risc of
-	 *            exposure</div> <div class="de">Code zu Komplikationsrisiken
-	 *            oder Expositionsrisiken.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">code for risc of complication or risc of
+	 *          exposure</div> <div class="de">Code zu Komplikationsrisiken oder
+	 *          Expositionsrisiken.</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param startOfProblem
-	 *            <div class="en">start of problem</div> <div class="de">Beginn
-	 *            des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">start of problem</div> <div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param endOfProblem
-	 *            <div class="en">end of problem</div> <div class="de">Ende des
-	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">end of problem</div> <div class="de">Ende des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy, org.ehealth_connector.common.Code problem, Date startOfProblem,
-			Date endOfProblem) {
+	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
 		this(kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
 	}
 
 	/**
 	 * <div class="en">Creates an object, which represents an allergy problem.
-	 * This constructor will be used, when the time span in which the problem
-	 * has been present</div> <div class="de">Erzeugt ein Objekt welches ein
-	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn
-	 * der Zeitraum in dem das Problem bestand bekannt ist und das Problem als
-	 * Code angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
+	 * This constructor will be used, when the time span in which the problem has
+	 * been present</div> <div class="de">Erzeugt ein Objekt welches ein
+	 * Allergie-Problem repräsentiert. Dieser Konstruktor wird verwendet, wenn der
+	 * Zeitraum in dem das Problem bestand bekannt ist und das Problem als Code
+	 * angegeben werden soll. Dieses Objekt kann einem ProblemConcernEntry
 	 * hinzugefügt werden.</div>
-	 * 
+	 *
 	 * @param kindOfAllergy
-	 *            <div class="en">kind of allergy</div> <div class="de">Die Art
-	 *            der Allergie</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">kind of allergy</div> <div class="de">Die Art der
+	 *          Allergie</div> <div class="fr"></div> <div class="it"></div>
 	 * @param problem
-	 *            <div class="en">code for risc of complication or risc of
-	 *            exposure</div> <div class="de">Code zu Komplikationsrisiken
-	 *            oder Expositionsrisiken.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">code for risc of complication or risc of
+	 *          exposure</div> <div class="de">Code zu Komplikationsrisiken oder
+	 *          Expositionsrisiken.</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 * @param startOfProblem
-	 *            <div class="en">start of problem</div> <div class="de">Beginn
-	 *            des Problems</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <div class="en">start of problem</div> <div class="de">Beginn des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param endOfProblem
-	 *            <div class="en">end of problem</div> <div class="de">Ende des
-	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">end of problem</div> <div class="de">Ende des
+	 *          Problems</div> <div class="fr"></div> <div class="it"></div>
 	 * @param internalProblemId
-	 *            <div class="en">internal id of the problem. If you don´t have
-	 *            such an id you can you another constructor and the id will be
-	 *            generated</div> <div class="de">Interne ID des Problems
-	 *            innerhalb der Akte. Steht eine solche nicht zur Verfügung dann
-	 *            kann ein anderer Konstruktor verwendet werden und es wird
-	 *            stattdesssen eine GUID durch die Convenience API
-	 *            generiert.</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">internal id of the problem. If you don´t have such
+	 *          an id you can you another constructor and the id will be
+	 *          generated</div> <div class="de">Interne ID des Problems innerhalb
+	 *          der Akte. Steht eine solche nicht zur Verfügung dann kann ein
+	 *          anderer Konstruktor verwendet werden und es wird stattdesssen eine
+	 *          GUID durch die Convenience API generiert.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy, org.ehealth_connector.common.Code problem, Date startOfProblem,
-			Date endOfProblem, Identificator internalProblemId) {
+	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem,
+			Identificator internalProblemId) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
 		setNotOccured(false);
 		setStartDate(startOfProblem);
@@ -160,29 +157,30 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Instantiates a new allergy problem.
-	 * 
+	 *
 	 * @param allergyIntolerance
-	 *            <br>
-	 *            <div class="de"> allergy intolerance</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <br>
+	 *          <div class="de"> allergy intolerance</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
+	public AbstractAllergyProblem(
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
 		setAllergyProblem(allergyIntolerance);
 	}
 
 	/**
 	 * Adds the id.
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public abstract void addId(Identificator id);
 
 	/**
 	 * Adds the value.
-	 * 
+	 *
 	 * @param code
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Code code) {
 		final CD mCodedProblem = EcoreUtil.copy(code.getCD());
@@ -191,18 +189,18 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Adds the value.
-	 * 
+	 *
 	 * @param value
-	 *            the new value
+	 *          the new value
 	 */
 	public void addValue(Value value) {
 		getAllergyProblem().getValues().add(value.getValue());
 	}
 
 	/**
-	 * <div class="de">Copy mdht allergy intolerance.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="de">Copy mdht allergy intolerance.</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return the allergy intolerance
 	 */
 	public AllergyIntolerance copyMdhtAllergyIntolerance() {
@@ -211,7 +209,7 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the mAllergyProblem
 	 */
 	public AllergyIntolerance getAllergyProblem() {
@@ -220,17 +218,18 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the code.
-	 * 
+	 *
 	 * @return das codedProblem Objekt
 	 */
 	public org.ehealth_connector.common.Code getCode() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(getAllergyProblem().getCode());
+		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+				getAllergyProblem().getCode());
 		return code;
 	}
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text.
-	 * 
+	 *
 	 * @return the reference of the level 3 comment entry, which point to the
 	 *         level 2 text
 	 */
@@ -241,7 +240,7 @@ public abstract class AbstractAllergyProblem {
 	/**
 	 * Gets the text of the comment text element (this is not necessarily the
 	 * comment itself)
-	 * 
+	 *
 	 * @return the comment text
 	 */
 	public String getCommentText() {
@@ -250,13 +249,14 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the end of problem.
-	 * 
+	 *
 	 * @return das endOfProblem Objekt
 	 */
 	public String getEndDate() {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getHigh() != null) {
-				return Util.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getHigh().getValue());
+				return Util
+						.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getHigh().getValue());
 			}
 		}
 		return null;
@@ -266,7 +266,7 @@ public abstract class AbstractAllergyProblem {
 	 * <div class="de">Liefert die (erste) interne (z.B. aus der Krankenakte
 	 * bekannte) ID für das Allergie Problem. Ist keine ID vorhanden, wird null
 	 * zurückgegeben.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the new id
 	 */
 	public Identificator getId() {
@@ -279,9 +279,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the specified id value based on its code system.
-	 * 
+	 *
 	 * @param codeSystem
-	 *            id's identity domain
+	 *          id's identity domain
 	 * @return the id or null if it doesn't exist
 	 */
 	public Identificator getId(IdentityDomain codeSystem) {
@@ -296,7 +296,7 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the mdht allergy problem.
-	 * 
+	 *
 	 * @return the mdht allergy problem
 	 */
 	public AllergyIntolerance getMdhtAllergyProblem() {
@@ -305,7 +305,7 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the problem not occured (NegationId).
-	 * 
+	 *
 	 * @return das NotOccured Objekt. True, if the problem did not occur. false,
 	 *         otherwise.
 	 */
@@ -315,13 +315,14 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Gets the start.
-	 * 
+	 *
 	 * @return das startOfProblem Objekt
 	 */
 	public String getStartDate() {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getLow() != null) {
-				return Util.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getLow().getValue());
+				return Util
+						.createEurDateStrFromTS(getAllergyProblem().getEffectiveTime().getLow().getValue());
 			}
 		}
 		return null;
@@ -333,11 +334,10 @@ public abstract class AbstractAllergyProblem {
 	 * If the value is coded, the convenience API will return the Code.
 	 * </p>
 	 * <p>
-	 * If the value is uncoded, the convenience API will return the xml
-	 * reference to the free text description of the document for further
-	 * processing.
+	 * If the value is uncoded, the convenience API will return the xml reference
+	 * to the free text description of the document for further processing.
 	 * </p>
-	 * 
+	 *
 	 * @return the problem value as string.
 	 */
 	public Value getValue() {
@@ -348,7 +348,7 @@ public abstract class AbstractAllergyProblem {
 	/**
 	 * Get a list of all problem values. Each Value may be a coded or uncoded
 	 * String.
-	 * 
+	 *
 	 * @return all problem values as ArrayList.
 	 */
 	public List<Value> getValues() {
@@ -362,9 +362,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Method to set
-	 * 
+	 *
 	 * @param aAllergyProblem
-	 *            the mAllergyProblem to set
+	 *          the mAllergyProblem to set
 	 */
 	public void setAllergyProblem(AllergyIntolerance aAllergyProblem) {
 		mAllergyProblem = aAllergyProblem;
@@ -372,9 +372,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets the code.
-	 * 
+	 *
 	 * @param kindOfAllergy
-	 *            the new code
+	 *          the new code
 	 */
 	public void setCode(AllergiesAndIntolerances kindOfAllergy) {
 		getAllergyProblem().setCode(kindOfAllergy.getCD());
@@ -382,9 +382,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets a comment text
-	 * 
+	 *
 	 * @param text
-	 *            the text
+	 *          the text
 	 */
 	public void setCommentText(String text) {
 		final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -401,9 +401,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets the end of problem.
-	 * 
+	 *
 	 * @param endOfProblem
-	 *            End of problem date.
+	 *          End of problem date.
 	 */
 	public void setEndDate(Date endOfProblem) {
 		if (getAllergyProblem().getEffectiveTime() == null) {
@@ -415,9 +415,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets the id.
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		final II ii = Util.createIdentificator(id);
@@ -426,9 +426,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets the problem not occured (negationId)
-	 * 
+	 *
 	 * @param notOccured
-	 *            true, if the problem is not occured, false otherwise.
+	 *          true, if the problem is not occured, false otherwise.
 	 */
 	public void setNotOccured(boolean notOccured) {
 		getAllergyProblem().setNegationInd(notOccured);
@@ -436,9 +436,9 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Sets the start.
-	 * 
+	 *
 	 * @param startOfProblem
-	 *            Start of the problem
+	 *          Start of the problem
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (getAllergyProblem().getEffectiveTime() == null) {

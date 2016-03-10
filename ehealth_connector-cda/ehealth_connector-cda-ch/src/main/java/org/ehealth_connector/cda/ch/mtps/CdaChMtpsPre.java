@@ -25,11 +25,19 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * The Class CdaChMtpsPre. See also CDA CH MTPS 7.4.2.4
  */
 public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
-	
+
+	/**
+	 * Instantiates a new cda ch mtps pre.
+	 */
+	public CdaChMtpsPre() {
+		this(LanguageCode.ENGLISH);
+	}
+
 	/**
 	 * Instantiates a new cda ch mtps pre.
 	 *
-	 * @param languageCode the language code
+	 * @param languageCode
+	 *          the language code
 	 */
 	public CdaChMtpsPre(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPre().init());
@@ -46,7 +54,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			setTitle("Prescrizione farmacologica"); // CDA CH MTPS 7.4.2.4
 			break;
 		case ENGLISH:
-			setTitle("Pharmacy Prescription"); 
+			setTitle("Pharmacy Prescription");
 			break;
 		}
 		PrescriptionSection section = new PrescriptionSection(getLanguageCode());
@@ -55,15 +63,9 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 
 	/**
 	 * Instantiates a new cda ch mtps pre.
-	 */
-	public CdaChMtpsPre() {
-		this(LanguageCode.ENGLISH);
-	}
-
-	/**
-	 * Instantiates a new cda ch mtps pre.
 	 *
-	 * @param doc the doc
+	 * @param doc
+	 *          the doc
 	 */
 	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre doc) {
 		super(doc);
@@ -75,10 +77,10 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * @return the prescription section
 	 */
 	public PrescriptionSection getPrescriptionSection() {
-		if (this.getMdht().getPrescriptionSection()!=null) {
+		if (this.getMdht().getPrescriptionSection() != null) {
 			return new PrescriptionSection(this.getMdht().getPrescriptionSection());
 		}
 		return null;
 	}
-	
+
 }

@@ -36,28 +36,30 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * immunization recommendation section for IHE Immunization Content (IC)
  * profiles. E.g. CDA-CH-VACD 7.5.8.2
  */
-public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection> {
+public class ImmunizationRecommendationSection
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection> {
 
 	// default language is German
 	private LanguageCode languageCode = LanguageCode.GERMAN;
 
 	/**
 	 * Instantiates a new immunization section.
-	 * 
+	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public ImmunizationRecommendationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationRecommendationSection().init(), null, null);
 		this.languageCode = languageCode;
-		this.getMdht().setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(languageCode.getCS())));
+		this.getMdht()
+				.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(languageCode.getCS())));
 	}
 
 	/**
 	 * Instantiates a new immunization section.
-	 * 
+	 *
 	 * @param ImmunizationRecommendation
-	 *            the immunization section
+	 *          the immunization section
 	 */
 	protected ImmunizationRecommendationSection(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection ImmunizationRecommendation) {
@@ -65,22 +67,22 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 	}
 
 	/**
-	 * Adds the immunization recommendation to the section. If the text is
-	 * created in the section based on the immunizationRecommendation object the
-	 * level3 obects immunizationRecommendation, medicationTargetEntry,
-	 * SectionAnnotationCommentEntry and criterionEntry will be linked with a
-	 * text reference (If the SectionAnnotationCommentEntry in
-	 * immunizationRecommendation has a text it will be replaced by the
-	 * reference)
-	 * 
+	 * Adds the immunization recommendation to the section. If the text is created
+	 * in the section based on the immunizationRecommendation object the level3
+	 * obects immunizationRecommendation, medicationTargetEntry,
+	 * SectionAnnotationCommentEntry and criterionEntry will be linked with a text
+	 * reference (If the SectionAnnotationCommentEntry in
+	 * immunizationRecommendation has a text it will be replaced by the reference)
+	 *
 	 * @param immunizationRecommendation
-	 *            the immunizationRecommendation
+	 *          the immunizationRecommendation
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @param createSectionText
-	 *            if the section text should be created
+	 *          if the section text should be created
 	 */
-	public void addImmunizationRecommendation(org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation immunizationRecommendation,
+	public void addImmunizationRecommendation(
+			org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation immunizationRecommendation,
 			LanguageCode languageCode, boolean createSectionText) {
 		if (immunizationRecommendation != null) {
 			getMdht().addSubstanceAdministration(immunizationRecommendation.getMdht());
@@ -103,7 +105,7 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 
 	/**
 	 * Gets the default section table.
-	 * 
+	 *
 	 * @return the table
 	 */
 	public String getTable() {
@@ -116,16 +118,17 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 
 	/**
 	 * adds a section the table for an immunizationRecommendation.
-	 * 
+	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @param immunizationRecommendation
-	 *            the immunizationRecommendation
+	 *          the immunizationRecommendation
 	 * @param contendIdPrefix
-	 *            the contend id prefix
+	 *          the contend id prefix
 	 * @return the table row
 	 */
-	public String getTableRow(LanguageCode languageCode, ImmunizationRecommendation immunizationRecommendation, String contendIdPrefix) {
+	public String getTableRow(LanguageCode languageCode,
+			ImmunizationRecommendation immunizationRecommendation, String contendIdPrefix) {
 
 		final StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("<tr><td>");
@@ -134,7 +137,8 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 
 		String contentId = contendIdPrefix + colIndex++;
 		stringBuffer.append("<content ID=\"" + contentId + "\">");
-		if ((immunizationRecommendation.getConsumable() != null) && (immunizationRecommendation.getConsumable().getTradeName() != null)) {
+		if ((immunizationRecommendation.getConsumable() != null)
+				&& (immunizationRecommendation.getConsumable().getTradeName() != null)) {
 			stringBuffer.append(immunizationRecommendation.getConsumable().getTradeName());
 		}
 		immunizationRecommendation.setTextReference("#" + contentId);
@@ -143,7 +147,8 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 
 		stringBuffer.append("</td><td>");
 		// <th>Hersteller</th>
-		if ((immunizationRecommendation.getConsumable() != null) && (immunizationRecommendation.getConsumable().getManufacturer() != null)
+		if ((immunizationRecommendation.getConsumable() != null)
+				&& (immunizationRecommendation.getConsumable().getManufacturer() != null)
 				&& (immunizationRecommendation.getConsumable().getManufacturer().getName() != null)) {
 			stringBuffer.append(immunizationRecommendation.getConsumable().getManufacturer().getName());
 		}
@@ -154,7 +159,8 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 		}
 		stringBuffer.append("</td><td>");
 		// <th>Impfung gegen</th>
-		final List<MedicationTargetEntry> medicationTargetEntries = immunizationRecommendation.getMedicationTargetEntries();
+		final List<MedicationTargetEntry> medicationTargetEntries = immunizationRecommendation
+				.getMedicationTargetEntries();
 		if (medicationTargetEntries != null) {
 			int i = 0;
 			// Sort List according to
@@ -176,19 +182,23 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung vom
-		if ((immunizationRecommendation.getAuthor() != null) && (immunizationRecommendation.getAuthor().getTimeAsDate() != null)) {
-			stringBuffer.append(DateUtil.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
+		if ((immunizationRecommendation.getAuthor() != null)
+				&& (immunizationRecommendation.getAuthor().getTimeAsDate() != null)) {
+			stringBuffer
+					.append(DateUtil.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
 		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung dokumentiert durch
-		if ((immunizationRecommendation.getAuthor() != null) && (immunizationRecommendation.getAuthor().getName() != null)) {
+		if ((immunizationRecommendation.getAuthor() != null)
+				&& (immunizationRecommendation.getAuthor().getName() != null)) {
 			stringBuffer.append(immunizationRecommendation.getAuthor().getName().getCompleteName());
 		}
 		stringBuffer.append("</td><td>");
 		// EKIF Empfehlungskategorie
 		if ((immunizationRecommendation.getCriterionEntry() != null)
 				&& (immunizationRecommendation.getCriterionEntry().getRecCategory() != null)) {
-			final CdaChVacdRecCategories recCategory = immunizationRecommendation.getCriterionEntry().getRecCategory();
+			final CdaChVacdRecCategories recCategory = immunizationRecommendation.getCriterionEntry()
+					.getRecCategory();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
 			stringBuffer.append(recCategory.getCode(languageCode).getDisplayName());
@@ -198,7 +208,8 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 		// <th>Kommentar</th>
 		stringBuffer.append("</td><td>");
 		if (immunizationRecommendation.getCommentEntry() != null) {
-			final SectionAnnotationCommentEntry commentEntry = immunizationRecommendation.getCommentEntry();
+			final SectionAnnotationCommentEntry commentEntry = immunizationRecommendation
+					.getCommentEntry();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
 			stringBuffer.append(commentEntry.getAnnotationCommentText());
@@ -208,9 +219,10 @@ public class ImmunizationRecommendationSection extends MdhtFacade<org.openhealth
 		stringBuffer.append("</td><td>");
 		// <th>Referenz</th>
 		if (immunizationRecommendation.getExternalDocumentEntry() != null) {
-			final ExternalDocumentEntry documentEntry = immunizationRecommendation.getExternalDocumentEntry();
-			stringBuffer.append("<linkHtml href=\"" + documentEntry.getReferenceUrl() + "\">" + documentEntry.getReferenceNarrativeText()
-					+ "</linkHtml>");
+			final ExternalDocumentEntry documentEntry = immunizationRecommendation
+					.getExternalDocumentEntry();
+			stringBuffer.append("<linkHtml href=\"" + documentEntry.getReferenceUrl() + "\">"
+					+ documentEntry.getReferenceNarrativeText() + "</linkHtml>");
 		}
 		stringBuffer.append("</td></tr>");
 		return stringBuffer.toString();

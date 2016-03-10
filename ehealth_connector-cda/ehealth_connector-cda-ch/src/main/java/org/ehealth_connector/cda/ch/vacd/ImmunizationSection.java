@@ -34,47 +34,50 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * The Class ImmunizationSection provides the support for immunization section
  * for IHE Immunization Content (IC) profiles. E.g. CDA-CH-VACD 7.5.8.2
  */
-public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
+public class ImmunizationSection
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection> {
 
 	// default language is German
 	private LanguageCode languageCode = LanguageCode.GERMAN;
 
 	/**
 	 * Instantiates a new immunization section.
-	 * 
+	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public ImmunizationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationsSection().init(), null, null);
 		this.languageCode = languageCode;
-		this.getMdht().setTitle(
-				Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
+		this.getMdht().setTitle(Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION
+				.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
 	}
 
 	/**
 	 * Instantiates a new immunization section.
-	 * 
+	 *
 	 * @param immunizationSection
-	 *            the immunization section
+	 *          the immunization section
 	 */
-	protected ImmunizationSection(org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection) {
+	protected ImmunizationSection(
+			org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection) {
 		super(immunizationSection, null, null);
 	}
 
 	/**
-	 * Adds the immunization to the section. If the text is created in the
-	 * section based on the immunization object the level3 obects immunization,
-	 * medicationTargetEntry, commentEntry and criterionEntry will be linked
-	 * with a text reference (If the CommentEntry in immunization has a text it
-	 * will be replaced by the reference)
-	 * 
+	 * Adds the immunization to the section. If the text is created in the section
+	 * based on the immunization object the level3 obects immunization,
+	 * medicationTargetEntry, commentEntry and criterionEntry will be linked with
+	 * a text reference (If the CommentEntry in immunization has a text it will be
+	 * replaced by the reference)
+	 *
 	 * @param immunization
-	 *            the immunization
+	 *          the immunization
 	 * @param createSectionText
-	 *            if the section text should be created
+	 *          if the section text should be created
 	 */
-	public void addImmunization(org.ehealth_connector.cda.ch.vacd.Immunization immunization, boolean createSectionText) {
+	public void addImmunization(org.ehealth_connector.cda.ch.vacd.Immunization immunization,
+			boolean createSectionText) {
 		if (immunization != null) {
 			getMdht().addSubstanceAdministration(immunization.getMdht());
 		}
@@ -96,7 +99,7 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Gets the default section table.
-	 * 
+	 *
 	 * @return the table
 	 */
 	public String getTable() {
@@ -109,11 +112,11 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * adds a section the table for an immunization.
-	 * 
+	 *
 	 * @param immunization
-	 *            the immunization
+	 *          the immunization
 	 * @param contendIdPrefix
-	 *            the contend id prefix
+	 *          the contend id prefix
 	 * @return the table row
 	 */
 	public String getTableRow(Immunization immunization, String contendIdPrefix) {
@@ -124,7 +127,8 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 
 		String contentId = contendIdPrefix + colIndex++;
 		stringBuffer.append("<content ID=\"" + contentId + "\">");
-		if ((immunization.getConsumable() != null) && (immunization.getConsumable().getTradeName() != null)) {
+		if ((immunization.getConsumable() != null)
+				&& (immunization.getConsumable().getTradeName() != null)) {
 			stringBuffer.append(immunization.getConsumable().getTradeName());
 		}
 		immunization.setTextReference("#" + contentId);
@@ -133,13 +137,15 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 
 		stringBuffer.append("</td><td>");
 		// Hersteller
-		if ((immunization.getConsumable() != null) && (immunization.getConsumable().getManufacturer() != null)
+		if ((immunization.getConsumable() != null)
+				&& (immunization.getConsumable().getManufacturer() != null)
 				&& (immunization.getConsumable().getManufacturer().getName() != null)) {
 			stringBuffer.append(immunization.getConsumable().getManufacturer().getName());
 		}
 		stringBuffer.append("</td><td>");
 		// Lot-Nr
-		if ((immunization.getConsumable() != null) && (immunization.getConsumable().getManufacturer() != null)
+		if ((immunization.getConsumable() != null)
+				&& (immunization.getConsumable().getManufacturer() != null)
 				&& (immunization.getConsumable().getLotNr() != null)) {
 			stringBuffer.append(immunization.getConsumable().getLotNr());
 		}
@@ -150,7 +156,8 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 		}
 		stringBuffer.append("</td><td>");
 		// Impfung gegen
-		final List<MedicationTargetEntry> medicationTargetEntries = immunization.getMedicationTargetEntries();
+		final List<MedicationTargetEntry> medicationTargetEntries = immunization
+				.getMedicationTargetEntries();
 		if (medicationTargetEntries != null) {
 			int i = 0;
 
@@ -184,7 +191,8 @@ public class ImmunizationSection extends MdhtFacade<org.openhealthtools.mdht.uml
 		}
 		stringBuffer.append("</td><td>");
 		// EKIF Empfehlungskategorie
-		if ((immunization.getCriterionEntry() != null) && (immunization.getCriterionEntry().getRecCategory() != null)) {
+		if ((immunization.getCriterionEntry() != null)
+				&& (immunization.getCriterionEntry().getRecCategory() != null)) {
 			final CdaChVacdRecCategories recCategory = immunization.getCriterionEntry().getRecCategory();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");

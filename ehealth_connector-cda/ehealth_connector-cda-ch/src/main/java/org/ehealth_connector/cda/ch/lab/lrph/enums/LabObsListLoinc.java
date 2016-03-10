@@ -17,16 +17,12 @@ public enum LabObsListLoinc {
 	 * <div class="en">Abnormal Prion Protein [Presence] in Brain by Electron
 	 * microscopy</div>
 	 */
-	ABNORMAL_PRION_PROTEIN_PRESENCE_IN_BRAIN_BY_ELECTRON_MICROSCOPY("23381-7",
-			"Abnormal Prion Protein [Presence] in Brain by Electron microscopy", "18725-2", "none",
-			"20130527", ""),
+	ABNORMAL_PRION_PROTEIN_PRESENCE_IN_BRAIN_BY_ELECTRON_MICROSCOPY("23381-7", "Abnormal Prion Protein [Presence] in Brain by Electron microscopy", "18725-2", "none", "20130527", ""),
 	/**
 	 * <div class="en">Brucella abortus Ab [Presence] in Cerebral spinal
 	 * fluid</div>
 	 */
-	BRUCELLA_ABORTUS_AB_PRESENCE_IN_CEREBRAL_SPINAL_FLUID("49196-9",
-			"Brucella abortus Ab [Presence] in Cerebral spinal fluid", "18725-2", "initials", "20130527",
-			"");
+	BRUCELLA_ABORTUS_AB_PRESENCE_IN_CEREBRAL_SPINAL_FLUID("49196-9", "Brucella abortus Ab [Presence] in Cerebral spinal fluid", "18725-2", "initials", "20130527", "");
 
 	/**
 	 * <div class="en">Code for Abnormal Prion Protein [Presence] in Brain by
