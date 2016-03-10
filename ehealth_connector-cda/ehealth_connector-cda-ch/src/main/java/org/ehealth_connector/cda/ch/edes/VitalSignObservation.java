@@ -40,22 +40,22 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a vital sign observation</div> <div
-	 *          class="de">Code für ein Vitalzeichen</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Code for a vital sign observation</div>
+	 *          <div class="de">Code für ein Vitalzeichen</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *          <div class="en">clinically or operationally relevant time</div>
-	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param interpretation
-	 *          <div class="de">Beurteilung des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beurteilung des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param targetSite
-	 *          <div class="de">Anatomische Lage des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Anatomische Lage des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime,
 			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
@@ -72,16 +72,16 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a vital sign observation</div> <div
-	 *          class="de">Code für ein Vitalzeichen</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Code for a vital sign observation</div>
+	 *          <div class="de">Code für ein Vitalzeichen</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *          <div class="en">clinically or operationally relevant time</div>
-	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
 		this(code, effectiveTime, null, null, value);
@@ -91,11 +91,12 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param observation
-	 *          <div class="en">Existing vital sign observation</div> <div
-	 *          class="de">Existierende vital sign observation</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="en">Existing vital sign observation</div>
+	 *          <div class="de">Existierende vital sign observation</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public VitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
+	public VitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
 		mVitalSignObservation = observation;
 	}
 
@@ -103,22 +104,22 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a vital sign observation</div> <div
-	 *          class="de">Code für ein Vitalzeichen</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Code for a vital sign observation</div>
+	 *          <div class="de">Code für ein Vitalzeichen</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *          <div class="en">clinically or operationally relevant time</div>
-	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param interpretation
-	 *          <div class="de">Beurteilung des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beurteilung des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param targetSite
-	 *          <div class="de">Anatomische Lage des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Anatomische Lage des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(VitalSignCodes code, Date effectiveTime,
 			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
@@ -129,39 +130,40 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a vital sign observation</div> <div
-	 *          class="de">Code für ein Vitalzeichen</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *          <div class="en">Code for a vital sign observation</div>
+	 *          <div class="de">Code für ein Vitalzeichen</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param effectiveTime
 	 *          <div class="en">clinically or operationally relevant time</div>
-	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">klinisch relevantes Datum und Uhrzeit</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(VitalSignCodes code, Date effectiveTime, Value value) {
 		this(code.getCode(), effectiveTime, value);
+	}
+
+	@Override
+	protected void initMdht() {
+		super.initMdht();
+		Identificator id = new Identificator(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
+		mVitalSignObservation.getTemplateIds().add(id.getIi());
 	}
 
 	/**
 	 * Set a new interpretations of the vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="de">Beurteilung des Resultats</div> <div
-	 *          class="fr"></div> <div class="it"></div>
+	 *          <div class="de">Beurteilung des Resultats</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
 		if (code != null) {
 			mVitalSignObservation.getInterpretationCodes().clear();
 			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
 		}
-	}
-
-	protected void initMdht() {
-		super.initMdht();
-		Identificator id = new Identificator(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
-		mVitalSignObservation.getTemplateIds().add(id.getIi());
 	}
 
 }

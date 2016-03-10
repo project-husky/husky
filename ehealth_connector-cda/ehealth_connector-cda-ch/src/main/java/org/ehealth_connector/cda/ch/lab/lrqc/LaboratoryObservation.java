@@ -21,7 +21,7 @@ public class LaboratoryObservation
 	public LaboratoryObservation(LabObsList code, ObservationInterpretation interpretationCode) {
 		this();
 		setCode(code);
-		setInterpretationCode(interpretationCode);
+		addInterpretationCode(interpretationCode);
 	}
 
 	public LaboratoryObservation(

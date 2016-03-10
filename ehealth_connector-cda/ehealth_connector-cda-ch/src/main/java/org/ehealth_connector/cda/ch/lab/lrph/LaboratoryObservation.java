@@ -32,7 +32,7 @@ public class LaboratoryObservation
 			Date effectiveTime) {
 		this();
 		setCode(code);
-		setInterpretationCode(interpretationCode);
+		addInterpretationCode(interpretationCode);
 		setEffectiveTime(effectiveTime);
 	}
 
@@ -54,7 +54,7 @@ public class LaboratoryObservation
 			Date effectiveTime) {
 		this();
 		setCode(code);
-		setInterpretationCode(interpretationCode);
+		addInterpretationCode(interpretationCode);
 		setEffectiveTime(effectiveTime);
 	}
 

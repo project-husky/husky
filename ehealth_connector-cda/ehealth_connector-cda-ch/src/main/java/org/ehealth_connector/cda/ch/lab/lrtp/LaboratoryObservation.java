@@ -1,16 +1,9 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import org.ehealth_connector.cda.ch.lab.SoasInfoEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
-import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
-import org.openhealthtools.mdht.uml.cda.Observation;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
@@ -37,7 +30,7 @@ public class LaboratoryObservation
 			Date effectiveTime) {
 		this();
 		setCode(code);
-		setInterpretationCode(interpretationCode);
+		addInterpretationCode(interpretationCode);
 		setEffectiveTime(effectiveTime);
 	}
 
@@ -46,54 +39,38 @@ public class LaboratoryObservation
 		super(mdht);
 	}
 
-	/**
-	 * Convenience function to add the two required SoasInfoEntries.
-	 *
-	 * @param centerSpecificAvoid
-	 *          <div class="en">Center specific Avoid=true means that a
-	 *          transplantation should not be performed, because of the
-	 *          HLA-Antibody even if the MFI-value is in the acceptable
-	 *          range.</div><div class="de"> Center specific Avoid=true
-	 *          bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
-	 *          Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
-	 *          noch im akzeptablen Bereich liegt.</div>
-	 * @param previousTx
-	 *          <div class="en">Prev-Tx=true means that the HLA-antibody has been
-	 *          build due to a former transplantation.</div>
-	 *          <div class="de">Prev-Tx=true bedeutet, dass der betreffende
-	 *          HLA-Antikörper aufgrund einer früheren Transplantation gebildet
-	 *          wurde.</div>
-	 */
-	public void addSoasInfoEnties(boolean centerSpecificAvoid, boolean previousTx) {
-		SoasInfoEntry csa = new SoasInfoEntry(centerSpecificAvoid);
-		SoasInfoEntry ptx = new SoasInfoEntry();
-		ptx.setPreviousTx(previousTx);
-
-		addSoasInfoEntry(csa);
-		addSoasInfoEntry(ptx);
-	}
-
-	public void addSoasInfoEntry(SoasInfoEntry entry) {
-		getMdht().addObservation(entry.copy());
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-				x_ActRelationshipEntryRelationship.COMP);
-	}
-
+	// /**
+	// * Convenience function to add the two required SoasInfoEntries.
+	// *
+	// * @param centerSpecificAvoid
+	// * <div class="en">Center specific Avoid=true means that a
+	// * transplantation should not be performed, because of the
+	// * HLA-Antibody even if the MFI-value is in the acceptable
+	// * range.</div><div class="de"> Center specific Avoid=true
+	// * bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
+	// * Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
+	// * noch im akzeptablen Bereich liegt.</div>
+	// * @param previousTx
+	// * <div class="en">Prev-Tx=true means that the HLA-antibody has been
+	// * build due to a former transplantation.</div>
+	// * <div class="de">Prev-Tx=true bedeutet, dass der betreffende
+	// * HLA-Antikörper aufgrund einer früheren Transplantation gebildet
+	// * wurde.</div>
+	// */
+	// public void addSoasInfoEnties(boolean centerSpecificAvoid, boolean
+	// previousTx) {
+	// SoasInfoEntry csa = new SoasInfoEntry(centerSpecificAvoid);
+	// SoasInfoEntry ptx = new SoasInfoEntry();
+	// ptx.setPreviousTx(previousTx);
 	//
-	// private byte findSoasInfoEntryIndex(Code code) {
-	// if (this.getSoasInfoEnties() != null &&
-	// !this.getSoasInfoEnties().isEmpty()) {
-	// // Check if this element is the CenterSpecificAvoid
-	// // If so, replace with the new one
-	// byte index = 0;
-	// for (SoasInfoEntry entry : getSoasInfoEnties()) {
-	// if (code.equals(entry.getCode())) {
-	// return index;
+	// addSoasInfoEntry(csa);
+	// addSoasInfoEntry(ptx);
 	// }
-	// index++;
-	// }
-	// }
-	// return -1;
+
+	// public void addSoasInfoEntry(SoasInfoEntry entry) {
+	// getMdht().addObservation(entry.copy());
+	// CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+	// x_ActRelationshipEntryRelationship.COMP);
 	// }
 
 	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList getCodeAsLoincEnum() {
@@ -103,25 +80,21 @@ public class LaboratoryObservation
 		return null;
 	}
 
-	// public boolean getSoasInfoCenterSpecificAvoid() {
-	// // Problem: Was ist, wenn das Element nicht da ist? Bei einem boolean kann
-	// // man kein null zurückgeben...
+	// public List<SoasInfoEntry> getSoasInfoEnties() {
+	// List<SoasInfoEntry> sl = new ArrayList<SoasInfoEntry>();
+	// for (Observation o : getMdht().getObservations()) {
+	// // We have to check the templateID, because MDHT does not recognize the
+	// // swiss extension
+	// for (II id : o.getTemplateIds()) {
+	// if (id.getRoot().equals("2.16.756.5.30.1.1.1.1.3.4.1")
+	// && id.getExtension().equals("CDA-CH.LRTP.SOASInfo")) {
+	// sl.add(new
+	// SoasInfoEntry((org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry) o));
 	// }
-
-	public List<SoasInfoEntry> getSoasInfoEnties() {
-		List<SoasInfoEntry> sl = new ArrayList<SoasInfoEntry>();
-		for (Observation o : getMdht().getObservations()) {
-			// We have to check the templateID, because MDHT does not recognize the
-			// swiss extension
-			for (II id : o.getTemplateIds()) {
-				if (id.getRoot().equals("2.16.756.5.30.1.1.1.1.3.4.1")
-						&& id.getExtension().equals("CDA-CH.LRTP.SOASInfo")) {
-					sl.add(new SoasInfoEntry((org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry) o));
-				}
-			}
-		}
-		return sl;
-	}
+	// }
+	// }
+	// return sl;
+	// }
 
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList code) {
 		getMdht().setCode(code.getCD());

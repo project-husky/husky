@@ -31,6 +31,8 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -307,6 +309,59 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts2);
 		assertEquals(ts2, doc.getNarrativeTextSectionLaboratorySpeciality());
+	}
+
+	@Test
+	public void testPrivayFilterHiv() {
+		// Create a new Lrph document and add a record target to it
+		CdaChLrph doc = new CdaChLrph();
+		doc.setPatient(patient1);
+
+		// Set the first givne name to a fixed one
+		doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames().get(0)
+				.getGivens().clear();
+		ENXP enxp = DatatypesFactory.eINSTANCE.createENXP();
+		enxp.addText("Xi");
+		doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames().get(0)
+				.getGivens().add(enxp);
+
+		// Create a Laboratory Observation with a Code that has the privacyFilter =
+		// initials
+		LaboratoryObservation lo = new LaboratoryObservation(LabObsListSnomed.BRUCELLA,
+				ObservationInterpretation.POS, new Date());
+		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer(StatusCode.COMPLETED, lo);
+		doc.addLaboratoryBatteryOrganizer(lbo, null);
+
+		// Apply the Privacy Filter and check the results
+		doc.applyPrivacyFilterHiv();
+
+		// Document document = doc.getDocument();
+
+		// One Given Name with right length
+		assertEquals(2, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames()
+				.get(0).getGivens().get(0).getText().length());
+		assertEquals(1, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames()
+				.get(0).getGivens().size());
+		assertEquals("X2", doc.getPatient().getName().getGivenNames());
+		// Family Name MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getPatient().getNames().get(0).getFamilies().get(0).getNullFlavor());
+		// Street Name MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole().getAddrs()
+				.get(0).getStreetNames().get(0).getNullFlavor());
+		// City equal
+		assertEquals(patient1.getAddress().getCity(), doc.getPatient().getAddress().getCity());
+		// Birth time equal
+		assertEquals(patient1.getBirthday(), doc.getPatient().getBirthday());
+		// Gender equal
+		assertEquals(patient1.getAdministrativeGenderCode(),
+				doc.getPatient().getAdministrativeGenderCode());
+		// Telecom MSK
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getTelecoms().get(0).getNullFlavor());
+		// ID MSK
+		assertEquals(NullFlavor.MSK,
+				doc.getMdht().getRecordTargets().get(0).getPatientRole().getIds().get(0).getNullFlavor());
 	}
 
 	@Test

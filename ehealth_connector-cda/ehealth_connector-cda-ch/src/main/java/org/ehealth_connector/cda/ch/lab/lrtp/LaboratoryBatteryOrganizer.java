@@ -1,6 +1,7 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
@@ -16,10 +17,20 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 *
 	 * @param observation
 	 *          the observation
+	 * @param effectiveTime
+	 *          <div class="en">the point in time of the measurement. If unknown,
+	 *          effectiveTime has to be declared with nullFlavor.</div>
+	 *          <div class="de">Zeitpunkt der Messung. Ist dieser unbekannt, MUSS
+	 *          effectiveTime mit nullFlavor angegeben werden. nullFlavor ist nur
+	 *          erlaubt, wenn der Organizer ausschliesslich Körpergrösse oder
+	 *          Gewicht enthält. Wenn der Organizer mindestens eine andere
+	 *          Beobachtung enthält, muss ein Wert angegeben werden.</div>
+	 *
 	 */
-	public LaboratoryBatteryOrganizer(LaboratoryObservation observation) {
+	public LaboratoryBatteryOrganizer(LaboratoryObservation observation, Date effectiveTime) {
 		this();
 		addLaboratoryObservation(observation);
+		setEffectiveTime(effectiveTime);
 	}
 
 	public LaboratoryBatteryOrganizer(

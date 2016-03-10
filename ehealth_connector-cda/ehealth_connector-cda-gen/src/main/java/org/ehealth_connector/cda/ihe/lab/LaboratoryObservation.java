@@ -39,6 +39,7 @@ import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -77,7 +78,6 @@ public class LaboratoryObservation
 	 */
 	public LaboratoryObservation(Code code, Date dateTimeOfResult, Organization laboratory) {
 		this();
-
 		setCode(code);
 		setEffectiveTime(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
@@ -143,6 +143,26 @@ public class LaboratoryObservation
 	}
 
 	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *          the new interpretation code
+	 */
+	public void addInterpretationCode(Code code) {
+		getMdht().getInterpretationCodes().add(code.getCE());
+	}
+
+	/**
+	 * Sets the interpretation code.
+	 *
+	 * @param code
+	 *          the new interpretation code
+	 */
+	public void addInterpretationCode(ObservationInterpretation code) {
+		getMdht().getInterpretationCodes().add(code.getCE());
+	}
+
+	/**
 	 * Adds a performer
 	 *
 	 * @param performer
@@ -204,6 +224,16 @@ public class LaboratoryObservation
 		return code;
 	}
 
+	// /**
+	// * Gets the text of the comment text element (this is not necessarily the
+	// * comment itself)
+	// *
+	// * @return the comment text
+	// */
+	// public String getCommentText() {
+	// return Util.getCommentText(getMdht().getEntryRelationships());
+	// }
+
 	/**
 	 * Gets the reference to the comment in the level 2 section text (when set).
 	 *
@@ -229,16 +259,6 @@ public class LaboratoryObservation
 			return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 		}
 	}
-
-	// /**
-	// * Gets the text of the comment text element (this is not necessarily the
-	// * comment itself)
-	// *
-	// * @return the comment text
-	// */
-	// public String getCommentText() {
-	// return Util.getCommentText(getMdht().getEntryRelationships());
-	// }
 
 	/**
 	 * <div class="en">Gets the date and time of the performed examination as
@@ -292,19 +312,20 @@ public class LaboratoryObservation
 	 *
 	 * @return the interpretation code
 	 */
-	public String getInterpretationCode() {
-		if (getMdht().getInterpretationCodes().size() > 0) {
-			return getMdht().getInterpretationCodes().get(0).getCode();
-		} else {
-			return null;
+	public ArrayList<String> getInterpretationCodes() {
+		ArrayList<String> icl = new ArrayList<String>();
+		for (CE ic : getMdht().getInterpretationCodes()) {
+			icl.add(ic.getCode());
 		}
+		return icl;
 	}
 
-	public ObservationInterpretation getInterpretationCodeEnum() {
-		if (this.getInterpretationCode() != null) {
-			return ObservationInterpretation.getEnum(this.getInterpretationCode());
+	public List<ObservationInterpretation> getInterpretationCodesAsEnum() {
+		ArrayList<ObservationInterpretation> icl = new ArrayList<ObservationInterpretation>();
+		for (CE ic : getMdht().getInterpretationCodes()) {
+			icl.add(ObservationInterpretation.getEnum(ic.getCode()));
 		}
-		return null;
+		return icl;
 	}
 
 	/**
@@ -337,7 +358,7 @@ public class LaboratoryObservation
 	}
 
 	/**
-	 * Sets the code.
+	 * Adds the code.
 	 *
 	 * @param code
 	 *          the new code
@@ -363,28 +384,6 @@ public class LaboratoryObservation
 				.get(getMdht().getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
-	}
-
-	/**
-	 * Sets the interpretation code.
-	 *
-	 * @param code
-	 *          the new interpretation code
-	 */
-	public void setInterpretationCode(Code code) {
-		getMdht().getInterpretationCodes().clear();
-		getMdht().getInterpretationCodes().add(code.getCE());
-	}
-
-	/**
-	 * Sets the interpretation code.
-	 *
-	 * @param code
-	 *          the new interpretation code
-	 */
-	public void setInterpretationCode(ObservationInterpretation code) {
-		getMdht().getInterpretationCodes().clear();
-		getMdht().getInterpretationCodes().add(code.getCE());
 	}
 
 	/**

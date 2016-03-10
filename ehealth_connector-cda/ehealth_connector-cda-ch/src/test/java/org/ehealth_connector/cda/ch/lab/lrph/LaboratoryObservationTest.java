@@ -62,8 +62,9 @@ public class LaboratoryObservationTest extends TestUtils {
 		// setter
 		observation.setEffectiveTime(startDate);
 		assertEquals(startDate, observation.getEffectiveTime());
-		observation.setInterpretationCode(ObservationInterpretation.ABNORMAL);
-		assertEquals(ObservationInterpretation.ABNORMAL, observation.getInterpretationCodeEnum());
+		observation.addInterpretationCode(ObservationInterpretation.ABNORMAL);
+		assertEquals(ObservationInterpretation.ABNORMAL,
+				observation.getInterpretationCodesAsEnum().get(0));
 		observation.setLaboratory(organization1, endDate);
 		assertTrue(isEqual(organization1, observation.getLaboratory()));
 		assertEquals(endDate, DateUtil.parseIVL_TSVDateTimeValue(

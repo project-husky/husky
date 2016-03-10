@@ -1,8 +1,10 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
@@ -38,5 +40,9 @@ public class VitalSignsObservationTest extends TestUtils {
 		assertEquals(v.copyMdhtPhysicalQuantity().getValue(),
 				o.getValue().copyMdhtPhysicalQuantity().getValue());
 		assertEquals("182.0", o.getValue().getPhysicalQuantityValue());
+
+		// Section Annotation Comment Entry
+		o.addCommentEntry(new SectionAnnotationCommentEntry());
+		assertFalse(o.getCommentEntries().isEmpty());
 	}
 }

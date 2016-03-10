@@ -89,7 +89,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		lo.setCode(LabObsList.A11_HLA_ANTIGENE);
 		SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
 		lo.addCommentEntry(sac);
-		lo.addSoasInfoEntry(sie);
+		// lo.addSoasInfoEntry(sie);
 		lbo.addLaboratoryObservation(lo);
 		spa.addLaboratoryBatteryOrganizer(lbo);
 		lrd.setSpecimenAct(spa);
@@ -117,8 +117,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		// LRTP specific
-		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
-				.getSoasInfoEnties().get(0));
+		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
+		// .getSoasInfoEnties().get(0));
 		assertNotNull(cda.getVitalSignsOrganizer());
 		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
 		assertNotNull(cda.getBloodGroupObservation());
@@ -141,8 +141,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
-		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
-				.getSoasInfoEnties().get(0));
+		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
+		// .getSoasInfoEnties().get(0));
 		assertNotNull(cda.getVitalSignsOrganizer());
 		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
 		assertNotNull(cda.getBloodGroupObservation());

@@ -1,6 +1,5 @@
 package org.ehealth_connector.cda;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import org.ehealth_connector.common.enums.StatusCode;
@@ -28,11 +27,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 	}
 
 	public void setEffectiveTime(Date date) {
-		try {
-			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(date));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 
 	public void setStatusCode(StatusCode statusCode) {

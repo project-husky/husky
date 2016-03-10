@@ -1,14 +1,21 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class VitalSignsObservation extends AbstractVitalSignObservation {
 
@@ -45,6 +52,14 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 		super.mVitalSignObservation.getInterpretationCodes().clear();
 	}
 
+	public void addCommentEntry(SectionAnnotationCommentEntry entry) {
+		mVitalSignObservation.addAct(entry.getMdht());
+		int nb = mVitalSignObservation.getEntryRelationships().size() - 1;
+		mVitalSignObservation.getEntryRelationships().get(nb)
+				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		mVitalSignObservation.getEntryRelationships().get(nb).setInversionInd(true);
+	}
+
 	// Swiss specific VitalSignObserations
 	// Es MUSS ein LOINC Code aus dem Value Set CDA-CH-LRTP vitalSignList
 	// verwendet werden (siehe Kapitel 5.6.5 Liste der Vitalzeichen“ auf Seite 52)
@@ -53,6 +68,21 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 			return VitalSignList.getEnum(getCode().getCode());
 		}
 		return null;
+	}
+
+	public List<SectionAnnotationCommentEntry> getCommentEntries() {
+		ArrayList<SectionAnnotationCommentEntry> sacl = new ArrayList<SectionAnnotationCommentEntry>();
+		for (EntryRelationship er : mVitalSignObservation.getEntryRelationships()) {
+			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+					&& er.getInversionInd().equals(true)) {
+				if (er.getAct().getTemplateIds().get(0).getRoot().equals("2.16.840.1.113883.10.20.1.40")
+						|| er.getAct().getTemplateIds().get(0).getRoot()
+								.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
+					sacl.add(new SectionAnnotationCommentEntry((Comment) er.getAct()));
+				}
+			}
+		}
+		return sacl;
 	}
 
 	public Code getMethodCodeTranslation() {

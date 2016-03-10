@@ -3,6 +3,7 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
@@ -17,11 +18,18 @@ import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.DocumentationOf;
+import org.openhealthtools.mdht.uml.cda.Patient;
+import org.openhealthtools.mdht.uml.cda.PatientRole;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ServiceEvent;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
@@ -90,8 +98,8 @@ public class CdaChLrtp
 			IntendedRecipient recipient, String soasCode) {
 		this(languageCode);
 		// set SOAS ID
-		patient.getIds().clear();
-		patient.getIds().add(new Identificator("2.16.756.5.30.1.129.1.1.1", soasCode));
+		patient.getMdhtPatientRole().getIds().clear();
+		patient.addId(new Identificator("2.16.756.5.30.1.129.1.1.1", soasCode));
 		setPatient(patient);
 		setEmtpyCustodian();
 		addAuthor(author);
@@ -200,14 +208,107 @@ public class CdaChLrtp
 		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
 
-	// Convenience Function
-	// - Scan Observations for pseudonymization / anonymization related
-	// NotifiableObservationLoinc or NotifiableObservationSnomed
-	// - If such an element exists, use getPrivacyFilter() to determine
-	// anonymization function
-	// - Apply Anonymization function
+	/**
+	 * Applies the privacy filter to all record target elements.
+	 *
+	 * <table summary="Elements which will be kept">
+	 * <thead>
+	 * <tr>
+	 * <th>Element name (english)</th>
+	 * <th>Element name (german)</th>
+	 * <th>CDA element</th>
+	 * </tr>
+	 * </thead><tbody>
+	 * <tr>
+	 * <td>Familiy name</td>
+	 * <td>Nachname</td>
+	 * <td>recordTarget/patientRole/patient/name[0]/family</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Given name</td>
+	 * <td>Vorname</td>
+	 * <td>recordTarget/patientRole/patient/name[0]/given</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Date of birth</td>
+	 * <td>Geburtsdatum</td>
+	 * <td>recordTarget/patientRole/patient/birthTime</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Gender</td>
+	 * <td>Geschlecht</td>
+	 * <td>recordTarget/patientRole/patient/administrativeGenderCode</td>
+	 * </tr>
+	 * </tbody>
+	 * </table>
+	 */
 	public void applyPrivacyFilter() {
+		byte index = 0;
+		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
+			// Get original elements
+			PatientRole originalPr = null;
+			if (originalRt.getPatientRole() != null) {
+				originalPr = originalRt.getPatientRole();
+			}
+			Patient originalP = null;
+			if (originalPr != null && originalPr.getPatient() != null) {
+				originalP = originalPr.getPatient();
+			}
 
+			// Initialize new elements
+			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			processedRt.setPatientRole(processedPr);
+			processedPr.setPatient(processedP);
+
+			// Copy all necessary elements from the original to the processed
+			// recordTarget
+			// Patient Name
+			if (originalP != null && !originalP.getNames().isEmpty()) {
+				if (originalP.getNames().get(0) != null) {
+					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					pn.getGivens().addAll(originalP.getNames().get(0).getGivens());
+					pn.getFamilies().addAll(originalP.getNames().get(0).getFamilies());
+					processedP.getNames().add(pn);
+				}
+			}
+
+			// Birth time
+			if (originalP != null && originalP.getBirthTime() != null) {
+				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
+			}
+
+			// Gender
+			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+				processedP
+						.setAdministrativeGenderCode(EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
+			}
+
+			// Addr MSK
+			if (originalPr != null && !originalPr.getAddrs().isEmpty()) {
+				AD ad = DatatypesFactory.eINSTANCE.createAD();
+				ad.setNullFlavor(NullFlavor.MSK);
+				processedPr.getAddrs().add(ad);
+			}
+
+			// Telecom (MSK)
+			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			tel.setNullFlavor(NullFlavor.MSK);
+			processedPr.getTelecoms().add(tel);
+
+			// SOAS ID
+			if (originalPr != null && !originalPr.getIds().isEmpty()) {
+				for (II ii : originalPr.getIds()) {
+					if (ii.getRoot().equals("2.16.756.5.30.1.129.1.1.1")) {
+						processedPr.getIds().add(EcoreUtil.copy(ii));
+					}
+				}
+			}
+
+			getMdht().getRecordTargets().set(index, processedRt);
+			index++;
+		}
 	}
 
 	/**

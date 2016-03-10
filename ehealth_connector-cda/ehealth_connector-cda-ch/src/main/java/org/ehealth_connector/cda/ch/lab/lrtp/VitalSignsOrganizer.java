@@ -19,25 +19,6 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	}
 
 	/**
-	 * Instantiates the class with the required elements. An ID with the CdaChLrtp
-	 * root and a generated extension will be added automatically.
-	 *
-	 * @param effectiveTime
-	 *          point in time of the measurement.
-	 * @param author
-	 *          the author
-	 * @param observation
-	 *          the observation
-	 */
-	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignsObservation observation) {
-		this();
-		setEffectiveTime(effectiveTime);
-		addAuthor(author);
-		addVitalSignsObservation(observation);
-		addId(null);
-	}
-
-	/**
 	 * Instantiates the class with the required elements.
 	 *
 	 * @param effectiveTime
@@ -55,6 +36,22 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 		setEffectiveTime(effectiveTime);
 		addAuthor(author);
 		addVitalSignsObservation(observation);
+	}
+
+	/**
+	 * Instantiates the class with the required elements. An ID with the CdaChLrtp
+	 * root and a generated extension will be added automatically.
+	 *
+	 * @param effectiveTime
+	 *          point in time of the measurement.
+	 * @param observation
+	 *          the observation
+	 */
+	public VitalSignsOrganizer(Date effectiveTime, VitalSignsObservation observation) {
+		this();
+		setEffectiveTime(effectiveTime);
+		addVitalSignsObservation(observation);
+		addId(null);
 	}
 
 	public VitalSignsOrganizer(org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer mdht) {

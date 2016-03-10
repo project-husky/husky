@@ -33,14 +33,11 @@ public class BloodGroupObservation
 	 *          blood group
 	 * @param value
 	 *          the BloodGroup value
-	 * @param author
-	 *          the author
 	 */
-	public BloodGroupObservation(String referenceValue, BloodGroup value, Author author) {
+	public BloodGroupObservation(String referenceValue, BloodGroup value) {
 		this();
 		setContentIdReference(referenceValue);
 		setValue(value);
-		addAuthor(author);
 	}
 
 	public void addAuthor(Author author) {
