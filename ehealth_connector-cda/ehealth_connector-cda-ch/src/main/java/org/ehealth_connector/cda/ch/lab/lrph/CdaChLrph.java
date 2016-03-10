@@ -1,5 +1,6 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -490,22 +491,25 @@ public class CdaChLrph
 
 	/**
 	 * Convenience function to return all LaboratoryBatteryOrganizers directly
-	 * from the underlying
+	 * from all underlying
 	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
 	 * element.
 	 *
-	 * @return a list of LaboratoryBatteryOrganizers. returns null, if this list
-	 *         does not exist.
+	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
-			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-					.getSpecimenAct().getLaboratoryBatteryOrganizers();
+		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
+		if (lss != null) {
+			LaboratoryReportDataProcessingEntry lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+			if (lrdpe != null) {
+				SpecimenAct se = lrdpe.getSpecimenAct();
+				if (se != null) {
+					lbol.addAll(se.getLaboratoryBatteryOrganizers());
+				}
+			}
 		}
-		return null;
+		return lbol;
 	}
 
 	/**

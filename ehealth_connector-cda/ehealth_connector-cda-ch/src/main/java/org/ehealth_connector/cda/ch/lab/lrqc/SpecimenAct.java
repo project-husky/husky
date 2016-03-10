@@ -75,7 +75,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	public void setCode(SpecialtySections code) {
-		getMdht().setCode(code.getCD());
+		getMdht().setCode(code.getCE());
 	}
 
 	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {

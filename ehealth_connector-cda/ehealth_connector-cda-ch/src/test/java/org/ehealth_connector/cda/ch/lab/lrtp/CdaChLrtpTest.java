@@ -101,18 +101,18 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		cda.setVitalSignOrganizer(vso);
 		cda.setBloodGroupObservation(bgo);
 
-		assertNotNull(cda.getLaboratorySpecialtySection());
+		assertNotNull(cda.getLaboratorySpecialtySections());
 		assertNotNull(
-				cda.getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry());
-		assertNotNull(cda.getLaboratorySpecialtySection().get(0)
+				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(
-				cda.getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry()
+				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
-		assertNotNull(cda.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0));
-		assertNotNull(cda.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
@@ -127,18 +127,18 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		log.debug(deserialized);
 		final CdaChLrtp cdaDeserialized = deserializeCda(deserialized);
 
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection());
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry());
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0));
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0));
-		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
 				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
@@ -149,9 +149,9 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 
 		assertTrue(cdaDeserialized != null);
 		assertEquals("Laboratory Specialty Section",
-				cdaDeserialized.getLaboratorySpecialtySection().get(0).getTitle());
+				cdaDeserialized.getLaboratorySpecialtySections().get(0).getTitle());
 		assertTrue(LabObsList.A11_HLA_ANTIGENE.getCode()
-				.equals(cdaDeserialized.getLaboratorySpecialtySection().get(0)
+				.equals(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 						.getCodeAsLoincEnum().getCode()));
@@ -200,7 +200,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		final CdaChLrtp cda = new CdaChLrtp();
 		cda.addLaboratoryBatteryOrganizer(org);
 
-		cda.getLaboratorySpecialtySection().get(0).setTextReference(
+		cda.getLaboratorySpecialtySections().get(0).setTextReference(
 				"<table><tr><td>Dies ist ein Test<content ID=\"TestContentIdRef\">Hier steht der menschenlesbare Text</content></td></tr></table>");
 		Document document = cda.getDocument();
 		xExist(document, "//reference[@value='#TestContentIdRef']");
@@ -214,7 +214,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		// Specialty Section
 		LaboratorySpecialtySection lss = new LaboratorySpecialtySection();
 		doc.addLaboratorySpecialtySection(lss);
-		assertNotNull(doc.getLaboratorySpecialtySection());
+		assertNotNull(doc.getLaboratorySpecialtySections());
 		Document document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 

@@ -138,13 +138,13 @@ public enum SpecialtySections {
 	* <div class="en">Identifier of the Code System</div>
 	* <div class="de">Identifikator für das Code System</div>
 	*/
-	public static final String CODE_SYSTEM_OID="2.16.756.5.30.1.144.1.2.2016";
+	public static final String CODE_SYSTEM_OID="2.16.840.1.113883.6.1";
 
 	/**
 	* <div class="en">Name of the Code System</div>
 	* <div class="de">Name des Codes Systems</div>
 	*/
-	public static final String CODE_SYSTEM_NAME="qc-repGroup";
+	public static final String CODE_SYSTEM_NAME="LOINC";
 
 
 	/**
@@ -202,7 +202,7 @@ public enum SpecialtySections {
 	* @return <div class="en">the code</div>
 	*/
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -212,12 +212,12 @@ public enum SpecialtySections {
 	*
 	* @return <div class="en">The MDHT Code</div>
 	*/
-	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM_OID);
-		cd.setCode(code);
-		cd.setDisplayName(displayName);
-		return cd;
+	public CE getCE() {
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
 	/**

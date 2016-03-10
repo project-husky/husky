@@ -20,7 +20,7 @@ public class AbstractLaboratoryReportTest extends TestUtils {
 		final Document document = cda.getDocument();
 
 		// realmCode
-		XPathExpression expr = xpath.compile("//realmCode[@code='CH']");
+		XPathExpression expr = xpath.compile("//realmCode[@code='CHE']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

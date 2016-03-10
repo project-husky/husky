@@ -18,6 +18,7 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
@@ -28,11 +29,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		extends AbstractCdaCh<EClinicalDocument> {
 
 	protected AbstractLaboratoryReport(EClinicalDocument doc) {
-		this(doc, null, null, null);
+		super(doc);
 	}
 
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode) {
-		this(doc, languageCode, null, null);
+		super(doc, languageCode);
 	}
 
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
@@ -45,6 +46,12 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			this.setLanguageCode(languageCode);
 		}
 		setTitle(getSpecialitySectionTitle());
+		initCda();
+		// Fix RealmCode
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode("CHE");
+		getDoc().getRealmCodes().clear();
+		getDoc().getRealmCodes().add(cs);
 	}
 
 	public void addIntendedRecipient(IntendedRecipient recipient) {

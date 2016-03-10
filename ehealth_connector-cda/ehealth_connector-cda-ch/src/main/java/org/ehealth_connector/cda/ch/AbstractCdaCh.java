@@ -44,10 +44,14 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation
+	 *          the CDA-CH Object in its MDHT representation
 	 */
 	public AbstractCdaCh(EClinicalDocument doc) {
 		super(doc);
+	}
+
+	public AbstractCdaCh(EClinicalDocument doc, LanguageCode languageCode) {
+		super(doc, languageCode);
 	}
 
 	/**
@@ -58,13 +62,13 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation
+	 *          the CDA-CH Object in its MDHT representation
 	 * @param stylesheet
-	 *            the stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *          the stylesheet for the document (e.g.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 * @param css
-	 *            the Cascasing stylesheet for the document (e.g.
-	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *          the Cascasing stylesheet for the document (e.g.
+	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
 	public AbstractCdaCh(EClinicalDocument doc, String stylesheet, String css) {
 		super(doc, stylesheet, css);

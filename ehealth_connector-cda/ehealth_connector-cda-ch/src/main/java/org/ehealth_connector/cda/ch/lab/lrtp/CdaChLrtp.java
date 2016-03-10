@@ -25,6 +25,7 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ServiceEvent;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
@@ -120,6 +121,13 @@ public class CdaChLrtp
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
+		// set the fixed laboratory Code
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("11502-2");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("LABORATORY REPORT.TOTAL");
+		getMdht().setCode(ce);
 	}
 
 	/**
@@ -154,7 +162,10 @@ public class CdaChLrtp
 
 	/**
 	 * Convenience function to add a Laboratory Battery Organizer and create the
-	 * necessary elements.
+	 * necessary elements. If these elements already exists, the Battery will be
+	 * added to new Laboratory Specialty Section. If you want to add the Battery
+	 * to an existing SpecialtySection, please use the according function of the
+	 * SpecimenAct Class.
 	 *
 	 * These elements are: LaboratorySpecialtySection (section code is derived
 	 * automatically from the first LaboratoryObservation enum)
@@ -177,7 +188,6 @@ public class CdaChLrtp
 
 		if (sectionCode != null) {
 			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode, getLanguageCode());
-			getMdht().setCode(sectionCode.getCE());
 		} else {
 			laboratorySpecialtySection = new LaboratorySpecialtySection();
 		}
@@ -185,9 +195,13 @@ public class CdaChLrtp
 		lrdpe = new LaboratoryReportDataProcessingEntry();
 
 		SpecimenAct se;
-		se = new SpecimenAct();
-		if (sectionCode != null) {
-			se.setCode(sectionCode);
+		if (lrdpe.getSpecimenAct() == null) {
+			se = new SpecimenAct();
+			if (sectionCode != null) {
+				se.setCode(sectionCode);
+			}
+		} else {
+			se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
 
 		se.addLaboratoryBatteryOrganizer(organizer);
@@ -364,22 +378,24 @@ public class CdaChLrtp
 
 	/**
 	 * Convenience function to return all LaboratoryBatteryOrganizers directly
-	 * from the underlying
+	 * from all underlying
 	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
-	 * element.
+	 * elements (even if they reside in a different SpecialtySection).
 	 *
-	 * @return a list of LaboratoryBatteryOrganizers. returns null, if this list
-	 *         does not exist.
+	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
-			return getLaboratorySpecialtySection().get(0).getLaboratoryReportDataProcessingEntry()
-					.getSpecimenAct().getLaboratoryBatteryOrganizers();
+		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		for (LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
+			LaboratoryReportDataProcessingEntry lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+			if (lrdpe != null) {
+				SpecimenAct se = lrdpe.getSpecimenAct();
+				if (se != null) {
+					lbol.addAll(se.getLaboratoryBatteryOrganizers());
+				}
+			}
 		}
-		return null;
+		return lbol;
 	}
 
 	/**
@@ -387,7 +403,7 @@ public class CdaChLrtp
 	 *
 	 * @return the laboratory specialty section
 	 */
-	public List<LaboratorySpecialtySection> getLaboratorySpecialtySection() {
+	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
 		List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
 		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
 				.getLaboratorySpecialtySections()) {
@@ -437,6 +453,24 @@ public class CdaChLrtp
 				// if present return LOINC Enum
 				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum().getSectionCode();
 			}
+		}
+		return null;
+	}
+
+	/**
+	 * Convenience function, which returns the SpecimenAct directly from the first
+	 * underlying
+	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry element
+	 *
+	 * @return the SpecimenAct. Returns null, if this element does not exist.
+	 */
+	public SpecimenAct getSpecimenAct() {
+		if (getLaboratorySpecialtySections() != null
+				&& getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct();
 		}
 		return null;
 	}
