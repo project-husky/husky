@@ -9,6 +9,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct {
@@ -41,7 +42,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 *          the LaboratoryBatteryOrganizer
 	 */
 	public SpecimenAct(LrphSections code,
-			org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry,
+			org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry entry,
 			LaboratoryBatteryOrganizer organizer) {
 		this();
 		setCode(code);
@@ -114,7 +115,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
 		for (EntryRelationship e : getMdht().getEntryRelationships()) {
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
-				return new org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry(
+				return new org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e.getProcedure());
 			}
 		}
@@ -152,10 +153,18 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	public void setSpecimenCollectionEntry(
-			org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry) {
-		getMdht().addProcedure(entry.copy());
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-				x_ActRelationshipEntryRelationship.COMP);
+			org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry entry) {
+		if (getSpecimenCollectionEntry() == null) {
+			getMdht().addProcedure(entry.copy());
+			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+					x_ActRelationshipEntryRelationship.COMP);
+		} else {
+			for (EntryRelationship er : getMdht().getEntryRelationships()) {
+				if (er.getProcedure() instanceof SpecimenCollection) {
+					er.setProcedure(entry.copy());
+				}
+			}
+		}
 	}
 
 }

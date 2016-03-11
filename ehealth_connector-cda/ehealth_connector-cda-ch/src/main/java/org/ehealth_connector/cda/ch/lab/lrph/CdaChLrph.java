@@ -68,6 +68,7 @@ public class CdaChLrph
 		setEmtpyCustodian();
 		addAuthor(author);
 		addReferralOrderingPhysician(refOrderingPhysician);
+		addIntendedRecipient(recipient);
 	}
 
 	/**

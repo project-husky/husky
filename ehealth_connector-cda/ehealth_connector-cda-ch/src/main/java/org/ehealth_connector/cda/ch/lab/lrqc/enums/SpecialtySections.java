@@ -34,10 +34,6 @@ public enum SpecialtySections {
 	 */
 	COAGULATION_STUDIES("18720-3", "Coagulation studies", "20150101", ""),
 	/**
-	 * <div class="en">displayName</div>
-	 */
-	DISPLAYNAME("value", "displayName", "validFrom", "validTo"),
-	/**
 	 * <div class="en">Hematology studies</div>
 	 */
 	HEMATOLOGY_STUDIES("18723-7", "Hematology studies", "20150101", ""),
@@ -102,11 +98,6 @@ public enum SpecialtySections {
 	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.1";
-
-	/**
-	 * <div class="en">Code for displayName</div>
-	 */
-	public static final String DISPLAYNAME_CODE = "value";
 
 	/**
 	 * <div class="en">Code for Hematology studies</div>

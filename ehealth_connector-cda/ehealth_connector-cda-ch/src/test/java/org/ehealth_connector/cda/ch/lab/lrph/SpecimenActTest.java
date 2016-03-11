@@ -57,7 +57,7 @@ public class SpecimenActTest extends TestUtils {
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']"));
 
 		// SpecimenCollectionEntry
-		org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry entry = new org.ehealth_connector.cda.ch.lab.lrph.SpecimenCollectionEntry();
+		org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry entry = new org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry();
 		act.setSpecimenCollectionEntry(entry);
 		assertNotNull(act.getSpecimenCollectionEntry());
 		document = act.getDocument();

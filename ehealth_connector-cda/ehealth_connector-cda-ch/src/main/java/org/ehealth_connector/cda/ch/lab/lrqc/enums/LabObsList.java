@@ -25,7 +25,7 @@ public enum LabObsList {
 	 * <div class="en">Activated partial thromboplastin time (aPTT) in Blood by
 	 * Coagulation assay</div>
 	 */
-	ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY("3173-2 ", "Activated partial thromboplastin time (aPTT) in Blood by Coagulation assay", "18720-3", "20150101", ""),
+	ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY("3173-2", "Activated partial thromboplastin time (aPTT) in Blood by Coagulation assay", "18720-3", "20150101", ""),
 	/**
 	 * <div class="en">Alanine aminotransferase [Enzymatic activity/volume] in
 	 * Serum or Plasma</div>
@@ -62,7 +62,7 @@ public enum LabObsList {
 	 * <div class="en">Alpha-1-Fetoprotein [Moles/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("19177-5 ", "Alpha-1-Fetoprotein [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("19177-5", "Alpha-1-Fetoprotein [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Alpha-1-Fetoprotein [Units/volume] in Serum or Plasma</div>
 	 */
@@ -88,11 +88,11 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Amphetamines [Presence] in Urine</div>
 	 */
-	AMPHETAMINES_PRESENCE_IN_URINE("3349-8 ", "Amphetamines [Presence] in Urine", "18729-4", "20150101", ""),
+	AMPHETAMINES_PRESENCE_IN_URINE("3349-8", "Amphetamines [Presence] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Amphetamines [Presence] in Urine by Screen method</div>
 	 */
-	AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19261-7 ", "Amphetamines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19261-7", "Amphetamines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Amphotericin B [Susceptibility]</div>
 	 */
@@ -101,7 +101,7 @@ public enum LabObsList {
 	 * <div class="en">Amylase [Enzymatic activity/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1798-8 ", "Amylase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1798-8", "Amylase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Amylase.pancreatic [Enzymatic activity/volume] in Serum or
 	 * Plasma</div>
@@ -123,7 +123,7 @@ public enum LabObsList {
 	 * <div class="en">Aspartate aminotransferase [Enzymatic activity/?volume] in
 	 * Serum or Plasma</div>
 	 */
-	ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1920-8 ", "Aspartate aminotransferase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1920-8", "Aspartate aminotransferase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Bacteria [#/area] in Urine sediment by Automated
 	 * count</div>
@@ -142,19 +142,19 @@ public enum LabObsList {
 	 * <div class="en">Barbiturates [Presence] in Serum or Plasma by Screen
 	 * method</div>
 	 */
-	BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD("20421-4 ", "Barbiturates [Presence] in Serum or Plasma by Screen method", "18719-5", "' validFrom='", "' validTo='"),
+	BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD("20421-4", "Barbiturates [Presence] in Serum or Plasma by Screen method", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Barbiturates [Presence] in Serum, Plasma or Blood</div>
 	 */
-	BARBITURATES_PRESENCE_IN_SERUM_PLASMA_OR_BLOOD("3376-1", "Barbiturates [Presence] in Serum, Plasma or Blood", "18719-5", "' validFrom='", "' validTo='"),
+	BARBITURATES_PRESENCE_IN_SERUM_PLASMA_OR_BLOOD("3376-1", "Barbiturates [Presence] in Serum, Plasma or Blood", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Barbiturates [Presence] in Urine</div>
 	 */
-	BARBITURATES_PRESENCE_IN_URINE("3377-9", "Barbiturates [Presence] in Urine", "18729-4", "' validFrom='", "' validTo='"),
+	BARBITURATES_PRESENCE_IN_URINE("3377-9", "Barbiturates [Presence] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Barbiturates [Presence] in Urine by Screen method</div>
 	 */
-	BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19270-8 ", "Barbiturates [Presence] in Urine by Screen method", "18729-4", "' validFrom='", "' validTo='"),
+	BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19270-8", "Barbiturates [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Basophils/?100 leukocytes in Blood by Manual count</div>
 	 */
@@ -162,15 +162,15 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Benzodiazepines [Presence] in Serum or Plasma</div>
 	 */
-	BENZODIAZEPINES_PRESENCE_IN_SERUM_OR_PLASMA("3389-4", "Benzodiazepines [Presence] in Serum or Plasma", "18719-5", "' validFrom='", "' validTo='"),
+	BENZODIAZEPINES_PRESENCE_IN_SERUM_OR_PLASMA("3389-4", "Benzodiazepines [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Benzodiazepines [Presence] in Urine</div>
 	 */
-	BENZODIAZEPINES_PRESENCE_IN_URINE("3390-2", "Benzodiazepines [Presence] in Urine", "18729-4", "' validFrom='", "' validTo='"),
+	BENZODIAZEPINES_PRESENCE_IN_URINE("3390-2", "Benzodiazepines [Presence] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Benzodiazepines [Presence] in Urine by Screen method</div>
 	 */
-	BENZODIAZEPINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("14316-4", "Benzodiazepines [Presence] in Urine by Screen method", "18729-4", "' validFrom='", "' validTo='"),
+	BENZODIAZEPINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("14316-4", "Benzodiazepines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Bg sup(a) Ab [Presence] in Serum or Plasma</div>
 	 */
@@ -213,7 +213,7 @@ public enum LabObsList {
 	 * <div class="en">C reactive protein [Mass/?volume] in Serum or Plasma by
 	 * High sensitivity method</div>
 	 */
-	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD("30522-7 ", "C reactive protein [Mass/?volume] in Serum or Plasma by High sensitivity method", "18719-5", "20150101", ""),
+	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD("30522-7", "C reactive protein [Mass/?volume] in Serum or Plasma by High sensitivity method", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Calcidiol [Mass/volume] in Serum or Plasma</div>
 	 */
@@ -238,11 +238,11 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Cannabinoids [Presence] in Urine</div>
 	 */
-	CANNABINOIDS_PRESENCE_IN_URINE("3427-2", "Cannabinoids [Presence] in Urine", "18729-4", "' validFrom='", "' validTo='"),
+	CANNABINOIDS_PRESENCE_IN_URINE("3427-2", "Cannabinoids [Presence] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Cannabinoids [Presence] in Urine by Screen method</div>
 	 */
-	CANNABINOIDS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("18282-4", "Cannabinoids [Presence] in Urine by Screen method", "18729-4", "' validFrom='", "' validTo='"),
+	CANNABINOIDS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("18282-4", "Cannabinoids [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Carbon dioxide [Partial pressure] in Blood</div>
 	 */
@@ -340,7 +340,7 @@ public enum LabObsList {
 	 * <div class="en">Cholecalciferol (Vit D3) [Moles/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA("33958-0 ", "Cholecalciferol (Vit D3) [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA("33958-0", "Cholecalciferol (Vit D3) [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Cholesterol in HDL [Mass/volume] in Serum or Plasma</div>
 	 */
@@ -431,11 +431,11 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Cocaine [Presence] in Urine</div>
 	 */
-	COCAINE_PRESENCE_IN_URINE("3397-7", "Cocaine [Presence] in Urine", "18729-4", "' validFrom='", "' validTo='"),
+	COCAINE_PRESENCE_IN_URINE("3397-7", "Cocaine [Presence] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Cocaine [Presence] in Urine by Screen method</div>
 	 */
-	COCAINE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19359-9", "Cocaine [Presence] in Urine by Screen method", "18729-4", "' validFrom='", "' validTo='"),
+	COCAINE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19359-9", "Cocaine [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Cortisol [Mass/volume] in Serum or Plasma</div>
 	 */
@@ -484,17 +484,17 @@ public enum LabObsList {
 	 * <div class="en">Cyclic citrullinated peptide Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM("53027-9 ", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM("53027-9", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Cyclic citrullinated peptide Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("32218-0 ", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("32218-0", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Cyclic citrullinated peptide IgG Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_IGG_AB_UNITSVOLUME_IN_SERUM("33935-8", "Cyclic citrullinated peptide IgG Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	CYCLIC_CITRULLINATED_PEPTIDE_IGG_AB_UNITSVOLUME_IN_SERUM("33935-8", "Cyclic citrullinated peptide IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Cystine crystals [Presence] in Urine sediment by Light
 	 * microscopy</div>
@@ -531,7 +531,7 @@ public enum LabObsList {
 	 * <div class="en">Cytomegalovirus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5124-3", "Cytomegalovirus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5124-3", "Cytomegalovirus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Presence] in Serum</div>
 	 */
@@ -544,12 +544,12 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Units/?volume] in Serum</div>
 	 */
-	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("7853-5", "Cytomegalovirus IgM Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("7853-5", "Cytomegalovirus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5126-8", "Cytomegalovirus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5126-8", "Cytomegalovirus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">D Ab [Presence] in Serum or Plasma</div>
 	 */
@@ -570,10 +570,6 @@ public enum LabObsList {
 	 * <div class="en">Digoxin [Moles/volume] in Serum or Plasma</div>
 	 */
 	DIGOXIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("14698-5", "Digoxin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
-	/**
-	 * <div class="en">displayName</div>
-	 */
-	DISPLAYNAME("value", "displayName", "specialtySection", "validFrom", "validTo"),
 	/**
 	 * <div class="en">E Ab [Presence] in Serum or Plasma</div>
 	 */
@@ -605,7 +601,7 @@ public enum LabObsList {
 	 * <div class="en">Epithelial cells.squamous [#/?volume] in Urine
 	 * sediment</div>
 	 */
-	EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT("13654-9 ", "Epithelial cells.squamous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT("13654-9", "Epithelial cells.squamous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Presence] in Serum</div>
 	 */
@@ -619,7 +615,7 @@ public enum LabObsList {
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM("7885-7", "Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM("7885-7", "Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>
@@ -638,7 +634,7 @@ public enum LabObsList {
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM("7886-5", "Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM("7886-5", "Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>
@@ -667,7 +663,7 @@ public enum LabObsList {
 	 * <div class="en">Epstein Barr virus early IgG Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_UNITSVOLUME_IN_SERUM("24007-7", "Epstein Barr virus early IgG Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_UNITSVOLUME_IN_SERUM("24007-7", "Epstein Barr virus early IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Epstein Barr virus nuclear IgG Ab [Presence] in Serum</div>
 	 */
@@ -878,7 +874,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Hemoglobin A1c [Mass/?volume] in Blood</div>
 	 */
-	HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD("41995-2 ", "Hemoglobin A1c [Mass/?volume] in Blood", "18719-5", "20150101", ""),
+	HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD("41995-2", "Hemoglobin A1c [Mass/?volume] in Blood", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Hemoglobin A1c/Hemoglobin.total in Blood</div>
 	 */
@@ -899,7 +895,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Hemoglobin [Moles/?volume] in Blood</div>
 	 */
-	HEMOGLOBIN_MOLESVOLUME_IN_BLOOD("59260-0 ", "Hemoglobin [Moles/?volume] in Blood", "18723-7", "20150101", ""),
+	HEMOGLOBIN_MOLESVOLUME_IN_BLOOD("59260-0", "Hemoglobin [Moles/?volume] in Blood", "18723-7", "20150101", ""),
 	/**
 	 * <div class="en">Hemoglobin [Presence] in Urine by Automated test
 	 * strip</div>
@@ -1491,7 +1487,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Methadone [Moles/?volume] in Urine</div>
 	 */
-	METHADONE_MOLESVOLUME_IN_URINE("52958-6 ", "Methadone [Moles/?volume] in Urine", "18729-4", "20150101", ""),
+	METHADONE_MOLESVOLUME_IN_URINE("52958-6", "Methadone [Moles/?volume] in Urine", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Methadone [Presence] in Urine</div>
 	 */
@@ -1625,7 +1621,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab [interpretation] in Serum</div>
 	 */
-	NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM("17352-6 ", "Neutrophil cytoplasmic Ab [interpretation] in Serum", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM("17352-6", "Neutrophil cytoplasmic Ab [interpretation] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab pattern [interpretation] in Serum
 	 * by Immunofluorescence</div>
@@ -1856,12 +1852,12 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Procalcitonin [Mass/volume] in Serum or Plasma</div>
 	 */
-	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA("33959-8", "Procalcitonin [Mass/volume] in Serum or Plasma", "18719-5", "' validFrom='", "' validTo='"),
+	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA("33959-8", "Procalcitonin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Procalcitonin [Mass/volume] in Serum or Plasma by
 	 * Immunoassay</div>
 	 */
-	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("75241-0", "Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "' validFrom='", "' validTo='"),
+	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("75241-0", "Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Prolactin [Mass/volume] in Serum or Plasma</div>
 	 */
@@ -2001,7 +1997,7 @@ public enum LabObsList {
 	 * <div class="en">Rubella virus IgG Ab [Units/volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5334-8", "Rubella virus IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5334-8", "Rubella virus IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Rubella virus IgM Ab [Presence] in Serum</div>
 	 */
@@ -2128,16 +2124,16 @@ public enum LabObsList {
 	 * <div class="en">Tissue transglutaminase IgA Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM("31017-7 ", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM("31017-7", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Tissue transglutaminase IgA Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("46128-5 ", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("46128-5", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Toxoplasma gondii Ab [Units/volume] in Serum</div>
 	 */
-	TOXOPLASMA_GONDII_AB_UNITSVOLUME_IN_SERUM("11598-0", "Toxoplasma gondii Ab [Units/volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	TOXOPLASMA_GONDII_AB_UNITSVOLUME_IN_SERUM("11598-0", "Toxoplasma gondii Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Toxoplasma gondii DNA [Presence] in Unspecified specimen by
 	 * Probe and target amplification method</div>
@@ -2146,12 +2142,12 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Toxoplasma gondii IgG Ab [Units/volume] in Serum</div>
 	 */
-	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM("8039-0", "Toxoplasma gondii IgG Ab [Units/volume] in Serum", "18727-8", "' validFrom='", "' validTo='"),
+	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM("8039-0", "Toxoplasma gondii IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Toxoplasma gondii IgG Ab [Units/volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5388-4", "Toxoplasma gondii IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5388-4", "Toxoplasma gondii IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Toxoplasma gondii IgM Ab [Presence] in Serum</div>
 	 */
@@ -2375,7 +2371,7 @@ public enum LabObsList {
 	 * <div class="en">Varicella zoster virus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>
 	 */
-	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5403-1", "Varicella zoster virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "' validFrom='", "' validTo='"),
+	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5403-1", "Varicella zoster virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Venlafaxine [Mass/volume] in Serum or Plasma</div>
 	 */
@@ -2406,7 +2402,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Waxy casts [#/?volume] in Urine sediment</div>
 	 */
-	WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT("41187-6 ", "Waxy casts [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT("41187-6", "Waxy casts [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">WBC casts [Presence] in Urine sediment by Light
 	 * microscopy</div>
@@ -2431,7 +2427,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Activated partial thromboplastin time (aPTT) in
 	 * Blood by Coagulation assay</div>
 	 */
-	public static final String ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY_CODE = "3173-2 ";
+	public static final String ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY_CODE = "3173-2";
 
 	/**
 	 * <div class="en">Code for Alanine aminotransferase [Enzymatic
@@ -2477,7 +2473,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Alpha-1-Fetoprotein [Moles/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	public static final String ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "19177-5 ";
+	public static final String ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "19177-5";
 
 	/**
 	 * <div class="en">Code for Alpha-1-Fetoprotein [Units/volume] in Serum or
@@ -2513,12 +2509,12 @@ public enum LabObsList {
 	 * <div class="en">Code for Amphetamines [Presence] in Urine by Screen
 	 * method</div>
 	 */
-	public static final String AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD_CODE = "19261-7 ";
+	public static final String AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD_CODE = "19261-7";
 
 	/**
 	 * <div class="en">Code for Amphetamines [Presence] in Urine</div>
 	 */
-	public static final String AMPHETAMINES_PRESENCE_IN_URINE_CODE = "3349-8 ";
+	public static final String AMPHETAMINES_PRESENCE_IN_URINE_CODE = "3349-8";
 
 	/**
 	 * <div class="en">Code for Amphotericin B [Susceptibility]</div>
@@ -2529,7 +2525,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Amylase [Enzymatic activity/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	public static final String AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_CODE = "1798-8 ";
+	public static final String AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_CODE = "1798-8";
 
 	/**
 	 * <div class="en">Code for Amylase.pancreatic [Enzymatic activity/volume] in
@@ -2557,7 +2553,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Aspartate aminotransferase [Enzymatic
 	 * activity/?volume] in Serum or Plasma</div>
 	 */
-	public static final String ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_CODE = "1920-8 ";
+	public static final String ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_CODE = "1920-8";
 
 	/**
 	 * <div class="en">Code for Bacteria [#/area] in Urine sediment by Automated
@@ -2580,7 +2576,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Barbiturates [Presence] in Serum or Plasma by
 	 * Screen method</div>
 	 */
-	public static final String BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD_CODE = "20421-4 ";
+	public static final String BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD_CODE = "20421-4";
 
 	/**
 	 * <div class="en">Code for Barbiturates [Presence] in Serum, Plasma or
@@ -2592,7 +2588,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Barbiturates [Presence] in Urine by Screen
 	 * method</div>
 	 */
-	public static final String BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD_CODE = "19270-8 ";
+	public static final String BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD_CODE = "19270-8";
 
 	/**
 	 * <div class="en">Code for Barbiturates [Presence] in Urine</div>
@@ -2673,7 +2669,7 @@ public enum LabObsList {
 	 * <div class="en">Code for C reactive protein [Mass/?volume] in Serum or
 	 * Plasma by High sensitivity method</div>
 	 */
-	public static final String C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD_CODE = "30522-7 ";
+	public static final String C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD_CODE = "30522-7";
 
 	/**
 	 * <div class="en">Code for C reactive protein [Mass/volume] in Serum or
@@ -2844,7 +2840,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Cholecalciferol (Vit D3) [Moles/?volume] in Serum
 	 * or Plasma</div>
 	 */
-	public static final String CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "33958-0 ";
+	public static final String CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "33958-0";
 
 	/**
 	 * <div class="en">Code for Cholesterol in HDL [Mass/volume] in Serum or
@@ -3039,13 +3035,13 @@ public enum LabObsList {
 	 * <div class="en">Code for Cyclic citrullinated peptide Ab [Units/?volume] in
 	 * Serum by Immunoassay</div>
 	 */
-	public static final String CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY_CODE = "32218-0 ";
+	public static final String CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY_CODE = "32218-0";
 
 	/**
 	 * <div class="en">Code for Cyclic citrullinated peptide Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	public static final String CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_CODE = "53027-9 ";
+	public static final String CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_CODE = "53027-9";
 
 	/**
 	 * <div class="en">Code for Cyclic citrullinated peptide IgG Ab
@@ -3149,11 +3145,6 @@ public enum LabObsList {
 	public static final String DIGOXIN_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "14698-5";
 
 	/**
-	 * <div class="en">Code for displayName</div>
-	 */
-	public static final String DISPLAYNAME_CODE = "value";
-
-	/**
 	 * <div class="en">Code for E Ab [Presence] in Serum or Plasma</div>
 	 */
 	public static final String E_AB_PRESENCE_IN_SERUM_OR_PLASMA_CODE = "1018-1";
@@ -3192,7 +3183,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Epithelial cells.squamous [#/?volume] in Urine
 	 * sediment</div>
 	 */
-	public static final String EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT_CODE = "13654-9 ";
+	public static final String EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT_CODE = "13654-9";
 
 	/**
 	 * <div class="en">Code for Epstein Barr virus capsid IgG Ab [Presence] in
@@ -3538,7 +3529,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Code for Hemoglobin A1c [Mass/?volume] in Blood</div>
 	 */
-	public static final String HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD_CODE = "41995-2 ";
+	public static final String HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD_CODE = "41995-2";
 
 	/**
 	 * <div class="en">Code for Hemoglobin A1c/Hemoglobin.total in Blood by
@@ -3565,7 +3556,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Code for Hemoglobin [Moles/?volume] in Blood</div>
 	 */
-	public static final String HEMOGLOBIN_MOLESVOLUME_IN_BLOOD_CODE = "59260-0 ";
+	public static final String HEMOGLOBIN_MOLESVOLUME_IN_BLOOD_CODE = "59260-0";
 
 	/**
 	 * <div class="en">Code for Hemoglobin [Presence] in Urine by Automated test
@@ -4318,7 +4309,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Code for Methadone [Moles/?volume] in Urine</div>
 	 */
-	public static final String METHADONE_MOLESVOLUME_IN_URINE_CODE = "52958-6 ";
+	public static final String METHADONE_MOLESVOLUME_IN_URINE_CODE = "52958-6";
 
 	/**
 	 * <div class="en">Code for Methadone [Presence] in Urine by Screen
@@ -4488,7 +4479,7 @@ public enum LabObsList {
 	 * <div class="en">Code for Neutrophil cytoplasmic Ab [interpretation] in
 	 * Serum</div>
 	 */
-	public static final String NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM_CODE = "17352-6 ";
+	public static final String NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM_CODE = "17352-6";
 
 	/**
 	 * <div class="en">Code for Neutrophil cytoplasmic Ab pattern [interpretation]
@@ -5145,13 +5136,13 @@ public enum LabObsList {
 	 * <div class="en">Code for Tissue transglutaminase IgA Ab [Units/?volume] in
 	 * Serum by Immunoassay</div>
 	 */
-	public static final String TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY_CODE = "46128-5 ";
+	public static final String TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY_CODE = "46128-5";
 
 	/**
 	 * <div class="en">Code for Tissue transglutaminase IgA Ab [Units/?volume] in
 	 * Serum</div>
 	 */
-	public static final String TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_CODE = "31017-7 ";
+	public static final String TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_CODE = "31017-7";
 
 	/**
 	 * <div class="en">Code for Toxoplasma gondii Ab [Units/volume] in Serum</div>
@@ -5501,7 +5492,7 @@ public enum LabObsList {
 	/**
 	 * <div class="en">Code for Waxy casts [#/?volume] in Urine sediment</div>
 	 */
-	public static final String WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT_CODE = "41187-6 ";
+	public static final String WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT_CODE = "41187-6";
 
 	/**
 	 * <div class="en">Code for WBC casts [Presence] in Urine sediment by Light
@@ -5653,6 +5644,7 @@ public enum LabObsList {
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
+		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		return cd;
 	}
 
@@ -5663,7 +5655,7 @@ public enum LabObsList {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 

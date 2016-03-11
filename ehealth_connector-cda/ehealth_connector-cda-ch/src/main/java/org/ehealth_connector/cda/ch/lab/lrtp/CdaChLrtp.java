@@ -105,6 +105,7 @@ public class CdaChLrtp
 		setEmtpyCustodian();
 		addAuthor(author);
 		addReferralOrderingPhysician(refOrderingPhysician);
+		addIntendedRecipient(recipient);
 	}
 
 	/**

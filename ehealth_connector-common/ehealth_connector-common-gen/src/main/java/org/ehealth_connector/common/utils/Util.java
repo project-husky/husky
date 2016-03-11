@@ -70,6 +70,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
@@ -301,6 +302,12 @@ public class Util {
 	public static ED createEd(String text) {
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		return (ed.addText(text));
+	}
+
+	public static IVL_TS createEffectiveTimeNullFlavorUnk() {
+		IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
+		ivlts.setNullFlavor(NullFlavor.UNK);
+		return ivlts;
 	}
 
 	/**
@@ -571,26 +578,6 @@ public class Util {
 		return ed;
 	}
 
-	/**
-	 * <div class="en">Creates the MDHT phone TEL object.</div>
-	 *
-	 * @param telNr
-	 *          <br>
-	 *          <div class="en"> tel nr</div>
-	 * @param usage
-	 *          <br>
-	 *          <div class="en"> usage</div>
-	 * @return the tel
-	 */
-	public static TEL createTel(String telNr, AddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		if (usage != null) {
-			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
-		}
-		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
-		return tel;
-	}
-
 	// /**
 	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	// * and a generated extension.</div>
@@ -630,6 +617,26 @@ public class Util {
 	// }
 	// return ii;
 	// }
+
+	/**
+	 * <div class="en">Creates the MDHT phone TEL object.</div>
+	 *
+	 * @param telNr
+	 *          <br>
+	 *          <div class="en"> tel nr</div>
+	 * @param usage
+	 *          <br>
+	 *          <div class="en"> usage</div>
+	 * @return the tel
+	 */
+	public static TEL createTel(String telNr, AddressUse usage) {
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		if (usage != null) {
+			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		}
+		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
+		return tel;
+	}
 
 	/**
 	 * <div class="en">Creates the MDHT phone TEL object, without knowing the type
@@ -913,21 +920,6 @@ public class Util {
 		return ii;
 	}
 
-	/**
-	 * Checks if an EntryRelationship is a comment
-	 *
-	 * @param er
-	 *          the EntryRelationship
-	 * @return true if the EntryRelationship is a comment, false otherwise
-	 */
-	public static boolean isComment(EntryRelationship er) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd())
-			return true;
-		else {
-			return false;
-		}
-	}
-
 	// /**
 	// * Updates a Reference if it is a comment (in a deph of two counters)
 	// *
@@ -988,6 +980,21 @@ public class Util {
 	// }
 	// return er;
 	// }
+
+	/**
+	 * Checks if an EntryRelationship is a comment
+	 *
+	 * @param er
+	 *          the EntryRelationship
+	 * @return true if the EntryRelationship is a comment, false otherwise
+	 */
+	public static boolean isComment(EntryRelationship er) {
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd())
+			return true;
+		else {
+			return false;
+		}
+	}
 
 	/**
 	 * <div class="en">Join an ArrayList of String with person names to a whole

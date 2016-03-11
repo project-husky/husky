@@ -24,6 +24,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
 
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaCh<EClinicalDocument> {
@@ -56,6 +57,8 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 
 	public void addIntendedRecipient(IntendedRecipient recipient) {
 		getMdht().getInformationRecipients().add(recipient.getIntendedRecipient());
+		int nb = getMdht().getInformationRecipients().size() - 1;
+		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 	}
 
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {

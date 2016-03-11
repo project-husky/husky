@@ -35,10 +35,13 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 *
 	 * @param code
 	 *          the code for the SpecimenAct
+	 * @param entry
+	 *          the SpecimenCollectionEntry
 	 * @param organizer
 	 *          the LaboratoryBatteryOrganizer
 	 */
-	public SpecimenAct(SpecialtySections code, LaboratoryBatteryOrganizer organizer) {
+	public SpecimenAct(SpecialtySections code, SpecimenCollectionEntry entry,
+			LaboratoryBatteryOrganizer organizer) {
 		this();
 		setCode(code);
 		addLaboratoryBatteryOrganizer(organizer);
@@ -47,6 +50,12 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
+	}
+
+	public void addSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
+		getMdht().addProcedure(entry.copy());
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
@@ -64,24 +73,18 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		return list;
 	}
 
-	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
+	public List<SpecimenCollectionEntry> getSpecimenCollectionEntries() {
+		ArrayList<SpecimenCollectionEntry> scel = new ArrayList<SpecimenCollectionEntry>();
 		for (EntryRelationship e : getMdht().getEntryRelationships()) {
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
-				return new SpecimenCollectionEntry(
-						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e.getProcedure());
+				scel.add(new SpecimenCollectionEntry(
+						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e.getProcedure()));
 			}
 		}
-		return null;
+		return scel;
 	}
 
 	public void setCode(SpecialtySections code) {
 		getMdht().setCode(code.getCE());
-	}
-
-	public void setSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
-		getMdht().getProcedures().clear();
-		getMdht().addProcedure(entry.copy());
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-				x_ActRelationshipEntryRelationship.COMP);
 	}
 }

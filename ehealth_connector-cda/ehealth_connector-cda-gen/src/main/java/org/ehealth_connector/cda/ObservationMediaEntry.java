@@ -30,6 +30,22 @@ public class ObservationMediaEntry
 		getMdht().setMoodCode(ActMood.EVN);
 	}
 
+	/**
+	 * Sets the (not Base64 encoded) inputStream and MimeType.
+	 *
+	 * @param inputStream
+	 *          the (not Base64 encoded) inputStream. It will be wrapped into an
+	 *          Base64InputStream
+	 * @param mimeType
+	 *          the mime type of the object
+	 * @throws IOException
+	 */
+	public ObservationMediaEntry(InputStream inputStream, LabObservationMediaMimeType mimeType)
+			throws IOException {
+		this();
+		setObject(inputStream, mimeType);
+	}
+
 	public ObservationMediaEntry(org.openhealthtools.mdht.uml.cda.ObservationMedia mdht) {
 		super(mdht);
 	}
@@ -119,7 +135,16 @@ public class ObservationMediaEntry
 		getMdht().setValue(value);
 	}
 
-	// gif, jpeg, png or bmp
+	/**
+	 * Sets the (not Base64 encoded) inputStream and MimeType.
+	 *
+	 * @param inputStream
+	 *          the (not Base64 encoded) inputStream. It will be wrapped into an
+	 *          Base64InputStream
+	 * @param mimeType
+	 *          the mime type of the object
+	 * @throws IOException
+	 */
 	public void setObject(InputStream inputStream, LabObservationMediaMimeType mimeType)
 			throws IOException {
 		Base64InputStream is = new Base64InputStream(inputStream, true);

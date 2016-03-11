@@ -1,9 +1,12 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import java.util.Date;
+import java.util.List;
 
 import org.ehealth_connector.cda.MdhtEntryActFacade;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived;
 
@@ -20,15 +23,23 @@ public class SpecimenReceivedEntry
 		setEffectiveTime(effectiveTime);
 	}
 
-	protected SpecimenReceivedEntry(SpecimenReceived mdht) {
+	public SpecimenReceivedEntry(SpecimenReceived mdht) {
 		super(mdht);
 	}
 
-	protected Date getEffectiveTime() {
+	public void addId(Identificator id) {
+		getMdht().getIds().add(id.getIi());
+	}
+
+	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
-	protected void setEffectiveTime(Date effectiveTime) {
+	public List<Identificator> getIds() {
+		return Util.convertIds(getMdht().getIds());
+	}
+
+	public void setEffectiveTime(Date effectiveTime) {
 		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(effectiveTime));
 	}
 }

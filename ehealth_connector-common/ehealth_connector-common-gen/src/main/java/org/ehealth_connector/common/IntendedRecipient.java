@@ -10,7 +10,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 
 public class IntendedRecipient {
-	org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mIntendedRecipient;
+	protected org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mIntendedRecipient;
 
 	/**
 	 * Standard constructor

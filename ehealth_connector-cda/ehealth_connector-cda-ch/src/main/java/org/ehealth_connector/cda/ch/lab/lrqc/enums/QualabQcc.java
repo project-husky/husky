@@ -1,6 +1,9 @@
 package org.ehealth_connector.cda.ch.lab.lrqc.enums;
 
+import java.util.Date;
+
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -11,45 +14,44 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum QualabQcc {
 
 	/**
-	 * <div class="en">CSCQ</div> <div class="de">CSCQ</div>
+	 * <div class="en">Centre Suisse de Contrôle de Qualité CSCQ</div>
 	 */
-	CSCQ("CSCQ", "CSCQ"),
+	CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ("7601001326507", "Centre Suisse de Contrôle de Qualité CSCQ", "20150101", ""),
 	/**
-	 * <div class="en">ITRANSFUSION</div> <div class="de">ITRANSFUSION</div>
+	 * <div class="en">Interregionale Blutspende SRK AG</div>
 	 */
-	ITRANSFUSION("ITRANSFUSION", "ITRANSFUSION"),
+	INTERREGIONALE_BLUTSPENDE_SRK_AG("7601001363540", "Interregionale Blutspende SRK AG", "20150101", ""),
 	/**
-	 * <div class="en">MK</div> <div class="de">MK</div>
+	 * <div class="en">Verein für medizinische Qualitätskontrolle</div>
 	 */
-	MK("MK", "MK");
+	VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE("7601001402805", "Verein für medizinische Qualitätskontrolle", "20150101", "");
+
+	/**
+	 * <div class="en">Code for Centre Suisse de Contrôle de Qualité CSCQ</div>
+	 */
+	public static final String CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ_CODE = "7601001326507";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
 	 * Codes Systems</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "Zugelassene Qualitätskontrollzentren";
+	public static final String CODE_SYSTEM_NAME = "GLN";
 
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.144.1.1.2016";
+	public static final String CODE_SYSTEM_OID = "2.51.1.3";
 
 	/**
-	 * <div class="en">Code for CSCQ</div> <div class="de">Code für CSCQ</div>
+	 * <div class="en">Code for Interregionale Blutspende SRK AG</div>
 	 */
-	public static final String CSCQ_CODE = "CSCQ";
+	public static final String INTERREGIONALE_BLUTSPENDE_SRK_AG_CODE = "7601001363540";
 
 	/**
-	 * <div class="en">Code for ITRANSFUSION</div> <div class="de">Code für
-	 * ITRANSFUSION</div>
+	 * <div class="en">Code for Verein für medizinische Qualitätskontrolle</div>
 	 */
-	public static final String ITRANSFUSION_CODE = "ITRANSFUSION";
-
-	/**
-	 * <div class="en">Code for MK</div> <div class="de">Code für MK</div>
-	 */
-	public static final String MK_CODE = "MK";
+	public static final String VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE_CODE = "7601001402805";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -125,20 +127,47 @@ public enum QualabQcc {
 	protected String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Start date for the period in which this element can be
+	 * used</div> <div class="de">Startdatum der Periode, innerhalb derer dieses
+	 * Element valide ist</div>
+	 */
+	protected Date validFrom;
+
+	/**
+	 * <div class="en">End date for the period in which this element can be
+	 * used</div> <div class="de">Enddatum der Periode, innerhalb derer dieses
+	 * Element valide ist</div>
+	 */
+	protected Date validTo;
+
+	/**
+	 * <div class="en">Instantiates this Enum Object with given code, displayName,
+	 * validFrom and validTo parameters</div> <div class="de">Instantiiert dieses
+	 * Enum Object mittels der code, displayName, validFrom und validTo
+	 * Parameter</div>
 	 *
 	 * @param code
 	 *          <br>
-	 *          <div class="de"> code</div>
+	 *          <div class="en">the code</div>
 	 * @param displayName
 	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *          <div class="en">the display name</div>
+	 * @param validFrom
+	 *          <br>
+	 *          <div class="en">the valid from</div>
+	 * @param validTo
+	 *          <br>
+	 *          <div class="en">the valid to</div>
 	 */
-	private QualabQcc(String code, String displayName) {
+	private QualabQcc(String code, String displayName, String validFrom, String validTo) {
 		this.code = code;
 		this.displayName = displayName;
+		if (validFrom != null && !"".equals(validFrom)) {
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+		}
+		if (validTo != null && !"".equals(validTo)) {
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+		}
 	}
 
 	/**
@@ -152,6 +181,7 @@ public enum QualabQcc {
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
+		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		return cd;
 	}
 
@@ -162,7 +192,7 @@ public enum QualabQcc {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -206,4 +236,32 @@ public enum QualabQcc {
 		return this.displayName;
 	}
 
+	/**
+	 * Checks if the code is valid now.
+	 *
+	 * @return true, if is valid
+	 */
+	public boolean isValid() {
+		return isValid(null);
+	}
+
+	/**
+	 * Checks if the code is valid for the specified date.
+	 *
+	 * @param date
+	 *          the date
+	 * @return true, if is valid
+	 */
+	public boolean isValid(Date date) {
+		if (date == null) {
+			date = new Date();
+		}
+		if (validFrom != null && validFrom.after(date)) {
+			return false;
+		}
+		if (validTo != null && validTo.before(date)) {
+			return false;
+		}
+		return true;
+	}
 }
