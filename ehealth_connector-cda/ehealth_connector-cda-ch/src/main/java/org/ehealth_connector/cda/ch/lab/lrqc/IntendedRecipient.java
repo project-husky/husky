@@ -16,6 +16,10 @@ public class IntendedRecipient extends org.ehealth_connector.common.IntendedReci
 		super();
 	}
 
+	public IntendedRecipient(org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mdht) {
+		super(mdht);
+	}
+
 	/**
 	 * Instantiates the class with the required elements. This constructor will
 	 * set: ClinicalDocument/informationRecipient/intendedRecipient/

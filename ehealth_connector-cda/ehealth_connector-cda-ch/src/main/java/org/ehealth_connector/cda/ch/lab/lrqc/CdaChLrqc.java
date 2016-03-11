@@ -10,8 +10,8 @@ import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
@@ -120,27 +120,15 @@ public class CdaChLrqc
 		setSpecimenAct(se, sectionCode);
 	}
 
-	/**
-	 * Convenience function to return all LaboratoryBatteryOrganizers directly
-	 * from all underlying
-	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
-	 * element.
-	 *
-	 * @return a list of LaboratoryBatteryOrganizers.
-	 */
-	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
-		LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
-		if (lss != null) {
-			LaboratoryReportDataProcessingEntry lrdpe = lss.getLaboratoryReportDataProcessingEntry();
-			if (lrdpe != null) {
-				SpecimenAct se = lrdpe.getSpecimenAct();
-				if (se != null) {
-					lbol.addAll(se.getLaboratoryBatteryOrganizers());
-				}
+	public List<IntendedRecipient> getIntendedRecipientsLrqc() {
+		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
+		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
+			if (ir instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
+				org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
+				il.add(new IntendedRecipient(iheIr));
 			}
 		}
-		return lbol;
+		return il;
 	}
 
 	// /**
@@ -179,6 +167,29 @@ public class CdaChLrqc
 	// }
 
 	/**
+	 * Convenience function to return all LaboratoryBatteryOrganizers directly
+	 * from all underlying
+	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
+	 * element.
+	 *
+	 * @return a list of LaboratoryBatteryOrganizers.
+	 */
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
+		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
+		if (lss != null) {
+			LaboratoryReportDataProcessingEntry lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+			if (lrdpe != null) {
+				SpecimenAct se = lrdpe.getSpecimenAct();
+				if (se != null) {
+					lbol.addAll(se.getLaboratoryBatteryOrganizers());
+				}
+			}
+		}
+		return lbol;
+	}
+
+	/**
 	 * Gets the laboratory specialty section.
 	 *
 	 * @return the laboratory specialty section
@@ -215,24 +226,6 @@ public class CdaChLrqc
 		return null;
 	}
 
-	/**
-	 * Convenience function, which returns the SpecimenAct directly from the
-	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
-	 * element
-	 *
-	 * @return the SpecimenAct. Returns null, if this element does not exist.
-	 */
-	public SpecimenAct getSpecimenAct() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
-			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-					.getSpecimenAct();
-		}
-		return null;
-	}
-
 	// /**
 	// * Convenience function to return the
 	// * PatientPrivacyFilter(none,initials,conditional,hiv) from a
@@ -261,6 +254,24 @@ public class CdaChLrqc
 	// }
 	// return null;
 	// }
+
+	/**
+	 * Convenience function, which returns the SpecimenAct directly from the
+	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
+	 * element
+	 *
+	 * @return the SpecimenAct. Returns null, if this element does not exist.
+	 */
+	public SpecimenAct getSpecimenAct() {
+		if (getLaboratorySpecialtySection() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null) {
+			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+					.getSpecimenAct();
+		}
+		return null;
+	}
 
 	/**
 	 * Sets a LaboratorySpecialtySection

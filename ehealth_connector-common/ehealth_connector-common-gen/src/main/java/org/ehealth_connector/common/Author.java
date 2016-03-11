@@ -354,9 +354,12 @@ public class Author {
 	 * @return <div class="en">the gln as identificator</div>
 	 */
 	public Identificator getGlnAsIdentificator() {
-		final II ii = mAuthor.getAssignedAuthor().getIds().get(0);
-		final Identificator id = new Identificator(ii);
-		return id;
+		if (!mAuthor.getAssignedAuthor().getIds().isEmpty()) {
+			final II ii = mAuthor.getAssignedAuthor().getIds().get(0);
+			final Identificator id = new Identificator(ii);
+			return id;
+		}
+		return null;
 	}
 
 	/**
