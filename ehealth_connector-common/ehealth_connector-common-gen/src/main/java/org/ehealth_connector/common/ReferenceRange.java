@@ -21,6 +21,12 @@ public class ReferenceRange extends ObservationRange {
 		this.mRr = mdht;
 	}
 
+	public ReferenceRange(Value value, ObservationInterpretation interpretationCode) {
+		this();
+		setValue(value);
+		setInterpretationCode(interpretationCode);
+	}
+
 	public org.openhealthtools.mdht.uml.cda.ReferenceRange copy() {
 		return EcoreUtil.copy(mRr);
 	}

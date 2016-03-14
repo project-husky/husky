@@ -201,15 +201,7 @@ public class LaboratoryObservation
 	 */
 	@Override
 	public void addValue(Value value) {
-		if (value.isPhysicalQuantity()) {
-			getMdht().getValues().add(value.copyMdhtPhysicalQuantity());
-		}
-		if (value.isCode()) {
-			getMdht().getValues().add(value.copyMdhtCode());
-		}
-		if (value.isRto()) {
-			getMdht().getValues().add(value.copyMdhtRto());
-		}
+		getMdht().getValues().add(value.getValue());
 	}
 
 	/**

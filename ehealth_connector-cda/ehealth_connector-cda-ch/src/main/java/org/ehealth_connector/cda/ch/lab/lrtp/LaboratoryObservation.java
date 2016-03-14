@@ -1,8 +1,8 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
-import java.util.Date;
-
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
+import org.ehealth_connector.common.ReferenceRange;
+import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 
 public class LaboratoryObservation
@@ -17,6 +17,11 @@ public class LaboratoryObservation
 	 *
 	 * @param code
 	 *          the code
+	 * @param value
+	 *          the value (with the value and (if applicable) ucumUnit, type). If
+	 *          the value type is PQ or INT, you have to provide the reference
+	 *          range for this value (either use setReferenceRange or use the
+	 *          according constructor).
 	 * @param interpretationCode
 	 *          the interpretation code
 	 * @param effectiveTime
@@ -26,12 +31,40 @@ public class LaboratoryObservation
 	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
 	 *          und Tageszeit mit Stunde und Minute </div>
 	 */
-	public LaboratoryObservation(LabObsList code, ObservationInterpretation interpretationCode,
-			Date effectiveTime) {
+	public LaboratoryObservation(LabObsList code, Value value,
+			ObservationInterpretation interpretationCode) {
 		this();
 		setCode(code);
+		addValue(value);
 		addInterpretationCode(interpretationCode);
-		setEffectiveTime(effectiveTime);
+	}
+
+	/**
+	 * Instantiates the class with the required elements (including a
+	 * referenceRange, if required because of value type PQ or INT)
+	 *
+	 * @param code
+	 *          the code
+	 * @param value
+	 *          the value (with the value and (if applicable) ucumUnit, type).
+	 * @param referenceRange
+	 *          the reference Range (with Value(low, high) and interpretationCode.
+	 * @param interpretationCode
+	 *          the interpretation code
+	 * @param effectiveTime
+	 *          <div class="en">point in time of the result (physiological
+	 *          relevant point in time). Precision: Date with hour and
+	 *          minute</div> <div class="de">Zeitpunkt des Resultats
+	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
+	 *          und Tageszeit mit Stunde und Minute </div>
+	 */
+	public LaboratoryObservation(LabObsList code, Value value, ReferenceRange referenceRange,
+			ObservationInterpretation interpretationCode) {
+		this();
+		setCode(code);
+		addValue(value);
+		setReferenceRange(referenceRange);
+		addInterpretationCode(interpretationCode);
 	}
 
 	public LaboratoryObservation(

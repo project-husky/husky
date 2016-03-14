@@ -48,7 +48,10 @@ public class IntendedRecipient {
 	 * Convenience constructor with required elements, if the recipient is an
 	 * organization. The according receivingOrganization element will be
 	 * constructed with the same data as the IntendedRecipient (Id, addr,
-	 * telecoms). These elements have to be present in the Organization object.
+	 * telecoms). These elements have to be present in the Organization object. If
+	 * the Organization has a name, it will be set as the name for the information
+	 * recipient (intendedRecipient/informationRecipient/name[0] =
+	 * organization/name[0])
 	 */
 	public IntendedRecipient(Organization organization) {
 		this();
@@ -61,6 +64,11 @@ public class IntendedRecipient {
 		}
 		if (!mdht.getTelecoms().isEmpty()) {
 			mIntendedRecipient.getIntendedRecipient().getTelecoms().addAll(mdht.getTelecoms());
+		}
+		if (!mdht.getNames().isEmpty()) {
+			org.openhealthtools.mdht.uml.cda.Person p = CDAFactory.eINSTANCE.createPerson();
+			p.getNames().add(Util.createPnFromOn(mdht.getNames().get(0)));
+			mIntendedRecipient.getIntendedRecipient().setInformationRecipient(p);
 		}
 		setOrganization(organization);
 	}
@@ -120,6 +128,15 @@ public class IntendedRecipient {
 	}
 
 	/**
+	 * Gets the person, who receives the information
+	 *
+	 * @return the person
+	 */
+	public Person getInformationRecipient() {
+		return new Person(mIntendedRecipient.getIntendedRecipient().getInformationRecipient());
+	}
+
+	/**
 	 * Returns the underlying mdht element
 	 *
 	 * @return
@@ -155,15 +172,6 @@ public class IntendedRecipient {
 	 */
 	public Telecoms getTelecoms() {
 		return new Telecoms(mIntendedRecipient.getIntendedRecipient().getTelecoms());
-	}
-
-	/**
-	 * Gets the person, who receives the information
-	 *
-	 * @return the person
-	 */
-	public Person setInformationRecipient() {
-		return new Person(mIntendedRecipient.getIntendedRecipient().getInformationRecipient());
 	}
 
 	/**
