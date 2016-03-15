@@ -6,12 +6,14 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
+import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -56,13 +58,30 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	public void addIntendedRecipient(IntendedRecipient recipient) {
-		getMdht().getInformationRecipients().add(recipient.getIntendedRecipient());
+		getMdht().getInformationRecipients().add(recipient.getMdhtIntendedRecipient());
 		int nb = getMdht().getInformationRecipients().size() - 1;
 		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 	}
 
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
 		getMdht().getParticipants().add(physician.copy());
+	}
+
+	/**
+	 * Convenience function that returns a list of all order ids of all
+	 * inFulfillmentOf Elements
+	 * 
+	 * @return the order id list (from all underlying
+	 *         /clinicalDocument/inFulfillmentOf/order/id)
+	 */
+	public List<Identificator> getInFulfillmentOfOrderIds() {
+		ArrayList<Identificator> al = new ArrayList<Identificator>();
+		for (InFulfillmentOf ifo : getMdht().getInFulfillmentOfs()) {
+			for (II id : ifo.getOrder().getIds()) {
+				al.add(new Identificator(id));
+			}
+		}
+		return al;
 	}
 
 	public List<IntendedRecipient> getIntendedRecipients() {

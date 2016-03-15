@@ -21,9 +21,9 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Convenience constructor with required elements, if the recipient is a
-	 * person. The according informationRecipient element will be constructed with
-	 * the given name.
+	 * Convenience constructor with (for CDA-CH-LRTP) required elements, if the
+	 * recipient is a person. The according informationRecipient element will be
+	 * constructed with the given name.
 	 */
 	public IntendedRecipient(Name name, Identificator id, Address address, Telecoms telecoms) {
 		this();
@@ -132,7 +132,7 @@ public class IntendedRecipient {
 	 *
 	 * @return the person
 	 */
-	public Person getInformationRecipient() {
+	public Person getMdhtInformationRecipient() {
 		return new Person(mIntendedRecipient.getIntendedRecipient().getInformationRecipient());
 	}
 
@@ -143,7 +143,7 @@ public class IntendedRecipient {
 	 *
 	 * @return the mdht element
 	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getIntendedRecipient() {
+	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getMdhtIntendedRecipient() {
 		return this.mIntendedRecipient;
 	}
 

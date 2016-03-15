@@ -314,7 +314,7 @@ public class Author {
 		// If the Author has no name, try the represented organization
 		if (retVal.equals("")) {
 			if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-				if (mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames() != null) {
+				if (!mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().isEmpty()) {
 					final Name name = new Name(
 							mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
 					retVal = name.getCompleteName();
@@ -334,6 +334,18 @@ public class Author {
 	}
 
 	/**
+	 * Gets the functionCode of the author
+	 *
+	 * @return the functionCode. Null, if not present.
+	 */
+	public Code getFunctionCode() {
+		if (mAuthor.getFunctionCode() != null) {
+			return new Code(mAuthor.getFunctionCode());
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Gets the gln (identification of the author)</div>
 	 * <div class="de">Liefert die GLN (ID des Autors)</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -341,9 +353,12 @@ public class Author {
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
-		final Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(),
-				CodeSystems.GLN.getCodeSystemId());
-		return gln.getExtension();
+		if (!mAuthor.getAssignedAuthor().getIds().isEmpty()) {
+			final Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(),
+					CodeSystems.GLN.getCodeSystemId());
+			return gln.getExtension();
+		}
+		return null;
 	}
 
 	/**
@@ -594,16 +609,34 @@ public class Author {
 	}
 
 	/**
+	 * Sets the functionCode of the author
+	 *
+	 * @param code
+	 *          the functionCode
+	 */
+	public void setFunctionCode(Code code) {
+		mAuthor.setFunctionCode(code.getCE());
+	}
+
+	/**
 	 * <div class="en">Sets the gln.</div> <div class="de">Setzt die GLN (ID des
 	 * Autoren).</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 *
 	 * @param gln
-	 *          <div class="en">the new gln</div> <div class="de">das neue
-	 *          gln.</div> <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">the new gln. If null an Id with nullFlavor = NA
+	 *          will be added.</div> <div class="de">Die neue gln. Bei null wird
+	 *          eine Id mit dem NullFlavor = NA hinzugefügt.</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setGln(String gln) {
-		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		if (gln != null) {
+			addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		} else {
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+			mAsAuthor.getIds().add(ii);
+		}
 	}
 
 	/**

@@ -19,10 +19,16 @@ import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
-import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
+import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.IntendedRecipient;
+import org.ehealth_connector.common.AuthoringDevice;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Telecoms;
+import org.ehealth_connector.common.enums.AddressUse;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
@@ -244,27 +250,85 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 	@Override
 	@Test
 	public void testDocumentHeader() throws XPathExpressionException {
-		final CdaChLrqc cda = new CdaChLrqc();
-		final Document document = cda.getDocument();
+		super.init();
+		final CdaChLrqc cda = new CdaChLrqc(LanguageCode.ENGLISH);
+		Document document = cda.getDocument();
 
-		// LRPH
+		// LRQC
 		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.7.1", null));
 
-		// Referral Ordering Physician
-		cda.addReferralOrderingPhysician(new ReferralOrderingPhysician());
-		assertNotNull(cda.getReferralOrderingPhysicians());
+		// realmCode
+		assertTrue(xExist(document, "//realmCode[@code='CHE']"));
 
-		// Intended Recipient
-		cda.addIntendedRecipient(new IntendedRecipient());
+		// code
+		assertTrue(xExist(document,
+				"/clinicaldocument/code[@code='11502-2' and @codeSystem='2.16.840.1.113883.6.1' and @codeSystemName='LOINC' and @displayName='LABORATORY REPORT.TOTAL']"));
+
+		// InFulfillmentOf
+		cda.addInFulfillmentOf("123");
+		assertEquals("123", cda.getInFulfillmentOfOrderIds().get(0).getExtension());
+		document = cda.getDocument();
+		assertTrue(xExist(document,
+				"/clinicaldocument/inFulfillmentOf/order/id[@root='2.51.1.3' and @extension='123']"));
+
+		// Recipient
+		cda.addIntendedRecipient(QualabQcc.CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ);
 		assertFalse(cda.getIntendedRecipients().isEmpty());
+		document = cda.getDocument();
+		assertTrue(xExist(document, "/clinicaldocument/informationRecipient[@typeCode='PRCP']"));
+		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.1.4", null));
+		assertEquals(QualabQcc.CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ.getCodeValue(),
+				cda.getIntendedRecipientsLrqc().get(0).getIds().get(0).getExtension());
 
-		// Empty Custodian
-		cda.setEmtpyCustodian();
-		assertNotNull(cda.getCustodian());
+		// RecordTarget
+		cda.setRecordTarget(id1);
+		assertTrue(isEqual(id1, cda.getRecordTargetId()));
+		document = cda.getDocument();
+		assertTrue(xExist(document, "/clinicaldocument/recordTarget[@typeCode='RCT']"));
+		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.1.2", null));
+		assertTrue(xExist(document, "/clinicaldocument/recordTarget/patientRole[@classCode='PAT']"));
+		assertTrue(
+				xExist(document, "/clinicaldocument/recordTarget/patientRole/patient[@nullFlavor='OTH']"));
 
-		// Author
-		cda.addAuthor(new Author());
-		assertFalse(cda.getAuthors().isEmpty());
+		// Human Author
+		Author author = new Author(new Name("Axel", "Helmer"));
+		author.setFunctionCode(new Code("3212", "2.16.840.1.113883.2.9.6.2.7", "ISCO-08",
+				"Medical and pathology laboratory technicians"));
+		author.setTime(super.endDate);
+		author.setGln("987");
+		author.addAddress(
+				new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen", AddressUse.PUBLIC));
+		Telecoms t = new Telecoms();
+		t.addPhone("+491794783239", AddressUse.PUBLIC);
+		author.setTelecoms(t);
+		cda.addAuthor(author);
+		assertTrue(isEqual(author, cda.getAuthor()));
+
+		// Software Author
+		Author sAuth = new Author();
+		sAuth.setAssignedAuthoringDevice(new AuthoringDevice(ts1));
+		sAuth.setOrganization(organization1);
+		cda.addAuthor(sAuth);
+		assertEquals(ts1, cda.getAuthors().get(1).getCompleteName());
+
+		// Custodian
+		cda.setCustodian(organization1);
+		assertNotNull(cda.getCustodianAsOrganization());
+
+		// LegalAuthenticator
+		cda.setLegalAuthenticator(author1);
+		assertNotNull(cda.getLegalAuthenticatorAsAuthor());
+		document = cda.getDocument();
+		assertTrue(xExist(document, "/clinicaldocument/legalAuthenticator/signatureCode[@code='S']"));
+
+		// Participant
+		Participant p = new Participant("456", "999", true);
+		cda.addParticipant(p);
+		document = cda.getDocument();
+		assertNotNull(cda.getParticipantsLrqc());
+		assertEquals("456", cda.getParticipantsLrqc().get(0).getGlnIds().get(0));
+		assertEquals("999", cda.getParticipantsLrqc().get(0).getZsrIds().get(0));
+		assertTrue(xExist(document, "//participant[@typeCode='IND']"));
 	}
 
 	@Test

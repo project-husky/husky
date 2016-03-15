@@ -56,6 +56,7 @@ import org.ehealth_connector.common.enums.Signature;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
+import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -187,6 +188,36 @@ public class Util {
 	 *          the assignedAuthor
 	 * @return the assignedEntity
 	 */
+	public static AssignedAuthor createAssignedAuthorFromAssignedEntity(AssignedEntity a) {
+		final AssignedAuthor asAut = CDAFactory.eINSTANCE.createAssignedAuthor();
+		// Copy Addresses
+		if (a.getAddrs() != null) {
+			asAut.getAddrs().addAll(a.getAddrs());
+		}
+		// Copy Ids
+		if (a.getIds() != null) {
+			asAut.getIds().addAll(a.getIds());
+		}
+		// Copy Telecoms
+		if (a.getTelecoms() != null) {
+			asAut.getTelecoms().addAll(a.getTelecoms());
+		}
+		// Copy Represented Organization
+		if (!a.getRepresentedOrganizations().isEmpty()) {
+			asAut.setRepresentedOrganization(a.getRepresentedOrganizations().get(0));
+		}
+		// Set Assigned Person
+		asAut.setAssignedPerson(a.getAssignedPerson());
+		return asAut;
+	}
+
+	/**
+	 * Creates an MDHT assignedEntity object from an MDHT AssignedAuthor object
+	 *
+	 * @param a
+	 *          the assignedAuthor
+	 * @return the assignedEntity
+	 */
 	public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
 		final AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
 		// Copy Addresses
@@ -208,6 +239,26 @@ public class Util {
 		// Set Assigned Person
 		asEnt.setAssignedPerson(a.getAssignedPerson());
 		return asEnt;
+	}
+
+	/**
+	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
+	 *
+	 * @param author
+	 *          <br>
+	 *          <div class="de">the author</div>
+	 * @return the legal authenticator
+	 */
+	public static Author createAuthorFromLagalAuthenticator(
+			org.openhealthtools.mdht.uml.cda.LegalAuthenticator authenticator) {
+		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+
+		a.setAssignedAuthor(createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
+
+		// Copy Time
+		a.setTime(authenticator.getTime());
+
+		return a;
 	}
 
 	public static AssignedAuthor createAuthorFromOrganization(Organization organization) {
@@ -478,6 +529,30 @@ public class Util {
 		return on;
 	}
 
+	public static org.openhealthtools.mdht.uml.cda.Organization createOrganizationFromCustodianOrganization(
+			CustodianOrganization mdhtCO) {
+		org.openhealthtools.mdht.uml.cda.Organization o = CDAFactory.eINSTANCE.createOrganization();
+		if (mdhtCO != null) {
+			// Name
+			if (mdhtCO.getName() != null) {
+				o.getNames().add(EcoreUtil.copy(mdhtCO.getName()));
+			}
+			// Ids
+			if (!mdhtCO.getIds().isEmpty()) {
+				o.getIds().addAll(EcoreUtil.copyAll(mdhtCO.getIds()));
+			}
+			// Addr
+			if (mdhtCO.getAddr() != null && !mdhtCO.getAddrs().isEmpty()) {
+				o.getAddrs().addAll(EcoreUtil.copyAll(mdhtCO.getAddrs()));
+			}
+			// Telecoms
+			if (!mdhtCO.getTelecoms().isEmpty()) {
+				o.getTelecoms().addAll(EcoreUtil.copyAll(mdhtCO.getTelecoms()));
+			}
+		}
+		return o;
+	}
+
 	public static Organization createOrganizationFromParticipant(Participant p) {
 		Organization o = new Organization();
 
@@ -560,24 +635,6 @@ public class Util {
 		return ed;
 	}
 
-	/**
-	 * Creates an MDHT ED reference from a given String
-	 *
-	 * @param url
-	 *          the reference url
-	 * @param narrativeText
-	 *          the reference narrative text
-	 * @return the MDHT ED
-	 */
-	public static ED createReference(String url, String narrativeText) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		tel.setValue(url);
-		ed.setReference(tel);
-		ed.addText(narrativeText);
-		return ed;
-	}
-
 	// /**
 	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	// * and a generated extension.</div>
@@ -617,6 +674,24 @@ public class Util {
 	// }
 	// return ii;
 	// }
+
+	/**
+	 * Creates an MDHT ED reference from a given String
+	 *
+	 * @param url
+	 *          the reference url
+	 * @param narrativeText
+	 *          the reference narrative text
+	 * @return the MDHT ED
+	 */
+	public static ED createReference(String url, String narrativeText) {
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		tel.setValue(url);
+		ed.setReference(tel);
+		ed.addText(narrativeText);
+		return ed;
+	}
 
 	/**
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
@@ -906,20 +981,6 @@ public class Util {
 		return h;
 	}
 
-	/**
-	 * <div class="en">Creates an MDHT II object.</div>
-	 *
-	 * @param root
-	 *          <br>
-	 *          <div class="en">the root</div>
-	 * @return the II
-	 */
-	public static II ii(String root) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(root);
-		return ii;
-	}
-
 	// /**
 	// * Updates a Reference if it is a comment (in a deph of two counters)
 	// *
@@ -980,6 +1041,20 @@ public class Util {
 	// }
 	// return er;
 	// }
+
+	/**
+	 * <div class="en">Creates an MDHT II object.</div>
+	 *
+	 * @param root
+	 *          <br>
+	 *          <div class="en">the root</div>
+	 * @return the II
+	 */
+	public static II ii(String root) {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(root);
+		return ii;
+	}
 
 	/**
 	 * Checks if an EntryRelationship is a comment

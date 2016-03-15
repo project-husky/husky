@@ -84,8 +84,10 @@ public class TestUtils {
 	}
 
 	public static boolean isEqual(Author a1, Author a2) {
-		if (!a1.getGln().equals(a2.getGln()))
-			return false;
+		if (a1.getGln() != null) {
+			if (!a1.getGln().equals(a2.getGln()))
+				return false;
+		}
 		for (int i = 0; i < a1.getIds().size(); i++) {
 			if (!isEqual(a1.getIds().get(i), a2.getIds().get(i)))
 				return false;

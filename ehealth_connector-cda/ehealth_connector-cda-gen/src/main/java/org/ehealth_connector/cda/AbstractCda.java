@@ -45,6 +45,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
@@ -59,7 +60,6 @@ import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
@@ -200,6 +200,23 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
+	 * <div class="en">Sets the in fulfillment of reference to another
+	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
+	 * Dokumentes zu, auf das es sich bezieht</div>
+	 *
+	 * @param id
+	 *          of the referenced document
+	 */
+	public void addInFulfillmentOf(Identificator id) {
+		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		final Order o = CDAFactory.eINSTANCE.createOrder();
+		o.getIds().add(id.getIi());
+
+		ifo.setOrder(o);
+		getDoc().getInFulfillmentOfs().add(ifo);
+	}
+
+	/**
 	 * <div class="en">Adds a insurance organization</div> <div class="de">Fügt
 	 * eine Versicherung hinzu</div>
 	 *
@@ -328,6 +345,30 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
+	 * Returns a new Organization object based on the
+	 * custodian/representedOrganization object (name, ids, addr, telecoms will be
+	 * copied)
+	 *
+	 * @return the Organization
+	 */
+	public Organization getCustodianAsOrganization() {
+		Custodian mdhtC = getMdht().getCustodian();
+		AssignedCustodian mdhtAC = null;
+		if (mdhtC != null) {
+			mdhtAC = mdhtC.getAssignedCustodian();
+		}
+		CustodianOrganization mdhtCO = null;
+		if (mdhtAC != null) {
+			mdhtCO = mdhtAC.getRepresentedCustodianOrganization();
+		}
+
+		if (mdhtCO != null) {
+			return new Organization(Util.createOrganizationFromCustodianOrganization(mdhtCO));
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Gets all authors of the document</div> <div class="de">Gibt
 	 * alle Autoren des Dokuments zurück</div>
 	 *
@@ -429,8 +470,30 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public Person getLegalAuthenticator() {
 		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
-		final Person p = new Person(la.getAssignedEntity().getAssignedPerson());
-		return p;
+
+		if (la != null) {
+			if (la.getAssignedEntity() != null && la.getAssignedEntity().getAssignedPerson() != null) {
+				final Person p = new Person(la.getAssignedEntity().getAssignedPerson());
+				return p;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the legal authenticator of the document <div class="de">Gibt den
+	 * juristisch verantwortlichen Unterzeichner des Dokuments als Autor Objekt
+	 * zurück</div>
+	 *
+	 * @return the legal authenticator as Author object
+	 */
+	public org.ehealth_connector.common.Author getLegalAuthenticatorAsAuthor() {
+		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
+
+		if (la != null) {
+			return new org.ehealth_connector.common.Author(Util.createAuthorFromLagalAuthenticator(la));
+		}
+		return null;
 	}
 
 	/**
@@ -594,20 +657,18 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public void setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
 		final Custodian mdhtCustodian = CDAFactory.eINSTANCE.createCustodian();
-		getDoc().setCustodian(mdhtCustodian);
-
 		final AssignedCustodian assCust = CDAFactory.eINSTANCE.createAssignedCustodian();
-		mdhtCustodian.setAssignedCustodian(assCust);
-
-		mdhtCustodian.getAssignedCustodian().setRepresentedCustodianOrganization(
+		assCust.setRepresentedCustodianOrganization(
 				Util.createCustodianOrganizationFromOrganization(organization));
 
 		// Setzt die GLN des Arztes
-		II id = DatatypesFactory.eINSTANCE.createII();
 		if (organization.getMdhtOrganization().getIds().size() > 0) {
-			id = organization.getMdhtOrganization().getIds().get(0);
+			assCust.getRepresentedCustodianOrganization().getIds()
+					.addAll(organization.getMdhtOrganization().getIds());
 		}
-		mdhtCustodian.getAssignedCustodian().getRepresentedCustodianOrganization().getIds().add(id);
+
+		mdhtCustodian.setAssignedCustodian(assCust);
+		getDoc().setCustodian(mdhtCustodian);
 	}
 
 	/**
@@ -646,23 +707,6 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *          the id
 	 */
 	public abstract void setId(Identificator id);
-
-	/**
-	 * <div class="en">Sets the in fulfillment of reference to another
-	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
-	 * Dokumentes zu, auf das es sich bezieht</div>
-	 *
-	 * @param id
-	 *          of the referenced document
-	 */
-	public void setInFulfillmentOf(Identificator id) {
-		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
-		final Order o = CDAFactory.eINSTANCE.createOrder();
-		o.getIds().add(id.getIi());
-
-		ifo.setOrder(o);
-		getDoc().getInFulfillmentOfs().add(ifo);
-	}
 
 	/**
 	 * <div class="en">Sets the language of the document</div>
