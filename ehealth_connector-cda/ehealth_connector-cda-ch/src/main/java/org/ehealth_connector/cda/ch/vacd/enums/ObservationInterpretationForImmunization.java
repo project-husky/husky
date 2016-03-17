@@ -77,9 +77,8 @@ public enum ObservationInterpretationForImmunization {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return true, if is in value set
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
 		for (ObservationInterpretationForImmunization x : values()) {
@@ -90,9 +89,9 @@ public enum ObservationInterpretationForImmunization {
 		return false;
 	}
 
-	private ObservationInterpretation root;
-
 	private String displayName;
+
+	private ObservationInterpretation root;
 
 	private ObservationInterpretationForImmunization(ObservationInterpretation root,
 			String displayName) {

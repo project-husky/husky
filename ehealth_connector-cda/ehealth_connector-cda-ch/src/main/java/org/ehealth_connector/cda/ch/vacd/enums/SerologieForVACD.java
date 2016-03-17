@@ -182,18 +182,17 @@ public enum SerologieForVACD {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
 	 * ist.</div>
 	 *
-	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
 	 */
-	public boolean isInValueSet(String code) {
-		for (final SerologieForVACD x : values()) {
-			if (x.getCodeValue().equals(code)) {
+	public static boolean isInValueSet(String codeValue) {
+		for (SerologieForVACD x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}

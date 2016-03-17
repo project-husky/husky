@@ -82,9 +82,8 @@ public enum ObservationInterpretationVitalSign {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return true, if is in value set
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
 		for (ObservationInterpretationVitalSign x : values()) {

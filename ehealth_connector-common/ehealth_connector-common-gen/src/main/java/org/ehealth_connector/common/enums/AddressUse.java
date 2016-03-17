@@ -239,17 +239,16 @@ public enum AddressUse {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de">codeValue</div>
-	 * @return true, if is in value set
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
 	 */
-	public boolean isInValueSet(String codeValue) {
-		for (final AddressUse x : values()) {
-			if (x.getCodeValue().equals(code)) {
+	public static boolean isInValueSet(String codeValue) {
+		for (AddressUse x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}

@@ -37,6 +37,12 @@ public enum RiskOfExposure {
 	 */
 	BESCHAEFTIGTE_IM_GESUNDHEITSWESEN("213001", "Beschäftigte im Gesundheitswesen", "Personnel médical et soignant", "Personale medico e di cura", "20130101", ""),
 	/**
+	 * <div class="de">Enge Kontaktpersonen von Meningokokken-Erkrankten</div>
+	 * <div class="fr">Méningocoques dans l'entourage</div>
+	 * <div class="it">Meningococco nell'entourage </div>
+	 */
+	ENGE_KONTAKTPERSONEN_VON_MENINGOKOKKEN_ERKRANKTEN("213028", "enge Kontaktpersonen von Meningokokken-Erkrankten", "Méningocoques dans l'entourage", "Meningococco nell'entourage", "20150101", ""),
+	/**
 	 * <div class="de">Erwachsene und Kinder ab 6 Jahren, die in Endemiegebieten
 	 * wohnen oder sich teilweise dort aufhalten</div> <div class="fr">Adultes et
 	 * enfants dès 6 ans qui résident ou séjournent temporairement dans des
@@ -85,6 +91,12 @@ public enum RiskOfExposure {
 	 */
 	KINDER_AUS_LAENDERN_MIT_MITTLERER_UND_HOHER_ENDEMIZITAET_DIE_IN_DER_SCHWEIZ_LEBEN_UND_FUER_EINEN_VORUEBERGEHENDEN_AUFENTHALT_IN_IHR_HERKUNFTSLAND_ZURUECKKEHREN("213011", "Kinder aus Ländern mit mittlerer und hoher Endemizität, die in der Schweiz leben und für einen vorübergehenden Aufenthalt in ihr Herkunftsland zurückkehren", "Enfants originaires de pays de moyenne et haute endémicité vivant en Suisse et retournant dans leurs pays pour des séjours temporaires", "Bambini originari di paesi di media ed elevata endemicità che vivono in Svizzera e che ritornano nel loro paese per dei soggiorni temporanei", "20130101", ""),
 	/**
+	 * <div class="de">Kinderkrippe / Hort vor 5 Monaten</div>
+	 * <div class="fr">Crèche / garderie avant 5 mois </div> <div class="it">Asilo
+	 * nido prima di 5 mesi</div>
+	 */
+	KINDERKRIPPE_HORT_VOR_5_MONATEN("213031", "Kinderkrippe/Hort vor 5 Monaten", "Crèche/garderie avant 5 mois", "Asilo nido prima di 5 mesi", "20150101", ""),
+	/**
 	 * <div class="de">Konsumenten von injizierbaren Drogen und deren
 	 * Kontaktpersonen</div> <div class="fr">Consommateurs de drogues injectables
 	 * et personnes à leur contact</div> <div class="it">Consumatori di droghe
@@ -92,12 +104,65 @@ public enum RiskOfExposure {
 	 */
 	KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN("213012", "Konsumenten von injizierbaren Drogen und deren Kontaktpersonen", "Consommateurs de drogues injectables et personnes à leur contact", "Consumatori di droghe iniettabili e persone a loro contatto", "20130101", ""),
 	/**
+	 * <div class="de">Kontaktpersonen von einer schwangeren Frau</div>
+	 * <div class="fr">Entourage d ' une femme enceinte </div>
+	 * <div class="it">Entourage di una donna incinta </div>
+	 */
+	KONTAKTPERSONEN_VON_EINER_SCHWANGEREN_FRAU("213032", "Kontaktpersonen von einer schwangeren Frau", "Entourage d'une femme enceinte", "Entourage di una donna incinta", "20150101", ""),
+	/**
+	 * <div class="de">Kontaktpersonen von Hepatitis-A-Erkrankten</div>
+	 * <div class="fr">Hépatite A dans l'entourage</div> <div class="it">Epatite A
+	 * nell'entourage </div>
+	 */
+	KONTAKTPERSONEN_VON_HEPATITIS_A_ERKRANKTEN("213027", "Kontaktpersonen von Hepatitis-A-Erkrankten", "Hépatite A dans l'entourage", "Epatite A nell'entourage", "20150101", ""),
+	/**
+	 * <div class="de">Kontaktpersonen von Hepatitis-B-Erkrankten</div>
+	 * <div class="fr">Hépatite B dans l'entourage</div> <div class="it">Epatite B
+	 * nell'entourage </div>
+	 */
+	KONTAKTPERSONEN_VON_HEPATITIS_B_ERKRANKTEN("213026", "Kontaktpersonen von Hepatitis-B-Erkrankten", "Hépatite B dans l'entourage", "Epatite B nell'entourage", "20150101", ""),
+	/**
+	 * <div class="de">Laborpersonal mit Bakterien-Expositionsrisiko</div>
+	 * <div class="fr">Personnel de laboratoire exposé aux bactéries</div>
+	 * <div class="it">Personale di laboratorio esposto ai batteri</div>
+	 */
+	LABORPERSONAL_MIT_BAKTERIEN_EXPOSITIONSRISIKO("213030", "Laborpersonal mit Bakterien-Expositionsrisiko", "Personnel de laboratoire exposé aux bactéries", "Personale di laboratorio esposto ai batteri", "20150101", ""),
+	/**
+	 * <div class="de">Laborpersonal mit Virus-Expositionsrisiko</div>
+	 * <div class="fr">Personnel de laboratoire exposé aux virus</div>
+	 * <div class="it">Personale di laboratorio esposto ai virus</div>
+	 */
+	LABORPERSONAL_MIT_VIRUS_EXPOSITIONSRISIKO("213029", "Laborpersonal mit Virus-Expositionsrisiko", "Personnel de laboratoire exposé aux virus", "Personale di laboratorio esposto ai virus", "20150101", ""),
+	/**
 	 * <div class="de">Männer, die mit Männern Geschlechtsverkehr haben</div>
 	 * <div class="fr">Hommes ayant des relations sexuelles avec d’autres
 	 * hommes</div> <div class="it">Uomini che hanno rapporti sessuali con altri
 	 * uomini</div>
 	 */
 	MAENNER_DIE_MIT_MAENNERN_GESCHLECHTSVERKEHR_HABEN("213014", "Männer, die mit Männern Geschlechtsverkehr haben", "Hommes ayant des relations sexuelles avec d’autres hommes", "Uomini che hanno rapporti sessuali con altri uomini", "20130101", ""),
+	/**
+	 * <div class="de">Mitarbeitende von Kinderkrippen</div>
+	 * <div class="fr">Professionnels de la petite enfance</div>
+	 * <div class="it">Professionisti della prima infanzia</div>
+	 */
+	MITARBEITENDE_VON_KINDERKRIPPEN("213033", "Mitarbeitende von Kinderkrippen", "Professionnels de la petite enfance", "Professionisti della prima infanzia", "20150101", ""),
+	/**
+	 * <div class="de">Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit
+	 * hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren
+	 * (in ihrem ersten Lebensjahr ) </div> <div class="fr">Nouveau - nés ou
+	 * nourrissons &lt; 12 mois originaire d’un pays à haute endémie et
+	 * susceptibles d’y retourner dans leur 1ère année de vie </div>
+	 * <div class="it">Neonati o lattanti &lt; 12 mesi originari di un paese a
+	 * elevata endemia e suscettibili di ritornarci nel loro primo anno di
+	 * vita </div>
+	 */
+	NEUGEBORENE_UND_SAEUGLINGE_UNTER_12_MONATEN_AUS_LAENDERN_MIT_HOHER_TUBERKULOSE_PRAEVALENZ_DIE_WAHRSCHEINLICH_WIEDER_DORTHIN_ZURUECKKEHREN_IN_IHREM_ERSTEN_LEBENSJAHR("213024", "Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)", "Nouveau-nés ou nourrissons < 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie", "Neonati o lattanti < 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ", "20150101", ""),
+	/**
+	 * <div class="de">Neugeborene von HBsAg-positiven Müttern </div>
+	 * <div class="fr">Nouveau-nés de mères HBsAg positives</div>
+	 * <div class="it">Neonati di madri HBsAg positive </div>
+	 */
+	NEUGEBORENE_VON_HBSAG_POSITIVEN_MUETTERN("213025", "Neugeborene von HBsAg-positiven Müttern", "Nouveau-nés de mères HBsAg positives", "Neonati di madri HBsAg positive", "20150101", ""),
 	/**
 	 * <div class="de">Patientinnen und Patienten in Pflegeheimen und in
 	 * Einrichtungen für Personen mit chronischen Erkrankungen </div>
@@ -164,72 +229,7 @@ public enum RiskOfExposure {
 	 * <div class="fr">Vétérinaires (étudiants : assistants vétérinaires)</div>
 	 * <div class="it">Veterinari (studenti, assistenti veterinari)</div>
 	 */
-	TIERAERZTE_INKL_STUDENTEN_PRAXISANGESTELLTE("213023", "Tierärzte (inkl. Studenten, Praxisangestellte)", "Vétérinaires (étudiants : assistants vétérinaires)", "Veterinari (studenti, assistenti veterinari)", "20130101", ""),
-	/**
-	 * <div class="de">Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit
-	 * hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren
-	 * (in ihrem ersten Lebensjahr ) </div> <div class="fr">Nouveau - nés ou
-	 * nourrissons &lt; 12 mois originaire d’un pays à haute endémie et
-	 * susceptibles d’y retourner dans leur 1ère année de vie </div>
-	 * <div class="it">Neonati o lattanti &lt; 12 mesi originari di un paese a
-	 * elevata endemia e suscettibili di ritornarci nel loro primo anno di
-	 * vita </div>
-	 */
-	NEUGEBORENE_UND_SAEUGLINGE_UNTER_12_MONATEN_AUS_LAENDERN_MIT_HOHER_TUBERKULOSE_PRAEVALENZ_DIE_WAHRSCHEINLICH_WIEDER_DORTHIN_ZURUECKKEHREN_IN_IHREM_ERSTEN_LEBENSJAHR("213024", "Neugeborene und Säuglinge unter 12 Monaten aus Ländern mit hoher Tuberkulose prävalenz, die wahrscheinlich wieder dorthin zurückkehren (in ihrem ersten Lebensjahr)", "Nouveau-nés ou nourrissons < 12 mois originaire d’un pays à haute endémie et susceptibles d’y retourner dans leur 1ère année de vie", "Neonati o lattanti < 12 mesi originari di un paese a elevata endemia e suscettibili di ritornarci nel loro primo anno di vita ", "20150101", ""),
-	/**
-	 * <div class="de">Neugeborene von HBsAg-positiven Müttern </div>
-	 * <div class="fr">Nouveau-nés de mères HBsAg positives</div>
-	 * <div class="it">Neonati di madri HBsAg positive </div>
-	 */
-	NEUGEBORENE_VON_HBSAG_POSITIVEN_MUETTERN("213025", "Neugeborene von HBsAg-positiven Müttern", "Nouveau-nés de mères HBsAg positives", "Neonati di madri HBsAg positive", "20150101", ""),
-	/**
-	 * <div class="de">Kontaktpersonen von Hepatitis-B-Erkrankten</div>
-	 * <div class="fr">Hépatite B dans l'entourage</div> <div class="it">Epatite B
-	 * nell'entourage </div>
-	 */
-	KONTAKTPERSONEN_VON_HEPATITIS_B_ERKRANKTEN("213026", "Kontaktpersonen von Hepatitis-B-Erkrankten", "Hépatite B dans l'entourage", "Epatite B nell'entourage", "20150101", ""),
-	/**
-	 * <div class="de">Kontaktpersonen von Hepatitis-A-Erkrankten</div>
-	 * <div class="fr">Hépatite A dans l'entourage</div> <div class="it">Epatite A
-	 * nell'entourage </div>
-	 */
-	KONTAKTPERSONEN_VON_HEPATITIS_A_ERKRANKTEN("213027", "Kontaktpersonen von Hepatitis-A-Erkrankten", "Hépatite A dans l'entourage", "Epatite A nell'entourage", "20150101", ""),
-	/**
-	 * <div class="de">Enge Kontaktpersonen von Meningokokken-Erkrankten</div>
-	 * <div class="fr">Méningocoques dans l'entourage</div>
-	 * <div class="it">Meningococco nell'entourage </div>
-	 */
-	ENGE_KONTAKTPERSONEN_VON_MENINGOKOKKEN_ERKRANKTEN("213028", "enge Kontaktpersonen von Meningokokken-Erkrankten", "Méningocoques dans l'entourage", "Meningococco nell'entourage", "20150101", ""),
-	/**
-	 * <div class="de">Laborpersonal mit Virus-Expositionsrisiko</div>
-	 * <div class="fr">Personnel de laboratoire exposé aux virus</div>
-	 * <div class="it">Personale di laboratorio esposto ai virus</div>
-	 */
-	LABORPERSONAL_MIT_VIRUS_EXPOSITIONSRISIKO("213029", "Laborpersonal mit Virus-Expositionsrisiko", "Personnel de laboratoire exposé aux virus", "Personale di laboratorio esposto ai virus", "20150101", ""),
-	/**
-	 * <div class="de">Laborpersonal mit Bakterien-Expositionsrisiko</div>
-	 * <div class="fr">Personnel de laboratoire exposé aux bactéries</div>
-	 * <div class="it">Personale di laboratorio esposto ai batteri</div>
-	 */
-	LABORPERSONAL_MIT_BAKTERIEN_EXPOSITIONSRISIKO("213030", "Laborpersonal mit Bakterien-Expositionsrisiko", "Personnel de laboratoire exposé aux bactéries", "Personale di laboratorio esposto ai batteri", "20150101", ""),
-	/**
-	 * <div class="de">Kinderkrippe / Hort vor 5 Monaten</div>
-	 * <div class="fr">Crèche / garderie avant 5 mois </div> <div class="it">Asilo
-	 * nido prima di 5 mesi</div>
-	 */
-	KINDERKRIPPE_HORT_VOR_5_MONATEN("213031", "Kinderkrippe/Hort vor 5 Monaten", "Crèche/garderie avant 5 mois", "Asilo nido prima di 5 mesi", "20150101", ""),
-	/**
-	 * <div class="de">Kontaktpersonen von einer schwangeren Frau</div>
-	 * <div class="fr">Entourage d ' une femme enceinte </div>
-	 * <div class="it">Entourage di una donna incinta </div>
-	 */
-	KONTAKTPERSONEN_VON_EINER_SCHWANGEREN_FRAU("213032", "Kontaktpersonen von einer schwangeren Frau", "Entourage d'une femme enceinte", "Entourage di una donna incinta", "20150101", ""),
-	/**
-	 * <div class="de">Mitarbeitende von Kinderkrippen</div>
-	 * <div class="fr">Professionnels de la petite enfance</div>
-	 * <div class="it">Professionisti della prima infanzia</div>
-	 */
-	MITARBEITENDE_VON_KINDERKRIPPEN("213033", "Mitarbeitende von Kinderkrippen", "Professionnels de la petite enfance", "Professionisti della prima infanzia", "20150101", "");
+	TIERAERZTE_INKL_STUDENTEN_PRAXISANGESTELLTE("213023", "Tierärzte (inkl. Studenten, Praxisangestellte)", "Vétérinaires (étudiants : assistants vétérinaires)", "Veterinari (studenti, assistenti veterinari)", "20130101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD exp-risks";
@@ -257,16 +257,15 @@ public enum RiskOfExposure {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
 	 *          <div class="de">code</div>
-	 * @return true, if is in value set
+	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final RiskOfExposure x : values()) {
+		for (RiskOfExposure x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}

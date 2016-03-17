@@ -49,7 +49,6 @@ public enum StandardCdaBodySelections {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
 	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
