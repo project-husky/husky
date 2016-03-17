@@ -2,6 +2,7 @@ package org.ehealth_connector.cda.ch.enums;
 
 import java.util.Arrays;
 
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -194,14 +195,21 @@ public enum ImmunologicalDisorders {
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
-	 *
 	 * @param enumName
 	 *          <br>
 	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumName) {
-		return Arrays.asList(values()).contains(enumName);
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(ImmunologicalDisorders.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
 	}
 
 	/**

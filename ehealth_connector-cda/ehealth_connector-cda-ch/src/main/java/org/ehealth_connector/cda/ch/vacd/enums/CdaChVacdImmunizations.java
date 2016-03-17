@@ -222,14 +222,21 @@ public enum CdaChVacdImmunizations {
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
-	 *
 	 * @param enumName
 	 *          <br>
 	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumName) {
-		return Arrays.asList(values()).contains(enumName);
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(CdaChVacdImmunizations.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
 	}
 
 	/**

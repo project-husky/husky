@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -431,8 +432,16 @@ public enum RiskOfComplications {
 	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumName) {
-		return Arrays.asList(values()).contains(enumName);
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(RiskOfComplications.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
 	}
 
 	/**

@@ -157,17 +157,23 @@ public enum Severity {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
-	 * 
+	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public boolean isEnumOfValueSet(String enumName) {
-		return Arrays.asList(values()).contains(enumName);
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(Severity.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
 	}
-
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
