@@ -24,12 +24,6 @@ public class LaboratoryObservation
 	 *          according constructor).
 	 * @param interpretationCode
 	 *          the interpretation code
-	 * @param effectiveTime
-	 *          <div class="en">point in time of the result (physiological
-	 *          relevant point in time). Precision: Date with hour and
-	 *          minute</div> <div class="de">Zeitpunkt des Resultats
-	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
-	 *          und Tageszeit mit Stunde und Minute </div>
 	 */
 	public LaboratoryObservation(LabObsList code, Value value,
 			ObservationInterpretation interpretationCode) {
@@ -51,12 +45,6 @@ public class LaboratoryObservation
 	 *          the reference Range (with Value(low, high) and interpretationCode.
 	 * @param interpretationCode
 	 *          the interpretation code
-	 * @param effectiveTime
-	 *          <div class="en">point in time of the result (physiological
-	 *          relevant point in time). Precision: Date with hour and
-	 *          minute</div> <div class="de">Zeitpunkt des Resultats
-	 *          (physiologisch relevanter Zeitpunkt) Genauigkeit des Werts: Datum
-	 *          und Tageszeit mit Stunde und Minute </div>
 	 */
 	public LaboratoryObservation(LabObsList code, Value value, ReferenceRange referenceRange,
 			ObservationInterpretation interpretationCode) {

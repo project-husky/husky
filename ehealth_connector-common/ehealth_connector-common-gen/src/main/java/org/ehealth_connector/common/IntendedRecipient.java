@@ -139,8 +139,6 @@ public class IntendedRecipient {
 	/**
 	 * Returns the underlying mdht element
 	 *
-	 * @return
-	 *
 	 * @return the mdht element
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getMdhtIntendedRecipient() {

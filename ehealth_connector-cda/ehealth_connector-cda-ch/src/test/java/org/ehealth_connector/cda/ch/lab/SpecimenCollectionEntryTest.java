@@ -11,8 +11,9 @@ import org.w3c.dom.Document;
 public class SpecimenCollectionEntryTest extends TestUtils {
 	@Test
 	public void testModel() throws XPathExpressionException {
+		super.init();
 		// Constructor with effectiveTime and id unknown
-		SpecimenCollectionEntry sce = new SpecimenCollectionEntry(true);
+		SpecimenCollectionEntry sce = new SpecimenCollectionEntry(id1, "testRef");
 
 		Document document = sce.getDocument();
 

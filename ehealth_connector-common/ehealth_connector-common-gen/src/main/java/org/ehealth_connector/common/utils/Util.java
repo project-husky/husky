@@ -78,6 +78,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -237,17 +238,20 @@ public class Util {
 			asEnt.getRepresentedOrganizations().add(a.getRepresentedOrganization());
 		}
 		// Set Assigned Person
-		asEnt.setAssignedPerson(a.getAssignedPerson());
+		if (a.getAssignedPerson() != null) {
+			asEnt.setAssignedPerson(a.getAssignedPerson());
+		}
+
 		return asEnt;
 	}
 
 	/**
 	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
 	 *
-	 * @param author
+	 * @param authenticator
 	 *          <br>
-	 *          <div class="de">the author</div>
-	 * @return the legal authenticator
+	 *          <div class="de">the authenticator</div>
+	 * @return the Author
 	 */
 	public static Author createAuthorFromLagalAuthenticator(
 			org.openhealthtools.mdht.uml.cda.LegalAuthenticator authenticator) {
@@ -330,12 +334,22 @@ public class Util {
 			// take the first address and set it as CustodianAdress
 			if (organization.getMdhtOrganization().getAddrs().size() > 0) {
 				mdhtCustOrg.setAddr(EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+				// Somehow PostalAddressUse is not copied by the MDHT function. We have
+				// to do it manually.
+				mdhtCustOrg.getAddr().getUses()
+						.addAll(organization.getMdhtOrganization().getAddrs().get(0).getUses());
 			}
 
 			// take the first telecom and set it as CustodianTelecom
 			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
 				mdhtCustOrg
 						.setTelecom(EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
+				mdhtCustOrg.getTelecom().getUses()
+						.add(organization.getMdhtOrganization().getTelecoms().get(0).getUses().get(0));
+				TelecommunicationAddressUse test = organization.getMdhtOrganization().getTelecoms().get(0)
+						.getUses().get(0);
+				// mdhtCustOrg.getTelecom().getUses().clear();
+				// mdhtCustOrg.getTelecom().getUses().add(TelecommunicationAddressUse.PUB);
 			}
 			return mdhtCustOrg;
 		}
@@ -621,7 +635,8 @@ public class Util {
 	}
 
 	/**
-	 * Creates an MDHT ED reference from a given String
+	 * Creates an MDHT ED reference from a given String. Adds the hashtag '#'
+	 * automatically, if not present as first character.
 	 *
 	 * @param value
 	 *          the reference value
@@ -630,6 +645,9 @@ public class Util {
 	public static ED createReference(String value) {
 		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		if (!value.startsWith("#")) {
+			value = "#" + value;
+		}
 		tel.setValue(value);
 		ed.setReference(tel);
 		return ed;

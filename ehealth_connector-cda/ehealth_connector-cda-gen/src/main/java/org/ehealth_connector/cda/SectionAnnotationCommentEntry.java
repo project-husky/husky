@@ -153,8 +153,6 @@ public class SectionAnnotationCommentEntry
 	 *          the content ID reference
 	 */
 	public void setContentIdReference(String value) {
-		if (!value.startsWith("#"))
-			value = "#" + value;
 		this.getMdht().setText(Util.createReference(value));
 	}
 

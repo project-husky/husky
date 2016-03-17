@@ -9,6 +9,9 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class SpecimenReceivedEntry
 		extends MdhtEntryActFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived> {
@@ -17,10 +20,28 @@ public class SpecimenReceivedEntry
 		super(LABFactory.eINSTANCE.createSpecimenReceived().init());
 	}
 
-	// Required Elements
+	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param effectiveTime
+	 */
 	public SpecimenReceivedEntry(Date effectiveTime) {
 		this();
 		setEffectiveTime(effectiveTime);
+	}
+
+	/**
+	 * Instantiates the class with the required elements for LRQC.
+	 *
+	 * @param effectiveTime
+	 *          the effectiveTime
+	 * @param id
+	 *          the id. If null, it will be set to NullFlavor.UNK
+	 */
+	public SpecimenReceivedEntry(Date effectiveTime, Identificator id) {
+		this();
+		setEffectiveTime(effectiveTime);
+		addId(id);
 	}
 
 	public SpecimenReceivedEntry(SpecimenReceived mdht) {
@@ -28,7 +49,13 @@ public class SpecimenReceivedEntry
 	}
 
 	public void addId(Identificator id) {
-		getMdht().getIds().add(id.getIi());
+		if (id != null) {
+			getMdht().getIds().add(id.getIi());
+		} else {
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setNullFlavor(NullFlavor.UNK);
+			getMdht().getIds().add(ii);
+		}
 	}
 
 	public Date getEffectiveTime() {

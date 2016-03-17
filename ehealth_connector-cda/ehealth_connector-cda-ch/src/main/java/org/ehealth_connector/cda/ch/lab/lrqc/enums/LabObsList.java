@@ -2969,13 +2969,13 @@ public enum LabObsList {
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
 	 * Codes Systems</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "qc-labObsList";
+	public static final String CODE_SYSTEM_NAME = "LOINC";
 
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.144.1.2.2016.1";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.1";
 
 	/**
 	 * <div class="en">Code for Cortisol [Mass/volume] in Serum or Plasma</div>
@@ -3143,11 +3143,6 @@ public enum LabObsList {
 	 * <div class="en">Code for Digoxin [Moles/volume] in Serum or Plasma</div>
 	 */
 	public static final String DIGOXIN_MOLESVOLUME_IN_SERUM_OR_PLASMA_CODE = "14698-5";
-
-	/**
-	 * <div class="en">Code for E Ab [Presence] in Serum or Plasma</div>
-	 */
-	public static final String E_AB_PRESENCE_IN_SERUM_OR_PLASMA_CODE = "1018-1";
 
 	/**
 	 * <div class="en">Code for Enterovirus RNA [Presence] in Unspecified specimen
@@ -5641,7 +5636,7 @@ public enum LabObsList {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM_OID);
+		cd.setCodeSystem(getCodeSystemOid());
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		cd.setCodeSystemName(CODE_SYSTEM_NAME);
@@ -5655,7 +5650,7 @@ public enum LabObsList {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
+		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 

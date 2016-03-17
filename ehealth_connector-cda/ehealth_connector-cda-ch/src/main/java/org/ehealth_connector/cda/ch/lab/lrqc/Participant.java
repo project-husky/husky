@@ -125,9 +125,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 * Gets a list of ZSR numbers, which are used if the participant wants to get
 	 * refunded.
 	 *
-	 * @param zsrNumber
-	 *          the extension part of the ZSR number. Root will be the same as
-	 *          CdaChLrqc.ZSR_ID_ROOT
+	 * @return the list of ZSR IDs
 	 */
 	public List<String> getZsrIds() {
 		ArrayList<String> zl = new ArrayList<String>();

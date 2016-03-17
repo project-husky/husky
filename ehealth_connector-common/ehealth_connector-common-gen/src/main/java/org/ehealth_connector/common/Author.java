@@ -74,7 +74,18 @@ public class Author {
 	}
 
 	/**
-	 * Instantiates a new author.
+	 * Instantiates a new software author (e.g. a laboratory information system)
+	 *
+	 * @param device
+	 *          the device
+	 */
+	public Author(AuthoringDevice device) {
+		this();
+		setAssignedAuthoringDevice(device);
+	}
+
+	/**
+	 * Instantiates a new human author.
 	 *
 	 * @param name
 	 *          the name
@@ -85,8 +96,8 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt einen neuen Autor (Dieser Konstruktor wird oft gebraucht für
-	 * Behandelnde).
+	 * Erstellt einen neuen (menschlien) Autor (Dieser Konstruktor wird oft
+	 * gebraucht für Behandelnde).
 	 *
 	 * @param name
 	 *          Name
@@ -582,6 +593,9 @@ public class Author {
 			mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
 		}
 		mAsAuthor.setAssignedAuthoringDevice(device.copy());
+		if (mAsAuthor.getAssignedPerson() != null) {
+			mAsAuthor.eUnset(mPerson.eContainingFeature());
+		}
 	}
 
 	/**

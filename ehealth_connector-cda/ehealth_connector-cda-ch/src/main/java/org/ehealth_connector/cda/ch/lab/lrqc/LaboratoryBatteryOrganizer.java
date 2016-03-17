@@ -1,6 +1,7 @@
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
@@ -16,11 +17,20 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	/**
 	 * Instantiates the class with the required elements
 	 *
+	 * @param effectiveTime
+	 *          <div class="en">the point in time of the measurement. If unknown,
+	 *          effectiveTime has to be declared with nullFlavor.</div>
+	 *          <div class="de">Zeitpunkt der Messung. Ist dieser unbekannt, MUSS
+	 *          effectiveTime mit nullFlavor angegeben werden. nullFlavor ist nur
+	 *          erlaubt, wenn der Organizer ausschliesslich Körpergrösse oder
+	 *          Gewicht enthält. Wenn der Organizer mindestens eine andere
+	 *          Beobachtung enthält, muss ein Wert angegeben werden.</div>
 	 * @param observation
 	 *          the observation
 	 */
-	public LaboratoryBatteryOrganizer(LaboratoryObservation observation) {
+	public LaboratoryBatteryOrganizer(Date effectiveTime, LaboratoryObservation observation) {
 		this();
+		setEffectiveTime(effectiveTime);
 		addLaboratoryObservation(observation);
 	}
 
@@ -39,6 +49,8 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 
 	public void addObservationMediaEntry(ObservationMediaEntry observationMedia) {
 		getMdht().addObservationMedia(observationMedia.copy());
+		int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
 
 	public List<LaboratoryObservation> getLaboratoryObservations() {

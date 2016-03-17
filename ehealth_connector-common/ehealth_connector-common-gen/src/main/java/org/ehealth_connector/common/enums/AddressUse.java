@@ -148,6 +148,9 @@ public enum AddressUse {
 		case MOBILE:
 			retVal = TelecommunicationAddressUse.MC;
 			break;
+		case PUBLIC:
+			retVal = TelecommunicationAddressUse.PUB;
+			break;
 		default:
 			retVal = TelecommunicationAddressUse.HP;
 		}

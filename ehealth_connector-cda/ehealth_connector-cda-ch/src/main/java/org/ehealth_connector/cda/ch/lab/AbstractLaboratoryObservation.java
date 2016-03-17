@@ -7,9 +7,12 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.ReferenceRange;
+import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 
 public abstract class AbstractLaboratoryObservation
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
@@ -59,6 +62,23 @@ public abstract class AbstractLaboratoryObservation
 		return null;
 	}
 
+	@Override
+	public String getTextReference() {
+		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+			return this.getMdht().getText().getReference().getValue();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Value> getValues() {
+		ArrayList<Value> vl = new ArrayList<Value>();
+		for (ANY v : getMdht().getValues()) {
+			vl.add(new Value(v));
+		}
+		return vl;
+	}
+
 	// Convenience function to set a new code, which is not in the value set for
 	// LRXX
 	public void setNewCode(Code code, SectionAnnotationCommentEntry commentEntry) {
@@ -71,5 +91,12 @@ public abstract class AbstractLaboratoryObservation
 	public void setReferenceRange(ReferenceRange referenceRange) {
 		getMdht().getReferenceRanges().clear();
 		getMdht().getReferenceRanges().add(referenceRange.getMdht());
+	}
+
+	@Override
+	public void setTextReference(String textReference) {
+		if (!textReference.startsWith("#"))
+			textReference = "#" + textReference;
+		this.getMdht().setText(Util.createReference(textReference));
 	}
 }

@@ -109,7 +109,8 @@ public class CdaChLrqc
 	 *          the order number of the QKZ
 	 *          (ClinicalDocument/inFullfillmentOf/id[@extension])
 	 * @param legalAuthenticator
-	 *          the legal authenticator of this document (e.g. 'Laborleiter')
+	 *          the legal authenticator of this document (e.g. 'Laborleiter'). You
+	 *          have to provide an Author, who is NOT a software.
 	 * @param id
 	 *          the ID of the recordTarget. The ID identifies the specimen and
 	 *          will be set in ClinicalDocument/recordTarget[0]/patientRole/id. If
@@ -444,7 +445,6 @@ public class CdaChLrqc
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode, getLanguageCode());
-				getMdht().setCode(sectionCode.getCE());
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}

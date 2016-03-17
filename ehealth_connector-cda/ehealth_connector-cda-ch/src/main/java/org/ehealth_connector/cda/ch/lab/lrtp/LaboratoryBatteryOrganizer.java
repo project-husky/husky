@@ -15,8 +15,6 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	/**
 	 * Instantiates the class with the required elements
 	 *
-	 * @param observation
-	 *          the observation
 	 * @param effectiveTime
 	 *          <div class="en">the point in time of the measurement. If unknown,
 	 *          effectiveTime has to be declared with nullFlavor.</div>
@@ -25,9 +23,11 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 *          erlaubt, wenn der Organizer ausschliesslich Körpergrösse oder
 	 *          Gewicht enthält. Wenn der Organizer mindestens eine andere
 	 *          Beobachtung enthält, muss ein Wert angegeben werden.</div>
+	 * @param observation
+	 *          the observation
 	 *
 	 */
-	public LaboratoryBatteryOrganizer(LaboratoryObservation observation, Date effectiveTime) {
+	public LaboratoryBatteryOrganizer(Date effectiveTime, LaboratoryObservation observation) {
 		this();
 		addLaboratoryObservation(observation);
 		setEffectiveTime(effectiveTime);

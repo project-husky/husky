@@ -20,10 +20,12 @@ import java.math.BigDecimal;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -54,6 +56,24 @@ public class Value {
 	 */
 	public Value(ANY value) {
 		mValue = value;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt and
+	 * an nullFlavor</div> <div class="de">Instantiiert ein neues Value Objekt.
+	 * Value repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY
+	 * Datenobjekts und einem NullFlavor initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param value
+	 *          <br>
+	 *          <div class="de"> value</div> <div class="fr"></div>
+	 *          <div class="it"></div>
+	 */
+	public Value(ANY value, NullFlavor nullFlavor) {
+		mValue = value;
+		value.setNullFlavor(nullFlavor);
 	}
 
 	/**
@@ -166,6 +186,10 @@ public class Value {
 		mValue = rto;
 	}
 
+	public Value(ED ed) {
+		mValue = ed;
+	}
+
 	/**
 	 * <div class="en">Instantiates a new value.</div>
 	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
@@ -197,6 +221,32 @@ public class Value {
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value.</div>
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
+	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
+	 * wird ein Value Objekt auf Basis eines MDHT ED Objektes mit einem text oder
+	 * einer Referenz initalisiert. initialisiert.</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param value
+	 *          <br>
+	 *          <div class="de"> code system</div> <div class="fr"></div>
+	 *          <div class="it"></div>
+	 * @param isText
+	 *          indicates, if the given value is a text (/value will be created)
+	 *          or a reference (/value/reference[@value] will be created)
+	 */
+	public Value(String value, boolean isText) {
+		final ED ed;
+		if (!isText) {
+			ed = Util.createReference(value);
+		} else {
+			ed = Util.createEd(value);
+		}
+		mValue = ed;
 	}
 
 	/**
@@ -300,6 +350,32 @@ public class Value {
 	}
 
 	/**
+	 * Returns the reference value of the underlying MDHT type ED (text)
+	 *
+	 * @return the text of the underlying type ED
+	 */
+	public String getEdReferenceValue() {
+		if (isEd()) {
+			ED ed = (ED) mValue;
+			return ed.getReference().getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the text of the underlying MDHT type ED (text)
+	 *
+	 * @return the text of the underlying type ED
+	 */
+	public String getEdText() {
+		if (isEd()) {
+			ED ed = (ED) mValue;
+			return ed.getText();
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Returns the higher bound of an interval of physical
 	 * measurements</div> Gibt den oberen Wert eines Intervals physikalischer
 	 * Größen zurück.
@@ -390,6 +466,15 @@ public class Value {
 		// return false;
 		// }
 		return (mValue instanceof CD);
+	}
+
+	/**
+	 * Checks if the Value object has the Datatype ED (Text).
+	 *
+	 * @return boolean true, if it is ED, false otherwise
+	 */
+	public boolean isEd() {
+		return (mValue instanceof ED);
 	}
 
 	/**
