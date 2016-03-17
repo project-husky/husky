@@ -25,7 +25,7 @@ public class BloodGroupObservationTest extends TestUtils {
 
 		// text contentId Reference
 		o.setContentIdReference("TestRef");
-		assertEquals("TestRef", o.getContentIdReference());
+		assertEquals("#TestRef", o.getContentIdReference());
 
 		// effective Time
 		o.setEffectiveTime(endDate);

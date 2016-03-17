@@ -153,7 +153,7 @@ public class LaboratoryObservation
 	}
 
 	/**
-	 * Sets the interpretation code.
+	 * Adds the interpretation code.
 	 *
 	 * @param code
 	 *          the new interpretation code
@@ -297,17 +297,17 @@ public class LaboratoryObservation
 	}
 
 	/**
-	 * <div class="en">Gets the (first) interpretation code, which indicates
-	 * wheater an immune protection exists (Interpretation Code)</div>
-	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (erster
-	 * Interpretation Code).</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets interpretation code values, which indicates wheater an
+	 * immune protection exists (Interpretation Code)</div> <div class="de">Gibt
+	 * zurück, ob ein Impfschutz besteht (erster Interpretation Code).</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the interpretation code
 	 */
-	public ArrayList<String> getInterpretationCodes() {
-		ArrayList<String> icl = new ArrayList<String>();
+	public ArrayList<Code> getInterpretationCodes() {
+		ArrayList<Code> icl = new ArrayList<Code>();
 		for (CE ic : getMdht().getInterpretationCodes()) {
-			icl.add(ic.getCode());
+			icl.add(new Code(ic));
 		}
 		return icl;
 	}
@@ -315,7 +315,26 @@ public class LaboratoryObservation
 	public List<ObservationInterpretation> getInterpretationCodesAsEnum() {
 		ArrayList<ObservationInterpretation> icl = new ArrayList<ObservationInterpretation>();
 		for (CE ic : getMdht().getInterpretationCodes()) {
-			icl.add(ObservationInterpretation.getEnum(ic.getCode()));
+			ObservationInterpretation oi = ObservationInterpretation.getEnum(ic.getCode());
+			if (oi != null) {
+				icl.add(ObservationInterpretation.getEnum(ic.getCode()));
+			}
+		}
+		return icl;
+	}
+
+	/**
+	 * <div class="en">Gets interpretation code values, which indicates wheater an
+	 * immune protection exists (Interpretation Code)</div> <div class="de">Gibt
+	 * zurück, ob ein Impfschutz besteht (erster Interpretation Code).</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the interpretation code
+	 */
+	public ArrayList<String> getInterpretationCodeValues() {
+		ArrayList<String> icl = new ArrayList<String>();
+		for (CE ic : getMdht().getInterpretationCodes()) {
+			icl.add(ic.getCode());
 		}
 		return icl;
 	}

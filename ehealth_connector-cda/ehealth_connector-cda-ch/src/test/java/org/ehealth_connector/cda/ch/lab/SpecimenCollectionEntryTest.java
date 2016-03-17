@@ -13,7 +13,7 @@ public class SpecimenCollectionEntryTest extends TestUtils {
 	public void testModel() throws XPathExpressionException {
 		super.init();
 		// Constructor with effectiveTime and id unknown
-		SpecimenCollectionEntry sce = new SpecimenCollectionEntry(id1, "testRef");
+		SpecimenCollectionEntry sce = new SpecimenCollectionEntry(null, "testRef");
 
 		Document document = sce.getDocument();
 

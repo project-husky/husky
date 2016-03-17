@@ -4,6 +4,9 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
@@ -46,6 +49,23 @@ public class LaboratoryObservation
 	public LaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *          the new interpretation code
+	 */
+	@Override
+	public void addInterpretationCode(ObservationInterpretation code) {
+		if (code != null) {
+			getMdht().getInterpretationCodes().add(code.getCE());
+		} else {
+			CE ce = DatatypesFactory.eINSTANCE.createCE();
+			ce.setNullFlavor(NullFlavor.NA);
+			getMdht().getInterpretationCodes().add(ce);
+		}
 	}
 
 	public org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList getCodeAsEnum() {

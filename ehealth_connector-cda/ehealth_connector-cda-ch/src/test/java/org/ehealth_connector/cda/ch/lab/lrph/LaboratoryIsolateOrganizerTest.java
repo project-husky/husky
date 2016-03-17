@@ -38,7 +38,7 @@ public class LaboratoryIsolateOrganizerTest extends TestUtils {
 		assertNotNull(lio.getSpecimen());
 		assertTrue(code1.equals(lio.getSpecimen().getCode()));
 		assertTrue(id1.equals(lio.getSpecimen().getIdList().get(0)));
-		assertEquals("testRef5", lio.getSpecimen().getCode().getOriginalTextReference());
+		assertEquals("#testRef5", lio.getSpecimen().getCode().getOriginalTextReference());
 
 		document = lio.getDocument();
 		assertTrue(xExist(document, "//specimen[@typeCode='SPC']"));

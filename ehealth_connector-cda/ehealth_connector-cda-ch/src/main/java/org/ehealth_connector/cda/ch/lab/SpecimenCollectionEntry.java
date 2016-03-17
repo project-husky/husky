@@ -9,7 +9,9 @@ import org.ehealth_connector.common.ParticipantRole;
 import org.ehealth_connector.common.PlayingEntity;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 public class SpecimenCollectionEntry
 		extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
@@ -114,7 +116,13 @@ public class SpecimenCollectionEntry
 	 *          your lab as extension
 	 */
 	public void addParticipant(Identificator id) {
-		addParticipant(id.getIi());
+		if (id != null) {
+			addParticipant(id.getIi());
+		} else {
+			II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setNullFlavor(NullFlavor.NA);
+			addParticipant(ii);
+		}
 	}
 
 	private void addParticipant(II id) {
