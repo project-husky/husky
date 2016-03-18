@@ -54,146 +54,6 @@ import ca.uhn.fhir.parser.IParser;
 public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div> <div
-	 * class="de"></div><div class="fr"></div>
-	 */
-	public static final String OID_EDESCTNN = "urn:oid:" + CdaChEdesCtnn.OID_MAIN;
-
-	private final FhirContext fhirCtx = new FhirContext();
-
-	/**
-	 * <div class="en">Creates an eHC CdaChEdesCtnn instance from a valid FHIR
-	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
-	 * 
-	 * @param bundle
-	 *            <div class="en">valid CdaChEdesCtnn FHIR bundle resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @param xsl
-	 *            <div class="en">desired stylesheet for the CDA document</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @param css
-	 *            <div class="en">desired CSS for the CDA document</div> <div
-	 *            class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">eHC CdaChEdesCtnn instance containing payload of
-	 *         the given FHIR Bundle resource</div> <div class="de"></div> <div
-	 *         class="fr"></div>
-	 */
-	public CdaChEdesCtnn createEdesCtnnFromFHIRBundle(Bundle bundle, String xsl, String css) {
-
-		// Header
-		final CdaChEdesCtnn doc = new CdaChEdesCtnn(getDocLanguage(bundle), xsl, css);
-		doc.setConfidentialityCode(getConfidentialityCode(bundle));
-		doc.setPatient(FhirCommon.getPatient(bundle));
-
-		Author docAuthor = null;
-		for (final Author author : getAuthors(bundle)) {
-			author.setTime(new Date());
-			doc.addAuthor(author);
-			docAuthor = author;
-		}
-		doc.setCustodian(getCustodian(bundle));
-		doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
-
-		// Body
-		String narrative = getNarrative(bundle, FhirCommon.urnUseAsAllergyProblemConcern);
-		doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsChiefComplaint);
-		doc.setNarrativeTextSectionChiefComplaint(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdDisposition);
-		doc.setNarrativeTextSectionEdDisposition(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsHistoryOfPresentIllness);
-		doc.setNarrativeTextSectionHistoryOfPresentIllness(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsCurrentMedications);
-		doc.setNarrativeTextSectionMedications(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsProcedures);
-		doc.setNarrativeTextSectionProceduresAndInterventions(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsReasonForVisit);
-		doc.setNarrativeTextSectionReasonForVisit(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsModeOfArrival);
-		doc.setNarrativeTextSectionModeOfArrival(narrative);
-
-		narrative = getNarrative(bundle, FhirCommon.urnUseAsAcuityAssessment);
-		doc.setNarrativeTextSectionAcuityAssessment(narrative);
-
-		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
-		if (vitalSigns != null && !vitalSigns.isEmpty()) {
-			for (AbstractVitalSignObservation abstractVitalSignObservation : vitalSigns) {
-				doc.addCodedVitalSign((VitalSignObservation) abstractVitalSignObservation,
-						docAuthor);
-			}
-		}
-
-		return doc;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
-	 * given FHIR bundle
-	 * 
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC EDES VitalSignObservation </div>
-	 *         <div class="de"></div> <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> getCodedVitalSigns(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
-		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> observations = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
-			if (observations != null && !observations.isEmpty() && (entry.getResource() instanceof Observation)) {
-				Observation observation = (Observation) entry.getResource();
-				IDatatype fhirEffectiveTime = observation.getEffective();
-				Date effectiveTime = new Date();
-				if (fhirEffectiveTime instanceof DateTimeDt) {
-					effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
-				}
-				List<Component> components = observation.getComponent();
-				for (Component component : components) {
-					CodingDt fhirCode = component.getCode().getCodingFirstRep();
-					IDatatype fhirValue = component.getValue();
-					
-					Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-							fhirCode.getCode(), fhirCode.getDisplay());
-					Value value = null;
-					if (fhirValue instanceof QuantityDt) {
-						// type PQ
-						final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-						PQ pq = DatatypesFactory.eINSTANCE.createPQ();
-						pq.setUnit(fhirQuantity.getUnit());
-						pq.setValue(fhirQuantity.getValue());
-						value = new Value(pq);
-					}
-					if (code != null && value != null) {
-						retVal.add(new VitalSignObservation(code, effectiveTime, value));
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * Read the EdesCtnnDocument object from the FHIR bundle file
-	 * 
-	 * @param fileName
-	 *            the file name
-	 * @return the edes ctnn document
-	 */
-	public EdesCtnnDocument readEdesCtnnDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(EdesCtnnDocument.class, resourceString);
-	}
-
-	/**
 	 * The class EdesCtnnDocument is a derived FHIR Bundle containing all
 	 * information of an Emergency Department Encounter Summary document based
 	 * on a Composite Triage and Nursing Note corresponding to the CDA-CH-EDES
@@ -254,7 +114,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the comment.
-		 * 
+		 *
 		 * @return the comment
 		 */
 		public Observation getComment() {
@@ -266,7 +126,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the confidentiality code.
-		 * 
+		 *
 		 * @return the confidentiality code
 		 */
 		public Basic getConfidentiality() {
@@ -278,7 +138,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the custodian.
-		 * 
+		 *
 		 * @return the custodian
 		 */
 		public Organization getCustodian() {
@@ -290,7 +150,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the doc author.
-		 * 
+		 *
 		 * @return the doc author
 		 */
 		public Person getDocAuthor() {
@@ -302,7 +162,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the doc language.
-		 * 
+		 *
 		 * @return the doc language
 		 */
 		public Basic getDocLanguage() {
@@ -314,7 +174,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the doc type.
-		 * 
+		 *
 		 * @return the doc type
 		 */
 		public Basic getDocType() {
@@ -326,7 +186,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the legal authenticator.
-		 * 
+		 *
 		 * @return the legal authenticator
 		 */
 		public Person getLegalAuthenticator() {
@@ -338,7 +198,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Gets the patient.
-		 * 
+		 *
 		 * @return the patient
 		 */
 		public Patient getPatient() {
@@ -350,7 +210,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the comment.
-		 * 
+		 *
 		 * @param comment
 		 *            the new comment
 		 */
@@ -362,7 +222,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the confidentiality code.
-		 * 
+		 *
 		 * @param confidentiality
 		 *            the new confidentiality code
 		 */
@@ -374,7 +234,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the custodian.
-		 * 
+		 *
 		 * @param custodian
 		 *            the new custodian
 		 */
@@ -386,7 +246,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the doc author.
-		 * 
+		 *
 		 * @param author
 		 *            the new doc author
 		 */
@@ -398,7 +258,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the doc language.
-		 * 
+		 *
 		 * @param language
 		 *            the new doc language
 		 */
@@ -410,7 +270,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the doc type.
-		 * 
+		 *
 		 * @param typePseudonymized
 		 *            the new doc type
 		 */
@@ -422,7 +282,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the legal authenticator.
-		 * 
+		 *
 		 * @param legalAuthenticator
 		 *            the new legal authenticator
 		 */
@@ -434,7 +294,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		/**
 		 * Sets the patient.
-		 * 
+		 *
 		 * @param patient
 		 *            the new patient
 		 */
@@ -443,5 +303,146 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 			resourceRef.setResource(patient);
 			this.patient = resourceRef;
 		}
+	}
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this OID</div>
+	 * <div class="de"></div><div class="fr"></div>
+	 */
+	public static final String OID_EDESCTNN = "urn:oid:" + CdaChEdesCtnn.OID_MAIN;
+
+	private final FhirContext fhirCtx = new FhirContext();
+
+	/**
+	 * <div class="en">Creates an eHC CdaChEdesCtnn instance from a valid FHIR
+	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param bundle
+	 *            <div class="en">valid CdaChEdesCtnn FHIR bundle resource</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @param xsl
+	 *            <div class="en">desired stylesheet for the CDA document</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @param css
+	 *            <div class="en">desired CSS for the CDA document</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">eHC CdaChEdesCtnn instance containing payload of
+	 *         the given FHIR Bundle resource</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public CdaChEdesCtnn createEdesCtnnFromFHIRBundle(Bundle bundle, String xsl, String css) {
+
+		// Header
+		final CdaChEdesCtnn doc = new CdaChEdesCtnn(getDocLanguage(bundle), xsl, css);
+		doc.setConfidentialityCode(getConfidentialityCode(bundle));
+		doc.setPatient(FhirCommon.getPatient(bundle));
+
+		Author docAuthor = null;
+		for (final Author author : getAuthors(bundle)) {
+			author.setTime(new Date());
+			doc.addAuthor(author);
+			docAuthor = author;
+		}
+		doc.setCustodian(getCustodian(bundle));
+		doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
+
+		// Body
+		String narrative = getNarrative(bundle, FhirCommon.urnUseAsAllergyProblemConcern);
+		doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsChiefComplaint);
+		doc.setNarrativeTextSectionChiefComplaint(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsEdDisposition);
+		doc.setNarrativeTextSectionEdDisposition(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsHistoryOfPresentIllness);
+		doc.setNarrativeTextSectionHistoryOfPresentIllness(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsCurrentMedications);
+		doc.setNarrativeTextSectionMedications(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsProcedures);
+		doc.setNarrativeTextSectionProceduresAndInterventions(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsReasonForVisit);
+		doc.setNarrativeTextSectionReasonForVisit(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsModeOfArrival);
+		doc.setNarrativeTextSectionModeOfArrival(narrative);
+
+		narrative = getNarrative(bundle, FhirCommon.urnUseAsAcuityAssessment);
+		doc.setNarrativeTextSectionAcuityAssessment(narrative);
+
+		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
+		if (vitalSigns != null && !vitalSigns.isEmpty()) {
+			for (AbstractVitalSignObservation abstractVitalSignObservation : vitalSigns) {
+				doc.addCodedVitalSign((VitalSignObservation) abstractVitalSignObservation,
+						docAuthor);
+			}
+		}
+
+		return doc;
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
+	 * given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC EDES VitalSignObservation </div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> getCodedVitalSigns(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
+		for (final Entry entry : bundle.getEntry()) {
+			List<ExtensionDt> observations = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
+			if (observations != null && !observations.isEmpty()
+					&& (entry.getResource() instanceof Observation)) {
+				Observation observation = (Observation) entry.getResource();
+				IDatatype fhirEffectiveTime = observation.getEffective();
+				Date effectiveTime = new Date();
+				if (fhirEffectiveTime instanceof DateTimeDt) {
+					effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
+				}
+				List<Component> components = observation.getComponent();
+				for (Component component : components) {
+					CodingDt fhirCode = component.getCode().getCodingFirstRep();
+					IDatatype fhirValue = component.getValue();
+
+					Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+							fhirCode.getCode(), fhirCode.getDisplay());
+					Value value = null;
+					if (fhirValue instanceof QuantityDt) {
+						// type PQ
+						final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
+						PQ pq = DatatypesFactory.eINSTANCE.createPQ();
+						pq.setUnit(fhirQuantity.getUnit());
+						pq.setValue(fhirQuantity.getValue());
+						value = new Value(pq);
+					}
+					if (code != null && value != null) {
+						retVal.add(new VitalSignObservation(code, effectiveTime, value));
+					}
+				}
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Read the EdesCtnnDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the edes ctnn document
+	 */
+	public EdesCtnnDocument readEdesCtnnDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(EdesCtnnDocument.class, resourceString);
 	};
 }

@@ -54,8 +54,260 @@ import ca.uhn.fhir.parser.IParser;
 public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div> <div
-	 * class="de"></div><div class="fr"></div>
+	 * The class EdesCtnnDocument is a derived FHIR Bundle containing all
+	 * information of an Emergency Department Encounter Summary document based
+	 * on a Composite Triage and Nursing Note corresponding to the CDA-CH-EDES
+	 * specification
+	 */
+	@ResourceDef(name = "Bundle")
+	public static class EdesEdpnDocument extends Bundle {
+
+		private static final long serialVersionUID = 7883384366035439713L;
+
+		/** The confidentiality. */
+		@Child(name = "confidentiality")
+		@Extension(url = FhirCommon.urnUseAsConfidentiality, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "confidentiality")
+		private ResourceReferenceDt confidentiality;
+
+		/** The custodian. */
+		@Child(name = "custodian")
+		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "custodian")
+		private ResourceReferenceDt custodian;
+
+		/** The doc author. */
+		@Child(name = "docAuthor")
+		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "author")
+		private ResourceReferenceDt docAuthor;
+
+		/** The doc language. */
+		@Child(name = "docLanguage")
+		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "docLanguage")
+		private ResourceReferenceDt docLanguage;
+
+		/** The doc type. */
+		@Child(name = "docType")
+		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "docType")
+		private ResourceReferenceDt docType;
+
+		/** The legal authenticator. */
+		@Child(name = "legalAuthenticator")
+		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "legalAuthenticator")
+		private ResourceReferenceDt legalAuthenticator;
+
+		/** The patient. */
+		@Child(name = "patient")
+		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "patient")
+		private ResourceReferenceDt patient;
+
+		/** The comment. */
+		@Child(name = "comment")
+		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Description(shortDefinition = "comment")
+		private ResourceReferenceDt comment;
+
+		/**
+		 * Gets the comment.
+		 *
+		 * @return the comment
+		 */
+		public Observation getComment() {
+			if (this.comment != null) {
+				return (Observation) this.comment.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the confidentiality code.
+		 *
+		 * @return the confidentiality code
+		 */
+		public Basic getConfidentiality() {
+			if (this.confidentiality != null) {
+				return (Basic) this.confidentiality.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the custodian.
+		 *
+		 * @return the custodian
+		 */
+		public Organization getCustodian() {
+			if (this.custodian != null) {
+				return (Organization) this.custodian.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the doc author.
+		 *
+		 * @return the doc author
+		 */
+		public Person getDocAuthor() {
+			if (this.docAuthor != null) {
+				return (Person) this.docAuthor.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the doc language.
+		 *
+		 * @return the doc language
+		 */
+		public Basic getDocLanguage() {
+			if (this.docLanguage != null) {
+				return (Basic) this.docLanguage.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the doc type.
+		 *
+		 * @return the doc type
+		 */
+		public Basic getDocType() {
+			if (this.docType != null) {
+				return (Basic) this.docType.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the legal authenticator.
+		 *
+		 * @return the legal authenticator
+		 */
+		public Person getLegalAuthenticator() {
+			if (this.legalAuthenticator != null) {
+				return (Person) this.legalAuthenticator.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Gets the patient.
+		 *
+		 * @return the patient
+		 */
+		public Patient getPatient() {
+			if (this.patient != null) {
+				return (Patient) this.patient.getResource();
+			}
+			return null;
+		}
+
+		/**
+		 * Sets the comment.
+		 *
+		 * @param comment
+		 *            the new comment
+		 */
+		public void setComment(Observation comment) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(comment);
+			this.comment = resourceRef;
+		}
+
+		/**
+		 * Sets the confidentiality code.
+		 *
+		 * @param confidentiality
+		 *            the new confidentiality code
+		 */
+		public void setConfidentiality(Basic confidentiality) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(confidentiality);
+			this.confidentiality = resourceRef;
+		}
+
+		/**
+		 * Sets the custodian.
+		 *
+		 * @param custodian
+		 *            the new custodian
+		 */
+		public void setCustodian(Organization custodian) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(custodian);
+			this.custodian = resourceRef;
+		}
+
+		/**
+		 * Sets the doc author.
+		 *
+		 * @param author
+		 *            the new doc author
+		 */
+		public void setDocAuthor(Person author) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(author);
+			this.docAuthor = resourceRef;
+		}
+
+		/**
+		 * Sets the doc language.
+		 *
+		 * @param language
+		 *            the new doc language
+		 */
+		public void setDocLanguage(Basic language) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(language);
+			this.docLanguage = resourceRef;
+		}
+
+		/**
+		 * Sets the doc type.
+		 *
+		 * @param typePseudonymized
+		 *            the new doc type
+		 */
+		public void setDocType(Basic typePseudonymized) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(typePseudonymized);
+			this.docType = resourceRef;
+		}
+
+		/**
+		 * Sets the legal authenticator.
+		 *
+		 * @param legalAuthenticator
+		 *            the new legal authenticator
+		 */
+		public void setLegalAuthenticator(Person legalAuthenticator) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(legalAuthenticator);
+			this.legalAuthenticator = resourceRef;
+		}
+
+		/**
+		 * Sets the patient.
+		 *
+		 * @param patient
+		 *            the new patient
+		 */
+		public void setPatient(Patient patient) {
+			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			resourceRef.setResource(patient);
+			this.patient = resourceRef;
+		}
+	}
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this OID</div>
+	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String OID_EDESEDPN = "urn:oid:" + CdaChEdesEdpn.OID_MAIN;
 
@@ -64,7 +316,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 	/**
 	 * <div class="en">Creates an eHC CdaChEdesEdpn instance from a valid FHIR
 	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
-	 * 
+	 *
 	 * @param bundle
 	 *            <div class="en">valid CdaChEdesCtnn FHIR bundle resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
@@ -172,7 +424,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 	/**
 	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
 	 * given FHIR bundle
-	 * 
+	 *
 	 * @param bundle
 	 *            the FHIR bundle
 	 * @return list of eHC EDES VitalSignObservation </div>
@@ -219,7 +471,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 
 	/**
 	 * Read the EdesCtnnDocument object from the FHIR bundle file
-	 * 
+	 *
 	 * @param fileName
 	 *            the file name
 	 * @return the edes ctnn document
@@ -228,257 +480,5 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(EdesEdpnDocument.class, resourceString);
-	}
-
-	/**
-	 * The class EdesCtnnDocument is a derived FHIR Bundle containing all
-	 * information of an Emergency Department Encounter Summary document based
-	 * on a Composite Triage and Nursing Note corresponding to the CDA-CH-EDES
-	 * specification
-	 */
-	@ResourceDef(name = "Bundle")
-	public static class EdesEdpnDocument extends Bundle {
-
-		private static final long serialVersionUID = 7883384366035439713L;
-
-		/** The confidentiality. */
-		@Child(name = "confidentiality")
-		@Extension(url = FhirCommon.urnUseAsConfidentiality, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "confidentiality")
-		private ResourceReferenceDt confidentiality;
-
-		/** The custodian. */
-		@Child(name = "custodian")
-		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "custodian")
-		private ResourceReferenceDt custodian;
-
-		/** The doc author. */
-		@Child(name = "docAuthor")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "author")
-		private ResourceReferenceDt docAuthor;
-
-		/** The doc language. */
-		@Child(name = "docLanguage")
-		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "docLanguage")
-		private ResourceReferenceDt docLanguage;
-
-		/** The doc type. */
-		@Child(name = "docType")
-		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "docType")
-		private ResourceReferenceDt docType;
-
-		/** The legal authenticator. */
-		@Child(name = "legalAuthenticator")
-		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "legalAuthenticator")
-		private ResourceReferenceDt legalAuthenticator;
-
-		/** The patient. */
-		@Child(name = "patient")
-		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "patient")
-		private ResourceReferenceDt patient;
-
-		/** The comment. */
-		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "comment")
-		private ResourceReferenceDt comment;
-
-		/**
-		 * Gets the comment.
-		 * 
-		 * @return the comment
-		 */
-		public Observation getComment() {
-			if (this.comment != null) {
-				return (Observation) this.comment.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the confidentiality code.
-		 * 
-		 * @return the confidentiality code
-		 */
-		public Basic getConfidentiality() {
-			if (this.confidentiality != null) {
-				return (Basic) this.confidentiality.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the custodian.
-		 * 
-		 * @return the custodian
-		 */
-		public Organization getCustodian() {
-			if (this.custodian != null) {
-				return (Organization) this.custodian.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the doc author.
-		 * 
-		 * @return the doc author
-		 */
-		public Person getDocAuthor() {
-			if (this.docAuthor != null) {
-				return (Person) this.docAuthor.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the doc language.
-		 * 
-		 * @return the doc language
-		 */
-		public Basic getDocLanguage() {
-			if (this.docLanguage != null) {
-				return (Basic) this.docLanguage.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the doc type.
-		 * 
-		 * @return the doc type
-		 */
-		public Basic getDocType() {
-			if (this.docType != null) {
-				return (Basic) this.docType.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the legal authenticator.
-		 * 
-		 * @return the legal authenticator
-		 */
-		public Person getLegalAuthenticator() {
-			if (this.legalAuthenticator != null) {
-				return (Person) this.legalAuthenticator.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Gets the patient.
-		 * 
-		 * @return the patient
-		 */
-		public Patient getPatient() {
-			if (this.patient != null) {
-				return (Patient) this.patient.getResource();
-			}
-			return null;
-		}
-
-		/**
-		 * Sets the comment.
-		 * 
-		 * @param comment
-		 *            the new comment
-		 */
-		public void setComment(Observation comment) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(comment);
-			this.comment = resourceRef;
-		}
-
-		/**
-		 * Sets the confidentiality code.
-		 * 
-		 * @param confidentiality
-		 *            the new confidentiality code
-		 */
-		public void setConfidentiality(Basic confidentiality) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(confidentiality);
-			this.confidentiality = resourceRef;
-		}
-
-		/**
-		 * Sets the custodian.
-		 * 
-		 * @param custodian
-		 *            the new custodian
-		 */
-		public void setCustodian(Organization custodian) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(custodian);
-			this.custodian = resourceRef;
-		}
-
-		/**
-		 * Sets the doc author.
-		 * 
-		 * @param author
-		 *            the new doc author
-		 */
-		public void setDocAuthor(Person author) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(author);
-			this.docAuthor = resourceRef;
-		}
-
-		/**
-		 * Sets the doc language.
-		 * 
-		 * @param language
-		 *            the new doc language
-		 */
-		public void setDocLanguage(Basic language) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(language);
-			this.docLanguage = resourceRef;
-		}
-
-		/**
-		 * Sets the doc type.
-		 * 
-		 * @param typePseudonymized
-		 *            the new doc type
-		 */
-		public void setDocType(Basic typePseudonymized) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(typePseudonymized);
-			this.docType = resourceRef;
-		}
-
-		/**
-		 * Sets the legal authenticator.
-		 * 
-		 * @param legalAuthenticator
-		 *            the new legal authenticator
-		 */
-		public void setLegalAuthenticator(Person legalAuthenticator) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(legalAuthenticator);
-			this.legalAuthenticator = resourceRef;
-		}
-
-		/**
-		 * Sets the patient.
-		 * 
-		 * @param patient
-		 *            the new patient
-		 */
-		public void setPatient(Patient patient) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
-			resourceRef.setResource(patient);
-			this.patient = resourceRef;
-		}
 	};
 }

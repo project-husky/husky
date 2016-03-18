@@ -32,24 +32,25 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	/**
 	 * Instantiates a new vital signs section.
 	 *
-	 * @param section
-	 *          the vital signs section
-	 */
-	protected CodedVitalSigns(CodedVitalSignsSection section) {
-		super(section);
-	}
-
-	/**
-	 * Instantiates a new vital signs section.
-	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 		this.languageCode = languageCode;
 		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
 				.getSectionTitle((languageCode != null ? languageCode : null))));
+	}
+
+	/**
+	 * Instantiates a new vital signs section.
+	 *
+	 * @param section
+	 *            the vital signs section
+	 */
+	protected CodedVitalSigns(LanguageCode languageCode, CodedVitalSignsSection section) {
+		super(section);
+		this.languageCode = languageCode;
 	}
 
 	@Override

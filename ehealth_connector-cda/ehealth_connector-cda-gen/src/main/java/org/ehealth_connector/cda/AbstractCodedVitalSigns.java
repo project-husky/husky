@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -45,7 +46,8 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
 				author = new Author(getMdht().getClinicalDocument().getAuthors().get(0));
 			} else {
-				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE.createAuthor();
+				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE
+						.createAuthor();
 				mdhtAuthor.setNullFlavor(NullFlavor.UNK);
 				author = new Author(mdhtAuthor);
 			}
@@ -77,7 +79,8 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		}
 		ret.sort(new Comparator<AbstractVitalSignObservation>() {
 			@Override
-			public int compare(AbstractVitalSignObservation left, AbstractVitalSignObservation right) {
+			public int compare(AbstractVitalSignObservation left,
+					AbstractVitalSignObservation right) {
 				return right.getEffectiveTime().compareTo(left.getEffectiveTime());
 			}
 		});
@@ -119,25 +122,34 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		if (!observations.isEmpty()) {
 			sb.append("<table><tbody>");
 			if (languageCode == LanguageCode.GERMAN) {
-				sb.append("<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
+				sb.append(
+						"<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
 			} else {
 				sb.append("<tr><th>Date / Time</th><th>Description</th><th>Result</th></tr>");
 			}
 			for (AbstractVitalSignObservation vitalSignObservation : observations) {
-				String signDateTime = DateUtil.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
-				String signDescription = vitalSignObservation.getCode().getDisplayName();
+				String signDateTime = DateUtil
+						.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
+
+				String signDescription = VitalSignCodes
+						.getEnum(vitalSignObservation.getCode().getCode())
+						.getDisplayName(languageCode);
+				if (signDescription.equals(""))
+					signDescription = vitalSignObservation.getCode().getDisplayName();
+
 				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue() + " "
 						+ vitalSignObservation.getValue().getPhysicalQuantityUnit();
 				Code code = vitalSignObservation.getInterpretationCode();
-				if (code != null && !code.isNullFlavor()
-						&& !ObservationInterpretation.NORMAL.getCodeValue().equals(code.getCode())) {
-					String signInterpretation = "[" + vitalSignObservation.getInterpretationCode().getCode()
-							+ "]";
+				if (code != null && !code.isNullFlavor() && !ObservationInterpretation.NORMAL
+						.getCodeValue().equals(code.getCode())) {
+					String signInterpretation = "["
+							+ vitalSignObservation.getInterpretationCode().getCode() + "]";
 					signResult += " " + signInterpretation;
 				}
 				Code target = vitalSignObservation.getTargetSiteCode();
 				if (target != null && !target.isNullFlavor()) {
-					String signTarget = "[" + vitalSignObservation.getTargetSiteCode().getDisplayName() + "]";
+					String signTarget = "["
+							+ vitalSignObservation.getTargetSiteCode().getDisplayName() + "]";
 					signDescription += " " + signTarget;
 				}
 				sb.append("<tr><td>" + signDateTime + "</td><td>" + signDescription + "</td><td>"
