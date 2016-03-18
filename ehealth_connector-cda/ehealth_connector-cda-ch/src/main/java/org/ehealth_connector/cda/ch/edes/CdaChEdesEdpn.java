@@ -39,6 +39,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.EDDiagnosesSection;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.PCCFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * <div class="en">This class represents a EDES EDPN CDA document. Note that for
@@ -91,6 +93,13 @@ public class CdaChEdesEdpn
 	public CdaChEdesEdpn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
 		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init(), stylesheet, cascadingStylesheet);
 		setLanguageCode(language);
+		// set the fixed Ctnn Code
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("28568-4");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("Physician Emergency department Note");
+		getMdht().setCode(ce);
 		common = new CdaChEdesCommon(getDoc());
 		setTitle(common.getDocumentTitle());
 	}

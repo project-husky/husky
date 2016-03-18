@@ -34,6 +34,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * <div class="en">This class represents a EDES CTNN CDA document. Note that for
@@ -86,6 +88,15 @@ public class CdaChEdesCtnn
 	public CdaChEdesCtnn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
 		super(CHFactory.eINSTANCE.createCdaChEdesCtnn().init(), stylesheet, cascadingStylesheet);
 		setLanguageCode(language);
+
+		// set the fixed Ctnn Code
+		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("X-TRIAGE");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("Triage Note");
+		getMdht().setCode(ce);
+
 		common = new CdaChEdesCommon(getDoc());
 		setTitle(common.getDocumentTitle());
 	}
