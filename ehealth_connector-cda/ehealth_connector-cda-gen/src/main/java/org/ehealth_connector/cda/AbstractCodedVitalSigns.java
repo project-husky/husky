@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Author;
@@ -148,9 +149,19 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 				}
 				Code target = vitalSignObservation.getTargetSiteCode();
 				if (target != null && !target.isNullFlavor()) {
-					String signTarget = "["
-							+ vitalSignObservation.getTargetSiteCode().getDisplayName() + "]";
-					signDescription += " " + signTarget;
+
+					String signTarget = ActSite
+							.getEnum(vitalSignObservation.getTargetSiteCode().getCode())
+							.getDisplayName(languageCode);
+					if (signTarget.equals(""))
+						signTarget = vitalSignObservation.getTargetSiteCode().getDisplayName();
+
+					// String signTarget = "["
+					// +
+					// vitalSignObservation.getTargetSiteCode().getDisplayName()
+					// + "]";
+					if (!signTarget.equals(""))
+						signDescription += " [" + signTarget + "]";
 				}
 				sb.append("<tr><td>" + signDateTime + "</td><td>" + signDescription + "</td><td>"
 						+ signResult + "</td></tr>");

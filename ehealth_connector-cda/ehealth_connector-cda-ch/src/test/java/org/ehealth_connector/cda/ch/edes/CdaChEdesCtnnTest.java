@@ -43,8 +43,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 	private final Log log = LogFactory.getLog(MdhtFacade.class);
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public CdaChEdesCtnnTest() {
 		super();
@@ -53,6 +53,7 @@ public class CdaChEdesCtnnTest extends TestUtils {
 	@Test
 	public void codedVitalSignsSerializationTest() throws Exception {
 		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		cda.setLanguageCode(LanguageCode.GERMAN);
 
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
@@ -70,8 +71,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
-				observations);
+		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
+				VitalSignCodes.BODY_HEIGHT, observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
@@ -83,6 +84,7 @@ public class CdaChEdesCtnnTest extends TestUtils {
 	@Test
 	public void codedVitalSignsTest() {
 		final CdaChEdesCtnn cda = new CdaChEdesCtnn();
+		cda.setLanguageCode(LanguageCode.GERMAN);
 
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
@@ -107,8 +109,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertFalse(observations.isEmpty());
 		assertEquals(5, observations.size());
 
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
-				observations);
+		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
+				VitalSignCodes.BODY_HEIGHT, observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
@@ -116,7 +118,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertEquals(Ucum.CentiMeter.getCodeValue(),
 				vsObservation.getValue().getPhysicalQuantityUnit());
 
-		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC, observations);
+		vsObservation = getVitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
+				observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
@@ -139,7 +142,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChEdesCtnn());
-		return new CdaChEdesCtnn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) clinicalDocument);
+		return new CdaChEdesCtnn(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) clinicalDocument);
 	}
 
 	@Test
@@ -189,7 +193,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		final Document document = cda.getDocument();
 
 		// Notfallaustrittsbericht Pflege
-		XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.1.1.12']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.1.1.12']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -265,7 +270,8 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		testText = "setNarrativeTextSectionAllergiesAndOtherAdverseReactions";
 		cda.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(testText);
-		assertTrue(cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
+		assertTrue(
+				cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
 
 		testText = "setNarrativeTextSectionAssessments";
 		cda.setNarrativeTextSectionAssessments(testText);
