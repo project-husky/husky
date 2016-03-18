@@ -63,16 +63,6 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Instantiates a new cda ch lrtp.
-	 *
-	 * @param languageCode
-	 *          the language code
-	 */
-	protected CdaChLrtp(LanguageCode languageCode) {
-		this(languageCode, null, null);
-	}
-
-	/**
 	 * Constructor with the recommended elements for the LRTP document Header.
 	 *
 	 * @param languageCode
@@ -85,6 +75,8 @@ public class CdaChLrtp
 	 *          the patient
 	 * @param recipient
 	 *          the recipient (e.g. the Bundesamt für Gesundheit)
+	 * @param scope
+	 *          the scope of this organ donor.
 	 * @param soasCode
 	 *          <div class="en">the SOAS code (will be set in
 	 *          recordTarget/patientRole/id/extension). Other Ids will be
@@ -96,7 +88,7 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(LanguageCode languageCode, Author author,
 			ReferralOrderingPhysician refOrderingPhysician, org.ehealth_connector.common.Patient patient,
-			IntendedRecipient recipient, String soasCode) {
+			IntendedRecipient recipient, ReportScopes scope, String soasCode) {
 		this(languageCode);
 		// set SOAS ID
 		patient.getMdhtPatientRole().getIds().clear();
@@ -106,6 +98,7 @@ public class CdaChLrtp
 		addAuthor(author);
 		addReferralOrderingPhysician(refOrderingPhysician);
 		addIntendedRecipient(recipient);
+		addDocumentationOf(scope);
 	}
 
 	/**
@@ -139,6 +132,16 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
 		super(doc);
+	}
+
+	/**
+	 * Instantiates a new cda ch lrtp.
+	 *
+	 * @param languageCode
+	 *          the language code
+	 */
+	protected CdaChLrtp(LanguageCode languageCode) {
+		this(languageCode, null, null);
 	}
 
 	/**
@@ -440,25 +443,6 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Convenience function to return the (LOINC) section code from a given
-	 * LaboratoryObservation, which is hold in the given
-	 * LaboratoryBatteryOrganizer.
-	 *
-	 * @param organizer
-	 *          the LaboratoryBatteryOrganizer
-	 * @return the section code
-	 */
-	private String getSectionCodeFromLaboratoryObservationEnum(LaboratoryBatteryOrganizer organizer) {
-		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
-				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum().getSectionCode();
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Convenience function, which returns the SpecimenAct directly from the first
 	 * underlying
 	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry element
@@ -581,7 +565,7 @@ public class CdaChLrtp
 	 * @param organizer
 	 *          the organizer
 	 */
-	public void setVitalSignOrganizer(VitalSignsOrganizer organizer) {
+	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
 		// Check if this section already exists. If so, get it, else create it.
 		CodedVitalSignsSection cvs;
 		if (getCodedVitalSignsSection() != null) {
@@ -591,5 +575,24 @@ public class CdaChLrtp
 		}
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
+	}
+
+	/**
+	 * Convenience function to return the (LOINC) section code from a given
+	 * LaboratoryObservation, which is hold in the given
+	 * LaboratoryBatteryOrganizer.
+	 *
+	 * @param organizer
+	 *          the LaboratoryBatteryOrganizer
+	 * @return the section code
+	 */
+	private String getSectionCodeFromLaboratoryObservationEnum(LaboratoryBatteryOrganizer organizer) {
+		if (!organizer.getLaboratoryObservations().isEmpty()) {
+			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
+				// if present return LOINC Enum
+				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum().getSectionCode();
+			}
+		}
+		return null;
 	}
 }

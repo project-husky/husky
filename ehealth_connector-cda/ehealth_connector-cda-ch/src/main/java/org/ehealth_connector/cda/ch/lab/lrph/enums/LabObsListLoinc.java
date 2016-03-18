@@ -71,7 +71,6 @@ public enum LabObsListLoinc {
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
-	 *
 	 * @param enumName
 	 *          <br>
 	 *          <div class="de"> enumName</div>

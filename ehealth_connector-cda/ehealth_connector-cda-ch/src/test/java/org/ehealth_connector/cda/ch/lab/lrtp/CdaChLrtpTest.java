@@ -41,26 +41,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 
 	}
 
-	private CdaChLrtp deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
-		LABPackage.eINSTANCE.eClass();
-		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) {
-			CdaChLrtp test = new CdaChLrtp(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
-			return test;
-		} else
-			return null;
-	}
-
-	private CdaChLrtp deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrtp());
-		return new CdaChLrtp((org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
-	}
-
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChLrtp cda = new CdaChLrtp();
@@ -96,7 +76,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 
 		// LRTP specific
 		vso.addVitalSignsObservation(vs);
-		cda.setVitalSignOrganizer(vso);
+		cda.setVitalSignsOrganizer(vso);
 		cda.setBloodGroupObservation(bgo);
 
 		assertNotNull(cda.getLaboratorySpecialtySections());
@@ -164,11 +144,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(cdaDeserialized != null);
 	}
 
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChLrtp cda = new CdaChLrtp();
@@ -176,12 +151,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
 		assertTrue(cdaDeserialized != null);
-	}
-
-	private String serializeDocument(CdaChLrtp doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
 	}
 
 	@Test
@@ -241,7 +210,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(xCount(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1']", 2));
 
 		// Convenience VitalSignsOrganizer (includes CodedVitalSignsSection)
-		doc.setVitalSignOrganizer(new VitalSignsOrganizer());
+		doc.setVitalSignsOrganizer(new VitalSignsOrganizer());
 		assertNotNull(doc.getCodedVitalSignsSection());
 		assertNotNull(doc.getVitalSignsOrganizer());
 		document = doc.getDocument();
@@ -312,5 +281,36 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		doc.setNarrativeTextSectionCodedVitalSignsSection(ts4);
 		assertEquals(ts4, doc.getNarrativeTextSectionCodedVitalSignsSection());
 
+	}
+
+	private CdaChLrtp deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		CHPackage.eINSTANCE.eClass();
+		LABPackage.eINSTANCE.eClass();
+		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) {
+			CdaChLrtp test = new CdaChLrtp(
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
+			return test;
+		} else
+			return null;
+	}
+
+	private CdaChLrtp deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChLrtp());
+		return new CdaChLrtp((org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	private String serializeDocument(CdaChLrtp doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
 	}
 }
