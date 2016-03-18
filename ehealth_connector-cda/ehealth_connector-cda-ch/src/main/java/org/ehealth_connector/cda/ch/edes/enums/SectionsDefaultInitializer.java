@@ -58,8 +58,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 /**
  * Initialize sections with default HL7 level 3 data.
  *
- * @author thomas
- *
  */
 public class SectionsDefaultInitializer {
 
