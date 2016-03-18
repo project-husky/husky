@@ -23,11 +23,10 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
 
-public class CodedVitalSigns extends AbstractCodedVitalSigns {
+public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 
 	/**
 	 * Instantiates a new vital signs section.
@@ -35,7 +34,7 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	 * @param languageCode
 	 *            the language code
 	 */
-	public CodedVitalSigns(LanguageCode languageCode) {
+	public CodedVitalSignsSection(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 		this.languageCode = languageCode;
 		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
@@ -45,10 +44,14 @@ public class CodedVitalSigns extends AbstractCodedVitalSigns {
 	/**
 	 * Instantiates a new vital signs section.
 	 *
+	 * @param languageCode
+	 *            the sections language
+	 *
 	 * @param section
 	 *            the vital signs section
 	 */
-	protected CodedVitalSigns(LanguageCode languageCode, CodedVitalSignsSection section) {
+	protected CodedVitalSignsSection(LanguageCode languageCode,
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section) {
 		super(section);
 		this.languageCode = languageCode;
 	}

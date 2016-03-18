@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -93,9 +93,9 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 		return null;
 	}
 
-	public ObservationInterpretationVitalSign getObservationInterpretationCodeEnum() {
+	public ObservationInterpretationForVitalSign getObservationInterpretationCodeEnum() {
 		if (!mVitalSignObservation.getInterpretationCodes().isEmpty()) {
-			return ObservationInterpretationVitalSign
+			return ObservationInterpretationForVitalSign
 					.getEnum(mVitalSignObservation.getInterpretationCodes().get(0).getCode());
 		}
 		return null;
@@ -120,7 +120,7 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 	 *          <div class="de">Beurteilung des Resultats</div>
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
+	public void setInterpretationCode(ObservationInterpretationForVitalSign code) {
 		if (code != null) {
 			mVitalSignObservation.getInterpretationCodes().clear();
 			mVitalSignObservation.getInterpretationCodes().add(code.getCE());

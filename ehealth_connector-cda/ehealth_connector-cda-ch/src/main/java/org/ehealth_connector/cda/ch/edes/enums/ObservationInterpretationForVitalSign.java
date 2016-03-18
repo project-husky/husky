@@ -24,7 +24,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  *<div class="de">Das folgende Subset ist für den vorliegenden Implementierungsleitfaden abschliessend. Andere Codes sind NICHT ERLAUBT.</div>
  *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
  */
-public enum ObservationInterpretationVitalSign {
+public enum ObservationInterpretationForVitalSign {
 	//@formatter:off
 	ABNORMAL(ObservationInterpretation.ABNORMAL),
 	ABNORMAL_ALERT(ObservationInterpretation.ABNORMAL_ALERT),
@@ -44,8 +44,8 @@ public enum ObservationInterpretationVitalSign {
 	 *          <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ObservationInterpretationVitalSign getEnum(String code) {
-		for (ObservationInterpretationVitalSign x : values()) {
+	public static ObservationInterpretationForVitalSign getEnum(String code) {
+		for (ObservationInterpretationForVitalSign x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -69,7 +69,7 @@ public enum ObservationInterpretationVitalSign {
 			return false;
 		}
 		try {
-			Enum.valueOf(ObservationInterpretationVitalSign.class, enumName);
+			Enum.valueOf(ObservationInterpretationForVitalSign.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -86,7 +86,7 @@ public enum ObservationInterpretationVitalSign {
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (ObservationInterpretationVitalSign x : values()) {
+		for (ObservationInterpretationForVitalSign x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -96,7 +96,7 @@ public enum ObservationInterpretationVitalSign {
 
 	private ObservationInterpretation commonInterpretation;
 
-	private ObservationInterpretationVitalSign(ObservationInterpretation commonInterpretation) {
+	private ObservationInterpretationForVitalSign(ObservationInterpretation commonInterpretation) {
 		this.commonInterpretation = commonInterpretation;
 	}
 

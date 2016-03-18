@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -383,11 +383,11 @@ public class CdaChEdesEdpnTest extends TestUtils {
 				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
+				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
 				new Value("140", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.LEFT_ARM,
+				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
 				new Value("90", Ucum.MilliMetersOfMercury)), null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();

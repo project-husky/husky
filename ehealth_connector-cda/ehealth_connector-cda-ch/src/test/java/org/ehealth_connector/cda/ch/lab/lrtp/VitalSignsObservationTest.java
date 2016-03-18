@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Value;
@@ -24,10 +24,10 @@ public class VitalSignsObservationTest extends TestUtils {
 		assertTrue(code1.equals(o.getMethodCodeTranslation()));
 
 		// Observation Interpretation
-		o.setInterpretationCode(ObservationInterpretationVitalSign.ABNORMAL);
-		assertEquals(ObservationInterpretationVitalSign.ABNORMAL.getCodeValue(),
+		o.setInterpretationCode(ObservationInterpretationForVitalSign.ABNORMAL);
+		assertEquals(ObservationInterpretationForVitalSign.ABNORMAL.getCodeValue(),
 				o.getInterpretationCode().getCode());
-		assertEquals(ObservationInterpretationVitalSign.ABNORMAL.getCodeValue(),
+		assertEquals(ObservationInterpretationForVitalSign.ABNORMAL.getCodeValue(),
 				o.getObservationInterpretationCodeEnum().getCodeValue());
 
 		// Code

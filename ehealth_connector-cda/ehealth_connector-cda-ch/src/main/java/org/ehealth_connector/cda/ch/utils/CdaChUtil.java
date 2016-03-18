@@ -36,12 +36,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public abstract class CdaChUtil extends CdaUtil {
 
 	/**
-	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID and
-	 * a generated extension.</div>
+	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID
+	 * and a generated extension.</div>
 	 *
 	 * @param id
-	 *          <br>
-	 *          <div class="en"> the id</div>
+	 *            <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static Identificator createUuidEdes(String id) {
@@ -56,12 +56,12 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID and
-	 * a generated extension.</div>
+	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
+	 * and a generated extension.</div>
 	 *
 	 * @param id
-	 *          <br>
-	 *          <div class="en"> the id</div>
+	 *            <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacd(String id) {
@@ -78,13 +78,13 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID (if
-	 * the root id is null, otherwise the provided id will be used) and a
+	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
+	 * (if the root id is null, otherwise the provided id will be used) and a
 	 * generated extension.</div>
 	 *
 	 * @param id
-	 *          <br>
-	 *          <div class="en"> the id</div>
+	 *            <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static II createUuidVacdIdentificator(Identificator id) {
@@ -101,18 +101,19 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * Updates a Reference if it is a comment (in a deph of two counters)
 	 *
 	 * @param er
-	 *          the EntryRelationship
+	 *            the EntryRelationship
 	 * @param i
-	 *          first counter
+	 *            first counter
 	 * @param j
-	 *          second counter
+	 *            second counter
 	 * @param prefix
-	 *          the prefix of the reference
+	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
 	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
 			SectionsVACD prefix) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd()) {
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+				&& er.getInversionInd()) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -131,11 +132,11 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * Updates a Reference if it is a comment
 	 *
 	 * @param er
-	 *          the EntryRelationship
+	 *            the EntryRelationship
 	 * @param ref
-	 *          the reference
+	 *            the reference
 	 * @param prefix
-	 *          the prefix of the reference
+	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
 	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,

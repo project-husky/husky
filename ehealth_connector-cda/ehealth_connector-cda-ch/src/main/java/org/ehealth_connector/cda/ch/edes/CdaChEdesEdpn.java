@@ -34,7 +34,6 @@ import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
-import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.EDDiagnosesSection;
@@ -57,7 +56,7 @@ public class CdaChEdesEdpn
 
 	private final CdaChEdesCommon common;
 
-	private CodedVitalSigns mCodedVitalSigns;
+	private CodedVitalSignsSection mCodedVitalSigns;
 
 	public CdaChEdesEdpn() {
 		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init());
@@ -168,13 +167,15 @@ public class CdaChEdesEdpn
 	 */
 	public void addCodedVitalSign(VitalSignObservation vitalSign, Author author) {
 		if (mCodedVitalSigns == null) {
-			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
+					.getCodedVitalSignsSection();
 			if (section == null) {
 				section = IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
 				common.addSection(section);
 			}
 			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
-			mCodedVitalSigns = new CodedVitalSigns(languageCode, section);
+			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
+					languageCode, section);
 		}
 		// if
 		// (mCodedVitalSigns.getMdht().getClinicalDocument().getLanguageCode()
@@ -285,12 +286,13 @@ public class CdaChEdesEdpn
 	 */
 	public List<AbstractVitalSignObservation> getCodedVitalSigns() {
 		if (mCodedVitalSigns == null) {
-			CodedVitalSignsSection section = getDoc().getCodedVitalSignsSection();
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
+					.getCodedVitalSignsSection();
 			if (section == null) {
 				return Collections.emptyList();
 			}
 			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
-			mCodedVitalSigns = new CodedVitalSigns(languageCode, section);
+			mCodedVitalSigns = new CodedVitalSignsSection(languageCode, section);
 		}
 		return mCodedVitalSigns.getCodedVitalSignObservations();
 	}

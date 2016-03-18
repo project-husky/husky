@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -98,11 +98,11 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				new Value("62", Ucum.PerMinute)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				effectiveTime, ObservationInterpretationForVitalSign.NORMAL, ActSite.LEFT_ARM,
 				new Value("120", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.NORMAL, ActSite.LEFT_ARM,
+				effectiveTime, ObservationInterpretationForVitalSign.NORMAL, ActSite.LEFT_ARM,
 				new Value("80", Ucum.MilliMetersOfMercury)), null);
 
 		List<AbstractVitalSignObservation> observations = cda.getCodedVitalSigns();
@@ -127,7 +127,7 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				vsObservation.getCode().getCode());
 		assertEquals(Ucum.MilliMetersOfMercury.getCodeValue(),
 				vsObservation.getValue().getPhysicalQuantityUnit());
-		assertEquals(ObservationInterpretationVitalSign.NORMAL.getCodeValue(),
+		assertEquals(ObservationInterpretationForVitalSign.NORMAL.getCodeValue(),
 				vsObservation.getInterpretationCode().getCode());
 		assertEquals(ActSite.LEFT_ARM.getCodeValue(), vsObservation.getTargetSiteCode().getCode());
 	}
@@ -360,11 +360,11 @@ public class CdaChEdesCtnnTest extends TestUtils {
 				new Value("80", Ucum.KiloGram)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.RIGHT_FOOT,
 				new Value("140", Ucum.MilliMetersOfMercury)), null);
 
 		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationVitalSign.HIGH, ActSite.RIGHT_FOOT,
+				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.RIGHT_FOOT,
 				new Value("90", Ucum.MilliMetersOfMercury)), null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();

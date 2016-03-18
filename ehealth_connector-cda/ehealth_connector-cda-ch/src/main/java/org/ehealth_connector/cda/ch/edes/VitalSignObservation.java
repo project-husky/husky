@@ -20,7 +20,7 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
-import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationVitalSign;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Code;
@@ -58,7 +58,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime,
-			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
+			ObservationInterpretationForVitalSign interpretation, ActSite targetSite, Value value) {
 		initMdht();
 
 		setCode(code);
@@ -122,7 +122,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public VitalSignObservation(VitalSignCodes code, Date effectiveTime,
-			ObservationInterpretationVitalSign interpretation, ActSite targetSite, Value value) {
+			ObservationInterpretationForVitalSign interpretation, ActSite targetSite, Value value) {
 		this(code.getCode(), effectiveTime, interpretation, targetSite, value);
 	}
 
@@ -159,7 +159,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *          <div class="de">Beurteilung des Resultats</div>
 	 *          <div class="fr"></div> <div class="it"></div>
 	 */
-	public void setInterpretationCode(ObservationInterpretationVitalSign code) {
+	public void setInterpretationCode(ObservationInterpretationForVitalSign code) {
 		if (code != null) {
 			mVitalSignObservation.getInterpretationCodes().clear();
 			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
