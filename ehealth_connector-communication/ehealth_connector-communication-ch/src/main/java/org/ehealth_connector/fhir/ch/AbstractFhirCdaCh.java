@@ -211,7 +211,10 @@ public abstract class AbstractFhirCdaCh {
 					&& (entry.getResource() instanceof Basic)) {
 				NarrativeDt text = ((Basic) entry.getResource()).getText();
 				if (text != null) {
-					return text.getDiv().getValueAsString();
+					retVal = text.getDiv().getValueAsString();
+					retVal = retVal.replace("</div>", "");
+					retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
+					return retVal;
 				}
 			}
 		}
