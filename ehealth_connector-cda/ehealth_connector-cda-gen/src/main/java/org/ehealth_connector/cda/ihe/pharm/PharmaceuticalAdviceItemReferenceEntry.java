@@ -37,7 +37,7 @@ public class PharmaceuticalAdviceItemReferenceEntry extends PharmaceuticalAdvice
 	 * Instantiates a new pharmaceutical advice item reference entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public PharmaceuticalAdviceItemReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemReferenceEntry mdht) {

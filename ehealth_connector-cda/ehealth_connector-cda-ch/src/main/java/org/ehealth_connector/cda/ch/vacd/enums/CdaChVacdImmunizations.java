@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.vacd.enums;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.ehealth_connector.common.Code;
@@ -60,6 +59,9 @@ public enum CdaChVacdImmunizations {
 	/** Mumps vaccination (procedure) */
 	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", "", 9),
 
+	/** Vaccination for human papillomavirus (procedure) */
+	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "", 12),
+
 	/** Pertussis vaccination (procedure) */
 	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", "", 3),
 
@@ -84,20 +86,17 @@ public enum CdaChVacdImmunizations {
 	/** Typhus vaccination (procedure) */
 	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", "", 34),
 
-	/** Vaccination for human papillomavirus (procedure) */
-	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "", 12),
-
 	/** Varicella vaccination (procedure) */
 	VARICELLA("68525005", "Varicella vaccination (procedure)", "20130101", "", 20),
 
 	/** Yellow fever vaccination (procedure) */
 	YELLOFEVER("67308009", "Yellow fever vaccination (procedure)", "20130101", "", 25);
 
-	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
-
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD immunizations";
+
+	/** The Constant CODE_SYSTEM_OID. */
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -117,20 +116,60 @@ public enum CdaChVacdImmunizations {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *          <br>
+	 *          <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(CdaChVacdImmunizations.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (CdaChVacdImmunizations x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/** The code. */
 	private String code;
 
 	/** The display name. */
 	private String displayName;
 
+	/** The sort order. */
+	private int sortOrder;
+
 	/** The valid from Date. */
 	private Date validFrom;
 
 	/** The valid to Date. */
 	private Date validTo;
-
-	/** The sort order. */
-	private int sortOrder;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and Display
@@ -215,46 +254,6 @@ public enum CdaChVacdImmunizations {
 	 */
 	public int getSortOrder() {
 		return sortOrder;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(CdaChVacdImmunizations.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
-
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
-	 *
-	 * @param codeValue
-	 *          <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
-	 */
-	public static boolean isInValueSet(String codeValue) {
-		for (CdaChVacdImmunizations x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

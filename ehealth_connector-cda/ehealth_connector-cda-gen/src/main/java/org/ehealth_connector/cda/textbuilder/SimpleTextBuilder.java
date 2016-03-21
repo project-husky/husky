@@ -21,8 +21,22 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 public class SimpleTextBuilder extends TextBuilder {
 	public static final String contentTagStr = "<content";
 
+	public static int countMatches(final String str, final String sub) {
+		if ("".equals(str) || "".equals(sub)) {
+			return 0;
+		}
+		int count = 0;
+		int idx = 0;
+		while ((idx = str.indexOf(sub, idx)) != -1) {
+			count++;
+			idx += sub.length();
+		}
+		return count;
+	}
+
 	String contentIdPrefix;
 	String text;
+
 	int currentContentId;
 
 	public SimpleTextBuilder(ContentIdPrefix section, String newText) {
@@ -40,19 +54,6 @@ public class SimpleTextBuilder extends TextBuilder {
 		currentContentId = contentTagOccurences + 1;
 		append(oldText);
 		addContent(newText, contentIdPrefix, currentContentId);
-	}
-
-	public static int countMatches(final String str, final String sub) {
-		if ("".equals(str) || "".equals(sub)) {
-			return 0;
-		}
-		int count = 0;
-		int idx = 0;
-		while ((idx = str.indexOf(sub, idx)) != -1) {
-			count++;
-			idx += sub.length();
-		}
-		return count;
 	}
 
 	public int getNewTextContentIDNr() {

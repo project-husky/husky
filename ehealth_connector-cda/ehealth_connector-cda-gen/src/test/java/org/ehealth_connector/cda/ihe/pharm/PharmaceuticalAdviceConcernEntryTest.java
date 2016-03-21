@@ -40,46 +40,18 @@ public class PharmaceuticalAdviceConcernEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testSerializeEmpty() throws Exception {
+	public void testEffectiveTime() throws Exception {
+
+		Date date = DateUtil.parseDateyyyyMMddHHmmss("20160824123926");
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
+		entry.setEffectiveTime(date);
 
 		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.5']");
+		XPathExpression expr = xpath.compile("//effectiveTime/low[@value='20160824123926']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.27']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.5.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		xpath.compile("//code[@nullFalvor='NA']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//statusCode[@code='active']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
-	public void testTextReference() throws XPathExpressionException {
-		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
-
-		entry.setTextReference("#reference1");
-
-		final Document document = entry.getDocument();
-
-		final XPathExpression expr = xpath.compile("//text/reference[@value='#reference1']");
-
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals("#reference1", entry.getTextReference());
+		assertEquals(date, entry.getEffectiveTime());
 	}
 
 	@Test
@@ -96,18 +68,19 @@ public class PharmaceuticalAdviceConcernEntryTest {
 	}
 
 	@Test
-	public void testEffectiveTime() throws Exception {
-
-		Date date = DateUtil.parseDateyyyyMMddHHmmss("20160824123926");
+	public void testProblemConcernEntry() throws Exception {
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
-		entry.setEffectiveTime(date);
+
+		AbstractProblemConcern problemConcernEntry = new AbstractProblemConcern();
+
+		entry.addProblemConcernEntry(problemConcernEntry);
 
 		final Document document = entry.getDocument();
-		XPathExpression expr = xpath.compile("//effectiveTime/low[@value='20160824123926']");
+
+		XPathExpression expr = xpath
+				.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-
-		assertEquals(date, entry.getEffectiveTime());
 	}
 
 	@Test
@@ -135,39 +108,67 @@ public class PharmaceuticalAdviceConcernEntryTest {
 		assertEquals("id3", entry.getDispenseItemReferenceEntry().getId().getExtension());
 
 	}
-	
+
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.5']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.27']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.5.1']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		xpath.compile("//code[@nullFalvor='NA']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//statusCode[@code='active']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
 	@Test
 	public void testSeverityOfConcern() throws Exception {
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
-		
+
 		SeverityOfConcernEntry severityOfConcernEntry = new SeverityOfConcernEntry();
 		severityOfConcernEntry.setTextReference("#reference1");
-		
+
 		entry.setSeverityOfConcernEntry(severityOfConcernEntry);
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']");
+		XPathExpression expr = xpath
+				.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		assertEquals("#reference1", entry.getSeverityOfConcernEntry().getTextReference());
 	}
-	
+
 	@Test
-	public void testProblemConcernEntry() throws Exception {
+	public void testTextReference() throws XPathExpressionException {
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
-		
-		AbstractProblemConcern problemConcernEntry = new AbstractProblemConcern();
-		
-		entry.addProblemConcernEntry(problemConcernEntry);
+
+		entry.setTextReference("#reference1");
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
+		final XPathExpression expr = xpath.compile("//text/reference[@value='#reference1']");
 
+		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("#reference1", entry.getTextReference());
+	}
 
 }

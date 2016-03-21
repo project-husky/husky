@@ -24,7 +24,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -62,8 +61,8 @@ public class ExternalDocumentEntryTest {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("externaldocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
+		XPathExpression expr = xpath.compile(
+				"externaldocument/text/reference[@value='http://www.bag.admin.ch/ekif/04423/04428/index.html']");
 
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

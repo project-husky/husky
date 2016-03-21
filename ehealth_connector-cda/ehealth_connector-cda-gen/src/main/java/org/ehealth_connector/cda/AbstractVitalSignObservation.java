@@ -141,24 +141,6 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
-	 * Initialize the MDHT VitalSignObservation model object.
-	 */
-	protected void initMdht() {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
-		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
-		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
-		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
-
-		mVitalSignObservation.setText(Util.createReference("#TODO"));
-	}
-
-	/**
 	 * Sets the code.
 	 *
 	 * @param code
@@ -261,5 +243,23 @@ public abstract class AbstractVitalSignObservation {
 		if (value.isRto()) {
 			mVitalSignObservation.getValues().add(value.copyMdhtRto());
 		}
+	}
+
+	/**
+	 * Initialize the MDHT VitalSignObservation model object.
+	 */
+	protected void initMdht() {
+		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
+		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+
+		mVitalSignObservation.setText(Util.createReference("#TODO"));
 	}
 }

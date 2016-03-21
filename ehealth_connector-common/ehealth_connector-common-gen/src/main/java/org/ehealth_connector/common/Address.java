@@ -51,21 +51,6 @@ public class Address {
 	}
 
 	/**
-	 * Erstellt ein Adress-Objekt
-	 *
-	 * @param zip
-	 *          PLZ
-	 * @param city
-	 *          Ort
-	 * @param usage
-	 *          Verwendungszweck (Privat, Geschäft)
-	 */
-	private Address(String zip, String city, AddressUse usage) {
-		mAd = DatatypesFactory.eINSTANCE.createAD();
-		setCityAndZip(zip, city, usage);
-	}
-
-	/**
 	 * Erstellt ein Adress-Objekt.
 	 *
 	 * @param addressline
@@ -149,6 +134,21 @@ public class Address {
 	}
 
 	/**
+	 * Erstellt ein Adress-Objekt
+	 *
+	 * @param zip
+	 *          PLZ
+	 * @param city
+	 *          Ort
+	 * @param usage
+	 *          Verwendungszweck (Privat, Geschäft)
+	 */
+	private Address(String zip, String city, AddressUse usage) {
+		mAd = DatatypesFactory.eINSTANCE.createAD();
+		setCityAndZip(zip, city, usage);
+	}
+
+	/**
 	 * <div class="en">Copy mdht adress.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
@@ -164,7 +164,10 @@ public class Address {
 	 * @return Adress-Zeile 1
 	 */
 	public String getAddressline1() {
-		return mAd.getStreetAddressLines().get(0).getText();
+		if (!mAd.getStreetAddressLines().isEmpty()) {
+			return mAd.getStreetAddressLines().get(0).getText();
+		}
+		return null;
 	}
 
 	/**
@@ -294,12 +297,6 @@ public class Address {
 		mAd.addCity(city);
 	}
 
-	private void setCityAndZip(String zip, String city, AddressUse usage) {
-		setCity(city);
-		setZip(zip);
-		setUsage(usage);
-	}
-
 	/**
 	 * Sets the country <div class="de">Setzt den Ort</div>
 	 *
@@ -362,6 +359,12 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [mAd=" + mAd + "]";
+	}
+
+	private void setCityAndZip(String zip, String city, AddressUse usage) {
+		setCity(city);
+		setZip(zip);
+		setUsage(usage);
 	}
 
 }

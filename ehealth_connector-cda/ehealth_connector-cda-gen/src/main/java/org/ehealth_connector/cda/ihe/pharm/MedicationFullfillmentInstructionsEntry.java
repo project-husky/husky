@@ -40,7 +40,7 @@ public class MedicationFullfillmentInstructionsEntry
 	 * Instantiates a new medication fullfillment instructions entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public MedicationFullfillmentInstructionsEntry(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createMedicationFullfillmentInstructions().init());
@@ -54,7 +54,7 @@ public class MedicationFullfillmentInstructionsEntry
 	 * Instantiates a new medication fullfillment instructions entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public MedicationFullfillmentInstructionsEntry(MedicationFullfillmentInstructions mdht) {
 		super(mdht);

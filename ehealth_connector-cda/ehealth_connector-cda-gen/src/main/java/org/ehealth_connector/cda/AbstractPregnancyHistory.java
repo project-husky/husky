@@ -53,11 +53,11 @@ public abstract class AbstractPregnancyHistory {
 
 	/**
 	 * Instantiates a new pregnancy.
-	 * 
+	 *
 	 * @param estimatedBirthDate
-	 *            <div class="en">calculated due date</div>
-	 *            <div class="de">Errechneter Geburtstermin</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *          <div class="en">calculated due date</div>
+	 *          <div class="de">Errechneter Geburtstermin</div>
+	 *          <div class="fr"></div> <div class="it"></div>
 	 */
 	public AbstractPregnancyHistory(Date estimatedBirthDate) {
 		this();
@@ -66,22 +66,21 @@ public abstract class AbstractPregnancyHistory {
 
 	/**
 	 * Instantiates a new pregnancy.
-	 * 
+	 *
 	 * @param pregnancy
-	 *            <div class="en">pregnancy</div>
-	 *            <div class="de">Schwangerschaft</div>
-	 *            <div class="fr"> pregnancy</div>
-	 *            <div class="it"> pregnancy</div>
+	 *          <div class="en">pregnancy</div>
+	 *          <div class="de">Schwangerschaft</div>
+	 *          <div class="fr"> pregnancy</div> <div class="it"> pregnancy</div>
 	 */
-	public AbstractPregnancyHistory(org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
+	public AbstractPregnancyHistory(
+			org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation pregnancy) {
 		mPregnancy = pregnancy;
 	}
 
 	/**
-	 * <div class="en">Copy mdht pregnancy.</div> <div class="de">kopiert das
-	 * MDHT Schwangerschaftsobjekt</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 * 
+	 * <div class="en">Copy mdht pregnancy.</div> <div class="de">kopiert das MDHT
+	 * Schwangerschaftsobjekt</div> <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation copyMdhtPregnancy() {
@@ -89,9 +88,9 @@ public abstract class AbstractPregnancyHistory {
 	}
 
 	/**
-	 * <div class="en">Gets the calculated due date</div><div class="de">Gibt
-	 * den errechneten Geburtstermin zurück.</div>
-	 * 
+	 * <div class="en">Gets the calculated due date</div><div class="de">Gibt den
+	 * errechneten Geburtstermin zurück.</div>
+	 *
 	 * @return the estimated birthdate (due date)
 	 */
 	public String getEstimatedBirthdate() {
@@ -105,7 +104,7 @@ public abstract class AbstractPregnancyHistory {
 
 	/**
 	 * Gets the mdht pregnancy.
-	 * 
+	 *
 	 * @return the mdht pregnancy
 	 */
 	public PregnancyObservation getMdhtPregnancy() {
@@ -113,11 +112,11 @@ public abstract class AbstractPregnancyHistory {
 	}
 
 	/**
-	 * <div class="en">sets the calculated due date</div><div class="de">Setzt
-	 * den errechneten Geburtstermin</div>
-	 * 
+	 * <div class="en">sets the calculated due date</div><div class="de">Setzt den
+	 * errechneten Geburtstermin</div>
+	 *
 	 * @param estimatedBirdDate
-	 *            the new estimated birth date
+	 *          the new estimated birth date
 	 */
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
 		final TS ts = DateUtil.ts(estimatedBirdDate);

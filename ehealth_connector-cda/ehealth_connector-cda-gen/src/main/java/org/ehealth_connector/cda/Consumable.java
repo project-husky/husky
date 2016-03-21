@@ -41,29 +41,33 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Consumable> {
 
 	/**
-	 * <div class="en">Creates an object, which represents a consumable
-	 * substance. This constructor will be used, if you want to initialize an
-	 * empty object (true) or if you want to code that the substance is unknown
-	 * (false).</div><div class="de"> Erzeugt ein Objekt welches eine Substanz
-	 * repräsentiert. Dieser Konstruktor wird verwendet, wenn ein leeres Object
-	 * initialisiert werden soll (true) oder codiert werden soll, dass die
-	 * Substanz unbekannt ist (false)</div>
-	 * 
+	 * <div class="en">Creates an object, which represents a consumable substance.
+	 * This constructor will be used, if you want to initialize an empty object
+	 * (true) or if you want to code that the substance is unknown (false).</div>
+	 * <div class="de"> Erzeugt ein Objekt welches eine Substanz repräsentiert.
+	 * Dieser Konstruktor wird verwendet, wenn ein leeres Object initialisiert
+	 * werden soll (true) oder codiert werden soll, dass die Substanz unbekannt
+	 * ist (false)</div>
+	 *
 	 * @param consumableKnown
-	 *            true: Erstellung eines leeren Objekts, false: Es sind keine
-	 *            Impfungen bekannt.
+	 *          true: Erstellung eines leeren Objekts, false: Es sind keine
+	 *          Impfungen bekannt.
 	 */
 	public Consumable(boolean consumableKnown) {
 		this("");
+	}
+
+	public Consumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
+		super(consumable);
 	}
 
 	/**
 	 * <div class="en">Creates an object, which represents a consumable
 	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
 	 * verabreichende Substanz repräsentiert.</div>
-	 * 
+	 *
 	 * @param tradeNameOfVaccine
-	 *            Handelsname des Impfstoffes
+	 *          Handelsname des Impfstoffes
 	 */
 	public Consumable(String tradeNameOfVaccine) {
 		this(tradeNameOfVaccine, null);
@@ -75,15 +79,15 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * verabreichende Substanz repräsentiert. Dieses Objekt kann einer
 	 * ImmunizationRecommendation oder einer Immunization hinzugefügt
 	 * werden.</div>
-	 * 
+	 *
 	 * @param tradeNameOfVaccine
-	 *            <div class="en">trade name of vaccine</div>
-	 *            <div class="de">Handelsname des Impfstoffes</div>
+	 *          <div class="en">trade name of vaccine</div>
+	 *          <div class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *            <div class="en">GTIN, GLN or swissINDEX.</div>
-	 *            <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID
-	 *            MUSS ein GTIN, GLN, oder Swiss Index Code sein.</div>
-	 * 
+	 *          <div class="en">GTIN, GLN or swissINDEX.</div>
+	 *          <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *          ein GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *
 	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
@@ -94,27 +98,28 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * <div class="en">Creates an object, which represents a consumable
 	 * substance.</div><div class="de">Erzeugt ein Objekt welches eine
 	 * verabreichende Substanz repräsentiert. Dieses Objekt kann einer
-	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden.
-	 * Wenn der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland
+	 * ImmunizationRecommendation oder einer Immunization hinzugefügt werden. Wenn
+	 * der Impfstoff resp. das Produkt nicht bekannt ist (z.B. im Ausland
 	 * verabreichte Impfung), dann muss das Antigen mittels WHO ATC angegeben
 	 * werden. Wenn in einem Produkt mehrere Antigene enthalten sind, MUSS das
 	 * Immunization Element für jedes Antigen je einmal angegeben werden.</div>
-	 * 
+	 *
 	 * @param tradeNameOfVaccine
-	 *            <div class="en">trade name of vaccine</div>
-	 *            <div class="de">Handelsname des Impfstoffes</div>
+	 *          <div class="en">trade name of vaccine</div>
+	 *          <div class="de">Handelsname des Impfstoffes</div>
 	 * @param gtin
-	 *            <div class="en">GTIN, GLN or swissINDEX.</div>
-	 *            <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID
-	 *            MUSS ein GTIN, GLN, oder Swiss Index Code sein.</div>
+	 *          <div class="en">GTIN, GLN or swissINDEX.</div>
+	 *          <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID MUSS
+	 *          ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 * @param whoAtcCode
-	 *            <div class="en">who atc code</div>
+	 *          <div class="en">who atc code</div>
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin, Code whoAtcCode) {
 
 		super(CDAFactory.eINSTANCE.createConsumable());
 		this.getMdht().setManufacturedProduct(IHEFactory.eINSTANCE.createProductEntry().init());
-		this.getMdht().getManufacturedProduct().setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
+		this.getMdht().getManufacturedProduct()
+				.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
 
 		// The WhoAtcCode has to be present as code element, otherwise
 		// translations can´t be set
@@ -128,29 +133,27 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 		getMdht().setTypeCode(ParticipationType.CSM);
 	}
 
-	public Consumable(org.openhealthtools.mdht.uml.cda.Consumable consumable) {
-		super(consumable);
-	}
-
 	/**
 	 * <div class="en">Adds the manufactured material translation.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param codedId
-	 *            das codedId Objekt welches gesetzt wird
+	 *          das codedId Objekt welches gesetzt wird
 	 */
 	public void addManufacturedMaterialTranslation(Code codedId) {
 
-		this.getMdht().getManufacturedProduct().getManufacturedMaterial().getCode().getTranslations().add(codedId.getCD());
+		this.getMdht().getManufacturedProduct().getManufacturedMaterial().getCode().getTranslations()
+				.add(codedId.getCD());
 	}
 
 	/**
 	 * Gets the Lot Number (Chargennummer)
-	 * 
+	 *
 	 * @return the Lot Number
 	 */
 	public String getLotNr() {
-		if ((this.getManufacturedMaterial() != null) && (getManufacturedMaterial().getLotNumberText() != null)) {
+		if ((this.getManufacturedMaterial() != null)
+				&& (getManufacturedMaterial().getLotNumberText() != null)) {
 			return getManufacturedMaterial().getLotNumberText().getText();
 		}
 		return null;
@@ -158,7 +161,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured material code.
-	 * 
+	 *
 	 * @return das codedId Objekt
 	 */
 	public Code getManufacturedMaterialCode() {
@@ -171,7 +174,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured material translations.
-	 * 
+	 *
 	 * @return the manufactured material translations
 	 */
 	public EList<CD> getManufacturedMaterialTranslations() {
@@ -184,14 +187,15 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	/**
 	 * Gets the product id from the ManufacturedProduct Ids oder the
 	 * ManufacturedMaterial Code or the according translations
-	 * 
+	 *
 	 * @return the gtin or ean or swiss index, null otherwise
 	 */
 	public Identificator getManufacturedProductId() {
 		if (this.getManufacturedProduct() != null)
 			for (final II id : getManufacturedProduct().getIds()) {
 				if (((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId()))
-						|| ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()))
+						|| ((id.getRoot() != null)
+								&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()))
 						|| ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId()))) {
 					final Identificator ide = new Identificator(id);
 					return ide;
@@ -202,11 +206,12 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the Organization that manufactured this product
-	 * 
+	 *
 	 * @return the organization
 	 */
 	public Organization getManufacturer() {
-		if ((getManufacturedProduct() != null) && (getManufacturedProduct().getManufacturerOrganization() != null)) {
+		if ((getManufacturedProduct() != null)
+				&& (getManufacturedProduct().getManufacturerOrganization() != null)) {
 			return new Organization(getManufacturedProduct().getManufacturerOrganization());
 		}
 		return null;
@@ -214,7 +219,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the trade name.
-	 * 
+	 *
 	 * @return das tradeNameOfVaccine Objekt
 	 */
 	public String getTradeName() {
@@ -227,12 +232,13 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	/**
 	 * <div class="en">Gets the who atc code.</div> <div class="de">Liefert den
 	 * who atc code.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return Code <div class="en">the who atc code</div>
 	 */
 	public Code getWhoAtcCode() {
 		if (this.getManufacturedMaterialCode() != null) {
-			if (this.getManufacturedMaterialCode().getCodeSystem().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
+			if (this.getManufacturedMaterialCode().getCodeSystem()
+					.equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
 				return getManufacturedMaterialCode();
 			}
 		}
@@ -241,9 +247,9 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Sets the Lot Number (Chargennummer)
-	 * 
+	 *
 	 * @param text
-	 *            the lot number text
+	 *          the lot number text
 	 */
 	public void setLotNr(String text) {
 		if (!"".equals(text) && (this.getManufacturedMaterial() != null)) {
@@ -254,12 +260,12 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	/**
 	 * Sets the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss
 	 * Index Code
-	 * 
+	 *
 	 * @see org.ehealth_connector.common.enums.CodeSystems
-	 * 
+	 *
 	 * @param gtinOrPharmacodeOrGln
-	 *            the new manufactured product id. If null, a NullFlavor.UNK
-	 *            will be set instead.
+	 *          the new manufactured product id. If null, a NullFlavor.UNK will be
+	 *          set instead.
 	 */
 	public void setManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
 		if (getManufacturedProduct() != null) {
@@ -276,9 +282,9 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Sets the Organization that manufactured this product
-	 * 
+	 *
 	 * @param organization
-	 *            the organization
+	 *          the organization
 	 */
 	public void setManufacturer(Organization organization) {
 		if (this.getManufacturedProduct() != null) {
@@ -288,9 +294,9 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Sets the trade name.
-	 * 
+	 *
 	 * @param tradeNameOfVaccine
-	 *            das tradeNameOfVaccine Objekt welches gesetzt wird
+	 *          das tradeNameOfVaccine Objekt welches gesetzt wird
 	 */
 	public void setTradeName(String tradeNameOfVaccine) {
 		if (this.getManufacturedMaterial() != null) {
@@ -306,9 +312,9 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Sets the who atc code (Use CodeSystem.WHOATCCode)
-	 * 
+	 *
 	 * @param whoAtcCode
-	 *            das WHOATcCode Objekt welches gesetzt wird
+	 *          das WHOATcCode Objekt welches gesetzt wird
 	 */
 	public void setWhoAtcCode(Code whoAtcCode) {
 		if (this.getManufacturedMaterial() != null) {
@@ -324,7 +330,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured material.
-	 * 
+	 *
 	 * @return the manufactured material
 	 */
 	private Material getManufacturedMaterial() {
@@ -336,7 +342,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Gets the manufactured product.
-	 * 
+	 *
 	 * @return the manufactured product
 	 */
 	private ManufacturedProduct getManufacturedProduct() {

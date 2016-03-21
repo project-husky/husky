@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.enums;
 public interface ContentIdPrefix {
 	/**
 	 * Method to get the content id prefix out of the enumeration
-	 * 
+	 *
 	 * @return the content id prefix
 	 */
 	String getContentIdPrefix();

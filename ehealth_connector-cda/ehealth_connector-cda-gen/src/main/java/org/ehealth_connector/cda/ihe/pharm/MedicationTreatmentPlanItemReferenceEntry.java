@@ -41,7 +41,7 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 	 * Instantiates a new medication treatment plan item reference entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public MedicationTreatmentPlanItemReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry mdht) {
@@ -50,7 +50,8 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 		this.getMdht().getTemplateIds().clear();
 		this.getMdht().getTemplateIds().add(new Identificator(templateId, null).getIi());
 		this.getMdht().setStatusCode(null);
-		// mdht modeling issue codeSystem, codeSystemName is form ihe::Medication fixed to snomed
+		// mdht modeling issue codeSystem, codeSystemName is form ihe::Medication
+		// fixed to snomed
 		if ("2.16.840.1.113883.6.96".equals(this.getMdht().getCode().getCodeSystem())) {
 			this.getMdht().getCode().setCodeSystem("1.3.6.1.4.1.19376.1.9.2.2");
 			this.getMdht().getCode().setCodeSystemName("IHE Pharmacy Item Type List");

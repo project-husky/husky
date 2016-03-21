@@ -38,6 +38,7 @@ public class PharmXPath {
 
 		XPath xpath = xpathFactory.newXPath();
 		xpath.setNamespaceContext(new NamespaceContext() {
+			@Override
 			public String getNamespaceURI(String prefix) {
 				if ("cda".equals(prefix)) {
 					return "urn:hl7-org:v3";
@@ -51,6 +52,7 @@ public class PharmXPath {
 				return null;
 			}
 
+			@Override
 			public String getPrefix(String namespaceURI) {
 				if ("urn:hl7-org:v3".equals(namespaceURI)) {
 					return "cda";
@@ -64,6 +66,7 @@ public class PharmXPath {
 				return null;
 			}
 
+			@Override
 			public Iterator<String> getPrefixes(String namespaceURI) {
 				return null;
 			}

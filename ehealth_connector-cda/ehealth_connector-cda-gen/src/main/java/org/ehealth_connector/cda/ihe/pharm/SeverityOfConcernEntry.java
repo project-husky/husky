@@ -42,7 +42,7 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 	 * Instantiates a new severity of concern entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public SeverityOfConcernEntry(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createSeverity().init());
@@ -53,7 +53,7 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 	 * Instantiates a new severity of concern entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public SeverityOfConcernEntry(Severity mdht) {
 		super(mdht);
@@ -73,13 +73,12 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 
 	/**
 	 * Gets the text reference pointing to the narrative text in the section.
-	 * 
+	 *
 	 * @return the text reference
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null)
-				&& (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -89,7 +88,7 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 	 * Sets the severity observation.
 	 *
 	 * @param severityObservation
-	 *            the new severity observation
+	 *          the new severity observation
 	 */
 	public void setSeverityObservation(SeverityObservation severityObservation) {
 		this.getMdht().setCode(severityObservation.getCode(languageCode).getCD());
@@ -99,7 +98,7 @@ public class SeverityOfConcernEntry extends MdhtFacade<Severity> {
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *            the new text reference
+	 *          the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

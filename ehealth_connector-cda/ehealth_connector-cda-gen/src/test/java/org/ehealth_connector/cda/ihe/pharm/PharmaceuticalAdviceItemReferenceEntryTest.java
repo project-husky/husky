@@ -35,6 +35,19 @@ public class PharmaceuticalAdviceItemReferenceEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
+	public void testIdentifier() throws Exception {
+
+		final PharmaceuticalAdviceItemReferenceEntry entry = new PharmaceuticalAdviceItemReferenceEntry();
+
+		entry.setId(new Identificator("oid", "id"));
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
 	public void testSerializeEmpty() throws Exception {
 		final PharmaceuticalAdviceItemReferenceEntry entry = new PharmaceuticalAdviceItemReferenceEntry();
 
@@ -48,19 +61,5 @@ public class PharmaceuticalAdviceItemReferenceEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-	
-	@Test
-	public void testIdentifier() throws Exception {
-
-		final PharmaceuticalAdviceItemReferenceEntry entry = new PharmaceuticalAdviceItemReferenceEntry();
-
-		entry.setId(new Identificator("oid", "id"));
-		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
 
 }

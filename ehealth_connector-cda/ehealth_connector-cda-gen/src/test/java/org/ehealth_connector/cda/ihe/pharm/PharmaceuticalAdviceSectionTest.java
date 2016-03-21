@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Class PharmaceuticalAdviceSectionTest.
  */
@@ -36,45 +35,44 @@ public class PharmaceuticalAdviceSectionTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testSerialize() throws Exception {
-		
-		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(LanguageCode.ENGLISH);
-		
-		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
-		padvEntry.setTextReference("#padv");
-		section.setPharmaceuticalAdviceItemEntry(padvEntry);
-		
-		final Document document = section.getDocument();
-
-		// Section
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.2']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-		
-		assertEquals("#padv",section.getPharmaceuticalAdviceItemEntry().getTextReference());
-	}
-	
-	@Test
 	public void testReplaceDispense() throws Exception {
-		
-		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(LanguageCode.ENGLISH);
-		
+
+		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(
+				LanguageCode.ENGLISH);
+
 		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
 		padvEntry.setTextReference("#padv");
 		section.setPharmaceuticalAdviceItemEntry(padvEntry);
 
-
-		assertEquals("#padv",section.getPharmaceuticalAdviceItemEntry().getTextReference());
+		assertEquals("#padv", section.getPharmaceuticalAdviceItemEntry().getTextReference());
 
 		final PharmaceuticalAdviceItemEntry padvEntry2 = new PharmaceuticalAdviceItemEntry();
 		padvEntry2.setTextReference("#padv2");
 		section.setPharmaceuticalAdviceItemEntry(padvEntry2);
 
-
-		assertEquals("#padv2",section.getPharmaceuticalAdviceItemEntry().getTextReference());
+		assertEquals("#padv2", section.getPharmaceuticalAdviceItemEntry().getTextReference());
 
 		section.getDocument();
+	}
+
+	@Test
+	public void testSerialize() throws Exception {
+
+		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(
+				LanguageCode.ENGLISH);
+
+		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
+		padvEntry.setTextReference("#padv");
+		section.setPharmaceuticalAdviceItemEntry(padvEntry);
+
+		final Document document = section.getDocument();
+
+		// Section
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.2']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("#padv", section.getPharmaceuticalAdviceItemEntry().getTextReference());
 	}
 
 }

@@ -54,7 +54,7 @@ public class DispenseItemEntry
 	 * Instantiates a new dispense item entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public DispenseItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseItemEntry().init());
@@ -62,9 +62,9 @@ public class DispenseItemEntry
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
-	 * 
+	 *
 	 * @param mdht
-	 *            the mdht model object
+	 *          the mdht model object
 	 */
 	protected DispenseItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry mdht) {
 		super(mdht, null, null);
@@ -74,7 +74,7 @@ public class DispenseItemEntry
 	 * Adds the precondition entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
 		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
@@ -248,13 +248,12 @@ public class DispenseItemEntry
 
 	/**
 	 * Gets the text reference.
-	 * 
+	 *
 	 * @return the text reference
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null)
-				&& (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -264,7 +263,7 @@ public class DispenseItemEntry
 	 * Sets the dispense code.
 	 *
 	 * @param code
-	 *            the new dispense code
+	 *          the new dispense code
 	 */
 	public void setDispenseCode(Code code) {
 		this.getMdht().setCode(code.getCD());
@@ -274,7 +273,7 @@ public class DispenseItemEntry
 	 * Sets the dosage instructions.
 	 *
 	 * @param entry
-	 *            the new dosage instructions
+	 *          the new dosage instructions
 	 */
 	public void setDosageInstructions(DosageInstructionsEntry entry) {
 		DosageInstructionsEntry old = this.getDosageInstructions();
@@ -297,7 +296,7 @@ public class DispenseItemEntry
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *            the new external document entry
+	 *          the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
@@ -313,7 +312,7 @@ public class DispenseItemEntry
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *            the new identificator
+	 *          the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -326,10 +325,9 @@ public class DispenseItemEntry
 	 * Sets the medication fullfillment instructions.
 	 *
 	 * @param entry
-	 *            the new medication fullfillment instructions
+	 *          the new medication fullfillment instructions
 	 */
-	public void setMedicationFullfillmentInstructions(
-			MedicationFullfillmentInstructionsEntry entry) {
+	public void setMedicationFullfillmentInstructions(MedicationFullfillmentInstructionsEntry entry) {
 		MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
 		if (old != null) {
 			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
@@ -352,9 +350,9 @@ public class DispenseItemEntry
 	 * Sets the medications special conditions.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setMedicationsSpecialConditions(MedicationsSpecialConditions code,
 			LanguageCode languageCode) {
@@ -367,7 +365,7 @@ public class DispenseItemEntry
 	 * Sets the medication treatment plan item reference entry.
 	 *
 	 * @param entry
-	 *            the new medication treatment plan item reference entry
+	 *          the new medication treatment plan item reference entry
 	 */
 	public void setMedicationTreatmentPlanItemReferenceEntry(
 			MedicationTreatmentPlanItemReferenceEntry entry) {
@@ -392,7 +390,7 @@ public class DispenseItemEntry
 	 * Sets the patient medical instructions.
 	 *
 	 * @param entry
-	 *            the new patient medical instructions
+	 *          the new patient medical instructions
 	 */
 	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
 		PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
@@ -416,7 +414,7 @@ public class DispenseItemEntry
 	 * Sets the pharmaceutical advice item reference entry.
 	 *
 	 * @param entry
-	 *            the new pharmaceutical advice item reference entry
+	 *          the new pharmaceutical advice item reference entry
 	 */
 	public void setPharmaceuticalAdviceItemReferenceEntry(
 			PharmaceuticalAdviceItemReferenceEntry entry) {
@@ -441,7 +439,7 @@ public class DispenseItemEntry
 	 * Sets the prescription item reference entry.
 	 *
 	 * @param entry
-	 *            the new prescription item reference entry
+	 *          the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
 		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
@@ -465,9 +463,9 @@ public class DispenseItemEntry
 	 * Sets the substance admin substitution.
 	 *
 	 * @param substanceAdminSubstitution
-	 *            the substance admin substitution
+	 *          the substance admin substitution
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setSubstanceAdminSubstitutionMade(
 			SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
@@ -491,7 +489,7 @@ public class DispenseItemEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *            the new text reference
+	 *          the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

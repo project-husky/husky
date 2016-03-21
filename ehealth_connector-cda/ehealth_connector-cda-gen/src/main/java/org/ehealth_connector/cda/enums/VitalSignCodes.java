@@ -87,6 +87,10 @@ public enum VitalSignCodes {
 		return getDisplayNameDe();
 	}
 
+	public Object getLoinc() {
+		return loinc;
+	}
+
 	private String getDisplayNameDe() {
 		if (descriptionDe != null) {
 			return descriptionDe;
@@ -113,10 +117,6 @@ public enum VitalSignCodes {
 			return descriptionIt;
 		}
 		return getDisplayNameEn();
-	}
-
-	public Object getLoinc() {
-		return loinc;
 	}
 
 }

@@ -43,14 +43,16 @@ public class PharmaceuticalAdviceSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public PharmaceuticalAdviceSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceSection().init());
 		this.languageCode = languageCode;
 
-		// mdht bug? dispense sections defines own code but is not honored in modelling
-		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
+		// mdht bug? dispense sections defines own code but is not honored in
+		// modelling
+		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1"
+		// codeSystemName="LOINC" displayName="History of medication use"/>
 		if ("10160-0".equals(getMdht().getCode().getCode())) {
 			getMdht().getCode().setCode("61357-0");
 			getMdht().getCode().setDisplayName("MEDICATION PHARMACEUTICAL ADVICE.BRIEF");
@@ -75,7 +77,7 @@ public class PharmaceuticalAdviceSection
 	 * Instantiates a new pharmaceutical advice section.
 	 *
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
 	public PharmaceuticalAdviceSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceSection section) {
@@ -110,7 +112,7 @@ public class PharmaceuticalAdviceSection
 	 * Sets the pharmaceutical advice item entry.
 	 *
 	 * @param entry
-	 *            the new pharmaceutical advice item entry
+	 *          the new pharmaceutical advice item entry
 	 */
 	public void setPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
 		if (this.getMdht().getPharmaceuticalAdviceItemEntry() != null) {

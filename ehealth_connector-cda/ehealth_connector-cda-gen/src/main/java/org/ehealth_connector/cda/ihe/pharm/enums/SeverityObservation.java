@@ -20,7 +20,8 @@ import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 
 /**
- * The Enum SeverityObservation HL7 ObservationValue (OID 2.16.840.1.113883.5.1063)
+ * The Enum SeverityObservation HL7 ObservationValue (OID
+ * 2.16.840.1.113883.5.1063)
  */
 public enum SeverityObservation {
 
@@ -43,7 +44,7 @@ public enum SeverityObservation {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static SeverityObservation getEnum(String code) {
@@ -68,11 +69,11 @@ public enum SeverityObservation {
 	 * Instantiates a new SeverityObservation.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param displayNameEn
-	 *            the display name en
+	 *          the display name en
 	 * @param displayNameFr
-	 *            the display name fr
+	 *          the display name fr
 	 */
 	private SeverityObservation(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -84,7 +85,7 @@ public enum SeverityObservation {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

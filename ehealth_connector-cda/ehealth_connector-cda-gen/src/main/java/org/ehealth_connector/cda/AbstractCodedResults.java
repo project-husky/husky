@@ -44,10 +44,10 @@ public abstract class AbstractCodedResults {
 
 	/**
 	 * Instantiates a new Simple Observation
-	 * 
+	 *
 	 * @param so
-	 *            the simple observation
-	 * 
+	 *          the simple observation
+	 *
 	 */
 	public AbstractCodedResults(SimpleObservation so) {
 		crs.addObservation(so);
@@ -59,13 +59,11 @@ public abstract class AbstractCodedResults {
 		// crs.addProcedure(createEmptyProcedureEntry());
 	}
 
-	protected abstract ProcedureEntry createEmptyProcedureEntry();
-
 	/**
 	 * Adds a Simple Observation
-	 * 
+	 *
 	 * @param so
-	 *            the simple observation
+	 *          the simple observation
 	 */
 	public void addSimpleObservation(SimpleObservation so) {
 		crs.addObservation(so);
@@ -74,7 +72,7 @@ public abstract class AbstractCodedResults {
 	/**
 	 * <div class="en">Copy mdht coded results section.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return the coded results section
 	 */
 	public CodedResultsSection copyMdhtCodedResultsSection() {
@@ -83,7 +81,7 @@ public abstract class AbstractCodedResults {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the crs
 	 */
 	public CodedResultsSection getCrs() {
@@ -91,18 +89,8 @@ public abstract class AbstractCodedResults {
 	}
 
 	/**
-	 * Method to set
-	 * 
-	 * @param crs
-	 *            the crs to set
-	 */
-	public void setCrs(CodedResultsSection crs) {
-		this.crs = crs;
-	}
-
-	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the mIi
 	 */
 	public II getIi() {
@@ -111,11 +99,23 @@ public abstract class AbstractCodedResults {
 
 	/**
 	 * Method to set
-	 * 
+	 *
+	 * @param crs
+	 *          the crs to set
+	 */
+	public void setCrs(CodedResultsSection crs) {
+		this.crs = crs;
+	}
+
+	/**
+	 * Method to set
+	 *
 	 * @param mIi
-	 *            the mIi to set
+	 *          the mIi to set
 	 */
 	public void setIi(II mIi) {
 		this.mIi = mIi;
 	}
+
+	protected abstract ProcedureEntry createEmptyProcedureEntry();
 }

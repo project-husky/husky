@@ -41,6 +41,20 @@ public class DispenseItemEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
+	public void testDosageInstructions() throws Exception {
+
+		final DispenseItemEntry entry = new DispenseItemEntry();
+		DosageInstructionsEntry dosageInstructions = new DosageInstructionsEntry();
+		entry.setDosageInstructions(dosageInstructions);
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='COMP']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
 	public void testExternalDocumentEntry() throws Exception {
 
 		final DispenseItemEntry entry = new DispenseItemEntry();
@@ -86,13 +100,12 @@ public class DispenseItemEntryTest {
 		medicalFullfillmentInstruction.setTextReference("#abc");
 		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstruction);
 		assertEquals("#abc", entry.getMedicationFullfillmentInstructions().getTextReference());
-		
+
 		MedicationFullfillmentInstructionsEntry medicalFullfillmentInstructionDisrupt = new MedicationFullfillmentInstructionsEntry();
 		medicalFullfillmentInstructionDisrupt.setTextReference("#ghi");
 		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstructionDisrupt);
 		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
 
-		
 		PatientMedicalInstructionsEntry patientInstructions = new PatientMedicalInstructionsEntry();
 		patientInstructions.setTextReference("#def");
 		entry.setPatientMedicalInstructions(patientInstructions);
@@ -100,16 +113,16 @@ public class DispenseItemEntryTest {
 		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
 		assertNotNull(entry.getPatientMedicalInstructions());
 		entry.getDocument();
-		
+
 		assertEquals("#def", entry.getPatientMedicalInstructions().getTextReference());
-		
+
 		PatientMedicalInstructionsEntry patientInstructionsDisrupt = new PatientMedicalInstructionsEntry();
 		patientInstructionsDisrupt.setTextReference("#jkl");
 		entry.setPatientMedicalInstructions(patientInstructionsDisrupt);
 
 		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
 		assertEquals("#jkl", entry.getPatientMedicalInstructions().getTextReference());
-		
+
 	}
 
 	@Test
@@ -142,8 +155,7 @@ public class DispenseItemEntryTest {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("//precondition/criterion/text/reference[@value='#abc']");
+		XPathExpression expr = xpath.compile("//precondition/criterion/text/reference[@value='#abc']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		assertEquals("#abc", entry.getPreconditionEntries().get(0).getTextReference());
@@ -151,6 +163,40 @@ public class DispenseItemEntryTest {
 		entry.addPreconditionEntry(criterionEntry2);
 		assertEquals(2, entry.getPreconditionEntries().size());
 		document = entry.getDocument();
+	}
+
+	@Test
+	public void testReferenceEntries() throws Exception {
+
+		final DispenseItemEntry entry = new DispenseItemEntry();
+
+		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
+		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
+		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
+
+		PrescriptionItemReferenceEntry prescriptionItemReferenceEntry = new PrescriptionItemReferenceEntry();
+		prescriptionItemReferenceEntry.setId(new Identificator("oid2", "id2"));
+		entry.setPrescriptionItemReferenceEntry(prescriptionItemReferenceEntry);
+
+		PharmaceuticalAdviceItemReferenceEntry pharmaceuticalAdviceItemReferenceEntry = new PharmaceuticalAdviceItemReferenceEntry();
+		pharmaceuticalAdviceItemReferenceEntry.setId(new Identificator("oid3", "id3"));
+		entry.setPharmaceuticalAdviceItemReferenceEntry(pharmaceuticalAdviceItemReferenceEntry);
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(3, nodes.getLength());
+
+		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
+		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+
+		assertEquals("oid2", entry.getPrescriptionItemReferenceEntry().getId().getRoot());
+		assertEquals("id2", entry.getPrescriptionItemReferenceEntry().getId().getExtension());
+
+		assertEquals("oid3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getRoot());
+		assertEquals("id3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getExtension());
+
 	}
 
 	@Test
@@ -175,6 +221,28 @@ public class DispenseItemEntryTest {
 	}
 
 	@Test
+	public void testSubstitutionHandlingEntry() throws Exception {
+
+		final DispenseItemEntry entry = new DispenseItemEntry();
+		entry.setSubstanceAdminSubstitutionMade(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				LanguageCode.ENGLISH);
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				entry.getSubstanceAdminSubstitutionMade());
+
+		final Document document = entry.getDocument(true);
+
+		XPathExpression expr = xpath
+				.compile("//pharm:component1[@moodCode='EVN' and @classCode='SUBST']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//pharm:code[@code='TE' and @codeSystem='2.16.840.1.113883.5.1070']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
 	public void testTextReference() throws XPathExpressionException {
 		final DispenseItemEntry entry = new DispenseItemEntry();
 
@@ -189,75 +257,5 @@ public class DispenseItemEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
-	
-	@Test
-	public void testDosageInstructions() throws Exception {
-
-		final DispenseItemEntry entry = new DispenseItemEntry();
-		DosageInstructionsEntry dosageInstructions = new DosageInstructionsEntry();
-		entry.setDosageInstructions(dosageInstructions);
-
-		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='COMP']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	
-	@Test
-	public void testReferenceEntries() throws Exception {
-
-		final DispenseItemEntry entry = new DispenseItemEntry();
-		
-		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
-		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
-		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
-		
-		PrescriptionItemReferenceEntry prescriptionItemReferenceEntry = new PrescriptionItemReferenceEntry();
-		prescriptionItemReferenceEntry.setId(new Identificator("oid2", "id2"));
-		entry.setPrescriptionItemReferenceEntry(prescriptionItemReferenceEntry);
-
-		PharmaceuticalAdviceItemReferenceEntry pharmaceuticalAdviceItemReferenceEntry = new PharmaceuticalAdviceItemReferenceEntry();
-		pharmaceuticalAdviceItemReferenceEntry.setId(new Identificator("oid3", "id3"));
-		entry.setPharmaceuticalAdviceItemReferenceEntry(pharmaceuticalAdviceItemReferenceEntry);
-
-		
-		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(3, nodes.getLength());
-
-		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
-		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
-		
-		assertEquals("oid2", entry.getPrescriptionItemReferenceEntry().getId().getRoot());
-		assertEquals("id2", entry.getPrescriptionItemReferenceEntry().getId().getExtension());
-
-		assertEquals("oid3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getRoot());
-		assertEquals("id3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getExtension());
-
-	}
-	
-	@Test
-	public void testSubstitutionHandlingEntry() throws Exception {
-
-		final DispenseItemEntry entry = new DispenseItemEntry();
-		entry.setSubstanceAdminSubstitutionMade(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
-		
-		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, entry.getSubstanceAdminSubstitutionMade());
-
-		final Document document = entry.getDocument(true);
-
-		XPathExpression expr = xpath.compile("//pharm:component1[@moodCode='EVN' and @classCode='SUBST']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//pharm:code[@code='TE' and @codeSystem='2.16.840.1.113883.5.1070']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
 
 }

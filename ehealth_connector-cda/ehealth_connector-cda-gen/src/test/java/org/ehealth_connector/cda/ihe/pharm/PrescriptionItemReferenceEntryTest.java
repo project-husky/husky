@@ -35,25 +35,6 @@ public class PrescriptionItemReferenceEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testSerializeEmpty() throws Exception {
-		final PrescriptionItemReferenceEntry entry = new PrescriptionItemReferenceEntry();
-
-		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.9999.2']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//code[@code='PREItem' and @codeSystem='1.3.6.1.4.1.19376.1.9.2.2' and @codeSystemName='IHE Pharmacy Item Type List']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		expr = xpath.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-	
-	@Test
 	public void testIdentifier() throws Exception {
 
 		final PrescriptionItemReferenceEntry entry = new PrescriptionItemReferenceEntry();
@@ -66,5 +47,24 @@ public class PrescriptionItemReferenceEntryTest {
 		assertEquals(1, nodes.getLength());
 	}
 
+	@Test
+	public void testSerializeEmpty() throws Exception {
+		final PrescriptionItemReferenceEntry entry = new PrescriptionItemReferenceEntry();
+
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.9999.2']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile(
+				"//code[@code='PREItem' and @codeSystem='1.3.6.1.4.1.19376.1.9.2.2' and @codeSystemName='IHE Pharmacy Item Type List']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
 
 }

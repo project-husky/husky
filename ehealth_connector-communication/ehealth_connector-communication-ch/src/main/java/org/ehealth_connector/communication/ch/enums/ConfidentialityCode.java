@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.ehealth_connector.communication.ch.enums;
 
-import java.util.Arrays;
-
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
@@ -122,6 +120,28 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *          <br>
+	 *          <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(ConfidentialityCode.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
 	}
 
 	/**
@@ -236,27 +256,5 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 */
 	public String getDisplayName() {
 		return this.displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(ConfidentialityCode.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
 	}
 }

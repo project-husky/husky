@@ -28,8 +28,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * The Class MedicationTreatmentPlanItemEntry.
- * see general base tests also in PrescriptionItemEntryTest
+ * The Class MedicationTreatmentPlanItemEntry. see general base tests also in
+ * PrescriptionItemEntryTest
  */
 public class MedicationListSectionTest {
 
@@ -37,27 +37,26 @@ public class MedicationListSectionTest {
 
 	@Test
 	public void testSerialize() throws Exception {
-		
+
 		final MedicationListSection section = new MedicationListSection(LanguageCode.ENGLISH);
-		
+
 		final MedicationTreatmentPlanItemEntry mtpEntry = new MedicationTreatmentPlanItemEntry();
 		mtpEntry.setTextReference("#mtp");
 		section.addMedicationTreatmentPlanItemEntry(mtpEntry);
-		
+
 		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
 		preEntry.setTextReference("#pre");
 		section.addPrescriptionItemEntry(preEntry);
-		
+
 		final Document document = section.getDocument();
 
 		// Section
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.5']");
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.5']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		assertEquals("#mtp",section.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
-		assertEquals("#pre",section.getPrescriptionItemEntries().get(0).getTextReference());
+
+		assertEquals("#mtp", section.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
+		assertEquals("#pre", section.getPrescriptionItemEntries().get(0).getTextReference());
 	}
 
 }

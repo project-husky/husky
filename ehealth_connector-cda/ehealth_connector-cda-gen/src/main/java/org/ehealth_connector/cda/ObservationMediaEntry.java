@@ -94,13 +94,6 @@ public class ObservationMediaEntry
 		return null;
 	}
 
-	protected String getMimeType() {
-		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
-			return getMdht().getValue().getMediaType();
-		}
-		return null;
-	}
-
 	public LabObservationMediaMimeType getMimeTypeEnum() {
 		if (this.getMimeType() != null) {
 			return LabObservationMediaMimeType.getEnum(getMimeType());
@@ -153,6 +146,13 @@ public class ObservationMediaEntry
 
 	public void setObservationMediaId(String id) {
 		getMdht().setObservationMediaId(id);
+	}
+
+	protected String getMimeType() {
+		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
+			return getMdht().getValue().getMediaType();
+		}
+		return null;
 	}
 
 }

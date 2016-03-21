@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Class DispenseSectionTest.
  */
@@ -36,43 +35,42 @@ public class DispenseSectionTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testSerialize() throws Exception {
-		
-		final DispenseSection section = new DispenseSection(LanguageCode.ENGLISH);
-		
-		final DispenseItemEntry disEntry = new DispenseItemEntry();
-		disEntry.setTextReference("#dis");
-		section.setDispenseItemEntry(disEntry);
-		
-		final Document document = section.getDocument();
-
-		// Section
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.3']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-		
-		assertEquals("#dis",section.getDispenseItemEntry().getTextReference());
-	}
-	
-	@Test
 	public void testReplaceDispense() throws Exception {
-		
+
 		final DispenseSection section = new DispenseSection(LanguageCode.ENGLISH);
-		
+
 		final DispenseItemEntry disEntry = new DispenseItemEntry();
 		disEntry.setTextReference("#dis");
 		section.setDispenseItemEntry(disEntry);
 
-		assertEquals("#dis",section.getDispenseItemEntry().getTextReference());
+		assertEquals("#dis", section.getDispenseItemEntry().getTextReference());
 
 		final DispenseItemEntry disEntry2 = new DispenseItemEntry();
 		disEntry2.setTextReference("#dis2");
 		section.setDispenseItemEntry(disEntry2);
 
-		assertEquals("#dis2",section.getDispenseItemEntry().getTextReference());
+		assertEquals("#dis2", section.getDispenseItemEntry().getTextReference());
 
 		section.getDocument();
+	}
+
+	@Test
+	public void testSerialize() throws Exception {
+
+		final DispenseSection section = new DispenseSection(LanguageCode.ENGLISH);
+
+		final DispenseItemEntry disEntry = new DispenseItemEntry();
+		disEntry.setTextReference("#dis");
+		section.setDispenseItemEntry(disEntry);
+
+		final Document document = section.getDocument();
+
+		// Section
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.3']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals("#dis", section.getDispenseItemEntry().getTextReference());
 	}
 
 }

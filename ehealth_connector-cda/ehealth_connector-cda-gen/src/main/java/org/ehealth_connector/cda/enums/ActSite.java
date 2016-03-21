@@ -88,18 +88,18 @@ public enum ActSite {
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ActSite ";
 	/**
-	 * <div class="en">Identifier of the Code System</div> <div
-	 * class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1052";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ActSite getEnum(String code) {
@@ -118,8 +118,8 @@ public enum ActSite {
 	 *
 	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 *          <br>
+	 *          <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -140,8 +140,8 @@ public enum ActSite {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -161,8 +161,8 @@ public enum ActSite {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div
-	 * class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
+	 * Name</div>
 	 */
 	private String displayName;
 
@@ -175,16 +175,16 @@ public enum ActSite {
 	private String displayNameIt;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and Display
+	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
+	 * Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *          <br>
+	 *          <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *          <br>
+	 *          <div class="de"> display name</div>
 	 */
 	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
 			String displayNameEn) {
@@ -197,8 +197,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
@@ -211,8 +211,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -232,8 +232,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -242,8 +242,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -262,8 +262,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the display name for the language code.</div> <div
-	 * class="de">Liefert den display name für den language code.</div>
+	 * <div class="en">Gets the display name for the language code.</div>
+	 * <div class="de">Liefert den display name für den language code.</div>
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */

@@ -23,9 +23,9 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
- * 
+ *
  * Always builds the whole part (not only adds one immunization recommendation).
- * 
+ *
  */
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
@@ -34,20 +34,21 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param problemConcerns
-	 *            a list of Problem Concerns
+	 *          a list of Problem Concerns
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
-	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns, ContentIdPrefix section) {
+	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns,
+			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
 
 	/**
 	 * Returns HTML formatted string.
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -19,7 +19,8 @@ package org.ehealth_connector.cda.ihe.pharm.enums;
 import org.ehealth_connector.common.Code;
 
 /**
- * The Enum PharmaceuticalAdviceStatusList see IHE PHARM PADV 6.5.1 IHE Pharmaceutical Advice Status List
+ * The Enum PharmaceuticalAdviceStatusList see IHE PHARM PADV 6.5.1 IHE
+ * Pharmaceutical Advice Status List
  */
 public enum PharmaceuticalAdviceStatusList {
 
@@ -35,7 +36,7 @@ public enum PharmaceuticalAdviceStatusList {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static PharmaceuticalAdviceStatusList getEnum(String code) {
@@ -54,7 +55,7 @@ public enum PharmaceuticalAdviceStatusList {
 	 * Instantiates a new pharmaceutical advice status list.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 */
 	private PharmaceuticalAdviceStatusList(String code) {
 		this.code = code;

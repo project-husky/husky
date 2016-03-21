@@ -40,7 +40,7 @@ public class PatientMedicalInstructionsEntry
 	 * Instantiates a new patient medical instructions entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public PatientMedicalInstructionsEntry(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createPatientMedicalInstructions().init());
@@ -53,7 +53,7 @@ public class PatientMedicalInstructionsEntry
 	 * Instantiates a new patient medical instructions entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public PatientMedicalInstructionsEntry(PatientMedicalInstructions mdht) {
 		super(mdht);

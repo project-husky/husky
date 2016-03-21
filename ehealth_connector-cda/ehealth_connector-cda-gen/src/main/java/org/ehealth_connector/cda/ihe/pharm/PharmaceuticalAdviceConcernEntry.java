@@ -49,7 +49,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Instantiates a new criterion entry.
 	 *
 	 * @param pharmaceuticalAdviceConcernEntry
-	 *            the pharmaceutical advice concern entry
+	 *          the pharmaceutical advice concern entry
 	 */
 	protected PharmaceuticalAdviceConcernEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry pharmaceuticalAdviceConcernEntry) {
@@ -60,7 +60,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Adds the problem concern entry.
 	 *
 	 * @param problemConcernEntry
-	 *            the problem concern entry
+	 *          the problem concern entry
 	 */
 	public void addProblemConcernEntry(AbstractProblemConcern problemConcernEntry) {
 		EntryRelationship entryRelationship = null;
@@ -161,13 +161,12 @@ public class PharmaceuticalAdviceConcernEntry extends
 
 	/**
 	 * Gets the text reference pointing to the narrative text in the section.
-	 * 
+	 *
 	 * @return the text reference
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null)
-				&& (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -177,7 +176,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the dispense item reference entry.
 	 *
 	 * @param entry
-	 *            the new dispense item reference entry
+	 *          the new dispense item reference entry
 	 */
 	public void setDispenseItemReferenceEntry(DispenseItemReferenceEntry entry) {
 		DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
@@ -201,7 +200,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the effective time in the low attribute.
 	 *
 	 * @param date
-	 *            the new effective time
+	 *          the new effective time
 	 */
 	public void setEffectiveTime(Date date) {
 		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
@@ -213,7 +212,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *            the new identificator
+	 *          the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -226,7 +225,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the prescription item reference entry.
 	 *
 	 * @param entry
-	 *            the new prescription item reference entry
+	 *          the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
 		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
@@ -250,7 +249,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the severity of concern entry.
 	 *
 	 * @param entry
-	 *            the new severity of concern entry
+	 *          the new severity of concern entry
 	 */
 	public void setSeverityOfConcernEntry(SeverityOfConcernEntry entry) {
 		SeverityOfConcernEntry old = this.getSeverityOfConcernEntry();
@@ -273,9 +272,9 @@ public class PharmaceuticalAdviceConcernEntry extends
 
 	/**
 	 * Sets the text reference.
-	 * 
+	 *
 	 * @param value
-	 *            the new text reference, # for local reference has to be included
+	 *          the new text reference, # for local reference has to be included
 	 */
 	@Override
 	public void setTextReference(String value) {

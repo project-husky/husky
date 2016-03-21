@@ -47,8 +47,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
 				author = new Author(getMdht().getClinicalDocument().getAuthors().get(0));
 			} else {
-				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE
-						.createAuthor();
+				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE.createAuthor();
 				mdhtAuthor.setNullFlavor(NullFlavor.UNK);
 				author = new Author(mdhtAuthor);
 			}
@@ -62,9 +61,6 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 		getMdht().createStrucDocText(getTable());
 	}
-
-	protected abstract AbstractVitalSignObservation createVitalSignObservation(
-			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
 
 	public List<AbstractVitalSignObservation> getCodedVitalSignObservations() {
 		List<AbstractVitalSignObservation> ret = new ArrayList<AbstractVitalSignObservation>();
@@ -80,13 +76,17 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		}
 		ret.sort(new Comparator<AbstractVitalSignObservation>() {
 			@Override
-			public int compare(AbstractVitalSignObservation left,
-					AbstractVitalSignObservation right) {
+			public int compare(AbstractVitalSignObservation left, AbstractVitalSignObservation right) {
 				return right.getEffectiveTime().compareTo(left.getEffectiveTime());
 			}
 		});
 		return ret;
 	}
+
+	protected abstract AbstractVitalSignObservation createVitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
+
+	protected abstract Identificator getUuid();
 
 	private VitalSignsOrganizer getOrganizer(Date effectiveTime, Author author) {
 		VitalSignsSection section = getMdht();
@@ -123,17 +123,14 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		if (!observations.isEmpty()) {
 			sb.append("<table><tbody>");
 			if (languageCode == LanguageCode.GERMAN) {
-				sb.append(
-						"<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
+				sb.append("<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
 			} else {
 				sb.append("<tr><th>Date / Time</th><th>Description</th><th>Result</th></tr>");
 			}
 			for (AbstractVitalSignObservation vitalSignObservation : observations) {
-				String signDateTime = DateUtil
-						.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
+				String signDateTime = DateUtil.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
 
-				String signDescription = VitalSignCodes
-						.getEnum(vitalSignObservation.getCode().getCode())
+				String signDescription = VitalSignCodes.getEnum(vitalSignObservation.getCode().getCode())
 						.getDisplayName(languageCode);
 				if (signDescription.equals(""))
 					signDescription = vitalSignObservation.getCode().getDisplayName();
@@ -141,17 +138,16 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue() + " "
 						+ vitalSignObservation.getValue().getPhysicalQuantityUnit();
 				Code code = vitalSignObservation.getInterpretationCode();
-				if (code != null && !code.isNullFlavor() && !ObservationInterpretation.NORMAL
-						.getCodeValue().equals(code.getCode())) {
-					String signInterpretation = "["
-							+ vitalSignObservation.getInterpretationCode().getCode() + "]";
+				if (code != null && !code.isNullFlavor()
+						&& !ObservationInterpretation.NORMAL.getCodeValue().equals(code.getCode())) {
+					String signInterpretation = "[" + vitalSignObservation.getInterpretationCode().getCode()
+							+ "]";
 					signResult += " " + signInterpretation;
 				}
 				Code target = vitalSignObservation.getTargetSiteCode();
 				if (target != null && !target.isNullFlavor()) {
 
-					String signTarget = ActSite
-							.getEnum(vitalSignObservation.getTargetSiteCode().getCode())
+					String signTarget = ActSite.getEnum(vitalSignObservation.getTargetSiteCode().getCode())
 							.getDisplayName(languageCode);
 					if (signTarget.equals(""))
 						signTarget = vitalSignObservation.getTargetSiteCode().getDisplayName();
@@ -171,6 +167,4 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 		return sb.toString();
 	}
-
-	protected abstract Identificator getUuid();
 }

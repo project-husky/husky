@@ -43,14 +43,16 @@ public class DispenseSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public DispenseSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseSection().init());
 		this.languageCode = languageCode;
 
-		// mdht bug? dispense sections defines own code but is not honored in modelling
-		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of medication use"/>
+		// mdht bug? dispense sections defines own code but is not honored in
+		// modelling
+		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1"
+		// codeSystemName="LOINC" displayName="History of medication use"/>
 		if ("10160-0".equals(getMdht().getCode().getCode())) {
 			getMdht().getCode().setCode("60590-7");
 			getMdht().getCode().setDisplayName("MEDICATION DISPENSED.BRIEF");
@@ -75,7 +77,7 @@ public class DispenseSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
 	public DispenseSection(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection section) {
 		super(section);
@@ -109,7 +111,7 @@ public class DispenseSection
 	 * Sets the dispense item entry.
 	 *
 	 * @param entry
-	 *            the new dispense item entry
+	 *          the new dispense item entry
 	 */
 	public void setDispenseItemEntry(DispenseItemEntry entry) {
 		if (this.getMdht().getDispenseItemEntry() != null) {

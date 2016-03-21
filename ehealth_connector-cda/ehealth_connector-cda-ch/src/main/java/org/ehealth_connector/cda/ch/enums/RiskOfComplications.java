@@ -9,12 +9,10 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.enums;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListLoinc;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -288,6 +286,28 @@ public enum RiskOfComplications {
 	}
 
 	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *          <br>
+	 *          <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(RiskOfComplications.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
 	 * ist.</div>
@@ -420,28 +440,6 @@ public enum RiskOfComplications {
 			displayName = displayNames.get(LanguageCode.GERMAN);
 		}
 		return displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(RiskOfComplications.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
 	}
 
 	/**

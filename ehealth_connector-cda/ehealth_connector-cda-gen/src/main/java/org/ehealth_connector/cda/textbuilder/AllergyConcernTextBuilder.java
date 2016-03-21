@@ -23,9 +23,9 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
- * 
+ *
  * Always builds the whole part (not only adds one immunization recommendation).
- * 
+ *
  */
 public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
@@ -34,22 +34,60 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param problemConcerns
-	 *            a list of problem concerns
+	 *          a list of problem concerns
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
-	public AllergyConcernTextBuilder(List<AbstractAllergyConcern> problemConcerns, ContentIdPrefix section) {
+	public AllergyConcernTextBuilder(List<AbstractAllergyConcern> problemConcerns,
+			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
 
-	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
+	/**
+	 * Method to get
+	 *
+	 * @return the contentIdPrefix
+	 */
+	public String getContentIdPrefix() {
+		return contentIdPrefix;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the problemConcerns
+	 */
+	public List<org.ehealth_connector.cda.AbstractAllergyConcern> getProblemConcerns() {
+		return problemConcerns;
+	}
+
+	/**
+	 * Method to set
+	 *
+	 * @param contentIdPrefix
+	 *          the contentIdPrefix to set
+	 */
+	public void setContentIdPrefix(String contentIdPrefix) {
+		this.contentIdPrefix = contentIdPrefix;
+	}
+
+	/**
+	 * Method to set
+	 *
+	 * @param problemConcerns
+	 *          the problemConcerns to set
+	 */
+	public void setProblemConcerns(
+			List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns) {
+		this.problemConcerns = problemConcerns;
+	}
 
 	/**
 	 * Returns HTML formatted string.
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -60,6 +98,8 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 		append("</table>");
 		return super.toString();
 	}
+
+	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
 
 	private void addBody() {
 		append("<tbody>");
@@ -78,43 +118,5 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 		append("<th>Kommentar</th>");
 		append("</tr>");
 		append("</thead>");
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the problemConcerns
-	 */
-	public List<org.ehealth_connector.cda.AbstractAllergyConcern> getProblemConcerns() {
-		return problemConcerns;
-	}
-
-	/**
-	 * Method to set
-	 * 
-	 * @param problemConcerns
-	 *            the problemConcerns to set
-	 */
-	public void setProblemConcerns(List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns) {
-		this.problemConcerns = problemConcerns;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the contentIdPrefix
-	 */
-	public String getContentIdPrefix() {
-		return contentIdPrefix;
-	}
-
-	/**
-	 * Method to set
-	 * 
-	 * @param contentIdPrefix
-	 *            the contentIdPrefix to set
-	 */
-	public void setContentIdPrefix(String contentIdPrefix) {
-		this.contentIdPrefix = contentIdPrefix;
 	}
 }

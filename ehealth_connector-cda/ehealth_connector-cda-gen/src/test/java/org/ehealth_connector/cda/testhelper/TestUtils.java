@@ -369,16 +369,6 @@ public class TestUtils {
 		return t;
 	}
 
-	protected Value createValue1() {
-		final Value value = new Value("500", "ml");
-		return value;
-	}
-
-	protected Value createValue2() {
-		final Value value = new Value(ts1, ts2);
-		return value;
-	}
-
 	public String getTempFilePath(String aFileName) {
 		String tmpPath = "";
 		if (System.getProperty("java.io.tmpdir") != null) {
@@ -462,5 +452,15 @@ public class TestUtils {
 			return xExist(document, "//templateId[@root='" + templateIdRoot + "' and @extension='"
 					+ templateIdExtension + "']");
 		}
+	}
+
+	protected Value createValue1() {
+		final Value value = new Value("500", "ml");
+		return value;
+	}
+
+	protected Value createValue2() {
+		final Value value = new Value(ts1, ts2);
+		return value;
 	}
 }

@@ -40,23 +40,19 @@ public class PatientMedicalInstructionsEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.3']");
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.3']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//templateId[@root='2.16.840.1.113883.10.20.1.49']");
+
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.49']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//code[@code='PINSTRUCT' and @codeSystem='1.3.6.1.4.1.19376.1.5.3.2']");
+
+		expr = xpath.compile("//code[@code='PINSTRUCT' and @codeSystem='1.3.6.1.4.1.19376.1.5.3.2']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//statusCode[@code='completed']");
+
+		expr = xpath.compile("//statusCode[@code='completed']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}

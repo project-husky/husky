@@ -24,17 +24,23 @@ import org.ehealth_connector.common.Code;
  */
 public enum MedicationsSpecialConditions {
 
-	/** <div class="en">Drug Treatment Unknown</div><div class="fr">Traitement médicamenteux inconnu</div> */
-	DRUG_TREATMENT_UNKNOWN("182904002", "Drug Treatment Unknown",
-			"Traitement médicamenteux inconnu"),
+	/**
+	 * <div class="en">Drug Treatment Unknown</div><div class="fr">Traitement
+	 * médicamenteux inconnu</div>
+	 */
+	DRUG_TREATMENT_UNKNOWN("182904002", "Drug Treatment Unknown", "Traitement médicamenteux inconnu"),
 
-	/** <div class="en">No Drug Therapy Prescribed</div><div class="fr">Aucun traitement médicamenteux prescrit</div> */
-	NO_DRUG_THERAPY_PRESCRIBED("182849000", "No Drug Therapy Prescribed",
-			"Aucun traitement médicamenteux prescrit"),
+	/**
+	 * <div class="en">No Drug Therapy Prescribed</div><div class="fr">Aucun
+	 * traitement médicamenteux prescrit</div>
+	 */
+	NO_DRUG_THERAPY_PRESCRIBED("182849000", "No Drug Therapy Prescribed", "Aucun traitement médicamenteux prescrit"),
 
-	/** <div class="en">Patient Not On Self-Medications</div><div class="fr">Le patient indique qu’il ne prend pas de médicaments.</div> */
-	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003", "Patient Not On Self-Medications",
-			"Le patient indique qu’il ne prend pas de médicaments.");
+	/**
+	 * <div class="en">Patient Not On Self-Medications</div><div class="fr">Le
+	 * patient indique qu’il ne prend pas de médicaments.</div>
+	 */
+	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003", "Patient Not On Self-Medications", "Le patient indique qu’il ne prend pas de médicaments.");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "IHE PCC TF2 Table 6.3.4.16.7-1";
@@ -46,7 +52,7 @@ public enum MedicationsSpecialConditions {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static MedicationsSpecialConditions getEnum(String code) {
@@ -71,11 +77,11 @@ public enum MedicationsSpecialConditions {
 	 * Instantiates a new medications special conditions.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param displayNameEn
-	 *            the display name en
+	 *          the display name en
 	 * @param displayNameFr
-	 *            the display name fr
+	 *          the display name fr
 	 */
 	private MedicationsSpecialConditions(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -87,7 +93,7 @@ public enum MedicationsSpecialConditions {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

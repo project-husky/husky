@@ -714,7 +714,6 @@ public class ConvenienceCommunication {
 		}
 		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
-		final String uuid = txnData.getDocList().get(0).getDocumentEntryUUID();
 		// Use the PatientId of the first Document for the Submission set ID
 		if (subSet.getPatientId() == null) {
 			CX testCx = firstDocEntry.getPatientId();

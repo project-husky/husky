@@ -22,7 +22,8 @@ import org.openhealthtools.mdht.uml.cda.Reference;
  * ExternalDocumentEntry implements the relationship for holding an External
  * Document Entry
  */
-public abstract class AbstractExternalReferenceEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Reference> {
+public abstract class AbstractExternalReferenceEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Reference> {
 
 	/**
 	 * Default constructor to instanciate the object
@@ -32,11 +33,11 @@ public abstract class AbstractExternalReferenceEntry extends MdhtFacade<org.open
 	}
 
 	/**
-	 * 
+	 *
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public AbstractExternalReferenceEntry(Reference mdht) {
 		super(mdht);
@@ -44,15 +45,16 @@ public abstract class AbstractExternalReferenceEntry extends MdhtFacade<org.open
 
 	/**
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 * @param templateIdRoot
-	 *            the id root
+	 *          the id root
 	 * @param templateIdExtension
-	 *            the id extension
+	 *          the id extension
 	 */
-	public AbstractExternalReferenceEntry(Reference mdht, String templateIdRoot, String templateIdExtension) {
+	public AbstractExternalReferenceEntry(Reference mdht, String templateIdRoot,
+			String templateIdExtension) {
 		super(mdht, templateIdRoot, templateIdExtension);
 	}
 
@@ -80,7 +82,7 @@ public abstract class AbstractExternalReferenceEntry extends MdhtFacade<org.open
 
 	/**
 	 * Gets the external document entry.
-	 * 
+	 *
 	 * @return the external document entry
 	 */
 	public ExternalDocumentEntry getExternalDocumentEntry() {
@@ -95,16 +97,17 @@ public abstract class AbstractExternalReferenceEntry extends MdhtFacade<org.open
 		final int prime = 31;
 		int result = 1;
 
-		result = (prime * result) + (this.getExternalDocumentEntry() != null ? this.getExternalDocumentEntry().hashCode() : 0);
+		result = (prime * result) + (this.getExternalDocumentEntry() != null
+				? this.getExternalDocumentEntry().hashCode() : 0);
 
 		return result;
 	}
 
 	/**
 	 * Sets the external document entry.
-	 * 
+	 *
 	 * @param externalDocumentEntry
-	 *            the new external document entry
+	 *          the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		if (externalDocumentEntry != null) {

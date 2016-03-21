@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.vacd.enums;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -79,6 +78,46 @@ public enum CdaChVacdRecCategories {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *          <br>
+	 *          <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(CdaChVacdRecCategories.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (CdaChVacdRecCategories x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** The code. */
@@ -226,46 +265,6 @@ public enum CdaChVacdRecCategories {
 	 */
 	public String getDisplayNameIt() {
 		return displayNameIt;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(CdaChVacdRecCategories.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
-
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
-	 *
-	 * @param codeValue
-	 *          <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
-	 */
-	public static boolean isInValueSet(String codeValue) {
-		for (CdaChVacdRecCategories x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

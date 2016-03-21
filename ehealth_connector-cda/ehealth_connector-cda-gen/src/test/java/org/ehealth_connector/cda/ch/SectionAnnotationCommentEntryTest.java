@@ -30,7 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * 
+ *
  * Test of SectionAnnotationCommentEntry
  *
  */
@@ -76,7 +76,7 @@ public class SectionAnnotationCommentEntryTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.SectionAnnotationCommentEntry#setContentIdReference(java.lang.String)}
 	 * .
-	 * 
+	 *
 	 * @throws XPathExpressionException
 	 */
 	@Test

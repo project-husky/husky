@@ -40,7 +40,7 @@ public class DispenseItemReferenceEntry extends DispenseItemEntry {
 	 * Instantiates a new dispense item reference entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public DispenseItemReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry mdht) {

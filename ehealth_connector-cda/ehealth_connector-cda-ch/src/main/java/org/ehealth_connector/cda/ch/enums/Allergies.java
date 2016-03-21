@@ -31,8 +31,8 @@ public enum Allergies {
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
 	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param enumName
 	 *          <br>
 	 *          <div class="de"> enumName</div>

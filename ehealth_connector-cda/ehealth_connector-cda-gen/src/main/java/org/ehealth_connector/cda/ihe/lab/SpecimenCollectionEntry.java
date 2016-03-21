@@ -35,10 +35,6 @@ public class SpecimenCollectionEntry
 		getMdht().getParticipants().add(participant.copy());
 	}
 
-	protected Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
-	}
-
 	public List<Participant> getParticipants() {
 		ArrayList<Participant> list = new ArrayList<Participant>();
 		if (getMdht() != null && getMdht().getParticipants() != null) {
@@ -51,10 +47,6 @@ public class SpecimenCollectionEntry
 
 	public SpecimenReceivedEntry getSpecimenReceivedEntry() {
 		return new SpecimenReceivedEntry(getMdht().getSpecimenReceived());
-	}
-
-	protected void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 
 	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
@@ -71,6 +63,14 @@ public class SpecimenCollectionEntry
 		}
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
+	}
+
+	protected Date getEffectiveTime() {
+		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+	}
+
+	protected void setEffectiveTime(Date date) {
+		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 
 }

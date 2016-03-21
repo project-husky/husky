@@ -20,35 +20,56 @@ import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 
 /**
- * The Enum SubstanceAdminSubstitution HL7 ObservationValue (OID 2.16.840.1.113883.5.1063)
+ * The Enum SubstanceAdminSubstitution HL7 ObservationValue (OID
+ * 2.16.840.1.113883.5.1063)
  */
 public enum SubstanceAdminSubstitution {
 
-	/** <div class="en"> brand composition</div><div class="fr">marque équivalente</div> */
+	/**
+	 * <div class="en"> brand composition</div><div class="fr">marque
+	 * équivalente</div>
+	 */
 	BRAND_COMPOSITION("BC", "brand composition", "marque équivalente"),
 
 	/** <div class="en"> equivalent</div><div class="fr">équivalent</div> */
 	EQUIVALENT("E", "equivalent", "équivalent"),
 
-	/** <div class="en"> equivalent composition</div><div class="fr">composition équivalente</div> */
+	/**
+	 * <div class="en"> equivalent composition</div><div class="fr">composition
+	 * équivalente</div>
+	 */
 	EQUIVALENT_COMPOSITION("EC", "equivalent composition", "composition équivalente"),
 
-	/** <div class="en"> formulary</div><div class="fr">formulaire guidelines</div> */
+	/**
+	 * <div class="en"> formulary</div><div class="fr">formulaire guidelines</div>
+	 */
 	FORMULARY("F", "formulary", "formulaire guidelines"),
 
-	/** <div class="en"> generic composition</div><div class="fr">générique équivalent</div> */
+	/**
+	 * <div class="en"> generic composition</div><div class="fr">générique
+	 * équivalent</div>
+	 */
 	GENERIC_COMPOSITION("G", "generic composition", "générique équivalent"),
 
 	/** <div class="en"> none</div><div class="fr">aucune</div> */
 	NONE("N", "none", "aucune"),
 
-	/** <div class="en"> therapeutic alternative</div><div class="fr">alternative thérapeutique</div> */
+	/**
+	 * <div class="en"> therapeutic alternative</div><div class="fr">alternative
+	 * thérapeutique</div>
+	 */
 	THERAPEUTIC_ALTERNATIVE("TE", "therapeutic alternative", "alternative thérapeutique"),
 
-	/** <div class="en"> therapeutic brand</div><div class="fr">marque thérapeutiquement équivalente</div> */
+	/**
+	 * <div class="en"> therapeutic brand</div><div class="fr">marque
+	 * thérapeutiquement équivalente</div>
+	 */
 	THERAPEUTIC_BRAND("TB", "therapeutic brand", "marque thérapeutiquement équivalente"),
 
-	/** <div class="en"> therapeutic generic</div><div class="fr">générique thérapeutique</div> */
+	/**
+	 * <div class="en"> therapeutic generic</div><div class="fr">générique
+	 * thérapeutique</div>
+	 */
 	THERAPEUTIC_GENERIC("TG", "therapeutic generic", "générique thérapeutique");
 
 	/** The Constant CODE_SYSTEM_NAME. */
@@ -61,7 +82,7 @@ public enum SubstanceAdminSubstitution {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static SubstanceAdminSubstitution getEnum(String code) {
@@ -86,11 +107,11 @@ public enum SubstanceAdminSubstitution {
 	 * Instantiates a new SubstanceAdminSubstitution.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param displayNameEn
-	 *            the display name en
+	 *          the display name en
 	 * @param displayNameFr
-	 *            the display name fr
+	 *          the display name fr
 	 */
 	private SubstanceAdminSubstitution(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -102,7 +123,7 @@ public enum SubstanceAdminSubstitution {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

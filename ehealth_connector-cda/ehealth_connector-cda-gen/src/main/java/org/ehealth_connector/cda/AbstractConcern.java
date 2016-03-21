@@ -51,11 +51,11 @@ public abstract class AbstractConcern {
 
 	/**
 	 * Instantiates a new concern entry.
-	 * 
+	 *
 	 * @param concernEntry
-	 *            <br>
-	 *            <div class="de"> concern entry</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 *          <br>
+	 *          <div class="de"> concern entry</div> <div class="fr"></div>
+	 *          <div class="it"></div>
 	 */
 	public AbstractConcern(org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
 		setConcernEntry(concernEntry);
@@ -63,16 +63,16 @@ public abstract class AbstractConcern {
 
 	/**
 	 * Adds the id.
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public abstract void addId(Identificator id);
 
 	/**
 	 * <div class="en">Gets the Concern</div> <div class="de">Gibt das Leiden
 	 * zurück.</div>
-	 * 
+	 *
 	 * @return the concern
 	 */
 	public String getConcern() {
@@ -85,7 +85,7 @@ public abstract class AbstractConcern {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the mConcernEntry
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getConcernEntry() {
@@ -93,20 +93,21 @@ public abstract class AbstractConcern {
 	}
 
 	/**
-	 * <div class="en">Gets the end of the concern</div> <div class="de">Gibt
-	 * das Ende des Leidens zurück.</div>
-	 * 
+	 * <div class="en">Gets the end of the concern</div> <div class="de">Gibt das
+	 * Ende des Leidens zurück.</div>
+	 *
 	 * @return Ende des Leidens
 	 */
 	public String getEnd() {
-		return Util.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getHigh().getValue());
+		return Util
+				.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getHigh().getValue());
 	}
 
 	/**
 	 * Gets the specified id value based on its code system.
-	 * 
+	 *
 	 * @param codeSystem
-	 *            id's identity domain
+	 *          id's identity domain
 	 * @return the id or null if it doesn't exist
 	 */
 	public Identificator getId(IdentityDomain codeSystem) {
@@ -121,7 +122,7 @@ public abstract class AbstractConcern {
 
 	/**
 	 * <div class="en">Gets the ids.</div>
-	 * 
+	 *
 	 * @return the id
 	 */
 	public List<Identificator> getIds() {
@@ -130,7 +131,7 @@ public abstract class AbstractConcern {
 
 	/**
 	 * Gets the mdht concern.
-	 * 
+	 *
 	 * @return the mdht concern
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry getMdhtConcern() {
@@ -140,19 +141,20 @@ public abstract class AbstractConcern {
 	/**
 	 * <div class="en">Gets the begin of the concern</div> <div class="de">Gibt
 	 * den Beginn des Leidens zurück.</div>
-	 * 
+	 *
 	 * @return <div class="en">start of concern</div><div class="de">Beginn des
 	 *         Leidens</div>
 	 */
 	public String getStart() {
-		return Util.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getLow().getValue());
+		return Util
+				.createEurDateStrFromTS(copyMdhtConcernEntry().getEffectiveTime().getLow().getValue());
 	}
 
 	/**
 	 * <div class="en">Gets the status (active/inactive/complete...) of the
 	 * concern</div> <div class="de">Gibt den Status (aktiv/inaktiv/...) des
 	 * Leidens zurück</div>
-	 * 
+	 *
 	 * @return <div class="en">status of the concern</div><div class="de">Status
 	 *         des Leidens</div>
 	 */
@@ -163,9 +165,9 @@ public abstract class AbstractConcern {
 	/**
 	 * <div class="en">Sets the Concern</div> <div class="de">Setzt das
 	 * Leiden.</div>
-	 * 
+	 *
 	 * @param concern
-	 *            <div class="en">Concern</div><div class="de">Leiden</div>
+	 *          <div class="en">Concern</div><div class="de">Leiden</div>
 	 */
 	public void setConcern(String concern) {
 		// Create and set the concern as freetext
@@ -175,21 +177,21 @@ public abstract class AbstractConcern {
 
 	/**
 	 * Method to set
-	 * 
+	 *
 	 * @param mConcernEntry
-	 *            the mConcernEntry to set
+	 *          the mConcernEntry to set
 	 */
 	public void setConcernEntry(org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry mConcernEntry) {
 		this.mConcernEntry = mConcernEntry;
 	}
 
 	/**
-	 * <div class="en">Sets the end of the concern</div> <div class="de">Setzt
-	 * das Ende des Leidens.</div>
-	 * 
+	 * <div class="en">Sets the end of the concern</div> <div class="de">Setzt das
+	 * Ende des Leidens.</div>
+	 *
 	 * @param endOfConcern
-	 *            <div class="en">End of concern</div><div class="de">Ende des
-	 *            Leidens</div>
+	 *          <div class="en">End of concern</div><div class="de">Ende des
+	 *          Leidens</div>
 	 */
 	public void setEnd(Date endOfConcern) {
 		try {
@@ -205,10 +207,10 @@ public abstract class AbstractConcern {
 	/**
 	 * <div class="en">Sets the begin of the Concern</div><div class="de">Setzt
 	 * den Beginn des Leidens.</div>
-	 * 
+	 *
 	 * @param startOfConcern
-	 *            <div class="en">Start of concern</div><div class="de">Beginn
-	 *            des Leidens</div>
+	 *          <div class="en">Start of concern</div><div class="de">Beginn des
+	 *          Leidens</div>
 	 */
 	public void setStart(Date startOfConcern) {
 		try {
@@ -222,25 +224,25 @@ public abstract class AbstractConcern {
 	}
 
 	/**
-	 * <div class="en">Sets the status of the concern
-	 * (active/inactive/completed). In case of an active concern (@see
+	 * <div class="en">Sets the status of the concern (active/inactive/completed).
+	 * In case of an active concern (@see
 	 * org.ehealth_connector.cda.ActiveProblemConcern) you HAVE to set either
 	 * completed, aborted, active, suspended and you HAVE to use the setEnd
 	 * method. In case of a past problem conern (@see
-	 * org.ehealth_connector.cda.PastProblemConcern) you HAVE to set completed
-	 * or aborted and you HAVE to use the setEnd Method </div>
-	 * <div class="de"> Setzt den Status (aktiv/inaktiv/...) des Leidens. <br>
+	 * org.ehealth_connector.cda.PastProblemConcern) you HAVE to set completed or
+	 * aborted and you HAVE to use the setEnd Method </div> <div class="de"> Setzt
+	 * den Status (aktiv/inaktiv/...) des Leidens. <br>
 	 * Bei einem Aktiven Leiden (@see
 	 * org.ehealth_connector.cda.ActiveProblemConcern) muss entweder completed,
-	 * aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS
-	 * die setEnd-Methode verwendet werden. <br>
+	 * aborted, active, suspended gesetzt werden (bei den letzten beiden MUSS die
+	 * setEnd-Methode verwendet werden. <br>
 	 * Bei einem vergangenen Leiden (@see
 	 * org.ehealth_connector.cda.PastProblemConcern) muss entweder completed,
 	 * aborted gesetzt werden. Es MUSS die setEnd-Methode verwendet werden.<br>
 	 * </div>
-	 * 
+	 *
 	 * @param concernStatus
-	 *            Status
+	 *          Status
 	 */
 	public void setStatus(ProblemConcernStatusCode concernStatus) {
 		getConcernEntry().setStatusCode(concernStatus.getCS());

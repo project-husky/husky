@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Class PrescriptionSectionTest.
  */
@@ -37,22 +36,21 @@ public class PrescriptionSectionTest {
 
 	@Test
 	public void testSerialize() throws Exception {
-		
+
 		final PrescriptionSection section = new PrescriptionSection(LanguageCode.ENGLISH);
-		
-				final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
+
+		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
 		preEntry.setTextReference("#pre");
 		section.addPrescriptionItemEntry(preEntry);
-		
+
 		final Document document = section.getDocument();
 
 		// Section
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.1']");
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		assertEquals("#pre",section.getPrescriptionItemEntries().get(0).getTextReference());
+
+		assertEquals("#pre", section.getPrescriptionItemEntries().get(0).getTextReference());
 	}
 
 }

@@ -38,7 +38,6 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 
 	public CdaChLrtpTest() {
 		super.init();
-
 	}
 
 	@Test

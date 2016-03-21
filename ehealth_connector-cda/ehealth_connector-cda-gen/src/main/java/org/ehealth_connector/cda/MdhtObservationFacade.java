@@ -20,12 +20,6 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 		super(mdht, templateIdRoot, templateIdExtension);
 	}
 
-	protected void addValue(Value value) {
-		if (getMdht() != null && getMdht().getValues() != null) {
-			getMdht().getValues().add(value.getValue());
-		}
-	}
-
 	/**
 	 * Gets the Effective Time
 	 *
@@ -48,6 +42,26 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	}
 
 	/**
+	 * Sets the date time of result.
+	 *
+	 * @param dateTimeOfResult
+	 *          the new date time of result
+	 */
+	public void setEffectiveTime(Date dateTimeOfResult) {
+		try {
+			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void addValue(Value value) {
+		if (getMdht() != null && getMdht().getValues() != null) {
+			getMdht().getValues().add(value.getValue());
+		}
+	}
+
+	/**
 	 * Get a list of all problem values. Each Value may be a coded or uncoded
 	 * String.
 	 *
@@ -60,19 +74,5 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 			vl.add(v);
 		}
 		return vl;
-	}
-
-	/**
-	 * Sets the date time of result.
-	 *
-	 * @param dateTimeOfResult
-	 *          the new date time of result
-	 */
-	public void setEffectiveTime(Date dateTimeOfResult) {
-		try {
-			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
 	}
 }

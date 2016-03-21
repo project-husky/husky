@@ -25,7 +25,8 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
 /**
- * Implements the Medication List Section Content Module (see also CDA-CH MTPS 7.3.5)
+ * Implements the Medication List Section Content Module (see also CDA-CH MTPS
+ * 7.3.5)
  */
 public class MedicationListSection
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationListSection> {
@@ -44,7 +45,7 @@ public class MedicationListSection
 	 * Instantiates a new medication list section.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public MedicationListSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationListSection().init());
@@ -70,7 +71,7 @@ public class MedicationListSection
 	 * Instantiates a new medication list section.
 	 *
 	 * @param section
-	 *            the section
+	 *          the section
 	 */
 	public MedicationListSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationListSection section) {
@@ -81,7 +82,7 @@ public class MedicationListSection
 	 * Adds the dispense item entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addDispenseItemEntry(DispenseItemEntry entry) {
 		this.getMdht().addSupply(entry.getMdht());
@@ -91,7 +92,7 @@ public class MedicationListSection
 	 * Adds the medication treatment plan item entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry entry) {
 		this.getMdht().addSubstanceAdministration(entry.getMdht());
@@ -101,7 +102,7 @@ public class MedicationListSection
 	 * Adds the pharmaceutical advice item entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
 		this.getMdht().addObservation(entry.getMdht());
@@ -111,7 +112,7 @@ public class MedicationListSection
 	 * Adds the prescription item entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
 		this.getMdht().addSubstanceAdministration(entry.getMdht());

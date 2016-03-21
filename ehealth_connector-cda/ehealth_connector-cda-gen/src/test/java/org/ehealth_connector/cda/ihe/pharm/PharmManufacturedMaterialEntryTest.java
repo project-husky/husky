@@ -42,20 +42,6 @@ public class PharmManufacturedMaterialEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testSerializeEmpty() throws Exception {
-		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
-		final Document document = entry.getDocument(true);
-		XPathExpression expr = xpath
-				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-		expr = xpath
-				.compile("//cda:material[@classCode='MMAT' and @determinerCode='KIND']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
 	public void testContent() throws XPathExpressionException {
 
 		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
@@ -69,12 +55,11 @@ public class PharmManufacturedMaterialEntryTest {
 
 		assertEquals(whoAtc, entry.getWhoAtcCode());
 		assertEquals("BOOSTRIX Polio Inj Susp", entry.getName());
-		assertEquals("lotNr",entry.getLotNr());
+		assertEquals("lotNr", entry.getLotNr());
 
 		Document document = entry.getDocument(true);
-		
-		XPathExpression expr = xpath
-				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
+
+		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -83,130 +68,129 @@ public class PharmManufacturedMaterialEntryTest {
 	public void testFormCode() throws XPathExpressionException {
 		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
 
-		Code formCode = new Code("2.16.840.1.113883.5.85","TAB","Tablet");
+		Code formCode = new Code("2.16.840.1.113883.5.85", "TAB", "Tablet");
 		entry.setFormCode(formCode);
-		
+
 		Date expirationTime = DateUtil.dateAndTime("04.12.2021 12:00");
 		entry.setExpirationTime(expirationTime);
-		
+
 		assertEquals(formCode, entry.getFormCode());
 		assertEquals(expirationTime, entry.getExpirationTime());
-		
+
 		Document document = entry.getDocument(true);
-		XPathExpression expr = xpath
-				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
+		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//pharm:formCode[@code='TAB' and @codeSystem='2.16.840.1.113883.5.85' and @displayName='Tablet']");
+
+		expr = xpath.compile(
+				"//pharm:formCode[@code='TAB' and @codeSystem='2.16.840.1.113883.5.85' and @displayName='Tablet']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 	}
-	
+
+	@Test
+	public void testIngredient() throws XPathExpressionException {
+		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
+
+		Code code = new Code("2.16.840.1.113883.6.73", "A10BA02", "metformin");
+		entry.setIngredientCode(code);
+
+		String brandName = "various";
+		entry.setIngredientName(brandName);
+
+		Value quantity = new Value(1000, 1, Ucum.MilliGram);
+
+		entry.setIngredientQuantity(quantity);
+
+		assertEquals(brandName, entry.getIngredientName());
+		assertEquals(code, entry.getIngredientCode());
+
+		Document document = entry.getDocument(true);
+		XPathExpression expr = xpath.compile("//cda:material/pharm:ingredient[@classCode='ACTI']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile(
+				"//pharm:code[@code='A10BA02' and @codeSystem='2.16.840.1.113883.6.73' and @displayName='metformin']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//pharm:quantity/pharm:nominator[@unit='mg' and @value='1000.0']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//pharm:name[text()='various']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
 	@Test
 	public void testPackagedMedicineProduct() throws XPathExpressionException {
 		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
-		
-		Code code = new Code("GTIN","7680553510145","METFIN cpr pell 1000 mg 60 pce");
+
+		Code code = new Code("GTIN", "7680553510145", "METFIN cpr pell 1000 mg 60 pce");
 		entry.setPackagedMedicineProductCode(code);
-		
+
 		String brandName = "METFIN cpr pell 1000 mg";
 		entry.setPackagedMedicineName(brandName);
-		
-		Code formCode = new Code("2.16.840.1.113883.5.85","TAB","Tablet");
+
+		Code formCode = new Code("2.16.840.1.113883.5.85", "TAB", "Tablet");
 		entry.setPackagedMedicineFormCode(formCode);
-		
+
 		BigDecimal value = BigDecimal.valueOf(60);
 		entry.setPackagedMedicineQuantity(value);
-		
+
 		assertEquals(code, entry.getPackagedMedicineProductCode());
 		assertEquals(brandName, entry.getPackagedMedicineName());
 		assertEquals(formCode, entry.getPackagedMedicineFormCode());
 		assertEquals(value, entry.getPackagedMedicineQuantity());
 
 		Document document = entry.getDocument(true);
-		XPathExpression expr = xpath
-				.compile("//cda:material/pharm:asContent");
+		XPathExpression expr = xpath.compile("//cda:material/pharm:asContent");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//pharm:code[@code='7680553510145' and @codeSystem='GTIN' and @displayName='METFIN cpr pell 1000 mg 60 pce']");
+
+		expr = xpath.compile(
+				"//pharm:code[@code='7680553510145' and @codeSystem='GTIN' and @displayName='METFIN cpr pell 1000 mg 60 pce']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("//pharm:capacityQuantity[@value='60']");
+		expr = xpath.compile("//pharm:capacityQuantity[@value='60']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("//pharm:formCode[@code='TAB' and @codeSystem='2.16.840.1.113883.5.85' and @displayName='Tablet']");
+		expr = xpath.compile(
+				"//pharm:formCode[@code='TAB' and @codeSystem='2.16.840.1.113883.5.85' and @displayName='Tablet']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-	
-	
-//	<pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
-//	<pharm:quantity>
-//		<pharm:numerator unit="mg" value="1000"
-//				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-//				xsi:type="pharm:PQ"/>
-//		<pharm:denominator value="1"
-//				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-//				xsi:type="pharm:PQ"/>
-//	</pharm:quantity>
-//	<pharm:ingredient classCode="MMAT" determinerCode="KIND">
-//	<pharm:code code="A10BA02" codeSystem="2.16.840.1.113883.6.73"
-//					codeSystemName="ATC WHO" displayName="metformin"/>
-//	<pharm:name>various</pharm:name>
-//</pharm:ingredient>
 
-	
+	// <pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
+	// <pharm:quantity>
+	// <pharm:numerator unit="mg" value="1000"
+	// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	// xsi:type="pharm:PQ"/>
+	// <pharm:denominator value="1"
+	// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	// xsi:type="pharm:PQ"/>
+	// </pharm:quantity>
+	// <pharm:ingredient classCode="MMAT" determinerCode="KIND">
+	// <pharm:code code="A10BA02" codeSystem="2.16.840.1.113883.6.73"
+	// codeSystemName="ATC WHO" displayName="metformin"/>
+	// <pharm:name>various</pharm:name>
+	// </pharm:ingredient>
+
 	@Test
-	public void testIngredient() throws XPathExpressionException {
+	public void testSerializeEmpty() throws Exception {
 		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
-		
-		Code code = new Code("2.16.840.1.113883.6.73","A10BA02","metformin");
-		entry.setIngredientCode(code);
-		
-		String brandName = "various";
-		entry.setIngredientName(brandName);
-		
-		Value quantity = new Value(1000, 1, Ucum.MilliGram);
-		
-		entry.setIngredientQuantity(quantity);
-		
-		
-		assertEquals(brandName, entry.getIngredientName());
-		assertEquals(code, entry.getIngredientCode());
-
-		Document document = entry.getDocument(true);
-		XPathExpression expr = xpath
-				.compile("//cda:material/pharm:ingredient[@classCode='ACTI']");
+		final Document document = entry.getDocument(true);
+		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//pharm:code[@code='A10BA02' and @codeSystem='2.16.840.1.113883.6.73' and @displayName='metformin']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//pharm:quantity/pharm:nominator[@unit='mg' and @value='1000.0']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-
-		expr = xpath
-				.compile("//pharm:name[text()='various']");
+		expr = xpath.compile("//cda:material[@classCode='MMAT' and @determinerCode='KIND']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-
-
-
 
 }

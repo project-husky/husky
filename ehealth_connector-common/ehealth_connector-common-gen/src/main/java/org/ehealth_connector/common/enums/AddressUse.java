@@ -16,8 +16,6 @@
 
 package org.ehealth_connector.common.enums;
 
-import java.util.Arrays;
-
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -80,6 +78,46 @@ public enum AddressUse {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *          <br>
+	 *          <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(AddressUse.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *          <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (AddressUse x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private String code;
@@ -220,45 +258,5 @@ public enum AddressUse {
 	 */
 	public String getDisplayName() {
 		return displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(AddressUse.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
-
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
-	 *
-	 * @param codeValue
-	 *          <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
-	 */
-	public static boolean isInValueSet(String codeValue) {
-		for (AddressUse x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

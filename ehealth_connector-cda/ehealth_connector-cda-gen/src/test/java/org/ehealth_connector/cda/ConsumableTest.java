@@ -25,7 +25,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -76,18 +75,18 @@ public class ConsumableTest {
 
 		Document document = consumable.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		XPathExpression expr = xpath.compile(
+				"consumable/manufacturedProduct/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
+		expr = xpath.compile(
+				"consumable/manufacturedProduct/id[@root='1.3.160' and @extension='7680006370012']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
+		expr = xpath.compile(
+				"consumable/manufacturedProduct/manufacturedMaterial/name='BOOSTRIX Polio Inj Susp'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 	}
 
@@ -97,8 +96,7 @@ public class ConsumableTest {
 
 		Document document = consumable.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

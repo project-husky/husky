@@ -28,14 +28,16 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
  * the reference to the immunization recommendation in switzerland, see chapter
  * 7.5.8.7 CDA-CH-VACD
  */
-public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
+public class ExternalDocumentEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ExternalDocument> {
 
 	/**
 	 * Instantiates a new criterion entry.
 	 */
 	public ExternalDocumentEntry() {
 		super(CDAFactory.eINSTANCE.createExternalDocument());
-		this.getMdht().getTemplateIds().add(DatatypesFactory.eINSTANCE.createII("2.16.840.1.113883.10.20.1.36"));
+		this.getMdht().getTemplateIds()
+				.add(DatatypesFactory.eINSTANCE.createII("2.16.840.1.113883.10.20.1.36"));
 		this.getMdht().setClassCode(ActClassDocument.DOC);
 		this.getMdht().setMoodCode(ActMood.EVN);
 
@@ -44,7 +46,8 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 	/**
 	 * Instantiates a new criterion entry.
 	 */
-	public ExternalDocumentEntry(org.openhealthtools.mdht.uml.cda.ExternalDocument externalReference) {
+	public ExternalDocumentEntry(
+			org.openhealthtools.mdht.uml.cda.ExternalDocument externalReference) {
 		super(externalReference);
 	}
 
@@ -77,7 +80,7 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 
 	/**
 	 * one id can be provided
-	 * 
+	 *
 	 * @return the id
 	 */
 	public Identificator getId() {
@@ -90,7 +93,7 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 
 	/**
 	 * Gets the narrative text for the reference.
-	 * 
+	 *
 	 * @return the narrative text for the reference.
 	 */
 	public String getReferenceNarrativeText() {
@@ -102,7 +105,7 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 
 	/**
 	 * Gets the url for the reference.
-	 * 
+	 *
 	 * @return the url for the reference
 	 */
 	public String getReferenceUrl() {
@@ -117,15 +120,16 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 		final int prime = 31;
 		int result = 1;
 		result = (prime * result) + (this.getId() != null ? this.getId().hashCode() : 0);
-		result = (prime * result) + (this.getReferenceUrl() != null ? this.getReferenceUrl().hashCode() : 0);
+		result = (prime * result)
+				+ (this.getReferenceUrl() != null ? this.getReferenceUrl().hashCode() : 0);
 		return result;
 	}
 
 	/**
 	 * one id can be provided
-	 * 
+	 *
 	 * @param id
-	 *            the new id
+	 *          the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -136,14 +140,13 @@ public class ExternalDocumentEntry extends MdhtFacade<org.openhealthtools.mdht.u
 
 	/**
 	 * Sets the text reference.
-	 * 
+	 *
 	 * @param value
-	 *            the new text reference, # for local reference has to be
-	 *            included
-	 * 
+	 *          the new text reference, # for local reference has to be included
+	 *
 	 * @param narrativeText
-	 *            the narrative Text to be used for the link in the CDA body
-	 *            level 1 text generation
+	 *          the narrative Text to be used for the link in the CDA body level 1
+	 *          text generation
 	 */
 	public void setReference(String value, String narrativeText) {
 		this.getMdht().setText(Util.createReference(value, narrativeText));

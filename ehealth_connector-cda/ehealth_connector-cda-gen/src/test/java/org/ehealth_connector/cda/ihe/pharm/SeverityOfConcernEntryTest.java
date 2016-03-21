@@ -41,25 +41,37 @@ public class SeverityOfConcernEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.1']");
+		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//templateId[@root='2.16.840.1.113883.10.20.1.55']");
+
+		expr = xpath.compile("//templateId[@root='2.16.840.1.113883.10.20.1.55']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//code[@code='SEV' and @codeSystem='2.16.840.1.113883.5.4' and @codeSystemName='HL7ActCode' and @displayName='Severity observation']");
+
+		expr = xpath.compile(
+				"//code[@code='SEV' and @codeSystem='2.16.840.1.113883.5.4' and @codeSystemName='HL7ActCode' and @displayName='Severity observation']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
-		expr = xpath
-				.compile("//statusCode[@code='completed']");
+
+		expr = xpath.compile("//statusCode[@code='completed']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testSeverityObservation() throws XPathExpressionException {
+		final SeverityOfConcernEntry entry = new SeverityOfConcernEntry();
+		entry.setSeverityObservation(SeverityObservation.LOW);
+
+		final Document document = entry.getDocument();
+		final XPathExpression expr = xpath
+				.compile("//code[@code='L' and @codeSystem='2.16.840.1.113883.5.1063']");
+		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		assertEquals(SeverityObservation.LOW, entry.getSeverityObservation());
+
 	}
 
 	@Test
@@ -77,20 +89,5 @@ public class SeverityOfConcernEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
-	
-	@Test
-	public void testSeverityObservation() throws XPathExpressionException {
-		final SeverityOfConcernEntry entry = new SeverityOfConcernEntry();
-		entry.setSeverityObservation(SeverityObservation.LOW);
-
-		final Document document = entry.getDocument();
-		final XPathExpression expr = xpath.compile("//code[@code='L' and @codeSystem='2.16.840.1.113883.5.1063']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
-		assertEquals(SeverityObservation.LOW, entry.getSeverityObservation());
-		
-	}
-
 
 }

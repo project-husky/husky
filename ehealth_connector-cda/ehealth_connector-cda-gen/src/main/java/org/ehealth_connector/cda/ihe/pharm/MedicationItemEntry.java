@@ -50,16 +50,15 @@ public class MedicationItemEntry
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
-	 * 
+	 *
 	 * @param mdht
-	 *            the mdht model object
+	 *          the mdht model object
 	 */
 	protected MedicationItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
 		super(mdht, null, null);
 		// adding missing template pcc id
-		mdht.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", null).getIi());
+		mdht.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", null).getIi());
 		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
 		statusCodeCompleted.setCode("completed");
 		this.getMdht().setStatusCode(statusCodeCompleted);
@@ -69,7 +68,7 @@ public class MedicationItemEntry
 	 * Adds the precondition entry.
 	 *
 	 * @param entry
-	 *            the entry
+	 *          the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
 		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
@@ -139,8 +138,7 @@ public class MedicationItemEntry
 	 */
 	public PatientMedicalInstructionsEntry getPatientMedicalInstructions() {
 		if (getMdht().getPharmPatientMedicalInstructions() != null) {
-			return new PatientMedicalInstructionsEntry(
-					getMdht().getPharmPatientMedicalInstructions());
+			return new PatientMedicalInstructionsEntry(getMdht().getPharmPatientMedicalInstructions());
 		}
 		return null;
 	}
@@ -152,8 +150,7 @@ public class MedicationItemEntry
 	 */
 	public PharmSubstitutionHandlingEntry getPharmSubstitutionHandlingEntry() {
 		if (getMdht().getPharmSubstitutionHandlingEntry() != null) {
-			return new PharmSubstitutionHandlingEntry(
-					getMdht().getPharmSubstitutionHandlingEntry());
+			return new PharmSubstitutionHandlingEntry(getMdht().getPharmSubstitutionHandlingEntry());
 		}
 		return null;
 	}
@@ -214,13 +211,12 @@ public class MedicationItemEntry
 
 	/**
 	 * Gets the text reference.
-	 * 
+	 *
 	 * @return the text reference
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null)
-				&& (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -230,7 +226,7 @@ public class MedicationItemEntry
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *            the new external document entry
+	 *          the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
@@ -246,7 +242,7 @@ public class MedicationItemEntry
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *            the new identificator
+	 *          the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -259,10 +255,9 @@ public class MedicationItemEntry
 	 * Sets the medication fullfillment instructions.
 	 *
 	 * @param entry
-	 *            the new medication fullfillment instructions
+	 *          the new medication fullfillment instructions
 	 */
-	public void setMedicationFullfillmentInstructions(
-			MedicationFullfillmentInstructionsEntry entry) {
+	public void setMedicationFullfillmentInstructions(MedicationFullfillmentInstructionsEntry entry) {
 		MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
 		if (old != null) {
 			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
@@ -285,9 +280,9 @@ public class MedicationItemEntry
 	 * Sets the medications special conditions.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setMedicationsSpecialConditions(MedicationsSpecialConditions code,
 			LanguageCode languageCode) {
@@ -300,7 +295,7 @@ public class MedicationItemEntry
 	 * Sets the patient medical instructions.
 	 *
 	 * @param entry
-	 *            the new patient medical instructions
+	 *          the new patient medical instructions
 	 */
 	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
 		PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
@@ -324,7 +319,7 @@ public class MedicationItemEntry
 	 * Sets the pharm substitution handling entry.
 	 *
 	 * @param entry
-	 *            the new pharm substitution handling entry
+	 *          the new pharm substitution handling entry
 	 */
 	public void setPharmSubstitutionHandlingEntry(PharmSubstitutionHandlingEntry entry) {
 		PharmSubstitutionHandlingEntry old = this.getPharmSubstitutionHandlingEntry();
@@ -347,17 +342,15 @@ public class MedicationItemEntry
 	 * Sets the reason for.
 	 *
 	 * @param internalReferenceIdentificator
-	 *            the new reason for
+	 *          the new reason for
 	 */
 	public void setReasonFor(Identificator internalReferenceIdentificator) {
-		if (getMdht().getInternalReferences() != null
-				&& getMdht().getInternalReferences().size() > 0) {
+		if (getMdht().getInternalReferences() != null && getMdht().getInternalReferences().size() > 0) {
 			InternalReference internalReference = getMdht().getInternalReferences().get(0);
 			internalReference.getIds().clear();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 		} else {
-			InternalReference internalReference = IHEFactory.eINSTANCE.createInternalReference()
-					.init();
+			InternalReference internalReference = IHEFactory.eINSTANCE.createInternalReference().init();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 			internalReference.setMoodCode(x_DocumentActMood.EVN);
 			internalReference.setClassCode(x_ActClassDocumentEntryAct.ACT);
@@ -374,7 +367,7 @@ public class MedicationItemEntry
 	 * Sets the route of administration.
 	 *
 	 * @param code
-	 *            the new route of administration
+	 *          the new route of administration
 	 */
 	public void setRouteOfAdministration(Code code) {
 		this.getMdht().setRouteCode(code.getCE());
@@ -384,7 +377,7 @@ public class MedicationItemEntry
 	 * Sets the supply quantity value.
 	 *
 	 * @param value
-	 *            the new supply quantity value
+	 *          the new supply quantity value
 	 */
 	public void setSupplyQuantityValue(BigDecimal value) {
 		PQ pq = DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), "1");
@@ -406,7 +399,7 @@ public class MedicationItemEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *            the new text reference
+	 *          the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

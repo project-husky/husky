@@ -29,8 +29,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 /**
  * Implements the IHE PharmSubstitutionHandlingEntry.
  */
-public class PharmSubstitutionHandlingEntry extends
-		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry> {
+public class PharmSubstitutionHandlingEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry> {
 
 	/**
 	 * Instantiates a new pharm substitution handling entry.
@@ -43,7 +43,7 @@ public class PharmSubstitutionHandlingEntry extends
 	 * Instantiates a new pharm substitution handling entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public PharmSubstitutionHandlingEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmSubstitutionHandlingEntry().init());
@@ -54,7 +54,7 @@ public class PharmSubstitutionHandlingEntry extends
 	 * Instantiates a new pharm substitution handling entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public PharmSubstitutionHandlingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSubstitutionHandlingEntry mdht) {
@@ -80,9 +80,9 @@ public class PharmSubstitutionHandlingEntry extends
 	 * Sets the substance admin substitution.
 	 *
 	 * @param substanceAdminSubstitution
-	 *            the substance admin substitution
+	 *          the substance admin substitution
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public void setSubstanceAdminSubstitution(SubstanceAdminSubstitution substanceAdminSubstitution,
 			LanguageCode languageCode) {

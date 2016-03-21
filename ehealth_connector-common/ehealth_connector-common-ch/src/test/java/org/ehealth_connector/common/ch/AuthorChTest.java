@@ -37,45 +37,41 @@ import org.junit.Test;
 
 public class AuthorChTest {
 
-	private Identificator testIdentificator1;
-
-	private CodeSystems testCodeSystem1;
-
-	private String testId1;
-
-	private String testGivenName;
-	private String testFamilyName;
-	private Name testName1;
-
-	private String testGln1;
-
 	private Address testAddress;
-
-	private Identificator testIdentificator2;
-
-	private CodeSystems testCodeSystem2;
-
-	private String testId2;
-
-	private String testGivenName2;
-	private String testFamilyName2;
-	private Name testName2;
-
-	private String testGln2;
-
-	private Date testDate1;
-
-	private String testStreet_1;
-
-	private String testHouseNumber_1;
 
 	private String testAddressline1_1;
 
-	private String testZip_1;
-
 	private String testCity_1;
 
+	private CodeSystems testCodeSystem1;
+	private CodeSystems testCodeSystem2;
+	private Date testDate1;
+
+	private String testFamilyName;
+
+	private String testFamilyName2;
+
+	private String testGivenName;
+
+	private String testGivenName2;
+
+	private String testGln1;
+
+	private String testHouseNumber_1;
+	private String testId1;
+	private String testId2;
+
+	private Identificator testIdentificator1;
+
+	private Identificator testIdentificator2;
+
+	private Name testName1;
+
+	private String testStreet_1;
+
 	private AddressUse testUsage_1;
+
+	private String testZip_1;
 
 	/**
 	 * Method implementing
@@ -108,11 +104,23 @@ public class AuthorChTest {
 
 		testGivenName2 = "Given My Author";
 		testFamilyName2 = "Family My Author";
-		testName2 = new Name(testGivenName2, testFamilyName2);
-
-		testGln2 = "7601001401564";
+		new Name(testGivenName2, testFamilyName2);
 
 		testDate1 = DateUtil.date("28.02.2018");
+	}
+
+	@Test
+	public void testAuthorCd() {
+		final org.ehealth_connector.common.ch.AuthorCh b = new org.ehealth_connector.common.ch.AuthorCh();
+
+		b.addId(testIdentificator1);
+		assertTrue(isEqual(testIdentificator1, b.getIds().get(0)));
+
+		b.setRoleFunction(AuthorRole.ANDERE);
+		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
+
+		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b.getSpecialityEnum());
 	}
 
 	@Test
@@ -125,8 +133,7 @@ public class AuthorChTest {
 
 		assertTrue(AbstractTestHelper.isEqual(testIdentificator2, b1.getIds().get(0)));
 		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b1.getRoleFunction().getCode());
-		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
-				b1.getSpecialityEnum());
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b1.getSpecialityEnum());
 
 		final AuthorCh b2 = new AuthorCh();
 		b2.addId(testIdentificator1);
@@ -157,21 +164,6 @@ public class AuthorChTest {
 		assertFalse(autCh.getIds().isEmpty());
 		assertEquals(testIdentificator1, autCh.getIds().get(0));
 		assertEquals(testName1.getFamilyName(), autCh.getName().getFamilyName());
-	}
-
-	@Test
-	public void testAuthorCd() {
-		final org.ehealth_connector.common.ch.AuthorCh b = new org.ehealth_connector.common.ch.AuthorCh();
-
-		b.addId(testIdentificator1);
-		assertTrue(isEqual(testIdentificator1, b.getIds().get(0)));
-
-		b.setRoleFunction(AuthorRole.ANDERE);
-		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
-
-		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
-		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
-				b.getSpecialityEnum());
 	}
 
 	private boolean isEqual(Identificator i1, Identificator i2) {

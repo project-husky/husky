@@ -489,7 +489,7 @@ public enum OrderableDrugFrom {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @return the enum
 	 */
 	public static OrderableDrugFrom getEnum(String code) {
@@ -511,11 +511,11 @@ public enum OrderableDrugFrom {
 	 * Instantiates a new OrderableDrugFrom.
 	 *
 	 * @param code
-	 *            the code
+	 *          the code
 	 * @param displayNameEn
-	 *            the display name en
+	 *          the display name en
 	 * @param displayNameFr
-	 *            the display name fr
+	 *          the display name fr
 	 */
 	private OrderableDrugFrom(String code, String displayNameEn) {
 		this.code = code;
@@ -524,7 +524,7 @@ public enum OrderableDrugFrom {
 
 	/**
 	 * Gets the code.
-	 * 
+	 *
 	 * @return the code
 	 */
 	public Code getCode() {

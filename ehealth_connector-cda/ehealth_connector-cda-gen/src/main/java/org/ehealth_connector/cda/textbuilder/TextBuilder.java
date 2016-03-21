@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.textbuilder;
 
 /**
  * Common code for all text builder classes.
- * 
+ *
  */
 public abstract class TextBuilder {
 

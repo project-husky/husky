@@ -39,7 +39,7 @@ public class DosageInstructionsEntry extends MedicationItemEntry {
 	 * Instantiates a new dispense item reference entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public DosageInstructionsEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.DosageInstructionsEntry mdht) {

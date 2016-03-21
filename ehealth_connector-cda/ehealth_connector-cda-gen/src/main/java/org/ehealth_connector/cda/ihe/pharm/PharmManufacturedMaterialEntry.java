@@ -47,8 +47,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClass;
 /**
  * Implements the IHE PharmManufacturedMaterialEntry.
  */
-public class PharmManufacturedMaterialEntry extends
-		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedMaterialEntry> {
+public class PharmManufacturedMaterialEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedMaterialEntry> {
 
 	/**
 	 * Instantiates a new pharm manufactured product entry.
@@ -61,7 +61,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Instantiates a new pharm manufactured product entry.
 	 *
 	 * @param languageCode
-	 *            the language code
+	 *          the language code
 	 */
 	public PharmManufacturedMaterialEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmManufacturedMaterialEntry().init());
@@ -72,7 +72,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Instantiates a new pharm manufactured product entry.
 	 *
 	 * @param mdht
-	 *            the mdht
+	 *          the mdht
 	 */
 	public PharmManufacturedMaterialEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedMaterialEntry mdht) {
@@ -80,7 +80,8 @@ public class PharmManufacturedMaterialEntry extends
 	}
 
 	/**
-	 * Gets the expiration time. NOTE for convenienc api: what is the correct resolution?
+	 * Gets the expiration time. NOTE for convenienc api: what is the correct
+	 * resolution?
 	 *
 	 * @return the expiration time
 	 */
@@ -99,18 +100,6 @@ public class PharmManufacturedMaterialEntry extends
 	public Code getFormCode() {
 		if (this.getMdht().getFormCode() != null) {
 			return new Code(getMdht().getFormCode());
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the ingredient.
-	 *
-	 * @return the ingredient
-	 */
-	private PharmSubstance getIngredient() {
-		if (this.getMdht() != null && this.getMdht().getIngredient() != null) {
-			return this.getMdht().getIngredient().getIngredient();
 		}
 		return null;
 	}
@@ -177,18 +166,6 @@ public class PharmManufacturedMaterialEntry extends
 	public String getName() {
 		if (this.getMdht().getName() != null) {
 			return this.getMdht().getName().getText();
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the packaged medicine.
-	 *
-	 * @return the packaged medicine
-	 */
-	private PharmPackagedMedicine getPackagedMedicine() {
-		if (this.getMdht() != null && this.getMdht().getAsContent() != null) {
-			return getMdht().getAsContent().getAsContainerPackagedMedicine();
 		}
 		return null;
 	}
@@ -261,46 +238,10 @@ public class PharmManufacturedMaterialEntry extends
 	}
 
 	/**
-	 * Inits the class object.
-	 */
-	private void init() {
-		this.getMdht().setClassCode(EntityClassManufacturedMaterial.MMAT);
-		this.getMdht().setDeterminerCode(EntityDeterminerDetermined.KIND);
-
-		if (this.getMdht().getAsContent() == null) {
-			PharmAsContent pharmAsContent = CDAFactory.eINSTANCE.createPharmAsContent();
-			pharmAsContent.setClassCode(EntityClassManufacturedMaterial.CONT);
-			this.getMdht().setAsContent(pharmAsContent);
-		}
-
-		if (this.getMdht().getAsContent().getAsContainerPackagedMedicine() == null) {
-			PharmPackagedMedicine packagedMedicine = CDAFactory.eINSTANCE
-					.createPharmPackagedMedicine();
-			packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
-			packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
-			this.getMdht().getAsContent().setAsContainerPackagedMedicine(packagedMedicine);
-		}
-
-		if (this.getMdht().getIngredient() == null) {
-			PharmIngredient ingredient = CDAFactory.eINSTANCE.createPharmIngredient();
-			ingredient.setClassCode(RoleClass.ACTI);
-			this.getMdht().setIngredient(ingredient);
-		}
-
-		if (this.getMdht().getIngredient().getIngredient() == null) {
-			PharmSubstance substance = CDAFactory.eINSTANCE.createPharmSubstance();
-			substance.setClassCode(EntityClassManufacturedMaterial.MMAT);
-			substance.setDeterminerCode(EntityDeterminer.KIND);
-			this.getMdht().getIngredient().setIngredient(substance);
-		}
-
-	}
-
-	/**
 	 * Sets the expiration time.
 	 *
 	 * @param ts
-	 *            the new expiration time
+	 *          the new expiration time
 	 */
 	public void setExpirationTime(Date ts) {
 
@@ -315,7 +256,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the form code.
 	 *
 	 * @param formCode
-	 *            the new form code
+	 *          the new form code
 	 */
 	public void setFormCode(Code formCode) {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -332,7 +273,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the ingredient code.
 	 *
 	 * @param ingredientCode
-	 *            the new ingredient code
+	 *          the new ingredient code
 	 */
 	public void setIngredientCode(Code ingredientCode) {
 		init();
@@ -347,7 +288,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the ingredient name.
 	 *
 	 * @param name
-	 *            the new ingredient name
+	 *          the new ingredient name
 	 */
 	public void setIngredientName(String name) {
 		init();
@@ -365,7 +306,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the ingredient quantity.
 	 *
 	 * @param quantity
-	 *            the new ingredient quantity
+	 *          the new ingredient quantity
 	 */
 	public void setIngredientQuantity(Value quantity) {
 		init();
@@ -386,7 +327,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the lot nr.
 	 *
 	 * @param text
-	 *            the new lot nr
+	 *          the new lot nr
 	 */
 	public void setLotNr(String text) {
 		this.getMdht().setLotNumberText(Util.st(text));
@@ -396,7 +337,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the name.
 	 *
 	 * @param name
-	 *            the new name
+	 *          the new name
 	 */
 	public void setName(String name) {
 		final EN en = DatatypesFactory.eINSTANCE.createEN();
@@ -408,13 +349,12 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the packaged medicine form code.
 	 *
 	 * @param formCode
-	 *            the new packaged medicine form code
+	 *          the new packaged medicine form code
 	 */
 	public void setPackagedMedicineFormCode(Code formCode) {
 		init();
 		if (formCode != null) {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine()
-					.setFormCode(formCode.getCE());
+			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setFormCode(formCode.getCE());
 		} else {
 			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setFormCode(null);
 		}
@@ -424,7 +364,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the packaged medicine name.
 	 *
 	 * @param name
-	 *            the new packaged medicine name
+	 *          the new packaged medicine name
 	 */
 	public void setPackagedMedicineName(String name) {
 		init();
@@ -441,13 +381,12 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the packaged medicine product code.
 	 *
 	 * @param productCode
-	 *            the new packaged medicine product code
+	 *          the new packaged medicine product code
 	 */
 	public void setPackagedMedicineProductCode(Code productCode) {
 		init();
 		if (productCode != null) {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine()
-					.setCode(productCode.getCE());
+			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setCode(productCode.getCE());
 		} else {
 			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setCode(null);
 		}
@@ -457,7 +396,7 @@ public class PharmManufacturedMaterialEntry extends
 	 * Sets the packaged medicine quantity.
 	 *
 	 * @param value
-	 *            the new packaged medicine quantity
+	 *          the new packaged medicine quantity
 	 */
 	public void setPackagedMedicineQuantity(BigDecimal value) {
 		init();
@@ -472,9 +411,9 @@ public class PharmManufacturedMaterialEntry extends
 
 	/**
 	 * Sets the who atc code (Use CodeSystem.WHOATCCode)
-	 * 
+	 *
 	 * @param whoAtcCode
-	 *            atc coe
+	 *          atc coe
 	 */
 	public void setWhoAtcCode(Code whoAtcCode) {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -484,6 +423,65 @@ public class PharmManufacturedMaterialEntry extends
 			ce.setNullFlavor(NullFlavor.UNK);
 		}
 		this.getMdht().setCode(ce);
+	}
+
+	/**
+	 * Gets the ingredient.
+	 *
+	 * @return the ingredient
+	 */
+	private PharmSubstance getIngredient() {
+		if (this.getMdht() != null && this.getMdht().getIngredient() != null) {
+			return this.getMdht().getIngredient().getIngredient();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the packaged medicine.
+	 *
+	 * @return the packaged medicine
+	 */
+	private PharmPackagedMedicine getPackagedMedicine() {
+		if (this.getMdht() != null && this.getMdht().getAsContent() != null) {
+			return getMdht().getAsContent().getAsContainerPackagedMedicine();
+		}
+		return null;
+	}
+
+	/**
+	 * Inits the class object.
+	 */
+	private void init() {
+		this.getMdht().setClassCode(EntityClassManufacturedMaterial.MMAT);
+		this.getMdht().setDeterminerCode(EntityDeterminerDetermined.KIND);
+
+		if (this.getMdht().getAsContent() == null) {
+			PharmAsContent pharmAsContent = CDAFactory.eINSTANCE.createPharmAsContent();
+			pharmAsContent.setClassCode(EntityClassManufacturedMaterial.CONT);
+			this.getMdht().setAsContent(pharmAsContent);
+		}
+
+		if (this.getMdht().getAsContent().getAsContainerPackagedMedicine() == null) {
+			PharmPackagedMedicine packagedMedicine = CDAFactory.eINSTANCE.createPharmPackagedMedicine();
+			packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
+			packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
+			this.getMdht().getAsContent().setAsContainerPackagedMedicine(packagedMedicine);
+		}
+
+		if (this.getMdht().getIngredient() == null) {
+			PharmIngredient ingredient = CDAFactory.eINSTANCE.createPharmIngredient();
+			ingredient.setClassCode(RoleClass.ACTI);
+			this.getMdht().setIngredient(ingredient);
+		}
+
+		if (this.getMdht().getIngredient().getIngredient() == null) {
+			PharmSubstance substance = CDAFactory.eINSTANCE.createPharmSubstance();
+			substance.setClassCode(EntityClassManufacturedMaterial.MMAT);
+			substance.setDeterminerCode(EntityDeterminer.KIND);
+			this.getMdht().getIngredient().setIngredient(substance);
+		}
+
 	}
 
 }
