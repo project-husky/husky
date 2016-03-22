@@ -22,6 +22,6 @@ public class NonHumanSubjectTest extends TestUtils {
 
 		Document document = nhs.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.1.2.1", null));
-		assertTrue(xExist(document, "//relatedSubject/code[@code='" + code1.getCode() + "']"));
+		assertTrue(xExist(document, "//relatedSubject/code"));
 	}
 }

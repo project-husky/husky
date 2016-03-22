@@ -125,7 +125,10 @@ public class ObservationMediaEntry
 		ED value = Util.createEd(valueString);
 		value.setMediaType(mimeType.getCodeValue());
 		value.setRepresentation(BinaryDataEncoding.B64);
+		// TODO Find out, how to add the xsi:type="ED" Attribute to this value
+		// element
 		getMdht().setValue(value);
+
 	}
 
 	/**

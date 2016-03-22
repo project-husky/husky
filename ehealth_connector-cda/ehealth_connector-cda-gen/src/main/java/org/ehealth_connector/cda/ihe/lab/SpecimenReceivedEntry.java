@@ -21,16 +21,6 @@ public class SpecimenReceivedEntry
 	}
 
 	/**
-	 * Instantiates the class with the required elements.
-	 *
-	 * @param effectiveTime
-	 */
-	public SpecimenReceivedEntry(Date effectiveTime) {
-		this();
-		setEffectiveTime(effectiveTime);
-	}
-
-	/**
 	 * Instantiates the class with the required elements for LRQC.
 	 *
 	 * @param effectiveTime

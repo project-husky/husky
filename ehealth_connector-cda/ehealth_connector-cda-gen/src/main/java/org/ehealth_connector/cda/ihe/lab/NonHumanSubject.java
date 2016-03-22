@@ -123,6 +123,7 @@ public class NonHumanSubject
 		if (code == null) {
 			CE ce = DatatypesFactory.eINSTANCE.createCE();
 			ce.setNullFlavor(NullFlavor.UNK);
+			getMdht().getRelatedSubject().setCode(ce);
 		} else {
 			getMdht().getRelatedSubject().setCode(code.getCE());
 		}

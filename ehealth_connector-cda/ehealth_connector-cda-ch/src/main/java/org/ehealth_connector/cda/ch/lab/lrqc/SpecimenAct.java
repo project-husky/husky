@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
+import org.ehealth_connector.cda.ihe.lab.NonHumanSubject;
 import org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -39,12 +40,16 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 *          the SpecimenCollectionEntry
 	 * @param organizer
 	 *          the LaboratoryBatteryOrganizer
+	 * @param nonHumanSubject
+	 *          the specimen <div class="de">Angaben zur Probe.</div>
 	 */
 	public SpecimenAct(SpecialtySections code, SpecimenCollectionEntry entry,
-			LaboratoryBatteryOrganizer organizer) {
+			LaboratoryBatteryOrganizer organizer, NonHumanSubject nonHumanSubject) {
 		this();
 		setCode(code);
+		addSpecimenCollectionEntry(entry);
 		addLaboratoryBatteryOrganizer(organizer);
+		setNonHumanSubject(nonHumanSubject);
 	}
 
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
@@ -73,6 +78,20 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		return list;
 	}
 
+	/**
+	 * Gets information regarding the specimen
+	 *
+	 * @return nonHumanSubject the specimen <div class="de">Angaben zur
+	 *         Probe.</div>
+	 */
+	public NonHumanSubject getNonHumanSubject() {
+		if (getMdht().getSubject() != null) {
+			return new NonHumanSubject(
+					(org.openhealthtools.mdht.uml.cda.ihe.lab.NonHumanSubject) getMdht().getSubject());
+		}
+		return null;
+	}
+
 	public List<SpecimenCollectionEntry> getSpecimenCollectionEntries() {
 		ArrayList<SpecimenCollectionEntry> scel = new ArrayList<SpecimenCollectionEntry>();
 		for (EntryRelationship e : getMdht().getEntryRelationships()) {
@@ -86,5 +105,15 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 
 	public void setCode(SpecialtySections code) {
 		getMdht().setCode(code.getCE());
+	}
+
+	/**
+	 * Sets information regarding the specimen
+	 *
+	 * @param nonHumanSubject
+	 *          the specimen <div class="de">Angaben zur Probe.</div>
+	 */
+	public void setNonHumanSubject(NonHumanSubject nonHumanSubject) {
+		getMdht().setSubject(nonHumanSubject.copy());
 	}
 }
