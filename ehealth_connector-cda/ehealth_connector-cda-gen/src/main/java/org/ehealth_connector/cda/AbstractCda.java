@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.EHealthConnectorVersions;
@@ -77,7 +78,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Erstellt ein Cda Objekt</div> <div class="fr"></div>
 	 *
 	 * @param doc
-	 *          the CDA Object in its MDHT representation
+	 *            the CDA Object in its MDHT representation
 	 */
 	public AbstractCda(EClinicalDocument doc) {
 		super(doc);
@@ -101,13 +102,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *          the CDA Object in its MDHT representation
+	 *            the CDA Object in its MDHT representation
 	 * @param stylesheet
-	 *          the stylesheet for the document (e.g.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *            the stylesheet for the document (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 * @param css
-	 *          the Cascasing stylesheet for the document (e.g.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *            the Cascasing stylesheet for the document (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
 	public AbstractCda(EClinicalDocument doc, String stylesheet, String css) {
 		this(doc);
@@ -123,15 +124,15 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
 	 *
 	 * @param authenticator
-	 *          Unterzeichner
+	 *            Unterzeichner
 	 */
 	public void addAuthenticator(org.ehealth_connector.common.Author authenticator) {
 		final Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		auth.setAssignedEntity(entity);
-		entity
-				.setAssignedPerson(authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
+		entity.setAssignedPerson(
+				authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
 		getDoc().getAuthenticators().add(auth);
 	}
@@ -141,7 +142,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
 	 *
 	 * @param authenticator
-	 *          Unterzeichner
+	 *            Unterzeichner
 	 */
 	public void addAuthenticator(Person authenticator) {
 		final Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
@@ -158,7 +159,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * hinzu</div>
 	 *
 	 * @param author
-	 *          the autor
+	 *            the autor
 	 */
 	public void addAuthor(org.ehealth_connector.common.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
@@ -171,7 +172,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * den XML Processing Instructions hinzu</div>
 	 *
 	 * @param css
-	 *          path of the CSS file
+	 *            path of the CSS file
 	 */
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
@@ -184,10 +185,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * Dokument einen Erfasser hinzu</div>
 	 *
 	 * @param dataEnterer
-	 *          <div class="en">a person, which delivered content for this
-	 *          document</div> <div class="de">Erfasser oder Sachbearbeiter/-in,
-	 *          welche(r) das Dokument erstellt oder Beiträge dazu geliefert
-	 *          hat.</div>
+	 *            <div class="en">a person, which delivered content for this
+	 *            document</div> <div class="de">Erfasser oder
+	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
+	 *            Beiträge dazu geliefert hat.</div>
 	 */
 	public void addDataEnterer(Person dataEnterer) {
 		final DataEnterer enterer = CDAFactory.eINSTANCE.createDataEnterer();
@@ -205,7 +206,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * Dokumentes zu, auf das es sich bezieht</div>
 	 *
 	 * @param id
-	 *          of the referenced document
+	 *            of the referenced document
 	 */
 	public void addInFulfillmentOf(Identificator id) {
 		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
@@ -221,7 +222,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * eine Versicherung hinzu</div>
 	 *
 	 * @param versicherung
-	 *          the insurance organization
+	 *            the insurance organization
 	 */
 	public void addInsurance(Organization versicherung) {
 		addParticipant(versicherung, ParticipantType.Insurance);
@@ -232,10 +233,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * Dokument einen Teilnehmer hinzu</div>
 	 *
 	 * @param organization
-	 *          Organisation
+	 *            Organisation
 	 * @param participantType
-	 *          <div class="en">Kind of participation (e.g. insurance)</div>
-	 *          <div class="de">Art der Partizipation (z.B. Versicherung)</div>
+	 *            <div class="en">Kind of participation (e.g. insurance)</div>
+	 *            <div class="de">Art der Partizipation (z.B.
+	 *            Versicherung)</div>
 	 */
 	public void addParticipant(Organization organization, ParticipantType participantType) {
 		// Set the given organization as Participant of this document.
@@ -252,13 +254,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Adds a stylesheet to the XML processing instructions</div>
-	 * <div class="de">Fügt ein Stylesheet zu den XML Processing Instructions
-	 * hinzu</div>
+	 * <div class="en">Adds a stylesheet to the XML processing
+	 * instructions</div> <div class="de">Fügt ein Stylesheet zu den XML
+	 * Processing Instructions hinzu</div>
 	 *
 	 * @param stylesheet
-	 *          Path to the stylesheet (e.g.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
+	 *            Path to the stylesheet (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl')
 	 */
 	public void addStylesheet(String stylesheet) {
 		if (stylesheet != null) {
@@ -340,8 +342,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Returns a new Organization object based on the
-	 * custodian/representedOrganization object (name, ids, addr, telecoms will be
-	 * copied)
+	 * custodian/representedOrganization object (name, ids, addr, telecoms will
+	 * be copied)
 	 *
 	 * @return the Organization
 	 */
@@ -363,8 +365,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets all authors of the document</div> <div class="de">Gibt
-	 * alle Autoren des Dokuments zurück</div>
+	 * <div class="en">Gets all authors of the document</div>
+	 * <div class="de">Gibt alle Autoren des Dokuments zurück</div>
 	 *
 	 * @return das eHealthConnector Author Objekt
 	 */
@@ -391,7 +393,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the document root (which helds the cda document)</div>
+	 * <div class="en">Gets the document root (which helds the cda
+	 * document)</div>
 	 *
 	 * @return the document root
 	 */
@@ -405,7 +408,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de"></div> <div class="fr"></div>
 	 *
 	 * @return <div class="en">identifier of the document which was replaced by
-	 *         the current one</div> <div class="de"></div> <div class="fr"></div>
+	 *         the current one</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public Identificator getDocumentToReplaceIdentifier() {
 		if ((this.getMdht().getRelatedDocuments() != null)
@@ -466,7 +470,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
 
 		if (la != null) {
-			if (la.getAssignedEntity() != null && la.getAssignedEntity().getAssignedPerson() != null) {
+			if (la.getAssignedEntity() != null
+					&& la.getAssignedEntity().getAssignedPerson() != null) {
 				final Person p = new Person(la.getAssignedEntity().getAssignedPerson());
 				return p;
 			}
@@ -485,7 +490,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
 
 		if (la != null) {
-			return new org.ehealth_connector.common.Author(Util.createAuthorFromLagalAuthenticator(la));
+			return new org.ehealth_connector.common.Author(
+					Util.createAuthorFromLagalAuthenticator(la));
 		}
 		return null;
 	}
@@ -539,7 +545,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public Identificator getSetId() {
 		if (getDoc().getSetId() != null) {
-			return new Identificator(getDoc().getSetId().getRoot(), getDoc().getSetId().getExtension());
+			return new Identificator(getDoc().getSetId().getRoot(),
+					getDoc().getSetId().getExtension());
 		}
 		return null;
 	}
@@ -584,8 +591,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">prints the XML representation of the document to the
-	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments auf
-	 * der Konsole aus</div>
+	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments
+	 * auf der Konsole aus</div>
 	 */
 	public void printXmlToConsole() {
 		try {
@@ -600,9 +607,9 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Speichert das CDA Dokument als XML Datei</div>
 	 *
 	 * @param fileName
-	 *          file name (incl. path)
+	 *            file name (incl. path)
 	 * @throws Exception
-	 *           the exception
+	 *             the exception
 	 */
 	public void saveToFile(String fileName) throws Exception {
 		final File yourFile = new File(fileName);
@@ -627,7 +634,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * Sets Confidentially Code
 	 *
 	 * @param code
-	 *          If null, "N" for "normal" will be set.
+	 *            If null, "N" for "normal" will be set.
 	 */
 	public void setConfidentialityCode(Confidentiality code) {
 		CE confidentialityCode;
@@ -640,13 +647,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Sets an organization as the custodian of the document</div>
-	 * <div class="de">Weist dem CDA Dokument die verwaltende Organisation
-	 * zu</div>
+	 * <div class="en">Sets an organization as the custodian of the
+	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
+	 * Organisation zu</div>
 	 *
 	 * @param organization
-	 *          <div class="en">custodian organization</div>
-	 *          <div class="de">verwaltende Organisation</div>
+	 *            <div class="en">custodian organization</div>
+	 *            <div class="de">verwaltende Organisation</div>
 	 */
 	public void setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
@@ -671,7 +678,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="fr"></div>
 	 *
 	 * @param documentId
-	 *          <div class="en">Identificator of replaced document</div>
+	 *            <div class="en">Identificator of replaced document</div>
 	 */
 	public void setDocumentToReplaceIdentifier(Identificator documentId) {
 		this.getMdht().getRelatedDocuments().clear();
@@ -684,11 +691,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Sets the id of the document</div> <div class="de">Weist dem
-	 * CDA Dokument eine id zu</div>
+	 * <div class="en">Sets the id of the document</div> <div class="de">Weist
+	 * dem CDA Dokument eine id zu</div>
 	 *
 	 * @param id
-	 *          the id
+	 *            the id
 	 */
 	public abstract void setId(Identificator id);
 
@@ -697,7 +704,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Weist dem document eine Sprache zu</div>
 	 *
 	 * @param language
-	 *          code for the language
+	 *            code for the language
 	 */
 	public void setLanguageCode(LanguageCode language) {
 		// Set language of the document
@@ -710,19 +717,21 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * hinzu</div>
 	 *
 	 * @param legalAuthenticator
-	 *          <div class="en">legal authenticator</div>
-	 *          <div class="de">rechtsgültiger Unterzeichner</div>
+	 *            <div class="en">legal authenticator</div>
+	 *            <div class="de">rechtsgültiger Unterzeichner</div>
 	 */
 	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
 		getDoc().setLegalAuthenticator(Util.createLagalAuthenticatorFromAuthor(legalAuthenticator));
+		getDoc().getLegalAuthenticator()
+				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));
 	}
 
 	/**
-	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA Dokument
-	 * einen Patienten zu</div>
+	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
+	 * Dokument einen Patienten zu</div>
 	 *
 	 * @param patient
-	 *          Patient
+	 *            Patient
 	 */
 	public void setPatient(Patient patient) {
 		getDoc().getRecordTargets().add(patient.getMdhtRecordTarget());
@@ -733,7 +742,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Weist dem Dokument einen Zeitstempel zu</div>
 	 *
 	 * @param date
-	 *          the timestamp
+	 *            the timestamp
 	 */
 	public void setTimestamp(Date date) {
 		if (date == null) {
@@ -753,9 +762,9 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * zu</div>
 	 *
 	 * @param guidVersion1
-	 *          the set Id (if null, the document ID will be used)
+	 *            the set Id (if null, the document ID will be used)
 	 * @param version
-	 *          the version of the document
+	 *            the version of the document
 	 */
 	public void setVersion(String guidVersion1, Integer version) {
 		setSetId(guidVersion1);
@@ -766,18 +775,18 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * Method implementing
 	 *
 	 * @param docRoot
-	 *          the document root
+	 *            the document root
 	 */
 	protected void setDoc(DocumentRoot docRoot) {
 		this.docRoot = docRoot;
 	}
 
 	/**
-	 * <div class="en">Sets the set id of the document</div> <div class="de">Weist
-	 * dem CDA Dokument eine set id zu</div>
+	 * <div class="en">Sets the set id of the document</div>
+	 * <div class="de">Weist dem CDA Dokument eine set id zu</div>
 	 *
 	 * @param id
-	 *          id of the document
+	 *            id of the document
 	 */
 	protected abstract void setSetId(String id);
 
@@ -794,7 +803,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	protected void setTypeId() {
 		// Set Type ID
 		// Identifies the Type of the xml document
-		final InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
+		final InfrastructureRootTypeId typeId = CDAFactory.eINSTANCE
+				.createInfrastructureRootTypeId();
 		getDoc().setTypeId(typeId);
 		typeId.setRoot("2.16.840.1.113883.1.3");
 		typeId.setExtension("POCD_HD000040");
@@ -812,8 +822,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	private String generateComment() {
 		return "Document based on CDA R2 generated by "
-				+ EHealthConnectorVersions.getCurrentVersion().getSystemVersionName() + ", Release Date "
-				+ EHealthConnectorVersions.getCurrentVersion().getReleaseDate();
+				+ EHealthConnectorVersions.getCurrentVersion().getSystemVersionName()
+				+ ", Release Date " + EHealthConnectorVersions.getCurrentVersion().getReleaseDate();
 	}
 
 }

@@ -180,6 +180,7 @@ public class CdaChLrqc
 
 	/**
 	 * Constructor with the recommended elements for the LRPH document Header.
+	 * The LegalAuthenticator will also be added as the author of this document.
 	 *
 	 * @param languageCode
 	 *            the language code
@@ -215,6 +216,7 @@ public class CdaChLrqc
 		setCustodian(custodian);
 		addIntendedRecipient(recipient);
 		addInFulfillmentOf(qkzOrderNumber);
+		addAuthor(legalAuthenticator);
 		setLegalAuthenticator(legalAuthenticator);
 		setRecordTarget(id);
 	}
