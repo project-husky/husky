@@ -44,7 +44,8 @@ public class LaboratoryObservationTest extends TestUtils {
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']"));
 		assertTrue(xExist(document, "//templateId[@root='2.16.840.1.113883.10.20.1.40']"));
 		assertTrue(xExist(document, "//reference[@value='#testRef1']"));
-		assertTrue(xExist(document, "//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']"));
+		assertTrue(
+				xExist(document, "//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']"));
 
 		// Performer
 		Performer performer = new Performer(organization1);
@@ -76,8 +77,8 @@ public class LaboratoryObservationTest extends TestUtils {
 		code.addTranslation(internalCode);
 		observation.setCode(code);
 		document = observation.getDocument();
-		assertTrue(
-				xExist(document, "//translation[@code='LabInternalCode' and @codeSystem='testoid']"));
+		assertTrue(xExist(document,
+				"//translation[@code='LabInternalCode' and @codeSystem='testoid']"));
 
 		// new code
 		SectionAnnotationCommentEntry sace = new SectionAnnotationCommentEntry();

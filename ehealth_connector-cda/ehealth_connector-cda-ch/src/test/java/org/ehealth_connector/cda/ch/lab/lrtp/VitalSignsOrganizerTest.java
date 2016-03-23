@@ -29,8 +29,8 @@ public class VitalSignsOrganizerTest extends TestUtils {
 		o.addVitalSignsObservation(new VitalSignsObservation());
 		assertFalse(o.getVitalSignsObservations().isEmpty());
 		document = o.getDocument();
-		assertTrue(
-				xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH-LRTP.Body.VitalSignL3"));
+		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1",
+				"CDA-CH-LRTP.Body.VitalSignL3"));
 		assertTrue(xExist(document, "/organizer/component[@typeCode='COMP']"));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.5.3.1.4.13.2", null));
 

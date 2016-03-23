@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab;
 
 import java.util.ArrayList;
@@ -28,17 +43,49 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
 
+/**
+ * The Class AbstractLaboratoryReport.
+ *
+ * @param <EClinicalDocument>
+ *            the generic type
+ */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaCh<EClinicalDocument> {
 
+	/**
+	 * Instantiates a new abstract laboratory report.
+	 *
+	 * @param doc
+	 *            the doc
+	 */
 	protected AbstractLaboratoryReport(EClinicalDocument doc) {
 		super(doc);
 	}
 
+	/**
+	 * Instantiates a new abstract laboratory report.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param languageCode
+	 *            the language code
+	 */
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode) {
 		super(doc, languageCode);
 	}
 
+	/**
+	 * Instantiates a new abstract laboratory report.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param languageCode
+	 *            the language code
+	 * @param styleSheet
+	 *            the style sheet
+	 * @param css
+	 *            the css
+	 */
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
 			String styleSheet, String css) {
 		super(doc, styleSheet, css);
@@ -57,20 +104,32 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		getDoc().getRealmCodes().add(cs);
 	}
 
+	/**
+	 * Adds the intended recipient.
+	 *
+	 * @param recipient
+	 *            the recipient
+	 */
 	public void addIntendedRecipient(IntendedRecipient recipient) {
 		getMdht().getInformationRecipients().add(recipient.getMdhtIntendedRecipient());
 		int nb = getMdht().getInformationRecipients().size() - 1;
 		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 	}
 
+	/**
+	 * Adds the referral ordering physician.
+	 *
+	 * @param physician
+	 *            the physician
+	 */
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
 		getMdht().getParticipants().add(physician.copy());
 	}
 
 	/**
 	 * Convenience function that returns a list of all order ids of all
-	 * inFulfillmentOf Elements
-	 * 
+	 * inFulfillmentOf Elements.
+	 *
 	 * @return the order id list (from all underlying
 	 *         /clinicalDocument/inFulfillmentOf/order/id)
 	 */
@@ -84,6 +143,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		return al;
 	}
 
+	/**
+	 * Gets the intended recipients.
+	 *
+	 * @return the intended recipients
+	 */
 	public List<IntendedRecipient> getIntendedRecipients() {
 		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
 		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
@@ -93,15 +157,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			}
 		}
 		return il;
-	}
-
-	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
-		for (Section s : getMdht().getAllSections()) {
-			if (s instanceof LaboratorySpecialtySection) {
-				return (LaboratorySpecialtySection) s;
-			}
-		}
-		return null;
 	}
 
 	/**
@@ -117,6 +172,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		return null;
 	}
 
+	/**
+	 * Gets the referral ordering physicians.
+	 *
+	 * @return the referral ordering physicians
+	 */
 	public List<ReferralOrderingPhysician> getReferralOrderingPhysicians() {
 		List<ReferralOrderingPhysician> pl = new ArrayList<ReferralOrderingPhysician>();
 		for (Participant1 p : getMdht().getParticipants()) {
@@ -127,20 +187,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			}
 		}
 		return pl;
-	}
-
-	private String getSpecialitySectionTitle() {
-		switch (this.getLanguageCode()) {
-		case FRENCH:
-			return ("Rapport de laboratoire");
-		case GERMAN:
-			return ("Laborbefund");
-		case ITALIAN:
-			return ("Rapporto di laboratorio");
-		case ENGLISH:
-			return ("Laboratory Specialty Section");
-		}
-		return "";
 	}
 
 	/**
@@ -184,11 +230,44 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * Sets the section/text element for the LaboratorySpecialtySection.
 	 *
 	 * @param text
-	 *          the text
+	 *            the text
 	 */
 	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
 		if (getLaboratorySpecialtySection() != null) {
 			getLaboratorySpecialtySection().createStrucDocText(text);
 		}
+	}
+
+	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
+	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
+		for (Section s : getMdht().getAllSections()) {
+			if (s instanceof LaboratorySpecialtySection) {
+				return (LaboratorySpecialtySection) s;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the speciality section title.
+	 *
+	 * @return the speciality section title
+	 */
+	private String getSpecialitySectionTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire");
+		case GERMAN:
+			return ("Laborbefund");
+		case ITALIAN:
+			return ("Rapporto di laboratorio");
+		case ENGLISH:
+			return ("Laboratory Specialty Section");
+		}
+		return "";
 	}
 }

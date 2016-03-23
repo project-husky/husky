@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtFacade;
@@ -7,17 +22,37 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
+/**
+ * The Class CodedVitalSigns. The vital signs section contains coded measurement
+ * results of a patient’s vital signs.
+ *
+ */
 public class CodedVitalSigns
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection> {
 
+	/**
+	 * Instantiates a new coded vital signs.
+	 */
 	protected CodedVitalSigns() {
 		this(LanguageCode.ENGLISH);
 	}
 
+	/**
+	 * Instantiates a new coded vital signs.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	protected CodedVitalSigns(CodedVitalSignsSection mdht) {
 		super(mdht);
 	}
 
+	/**
+	 * Instantiates a new coded vital signs.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
 	protected CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 
@@ -37,10 +72,20 @@ public class CodedVitalSigns
 		}
 	}
 
+	/**
+	 * Gets the code.
+	 *
+	 * @return the code
+	 */
 	public Code getCode() {
 		return new Code(getMdht().getCode());
 	}
 
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
 	public String getTitle() {
 		if (this.getMdht().getTitle() != null) {
 			return this.getMdht().getTitle().getText();
@@ -48,19 +93,42 @@ public class CodedVitalSigns
 		return null;
 	}
 
+	/**
+	 * Gets the vital sign organizer.
+	 *
+	 * @return the vital sign organizer
+	 */
 	public VitalSignsOrganizer getVitalSignOrganizer() {
 		return null;
 
 	}
 
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
 	public void setCode(Code code) {
 		getMdht().setCode(code.getCE());
 	}
 
+	/**
+	 * Sets the title.
+	 *
+	 * @param title
+	 *            the new title
+	 */
 	public void setTitle(String title) {
 		getMdht().setTitle(Util.st(title));
 	}
 
+	/**
+	 * Sets the vital sign organizer.
+	 *
+	 * @param organizer
+	 *            the new vital sign organizer
+	 */
 	public void setVitalSignOrganizer(VitalSignsOrganizer organizer) {
 		getMdht().getVitalSignsOrganizers().add(organizer.copy());
 	}

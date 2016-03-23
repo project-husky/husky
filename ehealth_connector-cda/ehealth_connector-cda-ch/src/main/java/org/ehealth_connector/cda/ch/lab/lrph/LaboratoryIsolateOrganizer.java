@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrph;
 
 import java.util.ArrayList;
@@ -17,20 +32,41 @@ import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
 
+/**
+ * The Class LaboratoryIsolateOrganizer.
+ *
+ * <div class="en">This element contains additional information about isolates
+ * and germs.</div> <div class="de">Über dieses Element können zusätzliche
+ * Informationen zu Isolaten und Keimen angegeben werden.</div>
+ */
 public class LaboratoryIsolateOrganizer
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
 
+	/**
+	 * Instantiates a new laboratory isolate organizer.
+	 */
 	public LaboratoryIsolateOrganizer() {
 		super();
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
+	/**
+	 * Instantiates a new laboratory isolate organizer.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public LaboratoryIsolateOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer mdht) {
 		super(mdht);
 	}
 
-	// Required Elements
+	/**
+	 * Instantiates a new laboratory isolate organizer.
+	 *
+	 * @param specimen
+	 *            the specimen
+	 */
 	public LaboratoryIsolateOrganizer(Specimen specimen) {
 		this();
 		setSpecimen(specimen);
@@ -38,13 +74,14 @@ public class LaboratoryIsolateOrganizer
 
 	/**
 	 *
-	 * Creates a new Laboratory Isolate Organizer. One specimen element (specimen,
-	 * specimenRole, and specimenPlayingEntity) will be created with the given
-	 * reference.
+	 * Creates a new Laboratory Isolate Organizer. One specimen element
+	 * (specimen, specimenRole, and specimenPlayingEntity) will be created with
+	 * the given reference.
 	 *
 	 * @param reference
-	 *          the reference will be set into
-	 *          specimen/specimenRole/specimenPlayingEntity/originalText/reference
+	 *            the reference will be set into
+	 *            specimen/specimenRole/specimenPlayingEntity/originalText/
+	 *            reference
 	 */
 	public LaboratoryIsolateOrganizer(String reference) {
 		this();
@@ -55,23 +92,57 @@ public class LaboratoryIsolateOrganizer
 		setSpecimen(specimen);
 	}
 
+	/**
+	 * Adds the laboratory.
+	 *
+	 * @param organization
+	 *            the organization
+	 * @param time
+	 *            the time
+	 */
 	public void addLaboratory(Organization organization, Date time) {
 		Participant p = Util.createParticipantFromOrganization(organization);
 		p.setTime(time);
 		this.addParticipant(p);
 	}
 
+	/**
+	 * Adds the laboratory battery organizer.
+	 *
+	 * @param labBatteryOrganizer
+	 *            the lab battery organizer
+	 */
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
 		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
 
+	/**
+	 *
+	 * <div class="en">Distinction of cases: laboratory result from a primary
+	 * laboatory: [O] secundary laboratory: [NP]. time: Point in time of
+	 * forwarding to the secundary laboratory. id: GLN of the secundary
+	 * laboatory. </div> <div class="de">Fallunterscheidung: Laborbefund aus
+	 * Primärlabor: [O] Sekundärlabor: [NP]. time: Zeitpunkt der Weiterleitung
+	 * des Isolats/Keimes an das Sekundärlabor. id: GLN des Sekundärlabors resp.
+	 * Referenzzentrums (root='1.3.88'). addr, telecom, playingEntity/name:
+	 * Name, Adresse und Kommunikations-mittel des Sekundärlabors resp.
+	 * Referenzzentrums </div>
+	 *
+	 * @param participant
+	 *            the participant with the values mentioned above
+	 */
 	public void addParticipant(Participant participant) {
 		participant.setTypeCode(ParticipationType.RESP);
 		getMdht().getParticipants().add(participant.copy());
 	}
 
+	/**
+	 * Gets the laboratory.
+	 *
+	 * @return the laboratory
+	 */
 	public Organization getLaboratory() {
 		for (final Participant2 p : getMdht().getParticipants()) {
 			if (p.getTypeCode().equals(ParticipationType.RESP)) {
@@ -81,6 +152,11 @@ public class LaboratoryIsolateOrganizer
 		return null;
 	}
 
+	/**
+	 * Gets the laboratory battery organizers.
+	 *
+	 * @return the laboratory battery organizers
+	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
 		final List<LaboratoryBatteryOrganizer> nl = new ArrayList<LaboratoryBatteryOrganizer>();
 		for (final Organizer mdht : getMdht().getOrganizers()) {
@@ -91,6 +167,11 @@ public class LaboratoryIsolateOrganizer
 		return nl;
 	}
 
+	/**
+	 * Gets the participants.
+	 *
+	 * @return the participants
+	 */
 	public List<Participant> getParticipants() {
 		final List<Participant> nl = new ArrayList<Participant>();
 		for (final Participant2 mdht : getMdht().getParticipants()) {
@@ -100,6 +181,11 @@ public class LaboratoryIsolateOrganizer
 		return nl;
 	}
 
+	/**
+	 * Gets the specimen.
+	 *
+	 * @return the specimen
+	 */
 	public Specimen getSpecimen() {
 		if (getMdht().getSpecimens() != null && !getMdht().getSpecimens().isEmpty()) {
 			return new Specimen(getMdht().getSpecimens().get(0));
@@ -107,6 +193,12 @@ public class LaboratoryIsolateOrganizer
 		return null;
 	}
 
+	/**
+	 * Sets the specimen.
+	 *
+	 * @param specimen
+	 *            the new specimen
+	 */
 	public void setSpecimen(Specimen specimen) {
 		getMdht().getSpecimens().clear();
 		specimen.getMdht().setTypeCode(ParticipationType.SPC);

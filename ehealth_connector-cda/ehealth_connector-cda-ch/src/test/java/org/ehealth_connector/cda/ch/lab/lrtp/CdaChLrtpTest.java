@@ -79,19 +79,20 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		cda.setBloodGroupObservation(bgo);
 
 		assertNotNull(cda.getLaboratorySpecialtySections());
-		assertNotNull(
-				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
+				.getLaboratoryReportDataProcessingEntry());
 		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(
 				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0));
-		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+		assertNotNull(
+				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+						.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		// LRTP specific
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
@@ -110,14 +111,15 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getCommentEntryList().get(0));
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
 		// .getSoasInfoEnties().get(0));
 		assertNotNull(cda.getVitalSignsOrganizer());

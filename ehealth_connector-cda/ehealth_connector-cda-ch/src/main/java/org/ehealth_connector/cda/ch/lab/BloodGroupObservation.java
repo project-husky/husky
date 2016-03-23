@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab;
 
 import java.util.ArrayList;
@@ -13,14 +28,30 @@ import org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
+/**
+ * The Class BloodGroupObservation.
+ *
+ * <div class="en">This element contains the blood group in a structured
+ * form.</div> <div class="de">Dieses Kapitel enthält die Blutgruppe in
+ * strukturierter Form.</div>
+ */
 public class BloodGroupObservation
 		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
 
+	/**
+	 * Instantiates a new blood group observation.
+	 */
 	public BloodGroupObservation() {
-		super(CHFactory.eINSTANCE.createBloodgroupObservation().init(), "2.16.756.5.30.1.1.1.1.3.4.1",
-				"CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup");
+		super(CHFactory.eINSTANCE.createBloodgroupObservation().init(),
+				"2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup");
 	}
 
+	/**
+	 * Instantiates a new blood group observation.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public BloodGroupObservation(BloodgroupObservation mdht) {
 		super(mdht);
 	}
@@ -29,10 +60,10 @@ public class BloodGroupObservation
 	 * Instantiates the class with the required elements.
 	 *
 	 * @param referenceValue
-	 *          reference to the section level text with the description of the
-	 *          blood group
+	 *            reference to the section level text with the description of
+	 *            the blood group
 	 * @param value
-	 *          the BloodGroup value
+	 *            the BloodGroup value
 	 */
 	public BloodGroupObservation(String referenceValue, BloodGroup value) {
 		this();
@@ -40,10 +71,21 @@ public class BloodGroupObservation
 		setValue(value);
 	}
 
+	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
 	public void addAuthor(Author author) {
 		getMdht().getAuthors().add(author.copyMdhtAuthor());
 	}
 
+	/**
+	 * Gets the author list.
+	 *
+	 * @return the author list
+	 */
 	public List<Author> getAuthorList() {
 		List<Author> al = new ArrayList<Author>();
 		if (getMdht().getAuthors() != null && !getMdht().getAuthors().isEmpty()) {
@@ -54,6 +96,11 @@ public class BloodGroupObservation
 		return al;
 	}
 
+	/**
+	 * Gets the comment.
+	 *
+	 * @return the comment
+	 */
 	public SectionAnnotationCommentEntry getComment() {
 		if (getMdht().getComment() != null) {
 			return new SectionAnnotationCommentEntry(getMdht().getComment());
@@ -61,6 +108,11 @@ public class BloodGroupObservation
 		return null;
 	}
 
+	/**
+	 * Gets the content id reference.
+	 *
+	 * @return the content id reference
+	 */
 	public String getContentIdReference() {
 		if (getMdht().getText() != null && getMdht().getText().getReference() != null
 				&& getMdht().getText().getReference().getValue() != null) {
@@ -69,6 +121,11 @@ public class BloodGroupObservation
 		return null;
 	}
 
+	/**
+	 * Gets the value enum.
+	 *
+	 * @return the value enum
+	 */
 	public BloodGroup getValueEnum() {
 		if (!getMdht().getValues().isEmpty() && getMdht().getValues().get(0) instanceof CE) {
 			CE ce = (CE) getMdht().getValues().get(0);
@@ -77,17 +134,37 @@ public class BloodGroupObservation
 		return null;
 	}
 
+	/**
+	 * Sets the comment.
+	 *
+	 * @param commentEntry
+	 *            the new comment
+	 */
 	public void setComment(SectionAnnotationCommentEntry commentEntry) {
 		getMdht().addAct(commentEntry.copy());
 		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
-		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(getMdht().getEntryRelationships());
+		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
+				getMdht().getEntryRelationships());
 	}
 
+	/**
+	 * Sets the content id reference.
+	 *
+	 * @param reference
+	 *            the new content id reference
+	 */
 	public void setContentIdReference(String reference) {
 		getMdht().setText(Util.createReference(reference));
 	}
 
+	/**
+	 * Sets the blood group.
+	 *
+	 * @param value
+	 *            <div class="en">Description of the blood group</div>
+	 *            <div class="de">Bezeichnung der Blutgruppe</div>
+	 */
 	public void setValue(BloodGroup value) {
 		getMdht().getValues().clear();
 		getMdht().getValues().add(value.getCE());

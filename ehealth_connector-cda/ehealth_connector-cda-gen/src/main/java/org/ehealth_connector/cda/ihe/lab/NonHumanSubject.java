@@ -25,7 +25,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
- * The Class NonHumanSubject.
+ * The Class NonHumanSubject. When the subject of the observations in the report
+ * is a sample exclusively taken from a non-human subject, such as an animal, a
+ * lake, soil or other environmental element, the following SHALL be present.
  */
 public class NonHumanSubject
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.NonHumanSubject> {
@@ -43,7 +45,7 @@ public class NonHumanSubject
 	 * /subject/relatedSubject/code will be set to NullFlavor.UNK.
 	 *
 	 * @param adress
-	 *          Address of the non-human subject
+	 *            Address of the non-human subject
 	 */
 	public NonHumanSubject(Address adress) {
 		this();
@@ -55,10 +57,10 @@ public class NonHumanSubject
 	 * Instantiates the class with the required elements.
 	 *
 	 * @param code
-	 *          Code characterizing the non-human subject (animal species,
-	 *          material...).
+	 *            Code characterizing the non-human subject (animal species,
+	 *            material...).
 	 * @param adress
-	 *          Address of the non-human subject
+	 *            Address of the non-human subject
 	 */
 	public NonHumanSubject(Code code, Address adress) {
 		this();
@@ -70,7 +72,7 @@ public class NonHumanSubject
 	 * Instantiates a new non human subject.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public NonHumanSubject(org.openhealthtools.mdht.uml.cda.ihe.lab.NonHumanSubject mdht) {
 		super(mdht);
@@ -95,7 +97,8 @@ public class NonHumanSubject
 	 * @return the code
 	 */
 	public Code getCode() {
-		if (getMdht().getRelatedSubject() != null && getMdht().getRelatedSubject().getCode() != null) {
+		if (getMdht().getRelatedSubject() != null
+				&& getMdht().getRelatedSubject().getCode() != null) {
 			return new Code(getMdht().getRelatedSubject().getCode());
 		}
 		return null;
@@ -105,7 +108,7 @@ public class NonHumanSubject
 	 * Sets the adress.
 	 *
 	 * @param adress
-	 *          Address of the non-human subject
+	 *            Address of the non-human subject
 	 */
 	public void setAdress(Address adress) {
 		getMdht().getRelatedSubject().getAddrs().add(adress.copyMdhtAdress());
@@ -115,9 +118,9 @@ public class NonHumanSubject
 	 * Sets the code.
 	 *
 	 * @param code
-	 *          Code characterizing the non-human subject (animal species,
-	 *          material...). If null, /subject/relatedSubject/code will be set to
-	 *          NullFlavor.UNK.
+	 *            Code characterizing the non-human subject (animal species,
+	 *            material...). If null, /subject/relatedSubject/code will be
+	 *            set to NullFlavor.UNK.
 	 */
 	public void setCode(Code code) {
 		if (code == null) {

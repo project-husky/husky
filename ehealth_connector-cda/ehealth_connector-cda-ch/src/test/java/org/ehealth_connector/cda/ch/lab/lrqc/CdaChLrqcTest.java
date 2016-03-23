@@ -46,26 +46,6 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 
 	}
 
-	private CdaChLrqc deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
-		LABPackage.eINSTANCE.eClass();
-		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) {
-			CdaChLrqc test = new CdaChLrqc(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
-			return test;
-		} else
-			return null;
-	}
-
-	private CdaChLrqc deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrqc());
-		return new CdaChLrqc((org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
-	}
-
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChLrqc cda = new CdaChLrqc();
@@ -109,56 +89,56 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
-				.get(0));
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-				.getCommentEntryList().get(0));
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntries().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntries().get(0).getSpecimenReceivedEntry());
 
-		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries().get(0)
-				.getCommentEntryList().get(0));
+		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries()
+				.get(0).getCommentEntryList().get(0));
 
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChLrqc cdaDeserialized = deserializeCda(deserialized);
 
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
-		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries().get(0)
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
+		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries()
+				.get(0).getCommentEntryList().get(0));
 
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getSpecimenCollectionEntries().get(0));
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getSpecimenCollectionEntries().get(0).getSpecimenReceivedEntry());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getSpecimenCollectionEntries().get(0));
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getSpecimenCollectionEntries().get(0).getSpecimenReceivedEntry());
 		assertTrue(cdaDeserialized != null);
 		assertEquals("Laboratory Specialty Section",
 				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
-		assertTrue(
-				LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getCode()
-						.equals(cdaDeserialized.getLaboratorySpecialtySection()
-								.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-								.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-								.getCodeAsEnum().getCode()));
+		assertTrue(LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getCode()
+				.equals(cdaDeserialized.getLaboratorySpecialtySection()
+						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+						.getCodeAsEnum().getCode()));
 	}
 
 	@Test
@@ -170,11 +150,6 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertTrue(cdaDeserialized != null);
 	}
 
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChLrqc cda = new CdaChLrqc();
@@ -182,12 +157,6 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
 		assertTrue(cdaDeserialized != null);
-	}
-
-	private String serializeDocument(CdaChLrqc doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
 	}
 
 	@Test
@@ -235,8 +204,10 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));
 		assertTrue(
-				xExist(document, "/clinicaldocument/component/structuredBody/component/section/code[@code='"
-						+ LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getSectionCode() + "']"));
+				xExist(document,
+						"/clinicaldocument/component/structuredBody/component/section/code[@code='"
+								+ LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getSectionCode()
+								+ "']"));
 		// a second Laboratory Battery Organizer
 		doc.addLaboratoryBatteryOrganizer(lbo);
 		document = doc.getDocument();
@@ -286,9 +257,10 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		document = cda.getDocument();
 		assertTrue(xExist(document, "/clinicaldocument/recordTarget[@typeCode='RCT']"));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.1.2", null));
-		assertTrue(xExist(document, "/clinicaldocument/recordTarget/patientRole[@classCode='PAT']"));
 		assertTrue(
-				xExist(document, "/clinicaldocument/recordTarget/patientRole/patient[@nullFlavor='OTH']"));
+				xExist(document, "/clinicaldocument/recordTarget/patientRole[@classCode='PAT']"));
+		assertTrue(xExist(document,
+				"/clinicaldocument/recordTarget/patientRole/patient[@nullFlavor='OTH']"));
 
 		// Human Author
 		Author author = new Author(new Name("Axel", "Helmer"));
@@ -319,7 +291,8 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		cda.setLegalAuthenticator(author1);
 		assertNotNull(cda.getLegalAuthenticatorAsAuthor());
 		document = cda.getDocument();
-		assertTrue(xExist(document, "/clinicaldocument/legalAuthenticator/signatureCode[@code='S']"));
+		assertTrue(
+				xExist(document, "/clinicaldocument/legalAuthenticator/signatureCode[@code='S']"));
 
 		// Participant
 		Participant p = new Participant("456", "999", true);
@@ -341,5 +314,36 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts2);
 		assertEquals(ts2, doc.getNarrativeTextSectionLaboratorySpeciality());
+	}
+
+	private CdaChLrqc deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		CHPackage.eINSTANCE.eClass();
+		LABPackage.eINSTANCE.eClass();
+		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) {
+			CdaChLrqc test = new CdaChLrqc(
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
+			return test;
+		} else
+			return null;
+	}
+
+	private CdaChLrqc deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChLrqc());
+		return new CdaChLrqc((org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	private String serializeDocument(CdaChLrqc doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
 	}
 }

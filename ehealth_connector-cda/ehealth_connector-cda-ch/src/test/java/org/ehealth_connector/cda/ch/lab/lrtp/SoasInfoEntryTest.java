@@ -19,7 +19,8 @@ public class SoasInfoEntryTest extends TestUtils {
 		// TemplateIds
 		Document document = sie.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.6", null));
-		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH.LRTP.SOASInfo"));
+		assertTrue(
+				xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH.LRTP.SOASInfo"));
 
 		// Center specific avoid
 		sie.setCenterSpecificAvoid(true);

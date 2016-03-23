@@ -76,9 +76,12 @@ public class LaboratoryIsolateOrganizerTest extends TestUtils {
 		assertNotNull(lio.getParticipants().get(0));
 		assertEquals(address1.getCity(),
 				lio.getParticipants().get(1).getParticipantRole().getAddresses().get(1).getCity());
-		assertTrue(id1.equals(lio.getParticipants().get(1).getParticipantRole().getIdList().get(0)));
-		assertTrue(id2.equals(lio.getParticipants().get(1).getParticipantRole().getIdList().get(1)));
-		assertTrue(isEqual(telecoms1, lio.getParticipants().get(1).getParticipantRole().getTelecoms()));
+		assertTrue(
+				id1.equals(lio.getParticipants().get(1).getParticipantRole().getIdList().get(0)));
+		assertTrue(
+				id2.equals(lio.getParticipants().get(1).getParticipantRole().getIdList().get(1)));
+		assertTrue(isEqual(telecoms1,
+				lio.getParticipants().get(1).getParticipantRole().getTelecoms()));
 
 		document = lio.getDocument();
 		assertTrue(xCount(document, "//participant[@typeCode='RESP']", 2));

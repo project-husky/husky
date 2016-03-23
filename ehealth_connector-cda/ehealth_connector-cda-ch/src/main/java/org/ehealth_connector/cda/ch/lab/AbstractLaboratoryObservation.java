@@ -47,7 +47,7 @@ public abstract class AbstractLaboratoryObservation
 	 * Instantiates a new abstract laboratory observation.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht object
 	 */
 	public AbstractLaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
@@ -59,11 +59,12 @@ public abstract class AbstractLaboratoryObservation
 	 * Add a comment entry.
 	 *
 	 * @param commentEntry
-	 *          the new comment entry
+	 *            the new comment entry
 	 */
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.copy());
-		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(getMdht().getEntryRelationships());
+		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
+				getMdht().getEntryRelationships());
 	}
 
 	/**
@@ -83,7 +84,7 @@ public abstract class AbstractLaboratoryObservation
 	}
 
 	/**
-	 * Gets the reference range.
+	 * Gets the reference range <div class="de">(Referenzbereich)</div>.
 	 *
 	 * @return the reference range
 	 */
@@ -101,7 +102,8 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -121,16 +123,15 @@ public abstract class AbstractLaboratoryObservation
 		return vl;
 	}
 
-	// Convenience function to set a new code, which is not in the value set for
 	/**
-	 * Sets the new code.
+	 * Convenience function to set a new code, which is not currently available
+	 * in the value set for LRXX.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param commentEntry
-	 *          the comment entry
+	 *            the comment entry
 	 */
-	// LRXX
 	public void setNewCode(Code code, SectionAnnotationCommentEntry commentEntry) {
 		this.addCommentEntry(commentEntry);
 		Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
@@ -139,10 +140,10 @@ public abstract class AbstractLaboratoryObservation
 	}
 
 	/**
-	 * Sets the reference range.
+	 * Sets the reference range <div class="de">(Referenzbereich)</div>.
 	 *
 	 * @param referenceRange
-	 *          the new reference range
+	 *            the new reference range
 	 */
 	public void setReferenceRange(ReferenceRange referenceRange) {
 		getMdht().getReferenceRanges().clear();

@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
@@ -5,25 +20,36 @@ import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 
+/**
+ * The Class LaboratoryObservation. <div class="en">Each laboratory result MUST
+ * contain a code and the interpretation of the laboratory result. Depending on
+ * the kind of result a value MAY be added.</div> <div class="de">Jedes
+ * Laborresultat MUSS dabei aus einem Code und der Interpretation des
+ * Messresultates bestehen. Je nach Art des Resultates KANN ein Wert angegeben
+ * werden.</div>
+ */
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
+	/**
+	 * Instantiates a new laboratory observation.
+	 */
 	public LaboratoryObservation() {
 		super();
 	}
 
 	/**
-	 * Instantiates the class with the required elements
+	 * Instantiates the class with the required elements.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param value
-	 *          the value (with the value and (if applicable) ucumUnit, type). If
-	 *          the value type is PQ or INT, you have to provide the reference
-	 *          range for this value (either use setReferenceRange or use the
-	 *          according constructor).
+	 *            the value (with the value and (if applicable) ucumUnit, type).
+	 *            If the value type is PQ or INT, you have to provide the
+	 *            reference range for this value (either use setReferenceRange
+	 *            or use the according constructor).
 	 * @param interpretationCode
-	 *          the interpretation code
+	 *            the interpretation code
 	 */
 	public LaboratoryObservation(LabObsList code, Value value,
 			ObservationInterpretation interpretationCode) {
@@ -35,16 +61,17 @@ public class LaboratoryObservation
 
 	/**
 	 * Instantiates the class with the required elements (including a
-	 * referenceRange, if required because of value type PQ or INT)
+	 * referenceRange, if required because of value type PQ or INT).
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param value
-	 *          the value (with the value and (if applicable) ucumUnit, type).
+	 *            the value (with the value and (if applicable) ucumUnit, type).
 	 * @param referenceRange
-	 *          the reference Range (with Value(low, high) and interpretationCode.
+	 *            the reference Range (with Value(low, high) and
+	 *            interpretationCode.
 	 * @param interpretationCode
-	 *          the interpretation code
+	 *            the interpretation code
 	 */
 	public LaboratoryObservation(LabObsList code, Value value, ReferenceRange referenceRange,
 			ObservationInterpretation interpretationCode) {
@@ -55,6 +82,12 @@ public class LaboratoryObservation
 		addInterpretationCode(interpretationCode);
 	}
 
+	/**
+	 * Instantiates a new laboratory observation.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public LaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
 		super(mdht);
@@ -94,6 +127,11 @@ public class LaboratoryObservation
 	// x_ActRelationshipEntryRelationship.COMP);
 	// }
 
+	/**
+	 * Gets the code as loinc enum.
+	 *
+	 * @return the code as loinc enum
+	 */
 	public org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList getCodeAsLoincEnum() {
 		if (getMdht().getCode() != null && getMdht().getCode().getCode() != null) {
 			return LabObsList.getEnum(getMdht().getCode().getCode());
@@ -117,6 +155,12 @@ public class LaboratoryObservation
 	// return sl;
 	// }
 
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
 	public void setCode(org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList code) {
 		getMdht().setCode(code.getCD());
 	}

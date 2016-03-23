@@ -1,66 +1,84 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrtp.enums;
 
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
+/**
+ * The Enum ReportScopes.
+ */
 /*
-*<div class="de">Geltungsbereich des Befundes</div>
-*<div class="fr"></div>
-*/
+ * <div class="en">Report Scope</div> <div class="de">Geltungsbereich des
+ * Befundes</div>
+ */
 public enum ReportScopes {
 
 	/**
-	 * <div class="en">Deceased donor </div> <div class="de">Leichenspender</div>
+	 * <div class="en">Deceased donor </div>
+	 * <div class="de">Leichenspender</div>.
 	 */
 	DECEASED_DONOR("DDON", "Deceased  donor "),
+
 	/**
-	 * <div class="en">Living donor</div> <div class="de">Lebendspender</div>
+	 * <div class="en">Living donor</div> <div class="de">Lebendspender</div>.
 	 */
 	LIVING_DONOR("LDON", "Living donor"),
-	/**
-	 * <div class="en">Recipient</div> <div class="de">Empfänger</div>
-	 */
+
+	/** <div class="en">Recipient</div> <div class="de">Empfänger</div>. */
 	RECIPIENT("RECIP", "Recipient");
 
 	/**
+	 * <div class="en">Name of the Code System</div> <div class="de">Name des
+	 * Codes Systems</div>.
+	 */
+	public static final String CODE_SYSTEM_NAME = "Geltungsbereich des Befundes";
+
+	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>.
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.129.1.1.4";
+
+	/**
 	 * <div class="en">Code for Deceased donor </div> <div class="de">Code für
-	 * Leichenspender</div>
+	 * Leichenspender</div>.
 	 */
 	public static final String DECEASED_DONOR_CODE = "DDON";
 
 	/**
 	 * <div class="en">Code for Living donor</div> <div class="de">Code für
-	 * Lebendspender</div>
+	 * Lebendspender</div>.
 	 */
 	public static final String LIVING_DONOR_CODE = "LDON";
 
 	/**
 	 * <div class="en">Code for Recipient</div> <div class="de">Code für
-	 * Empfänger</div>
+	 * Empfänger</div>.
 	 */
 	public static final String RECIPIENT_CODE = "RECIP";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
-	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.129.1.1.4";
-
-	/**
-	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
-	 */
-	public static final String CODE_SYSTEM_NAME = "Geltungsbereich des Befundes";
-
-	/**
 	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 *            the code (as present in this class with enumName_CODE)
+	 * @return the according enum object
 	 */
 	public static ReportScopes getEnum(String code) {
 		for (ReportScopes x : values()) {
@@ -78,9 +96,8 @@ public enum ReportScopes {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 *            name of the enum (as present in this class)
+	 * @return true, if the enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
 		if (enumName == null) {
@@ -100,9 +117,8 @@ public enum ReportScopes {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return true, if is in value set
+	 *            the code</div>
+	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
 		for (ReportScopes x : values()) {
@@ -116,27 +132,27 @@ public enum ReportScopes {
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * dieser Klasse) eindeutiger Code</div>.
 	 */
 	protected String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
 	protected String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ReportScopes(String code, String displayName) {
 		this.code = code;
@@ -151,7 +167,7 @@ public enum ReportScopes {
 	 */
 	public CE getCE() {
 		CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCodeSystem(getCodeSystemOid());
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;
@@ -159,12 +175,12 @@ public enum ReportScopes {
 
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -179,8 +195,8 @@ public enum ReportScopes {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -190,7 +206,7 @@ public enum ReportScopes {
 
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */

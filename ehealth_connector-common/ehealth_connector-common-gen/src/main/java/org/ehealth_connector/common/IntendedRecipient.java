@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.common;
 
 import java.util.ArrayList;
@@ -9,11 +24,17 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 
+/**
+ * The Class IntendedRecipient. This element contains information about a
+ * specific person or organization which is the recipient of the document.
+ */
 public class IntendedRecipient {
+
+	/** The m intended recipient. */
 	protected org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mIntendedRecipient;
 
 	/**
-	 * Standard constructor
+	 * Standard constructor.
 	 */
 	public IntendedRecipient() {
 		this.mIntendedRecipient = LABFactory.eINSTANCE.createIntendedRecipient().init();
@@ -24,6 +45,15 @@ public class IntendedRecipient {
 	 * Convenience constructor with (for CDA-CH-LRTP) required elements, if the
 	 * recipient is a person. The according informationRecipient element will be
 	 * constructed with the given name.
+	 *
+	 * @param name
+	 *          the name
+	 * @param id
+	 *          the id
+	 * @param address
+	 *          the address
+	 * @param telecoms
+	 *          the telecoms
 	 */
 	public IntendedRecipient(Name name, Identificator id, Address address, Telecoms telecoms) {
 		this();
@@ -35,7 +65,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Standard mdht constructor
+	 * Standard mdht constructor.
 	 *
 	 * @param mdht
 	 *          the mdht object
@@ -52,6 +82,9 @@ public class IntendedRecipient {
 	 * the Organization has a name, it will be set as the name for the information
 	 * recipient (intendedRecipient/informationRecipient/name[0] =
 	 * organization/name[0])
+	 *
+	 * @param organization
+	 *          the organization
 	 */
 	public IntendedRecipient(Organization organization) {
 		this();
@@ -74,7 +107,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Assigns a post address
+	 * Assigns a post address.
 	 *
 	 * @param address
 	 *          the post address
@@ -84,7 +117,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Assigns an id
+	 * Assigns an id.
 	 *
 	 * @param identificator
 	 *          the id
@@ -94,7 +127,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Returns a copy of the underlying mdht element
+	 * Returns a copy of the underlying mdht element.
 	 *
 	 * @return the copy of the mdht element
 	 */
@@ -119,7 +152,7 @@ public class IntendedRecipient {
 
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
-	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
+	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>.
 	 *
 	 * @return <div class="en">the ids</div>
 	 */
@@ -128,7 +161,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Gets the person, who receives the information
+	 * Gets the person, who receives the information.
 	 *
 	 * @return the person
 	 */
@@ -137,7 +170,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Returns the underlying mdht element
+	 * Returns the underlying mdht element.
 	 *
 	 * @return the mdht element
 	 */
@@ -173,7 +206,7 @@ public class IntendedRecipient {
 	}
 
 	/**
-	 * Sets the person, who receives the information
+	 * Sets the person, who receives the information.
 	 *
 	 * @param person
 	 *          the person

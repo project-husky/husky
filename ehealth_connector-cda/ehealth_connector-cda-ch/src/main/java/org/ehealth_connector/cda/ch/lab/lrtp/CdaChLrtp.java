@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
@@ -32,16 +47,28 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
+/**
+ * The Class CdaChLrtp. <div class="en">The document implements the normative
+ * specification regarding the sematic interoperability for systems for the
+ * electronic notification of laboratory results in the transplantation process.
+ * Transplantation center transfering laboratory data of the organ donor
+ * recipients to SOAS, so that they can be considered in the organ donor
+ * process.</div> <div class="de">Das vorliegende Dokument gibt normativ die
+ * Spezifikationen betreffend die semantische Interoperabilität von Systemen für
+ * die elektronische Meldung von Laborbefunden im Transplantationsprozess vor.
+ * Die Transplantationszentren übermitteln die Labordaten der Organempfänger an
+ * SOAS, damit diese bei der Organzuteilung berücksichtigt werden können.</div>
+ */
 public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
 
 	/**
-	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID and
-	 * a generated extension.</div>
+	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID
+	 * and a generated extension.</div>
 	 *
 	 * @param id
-	 *          <br>
-	 *          <div class="en"> the id</div>
+	 *            <br>
+	 *            <div class="en"> the id</div>
 	 * @return the ii
 	 */
 	public static Identificator createUuidLrtp(String id) {
@@ -56,7 +83,7 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Standard constructor
+	 * Standard constructor.
 	 */
 	public CdaChLrtp() {
 		this(LanguageCode.ENGLISH);
@@ -66,29 +93,30 @@ public class CdaChLrtp
 	 * Constructor with the recommended elements for the LRTP document Header.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @param author
-	 *          the author of the document (a laboratory)
+	 *            the author of the document (a laboratory)
 	 * @param refOrderingPhysician
-	 *          a physician
+	 *            a physician
 	 * @param patient
-	 *          the patient
+	 *            the patient
 	 * @param recipient
-	 *          the recipient (e.g. the Bundesamt für Gesundheit)
+	 *            the recipient (e.g. the Bundesamt für Gesundheit)
 	 * @param scope
-	 *          the scope of this organ donor.
+	 *            the scope of this organ donor.
 	 * @param soasCode
-	 *          <div class="en">the SOAS code (will be set in
-	 *          recordTarget/patientRole/id/extension). Other Ids will be
-	 *          deleted.</div> <div class="de">Die Spender- resp. Empfänger-ID
-	 *          (der sogenannte SOAS-Code wird gesetzt in
-	 *          recordTarget/patientRole/id/extension). Andere Ids werden
-	 *          gelöscht.</div>
+	 *            <div class="en">the SOAS code (will be set in
+	 *            recordTarget/patientRole/id/extension). Other Ids will be
+	 *            deleted.</div> <div class="de">Die Spender- resp. Empfänger-ID
+	 *            (der sogenannte SOAS-Code wird gesetzt in
+	 *            recordTarget/patientRole/id/extension). Andere Ids werden
+	 *            gelöscht.</div>
 	 *
 	 */
 	public CdaChLrtp(LanguageCode languageCode, Author author,
-			ReferralOrderingPhysician refOrderingPhysician, org.ehealth_connector.common.Patient patient,
-			IntendedRecipient recipient, ReportScopes scope, String soasCode) {
+			ReferralOrderingPhysician refOrderingPhysician,
+			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient,
+			ReportScopes scope, String soasCode) {
 		this(languageCode);
 		// set SOAS ID
 		patient.getMdhtPatientRole().getIds().clear();
@@ -105,12 +133,13 @@ public class CdaChLrtp
 	 * Instantiates a new cda ch lrtp.
 	 *
 	 * @param languageCode
-	 *          language of the document contents
+	 *            language of the document contents
 	 * @param styleSheet
-	 *          an extensible style sheet (XSLT) to transform and render the
-	 *          document
+	 *            an extensible style sheet (XSLT) to transform and render the
+	 *            document
 	 * @param css
-	 *          cascading style sheet (CSS) to add style information for rendering
+	 *            cascading style sheet (CSS) to add style information for
+	 *            rendering
 	 */
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
@@ -125,10 +154,56 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Constructor with the recommended elements for the LRTP document Header.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 * @param styleSheet
+	 *            an extensible style sheet (XSLT) to transform and render the
+	 *            document
+	 * @param css
+	 *            cascading style sheet (CSS) to add style information for
+	 *            rendering
+	 * @param author
+	 *            the author of the document (a laboratory)
+	 * @param refOrderingPhysician
+	 *            a physician
+	 * @param patient
+	 *            the patient
+	 * @param recipient
+	 *            the recipient (e.g. the Bundesamt für Gesundheit)
+	 * @param scope
+	 *            the scope of this organ donor.
+	 * @param soasCode
+	 *            <div class="en">the SOAS code (will be set in
+	 *            recordTarget/patientRole/id/extension). Other Ids will be
+	 *            deleted.</div> <div class="de">Die Spender- resp. Empfänger-ID
+	 *            (der sogenannte SOAS-Code wird gesetzt in
+	 *            recordTarget/patientRole/id/extension). Andere Ids werden
+	 *            gelöscht.</div>
+	 *
+	 */
+	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css, Author author,
+			ReferralOrderingPhysician refOrderingPhysician,
+			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient,
+			ReportScopes scope, String soasCode) {
+		this(languageCode, styleSheet, css);
+		// set SOAS ID
+		patient.getMdhtPatientRole().getIds().clear();
+		patient.addId(new Identificator("2.16.756.5.30.1.129.1.1.1", soasCode));
+		setPatient(patient);
+		setEmtpyCustodian();
+		addAuthor(author);
+		addReferralOrderingPhysician(refOrderingPhysician);
+		addIntendedRecipient(recipient);
+		addDocumentationOf(scope);
+	}
+
+	/**
 	 * Instantiates a new cda ch lrtp.
 	 *
 	 * @param doc
-	 *          mdht model document
+	 *            mdht model document
 	 */
 	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
 		super(doc);
@@ -138,15 +213,15 @@ public class CdaChLrtp
 	 * Instantiates a new cda ch lrtp.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	protected CdaChLrtp(LanguageCode languageCode) {
 		this(languageCode, null, null);
 	}
 
 	/**
-	 * <div class="en">Convenience function to add the DocumentationOf element. In
-	 * case of LRTP it determines the case of organ donor. </div>
+	 * <div class="en">Convenience function to add the DocumentationOf element.
+	 * In case of LRTP it determines the case of organ donor. </div>
 	 * <div class="de">Convenience Funktion um das documentationOf element
 	 * hinzuzufügen. Die Fallunterscheidung der untersuchten Person resp. der
 	 * Geltungsbereich des Befundes (Leichenspender, Lebendspender,
@@ -154,7 +229,7 @@ public class CdaChLrtp
 	 * dokumentiert.</div>
 	 *
 	 * @param scope
-	 *          the scope of this organ donor.
+	 *            the scope of this organ donor.
 	 */
 	public void addDocumentationOf(ReportScopes scope) {
 		DocumentationOf dof = CDAFactory.eINSTANCE.createDocumentationOf();
@@ -177,12 +252,13 @@ public class CdaChLrtp
 	 * Battery Organizer
 	 *
 	 * @param organizer
-	 *          the LaboratoryBatteryOrganizer holding at least one
-	 *          LaboratoryObservation
+	 *            the LaboratoryBatteryOrganizer holding at least one
+	 *            LaboratoryObservation
 	 */
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
 		LaboratorySpecialtySection laboratorySpecialtySection;
-		// Try to determine the right code from the LaboratoryObservation and set it
+		// Try to determine the right code from the LaboratoryObservation and
+		// set it
 		// in the Section
 		final String section = getSectionCodeFromLaboratoryObservationEnum(organizer);
 		Code sectionCode = null;
@@ -191,7 +267,8 @@ public class CdaChLrtp
 		}
 
 		if (sectionCode != null) {
-			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode, getLanguageCode());
+			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+					getLanguageCode());
 		} else {
 			laboratorySpecialtySection = new LaboratorySpecialtySection();
 		}
@@ -216,10 +293,10 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Sets a LaboratorySpecialtySection
+	 * Sets a LaboratorySpecialtySection.
 	 *
 	 * @param laboratorySpecialtySection
-	 *          the section
+	 *            the section
 	 */
 	public void addLaboratorySpecialtySection(
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
@@ -299,8 +376,8 @@ public class CdaChLrtp
 
 			// Gender
 			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
-				processedP
-						.setAdministrativeGenderCode(EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
+				processedP.setAdministrativeGenderCode(
+						EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
 			}
 
 			// Addr MSK
@@ -330,19 +407,20 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Gets the BloodGroupObservation
+	 * Gets the BloodGroupObservation.
 	 *
 	 * @return the BloodGroupObservation
 	 */
 	public BloodGroupObservation getBloodGroupObservation() {
-		if (getStudiesSummarySection() != null && getStudiesSummarySection().getBloodGroup() != null) {
+		if (getStudiesSummarySection() != null
+				&& getStudiesSummarySection().getBloodGroup() != null) {
 			return new BloodGroupObservation(getStudiesSummarySection().getBloodGroup().getMdht());
 		}
 		return null;
 	}
 
 	/**
-	 * Gets the CodedVitalSignsSection
+	 * Gets the CodedVitalSignsSection.
 	 *
 	 * @return the CodedVitalSignsSection
 	 */
@@ -361,9 +439,9 @@ public class CdaChLrtp
 	 * DocumentationOf elements. In case of LRTP it determines the case of organ
 	 * donor. </div> <div class="de">Convenience Funktion um die LRTP-relevanten
 	 * documentationOf Elemente zu erhalten. Die Fallunterscheidung der
-	 * untersuchten Person resp. der Geltungsbereich des Befundes (Leichenspender,
-	 * Lebendspender, Organempfänger) wird im CDA Header mit dem documentationOf
-	 * Element dokumentiert.</div>
+	 * untersuchten Person resp. der Geltungsbereich des Befundes
+	 * (Leichenspender, Lebendspender, Organempfänger) wird im CDA Header mit
+	 * dem documentationOf Element dokumentiert.</div>
 	 *
 	 * @return the scope of this organ donor.
 	 */
@@ -383,15 +461,17 @@ public class CdaChLrtp
 	/**
 	 * Convenience function to return all LaboratoryBatteryOrganizers directly
 	 * from all underlying
-	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/SpecimenAct
-	 * elements (even if they reside in a different SpecialtySection).
+	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/
+	 * SpecimenAct elements (even if they reside in a different
+	 * SpecialtySection).
 	 *
 	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
 		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
 		for (LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
-			LaboratoryReportDataProcessingEntry lrdpe = lss.getLaboratoryReportDataProcessingEntry();
+			LaboratoryReportDataProcessingEntry lrdpe = lss
+					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
 				SpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
@@ -443,15 +523,17 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Convenience function, which returns the SpecimenAct directly from the first
-	 * underlying
-	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry element
+	 * Convenience function, which returns the SpecimenAct directly from the
+	 * first underlying
+	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry
+	 * element.
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
 	public SpecimenAct getSpecimenAct() {
 		if (getLaboratorySpecialtySections() != null
-				&& getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry() != null
+				&& getLaboratorySpecialtySections().get(0)
+						.getLaboratoryReportDataProcessingEntry() != null
 				&& getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct() != null) {
 			return getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
@@ -461,7 +543,7 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Gets the StudiesSummarySection
+	 * Gets the StudiesSummarySection.
 	 *
 	 * @return the StudiesSummarySection
 	 */
@@ -476,7 +558,7 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Gets the VitalSignsOrganizer
+	 * Gets the VitalSignsOrganizer.
 	 *
 	 * @return the VitalSignsOrganizer
 	 */
@@ -495,7 +577,7 @@ public class CdaChLrtp
 	 * document.
 	 *
 	 * @param observation
-	 *          the observation
+	 *            the observation
 	 */
 	public void setBloodGroupObservation(BloodGroupObservation observation) {
 		// Check if this section already exists. If so, get it, else create it.
@@ -510,10 +592,10 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Sets the CodedVitalSignsSection
+	 * Sets the CodedVitalSignsSection.
 	 *
 	 * @param codedVitalSigns
-	 *          the CodedVitalSignsSection
+	 *            the CodedVitalSignsSection
 	 */
 	public void setCodedVitalSignsSection(CodedVitalSignsSection codedVitalSigns) {
 		if (getCodedVitalSignsSection() == null) {
@@ -525,7 +607,7 @@ public class CdaChLrtp
 	 * Sets the section/text element for the CodedVitalSignsSection.
 	 *
 	 * @param text
-	 *          the text
+	 *            the text
 	 */
 	public void setNarrativeTextSectionCodedVitalSignsSection(String text) {
 		if (getCodedVitalSignsSection() != null) {
@@ -537,7 +619,7 @@ public class CdaChLrtp
 	 * Sets the section/text element for the StudiesSummarySection.
 	 *
 	 * @param text
-	 *          the text
+	 *            the text
 	 */
 	public void setNarrativeTextSectionStudiesSummarySection(String text) {
 		if (getStudiesSummarySection() != null) {
@@ -546,10 +628,10 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Sets the StudiesSummarySection
+	 * Sets the StudiesSummarySection.
 	 *
 	 * @param section
-	 *          the StudiesSummarySection
+	 *            the StudiesSummarySection
 	 */
 	public void setStudiesSummary(StudiesSummarySection section) {
 		if (getStudiesSummarySection() == null) {
@@ -563,7 +645,7 @@ public class CdaChLrtp
 	 * document.
 	 *
 	 * @param organizer
-	 *          the organizer
+	 *            the organizer
 	 */
 	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
 		// Check if this section already exists. If so, get it, else create it.
@@ -583,14 +665,16 @@ public class CdaChLrtp
 	 * LaboratoryBatteryOrganizer.
 	 *
 	 * @param organizer
-	 *          the LaboratoryBatteryOrganizer
+	 *            the LaboratoryBatteryOrganizer
 	 * @return the section code
 	 */
-	private String getSectionCodeFromLaboratoryObservationEnum(LaboratoryBatteryOrganizer organizer) {
+	private String getSectionCodeFromLaboratoryObservationEnum(
+			LaboratoryBatteryOrganizer organizer) {
 		if (!organizer.getLaboratoryObservations().isEmpty()) {
 			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
 				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum().getSectionCode();
+				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum()
+						.getSectionCode();
 			}
 		}
 		return null;

@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.common;
 
 import java.text.ParseException;
@@ -9,18 +24,24 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
+/**
+ * The Class Participant. E.g. employer and school informational contacts MAY be
+ * recorded as participants.
+ */
 public class Participant {
+
+	/** The m participant. */
 	Participant2 mParticipant;
 
 	/**
-	 * Standard constructor
+	 * Standard constructor.
 	 */
 	public Participant() {
 		mParticipant = CDAFactory.eINSTANCE.createParticipant2();
 	}
 
 	/**
-	 * Standard mdht constructor
+	 * Standard mdht constructor.
 	 *
 	 * @param mdht
 	 *          the mdht object
@@ -30,7 +51,7 @@ public class Participant {
 	}
 
 	/**
-	 * Returns a copy of the underlying mdht element
+	 * Returns a copy of the underlying mdht element.
 	 *
 	 * @return the copy of the mdht element
 	 */
@@ -39,7 +60,7 @@ public class Participant {
 	}
 
 	/**
-	 * Returns the underlying mdht element
+	 * Returns the underlying mdht element.
 	 *
 	 * @return the mdht element
 	 */
@@ -48,7 +69,7 @@ public class Participant {
 	}
 
 	/**
-	 * Gets the ParticipantRole
+	 * Gets the ParticipantRole.
 	 *
 	 * @return the partcipantRole
 	 */
@@ -57,7 +78,7 @@ public class Participant {
 	}
 
 	/**
-	 * Gets the time as Java Date Object
+	 * Gets the time as Java Date Object.
 	 *
 	 * @return the time
 	 */
@@ -69,7 +90,7 @@ public class Participant {
 	}
 
 	/**
-	 * Gets the ParticipationTypeCode
+	 * Gets the ParticipationTypeCode.
 	 *
 	 * @return the participationTypeCode
 	 */
@@ -78,7 +99,7 @@ public class Participant {
 	}
 
 	/**
-	 * Sets the ParticipantRole
+	 * Sets the ParticipantRole.
 	 *
 	 * @param p
 	 *          the participantRole
@@ -88,7 +109,7 @@ public class Participant {
 	}
 
 	/**
-	 * Sets the time as Data object
+	 * Sets the time as Data object.
 	 *
 	 * @param date
 	 *          the date
@@ -102,7 +123,7 @@ public class Participant {
 	}
 
 	/**
-	 * Sets the type code for this participation
+	 * Sets the type code for this participation.
 	 *
 	 * @param typeCode
 	 *          the typeCode

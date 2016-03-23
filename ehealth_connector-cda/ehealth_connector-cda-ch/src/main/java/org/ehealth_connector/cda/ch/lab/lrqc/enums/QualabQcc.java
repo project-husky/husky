@@ -1,3 +1,18 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2016
+ *
+ *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrqc.enums;
 
 import java.util.Date;
@@ -7,60 +22,57 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
+/**
+ * The Enum QualabQcc.
+ */
 /*
-*<div class="de">Zugelassene Qualitätskontrollzentren</div>
-*<div class="fr"></div>
-*/
+ * <div class="en">Certified quality control center</div> <div
+ * class="de">Zugelassene Qualitätskontrollzentren</div>
+ */
 public enum QualabQcc {
 
-	/**
-	 * <div class="en">Centre Suisse de Contrôle de Qualité CSCQ</div>
-	 */
+	/** <div class="en">Centre Suisse de Contrôle de Qualité CSCQ</div>. */
 	CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ("7601001326507", "Centre Suisse de Contrôle de Qualité CSCQ", "20150101", ""),
-	/**
-	 * <div class="en">Interregionale Blutspende SRK AG</div>
-	 */
+
+	/** <div class="en">Interregionale Blutspende SRK AG</div>. */
 	INTERREGIONALE_BLUTSPENDE_SRK_AG("7601001363540", "Interregionale Blutspende SRK AG", "20150101", ""),
-	/**
-	 * <div class="en">Verein für medizinische Qualitätskontrolle</div>
-	 */
+
+	/** <div class="en">Verein für medizinische Qualitätskontrolle</div>. */
 	VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE("7601001402805", "Verein für medizinische Qualitätskontrolle", "20150101", "");
 
 	/**
-	 * <div class="en">Code for Centre Suisse de Contrôle de Qualité CSCQ</div>
+	 * <div class="en">Code for Centre Suisse de Contrôle de Qualité CSCQ</div>.
 	 */
 	public static final String CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ_CODE = "7601001326507";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
+	 * Codes Systems</div>.
 	 */
 	public static final String CODE_SYSTEM_NAME = "GLN";
 
 	/**
 	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>.
 	 */
 	public static final String CODE_SYSTEM_OID = "2.51.1.3";
 
-	/**
-	 * <div class="en">Code for Interregionale Blutspende SRK AG</div>
-	 */
+	/** <div class="en">Code for Interregionale Blutspende SRK AG</div>. */
 	public static final String INTERREGIONALE_BLUTSPENDE_SRK_AG_CODE = "7601001363540";
 
 	/**
 	 * <div class="en">Code for Verein für medizinische Qualitätskontrolle</div>
+	 * .
 	 */
 	public static final String VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE_CODE = "7601001402805";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 *            the code (as present in this class with enumName_CODE)
+	 * @return the according enum object
 	 */
 	public static QualabQcc getEnum(String code) {
 		for (QualabQcc x : values()) {
@@ -78,9 +90,8 @@ public enum QualabQcc {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 *            name of the enum (as present in this class)
+	 * @return true, if the enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
 		if (enumName == null) {
@@ -100,9 +111,8 @@ public enum QualabQcc {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
-	 * @return true, if is in value set
+	 *            the code</div>
+	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
 		for (QualabQcc x : values()) {
@@ -116,48 +126,48 @@ public enum QualabQcc {
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * dieser Klasse) eindeutiger Code</div>.
 	 */
 	protected String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
 	protected String displayName;
 
 	/**
 	 * <div class="en">Start date for the period in which this element can be
 	 * used</div> <div class="de">Startdatum der Periode, innerhalb derer dieses
-	 * Element valide ist</div>
+	 * Element valide ist</div>.
 	 */
 	protected Date validFrom;
 
 	/**
 	 * <div class="en">End date for the period in which this element can be
 	 * used</div> <div class="de">Enddatum der Periode, innerhalb derer dieses
-	 * Element valide ist</div>
+	 * Element valide ist</div>.
 	 */
 	protected Date validTo;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with given code, displayName,
-	 * validFrom and validTo parameters</div> <div class="de">Instantiiert dieses
-	 * Enum Object mittels der code, displayName, validFrom und validTo
-	 * Parameter</div>
+	 * <div class="en">Instantiates this Enum Object with given code,
+	 * displayName, validFrom and validTo parameters</div>
+	 * <div class="de">Instantiiert dieses Enum Object mittels der code,
+	 * displayName, validFrom und validTo Parameter</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="en">the code</div>
+	 *            <br>
+	 *            <div class="en">the code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="en">the display name</div>
+	 *            <br>
+	 *            <div class="en">the display name</div>
 	 * @param validFrom
-	 *          <br>
-	 *          <div class="en">the valid from</div>
+	 *            <br>
+	 *            <div class="en">the valid from</div>
 	 * @param validTo
-	 *          <br>
-	 *          <div class="en">the valid to</div>
+	 *            <br>
+	 *            <div class="en">the valid to</div>
 	 */
 	private QualabQcc(String code, String displayName, String validFrom, String validTo) {
 		this.code = code;
@@ -178,7 +188,7 @@ public enum QualabQcc {
 	 */
 	public CD getCD() {
 		CD cd = DatatypesFactory.eINSTANCE.createCD();
-		cd.setCodeSystem(CODE_SYSTEM_OID);
+		cd.setCodeSystem(getCodeSystemOid());
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
 		cd.setCodeSystemName(CODE_SYSTEM_NAME);
@@ -187,12 +197,12 @@ public enum QualabQcc {
 
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
+		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -207,8 +217,8 @@ public enum QualabQcc {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -218,7 +228,7 @@ public enum QualabQcc {
 
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -249,8 +259,8 @@ public enum QualabQcc {
 	 * Checks if the code is valid for the specified date.
 	 *
 	 * @param date
-	 *          the date
-	 * @return true, if is valid
+	 *            the date
+	 * @return true, if it is valid
 	 */
 	public boolean isValid(Date date) {
 		if (date == null) {

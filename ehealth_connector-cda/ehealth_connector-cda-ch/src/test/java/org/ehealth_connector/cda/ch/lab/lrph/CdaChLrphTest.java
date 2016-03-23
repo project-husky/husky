@@ -46,26 +46,6 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 	}
 
-	private CdaChLrph deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
-		LABPackage.eINSTANCE.eClass();
-		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) {
-			CdaChLrph test = new CdaChLrph(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
-			return test;
-		} else
-			return null;
-	}
-
-	private CdaChLrph deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrph());
-		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
-	}
-
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChLrph cda = new CdaChLrph();
@@ -111,11 +91,11 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
-				.get(0));
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-				.getCommentEntryList().get(0));
+				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntry());
@@ -126,50 +106,53 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getNotificationOrganizer());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getNotificationOrganizer().getOutbreakIdentificationObservation());
+				.getSpecimenAct().getNotificationOrganizer()
+				.getOutbreakIdentificationObservation());
 
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final CdaChLrph cdaDeserialized = deserializeCda(deserialized);
 
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getLaboratoryBatteryOrganizers()
-				.get(0).getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getCommentEntryList().get(0));
 
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getSpecimenCollectionEntry());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getSpecimenCollectionEntry().getSpecimenReceivedEntry());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getLaboratoryIsolateOrganizers());
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getSpecimenCollectionEntry());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
-				.getLaboratoryReportDataProcessingEntry().getSpecimenAct().getNotificationOrganizer());
-		assertNotNull(
-				cdaDeserialized.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getNotificationOrganizer().getOutbreakIdentificationObservation());
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getSpecimenCollectionEntry().getSpecimenReceivedEntry());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getLaboratoryIsolateOrganizers());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getNotificationOrganizer());
+		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
+				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.getNotificationOrganizer().getOutbreakIdentificationObservation());
 
 		assertTrue(cdaDeserialized != null);
 		assertEquals("Laboratory Specialty Section",
 				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
-		assertTrue(
-				LabObsListSnomed.BRUCELLA.getCode()
-						.equals(cdaDeserialized.getLaboratorySpecialtySection()
-								.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-								.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-								.getCodeAsSnomedEnum().getCode()));
+		assertTrue(LabObsListSnomed.BRUCELLA.getCode()
+				.equals(cdaDeserialized.getLaboratorySpecialtySection()
+						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+						.getCodeAsSnomedEnum().getCode()));
 	}
 
 	@Test
@@ -181,11 +164,6 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(cdaDeserialized != null);
 	}
 
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChLrph cda = new CdaChLrph();
@@ -193,12 +171,6 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
 		assertTrue(cdaDeserialized != null);
-	}
-
-	private String serializeDocument(CdaChLrph doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
 	}
 
 	@Test
@@ -267,7 +239,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// null));
 		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1",
 		// null));
-		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1", null));
+		// assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1",
+		// null));
 
 		//
 
@@ -325,7 +298,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames().get(0)
 				.getGivens().add(enxp);
 
-		// Create a Laboratory Observation with a Code that has the privacyFilter =
+		// Create a Laboratory Observation with a Code that has the
+		// privacyFilter =
 		// initials
 		LaboratoryObservation lo = new LaboratoryObservation(LabObsListSnomed.BRUCELLA,
 				ObservationInterpretation.POS, new Date());
@@ -338,17 +312,17 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		// Document document = doc.getDocument();
 
 		// One Given Name with right length
-		assertEquals(2, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames()
-				.get(0).getGivens().get(0).getText().length());
-		assertEquals(1, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient().getNames()
-				.get(0).getGivens().size());
+		assertEquals(2, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient()
+				.getNames().get(0).getGivens().get(0).getText().length());
+		assertEquals(1, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient()
+				.getNames().get(0).getGivens().size());
 		assertEquals("X2", doc.getPatient().getName().getGivenNames());
 		// Family Name MSK
 		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
 				.getPatient().getNames().get(0).getFamilies().get(0).getNullFlavor());
 		// Street Name MSK
-		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole().getAddrs()
-				.get(0).getStreetNames().get(0).getNullFlavor());
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getAddrs().get(0).getStreetNames().get(0).getNullFlavor());
 		// City equal
 		assertEquals(patient1.getAddress().getCity(), doc.getPatient().getAddress().getCity());
 		// Birth time equal
@@ -360,8 +334,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
 				.getTelecoms().get(0).getNullFlavor());
 		// ID MSK
-		assertEquals(NullFlavor.MSK,
-				doc.getMdht().getRecordTargets().get(0).getPatientRole().getIds().get(0).getNullFlavor());
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getIds().get(0).getNullFlavor());
 	}
 
 	@Test
@@ -370,7 +344,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		CdaChLrph doc = new CdaChLrph();
 		doc.setPatient(patient1);
 
-		// Create a Laboratory Observation with a Code that has the privacyFilter =
+		// Create a Laboratory Observation with a Code that has the
+		// privacyFilter =
 		// initials
 		LaboratoryObservation lo = new LaboratoryObservation(LabObsListSnomed.BRUCELLA,
 				ObservationInterpretation.POS, new Date());
@@ -394,8 +369,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
 				.getPatient().getNames().get(0).getNullFlavor());
 		// Street Name MSK
-		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole().getAddrs()
-				.get(0).getStreetNames().get(0).getNullFlavor());
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getAddrs().get(0).getStreetNames().get(0).getNullFlavor());
 		// City equal
 		assertEquals(patient1.getAddress().getCity(), doc.getPatient().getAddress().getCity());
 		// Birth time equal
@@ -407,7 +382,38 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
 				.getTelecoms().get(0).getNullFlavor());
 		// ID MSK
-		assertEquals(NullFlavor.MSK,
-				doc.getMdht().getRecordTargets().get(0).getPatientRole().getIds().get(0).getNullFlavor());
+		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
+				.getIds().get(0).getNullFlavor());
+	}
+
+	private CdaChLrph deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		CHPackage.eINSTANCE.eClass();
+		LABPackage.eINSTANCE.eClass();
+		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) {
+			CdaChLrph test = new CdaChLrph(
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+			return test;
+		} else
+			return null;
+	}
+
+	private CdaChLrph deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChLrph());
+		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+	}
+
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
+	private String serializeDocument(CdaChLrph doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
 	}
 }

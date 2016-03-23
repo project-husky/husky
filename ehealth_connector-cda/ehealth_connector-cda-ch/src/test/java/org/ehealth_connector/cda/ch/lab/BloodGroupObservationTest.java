@@ -33,7 +33,8 @@ public class BloodGroupObservationTest extends TestUtils {
 
 		// value
 		o.setValue(BloodGroup.BLOOD_GROUP_0);
-		assertEquals(BloodGroup.BLOOD_GROUP_0.getCE().getCode(), o.getValueEnum().getCE().getCode());
+		assertEquals(BloodGroup.BLOOD_GROUP_0.getCE().getCode(),
+				o.getValueEnum().getCE().getCode());
 		document = o.getDocument();
 		assertTrue(xExist(document, "//value[@type='CE']"));
 
@@ -47,6 +48,7 @@ public class BloodGroupObservationTest extends TestUtils {
 		assertNotNull(o.getComment());
 		document = o.getDocument();
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']"));
-		assertTrue(xExist(document, "//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']"));
+		assertTrue(
+				xExist(document, "//entryRelationship[@typeCode='SUBJ' and @inversionInd='true']"));
 	}
 }
