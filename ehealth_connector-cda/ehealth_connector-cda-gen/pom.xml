@@ -64,10 +64,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.openhealthtools.mdht.uml.cda.ihe.lab</groupId>
-			<artifactId>
-				org.openhealthtools.mdht.uml.cda.ihe.lab
-			</artifactId>
+			<groupId>org.openhealthtools.mdht.cda</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
 		</dependency>
 	</dependencies>
 
