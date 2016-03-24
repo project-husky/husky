@@ -293,7 +293,7 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Sets a LaboratorySpecialtySection.
+	 * Adds a LaboratorySpecialtySection.
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the section

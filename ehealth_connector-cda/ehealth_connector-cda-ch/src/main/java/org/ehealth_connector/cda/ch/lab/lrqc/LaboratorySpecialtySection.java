@@ -58,7 +58,8 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	 */
 	public LaboratorySpecialtySection(Code code, LaboratoryReportDataProcessingEntry entry) {
 		this(code);
-		setLaboratoryReportDataProcessingEntry(entry);
+		getMdht().getEntries().clear();
+		getMdht().getEntries().add(0, entry.getMdht());
 	}
 
 	/**

@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
@@ -45,7 +46,8 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	}
 
 	/**
-	 * Instantiates the class.
+	 * Instantiates the class with the required elements. A
+	 * LaboratoryReportDataProcessingEntry will be created automatically.
 	 *
 	 * @param code
 	 *            the code for this section
@@ -54,6 +56,7 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	 */
 	public LaboratorySpecialtySection(Code code, LanguageCode languageCode) {
 		super(code, languageCode);
+		setLaboratoryReportDataProcessingEntry(new LaboratoryReportDataProcessingEntry());
 	}
 
 	/**
@@ -69,7 +72,8 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	public LaboratorySpecialtySection(Code code, LanguageCode languageCode,
 			LaboratoryReportDataProcessingEntry entry) {
 		this(code, languageCode);
-		setLaboratoryReportDataProcessingEntry(entry);
+		getMdht().getEntries().clear();
+		getMdht().getEntries().add(0, entry.getMdht());
 	}
 
 	/**
@@ -81,6 +85,19 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	public LaboratorySpecialtySection(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Instantiates the class with the required elements. A
+	 * LaboratoryReportDataProcessingEntry will be created automatically.
+	 *
+	 * @param code
+	 *            the code for this section
+	 * @param languageCode
+	 *            the language code
+	 */
+	public LaboratorySpecialtySection(SpecialtySections code, LanguageCode languageCode) {
+		this(code.getCode(), languageCode);
 	}
 
 	/**
