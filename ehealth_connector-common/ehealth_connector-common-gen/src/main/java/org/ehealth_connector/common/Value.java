@@ -43,16 +43,17 @@ public class Value {
 	private ANY mValue;
 
 	/**
-	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt</div>
-	 * <div class="de">Instantiiert ein neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT ANY Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given MDHT ANY
+	 * Objekt</div> <div class="de">Instantiiert ein neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY
+	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> value</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(ANY value) {
 		mValue = value;
@@ -67,9 +68,9 @@ public class Value {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> value</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(ANY value, NullFlavor nullFlavor) {
 		mValue = value;
@@ -85,10 +86,10 @@ public class Value {
 	 * <div class="it"></div>
 	 *
 	 * @param low
-	 *          The lower bound
+	 *            The lower bound
 	 *
 	 * @param high
-	 *          The upper bound
+	 *            The upper bound
 	 */
 	public Value(BigDecimal low, BigDecimal high) {
 		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
@@ -105,16 +106,17 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a given boolean Object.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines Java boolean initialisiert (CDA
-	 * Datentyp: BL)</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given boolean
+	 * Object.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines Java boolean
+	 * initialisiert (CDA Datentyp: BL)</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(boolean code) {
 		BL bl = DatatypesFactory.eINSTANCE.createBL();
@@ -123,16 +125,17 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a give MDHT CD Objekt.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT CD (Code) Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a give MDHT CD
+	 * Objekt.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT CD (Code)
+	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param cd
-	 *          <br>
-	 *          <div class="de"> cd</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> cd</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(CD cd) {
 		mValue = cd;
@@ -146,30 +149,30 @@ public class Value {
 	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(Code code) {
 		mValue = code.getCD();
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT RTO
-	 * Objekt (A quantity constructed as the quotient of a numerator quantity
-	 * divided by a denominator quantity.).</div> <div class="de">Instantiiert
-	 * eine neues Value RTO Objekt. Dieses wird häufig für die Angabe von Titer
-	 * verwendet. Mit diesem Konstruktor wird ein Value Objekt auf Basis eines
-	 * MDHT RTO Datenobjekts initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * RTO Objekt (A quantity constructed as the quotient of a numerator
+	 * quantity divided by a denominator quantity.).</div>
+	 * <div class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird
+	 * häufig für die Angabe von Titer verwendet. Mit diesem Konstruktor wird
+	 * ein Value Objekt auf Basis eines MDHT RTO Datenobjekts
+	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param numerator
-	 *          The nominator value (nominator/denominator)
+	 *            The nominator value (nominator/denominator)
 	 *
 	 * @param denominator
-	 *          The denominator value (nominator/denominator)
+	 *            The denominator value (nominator/denominator)
 	 * @param ucumUnit
-	 *          the UCUM Unit
+	 *            the UCUM Unit
 	 */
 	public Value(double numerator, double denominator, Ucum ucumUnit) {
 		final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
@@ -199,9 +202,9 @@ public class Value {
 	 * <div class="it"></div>
 	 *
 	 * @param pq
-	 *          <br>
-	 *          <div class="de"> pq</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> pq</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(PQ pq) {
 		mValue = pq;
@@ -210,14 +213,14 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with a give MDHT RTO Objekt (A
 	 * quantity constructed as the quotient of a numerator quantity divided by a
-	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues Value
-	 * RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
+	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues
+	 * Value RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet.
+	 * Mit diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
 	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param rto
-	 *          The RTO object
+	 *            The RTO object
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
@@ -227,17 +230,18 @@ public class Value {
 	 * <div class="en">Instantiates a new value.</div>
 	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
 	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT ED Objektes mit einem text oder
-	 * einer Referenz initalisiert. initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * wird ein Value Objekt auf Basis eines MDHT ED Objektes mit einem text
+	 * oder einer Referenz initalisiert. initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> code system</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code system</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param isText
-	 *          indicates, if the given value is a text (/value will be created)
-	 *          or a reference (/value/reference[@value] will be created)
+	 *            indicates, if the given value is a text (/value will be
+	 *            created) or a reference (/value/reference[@value] will be
+	 *            created)
 	 */
 	public Value(String value, boolean isText) {
 		final ED ed;
@@ -257,13 +261,13 @@ public class Value {
 	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param codeSystem
-	 *          <br>
-	 *          <div class="de"> code system</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code system</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Value(String codeSystem, String code) {
 		final CD cd = DatatypesFactory.eINSTANCE.createCD();
@@ -276,9 +280,9 @@ public class Value {
 	 * Erstellt einen neuen Wert.
 	 *
 	 * @param value
-	 *          Der eigentliche Wert
+	 *            Der eigentliche Wert
 	 * @param unit
-	 *          Die Einheit
+	 *            Die Einheit
 	 */
 	public Value(String value, Ucum unit) {
 		this(DatatypesFactory.eINSTANCE.createPQ());
@@ -375,6 +379,11 @@ public class Value {
 		return null;
 	}
 
+	public String GetOriginalTextReference() {
+		final Code code = new Code((CD) mValue);
+		return code.getOriginalTextReference();
+	}
+
 	/**
 	 * <div class="en">Returns the higher bound of an interval of physical
 	 * measurements</div> Gibt den oberen Wert eines Intervals physikalischer
@@ -433,8 +442,8 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Gets the value.</div> <div class="de">Liefert value.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the value.</div> <div class="de">Liefert
+	 * value.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return ANY <div class="en">the value as MDHT ANY object</div>
 	 */
@@ -491,13 +500,18 @@ public class Value {
 	}
 
 	/**
-	 * Checks if the Value object is a RTO (A quantity constructed as the quotient
-	 * of a numerator quantity divided by a denominator quantity.).
+	 * Checks if the Value object is a RTO (A quantity constructed as the
+	 * quotient of a numerator quantity divided by a denominator quantity.).
 	 *
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
 	public boolean isRto() {
 		return (mValue instanceof RTO);
+	}
+
+	public void SetOriginalTextReference(String OriginalText) {
+		final Code code = new Code((CD) mValue);
+		code.setOriginalTextReference(OriginalText);
 	}
 
 	private void setPqValue(String value) {
@@ -511,9 +525,9 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Gets the value as String (e.g. "Value [value=200, unit=ml]"
-	 * )</div> <div class="de">Liefert value.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the value as String (e.g.
+	 * "Value [value=200, unit=ml]" )</div> <div class="de">Liefert value.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the value</div>
 	 */

@@ -130,6 +130,9 @@ public class CdaChEdesEdpn
 
 		// add the MDHT Object to the section
 		section.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
+		section.createStrucDocText(common.getProblemTable(section)); // Generate
+		// <text>ProblemConcern
+		// table</text>
 	}
 
 	/**
@@ -153,6 +156,8 @@ public class CdaChEdesEdpn
 
 		// add the MDHT Object to the section
 		section.addAct(AllergiesOrOtherAdverseReaction.copyMdhtAllergyConcern());
+		 section.createStrucDocText(common.getAllergyTable(getAllergiesAndOtherAdverseReactions()));
+		//  Generate <text> Allergy table</text>
 	}
 
 	/**
@@ -208,6 +213,9 @@ public class CdaChEdesEdpn
 
 		// add the MDHT Object to the section
 		section.addAct(edDiagnosis.copyMdhtProblemConcernEntry());
+		section.createStrucDocText(common.getProblemTable(section)); // Generate
+		// <text>ProblemConcern
+		// table</text>
 	}
 
 	/**
@@ -229,6 +237,9 @@ public class CdaChEdesEdpn
 
 		// add the MDHT Object to the section
 		section.addAct(PastIllness.copyMdhtProblemConcernEntry());
+		section.createStrucDocText(common.getProblemTable(section)); // Generate
+		// <text>ProblemConcern
+		// table</text>
 	}
 
 	/**
@@ -269,15 +280,15 @@ public class CdaChEdesEdpn
 		}
 		final EList<Act> acts = section.getActs();
 
-		final List<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
+		final List<AllergyConcern> AllergyConcerns = new ArrayList<AllergyConcern>();
 		for (final Act act : acts) {
-			final AllergyConcern problemConcernEntry = new AllergyConcern(
+			final AllergyConcern AllergyConcern = new AllergyConcern(
 					(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
-			problemConcernEntries.add(problemConcernEntry);
+			AllergyConcerns.add(AllergyConcern);
 		}
-		return problemConcernEntries;
+		return AllergyConcerns;
 	}
-
+	
 	/**
 	 * <div class="en">Gets the coded vital sign observations</div>
 	 * <div class="de">Liefert alle codierten Vitalzeichen zurück</div>
