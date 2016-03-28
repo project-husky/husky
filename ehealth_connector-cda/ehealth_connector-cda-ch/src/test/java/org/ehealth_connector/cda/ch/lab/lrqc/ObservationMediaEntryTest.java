@@ -28,7 +28,7 @@ public class ObservationMediaEntryTest extends TestUtils {
 		// set Image
 		// Read a sample file (not an image), encode it into the
 		// ObservationMediaEntry and write it to the disc
-		InputStream is = this.getClass().getResourceAsStream("/vacd/vacDoc_Test2.xml");
+		InputStream is = this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
 		OutputStream os = new FileOutputStream("ObservationMediaTest.xml");
 
 		try {
