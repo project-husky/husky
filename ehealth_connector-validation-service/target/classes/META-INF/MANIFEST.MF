@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Built-By: ich
-Build-Time: 2016-03-28T08:35:35Z
+Build-Time: 2016-03-28T08:59:50Z
 Class-Path: Saxon-HE-9.7.0-3.jar slf4j-api-1.7.12.jar VALA-1.0.jar
 Build-Jdk: 1.8.0_65
 Created-By: Maven Integration for Eclipse
