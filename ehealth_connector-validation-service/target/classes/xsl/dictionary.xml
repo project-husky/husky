@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+******************************************************************************
+Localized text entries for the multilingual Schematron Report
+******************************************************************************
+-->
+<dictionary>
+
+  <entry key="Pattern" lang="en" value="Pattern" />
+  <entry key="Pattern" lang="de" value="Pattern" />
+  <entry key="Pattern" lang="fr" value="Motif" />
+  <entry key="Pattern" lang="it" />
+
+  <entry key="Rule" lang="en" value="Rule" />
+  <entry key="Rule" lang="de" value="Regel" />
+  <entry key="Rule" lang="fr" value="Règle" />
+  <entry key="Rule" lang="it" value="Regola" />
+
+  <entry key="Assert" lang="en" value="Assert" />
+  <entry key="Assert" lang="de" value="Assert" />
+  <entry key="Assert" lang="fr" value="Assert" />
+  <entry key="Assert" lang="it" value="Assert" />
+
+  <entry key="Report" lang="en" value="Report" />
+  <entry key="Report" lang="de" value="Report" />
+  <entry key="Report" lang="fr" value="Report" />
+  <entry key="Report" lang="it" value="Report" />
+
+  <!-- render_rule_body -->
+  <entry key="Context" lang="en" value="Context" />
+  <entry key="Context" lang="de" value="Kontext" />
+  <entry key="Context" lang="fr" value="Context" />
+  <entry key="Context" lang="it" />
+
+  <entry key="Title" lang="en" value="Title" />
+  <entry key="Title" lang="de" value="Titel" />
+  <entry key="Title" lang="fr" value="Titre" />
+  <entry key="Title" lang="it" />
+
+  <entry key="Description" lang="en" value="Description" />
+  <entry key="Description" lang="de" value="Beschreibung" />
+  <entry key="Description" lang="fr" value="Description" />
+  <entry key="Description" lang="it"  />
+
+  <!-- END -->
+
+  <entry key="Test" lang="en" value="Test" />
+  <entry key="Test" lang="de" value="Test" />
+  <entry key="Test" lang="fr" value="Test" />
+  <entry key="Test" lang="it" value="Test" />
+
+  <entry key="Location" lang="en" value="Location" />
+  <entry key="Location" lang="de" value="Stelle" />
+  <entry key="Location" lang="fr" value="Emplacement" />
+  <entry key="Location" lang="it" />
+
+  <entry key="label.rules" lang="en" value="Rules" />
+  <entry key="label.rules" lang="de" value="Regeln" />
+  <entry key="label.rules" lang="fr" value="Règles" />
+
+  <entry key="label.messages" lang="en" value="Messages" />
+  <entry key="label.messages" lang="de" value="Meldungen" />
+  <entry key="label.messages" lang="fr" value="Messages" />
+
+  <entry key="info.see" lang="en" value="Link to the specifications" />
+  <entry key="info.see" lang="de" value="Link zur Spezifikation" />
+  <entry key="info.see" lang="fr" value="Lien vers les specifications" />
+
+  <!--
+  ****************************************************************************
+  ****************************************************************************
+  -->
+
+  <entry key="unknown" lang="en" value="unknown" />
+  <entry key="unknown" lang="de" value="unbekannt" />
+  <entry key="unknown" lang="fr" value="inconnue" />
+  <entry key="unknown" lang="it" value="sconosciuta" />
+
+  <entry key="Author" lang="en" value="Author" />
+  <entry key="Author" lang="de" value="Autor" />
+  <entry key="Author" lang="fr" value="Auteur" />
+  <entry key="Author" lang="it" value="Autore" />
+
+  <entry key="theDate" lang="en" value="the" />
+  <entry key="theDate" lang="de" value="am" />
+  <entry key="theDate" lang="fr" value=" le" />
+  <entry key="theDate" lang="it" value="il" />
+
+  <!-- Dokumentation Schematron -->
+  <entry key="Entity" lang="en" value="Entity" />
+  <entry key="Entity" lang="de" value="Entity" />
+  <entry key="Entity" lang="fr" value="Entity" />
+  <entry key="Entity" lang="it" value="entity tbd it" />
+
+  <entry key="file.name" lang="en" value="File name" />
+  <entry key="file.name" lang="de" value="Dateiname" />
+  <entry key="file.name" lang="fr" value="Nom du fichier" />
+  <entry key="file.name" lang="it" value="[file.name@it]" />
+
+  <entry key="Version" lang="en" value="Version" />
+  <entry key="Version" lang="de" value="Version" />
+  <entry key="Version" lang="fr" value="Version" />
+  <entry key="Version" lang="it" value="[Version@it]" />
+
+  <entry key="LastUpdate" lang="en" value="Last upate" />
+  <entry key="LastUpdate" lang="de" value="Letzte Änderung" />
+  <entry key="LastUpdate" lang="fr" value="Dernière mutation" />
+  <entry key="LastUpdate" lang="it" value="[LastUpdate@it]" />
+
+  <entry key="Phase" lang="en" value="Phase" />
+  <entry key="Phase" lang="de" value="Phase" />
+  <entry key="Phase" lang="fr" value="Phase" />
+  <entry key="Phase" lang="it" value="Fasi" />
+
+  <entry key="all" lang="en" value="all" />
+  <entry key="all" lang="de" value="alle" />
+  <entry key="all" lang="fr" value="toutes" />
+  <entry key="all" lang="it" value="tutte" />
+
+  <entry key="Role" lang="en" value="Role" />
+  <entry key="Role" lang="de" value="Kategorie" />
+  <entry key="Role" lang="fr" value="Catégorie" />
+  <entry key="Role" lang="it" value="Categoria" />
+
+  <entry key="Specification" lang="en" value="Specification" />
+  <entry key="Specification" lang="de" value="Spezifikation" />
+  <entry key="Specification" lang="fr" value="Spécification" />
+  <entry key="Specification" lang="it" value="specification tbd it" />
+
+  <entry key="error" lang="en" value="Error" />
+  <entry key="error" lang="de" value="Fehler" />
+  <entry key="error" lang="fr" value="Erreur" />
+  <entry key="error" lang="it" value="Errore" />
+
+  <entry key="warning" lang="en" value="Warning" />
+  <entry key="warning" lang="de" value="Warnung" />
+  <entry key="warning" lang="fr" value="Alerte" />
+  <entry key="warning" lang="it" value="Allarme" />
+
+  <entry key="information" lang="en" value="Information" />
+  <entry key="information" lang="de" value="Information" />
+  <entry key="information" lang="fr" value="Information" />
+  <entry key="information" lang="it" value="Informazioni" />
+
+  <entry key="note" lang="en" value="Information" />
+  <entry key="note" lang="de" value="Information" />
+  <entry key="note" lang="fr" value="Information" />
+  <entry key="note" lang="it" value="Informazioni" />
+
+  <entry key="debug" lang="en" value="Debug" />
+  <entry key="debug" lang="de" value="Debug" />
+  <entry key="debug" lang="fr" value="Debug" />
+  <entry key="debug" lang="it" value="Debug" />
+
+  <entry key="docu" lang="en" value="Documentation" />
+  <entry key="docu" lang="de" value="Dokumentation" />
+  <entry key="docu" lang="fr" value="Documentation" />
+  <entry key="docu" lang="it" value="Documentation tbd it" />
+
+  <entry key="SchValidationReportSubtitle" lang="en" value="Validation details:" />
+  <entry key="SchValidationReportSubtitle" lang="de" value="Details zur Validierung:" />
+  <entry key="SchValidationReportSubtitle" lang="fr" value="Détails de la validation:" />
+  <entry key="SchValidationReportSubtitle" lang="it" value="SchValidationReportSubtitle tbd it" />
+
+  <entry key="display.language" lang="en" value="Display language" />
+  <entry key="display.language" lang="de" value="Anzeigesprache" />
+  <entry key="display.language" lang="fr" value="Langue d'affichage" />
+  <entry key="display.language" lang="it" value="display.language [it]" />
+
+  <entry key="SchValidatedCDA" lang="en" value="Validated CDA:" />
+  <entry key="SchValidatedCDA" lang="de" value="Validiertes CDA:" />
+  <entry key="SchValidatedCDA" lang="fr" value="CDA validé:" />
+  <entry key="SchValidatedCDA" lang="it" value="SchValidatedCDA tbd it:" />
+
+  <entry key="SchUsedForValidation" lang="en" value="Schematron used:" />
+  <entry key="SchUsedForValidation" lang="de" value="Angewendetes Schematron:" />
+  <entry key="SchUsedForValidation" lang="fr" value="Schematron utilisé" />
+  <entry key="SchUsedForValidation" lang="it" value="SchUsedForValidation tbd it:" />
+
+  <entry key="SchValidationTimestamp" lang="en" value="Validation timestamp:" />
+  <entry key="SchValidationTimestamp" lang="de" value="Zeitpunkt der Validierung:" />
+  <entry key="SchValidationTimestamp" lang="fr" value="Moment de la validation:" />
+  <entry key="SchValidationTimestamp" lang="it" value="SchValidationTimestamp tbd it:" />
+
+   <!-- TODO Remove -->
+  <entry key="SchDocumentation" lang="en" value="Schematron documentation of " />
+  <entry key="SchDocumentation" lang="de" value="Schematron Dokumentation von " />
+  <entry key="SchDocumentation" lang="fr" value="Documentation Schematron de " />
+  <entry key="SchDocumentation" lang="it" value="SchDocumentation tbd it" />
+
+  <entry key="SchValidationReportTitle" lang="en" value="Schematron validation report of " />
+  <entry key="SchValidationReportTitle" lang="de" value="Schematron Validierungsbericht von " />
+  <entry key="SchValidationReportTitle" lang="fr" value="Rapport de validation Schematron de " />
+  <entry key="SchValidationReportTitle" lang="it" value="SchValidationReportTitle tbd it" />
+
+  <!-- Localized Text for the Schematron Documentation -->
+
+  <entry key="title.documentation" lang="en" value="Schematron documentation of " />
+  <entry key="title.documentation" lang="de" value="Schematron Dokumentation von " />
+  <entry key="title.documentation" lang="fr" value="Documentation Schematron de " />
+  <entry key="title.documentation" lang="it" />
+
+  <entry key="title.references" lang="en" value="Referenced entities" />
+  <entry key="title.references" lang="de" value="Referenzierte Entities" />
+  <entry key="title.references" lang="fr" value="Entitées référencées" />
+  <entry key="title.references" lang="it" value="Entities referenziate" />
+
+  <!-- Localized Text for the Schematron Validation Report -->
+
+  <entry key="title.validation.report" lang="en" value="Schematron validation report of " />
+  <entry key="title.validation.report" lang="de" value="Schematron Validierungsbericht von " />
+  <entry key="title.validation.report" lang="fr" value="Rapport de validation Schematron de " />
+  <entry key="title.validation.report" lang="it" />
+
+  <entry key="Occurences" lang="en" value="Occurences" />
+  <entry key="Occurences" lang="de" value="Vorkommen" />
+  <entry key="Occurences" lang="fr" value="Occurences" />
+  <entry key="Occurences" lang="it" />
+
+  <entry key="pattern.filter" lang="en" value="Pattern filter" />
+  <entry key="pattern.filter" lang="de" value="Pattern Filter" />
+  <entry key="pattern.filter" lang="fr" value="Filtre des motifs" />
+  <entry key="pattern.filter" lang="it" />
+
+  <entry key="rules.filter" lang="en" value="Rules filter" />
+  <entry key="rules.filter" lang="de" value="Regel Filter" />
+  <entry key="rules.filter" lang="fr" value="Filtre des règles" />
+  <entry key="rules.filter" lang="it" />
+
+  <entry key="displayed.messages" lang="en" value="Displayed messages" />
+  <entry key="displayed.messages" lang="de" value="Angezeigte Meldungen" />
+  <entry key="displayed.messages" lang="fr" value="Messages affichés" />
+  <entry key="displayed.messages" lang="it" />
+
+  <entry key="see.tooltip" lang="en" value="Link zur Detailbeschreibung der Regel" />
+  <entry key="see.tooltip" lang="de" value="Link zur Detailbeschreibung der Regel" />
+  <entry key="see.tooltip" lang="fr" value="Link zur Detailbeschreibung der Regel" />
+  <entry key="see.tooltip" lang="it" value="Link zur Detailbeschreibung der Regel" />
+
+  <!-- Common Localized Text Entries -->
+
+  <entry key="pattern.id" lang="en" value="Pattern ID" />
+  <entry key="pattern.id" lang="de" value="Pattern ID" />
+  <entry key="pattern.id" lang="fr" value="ID du motif" />
+  <entry key="pattern.id" lang="it" value="[pattern.id@it]" />
+
+  <entry key="rule.id" lang="en" value="Rule ID" />
+  <entry key="rule.id" lang="de" value="Regel ID" />
+  <entry key="rule.id" lang="fr" value="ID de la règle" />
+  <entry key="rule.id" lang="it" value="ID de la regola" />
+
+  <!-- Unused localized text -->
+
+  <entry key="SchDisplayValidationResults" lang="en" value="Display validation results:" />
+  <entry key="SchDisplayValidationResults" lang="de" value="Validierungsresultate anzeigen:" />
+  <entry key="SchDisplayValidationResults" lang="fr" value="Affichage des résultats de la validation:" />
+  <entry key="SchDisplayValidationResults" lang="it" value="SchDisplayValidationResults dbd it:" />
+
+</dictionary>
