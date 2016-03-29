@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
  */
 public class ParticipantRole {
 
-	/** The m participant role. */
+	/** The MDHT participant role object. */
 	org.openhealthtools.mdht.uml.cda.ParticipantRole mParticipantRole;
 
 	/**
@@ -44,7 +44,7 @@ public class ParticipantRole {
 	 * Instantiates a new participant role.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public ParticipantRole(org.openhealthtools.mdht.uml.cda.ParticipantRole mdht) {
 		this.mParticipantRole = mdht;
@@ -54,7 +54,7 @@ public class ParticipantRole {
 	 * Adds the address.
 	 *
 	 * @param address
-	 *          the address
+	 *            the address
 	 */
 	public void addAddress(Address address) {
 		mParticipantRole.getAddrs().add(address.copyMdhtAdress());
@@ -64,7 +64,7 @@ public class ParticipantRole {
 	 * Adds the id.
 	 *
 	 * @param id
-	 *          the id
+	 *            the id
 	 */
 	public void addId(Identificator id) {
 		mParticipantRole.getIds().add(id.getIi());
@@ -144,7 +144,7 @@ public class ParticipantRole {
 	 * Sets the class code.
 	 *
 	 * @param classCode
-	 *          the new class code
+	 *            the new class code
 	 */
 	public void setClassCode(RoleClassRoot classCode) {
 		mParticipantRole.setClassCode(classCode);
@@ -154,7 +154,7 @@ public class ParticipantRole {
 	 * Sets the playing entity.
 	 *
 	 * @param playingEntity
-	 *          the new playing entity
+	 *            the new playing entity
 	 */
 	public void setPlayingEntity(PlayingEntity playingEntity) {
 		mParticipantRole.setPlayingEntity(playingEntity.copyPlayingEntity());
@@ -165,8 +165,9 @@ public class ParticipantRole {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param telecoms
-	 *          <div class="en">the new telecoms</div> <div class="de">das neue
-	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new telecoms</div> <div class="de">das
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mParticipantRole.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));

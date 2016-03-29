@@ -28,7 +28,7 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	/**
 	 * Instantiates a new abstract specimen act.
 	 */
-	protected AbstractSpecimenAct() {
+	public AbstractSpecimenAct() {
 		super(LABFactory.eINSTANCE.createSpecimenAct().init());
 	}
 
@@ -38,7 +38,7 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected AbstractSpecimenAct(Act mdht) {
+	public AbstractSpecimenAct(Act mdht) {
 		super(mdht);
 	}
 
@@ -47,7 +47,7 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	 *
 	 * @return the status code
 	 */
-	protected Code getStatusCode() {
+	public Code getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
 			return new Code(getMdht().getStatusCode());
 		}
@@ -60,7 +60,7 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	 * @param code
 	 *            the new status code
 	 */
-	protected void setStatusCode(Code code) {
+	public void setStatusCode(Code code) {
 		getMdht().setStatusCode(code.getCS());
 	}
 

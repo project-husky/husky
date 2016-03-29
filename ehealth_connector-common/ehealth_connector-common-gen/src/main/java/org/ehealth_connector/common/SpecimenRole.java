@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
  */
 public class SpecimenRole extends PlayingEntity {
 
-	/** The m specimen role. */
+	/** The MDHT specimen role. */
 	org.openhealthtools.mdht.uml.cda.SpecimenRole mSpecimenRole;
 
 	/**
@@ -41,7 +41,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * Instantiates a new specimen role.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public SpecimenRole(org.openhealthtools.mdht.uml.cda.SpecimenRole mdht) {
 		super(mdht.getSpecimenPlayingEntity());
@@ -52,7 +52,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * Adds the id.
 	 *
 	 * @param id
-	 *          the id
+	 *            the id
 	 */
 	public void addId(Identificator id) {
 		mSpecimenRole.getIds().add(id.getIi());

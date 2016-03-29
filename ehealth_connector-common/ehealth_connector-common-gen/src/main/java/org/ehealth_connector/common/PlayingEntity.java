@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
  */
 public class PlayingEntity {
 
-	/** The m playing entity. */
+	/** The MDHT playing entity. */
 	org.openhealthtools.mdht.uml.cda.PlayingEntity mPlayingEntity;
 
 	/**
@@ -43,7 +43,7 @@ public class PlayingEntity {
 	 * Instantiates a new playing entity.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public PlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity mdht) {
 		mPlayingEntity = mdht;
@@ -54,7 +54,7 @@ public class PlayingEntity {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param name
-	 *          name
+	 *            name
 	 */
 	public void addName(Name name) {
 		mPlayingEntity.getNames().add(name.copyMdhtPn());
@@ -106,7 +106,7 @@ public class PlayingEntity {
 	 * Sets the code.
 	 *
 	 * @param code
-	 *          the new code
+	 *            the new code
 	 */
 	public void setCode(Code code) {
 		mPlayingEntity.setCode(code.getCE());

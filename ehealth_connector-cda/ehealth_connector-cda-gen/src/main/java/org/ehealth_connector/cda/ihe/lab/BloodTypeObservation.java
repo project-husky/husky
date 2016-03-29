@@ -27,7 +27,7 @@ public class BloodTypeObservation extends
 	/**
 	 * Instantiates a new blood type observation.
 	 */
-	protected BloodTypeObservation() {
+	public BloodTypeObservation() {
 		super(LABFactory.eINSTANCE.createBloodTypeObservation());
 	}
 
@@ -37,7 +37,7 @@ public class BloodTypeObservation extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected BloodTypeObservation(
+	public BloodTypeObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.BloodTypeObservation mdht) {
 		super(mdht);
 	}

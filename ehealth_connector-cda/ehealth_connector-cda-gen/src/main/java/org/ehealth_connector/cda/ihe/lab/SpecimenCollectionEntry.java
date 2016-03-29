@@ -71,6 +71,15 @@ public class SpecimenCollectionEntry
 	}
 
 	/**
+	 * Gets the effective time.
+	 *
+	 * @return the effective time
+	 */
+	public Date getEffectiveTime() {
+		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+	}
+
+	/**
 	 * Gets the participants.
 	 *
 	 * @return the participants
@@ -95,6 +104,16 @@ public class SpecimenCollectionEntry
 	}
 
 	/**
+	 * Sets the effective time.
+	 *
+	 * @param date
+	 *            the new effective time
+	 */
+	public void setEffectiveTime(Date date) {
+		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
+	}
+
+	/**
 	 * Sets the specimen received entry.
 	 *
 	 * @param entry
@@ -114,25 +133,6 @@ public class SpecimenCollectionEntry
 		}
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
-	}
-
-	/**
-	 * Gets the effective time.
-	 *
-	 * @return the effective time
-	 */
-	protected Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
-	}
-
-	/**
-	 * Sets the effective time.
-	 *
-	 * @param date
-	 *            the new effective time
-	 */
-	protected void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
 	}
 
 }

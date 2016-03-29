@@ -46,7 +46,7 @@ public class VitalSignsObservation
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected VitalSignsObservation(VitalSignObservation mdht) {
+	public VitalSignsObservation(VitalSignObservation mdht) {
 		super(mdht);
 	}
 
@@ -60,16 +60,14 @@ public class VitalSignsObservation
 		getMdht().getMethodCodes().add(code.getCE());
 	}
 
-	// Siehe VitalSignObservation - VitalSignCodes von Thomas
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.MdhtObservationFacade#addValue(org.ehealth_connector.common.Value)
 	 */
-	// Siehe IHE_PCC_TF_2 6.3.4.22.3
 	@Override
 	public void addValue(Value value) {
-
+		getMdht().getValues().add(value.getValue());
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class LaboratoryIsolateOrganizer extends
 	/**
 	 * Instantiates a new laboratory isolate organizer.
 	 */
-	protected LaboratoryIsolateOrganizer() {
+	public LaboratoryIsolateOrganizer() {
 		super(LABFactory.eINSTANCE.createLaboratoryIsolateOrganizer().init());
 	}
 
@@ -41,7 +41,7 @@ public class LaboratoryIsolateOrganizer extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected LaboratoryIsolateOrganizer(
+	public LaboratoryIsolateOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer mdht) {
 		super(mdht);
 	}

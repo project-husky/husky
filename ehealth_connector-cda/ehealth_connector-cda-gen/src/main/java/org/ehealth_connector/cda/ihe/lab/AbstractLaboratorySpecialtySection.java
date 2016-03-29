@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
  */
 public abstract class AbstractLaboratorySpecialtySection extends
 		MdhtSectionFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection> {
-	
+
 	/**
 	 * Instantiates a new abstract laboratory specialty section.
 	 */

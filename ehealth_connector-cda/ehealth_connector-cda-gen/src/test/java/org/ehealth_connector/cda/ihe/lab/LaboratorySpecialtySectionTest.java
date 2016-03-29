@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.ch.lab;
+package org.ehealth_connector.cda.ihe.lab;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

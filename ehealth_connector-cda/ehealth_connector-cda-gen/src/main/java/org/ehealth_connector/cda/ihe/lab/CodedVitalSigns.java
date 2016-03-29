@@ -33,7 +33,7 @@ public class CodedVitalSigns
 	/**
 	 * Instantiates a new coded vital signs.
 	 */
-	protected CodedVitalSigns() {
+	public CodedVitalSigns() {
 		this(LanguageCode.ENGLISH);
 	}
 
@@ -43,7 +43,7 @@ public class CodedVitalSigns
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected CodedVitalSigns(CodedVitalSignsSection mdht) {
+	public CodedVitalSigns(CodedVitalSignsSection mdht) {
 		super(mdht);
 	}
 
@@ -53,7 +53,7 @@ public class CodedVitalSigns
 	 * @param languageCode
 	 *            the language code
 	 */
-	protected CodedVitalSigns(LanguageCode languageCode) {
+	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 
 		switch (languageCode) {

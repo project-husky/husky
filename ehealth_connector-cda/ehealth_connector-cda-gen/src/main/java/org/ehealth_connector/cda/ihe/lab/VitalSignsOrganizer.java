@@ -15,11 +15,8 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.ihe.lab;
 
-import java.util.List;
-
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.enums.NullFlavor;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 
 /**
@@ -32,7 +29,7 @@ public class VitalSignsOrganizer
 	/**
 	 * Instantiates a new vital signs organizer.
 	 */
-	protected VitalSignsOrganizer() {
+	public VitalSignsOrganizer() {
 		super(IHEFactory.eINSTANCE.createVitalSignsOrganizer().init());
 	}
 
@@ -42,7 +39,7 @@ public class VitalSignsOrganizer
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected VitalSignsOrganizer(org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer mdht) {
+	public VitalSignsOrganizer(org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer mdht) {
 		super(mdht);
 	}
 
@@ -64,34 +61,5 @@ public class VitalSignsOrganizer
 	 */
 	public void addVitalSignsObservation(VitalSignsObservation observation) {
 		getMdht().addObservation(observation.copy());
-	}
-
-	/**
-	 * Gets the author list.
-	 *
-	 * @return the author list
-	 */
-	public List<Author> getAuthorList() {
-		return null;
-	}
-
-	/**
-	 * Gets the vital signs observations.
-	 *
-	 * @return the vital signs observations
-	 */
-	public List<VitalSignsObservation> getVitalSignsObservations() {
-		return null;
-		// getMdht().getVitalSignObservations().
-	}
-
-	/**
-	 * Sets the effective time.
-	 *
-	 * @param date
-	 *            the new effective time
-	 */
-	public void setEffectiveTime(NullFlavor date) {
-
 	}
 }

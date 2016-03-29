@@ -23,11 +23,11 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
  */
 public class LaboratoryReportDataProcessingEntry
 		extends AbstractLaboratoryReportDataProcessingEntry {
-	
+
 	/**
 	 * Instantiates a new laboratory report data processing entry.
 	 */
-	public LaboratoryReportDataProcessingEntry() {
+	protected LaboratoryReportDataProcessingEntry() {
 		super(LABFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init());
 	}
 
@@ -37,7 +37,7 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param mdht
 	 *            the mdht
 	 */
-	public LaboratoryReportDataProcessingEntry(
+	protected LaboratoryReportDataProcessingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
 	}
@@ -47,7 +47,7 @@ public class LaboratoryReportDataProcessingEntry
 	 *
 	 * @return the specimen act
 	 */
-	public org.ehealth_connector.cda.ihe.lab.SpecimenAct getSpecimenAct() {
+	protected org.ehealth_connector.cda.ihe.lab.SpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
 			return new SpecimenAct(
 					(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) getMdht().getAct());
@@ -60,7 +60,7 @@ public class LaboratoryReportDataProcessingEntry
 	 *
 	 * @return the specimen act ihe
 	 */
-	public SpecimenAct getSpecimenActIhe() {
+	protected SpecimenAct getSpecimenActIhe() {
 		if (getMdht().getAct() != null) {
 			return new SpecimenAct(
 					(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) getMdht().getAct());
@@ -74,7 +74,8 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param specimenAct
 	 *            the new specimen act
 	 */
-	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
+	protected void setSpecimenAct(
+			org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
 		getMdht().setAct(specimenAct.getMdht());
 	}
 }

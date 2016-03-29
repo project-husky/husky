@@ -31,7 +31,7 @@ public class NotificationOrganizer extends
 	/**
 	 * Instantiates a new notification organizer.
 	 */
-	protected NotificationOrganizer() {
+	public NotificationOrganizer() {
 		super(LABFactory.eINSTANCE.createNotificationOrganizer().init());
 	}
 
@@ -41,7 +41,7 @@ public class NotificationOrganizer extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected NotificationOrganizer(
+	public NotificationOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.NotificationOrganizer mdht) {
 		super(mdht);
 	}

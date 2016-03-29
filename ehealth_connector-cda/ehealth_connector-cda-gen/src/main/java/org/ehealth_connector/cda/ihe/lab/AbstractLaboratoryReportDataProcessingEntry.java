@@ -21,7 +21,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 /**
  * The Class AbstractLaboratoryReportDataProcessingEntry.
  */
-public class AbstractLaboratoryReportDataProcessingEntry extends
+public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 		MdhtEntryFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry> {
 
 	/**

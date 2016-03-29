@@ -32,7 +32,7 @@ public class SpecimenAct extends AbstractSpecimenAct {
 	 * same specimen, this specimen SHALL be attached to the top Specimen Act as
 	 * a specimen collection procedure sub-element.
 	 */
-	protected SpecimenAct() {
+	public SpecimenAct() {
 		super();
 	}
 
@@ -42,7 +42,7 @@ public class SpecimenAct extends AbstractSpecimenAct {
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
+	public SpecimenAct(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct mdht) {
 		super(mdht);
 	}
 
@@ -52,7 +52,7 @@ public class SpecimenAct extends AbstractSpecimenAct {
 	 * @see org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct#getStatusCode()
 	 */
 	@Override
-	protected Code getStatusCode() {
+	public Code getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
 			return new Code(getMdht().getStatusCode());
 		}
@@ -65,7 +65,7 @@ public class SpecimenAct extends AbstractSpecimenAct {
 	 * @see org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct#setStatusCode(org.ehealth_connector.common.Code)
 	 */
 	@Override
-	protected void setStatusCode(Code code) {
+	public void setStatusCode(Code code) {
 		getMdht().setStatusCode(code.getCS());
 	}
 

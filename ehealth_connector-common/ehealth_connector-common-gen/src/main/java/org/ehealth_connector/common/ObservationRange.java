@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
  */
 public class ObservationRange {
 
-	/** The m obs r. */
+	/** The MDHT Observation Range Object */
 	org.openhealthtools.mdht.uml.cda.ObservationRange mObsR;
 
 	/**
@@ -42,7 +42,7 @@ public class ObservationRange {
 	 * Instantiates a new observation range.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public ObservationRange(org.openhealthtools.mdht.uml.cda.ObservationRange mdht) {
 		mObsR = mdht;
@@ -76,7 +76,7 @@ public class ObservationRange {
 	 * Sets the interpretation code.
 	 *
 	 * @param code
-	 *          the new interpretation code
+	 *            the new interpretation code
 	 */
 	public void setInterpretationCode(ObservationInterpretation code) {
 		mObsR.setInterpretationCode(code.getCE());
@@ -86,7 +86,7 @@ public class ObservationRange {
 	 * Sets the value.
 	 *
 	 * @param value
-	 *          the new value
+	 *            the new value
 	 */
 	public void setValue(Value value) {
 		mObsR.setValue(value.getValue());

@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  */
 public class Participant {
 
-	/** The m participant. */
+	/** The MDHT participant object. */
 	Participant2 mParticipant;
 
 	/**
@@ -44,7 +44,7 @@ public class Participant {
 	 * Standard mdht constructor.
 	 *
 	 * @param mdht
-	 *          the mdht object
+	 *            the mdht object
 	 */
 	public Participant(Participant2 mdht) {
 		this.mParticipant = mdht;
@@ -102,7 +102,7 @@ public class Participant {
 	 * Sets the ParticipantRole.
 	 *
 	 * @param p
-	 *          the participantRole
+	 *            the participantRole
 	 */
 	public void setParticipantRole(org.ehealth_connector.common.ParticipantRole p) {
 		mParticipant.setParticipantRole(p.copy());
@@ -112,7 +112,7 @@ public class Participant {
 	 * Sets the time as Data object.
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 */
 	public void setTime(Date date) {
 		try {
@@ -126,7 +126,7 @@ public class Participant {
 	 * Sets the type code for this participation.
 	 *
 	 * @param typeCode
-	 *          the typeCode
+	 *            the typeCode
 	 */
 	public void setTypeCode(ParticipationType typeCode) {
 		mParticipant.setTypeCode(typeCode);

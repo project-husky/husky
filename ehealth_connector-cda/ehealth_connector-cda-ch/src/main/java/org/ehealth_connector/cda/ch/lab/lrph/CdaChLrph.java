@@ -532,10 +532,8 @@ public class CdaChLrph
 	// applyPrivacyFilterInitials(getMdht());
 	// break;
 	// case "conditional":
-	// // TODO
 	// break;
 	// case "hiv":
-	// // TODO
 	// break;
 	// }
 	// }

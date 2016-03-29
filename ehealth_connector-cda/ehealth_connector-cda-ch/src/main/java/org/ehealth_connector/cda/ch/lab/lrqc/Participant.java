@@ -68,9 +68,6 @@ public class Participant extends MdhtFacade<Participant1> {
 		this();
 		if (isPhysician) {
 			getMdht().setTypeCode(ParticipationType.IND);
-			// TODO
-			// getMdht().getAssociatedEntity().setClassCode();
-			// getMdht().getAssociatedEntity().setClassCode(RoleClassAssociati);
 		}
 		addGlnId(gln);
 	}

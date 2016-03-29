@@ -173,12 +173,12 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	}
 
 	/**
-	 * Sets the outbreak identification.
+	 * Sets the outbreak identification. Convenience Method that creates the
+	 * NotificationOrganizer automatically.
 	 *
 	 * @param outbreakIdentification
 	 *            the new outbreak identification
 	 */
-	// Convenience Method that creates the NotificationOrganizer automatically
 	public void setOutbreakIdentification(
 			org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation outbreakIdentification) {
 		this.setNotificationOrganizer(

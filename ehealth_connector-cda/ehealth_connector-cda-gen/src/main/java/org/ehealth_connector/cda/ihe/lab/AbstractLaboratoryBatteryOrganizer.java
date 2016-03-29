@@ -39,7 +39,7 @@ public abstract class AbstractLaboratoryBatteryOrganizer extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected AbstractLaboratoryBatteryOrganizer(
+	public AbstractLaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
 	}

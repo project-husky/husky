@@ -30,7 +30,7 @@ public class OutbreakIdentificationObservation extends
 	/**
 	 * Instantiates a new outbreak identification observation.
 	 */
-	protected OutbreakIdentificationObservation() {
+	public OutbreakIdentificationObservation() {
 		super(LABFactory.eINSTANCE.createOutbreakIdentification().init());
 	}
 
@@ -40,7 +40,7 @@ public class OutbreakIdentificationObservation extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected OutbreakIdentificationObservation(
+	public OutbreakIdentificationObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.OutbreakIdentification mdht) {
 		super(mdht);
 	}

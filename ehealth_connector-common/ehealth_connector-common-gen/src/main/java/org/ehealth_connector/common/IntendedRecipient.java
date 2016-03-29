@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
  */
 public class IntendedRecipient {
 
-	/** The m intended recipient. */
+	/** The MDHT intended recipient object. */
 	protected org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mIntendedRecipient;
 
 	/**
@@ -38,7 +38,8 @@ public class IntendedRecipient {
 	 */
 	public IntendedRecipient() {
 		this.mIntendedRecipient = LABFactory.eINSTANCE.createIntendedRecipient().init();
-		this.mIntendedRecipient.setIntendedRecipient(CDAFactory.eINSTANCE.createIntendedRecipient());
+		this.mIntendedRecipient
+				.setIntendedRecipient(CDAFactory.eINSTANCE.createIntendedRecipient());
 	}
 
 	/**
@@ -47,13 +48,13 @@ public class IntendedRecipient {
 	 * constructed with the given name.
 	 *
 	 * @param name
-	 *          the name
+	 *            the name
 	 * @param id
-	 *          the id
+	 *            the id
 	 * @param address
-	 *          the address
+	 *            the address
 	 * @param telecoms
-	 *          the telecoms
+	 *            the telecoms
 	 */
 	public IntendedRecipient(Name name, Identificator id, Address address, Telecoms telecoms) {
 		this();
@@ -68,7 +69,7 @@ public class IntendedRecipient {
 	 * Standard mdht constructor.
 	 *
 	 * @param mdht
-	 *          the mdht object
+	 *            the mdht object
 	 */
 	public IntendedRecipient(org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mdht) {
 		this.mIntendedRecipient = mdht;
@@ -78,13 +79,13 @@ public class IntendedRecipient {
 	 * Convenience constructor with required elements, if the recipient is an
 	 * organization. The according receivingOrganization element will be
 	 * constructed with the same data as the IntendedRecipient (Id, addr,
-	 * telecoms). These elements have to be present in the Organization object. If
-	 * the Organization has a name, it will be set as the name for the information
-	 * recipient (intendedRecipient/informationRecipient/name[0] =
+	 * telecoms). These elements have to be present in the Organization object.
+	 * If the Organization has a name, it will be set as the name for the
+	 * information recipient (intendedRecipient/informationRecipient/name[0] =
 	 * organization/name[0])
 	 *
 	 * @param organization
-	 *          the organization
+	 *            the organization
 	 */
 	public IntendedRecipient(Organization organization) {
 		this();
@@ -110,7 +111,7 @@ public class IntendedRecipient {
 	 * Assigns a post address.
 	 *
 	 * @param address
-	 *          the post address
+	 *            the post address
 	 */
 	public void addAddress(Address address) {
 		mIntendedRecipient.getIntendedRecipient().getAddrs().add(address.copyMdhtAdress());
@@ -120,7 +121,7 @@ public class IntendedRecipient {
 	 * Assigns an id.
 	 *
 	 * @param identificator
-	 *          the id
+	 *            the id
 	 */
 	public void addId(Identificator identificator) {
 		mIntendedRecipient.getIntendedRecipient().getIds().add(identificator.getIi());
@@ -209,7 +210,7 @@ public class IntendedRecipient {
 	 * Sets the person, who receives the information.
 	 *
 	 * @param person
-	 *          the person
+	 *            the person
 	 */
 	public void setInformationRecipient(Person person) {
 		mIntendedRecipient.getIntendedRecipient().setInformationRecipient(person.copyMdhtPerson());
@@ -223,9 +224,9 @@ public class IntendedRecipient {
 	 *
 	 *
 	 * @param organization
-	 *          <div class="en">the new organization</div> <div class="de">die
-	 *          neue Organisation</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <div class="en">the new organization</div> <div class="de">die
+	 *            neue Organisation</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
 		mIntendedRecipient.getIntendedRecipient()
@@ -237,8 +238,9 @@ public class IntendedRecipient {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param telecoms
-	 *          <div class="en">the new telecoms</div> <div class="de">das neue
-	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new telecoms</div> <div class="de">das
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mIntendedRecipient.getIntendedRecipient().getTelecoms()
