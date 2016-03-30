@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,20 +22,21 @@ import org.w3c.dom.Document;
 public class ObservationMediaEntryTest extends TestUtils {
 
 	@Test
-	public void modelTest() throws XPathExpressionException, FileNotFoundException {
-		ObservationMediaEntry o = new ObservationMediaEntry();
+	public void modelTest() throws XPathExpressionException, IOException {
+		final ObservationMediaEntry o = new ObservationMediaEntry();
 
 		// set Image
 		// Read a sample file (not an image), encode it into the
 		// ObservationMediaEntry and write it to the disc
-		InputStream is = this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
-		OutputStream os = new FileOutputStream("ObservationMediaTest.xml");
+		final InputStream is = this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
+
+		final OutputStream os = new FileOutputStream(File.createTempFile("ObservationMediaTest", ".xml"));
 
 		try {
 			o.setObject(is, LabObservationMediaMimeType.BMP_IMAGE);
 			o.getObject(os);
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 		o.setObservationMediaId("TestRef");
@@ -46,7 +47,7 @@ public class ObservationMediaEntryTest extends TestUtils {
 		assertTrue(xExist(document, "//value[@representation='B64']"));
 
 		// add comment
-		SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
+		final SectionAnnotationCommentEntry sac = new SectionAnnotationCommentEntry();
 		sac.setContentIdReference("TestRef");
 		o.addCommentEntry(sac);
 		assertFalse(o.getCommentEntryList().isEmpty());
