@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-main</artifactId>
@@ -91,11 +90,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<!-- eclipse stuff -->
 
 			<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
-			<!-- dependency>
-				<groupId>net.sourceforge.lpg</groupId>
-				<artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId>
-				<version>1.1.0.v200803061910</version>
-			</dependency -->
+			<!-- dependency> <groupId>net.sourceforge.lpg</groupId> <artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId> <version>1.1.0.v200803061910</version> 
+				</dependency -->
 
 			<!-- hl7 -->
 			<dependency>
@@ -111,25 +107,25 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			</dependency>
 
 
-			<!--  build from maven model project -->
+			<!-- build from maven model project -->
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 				<version>${oht.mdht.cda.ch.version}</version>
 			</dependency>
-						
+
 			<dependency>
 				<groupId>org.openhealthtools.mdht.cda</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
 				<version>${oht.mdht.cda.ch.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.openhealthtools.mdht.cda</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ihe</artifactId>
 				<version>${oht.mdht.cda.version}</version>
 			</dependency>
-			
+
 
 			<!-- open health tools ihe utils -->
 			<dependency>
@@ -284,8 +280,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			</dependency>
 
 			<!-- hapi fhir -->
-			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> 
-				<version>${hapi.fhir.version}</version> </dependency> -->
+			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> <version>${hapi.fhir.version}</version> </dependency> -->
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>hapi-fhir-structures-dstu2</artifactId>
@@ -399,6 +394,18 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 				<scope>provided</scope>
 			</dependency>
 
+			<!-- validator stuff -->
+			<dependency>
+				<groupId>net.sf.saxon</groupId>
+				<artifactId>Saxon-HE</artifactId>
+				<version>9.7.0-3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.pdftools</groupId>
+				<artifactId>VALA</artifactId>
+				<version>1.0</version>
+			</dependency>
+
 			<!-- test stuff -->
 			<dependency>
 				<groupId>junit</groupId>
@@ -476,8 +483,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
-							<!-- simpler configuration without reportSets available for usual 
-								cases -->
+							<!-- simpler configuration without reportSets available for usual cases -->
 							<reports>
 								<report>dependencies</report>
 								<report>scm</report>
@@ -711,8 +717,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 						<configuration>
 							<target>
 								<property environment="ikvmc.executable" />
-								<available file="commandname" filepath="${env.PATH}"
-									property="ikvmc.present" />
+								<available file="commandname" filepath="${env.PATH}" property="ikvmc.present" />
 							</target>
 						</configuration>
 					</plugin>

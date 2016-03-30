@@ -1,16 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.ehealth_connector</groupId>
-    <artifactId>ehealth_connector-main</artifactId>
-    <version>1.3-SNAPSHOT</version>
-  </parent>
-  <groupId>org.ehealth_connector.validation</groupId>
-  <artifactId>ehealth_connector-validation</artifactId>
-  <packaging>pom</packaging>
-  <name>eHealthConnector Validation</name>
-  <modules>
-  	<module>ehealth_connector-validation-service</module>
-  	<module>ehealth_connector-validation-report</module>
-  </modules>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.ehealth_connector.validation</groupId>
+	<artifactId>ehealth_connector-validation</artifactId>
+	<packaging>pom</packaging>
+	<name>eHealthConnector Validation</name>
+
+	<parent>
+		<groupId>org.ehealth_connector</groupId>
+		<artifactId>ehealth_connector-main</artifactId>
+		<version>1.3-SNAPSHOT</version>
+	</parent>
+
+	<modules>
+		<module>ehealth_connector-validation-service</module>
+		<module>ehealth_connector-validation-report</module>
+	</modules>
 </project>
