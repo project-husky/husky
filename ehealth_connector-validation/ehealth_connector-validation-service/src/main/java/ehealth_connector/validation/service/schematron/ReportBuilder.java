@@ -145,17 +145,17 @@ public class ReportBuilder {
 		t1.transform(in, baos);
 		byte[] svrl = baos.toByteArray();
 		
-		/*Test
+		//Test
 		OutputStream outputStream = null;
 		try {
-			outputStream = new FileOutputStream ("S:/smaps/medshare/eHC/Demo/output/Report.txt");
+			outputStream = new FileOutputStream ("S:/smaps/medshare/eHC/Demo/output/Report2.txt");
 			baos.writeTo(outputStream);
 			outputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Testende*/
+		//Testende
 		return svrl;
 	}
 	/**

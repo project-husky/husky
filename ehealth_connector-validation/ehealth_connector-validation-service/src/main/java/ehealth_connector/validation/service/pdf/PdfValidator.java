@@ -31,6 +31,7 @@ public class PdfValidator {
 
 	private Configuration config;
 	private String pdfLevel;
+	private ArrayList<PdfValidationResult>pdfValidationResults;
 	
 	public PdfValidator(Configuration config) {
 		this.config = config;
@@ -146,7 +147,7 @@ public class PdfValidator {
 			selector.setContextItem(hl7Doc);
 			XdmValue children = selector.evaluate();
 			if (children.size() > 0) {
-				ArrayList<PdfValidationResult>pdfValidationResults = new ArrayList<PdfValidationResult>();
+				pdfValidationResults = new ArrayList<PdfValidationResult>();
 				for (XdmItem item : children) {
 					XdmNode nonXMLBodyNode = (XdmNode) item;
 					String pdf = item.getStringValue().trim();// .replaceFirst("\n",
@@ -160,5 +161,13 @@ public class PdfValidator {
 				}
 			}
 				
+	}
+
+	public ArrayList<PdfValidationResult> getPdfValidationResults() {
+		return pdfValidationResults;
+	}
+
+	public void setPdfValidationResults(ArrayList<PdfValidationResult> pdfValidationResults) {
+		this.pdfValidationResults = pdfValidationResults;
 	}
 }
