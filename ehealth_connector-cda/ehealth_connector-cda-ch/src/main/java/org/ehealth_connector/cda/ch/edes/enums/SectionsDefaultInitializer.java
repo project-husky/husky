@@ -141,6 +141,7 @@ public class SectionsDefaultInitializer {
 		observation.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 
 		observation.getIds().add(getNullFlavorIi());
+		observation.setCode(getNullFlavorCd());
 		observation.setText(getTodoText());
 		observation.setStatusCode(getCS("completed"));
 		observation.setEffectiveTime(getNullFlavorIVL_TSLow());
