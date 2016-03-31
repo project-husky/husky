@@ -17,7 +17,9 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -31,6 +33,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
+import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -59,7 +62,8 @@ public class PharmManufacturedMaterialEntryTest {
 
 		Document document = entry.getDocument(true);
 
-		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
+		XPathExpression expr = xpath
+				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -78,7 +82,9 @@ public class PharmManufacturedMaterialEntryTest {
 		assertEquals(expirationTime, entry.getExpirationTime());
 
 		Document document = entry.getDocument(true);
-		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
+
+		XPathExpression expr = xpath
+				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -166,6 +172,20 @@ public class PharmManufacturedMaterialEntryTest {
 		assertEquals(1, nodes.getLength());
 	}
 
+	@Test
+	public void testPharmNamespace() {
+		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
+		Code formCode = new Code("2.16.840.1.113883.5.85", "TAB", "Tablet");
+		entry.setFormCode(formCode);
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		try {
+			CDAUtil.saveSnippet(entry.getMdht(), boas);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertTrue(boas.toString().contains("pharm:"));
+	}
+
 	// <pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
 	// <pharm:quantity>
 	// <pharm:numerator unit="mg" value="1000"
@@ -185,7 +205,8 @@ public class PharmManufacturedMaterialEntryTest {
 	public void testSerializeEmpty() throws Exception {
 		final PharmManufacturedMaterialEntry entry = new PharmManufacturedMaterialEntry();
 		final Document document = entry.getDocument(true);
-		XPathExpression expr = xpath.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
+		XPathExpression expr = xpath
+				.compile("//cda:templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		expr = xpath.compile("//cda:material[@classCode='MMAT' and @determinerCode='KIND']");

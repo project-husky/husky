@@ -38,11 +38,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * Implements the Base Class PharmaceuticalAdviceItemEntry from the IHE PHARM
- * Model.
+ * Implements the Base Class PharmaceuticalAdviceItemEntry from the IHE PHARM Model.
  */
-public class PharmaceuticalAdviceItemEntry
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry> {
+public class PharmaceuticalAdviceItemEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry> {
 
 	/**
 	 * Instantiates a new dipsen item entry.
@@ -55,7 +54,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Instantiates a new prescription item entry.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public PharmaceuticalAdviceItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceItemEntry().init());
@@ -66,9 +65,9 @@ public class PharmaceuticalAdviceItemEntry
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
-	 *
+	 * 
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected PharmaceuticalAdviceItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry mdht) {
@@ -79,7 +78,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Adds the precondition entry.
 	 *
 	 * @param entry
-	 *          the entry
+	 *            the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
 		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
@@ -151,9 +150,12 @@ public class PharmaceuticalAdviceItemEntry
 	public MedicationTreatmentPlanItemEntry getNewMedicationTreatmentPlanItemEntry() {
 		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
 				.getNewMedicationTreatmentPlanItemEntry() != null) {
-			return new MedicationTreatmentPlanItemEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-							.getNewMedicationTreatmentPlanItemEntry());
+			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (x_ActRelationshipEntryRelationship.REFR.equals(entryRelationship.getTypeCode())
+						&& entryRelationship.getInversionInd()!=null && entryRelationship.getInversionInd().booleanValue()==false) {
+					return new MedicationTreatmentPlanItemEntry((org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry) entryRelationship.getSubstanceAdministration());
+				}
+			}
 		}
 		return null;
 	}
@@ -197,8 +199,8 @@ public class PharmaceuticalAdviceItemEntry
 	public PharmaceuticalAdviceStatusList getPharmaceuticalAdviceStatusList() {
 		if (this.getMdht().getCode() != null) {
 			final Code code = new Code(this.getMdht().getCode());
-			if ((code != null)
-					&& PharmaceuticalAdviceStatusList.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			if ((code != null) && PharmaceuticalAdviceStatusList.CODE_SYSTEM_OID
+					.equals(code.getCodeSystem())) {
 				return PharmaceuticalAdviceStatusList.getEnum(code.getCode());
 			}
 		}
@@ -235,12 +237,13 @@ public class PharmaceuticalAdviceItemEntry
 
 	/**
 	 * Gets the text reference.
-	 *
+	 * 
 	 * @return the text reference
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -250,7 +253,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the dispense item reference entry.
 	 *
 	 * @param entry
-	 *          the new dispense item reference entry
+	 *            the new dispense item reference entry
 	 */
 	public void setDispenseItemReferenceEntry(DispenseItemReferenceEntry entry) {
 		DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
@@ -274,7 +277,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *          the new external document entry
+	 *            the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
@@ -290,7 +293,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *          the new identificator
+	 *            the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -303,7 +306,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the medication treatment plan item reference entry.
 	 *
 	 * @param entry
-	 *          the new medication treatment plan item reference entry
+	 *            the new medication treatment plan item reference entry
 	 */
 	public void setMedicationTreatmentPlanItemReferenceEntry(
 			MedicationTreatmentPlanItemReferenceEntry entry) {
@@ -328,7 +331,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the new medication treatment plan item entry.
 	 *
 	 * @param entry
-	 *          the new new medication treatment plan item entry
+	 *            the new new medication treatment plan item entry
 	 */
 	public void setNewMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry entry) {
 		MedicationTreatmentPlanItemEntry old = getNewMedicationTreatmentPlanItemEntry();
@@ -353,7 +356,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the new presciption entry.
 	 *
 	 * @param entry
-	 *          the new new presciption entry
+	 *            the new new presciption entry
 	 */
 	public void setNewPresciptionEntry(PrescriptionItemEntry entry) {
 		PrescriptionItemEntry old = getNewPresciptionEntry();
@@ -378,7 +381,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the pharmaceutical advice status.
 	 *
 	 * @param code
-	 *          the new pharmaceutical advice status
+	 *            the new pharmaceutical advice status
 	 */
 	public void setPharmaceuticalAdviceStatus(Code code) {
 		this.getMdht().setCode(code.getCD());
@@ -388,7 +391,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the medications special conditions.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 */
 	public void setPharmaceuticalAdviceStatus(PharmaceuticalAdviceStatusList code) {
 		if (code != null) {
@@ -400,7 +403,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the prescription item reference entry.
 	 *
 	 * @param entry
-	 *          the new prescription item reference entry
+	 *            the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
 		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
@@ -433,7 +436,7 @@ public class PharmaceuticalAdviceItemEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference
+	 *            the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

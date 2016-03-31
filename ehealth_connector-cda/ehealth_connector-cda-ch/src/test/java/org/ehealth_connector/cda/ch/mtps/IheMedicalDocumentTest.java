@@ -37,8 +37,6 @@ import org.w3c.dom.NodeList;
  */
 public class IheMedicalDocumentTest extends TestUtils {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
-
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
