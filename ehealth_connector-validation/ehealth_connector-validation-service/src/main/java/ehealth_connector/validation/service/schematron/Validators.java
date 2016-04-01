@@ -54,7 +54,7 @@ import net.sf.saxon.s9api.XsltExecutable;
  * </p>
  */
 public class Validators {
-	
+
 	/**
 	 * Implementation of an {@link Executor}, which executes the supplied
 	 * {@link Runnable} command directly in the current thread.
@@ -90,7 +90,7 @@ public class Validators {
 	 * Note that with this constructor the tasks will execute sequentially in
 	 * the current thread.
 	 * </p>
-	 * 
+	 *
 	 * @param factory
 	 *            the <cite>Schematron Rule-Set</cite> transformation factory.
 	 * @throws NullPointerException
@@ -110,7 +110,7 @@ public class Validators {
 	 * and compilation tasks sequentially in the current thread, for the case
 	 * where the specified executor is <tt>null</tt>.
 	 * </p>
-	 * 
+	 *
 	 * @param factory
 	 *            the <cite>Schematron Rule-Set</cite> transformation factory.
 	 * @param executor
@@ -162,7 +162,7 @@ public class Validators {
 	 * <p>
 	 * Note that this method blocks until the validator is available.
 	 * </p>
-	 * 
+	 *
 	 * @param in
 	 *            the input file (a <cite>Schematron</cite> master file).
 	 * @param out
@@ -212,7 +212,7 @@ public class Validators {
 	 * <p>
 	 * Note that this method blocks until the validator is available.
 	 * </p>
-	 * 
+	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
 	 * @return the compiled validator stylesheet.
@@ -265,7 +265,7 @@ public class Validators {
 	 * then the cache is not consulted and each invocation triggers a rebuild of
 	 * the compiled stylesheet.
 	 * </p>
-	 * 
+	 *
 	 * @param in
 	 *            the input file (a <cite>Schematron</cite> master file).
 	 * @param out
@@ -305,7 +305,7 @@ public class Validators {
 	 * If the rule-set is persistable, then the output file equals the value
 	 * returned by the {@link #createOutputFile(File)} method.
 	 * </p>
-	 * 
+	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
 	 * @return the compiled validator stylesheet wrapped in a <tt>Future</tt>.
