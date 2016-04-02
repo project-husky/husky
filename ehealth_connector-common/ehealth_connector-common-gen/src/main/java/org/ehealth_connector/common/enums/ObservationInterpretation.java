@@ -26,14 +26,23 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public enum ObservationInterpretation {
 	//@formatter:off
+	/** <div class="de">Abnormal</div>. */
 	ABNORMAL("A", "Abnormal"),
+	/** <div class="de">Abnormal (alarmierend)</div>. */
 	ABNORMAL_ALERT("AA", "Abnormal alert"),
+	/** <div class="de">Oberhalb Toleranz</div>. */
 	HIGH("H", "High"),
+	/** <div class="de"Oberhalb Toleranz (alarmierend)</div>. */
 	HIGH_ALERT("HH", "High alert"),
+	/** <div class="de"Unterhalb Toleranz</div>. */
 	LOW("L", "Low"),
+	/** <div class="de"Unterhalb Toleranz (alarmierend)</div>. */
 	LOW_ALERT("LL", "Low alert"),
+	/** <div class="de">Normal</div>. */
 	NORMAL("N",	"Normal"),
+	/** <div class="de">Positiv</div>. */
 	POS("POS", "Positiv"),
+	/** <div class="de">Negativ</div>. */
 	NEG("NEG", "Negativ");
 	//@formatter:on
 

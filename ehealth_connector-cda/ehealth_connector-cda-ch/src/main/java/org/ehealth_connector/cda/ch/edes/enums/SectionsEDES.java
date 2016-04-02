@@ -62,6 +62,13 @@ public enum SectionsEDES implements ContentIdPrefix {
 	SOCIAL_HISTORY("29762-2", "sohi", "Sozial Anamnese", "Anamnèse sociale", "Anamnesi sociale", "Social History");
 	//@formatter:on
 
+	/**
+	 * Get the corresponding Enum constant for the section.
+	 * 
+	 * @param section
+	 *            the Section to lookup
+	 * @return the Enum constant or null if not found
+	 */
 	public static SectionsEDES getEnum(Section section) {
 		CE code = section.getCode();
 		if (code != null) {
@@ -96,6 +103,11 @@ public enum SectionsEDES implements ContentIdPrefix {
 		this.sectionTitleEn = sectionTitleEn;
 	}
 
+	/**
+	 * Create and initialize a new section corresponding to the Enum constant.
+	 * 
+	 * @return initialized section
+	 */
 	public Section createSection() {
 		SectionsDefaultInitializer initializer = new SectionsDefaultInitializer();
 		switch (name()) {
@@ -170,6 +182,13 @@ public enum SectionsEDES implements ContentIdPrefix {
 		return null;
 	}
 
+	/**
+	 * Find the section section corresponding to the Enum constant in an
+	 * CdaChEdes document.
+	 * 
+	 * @param edesDocument
+	 * @return the section or null if not found
+	 */
 	public Section findSection(CdaChEdes edesDocument) {
 		for (final Section section : edesDocument.getSections()) {
 			if (section.getCode() != null) {
@@ -190,6 +209,14 @@ public enum SectionsEDES implements ContentIdPrefix {
 		return loincCode;
 	}
 
+	/**
+	 * Get the title of the section corresponding to the Enum constant, using
+	 * the LanguageCode.
+	 * 
+	 * @param languageCode
+	 *            LanguageCode the title should be in
+	 * @return the title of the section
+	 */
 	public String getSectionTitle(LanguageCode languageCode) {
 		String lcStr = LanguageCode.ENGLISH.getCodeValue();
 		if (languageCode != null) {
@@ -212,19 +239,19 @@ public enum SectionsEDES implements ContentIdPrefix {
 		return getSectionTitleDe();
 	}
 
-	public String getSectionTitleDe() {
+	private String getSectionTitleDe() {
 		return sectionTitleDe;
 	}
 
-	public String getSectionTitleEn() {
+	private String getSectionTitleEn() {
 		return sectionTitleEn;
 	}
 
-	public String getSectionTitleFr() {
+	private String getSectionTitleFr() {
 		return sectionTitleFr;
 	}
 
-	public String getSectionTitleIt() {
+	private String getSectionTitleIt() {
 		return sectionTitleIt;
 	}
 }

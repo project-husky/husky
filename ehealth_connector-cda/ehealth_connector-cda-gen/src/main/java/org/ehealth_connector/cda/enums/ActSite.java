@@ -25,60 +25,112 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public enum ActSite {
 	//@formatter:off
+	/** <div class="de">Ohren beidseits</div>. */
 	BILATERAL_EARS("BE", "Ohren beidseits", null, null, "bilateral ears"),
+	/** <div class="de">Nasenlöcher beidseits</div>. */
 	BILATERAL_NARES("BN", "Nasenlöcher beidseits", null, null, "bilateral nares"),
+	/** <div class="de">Augen beidseits</div>. */
 	BILITERAL_EYES("OU", "Augen beidseits", null, null, "biliteral eyes"),
 
+	/** <div class="de">Gesässbacke</div>. */
 	BUTTOCK("BU", "Gesässbacke", null, null, "buttock"),
+	/** <div class="de">Linke Fossa antecubitalis</div>. */
 	LEFT_ANTECUBITAL_FOSSA("LACF", "Linke Fossa antecubitalis", null, null, "left antecubital fossa"),
+	/** <div class="de">Linker vorderer Thorax</div>. */
 	LEFT_ANTERIOR_CHEST("LAC", "Linker vorderer Thorax", null, null, "left anterior chest"),
+	/** <div class="de">Linker Arm</div>. */
 	LEFT_ARM("LA", "Linker Arm", null, null, "left arm"),
+	/** <div class="de">Linker Deltoideus</div>. */
 	LEFT_DELTOID("LD", "Linker Deltoideus", null, null, "left deltoid"),
+	/** <div class="de">Linkes Ohr</div>. */
 	LEFT_EAR("LE", "Linkes Ohr", null, null, "left ear"),
+	/** <div class="de">Linke Jugularis externa</div>. */
 	LEFT_EXTERNAL_JUGULAR("LEJ", "Linke Jugularis externa", null, null, "left external jugular"),
+	/** <div class="de">Linkes Auge</div>. */
 	LEFT_EYE("OS", "Linkes Auge", null, null, "left eye"),
+	/** <div class="de">Linker Fuss</div>. */
 	LEFT_FOOT("LF", "Linker Fuss", null, null, "left foot"),
+	/** <div class="de">Linker Glutaeus medius</div>. */
 	LEFT_GLUTEUS_MEDIUS("LG", "Linker Glutaeus medius", null, null, "left gluteus medius"),
+	/** <div class="de">Linke Hand</div>. */
 	LEFT_HAND("LH", "Linke Hand", null, null, "left hand"),
+	/** <div class="de">Linke Jugularis interna</div>. */
 	LEFT_INTERNAL_JUGULAR("LIJ", "Linke Jugularis interna", null, null, "left internal jugular"),
+	/** <div class="de">Linker unterer Abdominal-Quadrant</div>. */
 	LEFT_LOWER_ABD_QUARANT("LLAQ", "Linker unterer Abdominal-Quadrant", null, null, "left lower abd quadrant"),
+	/** <div class="de">Linker distaler Unterarm</div>. */
 	LEFT_LOWER_FOREARM("LLFA", "Linker distaler Unterarm", null, null, "left lower forearm"),
+	/** <div class="de">Linker mittlerer Unterarm</div>. */
 	LEFT_MID_FOREARM("LMFA", "Linker mittlerer Unterarm", null, null, "left mid forearm"),
+	/** <div class="de">Linkes Nasenloch</div>. */
 	LEFT_NARIS("LN", "Linkes Nasenloch", null, null, "left naris"),
+	/** <div class="de">Linke hinterer Thorax</div>. */
 	LEFT_POSTERIOR_CHEST("LPC", "Linke hinterer Thorax", null, null, "left posterior chest"),
+	/** <div class="de">Linke Subclavia</div>. */
 	LEFT_SUBCLAVIAN("LSC", "Linke Subclavia", null, null, "left subclavian"),
+	/** <div class="de">Linker Oberschenkel</div>. */
 	LEFT_TIGH("LT", "Linker Oberschenkel", null, null, "left tigh"),
+	/** <div class="de">Linker oberer Abdominal‐Quadrant</div>. */
 	LEFT_UPPER_ABD_QUARANT("LUAQ", "Linker oberer Abdominal‐Quadrant", null, null, "left upper abd quadrant"),
+	/** <div class="de">Linker Obararm</div>. */
 	LEFT_UPPER_ARM("LUA", "Linker Obararm", null, null, "left upper arm"),
+	/** <div class="de">Linker proximaler Unterarm</div>. */
 	LEFT_UPPER_FOREARM("LUFA", "Linker proximaler Unterarm", null, null, "left upper forearm"),
 
+	/** <div class="de">Linker Vastus lateralis</div>. */
 	LEFT_VASTUS_LATERALIS("LVL", "Linker Vastus lateralis", null, null, "left vastus lateralis"),
+	/** <div class="de">Links ventragluteal</div>. */
 	LEFT_VENTRAGLUTEAL("LVG", "Links ventragluteal", null, null, "left ventragluteal"),
+	/** <div class="de">perianal</div>. */
 	PERIANAL("PA", "perianal", null, null, "perianal"),
+	/** <div class="de">perineal</div>. */
 	PERINEAL("PERIN", "perineal", null, null, "perineal"),
+	/** <div class="de">Rechte Fossa antecubitalis</div>. */
 	RIGHT_ANTECUBITAL_FOSSA("RACF", "Rechte Fossa antecubitalis", null, null, "right antecubital fossa"),
 
+	/** <div class="de">Rechter vorderer Thorax</div>. */
 	RIGHT_ANTERIOR_CHEST("RAC", "Rechter vorderer Thorax", null, null, "right anterior chest"),
+	/** <div class="de">Rechter Arm</div>. */
 	RIGHT_ARM("RA", "Rechter Arm", null, null, "right arm"),
+	/** <div class="de">Rechter Deltoideus</div>. */
 	RIGHT_DELTOID("RD", "Rechter Deltoideus", null, null, "right deltoid"),
+	/** <div class="de">Rechtes Ohr</div>. */
 	RIGHT_EAR("RE", "Rechtes Ohr", null, null, "right ear"),
+	/** <div class="de">Rechte Jugularis externa</div>. */
 	RIGHT_EXTERNAL_JUGULAR("REJ", "Rechte Jugularis externa", null, null, "right external jugular"),
+	/** <div class="de">Rechtes Auge</div>. */
 	RIGHT_EYE("OD", "Rechtes Auge", null, null, "right eye"),
+	/** <div class="de">Rechter Fuss</div>. */
 	RIGHT_FOOT("RF", "Rechter Fuss", null, null, "right foot"),
+	/** <div class="de">Rechter Gluaeus medius</div>. */
 	RIGHT_GLUTEUS_MEDIUS("RG", "Rechter Gluaeus medius", null, null, "right gluteus medius"),
+	/** <div class="de">Rechte Hand</div>. */
 	RIGHT_HAND("RH", "Rechte Hand", null, null, "right hand"),
+	/** <div class="de">Rechte Jugularis interna</div>. */
 	RIGHT_INTERNAL_JUGULAR("RIJ", "Rechte Jugularis interna", null, null, "right internal jugular"),
+	/** <div class="de">Rechter unterer Abdominal-Quadrant</div>. */
 	RIGHT_LOWER_ABD_QUARANT("RLAQ", "Rechter unterer Abdominal-Quadrant", null, null, "right lower abd quadrant"),
+	/** <div class="de">Rechter distaler Unterarm</div>. */
 	RIGHT_LOWER_FOREARM("RLFA", "Rechter distaler Unterarm", null, null, "right lower forearm"),
+	/** <div class="de">Rechter mittlerer Unterarm</div>. */
 	RIGHT_MID_FOREARM("RMFA", "Rechter mittlerer Unterarm", null, null, "right mid forearm"),
+	/** <div class="de">Rechtes Nasenloch</div>. */
 	RIGHT_NARIS("RN", "Rechtes Nasenloch", null, null, "right naris"),
+	/** <div class="de">Rechter hinterer Thorax</div>. */
 	RIGHT_POSTERIOR_CHEST("RPC", "Rechter hinterer Thorax", null, null, "right posterior chest"),
+	/** <div class="de">Rechte Subclavia</div>. */
 	RIGHT_SUBCLAVIAN("RSC", "Rechte Subclavia", null, null, "right subclavian"),
+	/** <div class="de">Rechter Oberschenkel</div>. */
 	RIGHT_TIGH("RT", "Rechter Oberschenkel", null, null, "right tigh"),
+	/** <div class="de">Rechter oberer Abdominal‐Quadrant</div>. */
 	RIGHT_UPPER_ABD_QUARANT("RUAQ", "Rechter oberer Abdominal‐Quadrant", null, null, "right upper abd quadrant"),
+	/** <div class="de">Rechter Oberarm</div>. */
 	RIGHT_UPPER_ARM("RUA", "Rechter Oberarm", null, null, "right upper arm"),
+	/** <div class="de">Rechter proximaler Unterarm</div>. */
 	RIGHT_UPPER_FOREARM("RUFA", "Rechter proximaler Unterarm", null, null, "right upper forearm"),
+	/** <div class="de">Rechter Vastus lateralis</div>. */
 	RIGHT_VASTUS_LATERALIS("RVL", "Rechter Vastus lateralis", null, null, "right vastus lateralis"),
+	/** <div class="de">Rechts ventragluteal</div>. */
 	RIGHT_VENTRAGLUTEAL("RVG", "Rechts ventragluteal", null, null, "right ventragluteal");
 	//@formatter:on
 

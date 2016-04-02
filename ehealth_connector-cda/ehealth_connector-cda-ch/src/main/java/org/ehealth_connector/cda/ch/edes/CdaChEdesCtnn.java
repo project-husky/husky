@@ -53,6 +53,10 @@ public class CdaChEdesCtnn
 
 	private CodedVitalSignsSection mCodedVitalSigns;
 
+	/**
+	 * <div class="en">Creates a new EDES CTNN CDA document</div>
+	 * <div class="de">Erstellt ein neues EDES CTNN CDA Dokument.</div>
+	 */
 	public CdaChEdesCtnn() {
 		super(CHFactory.eINSTANCE.createCdaChEdesCtnn().init());
 		common = new CdaChEdesCommon(getDoc());
@@ -100,6 +104,15 @@ public class CdaChEdesCtnn
 		setTitle(common.getDocumentTitle());
 	}
 
+	/**
+	 * <div class="en">Creates a new CdaChEdesCtnn convenience object on the
+	 * basis of a MDHT-CdaChEdesCtnn object.</div> <div class="de">Erstellt ein
+	 * neues CdaChEdesCtnn Convenience Objekt mittels eines MDHT-CdaChEdesCtnn
+	 * Objekts.</div>
+	 *
+	 * @param doc
+	 *            MDHT CdaChEdesCtnn object
+	 */
 	public CdaChEdesCtnn(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn doc) {
 		super(doc);
 		common = new CdaChEdesCommon(getDoc());

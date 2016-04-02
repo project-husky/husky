@@ -34,6 +34,11 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
+/**
+ * <div class="en">This class represents common methods of EDES CDA documents.
+ * It works on a ClinicalDocument. For internal use with specific EDES documents
+ * like EDES-CTNN and EDES-EDPN.</div>
+ */
 public class CdaChEdesCommon {
 
 	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
@@ -43,10 +48,22 @@ public class CdaChEdesCommon {
 
 	private ClinicalDocument document;
 
+	/**
+	 * Create a new common EDES CDA.
+	 * 
+	 * @param document
+	 *            MDHT ClinicalDocument object
+	 */
 	public CdaChEdesCommon(ClinicalDocument document) {
 		this.document = document;
 	}
 
+	/**
+	 * Add the section to the document, and update its title according to the
+	 * language code of the document.
+	 *
+	 * @return the title of the document
+	 */
 	public void addSection(Section section) {
 		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
 		if (document.getLanguageCode() != null) {
@@ -113,6 +130,12 @@ public class CdaChEdesCommon {
 		return sb.toString();
 	}
 
+	/**
+	 * Returns the title of the document according to the language code of the
+	 * document.
+	 *
+	 * @return the title of the document
+	 */
 	public String getDocumentTitle() {
 		CS lcode = document.getLanguageCode();
 		if (lcode != null) {
@@ -128,6 +151,13 @@ public class CdaChEdesCommon {
 		return DOCTITLE_EN;
 	}
 
+	/**
+	 * Returns the narrative Text of the section.
+	 *
+	 * @param Section
+	 *            the section
+	 * @return the narrative Text. Returns null, if this text does not exist.
+	 */
 	public String getNarrativeText(Section s) {
 		if (s != null) {
 			final StrucDocText t = s.getText();
@@ -203,6 +233,16 @@ public class CdaChEdesCommon {
 		return sb.toString();
 	}
 
+	/**
+	 * Sets the section/text element for the section.
+	 *
+	 * @param SectionsEDES
+	 *            enum specifying the section type
+	 * @param Section
+	 *            the section
+	 * @param text
+	 *            the text
+	 */
 	public void setNarrativeTextSection(SectionsEDES sectionEdes, Section section, String text) {
 		if (section == null) {
 			section = sectionEdes.createSection();

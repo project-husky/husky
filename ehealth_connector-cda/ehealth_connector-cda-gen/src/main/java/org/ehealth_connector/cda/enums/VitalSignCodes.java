@@ -19,6 +19,9 @@ package org.ehealth_connector.cda.enums;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
 
+/*
+ *<div class="de">Codesystem: LOINC (2.16.840.1.113883.6.1).</div>
+ */
 public enum VitalSignCodes {
 	//@formatter:off
 	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
@@ -33,6 +36,12 @@ public enum VitalSignCodes {
 	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate");
 	//@formatter:on
 
+	/**
+	 * <div class="en">Gets the Enum constant corresponding to the LOINC
+	 * code</div>
+	 *
+	 * @return <div class="en">the Enum constant</div>
+	 */
 	public static VitalSignCodes getEnum(String loincCode) {
 		VitalSignCodes[] values = values();
 		for (VitalSignCodes vitalSignCodes : values) {
@@ -59,12 +68,24 @@ public enum VitalSignCodes {
 		this.descriptionEn = descriptionEn;
 	}
 
+	/**
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
 	public Code getCode() {
 		Code ret = new Code(CodeSystems.LOINC, loinc);
 		ret.setDisplayName(getDisplayName(null));
 		return ret;
 	}
 
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
 	public String getDisplayName(LanguageCode lc) {
 		String lcStr = LanguageCode.ENGLISH.getCodeValue();
 		if (lc != null) {
@@ -87,7 +108,12 @@ public enum VitalSignCodes {
 		return getDisplayNameDe();
 	}
 
-	public Object getLoinc() {
+	/**
+	 * <div class="en">Gets the corresponding LOINC code.</div>
+	 *
+	 * @return <div class="en">LOINC code as String</div>
+	 */
+	public String getLoinc() {
 		return loinc;
 	}
 

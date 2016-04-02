@@ -26,12 +26,19 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  */
 public enum ObservationInterpretationForVitalSign {
 	//@formatter:off
+	/** <div class="de">Abnormal</div>. */
 	ABNORMAL(ObservationInterpretation.ABNORMAL),
+	/** <div class="de">Abnormal (alarmierend)</div>. */
 	ABNORMAL_ALERT(ObservationInterpretation.ABNORMAL_ALERT),
+	/** <div class="de">Oberhalb Toleranz</div>. */
 	HIGH(ObservationInterpretation.HIGH),
+	/** <div class="de"Oberhalb Toleranz (alarmierend)</div>. */
 	HIGH_ALERT(ObservationInterpretation.HIGH_ALERT),
+	/** <div class="de"Unterhalb Toleranz</div>. */
 	LOW(ObservationInterpretation.LOW),
+	/** <div class="de"Unterhalb Toleranz (alarmierend)</div>. */
 	LOW_ALERT(ObservationInterpretation.LOW_ALERT),
+	/** <div class="de">Normal</div>. */
 	NORMAL(ObservationInterpretation.NORMAL);
 	//@formatter:on
 

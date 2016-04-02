@@ -56,11 +56,21 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 		this.languageCode = languageCode;
 	}
 
+	/**
+	 * Creates a new EDES VitalSignObservation.
+	 * 
+	 * @return EDES VitalSignObservation
+	 */
 	@Override
 	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
 		return new org.ehealth_connector.cda.ch.edes.VitalSignObservation(mdht);
 	}
 
+	/**
+	 * Creates a UUID for EDES documents as Identificator.
+	 * 
+	 * @return UUID as Identificator
+	 */
 	@Override
 	protected Identificator getUuid() {
 		return CdaChUtil.createUuidEdes(null);
