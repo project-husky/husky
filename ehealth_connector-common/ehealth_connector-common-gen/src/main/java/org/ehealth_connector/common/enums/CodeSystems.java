@@ -21,7 +21,7 @@ import org.ehealth_connector.valueset.enums.IdentityDomain;
 /**
  * Bekannte und häufig gebrauchte Identifikationsdomänen
  * <ul>
- * <li>Global Location Number (GLN): 1.3.88</li>
+ * <li>Global Location Number (GLN): 2.51.1.3</li>
  * <li>Global Trade Item Number (GTIN): 1.3.160</li>
  * </ul>
  */
@@ -36,9 +36,9 @@ public enum CodeSystems implements IdentityDomain {
 	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
 			"diseaseName (ICR-DHA, chapter 2.1.1)"),
 	/**
-	 * OID: 1.3.88 <div class="en">Global Location Number</div>
+	 * OID: 2.51.1.3 <div class="en">Global Location Number</div>
 	 */
-	GLN("1.3.88", "Global Location Number"),
+	GLN("2.51.1.3", "Global Location Number"),
 	/**
 	 * OID: 1.3.160 <div class="en">Global Trade Item Number</div>
 	 */

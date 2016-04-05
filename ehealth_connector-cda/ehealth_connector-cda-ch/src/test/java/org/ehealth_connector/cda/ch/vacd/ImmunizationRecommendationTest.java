@@ -123,7 +123,7 @@ public class ImmunizationRecommendationTest {
 		assertEquals(1, nodes.getLength());
 
 		expr = xpath.compile(
-				"substanceadministration/author/assignedAuthor/id[@root='1.3.88' and @extension='7607777777777']");
+				"substanceadministration/author/assignedAuthor/id[@root='2.51.1.3' and @extension='7607777777777']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

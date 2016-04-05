@@ -126,7 +126,7 @@ public class LaboratoryIsolateOrganizer
 	 * laboatory. </div> <div class="de">Fallunterscheidung: Laborbefund aus
 	 * Primärlabor: [O] Sekundärlabor: [NP]. time: Zeitpunkt der Weiterleitung
 	 * des Isolats/Keimes an das Sekundärlabor. id: GLN des Sekundärlabors resp.
-	 * Referenzzentrums (root='1.3.88'). addr, telecom, playingEntity/name:
+	 * Referenzzentrums (root='2.51.1.3'). addr, telecom, playingEntity/name:
 	 * Name, Adresse und Kommunikations-mittel des Sekundärlabors resp.
 	 * Referenzzentrums </div>
 	 *

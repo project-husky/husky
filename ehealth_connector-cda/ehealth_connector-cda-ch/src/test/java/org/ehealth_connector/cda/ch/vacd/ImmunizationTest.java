@@ -48,8 +48,8 @@ import org.w3c.dom.NodeList;
  */
 public class ImmunizationTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	// <substanceadministration xmlns="urn:hl7-org:v3" classCode="SBADM"
 	// moodCode="EVN" negationInd="false">
@@ -136,12 +136,12 @@ public class ImmunizationTest {
 		assertEquals(1, nodes.getLength());
 
 		expr = xpath.compile(
-				"substanceadministration/author/assignedAuthor/id[@root='1.3.88' and @extension='7607777777777']");
+				"substanceadministration/author/assignedAuthor/id[@root='2.51.1.3' and @extension='7607777777777']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
+		expr = xpath.compile(
+				"substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 
 	}
@@ -317,7 +317,8 @@ public class ImmunizationTest {
 	public void testRouteCode() throws XPathExpressionException {
 		final Immunization entry = new Immunization();
 		entry.setRouteOfAdministration(RouteOfAdministration.INJECTION_SUBCUTANEOUS);
-		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS, entry.getRouteOfAdministration());
+		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS,
+				entry.getRouteOfAdministration());
 
 		final Document document = entry.getDocument();
 		final XPathExpression expr = xpath.compile(
@@ -333,7 +334,8 @@ public class ImmunizationTest {
 
 		final Document document = immunization.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
