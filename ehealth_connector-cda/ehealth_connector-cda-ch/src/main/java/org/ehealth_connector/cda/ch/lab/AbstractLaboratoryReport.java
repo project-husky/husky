@@ -266,7 +266,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		case ITALIAN:
 			return ("Rapporto di laboratorio");
 		case ENGLISH:
-			return ("Laboratory Specialty Section");
+			return ("Laboratory report");
 		}
 		return "";
 	}

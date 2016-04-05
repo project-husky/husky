@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.ehealth_connector.cda;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -149,6 +150,18 @@ public class ObservationMediaEntry
 	}
 
 	/**
+	 * Gets the mime type.
+	 *
+	 * @return the mime type
+	 */
+	protected String getMimeType() {
+		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
+			return getMdht().getValue().getMediaType();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the mime type enum.
 	 *
 	 * @return the mime type enum
@@ -232,7 +245,7 @@ public class ObservationMediaEntry
 	/**
 	 * Sets the (not Base64 encoded) inputStream and MimeType.
 	 *
-	 * @param resourceFileName
+	 * @param fileName
 	 *            the (not Base64 encoded) file object. It will be loaded as a
 	 *            resource. It will be wrapped into an Base64InputStream
 	 * @param mimeType
@@ -240,9 +253,9 @@ public class ObservationMediaEntry
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public void setObject(String resourceFileName, LabObservationMediaMimeType mimeType)
+	public void setObject(String fileName, LabObservationMediaMimeType mimeType)
 			throws IOException {
-		InputStream inputStream = getClass().getResourceAsStream(resourceFileName);
+		InputStream inputStream = new FileInputStream(fileName);
 		setObject(inputStream, mimeType);
 	}
 
@@ -254,18 +267,6 @@ public class ObservationMediaEntry
 	 */
 	public void setObservationMediaId(String id) {
 		getMdht().setObservationMediaId(id);
-	}
-
-	/**
-	 * Gets the mime type.
-	 *
-	 * @return the mime type
-	 */
-	protected String getMimeType() {
-		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
-			return getMdht().getValue().getMediaType();
-		}
-		return null;
 	}
 
 }
