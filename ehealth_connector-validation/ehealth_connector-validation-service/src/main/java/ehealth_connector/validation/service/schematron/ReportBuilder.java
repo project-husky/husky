@@ -339,17 +339,6 @@ public class ReportBuilder {
 		t1.transform(in, baos);
 		byte[] svrl = baos.toByteArray();
 
-		// // Test
-		// OutputStream outputStream = null;
-		// try {
-		// outputStream = new FileOutputStream("/temp/Report2.txt");
-		// baos.writeTo(outputStream);
-		// outputStream.close();
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// // Testende
 		return svrl;
 	}
 

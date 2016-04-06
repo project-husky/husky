@@ -33,6 +33,9 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -60,6 +63,7 @@ import ehealth_connector.validation.service.schematron.bind.ActivePattern;
 import ehealth_connector.validation.service.schematron.bind.FailedAssert;
 import ehealth_connector.validation.service.schematron.bind.FiredRule;
 import ehealth_connector.validation.service.schematron.bind.SchematronOutput;
+import ehealth_connector.validation.service.schematron.bind.SuccessfulReport;
 import ehealth_connector.validation.service.schematron.result.ActivePatternResult;
 import ehealth_connector.validation.service.schematron.result.FiredRuleResult;
 import ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
@@ -149,9 +153,11 @@ public class CdaValidator {
 	private SchematronValidationResult convertSchematronOutput(SchematronOutput schOut) {
 
 		ActivePattern currentAP = null;
-		ActivePatternResult tempAP = null;
+		ActivePatternResult currentApResult = null;
 		FiredRule currentFR = null;
-		Object prevTemp = null;
+		FiredRuleResult currentFrResult = null;
+		Object temp = null;
+		Object prevObject = null;
 		SchematronValidationResult schValRes = new SchematronValidationResult();
 
 		List<Object> schOutputList = schOut.getActivePatternAndFiredRuleAndFailedAssert();
@@ -159,43 +165,51 @@ public class CdaValidator {
 		if (!schOutputList.isEmpty()) {
 			Iterator<Object> schIter = schOutputList.iterator();
 			do {
-				Object temp = schIter.next();
-				if (temp instanceof ActivePattern) {
-					currentAP = (ActivePattern) temp;
-					if (prevTemp != null && prevTemp instanceof FailedAssert)
-						schValRes.getActivePatternResult().add(tempAP);
+				temp = schIter.next();
+				if (temp instanceof ActivePattern && prevObject == null) {
+					currentApResult = new ActivePatternResult();
+					currentApResult.setAp((ActivePattern) temp);
+					prevObject = temp;
+					continue;
 				}
-				if (temp instanceof FiredRule) {
-					currentFR = (FiredRule) temp;
-					if (prevTemp != null && prevTemp instanceof FailedAssert)
-						schValRes.getActivePatternResult().add(tempAP);
+				if (temp instanceof ActivePattern && prevObject != null && prevObject instanceof ActivePattern) {
+					schValRes.getActivePatternResultFull().add(currentApResult);
+					currentApResult = new ActivePatternResult();
+					currentApResult.setAp((ActivePattern) temp);
+					prevObject = temp;
+					continue;
 				}
-				if (temp instanceof FailedAssert) {
-					FiredRuleResult tempFR = new FiredRuleResult(currentFR);
-					tempFR.setFailedAssert((FailedAssert) temp);
-					tempAP = new ActivePatternResult();
-					tempAP.setAp(currentAP);
-					tempAP.getFiredRileList().add(tempFR);
+				if (temp instanceof ActivePattern && !(prevObject instanceof ActivePattern)) {
+					schValRes.getActivePatternResultFull().add(currentApResult);
+					currentApResult = new ActivePatternResult();
+					currentApResult.setAp((ActivePattern) temp);
+					prevObject = temp;
+					continue;
 				}
-				prevTemp = temp;
+				if (!(temp instanceof ActivePattern)) {
+					currentApResult.getApChilds().add(temp);
+					prevObject = temp;
+				}
+				
+					
 			} while (schIter.hasNext());
+			schValRes.getActivePatternResultFull().add(currentApResult);
 		}
 		return schValRes;
 	}
 
 	private SchematronOutput createSchematronOutput(ByteArrayInputStream in) {
+		
+		JAXBContext jaxbContext;
 		try {
-
-			JAXBContext jaxbContext = JAXBContext.newInstance(SchematronOutput.class);
-
+			jaxbContext = JAXBContext.newInstance(SchematronOutput.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			return (SchematronOutput) jaxbUnmarshaller.unmarshal(in);
-
 		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
-
+		return null;
 	}
 
 	/**
