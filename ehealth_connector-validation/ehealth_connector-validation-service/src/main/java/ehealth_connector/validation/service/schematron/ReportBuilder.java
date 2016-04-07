@@ -339,6 +339,18 @@ public class ReportBuilder {
 		t1.transform(in, baos);
 		byte[] svrl = baos.toByteArray();
 
+		// debug only !!
+		// try {
+		// FileOutputStream fos = new FileOutputStream(new
+		// File("/temp/svrl.xml"));
+		// baos.writeTo(fos);
+		// fos.close();
+		// } catch (IOException ioe) {
+		// // Handle exception here
+		// ioe.printStackTrace();
+		// }
+		// end of debug
+
 		return svrl;
 	}
 
