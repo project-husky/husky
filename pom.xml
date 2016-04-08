@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-main</artifactId>
@@ -31,7 +32,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 
 	<scm>
 		<connection>scm:svn:http://svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</connection>
-		<developerConnection>scm:svn:svn+ssh://rluykx@svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</developerConnection>
+		<developerConnection>scm:svn:svn+ssh://svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</developerConnection>
 	</scm>
 
 
@@ -42,6 +43,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<module>ehealth_connector-communication</module>
 		<module>ehealth_connector-valueset-api</module>
 		<module>ehealth_connector-validation</module>
+		<module>ehealth_connector-codeformat</module>
 	</modules>
 
 	<repositories>
@@ -90,8 +92,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<!-- eclipse stuff -->
 
 			<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
-			<!-- dependency> <groupId>net.sourceforge.lpg</groupId> <artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId> <version>1.1.0.v200803061910</version> 
-				</dependency -->
+			<!-- dependency> <groupId>net.sourceforge.lpg</groupId> <artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId> 
+				<version>1.1.0.v200803061910</version> </dependency -->
 
 			<!-- hl7 -->
 			<dependency>
@@ -280,7 +282,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			</dependency>
 
 			<!-- hapi fhir -->
-			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> <version>${hapi.fhir.version}</version> </dependency> -->
+			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> 
+				<version>${hapi.fhir.version}</version> </dependency> -->
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>hapi-fhir-structures-dstu2</artifactId>
@@ -459,7 +462,13 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<artifactId>build-helper-maven-plugin</artifactId>
 					<version>1.10</version>
 				</plugin>
+				<plugin>
+					<groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+					<artifactId>maven-java-formatter-plugin</artifactId>
+					<version>0.4</version>
+				</plugin>
 			</plugins>
+
 		</pluginManagement>
 		<plugins>
 			<plugin>
@@ -483,7 +492,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
-							<!-- simpler configuration without reportSets available for usual cases -->
+							<!-- simpler configuration without reportSets available for usual 
+								cases -->
 							<reports>
 								<report>dependencies</report>
 								<report>scm</report>
@@ -574,6 +584,31 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<additionalparam>-Xdoclint:none</additionalparam>
 					<failOnError>false</failOnError>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+				<artifactId>maven-java-formatter-plugin</artifactId>
+				<configuration>
+					<compilerSource>${java.version}</compilerSource>
+					<compilerCompliance>${java.version}</compilerCompliance>
+					<compilerTargetPlatform>${java.version}</compilerTargetPlatform>
+					<configFile>format/eHC_code_format.xml</configFile>
+					<!-- includes>
+						<include>org/ehealth_connector/</include>
+					</includes>
+					<excludes>
+						<exclude>org/ehealth_connector/</exclude>
+						<exclude>**/*Test.java</exclude>
+					</excludes -->
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<artifactId>ehealth_connector-codeformat</artifactId>
+						<groupId>org.ehealth_connector</groupId>
+						<version>1.3-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 
@@ -716,7 +751,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 						<configuration>
 							<target>
 								<property environment="ikvmc.executable" />
-								<available file="commandname" filepath="${env.PATH}" property="ikvmc.present" />
+								<available file="commandname" filepath="${env.PATH}"
+									property="ikvmc.present" />
 							</target>
 						</configuration>
 					</plugin>
