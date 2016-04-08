@@ -593,13 +593,12 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<compilerCompliance>${java.version}</compilerCompliance>
 					<compilerTargetPlatform>${java.version}</compilerTargetPlatform>
 					<configFile>format/eHC_code_format.xml</configFile>
-					<!-- includes>
-						<include>org/ehealth_connector/</include>
+					<includes>
+						<include>org/ehealth_connector/**</include>
 					</includes>
 					<excludes>
-						<exclude>org/ehealth_connector/</exclude>
 						<exclude>**/*Test.java</exclude>
-					</excludes -->
+					</excludes>
 				</configuration>
 
 				<dependencies>
