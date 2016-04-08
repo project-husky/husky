@@ -20,7 +20,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLDecoder;
 
@@ -91,7 +90,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	public void testLoadEdesCtnnFromFile() throws Exception {
 		final URL test1Url = new URL(
 				this.getClass().getResource("/cda/EdesCtnn-cda.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChEdesCtnn document = CdaChUtil.loadEdesCtnnFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -115,7 +114,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	public void testLoadEdesEdpnFromFile() throws Exception {
 		final URL test1Url = new URL(
 				this.getClass().getResource("/cda/EdesEdpn-cda.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChEdesEdpn document = CdaChUtil.loadEdesEdpnFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -138,7 +137,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	@Test
 	public void testLoadLrphFromFile() throws Exception {
 		final URL test1Url = new URL(this.getClass().getResource("/cda/Lrph-cda.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChLrph document = CdaChUtil.loadLrphFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -161,7 +160,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	@Test
 	public void testLoadLrqcFromFile() throws Exception {
 		final URL test1Url = new URL(this.getClass().getResource("/cda/Lrqc-cda.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChLrqc document = CdaChUtil.loadLrqcFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -184,7 +183,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	@Test
 	public void testLoadLrtpFromFile() throws Exception {
 		final URL test1Url = new URL(this.getClass().getResource("/cda/Lrtp-cda.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChLrtp document = CdaChUtil.loadLrtpFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -208,7 +207,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	public void testLoadVacdFromFile() throws Exception {
 		final URL test1Url = new URL(
 				this.getClass().getResource("/cda/vacDoc_Test1.xml").toString());
-		File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 		final CdaChVacd document = CdaChUtil.loadVacdFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
@@ -230,8 +229,14 @@ public class CdaChUtilTest extends CdaUtilTest {
 	 */
 	@Test
 	public void testLoadVacdFromStream() throws Exception {
-		InputStream testStream = this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
-		final CdaChVacd document = CdaChUtil.loadVacdFromStream(testStream);
+
+		// InputStream testStream =
+		// this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
+		// final CdaChVacd document = CdaChUtil.loadVacdFromStream(testStream);
+		final URL test1Url = new URL(
+				this.getClass().getResource("/cda/vacDoc_Test2.xml").toString());
+		final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		final CdaChVacd document = CdaChUtil.loadVacdFromFile(testFile.getAbsolutePath());
 		assertNotNull(document);
 		final DocumentRoot docRoot = document.getDocRoot();
 		assertNotNull(docRoot);

@@ -30,12 +30,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.ihe.utils.UUID;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.ch.CDACH;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ch.VACD;
-import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -122,9 +117,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChEdesCtnn Document
 	 */
 	public static CdaChEdesCtnn loadEdesCtnnFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument document = CDAUtil.load(inputstream);
-		return new CdaChEdesCtnn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) document);
+		final InputStream inputstream = new FileInputStream(filePath);
+		final CdaChLoader<CdaChEdesCtnn> loader = new CdaChLoader<CdaChEdesCtnn>();
+		return loader.loadFromStream(inputstream, CdaChEdesCtnn.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn.class);
 	}
 
 	/**
@@ -139,9 +135,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChEdesEdpn Document
 	 */
 	public static CdaChEdesEdpn loadEdesEdpnFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument document = CDAUtil.load(inputstream);
-		return new CdaChEdesEdpn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn) document);
+		final InputStream inputstream = new FileInputStream(filePath);
+		final CdaChLoader<CdaChEdesEdpn> loader = new CdaChLoader<CdaChEdesEdpn>();
+		return loader.loadFromStream(inputstream, CdaChEdesEdpn.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn.class);
 	}
 
 	/**
@@ -156,9 +153,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrph Document
 	 */
 	public static CdaChLrph loadLrphFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument document = CDAUtil.load(inputstream);
-		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) document);
+		final InputStream inputstream = new FileInputStream(filePath);
+		final CdaChLoader<CdaChLrph> loader = new CdaChLoader<CdaChLrph>();
+		return loader.loadFromStream(inputstream, CdaChLrph.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrph.class);
 	}
 
 	/**
@@ -173,9 +171,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrqc Document
 	 */
 	public static CdaChLrqc loadLrqcFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument document = CDAUtil.load(inputstream);
-		return new CdaChLrqc((org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) document);
+		final InputStream inputstream = new FileInputStream(filePath);
+		final CdaChLoader<CdaChLrqc> loader = new CdaChLoader<CdaChLrqc>();
+		return loader.loadFromStream(inputstream, CdaChLrqc.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc.class);
 	}
 
 	/**
@@ -190,9 +189,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrtp Document
 	 */
 	public static CdaChLrtp loadLrtpFromFile(String filePath) throws Exception {
-		InputStream inputstream = new FileInputStream(filePath);
-		ClinicalDocument document = CDAUtil.load(inputstream);
-		return new CdaChLrtp((org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) document);
+		final InputStream inputstream = new FileInputStream(filePath);
+		final CdaChLoader<CdaChLrtp> loader = new CdaChLoader<CdaChLrtp>();
+		return loader.loadFromStream(inputstream, CdaChLrtp.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp.class);
 	}
 
 	/**
@@ -208,44 +208,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChVacd loadVacdFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadVacdFromStream(inputstream);
-	}
-
-	/**
-	 * <div class="en">Loads a CdaChVacd document from a given
-	 * InputStream.</div> <div class="de">Lädt ein CdaChVacd aus einem
-	 * InputStream</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param input
-	 *            <div class="en">InputStream of a CDA-CH-VACD XML
-	 *            structure</div> <div class="de">InputStream einer CDA-CH-VACD
-	 *            XML-Struktur </div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 * @return the CdaChVacd Document
-	 * @throws Exception
-	 *             if the document could not be loaded
-	 */
-	public static CdaChVacd loadVacdFromStream(InputStream input) throws Exception {
-		// Explicit initialization
-		CHPackage.eINSTANCE.eClass();
-
-		final ClinicalDocument clinicalDocument = CDAUtil.load(input);
-
-		// Implicit initialization
-
-		VACD evacdocMdht = null;
-		if (clinicalDocument instanceof CDACH) {
-			// System.out.println("clinicalDocument is an instance of CDACH");
-		}
-		if (clinicalDocument instanceof VACD) {
-			// System.out.println("clinicalDocument is an instance of eVACDOC");
-			evacdocMdht = (VACD) clinicalDocument;
-		} else {
-			System.out.println("clinical document is NOT an instance of eVACDOC");
-			return null;
-		}
-
-		return new CdaChVacd(evacdocMdht);
+		final CdaChLoader<CdaChVacd> loader = new CdaChLoader<CdaChVacd>();
+		return loader.loadFromStream(inputstream, CdaChVacd.class,
+				org.openhealthtools.mdht.uml.cda.ch.VACD.class);
 	}
 
 	/**
