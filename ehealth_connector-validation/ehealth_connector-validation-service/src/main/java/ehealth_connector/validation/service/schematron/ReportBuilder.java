@@ -18,6 +18,8 @@ package ehealth_connector.validation.service.schematron;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -68,6 +70,8 @@ public class ReportBuilder {
 
 	/** Style sheet for generating Validation HTML output */
 	public static final String SVRL_TO_HTML = xslDir + JarUtils.separator + "svrl_to_html.xsl";
+	/** Style sheet for generating Validation XML output */
+	public static final String SVRL_TO_XML = xslDir + JarUtils.separator + "ms-svrl.xsl";
 
 	/**
 	 * Tries to auto-detect the matching rule-set from the specified input
@@ -261,8 +265,8 @@ public class ReportBuilder {
 	 *             if either the specified rule-set or input stream is
 	 *             <tt>null</tt>.
 	 */
-	public long createHTMLReport(RuleSet ruleSet, InputStream in, OutputStream out,
-			Properties parameters) throws TransformationException, InterruptedException {
+	public long createHTMLReport(RuleSet ruleSet, InputStream in, OutputStream out, Properties parameters)
+			throws TransformationException, InterruptedException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		XsltExecutable styleSheet = getValidator(ruleSet);
 		Transformation t1 = new Transformation(styleSheet);
@@ -330,28 +334,45 @@ public class ReportBuilder {
 		return createHTMLReport(ruleSet, input, parameters);
 	}
 
-	public byte[] createSvrlReport(RuleSet ruleSet, InputStream in, OutputStream out,
-			Properties parameters) throws TransformationException, InterruptedException {
+	public byte[] createSvrlReport(RuleSet ruleSet, InputStream in, OutputStream out, Properties parameters)
+			throws TransformationException, InterruptedException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream baos_ms = new ByteArrayOutputStream();
 		XsltExecutable styleSheet = getValidator(ruleSet);
 		Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
 		byte[] svrl = baos.toByteArray();
 
-		// debug only !!
-		// try {
-		// FileOutputStream fos = new FileOutputStream(new
-		// File("/temp/svrl.xml"));
-		// baos.writeTo(fos);
-		// fos.close();
-		// } catch (IOException ioe) {
-		// // Handle exception here
-		// ioe.printStackTrace();
-		// }
-		// end of debug
+		// Test
+				OutputStream outputStream = null;
+				try {
+					outputStream = new FileOutputStream("S:/eHC_Ress2/work2/svrl_raw_out.xml");
+					baos.writeTo(outputStream);
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		return svrl;
+		Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
+		t2.setURIResolver(this.resolver);
+		t2.setParameters(parameters);
+		t2.transform(new ByteArrayInputStream(svrl), baos_ms);
+		byte[] svrl_ms = baos_ms.toByteArray();
+		
+		// Test
+		//OutputStream outputStream = null;
+		try {
+			outputStream = new FileOutputStream("S:/eHC_Ress2/work2/svrl2xml_out.xml");
+			baos_ms.writeTo(outputStream);
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return svrl_ms;
 	}
 
 	/**
@@ -372,8 +393,7 @@ public class ReportBuilder {
 	 * @throws NullPointerException
 	 *             if the specified source document is <tt>null</tt>.
 	 */
-	public RuleSet detectRuleSet(Source source, RuleSet[] ruleSetList)
-			throws RuleSetDetectionException {
+	public RuleSet detectRuleSet(Source source, RuleSet[] ruleSetList) throws RuleSetDetectionException {
 		return detectRuleSet(getProcessor(), source, ruleSetList);
 	}
 
@@ -403,8 +423,7 @@ public class ReportBuilder {
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
 	 */
-	public XsltExecutable getValidator(RuleSet ruleSet)
-			throws TransformationException, InterruptedException {
+	public XsltExecutable getValidator(RuleSet ruleSet) throws TransformationException, InterruptedException {
 		return validators.get(ruleSet);
 	}
 

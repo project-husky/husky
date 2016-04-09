@@ -87,17 +87,45 @@ public class CdaValidator {
 	private Schema schema;
 	/** CDA file to be validated */
 	private File cdaFile;
+	
+	private String langCode;
 
 	private ValidationResult validationResult;
 
 	/**
-	 *
+	 * 
 	 * @param cdaFilePath
 	 *            The CDA document to be validated
 	 * @param configFilePath
 	 *            The configfile with following attributes - baseDir -
 	 *            document-schema - pdf-level - pdf-reporting-level -
 	 *            license-key - schematron/rule-set
+	 * @param langCode
+	 *            The outputLangauge of the schematron validation
+	 *            Different language messages have to be defined in the schematrons           
+	 * @throws ConfigurationException
+	 *             If the configuration fails, an exception will be thrown
+	 */
+	public CdaValidator(File cdaFile, File configFile, String langCode) throws ConfigurationException {
+		this.cdaFile = cdaFile;
+		this.configuration = configure(configFile);
+		this.validators = createValidators(this.configuration);
+		this.reportBuilder = new ReportBuilder(validators);
+		this.langCode = langCode;
+
+	}
+
+	/**
+	 * 
+	 * @param cdaFilePath
+	 *            The CDA document to be validated
+	 * @param configFilePath
+	 *            The configfile with following attributes - baseDir -
+	 *            document-schema - pdf-level - pdf-reporting-level -
+	 *            license-key - schematron/rule-set
+	 * @param langCode
+	 *            The outputLangauge of the schematron validation
+	 *            Different language messages have to be defined in the schematrons           
 	 * @throws ConfigurationException
 	 *             If the configuration fails, an exception will be thrown
 	 */
@@ -106,7 +134,6 @@ public class CdaValidator {
 		this.configuration = configure(configFile);
 		this.validators = createValidators(this.configuration);
 		this.reportBuilder = new ReportBuilder(validators);
-
 	}
 
 	/**
@@ -123,21 +150,12 @@ public class CdaValidator {
 			if (file == null) {
 				throw new ConfigurationException("No configuration file specified.");
 			}
-			// log.debug(">>> Loading new configuration ...");
 			Configurator configurator = new Configurator(file);
 			Configuration configuration = configurator.createConfiguration();
 			this.schema = loadSchema(configuration.getDocumentSchema());
-			if (this.schema != null) {
-				// log.info("XSD validation is turned on, using schema '{}'" +
-				// configuration.getDocumentSchema());
-			} else {
-				// log.info("XSD validation is turned off.");
-			}
-			// log.debug("<<< Configuration done.");
 			return configuration;
 		} catch (ConfigurationException e) {
-			// log.error("<<< Configuration failed: " + e.getCause());
-			throw e;
+			throw new ConfigurationException("Configuration error: " + e.getMessage());
 		}
 	}
 
@@ -146,20 +164,17 @@ public class CdaValidator {
 	 * either succesful-report oder failed-assert and the associated
 	 * active-pattern and fired-rule
 	 *
-	 * @param schOut
-	 *            Raw SchematronOutput
+	 * @param schOut SchematronOutput
 	 * @return
 	 */
 	private SchematronValidationResult convertSchematronOutput(SchematronOutput schOut) {
 
-		ActivePattern currentAP = null;
 		ActivePatternResult currentApResult = null;
-		FiredRule currentFR = null;
-		FiredRuleResult currentFrResult = null;
 		Object temp = null;
 		Object prevObject = null;
 		SchematronValidationResult schValRes = new SchematronValidationResult();
-
+		schValRes.setSchematronValid(true);
+		
 		List<Object> schOutputList = schOut.getActivePatternAndFiredRuleAndFailedAssert();
 
 		if (!schOutputList.isEmpty()) {
@@ -187,6 +202,8 @@ public class CdaValidator {
 					continue;
 				}
 				if (!(temp instanceof ActivePattern)) {
+					if (temp instanceof FailedAssert)
+						schValRes.setSchematronValid(false);
 					currentApResult.getApChilds().add(temp);
 					prevObject = temp;
 				}
@@ -198,6 +215,11 @@ public class CdaValidator {
 		return schValRes;
 	}
 
+	/**
+	 * Instantiate JAXB classes of the schematron XML validation output
+	 * @param in
+	 * @return
+	 */
 	private SchematronOutput createSchematronOutput(ByteArrayInputStream in) {
 		
 		JAXBContext jaxbContext;
@@ -283,7 +305,7 @@ public class CdaValidator {
 		}
 
 		try {
-			SchematronOutput schOut = validateSchematron();
+			SchematronOutput schOut = validateSchematronRaw();
 			SchematronValidationResult schValRes = convertSchematronOutput(schOut);
 			validationResult.setSchValRes(schValRes);
 
@@ -363,14 +385,14 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematron()
+	public SchematronOutput validateSchematronRaw()
 			throws FileNotFoundException, RuleSetDetectionException, TransformationException,
 			InterruptedException, ConfigurationException {
 
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
 		if (this.cdaFile == null)
-			throw new ConfigurationException("No Schematron-File to validate");
+			throw new ConfigurationException("No CDA-File to validate");
 
 		RuleSet[] ruleSetList = this.configuration.getRuleSetList();
 		Source source = new StreamSource(this.cdaFile);
@@ -379,6 +401,9 @@ public class CdaValidator {
 		InputStream in = new BufferedInputStream(new FileInputStream(this.cdaFile));
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		Properties parameters = new Properties();
+		if (langCode != null && !langCode.isEmpty())
+			parameters.put("uiLanguage", langCode);
+		
 		byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet, in, out, parameters);
 
 		return createSchematronOutput(new ByteArrayInputStream(svrlReport));
@@ -395,13 +420,26 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematron(File schFile)
+	public SchematronOutput validateSchematronRaw(File schFile)
 			throws FileNotFoundException, RuleSetDetectionException, TransformationException,
 			InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
-		return validateSchematron();
+		return validateSchematronRaw();
 	}
 
+	public SchematronValidationResult validateSchematron(File schFile)
+			throws FileNotFoundException, RuleSetDetectionException, TransformationException,
+			InterruptedException, ConfigurationException {
+		this.cdaFile = schFile;
+		return this.convertSchematronOutput(validateSchematronRaw());
+	}
+	
+	public SchematronValidationResult validateSchematron()
+			throws FileNotFoundException, RuleSetDetectionException, TransformationException,
+			InterruptedException, ConfigurationException {
+		return this.convertSchematronOutput(validateSchematronRaw());
+	}
+	
 	private void validateXsd() throws SAXException, IOException {
 		Schema schema = this.schema;
 		Validator validator = schema.newValidator();

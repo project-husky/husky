@@ -67,7 +67,7 @@ public class ZipFactory {
 	protected boolean flatten = false;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	//protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	protected final OutputStream out;
 
@@ -180,7 +180,7 @@ public class ZipFactory {
 			entryName += "/";
 		}
 		// Add a new entry and copy the file's data
-		log.debug("Adding Zip Entry: '" + entryName + "'");
+		//log.debug("Adding Zip Entry: '" + entryName + "'");
 		InputStream in = null;
 		try {
 			ZipOutputStream zos = getZipOutputStream();

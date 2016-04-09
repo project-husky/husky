@@ -62,11 +62,11 @@ public class ValidationResult {
 	}
 
 	public boolean isSchematronValid() {
-		return schematronValid;
+		return schValRes.isSchematronValid();
 	}
 
 	public void setSchematronValid(boolean schematronValid) {
-		this.schematronValid = schematronValid;
+		this.getSchValRes().setSchematronValid(schematronValid);
 	}
 
 	public SchematronValidationResult getSchValRes() {
