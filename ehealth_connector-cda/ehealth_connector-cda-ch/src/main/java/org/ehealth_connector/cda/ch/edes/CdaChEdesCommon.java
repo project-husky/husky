@@ -46,11 +46,11 @@ public class CdaChEdesCommon {
 	private static final String DOCTITLE_GER = "Notfallaustrittsbericht";
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
 
-	private ClinicalDocument document;
+	private final ClinicalDocument document;
 
 	/**
 	 * Create a new common EDES CDA.
-	 * 
+	 *
 	 * @param document
 	 *            MDHT ClinicalDocument object
 	 */
@@ -62,7 +62,6 @@ public class CdaChEdesCommon {
 	 * Add the section to the document, and update its title according to the
 	 * language code of the document.
 	 *
-	 * @return the title of the document
 	 */
 	public void addSection(Section section) {
 		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
@@ -154,7 +153,7 @@ public class CdaChEdesCommon {
 	/**
 	 * Returns the narrative Text of the section.
 	 *
-	 * @param Section
+	 * @param s
 	 *            the section
 	 * @return the narrative Text. Returns null, if this text does not exist.
 	 */
@@ -236,9 +235,9 @@ public class CdaChEdesCommon {
 	/**
 	 * Sets the section/text element for the section.
 	 *
-	 * @param SectionsEDES
+	 * @param sectionEdes
 	 *            enum specifying the section type
-	 * @param Section
+	 * @param section
 	 *            the section
 	 * @param text
 	 *            the text

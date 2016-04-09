@@ -26,19 +26,19 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  */
 public enum ObservationInterpretationForVitalSign {
 	//@formatter:off
-	/** <div class="de">Abnormal</div>. */
+	/** <div class="en">Abnormal</div><div class="de">Abnormal</div> */
 	ABNORMAL(ObservationInterpretation.ABNORMAL),
-	/** <div class="de">Abnormal (alarmierend)</div>. */
+	/** <div class="en">Abnormal alert</div><div class="de">Abnormal (alarmierend)</div> */
 	ABNORMAL_ALERT(ObservationInterpretation.ABNORMAL_ALERT),
-	/** <div class="de">Oberhalb Toleranz</div>. */
+	/** <div class="en">High</div><div class="de">Oberhalb Toleranz</div> */
 	HIGH(ObservationInterpretation.HIGH),
-	/** <div class="de"Oberhalb Toleranz (alarmierend)</div>. */
+	/** <div class="en">High alert</div><div class="de">Oberhalb Toleranz (alarmierend)</div> */
 	HIGH_ALERT(ObservationInterpretation.HIGH_ALERT),
-	/** <div class="de"Unterhalb Toleranz</div>. */
+	/** <div class="en">Low</div><div class="de">Unterhalb Toleranz</div> */
 	LOW(ObservationInterpretation.LOW),
-	/** <div class="de"Unterhalb Toleranz (alarmierend)</div>. */
+	/** <div class="en">Low alert</div><div class="de">Unterhalb Toleranz (alarmierend)</div>. */
 	LOW_ALERT(ObservationInterpretation.LOW_ALERT),
-	/** <div class="de">Normal</div>. */
+	/** <div class="en">Normal</div><div class="de">Normal</div> */
 	NORMAL(ObservationInterpretation.NORMAL);
 	//@formatter:on
 
@@ -47,8 +47,8 @@ public enum ObservationInterpretationForVitalSign {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretationForVitalSign getEnum(String code) {
@@ -67,8 +67,8 @@ public enum ObservationInterpretationForVitalSign {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -89,7 +89,7 @@ public enum ObservationInterpretationForVitalSign {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -138,8 +138,8 @@ public enum ObservationInterpretationForVitalSign {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

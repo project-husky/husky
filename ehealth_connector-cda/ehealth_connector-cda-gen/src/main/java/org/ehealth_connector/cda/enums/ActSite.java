@@ -25,112 +25,109 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public enum ActSite {
 	//@formatter:off
-	/** <div class="de">Ohren beidseits</div>. */
+	/** <div class="en">bilateral ears</div><div class="de">Ohren beidseits</div>*/
 	BILATERAL_EARS("BE", "Ohren beidseits", null, null, "bilateral ears"),
-	/** <div class="de">Nasenlöcher beidseits</div>. */
+	/** <div class="en">bilateral nares</div><div class="de">Nasenlöcher beidseits</div>*/
 	BILATERAL_NARES("BN", "Nasenlöcher beidseits", null, null, "bilateral nares"),
-	/** <div class="de">Augen beidseits</div>. */
+	/** <div class="en">biliteral eyes</div><div class="de">Augen beidseits</div>*/
 	BILITERAL_EYES("OU", "Augen beidseits", null, null, "biliteral eyes"),
-
-	/** <div class="de">Gesässbacke</div>. */
+	/** <div class="en">buttock</div><div class="de">Gesässbacke</div>*/
 	BUTTOCK("BU", "Gesässbacke", null, null, "buttock"),
-	/** <div class="de">Linke Fossa antecubitalis</div>. */
+	/** <div class="en">left antecubital fossa</div><div class="de">Linke Fossa antecubitalis</div>*/
 	LEFT_ANTECUBITAL_FOSSA("LACF", "Linke Fossa antecubitalis", null, null, "left antecubital fossa"),
-	/** <div class="de">Linker vorderer Thorax</div>. */
+	/** <div class="en">left anterior chest</div><div class="de">Linker vorderer Thorax</div>*/
 	LEFT_ANTERIOR_CHEST("LAC", "Linker vorderer Thorax", null, null, "left anterior chest"),
-	/** <div class="de">Linker Arm</div>. */
+	/** <div class="en">left arm</div><div class="de">Linker Arm</div>*/
 	LEFT_ARM("LA", "Linker Arm", null, null, "left arm"),
-	/** <div class="de">Linker Deltoideus</div>. */
+	/** <div class="en">left deltoid</div><div class="de">Linker Deltoideus</div>*/
 	LEFT_DELTOID("LD", "Linker Deltoideus", null, null, "left deltoid"),
-	/** <div class="de">Linkes Ohr</div>. */
+	/** <div class="en">left ear</div><div class="de">Linkes Ohr</div>*/
 	LEFT_EAR("LE", "Linkes Ohr", null, null, "left ear"),
-	/** <div class="de">Linke Jugularis externa</div>. */
+	/** <div class="en">left external jugular</div><div class="de">Linke Jugularis externa</div>*/
 	LEFT_EXTERNAL_JUGULAR("LEJ", "Linke Jugularis externa", null, null, "left external jugular"),
-	/** <div class="de">Linkes Auge</div>. */
+	/** <div class="en">left eye</div><div class="de">Linkes Auge</div>*/
 	LEFT_EYE("OS", "Linkes Auge", null, null, "left eye"),
-	/** <div class="de">Linker Fuss</div>. */
+	/** <div class="en">left foot</div><div class="de">Linker Fuss</div>*/
 	LEFT_FOOT("LF", "Linker Fuss", null, null, "left foot"),
-	/** <div class="de">Linker Glutaeus medius</div>. */
+	/** <div class="en">left gluteus medius</div><div class="de">Linker Glutaeus medius</div>*/
 	LEFT_GLUTEUS_MEDIUS("LG", "Linker Glutaeus medius", null, null, "left gluteus medius"),
-	/** <div class="de">Linke Hand</div>. */
+	/** <div class="en">left hand</div><div class="de">Linke Hand</div>*/
 	LEFT_HAND("LH", "Linke Hand", null, null, "left hand"),
-	/** <div class="de">Linke Jugularis interna</div>. */
+	/** <div class="en">left internal jugular</div><div class="de">Linke Jugularis interna</div>*/
 	LEFT_INTERNAL_JUGULAR("LIJ", "Linke Jugularis interna", null, null, "left internal jugular"),
-	/** <div class="de">Linker unterer Abdominal-Quadrant</div>. */
+	/** <div class="en">left lower abd quadrant</div><div class="de">Linker unterer Abdominal-Quadrant</div>*/
 	LEFT_LOWER_ABD_QUARANT("LLAQ", "Linker unterer Abdominal-Quadrant", null, null, "left lower abd quadrant"),
-	/** <div class="de">Linker distaler Unterarm</div>. */
+	/** <div class="en">left lower forearm</div><div class="de">Linker distaler Unterarm</div>*/
 	LEFT_LOWER_FOREARM("LLFA", "Linker distaler Unterarm", null, null, "left lower forearm"),
-	/** <div class="de">Linker mittlerer Unterarm</div>. */
+	/** <div class="en">left mid forearm</div><div class="de">Linker mittlerer Unterarm</div>*/
 	LEFT_MID_FOREARM("LMFA", "Linker mittlerer Unterarm", null, null, "left mid forearm"),
-	/** <div class="de">Linkes Nasenloch</div>. */
+	/** <div class="en">left naris</div><div class="de">Linkes Nasenloch</div>*/
 	LEFT_NARIS("LN", "Linkes Nasenloch", null, null, "left naris"),
-	/** <div class="de">Linke hinterer Thorax</div>. */
+	/** <div class="en">left posterior chest</div><div class="de">Linke hinterer Thorax</div>*/
 	LEFT_POSTERIOR_CHEST("LPC", "Linke hinterer Thorax", null, null, "left posterior chest"),
-	/** <div class="de">Linke Subclavia</div>. */
+	/** <div class="en">left subclavian</div><div class="de">Linke Subclavia</div>*/
 	LEFT_SUBCLAVIAN("LSC", "Linke Subclavia", null, null, "left subclavian"),
-	/** <div class="de">Linker Oberschenkel</div>. */
+	/** <div class="en">left tigh</div><div class="de">Linker Oberschenkel</div>*/
 	LEFT_TIGH("LT", "Linker Oberschenkel", null, null, "left tigh"),
-	/** <div class="de">Linker oberer Abdominal‐Quadrant</div>. */
+	/** <div class="en">left upper abd quadrant</div><div class="de">Linker oberer Abdominal‐Quadrant</div>*/
 	LEFT_UPPER_ABD_QUARANT("LUAQ", "Linker oberer Abdominal‐Quadrant", null, null, "left upper abd quadrant"),
-	/** <div class="de">Linker Obararm</div>. */
+	/** <div class="en">left upper arm</div><div class="de">Linker Obararm</div>*/
 	LEFT_UPPER_ARM("LUA", "Linker Obararm", null, null, "left upper arm"),
-	/** <div class="de">Linker proximaler Unterarm</div>. */
+	/** <div class="en">left upper forearm</div><div class="de">Linker proximaler Unterarm</div>*/
 	LEFT_UPPER_FOREARM("LUFA", "Linker proximaler Unterarm", null, null, "left upper forearm"),
-
-	/** <div class="de">Linker Vastus lateralis</div>. */
+	/** <div class="en">left vastus lateralis</div><div class="de">Linker Vastus lateralis</div>*/
 	LEFT_VASTUS_LATERALIS("LVL", "Linker Vastus lateralis", null, null, "left vastus lateralis"),
-	/** <div class="de">Links ventragluteal</div>. */
+	/** <div class="en">left ventragluteal</div><div class="de">Links ventragluteal</div>*/
 	LEFT_VENTRAGLUTEAL("LVG", "Links ventragluteal", null, null, "left ventragluteal"),
-	/** <div class="de">perianal</div>. */
+	/** <div class="en">perianal</div><div class="de">perianal</div>*/
 	PERIANAL("PA", "perianal", null, null, "perianal"),
-	/** <div class="de">perineal</div>. */
+	/** <div class="en">perineal</div><div class="de">perineal</div>*/
 	PERINEAL("PERIN", "perineal", null, null, "perineal"),
-	/** <div class="de">Rechte Fossa antecubitalis</div>. */
+	/** <div class="en">right antecubital fossa</div><div class="de">Rechte Fossa antecubitalis</div>*/
 	RIGHT_ANTECUBITAL_FOSSA("RACF", "Rechte Fossa antecubitalis", null, null, "right antecubital fossa"),
-
-	/** <div class="de">Rechter vorderer Thorax</div>. */
+	/** <div class="en">right anterior chest</div><div class="de">Rechter vorderer Thorax</div>*/
 	RIGHT_ANTERIOR_CHEST("RAC", "Rechter vorderer Thorax", null, null, "right anterior chest"),
-	/** <div class="de">Rechter Arm</div>. */
+	/** <div class="en">right arm</div><div class="de">Rechter Arm</div>*/
 	RIGHT_ARM("RA", "Rechter Arm", null, null, "right arm"),
-	/** <div class="de">Rechter Deltoideus</div>. */
+	/** <div class="en">right deltoid</div><div class="de">Rechter Deltoideus</div>*/
 	RIGHT_DELTOID("RD", "Rechter Deltoideus", null, null, "right deltoid"),
-	/** <div class="de">Rechtes Ohr</div>. */
+	/** <div class="en">right ear</div><div class="de">Rechtes Ohr</div>*/
 	RIGHT_EAR("RE", "Rechtes Ohr", null, null, "right ear"),
-	/** <div class="de">Rechte Jugularis externa</div>. */
+	/** <div class="en">right external jugular</div><div class="de">Rechte Jugularis externa</div>*/
 	RIGHT_EXTERNAL_JUGULAR("REJ", "Rechte Jugularis externa", null, null, "right external jugular"),
-	/** <div class="de">Rechtes Auge</div>. */
+	/** <div class="en">right eye</div><div class="de">Rechtes Auge</div>*/
 	RIGHT_EYE("OD", "Rechtes Auge", null, null, "right eye"),
-	/** <div class="de">Rechter Fuss</div>. */
+	/** <div class="en">right foot</div><div class="de">Rechter Fuss</div>*/
 	RIGHT_FOOT("RF", "Rechter Fuss", null, null, "right foot"),
-	/** <div class="de">Rechter Gluaeus medius</div>. */
+	/** <div class="en">right gluteus medius</div><div class="de">Rechter Gluaeus medius</div>*/
 	RIGHT_GLUTEUS_MEDIUS("RG", "Rechter Gluaeus medius", null, null, "right gluteus medius"),
-	/** <div class="de">Rechte Hand</div>. */
+	/** <div class="en">right hand</div><div class="de">Rechte Hand</div>*/
 	RIGHT_HAND("RH", "Rechte Hand", null, null, "right hand"),
-	/** <div class="de">Rechte Jugularis interna</div>. */
+	/** <div class="en">right internal jugular</div><div class="de">Rechte Jugularis interna</div>*/
 	RIGHT_INTERNAL_JUGULAR("RIJ", "Rechte Jugularis interna", null, null, "right internal jugular"),
-	/** <div class="de">Rechter unterer Abdominal-Quadrant</div>. */
+	/** <div class="en">right lower abd quadrant</div><div class="de">Rechter unterer Abdominal-Quadrant</div>*/
 	RIGHT_LOWER_ABD_QUARANT("RLAQ", "Rechter unterer Abdominal-Quadrant", null, null, "right lower abd quadrant"),
-	/** <div class="de">Rechter distaler Unterarm</div>. */
+	/** <div class="en">right lower forearm</div><div class="de">Rechter distaler Unterarm</div>*/
 	RIGHT_LOWER_FOREARM("RLFA", "Rechter distaler Unterarm", null, null, "right lower forearm"),
-	/** <div class="de">Rechter mittlerer Unterarm</div>. */
+	/** <div class="en">right mid forearm</div><div class="de">Rechter mittlerer Unterarm</div>*/
 	RIGHT_MID_FOREARM("RMFA", "Rechter mittlerer Unterarm", null, null, "right mid forearm"),
-	/** <div class="de">Rechtes Nasenloch</div>. */
+	/** <div class="en">right naris</div><div class="de">Rechtes Nasenloch</div>*/
 	RIGHT_NARIS("RN", "Rechtes Nasenloch", null, null, "right naris"),
-	/** <div class="de">Rechter hinterer Thorax</div>. */
+	/** <div class="en">right posterior chest</div><div class="de">Rechter hinterer Thorax</div>*/
 	RIGHT_POSTERIOR_CHEST("RPC", "Rechter hinterer Thorax", null, null, "right posterior chest"),
-	/** <div class="de">Rechte Subclavia</div>. */
+	/** <div class="en">right subclavian</div><div class="de">Rechte Subclavia</div>*/
 	RIGHT_SUBCLAVIAN("RSC", "Rechte Subclavia", null, null, "right subclavian"),
-	/** <div class="de">Rechter Oberschenkel</div>. */
+	/** <div class="en">right tigh</div><div class="de">Rechter Oberschenkel</div>*/
 	RIGHT_TIGH("RT", "Rechter Oberschenkel", null, null, "right tigh"),
-	/** <div class="de">Rechter oberer Abdominal‐Quadrant</div>. */
+	/** <div class="en">right upper abd quadrant</div><div class="de">Rechter oberer Abdominal‐Quadrant</div>*/
 	RIGHT_UPPER_ABD_QUARANT("RUAQ", "Rechter oberer Abdominal‐Quadrant", null, null, "right upper abd quadrant"),
-	/** <div class="de">Rechter Oberarm</div>. */
+	/** <div class="en">right upper arm</div><div class="de">Rechter Oberarm</div>*/
 	RIGHT_UPPER_ARM("RUA", "Rechter Oberarm", null, null, "right upper arm"),
-	/** <div class="de">Rechter proximaler Unterarm</div>. */
+	/** <div class="en">right upper forearm</div><div class="de">Rechter proximaler Unterarm</div>*/
 	RIGHT_UPPER_FOREARM("RUFA", "Rechter proximaler Unterarm", null, null, "right upper forearm"),
-	/** <div class="de">Rechter Vastus lateralis</div>. */
+	/** <div class="en">right vastus lateralis</div><div class="de">Rechter Vastus lateralis</div>*/
 	RIGHT_VASTUS_LATERALIS("RVL", "Rechter Vastus lateralis", null, null, "right vastus lateralis"),
-	/** <div class="de">Rechts ventragluteal</div>. */
+	/** <div class="en">right ventragluteal</div><div class="de">Rechts ventragluteal</div>*/
 	RIGHT_VENTRAGLUTEAL("RVG", "Rechts ventragluteal", null, null, "right ventragluteal");
 	//@formatter:on
 
@@ -150,8 +147,8 @@ public enum ActSite {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ActSite getEnum(String code) {
@@ -170,8 +167,8 @@ public enum ActSite {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -192,8 +189,8 @@ public enum ActSite {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -213,8 +210,8 @@ public enum ActSite {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
@@ -227,16 +224,16 @@ public enum ActSite {
 	private String displayNameIt;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ActSite(String code, String displayNameDe, String displayNameFr, String displayNameIt,
 			String displayNameEn) {
@@ -284,8 +281,8 @@ public enum ActSite {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

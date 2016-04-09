@@ -24,15 +24,25 @@ import org.ehealth_connector.common.enums.CodeSystems;
  */
 public enum VitalSignCodes {
 	//@formatter:off
+	/** <div class="en">body height (measured)</div><div class="de">Körpergrösse (gemessen)</div>*/
 	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
+	/** <div class="en">body height lying</div><div class="de">Körpergrösse im Liegen</div>*/
 	BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null, null, "body height lying"),
+	/** <div class="en">body temperature</div><div class="de">Körpertemperatur</div>*/
 	BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", null, null, "body temperature"),
+	/** <div class="en">body weight (measured)</div><div class="de">Körpergewicht (gewogen)</div>*/
 	BODY_WEIGHT("3141-9", "Körpergewicht (gewogen)", null, null, "body weight (measured)"),
+	/** <div class="en">circumfence occipital frontal</div><div class="de">Kopfumfang okzipitofrontal</div>*/
 	CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", null, null, "circumfence occipital frontal"),
+	/** <div class="en">heart beat</div><div class="de">Herzfrequenz</div>*/
 	HEART_BEAT("8867-4", "Herzfrequenz", null, null, "heart beat"),
+	/** <div class="en">intravascular diastolic</div><div class="de">Intrvaskulärer diastolischer Druck</div>*/
 	INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", null, null,"intravascular diastolic"),
+	/** <div class="en">intravascular systolic</div><div class="de">Intravaskulärer systolischer Druck</div>*/
 	INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", null, null, "intravascular systolic"),
+	/** <div class="en">oxygen saturation</div><div class="de">Sauerstoffsättigung</div>*/
 	OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", null, null, "oxygen saturation"),
+	/** <div class="en">respiration rate</div><div class="de">Atemfrequenz</div>*/
 	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate");
 	//@formatter:on
 
@@ -108,15 +118,6 @@ public enum VitalSignCodes {
 		return getDisplayNameDe();
 	}
 
-	/**
-	 * <div class="en">Gets the corresponding LOINC code.</div>
-	 *
-	 * @return <div class="en">LOINC code as String</div>
-	 */
-	public String getLoinc() {
-		return loinc;
-	}
-
 	private String getDisplayNameDe() {
 		if (descriptionDe != null) {
 			return descriptionDe;
@@ -143,6 +144,15 @@ public enum VitalSignCodes {
 			return descriptionIt;
 		}
 		return getDisplayNameEn();
+	}
+
+	/**
+	 * <div class="en">Gets the corresponding LOINC code.</div>
+	 *
+	 * @return <div class="en">LOINC code as String</div>
+	 */
+	public String getLoinc() {
+		return loinc;
 	}
 
 }
