@@ -140,7 +140,7 @@ public class CdaChEdesCtnn
 		// add the MDHT Object to the section
 		section.addAct(AllergiesOrOtherAdverseReaction.copyMdhtAllergyConcern());
 		section.createStrucDocText(common.getAllergyTable(getAllergiesAndOtherAdverseReactions()));
-	//  Generate <text> Allergy table</text>
+		// Generate <text> Allergy table</text>
 	}
 
 	/**
@@ -166,14 +166,7 @@ public class CdaChEdesCtnn
 					languageCode, section);
 		}
 
-		// if
-		// (mCodedVitalSigns.getMdht().getClinicalDocument().getLanguageCode()
-		// != null) {
-		// CS language =
-		// mCodedVitalSigns.getMdht().getClinicalDocument().getLanguageCode();
-		// vitalSign.setLanguageCode(LanguageCode.getEnum(language.getCode()));
-		// }
-		mCodedVitalSigns.add(vitalSign, author);
+		mCodedVitalSigns.add(vitalSign, author, "vs");
 	}
 
 	/**

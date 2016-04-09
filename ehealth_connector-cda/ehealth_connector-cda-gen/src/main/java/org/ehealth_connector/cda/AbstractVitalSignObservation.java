@@ -42,9 +42,9 @@ public abstract class AbstractVitalSignObservation {
 	protected org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
 
 	/**
-	 * <div class="en">Gets the code of the observation</div> <div class="de">Gibt
-	 * den Code der Beobachtung zurück.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the code of the observation</div>
+	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the code
 	 */
@@ -54,8 +54,8 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
-	 * Gets the reference to the content element. It is the value of the ID in the
-	 * &lt;content ID="xxx"&gt; element prefixed with #.
+	 * Gets the reference to the content element. It is the value of the ID in
+	 * the &lt;content ID="xxx"&gt; element prefixed with #.
 	 *
 	 * @return the content ID reference
 	 */
@@ -117,7 +117,7 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the text of this element.
 	 *
 	 * @param text
-	 *          the new text
+	 *            the new text
 	 */
 	public String getText(String text) {
 		if (mVitalSignObservation.getText() != null
@@ -128,7 +128,21 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded String.
+	 * Gets the text reference.
+	 *
+	 * @return the text reference
+	 */
+	public String getTextReference() {
+		if ((mVitalSignObservation.getText() != null)
+				&& (mVitalSignObservation.getText().getReference() != null)) {
+			return mVitalSignObservation.getText().getReference().getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * Get the (first) problem value. The Value may be a coded or uncoded
+	 * String.
 	 *
 	 * @return the (first) problem value as string.
 	 */
@@ -141,10 +155,28 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
+	 * Initialize the MDHT VitalSignObservation model object.
+	 */
+	protected void initMdht() {
+		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
+		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
+
+		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+
+		mVitalSignObservation.setText(Util.createReference("#TODO"));
+	}
+
+	/**
 	 * Sets the code.
 	 *
 	 * @param code
-	 *          the new code
+	 *            the new code
 	 */
 	public void setCode(Code code) {
 		mVitalSignObservation.setCode(code.getCD());
@@ -152,11 +184,11 @@ public abstract class AbstractVitalSignObservation {
 
 	/**
 	 * Sets the reference to the content element. This is the value of the ID in
-	 * the &lt;content ID="xxx"&gt; element. If not provided it will automatically
-	 * be prefixed with #.
+	 * the &lt;content ID="xxx"&gt; element. If not provided it will
+	 * automatically be prefixed with #.
 	 *
 	 * @param value
-	 *          the content ID reference
+	 *            the content ID reference
 	 */
 	public void setContentIdReference(String value) {
 		if (!value.startsWith("#"))
@@ -168,7 +200,7 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the date time of result.
 	 *
 	 * @param dateTimeOfResult
-	 *          the new date time of result
+	 *            the new date time of result
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
@@ -183,8 +215,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new language code of the vital sign observation, and its codes.
 	 *
 	 * @param languageCode
-	 *          <div class="de">Language code</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <div class="de">Language code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
 		CD code = mVitalSignObservation.getCode();
@@ -207,8 +239,8 @@ public abstract class AbstractVitalSignObservation {
 	 * Set a new act site of the vital sign observation.
 	 *
 	 * @param code
-	 *          <div class="de">Anatomische Lage des Resultats</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
@@ -221,17 +253,27 @@ public abstract class AbstractVitalSignObservation {
 	 * Sets the text of this element.
 	 *
 	 * @param text
-	 *          the new text
+	 *            the new text
 	 */
 	public void setText(String text) {
 		mVitalSignObservation.setText(Util.createEd(text));
 	}
 
 	/**
+	 * Creates the reference to the section.
+	 *
+	 * @param prefix
+	 *            the prefix
+	 */
+	public void setTextReference(String prefix) {
+		mVitalSignObservation.setText(Util.createReference(prefix));
+	}
+
+	/**
 	 * Adds the value.
 	 *
 	 * @param value
-	 *          the new value
+	 *            the new value
 	 */
 	public void setValue(Value value) {
 		if (value.isPhysicalQuantity()) {
@@ -243,23 +285,5 @@ public abstract class AbstractVitalSignObservation {
 		if (value.isRto()) {
 			mVitalSignObservation.getValues().add(value.copyMdhtRto());
 		}
-	}
-
-	/**
-	 * Initialize the MDHT VitalSignObservation model object.
-	 */
-	protected void initMdht() {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
-		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
-		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
-		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
-
-		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
-
-		mVitalSignObservation.setText(Util.createReference("#TODO"));
 	}
 }

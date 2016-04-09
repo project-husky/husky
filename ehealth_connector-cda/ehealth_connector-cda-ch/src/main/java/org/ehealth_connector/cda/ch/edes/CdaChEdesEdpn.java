@@ -169,8 +169,8 @@ public class CdaChEdesEdpn
 
 		// add the MDHT Object to the section
 		section.addAct(AllergiesOrOtherAdverseReaction.copyMdhtAllergyConcern());
-		 section.createStrucDocText(common.getAllergyTable(getAllergiesAndOtherAdverseReactions()));
-		//  Generate <text> Allergy table</text>
+		section.createStrucDocText(common.getAllergyTable(getAllergiesAndOtherAdverseReactions()));
+		// Generate <text> Allergy table</text>
 	}
 
 	/**
@@ -195,14 +195,7 @@ public class CdaChEdesEdpn
 			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
 					languageCode, section);
 		}
-		// if
-		// (mCodedVitalSigns.getMdht().getClinicalDocument().getLanguageCode()
-		// != null) {
-		// CS language =
-		// mCodedVitalSigns.getMdht().getClinicalDocument().getLanguageCode();
-		// vitalSign.setLanguageCode(LanguageCode.getEnum(language.getCode()));
-		// }
-		mCodedVitalSigns.add(vitalSign, author);
+		mCodedVitalSigns.add(vitalSign, author, "vs");
 	}
 
 	/**
@@ -301,7 +294,7 @@ public class CdaChEdesEdpn
 		}
 		return AllergyConcerns;
 	}
-	
+
 	/**
 	 * <div class="en">Gets the coded vital sign observations</div>
 	 * <div class="de">Liefert alle codierten Vitalzeichen zurück</div>
