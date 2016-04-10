@@ -134,6 +134,7 @@
 									<arg value="${project.build.directory}/ehealthconnector-ch.jar" />
 								</exec>
 								<copy failonerror="false" file="${project.build.directory}/ehealthconnector-ch.dll" tofile="${basedir}../../../../demo/dotnet/eHealthConnectorDemo/lib/ehealthconnector-ch.dll" />
+								<copy failonerror="false" file="${project.build.directory}/ehealthconnector-ch.jar" tofile="${basedir}../../../../demo/javascript/ehealthconnector-ch.jar" />
 							</target>
 						</configuration>
 						<executions>
