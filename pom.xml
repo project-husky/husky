@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-main</artifactId>
@@ -92,8 +91,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<!-- eclipse stuff -->
 
 			<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
-			<!-- dependency> <groupId>net.sourceforge.lpg</groupId> <artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId> 
-				<version>1.1.0.v200803061910</version> </dependency -->
+			<!-- dependency> <groupId>net.sourceforge.lpg</groupId> <artifactId>net.sourceforge.lpg.lpgjavaruntime</artifactId> <version>1.1.0.v200803061910</version> 
+				</dependency -->
 
 			<!-- hl7 -->
 			<dependency>
@@ -282,8 +281,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			</dependency>
 
 			<!-- hapi fhir -->
-			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> 
-				<version>${hapi.fhir.version}</version> </dependency> -->
+			<!-- <dependency> <groupId>ca.uhn.hapi.fhir</groupId> <artifactId>hapi-fhir-base</artifactId> <version>${hapi.fhir.version}</version> </dependency> -->
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>hapi-fhir-structures-dstu2</artifactId>
@@ -401,7 +399,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 			<dependency>
 				<groupId>net.sf.saxon</groupId>
 				<artifactId>Saxon-HE</artifactId>
-				<version>9.4</version>
+				<version>9.7.0-4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.pdftools</groupId>
@@ -467,10 +465,23 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<artifactId>maven-java-formatter-plugin</artifactId>
 					<version>0.4</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
 			</plugins>
 
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -492,8 +503,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
-							<!-- simpler configuration without reportSets available for usual 
-								cases -->
+							<!-- simpler configuration without reportSets available for usual cases -->
 							<reports>
 								<report>dependencies</report>
 								<report>scm</report>
@@ -732,33 +742,9 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<url>http://sourceforge.net/p/ehealthconnector/wiki/Home</url>
 	</organization>
 
-	<profiles>
-		<profile>
-			<id>activate-kvmc</id>
-			<activation>
-				<os>
-					<family>Windows</family>
-				</os>
-			</activation>
-			<build>
-				<plugins>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-
-						<configuration>
-							<target>
-								<property environment="ikvmc.executable" />
-								<available file="commandname" filepath="${env.PATH}"
-									property="ikvmc.present" />
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+	<!-- profiles> <profile> <id>activate-kvmc</id> <activation> <os> <family>Windows</family> </os> </activation> <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-antrun-plugin</artifactId> <configuration> <target> <property environment="ikvmc.executable" /> <available file="commandname" filepath="${env.PATH}" 
+		property="ikvmc.present" /> </target> </configuration> </plugin> </plugins> </build> </profile> </profiles -->
 
 </project>
 	
