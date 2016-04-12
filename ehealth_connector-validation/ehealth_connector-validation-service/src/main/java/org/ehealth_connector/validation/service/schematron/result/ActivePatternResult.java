@@ -37,8 +37,9 @@ public class ActivePatternResult {
 		Iterator<Object> apcIter = apChilds.iterator();
 		FiredRuleResult tempFR = null;
 		Object prevObject = null;
+		Object tempObj = null;
 		while (apcIter.hasNext()) {
-			Object tempObj = apcIter.next();
+			tempObj = apcIter.next();
 			if (tempObj instanceof FiredRule && (prevObject == null || prevObject instanceof FiredRule)) {
 				tempFR = new FiredRuleResult((FiredRule) tempObj);
 				prevObject = tempFR;
@@ -62,7 +63,9 @@ public class ActivePatternResult {
 				prevObject = tempFR;
 			}
 		}
-
+		if (tempObj instanceof SuccessfulReport || tempObj instanceof SuccessfulReport) {
+			firedRulesresults.add(tempFR);
+		}
 		return firedRulesresults;
 	}
 

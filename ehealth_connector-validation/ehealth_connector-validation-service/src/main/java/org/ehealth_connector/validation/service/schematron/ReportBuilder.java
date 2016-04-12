@@ -18,6 +18,8 @@ package org.ehealth_connector.validation.service.schematron;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -364,15 +366,15 @@ public class ReportBuilder {
 		byte[] svrl_ms = baos_ms.toByteArray();
 
 		// for debugging only - comment these lines for productive releases
-		// OutputStream outputStream2 = null;
-		// try {
-		// outputStream2 = new FileOutputStream("/temp/svrl2xml_out.xml");
-		// baos_ms.writeTo(outputStream2);
-		// outputStream2.close();
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+//		 OutputStream outputStream2 = null;
+//		 try {
+//		 outputStream2 = new FileOutputStream("temp/svrl2xml_out.xml");
+//		 baos_ms.writeTo(outputStream2);
+//		 outputStream2.close();
+//		 } catch (IOException e) {
+//		 // TODO Auto-generated catch block
+//		 e.printStackTrace();
+//		 }
 		// end of debugging only
 
 		return svrl_ms;
