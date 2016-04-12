@@ -42,8 +42,6 @@ import net.sf.saxon.s9api.XsltExecutable;
  *
  */
 public class StylesheetFactory {
-	// TODO Registration of an ErrorListener
-
 	/**
 	 * A {@link Computable} which takes an XSL source document as argument and
 	 * produces a compiled stylesheet.
@@ -54,11 +52,10 @@ public class StylesheetFactory {
 			return compileStylesheet(source);
 		}
 	};
-	
-	/** Thread-safe cache for storing the compiled stylesheets. */
-	private final Memoizer<Source, XsltExecutable> cache = new Memoizer<Source, XsltExecutable>(computable);
 
-	
+	/** Thread-safe cache for storing the compiled stylesheets. */
+	private final Memoizer<Source, XsltExecutable> cache = new Memoizer<Source, XsltExecutable>(
+			computable);
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());

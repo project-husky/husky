@@ -33,7 +33,9 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.ErrorListener;
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -71,6 +73,8 @@ import net.sf.saxon.s9api.SaxonApiException;
  *
  */
 public class CdaValidator {
+
+	// private final Log log = LogFactory.getLog(CdaValidator.class);
 
 	/** Configuration of the validator */
 	private Configuration configuration;
@@ -122,7 +126,8 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 *             If the configuration fails, an exception will be thrown
 	 */
-	public CdaValidator(File cdaFile, File configFile, String langCode) throws ConfigurationException {
+	public CdaValidator(File cdaFile, File configFile, String langCode)
+			throws ConfigurationException {
 		this.cdaFile = cdaFile;
 		this.configuration = configure(configFile);
 		this.validators = createValidators(this.configuration);
@@ -183,7 +188,8 @@ public class CdaValidator {
 					prevObject = temp;
 					continue;
 				}
-				if (temp instanceof ActivePattern && prevObject != null && prevObject instanceof ActivePattern) {
+				if (temp instanceof ActivePattern && prevObject != null
+						&& prevObject instanceof ActivePattern) {
 					schValRes.getActivePatternResultFull().add(currentApResult);
 					currentApResult = new ActivePatternResult();
 					currentApResult.setAp((ActivePattern) temp);
@@ -210,25 +216,21 @@ public class CdaValidator {
 					currentApResult.getApChilds().add(temp);
 					prevObject = temp;
 				}
-				
+
 				/*
-				if (!(temp instanceof ActivePattern)) {
-					if (temp instanceof FailedAssert) {
-						if (((FailedAssert) temp).getRole().equals("")
-								|| ((FailedAssert) temp).getRole().toLowerCase().equals("error"))
-							schValRes.setSchematronValid(false);
-						currentApResult.getApChilds().add(temp);
-						prevObject = temp;
-					}
-				}
-				if (!(temp instanceof ActivePattern)) {
-					if (temp instanceof SuccessfulReport) {
-						if (((SuccessfulReport) temp).getRole().toLowerCase().equals("error"))
-							schValRes.setSchematronValid(false);
-						currentApResult.getApChilds().add(temp);
-						prevObject = temp;
-					}
-				}*/
+				 * if (!(temp instanceof ActivePattern)) { if (temp instanceof
+				 * FailedAssert) { if (((FailedAssert)
+				 * temp).getRole().equals("") || ((FailedAssert)
+				 * temp).getRole().toLowerCase().equals("error"))
+				 * schValRes.setSchematronValid(false);
+				 * currentApResult.getApChilds().add(temp); prevObject = temp; }
+				 * } if (!(temp instanceof ActivePattern)) { if (temp instanceof
+				 * SuccessfulReport) { if (((SuccessfulReport)
+				 * temp).getRole().toLowerCase().equals("error"))
+				 * schValRes.setSchematronValid(false);
+				 * currentApResult.getApChilds().add(temp); prevObject = temp; }
+				 * }
+				 */
 
 			} while (schIter.hasNext());
 			schValRes.getActivePatternResultFull().add(currentApResult);
@@ -262,7 +264,28 @@ public class CdaValidator {
 	 */
 	private Validators createValidators(Configuration configuration) {
 		// log.debug("Building rule-set transformer ...");
-		RuleSetTransformer factory = new RuleSetTransformer(new Processor(false));
+
+		Processor processor = new Processor(false);
+
+		processor.getUnderlyingConfiguration().setErrorListener(new ErrorListener() {
+			@Override
+			public void error(TransformerException exception) throws TransformerException {
+				throw new TransformerException(exception);
+			}
+
+			@Override
+			public void fatalError(TransformerException exception) throws TransformerException {
+				throw new TransformerException(exception);
+			}
+
+			@Override
+			public void warning(TransformerException exception) throws TransformerException {
+				// Do nothing (suppress warnings)
+				// log.debug("PerformanceTimestamp: Starting
+				// DemoMPIClient.doDemo");
+			}
+		});
+		RuleSetTransformer factory = new RuleSetTransformer(processor);
 		return new Validators(factory);
 	}
 
@@ -331,8 +354,8 @@ public class CdaValidator {
 			SchematronValidationResult schValRes = convertSchematronOutput(schOut);
 			validationResult.setSchValRes(schValRes);
 
-		} catch (SAXException | FileNotFoundException | RuleSetDetectionException | TransformationException
-				| InterruptedException e) {
+		} catch (SAXException | FileNotFoundException | RuleSetDetectionException
+				| TransformationException | InterruptedException e) {
 			System.out.println("Schematron validation failed: " + e.getMessage());
 		}
 
@@ -370,7 +393,8 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public ArrayList<PdfValidationResult> validatePDF() throws ConfigurationException, SaxonApiException, IOException {
+	public ArrayList<PdfValidationResult> validatePDF()
+			throws ConfigurationException, SaxonApiException, IOException {
 
 		PdfValidator pdfValidator = new PdfValidator(this.configuration);
 		pdfValidator.validatePdfFile(this.cdaFile);
@@ -389,13 +413,13 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 *
-	public ArrayList<PdfValidationResult> validatePDF(String pdfLevel, String pdfReportingLevel, String licenseKey)
-			throws ConfigurationException, SaxonApiException, IOException {
-
-		//this.configuration
-		// geht nur mühsam, da config via file implementiert ist
-		return validatePDF();
-	}*/
+	 *             public ArrayList<PdfValidationResult> validatePDF(String
+	 *             pdfLevel, String pdfReportingLevel, String licenseKey) throws
+	 *             ConfigurationException, SaxonApiException, IOException {
+	 *
+	 *             //this.configuration // geht nur mühsam, da config via file
+	 *             implementiert ist return validatePDF(); }
+	 */
 
 	/**
 	 * @return SchematronValidationResult
@@ -406,8 +430,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronValidationResult validateSchematron() throws SAXException, FileNotFoundException,
-			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
+	public SchematronValidationResult validateSchematron()
+			throws SAXException, FileNotFoundException, RuleSetDetectionException,
+			TransformationException, InterruptedException, ConfigurationException {
 		return this.convertSchematronOutput(validateSchematronRaw());
 	}
 
@@ -421,8 +446,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronValidationResult validateSchematron(File schFile) throws SAXException, FileNotFoundException,
-			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
+	public SchematronValidationResult validateSchematron(File schFile)
+			throws SAXException, FileNotFoundException, RuleSetDetectionException,
+			TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
 		return this.convertSchematronOutput(validateSchematronRaw());
 	}
@@ -437,8 +463,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematronRaw() throws SAXException, FileNotFoundException,
-			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
+	public SchematronOutput validateSchematronRaw()
+			throws SAXException, FileNotFoundException, RuleSetDetectionException,
+			TransformationException, InterruptedException, ConfigurationException {
 
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
@@ -471,8 +498,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematronRaw(File schFile) throws SAXException, FileNotFoundException,
-			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
+	public SchematronOutput validateSchematronRaw(File schFile)
+			throws SAXException, FileNotFoundException, RuleSetDetectionException,
+			TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
 		return validateSchematronRaw();
 	}
