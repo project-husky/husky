@@ -17,6 +17,7 @@ import org.ehealth_connector.validation.service.schematron.RuleSetDetectionExcep
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.junit.Before;
+import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import net.sf.saxon.s9api.SaxonApiException;
@@ -31,18 +32,18 @@ public class ValidationTest {
 	SchematronValidationResult schValiRes;
 	ArrayList<PdfValidationResult> pdfValiRes;
 
-	private final String configFilePath = "rsc/demoValidation/config_elga.xml";
-	private final String cdaFilePath = "rsc/demoValidation/cda/elga/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(PDFA-1).xml";
-	private final String cdaXsdNokFilePath = "rsc/demoValidation/cda/elga/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(PDFA-1)_xsd_nok.xml";
-	private final String cdaSchNokFilePath = "rsc/demoValidation/cda/elga/ELGA-021-Entlassungsbrief_aerztlich_EIS-Structured_(XML-Body)_SchematronFailure";
+	private final String configFilePath = "rsc/config_elga.xml";
+	private final String cdaFilePath = "rsc/cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(PDFA-1).xml";
+	private final String cdaXsdNokFilePath = "rsc/cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(XML-Body)_xsd_nok.xml";
+	private final String cdaSchNokFilePath = "rsc/cda/ELGA-021-Entlassungsbrief_aerztlich_EIS-Structured_(XML-Body)_SchematronFailure";
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		cdaVali = new CdaValidator(new File(cdaFilePath).getAbsoluteFile(),
 				new File(configFilePath).getAbsoluteFile());
 	}
 
-	// @Test
+	//@Test
 	public void testPdfValidation() throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValiRes = cdaVali.validatePDF();
@@ -60,19 +61,19 @@ public class ValidationTest {
 		assertFalse(xsdValiRes.isXsdValid());
 	}
 
-	// @Test
+	//@Test
 	public void testSchematronValidation()
 			throws SAXException, ConfigurationException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException {
 
-		schValiRes = cdaVali.validateSchematron(new File(cdaFilePath));
+		schValiRes = cdaVali.validateSchematron();//.validateSchematron(new File(cdaFilePath));
 		assertTrue(schValiRes.isSchematronValid());
 
 		schValiRes = cdaVali.validateSchematron(new File(cdaSchNokFilePath));
 		assertFalse(schValiRes.isSchematronValid());
 	}
 
-	// @Test
+	//@Test
 	public void testXSDValidation() throws ConfigurationException {
 
 		xsdValiRes = cdaVali.validateXSD();

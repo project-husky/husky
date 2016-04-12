@@ -1,3 +1,19 @@
+/*******************************************************************************
+ *
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2015
+ *
+ *******************************************************************************/
+
 package org.ehealth_connector.validation.service.schematron.result;
 
 import java.util.ArrayList;
@@ -9,17 +25,23 @@ import org.ehealth_connector.validation.service.schematron.bind.FailedAssert;
 import org.ehealth_connector.validation.service.schematron.bind.FiredRule;
 import org.ehealth_connector.validation.service.schematron.bind.SuccessfulReport;
 
+/**
+ * Wrapper class for all actve-pattern elemnts, with coresponding
+ * fired-rule, failed-assert and successful-report
+ *
+ */
 public class ActivePatternResult {
 
 	private ActivePattern ap;
-	private String id;
-	private String name;
 	private List<Object> apChilds;
 
 	public ActivePatternResult() {
 		apChilds = new ArrayList<Object>();
 	}
 
+	/**
+	 * @return a List of all fired rules
+	 */
 	public List<FiredRule> getFiredRules() {
 		ArrayList<FiredRule> firedRules = new ArrayList<FiredRule>();
 		Iterator<Object> apcIter = apChilds.iterator();
@@ -32,6 +54,9 @@ public class ActivePatternResult {
 		return firedRules;
 	}
 
+	/**
+	 * @return a list of fired-rules with failed-assert or successful-report
+	 */
 	public List<FiredRuleResult> getFiredRulesSuccessFailed() {
 		List<FiredRuleResult> firedRulesresults = new ArrayList<FiredRuleResult>();
 		Iterator<Object> apcIter = apChilds.iterator();
@@ -69,6 +94,9 @@ public class ActivePatternResult {
 		return firedRulesresults;
 	}
 
+	/**
+	 * @return a list with all active-pattern childs
+	 */
 	public List<Object> getApChilds() {
 		return apChilds;
 	}
@@ -77,6 +105,9 @@ public class ActivePatternResult {
 		this.apChilds = apChilds;
 	}
 
+	/**
+	 * @return the underlying ActivePattern
+	 */
 	public ActivePattern getAp() {
 		return ap;
 	}
@@ -85,10 +116,16 @@ public class ActivePatternResult {
 		this.ap = ap;
 	}
 
+	/**
+	 * @return the id of the ActivePattern
+	 */
 	public String getId() {
 		return ap.getId();
 	}
 
+	/**
+	 * @return the name of the ActivePattern
+	 */
 	public void setId(String id) {
 		ap.setId(id);
 	}

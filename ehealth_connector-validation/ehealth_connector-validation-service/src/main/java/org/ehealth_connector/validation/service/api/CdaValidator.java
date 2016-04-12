@@ -161,7 +161,7 @@ public class CdaValidator {
 	 *
 	 * @param schOut
 	 *            SchematronOutput
-	 * @return
+	 * @return The SchematronValidationResult
 	 */
 	private SchematronValidationResult convertSchematronOutput(SchematronOutput schOut) {
 
@@ -240,7 +240,7 @@ public class CdaValidator {
 	 * Instantiate JAXB classes of the schematron XML validation output
 	 *
 	 * @param in
-	 * @return
+	 * @return Instantitad classes from svrl.xml
 	 */
 	private SchematronOutput createSchematronOutput(ByteArrayInputStream in) {
 
@@ -258,7 +258,7 @@ public class CdaValidator {
 
 	/**
 	 * @param configuration
-	 * @return
+	 * @return validators for the current configuration
 	 */
 	private Validators createValidators(Configuration configuration) {
 		// log.debug("Building rule-set transformer ...");
@@ -268,7 +268,7 @@ public class CdaValidator {
 
 	/**
 	 * @param schemaPath
-	 * @return
+	 * @return XSD schema
 	 */
 	private Schema loadSchema(final String schemaPath) {
 		if (schemaPath == null || schemaPath.isEmpty()) {
@@ -365,7 +365,7 @@ public class CdaValidator {
 	/**
 	 * Do a PDF validation of the file, with the current configuration
 	 *
-	 * @return
+	 * @return ArrayList of PDF Validation results
 	 * @throws ConfigurationException
 	 * @throws SaxonApiException
 	 * @throws IOException
@@ -388,20 +388,39 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 * @throws SaxonApiException
 	 * @throws IOException
-	 */
+	 *
 	public ArrayList<PdfValidationResult> validatePDF(String pdfLevel, String pdfReportingLevel, String licenseKey)
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		//this.configuration
 		// geht nur mühsam, da config via file implementiert ist
 		return validatePDF();
-	}
+	}*/
 
+	/**
+	 * @return SchematronValidationResult
+	 * @throws SAXException
+	 * @throws FileNotFoundException
+	 * @throws RuleSetDetectionException
+	 * @throws TransformationException
+	 * @throws InterruptedException
+	 * @throws ConfigurationException
+	 */
 	public SchematronValidationResult validateSchematron() throws SAXException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
 		return this.convertSchematronOutput(validateSchematronRaw());
 	}
 
+	/**
+	 * Do a Schematron validation of the file, with the current configuration
+	 *
+	 * @return Flat SchematronOutput
+	 * @throws FileNotFoundException
+	 * @throws RuleSetDetectionException
+	 * @throws TransformationException
+	 * @throws InterruptedException
+	 * @throws ConfigurationException
+	 */
 	public SchematronValidationResult validateSchematron(File schFile) throws SAXException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
