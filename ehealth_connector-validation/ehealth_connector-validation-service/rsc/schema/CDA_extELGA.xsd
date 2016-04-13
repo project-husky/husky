@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+*******************************************************************************
+Schema for HL7 Clinical Document Architecture (CDA) R2 (2005)
+Containing Extensions for IHE Pharmacy and ELGA
+
+History:
+2013.05.19 Tony Schaller, medshare GmbH, Switzerland (copied from CDA_extPHARM.xsd and ELGA extension added)
+
+*******************************************************************************
+-->
+<xs:schema
+	xmlns:hl7v3="urn:hl7-org:v3"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn:hl7-org:v3"
+	elementFormDefault="qualified">
+
+	<xs:include schemaLocation="POCD_MT000040_extELGA.xsd"/>
+
+	<xs:element name="ClinicalDocument" type="hl7v3:POCD_MT000040.ClinicalDocument"/>
+
+</xs:schema>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?> <!-- The base directory is set to be the parent folder of the configuration 
+	file. -->
+<configuration baseDir="rsc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="configuration.xsd">
+	<application>
+		<document-schema>schema/CDA_extELGA.xsd</document-schema>
+		<!-- The PDF Level used for Validation (1=PDF/A-1, 2=PDF/A-2, 3=PDF/A-3) -->
+		<pdf-level>1a</pdf-level>
+		<!-- 0 none Nothing is reported 1 errors Errors only are reported 2 warnings 
+			Errors and warnings are reported 3 information Errors, warnings and information 
+			messages are reported -->
+		<pdf-reporting-level>3</pdf-reporting-level>
+		<!-- The license-key for the pdf-tools software -->
+		<!-- Uncomment the license-key only if you pdf-tools installed -->
+		<!-- <license-key>yourkey</license-key>  -->
+	</application>
+	<!-- The Schematrons are located at a path relative to the base directory. -->
+	  <!--
+  The Schematrons are located at a path relative to the base directory.
+    -->
+  <schematron dir="schematron">
+
+    <!--
+    ELGA's Rule-Sets with correct templateId set.
+    -->
+    <rule-set file="elga-cdabgd.sch">
+      <description>Befund bildgebende Diagnostik</description>
+      <display-name>Befund bildgebende Diagnostik</display-name>
+      <templateId>1.2.40.0.34.11.5</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaea.sch">
+      <display-name>Entlassungsbrief ärztlich</display-name>
+      <templateId>1.2.40.0.34.11.2</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaep.sch">
+      <display-name>Entlassungsbrief Pflege</display-name>
+      <templateId>1.2.40.0.34.11.3</templateId>
+    </rule-set>
+    <rule-set file="elga-cdalab.sch">
+      <display-name>Laborbefund</display-name>
+      <templateId>1.2.40.0.34.11.4</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaempr.sch">
+      <display-name>e-Medikation Rezept</display-name>
+      <templateId>1.2.40.0.34.11.8.1</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaemdp.sch">
+      <display-name>e-Medikation Abgabe</display-name>
+      <templateId>1.2.40.0.34.11.8.2</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaemml.sch">
+      <display-name>e-Medikation Medikationsliste</display-name>
+      <templateId>1.2.40.0.34.11.8.3</templateId>
+    </rule-set>
+    <rule-set file="elga-cdaempa.sch">
+      <display-name>e-Medikation Pharmazeutische Empfehlung</display-name>
+      <templateId>1.2.40.0.34.11.8.4</templateId>
+    </rule-set>
+  </schematron>
+
+</configuration>

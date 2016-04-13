@@ -1,0 +1,1463 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="ELGA_Stylesheet_v1.0.xsl"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!--
+		=======================================================================
+		ELGA CDA Implementierungsleitfäden
+
+		*** CDA Demo-Dokument ***
+		Dies ist ein Beispielbefund. Bei den Inhalten handelt es sich um synthetische Mustertexte und keinesfalls um personenbezogene Echtdaten oder realistische Befunde.
+		Das Beispiel veranschaulicht die technischen Möglichkeiten unter Verwendung eines Maximums der erlaubten Optionen.
+
+		Spezieller Leitfaden: Entlassungsbrief (Pflege) Version 2.06
+		ELGA Interoperabilitätsstufe (EIS) "Basic"
+
+		auf der Basis des allgemeinen Leitfadens: HL7 Implementation Guide for CDA® R2: Allgemeiner Implementierungsleitfaden für ELGA CDA Dokumente
+
+		Autoren:
+			Jürgen Brandstätter, CodeWerk Software Services and Development GmbH
+			Oliver Kuttin, ELGA GmbH
+			Stefan Sabutsch, ELGA GmbH
+			Carina Seerainer, ELGA GmbH
+			
+		Dokumentrevision:	2.06.0
+		Datum: 				09.11.2015
+
+		Die Kommentare in diesem CDA Dokument dienen lediglich der Orientierungshilfe und sind nicht 
+		Bestandteil einer konkreten Implementierung!
+		=======================================================================
+		
+
+	
+		=======================================================================
+	-->
+	<!--
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+
+			Administrative Daten "CDA Header"
+
+			siehe Allgemeiner Leitfaden, Kapitel 6
+
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+	-->
+	<!--
+			========================================================================
+			========================================================================
+			Dokumentenstruktur
+			siehe Allgemeiner Leitfaden, Kapitel 6.2
+			========================================================================
+			========================================================================
+	-->
+	<!--
+		Hoheitsbereich des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.2.3)
+	-->
+	<realmCode code="AT"/>
+	
+	<!--
+		Dokumentformat (siehe Allgemeiner Leitfaden, Kapitel 6.2.4)
+	-->
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+	
+	<!--
+		ELGA Implementierungsleitfaden-Kennzeichnung (siehe Allgemeiner Leitfaden, Kapitel 6.2.5)
+	-->
+	<!-- Folgt dem Template des Allgemeinen Implementierungsleitfadens "CDA Dokumente im österreichischen Gesundheitswesen" -->
+	<templateId root="1.2.40.0.34.11.1" assigningAuthorityName="ELGA"/>
+
+	<!-- Folgt dem Template des Speziellen Implementierungsleitfadens "Entlassungsbrief (Pflege)" -->
+	<templateId root="1.2.40.0.34.11.3" assigningAuthorityName="ELGA"/>
+	
+	<!-- Folgt dem Template des Speziellen Implementierungsleitfadens "Entlassungsbrief (Pflege)", ELGA Interoperabilitätsstufe (EIS) "Basic" -->
+	<templateId root="1.2.40.0.34.11.3.0.1" assigningAuthorityName="ELGA"/>
+	
+	<!--
+		Dokumenten-Id (siehe Allgemeiner Leitfaden, Kapitel 6.2.6)
+	-->
+	<id root="1.2.40.0.34.99.111.1.1" extension="134F989" assigningAuthorityName="Amadeus Spital"/>
+	
+	<!--
+		Dokumentenklasse (siehe Allgemeiner Leitfaden, Kapitel 6.2.7)
+	-->
+	<code code="34745-0" displayName="Nurse Discharge summary" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+	
+	<!--
+		Titel des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.2.8)
+	-->
+	<title>Pflege-Entlassungsbrief</title>
+	
+	<!--
+		Erstellungsdatum des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.2.9)
+	-->
+	<effectiveTime value="20150730130100+0200"/>
+	
+	<!--
+		Vertraulichkeitscode (siehe Allgemeiner Leitfaden, Kapitel 6.2.10)
+	-->
+	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25" codeSystemName="HL7:Confidentiality"/>
+	
+	<!--
+		Sprachcode des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.2.11)
+	-->
+	<languageCode code="de-AT"/>
+	
+	<!--
+		Versionierung des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.2.12)
+	-->
+	<setId root="1.2.40.0.34.99.111.1.1" extension="134F989" assigningAuthorityName="Amadeus Spital"/>
+	<versionNumber value="1"/>
+	
+	
+	
+	<!--
+			========================================================================
+			========================================================================
+			Teilnehmende Parteien
+			siehe Allgemeiner Leitfaden, Kapitel 6.3
+			========================================================================
+			========================================================================
+	-->
+	<!--
+		========================================================================
+		Patient (siehe Allgemeiner Leitfaden, Kapitel 6.3.1)
+		========================================================================
+	-->
+	<recordTargets>
+		<patientRole>
+		
+			<!-- 
+				IDs des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.2)
+			-->
+			<!-- Identifikation des Patienten im lokalen System -->
+			<id root="1.2.40.0.34.99.111.1.2" extension="4711" assigningAuthorityName="Amadeus Spital"/>
+			
+			<!-- Sozialversicherungsnummer des Patienten	-->
+			<id root="1.2.40.0.10.1.4.3.1" extension="1111241249" assigningAuthorityName="Österreichische Sozialversicherung"/>
+			
+			<!--
+				Adresse des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.3)
+			-->
+			<addr use="H">
+				<streetAddressLine>Musterstraße 13a</streetAddressLine>
+				<postalCode>7000</postalCode>
+				<city>Eisenstadt</city>
+				<state>Burgenland</state>
+				<country>AUT</country>
+			</addr>
+			
+			<!--
+				Kontaktdaten des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.4)
+			-->
+			<telecom use="H" value="tel:+43.2682.40400"/>
+			<telecom use="MC" value="tel:+43.664.1234567"/>
+			<telecom value="mailto:herberthannes.mustermann@provider.at"/>
+			
+			<patient>
+			
+				<!-- 
+					Name des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.5)
+				-->
+				<name>
+					<prefix qualifier="AC">Dipl.Ing.</prefix>
+					<prefix qualifier="NB">Hofrat</prefix>
+					<given>Herbert</given>
+					<given>Hannes</given>
+					<family>Mustermann</family>
+					<family qualifier="BR">VorDerHeirat</family>
+					<suffix qualifier="AC">BSc</suffix>
+					<suffix qualifier="AC">MBA</suffix>
+				</name>
+				
+				<!--
+					Geschlecht des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.6)
+				-->
+				<administrativeGenderCode code="M" displayName="Male" codeSystem="2.16.840.1.113883.5.1" codeSystemName="HL7:AdministrativeGender"/>
+				
+				<!--
+					Geburtsdatum des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.7)
+				-->
+				<birthTime value="19491224"/>
+				
+				<!--
+					Familienstand des Patienten  (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.8)
+				-->
+				<maritalStatusCode code="M" displayName="Married" codeSystem="2.16.840.1.113883.5.2" codeSystemName="HL7:MaritalStatus"/>
+				
+				<!--
+					Religionszugehörigkeit des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.9)
+				 -->
+				<religiousAffiliationCode code="101" displayName="Römisch-Katholisch" codeSystem="2.16.840.1.113883.2.16.1.4.1" codeSystemName="HL7.AT:ReligionAustria"/>
+				
+				<!-- 
+					Vormund/Sachwalter des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.12)
+					"Organisation"
+				
+				<guardian>
+								
+						Eine Organisation als Guardian, hier als Strukturbeispiel
+					
+					<addr>
+						<streetAddressLine>Kinderdorfstraße 1</streetAddressLine>
+						<postalCode>2371</postalCode>
+						<city>Hinterbrühl</city>
+						<state>Niederösterreich</state>
+						<country>AUT</country>
+					</addr>
+					
+					
+						Kontaktdaten des Vormunds/Sachwalters (Organisation)
+					
+					<telecom use="H" value="tel:+43.2236.2928"/>
+					<telecom use="WP" value="tel:+43.2236.9000"/>
+					
+					<guardianOrganization>
+	
+						
+							Name der Vormund/Sachwalter-Organisation
+						
+						<name>SOS Kinderdorf Hinterbrühl</name>
+
+					</guardianOrganization>
+				</guardian>
+				
+				-->
+				<!-- 
+					Vormund/Sachwalter des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.12)
+					"Person"
+				-->
+				<guardian>
+				
+					<!--
+						Adresse des Vormunds/Sachwalters (Person)
+					-->
+					<addr>
+						<streetAddressLine>Musterstraße 1234</streetAddressLine>
+						<postalCode>8011</postalCode>
+						<city>Graz</city>
+						<state>Steiermark</state>
+						<country>AUT</country>
+					</addr>
+					
+					<!--
+						Kontaktdaten des Vormunds/Sachwalters (Person)
+					-->
+					<telecom use="MC" value="tel:+43.676.1234567"/>
+					<telecom use="H" value="tel:+43.316.717.653.9939"/>
+					<telecom use="WP" value="tel:+43.316.608.271.9000"/>
+					
+					<guardianPerson>
+					
+						<!--
+							Name der Vormund/Sachwalter-Organisation
+						-->
+						<name>
+							<given>Susi</given>
+							<family>Sorgenvoll</family>
+						</name>
+						
+					</guardianPerson>
+					
+				</guardian>
+				
+				<!-- 
+					Geburtsort des Patienten (siehe Allgemeiner Leitfaden, Kapitel 6.3.1.2.13)
+				-->
+				<birthplace>
+					<place>
+						<addr>Graz</addr>
+					</place>
+				</birthplace>
+				
+			</patient>
+		</patientRole>
+	</recordTarget>
+	
+	
+	<!--
+		========================================================================
+		Verfasser des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2)
+		========================================================================
+	-->
+	<author>
+	
+		<!--
+			Funktionscode des Verfassers des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.1)
+		-->
+		<functionCode code="DGKSP" displayName="Diplomierte Gesundheits- und Krankenschwester/Diplomierter Gesundheits- und Krankenpfleger" codeSystem="1.2.40.0.34.99.111.2.1" codeSystemName="Amadeus Spital - Funktionscodes"/>
+		
+		<!--
+			Zeitpunkt der Erstellung (z.B. des Diktats) (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.2)
+		-->
+		<time value="20130324082015+0100"/>
+		
+		<assignedAuthor>
+		
+			<!--  
+				Identifikation des Verfassers des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.3)
+			-->
+			<id root="1.2.40.0.34.99.111.1.3" extension="1111" assigningAuthorityName="Amadeus Spital"/>
+			
+			<!--  
+				Fachrichtung des Verfassers des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.4)
+			-->
+			<code code="212" displayName="Diplomierte Gesundheits- und Krankenschwester/Diplomierter Gesundheits- und Krankenpfleger" codeSystem="1.2.40.0.34.5.2" codeSystemName="ELGA_GTelVoGDARollen"/>
+
+			<!--
+				Kontaktdaten des Verfassers des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.5)
+			-->
+			<telecom use="WP" value="tel:+43.6138.3453446.1111"/>
+			
+			<!--
+				Personendaten des Verfassers des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.6)
+			-->
+			<assignedPerson>
+			
+				<!-- Name des Verfassers des Dokuments -->
+				<name>
+					<given>Isabella</given>
+					<family>Stern</family>
+				</name>
+				
+			</assignedPerson>
+			
+	
+			<!--
+				Organisation, in deren Auftrag der Verfasser des Dokuments die Dokumentation verfasst hat (siehe Allgemeiner Leitfaden, Kapitel 6.3.2.3.1.7)
+			-->
+			<representedOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index
+				-->
+				<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+
+				<!--
+					Name der Organisation
+				-->
+				<name>Amadeus Spital - Chirurgische Abteilung</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation
+				-->
+				<telecom value="tel:+43.6138.3453446.0"/>
+				<telecom value="fax:+43.6138.3453446.4674"/>
+				<telecom value="mailto:info@amadeusspital.at"/>
+				<telecom value="http://www.amadeusspital.at"/>
+				
+				<!--
+					Adresse der Organisation
+				-->
+				<addr>
+					<streetName>Mozartgasse</streetName>
+					<houseNumber>1-7</houseNumber>
+					<postalCode>5350</postalCode>
+					<city>St.Wolfgang</city>
+					<state>Salzburg</state>
+					<country>AUT</country>
+				</addr>
+				
+			</representedOrganization>
+			
+		</assignedAuthor>
+	</author>
+	
+	<!--
+		========================================================================
+		Personen der Dateneingabe (siehe Allgemeiner Leitfaden, Kapitel 6.3.3)
+		========================================================================
+	-->
+	<dataEnterer>
+	
+		<!--
+			Zeitpunkt des Schreibens (siehe Allgemeiner Leitfaden, Kapitel 6.3.3.2.2)
+		-->
+		<time value="20130324082015+0100"/>
+		
+		<!--
+			Personendaten der schreibenden Person (siehe Allgemeiner Leitfaden, Kapitel 6.3.3.2.3)
+		-->
+		<assignedEntity>
+		
+			<!--
+				ID der schreibenden Person
+			-->
+			<id nullFlavor="UNK"/>
+			
+			<assignedPerson>
+				<!--
+					Name der schreibenden Person
+				-->
+				<name>
+					<given>Maria</given>
+					<family>Bauer</family>
+				</name>
+			</assignedPerson>
+			
+		</assignedEntity>
+	</dataEnterer>
+	
+	<!--
+		========================================================================
+		Verwahrer des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.4)
+		========================================================================
+	-->
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index (siehe Allgemeiner Leitfaden, Kapitel 6.3.4.2.2)
+				-->
+				<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+
+				<!--
+					Name der Organisation (siehe Allgemeiner Leitfaden, Kapitel 6.3.4.2.3)
+				-->
+				<name>Amadeus Spital</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation (siehe Allgemeiner Leitfaden, Kapitel 6.3.4.2.4)
+				-->
+				<telecom value="tel:+43.6138.3453446.0"/>
+					
+				<!--
+					Adresse der Organisation (siehe Allgemeiner Leitfaden, Kapitel 6.3.4.2.5)
+				-->
+				<addr>
+					<streetName>Mozartgasse</streetName>
+					<houseNumber>1-7</houseNumber>
+					<postalCode>5350</postalCode>
+					<city>St.Wolfgang</city>
+					<state>Salzburg</state>
+					<country>AUT</country>
+				</addr>
+
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	
+	<!--
+		========================================================================
+		Beabsichtigte Empfänger des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.5)
+		========================================================================
+	-->
+	<!--
+		+++++++++++++++++
+		PRIMÄRER Empfänger
+		+++++++++++++++++
+	-->
+	<informationRecipient typeCode="PRCP">
+		<intendedRecipient>
+		
+			<!--
+				Identifikation des beabsichtigten Empfängers aus dem GDA-Index (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.2)
+			-->
+			<id nullFlavor="UNK"/>
+			
+			<!--
+				Personendaten des beabsichtigten Empfängers (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.3)
+			-->
+			<informationRecipient>
+				<name>
+					<prefix qualifier="AC">Univ.-Prof. Dr.</prefix>
+					<given>Herbert</given>
+					<family>Empfänger</family>
+				</name>
+			</informationRecipient>
+			
+			<!--
+				Organisation, der der beabsichtigte Empfänger angehört (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.4)
+			-->
+			<receivedOrganization>
+				<!--
+					Identifikation der Organisation des beabsichtigten Empfängers aus dem GDA-Index
+				-->
+				<id nullFlavor="UNK"/>
+				
+				<!--
+					Name der Organisation des beabsichtigten Empfängers
+				-->
+				<name>Ordination Dr. Empfänger</name>
+				
+				<!--
+					Kontaktdaten der Organisation des beabsichtigten Empfängers
+				-->
+				<telecom value="tel:0512.1234567"/>
+				<telecom value="fax:0512.1234567.11"/>
+				<telecom value="mailto:office@ordination-empfaenger.at"/>
+				<telecom value="http://www.ordination-empfaenger.at"/>
+				<telecom value="me:12345678791"/>
+				
+				<!--
+					Adresse der Organisation des beabsichtigten Empfängers
+				-->
+				<addr>
+					<streetName>Musterstraße</streetName>
+					<houseNumber>27/1/13</houseNumber>
+					<postalCode>6020</postalCode>
+					<city>Innsbruck</city>
+					<country>AUT</country>
+				</addr>
+			</receivedOrganization>
+			
+		</intendedRecipient>
+	</informationRecipient>
+	
+	<!--
+		+++++++++++++++++
+		SEKUNDÄRER Empfänger
+		+++++++++++++++++
+	 -->
+	<informationRecipient typeCode="TRC">
+		<intendedRecipient>
+		
+			<!--
+				Identifikation des beabsichtigten Empfängers aus dem GDA-Index (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.2)
+			-->
+			<id nullFlavor="UNK"/>
+			
+			<!--
+				Personendaten des beabsichtigten Empfängers (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.3)
+			-->
+			<informationRecipient>
+				<name>
+					<prefix qualifier="AC">Dr.</prefix>
+					<given>Walter</given>
+					<family>Empfänger Sekundär</family>
+				</name>
+			</informationRecipient>
+			
+			<!--
+				Organisation, der der beabsichtigte Empfänger angehört (siehe Allgemeiner Leitfaden, Kapitel 6.3.5.2.4)
+			-->
+			<receivedOrganization>
+				<!--
+					Identifikation der Organisation des beabsichtigten Empfängers aus dem GDA-Index
+				-->
+				<id nullFlavor="UNK"/>
+				
+				<!--
+					Name der Organisation des beabsichtigten Empfängers
+				-->
+				<name>Ordination Dr. Sekundär</name>
+				
+				<!--
+					Kontaktdaten der Organisation des beabsichtigten Empfängers
+				-->
+				<telecom value="tel:0512.1234567"/>
+				<telecom value="fax:0512.1234567.11"/>
+				<telecom value="mailto:office@ordination-sekundaer.at"/>
+				<telecom value="http://www.ordination-sekundaer.at"/>
+				<telecom value="me:12345678792"/>
+				
+				<!--
+					Adresse der Organisation des beabsichtigten Empfängers
+				-->
+				<addr>
+					<streetName>Sekundärstraße</streetName>
+					<houseNumber>22</houseNumber>
+					<postalCode>6020</postalCode>
+					<city>Innsbruck</city>
+					<country>AUT</country>
+				</addr>
+			</receivedOrganization>
+			
+		</intendedRecipient>
+	</informationRecipient>
+	
+	<!--
+		========================================================================
+		Rechtlicher Unterzeichner (siehe Allgemeiner Leitfaden, Kapitel 6.3.6)
+		========================================================================
+	-->
+	<legalAuthenticator>
+	
+		<!-- 
+			Zeitpunkt der Unterzeichnung (siehe Allgemeiner Leitfaden, Kapitel 6.3.6.2.2)
+		-->
+		<time value="20130324082015+0100"/>
+		
+		<!-- 
+			Signaturcode (siehe Allgemeiner Leitfaden, Kapitel 6.3.6.2.3)
+		-->
+		<signatureCode code="S"/>
+		
+		
+		<!--
+			Personen- und Organisationsdaten des Rechtlichen Unterzeichners des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.6.2.4)
+		-->
+		<assignedEntity>
+		
+			<!--  
+				Identifikation des Rechtlichen Unterzeichners des Dokuments
+			-->
+			<id root="1.2.40.0.34.99.111.1.3" extension="2222" assigningAuthorityName="Amadeus Spital"/>
+			
+			<!--
+				Kontaktdaten des Rechtlichen Unterzeichners des Dokuments
+			-->
+			<telecom use="WP" value="tel:+43.6138.3453446.2222"/>
+			
+			<!--
+				Personendaten des Rechtlichen Unterzeichners des Dokuments
+			-->
+			<assignedPerson>
+			
+				<!-- Name des Rechtlichen Unterzeichners des Dokuments -->
+				<name>
+					<given>Sigrid</given>
+					<family>Kollmann</family>
+				</name>
+				
+			</assignedPerson>
+			
+	
+			<!--
+				Organisation, in deren Auftrag der Rechtlichen Unterzeichners des Dokuments die Dokumentation unterzeichnet hat
+			-->
+			<representedOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index
+				-->
+				<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+
+				<!--
+					Name der Organisation
+				-->
+				<name>Amadeus Spital - Chirurgische Abteilung</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation
+				-->
+				<telecom value="tel:+43.6138.3453446.0"/>
+				<telecom value="fax:+43.6138.3453446.4674"/>
+				<telecom value="mailto:info@amadeusspital.at"/>
+				<telecom value="http://www.amadeusspital.at"/>
+				
+				<!--
+					Adresse der Organisation
+				-->
+				<addr>
+					<streetName>Mozartgasse</streetName>
+					<houseNumber>1-7</houseNumber>
+					<postalCode>5350</postalCode>
+					<city>St.Wolfgang</city>
+					<state>Salzburg</state>
+					<country>AUT</country>
+				</addr>
+				
+			</representedOrganization>
+			
+		</assignedEntity>
+	</legalAuthenticator>
+	
+	
+	<!--
+		========================================================================
+		Weitere Unterzeichner (siehe Allgemeiner Leitfaden, Kapitel 6.3.7)
+		========================================================================
+	-->
+	<authenticator>
+	
+		<!-- 
+			Zeitpunkt der Unterzeichnung (siehe Allgemeiner Leitfaden, Kapitel 6.3.7.2.2)
+		-->
+		<time value="20130324081915+0100"/>
+		
+		<!-- 
+			Signaturcode (siehe Allgemeiner Leitfaden, Kapitel 6.3.7.2.3)
+		-->
+		<signatureCode code="S"/>
+		
+		<!--
+			Personen- und Organisationsdaten des Weiteren Unterzeichners des Dokuments (siehe Allgemeiner Leitfaden, Kapitel 6.3.7.2.4)
+		-->
+		<assignedEntity>
+		
+			<!--  
+				Identifikation des Weiteren Unterzeichners des Dokuments
+			-->
+			<id root="1.2.40.0.34.99.111.1.3" extension="3333" assigningAuthorityName="Amadeus Spital"/>
+			
+			<!--
+				Kontaktdaten des Weiteren Unterzeichners des Dokuments
+			-->
+			<telecom use="WP" value="tel:+43.6138.3453446.3333"/>
+			
+			<!--
+				Personendaten des Weiteren Unterzeichners des Dokuments
+			-->
+			<assignedPerson>
+			
+				<!-- Name des Weiteren Unterzeichners des Dokuments -->
+				<name>
+					<given>Walter</given>
+					<family>Hummel</family>
+				</name>
+				
+			</assignedPerson>
+			
+	
+			<!--
+				Organisation, in deren Auftrag der Weiteren Unterzeichner des Dokuments die Dokumentation unterzeichnet hat
+			-->
+			<representedOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index
+				-->
+				<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+
+				<!--
+					Name der Organisation
+				-->
+				<name>Amadeus Spital - Chirurgische Abteilung</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation
+				-->
+				<telecom value="tel:+43.6138.3453446.0"/>
+				<telecom value="fax:+43.6138.3453446.4674"/>
+				<telecom value="mailto:info@amadeusspital.at"/>
+				<telecom value="http://www.amadeusspital.at"/>
+				
+				<!--
+					Adresse der Organisation
+				-->
+				<addr>
+					<streetName>Mozartgasse</streetName>
+					<houseNumber>1-7</houseNumber>
+					<postalCode>5350</postalCode>
+					<city>St.Wolfgang</city>
+					<state>Salzburg</state>
+					<country>AUT</country>
+				</addr>
+				
+			</representedOrganization>
+		</assignedEntity>
+	</authenticator>
+
+
+
+	<!--
+			========================================================================
+			========================================================================
+			Weitere Beteiligte
+			siehe Allgemeiner Leitfaden, Kapitel 6.3.8
+			========================================================================
+			========================================================================
+	-->
+	<!-- 
+		Medizinischer Ansprechpartner (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.2.2)
+	-->
+	<participant typeCode="CALLBCK">
+		<templateId root="1.2.40.0.34.11.1.1.1"/>
+		<associatedEntity classCode="PROV">
+		
+			<!--
+				Verpflichtende Telefonnummer des fachlichen Ansprechpartners
+			-->
+			<telecom use="WP" value="tel:+43.6138.3453446.1"/>
+			
+			<associatedPerson>
+				<!--
+					Name des Fachlichen Ansprechpartners
+				-->
+				<name>
+					<prefix>DGKS</prefix>
+					<given>Waltraud</given>
+					<family>Pfleger</family>
+				</name>
+			</associatedPerson>
+			
+			<!--
+				Organisation des Fachlichen Ansprechpartners
+			-->
+			<scopingOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index
+				-->
+				<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+
+				<!--
+					Name der Organisation
+				-->
+				<name>Amadeus Spital - Chirurgische Abteilung</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation
+				-->
+				<telecom value="tel:+43.6138.3453446.0"/>
+				<telecom value="fax:+43.6138.3453446.4674"/>
+				<telecom value="mailto:info@amadeusspital.at"/>
+				<telecom value="http://www.amadeusspital.at"/>
+
+				<!--
+					Adresse der Organisation
+				-->
+				<addr>
+					<streetName>Mozartgasse</streetName>
+					<houseNumber>1-7</houseNumber>
+					<postalCode>5350</postalCode>
+					<city>St.Wolfgang</city>
+					<state>Salzburg</state>
+					<country>AUT</country>
+				</addr>
+				
+			</scopingOrganization>
+			
+		</associatedEntity>
+	</participant>
+	
+	<!-- 
+		Einweisender Arzt (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.3.2)
+	-->
+	<participant typeCode="REF">
+		<templateId root="1.2.40.0.34.11.1.1.2"/>
+		<associatedEntity classCode="PROV">
+		
+			<!--
+				Identifikation des einweisenden Arztes (Person) aus dem GDA-Index
+			-->
+			<id nullFlavor="UNK"/>
+			
+			<!--
+				Personendaten des einweisenden Arztes
+			-->
+			<associatedPerson>
+				<name>
+					<prefix qualifier="AC">Univ.-Prof. Dr.</prefix>
+					<given>Herbert</given>
+					<family>Empfänger</family>
+				</name>
+			</associatedPerson>
+			
+			<!--
+				Organisation, der der einweisenden Arzt angehört
+			-->
+			<scopingOrganization>
+				<!--
+					Identifikation der Organisation des beabsichtigten Empfängers aus dem GDA-Index
+				-->
+				<id nullFlavor="UNK"/>
+				
+				<!--
+					Name der Organisation des einweisenden Arztes
+				-->
+				<name>Ordination Dr. Empfänger</name>
+				
+				<!--
+					Kontaktdaten der Organisation des einweisenden Arztes
+				-->
+				<telecom value="tel:0512.1234567"/>
+				<telecom value="fax:0512.1234567.11"/>
+				<telecom value="mailto:office@ordination-empfaenger.at"/>
+				<telecom value="http://www.ordination-empfaenger.at"/>
+				<telecom value="me:12345678791"/>
+				
+				<!--
+					Adresse der Organisation des einweisenden Arztes
+				-->
+				<addr>
+					<streetName>Musterstraße</streetName>
+					<houseNumber>27/1/13</houseNumber>
+					<postalCode>6020</postalCode>
+					<city>Innsbruck</city>
+					<country>AUT</country>
+				</addr>
+			</scopingOrganization>
+
+		</associatedEntity>
+	</participant>
+
+	<!-- 
+		Hausarzt (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.4.2)
+	-->
+	<participant typeCode="IND">
+		<templateId root="1.2.40.0.34.11.1.1.3"/>
+		<functionCode code="PCP" displayName="primary care physician" codeSystem="2.16.840.1.113883.5.88" codeSystemName="HL7:ParticipationFunction"/>
+		<associatedEntity classCode="PROV">
+
+			<!--
+				Identifikation des Hausarztes (Person) aus dem GDA-Index
+			-->
+			<id nullFlavor="UNK"/>
+			
+			<!--
+				Personendaten des Hausarztes
+			-->
+			<associatedPerson>
+				<name>
+					<prefix qualifier="AC">Dr.</prefix>
+					<given>Walter</given>
+					<family>Empfänger Sekundär</family>
+				</name>
+			</associatedPerson>
+			
+			<!--
+				Organisation, der der Hausarzt angehört
+			-->
+			<scopingOrganization>
+				<!--
+					Identifikation der Organisation des Hausarztes
+				-->
+				<id nullFlavor="UNK"/>
+				
+				<!--
+					Name der Organisation des Hausarztes
+				-->
+				<name>Ordination Dr. Sekundär</name>
+				
+				<!--
+					Kontaktdaten der Organisation Hausarztes
+				-->
+				<telecom value="tel:0512.1234567"/>
+				<telecom value="fax:0512.1234567.11"/>
+				<telecom value="mailto:office@ordination-sekundaer.at"/>
+				<telecom value="http://www.ordination-sekundaer.at"/>
+				<telecom value="me:12345678792"/>
+				
+				<!--
+					Adresse der Organisation des Hausarztes
+				-->
+				<addr>
+					<streetName>Sekundärstraße</streetName>
+					<houseNumber>22</houseNumber>
+					<postalCode>6020</postalCode>
+					<city>Innsbruck</city>
+					<country>AUT</country>
+				</addr>
+			</scopingOrganization>
+			
+		</associatedEntity>
+	</participant>
+	
+	<!-- 
+		Notfall-Kontakt / Auskunftsberechtigte Person (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.5.2)
+	-->
+	<participant typeCode="IND">
+		<templateId root="1.2.40.0.34.11.1.1.4"/>
+		<associatedEntity classCode="ECON">
+		
+			<!--
+				Verwandtschaftsverhältnis zum Notfall-Kontakts / Auskunftsberechtigte Person 
+			-->
+			<code code="DAU" displayName="natural daughter" codeSystem="2.16.840.1.113883.5.111" codeSystemName="HL7:RoleCode"/>
+
+			<!--
+				Adresse des Notfall-Kontakts / Auskunftsberechtigte Person
+			-->
+			<addr>Heimstrasse 1, 1220 Wien</addr>
+
+			<!--
+				Kontaktdaten des Notfall-Kontakts / Auskunftsberechtigte Person
+			-->
+			<telecom use="MC" value="tel:+43.664.12345678"/>
+			
+			<!--
+				Personendaten des Notfall-Kontakts / Auskunftsberechtigte Person 
+			-->
+			<associatedPerson>
+				<name>Julia Tochter</name>
+			</associatedPerson>
+
+			<!-- Organisation des Notfallkontakts (z.B.: Behörde) -->
+			<scopingOrganization>
+				<name>Jugendamt Wien</name>
+			</scopingOrganization>
+			
+		</associatedEntity>
+	</participant>
+	
+	<!-- 
+		Angehörige (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.6.2)
+	-->
+	<participant typeCode="IND">
+		<templateId root="1.2.40.0.34.11.1.1.5"/>
+		<associatedEntity classCode="PRS">
+		
+			<!--
+				Verwandtschaftsverhältnis zum Angehörigen 
+			-->
+			<code code="MTH" displayName="Mother" codeSystem="2.16.840.1.113883.5.111" codeSystemName="HL7:RoleCode"/>
+
+			<!--
+				Adresse des Angehörigen
+			-->
+			<addr>Heimstrasse 1, 1220 Wien</addr>
+
+			<!--
+				Kontaktdaten des Angehörigen
+			-->
+			<telecom use="MC" value="tel:+43.664.98765432"/>
+			
+			<!--
+				Personendaten des Angehörigen
+			-->
+			<associatedPerson>
+				<name>Hertha Mutter</name>
+			</associatedPerson>
+			
+		</associatedEntity>
+	</participant>
+
+	<!-- 
+		Versicherter/Versicherung (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.7.3)
+	-->
+	<participant typeCode="HLD">
+		<templateId root="1.2.40.0.34.11.1.1.6"/>
+
+		<!-- Versicherungszeitraum vom 01.01.2002 – 31.12.2013 -->
+		<time>
+			<low value="20020101"/>
+			<high value="20131231"/>
+		</time>
+
+		<associatedEntity classCode="POLHOLD">
+		
+			<!-- Sozialversicherungsnummer des Patienten	-->
+			<id root="1.2.40.0.10.1.4.3.1" extension="123424121970" assigningAuthorityName="Österreichische Sozialversicherung"/>
+
+			<!-- Code SELF (Patient ist selbst der Versicherungsnehmer) -->
+			<code code="SELF" displayName="self" codeSystem="2.16.840.1.113883.5.111" codeSystemName="HL7:RoleCode"/>
+			
+			<!-- Versicherungsgesellschaft -->
+			<scopingOrganization>
+				<name>Sozialversicherung der gew. Wirtschaft</name>
+				<telecom value="tel:01.54654.0"/>
+				<telecom value="fax:01.54654.385"/>
+				<telecom value="http://esv-sva.sozvers.at"/>
+				<addr>
+					<streetName>Wiedner Hauptstraße</streetName>
+					<houseNumber>84-86</houseNumber>
+					<postalCode>1051</postalCode>
+					<city>Wien</city>
+					<state>Wien</state>
+					<country>AUT</country>
+				</addr>
+			</scopingOrganization>
+
+		</associatedEntity>
+	</participant>
+	
+	
+	<!-- 
+		Betreuende Organisation (siehe Allgemeiner Leitfaden, Kapitel 6.3.8.8.2)
+	-->
+	<participant typeCode="IND">
+		<templateId root="1.2.40.0.34.11.1.1.7"/>
+		<associatedEntity classCode="CAREGIVER">
+			<scopingOrganization>
+			
+				<!--
+					ID der Organisation aus dem GDA Index
+				-->
+				<id nullFlavor="UNK"/>
+
+				<!--
+					Name der betreuenden Organisation
+				-->
+				<name>Hauskrankenpflege Sorgenfrei</name>
+				
+				<!-- 
+					Kontaktdaten der Organisation
+				-->
+				<telecom value="tel:+43.2252.3453446.0"/>
+				<telecom value="fax:+43.2252.3453446.4674"/>
+				<telecom value="mailto:info@hauskrankenpflege-sorgenfrei.at"/>
+				<telecom value="http://www.hauskrankenpflege-sorgenfrei.at"/>
+
+				<!--
+					Adresse der Organisation
+				-->
+				<addr>
+					<streetName>Im schönen Walde</streetName>
+					<houseNumber>24</houseNumber>
+					<postalCode>2500</postalCode>
+					<city>Baden</city>
+					<state>Niederösterreich</state>
+					<country>AUT</country>
+				</addr>
+				
+			</scopingOrganization>		
+		</associatedEntity>
+	</participant>
+	
+		
+	
+	<!--
+			========================================================================
+			========================================================================
+			Zuweisung und Ordermanagement
+			siehe Allgemeiner Leitfaden, Kapitel 6.4
+			========================================================================
+			========================================================================
+	-->
+	<!-- inFulfillmentOf -->
+	<!-- Nicht anwendbar in diesem Demo-Dokument -->
+	
+	
+	<!--
+			========================================================================
+			========================================================================
+			Dokumentation der Gesundheitsdienstleistung
+			siehe Allgemeiner Leitfaden, Kapitel 6.5
+			========================================================================
+			========================================================================
+	-->
+	<documentationOf>
+		<serviceEvent>
+		
+			<!--
+				Code der Gesundheitsdienstleistung (siehe Allgemeiner Leitfaden, Kapitel 6.5.1.2.2)
+			-->
+			<code code="GDLSTATAUF" displayName="Gesundheitsdienstleistung im Rahmen eines stationären Aufenthalts" codeSystem="1.2.40.0.34.5.21" codeSystemName="ELGA_ServiceEventsEntlassbrief"/>
+
+			<!--
+				Zeitraum der Gesundheitsdienstleistung (siehe Allgemeiner Leitfaden, Kapitel 6.5.1.2.3)
+			-->
+			<effectiveTime>
+				<!-- Im Falle des Entlassungsbriefs: Zeitpunkt der Aufnahme des Patienten in den stationären Aufenthalt -->
+				<low value="20130302082015+0100"/>
+				<!-- Im Falle des Entlassungsbriefs: Zeitpunkt der administrativen Entlassung des Patienten aus dem stationären Aufenthalt -->
+				<high value="20130325113000+0100"/>
+			</effectiveTime>
+			
+		</serviceEvent>
+	</documentationOf>
+
+
+	<!--
+			========================================================================
+			========================================================================
+			Bezug zu vorgehenden Dokumenten
+			siehe Allgemeiner Leitfaden, Kapitel 6.6
+			========================================================================
+			========================================================================
+	-->
+	<!-- relatedDocument -->
+	<!-- Nicht angewandt in diesem Demo-Dokument -->
+
+
+	<!--
+			========================================================================
+			========================================================================
+			Einverständniserklärung
+			siehe Allgemeiner Leitfaden, Kapitel 6.7
+			========================================================================
+			========================================================================
+	-->
+	<!-- authorization -->
+	<!-- Wird in ELGA nicht verwendet -->	
+	
+	
+	<!--
+			========================================================================
+			========================================================================
+			Informationen zum Patientenkontakt
+			siehe Allgemeiner Leitfaden, Kapitel 6.8
+			========================================================================
+			========================================================================
+	-->
+	<componentOf>
+		<encompassingEncounter>
+		
+			<!--
+				Aufenthaltszahl (siehe Allgemeiner Leitfaden, Kapitel 6.8.1.2.2)
+			-->
+			<id root="1.2.40.0.34.99.111.1.4" extension="Az123456" assigningAuthorityName="Amadeus Spital"/>
+			
+			<!--
+				Codierung des Patientenkontakts (siehe Allgemeiner Leitfaden, Kapitel 6.8.1.2.3)
+			-->
+			<code code="IMP" displayName="inpatient encounter" codeSystem="2.16.840.1.113883.5.4" codeSystemName="HL7:ActCode"/>
+			
+			<!--
+				Zeitraum des Patientenkontakts (siehe Allgemeiner Leitfaden, Kapitel 6.8.1.2.4)
+			-->
+			<effectiveTime>
+				<!-- Im Falle des Entlassungsbriefs: Zeitpunkt der Aufnahme des Patienten in den stationären Aufenthalt -->
+				<low value="20130302082015+0100"/>
+				<!-- Im Falle des Entlassungsbriefs: Zeitpunkt der administrativen Entlassung des Patienten aus dem stationären Aufenthalt -->
+				<high value="20130325113000+0100"/>
+			</effectiveTime>
+			
+			<!--
+				Verantwortliche Person für den Patientenkontakt (siehe Allgemeiner Leitfaden, Kapitel 6.8.1.2.5)
+			-->
+			<responsibleParty>
+				<assignedEntity>
+
+					<!--  
+						Identifikation der Verantwortlichen Person für den Patientenkontakt
+					-->
+					<id root="1.2.40.0.34.99.111.1.3" extension="2222" assigningAuthorityName="Amadeus Spital"/>
+					
+					<!--
+						Kontaktdaten der Verantwortlichen Person für den Patientenkontakt
+					-->
+					<telecom use="WP" value="tel:+43.6138.3453446.2222"/>
+					
+					<!--
+						Personendaten der Verantwortlichen Person für den Patientenkontakt
+					-->
+					<assignedPerson>
+					
+						<!-- Name der Verantwortlichen Person für den Patientenkontakt -->
+						<name>
+							<prefix>Univ.-Prof.Dr.</prefix>
+							<given>Sigrid</given>
+							<family>Kollmann</family>
+						</name>
+						
+					</assignedPerson>
+					
+				</assignedEntity>
+			</responsibleParty>
+			
+			<!--
+				Organisation, in deren Verantwortungsbereich der Patientenkontakt stattfand (siehe Allgemeiner Leitfaden, Kapitel 6.8.1.2.6)
+			-->
+			<location>
+				<healthCareFacility>
+					<serviceProviderOrganization>
+					
+						<!--
+							ID der Organisation aus dem GDA Index
+						-->
+						<id root="1.2.40.0.34.99.3" assigningAuthorityName="GDA Index"/>
+		
+						<!--
+							Name der Organisation
+						-->
+						<name>Amadeus Spital - Chirurgische Abteilung</name>
+						
+						<!-- 
+							Kontaktdaten der Organisation
+						-->
+						<telecom value="tel:+43.6138.3453446.0"/>
+						<telecom value="fax:+43.6138.3453446.4674"/>
+						<telecom value="mailto:info@amadeusspital.at"/>
+						<telecom value="http://www.amadeusspital.at"/>
+						
+						<!--
+							Adresse der Organisation
+						-->
+						<addr>
+							<streetName>Mozartgasse</streetName>
+							<houseNumber>1-7</houseNumber>
+							<postalCode>5350</postalCode>
+							<city>St.Wolfgang</city>
+							<state>Salzburg</state>
+							<country>AUT</country>
+						</addr>
+						
+					</serviceProviderOrganization>
+				</healthCareFacility>
+			</location>
+			
+		</encompassingEncounter>
+	</componentOf>
+
+
+
+	<!--
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+
+			Medizinische Inhalte "CDA Body"
+
+			siehe Allgemeiner Leitfaden, Kapitel 7
+
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+			************************************************************************************************************************************************
+	-->
+	<component>
+		<!-- ELGA Interoperabilitätsstufe (EIS) "Basic" bzw. "Strucuted"
+        XML-Body / Klartext mit einfacher Formatierung ohne Codes und Templates  
+        ("The unconstrained CDA specification", "plain text with simple markup")
+         -->
+		<structuredBody>
+				<component>
+					<section>
+						<text>
+							<content styleCode="Italics">Dies ist ein Beispielbefund. Bei den Inhalten handelt es sich um synthetische Mustertexte und keinesfalls um personenbezogene Echtdaten oder 
+							realistische Befunde. Das Beispiel veranschaulicht die technischen Möglichkeiten unter Verwendung eines Maximums der erlaubten Optionen. </content>
+						</text>	
+					</section>
+				</component>	
+					
+				<component>
+					<section>
+						<title>Pflegediagnosen</title>
+						<text>
+							<list>
+								<item>Beweglichkeit beeinflusst durch: Beeinträchtigung des Bewegungsapparates durch körperliche Erkrankung (Schienbeinbruch)</item>
+								<item>Selbstversorgungsdefizit bei der Körperpflege und Kleiden: Durch Schienbeinfraktur, durch Schmerzen</item>
+								<item>Selbstversorgungsdefizit bei der Ernährung: beeinflusst durch anfangs Bettruhe, mangelnde Mobilität</item>
+								<item>Selbstversorgungsdefizit bei der Ausscheidung beeinflusst durch Bettruhe, eingeschränkte Beweglichkeit</item>
+								<item>Atemnot: beeinflusst durch chronische Lungenerkrankung, Überanstrengung</item>
+								<item>Schlafstörungen: beeinflusst durch: Atemwegserkrankung mit Husten</item>
+								<item>Angst vor Schmerzen</item>
+								<item>Eingeschränkte Hörfähigkeit rechts, beeinflusst durch Infekte in jüngeren Jahren (Mittelohrentzündungen)</item>
+							</list>
+						</text>	
+					</section>
+				</component>
+				
+				
+				<component>
+					<section>	
+						<title>Mobilität</title>
+						<text>Bewegung ist erschwert, unsicher und verlangsamt, kann jedoch mit Hilfsmitteln selbstständig erfolgen. <br/> Hilfsmittel: Gehhilfe und Rollstuhl</text>
+					</section>
+				</component>
+			
+			<component>	
+				<section>
+					<title>Körperpflege und Kleiden</title>
+					<text>Unfähigkeit ans Waschbecken oder in die Nasszelle zu gelangen , Unfähigkeit sich Waschwasser zu beschaffen und die Körperpflege komplett durchzuführen. Klient braucht Unterstützung bei der Körperpflege und beim Vorrichten der Utensilien und kann dann die Körperpflege teilweise selbstständig durchführen.</text>
+				</section>	
+			</component>
+			
+			<component>
+				<section>
+					<title>Ernährung</title>
+					<text> Körperliche Unfähigkeit sich Nahrung zu beschaffen und diese zuzubereiten. Klient kann vorgerichtete Mahlzeit selbstständig essen.</text>	
+				</section>
+			</component>
+			
+			<component>	
+				<section>
+					<title>Ausscheidung</title>
+					<text>Klient kann die Toilette, den Toilettenstuhl nicht erreichen oder selbstständig nützen, Klient kann sich zum Ausscheiden nicht selbstständig aus oder ankleiden und kann die erforderlichen Hygienemaßnahmen nach dem Toilettengang nicht durchführen. Klient kann nach Hilfestellungen normal ausscheiden. </text>
+				</section>	
+			</component>
+			
+			
+			<component>	
+				<section>
+					<title>Hautzustand</title>
+					<text>Altersbedingter Hautzustand, eher trockene Haut, Pflege mit Ultrabassalbe und Verbandswechsel am operierten Bein laut ÄA durchführen.</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Atmung</title>
+					<text>Kurzatmigkeit und Beschwerden beim Ein- und Ausatmen, vermehrt Sputum, Husten und Atemgeräusche, Schwäche, Kraftlosigkeit
+						Klient kennt seine körperliche Belastbarkeit und seine Fähigkeiten, kann Situationen einschätzen, bleibt ruhig und gelassen. Klient kann mit Einschränkung umgehen und setzt sich zum Beispiel bei Atemnot auf. Klient ist kooperativ und motiviert mitzuarbeiten. Klient führt regelmäßig Inhalationen laut ÄA selbstständig durch.</text>
+				</section>	
+			</component>
+			
+			<component>	
+				<section>
+					<title>Schlafen</title>
+					<text>Klient äußert Probleme beim Ein- und Durchschlafen. Klient wurde ein schlafanstoßendes Medikament verordnet und hustenreizstillende Tropfen erhält er vor der Nachtruhe.</text>
+				</section>	
+			</component>
+			
+			<component>	
+				<section>
+					<title>Schmerz</title>
+					<text>Klient führt nur vorsichtig Gehübungen durch und neigt zur Schonung des operierten Beines.</text>
+				</section>	
+			</component>
+			
+			<component>	
+				<section>
+					<title>Orientierung und Bewusstseinslage</title>
+					<text>Klient ist orientiert. <br/> <content styleCode="Bold">Risiken: Sturzgefahr, Verletzungsgefahr</content></text>
+				</section>	
+			</component>
+			
+	
+			<component>	
+				<section>
+					<title>Soziale Umstände, Verhalten</title>
+					<text>Klient ist kontaktfreudig und liest gerne.</text>
+				</section>	
+			</component>
+			
+			<component>	
+				<section>
+					<title>Kommunikation</title>
+					<text>Hilfsmittel zur Kommunikation: Hörgerät
+					</text>
+				</section>	
+			</component>			
+			
+			<component>	
+				<section>
+					<title>Rollenwahrnehmung und Sinnfindung</title>
+						<text>Klient ist 63 Jahre und überdenkt seine weiteren privaten und beruflichen Möglichkeiten.
+					</text>
+				</section>	
+			</component>		
+	
+			<component>	
+				<section>
+					<title>Vitalparameter</title>
+					<text>Puls: 60/min, Blutdruck: 110/70 mm[Hg]</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Pflegerelevante Informationen zur medizinischen Behandlung</title>
+					<text>Der Klient benötigt eine L-Dopa-Infusionstherapie mittels subkutaner Pumpe, er kann Kassettenwechsel mit verbaler Anleitung durchführen und die Einstellungen der Bedieneinheit selbst vornehmen.
+					Informationsmaterial zur Pumpe mitgegeben.
+					<br/><br/><content styleCode="Bold">Risiken</content>
+						<list listType="unordered" styleCode="Disc"> 
+							<item>falsches Mischverhältnis bei der Vorbereitung des Medikaments</item>
+							<item>Infektionsrisiko</item>
+						</list>
+					
+					</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Medikamentenverabreichung</title>
+					<text>Klient nimmt Medikamente selbstständig ein. Er führt auch die Inhalationen selbst durch.</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Anmerkungen</title>
+					<text>Die Tochter des Klienten legt großen Wert auf die richtige Anrede (Dipl.Ing.) ihres Vaters.</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Entlassungsmanagement</title>
+					<text>Weiterführende Betreuung (Rehaaufenthalt) wurde beantragt. Die ambulante Physiotherapie startet 01.04.2013 um 08:15</text>
+				</section>	
+			</component>	
+			
+			<component>	
+				<section>
+					<title>Patientenverfügungen und andere juridische Dokumente</title>
+					<text>Testament wird von Tochter verwahrt.</text>
+				</section>	
+			</component>
+	
+		</structuredBody>
+		
+	</component>
+	
+</ClinicalDocument>

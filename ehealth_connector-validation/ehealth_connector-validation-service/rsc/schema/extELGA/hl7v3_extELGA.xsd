@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+*******************************************************************************
+Vocabulary and datatytypes for ELGA extension of HL7 Clinical Document Architecture (CDA) R2 (2005)
+Currently included by POCD_MT000040_extELGA.xsd
+
+History:
+2013.05.19 Tony Schaller, medshare GmbH, Switzerland (created for ELGA extension)
+
+*******************************************************************************
+-->
+<xs:schema
+	xmlns:hl7v3="urn:hl7-org:v3"
+	xmlns:pharm="urn:ihe:pharm:medication"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn:hl7-org:v3"
+	elementFormDefault="qualified">
+
+	<xs:include schemaLocation="../coreschemas/datatypes.xsd"/>
+	<xs:include schemaLocation="../coreschemas/datatypes-base.xsd"/>
+
+	<xs:simpleType name="xELGA_TimingEvent">
+		<xs:annotation>
+			<xs:documentation>vocSet: D10706 (C-0-D10706-cpt)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="hl7v3:cs">
+			<xs:enumeration value="AC"/>
+			<xs:enumeration value="ACD"/>
+			<xs:enumeration value="ACM"/>
+			<xs:enumeration value="ACV"/>
+			<xs:enumeration value="HS"/>
+			<xs:enumeration value="IC"/>
+			<xs:enumeration value="ICD"/>
+			<xs:enumeration value="ICM"/>
+			<xs:enumeration value="ICV"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="PCD"/>
+			<xs:enumeration value="PCM"/>
+			<xs:enumeration value="PCV"/>
+			<xs:enumeration value="CM"/>
+			<xs:enumeration value="CD"/>
+			<xs:enumeration value="CV"/>
+			<!--
+			ELGA extensions
+
+			added: CM, CD, CV
+
+			Author: Juergen Brandstaetter, June 2012
+			-->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="xELGA_EIVL.event">
+		<xs:annotation>
+			<xs:documentation>
+				A code for a common (periodical) activity of daily
+				living based on which the event related periodic
+				interval is specified.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="hl7v3:CE">
+				<xs:attribute name="code" type="hl7v3:xELGA_TimingEvent" use="optional"/>
+				<xs:attribute name="codeSystem" type="hl7v3:uid" fixed="2.16.840.1.113883.5.139"/>
+				<xs:attribute name="codeSystemName" type="hl7v3:st" fixed="xELGA_TimingEvent"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="xELGA_EIVL_TS">
+		<xs:annotation>
+			<xs:documentation>
+				Note: because this type is defined as an extension of SXCM_T,
+				all of the attributes and elements accepted for T are also
+				accepted by this definition.  However, they are NOT allowed
+				by the normative description of this type.  Unfortunately,
+				we cannot write a general purpose schematron contraints to
+				provide that extra validation, thus applications must be
+				aware that instance (fragments) that pass validation with
+				this might might still not be legal.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="hl7v3:SXCM_TS">
+				<xs:sequence>
+					<xs:element name="event" type="hl7v3:xELGA_EIVL.event" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>
+								A code for a common (periodical) activity of daily
+								living based on which the event related periodic
+								interval is specified.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="offset" minOccurs="0" maxOccurs="1" type="hl7v3:IVL_PQ">
+						<xs:annotation>
+							<xs:documentation>
+								An interval of elapsed time (duration, not absolute
+								point in time) that marks the offsets for the
+								beginning, width and end of the event-related periodic
+								interval measured from the time each such event
+								actually occurred.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="xELGA_URLScheme">
+		<xs:annotation>
+			<xs:documentation>vocSet: D14866 (C-0-D14866-cpt)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="hl7v3:cs">
+			<xs:enumeration value="fax"/>
+			<xs:enumeration value="file"/>
+			<xs:enumeration value="ftp"/>
+			<xs:enumeration value="http"/>
+			<xs:enumeration value="mailto"/>
+			<xs:enumeration value="mllp"/>
+			<xs:enumeration value="modem"/>
+			<xs:enumeration value="nfs"/>
+			<xs:enumeration value="tel"/>
+			<xs:enumeration value="telnet"/>
+			<xs:enumeration value="me"/>
+			<!--
+			ELGA extensions
+
+			added: me
+
+			Author: Juergen Brandstaetter, June 2012
+			-->
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>
