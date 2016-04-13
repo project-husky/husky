@@ -18,10 +18,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.ActSite;
@@ -35,16 +32,19 @@ import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class CdaChEdesEdpnTest extends TestUtils {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public CdaChEdesEdpnTest() {
 		super();
@@ -72,8 +72,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
-				observations);
+		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
+				VitalSignCodes.BODY_HEIGHT, observations);
 		assertNotNull(vsObservation);
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
 		assertEquals(VitalSignCodes.BODY_HEIGHT.getLoinc(), vsObservation.getCode().getCode());
@@ -91,7 +91,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChEdesEdpn());
-		return new CdaChEdesEdpn((org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn) clinicalDocument);
+		return new CdaChEdesEdpn(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn) clinicalDocument);
 	}
 
 	@Test
@@ -141,7 +142,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		final Document document = cda.getDocument();
 
 		// Notfallaustrittsbericht Ärzte
-		XPathExpression expr = xpath.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.1.1.11']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='2.16.756.5.30.1.1.1.1.3.1.1.11']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -196,7 +198,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 
 		testText = "setNarrativeTextSectionAllergiesAndOtherAdverseReactions";
 		cda.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(testText);
-		assertTrue(cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
+		assertTrue(
+				cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions().contains(testText));
 		assertTrue(cda.getNarrativeTextSectionAllergiesAndOtherAdverseReactions()
 				.contains(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS.getContentIdPrefix()));
 
@@ -341,8 +344,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		testText = "setNarrativeTextSectionResults";
 		cda.setNarrativeTextSectionResults(testText);
 		assertTrue(cda.getNarrativeTextSectionResults().contains(testText));
-		assertTrue(
-				cda.getNarrativeTextSectionResults().contains(SectionsEDES.RESULTS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionResults()
+				.contains(SectionsEDES.RESULTS.getContentIdPrefix()));
 
 		testText = "setNarrativeTextSectionReviewOfSystems";
 		cda.setNarrativeTextSectionReviewOfSystems(testText);
@@ -353,8 +356,8 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		testText = "setNarrativeTextSectionRemarks";
 		cda.setNarrativeTextSectionRemarks(testText);
 		assertTrue(cda.getNarrativeTextSectionRemarks().contains(testText));
-		assertTrue(
-				cda.getNarrativeTextSectionRemarks().contains(SectionsEDES.REMARKS.getContentIdPrefix()));
+		assertTrue(cda.getNarrativeTextSectionRemarks()
+				.contains(SectionsEDES.REMARKS.getContentIdPrefix()));
 
 		testText = "setNarrativeTextSectionSocialHistory";
 		cda.setNarrativeTextSectionSocialHistory(testText);

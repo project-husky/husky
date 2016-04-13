@@ -30,13 +30,10 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.AbstractAllergyConcern;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
 import org.ehealth_connector.cda.AbstractPregnancyHistory;
 import org.ehealth_connector.cda.Consumable;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -72,6 +69,8 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ch.VACD;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -131,9 +130,11 @@ public class CdaChVacdTest extends TestUtils {
 		return new Identificator("1.2.3.4", "1.2.3.4");
 	}
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
+
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 	// Test data
 	private CdaChVacd d;
 	private Consumable consumable1;
@@ -233,8 +234,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public Consumable createConsumable1() {
-		final Consumable c = new Consumable(ts1, new Code(CodeSystems.GTIN.getCodeSystemId(), numS1),
-				code1);
+		final Consumable c = new Consumable(ts1,
+				new Code(CodeSystems.GTIN.getCodeSystemId(), numS1), code1);
 		return c;
 	}
 
@@ -266,8 +267,8 @@ public class CdaChVacdTest extends TestUtils {
 
 		// Adding an id using an OID that is already known by the convenience
 		// API (AHV-Nr/No AVS/SSN)
-		patient.addId(
-				new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(), "123.71.332.115"));
+		patient.addId(new Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(),
+				"123.71.332.115"));
 		// Adding an id using an OID that is not known by the convenience API,
 		// yet
 		patient.addId(new Identificator("2.16.756.5.30.1.123.100.1.1.1", "8077560000000000000000"));
@@ -381,7 +382,8 @@ public class CdaChVacdTest extends TestUtils {
 
 	private VACD deserializeVacDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getVACD());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getVACD());
 		return (VACD) clinicalDocument;
 	}
 

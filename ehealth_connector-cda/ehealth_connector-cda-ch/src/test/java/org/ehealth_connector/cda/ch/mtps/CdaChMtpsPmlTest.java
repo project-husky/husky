@@ -30,9 +30,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
@@ -42,6 +39,8 @@ import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -50,11 +49,11 @@ import org.xml.sax.InputSource;
  * Test cases
  */
 public class CdaChMtpsPmlTest extends TestUtils {
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
-
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public CdaChMtpsPmlTest() {
 		super();
@@ -70,7 +69,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChMtpsPml());
-		return new CdaChMtpsPml((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) clinicalDocument);
+		return new CdaChMtpsPml(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) clinicalDocument);
 	}
 
 	@Test
@@ -128,7 +128,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath
+				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -201,8 +202,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 				.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
 		assertEquals("#pre", cdaDeserialized.getMedicationListSection().getPrescriptionItemEntries()
 				.get(0).getTextReference());
-		assertEquals("#dis", cdaDeserialized.getMedicationListSection().getDispenseItemEntries().get(0)
-				.getTextReference());
+		assertEquals("#dis", cdaDeserialized.getMedicationListSection().getDispenseItemEntries()
+				.get(0).getTextReference());
 		assertEquals("#padv", cdaDeserialized.getMedicationListSection()
 				.getPharmaceuticalAdviceItemEntries().get(0).getTextReference());
 

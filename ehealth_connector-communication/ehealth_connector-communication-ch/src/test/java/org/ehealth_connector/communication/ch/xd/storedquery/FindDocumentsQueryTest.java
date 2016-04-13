@@ -19,30 +19,20 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.function.Consumer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.ch.testhelper.XdsChTestUtils;
-import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test of class FindDocumentsQuery
  */
 public class FindDocumentsQueryTest extends XdsChTestUtils {
 
-	private Log log;
-
-	/**
-	 * Method implementing
-	 *
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		log = LogFactory.getLog(getClass());
-	}
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Test method for
@@ -53,8 +43,9 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 	public void testFindDocumentsQueryIdentificatorClassCodeArrayDateTimeRangeArrayPracticeSettingCodeArrayHealthcareFacilityTypeCodeArrayConfidentialityCodeArrayFormatCodeArrayXCNAvailabilityStatus() {
 		// Constructor Test
 		// Create a query
-		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, eDateTimeRanges, practiceSettingCodes,
-				healthCareFacilityCodes, confidentialityCodes, formatCodes, authorPerson, avaiabilityStatus);
+		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, eDateTimeRanges,
+				practiceSettingCodes, healthCareFacilityCodes, confidentialityCodes, formatCodes,
+				authorPerson, avaiabilityStatus);
 
 		// Check query parameters
 		final StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
@@ -71,17 +62,23 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 
 		assertTrue(sqpl.get("$XDSDocumentEntryStatus").contains(avaiabilityStatus.getCodeValue()));
 
-		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom").contains(eDateTimeRange1.getFromAsUsFormattedString()));
-		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo").contains(eDateTimeRange1.getToAsUsFormattedString()));
+		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom")
+				.contains(eDateTimeRange1.getFromAsUsFormattedString()));
+		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo")
+				.contains(eDateTimeRange1.getToAsUsFormattedString()));
 
 		assertTrue(sqpl.get("$XDSDocumentEntryClassCode").contains(classCodes[0].getCodeValue()));
-		assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode").contains(practiceSettingCodes[0].getCodeSystemOid()));
-		assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode").contains(healthCareFacilityCodes[0].getCodeValue()));
-		assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode").contains(confidentialityCodes[1].getCodeValue()));
+		assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode")
+				.contains(practiceSettingCodes[0].getCodeSystemOid()));
+		assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode")
+				.contains(healthCareFacilityCodes[0].getCodeValue()));
+		assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode")
+				.contains(confidentialityCodes[1].getCodeValue()));
 		assertTrue(sqpl.get("$XDSDocumentEntryFormatCode").contains(formatCodes[1].getCodeValue()));
 
 		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getGivenName()));
-		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getFamilyName()));
+		assertTrue(
+				sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getFamilyName()));
 		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
 		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
 	}

@@ -19,14 +19,14 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.MessageFormat;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.VendorInformation;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class IndexHtm represents the INDEX.HTM file, which is part of the
@@ -35,11 +35,9 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class IndexHtm {
 
-	/** The log service. */
-	private static Log log = LogFactory.getLog(IndexHtm.class);
-
 	/** The HTML Footer */
 	public static final String HTML_FOOTER = "</body>\n" + "</html>";
+
 	/** The HTML Header (including headline) */
 	public static final String HTML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
@@ -77,12 +75,14 @@ public class IndexHtm {
 			+ "<p>Ce volume contient {3} Dokumente en 1 Submission Set.</p>\n"
 			+ "<h3>Fichier README</h3>\n"
 			+ "<p>Pour plus de informations techniques au sujet de ce volume et le fournisseur, voir: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	/** The inputStream. */
 	private InputStream inputStream = null;
 
 	/**
 	 * Instantiates a new indexHtm.
-	 * 
+	 *
 	 * @param indexHtmStream
 	 *            the INDEX.HTM file as InputStream object. The file contains
 	 *            information about the contents of the volume.
@@ -93,7 +93,7 @@ public class IndexHtm {
 
 	/**
 	 * Creates a new INDEX.HTM based on the given txnData.
-	 * 
+	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 */
@@ -103,7 +103,7 @@ public class IndexHtm {
 
 	/**
 	 * Creates a new INDEX.HTM based on the given txnData and vendorInfo.
-	 * 
+	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 * @param vendorInfo
@@ -133,17 +133,8 @@ public class IndexHtm {
 	}
 
 	/**
-	 * Returns the content of the INDEX.HTM as InputStream object
-	 * 
-	 * @return the input stream
-	 */
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
-	/**
 	 * Creates the contents.
-	 * 
+	 *
 	 * @param SubmitTransactionData
 	 *            the txn data
 	 * @return the IndexHtm contents as string
@@ -169,5 +160,14 @@ public class IndexHtm {
 		}
 		contentsStr = contentsStr + "</ul>\n";
 		return contentsStr;
+	}
+
+	/**
+	 * Returns the content of the INDEX.HTM as InputStream object
+	 *
+	 * @return the input stream
+	 */
+	public InputStream getInputStream() {
+		return inputStream;
 	}
 }

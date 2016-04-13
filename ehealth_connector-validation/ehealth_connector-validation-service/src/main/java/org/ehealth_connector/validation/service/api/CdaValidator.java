@@ -58,9 +58,8 @@ import org.ehealth_connector.validation.service.schematron.bind.SuccessfulReport
 import org.ehealth_connector.validation.service.schematron.result.ActivePatternResult;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 import org.ehealth_connector.validation.service.transform.TransformationException;
-/*import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.demo.validation.DemoValidation;*/
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -74,7 +73,8 @@ import net.sf.saxon.s9api.SaxonApiException;
  */
 public class CdaValidator {
 
-	// private final Log log = LogFactory.getLog(CdaValidator.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Configuration of the validator */
 	private Configuration configuration;
@@ -263,7 +263,7 @@ public class CdaValidator {
 	 * @return validators for the current configuration
 	 */
 	private Validators createValidators(Configuration configuration) {
-		// log.debug("Building rule-set transformer ...");
+		log.debug("Building rule-set transformer ...");
 
 		Processor processor = new Processor(false);
 
@@ -281,8 +281,7 @@ public class CdaValidator {
 			@Override
 			public void warning(TransformerException exception) throws TransformerException {
 				// Do nothing (suppress warnings)
-				// log.debug("PerformanceTimestamp: Starting
-				// DemoMPIClient.doDemo");
+				log.warn("XSLT TransformerException:" + exception.getMessage());
 			}
 		});
 		RuleSetTransformer factory = new RuleSetTransformer(processor);
@@ -297,11 +296,11 @@ public class CdaValidator {
 		if (schemaPath == null || schemaPath.isEmpty()) {
 			return null;
 		}
-		// log.info("Loading XSD schema '" + schemaPath + "' ...");
+		log.info("Loading XSD schema '" + schemaPath + "' ...");
 		File schemaFile = new File(schemaPath).getAbsoluteFile();
 		if (!schemaFile.canRead()) {
-			// log.error("XSD schema " + schemaFile.toString() + " does not
-			// exist or can not be read.");
+			log.error(
+					"XSD schema " + schemaFile.toString() + " does not exist or can not be read.");
 			return null;
 		}
 		Source source = new StreamSource(schemaFile);
@@ -309,7 +308,7 @@ public class CdaValidator {
 		factory.setErrorHandler(new ErrorHandler() {
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
-				// log.warn("XSD schema error: " + exception.getMessage());
+				log.warn("XSD schema error: " + exception.getMessage());
 			}
 
 			@Override
@@ -324,7 +323,7 @@ public class CdaValidator {
 		try {
 			return factory.newSchema(source);
 		} catch (SAXException e) {
-			// log.error("Could not load XSD schema '" + schemaPath + "'", e);
+			log.error("Could not load XSD schema '" + schemaPath + "'", e);
 			return null;
 		}
 	}

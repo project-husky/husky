@@ -34,8 +34,6 @@ import java.util.zip.ZipFile;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -59,6 +57,8 @@ import org.openhealthtools.ihe.xds.response.XDSStatusType;
 import org.openhealthtools.ihe.xds.response.impl.XDSErrorListTypeImpl;
 import org.openhealthtools.ihe.xds.response.impl.XDSErrorTypeImpl;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class XdmContents represents all content of an XDM volume. This includes
@@ -66,9 +66,6 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * machine readable files like METADATA.XML
  */
 public class XdmContents {
-
-	/** The logger. */
-	private static Log log = LogFactory.getLog(XdmContents.class);
 
 	/** The xdm index. */
 	private static String XDM_INDEX = "INDEX.HTM";
@@ -82,6 +79,9 @@ public class XdmContents {
 	/** The xdm readme. */
 	private static String XDM_README = "README.TXT";
 
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
+
 	/** The index htm. */
 	private IndexHtm indexHtm;
 
@@ -89,7 +89,7 @@ public class XdmContents {
 	private ReadmeTxt readmeTxt;
 
 	/** The OHT response object. */
-	private XdmRetrieveResponseTypeImpl resp;
+	private final XdmRetrieveResponseTypeImpl resp;
 
 	/** The txn data. */
 	private SubmitTransactionData[] txnData;
@@ -108,7 +108,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT files
 	 * as according objects
-	 * 
+	 *
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -125,7 +125,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with a given filePath, pointing to an
 	 * existing zip file.
-	 * 
+	 *
 	 * @param filePath
 	 *            the file path to an existing zip file, which holds the
 	 *            contents of an xdm volume
@@ -145,7 +145,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with given INDEX.HTM and README.TXT
 	 * files, which will be read from given files paths.
-	 * 
+	 *
 	 * @param indexHtm
 	 *            the IndexHtm object (contains information about the contents
 	 *            of the volume)
@@ -167,7 +167,7 @@ public class XdmContents {
 	/**
 	 * Instantiates a new xdm contents with a given XDM volume as single zip
 	 * file.
-	 * 
+	 *
 	 * @param zipFile
 	 *            the zip file
 	 */
@@ -186,183 +186,8 @@ public class XdmContents {
 	}
 
 	/**
-	 * Creates the XDM volume contents and writes them to the given
-	 * outputStream.
-	 * 
-	 * @param outputStream
-	 *            the output stream, in which the contents will be written.
-	 * @param txnData
-	 *            the SubmitTransactionData data (containing Metadata and the
-	 *            payload files themselves)
-	 */
-	public void createZip(OutputStream outputStream, SubmitTransactionData txnData) {
-		this.txnData = new SubmitTransactionData[] { txnData };
-
-		// Creating the ZipFileHelper Class
-		final ZipCreator zip = new ZipCreator(outputStream);
-
-		// Add the path structure for documents in the Zip File
-		try {
-			zip.addZipItem("IHE_XDM/");
-			zip.addZipItem("IHE_XDM/SUBSET01/");
-
-			// Add each XdsDocument to the Zip File
-			int i = 0;
-			final List<XDSDocument> docList = txnData.getDocList();
-			for (final XDSDocument xdsDoc : docList) {
-				i++;
-				final String filePath = XdsUtil.createXdmDocPathAndName(xdsDoc, i);
-				txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID())
-						.setUri(XdsUtil.createXdmDocName(xdsDoc, i));
-
-				// add the document
-				zip.addZipItem(xdsDoc.getStream(), filePath);
-			}
-
-			// Add the necessary files to the zip container
-			zip.addZipItem(indexHtm.getInputStream(), "INDEX.HTM");
-			zip.addZipItem(readmeTxt.getInputStream(), "README.TXT");
-
-			final XMLResource metadataXml = createMetadataXml(txnData);
-			zip.addZipItem(this.getMetadataXmlInputStream(metadataXml),
-					"IHE_XDM/SUBSET01/METADATA.XML");
-
-			zip.closeZip();
-		} catch (final IOException e) {
-			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
-			log.error("IO Exception during zip creation. ", e);
-			return;
-		}
-	}
-
-	/**
-	 * Creates the XDM volume contents and writes them to the given File(path)
-	 * 
-	 * @param filePath
-	 *            the path to the file, in which the contents will be written.
-	 * @param txnData
-	 *            the SubmitTransactionData data (containing Metadata and the
-	 *            payload files themselves)
-	 */
-	public void createZip(String filePath, SubmitTransactionData txnData) {
-		final File targetFile = new File(filePath);
-		try {
-			final FileOutputStream outputStream = new FileOutputStream(targetFile);
-			createZip(outputStream, txnData);
-		} catch (final FileNotFoundException e) {
-			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
-			log.error("FileNotFoundException during target file creation. ", e);
-		}
-	}
-
-	/**
-	 * Gets a list containing the documents together with the Document Metadata.
-	 * 
-	 * @return the document and metadata list
-	 */
-	public List<DocumentContentAndMetadata> getDocumentAndMetadataList() {
-		return getDocumentAndMetadataList(0);
-	}
-
-	/**
-	 * Gets a list containing the documents together with the Document Metadata
-	 * for a specific submission set.
-	 * 
-	 * @param submissionSetNumber
-	 *            the submission set number
-	 * @return the document and metadata list
-	 */
-	public List<DocumentContentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
-		lazyLoadCheck();
-		if (isSubmitTransactionDataNull(submissionSetNumber))
-			return null;
-
-		final SubmitTransactionData std = txnData[submissionSetNumber];
-		final List<DocumentContentAndMetadata> docAndMetaList = new ArrayList<DocumentContentAndMetadata>();
-
-		for (final XDSDocument xdsDoc : std.getDocList()) {
-			final DocumentContentAndMetadata docAndMetadataEntry = new DocumentContentAndMetadata(
-					xdsDoc,
-					txnData[submissionSetNumber].getDocumentEntry(xdsDoc.getDocumentEntryUUID()));
-			docAndMetaList.add(docAndMetadataEntry);
-		}
-		return docAndMetaList;
-	}
-
-	/**
-	 * Gets a list of documents (the actual payload of the XDM volume)
-	 * 
-	 * @return the documents
-	 */
-	public List<XDSDocument> getDocumentList() {
-		return getDocumentList(0);
-	}
-
-	/**
-	 * Gets a list of documents (the actual payload of the XDM volume) for a
-	 * specific submission set.
-	 * 
-	 * @param submissionSetNumber
-	 *            the submission set number
-	 * @return the document list
-	 */
-	public List<XDSDocument> getDocumentList(int submissionSetNumber) {
-		lazyLoadCheck();
-		if (isSubmitTransactionDataNull(submissionSetNumber))
-			return null;
-
-		return txnData[submissionSetNumber].getDocList();
-	}
-
-	/**
-	 * Gets the index htm.
-	 * 
-	 * @return the index htm
-	 */
-	public IndexHtm getIndexHtm() {
-		lazyLoadCheck();
-		return indexHtm;
-	}
-
-	/**
-	 * Gets the readme txt.
-	 * 
-	 * @return the readme txt
-	 */
-	public ReadmeTxt getReadmeTxt() {
-		lazyLoadCheck();
-		return readmeTxt;
-	}
-
-	/**
-	 * Gets the XDM contents as OHT submit transaction data.
-	 * 
-	 * @return the XDM contents as OHT submit transaction data
-	 */
-	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
-		lazyLoadCheck();
-		return txnData;
-	}
-
-	/**
-	 * Gets the XDM contents as OHT XDSResponseType. This Object contains a flat
-	 * list of all documents from all submission sets. It does not contain the
-	 * full XDS Metadata for each document. If you want to get this data, please
-	 * use the getDocumentAndMetadata method.
-	 * 
-	 * @return The OHT XDSResponseType
-	 */
-	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
-		lazyLoadCheck();
-		for (int i = 0; i < txnData.length; i++) {
-			resp.setAttachments(txnData[i].getDocList());
-		}
-		return resp;
-	}
-
-	/**
 	 * Creates the metadata xml.
-	 * 
+	 *
 	 * @param txnData
 	 *            the txn data
 	 * @return the XML resource
@@ -414,9 +239,79 @@ public class XdmContents {
 	}
 
 	/**
+	 * Creates the XDM volume contents and writes them to the given
+	 * outputStream.
+	 *
+	 * @param outputStream
+	 *            the output stream, in which the contents will be written.
+	 * @param txnData
+	 *            the SubmitTransactionData data (containing Metadata and the
+	 *            payload files themselves)
+	 */
+	public void createZip(OutputStream outputStream, SubmitTransactionData txnData) {
+		this.txnData = new SubmitTransactionData[] { txnData };
+
+		// Creating the ZipFileHelper Class
+		final ZipCreator zip = new ZipCreator(outputStream);
+
+		// Add the path structure for documents in the Zip File
+		try {
+			zip.addZipItem("IHE_XDM/");
+			zip.addZipItem("IHE_XDM/SUBSET01/");
+
+			// Add each XdsDocument to the Zip File
+			int i = 0;
+			final List<XDSDocument> docList = txnData.getDocList();
+			for (final XDSDocument xdsDoc : docList) {
+				i++;
+				final String filePath = XdsUtil.createXdmDocPathAndName(xdsDoc, i);
+				txnData.getDocumentEntry(xdsDoc.getDocumentEntryUUID())
+						.setUri(XdsUtil.createXdmDocName(xdsDoc, i));
+
+				// add the document
+				zip.addZipItem(xdsDoc.getStream(), filePath);
+			}
+
+			// Add the necessary files to the zip container
+			zip.addZipItem(indexHtm.getInputStream(), "INDEX.HTM");
+			zip.addZipItem(readmeTxt.getInputStream(), "README.TXT");
+
+			final XMLResource metadataXml = createMetadataXml(txnData);
+			zip.addZipItem(this.getMetadataXmlInputStream(metadataXml),
+					"IHE_XDM/SUBSET01/METADATA.XML");
+
+			zip.closeZip();
+		} catch (final IOException e) {
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("IO Exception during zip creation. ", e);
+			return;
+		}
+	}
+
+	/**
+	 * Creates the XDM volume contents and writes them to the given File(path)
+	 *
+	 * @param filePath
+	 *            the path to the file, in which the contents will be written.
+	 * @param txnData
+	 *            the SubmitTransactionData data (containing Metadata and the
+	 *            payload files themselves)
+	 */
+	public void createZip(String filePath, SubmitTransactionData txnData) {
+		final File targetFile = new File(filePath);
+		try {
+			final FileOutputStream outputStream = new FileOutputStream(targetFile);
+			createZip(outputStream, txnData);
+		} catch (final FileNotFoundException e) {
+			this.resp.setStatus(XDSStatusType.ERROR_LITERAL);
+			log.error("FileNotFoundException during target file creation. ", e);
+		}
+	}
+
+	/**
 	 * Checks if the integritiy values (hash and size) for the documents are the
 	 * same as in the metadata.
-	 * 
+	 *
 	 * @return false, if the values don´t match, true otherwise
 	 */
 	private boolean documentsIntegrityCheck() {
@@ -483,10 +378,79 @@ public class XdmContents {
 	}
 
 	/**
+	 * Gets a list containing the documents together with the Document Metadata.
+	 *
+	 * @return the document and metadata list
+	 */
+	public List<DocumentContentAndMetadata> getDocumentAndMetadataList() {
+		return getDocumentAndMetadataList(0);
+	}
+
+	/**
+	 * Gets a list containing the documents together with the Document Metadata
+	 * for a specific submission set.
+	 *
+	 * @param submissionSetNumber
+	 *            the submission set number
+	 * @return the document and metadata list
+	 */
+	public List<DocumentContentAndMetadata> getDocumentAndMetadataList(int submissionSetNumber) {
+		lazyLoadCheck();
+		if (isSubmitTransactionDataNull(submissionSetNumber))
+			return null;
+
+		final SubmitTransactionData std = txnData[submissionSetNumber];
+		final List<DocumentContentAndMetadata> docAndMetaList = new ArrayList<DocumentContentAndMetadata>();
+
+		for (final XDSDocument xdsDoc : std.getDocList()) {
+			final DocumentContentAndMetadata docAndMetadataEntry = new DocumentContentAndMetadata(
+					xdsDoc,
+					txnData[submissionSetNumber].getDocumentEntry(xdsDoc.getDocumentEntryUUID()));
+			docAndMetaList.add(docAndMetadataEntry);
+		}
+		return docAndMetaList;
+	}
+
+	/**
+	 * Gets a list of documents (the actual payload of the XDM volume)
+	 *
+	 * @return the documents
+	 */
+	public List<XDSDocument> getDocumentList() {
+		return getDocumentList(0);
+	}
+
+	/**
+	 * Gets a list of documents (the actual payload of the XDM volume) for a
+	 * specific submission set.
+	 *
+	 * @param submissionSetNumber
+	 *            the submission set number
+	 * @return the document list
+	 */
+	public List<XDSDocument> getDocumentList(int submissionSetNumber) {
+		lazyLoadCheck();
+		if (isSubmitTransactionDataNull(submissionSetNumber))
+			return null;
+
+		return txnData[submissionSetNumber].getDocList();
+	}
+
+	/**
+	 * Gets the index htm.
+	 *
+	 * @return the index htm
+	 */
+	public IndexHtm getIndexHtm() {
+		lazyLoadCheck();
+		return indexHtm;
+	}
+
+	/**
 	 * Gets the metadata xml input stream.
-	 * 
+	 *
 	 * @param metadataXml
-	 * 
+	 *
 	 * @return the metadata xml input stream
 	 */
 	private InputStream getMetadataXmlInputStream(XMLResource metadataXml) {
@@ -502,9 +466,19 @@ public class XdmContents {
 	}
 
 	/**
+	 * Gets the readme txt.
+	 *
+	 * @return the readme txt
+	 */
+	public ReadmeTxt getReadmeTxt() {
+		lazyLoadCheck();
+		return readmeTxt;
+	}
+
+	/**
 	 * Given a full ZipEntry filespec, extracts the name of the folder (if
 	 * present) under the IHE_XDM root specified by IHE XDM.
-	 * 
+	 *
 	 * @param zipEntryName
 	 *            the zip entry name
 	 * @return the submission set dirspec
@@ -521,9 +495,35 @@ public class XdmContents {
 	}
 
 	/**
+	 * Gets the XDM contents as OHT submit transaction data.
+	 *
+	 * @return the XDM contents as OHT submit transaction data
+	 */
+	public SubmitTransactionData[] getXdmContentsAsOhtSubmitTransactionData() {
+		lazyLoadCheck();
+		return txnData;
+	}
+
+	/**
+	 * Gets the XDM contents as OHT XDSResponseType. This Object contains a flat
+	 * list of all documents from all submission sets. It does not contain the
+	 * full XDS Metadata for each document. If you want to get this data, please
+	 * use the getDocumentAndMetadata method.
+	 *
+	 * @return The OHT XDSResponseType
+	 */
+	public XdmRetrieveResponseTypeImpl getXdmContentsAsOhtXdsResponseType() {
+		lazyLoadCheck();
+		for (int i = 0; i < txnData.length; i++) {
+			resp.setAttachments(txnData[i].getDocList());
+		}
+		return resp;
+	}
+
+	/**
 	 * Tries accessing an XDM file inside ZIP using both MS-DOS and UNIX
 	 * separators.
-	 * 
+	 *
 	 * @param zipFile
 	 *            the zip file
 	 * @param subsetDirspec
@@ -555,7 +555,7 @@ public class XdmContents {
 
 	/**
 	 * Checks if Submit Transaction Data contains a valid dataset
-	 * 
+	 *
 	 * @param submissionSetNumber
 	 *            number of the dataset that should be checked
 	 * @return true, if SubmitTransactionData has no valid data. false

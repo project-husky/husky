@@ -18,13 +18,13 @@ package org.ehealth_connector.communication.mpi.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.communication.mpi.MpiQuery;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.openhealthtools.ihe.utils.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 
@@ -43,7 +43,8 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	/** The mpi community oid. */
 	static private String mpiCommunityOid = UUID.generate();
 
-	private final Log log = LogFactory.getLog(InMemoryMockMpiAdapter.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The home community oid */
 	private String homeCommunityOid;
@@ -51,7 +52,8 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	/**
 	 * Adds the patient.
 	 *
-	 * @param patient the patient
+	 * @param patient
+	 *            the patient
 	 * @return true, if successful
 	 */
 	@Override
@@ -94,14 +96,106 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 		map = new HashMap<String, FhirPatient>();
 	}
 
+	/**
+	 * Gets the home community patient id.
+	 *
+	 * @param patient
+	 *            the patient
+	 * @return the home community patient id
+	 */
+	private String getHomeCommunityPatientId(FhirPatient patient) {
+		initHomeCommunityId(patient);
+		return getPatientId(patient, URN_OID + homeCommunityOid);
+	}
+
+	/**
+	 * Gets the internal map key.
+	 *
+	 * @param patient
+	 *            the patient
+	 * @return the map key
+	 */
+	private String getMapKey(FhirPatient patient) {
+		final String homeCommunityPatientId = getHomeCommunityPatientId(patient);
+		if (homeCommunityPatientId == null) {
+			return null;
+		}
+		return getMapKey(homeCommunityPatientId);
+	}
+
+	/**
+	 * Gets the internal map key.
+	 *
+	 * @param homeCommunityPatientId
+	 *            the home community patient id
+	 * @return the map key
+	 */
+	private String getMapKey(String homeCommunityPatientId) {
+		return homeCommunityOid + "-" + homeCommunityPatientId;
+	}
+
+	/**
+	 * Gets the mpi patient id.
+	 *
+	 * @param patient
+	 *            the patient
+	 * @return the mpi patient id
+	 */
+	private String getMpiPatientId(FhirPatient patient) {
+		initHomeCommunityId(patient);
+		return getPatientId(patient, URN_OID + mpiCommunityOid);
+	}
+
 	@Override
 	public MpiQuery getMpiQuery() {
 		return null;
 	}
 
 	/**
+	 * gets the patient identifier defined by the system which issued the
+	 * patient identifier.
+	 *
+	 * @param patient
+	 *            the Patient
+	 * @param system
+	 *            the system responsible which issued the patient identifer
+	 * @return the patient id
+	 */
+	private String getPatientId(FhirPatient patient, String system) {
+		initHomeCommunityId(patient);
+		for (final IdentifierDt identifierDt : patient.getIdentifier()) {
+			if (identifierDt.getSystem().equals(system)) {
+				return identifierDt.getValue();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Inits the home community id.
+	 *
+	 * @param patient
+	 *            the patient
+	 */
+	private void initHomeCommunityId(FhirPatient patient) {
+		if (homeCommunityOid == null) {
+			if (patient.getIdentifier().size() == 1) {
+				final String system = patient.getIdentifier().get(0).getSystem();
+				if (system.length() > 8) {
+					// "urn:oid:"+
+					homeCommunityOid = system.substring(8);
+				} else {
+					throw new IllegalStateException("system has to start with urn:oid:");
+				}
+			} else {
+				throw new IllegalStateException("homeCommunityId has to be specified");
+			}
+		}
+	}
+
+	/**
 	 * Merge patient.
-	 * 
+	 *
 	 * @param patient
 	 *            the patient
 	 * @param obsoleteId
@@ -129,7 +223,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 
 	/**
 	 * Query patient id.
-	 * 
+	 *
 	 * @param patient
 	 *            the patient
 	 * @return the string
@@ -141,9 +235,12 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	/**
 	 * Query patient id.
 	 *
-	 * @param patient the patient
-	 * @param queryDomainOids the query domain oids
-	 * @param queryDomainNamespaces the query domain namespaces
+	 * @param patient
+	 *            the patient
+	 * @param queryDomainOids
+	 *            the query domain oids
+	 * @param queryDomainNamespaces
+	 *            the query domain namespaces
 	 * @return the string[]
 	 */
 	@Override
@@ -180,7 +277,8 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	/**
 	 * Query patients.
 	 *
-	 * @param mpiQuery the mpi query
+	 * @param mpiQuery
+	 *            the mpi query
 	 * @return the mpi query response
 	 */
 	@Override
@@ -191,7 +289,8 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	/**
 	 * Update patient.
 	 *
-	 * @param patient the patient
+	 * @param patient
+	 *            the patient
 	 * @return true, if successful
 	 */
 	@Override
@@ -219,98 +318,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 			log.error("no patient id provided " + patient);
 		}
 		return false;
-	}
-
-	/**
-	 * Gets the home community patient id.
-	 * 
-	 * @param patient
-	 *            the patient
-	 * @return the home community patient id
-	 */
-	private String getHomeCommunityPatientId(FhirPatient patient) {
-		initHomeCommunityId(patient);
-		return getPatientId(patient, URN_OID + homeCommunityOid);
-	}
-
-	/**
-	 * Gets the internal map key.
-	 * 
-	 * @param patient
-	 *            the patient
-	 * @return the map key
-	 */
-	private String getMapKey(FhirPatient patient) {
-		final String homeCommunityPatientId = getHomeCommunityPatientId(patient);
-		if (homeCommunityPatientId == null) {
-			return null;
-		}
-		return getMapKey(homeCommunityPatientId);
-	}
-
-	/**
-	 * Gets the internal map key.
-	 * 
-	 * @param homeCommunityPatientId
-	 *            the home community patient id
-	 * @return the map key
-	 */
-	private String getMapKey(String homeCommunityPatientId) {
-		return homeCommunityOid + "-" + homeCommunityPatientId;
-	}
-
-	/**
-	 * Gets the mpi patient id.
-	 * 
-	 * @param patient
-	 *            the patient
-	 * @return the mpi patient id
-	 */
-	private String getMpiPatientId(FhirPatient patient) {
-		initHomeCommunityId(patient);
-		return getPatientId(patient, URN_OID + mpiCommunityOid);
-	}
-
-	/**
-	 * gets the patient identifier defined by the system which issued the
-	 * patient identifier.
-	 * 
-	 * @param patient
-	 *            the Patient
-	 * @param system
-	 *            the system responsible which issued the patient identifer
-	 * @return the patient id
-	 */
-	private String getPatientId(FhirPatient patient, String system) {
-		initHomeCommunityId(patient);
-		for (final IdentifierDt identifierDt : patient.getIdentifier()) {
-			if (identifierDt.getSystem().equals(system)) {
-				return identifierDt.getValue();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Inits the home community id.
-	 * 
-	 * @param patient
-	 *            the patient
-	 */
-	private void initHomeCommunityId(FhirPatient patient) {
-		if (homeCommunityOid == null) {
-			if (patient.getIdentifier().size() == 1) {
-				final String system = patient.getIdentifier().get(0).getSystem();
-				if (system.length() > 8) {
-					// "urn:oid:"+
-					homeCommunityOid = system.substring(8);
-				} else {
-					throw new IllegalStateException("system has to start with urn:oid:");
-				}
-			} else {
-				throw new IllegalStateException("homeCommunityId has to be specified");
-			}
-		}
 	}
 
 }

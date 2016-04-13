@@ -18,21 +18,22 @@ package org.ehealth_connector.communication.mpi.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Junit Tests for the ImMemoryMpiAdapter
- * 
+ *
  * @see org.ehealth_connector.communication.mpi.impl.InMemoryMockMpiAdapter
  */
 public class InMemoryMockMpiAdapterTests {
 
-	private Log log = LogFactory.getLog(InMemoryMockMpiAdapterTests.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	private InMemoryMockMpiAdapter mpiAdapter;
 
@@ -71,7 +72,8 @@ public class InMemoryMockMpiAdapterTests {
 		assertTrue(mpiAdapter.addPatient(patientObsolete));
 		final String mpiPatientIdObsolete = mpiAdapter.queryPatientId(patientObsolete);
 		assertTrue(!mpiPatientId.equals(mpiPatientIdObsolete));
-		assertTrue(mpiAdapter.mergePatient(patient, TestPatient.getTestPatientMuellerObsolete().localId));
+		assertTrue(mpiAdapter.mergePatient(patient,
+				TestPatient.getTestPatientMuellerObsolete().localId));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patient));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patientObsolete));
 	}

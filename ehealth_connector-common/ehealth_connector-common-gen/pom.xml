@@ -17,10 +17,6 @@ are ok.</description>
 
 
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
 		<!-- dependency to org.openhealthtools.mdht.uml.hl7.datatypes -->
 
 		<dependency>
@@ -65,11 +61,6 @@ are ok.</description>
 			<artifactId>org.openhealthtools.ihe.common.hl7v2</artifactId>
 		</dependency>
 
-		<!-- loggin stuff -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
@@ -84,12 +75,10 @@ are ok.</description>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector</groupId>

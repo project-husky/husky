@@ -32,8 +32,6 @@ import java.util.zip.ZipFile;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
@@ -45,11 +43,28 @@ import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XdmTestUtils extends TestUtils {
 
-	private static final Log log = LogFactory.getLog(XdmTestUtils.class);
-	private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");;
+	private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+
+	/** The SLF4J logger instance. */
+	protected static Logger log = LoggerFactory.getLogger(XdmTestUtils.class);;
+
+	public static String getTempFilePath() {
+		String tmpPath = "";
+		if (System.getProperty("java.io.tmpdir") != null) {
+			tmpPath = System.getProperty("java.io.tmpdir");
+		} else if (System.getenv("TMP") != null) {
+			tmpPath = System.getenv("TMP");
+		} else if (System.getenv("TEMP") != null) {
+			tmpPath = System.getenv("TEMP");
+		}
+		// tmpPath += File.separator + aFileName;
+		return tmpPath;
+	}
 
 	public XdmContents exportSamples(ConvenienceCommunication conCom, File targetFile,
 			String sourceFile1, String sourceFile2) {
@@ -160,8 +175,6 @@ public class XdmTestUtils extends TestUtils {
 	public boolean isEqualSize(InputStream is1, InputStream is2) {
 
 		try {
-			log.debug(IOUtils.toByteArray(is1).length);
-			log.debug(IOUtils.toByteArray(is2).length);
 			if (IOUtils.toByteArray(is1).length != IOUtils.toByteArray(is2).length)
 				return false;
 			else
@@ -198,7 +211,7 @@ public class XdmTestUtils extends TestUtils {
 	/**
 	 * Creates the keystore as temporary file on the local filesystem OHT does
 	 * not support keystores from within the JAR...
-	 * 
+	 *
 	 * @return Full path and file name of the temporary file containing the
 	 *         keystore
 	 */
@@ -260,18 +273,5 @@ public class XdmTestUtils extends TestUtils {
 		metaData.setPracticeSettingCode(
 				new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine"));
 		metaData.addConfidentialityCode(Confidentiality.NORMAL);
-	}
-
-	public static String getTempFilePath() {
-		String tmpPath = "";
-		if (System.getProperty("java.io.tmpdir") != null) {
-			tmpPath = System.getProperty("java.io.tmpdir");
-		} else if (System.getenv("TMP") != null) {
-			tmpPath = System.getenv("TMP");
-		} else if (System.getenv("TEMP") != null) {
-			tmpPath = System.getenv("TEMP");
-		}
-		// tmpPath += File.separator + aFileName;
-		return tmpPath;
 	}
 }

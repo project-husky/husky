@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.ehealth_connector.cda.utils;
 
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
@@ -67,12 +66,14 @@ public class CdaUtilTest {
 
 		testSb = CDAFactory.eINSTANCE.createStructuredBody();
 		testSb.setLanguageCode(DatatypesFactory.eINSTANCE.createCS("de-CH"));
-		final InfrastructureRootTypeId irtid1 = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
+		final InfrastructureRootTypeId irtid1 = CDAFactory.eINSTANCE
+				.createInfrastructureRootTypeId();
 		irtid1.setRoot("1.2.3.4.5.6.7");
 		irtid1.setExtension("1234567890");
 		testSb.setTypeId(irtid1);
 		testS = CDAFactory.eINSTANCE.createSection();
-		final InfrastructureRootTypeId irtid2 = CDAFactory.eINSTANCE.createInfrastructureRootTypeId();
+		final InfrastructureRootTypeId irtid2 = CDAFactory.eINSTANCE
+				.createInfrastructureRootTypeId();
 		irtid2.setRoot("7.6.5.4.3.2.1");
 		irtid2.setExtension("0987654321");
 		testS.setTypeId(irtid2);
@@ -91,7 +92,6 @@ public class CdaUtilTest {
 	@Test
 	public void testAddSectionToStructuredBodyAsCopy() {
 		CdaUtil.addSectionToStructuredBodyAsCopy(testSb, testS);
-		LogFactory.getLog(getClass()).debug(testSb);
 	}
 
 }

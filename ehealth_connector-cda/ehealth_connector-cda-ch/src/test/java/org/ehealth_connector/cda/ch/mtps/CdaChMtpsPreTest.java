@@ -30,15 +30,14 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -49,10 +48,11 @@ import org.xml.sax.InputSource;
  */
 public class CdaChMtpsPreTest extends TestUtils {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public CdaChMtpsPreTest() {
 		super();
@@ -68,7 +68,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChMtpsPre());
-		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
+		return new CdaChMtpsPre(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
 	}
 
 	@Test
@@ -132,7 +133,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath
+				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -166,8 +168,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
+		expr = xpath.compile(
+				"//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

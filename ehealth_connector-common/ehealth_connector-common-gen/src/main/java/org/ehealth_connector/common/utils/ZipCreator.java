@@ -25,22 +25,24 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class provides the functions to create zip files
- * 
+ *
  */
 public class ZipCreator {
 
-	private static Log logService = LogFactory.getLog(ZipCreator.class);
-	private byte[] buffer = new byte[1024];
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
+
+	private final byte[] buffer = new byte[1024];
 	private ZipOutputStream out = null;
 
 	/**
 	 * Creates a new Object which provides the needed methods
-	 * 
+	 *
 	 * @param outputStream
 	 *            the outputStream, which is used to write the contents to
 	 */
@@ -50,7 +52,7 @@ public class ZipCreator {
 
 	/**
 	 * Creates a new Object which provides the needed methods
-	 * 
+	 *
 	 * @param filePath
 	 *            the path to the file, which is used to write the contents to
 	 */
@@ -60,13 +62,13 @@ public class ZipCreator {
 			outputStream = new FileOutputStream(new File(filePath));
 			out = new ZipOutputStream(outputStream);
 		} catch (final FileNotFoundException e) {
-			logService.error("Failed to create target file for zip outputstream.", e);
+			log.error("Failed to create target file for zip outputstream.", e);
 		}
 	}
 
 	/**
 	 * Adds an InputStream as ZipEntry to the ZipFile
-	 * 
+	 *
 	 * @param data
 	 *            Contains the file to compress as InputStream
 	 * @param pathInZipFile
@@ -76,7 +78,7 @@ public class ZipCreator {
 	 */
 	public void addZipItem(InputStream data, String pathInZipFile) throws IOException {
 
-		logService.debug("Adding to Zip-file: " + pathInZipFile);
+		log.debug("Adding to Zip-file: " + pathInZipFile);
 
 		if (data == null) {
 			out.putNextEntry(new ZipEntry(pathInZipFile));
@@ -95,7 +97,7 @@ public class ZipCreator {
 
 	/**
 	 * Adds a directory as ZipEntry to the ZipFile
-	 * 
+	 *
 	 * @param pathInZipFile
 	 *            Contains the relative path only in that zip file
 	 * @throws IOException
@@ -108,7 +110,7 @@ public class ZipCreator {
 
 	/**
 	 * Adds an InputStream as ZipEntry to the ZipFile
-	 * 
+	 *
 	 * @param filePath
 	 *            Contains the path to the file to add as zip item
 	 * @param pathInZipFile
@@ -124,7 +126,7 @@ public class ZipCreator {
 	/**
 	 * Closes the stream. It only has to be called when no more entries will be
 	 * added.
-	 * 
+	 *
 	 * @throws IOException
 	 *             if the file could not be read
 	 */

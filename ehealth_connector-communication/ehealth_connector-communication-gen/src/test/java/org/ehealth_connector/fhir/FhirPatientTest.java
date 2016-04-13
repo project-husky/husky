@@ -21,8 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
@@ -30,6 +28,8 @@ import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
@@ -53,13 +53,49 @@ import ca.uhn.fhir.validation.ValidationResult;
 
 /**
  * Junit Tests for the FhirPatient
- * 
+ *
  * @see org.ehealth_connector.communication.mpi.FhirPatient
  */
 public class FhirPatientTest {
 
-	private FhirContext ctx = new FhirContext();
-	private Log log = LogFactory.getLog(FhirPatientTest.class);
+	private final FhirContext ctx = new FhirContext();
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
+
+	private Patient getPatient(TestPatient patientMueller) {
+		final Name name = new Name(patientMueller.given, patientMueller.family);
+		AdministrativeGender gender;
+		if ("male".equals(patientMueller.gender)) {
+			gender = AdministrativeGender.MALE;
+		} else if ("female".equals(patientMueller.gender)) {
+			gender = AdministrativeGender.FEMALE;
+		} else {
+			gender = AdministrativeGender.UNDIFFERENTIATED;
+		}
+		final Patient conveniencePatient = new Patient(name, gender, patientMueller.getBirthDate());
+		return conveniencePatient;
+	}
+
+	private Organization getScopingOrganization() {
+		return this.getScopingOrganization("2.16.840.1.113883.3.72.5.9.2", "OHT", null);
+	}
+
+	private Organization getScopingOrganization(String oid, String name, String tel) {
+		final Organization org = new Organization();
+		if (oid != null) {
+			final IdentifierDt identifier = new IdentifierDt();
+			identifier.setSystem("urn:oid:" + oid);
+			org.getIdentifier().add(identifier);
+		}
+		if (name != null) {
+			org.setName(name);
+		}
+		if (tel != null) {
+			final ContactPointDt fhirTel = org.addTelecom();
+			fhirTel.setValue(tel);
+		}
+		return org;
+	}
 
 	@Test
 	public void testConveniencePatient() {
@@ -68,7 +104,8 @@ public class FhirPatientTest {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final HumanNameDt humanName = new HumanNameDt().addFamily("ALPHA").addGiven("ALAN");
 		fhirPatient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("1 PINETREE").setPostalCode("63119").setCity("WEBSTER").setState("MO");
+		final AddressDt address = new AddressDt().addLine("1 PINETREE").setPostalCode("63119")
+				.setCity("WEBSTER").setState("MO");
 		final IdentifierDt identifier = new IdentifierDt();
 		identifier.setValue("PIX");
 		identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.1");
@@ -88,7 +125,8 @@ public class FhirPatientTest {
 		assertEquals("ALPHA", patient.getName().getFamilyName());
 		assertEquals("ALAN", patient.getName().getGivenNames());
 
-		org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
+		org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole()
+				.getProviderOrganization().getIds().get(0);
 		assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
 
 		final FhirPatient fhirPatientEquals = new FhirPatient(patient);
@@ -118,7 +156,8 @@ public class FhirPatientTest {
 		assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr().getCities().get(0).getText());
+		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr()
+				.getCities().get(0).getText());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
@@ -179,8 +218,10 @@ public class FhirPatientTest {
 		fhirPatient.getCommunication().add(new Communication().setLanguage(frCH));
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunications().get(0).getLanguageCode().getCode());
-		assertEquals("fr-CH", patient.getMdhtPatient().getLanguageCommunications().get(1).getLanguageCode().getCode());
+		assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunications().get(0)
+				.getLanguageCode().getCode());
+		assertEquals("fr-CH", patient.getMdhtPatient().getLanguageCommunications().get(1)
+				.getLanguageCode().getCode());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 
@@ -265,7 +306,8 @@ public class FhirPatientTest {
 	@Test
 	public void testConveniencePatientOrganization() {
 		final FhirPatient fhirPatient = new FhirPatient();
-		fhirPatient.getManagingOrganization().setResource(getScopingOrganization("1234", "Test", "+417600000000"));
+		fhirPatient.getManagingOrganization()
+				.setResource(getScopingOrganization("1234", "Test", "+417600000000"));
 
 		ca.uhn.fhir.model.dstu2.resource.Organization org = (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient
 				.getManagingOrganization().getResource();
@@ -275,12 +317,16 @@ public class FhirPatientTest {
 		assertEquals("+417600000000", org.getTelecomFirstRep().getValue());
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("Test", patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
-		assertEquals("1234", patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0).getRoot());
-		assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization().getTelecoms().get(0).getValue());
+		assertEquals("Test",
+				patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
+		assertEquals("1234",
+				patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0).getRoot());
+		assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization()
+				.getTelecoms().get(0).getValue());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
-		org = (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization().getResource();
+		org = (ca.uhn.fhir.model.dstu2.resource.Organization) fhirPatient2.getManagingOrganization()
+				.getResource();
 
 		assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
 		assertEquals("Test", org.getName());
@@ -346,20 +392,28 @@ public class FhirPatientTest {
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 
-		assertEquals(ContactPointUseEnum.HOME, fhirPatient2.getTelecom().get(0).getUseElement().getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(0).getSystemElement().getValueAsEnum());
+		assertEquals(ContactPointUseEnum.HOME,
+				fhirPatient2.getTelecom().get(0).getUseElement().getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE,
+				fhirPatient2.getTelecom().get(0).getSystemElement().getValueAsEnum());
 		assertEquals("+4144000000000", fhirPatient2.getTelecom().get(0).getValue());
 
-		assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(1).getUseElement().getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(1).getSystemElement().getValueAsEnum());
+		assertEquals(ContactPointUseEnum.WORK,
+				fhirPatient2.getTelecom().get(1).getUseElement().getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE,
+				fhirPatient2.getTelecom().get(1).getSystemElement().getValueAsEnum());
 		assertEquals("+4188000000000", fhirPatient2.getTelecom().get(1).getValue());
 
-		assertEquals(ContactPointUseEnum.MOBILE, fhirPatient2.getTelecom().get(2).getUseElement().getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.PHONE, fhirPatient2.getTelecom().get(2).getSystemElement().getValueAsEnum());
+		assertEquals(ContactPointUseEnum.MOBILE,
+				fhirPatient2.getTelecom().get(2).getUseElement().getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.PHONE,
+				fhirPatient2.getTelecom().get(2).getSystemElement().getValueAsEnum());
 		assertEquals("+4176000000000", fhirPatient2.getTelecom().get(2).getValue());
 
-		assertEquals(ContactPointUseEnum.WORK, fhirPatient2.getTelecom().get(3).getUseElement().getValueAsEnum());
-		assertEquals(ContactPointSystemEnum.EMAIL, fhirPatient2.getTelecom().get(3).getSystemElement().getValueAsEnum());
+		assertEquals(ContactPointUseEnum.WORK,
+				fhirPatient2.getTelecom().get(3).getUseElement().getValueAsEnum());
+		assertEquals(ContactPointSystemEnum.EMAIL,
+				fhirPatient2.getTelecom().get(3).getSystemElement().getValueAsEnum());
 		assertEquals("xyz@abc.ch", fhirPatient2.getTelecom().get(3).getValue());
 	}
 
@@ -368,7 +422,8 @@ public class FhirPatientTest {
 		final Name name = new Name("given", "family", "prefix", "suffix");
 		final Patient conveniencePatient = new Patient(name, AdministrativeGender.MALE, new Date());
 
-		final Address address = new Address("addressline1", "addressline2", "addressline3", "zip", "city", AddressUse.PRIVATE);
+		final Address address = new Address("addressline1", "addressline2", "addressline3", "zip",
+				"city", AddressUse.PRIVATE);
 
 		address.getMdhtAdress().addCountry("cty");
 		address.getMdhtAdress().addState("state");
@@ -392,7 +447,8 @@ public class FhirPatientTest {
 		final Patient conveniencePatient = getPatient(patientMueller);
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep().getGivenAsSingleString());
-		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep().getFamilyAsSingleString());
+		assertEquals(patientMueller.family,
+				fhirPatient.getNameFirstRep().getFamilyAsSingleString());
 		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
 		assertEquals(patientMueller.gender, fhirPatient.getGender());
 	}
@@ -403,7 +459,8 @@ public class FhirPatientTest {
 		final Patient conveniencePatient = getPatient(patientMueller);
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals(patientMueller.given, fhirPatient.getNameFirstRep().getGivenAsSingleString());
-		assertEquals(patientMueller.family, fhirPatient.getNameFirstRep().getFamilyAsSingleString());
+		assertEquals(patientMueller.family,
+				fhirPatient.getNameFirstRep().getFamilyAsSingleString());
 		assertEquals(patientMueller.getBirthDate(), fhirPatient.getBirthDate());
 		assertEquals(patientMueller.gender, fhirPatient.getGender());
 	}
@@ -439,7 +496,8 @@ public class FhirPatientTest {
 
 		final FhirPatient fhirPatient = TestPatient.getFhirPatientMueller();
 
-		fhirPatient.getManagingOrganization().setResource(getScopingOrganization("1234", "Test", "+417600000000"));
+		fhirPatient.getManagingOrganization()
+				.setResource(getScopingOrganization("1234", "Test", "+417600000000"));
 
 		// telecom
 		final ContactPointDt telHome = new ContactPointDt();
@@ -509,7 +567,8 @@ public class FhirPatientTest {
 			System.out.println("Validation failed");
 			// The result contains an OperationOutcome outlining the failures
 			@SuppressWarnings("deprecation")
-			final String results = ctx.newXmlParser().setPrettyPrint(true).encodeResourceToString(result.getOperationOutcome());
+			final String results = ctx.newXmlParser().setPrettyPrint(true)
+					.encodeResourceToString(result.getOperationOutcome());
 			System.out.println(results);
 		}
 		assertTrue(result.isSuccessful());
@@ -519,44 +578,10 @@ public class FhirPatientTest {
 		log.debug(stringPatient);
 
 		final IParser parser = ctx.newXmlParser();
-		final FhirPatient fhirPatientDeserialized = parser.parseResource(FhirPatient.class, stringPatient);
+		final FhirPatient fhirPatientDeserialized = parser.parseResource(FhirPatient.class,
+				stringPatient);
 		assertTrue(fhirPatientDeserialized != null);
 
-	}
-
-	private Patient getPatient(TestPatient patientMueller) {
-		final Name name = new Name(patientMueller.given, patientMueller.family);
-		AdministrativeGender gender;
-		if ("male".equals(patientMueller.gender)) {
-			gender = AdministrativeGender.MALE;
-		} else if ("female".equals(patientMueller.gender)) {
-			gender = AdministrativeGender.FEMALE;
-		} else {
-			gender = AdministrativeGender.UNDIFFERENTIATED;
-		}
-		final Patient conveniencePatient = new Patient(name, gender, patientMueller.getBirthDate());
-		return conveniencePatient;
-	}
-
-	private Organization getScopingOrganization() {
-		return this.getScopingOrganization("2.16.840.1.113883.3.72.5.9.2", "OHT", null);
-	}
-
-	private Organization getScopingOrganization(String oid, String name, String tel) {
-		final Organization org = new Organization();
-		if (oid != null) {
-			final IdentifierDt identifier = new IdentifierDt();
-			identifier.setSystem("urn:oid:" + oid);
-			org.getIdentifier().add(identifier);
-		}
-		if (name != null) {
-			org.setName(name);
-		}
-		if (tel != null) {
-			final ContactPointDt fhirTel = org.addTelecom();
-			fhirTel.setValue(tel);
-		}
-		return org;
 	}
 
 }

@@ -29,9 +29,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.ehealth_connector.cda.testhelper.TestUtils;
@@ -40,6 +37,8 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -49,10 +48,11 @@ import org.xml.sax.InputSource;
  */
 public class CdaChMtpsDisTest extends TestUtils {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public CdaChMtpsDisTest() {
 		super();
@@ -68,7 +68,8 @@ public class CdaChMtpsDisTest extends TestUtils {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChMtpsDis());
-		return new CdaChMtpsDis((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) clinicalDocument);
+		return new CdaChMtpsDis(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) clinicalDocument);
 	}
 
 	@Test
@@ -132,7 +133,8 @@ public class CdaChMtpsDisTest extends TestUtils {
 		// assertEquals(1, nodes.getLength());
 		// should be blowe
 
-		// expr = xpath.compile("//*/section/title[text()='Pharmacy Dispense']");
+		// expr = xpath.compile("//*/section/title[text()='Pharmacy
+		// Dispense']");
 		// nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		// assertEquals(1, nodes.getLength());
 
@@ -159,7 +161,8 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath
+				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

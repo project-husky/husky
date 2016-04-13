@@ -19,11 +19,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
@@ -36,12 +36,12 @@ import ca.uhn.fhir.model.primitive.DateDt;
 /**
  * See http://pixpdqtests.nist.gov/pixpdqtool/ IHE PIX and PDQ Pre-Connectathon
  * Test Tool
- * 
+ *
  * Configuration for 2015 Europe
- * 
+ *
  * Application Name: provided by test tool Facility Name: provided by test tool
  * IP Address: provided by test tool Port Number: V3 Message (Non Secure: 9090 )
- * 
+ *
  * ATTENTION: You need to start the testtool and need to get the parameters from
  * webpage otherwise the test will not run through, you need also to remove
  * the @Ignore to perform the tests directly
@@ -49,7 +49,8 @@ import ca.uhn.fhir.model.primitive.DateDt;
 @Ignore
 public class V3PixAdapterPixPdqNistPreCatTests {
 
-	private final Log log = LogFactory.getLog(V3PixAdapterPixPdqNistPreCatTests.class);
+	/** The SLF4J logger instance. */
+	protected static Logger log = LoggerFactory.getLogger(V3PixAdapterPixPdqNistPreCatTests.class);
 
 	private V3PixPdqAdapter v3PixAdapter;
 	private V3PixPdqAdapterConfig v3PixAdapterCfg;
@@ -68,12 +69,21 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	final private String domainToReturnOid = "2.16.840.1.113883.3.72.5.9.3";
 	final private String domainToReturnNamespace = "NIST2010-3";
 
+	private Organization getScopingOrganization() {
+		final Organization org = new Organization();
+		final IdentifierDt identifier = new IdentifierDt();
+		identifier.setValue("OHT");
+		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		org.getIdentifier().add(identifier);
+		return org;
+	}
+
 	/**
 	 * The purpose of this test is to check that your PIX Source can send a
 	 * valid feed message (Patient Registry Record Added : PRPA_IN201301UV02).
 	 * Your PIX Source is required to register a patient in domain
 	 * 2.16.840.1.113883.3.72.5.9.1 (NIST2010).
-	 * 
+	 *
 	 * Send a valid feed message (PRPA_IN201301UV02) to the NIST PIX Manager.
 	 * The message shall contain patient ALPHA (last name) ALAN (first name)
 	 * with ID PIX in domain NIST2010. The NIST PIX Manager sends back an
@@ -83,15 +93,18 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	public void ITI44SourceFeedTest() {
 
 		log.debug("ITI44SourceFeedTest with ipAdress Target " + ipAddress);
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
+				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
+				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
+				null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		// ALPHA ALAN
 		final FhirPatient patient = new FhirPatient();
 		final HumanNameDt humanName = new HumanNameDt().addFamily("ALPHA").addGiven("ALAN");
 		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("1 PINETREE").setPostalCode("63119").setCity("WEBSTER").setState("MO");
+		final AddressDt address = new AddressDt().addLine("1 PINETREE").setPostalCode("63119")
+				.setCity("WEBSTER").setState("MO");
 		final IdentifierDt identifier = new IdentifierDt();
 		identifier.setValue("PIX");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
@@ -106,45 +119,6 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		log.debug(encoded);
 
 		assertTrue(v3PixAdapter.addPatient(patient));
-	}
-
-	/**
-	 * The purpose of this test is to check that your PIX Source can send an
-	 * merge message (Patient Registry Duplicates Resolved : PRPA_IN201304UV02).
-	 * 
-	 * Send a valid merge message (PRPA_IN201304UV02) to the NIST PIX Manager.
-	 * The message shall contain patient LINCOLN MARY with ID PIXL in domain
-	 * NIST2010 in replacement of ID PIXW (MARY WASHINGTON) in domain NIST2010.
-	 * The NIST PIX Manager sends an acknowledgement (MCCI_IN000002UV01) back to
-	 * your PIX Source.
-	 */
-	@Test
-	public void ITI44SourceMergeTest() {
-		log.debug("ITI44SourceMergeTest with ipAdress Target " + ipAddress);
-
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
-		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
-
-		// LINCOLN MARY
-		final FhirPatient patient = new FhirPatient();
-		final HumanNameDt humanName = new HumanNameDt().addFamily("LINCOLN").addGiven("MARY");
-		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("100 JORIE BLVD").setPostalCode("60523").setCity("CHICAGO").setState("IL");
-		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setValue("PIXL");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
-		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(new DateDt("19771208"));
-		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.FEMALE);
-		patient.getManagingOrganization().setResource(getScopingOrganization());
-
-		final FhirContext ctx = new FhirContext();
-		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
-		log.debug(encoded);
-
-		assertTrue(v3PixAdapter.mergePatient(patient, "PIXW"));
 	}
 
 	/*
@@ -188,7 +162,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * <v3:name>OHT</v3:name> </v3:assignedOrganization> </v3:assignedEntity>
 	 * </v3:custodian> </v3:registrationEvent> </v3:subject>
 	 * </v3:controlActProcess> </v3:PRPA_IN201301UV02>
-	 * 
+	 *
 	 * 2/19/15 7:33:34 AM - We are trying to send the response to your
 	 * system.Please wait... 2/19/15 7:33:34 AM - Message validation: started
 	 * 2/19/15 7:33:34 AM - Html report creation: started 2/19/15 7:33:34 AM -
@@ -209,22 +183,37 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * finished
 	 */
 
+	/**
+	 * The purpose of this test is to check that your PIX Source can send an
+	 * merge message (Patient Registry Duplicates Resolved : PRPA_IN201304UV02).
+	 *
+	 * Send a valid merge message (PRPA_IN201304UV02) to the NIST PIX Manager.
+	 * The message shall contain patient LINCOLN MARY with ID PIXL in domain
+	 * NIST2010 in replacement of ID PIXW (MARY WASHINGTON) in domain NIST2010.
+	 * The NIST PIX Manager sends an acknowledgement (MCCI_IN000002UV01) back to
+	 * your PIX Source.
+	 */
 	@Test
-	public void ITI44SourceUpdateTest() {
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null, URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
+	public void ITI44SourceMergeTest() {
+		log.debug("ITI44SourceMergeTest with ipAdress Target " + ipAddress);
+
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
+				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
+				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
+				null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
-		// TAU TERI
+		// LINCOLN MARY
 		final FhirPatient patient = new FhirPatient();
-		final HumanNameDt humanName = new HumanNameDt().addFamily("TAU").addGiven("TERI");
+		final HumanNameDt humanName = new HumanNameDt().addFamily("LINCOLN").addGiven("MARY");
 		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("202 KEN HABOR").setPostalCode("61000").setCity("NEW YORK CITY").setState("NY");
+		final AddressDt address = new AddressDt().addLine("100 JORIE BLVD").setPostalCode("60523")
+				.setCity("CHICAGO").setState("IL");
 		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setValue("PIX");
+		identifier.setValue("PIXL");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(new DateDt("19780510"));
+		patient.setBirthDate(new DateDt("19771208"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGenderEnum.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -233,7 +222,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(v3PixAdapter.updatePatient(patient));
+		assertTrue(v3PixAdapter.mergePatient(patient, "PIXW"));
 	}
 
 	/*
@@ -304,26 +293,33 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 */
 
 	@Test
-	public void ITI45ConsumperStep1Test() {
-
-		log.debug("ITI45ConsumperStep1Test with ipAdress Target " + ipAddress);
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"), null, null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace, null,
-				null, null);
+	public void ITI44SourceUpdateTest() {
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(null,
+				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
+				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
+				null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
+		// TAU TERI
 		final FhirPatient patient = new FhirPatient();
+		final HumanNameDt humanName = new HumanNameDt().addFamily("TAU").addGiven("TERI");
+		patient.getName().add(humanName);
+		final AddressDt address = new AddressDt().addLine("202 KEN HABOR").setPostalCode("61000")
+				.setCity("NEW YORK CITY").setState("NY");
 		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setValue("PIXL1");
+		identifier.setValue("PIX");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
+		patient.setBirthDate(new DateDt("19780510"));
+		patient.getAddress().add(address);
+		patient.setGender(AdministrativeGenderEnum.FEMALE);
+		patient.getManagingOrganization().setResource(getScopingOrganization());
 
 		final FhirContext ctx = new FhirContext();
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		// note: response in precat tool doest not contain response with id
-		v3PixAdapter.queryPatientId(patient);
+		assertTrue(v3PixAdapter.updatePatient(patient));
 	}
 
 	/*
@@ -394,11 +390,13 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 */
 
 	@Test
-	public void ITI45ConsumperStep2Test() {
+	public void ITI45ConsumperStep1Test() {
 
-		log.debug("ITI45ConsumperStep2Test with ipAdress Target " + ipAddress);
-		v3PixAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"), null, null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
+		log.debug("ITI45ConsumperStep1Test with ipAdress Target " + ipAddress);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
+				null, null, senderApplicationOid, null, applicationName, facilityName,
+				homeCommunityOid, homeCommunityNamespace, domainToReturnOid,
+				domainToReturnNamespace, null, null, null);
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		final FhirPatient patient = new FhirPatient();
@@ -411,24 +409,24 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		// NOTE: response in precat tool doest not contain response id
+		// note: response in precat tool doest not contain response with id
 		v3PixAdapter.queryPatientId(patient);
 	}
 
 	/*
 	 * 2/19/15 9:09:58 AM - Test: ITI-45-Consumer , Step: 1
-	 * 
+	 *
 	 * 2/19/15 9:09:58 AM - 2.16.840.1.113883.3.72.6.5.100.1461 / null
 	 * configuration started
-	 * 
+	 *
 	 * 2/19/15 9:09:58 AM - 2.16.840.1.113883.3.72.6.5.100.1461 / null
 	 * configuration finished
-	 * 
+	 *
 	 * 2/19/15 9:09:58 AM - Waiting for the incoming message...time elapsed=0s,
 	 * time left=120s
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - Incoming message received from 1.2.3.4 / null
-	 * 
+	 *
 	 * <v3:PRPA_IN201309UV02 ITSVersion="XML_1.0" xmlns:v3="urn:hl7-org:v3">
 	 * <v3:id root="1.2.3.4.103000069043208096.1424355010083.1"/>
 	 * <v3:creationTime value="20150219151010"/> <v3:interactionId
@@ -454,15 +452,15 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * <v3:semanticsText>Patient.Id</v3:semanticsText> </v3:patientIdentifier>
 	 * </v3:parameterList> </v3:queryByParameter> </v3:controlActProcess>
 	 * </v3:PRPA_IN201309UV02>
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - We are trying to send the response to your
 	 * system.Please wait... 2/19/15 9:10:17 AM - Message validation: started
 	 * 2/19/15 9:10:17 AM - Html report creation: started
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - Html report creation: finished
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - Message validation: finished
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - Response sent to 1.2.3.4 / null <PRPA_IN201310UV02
 	 * ITSVersion="XML_1.0" xmlns="urn:hl7-org:v3"
 	 * xmlns:env="http://www.w3.org/2003/05/soap-envelope"
@@ -494,17 +492,31 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * <v3:semanticsText>Patient.Id</v3:semanticsText> </v3:patientIdentifier>
 	 * </v3:parameterList> </queryByParameter> </controlActProcess>
 	 * </PRPA_IN201310UV02>
-	 * 
+	 *
 	 * 2/19/15 9:10:17 AM - Transaction finished
 	 */
 
-	private Organization getScopingOrganization() {
-		final Organization org = new Organization();
+	@Test
+	public void ITI45ConsumperStep2Test() {
+
+		log.debug("ITI45ConsumperStep2Test with ipAdress Target " + ipAddress);
+		v3PixAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
+				null, null, senderApplicationOid, null, applicationName, facilityName,
+				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
+		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
+
+		final FhirPatient patient = new FhirPatient();
 		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setValue("OHT");
+		identifier.setValue("PIXL1");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
-		org.getIdentifier().add(identifier);
-		return org;
+		patient.getIdentifier().add(identifier);
+
+		final FhirContext ctx = new FhirContext();
+		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+		log.debug(encoded);
+
+		// NOTE: response in precat tool doest not contain response id
+		v3PixAdapter.queryPatientId(patient);
 	}
 
 	/*
@@ -536,18 +548,18 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * <v3:semanticsText>Patient.Id</v3:semanticsText> </v3:patientIdentifier>
 	 * </v3:parameterList> </v3:queryByParameter> </v3:controlActProcess>
 	 * </v3:PRPA_IN201309UV02>
-	 * 
+	 *
 	 * 2/19/15 9:14:00 AM - We are trying to send the response to your
 	 * system.Please wait...
-	 * 
+	 *
 	 * 2/19/15 9:14:00 AM - Message validation: started
-	 * 
+	 *
 	 * 2/19/15 9:14:00 AM - Html report creation: started
-	 * 
+	 *
 	 * 2/19/15 9:14:01 AM - Html report creation: finished
-	 * 
+	 *
 	 * 2/19/15 9:14:01 AM - Message validation: finished
-	 * 
+	 *
 	 * 2/19/15 9:14:01 AM - Response sent to 1.2.3.4 / null <PRPA_IN201310UV02
 	 * ITSVersion="XML_1.0" xmlns="urn:hl7-org:v3"
 	 * xmlns:env="http://www.w3.org/2003/05/soap-envelope"
@@ -576,7 +588,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * <v3:semanticsText>Patient.Id</v3:semanticsText> </v3:patientIdentifier>
 	 * </v3:parameterList> </queryByParameter> </controlActProcess>
 	 * </PRPA_IN201310UV02>
-	 * 
+	 *
 	 * 2/19/15 9:14:01 AM - Transaction finished
 	 */
 

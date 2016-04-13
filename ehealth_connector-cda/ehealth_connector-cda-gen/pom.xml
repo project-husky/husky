@@ -30,17 +30,6 @@
 			<artifactId>org.openhealthtools.ihe.utils</artifactId>
 		</dependency>
 
-		<!-- commons stuff -->
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -55,12 +44,10 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>

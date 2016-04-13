@@ -20,34 +20,25 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.function.Consumer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
-import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Test of class FindDocumentsQuery
  */
 public class FindDocumentsQueryTest extends XdsTestUtils {
 
-	private Log log;
-
-	/**
-	 * Method implementing
-	 *
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		log = LogFactory.getLog(getClass());
-	}
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
-	public void testFindDocumentsQueryIdentificatorAvailabilityStatus() throws MalformedStoredQueryException {
+	public void testFindDocumentsQueryIdentificatorAvailabilityStatus()
+			throws MalformedStoredQueryException {
 
 		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, availabilityStatus);
 
@@ -63,11 +54,12 @@ public class FindDocumentsQueryTest extends XdsTestUtils {
 
 		final String patientIdRootRef = sqpl.get("$XDSDocumentEntryPatientId");
 		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef));
-		assertEquals(patientId.getExtension(), extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef));
+		assertEquals(patientId.getExtension(),
+				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef));
 
 		final String entryStatusRef = sqpl.get("$XDSDocumentEntryStatus");
-		assertEquals(availabilityStatus.getName(),
-				extractByRegex("\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", entryStatusRef));
+		assertEquals(availabilityStatus.getName(), extractByRegex(
+				"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", entryStatusRef));
 	}
 
 }

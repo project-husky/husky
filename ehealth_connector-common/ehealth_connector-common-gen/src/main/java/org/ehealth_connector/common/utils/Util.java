@@ -31,8 +31,6 @@ import java.util.Stack;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -79,6 +77,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Helper methods for the eHealth Connector and CDA
@@ -540,6 +540,12 @@ public class Util {
 		return ts;
 	}
 
+	private static ON createOnFromPn(PN pn) {
+		ON on = DatatypesFactory.eINSTANCE.createON();
+		on.addText(pn.getText());
+		return on;
+	}
+
 	public static org.openhealthtools.mdht.uml.cda.Organization createOrganizationFromCustodianOrganization(
 			CustodianOrganization mdhtCO) {
 		org.openhealthtools.mdht.uml.cda.Organization o = CDAFactory.eINSTANCE.createOrganization();
@@ -652,24 +658,6 @@ public class Util {
 		return ed;
 	}
 
-	/**
-	 * Creates an MDHT ED reference from a given String
-	 *
-	 * @param url
-	 *            the reference url
-	 * @param narrativeText
-	 *            the reference narrative text
-	 * @return the MDHT ED
-	 */
-	public static ED createReference(String url, String narrativeText) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		tel.setValue(url);
-		ed.setReference(tel);
-		ed.addText(narrativeText);
-		return ed;
-	}
-
 	// /**
 	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
 	// * and a generated extension.</div>
@@ -709,6 +697,24 @@ public class Util {
 	// }
 	// return ii;
 	// }
+
+	/**
+	 * Creates an MDHT ED reference from a given String
+	 *
+	 * @param url
+	 *            the reference url
+	 * @param narrativeText
+	 *            the reference narrative text
+	 * @return the MDHT ED
+	 */
+	public static ED createReference(String url, String narrativeText) {
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		tel.setValue(url);
+		ed.setReference(tel);
+		ed.addText(narrativeText);
+		return ed;
+	}
 
 	/**
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
@@ -908,6 +914,28 @@ public class Util {
 	}
 
 	/**
+	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
+	 * ArrayList<TEL>
+	 *
+	 * @param telecoms
+	 *            the List with unsorted MDHT TEL objects
+	 * @param type
+	 *            the type of telecommunication endpoint that should be
+	 *            extracted
+	 * @return the HashMap with TEL objects of the given type
+	 */
+	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
+		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		for (final TEL tel : telecoms) {
+			if (tel.getValue().toLowerCase().contains(type)) {
+				tl.put(tel.getValue(), (tel.getUses().size() > 0
+						? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+			}
+		}
+		return tl;
+	}
+
+	/**
 	 * <div class="en">Gets a temp folder for output files. If you set an
 	 * environment variable with the name 'eHCTempPath' the eHealth Connector
 	 * will use the path specified in this environment variable. If no such
@@ -920,7 +948,10 @@ public class Util {
 	public static String getTempDirectory() {
 		final String envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
-		final Log log = LogFactory.getLog(Util.class);
+
+		/** The SLF4J logger instance. */
+		final Logger log = LoggerFactory.getLogger(Util.class);
+
 		try {
 			final String env = System.getenv(envVariable);
 			if (env != null) {
@@ -943,6 +974,28 @@ public class Util {
 	}
 
 	/**
+	 * Extract text from an Ecore FeatureMap
+	 *
+	 * @param featureMap
+	 *            the featureMap
+	 * @return the text as String
+	 */
+	@SuppressWarnings("unused")
+	private static String getText(FeatureMap featureMap) {
+		final StringBuffer buffer = new StringBuffer("");
+		for (final FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
+				}
+			}
+		}
+		return buffer.toString().trim();
+	}
+
+	/**
 	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
 	 *
@@ -955,6 +1008,67 @@ public class Util {
 		final Map<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
 		return h;
 	}
+
+	// /**
+	// * Updates a Reference if it is a comment (in a deph of two counters)
+	// *
+	// * @param er
+	// * the EntryRelationship
+	// * @param i
+	// * first counter
+	// * @param j
+	// * second counter
+	// * @param prefix
+	// * the prefix of the reference
+	// * @return the EntryRelationship
+	// */
+	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
+	// int i, int j,
+	// SectionsVACD prefix) {
+	// if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+	// && er.getInversionInd().equals(true)) {
+	// // Get the ed and update it with the reference
+	// final ED ed = er.getAct().getText();
+	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+	// ed.setReference(tel);
+	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
+	// } else {
+	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
+	// }
+	// er.getAct().setText(ed);
+	// }
+	// return er;
+	// }
+	//
+	// /**
+	// * Updates a Reference if it is a comment
+	// *
+	// * @param er
+	// * the EntryRelationship
+	// * @param ref
+	// * the reference
+	// * @param prefix
+	// * the prefix of the reference
+	// * @return the EntryRelationship
+	// */
+	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
+	// String ref,
+	// SectionsVACD prefix) {
+	// if (isComment(er)) {
+	// // Get the ed and update it with the reference
+	// final ED ed = er.getAct().getText();
+	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+	// ed.setReference(tel);
+	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
+	// } else {
+	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
+	// }
+	// er.getAct().setText(ed);
+	// }
+	// return er;
+	// }
 
 	/**
 	 * <div class="en">Creates an MDHT II object.</div>
@@ -1022,67 +1136,6 @@ public class Util {
 		return builder.toString();
 	}
 
-	// /**
-	// * Updates a Reference if it is a comment (in a deph of two counters)
-	// *
-	// * @param er
-	// * the EntryRelationship
-	// * @param i
-	// * first counter
-	// * @param j
-	// * second counter
-	// * @param prefix
-	// * the prefix of the reference
-	// * @return the EntryRelationship
-	// */
-	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
-	// int i, int j,
-	// SectionsVACD prefix) {
-	// if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-	// && er.getInversionInd().equals(true)) {
-	// // Get the ed and update it with the reference
-	// final ED ed = er.getAct().getText();
-	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-	// ed.setReference(tel);
-	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
-	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
-	// } else {
-	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-	// }
-	// er.getAct().setText(ed);
-	// }
-	// return er;
-	// }
-	//
-	// /**
-	// * Updates a Reference if it is a comment
-	// *
-	// * @param er
-	// * the EntryRelationship
-	// * @param ref
-	// * the reference
-	// * @param prefix
-	// * the prefix of the reference
-	// * @return the EntryRelationship
-	// */
-	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
-	// String ref,
-	// SectionsVACD prefix) {
-	// if (isComment(er)) {
-	// // Get the ed and update it with the reference
-	// final ED ed = er.getAct().getText();
-	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-	// ed.setReference(tel);
-	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
-	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
-	// } else {
-	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-	// }
-	// er.getAct().setText(ed);
-	// }
-	// return er;
-	// }
-
 	/**
 	 * <div class="en">Join a list of MDHT ENXP (name parts) to a whole person
 	 * name</div>
@@ -1119,56 +1172,6 @@ public class Util {
 		final ST value = DatatypesFactory.eINSTANCE.createST();
 		value.addText(text);
 		return value;
-	}
-
-	private static ON createOnFromPn(PN pn) {
-		ON on = DatatypesFactory.eINSTANCE.createON();
-		on.addText(pn.getText());
-		return on;
-	}
-
-	/**
-	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
-	 * ArrayList<TEL>
-	 *
-	 * @param telecoms
-	 *            the List with unsorted MDHT TEL objects
-	 * @param type
-	 *            the type of telecommunication endpoint that should be
-	 *            extracted
-	 * @return the HashMap with TEL objects of the given type
-	 */
-	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
-		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
-		for (final TEL tel : telecoms) {
-			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(), (tel.getUses().size() > 0
-						? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
-			}
-		}
-		return tl;
-	}
-
-	/**
-	 * Extract text from an Ecore FeatureMap
-	 *
-	 * @param featureMap
-	 *            the featureMap
-	 * @return the text as String
-	 */
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		final StringBuffer buffer = new StringBuffer("");
-		for (final FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
 	}
 
 	/**

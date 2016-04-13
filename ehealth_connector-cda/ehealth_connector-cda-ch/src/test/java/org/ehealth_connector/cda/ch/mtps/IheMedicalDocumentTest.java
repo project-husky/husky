@@ -22,9 +22,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
@@ -37,8 +34,8 @@ import org.w3c.dom.NodeList;
  */
 public class IheMedicalDocumentTest extends TestUtils {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	public IheMedicalDocumentTest() {
 		super();

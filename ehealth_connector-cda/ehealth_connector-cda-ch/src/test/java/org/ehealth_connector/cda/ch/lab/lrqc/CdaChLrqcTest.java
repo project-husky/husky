@@ -12,9 +12,6 @@ import java.io.StringReader;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
@@ -34,16 +31,39 @@ import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 
-	private final Log log = LogFactory.getLog(MdhtFacade.class);
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	public CdaChLrqcTest() {
 		super.init();
 
+	}
+
+	private CdaChLrqc deserializeCda(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		CHPackage.eINSTANCE.eClass();
+		LABPackage.eINSTANCE.eClass();
+		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) {
+			CdaChLrqc test = new CdaChLrqc(
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
+			return test;
+		} else
+			return null;
+	}
+
+	private CdaChLrqc deserializeCdaDirect(String document) throws Exception {
+		final InputStream stream = new ByteArrayInputStream(document.getBytes());
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChLrqc());
+		return new CdaChLrqc((org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
 	}
 
 	@Test
@@ -150,6 +170,11 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return CDAUtil.load(source);
+	}
+
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChLrqc cda = new CdaChLrqc();
@@ -157,6 +182,12 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
 		assertTrue(cdaDeserialized != null);
+	}
+
+	private String serializeDocument(CdaChLrqc doc) throws Exception {
+		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
+		CDAUtil.save(doc.getDoc(), boas);
+		return boas.toString();
 	}
 
 	@Test
@@ -314,36 +345,5 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertEquals(ts1, doc.getNarrativeTextSectionLaboratorySpeciality());
 		doc.setNarrativeTextSectionLaboratorySpeciality(ts2);
 		assertEquals(ts2, doc.getNarrativeTextSectionLaboratorySpeciality());
-	}
-
-	private CdaChLrqc deserializeCda(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
-		LABPackage.eINSTANCE.eClass();
-		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) {
-			CdaChLrqc test = new CdaChLrqc(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
-			return test;
-		} else
-			return null;
-	}
-
-	private CdaChLrqc deserializeCdaDirect(String document) throws Exception {
-		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrqc());
-		return new CdaChLrqc((org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc) clinicalDocument);
-	}
-
-	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return CDAUtil.load(source);
-	}
-
-	private String serializeDocument(CdaChLrqc doc) throws Exception {
-		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
-		CDAUtil.save(doc.getDoc(), boas);
-		return boas.toString();
 	}
 }

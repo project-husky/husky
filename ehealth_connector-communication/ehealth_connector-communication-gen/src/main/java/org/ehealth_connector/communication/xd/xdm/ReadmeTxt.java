@@ -20,11 +20,11 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.VendorInformation;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class ReadmeTxt represents the README.TXT file, which is part of the
@@ -33,20 +33,20 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  */
 public class ReadmeTxt {
 
-	/** The log service. */
-	private static Log log = LogFactory.getLog(IndexHtm.class);
-
 	/** The Constant TEMPLATE_EN. */
 	public static final String TEMPLATE_EN = "Vendor name: {0}\n" + "Product: {1}\n"
 			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: See {4}\n"
 			+ "Creation timestamp: {5}\n";
+
+	/** The SLF4J logger instance. */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The InputStream */
 	private InputStream inputStream = null;
 
 	/**
 	 * Creates a new README.TXT based on the given InputStream.
-	 * 
+	 *
 	 * @param readmeTxtStream
 	 *            the readme txt stream
 	 */
@@ -57,7 +57,7 @@ public class ReadmeTxt {
 	/**
 	 * Creates a new README.TXT Object based on the given txnData (default
 	 * values will be used for vendor information).
-	 * 
+	 *
 	 * @param txnData
 	 *            the SubmitTransactionData
 	 */
@@ -68,7 +68,7 @@ public class ReadmeTxt {
 	/**
 	 * Creates a new README.TXT Object based on the given txnData and the given
 	 * vendor information.
-	 * 
+	 *
 	 * @param txnData
 	 *            the SubmitTransactionData data
 	 * @param vendorInfo
@@ -88,7 +88,7 @@ public class ReadmeTxt {
 
 	/**
 	 * Gets the INDEX.HTM contents as InputStream
-	 * 
+	 *
 	 * @return the input stream
 	 */
 	public InputStream getInputStream() {
