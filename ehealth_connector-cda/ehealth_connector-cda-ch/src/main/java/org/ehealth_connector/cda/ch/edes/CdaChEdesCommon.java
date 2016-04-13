@@ -16,12 +16,15 @@
 
 package org.ehealth_connector.cda.ch.edes;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
 import org.ehealth_connector.cda.AbstractProblemEntry;
 import org.ehealth_connector.cda.ch.AllergyConcern;
+import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -32,6 +35,9 @@ import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
+import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
+import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
+import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
 /**
@@ -59,10 +65,47 @@ public class CdaChEdesCommon {
 	}
 
 	/**
-	 * Add the section to the document, and update its title according to the
-	 * language code of the document.
+	 * <div class="en">Adds the AllergiesOrOtherAdverseReaction</div>
+	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
+	 * @param AllergiesOrOtherAdverseReaction
+	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
+	public void addAllergiesOrOtherAdverseReaction(AllergyConcern allergyOrOtherAdverseReaction,
+			AllergiesReactionsSection section) {
+		if (section == null) {
+			section = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
+			addSection(section);
+		}
+		// add the MDHT Object to the section
+		section.addAct(allergyOrOtherAdverseReaction.copyMdhtAllergyConcern());
+		section.createStrucDocText(getAllergyTable(getAllergiesAndOtherAdverseReactions(section)));
+		// Generate <text> Allergy table</text>
+	}
+
+	/**
+	 * <div class="en">Adds a PastIllness</div> <div class="de">Fügt ein
+	 * vergangenes Leiden hinzu</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param PastIllness
+	 *            the past problem concern
+	 */
+	public void addPastIllness(PastProblemConcern pastIllness,
+			HistoryOfPastIllnessSection section) {
+		if (section == null) {
+			section = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
+			addSection(section);
+		}
+		// add the MDHT Object to the section
+		section.addAct(pastIllness.copyMdhtProblemConcernEntry());
+		section.createStrucDocText(getProblemTable(section)); // Generate
+		// <text>ProblemConcern
+		// table</text>
+	}
+
 	public void addSection(Section section) {
 		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
 		if (document.getLanguageCode() != null) {
@@ -72,16 +115,38 @@ public class CdaChEdesCommon {
 		document.addSection(section);
 	}
 
-	public String getAllergyTable(List<AllergyConcern> AllergyConcerns) {
+	/**
+	 * <div class="en">Gets AllergiesAndOtherAdverseReactions</div>
+	 * <div class="de">Liefert alle Allergie Leiden zurück</div>
+	 *
+	 * @return the AllergiesAndOtherAdverseReactions
+	 */
+	public List<AllergyConcern> getAllergiesAndOtherAdverseReactions(
+			AllergiesReactionsSection section) {
+		if (section == null) {
+			return Collections.emptyList();
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<AllergyConcern> AllergyConcerns = new ArrayList<AllergyConcern>();
+		for (final Act act : acts) {
+			final AllergyConcern AllergyConcern = new AllergyConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
+			AllergyConcerns.add(AllergyConcern);
+		}
+		return AllergyConcerns;
+	}
+
+	public String getAllergyTable(List<AllergyConcern> allergyConcerns) {
 		StringBuilder sb = new StringBuilder();
-		if (!AllergyConcerns.isEmpty()) {
+		if (!allergyConcerns.isEmpty()) {
 			sb.append("<table><tbody>");
 			CS lcode = document.getLanguageCode();
 			if (lcode != null) {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
 					sb.append(
-							"<tr><th> von Datum / Uhrzeit</th><th> bis Datum / Uhrzeit</th><th>Code</th><th>Beschreibung</th><th>Status</th><th>Kommentar</th></tr>");
+							"<tr><th> von </th><th> bis</th><th>Code</th><th>Beschreibung</th><th>Status</th><th>Kommentar</th></tr>");
 					break;
 				case LanguageCode.FRENCH_CODE:
 					break;
@@ -89,11 +154,11 @@ public class CdaChEdesCommon {
 					break;
 				case LanguageCode.ENGLISH_CODE:
 					sb.append(
-							"<tr><th> From Datum / Time</th><th> Until Date / Time</th><th>Code</th><th>Description</th><th>Status</th><th>Commentar</th></tr>");
+							"<tr><th> From </th><th> Until</th><th>Code</th><th>Description</th><th>Status</th><th>Commentar</th></tr>");
 					break;
 				}
 			}
-			for (AllergyConcern AllergyConcern : AllergyConcerns) {
+			for (AllergyConcern AllergyConcern : allergyConcerns) {
 				String strStatus = "-";
 				String strCommentar = "-";
 				if (AllergyConcern.getStatus().toString() != null)
@@ -116,7 +181,7 @@ public class CdaChEdesCommon {
 						strCode = AllergyProblem.getValue().getCode().getCode();
 					if (AllergyProblem.getValue().getCode().getDisplayName() != null)
 						strDescription = AllergyProblem.getValue().getCode().getDisplayName();
-					// if (strDescription == "-") strDescription =
+					// if (strDescription.equals("-") ) strDescription =
 					// AllergyProblem.getValue().GetOriginalTextReference();
 					sb.append("<tr><td>" + strStartDateTime + "</td><td>" + strEndDateTime
 							+ "</td><td>" + strCode + "</td><td>" + strDescription + "</td><td>"
@@ -129,12 +194,6 @@ public class CdaChEdesCommon {
 		return sb.toString();
 	}
 
-	/**
-	 * Returns the title of the document according to the language code of the
-	 * document.
-	 *
-	 * @return the title of the document
-	 */
 	public String getDocumentTitle() {
 		CS lcode = document.getLanguageCode();
 		if (lcode != null) {
@@ -150,19 +209,33 @@ public class CdaChEdesCommon {
 		return DOCTITLE_EN;
 	}
 
-	/**
-	 * Returns the narrative Text of the section.
-	 *
-	 * @param s
-	 *            the section
-	 * @return the narrative Text. Returns null, if this text does not exist.
-	 */
-	public String getNarrativeText(Section s) {
-		if (s != null) {
-			final StrucDocText t = s.getText();
+	public String getNarrativeText(Section section) {
+		if (section != null) {
+			final StrucDocText t = section.getText();
 			return Util.extractStringFromNonQuotedStrucDocText(t);
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Gets HistoryOfPastIllness</div> <div class="de">Liefert
+	 * alle vergangen Leiden zurück</div>
+	 *
+	 * @return the HistoryOfPastIllness
+	 */
+	public List<PastProblemConcern> getPastIllness(HistoryOfPastIllnessSection section) {
+		if (section == null) {
+			return Collections.emptyList();
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<PastProblemConcern> problemConcernEntries = new ArrayList<PastProblemConcern>();
+		for (final Act act : acts) {
+			final PastProblemConcern problemConcernEntry = new PastProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
 	}
 
 	public String getProblemTable(Section section) {
@@ -175,7 +248,7 @@ public class CdaChEdesCommon {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
 					sb.append(
-							"<tr><th> von Datum / Uhrzeit</th><th> bis Datum / Uhrzeit</th><th>Katalog</th><th>Code</th><th>Beschreibung</th><th>Status</th><th>Kommentar</th></tr>");
+							"<tr><th> von </th><th> bis </th><th>Katalog</th><th>Code</th><th>Beschreibung</th><th>Status</th><th>Kommentar</th></tr>");
 					break;
 				case LanguageCode.FRENCH_CODE:
 					break;
@@ -183,7 +256,7 @@ public class CdaChEdesCommon {
 					break;
 				case LanguageCode.ENGLISH_CODE:
 					sb.append(
-							"<tr><th> From Datum / Time</th><th> Until Date / Time</th><th>Catalog</th><th>Code</th><th>Description</th><th>Status</th><th>Commentar</th></tr>");
+							"<tr><th> From</th><th> Until</th><th>Catalog</th><th>Code</th><th>Description</th><th>Status</th><th>Commentar</th></tr>");
 					break;
 				}
 			}
@@ -232,16 +305,6 @@ public class CdaChEdesCommon {
 		return sb.toString();
 	}
 
-	/**
-	 * Sets the section/text element for the section.
-	 *
-	 * @param sectionEdes
-	 *            enum specifying the section type
-	 * @param section
-	 *            the section
-	 * @param text
-	 *            the text
-	 */
 	public void setNarrativeTextSection(SectionsEDES sectionEdes, Section section, String text) {
 		if (section == null) {
 			section = sectionEdes.createSection();

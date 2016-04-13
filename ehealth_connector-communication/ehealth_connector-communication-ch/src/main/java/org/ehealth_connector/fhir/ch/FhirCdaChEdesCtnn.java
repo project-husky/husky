@@ -21,10 +21,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.ch.AllergyConcern;
+import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
+import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
+import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -38,16 +44,19 @@ import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
+import ca.uhn.fhir.model.dstu2.resource.Condition;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Observation.Component;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
+import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.parser.IParser;
 
@@ -347,8 +356,22 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 		doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
 
 		// Body
-		String narrative = getNarrative(bundle, FhirCommon.urnUseAsAllergyProblemConcern);
-		doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
+
+		String narrative;
+		// AllergiesAndOtherAdverseReactions
+		for (final AllergyConcern allergyOrOtherAdverseReaction : getAllergyProblemConcernEntries(
+				bundle)) {
+			doc.addAllergiesOrOtherAdverseReaction(allergyOrOtherAdverseReaction);
+		}
+
+		// String narrative = getNarrative(bundle,
+		// FhirCommon.urnUseAsAllergyProblemConcern);
+		// doc.setNarrativeTextSectionAllergiesAndOtherAdverseReactions(narrative);
+
+		// Past Illness / Bisherige Krankheiten/Anamnese
+		for (final PastProblemConcern pastillness : getPastProblemConcernEntries(bundle)) {
+			doc.addPastIllness(pastillness);
+		}
 
 		narrative = getNarrative(bundle, FhirCommon.urnUseAsChiefComplaint);
 		doc.setNarrativeTextSectionChiefComplaint(narrative);
@@ -384,6 +407,108 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 
 		return doc;
 	}
+
+	private org.ehealth_connector.cda.ch.ActiveProblemConcern getActiveProblemConcern(
+			Condition fhirCondition) {
+
+		final String concern = fhirCondition.getNotes();
+		final Date date = fhirCondition.getDateRecorded();
+
+		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
+		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
+
+		// Create the ActiveProblemConcern
+		final org.ehealth_connector.cda.ch.ActiveProblemConcern retVal = new org.ehealth_connector.cda.ch.ActiveProblemConcern(
+				concern, date, problemEntry, problemStatusCode);
+
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC ActiveProblemConcerns from the given
+	 * FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC ActiveProblemConcerns </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.ActiveProblemConcern> getActiveProblemConcernEntries(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.ActiveProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ActiveProblemConcern>();
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern)
+					.isEmpty() && (entry.getResource() instanceof Condition)) {
+				retVal.add(getActiveProblemConcern((Condition) entry.getResource()));
+			}
+		}
+		return retVal;
+	};
+
+	private org.ehealth_connector.cda.ch.AllergyConcern getAllergyProblemConcern(
+			Condition fhirCondition) {
+
+		final String concern = fhirCondition.getNotes();
+		final org.ehealth_connector.cda.ch.AllergyProblem problemEntry = getAllergyProblemEntry(
+				fhirCondition);
+
+		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
+
+		final org.ehealth_connector.cda.ch.AllergyConcern retVal = new org.ehealth_connector.cda.ch.AllergyConcern(
+				concern, fhirCondition.getDateRecorded(), null, problemEntry, problemStatusCode);
+
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC AllergyConcerns from the given FHIR
+	 * bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC AllergyConcerns </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.AllergyConcern> getAllergyProblemConcernEntries(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.AllergyConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.AllergyConcern>();
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern)
+					.isEmpty() && (entry.getResource() instanceof Condition)) {
+				retVal.add(getAllergyProblemConcern((Condition) entry.getResource()));
+			}
+		}
+		return retVal;
+	};
+
+	private org.ehealth_connector.cda.ch.AllergyProblem getAllergyProblemEntry(
+			Condition fhirCondition) {
+
+		final org.ehealth_connector.cda.ch.AllergyProblem retVal = new org.ehealth_connector.cda.ch.AllergyProblem();
+		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+
+		// Add Problem Entry Identifiers
+		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// currently only Drug intolerances supported
+		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
+
+		// Date
+		retVal.setStartDate(fhirCondition.getDateRecorded());
+
+		// Value
+		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+
+		return retVal;
+	};
 
 	/**
 	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
@@ -433,6 +558,83 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 		return retVal;
 	}
 
+	private org.ehealth_connector.cda.ch.PastProblemConcern getPastProblemConcern(
+			Condition fhirCondition) {
+		org.ehealth_connector.cda.ch.PastProblemConcern retVal = null;
+
+		final String concern = fhirCondition.getNotes();
+
+		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
+
+		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
+
+		// Create the PastProblemConcern
+		retVal = new PastProblemConcern(concern, problemEntry, problemStatusCode);
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC PastProblemConcerns from the given
+	 * FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC PastProblemConcerns </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.PastProblemConcern> getPastProblemConcernEntries(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.PastProblemConcern>();
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPastProblemConcern).isEmpty()
+					&& (entry.getResource() instanceof Condition)) {
+				retVal.add(getPastProblemConcern((Condition) entry.getResource()));
+			}
+		}
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
+			Condition condition)
+
+	{
+		org.ehealth_connector.cda.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
+		final ConditionClinicalStatusCodesEnum status = condition.getClinicalStatusElement()
+				.getValueAsEnum();
+		if (status == ConditionClinicalStatusCodesEnum.RESOLVED) {
+			retVal = ProblemConcernStatusCode.COMPLETED;
+		} else if (status == ConditionClinicalStatusCodesEnum.ACTIVE) {
+			retVal = ProblemConcernStatusCode.ACTIVE;
+		}
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.Problem getProblemEntry(Condition fhirCondition) {
+
+		final org.ehealth_connector.cda.Problem retVal = new org.ehealth_connector.cda.Problem();
+		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+
+		// Add Problem Entry Identifiers
+		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.setId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// currently only Problems supported
+		retVal.setCode(ProblemType.PROBLEM);
+
+		// Date
+		retVal.setStartDate(fhirCondition.getDateRecorded());
+
+		// Value
+		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+
+		return retVal;
+	}
+
 	/**
 	 * Read the EdesCtnnDocument object from the FHIR bundle file
 	 *
@@ -445,4 +647,5 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(EdesCtnnDocument.class, resourceString);
 	};
+
 }

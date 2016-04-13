@@ -379,7 +379,7 @@ public class Value {
 		return null;
 	}
 
-	public String GetOriginalTextReference() {
+	public String getOriginalTextReference() {
 		final Code code = new Code((CD) mValue);
 		return code.getOriginalTextReference();
 	}
@@ -509,9 +509,9 @@ public class Value {
 		return (mValue instanceof RTO);
 	}
 
-	public void SetOriginalTextReference(String OriginalText) {
+	public void setOriginalTextReference(String originalText) {
 		final Code code = new Code((CD) mValue);
-		code.setOriginalTextReference(OriginalText);
+		code.setOriginalTextReference(originalText);
 	}
 
 	private void setPqValue(String value) {
