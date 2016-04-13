@@ -33,11 +33,11 @@ public class ValidationTest {
 	ArrayList<PdfValidationResult> pdfValiRes;
 
 	private final String configFilePath = "rsc/config_elga.xml";
-	private final String cdaFilePath = "rsc/cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(PDFA-1).xml";
-	private final String cdaXsdNokFilePath = "rsc/cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(XML-Body)_xsd_nok.xml";
+	private final String cdaFilePath = "cda/ELGA-043-Laborbefund_EIS-FullSupport.xml";
+	private final String cdaXsdNokFilePath = "cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(XML-Body)_xsd_nok.xml";
 	private final String cdaSchNokFilePath = "rsc/cda/ELGA-021-Entlassungsbrief_aerztlich_EIS-Structured_(XML-Body)_SchematronFailure";
 
-	//@Before
+	@Before
 	public void setUp() throws Exception {
 		cdaVali = new CdaValidator(new File(cdaFilePath).getAbsoluteFile(),
 				new File(configFilePath).getAbsoluteFile());
@@ -66,20 +66,20 @@ public class ValidationTest {
 			throws SAXException, ConfigurationException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException {
 
-		schValiRes = cdaVali.validateSchematron();//.validateSchematron(new File(cdaFilePath));
+		schValiRes = cdaVali.validateSchematron(new File(cdaFilePath).getAbsoluteFile());
 		assertTrue(schValiRes.isSchematronValid());
 
-		schValiRes = cdaVali.validateSchematron(new File(cdaSchNokFilePath));
+		schValiRes = cdaVali.validateSchematron(new File(cdaSchNokFilePath).getAbsoluteFile());
 		assertFalse(schValiRes.isSchematronValid());
 	}
 
-	//@Test
+	@Test
 	public void testXSDValidation() throws ConfigurationException {
 
-		xsdValiRes = cdaVali.validateXSD();
+		xsdValiRes = cdaVali.validateXSD(new File(cdaFilePath).getAbsoluteFile());
 		assertTrue(xsdValiRes.isXsdValid());
 
-		xsdValiRes = cdaVali.validateXSD(new File(cdaXsdNokFilePath));
+		xsdValiRes = cdaVali.validateXSD(new File(cdaXsdNokFilePath).getAbsoluteFile());
 		assertFalse(xsdValiRes.isXsdValid());
 	}
 }
