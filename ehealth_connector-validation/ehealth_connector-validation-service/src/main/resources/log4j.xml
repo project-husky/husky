@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+  <appender name="CONSOLE_OUT" class="org.apache.log4j.ConsoleAppender">
+    <param name="target" value="System.out" />
+    <param name="threshold" value="TRACE" />
+
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%c{1}] %m%n" />
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="acceptOnMatch" value="true" />
+      <param name="levelMin" value="TRACE" />
+      <param name="levelMax" value="INFO" />
+    </filter>
+  </appender>
+
+  <appender name="CONSOLE_ERR" class="org.apache.log4j.ConsoleAppender">
+    <param name="target" value="System.err" />
+    <param name="threshold" value="WARN" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ISO8601} %-5p [%c{1}] %m%n" />
+    </layout>
+  </appender>
+
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+
+
+   <!-- ======================= -->
+   <!-- Setup the Root category -->
+   <!-- ======================= -->
+
+  <root>
+    <priority value="TRACE" />
+    <appender-ref ref="CONSOLE_OUT" />
+    <appender-ref ref="CONSOLE_ERR" />
+  </root>
+
+</log4j:configuration>
