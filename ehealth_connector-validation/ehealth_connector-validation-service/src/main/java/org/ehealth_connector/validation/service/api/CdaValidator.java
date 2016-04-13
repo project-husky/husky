@@ -520,7 +520,7 @@ public class CdaValidator {
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
 		if (this.cdaFile == null)
-			throw new ConfigurationException("No XSD-File to validate");
+			throw new ConfigurationException("No CDA-File to validate");
 		XsdValidationResult xsdValRes = new XsdValidationResult();
 		try {
 			validateXsd();
