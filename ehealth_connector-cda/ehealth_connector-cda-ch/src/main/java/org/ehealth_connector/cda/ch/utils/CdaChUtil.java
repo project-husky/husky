@@ -118,8 +118,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChEdesCtnn loadEdesCtnnFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadEdesCtnnFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChEdesCtnn document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChEdesCtnn aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            an inputstream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChEdesCtnn Document
+	 */
+	public static CdaChEdesCtnn loadEdesCtnnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesCtnn> loader = new CdaChLoader<CdaChEdesCtnn>();
-		return loader.loadFromStream(inputstream, CdaChEdesCtnn.class,
+		return loader.loadFromStream(inputStream, CdaChEdesCtnn.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn.class);
 	}
 
@@ -136,8 +151,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChEdesEdpn loadEdesEdpnFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadEdesEdpnFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChEdesEdpn document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChEdesEdpn aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            an input stream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChEdesEdpn Document
+	 */
+	public static CdaChEdesEdpn loadEdesEdpnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesEdpn> loader = new CdaChLoader<CdaChEdesEdpn>();
-		return loader.loadFromStream(inputstream, CdaChEdesEdpn.class,
+		return loader.loadFromStream(inputStream, CdaChEdesEdpn.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn.class);
 	}
 
@@ -154,8 +184,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChLrph loadLrphFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadLrphFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChLrph document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChLrph aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the stream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChLrph Document
+	 */
+	public static CdaChLrph loadLrphFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrph> loader = new CdaChLoader<CdaChLrph>();
-		return loader.loadFromStream(inputstream, CdaChLrph.class,
+		return loader.loadFromStream(inputStream, CdaChLrph.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChLrph.class);
 	}
 
@@ -172,8 +217,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChLrqc loadLrqcFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadLrqcFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChLrqc document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChLrqc aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 * 
+	 * @param inputStream
+	 *            the inputstream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChLrqc Document
+	 */
+	public static CdaChLrqc loadLrqcFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrqc> loader = new CdaChLoader<CdaChLrqc>();
-		return loader.loadFromStream(inputstream, CdaChLrqc.class,
+		return loader.loadFromStream(inputStream, CdaChLrqc.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc.class);
 	}
 
@@ -190,8 +250,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChLrtp loadLrtpFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadLrtpFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChLrtp document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChLrtp aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            inputstream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChLrtp Document
+	 */
+	public static CdaChLrtp loadLrtpFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrtp> loader = new CdaChLoader<CdaChLrtp>();
-		return loader.loadFromStream(inputstream, CdaChLrtp.class,
+		return loader.loadFromStream(inputStream, CdaChLrtp.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp.class);
 	}
 
@@ -208,8 +283,23 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChVacd loadVacdFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
+		return loadVacdFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChVacd document from an input stream.</div>
+	 * <div class="de">Lädt ein CdaChVacd aus einem inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the input stream
+	 * @return the CdaChVacd Document
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static CdaChVacd loadVacdFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChVacd> loader = new CdaChLoader<CdaChVacd>();
-		return loader.loadFromStream(inputstream, CdaChVacd.class,
+		return loader.loadFromStream(inputStream, CdaChVacd.class,
 				org.openhealthtools.mdht.uml.cda.ch.VACD.class);
 	}
 
