@@ -80,7 +80,8 @@ public abstract class AbstractFhirCdaCh {
 					if ("veryrestricted".equals(langCode.getCode().toLowerCase())) {
 						retVal = Confidentiality.VERY_RESTRICTED;
 						break;
-					} else if ("restricted".equals(langCode.getCode().toLowerCase())) {
+					} else if ("restricted".equals(langCode.getCode().toLowerCase())
+							|| "r".equals(langCode.getCode().toLowerCase())) {
 						retVal = Confidentiality.RESTRICED;
 						break;
 					} else if ("normal".equals(langCode.getCode().toLowerCase())) {

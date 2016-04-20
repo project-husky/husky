@@ -60,13 +60,16 @@ public class ObservationMediaEntry
 	 *            an Base64InputStream
 	 * @param mimeType
 	 *            the mime type of the object
+	 * @param reference
+	 *            a reference to the CDA section text
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public ObservationMediaEntry(InputStream inputStream, LabObservationMediaMimeType mimeType)
-			throws IOException {
+	public ObservationMediaEntry(InputStream inputStream, LabObservationMediaMimeType mimeType,
+			String reference) throws IOException {
 		this();
 		setObject(inputStream, mimeType);
+		setObservationMediaId(reference);
 	}
 
 	/**
@@ -145,18 +148,6 @@ public class ObservationMediaEntry
 				}
 			}
 			return comments;
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the mime type.
-	 *
-	 * @return the mime type
-	 */
-	protected String getMimeType() {
-		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
-			return getMdht().getValue().getMediaType();
 		}
 		return null;
 	}
@@ -267,6 +258,18 @@ public class ObservationMediaEntry
 	 */
 	public void setObservationMediaId(String id) {
 		getMdht().setObservationMediaId(id);
+	}
+
+	/**
+	 * Gets the mime type.
+	 *
+	 * @return the mime type
+	 */
+	protected String getMimeType() {
+		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
+			return getMdht().getValue().getMediaType();
+		}
+		return null;
 	}
 
 }
