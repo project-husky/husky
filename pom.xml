@@ -31,7 +31,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 
 	<scm>
 		<connection>scm:svn:http://svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</connection>
-		<developerConnection>scm:svn:svn+ssh://svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</developerConnection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/ehealthconnector/code/trunk/ehealthconnector</developerConnection>
 	</scm>
 
 
