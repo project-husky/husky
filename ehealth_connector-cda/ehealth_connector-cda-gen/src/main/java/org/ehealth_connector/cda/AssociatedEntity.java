@@ -86,6 +86,8 @@ public class AssociatedEntity
 	 */
 	public AssociatedEntity(Name name, Address address, Telecoms telecoms) {
 		this(name);
+		getMdht().getAddrs().clear();
+		getMdht().getTelecoms().clear();
 		addAddress(address);
 		setTelecoms(telecoms);
 	}

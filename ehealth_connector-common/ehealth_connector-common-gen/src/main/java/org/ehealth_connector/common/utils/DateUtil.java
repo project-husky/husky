@@ -39,8 +39,8 @@ public class DateUtil {
 	 * <div class="en">Convert date.</div>
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="en"> date</div>
+	 *            <br>
+	 *            <div class="en"> date</div>
 	 * @return the ivl ts
 	 */
 	public static IVL_TS convertDate(Date date) {
@@ -57,8 +57,8 @@ public class DateUtil {
 	 * <div class="en">Convert date.</div>
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="en"> date</div>
+	 *            <br>
+	 *            <div class="en"> date</div>
 	 * @return the ivl ts
 	 */
 	public static IVL_TS convertDateyyyyMMddHHmmssZZZZ(Date date) {
@@ -80,9 +80,9 @@ public class DateUtil {
 	 * <div class="de"></div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param effectiveTimes
-	 *          <br>
-	 *          <div class="en"> effective times</div> <div class="de"> </div>
-	 *          <div class="fr"> </div> <div class="it"> </div>
+	 *            <br>
+	 *            <div class="en"> effective times</div> <div class="de"> </div>
+	 *            <div class="fr"> </div> <div class="it"> </div>
 	 * @return the string
 	 */
 	public static String convertSXCM_TSToEurString(List<SXCM_TS> effectiveTimes) {
@@ -91,7 +91,8 @@ public class DateUtil {
 			if (effectiveTime instanceof IVL_TS) {
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
 				if (effectiveTimeInterval.getLow() != null) {
-					final Date tsLow = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+					final Date tsLow = DateUtil
+							.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
 					if ((effectiveTimeInterval.getHigh() != null)
 							&& (effectiveTimeInterval.getHigh().getValue() != null)) {
 						final Date tsHigh = DateUtil
@@ -120,12 +121,12 @@ public class DateUtil {
 	 * Creates an IVL_TS object
 	 *
 	 * @param eurDateTime
-	 *          <div class="en">start of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">der Begin des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">start of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">der Begin des Intervals in
+	 *            dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @return HL7 IVL_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVL_TS createIVL_TSFromEuroDate(Date eurDateTime) throws ParseException {
 		// Create OHT Data structure
@@ -146,16 +147,16 @@ public class DateUtil {
 	 * Creates an IVL_TS object
 	 *
 	 * @param eurDateBegin
-	 *          <div class="en">start of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">der Begin des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">start of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">der Begin des Intervals in
+	 *            dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @param eurDateEnd
-	 *          <div class="en">end of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">das Ende des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">end of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">das Ende des Intervals in dem
+	 *            Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @return HL7 IVL_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVL_TS createIVL_TSFromEuroDate(Date eurDateBegin, Date eurDateEnd)
 			throws ParseException {
@@ -174,16 +175,16 @@ public class DateUtil {
 	 * Creates an IVL_TS object
 	 *
 	 * @param eurDateBegin
-	 *          <div class="en">start of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">der Begin des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">start of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">der Begin des Intervals in
+	 *            dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @param eurDateEnd
-	 *          <div class="en">end of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">das Ende des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">end of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">das Ende des Intervals in dem
+	 *            Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @return HL7 IVL_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVL_TS createIVL_TSFromEuroDate(String eurDateBegin, String eurDateEnd)
 			throws ParseException {
@@ -203,12 +204,12 @@ public class DateUtil {
 	 * Creates an IVL_TS object
 	 *
 	 * @param eurDateTime
-	 *          <div class="en">start of an interval in the european format
-	 *          dd.MM.yyyy</div> <div class="de">der Begin des Intervals in dem
-	 *          Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
+	 *            <div class="en">start of an interval in the european format
+	 *            dd.MM.yyyy</div> <div class="de">der Begin des Intervals in
+	 *            dem Format dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @return HL7 IVL_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVL_TS createIVL_TSFromEuroDateTime(Date eurDateTime) throws ParseException {
 		// Create OHT Data structure
@@ -225,11 +226,12 @@ public class DateUtil {
 	 * Creates an IVL_TS object
 	 *
 	 * @param yyyyMMdd
-	 *          <div class="en">start of an interval in the format yyyyMMdd</div>
-	 *          <div class="de">der Begin des Intervals im Format yyyyMMdd</div>
+	 *            <div class="en">start of an interval in the format
+	 *            yyyyMMdd</div> <div class="de">der Begin des Intervals im
+	 *            Format yyyyMMdd</div>
 	 * @return HL7 IVL_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVL_TS createIVL_TSFromHL7Date(String yyyyMMdd) throws ParseException {
 		// Create OHT Data structure
@@ -242,8 +244,8 @@ public class DateUtil {
 	 * <div class="en">Creates an IVXB_TS Object day resolution.
 	 *
 	 * @param date
-	 *          date</div> <div class="de"></div><div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            date</div> <div class="de"></div><div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @return HL7 IVXB_TS Objekt
 	 */
 	public static IVXB_TS createIVXB_TSFromDate(Date date) {
@@ -261,8 +263,8 @@ public class DateUtil {
 	 * <div class="en">Creates an IVXB_TS Object day/time resolution.
 	 *
 	 * @param date
-	 *          date</div> <div class="de"></div><div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            date</div> <div class="de"></div><div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @return HL7 IVXB_TS Objekt
 	 */
 	public static IVXB_TS createIVXB_TSFromDateTime(Date date) {
@@ -280,10 +282,10 @@ public class DateUtil {
 	 * Creates an IVXB_TS Objekt.
 	 *
 	 * @param eurDateStr
-	 *          a Date String in the European Format dd.MM.yyyy
+	 *            a Date String in the European Format dd.MM.yyyy
 	 * @return HL7 IVXB_TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static IVXB_TS createIVXB_TSFromEuroDate(String eurDateStr) throws ParseException {
 		final IVXB_TS ohtIntervalPoint = DatatypesFactory.eINSTANCE.createIVXB_TS();
@@ -308,7 +310,7 @@ public class DateUtil {
 	 * Creates an MDHT SXCM_TS object
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 * @return the MDHT SXCM_TS object
 	 */
 	public static SXCM_TS createSTCM_TS(Date date) {
@@ -327,14 +329,15 @@ public class DateUtil {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param startOfPossibleAppliance
-	 *          <br>
-	 *          <div class="en"> start of possible appliance</div>
+	 *            <br>
+	 *            <div class="en"> start of possible appliance</div>
 	 * @param endOfPossibleAppliance
-	 *          <br>
-	 *          <div class="en"> end of possible appliance</div>
+	 *            <br>
+	 *            <div class="en"> end of possible appliance</div>
 	 * @return the sxcm ts
 	 */
-	public static SXCM_TS createSTCM_TS(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
+	public static SXCM_TS createSTCM_TS(Date startOfPossibleAppliance,
+			Date endOfPossibleAppliance) {
 		try {
 			final IVL_TS ivl_ts = createIVL_TSFromEuroDate(startOfPossibleAppliance,
 					endOfPossibleAppliance);
@@ -350,11 +353,11 @@ public class DateUtil {
 	 * Creates an TS Object.
 	 *
 	 * @param eurDate
-	 *          <br>
-	 *          <div class="de"> eur date</div>
+	 *            <br>
+	 *            <div class="de"> eur date</div>
 	 * @return HL7 TS Object
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static TS createTSFromEuroDate(Date eurDate) throws ParseException {
 		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
@@ -369,12 +372,12 @@ public class DateUtil {
 	 * Creates an TS Object.
 	 *
 	 * @param eurDateStr
-	 *          <div class="en">a String in the european format dd.MM.yyyy</div>
-	 *          <div class="de">Ein String in dem Format dd.MM.yyyy wie er in
-	 *          Europa gebräuchlich ist</div>
+	 *            <div class="en">a String in the european format
+	 *            dd.MM.yyyy</div> <div class="de">Ein String in dem Format
+	 *            dd.MM.yyyy wie er in Europa gebräuchlich ist</div>
 	 * @return HL7 TS Objekt
 	 * @throws ParseException
-	 *           the parse exception
+	 *             the parse exception
 	 */
 	public static TS createTSFromEuroDateStr(String eurDateStr) throws ParseException {
 		final DateFormat eurDateFormatter = new SimpleDateFormat("dd.MM.yyyy");
@@ -405,8 +408,8 @@ public class DateUtil {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param nf
-	 *          <br>
-	 *          <div class="de"> nf</div>
+	 *            <br>
+	 *            <div class="de"> nf</div>
 	 * @return the ivl ts
 	 */
 	public static IVL_TS createUnknownTime(NullFlavor nf) {
@@ -423,8 +426,8 @@ public class DateUtil {
 	 * <div class="en">Date in dd.MM.yyyy</div>
 	 *
 	 * @param dateSt
-	 *          <br>
-	 *          <div class="en"> date String</div>
+	 *            <br>
+	 *            <div class="en"> date String</div>
 	 * @return the date
 	 */
 	public static Date date(String dateSt) {
@@ -441,8 +444,8 @@ public class DateUtil {
 	 * <div class="en">Date and time in dd.MM.yyyy HH:mm.</div>
 	 *
 	 * @param dateSt
-	 *          <br>
-	 *          <div class="de"> date String</div>
+	 *            <br>
+	 *            <div class="de"> date String</div>
 	 * @return the date
 	 */
 	public static Date dateAndTime(String dateSt) {
@@ -459,8 +462,8 @@ public class DateUtil {
 	 * <div class="en">Format date in yyyyMMddHHmmss</div>
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="de"> date</div>
+	 *            <br>
+	 *            <div class="de"> date</div>
 	 * @return the string
 	 */
 	public static String format(Date date) {
@@ -472,8 +475,8 @@ public class DateUtil {
 	 * Converts Date to String yyyyMMdd.
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="de"> date</div>
+	 *            <br>
+	 *            <div class="de"> date</div>
 	 * @return String - yyyyMMdd formatted
 	 */
 	public static String formatDate(Date date) {
@@ -485,8 +488,8 @@ public class DateUtil {
 	 * Converts Date to String dd.MM.yyyy.
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="de"> date</div>
+	 *            <br>
+	 *            <div class="de"> date</div>
 	 * @return String - dd.MM.yyyy formatted
 	 */
 	public static String formatDateCH(Date date) {
@@ -498,7 +501,7 @@ public class DateUtil {
 	 * Formats a data to a dd.MM.yyyy HH:mm String
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 * @return the dd.MM.yyyy HH:mm String
 	 */
 	public static String formatDateTimeCh(Date date) {
@@ -528,8 +531,8 @@ public class DateUtil {
 	 * <div class="en">Parses the date.</div>
 	 *
 	 * @param timeStamp
-	 *          <br>
-	 *          <div class="en"> time stamp</div>
+	 *            <br>
+	 *            <div class="en"> time stamp</div>
 	 * @return the date
 	 */
 	public static Date parseDate(TS timeStamp) {
@@ -538,8 +541,8 @@ public class DateUtil {
 	}
 
 	public static Date parseDates(String value) {
-		final String[] formatStrings = { "yyyyMMddHHmmssZZZZ", "yyyyMMddHHmm", "yyyyMMdd",
-				"yyyyMMddHHmm" };
+		final String[] formatStrings = { "yyyyMMddHHmmssZZZZ", "yyyyMMddHHmmZZZZ", "yyyyMMddHHmm",
+				"yyyyMMdd", "yyyyMMddHHmm" };
 
 		for (final String formatString : formatStrings) {
 			try {
@@ -555,8 +558,8 @@ public class DateUtil {
 	 * <div class="en">Parses the date to str.</div>
 	 *
 	 * @param timestamp
-	 *          <br>
-	 *          <div class="en">timestamp</div>
+	 *            <br>
+	 *            <div class="en">timestamp</div>
 	 * @return the string
 	 */
 	public static String parseDateToStr(TS timestamp) {
@@ -568,8 +571,8 @@ public class DateUtil {
 	 * Parse date in format yyyyMMdd.
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de">value</div>
+	 *            <br>
+	 *            <div class="de">value</div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMdd(String value) {
@@ -586,8 +589,8 @@ public class DateUtil {
 	 * Parse date in format yyyyMMddHHmm.
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div>
+	 *            <br>
+	 *            <div class="de"> value</div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMddHHmm(String value) {
@@ -596,7 +599,8 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmm.", e);
+					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmm.",
+					e);
 		}
 	}
 
@@ -604,8 +608,8 @@ public class DateUtil {
 	 * Parse date in format yyyyMMddHHmmss.
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div>
+	 *            <br>
+	 *            <div class="de"> value</div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMddHHmmss(String value) {
@@ -614,16 +618,17 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.", e);
+					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.",
+					e);
 		}
 	}
 
 	/**
-	 * Parse date in format yyyyMMddHHmmZ.
+	 * Parse date in format yyyyMMddHHmmssZZZZ.
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div>
+	 *            <br>
+	 *            <div class="de"> value</div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMddHHmmssZZZZ(String value) {
@@ -631,8 +636,8 @@ public class DateUtil {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
 			return sdf.parse(value);
 		} catch (final ParseException e) {
-			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmssZZZZ.", e);
+			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+					+ "]. Expected format is yyyyMMddHHmmssZZZZ.", e);
 		}
 	}
 
@@ -640,8 +645,8 @@ public class DateUtil {
 	 * Parse date in format yyyyMMddHHmmZ.
 	 *
 	 * @param value
-	 *          <br>
-	 *          <div class="de"> value</div>
+	 *            <br>
+	 *            <div class="de"> value</div>
 	 * @return java.util.Date
 	 */
 	public static Date parseDateyyyyMMddHHmmZ(String value) {
@@ -655,12 +660,30 @@ public class DateUtil {
 	}
 
 	/**
+	 * Parse date in format yyyyMMddHHmmZZZZ.
+	 *
+	 * @param value
+	 *            <br>
+	 *            <div class="de"> value</div>
+	 * @return java.util.Date
+	 */
+	public static Date parseDateyyyyMMddHHmmZZZZ(String value) {
+		try {
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmZZZZ");
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+					+ "]. Expected format is yyyyMMddHHmmZZZZ.", e);
+		}
+	}
+
+	/**
 	 * <div class="en">Parses the iv l_ tsv date time value.</div>
 	 * <div class="de"></div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param effectiveTime
-	 *          <br>
-	 *          <div class="de"> effective time</div>
+	 *            <br>
+	 *            <div class="de"> effective time</div>
 	 * @return the date
 	 */
 	public static Date parseIVL_TSVDateTimeValue(IVL_TS effectiveTime) {
@@ -673,8 +696,8 @@ public class DateUtil {
 	 * <div class="it"></div>
 	 *
 	 * @param date
-	 *          <br>
-	 *          <div class="de"> date</div>
+	 *            <br>
+	 *            <div class="de"> date</div>
 	 * @return the ts
 	 */
 	public static TS ts(Date date) {

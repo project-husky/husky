@@ -25,13 +25,16 @@ import org.ehealth_connector.common.enums.Confidentiality;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.ch.FhirCdaChVacd.DocTypeCode;
 
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
 import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
+import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Person;
+import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 
 public abstract class AbstractFhirCdaCh {
 	/**
@@ -53,8 +56,8 @@ public abstract class AbstractFhirCdaCh {
 		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 		for (final Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor).isEmpty()
-					&& (entry.getResource() instanceof Person)) {
-				retVal.add(FhirCommon.getAuthor((Person) entry.getResource()));
+					&& (entry.getResource() instanceof Organization)) {
+				retVal.add(FhirCommon.getAuthor((Organization) entry.getResource()));
 			}
 		}
 		return retVal;
@@ -208,10 +211,14 @@ public abstract class AbstractFhirCdaCh {
 	public String getNarrative(Bundle bundle, String extensionUrl) {
 		String retVal = "";
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(extensionUrl).isEmpty()
-					&& (entry.getResource() instanceof Basic)) {
-				NarrativeDt text = ((Basic) entry.getResource()).getText();
-				if (text != null) {
+			if (!entry.getUndeclaredExtensionsByUrl(extensionUrl).isEmpty()) {
+				NarrativeDt text;
+				if (entry.getResource() instanceof Basic) {
+					text = ((Basic) entry.getResource()).getText();
+				} else {
+					text = ((Observation) entry.getResource()).getText();
+				}
+				if (text != null && text.getDiv().getValueAsString() != null) {
 					retVal = text.getDiv().getValueAsString();
 					retVal = retVal.replace("</div>", "");
 					retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
@@ -244,5 +251,18 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return false;
+	}
+
+	private Observation createComment(String comment) {
+
+		final Observation fhirObservation = new Observation();
+		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
+
+		final CodeableConceptDt fhirCode = new CodeableConceptDt();
+		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
+		fhirObservation.setCode(fhirCode);
+		fhirObservation.setComments(comment);
+
+		return fhirObservation;
 	}
 }

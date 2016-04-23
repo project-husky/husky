@@ -40,8 +40,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Author {
 
-	final private static Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
-	final private static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7",
+	final public static Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
+	final public static Code FUNCTION_CODE_AUTHORDEVICE = new Code("2.16.756.5.30.2.1.1.1",
+			"TASST");
+	final public static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7",
 			"221", "ISCO-08", "Medical doctors");
 
 	/** assigned Author */
@@ -77,7 +79,7 @@ public class Author {
 	 * Instantiates a new software author (e.g. a laboratory information system)
 	 *
 	 * @param device
-	 *          the device
+	 *            the device
 	 */
 	public Author(AuthoringDevice device) {
 		this();
@@ -88,7 +90,7 @@ public class Author {
 	 * Instantiates a new human author.
 	 *
 	 * @param name
-	 *          the name
+	 *            the name
 	 */
 	public Author(Name name) {
 		this();
@@ -100,9 +102,9 @@ public class Author {
 	 * gebraucht für Behandelnde).
 	 *
 	 * @param name
-	 *          Name
+	 *            Name
 	 * @param gln
-	 *          Global Location Number (GLN)
+	 *            Global Location Number (GLN)
 	 */
 	public Author(Name name, String gln) {
 		this(name);
@@ -120,7 +122,7 @@ public class Author {
 	 * Objekts.
 	 *
 	 * @param authorMdht
-	 *          the MDHT Author Object
+	 *            the MDHT Author Object
 	 */
 	public Author(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
 		mAuthor = authorMdht;
@@ -132,8 +134,9 @@ public class Author {
 	 * übergebenen Organisation entspricht.</div>
 	 *
 	 * @param organizationAsAuthor
-	 *          <div class="en"> this Organization is used as Author</div>
-	 *          <div class="de"> diese Organisation wird als Autor verwendet</div>
+	 *            <div class="en"> this Organization is used as Author</div>
+	 *            <div class="de"> diese Organisation wird als Autor
+	 *            verwendet</div>
 	 */
 	public Author(Organization organizationAsAuthor) {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
@@ -150,9 +153,9 @@ public class Author {
 	 * übergebenden Patienten entspricht.</div>
 	 *
 	 * @param patientAsAuthor
-	 *          <div class="en"> this Patient is used as Author</div>
-	 *          <div class="de"> dieser Patient wird als Autor verwendet</div>
-	 *          <div class="fr"></div>
+	 *            <div class="en"> this Patient is used as Author</div>
+	 *            <div class="de"> dieser Patient wird als Autor verwendet</div>
+	 *            <div class="fr"></div>
 	 */
 	public Author(Patient patientAsAuthor) {
 		this();
@@ -177,7 +180,7 @@ public class Author {
 	 * Weist dem Autor eine Postadresse zu.
 	 *
 	 * @param address
-	 *          Die Postadresse des Autors
+	 *            Die Postadresse des Autors
 	 */
 	public void addAddress(Address address) {
 		mAuthor.getAssignedAuthor().getAddrs().add(address.copyMdhtAdress());
@@ -187,8 +190,8 @@ public class Author {
 	 * Weist dem Autoren eine ID zu.
 	 *
 	 * @param identificator
-	 *          Kombination von eigentlicher ID und der OID der verwaltenden
-	 *          Domäne
+	 *            Kombination von eigentlicher ID und der OID der verwaltenden
+	 *            Domäne
 	 */
 	public void addId(Identificator identificator) {
 		mAuthor.getAssignedAuthor().getIds().add(identificator.getIi());
@@ -199,7 +202,7 @@ public class Author {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param name
-	 *          name
+	 *            name
 	 */
 	public void addName(Name name) {
 		mAuthor.getAssignedAuthor().getAssignedPerson().getNames().add(name.getMdhtPn());
@@ -248,8 +251,8 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the address.</div> <div class="de">Liefert die (erste)
-	 * Adresse.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
+	 * (erste) Adresse.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the address</div>
 	 */
@@ -292,11 +295,11 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert author
-	 * mdht.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert
+	 * author mdht.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the author
-	 *         mdht</div>
+	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the
+	 *         author mdht</div>
 	 */
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
 		return EcoreUtil.copy(mAuthor);
@@ -325,9 +328,10 @@ public class Author {
 		// If the Author has no name, try the represented organization
 		if (retVal.equals("")) {
 			if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-				if (!mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().isEmpty()) {
-					final Name name = new Name(
-							mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames().get(0));
+				if (!mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames()
+						.isEmpty()) {
+					final Name name = new Name(mAuthor.getAssignedAuthor()
+							.getRepresentedOrganization().getNames().get(0));
 					retVal = name.getCompleteName();
 				}
 			}
@@ -336,8 +340,10 @@ public class Author {
 		if (retVal.equals("")) {
 			if (mAuthor.getAssignedAuthor() != null
 					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice() != null
-					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName() != null) {
-				return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName().getText();
+					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice()
+							.getSoftwareName() != null) {
+				return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName()
+						.getText();
 			}
 		}
 		return retVal;
@@ -365,8 +371,8 @@ public class Author {
 	 */
 	public String getGln() {
 		if (!mAuthor.getAssignedAuthor().getIds().isEmpty()) {
-			final Identificator gln = Identificator.getIdentificator(mAuthor.getAssignedAuthor().getIds(),
-					CodeSystems.GLN.getCodeSystemId());
+			final Identificator gln = Identificator.getIdentificator(
+					mAuthor.getAssignedAuthor().getIds(), CodeSystems.GLN.getCodeSystemId());
 			return gln.getExtension();
 		}
 		return null;
@@ -399,13 +405,15 @@ public class Author {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) family name.</div> <div class="de">Liefert
-	 * den (ersten) Nachnamen</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the (first) family name.</div>
+	 * <div class="de">Liefert den (ersten) Nachnamen</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		final Name name = new Name(mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
+		final Name name = new Name(
+				mAuthor.getAssignedAuthor().getAssignedPerson().getNames().get(0));
 		return name;
 	}
 
@@ -427,11 +435,12 @@ public class Author {
 	/**
 	 * <div class="en">Gets the organization (RepresentedOrganization). This
 	 * element can also be used as author represented organization, when a
-	 * document is beeing sent (via XDS, XDM, XDR).</div> <div class="de">Liefert
-	 * die Organisation (RepresentedOrganization), der der Autor angehört (z.B.
-	 * ein Krankenhaus). Dieses Element kann auch als Author Represented
-	 * Organization Attribut verwendet werden, wenn das Dokument per XDS, XDM oder
-	 * XDR verschickt wird.</div> <div class="fr"></div> <div class="it"></div>
+	 * document is beeing sent (via XDS, XDM, XDR).</div>
+	 * <div class="de">Liefert die Organisation (RepresentedOrganization), der
+	 * der Autor angehört (z.B. ein Krankenhaus). Dieses Element kann auch als
+	 * Author Represented Organization Attribut verwendet werden, wenn das
+	 * Dokument per XDS, XDM oder XDR verschickt wird.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 *
 	 * @return organization <div class="en">the organization</div>
@@ -455,8 +464,8 @@ public class Author {
 	/**
 	 * Gets the author function code. This element specifies in which role or
 	 * function the author is related to this document (e.g. Code "40001" for
-	 * "Apotheker"). The code can also be used as author role, when a document is
-	 * beeing sent (via XDS, XDM, XDR).
+	 * "Apotheker"). The code can also be used as author role, when a document
+	 * is beeing sent (via XDS, XDM, XDR).
 	 *
 	 * @return code the function code
 	 */
@@ -466,8 +475,8 @@ public class Author {
 
 	/**
 	 * Sets the author speciality code. This element specifies the speciality
-	 * ("Fachrichtung", e.g. "Fachärztin/Facharzt für Allgemeine Innere Medizin" )
-	 * of the author. The code can also be used as author speciality, when a
+	 * ("Fachrichtung", e.g. "Fachärztin/Facharzt für Allgemeine Innere Medizin"
+	 * ) of the author. The code can also be used as author speciality, when a
 	 * document is beeing sent (via XDS, XDM, XDR).
 	 *
 	 * @return code the speciality code
@@ -582,7 +591,7 @@ public class Author {
 	 * Method to set
 	 *
 	 * @param asAuthor
-	 *          the asAuthor to set
+	 *            the asAuthor to set
 	 */
 	public void setAsAuthor(org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor) {
 		mAsAuthor = asAuthor;
@@ -602,7 +611,7 @@ public class Author {
 	 * Method to set
 	 *
 	 * @param author
-	 *          the author to set
+	 *            the author to set
 	 */
 	public void setAuthor(org.openhealthtools.mdht.uml.cda.Author author) {
 		mAuthor = author;
@@ -612,7 +621,7 @@ public class Author {
 	 * Sets the author patient.
 	 *
 	 * @param isAuthorPatient
-	 *          true if the author is not a doctor but the patient himself
+	 *            true if the author is not a doctor but the patient himself
 	 */
 	public void setAuthorIsPatient(boolean isAuthorPatient) {
 		if (isAuthorPatient) {
@@ -626,7 +635,7 @@ public class Author {
 	 * Sets the functionCode of the author
 	 *
 	 * @param code
-	 *          the functionCode
+	 *            the functionCode
 	 */
 	public void setFunctionCode(Code code) {
 		mAuthor.setFunctionCode(code.getCE());
@@ -638,10 +647,10 @@ public class Author {
 	 *
 	 *
 	 * @param gln
-	 *          <div class="en">the new gln. If null an Id with nullFlavor = NA
-	 *          will be added.</div> <div class="de">Die neue gln. Bei null wird
-	 *          eine Id mit dem NullFlavor = NA hinzugefügt.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new gln. If null an Id with nullFlavor =
+	 *            NA will be added.</div> <div class="de">Die neue gln. Bei null
+	 *            wird eine Id mit dem NullFlavor = NA hinzugefügt.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setGln(String gln) {
 		if (gln != null) {
@@ -664,9 +673,9 @@ public class Author {
 	 *
 	 *
 	 * @param organization
-	 *          <div class="en">the new organization</div> <div class="de">die
-	 *          neue Organisation</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <div class="en">the new organization</div> <div class="de">die
+	 *            neue Organisation</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
 		mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
@@ -676,7 +685,7 @@ public class Author {
 	 * Method to set
 	 *
 	 * @param person
-	 *          the person to set
+	 *            the person to set
 	 */
 	public void setPerson(org.openhealthtools.mdht.uml.cda.Person person) {
 		mPerson = person;
@@ -685,11 +694,11 @@ public class Author {
 	/**
 	 * Sets the author function code. This element specifies in which role or
 	 * function the author is related to this document (e.g. Code "40001" for
-	 * "Apotheker"). The code can also be used as author role, when a document is
-	 * beeing sent (via XDS, XDM, XDR).
+	 * "Apotheker"). The code can also be used as author role, when a document
+	 * is beeing sent (via XDS, XDM, XDR).
 	 *
 	 * @param code
-	 *          the function code
+	 *            the function code
 	 */
 	public void setRoleFunction(Code code) {
 		mAuthor.setFunctionCode(code.getCE());
@@ -699,11 +708,11 @@ public class Author {
 	 * Sets the author speciality code. This element specifies the speciality
 	 * ("Fachrichtung", e.g. Code "50001" for
 	 * "Fachärztin/Facharzt für Allgemeine Innere Medizin") of the author. The
-	 * code can also be used as author speciality, when a document is beeing sent
-	 * (via XDS, XDM, XDR).
+	 * code can also be used as author speciality, when a document is beeing
+	 * sent (via XDS, XDM, XDR).
 	 *
 	 * @param code
-	 *          the speciality code
+	 *            the speciality code
 	 */
 	public void setSpeciality(Code code) {
 		mAsAuthor.setCode(code.getCE());
@@ -714,11 +723,13 @@ public class Author {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param telecoms
-	 *          <div class="en">the new telecoms</div> <div class="de">das neue
-	 *          telecoms.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new telecoms</div> <div class="de">das
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
-		mAuthor.getAssignedAuthor().getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+		mAuthor.getAssignedAuthor().getTelecoms()
+				.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
 
 	/**
@@ -731,9 +742,10 @@ public class Author {
 	 *
 	 *
 	 * @param date
-	 *          <div class="en">the start time of the participation as date</div>
-	 *          <div class="de">den Startzeitpunkt der Partizipation als
-	 *          Date</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the start time of the participation as
+	 *            date</div> <div class="de">den Startzeitpunkt der
+	 *            Partizipation als Date</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTime(Date date) {
 		if (date != null) {

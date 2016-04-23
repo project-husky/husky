@@ -86,7 +86,7 @@ public class LaboratoryIsolateOrganizer
 	public LaboratoryIsolateOrganizer(String reference) {
 		this();
 		Code code = new Code();
-		code.setOriginalTextReference("testRef");
+		code.setOriginalTextReference(reference);
 		Specimen specimen = new Specimen();
 		specimen.setCode(code);
 		setSpecimen(specimen);

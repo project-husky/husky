@@ -495,10 +495,6 @@ public class Value {
 		return (mValue instanceof PQ);
 	}
 
-	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
-	}
-
 	/**
 	 * Checks if the Value object is a RTO (A quantity constructed as the
 	 * quotient of a numerator quantity divided by a denominator quantity.).
@@ -514,14 +510,9 @@ public class Value {
 		code.setOriginalTextReference(originalText);
 	}
 
-	private void setPqValue(String value) {
+	public void setUcumUnit(String unit) {
 		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
-	private void setUcumUnit(Ucum unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit.getCodeValue());
+		pq.setUnit(unit);
 	}
 
 	/**
@@ -535,6 +526,20 @@ public class Value {
 	public String toString() {
 		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit()
 				+ "]";
+	}
+
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
+	}
+
+	private void setPqValue(String value) {
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	private void setUcumUnit(Ucum unit) {
+		final PQ pq = (PQ) mValue;
+		pq.setUnit(unit.getCodeValue());
 	}
 
 }

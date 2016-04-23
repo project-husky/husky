@@ -397,17 +397,22 @@ public class CdaChLrph
 				}
 			}
 
-			if (originalPr != null && !originalPr.getAddrs().isEmpty()
-					&& originalPr.getAddrs().get(0).getCities() != null
-					&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
+			if (originalPr != null && !originalPr.getAddrs().isEmpty()) {
 				AD ad = DatatypesFactory.eINSTANCE.createAD();
 				// Street Name = MSK
 				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
 				streetName.setNullFlavor(NullFlavor.MSK);
 				ad.getStreetNames().add(streetName);
 				// City
-				ad.addCity(
-						EcoreUtil.copy(originalPr.getAddrs().get(0).getCities().get(0)).getText());
+				if (originalPr.getAddrs().get(0).getCities() != null
+						&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
+					ad.addCity(originalPr.getAddrs().get(0).getCities().get(0).getText());
+				}
+				// Postal code
+				if (!originalPr.getAddrs().get(0).getPostalCodes().isEmpty()) {
+					ad.addPostalCode(
+							originalPr.getAddrs().get(0).getPostalCodes().get(0).getText());
+				}
 				processedPr.getAddrs().add(ad);
 			}
 
@@ -435,6 +440,7 @@ public class CdaChLrph
 			getMdht().getRecordTargets().set(index, processedRt);
 			index++;
 		}
+
 	}
 
 	// /**

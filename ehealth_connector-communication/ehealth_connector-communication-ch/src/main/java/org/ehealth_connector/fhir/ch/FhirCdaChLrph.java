@@ -20,11 +20,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
+import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -32,18 +45,23 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.api.IDatatype;
+import ca.uhn.fhir.model.api.IResource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
+import ca.uhn.fhir.model.dstu2.composite.RatioDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Observation.Component;
+import ca.uhn.fhir.model.dstu2.resource.Observation.Related;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
@@ -356,8 +374,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		final CdaChLrph doc = new CdaChLrph(getDocLanguage(bundle), xsl, css);
 		doc.setPatient(FhirCommon.getPatient(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
-		// TODO
-		// doc.addIntendedRecipient(FhirCommon.getInten);
+		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 
 		Author docAuthor = null;
 		for (final Author author : getAuthors(bundle)) {
@@ -369,81 +386,41 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 
 		if (getDocType(bundle) == DocTypeCode.HIV)
 			doc.applyPrivacyFilterHiv();
+		if (getDocType(bundle) == DocTypeCode.PSEUDONYMIZED)
+			doc.applyPrivacyFilterInitials();
+
 		// doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
 
 		// Body
-		String narrative = getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialitySection);
+		// Laboratory SpecialtySections
+		List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
+		Code sectionCode = lssList.get(0).getCode();
+
+		// Laboratory Battery Organizers
+		List<LaboratoryBatteryOrganizer> laboratoryBatteryOrganizers = getLaboratoryBatteryOrganizers(
+				bundle);
+		if (laboratoryBatteryOrganizers != null && !laboratoryBatteryOrganizers.isEmpty()) {
+			for (LaboratoryBatteryOrganizer lbo : laboratoryBatteryOrganizers) {
+				doc.addLaboratoryBatteryOrganizer(lbo, sectionCode);
+			}
+		}
+
+		// LaboratorySpecialtySection
+		String narrative = getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialtySection);
 		doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
 
-		// List<LaboratoryBatteryOrganizer> batteryOrganizer =
+		// SpecimenCollection
+		SpecimenCollectionEntry sce = getSpecimenCollectionEntry(bundle);
+		doc.getSpecimenAct().setSpecimenCollectionEntry(sce);
 
-		// List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
-		// if (vitalSigns != null && !vitalSigns.isEmpty()) {
-		// for (AbstractVitalSignObservation abstractVitalSignObservation :
-		// vitalSigns) {
-		// doc.addCodedVitalSign((VitalSignObservation)
-		// abstractVitalSignObservation,
-		// docAuthor);
-		// }
-		// }
+		// IsolateOrganizer
+		LaboratoryIsolateOrganizer lio = getLaboratoryIsolateOrganizer(bundle);
+		if (lio != null) {
+			doc.getSpecimenAct().addLaboratoryIsolateOrganizer(lio);
+		}
 
 		return doc;
 	}
-
-	// /**
-	// * <div class="en">Gets a list of eHC LRPH LaboratoryBatteryOrganizers
-	// from the
-	// * given FHIR bundle
-	// *
-	// * @param bundle
-	// * the FHIR bundle
-	// * @return list of eHC LRPH LaboratoryBatteryOrganizers</div>
-	// * <div class="de"></div> <div class="fr"></div>
-	// */
-	// public
-	// List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>
-	// getLaboratoryBatteryOrganizers(
-	// Bundle bundle) {
-	// final
-	// List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>
-	// retVal = new
-	// ArrayList<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>();
-	// for (final Entry entry : bundle.getEntry()) {
-	// List<ExtensionDt> laboratoryBatteryOrganizers = entry
-	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
-	// //TODO
-	// if (laboratoryBatteryOrganizers != null &&
-	// !laboratoryBatteryOrganizers.isEmpty()) {
-	// Observation observation = (Observation) entry.getResource();
-	// IDatatype fhirEffectiveTime = observation.getEffective();
-	// Date effectiveTime = new Date();
-	// if (fhirEffectiveTime instanceof DateTimeDt) {
-	// effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
-	// }
-	// List<Component> components = observation.getComponent();
-	// for (Component component : components) {
-	// CodingDt fhirCode = component.getCode().getCodingFirstRep();
-	// IDatatype fhirValue = component.getValue();
-	//
-	// Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-	// fhirCode.getCode(), fhirCode.getDisplay());
-	// Value value = null;
-	// if (fhirValue instanceof QuantityDt) {
-	// // type PQ
-	// final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-	// PQ pq = DatatypesFactory.eINSTANCE.createPQ();
-	// pq.setUnit(fhirQuantity.getUnit());
-	// pq.setValue(fhirQuantity.getValue());
-	// value = new Value(pq);
-	// }
-	// if (code != null && value != null) {
-	// retVal.add(new VitalSignObservation(code, effectiveTime, value));
-	// }
-	// }
-	// }
-	// }
-	// return retVal;
-	// }
 
 	/**
 	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
@@ -515,12 +492,119 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 					} else if ("hiv".equals(langCode.getCode().toLowerCase())) {
 						retVal = DocTypeCode.HIV;
 						break;
+					} else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
+						retVal = DocTypeCode.PSEUDONYMIZED;
+						break;
 					}
 				}
 			}
 		}
 		return retVal;
-	};
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC LRPH LaboratoryBatteryOrganizers from
+	 * the given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC LRPH LaboratoryBatteryOrganizers</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>();
+
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratoryBatteryOrganizers
+			List<ExtensionDt> laboratoryBatteryOrganizers = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
+			if (laboratoryBatteryOrganizers != null && !laboratoryBatteryOrganizers.isEmpty()) {
+				org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer();
+				Observation labObsList = (Observation) entry.getResource();
+
+				// Set the Organizer Attributes
+				// Status Code
+				String statusCode = getValueFromKeyValueString(labObsList.getText(), "statusCode");
+				if (statusCode != null) {
+					lbo.setStatusCode(StatusCode.getEnum(statusCode));
+				}
+				if (!labObsList.getIdentifier().isEmpty()) {
+					lbo.addIdForHiv(FhirCommon
+							.fhirIdentifierToEhcIdentificator(labObsList.getIdentifierFirstRep()));
+				}
+
+				// Add all LaboratoryObservations
+				for (Related relatedObs : labObsList.getRelated()) {
+					Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
+					LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
+					lbo.addLaboratoryObservation(labObs);
+				}
+				retVal.add(lbo);
+			}
+		}
+		return retVal;
+	}
+
+	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections(Bundle bundle) {
+
+		List<LaboratorySpecialtySection> lssList = new ArrayList<LaboratorySpecialtySection>();
+
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			List<ExtensionDt> specialtySections = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratorySpecialtySection);
+			if (specialtySections != null && !specialtySections.isEmpty()) {
+				Observation obs = (Observation) entry.getResource();
+
+				org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection();
+				Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
+				code.setCodeSystemName("LOINC");
+				lss.setCode(code);
+				lssList.add(lss);
+			}
+		}
+		return lssList;
+	}
+
+	/**
+	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
+	 * bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician getReferralOrderingPhysician(
+			Bundle bundle) {
+		org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsReferralOrderingPhysician)
+					.isEmpty()) {
+				Person physician = (Person) entry.getResource();
+
+				Name name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
+				Address address = FhirCommon
+						.fhirAddressToEhcAddress(physician.getAddressFirstRep());
+				Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
+
+				AssociatedEntity entity = new AssociatedEntity(name, address, telecoms);
+
+				if (physician.getContained() != null
+						&& !physician.getContained().getContainedResources().isEmpty()) {
+					for (IResource res : physician.getContained().getContainedResources()) {
+						if (res instanceof Organization) {
+							entity.setOrganization(FhirCommon.getOrganization(res));
+						}
+					}
+				}
+				retVal = new ReferralOrderingPhysician(entity);
+			}
+		}
+		return retVal;
+	}
 
 	/**
 	 * Read the LrphDocument object from the FHIR bundle file
@@ -533,5 +617,126 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(LrphDocument.class, resourceString);
+	}
+
+	private LaboratoryIsolateOrganizer getLaboratoryIsolateOrganizer(Bundle bundle) {
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			List<ExtensionDt> element = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryIsolateOrganizer);
+			if (element != null && !element.isEmpty()) {
+				Observation obs = (Observation) entry.getResource();
+
+				Identificator id = FhirCommon
+						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				String ref = getNarrative(bundle, FhirCommon.urnUseAsLaboratoryIsolateOrganizer);
+				Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
+				code.setOriginalTextReference(ref);
+
+				LaboratoryIsolateOrganizer sce = new LaboratoryIsolateOrganizer(ref);
+				sce.getSpecimen().setCode(code);
+				sce.getMdht().getIds().add(id.getIi());
+
+				// Add all LaboratoryObservations
+				for (Related relatedObs : obs.getRelated()) {
+					Observation fhirBat = (Observation) relatedObs.getTarget().getResource();
+					LaboratoryBatteryOrganizer labBat = new LaboratoryBatteryOrganizer();
+					sce.addLaboratoryBatteryOrganizer(labBat);
+				}
+
+				return sce;
+			}
+		}
+		return null;
+	}
+
+	private org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation getLaboratoryObservation(
+			Observation fhirObservation) {
+		final org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation retVal = new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation();
+
+		final CodingDt fhirCode = fhirObservation.getCode().getCodingFirstRep();
+		retVal.setCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+		retVal.setEffectiveTime(fhirObservation.getIssued());
+		if (!fhirObservation.getPerformer().isEmpty()) {
+			final ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
+			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
+					fhirObservation.getIssued());
+		}
+
+		if (fhirObservation.getValue() instanceof QuantityDt) {
+			// type PQ
+			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
+			Value v = new Value(fhirQuantity.getValue().toString(),
+					Ucum.AHGEquivalentsPerMilliLiter);
+			v.setUcumUnit(fhirQuantity.getUnit());
+			retVal.addValue(v);
+
+		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
+			// type CD
+			final CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
+					.getCodingFirstRep();
+			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
+					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+		} else if (fhirObservation.getValue() instanceof RatioDt) {
+			// type RTO not yet implemented
+		}
+
+		if (fhirObservation.getReferenceRangeFirstRep() != null) {
+			// ReferenceRange not yet implemented
+		}
+
+		final CodingDt fhirInterpretationCode = fhirObservation.getInterpretation()
+				.getCodingFirstRep();
+		if (fhirInterpretationCode != null) {
+			if (fhirInterpretationCode.getSystem() != null) {
+				retVal.addInterpretationCode(new Code(
+						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
+			}
+		}
+
+		if (fhirObservation.getComments() != null) {
+			retVal.setCommentText(fhirObservation.getComments());
+		}
+		return retVal;
+
+	}
+
+	private SpecimenCollectionEntry getSpecimenCollectionEntry(Bundle bundle) {
+
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			List<ExtensionDt> specimenCollection = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenCollection);
+			if (specimenCollection != null && !specimenCollection.isEmpty()) {
+				Observation obs = (Observation) entry.getResource();
+
+				Identificator id = FhirCommon
+						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				DateTimeDt date = (DateTimeDt) obs.getEffective();
+
+				SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
+						"ref");
+				return sce;
+			}
+		}
+		return null;
+	};
+
+	private String getValueFromKeyValueString(NarrativeDt text, String key) {
+		if (text == null || text.getDivAsString() == null)
+			return null;
+		if (!text.getDivAsString().contains(key))
+			return null;
+		String[] lines = text.getDivAsString().split("\n");
+		for (String line : lines) {
+			if (line.contains(key)) {
+				String[] keyValue = line.split("=");
+				String value = keyValue[2].replace("</div>", "");
+				return value;
+			}
+		}
+		return null;
 	}
 }
