@@ -590,7 +590,16 @@ public class FhirCommon {
 	}
 
 	public static Name fhirNameToEhcName(HumanNameDt fName) {
-		Name name = new Name(fName.getGivenAsSingleString(), fName.getFamilyAsSingleString());
+		Name name = null;
+		if (!fName.getGivenAsSingleString().isEmpty()
+				&& !fName.getFamilyAsSingleString().isEmpty()) {
+			name = new Name(fName.getGivenAsSingleString(), fName.getFamilyAsSingleString());
+		} else {
+			if (!fName.getText().isEmpty()) {
+				name = new Name(fName.getText());
+			}
+		}
+
 		if (fName.getPrefixAsSingleString() != null) {
 			name.setPrefix(fName.getPrefixAsSingleString());
 		}

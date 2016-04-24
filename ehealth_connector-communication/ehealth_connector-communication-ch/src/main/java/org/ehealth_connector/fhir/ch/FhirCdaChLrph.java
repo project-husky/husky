@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AssociatedEntity;
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
@@ -28,6 +29,7 @@ import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.common.Address;
@@ -55,7 +57,6 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
 import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.RatioDt;
 import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
@@ -379,11 +380,9 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 
-		Author docAuthor = null;
 		for (final Author author : getAuthors(bundle)) {
 			author.setTime(new Date());
 			doc.addAuthor(author);
-			docAuthor = author;
 		}
 		doc.setEmtpyCustodian();
 
@@ -431,39 +430,13 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 			doc.getSpecimenAct().addLaboratoryIsolateOrganizer(lio);
 		}
 
-		return doc;
-	}
-
-	/**
-	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
-	 * patient demographics) from the given FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Vacd document type code (full or masked patient
-	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
-	 */
-	public DocTypeCode getDocType(Bundle bundle) {
-		DocTypeCode retVal = DocTypeCode.PATIENT; // default
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Basic) {
-				final Basic fhirBasic = (Basic) entry.getResource();
-				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (OID_LRPH.equals(langCode.getSystem())) {
-					if ("patient".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PATIENT;
-						break;
-					} else if ("hiv".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.HIV;
-						break;
-					} else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PSEUDONYMIZED;
-						break;
-					}
-				}
-			}
+		// OutbreakIdentification
+		OutbreakIdentificationObservation oio = getOutbreakIdentification(bundle);
+		if (oio != null) {
+			doc.getSpecimenAct().setOutbreakIdentification(oio);
 		}
-		return retVal;
+
+		return doc;
 	}
 
 	/**
@@ -528,21 +501,32 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
-	 * bundle
+	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
+	 * patient demographics) from the given FHIR bundle
 	 *
 	 * @param bundle
 	 *            the FHIR bundle
-	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 * @return eHC Vacd document type code (full or masked patient
+	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	private IntendedRecipient getIntendedRecipient(Bundle bundle) {
-		IntendedRecipient retVal = null;
+	private DocTypeCode getDocType(Bundle bundle) {
+		DocTypeCode retVal = DocTypeCode.PATIENT; // default
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInformationRecipient)
-					.isEmpty()) {
-				Organization physician = (Organization) entry.getResource();
-				org.ehealth_connector.common.Organization o = FhirCommon.getOrganization(physician);
-				retVal = new IntendedRecipient(o);
+			if (entry.getResource() instanceof Basic) {
+				final Basic fhirBasic = (Basic) entry.getResource();
+				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
+				if (OID_LRPH.equals(langCode.getSystem())) {
+					if ("patient".equals(langCode.getCode().toLowerCase())) {
+						retVal = DocTypeCode.PATIENT;
+						break;
+					} else if ("hiv".equals(langCode.getCode().toLowerCase())) {
+						retVal = DocTypeCode.HIV;
+						break;
+					} else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
+						retVal = DocTypeCode.PSEUDONYMIZED;
+						break;
+					}
+				}
 			}
 		}
 		return retVal;
@@ -613,7 +597,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 
 				// Add all LaboratoryObservations
 				for (Related relatedObs : obs.getRelated()) {
-					Observation fhirBat = (Observation) relatedObs.getTarget().getResource();
+					relatedObs.getTarget().getResource();
 					LaboratoryBatteryOrganizer labBat = new LaboratoryBatteryOrganizer();
 					sce.addLaboratoryBatteryOrganizer(labBat);
 				}
@@ -628,7 +612,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 			Observation fhirObservation) {
 		final org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation retVal = new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation();
 
-		final CodingDt fhirCode = fhirObservation.getCode().getCodingFirstRep();
+		fhirObservation.getCode().getCodingFirstRep();
 		retVal.setCode(FhirCommon.fhirCodeToEhcCode(fhirObservation.getCode()));
 		retVal.setEffectiveTime(fhirObservation.getIssued());
 		if (!fhirObservation.getPerformer().isEmpty()) {
@@ -670,10 +654,10 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		}
 
 		if (fhirObservation.getComments() != null) {
-			retVal.setCommentText(fhirObservation.getComments());
+			retVal.addCommentEntry(
+					new SectionAnnotationCommentEntry(fhirObservation.getComments()));
 		}
 		return retVal;
-
 	}
 
 	private List<LaboratorySpecialtySection> getLaboratorySpecialtySections(Bundle bundle) {
@@ -698,6 +682,26 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		return lssList;
 	}
 
+	private org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation getOutbreakIdentification(
+			Bundle bundle) {
+		org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation retVal = null;
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			List<ExtensionDt> outbreakIdentification = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsOutbreakIdentification);
+			if (outbreakIdentification != null && !outbreakIdentification.isEmpty()) {
+				retVal = new org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation();
+				Observation fhirObservation = (Observation) entry.getResource();
+
+				if (fhirObservation.getComments() != null) {
+					retVal.setCommentEntry(
+							new SectionAnnotationCommentEntry(fhirObservation.getComments()));
+				}
+			}
+		}
+		return retVal;
+	}
+
 	/**
 	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
 	 * bundle
@@ -714,7 +718,10 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 					.isEmpty()) {
 				Person physician = (Person) entry.getResource();
 
-				Name name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
+				Name name = null;
+				if (physician.getNameFirstRep() != null) {
+					name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
+				}
 				Address address = FhirCommon
 						.fhirAddressToEhcAddress(physician.getAddressFirstRep());
 				Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
@@ -736,69 +743,5 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
-
-	private SpecimenCollectionEntry getSpecimenCollectionEntry(Bundle bundle) {
-
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all LaboratorySpecialtySections
-			List<ExtensionDt> specimenCollection = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenCollection);
-			if (specimenCollection != null && !specimenCollection.isEmpty()) {
-				Observation obs = (Observation) entry.getResource();
-
-				Identificator id = FhirCommon
-						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
-				DateTimeDt date = (DateTimeDt) obs.getEffective();
-
-				SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
-						"ref");
-				return sce;
-			}
-		}
-		return null;
-	};
-
-	private SpecimenReceivedEntry getSpecimenReceivedEntry(Bundle bundle) {
-
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all LaboratorySpecialtySections
-			List<ExtensionDt> specimenReceived = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenReceived);
-			if (specimenReceived != null && !specimenReceived.isEmpty()) {
-				Observation obs = (Observation) entry.getResource();
-				SpecimenReceivedEntry sce = new SpecimenReceivedEntry();
-
-				Identificator id = FhirCommon
-						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
-				if (id != null) {
-					sce.addId(id);
-				}
-				DateTimeDt fDate = (DateTimeDt) obs.getEffective();
-				if (fDate != null) {
-					Date date = fDate.getValue();
-					sce.setEffectiveTime(date);
-				}
-
-				return sce;
-			}
-		}
-		return null;
-	};
-
-	private String getValueFromKeyValueString(NarrativeDt text, String key) {
-		if (text == null || text.getDivAsString() == null)
-			return null;
-		if (!text.getDivAsString().contains(key))
-			return null;
-		String[] lines = text.getDivAsString().split("\n");
-		for (String line : lines) {
-			if (line.contains(key)) {
-				String[] keyValue = line.split("=");
-				String value = keyValue[2].replace("</div>", "");
-				return value;
-			}
-		}
-		return null;
 	}
 }

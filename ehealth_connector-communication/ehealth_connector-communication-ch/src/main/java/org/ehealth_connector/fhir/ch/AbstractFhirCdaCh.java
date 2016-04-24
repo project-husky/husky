@@ -17,14 +17,20 @@
 package org.ehealth_connector.fhir.ch;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.Confidentiality;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.ch.FhirCdaChVacd.DocTypeCode;
 
+import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
@@ -35,6 +41,7 @@ import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
+import ca.uhn.fhir.model.primitive.DateTimeDt;
 
 public abstract class AbstractFhirCdaCh {
 	/**
@@ -182,6 +189,27 @@ public abstract class AbstractFhirCdaCh {
 	}
 
 	/**
+	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
+	 * bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 */
+	public IntendedRecipient getIntendedRecipient(Bundle bundle) {
+		IntendedRecipient retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInformationRecipient)
+					.isEmpty()) {
+				Organization physician = (Organization) entry.getResource();
+				org.ehealth_connector.common.Organization o = FhirCommon.getOrganization(physician);
+				retVal = new IntendedRecipient(o);
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets an eHC Author object containing the legal authenticator from the
 	 * given FHIR bundle
 	 *
@@ -198,7 +226,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
+	};
 
 	/**
 	 * Gets an eHC Author object containing the legal authenticator from the
@@ -227,6 +255,82 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
+	};
+
+	/**
+	 * Gets the specimen collection entry.
+	 *
+	 * @param bundle
+	 *            the bundle
+	 * @return the specimen collection entry
+	 */
+	public SpecimenCollectionEntry getSpecimenCollectionEntry(Bundle bundle) {
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			List<ExtensionDt> specimenCollection = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenCollection);
+			if (specimenCollection != null && !specimenCollection.isEmpty()) {
+				Observation obs = (Observation) entry.getResource();
+
+				Identificator id = FhirCommon
+						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				DateTimeDt date = (DateTimeDt) obs.getEffective();
+
+				SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
+						"ref");
+				return sce;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the specimen received entry.
+	 *
+	 * @param bundle
+	 *            the bundle
+	 * @return the specimen received entry
+	 */
+	public SpecimenReceivedEntry getSpecimenReceivedEntry(Bundle bundle) {
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			List<ExtensionDt> specimenReceived = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenReceived);
+			if (specimenReceived != null && !specimenReceived.isEmpty()) {
+				Observation obs = (Observation) entry.getResource();
+				SpecimenReceivedEntry sce = new SpecimenReceivedEntry();
+
+				Identificator id = FhirCommon
+						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				if (id != null) {
+					sce.addId(id);
+				}
+				DateTimeDt fDate = (DateTimeDt) obs.getEffective();
+				if (fDate != null) {
+					Date date = fDate.getValue();
+					sce.setEffectiveTime(date);
+				}
+
+				return sce;
+			}
+		}
+		return null;
+	}
+
+	public String getValueFromKeyValueString(NarrativeDt text, String key) {
+		if (text == null || text.getDivAsString() == null)
+			return null;
+		if (!text.getDivAsString().contains(key))
+			return null;
+		String[] lines = text.getDivAsString().split("\n");
+		for (String line : lines) {
+			if (line.contains(key)) {
+				String[] keyValue = line.split("=");
+				String value = keyValue[2].replace("</div>", "");
+				return value;
+			}
+		}
+		return null;
 	}
 
 	/**

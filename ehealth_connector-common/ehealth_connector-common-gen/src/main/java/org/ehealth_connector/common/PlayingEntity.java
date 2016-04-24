@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
 
 /**
  * The Class PlayingEntity. An entity with a name.
@@ -36,7 +35,7 @@ public class PlayingEntity {
 	 */
 	public PlayingEntity() {
 		mPlayingEntity = CDAFactory.eINSTANCE.createPlayingEntity();
-		mPlayingEntity.setClassCode(EntityClassRoot.MIC);
+		// mPlayingEntity.setClassCode(EntityClassRoot.MIC);
 	}
 
 	/**
