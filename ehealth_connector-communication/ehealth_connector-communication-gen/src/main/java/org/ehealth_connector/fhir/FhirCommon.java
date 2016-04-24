@@ -567,14 +567,14 @@ public class FhirCommon {
 
 	public static Code fhirCodeToEhcCode(CodeableConceptDt codableConcept) {
 		Code code;
-		code = new Code(codableConcept.getCodingFirstRep().getSystem(),
+		code = new Code(removeURIPrefix(codableConcept.getCodingFirstRep().getSystem()),
 				codableConcept.getCodingFirstRep().getCode(),
 				codableConcept.getCodingFirstRep().getDisplay());
 		if (codableConcept.getCoding().size() > 1) {
-			for (int i = 1; i <= codableConcept.getCoding().size(); i++) {
+			for (int i = 1; i < codableConcept.getCoding().size(); i++) {
 				CodingDt fhirCode = codableConcept.getCoding().get(i);
-				code.addTranslation(
-						new Code(fhirCode.getSystem(), fhirCode.getCode(), fhirCode.getDisplay()));
+				code.addTranslation(new Code(removeURIPrefix(fhirCode.getSystem()),
+						fhirCode.getCode(), fhirCode.getDisplay()));
 			}
 
 		}
@@ -582,7 +582,11 @@ public class FhirCommon {
 	}
 
 	public static Identificator fhirIdentifierToEhcIdentificator(IdentifierDt id) {
-		return new Identificator(id.getSystem(), id.getValue());
+		if (id != null && !id.isEmpty()) {
+			return new Identificator(FhirCommon.removeURIPrefix(id.getSystem()), id.getValue());
+		} else {
+			return null;
+		}
 	}
 
 	public static Name fhirNameToEhcName(HumanNameDt fName) {
@@ -1371,6 +1375,9 @@ public class FhirCommon {
 		String retVal = "";
 		if (value.toLowerCase().startsWith("urn:oid:"))
 			retVal = value.substring(8, value.length());
+		else {
+			retVal = value;
+		}
 		return retVal;
 	}
 }
