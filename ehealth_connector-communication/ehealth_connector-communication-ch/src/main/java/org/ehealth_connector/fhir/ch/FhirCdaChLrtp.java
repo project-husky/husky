@@ -27,6 +27,7 @@ import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -397,6 +398,16 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		if (ifoId != null) {
 			doc.addInFulfillmentOf(ifoId);
 		}
+		// DocumentationOf
+		String documentationOfCode = getDocumentationOf(bundle);
+		if (documentationOfCode != null) {
+			doc.addDocumentationOf(ReportScopes.getEnum(documentationOfCode));
+		}
+		// RelatedDocument
+		Identificator relatedDocument = getRelatedDocument(bundle);
+		if (relatedDocument != null) {
+			doc.setDocumentToReplaceIdentifier(relatedDocument);
+		}
 		// DocVersion
 		final Integer docVersion = getDocVersion(bundle);
 		if (docVersion != null) {
@@ -521,6 +532,20 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return retVal;
 	}
 
+	private String getDocumentationOf(Bundle bundle) {
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all DocumentationOfs
+			List<ExtensionDt> ifoEntries = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentationOf);
+			if (ifoEntries != null && !ifoEntries.isEmpty()) {
+				Basic ifo = (Basic) entry.getResource();
+				return ifo.getCode().getCodingFirstRep().getCode();
+			}
+		}
+		return null;
+	}
+
 	private Integer getDocVersion(Bundle bundle) {
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
@@ -536,8 +561,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	}
 
 	private Identificator getInFulfillmentOf(Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer>();
-
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all InFulfillmentOfs
@@ -718,5 +741,19 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
+	}
+
+	private Identificator getRelatedDocument(Bundle bundle) {
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all relevant elements
+			List<ExtensionDt> ifoEntries = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRelatedDocument);
+			if (ifoEntries != null && !ifoEntries.isEmpty()) {
+				Basic ifo = (Basic) entry.getResource();
+				return FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+			}
+		}
+		return null;
 	}
 }
