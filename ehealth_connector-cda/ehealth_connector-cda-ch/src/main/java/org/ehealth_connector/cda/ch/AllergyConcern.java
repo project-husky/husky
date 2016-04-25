@@ -104,7 +104,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	@Override
 	public List<AbstractAllergyProblem> getAllergyProblems() {
 		final List<AbstractAllergyProblem> apl = new ArrayList<AbstractAllergyProblem>();
-		for (final AllergyIntolerance mAllergy : getMdhtAllergyConcern().getAllergyIntolerances()) {
+		for (final AllergyIntolerance mAllergy : getMdht().getAllergyIntolerances()) {
 			final AllergyProblem allergy = new AllergyProblem(mAllergy);
 			apl.add(allergy);
 		}

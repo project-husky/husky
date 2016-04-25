@@ -32,6 +32,7 @@ import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -63,6 +64,7 @@ import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.TimeDt;
 import ca.uhn.fhir.parser.IParser;
 
@@ -409,7 +411,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		doc.setNarrativeTextSectionEdConsultations(narrative);
 
 		// Ed diagnosis / Problemliste
-		for (final ProblemConcern edDiagnosis : getActiveProblemConcernEntries(bundle)) {
+		for (final ProblemConcern edDiagnosis : getEdDiagnoses(bundle)) {
 			doc.addEdDiagnosis(edDiagnosis);
 		}
 
@@ -457,7 +459,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 	}
 
 	private org.ehealth_connector.cda.ch.ActiveProblemConcern getActiveProblemConcern(
-			Condition fhirCondition) {
+			Condition fhirCondition, String id) {
 
 		final String concern = fhirCondition.getNotes();
 		final Date date = fhirCondition.getDateRecorded();
@@ -469,7 +471,8 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		// Create the ActiveProblemConcern
 		final org.ehealth_connector.cda.ch.ActiveProblemConcern retVal = new org.ehealth_connector.cda.ch.ActiveProblemConcern(
 				concern, date, problemEntry, problemStatusCode);
-
+		retVal.getMdht().getIds().clear();
+		retVal.addId(new Identificator(EHealthConnectorVersions.getCurrentVersion().getOid(), id));
 		return retVal;
 
 	}
@@ -487,9 +490,11 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.ActiveProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ActiveProblemConcern>();
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern)
-					.isEmpty() && (entry.getResource() instanceof Condition)) {
-				retVal.add(getActiveProblemConcern((Condition) entry.getResource()));
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
+				String id = ((StringDt) extensions.get(0).getValue()).toString();
+				retVal.add(getActiveProblemConcern((Condition) entry.getResource(), id));
 			}
 		}
 		return retVal;
@@ -530,14 +535,36 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
 				Condition fhirCondition = (Condition) entry.getResource();
 				AllergyConcern concern = getAllergyProblemConcern(fhirCondition);
-				DateDt timeStamp = ((DateDt) extensions.get(0).getValue());
-				concern.setStart(timeStamp.getValue());
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						concern.setStart(((DateDt) ext.getValue()).getValue());
+					}
+					if (ext.getValue() instanceof StringDt) {
+						concern.getMdht().getIds().clear();
+						concern.addId(new Identificator(
+								EHealthConnectorVersions.getCurrentVersion().getOid(),
+								((StringDt) ext.getValue()).toString()));
+					}
+				}
 				for (final IdentifierDt id : fhirCondition.getIdentifier()) {
 					final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 					concern.addId(new Identificator(codeSystem, id.getValue()));
 				}
 				retVal.add(concern);
 			}
+			// if (!extensions.isEmpty() && (entry.getResource() instanceof
+			// Condition)) {
+			// Condition fhirCondition = (Condition) entry.getResource();
+			// AllergyConcern concern = getAllergyProblemConcern(fhirCondition);
+			// DateDt timeStamp = ((DateDt) extensions.get(0).getValue());
+			// concern.setStart(timeStamp.getValue());
+			// for (final IdentifierDt id : fhirCondition.getIdentifier()) {
+			// final String codeSystem =
+			// FhirCommon.removeURIPrefix(id.getSystem());
+			// concern.addId(new Identificator(codeSystem, id.getValue()));
+			// }
+			// retVal.add(concern);
+			// }
 		}
 		return retVal;
 	};
@@ -657,7 +684,41 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		return retVal;
 	}
 
-	private org.ehealth_connector.cda.ch.ProblemConcern getEdDiagnoses(Condition fhirCondition) {
+	/**
+	 * <div class="en">Gets a list of eHC ActiveProblemConcerns from the given
+	 * FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC ActiveProblemConcerns </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.ProblemConcern> getEdDiagnoses(Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.ProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ProblemConcern>();
+		for (final Entry entry : bundle.getEntry()) {
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsEdDiagnosis);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
+				Identificator id = null;
+				Date timestamp = null;
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						timestamp = ((DateDt) ext.getValue()).getValue();
+					}
+					if (ext.getValue() instanceof StringDt) {
+						id = new Identificator(
+								EHealthConnectorVersions.getCurrentVersion().getOid(),
+								((StringDt) ext.getValue()).toString());
+					}
+				}
+				retVal.add(getEdDiagnoses((Condition) entry.getResource(), id, timestamp));
+			}
+		}
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.ch.ProblemConcern getEdDiagnoses(Condition fhirCondition,
+			Identificator id, Date timeStamp) {
 
 		final String concern = fhirCondition.getNotes();
 		// final Date date = fhirCondition.getDateRecorded();
@@ -669,30 +730,13 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		// Create the ActiveProblemConcern
 		final org.ehealth_connector.cda.ch.ProblemConcern retVal = new org.ehealth_connector.cda.ch.ProblemConcern(
 				concern, problemEntry, problemStatusCode);
+		retVal.getMdht().getIds().clear();
+		retVal.addId(id);
+		if (timeStamp != null)
+			retVal.setStart(timeStamp);
 
 		return retVal;
 
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC ActiveProblemConcerns from the given
-	 * FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC ActiveProblemConcerns </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.ProblemConcern> getEdDiagnosisroblemConcerns(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.ProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ProblemConcern>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsEdDiagnosis).isEmpty()
-					&& (entry.getResource() instanceof Condition)) {
-				retVal.add(getEdDiagnoses((Condition) entry.getResource()));
-			}
-		}
-		return retVal;
 	}
 
 	private org.ehealth_connector.cda.ch.PastProblemConcern getPastProblemConcern(
@@ -730,8 +774,18 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
 				Condition fhirCondition = (Condition) entry.getResource();
 				PastProblemConcern concern = getPastProblemConcern(fhirCondition);
-				DateDt timeStamp = ((DateDt) extensions.get(0).getValue());
-				concern.setStart(timeStamp.getValue());
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						concern.setStart(((DateDt) ext.getValue()).getValue());
+					}
+					if (ext.getValue() instanceof StringDt) {
+						concern.getMdht().getIds().clear();
+						concern.addId(new Identificator(
+								EHealthConnectorVersions.getCurrentVersion().getOid(),
+								((StringDt) ext.getValue()).toString()));
+					}
+				}
+
 				for (final IdentifierDt id : fhirCondition.getIdentifier()) {
 					final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 					concern.addId(new Identificator(codeSystem, id.getValue()));
