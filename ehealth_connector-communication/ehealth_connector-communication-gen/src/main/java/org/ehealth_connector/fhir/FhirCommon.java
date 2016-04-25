@@ -226,6 +226,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsDocVersion = "urn:ehealth_connector:FhirExtension:useAsDocVersion";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsEdConsultations = "urn:ehealth_connector:FhirExtension:useAsEdConsultations";
 
 	/**
@@ -293,6 +299,12 @@ public class FhirCommon {
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
 	public static final String urnUseAsInformationRecipient = "urn:ehealth_connector:FhirExtension:useAsInformationRecipient";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsInFulfillmentOf = "urn:ehealth_connector:FhirExtension:useAsInFulfillmentOf";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>

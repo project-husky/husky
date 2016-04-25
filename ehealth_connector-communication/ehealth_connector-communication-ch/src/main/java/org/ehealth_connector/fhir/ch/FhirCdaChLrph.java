@@ -376,25 +376,41 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 
 		// Header
 		final CdaChLrph doc = new CdaChLrph(getDocLanguage(bundle), xsl, css);
-		doc.setPatient(FhirCommon.getPatient(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
+		// RecordTarget
+		doc.setPatient(FhirCommon.getPatient(bundle));
+		// ReferralOrderingPhysician
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
-
+		// Authors
 		for (final Author author : getAuthors(bundle)) {
 			author.setTime(new Date());
 			doc.addAuthor(author);
 		}
+		// LegalAuthenticator
+		Author legalAuth = getLegalAuthenticator(bundle);
+		if (legalAuth != null) {
+			doc.setLegalAuthenticator(legalAuth);
+		}
+		// Custodian
 		doc.setEmtpyCustodian();
-
+		// IntendedRecipient
 		IntendedRecipient ir = getIntendedRecipient(bundle);
 		doc.addIntendedRecipient(ir);
-
+		// InFulfillmentOf
+		Identificator ifoId = getInFulfillmentOf(bundle);
+		if (ifoId != null) {
+			doc.addInFulfillmentOf(ifoId);
+		}
+		// DocVersion
+		Integer docVersion = getDocVersion(bundle);
+		if (docVersion != null) {
+			doc.setVersion(null, docVersion);
+		}
+		// DocType and Pseudonymization
 		if (getDocType(bundle) == DocTypeCode.HIV)
 			doc.applyPrivacyFilterHiv();
 		if (getDocType(bundle) == DocTypeCode.PSEUDONYMIZED)
 			doc.applyPrivacyFilterInitials();
-
-		// doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
 
 		// Body
 		// Laboratory SpecialtySections
@@ -532,6 +548,36 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		return retVal;
 	}
 
+	private Integer getDocVersion(Bundle bundle) {
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all InFulfillmentOfs
+			List<ExtensionDt> ifoEntries = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocVersion);
+			if (ifoEntries != null && !ifoEntries.isEmpty()) {
+				Basic ifo = (Basic) entry.getResource();
+				return Integer.parseInt(ifo.getCode().getCodingFirstRep().getCode());
+			}
+		}
+		return null;
+	}
+
+	private Identificator getInFulfillmentOf(Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>();
+
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all InFulfillmentOfs
+			List<ExtensionDt> ifoEntries = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInFulfillmentOf);
+			if (ifoEntries != null && !ifoEntries.isEmpty()) {
+				Basic ifo = (Basic) entry.getResource();
+				return FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * <div class="en">Gets a list of eHC LRPH LaboratoryBatteryOrganizers from
 	 * the given FHIR bundle
@@ -626,7 +672,17 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
 			Value v = new Value(fhirQuantity.getValue().toString(),
 					Ucum.AHGEquivalentsPerMilliLiter);
-			v.setUcumUnit(fhirQuantity.getUnit());
+
+			// fix for the bug(?), which ommits the unit when it´s set to "1"
+			String unit;
+			if (fhirQuantity.getUnit().startsWith("#")) {
+				// Seems to be a bug in the MDHT. Ucum Unit can´t be set to "1".
+				// unit = fhirQuantity.getUnit().replace("#", "");
+				unit = fhirQuantity.getUnit();
+			} else {
+				unit = fhirQuantity.getUnit();
+			}
+			v.setUcumUnit(unit);
 			retVal.addValue(v);
 
 		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
