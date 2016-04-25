@@ -55,7 +55,7 @@ public class Concern extends AbstractConcern {
 	 */
 	@Override
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		getConcernEntry().getIds().add(ii);
 	}
 }

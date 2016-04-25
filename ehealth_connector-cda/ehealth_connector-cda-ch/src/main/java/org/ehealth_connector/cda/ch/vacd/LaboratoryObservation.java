@@ -175,7 +175,7 @@ public class LaboratoryObservation {
 	 *          the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		mLaboratoryObservation.getIds().add(ii);
 	}
 

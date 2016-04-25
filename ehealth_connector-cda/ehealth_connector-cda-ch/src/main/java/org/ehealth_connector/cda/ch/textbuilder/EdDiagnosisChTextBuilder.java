@@ -16,11 +16,10 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.ActiveProblemConcern;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.ProblemConcern;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
 
 /**
@@ -29,33 +28,33 @@ import org.ehealth_connector.cda.textbuilder.TextBuilder;
  * Always builds the whole part (not only adds one recommendation).
  *
  */
-public class ActiveProblemConcernTextBuilder extends TextBuilder {
+public class EdDiagnosisChTextBuilder extends TextBuilder {
 
-	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>Risikokategorie</th><th>Risikofaktor</th></tr></thead><tbody>";
-	private final List<ActiveProblemConcern> problemConcernEntries;
-	private final ActiveProblemConcern newProblemConcernEntry;
+	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>TODO tsc</th><th>TODO tsc</th></tr></thead><tbody>";
+	private final List<ProblemConcern> problemConcernEntries;
+	private final ProblemConcern newProblemConcernEntry;
 	private String sectionText;
 	private int newId;
 
-	public ActiveProblemConcernTextBuilder(ArrayList<ActiveProblemConcern> problemConcernEntries,
-			ActiveProblemConcern newProblemConcernEntry, String sectionText) {
+	public EdDiagnosisChTextBuilder(List<ProblemConcern> problemConcernEntries,
+			ProblemConcern newProblemConcernEntry, String sectionText) {
 		this.problemConcernEntries = problemConcernEntries;
 		this.newProblemConcernEntry = newProblemConcernEntry;
 		this.sectionText = sectionText;
 		init();
 	}
 
-	protected String buildRow(ActiveProblemConcern newProblemConcernEntry2, int newId) {
+	protected String buildRow(ProblemConcern newProblemConcernEntry2, int newId) {
 		final StringBuilder rowBuilder = new StringBuilder();
 		rowBuilder.append("<tr>");
 		rowBuilder.append(buildCell("TODO tsc"));
 		rowBuilder.append(buildCellWithContent(newProblemConcernEntry2.getConcern(), newId,
-				SectionsVACD.ACTIVE_PROBLEMS.getContentIdPrefix()));
+				SectionsEDES.ED_DIAGNOSIS.getContentIdPrefix()));
 		rowBuilder.append("</tr>");
 		return rowBuilder.toString();
 	}
 
-	public ActiveProblemConcern getProblemConcernEntry() {
+	public ProblemConcern getProblemConcernEntry() {
 		return newProblemConcernEntry;
 	}
 
@@ -82,8 +81,7 @@ public class ActiveProblemConcernTextBuilder extends TextBuilder {
 		sectionText = insertRow(newProblemConcernEntry, newId, sectionText);
 	}
 
-	public String insertRow(ActiveProblemConcern newProblemConcernEntry2, int newId,
-			String sectionText) {
+	public String insertRow(ProblemConcern newProblemConcernEntry2, int newId, String sectionText) {
 		final String rowStr = buildRow(newProblemConcernEntry2, newId);
 		// If there is no element found that could be replaced, then an
 		// error occured (e.g. in a scenario, where an external document is

@@ -845,7 +845,7 @@ public class CdaChVacdTest extends TestUtils {
 		final PastProblemConcern p = new PastProblemConcern();
 
 		p.addId(id1);
-		assertEquals(true, TestUtils.isEqual(id1, p.getIds().get(0)));
+		assertEquals(true, TestUtils.isEqual(id1, p.getIds().get(p.getIds().size() - 1)));
 
 		p.setStart(startDate);
 		assertEquals(startDateString, p.getStart());

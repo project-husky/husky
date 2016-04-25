@@ -57,7 +57,7 @@ public class GestationalAge extends CodedResults {
 		getCrs().addObservation(mDays);
 
 		// Create Id
-		mIi = CdaChUtil.createUuidVacdIdentificator(null);
+		mIi = CdaChUtil.createUniqueIiFromString(null);
 
 		// CreateEmpty Procedure Entry
 		getCrs().addProcedure(createEmptyProcedureEntry());

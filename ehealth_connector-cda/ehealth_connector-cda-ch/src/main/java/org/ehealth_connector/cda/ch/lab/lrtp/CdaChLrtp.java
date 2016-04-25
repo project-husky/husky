@@ -63,26 +63,6 @@ public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
 
 	/**
-	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID
-	 * and a generated extension.</div>
-	 *
-	 * @param id
-	 *            <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static Identificator createUuidLrtp(String id) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot("2.16.756.5.30.1.1.1.1.3.4.1");
-		if (id == null) {
-			ii.setExtension(UUID.generate());
-		} else {
-			ii.setExtension(id);
-		}
-		return new Identificator(ii);
-	}
-
-	/**
 	 * Standard constructor.
 	 */
 	public CdaChLrtp() {

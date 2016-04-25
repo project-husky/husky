@@ -30,21 +30,42 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
 	private List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns;
-	private String contentIdPrefix;
+	protected String contentIdPrefix;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param problemConcerns
-	 *          a list of problem concerns
+	 *            a list of problem concerns
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public AllergyConcernTextBuilder(List<AbstractAllergyConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
 	}
+
+	private void addBody() {
+		append("<tbody>");
+		int i = 1;
+		for (final org.ehealth_connector.cda.AbstractAllergyConcern problemConcern : problemConcerns) {
+			addRow(problemConcern, i++);
+		}
+		append("</tbody>");
+	}
+
+	private void addHeader() {
+		append("<thead>");
+		append("<tr>");
+		append("<th>TODO tsc</th>");
+		append("<th>TODO tsc</th>");
+		append("<th>TODO tsc</th>");
+		append("</tr>");
+		append("</thead>");
+	}
+
+	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
 
 	/**
 	 * Method to get
@@ -68,7 +89,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 * Method to set
 	 *
 	 * @param contentIdPrefix
-	 *          the contentIdPrefix to set
+	 *            the contentIdPrefix to set
 	 */
 	public void setContentIdPrefix(String contentIdPrefix) {
 		this.contentIdPrefix = contentIdPrefix;
@@ -78,7 +99,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 * Method to set
 	 *
 	 * @param problemConcerns
-	 *          the problemConcerns to set
+	 *            the problemConcerns to set
 	 */
 	public void setProblemConcerns(
 			List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns) {
@@ -97,26 +118,5 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 		addBody();
 		append("</table>");
 		return super.toString();
-	}
-
-	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
-
-	private void addBody() {
-		append("<tbody>");
-		int i = 1;
-		for (final org.ehealth_connector.cda.AbstractAllergyConcern problemConcern : problemConcerns) {
-			addRow(problemConcern, i++);
-		}
-		append("</tbody>");
-	}
-
-	private void addHeader() {
-		append("<thead>");
-		append("<tr>");
-		append("<th>Risikokategorie</th>");
-		append("<th>Risikofaktor</th>");
-		append("<th>Kommentar</th>");
-		append("</tr>");
-		append("</thead>");
 	}
 }

@@ -64,7 +64,7 @@ public enum EHealthConnectorVersions {
 		return systemVersionName;
 	}
 
-	public String oid() {
+	public String getOid() {
 		return oid;
 	}
 

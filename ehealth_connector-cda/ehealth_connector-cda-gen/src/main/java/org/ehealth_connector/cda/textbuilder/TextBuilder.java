@@ -24,14 +24,9 @@ public abstract class TextBuilder {
 
 	protected final static String tableFooter = "</tbody></table>";
 
-	private StringBuffer buffer = new StringBuffer();
+	private final StringBuffer buffer = new StringBuffer();
 
 	public TextBuilder() {
-	}
-
-	@Override
-	public String toString() {
-		return buffer.toString();
 	}
 
 	protected void addCell(String text) {
@@ -62,6 +57,11 @@ public abstract class TextBuilder {
 
 	protected String buildCellWithContent(String text, int i, String prefix) {
 		return ("<td><content ID=\"" + prefix + i + "\">" + text + "</content></td>");
+	}
+
+	@Override
+	public String toString() {
+		return buffer.toString();
 	}
 
 	// public void build(String[] tableHeader, String[][] tableBody,

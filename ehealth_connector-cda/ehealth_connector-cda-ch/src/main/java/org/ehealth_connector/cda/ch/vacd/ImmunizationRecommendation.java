@@ -134,7 +134,7 @@ public class ImmunizationRecommendation
 	 *          the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		this.getMdht().getIds().add(ii);
 	}
 
@@ -475,7 +475,7 @@ public class ImmunizationRecommendation
 		this.getMdht().setPriorityCode(ce);
 		this.getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		this.getMdht().getIds().add(CdaChUtil.createUuidVacd(null));
+		this.getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}

@@ -13,18 +13,19 @@
  * Year of publication: 2016
  *
  *******************************************************************************/
-package org.ehealth_connector.cda.ch.lab.lrtp;
+package org.ehealth_connector.cda.ch.edes;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.AbstractVitalSignsOrganizer;
-import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.NullFlavor;
-import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
+import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
@@ -57,7 +58,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param id
 	 *            the id
 	 */
-	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignsObservation observation,
+	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignObservation observation,
 			Identificator id) {
 		this();
 		setEffectiveTime(effectiveTime);
@@ -74,7 +75,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param observation
 	 *            the observation
 	 */
-	public VitalSignsOrganizer(Date effectiveTime, VitalSignsObservation observation) {
+	public VitalSignsOrganizer(Date effectiveTime, VitalSignObservation observation) {
 		this();
 		setEffectiveTime(effectiveTime);
 		addVitalSignsObservation(observation);
@@ -114,7 +115,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	@Override
 	public void addId(Identificator id) {
 		if (id == null) {
-			id = CdaChUtil.createUniqueIdentificator();
+			id = new Identificator(AbstractCdaCh.OID_MAIN, UUID.generate());
 		}
 		getMdht().getIds().add(id.getIi());
 	}
@@ -122,11 +123,11 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	/**
 	 * Adds the vital signs observation.
 	 *
-	 * @param observation
+	 * @param vitalSignObservation
 	 *            the observation
 	 */
-	public void addVitalSignsObservation(VitalSignsObservation observation) {
-		getMdht().addObservation(observation.getMdhtCopy());
+	public void addVitalSignsObservation(VitalSignObservation vitalSignObservation) {
+		getMdht().addObservation(vitalSignObservation.getMdhtCopy());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
@@ -150,10 +151,11 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 *
 	 * @return the vital signs observations
 	 */
-	public List<VitalSignsObservation> getVitalSignsObservations() {
-		List<VitalSignsObservation> vsl = new ArrayList<VitalSignsObservation>();
-		for (VitalSignObservation mdht : getMdht().getVitalSignObservations()) {
-			VitalSignsObservation ehc = new VitalSignsObservation(mdht);
+	public List<AbstractVitalSignObservation> getVitalSignsObservations() {
+		List<AbstractVitalSignObservation> vsl = new ArrayList<AbstractVitalSignObservation>();
+		for (org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht : getMdht()
+				.getVitalSignObservations()) {
+			AbstractVitalSignObservation ehc = new VitalSignObservation(mdht);
 			vsl.add(ehc);
 		}
 		return vsl;

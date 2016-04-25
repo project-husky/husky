@@ -761,7 +761,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param id
 	 *            id of the document
 	 */
-	protected abstract void setSetId(String id);
+	public abstract void setSetId(Identificator id);
 
 	/**
 	 * <div class="en">Sets the timestamp of the document</div>
@@ -807,13 +807,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
 	 * zu</div>
 	 *
-	 * @param guidVersion1
+	 * @param idVersion1
 	 *            the set Id (if null, the document ID will be used)
 	 * @param version
 	 *            the version of the document
 	 */
-	public void setVersion(String guidVersion1, Integer version) {
-		setSetId(guidVersion1);
+	public void setVersion(Identificator idVersion1, Integer version) {
+		setSetId(idVersion1);
 		setVersionNumber(version);
 	}
 

@@ -40,7 +40,7 @@ public class Value {
 	/**
 	 * The m value.
 	 */
-	private ANY mValue;
+	private final ANY mValue;
 
 	/**
 	 * <div class="en">Instantiates a new value with a given MDHT ANY
@@ -224,6 +224,10 @@ public class Value {
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
+	}
+
+	public Value(String text) {
+		mValue = Util.createEd(text);
 	}
 
 	/**
@@ -495,6 +499,10 @@ public class Value {
 		return (mValue instanceof PQ);
 	}
 
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
+	}
+
 	/**
 	 * Checks if the Value object is a RTO (A quantity constructed as the
 	 * quotient of a numerator quantity divided by a denominator quantity.).
@@ -510,9 +518,19 @@ public class Value {
 		code.setOriginalTextReference(originalText);
 	}
 
+	private void setPqValue(String value) {
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
 	public void setUcumUnit(String unit) {
 		final PQ pq = (PQ) mValue;
 		pq.setUnit(unit);
+	}
+
+	private void setUcumUnit(Ucum unit) {
+		final PQ pq = (PQ) mValue;
+		pq.setUnit(unit.getCodeValue());
 	}
 
 	/**
@@ -526,20 +544,6 @@ public class Value {
 	public String toString() {
 		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit()
 				+ "]";
-	}
-
-	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
-	}
-
-	private void setPqValue(String value) {
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
-	private void setUcumUnit(Ucum unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit.getCodeValue());
 	}
 
 }

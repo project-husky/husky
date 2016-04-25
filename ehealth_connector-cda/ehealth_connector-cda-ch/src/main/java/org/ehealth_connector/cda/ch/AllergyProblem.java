@@ -104,7 +104,7 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	 */
 	@Override
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		getAllergyProblem().getIds().add(ii);
 	}
 

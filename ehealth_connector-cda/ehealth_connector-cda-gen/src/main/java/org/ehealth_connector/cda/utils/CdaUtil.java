@@ -17,6 +17,7 @@ package org.ehealth_connector.cda.utils;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -38,9 +39,9 @@ public abstract class CdaUtil {
 	 * Adds the copy of a given section to a given structured body
 	 *
 	 * @param sb
-	 *          the StructuredBody
+	 *            the StructuredBody
 	 * @param s
-	 *          the Section
+	 *            the Section
 	 */
 	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
 		if ((sb != null) && (s != null)) {
@@ -51,23 +52,65 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates a UUID for LRTP documents with the LRTP root ID and
-	 * a generated extension.</div>
+	 * <div class="en">Creates a unique Identificator (root=ehc OID;
+	 * extension=UUID)</div>
+	 *
+	 * @return the Identificator
+	 */
+	public static Identificator createUniqueIdentificator() {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
+		ii.setExtension(UUID.generate());
+		return new Identificator(ii);
+	}
+
+	/**
+	 * <div class="en">Creates a unique II (root=ehc OID; extension=UUID)</div>
+	 *
+	 * @return the II
+	 */
+	public static II createUniqueIi() {
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
+		ii.setExtension(UUID.generate());
+		return ii;
+	}
+
+	/**
+	 * <div class="en">Creates a unique II (root=from the id or the ehc OID;
+	 * extension=from the id or a UUID)</div>
 	 *
 	 * @param id
-	 *          <br>
-	 *          <div class="en"> the id</div>
-	 * @return the ii
+	 *            the base id
+	 * @return the II
 	 */
-	public static Identificator createUuidLrtp(String id) {
+	public static II createUniqueIiFromIdentificator(Identificator id) {
+		II ii;
+		if (id == null) {
+			ii = createUniqueIi();
+		} else {
+			ii = id.getIi();
+		}
+		return ii;
+	}
+
+	/**
+	 * <div class="en">Creates a unique II (root=the ehc OID; extension=from the
+	 * id or a UUID)</div>
+	 *
+	 * @param id
+	 *            the base id
+	 * @return the II
+	 */
+	public static II createUniqueIiFromString(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot("2.16.756.5.30.1.1.1.1.3.4.1");
+		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {
 			ii.setExtension(id);
 		}
-		return new Identificator(ii);
+		return ii;
 	}
 
 	public static void setEntryRelationshipCommentInversionIdAndTypeCode(

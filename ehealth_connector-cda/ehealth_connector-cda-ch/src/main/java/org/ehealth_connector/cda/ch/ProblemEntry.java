@@ -16,6 +16,7 @@
 package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.LanguageCode;
@@ -35,14 +36,14 @@ public class ProblemEntry extends AbstractProblemEntry {
 	 * Default constructor to instanciate the object
 	 */
 	public ProblemEntry() {
-		this.setId(new Identificator("2.16.756.5.30.1.1.1.1.3.5", UUID.generate()));
+		this.setId(new Identificator(CdaChEdesEdpn.OID_MAIN, UUID.generate()));
 	}
 
 	/**
 	 * Instantiates a new problem entry.
 	 *
 	 * @param entry
-	 *          the entry
+	 *            the entry
 	 */
 	public ProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry) {
 		super(entry);
@@ -57,7 +58,8 @@ public class ProblemEntry extends AbstractProblemEntry {
 		final Value value = this.getValue();
 		if (value != null) {
 			final Code code = value.getCode();
-			if ((code != null) && RiskOfComplications.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			if ((code != null)
+					&& RiskOfComplications.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 				return RiskOfComplications.getEnum(code.getCode());
 			}
 		}
@@ -81,12 +83,13 @@ public class ProblemEntry extends AbstractProblemEntry {
 	}
 
 	/**
-	 * Sets the complication Risk and in addition sets the ProblemType to PROBLEM
+	 * Sets the complication Risk and in addition sets the ProblemType to
+	 * PROBLEM
 	 *
 	 * @param complRisk
-	 *          the compl risk
+	 *            the compl risk
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public void setComplicationRisk(RiskOfComplications complRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);
@@ -97,9 +100,9 @@ public class ProblemEntry extends AbstractProblemEntry {
 	 * Sets the exposure risk and in addition sets the ProblemType to PROBLEM.
 	 *
 	 * @param expRisk
-	 *          the exp risk
+	 *            the exp risk
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public void setExposureRisk(RiskOfExposure expRisk, LanguageCode languageCode) {
 		setProblemType(ProblemType.PROBLEM);

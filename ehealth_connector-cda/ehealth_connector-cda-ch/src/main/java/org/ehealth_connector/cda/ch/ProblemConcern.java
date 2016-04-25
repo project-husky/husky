@@ -43,7 +43,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param problemConcernEntry
-	 *          the problem concern entry
+	 *            the problem concern entry
 	 */
 	public ProblemConcern(ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
@@ -53,11 +53,11 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param concern
-	 *          the concern
+	 *            the concern
 	 * @param problemEntry
-	 *          the problem entry
+	 *            the problem entry
 	 * @param concernStatus
-	 *          the concern status
+	 *            the concern status
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus) {
@@ -68,15 +68,15 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * Instantiates a new problem concern.
 	 *
 	 * @param concern
-	 *          the concern
+	 *            the concern
 	 * @param problemEntry
-	 *          the problem entry
+	 *            the problem entry
 	 * @param concernStatus
-	 *          the concern status
+	 *            the concern status
 	 * @param start
-	 *          the start
+	 *            the start
 	 * @param end
-	 *          the end
+	 *            the end
 	 */
 	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus, Date start, Date end) {
@@ -90,7 +90,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 */
 	@Override
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		getConcernEntry().getIds().add(ii);
 	}
 

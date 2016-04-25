@@ -21,24 +21,40 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
+import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
+import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
+import org.ehealth_connector.cda.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
+import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.HistoryOfPastIllnessSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry;
+import org.openhealthtools.mdht.uml.cda.ihe.pcc.PCCFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 
 /**
  * <div class="en">This class represents common methods of EDES CDA documents.
@@ -47,10 +63,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
  */
 public class CdaChEdesCommon {
 
+	public static final boolean CDA_LEVEL2_TEXT_GENERATION = true;
+
 	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
 
 	private static final String DOCTITLE_GER = "Notfallaustrittsbericht";
+
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
+	private CodedVitalSignsSection mCodedVitalSigns;
 
 	private final ClinicalDocument document;
 
@@ -62,6 +82,50 @@ public class CdaChEdesCommon {
 	 */
 	public CdaChEdesCommon(ClinicalDocument document) {
 		this.document = document;
+	}
+
+	/**
+	 * <div class="en">Adds the active problem concern.</div>
+	 * <div class="de">Fügt ein Aktives Leiden hinzu</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param activeProblemConcern
+	 *            <br>
+	 *            <div class="en"> active problem concern</div>
+	 *            <div class="de"> Das aktive Leiden</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern,
+			ActiveProblemsSection section) {
+
+		// find or create (and add) the Section
+		if (section == null) {
+			section = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
+			addSection(section);
+		}
+
+		// add the MDHT Object to the section
+		section.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
+
+		// update the MDHT Object content references to CDA level 1 text
+		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.ACTIVE_PROBLEMS)) {
+			if (CDA_LEVEL2_TEXT_GENERATION) {
+				// create the CDA level 1 text
+				section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
+			} else {
+				setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS, section, "");
+			}
+		} else {
+			section.createStrucDocText("Keine Angaben");
+			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
+		}
+
+		// TODO tsc
+		// section.createStrucDocText(mCommon.getProblemTable(section)); //
+		// Generate
+		// <text>ProblemConcern
+		// table</text>
 	}
 
 	/**
@@ -81,8 +145,84 @@ public class CdaChEdesCommon {
 		}
 		// add the MDHT Object to the section
 		section.addAct(allergyOrOtherAdverseReaction.copyMdhtAllergyConcern());
-		section.createStrucDocText(getAllergyTable(getAllergiesAndOtherAdverseReactions(section)));
+
+		// create the CDA level 2 text (either generated or empty text with
+		// content reference)
+
+		// update the MDHT Object content references to CDA level 1 text
+		if (updateAllergyConcernReferences(section.getActs(),
+				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS)) {
+			if (CDA_LEVEL2_TEXT_GENERATION) {
+				// create the CDA level 1 text
+				section.createStrucDocText(generateNarrativeTextAllergyProblemConcerns(section));
+			} else {
+				setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS, section,
+						"");
+			}
+		} else {
+			section.createStrucDocText("Keine Angaben");
+			allergyOrOtherAdverseReaction.copyMdhtAllergyConcern().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
+		}
+
+		// TODO tsc
+		// section.createStrucDocText(getAllergyTable(getAllergiesAndOtherAdverseReactions(section)));
 		// Generate <text> Allergy table</text>
+	}
+
+	/**
+	 * <div class="en">Add the coded vital sign observation to the
+	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
+	 * Dokument ein</div>
+	 *
+	 * @param organizer
+	 *            The desired organizer where to put the observation
+	 * @param vitalSign
+	 *            <div class="en">The coded vital sign observation to add</div>
+	 *            <div class="de">Das hinzuzufügende codierte Vitalzeichen</div>
+	 * @param author
+	 *            the author of the observation
+	 */
+	public void addCodedVitalSign(VitalSignsOrganizer organizer, VitalSignObservation vitalSign,
+			Author author, org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section,
+			LanguageCode languageCode) {
+		if (mCodedVitalSigns == null) {
+			if (section == null) {
+				section = IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
+				addSection(section);
+			}
+			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
+					languageCode, section);
+		}
+
+		mCodedVitalSigns.add(organizer, vitalSign, author, "vs");
+
+	}
+
+	public void addEdDiagnosis(ProblemConcern edDiagnosis, Section section) {
+		if (section == null) {
+			section = PCCFactory.eINSTANCE.createEDDiagnosesSection().init();
+			addSection(section);
+		}
+		// add the MDHT Object to the section
+		section.addAct(edDiagnosis.copyMdhtProblemConcernEntry());
+
+		// create the CDA level 2 text (either generated or empty text with
+		// content reference)
+
+		// update the MDHT Object content references to CDA level 1 text
+		if (updateEdDiagnoseReferences(section.getActs(), SectionsEDES.ED_DIAGNOSIS)) {
+			if (CDA_LEVEL2_TEXT_GENERATION) {
+				// create the CDA level 1 text
+				section.createStrucDocText(generateNarrativeTextEdDiagnoses(section));
+			} else {
+				setNarrativeTextSection(SectionsEDES.ED_DIAGNOSIS, section, "");
+			}
+		} else {
+			section.createStrucDocText("Keine Angaben");
+			edDiagnosis.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
+		}
 	}
 
 	/**
@@ -101,7 +241,25 @@ public class CdaChEdesCommon {
 		}
 		// add the MDHT Object to the section
 		section.addAct(pastIllness.copyMdhtProblemConcernEntry());
-		section.createStrucDocText(getProblemTable(section)); // Generate
+
+		// update the MDHT Object content references to CDA level 1 text
+		if (updateProblemConcernReferences(section.getActs(),
+				SectionsEDES.HISTORY_OF_PAST_ILLNESS)) {
+			// create the CDA level 2 text (either generated or empty text with
+			// content reference)
+			if (CDA_LEVEL2_TEXT_GENERATION) {
+				section.createStrucDocText(generateNarrativeTextPastProblemConcernEntries(section));
+			} else {
+				setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS, section, "");
+			}
+		} else {
+			section.createStrucDocText("");
+			pastIllness.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+					.getObservation().setText(Util.createEd(""));
+		}
+
+		// TODO tsc
+		// section.createStrucDocText(getProblemTable(section)); // Generate
 		// <text>ProblemConcern
 		// table</text>
 	}
@@ -113,6 +271,113 @@ public class CdaChEdesCommon {
 					.getSectionTitle(LanguageCode.getEnum(document.getLanguageCode().getCode()))));
 		}
 		document.addSection(section);
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the active problems
+	 * chapter</div> <div class="de">Liefert den menschenlesbaren Text des
+	 * Kapitels zu Aktiven Leiden zurück</div>
+	 *
+	 * @return the active problem concerns text
+	 */
+	public String generateNarrativeTextActiveProblemConcerns(Section section) {
+		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		// Convert from the specific PastProblemConcern Type to the more
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(getActiveProblemConcerns(section));
+		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+				problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the allergy concerns
+	 * chapter</div> <div class="de">Liefert den Text des Kapitels Allergie
+	 * Leiden zurück</div>
+	 *
+	 * @return the allergy problem concerns text
+	 */
+	public String generateNarrativeTextAllergyProblemConcerns(Section section) {
+		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
+				getAllergyProblemConcerns(section), SectionsVACD.ALLERGIES_REACTIONS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the ed diagnoses
+	 * chapter</div> <div class="de">Liefert den Text des Kapitels
+	 * Notfalldiagnosen zurück</div>
+	 *
+	 * @return the allergy problem concerns text
+	 */
+	public String generateNarrativeTextEdDiagnoses(Section section) {
+		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		// Convert from the specific PastProblemConcern Type to the more
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(getEdDiagnoses(section));
+		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+				problemConcernEntryList, SectionsEDES.ED_DIAGNOSIS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the history of past
+	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text
+	 * zu allen vergangenen Leiden zurück</div>
+	 *
+	 * @return the past problem concern entries text
+	 */
+	public String generateNarrativeTextPastProblemConcernEntries(
+			List<PastProblemConcern> pastProblemConcerns) {
+		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+
+		// Convert from the specific PastProblemConcern Type to the more
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(pastProblemConcerns);
+		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the history of past
+	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text
+	 * zu allen vergangenen Leiden zurück</div>
+	 *
+	 * @return the past problem concern entries text
+	 */
+	public String generateNarrativeTextPastProblemConcernEntries(Section section) {
+		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+
+		// Convert from the specific PastProblemConcern Type to the more
+		// general PastProblemConcern
+		problemConcernEntryList.addAll(getPastProblemConcerns(section));
+		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Gets the active problems</div> <div class="de">Liefert
+	 * alle Aktiven Leiden zurück</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return the active problem concerns
+	 */
+	public List<ActiveProblemConcern> getActiveProblemConcerns(Section section) {
+		// Search for the right section
+		if (section == null) {
+			return null;
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<ActiveProblemConcern> problemConcernEntries = new ArrayList<ActiveProblemConcern>();
+		for (final Act act : acts) {
+			final ActiveProblemConcern problemConcernEntry = new ActiveProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
 	}
 
 	/**
@@ -135,6 +400,28 @@ public class CdaChEdesCommon {
 			AllergyConcerns.add(AllergyConcern);
 		}
 		return AllergyConcerns;
+	}
+
+	/**
+	 * <div class="en">Gets the allergy problem concerns</div>
+	 * <div class="de">Liefert alle Allergie Leiden zurück</div>
+	 *
+	 * @return the allergy problem concerns
+	 */
+	public List<AllergyConcern> getAllergyProblemConcerns(Section section) {
+		// Search for the right section
+		if (section == null) {
+			return null;
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<AllergyConcern> problemConcernEntries = new ArrayList<AllergyConcern>();
+		for (final Act act : acts) {
+			final AllergyConcern problemConcernEntry = new AllergyConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
 	}
 
 	public String getAllergyTable(List<AllergyConcern> allergyConcerns) {
@@ -209,6 +496,28 @@ public class CdaChEdesCommon {
 		return DOCTITLE_EN;
 	}
 
+	/**
+	 * <div class="en">Gets the ED diagnoses</div> <div class="de">Liefert alle
+	 * Notfalldiagnosen zurück</div>
+	 *
+	 * @return the allergy problem concerns
+	 */
+	public List<ProblemConcern> getEdDiagnoses(Section section) {
+		// Search for the right section
+		if (section == null) {
+			return null;
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<ProblemConcern> diagnosesEntries = new ArrayList<ProblemConcern>();
+		for (final Act act : acts) {
+			final ProblemConcern diagnosis = new ProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			diagnosesEntries.add(diagnosis);
+		}
+		return diagnosesEntries;
+	}
+
 	public String getNarrativeText(Section section) {
 		if (section != null) {
 			final StrucDocText t = section.getText();
@@ -226,6 +535,28 @@ public class CdaChEdesCommon {
 	public List<PastProblemConcern> getPastIllness(HistoryOfPastIllnessSection section) {
 		if (section == null) {
 			return Collections.emptyList();
+		}
+		final EList<Act> acts = section.getActs();
+
+		final List<PastProblemConcern> problemConcernEntries = new ArrayList<PastProblemConcern>();
+		for (final Act act : acts) {
+			final PastProblemConcern problemConcernEntry = new PastProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
+	}
+
+	/**
+	 * <div class="en">Gets the past problem concerns</div>
+	 * <div class="de">Liefert alle vergangen Leiden zurück</div>
+	 *
+	 * @return the past problem concern entries
+	 */
+	public List<PastProblemConcern> getPastProblemConcerns(Section section) {
+		// Search for the right section
+		if (section == null) {
+			return null;
 		}
 		final EList<Act> acts = section.getActs();
 
@@ -283,15 +614,19 @@ public class CdaChEdesCommon {
 							strEndDateTime = DateUtil.formatDateTimeCh(Problementry.getEndDate());
 					} catch (NullPointerException npe) {
 					}
-					if (Problementry.getValue().getCode().getCodeSystemName() != null)
-						strCatalog = Problementry.getValue().getCode().getCodeSystemName();
-					if (Problementry.getValue().getCode().getCode() != null
-							&& Problementry.getValue().getCode().getCode() != "")
-						strCode = Problementry.getValue().getCode().getCode();
-					if (Problementry.getValue().getCode().getDisplayName() != null)
-						strDescription = Problementry.getValue().getCode().getDisplayName();
-					// if (strDescription == "-") strDescription =
-					// Problementry.getValue().GetOriginalTextReference();
+					Value value = Problementry.getValue();
+					if (value.isCode()) {
+						if (value.getCode().getCodeSystemName() != null)
+							strCatalog = Problementry.getValue().getCode().getCodeSystemName();
+						if (value.getCode().getCode() != null
+								&& Problementry.getValue().getCode().getCode() != "")
+							strCode = Problementry.getValue().getCode().getCode();
+						if (value.getCode().getDisplayName() != null)
+							strDescription = Problementry.getValue().getCode().getDisplayName();
+					}
+					if (value.isEd()) {
+						strDescription = value.getEdText();
+					}
 					sb.append("<tr><td>" + strStartDateTime + "</td><td>" + strEndDateTime
 							+ "</td><td>" + strCatalog + "</td><td>" + strCode + "</td><td>"
 							+ strDescription + "</td><td>" + strStatus + "</td><td>" + strCommentar
@@ -311,5 +646,103 @@ public class CdaChEdesCommon {
 			addSection(section);
 		}
 		section.createStrucDocText(new SimpleTextBuilder(sectionEdes, text).toString());
+	}
+
+	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+		int i = 0;
+		for (final Act act : acts) {
+			int j = 0;
+			i++;
+			final org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) act;
+			for (final ProblemEntry problemEntry : problemConcernEntry.getAllergyIntolerances()) {
+				// Check if the problem is not unknown (leads to no reference,
+				// because there is no problem)
+				final Code code = new Code(problemEntry.getCode());
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
+						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+					return false;
+				} else {
+					// Create references to level 1 text
+					ED reference;
+					if (CDA_LEVEL2_TEXT_GENERATION) {
+						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
+					} else {
+						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
+					}
+					problemEntry.setText(EcoreUtil.copy(reference));
+					problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
+				}
+				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
+					j++;
+					CdaChUtil.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j),
+							loincSectionCode);
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean updateEdDiagnoseReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+		int i = 0;
+		for (final Act act : acts) {
+			int j = 0;
+			i++;
+			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
+			for (final ProblemEntry problemEntry : problemConcernEntry.getProblemEntries()) {
+				// Check if the problem is not unknown (leads to no reference,
+				// because there is no problem)
+				final Code code = new Code(problemEntry.getCode());
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
+						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+					return false;
+				} else {
+					// Create references to level 1 text
+					ED reference;
+					if (CDA_LEVEL2_TEXT_GENERATION) {
+						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
+					} else {
+						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
+					}
+					problemEntry.setText(EcoreUtil.copy(reference));
+					problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
+				}
+				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
+					j++;
+					CdaChUtil.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j),
+							loincSectionCode);
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean updateProblemConcernReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+		@SuppressWarnings("unused")
+		int i = 0;
+		for (final Act act : acts) {
+			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
+			for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry problemEntry : problemConcernEntry
+					.getProblemEntries()) {
+				// Check if the problem is not unknown (leads to no reference,
+				// because there is no problem)
+				final Code code = new Code(problemEntry.getCode());
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
+						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+					return false;
+				} else {
+					// Create references to level 1 text
+					i++;
+					ED reference;
+					if (CDA_LEVEL2_TEXT_GENERATION) {
+						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
+					} else {
+						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
+					}
+					problemEntry.setText(EcoreUtil.copy(reference));
+					problemEntry.getCode().setOriginalText(EcoreUtil.copy(reference));
+				}
+			}
+		}
+		return true;
 	}
 }

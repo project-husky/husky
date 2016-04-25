@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ch;
 import java.util.Date;
 
 import org.ehealth_connector.cda.AbstractPregnancyHistory;
-import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -40,7 +40,7 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	 * Instantiates a new pregnancy history.
 	 *
 	 * @param estimatedBirthDate
-	 *          the estimated birth date
+	 *            the estimated birth date
 	 */
 	public PregnancyHistory(Date estimatedBirthDate) {
 		super(estimatedBirthDate);
@@ -50,7 +50,7 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	 * Instantiates a new pregnancy history.
 	 *
 	 * @param pregnancy
-	 *          the pregnancy
+	 *            the pregnancy
 	 */
 	public PregnancyHistory(PregnancyObservation pregnancy) {
 		super(pregnancy);
@@ -63,7 +63,7 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	 */
 	@Override
 	protected void setInternalId(String id) {
-		final II ii = CdaChUtil.createUuidVacd(id);
+		final II ii = CdaUtil.createUniqueIiFromString(id);
 		getMdhtPregnancy().getIds().add(ii);
 	}
 

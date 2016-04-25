@@ -29,35 +29,21 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
  */
 public class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-	private List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
-	private String contentIdPrefix;
+	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
+	private final String contentIdPrefix;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param problemConcerns
-	 *          a list of Problem Concerns
+	 *            a list of Problem Concerns
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
-	}
-
-	/**
-	 * Returns HTML formatted string.
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		append("<table border='1' width='100%'>");
-		addHeader();
-		addBody();
-		append("</table>");
-		return super.toString();
 	}
 
 	private void addBody() {
@@ -72,20 +58,34 @@ public class ProblemConcernEntryTextBuilder extends TextBuilder {
 	private void addHeader() {
 		append("<thead>");
 		append("<tr>");
-		append("<th>Risikokategorie</th>");
-		append("<th>Risikofaktor</th>");
+		append("<th>TODO tsc</th>");
+		append("<th>TODO tsc</th>");
 		append("</tr>");
 		append("</thead>");
 	}
 
 	private void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcern, int i) {
 		append("<tr>");
-		addCell("Komplikationsrisiko");
+		addCell("TODO tsc");
 		if (problemConcern.getConcern() != null) {
 			addCellWithContent(problemConcern.getConcern(), contentIdPrefix, i);
 		} else {
 			addCell("");
 		}
 		append("</tr>");
+	}
+
+	/**
+	 * Returns HTML formatted string.
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
 	}
 }

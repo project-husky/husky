@@ -298,7 +298,7 @@ public class SubmissionSetMetadata {
 
 			// This is the eHealth Connector Root OID
 			// default value just in case...
-			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
+			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
 
 			if (ohtSubmissionSetType.getUniqueId() == null) {
 				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));

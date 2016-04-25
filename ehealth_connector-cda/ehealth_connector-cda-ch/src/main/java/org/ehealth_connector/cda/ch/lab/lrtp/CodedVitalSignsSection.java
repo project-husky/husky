@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lab.lrtp;
 import org.ehealth_connector.cda.AbstractCodedVitalSigns;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
@@ -77,6 +78,26 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#createVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation)
+	 */
+	@Override
+	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
+		return new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation(mdht);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#getUuid()
+	 */
+	@Override
+	protected Identificator getUuid() {
+		return CdaChUtil.createUniqueIdentificator();
+	}
+
+	/**
 	 * Gets the vital signs organizer.
 	 *
 	 * @return the vital signs organizer
@@ -99,25 +120,5 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
 		getMdht().getEntries().clear();
 		getMdht().addOrganizer(organizer.copy());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#createVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation)
-	 */
-	@Override
-	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
-		return new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation(mdht);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#getUuid()
-	 */
-	@Override
-	protected Identificator getUuid() {
-		return CdaChLrtp.createUuidLrtp(null);
 	}
 }

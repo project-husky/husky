@@ -58,7 +58,7 @@ import ca.uhn.fhir.parser.IParser;
  * only way to create valid FHIR document resources for XD Transactions. You may
  * edit these FHIR resources in a text editor in order to change the payload of
  * the resulting transaction on your own risk.
- * 
+ *
  * @see "https://www.hl7.org/fhir/"
  */
 public class FhirXdTransaction {
@@ -72,10 +72,10 @@ public class FhirXdTransaction {
 	public static class Transaction extends Bundle {
 
 		/** The Constant urnUseAsAffinityDomain. */
-		public static final String urnUseAsAffinityDomain = "urn:ehealth_connector:FhirExtension:useAsAffinityDomain";
+		public static final String urnUseAsAffinityDomain = "http://ehealth-connector.org/FhirExtension/useAsAffinityDomain";
 
 		/** The Constant urnUseAsSubmissionSets. */
-		public static final String urnUseAsSubmissionSet = "urn:ehealth_connector:FhirExtension:useAsSubmissionSet";
+		public static final String urnUseAsSubmissionSet = "http://ehealth-connector.org/FhirExtension/useAsSubmissionSet";
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -928980987511039196L;
@@ -98,7 +98,7 @@ public class FhirXdTransaction {
 
 		/**
 		 * Adds an endpoint (destination) to the FHIR bundle
-		 * 
+		 *
 		 * @param destination
 		 *            - add the destination (FHIR MessageHeader)
 		 */
@@ -110,7 +110,7 @@ public class FhirXdTransaction {
 
 		/**
 		 * Adds an document to the FHIR bundle
-		 * 
+		 *
 		 * @param document
 		 *            - add the document (FHIR DocumentReference)
 		 */
@@ -122,7 +122,7 @@ public class FhirXdTransaction {
 
 		/**
 		 * Adds an submission-set to the FHIR bundle
-		 * 
+		 *
 		 * @param submissionSet
 		 *            - add the submission-set (FHIR DocumentManifest)
 		 */
@@ -145,7 +145,7 @@ public class FhirXdTransaction {
 
 	/**
 	 * <div class="en"> Gets the eHC affinity domain object from the FHIR bundle
-	 * 
+	 *
 	 * @param transaction
 	 *            the FHIR bundle
 	 * @return the eHC affinity domain object </div> <div class="de"></div>
@@ -169,7 +169,7 @@ public class FhirXdTransaction {
 	/**
 	 * <div class="en">Gets an eHC author object from the FHIR DocumentManifest
 	 * object
-	 * 
+	 *
 	 * @param fhirObject
 	 *            the FHIR object
 	 * @return eHC author object </div> <div class="de"></div>
@@ -185,7 +185,7 @@ public class FhirXdTransaction {
 	/**
 	 * <div class="en">Gets an eHC author object from the FHIR DocumentReference
 	 * object
-	 * 
+	 *
 	 * @param fhirObject
 	 *            the FHIR object
 	 * @return eHC author object </div> <div class="de"></div>
@@ -199,9 +199,48 @@ public class FhirXdTransaction {
 	}
 
 	/**
+	 * <div class="en"> Gets an eHC Destination object from the given FHIR
+	 * MessageHeader object
+	 *
+	 * @param fhirObject
+	 *            the FHIR object
+	 * @return the eHC Destination </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	private org.ehealth_connector.communication.Destination getDestination(
+			MessageHeader fhirObject) {
+		org.ehealth_connector.communication.Destination retVal = null;
+
+		final String senderOrganizationalOid = fhirObject.getSource().getSoftware();
+		String receiverFacilityOid = null;
+		String sourceFacilityOid = null;
+		URI uri = null;
+
+		// Create the Destination
+		try {
+			final Source source = fhirObject.getSource();
+			sourceFacilityOid = source.getName();
+
+			final Destination destination = fhirObject.getDestinationFirstRep();
+			receiverFacilityOid = destination.getName();
+			uri = new URI(destination.getEndpoint());
+		} catch (final URISyntaxException e) {
+			// do nothing
+		}
+		retVal = new org.ehealth_connector.communication.Destination(senderOrganizationalOid, uri);
+		if (receiverFacilityOid != null)
+			retVal.setReceiverFacilityOid(receiverFacilityOid);
+		if (sourceFacilityOid != null)
+			retVal.setSenderFacilityOid(sourceFacilityOid);
+
+		return retVal;
+
+	}
+
+	/**
 	 * <div class="en">Gets a list containing all document metadatas from the
 	 * FHIR bundle
-	 * 
+	 *
 	 * @param transaction
 	 *            the FHIR bundle
 	 * @param receiverFacilityOid
@@ -258,7 +297,7 @@ public class FhirXdTransaction {
 	/**
 	 * <div class="en"> Gets the registry as eHC Destination object from the
 	 * FHIR bundle
-	 * 
+	 *
 	 * @param bundle
 	 *            the FHIR bundle
 	 * @return the registry as eHC Destination object </div>
@@ -282,7 +321,7 @@ public class FhirXdTransaction {
 	/**
 	 * <div class="en"> Gets a list of repositories as eHC Destination objects
 	 * from the FHIR bundle
-	 * 
+	 *
 	 * @param bundle
 	 *            the FHIR bundle
 	 * @return list of repositories</div> <div class="de"></div>
@@ -307,7 +346,7 @@ public class FhirXdTransaction {
 	/**
 	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR
 	 * bundle
-	 * 
+	 *
 	 * @param transaction
 	 *            the FHIR bundle
 	 * @param receiverFacilityOid
@@ -356,7 +395,7 @@ public class FhirXdTransaction {
 
 	/**
 	 * Read the transaction object from the FHIR bundle file
-	 * 
+	 *
 	 * @param fileName
 	 *            the file name
 	 * @return the transaction
@@ -365,45 +404,6 @@ public class FhirXdTransaction {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(Transaction.class, resourceString);
-	}
-
-	/**
-	 * <div class="en"> Gets an eHC Destination object from the given FHIR
-	 * MessageHeader object
-	 * 
-	 * @param fhirObject
-	 *            the FHIR object
-	 * @return the eHC Destination </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	private org.ehealth_connector.communication.Destination getDestination(
-			MessageHeader fhirObject) {
-		org.ehealth_connector.communication.Destination retVal = null;
-
-		final String senderOrganizationalOid = fhirObject.getSource().getSoftware();
-		String receiverFacilityOid = null;
-		String sourceFacilityOid = null;
-		URI uri = null;
-
-		// Create the Destination
-		try {
-			final Source source = fhirObject.getSource();
-			sourceFacilityOid = source.getName();
-
-			final Destination destination = fhirObject.getDestinationFirstRep();
-			receiverFacilityOid = destination.getName();
-			uri = new URI(destination.getEndpoint());
-		} catch (final URISyntaxException e) {
-			// do nothing
-		}
-		retVal = new org.ehealth_connector.communication.Destination(senderOrganizationalOid, uri);
-		if (receiverFacilityOid != null)
-			retVal.setReceiverFacilityOid(receiverFacilityOid);
-		if (sourceFacilityOid != null)
-			retVal.setSenderFacilityOid(sourceFacilityOid);
-
-		return retVal;
-
 	}
 
 }

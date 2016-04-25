@@ -41,7 +41,8 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		super(mdht);
 	}
 
-	public void add(AbstractVitalSignObservation vitalSign, Author author, String contendIdPrefix) {
+	public void add(AbstractVitalSignsOrganizer organizer, AbstractVitalSignObservation vitalSign,
+			Author author, String contendIdPrefix) {
 		if (author == null) {
 			// default to author of document
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
@@ -54,10 +55,14 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			}
 		}
 
-		VitalSignsOrganizer organizer = getOrganizer(vitalSign.getEffectiveTime(), author);
-		organizer.addObservation(vitalSign.getMdhtCopy());
+		Identificator id = null;
+		if (!organizer.getIds().isEmpty())
+			id = organizer.getIds().get(0);
+		VitalSignsOrganizer mdhtOrganizer = getOrganizer(id, vitalSign.getEffectiveTime(), author);
+		// VitalSignsOrganizer mdhtOrganizer = organizer.getMdht();
+		mdhtOrganizer.addObservation(vitalSign.getMdhtCopy());
 		// update the component type
-		EList<Component4> components = organizer.getComponents();
+		EList<Component4> components = mdhtOrganizer.getComponents();
 		components.get(components.size() - 1).setTypeCode(ActRelationshipHasComponent.COMP);
 
 		getMdht().createStrucDocText(getTable(contendIdPrefix));
@@ -88,9 +93,15 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		return ret;
 	}
 
-	private VitalSignsOrganizer getOrganizer(Date effectiveTime, Author author) {
+	private VitalSignsOrganizer getOrganizer(Identificator id, Date effectiveTime, Author author) {
 		VitalSignsSection section = getMdht();
 		EList<VitalSignsOrganizer> organizers = section.getVitalSignsOrganizers();
+		for (VitalSignsOrganizer organizer : organizers) {
+			if (!organizer.getIds().isEmpty() && id != null) {
+				if (organizer.getIds().get(0).getExtension().equals(id.getExtension()))
+					return organizer;
+			}
+		}
 		for (VitalSignsOrganizer organizer : organizers) {
 			Date organizerDate = DateUtil.parseIVL_TSVDateTimeValue(organizer.getEffectiveTime());
 			if (organizerDate.equals(effectiveTime)) {

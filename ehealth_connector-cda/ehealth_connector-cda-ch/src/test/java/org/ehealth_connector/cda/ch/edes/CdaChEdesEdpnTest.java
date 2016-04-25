@@ -54,14 +54,15 @@ public class CdaChEdesEdpnTest extends TestUtils {
 	public void codedVitalSignsSerializationTest() throws Exception {
 		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
 		cda.setLanguageCode(LanguageCode.GERMAN);
+		VitalSignsOrganizer organizer = new VitalSignsOrganizer();
 
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)), null);
+		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				effectiveTime, new Value("180", Ucum.CentiMeter)), null);
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)), null);
+		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_WEIGHT,
+				effectiveTime, new Value("80", Ucum.KiloGram)), null);
 
 		final String deserialized = serializeDocument(cda);
 		log.debug(deserialized);
@@ -376,22 +377,27 @@ public class CdaChEdesEdpnTest extends TestUtils {
 	public void sectionsLanguageCodeTest() {
 		final CdaChEdesEdpn cda = new CdaChEdesEdpn();
 		cda.setLanguageCode(LanguageCode.GERMAN);
+		VitalSignsOrganizer organizer = new VitalSignsOrganizer();
 
 		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_HEIGHT, effectiveTime,
-				new Value("180", Ucum.CentiMeter)), null);
+		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				effectiveTime, new Value("180", Ucum.CentiMeter)), null);
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.BODY_WEIGHT, effectiveTime,
-				new Value("80", Ucum.KiloGram)), null);
+		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_WEIGHT,
+				effectiveTime, new Value("80", Ucum.KiloGram)), null);
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC,
-				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
-				new Value("140", Ucum.MilliMetersOfMercury)), null);
+		cda.addCodedVitalSign(organizer,
+				new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_SYSTOLIC, effectiveTime,
+						ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
+						new Value("140", Ucum.MilliMetersOfMercury)),
+				null);
 
-		cda.addCodedVitalSign(new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC,
-				effectiveTime, ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
-				new Value("90", Ucum.MilliMetersOfMercury)), null);
+		cda.addCodedVitalSign(organizer,
+				new VitalSignObservation(VitalSignCodes.INTRAVASCULAR_DIASTOLIC, effectiveTime,
+						ObservationInterpretationForVitalSign.HIGH, ActSite.LEFT_ARM,
+						new Value("90", Ucum.MilliMetersOfMercury)),
+				null);
 
 		String narrativeGerman = cda.getNarrativeTextSectionCodedVitalSigns();
 		assertTrue(narrativeGerman.contains("Körpergewicht"));

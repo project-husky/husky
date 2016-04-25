@@ -31,11 +31,9 @@ import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.EDDiagnosesSection;
-import org.openhealthtools.mdht.uml.cda.ihe.pcc.PCCFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -54,7 +52,7 @@ public class CdaChEdesEdpn
 
 	private final CdaChEdesCommon mCommon;
 
-	private CodedVitalSignsSection mCodedVitalSigns;
+	// private CodedVitalSignsSection mCodedVitalSigns;
 
 	/**
 	 * <div class="en">Creates a new EDES EDPN CDA document</div>
@@ -131,19 +129,7 @@ public class CdaChEdesEdpn
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
-
-		// find or create (and add) the Section
-		ActiveProblemsSection section = getDoc().getActiveProblemsSection();
-		if (section == null) {
-			section = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
-			mCommon.addSection(section);
-		}
-
-		// add the MDHT Object to the section
-		section.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
-		section.createStrucDocText(mCommon.getProblemTable(section)); // Generate
-		// <text>ProblemConcern
-		// table</text>
+		mCommon.addActiveProblemConcern(activeProblemConcern, getDoc().getActiveProblemsSection());
 	}
 
 	/**
@@ -166,25 +152,19 @@ public class CdaChEdesEdpn
 	 * document</div> <div class="de">Fügt das codierte Vitalzeichen in das
 	 * Dokument ein</div>
 	 *
+	 * @param organizer
+	 *            The desired organizer where to put the observation
 	 * @param vitalSign
-	 *            VitalSign <div class="en">The coded vital sign observation to
-	 *            add</div> <div class="de">Das hinzuzufügende codierte
-	 *            Vitalzeichen</div>
+	 *            <div class="en">The coded vital sign observation to add</div>
+	 *            <div class="de">Das hinzuzufügende codierte Vitalzeichen</div>
+	 * @param author
+	 *            the author of the observation
 	 */
-	public void addCodedVitalSign(VitalSignObservation vitalSign, Author author) {
-		if (mCodedVitalSigns == null) {
-			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
-					.getCodedVitalSignsSection();
-			if (section == null) {
-				section = IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
-				mCommon.addSection(section);
-			}
-			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
-			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
-					languageCode, section);
-		}
-
-		mCodedVitalSigns.add(vitalSign, author, "vs");
+	public void addCodedVitalSign(VitalSignsOrganizer organizer, VitalSignObservation vitalSign,
+			Author author) {
+		mCommon.addCodedVitalSign(organizer, vitalSign, author,
+				getDoc().getCodedVitalSignsSection(),
+				LanguageCode.getEnum(getDoc().getLanguageCode().getCode()));
 	}
 
 	/**
@@ -198,19 +178,7 @@ public class CdaChEdesEdpn
 	 *            <div class="it"></div>
 	 */
 	public void addEdDiagnosis(ProblemConcern edDiagnosis) {
-
-		// find or create (and add) the Section
-		EDDiagnosesSection section = getDoc().getEDDiagnosesSection();
-		if (section == null) {
-			section = PCCFactory.eINSTANCE.createEDDiagnosesSection().init();
-			mCommon.addSection(section);
-		}
-
-		// add the MDHT Object to the section
-		section.addAct(edDiagnosis.copyMdhtProblemConcernEntry());
-		section.createStrucDocText(mCommon.getProblemTable(section)); // Generate
-		// <text>ProblemConcern
-		// table</text>
+		mCommon.addEdDiagnosis(edDiagnosis, getDoc().getEDDiagnosesSection());
 	}
 
 	/**
@@ -223,30 +191,6 @@ public class CdaChEdesEdpn
 	 */
 	public void addPastIllness(PastProblemConcern pastIllness) {
 		mCommon.addPastIllness(pastIllness, getDoc().getHistoryOfPastIllnessSection());
-	}
-
-	/**
-	 * <div class="en">Gets the active problems</div> <div class="de">Liefert
-	 * alle Aktiven Leiden zurück</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return the active problem concerns
-	 */
-	public List<ActiveProblemConcern> getActiveProblemConcerns() {
-		// Get the right section
-		ActiveProblemsSection section = getDoc().getActiveProblemsSection();
-		if (section == null) {
-			return Collections.emptyList();
-		}
-		final EList<Act> acts = section.getActs();
-
-		final List<ActiveProblemConcern> problemConcernEntries = new ArrayList<ActiveProblemConcern>();
-		for (final Act act : acts) {
-			final ActiveProblemConcern problemConcernEntry = new ActiveProblemConcern(
-					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
-			problemConcernEntries.add(problemConcernEntry);
-		}
-		return problemConcernEntries;
 	}
 
 	/**
@@ -267,16 +211,29 @@ public class CdaChEdesEdpn
 	 * @return List with coded vital sign observations
 	 */
 	public List<AbstractVitalSignObservation> getCodedVitalSigns() {
-		if (mCodedVitalSigns == null) {
-			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
-					.getCodedVitalSignsSection();
-			if (section == null) {
-				return Collections.emptyList();
-			}
-			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
-			mCodedVitalSigns = new CodedVitalSignsSection(languageCode, section);
+		org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
+				.getCodedVitalSignsSection();
+		if (section == null) {
+			return Collections.emptyList();
 		}
-		return mCodedVitalSigns.getCodedVitalSignObservations();
+		LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
+		CodedVitalSignsSection codedVitalSigns = new CodedVitalSignsSection(languageCode, section);
+		return codedVitalSigns.getCodedVitalSignObservations();
+	}
+
+	/**
+	 * Gets the CodedVitalSignsSection.
+	 *
+	 * @return the CodedVitalSignsSection
+	 */
+	public CodedVitalSignsSection getCodedVitalSignsSection() {
+		for (Section s : getMdht().getAllSections()) {
+			if (s instanceof org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) {
+				return new CodedVitalSignsSection(
+						(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) s);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -738,6 +695,41 @@ public class CdaChEdesEdpn
 	 */
 	public List<PastProblemConcern> getPastIllness() {
 		return mCommon.getPastIllness(getDoc().getHistoryOfPastIllnessSection());
+	}
+
+	/**
+	 * <div class="en">Gets the past problem concerns</div>
+	 * <div class="de">Liefert alle vergangen Leiden zurück</div>
+	 *
+	 * @return the past problem concern entries
+	 */
+	public List<PastProblemConcern> getPastProblemConcerns() {
+		// Search for the right section
+		final Section hopis = getDoc().getHistoryOfPastIllnessSection();
+		if (hopis == null) {
+			return null;
+		}
+		final EList<Act> acts = hopis.getActs();
+
+		final List<PastProblemConcern> problemConcernEntries = new ArrayList<PastProblemConcern>();
+		for (final Act act : acts) {
+			final PastProblemConcern problemConcernEntry = new PastProblemConcern(
+					(org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act);
+			problemConcernEntries.add(problemConcernEntry);
+		}
+		return problemConcernEntries;
+	}
+
+	/**
+	 * Sets the CodedVitalSignsSection.
+	 *
+	 * @param codedVitalSigns
+	 *            the CodedVitalSignsSection
+	 */
+	public void setCodedVitalSignsSection(CodedVitalSignsSection codedVitalSigns) {
+		if (getCodedVitalSignsSection() == null) {
+			getMdht().addSection(codedVitalSigns.copy());
+		}
 	}
 
 	/**
@@ -1218,5 +1210,25 @@ public class CdaChEdesEdpn
 	public void setNarrativeTextSectionSocialHistory(String text) {
 		mCommon.setNarrativeTextSection(SectionsEDES.SOCIAL_HISTORY,
 				getDoc().getSocialHistorySection(), text);
+	}
+
+	/**
+	 * Convenience function, which adds a Vital Sign Organizer and creates the
+	 * Vital Sign Section automatically with the current LanguageCode of the
+	 * document.
+	 *
+	 * @param organizer
+	 *            the organizer
+	 */
+	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
+		// Check if this section already exists. If so, get it, else create it.
+		CodedVitalSignsSection cvs;
+		if (getCodedVitalSignsSection() != null) {
+			cvs = getCodedVitalSignsSection();
+		} else {
+			cvs = new CodedVitalSignsSection(getLanguageCode());
+		}
+		cvs.setVitalSignsOrganizer(organizer);
+		setCodedVitalSignsSection(cvs);
 	}
 }

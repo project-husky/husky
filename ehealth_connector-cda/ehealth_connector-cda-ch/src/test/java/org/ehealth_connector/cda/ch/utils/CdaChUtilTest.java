@@ -57,24 +57,24 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUuidVacd(java.lang.String)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(java.lang.String)}
 	 * .
 	 */
 	@Test
 	public void testCreateUuidVacd() {
-		final II ref = CdaChUtil.createUuidVacd(testId);
+		final II ref = CdaChUtil.createUniqueIiFromString(testId);
 
 		assertEquals(testId, ref.getExtension());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUuidVacdIdentificator(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(org.ehealth_connector.common.Identificator)}
 	 * .
 	 */
 	@Test
 	public void testCreateUuidVacdIdentificator() {
-		final II ref = CdaChUtil.createUuidVacdIdentificator(testIdentiicator);
+		final II ref = CdaChUtil.createUniqueIiFromIdentificator(testIdentiicator);
 		assertEquals(CodeSystems.GLN.getCodeSystemId(), ref.getRoot());
 		assertEquals(testId, ref.getExtension());
 	}

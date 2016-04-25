@@ -21,8 +21,8 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AbstractAllergyConcern;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
@@ -45,7 +45,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param allergyConcern
-	 *          the allergy concern
+	 *            the allergy concern
 	 */
 	public AllergyConcern(AllergyIntoleranceConcern allergyConcern) {
 		super(allergyConcern);
@@ -55,11 +55,11 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param concern
-	 *          the concern
+	 *            the concern
 	 * @param problemEntry
-	 *          the problem entry
+	 *            the problem entry
 	 * @param concernStatus
-	 *          the concern status
+	 *            the concern status
 	 */
 	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {
@@ -70,15 +70,15 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * Instantiates a new allergy concern.
 	 *
 	 * @param concern
-	 *          the concern
+	 *            the concern
 	 * @param begin
-	 *          the begin
+	 *            the begin
 	 * @param end
-	 *          the end
+	 *            the end
 	 * @param problemEntry
-	 *          the problem entry
+	 *            the problem entry
 	 * @param concernStatus
-	 *          the concern status
+	 *            the concern status
 	 */
 	public AllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {
@@ -92,7 +92,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 */
 	@Override
 	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(id);
+		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
 		getConcernEntry().getIds().add(ii);
 	}
 

@@ -178,7 +178,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 *          the new id
 	 */
 	public void addId(Identificator codedId) {
-		final II ii = CdaChUtil.createUuidVacdIdentificator(codedId);
+		final II ii = CdaChUtil.createUniqueIiFromIdentificator(codedId);
 		this.getMdht().getIds().add(ii);
 	}
 
@@ -492,7 +492,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		getMdht().setPriorityCode(ce);
 		getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
-		getMdht().getIds().add(CdaChUtil.createUuidVacd(null));
+		getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}

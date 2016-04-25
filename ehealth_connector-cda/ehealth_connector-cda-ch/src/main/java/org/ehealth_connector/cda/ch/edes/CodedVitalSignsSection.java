@@ -57,8 +57,19 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	}
 
 	/**
+	 * Instantiates a new vital signs section.
+	 *
+	 * @param section
+	 *            the vital signs section
+	 */
+	protected CodedVitalSignsSection(
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section) {
+		super(section);
+	}
+
+	/**
 	 * Creates a new EDES VitalSignObservation.
-	 * 
+	 *
 	 * @return EDES VitalSignObservation
 	 */
 	@Override
@@ -68,11 +79,23 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 
 	/**
 	 * Creates a UUID for EDES documents as Identificator.
-	 * 
+	 *
 	 * @return UUID as Identificator
 	 */
 	@Override
 	protected Identificator getUuid() {
-		return CdaChUtil.createUuidEdes(null);
+		return CdaChUtil.createUniqueIdentificator();
 	}
+
+	/**
+	 * Sets the vital signs organizer.
+	 *
+	 * @param organizer
+	 *            the new vital signs organizer
+	 */
+	public void setVitalSignsOrganizer(VitalSignsOrganizer organizer) {
+		getMdht().getEntries().clear();
+		getMdht().addOrganizer(organizer.copy());
+	}
+
 }

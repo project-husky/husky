@@ -18,22 +18,19 @@ package org.ehealth_connector.cda.ch.utils;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.ehealth_connector.cda.ch.edes.CdaChEdesCommon;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -42,68 +39,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtil {
-
-	/**
-	 * <div class="en">Creates a UUID for EDES documents with the EDES root ID
-	 * and a generated extension.</div>
-	 *
-	 * @param id
-	 *            <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static Identificator createUuidEdes(String id) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(CdaChEdesCommon.OID_MAIN);
-		if (id == null) {
-			ii.setExtension(UUID.generate());
-		} else {
-			ii.setExtension(id);
-		}
-		return new Identificator(ii);
-	}
-
-	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	 * and a generated extension.</div>
-	 *
-	 * @param id
-	 *            <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static II createUuidVacd(String id) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(CdaChVacd.OID_MAIN);
-		if (id == null) {
-			ii.setExtension(UUID.generate());
-		} else {
-			// TODO should this not be ii.setExtension(id) ?
-			// ii.setRoot(id);
-			ii.setExtension(id);
-		}
-		return ii;
-	}
-
-	/**
-	 * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	 * (if the root id is null, otherwise the provided id will be used) and a
-	 * generated extension.</div>
-	 *
-	 * @param id
-	 *            <br>
-	 *            <div class="en"> the id</div>
-	 * @return the ii
-	 */
-	public static II createUuidVacdIdentificator(Identificator id) {
-		II ii;
-		if (id == null) {
-			ii = createUuidVacd(null);
-		} else {
-			ii = id.getIi();
-		}
-		return ii;
-	}
 
 	/**
 	 * <div class="en">Loads a CdaChEdesCtnn document from a given File.</div>
@@ -224,7 +159,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * <div class="en">Loads a CdaChLrqc document from an inputstream.</div>
 	 * <div class="de">Lädt ein CdaChLrqc aus einem Inputstream.</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param inputStream
 	 *            the inputstream
 	 * @throws Exception
@@ -326,6 +261,34 @@ public abstract class CdaChUtil extends CdaUtil {
 			ed.setReference(tel);
 			if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
 				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
+			} else {
+				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
+			}
+			er.getAct().setText(ed);
+		}
+		return er;
+	}
+
+	/**
+	 * Updates a Reference if it is a comment
+	 *
+	 * @param er
+	 *            the EntryRelationship
+	 * @param ref
+	 *            the reference
+	 * @param prefix
+	 *            the prefix of the reference
+	 * @return the EntryRelationship
+	 */
+	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
+			SectionsEDES prefix) {
+		if (Util.isComment(er)) {
+			// Get the ed and update it with the reference
+			final ED ed = er.getAct().getText();
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			ed.setReference(tel);
+			if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
 			}

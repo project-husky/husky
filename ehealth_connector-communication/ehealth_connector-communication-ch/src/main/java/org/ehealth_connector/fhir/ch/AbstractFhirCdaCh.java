@@ -27,21 +27,26 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.ch.FhirCdaChVacd.DocTypeCode;
 
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
 import ca.uhn.fhir.model.dstu2.resource.Basic;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
+import ca.uhn.fhir.model.dstu2.resource.Condition;
+import ca.uhn.fhir.model.dstu2.resource.DocumentManifest;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.TimeDt;
 
 public abstract class AbstractFhirCdaCh {
 	/**
@@ -50,6 +55,19 @@ public abstract class AbstractFhirCdaCh {
 	 */
 	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
 			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
+
+	private Observation createComment(String comment) {
+
+		final Observation fhirObservation = new Observation();
+		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
+
+		final CodeableConceptDt fhirCode = new CodeableConceptDt();
+		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
+		fhirObservation.setCode(fhirCode);
+		fhirObservation.setComments(comment);
+
+		return fhirObservation;
+	}
 
 	/**
 	 * <div class="en">Gets a list of eHC Authors from the given FHIR bundle
@@ -62,9 +80,14 @@ public abstract class AbstractFhirCdaCh {
 	public List<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
 		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor).isEmpty()
-					&& (entry.getResource() instanceof Organization)) {
-				retVal.add(FhirCommon.getAuthor((Organization) entry.getResource()));
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Person)) {
+				org.ehealth_connector.common.Author author = FhirCommon
+						.getAuthor((Person) entry.getResource());
+				TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+				author.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+				retVal.add(author);
 			}
 		}
 		return retVal;
@@ -189,6 +212,65 @@ public abstract class AbstractFhirCdaCh {
 	}
 
 	/**
+	 * <div class="en"> Gets the document date from the given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return the document Id
+	 */
+	public Date getDocumentDate(Bundle bundle) {
+		Date retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof DocumentManifest) {
+				final DocumentManifest fhirDocumentManifest = (DocumentManifest) entry
+						.getResource();
+				retVal = fhirDocumentManifest.getCreated();
+			}
+		}
+		return retVal;
+	};
+
+	/**
+	 * <div class="en"> Gets the document Id from the given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return the document Id
+	 */
+	public Identificator getDocumentId(Bundle bundle) {
+		Identificator retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof DocumentManifest) {
+				final DocumentManifest fhirDocumentManifest = (DocumentManifest) entry
+						.getResource();
+				final IdentifierDt docId = fhirDocumentManifest.getIdentifier().get(0);
+				retVal = new Identificator(docId.getSystem(), docId.getValue());
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * <div class="en"> Gets the document Set Id from the given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return the document Set Id
+	 */
+	public Identificator getDocumentSetId(Bundle bundle) {
+		Identificator retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof DocumentManifest) {
+				final DocumentManifest fhirDocumentManifest = (DocumentManifest) entry
+						.getResource();
+				final IdentifierDt docId = fhirDocumentManifest.getIdentifier().get(1);
+				retVal = new Identificator(docId.getSystem(), docId.getValue());
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
 	 * bundle
 	 *
@@ -220,13 +302,16 @@ public abstract class AbstractFhirCdaCh {
 	public org.ehealth_connector.common.Author getLegalAuthenticator(Bundle bundle) {
 		org.ehealth_connector.common.Author retVal = null;
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLegalAuthenticator).isEmpty()
-					&& (entry.getResource() instanceof Person)) {
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLegalAuthenticator);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Person)) {
 				retVal = FhirCommon.getAuthor((Person) entry.getResource());
+				TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+				retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * Gets an eHC Author object containing the legal authenticator from the
@@ -244,7 +329,11 @@ public abstract class AbstractFhirCdaCh {
 				if (entry.getResource() instanceof Basic) {
 					text = ((Basic) entry.getResource()).getText();
 				} else {
-					text = ((Observation) entry.getResource()).getText();
+					if (entry.getResource() instanceof Condition) {
+						text = ((Condition) entry.getResource()).getText();
+					} else {
+						text = ((Observation) entry.getResource()).getText();
+					}
 				}
 				if (text != null && text.getDiv().getValueAsString() != null) {
 					retVal = text.getDiv().getValueAsString();
@@ -255,7 +344,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * Gets the specimen collection entry.
@@ -355,18 +444,5 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return false;
-	}
-
-	private Observation createComment(String comment) {
-
-		final Observation fhirObservation = new Observation();
-		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
-
-		final CodeableConceptDt fhirCode = new CodeableConceptDt();
-		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
-		fhirObservation.setCode(fhirCode);
-		fhirObservation.setComments(comment);
-
-		return fhirObservation;
 	}
 }

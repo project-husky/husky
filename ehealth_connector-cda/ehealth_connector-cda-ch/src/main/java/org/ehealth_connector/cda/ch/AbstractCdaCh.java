@@ -44,7 +44,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
 	 *
 	 * @param doc
-	 *          the CDA-CH Object in its MDHT representation
+	 *            the CDA-CH Object in its MDHT representation
 	 */
 	public AbstractCdaCh(EClinicalDocument doc) {
 		super(doc);
@@ -62,13 +62,13 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *          the CDA-CH Object in its MDHT representation
+	 *            the CDA-CH Object in its MDHT representation
 	 * @param stylesheet
-	 *          the stylesheet for the document (e.g.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *            the stylesheet for the document (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 * @param css
-	 *          the Cascasing stylesheet for the document (e.g.
-	 *          '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
+	 *            the Cascasing stylesheet for the document (e.g.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
 	public AbstractCdaCh(EClinicalDocument doc, String stylesheet, String css) {
 		super(doc, stylesheet, css);
@@ -144,13 +144,13 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * @see org.ehealth_connector.cda.AbstractCda#setSetId(java.lang.String)
 	 */
 	@Override
-	protected void setSetId(String id) {
+	public void setSetId(Identificator id) {
 		if (id == null) {
 			getDoc().setSetId(EcoreUtil.copy(getDoc().getId()));
 		} else {
 			final II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot(AbstractCdaCh.OID_MAIN);
-			ii.setExtension(id);
+			ii.setRoot(id.getRoot());
+			ii.setExtension(id.getExtension());
 			getDoc().setSetId(ii);
 		}
 	}

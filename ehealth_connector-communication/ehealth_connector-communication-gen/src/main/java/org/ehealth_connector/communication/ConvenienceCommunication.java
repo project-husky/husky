@@ -693,7 +693,7 @@ public class ConvenienceCommunication {
 
 			// This is the eHealth Connector Root OID
 			// default value just in case...
-			String organizationalId = EHealthConnectorVersions.getCurrentVersion().oid();
+			String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
 
 			if (subSet.getUniqueId() == null) {
 				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
