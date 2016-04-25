@@ -749,9 +749,9 @@ public class Author {
 	 */
 	public void setTime(Date date) {
 		if (date != null) {
-			mAuthor.setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
+			mAuthor.setTime(DateUtil.convertDateToTsyyyyMMddHHmmssZZZZ(date));
 		} else {
-			mAuthor.setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(new Date()));
+			mAuthor.setTime(DateUtil.convertDateToTsyyyyMMddHHmmssZZZZ(new Date()));
 		}
 	}
 

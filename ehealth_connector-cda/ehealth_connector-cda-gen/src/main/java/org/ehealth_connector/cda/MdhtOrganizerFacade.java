@@ -27,7 +27,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 	}
 
 	public void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
+		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 
 	public void setStatusCode(StatusCode statusCode) {

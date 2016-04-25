@@ -110,7 +110,7 @@ public class SpecimenCollectionEntry
 	 *            the new effective time
 	 */
 	public void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
+		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 
 	/**

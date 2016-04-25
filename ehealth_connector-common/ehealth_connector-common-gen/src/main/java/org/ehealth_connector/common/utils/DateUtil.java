@@ -61,11 +61,33 @@ public class DateUtil {
 	 *            <div class="en"> date</div>
 	 * @return the ivl ts
 	 */
-	public static IVL_TS convertDateyyyyMMddHHmmssZZZZ(Date date) {
+	public static IVL_TS convertDateToIvlTsyyyyMMddHHmmssZZZZ(Date date) {
 		if (date == null) {
 			return createUnknownTime(null);
 		} else {
 			final IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
+
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
+			final String tsStr = sdf.format(date);
+
+			ts.setValue(tsStr);
+			return ts;
+		}
+	}
+
+	/**
+	 * <div class="en">Convert date.</div>
+	 *
+	 * @param date
+	 *            <br>
+	 *            <div class="en"> date</div>
+	 * @return the ivl ts
+	 */
+	public static TS convertDateToTsyyyyMMddHHmmssZZZZ(Date date) {
+		if (date == null) {
+			return createUnknownTime(null);
+		} else {
+			final TS ts = DatatypesFactory.eINSTANCE.createTS();
 
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
 			final String tsStr = sdf.format(date);

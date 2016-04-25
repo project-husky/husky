@@ -28,8 +28,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
  * is independent of the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implementing the facade to it,
- *          extending an Act
+ *            the model type to provide for implementing the facade to it,
+ *            extending an Act
  */
 public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E> {
 
@@ -37,7 +37,7 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtParticipant1Facade(E mdht) {
 		super(mdht, null, null);
@@ -71,9 +71,9 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 * Sets the time as Data object
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 */
 	public void setTime(Date date) {
-		getMdht().setTime(DateUtil.convertDateyyyyMMddHHmmssZZZZ(date));
+		getMdht().setTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 }
