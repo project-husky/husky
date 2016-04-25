@@ -44,7 +44,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	static private String mpiCommunityOid = UUID.generate();
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The home community oid */
 	private String homeCommunityOid;

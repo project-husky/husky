@@ -211,10 +211,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *          aktive Leiden</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
-		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection aps;
-
 		// find or create (and add) the Section
-		aps = getDoc().getActiveProblemsSection();
+		org.openhealthtools.mdht.uml.cda.ihe.ActiveProblemsSection aps = getDoc()
+				.getActiveProblemsSection();
 		if (aps == null) {
 			aps = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
 			aps.setTitle(
@@ -236,7 +235,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			aps.createStrucDocText("Keine Angaben");
 			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -250,10 +249,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *          <div class="it"></div>
 	 */
 	public void addAllergyConcern(AllergyConcern allergyConcern) {
-		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars;
-
 		// find or create (and add) the Section
-		ars = getDoc().getAllergiesReactionsSection();
+		org.openhealthtools.mdht.uml.cda.ihe.AllergiesReactionsSection ars = getDoc()
+				.getAllergiesReactionsSection();
 		if (ars == null) {
 			ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
 			ars.setTitle(
@@ -278,7 +276,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			ars.createStrucDocText("Keine Angaben");
 			allergyConcern.copyMdhtAllergyConcern().getEntryRelationships().get(0).getObservation()
-					.setText(Util.createEd(""));
+			.setText(Util.createEd(""));
 		}
 	}
 
@@ -320,11 +318,10 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *          the comment
 	 */
 	public void addComment(String comment) {
-		Section rs;
-		SimpleTextBuilder sb;
+
 
 		// find or create (and add) the Section
-		rs = findRemarksSection();
+		Section rs = findRemarksSection();
 		if (rs == null) {
 			rs = CHFactory.eINSTANCE.createRemarksSection().init();
 			for (final II ii : rs.getTemplateIds()) {
@@ -340,8 +337,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
 		rs.addAct(mComment);
 
-		ED reference;
 		// update the MDHT Object content references to CDA level 1 text
+		SimpleTextBuilder sb = null;
 		if (rs.getText() != null) {
 			final String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
 			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
@@ -349,7 +346,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
 		}
 
-		reference = Util.createReference(sb.getNewTextContentIDNr(),
+		final ED reference = Util.createReference(sb.getNewTextContentIDNr(),
 				SectionsVACD.REMARKS.getContentIdPrefix());
 
 		// create the CDA level 1 text
@@ -404,22 +401,22 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 */
 	public void addLaboratoryObservation(
 			org.ehealth_connector.cda.ch.vacd.LaboratoryObservation laboratoryObservation) {
-		org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss;
-		LaboratoryReportDataProcessingEntry lrdpe;
-		org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct spa;
 		// LaboratoryObservationTextBuilder tb;
 
+		org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct spa = null;
 		// Dieser Teil sollte in dem Objekt selbst ausgeführt werden. Also
 		// in LaboratoryObservation die Battery etc. erzeugen.
 		// find or create (and add) the Section
-		lss = getDoc().getLaboratorySpecialtySection();
+		org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss = getDoc()
+				.getLaboratorySpecialtySection();
 		if (lss == null) {
 			lss = LABFactory.eINSTANCE.createLaboratorySpecialtySection().init();
-			lrdpe = LABFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init();
+			final LaboratoryReportDataProcessingEntry lrdpe = LABFactory.eINSTANCE
+					.createLaboratoryReportDataProcessingEntry().init();
 			spa = LABFactory.eINSTANCE.createSpecimenAct().init();
 
 			// Fixed code for LaboratorySpecialty
-			Code labSpec = new Code("2.16.840.1.113883.6.1", "18727-8", "LOINC", "SEROLOGY STUDIES");
+			final Code labSpec = new Code("2.16.840.1.113883.6.1", "18727-8", "LOINC", "SEROLOGY STUDIES");
 			lss.setCode(labSpec.getCE());
 			lss.getEntries().add(lrdpe);
 			lrdpe.setAct(spa);
@@ -432,7 +429,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		}
 		// If the section is already present, get instances of the templates
 		else {
-			lrdpe = (LaboratoryReportDataProcessingEntry) lss.getEntries().get(0);
+			final LaboratoryReportDataProcessingEntry lrdpe = (LaboratoryReportDataProcessingEntry) lss
+					.getEntries().get(0);
 			spa = (org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) lrdpe.getAct();
 		}
 
@@ -448,9 +446,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// Set the Type codes
 		lbo.getComponents().get(lbo.getComponents().size() - 1)
-				.setTypeCode(ActRelationshipHasComponent.COMP);
+		.setTypeCode(ActRelationshipHasComponent.COMP);
 		spa.getEntryRelationships().get(spa.getEntryRelationships().size() - 1)
-				.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+		.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		// Update the MDHT Object content references to CDA level 1 text
 		// (if necessary)
@@ -513,7 +511,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			hopis.createStrucDocText("");
 			pastProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -1118,7 +1116,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		if (problemConcerns != null) {
 			for (final ActiveProblemConcern aConcern : problemConcerns) {
 				final Value value = aConcern.getProblemEntry().getValue();
-				if (value != null && value.getCode() != null
+				if ((value != null) && (value.getCode() != null)
 						&& !StringUtils.isEmpty(value.getCode().getCode())) {
 					if (RiskOfComplications.isInValueSet(value.getCode().getCode())) {
 						riskOfComplications.add(aConcern);
@@ -1146,7 +1144,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		if (problemConcerns != null) {
 			for (final ActiveProblemConcern aConcern : problemConcerns) {
 				final Value value = aConcern.getProblemEntry().getValue();
-				if (value != null && value.getCode() != null
+				if ((value != null) && (value.getCode() != null)
 						&& !StringUtils.isEmpty(value.getCode().getCode())) {
 					if (RiskOfExposure.isInValueSet(value.getCode().getCode())) {
 						riskOfExposures.add(aConcern);

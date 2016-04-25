@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
  * Informationen zu Isolaten und Keimen angegeben werden.</div>
  */
 public class LaboratoryIsolateOrganizer
-		extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
+extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
 
 	/**
 	 * Instantiates a new laboratory isolate organizer.
@@ -85,9 +85,9 @@ public class LaboratoryIsolateOrganizer
 	 */
 	public LaboratoryIsolateOrganizer(String reference) {
 		this();
-		Code code = new Code();
+		final Code code = new Code();
 		code.setOriginalTextReference(reference);
-		Specimen specimen = new Specimen();
+		final Specimen specimen = new Specimen();
 		specimen.setCode(code);
 		setSpecimen(specimen);
 	}
@@ -101,7 +101,7 @@ public class LaboratoryIsolateOrganizer
 	 *            the time
 	 */
 	public void addLaboratory(Organization organization, Date time) {
-		Participant p = Util.createParticipantFromOrganization(organization);
+		final Participant p = Util.createParticipantFromOrganization(organization);
 		p.setTime(time);
 		this.addParticipant(p);
 	}
@@ -187,7 +187,7 @@ public class LaboratoryIsolateOrganizer
 	 * @return the specimen
 	 */
 	public Specimen getSpecimen() {
-		if (getMdht().getSpecimens() != null && !getMdht().getSpecimens().isEmpty()) {
+		if ((getMdht().getSpecimens() != null) && !getMdht().getSpecimens().isEmpty()) {
 			return new Specimen(getMdht().getSpecimens().get(0));
 		}
 		return null;
@@ -204,7 +204,7 @@ public class LaboratoryIsolateOrganizer
 		specimen.getMdht().setTypeCode(ParticipationType.SPC);
 		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
 		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
-				.setClassCode(EntityClassRoot.MIC);
+		.setClassCode(EntityClassRoot.MIC);
 		getMdht().getSpecimens().add(specimen.getMdht());
 	}
 }

@@ -57,7 +57,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			setTitle("Medication Treatment Plan");
 			break;
 		}
-		MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(getLanguageCode());
+		final MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(
+				getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 

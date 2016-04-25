@@ -79,16 +79,16 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 * <div class="en">the resulting CDA document contains hiv patient
 		 * demographics</div><div class="de"></div> <div class="fr"></div>
 		 */
-		HIV,
-		/**
-		 * <div class="en">the resulting CDA document contains full patient
-		 * demographics</div><div class="de"></div><div class="fr"></div>
-		 */
-		PATIENT,
-		/**
-		 * <div class="en">the resulting CDA document contains masked patient
-		 * demographics</div><div class="de"></div> <div class="fr"></div>
-		 */
+		HIV, /**
+				 * <div class="en">the resulting CDA document contains full
+				 * patient demographics</div><div class="de"></div>
+				 * <div class="fr"></div>
+				 */
+		PATIENT, /**
+					 * <div class="en">the resulting CDA document contains
+					 * masked patient demographics</div><div class="de"></div>
+					 * <div class="fr"></div>
+					 */
 		PSEUDONYMIZED
 	}
 
@@ -383,22 +383,22 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			doc.addAuthor(author);
 		}
 		// LegalAuthenticator
-		Author legalAuth = getLegalAuthenticator(bundle);
+		final Author legalAuth = getLegalAuthenticator(bundle);
 		if (legalAuth != null) {
 			doc.setLegalAuthenticator(legalAuth);
 		}
 		// Custodian
 		doc.setEmtpyCustodian();
 		// IntendedRecipient
-		IntendedRecipient ir = getIntendedRecipient(bundle);
+		final IntendedRecipient ir = getIntendedRecipient(bundle);
 		doc.addIntendedRecipient(ir);
 		// InFulfillmentOf
-		Identificator ifoId = getInFulfillmentOf(bundle);
+		final Identificator ifoId = getInFulfillmentOf(bundle);
 		if (ifoId != null) {
 			doc.addInFulfillmentOf(ifoId);
 		}
 		// DocVersion
-		Integer docVersion = getDocVersion(bundle);
+		final Integer docVersion = getDocVersion(bundle);
 		if (docVersion != null) {
 			doc.setVersion(null, docVersion);
 		}
@@ -408,20 +408,21 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 		// Body
 		// Laboratory SpecialtySections
-		List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
-		Code sectionCode = lssList.get(0).getCode();
+		final List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
+		final Code sectionCode = lssList.get(0).getCode();
 
 		// Laboratory Battery Organizers
-		List<LaboratoryBatteryOrganizer> laboratoryBatteryOrganizers = getLaboratoryBatteryOrganizers(
+		final List<LaboratoryBatteryOrganizer> laboratoryBatteryOrganizers = getLaboratoryBatteryOrganizers(
 				bundle);
-		if (laboratoryBatteryOrganizers != null && !laboratoryBatteryOrganizers.isEmpty()) {
-			for (LaboratoryBatteryOrganizer lbo : laboratoryBatteryOrganizers) {
+		if ((laboratoryBatteryOrganizers != null) && !laboratoryBatteryOrganizers.isEmpty()) {
+			for (final LaboratoryBatteryOrganizer lbo : laboratoryBatteryOrganizers) {
 				doc.addLaboratoryBatteryOrganizer(lbo);
 			}
 		}
 
 		// LaboratorySpecialtySection
-		String narrative = getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialtySection);
+		final String narrative = getNarrative(bundle,
+				FhirCommon.urnUseAsLaboratorySpecialtySection);
 		doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
 
 		return doc;
@@ -453,33 +454,33 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
 		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> observations = entry
+			final List<ExtensionDt> observations = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
-			if (observations != null && !observations.isEmpty()
+			if ((observations != null) && !observations.isEmpty()
 					&& (entry.getResource() instanceof Observation)) {
-				Observation observation = (Observation) entry.getResource();
-				IDatatype fhirEffectiveTime = observation.getEffective();
+				final Observation observation = (Observation) entry.getResource();
+				final IDatatype fhirEffectiveTime = observation.getEffective();
 				Date effectiveTime = new Date();
 				if (fhirEffectiveTime instanceof DateTimeDt) {
 					effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
 				}
-				List<Component> components = observation.getComponent();
-				for (Component component : components) {
-					CodingDt fhirCode = component.getCode().getCodingFirstRep();
-					IDatatype fhirValue = component.getValue();
+				final List<Component> components = observation.getComponent();
+				for (final Component component : components) {
+					final CodingDt fhirCode = component.getCode().getCodingFirstRep();
+					final IDatatype fhirValue = component.getValue();
 
-					Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+					final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 							fhirCode.getCode(), fhirCode.getDisplay());
 					Value value = null;
 					if (fhirValue instanceof QuantityDt) {
 						// type PQ
 						final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-						PQ pq = DatatypesFactory.eINSTANCE.createPQ();
+						final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
 						pq.setUnit(fhirQuantity.getUnit());
 						pq.setValue(fhirQuantity.getValue());
 						value = new Value(pq);
 					}
-					if (code != null && value != null) {
+					if ((code != null) && (value != null)) {
 						retVal.add(new VitalSignObservation(code, effectiveTime, value));
 					}
 				}
@@ -524,10 +525,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all InFulfillmentOfs
-			List<ExtensionDt> ifoEntries = entry
+			final List<ExtensionDt> ifoEntries = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocVersion);
-			if (ifoEntries != null && !ifoEntries.isEmpty()) {
-				Basic ifo = (Basic) entry.getResource();
+			if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
+				final Basic ifo = (Basic) entry.getResource();
 				return Integer.parseInt(ifo.getCode().getCodingFirstRep().getCode());
 			}
 		}
@@ -540,10 +541,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all InFulfillmentOfs
-			List<ExtensionDt> ifoEntries = entry
+			final List<ExtensionDt> ifoEntries = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInFulfillmentOf);
-			if (ifoEntries != null && !ifoEntries.isEmpty()) {
-				Basic ifo = (Basic) entry.getResource();
+			if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
+				final Basic ifo = (Basic) entry.getResource();
 				return FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
 			}
 		}
@@ -566,23 +567,24 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all LaboratoryBatteryOrganizers
-			List<ExtensionDt> laboratoryBatteryOrganizers = entry
+			final List<ExtensionDt> laboratoryBatteryOrganizers = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
-			if (laboratoryBatteryOrganizers != null && !laboratoryBatteryOrganizers.isEmpty()) {
-				org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
-				Observation labObsList = (Observation) entry.getResource();
+			if ((laboratoryBatteryOrganizers != null) && !laboratoryBatteryOrganizers.isEmpty()) {
+				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
+				final Observation labObsList = (Observation) entry.getResource();
 
 				// Set the Organizer Attributes
 				// Status Code
-				String statusCode = getValueFromKeyValueString(labObsList.getText(), "statusCode");
+				final String statusCode = getValueFromKeyValueString(labObsList.getText(),
+						"statusCode");
 				if (statusCode != null) {
 					lbo.setStatusCode(StatusCode.getEnum(statusCode));
 				}
 
 				// Add all LaboratoryObservations
-				for (Related relatedObs : labObsList.getRelated()) {
-					Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-					LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
+				for (final Related relatedObs : labObsList.getRelated()) {
+					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
+					final LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
 					lbo.addLaboratoryObservation(labObs);
 				}
 				retVal.add(lbo);
@@ -607,7 +609,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		if (fhirObservation.getValue() instanceof QuantityDt) {
 			// type PQ
 			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
-			Value v = new Value(fhirQuantity.getValue().toString(),
+			final Value v = new Value(fhirQuantity.getValue().toString(),
 					Ucum.AHGEquivalentsPerMilliLiter);
 
 			// fix for the bug(?), which ommits the unit when it´s set to "1"
@@ -655,18 +657,18 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 	private List<LaboratorySpecialtySection> getLaboratorySpecialtySections(Bundle bundle) {
 
-		List<LaboratorySpecialtySection> lssList = new ArrayList<LaboratorySpecialtySection>();
+		final List<LaboratorySpecialtySection> lssList = new ArrayList<LaboratorySpecialtySection>();
 
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all LaboratorySpecialtySections
-			List<ExtensionDt> specialtySections = entry
+			final List<ExtensionDt> specialtySections = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratorySpecialtySection);
-			if (specialtySections != null && !specialtySections.isEmpty()) {
-				Observation obs = (Observation) entry.getResource();
+			if ((specialtySections != null) && !specialtySections.isEmpty()) {
+				final Observation obs = (Observation) entry.getResource();
 
-				org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection();
-				Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
+				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection();
+				final Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
 				code.setCodeSystemName("LOINC");
 				lss.setCode(code);
 				lssList.add(lss);
@@ -689,24 +691,24 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		for (final Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsReferralOrderingPhysician)
 					.isEmpty()) {
-				Person physician = (Person) entry.getResource();
+				final Person physician = (Person) entry.getResource();
 
 				Name name = null;
 				if (physician.getNameFirstRep() != null) {
 					name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
 				}
-				Address address = FhirCommon
+				final Address address = FhirCommon
 						.fhirAddressToEhcAddress(physician.getAddressFirstRep());
-				Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
+				final Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
 
-				AssociatedEntity entity = new AssociatedEntity(name, address, telecoms);
-				for (IdentifierDt id : physician.getIdentifier()) {
+				final AssociatedEntity entity = new AssociatedEntity(name, address, telecoms);
+				for (final IdentifierDt id : physician.getIdentifier()) {
 					entity.addId(FhirCommon.fhirIdentifierToEhcIdentificator(id));
 				}
 
-				if (physician.getContained() != null
+				if ((physician.getContained() != null)
 						&& !physician.getContained().getContainedResources().isEmpty()) {
-					for (IResource res : physician.getContained().getContainedResources()) {
+					for (final IResource res : physician.getContained().getContainedResources()) {
 						if (res instanceof Organization) {
 							entity.setOrganization(FhirCommon.getOrganization(res));
 						}

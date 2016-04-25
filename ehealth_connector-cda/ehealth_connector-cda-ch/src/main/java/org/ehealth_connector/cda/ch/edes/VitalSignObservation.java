@@ -97,7 +97,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public VitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
-		mVitalSignObservation = observation;
+		setVitalSignObservation(observation);
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	@Override
 	protected void initMdht() {
 		super.initMdht();
-		Identificator id = new Identificator(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
-		mVitalSignObservation.getTemplateIds().add(id.getIi());
+		final Identificator id = new Identificator(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
+		getVitalSignObservation().getTemplateIds().add(id.getIi());
 	}
 
 	/**
@@ -161,8 +161,8 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public void setInterpretationCode(ObservationInterpretationForVitalSign code) {
 		if (code != null) {
-			mVitalSignObservation.getInterpretationCodes().clear();
-			mVitalSignObservation.getInterpretationCodes().add(code.getCE());
+			getVitalSignObservation().getInterpretationCodes().clear();
+			getVitalSignObservation().getInterpretationCodes().add(code.getCE());
 		}
 	}
 

@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.SC;
 public class AuthoringDevice {
 
 	/** The MDHT authoring device object. */
-	org.openhealthtools.mdht.uml.cda.AuthoringDevice mAuthoringDevice;
+	private org.openhealthtools.mdht.uml.cda.AuthoringDevice mAuthoringDevice;
 
 	/**
 	 * Instantiates a new authoring device.
@@ -81,8 +81,8 @@ public class AuthoringDevice {
 	 * @return the software name
 	 */
 	public String getSoftwareName() {
-		if (mAuthoringDevice.getSoftwareName() != null
-				&& mAuthoringDevice.getSoftwareName().getText() != null) {
+		if ((mAuthoringDevice.getSoftwareName() != null)
+				&& (mAuthoringDevice.getSoftwareName().getText() != null)) {
 			return mAuthoringDevice.getSoftwareName().getText();
 		}
 		return null;
@@ -95,7 +95,7 @@ public class AuthoringDevice {
 	 *            the new software name
 	 */
 	public void setSoftwareName(String name) {
-		SC sc = DatatypesFactory.eINSTANCE.createSC();
+		final SC sc = DatatypesFactory.eINSTANCE.createSC();
 		sc.addText(name);
 		mAuthoringDevice.setSoftwareName(sc);
 	}

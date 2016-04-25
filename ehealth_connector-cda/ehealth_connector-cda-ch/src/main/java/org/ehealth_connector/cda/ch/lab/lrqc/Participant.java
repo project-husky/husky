@@ -99,7 +99,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 */
 	public void addGlnId(String gln) {
 		if (gln != null) {
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setRoot(CodeSystems.GLN.getCodeSystemId());
 			ii.setExtension(gln);
 			getMdht().getAssociatedEntity().getIds().add(ii);
@@ -115,7 +115,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 *            automatically, according to CdaChLrqc.ZSR_ID_ROOT
 	 */
 	public void addZsrId(String zsrNumber) {
-		II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(CdaChLrqc.ZSR_ID_ROOT);
 		ii.setExtension(zsrNumber);
 		getMdht().getAssociatedEntity().getIds().add(ii);
@@ -139,7 +139,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 * @return the list of GLN Id extensions
 	 */
 	public List<String> getGlnIds() {
-		ArrayList<String> al = new ArrayList<String>();
+		final List<String> al = new ArrayList<String>();
 		for (final II i : getMdht().getAssociatedEntity().getIds()) {
 			if (i.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 				al.add(i.getExtension());
@@ -155,8 +155,8 @@ public class Participant extends MdhtFacade<Participant1> {
 	 * @return the list of ZSR IDs
 	 */
 	public List<String> getZsrIds() {
-		ArrayList<String> zl = new ArrayList<String>();
-		for (II ii : getMdht().getAssociatedEntity().getIds()) {
+		final List<String> zl = new ArrayList<String>();
+		for (final II ii : getMdht().getAssociatedEntity().getIds()) {
 			if (ii.getRoot().equals(CdaChLrqc.ZSR_ID_ROOT)) {
 				zl.add(ii.getExtension());
 			}

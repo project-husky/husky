@@ -34,10 +34,10 @@ public class SimpleTextBuilder extends TextBuilder {
 		return count;
 	}
 
-	String contentIdPrefix;
-	String text;
+	private String contentIdPrefix;
+	private String text;
 
-	int currentContentId;
+	private int currentContentId;
 
 	public SimpleTextBuilder(ContentIdPrefix section, String newText) {
 		contentIdPrefix = section.getContentIdPrefix();

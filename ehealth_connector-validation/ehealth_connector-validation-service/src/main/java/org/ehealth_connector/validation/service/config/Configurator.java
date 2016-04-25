@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class Configurator {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Parser used to process the application's XML configuration file */
 	private final ConfigurationParser configurationParser;
@@ -67,7 +67,7 @@ public class Configurator {
 	 *             if no implementation of the schema language is available.
 	 */
 	public Configuration createConfiguration() throws ConfigurationException {
-		ConfigurationType configurationType = getConfigurationParser().parse();
+		final ConfigurationType configurationType = getConfigurationParser().parse();
 		setupHomeDirectory(configurationType);
 		return new Configuration(configurationType);
 	}
@@ -119,7 +119,7 @@ public class Configurator {
 		}
 		try {
 			homeDir = homeDir.getCanonicalFile();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new ConfigurationException(e);
 		}
 		log.info("Setting application base directory to '{}'", homeDir);

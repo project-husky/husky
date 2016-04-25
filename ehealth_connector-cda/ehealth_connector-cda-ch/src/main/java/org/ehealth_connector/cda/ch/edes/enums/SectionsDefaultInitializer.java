@@ -62,19 +62,19 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class SectionsDefaultInitializer {
 
 	private CS getCS(String code) {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}
 
 	private CD getNullFlavorCd() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setNullFlavor(NullFlavor.NA);
 		return cd;
 	}
 
 	private CE getNullFlavorCe() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NA);
 		return ce;
 	}
@@ -84,33 +84,33 @@ public class SectionsDefaultInitializer {
 	}
 
 	private IVL_PQ getNullFlavorIVL_PQ() {
-		IVL_PQ ivl = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVL_PQ ivl = DatatypesFactory.eINSTANCE.createIVL_PQ();
 		ivl.setNullFlavor(NullFlavor.UNK);
 		return ivl;
 	}
 
 	private IVL_TS getNullFlavorIVL_TS() {
-		IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
 		time.setNullFlavor(NullFlavor.UNK);
 		return time;
 	}
 
 	private IVL_TS getNullFlavorIVL_TSLow() {
-		IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
-		IVXB_TS unk = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		final IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVXB_TS unk = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		unk.setNullFlavor(NullFlavor.UNK);
 		time.setLow(unk);
 		return time;
 	}
 
 	private IVL_TS getNullFlavorIVL_TSLowHigh() {
-		IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
-		IVXB_TS unk = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		final IVL_TS time = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVXB_TS unk = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		unk.setNullFlavor(NullFlavor.UNK);
 		time.setHigh(unk);
-		unk = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		unk.setNullFlavor(NullFlavor.UNK);
-		time.setLow(unk);
+		final IVXB_TS unk2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		unk2.setNullFlavor(NullFlavor.UNK);
+		time.setLow(unk2);
 		return time;
 	}
 
@@ -119,7 +119,7 @@ public class SectionsDefaultInitializer {
 	}
 
 	public ActiveProblemsSection init(ActiveProblemsSection section) {
-		Act act = CDAFactory.eINSTANCE.createAct();
+		final Act act = CDAFactory.eINSTANCE.createAct();
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.EVN);
 		act.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5.2", "").getIi());
@@ -131,15 +131,15 @@ public class SectionsDefaultInitializer {
 		act.setText(getTodoText());
 		act.setEffectiveTime(getNullFlavorIVL_TSLowHigh());
 
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
+		final Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.setNegationInd(false);
 
 		observation.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 
 		observation.getIds().add(getNullFlavorIi());
 		observation.setCode(getNullFlavorCd());
@@ -148,7 +148,7 @@ public class SectionsDefaultInitializer {
 		observation.setEffectiveTime(getNullFlavorIVL_TSLow());
 		observation.getValues().add(getNullFlavorCd());
 
-		EntryRelationship relationship = CDAFactory.eINSTANCE.createEntryRelationship();
+		final EntryRelationship relationship = CDAFactory.eINSTANCE.createEntryRelationship();
 		relationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		relationship.setInversionInd(false);
 		relationship.setAct(act);
@@ -161,11 +161,11 @@ public class SectionsDefaultInitializer {
 	}
 
 	public AcuityAssessmentSection init(AcuityAssessmentSection section) {
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
+		final Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.13.3.1", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.13.3.1", "").getIi());
 		observation.setCode(getNullFlavorCd());
 		observation.getIds().add(getNullFlavorIi());
 		observation.setText(getTodoText());
@@ -175,7 +175,7 @@ public class SectionsDefaultInitializer {
 	}
 
 	public AllergiesReactionsSection init(AllergiesReactionsSection section) {
-		Act act = CDAFactory.eINSTANCE.createAct();
+		final Act act = CDAFactory.eINSTANCE.createAct();
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.EVN);
 
@@ -188,20 +188,20 @@ public class SectionsDefaultInitializer {
 		act.setStatusCode(getCS("completed"));
 		act.setEffectiveTime(getNullFlavorIVL_TSLowHigh());
 
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
+		final Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.setNegationInd(false);
 
 		observation.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 		observation.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.6", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.6", "").getIi());
 
 		observation.getIds().add(getNullFlavorIi());
-		Code code = new Code("2.16.840.1.113883.5.4", "OINT", "ObservationIntoleranceType",
+		final Code code = new Code("2.16.840.1.113883.5.4", "OINT", "ObservationIntoleranceType",
 				"intolerance");
 		observation.setCode(code.getCD());
 
@@ -210,7 +210,7 @@ public class SectionsDefaultInitializer {
 		observation.setEffectiveTime(getNullFlavorIVL_TSLow());
 		observation.getValues().add(getNullFlavorCd());
 
-		EntryRelationship relationship = CDAFactory.eINSTANCE.createEntryRelationship();
+		final EntryRelationship relationship = CDAFactory.eINSTANCE.createEntryRelationship();
 		relationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		relationship.setInversionInd(false);
 		relationship.setAct(act);
@@ -223,14 +223,14 @@ public class SectionsDefaultInitializer {
 	}
 
 	public EDDiagnosesSection init(EDDiagnosesSection section) {
-		Observation observation = CDAFactory.eINSTANCE.createObservation();
+		final Observation observation = CDAFactory.eINSTANCE.createObservation();
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.setNegationInd(false);
 		observation.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 		observation.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.setCode(getNullFlavorCd());
 		observation.getIds().add(getNullFlavorIi());
 		observation.setText(getTodoText());
@@ -242,11 +242,11 @@ public class SectionsDefaultInitializer {
 	}
 
 	public EDDispositionSection init(EDDispositionSection section) {
-		Act act = CDAFactory.eINSTANCE.createAct();
+		final Act act = CDAFactory.eINSTANCE.createAct();
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.INT);
 		act.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.2", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.2", "").getIi());
 		act.setCode(getNullFlavorCd());
 		act.getIds().add(getNullFlavorIi());
 		act.setText(getTodoText());
@@ -257,25 +257,25 @@ public class SectionsDefaultInitializer {
 	}
 
 	public ImmunizationsSection init(ImmunizationsSection section) {
-		SubstanceAdministration administration = CDAFactory.eINSTANCE
+		final SubstanceAdministration administration = CDAFactory.eINSTANCE
 				.createSubstanceAdministration();
 		administration.setClassCode(ActClass.SBADM);
 		administration.setMoodCode(x_DocumentSubstanceMood.EVN);
 		administration.setNegationInd(false);
 
 		administration.getTemplateIds()
-				.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
+		.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.12", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.12", "").getIi());
 
 		administration.getIds().add(getNullFlavorIi());
-		Code code = new Code("2.16.840.1.113883.5.4", "IMMUNIZ");
+		final Code code = new Code("2.16.840.1.113883.5.4", "IMMUNIZ");
 		administration.setCode(code.getCD());
 		administration.setText(getTodoText());
 		administration.setStatusCode(getCS("completed"));
@@ -287,10 +287,10 @@ public class SectionsDefaultInitializer {
 		administration.getEffectiveTimes().add(getNullFlavorIVL_TS());
 		administration.getApproachSiteCodes().add(getNullFlavorCd());
 
-		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
-		ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
+		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
+		final ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
 		product.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
 		product.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.53", "").getIi());
 		product.getIds().add(getNullFlavorIi());
 		product.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
@@ -301,22 +301,22 @@ public class SectionsDefaultInitializer {
 	}
 
 	public MedicationsSection init(MedicationsSection section) {
-		SubstanceAdministration administration = CDAFactory.eINSTANCE
+		final SubstanceAdministration administration = CDAFactory.eINSTANCE
 				.createSubstanceAdministration();
 		administration.setClassCode(ActClass.SBADM);
 		administration.setMoodCode(x_DocumentSubstanceMood.EVN);
 
 		administration.getTemplateIds()
-				.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
+		.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
 		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
 
 		administration.getIds().add(getNullFlavorIi());
-		Code code = new Code("2.16.840.1.113883.5.4", "DRUG", "Medikamentöse Therapie");
+		final Code code = new Code("2.16.840.1.113883.5.4", "DRUG", "Medikamentöse Therapie");
 		administration.setCode(code.getCD());
 		administration.setText(getTodoText());
 		administration.setStatusCode(getCS("completed"));
@@ -327,10 +327,10 @@ public class SectionsDefaultInitializer {
 		administration.setRateQuantity(getNullFlavorIVL_PQ());
 		administration.getEffectiveTimes().add(getNullFlavorIVL_TS());
 
-		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
-		ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
+		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
+		final ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
 		product.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
 		product.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.53", "").getIi());
 		product.getIds().add(getNullFlavorIi());
 		product.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
@@ -341,11 +341,11 @@ public class SectionsDefaultInitializer {
 	}
 
 	public ModeOfArrivalSection init(ModeOfArrivalSection section) {
-		Act act = CDAFactory.eINSTANCE.createAct();
+		final Act act = CDAFactory.eINSTANCE.createAct();
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.EVN);
 		act.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.1", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.1", "").getIi());
 		act.setCode(getNullFlavorCd());
 		act.getIds().add(getNullFlavorIi());
 		act.setText(getTodoText());
@@ -355,13 +355,13 @@ public class SectionsDefaultInitializer {
 	}
 
 	public ProceduresAndInterventionsSection init(ProceduresAndInterventionsSection section) {
-		Procedure procedure = CDAFactory.eINSTANCE.createProcedure();
+		final Procedure procedure = CDAFactory.eINSTANCE.createProcedure();
 		procedure.setClassCode(ActClass.PROC);
 		procedure.setMoodCode(x_DocumentProcedureMood.EVN);
 		procedure.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.19", "").getIi());
+		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.19", "").getIi());
 		procedure.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.29", "").getIi());
+		.add(new Identificator("2.16.840.1.113883.10.20.1.29", "").getIi());
 		procedure.setCode(getNullFlavorCd());
 		procedure.getIds().add(getNullFlavorIi());
 		procedure.setText(getTodoText());

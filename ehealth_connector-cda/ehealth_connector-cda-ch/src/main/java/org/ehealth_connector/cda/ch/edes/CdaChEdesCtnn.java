@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *
  */
 public class CdaChEdesCtnn
-		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
+extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 
 	/** main OID for CDA-CH-EDES CTNN */
 	public static final String OID_MAIN = "1.3.6.1.4.1.19376.1.5.3.1.1.13.1.3";
@@ -89,7 +89,7 @@ public class CdaChEdesCtnn
 		setLanguageCode(language);
 
 		// set the fixed Ctnn Code
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCode("X-TRIAGE");
 		ce.setCodeSystem("2.16.840.1.113883.6.1");
 		ce.setCodeSystemName("LOINC");
@@ -151,7 +151,8 @@ public class CdaChEdesCtnn
 				section = IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
 				mCommon.addSection(section);
 			}
-			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
+			final LanguageCode languageCode = LanguageCode
+					.getEnum(getDoc().getLanguageCode().getCode());
 			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
 					languageCode, section);
 		}
@@ -195,7 +196,8 @@ public class CdaChEdesCtnn
 			if (section == null) {
 				return Collections.emptyList();
 			}
-			LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
+			final LanguageCode languageCode = LanguageCode
+					.getEnum(getDoc().getLanguageCode().getCode());
 			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
 					languageCode, section);
 		}
@@ -208,7 +210,7 @@ public class CdaChEdesCtnn
 	 * @return the CodedVitalSignsSection
 	 */
 	public CodedVitalSignsSection getCodedVitalSignsSection() {
-		for (Section s : getMdht().getAllSections()) {
+		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) {
 				return new CodedVitalSignsSection(
 						(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) s);

@@ -103,9 +103,9 @@ public enum SectionsEDES implements ContentIdPrefix {
 	 * @return the Enum constant or null if not found
 	 */
 	public static SectionsEDES getEnum(Section section) {
-		CE code = section.getCode();
+		final CE code = section.getCode();
 		if (code != null) {
-			for (SectionsEDES sectionsEDES : values()) {
+			for (final SectionsEDES sectionsEDES : values()) {
 				if (code.getCode().equals(sectionsEDES.getLoincCode())) {
 					return sectionsEDES;
 				}
@@ -142,7 +142,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 	 * @return initialized section
 	 */
 	public Section createSection() {
-		SectionsDefaultInitializer initializer = new SectionsDefaultInitializer();
+		final SectionsDefaultInitializer initializer = new SectionsDefaultInitializer();
 		switch (name()) {
 		case "ABILITY_TO_WORK":
 			return CHFactory.eINSTANCE.createAbilityToWorkSection().init();

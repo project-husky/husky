@@ -52,14 +52,14 @@ public enum ObservationInterpretation {
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
 	/**
-	 * <div class="en">Identifier of the Code System</div> <div
-	 * class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.83";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div> <div
-	 * class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
 	 *            <br>
@@ -67,7 +67,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretation getEnum(String code) {
-		for (ObservationInterpretation x : values()) {
+		for (final ObservationInterpretation x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -109,7 +109,7 @@ public enum ObservationInterpretation {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (ObservationInterpretation x : values()) {
+		for (final ObservationInterpretation x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -125,8 +125,8 @@ public enum ObservationInterpretation {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div
-	 * class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
@@ -148,13 +148,13 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div> <div
-	 * class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -162,13 +162,13 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div> <div
-	 * class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -193,8 +193,8 @@ public enum ObservationInterpretation {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div> <div
-	 * class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */

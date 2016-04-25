@@ -16,10 +16,9 @@
 
 package org.ehealth_connector.validation.service.pdf;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Iterator;
+import java.util.List;
 
 public class PdfValidationResult {
 
@@ -34,8 +33,8 @@ public class PdfValidationResult {
 
 	private String lineNumber;
 	private Boolean errSeverity = false;
-	private ArrayList<SEVERITY> severities = new ArrayList<>();
-	private ArrayList<String> errMsgs = new ArrayList<>();
+	private List<SEVERITY> severities = new ArrayList<>();
+	private List<String> errMsgs = new ArrayList<>();
 	// private ArrayList<Integer> errCodes = new ArrayList<>();
 	private int currentItem = 0;
 
@@ -81,14 +80,14 @@ public class PdfValidationResult {
 		return errMsgs.get(currentItem);
 	}
 
-	public ArrayList<String> getErrMsgs() {
+	public List<String> getErrMsgs() {
 		return errMsgs;
 	}
 
-	public ArrayList<String> getErrMsgsSorted() {
+	public List<String> getErrMsgsSorted() {
 		String temp;
 		Iterator<String> iter = errMsgs.iterator();
-		ArrayList<String> tempErrMsgsSorted = new ArrayList<String>();
+		final List<String> tempErrMsgsSorted = new ArrayList<String>();
 		// Alle Errors
 		while (iter.hasNext()) {
 			temp = iter.next();
@@ -132,5 +131,4 @@ public class PdfValidationResult {
 		this.lineNumber = lineNumber;
 	}
 
-	
 }

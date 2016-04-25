@@ -85,9 +85,9 @@ public class SpecimenCollectionEntry
 	 * @return the participants
 	 */
 	public List<Participant> getParticipants() {
-		ArrayList<Participant> list = new ArrayList<Participant>();
-		if (getMdht() != null && getMdht().getParticipants() != null) {
-			for (Participant2 p : this.getMdht().getParticipants()) {
+		final List<Participant> list = new ArrayList<Participant>();
+		if ((getMdht() != null) && (getMdht().getParticipants() != null)) {
+			for (final Participant2 p : this.getMdht().getParticipants()) {
 				list.add(new Participant(p));
 			}
 		}

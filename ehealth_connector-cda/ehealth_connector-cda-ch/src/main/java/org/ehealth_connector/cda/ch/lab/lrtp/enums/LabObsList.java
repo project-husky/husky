@@ -1952,7 +1952,7 @@ public enum LabObsList {
 	 * @return the according enum object
 	 */
 	public static LabObsList getEnum(String code) {
-		for (LabObsList x : values()) {
+		for (final LabObsList x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -1992,7 +1992,7 @@ public enum LabObsList {
 	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (LabObsList x : values()) {
+		for (final LabObsList x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -2005,39 +2005,39 @@ public enum LabObsList {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>.
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>.
 	 */
-	protected String codeSystem;
+	private String codeSystem;
 
 	/**
 	 * <div class="en">Human readable name</div>
 	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Section code for this Element</div>
 	 * <div class="de">Section Code für dieses Element</div>.
 	 */
-	protected String sectionCode;
+	private String sectionCode;
 
 	/**
 	 * <div class="en">Start date for the period in which this element can be
 	 * used</div> <div class="de">Startdatum der Periode, innerhalb derer dieses
 	 * Element valide ist</div>.
 	 */
-	protected Date validFrom;
+	private Date validFrom;
 
 	/**
 	 * <div class="en">End date for the period in which this element can be
 	 * used</div> <div class="de">Enddatum der Periode, innerhalb derer dieses
 	 * Element valide ist</div>.
 	 */
-	protected Date validTo;
+	private Date validTo;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with given code,
@@ -2071,10 +2071,10 @@ public enum LabObsList {
 		this.codeSystem = codeSystem;
 		this.displayName = displayName;
 		this.sectionCode = sectionCode;
-		if (validFrom != null && !"".equals(validFrom)) {
+		if ((validFrom != null) && !"".equals(validFrom)) {
 			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
-		if (validTo != null && !"".equals(validTo)) {
+		if ((validTo != null) && !"".equals(validTo)) {
 			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
@@ -2086,7 +2086,7 @@ public enum LabObsList {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(getCodeSystemOid());
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
@@ -2101,7 +2101,7 @@ public enum LabObsList {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
+		final Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -2175,10 +2175,10 @@ public enum LabObsList {
 		if (date == null) {
 			date = new Date();
 		}
-		if (validFrom != null && validFrom.after(date)) {
+		if ((validFrom != null) && validFrom.after(date)) {
 			return false;
 		}
-		if (validTo != null && validTo.before(date)) {
+		if ((validTo != null) && validTo.before(date)) {
 			return false;
 		}
 		return true;

@@ -125,7 +125,7 @@ public enum SpecialtySections {
 	 * @return the according enum object
 	 */
 	public static SpecialtySections getEnum(String code) {
-		for (SpecialtySections x : values()) {
+		for (final SpecialtySections x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -165,7 +165,7 @@ public enum SpecialtySections {
 	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (SpecialtySections x : values()) {
+		for (final SpecialtySections x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -178,27 +178,27 @@ public enum SpecialtySections {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>.
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div>
 	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Start date for the period in which this element can be
 	 * used</div> <div class="de">Startdatum der Periode, innerhalb derer dieses
 	 * Element valide ist</div>.
 	 */
-	protected Date validFrom;
+	private Date validFrom;
 
 	/**
 	 * <div class="en">End date for the period in which this element can be
 	 * used</div> <div class="de">Enddatum der Periode, innerhalb derer dieses
 	 * Element valide ist</div>.
 	 */
-	protected Date validTo;
+	private Date validTo;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with given code,
@@ -222,10 +222,10 @@ public enum SpecialtySections {
 	private SpecialtySections(String code, String displayName, String validFrom, String validTo) {
 		this.code = code;
 		this.displayName = displayName;
-		if (validFrom != null && !"".equals(validFrom)) {
+		if ((validFrom != null) && !"".equals(validFrom)) {
 			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
-		if (validTo != null && !"".equals(validTo)) {
+		if ((validTo != null) && !"".equals(validTo)) {
 			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
@@ -237,7 +237,7 @@ public enum SpecialtySections {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(getCodeSystemOid());
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -251,7 +251,7 @@ public enum SpecialtySections {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
+		final Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 
@@ -315,10 +315,10 @@ public enum SpecialtySections {
 		if (date == null) {
 			date = new Date();
 		}
-		if (validFrom != null && validFrom.after(date)) {
+		if ((validFrom != null) && validFrom.after(date)) {
 			return false;
 		}
-		if (validTo != null && validTo.before(date)) {
+		if ((validTo != null) && validTo.before(date)) {
 			return false;
 		}
 		return true;

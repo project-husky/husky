@@ -354,7 +354,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @return the Organization
 	 */
 	public Organization getCustodianAsOrganization() {
-		Custodian mdhtC = getMdht().getCustodian();
+		final Custodian mdhtC = getMdht().getCustodian();
 		AssignedCustodian mdhtAC = null;
 		if (mdhtC != null) {
 			mdhtAC = mdhtC.getAssignedCustodian();
@@ -476,8 +476,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
 
 		if (la != null) {
-			if (la.getAssignedEntity() != null
-					&& la.getAssignedEntity().getAssignedPerson() != null) {
+			if ((la.getAssignedEntity() != null)
+					&& (la.getAssignedEntity().getAssignedPerson() != null)) {
 				final Person p = new Person(la.getAssignedEntity().getAssignedPerson());
 				return p;
 			}

@@ -62,8 +62,8 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 * @return the laboratory observations
 	 */
 	public List<LaboratoryObservation> getLaboratoryObservations() {
-		List<LaboratoryObservation> ol = new ArrayList<LaboratoryObservation>();
-		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation o : getMdht()
+		final List<LaboratoryObservation> ol = new ArrayList<LaboratoryObservation>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation o : getMdht()
 				.getLaboratoryObservations()) {
 			ol.add(new LaboratoryObservation(o));
 		}

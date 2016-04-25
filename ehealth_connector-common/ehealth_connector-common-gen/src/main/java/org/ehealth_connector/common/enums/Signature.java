@@ -14,16 +14,17 @@ public enum Signature {
 	 * <div class="en"></div> <div class="de">Eine Unterschrift ist
 	 * beabsichtigt</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	INTENDED("I", "intended"),
-	/**
-	 * <div class="en"></div> <div class="de">Eine Unterschrift ist für diesen
-	 * Akteur erforderlich</div> <div class="fr"></div> <div class="it"></div>
-	 */
-	REQUIRED("X", "required"),
-	/**
-	 * <div class="en"></div> <div class="de">Eine Unterschrift ist erfolgt</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
+	INTENDED("I", "intended"), /**
+								 * <div class="en"></div> <div class="de">Eine
+								 * Unterschrift ist für diesen Akteur
+								 * erforderlich</div> <div class="fr"></div>
+								 * <div class="it"></div>
+								 */
+	REQUIRED("X", "required"), /**
+								 * <div class="en"></div> <div class="de">Eine
+								 * Unterschrift ist erfolgt</div>
+								 * <div class="fr"></div> <div class="it"></div>
+								 */
 	SIGNED("S", "signed");
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -46,12 +47,12 @@ public enum Signature {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static Signature getEnum(String code) {
-		for (Signature x : values()) {
+		for (final Signature x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -66,8 +67,8 @@ public enum Signature {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -88,12 +89,12 @@ public enum Signature {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (Signature x : values()) {
+		for (final Signature x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -106,25 +107,25 @@ public enum Signature {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private Signature(String code, String displayName) {
 		this.code = code;
@@ -138,7 +139,7 @@ public enum Signature {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -153,8 +154,8 @@ public enum Signature {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -179,7 +180,7 @@ public enum Signature {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}

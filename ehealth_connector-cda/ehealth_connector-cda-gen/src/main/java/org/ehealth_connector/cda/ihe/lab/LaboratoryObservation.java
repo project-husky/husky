@@ -182,7 +182,7 @@ public class LaboratoryObservation extends
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
 			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfResult));
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
 		getMdht().getPerformers().add(mPerformer);
@@ -309,9 +309,9 @@ public class LaboratoryObservation extends
 	 *
 	 * @return the interpretation code
 	 */
-	public ArrayList<Code> getInterpretationCodes() {
-		ArrayList<Code> icl = new ArrayList<Code>();
-		for (CE ic : getMdht().getInterpretationCodes()) {
+	public List<Code> getInterpretationCodes() {
+		final List<Code> icl = new ArrayList<Code>();
+		for (final CE ic : getMdht().getInterpretationCodes()) {
 			icl.add(new Code(ic));
 		}
 		return icl;
@@ -323,9 +323,9 @@ public class LaboratoryObservation extends
 	 * @return the interpretation codes as enum
 	 */
 	public List<ObservationInterpretation> getInterpretationCodesAsEnum() {
-		ArrayList<ObservationInterpretation> icl = new ArrayList<ObservationInterpretation>();
-		for (CE ic : getMdht().getInterpretationCodes()) {
-			ObservationInterpretation oi = ObservationInterpretation.getEnum(ic.getCode());
+		final List<ObservationInterpretation> icl = new ArrayList<ObservationInterpretation>();
+		for (final CE ic : getMdht().getInterpretationCodes()) {
+			final ObservationInterpretation oi = ObservationInterpretation.getEnum(ic.getCode());
 			if (oi != null) {
 				icl.add(ObservationInterpretation.getEnum(ic.getCode()));
 			}
@@ -341,9 +341,9 @@ public class LaboratoryObservation extends
 	 *
 	 * @return the interpretation code
 	 */
-	public ArrayList<String> getInterpretationCodeValues() {
-		ArrayList<String> icl = new ArrayList<String>();
-		for (CE ic : getMdht().getInterpretationCodes()) {
+	public List<String> getInterpretationCodeValues() {
+		final List<String> icl = new ArrayList<String>();
+		for (final CE ic : getMdht().getInterpretationCodes()) {
 			icl.add(ic.getCode());
 		}
 		return icl;

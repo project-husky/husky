@@ -28,13 +28,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class PlayingEntity {
 
 	/** The MDHT playing entity. */
-	org.openhealthtools.mdht.uml.cda.PlayingEntity mPlayingEntity;
+	private org.openhealthtools.mdht.uml.cda.PlayingEntity mPlayingEntity;
 
 	/**
 	 * Instantiates a new playing entity.
 	 */
 	public PlayingEntity() {
-		mPlayingEntity = CDAFactory.eINSTANCE.createPlayingEntity();
+		setPlayingEntity(CDAFactory.eINSTANCE.createPlayingEntity());
 		// mPlayingEntity.setClassCode(EntityClassRoot.MIC);
 	}
 
@@ -45,7 +45,7 @@ public class PlayingEntity {
 	 *            the mdht
 	 */
 	public PlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity mdht) {
-		mPlayingEntity = mdht;
+		setPlayingEntity(mdht);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class PlayingEntity {
 	 *            name
 	 */
 	public void addName(Name name) {
-		mPlayingEntity.getNames().add(name.copyMdhtPn());
+		getPlayingEntity().getNames().add(name.copyMdhtPn());
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class PlayingEntity {
 	 * @return the org.openhealthtools.mdht.uml.cda. playing entity
 	 */
 	public org.openhealthtools.mdht.uml.cda.PlayingEntity copyPlayingEntity() {
-		return EcoreUtil.copy(mPlayingEntity);
+		return EcoreUtil.copy(getPlayingEntity());
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class PlayingEntity {
 	 * @return the code
 	 */
 	public Code getCode() {
-		return new Code(mPlayingEntity.getCode());
+		return new Code(getPlayingEntity().getCode());
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class PlayingEntity {
 	 * @return the mdht playing entity
 	 */
 	public org.openhealthtools.mdht.uml.cda.PlayingEntity getMdhtPlayingEntity() {
-		return mPlayingEntity;
+		return getPlayingEntity();
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class PlayingEntity {
 	 */
 	public List<Name> getNames() {
 		final List<Name> nl = new ArrayList<Name>();
-		for (final PN mName : mPlayingEntity.getNames()) {
+		for (final PN mName : getPlayingEntity().getNames()) {
 			final Name name = new Name(mName);
 			nl.add(name);
 		}
@@ -108,6 +108,22 @@ public class PlayingEntity {
 	 *            the new code
 	 */
 	public void setCode(Code code) {
-		mPlayingEntity.setCode(code.getCE());
+		getPlayingEntity().setCode(code.getCE());
+	}
+
+	/**
+	 * Method to get
+	 * @return the playingEntity
+	 */
+	public org.openhealthtools.mdht.uml.cda.PlayingEntity getPlayingEntity() {
+		return mPlayingEntity;
+	}
+
+	/**
+	 * Method to set
+	 * @param playingEntity the playingEntity to set
+	 */
+	public void setPlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity playingEntity) {
+		mPlayingEntity = playingEntity;
 	}
 }

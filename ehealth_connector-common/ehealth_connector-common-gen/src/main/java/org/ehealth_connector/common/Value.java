@@ -119,7 +119,7 @@ public class Value {
 	 *            <div class="it"></div>
 	 */
 	public Value(boolean code) {
-		BL bl = DatatypesFactory.eINSTANCE.createBL();
+		final BL bl = DatatypesFactory.eINSTANCE.createBL();
 		bl.setValue(code);
 		mValue = bl;
 	}
@@ -340,7 +340,7 @@ public class Value {
 	 */
 	public boolean getBoolean() {
 		if (isBl()) {
-			BL bl = (BL) mValue;
+			final BL bl = (BL) mValue;
 			return bl.getValue();
 		}
 		return false;
@@ -364,7 +364,7 @@ public class Value {
 	 */
 	public String getEdReferenceValue() {
 		if (isEd()) {
-			ED ed = (ED) mValue;
+			final ED ed = (ED) mValue;
 			return ed.getReference().getValue();
 		}
 		return null;
@@ -377,7 +377,7 @@ public class Value {
 	 */
 	public String getEdText() {
 		if (isEd()) {
-			ED ed = (ED) mValue;
+			final ED ed = (ED) mValue;
 			return ed.getText();
 		}
 		return null;
@@ -397,7 +397,7 @@ public class Value {
 	 */
 	public BigDecimal getPhysicalQuantityIntervalHighValue() {
 		if (isPhysicalQuantityInterval()) {
-			IVL_PQ ivlPq = (IVL_PQ) mValue;
+			final IVL_PQ ivlPq = (IVL_PQ) mValue;
 			return ivlPq.getHigh().getValue();
 		}
 		return null;
@@ -412,7 +412,7 @@ public class Value {
 	 */
 	public BigDecimal getPhysicalQuantityIntervalLowValue() {
 		if (isPhysicalQuantityInterval()) {
-			IVL_PQ ivlPq = (IVL_PQ) mValue;
+			final IVL_PQ ivlPq = (IVL_PQ) mValue;
 			return ivlPq.getLow().getValue();
 		}
 		return null;

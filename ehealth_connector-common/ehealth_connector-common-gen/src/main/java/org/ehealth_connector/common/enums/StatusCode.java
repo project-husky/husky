@@ -14,36 +14,38 @@ public enum StatusCode {
 	 * <div class="en"></div> <div class="de">nicht mehr gewollt</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	ABORTED("aborted", "aborted"),
-	/**
-	 * <div class="en"></div> <div class="de">aktiv</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	ACTIVE("active", "active"),
-	/**
-	 * <div class="en"></div> <div class="de">abgebrochen</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	CANCELLED("cancelled", "cancelled"),
-	/**
-	 * <div class="en"></div> <div class="de">erledigt</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	COMPLETED("completed", "completed"),
-	/**
-	 * <div class="en"></div> <div class="de">abwartend</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	HELD("held", "held"),
-	/**
-	 * <div class="en"></div> <div class="de">aktuell</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	NEW("new", "new"),
-	/**
-	 * <div class="en"></div> <div class="de">ausgesetzt</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
+	ABORTED("aborted",
+			"aborted"), /**
+						 * <div class="en"></div> <div class="de">aktiv</div>
+						 * <div class="fr"></div> <div class="it"></div>
+						 */
+	ACTIVE("active", "active"), /**
+								 * <div class="en"></div>
+								 * <div class="de">abgebrochen</div>
+								 * <div class="fr"></div> <div class="it"></div>
+								 */
+	CANCELLED("cancelled",
+			"cancelled"), /**
+							 * <div class="en"></div>
+							 * <div class="de">erledigt</div>
+							 * <div class="fr"></div> <div class="it"></div>
+							 */
+	COMPLETED("completed",
+			"completed"), /**
+							 * <div class="en"></div>
+							 * <div class="de">abwartend</div>
+							 * <div class="fr"></div> <div class="it"></div>
+							 */
+	HELD("held",
+			"held"), /**
+						 * <div class="en"></div> <div class="de">aktuell</div>
+						 * <div class="fr"></div> <div class="it"></div>
+						 */
+	NEW("new",
+			"new"), /**
+					 * <div class="en"></div> <div class="de">ausgesetzt</div>
+					 * <div class="fr"></div> <div class="it"></div>
+					 */
 	SUSPENDED("suspended", "suspended");
 	public static final String ABORTED_CODE = "aborted";
 	public static final String ACTIVE_CODE = "active";
@@ -70,12 +72,12 @@ public enum StatusCode {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static StatusCode getEnum(String code) {
-		for (StatusCode x : values()) {
+		for (final StatusCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -90,8 +92,8 @@ public enum StatusCode {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -112,12 +114,12 @@ public enum StatusCode {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (StatusCode x : values()) {
+		for (final StatusCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -130,25 +132,25 @@ public enum StatusCode {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private StatusCode(String code, String displayName) {
 		this.code = code;
@@ -162,7 +164,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -177,8 +179,8 @@ public enum StatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -203,7 +205,7 @@ public enum StatusCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
 	}

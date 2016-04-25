@@ -53,8 +53,8 @@ public enum VitalSignCodes {
 	 * @return <div class="en">the Enum constant</div>
 	 */
 	public static VitalSignCodes getEnum(String loincCode) {
-		VitalSignCodes[] values = values();
-		for (VitalSignCodes vitalSignCodes : values) {
+		final VitalSignCodes[] values = values();
+		for (final VitalSignCodes vitalSignCodes : values) {
 			if (vitalSignCodes.getLoinc().equals(loincCode)) {
 				return vitalSignCodes;
 			}
@@ -85,7 +85,7 @@ public enum VitalSignCodes {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ret = new Code(CodeSystems.LOINC, loinc);
+		final Code ret = new Code(CodeSystems.LOINC, loinc);
 		ret.setDisplayName(getDisplayName(null));
 		return ret;
 	}

@@ -39,14 +39,15 @@ public class DosageInstructionsEntry extends MedicationItemEntry {
 	 * Instantiates a new dispense item reference entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public DosageInstructionsEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.DosageInstructionsEntry mdht) {
 		super(mdht);
-		Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
-		ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE.createManufacturedProduct();
-		Material material = CDAFactory.eINSTANCE.createMaterial();
+		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
+		final ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE
+				.createManufacturedProduct();
+		final Material material = CDAFactory.eINSTANCE.createMaterial();
 		material.setNullFlavor(NullFlavor.NA);
 		manufacturedProduct.setManufacturedMaterial(material);
 		consumable.setManufacturedProduct(manufacturedProduct);

@@ -30,7 +30,7 @@ import java.util.jar.Manifest;
 public class JarUtils {
 	public static final char separatorChar = '/';
 	public static final String separator = new Character(separatorChar).toString();
-	
+
 	/**
 	 * Returns the <cite>Manifest</cite> given a <tt>Class</tt> instance.
 	 *
@@ -50,7 +50,7 @@ public class JarUtils {
 			if (is != null)
 				try {
 					is.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 				}
 		}
 	}
@@ -59,13 +59,13 @@ public class JarUtils {
 		if (clazz == null) {
 			throw new NullPointerException("Class is null.");
 		}
-		String className = clazz.getSimpleName() + ".class";
-		String classPath = clazz.getResource(className).toString();
+		final String className = clazz.getSimpleName() + ".class";
+		final String classPath = clazz.getResource(className).toString();
 		Package pkg;
 		if (classPath.startsWith("jar")) {
 			return classPath.substring(0, classPath.lastIndexOf("!") + 1);
 		} else if ((pkg = clazz.getPackage()) != null) {
-			String packagePath = pkg.getName().replace('.', separatorChar);
+			final String packagePath = pkg.getName().replace('.', separatorChar);
 			return classPath.substring(0, classPath.lastIndexOf(packagePath) - 1);
 		} else {
 			return classPath.substring(0, classPath.lastIndexOf(separator));
@@ -73,7 +73,7 @@ public class JarUtils {
 	}
 
 	public static String getRelativeUri(String uri, Class<?> clazz) {
-		String path = uri.substring(getPackageUri(clazz).length());
+		final String path = uri.substring(getPackageUri(clazz).length());
 		int index = 0;
 		while (path.charAt(index) == separatorChar)
 			++index;

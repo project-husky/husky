@@ -38,7 +38,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * Implements the Base Class PharmaceuticalAdviceItemEntry from the IHE PHARM Model.
+ * Implements the Base Class PharmaceuticalAdviceItemEntry from the IHE PHARM
+ * Model.
  */
 public class PharmaceuticalAdviceItemEntry extends
 		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry> {
@@ -81,7 +82,7 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
-		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
+		final Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
 		precondition.setCriterion(entry.getMdht());
 		getMdht().getPreconditions().add(precondition);
 	}
@@ -92,11 +93,8 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return the dispense item reference entry
 	 */
 	public DispenseItemReferenceEntry getDispenseItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-				.getDispenseItemReferenceEntry() != null) {
-			return new DispenseItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-							.getDispenseItemReferenceEntry());
+		if (getMdht().getDispenseItemReferenceEntry() != null) {
+			return new DispenseItemReferenceEntry(getMdht().getDispenseItemReferenceEntry());
 		}
 		return null;
 	}
@@ -133,11 +131,9 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return the medication treatment plan item reference entry
 	 */
 	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-				.getMedicationTreatmentPlanItemReferenceEntry() != null) {
+		if (getMdht().getMedicationTreatmentPlanItemReferenceEntry() != null) {
 			return new MedicationTreatmentPlanItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-							.getMedicationTreatmentPlanItemReferenceEntry());
+					getMdht().getMedicationTreatmentPlanItemReferenceEntry());
 		}
 		return null;
 	}
@@ -148,12 +144,14 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return the new medication treatment plan item entry
 	 */
 	public MedicationTreatmentPlanItemEntry getNewMedicationTreatmentPlanItemEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-				.getNewMedicationTreatmentPlanItemEntry() != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+		if (getMdht().getNewMedicationTreatmentPlanItemEntry() != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (x_ActRelationshipEntryRelationship.REFR.equals(entryRelationship.getTypeCode())
-						&& entryRelationship.getInversionInd()!=null && entryRelationship.getInversionInd().booleanValue()==false) {
-					return new MedicationTreatmentPlanItemEntry((org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry) entryRelationship.getSubstanceAdministration());
+						&& (entryRelationship.getInversionInd() != null)
+						&& (entryRelationship.getInversionInd().booleanValue() == false)) {
+					return new MedicationTreatmentPlanItemEntry(
+							(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry) entryRelationship
+									.getSubstanceAdministration());
 				}
 			}
 		}
@@ -167,8 +165,8 @@ public class PharmaceuticalAdviceItemEntry extends
 	 */
 	public PrescriptionItemEntry getNewPresciptionEntry() {
 		if (this.getMdht().getNewPrescription() != null) {
-			Organizer organizer = (Organizer) getMdht().getNewPrescription();
-			if (organizer.getComponents() != null && organizer.getComponents().size() > 0) {
+			final Organizer organizer = (Organizer) getMdht().getNewPrescription();
+			if ((organizer.getComponents() != null) && (organizer.getComponents().size() > 0)) {
 				if (organizer.getComponents().get(0).getSubstanceAdministration() != null) {
 					return new PrescriptionItemEntry(
 							((org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry) organizer
@@ -214,7 +212,7 @@ public class PharmaceuticalAdviceItemEntry extends
 	 */
 	public List<CriterionEntry> getPreconditionEntries() {
 		final List<CriterionEntry> preconditionEntries = new ArrayList<CriterionEntry>();
-		for (Precondition precondition : getMdht().getPreconditions()) {
+		for (final Precondition precondition : getMdht().getPreconditions()) {
 			preconditionEntries.add(new CriterionEntry(precondition.getCriterion()));
 		}
 		return preconditionEntries;
@@ -226,11 +224,9 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return the prescription item reference entry
 	 */
 	public PrescriptionItemReferenceEntry getPrescriptionItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-				.getPrescriptionItemReferenceEntry() != null) {
+		if (getMdht().getPrescriptionItemReferenceEntry() != null) {
 			return new PrescriptionItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry) getMdht())
-							.getPrescriptionItemReferenceEntry());
+					getMdht().getPrescriptionItemReferenceEntry());
 		}
 		return null;
 	}
@@ -256,17 +252,17 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            the new dispense item reference entry
 	 */
 	public void setDispenseItemReferenceEntry(DispenseItemReferenceEntry entry) {
-		DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
+		final DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSupply(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSupply(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -281,7 +277,8 @@ public class PharmaceuticalAdviceItemEntry extends
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
-		ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef().init();
+		final ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef()
+				.init();
 		reference.getTemplateIds().clear();
 		externalDocumentEntry.getMdht().getTemplateIds().clear();
 		reference.setExternalDocument(externalDocumentEntry.getMdht());
@@ -310,17 +307,17 @@ public class PharmaceuticalAdviceItemEntry extends
 	 */
 	public void setMedicationTreatmentPlanItemReferenceEntry(
 			MedicationTreatmentPlanItemReferenceEntry entry) {
-		MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
+		final MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -334,17 +331,17 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            the new new medication treatment plan item entry
 	 */
 	public void setNewMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry entry) {
-		MedicationTreatmentPlanItemEntry old = getNewMedicationTreatmentPlanItemEntry();
+		final MedicationTreatmentPlanItemEntry old = getNewMedicationTreatmentPlanItemEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setInversionInd(Boolean.FALSE);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
@@ -359,17 +356,17 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            the new new presciption entry
 	 */
 	public void setNewPresciptionEntry(PrescriptionItemEntry entry) {
-		PrescriptionItemEntry old = getNewPresciptionEntry();
+		final PrescriptionItemEntry old = getNewPresciptionEntry();
 		if (old != null) {
-			Organizer organizer = (Organizer) getMdht().getNewPrescription();
+			final Organizer organizer = (Organizer) getMdht().getNewPrescription();
 			organizer.getComponents().get(0).setSubstanceAdministration(entry.getMdht());
 		} else {
-			Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
-			Component4 component = CDAFactory.eINSTANCE.createComponent4();
+			final Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
+			final Component4 component = CDAFactory.eINSTANCE.createComponent4();
 			component.setSubstanceAdministration(entry.getMdht());
 			organizer.getComponents().add(component);
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setInversionInd(Boolean.FALSE);
 			entryRelationship.setOrganizer(organizer);
@@ -406,17 +403,17 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
-		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
+		final PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);

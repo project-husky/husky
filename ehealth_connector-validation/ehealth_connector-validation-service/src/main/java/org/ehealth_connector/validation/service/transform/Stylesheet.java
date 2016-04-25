@@ -67,7 +67,7 @@ public class Stylesheet {
 	private final File file;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Constructs a new stylesheet.
@@ -107,7 +107,7 @@ public class Stylesheet {
 			log.debug("Compiling stylesheet " + source.getSystemId());
 			this.executable = compiler.compile(source);
 			return this;
-		} catch (SaxonApiException e) {
+		} catch (final SaxonApiException e) {
 			throw new TransformationException("Failed to compile XSL stylesheet.", e);
 		}
 	}

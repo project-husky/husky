@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * The Class SoasInfoEntry.
  */
 public class SoasInfoEntry
-		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry> {
+extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry> {
 
 	/** The Constant CENTER_SPECIFIC_AVOID_CODE. */
 	public static final Code CENTER_SPECIFIC_AVOID_CODE = new Code("2.16.756.5.30.1.129.1.1.2",
@@ -95,7 +95,7 @@ public class SoasInfoEntry
 	 */
 	@Override
 	public Value getValue() {
-		if (getMdht().getValues() != null && !getMdht().getValues().isEmpty()) {
+		if ((getMdht().getValues() != null) && !getMdht().getValues().isEmpty()) {
 			return new Value(getMdht().getValues().get(0));
 		}
 		return null;
@@ -175,8 +175,8 @@ public class SoasInfoEntry
 	// Convenience function to set Code and value for previosTx
 	public void setPreviousTx(NullFlavor previousTx) {
 		this.setCode(PREVIOUS_TX);
-		BL v = DatatypesFactory.eINSTANCE.createBL();
-		org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor nf = org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor
+		final BL v = DatatypesFactory.eINSTANCE.createBL();
+		final org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor nf = org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor
 				.get(previousTx.getCodeValue());
 		v.setNullFlavor(nf);
 

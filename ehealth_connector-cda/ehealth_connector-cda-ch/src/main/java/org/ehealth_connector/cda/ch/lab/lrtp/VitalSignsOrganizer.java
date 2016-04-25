@@ -137,9 +137,9 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @return the authors
 	 */
 	public List<Author> getAuthors() {
-		List<Author> al = new ArrayList<Author>();
-		for (org.openhealthtools.mdht.uml.cda.Author mdht : getMdht().getAuthors()) {
-			Author ehc = new Author(mdht);
+		final List<Author> al = new ArrayList<Author>();
+		for (final org.openhealthtools.mdht.uml.cda.Author mdht : getMdht().getAuthors()) {
+			final Author ehc = new Author(mdht);
 			al.add(ehc);
 		}
 		return al;
@@ -151,9 +151,9 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @return the vital signs observations
 	 */
 	public List<VitalSignsObservation> getVitalSignsObservations() {
-		List<VitalSignsObservation> vsl = new ArrayList<VitalSignsObservation>();
-		for (VitalSignObservation mdht : getMdht().getVitalSignObservations()) {
-			VitalSignsObservation ehc = new VitalSignsObservation(mdht);
+		final List<VitalSignsObservation> vsl = new ArrayList<VitalSignsObservation>();
+		for (final VitalSignObservation mdht : getMdht().getVitalSignObservations()) {
+			final VitalSignsObservation ehc = new VitalSignsObservation(mdht);
 			vsl.add(ehc);
 		}
 		return vsl;

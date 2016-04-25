@@ -16,8 +16,8 @@
 
 package org.ehealth_connector.validation.service.api;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
@@ -30,22 +30,22 @@ public class ValidationResult {
 
 	private boolean xsdValid;
 
-	XsdValidationResult xsdValRes;
+	private XsdValidationResult xsdValRes;
 
 	private boolean schematronValid;
 
-	SchematronValidationResult schValRes;
+	private SchematronValidationResult schValRes;
 
 	private boolean pdfValid;
 
-	ArrayList<PdfValidationResult> pdfValRes;
+	private List<PdfValidationResult> pdfValRes;
 
 	public ValidationResult() {
 		this.xsdValRes = new XsdValidationResult();
 		this.schValRes = new SchematronValidationResult();
 	}
 
-	public ArrayList<PdfValidationResult> getPdfValRes() {
+	public List<PdfValidationResult> getPdfValRes() {
 		return pdfValRes;
 	}
 
@@ -58,8 +58,8 @@ public class ValidationResult {
 	}
 
 	public boolean isPdfValid() {
-		boolean hasError = false;
-		Iterator<PdfValidationResult> iter = pdfValRes.iterator();
+		final boolean hasError = false;
+		final Iterator<PdfValidationResult> iter = pdfValRes.iterator();
 		boolean hasErrors = false;
 		PdfValidationResult temp;
 		while (iter.hasNext()) {
@@ -77,7 +77,7 @@ public class ValidationResult {
 		return xsdValid;
 	}
 
-	public void setPdfValRes(ArrayList<PdfValidationResult> pdfValRes) {
+	public void setPdfValRes(List<PdfValidationResult> pdfValRes) {
 		this.pdfValRes = pdfValRes;
 	}
 

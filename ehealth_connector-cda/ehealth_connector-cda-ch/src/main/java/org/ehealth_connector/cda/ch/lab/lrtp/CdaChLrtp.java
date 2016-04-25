@@ -30,7 +30,6 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.DocumentationOf;
 import org.openhealthtools.mdht.uml.cda.Patient;
@@ -60,7 +59,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * SOAS, damit diese bei der Organzuteilung berücksichtigt werden können.</div>
  */
 public class CdaChLrtp
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
 
 	/**
 	 * Standard constructor.
@@ -125,7 +124,7 @@ public class CdaChLrtp
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
 		// set the fixed laboratory Code
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCode("11502-2");
 		ce.setCodeSystem("2.16.840.1.113883.6.1");
 		ce.setCodeSystemName("LOINC");
@@ -212,8 +211,8 @@ public class CdaChLrtp
 	 *            the scope of this organ donor.
 	 */
 	public void addDocumentationOf(ReportScopes scope) {
-		DocumentationOf dof = CDAFactory.eINSTANCE.createDocumentationOf();
-		ServiceEvent se = CDAFactory.eINSTANCE.createServiceEvent();
+		final DocumentationOf dof = CDAFactory.eINSTANCE.createDocumentationOf();
+		final ServiceEvent se = CDAFactory.eINSTANCE.createServiceEvent();
 		se.setCode(scope.getCE());
 		dof.setServiceEvent(se);
 		getMdht().getDocumentationOfs().add(dof);
@@ -319,30 +318,30 @@ public class CdaChLrtp
 	 */
 	public void applyPrivacyFilter() {
 		byte index = 0;
-		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
+		for (final RecordTarget originalRt : getMdht().getRecordTargets()) {
 			// Get original elements
 			PatientRole originalPr = null;
 			if (originalRt.getPatientRole() != null) {
 				originalPr = originalRt.getPatientRole();
 			}
 			Patient originalP = null;
-			if (originalPr != null && originalPr.getPatient() != null) {
+			if ((originalPr != null) && (originalPr.getPatient() != null)) {
 				originalP = originalPr.getPatient();
 			}
 
 			// Initialize new elements
-			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
-			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
-			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			final RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			final PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			final Patient processedP = CDAFactory.eINSTANCE.createPatient();
 			processedRt.setPatientRole(processedPr);
 			processedPr.setPatient(processedP);
 
 			// Copy all necessary elements from the original to the processed
 			// recordTarget
 			// Patient Name
-			if (originalP != null && !originalP.getNames().isEmpty()) {
+			if ((originalP != null) && !originalP.getNames().isEmpty()) {
 				if (originalP.getNames().get(0) != null) {
-					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					final PN pn = DatatypesFactory.eINSTANCE.createPN();
 					pn.getGivens().addAll(originalP.getNames().get(0).getGivens());
 					pn.getFamilies().addAll(originalP.getNames().get(0).getFamilies());
 					processedP.getNames().add(pn);
@@ -350,31 +349,31 @@ public class CdaChLrtp
 			}
 
 			// Birth time
-			if (originalP != null && originalP.getBirthTime() != null) {
+			if ((originalP != null) && (originalP.getBirthTime() != null)) {
 				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
 			}
 
 			// Gender
-			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+			if ((originalP != null) && (originalP.getAdministrativeGenderCode() != null)) {
 				processedP.setAdministrativeGenderCode(
 						EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
 			}
 
 			// Addr MSK
-			if (originalPr != null && !originalPr.getAddrs().isEmpty()) {
-				AD ad = DatatypesFactory.eINSTANCE.createAD();
+			if ((originalPr != null) && !originalPr.getAddrs().isEmpty()) {
+				final AD ad = DatatypesFactory.eINSTANCE.createAD();
 				ad.setNullFlavor(NullFlavor.MSK);
 				processedPr.getAddrs().add(ad);
 			}
 
 			// Telecom (MSK)
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			tel.setNullFlavor(NullFlavor.MSK);
 			processedPr.getTelecoms().add(tel);
 
 			// SOAS ID
-			if (originalPr != null && !originalPr.getIds().isEmpty()) {
-				for (II ii : originalPr.getIds()) {
+			if ((originalPr != null) && !originalPr.getIds().isEmpty()) {
+				for (final II ii : originalPr.getIds()) {
 					if (ii.getRoot().equals("2.16.756.5.30.1.129.1.1.1")) {
 						processedPr.getIds().add(EcoreUtil.copy(ii));
 					}
@@ -392,8 +391,8 @@ public class CdaChLrtp
 	 * @return the BloodGroupObservation
 	 */
 	public BloodGroupObservation getBloodGroupObservation() {
-		if (getStudiesSummarySection() != null
-				&& getStudiesSummarySection().getBloodGroup() != null) {
+		if ((getStudiesSummarySection() != null)
+				&& (getStudiesSummarySection().getBloodGroup() != null)) {
 			return new BloodGroupObservation(getStudiesSummarySection().getBloodGroup().getMdht());
 		}
 		return null;
@@ -405,7 +404,7 @@ public class CdaChLrtp
 	 * @return the CodedVitalSignsSection
 	 */
 	public CodedVitalSignsSection getCodedVitalSignsSection() {
-		for (Section s : getMdht().getAllSections()) {
+		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) {
 				return new CodedVitalSignsSection(
 						(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) s);
@@ -426,10 +425,10 @@ public class CdaChLrtp
 	 * @return the scope of this organ donor.
 	 */
 	public List<ReportScopes> getDocumentationOfs() {
-		List<ReportScopes> rl = new ArrayList<ReportScopes>();
-		for (DocumentationOf dof : getMdht().getDocumentationOfs()) {
-			if (dof.getServiceEvent() != null && dof.getServiceEvent().getCode() != null) {
-				ReportScopes rs = ReportScopes.getEnum(dof.getServiceEvent().getCode().getCode());
+		final List<ReportScopes> rl = new ArrayList<ReportScopes>();
+		for (final DocumentationOf dof : getMdht().getDocumentationOfs()) {
+			if ((dof.getServiceEvent() != null) && (dof.getServiceEvent().getCode() != null)) {
+				final ReportScopes rs = ReportScopes.getEnum(dof.getServiceEvent().getCode().getCode());
 				if (rs != null) {
 					rl.add(rs);
 				}
@@ -448,12 +447,12 @@ public class CdaChLrtp
 	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
-		for (LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
-			LaboratoryReportDataProcessingEntry lrdpe = lss
+		final ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		for (final LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
+			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				SpecimenAct se = lrdpe.getSpecimenAct();
+				final SpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
 					lbol.addAll(se.getLaboratoryBatteryOrganizers());
 				}
@@ -468,8 +467,8 @@ public class CdaChLrtp
 	 * @return the laboratory specialty section
 	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
-		List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
-		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
+		final List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
 				.getLaboratorySpecialtySections()) {
 			ls.add(new LaboratorySpecialtySection(lss));
 		}
@@ -482,9 +481,9 @@ public class CdaChLrtp
 	 * @return the narrative Text. Returns null, if this text does not exist.
 	 */
 	public String getNarrativeTextSectionCodedVitalSignsSection() {
-		if (getCodedVitalSignsSection() != null
-				&& getCodedVitalSignsSection().getMdht().getText() != null
-				&& getCodedVitalSignsSection().getMdht().getText().getText() != null) {
+		if ((getCodedVitalSignsSection() != null)
+				&& (getCodedVitalSignsSection().getMdht().getText() != null)
+				&& (getCodedVitalSignsSection().getMdht().getText().getText() != null)) {
 			return getCodedVitalSignsSection().getMdht().getText().getText();
 		}
 		return null;
@@ -496,7 +495,7 @@ public class CdaChLrtp
 	 * @return the narrative Text. Returns null, if this text does not exist.
 	 */
 	public String getNarrativeTextSectionStudiesSummarySection() {
-		if (getStudiesSummarySection() != null && getStudiesSummarySection().getText() != null) {
+		if ((getStudiesSummarySection() != null) && (getStudiesSummarySection().getText() != null)) {
 			return getStudiesSummarySection().getText();
 		}
 		return null;
@@ -511,11 +510,11 @@ public class CdaChLrtp
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
 	public SpecimenAct getSpecimenAct() {
-		if (getLaboratorySpecialtySections() != null
-				&& getLaboratorySpecialtySections().get(0)
-						.getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
+		if ((getLaboratorySpecialtySections() != null)
+				&& (getLaboratorySpecialtySections().get(0)
+						.getLaboratoryReportDataProcessingEntry() != null)
+				&& (getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null)) {
 			return getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
 					.getSpecimenAct();
 		}
@@ -528,7 +527,7 @@ public class CdaChLrtp
 	 * @return the StudiesSummarySection
 	 */
 	public StudiesSummarySection getStudiesSummarySection() {
-		for (Section s : getMdht().getAllSections()) {
+		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) {
 				return new StudiesSummarySection(
 						(org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) s);
@@ -543,8 +542,8 @@ public class CdaChLrtp
 	 * @return the VitalSignsOrganizer
 	 */
 	public VitalSignsOrganizer getVitalSignsOrganizer() {
-		if (getCodedVitalSignsSection() != null
-				&& getCodedVitalSignsSection().getVitalSignsOrganizer() != null) {
+		if ((getCodedVitalSignsSection() != null)
+				&& (getCodedVitalSignsSection().getVitalSignsOrganizer() != null)) {
 			return new VitalSignsOrganizer(
 					getCodedVitalSignsSection().getVitalSignsOrganizer().getMdht());
 		}

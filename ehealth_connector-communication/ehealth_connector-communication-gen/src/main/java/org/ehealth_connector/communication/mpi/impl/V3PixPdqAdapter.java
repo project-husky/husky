@@ -119,7 +119,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	private String homeCommunityOid;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Used to capture additional oid identifiers for the person such as a

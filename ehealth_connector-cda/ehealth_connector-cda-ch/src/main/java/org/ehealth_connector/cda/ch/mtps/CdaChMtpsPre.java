@@ -57,7 +57,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			setTitle("Pharmacy Prescription");
 			break;
 		}
-		PrescriptionSection section = new PrescriptionSection(getLanguageCode());
+		final PrescriptionSection section = new PrescriptionSection(getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 

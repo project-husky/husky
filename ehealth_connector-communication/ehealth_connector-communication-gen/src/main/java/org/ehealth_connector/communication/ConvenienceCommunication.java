@@ -126,11 +126,11 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new convenience communication with the given
-	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
+	 * <div class="en">Instantiates a new convenience communication with the
+	 * given affinity domain set-up. ATNA audit is disabled (unsecure) </div>
 	 *
 	 * @param affinityDomain
-	 *          the affinity domain configuration
+	 *            the affinity domain configuration
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
@@ -138,21 +138,21 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new convenience communication with the given
-	 * affinity domain set-up.</div>
+	 * <div class="en">Instantiates a new convenience communication with the
+	 * given affinity domain set-up.</div>
 	 *
 	 * @param affinityDomain
-	 *          the affinity domain configuration
+	 *            the affinity domain configuration
 	 * @param atnaConfigMode
-	 *          the ATNA config mode (secure or unsecure)
+	 *            the ATNA config mode (secure or unsecure)
 	 * @param documentMetadataExtractionMode
-	 *          determines, if and how document metadata should be extracted
-	 *          automatically. Extracted metadata attributes will not overwrite
-	 *          attributes that have been set, manually.
+	 *            determines, if and how document metadata should be extracted
+	 *            automatically. Extracted metadata attributes will not
+	 *            overwrite attributes that have been set, manually.
 	 * @param submissionSetMetadataExtractionMode
-	 *          determines, if and how submission set metadata should be
-	 *          extracted, automatically. Extracted metadata attributes will not
-	 *          overwrite attributes that have been set, manually.
+	 *            determines, if and how submission set metadata should be
+	 *            extracted, automatically. Extracted metadata attributes will
+	 *            not overwrite attributes that have been set, manually.
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode,
@@ -167,10 +167,10 @@ public class ConvenienceCommunication {
 	 * <div class="en">Adds a document to the XDS Submission set.
 	 *
 	 * @param desc
-	 *          the document descriptor (which kind of document do you want to
-	 *          transfer? e.g. PDF, CDA,...)
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
-	 *          The input stream to the document
+	 *            The input stream to the document
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
@@ -191,13 +191,13 @@ public class ConvenienceCommunication {
 	 * <div class="en"> Adds a document to the XDS Submission set.
 	 *
 	 * @param desc
-	 *          the document descriptor (which kind of document do you want to
-	 *          transfer? e.g. PDF, CDA,...)
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
-	 *          the file path
+	 *            the file path
 	 * @return the document metadata (which have to be completed) </div>
 	 * @throws FileNotFoundException
-	 *           exception
+	 *             exception
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws FileNotFoundException {
@@ -213,33 +213,34 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to add
-	 * a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
 	 *
 	 * @param outputStream
-	 *          The outputStream object where the contents will be written to.
+	 *            The outputStream object where the contents will be written to.
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
+				new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with a given XdmContents object. This
-	 * method will be used, if you want to create your own INDEX.HTM and
+	 * <div class="en">creates an XDM volume with a given XdmContents object.
+	 * This method will be used, if you want to create your own INDEX.HTM and
 	 * README.TXT for your XDM volume. You have to add a document to this class
 	 * first.</div>
 	 *
 	 * @param outputStream
-	 *          The outputStream object where the contents will be written to.
+	 *            The outputStream object where the contents will be written to.
 	 * @param xdmContents
-	 *          The xdmContents object containing your own INDEX.HTM and
-	 *          README.TXT
+	 *            The xdmContents object containing your own INDEX.HTM and
+	 *            README.TXT
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
@@ -251,31 +252,32 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to add
-	 * a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
 	 *
 	 * @param filePath
-	 *          The filePath where the contents will be written to.
+	 *            The filePath where the contents will be written to.
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			generateDefaultSubmissionSetAttributes();
 		}
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
+				new ReadmeTxt(txnData));
 		xdmContents.createZip(filePath, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to add
-	 * a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to
+	 * add a document to this class first.</div>
 	 *
 	 * @param filePath
-	 *          The filePath where the contents will be written to.
+	 *            The filePath where the contents will be written to.
 	 * @param xdmContents
-	 *          The xdmContents object containing your own INDEX.HTM and
-	 *          README.TXT
+	 *            The xdmContents object containing your own INDEX.HTM and
+	 *            README.TXT
 	 *
 	 * @return the XdmContents object
 	 */
@@ -292,15 +294,16 @@ public class ConvenienceCommunication {
 	 * metadata. You have to add a document to this class first.</div>
 	 *
 	 * @param submissionSetMetadata
-	 *          The metadata of the submission set
+	 *            The metadata of the submission set
 	 * @param outputStream
-	 *          The outputStream object where the contents will be written to.
+	 *            The outputStream object where the contents will be written to.
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata,
 			OutputStream outputStream) {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
+		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
+				new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
@@ -340,7 +343,7 @@ public class ConvenienceCommunication {
 	 * Returns the contents of an existing XDM volume.
 	 *
 	 * @param filePath
-	 *          the XDM volume as ZipFile
+	 *            the XDM volume as ZipFile
 	 * @return the XDMContents
 	 */
 	public XdmContents getXdmContents(String filePath) {
@@ -351,7 +354,7 @@ public class ConvenienceCommunication {
 	 * Returns the contents of an existing XDM volume.
 	 *
 	 * @param zipFile
-	 *          the XDM volume as ZipFile
+	 *            the XDM volume as ZipFile
 	 * @return the XDMContents
 	 */
 	public XdmContents getXdmContents(ZipFile zipFile) {
@@ -361,13 +364,13 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query. This is useful if the number of
-	 * results is limited in the registry and your query would exceed this limit.
-	 * In this case, precise your query or do a query for references first, choose
-	 * the possible matches (e.g. the last 10 results) and then query for
-	 * metadata.
+	 * results is limited in the registry and your query would exceed this
+	 * limit. In this case, precise your query or do a query for references
+	 * first, choose the possible matches (e.g. the last 10 results) and then
+	 * query for metadata.
 	 *
 	 * @param queryParameter
-	 *          a findDocumentsQuery object filled with your query parameters
+	 *            a findDocumentsQuery object filled with your query parameters
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
 	 */
@@ -379,11 +382,11 @@ public class ConvenienceCommunication {
 	 * Query a registry for documents, using a find documents query.
 	 *
 	 * @param queryParameter
-	 *          a findDocumentsQuery object filled with your query parameters
+	 *            a findDocumentsQuery object filled with your query parameters
 	 * @param returnReferencesOnly
-	 *          if set to false, the registry response will contain the document
-	 *          metadata. If set to true, the response will contain references
-	 *          instead of the complete document metadata.
+	 *            if set to false, the registry response will contain the
+	 *            document metadata. If set to true, the response will contain
+	 *            references instead of the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
 
@@ -392,7 +395,7 @@ public class ConvenienceCommunication {
 	 * documents, using a find documents query.
 	 *
 	 * @param queryParameter
-	 *          a findDocumentsQuery object filled with your query parameters
+	 *            a findDocumentsQuery object filled with your query parameters
 	 * @return the OHT XDSQueryResponseType containing full document
 	 *         metadata</div>
 	 */
@@ -405,15 +408,16 @@ public class ConvenienceCommunication {
 	 * documents satisfying the given query parameters.
 	 *
 	 * @param query
-	 *          one of the given queries (@see
-	 *          org.ehealth_connector.communication.storedquery and
-	 *          org.ehealth_connector.communication.storedquery.ch)
+	 *            one of the given queries (@see
+	 *            org.ehealth_connector.communication.storedquery and
+	 *            org.ehealth_connector.communication.storedquery.ch)
 	 * @return the OHT XDSQueryResponseType containing full document
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
 		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		final B_Consumer consumer = new B_Consumer(
+				affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
@@ -432,15 +436,16 @@ public class ConvenienceCommunication {
 	 * query for metadata.
 	 *
 	 * @param query
-	 *          one of the given queries (@see
-	 *          org.ehealth_connector.communication.storedquery and
-	 *          org.ehealth_connector.communication.storedquery.ch)
+	 *            one of the given queries (@see
+	 *            org.ehealth_connector.communication.storedquery and
+	 *            org.ehealth_connector.communication.storedquery.ch)
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
 		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		final B_Consumer consumer = new B_Consumer(
+				affinityDomain.getRegistryDestination().getUri());
 
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
@@ -454,7 +459,7 @@ public class ConvenienceCommunication {
 	 * <div class="en">Retrieves a document from a Repository
 	 *
 	 * @param docReq
-	 *          the document request
+	 *            the document request
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 */
 	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq) {
@@ -462,15 +467,17 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Retrieves multiple documents from one or more Repositories
+	 * <div class="en">Retrieves multiple documents from one or more
+	 * Repositories
 	 *
 	 * @param docReq
-	 *          an array of document requests
+	 *            an array of document requests
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 */
 	@SuppressWarnings("unchecked")
 	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		final B_Consumer consumer = new B_Consumer(affinityDomain.getRegistryDestination().getUri());
+		final B_Consumer consumer = new B_Consumer(
+				affinityDomain.getRegistryDestination().getUri());
 
 		// Create RetrieveSetRequestType
 		final RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
@@ -483,7 +490,8 @@ public class ConvenienceCommunication {
 			repositoryMap.put(element.getRepositoryId(), element.getRepositoryUri());
 
 			// Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest().add(element.getOhtDocumentRequestType());
+			retrieveDocumentSetRequest.getDocumentRequest()
+					.add(element.getOhtDocumentRequestType());
 		}
 		consumer.setRepositoryMap(repositoryMap);
 
@@ -498,7 +506,7 @@ public class ConvenienceCommunication {
 	 * <div class="en">Sets the affinity domain set-up
 	 *
 	 * @param affinityDomain
-	 *          the affinity domain set-up </div>
+	 *            the affinity domain set-up </div>
 	 */
 	public void setAffinityDomain(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
@@ -508,8 +516,8 @@ public class ConvenienceCommunication {
 	 * Sets the status of the automatic metadata extraction
 	 *
 	 * @param automaticExtractionEnabled
-	 *          true, if metadata will be extracted as far as possible)
-	 *          automatically, false otherwise
+	 *            true, if metadata will be extracted as far as possible)
+	 *            automatically, false otherwise
 	 */
 	public void setAutomaticExtractionEnabled(
 			DocumentMetadataExtractionMode automaticExtractionEnabled) {
@@ -524,7 +532,7 @@ public class ConvenienceCommunication {
 	 *
 	 * @return the OHT XDSResponseType</div>
 	 * @throws Exception
-	 *           if the transfer is not successful
+	 *             if the transfer is not successful
 	 */
 	public XDSResponseType submit() throws Exception {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
@@ -544,14 +552,15 @@ public class ConvenienceCommunication {
 	 * ITI Document Source actor
 	 *
 	 * @param submissionSetMetadata
-	 *          The information in this object will be used to create
-	 *          comprehensive meta data about this submission (e.g. with
-	 *          AuthorRole, AuthorInstitution, ContentType and Title). Although,
-	 *          some of this information can be derived automatically, some may be
-	 *          required in your country (e.g. AuthorRole in Switzerland)
+	 *            The information in this object will be used to create
+	 *            comprehensive meta data about this submission (e.g. with
+	 *            AuthorRole, AuthorInstitution, ContentType and Title).
+	 *            Although, some of this information can be derived
+	 *            automatically, some may be required in your country (e.g.
+	 *            AuthorRole in Switzerland)
 	 * @return the OHT XDSResponseType</div>
 	 * @throws Exception
-	 *           if the transfer is not successful
+	 *             if the transfer is not successful
 	 */
 	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
@@ -563,9 +572,9 @@ public class ConvenienceCommunication {
 	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
 	 *
 	 * @param doc
-	 *          the document
+	 *            the document
 	 * @param desc
-	 *          the Document descriptor
+	 *            the Document descriptor
 	 * @return the DocumentMetadata
 	 */
 	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
@@ -606,9 +615,9 @@ public class ConvenienceCommunication {
 	 * logger
 	 *
 	 * @param affinityDomain
-	 *          the affinity domain
+	 *            the affinity domain
 	 * @param atnaConfigMode
-	 *          the ATNA config mode (secure or unsecure)
+	 *            the ATNA config mode (secure or unsecure)
 	 */
 	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
 		XDSSourceAuditor.getAuditor().getConfig()
@@ -616,12 +625,12 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction methods,
-	 * which are unsafe, because an XDS registry might use another value
-	 * set.</div>
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
+	 * methods, which are unsafe, because an XDS registry might use another
+	 * value set.</div>
 	 *
 	 * @param docMetadata
-	 *          the doc metadata </div>
+	 *            the doc metadata </div>
 	 */
 	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
 		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
@@ -641,15 +650,15 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
 		// to long for the registry (EXT part is larger than the allowed 16
 		// characters)
-		docMetadata
-				.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		docMetadata.setUniqueId(
+				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	/**
 	 * <div class="en">Generate missing doc entry attributes.</div>
 	 *
 	 * @param docEntryUuid
-	 *          the doc entry uuid </div>
+	 *            the doc entry uuid </div>
 	 */
 	private void generateDefaultDocEntryAttributes(String docEntryUuid) {
 
@@ -664,8 +673,8 @@ public class ConvenienceCommunication {
 
 		// Generate the UUID
 		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata
-					.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			docMetadata.setUniqueId(
+					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		// Generate Creation Time with the current time
@@ -679,8 +688,8 @@ public class ConvenienceCommunication {
 	 */
 	private void generateDefaultSubmissionSetAttributes() {
 
-		DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata().getDocumentEntry()
-				.get(0);
+		final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
+				.getDocumentEntry().get(0);
 		if (firstDocEntry.getPatientId() == null) {
 			throw new IllegalStateException(
 					"Missing destination patient ID in DocumentMetadata of first document.");
@@ -716,7 +725,7 @@ public class ConvenienceCommunication {
 
 		// Use the PatientId of the first Document for the Submission set ID
 		if (subSet.getPatientId() == null) {
-			CX testCx = firstDocEntry.getPatientId();
+			final CX testCx = firstDocEntry.getPatientId();
 			subSet.setPatientId(EcoreUtil.copy(testCx));
 		}
 
@@ -732,7 +741,7 @@ public class ConvenienceCommunication {
 	 * Sets the key- and truststore for the default security domain
 	 *
 	 * @param dest
-	 *          the Destination Object
+	 *            the Destination Object
 	 */
 	private void setDefaultKeystoreTruststore(Destination dest) {
 		if (dest.getKeyStore() == null) {

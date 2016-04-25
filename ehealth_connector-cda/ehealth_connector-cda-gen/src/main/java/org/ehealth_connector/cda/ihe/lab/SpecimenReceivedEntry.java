@@ -77,7 +77,7 @@ public class SpecimenReceivedEntry
 		if (id != null) {
 			getMdht().getIds().add(id.getIi());
 		} else {
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(NullFlavor.UNK);
 			getMdht().getIds().add(ii);
 		}

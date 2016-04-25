@@ -140,9 +140,9 @@ public class ObservationMediaEntry
 	 * @return the comment entry
 	 */
 	public List<SectionAnnotationCommentEntry> getCommentEntryList() {
-		if (this.getMdht().getActs() != null && !this.getMdht().getActs().isEmpty()) {
-			ArrayList<SectionAnnotationCommentEntry> comments = new ArrayList<SectionAnnotationCommentEntry>();
-			for (Act act : getMdht().getActs()) {
+		if ((this.getMdht().getActs() != null) && !this.getMdht().getActs().isEmpty()) {
+			final List<SectionAnnotationCommentEntry> comments = new ArrayList<SectionAnnotationCommentEntry>();
+			for (final Act act : getMdht().getActs()) {
 				if (act instanceof Comment) {
 					comments.add(new SectionAnnotationCommentEntry((Comment) act));
 				}
@@ -174,7 +174,7 @@ public class ObservationMediaEntry
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public boolean getObject(OutputStream outputStream) throws IOException {
-		Base64OutputStream os = new Base64OutputStream(outputStream, false);
+		final Base64OutputStream os = new Base64OutputStream(outputStream, false);
 		if (getMdht().getValue() != null) {
 			os.write(getMdht().getValue().getText().getBytes());
 			os.close();
@@ -208,8 +208,8 @@ public class ObservationMediaEntry
 	 */
 	public void setBase64Object(InputStream is, LabObservationMediaMimeType mimeType)
 			throws IOException {
-		String valueString = new String(IOUtils.toByteArray(is));
-		ED value = Util.createEd(valueString);
+		final String valueString = new String(IOUtils.toByteArray(is));
+		final ED value = Util.createEd(valueString);
 		value.setMediaType(mimeType.getCodeValue());
 		value.setRepresentation(BinaryDataEncoding.B64);
 		getMdht().setValue(value);
@@ -229,7 +229,7 @@ public class ObservationMediaEntry
 	 */
 	public void setObject(InputStream inputStream, LabObservationMediaMimeType mimeType)
 			throws IOException {
-		Base64InputStream is = new Base64InputStream(inputStream, true);
+		final Base64InputStream is = new Base64InputStream(inputStream, true);
 		this.setBase64Object(is, mimeType);
 	}
 
@@ -246,7 +246,7 @@ public class ObservationMediaEntry
 	 */
 	public void setObject(String fileName, LabObservationMediaMimeType mimeType)
 			throws IOException {
-		InputStream inputStream = new FileInputStream(fileName);
+		final InputStream inputStream = new FileInputStream(fileName);
 		setObject(inputStream, mimeType);
 	}
 
@@ -266,7 +266,7 @@ public class ObservationMediaEntry
 	 * @return the mime type
 	 */
 	protected String getMimeType() {
-		if (getMdht().getValue() != null && getMdht().getValue().getMediaType() != null) {
+		if ((getMdht().getValue() != null) && (getMdht().getValue().getMediaType() != null)) {
 			return getMdht().getValue().getMediaType();
 		}
 		return null;

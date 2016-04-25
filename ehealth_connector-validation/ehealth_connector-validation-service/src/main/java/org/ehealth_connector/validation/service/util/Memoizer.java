@@ -51,13 +51,13 @@ public class Memoizer<A, V> implements Computable<A, V> {
 		while (true) {
 			Future<V> f = cache.get(arg);
 			if (f == null) {
-				Callable<V> eval = new Callable<V>() {
+				final Callable<V> eval = new Callable<V>() {
 					@Override
 					public V call() throws Exception {
 						return c.compute(arg);
 					}
 				};
-				FutureTask<V> ft = new FutureTask<V>(eval);
+				final FutureTask<V> ft = new FutureTask<V>(eval);
 				if ((f = cache.putIfAbsent(arg, ft)) == null) {
 					f = ft;
 					ft.run();
@@ -65,7 +65,7 @@ public class Memoizer<A, V> implements Computable<A, V> {
 			}
 			try {
 				return f.get();
-			} catch (CancellationException e) {
+			} catch (final CancellationException e) {
 				cache.remove(arg, f);
 			}
 		}

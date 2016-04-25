@@ -45,32 +45,32 @@ import org.xml.sax.InputSource;
  * the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implemting the facade to it
+ *            the model type to provide for implemting the facade to it
  */
 public class MdhtFacade<E extends InfrastructureRoot> {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The facade objects. */
 	private E mdht;
 
 	/** The template id. */
-	protected String templateId;
+	private String templateId;
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtFacade(E mdht) {
 		this.mdht = mdht;
 		if (mdht != null) {
-			EClass eClass = mdht.eClass();
-			EAnnotation eAnnotation = eClass
+			final EClass eClass = mdht.eClass();
+			final EAnnotation eAnnotation = eClass
 					.getEAnnotation("http://www.openhealthtools.org/mdht/uml/cda/annotation");
-			if (eAnnotation != null && eAnnotation.getDetails() != null) {
+			if ((eAnnotation != null) && (eAnnotation.getDetails() != null)) {
 				templateId = eAnnotation.getDetails().get("templateId.root");
 			}
 		}
@@ -80,14 +80,14 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * Instantiates a new facade object for the provided model.
 	 *
 	 * @param mdht
-	 *          the mdht object which a facade is provided
+	 *            the mdht object which a facade is provided
 	 * @param templateIdRoot
-	 *          the template id root
+	 *            the template id root
 	 * @param templateIdExtension
-	 *          the template id extension, mdht does not provide templateId
-	 *          extension attribute for modeling, this extension necessary for
-	 *          swiss templates and can be added during for the specified root
-	 *          during constructing the facade
+	 *            the template id extension, mdht does not provide templateId
+	 *            extension attribute for modeling, this extension necessary for
+	 *            swiss templates and can be added during for the specified root
+	 *            during constructing the facade
 	 */
 	protected MdhtFacade(E mdht, String templateIdRoot, String templateIdExtension) {
 		this(mdht);
@@ -113,10 +113,10 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * returns the text of a Level2 section specified by a contendId.
 	 *
 	 * @param section
-	 *          the section
+	 *            the section
 	 * @param reference
-	 *          the content id the section should be searched for by the
-	 *          reference, reference has to start with a # (relative)
+	 *            the content id the section should be searched for by the
+	 *            reference, reference has to start with a # (relative)
 	 * @return the string
 	 */
 	public String getContentIdText(MdhtFacade<?> section, String reference) {
@@ -179,7 +179,8 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * Gets the document.
 	 *
 	 * @param namespaceAware
-	 *          if doucment should be built with namespace aware set (for xpath)
+	 *            if doucment should be built with namespace aware set (for
+	 *            xpath)
 	 * @return the document
 	 */
 	public Document getDocument(boolean namespaceAware) {
@@ -232,7 +233,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference
+	 *            the new text reference
 	 */
 	public void setTextReference(String value) {
 	}

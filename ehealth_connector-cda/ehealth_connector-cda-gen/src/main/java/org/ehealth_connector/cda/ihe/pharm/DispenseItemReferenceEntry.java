@@ -40,17 +40,18 @@ public class DispenseItemReferenceEntry extends DispenseItemEntry {
 	 * Instantiates a new dispense item reference entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public DispenseItemReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry mdht) {
 		super(mdht);
-		String templateId = this.getTemplateId();
+		final String templateId = this.getTemplateId();
 		this.getMdht().getTemplateIds().clear();
 		this.getMdht().getTemplateIds().add(new Identificator(templateId, null).getIi());
-		Product product = CDAFactory.eINSTANCE.createProduct();
-		ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE.createManufacturedProduct();
-		Material material = CDAFactory.eINSTANCE.createMaterial();
+		final Product product = CDAFactory.eINSTANCE.createProduct();
+		final ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE
+				.createManufacturedProduct();
+		final Material material = CDAFactory.eINSTANCE.createMaterial();
 		material.setNullFlavor(NullFlavor.NA);
 		manufacturedProduct.setManufacturedMaterial(material);
 		product.setManufacturedProduct(manufacturedProduct);

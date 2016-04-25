@@ -26,15 +26,15 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 public class SpecimenRole extends PlayingEntity {
 
 	/** The MDHT specimen role. */
-	org.openhealthtools.mdht.uml.cda.SpecimenRole mSpecimenRole;
+	private org.openhealthtools.mdht.uml.cda.SpecimenRole mSpecimenRole;
 
 	/**
 	 * Instantiates a new specimen role.
 	 */
 	public SpecimenRole() {
 		super();
-		mSpecimenRole = CDAFactory.eINSTANCE.createSpecimenRole();
-		mSpecimenRole.setSpecimenPlayingEntity(mPlayingEntity);
+		setSpecimenRole(CDAFactory.eINSTANCE.createSpecimenRole());
+		getSpecimenRole().setSpecimenPlayingEntity(getPlayingEntity());
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class SpecimenRole extends PlayingEntity {
 	 */
 	public SpecimenRole(org.openhealthtools.mdht.uml.cda.SpecimenRole mdht) {
 		super(mdht.getSpecimenPlayingEntity());
-		mSpecimenRole = mdht;
+		setSpecimenRole(mdht);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class SpecimenRole extends PlayingEntity {
 	 *            the id
 	 */
 	public void addId(Identificator id) {
-		mSpecimenRole.getIds().add(id.getIi());
+		getSpecimenRole().getIds().add(id.getIi());
 	}
 
 	/**
@@ -64,6 +64,22 @@ public class SpecimenRole extends PlayingEntity {
 	 * @return the id list
 	 */
 	public List<Identificator> getIdList() {
-		return Util.convertIds(mSpecimenRole.getIds());
+		return Util.convertIds(getSpecimenRole().getIds());
+	}
+
+	/**
+	 * Method to get
+	 * @return the specimenRole
+	 */
+	public org.openhealthtools.mdht.uml.cda.SpecimenRole getSpecimenRole() {
+		return mSpecimenRole;
+	}
+
+	/**
+	 * Method to set
+	 * @param specimenRole the specimenRole to set
+	 */
+	public void setSpecimenRole(org.openhealthtools.mdht.uml.cda.SpecimenRole specimenRole) {
+		mSpecimenRole = specimenRole;
 	}
 }

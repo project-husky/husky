@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 public class ZipCreator {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private final byte[] buffer = new byte[1024];
 	private ZipOutputStream out = null;

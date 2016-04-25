@@ -64,14 +64,14 @@ public class IntendedRecipient extends org.ehealth_connector.common.IntendedReci
 		addId(recipient);
 
 		// addr = NASK
-		AD ad = DatatypesFactory.eINSTANCE.createAD();
+		final AD ad = DatatypesFactory.eINSTANCE.createAD();
 		ad.setNullFlavor(NullFlavor.NASK);
-		mIntendedRecipient.getIntendedRecipient().getAddrs().add(ad);
+		getIntendedRecipient().getIntendedRecipient().getAddrs().add(ad);
 
 		// telecoms = NASK
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.MSK);
-		mIntendedRecipient.getIntendedRecipient().getTelecoms().add(tel);
+		getIntendedRecipient().getIntendedRecipient().getTelecoms().add(tel);
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class IntendedRecipient extends org.ehealth_connector.common.IntendedReci
 	 *            the recipient
 	 */
 	public void addId(QualabQcc recipient) {
-		Identificator id = Identificator.convertToIdentificator(recipient.getCode());
-		mIntendedRecipient.getIntendedRecipient().getIds().add(id.getIi());
+		final Identificator id = Identificator.convertToIdentificator(recipient.getCode());
+		getIntendedRecipient().getIntendedRecipient().getIds().add(id.getIi());
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class IntendedRecipient extends org.ehealth_connector.common.IntendedReci
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<QualabQcc> getIdsEnum() {
-		ArrayList<QualabQcc> iil = new ArrayList<QualabQcc>();
-		for (II ii : mIntendedRecipient.getIntendedRecipient().getIds()) {
+		final List<QualabQcc> iil = new ArrayList<QualabQcc>();
+		for (final II ii : getIntendedRecipient().getIntendedRecipient().getIds()) {
 			if (QualabQcc.getEnum(ii.getExtension()) != null) {
 				iil.add(QualabQcc.getEnum(ii.getExtension()));
 			}

@@ -26,8 +26,8 @@ import org.ehealth_connector.validation.service.schematron.bind.FiredRule;
 import org.ehealth_connector.validation.service.schematron.bind.SuccessfulReport;
 
 /**
- * Wrapper class for all actve-pattern elemnts, with coresponding
- * fired-rule, failed-assert and successful-report
+ * Wrapper class for all actve-pattern elemnts, with coresponding fired-rule,
+ * failed-assert and successful-report
  *
  */
 public class ActivePatternResult {
@@ -43,10 +43,10 @@ public class ActivePatternResult {
 	 * @return a List of all fired rules
 	 */
 	public List<FiredRule> getFiredRules() {
-		ArrayList<FiredRule> firedRules = new ArrayList<FiredRule>();
-		Iterator<Object> apcIter = apChilds.iterator();
+		final List<FiredRule> firedRules = new ArrayList<FiredRule>();
+		final Iterator<Object> apcIter = apChilds.iterator();
 		while (apcIter.hasNext()) {
-			Object tempObj = apcIter.next();
+			final Object tempObj = apcIter.next();
 			if (tempObj instanceof FiredRule) {
 				firedRules.add((FiredRule) tempObj);
 			}
@@ -58,14 +58,15 @@ public class ActivePatternResult {
 	 * @return a list of fired-rules with failed-assert or successful-report
 	 */
 	public List<FiredRuleResult> getFiredRulesSuccessFailed() {
-		List<FiredRuleResult> firedRulesresults = new ArrayList<FiredRuleResult>();
-		Iterator<Object> apcIter = apChilds.iterator();
+		final List<FiredRuleResult> firedRulesresults = new ArrayList<FiredRuleResult>();
+		final Iterator<Object> apcIter = apChilds.iterator();
 		FiredRuleResult tempFR = null;
 		Object prevObject = null;
 		Object tempObj = null;
 		while (apcIter.hasNext()) {
 			tempObj = apcIter.next();
-			if (tempObj instanceof FiredRule && (prevObject == null || prevObject instanceof FiredRule)) {
+			if ((tempObj instanceof FiredRule)
+					&& ((prevObject == null) || (prevObject instanceof FiredRule))) {
 				tempFR = new FiredRuleResult((FiredRule) tempObj);
 				prevObject = tempFR;
 				continue;
@@ -81,14 +82,14 @@ public class ActivePatternResult {
 					continue;
 				}
 			}
-			if (tempObj instanceof FiredRule && !(prevObject instanceof FiredRule)) {
+			if ((tempObj instanceof FiredRule) && !(prevObject instanceof FiredRule)) {
 				if (!(tempFR.getFailedAssert().isEmpty() && tempFR.getSuccessfulReport().isEmpty()))
-						firedRulesresults.add(tempFR);
+					firedRulesresults.add(tempFR);
 				tempFR = new FiredRuleResult((FiredRule) tempObj);
 				prevObject = tempFR;
 			}
 		}
-		if (tempObj instanceof SuccessfulReport || tempObj instanceof SuccessfulReport) {
+		if ((tempObj instanceof SuccessfulReport) || (tempObj instanceof SuccessfulReport)) {
 			firedRulesresults.add(tempFR);
 		}
 		return firedRulesresults;

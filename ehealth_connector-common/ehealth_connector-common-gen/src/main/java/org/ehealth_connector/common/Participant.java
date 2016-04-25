@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 public class Participant {
 
 	/** The MDHT participant object. */
-	Participant2 mParticipant;
+	private Participant2 mParticipant;
 
 	/**
 	 * Standard constructor.
@@ -117,7 +117,7 @@ public class Participant {
 	public void setTime(Date date) {
 		try {
 			mParticipant.setTime(DateUtil.createIVL_TSFromEuroDate(date));
-		} catch (ParseException e) {
+		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
 	}

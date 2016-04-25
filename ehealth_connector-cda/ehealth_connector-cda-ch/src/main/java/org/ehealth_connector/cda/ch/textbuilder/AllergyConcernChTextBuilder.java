@@ -64,7 +64,7 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 	 */
 	@Override
 	protected void addRow(AbstractAllergyConcern allergyConcern, int i) {
-		for (AbstractAllergyProblem item : allergyConcern.getAllergyProblems()) {
+		for (final AbstractAllergyProblem item : allergyConcern.getAllergyProblems()) {
 			append("<tr>");
 			addCell("Problem");
 			if (allergyConcern.getConcern() != null) {
@@ -86,7 +86,8 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 							if (Util.isComment(er)) {
 								j++;
 								minOneComment = true;
-								cellStr = cellStr + ("<content ID='" + contentIdPrefix + "-comment"
+								cellStr = cellStr + ("<content ID='" + getContentIdPrefix()
+										+ "-comment"
 										+ i + j + "'>");
 								cellStr = cellStr + (ap.getCommentText());
 								cellStr = cellStr + ("</content>");

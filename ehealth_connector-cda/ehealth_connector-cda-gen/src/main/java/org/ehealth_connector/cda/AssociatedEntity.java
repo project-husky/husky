@@ -57,16 +57,16 @@ public class AssociatedEntity
 	 */
 	public AssociatedEntity(Name name) {
 		this();
-		Person person = new Person(name);
+		final Person person = new Person(name);
 		setPerson(person);
 
 		// add AD = UNK
-		AD address = DatatypesFactory.eINSTANCE.createAD();
+		final AD address = DatatypesFactory.eINSTANCE.createAD();
 		address.setNullFlavor(NullFlavor.UNK);
 		getMdht().getAddrs().add(address);
 
 		// add TEL = UNK
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.UNK);
 		getMdht().getTelecoms().add(tel);
 	}

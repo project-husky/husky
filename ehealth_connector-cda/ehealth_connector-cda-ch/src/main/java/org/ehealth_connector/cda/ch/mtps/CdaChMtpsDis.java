@@ -57,7 +57,7 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			setTitle("Medication dispensed"); // IHE PHARM DIS L350
 			break;
 		}
-		DispenseSection dispenseSection = new DispenseSection(languageCode);
+		final DispenseSection dispenseSection = new DispenseSection(languageCode);
 		this.getDoc().addSection(dispenseSection.getMdht());
 	}
 

@@ -49,7 +49,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Instantiates a new criterion entry.
 	 *
 	 * @param pharmaceuticalAdviceConcernEntry
-	 *          the pharmaceutical advice concern entry
+	 *            the pharmaceutical advice concern entry
 	 */
 	protected PharmaceuticalAdviceConcernEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry pharmaceuticalAdviceConcernEntry) {
@@ -60,11 +60,10 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Adds the problem concern entry.
 	 *
 	 * @param problemConcernEntry
-	 *          the problem concern entry
+	 *            the problem concern entry
 	 */
 	public void addProblemConcernEntry(AbstractProblemConcern problemConcernEntry) {
-		EntryRelationship entryRelationship = null;
-		entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+		final EntryRelationship entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
 		entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		entryRelationship.setInversionInd(Boolean.FALSE);
 		entryRelationship.setAct(problemConcernEntry.getMdht());
@@ -77,11 +76,8 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @return the dispense item reference entry
 	 */
 	public DispenseItemReferenceEntry getDispenseItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-				.getDispenseItemReferenceEntry() != null) {
-			return new DispenseItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-							.getDispenseItemReferenceEntry());
+		if (getMdht().getDispenseItemReferenceEntry() != null) {
+			return new DispenseItemReferenceEntry(getMdht().getDispenseItemReferenceEntry());
 		}
 		return null;
 	}
@@ -92,8 +88,8 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @return the effective time
 	 */
 	public Date getEffectiveTime() {
-		if (this.getMdht().getEffectiveTime() != null
-				&& this.getMdht().getEffectiveTime().getLow() != null) {
+		if ((this.getMdht().getEffectiveTime() != null)
+				&& (this.getMdht().getEffectiveTime().getLow() != null)) {
 			return DateUtil
 					.parseDateyyyyMMddHHmmss(this.getMdht().getEffectiveTime().getLow().getValue());
 		}
@@ -119,11 +115,9 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @return the prescription item reference entry
 	 */
 	public PrescriptionItemReferenceEntry getPrescriptionItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-				.getPrescriptionItemReferenceEntry() != null) {
+		if (getMdht().getPrescriptionItemReferenceEntry() != null) {
 			return new PrescriptionItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-							.getPrescriptionItemReferenceEntry());
+					getMdht().getPrescriptionItemReferenceEntry());
 		}
 		return null;
 	}
@@ -134,9 +128,9 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @return the problem concern entries
 	 */
 	public List<AbstractProblemConcern> getProblemConcernEntries() {
-		List<AbstractProblemConcern> list = new ArrayList<AbstractProblemConcern>();
+		final List<AbstractProblemConcern> list = new ArrayList<AbstractProblemConcern>();
 		if (this.getMdht().getProblemConcernEntriess() != null) {
-			for (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry : getMdht()
+			for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry : getMdht()
 					.getProblemConcernEntriess()) {
 				list.add(new AbstractProblemConcern(problemConcernEntry));
 			}
@@ -150,11 +144,8 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @return the severity of concern entry
 	 */
 	public SeverityOfConcernEntry getSeverityOfConcernEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-				.getSeverityOfConcernEntry() != null) {
-			return new SeverityOfConcernEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry) getMdht())
-							.getSeverityOfConcernEntry());
+		if (getMdht().getSeverityOfConcernEntry() != null) {
+			return new SeverityOfConcernEntry(getMdht().getSeverityOfConcernEntry());
 		}
 		return null;
 	}
@@ -166,7 +157,8 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -176,12 +168,12 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the dispense item reference entry.
 	 *
 	 * @param entry
-	 *          the new dispense item reference entry
+	 *            the new dispense item reference entry
 	 */
 	public void setDispenseItemReferenceEntry(DispenseItemReferenceEntry entry) {
-		DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
+		final DispenseItemReferenceEntry old = getDispenseItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSupply(entry.getMdht());
 					break;
@@ -200,7 +192,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the effective time in the low attribute.
 	 *
 	 * @param date
-	 *          the new effective time
+	 *            the new effective time
 	 */
 	public void setEffectiveTime(Date date) {
 		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
@@ -212,7 +204,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *          the new identificator
+	 *            the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -225,12 +217,12 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the prescription item reference entry.
 	 *
 	 * @param entry
-	 *          the new prescription item reference entry
+	 *            the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
-		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
+		final PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
@@ -249,12 +241,12 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the severity of concern entry.
 	 *
 	 * @param entry
-	 *          the new severity of concern entry
+	 *            the new severity of concern entry
 	 */
 	public void setSeverityOfConcernEntry(SeverityOfConcernEntry entry) {
-		SeverityOfConcernEntry old = this.getSeverityOfConcernEntry();
+		final SeverityOfConcernEntry old = this.getSeverityOfConcernEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setObservation(entry.getMdht());
 					break;
@@ -274,7 +266,8 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference, # for local reference has to be included
+	 *            the new text reference, # for local reference has to be
+	 *            included
 	 */
 	@Override
 	public void setTextReference(String value) {

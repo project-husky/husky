@@ -44,8 +44,8 @@ public class TransformerErrorListener implements ErrorListener {
 	private static final int SIZE_LIMIT = 10;
 
 	public static String explainException(TransformerException exception) {
-		StringBuilder sb = new StringBuilder();
-		String location = getLocationString(exception);
+		final StringBuilder sb = new StringBuilder();
+		final String location = getLocationString(exception);
 		if (location != null) {
 			sb.append("Error on " + location);
 		}
@@ -63,8 +63,8 @@ public class TransformerErrorListener implements ErrorListener {
 	}
 
 	private static String getFileName(String uri) {
-		int pos = uri.lastIndexOf("/");
-		if (pos >= 0 && pos < uri.length() - 1) {
+		final int pos = uri.lastIndexOf("/");
+		if ((pos >= 0) && (pos < (uri.length() - 1))) {
 			return uri.substring(pos + 1);
 		}
 		return uri;
@@ -76,7 +76,7 @@ public class TransformerErrorListener implements ErrorListener {
 			return "line " + locator.getLineNumber() + " column " + locator.getColumnNumber()
 					+ " of " + getFileName(locator.getSystemId());
 		} else if (exception.getCause() instanceof SAXParseException) {
-			SAXParseException e = (SAXParseException) exception.getCause();
+			final SAXParseException e = (SAXParseException) exception.getCause();
 			return "line " + e.getLineNumber() + " column " + e.getColumnNumber() + " of "
 					+ getFileName(e.getSystemId());
 		}
@@ -86,7 +86,7 @@ public class TransformerErrorListener implements ErrorListener {
 	private List<Exception> errors;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private List<Exception> warnings;
 
@@ -131,7 +131,7 @@ public class TransformerErrorListener implements ErrorListener {
 	}
 
 	protected void handleError(TransformerException e) {
-		for (String s : explainException(e).split("\n")) {
+		for (final String s : explainException(e).split("\n")) {
 			log.error(s);
 		}
 		if (errors == null) {
@@ -147,7 +147,7 @@ public class TransformerErrorListener implements ErrorListener {
 	}
 
 	protected void handleWarning(TransformerException e) {
-		for (String s : explainException(e).split("\n")) {
+		for (final String s : explainException(e).split("\n")) {
 			log.warn(s);
 		}
 		if (warnings == null) {

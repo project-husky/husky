@@ -37,12 +37,12 @@ public class PharmaceuticalAdviceItemReferenceEntry extends PharmaceuticalAdvice
 	 * Instantiates a new pharmaceutical advice item reference entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public PharmaceuticalAdviceItemReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemReferenceEntry mdht) {
 		super(mdht);
-		String templateId = this.getTemplateId();
+		final String templateId = this.getTemplateId();
 		this.getMdht().getTemplateIds().clear();
 		this.getMdht().getTemplateIds().add(new Identificator(templateId, null).getIi());
 		this.getMdht().setStatusCode(null);

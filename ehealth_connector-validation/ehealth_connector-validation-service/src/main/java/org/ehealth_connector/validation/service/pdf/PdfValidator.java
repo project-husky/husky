@@ -2,11 +2,11 @@ package org.ehealth_connector.validation.service.pdf;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.transform.stream.StreamSource;
@@ -19,12 +19,12 @@ import com.pdftools.NativeLibrary.COMPLIANCE;
 import com.pdftools.pdfvalidator.PdfError;
 import com.pdftools.pdfvalidator.PdfValidatorAPI;
 
+import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XPathCompiler;
 import net.sf.saxon.s9api.XPathSelector;
 import net.sf.saxon.s9api.XdmItem;
-import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XdmValue;
 
@@ -32,20 +32,20 @@ public class PdfValidator {
 
 	private Configuration config;
 	private String pdfLevel;
-	private ArrayList<PdfValidationResult>pdfValidationResults;
-	
+	private List<PdfValidationResult> pdfValidationResults;
+
 	public PdfValidator(Configuration config) {
 		this.config = config;
 		this.pdfLevel = config.getPdfLevel();
-		
+
 	}
 
 	private PdfValidationResult validatePdf(String pdfStrB64)
 			throws IOException, ConfigurationException {
 
-		PdfValidatorAPI pdfValidator = new PdfValidatorAPI();
+		final PdfValidatorAPI pdfValidator = new PdfValidatorAPI();
 		pdfValidator.setNoTempFiles(true);
-		String licenseKey = config.getLicenseKey();
+		final String licenseKey = config.getLicenseKey();
 		if (!PdfValidatorAPI.setLicenseKey(licenseKey))
 			throw new ConfigurationException("PDF-Validator: Ungültige Lizenz");
 		switch (config.getPdfReportingLevel()) {
@@ -91,8 +91,7 @@ public class PdfValidator {
 		default:
 			comlianceLevel = COMPLIANCE.ePDFUnk;
 		}
-		pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "",
-				comlianceLevel);
+		pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "", comlianceLevel);
 
 		pdfValidator.validate();
 		PdfValidationResult pdfVResult = null;
@@ -100,13 +99,13 @@ public class PdfValidator {
 		if (err != null) {
 			pdfVResult = new PdfValidationResult();
 			while (err != null) {
-				String sErrorMsg = err.getMessage();
-				int errorCode = err.getErrorCode();
-				//log.info("PDF Validation Message: " + errorCode + " "
-					//	+ sErrorMsg);
+				final String sErrorMsg = err.getMessage();
+				final int errorCode = err.getErrorCode();
+				// log.info("PDF Validation Message: " + errorCode + " "
+				// + sErrorMsg);
 				if (errorCode != -2092890606) {
-					BitSet tempBS = BitSet.valueOf(ByteBuffer.allocate(4)
-							.putInt(errorCode).array());
+					final BitSet tempBS = BitSet
+							.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
 					SEVERITY severity = SEVERITY.Information;
 
 					// ErrorCode --> Bit 7 = Error, Bit 23 = Warnung, sonst Info
@@ -128,43 +127,44 @@ public class PdfValidator {
 		return pdfVResult;
 	}
 
-	public void validatePdfFile(File cdaFile) throws ConfigurationException, SaxonApiException, IOException {
-		
-		Processor proc = new Processor(false);
+	public void validatePdfFile(File cdaFile)
+			throws ConfigurationException, SaxonApiException, IOException {
 
-		DocumentBuilder builder = proc.newDocumentBuilder();
+		final Processor proc = new Processor(false);
+
+		final DocumentBuilder builder = proc.newDocumentBuilder();
 		builder.setLineNumbering(true);
 		XdmNode hl7Doc;
-		
-			hl7Doc = builder.build(new StreamSource(new FileInputStream(cdaFile)));
 
-			XPathCompiler xpath = proc.newXPathCompiler();
-			xpath.declareNamespace("", "urn:hl7-org:v3");
+		hl7Doc = builder.build(new StreamSource(new FileInputStream(cdaFile)));
 
-			XPathSelector selector = xpath
-					.compile(
-							"//*[@mediaType='application/pdf' and @representation='B64']")// "//nonXMLBody/*[@mediaType='application/pdf'] | //nonXMLBody/*[@representation='B64']")
-					.load();
-			selector.setContextItem(hl7Doc);
-			XdmValue children = selector.evaluate();
-			if (children.size() > 0) {
-				pdfValidationResults = new ArrayList<PdfValidationResult>();
-				for (XdmItem item : children) {
-					XdmNode nonXMLBodyNode = (XdmNode) item;
-					String pdf = item.getStringValue().trim();// .replaceFirst("\n",
-																// "");
-					PdfValidationResult result = validatePdf(pdf);
-					if (result != null) {
-						result.setLineNumber(String.valueOf(nonXMLBodyNode
-								.getLineNumber()));
-						pdfValidationResults.add(result);
-					}
+		final XPathCompiler xpath = proc.newXPathCompiler();
+		xpath.declareNamespace("", "urn:hl7-org:v3");
+
+		final XPathSelector selector = xpath
+				.compile("//*[@mediaType='application/pdf' and @representation='B64']")// "//nonXMLBody/*[@mediaType='application/pdf']
+																						// |
+																						// //nonXMLBody/*[@representation='B64']")
+				.load();
+		selector.setContextItem(hl7Doc);
+		final XdmValue children = selector.evaluate();
+		if (children.size() > 0) {
+			pdfValidationResults = new ArrayList<PdfValidationResult>();
+			for (final XdmItem item : children) {
+				final XdmNode nonXMLBodyNode = (XdmNode) item;
+				final String pdf = item.getStringValue().trim();// .replaceFirst("\n",
+				// "");
+				final PdfValidationResult result = validatePdf(pdf);
+				if (result != null) {
+					result.setLineNumber(String.valueOf(nonXMLBodyNode.getLineNumber()));
+					pdfValidationResults.add(result);
 				}
 			}
-				
+		}
+
 	}
 
-	public ArrayList<PdfValidationResult> getPdfValidationResults() {
+	public List<PdfValidationResult> getPdfValidationResults() {
 		return pdfValidationResults;
 	}
 

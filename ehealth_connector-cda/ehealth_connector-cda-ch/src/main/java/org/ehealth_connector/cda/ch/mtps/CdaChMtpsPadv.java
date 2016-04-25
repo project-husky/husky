@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * The Class CdaChMtpsPadv. see also CDA CH MTPS 7.4.2.6
  */
 public class CdaChMtpsPadv
-		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
+extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 
 	/**
 	 * Instantiates a new cda ch mtps padv.
@@ -58,7 +58,8 @@ public class CdaChMtpsPadv
 			setTitle("Pharmacy Pharmaceutical Advice"); // CDA CH MTPS 7.4.2.6
 			break;
 		}
-		PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(getLanguageCode());
+		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(
+				getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 

@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 public class ObservationRange {
 
 	/** The MDHT Observation Range Object */
-	org.openhealthtools.mdht.uml.cda.ObservationRange mObsR;
+	private org.openhealthtools.mdht.uml.cda.ObservationRange mObsR;
 
 	/**
 	 * Instantiates a new observation range.
@@ -90,6 +90,25 @@ public class ObservationRange {
 	 */
 	public void setValue(Value value) {
 		mObsR.setValue(value.getValue());
+	}
+
+	/**
+	 * Method to get
+	 * 
+	 * @return the obsR
+	 */
+	public org.openhealthtools.mdht.uml.cda.ObservationRange getObsR() {
+		return mObsR;
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param obsR
+	 *            the obsR to set
+	 */
+	public void setObsR(org.openhealthtools.mdht.uml.cda.ObservationRange obsR) {
+		mObsR = obsR;
 	}
 
 }

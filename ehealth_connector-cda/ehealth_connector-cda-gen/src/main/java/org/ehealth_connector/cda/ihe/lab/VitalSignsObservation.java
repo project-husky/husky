@@ -76,8 +76,8 @@ public class VitalSignsObservation
 	 * @return the method codes
 	 */
 	public List<Code> getMethodCodes() {
-		List<Code> cl = new ArrayList<Code>();
-		for (CE ce : getMdht().getMethodCodes()) {
+		final List<Code> cl = new ArrayList<Code>();
+		for (final CE ce : getMdht().getMethodCodes()) {
 			cl.add(new Code(ce));
 		}
 		return cl;

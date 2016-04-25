@@ -24,7 +24,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 public class Specimen extends SpecimenRole {
 
 	/** The MDHT specimen. */
-	org.openhealthtools.mdht.uml.cda.Specimen mSpecimen;
+	private org.openhealthtools.mdht.uml.cda.Specimen mSpecimen;
 
 	/**
 	 * Instantiates a new specimen.
@@ -32,7 +32,7 @@ public class Specimen extends SpecimenRole {
 	public Specimen() {
 		super();
 		mSpecimen = CDAFactory.eINSTANCE.createSpecimen();
-		mSpecimen.setSpecimenRole(mSpecimenRole);
+		mSpecimen.setSpecimenRole(getSpecimenRole());
 	}
 
 	/**

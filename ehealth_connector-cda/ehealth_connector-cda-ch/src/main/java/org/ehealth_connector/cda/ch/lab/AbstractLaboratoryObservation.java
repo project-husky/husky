@@ -33,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
  * The Class AbstractLaboratoryObservation.
  */
 public abstract class AbstractLaboratoryObservation
-		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
+extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
 
 	/**
 	 * Instantiates a new abstract laboratory observation.
@@ -74,8 +74,8 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	public List<SectionAnnotationCommentEntry> getCommentEntryList() {
 		if (this.getMdht().getComments() != null) {
-			ArrayList<SectionAnnotationCommentEntry> comments = new ArrayList<SectionAnnotationCommentEntry>();
-			for (Comment comment : this.getMdht().getComments()) {
+			final List<SectionAnnotationCommentEntry> comments = new ArrayList<SectionAnnotationCommentEntry>();
+			for (final Comment comment : this.getMdht().getComments()) {
 				comments.add(new SectionAnnotationCommentEntry(comment));
 			}
 			return comments;
@@ -89,7 +89,7 @@ public abstract class AbstractLaboratoryObservation
 	 * @return the reference range
 	 */
 	public ReferenceRange getReferenceRange() {
-		if (getMdht().getReferenceRanges() != null && !getMdht().getReferenceRanges().isEmpty()) {
+		if ((getMdht().getReferenceRanges() != null) && !getMdht().getReferenceRanges().isEmpty()) {
 			return new ReferenceRange(getMdht().getReferenceRanges().get(0));
 		}
 		return null;
@@ -116,8 +116,8 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	@Override
 	public List<Value> getValues() {
-		ArrayList<Value> vl = new ArrayList<Value>();
-		for (ANY v : getMdht().getValues()) {
+		final List<Value> vl = new ArrayList<Value>();
+		for (final ANY v : getMdht().getValues()) {
 			vl.add(new Value(v));
 		}
 		return vl;
@@ -134,7 +134,7 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	public void setNewCode(Code code, SectionAnnotationCommentEntry commentEntry) {
 		this.addCommentEntry(commentEntry);
-		Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
+		final Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
 		nullCode.addTranslation(code);
 		this.setCode(nullCode);
 	}

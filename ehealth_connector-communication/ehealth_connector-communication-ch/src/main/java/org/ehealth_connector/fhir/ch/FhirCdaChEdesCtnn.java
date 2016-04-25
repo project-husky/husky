@@ -401,12 +401,12 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 		narrative = getNarrative(bundle, FhirCommon.urnUseAsAcuityAssessment);
 		doc.setNarrativeTextSectionAcuityAssessment(narrative);
 
-		VitalSignsOrganizer vitalSignOrganizer = getCodedVitalSignOrganizer(bundle);
+		final VitalSignsOrganizer vitalSignOrganizer = getCodedVitalSignOrganizer(bundle);
 		doc.setVitalSignsOrganizer(vitalSignOrganizer);
 
-		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
-		if (vitalSigns != null && !vitalSigns.isEmpty()) {
-			for (VitalSignObservation vitalSign : vitalSigns) {
+		final List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
+		if ((vitalSigns != null) && !vitalSigns.isEmpty()) {
+			for (final VitalSignObservation vitalSign : vitalSigns) {
 				doc.addCodedVitalSign(vitalSignOrganizer, vitalSign, docAuthor);
 			}
 		}
@@ -517,26 +517,26 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 	};
 
 	private VitalSignsOrganizer getCodedVitalSignOrganizer(Bundle bundle) {
-		VitalSignsOrganizer retVal = new VitalSignsOrganizer();
+		final VitalSignsOrganizer retVal = new VitalSignsOrganizer();
 		for (final Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof ListResource) {
-				ListResource list = (ListResource) entry.getResource();
-				List<ExtensionDt> extensions = list
+				final ListResource list = (ListResource) entry.getResource();
+				final List<ExtensionDt> extensions = list
 						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList);
 				if (!extensions.isEmpty()) {
-					IdentifierDt id = list.getIdentifier().get(0);
-					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+					final IdentifierDt id = list.getIdentifier().get(0);
+					final TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
 					retVal.setEffectiveTime(
 							DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 					retVal.addId(new Identificator(id.getSystem(), id.getValue()));
-					for (ListResource.Entry listEntry : list.getEntry()) {
-						List<ExtensionDt> extensions2 = listEntry
+					for (final ListResource.Entry listEntry : list.getEntry()) {
+						final List<ExtensionDt> extensions2 = listEntry
 								.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions2.isEmpty()
-								&& listEntry.getItem().getResource() instanceof Person) {
-							org.ehealth_connector.common.Author author = FhirCommon
+								&& (listEntry.getItem().getResource() instanceof Person)) {
+							final org.ehealth_connector.common.Author author = FhirCommon
 									.getAuthor((Person) listEntry.getItem().getResource());
-							TimeDt timeStamp2 = ((TimeDt) extensions2.get(0).getValue());
+							final TimeDt timeStamp2 = ((TimeDt) extensions2.get(0).getValue());
 							author.setTime(
 									DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp2.getValue()));
 							retVal.addAuthor(author);
@@ -563,35 +563,35 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
 		for (final Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof ListResource) {
-				ListResource list = (ListResource) entry.getResource();
+				final ListResource list = (ListResource) entry.getResource();
 				if (!list.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList)
 						.isEmpty()) {
-					for (ListResource.Entry listEntry : list.getEntry()) {
+					for (final ListResource.Entry listEntry : list.getEntry()) {
 						if (!listEntry.getUndeclaredExtensionsByUrl(
 								FhirCommon.urnUseAsCodedVitalSignObservation).isEmpty()
-								&& listEntry.getItem().getResource() instanceof Observation) {
-							Observation fhirObservation = (Observation) listEntry.getItem()
+								&& (listEntry.getItem().getResource() instanceof Observation)) {
+							final Observation fhirObservation = (Observation) listEntry.getItem()
 									.getResource();
 
-							IDatatype fhirEffectiveTime = fhirObservation.getEffective();
+							final IDatatype fhirEffectiveTime = fhirObservation.getEffective();
 							Date effectiveTime = new Date();
 							if (fhirEffectiveTime instanceof DateTimeDt) {
 								effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
 							}
-							List<Component> components = fhirObservation.getComponent();
-							for (Component component : components) {
+							final List<Component> components = fhirObservation.getComponent();
+							for (final Component component : components) {
 								Value value = null;
 
-								CodingDt fhirCode = component.getCode().getCodingFirstRep();
-								IDatatype fhirValue = component.getValue();
+								final CodingDt fhirCode = component.getCode().getCodingFirstRep();
+								final IDatatype fhirValue = component.getValue();
 
-								Code code = new Code(
+								final Code code = new Code(
 										FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 										fhirCode.getCode(), fhirCode.getDisplay());
 								if (fhirValue instanceof QuantityDt) {
 									// type PQ
 									final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-									PQ pq = DatatypesFactory.eINSTANCE.createPQ();
+									final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
 									pq.setUnit(fhirQuantity.getUnit());
 									pq.setValue(fhirQuantity.getValue());
 									value = new Value(pq);

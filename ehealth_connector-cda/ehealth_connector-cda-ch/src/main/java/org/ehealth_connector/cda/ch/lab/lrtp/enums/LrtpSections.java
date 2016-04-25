@@ -70,7 +70,7 @@ public enum LrtpSections {
 	 * @return the according enum object
 	 */
 	public static LrtpSections getEnum(String code) {
-		for (LrtpSections x : values()) {
+		for (final LrtpSections x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -110,7 +110,7 @@ public enum LrtpSections {
 	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (LrtpSections x : values()) {
+		for (final LrtpSections x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -123,13 +123,13 @@ public enum LrtpSections {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>.
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div>
 	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -155,7 +155,7 @@ public enum LrtpSections {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(getCodeSystemOid());
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -169,7 +169,7 @@ public enum LrtpSections {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
+		final Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 

@@ -49,7 +49,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Sektion Meldesysteme des BAG, basierend auf HL7 CDA-CH um.</div>
  */
 public class CdaChLrph
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
+extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
 
 	/**
 	 * Standard constructor.
@@ -241,40 +241,40 @@ public class CdaChLrph
 	 */
 	public void applyPrivacyFilterHiv() {
 		byte index = 0;
-		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
+		for (final RecordTarget originalRt : getMdht().getRecordTargets()) {
 			// Get original elements
 			PatientRole originalPr = null;
 			if (originalRt.getPatientRole() != null) {
 				originalPr = originalRt.getPatientRole();
 			}
 			Patient originalP = null;
-			if (originalPr != null && originalPr.getPatient() != null) {
+			if ((originalPr != null) && (originalPr.getPatient() != null)) {
 				originalP = originalPr.getPatient();
 			}
 
 			// Initialize new elements
-			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
-			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
-			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			final RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			final PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			final Patient processedP = CDAFactory.eINSTANCE.createPatient();
 			processedRt.setPatientRole(processedPr);
 			processedPr.setPatient(processedP);
 
 			// Copy all necessary elements from the original to the processed
 			// recordTarget
 			// Patient Name
-			if (originalP != null && !originalP.getNames().isEmpty()) {
+			if ((originalP != null) && !originalP.getNames().isEmpty()) {
 				if (originalP.getNames().get(0) != null) {
-					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					final PN pn = DatatypesFactory.eINSTANCE.createPN();
 					pn.setNullFlavor(NullFlavor.MSK);
 					// First letter and number of letters of first given name
 					if (!originalP.getNames().get(0).getGivens().isEmpty()) {
 						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText()
 								.substring(0, 1)
 								+ originalP.getNames().get(0).getGivens().get(0).getText()
-										.length());
+								.length());
 					}
 					// Family Name = MSK
-					ENXP enxp = DatatypesFactory.eINSTANCE.createENXP();
+					final ENXP enxp = DatatypesFactory.eINSTANCE.createENXP();
 					enxp.setNullFlavor(NullFlavor.MSK);
 					pn.getFamilies().add(enxp);
 
@@ -282,12 +282,12 @@ public class CdaChLrph
 				}
 			}
 
-			if (originalPr != null && !originalPr.getAddrs().isEmpty()
-					&& originalPr.getAddrs().get(0).getCities() != null
+			if ((originalPr != null) && !originalPr.getAddrs().isEmpty()
+					&& (originalPr.getAddrs().get(0).getCities() != null)
 					&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
-				AD ad = DatatypesFactory.eINSTANCE.createAD();
+				final AD ad = DatatypesFactory.eINSTANCE.createAD();
 				// Street Name = MSK
-				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
+				final ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
 				streetName.setNullFlavor(NullFlavor.MSK);
 				ad.getStreetNames().add(streetName);
 				// City
@@ -297,23 +297,23 @@ public class CdaChLrph
 			}
 
 			// Birth time
-			if (originalP != null && originalP.getBirthTime() != null) {
+			if ((originalP != null) && (originalP.getBirthTime() != null)) {
 				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
 			}
 
 			// Gender
-			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+			if ((originalP != null) && (originalP.getAdministrativeGenderCode() != null)) {
 				processedP.setAdministrativeGenderCode(
 						EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
 			}
 
 			// Telecom (MSK)
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			tel.setNullFlavor(NullFlavor.MSK);
 			processedPr.getTelecoms().add(tel);
 
 			// ID (MSK)
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(NullFlavor.MSK);
 			processedPr.getIds().add(ii);
 
@@ -359,31 +359,31 @@ public class CdaChLrph
 	 */
 	public void applyPrivacyFilterInitials() {
 		byte index = 0;
-		for (RecordTarget originalRt : getMdht().getRecordTargets()) {
+		for (final RecordTarget originalRt : getMdht().getRecordTargets()) {
 			// Get original elements
 			PatientRole originalPr = null;
 			if (originalRt.getPatientRole() != null) {
 				originalPr = originalRt.getPatientRole();
 			}
 			Patient originalP = null;
-			if (originalPr != null && originalPr.getPatient() != null) {
+			if ((originalPr != null) && (originalPr.getPatient() != null)) {
 				originalP = originalPr.getPatient();
 			}
 
 			// Initialize new elements
-			RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
-			PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
-			Patient processedP = CDAFactory.eINSTANCE.createPatient();
+			final RecordTarget processedRt = CDAFactory.eINSTANCE.createRecordTarget();
+			final PatientRole processedPr = CDAFactory.eINSTANCE.createPatientRole();
+			final Patient processedP = CDAFactory.eINSTANCE.createPatient();
 			processedRt.setPatientRole(processedPr);
 			processedPr.setPatient(processedP);
 
 			// Copy all necessary elements from the original to the processed
 			// recordTarget
 			// Patient Name
-			if (originalP != null && !originalP.getNames().isEmpty()) {
+			if ((originalP != null) && !originalP.getNames().isEmpty()) {
 				if (originalP.getNames().get(0) != null) {
 					// First letter of first given and family name
-					PN pn = DatatypesFactory.eINSTANCE.createPN();
+					final PN pn = DatatypesFactory.eINSTANCE.createPN();
 					pn.setNullFlavor(NullFlavor.MSK);
 					if (!originalP.getNames().get(0).getGivens().isEmpty()) {
 						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText()
@@ -397,14 +397,14 @@ public class CdaChLrph
 				}
 			}
 
-			if (originalPr != null && !originalPr.getAddrs().isEmpty()) {
-				AD ad = DatatypesFactory.eINSTANCE.createAD();
+			if ((originalPr != null) && !originalPr.getAddrs().isEmpty()) {
+				final AD ad = DatatypesFactory.eINSTANCE.createAD();
 				// Street Name = MSK
-				ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
+				final ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
 				streetName.setNullFlavor(NullFlavor.MSK);
 				ad.getStreetNames().add(streetName);
 				// City
-				if (originalPr.getAddrs().get(0).getCities() != null
+				if ((originalPr.getAddrs().get(0).getCities() != null)
 						&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
 					ad.addCity(originalPr.getAddrs().get(0).getCities().get(0).getText());
 				}
@@ -417,23 +417,23 @@ public class CdaChLrph
 			}
 
 			// Birth time
-			if (originalP != null && originalP.getBirthTime() != null) {
+			if ((originalP != null) && (originalP.getBirthTime() != null)) {
 				processedP.setBirthTime(EcoreUtil.copy(originalP.getBirthTime()));
 			}
 
 			// Gender
-			if (originalP != null && originalP.getAdministrativeGenderCode() != null) {
+			if ((originalP != null) && (originalP.getAdministrativeGenderCode() != null)) {
 				processedP.setAdministrativeGenderCode(
 						EcoreUtil.copy(originalP.getAdministrativeGenderCode()));
 			}
 
 			// Telecom (MSK)
-			TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			tel.setNullFlavor(NullFlavor.MSK);
 			processedPr.getTelecoms().add(tel);
 
 			// ID (MSK)
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(NullFlavor.MSK);
 			processedPr.getIds().add(ii);
 
@@ -554,13 +554,13 @@ public class CdaChLrph
 	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
-		LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
+		final ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		final LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
 		if (lss != null) {
-			LaboratoryReportDataProcessingEntry lrdpe = lss
+			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				SpecimenAct se = lrdpe.getSpecimenAct();
+				final SpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
 					lbol.addAll(se.getLaboratoryBatteryOrganizers());
 				}
@@ -590,10 +590,10 @@ public class CdaChLrph
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
 	public SpecimenAct getSpecimenAct() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
+		if ((getLaboratorySpecialtySection() != null)
+				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null)
+				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null)) {
 			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 					.getSpecimenAct();
 		}
@@ -674,7 +674,7 @@ public class CdaChLrph
 			// We need to create a new Structured Body element, as the section
 			// list is
 			// not modifiable
-			StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+			final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
 			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
 			getMdht().setStructuredBody(sb);
 		}

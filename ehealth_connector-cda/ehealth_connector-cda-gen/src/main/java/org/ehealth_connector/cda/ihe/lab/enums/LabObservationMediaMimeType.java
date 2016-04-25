@@ -23,20 +23,20 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * The Enum LabObservationMediaMimeType.
  */
 /*
-*<div class="en">List of allowed Mime types for XDS-Lab</div>
-*<div class="de">Liste der zulässigen Mime Types für XDS-Lab</div>
-*/
+ * <div class="en">List of allowed Mime types for XDS-Lab</div> <div
+ * class="de">Liste der zulässigen Mime Types für XDS-Lab</div>
+ */
 public enum LabObservationMediaMimeType {
 
 	/** <div class="en">BMP Image</div> <div class="de">BMP Image</div>. */
 	BMP_IMAGE("image/bmp", "BMP Image"),
-	
+
 	/** <div class="en">GIF Image</div> <div class="de">GIF Image</div>. */
 	GIF_IMAGE("image/gif", "GIF Image"),
-	
+
 	/** <div class="en">JPEG Image</div> <div class="de">JPEG Image</div>. */
 	JPEG_IMAGE("image/jpeg", "JPEG Image"),
-	
+
 	/** <div class="en">PNG Image</div> <div class="de">PNG Image</div>. */
 	PNG_IMAGE("image/png", "PNG Image");
 
@@ -85,7 +85,7 @@ public enum LabObservationMediaMimeType {
 	 * @return the according enum object
 	 */
 	public static LabObservationMediaMimeType getEnum(String code) {
-		for (LabObservationMediaMimeType x : values()) {
+		for (final LabObservationMediaMimeType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -125,7 +125,7 @@ public enum LabObservationMediaMimeType {
 	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (LabObservationMediaMimeType x : values()) {
+		for (final LabObservationMediaMimeType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -138,13 +138,13 @@ public enum LabObservationMediaMimeType {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>.
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div>
 	 * <div class="de">Menschenlesbarer Name</div>.
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
@@ -170,7 +170,7 @@ public enum LabObservationMediaMimeType {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(getCodeSystemOid());
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
@@ -185,7 +185,7 @@ public enum LabObservationMediaMimeType {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
+		final Code ehcCode = new Code(getCodeSystemOid(), code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 

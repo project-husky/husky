@@ -125,12 +125,12 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 */
 	@SuppressWarnings("deprecation")
 	private XsltExecutable buildTransientValidator(Source source) throws TransformationException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		Destination destination = new Serializer(baos);
-		Transformation transformer = getFactory().createTransformer();
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final Destination destination = new Serializer(baos);
+		final Transformation transformer = getFactory().createTransformer();
 		transformer.transform(source, destination);
 
-		InputStream inputStream = new ByteArrayInputStream(baos.toByteArray());
+		final InputStream inputStream = new ByteArrayInputStream(baos.toByteArray());
 		return getFactory().getStylesheet(new StreamSource(inputStream), false);
 	}
 
@@ -148,10 +148,10 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	@Override
 	public XsltExecutable call() throws TransformationException {
 		try {
-			XsltExecutable stylesheet = createValidator(in, out);
+			final XsltExecutable stylesheet = createValidator(in, out);
 			log.info("<<< Successfully created validator for '{}'", in.getName());
 			return stylesheet;
-		} catch (TransformationException e) {
+		} catch (final TransformationException e) {
 			log.error("<<< Failed to create validator for '" + in.getName() + "'", e);
 			throw e;
 		}
@@ -187,16 +187,16 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	@SuppressWarnings("deprecation")
 	protected XsltExecutable createValidator(File in, File out) throws TransformationException {
 		XsltExecutable stylesheet;
-		Source source = new StreamSource(in);
+		final Source source = new StreamSource(in);
 		if (out == null) {
 			log.info(">>> Creating transient validator from file '{}'", in.getAbsolutePath());
 			stylesheet = buildTransientValidator(source);
 		} else {
-			if (!out.exists() || in.lastModified() > out.lastModified()) {
+			if (!out.exists() || (in.lastModified() > out.lastModified())) {
 				log.info(">>> Creating new persitent validator from '{}' to '{}'",
 						in.getAbsolutePath(), out.getAbsolutePath());
-				Destination destination = new Serializer(out);
-				Transformation transformer = getFactory().createTransformer();
+				final Destination destination = new Serializer(out);
+				final Transformation transformer = getFactory().createTransformer();
 				transformer.transform(source, destination);
 			} else {
 				log.info(">>> Reusing persistent validator file '{}' (master file: '{}')",

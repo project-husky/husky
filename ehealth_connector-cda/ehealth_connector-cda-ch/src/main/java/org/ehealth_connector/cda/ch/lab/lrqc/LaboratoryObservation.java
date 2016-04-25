@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Interpretation des Messresultates bestehen.</div>
  */
 public class LaboratoryObservation
-		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
+extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.
@@ -95,7 +95,7 @@ public class LaboratoryObservation
 		if (code != null) {
 			getMdht().getInterpretationCodes().add(code.getCE());
 		} else {
-			CE ce = DatatypesFactory.eINSTANCE.createCE();
+			final CE ce = DatatypesFactory.eINSTANCE.createCE();
 			ce.setNullFlavor(NullFlavor.NA);
 			getMdht().getInterpretationCodes().add(ce);
 		}
@@ -107,7 +107,7 @@ public class LaboratoryObservation
 	 * @return the code as enum
 	 */
 	public org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList getCodeAsEnum() {
-		if (getMdht().getCode() != null && getMdht().getCode().getCode() != null) {
+		if ((getMdht().getCode() != null) && (getMdht().getCode().getCode() != null)) {
 			return org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList
 					.getEnum(getMdht().getCode().getCode());
 		}

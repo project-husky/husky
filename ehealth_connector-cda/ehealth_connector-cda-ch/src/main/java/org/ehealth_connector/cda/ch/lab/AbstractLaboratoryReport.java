@@ -50,7 +50,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  *            the generic type
  */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
-		extends AbstractCdaCh<EClinicalDocument> {
+extends AbstractCdaCh<EClinicalDocument> {
 
 	/**
 	 * Instantiates a new abstract laboratory report.
@@ -112,7 +112,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 */
 	public void addIntendedRecipient(IntendedRecipient recipient) {
 		getMdht().getInformationRecipients().add(recipient.getMdhtIntendedRecipient());
-		int nb = getMdht().getInformationRecipients().size() - 1;
+		final int nb = getMdht().getInformationRecipients().size() - 1;
 		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 	}
 
@@ -134,9 +134,9 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 *         /clinicalDocument/inFulfillmentOf/order/id)
 	 */
 	public List<Identificator> getInFulfillmentOfOrderIds() {
-		ArrayList<Identificator> al = new ArrayList<Identificator>();
-		for (InFulfillmentOf ifo : getMdht().getInFulfillmentOfs()) {
-			for (II id : ifo.getOrder().getIds()) {
+		final List<Identificator> al = new ArrayList<Identificator>();
+		for (final InFulfillmentOf ifo : getMdht().getInFulfillmentOfs()) {
+			for (final II id : ifo.getOrder().getIds()) {
 				al.add(new Identificator(id));
 			}
 		}
@@ -149,10 +149,10 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * @return the intended recipients
 	 */
 	public List<IntendedRecipient> getIntendedRecipients() {
-		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
-		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
+		final List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
+		for (final InformationRecipient ir : getMdht().getInformationRecipients()) {
 			if (ir instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
-				org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
+				final org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
 				il.add(new IntendedRecipient(iheIr));
 			}
 		}
@@ -165,8 +165,8 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * @return the narrative Text. Returns null, if this text does not exist.
 	 */
 	public String getNarrativeTextSectionLaboratorySpeciality() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getText() != null) {
+		if ((getLaboratorySpecialtySection() != null)
+				&& (getLaboratorySpecialtySection().getText() != null)) {
 			return getLaboratorySpecialtySection().getText().getText();
 		}
 		return null;
@@ -178,10 +178,10 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * @return the referral ordering physicians
 	 */
 	public List<ReferralOrderingPhysician> getReferralOrderingPhysicians() {
-		List<ReferralOrderingPhysician> pl = new ArrayList<ReferralOrderingPhysician>();
-		for (Participant1 p : getMdht().getParticipants()) {
+		final List<ReferralOrderingPhysician> pl = new ArrayList<ReferralOrderingPhysician>();
+		for (final Participant1 p : getMdht().getParticipants()) {
 			if (p instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.ReferralOrderingPhysician) {
-				ReferralOrderingPhysician mdht = new ReferralOrderingPhysician(
+				final ReferralOrderingPhysician mdht = new ReferralOrderingPhysician(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.ReferralOrderingPhysician) p);
 				pl.add(mdht);
 			}
@@ -193,32 +193,32 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * Creates an empty Custodian element, according to the LRXX specification.
 	 */
 	public void setEmtpyCustodian() {
-		Custodian c = CDAFactory.eINSTANCE.createCustodian();
-		AssignedCustodian ac = CDAFactory.eINSTANCE.createAssignedCustodian();
-		CustodianOrganization co = CDAFactory.eINSTANCE.createCustodianOrganization();
+		final Custodian c = CDAFactory.eINSTANCE.createCustodian();
+		final AssignedCustodian ac = CDAFactory.eINSTANCE.createAssignedCustodian();
+		final CustodianOrganization co = CDAFactory.eINSTANCE.createCustodianOrganization();
 
 		c.setAssignedCustodian(ac);
 		ac.setRepresentedCustodianOrganization(co);
 
 		// Id
-		II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setNullFlavor(NullFlavor.NASK);
 		co.getIds().add(ii);
 
 		// Name
-		ON on = DatatypesFactory.eINSTANCE.createON();
+		final ON on = DatatypesFactory.eINSTANCE.createON();
 		on.setNullFlavor(NullFlavor.NASK);
 		co.setName(on);
 
 		// Telecom
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.NASK);
 		co.setTelecom(tel);
 
 		// Addr
-		AD ad = DatatypesFactory.eINSTANCE.createAD();
+		final AD ad = DatatypesFactory.eINSTANCE.createAD();
 		ad.setNullFlavor(NullFlavor.NASK);
-		ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
+		final ADXP adxp = DatatypesFactory.eINSTANCE.createADXP();
 		adxp.setNullFlavor(NullFlavor.NASK);
 		ad.getStreetNames().add(adxp);
 		co.setAddr(ad);
@@ -244,7 +244,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 * @return the laboratory specialty section
 	 */
 	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
-		for (Section s : getMdht().getAllSections()) {
+		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof LaboratorySpecialtySection) {
 				return (LaboratorySpecialtySection) s;
 			}

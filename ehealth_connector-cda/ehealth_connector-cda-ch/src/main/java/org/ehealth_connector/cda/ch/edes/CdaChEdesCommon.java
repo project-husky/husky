@@ -118,7 +118,7 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 
 		// TODO tsc
@@ -162,7 +162,7 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			allergyOrOtherAdverseReaction.copyMdhtAllergyConcern().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 
 		// TODO tsc
@@ -221,7 +221,7 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			edDiagnosis.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -255,7 +255,7 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("");
 			pastIllness.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-					.getObservation().setText(Util.createEd(""));
+			.getObservation().setText(Util.createEd(""));
 		}
 
 		// TODO tsc
@@ -265,7 +265,7 @@ public class CdaChEdesCommon {
 	}
 
 	public void addSection(Section section) {
-		SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
+		final SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
 		if (document.getLanguageCode() != null) {
 			section.setTitle(Util.st(sectionEnum
 					.getSectionTitle(LanguageCode.getEnum(document.getLanguageCode().getCode()))));
@@ -425,10 +425,10 @@ public class CdaChEdesCommon {
 	}
 
 	public String getAllergyTable(List<AllergyConcern> allergyConcerns) {
-		StringBuilder sb = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 		if (!allergyConcerns.isEmpty()) {
 			sb.append("<table><tbody>");
-			CS lcode = document.getLanguageCode();
+			final CS lcode = document.getLanguageCode();
 			if (lcode != null) {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
@@ -445,14 +445,14 @@ public class CdaChEdesCommon {
 					break;
 				}
 			}
-			for (AllergyConcern AllergyConcern : allergyConcerns) {
+			for (final AllergyConcern AllergyConcern : allergyConcerns) {
 				String strStatus = "-";
 				String strCommentar = "-";
 				if (AllergyConcern.getStatus().toString() != null)
 					strStatus = AllergyConcern.getStatus().toString();
 				if (AllergyConcern.getConcernEntry().getText().getText() != null)
 					strCommentar = AllergyConcern.getConcernEntry().getText().getText();
-				for (AbstractAllergyProblem AllergyProblem : AllergyConcern.getAllergyProblems()) {
+				for (final AbstractAllergyProblem AllergyProblem : AllergyConcern.getAllergyProblems()) {
 					String strStartDateTime = "-";
 					String strEndDateTime = "-";
 					String strCode = "-";
@@ -462,7 +462,7 @@ public class CdaChEdesCommon {
 							strStartDateTime = AllergyProblem.getStartDate();
 						if (AllergyProblem.getEndDate() != null)
 							strEndDateTime = AllergyProblem.getEndDate();
-					} catch (NullPointerException npe) {
+					} catch (final NullPointerException npe) {
 					}
 					if (AllergyProblem.getValue().getCode().getCode() != null)
 						strCode = AllergyProblem.getValue().getCode().getCode();
@@ -482,7 +482,7 @@ public class CdaChEdesCommon {
 	}
 
 	public String getDocumentTitle() {
-		CS lcode = document.getLanguageCode();
+		final CS lcode = document.getLanguageCode();
 		if (lcode != null) {
 			switch (lcode.getCode()) {
 			case LanguageCode.GERMAN_CODE:
@@ -571,10 +571,10 @@ public class CdaChEdesCommon {
 
 	public String getProblemTable(Section section) {
 		final EList<Act> acts = section.getActs();
-		StringBuilder sb = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 		if (!acts.isEmpty()) {
 			sb.append("<table><tbody>");
-			CS lcode = document.getLanguageCode();
+			final CS lcode = document.getLanguageCode();
 			if (lcode != null) {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
@@ -600,7 +600,7 @@ public class CdaChEdesCommon {
 					strCommentar = Problemconcern.getConcernEntry().getText().getText();
 				if (Problemconcern.getStatus().toString() != null)
 					strStatus = Problemconcern.getStatus().toString();
-				for (AbstractProblemEntry Problementry : Problemconcern.getProblemEntries()) {
+				for (final AbstractProblemEntry Problementry : Problemconcern.getProblemEntries()) {
 					String strStartDateTime = "-";
 					String strEndDateTime = "-";
 					String strCode = "-";
@@ -609,17 +609,17 @@ public class CdaChEdesCommon {
 					try {
 						if (Problementry.getStartDate() != null)
 							strStartDateTime = DateUtil
-									.formatDateTimeCh(Problementry.getStartDate());
+							.formatDateTimeCh(Problementry.getStartDate());
 						if (Problementry.getEndDate() != null)
 							strEndDateTime = DateUtil.formatDateTimeCh(Problementry.getEndDate());
-					} catch (NullPointerException npe) {
+					} catch (final NullPointerException npe) {
 					}
-					Value value = Problementry.getValue();
+					final Value value = Problementry.getValue();
 					if (value.isCode()) {
 						if (value.getCode().getCodeSystemName() != null)
 							strCatalog = Problementry.getValue().getCode().getCodeSystemName();
-						if (value.getCode().getCode() != null
-								&& Problementry.getValue().getCode().getCode() != "")
+						if ((value.getCode().getCode() != null)
+								&& (Problementry.getValue().getCode().getCode() != ""))
 							strCode = Problementry.getValue().getCode().getCode();
 						if (value.getCode().getDisplayName() != null)
 							strDescription = Problementry.getValue().getCode().getDisplayName();

@@ -5,9 +5,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
-*<div class="en">Structured Yes/No Answer</div>
-*<div class="de">Strukturierte Ja/Nein Antwort</div>
-*/
+ *<div class="en">Structured Yes/No Answer</div>
+ *<div class="de">Strukturierte Ja/Nein Antwort</div>
+ */
 public enum StandardCdaBodySelections {
 
 	NO("N", "No"), YES("Y", "Yes");
@@ -34,7 +34,7 @@ public enum StandardCdaBodySelections {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static StandardCdaBodySelections getEnum(String code) {
-		for (StandardCdaBodySelections x : values()) {
+		for (final StandardCdaBodySelections x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -75,7 +75,7 @@ public enum StandardCdaBodySelections {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (StandardCdaBodySelections x : values()) {
+		for (final StandardCdaBodySelections x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -88,13 +88,13 @@ public enum StandardCdaBodySelections {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
 	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
 	 * Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with given code, displayName,
@@ -122,7 +122,7 @@ public enum StandardCdaBodySelections {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
@@ -136,7 +136,7 @@ public enum StandardCdaBodySelections {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 

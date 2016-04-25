@@ -43,7 +43,7 @@ public class DispenseSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public DispenseSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseSection().init());
@@ -77,7 +77,7 @@ public class DispenseSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public DispenseSection(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection section) {
 		super(section);
@@ -111,12 +111,12 @@ public class DispenseSection
 	 * Sets the dispense item entry.
 	 *
 	 * @param entry
-	 *          the new dispense item entry
+	 *            the new dispense item entry
 	 */
 	public void setDispenseItemEntry(DispenseItemEntry entry) {
 		if (this.getMdht().getDispenseItemEntry() != null) {
-			EList<Entry> entries = this.getMdht().getEntries();
-			if (entries != null && entries.size() > 0) {
+			final EList<Entry> entries = this.getMdht().getEntries();
+			if ((entries != null) && (entries.size() > 0)) {
 				entries.get(0).setSupply(entry.getMdht());
 				return;
 			}

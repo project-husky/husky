@@ -101,11 +101,11 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the laboratory battery organizers
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
-		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
-		if (getMdht() != null && getMdht().getOrganizers() != null) {
-			for (Organizer organizer : this.getMdht().getOrganizers()) {
+		final List<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
+		if ((getMdht() != null) && (getMdht().getOrganizers() != null)) {
+			for (final Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
-					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
+					final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
 					list.add(new LaboratoryBatteryOrganizer(iheOrganizer));
 				}
 			}
@@ -119,13 +119,13 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the laboratory isolate organizers
 	 */
 	public List<LaboratoryIsolateOrganizer> getLaboratoryIsolateOrganizers() {
-		if (getMdht() != null && getMdht().getOrganizers() != null) {
-			ArrayList<LaboratoryIsolateOrganizer> laboratoryOrganizerList = new ArrayList<LaboratoryIsolateOrganizer>();
-			for (Organizer organizer : this.getMdht().getOrganizers()) {
+		if ((getMdht() != null) && (getMdht().getOrganizers() != null)) {
+			final List<LaboratoryIsolateOrganizer> laboratoryOrganizerList = new ArrayList<LaboratoryIsolateOrganizer>();
+			for (final Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) {
-					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer iheLabIsolateOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) organizer;
+					final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer iheLabIsolateOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) organizer;
 					laboratoryOrganizerList
-							.add(new LaboratoryIsolateOrganizer(iheLabIsolateOrganizer));
+					.add(new LaboratoryIsolateOrganizer(iheLabIsolateOrganizer));
 				}
 			}
 			return laboratoryOrganizerList;
@@ -139,8 +139,8 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the outbreak identification
 	 */
 	public OutbreakIdentificationObservation getOutbreakIdentification() {
-		if (this.getNotificationOrganizer() != null
-				&& this.getNotificationOrganizer().getOutbreakIdentificationObservation() != null) {
+		if ((this.getNotificationOrganizer() != null)
+				&& (this.getNotificationOrganizer().getOutbreakIdentificationObservation() != null)) {
 			return this.getNotificationOrganizer().getOutbreakIdentificationObservation();
 		}
 		return null;
@@ -152,11 +152,11 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the specimen collection entry
 	 */
 	public SpecimenCollectionEntry getSpecimenCollectionEntry() {
-		for (EntryRelationship e : getMdht().getEntryRelationships()) {
+		for (final EntryRelationship e : getMdht().getEntryRelationships()) {
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
 				return new org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e
-								.getProcedure());
+						.getProcedure());
 			}
 		}
 		return null;
@@ -199,7 +199,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 					x_ActRelationshipEntryRelationship.COMP);
 		} else {
-			for (EntryRelationship er : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship er : getMdht().getEntryRelationships()) {
 				if (er.getProcedure() instanceof SpecimenCollection) {
 					er.setProcedure(entry.copy());
 				}
@@ -213,7 +213,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the notification organizer
 	 */
 	protected org.ehealth_connector.cda.ch.lab.lrph.NotificationOrganizer getNotificationOrganizer() {
-		for (Organizer o : getMdht().getOrganizers()) {
+		for (final Organizer o : getMdht().getOrganizers()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.NotificationOrganizer) {
 				return new NotificationOrganizer(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.NotificationOrganizer) o);
@@ -240,9 +240,9 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		}
 		if (added == false) {
 			getMdht().addOrganizer(notificationOrganizer.copy());
-			int nb = getMdht().getEntryRelationships().size() - 1;
+			final int nb = getMdht().getEntryRelationships().size() - 1;
 			getMdht().getEntryRelationships().get(nb)
-					.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 		}
 	}
 

@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
 	private List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns;
-	protected String contentIdPrefix;
+	private String contentIdPrefix;
 
 	/**
 	 * Constructor.

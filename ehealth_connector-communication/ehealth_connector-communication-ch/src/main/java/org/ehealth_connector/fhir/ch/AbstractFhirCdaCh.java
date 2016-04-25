@@ -68,7 +68,7 @@ public abstract class AbstractFhirCdaCh {
 	public List<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
 		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
+			final List<ExtensionDt> extensions = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty()) {
 				org.ehealth_connector.common.Author author = null;
@@ -79,7 +79,7 @@ public abstract class AbstractFhirCdaCh {
 					author = FhirCommon.getAuthor((Organization) entry.getResource());
 				}
 
-				StringDt timeStamp = ((StringDt) extensions.get(0).getValue());
+				final StringDt timeStamp = ((StringDt) extensions.get(0).getValue());
 				author.setTime(DateUtil.parseDates(timeStamp.getValue()));
 				retVal.add(author);
 			}
@@ -102,7 +102,7 @@ public abstract class AbstractFhirCdaCh {
 			if (entry.getResource() instanceof Basic) {
 				final Basic fhirBasic = (Basic) entry.getResource();
 				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (langCode != null && langCode.getSystem() != null
+				if ((langCode != null) && (langCode.getSystem() != null)
 						&& langCode.getSystem().equals(OID_CONFIDENTIALITY_CODE)) {
 					if ("veryrestricted".equals(langCode.getCode().toLowerCase())) {
 						retVal = Confidentiality.VERY_RESTRICTED;
@@ -277,8 +277,9 @@ public abstract class AbstractFhirCdaCh {
 		for (final Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInformationRecipient)
 					.isEmpty()) {
-				Organization physician = (Organization) entry.getResource();
-				org.ehealth_connector.common.Organization o = FhirCommon.getOrganization(physician);
+				final Organization physician = (Organization) entry.getResource();
+				final org.ehealth_connector.common.Organization o = FhirCommon
+						.getOrganization(physician);
 				retVal = new IntendedRecipient(o);
 			}
 		}
@@ -296,11 +297,11 @@ public abstract class AbstractFhirCdaCh {
 	public org.ehealth_connector.common.Author getLegalAuthenticator(Bundle bundle) {
 		org.ehealth_connector.common.Author retVal = null;
 		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
+			final List<ExtensionDt> extensions = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLegalAuthenticator);
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Person)) {
 				retVal = FhirCommon.getAuthor((Person) entry.getResource());
-				TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+				final TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
 				retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 			}
 		}
@@ -329,7 +330,7 @@ public abstract class AbstractFhirCdaCh {
 						text = ((Observation) entry.getResource()).getText();
 					}
 				}
-				if (text != null && text.getDiv().getValueAsString() != null) {
+				if ((text != null) && (text.getDiv().getValueAsString() != null)) {
 					retVal = text.getDiv().getValueAsString();
 					retVal = retVal.replace("</div>", "");
 					retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
@@ -350,16 +351,16 @@ public abstract class AbstractFhirCdaCh {
 	public SpecimenCollectionEntry getSpecimenCollectionEntry(Bundle bundle) {
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all LaboratorySpecialtySections
-			List<ExtensionDt> specimenCollection = entry
+			final List<ExtensionDt> specimenCollection = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenCollection);
-			if (specimenCollection != null && !specimenCollection.isEmpty()) {
-				Observation obs = (Observation) entry.getResource();
+			if ((specimenCollection != null) && !specimenCollection.isEmpty()) {
+				final Observation obs = (Observation) entry.getResource();
 
-				Identificator id = FhirCommon
+				final Identificator id = FhirCommon
 						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
-				DateTimeDt date = (DateTimeDt) obs.getEffective();
+				final DateTimeDt date = (DateTimeDt) obs.getEffective();
 
-				SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
+				final SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
 						"ref");
 				return sce;
 			}
@@ -377,20 +378,20 @@ public abstract class AbstractFhirCdaCh {
 	public SpecimenReceivedEntry getSpecimenReceivedEntry(Bundle bundle) {
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all LaboratorySpecialtySections
-			List<ExtensionDt> specimenReceived = entry
+			final List<ExtensionDt> specimenReceived = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsSpecimenReceived);
-			if (specimenReceived != null && !specimenReceived.isEmpty()) {
-				Observation obs = (Observation) entry.getResource();
-				SpecimenReceivedEntry sce = new SpecimenReceivedEntry();
+			if ((specimenReceived != null) && !specimenReceived.isEmpty()) {
+				final Observation obs = (Observation) entry.getResource();
+				final SpecimenReceivedEntry sce = new SpecimenReceivedEntry();
 
-				Identificator id = FhirCommon
+				final Identificator id = FhirCommon
 						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
 				if (id != null) {
 					sce.addId(id);
 				}
-				DateTimeDt fDate = (DateTimeDt) obs.getEffective();
+				final DateTimeDt fDate = (DateTimeDt) obs.getEffective();
 				if (fDate != null) {
-					Date date = fDate.getValue();
+					final Date date = fDate.getValue();
 					sce.setEffectiveTime(date);
 				}
 
@@ -401,15 +402,15 @@ public abstract class AbstractFhirCdaCh {
 	}
 
 	public String getValueFromKeyValueString(NarrativeDt text, String key) {
-		if (text == null || text.getDivAsString() == null)
+		if ((text == null) || (text.getDivAsString() == null))
 			return null;
 		if (!text.getDivAsString().contains(key))
 			return null;
-		String[] lines = text.getDivAsString().split("\n");
-		for (String line : lines) {
+		final String[] lines = text.getDivAsString().split("\n");
+		for (final String line : lines) {
 			if (line.contains(key)) {
-				String[] keyValue = line.split("=");
-				String value = keyValue[2].replace("</div>", "");
+				final String[] keyValue = line.split("=");
+				final String value = keyValue[2].replace("</div>", "");
 				return value;
 			}
 		}

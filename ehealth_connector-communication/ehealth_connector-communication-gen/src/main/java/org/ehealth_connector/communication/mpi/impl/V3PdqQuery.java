@@ -43,7 +43,7 @@ import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 public class V3PdqQuery implements MpiQuery {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** cancels the next Query */
 	private boolean cancelQuery;

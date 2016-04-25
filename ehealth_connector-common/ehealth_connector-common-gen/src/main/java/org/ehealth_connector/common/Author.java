@@ -338,10 +338,10 @@ public class Author {
 		}
 		// If the Represented Organization has no Name try the Authoring Device
 		if (retVal.equals("")) {
-			if (mAuthor.getAssignedAuthor() != null
-					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice() != null
-					&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice()
-							.getSoftwareName() != null) {
+			if ((mAuthor.getAssignedAuthor() != null)
+					&& (mAuthor.getAssignedAuthor().getAssignedAuthoringDevice() != null)
+					&& (mAuthor.getAssignedAuthor().getAssignedAuthoringDevice()
+							.getSoftwareName() != null)) {
 				return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName()
 						.getText();
 			}
@@ -656,7 +656,7 @@ public class Author {
 		if (gln != null) {
 			addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 		} else {
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
 			mAsAuthor.getIds().add(ii);
 		}

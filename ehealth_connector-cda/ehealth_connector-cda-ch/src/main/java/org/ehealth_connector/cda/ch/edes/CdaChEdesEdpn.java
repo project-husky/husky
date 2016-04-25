@@ -45,7 +45,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *
  */
 public class CdaChEdesEdpn
-		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
+extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 
 	/** main OID for CDA-CH-EDES EDPN */
 	public static final String OID_MAIN = "1.3.6.1.4.1.19376.1.5.3.1.1.13.1.4";
@@ -93,7 +93,7 @@ public class CdaChEdesEdpn
 		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init(), stylesheet, cascadingStylesheet);
 		setLanguageCode(language);
 		// set the fixed Ctnn Code
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCode("28568-4");
 		ce.setCodeSystem("2.16.840.1.113883.6.1");
 		ce.setCodeSystemName("LOINC");
@@ -211,13 +211,15 @@ public class CdaChEdesEdpn
 	 * @return List with coded vital sign observations
 	 */
 	public List<AbstractVitalSignObservation> getCodedVitalSigns() {
-		org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
+		final org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
 				.getCodedVitalSignsSection();
 		if (section == null) {
 			return Collections.emptyList();
 		}
-		LanguageCode languageCode = LanguageCode.getEnum(getDoc().getLanguageCode().getCode());
-		CodedVitalSignsSection codedVitalSigns = new CodedVitalSignsSection(languageCode, section);
+		final LanguageCode languageCode = LanguageCode
+				.getEnum(getDoc().getLanguageCode().getCode());
+		final CodedVitalSignsSection codedVitalSigns = new CodedVitalSignsSection(languageCode,
+				section);
 		return codedVitalSigns.getCodedVitalSignObservations();
 	}
 
@@ -227,7 +229,7 @@ public class CdaChEdesEdpn
 	 * @return the CodedVitalSignsSection
 	 */
 	public CodedVitalSignsSection getCodedVitalSignsSection() {
-		for (Section s : getMdht().getAllSections()) {
+		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) {
 				return new CodedVitalSignsSection(
 						(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) s);
@@ -256,7 +258,7 @@ public class CdaChEdesEdpn
 	 */
 	public List<ProblemConcern> getEdDiagnoses() {
 		// Get the right section
-		EDDiagnosesSection section = getDoc().getEDDiagnosesSection();
+		final EDDiagnosesSection section = getDoc().getEDDiagnosesSection();
 		if (section == null) {
 			return Collections.emptyList();
 		}

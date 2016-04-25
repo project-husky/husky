@@ -152,7 +152,7 @@ public enum ActSite {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ActSite getEnum(String code) {
-		for (ActSite x : values()) {
+		for (final ActSite x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -194,7 +194,7 @@ public enum ActSite {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (ActSite x : values()) {
+		for (final ActSite x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -252,7 +252,7 @@ public enum ActSite {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		CD ce = DatatypesFactory.eINSTANCE.createCD();
+		final CD ce = DatatypesFactory.eINSTANCE.createCD();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -266,7 +266,7 @@ public enum ActSite {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 

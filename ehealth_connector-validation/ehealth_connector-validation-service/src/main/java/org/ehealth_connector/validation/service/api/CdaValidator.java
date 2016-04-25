@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -74,7 +73,7 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class CdaValidator {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Configuration of the validator */
 	private Configuration configuration;
@@ -150,11 +149,11 @@ public class CdaValidator {
 			if (file == null) {
 				throw new ConfigurationException("No configuration file specified.");
 			}
-			Configurator configurator = new Configurator(file);
-			Configuration configuration = configurator.createConfiguration();
+			final Configurator configurator = new Configurator(file);
+			final Configuration configuration = configurator.createConfiguration();
 			this.schema = loadSchema(configuration.getDocumentSchema());
 			return configuration;
-		} catch (ConfigurationException e) {
+		} catch (final ConfigurationException e) {
 			throw new ConfigurationException("Configuration error: " + e.getMessage());
 		}
 	}
@@ -173,30 +172,30 @@ public class CdaValidator {
 		ActivePatternResult currentApResult = null;
 		Object temp = null;
 		Object prevObject = null;
-		SchematronValidationResult schValRes = new SchematronValidationResult();
+		final SchematronValidationResult schValRes = new SchematronValidationResult();
 		schValRes.setSchematronValid(true);
 
-		List<Object> schOutputList = schOut.getActivePatternAndFiredRuleAndFailedAssert();
+		final List<Object> schOutputList = schOut.getActivePatternAndFiredRuleAndFailedAssert();
 
 		if (!schOutputList.isEmpty()) {
-			Iterator<Object> schIter = schOutputList.iterator();
+			final Iterator<Object> schIter = schOutputList.iterator();
 			do {
 				temp = schIter.next();
-				if (temp instanceof ActivePattern && prevObject == null) {
+				if ((temp instanceof ActivePattern) && (prevObject == null)) {
 					currentApResult = new ActivePatternResult();
 					currentApResult.setAp((ActivePattern) temp);
 					prevObject = temp;
 					continue;
 				}
-				if (temp instanceof ActivePattern && prevObject != null
-						&& prevObject instanceof ActivePattern) {
+				if ((temp instanceof ActivePattern) && (prevObject != null)
+						&& (prevObject instanceof ActivePattern)) {
 					schValRes.getActivePatternResultFull().add(currentApResult);
 					currentApResult = new ActivePatternResult();
 					currentApResult.setAp((ActivePattern) temp);
 					prevObject = temp;
 					continue;
 				}
-				if (temp instanceof ActivePattern && !(prevObject instanceof ActivePattern)) {
+				if ((temp instanceof ActivePattern) && !(prevObject instanceof ActivePattern)) {
 					schValRes.getActivePatternResultFull().add(currentApResult);
 					currentApResult = new ActivePatternResult();
 					currentApResult.setAp((ActivePattern) temp);
@@ -249,9 +248,9 @@ public class CdaValidator {
 		JAXBContext jaxbContext;
 		try {
 			jaxbContext = JAXBContext.newInstance(SchematronOutput.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			return (SchematronOutput) jaxbUnmarshaller.unmarshal(in);
-		} catch (JAXBException e) {
+		} catch (final JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -265,7 +264,7 @@ public class CdaValidator {
 	private Validators createValidators(Configuration configuration) {
 		log.debug("Building rule-set transformer ...");
 
-		Processor processor = new Processor(false);
+		final Processor processor = new Processor(false);
 
 		processor.getUnderlyingConfiguration().setErrorListener(new ErrorListener() {
 			@Override
@@ -284,7 +283,7 @@ public class CdaValidator {
 				log.warn("XSLT TransformerException:" + exception.getMessage());
 			}
 		});
-		RuleSetTransformer factory = new RuleSetTransformer(processor);
+		final RuleSetTransformer factory = new RuleSetTransformer(processor);
 		return new Validators(factory);
 	}
 
@@ -293,18 +292,18 @@ public class CdaValidator {
 	 * @return XSD schema
 	 */
 	private Schema loadSchema(final String schemaPath) {
-		if (schemaPath == null || schemaPath.isEmpty()) {
+		if ((schemaPath == null) || schemaPath.isEmpty()) {
 			return null;
 		}
 		log.info("Loading XSD schema '" + schemaPath + "' ...");
-		File schemaFile = new File(schemaPath).getAbsoluteFile();
+		final File schemaFile = new File(schemaPath).getAbsoluteFile();
 		if (!schemaFile.canRead()) {
 			log.error(
 					"XSD schema " + schemaFile.toString() + " does not exist or can not be read.");
 			return null;
 		}
-		Source source = new StreamSource(schemaFile);
-		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		final Source source = new StreamSource(schemaFile);
+		final SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		factory.setErrorHandler(new ErrorHandler() {
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
@@ -322,7 +321,7 @@ public class CdaValidator {
 		});
 		try {
 			return factory.newSchema(source);
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			log.error("Could not load XSD schema '" + schemaPath + "'", e);
 			return null;
 		}
@@ -342,15 +341,15 @@ public class CdaValidator {
 		try {
 			validateXsd();
 			validationResult.setXsdValid(true);
-			validationResult.xsdValRes.setXsdValidationMsg("XSD Valid");
+			validationResult.getXsdValRes().setXsdValidationMsg("XSD Valid");
 		} catch (SAXException | IOException e) {
 			validationResult.setXsdValid(false);
-			validationResult.xsdValRes.setXsdValidationMsg(e.getMessage());
+			validationResult.getXsdValRes().setXsdValidationMsg(e.getMessage());
 		}
 
 		try {
-			SchematronOutput schOut = validateSchematronRaw();
-			SchematronValidationResult schValRes = convertSchematronOutput(schOut);
+			final SchematronOutput schOut = validateSchematronRaw();
+			final SchematronValidationResult schValRes = convertSchematronOutput(schOut);
 			validationResult.setSchValRes(schValRes);
 
 		} catch (SAXException | FileNotFoundException | RuleSetDetectionException
@@ -392,10 +391,10 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public ArrayList<PdfValidationResult> validatePDF()
+	public List<PdfValidationResult> validatePDF()
 			throws ConfigurationException, SaxonApiException, IOException {
 
-		PdfValidator pdfValidator = new PdfValidator(this.configuration);
+		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
 		pdfValidator.validatePdfFile(this.cdaFile);
 
 		return pdfValidator.getPdfValidationResults();
@@ -471,17 +470,17 @@ public class CdaValidator {
 		if (this.cdaFile == null)
 			throw new ConfigurationException("No CDA-File to validate");
 
-		RuleSet[] ruleSetList = this.configuration.getRuleSetList();
-		Source source = new StreamSource(this.cdaFile);
-		RuleSet ruleSet = reportBuilder.detectRuleSet(source, ruleSetList);
+		final RuleSet[] ruleSetList = this.configuration.getRuleSetList();
+		final Source source = new StreamSource(this.cdaFile);
+		final RuleSet ruleSet = reportBuilder.detectRuleSet(source, ruleSetList);
 
-		InputStream in = new BufferedInputStream(new FileInputStream(this.cdaFile));
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		Properties parameters = new Properties();
-		if (langCode != null && !langCode.isEmpty())
+		final InputStream in = new BufferedInputStream(new FileInputStream(this.cdaFile));
+		final ByteArrayOutputStream out = new ByteArrayOutputStream();
+		final Properties parameters = new Properties();
+		if ((langCode != null) && !langCode.isEmpty())
 			parameters.put("uiLanguage", langCode);
 
-		byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet, in, out, parameters);
+		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet, in, out, parameters);
 
 		return createSchematronOutput(new ByteArrayInputStream(svrlReport));
 	}
@@ -505,8 +504,8 @@ public class CdaValidator {
 	}
 
 	private void validateXsd() throws SAXException, IOException {
-		Schema schema = this.schema;
-		Validator validator = schema.newValidator();
+		final Schema schema = this.schema;
+		final Validator validator = schema.newValidator();
 		validator.validate(new StreamSource(this.cdaFile));
 	}
 
@@ -521,7 +520,7 @@ public class CdaValidator {
 			throw new ConfigurationException("No configuration available");
 		if (this.cdaFile == null)
 			throw new ConfigurationException("No CDA-File to validate");
-		XsdValidationResult xsdValRes = new XsdValidationResult();
+		final XsdValidationResult xsdValRes = new XsdValidationResult();
 		try {
 			validateXsd();
 			xsdValRes.setXsdValid(true);

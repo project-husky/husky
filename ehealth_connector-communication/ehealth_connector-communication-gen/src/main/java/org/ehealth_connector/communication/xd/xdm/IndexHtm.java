@@ -76,7 +76,7 @@ public class IndexHtm {
 			+ "<h3>Fichier README</h3>\n"
 			+ "<p>Pour plus de informations techniques au sujet de ce volume et le fournisseur, voir: <a target=\"_blank\" href=\"README.TXT\">README.TXT</a>.</p>\n";
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	/** The inputStream. */
 	private InputStream inputStream = null;
 

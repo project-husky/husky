@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 
 	// default language is German
-	protected LanguageCode languageCode = LanguageCode.GERMAN;
+	private LanguageCode languageCode = LanguageCode.GERMAN;
 
 	public AbstractCodedVitalSigns() {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
@@ -48,7 +48,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {
 				author = new Author(getMdht().getClinicalDocument().getAuthors().get(0));
 			} else {
-				org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE
+				final org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = CDAFactory.eINSTANCE
 						.createAuthor();
 				mdhtAuthor.setNullFlavor(NullFlavor.UNK);
 				author = new Author(mdhtAuthor);
@@ -56,13 +56,15 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		}
 
 		Identificator id = null;
-		if (!organizer.getIds().isEmpty())
+		if (!organizer.getIds().isEmpty()) {
 			id = organizer.getIds().get(0);
-		VitalSignsOrganizer mdhtOrganizer = getOrganizer(id, vitalSign.getEffectiveTime(), author);
+		}
+		final VitalSignsOrganizer mdhtOrganizer = getOrganizer(id, vitalSign.getEffectiveTime(),
+				author);
 		// VitalSignsOrganizer mdhtOrganizer = organizer.getMdht();
 		mdhtOrganizer.addObservation(vitalSign.getMdhtCopy());
 		// update the component type
-		EList<Component4> components = mdhtOrganizer.getComponents();
+		final EList<Component4> components = mdhtOrganizer.getComponents();
 		components.get(components.size() - 1).setTypeCode(ActRelationshipHasComponent.COMP);
 
 		getMdht().createStrucDocText(getTable(contendIdPrefix));
@@ -72,11 +74,11 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
 
 	public List<AbstractVitalSignObservation> getCodedVitalSignObservations() {
-		List<AbstractVitalSignObservation> ret = new ArrayList<AbstractVitalSignObservation>();
-		EList<Organizer> organizers = getMdht().getOrganizers();
-		for (Organizer organizer : organizers) {
-			EList<Observation> observations = organizer.getObservations();
-			for (Observation observation : observations) {
+		final List<AbstractVitalSignObservation> ret = new ArrayList<AbstractVitalSignObservation>();
+		final EList<Organizer> organizers = getMdht().getOrganizers();
+		for (final Organizer organizer : organizers) {
+			final EList<Observation> observations = organizer.getObservations();
+			for (final Observation observation : observations) {
 				if (observation instanceof org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation) {
 					ret.add(createVitalSignObservation(
 							(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation) observation));
@@ -94,25 +96,27 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 	}
 
 	private VitalSignsOrganizer getOrganizer(Identificator id, Date effectiveTime, Author author) {
-		VitalSignsSection section = getMdht();
-		EList<VitalSignsOrganizer> organizers = section.getVitalSignsOrganizers();
-		for (VitalSignsOrganizer organizer : organizers) {
-			if (!organizer.getIds().isEmpty() && id != null) {
+		final VitalSignsSection section = getMdht();
+		final EList<VitalSignsOrganizer> organizers = section.getVitalSignsOrganizers();
+		for (final VitalSignsOrganizer organizer : organizers) {
+			if (!organizer.getIds().isEmpty() && (id != null)) {
 				if (organizer.getIds().get(0).getExtension().equals(id.getExtension()))
 					return organizer;
 			}
 		}
-		for (VitalSignsOrganizer organizer : organizers) {
-			Date organizerDate = DateUtil.parseIVL_TSVDateTimeValue(organizer.getEffectiveTime());
+		for (final VitalSignsOrganizer organizer : organizers) {
+			final Date organizerDate = DateUtil
+					.parseIVL_TSVDateTimeValue(organizer.getEffectiveTime());
 			if (organizerDate.equals(effectiveTime)) {
 				return organizer;
 			}
 		}
-		VitalSignsOrganizer organizer = IHEFactory.eINSTANCE.createVitalSignsOrganizer().init();
+		final VitalSignsOrganizer organizer = IHEFactory.eINSTANCE.createVitalSignsOrganizer()
+				.init();
 		try {
 			organizer.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(effectiveTime));
 			organizer.getIds().add(getUuid().getIi());
-			org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = author.copyMdhtAuthor();
+			final org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = author.copyMdhtAuthor();
 			mdhtAuthor.setTypeCode(ParticipationType.AUT);
 			organizer.getAuthors().add(mdhtAuthor);
 			// fix the code system name for schematron validation
@@ -135,12 +139,12 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 	 * @return the table row
 	 */
 	private String getTable(String contendIdPrefix) {
-		StringBuilder sb = new StringBuilder();
-		List<AbstractVitalSignObservation> observations = getCodedVitalSignObservations();
+		final StringBuilder sb = new StringBuilder();
+		final List<AbstractVitalSignObservation> observations = getCodedVitalSignObservations();
 
 		if (!observations.isEmpty()) {
 			sb.append("<table><tbody>");
-			if (languageCode == LanguageCode.GERMAN) {
+			if (getLanguageCode() == LanguageCode.GERMAN) {
 				sb.append(
 						"<tr><th>Datum / Uhrzeit</th><th>Beschreibung</th><th>Resultat</th></tr>");
 			} else {
@@ -148,19 +152,19 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			}
 
 			int colIndex = 0;
-			for (AbstractVitalSignObservation vitalSignObservation : observations) {
+			for (final AbstractVitalSignObservation vitalSignObservation : observations) {
 				colIndex++;
-				String signDateTime = DateUtil
+				final String signDateTime = DateUtil
 						.formatDateTimeCh(vitalSignObservation.getEffectiveTime());
 
 				String signDescription = VitalSignCodes
 						.getEnum(vitalSignObservation.getCode().getCode())
-						.getDisplayName(languageCode);
+						.getDisplayName(getLanguageCode());
 				if (signDescription.equals(""))
 					signDescription = vitalSignObservation.getCode().getDisplayName();
 
 				// TODOX
-				String contentId = contendIdPrefix + colIndex++;
+				final String contentId = contendIdPrefix + colIndex++;
 				signDescription = "<content ID=\"" + contentId + "\">" + signDescription
 						+ "</content>";
 				vitalSignObservation.setTextReference("#" + contentId);
@@ -168,19 +172,19 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 				String signResult = vitalSignObservation.getValue().getPhysicalQuantityValue() + " "
 						+ vitalSignObservation.getValue().getPhysicalQuantityUnit();
-				Code code = vitalSignObservation.getInterpretationCode();
-				if (code != null && !code.isNullFlavor() && !ObservationInterpretation.NORMAL
+				final Code code = vitalSignObservation.getInterpretationCode();
+				if ((code != null) && !code.isNullFlavor() && !ObservationInterpretation.NORMAL
 						.getCodeValue().equals(code.getCode())) {
-					String signInterpretation = "["
+					final String signInterpretation = "["
 							+ vitalSignObservation.getInterpretationCode().getCode() + "]";
 					signResult += " " + signInterpretation;
 				}
-				Code target = vitalSignObservation.getTargetSiteCode();
-				if (target != null && !target.isNullFlavor()) {
+				final Code target = vitalSignObservation.getTargetSiteCode();
+				if ((target != null) && !target.isNullFlavor()) {
 
 					String signTarget = ActSite
 							.getEnum(vitalSignObservation.getTargetSiteCode().getCode())
-							.getDisplayName(languageCode);
+							.getDisplayName(getLanguageCode());
 					if (signTarget.equals(""))
 						signTarget = vitalSignObservation.getTargetSiteCode().getDisplayName();
 
@@ -201,5 +205,21 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 	}
 
 	protected abstract Identificator getUuid();
+
+	/**
+	 * Method to get
+	 * @return the languageCode
+	 */
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	/**
+	 * Method to set
+	 * @param languageCode the languageCode to set
+	 */
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
+	}
 
 }

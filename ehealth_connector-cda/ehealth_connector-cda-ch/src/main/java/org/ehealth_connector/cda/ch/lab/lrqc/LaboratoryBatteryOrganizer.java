@@ -94,7 +94,7 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 */
 	public void addObservationMediaEntry(ObservationMediaEntry observationMedia) {
 		getMdht().addObservationMedia(observationMedia.copy());
-		int nb = getMdht().getComponents().size() - 1;
+		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
 
@@ -104,8 +104,8 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 * @return the laboratory observations
 	 */
 	public List<LaboratoryObservation> getLaboratoryObservations() {
-		List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
-		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
+		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
 				.getLaboratoryObservations()) {
 			loList.add(new LaboratoryObservation(lo));
 		}
@@ -118,8 +118,8 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 * @return the observation media entries
 	 */
 	public List<ObservationMediaEntry> getObservationMediaEntries() {
-		List<ObservationMediaEntry> ol = new ArrayList<ObservationMediaEntry>();
-		for (ObservationMedia om : getMdht().getObservationMedia()) {
+		final List<ObservationMediaEntry> ol = new ArrayList<ObservationMediaEntry>();
+		for (final ObservationMedia om : getMdht().getObservationMedia()) {
 			ol.add(new ObservationMediaEntry(om));
 		}
 		return ol;

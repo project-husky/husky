@@ -34,7 +34,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * von 24 Stunden oder gar nicht gemeldet werden müssen. </div>
  */
 public class OutbreakIdentificationObservation
-		extends org.ehealth_connector.cda.ihe.lab.OutbreakIdentificationObservation {
+extends org.ehealth_connector.cda.ihe.lab.OutbreakIdentificationObservation {
 
 	/**
 	 * Instantiates a new outbreak identification observation.
@@ -42,7 +42,7 @@ public class OutbreakIdentificationObservation
 	public OutbreakIdentificationObservation() {
 		super();
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NA);
 		getMdht().getValues().add(ce);
 	}

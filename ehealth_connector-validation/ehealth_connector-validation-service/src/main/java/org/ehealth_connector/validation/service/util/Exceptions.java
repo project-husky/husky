@@ -47,7 +47,7 @@ public class Exceptions {
 	 *         {@link Throwable}s.
 	 */
 	public static Throwable[] getExceptionCauses(Throwable e, boolean reverse) {
-		List<Throwable> throwables = new ArrayList<Throwable>();
+		final List<Throwable> throwables = new ArrayList<Throwable>();
 		for (; e != null; e = e.getCause())
 			throwables.add(e);
 		if (reverse)

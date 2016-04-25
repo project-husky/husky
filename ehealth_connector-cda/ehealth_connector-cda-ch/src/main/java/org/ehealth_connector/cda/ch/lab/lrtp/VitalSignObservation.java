@@ -57,7 +57,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public VitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
-		mVitalSignObservation = observation;
+		setVitalSignObservation(observation);
 	}
 
 	/**
@@ -72,8 +72,8 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		this();
 		setCode(code.getCode());
 		setValue(value);
-		super.mVitalSignObservation.getInterpretationCodes().clear();
-		super.mVitalSignObservation.setText(null);
+		super.getVitalSignObservation().getInterpretationCodes().clear();
+		super.getVitalSignObservation().setText(null);
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *            the entry
 	 */
 	public void addCommentEntry(SectionAnnotationCommentEntry entry) {
-		mVitalSignObservation.addAct(entry.getMdht());
-		int nb = mVitalSignObservation.getEntryRelationships().size() - 1;
-		mVitalSignObservation.getEntryRelationships().get(nb)
-				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-		mVitalSignObservation.getEntryRelationships().get(nb).setInversionInd(true);
+		getVitalSignObservation().addAct(entry.getMdht());
+		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;
+		getVitalSignObservation().getEntryRelationships().get(nb)
+		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		getVitalSignObservation().getEntryRelationships().get(nb).setInversionInd(true);
 	}
 
 	// /**
@@ -108,14 +108,14 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @return the comment entries
 	 */
 	public List<SectionAnnotationCommentEntry> getCommentEntries() {
-		ArrayList<SectionAnnotationCommentEntry> sacl = new ArrayList<SectionAnnotationCommentEntry>();
-		for (EntryRelationship er : mVitalSignObservation.getEntryRelationships()) {
+		final List<SectionAnnotationCommentEntry> sacl = new ArrayList<SectionAnnotationCommentEntry>();
+		for (final EntryRelationship er : getVitalSignObservation().getEntryRelationships()) {
 			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
 					&& er.getInversionInd().equals(true)) {
 				if (er.getAct().getTemplateIds().get(0).getRoot()
 						.equals("2.16.840.1.113883.10.20.1.40")
 						|| er.getAct().getTemplateIds().get(0).getRoot()
-								.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
+						.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
 					sacl.add(new SectionAnnotationCommentEntry((Comment) er.getAct()));
 				}
 			}
@@ -130,9 +130,9 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @return the method code translation
 	 */
 	public Code getMethodCodeTranslation() {
-		if (!mVitalSignObservation.getMethodCodes().isEmpty()
-				&& !mVitalSignObservation.getMethodCodes().get(0).getTranslations().isEmpty()) {
-			return new Code(mVitalSignObservation.getMethodCodes().get(0).getTranslations().get(0));
+		if (!getVitalSignObservation().getMethodCodes().isEmpty()
+				&& !getVitalSignObservation().getMethodCodes().get(0).getTranslations().isEmpty()) {
+			return new Code(getVitalSignObservation().getMethodCodes().get(0).getTranslations().get(0));
 		}
 		return null;
 	}
@@ -159,9 +159,9 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	@Override
 	protected void initMdht() {
 		super.initMdht();
-		Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.4.1",
+		final Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH-LRTP.Body.VitalSignL3");
-		mVitalSignObservation.getTemplateIds().add(id.getIi());
+		getVitalSignObservation().getTemplateIds().add(id.getIi());
 	}
 
 	// /**
@@ -197,12 +197,12 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *            the new method code translation
 	 */
 	public void setMethodCodeTranslation(Code translation) {
-		mVitalSignObservation.getMethodCodes().clear();
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		getVitalSignObservation().getMethodCodes().clear();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(NullFlavor.NA);
 		if (translation != null) {
 			ce.getTranslations().add(translation.getCE());
 		}
-		mVitalSignObservation.getMethodCodes().add(ce);
+		getVitalSignObservation().getMethodCodes().add(ce);
 	}
 }

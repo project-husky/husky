@@ -18,8 +18,6 @@ package org.ehealth_connector.validation.service.schematron;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -104,31 +102,31 @@ public class ReportBuilder {
 		} else if (ruleSetList == null) {
 			throw new RuleSetDetectionException(new ArrayList<RuleSet>());
 		}
-		Map<String, RuleSet> ruleSetOidMap = new HashMap<String, RuleSet>();
-		for (RuleSet ruleSet : ruleSetList) {
+		final Map<String, RuleSet> ruleSetOidMap = new HashMap<String, RuleSet>();
+		for (final RuleSet ruleSet : ruleSetList) {
 			if (ruleSet.getTemplateId() != null) {
 				ruleSetOidMap.put(ruleSet.getTemplateId(), ruleSet);
 			}
 		}
-		List<RuleSet> matchingRuleSets = new ArrayList<RuleSet>();
-		String expression = "/cda:ClinicalDocument/cda:templateId/@root";
+		final List<RuleSet> matchingRuleSets = new ArrayList<RuleSet>();
+		final String expression = "/cda:ClinicalDocument/cda:templateId/@root";
 
-		DocumentBuilder builder = processor.newDocumentBuilder();
-		XPathCompiler compiler = processor.newXPathCompiler();
+		final DocumentBuilder builder = processor.newDocumentBuilder();
+		final XPathCompiler compiler = processor.newXPathCompiler();
 		compiler.declareNamespace("cda", "urn:hl7-org:v3");
 
 		XPathSelector selector;
 		try {
-			XdmNode document = builder.build(source);
-			XPathExecutable executable = compiler.compile(expression);
+			final XdmNode document = builder.build(source);
+			final XPathExecutable executable = compiler.compile(expression);
 			selector = executable.load();
 			selector.setContextItem(document);
-		} catch (SaxonApiException cause) {
+		} catch (final SaxonApiException cause) {
 			throw new RuleSetDetectionException(cause);
 		}
 		RuleSet match;
 		String value;
-		for (XdmItem item : selector) {
+		for (final XdmItem item : selector) {
 			value = ((XdmNode) item).getStringValue();
 			if ((match = ruleSetOidMap.get(value)) != null) {
 				matchingRuleSets.add(match);
@@ -141,7 +139,7 @@ public class ReportBuilder {
 	}
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Validator class used for validatio */
 	private final Validators validators;
@@ -193,16 +191,16 @@ public class ReportBuilder {
 	 * @throws TransformationException
 	 */
 	protected long countErrors(InputStream in) throws TransformationException {
-		DocumentBuilder builder = getProcessor().newDocumentBuilder();
-		XPathCompiler compiler = getProcessor().newXPathCompiler();
+		final DocumentBuilder builder = getProcessor().newDocumentBuilder();
+		final XPathCompiler compiler = getProcessor().newXPathCompiler();
 		compiler.declareNamespace("svrl", "http://purl.oclc.org/dsdl/svrl");
-		String expression = "count(//svrl:failed-assert[@role='error'])"
+		final String expression = "count(//svrl:failed-assert[@role='error'])"
 				+ " + count(//svrl:successful-report[@role='error'])";
 		try {
-			XdmNode document = builder.build(new StreamSource(in));
-			XdmItem item = compiler.evaluateSingle(expression, document);
+			final XdmNode document = builder.build(new StreamSource(in));
+			final XdmItem item = compiler.evaluateSingle(expression, document);
 			return ((XdmAtomicValue) item).getLongValue();
-		} catch (SaxonApiException cause) {
+		} catch (final SaxonApiException cause) {
 			throw new TransformationException(cause);
 		}
 	}
@@ -235,8 +233,8 @@ public class ReportBuilder {
 	 */
 	public byte[] createHTMLReport(RuleSet ruleSet, byte[] input, Properties parameters)
 			throws TransformationException, InterruptedException {
-		ByteArrayInputStream in = new ByteArrayInputStream(input);
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		final ByteArrayInputStream in = new ByteArrayInputStream(input);
+		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 		createHTMLReport(ruleSet, in, out, parameters);
 		return out.toByteArray();
 	}
@@ -269,12 +267,12 @@ public class ReportBuilder {
 	 */
 	public long createHTMLReport(RuleSet ruleSet, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		XsltExecutable styleSheet = getValidator(ruleSet);
-		Transformation t1 = new Transformation(styleSheet);
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final XsltExecutable styleSheet = getValidator(ruleSet);
+		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
-		byte[] svrl = baos.toByteArray();
+		final byte[] svrl = baos.toByteArray();
 		// for debugging only - comment these lines for productive releases
 		// log.debug("Validation-Result input cachable: {}",
 		// new Object[] { ruleSet.isCacheable() });
@@ -282,7 +280,7 @@ public class ReportBuilder {
 		// baos.toString() });
 		// end of debugging only
 
-		Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_HTML, false));
+		final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_HTML, false));
 		t2.setURIResolver(this.resolver);
 		t2.setParameters(parameters);
 		t2.transform(new ByteArrayInputStream(svrl), out);
@@ -332,20 +330,20 @@ public class ReportBuilder {
 	public byte[] createHTMLReport(RuleSet[] ruleSetList, byte[] input, Properties parameters)
 			throws SAXException, RuleSetDetectionException, TransformationException,
 			InterruptedException {
-		ByteArrayInputStream in = new ByteArrayInputStream(input);
-		RuleSet ruleSet = detectRuleSet(new StreamSource(in), ruleSetList);
+		final ByteArrayInputStream in = new ByteArrayInputStream(input);
+		final RuleSet ruleSet = detectRuleSet(new StreamSource(in), ruleSetList);
 		return createHTMLReport(ruleSet, input, parameters);
 	}
 
 	public byte[] createSvrlReport(RuleSet ruleSet, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ByteArrayOutputStream baos_ms = new ByteArrayOutputStream();
-		XsltExecutable styleSheet = getValidator(ruleSet);
-		Transformation t1 = new Transformation(styleSheet);
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final ByteArrayOutputStream baos_ms = new ByteArrayOutputStream();
+		final XsltExecutable styleSheet = getValidator(ruleSet);
+		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
-		byte[] svrl = baos.toByteArray();
+		final byte[] svrl = baos.toByteArray();
 
 		// for debugging only - comment these lines for productive releases
 		// OutputStream outputStream1 = null;
@@ -359,22 +357,22 @@ public class ReportBuilder {
 		// }
 		// end of debugging only
 
-		Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
+		final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
 		t2.setURIResolver(this.resolver);
 		t2.setParameters(parameters);
 		t2.transform(new ByteArrayInputStream(svrl), baos_ms);
-		byte[] svrl_ms = baos_ms.toByteArray();
+		final byte[] svrl_ms = baos_ms.toByteArray();
 
 		// for debugging only - comment these lines for productive releases
-//		 OutputStream outputStream2 = null;
-//		 try {
-//		 outputStream2 = new FileOutputStream("temp/svrl2xml_out.xml");
-//		 baos_ms.writeTo(outputStream2);
-//		 outputStream2.close();
-//		 } catch (IOException e) {
-//		 // TODO Auto-generated catch block
-//		 e.printStackTrace();
-//		 }
+		// OutputStream outputStream2 = null;
+		// try {
+		// outputStream2 = new FileOutputStream("temp/svrl2xml_out.xml");
+		// baos_ms.writeTo(outputStream2);
+		// outputStream2.close();
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		// end of debugging only
 
 		return svrl_ms;

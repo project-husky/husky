@@ -44,7 +44,8 @@ public class AbstractVitalSignsOrganizer
 	}
 
 	public NullFlavor getEffectiveTimeNullFlavor() {
-		if (getMdht().getEffectiveTime() != null && getMdht().getEffectiveTime().isSetNullFlavor()) {
+		if ((getMdht().getEffectiveTime() != null)
+				&& getMdht().getEffectiveTime().isSetNullFlavor()) {
 			return NullFlavor.getEnum(getMdht().getEffectiveTime().getNullFlavor().getLiteral());
 		}
 		return null;
@@ -55,7 +56,7 @@ public class AbstractVitalSignsOrganizer
 	}
 
 	public void setEffectiveTimeNullFlavor(NullFlavor nullFlavor) {
-		IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
 		ivlts.setNullFlavor(
 				org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.get(nullFlavor.getCodeValue()));
 		getMdht().setEffectiveTime(ivlts);

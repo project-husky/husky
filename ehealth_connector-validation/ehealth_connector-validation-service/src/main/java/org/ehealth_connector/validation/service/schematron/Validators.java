@@ -80,7 +80,7 @@ public class Validators {
 	private final RuleSetTransformer factory;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Creates a new <tt>Validators</tt> instance which relies on the specified
@@ -138,7 +138,7 @@ public class Validators {
 	 */
 	protected File createOutputFile(File base) {
 		String baseName = base.getName();
-		int pos = baseName.lastIndexOf(".");
+		final int pos = baseName.lastIndexOf(".");
 		if (pos >= 0) {
 			baseName = baseName.substring(0, pos) + VALIDATOR_FILE_EXTENSION;
 		}
@@ -183,13 +183,13 @@ public class Validators {
 	 */
 	public XsltExecutable get(File in, File out, boolean cacheable)
 			throws TransformationException, InterruptedException {
-		Future<XsltExecutable> f = load(in, out, cacheable);
+		final Future<XsltExecutable> f = load(in, out, cacheable);
 		try {
 			return f.get();
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			cache.remove(in);
 			throw e;
-		} catch (ExecutionException e) {
+		} catch (final ExecutionException e) {
 			if (e.getCause() instanceof TransformationException) {
 				throw (TransformationException) e.getCause();
 			}
@@ -232,8 +232,8 @@ public class Validators {
 			throws TransformationException, InterruptedException {
 		if (ruleSet == null)
 			throw new NullPointerException("Rule-Set is null.");
-		File in = ruleSet.getPath();
-		File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
+		final File in = ruleSet.getPath();
+		final File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
 		return get(in, out, ruleSet.isCacheable());
 	}
 
@@ -283,9 +283,9 @@ public class Validators {
 			throw new NullPointerException("Input file is null.");
 		Future<XsltExecutable> f = (cacheable ? cache.get(in) : null);
 		if (f == null) {
-			Callable<XsltExecutable> c = new ValidatorBuilder(factory, in, out);
-			FutureTask<XsltExecutable> ft = new FutureTask<XsltExecutable>(c);
-			if (!cacheable || (f = cache.putIfAbsent(in, ft)) == null) {
+			final Callable<XsltExecutable> c = new ValidatorBuilder(factory, in, out);
+			final FutureTask<XsltExecutable> ft = new FutureTask<XsltExecutable>(c);
+			if (!cacheable || ((f = cache.putIfAbsent(in, ft)) == null)) {
 				f = ft;
 				executor.execute(ft);
 			}
@@ -313,8 +313,8 @@ public class Validators {
 	 *             if the specified rule-set is <tt>null</tt>.
 	 */
 	public Future<XsltExecutable> load(RuleSet ruleSet) {
-		File in = ruleSet.getPath();
-		File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
+		final File in = ruleSet.getPath();
+		final File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
 		return load(in, out, ruleSet.isCacheable());
 	}
 

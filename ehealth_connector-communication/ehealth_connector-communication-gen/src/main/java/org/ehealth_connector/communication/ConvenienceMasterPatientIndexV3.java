@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 public class ConvenienceMasterPatientIndexV3 {
 
 	/** The SLF4J logger instance. */
-	protected static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
+	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
 
 	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 

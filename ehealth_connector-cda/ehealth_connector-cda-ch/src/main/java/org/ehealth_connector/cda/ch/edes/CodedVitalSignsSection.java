@@ -36,7 +36,7 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	 */
 	public CodedVitalSignsSection(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
 				.getSectionTitle((languageCode != null ? languageCode : null))));
 	}
@@ -53,7 +53,7 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	protected CodedVitalSignsSection(LanguageCode languageCode,
 			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section) {
 		super(section);
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 	}
 
 	/**

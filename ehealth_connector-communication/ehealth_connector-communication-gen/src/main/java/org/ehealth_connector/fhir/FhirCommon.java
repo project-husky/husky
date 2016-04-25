@@ -548,14 +548,14 @@ public class FhirCommon {
 	public static final String urnUseAsVitalSignsOrganizer = "http://www.ehealth-connector.org/fhir-extensions/useAsVitalSignsOrganizer";
 
 	public static Address fhirAddressToEhcAddress(AddressDt fAddr) {
-		Address addr = new Address();
+		final Address addr = new Address();
 		if (fAddr.getCity() != null) {
 			addr.setCity(fAddr.getCity());
 		}
 		if (fAddr.getCountry() != null) {
 			addr.setCountry(fAddr.getCountry());
 		}
-		for (StringDt fLine : fAddr.getLine()) {
+		for (final StringDt fLine : fAddr.getLine()) {
 			addr.getMdhtAdress().addStreetAddressLine(fLine.getValue());
 		}
 		if (fAddr.getPostalCode() != null) {
@@ -565,7 +565,7 @@ public class FhirCommon {
 			addr.getMdhtAdress().addState(fAddr.getState());
 		}
 		if (fAddr.getUse() != null) {
-			BoundCodeDt<AddressUseEnum> useElement = fAddr.getUseElement();
+			final BoundCodeDt<AddressUseEnum> useElement = fAddr.getUseElement();
 			if (useElement.equals(AddressUseEnum.HOME)) {
 				addr.getMdhtAdress().getUses().add(PostalAddressUse.HP);
 			}
@@ -589,7 +589,7 @@ public class FhirCommon {
 				codableConcept.getCodingFirstRep().getDisplay());
 		if (codableConcept.getCoding().size() > 1) {
 			for (int i = 1; i < codableConcept.getCoding().size(); i++) {
-				CodingDt fhirCode = codableConcept.getCoding().get(i);
+				final CodingDt fhirCode = codableConcept.getCoding().get(i);
 				code.addTranslation(new Code(removeURIPrefix(fhirCode.getSystem()),
 						fhirCode.getCode(), fhirCode.getDisplay()));
 			}
@@ -599,7 +599,7 @@ public class FhirCommon {
 	}
 
 	public static Identificator fhirIdentifierToEhcIdentificator(IdentifierDt id) {
-		if (id != null && !id.isEmpty()) {
+		if ((id != null) && !id.isEmpty()) {
 			return new Identificator(FhirCommon.removeURIPrefix(id.getSystem()), id.getValue());
 		} else {
 			return null;
@@ -662,7 +662,7 @@ public class FhirCommon {
 		final String authoringDeviceName = fhirObject.getName();
 
 		// Create the author
-		AuthoringDevice ad = new AuthoringDevice(authoringDeviceName);
+		final AuthoringDevice ad = new AuthoringDevice(authoringDeviceName);
 		retVal = new org.ehealth_connector.common.Author(ad);
 		retVal.setFunctionCode(Author.FUNCTION_CODE_AUTHORDEVICE);
 
@@ -1184,8 +1184,8 @@ public class FhirCommon {
 		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 			gender = AdministrativeGender.FEMALE;
-		} else if (fhirPatient.getGenderElement()
-				.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+		} else
+			if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
 			gender = AdministrativeGender.MALE;
 		}
 
@@ -1262,8 +1262,8 @@ public class FhirCommon {
 		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 			gender = AdministrativeGender.FEMALE;
-		} else if (fhirPatient.getGenderElement()
-				.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+		} else
+			if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
 			gender = AdministrativeGender.MALE;
 		}
 

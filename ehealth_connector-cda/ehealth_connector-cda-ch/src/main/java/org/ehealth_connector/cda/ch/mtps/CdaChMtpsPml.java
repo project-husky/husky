@@ -56,7 +56,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		case ENGLISH:
 			setTitle("Medication List");
 		}
-		MedicationListSection section = new MedicationListSection(getLanguageCode());
+		final MedicationListSection section = new MedicationListSection(getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 

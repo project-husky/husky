@@ -14,16 +14,16 @@ public enum AdministrativeGender {
 	 * <div class="en"></div> <div class="de">Weiblich</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	FEMALE("F", "Female"),
-	/**
-	 * <div class="en"></div> <div class="de">Männlich</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	MALE("M", "Male"),
-	/**
-	 * <div class="en"></div> <div class="de">Undifferenziert</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
+	FEMALE("F",
+			"Female"), /**
+						 * <div class="en"></div> <div class="de">Männlich</div>
+						 * <div class="fr"></div> <div class="it"></div>
+						 */
+	MALE("M", "Male"), /**
+						 * <div class="en"></div>
+						 * <div class="de">Undifferenziert</div>
+						 * <div class="fr"></div> <div class="it"></div>
+						 */
 	UNDIFFERENTIATED("UN", "Undifferentiated");
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -46,12 +46,12 @@ public enum AdministrativeGender {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AdministrativeGender getEnum(String code) {
-		for (AdministrativeGender x : values()) {
+		for (final AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -66,8 +66,8 @@ public enum AdministrativeGender {
 	 *
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -88,12 +88,12 @@ public enum AdministrativeGender {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (AdministrativeGender x : values()) {
+		for (final AdministrativeGender x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -106,25 +106,25 @@ public enum AdministrativeGender {
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
 	 */
-	protected String code;
+	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
-	protected String displayName;
+	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private AdministrativeGender(String code, String displayName) {
 		this.code = code;
@@ -138,7 +138,7 @@ public enum AdministrativeGender {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -152,7 +152,7 @@ public enum AdministrativeGender {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
 		return ehcCode;
 	}
 
@@ -167,8 +167,8 @@ public enum AdministrativeGender {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

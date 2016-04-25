@@ -43,7 +43,7 @@ public class PharmaceuticalAdviceSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public PharmaceuticalAdviceSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceSection().init());
@@ -77,7 +77,7 @@ public class PharmaceuticalAdviceSection
 	 * Instantiates a new pharmaceutical advice section.
 	 *
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public PharmaceuticalAdviceSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceSection section) {
@@ -112,12 +112,12 @@ public class PharmaceuticalAdviceSection
 	 * Sets the pharmaceutical advice item entry.
 	 *
 	 * @param entry
-	 *          the new pharmaceutical advice item entry
+	 *            the new pharmaceutical advice item entry
 	 */
 	public void setPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
 		if (this.getMdht().getPharmaceuticalAdviceItemEntry() != null) {
-			EList<Entry> entries = this.getMdht().getEntries();
-			if (entries != null && entries.size() > 0) {
+			final EList<Entry> entries = this.getMdht().getEntries();
+			if ((entries != null) && (entries.size() > 0)) {
 				entries.get(0).setObservation(entry.getMdht());
 				return;
 			}

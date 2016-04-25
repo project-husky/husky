@@ -36,7 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  * strukturierter Form.</div>
  */
 public class BloodGroupObservation
-		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
+extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
 
 	/**
 	 * Instantiates a new blood group observation.
@@ -87,9 +87,9 @@ public class BloodGroupObservation
 	 * @return the author list
 	 */
 	public List<Author> getAuthorList() {
-		List<Author> al = new ArrayList<Author>();
-		if (getMdht().getAuthors() != null && !getMdht().getAuthors().isEmpty()) {
-			for (org.openhealthtools.mdht.uml.cda.Author a : getMdht().getAuthors()) {
+		final List<Author> al = new ArrayList<Author>();
+		if ((getMdht().getAuthors() != null) && !getMdht().getAuthors().isEmpty()) {
+			for (final org.openhealthtools.mdht.uml.cda.Author a : getMdht().getAuthors()) {
 				al.add(new Author(a));
 			}
 		}
@@ -114,8 +114,8 @@ public class BloodGroupObservation
 	 * @return the content id reference
 	 */
 	public String getContentIdReference() {
-		if (getMdht().getText() != null && getMdht().getText().getReference() != null
-				&& getMdht().getText().getReference().getValue() != null) {
+		if ((getMdht().getText() != null) && (getMdht().getText().getReference() != null)
+				&& (getMdht().getText().getReference().getValue() != null)) {
 			return getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -127,8 +127,8 @@ public class BloodGroupObservation
 	 * @return the value enum
 	 */
 	public BloodGroup getValueEnum() {
-		if (!getMdht().getValues().isEmpty() && getMdht().getValues().get(0) instanceof CE) {
-			CE ce = (CE) getMdht().getValues().get(0);
+		if (!getMdht().getValues().isEmpty() && (getMdht().getValues().get(0) instanceof CE)) {
+			final CE ce = (CE) getMdht().getValues().get(0);
 			return BloodGroup.getEnum(ce.getCode());
 		}
 		return null;

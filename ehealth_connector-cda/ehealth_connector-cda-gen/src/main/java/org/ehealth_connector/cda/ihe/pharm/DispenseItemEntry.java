@@ -54,7 +54,7 @@ public class DispenseItemEntry
 	 * Instantiates a new dispense item entry.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public DispenseItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseItemEntry().init());
@@ -64,7 +64,7 @@ public class DispenseItemEntry
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected DispenseItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry mdht) {
 		super(mdht, null, null);
@@ -74,10 +74,10 @@ public class DispenseItemEntry
 	 * Adds the precondition entry.
 	 *
 	 * @param entry
-	 *          the entry
+	 *            the entry
 	 */
 	public void addPreconditionEntry(CriterionEntry entry) {
-		Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
+		final Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
 		precondition.setCriterion(entry.getMdht());
 		getMdht().getPreconditions().add(precondition);
 	}
@@ -167,11 +167,9 @@ public class DispenseItemEntry
 	 * @return the medication treatment plan item reference entry
 	 */
 	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-				.getMedicationTreatmentPlanItemReferenceEntry() != null) {
+		if (getMdht().getMedicationTreatmentPlanItemReferenceEntry() != null) {
 			return new MedicationTreatmentPlanItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-							.getMedicationTreatmentPlanItemReferenceEntry());
+					getMdht().getMedicationTreatmentPlanItemReferenceEntry());
 		}
 		return null;
 	}
@@ -194,11 +192,9 @@ public class DispenseItemEntry
 	 * @return the pharmaceutical advice item reference entry
 	 */
 	public PharmaceuticalAdviceItemReferenceEntry getPharmaceuticalAdviceItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-				.getPharmaceuticalAdviceItemReferenceEntry() != null) {
+		if (getMdht().getPharmaceuticalAdviceItemReferenceEntry() != null) {
 			return new PharmaceuticalAdviceItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-							.getPharmaceuticalAdviceItemReferenceEntry());
+					getMdht().getPharmaceuticalAdviceItemReferenceEntry());
 		}
 		return null;
 	}
@@ -210,7 +206,7 @@ public class DispenseItemEntry
 	 */
 	public List<CriterionEntry> getPreconditionEntries() {
 		final List<CriterionEntry> preconditionEntries = new ArrayList<CriterionEntry>();
-		for (Precondition precondition : getMdht().getPreconditions()) {
+		for (final Precondition precondition : getMdht().getPreconditions()) {
 			preconditionEntries.add(new CriterionEntry(precondition.getCriterion()));
 		}
 		return preconditionEntries;
@@ -222,11 +218,9 @@ public class DispenseItemEntry
 	 * @return the prescription item reference entry
 	 */
 	public PrescriptionItemReferenceEntry getPrescriptionItemReferenceEntry() {
-		if (((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-				.getPrescriptionItemReferenceEntry() != null) {
+		if (getMdht().getPrescriptionItemReferenceEntry() != null) {
 			return new PrescriptionItemReferenceEntry(
-					((org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry) getMdht())
-							.getPrescriptionItemReferenceEntry());
+					getMdht().getPrescriptionItemReferenceEntry());
 		}
 		return null;
 	}
@@ -238,7 +232,7 @@ public class DispenseItemEntry
 	 */
 	public SubstanceAdminSubstitution getSubstanceAdminSubstitutionMade() {
 		if (this.getMdht().getComponent1() != null) {
-			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
 			if (pharmSubstitution.getCode() != null) {
 				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
 			}
@@ -253,7 +247,8 @@ public class DispenseItemEntry
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -263,7 +258,7 @@ public class DispenseItemEntry
 	 * Sets the dispense code.
 	 *
 	 * @param code
-	 *          the new dispense code
+	 *            the new dispense code
 	 */
 	public void setDispenseCode(Code code) {
 		this.getMdht().setCode(code.getCD());
@@ -273,19 +268,20 @@ public class DispenseItemEntry
 	 * Sets the dosage instructions.
 	 *
 	 * @param entry
-	 *          the new dosage instructions
+	 *            the new dosage instructions
 	 */
 	public void setDosageInstructions(DosageInstructionsEntry entry) {
-		DosageInstructionsEntry old = this.getDosageInstructions();
+		final DosageInstructionsEntry old = this.getDosageInstructions();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration((entry.getMdht()));
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationShip.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
@@ -296,11 +292,12 @@ public class DispenseItemEntry
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *          the new external document entry
+	 *            the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
-		ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef().init();
+		final ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef()
+				.init();
 		reference.getTemplateIds().clear();
 		externalDocumentEntry.getMdht().getTemplateIds().clear();
 		reference.setExternalDocument(externalDocumentEntry.getMdht());
@@ -312,7 +309,7 @@ public class DispenseItemEntry
 	 * Sets the identificator. Note: replaces all existing identifiers
 	 *
 	 * @param id
-	 *          the new identificator
+	 *            the new identificator
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -325,20 +322,22 @@ public class DispenseItemEntry
 	 * Sets the medication fullfillment instructions.
 	 *
 	 * @param entry
-	 *          the new medication fullfillment instructions
+	 *            the new medication fullfillment instructions
 	 */
-	public void setMedicationFullfillmentInstructions(MedicationFullfillmentInstructionsEntry entry) {
-		MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
+	public void setMedicationFullfillmentInstructions(
+			MedicationFullfillmentInstructionsEntry entry) {
+		final MedicationFullfillmentInstructionsEntry old = this
+				.getMedicationFullfillmentInstructions();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationship.setAct(entry.getMdht());
 			entryRelationship.setInversionInd(Boolean.TRUE);
@@ -350,9 +349,9 @@ public class DispenseItemEntry
 	 * Sets the medications special conditions.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public void setMedicationsSpecialConditions(MedicationsSpecialConditions code,
 			LanguageCode languageCode) {
@@ -365,21 +364,21 @@ public class DispenseItemEntry
 	 * Sets the medication treatment plan item reference entry.
 	 *
 	 * @param entry
-	 *          the new medication treatment plan item reference entry
+	 *            the new medication treatment plan item reference entry
 	 */
 	public void setMedicationTreatmentPlanItemReferenceEntry(
 			MedicationTreatmentPlanItemReferenceEntry entry) {
-		MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
+		final MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -390,19 +389,20 @@ public class DispenseItemEntry
 	 * Sets the patient medical instructions.
 	 *
 	 * @param entry
-	 *          the new patient medical instructions
+	 *            the new patient medical instructions
 	 */
 	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
-		PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
+		final PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setAct(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationShip.setAct(entry.getMdht());
 			entryRelationShip.setInversionInd(Boolean.TRUE);
@@ -414,21 +414,21 @@ public class DispenseItemEntry
 	 * Sets the pharmaceutical advice item reference entry.
 	 *
 	 * @param entry
-	 *          the new pharmaceutical advice item reference entry
+	 *            the new pharmaceutical advice item reference entry
 	 */
 	public void setPharmaceuticalAdviceItemReferenceEntry(
 			PharmaceuticalAdviceItemReferenceEntry entry) {
-		PharmaceuticalAdviceItemReferenceEntry old = getPharmaceuticalAdviceItemReferenceEntry();
+		final PharmaceuticalAdviceItemReferenceEntry old = getPharmaceuticalAdviceItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setObservation(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setObservation(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -439,20 +439,20 @@ public class DispenseItemEntry
 	 * Sets the prescription item reference entry.
 	 *
 	 * @param entry
-	 *          the new prescription item reference entry
+	 *            the new prescription item reference entry
 	 */
 	public void setPrescriptionItemReferenceEntry(PrescriptionItemReferenceEntry entry) {
-		PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
+		final PrescriptionItemReferenceEntry old = getPrescriptionItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -463,21 +463,21 @@ public class DispenseItemEntry
 	 * Sets the substance admin substitution.
 	 *
 	 * @param substanceAdminSubstitution
-	 *          the substance admin substitution
+	 *            the substance admin substitution
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public void setSubstanceAdminSubstitutionMade(
 			SubstanceAdminSubstitution substanceAdminSubstitution, LanguageCode languageCode) {
 		if (substanceAdminSubstitution != null) {
 			if (this.getMdht().getComponent1() == null) {
-				PharmSubstitutionMade pharmSubstitution = CDAFactory.eINSTANCE
+				final PharmSubstitutionMade pharmSubstitution = CDAFactory.eINSTANCE
 						.createPharmSubstitutionMade();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.EVN);
 				this.getMdht().setComponent1(pharmSubstitution);
 			}
-			PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
 			pharmSubstitution.setCode(substanceAdminSubstitution.getCode(languageCode).getCE());
 		} else {
 			this.getMdht().setComponent1(null);
@@ -489,7 +489,7 @@ public class DispenseItemEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference
+	 *            the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

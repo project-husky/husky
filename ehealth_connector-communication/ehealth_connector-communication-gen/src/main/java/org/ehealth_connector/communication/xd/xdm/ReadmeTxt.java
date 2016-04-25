@@ -39,7 +39,7 @@ public class ReadmeTxt {
 			+ "Creation timestamp: {5}\n";
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The InputStream */
 	private InputStream inputStream = null;

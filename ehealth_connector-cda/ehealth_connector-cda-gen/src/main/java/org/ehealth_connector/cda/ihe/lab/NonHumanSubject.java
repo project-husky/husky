@@ -84,7 +84,7 @@ public class NonHumanSubject
 	 * @return the adress
 	 */
 	public Address getAdress() {
-		if (getMdht().getRelatedSubject() != null
+		if ((getMdht().getRelatedSubject() != null)
 				&& !getMdht().getRelatedSubject().getAddrs().isEmpty()) {
 			return new Address(getMdht().getRelatedSubject().getAddrs().get(0));
 		}
@@ -97,8 +97,8 @@ public class NonHumanSubject
 	 * @return the code
 	 */
 	public Code getCode() {
-		if (getMdht().getRelatedSubject() != null
-				&& getMdht().getRelatedSubject().getCode() != null) {
+		if ((getMdht().getRelatedSubject() != null)
+				&& (getMdht().getRelatedSubject().getCode() != null)) {
 			return new Code(getMdht().getRelatedSubject().getCode());
 		}
 		return null;
@@ -124,7 +124,7 @@ public class NonHumanSubject
 	 */
 	public void setCode(Code code) {
 		if (code == null) {
-			CE ce = DatatypesFactory.eINSTANCE.createCE();
+			final CE ce = DatatypesFactory.eINSTANCE.createCE();
 			ce.setNullFlavor(NullFlavor.UNK);
 			getMdht().getRelatedSubject().setCode(ce);
 		} else {

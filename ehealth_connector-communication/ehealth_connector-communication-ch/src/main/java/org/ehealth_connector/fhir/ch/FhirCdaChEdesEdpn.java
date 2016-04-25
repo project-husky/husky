@@ -32,7 +32,6 @@ import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -64,7 +63,6 @@ import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
 import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
-import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.TimeDt;
 import ca.uhn.fhir.parser.IParser;
 
@@ -445,12 +443,12 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		narrative = getNarrative(bundle, FhirCommon.urnUseAsAssessmentAndPlan);
 		doc.setNarrativeTextSectionAssessmentAndPlan(narrative);
 
-		VitalSignsOrganizer vitalSignOrganizer = getCodedVitalSignOrganizer(bundle);
+		final VitalSignsOrganizer vitalSignOrganizer = getCodedVitalSignOrganizer(bundle);
 		doc.setVitalSignsOrganizer(vitalSignOrganizer);
 
-		List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
-		if (vitalSigns != null && !vitalSigns.isEmpty()) {
-			for (VitalSignObservation vitalSign : vitalSigns) {
+		final List<VitalSignObservation> vitalSigns = getCodedVitalSigns(bundle);
+		if ((vitalSigns != null) && !vitalSigns.isEmpty()) {
+			for (final VitalSignObservation vitalSign : vitalSigns) {
 				doc.addCodedVitalSign(vitalSignOrganizer, vitalSign, docAuthor);
 			}
 		}
@@ -530,7 +528,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.AllergyConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.AllergyConcern>();
 		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
+			final List<ExtensionDt> extensions = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern);
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
 				Condition fhirCondition = (Condition) entry.getResource();
@@ -595,26 +593,26 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 	}
 
 	private VitalSignsOrganizer getCodedVitalSignOrganizer(Bundle bundle) {
-		VitalSignsOrganizer retVal = new VitalSignsOrganizer();
+		final VitalSignsOrganizer retVal = new VitalSignsOrganizer();
 		for (final Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof ListResource) {
-				ListResource list = (ListResource) entry.getResource();
-				List<ExtensionDt> extensions = list
+				final ListResource list = (ListResource) entry.getResource();
+				final List<ExtensionDt> extensions = list
 						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList);
 				if (!extensions.isEmpty()) {
-					IdentifierDt id = list.getIdentifier().get(0);
-					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+					final IdentifierDt id = list.getIdentifier().get(0);
+					final TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
 					retVal.setEffectiveTime(
 							DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 					retVal.addId(new Identificator(id.getSystem(), id.getValue()));
-					for (ListResource.Entry listEntry : list.getEntry()) {
-						List<ExtensionDt> extensions2 = listEntry
+					for (final ListResource.Entry listEntry : list.getEntry()) {
+						final List<ExtensionDt> extensions2 = listEntry
 								.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions2.isEmpty()
-								&& listEntry.getItem().getResource() instanceof Person) {
-							org.ehealth_connector.common.Author author = FhirCommon
+								&& (listEntry.getItem().getResource() instanceof Person)) {
+							final org.ehealth_connector.common.Author author = FhirCommon
 									.getAuthor((Person) listEntry.getItem().getResource());
-							TimeDt timeStamp2 = ((TimeDt) extensions2.get(0).getValue());
+							final TimeDt timeStamp2 = ((TimeDt) extensions2.get(0).getValue());
 							author.setTime(
 									DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp2.getValue()));
 							retVal.addAuthor(author);
@@ -641,35 +639,35 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
 		for (final Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof ListResource) {
-				ListResource list = (ListResource) entry.getResource();
+				final ListResource list = (ListResource) entry.getResource();
 				if (!list.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList)
 						.isEmpty()) {
-					for (ListResource.Entry listEntry : list.getEntry()) {
+					for (final ListResource.Entry listEntry : list.getEntry()) {
 						if (!listEntry.getUndeclaredExtensionsByUrl(
 								FhirCommon.urnUseAsCodedVitalSignObservation).isEmpty()
-								&& listEntry.getItem().getResource() instanceof Observation) {
-							Observation fhirObservation = (Observation) listEntry.getItem()
+								&& (listEntry.getItem().getResource() instanceof Observation)) {
+							final Observation fhirObservation = (Observation) listEntry.getItem()
 									.getResource();
 
-							IDatatype fhirEffectiveTime = fhirObservation.getEffective();
+							final IDatatype fhirEffectiveTime = fhirObservation.getEffective();
 							Date effectiveTime = new Date();
 							if (fhirEffectiveTime instanceof DateTimeDt) {
 								effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
 							}
-							List<Component> components = fhirObservation.getComponent();
-							for (Component component : components) {
+							final List<Component> components = fhirObservation.getComponent();
+							for (final Component component : components) {
 								Value value = null;
 
-								CodingDt fhirCode = component.getCode().getCodingFirstRep();
-								IDatatype fhirValue = component.getValue();
+								final CodingDt fhirCode = component.getCode().getCodingFirstRep();
+								final IDatatype fhirValue = component.getValue();
 
-								Code code = new Code(
+								final Code code = new Code(
 										FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 										fhirCode.getCode(), fhirCode.getDisplay());
 								if (fhirValue instanceof QuantityDt) {
 									// type PQ
 									final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-									PQ pq = DatatypesFactory.eINSTANCE.createPQ();
+									final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
 									pq.setUnit(fhirQuantity.getUnit());
 									pq.setValue(fhirQuantity.getValue());
 									value = new Value(pq);
@@ -769,7 +767,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.PastProblemConcern>();
 		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
+			final List<ExtensionDt> extensions = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPastProblemConcern);
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
 				Condition fhirCondition = (Condition) entry.getResource();
@@ -785,7 +783,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 								((StringDt) ext.getValue()).toString()));
 					}
 				}
-
+				
 				for (final IdentifierDt id : fhirCondition.getIdentifier()) {
 					final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 					concern.addId(new Identificator(codeSystem, id.getValue()));

@@ -40,7 +40,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ObservationInterpretationForImmunization getEnum(String code) {
-		for (ObservationInterpretationForImmunization x : values()) {
+		for (final ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -81,7 +81,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (ObservationInterpretationForImmunization x : values()) {
+		for (final ObservationInterpretationForImmunization x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -106,7 +106,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		CE ce = root.getCE();
+		final CE ce = root.getCE();
 		ce.setDisplayName(displayName);
 		return ce;
 	}
@@ -118,7 +118,7 @@ public enum ObservationInterpretationForImmunization {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		Code ehcCode = root.getCode();
+		final Code ehcCode = root.getCode();
 		ehcCode.setDisplayName(displayName);
 		return ehcCode;
 	}

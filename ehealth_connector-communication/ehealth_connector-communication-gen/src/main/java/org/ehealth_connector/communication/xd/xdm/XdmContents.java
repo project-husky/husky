@@ -80,7 +80,7 @@ public class XdmContents {
 	private static String XDM_README = "README.TXT";
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The index htm. */
 	private IndexHtm indexHtm;

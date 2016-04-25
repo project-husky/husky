@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 public class ReferenceRange extends ObservationRange {
 
 	/** The MDHT Reference Range. */
-	org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
+	private org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
 
 	/**
 	 * Instantiates a new reference range.
@@ -35,7 +35,7 @@ public class ReferenceRange extends ObservationRange {
 	public ReferenceRange() {
 		super();
 		mRr = CDAFactory.eINSTANCE.createReferenceRange();
-		mRr.setObservationRange(mObsR);
+		mRr.setObservationRange(getObsR());
 		mRr.setTypeCode(ActRelationshipType.REFV);
 		this.setInterpretationCode(ObservationInterpretation.NORMAL);
 	}

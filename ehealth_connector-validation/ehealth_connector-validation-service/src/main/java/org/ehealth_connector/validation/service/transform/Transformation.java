@@ -61,7 +61,7 @@ public class Transformation {
 		if (destination instanceof XsltTransformer) {
 			return "Pipe to next transformation";
 		} else if (destination instanceof Serializer) {
-			Object out = ((Serializer) destination).getOutputDestination();
+			final Object out = ((Serializer) destination).getOutputDestination();
 			if (out instanceof File) {
 				return ((File) out).getPath();
 			}
@@ -82,13 +82,13 @@ public class Transformation {
 		if (source == null) {
 			return "Read from pipe";
 		} else if (source instanceof StreamSource) {
-			StreamSource streamSource = (StreamSource) source;
+			final StreamSource streamSource = (StreamSource) source;
 			if (streamSource.getPublicId() != null) {
 				return streamSource.getPublicId();
 			} else if (streamSource.getSystemId() != null) {
 				return source.getSystemId();
 			}
-			InputStream in = streamSource.getInputStream();
+			final InputStream in = streamSource.getInputStream();
 			if (in != null)
 				return in.getClass().getName();
 		} else if (source.getSystemId() != null) {
@@ -98,7 +98,7 @@ public class Transformation {
 	}
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The next transformation step (may be <tt>null</tt>). */
 	private Transformation next;
@@ -134,7 +134,7 @@ public class Transformation {
 	 */
 	protected Source getNextSource() {
 		final File output = getOutputFile();
-		if (isLastStep() || output == null) {
+		if (isLastStep() || (output == null)) {
 			return null;
 		}
 		return new StreamSource(output);
@@ -279,12 +279,12 @@ public class Transformation {
 	 */
 	protected void setDestination(Destination finalDestination) {
 		Destination destination;
-		if (isLastStep() && finalDestination != null) {
+		if (isLastStep() && (finalDestination != null)) {
 			// Specified destination has precedence
 			destination = finalDestination;
 		} else {
 			final File out = getOutputFile();
-			if (isLastStep() && out == null) {
+			if (isLastStep() && (out == null)) {
 				throw new IllegalStateException("Missing final destination.");
 			} else if (out != null) {
 				destination = new Serializer(out);
@@ -344,8 +344,8 @@ public class Transformation {
 	 */
 	public void setParameters(Properties properties) {
 		if (properties != null) {
-			for (Object key : properties.keySet()) {
-				String name = (String) key;
+			for (final Object key : properties.keySet()) {
+				final String name = (String) key;
 				setParameter(name, properties.getProperty(name));
 			}
 		}
@@ -369,7 +369,7 @@ public class Transformation {
 		try {
 			getTransformer().setSource(source);
 			log.debug("Source: " + describeSource(source));
-		} catch (SaxonApiException e) {
+		} catch (final SaxonApiException e) {
 			throw new TransformationException("Failed to set the source document.", e);
 		}
 	}
@@ -451,14 +451,14 @@ public class Transformation {
 			throw new NullPointerException("Source is null.");
 		}
 		log.debug("Initializing transformation sequences ...");
-		List<Transformation> breakPoints = prepare(source, destination);
-		String srcDocument = describeSource(source);
+		final List<Transformation> breakPoints = prepare(source, destination);
+		final String srcDocument = describeSource(source);
 		log.info("Starting transformation of '{}'", srcDocument);
 		try {
-			for (Transformation point : breakPoints) {
+			for (final Transformation point : breakPoints) {
 				point.getTransformer().transform();
 			}
-		} catch (SaxonApiException e) {
+		} catch (final SaxonApiException e) {
 			throw new TransformationException(e);
 		}
 		log.info("Successfully transformed '{}", srcDocument);

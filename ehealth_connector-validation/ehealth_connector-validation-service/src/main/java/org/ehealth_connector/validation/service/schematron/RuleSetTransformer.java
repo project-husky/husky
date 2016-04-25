@@ -24,8 +24,8 @@ import org.ehealth_connector.validation.service.util.JarUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.XsltExecutable;
 
 /**
  * Implementation of a transformation factory, which creates a <cite>Schematron
@@ -53,7 +53,7 @@ public class RuleSetTransformer extends StylesheetFactory {
 	public static final String ISO_SVRL_FOR_XSLT2;
 	/** The SLF4J logger instance. */
 	protected static final Logger log = LoggerFactory.getLogger(RuleSetTransformer.class);
-	
+
 	private static final String xslDir = JarUtils.getResourceUri("xsl/iso-schematron-xslt2",
 			RuleSetTransformer.class);
 
@@ -63,12 +63,9 @@ public class RuleSetTransformer extends StylesheetFactory {
 		ISO_ABSTRACT_EXPAND = xslDir + JarUtils.separator + "iso_abstract_expand.xsl";
 		ISO_SVRL_FOR_XSLT2 = xslDir + JarUtils.separator + "iso_svrl_for_xslt2.xsl";
 	}
-	
+
 	private static final String[] stylesheetNames = new String[] { ISO_DSDL_INCLUDE,
 			ISO_ABSTRACT_EXPAND, ISO_SVRL_FOR_XSLT2 };
-
-	
-	
 
 	/**
 	 * Constructs a new <cite>Schematron Rule-Set</cite> transformer instance.
@@ -107,8 +104,8 @@ public class RuleSetTransformer extends StylesheetFactory {
 	protected Transformation createTransformation(String uri) throws TransformationException {
 		log.debug("Creating transformation based on '{}'",
 				JarUtils.getRelativeUri(uri, getClass()));
-		XsltExecutable stylesheet = getStylesheet(uri, false);
-		Transformation transformation = new Transformation(stylesheet);
+		final XsltExecutable stylesheet = getStylesheet(uri, false);
+		final Transformation transformation = new Transformation(stylesheet);
 		if (ISO_SVRL_FOR_XSLT2.equals(uri)) {
 			transformation.setParameter("allow-foreign", "true");
 			transformation.setParameter("full-path-notation", "2");
@@ -137,7 +134,7 @@ public class RuleSetTransformer extends StylesheetFactory {
 	public Transformation createTransformer() throws TransformationException {
 		Transformation root = null;
 		Transformation step = null;
-		for (String name : getStylesheetNames()) {
+		for (final String name : getStylesheetNames()) {
 			if (step == null) {
 				step = root = createTransformation(name);
 			} else {

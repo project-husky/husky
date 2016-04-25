@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.ehealth_connector.validation.service.api.CdaValidator;
 import org.ehealth_connector.validation.service.api.XsdValidationResult;
@@ -28,9 +28,9 @@ import net.sf.saxon.s9api.SaxonApiException;
 public class ValidationTest {
 
 	private CdaValidator cdaVali;
-	XsdValidationResult xsdValiRes;
-	SchematronValidationResult schValiRes;
-	ArrayList<PdfValidationResult> pdfValiRes;
+	private XsdValidationResult xsdValiRes;
+	private SchematronValidationResult schValiRes;
+	private List<PdfValidationResult> pdfValiRes;
 
 	private final String configFilePath = "rsc/config_elga.xml";
 	private final String cdaFilePath = "cda/ELGA-043-Laborbefund_EIS-FullSupport.xml";
@@ -43,12 +43,12 @@ public class ValidationTest {
 				new File(configFilePath).getAbsoluteFile());
 	}
 
-	//@Test
+	// @Test
 	public void testPdfValidation() throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValiRes = cdaVali.validatePDF();
-		boolean hasError = false;
-		Iterator<PdfValidationResult> iter = pdfValiRes.iterator();
+		final boolean hasError = false;
+		final Iterator<PdfValidationResult> iter = pdfValiRes.iterator();
 		boolean hasErrors = false;
 		PdfValidationResult temp;
 		while (iter.hasNext()) {
@@ -61,7 +61,7 @@ public class ValidationTest {
 		assertFalse(xsdValiRes.isXsdValid());
 	}
 
-	//@Test
+	// @Test
 	public void testSchematronValidation()
 			throws SAXException, ConfigurationException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException {

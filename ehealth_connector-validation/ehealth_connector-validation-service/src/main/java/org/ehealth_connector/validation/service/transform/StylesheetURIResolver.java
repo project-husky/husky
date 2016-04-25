@@ -52,7 +52,7 @@ public class StylesheetURIResolver implements URIResolver {
 	private final Object base;
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	public StylesheetURIResolver(File baseDir) {
 		this.base = baseDir.getAbsoluteFile();
@@ -68,7 +68,7 @@ public class StylesheetURIResolver implements URIResolver {
 			return new StreamSource(file);
 		} else if (base instanceof String) {
 			final String name = (String) base + File.separator + href;
-			StreamSource source = new StreamSource(getClass().getResourceAsStream(name));
+			final StreamSource source = new StreamSource(getClass().getResourceAsStream(name));
 			source.setSystemId(name);
 			return source;
 		}
@@ -78,7 +78,7 @@ public class StylesheetURIResolver implements URIResolver {
 	@Override
 	public Source resolve(String href, String base) throws TransformerException {
 		final Source source = getSource(href);
-		Object[] values = { href, source.getSystemId() };
+		final Object[] values = { href, source.getSystemId() };
 		log.trace("Resolving href=\"{}\" to '{}'", values);
 		return source;
 	}

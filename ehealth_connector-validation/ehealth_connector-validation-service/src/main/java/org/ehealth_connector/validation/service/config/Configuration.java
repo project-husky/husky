@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public class Configuration {
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The underlying unmarshalled configuration element. */
 	private final ConfigurationType configuration;
@@ -72,14 +72,14 @@ public class Configuration {
 	 * @return the list of configured rule-sets.
 	 */
 	protected List<RuleSet> createRuleSetList() {
-		SchematronType schematron = configuration.getSchematron();
-		List<RuleSet> ruleSetList = new ArrayList<RuleSet>();
+		final SchematronType schematron = configuration.getSchematron();
+		final List<RuleSet> ruleSetList = new ArrayList<RuleSet>();
 		try {
-			File ruleSetDir = getRuleSetsDir();
-			for (RuleSetType ruleSetType : schematron.getRuleSets()) {
+			final File ruleSetDir = getRuleSetsDir();
+			for (final RuleSetType ruleSetType : schematron.getRuleSets()) {
 				ruleSetList.add(new RuleSetImpl(ruleSetType, ruleSetDir));
 			}
-		} catch (ConfigurationException e) {
+		} catch (final ConfigurationException e) {
 			log.error("RuleSet is invalid: '{}'", e);
 		}
 		return ruleSetList;
@@ -89,14 +89,14 @@ public class Configuration {
 	 * @return
 	 */
 	private void createRuleSetMaps() {
-		RuleSet first;
 		ruleSetMap.clear();
 		ruleSetOidMap.clear();
-		for (RuleSet ruleSet : createRuleSetList()) {
+		for (final RuleSet ruleSet : createRuleSetList()) {
 			ruleSetMap.put(ruleSet.getId(), ruleSet);
 			if (ruleSet.getTemplateId() != null) {
+				RuleSet first = null;
 				if ((first = ruleSetOidMap.put(ruleSet.getTemplateId(), ruleSet)) != null) {
-					Object[] args = new Object[] { ruleSet.getTemplateId(),
+					final Object[] args = new Object[] { ruleSet.getTemplateId(),
 							first.getPath().getName(), ruleSet.getPath().getName() };
 					log.error("RuleSet OID {} is not unique." + " It was declared in '{}' and '{}'",
 							args);
@@ -120,7 +120,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getDocumentSchema() throws ConfigurationException {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		if (application != null) {
 			File schema = new File(application.getDocumentSchema());
 			if (!schema.isFile()) {
@@ -145,7 +145,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getDownloadsUrl() {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		return (application != null ? application.getDownloadsUrl() : null);
 	}
 
@@ -153,7 +153,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getLicenseKey() {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		return (application != null ? application.getLicenseKey() : null);
 	}
 
@@ -161,7 +161,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getPdfLevel() {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		return (application != null ? application.getPdfLevel() : null);
 	}
 
@@ -169,7 +169,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getPdfReportingLevel() {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		return (application != null ? application.getPdfReportingLevel() : null);
 	}
 
@@ -231,7 +231,7 @@ public class Configuration {
 	 * @return
 	 */
 	public String getTheme() {
-		ApplicationType application = configuration.getApplication();
+		final ApplicationType application = configuration.getApplication();
 		return (application != null ? application.getTheme() : null);
 	}
 
@@ -248,7 +248,7 @@ public class Configuration {
 	public File getWorkDir() {
 		try {
 			return configuration.getWorkDir();
-		} catch (ConfigurationException e) {
+		} catch (final ConfigurationException e) {
 			log.error("<<< Configuration failed: " + e.getCause());
 			return configuration.getBaseDir();
 		}

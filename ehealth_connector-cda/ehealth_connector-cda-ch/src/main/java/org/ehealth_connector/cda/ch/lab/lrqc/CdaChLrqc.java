@@ -58,7 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * auf HL7 CDA. </div>
  */
 public class CdaChLrqc
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
+extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
 
 	/** Root ID for the ZSR ID. */
 	public static final String ZSR_ID_ROOT = "2.16.756.5.30.1.123.100.2.1.1";
@@ -170,7 +170,7 @@ public class CdaChLrqc
 		super(CHFactory.eINSTANCE.createCdaChLrqc().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
 		// set the fixed laboratory Code
-		CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCode("11502-2");
 		ce.setCodeSystem("2.16.840.1.113883.6.1");
 		ce.setCodeSystemName("LOINC");
@@ -258,28 +258,28 @@ public class CdaChLrqc
 	 *            informationRecipient/name
 	 */
 	public void addIntendedRecipient(QualabQcc qkz) {
-		org.ehealth_connector.common.IntendedRecipient ir = new org.ehealth_connector.common.IntendedRecipient();
+		final org.ehealth_connector.common.IntendedRecipient ir = new org.ehealth_connector.common.IntendedRecipient();
 
 		// ID
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().getIds()
-				.add(Identificator.convertToIdentificator(qkz.getCode()).getIi());
+		.add(Identificator.convertToIdentificator(qkz.getCode()).getIi());
 		// Name
-		PN pn = DatatypesFactory.eINSTANCE.createPN();
+		final PN pn = DatatypesFactory.eINSTANCE.createPN();
 		pn.addText(qkz.getDisplayName());
-		Person p = CDAFactory.eINSTANCE.createPerson();
+		final Person p = CDAFactory.eINSTANCE.createPerson();
 		p.getNames().add(pn);
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().setInformationRecipient(p);
 		// Addr NASK
-		AD ad = DatatypesFactory.eINSTANCE.createAD();
+		final AD ad = DatatypesFactory.eINSTANCE.createAD();
 		ad.setNullFlavor(NullFlavor.NASK);
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().getAddrs().add(ad);
 		// Telecoms NASK
-		TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		tel.setNullFlavor(NullFlavor.NASK);
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().getTelecoms().add(tel);
 
 		getMdht().getInformationRecipients().add(ir.getMdhtIntendedRecipient());
-		int nb = getMdht().getInformationRecipients().size() - 1;
+		final int nb = getMdht().getInformationRecipients().size() - 1;
 		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 	}
 
@@ -338,10 +338,10 @@ public class CdaChLrqc
 	 * @return the intended recipients lrqc
 	 */
 	public List<IntendedRecipient> getIntendedRecipientsLrqc() {
-		List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
-		for (InformationRecipient ir : getMdht().getInformationRecipients()) {
+		final List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
+		for (final InformationRecipient ir : getMdht().getInformationRecipients()) {
 			if (ir instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) {
-				org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
+				final org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient iheIr = (org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient) ir;
 				il.add(new IntendedRecipient(iheIr));
 			}
 		}
@@ -357,13 +357,13 @@ public class CdaChLrqc
 	 * @return a list of LaboratoryBatteryOrganizers.
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
-		LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
+		final ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		final LaboratorySpecialtySection lss = getLaboratorySpecialtySection();
 		if (lss != null) {
-			LaboratoryReportDataProcessingEntry lrdpe = lss
+			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				SpecimenAct se = lrdpe.getSpecimenAct();
+				final SpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
 					lbol.addAll(se.getLaboratoryBatteryOrganizers());
 				}
@@ -391,10 +391,10 @@ public class CdaChLrqc
 	 * @return the List of Participants
 	 */
 	public List<Participant> getParticipantsLrqc() {
-		ArrayList<Participant> al = new ArrayList<Participant>();
-		for (Participant1 p : getMdht().getParticipants()) {
+		final ArrayList<Participant> al = new ArrayList<Participant>();
+		for (final Participant1 p : getMdht().getParticipants()) {
 			if (p.getAssociatedEntity() != null) {
-				for (II ii : p.getAssociatedEntity().getIds()) {
+				for (final II ii : p.getAssociatedEntity().getIds()) {
 					if (ii.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
 						al.add(new Participant(p));
 					}
@@ -412,8 +412,8 @@ public class CdaChLrqc
 	 */
 	public Identificator getRecordTargetId() {
 		if (!getMdht().getRecordTargets().isEmpty()
-				&& getMdht().getRecordTargets().get(0).getPatientRole() != null
-				&& getMdht().getRecordTargets().get(0).getPatientRole().getIds() != null) {
+				&& (getMdht().getRecordTargets().get(0).getPatientRole() != null)
+				&& (getMdht().getRecordTargets().get(0).getPatientRole().getIds() != null)) {
 			return new Identificator(
 					getMdht().getRecordTargets().get(0).getPatientRole().getIds().get(0));
 		}
@@ -428,10 +428,10 @@ public class CdaChLrqc
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
 	public SpecimenAct getSpecimenAct() {
-		if (getLaboratorySpecialtySection() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null
-				&& getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct() != null) {
+		if ((getLaboratorySpecialtySection() != null)
+				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null)
+				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
+						.getSpecimenAct() != null)) {
 			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 					.getSpecimenAct();
 		}
@@ -453,7 +453,7 @@ public class CdaChLrqc
 			// We need to create a new Structured Body element, as the section
 			// list is
 			// not modifiable
-			StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+			final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
 			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
 			getMdht().setStructuredBody(sb);
 		}
@@ -469,9 +469,9 @@ public class CdaChLrqc
 	 */
 	public void setRecordTarget(Identificator id) {
 		// Create a record target for a non-human subject
-		RecordTarget rt = CDAFactory.eINSTANCE.createRecordTarget();
-		PatientRole pr = CDAFactory.eINSTANCE.createPatientRole();
-		Patient p = CDAFactory.eINSTANCE.createPatient();
+		final RecordTarget rt = CDAFactory.eINSTANCE.createRecordTarget();
+		final PatientRole pr = CDAFactory.eINSTANCE.createPatientRole();
+		final Patient p = CDAFactory.eINSTANCE.createPatient();
 
 		// Patient
 		p.setNullFlavor(NullFlavor.OTH);
@@ -480,14 +480,14 @@ public class CdaChLrqc
 		if (id != null) {
 			pr.getIds().add(id.getIi());
 		} else {
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(NullFlavor.NA);
 			pr.getIds().add(ii);
 		}
 		pr.setClassCode(RoleClass.PAT);
 		rt.setPatientRole(pr);
 		// Record Target
-		II tIi = DatatypesFactory.eINSTANCE.createII();
+		final II tIi = DatatypesFactory.eINSTANCE.createII();
 		tIi.setRoot("1.3.6.1.4.1.19376.1.3.3.1.2");
 		rt.getTemplateIds().add(tIi);
 		rt.setTypeCode(ParticipationType.RCT);

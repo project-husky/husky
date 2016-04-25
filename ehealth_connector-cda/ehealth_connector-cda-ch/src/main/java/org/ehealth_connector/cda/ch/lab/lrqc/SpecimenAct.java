@@ -102,11 +102,11 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the laboratory battery organizers
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
-		ArrayList<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
-		if (getMdht() != null && getMdht().getOrganizers() != null) {
-			for (Organizer organizer : this.getMdht().getOrganizers()) {
+		final List<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
+		if ((getMdht() != null) && (getMdht().getOrganizers() != null)) {
+			for (final Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) {
-					org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
+					final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer iheOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) organizer;
 					list.add(new LaboratoryBatteryOrganizer(iheOrganizer));
 				}
 			}
@@ -124,7 +124,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		if (getMdht().getSubject() != null) {
 			return new NonHumanSubject(
 					(org.openhealthtools.mdht.uml.cda.ihe.lab.NonHumanSubject) getMdht()
-							.getSubject());
+					.getSubject());
 		}
 		return null;
 	}
@@ -135,12 +135,12 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @return the specimen collection entries
 	 */
 	public List<SpecimenCollectionEntry> getSpecimenCollectionEntries() {
-		ArrayList<SpecimenCollectionEntry> scel = new ArrayList<SpecimenCollectionEntry>();
-		for (EntryRelationship e : getMdht().getEntryRelationships()) {
+		final List<SpecimenCollectionEntry> scel = new ArrayList<SpecimenCollectionEntry>();
+		for (final EntryRelationship e : getMdht().getEntryRelationships()) {
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
 				scel.add(new SpecimenCollectionEntry(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e
-								.getProcedure()));
+						.getProcedure()));
 			}
 		}
 		return scel;

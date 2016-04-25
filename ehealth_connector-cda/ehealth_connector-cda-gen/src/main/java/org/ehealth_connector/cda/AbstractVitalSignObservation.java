@@ -39,7 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public abstract class AbstractVitalSignObservation {
 
 	/** The m vital sign observation. */
-	protected org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
+	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
 
 	/**
 	 * <div class="en">Gets the code of the observation</div>
@@ -49,7 +49,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the code
 	 */
 	public Code getCode() {
-		final Code code = new Code(mVitalSignObservation.getCode());
+		final Code code = new Code(getVitalSignObservation().getCode());
 		return code;
 	}
 
@@ -60,9 +60,9 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the content ID reference
 	 */
 	public String getContentIdReference() {
-		if ((mVitalSignObservation.getText() != null)
-				&& (mVitalSignObservation.getText().getReference() != null)) {
-			return mVitalSignObservation.getText().getReference().getValue();
+		if ((getVitalSignObservation().getText() != null)
+				&& (getVitalSignObservation().getText().getReference() != null)) {
+			return getVitalSignObservation().getText().getReference().getValue();
 		}
 		return null;
 	}
@@ -73,7 +73,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the effective time as date
 	 */
 	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(mVitalSignObservation.getEffectiveTime());
+		return DateUtil.parseIVL_TSVDateTimeValue(getVitalSignObservation().getEffectiveTime());
 	}
 
 	/**
@@ -82,7 +82,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the interpretation as code or null.
 	 */
 	public Code getInterpretationCode() {
-		EList<CE> codes = mVitalSignObservation.getInterpretationCodes();
+		final EList<CE> codes = getVitalSignObservation().getInterpretationCodes();
 		if (!codes.isEmpty()) {
 			return new Code(codes.get(0));
 		}
@@ -97,7 +97,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the org.openhealthtools.mdht.uml.cda.ch. vital sign observation
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getMdhtCopy() {
-		return EcoreUtil.copy(mVitalSignObservation);
+		return EcoreUtil.copy(getVitalSignObservation());
 	}
 
 	/**
@@ -106,7 +106,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the target site as code or null.
 	 */
 	public Code getTargetSiteCode() {
-		EList<CD> codes = mVitalSignObservation.getTargetSiteCodes();
+		final EList<CD> codes = getVitalSignObservation().getTargetSiteCodes();
 		if (!codes.isEmpty()) {
 			return new Code(codes.get(0));
 		}
@@ -120,9 +120,9 @@ public abstract class AbstractVitalSignObservation {
 	 *            the new text
 	 */
 	public String getText(String text) {
-		if (mVitalSignObservation.getText() != null
-				&& mVitalSignObservation.getText().getText() != null) {
-			return mVitalSignObservation.getText().getText();
+		if ((getVitalSignObservation().getText() != null)
+				&& (getVitalSignObservation().getText().getText() != null)) {
+			return getVitalSignObservation().getText().getText();
 		}
 		return null;
 	}
@@ -133,9 +133,9 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the text reference
 	 */
 	public String getTextReference() {
-		if ((mVitalSignObservation.getText() != null)
-				&& (mVitalSignObservation.getText().getReference() != null)) {
-			return mVitalSignObservation.getText().getReference().getValue();
+		if ((getVitalSignObservation().getText() != null)
+				&& (getVitalSignObservation().getText().getReference() != null)) {
+			return getVitalSignObservation().getText().getReference().getValue();
 		}
 		return null;
 	}
@@ -147,9 +147,9 @@ public abstract class AbstractVitalSignObservation {
 	 * @return the (first) problem value as string.
 	 */
 	public Value getValue() {
-		if (!mVitalSignObservation.getValues().isEmpty()
-				&& mVitalSignObservation.getValues().get(0) instanceof PQ) {
-			return new Value(mVitalSignObservation.getValues().get(0));
+		if (!getVitalSignObservation().getValues().isEmpty()
+				&& (getVitalSignObservation().getValues().get(0) instanceof PQ)) {
+			return new Value(getVitalSignObservation().getValues().get(0));
 		}
 		return null;
 	}
@@ -158,18 +158,18 @@ public abstract class AbstractVitalSignObservation {
 	 * Initialize the MDHT VitalSignObservation model object.
 	 */
 	protected void initMdht() {
-		mVitalSignObservation = IHEFactory.eINSTANCE.createVitalSignObservation().init();
-		CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
+		setVitalSignObservation(IHEFactory.eINSTANCE.createVitalSignObservation().init());
+		final CE ceNullFlavourCode = DatatypesFactory.eINSTANCE.createCE();
 		ceNullFlavourCode.setNullFlavor(NullFlavor.NA);
 
-		CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
+		final CD cdNullFlavourCode = DatatypesFactory.eINSTANCE.createCD();
 		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
 
-		mVitalSignObservation.getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		mVitalSignObservation.getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
+		getVitalSignObservation().getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		getVitalSignObservation().getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		getVitalSignObservation().getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
 
-		mVitalSignObservation.setText(Util.createReference("#TODO"));
+		getVitalSignObservation().setText(Util.createReference("#TODO"));
 	}
 
 	/**
@@ -179,7 +179,7 @@ public abstract class AbstractVitalSignObservation {
 	 *            the new code
 	 */
 	public void setCode(Code code) {
-		mVitalSignObservation.setCode(code.getCD());
+		getVitalSignObservation().setCode(code.getCD());
 	}
 
 	/**
@@ -193,7 +193,7 @@ public abstract class AbstractVitalSignObservation {
 	public void setContentIdReference(String value) {
 		if (!value.startsWith("#"))
 			value = "#" + value;
-		mVitalSignObservation.setText(Util.createReference(value));
+		getVitalSignObservation().setText(Util.createReference(value));
 	}
 
 	/**
@@ -204,7 +204,7 @@ public abstract class AbstractVitalSignObservation {
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
-			mVitalSignObservation
+			getVitalSignObservation()
 					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
@@ -219,16 +219,16 @@ public abstract class AbstractVitalSignObservation {
 	 *            <div class="it"></div>
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
-		CD code = mVitalSignObservation.getCode();
+		final CD code = getVitalSignObservation().getCode();
 		if (code != null) {
-			VitalSignCodes vsCode = VitalSignCodes.getEnum(code.getCode());
+			final VitalSignCodes vsCode = VitalSignCodes.getEnum(code.getCode());
 			if (vsCode != null) {
 				code.setDisplayName(vsCode.getDisplayName(languageCode));
 			}
 		}
-		if (!mVitalSignObservation.getTargetSiteCodes().isEmpty()) {
-			CD tsCode = mVitalSignObservation.getTargetSiteCodes().get(0);
-			ActSite aSite = ActSite.getEnum(tsCode.getCode());
+		if (!getVitalSignObservation().getTargetSiteCodes().isEmpty()) {
+			final CD tsCode = getVitalSignObservation().getTargetSiteCodes().get(0);
+			final ActSite aSite = ActSite.getEnum(tsCode.getCode());
 			if (aSite != null) {
 				tsCode.setDisplayName(aSite.getDisplayName(languageCode));
 			}
@@ -244,8 +244,8 @@ public abstract class AbstractVitalSignObservation {
 	 */
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
-			mVitalSignObservation.getTargetSiteCodes().clear();
-			mVitalSignObservation.getTargetSiteCodes().add(code.getCD());
+			getVitalSignObservation().getTargetSiteCodes().clear();
+			getVitalSignObservation().getTargetSiteCodes().add(code.getCD());
 		}
 	}
 
@@ -256,7 +256,7 @@ public abstract class AbstractVitalSignObservation {
 	 *            the new text
 	 */
 	public void setText(String text) {
-		mVitalSignObservation.setText(Util.createEd(text));
+		getVitalSignObservation().setText(Util.createEd(text));
 	}
 
 	/**
@@ -266,7 +266,7 @@ public abstract class AbstractVitalSignObservation {
 	 *            the prefix
 	 */
 	public void setTextReference(String prefix) {
-		mVitalSignObservation.setText(Util.createReference(prefix));
+		getVitalSignObservation().setText(Util.createReference(prefix));
 	}
 
 	/**
@@ -277,13 +277,29 @@ public abstract class AbstractVitalSignObservation {
 	 */
 	public void setValue(Value value) {
 		if (value.isPhysicalQuantity()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtPhysicalQuantity());
+			getVitalSignObservation().getValues().add(value.copyMdhtPhysicalQuantity());
 		}
 		if (value.isCode()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtCode());
+			getVitalSignObservation().getValues().add(value.copyMdhtCode());
 		}
 		if (value.isRto()) {
-			mVitalSignObservation.getValues().add(value.copyMdhtRto());
+			getVitalSignObservation().getValues().add(value.copyMdhtRto());
 		}
+	}
+
+	/**
+	 * Method to get
+	 * @return the vitalSignObservation
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getVitalSignObservation() {
+		return mVitalSignObservation;
+	}
+
+	/**
+	 * Method to set
+	 * @param vitalSignObservation the vitalSignObservation to set
+	 */
+	public void setVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation vitalSignObservation) {
+		mVitalSignObservation = vitalSignObservation;
 	}
 }

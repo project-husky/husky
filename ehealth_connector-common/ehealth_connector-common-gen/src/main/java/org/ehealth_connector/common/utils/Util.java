@@ -146,8 +146,8 @@ public class Util {
 	 *            the list to convert
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public static ArrayList<Identificator> convertIds(EList<II> mII) {
-		final ArrayList<Identificator> il = new ArrayList<Identificator>();
+	public static List<Identificator> convertIds(EList<II> mII) {
+		final List<Identificator> il = new ArrayList<Identificator>();
 		for (final II mId : mII) {
 			final Identificator id = new Identificator(mId);
 			il.add(id);
@@ -268,8 +268,8 @@ public class Util {
 	}
 
 	public static AssignedAuthor createAuthorFromOrganization(Organization organization) {
-		org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
-		AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
+		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
+		final AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
 		if (!o.getAddrs().isEmpty()) {
 			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
 		}
@@ -371,7 +371,7 @@ public class Util {
 	}
 
 	public static IVL_TS createEffectiveTimeNullFlavorUnk() {
-		IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
 		ivlts.setNullFlavor(NullFlavor.UNK);
 		return ivlts;
 	}
@@ -436,7 +436,7 @@ public class Util {
 	 * @return the MDHT II
 	 */
 	public static II createIdentificator(Identificator id) {
-		II ii;
+		II ii = null;
 		if (id == null) {
 			ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setRoot(EHealthConnectorVersions.EHealthConnectorDev.getOid());
@@ -541,14 +541,15 @@ public class Util {
 	}
 
 	private static ON createOnFromPn(PN pn) {
-		ON on = DatatypesFactory.eINSTANCE.createON();
+		final ON on = DatatypesFactory.eINSTANCE.createON();
 		on.addText(pn.getText());
 		return on;
 	}
 
 	public static org.openhealthtools.mdht.uml.cda.Organization createOrganizationFromCustodianOrganization(
 			CustodianOrganization mdhtCO) {
-		org.openhealthtools.mdht.uml.cda.Organization o = CDAFactory.eINSTANCE.createOrganization();
+		final org.openhealthtools.mdht.uml.cda.Organization o = CDAFactory.eINSTANCE
+				.createOrganization();
 		if (mdhtCO != null) {
 			// Name
 			if (mdhtCO.getName() != null) {
@@ -559,7 +560,7 @@ public class Util {
 				o.getIds().addAll(EcoreUtil.copyAll(mdhtCO.getIds()));
 			}
 			// Addr
-			if (mdhtCO.getAddr() != null && !mdhtCO.getAddrs().isEmpty()) {
+			if ((mdhtCO.getAddr() != null) && !mdhtCO.getAddrs().isEmpty()) {
 				o.getAddrs().addAll(EcoreUtil.copyAll(mdhtCO.getAddrs()));
 			}
 			// Telecoms
@@ -571,14 +572,14 @@ public class Util {
 	}
 
 	public static Organization createOrganizationFromParticipant(Participant p) {
-		Organization o = new Organization();
+		final Organization o = new Organization();
 
 		// id, addrs, names, telecoms
 		o.getMdhtOrganization().getIds()
 				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getIds()));
 		o.getMdhtOrganization().getAddrs()
 				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getAddrs()));
-		if (p.getMdht().getParticipantRole().getPlayingEntity().getNames() != null
+		if ((p.getMdht().getParticipantRole().getPlayingEntity().getNames() != null)
 				&& !p.getMdht().getParticipantRole().getPlayingEntity().getNames().isEmpty()) {
 			o.getMdhtOrganization().getNames().add(EcoreUtil.copy(createOnFromPn(
 					p.getMdht().getParticipantRole().getPlayingEntity().getNames().get(0))));
@@ -590,10 +591,10 @@ public class Util {
 	}
 
 	public static Participant createParticipantFromOrganization(Organization o) {
-		PlayingEntity pe = new PlayingEntity();
-		ParticipantRole pr = new ParticipantRole();
+		final PlayingEntity pe = new PlayingEntity();
+		final ParticipantRole pr = new ParticipantRole();
 		pr.setPlayingEntity(pe);
-		Participant p = new Participant();
+		final Participant p = new Participant();
 		p.setParticipantRole(pr);
 
 		// id, addrs, names, telecoms
@@ -601,7 +602,7 @@ public class Util {
 				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getIds()));
 		p.getMdht().getParticipantRole().getAddrs()
 				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getAddrs()));
-		if (o.getMdhtOrganization().getNames() != null
+		if ((o.getMdhtOrganization().getNames() != null)
 				&& !o.getMdhtOrganization().getNames().isEmpty()) {
 			p.getMdht().getParticipantRole().getPlayingEntity().getNames()
 					.add(EcoreUtil.copy(createPnFromOn(o.getMdhtOrganization().getNames().get(0))));
@@ -613,7 +614,7 @@ public class Util {
 	}
 
 	public static PN createPnFromOn(ON on) {
-		PN pn = DatatypesFactory.eINSTANCE.createPN();
+		final PN pn = DatatypesFactory.eINSTANCE.createPN();
 		pn.addText(on.getText());
 		return pn;
 	}

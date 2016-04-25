@@ -31,7 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
 public class ParticipantRole {
 
 	/** The MDHT participant role object. */
-	org.openhealthtools.mdht.uml.cda.ParticipantRole mParticipantRole;
+	private org.openhealthtools.mdht.uml.cda.ParticipantRole mParticipantRole;
 
 	/**
 	 * Instantiates a new participant role.

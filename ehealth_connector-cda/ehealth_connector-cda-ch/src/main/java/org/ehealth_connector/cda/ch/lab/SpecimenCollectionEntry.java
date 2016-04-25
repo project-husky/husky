@@ -35,7 +35,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * zur Probe</div>
  */
 public class SpecimenCollectionEntry
-		extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
+extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
 
 	/**
 	 * Instantiates a new specimen collection entry.
@@ -128,7 +128,7 @@ public class SpecimenCollectionEntry
 		if (id != null) {
 			addParticipant(id.getIi());
 		} else {
-			II ii = DatatypesFactory.eINSTANCE.createII();
+			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(NullFlavor.NA);
 			addParticipant(ii);
 		}
@@ -175,9 +175,9 @@ public class SpecimenCollectionEntry
 	 *            the id
 	 */
 	private void addParticipant(II id) {
-		PlayingEntity pl = new PlayingEntity();
-		ParticipantRole pr = new ParticipantRole();
-		Participant participant = new Participant();
+		final PlayingEntity pl = new PlayingEntity();
+		final ParticipantRole pr = new ParticipantRole();
+		final Participant participant = new Participant();
 
 		// Fixed Loinc Code for Playing Entity
 		pl.setCode(new Code("2.16.756.5.30.2.1.1.10", "LOINC"));

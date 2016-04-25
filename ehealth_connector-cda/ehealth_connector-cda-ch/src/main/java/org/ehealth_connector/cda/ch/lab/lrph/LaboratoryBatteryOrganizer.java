@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
  * gemäss IHE XD-LAB die Gruppierung von Resultaten.</div>
  */
 public class LaboratoryBatteryOrganizer
-		extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer {
+extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer {
 
 	/**
 	 * Instantiates a new laboratory battery organizer.
@@ -86,7 +86,7 @@ public class LaboratoryBatteryOrganizer
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
 		getMdht().addObservation(observation.copy());
 
-		int nb = getMdht().getComponents().size() - 1;
+		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 	}
 
@@ -105,8 +105,8 @@ public class LaboratoryBatteryOrganizer
 	 * @return the laboratory observations
 	 */
 	public List<LaboratoryObservation> getLaboratoryObservations() {
-		List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
-		for (Observation o : getMdht().getObservations()) {
+		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
+		for (final Observation o : getMdht().getObservations()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {
 				loList.add(new LaboratoryObservation(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) o));

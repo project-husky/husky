@@ -38,7 +38,7 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 * Instantiates a new prescription item entry.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public PrescriptionItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPrescriptionItemEntry().init());
@@ -48,7 +48,7 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 * Instantiates a new prescription item entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public PrescriptionItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry mdht) {
@@ -74,21 +74,21 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 * Sets the medication treatment plan item reference entry.
 	 *
 	 * @param entry
-	 *          the new medication treatment plan item reference entry
+	 *            the new medication treatment plan item reference entry
 	 */
 	public void setMedicationTreatmentPlanItemReferenceEntry(
 			MedicationTreatmentPlanItemReferenceEntry entry) {
-		MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
+		final MedicationTreatmentPlanItemReferenceEntry old = getMedicationTreatmentPlanItemReferenceEntry();
 		if (old != null) {
-			for (EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
 					entryRelationship.setSubstanceAdministration(entry.getMdht());
 					break;
 				}
 			}
 		} else {
-			EntryRelationship entryRelationship = null;
-			entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setSubstanceAdministration(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);

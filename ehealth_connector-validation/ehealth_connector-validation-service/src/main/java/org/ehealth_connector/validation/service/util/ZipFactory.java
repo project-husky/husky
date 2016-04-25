@@ -28,9 +28,6 @@ import java.util.LinkedList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * A ZIP factory, able to recursively compress files and directories.
  *
@@ -53,26 +50,26 @@ public class ZipFactory {
 	 *             if an I/O error occurs.
 	 */
 	private static void copyData(InputStream in, OutputStream out) throws IOException {
-		byte[] data = new byte[READ_BUFFER_SIZE];
-		int bytesRead;
+		final byte[] data = new byte[READ_BUFFER_SIZE];
+		int bytesRead = 0;
 		while ((bytesRead = in.read(data)) != -1) {
 			out.write(data, 0, bytesRead);
 		}
 	}
 
 	/** An optional file filter. */
-	protected FileFilter filter;
+	private FileFilter filter;
 
 	/** Enables/disables storing just the name (junk the path). */
-	protected boolean flatten = false;
+	private boolean flatten = false;
 
 	/** The SLF4J logger instance. */
-	//protected final Logger log = LoggerFactory.getLogger(getClass());
+	// protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	protected final OutputStream out;
+	private final OutputStream out;
 
 	/** Enables/disables traveling the directory structure recursively. */
-	protected boolean recursive = false;
+	private boolean recursive = false;
 
 	/** The ZIP output stream. */
 	private ZipOutputStream zos;
@@ -140,13 +137,13 @@ public class ZipFactory {
 		} else if (path.isFile()) {
 			addEntry(path, null);
 		} else if (path.isDirectory() && isRecursive()) {
-			File base = path;
-			Deque<File> queue = new LinkedList<File>();
+			final File base = path;
+			final Deque<File> queue = new LinkedList<File>();
 			queue.push(path);
 			File directory;
 			while ((directory = queue.poll()) != null) {
 				addEntry(directory, base);
-				for (File file : directory.listFiles(filter)) {
+				for (final File file : directory.listFiles(filter)) {
 					if (file.isDirectory()) {
 						queue.push(file);
 					} else {
@@ -171,7 +168,7 @@ public class ZipFactory {
 		String entryName;
 		if (isFlatten()) {
 			entryName = path.getName();
-		} else if (path.isAbsolute() && base != null) {
+		} else if (path.isAbsolute() && (base != null)) {
 			entryName = base.toURI().relativize(path.toURI()).toString();
 		} else {
 			entryName = path.getPath();
@@ -180,10 +177,10 @@ public class ZipFactory {
 			entryName += "/";
 		}
 		// Add a new entry and copy the file's data
-		//log.debug("Adding Zip Entry: '" + entryName + "'");
+		// log.debug("Adding Zip Entry: '" + entryName + "'");
 		InputStream in = null;
 		try {
-			ZipOutputStream zos = getZipOutputStream();
+			final ZipOutputStream zos = getZipOutputStream();
 			zos.putNextEntry(new ZipEntry(entryName));
 			if (path.isFile()) {
 				in = new FileInputStream(path);

@@ -58,7 +58,7 @@ public class StylesheetFactory {
 			computable);
 
 	/** The SLF4J logger instance. */
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The <cite>Saxon Processor</cite> instance. */
 	private final Processor processor;
@@ -107,7 +107,7 @@ public class StylesheetFactory {
 		try {
 			log.info("Compiling stylesheet '{}'", sourceName);
 			return compiler.compile(source);
-		} catch (SaxonApiException e) {
+		} catch (final SaxonApiException e) {
 			throw new TransformationException("Failed to compile stylesheet '{}'" + sourceName, e);
 		}
 	}
@@ -160,7 +160,7 @@ public class StylesheetFactory {
 			throws TransformationException {
 		try {
 			return (useCache ? cache : computable).compute(source);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			if (e.getCause() instanceof TransformationException) {
 				throw (TransformationException) e.getCause();
 			}
@@ -190,17 +190,17 @@ public class StylesheetFactory {
 		InputStream in = null;
 		try {
 			in = new URL(uri).openStream();
-			StreamSource streamSource = new StreamSource(in);
+			final StreamSource streamSource = new StreamSource(in);
 			streamSource.setPublicId(JarUtils.getRelativeUri(uri, getClass()));
 			return getStylesheet(streamSource, useCache);
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			throw new TransformationException(
 					"An I/O error occured when trying to access the stylesheet.", e);
 		} finally {
 			if (in != null)
 				try {
 					in.close();
-				} catch (IOException e) {
+				} catch (final IOException e) {
 				}
 		}
 	}
