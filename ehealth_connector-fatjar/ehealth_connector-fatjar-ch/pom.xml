@@ -105,11 +105,7 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet</id>
-			<!-- activation>
-				<os>
-					<family>Windows</family>
-				</os>
-			</activation -->
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>
 				<plugins>
@@ -119,6 +115,7 @@
 						<executions>
 							<execution>
 								<id>parse-version</id>
+								<phase>generate-resources</phase>
 								<goals>
 									<goal>parse-version</goal>
 								</goals>
@@ -132,7 +129,7 @@
 							<property name="mvnValue" value="${project.version}" />
 							<target>
 								<exec executable="ikvmc">
-									<arg value="-version:${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.0" />
+									<arg value="-version:${dll.version}" />
 									<arg value="-target:library" />
 									<arg value="-nowarn:warning" />
 									<arg value="-out:${project.build.directory}/ehealthconnector-ch.dll" />
@@ -148,6 +145,27 @@
 								<goals>
 									<goal>run</goal>
 								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-artifacts</id>
+								<phase>package</phase>
+								<goals>
+									<goal>attach-artifact</goal>
+								</goals>
+								<configuration>
+									<artifacts>
+										<artifact>
+											<file>${project.build.directory}/ehealthconnector-ch.dll</file>
+											<type>dll</type>
+										</artifact>
+									</artifacts>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
