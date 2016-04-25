@@ -46,6 +46,7 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.TimeDt;
 
 public abstract class AbstractFhirCdaCh {
@@ -55,19 +56,6 @@ public abstract class AbstractFhirCdaCh {
 	 */
 	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
 			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
-
-	private Observation createComment(String comment) {
-
-		final Observation fhirObservation = new Observation();
-		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
-
-		final CodeableConceptDt fhirCode = new CodeableConceptDt();
-		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
-		fhirObservation.setCode(fhirCode);
-		fhirObservation.setComments(comment);
-
-		return fhirObservation;
-	}
 
 	/**
 	 * <div class="en">Gets a list of eHC Authors from the given FHIR bundle
@@ -82,11 +70,17 @@ public abstract class AbstractFhirCdaCh {
 		for (final Entry entry : bundle.getEntry()) {
 			List<ExtensionDt> extensions = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
-			if (!extensions.isEmpty() && (entry.getResource() instanceof Person)) {
-				org.ehealth_connector.common.Author author = FhirCommon
-						.getAuthor((Person) entry.getResource());
-				TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
-				author.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+			if (!extensions.isEmpty()) {
+				org.ehealth_connector.common.Author author = null;
+				if (entry.getResource() instanceof Person) {
+					author = FhirCommon.getAuthor((Person) entry.getResource());
+				}
+				if (entry.getResource() instanceof Organization) {
+					author = FhirCommon.getAuthor((Organization) entry.getResource());
+				}
+
+				StringDt timeStamp = ((StringDt) extensions.get(0).getValue());
+				author.setTime(DateUtil.parseDates(timeStamp.getValue()));
 				retVal.add(author);
 			}
 		}
@@ -228,7 +222,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * <div class="en"> Gets the document Id from the given FHIR bundle
@@ -248,7 +242,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
+	};
 
 	/**
 	 * <div class="en"> Gets the document Set Id from the given FHIR bundle
@@ -444,5 +438,18 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return false;
+	}
+
+	private Observation createComment(String comment) {
+
+		final Observation fhirObservation = new Observation();
+		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
+
+		final CodeableConceptDt fhirCode = new CodeableConceptDt();
+		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
+		fhirObservation.setCode(fhirCode);
+		fhirObservation.setComments(comment);
+
+		return fhirObservation;
 	}
 }
