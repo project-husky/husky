@@ -27,7 +27,9 @@ import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
+import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -37,6 +39,7 @@ import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.fhir.FhirCommon;
@@ -67,6 +70,7 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.InstantDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrtp extends AbstractFhirCdaCh {
@@ -80,16 +84,16 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 * <div class="en">the resulting CDA document contains hiv patient
 		 * demographics</div><div class="de"></div> <div class="fr"></div>
 		 */
-		HIV, /**
-				 * <div class="en">the resulting CDA document contains full
-				 * patient demographics</div><div class="de"></div>
-				 * <div class="fr"></div>
-				 */
-		PATIENT, /**
-					 * <div class="en">the resulting CDA document contains
-					 * masked patient demographics</div><div class="de"></div>
-					 * <div class="fr"></div>
-					 */
+		HIV,
+		/**
+		 * <div class="en">the resulting CDA document contains full patient
+		 * demographics</div><div class="de"></div> <div class="fr"></div>
+		 */
+		PATIENT,
+		/**
+		 * <div class="en">the resulting CDA document contains masked patient
+		 * demographics</div><div class="de"></div> <div class="fr"></div>
+		 */
 		PSEUDONYMIZED
 	}
 
@@ -420,7 +424,9 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		// Body
 		// Laboratory SpecialtySections
 		final List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
-		final Code sectionCode = lssList.get(0).getCode();
+		if (lssList != null && !lssList.isEmpty()) {
+			final Code sectionCode = lssList.get(0).getCode();
+		}
 
 		// Laboratory Battery Organizers
 		final List<LaboratoryBatteryOrganizer> laboratoryBatteryOrganizers = getLaboratoryBatteryOrganizers(
@@ -431,10 +437,17 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 
-		// LaboratorySpecialtySection
-		final String narrative = getNarrative(bundle,
-				FhirCommon.urnUseAsLaboratorySpecialtySection);
-		doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
+		// Narrative Text: LaboratorySpecialtySection
+		doc.setNarrativeTextSectionLaboratorySpeciality(
+				getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialtySection));
+
+		// Narrative Text: CodedVitalSigns
+		doc.setNarrativeTextSectionCodedVitalSignsSection(
+				getNarrative(bundle, FhirCommon.urnUseAsCodedVitalSignList));
+
+		// Narrative Text: StudiesSummary
+		doc.setNarrativeTextSectionStudiesSummarySection(
+				getNarrative(bundle, FhirCommon.urnUseAsStudiesSummary));
 
 		return doc;
 	}
@@ -657,8 +670,16 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			// type RTO not yet implemented
 		}
 
-		if (fhirObservation.getReferenceRangeFirstRep() != null) {
-			// ReferenceRange not yet implemented
+		// ReferenceRange
+		if (fhirObservation.getReferenceRangeFirstRep() != null
+				&& !fhirObservation.getReferenceRange().isEmpty()) {
+			org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
+			Value v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+					fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			rr.setValue(v);
+			rr.setInterpretationCode(ObservationInterpretation.getEnum(fhirObservation
+					.getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode()));
+			retVal.setReferenceRange(rr);
 		}
 
 		final CodingDt fhirInterpretationCode = fhirObservation.getInterpretation()
@@ -755,5 +776,71 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 		return null;
+	}
+
+	private VitalSignsObservation getVitalSignObservation(Observation fhirObs) {
+		VitalSignsObservation vso = new VitalSignsObservation();
+		// Value
+		QuantityDt fValue = (QuantityDt) fhirObs.getValue();
+		Value v = new Value(fValue.getValue().toString(), fValue.getUnit());
+		vso.setValue(v);
+
+		// Code
+		VitalSignList codeEnum = VitalSignList
+				.getEnum(FhirCommon.fhirCodeToEhcCode(fhirObs.getCode()).getCode());
+		vso.setCode(codeEnum);
+
+		// CommentEntry
+		vso.addCommentEntry(new SectionAnnotationCommentEntry(fhirObs.getComments()));
+
+		return vso;
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC LRTP VitalSignsOrganizers from the
+	 * given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC LRTP VitalSignsOrganizers</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	private List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer> getVitalSignsOrganizers(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer>();
+
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratoryBatteryOrganizers
+			final List<ExtensionDt> vsoList = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsVitalSignsOrganizer);
+			if ((vsoList != null) && !vsoList.isEmpty()) {
+				final org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer vso = new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer();
+				final Observation fVso = (Observation) entry.getResource();
+
+				// Set the Organizer Attributes
+				// Date
+				if (fVso.getEffective() != null && !fVso.isEmpty()) {
+					InstantDt fTime = (InstantDt) fVso.getEffective();
+					vso.setEffectiveTime(fTime.getValue());
+				}
+
+				// // Status Code
+				// final String statusCode =
+				// getValueFromKeyValueString(labObsList.getText(),
+				// "statusCode");
+				// if (statusCode != null) {
+				// vso.setStatusCode(StatusCode.getEnum(statusCode));
+
+				// Add all VitalSignObservations
+				for (final Related relatedObs : fVso.getRelated()) {
+					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
+					final VitalSignsObservation vit = getVitalSignObservation(fhirObs);
+					vso.addVitalSignsObservation(vit);
+				}
+				retVal.add(vso);
+			}
+		}
+		return retVal;
 	}
 }

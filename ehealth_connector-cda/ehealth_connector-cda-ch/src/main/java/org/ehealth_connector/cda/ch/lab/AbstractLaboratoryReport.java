@@ -50,7 +50,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  *            the generic type
  */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
-extends AbstractCdaCh<EClinicalDocument> {
+		extends AbstractCdaCh<EClinicalDocument> {
 
 	/**
 	 * Instantiates a new abstract laboratory report.
@@ -123,7 +123,9 @@ extends AbstractCdaCh<EClinicalDocument> {
 	 *            the physician
 	 */
 	public void addReferralOrderingPhysician(ReferralOrderingPhysician physician) {
-		getMdht().getParticipants().add(physician.copy());
+		if (physician != null) {
+			getMdht().getParticipants().add(physician.copy());
+		}
 	}
 
 	/**

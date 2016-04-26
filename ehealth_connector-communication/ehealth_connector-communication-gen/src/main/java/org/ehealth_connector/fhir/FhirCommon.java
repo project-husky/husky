@@ -491,6 +491,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsReferenceRange = "http://www.ehealth-connector.org/fhir-extensions/useAsReferenceRange";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsReferralOrderingPhysician = "http://www.ehealth-connector.org/fhir-extensions/useAsReferralOrderingPhysician";
 
 	/**
@@ -558,6 +564,21 @@ public class FhirCommon {
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
 	public static final String urnUseAsVitalSignsOrganizer = "http://www.ehealth-connector.org/fhir-extensions/useAsVitalSignsOrganizer";
+
+	public static CodeableConceptDt ehcCodeToFhirCode(Code code) {
+		CodeableConceptDt cc = new CodeableConceptDt();
+		CodingDt fCode;
+
+		fCode = new CodingDt(addUriPrefix(code.getCodeSystem()), code.getCode());
+		cc.addCoding(fCode);
+
+		for (Code translation : code.getTranslations()) {
+			cc.addCoding(
+					new CodingDt(addUriPrefix(translation.getCodeSystem()), translation.getCode()));
+		}
+
+		return cc;
+	}
 
 	public static Address fhirAddressToEhcAddress(AddressDt fAddr) {
 		final Address addr = new Address();
@@ -1196,8 +1217,8 @@ public class FhirCommon {
 		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 			gender = AdministrativeGender.FEMALE;
-		} else
-			if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+		} else if (fhirPatient.getGenderElement()
+				.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
 			gender = AdministrativeGender.MALE;
 		}
 
@@ -1274,8 +1295,8 @@ public class FhirCommon {
 		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 			gender = AdministrativeGender.FEMALE;
-		} else
-			if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+		} else if (fhirPatient.getGenderElement()
+				.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
 			gender = AdministrativeGender.MALE;
 		}
 
@@ -1417,5 +1438,9 @@ public class FhirCommon {
 			retVal = value;
 		}
 		return retVal;
+	}
+
+	private static String addUriPrefix(String codeSystem) {
+		return "urn:oid:" + codeSystem;
 	}
 }
