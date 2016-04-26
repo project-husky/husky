@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
@@ -425,8 +426,11 @@ public abstract class AbstractAllergyProblem {
 	 *            the new id
 	 */
 	public void setId(Identificator id) {
-		final II ii = Util.createIdentificator(id);
-		getAllergyProblem().getIds().add(ii);
+		if (id != null) {
+			final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+			getAllergyProblem().getIds().clear();
+			getAllergyProblem().getIds().add(ii);
+		}
 	}
 
 	/**

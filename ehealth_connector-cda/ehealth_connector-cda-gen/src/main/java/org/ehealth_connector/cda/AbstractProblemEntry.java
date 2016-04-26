@@ -68,7 +68,8 @@ public class AbstractProblemEntry
 		final AbstractProblemEntry other = (AbstractProblemEntry) obj;
 
 		final Identificator id = this.getId();
-		if (((id != null) && !id.equals(other.getId())) || ((id == null) && (other.getId() != null))) {
+		if (((id != null) && !id.equals(other.getId()))
+				|| ((id == null) && (other.getId() != null))) {
 			return false;
 		}
 
@@ -91,7 +92,8 @@ public class AbstractProblemEntry
 			return false;
 		}
 		if (getValue() != null) {
-			if (!this.getValue().isCode() || (other.getValue() == null) || !other.getValue().isCode()) {
+			if (!this.getValue().isCode() || (other.getValue() == null)
+					|| !other.getValue().isCode()) {
 				return false;
 			}
 			if (!getValue().getCode().equals(other.getValue().getCode())) {
@@ -123,8 +125,8 @@ public class AbstractProblemEntry
 	}
 
 	/**
-	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt den
-	 * Code des Problems zurück.</div> <div class="fr"></div>
+	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
+	 * den Code des Problems zurück.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return the codedProblem object
@@ -196,8 +198,8 @@ public class AbstractProblemEntry
 	}
 
 	/**
-	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt den
-	 * Code des Problems zurück.</div> <div class="fr"></div>
+	 * <div class="en">Gets the code of the problem</div> <div class="de">Gibt
+	 * den Code des Problems zurück.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return the codedProblem object
@@ -234,7 +236,8 @@ public class AbstractProblemEntry
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -270,7 +273,7 @@ public class AbstractProblemEntry
 	 * Sets the allergies special condition.
 	 *
 	 * @param condition
-	 *          the new allergies special condition
+	 *            the new allergies special condition
 	 */
 	public void setAllergySpecialCondition(AllergiesSpecialConditions condition) {
 		setValue(new Value(condition.getCode()));
@@ -280,7 +283,7 @@ public class AbstractProblemEntry
 	 * Sets the code.
 	 *
 	 * @param codedProblem
-	 *          the codedProblem Object which will be set
+	 *            the codedProblem Object which will be set
 	 */
 	public void setCode(org.ehealth_connector.common.Code codedProblem) {
 		getMdht().setCode(codedProblem.getCD());
@@ -288,11 +291,11 @@ public class AbstractProblemEntry
 
 	/**
 	 * <div class="en">sets the point in time, when the problem had ended</div>
-	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet ist</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Setzt den Zeitpunkt, seitdem das Problems beendet
+	 * ist</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param endOfProblem
-	 *          the endOfProblem Object which will be set
+	 *            the endOfProblem Object which will be set
 	 */
 	public void setEndDate(Date endOfProblem) {
 		if (this.getMdht().getEffectiveTime() == null) {
@@ -306,7 +309,7 @@ public class AbstractProblemEntry
 	 * one id can be provided for retraceability (evacdoc 7.5.2.5)
 	 *
 	 * @param id
-	 *          the new id
+	 *            the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -325,7 +328,7 @@ public class AbstractProblemEntry
 	 * <div class="it"></div>
 	 *
 	 * @param problemNotOccured
-	 *          the problemNotOccured Object which will be set
+	 *            the problemNotOccured Object which will be set
 	 */
 	public void setNotOccured(boolean problemNotOccured) {
 		this.getMdht().setNegationInd(problemNotOccured);
@@ -335,7 +338,7 @@ public class AbstractProblemEntry
 	 * Sets the problem special condition.
 	 *
 	 * @param condition
-	 *          the new problem special condition
+	 *            the new problem special condition
 	 */
 	public void setProblemSpecialCondition(ProblemsSpecialConditions condition) {
 		setValue(new Value(condition.getCode()));
@@ -345,7 +348,7 @@ public class AbstractProblemEntry
 	 * Sets the code.
 	 *
 	 * @param kindOfProblem
-	 *          the new code
+	 *            the new code
 	 */
 	public void setProblemType(ProblemType kindOfProblem) {
 		getMdht().setCode(kindOfProblem.getCD());
@@ -357,7 +360,7 @@ public class AbstractProblemEntry
 	 * hat</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param startOfProblem
-	 *          the startOfProblem Object which will be set
+	 *            the startOfProblem Object which will be set
 	 */
 	public void setStartDate(Date startOfProblem) {
 		if (this.getMdht().getEffectiveTime() == null) {
@@ -371,7 +374,8 @@ public class AbstractProblemEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference, # for local reference has to be included
+	 *            the new text reference, # for local reference has to be
+	 *            included
 	 */
 	@Override
 	public void setTextReference(String value) {
@@ -382,7 +386,7 @@ public class AbstractProblemEntry
 	 * Sets the value.
 	 *
 	 * @param value
-	 *          the new value
+	 *            the new value
 	 */
 	public void setValue(Value value) {
 		getMdht().getValues().clear();

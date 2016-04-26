@@ -36,18 +36,6 @@ public class Concern extends AbstractConcern {
 	}
 
 	/**
-	 * Instantiates a new concern entry.
-	 *
-	 * @param concernEntry
-	 *          <br>
-	 *          <div class="de"> concern entry</div> <div class="fr"></div>
-	 *          <div class="it"></div>
-	 */
-	public Concern(org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry concernEntry) {
-		super(concernEntry);
-	}
-
-	/**
 	 *
 	 * {@inheritDoc}
 	 *

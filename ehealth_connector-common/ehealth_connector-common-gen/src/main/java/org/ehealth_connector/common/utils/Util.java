@@ -428,26 +428,6 @@ public class Util {
 	}
 
 	/**
-	 * Creates an MDHT II object with the eHealthConnector root OID from an eHC
-	 * Identificator object
-	 *
-	 * @param id
-	 *            the Identificator
-	 * @return the MDHT II
-	 */
-	public static II createIdentificator(Identificator id) {
-		II ii = null;
-		if (id == null) {
-			ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot(EHealthConnectorVersions.EHealthConnectorDev.getOid());
-			ii.setExtension(UUID.generate());
-		} else {
-			ii = id.getIi();
-		}
-		return ii;
-	}
-
-	/**
 	 * <div class="en">Creates the MDHT IVL_PQ null flavor NA object.</div>
 	 *
 	 * @return the IVL_PQ
@@ -658,46 +638,6 @@ public class Util {
 		ed.setReference(tel);
 		return ed;
 	}
-
-	// /**
-	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	// * and a generated extension.</div>
-	// *
-	// * @param id
-	// * <br>
-	// * <div class="en"> the id</div>
-	// * @return the ii
-	// */
-	// public static II createUuidVacd(String id) {
-	// final II ii = DatatypesFactory.eINSTANCE.createII();
-	// ii.setRoot(CdaChVacd.OID_MAIN);
-	// if (id == null) {
-	// ii.setExtension(UUID.generate());
-	// } else {
-	// ii.setRoot(id);
-	// }
-	// return ii;
-	// }
-	//
-	// /**
-	// * <div class="en">Creates a UUID for VACD documents with the VACD root ID
-	// * (if the root id is null, otherwise the provided id will be used) and a
-	// * generated extension.</div>
-	// *
-	// * @param id
-	// * <br>
-	// * <div class="en"> the id</div>
-	// * @return the ii
-	// */
-	// public static II createUuidVacdIdentificator(Identificator id) {
-	// II ii;
-	// if (id == null) {
-	// ii = Util.createUuidVacd(null);
-	// } else {
-	// ii = id.getIi();
-	// }
-	// return ii;
-	// }
 
 	/**
 	 * Creates an MDHT ED reference from a given String

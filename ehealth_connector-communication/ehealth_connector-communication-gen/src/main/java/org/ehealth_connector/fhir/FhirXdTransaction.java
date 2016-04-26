@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.ohf.utilities.UUID;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.AffinityDomain;
@@ -105,7 +104,7 @@ public class FhirXdTransaction {
 		public void addDestination(MessageHeader destination) {
 			final Entry entry = this.addEntry();
 			entry.setResource(destination);
-			entry.setFullUrl(UUID.generateURN());
+			entry.setFullUrl("urn:uuid:4953a5a4-2952-0726-aa8a-fcbd41af02a3");
 		}
 
 		/**
@@ -117,7 +116,7 @@ public class FhirXdTransaction {
 		public void addDocument(DocumentReference document) {
 			final Entry entry = this.addEntry();
 			entry.setResource(document);
-			entry.setFullUrl(UUID.generateURN());
+			entry.setFullUrl("urn:uuid:4953a6e4-2952-0726-5295-fcbd41af02a3");
 		}
 
 		/**
@@ -129,7 +128,7 @@ public class FhirXdTransaction {
 		public void addSubmissionSet(DocumentManifest submissionSet) {
 			final Entry entry = this.addEntry();
 			entry.setResource(submissionSet);
-			entry.setFullUrl(UUID.generateURN());
+			entry.setFullUrl("urn:uuid:4953a644-2952-0726-cc6c-fcbd41af02a3");
 		}
 
 	};

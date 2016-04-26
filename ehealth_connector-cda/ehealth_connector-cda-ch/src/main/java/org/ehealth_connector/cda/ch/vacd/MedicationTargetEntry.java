@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch.vacd;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.ihe.utils.UUID;
@@ -41,9 +42,11 @@ public class MedicationTargetEntry
 		this.getMdht().getTemplateIds().clear();
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().add(
-				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason").getIi());
+				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason")
+						.getIi());
 
-		final Identificator id = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", UUID.generate());
+		final Identificator id = new Identificator(
+				EHealthConnectorVersions.getCurrentVersion().getOid(), UUID.generate());
 		this.setId(id);
 	}
 
@@ -51,7 +54,7 @@ public class MedicationTargetEntry
 	 * Instantiates a new medication target entry.
 	 *
 	 * @param targetImmunization
-	 *          the target immunization
+	 *            the target immunization
 	 */
 	public MedicationTargetEntry(CdaChVacdImmunizations targetImmunization) {
 		this();
@@ -60,9 +63,9 @@ public class MedicationTargetEntry
 
 	/**
 	 * Instantiates a new medication target entry.
-	 * 
+	 *
 	 * @param entry
-	 *          the target entry
+	 *            the target entry
 	 */
 	public MedicationTargetEntry(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry, "2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason");
@@ -113,7 +116,8 @@ public class MedicationTargetEntry
 		}
 
 		final Identificator id = getId();
-		if (((id != null) && !id.equals(other.getId())) || ((id == null) && (other.getId() != null))) {
+		if (((id != null) && !id.equals(other.getId()))
+				|| ((id == null) && (other.getId() != null))) {
 			return false;
 		}
 
@@ -164,7 +168,8 @@ public class MedicationTargetEntry
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -184,7 +189,7 @@ public class MedicationTargetEntry
 	 * Sets the software created id.
 	 *
 	 * @param identifier
-	 *          the new software created id
+	 *            the new software created id
 	 */
 	public void setId(Identificator identifier) {
 		getMdht().getIds().clear();
@@ -195,7 +200,7 @@ public class MedicationTargetEntry
 	 * Sets the immunization target.
 	 *
 	 * @param targetImmunization
-	 *          the new immunization target
+	 *            the new immunization target
 	 */
 	public void setImmunizationTarget(CdaChVacdImmunizations targetImmunization) {
 		if (targetImmunization != null) {
@@ -209,7 +214,7 @@ public class MedicationTargetEntry
 	 * Sets the immunization target code.
 	 *
 	 * @param code
-	 *          the new immunization target code
+	 *            the new immunization target code
 	 */
 	public void setImmunizationTargetCode(Code code) {
 		getMdht().setCode(code.getCD());
@@ -219,7 +224,8 @@ public class MedicationTargetEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference, # for local reference has to be included
+	 *            the new text reference, # for local reference has to be
+	 *            included
 	 */
 	@Override
 	public void setTextReference(String value) {

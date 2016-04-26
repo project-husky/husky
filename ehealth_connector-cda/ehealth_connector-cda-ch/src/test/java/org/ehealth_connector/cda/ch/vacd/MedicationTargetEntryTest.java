@@ -25,6 +25,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.junit.Test;
 import org.openhealthtools.ihe.utils.UUID;
@@ -36,8 +37,8 @@ import org.w3c.dom.NodeList;
  */
 public class MedicationTargetEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	@Test
 	public void testEquals() {
@@ -89,8 +90,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
+		final XPathExpression expr = xpath.compile(
+				"observation/code[@code='68525005' and @codeSystem='2.16.840.1.113883.6.96']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -107,8 +108,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
+		final XPathExpression expr = xpath.compile(
+				"observation/code[@code='76668005' and @codeSystem='2.16.840.1.113883.6.96']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -141,13 +142,15 @@ public class MedicationTargetEntryTest {
 		final MedicationTargetEntry entry = new MedicationTargetEntry();
 
 		final String uuid = UUID.generate();
-		final Identificator softwareId = new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", uuid);
+		final Identificator softwareId = new Identificator(
+				EHealthConnectorVersions.getCurrentVersion().getOid(), uuid);
 		entry.setId(softwareId);
 
 		final Document document = entry.getDocument();
 
 		final XPathExpression expr = xpath.compile(
-				"observation/id[@root='2.16.756.5.30.1.1.1.1.3.5.1' and @extension='" + uuid + "']");
+				"observation/id[@root='" + EHealthConnectorVersions.getCurrentVersion().getOid()
+						+ "' and @extension='" + uuid + "']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -162,7 +165,8 @@ public class MedicationTargetEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/text/reference[@value='#reference1']");
+		final XPathExpression expr = xpath
+				.compile("observation/text/reference[@value='#reference1']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

@@ -154,7 +154,7 @@ public class DateUtil {
 		// Create OHT Data structure
 		final IVL_TS ohtInterval = DatatypesFactory.eINSTANCE.createIVL_TS();
 
-		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMdd");
+		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
 		// Create and set Begin
 		if (eurDateTime != null) {
 			ohtInterval.setValue(cdaDateFormatter.format(eurDateTime));
@@ -642,6 +642,24 @@ public class DateUtil {
 			throw new IllegalArgumentException(
 					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.",
 					e);
+		}
+	}
+
+	/**
+	 * Parse date in format yyyyMMddHHmmssSSSZZZZ.
+	 *
+	 * @param value
+	 *            <br>
+	 *            <div class="de"> value</div>
+	 * @return java.util.Date
+	 */
+	public static Date parseDateyyyyMMddHHmmssSSSZZZZ(String value) {
+		try {
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSSZZZZ");
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+					+ "]. Expected format is yyyyMMddHHmmssSSSZZZZ.", e);
 		}
 	}
 

@@ -362,6 +362,19 @@ public class AbstractProblemConcern
 	}
 
 	/**
+	 * one id can be provided for retraceability
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(Identificator id) {
+		this.getMdht().getIds().clear();
+		if (id != null) {
+			this.getMdht().getIds().add(id.getIi());
+		}
+	}
+
+	/**
 	 * <div class="en">Sets the begin of the Concern</div><div class="de">Setzt
 	 * den Beginn des Leidens.</div>
 	 *
