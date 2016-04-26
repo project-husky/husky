@@ -26,9 +26,10 @@ import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
-import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
+import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
@@ -78,6 +79,7 @@ import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.resource.Practitioner;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
+import ca.uhn.fhir.model.primitive.XhtmlDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrtp extends AbstractFhirCdaCh {
@@ -361,6 +363,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 */
 	public static final String OID_LRTP = "urn:oid:" + CdaChLrtp.OID_MAIN;
 
+	private CdaChLrtp doc;
+
 	private final FhirContext fhirCtx = new FhirContext();
 
 	/**
@@ -383,7 +387,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	public CdaChLrtp createCdaChLrtpFromFHIRBundle(Bundle bundle, String xsl, String css) {
 
 		// Header
-		final CdaChLrtp doc = new CdaChLrtp(getDocLanguage(bundle), xsl, css);
+		doc = new CdaChLrtp(getDocLanguage(bundle), xsl, css);
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		// RecordTarget
 		doc.setPatient(FhirCommon.getPatient(bundle));
@@ -431,17 +435,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		// Body
 		// Laboratory SpecialtySections
 		final List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
-		if (lssList != null && !lssList.isEmpty()) {
-			final Code sectionCode = lssList.get(0).getCode();
-		}
-
-		// Laboratory Battery Organizers
-		final List<LaboratoryBatteryOrganizer> laboratoryBatteryOrganizers = getLaboratoryBatteryOrganizers(
-				bundle);
-		if ((laboratoryBatteryOrganizers != null) && !laboratoryBatteryOrganizers.isEmpty()) {
-			for (final LaboratoryBatteryOrganizer lbo : laboratoryBatteryOrganizers) {
-				doc.addLaboratoryBatteryOrganizer(lbo);
-			}
+		for (LaboratorySpecialtySection lss : lssList) {
+			doc.addLaboratorySpecialtySection(lss);
 		}
 
 		// VitalSignsOrganizer
@@ -455,10 +450,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		if (bgo != null) {
 			doc.setBloodGroupObservation(bgo);
 		}
-
-		// Narrative Text: LaboratorySpecialtySection
-		doc.setNarrativeTextSectionLaboratorySpeciality(
-				getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialtySection));
 
 		// Narrative Text: CodedVitalSigns
 		doc.setNarrativeTextSectionCodedVitalSignsSection(
@@ -482,6 +473,13 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(LrtpDocument.class, resourceString);
+	}
+
+	private String formatDiv(XhtmlDt text) {
+		String retVal = text.getValueAsString();
+		retVal = retVal.replace("</div>", "");
+		retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
+		return retVal;
 	}
 
 	private BloodGroupObservation getBloodGroupObservation(Bundle bundle) {
@@ -640,54 +638,39 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 * <div class="en">Gets a list of eHC LRTP LaboratoryBatteryOrganizers from
 	 * the given FHIR bundle
 	 *
-	 * @param bundle
+	 * @param fhirObs2
 	 *            the FHIR bundle
 	 * @return list of eHC LRTP LaboratoryBatteryOrganizers</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	private List<org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer>();
-
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all LaboratoryBatteryOrganizers
-			final List<ExtensionDt> laboratoryBatteryOrganizers = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
-			if ((laboratoryBatteryOrganizers != null) && !laboratoryBatteryOrganizers.isEmpty()) {
-				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
-				final Observation labObsList = (Observation) entry.getResource();
-
-				// Set the Organizer Attributes
-				// Status Code
-				final String statusCode = getValueFromKeyValueString(labObsList.getText(),
-						"statusCode");
-				if (statusCode != null) {
-					lbo.setStatusCode(StatusCode.getEnum(statusCode));
-				}
-				// EffectiveTime
-				final DateTimeDt fTime = (DateTimeDt) labObsList.getEffective();
-				lbo.setEffectiveTime(fTime.getValue());
-
-				// Authors
-				for (ResourceReferenceDt perfRef : labObsList.getPerformer()) {
-					Practitioner p = (Practitioner) perfRef.getResource();
-					Author author = new Author("");
-					author.addId(
-							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
-					lbo.addAuthor(author);
-				}
-
-				// Add all LaboratoryObservations
-				for (final Related relatedObs : labObsList.getRelated()) {
-					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-					final LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
-					lbo.addLaboratoryObservation(labObs);
-				}
-				retVal.add(lbo);
-			}
+	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer getLaboratoryBatteryOrganizers(
+			Observation labObsList) {
+		final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
+		// Set the Organizer Attributes
+		// Status Code
+		final String statusCode = getValueFromKeyValueString(labObsList.getText(), "statusCode");
+		if (statusCode != null) {
+			lbo.setStatusCode(StatusCode.getEnum(statusCode));
 		}
-		return retVal;
+		// EffectiveTime
+		final DateTimeDt fTime = (DateTimeDt) labObsList.getEffective();
+		lbo.setEffectiveTime(fTime.getValue());
+
+		// Authors
+		for (ResourceReferenceDt perfRef : labObsList.getPerformer()) {
+			Practitioner p = (Practitioner) perfRef.getResource();
+			Author author = new Author("");
+			author.addId(FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+			lbo.addAuthor(author);
+		}
+
+		// Add all LaboratoryObservations
+		for (final Related relatedObs : labObsList.getRelated()) {
+			final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
+			final LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
+			lbo.addLaboratoryObservation(labObs);
+		}
+		return lbo;
 	}
 
 	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation getLaboratoryObservation(
@@ -807,10 +790,24 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			if ((specialtySections != null) && !specialtySections.isEmpty()) {
 				final Observation obs = (Observation) entry.getResource();
 
-				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection();
+				// SectionCode
 				final Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
 				code.setCodeSystemName("LOINC");
-				lss.setCode(code);
+				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection(
+						code, doc.getLanguageCode());
+
+				// Add all LaboratoryBatteryOrganizers
+				SpecimenAct spa = new SpecimenAct();
+				spa.setCode(code);
+				for (final Related relatedObs : obs.getRelated()) {
+					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
+					spa.addLaboratoryBatteryOrganizer(getLaboratoryBatteryOrganizers(fhirObs));
+				}
+				lss.setLaboratoryReportDataProcessingEntry(
+						new LaboratoryReportDataProcessingEntry(spa));
+
+				// NarrativeText
+				lss.setText(formatDiv(obs.getText().getDiv()));
 				lssList.add(lss);
 			}
 		}
@@ -936,6 +933,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				if (fVso.getEffective() != null && !fVso.isEmpty()) {
 					DateTimeDt fTime = (DateTimeDt) fVso.getEffective();
 					vso.setEffectiveTime(fTime.getValue());
+				}
+				// Ids
+				for (IdentifierDt fId : fVso.getIdentifier()) {
+					vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
 				}
 				// Authors
 				for (ResourceReferenceDt perfRef : fVso.getPerformer()) {
