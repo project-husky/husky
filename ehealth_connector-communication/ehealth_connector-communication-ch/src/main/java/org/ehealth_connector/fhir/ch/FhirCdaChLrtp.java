@@ -23,13 +23,17 @@ import java.util.List;
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
+import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation;
+import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
+import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -69,8 +73,8 @@ import ca.uhn.fhir.model.dstu2.resource.Observation.Related;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
+import ca.uhn.fhir.model.dstu2.resource.Practitioner;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
-import ca.uhn.fhir.model.primitive.InstantDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrtp extends AbstractFhirCdaCh {
@@ -437,13 +441,25 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 
+		// VitalSignsOrganizer
+		List<VitalSignsOrganizer> vsoList = getVitalSignsOrganizers(bundle);
+		for (VitalSignsOrganizer vso : vsoList) {
+			doc.setVitalSignsOrganizer(vso);
+		}
+
+		// BloodGroup
+		BloodGroupObservation bgo = getBloodGroupObservation(bundle);
+		if (bgo != null) {
+			doc.setBloodGroupObservation(bgo);
+		}
+
 		// Narrative Text: LaboratorySpecialtySection
 		doc.setNarrativeTextSectionLaboratorySpeciality(
 				getNarrative(bundle, FhirCommon.urnUseAsLaboratorySpecialtySection));
 
 		// Narrative Text: CodedVitalSigns
 		doc.setNarrativeTextSectionCodedVitalSignsSection(
-				getNarrative(bundle, FhirCommon.urnUseAsCodedVitalSignList));
+				getNarrative(bundle, FhirCommon.urnUseAsCodedVitalSigns));
 
 		// Narrative Text: StudiesSummary
 		doc.setNarrativeTextSectionStudiesSummarySection(
@@ -463,6 +479,36 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(LrtpDocument.class, resourceString);
+	}
+
+	private BloodGroupObservation getBloodGroupObservation(Bundle bundle) {
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all relevant elements
+			List<ExtensionDt> ifoEntries = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsBloodGroup);
+			if (ifoEntries != null && !ifoEntries.isEmpty()) {
+				Observation fObs = (Observation) entry.getResource();
+				BloodGroupObservation bgo = new BloodGroupObservation();
+				// Value
+				BloodGroup bg = BloodGroup.getEnum(fObs.getCode().getCodingFirstRep().getCode());
+				bgo.setValue(bg);
+				// comment
+				bgo.setComment(new SectionAnnotationCommentEntry(fObs.getComments()));
+				// Author
+				for (ResourceReferenceDt fPerfRef : fObs.getPerformer()) {
+					Practitioner fPerf = (Practitioner) fPerfRef.getResource();
+					// Id
+					Author author = new Author();
+					author.addId(FhirCommon
+							.fhirIdentifierToEhcIdentificator(fPerf.getIdentifierFirstRep()));
+					// Time
+					// TODO
+				}
+
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -782,13 +828,29 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		VitalSignsObservation vso = new VitalSignsObservation();
 		// Value
 		QuantityDt fValue = (QuantityDt) fhirObs.getValue();
-		Value v = new Value(fValue.getValue().toString(), fValue.getUnit());
+		Value v = new Value(fValue.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
+		v.setUcumUnit(fValue.getUnit());
 		vso.setValue(v);
 
 		// Code
 		VitalSignList codeEnum = VitalSignList
-				.getEnum(FhirCommon.fhirCodeToEhcCode(fhirObs.getCode()).getCode());
-		vso.setCode(codeEnum);
+				.getEnum(fhirObs.getCode().getCodingFirstRep().getCode());
+		if (codeEnum != null) {
+			vso.setCode(codeEnum);
+		}
+
+		// ObservationInterpretation
+		ObservationInterpretationForVitalSign i = ObservationInterpretationForVitalSign
+				.getEnum(fhirObs.getInterpretation().getCodingFirstRep().getCode());
+		if (i != null) {
+			vso.setInterpretationCode(i);
+		}
+
+		// Method Code Translation
+		if (fhirObs.getCode().getCoding().size() > 1) {
+			Code translation = new Code(fhirObs.getCode().getCoding().get(1).getSystem(), fhirObs.getCode().getCoding().get(1).getCode());
+			vso.setMethodCodeTranslation(translation);
+		}
 
 		// CommentEntry
 		vso.addCommentEntry(new SectionAnnotationCommentEntry(fhirObs.getComments()));
@@ -821,8 +883,16 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				// Set the Organizer Attributes
 				// Date
 				if (fVso.getEffective() != null && !fVso.isEmpty()) {
-					InstantDt fTime = (InstantDt) fVso.getEffective();
+					DateTimeDt fTime = (DateTimeDt) fVso.getEffective();
 					vso.setEffectiveTime(fTime.getValue());
+				}
+				// Authors
+				for (ResourceReferenceDt perfRef : fVso.getPerformer()) {
+					Practitioner p = (Practitioner) perfRef.getResource();
+					Author author = new Author();
+					author.addId(
+							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+					vso.addAuthor(author);
 				}
 
 				// // Status Code

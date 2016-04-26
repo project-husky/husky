@@ -46,6 +46,9 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 	public VitalSignsObservation() {
 		initMdht();
 		setMethodCodeTranslation(null);
+		super.getVitalSignObservation().getInterpretationCodes().clear();
+		super.getVitalSignObservation().setText(null);
+		super.getVitalSignObservation().getTargetSiteCodes().clear();
 	}
 
 	/**
@@ -73,8 +76,6 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 		this();
 		setCode(code);
 		setValue(value);
-		super.getVitalSignObservation().getInterpretationCodes().clear();
-		super.getVitalSignObservation().setText(null);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 		getVitalSignObservation().addAct(entry.getMdht());
 		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;
 		getVitalSignObservation().getEntryRelationships().get(nb)
-		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		getVitalSignObservation().getEntryRelationships().get(nb).setInversionInd(true);
 	}
 
@@ -116,7 +117,7 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 				if (er.getAct().getTemplateIds().get(0).getRoot()
 						.equals("2.16.840.1.113883.10.20.1.40")
 						|| er.getAct().getTemplateIds().get(0).getRoot()
-						.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
+								.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
 					sacl.add(new SectionAnnotationCommentEntry((Comment) er.getAct()));
 				}
 			}
@@ -133,7 +134,8 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 	public Code getMethodCodeTranslation() {
 		if (!getVitalSignObservation().getMethodCodes().isEmpty()
 				&& !getVitalSignObservation().getMethodCodes().get(0).getTranslations().isEmpty()) {
-			return new Code(getVitalSignObservation().getMethodCodes().get(0).getTranslations().get(0));
+			return new Code(
+					getVitalSignObservation().getMethodCodes().get(0).getTranslations().get(0));
 		}
 		return null;
 	}
