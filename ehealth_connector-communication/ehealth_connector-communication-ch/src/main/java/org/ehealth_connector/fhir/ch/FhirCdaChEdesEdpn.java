@@ -552,19 +552,6 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 				}
 				retVal.add(concern);
 			}
-			// if (!extensions.isEmpty() && (entry.getResource() instanceof
-			// Condition)) {
-			// Condition fhirCondition = (Condition) entry.getResource();
-			// AllergyConcern concern = getAllergyProblemConcern(fhirCondition);
-			// DateDt timeStamp = ((DateDt) extensions.get(0).getValue());
-			// concern.setStart(timeStamp.getValue());
-			// for (final IdentifierDt id : fhirCondition.getIdentifier()) {
-			// final String codeSystem =
-			// FhirCommon.removeURIPrefix(id.getSystem());
-			// concern.addId(new Identificator(codeSystem, id.getValue()));
-			// }
-			// retVal.add(concern);
-			// }
 		}
 		return retVal;
 	};

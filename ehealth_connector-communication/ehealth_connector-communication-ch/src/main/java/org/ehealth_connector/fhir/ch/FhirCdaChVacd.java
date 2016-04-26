@@ -50,6 +50,7 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
@@ -73,8 +74,10 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
+import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
+import ca.uhn.fhir.model.primitive.TimeDt;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
 
@@ -92,7 +95,7 @@ import ca.uhn.fhir.util.ElementUtil;
 /**
  * <div class="en"></div><div class="de"></div><div class="fr"></div>
  */
-public class FhirCdaChVacd {
+public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 	/**
 	 * <div class="en">Type of the bundle to define whether the resulting CDA
@@ -944,6 +947,9 @@ public class FhirCdaChVacd {
 		// Header
 		final CdaChVacd doc = new CdaChVacd(getDocLanguage(bundle), xsl, css);
 		final DocTypeCode docType = getDocType(bundle);
+		doc.setId(getDocumentId(bundle));
+		doc.setSetId(getDocumentId(bundle));
+		doc.setTimestamp(getDocumentDate(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		doc.setPatient(FhirCommon.getPatient(bundle));
 		if (docType == DocTypeCode.PSEUDONYMIZED)
@@ -1010,6 +1016,24 @@ public class FhirCdaChVacd {
 		return doc;
 	}
 
+	private org.ehealth_connector.cda.ch.ActiveProblemConcern getActiveProblemConcern(
+			Condition fhirCondition) {
+
+		final String concern = fhirCondition.getNotes();
+		final Date date = fhirCondition.getDateRecorded();
+
+		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
+		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
+
+		// Create the ActiveProblemConcern
+		final org.ehealth_connector.cda.ch.ActiveProblemConcern retVal = new org.ehealth_connector.cda.ch.ActiveProblemConcern(
+				concern, date, problemEntry, problemStatusCode);
+
+		return retVal;
+
+	}
+
 	/**
 	 * <div class="en">Gets a list of eHC ActiveProblemConcerns from the given
 	 * FHIR bundle
@@ -1023,12 +1047,48 @@ public class FhirCdaChVacd {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.ActiveProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ActiveProblemConcern>();
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern)
-					.isEmpty() && (entry.getResource() instanceof Condition)) {
-				retVal.add(getActiveProblemConcern((Condition) entry.getResource()));
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
+				Condition fhirCondition = (Condition) entry.getResource();
+				ActiveProblemConcern concern = getActiveProblemConcern(fhirCondition);
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						concern.setStart(((DateDt) ext.getValue()).getValue());
+					}
+					if (ext.getValue() instanceof StringDt) {
+						concern.getMdht().getIds().clear();
+						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
+								((StringDt) ext.getValue()).toString()));
+					}
+				}
+				retVal.add(concern);
 			}
+			// if
+			// (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern)
+			// .isEmpty() && (entry.getResource() instanceof Condition)) {
+			// retVal.add(getActiveProblemConcern((Condition)
+			// entry.getResource()));
+			// }
 		}
 		return retVal;
+	}
+
+	private org.ehealth_connector.cda.ch.AllergyConcern getAllergyProblemConcern(
+			Condition fhirCondition) {
+
+		final String concern = fhirCondition.getNotes();
+		final org.ehealth_connector.cda.ch.AllergyProblem problemEntry = getAllergyProblemEntry(
+				fhirCondition);
+
+		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
+				fhirCondition);
+
+		final org.ehealth_connector.cda.ch.AllergyConcern retVal = new org.ehealth_connector.cda.ch.AllergyConcern(
+				concern, fhirCondition.getDateRecorded(), null, problemEntry, problemStatusCode);
+
+		return retVal;
+
 	}
 
 	/**
@@ -1044,11 +1104,49 @@ public class FhirCdaChVacd {
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.AllergyConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.AllergyConcern>();
 		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern)
-					.isEmpty() && (entry.getResource() instanceof Condition)) {
-				retVal.add(getAllergyProblemConcern((Condition) entry.getResource()));
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
+				Condition fhirCondition = (Condition) entry.getResource();
+				AllergyConcern concern = getAllergyProblemConcern(fhirCondition);
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						concern.setStart(((DateDt) ext.getValue()).getValue());
+					}
+					if (ext.getValue() instanceof StringDt) {
+						concern.getMdht().getIds().clear();
+						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
+								((StringDt) ext.getValue()).toString()));
+					}
+				}
+				retVal.add(concern);
 			}
 		}
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.ch.AllergyProblem getAllergyProblemEntry(
+			Condition fhirCondition) {
+
+		final org.ehealth_connector.cda.ch.AllergyProblem retVal = new org.ehealth_connector.cda.ch.AllergyProblem();
+		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
+
+		// Add Problem Entry Identifiers
+		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// currently only Drug intolerances supported
+		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
+
+		// Date
+		retVal.setStartDate(fhirCondition.getDateRecorded());
+
+		// Value
+		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+
 		return retVal;
 	}
 
@@ -1064,10 +1162,19 @@ public class FhirCdaChVacd {
 	public org.ehealth_connector.common.Author getAuthor(
 			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.common.Author retVal = null;
-		// fhirMedicationStatement.getSupportingInformation();
 		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor).isEmpty()) {
+			List<ExtensionDt> extensions = ref
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+			if (!extensions.isEmpty() && (ref.getResource() instanceof Person)) {
 				retVal = FhirCommon.getAuthor((Person) ref.getResource());
+				if (extensions.get(0).getValue() instanceof TimeDt) {
+					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+					if (timeStamp.getValue().length() > 8)
+						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+
+					else
+						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+				}
 			}
 		}
 		return retVal;
@@ -1081,6 +1188,7 @@ public class FhirCdaChVacd {
 	 * @return list of eHC Authors </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
+	@Override
 	public List<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
 		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 		for (final Entry entry : bundle.getEntry()) {
@@ -1088,6 +1196,18 @@ public class FhirCdaChVacd {
 					&& (entry.getResource() instanceof Person)) {
 				retVal.add(FhirCommon.getAuthor((Person) entry.getResource()));
 			}
+		}
+		return retVal;
+	}
+
+	private Code getCode(MedicationStatement fhirMedicationStatement) {
+		Code retVal = null;
+		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode)
+				.isEmpty()) {
+			final CodingDt fhirCode = (CodingDt) fhirMedicationStatement
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode).get(0).getValue();
+			retVal = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
+					fhirCode.getDisplay());
 		}
 		return retVal;
 	}
@@ -1111,6 +1231,17 @@ public class FhirCdaChVacd {
 		return retVal;
 	}
 
+	private String getComment(MedicationStatement fhirMedicationStatement) {
+		String retVal = "";
+		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment)
+				.isEmpty()) {
+			final StringDt comment = (StringDt) fhirMedicationStatement
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment).get(0).getValue();
+			retVal = comment.toString();
+		}
+		return retVal;
+	}
+
 	/**
 	 * <div class="en"> Gets the eHC confidentiality code from the given FHIR
 	 * bundle
@@ -1120,6 +1251,7 @@ public class FhirCdaChVacd {
 	 * @return eHC confidentiality code </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
+	@Override
 	public Confidentiality getConfidentialityCode(Bundle bundle) {
 		Confidentiality retVal = Confidentiality.NORMAL; // default
 		for (final Entry entry : bundle.getEntry()) {
@@ -1140,6 +1272,46 @@ public class FhirCdaChVacd {
 				}
 			}
 		}
+		return retVal;
+	}
+
+	private org.ehealth_connector.cda.Consumable getConsumable(
+			MedicationStatement fhirMedicationStatement) {
+		org.ehealth_connector.cda.Consumable retVal = null;
+
+		if (fhirMedicationStatement.getMedication() instanceof ResourceReferenceDt) {
+			final ResourceReferenceDt ref = (ResourceReferenceDt) fhirMedicationStatement
+					.getMedication();
+			final Medication fhirMedi = (Medication) ref.getResource();
+			// Create the consumable
+			retVal = new org.ehealth_connector.cda.Consumable(fhirMedi.getCode().getText());
+
+			// Set id
+			if (!fhirMedi.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).isEmpty()) {
+				final IdentifierDt id = (IdentifierDt) fhirMedi
+						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0)
+						.getValue();
+				retVal.setManufacturedProductId(new org.ehealth_connector.common.Identificator(
+						FhirCommon.removeURIPrefix(id.getSystem()), id.getValue()));
+			}
+
+			// Set code
+			final CodingDt fhirCode = fhirMedi.getCode().getCodingFirstRep();
+			final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+					fhirCode.getCode(), fhirCode.getDisplay());
+			retVal.setWhoAtcCode(code);
+
+			// Set manufacturer
+			final ResourceReferenceDt refManufacturer = fhirMedi.getManufacturer();
+			retVal.setManufacturer(FhirCommon.getOrganization(refManufacturer.getResource()));
+
+			// LotNumber
+			retVal.setLotNr(getLot(fhirMedicationStatement));
+		} else {
+			// Create the consumable
+			retVal = new org.ehealth_connector.cda.Consumable(false);
+		}
+
 		return retVal;
 	}
 
@@ -1170,6 +1342,7 @@ public class FhirCdaChVacd {
 	 *            the FHIR bundle
 	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
 	 */
+	@Override
 	public org.ehealth_connector.common.Organization getCustodian(Bundle bundle) {
 		org.ehealth_connector.common.Organization retVal = null;
 		for (final Entry entry : bundle.getEntry()) {
@@ -1190,6 +1363,7 @@ public class FhirCdaChVacd {
 	 * @return eHC document language </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
+	@Override
 	public LanguageCode getDocLanguage(Bundle bundle) {
 		LanguageCode retVal = LanguageCode.GERMAN; // default
 		for (final Entry entry : bundle.getEntry()) {
@@ -1252,9 +1426,11 @@ public class FhirCdaChVacd {
 	 *         <div class="fr"></div>
 	 */
 	public org.ehealth_connector.cda.ch.CodedResults getGestationalAge(Bundle bundle) {
-		CodedResults retVal = null;
+		GestationalAge retVal = null;
 		BigInteger gWeek = BigInteger.valueOf(-1);
 		BigInteger gDay = BigInteger.valueOf(-1);
+		Identificator idWeek = null;
+		Identificator idDay = null;
 		for (final Entry entry : bundle.getEntry()) {
 			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPregnancyObservation)
 					.isEmpty() && (entry.getResource() instanceof Observation)) {
@@ -1262,334 +1438,30 @@ public class FhirCdaChVacd {
 				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 				if ("49051-6".equals(fhirCode.getCode())) {
 					gWeek = ((QuantityDt) fhirObs.getValue()).getValue().toBigInteger();
+					if (!fhirObs.getIdentifier().isEmpty()) {
+						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
+						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
+						idWeek = new Identificator(codeSystem, idTemp.getValue());
+					}
 				}
 				if ("49052-4".equals(fhirCode.getCode())) {
 					gDay = ((QuantityDt) fhirObs.getValue()).getValue().toBigInteger();
+					if (!fhirObs.getIdentifier().isEmpty()) {
+						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
+						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
+						idDay = new Identificator(codeSystem, idTemp.getValue());
+					}
 				}
 			}
 		}
 
 		if ((gDay.intValue() > -1) && (gWeek.intValue() > -1)) {
 			retVal = new GestationalAge(gWeek.intValue(), gDay.intValue());
-			// not yet implemented:
-			// retVal.setPerformer(perfomer);
+			if (idWeek != null)
+				retVal.setGestationalAgeWeeksId(idWeek);
+			if (idDay != null)
+				retVal.setGestationalAgeDaysId(idDay);
 		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC ImmunizationRecommendations from the
-	 * given FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC ImmunizationRecommendations </div>
-	 *         <div class="de"></div> <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> getImmunizationRecommendations(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunizationRecommendation)
-					.isEmpty() && (entry.getResource() instanceof MedicationStatement)) {
-				retVal.add(
-						getImmunizationRecommendation((MedicationStatement) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC Immunizations from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            FHIR bundle
-	 * @return list of eHC Immunizations </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.vacd.Immunization> getImmunizations(Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.vacd.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.Immunization>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()
-					&& (entry.getResource() instanceof MedicationStatement)) {
-				retVal.add(getImmunization((MedicationStatement) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC LaboratoryObservations from the given
-	 * FHIR bundle
-	 *
-	 * @param bundle
-	 *            FHIR bundle
-	 * @return list of eHC LaboratoryObservations </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getLaboratoryObservations(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryObservation)
-					.isEmpty() && (entry.getResource() instanceof Observation)) {
-				retVal.add(getLaboratoryObservation((Observation) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * Gets an eHC Author object containing the legal authenticator from the
-	 * given FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Author object containing the legal authenticator
-	 */
-	public org.ehealth_connector.common.Author getLegalAuthenticator(Bundle bundle) {
-		org.ehealth_connector.common.Author retVal = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLegalAuthenticator).isEmpty()
-					&& (entry.getResource() instanceof Person)) {
-				retVal = FhirCommon.getAuthor((Person) entry.getResource());
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en"> Gets a FHIR ListResource object containing the
-	 * medication targes in the given FHIR MedicationStatement object
-	 *
-	 * @param fhirMedicationStatement
-	 *            the FHIR MedicationStatement object
-	 * @return FHIR ListResource object containing the medication targets </div>
-	 *         <div class="de"></div> <div class="fr"></div>
-	 */
-	public ListResource getMedicationTargets(MedicationStatement fhirMedicationStatement) {
-		ListResource retVal = new ListResource();
-		// fhirMedicationStatement.getSupportingInformation();
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMedicationTarget).isEmpty()) {
-				retVal = (ListResource) ref.getResource();
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC PastProblemConcerns from the given
-	 * FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC PastProblemConcerns </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.PastProblemConcern> getPastProblemConcernEntries(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.PastProblemConcern>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPastProblemConcern).isEmpty()
-					&& (entry.getResource() instanceof Condition)) {
-				retVal.add(getPastProblemConcern((Condition) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * Gets an eHC Author object containing the performer from the given FHIR
-	 * MedicationStatement object
-	 *
-	 * @param fhirMedicationStatement
-	 *            the FHIR bundle
-	 * @return eHC Author object containing the performer
-	 */
-	public org.ehealth_connector.common.Author getPerformer(
-			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.common.Author retVal = null;
-		// fhirMedicationStatement.getSupportingInformation();
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPerformer).isEmpty()) {
-				retVal = FhirCommon.getAuthor((Person) ref.getResource());
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets the eHC PregnancyHistory object from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC PregnancyHistory object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public org.ehealth_connector.cda.ch.PregnancyHistory getPregnancyHistory(Bundle bundle) {
-		PregnancyHistory retVal = null;
-		Date deliveryDate = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPregnancyObservation)
-					.isEmpty() && (entry.getResource() instanceof Observation)) {
-				final Observation fhirObs = (Observation) entry.getResource();
-				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				if ("11778-8".equals(fhirCode.getCode())) {
-					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
-				}
-			}
-		}
-
-		if (deliveryDate != null) {
-			retVal = new PregnancyHistory(deliveryDate);
-			// not yet implemented:
-			// retVal.setPerformer(perfomer);
-		}
-		return retVal;
-	}
-
-	/**
-	 * Read the VacdDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the vacd document
-	 */
-	public VacdDocument readVacDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(VacdDocument.class, resourceString);
-	}
-
-	private org.ehealth_connector.cda.ch.ActiveProblemConcern getActiveProblemConcern(
-			Condition fhirCondition) {
-
-		final String concern = fhirCondition.getNotes();
-		final Date date = fhirCondition.getDateRecorded();
-
-		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
-		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
-				fhirCondition);
-
-		// Create the ActiveProblemConcern
-		final org.ehealth_connector.cda.ch.ActiveProblemConcern retVal = new org.ehealth_connector.cda.ch.ActiveProblemConcern(
-				concern, date, problemEntry, problemStatusCode);
-
-		return retVal;
-
-	}
-
-	private org.ehealth_connector.cda.ch.AllergyConcern getAllergyProblemConcern(
-			Condition fhirCondition) {
-
-		final String concern = fhirCondition.getNotes();
-		final org.ehealth_connector.cda.ch.AllergyProblem problemEntry = getAllergyProblemEntry(
-				fhirCondition);
-
-		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
-				fhirCondition);
-		// // Create the AllergyProblemConcern
-		// retVal = new org.ehealth_connector.cda.AllergyConcern(concern,
-		// problemEntry, problemStatusCode);
-		//
-		// // Date
-		// retVal.setStartDate(fhirCondition.getDateAsserted());
-
-		final org.ehealth_connector.cda.ch.AllergyConcern retVal = new org.ehealth_connector.cda.ch.AllergyConcern(
-				concern, fhirCondition.getDateRecorded(), null, problemEntry, problemStatusCode);
-
-		return retVal;
-
-	}
-
-	private org.ehealth_connector.cda.ch.AllergyProblem getAllergyProblemEntry(
-			Condition fhirCondition) {
-
-		final org.ehealth_connector.cda.ch.AllergyProblem retVal = new org.ehealth_connector.cda.ch.AllergyProblem();
-		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-
-		// Add Problem Entry Identifiers
-		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
-		// currently only Drug intolerances supported
-		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
-
-		// Date
-		retVal.setStartDate(fhirCondition.getDateRecorded());
-
-		// Value
-		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
-
-		return retVal;
-	}
-
-	private Code getCode(MedicationStatement fhirMedicationStatement) {
-		Code retVal = null;
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode)
-				.isEmpty()) {
-			final CodingDt fhirCode = (CodingDt) fhirMedicationStatement
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode).get(0).getValue();
-			retVal = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
-					fhirCode.getDisplay());
-		}
-		return retVal;
-	}
-
-	private String getComment(MedicationStatement fhirMedicationStatement) {
-		String retVal = "";
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment)
-				.isEmpty()) {
-			final StringDt comment = (StringDt) fhirMedicationStatement
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment).get(0).getValue();
-			retVal = comment.toString();
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.Consumable getConsumable(
-			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.cda.Consumable retVal = null;
-
-		if (fhirMedicationStatement.getMedication() instanceof ResourceReferenceDt) {
-			final ResourceReferenceDt ref = (ResourceReferenceDt) fhirMedicationStatement
-					.getMedication();
-			final Medication fhirMedi = (Medication) ref.getResource();
-			// Create the consumable
-			retVal = new org.ehealth_connector.cda.Consumable(fhirMedi.getCode().getText());
-
-			// Set id
-			if (!fhirMedi.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).isEmpty()) {
-				final IdentifierDt id = (IdentifierDt) fhirMedi
-						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0)
-						.getValue();
-				retVal.setManufacturedProductId(new org.ehealth_connector.common.Identificator(
-						FhirCommon.removeURIPrefix(id.getSystem()), id.getValue()));
-			}
-
-			// Set code
-			final CodingDt fhirCode = fhirMedi.getCode().getCodingFirstRep();
-			final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-					fhirCode.getCode(), fhirCode.getDisplay());
-			retVal.setWhoAtcCode(code);
-
-			// Set manufacturer
-			final ResourceReferenceDt refManufacturer = fhirMedi.getManufacturer();
-			retVal.setManufacturer(FhirCommon.getOrganization(refManufacturer.getResource()));
-
-			// LotNumber
-			retVal.setLotNr(getLot(fhirMedicationStatement));
-		} else {
-			// Create the consumable
-			retVal = new org.ehealth_connector.cda.Consumable(false);
-		}
-
 		return retVal;
 	}
 
@@ -1602,6 +1474,7 @@ public class FhirCdaChVacd {
 		final org.ehealth_connector.cda.ch.vacd.Immunization retVal = new org.ehealth_connector.cda.ch.vacd.Immunization();
 
 		// Add Identifiers
+		retVal.getMdht().getIds().clear();
 		for (final IdentifierDt id : fhirMedicationStatement.getIdentifier()) {
 			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
@@ -1651,6 +1524,8 @@ public class FhirCdaChVacd {
 				final Observation fhirObs = (Observation) refObs.getResource();
 				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
 				final MedicationTargetEntry entry = new MedicationTargetEntry();
+				entry.setId(new Identificator(fhirObs.getIdentifierFirstRep().getSystem(),
+						fhirObs.getIdentifierFirstRep().getValue()));
 				entry.setImmunizationTargetCode(
 						new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 								fhirCode.getCode(), fhirCode.getDisplay()));
@@ -1689,8 +1564,10 @@ public class FhirCdaChVacd {
 		for (final IdentifierDt id : fhirMedicationStatement.getIdentifier()) {
 			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
-
 		}
+
+		// Date
+		retVal.setPossibleAppliance(fhirMedicationStatement.getDateAsserted(), null);
 
 		// code
 		final Code code = getCode(fhirMedicationStatement);
@@ -1708,10 +1585,6 @@ public class FhirCdaChVacd {
 						MedicationsSpecialConditions.getEnum(cc.getCodingFirstRep().getCode()));
 			} else {
 				retVal.setShallNotBeAdministerd(fhirMedicationStatement.getWasNotTaken());
-
-				// effectiveTime
-				// not yet implemented: effectiveTime highValue
-				retVal.setPossibleAppliance(fhirMedicationStatement.getDateAsserted(), null);
 
 				// doseQuantity
 				Double doseQuantity = null;
@@ -1738,6 +1611,8 @@ public class FhirCdaChVacd {
 			entry.setImmunizationTargetCode(
 					new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
 							fhirCode.getDisplay()));
+			entry.setId(new Identificator(fhirObs.getIdentifierFirstRep().getSystem(),
+					fhirObs.getIdentifierFirstRep().getValue().toString()));
 			retVal.addMedicationTargetEntry(entry);
 		}
 
@@ -1750,6 +1625,10 @@ public class FhirCdaChVacd {
 			final CriterionEntry entry = new CriterionEntry();
 			entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 					fhirCode.getCode(), fhirCode.getDisplay()));
+			// not supported, yet
+			// entry.addId(
+			// new Identificator(fhirObs.getId().getIdPart(),
+			// fhirObs.getValue().toString()));
 			retVal.setCriterionEntry(entry);
 		}
 
@@ -1758,6 +1637,50 @@ public class FhirCdaChVacd {
 
 		return retVal;
 
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC ImmunizationRecommendations from the
+	 * given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC ImmunizationRecommendations </div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> getImmunizationRecommendations(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation>();
+		for (final Entry entry : bundle.getEntry()) {
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunizationRecommendation);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof MedicationStatement)) {
+				MedicationStatement fhirObject = (MedicationStatement) entry.getResource();
+				ImmunizationRecommendation recom = getImmunizationRecommendation(fhirObject);
+				retVal.add(recom);
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC Immunizations from the given FHIR
+	 * bundle
+	 *
+	 * @param bundle
+	 *            FHIR bundle
+	 * @return list of eHC Immunizations </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.vacd.Immunization> getImmunizations(Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.vacd.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.Immunization>();
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()
+					&& (entry.getResource() instanceof MedicationStatement)) {
+				retVal.add(getImmunization((MedicationStatement) entry.getResource()));
+			}
+		}
+		return retVal;
 	}
 
 	private org.ehealth_connector.cda.ch.vacd.LaboratoryObservation getLaboratoryObservation(
@@ -1809,6 +1732,27 @@ public class FhirCdaChVacd {
 
 	}
 
+	/**
+	 * <div class="en">Gets a list of eHC LaboratoryObservations from the given
+	 * FHIR bundle
+	 *
+	 * @param bundle
+	 *            FHIR bundle
+	 * @return list of eHC LaboratoryObservations </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getLaboratoryObservations(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation>();
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryObservation)
+					.isEmpty() && (entry.getResource() instanceof Observation)) {
+				retVal.add(getLaboratoryObservation((Observation) entry.getResource()));
+			}
+		}
+		return retVal;
+	}
+
 	private String getLot(MedicationStatement fhirMedicationStatement) {
 		String retVal = "";
 		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLotNumbertext)
@@ -1821,17 +1765,31 @@ public class FhirCdaChVacd {
 		return retVal;
 	}
 
+	/**
+	 * <div class="en"> Gets a FHIR ListResource object containing the
+	 * medication targes in the given FHIR MedicationStatement object
+	 *
+	 * @param fhirMedicationStatement
+	 *            the FHIR MedicationStatement object
+	 * @return FHIR ListResource object containing the medication targets </div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public ListResource getMedicationTargets(MedicationStatement fhirMedicationStatement) {
+		ListResource retVal = new ListResource();
+		// fhirMedicationStatement.getSupportingInformation();
+		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
+			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMedicationTarget).isEmpty()) {
+				retVal = (ListResource) ref.getResource();
+			}
+		}
+		return retVal;
+	}
+
 	private org.ehealth_connector.cda.ch.PastProblemConcern getPastProblemConcern(
 			Condition fhirCondition) {
 		org.ehealth_connector.cda.ch.PastProblemConcern retVal = null;
 
 		final String concern = fhirCondition.getNotes();
-		// org.ehealth_connector.cda.Problem problemEntry = new
-		// org.ehealth_connector.cda.Problem();
-		// CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-		// problemEntry.setCode(new
-		// Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-		// fhirCode.getCode(), fhirCode.getDisplay()));
 
 		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
 
@@ -1841,14 +1799,111 @@ public class FhirCdaChVacd {
 		// Create the PastProblemConcern
 		retVal = new PastProblemConcern(concern, problemEntry, problemStatusCode);
 
-		// // Add Identifiers
-		// for (IdentifierDt id : fhirCondition.getIdentifier()) {
-		// String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-		// retVal.addId(new Identificator(codeSystem, id.getValue()));
-		// }
-		//
 		return retVal;
 
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC PastProblemConcerns from the given
+	 * FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return list of eHC PastProblemConcerns </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.PastProblemConcern> getPastProblemConcernEntries(
+			Bundle bundle) {
+		final List<org.ehealth_connector.cda.ch.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.PastProblemConcern>();
+		for (final Entry entry : bundle.getEntry()) {
+			List<ExtensionDt> extensions = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPastProblemConcern);
+			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
+				Condition fhirCondition = (Condition) entry.getResource();
+				PastProblemConcern concern = getPastProblemConcern(fhirCondition);
+				for (ExtensionDt ext : extensions) {
+					if (ext.getValue() instanceof DateDt) {
+						concern.setStart(((DateDt) ext.getValue()).getValue());
+					}
+					if (ext.getValue() instanceof StringDt) {
+						concern.getMdht().getIds().clear();
+						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
+								((StringDt) ext.getValue()).toString()));
+					}
+				}
+				retVal.add(concern);
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets an eHC Author object containing the performer from the given FHIR
+	 * MedicationStatement object
+	 *
+	 * @param fhirMedicationStatement
+	 *            the FHIR bundle
+	 * @return eHC Author object containing the performer
+	 */
+	public org.ehealth_connector.common.Author getPerformer(
+			MedicationStatement fhirMedicationStatement) {
+		org.ehealth_connector.common.Author retVal = null;
+		// fhirMedicationStatement.getSupportingInformation();
+		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
+			List<ExtensionDt> extensions = ref
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPerformer);
+			if (!extensions.isEmpty() && (ref.getResource() instanceof Person)) {
+				retVal = FhirCommon.getAuthor((Person) ref.getResource());
+				if (extensions.get(0).getValue() instanceof TimeDt) {
+					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+					if (timeStamp.getValue().length() > 8)
+						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+
+					else
+						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+				}
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Gets the eHC PregnancyHistory object from the given FHIR
+	 * bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC PregnancyHistory object </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public org.ehealth_connector.cda.ch.PregnancyHistory getPregnancyHistory(Bundle bundle) {
+		PregnancyHistory retVal = null;
+		Date deliveryDate = null;
+		Identificator id = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPregnancyObservation)
+					.isEmpty() && (entry.getResource() instanceof Observation)) {
+				final Observation fhirObs = (Observation) entry.getResource();
+				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+				if ("11778-8".equals(fhirCode.getCode())) {
+					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
+					if (!fhirObs.getIdentifier().isEmpty()) {
+						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
+						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
+						id = new Identificator(codeSystem, idTemp.getValue());
+					}
+				}
+			}
+		}
+
+		if (deliveryDate != null) {
+			retVal = new PregnancyHistory(deliveryDate);
+			if (id != null)
+				retVal.setId(id);
+			// not yet implemented:
+			// retVal.setPerformer(perfomer);
+		}
+		return retVal;
 	}
 
 	private org.ehealth_connector.cda.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
@@ -1888,6 +1943,19 @@ public class FhirCdaChVacd {
 				fhirCode.getCode(), fhirCode.getDisplay()));
 
 		return retVal;
+	}
+
+	/**
+	 * Read the VacdDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the vacd document
+	 */
+	public VacdDocument readVacDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(VacdDocument.class, resourceString);
 	}
 
 }

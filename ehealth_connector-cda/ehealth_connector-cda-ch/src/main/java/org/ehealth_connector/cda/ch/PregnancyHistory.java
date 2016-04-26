@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.AbstractPregnancyHistory;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -57,6 +58,18 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 	}
 
 	/**
+	 * Set an Identificator for the pregnancy history
+	 *
+	 * @param id
+	 *            the Id to be used
+	 */
+	public void setId(Identificator id) {
+		getMdhtPregnancy().getIds().clear();
+		getMdhtPregnancy().getIds().add(id.getIi());
+
+	}
+
+	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.AbstractPregnancyHistory#setInternalId(java.lang.String)
@@ -66,5 +79,4 @@ public class PregnancyHistory extends AbstractPregnancyHistory {
 		final II ii = CdaUtil.createUniqueIiFromString(id);
 		getMdhtPregnancy().getIds().add(ii);
 	}
-
 }

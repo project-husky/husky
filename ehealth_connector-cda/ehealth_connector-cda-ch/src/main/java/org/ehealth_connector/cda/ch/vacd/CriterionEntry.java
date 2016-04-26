@@ -41,8 +41,8 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 		super(CHFactory.eINSTANCE.createCriterionEntry().init());
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().clear();
-		this.getMdht().getTemplateIds()
-				.add(new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category")
+		this.getMdht().getTemplateIds().add(
+				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category")
 						.getIi());
 	}
 
@@ -50,18 +50,22 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Instantiates a new criterion entry.
 	 *
 	 * @param criterion
-	 *          the criterion
+	 *            the criterion
 	 */
 	protected CriterionEntry(Criterion criterion) {
 		super((org.openhealthtools.mdht.uml.cda.ch.CriterionEntry) criterion,
 				"2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Category");
 	}
 
+	public void addId(Identificator id) {
+		// not yet suported by MDHT model
+	}
+
 	/**
 	 * Equals.
 	 *
 	 * @param obj
-	 *          the obj
+	 *            the obj
 	 * @return true, if successful
 	 */
 	@Override
@@ -118,7 +122,8 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -142,9 +147,9 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Sets the recommendation category.
 	 *
 	 * @param recCategory
-	 *          the recommendation category
+	 *            the recommendation category
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public void setRecCategory(CdaChVacdRecCategories recCategory, LanguageCode languageCode) {
 		if (recCategory != null) {
@@ -158,7 +163,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Sets the recommendation code.
 	 *
 	 * @param code
-	 *          the new recommendation category code
+	 *            the new recommendation category code
 	 */
 	public void setRecCategoryCode(Code code) {
 		getMdht().setCode(code.getCD());
@@ -168,7 +173,8 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference, # for local reference has to be included
+	 *            the new text reference, # for local reference has to be
+	 *            included
 	 */
 	@Override
 	public void setTextReference(String value) {

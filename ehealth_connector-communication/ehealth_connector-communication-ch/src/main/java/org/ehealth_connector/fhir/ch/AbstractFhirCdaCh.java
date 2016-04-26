@@ -57,6 +57,19 @@ public abstract class AbstractFhirCdaCh {
 	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
 			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
 
+	private Observation createComment(String comment) {
+
+		final Observation fhirObservation = new Observation();
+		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
+
+		final CodeableConceptDt fhirCode = new CodeableConceptDt();
+		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
+		fhirObservation.setCode(fhirCode);
+		fhirObservation.setComments(comment);
+
+		return fhirObservation;
+	}
+
 	/**
 	 * <div class="en">Gets a list of eHC Authors from the given FHIR bundle
 	 *
@@ -222,7 +235,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
+	};
 
 	/**
 	 * <div class="en"> Gets the document Id from the given FHIR bundle
@@ -242,7 +255,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * <div class="en"> Gets the document Set Id from the given FHIR bundle
@@ -302,7 +315,11 @@ public abstract class AbstractFhirCdaCh {
 			if (!extensions.isEmpty() && (entry.getResource() instanceof Person)) {
 				retVal = FhirCommon.getAuthor((Person) entry.getResource());
 				final TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
-				retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+				if (timeStamp.getValue().length() > 8)
+					retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+
+				else
+					retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
 			}
 		}
 		return retVal;
@@ -439,18 +456,5 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return false;
-	}
-
-	private Observation createComment(String comment) {
-
-		final Observation fhirObservation = new Observation();
-		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
-
-		final CodeableConceptDt fhirCode = new CodeableConceptDt();
-		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
-		fhirObservation.setCode(fhirCode);
-		fhirObservation.setComments(comment);
-
-		return fhirObservation;
 	}
 }

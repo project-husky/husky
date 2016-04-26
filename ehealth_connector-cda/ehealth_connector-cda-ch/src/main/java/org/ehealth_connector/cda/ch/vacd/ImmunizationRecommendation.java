@@ -83,21 +83,22 @@ public class ImmunizationRecommendation
 	 * Instantiates a new immunization recommendation.
 	 *
 	 * @param consumable
-	 *          recommended vaccine
+	 *            recommended vaccine
 	 * @param author
-	 *          author of this entry
+	 *            author of this entry
 	 * @param startOfPossibleAppliance
-	 *          start of applicance for this immunization
+	 *            start of applicance for this immunization
 	 * @param endOfPossibleAppliance
-	 *          end of applicance for this immunization
+	 *            end of applicance for this immunization
 	 * @param intendedOrProposed
-	 *          if immunization is intended and or proposed
+	 *            if immunization is intended and or proposed
 	 * @param shallNotBeAdministerd
-	 *          if immunization should not be administred
+	 *            if immunization should not be administred
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
-			Date endOfPossibleAppliance, boolean intendedOrProposed, boolean shallNotBeAdministerd) {
+			Date endOfPossibleAppliance, boolean intendedOrProposed,
+			boolean shallNotBeAdministerd) {
 
 		this();
 		if (intendedOrProposed) {
@@ -118,9 +119,9 @@ public class ImmunizationRecommendation
 	 * Instantiates a new immunization recommendation.
 	 *
 	 * @param immunizationRecommendation
-	 *          <br>
-	 *          <div class="de">Impfempfehlung</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de">Impfempfehlung</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public ImmunizationRecommendation(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation immunizationRecommendation) {
@@ -131,7 +132,7 @@ public class ImmunizationRecommendation
 	 * Adds the id.
 	 *
 	 * @param id
-	 *          the new id
+	 *            the new id
 	 */
 	public void addId(Identificator id) {
 		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
@@ -142,7 +143,7 @@ public class ImmunizationRecommendation
 	 * Adds the medication target entry.
 	 *
 	 * @param medicationTargetEntry
-	 *          the medication target entry
+	 *            the medication target entry
 	 */
 	public void addMedicationTargetEntry(MedicationTargetEntry medicationTargetEntry) {
 
@@ -267,8 +268,8 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * Gets the id of immunization of the software which registred it (see evadoc
-	 * 7.5.8.5/7.5.1.5)
+	 * Gets the id of immunization of the software which registred it (see
+	 * evadoc 7.5.8.5/7.5.1.5)
 	 *
 	 * @return the id
 	 */
@@ -287,9 +288,9 @@ public class ImmunizationRecommendation
 	 * (moodCode:INT).</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">true, if the immunization is intendet, but not
-	 *         administered, yet. false, otherwise</div><div class="de">true, wenn
-	 *         eine Impfung beabsichtigt, aber noch nicht erfolgt ist. Sonst:
-	 *         false</div>
+	 *         administered, yet. false, otherwise</div><div class="de">true,
+	 *         wenn eine Impfung beabsichtigt, aber noch nicht erfolgt ist.
+	 *         Sonst: false</div>
 	 */
 	public boolean getIntended() {
 		return getMdht().getMoodCode().equals(x_DocumentSubstanceMood.INT);
@@ -371,7 +372,8 @@ public class ImmunizationRecommendation
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="de">Zeitraum, in dem die Impfung verabreicht werden
-	 *         soll als String</div> <div class="fr"></div> <div class="it"></div>
+	 *         soll als String</div> <div class="fr"></div>
+	 *         <div class="it"></div>
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
@@ -379,9 +381,10 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
-	 * which the Act happened, can happen, is happening, is intended to happen, or
-	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency
+	 * under which the Act happened, can happen, is happening, is intended to
+	 * happen, or is requested/demanded to happen. Codesystem:
+	 * 2.16.840.1.113883.5.7
 	 *
 	 * @return priorityCode
 	 */
@@ -417,7 +420,8 @@ public class ImmunizationRecommendation
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -452,7 +456,7 @@ public class ImmunizationRecommendation
 	 * Sets the author.
 	 *
 	 * @param author
-	 *          the new author
+	 *            the new author
 	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		getMdht().getAuthors().clear();
@@ -465,7 +469,7 @@ public class ImmunizationRecommendation
 	 * document.
 	 *
 	 * @param specialCode
-	 *          expresses a special condition for this element
+	 *            expresses a special condition for this element
 	 */
 	public void setCode(MedicationsSpecialConditions specialCode) {
 		this.getMdht().setCode(specialCode.getCD());
@@ -474,7 +478,8 @@ public class ImmunizationRecommendation
 		ce.setNullFlavor(NullFlavor.UNK);
 		this.getMdht().setPriorityCode(ce);
 		this.getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+		// this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new
+		// Date()));
 		this.getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
@@ -484,7 +489,7 @@ public class ImmunizationRecommendation
 	 * Sets the comment entry.
 	 *
 	 * @param commentEntry
-	 *          the new comment entry
+	 *            the new comment entry
 	 */
 	public void setCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
@@ -502,7 +507,7 @@ public class ImmunizationRecommendation
 	 * Sets a comment text.
 	 *
 	 * @param text
-	 *          the text
+	 *            the text
 	 */
 	public void setCommentText(String text) {
 		final SectionAnnotationCommentEntry commentEntry = new SectionAnnotationCommentEntry();
@@ -514,7 +519,7 @@ public class ImmunizationRecommendation
 	 * Sets the consumable.
 	 *
 	 * @param consumable
-	 *          the new consumable
+	 *            the new consumable
 	 */
 	public void setConsumable(Consumable consumable) {
 		getMdht().setConsumable(consumable.getMdht());
@@ -524,7 +529,7 @@ public class ImmunizationRecommendation
 	 * Sets the criterion entry.
 	 *
 	 * @param citerionEntry
-	 *          the new criterion entry
+	 *            the new criterion entry
 	 */
 	public void setCriterionEntry(CriterionEntry citerionEntry) {
 		this.getMdht().getPreconditions().clear();
@@ -538,7 +543,7 @@ public class ImmunizationRecommendation
 	 * Sets the dosage.
 	 *
 	 * @param doseQuantity
-	 *          the new dosage (use null, if not known)
+	 *            the new dosage (use null, if not known)
 	 */
 	public void setDosage(Double doseQuantity) {
 		if (doseQuantity == null) {
@@ -555,7 +560,7 @@ public class ImmunizationRecommendation
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *          the new external document entry
+	 *            the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		getMdht().getReferences().clear();
@@ -568,7 +573,7 @@ public class ImmunizationRecommendation
 	 * Sets the id of immunization from the software which created it.
 	 *
 	 * @param id
-	 *          the new id
+	 *            the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -587,7 +592,7 @@ public class ImmunizationRecommendation
 	 * Sets the possible appliance.
 	 *
 	 * @param startOfPossibleAppliance
-	 *          the new possible appliance date YYYYmmdd resolution
+	 *            the new possible appliance date YYYYmmdd resolution
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
@@ -597,18 +602,18 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht werden
-	 * soll.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Setzt, den Zeitraum, in dem die Impfung verabreicht
+	 * werden soll.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param startOfPossibleAppliance
-	 *          <br>
-	 *          <div class="de">Startpunkt des Zeitraumes, wann die Impfung
-	 *          verabreicht werden soll.</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de">Startpunkt des Zeitraumes, wann die Impfung
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param endOfPossibleAppliance
-	 *          <div class="de">Endpunkt des Zeitraumes, wann die Impfung
-	 *          verabreicht werden soll.</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <div class="de">Endpunkt des Zeitraumes, wann die Impfung
+	 *            verabreicht werden soll.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
@@ -617,12 +622,13 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * A set of codes (e.g., for routine, emergency), specifying the urgency under
-	 * which the Act happened, can happen, is happening, is intended to happen, or
-	 * is requested/demanded to happen. Codesystem: 2.16.840.1.113883.5.7
+	 * A set of codes (e.g., for routine, emergency), specifying the urgency
+	 * under which the Act happened, can happen, is happening, is intended to
+	 * happen, or is requested/demanded to happen. Codesystem:
+	 * 2.16.840.1.113883.5.7
 	 *
 	 * @param priorityCode
-	 *          the priority code
+	 *            the priority code
 	 */
 	public void setPriorityCode(Code priorityCode) {
 		getMdht().setPriorityCode(priorityCode.getCE());
@@ -643,7 +649,7 @@ public class ImmunizationRecommendation
 	 * 'routeCode nullFlavor="UNK"' is written to CDA document.
 	 *
 	 * @param routeCode
-	 *          the new route of administration
+	 *            the new route of administration
 	 */
 	public void setRouteOfAdministration(RouteOfAdministration routeCode) {
 		if (routeCode == null) {
@@ -656,16 +662,16 @@ public class ImmunizationRecommendation
 	}
 
 	/**
-	 * <div class="en">Sets the information, wheater an immunization shall not be
-	 * administered</div> <div class="de">Gibt an, ob eine Impfung nicht
+	 * <div class="en">Sets the information, wheater an immunization shall not
+	 * be administered</div> <div class="de">Gibt an, ob eine Impfung nicht
 	 * verabreicht werden soll.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param shallNotBeAdministerd
-	 *          <div class="en">true, if the immunization shall not be
-	 *          administered. false, otherwise.</div> <div class="de">true, wenn
-	 *          die Impfung nicht verabreicht werden soll, sonst false</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">true, if the immunization shall not be
+	 *            administered. false, otherwise.</div> <div class="de">true,
+	 *            wenn die Impfung nicht verabreicht werden soll, sonst
+	 *            false</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
 		if (shallNotBeAdministerd) {
@@ -679,7 +685,7 @@ public class ImmunizationRecommendation
 	 * Creates the reference to the section.
 	 *
 	 * @param prefix
-	 *          the prefix
+	 *            the prefix
 	 */
 	@Override
 	public void setTextReference(String prefix) {
