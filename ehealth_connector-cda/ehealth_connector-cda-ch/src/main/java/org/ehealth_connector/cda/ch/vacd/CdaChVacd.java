@@ -244,7 +244,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			aps.createStrucDocText("Keine Angaben");
 			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -285,7 +285,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			ars.createStrucDocText("Keine Angaben");
 			allergyConcern.copyMdhtAllergyConcern().getEntryRelationships().get(0).getObservation()
-			.setText(Util.createEd(""));
+					.setText(Util.createEd(""));
 		}
 	}
 
@@ -329,7 +329,6 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            the comment
 	 */
 	public void addComment(String comment) {
-
 
 		// find or create (and add) the Section
 		Section rs = findRemarksSection();
@@ -428,7 +427,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 			spa = LABFactory.eINSTANCE.createSpecimenAct().init();
 
 			// Fixed code for LaboratorySpecialty
-			final Code labSpec = new Code("2.16.840.1.113883.6.1", "18727-8", "LOINC", "SEROLOGY STUDIES");
+			final Code labSpec = new Code("2.16.840.1.113883.6.1", "18727-8", "LOINC",
+					"SEROLOGY STUDIES");
 			lss.setCode(labSpec.getCE());
 			lss.getEntries().add(lrdpe);
 			lrdpe.setAct(spa);
@@ -458,9 +458,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// Set the Type codes
 		lbo.getComponents().get(lbo.getComponents().size() - 1)
-		.setTypeCode(ActRelationshipHasComponent.COMP);
+				.setTypeCode(ActRelationshipHasComponent.COMP);
 		spa.getEntryRelationships().get(spa.getEntryRelationships().size() - 1)
-		.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+				.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		// Update the MDHT Object content references to CDA level 1 text
 		// (if necessary)
@@ -524,7 +524,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		} else {
 			hopis.createStrucDocText("");
 			pastProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -1190,14 +1190,14 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	private void initVacd() {
 		CHPackage.eINSTANCE.eClass();
 		// fix missing extension values in MDHT model.
-		for (final II templateId : getDoc().getTemplateIds()) {
-			if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH-VACD");
-			}
-			if (AbstractCdaCh.OID_MAIN.equals(templateId.getRoot())) {
-				templateId.setExtension("CDA-CH");
-			}
-		}
+		// for (final II templateId : getDoc().getTemplateIds()) {
+		// if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
+		// templateId.setExtension("CDA-CH-VACD");
+		// }
+		// if (AbstractCdaCh.OID_MAIN.equals(templateId.getRoot())) {
+		// templateId.setExtension("CDA-CH");
+		// }
+		// }
 		setTitle(EVACDOC_TITLE);
 		fixGeneralHeaderConstraintTemplateId();
 		new Query(getDoc());
