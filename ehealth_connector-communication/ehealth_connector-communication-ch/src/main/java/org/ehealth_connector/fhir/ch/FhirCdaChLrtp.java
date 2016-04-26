@@ -47,8 +47,10 @@ import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.fhir.FhirCommon;
+import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.ExtensionDt;
@@ -75,6 +77,7 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.dstu2.resource.Practitioner;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
+import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrtp extends AbstractFhirCdaCh {
@@ -499,7 +502,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				for (ResourceReferenceDt fPerfRef : fObs.getPerformer()) {
 					Practitioner fPerf = (Practitioner) fPerfRef.getResource();
 					// Id
-					Author author = new Author();
+					Author author = new Author("");
 					author.addId(FhirCommon
 							.fhirIdentifierToEhcIdentificator(fPerf.getIdentifierFirstRep()));
 					// Time
@@ -662,6 +665,18 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				if (statusCode != null) {
 					lbo.setStatusCode(StatusCode.getEnum(statusCode));
 				}
+				// EffectiveTime
+				final DateTimeDt fTime = (DateTimeDt) labObsList.getEffective();
+				lbo.setEffectiveTime(fTime.getValue());
+
+				// Authors
+				for (ResourceReferenceDt perfRef : labObsList.getPerformer()) {
+					Practitioner p = (Practitioner) perfRef.getResource();
+					Author author = new Author("");
+					author.addId(
+							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+					lbo.addAuthor(author);
+				}
 
 				// Add all LaboratoryObservations
 				for (final Related relatedObs : labObsList.getRelated()) {
@@ -681,50 +696,83 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 		fhirObservation.getCode().getCodingFirstRep();
 		retVal.setCode(FhirCommon.fhirCodeToEhcCode(fhirObservation.getCode()));
-		retVal.setEffectiveTime(fhirObservation.getIssued());
+		if (fhirObservation.getIssued() != null) {
+			retVal.setEffectiveTime(fhirObservation.getIssued());
+		}
 		if (!fhirObservation.getPerformer().isEmpty()) {
 			final ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
 			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
 					fhirObservation.getIssued());
 		}
-
+		Value v = null;
+		// type PQ
 		if (fhirObservation.getValue() instanceof QuantityDt) {
-			// type PQ
 			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
-			final Value v = new Value(fhirQuantity.getValue().toString(),
-					Ucum.AHGEquivalentsPerMilliLiter);
+			v = new Value(fhirQuantity.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
 
-			// fix for the bug(?), which ommits the unit when it´s set to "1"
+			// fix for the bug(?), which ommits the unit when it´s set to
+			// "1"
+			// Seems to be a bug in the MDHT. Ucum Unit can´t be set to "1".
+			// unit = fhirQuantity.getUnit().replace("#", "");
 			String unit;
 			if (fhirQuantity.getUnit().startsWith("#")) {
-				// Seems to be a bug in the MDHT. Ucum Unit can´t be set to "1".
-				// unit = fhirQuantity.getUnit().replace("#", "");
 				unit = fhirQuantity.getUnit();
 			} else {
 				unit = fhirQuantity.getUnit();
 			}
 			v.setUcumUnit(unit);
-			retVal.addValue(v);
-
-		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
-			// type CD
+		}
+		// type String
+		if (fhirObservation.getValue() instanceof StringDt) {
+			final StringDt fhirString = (StringDt) fhirObservation.getValue();
+			// type BL
+			if (fhirString.getValueAsString().equalsIgnoreCase("false")
+					|| fhirString.getValueAsString().equalsIgnoreCase("true")
+					|| fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+				if (!fhirObservation.getDataAbsentReason().isEmpty()) {
+					BL bl = DatatypesFactory.eINSTANCE.createBL();
+					bl.setNullFlavor(NullFlavor.NA);
+					v = new Value(bl);
+				} else {
+					if (fhirString.getValueAsString().equalsIgnoreCase("true")) {
+						v = new Value(true);
+					}
+					if (fhirString.getValueAsString().equalsIgnoreCase("false")) {
+						v = new Value(false);
+					}
+					if (fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+						BL bl = DatatypesFactory.eINSTANCE.createBL();
+						bl.setNullFlavor(NullFlavor.NA);
+						v = new Value(bl);
+					}
+				}
+			}
+		}
+		// type CD
+		if (fhirObservation.getValue() instanceof CodeableConceptDt) {
 			final CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
 					.getCodingFirstRep();
 			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
 					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
-		} else if (fhirObservation.getValue() instanceof RatioDt) {
+		}
+		if (fhirObservation.getValue() instanceof RatioDt) {
 			// type RTO not yet implemented
 		}
+		retVal.addValue(v);
 
 		// ReferenceRange
-		if (fhirObservation.getReferenceRangeFirstRep() != null
-				&& !fhirObservation.getReferenceRange().isEmpty()) {
+		if (!fhirObservation.getReferenceRange().isEmpty()) {
 			org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
-			Value v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+			// Value
+			v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
 					fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
 			rr.setValue(v);
-			rr.setInterpretationCode(ObservationInterpretation.getEnum(fhirObservation
-					.getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode()));
+			// Interpretation;
+			ObservationInterpretation obsInt = ObservationInterpretation.getEnum(fhirObservation
+					.getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
+			if (obsInt != null) {
+				rr.setInterpretationCode(obsInt);
+			}
 			retVal.setReferenceRange(rr);
 		}
 
@@ -736,6 +784,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
 			}
+			retVal.addInterpretationCode(
+					new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 		}
 
 		if (fhirObservation.getComments() != null) {
@@ -848,7 +898,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 		// Method Code Translation
 		if (fhirObs.getCode().getCoding().size() > 1) {
-			Code translation = new Code(fhirObs.getCode().getCoding().get(1).getSystem(), fhirObs.getCode().getCoding().get(1).getCode());
+			Code translation = new Code(fhirObs.getCode().getCoding().get(1).getSystem(),
+					fhirObs.getCode().getCoding().get(1).getCode());
 			vso.setMethodCodeTranslation(translation);
 		}
 
@@ -889,7 +940,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				// Authors
 				for (ResourceReferenceDt perfRef : fVso.getPerformer()) {
 					Practitioner p = (Practitioner) perfRef.getResource();
-					Author author = new Author();
+					Author author = new Author("");
 					author.addId(
 							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
 					vso.addAuthor(author);

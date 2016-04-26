@@ -569,12 +569,18 @@ public class FhirCommon {
 		CodeableConceptDt cc = new CodeableConceptDt();
 		CodingDt fCode;
 
-		fCode = new CodingDt(addUriPrefix(code.getCodeSystem()), code.getCode());
+		fCode = new CodingDt();
+		fCode.setSystem(addUriPrefix(code.getCodeSystem()));
+		fCode.setCode(code.getCode());
+		fCode.setDisplay(code.getDisplayName());
 		cc.addCoding(fCode);
 
 		for (Code translation : code.getTranslations()) {
-			cc.addCoding(
-					new CodingDt(addUriPrefix(translation.getCodeSystem()), translation.getCode()));
+			CodingDt cdt = new CodingDt();
+			cdt.setSystem(addUriPrefix(translation.getCodeSystem()));
+			cdt.setCode(translation.getCode());
+			cdt.setDisplay(translation.getDisplayName());
+			cc.addCoding(cdt);
 		}
 
 		return cc;

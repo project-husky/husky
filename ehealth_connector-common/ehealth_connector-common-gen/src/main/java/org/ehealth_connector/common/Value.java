@@ -118,6 +118,23 @@ public class Value {
 	 *            <div class="de"> code</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
+	public Value(BL bl) {
+		mValue = bl;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with a given boolean
+	 * Object.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
+	 * diesem Konstruktor wird ein Value Objekt auf Basis eines Java boolean
+	 * initialisiert (CDA Datentyp: BL)</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
 	public Value(boolean code) {
 		final BL bl = DatatypesFactory.eINSTANCE.createBL();
 		bl.setValue(code);
@@ -499,10 +516,6 @@ public class Value {
 		return (mValue instanceof PQ);
 	}
 
-	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
-	}
-
 	/**
 	 * Checks if the Value object is a RTO (A quantity constructed as the
 	 * quotient of a numerator quantity divided by a denominator quantity.).
@@ -518,19 +531,9 @@ public class Value {
 		code.setOriginalTextReference(originalText);
 	}
 
-	private void setPqValue(String value) {
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
 	public void setUcumUnit(String unit) {
 		final PQ pq = (PQ) mValue;
 		pq.setUnit(unit);
-	}
-
-	private void setUcumUnit(Ucum unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit.getCodeValue());
 	}
 
 	/**
@@ -544,6 +547,20 @@ public class Value {
 	public String toString() {
 		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit()
 				+ "]";
+	}
+
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
+	}
+
+	private void setPqValue(String value) {
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	private void setUcumUnit(Ucum unit) {
+		final PQ pq = (PQ) mValue;
+		pq.setUnit(unit.getCodeValue());
 	}
 
 }

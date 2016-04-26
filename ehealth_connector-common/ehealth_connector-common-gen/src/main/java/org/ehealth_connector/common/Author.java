@@ -177,6 +177,26 @@ public class Author {
 	}
 
 	/**
+	 * Instantiates a new author.
+	 */
+	public Author(String functionCode) {
+		mAuthor = CDAFactory.eINSTANCE.createAuthor();
+		mPerson = CDAFactory.eINSTANCE.createPerson();
+		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+
+		mAsAuthor.setAssignedPerson(mPerson);
+		mAuthor.setAssignedAuthor(mAsAuthor);
+
+		// add functionCode and time
+		if (functionCode != null && !functionCode.equals("")) {
+			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
+		}
+		mAuthor.setTime(DateUtil.nowAsTS());
+
+		setTime(null);
+	}
+
+	/**
 	 * Weist dem Autor eine Postadresse zu.
 	 *
 	 * @param address
@@ -638,7 +658,11 @@ public class Author {
 	 *            the functionCode
 	 */
 	public void setFunctionCode(Code code) {
-		mAuthor.setFunctionCode(code.getCE());
+		if (code != null) {
+			mAuthor.setFunctionCode(code.getCE());
+		} else {
+			CE ce = mAuthor.getFunctionCode();
+		}
 	}
 
 	/**

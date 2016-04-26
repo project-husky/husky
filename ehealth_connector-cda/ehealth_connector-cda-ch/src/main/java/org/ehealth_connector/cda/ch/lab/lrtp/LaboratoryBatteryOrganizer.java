@@ -20,7 +20,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
  * The Class LaboratoryBatteryOrganizer.
@@ -71,6 +73,18 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	}
 
 	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
+	}
+
+	/**
 	 * Adds the laboratory observation.
 	 *
 	 * @param observation
@@ -82,6 +96,20 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
 
+	}
+
+	/**
+	 * Gets the authors.
+	 *
+	 * @return the authors
+	 */
+	public List<Author> getAuthors() {
+		final List<Author> al = new ArrayList<Author>();
+		for (final org.openhealthtools.mdht.uml.cda.Author mdht : getMdht().getAuthors()) {
+			final Author ehc = new Author(mdht);
+			al.add(ehc);
+		}
+		return al;
 	}
 
 	/**
