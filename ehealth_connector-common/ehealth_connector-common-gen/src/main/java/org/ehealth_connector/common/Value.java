@@ -26,6 +26,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
+import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -208,6 +209,17 @@ public class Value {
 
 	public Value(ED ed) {
 		mValue = ed;
+	}
+
+	/**
+	 * Erstellt einen neuen Wert (INT).
+	 *
+	 * @param value
+	 *            Der eigentliche Wert
+	 */
+	public Value(int value) {
+		this(DatatypesFactory.eINSTANCE.createINT());
+		setIntValue(value);
 	}
 
 	/**
@@ -551,6 +563,11 @@ public class Value {
 
 	private boolean isPhysicalQuantityInterval() {
 		return (mValue instanceof IVL_PQ);
+	}
+
+	private void setIntValue(int value) {
+		INT i = (INT) mValue;
+		i.setValue(value);
 	}
 
 	private void setPqValue(String value) {

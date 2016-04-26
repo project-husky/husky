@@ -50,6 +50,7 @@ import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
@@ -730,9 +731,20 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 					}
 				}
 			}
+			if (fhirString.getValue().startsWith("INT:")) {
+				if (fhirString.getValue().startsWith("INT:NA")) {
+					INT intValue = DatatypesFactory.eINSTANCE.createINT();
+					intValue.setNullFlavor(NullFlavor.NA);
+					v = new Value(intValue);
+				} else {
+					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
+				}
+			}
 		}
 		// type CD
-		if (fhirObservation.getValue() instanceof CodeableConceptDt) {
+		if (fhirObservation.getValue() instanceof CodeableConceptDt)
+
+		{
 			final CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
 					.getCodingFirstRep();
 			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
@@ -741,7 +753,9 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		if (fhirObservation.getValue() instanceof RatioDt) {
 			// type RTO not yet implemented
 		}
-		retVal.addValue(v);
+		if (v != null) {
+			retVal.addValue(v);
+		}
 
 		// ReferenceRange
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
@@ -766,9 +780,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				retVal.addInterpretationCode(new Code(
 						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
+			} else {
+				retVal.addInterpretationCode(
+						new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 			}
-			retVal.addInterpretationCode(
-					new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 		}
 
 		if (fhirObservation.getComments() != null) {
@@ -874,9 +889,24 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	private VitalSignsObservation getVitalSignObservation(Observation fhirObs) {
 		VitalSignsObservation vso = new VitalSignsObservation();
 		// Value
-		QuantityDt fValue = (QuantityDt) fhirObs.getValue();
-		Value v = new Value(fValue.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
-		v.setUcumUnit(fValue.getUnit());
+		Value v = null;
+		if (fhirObs.getValue() instanceof QuantityDt) {
+			QuantityDt fValue = (QuantityDt) fhirObs.getValue();
+			v = new Value(fValue.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
+			v.setUcumUnit(fValue.getUnit());
+		}
+		if (fhirObs.getValue() instanceof StringDt) {
+			StringDt fValue = (StringDt) fhirObs.getValue();
+			if (fValue.getValue().startsWith("INT:")) {
+				if (fValue.getValue().startsWith("INT:NA")) {
+					INT intValue = DatatypesFactory.eINSTANCE.createINT();
+					intValue.setNullFlavor(NullFlavor.NA);
+					v = new Value(intValue);
+				} else {
+					v = new Value(Integer.parseInt(fValue.getValue()));
+				}
+			}
+		}
 		vso.setValue(v);
 
 		// Code
@@ -884,6 +914,11 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				.getEnum(fhirObs.getCode().getCodingFirstRep().getCode());
 		if (codeEnum != null) {
 			vso.setCode(codeEnum);
+		}
+
+		// Ids
+		for (IdentifierDt fId : fhirObs.getIdentifier()) {
+			vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
 		}
 
 		// ObservationInterpretation

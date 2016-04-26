@@ -93,6 +93,16 @@ public class VitalSignsObservation extends AbstractVitalSignObservation {
 	}
 
 	/**
+	 * Adds the id.
+	 *
+	 * @param id
+	 *            the id
+	 */
+	public void addId(Identificator id) {
+		getVitalSignObservation().getIds().add(id.getIi());
+	}
+
+	/**
 	 * Gets the code enum.
 	 *
 	 * @return the code enum

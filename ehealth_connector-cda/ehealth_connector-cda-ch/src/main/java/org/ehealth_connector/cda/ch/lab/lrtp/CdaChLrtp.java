@@ -59,7 +59,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * SOAS, damit diese bei der Organzuteilung berücksichtigt werden können.</div>
  */
 public class CdaChLrtp
-extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
 
 	/**
 	 * Standard constructor.
@@ -360,11 +360,9 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> 
 			}
 
 			// Addr MSK
-			if ((originalPr != null) && !originalPr.getAddrs().isEmpty()) {
-				final AD ad = DatatypesFactory.eINSTANCE.createAD();
-				ad.setNullFlavor(NullFlavor.MSK);
-				processedPr.getAddrs().add(ad);
-			}
+			final AD ad = DatatypesFactory.eINSTANCE.createAD();
+			ad.setNullFlavor(NullFlavor.MSK);
+			processedPr.getAddrs().add(ad);
 
 			// Telecom (MSK)
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
@@ -428,7 +426,8 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> 
 		final List<ReportScopes> rl = new ArrayList<ReportScopes>();
 		for (final DocumentationOf dof : getMdht().getDocumentationOfs()) {
 			if ((dof.getServiceEvent() != null) && (dof.getServiceEvent().getCode() != null)) {
-				final ReportScopes rs = ReportScopes.getEnum(dof.getServiceEvent().getCode().getCode());
+				final ReportScopes rs = ReportScopes
+						.getEnum(dof.getServiceEvent().getCode().getCode());
 				if (rs != null) {
 					rl.add(rs);
 				}
@@ -495,7 +494,8 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> 
 	 * @return the narrative Text. Returns null, if this text does not exist.
 	 */
 	public String getNarrativeTextSectionStudiesSummarySection() {
-		if ((getStudiesSummarySection() != null) && (getStudiesSummarySection().getText() != null)) {
+		if ((getStudiesSummarySection() != null)
+				&& (getStudiesSummarySection().getText() != null)) {
 			return getStudiesSummarySection().getText();
 		}
 		return null;
