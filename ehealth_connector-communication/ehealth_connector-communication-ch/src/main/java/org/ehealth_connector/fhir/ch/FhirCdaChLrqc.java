@@ -69,7 +69,6 @@ import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.dstu2.resource.Person;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
-import ca.uhn.fhir.model.primitive.XhtmlDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrqc extends AbstractFhirCdaCh {
@@ -380,12 +379,14 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		doc = new CdaChLrqc(getDocLanguage(bundle), xsl, css);
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		// RecordTarget
-		doc.setPatient(FhirCommon.getPatient(bundle));
+		doc.setRecordTarget(getPatientLrqc(bundle));
 		// ReferralOrderingPhysician
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 		// Authors
 		for (final Author author : getAuthors(bundle)) {
 			author.setTime(new Date());
+			author.setFunctionCode(new Code("urn:oid:2.16.840.1.113883.2.9.6.2.7", "3212",
+					"Medical and pathology laboratory technicians"));
 			doc.addAuthor(author);
 		}
 		// LegalAuthenticator
@@ -394,7 +395,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			doc.setLegalAuthenticator(legalAuth);
 		}
 		// Custodian
-		doc.setEmtpyCustodian();
+		doc.setCustodian(getCustodian(bundle));
 		// IntendedRecipient
 		final IntendedRecipient ir = getIntendedRecipient(bundle);
 		doc.addIntendedRecipient(ir);
@@ -429,6 +430,48 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 	}
 
 	/**
+	 * <div class="en">Gets the eHC Custodian from the given FHIR bundle
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 */
+	@Override
+	public org.ehealth_connector.common.Organization getCustodian(Bundle bundle) {
+		org.ehealth_connector.common.Organization retVal = null;
+		for (final Entry entry : bundle.getEntry()) {
+			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCustodian).isEmpty()
+					&& (entry.getResource() instanceof Organization)) {
+				retVal = FhirCommon.getOrganization((Organization) entry.getResource());
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * <div class="en"> Gets an eHC Patient object from the given FHIR bundle.
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC Patient object </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public Identificator getPatientLrqc(Bundle bundle) {
+		Patient fhirPatient = null;
+
+		for (final Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof Patient)
+				fhirPatient = (Patient) entry.getResource();
+		}
+		// Get Identifier
+		for (final IdentifierDt id : fhirPatient.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			return new Identificator(codeSystem, id.getValue());
+		}
+		return null;
+	}
+
+	/**
 	 * Read the LrqcDocument object from the FHIR bundle file
 	 *
 	 * @param fileName
@@ -439,13 +482,6 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(LrqcDocument.class, resourceString);
-	}
-
-	private String formatDiv(XhtmlDt text) {
-		String retVal = text.getValueAsString();
-		retVal = retVal.replace("</div>", "");
-		retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
-		return retVal;
 	}
 
 	/**
@@ -698,7 +734,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 						new LaboratoryReportDataProcessingEntry(spa));
 
 				// NarrativeText
-				lss.setText(formatDiv(obs.getText().getDiv()));
+				lss.setText(FhirCommon.formatDiv(obs.getText().getDiv()));
 				lssList.add(lss);
 			}
 		}

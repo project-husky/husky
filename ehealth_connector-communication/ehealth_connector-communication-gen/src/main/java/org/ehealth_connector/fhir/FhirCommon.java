@@ -58,6 +58,7 @@ import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 import ca.uhn.fhir.model.primitive.BoundCodeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
+import ca.uhn.fhir.model.primitive.XhtmlDt;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -136,6 +137,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static String urnUseAsAuthorLrqc = "http://www.ehealth-connector.org/fhir-extensions/useAsAuthorLrqc";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsBloodGroup = "http://www.ehealth-connector.org/fhir-extensions/useAsBloodGroup";
 
 	/**
@@ -190,12 +197,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
-	public static final String urnUseAsConfidentiality = "http://www.ehealth-connector.org/fhir-extensions/useAsConfidentiality";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsConfidentiality = "http://www.ehealth-connector.org/fhir-extensions/useAsConfidentiality";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
@@ -665,6 +672,13 @@ public class FhirCommon {
 		return name;
 	}
 
+	public static String formatDiv(XhtmlDt text) {
+		String retVal = text.getValueAsString();
+		retVal = retVal.replace("</div>", "");
+		retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
+		return retVal;
+	}
+
 	/**
 	 * <div class="en">Gets an eHC Author from FHIR base resource.
 	 *
@@ -727,6 +741,12 @@ public class FhirCommon {
 
 		// Add Telecoms
 		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
+
+		// Add OrganizationName
+		if (fhirObject.getText().getDiv() != null) {
+			retVal.setOrganization(new org.ehealth_connector.common.Organization(
+					formatDiv(fhirObject.getText().getDiv())));
+		}
 
 		return retVal;
 	}
@@ -1179,9 +1199,15 @@ public class FhirCommon {
 			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
 				usage = AddressUse.PRIVATE;
 			}
-			final Address eHCAddr = new Address(addr.getLineFirstRep().toString(),
-					addr.getPostalCode(), addr.getCity(), usage);
+			final Address eHCAddr = new Address();
+			eHCAddr.setAddressline1(addr.getLineFirstRep().toString());
+			if (addr.getLine().size() > 1) {
+				eHCAddr.setAddressline2(addr.getLine().get(1).getValueAsString());
+			}
+			eHCAddr.setCity(addr.getCity());
+			eHCAddr.setZip(addr.getPostalCode());
 			eHCAddr.setCountry(addr.getCountry());
+			eHCAddr.setUsage(usage);
 			retVal.addAddress(eHCAddr);
 		}
 
@@ -1213,24 +1239,38 @@ public class FhirCommon {
 	 */
 	public static org.ehealth_connector.common.Patient getPatient(Bundle bundle) {
 		Patient fhirPatient = null;
-		org.ehealth_connector.common.Patient retVal = null;
+		org.ehealth_connector.common.Patient retVal = new org.ehealth_connector.common.Patient();
 		for (final Entry entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof Patient)
 				fhirPatient = (Patient) entry.getResource();
 		}
-		final Name patientName = new Name(fhirPatient.getNameFirstRep().getGivenAsSingleString(),
-				fhirPatient.getNameFirstRep().getFamilyAsSingleString());
-		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
-		if (fhirPatient.getGenderElement().getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
-			gender = AdministrativeGender.FEMALE;
-		} else if (fhirPatient.getGenderElement()
-				.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
-			gender = AdministrativeGender.MALE;
+		// Name
+		if (!fhirPatient.getName().isEmpty()) {
+			final Name patientName = new Name(
+					fhirPatient.getNameFirstRep().getGivenAsSingleString(),
+					fhirPatient.getNameFirstRep().getFamilyAsSingleString());
+			retVal.addName(patientName);
+		}
+		// Gender
+		if (fhirPatient.getGender() != null && !fhirPatient.getGender().isEmpty()) {
+			AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
+			if (fhirPatient.getGenderElement()
+					.getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
+				gender = AdministrativeGender.FEMALE;
+			} else if (fhirPatient.getGenderElement()
+					.getValueAsEnum() == AdministrativeGenderEnum.MALE) {
+				gender = AdministrativeGender.MALE;
+			}
+		}
+		// Birthdate
+		if (fhirPatient.getBirthDate() != null) {
+			retVal.setBirthday(fhirPatient.getBirthDate());
 		}
 
 		// Create eHC Patient
-		retVal = new org.ehealth_connector.common.Patient(patientName, gender,
-				fhirPatient.getBirthDate());
+		// retVal = new org.ehealth_connector.common.Patient(patientName,
+		// gender,
+		// fhirPatient.getBirthDate());
 
 		// Add Identifiers
 		for (final IdentifierDt id : fhirPatient.getIdentifier()) {

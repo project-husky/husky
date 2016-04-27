@@ -58,7 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * auf HL7 CDA. </div>
  */
 public class CdaChLrqc
-extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
 
 	/** Root ID for the ZSR ID. */
 	public static final String ZSR_ID_ROOT = "2.16.756.5.30.1.123.100.2.1.1";
@@ -242,6 +242,18 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> 
 	}
 
 	/**
+	 * Adds the QualityControlCenter ('Qualtitätskontrollzentrum' QKZ).
+	 *
+	 * @param intendedRecipient
+	 *            the intendedRecipient
+	 */
+	public void addIntendedRecipient(IntendedRecipient intendedRecipient) {
+		getMdht().getInformationRecipients().add(intendedRecipient.getMdhtIntendedRecipient());
+		final int nb = getMdht().getInformationRecipients().size() - 1;
+		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
+	}
+
+	/**
 	 * Adds the QualityControlCenter ('Qualtitätskontrollzentrum' QKZ). Will set
 	 * the following elements:
 	 * ClinicalDocument/informationRecipient/intendedRecipient/addr =
@@ -262,7 +274,7 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> 
 
 		// ID
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().getIds()
-		.add(Identificator.convertToIdentificator(qkz.getCode()).getIi());
+				.add(Identificator.convertToIdentificator(qkz.getCode()).getIi());
 		// Name
 		final PN pn = DatatypesFactory.eINSTANCE.createPN();
 		pn.addText(qkz.getDisplayName());
@@ -333,9 +345,9 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> 
 	}
 
 	/**
-	 * Gets the intended recipients lrqc.
+	 * Gets the intended recipients for LRQC.
 	 *
-	 * @return the intended recipients lrqc
+	 * @return the intended recipients for LRQC
 	 */
 	public List<IntendedRecipient> getIntendedRecipientsLrqc() {
 		final List<IntendedRecipient> il = new ArrayList<IntendedRecipient>();
@@ -429,7 +441,8 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> 
 	 */
 	public SpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
-				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null)
+				&& (getLaboratorySpecialtySection()
+						.getLaboratoryReportDataProcessingEntry() != null)
 				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct() != null)) {
 			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
