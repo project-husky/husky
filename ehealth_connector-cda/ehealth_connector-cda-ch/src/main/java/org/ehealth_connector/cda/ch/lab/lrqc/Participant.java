@@ -26,6 +26,7 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
 
 /**
  * The Class Participant. <div class="en">Physicians performing examinations in
@@ -41,6 +42,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	public Participant() {
 		super(CDAFactory.eINSTANCE.createParticipant1());
 		getMdht().setAssociatedEntity(CDAFactory.eINSTANCE.createAssociatedEntity());
+		getMdht().getAssociatedEntity().setClassCode(RoleClassAssociative.PROV);
 	}
 
 	/**
@@ -171,6 +173,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 *            the AssociatedEntity
 	 */
 	public void setAssociatedEntity(AssociatedEntity entity) {
+		entity.getMdht().setClassCode(RoleClassAssociative.PROV);
 		getMdht().setAssociatedEntity(entity.copy());
 	}
 }

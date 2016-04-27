@@ -412,6 +412,12 @@ public class FhirCommon {
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
+	public static final String urnUseAsNonLivingSubject = "http://www.ehealth-connector.org/fhir-extensions/useAsNonLivingSubject";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
 	public static final String urnUseAsNotificationOrganizer = "http://www.ehealth-connector.org/fhir-extensions/useAsNotificationOrganizer";
 
 	/**
@@ -612,16 +618,18 @@ public class FhirCommon {
 		}
 		if (fAddr.getUse() != null) {
 			final BoundCodeDt<AddressUseEnum> useElement = fAddr.getUseElement();
-			if (useElement.equals(AddressUseEnum.HOME)) {
+			if (useElement.getValue().equals(AddressUseEnum.HOME.getCode())) {
 				addr.getMdhtAdress().getUses().add(PostalAddressUse.HP);
 			}
-			if (useElement.equals(AddressUseEnum.OLD___INCORRECT)) {
+			if (useElement.getValue().equals(AddressUseEnum.OLD___INCORRECT.getCode())) {
 				addr.getMdhtAdress().getUses().add(PostalAddressUse.BAD);
 			}
-			if (useElement.equals(AddressUseEnum.TEMPORARY)) {
-				addr.getMdhtAdress().getUses().add(PostalAddressUse.TMP);
+			// We use TMP for PUB, because it is required in LRQC but not
+			// available in FHIR ;)
+			if (useElement.getValue().equals(AddressUseEnum.TEMPORARY.getCode())) {
+				addr.getMdhtAdress().getUses().add(PostalAddressUse.PUB);
 			}
-			if (useElement.equals(AddressUseEnum.WORK)) {
+			if (useElement.getValue().equals(AddressUseEnum.WORK.getCode())) {
 				addr.getMdhtAdress().getUses().add(PostalAddressUse.WP);
 			}
 		}
@@ -779,6 +787,9 @@ public class FhirCommon {
 			AddressUse usage = AddressUse.BUSINESS;
 			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
 				usage = AddressUse.PRIVATE;
+			}
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.TEMPORARY) {
+				usage = AddressUse.PUBLIC;
 			}
 			final Address eHCAddr = new Address(addr.getLineFirstRep().toString(),
 					addr.getPostalCode(), addr.getCity(), usage);
@@ -1033,6 +1044,10 @@ public class FhirCommon {
 		return new ExtensionDt(false, FhirCommon.urnUseAsMimeType, new StringDt("dummy"));
 	}
 
+	public static ExtensionDt getExtensionNonLivingSubject() {
+		return new ExtensionDt(false, FhirCommon.urnUseAsNonLivingSubject, new StringDt("dummy"));
+	}
+
 	/**
 	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
 	 * <div class="fr"></div>.
@@ -1202,6 +1217,9 @@ public class FhirCommon {
 			AddressUse usage = AddressUse.BUSINESS;
 			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
 				usage = AddressUse.PRIVATE;
+			}
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.TEMPORARY) {
+				usage = AddressUse.PUBLIC;
 			}
 			final Address eHCAddr = new Address();
 			eHCAddr.setAddressline1(addr.getLineFirstRep().toString());
@@ -1421,6 +1439,9 @@ public class FhirCommon {
 			AddressUse usage = AddressUse.BUSINESS;
 			if (telco.getUseElement().getValueAsEnum() == ContactPointUseEnum.HOME) {
 				usage = AddressUse.PRIVATE;
+			}
+			if (telco.getUseElement().getValueAsEnum() == ContactPointUseEnum.TEMP) {
+				usage = AddressUse.PUBLIC;
 			}
 			final String value = telco.getValue();
 			if (value.toLowerCase().startsWith("tel:")) {

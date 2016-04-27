@@ -30,6 +30,8 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.ch.FhirCdaChVacd.DocTypeCode;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 import ca.uhn.fhir.model.api.ExtensionDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
@@ -44,10 +46,12 @@ import ca.uhn.fhir.model.dstu2.resource.DocumentManifest;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Organization;
 import ca.uhn.fhir.model.dstu2.resource.Person;
+import ca.uhn.fhir.model.dstu2.valueset.NarrativeStatusEnum;
 import ca.uhn.fhir.model.dstu2.valueset.ObservationStatusEnum;
 import ca.uhn.fhir.model.primitive.DateTimeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.TimeDt;
+import ca.uhn.fhir.model.primitive.XhtmlDt;
 
 public abstract class AbstractFhirCdaCh {
 	/**
@@ -57,7 +61,7 @@ public abstract class AbstractFhirCdaCh {
 	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
 			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
 
-	private Observation createComment(String comment) {
+	public Observation createComment(String comment) {
 
 		final Observation fhirObservation = new Observation();
 		fhirObservation.setStatus(ObservationStatusEnum.UNKNOWN_STATUS);
@@ -68,6 +72,10 @@ public abstract class AbstractFhirCdaCh {
 		fhirObservation.setComments(comment);
 
 		return fhirObservation;
+	}
+
+	public NarrativeDt createText(String text) {
+		return new NarrativeDt(new XhtmlDt(text), NarrativeStatusEnum.ADDITIONAL);
 	}
 
 	/**
@@ -216,7 +224,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
+	};
 
 	/**
 	 * <div class="en"> Gets the document date from the given FHIR bundle
@@ -235,7 +243,7 @@ public abstract class AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * <div class="en"> Gets the document Id from the given FHIR bundle
@@ -373,12 +381,18 @@ public abstract class AbstractFhirCdaCh {
 			if ((specimenCollection != null) && !specimenCollection.isEmpty()) {
 				final Observation obs = (Observation) entry.getResource();
 
-				final Identificator id = FhirCommon
-						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				Identificator id = null;
+				if (obs.getIdentifierFirstRep() != null && !obs.getIdentifierFirstRep().isEmpty()) {
+					id = FhirCommon.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+				}
+				String ref = null;
+				if (obs.getComments() != null && !obs.getComments().isEmpty()) {
+					ref = obs.getComments();
+				}
 				final DateTimeDt date = (DateTimeDt) obs.getEffective();
 
 				final SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
-						"ref");
+						ref);
 				return sce;
 			}
 		}
@@ -405,6 +419,11 @@ public abstract class AbstractFhirCdaCh {
 						.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
 				if (id != null) {
 					sce.addId(id);
+				} else {
+					org.openhealthtools.mdht.uml.hl7.datatypes.II ii = DatatypesFactory.eINSTANCE
+							.createII();
+					ii.setNullFlavor(NullFlavor.NA);
+					sce.addId(new Identificator(ii));
 				}
 				final DateTimeDt fDate = (DateTimeDt) obs.getEffective();
 				if (fDate != null) {

@@ -22,13 +22,16 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.ch.lab.lrqc.Participant;
 import org.ehealth_connector.cda.ch.lab.lrqc.SpecimenAct;
+import org.ehealth_connector.cda.ihe.lab.NonHumanSubject;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -386,7 +389,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		// Authors
 		for (final Author author : getAuthors(bundle)) {
 			author.setTime(new Date());
-			author.setFunctionCode(new Code("urn:oid:2.16.840.1.113883.2.9.6.2.7", "3212",
+			author.setFunctionCode(new Code("2.16.840.1.113883.2.9.6.2.7", "3212", "ISCO-08",
 					"Medical and pathology laboratory technicians"));
 			doc.addAuthor(author);
 		}
@@ -428,9 +431,22 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			doc.setLaboratorySpecialtySection(lss);
 		}
 
-		// // Narrative Text: StudiesSummary
-		// doc.setNarrativeTextSectionStudiesSummarySection(
-		// getNarrative(bundle, FhirCommon.urnUseAsStudiesSummary));
+		// SpecimenCollection
+		final SpecimenCollectionEntry sce = getSpecimenCollectionEntry(bundle);
+		doc.getSpecimenAct().addSpecimenCollectionEntry(sce);
+
+		// SpecimenReceived
+		final SpecimenReceivedEntry sre = getSpecimenReceivedEntry(bundle);
+		if (sre != null) {
+			doc.getSpecimenAct().getSpecimenCollectionEntries().get(0)
+					.setSpecimenReceivedEntry(sre);
+		}
+
+		// NonHumanSubject
+		NonHumanSubject nhs = getNonLivingSubject(bundle);
+		if (nhs != null) {
+			doc.getSpecimenAct().setNonHumanSubject(nhs);
+		}
 
 		return doc;
 	}
@@ -703,11 +719,21 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 						new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 			}
 		}
-
-		if (fhirObservation.getComments() != null) {
-			retVal.addCommentEntry(
-					new SectionAnnotationCommentEntry(fhirObservation.getComments()));
+		// Text reference (inside the observation)
+		if (fhirObservation.getComments() != null && !fhirObservation.getComments().isEmpty()) {
+			retVal.setTextReference(fhirObservation.getComments());
 		}
+		// Comments
+		for (Related commentRef : fhirObservation.getRelated()) {
+			if (commentRef.getTarget().getResource() instanceof Observation) {
+				Observation comment = (Observation) commentRef.getTarget().getResource();
+				if (fhirObservation.getComments() != null) {
+					retVal.addCommentEntry(
+							new SectionAnnotationCommentEntry(comment.getComments()));
+				}
+			}
+		}
+
 		return retVal;
 	}
 
@@ -745,6 +771,22 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			}
 		}
 		return lssList;
+	}
+
+	private NonHumanSubject getNonLivingSubject(Bundle bundle) {
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			final List<ExtensionDt> specialtySections = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsNonLivingSubject);
+			if ((specialtySections != null) && !specialtySections.isEmpty()) {
+				final Person obs = (Person) entry.getResource();
+				NonHumanSubject nhs = new NonHumanSubject(
+						FhirCommon.fhirAddressToEhcAddress(obs.getAddressFirstRep()));
+				return nhs;
+			}
+		}
+		return null;
 	}
 
 	private List<Participant> getParticipants(Bundle bundle) {
