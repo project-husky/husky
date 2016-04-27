@@ -773,10 +773,6 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 					}
 				}
 
-				for (final IdentifierDt id : fhirCondition.getIdentifier()) {
-					final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-					concern.addId(new Identificator(codeSystem, id.getValue()));
-				}
 				retVal.add(concern);
 			}
 		}
