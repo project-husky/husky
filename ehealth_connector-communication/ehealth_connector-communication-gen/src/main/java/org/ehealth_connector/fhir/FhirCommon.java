@@ -790,8 +790,11 @@ public class FhirCommon {
 		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
 
 		// Add organization
-		retVal.setOrganization(
-				getOrganization((Organization) fhirObject.getManagingOrganization().getResource()));
+		if (fhirObject.getManagingOrganization().getResource() != null
+				&& !fhirObject.getManagingOrganization().getResource().isEmpty()) {
+			retVal.setOrganization(getOrganization(
+					(Organization) fhirObject.getManagingOrganization().getResource()));
+		}
 
 		return retVal;
 
@@ -1037,7 +1040,7 @@ public class FhirCommon {
 	 * @return the extension author
 	 */
 	public static ExtensionDt getExtensionParticipant() {
-		return new ExtensionDt(false, FhirCommon.urnUseAsAuthor, new StringDt("dummy"));
+		return new ExtensionDt(false, FhirCommon.urnUseAsParticipant, new StringDt("dummy"));
 	}
 
 	/**
@@ -1185,8 +1188,9 @@ public class FhirCommon {
 			Organization fhirOrganization) {
 		org.ehealth_connector.common.Organization retVal = null;
 		// Create the organization
-		retVal = new org.ehealth_connector.common.Organization(fhirOrganization.getName());
-
+		if (fhirOrganization.getName() != null) {
+			retVal = new org.ehealth_connector.common.Organization(fhirOrganization.getName());
+		}
 		// Add Identifiers
 		for (final IdentifierDt id : fhirOrganization.getIdentifier()) {
 			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());

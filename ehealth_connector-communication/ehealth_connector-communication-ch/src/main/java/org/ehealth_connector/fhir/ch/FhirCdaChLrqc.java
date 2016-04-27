@@ -26,6 +26,7 @@ import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.LaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.lrqc.Participant;
 import org.ehealth_connector.cda.ch.lab.lrqc.SpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Address;
@@ -399,6 +400,11 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		// IntendedRecipient
 		final IntendedRecipient ir = getIntendedRecipient(bundle);
 		doc.addIntendedRecipient(ir);
+		// Participant Claims
+		final List<Participant> participantsList = getParticipants(bundle);
+		for (Participant p : participantsList) {
+			doc.addParticipant(p);
+		}
 		// InFulfillmentOf
 		final Identificator ifoId = getInFulfillmentOf(bundle);
 		if (ifoId != null) {
@@ -739,6 +745,30 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			}
 		}
 		return lssList;
+	}
+
+	private List<Participant> getParticipants(Bundle bundle) {
+		List<Participant> pList = new ArrayList<Participant>();
+		// Iterate over all Bundle Entries
+		for (final Entry entry : bundle.getEntry()) {
+			// Get all LaboratorySpecialtySections
+			final List<ExtensionDt> specialtySections = entry
+					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsParticipant);
+			if ((specialtySections != null) && !specialtySections.isEmpty()) {
+				final Person fPar = (Person) entry.getResource();
+				String gln = null;
+				String zsr = null;
+				for (IdentifierDt id : fPar.getIdentifier()) {
+					if (id.getSystem().equals("2.51.1.3"))
+						gln = id.getValue();
+					if (id.getSystem().equals("2.16.756.5.30.1.123.100.2.1.1"))
+						zsr = id.getValue();
+				}
+				Participant p = new Participant(gln, zsr, true);
+				pList.add(p);
+			}
+		}
+		return pList;
 	}
 
 	/**
