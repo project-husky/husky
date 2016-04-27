@@ -695,8 +695,17 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
 			org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
 			// Value
-			v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
-					fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			if (fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null
+					&& fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null) {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getLow().getUnit(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit());
+			} else {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			}
+
 			rr.setValue(v);
 			// Interpretation;
 			ObservationInterpretation obsInt = ObservationInterpretation.getEnum(fhirObservation
@@ -727,7 +736,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		for (Related commentRef : fhirObservation.getRelated()) {
 			if (commentRef.getTarget().getResource() instanceof Observation) {
 				Observation comment = (Observation) commentRef.getTarget().getResource();
-				if (fhirObservation.getComments() != null) {
+				if (comment.getComments() != null) {
 					retVal.addCommentEntry(
 							new SectionAnnotationCommentEntry(comment.getComments()));
 				}

@@ -751,7 +751,8 @@ public class FhirCommon {
 		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
 
 		// Add OrganizationName
-		if (fhirObject.getText().getDiv() != null) {
+		if (fhirObject.getText() != null && fhirObject.getText().getDiv() != null
+				&& !fhirObject.getText().isEmpty() && !fhirObject.getText().getDiv().isEmpty()) {
 			retVal.setOrganization(new org.ehealth_connector.common.Organization(
 					formatDiv(fhirObject.getText().getDiv())));
 		}
@@ -1274,8 +1275,8 @@ public class FhirCommon {
 			retVal.addName(patientName);
 		}
 		// Gender
+		AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 		if (fhirPatient.getGender() != null && !fhirPatient.getGender().isEmpty()) {
-			AdministrativeGender gender = AdministrativeGender.UNDIFFERENTIATED;
 			if (fhirPatient.getGenderElement()
 					.getValueAsEnum() == AdministrativeGenderEnum.FEMALE) {
 				gender = AdministrativeGender.FEMALE;
@@ -1284,6 +1285,7 @@ public class FhirCommon {
 				gender = AdministrativeGender.MALE;
 			}
 		}
+		retVal.setAdministrativeGender(gender);
 		// Birthdate
 		if (fhirPatient.getBirthDate() != null) {
 			retVal.setBirthday(fhirPatient.getBirthDate());
