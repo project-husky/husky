@@ -241,6 +241,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	/**
 	 * Updates a Reference if it is a comment (in a deph of two counters)
 	 *
+	 * @param doNarrTextGen
+	 *            true, when narrative text generation is on; false otherwise
 	 * @param er
 	 *            the EntryRelationship
 	 * @param i
@@ -251,15 +253,15 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, int i, int j,
-			SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
+			int i, int j, SectionsVACD prefix) {
 		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
 				&& er.getInversionInd()) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			ed.setReference(tel);
-			if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+			if (doNarrTextGen) {
 				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
@@ -272,6 +274,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	/**
 	 * Updates a Reference if it is a comment
 	 *
+	 * @param doNarrTextGen
+	 *            true, when narrative text generation is on; false otherwise
 	 * @param er
 	 *            the EntryRelationship
 	 * @param ref
@@ -280,14 +284,14 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
-			SectionsEDES prefix) {
+	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
+			String ref, SectionsEDES prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			ed.setReference(tel);
-			if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+			if (doNarrTextGen) {
 				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
@@ -300,6 +304,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	/**
 	 * Updates a Reference if it is a comment
 	 *
+	 * @param doNarrTextGen
+	 *            true, when narrative text generation is on; false otherwise
 	 * @param er
 	 *            the EntryRelationship
 	 * @param ref
@@ -308,14 +314,14 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *            the prefix of the reference
 	 * @return the EntryRelationship
 	 */
-	public static EntryRelationship updateRefIfComment(EntryRelationship er, String ref,
-			SectionsVACD prefix) {
+	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
+			String ref, SectionsVACD prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
 			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 			ed.setReference(tel);
-			if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
+			if (doNarrTextGen) {
 				tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
 			} else {
 				tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));

@@ -18,8 +18,8 @@ package org.ehealth_connector.cda.ch.enums;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ public class RiskOfComplicationsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfComplications#getDisplayName(org.ehealth_connector.cda.enums.LanguageCode)}
+	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfComplications#getDisplayName(org.ehealth_connector.common.enums.LanguageCode)}
 	 * .
 	 */
 	@Test

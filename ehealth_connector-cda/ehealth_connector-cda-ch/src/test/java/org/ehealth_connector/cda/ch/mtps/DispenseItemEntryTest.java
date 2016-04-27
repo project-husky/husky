@@ -24,8 +24,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ch.mtps.enums.DispenseCodeList;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

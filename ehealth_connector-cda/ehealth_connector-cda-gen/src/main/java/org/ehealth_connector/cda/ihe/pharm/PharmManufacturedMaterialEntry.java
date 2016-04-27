@@ -20,10 +20,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;

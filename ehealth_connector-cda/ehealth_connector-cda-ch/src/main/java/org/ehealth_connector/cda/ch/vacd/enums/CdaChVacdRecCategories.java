@@ -17,8 +17,8 @@ package org.ehealth_connector.cda.ch.vacd.enums;
 
 import java.util.Date;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 
 /**

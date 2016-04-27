@@ -221,9 +221,11 @@ public class AbstractProblemEntry
 	 * @return the startOfProblem Object
 	 */
 	public Date getStartDate() {
-		if (getMdht().getEffectiveTime() != null) {
-			if (getMdht().getEffectiveTime().getLow() != null) {
-				return DateUtil.parseDate(getMdht().getEffectiveTime().getLow());
+		if (getMdht() != null) {
+			if (getMdht().getEffectiveTime() != null) {
+				if (getMdht().getEffectiveTime().getLow() != null) {
+					return DateUtil.parseDate(getMdht().getEffectiveTime().getLow());
+				}
 			}
 		}
 		return null;

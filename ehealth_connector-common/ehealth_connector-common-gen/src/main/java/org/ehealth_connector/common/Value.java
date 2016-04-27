@@ -528,6 +528,10 @@ public class Value {
 		return (mValue instanceof PQ);
 	}
 
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
+	}
+
 	/**
 	 * Checks if the Value object is a RTO (A quantity constructed as the
 	 * quotient of a numerator quantity divided by a denominator quantity.).
@@ -538,36 +542,14 @@ public class Value {
 		return (mValue instanceof RTO);
 	}
 
-	public void setOriginalTextReference(String originalText) {
-		final Code code = new Code((CD) mValue);
-		code.setOriginalTextReference(originalText);
-	}
-
-	public void setUcumUnit(String unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit);
-	}
-
-	/**
-	 * <div class="en">Gets the value as String (e.g.
-	 * "Value [value=200, unit=ml]" )</div> <div class="de">Liefert value.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return <div class="en">the value</div>
-	 */
-	@Override
-	public String toString() {
-		return "Value [value=" + getPhysicalQuantityValue() + ", unit=" + getPhysicalQuantityUnit()
-				+ "]";
-	}
-
-	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
-	}
-
 	private void setIntValue(int value) {
 		INT i = (INT) mValue;
 		i.setValue(value);
+	}
+
+	public void setOriginalTextReference(String originalText) {
+		final Code code = new Code((CD) mValue);
+		code.setOriginalTextReference(originalText);
 	}
 
 	private void setPqValue(String value) {
@@ -575,9 +557,43 @@ public class Value {
 		pq.setValue(Double.valueOf(value));
 	}
 
+	public void setUcumUnit(String unit) {
+		final PQ pq = (PQ) mValue;
+		pq.setUnit(unit);
+	}
+
 	private void setUcumUnit(Ucum unit) {
 		final PQ pq = (PQ) mValue;
 		pq.setUnit(unit.getCodeValue());
 	}
 
+	/**
+	 * <div class="en">Gets the value as String (e.g. "200 ml" )</div>
+	 *
+	 * @return <div class="en">the value</div>
+	 */
+	@Override
+	public String toString() {
+		// Resultat
+		String resultText = "";
+		if (isCode())
+			// TODO This is draft implementation only! the text needs to be
+			// translated by the real code. Displaynames should never be
+			// used!
+			resultText = getCode().getDisplayName();
+		else if (isPhysicalQuantity())
+			resultText = getPhysicalQuantityValue() + " " + getPhysicalQuantityUnit();
+		else if (isEd())
+			resultText = getEdText();
+		else
+			resultText = "*** not yet implemented value type";
+
+		if (resultText == null)
+			resultText = "";
+
+		resultText = resultText.replace("&lt;", "<");
+		resultText = resultText.replace("&gt;", ">");
+
+		return resultText;
+	}
 }

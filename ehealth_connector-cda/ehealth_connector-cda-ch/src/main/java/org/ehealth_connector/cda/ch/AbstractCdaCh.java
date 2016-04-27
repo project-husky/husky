@@ -18,8 +18,8 @@ package org.ehealth_connector.cda.ch;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;

@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCodedResults;
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -33,19 +34,19 @@ import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
-import org.ehealth_connector.cda.ch.textbuilder.LaboratoryObservationTextBuilder;
+import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
+import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryChTextBuilder;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.ch.vacd.enums.SerologieForVACD;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.cda.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -88,8 +89,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
 public class CdaChVacd extends AbstractCdaCh<VACD> {
-
-	public static final boolean CDA_LEVEL2_TEXT_GENERATION = false;
 
 	/** The Constant eVACDOCTitle. */
 	public static final String EVACDOC_TITLE = "eVACDOC";
@@ -235,7 +234,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateProblemConcernReferences(aps.getActs(), SectionsVACD.ACTIVE_PROBLEMS)) {
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (IsNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
 			} else {
@@ -276,7 +275,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateAllergyConcernReferences(ars.getActs(), SectionsVACD.ALLERGIES_REACTIONS)) {
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (IsNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
 			} else {
@@ -468,14 +467,14 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
-		if (CDA_LEVEL2_TEXT_GENERATION) {
+		if (IsNarrativeTextGenerationEnabled()) {
 			lss.createStrucDocText(generateNarrativeTextLaboratoryObservations());
 		} else {
 			if (laboratoryObservation.getCommentText() != null) {
 				// Aller vorhandenen Kommentare zusammenfügen
 				int i = 0;
 				String allComments = "";
-				for (final LaboratoryObservation t : getLaboratoryObservations()) {
+				for (final AbstractObservation t : getLaboratoryObservations()) {
 					if (t.getCommentText() != null) {
 						i++;
 						allComments = allComments + "Kommentar " + i + ": " + t.getCommentText()
@@ -516,7 +515,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		if (updateProblemConcernReferences(hopis.getActs(), SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (IsNarrativeTextGenerationEnabled()) {
 				hopis.createStrucDocText(generateNarrativeTextPastProblemConcernEntries());
 			} else {
 				setNarrativeTextSectionHistoryOfPastIllnes("");
@@ -552,7 +551,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		ED reference;
-		if (CDA_LEVEL2_TEXT_GENERATION) {
+		if (IsNarrativeTextGenerationEnabled()) {
 			// create the CDA level 1 text and update the MDHT Object content
 			// references to CDA level 1 text
 			final String pregnancyText = "Voraussichtlicher Geburtstermin: "
@@ -743,7 +742,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns());
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
 				problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
@@ -769,8 +768,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations() {
-		final LaboratoryObservationTextBuilder b = new LaboratoryObservationTextBuilder(
-				getLaboratoryObservations(), SectionsVACD.SEROLOGY_STUDIES);
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(getLaboratoryObservations(),
+				SectionsVACD.SEROLOGY_STUDIES);
 		return b.toString();
 	}
 
@@ -787,7 +786,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getPastProblemConcerns());
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
+		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
 				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
@@ -922,7 +921,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *
 	 * @return List with laboratory observations
 	 */
-	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getLaboratoryObservations() {
+	public List<AbstractObservation> getLaboratoryObservations() {
 		// Search for the right section
 		final Section los = getDoc().getLaboratorySpecialtySection();
 		if (los == null) {
@@ -930,7 +929,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		}
 		final EList<Entry> entries = los.getEntries();
 
-		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> labObservations = new ArrayList<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation>();
+		final List<AbstractObservation> labObservations = new ArrayList<AbstractObservation>();
 		for (final Entry entry : entries) {
 			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
 
@@ -1421,7 +1420,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 				} else {
 					// Create references to level 1 text
 					ED reference;
-					if (CDA_LEVEL2_TEXT_GENERATION) {
+					if (IsNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
@@ -1431,8 +1430,8 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 				}
 				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					CdaChUtil.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j),
-							loincSectionCode);
+					CdaChUtil.updateRefIfComment(IsNarrativeTextGenerationEnabled(), er,
+							String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
 		}
@@ -1450,8 +1449,10 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 					final EntryRelationship er = lo.getEntryRelationships().get(k);
 					if (Util.isComment(er)) {
 						++k;
-						CdaChUtil.updateRefIfComment(er, String.valueOf(i + 1)
-								+ String.valueOf(j + 1) + String.valueOf(k + 1), loincSectionCode);
+						CdaChUtil.updateRefIfComment(
+								IsNarrativeTextGenerationEnabled(), er, String.valueOf(i + 1)
+										+ String.valueOf(j + 1) + String.valueOf(k + 1),
+								loincSectionCode);
 					}
 				}
 			}
@@ -1474,7 +1475,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 					// Create references to level 1 text
 					i++;
 					ED reference;
-					if (CDA_LEVEL2_TEXT_GENERATION) {
+					if (IsNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());

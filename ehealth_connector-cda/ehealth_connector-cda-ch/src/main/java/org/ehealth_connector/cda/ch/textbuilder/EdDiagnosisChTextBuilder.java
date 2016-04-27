@@ -18,81 +18,96 @@ package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.ProblemConcern;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
+import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
- * Builds the &lt; text &gt; part of the Treatment plan section.
- *
- * Always builds the whole part (not only adds one recommendation).
- *
+ * Builds the &lt; text &gt; part of the ED Diagnosis section.
  */
 public class EdDiagnosisChTextBuilder extends TextBuilder {
 
-	protected final static String tableStub = "<table border=\"1\" width=\"100%\"><thead><tr><th>TODO tsc</th><th>TODO tsc</th></tr></thead><tbody>";
-	private final List<ProblemConcern> problemConcernEntries;
-	private final ProblemConcern newProblemConcernEntry;
-	private String sectionText;
-	private int newId;
+	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
+	private final String contentIdPrefix;
 
-	public EdDiagnosisChTextBuilder(List<ProblemConcern> problemConcernEntries,
-			ProblemConcern newProblemConcernEntry, String sectionText) {
-		this.problemConcernEntries = problemConcernEntries;
-		this.newProblemConcernEntry = newProblemConcernEntry;
-		this.sectionText = sectionText;
-		init();
+	/**
+	 * Constructor.
+	 *
+	 * @param problemConcerns
+	 *            a list of Problem Concerns
+	 * @param section
+	 *            the section
+	 */
+	public EdDiagnosisChTextBuilder(List<AbstractProblemConcern> problemConcerns,
+			ContentIdPrefix section) {
+		this.problemConcerns = problemConcerns;
+		contentIdPrefix = section.getContentIdPrefix();
 	}
 
-	protected String buildRow(ProblemConcern newProblemConcernEntry2, int newId) {
-		final StringBuilder rowBuilder = new StringBuilder();
-		rowBuilder.append("<tr>");
-		rowBuilder.append(buildCell("TODO tsc"));
-		rowBuilder.append(buildCellWithContent(newProblemConcernEntry2.getConcern(), newId,
-				SectionsEDES.ED_DIAGNOSIS.getContentIdPrefix()));
-		rowBuilder.append("</tr>");
-		return rowBuilder.toString();
-	}
-
-	public ProblemConcern getProblemConcernEntry() {
-		return newProblemConcernEntry;
-	}
-
-	public String getSectionText() {
-		return sectionText;
-	}
-
-	public void init() {
-		// ID
-		if (problemConcernEntries.size() != 0) {
-			newId = problemConcernEntries.size() + 1;
-			if ("".equals(sectionText) || (sectionText == null))
-				try {
-					throw new Exception(
-							"If there is more than zero elements, the sectionText can´t be empty.");
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
-		} else {
-			newId = 1;
-			sectionText = tableStub + tableFooter;
+	private void addBody() {
+		append("<tbody>");
+		int i = 0;
+		for (final org.ehealth_connector.cda.AbstractProblemConcern problemConcern : problemConcerns) {
+			addRow(problemConcern, i);
+			i++;
 		}
-
-		sectionText = insertRow(newProblemConcernEntry, newId, sectionText);
+		append("</tbody>");
 	}
 
-	public String insertRow(ProblemConcern newProblemConcernEntry2, int newId, String sectionText) {
-		final String rowStr = buildRow(newProblemConcernEntry2, newId);
-		// If there is no element found that could be replaced, then an
-		// error occured (e.g. in a scenario, where an external document is
-		// loaded where the table footer does not match this table footer. If
-		// the convenience API is used to add a ProblemConcern then this method
-		// would not find the specific text.
-		// - In this case: Generate a new (convennience API conformant) set of
-		// ids, update the text and the objects. For this purpose the other
-		// methods of this and the super class could be useful.
-		final String tableStr = sectionText.replace(tableFooter, rowStr + tableFooter);
-		return tableStr;
+	private void addHeader() {
+		// Currently only German available. Translation contributions are
+		// welcome
+		append("<thead>");
+		append("<tr>");
+		append("<th>Bereich</th>");
+		append("<th>Diagnose</th>");
+		append("<th>Von</th>");
+		append("<th>Bis</th>");
+		append("</tr>");
+		append("</thead>");
 	}
 
+	private void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcerns,
+			int index) {
+		// Currently only German available. Translation contributions are
+		// welcome
+		int i = 0;
+		for (AbstractProblemEntry problem : problemConcerns.getProblemEntries()) {
+			append("<tr>");
+			if (i == 0 && problemConcerns.getConcern() != null) {
+				addCell(problemConcerns.getConcern());
+			} else {
+				addCell("");
+			}
+
+			Value val = problem.getValue();
+			if (val != null)
+				addCellWithContent(val.toString(), contentIdPrefix, index);
+			else
+				addCell("");
+
+			addCell(DateUtil.formatDateCH(problem.getStartDate()));
+			addCell(DateUtil.formatDateCH(problem.getEndDate()));
+
+			append("</tr>");
+			i++;
+		}
+	}
+
+	/**
+	 * Returns HTML formatted string.
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		append("<table border='1' width='100%'>");
+		addHeader();
+		addBody();
+		append("</table>");
+		return super.toString();
+	}
 }

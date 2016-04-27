@@ -16,8 +16,8 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * The Enum MedicationsSpecialConditions see IHE PCC TF2 Table 6.3.4.16.7-1.

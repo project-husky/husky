@@ -28,13 +28,14 @@ import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.EDDiagnosesSection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
@@ -45,7 +46,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *
  */
 public class CdaChEdesEdpn
-extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
+		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
+
+	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary (Physician Note)";
+	private static final String DOCTITLE_GER = "Notfallaustrittsbericht (aus ärztlicher Sicht)";
 
 	/** main OID for CDA-CH-EDES EDPN */
 	public static final String OID_MAIN = "1.3.6.1.4.1.19376.1.5.3.1.1.13.1.4";
@@ -60,7 +64,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 	 */
 	public CdaChEdesEdpn() {
 		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init());
-		mCommon = new CdaChEdesCommon(getDoc());
+		mCommon = new CdaChEdesCommon(this);
 	}
 
 	/**
@@ -99,8 +103,8 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 		ce.setCodeSystemName("LOINC");
 		ce.setDisplayName("Physician Emergency department Note");
 		getMdht().setCode(ce);
-		mCommon = new CdaChEdesCommon(getDoc());
-		setTitle(mCommon.getDocumentTitle());
+		mCommon = new CdaChEdesCommon(this);
+		setTitle(getDocumentTitle());
 	}
 
 	/**
@@ -114,7 +118,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 	 */
 	public CdaChEdesEdpn(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn doc) {
 		super(doc);
-		mCommon = new CdaChEdesCommon(getDoc());
+		mCommon = new CdaChEdesCommon(this);
 	}
 
 	/**
@@ -247,6 +251,21 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 	@Override
 	public org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn getDoc() {
 		return (org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn) super.getDoc();
+	}
+
+	public String getDocumentTitle() {
+		final CS lcode = getDoc().getLanguageCode();
+		if (lcode != null) {
+			switch (lcode.getCode()) {
+			case LanguageCode.GERMAN_CODE:
+				return DOCTITLE_GER;
+			case LanguageCode.FRENCH_CODE:
+			case LanguageCode.ITALIAN_CODE:
+			case LanguageCode.ENGLISH_CODE:
+				return DOCTITLE_EN;
+			}
+		}
+		return DOCTITLE_EN;
 	}
 
 	/**
@@ -1233,4 +1252,5 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
+
 }

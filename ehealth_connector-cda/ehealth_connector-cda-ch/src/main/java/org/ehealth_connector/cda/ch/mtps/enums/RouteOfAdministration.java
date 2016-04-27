@@ -16,8 +16,8 @@
 
 package org.ehealth_connector.cda.ch.mtps.enums;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * The RouteOfAdministration. MTPS 7.6.4

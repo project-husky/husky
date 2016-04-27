@@ -255,7 +255,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 	 */
 	@Test
 	public void testUpdateRefIfCommentEntryRelationshipIntIntSectionsVACD() {
-		final EntryRelationship ref = CdaChUtil.updateRefIfComment(testEr, testI, testJ,
+		final EntryRelationship ref = CdaChUtil.updateRefIfComment(false, testEr, testI, testJ,
 				testPrefix);
 		assertNotNull(ref);
 		assertTrue(ref.getInversionInd());
@@ -277,7 +277,8 @@ public class CdaChUtilTest extends CdaUtilTest {
 	 */
 	@Test
 	public void testUpdateRefIfCommentEntryRelationshipStringSectionsVACD() {
-		final EntryRelationship ref = CdaChUtil.updateRefIfComment(testEr, testRef, testPrefix);
+		final EntryRelationship ref = CdaChUtil.updateRefIfComment(false, testEr, testRef,
+				testPrefix);
 		assertNotNull(ref);
 		assertTrue(ref.getInversionInd());
 

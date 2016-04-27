@@ -252,18 +252,21 @@ public abstract class AbstractAllergyProblem {
 	}
 
 	/**
-	 * Gets the end of problem.
+	 * Gets the end date of the problem.
 	 *
-	 * @return das endOfProblem Objekt
+	 * @return the end date of the problem.
 	 */
-	public String getEndDate() {
+	public Date getEndDate() {
+		Date retVal = null;
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getHigh() != null) {
-				return Util.createEurDateStrFromTS(
-						getAllergyProblem().getEffectiveTime().getHigh().getValue());
+				try {
+					retVal = DateUtil.parseDate(getAllergyProblem().getEffectiveTime().getHigh());
+				} catch (Exception e) {
+				}
 			}
 		}
-		return null;
+		return retVal;
 	}
 
 	/**
@@ -314,22 +317,26 @@ public abstract class AbstractAllergyProblem {
 	 *         otherwise.
 	 */
 	public boolean getNotOccured() {
-		return getAllergyProblem().getNegationInd();
+		return (getAllergyProblem().getNegationInd() == null ? false
+				: getAllergyProblem().getNegationInd());
 	}
 
 	/**
-	 * Gets the start.
+	 * Gets the end date of the problem.
 	 *
-	 * @return das startOfProblem Objekt
+	 * @return the end date of the problem.
 	 */
-	public String getStartDate() {
+	public Date getStartDate() {
+		Date retVal = null;
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getLow() != null) {
-				return Util.createEurDateStrFromTS(
-						getAllergyProblem().getEffectiveTime().getLow().getValue());
+				try {
+					retVal = DateUtil.parseDate(getAllergyProblem().getEffectiveTime().getLow());
+				} catch (Exception e) {
+				}
 			}
 		}
-		return null;
+		return retVal;
 	}
 
 	/**

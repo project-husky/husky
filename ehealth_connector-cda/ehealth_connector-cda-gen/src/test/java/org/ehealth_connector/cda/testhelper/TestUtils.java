@@ -337,7 +337,8 @@ public class TestUtils {
 	}
 
 	public Patient createPatient() {
-		Patient patient = new Patient(createName1(), AdministrativeGender.FEMALE, createStartDate());
+		Patient patient = new Patient(createName1(), AdministrativeGender.FEMALE,
+				createStartDate());
 		patient.addAddress(createAddress1());
 		patient.setBirthday(createStartDate());
 		patient.setTelecoms(createTelecoms1());
@@ -367,6 +368,16 @@ public class TestUtils {
 		t.addPhone(telS1, AddressUse.BUSINESS);
 		t.addPhone(telS2, AddressUse.PRIVATE);
 		return t;
+	}
+
+	protected Value createValue1() {
+		final Value value = new Value("500", "ml");
+		return value;
+	}
+
+	protected Value createValue2() {
+		final Value value = new Value(ts1, ts2);
+		return value;
 	}
 
 	public String getTempFilePath(String aFileName) {
@@ -452,15 +463,5 @@ public class TestUtils {
 			return xExist(document, "//templateId[@root='" + templateIdRoot + "' and @extension='"
 					+ templateIdExtension + "']");
 		}
-	}
-
-	protected Value createValue1() {
-		final Value value = new Value("500", "ml");
-		return value;
-	}
-
-	protected Value createValue2() {
-		final Value value = new Value(ts1, ts2);
-		return value;
 	}
 }

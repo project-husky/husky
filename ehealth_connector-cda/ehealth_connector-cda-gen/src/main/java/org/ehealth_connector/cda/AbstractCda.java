@@ -27,13 +27,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ParticipantType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -72,6 +72,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		extends MdhtFacade<EClinicalDocument> {
 
 	private DocumentRoot docRoot;
+	private boolean performNarrativeTextGeneration = true;
 
 	/**
 	 * <div class="en">Constructor for Cda documents</div>
@@ -271,6 +272,20 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), 0, "xml-stylesheet",
 					"type=\"text/xsl\" href=\"" + stylesheet + "\"");
 		}
+	}
+
+	/**
+	 * Switch automatic generation of narrative text off
+	 */
+	public void DisableNarrativeTextGeneration() {
+		performNarrativeTextGeneration = false;
+	}
+
+	/**
+	 * Switch automatic generation of narrative text on
+	 */
+	public void EnableNarrativeTextGeneration() {
+		performNarrativeTextGeneration = true;
 	}
 
 	private String generateComment() {
@@ -596,6 +611,15 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public abstract void initCda();
 
 	/**
+	 * Indicates whether narrative text generation is enabled or disabled
+	 *
+	 * @return true when enabled; false when disabled
+	 */
+	public boolean IsNarrativeTextGenerationEnabled() {
+		return performNarrativeTextGeneration;
+	}
+
+	/**
 	 * <div class="en">prints the XML representation of the document to the
 	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments
 	 * auf der Konsole aus</div>
@@ -826,5 +850,4 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		}
 		getDoc().setVersionNumber(i);
 	}
-
 }

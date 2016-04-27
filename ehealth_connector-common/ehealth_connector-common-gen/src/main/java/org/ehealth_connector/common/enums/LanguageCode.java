@@ -1,4 +1,4 @@
-package org.ehealth_connector.cda.enums;
+package org.ehealth_connector.common.enums;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.ehealth_connector.common.Code;

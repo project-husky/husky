@@ -17,6 +17,9 @@
 package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.LangText;
+import org.ehealth_connector.common.utils.LangTexts;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -364,5 +367,14 @@ public enum ActSite {
 			return displayNameIt;
 		}
 		return getDisplayNameEn();
+	}
+
+	public LangTexts getLangTexts() {
+		LangTexts retVal = new LangTexts();
+		retVal.add(new LangText(LanguageCode.GERMAN, getDisplayNameDe()));
+		retVal.add(new LangText(LanguageCode.ENGLISH, getDisplayNameEn()));
+		retVal.add(new LangText(LanguageCode.FRENCH, getDisplayNameFr()));
+		retVal.add(new LangText(LanguageCode.ITALIAN, getDisplayNameIt()));
+		return retVal;
 	}
 }

@@ -43,7 +43,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Participant;
@@ -51,7 +50,6 @@ import org.ehealth_connector.common.ParticipantRole;
 import org.ehealth_connector.common.PlayingEntity;
 import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.Signature;
-import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.Author;
@@ -312,6 +310,17 @@ public class Util {
 	public static CD createCodeNullFlavorNA() {
 		final CD code = DatatypesFactory.eINSTANCE.createCD();
 		code.setNullFlavor(NullFlavor.NA);
+		return code;
+	}
+
+	/**
+	 * <div class="en">Creates the MDHT CD null flavor UNK.</div>
+	 *
+	 * @return the CD
+	 */
+	public static CD createCodeNullFlavorUNK() {
+		final CD code = DatatypesFactory.eINSTANCE.createCD();
+		code.setNullFlavor(NullFlavor.UNK);
 		return code;
 	}
 

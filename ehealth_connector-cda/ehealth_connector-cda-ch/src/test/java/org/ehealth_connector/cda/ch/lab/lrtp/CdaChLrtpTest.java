@@ -79,7 +79,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		LaboratoryObservation lo = new LaboratoryObservation();
 
 		// LRTP specific
-		VitalSignsObservation vs = new VitalSignsObservation();
+		VitalSignObservation vs = new VitalSignObservation();
 		VitalSignsOrganizer vso = new VitalSignsOrganizer();
 		BloodGroupObservation bgo = new BloodGroupObservation();
 
@@ -94,7 +94,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		cda.addLaboratorySpecialtySection(sps);
 
 		// LRTP specific
-		vso.addVitalSignsObservation(vs);
+		vso.addVitalSignObservation(vs);
 		cda.setVitalSignsOrganizer(vso);
 		cda.setBloodGroupObservation(bgo);
 
@@ -118,7 +118,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
 		// .getSoasInfoEnties().get(0));
 		assertNotNull(cda.getVitalSignsOrganizer());
-		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
+		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignObservations().get(0));
 		assertNotNull(cda.getBloodGroupObservation());
 
 		final String deserialized = this.serializeDocument(cda);
@@ -143,7 +143,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
 		// .getSoasInfoEnties().get(0));
 		assertNotNull(cda.getVitalSignsOrganizer());
-		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignsObservations().get(0));
+		assertNotNull(cda.getVitalSignsOrganizer().getVitalSignObservations().get(0));
 		assertNotNull(cda.getBloodGroupObservation());
 
 		assertTrue(cdaDeserialized != null);

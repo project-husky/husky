@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
@@ -30,7 +29,7 @@ import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct;
-import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation;
+import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
@@ -463,19 +462,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return doc;
 	}
 
-	/**
-	 * Read the LrtpDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the LRTP document
-	 */
-	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(LrtpDocument.class, resourceString);
-	}
-
 	private String formatDiv(XhtmlDt text) {
 		String retVal = text.getValueAsString();
 		retVal = retVal.replace("</div>", "");
@@ -522,9 +508,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 * @return list of eHC EDES VitalSignObservation </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	private List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> getCodedVitalSigns(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
+	private List<VitalSignObservation> getCodedVitalSigns(Bundle bundle) {
+		final List<VitalSignObservation> retVal = new ArrayList<VitalSignObservation>();
 		for (final Entry entry : bundle.getEntry()) {
 			final List<ExtensionDt> observations = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
@@ -886,8 +871,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return null;
 	}
 
-	private VitalSignsObservation getVitalSignObservation(Observation fhirObs) {
-		VitalSignsObservation vso = new VitalSignsObservation();
+	private VitalSignObservation getVitalSignObservation(Observation fhirObs) {
+		VitalSignObservation vso = new VitalSignObservation();
 		// Value
 		Value v = null;
 		if (fhirObs.getValue() instanceof QuantityDt) {
@@ -913,7 +898,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		VitalSignList codeEnum = VitalSignList
 				.getEnum(fhirObs.getCode().getCodingFirstRep().getCode());
 		if (codeEnum != null) {
-			vso.setCode(codeEnum);
+			vso.setCode(codeEnum.getCode());
 		}
 
 		// Ids
@@ -960,7 +945,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			final List<ExtensionDt> vsoList = entry
 					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsVitalSignsOrganizer);
 			if ((vsoList != null) && !vsoList.isEmpty()) {
-				final org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer vso = new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer();
+				final VitalSignsOrganizer vso = new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer();
 				final Observation fVso = (Observation) entry.getResource();
 
 				// Set the Organizer Attributes
@@ -992,12 +977,25 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				// Add all VitalSignObservations
 				for (final Related relatedObs : fVso.getRelated()) {
 					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-					final VitalSignsObservation vit = getVitalSignObservation(fhirObs);
-					vso.addVitalSignsObservation(vit);
+					final VitalSignObservation vit = getVitalSignObservation(fhirObs);
+					vso.addVitalSignObservation(vit);
 				}
 				retVal.add(vso);
 			}
 		}
 		return retVal;
+	}
+
+	/**
+	 * Read the LrtpDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the LRTP document
+	 */
+	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(LrtpDocument.class, resourceString);
 	}
 }

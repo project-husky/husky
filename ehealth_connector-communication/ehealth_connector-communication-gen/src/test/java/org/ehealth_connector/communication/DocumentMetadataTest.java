@@ -19,12 +19,12 @@ package org.ehealth_connector.communication;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;

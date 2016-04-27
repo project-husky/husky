@@ -16,10 +16,12 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -45,6 +47,25 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	public VitalSignObservation() {
 		initMdht();
 		setMethodCodeTranslation(null);
+		super.getVitalSignObservation().getInterpretationCodes().clear();
+		super.getVitalSignObservation().setText(null);
+		super.getVitalSignObservation().getTargetSiteCodes().clear();
+	}
+
+	/**
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param code
+	 *            the code according to Lrtp specification chap. 5.6.5
+	 * @param effectiveTime
+	 *            the date time of result
+	 * @param value
+	 *            the value according to [IHE PCC TF-2] 6.3.4.22.3
+	 */
+	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
+		setCode(code);
+		setValue(value);
+		setEffectiveTime(effectiveTime);
 	}
 
 	/**
@@ -70,10 +91,8 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public VitalSignObservation(VitalSignList code, Value value) {
 		this();
-		setCode(code.getCode());
+		setCode(code);
 		setValue(value);
-		super.getVitalSignObservation().getInterpretationCodes().clear();
-		super.getVitalSignObservation().setText(null);
 	}
 
 	/**
@@ -86,21 +105,21 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		getVitalSignObservation().addAct(entry.getMdht());
 		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;
 		getVitalSignObservation().getEntryRelationships().get(nb)
-		.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		getVitalSignObservation().getEntryRelationships().get(nb).setInversionInd(true);
 	}
 
-	// /**
-	// * Gets the code enum.
-	// *
-	// * @return the code enum
-	// */
-	// public VitalSignList getCodeEnum() {
-	// if (getCode() != null) {
-	// return VitalSignList.getEnum(getCode().getCode());
-	// }
-	// return null;
-	// }
+	/**
+	 * Gets the code enum.
+	 *
+	 * @return the code enum
+	 */
+	public VitalSignList getCodeEnum() {
+		if (getCode() != null) {
+			return VitalSignList.getEnum(getCode().getCode());
+		}
+		return null;
+	}
 
 	/**
 	 * Gets the comment entries.
@@ -115,7 +134,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 				if (er.getAct().getTemplateIds().get(0).getRoot()
 						.equals("2.16.840.1.113883.10.20.1.40")
 						|| er.getAct().getTemplateIds().get(0).getRoot()
-						.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
+								.equals("1.3.6.1.4.1.19376.1.5.3.1.4.2")) {
 					sacl.add(new SectionAnnotationCommentEntry((Comment) er.getAct()));
 				}
 			}
@@ -132,25 +151,25 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	public Code getMethodCodeTranslation() {
 		if (!getVitalSignObservation().getMethodCodes().isEmpty()
 				&& !getVitalSignObservation().getMethodCodes().get(0).getTranslations().isEmpty()) {
-			return new Code(getVitalSignObservation().getMethodCodes().get(0).getTranslations().get(0));
+			return new Code(
+					getVitalSignObservation().getMethodCodes().get(0).getTranslations().get(0));
 		}
 		return null;
 	}
 
-	// /**
-	// * Gets the observation interpretation code enum.
-	// *
-	// * @return the observation interpretation code enum
-	// */
-	// public ObservationInterpretationForVitalSign
-	// getObservationInterpretationCodeEnum() {
-	// if (!mVitalSignObservation.getInterpretationCodes().isEmpty()) {
-	// return ObservationInterpretationForVitalSign
-	// .getEnum(mVitalSignObservation.getInterpretationCodes().get(0).getCode());
-	// }
-	// return null;
-	// }
-	//
+	/**
+	 * Gets the observation interpretation code enum.
+	 *
+	 * @return the observation interpretation code enum
+	 */
+	public ObservationInterpretationForVitalSign getObservationInterpretationCodeEnum() {
+		if (!getVitalSignObservation().getInterpretationCodes().isEmpty()) {
+			return ObservationInterpretationForVitalSign
+					.getEnum(getVitalSignObservation().getInterpretationCodes().get(0).getCode());
+		}
+		return null;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -164,30 +183,29 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		getVitalSignObservation().getTemplateIds().add(id.getIi());
 	}
 
-	// /**
-	// * Sets the code.
-	// *
-	// * @param code
-	// * the new code
-	// */
-	// public void setCode(VitalSignList code) {
-	// setCode(code.getCode());
-	// }
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	public void setCode(VitalSignList code) {
+		setCode(code.getCode());
+	}
 
-	// /**
-	// * Set a new interpretations of the vital sign observation.
-	// *
-	// * @param code
-	// * <div class="de">Beurteilung des Resultats</div>
-	// * <div class="fr"></div> <div class="it"></div>
-	// */
-	// public void setInterpretationCode(ObservationInterpretationForVitalSign
-	// code) {
-	// if (code != null) {
-	// mVitalSignObservation.getInterpretationCodes().clear();
-	// mVitalSignObservation.getInterpretationCodes().add(code.getCE());
-	// }
-	// }
+	/**
+	 * Set a new interpretations of the vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="de">Beurteilung des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public void setInterpretationCode(ObservationInterpretationForVitalSign code) {
+		if (code != null) {
+			getVitalSignObservation().getInterpretationCodes().clear();
+			getVitalSignObservation().getInterpretationCodes().add(code.getCE());
+		}
+	}
 
 	/**
 	 * Sets the method code translation (code with NullFlavor.Na and the given

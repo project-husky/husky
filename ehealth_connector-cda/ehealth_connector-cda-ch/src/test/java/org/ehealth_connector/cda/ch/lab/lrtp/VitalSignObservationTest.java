@@ -12,11 +12,11 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.Ucum;
 import org.junit.Test;
 
-public class VitalSignsObservationTest extends TestUtils {
+public class VitalSignObservationTest extends TestUtils {
 	@Test
 	public void testConvenience() {
 		super.init();
-		VitalSignsObservation o = new VitalSignsObservation();
+		VitalSignObservation o = new VitalSignObservation();
 
 		// Method code has to be NA or a translation
 		assertTrue(o.getMdhtCopy().getMethodCodes().get(0).getNullFlavor() != null);

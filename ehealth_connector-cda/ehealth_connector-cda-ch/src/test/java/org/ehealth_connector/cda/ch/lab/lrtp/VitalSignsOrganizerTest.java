@@ -26,8 +26,8 @@ public class VitalSignsOrganizerTest extends TestUtils {
 		assertTrue(xExist(document, "//code[@code='46680005']"));
 
 		// Vital Signs Observation
-		o.addVitalSignsObservation(new VitalSignsObservation());
-		assertFalse(o.getVitalSignsObservations().isEmpty());
+		o.addVitalSignObservation(new VitalSignObservation());
+		assertFalse(o.getVitalSignObservations().isEmpty());
 		document = o.getDocument();
 		assertTrue(xExistTemplateId(document, "2.16.756.5.30.1.1.1.1.3.4.1",
 				"CDA-CH-LRTP.Body.VitalSignL3"));

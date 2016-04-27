@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
-import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -46,20 +46,20 @@ public class ImmunizationRecommendationSection
 	 * Instantiates a new immunization section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public ImmunizationRecommendationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationRecommendationSection().init(), null, null);
 		this.languageCode = languageCode;
-		this.getMdht()
-				.setTitle(Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(languageCode.getCS())));
+		this.getMdht().setTitle(
+				Util.st(SectionsVACD.TREATMENT_PLAN.getSectionTitle(languageCode.getCS())));
 	}
 
 	/**
 	 * Instantiates a new immunization section.
 	 *
 	 * @param ImmunizationRecommendation
-	 *          the immunization section
+	 *            the immunization section
 	 */
 	protected ImmunizationRecommendationSection(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendationSection ImmunizationRecommendation) {
@@ -67,19 +67,20 @@ public class ImmunizationRecommendationSection
 	}
 
 	/**
-	 * Adds the immunization recommendation to the section. If the text is created
-	 * in the section based on the immunizationRecommendation object the level3
-	 * obects immunizationRecommendation, medicationTargetEntry,
-	 * SectionAnnotationCommentEntry and criterionEntry will be linked with a text
-	 * reference (If the SectionAnnotationCommentEntry in
-	 * immunizationRecommendation has a text it will be replaced by the reference)
+	 * Adds the immunization recommendation to the section. If the text is
+	 * created in the section based on the immunizationRecommendation object the
+	 * level3 obects immunizationRecommendation, medicationTargetEntry,
+	 * SectionAnnotationCommentEntry and criterionEntry will be linked with a
+	 * text reference (If the SectionAnnotationCommentEntry in
+	 * immunizationRecommendation has a text it will be replaced by the
+	 * reference)
 	 *
 	 * @param immunizationRecommendation
-	 *          the immunizationRecommendation
+	 *            the immunizationRecommendation
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @param createSectionText
-	 *          if the section text should be created
+	 *            if the section text should be created
 	 */
 	public void addImmunizationRecommendation(
 			org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation immunizationRecommendation,
@@ -120,11 +121,11 @@ public class ImmunizationRecommendationSection
 	 * adds a section the table for an immunizationRecommendation.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @param immunizationRecommendation
-	 *          the immunizationRecommendation
+	 *            the immunizationRecommendation
 	 * @param contendIdPrefix
-	 *          the contend id prefix
+	 *            the contend id prefix
 	 * @return the table row
 	 */
 	public String getTableRow(LanguageCode languageCode,
@@ -149,8 +150,10 @@ public class ImmunizationRecommendationSection
 		// <th>Hersteller</th>
 		if ((immunizationRecommendation.getConsumable() != null)
 				&& (immunizationRecommendation.getConsumable().getManufacturer() != null)
-				&& (immunizationRecommendation.getConsumable().getManufacturer().getName() != null)) {
-			stringBuffer.append(immunizationRecommendation.getConsumable().getManufacturer().getName());
+				&& (immunizationRecommendation.getConsumable().getManufacturer()
+						.getName() != null)) {
+			stringBuffer
+					.append(immunizationRecommendation.getConsumable().getManufacturer().getName());
 		}
 		stringBuffer.append("</td><td>");
 		// <th>Zeitraum</th>
@@ -166,7 +169,8 @@ public class ImmunizationRecommendationSection
 			// Sort List according to
 			Collections.sort(medicationTargetEntries);
 			for (final MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {
-				final CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
+				final CdaChVacdImmunizations vacdImmun = medicationTargetEntry
+						.getImmunizationTarget();
 				if (vacdImmun != null) {
 					if (i > 0) {
 						stringBuffer.append(", ");
@@ -174,7 +178,12 @@ public class ImmunizationRecommendationSection
 					++i;
 					contentId = contendIdPrefix + colIndex++;
 					stringBuffer.append("<content ID=\"" + contentId + "\">");
-					stringBuffer.append(medicationTargetEntry.getImmunizationTargetCode().getDisplayName());
+					// TODO This is draft implementation only! the text needs to
+					// be
+					// translated by the real code. Displaynames should never be
+					// used!
+					stringBuffer.append(
+							medicationTargetEntry.getImmunizationTargetCode().getDisplayName());
 					stringBuffer.append("</content>");
 					medicationTargetEntry.setTextReference("#" + contentId);
 				}
@@ -184,8 +193,8 @@ public class ImmunizationRecommendationSection
 		// Impfempfehlung vom
 		if ((immunizationRecommendation.getAuthor() != null)
 				&& (immunizationRecommendation.getAuthor().getTimeAsDate() != null)) {
-			stringBuffer
-					.append(DateUtil.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
+			stringBuffer.append(
+					DateUtil.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
 		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung dokumentiert durch
@@ -197,10 +206,13 @@ public class ImmunizationRecommendationSection
 		// EKIF Empfehlungskategorie
 		if ((immunizationRecommendation.getCriterionEntry() != null)
 				&& (immunizationRecommendation.getCriterionEntry().getRecCategory() != null)) {
-			final CdaChVacdRecCategories recCategory = immunizationRecommendation.getCriterionEntry()
-					.getRecCategory();
+			final CdaChVacdRecCategories recCategory = immunizationRecommendation
+					.getCriterionEntry().getRecCategory();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
+			// TODO This is draft implementation only! the text needs to be
+			// translated by the real code. Displaynames should never be
+			// used!
 			stringBuffer.append(recCategory.getCode(languageCode).getDisplayName());
 			stringBuffer.append("</content>");
 			immunizationRecommendation.getCriterionEntry().setTextReference("#" + contentId);

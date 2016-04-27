@@ -23,6 +23,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
+import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.AbstractProblemEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -31,15 +33,16 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
+import org.ehealth_connector.cda.ch.textbuilder.EdDiagnosisChTextBuilder;
+import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
+import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryChTextBuilder;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.cda.textbuilder.ProblemConcernEntryTextBuilder;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -63,16 +66,11 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
  */
 public class CdaChEdesCommon {
 
-	public static final boolean CDA_LEVEL2_TEXT_GENERATION = true;
-
-	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary";
-
-	private static final String DOCTITLE_GER = "Notfallaustrittsbericht";
-
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
 	private CodedVitalSignsSection mCodedVitalSigns;
 
-	private final ClinicalDocument document;
+	private final ClinicalDocument mdhtDocument;
+	private final AbstractCda cdaDocument;
 
 	/**
 	 * Create a new common EDES CDA.
@@ -80,8 +78,9 @@ public class CdaChEdesCommon {
 	 * @param document
 	 *            MDHT ClinicalDocument object
 	 */
-	public CdaChEdesCommon(ClinicalDocument document) {
-		this.document = document;
+	public CdaChEdesCommon(AbstractCda cdaDocument) {
+		this.cdaDocument = cdaDocument;
+		this.mdhtDocument = cdaDocument.getDoc();
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.ACTIVE_PROBLEMS)) {
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
 			} else {
@@ -118,14 +117,8 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
-
-		// TODO tsc
-		// section.createStrucDocText(mCommon.getProblemTable(section)); //
-		// Generate
-		// <text>ProblemConcern
-		// table</text>
 	}
 
 	/**
@@ -152,7 +145,7 @@ public class CdaChEdesCommon {
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateAllergyConcernReferences(section.getActs(),
 				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS)) {
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextAllergyProblemConcerns(section));
 			} else {
@@ -162,12 +155,8 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			allergyOrOtherAdverseReaction.copyMdhtAllergyConcern().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
-
-		// TODO tsc
-		// section.createStrucDocText(getAllergyTable(getAllergiesAndOtherAdverseReactions(section)));
-		// Generate <text> Allergy table</text>
 	}
 
 	/**
@@ -197,6 +186,16 @@ public class CdaChEdesCommon {
 
 		mCodedVitalSigns.add(organizer, vitalSign, author, "vs");
 
+		// update the MDHT Object content references to CDA level 1 text
+		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.CODED_VITAL_SIGNS)) {
+			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+				// create the CDA level 1 text
+				section.createStrucDocText(generateNarrativeTextCodedVitalSigns(
+						mCodedVitalSigns.getVitalSignObservations()));
+			} else {
+				setNarrativeTextSection(SectionsEDES.CODED_VITAL_SIGNS, section, "");
+			}
+		}
 	}
 
 	public void addEdDiagnosis(ProblemConcern edDiagnosis, Section section) {
@@ -212,7 +211,7 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateEdDiagnoseReferences(section.getActs(), SectionsEDES.ED_DIAGNOSIS)) {
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextEdDiagnoses(section));
 			} else {
@@ -221,7 +220,7 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("Keine Angaben");
 			edDiagnosis.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
 	}
 
@@ -247,7 +246,7 @@ public class CdaChEdesCommon {
 				SectionsEDES.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
-			if (CDA_LEVEL2_TEXT_GENERATION) {
+			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 				section.createStrucDocText(generateNarrativeTextPastProblemConcernEntries(section));
 			} else {
 				setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS, section, "");
@@ -255,27 +254,22 @@ public class CdaChEdesCommon {
 		} else {
 			section.createStrucDocText("");
 			pastIllness.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-			.getObservation().setText(Util.createEd(""));
+					.getObservation().setText(Util.createEd(""));
 		}
-
-		// TODO tsc
-		// section.createStrucDocText(getProblemTable(section)); // Generate
-		// <text>ProblemConcern
-		// table</text>
 	}
 
 	public void addSection(Section section) {
 		final SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
-		if (document.getLanguageCode() != null) {
-			section.setTitle(Util.st(sectionEnum
-					.getSectionTitle(LanguageCode.getEnum(document.getLanguageCode().getCode()))));
+		if (mdhtDocument.getLanguageCode() != null) {
+			section.setTitle(Util.st(sectionEnum.getSectionTitle(
+					LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()))));
 		}
-		document.addSection(section);
+		mdhtDocument.addSection(section);
 	}
 
 	/**
 	 * <div class="en">Generates the human readable text of the active problems
-	 * chapter</div> <div class="de">Liefert den menschenlesbaren Text des
+	 * section</div> <div class="de">Liefert den menschenlesbaren Text des
 	 * Kapitels zu Aktiven Leiden zurück</div>
 	 *
 	 * @return the active problem concerns text
@@ -285,44 +279,57 @@ public class CdaChEdesCommon {
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns(section));
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
+		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
+				problemConcernEntryList, SectionsEDES.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
 
 	/**
 	 * <div class="en">Generates the human readable text of the allergy concerns
-	 * chapter</div> <div class="de">Liefert den Text des Kapitels Allergie
+	 * section</div> <div class="de">Liefert den Text des Kapitels Allergie
 	 * Leiden zurück</div>
 	 *
 	 * @return the allergy problem concerns text
 	 */
 	public String generateNarrativeTextAllergyProblemConcerns(Section section) {
 		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
-				getAllergyProblemConcerns(section), SectionsVACD.ALLERGIES_REACTIONS);
+				getAllergyProblemConcerns(section),
+				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the coded vital
+	 * signs section</div> <div class="de">Liefert den menschenlesbaren Text des
+	 * Kapitels zu Aktiven Leiden zurück</div>
+	 *
+	 * @return the active problem concerns text
+	 */
+	public String generateNarrativeTextCodedVitalSigns(
+			List<AbstractObservation> vitalSignObservationList) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignObservationList,
+				SectionsEDES.CODED_VITAL_SIGNS);
 		return b.toString();
 	}
 
 	/**
 	 * <div class="en">Generates the human readable text of the ed diagnoses
-	 * chapter</div> <div class="de">Liefert den Text des Kapitels
+	 * section</div> <div class="de">Liefert den Text des Kapitels
 	 * Notfalldiagnosen zurück</div>
 	 *
 	 * @return the allergy problem concerns text
 	 */
 	public String generateNarrativeTextEdDiagnoses(Section section) {
 		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
-		// Convert from the specific PastProblemConcern Type to the more
-		// general PastProblemConcern
 		problemConcernEntryList.addAll(getEdDiagnoses(section));
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsEDES.ED_DIAGNOSIS);
+		final EdDiagnosisChTextBuilder b = new EdDiagnosisChTextBuilder(problemConcernEntryList,
+				SectionsEDES.ED_DIAGNOSIS);
 		return b.toString();
 	}
 
 	/**
 	 * <div class="en">Generates the human readable text of the history of past
-	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text
+	 * illness section</div> <div class="de">Liefert den menschenlesbaren Text
 	 * zu allen vergangenen Leiden zurück</div>
 	 *
 	 * @return the past problem concern entries text
@@ -334,14 +341,14 @@ public class CdaChEdesCommon {
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(pastProblemConcerns);
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
+				problemConcernEntryList, SectionsEDES.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
 	/**
 	 * <div class="en">Generates the human readable text of the history of past
-	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text
+	 * illness section</div> <div class="de">Liefert den menschenlesbaren Text
 	 * zu allen vergangenen Leiden zurück</div>
 	 *
 	 * @return the past problem concern entries text
@@ -352,8 +359,8 @@ public class CdaChEdesCommon {
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getPastProblemConcerns(section));
-		final ProblemConcernEntryTextBuilder b = new ProblemConcernEntryTextBuilder(
-				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
+				problemConcernEntryList, SectionsEDES.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
@@ -428,7 +435,7 @@ public class CdaChEdesCommon {
 		final StringBuilder sb = new StringBuilder();
 		if (!allergyConcerns.isEmpty()) {
 			sb.append("<table><tbody>");
-			final CS lcode = document.getLanguageCode();
+			final CS lcode = mdhtDocument.getLanguageCode();
 			if (lcode != null) {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
@@ -452,20 +459,26 @@ public class CdaChEdesCommon {
 					strStatus = AllergyConcern.getStatus().toString();
 				if (AllergyConcern.getConcernEntry().getText().getText() != null)
 					strCommentar = AllergyConcern.getConcernEntry().getText().getText();
-				for (final AbstractAllergyProblem AllergyProblem : AllergyConcern.getAllergyProblems()) {
+				for (final AbstractAllergyProblem AllergyProblem : AllergyConcern
+						.getAllergyProblems()) {
 					String strStartDateTime = "-";
 					String strEndDateTime = "-";
 					String strCode = "-";
 					String strDescription = "-";
 					try {
 						if (AllergyProblem.getStartDate() != null)
-							strStartDateTime = AllergyProblem.getStartDate();
+							strStartDateTime = DateUtil.formatDateCH(AllergyProblem.getStartDate());
 						if (AllergyProblem.getEndDate() != null)
-							strEndDateTime = AllergyProblem.getEndDate();
+							strEndDateTime = DateUtil.formatDateCH(AllergyProblem.getEndDate());
 					} catch (final NullPointerException npe) {
 					}
 					if (AllergyProblem.getValue().getCode().getCode() != null)
 						strCode = AllergyProblem.getValue().getCode().getCode();
+
+					// TODO This is draft implementation only! the text needs to
+					// be
+					// translated by the real code. Displaynames should never be
+					// used!
 					if (AllergyProblem.getValue().getCode().getDisplayName() != null)
 						strDescription = AllergyProblem.getValue().getCode().getDisplayName();
 					// if (strDescription.equals("-") ) strDescription =
@@ -479,21 +492,6 @@ public class CdaChEdesCommon {
 		}
 
 		return sb.toString();
-	}
-
-	public String getDocumentTitle() {
-		final CS lcode = document.getLanguageCode();
-		if (lcode != null) {
-			switch (lcode.getCode()) {
-			case LanguageCode.GERMAN_CODE:
-				return DOCTITLE_GER;
-			case LanguageCode.FRENCH_CODE:
-			case LanguageCode.ITALIAN_CODE:
-			case LanguageCode.ENGLISH_CODE:
-				return DOCTITLE_EN;
-			}
-		}
-		return DOCTITLE_EN;
 	}
 
 	/**
@@ -574,7 +572,7 @@ public class CdaChEdesCommon {
 		final StringBuilder sb = new StringBuilder();
 		if (!acts.isEmpty()) {
 			sb.append("<table><tbody>");
-			final CS lcode = document.getLanguageCode();
+			final CS lcode = mdhtDocument.getLanguageCode();
 			if (lcode != null) {
 				switch (lcode.getCode()) {
 				case LanguageCode.GERMAN_CODE:
@@ -609,7 +607,7 @@ public class CdaChEdesCommon {
 					try {
 						if (Problementry.getStartDate() != null)
 							strStartDateTime = DateUtil
-							.formatDateTimeCh(Problementry.getStartDate());
+									.formatDateTimeCh(Problementry.getStartDate());
 						if (Problementry.getEndDate() != null)
 							strEndDateTime = DateUtil.formatDateTimeCh(Problementry.getEndDate());
 					} catch (final NullPointerException npe) {
@@ -621,6 +619,12 @@ public class CdaChEdesCommon {
 						if ((value.getCode().getCode() != null)
 								&& (Problementry.getValue().getCode().getCode() != ""))
 							strCode = Problementry.getValue().getCode().getCode();
+
+						// TODO This is draft implementation only! the text
+						// needs to be
+						// translated by the real code. Displaynames should
+						// never be
+						// used!
 						if (value.getCode().getDisplayName() != null)
 							strDescription = Problementry.getValue().getCode().getDisplayName();
 					}
@@ -664,7 +668,7 @@ public class CdaChEdesCommon {
 				} else {
 					// Create references to level 1 text
 					ED reference;
-					if (CDA_LEVEL2_TEXT_GENERATION) {
+					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
@@ -674,8 +678,8 @@ public class CdaChEdesCommon {
 				}
 				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					CdaChUtil.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j),
-							loincSectionCode);
+					CdaChUtil.updateRefIfComment(cdaDocument.IsNarrativeTextGenerationEnabled(), er,
+							String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
 		}
@@ -698,7 +702,7 @@ public class CdaChEdesCommon {
 				} else {
 					// Create references to level 1 text
 					ED reference;
-					if (CDA_LEVEL2_TEXT_GENERATION) {
+					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
@@ -708,8 +712,8 @@ public class CdaChEdesCommon {
 				}
 				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					CdaChUtil.updateRefIfComment(er, String.valueOf(i) + String.valueOf(j),
-							loincSectionCode);
+					CdaChUtil.updateRefIfComment(cdaDocument.IsNarrativeTextGenerationEnabled(), er,
+							String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
 		}
@@ -733,7 +737,7 @@ public class CdaChEdesCommon {
 					// Create references to level 1 text
 					i++;
 					ED reference;
-					if (CDA_LEVEL2_TEXT_GENERATION) {
+					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());

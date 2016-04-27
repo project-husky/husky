@@ -24,7 +24,6 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.NullFlavor;
-import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
@@ -57,12 +56,12 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param id
 	 *            the id
 	 */
-	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignsObservation observation,
+	public VitalSignsOrganizer(Date effectiveTime, Author author, VitalSignObservation observation,
 			Identificator id) {
 		this();
 		setEffectiveTime(effectiveTime);
 		addAuthor(author);
-		addVitalSignsObservation(observation);
+		addVitalSignObservation(observation);
 	}
 
 	/**
@@ -74,10 +73,10 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param observation
 	 *            the observation
 	 */
-	public VitalSignsOrganizer(Date effectiveTime, VitalSignsObservation observation) {
+	public VitalSignsOrganizer(Date effectiveTime, VitalSignObservation observation) {
 		this();
 		setEffectiveTime(effectiveTime);
-		addVitalSignsObservation(observation);
+		addVitalSignObservation(observation);
 		addId(null);
 	}
 
@@ -125,7 +124,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param observation
 	 *            the observation
 	 */
-	public void addVitalSignsObservation(VitalSignsObservation observation) {
+	public void addVitalSignObservation(VitalSignObservation observation) {
 		getMdht().addObservation(observation.getMdhtCopy());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
@@ -150,10 +149,11 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 *
 	 * @return the vital signs observations
 	 */
-	public List<VitalSignsObservation> getVitalSignsObservations() {
-		final List<VitalSignsObservation> vsl = new ArrayList<VitalSignsObservation>();
-		for (final VitalSignObservation mdht : getMdht().getVitalSignObservations()) {
-			final VitalSignsObservation ehc = new VitalSignsObservation(mdht);
+	public List<VitalSignObservation> getVitalSignObservations() {
+		final List<VitalSignObservation> vsl = new ArrayList<VitalSignObservation>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht : getMdht()
+				.getVitalSignObservations()) {
+			final VitalSignObservation ehc = new VitalSignObservation(mdht);
 			vsl.add(ehc);
 		}
 		return vsl;

@@ -55,16 +55,21 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 		append("</tbody>");
 	}
 
-	private void addHeader() {
-		append("<thead>");
-		append("<tr>");
-		append("<th>TODO tsc</th>");
-		append("<th>TODO tsc</th>");
-		append("<th>TODO tsc</th>");
-		append("</tr>");
-		append("</thead>");
-	}
+	/**
+	 * adds the header line of the table in the narrative text
+	 */
+	protected abstract void addHeader();
 
+	/**
+	 * adds one table row in the narrative text
+	 *
+	 * @param problemConcern
+	 *            the problem concern to be displayed in the narrative text
+	 * @param i
+	 *            the row index (used for the creation of the content id
+	 *            elements; make sure you do not use duplicate indexes other
+	 *            wise the CDA xml will become invalid!)
+	 */
 	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
 
 	/**

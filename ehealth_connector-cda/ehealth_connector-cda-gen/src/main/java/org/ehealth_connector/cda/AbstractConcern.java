@@ -48,7 +48,7 @@ public abstract class AbstractConcern
 	public AbstractConcern() {
 		super(IHEFactory.eINSTANCE.createConcernEntry().init());
 		mConcernEntry = getMdht();
-		getConcernEntry().setCode(Util.createCENullFlavorUNK());
+		getConcernEntry().setCode(Util.createCodeNullFlavorUNK());
 	}
 
 	/**
@@ -57,7 +57,7 @@ public abstract class AbstractConcern
 	public AbstractConcern(AllergyIntoleranceConcern allergyIntoleranceConcern) {
 		super(allergyIntoleranceConcern);
 		mConcernEntry = allergyIntoleranceConcern;
-		getConcernEntry().setCode(Util.createCENullFlavorUNK());
+		getConcernEntry().setCode(Util.createCodeNullFlavorNA());
 	}
 
 	/**

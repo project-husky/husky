@@ -22,8 +22,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -52,7 +54,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">Class LaboratoryObservation.</div> <div class="de">Klasse
  * Laborbefund</div> <div class="it"></div>
  */
-public class LaboratoryObservation {
+public class LaboratoryObservation extends AbstractObservation {
 
 	/** The m laboratory observation. */
 	private final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLaboratoryObservation;
@@ -69,21 +71,22 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a laboratory observation</div>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
-	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a laboratory observation</div>
+	 *            <div class="de">Code für einen bezüglich einer Impfung
+	 *            relevanten Laborbefund</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">true, if an immune protection exists</div>
+	 *            <div class="de">true, wenn ein Immunschutz besteht.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 *          <div class="en">date and time, when the result was known</div>
-	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
-	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param laboratory
-	 *          <div class="en">the performing laboratory</div>
-	 *          <div class="de">Das ausführende Labor.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the performing laboratory</div>
+	 *            <div class="de">Das ausführende Labor.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
@@ -99,24 +102,25 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a laboratory observation</div>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
-	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a laboratory observation</div>
+	 *            <div class="de">Code für einen bezüglich einer Impfung
+	 *            relevanten Laborbefund</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param laboratory
-	 *          <div class="en">the performing laboratory</div>
-	 *          <div class="de">Das ausführende Labor.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the performing laboratory</div>
+	 *            <div class="de">Das ausführende Labor.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">true, if an immune protection exists</div>
+	 *            <div class="de">true, wenn ein Immunschutz besteht.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 *          <div class="en">date and time, when the result was known</div>
-	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
-	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param valueCode
-	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Wert des Resultats (als Code-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Code valueCode) {
@@ -129,24 +133,25 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code
-	 *          <div class="en">Code for a laboratory observation</div>
-	 *          <div class="de">Code für einen bezüglich einer Impfung relevanten
-	 *          Laborbefund</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">Code for a laboratory observation</div>
+	 *            <div class="de">Code für einen bezüglich einer Impfung
+	 *            relevanten Laborbefund</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 * @param laboratory
-	 *          <div class="en">the performing laboratory</div>
-	 *          <div class="de">Das ausführende Labor.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the performing laboratory</div>
+	 *            <div class="de">Das ausführende Labor.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param immuneProtection
-	 *          <div class="en">true, if an immune protection exists</div>
-	 *          <div class="de">true, wenn ein Immunschutz besteht.</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">true, if an immune protection exists</div>
+	 *            <div class="de">true, wenn ein Immunschutz besteht.</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 * @param dateTimeOfResult
-	 *          <div class="en">date and time, when the result was known</div>
-	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
-	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 * @param value
-	 *          <div class="de">Wert des Resultats (als Code-Objekt)</div>
-	 *          <div class="fr"></div> <div class="it"></div>
+	 *            <div class="de">Wert des Resultats (als Code-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public LaboratoryObservation(Code code, Organization laboratory, boolean immuneProtection,
 			Date dateTimeOfResult, Value value) {
@@ -159,9 +164,9 @@ public class LaboratoryObservation {
 	 * Instantiates a new laboratory observation.
 	 *
 	 * @param labObs
-	 *          <br>
-	 *          <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
-	 *          <div class="it"> lab obs</div>
+	 *            <br>
+	 *            <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
+	 *            <div class="it"> lab obs</div>
 	 */
 	public LaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation labObs) {
@@ -172,7 +177,7 @@ public class LaboratoryObservation {
 	 * Adds the id.
 	 *
 	 * @param id
-	 *          the new id
+	 *            the new id
 	 */
 	public void addId(Identificator id) {
 		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
@@ -183,11 +188,11 @@ public class LaboratoryObservation {
 	 * Adds a performer
 	 *
 	 * @param performer
-	 *          the performer
+	 *            the performer
 	 * @param dateTimeOfResult
-	 *          <div class="en">date and time, when the result was known</div>
-	 *          <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
-	 *          wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void addPerformer(Performer performer, Date dateTimeOfResult) {
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
@@ -199,7 +204,7 @@ public class LaboratoryObservation {
 	 * Sets the value as code.
 	 *
 	 * @param code
-	 *          the new value
+	 *            the new value
 	 */
 	public void addValue(Code code) {
 		mLaboratoryObservation.getValues().add(code.getCD());
@@ -209,7 +214,7 @@ public class LaboratoryObservation {
 	 * Adds the value.
 	 *
 	 * @param value
-	 *          the new value
+	 *            the new value
 	 */
 	public void addValue(Value value) {
 		if (value.isPhysicalQuantity()) {
@@ -235,12 +240,13 @@ public class LaboratoryObservation {
 	}
 
 	/**
-	 * <div class="en">Gets the code of the observation</div> <div class="de">Gibt
-	 * den Code der Beobachtung zurück.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the code of the observation</div>
+	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the code
 	 */
+	@Override
 	public Code getCode() {
 		final Code code = new Code(mLaboratoryObservation.getCode());
 		return code;
@@ -262,22 +268,23 @@ public class LaboratoryObservation {
 	 *
 	 * @return the comment text
 	 */
+	@Override
 	public String getCommentText() {
 		return Util.getCommentText(mLaboratoryObservation.getEntryRelationships());
 	}
 
 	/**
 	 * <div class="en">Gets the date and time, when the examination was
-	 * performed</div> <div class="de">Gibt das Datum und die Uhrzeit zurück, wann
-	 * die Untersuchung durchgeführt wurde.</div> <div class="fr"></div>
+	 * performed</div> <div class="de">Gibt das Datum und die Uhrzeit zurück,
+	 * wann die Untersuchung durchgeführt wurde.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return the date time of result
 	 */
 	public Date getDateTimeOfResult() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtil
-					.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime());
+			return DateUtil.parseIVL_TSVDateTimeValue(
+					mLaboratoryObservation.getPerformers().get(0).getTime());
 		} else {
 			return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
 		}
@@ -286,15 +293,15 @@ public class LaboratoryObservation {
 	/**
 	 * <div class="en">Gets the date and time of the performed examination as
 	 * String</div> <div class="de">Gibt das Datum und die Uhrzeit, wann die
-	 * Untersuchung durchgeführt wurde als String zurück (z.B. "28.02.2015 16:00"
-	 * )</div> <div class="fr"></div> <div class="it"></div>
+	 * Untersuchung durchgeführt wurde als String zurück (z.B.
+	 * "28.02.2015 16:00" )</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return the date time of result
 	 */
 	public String getDateTimeOfResultStr() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtil.formatDateTimeCh(DateUtil
-					.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getPerformers().get(0).getTime()));
+			return DateUtil.formatDateTimeCh(DateUtil.parseIVL_TSVDateTimeValue(
+					mLaboratoryObservation.getPerformers().get(0).getTime()));
 		} else {
 			return DateUtil.formatDateTimeCh(
 					DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime()));
@@ -314,7 +321,7 @@ public class LaboratoryObservation {
 	 * Gets the specified id value based on its code system.
 	 *
 	 * @param codeSystem
-	 *          id's identity domain
+	 *            id's identity domain
 	 * @return the id or null if it doesn't exist
 	 */
 	public Identificator getId(IdentityDomain codeSystem) {
@@ -355,7 +362,8 @@ public class LaboratoryObservation {
 	/**
 	 * <div class="en">Gets the laboratory organization, which performed the
 	 * examination</div> <div class="de">Gibt das Labor zurück, welches das
-	 * Ergebnis ermittelt hat.</div> <div class="fr"></div> <div class="it"></div>
+	 * Ergebnis ermittelt hat.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return the laboratory
 	 */
@@ -364,8 +372,8 @@ public class LaboratoryObservation {
 			if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity() != null) {
 				if (mLaboratoryObservation.getPerformers().get(0).getAssignedEntity()
 						.getRepresentedOrganizations().size() > 0) {
-					return new Organization(mLaboratoryObservation.getPerformers().get(0).getAssignedEntity()
-							.getRepresentedOrganizations().get(0));
+					return new Organization(mLaboratoryObservation.getPerformers().get(0)
+							.getAssignedEntity().getRepresentedOrganizations().get(0));
 				}
 			}
 		}
@@ -381,11 +389,18 @@ public class LaboratoryObservation {
 		return mLaboratoryObservation;
 	}
 
+	@Override
+	public Object getMdhtObservation() {
+		return mLaboratoryObservation;
+	}
+
 	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded String.
+	 * Get the (first) problem value. The Value may be a coded or uncoded
+	 * String.
 	 *
 	 * @return the (first) problem value as string.
 	 */
+	@Override
 	public Value getValue() {
 		if (!mLaboratoryObservation.getValues().isEmpty()) {
 			return new Value(mLaboratoryObservation.getValues().get(0));
@@ -412,7 +427,7 @@ public class LaboratoryObservation {
 	 * Sets the code.
 	 *
 	 * @param code
-	 *          the new code
+	 *            the new code
 	 */
 	public void setCode(Code code) {
 		mLaboratoryObservation.setCode(code.getCD());
@@ -422,7 +437,7 @@ public class LaboratoryObservation {
 	 * Sets a comment text
 	 *
 	 * @param text
-	 *          the text
+	 *            the text
 	 */
 	public void setCommentText(String text) {
 		final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
@@ -441,7 +456,7 @@ public class LaboratoryObservation {
 	 * Sets the date time of result.
 	 *
 	 * @param dateTimeOfResult
-	 *          the new date time of result
+	 *            the new date time of result
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
@@ -456,7 +471,7 @@ public class LaboratoryObservation {
 	 * Sets the interpretation code.
 	 *
 	 * @param code
-	 *          the new interpretation code
+	 *            the new interpretation code
 	 */
 	public void setInterpretationCode(Code code) {
 		mLaboratoryObservation.getInterpretationCodes().clear();
@@ -467,7 +482,7 @@ public class LaboratoryObservation {
 	 * Sets the interpretation code.
 	 *
 	 * @param code
-	 *          the new interpretation code
+	 *            the new interpretation code
 	 */
 	public void setInterpretationCode(ObservationInterpretationForImmunization code) {
 		mLaboratoryObservation.getInterpretationCodes().clear();
@@ -479,14 +494,15 @@ public class LaboratoryObservation {
 	 * laboratory.</div> <div class="it">Sets the laboratory.</div>
 	 *
 	 * @param laboratory
-	 *          <br>
-	 *          <div class="en"> laboratory</div>
-	 *          <div class="fr"> laboratory</div>
-	 *          <div class="it"> laboratory</div>
+	 *            <br>
+	 *            <div class="en"> laboratory</div>
+	 *            <div class="fr"> laboratory</div>
+	 *            <div class="it"> laboratory</div>
 	 * @param dateTimeOfResult
-	 *          <br>
-	 *          <div class="en"> date time of result</div> <div class="fr"> date
-	 *          time of result</div> <div class="it"> date time of result</div>
+	 *            <br>
+	 *            <div class="en"> date time of result</div>
+	 *            <div class="fr"> date time of result</div>
+	 *            <div class="it"> date time of result</div>
 	 */
 	public void setLaboratory(Organization laboratory, Date dateTimeOfResult) {
 		final Performer2 perf = CDAFactory.eINSTANCE.createPerformer2();
@@ -507,5 +523,17 @@ public class LaboratoryObservation {
 			e.printStackTrace();
 		}
 		mLaboratoryObservation.getPerformers().add(perf);
+	}
+
+	@Override
+	public void setTargetSite(ActSite actSite) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void setValue(Value value) {
+		mLaboratoryObservation.getValues().clear();
+		addValue(value);
+
 	}
 }

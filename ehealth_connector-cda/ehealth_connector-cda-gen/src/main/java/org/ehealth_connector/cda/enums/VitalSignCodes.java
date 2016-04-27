@@ -18,6 +18,9 @@ package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.LangText;
+import org.ehealth_connector.common.utils.LangTexts;
 
 /*
  *<div class="de">Codesystem: LOINC (2.16.840.1.113883.6.1).</div>
@@ -144,6 +147,15 @@ public enum VitalSignCodes {
 			return descriptionIt;
 		}
 		return getDisplayNameEn();
+	}
+
+	public LangTexts getLangTexts() {
+		LangTexts retVal = new LangTexts();
+		retVal.add(new LangText(LanguageCode.GERMAN, descriptionDe));
+		retVal.add(new LangText(LanguageCode.ENGLISH, descriptionEn));
+		retVal.add(new LangText(LanguageCode.FRENCH, descriptionFr));
+		retVal.add(new LangText(LanguageCode.ITALIAN, descriptionIt));
+		return retVal;
 	}
 
 	/**

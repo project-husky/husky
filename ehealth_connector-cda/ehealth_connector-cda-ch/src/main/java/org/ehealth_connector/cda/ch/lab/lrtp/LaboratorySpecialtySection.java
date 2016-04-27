@@ -16,9 +16,9 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * The Class LaboratorySpecialtySection. <div class="en">Each LRPH document in

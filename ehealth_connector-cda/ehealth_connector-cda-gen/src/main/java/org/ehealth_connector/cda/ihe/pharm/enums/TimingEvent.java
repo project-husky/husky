@@ -16,8 +16,8 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * The Enum TimingEvent (OID 2.16.840.1.113883.5.139)

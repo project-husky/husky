@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
-import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -44,7 +44,7 @@ public class ImmunizationSection
 	 * Instantiates a new immunization section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public ImmunizationSection(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createImmunizationsSection().init(), null, null);
@@ -57,7 +57,7 @@ public class ImmunizationSection
 	 * Instantiates a new immunization section.
 	 *
 	 * @param immunizationSection
-	 *          the immunization section
+	 *            the immunization section
 	 */
 	protected ImmunizationSection(
 			org.openhealthtools.mdht.uml.cda.ch.ImmunizationsSection immunizationSection) {
@@ -65,16 +65,16 @@ public class ImmunizationSection
 	}
 
 	/**
-	 * Adds the immunization to the section. If the text is created in the section
-	 * based on the immunization object the level3 obects immunization,
-	 * medicationTargetEntry, commentEntry and criterionEntry will be linked with
-	 * a text reference (If the CommentEntry in immunization has a text it will be
-	 * replaced by the reference)
+	 * Adds the immunization to the section. If the text is created in the
+	 * section based on the immunization object the level3 obects immunization,
+	 * medicationTargetEntry, commentEntry and criterionEntry will be linked
+	 * with a text reference (If the CommentEntry in immunization has a text it
+	 * will be replaced by the reference)
 	 *
 	 * @param immunization
-	 *          the immunization
+	 *            the immunization
 	 * @param createSectionText
-	 *          if the section text should be created
+	 *            if the section text should be created
 	 */
 	public void addImmunization(org.ehealth_connector.cda.ch.vacd.Immunization immunization,
 			boolean createSectionText) {
@@ -114,9 +114,9 @@ public class ImmunizationSection
 	 * adds a section the table for an immunization.
 	 *
 	 * @param immunization
-	 *          the immunization
+	 *            the immunization
 	 * @param contendIdPrefix
-	 *          the contend id prefix
+	 *            the contend id prefix
 	 * @return the table row
 	 */
 	public String getTableRow(Immunization immunization, String contendIdPrefix) {
@@ -165,7 +165,8 @@ public class ImmunizationSection
 			Collections.sort(medicationTargetEntries);
 
 			for (final MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {
-				final CdaChVacdImmunizations vacdImmun = medicationTargetEntry.getImmunizationTarget();
+				final CdaChVacdImmunizations vacdImmun = medicationTargetEntry
+						.getImmunizationTarget();
 				if (vacdImmun != null) {
 					if (i > 0) {
 						stringBuffer.append(", ");
@@ -173,7 +174,12 @@ public class ImmunizationSection
 					++i;
 					contentId = contendIdPrefix + colIndex++;
 					stringBuffer.append("<content ID=\"" + contentId + "\">");
-					stringBuffer.append(medicationTargetEntry.getImmunizationTargetCode().getDisplayName());
+					// TODO This is draft implementation only! the text needs to
+					// be
+					// translated by the real code. Displaynames should never be
+					// used!
+					stringBuffer.append(
+							medicationTargetEntry.getImmunizationTargetCode().getDisplayName());
 					stringBuffer.append("</content>");
 					medicationTargetEntry.setTextReference("#" + contentId);
 				}
@@ -181,7 +187,8 @@ public class ImmunizationSection
 		}
 		stringBuffer.append("</td><td>");
 		// Impfung erfolgt durch
-		if ((immunization.getPerformer() != null) && (immunization.getPerformer().getName() != null)) {
+		if ((immunization.getPerformer() != null)
+				&& (immunization.getPerformer().getName() != null)) {
 			stringBuffer.append(immunization.getPerformer().getName().getCompleteName());
 		}
 		stringBuffer.append("</td><td>");
@@ -193,9 +200,13 @@ public class ImmunizationSection
 		// EKIF Empfehlungskategorie
 		if ((immunization.getCriterionEntry() != null)
 				&& (immunization.getCriterionEntry().getRecCategory() != null)) {
-			final CdaChVacdRecCategories recCategory = immunization.getCriterionEntry().getRecCategory();
+			final CdaChVacdRecCategories recCategory = immunization.getCriterionEntry()
+					.getRecCategory();
 			contentId = contendIdPrefix + colIndex++;
 			stringBuffer.append("<content ID=\"" + contentId + "\">");
+			// TODO This is draft implementation only! the text needs to be
+			// translated by the real code. Displaynames should never be
+			// used!
 			stringBuffer.append(recCategory.getCode(languageCode).getDisplayName());
 			stringBuffer.append("</content>");
 			immunization.getCriterionEntry().setTextReference("#" + contentId);

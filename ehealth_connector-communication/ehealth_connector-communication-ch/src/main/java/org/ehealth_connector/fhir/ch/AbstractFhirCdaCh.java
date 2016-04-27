@@ -21,12 +21,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.ch.FhirCdaChVacd.DocTypeCode;

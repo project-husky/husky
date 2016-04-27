@@ -24,8 +24,8 @@ import org.ehealth_connector.cda.AbstractAllergyProblem;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
-import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
@@ -55,51 +55,49 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 		super(toAbstracAllergyConcernList(problemConcerns), section);
 	}
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder#addRow(org.ehealth_connector.cda.AbstractAllergyConcern,
-	 *      int)
-	 */
+	@Override
+	protected void addHeader() {
+		// Currently only German available. Translation contributions are
+		// welcome
+		append("<thead>");
+		append("<tr>");
+		append("<th>Bereich</th>");
+		append("<th>Allergie</th>");
+		append("<th>Von</th>");
+		append("<th>Bis</th>");
+		append("<th>Kommentar</th>");
+		append("</tr>");
+		append("</thead>");
+	}
+
 	@Override
 	protected void addRow(AbstractAllergyConcern allergyConcern, int i) {
-		for (final AbstractAllergyProblem item : allergyConcern.getAllergyProblems()) {
+		// Currently only German available. Translation contributions are
+		// welcome
+		int j = 0;
+		String contentPrefix = getContentIdPrefix() + i;
+		for (AbstractAllergyProblem problem : allergyConcern.getAllergyProblems()) {
+			j++;
 			append("<tr>");
-			addCell("Problem");
-			if (allergyConcern.getConcern() != null) {
-				addCellWithContent(allergyConcern.getConcern(), getContentIdPrefix(), i);
-			} else {
+			if (j == 1)
+				addCell(allergyConcern.getConcern());
+			else
 				addCell("");
-			}
-			if (allergyConcern.getAllergyProblems() == null) {
+
+			Value val = problem.getValue();
+			if (val != null)
+				addCellWithContent(val.toString(), contentPrefix, i);
+			else
 				addCell("");
-			} else {
-				// Create a string with more than one reference
-				String cellStr = "<td>";
-				int j = 0;
-				boolean minOneComment = false;
-				for (final AbstractAllergyProblem ap : allergyConcern.getAllergyProblems()) {
-					if (ap.getMdhtAllergyProblem().getEntryRelationships() != null) {
-						for (final EntryRelationship er : ap.getMdhtAllergyProblem()
-								.getEntryRelationships()) {
-							if (Util.isComment(er)) {
-								j++;
-								minOneComment = true;
-								cellStr = cellStr + ("<content ID='" + getContentIdPrefix()
-										+ "-comment"
-										+ i + j + "'>");
-								cellStr = cellStr + (ap.getCommentText());
-								cellStr = cellStr + ("</content>");
-							}
-						}
-					}
-				}
-				if (minOneComment) {
-					cellStr = cellStr + "</td>";
-					append(cellStr);
-				}
-			}
+
+			addCell(DateUtil.formatDateCH(problem.getStartDate()));
+			addCell(DateUtil.formatDateCH(problem.getEndDate()));
+
+			String commentText = problem.getCommentText();
+			if (commentText != null)
+				addCellWithContent(commentText, contentPrefix + "-comment", i);
+			else
+				addCell("");
 			append("</tr>");
 		}
 	}

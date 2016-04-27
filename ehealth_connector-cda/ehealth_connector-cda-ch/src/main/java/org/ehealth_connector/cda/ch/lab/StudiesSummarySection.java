@@ -16,7 +16,7 @@
 package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.MdhtSectionFacade;
-import org.ehealth_connector.cda.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**

@@ -24,12 +24,12 @@ import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
@@ -40,7 +40,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *
  */
 public class CdaChEdesCtnn
-extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
+		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
+
+	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary (Composite Triage and Nursing Note)";
+	private static final String DOCTITLE_GER = "Notfallaustrittsbericht (aus pflegerischer Sicht)";
 
 	/** main OID for CDA-CH-EDES CTNN */
 	public static final String OID_MAIN = "1.3.6.1.4.1.19376.1.5.3.1.1.13.1.3";
@@ -55,7 +58,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 	 */
 	public CdaChEdesCtnn() {
 		super(CHFactory.eINSTANCE.createCdaChEdesCtnn().init());
-		mCommon = new CdaChEdesCommon(getDoc());
+		mCommon = new CdaChEdesCommon(this);
 	}
 
 	/**
@@ -96,8 +99,8 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 		ce.setDisplayName("Triage Note");
 		getMdht().setCode(ce);
 
-		mCommon = new CdaChEdesCommon(getDoc());
-		setTitle(mCommon.getDocumentTitle());
+		mCommon = new CdaChEdesCommon(this);
+		setTitle(getDocumentTitle());
 	}
 
 	/**
@@ -111,7 +114,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 	 */
 	public CdaChEdesCtnn(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn doc) {
 		super(doc);
-		mCommon = new CdaChEdesCommon(getDoc());
+		mCommon = new CdaChEdesCommon(this);
 	}
 
 	/**
@@ -144,20 +147,9 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 	 */
 	public void addCodedVitalSign(VitalSignsOrganizer organizer, VitalSignObservation vitalSign,
 			Author author) {
-		if (mCodedVitalSigns == null) {
-			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
-					.getCodedVitalSignsSection();
-			if (section == null) {
-				section = IHEFactory.eINSTANCE.createCodedVitalSignsSection().init();
-				mCommon.addSection(section);
-			}
-			final LanguageCode languageCode = LanguageCode
-					.getEnum(getDoc().getLanguageCode().getCode());
-			mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
-					languageCode, section);
-		}
-
-		mCodedVitalSigns.add(organizer, vitalSign, author, "vs");
+		mCommon.addCodedVitalSign(organizer, vitalSign, author,
+				getDoc().getCodedVitalSignsSection(),
+				LanguageCode.getEnum(getDoc().getLanguageCode().getCode()));
 	}
 
 	/**
@@ -228,6 +220,21 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 	@Override
 	public org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn getDoc() {
 		return (org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) super.getDoc();
+	}
+
+	public String getDocumentTitle() {
+		final CS lcode = getDoc().getLanguageCode();
+		if (lcode != null) {
+			switch (lcode.getCode()) {
+			case LanguageCode.GERMAN_CODE:
+				return DOCTITLE_GER;
+			case LanguageCode.FRENCH_CODE:
+			case LanguageCode.ITALIAN_CODE:
+			case LanguageCode.ENGLISH_CODE:
+				return DOCTITLE_EN;
+			}
+		}
+		return DOCTITLE_EN;
 	}
 
 	/**
@@ -859,4 +866,5 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn> {
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
+
 }

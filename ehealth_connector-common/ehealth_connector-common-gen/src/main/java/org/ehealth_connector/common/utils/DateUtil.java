@@ -515,8 +515,11 @@ public class DateUtil {
 	 * @return String - dd.MM.yyyy formatted
 	 */
 	public static String formatDateCH(Date date) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-		return sdf.format(date);
+		if (date != null) {
+			final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+			return sdf.format(date);
+		} else
+			return "";
 	}
 
 	/**
@@ -559,7 +562,10 @@ public class DateUtil {
 	 */
 	public static Date parseDate(TS timeStamp) {
 		final String value = timeStamp.getValue();
-		return parseDateyyyyMMdd(value);
+		if (value != null)
+			return parseDateyyyyMMdd(value);
+		else
+			return null;
 	}
 
 	public static Date parseDates(String value) {

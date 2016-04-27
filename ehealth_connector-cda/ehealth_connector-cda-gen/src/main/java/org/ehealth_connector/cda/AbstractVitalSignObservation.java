@@ -6,16 +6,19 @@ import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ActSite;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
@@ -36,10 +39,21 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  *
  *******************************************************************************/
 
-public abstract class AbstractVitalSignObservation {
+public abstract class AbstractVitalSignObservation extends AbstractObservation {
 
 	/** The m vital sign observation. */
 	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
+
+	/**
+	 * Adds the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	public void addId(Identificator id) {
+		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		mVitalSignObservation.getIds().add(ii);
+	}
 
 	/**
 	 * <div class="en">Gets the code of the observation</div>
@@ -48,9 +62,15 @@ public abstract class AbstractVitalSignObservation {
 	 *
 	 * @return the code
 	 */
+	@Override
 	public Code getCode() {
 		final Code code = new Code(getVitalSignObservation().getCode());
 		return code;
+	}
+
+	@Override
+	public String getCommentText() {
+		return Util.getCommentText(mVitalSignObservation.getEntryRelationships());
 	}
 
 	/**
@@ -100,6 +120,11 @@ public abstract class AbstractVitalSignObservation {
 		return EcoreUtil.copy(getVitalSignObservation());
 	}
 
+	@Override
+	public Object getMdhtObservation() {
+		return mVitalSignObservation;
+	}
+
 	/**
 	 * Gets the target site of the vital sign observation.
 	 *
@@ -146,12 +171,22 @@ public abstract class AbstractVitalSignObservation {
 	 *
 	 * @return the (first) problem value as string.
 	 */
+	@Override
 	public Value getValue() {
 		if (!getVitalSignObservation().getValues().isEmpty()
 				&& (getVitalSignObservation().getValues().get(0) instanceof PQ)) {
 			return new Value(getVitalSignObservation().getValues().get(0));
 		}
 		return null;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the vitalSignObservation
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getVitalSignObservation() {
+		return mVitalSignObservation;
 	}
 
 	/**
@@ -242,6 +277,7 @@ public abstract class AbstractVitalSignObservation {
 	 *            <div class="de">Anatomische Lage des Resultats</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
+	@Override
 	public void setTargetSite(ActSite code) {
 		if (code != null) {
 			getVitalSignObservation().getTargetSiteCodes().clear();
@@ -275,6 +311,7 @@ public abstract class AbstractVitalSignObservation {
 	 * @param value
 	 *            the new value
 	 */
+	@Override
 	public void setValue(Value value) {
 		if (value.isPhysicalQuantity()) {
 			getVitalSignObservation().getValues().add(value.copyMdhtPhysicalQuantity());
@@ -288,18 +325,14 @@ public abstract class AbstractVitalSignObservation {
 	}
 
 	/**
-	 * Method to get
-	 * @return the vitalSignObservation
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation getVitalSignObservation() {
-		return mVitalSignObservation;
-	}
-
-	/**
 	 * Method to set
-	 * @param vitalSignObservation the vitalSignObservation to set
+	 *
+	 * @param vitalSignObservation
+	 *            the vitalSignObservation to set
 	 */
-	public void setVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation vitalSignObservation) {
+	public void setVitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation vitalSignObservation) {
 		mVitalSignObservation = vitalSignObservation;
 	}
+
 }

@@ -14,12 +14,16 @@
  *
  *******************************************************************************/
 
-package org.ehealth_connector.cda.textbuilder;
+package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.AbstractProblemEntry;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
+import org.ehealth_connector.cda.textbuilder.TextBuilder;
+import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
@@ -27,7 +31,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
  * Always builds the whole part (not only adds one immunization recommendation).
  *
  */
-public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
+public class ProblemConcernEntryChTextBuilder extends TextBuilder {
 
 	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
 	private final String contentIdPrefix;
@@ -40,7 +44,7 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 	 * @param section
 	 *            the section
 	 */
-	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns,
+	public ProblemConcernEntryChTextBuilder(List<AbstractProblemConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
@@ -48,30 +52,53 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 
 	private void addBody() {
 		append("<tbody>");
-		int i = 1;
+		int i = 0;
 		for (final org.ehealth_connector.cda.AbstractProblemConcern problemConcern : problemConcerns) {
-			addRow(problemConcern, i++);
+			addRow(problemConcern, i);
+			i++;
 		}
 		append("</tbody>");
 	}
 
-	/**
-	 * adds the header line of the table in the narrative text
-	 */
-	protected abstract void addHeader();
+	private void addHeader() {
+		// Currently only German available. Translation contributions are
+		// welcome
+		append("<thead>");
+		append("<tr>");
+		append("<th>Bereich</th>");
+		append("<th>Leiden</th>");
+		append("<th>Von</th>");
+		append("<th>Bis</th>");
+		append("</tr>");
+		append("</thead>");
+	}
 
-	/**
-	 * adds one table row in the narrative text
-	 *
-	 * @param problemConcern
-	 *            the problem concern to be displayed in the narrative text
-	 * @param i
-	 *            the row index (used for the creation of the content id
-	 *            elements; make sure you do not use duplicate indexes other
-	 *            wise the CDA xml will become invalid!)
-	 */
-	protected abstract void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcern,
-			int i);
+	private void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcerns,
+			int index) {
+		// Currently only German available. Translation contributions are
+		// welcome
+		int i = 0;
+		for (AbstractProblemEntry problem : problemConcerns.getProblemEntries()) {
+			append("<tr>");
+			if (i == 0 && problemConcerns.getConcern() != null) {
+				addCell(problemConcerns.getConcern());
+			} else {
+				addCell("");
+			}
+
+			Value val = problem.getValue();
+			if (val != null)
+				addCellWithContent(val.toString(), contentIdPrefix, index);
+			else
+				addCell("");
+
+			addCell(DateUtil.formatDateCH(problem.getStartDate()));
+			addCell(DateUtil.formatDateCH(problem.getEndDate()));
+
+			append("</tr>");
+			i++;
+		}
+	}
 
 	/**
 	 * Returns HTML formatted string.

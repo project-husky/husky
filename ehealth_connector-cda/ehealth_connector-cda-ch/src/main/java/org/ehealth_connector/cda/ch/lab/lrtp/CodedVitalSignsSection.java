@@ -19,11 +19,10 @@ import org.ehealth_connector.cda.AbstractCodedVitalSigns;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
 
 /**
  * The Class CodedVitalSignsSection. <div class="en">This section contains a
@@ -83,8 +82,9 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#createVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation)
 	 */
 	@Override
-	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
-		return new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsObservation(mdht);
+	protected AbstractVitalSignObservation createVitalSignObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht) {
+		return new VitalSignObservation(mdht);
 	}
 
 	/**

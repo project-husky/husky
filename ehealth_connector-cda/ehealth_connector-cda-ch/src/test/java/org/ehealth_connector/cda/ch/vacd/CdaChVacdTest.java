@@ -46,7 +46,6 @@ import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
-import org.ehealth_connector.cda.enums.LanguageCode;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Address;
@@ -61,6 +60,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -531,7 +531,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(true, TestUtils.isEqual(id1, p.getId()));
 
 		p.setStartDate(startDate);
-		assertEquals(startDateString, p.getStartDate());
+		assertEquals(startDate, p.getStartDate());
 
 		p.setNotOccured(true);
 		assertEquals(true, p.getNotOccured());
