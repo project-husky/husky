@@ -44,6 +44,8 @@ import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.config.Configurator;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
+import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry;
+import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry.SEVERITY;
 import org.ehealth_connector.validation.service.pdf.PdfValidator;
 import org.ehealth_connector.validation.service.schematron.ReportBuilder;
 import org.ehealth_connector.validation.service.schematron.RuleSet;
@@ -149,6 +151,83 @@ public class CdaValidator {
 		this.reportBuilder = new ReportBuilder(validators);
 		this.langCode = langCode;
 
+	}
+
+	private boolean checkPdfLevel(PdfValidationResult result) {
+		boolean retVal = false;
+
+		String pdfLevel = this.configuration.getPdfLevel();
+		if (pdfLevel == null)
+			pdfLevel = "not set";
+
+		// 1a: PDF/A 1a, ISO 19005-1, Level A compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("1a"));
+
+		// 1b: PDF/A 1b, ISO 19005-1, Level B compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("1b"));
+
+		// 2a: PDF/A 2a, ISO 19005-2, Level A compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("2a"));
+
+		// 2b: PDF/A 2b, ISO 19005-2, Level B compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("2b"));
+
+		// 2u: PDF/A 2u, ISO 19005-2, Level U compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("2u"));
+
+		// 3a: PDF/A 3a, ISO 19005-3, Level A compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("3a"));
+
+		// 3b: PDF/A 3b, ISO 19005-3, Level B compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("3b"));
+
+		// 3u: PDF/A 3u, ISO 19005-3, Level U compliance
+		if (!retVal)
+			retVal = (pdfLevel.equals("3u"));
+
+		if (!retVal) {
+			String errorMsg = "Invalid pdf-level specified: " + pdfLevel;
+			log.error(errorMsg);
+			PdfValidationResultEntry failure = new PdfValidationResultEntry();
+			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber("none");
+			result.add(failure);
+		}
+
+		return retVal;
+	}
+
+	private boolean checkReportingLevel(PdfValidationResult result) {
+		boolean retVal = false;
+		String reportingLevel = this.configuration.getPdfReportingLevel();
+		if (reportingLevel == null)
+			reportingLevel = "not set";
+		if (!retVal)
+			retVal = (reportingLevel.equals("0"));
+		if (!retVal)
+			retVal = (reportingLevel.equals("1"));
+		if (!retVal)
+			retVal = (reportingLevel.equals("2"));
+		if (!retVal)
+			retVal = (reportingLevel.equals("3"));
+
+		if (!retVal) {
+			String errorMsg = "Invalid pdf-reporting-level specified: " + reportingLevel;
+			log.error(errorMsg);
+			PdfValidationResultEntry failure = new PdfValidationResultEntry();
+			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber("none");
+			result.add(failure);
+		}
+
+		return retVal;
 	}
 
 	/**
@@ -388,65 +467,12 @@ public class CdaValidator {
 			System.out.println("Schematron validation failed: " + e.getMessage());
 		}
 
-		if (this.configuration.getLicenseKey() != null) {
-			try {
-				validationResult.setPdfValRes(validatePDF());
-			} catch (ConfigurationException | SaxonApiException | IOException e) {
-				System.out.println("PDF validation failed: " + e.getMessage());
-			}
+		try {
+			validationResult.setPdfValRes(validatePDF());
+		} catch (ConfigurationException | SaxonApiException | IOException e) {
+			System.out.println("PDF validation failed: " + e.getMessage());
 		}
 		return validationResult;
-	}
-
-	// /**
-	// * Do a XSD, a Schematron and the PDF validation (if a license key is
-	// * provided) with the configuration passed to the method
-	// *
-	// * @param configFile
-	// * @return ValidationResult object, containing of all results
-	// * @throws ConfigurationException
-	// */
-	// public ValidationResult validate(File configFile) throws
-	// ConfigurationException {
-	// this.configuration = configure(configFile);
-	// this.validators = createValidators(this.configuration);
-	// this.reportBuilder = new ReportBuilder(validators);
-	// return validate();
-	//
-	// }
-
-	/**
-	 * Do a PDF validation of the file, with the current configuration
-	 *
-	 * @return ArrayList of PDF Validation results
-	 * @throws ConfigurationException
-	 * @throws SaxonApiException
-	 * @throws IOException
-	 */
-	public PdfValidationResult validatePDF()
-			throws ConfigurationException, SaxonApiException, IOException {
-
-		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
-		pdfValidator.validateCdaFile(this.cdaFile);
-
-		return pdfValidator.getPdfValidationResults();
-	}
-
-	/**
-	 * Do a PDF validation of the file, with the current configuration
-	 *
-	 * @return ArrayList of PDF Validation results
-	 * @throws ConfigurationException
-	 * @throws SaxonApiException
-	 * @throws IOException
-	 */
-	public PdfValidationResult validatePDF(File cdaFile)
-			throws ConfigurationException, SaxonApiException, IOException {
-		this.cdaFile = cdaFile;
-		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
-		pdfValidator.validateCdaFile(this.cdaFile);
-
-		return pdfValidator.getPdfValidationResults();
 	}
 
 	/**
@@ -467,6 +493,47 @@ public class CdaValidator {
 	 *             //this.configuration // geht nur mühsam, da config via file
 	 *             implementiert ist return validatePDF(); }
 	 */
+
+	/**
+	 * Do a PDF validation of the file, with the current configuration
+	 *
+	 * @return ArrayList of PDF Validation results
+	 * @throws ConfigurationException
+	 * @throws SaxonApiException
+	 * @throws IOException
+	 */
+	public PdfValidationResult validatePDF()
+			throws ConfigurationException, SaxonApiException, IOException {
+
+		PdfValidationResult retVal = new PdfValidationResult();
+		if (this.configuration.getLicenseKey() != null) {
+			if (checkPdfLevel(retVal) && checkReportingLevel(retVal)) {
+				final PdfValidator pdfValidator = new PdfValidator(this.configuration);
+				pdfValidator.validateCdaFile(this.cdaFile);
+				retVal = pdfValidator.getPdfValidationResults();
+			} else
+				retVal.setIsDone();
+		}
+		return retVal;
+
+	}
+
+	/**
+	 * Do a PDF validation of the file, with the current configuration
+	 *
+	 * @return ArrayList of PDF Validation results
+	 * @throws ConfigurationException
+	 * @throws SaxonApiException
+	 * @throws IOException
+	 */
+	public PdfValidationResult validatePDF(File cdaFile)
+			throws ConfigurationException, SaxonApiException, IOException {
+		this.cdaFile = cdaFile;
+		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
+		pdfValidator.validateCdaFile(this.cdaFile);
+
+		return pdfValidator.getPdfValidationResults();
+	}
 
 	/**
 	 * @return SchematronValidationResult
@@ -593,4 +660,5 @@ public class CdaValidator {
 		this.cdaFile = xsdFile;
 		return validateXSD();
 	}
+
 }

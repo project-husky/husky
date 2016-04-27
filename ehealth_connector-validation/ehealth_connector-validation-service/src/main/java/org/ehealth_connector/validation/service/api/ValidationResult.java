@@ -29,11 +29,7 @@ public class ValidationResult {
 
 	private XsdValidationResult xsdValRes;
 
-	private boolean schematronValid;
-
 	private SchematronValidationResult schValRes;
-
-	private boolean pdfValid;
 
 	private PdfValidationResult pdfValRes;
 

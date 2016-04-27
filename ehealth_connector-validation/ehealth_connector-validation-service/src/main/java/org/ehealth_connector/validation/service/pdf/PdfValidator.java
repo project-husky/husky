@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.transform.stream.StreamSource;
@@ -48,78 +46,6 @@ public class PdfValidator {
 		this.pdfLevel = config.getPdfLevel();
 	}
 
-	private boolean checkPdfLevel() {
-		boolean retVal = false;
-
-		if (pdfLevel == null)
-			pdfLevel = "not set";
-
-		// 1a: PDF/A 1a, ISO 19005-1, Level A compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("1a"));
-
-		// 1b: PDF/A 1b, ISO 19005-1, Level B compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("1b"));
-
-		// 2a: PDF/A 2a, ISO 19005-2, Level A compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("2a"));
-
-		// 2b: PDF/A 2b, ISO 19005-2, Level B compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("2b"));
-
-		// 2u: PDF/A 2u, ISO 19005-2, Level U compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("2u"));
-
-		// 3a: PDF/A 3a, ISO 19005-3, Level A compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("3a"));
-
-		// 3b: PDF/A 3b, ISO 19005-3, Level B compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("3b"));
-
-		// 3u: PDF/A 3u, ISO 19005-3, Level U compliance
-		if (!retVal)
-			retVal = (pdfLevel.equals("3u"));
-
-		if (!retVal) {
-			String errorMsg = "Invalid pdf-level specified: " + pdfLevel;
-			log.error(errorMsg);
-			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
-			pdfValidationResult.add(failure);
-		}
-
-		return retVal;
-	}
-
-	private boolean checkReportingLevel() {
-		boolean retVal = false;
-		String reportingLevel = config.getPdfReportingLevel();
-		if (!retVal)
-			retVal = (reportingLevel.equals("0"));
-		if (!retVal)
-			retVal = (reportingLevel.equals("1"));
-		if (!retVal)
-			retVal = (reportingLevel.equals("2"));
-		if (!retVal)
-			retVal = (reportingLevel.equals("3"));
-
-		if (!retVal) {
-			String errorMsg = "Invalid pdf-reporting-level specified: " + reportingLevel;
-			log.error(errorMsg);
-			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
-			pdfValidationResult.add(failure);
-		}
-
-		return retVal;
-	}
-
 	public String getPdfLevel() {
 		return pdfLevel;
 	}
@@ -136,46 +62,34 @@ public class PdfValidator {
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValidationResult = new PdfValidationResult();
-		if (checkPdfLevel() && checkReportingLevel()) {
-			final Processor proc = new Processor(false);
+		final Processor proc = new Processor(false);
 
-			final DocumentBuilder builder = proc.newDocumentBuilder();
-			builder.setLineNumbering(true);
-			XdmNode hl7Doc;
+		final DocumentBuilder builder = proc.newDocumentBuilder();
+		builder.setLineNumbering(true);
+		XdmNode hl7Doc;
 
-			hl7Doc = builder.build(new StreamSource(new FileInputStream(cdaFile)));
+		hl7Doc = builder.build(new StreamSource(new FileInputStream(cdaFile)));
 
-			final XPathCompiler xpath = proc.newXPathCompiler();
-			xpath.declareNamespace("", "urn:hl7-org:v3");
+		final XPathCompiler xpath = proc.newXPathCompiler();
+		xpath.declareNamespace("", "urn:hl7-org:v3");
 
-			final XPathSelector selector = xpath
-					.compile("//*[@mediaType='application/pdf' and @representation='B64']").load();
-			selector.setContextItem(hl7Doc);
-			final XdmValue children = selector.evaluate();
-			if (children.size() > 0) {
-				for (final XdmItem item : children) {
-					final XdmNode nonXMLBodyNode = (XdmNode) item;
-					final String pdf = item.getStringValue().trim();
-					final PdfValidationResult results = validatePdf(pdf);
-					List<PdfValidationResultEntry> newList = new ArrayList<PdfValidationResultEntry>();
-					for (PdfValidationResultEntry entry : results.getEntries()) {
-						PdfValidationResultEntry newEntry = PdfValidationResultEntry.copy(entry);
-						newEntry.setLineNumber(String.valueOf(nonXMLBodyNode.getLineNumber()));
-						// this is to avoid
-						// java.util.ConcurrentModificationException
-						newList.add(newEntry);
-					}
-					for (PdfValidationResultEntry entry : newList) {
-						pdfValidationResult.add(entry);
-					}
-				}
+		final XPathSelector selector = xpath
+				.compile("//*[@mediaType='application/pdf' and @representation='B64']").load();
+		selector.setContextItem(hl7Doc);
+		final XdmValue children = selector.evaluate();
+		if (children.size() > 0) {
+			for (final XdmItem item : children) {
+				final XdmNode nonXMLBodyNode = (XdmNode) item;
+				final String pdf = item.getStringValue().trim();
+				validatePdf(pdf, String.valueOf(nonXMLBodyNode.getLineNumber()));
 			}
 		}
 	}
 
-	private PdfValidationResult validatePdf(String pdfStrB64)
+	private PdfValidationResult validatePdf(String pdfStrB64, String lineNumber)
 			throws IOException, ConfigurationException {
 
+		pdfValidationResult.resetIsDone();
 		PdfValidatorAPI pdfValidator = null;
 		try {
 			pdfValidator = new PdfValidatorAPI();
@@ -184,18 +98,21 @@ public class PdfValidator {
 			log.error(errorMsg);
 			PdfValidationResultEntry failure = new PdfValidationResultEntry();
 			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber(lineNumber);
 			pdfValidationResult.add(failure);
 		} catch (NoClassDefFoundError e) {
 			String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 			log.error(errorMsg);
 			PdfValidationResultEntry failure = new PdfValidationResultEntry();
 			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber(lineNumber);
 			pdfValidationResult.add(failure);
-		} catch (Exception e) {
+		} catch (ExceptionInInitializerError e) {
 			String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 			log.error(errorMsg);
 			PdfValidationResultEntry failure = new PdfValidationResultEntry();
 			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber(lineNumber);
 			pdfValidationResult.add(failure);
 		}
 		if (pdfValidator != null) {
@@ -206,11 +123,15 @@ public class PdfValidator {
 				log.error(errorMsg);
 				PdfValidationResultEntry failure = new PdfValidationResultEntry();
 				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			}
 		}
 		if (pdfValidator != null) {
-			switch (config.getPdfReportingLevel()) {
+			String reportingLevel = config.getPdfReportingLevel();
+			if (reportingLevel == null)
+				reportingLevel = "";
+			switch (reportingLevel) {
 			case "1":
 				pdfValidator.setReportingLevel(1);
 				break;
@@ -225,6 +146,8 @@ public class PdfValidator {
 			}
 
 			int comlianceLevel = COMPLIANCE.ePDFUnk;
+			if (pdfLevel == null)
+				pdfLevel = "";
 			switch (pdfLevel) {
 			case "1a":
 				comlianceLevel = COMPLIANCE.ePDFA1a;
@@ -256,6 +179,7 @@ public class PdfValidator {
 			pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "", comlianceLevel);
 
 			pdfValidator.validate();
+			pdfValidationResult.setIsDone();
 			PdfError err = pdfValidator.getFirstError();
 			if (err != null) {
 				while (err != null) {
@@ -280,6 +204,7 @@ public class PdfValidator {
 						}
 						PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
 						pdfVResult.setErrMsg(sErrorMsg, severity);
+						pdfVResult.setLineNumber(lineNumber);
 						pdfValidationResult.add(pdfVResult);
 					}
 					err = pdfValidator.getNextError();

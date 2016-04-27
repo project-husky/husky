@@ -27,6 +27,8 @@ public class PdfValidationResult {
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
+	private boolean validationDone = false;
+
 	private final List<PdfValidationResultEntry> results = new ArrayList<PdfValidationResultEntry>();
 
 	public void add(PdfValidationResultEntry entry) {
@@ -37,12 +39,17 @@ public class PdfValidationResult {
 		return results;
 	}
 
+	public boolean isDone() {
+		return validationDone;
+	}
+
 	public boolean isPdfValid() {
-		boolean retVal = false;
+		boolean retVal = true;
 		for (PdfValidationResultEntry entry : results) {
-			retVal = retVal || entry.hasError();
+			if (entry.hasError())
+				retVal = false;
 		}
-		return false;
+		return retVal;
 	}
 
 	public boolean isPdfValidatorApiInstalled() {
@@ -73,5 +80,13 @@ public class PdfValidationResult {
 				break;
 		}
 		return retVal;
+	}
+
+	public void resetIsDone() {
+		validationDone = false;
+	}
+
+	public void setIsDone() {
+		validationDone = true;
 	}
 }

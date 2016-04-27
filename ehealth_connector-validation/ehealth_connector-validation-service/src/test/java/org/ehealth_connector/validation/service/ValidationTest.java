@@ -55,12 +55,12 @@ public class ValidationTest {
 		testFile = cdaFilePath_ValidPdf;
 		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
 		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isPdfValidatorApiInstalled());
+		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
 		testFile = cdaFilePath_InvalidPdf;
 		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
 		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isPdfValidatorApiInstalled());
+		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
 	}
 
