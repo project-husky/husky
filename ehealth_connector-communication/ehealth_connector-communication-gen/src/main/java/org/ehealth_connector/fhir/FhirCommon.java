@@ -739,6 +739,9 @@ public class FhirCommon {
 			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.HOME) {
 				usage = AddressUse.PRIVATE;
 			}
+			if (addr.getUseElement().getValueAsEnum() == AddressUseEnum.TEMPORARY) {
+				usage = AddressUse.PUBLIC;
+			}
 			final Address eHCAddr = new Address(addr.getLineFirstRep().toString(),
 					addr.getPostalCode(), addr.getCity(), usage);
 			if (addr.getCountry() != null) {

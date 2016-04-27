@@ -389,10 +389,13 @@ public abstract class AbstractFhirCdaCh {
 				if (obs.getComments() != null && !obs.getComments().isEmpty()) {
 					ref = obs.getComments();
 				}
-				final DateTimeDt date = (DateTimeDt) obs.getEffective();
+				Date date = null;
+				final DateTimeDt fdate = (DateTimeDt) obs.getEffective();
+				if (fdate != null) {
+					date = fdate.getValue();
+				}
 
-				final SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date.getValue(), id,
-						ref);
+				final SpecimenCollectionEntry sce = new SpecimenCollectionEntry(date, id, ref);
 				return sce;
 			}
 		}

@@ -35,7 +35,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * zur Probe</div>
  */
 public class SpecimenCollectionEntry
-extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
+		extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
 
 	/**
 	 * Instantiates a new specimen collection entry.
@@ -163,9 +163,11 @@ extends org.ehealth_connector.cda.ihe.lab.SpecimenCollectionEntry {
 	 */
 	@Override
 	public void setTextReference(String textReference) {
-		if (!textReference.startsWith("#"))
-			textReference = "#" + textReference;
-		this.getMdht().setText(Util.createReference(textReference));
+		if (textReference != null) {
+			if (!textReference.startsWith("#"))
+				textReference = "#" + textReference;
+			this.getMdht().setText(Util.createReference(textReference));
+		}
 	}
 
 	/**

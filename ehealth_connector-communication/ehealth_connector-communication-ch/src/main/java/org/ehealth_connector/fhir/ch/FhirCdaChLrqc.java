@@ -43,9 +43,11 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -659,6 +661,14 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 					INT intValue = DatatypesFactory.eINSTANCE.createINT();
 					intValue.setNullFlavor(NullFlavor.NA);
 					v = new Value(intValue);
+				} else {
+					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
+				}
+			}
+			if (fhirString.getValue().startsWith("ED:")) {
+				if (fhirString.getValue().startsWith("ED:#")) {
+					ED edValue = Util.createReference(fhirString.getValue().replace("ED:", ""));
+					v = new Value(edValue);
 				} else {
 					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
 				}
