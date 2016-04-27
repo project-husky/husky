@@ -51,6 +51,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -462,6 +463,19 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return doc;
 	}
 
+	/**
+	 * Read the LrtpDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the LRTP document
+	 */
+	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(LrtpDocument.class, resourceString);
+	}
+
 	private String formatDiv(XhtmlDt text) {
 		String retVal = text.getValueAsString();
 		retVal = retVal.replace("</div>", "");
@@ -725,6 +739,17 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
 				}
 			}
+			if (fhirString.getValue().startsWith("ST:")) {
+				if (fhirString.getValue().startsWith("ST:NA")) {
+					ST stValue = DatatypesFactory.eINSTANCE.createST();
+					stValue.setNullFlavor(NullFlavor.NA);
+					v = new Value(stValue);
+				} else {
+					ST stValue = DatatypesFactory.eINSTANCE
+							.createST(fhirString.getValue().replace("ST:", ""));
+					v = new Value(stValue);
+				}
+			}
 		}
 		// type CD
 		if (fhirObservation.getValue() instanceof CodeableConceptDt)
@@ -984,18 +1009,5 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
-	}
-
-	/**
-	 * Read the LrtpDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the LRTP document
-	 */
-	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(LrtpDocument.class, resourceString);
 	}
 }

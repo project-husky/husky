@@ -31,6 +31,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
@@ -253,6 +254,16 @@ public class Value {
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
+	}
+
+	/**
+	 * Erstellt einen neuen Wert (ST).
+	 *
+	 * @param value
+	 *            Der eigentliche Wert
+	 */
+	public Value(ST value) {
+		mValue = value;
 	}
 
 	public Value(String text) {
@@ -528,10 +539,6 @@ public class Value {
 		return (mValue instanceof PQ);
 	}
 
-	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
-	}
-
 	/**
 	 * Checks if the Value object is a RTO (A quantity constructed as the
 	 * quotient of a numerator quantity divided by a denominator quantity.).
@@ -542,29 +549,14 @@ public class Value {
 		return (mValue instanceof RTO);
 	}
 
-	private void setIntValue(int value) {
-		INT i = (INT) mValue;
-		i.setValue(value);
-	}
-
 	public void setOriginalTextReference(String originalText) {
 		final Code code = new Code((CD) mValue);
 		code.setOriginalTextReference(originalText);
 	}
 
-	private void setPqValue(String value) {
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
 	public void setUcumUnit(String unit) {
 		final PQ pq = (PQ) mValue;
 		pq.setUnit(unit);
-	}
-
-	private void setUcumUnit(Ucum unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit.getCodeValue());
 	}
 
 	/**
@@ -595,5 +587,24 @@ public class Value {
 		resultText = resultText.replace("&gt;", ">");
 
 		return resultText;
+	}
+
+	private boolean isPhysicalQuantityInterval() {
+		return (mValue instanceof IVL_PQ);
+	}
+
+	private void setIntValue(int value) {
+		INT i = (INT) mValue;
+		i.setValue(value);
+	}
+
+	private void setPqValue(String value) {
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	private void setUcumUnit(Ucum unit) {
+		final PQ pq = (PQ) mValue;
+		pq.setUnit(unit.getCodeValue());
 	}
 }
