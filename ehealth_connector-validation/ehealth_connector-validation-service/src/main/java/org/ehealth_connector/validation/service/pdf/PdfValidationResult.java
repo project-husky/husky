@@ -17,118 +17,61 @@
 package org.ehealth_connector.validation.service.pdf;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PdfValidationResult {
 
-	public enum SEVERITY {
-		Error, Warning, Information, CustomWarning
-	};
+	/** The SLF4J logger instance. */
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private static String T_ERROR = "Error";
-	private static String T_WARNING = "Warning";
-	private static String T_CUSTOMWARNING = "Custom warning";
-	private static String T_INFORMATION = "Information";
+	private final List<PdfValidationResultEntry> results = new ArrayList<PdfValidationResultEntry>();
 
-	private String lineNumber;
-	private Boolean errSeverity = false;
-	private List<SEVERITY> severities = new ArrayList<>();
-	private List<String> errMsgs = new ArrayList<>();
-	// private ArrayList<Integer> errCodes = new ArrayList<>();
-	private int currentItem = 0;
-
-	/**
-	 * überprüft, ob einer der ErrorCodes = Error od. Warning
-	 * 
-	 * @return
-	 */
-	public boolean hasError() {
-		return errSeverity;
+	public void add(PdfValidationResultEntry entry) {
+		results.add(entry);
 	}
 
-	public PdfValidationResult getValidationResult() {
-		return this;
+	public List<PdfValidationResultEntry> getEntries() {
+		return results;
 	}
 
-	/**
-	 * Methode zur Aufbereitung der Validierungsmeldungen.
-	 * 
-	 * @param errMsg
-	 * @param severity
-	 */
-	public void setErrMsg(String errMsg, SEVERITY severity) {
-		switch (severity) {
-		case CustomWarning:
-			this.errMsgs.add(T_CUSTOMWARNING + ": " + errMsg);
-			break;
-		case Error:
-			this.errMsgs.add(T_ERROR + ": " + errMsg);
-			this.errSeverity = true;
-			break;
-		case Warning:
-			this.errMsgs.add(T_WARNING + ": " + errMsg);
-			this.errSeverity = true;
-			break;
-		default:
-			this.errMsgs.add(T_INFORMATION + ": " + errMsg);
-			break;
+	public boolean isPdfValid() {
+		boolean retVal = false;
+		for (PdfValidationResultEntry entry : results) {
+			retVal = retVal || entry.hasError();
 		}
+		return false;
 	}
 
-	public String getErrMsg() {
-		return errMsgs.get(currentItem);
-	}
-
-	public List<String> getErrMsgs() {
-		return errMsgs;
-	}
-
-	public List<String> getErrMsgsSorted() {
-		String temp;
-		Iterator<String> iter = errMsgs.iterator();
-		final List<String> tempErrMsgsSorted = new ArrayList<String>();
-		// Alle Errors
-		while (iter.hasNext()) {
-			temp = iter.next();
-			if (temp.startsWith(T_ERROR))
-				tempErrMsgsSorted.add(temp);
+	public boolean isPdfValidatorApiInstalled() {
+		boolean retVal = true;
+		for (PdfValidationResultEntry entry : results) {
+			for (String msg : entry.getErrMsgsSorted()) {
+				if (msg.contains(PdfValidator.ERR_NOT_INSTALLED)) {
+					retVal = false;
+					break;
+				}
+			}
+			if (!retVal)
+				break;
 		}
-		// Alle Warnings
-		iter = errMsgs.iterator();
-		while (iter.hasNext()) {
-			temp = iter.next();
-			if (temp.startsWith(T_WARNING))
-				tempErrMsgsSorted.add(temp);
+		return retVal;
+	}
+
+	public boolean isPdfValidatorApiLicensed() {
+		boolean retVal = true;
+		for (PdfValidationResultEntry entry : results) {
+			for (String msg : entry.getErrMsgsSorted()) {
+				if (msg.contains(PdfValidator.ERR_INVALID_LICENSE)) {
+					retVal = false;
+					break;
+				}
+			}
+			if (!retVal)
+				break;
 		}
-		// Alle Custom Warnings
-		iter = errMsgs.iterator();
-		while (iter.hasNext()) {
-			temp = iter.next();
-			if (temp.startsWith(T_CUSTOMWARNING))
-				tempErrMsgsSorted.add(temp);
-		}
-		// Alle Informations
-		iter = errMsgs.iterator();
-		while (iter.hasNext()) {
-			temp = iter.next();
-			if (temp.startsWith(T_INFORMATION))
-				tempErrMsgsSorted.add(temp);
-		}
-
-		return tempErrMsgsSorted;
+		return retVal;
 	}
-
-	public void setErrMsgs(ArrayList<String> errMsgs) {
-		this.errMsgs = errMsgs;
-	}
-
-	public String getLineNumber() {
-		return lineNumber;
-	}
-
-	public void setLineNumber(String lineNumber) {
-		this.lineNumber = lineNumber;
-	}
-
 }

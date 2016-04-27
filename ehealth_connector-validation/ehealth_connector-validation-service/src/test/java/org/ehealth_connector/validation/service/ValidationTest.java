@@ -1,13 +1,10 @@
 package org.ehealth_connector.validation.service;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
 import org.ehealth_connector.validation.service.api.CdaValidator;
 import org.ehealth_connector.validation.service.api.XsdValidationResult;
@@ -18,6 +15,8 @@ import org.ehealth_connector.validation.service.schematron.result.SchematronVali
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import net.sf.saxon.s9api.SaxonApiException;
@@ -27,59 +26,100 @@ import net.sf.saxon.s9api.SaxonApiException;
  */
 public class ValidationTest {
 
-	private CdaValidator cdaVali;
+	private CdaValidator cdaVali = null;
 	private XsdValidationResult xsdValiRes;
 	private SchematronValidationResult schValiRes;
-	private List<PdfValidationResult> pdfValiRes;
+	private PdfValidationResult pdfValiRes;
 
-	private final String configFilePath = "rsc/config_elga.xml";
-	private final String cdaFilePath = "cda/ELGA-043-Laborbefund_EIS-FullSupport.xml";
-	private final String cdaXsdNokFilePath = "cda/ELGA-031-Entlassungsbrief_Pflege_EIS-Structured_(XML-Body)_xsd_nok.xml";
-	private final String cdaSchNokFilePath = "rsc/cda/ELGA-021-Entlassungsbrief_aerztlich_EIS-Structured_(XML-Body)_SchematronFailure";
+	private final String configFilePath = "rsc/config.xml";
+	private final String cdaFilePath_Valid = "rsc/cda/miniCDA_Valid.xml";
+	private final String cdaFilePath_SchemaAndSchematronFailure = "rsc/cda/miniCDA_SchemaAndSchematronFailure.xml";
+	private final String cdaFilePath_SchemaFailure = "rsc/cda/miniCDA_SchemaFailure.xml";
+	private final String cdaFilePath_SchematronFailures = "rsc/cda/miniCDA_SchematronFailures.xml";
+	private final String cdaFilePath_ValidPdf = "rsc/cda/miniCDA_PdfValid.xml";
+	private final String cdaFilePath_InvalidPdf = "rsc/cda/miniCDA_PdfInvalid.xml";
+
+	/** The SLF4J logger instance. */
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Before
 	public void setUp() throws Exception {
-		cdaVali = new CdaValidator(new File(cdaFilePath).getAbsoluteFile(),
-				new File(configFilePath).getAbsoluteFile());
+		log.info("basePath='" + new File(".").getAbsolutePath() + "'");
+		cdaVali = new CdaValidator(new File(configFilePath).getAbsoluteFile());
 	}
 
-	// @Test
+	@Test
 	public void testPdfValidation() throws ConfigurationException, SaxonApiException, IOException {
 
-		pdfValiRes = cdaVali.validatePDF();
-		final boolean hasError = false;
-		final Iterator<PdfValidationResult> iter = pdfValiRes.iterator();
-		boolean hasErrors = false;
-		PdfValidationResult temp;
-		while (iter.hasNext()) {
-			temp = iter.next();
-			hasErrors = hasErrors || temp.hasError();
-		}
-		assertTrue(!hasError);
+		String testFile = null;
+		testFile = cdaFilePath_ValidPdf;
+		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
+		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isPdfValidatorApiInstalled());
 
-		xsdValiRes = cdaVali.validateXSD(new File(cdaXsdNokFilePath));
-		assertFalse(xsdValiRes.isXsdValid());
+		testFile = cdaFilePath_InvalidPdf;
+		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
+		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isPdfValidatorApiInstalled());
+
 	}
 
-	// @Test
+	@Test
 	public void testSchematronValidation()
 			throws SAXException, ConfigurationException, FileNotFoundException,
 			RuleSetDetectionException, TransformationException, InterruptedException {
 
-		schValiRes = cdaVali.validateSchematron(new File(cdaFilePath).getAbsoluteFile());
+		String testFile = null;
+
+		testFile = cdaFilePath_Valid;
+		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		log.info("Schematron validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
 		assertTrue(schValiRes.isSchematronValid());
 
-		schValiRes = cdaVali.validateSchematron(new File(cdaSchNokFilePath).getAbsoluteFile());
-		assertFalse(schValiRes.isSchematronValid());
+		testFile = cdaFilePath_SchemaAndSchematronFailure;
+		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		log.info("Schematron validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(!schValiRes.isSchematronValid());
+
+		testFile = cdaFilePath_SchemaFailure;
+		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		log.info("Schematron validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(schValiRes.isSchematronValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		log.info("Schematron validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(!schValiRes.isSchematronValid());
+
 	}
 
 	@Test
 	public void testXSDValidation() throws ConfigurationException {
 
-		xsdValiRes = cdaVali.validateXSD(new File(cdaFilePath).getAbsoluteFile());
+		String testFile = null;
+
+		testFile = cdaFilePath_Valid;
+		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(xsdValiRes.isXsdValid());
 
-		xsdValiRes = cdaVali.validateXSD(new File(cdaXsdNokFilePath).getAbsoluteFile());
-		assertFalse(xsdValiRes.isXsdValid());
+		testFile = cdaFilePath_SchemaAndSchematronFailure;
+		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		assertTrue(!xsdValiRes.isXsdValid());
+
+		testFile = cdaFilePath_SchemaFailure;
+		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		assertTrue(!xsdValiRes.isXsdValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		assertTrue(xsdValiRes.isXsdValid());
 	}
 }

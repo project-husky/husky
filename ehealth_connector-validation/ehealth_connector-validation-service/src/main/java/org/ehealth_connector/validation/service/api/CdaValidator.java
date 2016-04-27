@@ -76,11 +76,11 @@ public class CdaValidator {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Configuration of the validator */
-	private Configuration configuration;
+	private final Configuration configuration;
 	/** Validators to be used */
-	private Validators validators;
+	private final Validators validators;
 	/** ReportBuilder for schematron results */
-	private ReportBuilder reportBuilder;
+	private final ReportBuilder reportBuilder;
 	/** XSD-schema to be used */
 	private Schema schema;
 	/** CDA file to be validated */
@@ -89,6 +89,22 @@ public class CdaValidator {
 	private String langCode;
 
 	private ValidationResult validationResult;
+
+	/**
+	 * Minimal constructor
+	 *
+	 * @param configFilePath
+	 *            The configfile with following attributes - baseDir -
+	 *            document-schema - pdf-level - pdf-reporting-level -
+	 *            license-key - schematron/rule-set
+	 * @throws ConfigurationException
+	 *             If the configuration fails, an exception will be thrown
+	 */
+	public CdaValidator(File configFile) throws ConfigurationException {
+		this.configuration = configure(configFile);
+		this.validators = createValidators(this.configuration);
+		this.reportBuilder = new ReportBuilder(validators);
+	}
 
 	/**
 	 *
@@ -204,13 +220,28 @@ public class CdaValidator {
 				}
 				if (!(temp instanceof ActivePattern)) {
 					if (temp instanceof FailedAssert) {
-						if (((FailedAssert) temp).getRole().equals("")
-								|| ((FailedAssert) temp).getRole().toLowerCase().equals("error"))
+						String role = ((FailedAssert) temp).getRole();
+
+						// if there is no role, a failed assert is always an
+						// error
+						if (role == null)
+							role = "error";
+
+						if (role.equals("") || role.toLowerCase().equals("error"))
 							schValRes.setSchematronValid(false);
+
 					}
 					if (temp instanceof SuccessfulReport) {
-						if (((SuccessfulReport) temp).getRole().toLowerCase().equals("error"))
+						String role = ((SuccessfulReport) temp).getRole();
+
+						// if there is no role, a successful report is never an
+						// error
+						if (role == null)
+							role = "";
+
+						if (role.toLowerCase().equals("error"))
 							schValRes.setSchematronValid(false);
+
 					}
 					currentApResult.getApChilds().add(temp);
 					prevObject = temp;
@@ -367,20 +398,38 @@ public class CdaValidator {
 		return validationResult;
 	}
 
-	/**
-	 * Do a XSD, a Schematron and the PDF validation (if a license key is
-	 * provided) with the configuration passed to the method
-	 *
-	 * @param configFile
-	 * @return ValidationResult object, containing of all results
-	 * @throws ConfigurationException
-	 */
-	public ValidationResult validate(File configFile) throws ConfigurationException {
-		this.configuration = configure(configFile);
-		this.validators = createValidators(this.configuration);
-		this.reportBuilder = new ReportBuilder(validators);
-		return validate();
+	// /**
+	// * Do a XSD, a Schematron and the PDF validation (if a license key is
+	// * provided) with the configuration passed to the method
+	// *
+	// * @param configFile
+	// * @return ValidationResult object, containing of all results
+	// * @throws ConfigurationException
+	// */
+	// public ValidationResult validate(File configFile) throws
+	// ConfigurationException {
+	// this.configuration = configure(configFile);
+	// this.validators = createValidators(this.configuration);
+	// this.reportBuilder = new ReportBuilder(validators);
+	// return validate();
+	//
+	// }
 
+	/**
+	 * Do a PDF validation of the file, with the current configuration
+	 *
+	 * @return ArrayList of PDF Validation results
+	 * @throws ConfigurationException
+	 * @throws SaxonApiException
+	 * @throws IOException
+	 */
+	public PdfValidationResult validatePDF()
+			throws ConfigurationException, SaxonApiException, IOException {
+
+		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
+		pdfValidator.validateCdaFile(this.cdaFile);
+
+		return pdfValidator.getPdfValidationResults();
 	}
 
 	/**
@@ -391,11 +440,11 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public List<PdfValidationResult> validatePDF()
+	public PdfValidationResult validatePDF(File cdaFile)
 			throws ConfigurationException, SaxonApiException, IOException {
-
+		this.cdaFile = cdaFile;
 		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
-		pdfValidator.validatePdfFile(this.cdaFile);
+		pdfValidator.validateCdaFile(this.cdaFile);
 
 		return pdfValidator.getPdfValidationResults();
 	}
@@ -444,10 +493,10 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronValidationResult validateSchematron(File schFile)
+	public SchematronValidationResult validateSchematron(File cdaFile)
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
-		this.cdaFile = schFile;
+		this.cdaFile = cdaFile;
 		return this.convertSchematronOutput(validateSchematronRaw());
 	}
 
