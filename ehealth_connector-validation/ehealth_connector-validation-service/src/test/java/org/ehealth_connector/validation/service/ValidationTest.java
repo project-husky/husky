@@ -53,12 +53,12 @@ public class ValidationTest {
 
 		String testFile = null;
 		testFile = cdaFilePath_ValidPdf;
-		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
+		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
 		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
 		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
 		testFile = cdaFilePath_InvalidPdf;
-		pdfValiRes = cdaVali.validatePDF(new File(testFile).getAbsoluteFile());
+		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
 		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
 		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
@@ -72,25 +72,25 @@ public class ValidationTest {
 		String testFile = null;
 
 		testFile = cdaFilePath_Valid;
-		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
 		log.info("Schematron validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchemaAndSchematronFailure;
-		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
 		log.info("Schematron validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(!schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchemaFailure;
-		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
 		log.info("Schematron validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchematronFailures;
-		schValiRes = cdaVali.validateSchematron(new File(testFile).getAbsoluteFile());
+		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
 		log.info("Schematron validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(!schValiRes.isSchematronValid());
@@ -103,22 +103,22 @@ public class ValidationTest {
 		String testFile = null;
 
 		testFile = cdaFilePath_Valid;
-		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
 		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchemaAndSchematronFailure;
-		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
 		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(!xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchemaFailure;
-		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
 		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(!xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchematronFailures;
-		xsdValiRes = cdaVali.validateXSD(new File(testFile).getAbsoluteFile());
+		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
 		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(xsdValiRes.isXsdValid());
 	}

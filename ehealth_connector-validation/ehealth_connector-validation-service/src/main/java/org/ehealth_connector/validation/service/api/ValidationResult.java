@@ -38,15 +38,15 @@ public class ValidationResult {
 		this.schValRes = new SchematronValidationResult();
 	}
 
-	public PdfValidationResult getPdfValRes() {
+	public PdfValidationResult getPdfValidationResult() {
 		return pdfValRes;
 	}
 
-	public SchematronValidationResult getSchValRes() {
+	public SchematronValidationResult getSchValidationResult() {
 		return schValRes;
 	}
 
-	public XsdValidationResult getXsdValRes() {
+	public XsdValidationResult getXsdValidationResult() {
 		return xsdValRes;
 	}
 
@@ -54,7 +54,7 @@ public class ValidationResult {
 		return pdfValRes.isPdfValid();
 	}
 
-	public boolean isSchematronValid() {
+	public boolean isSchValid() {
 		return schValRes.isSchematronValid();
 	}
 
@@ -62,15 +62,15 @@ public class ValidationResult {
 		return xsdValid;
 	}
 
-	public void setPdfValRes(PdfValidationResult pdfValRes) {
+	public void setPdfValidationResult(PdfValidationResult pdfValRes) {
 		this.pdfValRes = pdfValRes;
 	}
 
-	public void setSchematronValid(boolean schematronValid) {
-		this.getSchValRes().setSchematronValid(schematronValid);
+	public void setSchValid(boolean schematronValid) {
+		this.getSchValidationResult().setSchematronValid(schematronValid);
 	}
 
-	public void setSchValRes(SchematronValidationResult schValRes) {
+	public void setSchValidationResult(SchematronValidationResult schValRes) {
 		this.schValRes = schValRes;
 	}
 
@@ -78,7 +78,7 @@ public class ValidationResult {
 		this.xsdValid = xsdValid;
 	}
 
-	public void setXsdValRes(XsdValidationResult xsdValRes) {
+	public void setXsdValidationResult(XsdValidationResult xsdValRes) {
 		this.xsdValRes = xsdValRes;
 	}
 

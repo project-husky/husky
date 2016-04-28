@@ -449,18 +449,18 @@ public class CdaValidator {
 			throw new ConfigurationException("No configuration available");
 		this.validationResult = new ValidationResult();
 		try {
-			validateXsd();
+			validateXsdSchema();
 			validationResult.setXsdValid(true);
-			validationResult.getXsdValRes().setXsdValidationMsg("XSD Valid");
+			validationResult.getXsdValidationResult().setXsdValidationMsg("XSD Valid");
 		} catch (SAXException | IOException e) {
 			validationResult.setXsdValid(false);
-			validationResult.getXsdValRes().setXsdValidationMsg(e.getMessage());
+			validationResult.getXsdValidationResult().setXsdValidationMsg(e.getMessage());
 		}
 
 		try {
-			final SchematronOutput schOut = validateSchematronRaw();
+			final SchematronOutput schOut = validateSchRaw();
 			final SchematronValidationResult schValRes = convertSchematronOutput(schOut);
-			validationResult.setSchValRes(schValRes);
+			validationResult.setSchValidationResult(schValRes);
 
 		} catch (SAXException | FileNotFoundException | RuleSetDetectionException
 				| TransformationException | InterruptedException e) {
@@ -468,7 +468,7 @@ public class CdaValidator {
 		}
 
 		try {
-			validationResult.setPdfValRes(validatePDF());
+			validationResult.setPdfValidationResult(validatePdf());
 		} catch (ConfigurationException | SaxonApiException | IOException e) {
 			System.out.println("PDF validation failed: " + e.getMessage());
 		}
@@ -502,7 +502,7 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public PdfValidationResult validatePDF()
+	public PdfValidationResult validatePdf()
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		PdfValidationResult retVal = new PdfValidationResult();
@@ -526,7 +526,7 @@ public class CdaValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public PdfValidationResult validatePDF(File cdaFile)
+	public PdfValidationResult validatePdf(File cdaFile)
 			throws ConfigurationException, SaxonApiException, IOException {
 		this.cdaFile = cdaFile;
 		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
@@ -544,10 +544,10 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronValidationResult validateSchematron()
+	public SchematronValidationResult validateSch()
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
-		return this.convertSchematronOutput(validateSchematronRaw());
+		return this.convertSchematronOutput(validateSchRaw());
 	}
 
 	/**
@@ -560,11 +560,11 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronValidationResult validateSchematron(File cdaFile)
+	public SchematronValidationResult validateSch(File cdaFile)
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = cdaFile;
-		return this.convertSchematronOutput(validateSchematronRaw());
+		return this.convertSchematronOutput(validateSchRaw());
 	}
 
 	/**
@@ -577,7 +577,7 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematronRaw()
+	public SchematronOutput validateSchRaw()
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
 
@@ -612,14 +612,14 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchematronRaw(File schFile)
+	public SchematronOutput validateSchRaw(File schFile)
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
-		return validateSchematronRaw();
+		return validateSchRaw();
 	}
 
-	private void validateXsd() throws SAXException, IOException {
+	private void validateXsdSchema() throws SAXException, IOException {
 		final Schema schema = this.schema;
 		final Validator validator = schema.newValidator();
 		validator.validate(new StreamSource(this.cdaFile));
@@ -631,14 +631,14 @@ public class CdaValidator {
 	 * @return XsdValidationResult
 	 * @throws ConfigurationException
 	 */
-	public XsdValidationResult validateXSD() throws ConfigurationException {
+	public XsdValidationResult validateXsd() throws ConfigurationException {
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
 		if (this.cdaFile == null)
 			throw new ConfigurationException("No CDA-File to validate");
 		final XsdValidationResult xsdValRes = new XsdValidationResult();
 		try {
-			validateXsd();
+			validateXsdSchema();
 			xsdValRes.setXsdValid(true);
 			xsdValRes.setXsdValidationMsg("XSD Valid");
 		} catch (SAXException | IOException e) {
@@ -656,9 +656,9 @@ public class CdaValidator {
 	 * @return XsdValidationResult
 	 * @throws ConfigurationException
 	 */
-	public XsdValidationResult validateXSD(File xsdFile) throws ConfigurationException {
+	public XsdValidationResult validateXsd(File xsdFile) throws ConfigurationException {
 		this.cdaFile = xsdFile;
-		return validateXSD();
+		return validateXsd();
 	}
 
 }
