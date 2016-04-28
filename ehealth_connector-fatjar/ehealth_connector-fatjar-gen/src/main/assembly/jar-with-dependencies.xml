@@ -9,6 +9,16 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<dependencySets>
 		<dependencySet>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useTransitiveDependencies>true</useTransitiveDependencies>
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<includes>
+				<include>org.apache.axis2:addressing</include>
+			</includes>
+			<outputDirectory>/</outputDirectory>
+		</dependencySet>
+		<dependencySet>
 			<useProjectArtifact>true</useProjectArtifact>
 			<useTransitiveDependencies>false</useTransitiveDependencies>
 			<unpack>true</unpack>

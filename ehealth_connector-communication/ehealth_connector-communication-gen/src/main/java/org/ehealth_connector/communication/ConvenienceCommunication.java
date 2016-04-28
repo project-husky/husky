@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
@@ -59,6 +60,8 @@ import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -83,6 +86,8 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * </div>
  */
 public class ConvenienceCommunication {
+	
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -121,8 +126,10 @@ public class ConvenienceCommunication {
 	 *
 	 */
 	public ConvenienceCommunication() {
+		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
+		initAxis2Config();
 	}
 
 	/**
@@ -135,6 +142,7 @@ public class ConvenienceCommunication {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
+		initAxis2Config();
 	}
 
 	/**
@@ -161,6 +169,16 @@ public class ConvenienceCommunication {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
+		initAxis2Config();
+	}
+	
+	/**
+	 * Method to load axis2 config from ressource
+	 */
+	private void initAxis2Config() {
+		String axis2File = Util.extractFileFromResource("/conf/axis2.xml");
+		log.debug("Loading Axis2 Config from "+axis2File);
+		System.setProperty("axis2.xml", axis2File);
 	}
 
 	/**
