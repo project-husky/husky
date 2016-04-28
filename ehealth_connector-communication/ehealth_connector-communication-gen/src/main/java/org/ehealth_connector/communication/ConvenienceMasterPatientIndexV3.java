@@ -23,6 +23,7 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
+import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +56,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		if (FACTORY == null) {
 			throw new ExceptionInInitializerError();
 		}
+		AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**

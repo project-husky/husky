@@ -34,6 +34,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 //import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 //import org.ehealth_connector.communication.ch.enums.AuthorRole;
 //import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
@@ -86,8 +87,6 @@ import org.slf4j.LoggerFactory;
  * </div>
  */
 public class ConvenienceCommunication {
-	
-	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -129,7 +128,7 @@ public class ConvenienceCommunication {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		initAxis2Config();
+		AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class ConvenienceCommunication {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		initAxis2Config();
+		AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -169,16 +168,7 @@ public class ConvenienceCommunication {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
-		initAxis2Config();
-	}
-	
-	/**
-	 * Method to load axis2 config from ressource
-	 */
-	private void initAxis2Config() {
-		String axis2File = Util.extractFileFromResource("/conf/axis2.xml");
-		log.debug("Loading Axis2 Config from "+axis2File);
-		System.setProperty("axis2.xml", axis2File);
+		AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
