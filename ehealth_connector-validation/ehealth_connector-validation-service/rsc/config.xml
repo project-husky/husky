@@ -19,7 +19,7 @@ file. -->
 		-->
 		<pdf-level>1a</pdf-level>
 
-		<!-- pdf-reporting-level:
+		<!-- The level of validation result reporting:
 		0: none Nothing is reported
 		1: errors Errors are reported
 		2: warnings Errors and warnings are reported
