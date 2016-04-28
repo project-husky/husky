@@ -199,80 +199,6 @@ public class AuthorTest {
 		testDate1 = DateUtil.date("28.02.2018");
 	}
 
-	@Test
-	public void testAuthor() {
-		final Author a = new Author();
-		a.addAddress(testAddress);
-		a.addAddress(testAddress);
-		a.addId(testIdentificator1);
-		a.addId(testIdentificator2);
-		a.addName(testName1);
-		a.addName(testName2);
-		a.setGln(testGln1);
-		a.setGln(testGln2);
-		a.setTime(testDate1);
-
-		a.setRoleFunction(code1);
-		assertTrue(AbstractTestHelper.isEqual(code1, a.getRoleFunction()));
-
-		a.setSpeciality(code2);
-		assertTrue(AbstractTestHelper.isEqual(code2, a.getSpeciality()));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.Name)}
-	 * .
-	 */
-	@Test
-	public void testAuthorName() {
-		final Author auth = new Author(testName1);
-		final Name ref = auth.getName();
-		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getGivenNames());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.Name, java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testAuthorNameString() {
-		final Author auth = new Author(testName1, testGln1);
-
-		final Name ref = auth.getName();
-		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getGivenNames());
-
-		assertEquals(testGln1, auth.getGln());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
-	 * .
-	 */
-	@Test
-	@Ignore
-	public void testAuthorAuthor() {
-		final Author auth = new Author(testAuthorMdht);
-		final org.openhealthtools.mdht.uml.cda.Author ref = auth.getAuthorMdht();
-		assertNotNull(testAuthorMdht);
-		assertEquals(testTs1, ref.getTime());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#copyMdhtAuthor()}.
-	 */
-	@Test
-	public void testCopyMdhtAuthor() {
-		final Author auth = new Author(testAuthorMdht);
-		final org.openhealthtools.mdht.uml.cda.Author ref = auth.copyMdhtAuthor();
-		assertEquals(testAuthorMdht.getTime().getValue(), ref.getTime().getValue());
-	}
-
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.common.Author#addAddress(org.ehealth_connector.common.Address)}
@@ -336,6 +262,80 @@ public class AuthorTest {
 		assertEquals(testName2.getFamilyName(), names2.get(1).getFamilyName());
 	}
 
+	@Test
+	public void testAuthor() {
+		final Author a = new Author();
+		a.addAddress(testAddress);
+		a.addAddress(testAddress);
+		a.addId(testIdentificator1);
+		a.addId(testIdentificator2);
+		a.addName(testName1);
+		a.addName(testName2);
+		a.setGln(testGln1);
+		a.setGln(testGln2);
+		a.setTime(testDate1);
+
+		a.setRoleFunction(code1);
+		assertTrue(AbstractTestHelper.isEqual(code1, a.getRoleFunction()));
+
+		a.setSpeciality(code2);
+		assertTrue(AbstractTestHelper.isEqual(code2, a.getSpeciality()));
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
+	 * .
+	 */
+	@Test
+	@Ignore
+	public void testAuthorAuthor() {
+		final Author auth = new Author(testAuthorMdht);
+		final org.openhealthtools.mdht.uml.cda.Author ref = auth.getAuthorMdht();
+		assertNotNull(testAuthorMdht);
+		assertEquals(testTs1, ref.getTime());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.Name)}
+	 * .
+	 */
+	@Test
+	public void testAuthorName() {
+		final Author auth = new Author(testName1);
+		final Name ref = auth.getName();
+		assertEquals(testFamilyName, ref.getFamilyName());
+		assertEquals(testGivenName, ref.getGivenNames());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.Name, java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testAuthorNameString() {
+		final Author auth = new Author(testName1, testGln1);
+
+		final Name ref = auth.getName();
+		assertEquals(testFamilyName, ref.getFamilyName());
+		assertEquals(testGivenName, ref.getGivenNames());
+
+		assertEquals(testGln1, auth.getGln());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Author#copyMdhtAuthor()}.
+	 */
+	@Test
+	public void testCopyMdhtAuthor() {
+		final Author auth = new Author(testAuthorMdht);
+		final org.openhealthtools.mdht.uml.cda.Author ref = auth.copyMdhtAuthor();
+		assertEquals(testAuthorMdht.getTime().getValue(), ref.getTime().getValue());
+	}
+
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.common.Author#getCompleteName()}.
@@ -345,6 +345,20 @@ public class AuthorTest {
 		final Author auth = new Author(testName1);
 		final String ref = auth.getCompleteName();
 		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Author#getGlnAsIdentificator()}.
+	 */
+	@Test
+	public void testGetGlnAsIdentificator() {
+		final Author auth = new Author(testName1, testGln1);
+		assertEquals(testGln1, auth.getGln());
+
+		final Identificator ref = auth.getGlnAsIdentificator();
+		assertNotNull(ref);
+		assertEquals(testGln1, ref.getExtension());
 	}
 
 	/**
@@ -366,20 +380,6 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getGlnAsIdentificator()}.
-	 */
-	@Test
-	public void testGetGlnAsIdentificator() {
-		final Author auth = new Author(testName1, testGln1);
-		assertEquals(testGln1, auth.getGln());
-
-		final Identificator ref = auth.getGlnAsIdentificator();
-		assertNotNull(ref);
-		assertEquals(testGln1, ref.getExtension());
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.common.Author#getOrganization()}.
 	 */
 	@Test
@@ -390,7 +390,8 @@ public class AuthorTest {
 		final Organization ref = auth.getOrganization();
 		assertNotNull(ref);
 		assertEquals(testOrgcanization1.getName(), ref.getName());
-		assertEquals(testOrgcanization1.getTelecoms().getPhones().get(testOrgPhone1), ref.getTelecoms().getPhones().get(testOrgPhone1));
+		assertEquals(testOrgcanization1.getTelecoms().getPhones().get(testOrgPhone1),
+				ref.getTelecoms().getPhones().get(testOrgPhone1));
 	}
 
 	/**
@@ -404,7 +405,8 @@ public class AuthorTest {
 
 		final Telecoms ref = auth.getTelecoms();
 		assertNotNull(ref);
-		assertEquals(testTelecoms.getPhones().get(testOrgPhone1), ref.getPhones().get(testOrgPhone1));
+		assertEquals(testTelecoms.getPhones().get(testOrgPhone1),
+				ref.getPhones().get(testOrgPhone1));
 	}
 
 	/**

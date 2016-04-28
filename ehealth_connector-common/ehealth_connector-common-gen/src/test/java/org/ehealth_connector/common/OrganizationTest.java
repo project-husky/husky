@@ -38,36 +38,6 @@ public class OrganizationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#Organization(org.openhealthtools.mdht.uml.cda.Organization)}
-	 * .
-	 */
-	@Test
-	public void testOrganizationOrganization() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testOrganizationString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String, java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testOrganizationStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.common.Organization#copyMdhtOrganization()}.
 	 */
 	@Test
@@ -99,6 +69,36 @@ public class OrganizationTest {
 	 */
 	@Test
 	public void testGetName() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#Organization(org.openhealthtools.mdht.uml.cda.Organization)}
+	 * .
+	 */
+	@Test
+	public void testOrganizationOrganization() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testOrganizationString() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Organization#Organization(java.lang.String, java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testOrganizationStringString() {
 		fail("Not yet implemented");
 	}
 

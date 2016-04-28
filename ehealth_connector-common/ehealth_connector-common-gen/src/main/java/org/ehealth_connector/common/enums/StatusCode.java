@@ -14,38 +14,36 @@ public enum StatusCode {
 	 * <div class="en"></div> <div class="de">nicht mehr gewollt</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	ABORTED("aborted",
-			"aborted"), /**
-						 * <div class="en"></div> <div class="de">aktiv</div>
-						 * <div class="fr"></div> <div class="it"></div>
-						 */
-	ACTIVE("active", "active"), /**
-								 * <div class="en"></div>
-								 * <div class="de">abgebrochen</div>
-								 * <div class="fr"></div> <div class="it"></div>
-								 */
-	CANCELLED("cancelled",
-			"cancelled"), /**
-							 * <div class="en"></div>
-							 * <div class="de">erledigt</div>
-							 * <div class="fr"></div> <div class="it"></div>
-							 */
-	COMPLETED("completed",
-			"completed"), /**
-							 * <div class="en"></div>
-							 * <div class="de">abwartend</div>
-							 * <div class="fr"></div> <div class="it"></div>
-							 */
-	HELD("held",
-			"held"), /**
-						 * <div class="en"></div> <div class="de">aktuell</div>
-						 * <div class="fr"></div> <div class="it"></div>
-						 */
-	NEW("new",
-			"new"), /**
-					 * <div class="en"></div> <div class="de">ausgesetzt</div>
-					 * <div class="fr"></div> <div class="it"></div>
-					 */
+	ABORTED("aborted", "aborted"),
+	/**
+	 * <div class="en"></div> <div class="de">aktiv</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 */
+	ACTIVE("active", "active"),
+	/**
+	 * <div class="en"></div> <div class="de">abgebrochen</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
+	CANCELLED("cancelled", "cancelled"),
+	/**
+	 * <div class="en"></div> <div class="de">erledigt</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
+	COMPLETED("completed", "completed"),
+	/**
+	 * <div class="en"></div> <div class="de">abwartend</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
+	HELD("held", "held"),
+	/**
+	 * <div class="en"></div> <div class="de">aktuell</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
+	NEW("new", "new"),
+	/**
+	 * <div class="en"></div> <div class="de">ausgesetzt</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
 	SUSPENDED("suspended", "suspended");
 	public static final String ABORTED_CODE = "aborted";
 	public static final String ACTIVE_CODE = "active";

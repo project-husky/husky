@@ -49,13 +49,23 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Sektion Meldesysteme des BAG, basierend auf HL7 CDA-CH um.</div>
  */
 public class CdaChLrph
-extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
 
 	/**
 	 * Standard constructor.
 	 */
 	public CdaChLrph() {
 		this(LanguageCode.ENGLISH);
+	}
+
+	/**
+	 * Instantiates a new cda ch lrph.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
+	protected CdaChLrph(LanguageCode languageCode) {
+		this(languageCode, null, null);
 	}
 
 	/**
@@ -139,16 +149,6 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> 
 	 */
 	public CdaChLrph(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph doc) {
 		super(doc);
-	}
-
-	/**
-	 * Instantiates a new cda ch lrph.
-	 *
-	 * @param languageCode
-	 *            the language code
-	 */
-	protected CdaChLrph(LanguageCode languageCode) {
-		this(languageCode, null, null);
 	}
 
 	/**
@@ -271,7 +271,7 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> 
 						pn.addGiven(originalP.getNames().get(0).getGivens().get(0).getText()
 								.substring(0, 1)
 								+ originalP.getNames().get(0).getGivens().get(0).getText()
-								.length());
+										.length());
 					}
 					// Family Name = MSK
 					final ENXP enxp = DatatypesFactory.eINSTANCE.createENXP();
@@ -591,7 +591,8 @@ extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> 
 	 */
 	public SpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
-				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry() != null)
+				&& (getLaboratorySpecialtySection()
+						.getLaboratoryReportDataProcessingEntry() != null)
 				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct() != null)) {
 			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()

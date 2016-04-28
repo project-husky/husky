@@ -35,37 +35,21 @@ import ca.uhn.fhir.model.primitive.DateDt;
  */
 public class TestPatient {
 
-	public String given;
-
-	public String family;
-
-	public String birthDate;
-
-	public String addrLine1;
-
-	public String addrCity;
-
-	public String addrState;
-	public String addrCountry;
-	public String addrUse;
-	public String addrPostalCode;
-
-	public String gender;
-
 	static public String oidInsuranceCard = "urn:oid:2.16.756.5.30.1.123.100.1.1.1";
-	public String idInsuranceCard;
-	public String localId;
+
 	static private String oidLocalId = "1.2.3.4";
 
 	public static FhirPatient getFhirPatientMueller() {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMueller();
 
-		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
-				.setCity(testPatient.addrCity).setState(testPatient.addrState).setCountry(testPatient.addrCountry);
+		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1)
+				.setPostalCode(testPatient.addrPostalCode).setCity(testPatient.addrCity)
+				.setState(testPatient.addrState).setCountry(testPatient.addrCountry);
 		address.setUse(AddressUseEnum.valueOf(testPatient.addrUse.toUpperCase()));
 
-		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family).addGiven(testPatient.given);
+		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family)
+				.addGiven(testPatient.given);
 		patient.getName().add(humanName);
 
 		final IdentifierDt identifier = new IdentifierDt();
@@ -87,11 +71,13 @@ public class TestPatient {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMuellerObsolete();
 
-		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
-				.setCity(testPatient.addrCity).setState(testPatient.addrState).setCountry(testPatient.addrCountry);
+		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1)
+				.setPostalCode(testPatient.addrPostalCode).setCity(testPatient.addrCity)
+				.setState(testPatient.addrState).setCountry(testPatient.addrCountry);
 		address.setUse(AddressUseEnum.valueOf(testPatient.addrUse.toUpperCase()));
 
-		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family).addGiven(testPatient.given);
+		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family)
+				.addGiven(testPatient.given);
 		patient.getName().add(humanName);
 
 		final IdentifierDt identifier = new IdentifierDt();
@@ -168,6 +154,26 @@ public class TestPatient {
 
 		return testPatient;
 	}
+
+	public String given;
+	public String family;
+
+	public String birthDate;
+
+	public String addrLine1;
+	public String addrCity;
+	public String addrState;
+	public String addrCountry;
+
+	public String addrUse;
+
+	public String addrPostalCode;
+
+	public String gender;
+
+	public String idInsuranceCard;
+
+	public String localId;
 
 	public Date getBirthDate() {
 		try {

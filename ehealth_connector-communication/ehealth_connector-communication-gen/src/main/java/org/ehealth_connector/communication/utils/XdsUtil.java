@@ -21,27 +21,21 @@ import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 
 /**
- * 
+ *
  * xds util class
  *
  */
 public class XdsUtil {
 
 	/**
-	 * Default constructor to instanciate the object
-	 */
-	private XdsUtil() {
-
-	}
-
-	/**
 	 * Converts a list of eHC DateTimeRange to a list of OHT DateTimeRange.
-	 * 
+	 *
 	 * @param dtr
 	 *            the OHT DateTimeRange
 	 * @return the DateTimeRange Array
 	 */
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(DateTimeRange[] dtr) {
+	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(
+			DateTimeRange[] dtr) {
 		if (dtr == null)
 			return null;
 		else {
@@ -60,7 +54,7 @@ public class XdsUtil {
 	/**
 	 * Creates a document name in conformance with the XDM document naming
 	 * scheme
-	 * 
+	 *
 	 * @param xdsDoc
 	 *            the OHT XDSDocument
 	 * @param docNr
@@ -90,7 +84,7 @@ public class XdsUtil {
 	/**
 	 * Creates a document path and name in conformance with the XDM document
 	 * naming scheme
-	 * 
+	 *
 	 * @param xdsDoc
 	 *            the OHT XDSDocument
 	 * @param docNr
@@ -100,5 +94,12 @@ public class XdsUtil {
 	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
 		final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
 		return filePath;
+	}
+
+	/**
+	 * Default constructor to instanciate the object
+	 */
+	private XdsUtil() {
+
 	}
 }

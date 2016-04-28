@@ -14,16 +14,16 @@ public enum AdministrativeGender {
 	 * <div class="en"></div> <div class="de">Weiblich</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	FEMALE("F",
-			"Female"), /**
-						 * <div class="en"></div> <div class="de">Männlich</div>
-						 * <div class="fr"></div> <div class="it"></div>
-						 */
-	MALE("M", "Male"), /**
-						 * <div class="en"></div>
-						 * <div class="de">Undifferenziert</div>
-						 * <div class="fr"></div> <div class="it"></div>
-						 */
+	FEMALE("F", "Female"),
+	/**
+	 * <div class="en"></div> <div class="de">Männlich</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
+	MALE("M", "Male"),
+	/**
+	 * <div class="en"></div> <div class="de">Undifferenziert</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 */
 	UNDIFFERENTIATED("UN", "Undifferentiated");
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des

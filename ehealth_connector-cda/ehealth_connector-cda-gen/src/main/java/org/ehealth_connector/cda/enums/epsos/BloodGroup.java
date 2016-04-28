@@ -13,68 +13,58 @@ public enum BloodGroup {
 	/**
 	 * <div class="en">blood group 0</div> <div class="de">0</div>
 	 */
-	BLOOD_GROUP_0("58460004",
-			"blood group 0"), /**
-								 * <div class="en">blood group 0 Rh(D)
-								 * negative</div> <div class="de">0 neg</div>
-								 */
-	BLOOD_GROUP_0_RHD_NEGATIVE("278148006",
-			"blood group 0 Rh(D) negative"), /**
-												 * <div class="en">blood group 0
-												 * Rh(D) positive</div>
-												 * <div class="de">0 pos</div>
-												 */
-	BLOOD_GROUP_0_RHD_POSITIVE("278147001",
-			"blood group 0 Rh(D) positive"), /**
-												 * <div class="en">blood group
-												 * A</div>
-												 * <div class="de">A</div>
-												 */
-	BLOOD_GROUP_A("112144000",
-			"blood group A"), /**
-								 * <div class="en">blood group A Rh(D)
-								 * negative</div> <div class="de">A neg</div>
-								 */
-	BLOOD_GROUP_A_RHD_NEGATIVE("278152006",
-			"blood group A Rh(D) negative"), /**
-												 * <div class="en">blood group A
-												 * Rh(D) positive</div>
-												 * <div class="de">A pos</div>
-												 */
-	BLOOD_GROUP_A_RHD_POSITIVE("278149003",
-			"blood group A Rh(D) positive"), /**
-												 * <div class="en">blood group
-												 * AB</div>
-												 * <div class="de">AB</div>
-												 */
-	BLOOD_GROUP_AB("165743006",
-			"blood group AB"), /**
-								 * <div class="en">blood group AB Rh(D)
-								 * negative</div> <div class="de">AB pos</div>
-								 */
-	BLOOD_GROUP_AB_RHD_NEGATIVE("278154007",
-			"blood group AB Rh(D) negative"), /**
-												 * <div class="en">blood group
-												 * AB Rh(D) positive</div>
-												 * <div class="de">AB neg</div>
-												 */
-	BLOOD_GROUP_AB_RHD_POSITIVE("278151004",
-			"blood group AB Rh(D) positive"), /**
-												 * <div class="en">blood group
-												 * B</div>
-												 * <div class="de">B</div>
-												 */
-	BLOOD_GROUP_B("112149005",
-			"blood group B"), /**
-								 * <div class="en">blood group B Rh(D)
-								 * negative</div> <div class="de">B neg</div>
-								 */
-	BLOOD_GROUP_B_RHD_NEGATIVE("278153001",
-			"blood group B Rh(D) negative"), /**
-												 * <div class="en">blood group B
-												 * Rh(D) positive</div>
-												 * <div class="de">B pos</div>
-												 */
+	BLOOD_GROUP_0("58460004", "blood group 0"),
+	/**
+	 * <div class="en">blood group 0 Rh(D) negative</div> <div class="de">0
+	 * neg</div>
+	 */
+	BLOOD_GROUP_0_RHD_NEGATIVE("278148006", "blood group 0 Rh(D) negative"),
+	/**
+	 * <div class="en">blood group 0 Rh(D) positive</div> <div class="de">0
+	 * pos</div>
+	 */
+	BLOOD_GROUP_0_RHD_POSITIVE("278147001", "blood group 0 Rh(D) positive"),
+	/**
+	 * <div class="en">blood group A</div> <div class="de">A</div>
+	 */
+	BLOOD_GROUP_A("112144000", "blood group A"),
+	/**
+	 * <div class="en">blood group A Rh(D) negative</div> <div class="de">A
+	 * neg</div>
+	 */
+	BLOOD_GROUP_A_RHD_NEGATIVE("278152006", "blood group A Rh(D) negative"),
+	/**
+	 * <div class="en">blood group A Rh(D) positive</div> <div class="de">A
+	 * pos</div>
+	 */
+	BLOOD_GROUP_A_RHD_POSITIVE("278149003", "blood group A Rh(D) positive"),
+	/**
+	 * <div class="en">blood group AB</div> <div class="de">AB</div>
+	 */
+	BLOOD_GROUP_AB("165743006", "blood group AB"),
+	/**
+	 * <div class="en">blood group AB Rh(D) negative</div> <div class="de">AB
+	 * pos</div>
+	 */
+	BLOOD_GROUP_AB_RHD_NEGATIVE("278154007", "blood group AB Rh(D) negative"),
+	/**
+	 * <div class="en">blood group AB Rh(D) positive</div> <div class="de">AB
+	 * neg</div>
+	 */
+	BLOOD_GROUP_AB_RHD_POSITIVE("278151004", "blood group AB Rh(D) positive"),
+	/**
+	 * <div class="en">blood group B</div> <div class="de">B</div>
+	 */
+	BLOOD_GROUP_B("112149005", "blood group B"),
+	/**
+	 * <div class="en">blood group B Rh(D) negative</div> <div class="de">B
+	 * neg</div>
+	 */
+	BLOOD_GROUP_B_RHD_NEGATIVE("278153001", "blood group B Rh(D) negative"),
+	/**
+	 * <div class="en">blood group B Rh(D) positive</div> <div class="de">B
+	 * pos</div>
+	 */
 	BLOOD_GROUP_B_RHD_POSITIVE("278150003", "blood group B Rh(D) positive");
 
 	/**

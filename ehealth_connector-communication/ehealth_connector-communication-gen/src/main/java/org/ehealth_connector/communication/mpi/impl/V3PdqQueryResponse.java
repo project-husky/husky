@@ -27,7 +27,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Gets the current numbers of returned patients in the query.
-	 * 
+	 *
 	 * @return the current numbers
 	 */
 	@Override
@@ -37,7 +37,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Gets the patients from the query.
-	 * 
+	 *
 	 * @return the patients
 	 */
 	@Override
@@ -47,7 +47,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Gets the remaining numbers of patients in the query.
-	 * 
+	 *
 	 * @return the remaining numbers
 	 */
 	@Override
@@ -57,7 +57,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Query state
-	 * 
+	 *
 	 * @return true if successful
 	 */
 	@Override
@@ -67,7 +67,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Gets the total numbers of patients from the query.
-	 * 
+	 *
 	 * @return the total numbers
 	 */
 	@Override
@@ -77,7 +77,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Sets the current numbers of patient returned in this query step.
-	 * 
+	 *
 	 * @param currentNumbers
 	 *            the new current numbers
 	 */
@@ -87,7 +87,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Sets the patients from the query.
-	 * 
+	 *
 	 * @param patients
 	 *            the new patients
 	 */
@@ -97,7 +97,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Sets the remaining numbers of patients for this query.
-	 * 
+	 *
 	 * @param remainingNumbers
 	 *            the new remaining numbers
 	 */
@@ -107,7 +107,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Sets the success return value of the query.
-	 * 
+	 *
 	 * @param success
 	 *            the new success
 	 */
@@ -117,7 +117,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/**
 	 * Sets the total numbers of patients for this query.
-	 * 
+	 *
 	 * @param totalNumbers
 	 *            the new total numbers
 	 */

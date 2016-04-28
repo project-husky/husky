@@ -24,8 +24,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 /**
  * Implements the IHE Pharm MedicationTreatmentPlanSection.
  */
-public class MedicationTreatmentPlanSection
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection> {
+public class MedicationTreatmentPlanSection extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection> {
 
 	/** The language code. */
 	private LanguageCode languageCode;
@@ -41,7 +41,7 @@ public class MedicationTreatmentPlanSection
 	 * Instantiates a new medication treatment plan section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public MedicationTreatmentPlanSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanSection().init());
@@ -66,7 +66,7 @@ public class MedicationTreatmentPlanSection
 	 * Instantiates a new medication treatment plan section.
 	 *
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public MedicationTreatmentPlanSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanSection section) {

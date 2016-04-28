@@ -50,6 +50,30 @@ import org.xml.sax.SAXException;
  */
 public class ConfigurationParser {
 
+	/**
+	 * A <tt>ValidationEventHandler</tt> which collects all events. The
+	 * {@link ValidationHandler#handleEvent(ValidationEvent)} method is
+	 * overwritten to only continue the current process if the event's severity
+	 * is {@link ValidationEvent#WARNING}.
+	 */
+	static class ValidationHandler extends ValidationEventCollector {
+
+		/**
+		 * {@inheritDoc}
+		 * <p>
+		 * This implementation attempts to continue the current unmarshal,
+		 * validate, or marshal operation only if the message's severity is
+		 * {@link ValidationEvent#WARNING}. If an error or a fatal error is
+		 * reported the provider will terminate the current operation.
+		 * </p>
+		 */
+		@Override
+		public boolean handleEvent(ValidationEvent event) {
+			return (super.handleEvent(event) && (event.getSeverity() == ValidationEvent.WARNING));
+		}
+
+	} // End of class ValidationHandler
+
 	/** The name of the XML schema file. */
 	private static final String schemaName = "/configuration.xsd";
 
@@ -78,12 +102,53 @@ public class ConfigurationParser {
 	}
 
 	/**
+	 * Creates and returns the schema instance.
+	 *
+	 * @return a new {@link Schema} from the parsed schema.
+	 * @throws FileNotFoundException
+	 *             if no schema resource is found.
+	 * @throws SAXException
+	 *             if a SAX error occurs during parsing the schema.
+	 * @throws IllegalArgumentException
+	 *             if no implementation of the schema language is available.
+	 */
+	protected Schema createSchema() throws SAXException, FileNotFoundException {
+		final InputStream in = getClass().getResourceAsStream(schemaName);
+		if (in == null) {
+			throw new FileNotFoundException("Could not find schema as resource: " + schemaName);
+		}
+		try {
+			final Source schemaSource = new StreamSource(in);
+			final SchemaFactory schemaFactory = SchemaFactory
+					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			return schemaFactory.newSchema(schemaSource);
+		} finally {
+			try {
+				in.close();
+			} catch (final IOException e) {
+			}
+		}
+	}
+
+	/**
 	 * Returns the XML configuration file.
 	 *
 	 * @return the XML configuration file.
 	 */
 	public File getConfigFile() {
 		return configFile;
+	}
+
+	/**
+	 * Returns the validation event handler. Hook for sub-classer.
+	 *
+	 * @return the validation event handler.
+	 */
+	protected ValidationEventCollector getValidationHandler() {
+		if (validationHandler == null) {
+			validationHandler = new ValidationHandler();
+		}
+		return validationHandler;
 	}
 
 	/**
@@ -128,7 +193,7 @@ public class ConfigurationParser {
 	 * An exception is thrown on the first event with severity error or fatal
 	 * error. Warnings are simply logged and do not throw any exception.
 	 * </p>
-	 * 
+	 *
 	 * @throws ConfigurationException
 	 *             on the first event with severity error or fatal error.
 	 */
@@ -154,71 +219,6 @@ public class ConfigurationParser {
 			case ValidationEvent.FATAL_ERROR:
 				throw new ConfigurationException(sb.toString() + "Invalid configuration entry",
 						event.getLinkedException());
-			}
-		}
-	}
-
-	/**
-	 * Returns the validation event handler. Hook for sub-classer.
-	 *
-	 * @return the validation event handler.
-	 */
-	protected ValidationEventCollector getValidationHandler() {
-		if (validationHandler == null) {
-			validationHandler = new ValidationHandler();
-		}
-		return validationHandler;
-	}
-
-	/**
-	 * A <tt>ValidationEventHandler</tt> which collects all events. The
-	 * {@link ValidationHandler#handleEvent(ValidationEvent)} method is
-	 * overwritten to only continue the current process if the event's severity
-	 * is {@link ValidationEvent#WARNING}.
-	 */
-	static class ValidationHandler extends ValidationEventCollector {
-
-		/**
-		 * {@inheritDoc}
-		 * <p>
-		 * This implementation attempts to continue the current unmarshal,
-		 * validate, or marshal operation only if the message's severity is
-		 * {@link ValidationEvent#WARNING}. If an error or a fatal error is
-		 * reported the provider will terminate the current operation.
-		 * </p>
-		 */
-		@Override
-		public boolean handleEvent(ValidationEvent event) {
-			return (super.handleEvent(event) && (event.getSeverity() == ValidationEvent.WARNING));
-		}
-
-	} // End of class ValidationHandler
-
-	/**
-	 * Creates and returns the schema instance.
-	 *
-	 * @return a new {@link Schema} from the parsed schema.
-	 * @throws FileNotFoundException
-	 *             if no schema resource is found.
-	 * @throws SAXException
-	 *             if a SAX error occurs during parsing the schema.
-	 * @throws IllegalArgumentException
-	 *             if no implementation of the schema language is available.
-	 */
-	protected Schema createSchema() throws SAXException, FileNotFoundException {
-		final InputStream in = getClass().getResourceAsStream(schemaName);
-		if (in == null) {
-			throw new FileNotFoundException("Could not find schema as resource: " + schemaName);
-		}
-		try {
-			final Source schemaSource = new StreamSource(in);
-			final SchemaFactory schemaFactory = SchemaFactory
-					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			return schemaFactory.newSchema(schemaSource);
-		} finally {
-			try {
-				in.close();
-			} catch (final IOException e) {
 			}
 		}
 	}

@@ -39,7 +39,7 @@ public class ExternalReferenceEntry
 	 * Instantiates a new external reference entry.
 	 *
 	 * @param externalReference
-	 *          the external reference
+	 *            the external reference
 	 */
 	public ExternalReferenceEntry(
 			org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef externalReference) {

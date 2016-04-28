@@ -69,6 +69,16 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Instantiates a new cda ch lrtp.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 */
+	protected CdaChLrtp(LanguageCode languageCode) {
+		this(languageCode, null, null);
+	}
+
+	/**
 	 * Constructor with the recommended elements for the LRTP document Header.
 	 *
 	 * @param languageCode
@@ -186,16 +196,6 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
 		super(doc);
-	}
-
-	/**
-	 * Instantiates a new cda ch lrtp.
-	 *
-	 * @param languageCode
-	 *            the language code
-	 */
-	protected CdaChLrtp(LanguageCode languageCode) {
-		this(languageCode, null, null);
 	}
 
 	/**
@@ -502,6 +502,27 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Convenience function to return the (LOINC) section code from a given
+	 * LaboratoryObservation, which is hold in the given
+	 * LaboratoryBatteryOrganizer.
+	 *
+	 * @param organizer
+	 *            the LaboratoryBatteryOrganizer
+	 * @return the section code
+	 */
+	private String getSectionCodeFromLaboratoryObservationEnum(
+			LaboratoryBatteryOrganizer organizer) {
+		if (!organizer.getLaboratoryObservations().isEmpty()) {
+			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
+				// if present return LOINC Enum
+				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum()
+						.getSectionCode();
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Convenience function, which returns the SpecimenAct directly from the
 	 * first underlying
 	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry
@@ -636,26 +657,5 @@ public class CdaChLrtp
 		}
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
-	}
-
-	/**
-	 * Convenience function to return the (LOINC) section code from a given
-	 * LaboratoryObservation, which is hold in the given
-	 * LaboratoryBatteryOrganizer.
-	 *
-	 * @param organizer
-	 *            the LaboratoryBatteryOrganizer
-	 * @return the section code
-	 */
-	private String getSectionCodeFromLaboratoryObservationEnum(
-			LaboratoryBatteryOrganizer organizer) {
-		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
-				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum()
-						.getSectionCode();
-			}
-		}
-		return null;
 	}
 }

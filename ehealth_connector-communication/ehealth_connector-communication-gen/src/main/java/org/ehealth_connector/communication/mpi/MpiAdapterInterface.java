@@ -19,7 +19,7 @@ import org.ehealth_connector.fhir.FhirPatient;
 
 /**
  * General adapter Inteface for an MPI implementation.
- * 
+ *
  * @param <T>
  *            a MpiQuery type implementation
  * @param <U>
@@ -29,7 +29,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 
 	/**
 	 * adds a patient to the mpi.
-	 * 
+	 *
 	 * @param patient
 	 *            the patient
 	 * @return if success true, false otherwise
@@ -38,7 +38,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 
 	/**
 	 * Gets an empty MpiQuery objects.
-	 * 
+	 *
 	 * @return the mpiQuery objects
 	 */
 	abstract T getMpiQuery();
@@ -46,7 +46,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	/**
 	 * a patient referenced with the obsolete id will be merged into supplied
 	 * patient.
-	 * 
+	 *
 	 * @param patient
 	 *            the patient
 	 * @param obsoleteId
@@ -58,7 +58,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	/**
 	 * query the mpi with patient id and return the ids in the queried Domains
 	 * from the mpi.
-	 * 
+	 *
 	 * @param patient
 	 *            patient with local Id
 	 * @param queryDomainOids
@@ -68,11 +68,12 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            queryDomainOids)
 	 * @return string array with correspoding identifiers to queryDomainOids
 	 */
-	abstract String[] queryPatientId(FhirPatient patient, String[] queryDomainOids, String[] queryDomainNamespaces);
+	abstract String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
+			String[] queryDomainNamespaces);
 
 	/**
 	 * queries the mpi for patients according to the criteria specified
-	 * 
+	 *
 	 * @param mpiQuery
 	 *            the mpi query criterias
 	 * @return the mpi query response
@@ -81,7 +82,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 
 	/**
 	 * updates the demographic information of the patient in the mpi.
-	 * 
+	 *
 	 * @param patient
 	 *            the patient
 	 * @return if success true, false otherwise

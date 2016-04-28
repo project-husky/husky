@@ -142,7 +142,7 @@ public class Transformation {
 
 	/**
 	 * Returns the next transformation step.
-	 * 
+	 *
 	 * @return the next transformation step or <tt>null</tt>, if this is the
 	 *         last transformation step.
 	 * @see #isLastStep()
@@ -205,7 +205,7 @@ public class Transformation {
 	 * transformation steps on which the <tt>transform</tt> method has to be
 	 * invoked.
 	 * </p>
-	 * 
+	 *
 	 * @param source
 	 *            the XML source to transform.
 	 * @param destination
@@ -357,7 +357,7 @@ public class Transformation {
 	 * Note that a <tt>null</tt> source is allowed if this transformation is
 	 * part of a transformation chain and is not the first member.
 	 * </p>
-	 * 
+	 *
 	 * @param source
 	 *            the source document for the transformation (<tt>null</tt>
 	 *            allowed).
@@ -412,7 +412,7 @@ public class Transformation {
 	 * Note that it is the responsibility of the caller to properly close the
 	 * streams after use.
 	 * </p>
-	 * 
+	 *
 	 * @param in
 	 *            a reference to an XML input stream.
 	 * @param out

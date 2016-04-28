@@ -134,7 +134,8 @@ public class PrescriptionItemEntryTest {
 		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
 		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
 
-		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
+		entry.setMedicationTreatmentPlanItemReferenceEntry(
+				medicationTreatmentPlanItemReferenceEntry);
 
 		final Document document = entry.getDocument();
 
@@ -151,7 +152,8 @@ public class PrescriptionItemEntryTest {
 		assertEquals(1, nodes.getLength());
 
 		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
-		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+		assertEquals("id",
+				entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
 	}
 
 	@Test
@@ -167,7 +169,8 @@ public class PrescriptionItemEntryTest {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//precondition/criterion/text/reference[@value='#abc']");
+		XPathExpression expr = xpath
+				.compile("//precondition/criterion/text/reference[@value='#abc']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		assertEquals("#abc", entry.getPreconditionEntries().get(0).getTextReference());

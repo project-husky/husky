@@ -153,6 +153,18 @@ public class ObservationMediaEntry
 	}
 
 	/**
+	 * Gets the mime type.
+	 *
+	 * @return the mime type
+	 */
+	protected String getMimeType() {
+		if ((getMdht().getValue() != null) && (getMdht().getValue().getMediaType() != null)) {
+			return getMdht().getValue().getMediaType();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the mime type enum.
 	 *
 	 * @return the mime type enum
@@ -258,18 +270,6 @@ public class ObservationMediaEntry
 	 */
 	public void setObservationMediaId(String id) {
 		getMdht().setObservationMediaId(id);
-	}
-
-	/**
-	 * Gets the mime type.
-	 *
-	 * @return the mime type
-	 */
-	protected String getMimeType() {
-		if ((getMdht().getValue() != null) && (getMdht().getValue().getMediaType() != null)) {
-			return getMdht().getValue().getMediaType();
-		}
-		return null;
 	}
 
 }

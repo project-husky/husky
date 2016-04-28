@@ -20,6 +20,12 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 		super(mdht, templateIdRoot, templateIdExtension);
 	}
 
+	protected void addValue(Value value) {
+		if (getMdht() != null && getMdht().getValues() != null) {
+			getMdht().getValues().add(value.getValue());
+		}
+	}
+
 	/**
 	 * Gets the Effective Time
 	 *
@@ -30,7 +36,8 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	}
 
 	/**
-	 * Get the (first) problem value. The Value may be a coded or uncoded String.
+	 * Get the (first) problem value. The Value may be a coded or uncoded
+	 * String.
 	 *
 	 * @return the (first) problem value as string.
 	 */
@@ -39,26 +46,6 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 			return new Value(getMdht().getValues().get(0));
 		}
 		return null;
-	}
-
-	/**
-	 * Sets the date time of result.
-	 *
-	 * @param dateTimeOfResult
-	 *          the new date time of result
-	 */
-	public void setEffectiveTime(Date dateTimeOfResult) {
-		try {
-			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected void addValue(Value value) {
-		if (getMdht() != null && getMdht().getValues() != null) {
-			getMdht().getValues().add(value.getValue());
-		}
 	}
 
 	/**
@@ -74,5 +61,19 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 			vl.add(v);
 		}
 		return vl;
+	}
+
+	/**
+	 * Sets the date time of result.
+	 *
+	 * @param dateTimeOfResult
+	 *            the new date time of result
+	 */
+	public void setEffectiveTime(Date dateTimeOfResult) {
+		try {
+			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }

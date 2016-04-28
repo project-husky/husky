@@ -162,6 +162,20 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
+	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
+		for (final Section s : getMdht().getAllSections()) {
+			if (s instanceof LaboratorySpecialtySection) {
+				return (LaboratorySpecialtySection) s;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Returns the narrative Text of the LaboratorySpecialtySection.
 	 *
 	 * @return the narrative Text. Returns null, if this text does not exist.
@@ -189,6 +203,25 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			}
 		}
 		return pl;
+	}
+
+	/**
+	 * Gets the speciality section title.
+	 *
+	 * @return the speciality section title
+	 */
+	private String getSpecialitySectionTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire");
+		case GERMAN:
+			return ("Laborbefund");
+		case ITALIAN:
+			return ("Rapporto di laboratorio");
+		case ENGLISH:
+			return ("Laboratory report");
+		}
+		return "";
 	}
 
 	/**
@@ -238,38 +271,5 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		if (getLaboratorySpecialtySection() != null) {
 			getLaboratorySpecialtySection().createStrucDocText(text);
 		}
-	}
-
-	/**
-	 * Gets the laboratory specialty section.
-	 *
-	 * @return the laboratory specialty section
-	 */
-	private LaboratorySpecialtySection getLaboratorySpecialtySection() {
-		for (final Section s : getMdht().getAllSections()) {
-			if (s instanceof LaboratorySpecialtySection) {
-				return (LaboratorySpecialtySection) s;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the speciality section title.
-	 *
-	 * @return the speciality section title
-	 */
-	private String getSpecialitySectionTitle() {
-		switch (this.getLanguageCode()) {
-		case FRENCH:
-			return ("Rapport de laboratoire");
-		case GERMAN:
-			return ("Laborbefund");
-		case ITALIAN:
-			return ("Rapporto di laboratorio");
-		case ENGLISH:
-			return ("Laboratory report");
-		}
-		return "";
 	}
 }

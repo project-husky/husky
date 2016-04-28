@@ -44,7 +44,8 @@ public class ImmunizationSectionTest {
 	@Test
 	public void testAddImmunizationContentIdCheck() throws Exception {
 
-		final ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
+		final ImmunizationSection immunizationSection = new ImmunizationSection(
+				LanguageCode.GERMAN);
 		final Immunization immunization = new Immunization();
 
 		final Author author = CdaChVacdTest.getArztAllzeitBereit();
@@ -83,8 +84,8 @@ public class ImmunizationSectionTest {
 		assertEquals("#is14", criterionEntry.getTextReference());
 		assertEquals("#is15", commentEntry.getContentIdReference());
 
-		assertEquals(comment,
-				commentEntry.getContentIdText(immunizationSection, commentEntry.getContentIdReference()));
+		assertEquals(comment, commentEntry.getContentIdText(immunizationSection,
+				commentEntry.getContentIdReference()));
 
 		assertEquals("Hepatitis A immunization (procedure)",
 				hepB.getContentIdText(immunizationSection, hepA.getTextReference()));
@@ -104,7 +105,8 @@ public class ImmunizationSectionTest {
 
 	@Test
 	public void testAddImmunizationEmpty() throws Exception {
-		final ImmunizationSection immunizationSection = new ImmunizationSection(LanguageCode.GERMAN);
+		final ImmunizationSection immunizationSection = new ImmunizationSection(
+				LanguageCode.GERMAN);
 		final Immunization immunization = new Immunization();
 		immunizationSection.addImmunization(immunization, true);
 		final Document document = immunizationSection.getDocument();
@@ -119,7 +121,8 @@ public class ImmunizationSectionTest {
 
 		final Document document = immunization.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.3.23']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.3.23']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

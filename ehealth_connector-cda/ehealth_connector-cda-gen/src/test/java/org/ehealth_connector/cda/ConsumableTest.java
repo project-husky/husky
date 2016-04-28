@@ -96,7 +96,8 @@ public class ConsumableTest {
 
 		Document document = consumable.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

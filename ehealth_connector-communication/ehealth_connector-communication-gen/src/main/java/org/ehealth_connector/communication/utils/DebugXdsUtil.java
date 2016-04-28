@@ -27,7 +27,7 @@ public class DebugXdsUtil extends DebugUtil {
 	/**
 	 * Creates a string with the submission-set metadata (for debugging purposes
 	 * only)
-	 * 
+	 *
 	 * @param txnDatas
 	 *            <div class="en">the submit transaction data</div>
 	 * @return <div class="en">string with the submission-set metadata (for
@@ -50,10 +50,12 @@ public class DebugXdsUtil extends DebugUtil {
 			retVal.append("  UniqueId:             " + ss.getUniqueId() + "\n");
 			retVal.append("  Title:                " + ss.getTitle() + "\n");
 			retVal.append("  PatientId:            " + ss.getPatientId() + "\n");
-			retVal.append("  ContentTypeCode:      " + debugCodeString(ss.getContentTypeCode()) + "\n");
+			retVal.append(
+					"  ContentTypeCode:      " + debugCodeString(ss.getContentTypeCode()) + "\n");
 			retVal.append("  Author:               " + debugAuthorString(ss.getAuthor()) + "\n");
 			retVal.append("  AvailabilityStatus:   " + ss.getAvailabilityStatus() + "\n");
-			retVal.append("  Comments:             " + debugInternationalString(ss.getComments()) + "\n");
+			retVal.append(
+					"  Comments:             " + debugInternationalString(ss.getComments()) + "\n");
 			retVal.append("  IntendedRecipient:    ");
 			if (ss.getIntendedRecipient().isEmpty()) {
 				retVal.append("null");

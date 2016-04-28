@@ -102,6 +102,15 @@ public class PlayingEntity {
 	}
 
 	/**
+	 * Method to get
+	 * 
+	 * @return the playingEntity
+	 */
+	public org.openhealthtools.mdht.uml.cda.PlayingEntity getPlayingEntity() {
+		return mPlayingEntity;
+	}
+
+	/**
 	 * Sets the code.
 	 *
 	 * @param code
@@ -112,16 +121,10 @@ public class PlayingEntity {
 	}
 
 	/**
-	 * Method to get
-	 * @return the playingEntity
-	 */
-	public org.openhealthtools.mdht.uml.cda.PlayingEntity getPlayingEntity() {
-		return mPlayingEntity;
-	}
-
-	/**
 	 * Method to set
-	 * @param playingEntity the playingEntity to set
+	 * 
+	 * @param playingEntity
+	 *            the playingEntity to set
 	 */
 	public void setPlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity playingEntity) {
 		mPlayingEntity = playingEntity;

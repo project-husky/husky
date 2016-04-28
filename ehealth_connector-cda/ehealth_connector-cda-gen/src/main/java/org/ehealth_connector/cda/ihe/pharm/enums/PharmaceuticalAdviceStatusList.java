@@ -36,7 +36,7 @@ public enum PharmaceuticalAdviceStatusList {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static PharmaceuticalAdviceStatusList getEnum(String code) {
@@ -55,7 +55,7 @@ public enum PharmaceuticalAdviceStatusList {
 	 * Instantiates a new pharmaceutical advice status list.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 */
 	private PharmaceuticalAdviceStatusList(String code) {
 		this.code = code;

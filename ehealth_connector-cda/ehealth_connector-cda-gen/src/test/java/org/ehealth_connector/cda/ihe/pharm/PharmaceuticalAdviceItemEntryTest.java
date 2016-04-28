@@ -87,7 +87,7 @@ public class PharmaceuticalAdviceItemEntryTest {
 		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		
+
 		assertEquals("oid4", entry.getNewMedicationTreatmentPlanItemEntry().getId().getRoot());
 		assertEquals("id4", entry.getNewMedicationTreatmentPlanItemEntry().getId().getExtension());
 	}
@@ -96,14 +96,13 @@ public class PharmaceuticalAdviceItemEntryTest {
 	public void testNewPresciption() throws Exception {
 
 		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
-		
+
 		assertEquals(null, entry.getNewPresciptionEntry());
-		
+
 		PrescriptionItemEntry newPresriptionEntry = new PrescriptionItemEntry();
 		newPresriptionEntry.setId(new Identificator("oid", "id"));
 		entry.setNewPresciptionEntry(newPresriptionEntry);
-		
-		
+
 		final Document document = entry.getDocument();
 		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
@@ -156,7 +155,7 @@ public class PharmaceuticalAdviceItemEntryTest {
 	public void testReferenceEntries() throws Exception {
 
 		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
-		
+
 		PrescriptionItemReferenceEntry prescriptionItemReferenceEntry = new PrescriptionItemReferenceEntry();
 		prescriptionItemReferenceEntry.setId(new Identificator("oid2", "id2"));
 		entry.setPrescriptionItemReferenceEntry(prescriptionItemReferenceEntry);
@@ -164,15 +163,16 @@ public class PharmaceuticalAdviceItemEntryTest {
 		DispenseItemReferenceEntry dispenseItemReferenceEntry = new DispenseItemReferenceEntry();
 		dispenseItemReferenceEntry.setId(new Identificator("oid3", "id3"));
 		entry.setDispenseItemReferenceEntry(dispenseItemReferenceEntry);
-		
+
 		MedicationTreatmentPlanItemEntry newMedicationTreatmentPlanItemEntry = new MedicationTreatmentPlanItemEntry();
 		newMedicationTreatmentPlanItemEntry.setId(new Identificator("oid4", "id4"));
 		entry.setNewMedicationTreatmentPlanItemEntry(newMedicationTreatmentPlanItemEntry);
-		
+
 		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
 		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
-		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
-		
+		entry.setMedicationTreatmentPlanItemReferenceEntry(
+				medicationTreatmentPlanItemReferenceEntry);
+
 		final Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile("//entryRelationship[@typeCode='REFR']");
@@ -180,8 +180,9 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals(4, nodes.getLength());
 
 		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
-		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
-		
+		assertEquals("id",
+				entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+
 		assertEquals("oid2", entry.getPrescriptionItemReferenceEntry().getId().getRoot());
 		assertEquals("id2", entry.getPrescriptionItemReferenceEntry().getId().getExtension());
 
@@ -192,8 +193,7 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals("id4", entry.getNewMedicationTreatmentPlanItemEntry().getId().getExtension());
 
 	}
-	
-	
+
 	@Test
 	public void testSerializeEmpty() throws Exception {
 		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
@@ -204,7 +204,7 @@ public class PharmaceuticalAdviceItemEntryTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-	
+
 	@Test
 	public void testStatusCodeActive() throws Exception {
 
@@ -217,7 +217,6 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals(1, nodes.getLength());
 	}
 
-	
 	@Test
 	public void testTextReference() throws XPathExpressionException {
 		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();

@@ -103,8 +103,8 @@ public enum CdaChVacdImmunizations {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static CdaChVacdImmunizations getEnum(String code) {
@@ -122,8 +122,8 @@ public enum CdaChVacdImmunizations {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -144,7 +144,7 @@ public enum CdaChVacdImmunizations {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -172,19 +172,19 @@ public enum CdaChVacdImmunizations {
 	private Date validTo;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>.
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
-	private CdaChVacdImmunizations(String code, String displayName, String validFrom, String validTo,
-			int sortOrder) {
+	private CdaChVacdImmunizations(String code, String displayName, String validFrom,
+			String validTo, int sortOrder) {
 		this.code = code;
 		this.displayName = displayName;
 		if ((validFrom != null) && !"".equals(validFrom)) {
@@ -218,8 +218,8 @@ public enum CdaChVacdImmunizations {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -269,7 +269,7 @@ public enum CdaChVacdImmunizations {
 	 * Checks if the code is valid for the specified date
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 * @return true, if is valid
 	 */
 	public boolean isValid(Date date) {

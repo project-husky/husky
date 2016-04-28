@@ -92,7 +92,7 @@ public class RuleSetTransformer extends StylesheetFactory {
 	 * <li>use the human readable notation for SVRL's location attribute</li>
 	 * </ul>
 	 * </p>
-	 * 
+	 *
 	 * @param uri
 	 *            the URI of the XSL stylesheet to be used.
 	 * @return a new {@link Transformation} instance based on specified XSL
@@ -125,7 +125,7 @@ public class RuleSetTransformer extends StylesheetFactory {
 	 * method is invoked, giving the implementor the possibility to configure
 	 * each transformation step as needed.
 	 * </p>
-	 * 
+	 *
 	 * @return the root {@link Transformation} step.
 	 * @throws TransformationException
 	 * @see #getStylesheetNames()

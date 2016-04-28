@@ -65,7 +65,8 @@ public class ExternalDocumentEntry
 		final ExternalDocumentEntry other = (ExternalDocumentEntry) obj;
 
 		final Identificator id = this.getId();
-		if (((id != null) && !id.equals(other.getId())) || ((id == null) && (other.getId() != null))) {
+		if (((id != null) && !id.equals(other.getId()))
+				|| ((id == null) && (other.getId() != null))) {
 			return false;
 		}
 
@@ -109,7 +110,8 @@ public class ExternalDocumentEntry
 	 * @return the url for the reference
 	 */
 	public String getReferenceUrl() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -129,7 +131,7 @@ public class ExternalDocumentEntry
 	 * one id can be provided
 	 *
 	 * @param id
-	 *          the new id
+	 *            the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -142,11 +144,12 @@ public class ExternalDocumentEntry
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference, # for local reference has to be included
+	 *            the new text reference, # for local reference has to be
+	 *            included
 	 *
 	 * @param narrativeText
-	 *          the narrative Text to be used for the link in the CDA body level 1
-	 *          text generation
+	 *            the narrative Text to be used for the link in the CDA body
+	 *            level 1 text generation
 	 */
 	public void setReference(String value, String narrativeText) {
 		this.getMdht().setText(Util.createReference(value, narrativeText));

@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
  * gemäss IHE XD-LAB die Gruppierung von Resultaten.</div>
  */
 public class LaboratoryBatteryOrganizer
-extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer {
+		extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer {
 
 	/**
 	 * Instantiates a new laboratory battery organizer.

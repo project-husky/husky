@@ -33,7 +33,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 
 	/**
 	 * Constructs a FindDocuments Query
-	 * 
+	 *
 	 * @param patientId
 	 *            ID of the patient
 	 * @param status
@@ -51,7 +51,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 
 	/**
 	 * Constructs a FindDocuments Query
-	 * 
+	 *
 	 * @param patientId
 	 *            ID of the patient (required)
 	 * @param classCodes
@@ -111,7 +111,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 * AND-ed together with any confidentialityCode clauses previously added.
 	 * Calling this method sequentially will result in the AND-ing of multiple
 	 * clauses.
-	 * 
+	 *
 	 * @param confidentialityCodes
 	 *            array of confidentiality codes
 	 */
@@ -126,7 +126,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 
 	/**
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
-	 * 
+	 *
 	 * @return the OHT StoredQuery
 	 */
 	@Override

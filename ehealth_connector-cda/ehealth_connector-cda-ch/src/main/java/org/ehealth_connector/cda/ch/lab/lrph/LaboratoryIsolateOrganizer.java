@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
  * Informationen zu Isolaten und Keimen angegeben werden.</div>
  */
 public class LaboratoryIsolateOrganizer
-extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
+		extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
 
 	/**
 	 * Instantiates a new laboratory isolate organizer.
@@ -204,7 +204,7 @@ extends org.ehealth_connector.cda.ihe.lab.LaboratoryIsolateOrganizer {
 		specimen.getMdht().setTypeCode(ParticipationType.SPC);
 		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
 		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
-		.setClassCode(EntityClassRoot.MIC);
+				.setClassCode(EntityClassRoot.MIC);
 		getMdht().getSpecimens().add(specimen.getMdht());
 	}
 }

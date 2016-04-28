@@ -463,19 +463,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return doc;
 	}
 
-	/**
-	 * Read the LrtpDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the LRTP document
-	 */
-	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(LrtpDocument.class, resourceString);
-	}
-
 	private String formatDiv(XhtmlDt text) {
 		String retVal = text.getValueAsString();
 		retVal = retVal.replace("</div>", "");
@@ -1009,5 +996,18 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
+	}
+
+	/**
+	 * Read the LrtpDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the LRTP document
+	 */
+	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(LrtpDocument.class, resourceString);
 	}
 }

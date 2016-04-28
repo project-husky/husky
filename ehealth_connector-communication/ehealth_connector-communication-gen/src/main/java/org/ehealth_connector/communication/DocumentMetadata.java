@@ -49,7 +49,7 @@ public class DocumentMetadata {
 
 	/**
 	 * The Class MetadataExtractionMode
-	 * 
+	 *
 	 */
 	public enum DocumentMetadataExtractionMode {
 		/**
@@ -111,11 +111,11 @@ public class DocumentMetadata {
 		 * </tr>
 		 * </tbody>
 		 * </table>
-		 * 
+		 *
 		 * <br>
 		 * The following attributes will be generated as described, if they are
 		 * not present in the document entries:
-		 * 
+		 *
 		 * <table summary=
 		 * "Empty document entries attributes generation" width="100%">
 		 * <thead>
@@ -179,7 +179,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Instantiates a new document metadata.
-	 * 
+	 *
 	 * @param documentEntryType
 	 *            the document entry type
 	 */
@@ -190,7 +190,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Instantiates a new document meta data.
-	 * 
+	 *
 	 * @param language
 	 *            language of the meta data
 	 */
@@ -202,7 +202,7 @@ public class DocumentMetadata {
 	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convenience API Author.
-	 * 
+	 *
 	 * @param author
 	 *            the author
 	 */
@@ -229,7 +229,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
-	 * 
+	 *
 	 * @param code
 	 *            the code
 	 */
@@ -241,7 +241,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
-	 * 
+	 *
 	 * @param code
 	 *            the code
 	 */
@@ -307,7 +307,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Copy mdht document entry type.
-	 * 
+	 *
 	 * @return the document entry type
 	 */
 	public DocumentEntryType copyMdhtDocumentEntryType() {
@@ -388,8 +388,8 @@ public class DocumentMetadata {
 		if (this.getHealthcareFacilityTypeCode() == null) {
 			if (other.getHealthcareFacilityTypeCode() != null)
 				return false;
-		} else
-			if (!this.getHealthcareFacilityTypeCode().equals(other.getHealthcareFacilityTypeCode()))
+		} else if (!this.getHealthcareFacilityTypeCode()
+				.equals(other.getHealthcareFacilityTypeCode()))
 			return false;
 
 		if (this.getMimeType() == null) {
@@ -427,7 +427,7 @@ public class DocumentMetadata {
 	/**
 	 * Returns an (optional) author element. All information contained in the
 	 * XDS Document Metadata will be extracted to the Convenience API Author.
-	 * 
+	 *
 	 * @return ArrayList with Author objects
 	 */
 	public List<Author> getAuthors() {
@@ -442,7 +442,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the classCode
-	 * 
+	 *
 	 * @return Code element with classCode
 	 */
 	public Code getClassCode() {
@@ -451,7 +451,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the codedLanguage
-	 * 
+	 *
 	 * @return codedLanguage as String
 	 */
 	public String getCodedLanguage() {
@@ -460,7 +460,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the confidentialityCode list
-	 * 
+	 *
 	 * @return the ArrayList with ConfidentialityCodes
 	 */
 	public List<Code> getConfidentialityCodes() {
@@ -480,7 +480,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the creationTime
-	 * 
+	 *
 	 * @return creationTime as Date
 	 */
 	public Date getCreationTime() {
@@ -489,7 +489,7 @@ public class DocumentMetadata {
 
 	/**
 	 * <div class="en">Gets the document source actors organization id
-	 * 
+	 *
 	 * @return the document source actors organization id </div>
 	 */
 	public String getDocSourceActorOrganizationId() {
@@ -498,7 +498,7 @@ public class DocumentMetadata {
 
 	/**
 	 * <div class="en">Gets the document descriptor of the document
-	 * 
+	 *
 	 * @return the document descriptor of the document</div>
 	 */
 	public DocumentDescriptor getDocumentDescriptor() {
@@ -507,7 +507,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the formatCode
-	 * 
+	 *
 	 * @return formatCode as Code
 	 */
 	public Code getFormatCode() {
@@ -516,7 +516,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the healthcareFacilityTypeCode
-	 * 
+	 *
 	 * @return healthcareFacilityTypeCode as Code
 	 */
 	public Code getHealthcareFacilityTypeCode() {
@@ -525,7 +525,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the mdht document entry type.
-	 * 
+	 *
 	 * @return the mdht document entry type
 	 */
 	public DocumentEntryType getMdhtDocumentEntryType() {
@@ -534,7 +534,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the meta data language
-	 * 
+	 *
 	 * @return the meta data language
 	 */
 	public String getMetadataLanguage() {
@@ -543,7 +543,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the mimeType
-	 * 
+	 *
 	 * @return mimeType as String
 	 */
 	public String getMimeType() {
@@ -553,7 +553,7 @@ public class DocumentMetadata {
 	/**
 	 * Gets the patient. All information from the XDS Document Metadata will be
 	 * extracted to the Convenience API Patient object.
-	 * 
+	 *
 	 * @return patient
 	 */
 	public Patient getPatient() {
@@ -562,7 +562,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the patient id.
-	 * 
+	 *
 	 * @return patientId as Identificator
 	 */
 	public Identificator getPatientId() {
@@ -573,7 +573,7 @@ public class DocumentMetadata {
 	 * Gets the practice setting code. This is the medical speciality of the
 	 * practice where the document was produced (e.g. Code for
 	 * "General Medicine")
-	 * 
+	 *
 	 * @return the practiceSettingCode as Code
 	 */
 	public Code getPracticeSettingCode() {
@@ -583,7 +583,7 @@ public class DocumentMetadata {
 	/**
 	 * Gets the source patient id. This is the local patient id, e.g. inside a
 	 * hospital.
-	 * 
+	 *
 	 * @return the sourcePatientId as Identificator
 	 */
 	public Identificator getSourcePatientId() {
@@ -596,7 +596,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the title.
-	 * 
+	 *
 	 * @return the title as String
 	 */
 	public String getTitle() {
@@ -606,7 +606,7 @@ public class DocumentMetadata {
 	/**
 	 * Gets the typeCode. Specifies the type of the document (like the class
 	 * code, but more specific) (e.g. Code for "Summarization of Episode Note")
-	 * 
+	 *
 	 * @return the typeCode as Code
 	 */
 	public Code getTypeCode() {
@@ -615,7 +615,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the unique id. The UUID of the document.
-	 * 
+	 *
 	 * @return the uniqueId
 	 */
 	public String getUniqueId() {
@@ -624,7 +624,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the uri of the document.
-	 * 
+	 *
 	 * @return the uri
 	 */
 	public String getUri() {
@@ -633,7 +633,7 @@ public class DocumentMetadata {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -664,7 +664,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required, but in principle computable) class code, which
 	 * defines the class of the document (e.g. Code for "Consultation")
-	 * 
+	 *
 	 * @param code
 	 *            the new class code
 	 */
@@ -675,7 +675,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) coded language (e.g. "de-CH"). This code can be
 	 * extracted from CDA Documents, automatically.
-	 * 
+	 *
 	 * @param codedLanguage
 	 *            the new language code
 	 */
@@ -686,7 +686,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) creation time of the document. If not set, the
 	 * current time will be used.
-	 * 
+	 *
 	 * @param dateAndTime
 	 *            the new creation time
 	 */
@@ -698,7 +698,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) destination patient id, which is used in the affinity
 	 * domain (typically retrieved from a Master Patient Index (MPI))
-	 * 
+	 *
 	 * @param id
 	 *            the new patient id
 	 */
@@ -708,7 +708,7 @@ public class DocumentMetadata {
 
 	/**
 	 * <div class="en">Sets the document source actors organization id
-	 * 
+	 *
 	 * @param docSourceActorOrgId
 	 *            the document source actors organization id </div>
 	 */
@@ -718,7 +718,7 @@ public class DocumentMetadata {
 
 	/**
 	 * <div class="en">Sets the document descriptor of the document
-	 * 
+	 *
 	 * @param documentDescriptor
 	 *            the document descriptor of the document</div>
 	 */
@@ -729,7 +729,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) format code. If not set, the system will try to
 	 * derive it from the Document MimeType.
-	 * 
+	 *
 	 * @param code
 	 *            the new format code
 	 */
@@ -740,7 +740,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) healthcare facility type code (e.g. Code for
 	 * "Hospital")
-	 * 
+	 *
 	 * @param code
 	 *            the new healthcare facility type code
 	 */
@@ -783,7 +783,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the language of the document meta data
-	 * 
+	 *
 	 * @param language
 	 *            the language
 	 */
@@ -793,7 +793,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (required) mime type (e.g. "text/xml")
-	 * 
+	 *
 	 * @param mimeType
 	 *            the new mime type
 	 */
@@ -804,7 +804,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) patient. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convencience API Patient.
-	 * 
+	 *
 	 * @param patient
 	 *            the new patient
 	 */
@@ -826,7 +826,7 @@ public class DocumentMetadata {
 	 * Sets the (required) practice setting code. This is the medical speciality
 	 * of the practice where the document was produced (e.g. Code for
 	 * "General Medicine")
-	 * 
+	 *
 	 * @param code
 	 *            the new practice setting code
 	 */
@@ -838,7 +838,7 @@ public class DocumentMetadata {
 	/**
 	 * Sets the (required) source patient id. This is the local patient id, e.g.
 	 * inside a hospital.
-	 * 
+	 *
 	 * @param id
 	 *            the new source patient id
 	 */
@@ -848,7 +848,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (optional) title.
-	 * 
+	 *
 	 * @param title
 	 *            the title object to set
 	 */
@@ -860,7 +860,7 @@ public class DocumentMetadata {
 	 * Sets the (required) type code. Specifies the type of the document (like
 	 * the class code, but more specific) (e.g. Code for
 	 * "Summarization of Episode Note")
-	 * 
+	 *
 	 * @param code
 	 *            the new type code
 	 */
@@ -872,7 +872,7 @@ public class DocumentMetadata {
 	 * Sets the unique id. The UUID of the document. Will be generated, when the
 	 * instance of class is retrieved from
 	 * ConvenienceCommunication.addDocument()
-	 * 
+	 *
 	 * @param id
 	 *            the new unique id
 	 */
@@ -882,7 +882,7 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the uri of the document.
-	 * 
+	 *
 	 * @param uri
 	 *            the new unique id
 	 */

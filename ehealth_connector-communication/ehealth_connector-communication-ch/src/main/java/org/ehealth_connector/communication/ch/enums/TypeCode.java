@@ -115,8 +115,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	KNOCHENMARK_BIOPSIE_BEFUND("60026", "Knochenmark-Biopsie-Befund"),
 	/**
-	 * <div class="de">Konsilauftrag (allgemein)</div> <div class="fr">Demande de
-	 * consultation</div> <div class="it"></div>
+	 * <div class="de">Konsilauftrag (allgemein)</div> <div class="fr">Demande
+	 * de consultation</div> <div class="it"></div>
 	 */
 	KONSILAUFTRAG_ALLGEMEIN("60017", "Konsilauftrag (allgemein)"),
 	/**
@@ -160,8 +160,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	LUNGENFUNKTIONS_BEFUND("60030", "Lungenfunktions-Befund"),
 	/**
-	 * <div class="de">Medikamentenliste (aktuell)</div> <div class="fr">Liste des
-	 * médicaments</div> <div class="it"></div>
+	 * <div class="de">Medikamentenliste (aktuell)</div> <div class="fr">Liste
+	 * des médicaments</div> <div class="it"></div>
 	 */
 	MEDIKAMENTENLISTE_AKTUELL("60005", "Medikamentenliste (aktuell)"),
 	/**
@@ -170,8 +170,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	MELDUNG_UBERTRAGBARE_ERKRANKUNG("60042", "Meldung übertragbare Erkrankung"),
 	/**
-	 * <div class="de">Nicht spezifizierte Bilddaten</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="de">Nicht spezifizierte Bilddaten</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
 	NICHT_SPEZIFIZIERTE_BILDDATEN("60040", "Nicht spezifizierte Bilddaten"),
 	/**
@@ -185,8 +185,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	NOTFALL_AUSWEIS("60044", "Notfall-Ausweis"),
 	/**
-	 * <div class="de">OP-Bericht</div> <div class="fr">Protocole opératoire</div>
-	 * <div class="it"></div>
+	 * <div class="de">OP-Bericht</div> <div class="fr">Protocole
+	 * opératoire</div> <div class="it"></div>
 	 */
 	OP_BERICHT("60033", "OP-Bericht"),
 	/**
@@ -205,9 +205,9 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	PATIENTENEINWILLIGUNG("60002", "Patienteneinwilligung "),
 	/**
-	 * <div class="de">Patienteneinwilligung für die Verwendung der elektronischen
-	 * Daten</div> <div class="fr">Consentement du patient au dossier
-	 * électronique</div> <div class="it"></div>
+	 * <div class="de">Patienteneinwilligung für die Verwendung der
+	 * elektronischen Daten</div> <div class="fr">Consentement du patient au
+	 * dossier électronique</div> <div class="it"></div>
 	 */
 	PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN("60001", "Patienteneinwilligung für die Verwendung der elektronischen Daten"),
 	/**
@@ -348,8 +348,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	public static final String GEBURTSANZEIGE_CODE = "60047";
 
 	/**
-	 * <div class="de">Code für Herzkatheter-Befund</div> <div class="fr">Code de
-	 * Rapport de cathétérisme cardiaque</div>
+	 * <div class="de">Code für Herzkatheter-Befund</div> <div class="fr">Code
+	 * de Rapport de cathétérisme cardiaque</div>
 	 */
 	public static final String HERZKATHETER_BEFUND_CODE = "60028";
 
@@ -380,8 +380,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	public static final String KONSILAUFTRAG_ALLGEMEIN_CODE = "60017";
 
 	/**
-	 * <div class="de">Code für Konsultationsbericht</div> <div class="fr">Code de
-	 * Rapport de consultation</div>
+	 * <div class="de">Code für Konsultationsbericht</div> <div class="fr">Code
+	 * de Rapport de consultation</div>
 	 */
 	public static final String KONSULTATIONSBERICHT_CODE = "60021";
 
@@ -450,8 +450,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	public static final String NOTFALL_AUSWEIS_CODE = "60044";
 
 	/**
-	 * <div class="de">Code für OP-Bericht</div> <div class="fr">Code de Protocole
-	 * opératoire</div>
+	 * <div class="de">Code für OP-Bericht</div> <div class="fr">Code de
+	 * Protocole opératoire</div>
 	 */
 	public static final String OP_BERICHT_CODE = "60033";
 
@@ -467,15 +467,15 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	public static final String PATHOLOGIE_BEFUND_CODE = "60025";
 
 	/**
-	 * <div class="de">Code für Patienteneinwilligung </div> <div class="fr">Code
-	 * de Consentement du patient</div>
+	 * <div class="de">Code für Patienteneinwilligung </div>
+	 * <div class="fr">Code de Consentement du patient</div>
 	 */
 	public static final String PATIENTENEINWILLIGUNG_CODE = "60002";
 
 	/**
 	 * <div class="de">Code für Patienteneinwilligung für die Verwendung der
-	 * elektronischen Daten</div> <div class="fr">Code de Consentement du patient
-	 * au dossier électronique</div>
+	 * elektronischen Daten</div> <div class="fr">Code de Consentement du
+	 * patient au dossier électronique</div>
 	 */
 	public static final String PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN_CODE = "60001";
 
@@ -572,8 +572,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static TypeCode getEnum(String code) {
@@ -591,8 +591,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -613,7 +613,7 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -633,22 +633,22 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private TypeCode(String code, String displayName) {
 		this.code = code;
@@ -677,7 +677,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -692,8 +693,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

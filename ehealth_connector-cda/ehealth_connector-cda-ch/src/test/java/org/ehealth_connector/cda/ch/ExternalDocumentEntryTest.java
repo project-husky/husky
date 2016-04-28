@@ -68,7 +68,8 @@ public class ExternalDocumentEntryTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html", entry.getReferenceUrl());
+		assertEquals("http://www.bag.admin.ch/ekif/04423/04428/index.html",
+				entry.getReferenceUrl());
 
 		assertEquals("Schweizerischer Impfplan", entry.getReferenceNarrativeText());
 

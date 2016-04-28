@@ -54,7 +54,8 @@ public class MedicationTreatmentPlanItemReferenceEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.9999.1']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.9999.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -63,7 +64,8 @@ public class MedicationTreatmentPlanItemReferenceEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
+		expr = xpath
+				.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}

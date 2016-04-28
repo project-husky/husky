@@ -43,7 +43,7 @@ public class RuleSetDetectionException extends Exception {
 	/**
 	 * Constructs a new <tt>RuleSetDetectionException</tt> with the given error
 	 * detail message.
-	 * 
+	 *
 	 * @param message
 	 *            the detail message.
 	 */
@@ -55,7 +55,7 @@ public class RuleSetDetectionException extends Exception {
 	/**
 	 * Constructs a new <tt>RuleSetDetectionException</tt> with the given error
 	 * detail message and the nested throwable cause.
-	 * 
+	 *
 	 * @param message
 	 *            the detail message.
 	 * @param cause
@@ -69,7 +69,7 @@ public class RuleSetDetectionException extends Exception {
 	/**
 	 * Constructs a new <tt>RuleSetDetectionException</tt> with the specified
 	 * nested throwable cause and no detail message.
-	 * 
+	 *
 	 * @param cause
 	 *            the cause leading this exception to be thrown.
 	 */

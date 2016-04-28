@@ -102,7 +102,7 @@ public class Patient extends Person {
 
 	/**
 	 * Erstellt einen neuen Patienten.
-	 * 
+	 *
 	 */
 	public Patient() {
 		// Create the RecordTarget, PatientRole and Patient
@@ -116,7 +116,7 @@ public class Patient extends Person {
 
 	/**
 	 * Erstellt einen neuen Patienten.
-	 * 
+	 *
 	 * @param name
 	 *            Name
 	 * @param sex
@@ -149,7 +149,7 @@ public class Patient extends Person {
 	 * Erstellt einen neuen Patienten inkl. einer Patienten Id. Wenn es sich bei
 	 * dem Dokument um einen Impfausweis handelt dann MUSS dieser Konstruktor
 	 * verwendet werden.
-	 * 
+	 *
 	 * @param name
 	 *            Name
 	 * @param sex
@@ -157,8 +157,9 @@ public class Patient extends Person {
 	 * @param birthDay
 	 *            Geburtsdatum
 	 * @param id
-	 *            <br> <div class="de">ID</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de">ID</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
 		// Create the RecordTarget, PatientRole and Patient
@@ -184,9 +185,10 @@ public class Patient extends Person {
 
 	/**
 	 * Constructor (used when deserializing CDA document).
-	 * 
+	 *
 	 * @param recordTarget
-	 *            <br> <div class="en"> record target</div>
+	 *            <br>
+	 *            <div class="en"> record target</div>
 	 */
 	public Patient(RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
@@ -196,7 +198,7 @@ public class Patient extends Person {
 
 	/**
 	 * Fügt eine Adresse hinzu.
-	 * 
+	 *
 	 * @param address
 	 *            Adresse
 	 */
@@ -208,7 +210,7 @@ public class Patient extends Person {
 
 	/**
 	 * Fügt einen Identifikator hinzu.
-	 * 
+	 *
 	 * @param identificator
 	 *            Identificator
 	 */
@@ -220,21 +222,23 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Adds the name.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="en">Adds the name.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @param name
-	 *            <br> <div class="de"> name</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            <br>
+	 *            <div class="de"> name</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
+	@Override
 	public void addName(Name name) {
 		mPatient.getNames().add(name.copyMdhtPn());
 	}
 
 	/**
-	 * <div class="en">Copy mdht patient.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="en">Copy mdht patient.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @return the org.openhealthtools.mdht.uml.cda.Patient the MDHT Patient
 	 *         object
 	 */
@@ -243,9 +247,9 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Copy mdht patient role.</div> <div class="de"></div> <div
-	 * class="fr"></div> <div class="it"></div>
-	 * 
+	 * <div class="en">Copy mdht patient role.</div> <div class="de"></div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
 	 * @return PatientRole the patient role
 	 */
 	public PatientRole copyMdhtPatientRole() {
@@ -255,7 +259,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Copy mdht record target.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return RecordTarget the record target
 	 */
 	public RecordTarget copyMdhtRecordTarget() {
@@ -265,7 +269,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
 	 * (erste) Adresse</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
@@ -277,7 +281,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the adresses.</div> <div class="de">Liefert alles
 	 * Adressen</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the adresses</div>
 	 */
 	public List<Address> getAddresses() {
@@ -292,7 +296,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the gender code.</div> <div class="de">Liefert das
 	 * Geschlecht</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the gender code</div>
 	 */
 	public AdministrativeGender getAdministrativeGenderCode() {
@@ -306,7 +310,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the birthday.</div> <div class="de">Liefert
 	 * birthday.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return Date <div class="en">the birthday</div>
 	 */
 	public Date getBirthday() {
@@ -324,7 +328,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the deceased Indicator
-	 * 
+	 *
 	 * @return the deceased ind
 	 */
 	public Boolean getDeceasedInd() {
@@ -333,7 +337,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the deceased time.
-	 * 
+	 *
 	 * @return the deceased time
 	 */
 	public Date getDeceasedTime() {
@@ -342,7 +346,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the employee occupation.
-	 * 
+	 *
 	 * @return the employee occupation
 	 */
 	public String getEmployeeOccupation() {
@@ -352,7 +356,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the ids.</div> <div class="de">Liefert alle
 	 * ids.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
@@ -362,7 +366,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the mdht patient.</div> <div class="de">Liefert mdht
 	 * patient.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return org.openhealthtools.mdht.uml.cda.Patient <div class="en">the mdht
 	 *         patient</div>
 	 */
@@ -373,7 +377,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the mdht patient role.</div> <div class="de">Liefert
 	 * mdht patient role.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return PatientRole <div class="en">the mdht patient role</div>
 	 */
 	public PatientRole getMdhtPatientRole() {
@@ -381,10 +385,10 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Gets the mdht record target.</div> <div
-	 * class="de">Liefert mdht record target.</div> <div class="fr"></div> <div
-	 * class="it"></div>
-	 * 
+	 * <div class="en">Gets the mdht record target.</div>
+	 * <div class="de">Liefert mdht record target.</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return RecordTarget <div class="en">the mdht record target</div>
 	 */
 	public RecordTarget getMdhtRecordTarget() {
@@ -393,7 +397,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the mothers maiden name.
-	 * 
+	 *
 	 * @return the mothers maiden name
 	 */
 	public String getMothersMaidenName() {
@@ -402,7 +406,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the multiple birth Indictator
-	 * 
+	 *
 	 * @return the multiple birth ind
 	 */
 	public Boolean getMultipleBirthInd() {
@@ -411,7 +415,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the multiple birth order number.
-	 * 
+	 *
 	 * @return the multiple birth order number
 	 */
 	public Integer getMultipleBirthOrderNumber() {
@@ -420,7 +424,7 @@ public class Patient extends Person {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.ehealth_connector.common.Person#getName()
 	 */
 	@Override
@@ -431,7 +435,7 @@ public class Patient extends Person {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.ehealth_connector.common.Person#getNames()
 	 */
 	@Override
@@ -446,7 +450,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the nation.
-	 * 
+	 *
 	 * @return the nation
 	 */
 	public String getNation() {
@@ -455,7 +459,7 @@ public class Patient extends Person {
 
 	/**
 	 * Gets the religious affiliation.
-	 * 
+	 *
 	 * @return the religious affiliation
 	 */
 	public String getReligiousAffiliation() {
@@ -465,7 +469,7 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
@@ -473,15 +477,20 @@ public class Patient extends Person {
 		return telecoms;
 	}
 
+	private Date parseDate(String value) throws ParseException {
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.parse(value);
+	}
+
 	/**
 	 * <div class="en">Sets the gender.</div> <div class="de">Setzt
 	 * gender.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param sex
-	 *            <div class="en">the new (administrative) gender</div> <div
-	 *            class="de">das neue (administrative) Geschlecht</div> <div
-	 *            class="fr"></div> <div class="it"></div>
+	 *            <div class="en">the new (administrative) gender</div>
+	 *            <div class="de">das neue (administrative) Geschlecht</div>
+	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setAdministrativeGender(AdministrativeGender sex) {
 		mPatient.setAdministrativeGenderCode(sex.getCE());
@@ -490,11 +499,11 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Sets the birthday.</div> <div class="de">Setzt
 	 * birthday.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param birthDay
 	 *            <div class="en">the new birthday</div> <div class="de">das
-	 *            neue birthday.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            neue birthday.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setBirthday(Date birthDay) {
 		try {
@@ -506,7 +515,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the deceased Indicator
-	 * 
+	 *
 	 * @param deceasedInd
 	 *            the new deceased ind
 	 */
@@ -516,7 +525,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the deceased time.
-	 * 
+	 *
 	 * @param deceasedTime
 	 *            the new deceased time
 	 */
@@ -526,7 +535,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the employee occupation.
-	 * 
+	 *
 	 * @param employeeOccupation
 	 *            the new employee occupation
 	 */
@@ -536,7 +545,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the mothers maiden name.
-	 * 
+	 *
 	 * @param mothersMaidenName
 	 *            the new mothers maiden name
 	 */
@@ -546,7 +555,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the multiple birth Indicator
-	 * 
+	 *
 	 * @param multipleBirthInd
 	 *            the new multiple birth ind
 	 */
@@ -556,7 +565,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the multiple birth order number.
-	 * 
+	 *
 	 * @param multipleBirthOrderNumber
 	 *            the new multiple birth order number
 	 */
@@ -566,7 +575,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the nation.
-	 * 
+	 *
 	 * @param nation
 	 *            the new nation
 	 */
@@ -576,7 +585,7 @@ public class Patient extends Person {
 
 	/**
 	 * Sets the religious affiliation.
-	 * 
+	 *
 	 * @param religiousAffiliation
 	 *            the new religious affiliation
 	 */
@@ -587,19 +596,14 @@ public class Patient extends Person {
 	/**
 	 * <div class="en">Sets the telecoms.</div> <div class="de">Setzt
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param telecoms
 	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div> <div
-	 *            class="it"></div>
+	 *            neue telecoms.</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void setTelecoms(Telecoms telecoms) {
 		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
-	}
-
-	private Date parseDate(String value) throws ParseException {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		return sdf.parse(value);
 	}
 }

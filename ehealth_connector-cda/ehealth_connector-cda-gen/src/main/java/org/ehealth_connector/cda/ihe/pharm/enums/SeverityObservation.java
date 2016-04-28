@@ -44,7 +44,7 @@ public enum SeverityObservation {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static SeverityObservation getEnum(String code) {
@@ -69,11 +69,11 @@ public enum SeverityObservation {
 	 * Instantiates a new SeverityObservation.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private SeverityObservation(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -85,7 +85,7 @@ public enum SeverityObservation {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

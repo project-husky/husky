@@ -58,7 +58,8 @@ public class ProblemEntryTest {
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES, entry.getAllergySpecialCondition());
+		assertEquals(AllergiesSpecialConditions.NO_KNOWN_ALLERGIES,
+				entry.getAllergySpecialCondition());
 	}
 
 	@Test
@@ -66,12 +67,13 @@ public class ProblemEntryTest {
 		final ProblemEntry entry = new ProblemEntry();
 
 		entry.setComplicationRisk(
-				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC, null);
+				RiskOfComplications.ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC,
+				null);
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+		XPathExpression expr = xpath.compile(
+				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
 
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -99,7 +101,8 @@ public class ProblemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/effectiveTime/high[@value='20161019']");
+		final XPathExpression expr = xpath
+				.compile("observation/effectiveTime/high[@value='20161019']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -111,7 +114,8 @@ public class ProblemEntryTest {
 		entry.setEndDate(null);
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/effectiveTime/high[@nullFlavor='UNK']");
+		final XPathExpression expr = xpath
+				.compile("observation/effectiveTime/high[@nullFlavor='UNK']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -121,12 +125,13 @@ public class ProblemEntryTest {
 		final ProblemEntry entry = new ProblemEntry();
 
 		entry.setExposureRisk(
-				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN, null);
+				RiskOfExposure.KONSUMENTEN_VON_INJIZIERBAREN_DROGEN_UND_DEREN_KONTAKTPERSONEN,
+				null);
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
-				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+		XPathExpression expr = xpath.compile(
+				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
 
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -162,7 +167,8 @@ public class ProblemEntryTest {
 	public void testProblemSpecialConditions() throws XPathExpressionException {
 		final ProblemEntry entry = new ProblemEntry();
 
-		entry.setProblemSpecialCondition(ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY);
+		entry.setProblemSpecialCondition(
+				ProblemsSpecialConditions.NO_CURRENT_PROBLEMS_OR_DISABILITY);
 
 		final Document document = entry.getDocument();
 
@@ -187,8 +193,8 @@ public class ProblemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
+		final XPathExpression expr = xpath.compile(
+				"observation/code[@code='55607006' and @codeSystem='2.16.840.1.113883.6.96']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
@@ -236,7 +242,8 @@ public class ProblemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/effectiveTime/low[@value='20151019']");
+		final XPathExpression expr = xpath
+				.compile("observation/effectiveTime/low[@value='20151019']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -248,7 +255,8 @@ public class ProblemEntryTest {
 		entry.setStartDate(null);
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/effectiveTime/low[@nullFlavor='UNK']");
+		final XPathExpression expr = xpath
+				.compile("observation/effectiveTime/low[@nullFlavor='UNK']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
@@ -261,7 +269,8 @@ public class ProblemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("observation/text/reference[@value='#reference1']");
+		final XPathExpression expr = xpath
+				.compile("observation/text/reference[@value='#reference1']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

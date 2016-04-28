@@ -34,7 +34,7 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	/**
 	 * Constructor. All arrays of codes are interpreted with as a disjunction
 	 * (OR - semantics).
-	 * 
+	 *
 	 * @param folderId
 	 *            id of the folder (either uniqueId or entryUUID) (required)
 	 * @param isUUID
@@ -63,7 +63,7 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA (Cross Community Access) profile extension of
 	 * this query.
-	 * 
+	 *
 	 * @param folderId
 	 *            id of the folder (either uniqueId or entryUUID) (required)
 	 * @param isUUID
@@ -96,7 +96,7 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	/**
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA profile extension of this query.
-	 * 
+	 *
 	 * @param folderId
 	 *            id of the folder (either uniqueId or entryUUID) (required)
 	 * @param isUUID
@@ -137,7 +137,7 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 * AND-ed together with any confidentialityCode clauses previously added.
 	 * Calling this method sequentially will result in the AND-ing of multiple
 	 * clauses.
-	 * 
+	 *
 	 * @param confidentialityCodes
 	 *            array of confidentialityCodes, interpreted as a disjunctive
 	 *            clause in which each confidentialityCodes[i] will be a literal
@@ -154,11 +154,11 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 
 	/*
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
-	 * 
+	 *
 	 * @see
 	 * org.ehealth_connector.communication.storedquery.StoredQueryInterface#
 	 * getOhtStoredQuery()
-	 * 
+	 *
 	 * @returns the OHT StoredQuery
 	 */
 	@Override

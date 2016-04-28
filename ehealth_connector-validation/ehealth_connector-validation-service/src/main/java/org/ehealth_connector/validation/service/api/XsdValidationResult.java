@@ -14,17 +14,21 @@
  *
  *******************************************************************************/
 
- package org.ehealth_connector.validation.service.api;
+package org.ehealth_connector.validation.service.api;
 
 /**
  * @author ich
  *
  */
 public class XsdValidationResult {
-	
+
 	private boolean isXsdValid;
-	
+
 	private String xsdValidationMsg = "";
+
+	public String getXsdValidationMsg() {
+		return xsdValidationMsg;
+	}
 
 	public boolean isXsdValid() {
 		return isXsdValid;
@@ -32,10 +36,6 @@ public class XsdValidationResult {
 
 	public void setXsdValid(boolean isXsdValid) {
 		this.isXsdValid = isXsdValid;
-	}
-
-	public String getXsdValidationMsg() {
-		return xsdValidationMsg;
 	}
 
 	public void setXsdValidationMsg(String xsdValidationMsg) {

@@ -163,6 +163,15 @@ public class IntendedRecipient {
 	}
 
 	/**
+	 * Method to get
+	 * 
+	 * @return the intendedRecipient
+	 */
+	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getIntendedRecipient() {
+		return mIntendedRecipient;
+	}
+
+	/**
 	 * Gets the person, who receives the information.
 	 *
 	 * @return the person
@@ -214,7 +223,19 @@ public class IntendedRecipient {
 	 *            the person
 	 */
 	public void setInformationRecipient(Person person) {
-		getIntendedRecipient().getIntendedRecipient().setInformationRecipient(person.copyMdhtPerson());
+		getIntendedRecipient().getIntendedRecipient()
+				.setInformationRecipient(person.copyMdhtPerson());
+	}
+
+	/**
+	 * Method to set
+	 * 
+	 * @param intendedRecipient
+	 *            the intendedRecipient to set
+	 */
+	public void setIntendedRecipient(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient intendedRecipient) {
+		mIntendedRecipient = intendedRecipient;
 	}
 
 	/**
@@ -246,21 +267,5 @@ public class IntendedRecipient {
 	public void setTelecoms(Telecoms telecoms) {
 		getIntendedRecipient().getIntendedRecipient().getTelecoms()
 				.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
-	}
-
-	/**
-	 * Method to get
-	 * @return the intendedRecipient
-	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getIntendedRecipient() {
-		return mIntendedRecipient;
-	}
-
-	/**
-	 * Method to set
-	 * @param intendedRecipient the intendedRecipient to set
-	 */
-	public void setIntendedRecipient(org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient intendedRecipient) {
-		mIntendedRecipient = intendedRecipient;
 	}
 }

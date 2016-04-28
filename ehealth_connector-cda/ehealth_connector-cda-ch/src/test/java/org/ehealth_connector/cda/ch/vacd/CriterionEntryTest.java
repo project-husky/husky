@@ -40,7 +40,8 @@ public class CriterionEntryTest {
 
 	/*
 	 * REC_BASE("41501", "Empfohlene Basisimpfungen",
-	 * "Vaccinations recommandées de base", "Vaccinazioni raccomandate di base" ),
+	 * "Vaccinations recommandées de base", "Vaccinazioni raccomandate di base"
+	 * ),
 	 */
 	@Test
 	public void testRecCatgoryCode() throws XPathExpressionException {
@@ -50,8 +51,8 @@ public class CriterionEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("criterion/code[@code='41501' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
+		final XPathExpression expr = xpath.compile(
+				"criterion/code[@code='41501' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -70,8 +71,8 @@ public class CriterionEntryTest {
 		entry.setRecCategory(CdaChVacdRecCategories.REC_NONE, LanguageCode.FRENCH);
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath
-				.compile("criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
+		final XPathExpression expr = xpath.compile(
+				"criterion/code[@code='41504' and @codeSystem='2.16.756.5.30.1.127.3.3.4']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -98,7 +99,8 @@ public class CriterionEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("criterion/text/reference[@value='#reference1']");
+		final XPathExpression expr = xpath
+				.compile("criterion/text/reference[@value='#reference1']");
 
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

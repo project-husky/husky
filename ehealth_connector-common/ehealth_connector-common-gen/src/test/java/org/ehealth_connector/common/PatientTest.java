@@ -37,52 +37,6 @@ public class PatientTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#getName()}.
-	 */
-	@Test
-	public void testGetName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.common.Patient#getNames()}.
-	 */
-	@Test
-	public void testGetNames() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date)}
-	 * .
-	 */
-	@Test
-	public void testPatientNameAdministrativeGenderDate() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date, org.ehealth_connector.common.Identificator)}
-	 * .
-	 */
-	@Test
-	public void testPatientNameAdministrativeGenderDateIdentificator() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
-	 * .
-	 */
-	@Test
-	public void testPatientRecordTarget() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.common.Patient#addAddress(org.ehealth_connector.common.Address)}
 	 * .
@@ -136,6 +90,52 @@ public class PatientTest {
 	 */
 	@Test
 	public void testCopyMdhtRecordTarget() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link org.ehealth_connector.common.Patient#getName()}.
+	 */
+	@Test
+	public void testGetName() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link org.ehealth_connector.common.Patient#getNames()}.
+	 */
+	@Test
+	public void testGetNames() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date)}
+	 * .
+	 */
+	@Test
+	public void testPatientNameAdministrativeGenderDate() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date, org.ehealth_connector.common.Identificator)}
+	 * .
+	 */
+	@Test
+	public void testPatientNameAdministrativeGenderDateIdentificator() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
+	 * .
+	 */
+	@Test
+	public void testPatientRecordTarget() {
 		fail("Not yet implemented");
 	}
 

@@ -48,7 +48,7 @@ public class Reason extends MedicationTargetEntry {
 	 * Instantiates a Reason object with a code
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 */
 	public Reason(Code code) {
 		this();
@@ -59,11 +59,11 @@ public class Reason extends MedicationTargetEntry {
 	 * Instantiates a Reason with a given code, a reference and an ID
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param reference
-	 *          the reference
+	 *            the reference
 	 * @param id
-	 *          the id. If null, an ID will be generated
+	 *            the id. If null, an ID will be generated
 	 */
 	public Reason(Code code, URL reference, String id) {
 		this(code);
@@ -76,7 +76,7 @@ public class Reason extends MedicationTargetEntry {
 	 * Instantiates a new reason.
 	 *
 	 * @param entry
-	 *          the entry
+	 *            the entry
 	 */
 	protected Reason(org.openhealthtools.mdht.uml.cda.ch.MedicationTargetEntry entry) {
 		super(entry);
@@ -144,7 +144,8 @@ public class Reason extends MedicationTargetEntry {
 
 		// Fix Template ID
 		mExtRef.getTemplateIds().clear();
-		final II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaCh.OID_V1, "CDA-CH.Body.ExtRef");
+		final II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaCh.OID_V1,
+				"CDA-CH.Body.ExtRef");
 		mExtRef.getTemplateIds().add(ii);
 
 		// Set attributes
@@ -161,8 +162,8 @@ public class Reason extends MedicationTargetEntry {
 	 * Sets a reference to an external Document.
 	 *
 	 * @param reference
-	 *          The Reference URL (e.g.
-	 *          'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
+	 *            The Reference URL (e.g.
+	 *            'http://www.bag.admin.ch/ekif/04423/04428/index.html?lang=de')
 	 */
 	public void setReference(URL reference) {
 		if (mExtRef == null) {
@@ -176,7 +177,7 @@ public class Reason extends MedicationTargetEntry {
 	 * Sets the reference id
 	 *
 	 * @param id
-	 *          the if of the reference (if null, an id will be generated)
+	 *            the if of the reference (if null, an id will be generated)
 	 */
 	public void setReferenceId(String id) {
 		if (mExtRef == null) {

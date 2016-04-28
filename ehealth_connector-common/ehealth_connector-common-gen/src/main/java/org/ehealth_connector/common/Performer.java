@@ -33,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
  * A Person or Organization performing an action
- * 
+ *
  */
 public class Performer {
 
@@ -70,7 +70,7 @@ public class Performer {
 	/**
 	 * Erstellt einen neuen Perfomer (Dieser Konstruktor wird oft gebraucht für
 	 * Gesundheitsfachpersonen
-	 * 
+	 *
 	 * @param name
 	 *            Name
 	 * @param gln
@@ -90,7 +90,7 @@ public class Performer {
 	/**
 	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Performer
 	 * Objekts.
-	 * 
+	 *
 	 * @param performerMdht
 	 *            the MDHT Author Object
 	 */
@@ -120,7 +120,7 @@ public class Performer {
 
 	/**
 	 * Weist dem Autor eine Postadresse zu.
-	 * 
+	 *
 	 * @param address
 	 *            Die Postadresse des Autors
 	 */
@@ -130,7 +130,7 @@ public class Performer {
 
 	/**
 	 * Weist dem Autoren eine ID zu.
-	 * 
+	 *
 	 * @param identificator
 	 *            Kombination von eigentlicher ID und der OID der verwaltenden
 	 *            Domäne
@@ -142,7 +142,7 @@ public class Performer {
 	/**
 	 * <div class="en">Adds the name.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param name
 	 *            name
 	 */
@@ -153,7 +153,7 @@ public class Performer {
 	/**
 	 * <div class="en">Copy mdht author.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return org.openhealthtools.mdht.uml.cda.author
 	 */
 	public org.openhealthtools.mdht.uml.cda.Performer2 copyMdhtPerfomer() {
@@ -163,7 +163,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
 	 * (erste) Adresse.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
@@ -174,7 +174,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the addresses.</div> <div class="de">Liefert alle
 	 * Adressen.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
@@ -190,7 +190,7 @@ public class Performer {
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
 	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
@@ -217,7 +217,7 @@ public class Performer {
 	 * <div class="en">Gets the gln (identification of the author)</div>
 	 * <div class="de">Liefert die GLN (ID des Autors)</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
@@ -230,7 +230,7 @@ public class Performer {
 	 * <div class="en">Gets the gln as identificator.</div>
 	 * <div class="de">Liefert gln (ID des Autoren) als Identificator
 	 * Objekt.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the gln as identificator</div>
 	 */
 	public Identificator getGlnAsIdentificator() {
@@ -242,7 +242,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
 	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
@@ -253,7 +253,7 @@ public class Performer {
 	 * <div class="en">Gets the (first) family name.</div>
 	 * <div class="de">Liefert den (ersten) Nachnamen</div>
 	 * <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
@@ -264,7 +264,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the names.</div> <div class="de">Liefert alle
 	 * Nachnamen</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
@@ -281,8 +281,8 @@ public class Performer {
 	 * <div class="de">Liefert die Organisation (RepresentedOrganization), der
 	 * der Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @return organization <div class="en">the organization</div>
 	 *         <div class="de">die Organisation</div> <div class="fr"></div>
 	 *         <div class="it"></div>
@@ -295,7 +295,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert
 	 * author mdht.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the
 	 *         author mdht</div>
 	 */
@@ -306,7 +306,7 @@ public class Performer {
 	/**
 	 * <div class="en">Gets the telecoms.</div> <div class="de">Liefert
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
 	public Telecoms getTelecoms() {
@@ -317,8 +317,8 @@ public class Performer {
 	/**
 	 * <div class="en">Sets the gln.</div> <div class="de">Setzt die GLN (ID des
 	 * Autoren).</div> <div class="fr"></div> <div class="it"></div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param gln
 	 *            <div class="en">the new gln</div> <div class="de">das neue
 	 *            gln.</div> <div class="fr"></div> <div class="it"></div>
@@ -332,8 +332,8 @@ public class Performer {
 	 * <div class="de">Setzt eine Organisation (RepresentedOrganization), der
 	 * der Autor angehört (z.B. ein Krankenhaus)</div> <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
-	 * 
+	 *
+	 *
 	 * @param organization
 	 *            <div class="en">the new organization</div> <div class="de">die
 	 *            neue Organisation</div> <div class="fr"></div>
@@ -347,7 +347,7 @@ public class Performer {
 	/**
 	 * <div class="en">Sets the telecoms.</div> <div class="de">Setzt
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
-	 * 
+	 *
 	 * @param telecoms
 	 *            <div class="en">the new telecoms</div> <div class="de">das
 	 *            neue telecoms.</div> <div class="fr"></div>
@@ -359,7 +359,7 @@ public class Performer {
 
 	/**
 	 * Sets the Time Value
-	 * 
+	 *
 	 * @param eurDate
 	 *            the date
 	 */

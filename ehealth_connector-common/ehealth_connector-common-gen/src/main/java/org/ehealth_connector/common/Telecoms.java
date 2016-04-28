@@ -54,8 +54,8 @@ public class Telecoms {
 	 * <div class="de">Instantiiert eine neue Liste mit Telcoms</div>
 	 *
 	 * @param telecoms
-	 *          <br>
-	 *          <div class="en"> telecoms</div>
+	 *            <br>
+	 *            <div class="en"> telecoms</div>
 	 */
 	public Telecoms(List<TEL> telecoms) {
 		this();
@@ -66,34 +66,35 @@ public class Telecoms {
 
 	/**
 	 * <div class="en">Adds a new entry to the telecoms object. These shall have
-	 * the following format: : "+41.32.234.66.77" </div><div class="de"> Weist der
-	 * Telecoms Liste einen Eintrag zu. Diese MÜSSEN folgendes Format haben:
+	 * the following format: : "+41.32.234.66.77" </div><div class="de"> Weist
+	 * der Telecoms Liste einen Eintrag zu. Diese MÜSSEN folgendes Format haben:
 	 * "+41.32.234.66.77" </div>
 	 *
 	 * @param type
-	 *          e.g. "tel"
+	 *            e.g. "tel"
 	 * @param endpointIdentifier
-	 *          e.g. Phone number "+41.32.234.66.77"
+	 *            e.g. Phone number "+41.32.234.66.77"
 	 * @param usage
-	 *          <div class="en">use of this endpoint</div>
-	 *          <div class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
+	 *            <div class="en">use of this endpoint</div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
+	 *            Mobil) </div>
 	 */
 	public void add(String type, String endpointIdentifier, AddressUse usage) {
 		TEL tel = null;
-		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(
-				Util.TELECOMS_EMAIL_PREFIX.substring(0, Util.TELECOMS_EMAIL_PREFIX.length() - 1)))) {
+		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(Util.TELECOMS_EMAIL_PREFIX
+				.substring(0, Util.TELECOMS_EMAIL_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type
-				.equals(Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length() - 1)))) {
+		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type.equals(
+				Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(
-				Util.TELECOMS_PHONE_PREFIX.substring(0, Util.TELECOMS_PHONE_PREFIX.length() - 1)))) {
+		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(Util.TELECOMS_PHONE_PREFIX
+				.substring(0, Util.TELECOMS_PHONE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_WEBSITE_PREFIX) || (type.equals(
-				Util.TELECOMS_WEBSITE_PREFIX.substring(0, Util.TELECOMS_WEBSITE_PREFIX.length() - 1)))) {
+		if (type.equals(Util.TELECOMS_WEBSITE_PREFIX) || (type.equals(Util.TELECOMS_WEBSITE_PREFIX
+				.substring(0, Util.TELECOMS_WEBSITE_PREFIX.length() - 1)))) {
 			tel = Util.createTel(endpointIdentifier, usage);
 		}
 		if (tel == null) {
@@ -107,45 +108,48 @@ public class Telecoms {
 	 * <div class="de">Weist der Telecoms Liste eine eMail Adresse zu.</div>
 	 *
 	 * @param eMail
-	 *          eMail address
+	 *            eMail address
 	 * @param usage
-	 *          <div class="en">use of this endpoint</div>
-	 *          <div class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
+	 *            <div class="en">use of this endpoint</div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
+	 *            Mobil) </div>
 	 */
 	public void addEMail(String eMail, AddressUse usage) {
 		mTels.add(Util.createEMail(eMail, usage));
 	}
 
 	/**
-	 * <div class="en">Add a new fax number to the telecoms list. This shall have
-	 * the following format: "+41.32.234.66.77"</div><div class="de">Weist der
-	 * Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format haben:
-	 * "+41.32.234.66.77"</div>
+	 * <div class="en">Add a new fax number to the telecoms list. This shall
+	 * have the following format: "+41.32.234.66.77"</div><div class="de">Weist
+	 * der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
+	 * haben: "+41.32.234.66.77"</div>
 	 *
 	 * @param fax
-	 *          <br>
-	 *          <div class="de"> fax</div>
+	 *            <br>
+	 *            <div class="de"> fax</div>
 	 * @param usage
-	 *          <div class="en">use of this endpoint</div>
-	 *          <div class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
+	 *            <div class="en">use of this endpoint</div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
+	 *            Mobil) </div>
 	 */
 	public void addFax(String fax, AddressUse usage) {
 		mTels.add(Util.createFax(fax, usage));
 	}
 
 	/**
-	 * <div class="en">Adds a new fax number to the telecoms list. This shall have
-	 * the following format: "+41.32.234.66.77"</div><div class="de">Weist der
-	 * Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format haben:
-	 * "+41.32.234.66.77"</div>
+	 * <div class="en">Adds a new fax number to the telecoms list. This shall
+	 * have the following format: "+41.32.234.66.77"</div><div class="de">Weist
+	 * der Telecoms Liste eine Fax Nummer zu. Diese MÜSSEN folgendes Format
+	 * haben: "+41.32.234.66.77"</div>
 	 *
 	 * @param phoneNr
-	 *          <div class="en">Phone number (only international format)</div>
-	 *          <div class="de">Telefonnummer (nur internationale Rufnummer ohne
-	 *          Sonderzeichen: "+41.32.234.66.77"</div>
+	 *            <div class="en">Phone number (only international format)</div>
+	 *            <div class="de">Telefonnummer (nur internationale Rufnummer
+	 *            ohne Sonderzeichen: "+41.32.234.66.77"</div>
 	 * @param usage
-	 *          <div class="en">use of this endpoint</div>
-	 *          <div class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
+	 *            <div class="en">use of this endpoint</div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
+	 *            Mobil) </div>
 	 */
 	public void addPhone(String phoneNr, AddressUse usage) {
 		mTels.add(Util.createTel(phoneNr, usage));
@@ -156,12 +160,14 @@ public class Telecoms {
 	 * <div class="de">Weist der Telecoms Liste eine neue Webseite</div>
 	 *
 	 * @param url
-	 *          <div class="en">website e.g.
-	 *          "http://www.ehealth-connector.org")</div><div class="de">Webseite
-	 *          (z.B. "http://www.ehealth-connector.org")</div>
+	 *            <div class="en">website e.g.
+	 *            "http://www.ehealth-connector.org")</div>
+	 *            <div class="de">Webseite (z.B.
+	 *            "http://www.ehealth-connector.org")</div>
 	 * @param usage
-	 *          <div class="en">use of this endpoint</div>
-	 *          <div class="de">Verwendungszweck (Privat, Geschäft, Mobil) </div>
+	 *            <div class="en">use of this endpoint</div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
+	 *            Mobil) </div>
 	 */
 	public void addWebsite(String url, AddressUse usage) {
 		final TEL t = DatatypesFactory.eINSTANCE.createTEL();
@@ -221,8 +227,8 @@ public class Telecoms {
 	}
 
 	/**
-	 * <div class="en">Gets the telecoms as HashMap</div> <div class="de">Liefert
-	 * die Telecoms Liste als HashMap</div>
+	 * <div class="en">Gets the telecoms as HashMap</div>
+	 * <div class="de">Liefert die Telecoms Liste als HashMap</div>
 	 *
 	 * @return <div class="en">the telecoms</div>
 	 */

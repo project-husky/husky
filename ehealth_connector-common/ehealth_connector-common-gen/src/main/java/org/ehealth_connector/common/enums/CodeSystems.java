@@ -33,8 +33,7 @@ public enum CodeSystems implements IdentityDomain {
 	 * de la maladie ou de la séquelle d’accident (OCA-DFI, chapitre
 	 * 2.1.1)</div>
 	 */
-	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
-			"diseaseName (ICR-DHA, chapter 2.1.1)"),
+	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1", "diseaseName (ICR-DHA, chapter 2.1.1)"),
 	/**
 	 * OID: 2.51.1.3 <div class="en">Global Location Number</div>
 	 */
@@ -44,8 +43,8 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	GTIN("1.3.160", "Global Trade Item Number"),
 	/**
-	 * <div class="en">SwissINDEX</div> OID: 2.16.756.5.32 <div
-	 * class="de">SwissINDEX</div> <div class="fr">SwissIndex</div>
+	 * <div class="en">SwissINDEX</div> OID: 2.16.756.5.32
+	 * <div class="de">SwissINDEX</div> <div class="fr">SwissIndex</div>
 	 */
 	SwissINDEX("2.16.756.5.30.2.6.1", "SwissINDEX"),
 	/**
@@ -54,14 +53,14 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	WHOATCCode("2.16.840.1.113883.6.73", "WHO ATC Code"),
 	/**
-	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div><div
-	 * class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
+	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
+	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
 	 * nouveaux)</div>
 	 */
 	SwissSSN("2.16.756.5.32", "AHV Nummer (die Neue)"),
 	/**
-	 * OID: 2.16.756.5.31 <div class="en">AHV Number (the old one)</div><div
-	 * class="de">AHV Nummer (die Alte)</div> <div class="fr">No AVS (le
+	 * OID: 2.16.756.5.31 <div class="en">AHV Number (the old one)</div>
+	 * <div class="de">AHV Nummer (die Alte)</div> <div class="fr">No AVS (le
 	 * vieil)</div>
 	 */
 	SwissSSNDeprecated("2.16.756.5.31", "AHV Nummer (die Alte)"),
@@ -72,8 +71,8 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1", "Kartennummern für die Versichertenkarte (VeKa)"),
 	/**
-	 * OID: 2.16.756.5.31 <div class="en">ICD-10</div><div
-	 * class="de">ICD-10</div> <div class="fr">ICD-10</div>
+	 * OID: 2.16.756.5.31 <div class="en">ICD-10</div>
+	 * <div class="de">ICD-10</div> <div class="fr">ICD-10</div>
 	 */
 	ICD10("2.16.756.5.30.1.126.3.2", "ICD-10"),
 	/**
@@ -127,14 +126,14 @@ public enum CodeSystems implements IdentityDomain {
 	HL7ActCode("2.16.840.1.113883.5.4", "HL7ActCode"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.1063 <div
-	 * class="en">HL7SeverityObservation</div>
+	 * OID: 2.16.840.1.113883.5.1063
+	 * <div class="en">HL7SeverityObservation</div>
 	 */
 	HL7SeverityObservation("2.16.840.1.113883.5.1063", "HL7SeverityObservation"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.112 <div
-	 * class="en">HL7RouteOfAdministration</div>
+	 * OID: 2.16.840.1.113883.5.112
+	 * <div class="en">HL7RouteOfAdministration</div>
 	 */
 	HL7RouteOfAdministration("2.16.840.1.113883.5.112", "HL7RouteOfAdministration"),
 
@@ -144,8 +143,8 @@ public enum CodeSystems implements IdentityDomain {
 	LOINC("2.16.840.1.113883.6.1", "LOINC"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.83 <div
-	 * class="en">HL7ObservationInterpretation</div>
+	 * OID: 2.16.840.1.113883.5.83
+	 * <div class="en">HL7ObservationInterpretation</div>
 	 */
 	HL7ObservationInterpretation("2.16.840.1.113883.5.83", "HL7ObservationInterpretation"),
 

@@ -177,6 +177,7 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	 *
 	 * @return the mdht allergy concern
 	 */
+	@Override
 	public AllergyIntoleranceConcern getMdht() {
 		return mAllergyConcern;
 	}

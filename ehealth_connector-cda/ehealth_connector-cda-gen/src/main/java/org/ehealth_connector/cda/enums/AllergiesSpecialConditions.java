@@ -11,9 +11,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum AllergiesSpecialConditions {
 
 	/**
-	 * <div class="de">Patient hat Allergie/Unverträglichkeit auf eine unbekannte
-	 * Substanz</div> <div class="fr">Le patient présente une allergie/intolérance
-	 * à une substance inconnue.</div>
+	 * <div class="de">Patient hat Allergie/Unverträglichkeit auf eine
+	 * unbekannte Substanz</div> <div class="fr">Le patient présente une
+	 * allergie/intolérance à une substance inconnue.</div>
 	 */
 	SUBSTANCE_TYPE_UNKNOWN("64970000", "Substance Type Unknown"),
 	/**
@@ -38,8 +38,8 @@ public enum AllergiesSpecialConditions {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AllergiesSpecialConditions getEnum(String code) {
@@ -57,8 +57,8 @@ public enum AllergiesSpecialConditions {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -79,7 +79,7 @@ public enum AllergiesSpecialConditions {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -96,16 +96,16 @@ public enum AllergiesSpecialConditions {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private AllergiesSpecialConditions(String code, String displayName) {
 		this.code = code;
@@ -149,8 +149,8 @@ public enum AllergiesSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

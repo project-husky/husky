@@ -44,13 +44,14 @@ public class PrescriptionSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public PrescriptionSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPrescriptionSection().init());
 		this.languageCode = languageCode;
 
-		// mdht bug? prescription sections defines own code but is not honored in
+		// mdht bug? prescription sections defines own code but is not honored
+		// in
 		// modelling
 		// <code code="10160-0" codeSystem="2.16.840.1.113883.6.1"
 		// codeSystemName="LOINC" displayName="History of medication use"/>
@@ -78,7 +79,7 @@ public class PrescriptionSection
 	 * Instantiates a new dispense section.
 	 *
 	 * @param section
-	 *          the section
+	 *            the section
 	 */
 	public PrescriptionSection(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionSection section) {
@@ -89,7 +90,7 @@ public class PrescriptionSection
 	 * Adds the prescription item entry.
 	 *
 	 * @param entry
-	 *          the entry
+	 *            the entry
 	 */
 	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
 		this.getMdht().addSubstanceAdministration(entry.getMdht());

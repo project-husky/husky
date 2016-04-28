@@ -41,7 +41,8 @@ public enum SubstanceAdminSubstitution {
 	EQUIVALENT_COMPOSITION("EC", "equivalent composition", "composition équivalente"),
 
 	/**
-	 * <div class="en"> formulary</div><div class="fr">formulaire guidelines</div>
+	 * <div class="en"> formulary</div><div class="fr">formulaire
+	 * guidelines</div>
 	 */
 	FORMULARY("F", "formulary", "formulaire guidelines"),
 
@@ -82,7 +83,7 @@ public enum SubstanceAdminSubstitution {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static SubstanceAdminSubstitution getEnum(String code) {
@@ -107,11 +108,11 @@ public enum SubstanceAdminSubstitution {
 	 * Instantiates a new SubstanceAdminSubstitution.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private SubstanceAdminSubstitution(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -123,7 +124,7 @@ public enum SubstanceAdminSubstitution {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

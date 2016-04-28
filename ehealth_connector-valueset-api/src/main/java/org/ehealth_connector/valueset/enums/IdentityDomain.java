@@ -18,7 +18,7 @@ package org.ehealth_connector.valueset.enums;
 
 /**
  * Interface for CodeSystems
- * 
+ *
  */
 public interface IdentityDomain {
 	/**

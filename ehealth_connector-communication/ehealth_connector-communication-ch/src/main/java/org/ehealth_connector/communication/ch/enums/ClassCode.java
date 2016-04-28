@@ -40,14 +40,15 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 */
 	CARE_PLANS("DTC12", "Care Plans"),
 	/**
-	 * <div class="de">Zuweisungen/Überweisungen</div> <div class="fr">Demandes de
-	 * prise en charge</div> <div class="it">Richieste di presa a carico</div>
+	 * <div class="de">Zuweisungen/Überweisungen</div> <div class="fr">Demandes
+	 * de prise en charge</div> <div class="it">Richieste di presa a
+	 * carico</div>
 	 */
 	CLINICAL_CARE_REFERRALS("DTC05", "Clinical Care Referrals"),
 	/**
-	 * <div class="de">Eigene Daten des Patienten</div> <div class="fr">Documents
-	 * introduits par le patients</div> <div class="it">Documenti inseriti dal
-	 * paziente</div>
+	 * <div class="de">Eigene Daten des Patienten</div>
+	 * <div class="fr">Documents introduits par le patients</div>
+	 * <div class="it">Documenti inseriti dal paziente</div>
 	 */
 	DATA_FROM_PATIENT("DTC21", "Data from Patient"),
 	/**
@@ -63,19 +64,20 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	EPISODE_SUMMARY_REPORTS("DTC06", "Episode Summary Reports"),
 	/**
 	 * <div class="de">Zusammenfassungen der Krankengeschichte</div>
-	 * <div class="fr">Résumés d'antécédents</div> <div class="it">Riassunti della
-	 * storia clinica</div>
+	 * <div class="fr">Résumés d'antécédents</div> <div class="it">Riassunti
+	 * della storia clinica</div>
 	 */
 	HISTORIC_OVERVIEWS("DTC10", "Historic Overviews"),
 	/**
-	 * <div class="de">Konsultationseinträge/- Notizen</div> <div class="fr">Notes
-	 * de consultation</div> <div class="it">Rapporti e note di
-	 * consultazione</div>
+	 * <div class="de">Konsultationseinträge/- Notizen</div>
+	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
+	 * note di consultazione</div>
 	 */
 	NOTES_ON_CONSULTATIONS("DTC01", "Notes on Consultations"),
 	/**
-	 * <div class="de">Interventionseinträge /-Notizen</div> <div class="fr">Notes
-	 * d'interventions</div> <div class="it">Rapporti e note d'intervento</div>
+	 * <div class="de">Interventionseinträge /-Notizen</div>
+	 * <div class="fr">Notes d'interventions</div> <div class="it">Rapporti e
+	 * note d'intervento</div>
 	 */
 	NOTES_ON_PROCEDURES("DTC03", "Notes on Procedures"),
 	/**
@@ -187,22 +189,22 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	public static final String NOTIFICATIONS_CODE = "DTC09";
 
 	/**
-	 * <div class="de">Code für anderweitige Dokumente</div> <div class="fr">Code
-	 * de Autre</div> <div class="it">Code per Altro</div>
+	 * <div class="de">Code für anderweitige Dokumente</div>
+	 * <div class="fr">Code de Autre</div> <div class="it">Code per Altro</div>
 	 */
 	public static final String OTHER_COMPOSITION_CODE = "DTC90";
 
 	/**
 	 * <div class="de">Code für Zusammenfassungen aktueller Zustand</div>
-	 * <div class="fr">Code de Résumés de l'état actuel</div> <div class="it">Code
-	 * per Riassunti dello stato attuale</div>
+	 * <div class="fr">Code de Résumés de l'état actuel</div>
+	 * <div class="it">Code per Riassunti dello stato attuale</div>
 	 */
 	public static final String PRESENT_STATE_SUMMARIES_CODE = "DTC11";
 
 	/**
 	 * <div class="de">Code für Verlaufseinträge/-Notizen</div>
-	 * <div class="fr">Code de Notes de suivi</div> <div class="it">Code per Note
-	 * di evoluzione</div>
+	 * <div class="fr">Code de Notes de suivi</div> <div class="it">Code per
+	 * Note di evoluzione</div>
 	 */
 	public static final String PROGRESS_NOTES_CODE = "DTC02";
 
@@ -214,8 +216,8 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	public static final String PROGRESS_REPORTS_CODE = "DTC07";
 
 	/**
-	 * <div class="de">Code für Gescannte Dokumente</div> <div class="fr">Code de
-	 * Documents scannés</div> <div class="it">Code per Documenti
+	 * <div class="de">Code für Gescannte Dokumente</div> <div class="fr">Code
+	 * de Documents scannés</div> <div class="it">Code per Documenti
 	 * scansionati</div>
 	 */
 	public static final String SCANNED_DOCUMENTS_CODE = "DTC20";
@@ -244,8 +246,8 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ClassCode getEnum(String code) {
@@ -263,8 +265,8 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -287,22 +289,22 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ClassCode(String code, String displayName) {
 		this.code = code;
@@ -331,7 +333,8 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -346,8 +349,8 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -377,12 +380,12 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets vorhanden
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public boolean isInValueSet(String codeValue) {

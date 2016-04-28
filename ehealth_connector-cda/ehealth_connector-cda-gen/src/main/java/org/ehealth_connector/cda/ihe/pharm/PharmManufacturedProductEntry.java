@@ -23,8 +23,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 /**
  * Implements the IHE PharmManufacturedProductEntry.
  */
-public class PharmManufacturedProductEntry
-		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedProductEntry> {
+public class PharmManufacturedProductEntry extends
+		MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedProductEntry> {
 
 	/**
 	 * Instantiates a new pharm manufactured product entry.
@@ -37,7 +37,7 @@ public class PharmManufacturedProductEntry
 	 * Instantiates a new pharm manufactured product entry.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public PharmManufacturedProductEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmManufacturedProductEntry().init());
@@ -47,7 +47,7 @@ public class PharmManufacturedProductEntry
 	 * Instantiates a new pharm manufactured product entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public PharmManufacturedProductEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmManufacturedProductEntry mdht) {

@@ -30,21 +30,21 @@ public enum RiskOfComplications {
 	 */
 	ANATOMISCHE_ODER_FUNKTIONELLE_ASPLENIE("113001", "Anatomische oder funktionelle Asplenie", "Asplénie anatomique ou fonctionnelle", "Asplenia anatomica o funzionale", "20130101", ""),
 	/**
-	 * <div class="de"> andere Lebererkrankung</div> <div class="fr">autre maladie
-	 * hépatique</div> <div class="it">altra malattia epatica</div>
+	 * <div class="de"> andere Lebererkrankung</div> <div class="fr">autre
+	 * maladie hépatique</div> <div class="it">altra malattia epatica</div>
 	 */
 	ANDERE_LEBERERKRANKUNG("114036", "andere Lebererkrankung", "autre maladie hépatique", "altra malattia epatica", "20150101", ""),
 	/**
 	 * <div class="de">Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma
 	 * bronchiale, etc.)</div> <div class="fr">Autres maladies pulmonaires (ex :
-	 * mucoviscidose, asthme traité par aérosols, etc)</div> <div class="it">Altre
-	 * malattie polmonari (p.es. mucoviscidosi, asma trattata con aerosol,
-	 * ecc.)</div>
+	 * mucoviscidose, asthme traité par aérosols, etc)</div>
+	 * <div class="it">Altre malattie polmonari (p.es. mucoviscidosi, asma
+	 * trattata con aerosol, ecc.)</div>
 	 */
 	ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC("114006", "Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)", "Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)", "Altre malattie polmonari (p.es. mucoviscidosi, asma trattata con aerosol, ecc.)", "20140101", ""),
 	/**
-	 * <div class="de">Andere Nierenerkrankung</div> <div class="fr">autre maladie
-	 * des reins</div> <div class="it">altra malattia renale</div>
+	 * <div class="de">Andere Nierenerkrankung</div> <div class="fr">autre
+	 * maladie des reins</div> <div class="it">altra malattia renale</div>
 	 */
 	ANDERE_NIERENERKRANKUNG("114033", "andere Nierenerkrankung", "autre maladie des reins", "altra malattia renale", "20150101", ""),
 	/**
@@ -93,9 +93,9 @@ public enum RiskOfComplications {
 	COCHLEAIMPLANTAT_IN_SITU_ODER_GEPLANT("113002", "Cochleaimplantat, in situ oder geplant", "Implant cochléaire, in situ ou planifié", "Impianto cocleare, in situ o pianificato", "20130101", ""),
 	/**
 	 * <div class="de">Diabetes mit Auswirkung auf die Funktion von Herz, Lungen
-	 * oder Nieren</div> <div class="fr">Diabète avec répercussion sur la fonction
-	 * cardiaque, pulmonaire ou rénale</div> <div class="it">Diabete con
-	 * ripercussioni sulla funzione cardiopolmonare o renale</div>
+	 * oder Nieren</div> <div class="fr">Diabète avec répercussion sur la
+	 * fonction cardiaque, pulmonaire ou rénale</div> <div class="it">Diabete
+	 * con ripercussioni sulla funzione cardiopolmonare o renale</div>
 	 */
 	DIABETES_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN("114015", "Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren", "Diabète avec répercussion sur la fonction cardiaque, pulmonaire ou rénale", "Diabete con ripercussioni sulla funzione cardiopolmonare o renale", "20140101", ""),
 	/**
@@ -114,8 +114,8 @@ public enum RiskOfComplications {
 	 * <div class="de">Geburt vor der 33. Schwangerschaftswoche oder
 	 * Geburtsgewicht &lt; 1500g</div> <div class="fr">Naissance avant la 33e
 	 * semaine de grossesse ou poids de naissance &lt;1500g</div>
-	 * <div class="it">Nascita prima della 33a settimana di gravidanza o peso alla
-	 * nascita &lt;1500g</div>
+	 * <div class="it">Nascita prima della 33a settimana di gravidanza o peso
+	 * alla nascita &lt;1500g</div>
 	 */
 	GEBURT_VOR_DER_33_SCHWANGERSCHAFTSWOCHE_ODER_GEBURTSGEWICHT_GROESSER_1500G("113004", "Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht &lt; 1500g", "Naissance avant la 33e semaine de grossesse ou poids de naissance &lt;1500 g", "Nascita prima della 33a settimana di gravidanza o peso alla nascita &lt;1500 g", "20130101", ""),
 	/**
@@ -141,17 +141,17 @@ public enum RiskOfComplications {
 	 */
 	HERZKRANKHEITEN_CHRONISCHE_KONGENITALE_MISSBILDUNGEN("113007", "Herzkrankheiten (chronische, kongenitale Missbildungen)", "Cardiopathies chroniques, malformations congénitales", "Cardiopatie croniche, malformazioni congenite", "20130101", ""),
 	/**
-	 * <div class="de">HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene: &gt;=
-	 * 200 / µl)</div> <div class="fr"> Infection à VIH avec CD4 &gt;= 15%
+	 * <div class="de">HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene:
+	 * &gt;= 200 / µl)</div> <div class="fr"> Infection à VIH avec CD4 &gt;= 15%
 	 * (Adultes : &gt;= 200 / µl)</div> <div class="it">Infezione HIV con CD4
 	 * &gt;= 15% (Adulti : &gt;= 200 / µl)</div>
 	 */
 	HIV_INFEKTION_MIT_CD4_ZELLEN_GROESSER_GLEICH_15_PROZENT_ERWACHSENE_GROESSER_GLEICH_200_PRO_UL("113008", "HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene: &gt;= 200 / µl)", " Infection à VIH avec CD4 &gt;= 15% (Adultes : &gt;= 200 / µl)", "Infezione HIV con CD4 &gt;= 15% (Adulti : &gt;= 200 / µl)", "20130101", ""),
 	/**
 	 * <div class="de">HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt;
-	 * 200 / µl)</div> <div class="fr">Infection à VIH avec CD4 &lt; 15% (Adultes
-	 * : &lt; 200 / µl)</div> <div class="it">Infezione HIV con CD4 &lt; 15%
-	 * (Adulti : &lt; 200 / µl)</div>
+	 * 200 / µl)</div> <div class="fr">Infection à VIH avec CD4 &lt; 15%
+	 * (Adultes : &lt; 200 / µl)</div> <div class="it">Infezione HIV con CD4
+	 * &lt; 15% (Adulti : &lt; 200 / µl)</div>
 	 */
 	HIV_INFEKTION_MIT_CD4_ZELLEN_KLEINER_15_PROZENT_ERWACHSENE_KLEINER_200_PRO_UL("113009", "HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt; 200 / µl)", "Infection à VIH avec CD4 &lt; 15% (Adultes : &lt; 200 / µl)", "Infezione HIV con CD4 &lt; 15% (Adulti : &lt; 200 / µl)", "20130101", ""),
 	/**
@@ -184,9 +184,9 @@ public enum RiskOfComplications {
 	MANGEL_AN_MANNOSE_BINDENDEM_LEKTIN("113014", "Mangel an Mannose-bindendem Lektin", "Déficit en lectine liant le mannose", "Deficit di lectina legante il mannosio", "20130101", ""),
 	/**
 	 * <div class="de">Mangel im klassischen oder alternativen Weg der
-	 * Komplementaktivierung</div> <div class="fr">Déficit en facteurs de la voie
-	 * alterne ou terminale du complément</div> <div class="it">Deficit in fattori
-	 * della via alterna o terminale del complemento</div>
+	 * Komplementaktivierung</div> <div class="fr">Déficit en facteurs de la
+	 * voie alterne ou terminale du complément</div> <div class="it">Deficit in
+	 * fattori della via alterna o terminale del complemento</div>
 	 */
 	MANGEL_IM_KLASSISCHEN_ODER_ALTERNATIVEN_WEG_DER_KOMPLEMENTAKTIVIERUNG("114026", "Mangel im klassischen oder alternativen Weg der Komplementaktivierung", "Déficit en facteurs de la voie alterne ou terminale du complément", "Deficit in fattori della via alterna o terminale del complemento", "20140101", ""),
 	/**
@@ -211,10 +211,10 @@ public enum RiskOfComplications {
 	NEPHROTISCHES_SYNDROM("113018", "Nephrotisches Syndrom", "Syndrome néphrotique", "Sindrome nefrosica", "20130101", ""),
 	/**
 	 * <div class="de">Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-,
-	 * Lungen- oder Nierenfunktion)</div> <div class="fr">Maladie neuromusculaire
-	 * (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)</div>
-	 * <div class="it">Malattia neuromuscolare (Se ripercussione sulla funzione
-	 * cardiaca, polmonare o renale)</div>
+	 * Lungen- oder Nierenfunktion)</div> <div class="fr">Maladie
+	 * neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou
+	 * rénale)</div> <div class="it">Malattia neuromuscolare (Se ripercussione
+	 * sulla funzione cardiaca, polmonare o renale)</div>
 	 */
 	NEUROMUSKULAERE_KRANKHEIT_FALLS_AUSWIRKUNGEN_AUF_HERZ__LUNGEN_ODER_NIERENFUNKTION("114012", "Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder Nierenfunktion)", "Maladie neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)", "Malattia neuromuscolare (Se ripercussione sulla funzione cardiaca, polmonare o renale)", "20140101", ""),
 	/**
@@ -231,15 +231,15 @@ public enum RiskOfComplications {
 	/**
 	 * <div class="de">Schädelbasisfraktur /-Missbildung, zerebrospinale
 	 * Liquorfistel</div> <div class="fr">Fracture ou malformation de la base du
-	 * crâne, fistule de liquide céphalo-rachidien</div> <div class="it">Frattura
-	 * o malformazione della base del cranio, fistola di liquido
-	 * cerebrospinale</div>
+	 * crâne, fistule de liquide céphalo-rachidien</div>
+	 * <div class="it">Frattura o malformazione della base del cranio, fistola
+	 * di liquido cerebrospinale</div>
 	 */
 	SCHAEDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL("114032", "Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel", "Fracture ou malformation de la base du crâne, fistule de liquide céphalo-rachidien", "Frattura o malformazione della base del cranio, fistola di liquido cerebrospinale", "20140101", ""),
 	/**
 	 * <div class="de">Schwangerschaft und post-partum Periode</div>
-	 * <div class="fr">Grossesse et post-partum</div> <div class="it">Gravidanza e
-	 * post-parto</div>
+	 * <div class="fr">Grossesse et post-partum</div> <div class="it">Gravidanza
+	 * e post-parto</div>
 	 */
 	SCHWANGERSCHAFT_UND_POST_PARTUM_PERIODE("114028", "Schwangerschaft und post-partum Periode", "Grossesse et post-partum", "Gravidanza e post-parto", "20140101", ""),
 	/**
@@ -249,10 +249,11 @@ public enum RiskOfComplications {
 	 */
 	SCHWERE_NEURODERMITIS_BEIM_KIND("113021", "Schwere Neurodermitis beim Kind", "Eczema sévère chez l’enfant", "Eczema severo nel bambino", "20130101", ""),
 	/**
-	 * <div class="de">Schweres Asthma: bei verlängerter oder häufiger Behandlung
-	 * mit oralen Steroiden</div> <div class="fr">Asthme sévère : si traitement
-	 * prolongé ou fréquent par des corticoïdes oraux</div> <div class="it">Asma
-	 * severa : se trattamento prolungato o frequente con corticoidi orali</div>
+	 * <div class="de">Schweres Asthma: bei verlängerter oder häufiger
+	 * Behandlung mit oralen Steroiden</div> <div class="fr">Asthme sévère : si
+	 * traitement prolongé ou fréquent par des corticoïdes oraux</div>
+	 * <div class="it">Asma severa : se trattamento prolungato o frequente con
+	 * corticoidi orali</div>
 	 */
 	SCHWERES_ASTHMA_BEI_VERLAENGERTER_ODER_HAEUFIGER_BEHANDLUNG_MIT_ORALEN_STEROIDEN("114004", "Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen Steroiden", "Asthme sévère : si traitement prolongé ou fréquent par des corticoïdes oraux", "Asma severa : se trattamento prolungato o frequente con corticoidi orali", "20140101", ""),
 	/**
@@ -272,8 +273,8 @@ public enum RiskOfComplications {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static RiskOfComplications getEnum(String code) {
@@ -291,8 +292,8 @@ public enum RiskOfComplications {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -313,7 +314,7 @@ public enum RiskOfComplications {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -338,23 +339,23 @@ public enum RiskOfComplications {
 	private Date validTo;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantsiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>.
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantsiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayNameDe
-	 *          the display name de
+	 *            the display name de
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 * @param displayNameIt
-	 *          the display name it
+	 *            the display name it
 	 * @param validFrom
-	 *          the valid from
+	 *            the valid from
 	 * @param validTo
-	 *          the valid to
+	 *            the valid to
 	 */
 	private RiskOfComplications(String code, String displayNameDe, String displayNameFr,
 			String displayNameIt, String validFrom, String validTo) {
@@ -377,7 +378,7 @@ public enum RiskOfComplications {
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode(LanguageCode languageCode) {
@@ -402,8 +403,8 @@ public enum RiskOfComplications {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -428,7 +429,7 @@ public enum RiskOfComplications {
 	 * standartmässig deutsch geliefert.</div>
 	 *
 	 * @param languageCode
-	 *          the language code to get the display name for
+	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
@@ -455,7 +456,7 @@ public enum RiskOfComplications {
 	 * Checks if the code is valid for the specified date.
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 * @return true, if is valid
 	 */
 	public boolean isValid(Date date) {

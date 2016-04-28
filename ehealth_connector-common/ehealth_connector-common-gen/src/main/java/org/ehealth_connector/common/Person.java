@@ -47,9 +47,9 @@ public class Person {
 	 * Behandelnde).
 	 *
 	 * @param name
-	 *          <br>
-	 *          <div class="de"> name</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> name</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Person(Name name) {
 		mPerson = CDAFactory.eINSTANCE.createPerson();
@@ -63,9 +63,9 @@ public class Person {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param person
-	 *          <br>
-	 *          <div class="de"> person</div> <div class="fr"></div>
-	 *          <div class="it"></div>
+	 *            <br>
+	 *            <div class="de"> person</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
 		mPerson = person;
@@ -76,7 +76,7 @@ public class Person {
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param name
-	 *          name
+	 *            name
 	 */
 	public void addName(Name name) {
 		mPerson.getNames().add(name.getMdhtPn());
@@ -86,7 +86,8 @@ public class Person {
 	 * <div class="en">Copy mdht person.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person object
+	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person
+	 *         object
 	 */
 	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
 		return EcoreUtil.copy(mPerson);

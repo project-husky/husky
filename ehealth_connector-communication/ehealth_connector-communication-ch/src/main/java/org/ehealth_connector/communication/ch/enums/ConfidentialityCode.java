@@ -41,8 +41,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 */
 	ADMINISTRATIVE_DATEN("30001", "administrative Daten"),
 	/**
-	 * <div class="de">geheime Daten</div> <div class="fr">données secrètes</div>
-	 * <div class="it">dati segreti</div>
+	 * <div class="de">geheime Daten</div> <div class="fr">données
+	 * secrètes</div> <div class="it">dati segreti</div>
 	 */
 	GEHEIME_DATEN("30005", "geheime Daten"),
 	/**
@@ -51,8 +51,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 */
 	MEDIZINISCHE_DATEN("30003", "medizinische Daten"),
 	/**
-	 * <div class="de">nützliche Daten</div> <div class="fr">données utiles</div>
-	 * <div class="it">dati utilitari</div>
+	 * <div class="de">nützliche Daten</div> <div class="fr">données
+	 * utiles</div> <div class="it">dati utilitari</div>
 	 */
 	NUTZLICHE_DATEN("30002", "nützliche Daten"),
 	/**
@@ -62,8 +62,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	SENSIBLE_DATEN("30004", "sensible Daten");
 
 	/**
-	 * <div class="de">Code für administrative Daten</div> <div class="fr">Code de
-	 * données administratives</div> <div class="it">Code per dati
+	 * <div class="de">Code für administrative Daten</div> <div class="fr">Code
+	 * de données administratives</div> <div class="it">Code per dati
 	 * amministrativi</div>
 	 */
 	public static final String ADMINISTRATIVE_DATEN_CODE = "30001";
@@ -100,7 +100,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für sensible Daten</div> <div class="fr">Code de
-	 * données sensibles</div> <div class="it">Code per dati stigmatizzanti</div>
+	 * données sensibles</div> <div class="it">Code per dati
+	 * stigmatizzanti</div>
 	 */
 	public static final String SENSIBLE_DATEN_CODE = "30004";
 
@@ -109,8 +110,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ConfidentialityCode getEnum(String code) {
@@ -128,8 +129,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -150,7 +151,7 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -170,22 +171,22 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ConfidentialityCode(String code, String displayName) {
 		this.code = code;
@@ -214,7 +215,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -229,8 +231,8 @@ public enum ConfidentialityCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

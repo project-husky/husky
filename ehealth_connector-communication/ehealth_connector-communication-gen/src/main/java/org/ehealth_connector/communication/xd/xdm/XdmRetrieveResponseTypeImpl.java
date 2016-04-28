@@ -26,10 +26,10 @@ import org.openhealthtools.ihe.xds.response.impl.XDSRetrieveResponseTypeImpl;
 /**
  * Class that holds the extracted documents and submission sets from a given xdm
  * volume. It also contains errors, which might occur during the import process.
- * 
+ *
  */
-public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl implements
-		XDSRetrieveResponseType {
+public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
+		implements XDSRetrieveResponseType {
 
 	private List<XDSDocument> attachments;
 
@@ -42,7 +42,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 
 	/**
 	 * Returns a list of XDSDocuments
-	 * 
+	 *
 	 * @return List of XDSDocuments in the XDM Zip File
 	 */
 	@Override
@@ -58,7 +58,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 
 	/**
 	 * Contains a map of exceptions thrown. Not used in the XDM implementation.
-	 * 
+	 *
 	 * @see org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType#getCaughtExceptions()
 	 */
 	@Override
@@ -69,7 +69,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 	/**
 	 * Determines whether or not the transfer is complete. Not used in the XDM
 	 * implementation.
-	 * 
+	 *
 	 * @see org.openhealthtools.ihe.xds.response.XDSResponseType#isComplete()
 	 */
 	@Override
@@ -80,7 +80,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 	/**
 	 * Determines whether or not the processing is complete. Not used in the XDM
 	 * implementation.
-	 * 
+	 *
 	 * @see org.openhealthtools.ihe.xds.response.impl.XDSResponseTypeImpl#isProcessed()
 	 */
 	@Override
@@ -90,7 +90,7 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl imp
 
 	/**
 	 * Set the list of attachments
-	 * 
+	 *
 	 * @param attachments
 	 *            List of attachments for this responect
 	 */

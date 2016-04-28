@@ -124,7 +124,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 		if (getMdht().getSubject() != null) {
 			return new NonHumanSubject(
 					(org.openhealthtools.mdht.uml.cda.ihe.lab.NonHumanSubject) getMdht()
-					.getSubject());
+							.getSubject());
 		}
 		return null;
 	}
@@ -140,7 +140,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 			if (e.getProcedure() instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) {
 				scel.add(new SpecimenCollectionEntry(
 						(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection) e
-						.getProcedure()));
+								.getProcedure()));
 			}
 		}
 		return scel;

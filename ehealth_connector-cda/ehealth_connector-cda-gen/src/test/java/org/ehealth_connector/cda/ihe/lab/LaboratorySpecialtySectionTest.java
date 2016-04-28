@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry;
-import org.ehealth_connector.cda.ihe.lab.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;

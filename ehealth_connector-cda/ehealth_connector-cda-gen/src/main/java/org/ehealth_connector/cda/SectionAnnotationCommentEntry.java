@@ -34,7 +34,8 @@ public class SectionAnnotationCommentEntry
 	}
 
 	/**
-	 * Instantiates a new SectionAnnotationCommentEntry based on the MDHT element.
+	 * Instantiates a new SectionAnnotationCommentEntry based on the MDHT
+	 * element.
 	 */
 	public SectionAnnotationCommentEntry(org.openhealthtools.mdht.uml.cda.ihe.Comment comment) {
 		super(comment);
@@ -61,14 +62,14 @@ public class SectionAnnotationCommentEntry
 	}
 
 	/**
-	 * Adds the given text after the existing text of the annotation comment. This
-	 * is the text element of the level3 object. If this object is added to a
-	 * section with narrative generation enabled this text will copied to the
+	 * Adds the given text after the existing text of the annotation comment.
+	 * This is the text element of the level3 object. If this object is added to
+	 * a section with narrative generation enabled this text will copied to the
 	 * section text and the text can then be referenced by the &lt;content
 	 * ID="xxx"&gt; element.
 	 *
 	 * @param text
-	 *          the new comment text
+	 *            the new comment text
 	 */
 	public void addAnnotationCommentText(String text) {
 		if (getMdht().getText() != null && getMdht().getText().getText() != null) {
@@ -110,13 +111,14 @@ public class SectionAnnotationCommentEntry
 	}
 
 	/**
-	 * Gets the reference to the content element. It is the value of the ID in the
-	 * &lt;content ID="xxx"&gt; element prefixed with #.
+	 * Gets the reference to the content element. It is the value of the ID in
+	 * the &lt;content ID="xxx"&gt; element prefixed with #.
 	 *
 	 * @return the content ID reference
 	 */
 	public String getContentIdReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -126,8 +128,8 @@ public class SectionAnnotationCommentEntry
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result)
-				+ (this.getContentIdReference() != null ? this.getContentIdReference().hashCode() : 0);
+		result = (prime * result) + (this.getContentIdReference() != null
+				? this.getContentIdReference().hashCode() : 0);
 		return result;
 	}
 
@@ -138,7 +140,7 @@ public class SectionAnnotationCommentEntry
 	 * can then be referenced by the &lt;content ID="xxx"&gt; element.
 	 *
 	 * @param text
-	 *          the new comment text
+	 *            the new comment text
 	 */
 	public void setAnnotationCommentText(String text) {
 		this.getMdht().setText(Util.createEd(text));
@@ -146,11 +148,11 @@ public class SectionAnnotationCommentEntry
 
 	/**
 	 * Sets the reference to the content element. This is the value of the ID in
-	 * the &lt;content ID="xxx"&gt; element. If not provided it will automatically
-	 * be prefixed with #.
+	 * the &lt;content ID="xxx"&gt; element. If not provided it will
+	 * automatically be prefixed with #.
 	 *
 	 * @param value
-	 *          the content ID reference
+	 *            the content ID reference
 	 */
 	public void setContentIdReference(String value) {
 		this.getMdht().setText(Util.createReference(value));

@@ -205,6 +205,78 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
+	 *
+	 * @param doc
+	 *            the document
+	 * @param desc
+	 *            the Document descriptor
+	 * @return the DocumentMetadata
+	 */
+	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
+		if (txnData == null) {
+			txnData = new SubmitTransactionData();
+		}
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
+		String docEntryUUID;
+		try {
+
+			docEntryUUID = txnData.addDocument(doc);
+
+			final DocumentMetadata docMetadata = new DocumentMetadata(
+					txnData.getDocumentEntry(docEntryUUID));
+
+			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+				if (DocumentDescriptor.CDA_R2.equals(desc)) {
+					// extractDocMetadataFromCda(docMetadata);
+					cdaExtractionFixes(docMetadata);
+				}
+				generateDefaultDocEntryAttributes(doc.getDocumentEntryUUID());
+			} else {
+				docMetadata.clear();
+			}
+
+			return docMetadata;
+		} catch (final MetadataExtractionException e) {
+			e.printStackTrace();
+		} catch (final SubmitTransactionCompositionException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
+	 * methods, which are unsafe, because an XDS registry might use another
+	 * value set.</div>
+	 *
+	 * @param docMetadata
+	 *            the doc metadata </div>
+	 */
+	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
+		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
+		// code from the cda for the XDS metadata. This leads to an error in the
+		// swiss repository, where the value set is differnt. As procausion we
+		// clean the list.
+		docMetadata.clearExtracted();
+
+		// Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not
+		// a known Slot for the NIST Registry by deleting all
+		// authorTelecommunications
+		for (final Object object : docMetadata.getMdhtDocumentEntryType().getAuthors()) {
+			final AuthorType at = (AuthorType) object;
+			at.getAuthorTelecommunication().clear();
+		}
+
+		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
+		// to long for the registry (EXT part is larger than the allowed 16
+		// characters)
+		docMetadata.setUniqueId(
+				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+	}
+
+	/**
 	 * <div class="en">Resets the transaction data (SubmissionSet and
 	 * DocumentMetadata)</div>
 	 */
@@ -309,6 +381,89 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * <div class="en">Generate missing doc entry attributes.</div>
+	 *
+	 * @param docEntryUuid
+	 *            the doc entry uuid </div>
+	 */
+	private void generateDefaultDocEntryAttributes(String docEntryUuid) {
+
+		final DocumentMetadata docMetadata = new DocumentMetadata(
+				txnData.getDocumentEntry(docEntryUuid));
+		final DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
+
+		// Derive MimeType from DocumentDescriptor
+		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
+			docMetadata.setMimeType(desc.getMimeType());
+		}
+
+		// Generate the UUID
+		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
+			docMetadata.setUniqueId(
+					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		}
+
+		// Generate Creation Time with the current time
+		if (docMetadata.getMdhtDocumentEntryType().getCreationTime() == null) {
+			docMetadata.setCreationTime(DateUtil.nowAsDate());
+		}
+	}
+
+	/**
+	 * <div class="en">Generate missing Submission Set attributes</div>
+	 */
+	private void generateDefaultSubmissionSetAttributes() {
+
+		final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
+				.getDocumentEntry().get(0);
+		if (firstDocEntry.getPatientId() == null) {
+			throw new IllegalStateException(
+					"Missing destination patient ID in DocumentMetadata of first document.");
+		}
+
+		// Create SubmissionSet
+		final SubmissionSetType subSet = txnData.getSubmissionSet();
+
+		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+			// This is the eHealth Connector Root OID
+			// default value just in case...
+			String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+
+			if (subSet.getUniqueId() == null) {
+				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			}
+
+			if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
+				organizationalId = firstDocEntry.getPatientId().getAssigningAuthorityUniversalId();
+			}
+			// set submission set source id
+			if (subSet.getSourceId() == null) {
+				subSet.setSourceId(organizationalId);
+			}
+		}
+
+		// set submission time
+		if (subSet.getSubmissionTime() == null) {
+			subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+		}
+		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+		// Use the PatientId of the first Document for the Submission set ID
+		if (subSet.getPatientId() == null) {
+			final CX testCx = firstDocEntry.getPatientId();
+			subSet.setPatientId(EcoreUtil.copy(testCx));
+		}
+
+		// set ContentTypeCode
+		if (subSet.getContentTypeCode() == null) {
+			if (firstDocEntry.getTypeCode() != null) {
+				subSet.setContentTypeCode(EcoreUtil.copy(firstDocEntry.getTypeCode()));
+			}
+		}
+	}
+
+	/**
 	 * <div class="en">Returns the current affinity domain
 	 *
 	 * @return the affinity domain </div>
@@ -328,6 +483,18 @@ public class ConvenienceCommunication {
 	public DocumentMetadataExtractionMode getAutomaticExtractionEnabled() {
 		return documentMetadataExtractionMode;
 	}
+
+	/**
+	 * Query a registry for documents, using a find documents query.
+	 *
+	 * @param queryParameter
+	 *            a findDocumentsQuery object filled with your query parameters
+	 * @param returnReferencesOnly
+	 *            if set to false, the registry response will contain the
+	 *            document metadata. If set to true, the response will contain
+	 *            references instead of the complete document metadata.
+	 * @return the XDSQueryResponseType
+	 */
 
 	/**
 	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
@@ -377,18 +544,6 @@ public class ConvenienceCommunication {
 	public XDSQueryResponseType queryDocumentReferencesOnly(FindDocumentsQuery queryParameter) {
 		return this.queryDocuments((StoredQueryInterface) queryParameter);
 	}
-
-	/**
-	 * Query a registry for documents, using a find documents query.
-	 *
-	 * @param queryParameter
-	 *            a findDocumentsQuery object filled with your query parameters
-	 * @param returnReferencesOnly
-	 *            if set to false, the registry response will contain the
-	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata.
-	 * @return the XDSQueryResponseType
-	 */
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
@@ -525,6 +680,48 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * Sets the key- and truststore for the default security domain
+	 *
+	 * @param dest
+	 *            the Destination Object
+	 */
+	private void setDefaultKeystoreTruststore(Destination dest) {
+		if (dest.getKeyStore() == null) {
+			System.clearProperty("javax.net.ssl.keyStore");
+			System.clearProperty("javax.net.ssl.keyStorePassword");
+			System.clearProperty("javax.net.ssl.trustStore");
+			System.clearProperty("javax.net.ssl.trustStorePassword");
+		} else {
+			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
+			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
+			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
+			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
+		}
+		// System.setProperty("javax.net.debug", "all");
+		// System.setProperty("https.protocols", "TLSv1.2");
+		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+		// System.setProperty("https.ciphersuites",
+		// "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
+
+		// System.setProperty("https.ciphersuites",
+		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
+	}
+
+	/**
+	 * Setting up the communication endpoints for the affinity domain and the
+	 * logger
+	 *
+	 * @param affinityDomain
+	 *            the affinity domain
+	 * @param atnaConfigMode
+	 *            the ATNA config mode (secure or unsecure)
+	 */
+	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
+	}
+
+	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
@@ -566,202 +763,5 @@ public class ConvenienceCommunication {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit();
-	}
-
-	/**
-	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
-	 *
-	 * @param doc
-	 *            the document
-	 * @param desc
-	 *            the Document descriptor
-	 * @return the DocumentMetadata
-	 */
-	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
-		if (txnData == null) {
-			txnData = new SubmitTransactionData();
-		}
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
-		String docEntryUUID;
-		try {
-
-			docEntryUUID = txnData.addDocument(doc);
-
-			final DocumentMetadata docMetadata = new DocumentMetadata(
-					txnData.getDocumentEntry(docEntryUUID));
-
-			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
-				if (DocumentDescriptor.CDA_R2.equals(desc)) {
-					// extractDocMetadataFromCda(docMetadata);
-					cdaExtractionFixes(docMetadata);
-				}
-				generateDefaultDocEntryAttributes(doc.getDocumentEntryUUID());
-			} else {
-				docMetadata.clear();
-			}
-
-			return docMetadata;
-		} catch (final MetadataExtractionException e) {
-			e.printStackTrace();
-		} catch (final SubmitTransactionCompositionException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
-	 * Setting up the communication endpoints for the affinity domain and the
-	 * logger
-	 *
-	 * @param affinityDomain
-	 *            the affinity domain
-	 * @param atnaConfigMode
-	 *            the ATNA config mode (secure or unsecure)
-	 */
-	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
-	}
-
-	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
-	 * methods, which are unsafe, because an XDS registry might use another
-	 * value set.</div>
-	 *
-	 * @param docMetadata
-	 *            the doc metadata </div>
-	 */
-	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
-		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
-		// code from the cda for the XDS metadata. This leads to an error in the
-		// swiss repository, where the value set is differnt. As procausion we
-		// clean the list.
-		docMetadata.clearExtracted();
-
-		// Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not
-		// a known Slot for the NIST Registry by deleting all
-		// authorTelecommunications
-		for (final Object object : docMetadata.getMdhtDocumentEntryType().getAuthors()) {
-			final AuthorType at = (AuthorType) object;
-			at.getAuthorTelecommunication().clear();
-		}
-
-		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
-		// to long for the registry (EXT part is larger than the allowed 16
-		// characters)
-		docMetadata.setUniqueId(
-				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
-	}
-
-	/**
-	 * <div class="en">Generate missing doc entry attributes.</div>
-	 *
-	 * @param docEntryUuid
-	 *            the doc entry uuid </div>
-	 */
-	private void generateDefaultDocEntryAttributes(String docEntryUuid) {
-
-		final DocumentMetadata docMetadata = new DocumentMetadata(
-				txnData.getDocumentEntry(docEntryUuid));
-		final DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
-
-		// Derive MimeType from DocumentDescriptor
-		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
-			docMetadata.setMimeType(desc.getMimeType());
-		}
-
-		// Generate the UUID
-		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(
-					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
-		}
-
-		// Generate Creation Time with the current time
-		if (docMetadata.getMdhtDocumentEntryType().getCreationTime() == null) {
-			docMetadata.setCreationTime(DateUtil.nowAsDate());
-		}
-	}
-
-	/**
-	 * <div class="en">Generate missing Submission Set attributes</div>
-	 */
-	private void generateDefaultSubmissionSetAttributes() {
-
-		final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
-				.getDocumentEntry().get(0);
-		if (firstDocEntry.getPatientId() == null) {
-			throw new IllegalStateException(
-					"Missing destination patient ID in DocumentMetadata of first document.");
-		}
-
-		// Create SubmissionSet
-		final SubmissionSetType subSet = txnData.getSubmissionSet();
-
-		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-			// This is the eHealth Connector Root OID
-			// default value just in case...
-			String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
-
-			if (subSet.getUniqueId() == null) {
-				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-			}
-
-			if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
-				organizationalId = firstDocEntry.getPatientId().getAssigningAuthorityUniversalId();
-			}
-			// set submission set source id
-			if (subSet.getSourceId() == null) {
-				subSet.setSourceId(organizationalId);
-			}
-		}
-
-		// set submission time
-		if (subSet.getSubmissionTime() == null) {
-			subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
-		}
-		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
-
-		// Use the PatientId of the first Document for the Submission set ID
-		if (subSet.getPatientId() == null) {
-			final CX testCx = firstDocEntry.getPatientId();
-			subSet.setPatientId(EcoreUtil.copy(testCx));
-		}
-
-		// set ContentTypeCode
-		if (subSet.getContentTypeCode() == null) {
-			if (firstDocEntry.getTypeCode() != null) {
-				subSet.setContentTypeCode(EcoreUtil.copy(firstDocEntry.getTypeCode()));
-			}
-		}
-	}
-
-	/**
-	 * Sets the key- and truststore for the default security domain
-	 *
-	 * @param dest
-	 *            the Destination Object
-	 */
-	private void setDefaultKeystoreTruststore(Destination dest) {
-		if (dest.getKeyStore() == null) {
-			System.clearProperty("javax.net.ssl.keyStore");
-			System.clearProperty("javax.net.ssl.keyStorePassword");
-			System.clearProperty("javax.net.ssl.trustStore");
-			System.clearProperty("javax.net.ssl.trustStorePassword");
-		} else {
-			System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-			System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
-			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
-		}
-		// System.setProperty("javax.net.debug", "all");
-		// System.setProperty("https.protocols", "TLSv1.2");
-		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-		// System.setProperty("https.ciphersuites",
-		// "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
-
-		// System.setProperty("https.ciphersuites",
-		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
 	}
 }

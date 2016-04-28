@@ -23,6 +23,27 @@ import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryExce
 public class GetDocumentsQuery extends AbstractStoredQuery {
 
 	/**
+	 * Creates the query
+	 *
+	 * @param docIds
+	 *            list of ids of the documents (either uniqueId or entryUUID)
+	 * @param isUUID
+	 *            set to true if docID is the entryUUID (internal registry
+	 *            identifier) of the document and set to false if it is the
+	 *            uniqueID (external to registry) of the document. In most user
+	 *            cases, this should be set to false
+	 */
+	public GetDocumentsQuery(String[] docIds, boolean isUUID) {
+		try {
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds,
+							isUUID));
+		} catch (final MalformedStoredQueryException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * @param docIds
 	 *            list of ids of the documents (either uniqueId or entryUUID)
 	 * @param isUUID
@@ -37,26 +58,9 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 */
 	public GetDocumentsQuery(String[] docIds, boolean isUUID, String homeCommunityId) {
 		try {
-			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds, isUUID, homeCommunityId));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Creates the query
-	 * 
-	 * @param docIds
-	 *            list of ids of the documents (either uniqueId or entryUUID)
-	 * @param isUUID
-	 *            set to true if docID is the entryUUID (internal registry
-	 *            identifier) of the document and set to false if it is the
-	 *            uniqueID (external to registry) of the document. In most user
-	 *            cases, this should be set to false
-	 */
-	public GetDocumentsQuery(String[] docIds, boolean isUUID) {
-		try {
-			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds, isUUID));
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds,
+							isUUID, homeCommunityId));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}

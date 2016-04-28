@@ -40,6 +40,20 @@ public class ActivePatternResult {
 	}
 
 	/**
+	 * @return the underlying ActivePattern
+	 */
+	public ActivePattern getAp() {
+		return ap;
+	}
+
+	/**
+	 * @return a list with all active-pattern childs
+	 */
+	public List<Object> getApChilds() {
+		return apChilds;
+	}
+
+	/**
 	 * @return a List of all fired rules
 	 */
 	public List<FiredRule> getFiredRules() {
@@ -96,10 +110,18 @@ public class ActivePatternResult {
 	}
 
 	/**
-	 * @return a list with all active-pattern childs
+	 * @return the id of the ActivePattern
 	 */
-	public List<Object> getApChilds() {
-		return apChilds;
+	public String getId() {
+		return ap.getId();
+	}
+
+	public String getName() {
+		return ap.getName();
+	}
+
+	public void setAp(ActivePattern ap) {
+		this.ap = ap;
 	}
 
 	public void setApChilds(List<Object> apChilds) {
@@ -107,32 +129,10 @@ public class ActivePatternResult {
 	}
 
 	/**
-	 * @return the underlying ActivePattern
-	 */
-	public ActivePattern getAp() {
-		return ap;
-	}
-
-	public void setAp(ActivePattern ap) {
-		this.ap = ap;
-	}
-
-	/**
-	 * @return the id of the ActivePattern
-	 */
-	public String getId() {
-		return ap.getId();
-	}
-
-	/**
 	 * @return the name of the ActivePattern
 	 */
 	public void setId(String id) {
 		ap.setId(id);
-	}
-
-	public String getName() {
-		return ap.getName();
 	}
 
 	public void setName(String name) {

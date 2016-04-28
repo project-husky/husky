@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
  * The Class CdaChMtpsPadv. see also CDA CH MTPS 7.4.2.6
  */
 public class CdaChMtpsPadv
-extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
+		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 
 	/**
 	 * Instantiates a new cda ch mtps padv.
@@ -38,7 +38,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 	 * Instantiates a new cda ch mtps padv.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public CdaChMtpsPadv(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPadv().init());
@@ -67,7 +67,7 @@ extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 	 * Instantiates a new cda ch mtps padv.
 	 *
 	 * @param doc
-	 *          the doc
+	 *            the doc
 	 */
 	public CdaChMtpsPadv(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv doc) {
 		super(doc);

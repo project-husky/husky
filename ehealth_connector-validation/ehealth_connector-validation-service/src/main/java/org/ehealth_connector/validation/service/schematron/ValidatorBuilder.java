@@ -87,7 +87,7 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 * results (the <cite>Schematron Validator</cite> file) is not persisted on
 	 * disk but compiled in memory.
 	 * </p>
-	 * 
+	 *
 	 * @param factory
 	 *            a <cite>Schematron Rule-Set</cite> transformation factory.
 	 * @param in
@@ -173,7 +173,7 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 * If no output file is specified, then all transformation steps as well as
 	 * the compilation of the resulting stylesheet is entirely done in memory.
 	 * </p>
-	 * 
+	 *
 	 * @param in
 	 *            the input <cite>Schematron</cite> file.
 	 * @param the

@@ -29,10 +29,11 @@ import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 public class DebugUtil {
 
 	/**
-	 * Creates a debug string for the given Author (for debugging purposes only!)
+	 * Creates a debug string for the given Author (for debugging purposes
+	 * only!)
 	 *
 	 * @param data
-	 *          the author
+	 *            the author
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -40,7 +41,8 @@ public class DebugUtil {
 		final StringBuffer retVal = new StringBuffer();
 		if (data != null) {
 			retVal.append("    " + data.getAuthorPerson().getFamilyName() + " "
-					+ data.getAuthorPerson().getGivenName() + " " + data.getAuthorPerson().getIdNumber() + " "
+					+ data.getAuthorPerson().getGivenName() + " "
+					+ data.getAuthorPerson().getIdNumber() + " "
 					+ data.getAuthorPerson().getAssigningAuthorityName() + "\n");
 
 			if (data.getAuthorRole().isEmpty()) {
@@ -68,7 +70,8 @@ public class DebugUtil {
 			} else {
 				retVal.append("    AuthorTelecommunication: ");
 				for (final Object item2 : data.getAuthorTelecommunication()) {
-					retVal.append("    TODO AuthorTelecommunication " + item2.getClass().getName() + "\n");
+					retVal.append("    TODO AuthorTelecommunication " + item2.getClass().getName()
+							+ "\n");
 				}
 				retVal.append("\n");
 			}
@@ -90,11 +93,11 @@ public class DebugUtil {
 	}
 
 	/**
-	 * Creates a debug string for the given list of codes (for debugging purposes
-	 * only!)
+	 * Creates a debug string for the given list of codes (for debugging
+	 * purposes only!)
 	 *
 	 * @param data
-	 *          the list of codes
+	 *            the list of codes
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -113,7 +116,7 @@ public class DebugUtil {
 	 * Creates a debug string for the given code (for debugging purposes only!)
 	 *
 	 * @param data
-	 *          the code
+	 *            the code
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -134,7 +137,7 @@ public class DebugUtil {
 	 * Creates a string with the document metadata (for debugging purposes only)
 	 *
 	 * @param docEntry
-	 *          <div class="en">the document metadata</div>
+	 *            <div class="en">the document metadata</div>
 	 * @return <div class="en">string with the document metadata (for debugging
 	 *         purposes only)</div>
 	 */
@@ -176,19 +179,19 @@ public class DebugUtil {
 			}
 		}
 
-		retVal.append(
-				"  EventCode:                  " + debugCodesString(docEntry.getEventCode()) + "\n");
+		retVal.append("  EventCode:                  " + debugCodesString(docEntry.getEventCode())
+				+ "\n");
 		retVal.append("  Extension:                  " + docEntry.getExtension() + "\n");
-		retVal.append(
-				"  FormatCode:                 " + debugCodeString(docEntry.getFormatCode()) + "\n");
+		retVal.append("  FormatCode:                 " + debugCodeString(docEntry.getFormatCode())
+				+ "\n");
 
 		retVal.append("  HealthCareFacilityTypeCode: "
 				+ debugCodeString(docEntry.getHealthCareFacilityTypeCode()) + "\n");
 
 		retVal.append("  LegalAuthenticator:         " + docEntry.getLegalAuthenticator() + "\n");
 		retVal.append("  ParentDocument:             " + docEntry.getParentDocument() + "\n");
-		retVal.append("  PatientId:                  " + docEntry.getPatientId().getIdNumber() + " / "
-				+ docEntry.getPatientId().getAssigningAuthorityUniversalId() + "\n");
+		retVal.append("  PatientId:                  " + docEntry.getPatientId().getIdNumber()
+				+ " / " + docEntry.getPatientId().getAssigningAuthorityUniversalId() + "\n");
 		retVal.append("  PracticeSettingCode:        "
 				+ debugCodeString(docEntry.getPracticeSettingCode()) + "\n");
 
@@ -197,19 +200,19 @@ public class DebugUtil {
 		retVal.append("  SourcePatientInfo:          " + docEntry.getSourcePatientInfo() + "\n");
 		retVal.append("  Title:                      "
 				+ debugLocalizedString(docEntry.getTitle().getLocalizedString()) + "\n");
-		retVal
-				.append("  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
-		retVal
-				.append("  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
+		retVal.append(
+				"  TypeCode:                   " + debugCodeString(docEntry.getTypeCode()) + "\n");
+		retVal.append(
+				"  ClassCode:                  " + debugCodeString(docEntry.getClassCode()) + "\n");
 		return retVal.toString();
 	}
 
 	/**
-	 * Creates a debug string for the given InternationalStringType (for debugging
-	 * purposes only!)
+	 * Creates a debug string for the given InternationalStringType (for
+	 * debugging purposes only!)
 	 *
 	 * @param data
-	 *          the InternationalStringType
+	 *            the InternationalStringType
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -223,7 +226,7 @@ public class DebugUtil {
 	 * debugging purposes only!)
 	 *
 	 * @param data
-	 *          the list of localized strings
+	 *            the list of localized strings
 	 * @return the debug string <div class="en"></div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */

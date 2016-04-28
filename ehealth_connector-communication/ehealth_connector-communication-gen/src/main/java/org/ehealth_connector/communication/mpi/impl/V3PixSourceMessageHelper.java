@@ -50,66 +50,18 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
 
 /**
  * The Class V3PixSourceMessageHelper.
- * 
+ *
  * Simplifies the api to the three different PIX Source messages implementations
  * and leaves the possibility to get back to elements PatientRole for
  * languageCommunication which are not implemented in OHT V3 Message
  */
 public class V3PixSourceMessageHelper {
 
-	private V3PixSourceMergePatients v3MergePatientsMessage;
-	private V3PixSourceRecordAdded v3RecordAddedMessage;
-	private V3PixSourceRecordRevised v3RecordRevisedMessage;
-
-	/**
-	 * create a V3PixSourceMessageHelper with the supplied sender and receiver.
-	 * OHT does not set the conduction Indicator value in the
-	 * MFMI_MT700701UV01/subject control act wrapper to false this is fixed in
-	 * the constructor
-	 * 
-	 * @param addMessage
-	 *            true use V3PixSourceRecordAdded for message generation
-	 * @param revisedMessage
-	 *            true use V3PixSourceRecordRevised for message generation
-	 * @param mergeMessage
-	 *            true use V3PixSourceMergePatients for message generation
-	 * @param senderApplicationOid
-	 *            application oid of the sender
-	 * @param senderFacilityOid
-	 *            facility oid of the sender
-	 * @param receiverApplicationOid
-	 *            receiver oid the application
-	 * @param receiverFacilityOid
-	 *            receiver oid of the facility
-	 */
-	public V3PixSourceMessageHelper(boolean addMessage, boolean revisedMessage,
-			boolean mergeMessage, String senderApplicationOid, String senderFacilityOid,
-			String receiverApplicationOid, String receiverFacilityOid) {
-		if (addMessage) {
-			v3RecordAddedMessage = new V3PixSourceRecordAdded(senderApplicationOid,
-					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
-			v3RecordAddedMessage.getRootElement().getControlActProcess().getSubject().get(0)
-					.setContextConductionInd(false);
-		}
-		if (revisedMessage) {
-			v3RecordRevisedMessage = new V3PixSourceRecordRevised(senderApplicationOid,
-					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
-			v3RecordRevisedMessage.getRootElement().getControlActProcess().getSubject().get(0)
-					.setContextConductionInd(false);
-		}
-		if (mergeMessage) {
-			v3MergePatientsMessage = new V3PixSourceMergePatients(senderApplicationOid,
-					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
-			v3MergePatientsMessage.getRootElement().getControlActProcess().getSubject().get(0)
-					.setContextConductionInd(false);
-		}
-	}
-
 	/**
 	 * create a TEL type object with the supplied telecom value and use value
 	 * (if supplied) we extend the type her also for the mobile, the standard
 	 * PixPdqV3Utils.createTel has only WP and HP for useValue
-	 * 
+	 *
 	 * @param telecomValue
 	 *            (the phone, web, or e-mail address value)
 	 * @param useValue
@@ -150,28 +102,81 @@ public class V3PixSourceMessageHelper {
 		return returnTEL;
 	}
 
+	private V3PixSourceMergePatients v3MergePatientsMessage;
+	private V3PixSourceRecordAdded v3RecordAddedMessage;
+
+	private V3PixSourceRecordRevised v3RecordRevisedMessage;
+
+	/**
+	 * create a V3PixSourceMessageHelper with the supplied sender and receiver.
+	 * OHT does not set the conduction Indicator value in the
+	 * MFMI_MT700701UV01/subject control act wrapper to false this is fixed in
+	 * the constructor
+	 *
+	 * @param addMessage
+	 *            true use V3PixSourceRecordAdded for message generation
+	 * @param revisedMessage
+	 *            true use V3PixSourceRecordRevised for message generation
+	 * @param mergeMessage
+	 *            true use V3PixSourceMergePatients for message generation
+	 * @param senderApplicationOid
+	 *            application oid of the sender
+	 * @param senderFacilityOid
+	 *            facility oid of the sender
+	 * @param receiverApplicationOid
+	 *            receiver oid the application
+	 * @param receiverFacilityOid
+	 *            receiver oid of the facility
+	 */
+	public V3PixSourceMessageHelper(boolean addMessage, boolean revisedMessage,
+			boolean mergeMessage, String senderApplicationOid, String senderFacilityOid,
+			String receiverApplicationOid, String receiverFacilityOid) {
+		if (addMessage) {
+			v3RecordAddedMessage = new V3PixSourceRecordAdded(senderApplicationOid,
+					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3RecordAddedMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
+		}
+		if (revisedMessage) {
+			v3RecordRevisedMessage = new V3PixSourceRecordRevised(senderApplicationOid,
+					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3RecordRevisedMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
+		}
+		if (mergeMessage) {
+			v3MergePatientsMessage = new V3PixSourceMergePatients(senderApplicationOid,
+					senderFacilityOid, receiverApplicationOid, receiverFacilityOid);
+			v3MergePatientsMessage.getRootElement().getControlActProcess().getSubject().get(0)
+					.setContextConductionInd(false);
+		}
+	}
+
 	/**
 	 * adds an employee code
-	 * 
+	 *
 	 * @param employeeOccupationCode
 	 *            CWE:EmployeeOccupationCode
 	 */
 	public void addEmployeeCode(String employeeOccupationCode) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02Employee employee = V3Factory.eINSTANCE.createPRPAMT201301UV02Employee();
+			final PRPAMT201301UV02Employee employee = V3Factory.eINSTANCE
+					.createPRPAMT201301UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
 		if (v3RecordRevisedMessage != null) {
-			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
-			final PRPAMT201302UV02Employee employee = V3Factory.eINSTANCE.createPRPAMT201302UV02Employee();
+			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
+			final PRPAMT201302UV02Employee employee = V3Factory.eINSTANCE
+					.createPRPAMT201302UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02Employee employee = V3Factory.eINSTANCE.createPRPAMT201303UV02Employee();
+			final PRPAMT201303UV02Employee employee = V3Factory.eINSTANCE
+					.createPRPAMT201303UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
@@ -179,26 +184,30 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds a language communication.
-	 * 
+	 *
 	 * @param languageCommunication
 	 *            the language communication {CWE:HumanLanguage}
 	 */
 	public void addLanguageCommunication(String languageCommunication) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201301UV02LanguageCommunication();
+			final PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE
+					.createPRPAMT201301UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
 		if (v3RecordRevisedMessage != null) {
-			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
-			final PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201302UV02LanguageCommunication();
+			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
+			final PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE
+					.createPRPAMT201302UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE.createPRPAMT201303UV02LanguageCommunication();
+			final PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE
+					.createPRPAMT201303UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
@@ -206,7 +215,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * add an address for the patient.
-	 * 
+	 *
 	 * @param addressStreetAddress
 	 *            street
 	 * @param addressCity
@@ -228,9 +237,8 @@ public class V3PixSourceMessageHelper {
 			String addressCounty, String addressState, String addressCountry, String addressZip,
 			String addressOtherDesignation, String addressType) {
 		if (v3RecordAddedMessage != null) {
-			v3RecordAddedMessage.addPatientAddress(addressStreetAddress, addressCity,
-					addressCounty, addressState, addressCountry, addressZip,
-					addressOtherDesignation, addressType);
+			v3RecordAddedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
+					addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
 		}
 		if (v3RecordRevisedMessage != null) {
 			v3RecordRevisedMessage.addPatientAddress(addressStreetAddress, addressCity,
@@ -246,7 +254,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds a confidentiality code to the patient
-	 * 
+	 *
 	 * @param code
 	 *            confidentiality Code {CWE:Confidentiality}
 	 */
@@ -264,7 +272,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * add a patient ethnic group code to the patient
-	 * 
+	 *
 	 * @param code
 	 *            patient etnnic group code {CWE:Ethnicity}
 	 */
@@ -282,7 +290,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds a patient identifier
-	 * 
+	 *
 	 * @param extension
 	 *            patient identifier
 	 * @param root
@@ -304,7 +312,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds a patient name
-	 * 
+	 *
 	 * @param familyName
 	 *            family
 	 * @param givenName
@@ -334,31 +342,38 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds a nation code
-	 * 
+	 *
 	 * @param nationCode
 	 *            CWE:NationEntityType
 	 */
 	public void addPatientNation(String nationCode) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02Citizen citizen = V3Factory.eINSTANCE.createPRPAMT201301UV02Citizen();
-			final PRPAMT201301UV02Nation citizenNation = V3Factory.eINSTANCE.createPRPAMT201301UV02Nation();
+			final PRPAMT201301UV02Citizen citizen = V3Factory.eINSTANCE
+					.createPRPAMT201301UV02Citizen();
+			final PRPAMT201301UV02Nation citizenNation = V3Factory.eINSTANCE
+					.createPRPAMT201301UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
 		}
 		if (v3RecordRevisedMessage != null) {
-			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
-			final PRPAMT201302UV02Citizen citizen = V3Factory.eINSTANCE.createPRPAMT201302UV02Citizen();
-			final PRPAMT201302UV02Nation citizenNation = V3Factory.eINSTANCE.createPRPAMT201302UV02Nation();
+			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
+			final PRPAMT201302UV02Citizen citizen = V3Factory.eINSTANCE
+					.createPRPAMT201302UV02Citizen();
+			final PRPAMT201302UV02Nation citizenNation = V3Factory.eINSTANCE
+					.createPRPAMT201302UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02Citizen citizen = V3Factory.eINSTANCE.createPRPAMT201303UV02Citizen();
-			final PRPAMT201303UV02Nation citizenNation = V3Factory.eINSTANCE.createPRPAMT201303UV02Nation();
+			final PRPAMT201303UV02Citizen citizen = V3Factory.eINSTANCE
+					.createPRPAMT201303UV02Citizen();
+			final PRPAMT201303UV02Nation citizenNation = V3Factory.eINSTANCE
+					.createPRPAMT201303UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
@@ -367,7 +382,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * add a patient other id for the patient
-	 * 
+	 *
 	 * @param extension
 	 *            id for the patient which should be listed as otherId
 	 * @param root
@@ -387,7 +402,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * adds patient race code to the patient
-	 * 
+	 *
 	 * @param code
 	 *            patient race code {CWE:Race}
 	 */
@@ -406,7 +421,7 @@ public class V3PixSourceMessageHelper {
 	/**
 	 * adds a telecom value with the provided useValue ("HP" or "WP" or "H" or
 	 * "MC")
-	 * 
+	 *
 	 * @param telecomValue
 	 *            value for the telecom
 	 * @param useValue
@@ -419,7 +434,8 @@ public class V3PixSourceMessageHelper {
 			patientPerson.getTelecom().add(createTEL(telecomValue, useValue));
 		}
 		if (v3RecordRevisedMessage != null) {
-			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
+			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
 			patientPerson.getTelecom().add(createTEL(telecomValue, useValue));
 		}
 		if (v3MergePatientsMessage != null) {
@@ -429,8 +445,58 @@ public class V3PixSourceMessageHelper {
 	}
 
 	/**
+	 * gets the patient person.
+	 *
+	 * @param v3MergePatientsMessage
+	 *            the v3 merge patients message
+	 * @return the patient person
+	 */
+	private PRPAMT201303UV02Person getPatientPerson(
+			V3PixSourceMergePatients v3MergePatientsMessage) {
+		if (v3MergePatientsMessage != null) {
+			final PRPAIN201304UV02Type rootElement = v3MergePatientsMessage.getRootElement();
+			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+					.getSubject1().getPatient().getPatientPerson();
+		}
+		return null;
+	}
+
+	/**
+	 * gets the patient person.
+	 *
+	 * @param v3RecordAddedMessage
+	 *            the v3 record added message
+	 * @return the patient person
+	 */
+	private PRPAMT201301UV02Person getPatientPerson(V3PixSourceRecordAdded v3RecordAddedMessage) {
+		if (v3RecordAddedMessage != null) {
+			final PRPAIN201301UV02Type rootElement = v3RecordAddedMessage.getRootElement();
+			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+					.getSubject1().getPatient().getPatientPerson();
+		}
+		return null;
+	}
+
+	/**
+	 * gets the patient person.
+	 *
+	 * @param v3RecordRevisedMessage
+	 *            the v3 record revised message
+	 * @return the patient person
+	 */
+	private PRPAMT201302UV02PatientPatientPerson getPatientPerson(
+			V3PixSourceRecordRevised v3RecordRevisedMessage) {
+		if (v3RecordRevisedMessage != null) {
+			final PRPAIN201302UV02Type rootElement = v3RecordRevisedMessage.getRootElement();
+			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
+					.getSubject1().getPatient().getPatientPerson();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the v3 merge patients message.
-	 * 
+	 *
 	 * @return the v3 merge patients message
 	 */
 	public V3PixSourceMergePatients getV3MergePatientsMessage() {
@@ -439,7 +505,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * Gets the v3 record added message.
-	 * 
+	 *
 	 * @return the v3 record added message
 	 */
 	public V3PixSourceRecordAdded getV3RecordAddedMessage() {
@@ -448,7 +514,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * Gets the v3 record revised message.
-	 * 
+	 *
 	 * @return the v3 record revised message
 	 */
 	public V3PixSourceRecordRevised getV3RecordRevisedMessage() {
@@ -457,7 +523,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the birth place
-	 * 
+	 *
 	 * @param addressBirthPlace
 	 *            the birth place address
 	 */
@@ -472,7 +538,8 @@ public class V3PixSourceMessageHelper {
 			patientPerson.setBirthPlace(birthplace);
 		}
 		if (v3RecordRevisedMessage != null) {
-			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(v3RecordRevisedMessage);
+			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
+					v3RecordRevisedMessage);
 			final PRPAMT201302UV02BirthPlace birthplace = V3Factory.eINSTANCE
 					.createPRPAMT201302UV02BirthPlace();
 			final COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
@@ -493,7 +560,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the patient birth time.
-	 * 
+	 *
 	 * @param birthTime
 	 *            birthtime of the patient
 	 */
@@ -511,7 +578,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets whether the patient is deceased
-	 * 
+	 *
 	 * @param patientDeceased
 	 *            true if patient is deceased
 	 */
@@ -529,7 +596,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the patient deceased time.
-	 * 
+	 *
 	 * @param patientDeceasedTime
 	 *            deceased time of the patient
 	 */
@@ -547,7 +614,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * set the patient gender to the provided value ("M", "F", or "U")
-	 * 
+	 *
 	 * @param gender
 	 *            gender values ("M", "F", or "U")
 	 */
@@ -565,7 +632,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * Set the marital status for the patient
-	 * 
+	 *
 	 * @param maritalStatus
 	 *            marital status of the patient {CWE:MaritalStatus}
 	 */
@@ -583,7 +650,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets a mother's maiden name for the patient.
-	 * 
+	 *
 	 * @param family
 	 *            mothers maiden family
 	 * @param given
@@ -601,18 +668,18 @@ public class V3PixSourceMessageHelper {
 			v3RecordAddedMessage.setPatientMothersMaidenName(family, given, other, suffix, prefix);
 		}
 		if (v3RecordRevisedMessage != null) {
-			v3RecordRevisedMessage
-					.setPatientMothersMaidenName(family, given, other, suffix, prefix);
+			v3RecordRevisedMessage.setPatientMothersMaidenName(family, given, other, suffix,
+					prefix);
 		}
 		if (v3MergePatientsMessage != null) {
-			v3MergePatientsMessage
-					.setPatientMothersMaidenName(family, given, other, suffix, prefix);
+			v3MergePatientsMessage.setPatientMothersMaidenName(family, given, other, suffix,
+					prefix);
 		}
 	}
 
 	/**
 	 * sets whether there was a multiple birth.
-	 * 
+	 *
 	 * @param birthIndicator
 	 *            true if multiple birth
 	 */
@@ -630,7 +697,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the birth order number to the provided value
-	 * 
+	 *
 	 * @param birthNumber
 	 *            birth order number
 	 */
@@ -648,7 +715,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the religious affiliation for the patient
-	 * 
+	 *
 	 * @param religiousAffiliation
 	 *            CWE:ReligiousAffiliation
 	 */
@@ -666,7 +733,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the patient very important person code
-	 * 
+	 *
 	 * @param code
 	 *            patient vip code CWE:PatientImportance}
 	 */
@@ -684,7 +751,7 @@ public class V3PixSourceMessageHelper {
 
 	/**
 	 * sets the scoping organization for the patient
-	 * 
+	 *
 	 * @param organizationOID
 	 *            oid of the organization
 	 * @param organizationName
@@ -706,55 +773,6 @@ public class V3PixSourceMessageHelper {
 			v3MergePatientsMessage.setScopingOrganization(organizationOID, organizationName,
 					telecomValue);
 		}
-	}
-
-	/**
-	 * gets the patient person.
-	 * 
-	 * @param v3MergePatientsMessage
-	 *            the v3 merge patients message
-	 * @return the patient person
-	 */
-	private PRPAMT201303UV02Person getPatientPerson(V3PixSourceMergePatients v3MergePatientsMessage) {
-		if (v3MergePatientsMessage != null) {
-			final PRPAIN201304UV02Type rootElement = v3MergePatientsMessage.getRootElement();
-			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-					.getSubject1().getPatient().getPatientPerson();
-		}
-		return null;
-	}
-
-	/**
-	 * gets the patient person.
-	 * 
-	 * @param v3RecordAddedMessage
-	 *            the v3 record added message
-	 * @return the patient person
-	 */
-	private PRPAMT201301UV02Person getPatientPerson(V3PixSourceRecordAdded v3RecordAddedMessage) {
-		if (v3RecordAddedMessage != null) {
-			final PRPAIN201301UV02Type rootElement = v3RecordAddedMessage.getRootElement();
-			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-					.getSubject1().getPatient().getPatientPerson();
-		}
-		return null;
-	}
-
-	/**
-	 * gets the patient person.
-	 * 
-	 * @param v3RecordRevisedMessage
-	 *            the v3 record revised message
-	 * @return the patient person
-	 */
-	private PRPAMT201302UV02PatientPatientPerson getPatientPerson(
-			V3PixSourceRecordRevised v3RecordRevisedMessage) {
-		if (v3RecordRevisedMessage != null) {
-			final PRPAIN201302UV02Type rootElement = v3RecordRevisedMessage.getRootElement();
-			return rootElement.getControlActProcess().getSubject().get(0).getRegistrationEvent()
-					.getSubject1().getPatient().getPatientPerson();
-		}
-		return null;
 	}
 
 }

@@ -29,12 +29,13 @@ public enum ProblemConcernStatusCode {
 	 */
 	SUSPENDED("suspended", "suspended"),
 	/**
-	 * <div class="de">Ein Leiden, das nicht geheilt wurde, aber nicht mehr weiter
-	 * behandelt wird. Dieser Wert kann z.B. dann eingesetzt werden, wenn der
-	 * Patient gegen den ärztlichen Rat eine Behandlung abgebrochen hat.</div>
-	 * <div class="fr">Affectation qui n’a pas été guérie, mais dont le traitement
-	 * n’est plus poursuivi. Cette valeur peut par exemple être utilisée si le
-	 * patient a interrompu un traitement contre l’avis du médecin.</div>
+	 * <div class="de">Ein Leiden, das nicht geheilt wurde, aber nicht mehr
+	 * weiter behandelt wird. Dieser Wert kann z.B. dann eingesetzt werden, wenn
+	 * der Patient gegen den ärztlichen Rat eine Behandlung abgebrochen
+	 * hat.</div> <div class="fr">Affectation qui n’a pas été guérie, mais dont
+	 * le traitement n’est plus poursuivi. Cette valeur peut par exemple être
+	 * utilisée si le patient a interrompu un traitement contre l’avis du
+	 * médecin.</div>
 	 */
 	ABORTED("aborted", "aborted");
 	public static final String ACTIVE_CODE = "active";
@@ -50,8 +51,8 @@ public enum ProblemConcernStatusCode {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ProblemConcernStatusCode getEnum(String code) {
@@ -69,8 +70,8 @@ public enum ProblemConcernStatusCode {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -91,7 +92,7 @@ public enum ProblemConcernStatusCode {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -108,16 +109,16 @@ public enum ProblemConcernStatusCode {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ProblemConcernStatusCode(String code, String displayName) {
 		this.code = code;
@@ -146,8 +147,8 @@ public enum ProblemConcernStatusCode {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

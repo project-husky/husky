@@ -72,8 +72,9 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 */
 	PATIENT("40007", "Patient"),
 	/**
-	 * <div class="de">Pflegefachperson</div> <div class="fr">Infirmier/ère</div>
-	 * <div class="it">Professionista della salute</div>
+	 * <div class="de">Pflegefachperson</div>
+	 * <div class="fr">Infirmier/ère</div> <div class="it">Professionista della
+	 * salute</div>
 	 */
 	PFLEGEFACHPERSON("40008", "Pflegefachperson"),
 	/**
@@ -165,8 +166,8 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	public static final String PSYCHOLOGE_CODE = "40009";
 
 	/**
-	 * <div class="de">Code für Sozialdienst</div> <div class="fr">Code de Service
-	 * social</div> <div class="it">Code per Servizio sociale</div>
+	 * <div class="de">Code für Sozialdienst</div> <div class="fr">Code de
+	 * Service social</div> <div class="it">Code per Servizio sociale</div>
 	 */
 	public static final String SOZIALDIENST_CODE = "40010";
 
@@ -205,8 +206,8 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AuthorRole getEnum(String code) {
@@ -224,8 +225,8 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -246,7 +247,7 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -266,22 +267,22 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private AuthorRole(String code, String displayName) {
 		this.code = code;
@@ -310,7 +311,8 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -325,8 +327,8 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

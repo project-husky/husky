@@ -30,7 +30,8 @@ public class ObservationMediaEntryTest extends TestUtils {
 		// ObservationMediaEntry and write it to the disc
 		final InputStream is = this.getClass().getResourceAsStream("/cda/vacDoc_Test2.xml");
 
-		final OutputStream os = new FileOutputStream(File.createTempFile("ObservationMediaTest", ".xml"));
+		final OutputStream os = new FileOutputStream(
+				File.createTempFile("ObservationMediaTest", ".xml"));
 
 		try {
 			o.setObject(is, LabObservationMediaMimeType.BMP_IMAGE);

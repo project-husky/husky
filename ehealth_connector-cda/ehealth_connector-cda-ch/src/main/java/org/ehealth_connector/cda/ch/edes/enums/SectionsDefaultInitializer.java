@@ -137,9 +137,9 @@ public class SectionsDefaultInitializer {
 		observation.setNegationInd(false);
 
 		observation.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 
 		observation.getIds().add(getNullFlavorIi());
 		observation.setCode(getNullFlavorCd());
@@ -165,7 +165,7 @@ public class SectionsDefaultInitializer {
 		observation.setClassCode(ActClassObservation.OBS);
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.13.3.1", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.13.3.1", "").getIi());
 		observation.setCode(getNullFlavorCd());
 		observation.getIds().add(getNullFlavorIi());
 		observation.setText(getTodoText());
@@ -194,11 +194,11 @@ public class SectionsDefaultInitializer {
 		observation.setNegationInd(false);
 
 		observation.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 		observation.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.6", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.6", "").getIi());
 
 		observation.getIds().add(getNullFlavorIi());
 		final Code code = new Code("2.16.840.1.113883.5.4", "OINT", "ObservationIntoleranceType",
@@ -228,9 +228,9 @@ public class SectionsDefaultInitializer {
 		observation.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		observation.setNegationInd(false);
 		observation.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.28", "").getIi());
 		observation.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.5", "").getIi());
 		observation.setCode(getNullFlavorCd());
 		observation.getIds().add(getNullFlavorIi());
 		observation.setText(getTodoText());
@@ -246,7 +246,7 @@ public class SectionsDefaultInitializer {
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.INT);
 		act.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.2", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.2", "").getIi());
 		act.setCode(getNullFlavorCd());
 		act.getIds().add(getNullFlavorIi());
 		act.setText(getTodoText());
@@ -264,15 +264,15 @@ public class SectionsDefaultInitializer {
 		administration.setNegationInd(false);
 
 		administration.getTemplateIds()
-		.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
+				.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.12", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.12", "").getIi());
 
 		administration.getIds().add(getNullFlavorIi());
 		final Code code = new Code("2.16.840.1.113883.5.4", "IMMUNIZ");
@@ -290,7 +290,7 @@ public class SectionsDefaultInitializer {
 		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
 		final ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
 		product.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
 		product.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.53", "").getIi());
 		product.getIds().add(getNullFlavorIi());
 		product.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
@@ -307,13 +307,13 @@ public class SectionsDefaultInitializer {
 		administration.setMoodCode(x_DocumentSubstanceMood.EVN);
 
 		administration.getTemplateIds()
-		.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
+				.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.24", "").getIi());
 		administration.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "").getIi());
 
 		administration.getIds().add(getNullFlavorIi());
 		final Code code = new Code("2.16.840.1.113883.5.4", "DRUG", "Medikamentöse Therapie");
@@ -330,7 +330,7 @@ public class SectionsDefaultInitializer {
 		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
 		final ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
 		product.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.2", "").getIi());
 		product.getTemplateIds().add(new Identificator("2.16.840.1.113883.10.20.1.53", "").getIi());
 		product.getIds().add(getNullFlavorIi());
 		product.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
@@ -345,7 +345,7 @@ public class SectionsDefaultInitializer {
 		act.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		act.setMoodCode(x_DocumentActMood.EVN);
 		act.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.1", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.1.10.4.1", "").getIi());
 		act.setCode(getNullFlavorCd());
 		act.getIds().add(getNullFlavorIi());
 		act.setText(getTodoText());
@@ -359,9 +359,9 @@ public class SectionsDefaultInitializer {
 		procedure.setClassCode(ActClass.PROC);
 		procedure.setMoodCode(x_DocumentProcedureMood.EVN);
 		procedure.getTemplateIds()
-		.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.19", "").getIi());
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.19", "").getIi());
 		procedure.getTemplateIds()
-		.add(new Identificator("2.16.840.1.113883.10.20.1.29", "").getIi());
+				.add(new Identificator("2.16.840.1.113883.10.20.1.29", "").getIi());
 		procedure.setCode(getNullFlavorCd());
 		procedure.getIds().add(getNullFlavorIi());
 		procedure.setText(getTodoText());

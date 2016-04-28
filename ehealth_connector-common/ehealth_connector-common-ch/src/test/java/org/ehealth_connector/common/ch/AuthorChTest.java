@@ -73,6 +73,14 @@ public class AuthorChTest {
 
 	private String testZip_1;
 
+	private boolean isEqual(Identificator i1, Identificator i2) {
+		if (!i1.getRoot().equals(i2.getRoot()))
+			return false;
+		if (!i1.getExtension().equals(i2.getExtension()))
+			return false;
+		return true;
+	}
+
 	/**
 	 * Method implementing
 	 *
@@ -120,7 +128,8 @@ public class AuthorChTest {
 		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
 
 		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
-		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b.getSpecialityEnum());
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
+				b.getSpecialityEnum());
 	}
 
 	@Test
@@ -133,7 +142,8 @@ public class AuthorChTest {
 
 		assertTrue(AbstractTestHelper.isEqual(testIdentificator2, b1.getIds().get(0)));
 		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b1.getRoleFunction().getCode());
-		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG, b1.getSpecialityEnum());
+		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
+				b1.getSpecialityEnum());
 
 		final AuthorCh b2 = new AuthorCh();
 		b2.addId(testIdentificator1);
@@ -164,13 +174,5 @@ public class AuthorChTest {
 		assertFalse(autCh.getIds().isEmpty());
 		assertEquals(testIdentificator1, autCh.getIds().get(0));
 		assertEquals(testName1.getFamilyName(), autCh.getName().getFamilyName());
-	}
-
-	private boolean isEqual(Identificator i1, Identificator i2) {
-		if (!i1.getRoot().equals(i2.getRoot()))
-			return false;
-		if (!i1.getExtension().equals(i2.getExtension()))
-			return false;
-		return true;
 	}
 }

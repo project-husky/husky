@@ -46,7 +46,7 @@ public abstract class AbstractCodedResults {
 	 * Instantiates a new Simple Observation
 	 *
 	 * @param so
-	 *          the simple observation
+	 *            the simple observation
 	 *
 	 */
 	public AbstractCodedResults(SimpleObservation so) {
@@ -63,7 +63,7 @@ public abstract class AbstractCodedResults {
 	 * Adds a Simple Observation
 	 *
 	 * @param so
-	 *          the simple observation
+	 *            the simple observation
 	 */
 	public void addSimpleObservation(SimpleObservation so) {
 		crs.addObservation(so);
@@ -78,6 +78,8 @@ public abstract class AbstractCodedResults {
 	public CodedResultsSection copyMdhtCodedResultsSection() {
 		return EcoreUtil.copy(crs);
 	}
+
+	protected abstract ProcedureEntry createEmptyProcedureEntry();
 
 	/**
 	 * Method to get
@@ -101,7 +103,7 @@ public abstract class AbstractCodedResults {
 	 * Method to set
 	 *
 	 * @param crs
-	 *          the crs to set
+	 *            the crs to set
 	 */
 	public void setCrs(CodedResultsSection crs) {
 		this.crs = crs;
@@ -111,11 +113,9 @@ public abstract class AbstractCodedResults {
 	 * Method to set
 	 *
 	 * @param mIi
-	 *          the mIi to set
+	 *            the mIi to set
 	 */
 	public void setIi(II mIi) {
 		this.mIi = mIi;
 	}
-
-	protected abstract ProcedureEntry createEmptyProcedureEntry();
 }

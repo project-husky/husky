@@ -122,9 +122,10 @@ public class Configurator {
 		} catch (final IOException e) {
 			throw new ConfigurationException(e);
 		}
-		// This changes the current dir and therefore relative paths will no longer work afterwards!!
-//		log.info("Setting application base directory to '{}'", homeDir);
-//		System.setProperty("user.dir", homeDir.getPath());
+		// This changes the current dir and therefore relative paths will no
+		// longer work afterwards!!
+		// log.info("Setting application base directory to '{}'", homeDir);
+		// System.setProperty("user.dir", homeDir.getPath());
 	}
 
 }

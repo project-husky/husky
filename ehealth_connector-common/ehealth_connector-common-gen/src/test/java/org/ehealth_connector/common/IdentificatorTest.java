@@ -38,6 +38,35 @@ public class IdentificatorTest {
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#convertToIdentificator(org.ehealth_connector.common.Code)}
+	 * .
+	 */
+	@Test
+	public void testConvertToIdentificator() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#getIdentificator(java.util.List, java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testGetIdentificator() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Identificator#getIi()}.
+	 */
+	@Test
+	public void testGetIi() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.common.Identificator#Identificator(org.ehealth_connector.common.enums.CodeSystems, java.lang.String)}
 	 * .
 	 */
@@ -63,35 +92,6 @@ public class IdentificatorTest {
 	 */
 	@Test
 	public void testIdentificatorStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#convertToIdentificator(org.ehealth_connector.common.Code)}
-	 * .
-	 */
-	@Test
-	public void testConvertToIdentificator() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#getIdentificator(java.util.List, java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testGetIdentificator() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Identificator#getIi()}.
-	 */
-	@Test
-	public void testGetIi() {
 		fail("Not yet implemented");
 	}
 

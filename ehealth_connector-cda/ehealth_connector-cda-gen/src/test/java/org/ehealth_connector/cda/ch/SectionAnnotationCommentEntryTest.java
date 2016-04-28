@@ -54,7 +54,8 @@ public class SectionAnnotationCommentEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("act/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']");
+		XPathExpression expr = xpath
+				.compile("act/templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

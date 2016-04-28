@@ -135,6 +135,26 @@ public class SpecimenCollectionEntry
 	}
 
 	/**
+	 * Adds the participant (typically, a laboratory).
+	 *
+	 * @param id
+	 *            the id
+	 */
+	private void addParticipant(II id) {
+		final PlayingEntity pl = new PlayingEntity();
+		final ParticipantRole pr = new ParticipantRole();
+		final Participant participant = new Participant();
+
+		// Fixed Loinc Code for Playing Entity
+		pl.setCode(new Code("2.16.756.5.30.2.1.1.10", "LOINC"));
+		pr.setPlayingEntity(pl);
+		pr.getMdht().getIds().add(id);
+		participant.setParticipantRole(pr);
+
+		addParticipant(participant);
+	}
+
+	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.MdhtFacade#getTextReference()
@@ -168,25 +188,5 @@ public class SpecimenCollectionEntry
 				textReference = "#" + textReference;
 			this.getMdht().setText(Util.createReference(textReference));
 		}
-	}
-
-	/**
-	 * Adds the participant (typically, a laboratory).
-	 *
-	 * @param id
-	 *            the id
-	 */
-	private void addParticipant(II id) {
-		final PlayingEntity pl = new PlayingEntity();
-		final ParticipantRole pr = new ParticipantRole();
-		final Participant participant = new Participant();
-
-		// Fixed Loinc Code for Playing Entity
-		pl.setCode(new Code("2.16.756.5.30.2.1.1.10", "LOINC"));
-		pr.setPlayingEntity(pl);
-		pr.getMdht().getIds().add(id);
-		participant.setParticipantRole(pr);
-
-		addParticipant(participant);
 	}
 }

@@ -70,6 +70,20 @@ public class CodeTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testCodeSystemCode() {
+		final Code actStatus = new Code(CodeSystems.ActStatus, "1");
+		final Code gtinCode = new Code(CodeSystems.GTIN, "2");
+
+		assertEquals(actStatus.getCodeSystem(), CodeSystems.ActStatus.getCodeSystemId());
+		assertEquals(actStatus.getCodeSystemName(), CodeSystems.ActStatus.getCodeSystemName());
+		assertEquals(actStatus.getCode(), "1");
+
+		assertEquals(gtinCode.getCodeSystem(), CodeSystems.GTIN.getCodeSystemId());
+		assertEquals(gtinCode.getCodeSystemName(), CodeSystems.GTIN.getCodeSystemName());
+		assertEquals(gtinCode.getCode(), "2");
+	}
+
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.common.Code#setCD(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
@@ -122,20 +136,6 @@ public class CodeTest {
 	@Test
 	public void testSetNullFlavor() {
 		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCodeSystemCode() {
-		final Code actStatus = new Code(CodeSystems.ActStatus, "1");
-		final Code gtinCode = new Code(CodeSystems.GTIN, "2");
-
-		assertEquals(actStatus.getCodeSystem(), CodeSystems.ActStatus.getCodeSystemId());
-		assertEquals(actStatus.getCodeSystemName(), CodeSystems.ActStatus.getCodeSystemName());
-		assertEquals(actStatus.getCode(), "1");
-
-		assertEquals(gtinCode.getCodeSystem(), CodeSystems.GTIN.getCodeSystemId());
-		assertEquals(gtinCode.getCodeSystemName(), CodeSystems.GTIN.getCodeSystemName());
-		assertEquals(gtinCode.getCode(), "2");
 	}
 
 }

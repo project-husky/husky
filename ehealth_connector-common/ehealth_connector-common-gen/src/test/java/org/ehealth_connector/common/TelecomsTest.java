@@ -53,17 +53,6 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}
-	 * .
-	 */
-	@Test
-	@Ignore
-	public void testTelecomsEListOfTEL() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.common.Telecoms#addEMail(java.lang.String, org.ehealth_connector.common.enums.AddressUse)}
 	 * .
 	 */
@@ -123,6 +112,17 @@ public class TelecomsTest {
 		t.addWebsite(testWebsite2, AddressUse.PRIVATE);
 		assertTrue(t.getWebsites().containsKey(testWebsite1));
 		assertTrue(t.getWebsites().containsValue(AddressUse.PRIVATE));
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}
+	 * .
+	 */
+	@Test
+	@Ignore
+	public void testTelecomsEListOfTEL() {
+		fail("Not yet implemented");
 	}
 
 }

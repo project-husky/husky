@@ -25,8 +25,8 @@ import org.openhealthtools.mdht.uml.cda.Observation;
  * is independent of the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implemting the facade to it, extending
- *          an observation (Act)
+ *            the model type to provide for implemting the facade to it,
+ *            extending an observation (Act)
  */
 public class MdhtEntryObservationFacade<E extends Observation> extends MdhtFacade<E> {
 
@@ -34,7 +34,7 @@ public class MdhtEntryObservationFacade<E extends Observation> extends MdhtFacad
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtEntryObservationFacade(E mdht) {
 		super(mdht, null, null);
@@ -47,7 +47,8 @@ public class MdhtEntryObservationFacade<E extends Observation> extends MdhtFacad
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -57,7 +58,7 @@ public class MdhtEntryObservationFacade<E extends Observation> extends MdhtFacad
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference
+	 *            the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

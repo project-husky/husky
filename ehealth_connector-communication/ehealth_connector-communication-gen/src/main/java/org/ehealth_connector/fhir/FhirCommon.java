@@ -578,6 +578,10 @@ public class FhirCommon {
 	 */
 	public static final String urnUseAsVitalSignsOrganizer = "http://www.ehealth-connector.org/fhir-extensions/useAsVitalSignsOrganizer";
 
+	private static String addUriPrefix(String codeSystem) {
+		return "urn:oid:" + codeSystem;
+	}
+
 	public static CodeableConceptDt ehcCodeToFhirCode(Code code) {
 		CodeableConceptDt cc = new CodeableConceptDt();
 		CodingDt fCode;
@@ -1514,9 +1518,5 @@ public class FhirCommon {
 			retVal = value;
 		}
 		return retVal;
-	}
-
-	private static String addUriPrefix(String codeSystem) {
-		return "urn:oid:" + codeSystem;
 	}
 }

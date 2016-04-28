@@ -240,7 +240,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 
 	/**
 	 * Gets the Loinc code of the element
-	 * 
+	 *
 	 * @return the Loinc code
 	 */
 	public String getLoincCode() {

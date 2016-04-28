@@ -199,7 +199,8 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	public void testTypeCode() {
-		final Code tc = new Code("2.16.840.1.113883.6.1", "34133-9", "Summarization of Episode Note");
+		final Code tc = new Code("2.16.840.1.113883.6.1", "34133-9",
+				"Summarization of Episode Note");
 		d.setTypeCode(tc); // Can
 		// be
 		// extracted

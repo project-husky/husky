@@ -37,7 +37,7 @@ public abstract class AbstractExternalReferenceEntry
 	 * Default constructor to instanciate the object
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public AbstractExternalReferenceEntry(Reference mdht) {
 		super(mdht);
@@ -47,11 +47,11 @@ public abstract class AbstractExternalReferenceEntry
 	 * Default constructor to instanciate the object
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 * @param templateIdRoot
-	 *          the id root
+	 *            the id root
 	 * @param templateIdExtension
-	 *          the id extension
+	 *            the id extension
 	 */
 	public AbstractExternalReferenceEntry(Reference mdht, String templateIdRoot,
 			String templateIdExtension) {
@@ -107,7 +107,7 @@ public abstract class AbstractExternalReferenceEntry
 	 * Sets the external document entry.
 	 *
 	 * @param externalDocumentEntry
-	 *          the new external document entry
+	 *            the new external document entry
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		if (externalDocumentEntry != null) {

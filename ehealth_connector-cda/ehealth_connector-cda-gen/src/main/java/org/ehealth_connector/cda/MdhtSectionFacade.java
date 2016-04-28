@@ -26,8 +26,8 @@ import org.openhealthtools.mdht.uml.cda.Section;
  * is independent of the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implemting the facade to it, extending
- *          an Act
+ *            the model type to provide for implemting the facade to it,
+ *            extending an Act
  */
 public class MdhtSectionFacade<E extends Section> extends MdhtFacade<E> {
 
@@ -35,7 +35,7 @@ public class MdhtSectionFacade<E extends Section> extends MdhtFacade<E> {
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtSectionFacade(E mdht) {
 		super(mdht, null, null);
@@ -45,7 +45,7 @@ public class MdhtSectionFacade<E extends Section> extends MdhtFacade<E> {
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtSectionFacade(E mdht, String templateIdRoot, String templateIdExtension) {
 		super(mdht, templateIdRoot, templateIdExtension);

@@ -29,8 +29,8 @@ public enum StandardCdaBodySelections {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static StandardCdaBodySelections getEnum(String code) {
@@ -49,7 +49,7 @@ public enum StandardCdaBodySelections {
 	 *
 	 *
 	 * @param enumName
-	 *          <div class="de"> enumName</div>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -70,8 +70,8 @@ public enum StandardCdaBodySelections {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -91,24 +91,24 @@ public enum StandardCdaBodySelections {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with given code, displayName,
-	 * specialitySectionCode, privacyFilter, validFrom and validTo
+	 * <div class="en">Instantiates this Enum Object with given code,
+	 * displayName, specialitySectionCode, privacyFilter, validFrom and validTo
 	 * parameters</div> <div class="de">Instantiiert dieses Enum Object mittels
-	 * der code, displayName, specialitySectionCode, privacyFilter, validFrom und
-	 * validTo Parameter</div>
+	 * der code, displayName, specialitySectionCode, privacyFilter, validFrom
+	 * und validTo Parameter</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="en">the code</div>
+	 *            <br>
+	 *            <div class="en">the code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="en">the display name</div>
+	 *            <br>
+	 *            <div class="en">the display name</div>
 	 */
 	private StandardCdaBodySelections(String code, String displayName) {
 		this.code = code;
@@ -151,8 +151,8 @@ public enum StandardCdaBodySelections {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

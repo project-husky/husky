@@ -45,7 +45,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Instantiates a new master patient index query response.
-	 * 
+	 *
 	 * @param mpiQueryResponse
 	 *            the mpi query response
 	 */
@@ -67,7 +67,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Gets the current numbers.
-	 * 
+	 *
 	 * @return the current numbers
 	 */
 	public int getCurrentNumbers() {
@@ -76,7 +76,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Gets the patients from the query.
-	 * 
+	 *
 	 * @return the patients
 	 */
 	public List<Patient> getPatients() {
@@ -85,7 +85,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Gets the remaining numbers of patients in the query.
-	 * 
+	 *
 	 * @return the remaining numbers
 	 */
 	public int getRemainingNumbers() {
@@ -94,7 +94,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Query state
-	 * 
+	 *
 	 * @return true if successful
 	 */
 	public boolean getSuccess() {
@@ -103,7 +103,7 @@ public class MasterPatientIndexQueryResponse {
 
 	/**
 	 * Gets the total numbers of patients from the query.
-	 * 
+	 *
 	 * @return the total numbers
 	 */
 	public int getTotalNumbers() {

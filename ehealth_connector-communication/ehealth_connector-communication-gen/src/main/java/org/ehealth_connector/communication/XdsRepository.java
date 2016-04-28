@@ -32,7 +32,7 @@ public class XdsRepository {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param id
 	 *            repository ID
 	 * @param uri
@@ -44,7 +44,7 @@ public class XdsRepository {
 
 	/**
 	 * Gets the repository ID
-	 * 
+	 *
 	 * @return the ID
 	 */
 	public String getId() {
@@ -53,7 +53,7 @@ public class XdsRepository {
 
 	/**
 	 * Gets the repository URI
-	 * 
+	 *
 	 * @return the URI
 	 */
 	public URI getUri() {
@@ -62,7 +62,7 @@ public class XdsRepository {
 
 	/**
 	 * Set the necessary connection details for a repository.
-	 * 
+	 *
 	 * @param id
 	 *            repository ID
 	 * @param uri

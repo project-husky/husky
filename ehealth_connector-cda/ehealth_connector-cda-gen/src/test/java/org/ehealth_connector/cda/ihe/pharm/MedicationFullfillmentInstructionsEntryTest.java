@@ -40,7 +40,8 @@ public class MedicationFullfillmentInstructionsEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.3.1']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.3.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -48,7 +49,8 @@ public class MedicationFullfillmentInstructionsEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//code[@code='FINSTRUCT' and @codeSystem='1.3.6.1.4.1.19376.1.5.3.2']");
+		expr = xpath
+				.compile("//code[@code='FINSTRUCT' and @codeSystem='1.3.6.1.4.1.19376.1.5.3.2']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

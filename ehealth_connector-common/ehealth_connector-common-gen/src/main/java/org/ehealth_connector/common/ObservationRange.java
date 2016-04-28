@@ -61,6 +61,15 @@ public class ObservationRange {
 	}
 
 	/**
+	 * Method to get
+	 *
+	 * @return the obsR
+	 */
+	public org.openhealthtools.mdht.uml.cda.ObservationRange getObsR() {
+		return mObsR;
+	}
+
+	/**
 	 * Gets the value.
 	 *
 	 * @return the value
@@ -83,6 +92,16 @@ public class ObservationRange {
 	}
 
 	/**
+	 * Method to set
+	 *
+	 * @param obsR
+	 *            the obsR to set
+	 */
+	public void setObsR(org.openhealthtools.mdht.uml.cda.ObservationRange obsR) {
+		mObsR = obsR;
+	}
+
+	/**
 	 * Sets the value.
 	 *
 	 * @param value
@@ -90,25 +109,6 @@ public class ObservationRange {
 	 */
 	public void setValue(Value value) {
 		mObsR.setValue(value.getValue());
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the obsR
-	 */
-	public org.openhealthtools.mdht.uml.cda.ObservationRange getObsR() {
-		return mObsR;
-	}
-
-	/**
-	 * Method to set
-	 * 
-	 * @param obsR
-	 *            the obsR to set
-	 */
-	public void setObsR(org.openhealthtools.mdht.uml.cda.ObservationRange obsR) {
-		mObsR = obsR;
 	}
 
 }

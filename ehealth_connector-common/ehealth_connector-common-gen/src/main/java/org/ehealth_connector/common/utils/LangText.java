@@ -43,7 +43,7 @@ public class LangText {
 
 	/**
 	 * Returns the language of the text
-	 * 
+	 *
 	 * @return the langCode the language
 	 */
 	public LanguageCode getLangCode() {
@@ -52,7 +52,7 @@ public class LangText {
 
 	/**
 	 * Returns the text
-	 * 
+	 *
 	 * @return the langText the text
 	 */
 	public String getLangText() {

@@ -52,7 +52,7 @@ public enum MedicationsSpecialConditions {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static MedicationsSpecialConditions getEnum(String code) {
@@ -77,11 +77,11 @@ public enum MedicationsSpecialConditions {
 	 * Instantiates a new medications special conditions.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private MedicationsSpecialConditions(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -93,7 +93,7 @@ public enum MedicationsSpecialConditions {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

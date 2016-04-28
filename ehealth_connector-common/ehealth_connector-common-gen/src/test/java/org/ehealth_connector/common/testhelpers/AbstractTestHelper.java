@@ -160,7 +160,8 @@ public abstract class AbstractTestHelper {
 	public static boolean isEqual(Patient p1, Patient p2) {
 		if (!isEqual(p1.getName(), p2.getName()))
 			return false;
-		if (!isEqual(p1.getAdministrativeGenderCode().getCode(), p2.getAdministrativeGenderCode().getCode()))
+		if (!isEqual(p1.getAdministrativeGenderCode().getCode(),
+				p2.getAdministrativeGenderCode().getCode()))
 			return false;
 		if (p1.getBirthday().getTime() != p1.getBirthday().getTime())
 			return false;

@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * The Class SoasInfoEntry.
  */
 public class SoasInfoEntry
-extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry> {
+		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry> {
 
 	/** The Constant CENTER_SPECIFIC_AVOID_CODE. */
 	public static final Code CENTER_SPECIFIC_AVOID_CODE = new Code("2.16.756.5.30.1.129.1.1.2",

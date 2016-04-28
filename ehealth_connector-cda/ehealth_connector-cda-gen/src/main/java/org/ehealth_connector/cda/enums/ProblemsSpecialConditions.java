@@ -26,8 +26,8 @@ public enum ProblemsSpecialConditions {
 	 */
 	HISTORY_OF_PAST_ILLNESS_UNKNOWN("396782006", "History of Past Illness unknown"),
 	/**
-	 * <div class="de">Keine Familienanamnese bekannt</div> <div class="fr">Aucun
-	 * antécédent familial connu</div>
+	 * <div class="de">Keine Familienanamnese bekannt</div>
+	 * <div class="fr">Aucun antécédent familial connu</div>
 	 */
 	FAMILY_HISTORY_UNKNOWN("407559004", "Family History Unknown");
 	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE = "160243008";
@@ -43,8 +43,8 @@ public enum ProblemsSpecialConditions {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static ProblemsSpecialConditions getEnum(String code) {
@@ -62,8 +62,8 @@ public enum ProblemsSpecialConditions {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -84,7 +84,7 @@ public enum ProblemsSpecialConditions {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -101,16 +101,16 @@ public enum ProblemsSpecialConditions {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private ProblemsSpecialConditions(String code, String displayName) {
 		this.code = code;
@@ -154,8 +154,8 @@ public enum ProblemsSpecialConditions {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

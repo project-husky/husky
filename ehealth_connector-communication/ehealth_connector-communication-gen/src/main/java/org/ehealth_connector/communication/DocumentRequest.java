@@ -30,12 +30,13 @@ public class DocumentRequest {
 	 * Standard constructor.
 	 */
 	public DocumentRequest() {
-		this.ohtDocReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE.createDocumentRequestType();
+		this.ohtDocReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
+				.createDocumentRequestType();
 	}
 
 	/**
 	 * Minimal constructor.
-	 * 
+	 *
 	 * @param repositoryId
 	 *            the ID of the repository. Typically you will find this id in
 	 *            the object that you get after using
@@ -63,7 +64,7 @@ public class DocumentRequest {
 
 	/**
 	 * Constructor with homeCommunityID for the IHE XCA profile.
-	 * 
+	 *
 	 * @param repositoryId
 	 *            the ID of the repository. Typically you will find this id in
 	 *            the object that you get after using
@@ -91,7 +92,8 @@ public class DocumentRequest {
 	 *            XDSQueryResponseType
 	 *            .getDocumentEntryResponses().getHomeCommunityId())
 	 */
-	public DocumentRequest(String repositoryId, URI repositoryUri, String documentId, String homeCommunityId) {
+	public DocumentRequest(String repositoryId, URI repositoryUri, String documentId,
+			String homeCommunityId) {
 		this();
 		setRepositoryId(repositoryId);
 		setRepositoryUri(repositoryUri);
@@ -101,7 +103,7 @@ public class DocumentRequest {
 
 	/**
 	 * Gets the document Id.
-	 * 
+	 *
 	 * @return the document Id
 	 */
 	public String getDocumentId() {
@@ -110,7 +112,7 @@ public class DocumentRequest {
 
 	/**
 	 * Gets the home community id
-	 * 
+	 *
 	 * @return the Id of the community
 	 */
 	public String getHomeCommunityId() {
@@ -119,7 +121,7 @@ public class DocumentRequest {
 
 	/**
 	 * Gets the OHT DocumentRequestType, which is wrapped by this class
-	 * 
+	 *
 	 * @return the OHT DocumentRequestType
 	 */
 	public DocumentRequestType getOhtDocumentRequestType() {
@@ -128,7 +130,7 @@ public class DocumentRequest {
 
 	/**
 	 * Gets the repository id.
-	 * 
+	 *
 	 * @return the repositoryId
 	 */
 	public String getRepositoryId() {
@@ -137,7 +139,7 @@ public class DocumentRequest {
 
 	/**
 	 * Gets the repository URI.
-	 * 
+	 *
 	 * @return repositoryURI
 	 */
 	public URI getRepositoryUri() {
@@ -146,7 +148,7 @@ public class DocumentRequest {
 
 	/**
 	 * Sets the document Id.
-	 * 
+	 *
 	 * @param documentId
 	 *            Typically you will find this id in the object that you get
 	 *            after using ConvenienceCommunication.queryForDocuments. (Using
@@ -160,7 +162,7 @@ public class DocumentRequest {
 
 	/**
 	 * Sets the home community Id.
-	 * 
+	 *
 	 * @param homeCommunityId
 	 *            Typically you will find this id in the object that you get
 	 *            after using ConvenienceCommunication.queryForDocuments. (Using
@@ -173,7 +175,7 @@ public class DocumentRequest {
 
 	/**
 	 * Sets the repository id.
-	 * 
+	 *
 	 * @param repositoryId
 	 *            Typically you will find this id in the object that you get
 	 *            after using ConvenienceCommunication.queryForDocuments. (Using
@@ -187,7 +189,7 @@ public class DocumentRequest {
 
 	/**
 	 * Sets the repository URI.
-	 * 
+	 *
 	 * @param repositoryUri
 	 *            Typically you will find this id in the object that you get
 	 *            after using ConvenienceCommunication.queryForDocuments. (Using

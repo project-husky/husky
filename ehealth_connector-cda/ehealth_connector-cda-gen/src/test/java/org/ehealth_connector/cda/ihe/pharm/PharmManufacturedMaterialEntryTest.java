@@ -186,7 +186,8 @@ public class PharmManufacturedMaterialEntryTest {
 		assertTrue(boas.toString().contains("pharm:"));
 	}
 
-	// <pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
+	// <pharm:ingredient classCode="ACTI"
+	// xmlns:pharm="urn:ihe:pharm:medication">
 	// <pharm:quantity>
 	// <pharm:numerator unit="mg" value="1000"
 	// xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

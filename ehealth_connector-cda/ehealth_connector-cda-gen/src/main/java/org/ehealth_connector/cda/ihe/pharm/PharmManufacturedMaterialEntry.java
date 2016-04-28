@@ -105,6 +105,18 @@ public class PharmManufacturedMaterialEntry extends
 	}
 
 	/**
+	 * Gets the ingredient.
+	 *
+	 * @return the ingredient
+	 */
+	private PharmSubstance getIngredient() {
+		if ((this.getMdht() != null) && (this.getMdht().getIngredient() != null)) {
+			return this.getMdht().getIngredient().getIngredient();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the ingredient code.
 	 *
 	 * @return the ingredient code
@@ -166,6 +178,18 @@ public class PharmManufacturedMaterialEntry extends
 	public String getName() {
 		if (this.getMdht().getName() != null) {
 			return this.getMdht().getName().getText();
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the packaged medicine.
+	 *
+	 * @return the packaged medicine
+	 */
+	private PharmPackagedMedicine getPackagedMedicine() {
+		if ((this.getMdht() != null) && (this.getMdht().getAsContent() != null)) {
+			return getMdht().getAsContent().getAsContainerPackagedMedicine();
 		}
 		return null;
 	}
@@ -236,6 +260,42 @@ public class PharmManufacturedMaterialEntry extends
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Inits the class object.
+	 */
+	private void init() {
+		this.getMdht().setClassCode(EntityClassManufacturedMaterial.MMAT);
+		this.getMdht().setDeterminerCode(EntityDeterminerDetermined.KIND);
+
+		if (this.getMdht().getAsContent() == null) {
+			final PharmAsContent pharmAsContent = CDAFactory.eINSTANCE.createPharmAsContent();
+			pharmAsContent.setClassCode(EntityClassManufacturedMaterial.CONT);
+			this.getMdht().setAsContent(pharmAsContent);
+		}
+
+		if (this.getMdht().getAsContent().getAsContainerPackagedMedicine() == null) {
+			final PharmPackagedMedicine packagedMedicine = CDAFactory.eINSTANCE
+					.createPharmPackagedMedicine();
+			packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
+			packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
+			this.getMdht().getAsContent().setAsContainerPackagedMedicine(packagedMedicine);
+		}
+
+		if (this.getMdht().getIngredient() == null) {
+			final PharmIngredient ingredient = CDAFactory.eINSTANCE.createPharmIngredient();
+			ingredient.setClassCode(RoleClass.ACTI);
+			this.getMdht().setIngredient(ingredient);
+		}
+
+		if (this.getMdht().getIngredient().getIngredient() == null) {
+			final PharmSubstance substance = CDAFactory.eINSTANCE.createPharmSubstance();
+			substance.setClassCode(EntityClassManufacturedMaterial.MMAT);
+			substance.setDeterminerCode(EntityDeterminer.KIND);
+			this.getMdht().getIngredient().setIngredient(substance);
+		}
+
 	}
 
 	/**
@@ -426,66 +486,6 @@ public class PharmManufacturedMaterialEntry extends
 			ce.setNullFlavor(NullFlavor.UNK);
 		}
 		this.getMdht().setCode(ce);
-	}
-
-	/**
-	 * Gets the ingredient.
-	 *
-	 * @return the ingredient
-	 */
-	private PharmSubstance getIngredient() {
-		if ((this.getMdht() != null) && (this.getMdht().getIngredient() != null)) {
-			return this.getMdht().getIngredient().getIngredient();
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the packaged medicine.
-	 *
-	 * @return the packaged medicine
-	 */
-	private PharmPackagedMedicine getPackagedMedicine() {
-		if ((this.getMdht() != null) && (this.getMdht().getAsContent() != null)) {
-			return getMdht().getAsContent().getAsContainerPackagedMedicine();
-		}
-		return null;
-	}
-
-	/**
-	 * Inits the class object.
-	 */
-	private void init() {
-		this.getMdht().setClassCode(EntityClassManufacturedMaterial.MMAT);
-		this.getMdht().setDeterminerCode(EntityDeterminerDetermined.KIND);
-
-		if (this.getMdht().getAsContent() == null) {
-			final PharmAsContent pharmAsContent = CDAFactory.eINSTANCE.createPharmAsContent();
-			pharmAsContent.setClassCode(EntityClassManufacturedMaterial.CONT);
-			this.getMdht().setAsContent(pharmAsContent);
-		}
-
-		if (this.getMdht().getAsContent().getAsContainerPackagedMedicine() == null) {
-			final PharmPackagedMedicine packagedMedicine = CDAFactory.eINSTANCE
-					.createPharmPackagedMedicine();
-			packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
-			packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
-			this.getMdht().getAsContent().setAsContainerPackagedMedicine(packagedMedicine);
-		}
-
-		if (this.getMdht().getIngredient() == null) {
-			final PharmIngredient ingredient = CDAFactory.eINSTANCE.createPharmIngredient();
-			ingredient.setClassCode(RoleClass.ACTI);
-			this.getMdht().setIngredient(ingredient);
-		}
-
-		if (this.getMdht().getIngredient().getIngredient() == null) {
-			final PharmSubstance substance = CDAFactory.eINSTANCE.createPharmSubstance();
-			substance.setClassCode(EntityClassManufacturedMaterial.MMAT);
-			substance.setDeterminerCode(EntityDeterminer.KIND);
-			this.getMdht().getIngredient().setIngredient(substance);
-		}
-
 	}
 
 }

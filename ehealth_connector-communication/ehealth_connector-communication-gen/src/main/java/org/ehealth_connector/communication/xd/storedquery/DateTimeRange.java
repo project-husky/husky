@@ -31,7 +31,7 @@ public class DateTimeRange {
 
 	/**
 	 * Constructs a new DateTimeRange
-	 * 
+	 *
 	 * @param name
 	 *            The XDS metadata attribute to which this DateTimeRange belongs
 	 *            to (CreationTime, ServiceStartTime, ServiceStopTime)
@@ -51,7 +51,7 @@ public class DateTimeRange {
 
 	/**
 	 * Gets the point in time where this range starts
-	 * 
+	 *
 	 * @return the starting point
 	 */
 	public Date getFrom() {
@@ -60,7 +60,7 @@ public class DateTimeRange {
 
 	/**
 	 * Gets the point in time where this range starts
-	 * 
+	 *
 	 * @return the start point
 	 */
 	public String getFromAsUsFormattedString() {
@@ -69,7 +69,7 @@ public class DateTimeRange {
 
 	/**
 	 * Gets the wrapped OHT DateTimeRange Object
-	 * 
+	 *
 	 * @return the DateTimeRange
 	 */
 	public org.openhealthtools.ihe.xds.consumer.query.DateTimeRange getOhtDateTimeRange() {
@@ -78,7 +78,7 @@ public class DateTimeRange {
 
 	/**
 	 * Gets the point in time where this range ends
-	 * 
+	 *
 	 * @return the end point
 	 */
 	public Date getTo() {
@@ -87,7 +87,7 @@ public class DateTimeRange {
 
 	/**
 	 * Gets the point in time where this range ends
-	 * 
+	 *
 	 * @return the end point
 	 */
 	public String getToAsUsFormattedString() {
@@ -96,7 +96,7 @@ public class DateTimeRange {
 
 	/**
 	 * Sets the point in time where this range starts
-	 * 
+	 *
 	 * @param from
 	 *            the starting point
 	 */
@@ -106,7 +106,7 @@ public class DateTimeRange {
 
 	/**
 	 * Sets the point in time where this range ends
-	 * 
+	 *
 	 * @param to
 	 *            the end point
 	 */

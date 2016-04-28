@@ -73,9 +73,9 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 */
 	INSTITUT_FÜR_MEDIZINISCHE_DIAGNOSTIK("20001", "Institut für medizinische Diagnostik"),
 	/**
-	 * <div class="de"> Notfall- / Rettungsdienste</div> <div class="fr"> Service
-	 * d'urgence et de sauvetage</div> <div class="it"> Servizio di pronto
-	 * soccorso e di salvataggio</div>
+	 * <div class="de"> Notfall- / Rettungsdienste</div>
+	 * <div class="fr"> Service d'urgence et de sauvetage</div>
+	 * <div class="it"> Servizio di pronto soccorso e di salvataggio</div>
 	 */
 	NOTFALL_RETTUNGSDIENSTE("20002", "Notfall- / Rettungsdienste"),
 	/**
@@ -133,9 +133,9 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	public static final String APOTHEKE_CODE = "20009";
 
 	/**
-	 * <div class="de">Code für Armeeärztliche Dienste</div> <div class="fr">Code
-	 * de Service sanitaire </div> <div class="it">Code per Servizio di medicina
-	 * militare</div>
+	 * <div class="de">Code für Armeeärztliche Dienste</div>
+	 * <div class="fr">Code de Service sanitaire </div> <div class="it">Code per
+	 * Servizio di medicina militare</div>
 	 */
 	public static final String ARMEEÄRZTLICHE_DIENSTE_CODE = "20006";
 
@@ -163,7 +163,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Notfall- / Rettungsdienste</div>
 	 * <div class="fr">Code de Service d'urgence et de sauvetage</div>
-	 * <div class="it">Code per Servizio di pronto soccorso e di salvataggio</div>
+	 * <div class="it">Code per Servizio di pronto soccorso e di
+	 * salvataggio</div>
 	 */
 	public static final String NOTFALL_RETTUNGSDIENSTE_CODE = "20002";
 
@@ -224,8 +225,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static HealthcareFacilityTypeCode getEnum(String code) {
@@ -243,8 +244,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -265,7 +266,7 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -285,22 +286,22 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private HealthcareFacilityTypeCode(String code, String displayName) {
 		this.code = code;
@@ -329,7 +330,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -344,8 +346,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

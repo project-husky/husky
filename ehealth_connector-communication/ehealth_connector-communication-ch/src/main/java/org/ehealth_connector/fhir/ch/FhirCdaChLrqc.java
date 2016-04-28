@@ -473,42 +473,6 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en"> Gets an eHC Patient object from the given FHIR bundle.
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public Identificator getPatientLrqc(Bundle bundle) {
-		Patient fhirPatient = null;
-
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Patient)
-				fhirPatient = (Patient) entry.getResource();
-		}
-		// Get Identifier
-		for (final IdentifierDt id : fhirPatient.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-			return new Identificator(codeSystem, id.getValue());
-		}
-		return null;
-	}
-
-	/**
-	 * Read the LrqcDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the LRQC document
-	 */
-	public LrqcDocument readLrqcDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(LrqcDocument.class, resourceString);
-	}
-
-	/**
 	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
 	 * patient demographics) from the given FHIR bundle
 	 *
@@ -833,6 +797,29 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 	}
 
 	/**
+	 * <div class="en"> Gets an eHC Patient object from the given FHIR bundle.
+	 *
+	 * @param bundle
+	 *            the FHIR bundle
+	 * @return eHC Patient object </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public Identificator getPatientLrqc(Bundle bundle) {
+		Patient fhirPatient = null;
+
+		for (final Entry entry : bundle.getEntry()) {
+			if (entry.getResource() instanceof Patient)
+				fhirPatient = (Patient) entry.getResource();
+		}
+		// Get Identifier
+		for (final IdentifierDt id : fhirPatient.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			return new Identificator(codeSystem, id.getValue());
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
 	 * bundle
 	 *
@@ -887,5 +874,18 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Read the LrqcDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the LRQC document
+	 */
+	public LrqcDocument readLrqcDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(LrqcDocument.class, resourceString);
 	}
 }

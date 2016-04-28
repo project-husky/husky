@@ -77,39 +77,39 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN("50062", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann"),
 	/**
-	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter Pflegefachmann
-	 * mit akademischem pflegefachlichem Abschluss (Bachelor) </div>
-	 * <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un Bachelor
-	 * de Science en soins infirmiers </div> <div class = "it"> Infermiere /a con
-	 * titolo accademico (Bachelor) </div>
+	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
+	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss
+	 * (Bachelor) </div> <div class = "fr"> Infirmière diplômée / Infirmier
+	 * diplômé avec un Bachelor de Science en soins infirmiers </div>
+	 * <div class = "it"> Infermiere /a con titolo accademico (Bachelor) </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR("50063", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)"),
 	/**
-	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter Pflegefachmann
-	 * mit akademischem pflegefachlichem Abschluss (Master) </div>
-	 * <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un Master
-	 * de Science en soins infirmiers </div> <div class = "it"> Infermiere / a con
-	 * titolo accademico (Master) </div>
+	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
+	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss
+	 * (Master) </div> <div class = "fr"> Infirmière diplômée / Infirmier
+	 * diplômé avec un Master de Science en soins infirmiers </div>
+	 * <div class = "it"> Infermiere / a con titolo accademico (Master) </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER("50064", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Master)"),
 	/**
-	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter Pflegefachmann
-	 * mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie
-	 * Diabetesberaterin, Stillberaterin etc. </div> <div class = "fr"> Infirmière
-	 * diplômée / Infirmier diplômé avec un cours de spécialisation postgrades et
-	 * des formation spéciale supplémentaires comme Conseiller / Conseillère aux
-	 * diabétiques, conseiller / Coonseillère en cas d ’ allaitement </div>
-	 * <div class = "it"> Infermiere / a diplomato / a con corso post - diploma di
-	 * approfondimento della materia e altre formazioni supplementari, come
-	 * consulente per il diabete, consulente per l ' allattamento al seno
-	 * ecc. </div>
+	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
+	 * Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen
+	 * wie Diabetesberaterin, Stillberaterin etc. </div>
+	 * <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un cours
+	 * de spécialisation postgrades et des formation spéciale supplémentaires
+	 * comme Conseiller / Conseillère aux diabétiques, conseiller / Coonseillère
+	 * en cas d ’ allaitement </div> <div class = "it"> Infermiere / a diplomato
+	 * / a con corso post - diploma di approfondimento della materia e altre
+	 * formazioni supplementari, come consulente per il diabete, consulente per
+	 * l ' allattamento al seno ecc. </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_FACHVERTIEFENDEM_NDK_UND_WEITEREN_ZUSATZAUSBILDUNGEN_WIE_DIABETESBERATERIN_STILLBERATERIN_ETC("50066", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie Diabetesberaterin, Stillberaterin etc."),
 	/**
-	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter Pflegefachmann
-	 * mit Zusatz- oder Spezialfunktion, z . B. IPS, Anästhesie (NDS) </div>
-	 * <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec une
-	 * function supplémentaire ou spécial, p . ex. soins intensiv,
+	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
+	 * Pflegefachmann mit Zusatz- oder Spezialfunktion, z . B. IPS, Anästhesie
+	 * (NDS) </div> <div class = "fr"> Infirmière diplômée / Infirmier diplômé
+	 * avec une function supplémentaire ou spécial, p . ex. soins intensiv,
 	 * anesthésie </div> <div class = "it"> Infermiere / a diplomato / a con
 	 * funzione supplementare o speciale, p. es. reparto cure intense (RCI ) ,
 	 * anestesia (SPD) </div>
@@ -132,9 +132,10 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_ALLERGOLOGIE("50074", "Fachärztin/Facharzt für Allergologie"),
 	/**
-	 * <div class="de"> Fachärztin/Facharzt für Allergologie und Immunologie</div>
-	 * <div class="fr"> Médecin spécialiste en allergologie et immunologie</div>
-	 * <div class="it"> Medico specializzato/a in allergologia e immunologia</div>
+	 * <div class="de"> Fachärztin/Facharzt für Allergologie und
+	 * Immunologie</div> <div class="fr"> Médecin spécialiste en allergologie et
+	 * immunologie</div> <div class="it"> Medico specializzato/a in allergologia
+	 * e immunologia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_ALLERGOLOGIE_UND_IMMUNOLOGIE("50073", "Fachärztin/Facharzt für Allergologie und Immunologie"),
 	/**
@@ -169,9 +170,10 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_CHIRURGIE("50004", "Fachärztin/Facharzt für Chirurgie"),
 	/**
-	 * <div class="de"> Fachärztin/Facharzt für Dermatologie und Venerologie</div>
-	 * <div class="fr">Médecin spécialiste en dermatologie et vénéréologie</div>
-	 * <div class="it">Medico specializzato/a in dermatologia e venereologia</div>
+	 * <div class="de"> Fachärztin/Facharzt für Dermatologie und
+	 * Venerologie</div> <div class="fr">Médecin spécialiste en dermatologie et
+	 * vénéréologie</div> <div class="it">Medico specializzato/a in dermatologia
+	 * e venereologia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_DERMATOLOGIE_UND_VENEROLOGIE("50005", "Fachärztin/Facharzt für Dermatologie und Venerologie"),
 	/**
@@ -189,9 +191,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_GASTROENTEROLOGIE("50007", "Fachärztin/Facharzt für Gastroenterologie"),
 	/**
 	 * <div class="de"> Fachärztin/ Facharzt für Gynäkologie und
-	 * Geburtshilfe </div> <div class="fr"> Médecin spécialiste en gynécologie et
-	 * obstétrique</div> <div class="it"> Medico specializzato/a in ginecologia e
-	 * ostetricia</div>
+	 * Geburtshilfe </div> <div class="fr"> Médecin spécialiste en gynécologie
+	 * et obstétrique</div> <div class="it"> Medico specializzato/a in
+	 * ginecologia e ostetricia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_GYNAKOLOGIE_UND_GEBURTSHILFE("50008", "Fachärztin/Facharzt für Gynäkologie und Geburtshilfe"),
 	/**
@@ -252,9 +254,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_KINDERCHIRURGIE("50015", "Fachärztin/Facharzt für Kinderchirurgie"),
 	/**
 	 * <div class = "de"> Fachärztin / Facharzt für Klinische Pharmakologie und
-	 * Toxikologie </div> <div class = "fr"> Médecin spécialiste en pharmacologie
-	 * clinique et toxicologie </div> <div class = "it"> Medico specializzato / a
-	 * in farmacologia clinica e tossicologica </div>
+	 * Toxikologie </div> <div class = "fr"> Médecin spécialiste en
+	 * pharmacologie clinique et toxicologie </div> <div class = "it"> Medico
+	 * specializzato / a in farmacologia clinica e tossicologica </div>
 	 */
 	FACHARZTINFACHARZT_FUR_KLINISCHE_PHARMAKOLOGIE_UND_TOXIKOLOGIE("50016", "Fachärztin/Facharzt für Klinische Pharmakologie und Toxikologie"),
 	/**
@@ -271,9 +273,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_MEDIZINISCHE_ONKOLOGIE("50039", "Fachärztin/Facharzt für Medizinische Onkologie"),
 	/**
 	 * <div class= "de"> Fachärztin/ Facharzt für Mund-, Kiefer- und
-	 * Gesichtschirurgie </div> <div class= "fr">Médecin spécialiste en chirurgie
-	 * dento-maxillo -faciale </div> <div class= "it">Medico specializzato /a in
-	 * chirurgia maxillo- facciale </div>
+	 * Gesichtschirurgie </div> <div class= "fr">Médecin spécialiste en
+	 * chirurgie dento-maxillo -faciale </div> <div class= "it">Medico
+	 * specializzato /a in chirurgia maxillo- facciale </div>
 	 */
 	FACHARZTINFACHARZT_FUR_MUND_KIEFER_UND_GESICHTSCHIRURGIE("50017", "Fachärztin/Facharzt für Mund-, Kiefer- und Gesichtschirurgie"),
 	/**
@@ -322,8 +324,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_ORTHOPADISCHE_CHIRURGIE_UND_TRAUMATOLOGIE_DES_BEWEGUNGSAPPARATES("50023", "Fachärztin/Facharzt für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates"),
 	/**
 	 * <div class = "de"> Fachärztin / Facharzt für Oto - Rhino -
-	 * Laryngologie </div> <div class = "fr"> Médecin spécialiste en oto - rhino -
-	 * laryngologie </div> <div class = "it"> Medico specializzato / a in
+	 * Laryngologie </div> <div class = "fr"> Médecin spécialiste en oto - rhino
+	 * - laryngologie </div> <div class = "it"> Medico specializzato / a in
 	 * otorinolaringoiatria </div>
 	 */
 	FACHARZTINFACHARZT_FUR_OTO_RHINO_LARYNGOLOGIE("50024", "Fachärztin/Facharzt für Oto-Rhino-Laryngologie"),
@@ -341,15 +343,15 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_PHARMAZEUTISCHE_MEDIZIN("50040", "Fachärztin/Facharzt für Pharmazeutische Medizin"),
 	/**
 	 * <div class= "de"> Fachärztin/ Facharzt für Physikalische Medizin und
-	 * Rehabiliation </div> <div class= "fr">Médecin spécialiste en kinésithérapie
-	 * et réhabilitation </div> <div class= "it">Medico specializzato /a in
-	 * medicina fisica e in riabilitazione </div>
+	 * Rehabiliation </div> <div class= "fr">Médecin spécialiste en
+	 * kinésithérapie et réhabilitation </div> <div class= "it">Medico
+	 * specializzato /a in medicina fisica e in riabilitazione </div>
 	 */
 	FACHARZTINFACHARZT_FUR_PHYSIKALISCHE_MEDIZIN_UND_REHABILIATION("50026", "Fachärztin/Facharzt für Physikalische Medizin und Rehabiliation"),
 	/**
-	 * <div class = "de"> Fachärztin / Facharzt für Plastische, Rekonstruktive und
-	 * Asthetische Chirurgie </div> <div class = "fr"> Médecin spécialiste en
-	 * chirurgie plastique, reconstructrice et esthétique </div>
+	 * <div class = "de"> Fachärztin / Facharzt für Plastische, Rekonstruktive
+	 * und Asthetische Chirurgie </div> <div class = "fr"> Médecin spécialiste
+	 * en chirurgie plastique, reconstructrice et esthétique </div>
 	 * <div class = "it"> Medico specializzato / a in chirurgia plastica,
 	 * ricostruttiva ed estetica </div>
 	 */
@@ -362,23 +364,23 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_PNEUMOLOGIE("50028", "Fachärztin/Facharzt für Pneumologie"),
 	/**
 	 * <div class="de"> Fachärztin/Facharzt für Prävention und
-	 * Gesundheitswesen</div> <div class="fr">Médecin spécialiste en prévention et
-	 * santé</div> <div class="it">Medico specializzato/a in medicina preventiva e
-	 * in sanità pubblica</div>
+	 * Gesundheitswesen</div> <div class="fr">Médecin spécialiste en prévention
+	 * et santé</div> <div class="it">Medico specializzato/a in medicina
+	 * preventiva e in sanità pubblica</div>
 	 */
 	FACHARZTINFACHARZT_FUR_PRAVENTION_UND_GESUNDHEITSWESEN("50029", "Fachärztin/Facharzt für Prävention und Gesundheitswesen"),
 	/**
 	 * <div class = "de"> Fachärztin / Facharzt für Psychiatrie und
-	 * Psychotherapie </div> <div class = "fr"> Médecin spécialiste en psychiatrie
-	 * et psychothérapie </div> <div class = "it"> Medico specializzato /a in
-	 * psichiatria e in psicoterapia </div>
+	 * Psychotherapie </div> <div class = "fr"> Médecin spécialiste en
+	 * psychiatrie et psychothérapie </div> <div class = "it"> Medico
+	 * specializzato /a in psichiatria e in psicoterapia </div>
 	 */
 	FACHARZTINFACHARZT_FUR_PSYCHIATRIE_UND_PSYCHOTHERAPIE("50030", "Fachärztin/Facharzt für Psychiatrie und Psychotherapie"),
 	/**
 	 * <div class="de"> Fachärztin/Facharzt für Radio-Onkologie /
 	 * Strahlentherapie</div> <div class="fr">Médecin spécialiste en
-	 * radio-oncologie/ radiothérapie</div> <div class="it">Medico specializzato/a
-	 * in radio-oncologia / radioterapia</div>
+	 * radio-oncologie/ radiothérapie</div> <div class="it">Medico
+	 * specializzato/a in radio-oncologia / radioterapia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_RADIO_ONKOLOGIE_STRAHLENTHERAPIE("50032", "Fachärztin/Facharzt für Radio-Onkologie / Strahlentherapie"),
 	/**
@@ -402,8 +404,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de"> Fachärztin/Facharzt für Tropen- und Reisemedizin</div>
 	 * <div class="fr"> Médecin spécialiste en médecine tropicale et des
-	 * voyages</div> <div class="it"> Medico specializzato/a in medicina tropicale
-	 * e di viaggio</div>
+	 * voyages</div> <div class="it"> Medico specializzato/a in medicina
+	 * tropicale e di viaggio</div>
 	 */
 	FACHARZTINFACHARZT_FUR_TROPEN_UND_REISEMEDIZIN("50034", "Fachärztin/Facharzt für Tropen- und Reisemedizin"),
 	/**
@@ -414,10 +416,10 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_UROLOGIE("50035", "Fachärztin/Facharzt für Urologie"),
 	/**
 	 * <div class="de"> Fachfrau/Fachmann Gesundheit, FaGe mit eidg.
-	 * Fähigkeitszeugnis </div> <div class="fr"> assistante/assistant en soins et
-	 * santé communautaire (ASSC) avec certificat fédéral de capacité</div>
-	 * <div class="it"> Operatore/trice sociosanitario AFC con attestato federale
-	 * di capacità</div>
+	 * Fähigkeitszeugnis </div> <div class="fr"> assistante/assistant en soins
+	 * et santé communautaire (ASSC) avec certificat fédéral de capacité</div>
+	 * <div class="it"> Operatore/trice sociosanitario AFC con attestato
+	 * federale di capacità</div>
 	 */
 	FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FAHIGKEITSZEUGNIS("50068", "Fachfrau/Fachmann Gesundheit, FaGe mit eidg. Fähigkeitszeugnis"),
 	/**
@@ -428,8 +430,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	GESUNDHEITS_UND_SOZIALBERATUNG("50071", "Gesundheits- und Sozialberatung"),
 	/**
 	 * <div class="de"> Gesundheitspsychologin/ Gesundheitspsychologe </div>
-	 * <div class="fr"> Psychologue de la santé</div> <div class="it">Psicologo /a
-	 * della salute</div>
+	 * <div class="fr"> Psychologue de la santé</div> <div class="it">Psicologo
+	 * /a della salute</div>
 	 */
 	GESUNDHEITSPSYCHOLOGINGESUNDHEITSPSYCHOLOGE("50052", "Gesundheitspsychologin/Gesundheitspsychologe"),
 	/**
@@ -503,8 +505,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	PSYCHOTHERAPEUTINPSYCHOTHERAPEUT("50050", "Psychotherapeutin/Psychotherapeut"),
 	/**
 	 * <div class="de"> Radiologietechnologin/ Radiologietechnologe </div>
-	 * <div class="fr"> Technicien en radiologie</div> <div class="it">Tecnico in
-	 * radiologia</div>
+	 * <div class="fr"> Technicien en radiologie</div> <div class="it">Tecnico
+	 * in radiologia</div>
 	 */
 	RADIOLOGIETECHNOLOGINRADIOLOGIETECHNOLOGE("50057", "Radiologietechnologin/Radiologietechnologe"),
 	/**
@@ -527,7 +529,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für andere Gesundheitsbezogene Fachrichtung</div>
 	 * <div class="fr">Code de autre spécialisation du domaine de la santé</div>
-	 * <div class="it">Code per Altri rami specialistici in ambito sanitario</div>
+	 * <div class="it">Code per Altri rami specialistici in ambito
+	 * sanitario</div>
 	 */
 	public static final String ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG_CODE = "50999";
 
@@ -572,8 +575,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.1.4";
 
 	/**
-	 * <div class="de">Code für Diätologin/Diätologe</div> <div class="fr">Code de
-	 * Diabétologue</div> <div class="it">Code per Dietologo/a</div>
+	 * <div class="de">Code für Diätologin/Diätologe</div> <div class="fr">Code
+	 * de Diabétologue</div> <div class="it">Code per Dietologo/a</div>
 	 */
 	public static final String DIATOLOGINDIATOLOGE_CODE = "50058";
 
@@ -587,10 +590,11 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für diplomierte Pflegefachfrau/diplomierter
-	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)</div>
-	 * <div class="fr">Code de Infirmière diplômée / Infirmier diplômé avec un
-	 * Bachelor de Science en soins infirmiers</div> <div class="it">Code per
-	 * Infermiere/a con titolo accademico (Bachelor)</div>
+	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss
+	 * (Bachelor)</div> <div class="fr">Code de Infirmière diplômée / Infirmier
+	 * diplômé avec un Bachelor de Science en soins infirmiers</div>
+	 * <div class="it">Code per Infermiere/a con titolo accademico
+	 * (Bachelor)</div>
 	 */
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR_CODE = "50063";
 
@@ -605,8 +609,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für diplomierte Pflegefachfrau/diplomierter
-	 * Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie
-	 * Diabetesberaterin, Stillberaterin etc.</div> <div class="fr">Code de
+	 * Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen
+	 * wie Diabetesberaterin, Stillberaterin etc.</div> <div class="fr">Code de
 	 * Infirmière diplômée / Infirmier diplômé avec un cours de spécialisation
 	 * postgrades et des formation spéciale supplémentaires comme
 	 * Conseiller/Conseillère aux diabétiques, conseiller/Coonseillère en cas
@@ -620,11 +624,11 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für diplomierte Pflegefachfrau/diplomierter
 	 * Pflegefachmann mit Zusatz- oder Spezialfunktion, z.B. IPS, Anästhesie
-	 * (NDS)</div> <div class="fr">Code de Infirmière diplômée / Infirmier diplômé
-	 * avec une function supplémentaire ou spécial, p.ex. soins intensiv,
-	 * anesthésie</div> <div class="it">Code per Infermiere/a diplomato/a con
-	 * funzione supplementare o speciale, p. es. reparto cure intense (RCI),
-	 * anestesia (SPD)</div>
+	 * (NDS)</div> <div class="fr">Code de Infirmière diplômée / Infirmier
+	 * diplômé avec une function supplémentaire ou spécial, p.ex. soins
+	 * intensiv, anesthésie</div> <div class="it">Code per Infermiere/a
+	 * diplomato/a con funzione supplementare o speciale, p. es. reparto cure
+	 * intense (RCI), anestesia (SPD)</div>
 	 */
 	public static final String DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_ZUSATZ_ODER_SPEZIALFUNKTION_Z_B_IPS_ANASTHESIE_NDS_CODE = "50065";
 
@@ -713,7 +717,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Gastroenterologie</div>
 	 * <div class="fr">Code de Médecin spécialiste en gastroentérologie</div>
-	 * <div class="it">Code per Medico specializzato/a in gastroenterologia</div>
+	 * <div class="it">Code per Medico specializzato/a in
+	 * gastroenterologia</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_GASTROENTEROLOGIE_CODE = "50007";
 
@@ -758,7 +763,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Intensivmedizin</div>
 	 * <div class="fr">Code de Médecin spécialiste en médecine intensive</div>
-	 * <div class="it">Code per Medico specializzato/a in medicina intensiva</div>
+	 * <div class="it">Code per Medico specializzato/a in medicina
+	 * intensiva</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_INTENSIVMEDIZIN_CODE = "50037";
 
@@ -779,8 +785,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Kinder- und
-	 * Jugendpsychiatrie und -psychotherapie</div> <div class="fr">Code de Médecin
-	 * spécialiste en pédopsychiatrie et pédopsychothérapie</div>
+	 * Jugendpsychiatrie und -psychotherapie</div> <div class="fr">Code de
+	 * Médecin spécialiste en pédopsychiatrie et pédopsychothérapie</div>
 	 * <div class="it">Code per Medico specializzato/a in pedopsichiatria e
 	 * pedopsicoterapia</div>
 	 */
@@ -797,15 +803,16 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Klinische Pharmakologie
 	 * und Toxikologie</div> <div class="fr">Code de Médecin spécialiste en
-	 * pharmacologie clinique et toxicologie</div> <div class="it">Code per Medico
-	 * specializzato/a in farmacologia clinica e tossicologica</div>
+	 * pharmacologie clinique et toxicologie</div> <div class="it">Code per
+	 * Medico specializzato/a in farmacologia clinica e tossicologica</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_KLINISCHE_PHARMAKOLOGIE_UND_TOXIKOLOGIE_CODE = "50016";
 
 	/**
-	 * <div class="de">Code für Fachärztin/Facharzt für Medizinische Genetik</div>
-	 * <div class="fr">Code de Médecin spécialiste en médecine génétique</div>
-	 * <div class="it">Code per Medico specializzato/a in genetica medica</div>
+	 * <div class="de">Code für Fachärztin/Facharzt für Medizinische
+	 * Genetik</div> <div class="fr">Code de Médecin spécialiste en médecine
+	 * génétique</div> <div class="it">Code per Medico specializzato/a in
+	 * genetica medica</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_MEDIZINISCHE_GENETIK_CODE = "50038";
 
@@ -856,7 +863,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Nuklearmedizin</div>
 	 * <div class="fr">Code de Médecin spécialiste en médecine nucléaire</div>
-	 * <div class="it">Code per Medico specializzato/a in medicina nucleare</div>
+	 * <div class="it">Code per Medico specializzato/a in medicina
+	 * nucleare</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_NUKLEARMEDIZIN_CODE = "50021";
 
@@ -871,15 +879,16 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Fachärztin/Facharzt für Orthopädische Chirurgie
 	 * und Traumatologie des Bewegungsapparates</div> <div class="fr">Code de
 	 * Médecin spécialiste en chirurgie orthopédique et traumatologie de
-	 * l'appareil locomoteur</div> <div class="it">Code per Medico specializzato/a
-	 * in chirurgia ortopedica e traumatologia dell'apparato motorio</div>
+	 * l'appareil locomoteur</div> <div class="it">Code per Medico
+	 * specializzato/a in chirurgia ortopedica e traumatologia dell'apparato
+	 * motorio</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_ORTHOPADISCHE_CHIRURGIE_UND_TRAUMATOLOGIE_DES_BEWEGUNGSAPPARATES_CODE = "50023";
 
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für
-	 * Oto-Rhino-Laryngologie</div> <div class="fr">Code de Médecin spécialiste en
-	 * oto-rhino-laryngologie</div> <div class="it">Code per Medico
+	 * Oto-Rhino-Laryngologie</div> <div class="fr">Code de Médecin spécialiste
+	 * en oto-rhino-laryngologie</div> <div class="it">Code per Medico
 	 * specializzato/a in otorinolaringoiatria</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_OTO_RHINO_LARYNGOLOGIE_CODE = "50024";
@@ -900,19 +909,19 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String FACHARZTINFACHARZT_FUR_PHARMAZEUTISCHE_MEDIZIN_CODE = "50040";
 
 	/**
-	 * <div class="de">Code für Fachärztin/Facharzt für Physikalische Medizin und
-	 * Rehabiliation</div> <div class="fr">Code de Médecin spécialiste en
+	 * <div class="de">Code für Fachärztin/Facharzt für Physikalische Medizin
+	 * und Rehabiliation</div> <div class="fr">Code de Médecin spécialiste en
 	 * kinésithérapie et réhabilitation</div> <div class="it">Code per Medico
 	 * specializzato/a in medicina fisica e in riabilitazione</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_PHYSIKALISCHE_MEDIZIN_UND_REHABILIATION_CODE = "50026";
 
 	/**
-	 * <div class="de">Code für Fachärztin/Facharzt für Plastische, Rekonstruktive
-	 * und Asthetische Chirurgie</div> <div class="fr">Code de Médecin spécialiste
-	 * en chirurgie plastique, reconstructrice et esthétique</div>
-	 * <div class="it">Code per Medico specializzato/a in chirurgia plastica,
-	 * ricostruttiva ed estetica</div>
+	 * <div class="de">Code für Fachärztin/Facharzt für Plastische,
+	 * Rekonstruktive und Asthetische Chirurgie</div> <div class="fr">Code de
+	 * Médecin spécialiste en chirurgie plastique, reconstructrice et
+	 * esthétique</div> <div class="it">Code per Medico specializzato/a in
+	 * chirurgia plastica, ricostruttiva ed estetica</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE_CODE = "50027";
 
@@ -970,8 +979,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für Fachärztin/Facharzt für Tropen- und
-	 * Reisemedizin</div> <div class="fr">Code de Médecin spécialiste en médecine
-	 * tropicale et des voyages</div> <div class="it">Code per Medico
+	 * Reisemedizin</div> <div class="fr">Code de Médecin spécialiste en
+	 * médecine tropicale et des voyages</div> <div class="it">Code per Medico
 	 * specializzato/a in medicina tropicale e di viaggio</div>
 	 */
 	public static final String FACHARZTINFACHARZT_FUR_TROPEN_UND_REISEMEDIZIN_CODE = "50034";
@@ -987,8 +996,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 * <div class="de">Code für Fachfrau/Fachmann Gesundheit, FaGe mit eidg.
 	 * Fähigkeitszeugnis</div> <div class="fr">Code de assistante/assistant en
 	 * soins et santé communautaire (ASSC) avec certificat fédéral de
-	 * capacité</div> <div class="it">Code per Operatore/trice sociosanitario AFC
-	 * con attestato federale di capacità</div>
+	 * capacité</div> <div class="it">Code per Operatore/trice sociosanitario
+	 * AFC con attestato federale di capacità</div>
 	 */
 	public static final String FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FAHIGKEITSZEUGNIS_CODE = "50068";
 
@@ -1000,9 +1009,10 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String GESUNDHEITS_UND_SOZIALBERATUNG_CODE = "50071";
 
 	/**
-	 * <div class="de">Code für Gesundheitspsychologin/Gesundheitspsychologe</div>
-	 * <div class="fr">Code de Psychologue de la santé</div> <div class="it">Code
-	 * per Psicologo/a della salute</div>
+	 * <div class="de">Code für
+	 * Gesundheitspsychologin/Gesundheitspsychologe</div> <div class="fr">Code
+	 * de Psychologue de la santé</div> <div class="it">Code per Psicologo/a
+	 * della salute</div>
 	 */
 	public static final String GESUNDHEITSPSYCHOLOGINGESUNDHEITSPSYCHOLOGE_CODE = "50052";
 
@@ -1034,9 +1044,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String KARDIOTECHNIKERINKARDIOTECHNIKER_CODE = "50070";
 
 	/**
-	 * <div class="de">Code für Klinischer Psychologe/Klinische Psychologin</div>
-	 * <div class="fr">Code de Psychologue clinicien</div> <div class="it">Code
-	 * per Psicologo/a clinico/a</div>
+	 * <div class="de">Code für Klinischer Psychologe/Klinische
+	 * Psychologin</div> <div class="fr">Code de Psychologue clinicien</div>
+	 * <div class="it">Code per Psicologo/a clinico/a</div>
 	 */
 	public static final String KLINISCHER_PSYCHOLOGEKLINISCHE_PSYCHOLOGIN_CODE = "50051";
 
@@ -1054,8 +1064,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String MUSIKTHERAPEUTINMUSIKTHERAPEUT_CODE = "50053";
 
 	/**
-	 * <div class="de">Code für Orthoptistin/Orthoptist</div> <div class="fr">Code
-	 * de Orthoptiste</div> <div class="it">Code per Ortottista</div>
+	 * <div class="de">Code für Orthoptistin/Orthoptist</div>
+	 * <div class="fr">Code de Orthoptiste</div> <div class="it">Code per
+	 * Ortottista</div>
 	 */
 	public static final String ORTHOPTISTINORTHOPTIST_CODE = "50061";
 
@@ -1090,8 +1101,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für Radiologietechnologin/Radiologietechnologe</div>
-	 * <div class="fr">Code de Technicien en radiologie</div> <div class="it">Code
-	 * per Tecnico in radiologia</div>
+	 * <div class="fr">Code de Technicien en radiologie</div>
+	 * <div class="it">Code per Tecnico in radiologia</div>
 	 */
 	public static final String RADIOLOGIETECHNOLOGINRADIOLOGIETECHNOLOGE_CODE = "50057";
 
@@ -1109,8 +1120,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	public static final String UNBEKANNT_CODE = "50900";
 
 	/**
-	 * <div class="de">Code für Zahnärztin/Zahnarzt</div> <div class="fr">Code de
-	 * Dentiste</div> <div class="it">Code per Dentista</div>
+	 * <div class="de">Code für Zahnärztin/Zahnarzt</div> <div class="fr">Code
+	 * de Dentiste</div> <div class="it">Code per Dentista</div>
 	 */
 	public static final String ZAHNARZTINZAHNARZT_CODE = "50044";
 
@@ -1119,8 +1130,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static AuthorSpeciality getEnum(String code) {
@@ -1138,8 +1149,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -1160,7 +1171,7 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -1180,22 +1191,22 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *          <br>
-	 *          <div class="de"> display name</div>
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
 	private AuthorSpeciality(String code, String displayName) {
 		this.code = code;
@@ -1224,7 +1235,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
 		cmt.setSchemeName(CODE_SYSTEM_OID);
 		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+		cmt.setDisplayName(
+				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
 		return cmt;
 	}
 
@@ -1239,8 +1251,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */

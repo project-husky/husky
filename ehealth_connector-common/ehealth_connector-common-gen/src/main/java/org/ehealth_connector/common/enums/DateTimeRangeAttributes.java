@@ -17,21 +17,21 @@ package org.ehealth_connector.common.enums;
 
 /**
  * Represents the XDS metadata attributes, which are related to DateTimeRanges
- * 
+ *
  */
 public enum DateTimeRangeAttributes {
 
 	/**
 	 * Time, when the author created the document
 	 */
-	CREATION_TIME("creationTime"), /**
-									 * Start time of the service, which led to
-									 * the document
-									 */
-	SERVICE_START_TIME("serviceStartTime"), /**
-											 * End time of the service, which
-											 * led to the document
-											 */
+	CREATION_TIME("creationTime"),
+	/**
+	 * Start time of the service, which led to the document
+	 */
+	SERVICE_START_TIME("serviceStartTime"),
+	/**
+	 * End time of the service, which led to the document
+	 */
 	SERVICE_STOP_TIME("serviceStopTime");
 
 	private String name;
@@ -42,7 +42,7 @@ public enum DateTimeRangeAttributes {
 
 	/**
 	 * Gets the XDS attribute name of the Enum
-	 * 
+	 *
 	 * @return the name of the attribute
 	 */
 	public String getName() {

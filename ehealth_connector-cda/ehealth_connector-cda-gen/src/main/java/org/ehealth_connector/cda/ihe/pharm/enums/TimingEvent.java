@@ -63,7 +63,9 @@ public enum TimingEvent {
 	 */
 	BEFORE_LUNCH("ACD", "Before lunch", "Avant le repas de midi"),
 
-	/** <div class="en"> Before meal</div><div class="fr">Avant un repas</div> */
+	/**
+	 * <div class="en"> Before meal</div><div class="fr">Avant un repas</div>
+	 */
 	BEFORE_MEAL("AC", "Before meal", "Avant un repas"),
 
 	/**
@@ -73,8 +75,8 @@ public enum TimingEvent {
 	BEFORE_SLEEP("HS", "Before sleep", "Avant d’aller dormir (hors sieste)"),
 
 	/**
-	 * <div class="en"> Between breakfast and lunch</div><div class="fr">Entre le
-	 * petit-déjeuner et le repas de midi</div>
+	 * <div class="en"> Between breakfast and lunch</div><div class="fr">Entre
+	 * le petit-déjeuner et le repas de midi</div>
 	 */
 	BETWEEN_BREAKFAST_AND_LUNCH("ICM", "Between breakfast and lunch", "Entre le petit-déjeuner et le repas de midi"),
 
@@ -131,7 +133,7 @@ public enum TimingEvent {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static TimingEvent getEnum(String code) {
@@ -156,11 +158,11 @@ public enum TimingEvent {
 	 * Instantiates a new TimingEvent.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private TimingEvent(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -172,7 +174,7 @@ public enum TimingEvent {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

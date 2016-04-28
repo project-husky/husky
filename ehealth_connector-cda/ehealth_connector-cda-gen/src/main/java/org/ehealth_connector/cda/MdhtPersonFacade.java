@@ -28,8 +28,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  * is independent of the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implementing the facade to it,
- *          extending an Participant
+ *            the model type to provide for implementing the facade to it,
+ *            extending an Participant
  */
 public class MdhtPersonFacade<E extends org.openhealthtools.mdht.uml.cda.Person>
 		extends MdhtFacade<E> {
@@ -38,7 +38,7 @@ public class MdhtPersonFacade<E extends org.openhealthtools.mdht.uml.cda.Person>
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtPersonFacade(E mdht) {
 		super(mdht, null, null);

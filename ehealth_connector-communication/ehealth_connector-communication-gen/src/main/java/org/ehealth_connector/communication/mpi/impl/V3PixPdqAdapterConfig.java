@@ -19,7 +19,7 @@ import java.net.URI;
 
 /**
  * V3PixAdapterConfig configuration parameters for V3PixAdapter
- * 
+ *
  */
 public class V3PixPdqAdapterConfig {
 
@@ -70,7 +70,7 @@ public class V3PixPdqAdapterConfig {
 
 	/**
 	 * Instantiates a new v3 pix adapter config.
-	 * 
+	 *
 	 * @param pixQueryUri
 	 *            the pix query uri endpoint
 	 * @param pixSourceUri
@@ -125,106 +125,7 @@ public class V3PixPdqAdapterConfig {
 
 	/**
 	 * Method to get
-	 * 
-	 * @return the pixQueryUri
-	 */
-	public URI getPixQueryUri() {
-		return pixQueryUri;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the pixSourceUri
-	 */
-	public URI getPixSourceUri() {
-		return pixSourceUri;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the pdqConsumerUri
-	 */
-	public URI getPdqConsumerUri() {
-		return pdqConsumerUri;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the senderApplicationOid
-	 */
-	public String getSenderApplicationOid() {
-		return senderApplicationOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the senderFacilityOid
-	 */
-	public String getSenderFacilityOid() {
-		return senderFacilityOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the receiverApplicationOid
-	 */
-	public String getReceiverApplicationOid() {
-		return receiverApplicationOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the receiverFacilityOid
-	 */
-	public String getReceiverFacilityOid() {
-		return receiverFacilityOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the homeCommunityOid
-	 */
-	public String getHomeCommunityOid() {
-		return homeCommunityOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the homeCommunityNamespace
-	 */
-	public String getHomeCommunityNamespace() {
-		return homeCommunityNamespace;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the domainToReturnOid
-	 */
-	public String getDomainToReturnOid() {
-		return domainToReturnOid;
-	}
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the domainToReturnNamespace
-	 */
-	public String getDomainToReturnNamespace() {
-		return domainToReturnNamespace;
-	}
-
-	/**
-	 * Method to get
-	 * 
+	 *
 	 * @return the auditRepositoryUri
 	 */
 	public String getAuditRepositoryUri() {
@@ -233,7 +134,7 @@ public class V3PixPdqAdapterConfig {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the auditSourceId
 	 */
 	public String getAuditSourceId() {
@@ -242,11 +143,110 @@ public class V3PixPdqAdapterConfig {
 
 	/**
 	 * Method to get
-	 * 
+	 *
+	 * @return the domainToReturnNamespace
+	 */
+	public String getDomainToReturnNamespace() {
+		return domainToReturnNamespace;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the domainToReturnOid
+	 */
+	public String getDomainToReturnOid() {
+		return domainToReturnOid;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the homeCommunityNamespace
+	 */
+	public String getHomeCommunityNamespace() {
+		return homeCommunityNamespace;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the homeCommunityOid
+	 */
+	public String getHomeCommunityOid() {
+		return homeCommunityOid;
+	}
+
+	/**
+	 * Method to get
+	 *
 	 * @return the otherOidIds
 	 */
 	public String[] getOtherOidIds() {
 		return otherOidIds;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the pdqConsumerUri
+	 */
+	public URI getPdqConsumerUri() {
+		return pdqConsumerUri;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the pixQueryUri
+	 */
+	public URI getPixQueryUri() {
+		return pixQueryUri;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the pixSourceUri
+	 */
+	public URI getPixSourceUri() {
+		return pixSourceUri;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the receiverApplicationOid
+	 */
+	public String getReceiverApplicationOid() {
+		return receiverApplicationOid;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the receiverFacilityOid
+	 */
+	public String getReceiverFacilityOid() {
+		return receiverFacilityOid;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the senderApplicationOid
+	 */
+	public String getSenderApplicationOid() {
+		return senderApplicationOid;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the senderFacilityOid
+	 */
+	public String getSenderFacilityOid() {
+		return senderFacilityOid;
 	}
 
 }

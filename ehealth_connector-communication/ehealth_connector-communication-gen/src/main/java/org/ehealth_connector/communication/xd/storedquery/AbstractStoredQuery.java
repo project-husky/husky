@@ -17,7 +17,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 /**
  * Represents a convenience stored query object
- * 
+ *
  */
 public abstract class AbstractStoredQuery implements StoredQueryInterface {
 	/**
@@ -27,7 +27,7 @@ public abstract class AbstractStoredQuery implements StoredQueryInterface {
 
 	/**
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
-	 * 
+	 *
 	 * @return the OHT StoredQuery
 	 */
 	@Override
@@ -37,10 +37,12 @@ public abstract class AbstractStoredQuery implements StoredQueryInterface {
 
 	/**
 	 * Method to set
-	 * 
-	 * @param ohtStoredQuery the ohtStoredQuery to set
+	 *
+	 * @param ohtStoredQuery
+	 *            the ohtStoredQuery to set
 	 */
-	public void setOhtStoredQuery(org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery ohtStoredQuery) {
+	public void setOhtStoredQuery(
+			org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery ohtStoredQuery) {
 		this.ohtStoredQuery = ohtStoredQuery;
 	}
 }

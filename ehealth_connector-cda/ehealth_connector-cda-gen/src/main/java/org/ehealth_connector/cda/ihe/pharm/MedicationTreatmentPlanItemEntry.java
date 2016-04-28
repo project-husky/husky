@@ -35,7 +35,7 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	 * Instantiates a new medication treatment plan item entry.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public MedicationTreatmentPlanItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemEntry().init());
@@ -45,7 +45,7 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	 * Instantiates a new medication treatment plan item entry.
 	 *
 	 * @param mdht
-	 *          the mdht
+	 *            the mdht
 	 */
 	public MedicationTreatmentPlanItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry mdht) {

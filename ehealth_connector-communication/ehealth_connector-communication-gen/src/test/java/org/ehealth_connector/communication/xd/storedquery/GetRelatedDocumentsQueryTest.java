@@ -44,7 +44,8 @@ public class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 	 */
 	@Test
 	public void testGetRelatedDocumentsQueryStringBooleanParentDocumentRelationshipTypeArray() {
-		final GetRelatedDocumentsQuery q1 = new GetRelatedDocumentsQuery("1234", true, parentRelation);
+		final GetRelatedDocumentsQuery q1 = new GetRelatedDocumentsQuery("1234", true,
+				parentRelation);
 
 		final StoredQueryParameterList sqpl = q1.getOhtStoredQuery().getQueryParameters();
 
@@ -61,7 +62,8 @@ public class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 	 */
 	@Test
 	public void testGetRelatedDocumentsQueryStringBooleanParentDocumentRelationshipTypeArrayString() {
-		final GetRelatedDocumentsQuery q2 = new GetRelatedDocumentsQuery("1234", true, parentRelation, "9876");
+		final GetRelatedDocumentsQuery q2 = new GetRelatedDocumentsQuery("1234", true,
+				parentRelation, "9876");
 		assertTrue(q2.getOhtStoredQuery().getHomeCommunityId().contains("9876"));
 	}
 
@@ -72,7 +74,8 @@ public class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 	 */
 	@Test
 	public void testGetRelatedDocumentsQueryStringBooleanParentDocumentRelationshipTypeArrayStringObjectType() {
-		final GetRelatedDocumentsQuery q3 = new GetRelatedDocumentsQuery("1234", true, parentRelation, "6789", ObjectType.STATIC);
+		final GetRelatedDocumentsQuery q3 = new GetRelatedDocumentsQuery("1234", true,
+				parentRelation, "6789", ObjectType.STATIC);
 		assertTrue(q3.getOhtStoredQuery().getQueryParameters().get("$XDSDocumentEntryType")
 				.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1"));
 	}

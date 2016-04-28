@@ -40,7 +40,7 @@ import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 
 /**
- * 
+ *
  * Implementation of ch specific convenience communication
  *
  */
@@ -54,7 +54,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 
 	/**
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param affinityDomain
 	 *            the affinity Domain
 	 */
@@ -77,12 +77,13 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	public ConvenienceCommunicationCh(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode,
 			SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
-		super(affinityDomain, atnaConfigMode, documentMetadataExtractionMode, submissionSetMetadataExtractionMode);
+		super(affinityDomain, atnaConfigMode, documentMetadataExtractionMode,
+				submissionSetMetadataExtractionMode);
 	}
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
-	 * 
+	 *
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -112,7 +113,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
-	 * 
+	 *
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
@@ -122,15 +123,46 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @throws FileNotFoundException
 	 *             exception
 	 */
-	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath) throws FileNotFoundException {
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
+			throws FileNotFoundException {
 		return addChDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
 	/**
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents of one patient. This is useful if the number of results is
+	 * limited in the registry and your query would exceed this limit. In this
+	 * case, precise your query or do a query for references first, choose the
+	 * possible matches (e.g. the last 10 results) and then query for metadata.
+	 *
+	 * @param patientId
+	 *            the ID of the patient
+	 * @return the OHT XDSQueryResponseType containing references instead of the
+	 *         complete document metadata</div>
+	 */
+	public XDSQueryResponseType queryDocumentReferencesOnly(Identificator patientId) {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	}
+
+	/**
+	 * <div class="en">Queries the registry of the affinity domain for all
+	 * documents of one patient.
+	 *
+	 * @param patientId
+	 *            the ID of the patient
+	 * @return the OHT XDSQueryResponseType containing full document
+	 *         metadata</div>
+	 */
+	public XDSQueryResponseType queryDocuments(Identificator patientId) {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	}
+
+	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br> IHE [ITI-41] Provide and Register Document Set – b in the
-	 * role of the IHE ITI Document Source actor
-	 * 
+	 * repository<br>
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
+	 * ITI Document Source actor
+	 *
 	 * @param authorRole
 	 *            The AuthorRole is one of the minimal required information
 	 *            according to IHE Suisse for classification of documents in
@@ -145,35 +177,6 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 		author.setRoleFunction(authorRole);
 		subSet.setAuthor(author);
 		return submit(subSet);
-	}
-
-	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents of one patient. This is useful if the number of results is
-	 * limited in the registry and your query would exceed this limit. In this
-	 * case, precise your query or do a query for references first, choose the
-	 * possible matches (e.g. the last 10 results) and then query for metadata.
-	 * 
-	 * @param patientId
-	 *            the ID of the patient
-	 * @return the OHT XDSQueryResponseType containing references instead of the
-	 *         complete document metadata</div>
-	 */
-	public XDSQueryResponseType queryDocumentReferencesOnly(Identificator patientId) {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
-	}
-
-	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents of one patient.
-	 * 
-	 * @param patientId
-	 *            the ID of the patient
-	 * @return the OHT XDSQueryResponseType containing full document
-	 *         metadata</div>
-	 */
-	public XDSQueryResponseType queryDocuments(Identificator patientId) {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
 	}
 
 }

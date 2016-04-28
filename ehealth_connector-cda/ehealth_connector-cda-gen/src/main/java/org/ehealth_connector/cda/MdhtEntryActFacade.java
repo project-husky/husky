@@ -25,8 +25,8 @@ import org.openhealthtools.mdht.uml.cda.Act;
  * is independent of the mdht implementation.
  *
  * @param <E>
- *          the model type to provide for implemting the facade to it, extending
- *          an Act
+ *            the model type to provide for implemting the facade to it,
+ *            extending an Act
  */
 public class MdhtEntryActFacade<E extends Act> extends MdhtFacade<E> {
 
@@ -34,7 +34,7 @@ public class MdhtEntryActFacade<E extends Act> extends MdhtFacade<E> {
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *          the mdht model object
+	 *            the mdht model object
 	 */
 	protected MdhtEntryActFacade(E mdht) {
 		super(mdht, null, null);
@@ -58,7 +58,7 @@ public class MdhtEntryActFacade<E extends Act> extends MdhtFacade<E> {
 	 * Sets the text reference.
 	 *
 	 * @param value
-	 *          the new text reference
+	 *            the new text reference
 	 */
 	@Override
 	public void setTextReference(String value) {

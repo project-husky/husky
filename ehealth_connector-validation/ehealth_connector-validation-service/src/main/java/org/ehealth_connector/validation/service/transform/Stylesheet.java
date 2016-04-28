@@ -41,7 +41,7 @@ public class Stylesheet {
 
 	/**
 	 * Factory method to create a new stylesheet.
-	 * 
+	 *
 	 * @param file
 	 *            a valid reference to the stylesheet file.
 	 * @param compiler

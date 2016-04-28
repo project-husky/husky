@@ -26,7 +26,7 @@ import org.openhealthtools.ihe.xds.metadata.ParentDocumentRelationshipType;
 public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
@@ -42,7 +42,9 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
 			ParentDocumentRelationshipType[] relationshipTypes) {
 		try {
-			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(docId, isUUID, relationshipTypes));
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
+							docId, isUUID, relationshipTypes));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +53,7 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA profile extension of this query.
-	 * 
+	 *
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
@@ -71,7 +73,9 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
 			ParentDocumentRelationshipType[] relationshipTypes, String homeCommunityId) {
 		try {
-			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(docId, isUUID, relationshipTypes, homeCommunityId));
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
+							docId, isUUID, relationshipTypes, homeCommunityId));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +84,7 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor that allows for the addition of a homeCommunityId to the
 	 * query to support the XCA profile extension of this query.
-	 * 
+	 *
 	 * @param docId
 	 *            ID of the document
 	 * @param isUUID
@@ -104,7 +108,9 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 			ParentDocumentRelationshipType[] relationshipTypes, String homeCommunityId,
 			ObjectType objectType) {
 		try {
-			setOhtStoredQuery(new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(docId, isUUID, relationshipTypes, homeCommunityId, objectType));
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
+							docId, isUUID, relationshipTypes, homeCommunityId, objectType));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}

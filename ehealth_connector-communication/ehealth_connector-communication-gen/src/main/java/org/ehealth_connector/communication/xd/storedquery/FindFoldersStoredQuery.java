@@ -27,7 +27,7 @@ public class FindFoldersStoredQuery extends AbstractStoredQuery {
 
 	/**
 	 * Construct a find folders stored query.
-	 * 
+	 *
 	 * @param patientId
 	 *            ID of the patient (required)
 	 * @param status

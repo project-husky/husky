@@ -17,7 +17,7 @@ package org.ehealth_connector.communication.exceptions;
 
 /**
  * <div class="en">Exception in case when no document found</div>
- * 
+ *
  * @version 1.0
  * @since Dec 15, 2015 11:23:08 AM
  *
@@ -31,7 +31,7 @@ public class DocumentNotAccessibleException extends Exception {
 	 * Default constructor to instanciate the object
 	 */
 	public DocumentNotAccessibleException() {
-	super("The Document could not be found. Is the path correct?");
+		super("The Document could not be found. Is the path correct?");
 	}
 
 }

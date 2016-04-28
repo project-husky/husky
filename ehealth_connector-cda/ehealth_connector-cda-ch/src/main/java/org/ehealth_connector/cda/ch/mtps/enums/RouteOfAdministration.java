@@ -31,7 +31,8 @@ public enum RouteOfAdministration {
 	BUC("BUC", "topical application, buccal", "dans la bouche"),
 
 	/**
-	 * <div class="en"> chew, oral</div><div class="fr">à mâcher ou à sucer</div>
+	 * <div class="en"> chew, oral</div><div class="fr">à mâcher ou à
+	 * sucer</div>
 	 */
 	CHEW("CHEW", "chew, oral", "à mâcher ou à sucer"),
 
@@ -90,8 +91,8 @@ public enum RouteOfAdministration {
 	NASOGASINSTIL("NASOGASINSTIL", "instillation, nasogastric", "par sonde naso gastrique"),
 
 	/**
-	 * <div class="en"> topical application, ophthalmic</div><div class="fr">dans
-	 * l'oeil</div>
+	 * <div class="en"> topical application, ophthalmic</div>
+	 * <div class="fr">dans l'oeil</div>
 	 */
 	OPTHALTA("OPTHALTA", "topical application, ophthalmic", "dans l'oeil"),
 
@@ -102,12 +103,14 @@ public enum RouteOfAdministration {
 	OT("OT", "instillation, otic", "dans l'oreille"),
 
 	/**
-	 * <div class="en"> injection, paranasal sinuses</div><div class="fr">par voie
-	 * nasale</div>
+	 * <div class="en"> injection, paranasal sinuses</div><div class="fr">par
+	 * voie nasale</div>
 	 */
 	PNSINJ("PNSINJ", "injection, paranasal sinuses", "par voie nasale"),
 
-	/** <div class="en"> swallow, oral</div><div class="fr">par la bouche</div> */
+	/**
+	 * <div class="en"> swallow, oral</div><div class="fr">par la bouche</div>
+	 */
 	PO("PO", "swallow, oral", "par la bouche"),
 
 	/**
@@ -129,8 +132,8 @@ public enum RouteOfAdministration {
 	SL("SL", "dissolve, sublingual", "sous la langue"),
 
 	/**
-	 * <div class="en"> injection, subcutaneous</div><div class="fr">par voie sous
-	 * cutané</div>
+	 * <div class="en"> injection, subcutaneous</div><div class="fr">par voie
+	 * sous cutané</div>
 	 */
 	SQ("SQ", "injection, subcutaneous", "par voie sous cutané"),
 
@@ -138,8 +141,8 @@ public enum RouteOfAdministration {
 	SUCK("SUCK", "suck, oromucosal", "à sucer"),
 
 	/**
-	 * <div class="en"> topical application, vaginal</div><div class="fr">par voie
-	 * transdermique</div>
+	 * <div class="en"> topical application, vaginal</div><div class="fr">par
+	 * voie transdermique</div>
 	 */
 	TRNSDERM("TRNSDERM", "topical application, vaginal", "par voie transdermique"),
 
@@ -156,7 +159,7 @@ public enum RouteOfAdministration {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static RouteOfAdministration getEnum(String code) {
@@ -181,11 +184,11 @@ public enum RouteOfAdministration {
 	 * Instantiates a new route of administration.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private RouteOfAdministration(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -197,7 +200,7 @@ public enum RouteOfAdministration {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

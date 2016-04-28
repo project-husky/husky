@@ -55,7 +55,8 @@ public class MedicationListSectionTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		assertEquals("#mtp", section.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
+		assertEquals("#mtp",
+				section.getMedicationTreatmentPlanItemEntries().get(0).getTextReference());
 		assertEquals("#pre", section.getPrescriptionItemEntries().get(0).getTextReference());
 	}
 

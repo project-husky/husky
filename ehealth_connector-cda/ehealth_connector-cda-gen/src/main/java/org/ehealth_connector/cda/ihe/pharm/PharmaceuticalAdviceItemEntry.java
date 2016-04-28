@@ -66,7 +66,7 @@ public class PharmaceuticalAdviceItemEntry extends
 
 	/**
 	 * Instantiates a new facade for the provided mdht object.
-	 * 
+	 *
 	 * @param mdht
 	 *            the mdht model object
 	 */
@@ -233,7 +233,7 @@ public class PharmaceuticalAdviceItemEntry extends
 
 	/**
 	 * Gets the text reference.
-	 * 
+	 *
 	 * @return the text reference
 	 */
 	@Override

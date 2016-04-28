@@ -37,6 +37,31 @@ public class NameTest {
 	}
 
 	/**
+	 * Test method for {@link org.ehealth_connector.common.Name#copyMdhtPn()}.
+	 */
+	@Test
+	public void testCopyMdhtPn() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Name#getCompleteName()}.
+	 */
+	@Test
+	public void testGetCompleteName() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link org.ehealth_connector.common.Name#getMdhtPn()}.
+	 */
+	@Test
+	public void testGetMdhtPn() {
+		fail("Not yet implemented");
+	}
+
+	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.common.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.ON)}
 	 * .
@@ -83,31 +108,6 @@ public class NameTest {
 	 */
 	@Test
 	public void testNameStringStringStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#copyMdhtPn()}.
-	 */
-	@Test
-	public void testCopyMdhtPn() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Name#getCompleteName()}.
-	 */
-	@Test
-	public void testGetCompleteName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.common.Name#getMdhtPn()}.
-	 */
-	@Test
-	public void testGetMdhtPn() {
 		fail("Not yet implemented");
 	}
 

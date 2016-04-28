@@ -26,35 +26,35 @@ public interface MpiQueryResponse {
 
 	/**
 	 * Gets the current numbers of returned patients in the query.
-	 * 
+	 *
 	 * @return the current numbers
 	 */
 	abstract int getCurrentNumbers();
 
 	/**
 	 * Gets the patients from the query.
-	 * 
+	 *
 	 * @return the patients
 	 */
 	abstract List<FhirPatient> getPatients();
 
 	/**
 	 * Gets the remaining numbers of patients in the query.
-	 * 
+	 *
 	 * @return the remaining numbers
 	 */
 	abstract int getRemainingNumbers();
 
 	/**
 	 * Query state
-	 * 
+	 *
 	 * @return true if successful
 	 */
 	abstract boolean getSuccess();
 
 	/**
 	 * Gets the total numbers of patients from the query.
-	 * 
+	 *
 	 * @return the total numbers
 	 */
 	abstract int getTotalNumbers();

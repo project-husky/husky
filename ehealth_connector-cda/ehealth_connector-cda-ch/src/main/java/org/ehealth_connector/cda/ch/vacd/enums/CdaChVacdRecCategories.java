@@ -67,8 +67,8 @@ public enum CdaChVacdRecCategories {
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
 	public static CdaChVacdRecCategories getEnum(String code) {
@@ -86,8 +86,8 @@ public enum CdaChVacdRecCategories {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *          <br>
-	 *          <div class="de"> enumName</div>
+	 *            <br>
+	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -108,7 +108,7 @@ public enum CdaChVacdRecCategories {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *          <div class="de">code</div>
+	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -139,19 +139,19 @@ public enum CdaChVacdRecCategories {
 	private Date validTo;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>.
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *          <br>
-	 *          <div class="de"> code</div>
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayNameDe
-	 *          the display name de
+	 *            the display name de
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 * @param displayNameIt
-	 *          the display name it
+	 *            the display name it
 	 */
 	private CdaChVacdRecCategories(String code, String displayNameDe, String displayNameFr,
 			String displayNameIt, String validFrom, String validTo) {
@@ -172,7 +172,7 @@ public enum CdaChVacdRecCategories {
 	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode(LanguageCode languageCode) {
@@ -208,8 +208,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
-	 * code system id.</div>
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
@@ -228,8 +228,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div> <div class="de">Liefert
-	 * display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
@@ -238,8 +238,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the german display name.</div> <div class="de">Liefert
-	 * display name in deutscher Sprache.</div>
+	 * <div class="en">Gets the german display name.</div>
+	 * <div class="de">Liefert display name in deutscher Sprache.</div>
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
@@ -248,8 +248,8 @@ public enum CdaChVacdRecCategories {
 	}
 
 	/**
-	 * <div class="en">Gets the french display name.</div> <div class="de">Liefert
-	 * display name in französischer Sprache.</div>
+	 * <div class="en">Gets the french display name.</div>
+	 * <div class="de">Liefert display name in französischer Sprache.</div>
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
@@ -280,7 +280,7 @@ public enum CdaChVacdRecCategories {
 	 * Checks if the code is valid for the specified date
 	 *
 	 * @param date
-	 *          the date
+	 *            the date
 	 * @return true, if is valid
 	 */
 	public boolean isValid(Date date) {

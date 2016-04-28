@@ -33,7 +33,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Instantiates a new document and metadata.
-	 * 
+	 *
 	 * @param xdsDocument
 	 *            the xds document
 	 * @param docEntry
@@ -46,7 +46,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Gets the Document Metadata as convenience object.
-	 * 
+	 *
 	 * @return the doc entry
 	 */
 	public DocumentMetadata getDocEntry() {
@@ -55,7 +55,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Gets the doc entry as OHT document entry type.
-	 * 
+	 *
 	 * @return the doc entry as OHT document entry type
 	 */
 	public DocumentEntryType getDocEntryAsOhtDocumentEntryType() {
@@ -64,7 +64,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Gets the xds document.
-	 * 
+	 *
 	 * @return the xds document
 	 */
 	public XDSDocument getXdsDocument() {
@@ -73,7 +73,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Sets the Document Metadata.
-	 * 
+	 *
 	 * @param docEntry
 	 *            the new doc entry
 	 */
@@ -83,7 +83,7 @@ public class DocumentContentAndMetadata {
 
 	/**
 	 * Sets the xds document.
-	 * 
+	 *
 	 * @param xdsDocument
 	 *            the new xds document
 	 */

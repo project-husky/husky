@@ -14,17 +14,16 @@ public enum Signature {
 	 * <div class="en"></div> <div class="de">Eine Unterschrift ist
 	 * beabsichtigt</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	INTENDED("I", "intended"), /**
-								 * <div class="en"></div> <div class="de">Eine
-								 * Unterschrift ist für diesen Akteur
-								 * erforderlich</div> <div class="fr"></div>
-								 * <div class="it"></div>
-								 */
-	REQUIRED("X", "required"), /**
-								 * <div class="en"></div> <div class="de">Eine
-								 * Unterschrift ist erfolgt</div>
-								 * <div class="fr"></div> <div class="it"></div>
-								 */
+	INTENDED("I", "intended"),
+	/**
+	 * <div class="en"></div> <div class="de">Eine Unterschrift ist für diesen
+	 * Akteur erforderlich</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	REQUIRED("X", "required"),
+	/**
+	 * <div class="en"></div> <div class="de">Eine Unterschrift ist
+	 * erfolgt</div> <div class="fr"></div> <div class="it"></div>
+	 */
 	SIGNED("S", "signed");
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des

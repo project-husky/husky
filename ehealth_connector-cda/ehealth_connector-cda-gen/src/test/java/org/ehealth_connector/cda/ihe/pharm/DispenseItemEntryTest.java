@@ -155,7 +155,8 @@ public class DispenseItemEntryTest {
 
 		Document document = entry.getDocument();
 
-		XPathExpression expr = xpath.compile("//precondition/criterion/text/reference[@value='#abc']");
+		XPathExpression expr = xpath
+				.compile("//precondition/criterion/text/reference[@value='#abc']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		assertEquals("#abc", entry.getPreconditionEntries().get(0).getTextReference());
@@ -172,7 +173,8 @@ public class DispenseItemEntryTest {
 
 		MedicationTreatmentPlanItemReferenceEntry medicationTreatmentPlanItemReferenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
 		medicationTreatmentPlanItemReferenceEntry.setId(new Identificator("oid", "id"));
-		entry.setMedicationTreatmentPlanItemReferenceEntry(medicationTreatmentPlanItemReferenceEntry);
+		entry.setMedicationTreatmentPlanItemReferenceEntry(
+				medicationTreatmentPlanItemReferenceEntry);
 
 		PrescriptionItemReferenceEntry prescriptionItemReferenceEntry = new PrescriptionItemReferenceEntry();
 		prescriptionItemReferenceEntry.setId(new Identificator("oid2", "id2"));
@@ -189,13 +191,15 @@ public class DispenseItemEntryTest {
 		assertEquals(3, nodes.getLength());
 
 		assertEquals("oid", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getRoot());
-		assertEquals("id", entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
+		assertEquals("id",
+				entry.getMedicationTreatmentPlanItemReferenceEntry().getId().getExtension());
 
 		assertEquals("oid2", entry.getPrescriptionItemReferenceEntry().getId().getRoot());
 		assertEquals("id2", entry.getPrescriptionItemReferenceEntry().getId().getExtension());
 
 		assertEquals("oid3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getRoot());
-		assertEquals("id3", entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getExtension());
+		assertEquals("id3",
+				entry.getPharmaceuticalAdviceItemReferenceEntry().getId().getExtension());
 
 	}
 

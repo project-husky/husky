@@ -47,7 +47,7 @@ public class SubmissionSetMetadata {
 		 * <div class="en">Minimal (secure) metadata will be extracted *
 		 * Extraction from the first Document Entry to the Submission Set uses
 		 * the following mapping:
-		 * 
+		 *
 		 * <table summary="Submission set attributes generation">
 		 * <thead>
 		 * <tr>
@@ -102,7 +102,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Constructor with OHT SubmissionSet object.
-	 * 
+	 *
 	 * @param ohtSubmissionSet
 	 *            the OHT submission set object
 	 */
@@ -113,7 +113,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the Author of this Submission
-	 * 
+	 *
 	 * @return the Author as Convenience API Object
 	 */
 	public Author getAuthor() {
@@ -131,7 +131,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets comments for this submission
-	 * 
+	 *
 	 * @return comments the comments
 	 */
 	public String getComments() {
@@ -141,7 +141,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Gets the contentTypeCode, which defines the type of the submission set
 	 * content
-	 * 
+	 *
 	 * @return code the contentTypeCode
 	 */
 	public Code getContentTypeCode() {
@@ -150,7 +150,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the OHT SubmissionSet Object, which is wrapped by this class.
-	 * 
+	 *
 	 * @return the OHT SubmissionSet Object
 	 */
 	public SubmissionSetType getOhtSubmissionSetType() {
@@ -159,7 +159,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the ID of the patient
-	 * 
+	 *
 	 * @return id the patientId
 	 */
 	public Identificator getPatientId() {
@@ -168,7 +168,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the ID of the sending facility (e.g. a hospital id)
-	 * 
+	 *
 	 * @return id the SourceId
 	 */
 	public String getSourceId() {
@@ -177,7 +177,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Gets the title of the submission set
-	 * 
+	 *
 	 * @return the title
 	 */
 	public String getTitle() {
@@ -186,7 +186,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the Author of this submission
-	 * 
+	 *
 	 * @param author
 	 *            the Author
 	 */
@@ -211,7 +211,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the Availability Status of the Document
-	 * 
+	 *
 	 * @param status
 	 *            the AvailabilityStatus
 	 */
@@ -221,7 +221,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets comments for this submission
-	 * 
+	 *
 	 * @param comments
 	 *            the comments
 	 */
@@ -232,7 +232,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Sets the contentTypeCode, which defines the type of the submission set
 	 * content
-	 * 
+	 *
 	 * @param code
 	 *            the contentTypeCode
 	 */
@@ -242,7 +242,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the ID for the patient in the destination
-	 * 
+	 *
 	 * @param id
 	 *            the patientId
 	 */
@@ -252,7 +252,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the ID of the sending facility (e.g. a hospital id)
-	 * 
+	 *
 	 * @param id
 	 *            the SourceId
 	 */
@@ -262,7 +262,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * Sets the title of the submission set
-	 * 
+	 *
 	 * @param title
 	 *            the title
 	 */
@@ -273,7 +273,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Fills a given OHT SubmissionSetType object with the data of this
 	 * submission set class
-	 * 
+	 *
 	 * @param ohtSubmissionSetType
 	 *            the SubmissionSetType
 	 * @return the filled ohtSubmissionSetType

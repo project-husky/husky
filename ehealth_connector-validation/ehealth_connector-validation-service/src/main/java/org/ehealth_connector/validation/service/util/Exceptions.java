@@ -38,7 +38,7 @@ public class Exceptions {
 	 * If the specified exception is <tt>null</tt>, then an empty array is
 	 * returned.
 	 * </p>
-	 * 
+	 *
 	 * @param e
 	 *            an exception instance.
 	 * @param reverse
@@ -60,7 +60,7 @@ public class Exceptions {
 	 * <p>
 	 * This method is from the book <cite>Java Concurrency In Practice</cite>.
 	 * </p>
-	 * 
+	 *
 	 * @param t
 	 *            the <tt>Throwable</tt> instance.
 	 * @return a <tt>RuntimeException</tt>.

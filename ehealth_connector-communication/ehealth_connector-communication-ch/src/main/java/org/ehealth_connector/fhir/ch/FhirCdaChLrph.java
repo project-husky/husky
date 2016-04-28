@@ -83,16 +83,16 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		 * <div class="en">the resulting CDA document contains hiv patient
 		 * demographics</div><div class="de"></div> <div class="fr"></div>
 		 */
-		HIV, /**
-				 * <div class="en">the resulting CDA document contains full
-				 * patient demographics</div><div class="de"></div>
-				 * <div class="fr"></div>
-				 */
-		PATIENT, /**
-					 * <div class="en">the resulting CDA document contains
-					 * masked patient demographics</div><div class="de"></div>
-					 * <div class="fr"></div>
-					 */
+		HIV,
+		/**
+		 * <div class="en">the resulting CDA document contains full patient
+		 * demographics</div><div class="de"></div> <div class="fr"></div>
+		 */
+		PATIENT,
+		/**
+		 * <div class="en">the resulting CDA document contains masked patient
+		 * demographics</div><div class="de"></div> <div class="fr"></div>
+		 */
 		PSEUDONYMIZED
 	}
 
@@ -457,19 +457,6 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * Read the LrphDocument object from the FHIR bundle file
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the LRPH document
-	 */
-	public LrphDocument readLrphDocumentFromFile(String fileName) {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
-		final IParser parser = fhirCtx.newXmlParser();
-		return parser.parseResource(LrphDocument.class, resourceString);
-	}
-
-	/**
 	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
 	 * given FHIR bundle
 	 *
@@ -802,5 +789,18 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 			}
 		}
 		return retVal;
+	}
+
+	/**
+	 * Read the LrphDocument object from the FHIR bundle file
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the LRPH document
+	 */
+	public LrphDocument readLrphDocumentFromFile(String fileName) {
+		final String resourceString = FhirCommon.getXmlResource(fileName);
+		final IParser parser = fhirCtx.newXmlParser();
+		return parser.parseResource(LrphDocument.class, resourceString);
 	}
 }

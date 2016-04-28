@@ -57,7 +57,7 @@ public class AffinityDomain {
 
 	/**
 	 * Instantiates a new affinity domain.
-	 * 
+	 *
 	 * @param destPidSource
 	 *            the dest pid source
 	 * @param destRegistry
@@ -76,7 +76,7 @@ public class AffinityDomain {
 
 	/**
 	 * Instantiates a new affinity domain.
-	 * 
+	 *
 	 * @param destPidSource
 	 *            the dest pid source
 	 * @param destRegistry
@@ -94,7 +94,7 @@ public class AffinityDomain {
 
 	/**
 	 * Adds an other Identificator (like a SSN) ot the affinity Domain.
-	 * 
+	 *
 	 * @param oid
 	 *            the oid
 	 */
@@ -104,7 +104,7 @@ public class AffinityDomain {
 
 	/**
 	 * Adds the repository.
-	 * 
+	 *
 	 * @param destRepository
 	 *            the dest repository
 	 */
@@ -121,7 +121,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the atna config.
-	 * 
+	 *
 	 * @return the atna config
 	 */
 	public AtnaConfig getAtnaConfig() {
@@ -130,7 +130,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the mpi pid.
-	 * 
+	 *
 	 * @return the mpi pid
 	 */
 	public String getMpiPid() {
@@ -139,7 +139,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the other ids oid set.
-	 * 
+	 *
 	 * @return the other ids oid set
 	 */
 	public Set<String> getOtherIdsOidSet() {
@@ -148,7 +148,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the pdq destination.
-	 * 
+	 *
 	 * @return the pdq destination
 	 */
 	public Destination getPdqDestination() {
@@ -157,7 +157,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the pid source.
-	 * 
+	 *
 	 * @return the pid source
 	 */
 	public Destination getPixDestination() {
@@ -166,7 +166,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the registry.
-	 * 
+	 *
 	 * @return the registry
 	 */
 	public Destination getRegistryDestination() {
@@ -175,7 +175,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the repository.
-	 * 
+	 *
 	 * @return the repository
 	 */
 	public Destination getRepositoryDestination() {
@@ -188,7 +188,7 @@ public class AffinityDomain {
 
 	/**
 	 * Gets the repository.
-	 * 
+	 *
 	 * @param index
 	 *            the index
 	 * @return the repository
@@ -203,7 +203,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the atna config.
-	 * 
+	 *
 	 * @param atnaConfig
 	 *            the new atna config
 	 */
@@ -213,7 +213,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the mpi pid.
-	 * 
+	 *
 	 * @param mpiPid
 	 *            the new mpi pid
 	 */
@@ -223,7 +223,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the other ids oid set.
-	 * 
+	 *
 	 * @param otherIdsOidSet
 	 *            the new other ids oid set
 	 */
@@ -233,7 +233,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the pdq destination.
-	 * 
+	 *
 	 * @param pdqDestination
 	 *            the new pdq destination
 	 */
@@ -243,7 +243,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the pix source.
-	 * 
+	 *
 	 * @param destPidSource
 	 *            the new pid source
 	 */
@@ -253,7 +253,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the registry.
-	 * 
+	 *
 	 * @param destRegistry
 	 *            the new registry
 	 */
@@ -263,7 +263,7 @@ public class AffinityDomain {
 
 	/**
 	 * Sets the repository.
-	 * 
+	 *
 	 * @param destRepository
 	 *            the new repository
 	 */

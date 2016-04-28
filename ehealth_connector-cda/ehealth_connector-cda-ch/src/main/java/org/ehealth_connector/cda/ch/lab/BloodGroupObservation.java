@@ -36,7 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  * strukturierter Form.</div>
  */
 public class BloodGroupObservation
-extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
+		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation> {
 
 	/**
 	 * Instantiates a new blood group observation.

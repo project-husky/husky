@@ -127,8 +127,8 @@ public class ImmunizationRecommendationTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath
-				.compile("substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
+		expr = xpath.compile(
+				"substanceadministration/author/assignedAuthor/assignedPerson/name/given='Pieks'");
 		assertTrue((Boolean) expr.evaluate(document, XPathConstants.BOOLEAN));
 
 	}
@@ -312,7 +312,8 @@ public class ImmunizationRecommendationTest {
 	public void testRouteCode() throws XPathExpressionException {
 		final ImmunizationRecommendation entry = new ImmunizationRecommendation();
 		entry.setRouteOfAdministration(RouteOfAdministration.INJECTION_SUBCUTANEOUS);
-		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS, entry.getRouteOfAdministration());
+		assertEquals(RouteOfAdministration.INJECTION_SUBCUTANEOUS,
+				entry.getRouteOfAdministration());
 
 		final Document document = entry.getDocument();
 		final XPathExpression expr = xpath.compile(
@@ -328,7 +329,8 @@ public class ImmunizationRecommendationTest {
 
 		final Document document = immunization.getDocument();
 
-		XPathExpression expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12.2']");
+		XPathExpression expr = xpath
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.5.3.1.4.12.2']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

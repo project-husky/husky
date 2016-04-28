@@ -38,55 +38,6 @@ public class PerformerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer()}.
-	 */
-	@Test
-	public void testPerformer() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name)}
-	 * .
-	 */
-	@Test
-	public void testPerformerName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name, java.lang.String)}
-	 * .
-	 */
-	@Test
-	public void testPerformerNameString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.openhealthtools.mdht.uml.cda.Performer2)}
-	 * .
-	 */
-	@Test
-	public void testPerformerPerformer2() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Organization)}
-	 * .
-	 */
-	@Test
-	public void testPerformerOrganization() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.common.Performer#addAddress(org.ehealth_connector.common.Address)}
 	 * .
 	 */
@@ -147,6 +98,55 @@ public class PerformerTest {
 	 */
 	@Test
 	public void testGetGlnAsIdentificator() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer()}.
+	 */
+	@Test
+	public void testPerformer() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name)}
+	 * .
+	 */
+	@Test
+	public void testPerformerName() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Name, java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testPerformerNameString() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.ehealth_connector.common.Organization)}
+	 * .
+	 */
+	@Test
+	public void testPerformerOrganization() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.common.Performer#Performer(org.openhealthtools.mdht.uml.cda.Performer2)}
+	 * .
+	 */
+	@Test
+	public void testPerformerPerformer2() {
 		fail("Not yet implemented");
 	}
 

@@ -41,7 +41,7 @@ public class ZipFactory {
 	/**
 	 * Reads data from the input stream till end of file and writes it out to
 	 * the output stream.
-	 * 
+	 *
 	 * @param in
 	 *            the stream from which data is read.
 	 * @param out

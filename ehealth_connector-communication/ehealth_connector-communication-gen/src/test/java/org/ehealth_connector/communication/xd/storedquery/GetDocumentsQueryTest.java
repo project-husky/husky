@@ -42,7 +42,7 @@ public class GetDocumentsQueryTest extends XdsTestUtils {
 	 * Test method for
 	 * {@link org.ehealth_connector.communication.xd.storedquery.GetDocumentsQuery#GetDocumentsQuery(java.lang.String[], boolean)}
 	 * .
-	 * 
+	 *
 	 * @throws MalformedStoredQueryException
 	 */
 	@Test

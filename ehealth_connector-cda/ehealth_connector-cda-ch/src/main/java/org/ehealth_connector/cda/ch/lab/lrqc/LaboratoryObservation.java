@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Interpretation des Messresultates bestehen.</div>
  */
 public class LaboratoryObservation
-extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
+		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
 	/**
 	 * Instantiates a new laboratory observation.

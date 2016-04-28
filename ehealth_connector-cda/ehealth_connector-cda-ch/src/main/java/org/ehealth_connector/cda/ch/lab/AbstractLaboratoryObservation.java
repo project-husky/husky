@@ -33,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
  * The Class AbstractLaboratoryObservation.
  */
 public abstract class AbstractLaboratoryObservation
-extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
+		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
 
 	/**
 	 * Instantiates a new abstract laboratory observation.

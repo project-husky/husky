@@ -54,7 +54,7 @@ public enum DispenseCodeList {
 	 * Gets the enum.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @return the enum
 	 */
 	public static DispenseCodeList getEnum(String code) {
@@ -79,11 +79,11 @@ public enum DispenseCodeList {
 	 * Instantiates a new route of administration.
 	 *
 	 * @param code
-	 *          the code
+	 *            the code
 	 * @param displayNameEn
-	 *          the display name en
+	 *            the display name en
 	 * @param displayNameFr
-	 *          the display name fr
+	 *            the display name fr
 	 */
 	private DispenseCodeList(String code, String displayNameEn, String displayNameFr) {
 		this.code = code;
@@ -95,7 +95,7 @@ public enum DispenseCodeList {
 	 * Gets the code.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 * @return the code
 	 */
 	public Code getCode(LanguageCode languageCode) {

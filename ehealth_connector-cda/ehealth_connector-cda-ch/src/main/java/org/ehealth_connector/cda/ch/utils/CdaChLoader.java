@@ -31,14 +31,14 @@ public class CdaChLoader<T> {
 	/**
 	 * <div class="en">Loads a CdaCh document from an input stream and
 	 * instantiate to a given type.</div>
-	 * 
+	 *
 	 * <div class="de">Lädt ein CdaCh aus einem inputstream und instanziert
 	 * object vom angegebenen typ.</div>
-	 * 
+	 *
 	 * <div class="fr"></div>
-	 * 
+	 *
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param input
 	 *            the inputstream
 	 * @param aClazz

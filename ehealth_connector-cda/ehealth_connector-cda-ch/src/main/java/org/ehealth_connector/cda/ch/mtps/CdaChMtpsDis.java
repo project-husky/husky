@@ -37,7 +37,7 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * Instantiates a new cda ch mtps dis.
 	 *
 	 * @param languageCode
-	 *          the language code
+	 *            the language code
 	 */
 	public CdaChMtpsDis(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
@@ -65,7 +65,7 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * Instantiates a new cda ch mtps dis.
 	 *
 	 * @param doc
-	 *          mdht model document
+	 *            mdht model document
 	 */
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {
 		super(doc);
