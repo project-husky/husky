@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-main</artifactId>
@@ -28,14 +29,24 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<module>ehealth_connector-codeformat</module>
 	</modules>
 
-	<dependencyManagement>
-		<dependencies>
-
-			<!-- eclipse stuff -->
-
-			
-		</dependencies>
-	</dependencyManagement>
+	<repositories>
+		<repository>
+			<id>projects.suisse-open-exchange.healthcare-sna</id>
+			<name>projects.suisse-open-exchange.healthcare-snapshots</name>
+			<url>https://projects.suisse-open-exchange.healthcare/artifactory/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>projects.suisse-open-exchange.healthcare-rel</id>
+			<name>projects.suisse-open-exchange.healthcare-releases</name>
+			<url>https://projects.suisse-open-exchange.healthcare/artifactory/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
@@ -51,7 +62,8 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
-							<!-- simpler configuration without reportSets available for usual cases -->
+							<!-- simpler configuration without reportSets available for usual 
+								cases -->
 							<reports>
 								<report>dependencies</report>
 								<report>scm</report>
