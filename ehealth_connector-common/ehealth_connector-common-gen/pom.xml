@@ -27,6 +27,7 @@ are ok.</description>
 		<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
+				<version>1.3-SNAPSHOT</version>
 		</dependency>
 
 		<!-- open health tools ihe -->
