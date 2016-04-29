@@ -54,6 +54,14 @@
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute name="workDir" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					The work directory. If specified, all precompiled Schematrons will be 
+					stored in this directory. If not specified, a work directory will be created in the path 
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>
 
 	<xsd:complexType name="ApplicationType">

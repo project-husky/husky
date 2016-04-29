@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.ehealth_connector.cda;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,8 +57,8 @@ public class ObservationMediaEntry
 	 * Sets the (not Base64 encoded) inputStream and MimeType.
 	 *
 	 * @param inputStream
-	 *            the (not Base64 encoded) inputStream. It will be wrapped into
-	 *            an Base64InputStream
+	 *            the binary inputStream. It will be wrapped into an
+	 *            Base64InputStream
 	 * @param mimeType
 	 *            the mime type of the object
 	 * @param reference
@@ -97,6 +98,26 @@ public class ObservationMediaEntry
 			throws IOException {
 		this();
 		setObject(resourceFileName, mimeType);
+	}
+
+	/**
+	 * Sets the (not Base64 encoded) file and MimeType.
+	 *
+	 * @param filePath
+	 *            the full path to a binary file. It will be wrapped into an
+	 *            Base64InputStream
+	 * @param mimeType
+	 *            the mime type of the object
+	 * @param reference
+	 *            a reference to the CDA section text
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public ObservationMediaEntry(String filePath, LabObservationMediaMimeType mimeType,
+			String reference) throws IOException {
+		this();
+		setObject(new FileInputStream(new File(filePath)), mimeType);
+		setObservationMediaId(reference);
 	}
 
 	/**

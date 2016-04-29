@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- The base directory is set to be the parent folder of the configuration
 file. -->
-<configuration baseDir="rsc"
+<configuration baseDir="rsc" workDir="work"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="configuration.xsd">
 	

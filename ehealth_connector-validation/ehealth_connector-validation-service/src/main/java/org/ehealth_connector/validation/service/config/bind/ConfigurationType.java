@@ -63,11 +63,17 @@ public class ConfigurationType {
 
 	@XmlElement(required = true)
 	protected ApplicationType application;
+
 	@XmlElement(required = true)
 	protected SchematronType schematron;
+
 	@XmlAttribute
 	@XmlSchemaType(name = "anySimpleType")
 	protected String baseDir;
+
+	@XmlAttribute
+	@XmlSchemaType(name = "anySimpleType")
+	protected String workDir;
 
 	/**
 	 * Gets the value of the application property.
@@ -131,17 +137,22 @@ public class ConfigurationType {
 	 * @return the application's work directory.
 	 */
 	public File getWorkDir() throws ConfigurationException {
-		File workDir = new File(getBaseDir() + "/work");
-		if (!workDir.isDirectory()) {
-			if (!workDir.mkdir()) {
-				throw new ConfigurationException(
-						String.format("Could not create working directory: '%s'", workDir));
+		File wD = null;
+		if (workDir == null) {
+			wD = new File(getBaseDir() + "/work");
+			if (!wD.isDirectory()) {
+				if (!wD.mkdir()) {
+					throw new ConfigurationException(
+							String.format("Could not create working directory: '%s'", wD));
+				}
 			}
-		}
-		if (!workDir.canWrite()) {
-			throw new ConfigurationException("Working directory is not writable");
-		}
-		return workDir.getAbsoluteFile();
+			if (!wD.canWrite()) {
+				throw new ConfigurationException("Working directory is not writable");
+			}
+		} else
+			wD = new File(workDir);
+
+		return wD.getAbsoluteFile();
 	}
 
 	/**

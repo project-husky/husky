@@ -68,8 +68,6 @@ public class Validators {
 
 	private static final String VALIDATOR_FILE_EXTENSION = "-validator.xsl";
 
-	private static final String WORK_DIRECTORY_NAME = "work";
-
 	/** The tread-safe cache for compiled stylesheets. */
 	private final ConcurrentHashMap<File, Future<XsltExecutable>> cache = new ConcurrentHashMap<File, Future<XsltExecutable>>();
 
@@ -134,15 +132,20 @@ public class Validators {
 	 * @param base
 	 *            the base file, normally the <cite>Schematron Master
 	 *            File</cite>.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @return a new output file for the <cite>Schematron Validator</cite>.
 	 */
-	protected File createOutputFile(File base) {
+	protected File createOutputFile(File base, File workDir) {
 		String baseName = base.getName();
 		final int pos = baseName.lastIndexOf(".");
 		if (pos >= 0) {
 			baseName = baseName.substring(0, pos) + VALIDATOR_FILE_EXTENSION;
 		}
-		return new File(getWorkDir(), baseName);
+		return new File(workDir, baseName);
 	}
 
 	/**
@@ -215,25 +218,34 @@ public class Validators {
 	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @return the compiled validator stylesheet.
+	 *
 	 * @throws TransformationException
 	 *             if the construction of the compiled stylesheet aborted by
 	 *             throwing an exception.
+	 *
 	 * @throws InterruptedException
 	 *             if the construction of the compiled stylesheet was
 	 *             interrupted.
+	 *
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
+	 *
 	 * @see #load(RuleSet)
 	 * @see #get(File, File, boolean)
 	 * @see #createOutputFile(File)
 	 */
-	public XsltExecutable get(RuleSet ruleSet)
+	public XsltExecutable get(RuleSet ruleSet, File workDir)
 			throws TransformationException, InterruptedException {
 		if (ruleSet == null)
 			throw new NullPointerException("Rule-Set is null.");
 		final File in = ruleSet.getPath();
-		final File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
+		final File out = (ruleSet.isPersistable() ? createOutputFile(in, workDir) : null);
 		return get(in, out, ruleSet.isCacheable());
 	}
 
@@ -244,16 +256,6 @@ public class Validators {
 	 */
 	public Processor getProcessor() {
 		return factory.getProcessor();
-	}
-
-	/**
-	 * Returns the absolute path of the work directory.
-	 *
-	 * @return the absolute path of the directory, where the transformed output
-	 *         file goes.
-	 */
-	protected File getWorkDir() {
-		return new File(WORK_DIRECTORY_NAME).getAbsoluteFile();
 	}
 
 	/**
@@ -308,13 +310,19 @@ public class Validators {
 	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
+	 * 
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @return the compiled validator stylesheet wrapped in a <tt>Future</tt>.
+	 *
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
 	 */
-	public Future<XsltExecutable> load(RuleSet ruleSet) {
+	public Future<XsltExecutable> load(RuleSet ruleSet, File workDir) {
 		final File in = ruleSet.getPath();
-		final File out = (ruleSet.isPersistable() ? createOutputFile(in) : null);
+		final File out = (ruleSet.isPersistable() ? createOutputFile(in, workDir) : null);
 		return load(in, out, ruleSet.isCacheable());
 	}
 

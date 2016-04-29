@@ -104,6 +104,7 @@ public class CdaValidator {
 	 */
 	public CdaValidator(File configFile) throws ConfigurationException {
 		this.configuration = configure(configFile);
+		System.out.println("workDir=" + this.configuration.getWorkDir());
 		this.validators = createValidators(this.configuration);
 		this.reportBuilder = new ReportBuilder(validators);
 	}
@@ -457,15 +458,18 @@ public class CdaValidator {
 			validationResult.getXsdValidationResult().setXsdValidationMsg(e.getMessage());
 		}
 
+		SchematronValidationResult schValRes = null;
 		try {
 			final SchematronOutput schOut = validateSchRaw();
-			final SchematronValidationResult schValRes = convertSchematronOutput(schOut);
-			validationResult.setSchValidationResult(schValRes);
+			schValRes = convertSchematronOutput(schOut);
 
 		} catch (SAXException | FileNotFoundException | RuleSetDetectionException
 				| TransformationException | InterruptedException e) {
-			System.out.println("Schematron validation failed: " + e.getMessage());
+			log.error("Schematron validation failed: " + e.getMessage());
+			schValRes = new SchematronValidationResult();
+			schValRes.setException(e.getMessage());
 		}
+		validationResult.setSchValidationResult(schValRes);
 
 		try {
 			validationResult.setPdfValidationResult(validatePdf());
@@ -596,7 +600,8 @@ public class CdaValidator {
 		if ((langCode != null) && !langCode.isEmpty())
 			parameters.put("uiLanguage", langCode);
 
-		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet, in, out, parameters);
+		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet,
+				configuration.getWorkDir(), in, out, parameters);
 
 		return createSchematronOutput(new ByteArrayInputStream(svrlReport));
 	}
@@ -617,12 +622,6 @@ public class CdaValidator {
 			TransformationException, InterruptedException, ConfigurationException {
 		this.cdaFile = schFile;
 		return validateSchRaw();
-	}
-
-	private void validateXsdSchema() throws SAXException, IOException {
-		final Schema schema = this.schema;
-		final Validator validator = schema.newValidator();
-		validator.validate(new StreamSource(this.cdaFile));
 	}
 
 	/**
@@ -659,6 +658,12 @@ public class CdaValidator {
 	public XsdValidationResult validateXsd(File xsdFile) throws ConfigurationException {
 		this.cdaFile = xsdFile;
 		return validateXsd();
+	}
+
+	private void validateXsdSchema() throws SAXException, IOException {
+		final Schema schema = this.schema;
+		final Validator validator = schema.newValidator();
+		validator.validate(new StreamSource(this.cdaFile));
 	}
 
 }

@@ -91,6 +91,7 @@ public class PdfValidator {
 
 		pdfValidationResult.resetIsDone();
 		PdfValidatorAPI pdfValidator = null;
+		log.info("Trying to initialize PdfValidatorAPI...	");
 		try {
 			pdfValidator = new PdfValidatorAPI();
 		} catch (UnsatisfiedLinkError ue) {
@@ -116,6 +117,7 @@ public class PdfValidator {
 			pdfValidationResult.add(failure);
 		}
 		if (pdfValidator != null) {
+			log.info("PdfValidatorAPI initialized");
 			pdfValidator.setNoTempFiles(true);
 			final String licenseKey = config.getLicenseKey();
 			if (!PdfValidatorAPI.setLicenseKey(licenseKey)) {
@@ -127,6 +129,7 @@ public class PdfValidator {
 				pdfValidationResult.add(failure);
 			}
 		}
+
 		if (pdfValidator != null) {
 			String reportingLevel = config.getPdfReportingLevel();
 			if (reportingLevel == null)

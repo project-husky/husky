@@ -18,6 +18,7 @@ package org.ehealth_connector.validation.service.schematron;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -212,9 +213,19 @@ public class ReportBuilder {
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance to be used
 	 *            for the validation process.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @param input
 	 *            the XML input to be validated as an array of bytes.
+	 *
+	 * @param parameters
+	 *            XSLT parameters
+	 *
 	 * @return an HTML validation report as an array of bytes.
+	 *
 	 * @throws TransformationException
 	 *             if the construction of the validator stylesheet aborted by
 	 *             throwing an exception, if any stylesheet contains static
@@ -231,11 +242,11 @@ public class ReportBuilder {
 	 * @see #createHTMLReport(RuleSet[], byte[])
 	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
 	 */
-	public byte[] createHTMLReport(RuleSet ruleSet, byte[] input, Properties parameters)
-			throws TransformationException, InterruptedException {
+	public byte[] createHTMLReport(RuleSet ruleSet, File workDir, byte[] input,
+			Properties parameters) throws TransformationException, InterruptedException {
 		final ByteArrayInputStream in = new ByteArrayInputStream(input);
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		createHTMLReport(ruleSet, in, out, parameters);
+		createHTMLReport(ruleSet, workDir, in, out, parameters);
 		return out.toByteArray();
 	}
 
@@ -247,10 +258,19 @@ public class ReportBuilder {
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance to be used
 	 *            for the validation process.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @param in
 	 *            the XML input to be validated.
 	 * @param out
 	 *            the output stream, where the validation results are written.
+	 *
+	 * @param parameters
+	 *            XSLT parameters
+	 *
 	 * @throws TransformationException
 	 *             if the construction of the validator stylesheet aborted by
 	 *             throwing an exception, if any stylesheet contains static
@@ -265,10 +285,10 @@ public class ReportBuilder {
 	 *             if either the specified rule-set or input stream is
 	 *             <tt>null</tt>.
 	 */
-	public long createHTMLReport(RuleSet ruleSet, InputStream in, OutputStream out,
+	public long createHTMLReport(RuleSet ruleSet, File workDir, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		final XsltExecutable styleSheet = getValidator(ruleSet);
+		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
 		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
@@ -303,14 +323,25 @@ public class ReportBuilder {
 	 *
 	 * @param ruleSetList
 	 *            the list of available rule-sets.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @param input
 	 *            the XML input to be validated as an array of bytes.
+	 *
+	 * @param parameters
+	 *            XSLT parameters
+	 *
 	 * @return an HTML validation report as an array of bytes.
+	 *
 	 * @throws RuleSetDetectionException
 	 *             if no rule-set or if more than one rule-set was found for the
 	 *             specified document, or if an error occurs when building the
 	 *             document, for example a parsing error or because the type of
 	 *             document supplied does not match the required type.
+	 *
 	 * @throws TransformationException
 	 *             if the construction of the validator stylesheet aborted by
 	 *             throwing an exception, if any stylesheet contains static
@@ -327,19 +358,42 @@ public class ReportBuilder {
 	 * @see #createHTMLReport(RuleSet, byte[])
 	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
 	 */
-	public byte[] createHTMLReport(RuleSet[] ruleSetList, byte[] input, Properties parameters)
-			throws SAXException, RuleSetDetectionException, TransformationException,
-			InterruptedException {
+	public byte[] createHTMLReport(RuleSet[] ruleSetList, File workDir, byte[] input,
+			Properties parameters) throws SAXException, RuleSetDetectionException,
+			TransformationException, InterruptedException {
 		final ByteArrayInputStream in = new ByteArrayInputStream(input);
 		final RuleSet ruleSet = detectRuleSet(new StreamSource(in), ruleSetList);
-		return createHTMLReport(ruleSet, input, parameters);
+		return createHTMLReport(ruleSet, workDir, input, parameters);
 	}
 
-	public byte[] createSvrlReport(RuleSet ruleSet, InputStream in, OutputStream out,
+	/**
+	 *
+	 * Creates a Schematrron result in the SVRL format
+	 *
+	 * @param ruleSet
+	 *            the list of available rule-sets.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
+	 * @param in
+	 *            the XML input to be validated as an stream
+	 * @param out
+	 *            the output stream, where the validation results are written.
+	 *
+	 * @param parameters
+	 *            XSLT parameters
+	 *
+	 * @return
+	 * @throws TransformationException
+	 * @throws InterruptedException
+	 */
+	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final ByteArrayOutputStream baos_ms = new ByteArrayOutputStream();
-		final XsltExecutable styleSheet = getValidator(ruleSet);
+		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
 		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
@@ -417,19 +471,27 @@ public class ReportBuilder {
 	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
+	 * 
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
 	 * @return the compiled validator stylesheet.
+	 *
 	 * @throws TransformationException
 	 *             if the construction of the compiled stylesheet aborted by
 	 *             throwing an exception.
+	 * 
 	 * @throws InterruptedException
 	 *             if the construction of the compiled stylesheet was
 	 *             interrupted.
+	 * 
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
 	 */
-	public XsltExecutable getValidator(RuleSet ruleSet)
+	public XsltExecutable getValidator(RuleSet ruleSet, File workDir)
 			throws TransformationException, InterruptedException {
-		return validators.get(ruleSet);
+		return validators.get(ruleSet, workDir);
 	}
 
 } // End of ReportBuilder
