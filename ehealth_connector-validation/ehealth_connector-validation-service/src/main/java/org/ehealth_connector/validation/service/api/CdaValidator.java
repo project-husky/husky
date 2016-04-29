@@ -270,6 +270,8 @@ public class CdaValidator {
 		Object prevObject = null;
 		final SchematronValidationResult schValRes = new SchematronValidationResult();
 		schValRes.setSchematronValid(true);
+		schValRes.setRuleSet(schOut.getRuleSet());
+		schValRes.setSourceFile(schOut.getSourceFile());
 
 		final List<Object> schOutputList = schOut.getActivePatternAndFiredRuleAndFailedAssert();
 
@@ -468,6 +470,7 @@ public class CdaValidator {
 			log.error("Schematron validation failed: " + e.getMessage());
 			schValRes = new SchematronValidationResult();
 			schValRes.setException(e.getMessage());
+			schValRes.setSourceFile(cdaFile);
 		}
 		validationResult.setSchValidationResult(schValRes);
 
@@ -602,8 +605,11 @@ public class CdaValidator {
 
 		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet,
 				configuration.getWorkDir(), in, out, parameters);
+		SchematronOutput retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
+		retVal.setRuleSet(ruleSet);
+		retVal.setSourceFile(this.cdaFile);
 
-		return createSchematronOutput(new ByteArrayInputStream(svrlReport));
+		return retVal;
 	}
 
 	/**

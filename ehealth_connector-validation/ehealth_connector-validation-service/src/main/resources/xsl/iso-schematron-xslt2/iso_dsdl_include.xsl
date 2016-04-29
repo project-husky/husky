@@ -101,7 +101,7 @@
 	
 	3. This notice may not be removed or altered from any source distribution.
 -->
-<xslt:stylesheet version="1.0"
+<xslt:stylesheet version="2.0"
 	xmlns:xslt="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:iso="http://purl.oclc.org/dsdl/schematron"
@@ -202,7 +202,7 @@
 	
 		<xslt:template match="iso:name[@path]" mode="dsdl:go">
 	  <xsl:call-template name="sch-check:xpath-wf-message">
-          <xsl:with-param name="string" select=" @select "  />
+          <xsl:with-param name="string" select=" @path "  />
           <xsl:with-param name="subject" select=" 'Bad name element: ' "  />
         </xsl:call-template>
         

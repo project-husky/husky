@@ -1,7 +1,10 @@
 package org.ehealth_connector.validation.service.schematron.result;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.ehealth_connector.validation.service.schematron.RuleSet;
 
 public class SchematronValidationResult {
 
@@ -9,6 +12,10 @@ public class SchematronValidationResult {
 	private String exceptionMsg = null;
 
 	private boolean schematronValid;
+
+	private RuleSet ruleSet = null;
+
+	private File sourceFile = null;
 
 	public SchematronValidationResult() {
 		activePatternResultFull = new ArrayList<ActivePatternResult>();
@@ -20,6 +27,14 @@ public class SchematronValidationResult {
 
 	public String getException() {
 		return exceptionMsg;
+	}
+
+	public RuleSet getRuleSet() {
+		return ruleSet;
+	}
+
+	public File getSourceFile() {
+		return sourceFile;
 	}
 
 	public boolean isSchematronValid() {
@@ -35,7 +50,16 @@ public class SchematronValidationResult {
 		schematronValid = false;
 	}
 
+	public void setRuleSet(RuleSet ruleSet) {
+		this.ruleSet = ruleSet;
+	}
+
 	public void setSchematronValid(boolean schematronValid) {
 		this.schematronValid = schematronValid;
 	}
+
+	public void setSourceFile(File sourceFile) {
+		this.sourceFile = sourceFile;
+	}
+
 }

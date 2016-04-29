@@ -7,6 +7,7 @@
 
 package org.ehealth_connector.validation.service.schematron.bind;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.ehealth_connector.validation.service.schematron.RuleSet;
 
 /**
  * <p>
@@ -82,28 +86,34 @@ public class SchematronOutput {
 	@XmlSchemaType(name = "anySimpleType")
 	protected String schemaVersion;
 
+	@XmlTransient
+	private RuleSet ruleSet = null;
+
+	@XmlTransient
+	private File sourceFile = null;
+
 	/**
 	 * Gets the value of the activePatternAndFiredRuleAndFailedAssert property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the activePatternAndFiredRuleAndFailedAssert
 	 * property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getActivePatternAndFiredRuleAndFailedAssert().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link ActivePattern } {@link FiredRule } {@link FailedAssert }
 	 * {@link SuccessfulReport }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<Object> getActivePatternAndFiredRuleAndFailedAssert() {
 		if (activePatternAndFiredRuleAndFailedAssert == null) {
@@ -114,24 +124,24 @@ public class SchematronOutput {
 
 	/**
 	 * Gets the value of the nsPrefixInAttributeValues property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the nsPrefixInAttributeValues property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getNsPrefixInAttributeValues().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link NsPrefixInAttributeValues }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<NsPrefixInAttributeValues> getNsPrefixInAttributeValues() {
 		if (nsPrefixInAttributeValues == null) {
@@ -142,43 +152,61 @@ public class SchematronOutput {
 
 	/**
 	 * Gets the value of the phase property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPhase() {
 		return phase;
 	}
 
 	/**
+	 * Returns the RuleSet that was used for the current validation
+	 *
+	 * @return RuleSet that was used for the current validation
+	 */
+	public RuleSet getRuleSet() {
+		return ruleSet;
+	}
+
+	/**
 	 * Gets the value of the schemaVersion property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getSchemaVersion() {
 		return schemaVersion;
 	}
 
 	/**
+	 * Returns the Source File that was used for the current validation
+	 *
+	 * @return Source File that was used for the current validation
+	 */
+	public File getSourceFile() {
+		return sourceFile;
+	}
+
+	/**
 	 * Gets the value of the text property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the text property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getText().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list {@link Text }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<Text> getText() {
 		if (text == null) {
@@ -189,9 +217,9 @@ public class SchematronOutput {
 
 	/**
 	 * Gets the value of the title property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTitle() {
 		return title;
@@ -199,32 +227,52 @@ public class SchematronOutput {
 
 	/**
 	 * Sets the value of the phase property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPhase(String value) {
 		this.phase = value;
 	}
 
 	/**
+	 * Sets the RuleSet that was used for the current validation
+	 *
+	 * @param ruleSet
+	 *            RuleSet that was used for the current validation
+	 */
+	public void setRuleSet(RuleSet ruleSet) {
+		this.ruleSet = ruleSet;
+	}
+
+	/**
 	 * Sets the value of the schemaVersion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setSchemaVersion(String value) {
 		this.schemaVersion = value;
 	}
 
 	/**
+	 * Sets the Source File that was used for the current validation
+	 *
+	 * @param sourceFile
+	 *            Source File that was used for the current validation
+	 */
+	public void setSourceFile(File sourceFile) {
+		this.sourceFile = sourceFile;
+	}
+
+	/**
 	 * Sets the value of the title property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTitle(String value) {
 		this.title = value;
