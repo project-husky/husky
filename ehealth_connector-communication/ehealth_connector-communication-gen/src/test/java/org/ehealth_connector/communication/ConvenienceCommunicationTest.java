@@ -40,9 +40,9 @@ public class ConvenienceCommunicationTest {
 	public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
 	// Keystore and Truststore for secured communication (in this example, we
 	// use one keystore file for those two)
-	public static final String KEY_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore";
+	public static final String KEY_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
 	public static final String KEY_STORE_PASS = "nistbill";
-	public static final String TRUST_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore";
+	public static final String TRUST_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
 	public static final String TRUST_STORE_PASS = "nistbill";
 
 	// The ID of your Organization
