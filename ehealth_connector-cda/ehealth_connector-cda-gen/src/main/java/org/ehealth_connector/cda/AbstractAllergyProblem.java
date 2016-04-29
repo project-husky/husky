@@ -433,11 +433,9 @@ public abstract class AbstractAllergyProblem {
 	 *            the new id
 	 */
 	public void setId(Identificator id) {
-		if (id != null) {
-			final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
-			getAllergyProblem().getIds().clear();
-			getAllergyProblem().getIds().add(ii);
-		}
+		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		getAllergyProblem().getIds().clear();
+		getAllergyProblem().getIds().add(ii);
 	}
 
 	/**
