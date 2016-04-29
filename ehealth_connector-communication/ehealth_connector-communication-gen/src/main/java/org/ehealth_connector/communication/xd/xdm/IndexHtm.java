@@ -17,6 +17,7 @@ package org.ehealth_connector.communication.xd.xdm;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 
 import org.ehealth_connector.common.VendorInformation;
@@ -129,7 +130,12 @@ public class IndexHtm {
 
 		str = str + HTML_FOOTER;
 
-		inputStream = new ByteArrayInputStream(str.getBytes());
+		try {
+			inputStream = new ByteArrayInputStream(str.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
