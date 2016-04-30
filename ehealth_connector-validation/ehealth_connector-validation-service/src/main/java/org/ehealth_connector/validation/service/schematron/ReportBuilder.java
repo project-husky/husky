@@ -420,7 +420,7 @@ public class ReportBuilder {
 		// for debugging only - comment these lines for productive releases
 		// OutputStream outputStream2 = null;
 		// try {
-		// outputStream2 = new FileOutputStream("temp/svrl2xml_out.xml");
+		// outputStream2 = new FileOutputStream("/temp/svrl2xml_out.xml");
 		// baos_ms.writeTo(outputStream2);
 		// outputStream2.close();
 		// } catch (IOException e) {
@@ -471,7 +471,7 @@ public class ReportBuilder {
 	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
-	 * 
+	 *
 	 * @param workDir
 	 *            the work directory where to put/read precompiled Schematron
 	 *            stylesheets
@@ -481,11 +481,11 @@ public class ReportBuilder {
 	 * @throws TransformationException
 	 *             if the construction of the compiled stylesheet aborted by
 	 *             throwing an exception.
-	 * 
+	 *
 	 * @throws InterruptedException
 	 *             if the construction of the compiled stylesheet was
 	 *             interrupted.
-	 * 
+	 *
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
 	 */

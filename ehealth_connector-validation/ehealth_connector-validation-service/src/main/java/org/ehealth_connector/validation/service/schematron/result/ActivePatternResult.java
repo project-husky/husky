@@ -103,7 +103,7 @@ public class ActivePatternResult {
 				prevObject = tempFR;
 			}
 		}
-		if ((tempObj instanceof SuccessfulReport) || (tempObj instanceof SuccessfulReport)) {
+		if ((tempObj instanceof FailedAssert) || (tempObj instanceof SuccessfulReport)) {
 			firedRulesresults.add(tempFR);
 		}
 		return firedRulesresults;
