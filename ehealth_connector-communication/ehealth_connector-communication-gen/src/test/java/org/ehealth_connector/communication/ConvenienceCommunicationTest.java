@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URISyntaxException;
 
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
@@ -40,9 +41,11 @@ public class ConvenienceCommunicationTest {
 	public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
 	// Keystore and Truststore for secured communication (in this example, we
 	// use one keystore file for those two)
-	public static final String KEY_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
+//	public static final String KEY_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
+	public static final String KEY_STORE = "docConsumer/security/keystore.jks";
 	public static final String KEY_STORE_PASS = "nistbill";
-	public static final String TRUST_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
+//	public static final String TRUST_STORE = "../demo/java/ehealthconnectorDemo/rsc/demoDocSource/security/keystore.jks";
+	public static final String TRUST_STORE = "docConsumer/security/keystore.jks";
 	public static final String TRUST_STORE_PASS = "nistbill";
 
 	// The ID of your Organization
@@ -66,7 +69,9 @@ public class ConvenienceCommunicationTest {
 			e.printStackTrace();
 		}
 
-		repo = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS, TRUST_STORE,
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+		final String truststore = Util.extractFileFromResource(TRUST_STORE);
+		repo = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS, truststore,
 				TRUST_STORE_PASS);
 
 		affinityDomain = new AffinityDomain(null, null, repo);

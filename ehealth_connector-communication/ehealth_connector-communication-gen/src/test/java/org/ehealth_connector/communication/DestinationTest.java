@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.net.URISyntaxException;
 
+import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,9 +33,9 @@ public class DestinationTest {
 	public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
 	// Keystore and Truststore for secured communication (in this example, we
 	// use one keystore file for those two)
-	public static final String KEY_STORE = "src/test/resources/security/keystore.jks";
+	public static final String KEY_STORE = "docConsumer/security/keystore.jks";
 	public static final String KEY_STORE_PASS = "nistbill";
-	public static final String TRUST_STORE = "src/test/resources/security/keystore.jks";
+	public static final String TRUST_STORE = "docConsumer/security/keystore.jks";
 	public static final String TRUST_STORE_PASS = "nistbill";
 
 	// The ID of your Organization
@@ -61,8 +62,7 @@ public class DestinationTest {
 
 	@Test
 	public void testKeyStoreConstructor() {
-		File keyFile = new File(System.getProperty("user.dir"), KEY_STORE);
-		final String keystore = keyFile.getAbsolutePath();
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
 		
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
@@ -75,10 +75,9 @@ public class DestinationTest {
 
 	@Test
 	public void testKeyStoreTrustStoreConstructor() {
-		File keyFile = new File(System.getProperty("user.dir"), KEY_STORE);
-		final String keystore = keyFile.getAbsolutePath();
-		File trustFile = new File(System.getProperty("user.dir"), TRUST_STORE);
-		final String truststore = trustFile.getAbsolutePath();
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+		final String truststore = Util.extractFileFromResource(TRUST_STORE);
+		
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS,
 				truststore, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
@@ -92,8 +91,8 @@ public class DestinationTest {
 	@Test
 	public void testSetterGetter() {
 		Destination dest = new Destination();
-		File keyFile = new File(System.getProperty("user.dir"), KEY_STORE);
-		final String keystore = keyFile.getAbsolutePath();
+		final String keystore = Util.extractFileFromResource(KEY_STORE);	
+		
 		dest.setKeyStore(keystore);
 		assertEquals(keystore, dest.getKeyStore());
 		dest.setKeyStorePassword(KEY_STORE_PASS);
@@ -113,8 +112,7 @@ public class DestinationTest {
 		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
 		
-		File trustFile = new File(System.getProperty("user.dir"), TRUST_STORE);
-		final String truststore = trustFile.getAbsolutePath();
+		final String truststore = Util.extractFileFromResource(TRUST_STORE);
 		dest.setTrustStore(truststore);
 		assertEquals(truststore, dest.getTrustStore());
 		dest.setTrustStorePassword(TRUST_STORE_PASS);
