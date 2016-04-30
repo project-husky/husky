@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-main</artifactId>
@@ -12,7 +11,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
 		<artifactId>ehealth_connector-parent</artifactId>
-		<version>1.3-SNAPSHOT</version>
+		<version>1.3.0-201604</version>
 	</parent>
 
 	<properties>
@@ -175,7 +174,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<dependency>
 						<artifactId>ehealth_connector-codeformat</artifactId>
 						<groupId>org.ehealth_connector</groupId>
-						<version>1.3-SNAPSHOT</version>
+						<version>1.3.0-201604</version>
 					</dependency>
 				</dependencies>
 			</plugin>

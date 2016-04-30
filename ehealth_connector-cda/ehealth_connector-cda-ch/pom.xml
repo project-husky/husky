@@ -7,14 +7,14 @@
 	<parent>
 		<groupId>org.ehealth_connector.cda</groupId>
 		<artifactId>ehealth_connector-cda</artifactId>
-		<version>1.3-SNAPSHOT</version>
+		<version>1.3.0-201604</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.3.0-201604</version>
 		</dependency>
 		
 		<!-- test stuff -->
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.3.0-201604</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
