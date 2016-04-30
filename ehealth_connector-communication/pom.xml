@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.ehealth_connector</groupId>
     <artifactId>ehealth_connector-main</artifactId>
-    <version>1.3.0-201604</version>
+    <version>1.4-SNAPSHOT</version>
   </parent>
   <groupId>org.ehealth_connector.communication</groupId>
   <artifactId>ehealth_connector-communication</artifactId>
