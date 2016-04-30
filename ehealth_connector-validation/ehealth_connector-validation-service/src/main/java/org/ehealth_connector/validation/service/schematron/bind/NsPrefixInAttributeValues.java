@@ -52,9 +52,9 @@ public class NsPrefixInAttributeValues {
 
 	/**
 	 * Gets the value of the prefix property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPrefix() {
 		return prefix;
@@ -62,9 +62,9 @@ public class NsPrefixInAttributeValues {
 
 	/**
 	 * Gets the value of the uri property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getUri() {
 		return uri;
@@ -72,10 +72,10 @@ public class NsPrefixInAttributeValues {
 
 	/**
 	 * Sets the value of the prefix property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPrefix(String value) {
 		this.prefix = value;
@@ -83,10 +83,10 @@ public class NsPrefixInAttributeValues {
 
 	/**
 	 * Sets the value of the uri property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setUri(String value) {
 		this.uri = value;

@@ -34,14 +34,14 @@ public class ObjectFactoryOutput {
 	 * Create a new ObjectFactory that can be used to create new instances of
 	 * schema derived classes for package:
 	 * ehealth_connector.validation.service.config.bind
-	 * 
+	 *
 	 */
 	public ObjectFactoryOutput() {
 	}
 
 	/**
 	 * Create an instance of {@link SchematronOutput }
-	 * 
+	 *
 	 */
 	public SchematronOutput createSchematronOutput() {
 		return new SchematronOutput();
@@ -49,7 +49,7 @@ public class ObjectFactoryOutput {
 
 	/**
 	 * Create an instance of {@link SchematronOutput.ActivePattern }
-	 * 
+	 *
 	 */
 	public SchematronOutput.ActivePattern createSchematronOutputActivePattern() {
 		return new SchematronOutput.ActivePattern();
@@ -57,7 +57,7 @@ public class ObjectFactoryOutput {
 
 	/**
 	 * Create an instance of {@link SchematronOutput.FailedAssert }
-	 * 
+	 *
 	 */
 	public SchematronOutput.FailedAssert createSchematronOutputFailedAssert() {
 		return new SchematronOutput.FailedAssert();
@@ -66,7 +66,7 @@ public class ObjectFactoryOutput {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link String }
 	 * {@code >}}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://purl.oclc.org/dsdl/svrl", name = "text", scope = SchematronOutput.FailedAssert.class)
 	public JAXBElement<String> createSchematronOutputFailedAssertText(String value) {
@@ -76,7 +76,7 @@ public class ObjectFactoryOutput {
 
 	/**
 	 * Create an instance of {@link SchematronOutput.FiredRule }
-	 * 
+	 *
 	 */
 	public SchematronOutput.FiredRule createSchematronOutputFiredRule() {
 		return new SchematronOutput.FiredRule();
@@ -84,7 +84,7 @@ public class ObjectFactoryOutput {
 
 	/**
 	 * Create an instance of {@link SchematronOutput.NsPrefixInAttributeValues }
-	 * 
+	 *
 	 */
 	public SchematronOutput.NsPrefixInAttributeValues createSchematronOutputNsPrefixInAttributeValues() {
 		return new SchematronOutput.NsPrefixInAttributeValues();

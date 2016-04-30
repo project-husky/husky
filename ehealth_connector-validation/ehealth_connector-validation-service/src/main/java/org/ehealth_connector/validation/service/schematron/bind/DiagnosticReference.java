@@ -54,9 +54,9 @@ public class DiagnosticReference {
 
 	/**
 	 * Gets the value of the diagnostic property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDiagnostic() {
 		return diagnostic;
@@ -64,9 +64,9 @@ public class DiagnosticReference {
 
 	/**
 	 * Gets the value of the text property.
-	 * 
+	 *
 	 * @return possible object is {@link Text }
-	 * 
+	 *
 	 */
 	public Text getText() {
 		return text;
@@ -74,10 +74,10 @@ public class DiagnosticReference {
 
 	/**
 	 * Sets the value of the diagnostic property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDiagnostic(String value) {
 		this.diagnostic = value;
@@ -85,10 +85,10 @@ public class DiagnosticReference {
 
 	/**
 	 * Sets the value of the text property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Text }
-	 * 
+	 *
 	 */
 	public void setText(Text value) {
 		this.text = value;

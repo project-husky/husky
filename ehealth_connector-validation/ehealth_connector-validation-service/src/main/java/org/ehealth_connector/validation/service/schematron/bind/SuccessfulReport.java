@@ -78,24 +78,24 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the diagnosticReference property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the diagnosticReference property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getDiagnosticReference().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link DiagnosticReference }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<DiagnosticReference> getDiagnosticReference() {
 		if (diagnosticReference == null) {
@@ -106,9 +106,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the flag property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getFlag() {
 		return flag;
@@ -116,9 +116,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the id property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return id;
@@ -126,9 +126,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the location property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLocation() {
 		return location;
@@ -136,9 +136,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the role property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRole() {
 		return role;
@@ -146,9 +146,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the see property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getSee() {
 		return see;
@@ -156,9 +156,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the test property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTest() {
 		return test;
@@ -166,9 +166,9 @@ public class SuccessfulReport {
 
 	/**
 	 * Gets the value of the text property.
-	 * 
+	 *
 	 * @return possible object is {@link Text }
-	 * 
+	 *
 	 */
 	public Text getText() {
 		return text;
@@ -176,10 +176,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the flag property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setFlag(String value) {
 		this.flag = value;
@@ -187,10 +187,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the id property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
@@ -198,10 +198,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the location property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLocation(String value) {
 		this.location = value;
@@ -209,10 +209,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the role property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRole(String value) {
 		this.role = value;
@@ -220,10 +220,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the see property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setSee(String value) {
 		this.see = value;
@@ -231,10 +231,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the test property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTest(String value) {
 		this.test = value;
@@ -242,10 +242,10 @@ public class SuccessfulReport {
 
 	/**
 	 * Sets the value of the text property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Text }
-	 * 
+	 *
 	 */
 	public void setText(Text value) {
 		this.text = value;

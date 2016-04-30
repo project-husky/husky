@@ -71,9 +71,9 @@ public class ApplicationType {
 
 	/**
 	 * Gets the value of the documentSchema property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDocumentSchema() {
 		return documentSchema;
@@ -81,9 +81,9 @@ public class ApplicationType {
 
 	/**
 	 * Gets the value of the downloadsUrl property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDownloadsUrl() {
 		return downloadsUrl;
@@ -103,9 +103,9 @@ public class ApplicationType {
 
 	/**
 	 * Gets the value of the theme property (JQuery Theme).
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTheme() {
 		return theme;
@@ -113,10 +113,10 @@ public class ApplicationType {
 
 	/**
 	 * Sets the value of the documentSchema property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDocumentSchema(String value) {
 		this.documentSchema = value;
@@ -124,10 +124,10 @@ public class ApplicationType {
 
 	/**
 	 * Sets the value of the downloadsUrl property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDownloadsUrl(String value) {
 		this.downloadsUrl = value;
@@ -147,10 +147,10 @@ public class ApplicationType {
 
 	/**
 	 * Sets the value of the theme property (JQuery Theme).
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTheme(String value) {
 		this.theme = value;

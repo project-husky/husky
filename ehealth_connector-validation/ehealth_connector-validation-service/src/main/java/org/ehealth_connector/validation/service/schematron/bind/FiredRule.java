@@ -64,9 +64,9 @@ public class FiredRule {
 
 	/**
 	 * Gets the value of the context property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getContext() {
 		return context;
@@ -74,9 +74,9 @@ public class FiredRule {
 
 	/**
 	 * Gets the value of the flag property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getFlag() {
 		return flag;
@@ -84,9 +84,9 @@ public class FiredRule {
 
 	/**
 	 * Gets the value of the id property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return id;
@@ -94,9 +94,9 @@ public class FiredRule {
 
 	/**
 	 * Gets the value of the role property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getRole() {
 		return role;
@@ -104,10 +104,10 @@ public class FiredRule {
 
 	/**
 	 * Sets the value of the context property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setContext(String value) {
 		this.context = value;
@@ -115,10 +115,10 @@ public class FiredRule {
 
 	/**
 	 * Sets the value of the flag property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setFlag(String value) {
 		this.flag = value;
@@ -126,10 +126,10 @@ public class FiredRule {
 
 	/**
 	 * Sets the value of the id property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
@@ -137,10 +137,10 @@ public class FiredRule {
 
 	/**
 	 * Sets the value of the role property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setRole(String value) {
 		this.role = value;

@@ -44,9 +44,9 @@ public class LangTextType {
 
 	/**
 	 * Gets the value of the lang property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLang() {
 		return lang;
@@ -54,9 +54,9 @@ public class LangTextType {
 
 	/**
 	 * Gets the value of the value property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getValue() {
 		return value;
@@ -64,10 +64,10 @@ public class LangTextType {
 
 	/**
 	 * Sets the value of the lang property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLang(String value) {
 		this.lang = value;
@@ -75,10 +75,10 @@ public class LangTextType {
 
 	/**
 	 * Sets the value of the value property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setValue(String value) {
 		this.value = value;

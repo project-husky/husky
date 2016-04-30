@@ -48,14 +48,14 @@ public class ObjectFactory {
 	 * Create a new ObjectFactory that can be used to create new instances of
 	 * schema derived classes for package:
 	 * net.medshare.cda.validator.config.bind
-	 * 
+	 *
 	 */
 	public ObjectFactory() {
 	}
 
 	/**
 	 * Create an instance of {@link ApplicationType }
-	 * 
+	 *
 	 */
 	public ApplicationType createApplicationType() {
 		return new ApplicationType();
@@ -64,7 +64,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}
 	 * {@link ConfigurationType }{@code >}}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "", name = "configuration")
 	public JAXBElement<ConfigurationType> createConfiguration(ConfigurationType value) {
@@ -74,7 +74,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link ConfigurationType }
-	 * 
+	 *
 	 */
 	public ConfigurationType createConfigurationType() {
 		return new ConfigurationType();
@@ -82,7 +82,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link RuleSetType }
-	 * 
+	 *
 	 */
 	public RuleSetType createRuleSetType() {
 		return new RuleSetType();
@@ -90,7 +90,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link SchematronType }
-	 * 
+	 *
 	 */
 	public SchematronType createSchematronType() {
 		return new SchematronType();

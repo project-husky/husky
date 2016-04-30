@@ -34,14 +34,14 @@ public class ObjectFactory {
 	 * Create a new ObjectFactory that can be used to create new instances of
 	 * schema derived classes for package:
 	 * ehealth_connector.validation.service.schematron.bind
-	 * 
+	 *
 	 */
 	public ObjectFactory() {
 	}
 
 	/**
 	 * Create an instance of {@link ActivePattern }
-	 * 
+	 *
 	 */
 	public ActivePattern createActivePattern() {
 		return new ActivePattern();
@@ -49,7 +49,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link DiagnosticReference }
-	 * 
+	 *
 	 */
 	public DiagnosticReference createDiagnosticReference() {
 		return new DiagnosticReference();
@@ -57,7 +57,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link FailedAssert }
-	 * 
+	 *
 	 */
 	public FailedAssert createFailedAssert() {
 		return new FailedAssert();
@@ -65,7 +65,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link FiredRule }
-	 * 
+	 *
 	 */
 	public FiredRule createFiredRule() {
 		return new FiredRule();
@@ -73,7 +73,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link LangTextType }
-	 * 
+	 *
 	 */
 	public LangTextType createLangTextType() {
 		return new LangTextType();
@@ -81,7 +81,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link NsPrefixInAttributeValues }
-	 * 
+	 *
 	 */
 	public NsPrefixInAttributeValues createNsPrefixInAttributeValues() {
 		return new NsPrefixInAttributeValues();
@@ -89,7 +89,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link SchematronOutput }
-	 * 
+	 *
 	 */
 	public SchematronOutput createSchematronOutput() {
 		return new SchematronOutput();
@@ -97,7 +97,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link SuccessfulReport }
-	 * 
+	 *
 	 */
 	public SuccessfulReport createSuccessfulReport() {
 		return new SuccessfulReport();
@@ -105,7 +105,7 @@ public class ObjectFactory {
 
 	/**
 	 * Create an instance of {@link Text }
-	 * 
+	 *
 	 */
 	public Text createText() {
 		return new Text();
@@ -114,7 +114,7 @@ public class ObjectFactory {
 	/**
 	 * Create an instance of {@link JAXBElement }{@code <}{@link LangTextType }
 	 * {@code >}}
-	 * 
+	 *
 	 */
 	@XmlElementDecl(namespace = "http://purl.oclc.org/dsdl/svrl", name = "langText", scope = Text.class)
 	public JAXBElement<LangTextType> createTextLangText(LangTextType value) {

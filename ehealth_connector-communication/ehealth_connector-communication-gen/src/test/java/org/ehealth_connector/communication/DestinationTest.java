@@ -18,7 +18,6 @@ package org.ehealth_connector.communication;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.net.URISyntaxException;
 
 import org.ehealth_connector.common.utils.Util;
@@ -63,7 +62,7 @@ public class DestinationTest {
 	@Test
 	public void testKeyStoreConstructor() {
 		final String keystore = Util.extractFileFromResource(KEY_STORE);
-		
+
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
 		assertEquals(repUri, dest.getUri());
@@ -77,7 +76,7 @@ public class DestinationTest {
 	public void testKeyStoreTrustStoreConstructor() {
 		final String keystore = Util.extractFileFromResource(KEY_STORE);
 		final String truststore = Util.extractFileFromResource(TRUST_STORE);
-		
+
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS,
 				truststore, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
@@ -91,8 +90,8 @@ public class DestinationTest {
 	@Test
 	public void testSetterGetter() {
 		Destination dest = new Destination();
-		final String keystore = Util.extractFileFromResource(KEY_STORE);	
-		
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+
 		dest.setKeyStore(keystore);
 		assertEquals(keystore, dest.getKeyStore());
 		dest.setKeyStorePassword(KEY_STORE_PASS);
@@ -111,7 +110,7 @@ public class DestinationTest {
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderApplicationOid());
 		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-		
+
 		final String truststore = Util.extractFileFromResource(TRUST_STORE);
 		dest.setTrustStore(truststore);
 		assertEquals(truststore, dest.getTrustStore());

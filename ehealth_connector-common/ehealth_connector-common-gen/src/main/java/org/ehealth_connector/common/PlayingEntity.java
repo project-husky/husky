@@ -103,7 +103,7 @@ public class PlayingEntity {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the playingEntity
 	 */
 	public org.openhealthtools.mdht.uml.cda.PlayingEntity getPlayingEntity() {
@@ -122,7 +122,7 @@ public class PlayingEntity {
 
 	/**
 	 * Method to set
-	 * 
+	 *
 	 * @param playingEntity
 	 *            the playingEntity to set
 	 */

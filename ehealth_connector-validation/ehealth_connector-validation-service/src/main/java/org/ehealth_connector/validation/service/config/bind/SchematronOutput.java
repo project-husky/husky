@@ -105,11 +105,11 @@ public class SchematronOutput {
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
 	 * The following schema fragment specifies the expected content contained
 	 * within this class.
-	 * 
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;simpleContent>
@@ -121,8 +121,8 @@ public class SchematronOutput {
 	 *   &lt;/simpleContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "", propOrder = { "value" })
@@ -139,9 +139,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the document property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getDocument() {
 			return document;
@@ -149,9 +149,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the id property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getId() {
 			return id;
@@ -159,9 +159,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the name property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getName() {
 			return name;
@@ -169,9 +169,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the value property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getValue() {
 			return value;
@@ -179,10 +179,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the document property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setDocument(String value) {
 			this.document = value;
@@ -190,10 +190,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the id property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setId(String value) {
 			this.id = value;
@@ -201,10 +201,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the name property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setName(String value) {
 			this.name = value;
@@ -212,10 +212,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the value property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setValue(String value) {
 			this.value = value;
@@ -226,11 +226,11 @@ public class SchematronOutput {
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
 	 * The following schema fragment specifies the expected content contained
 	 * within this class.
-	 * 
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;complexContent>
@@ -248,8 +248,8 @@ public class SchematronOutput {
 	 *   &lt;/complexContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "", propOrder = { "content" })
@@ -274,24 +274,24 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the content property.
-		 * 
+		 *
 		 * <p>
 		 * This accessor method returns a reference to the live list, not a
 		 * snapshot. Therefore any modification you make to the returned list
 		 * will be present inside the JAXB object. This is why there is not a
 		 * <CODE>set</CODE> method for the content property.
-		 * 
+		 *
 		 * <p>
 		 * For example, to add a new item, do as follows: <pre>
 		 *    getContent().add(newItem);
 		 * </pre>
-		 * 
-		 * 
+		 *
+		 *
 		 * <p>
 		 * Objects of the following type(s) are allowed in the list
 		 * {@link JAXBElement }{@code <}{@link String }{@code >} {@link String }
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		public List<Serializable> getContent() {
 			if (content == null) {
@@ -302,9 +302,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the context property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getContext() {
 			return context;
@@ -312,9 +312,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the id property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getId() {
 			return id;
@@ -322,9 +322,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the location property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getLocation() {
 			return location;
@@ -332,9 +332,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the role property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getRole() {
 			return role;
@@ -342,9 +342,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the see property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getSee() {
 			return see;
@@ -352,9 +352,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the test property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getTest() {
 			return test;
@@ -362,10 +362,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the context property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setContext(String value) {
 			this.context = value;
@@ -373,10 +373,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the id property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setId(String value) {
 			this.id = value;
@@ -384,10 +384,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the location property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setLocation(String value) {
 			this.location = value;
@@ -395,10 +395,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the role property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setRole(String value) {
 			this.role = value;
@@ -406,10 +406,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the see property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setSee(String value) {
 			this.see = value;
@@ -417,10 +417,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the test property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setTest(String value) {
 			this.test = value;
@@ -431,11 +431,11 @@ public class SchematronOutput {
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
 	 * The following schema fragment specifies the expected content contained
 	 * within this class.
-	 * 
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;simpleContent>
@@ -448,8 +448,8 @@ public class SchematronOutput {
 	 *   &lt;/simpleContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "", propOrder = { "value" })
@@ -468,9 +468,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the context property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getContext() {
 			return context;
@@ -478,9 +478,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the document property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getDocument() {
 			return document;
@@ -488,9 +488,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the id property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getId() {
 			return id;
@@ -498,9 +498,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the name property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getName() {
 			return name;
@@ -508,9 +508,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the value property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getValue() {
 			return value;
@@ -518,10 +518,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the context property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setContext(String value) {
 			this.context = value;
@@ -529,10 +529,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the document property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setDocument(String value) {
 			this.document = value;
@@ -540,10 +540,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the id property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setId(String value) {
 			this.id = value;
@@ -551,10 +551,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the name property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setName(String value) {
 			this.name = value;
@@ -562,10 +562,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the value property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setValue(String value) {
 			this.value = value;
@@ -576,11 +576,11 @@ public class SchematronOutput {
 	/**
 	 * <p>
 	 * Java class for anonymous complex type.
-	 * 
+	 *
 	 * <p>
 	 * The following schema fragment specifies the expected content contained
 	 * within this class.
-	 * 
+	 *
 	 * <pre>
 	 * &lt;complexType>
 	 *   &lt;simpleContent>
@@ -591,8 +591,8 @@ public class SchematronOutput {
 	 *   &lt;/simpleContent>
 	 * &lt;/complexType>
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	@XmlAccessorType(XmlAccessType.FIELD)
 	@XmlType(name = "", propOrder = { "value" })
@@ -607,9 +607,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the prefix property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getPrefix() {
 			return prefix;
@@ -617,9 +617,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the uri property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getUri() {
 			return uri;
@@ -627,9 +627,9 @@ public class SchematronOutput {
 
 		/**
 		 * Gets the value of the value property.
-		 * 
+		 *
 		 * @return possible object is {@link String }
-		 * 
+		 *
 		 */
 		public String getValue() {
 			return value;
@@ -637,10 +637,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the prefix property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setPrefix(String value) {
 			this.prefix = value;
@@ -648,10 +648,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the uri property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setUri(String value) {
 			this.uri = value;
@@ -659,10 +659,10 @@ public class SchematronOutput {
 
 		/**
 		 * Sets the value of the value property.
-		 * 
+		 *
 		 * @param value
 		 *            allowed object is {@link String }
-		 * 
+		 *
 		 */
 		public void setValue(String value) {
 			this.value = value;
@@ -686,28 +686,28 @@ public class SchematronOutput {
 	/**
 	 * Gets the value of the nsPrefixInAttributeValuesOrActivePatternOrFiredRule
 	 * property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the
 	 * nsPrefixInAttributeValuesOrActivePatternOrFiredRule property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getNsPrefixInAttributeValuesOrActivePatternOrFiredRule().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link SchematronOutput.NsPrefixInAttributeValues }
 	 * {@link SchematronOutput.ActivePattern }
 	 * {@link SchematronOutput.FiredRule }
 	 * {@link SchematronOutput.FailedAssert }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<Object> getNsPrefixInAttributeValuesOrActivePatternOrFiredRule() {
 		if (nsPrefixInAttributeValuesOrActivePatternOrFiredRule == null) {
@@ -718,9 +718,9 @@ public class SchematronOutput {
 
 	/**
 	 * Gets the value of the schemaVersion property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getSchemaVersion() {
 		return schemaVersion;
@@ -728,9 +728,9 @@ public class SchematronOutput {
 
 	/**
 	 * Gets the value of the title property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTitle() {
 		return title;
@@ -738,10 +738,10 @@ public class SchematronOutput {
 
 	/**
 	 * Sets the value of the schemaVersion property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setSchemaVersion(String value) {
 		this.schemaVersion = value;
@@ -749,10 +749,10 @@ public class SchematronOutput {
 
 	/**
 	 * Sets the value of the title property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTitle(String value) {
 		this.title = value;

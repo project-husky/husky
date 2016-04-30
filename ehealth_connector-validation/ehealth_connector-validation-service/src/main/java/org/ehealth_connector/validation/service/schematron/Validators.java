@@ -310,7 +310,7 @@ public class Validators {
 	 *
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance.
-	 * 
+	 *
 	 * @param workDir
 	 *            the work directory where to put/read precompiled Schematron
 	 *            stylesheets

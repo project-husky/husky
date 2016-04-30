@@ -69,7 +69,7 @@ public class SpecimenRole extends PlayingEntity {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the specimenRole
 	 */
 	public org.openhealthtools.mdht.uml.cda.SpecimenRole getSpecimenRole() {
@@ -78,7 +78,7 @@ public class SpecimenRole extends PlayingEntity {
 
 	/**
 	 * Method to set
-	 * 
+	 *
 	 * @param specimenRole
 	 *            the specimenRole to set
 	 */

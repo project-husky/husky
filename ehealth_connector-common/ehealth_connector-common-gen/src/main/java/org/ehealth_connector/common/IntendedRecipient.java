@@ -164,7 +164,7 @@ public class IntendedRecipient {
 
 	/**
 	 * Method to get
-	 * 
+	 *
 	 * @return the intendedRecipient
 	 */
 	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getIntendedRecipient() {
@@ -229,7 +229,7 @@ public class IntendedRecipient {
 
 	/**
 	 * Method to set
-	 * 
+	 *
 	 * @param intendedRecipient
 	 *            the intendedRecipient to set
 	 */

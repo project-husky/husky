@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
@@ -61,8 +60,6 @@ import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
