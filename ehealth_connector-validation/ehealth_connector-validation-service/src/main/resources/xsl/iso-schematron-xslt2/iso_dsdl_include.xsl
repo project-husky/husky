@@ -202,6 +202,11 @@
 	
 		<xslt:template match="iso:name[@path]" mode="dsdl:go">
 	  <xsl:call-template name="sch-check:xpath-wf-message">
+	  			<!-- 30.04.2016 correction by Tony Schaller, medshare GmbH
+	  			     This is now identical to ART-DECOR. 
+	  			     The original ISO Schematron states here:
+	  			     select=" @select " 
+	  			     which is an error -->
           <xsl:with-param name="string" select=" @path "  />
           <xsl:with-param name="subject" select=" 'Bad name element: ' "  />
         </xsl:call-template>
