@@ -47,7 +47,7 @@ public enum EHealthConnectorVersions {
 	EHealthConnectorR201604("2.16.756.5.30.1.139.1.1.5", "eHealthConnector R201604", "R20160430");
 
 	public static EHealthConnectorVersions getCurrentVersion() {
-		return EHealthConnectorR201604;
+		return EHealthConnectorDev;
 	}
 
 	private String oid;
