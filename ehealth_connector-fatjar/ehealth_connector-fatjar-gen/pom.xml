@@ -14,6 +14,12 @@
 	</properties>
 
 	<dependencies>
+   		<dependency>
+			<groupId>org.apache.axis2</groupId>
+			<artifactId>addressing</artifactId>
+			<type>mar</type>
+			<version>1.41</version>
+		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>
 			<artifactId>ehealth_connector-communication-gen</artifactId>

@@ -15,12 +15,13 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+   		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>addressing</artifactId>
+			<type>mar</type>
+			<version>1.41</version>
 		</dependency>
-
-		<dependency>
+ 		<dependency>
 			<groupId>org.ehealth_connector.communication.ch</groupId>
 			<artifactId>ehealth_connector-communication-ch</artifactId>
 			<version>1.4-SNAPSHOT</version>
