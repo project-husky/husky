@@ -104,23 +104,6 @@ public class Util {
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
-	// /**
-	// * Adds the copy of a given section to a given structured body
-	// *
-	// * @param sb
-	// * the StructuredBody
-	// * @param s
-	// * the Section
-	// */
-	// public static void addSectionToStructuredBodyAsCopy(StructuredBody sb,
-	// Section s) {
-	// if ((sb != null) && (s != null)) {
-	// final Component3 c = CDAFactory.eINSTANCE.createComponent3();
-	// c.setSection(EcoreUtil.copy(s));
-	// sb.getComponents().add(c);
-	// }
-	// }
-
 	/**
 	 * Checks to see if the list has at least one element.
 	 *
@@ -722,8 +705,8 @@ public class Util {
 		final String filename = FilenameUtils.getName(rscPath);
 		String targetPath = null;
 
-		if (!rscPath.startsWith("/"))
-			rscPath = "/" + rscPath;
+		if (!rscPath.startsWith(getPlatformSpecificPathSeparator()))
+			rscPath = getPlatformSpecificPathSeparator() + rscPath;
 
 		try {
 			targetPath = File.createTempFile(filename, "").getAbsolutePath();
@@ -864,6 +847,18 @@ public class Util {
 	}
 
 	/**
+	 * Returns "/" for Unix based platforms or "\" for Windows based platforms
+	 *
+	 * @return "/" for Unix based platforms or "\" for Windows based platforms
+	 */
+	public static String getPlatformSpecificPathSeparator() {
+		String retVal = "/";
+		if (isWindows())
+			retVal = "\\";
+		return retVal;
+	}
+
+	/**
 	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
 	 * ArrayList<TEL>
 	 *
@@ -909,7 +904,7 @@ public class Util {
 				log.debug("Trying to use temp folder set by environment variable '" + envVariable
 						+ "': " + tempDirectoryPath);
 			} else {
-				tempDirectoryPath = "/temp";
+				tempDirectoryPath = getPlatformSpecificPathSeparator() + "temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
 			final File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
@@ -943,20 +938,6 @@ public class Util {
 			}
 		}
 		return buffer.toString().trim();
-	}
-
-	/**
-	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
-	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
-	 *
-	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
-	 * @return <div class="en">the webside</div>
-	 */
-	public static Map<String, AddressUse> getWebsites(List<TEL> telecoms) {
-		final Map<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
-		return h;
 	}
 
 	// /**
@@ -1021,6 +1002,20 @@ public class Util {
 	// }
 
 	/**
+	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
+	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
+	 *
+	 * @param telecoms
+	 *            <br>
+	 *            <div class="en">the telecoms</div>
+	 * @return <div class="en">the webside</div>
+	 */
+	public static Map<String, AddressUse> getWebsites(List<TEL> telecoms) {
+		final Map<String, AddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
+		return h;
+	}
+
+	/**
 	 * <div class="en">Creates an MDHT II object.</div>
 	 *
 	 * @param root
@@ -1048,6 +1043,61 @@ public class Util {
 		else {
 			return false;
 		}
+	}
+
+	public static boolean isComment2(EntryRelationship er) {
+		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
+				&& er.getInversionInd())
+			return true;
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Detects whether the current platform is Mac
+	 *
+	 * @return true for Mac platforms; false otherwise
+	 */
+	public static boolean isMac() {
+
+		return (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0);
+
+	}
+
+	/**
+	 * Detects whether the current platform is Solaris
+	 *
+	 * @return true for Solaris platforms; false otherwise
+	 */
+	public static boolean isSolaris() {
+
+		return (System.getProperty("os.name").toLowerCase().indexOf("sunos") >= 0);
+
+	}
+
+	/**
+	 * Detects whether the current platform is Unix
+	 *
+	 * @return true for Unix platforms; false otherwise
+	 */
+	public static boolean isUnix() {
+
+		return (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0
+				|| System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0
+				|| System.getProperty("os.name").toLowerCase().indexOf("aix") > 0);
+
+	}
+
+	/**
+	 * Detects whether the current platform is Windows
+	 *
+	 * @return true for Windows platforms; false otherwise
+	 */
+	public static boolean isWindows() {
+
+		return (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0);
+
 	}
 
 	/**
