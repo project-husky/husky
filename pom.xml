@@ -15,7 +15,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 	</parent>
 
 	<properties>
-		<dll.version>1.3.0.0</dll.version>
+		<dll.version>1.4.0.0</dll.version>
 	</properties>
 
 	<modules>

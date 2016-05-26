@@ -106,7 +106,6 @@
 									<arg value="-out:${project.build.directory}/ehealthconnector.dll" />
 									<arg value="${project.build.directory}/ehealthconnector.jar" />
 								</exec>
-								<!-- currently only ehealthconnector-ch.dll is used by the .Net Demo <copy failonerror="false" file="${project.build.directory}/ehealthconnector.dll" tofile="${basedir}../../../../demo/dotnet/eHealthConnectorDemo/lib/ehealthconnector.dll" /> -->
 							</target>
 						</configuration>
 						<executions>
