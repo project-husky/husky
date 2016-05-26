@@ -1045,15 +1045,6 @@ public class Util {
 		}
 	}
 
-	public static boolean isComment2(EntryRelationship er) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd())
-			return true;
-		else {
-			return false;
-		}
-	}
-
 	/**
 	 * Detects whether the current platform is Mac
 	 *
