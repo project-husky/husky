@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.fhir.FhirPatient;
 
 import ca.uhn.fhir.model.dstu2.composite.AddressDt;
@@ -104,7 +105,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = "CH";
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "male";
@@ -124,7 +125,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = "CH";
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "male";
@@ -144,7 +145,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = "CH";
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "female";

@@ -26,6 +26,7 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -291,16 +292,16 @@ public class FhirPatientTest {
 	public void testConveniencePatientNation() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConceptDt nation = new CodeableConceptDt();
-		nation.setText("CHE");
+		nation.setText(CountryCode.SWITZERLAND.getCodeValue());
 
 		fhirPatient.setNation(nation);
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("CHE", patient.getNation());
+		assertEquals(CountryCode.SWITZERLAND.getCodeValue(), patient.getNation());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 
-		assertEquals("CHE", fhirPatient2.getNation().getText());
+		assertEquals(CountryCode.SWITZERLAND.getCodeValue(), fhirPatient2.getNation().getText());
 	}
 
 	@Test
@@ -551,7 +552,7 @@ public class FhirPatientTest {
 		fhirPatient.setReligiousAffiliation(religion);
 
 		final CodeableConceptDt nation = new CodeableConceptDt();
-		nation.setText("CHE");
+		nation.setText(CountryCode.SWITZERLAND.getCodeValue());
 		fhirPatient.setNation(nation);
 
 		final CodeableConceptDt employeeOccupationCode = new CodeableConceptDt();

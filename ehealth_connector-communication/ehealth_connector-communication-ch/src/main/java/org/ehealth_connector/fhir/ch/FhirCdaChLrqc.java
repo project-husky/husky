@@ -17,7 +17,6 @@
 package org.ehealth_connector.fhir.ch;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AssociatedEntity;
@@ -383,6 +382,9 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 
 		// Header
 		doc = new CdaChLrqc(getDocLanguage(bundle), xsl, css);
+		doc.setId(getDocumentId(bundle));
+		doc.setSetId(getDocumentId(bundle));
+		doc.setTimestamp(getDocumentDate(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		// RecordTarget
 		doc.setRecordTarget(getPatientLrqc(bundle));
@@ -390,7 +392,6 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 		// Authors
 		for (final Author author : getAuthors(bundle)) {
-			author.setTime(new Date());
 			author.setFunctionCode(new Code("2.16.840.1.113883.2.9.6.2.7", "3212", "ISCO-08",
 					"Medical and pathology laboratory technicians"));
 			doc.addAuthor(author);

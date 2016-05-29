@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
@@ -111,7 +112,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode("CH");
+		cs.setCode(CountryCode.SWITZERLAND.getCodeValue());
 		getDoc().getRealmCodes().clear();
 		getDoc().getRealmCodes().add(cs);
 

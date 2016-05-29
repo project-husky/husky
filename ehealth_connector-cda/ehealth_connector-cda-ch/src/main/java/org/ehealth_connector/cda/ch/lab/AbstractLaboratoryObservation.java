@@ -62,9 +62,11 @@ public abstract class AbstractLaboratoryObservation
 	 *            the new comment entry
 	 */
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
-		this.getMdht().addAct(commentEntry.copy());
-		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
-				getMdht().getEntryRelationships());
+		if (commentEntry != null) {
+			this.getMdht().addAct(commentEntry.copy());
+			CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
+					getMdht().getEntryRelationships());
+		}
 	}
 
 	/**
@@ -146,8 +148,10 @@ public abstract class AbstractLaboratoryObservation
 	 *            the new reference range
 	 */
 	public void setReferenceRange(ReferenceRange referenceRange) {
-		getMdht().getReferenceRanges().clear();
-		getMdht().getReferenceRanges().add(referenceRange.getMdht());
+		if (referenceRange != null) {
+			getMdht().getReferenceRanges().clear();
+			getMdht().getReferenceRanges().add(referenceRange.getMdht());
+		}
 	}
 
 	/**
@@ -157,8 +161,12 @@ public abstract class AbstractLaboratoryObservation
 	 */
 	@Override
 	public void setTextReference(String textReference) {
-		if (!textReference.startsWith("#"))
-			textReference = "#" + textReference;
-		this.getMdht().setText(Util.createReference(textReference));
+		if (textReference != null) {
+			if (!textReference.equals("")) {
+				if (!textReference.startsWith("#"))
+					textReference = "#" + textReference;
+				this.getMdht().setText(Util.createReference(textReference));
+			}
+		}
 	}
 }

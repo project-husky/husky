@@ -376,6 +376,9 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 
 		// Header
 		final CdaChLrph doc = new CdaChLrph(getDocLanguage(bundle), xsl, css);
+		doc.setId(getDocumentId(bundle));
+		doc.setSetId(getDocumentId(bundle));
+		doc.setTimestamp(getDocumentDate(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		// RecordTarget
 		doc.setPatient(FhirCommon.getPatient(bundle));
@@ -383,7 +386,6 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 		// Authors
 		for (final Author author : getAuthors(bundle)) {
-			author.setTime(new Date());
 			doc.addAuthor(author);
 		}
 		// LegalAuthenticator

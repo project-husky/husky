@@ -46,6 +46,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -389,6 +390,9 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 		// Header
 		doc = new CdaChLrtp(getDocLanguage(bundle), xsl, css);
+		doc.setId(getDocumentId(bundle));
+		doc.setSetId(getDocumentId(bundle));
+		doc.setTimestamp(getDocumentDate(bundle));
 		doc.setConfidentialityCode(getConfidentialityCode(bundle));
 		// RecordTarget
 		doc.setPatient(FhirCommon.getPatient(bundle));
@@ -396,7 +400,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
 		// Authors
 		for (final Author author : getAuthors(bundle)) {
-			author.setTime(new Date());
 			doc.addAuthor(author);
 		}
 		// LegalAuthenticator
@@ -506,7 +509,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 *
 	 * @param bundle
 	 *            the FHIR bundle
-	 * @return list of eHC EDES VitalSignObservation </div>
+	 * @return list of eHC LRTP VitalSignObservation </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private List<VitalSignObservation> getCodedVitalSigns(Bundle bundle) {
@@ -631,7 +634,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer getLaboratoryBatteryOrganizers(
-			Observation labObsList) {
+			Observation labObsList, StringDt authorTimeStamp) {
 		final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
 		// Set the Organizer Attributes
 		// Status Code
@@ -648,6 +651,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			Practitioner p = (Practitioner) perfRef.getResource();
 			Author author = new Author("");
 			author.addId(FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+			author.setTime(DateUtil.parseDates(authorTimeStamp.getValue()));
 			lbo.addAuthor(author);
 		}
 
@@ -812,8 +816,18 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				SpecimenAct spa = new SpecimenAct();
 				spa.setCode(code);
 				for (final Related relatedObs : obs.getRelated()) {
-					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-					spa.addLaboratoryBatteryOrganizer(getLaboratoryBatteryOrganizers(fhirObs));
+
+					final List<ExtensionDt> organizers = relatedObs.getTarget()
+							.getUndeclaredExtensionsByUrl(
+									FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
+					if ((organizers != null) && !organizers.isEmpty()) {
+						// AuthorTimeStamp
+						final StringDt authorTimeStamp = ((StringDt) organizers.get(0).getValue());
+						final Observation fhirObs = (Observation) relatedObs.getTarget()
+								.getResource();
+						spa.addLaboratoryBatteryOrganizer(
+								getLaboratoryBatteryOrganizers(fhirObs, authorTimeStamp));
+					}
 				}
 				lss.setLaboratoryReportDataProcessingEntry(
 						new LaboratoryReportDataProcessingEntry(spa));
@@ -976,6 +990,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 					Author author = new Author("");
 					author.addId(
 							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+					final StringDt timeStamp = ((StringDt) vsoList.get(0).getValue());
+					author.setTime(DateUtil.parseDates(timeStamp.getValue()));
 					vso.addAuthor(author);
 				}
 

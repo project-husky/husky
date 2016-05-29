@@ -22,6 +22,7 @@ import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -95,11 +96,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		} else {
 			this.setLanguageCode(languageCode);
 		}
-		setTitle(getSpecialitySectionTitle());
+		setTitle(createSpecialitySectionTitle());
 		initCda();
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode("CHE");
+		cs.setCode(CountryCode.SWITZERLAND.getCodeValue());
 		getDoc().getRealmCodes().clear();
 		getDoc().getRealmCodes().add(cs);
 	}
@@ -126,6 +127,25 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		if (physician != null) {
 			getMdht().getParticipants().add(physician.copy());
 		}
+	}
+
+	/**
+	 * Gets the speciality section title.
+	 *
+	 * @return the speciality section title
+	 */
+	private String createSpecialitySectionTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire");
+		case GERMAN:
+			return ("Laborbefund");
+		case ITALIAN:
+			return ("Rapporto di laboratorio");
+		case ENGLISH:
+			return ("Laboratory report");
+		}
+		return "";
 	}
 
 	/**
@@ -203,25 +223,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			}
 		}
 		return pl;
-	}
-
-	/**
-	 * Gets the speciality section title.
-	 *
-	 * @return the speciality section title
-	 */
-	private String getSpecialitySectionTitle() {
-		switch (this.getLanguageCode()) {
-		case FRENCH:
-			return ("Rapport de laboratoire");
-		case GERMAN:
-			return ("Laborbefund");
-		case ITALIAN:
-			return ("Rapporto di laboratorio");
-		case ENGLISH:
-			return ("Laboratory report");
-		}
-		return "";
 	}
 
 	/**
