@@ -59,6 +59,8 @@ public abstract class AbstractSpecimenAct
 	 *            the new code
 	 */
 	public void setCode(Code code) {
-		getMdht().setCode(code.getCD());
+		if (code != null) {
+			getMdht().setCode(code.getCD());
+		}
 	}
 }

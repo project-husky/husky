@@ -112,9 +112,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 *            the recipient
 	 */
 	public void addIntendedRecipient(IntendedRecipient recipient) {
-		getMdht().getInformationRecipients().add(recipient.getMdhtIntendedRecipient());
-		final int nb = getMdht().getInformationRecipients().size() - 1;
-		getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
+		if (recipient != null) {
+			getMdht().getInformationRecipients().add(recipient.getMdhtIntendedRecipient());
+			final int nb = getMdht().getInformationRecipients().size() - 1;
+			getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
+		}
 	}
 
 	/**
@@ -145,7 +147,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		case ENGLISH:
 			return ("Laboratory report");
 		}
-		return "";
+		return "Laboratory report";
 	}
 
 	/**
