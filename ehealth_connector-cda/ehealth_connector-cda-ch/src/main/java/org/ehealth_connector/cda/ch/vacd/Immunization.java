@@ -341,6 +341,23 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	}
 
 	/**
+	 * 
+	 * Gets the ids of immunization of the software which registred it (see
+	 * evadoc 7.5.1.5)
+	 *
+	 * @return list of ids
+	 */
+	public List<Identificator> getIds() {
+		final List<Identificator> retVal = new ArrayList<Identificator>();
+		if ((getMdht().getIds() != null) && (getMdht().getIds().size() > 0)) {
+			for (int i = 0; i < getMdht().getIds().size(); i++) {
+				retVal.add(new Identificator(getMdht().getIds().get(i)));
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets the specified id value based on its code system.
 	 *
 	 * @param codeSystem
