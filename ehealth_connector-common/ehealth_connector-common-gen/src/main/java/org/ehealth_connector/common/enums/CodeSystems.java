@@ -33,59 +33,86 @@ public enum CodeSystems implements IdentityDomain {
 	 * de la maladie ou de la séquelle d’accident (OCA-DFI, chapitre
 	 * 2.1.1)</div>
 	 */
-	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1", "diseaseName (ICR-DHA, chapter 2.1.1)"),
-	/**
-	 * OID: 2.51.1.3 <div class="en">Global Location Number</div>
-	 */
-	GLN("2.51.1.3", "Global Location Number"),
-	/**
-	 * OID: 1.3.160 <div class="en">Global Trade Item Number</div>
-	 */
-	GTIN("1.3.160", "Global Trade Item Number"),
-	/**
-	 * <div class="en">SwissINDEX</div> OID: 2.16.756.5.32
-	 * <div class="de">SwissINDEX</div> <div class="fr">SwissIndex</div>
-	 */
-	SwissINDEX("2.16.756.5.30.2.6.1", "SwissINDEX"),
-	/**
-	 * OID: 2.16.756.5.32 <div class="en">WHO ATC Code</div><div class="de">WHO
-	 * ATC Code</div> <div class="fr">WHO ATC Code</div>
-	 */
-	WHOATCCode("2.16.840.1.113883.6.73", "WHO ATC Code"),
-	/**
-	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
-	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
-	 * nouveaux)</div>
-	 */
-	SwissSSN("2.16.756.5.32", "AHV Nummer (die Neue)"),
-	/**
-	 * OID: 2.16.756.5.31 <div class="en">AHV Number (the old one)</div>
-	 * <div class="de">AHV Nummer (die Alte)</div> <div class="fr">No AVS (le
-	 * vieil)</div>
-	 */
-	SwissSSNDeprecated("2.16.756.5.31", "AHV Nummer (die Alte)"),
-	/**
-	 * OID: 2.16.756.5.30.1.123.100.1.1.1 <div class="en">Insurance Card Number
-	 * (VeKa)</div><div class="de">Kartennummern für die Versichertenkarte
-	 * (VeKa)</div> <div class="fr">No carte d insurance (VeKa)</div>
-	 */
-	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1", "Kartennummern für die Versichertenkarte (VeKa)"),
-	/**
-	 * OID: 2.16.756.5.31 <div class="en">ICD-10</div>
-	 * <div class="de">ICD-10</div> <div class="fr">ICD-10</div>
-	 */
-	ICD10("2.16.756.5.30.1.126.3.2", "ICD-10"),
-	/**
-	 * OID: 2.16.840.1.113883.6.121 <div class="en">Language Code</div>
-	 */
-	LanguageCode("2.16.840.1.113883.6.121", "Language Code"),
-	/**
-	 * OID: 2.16.840.1.113883.5.25 <div class="en">Confidentiality Code</div>
-	 */
-	ConfidentialityCode("2.16.840.1.113883.5.25", "Confidentiality Code"),
-	/**
-	 * OID: 2.16.840.1.113883.5.1 <div class="en">AdministrativeGender</div>
-	 */
+	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
+			"diseaseName (ICR-DHA, chapter 2.1.1)"), /**
+														 * OID: 2.51.1.3
+														 * <div class="en">
+														 * Global Location
+														 * Number</div>
+														 */
+	GLN("2.51.1.3",
+			"Global Location Number"), /**
+										 * OID: 1.3.160 <div class="en">Global
+										 * Trade Item Number</div>
+										 */
+	GTIN("1.3.160",
+			"Global Trade Item Number"), /**
+											 * <div class="en">SwissINDEX</div>
+											 * OID: 2.16.756.5.32
+											 * <div class="de">SwissINDEX</div>
+											 * <div class="fr">SwissIndex</div>
+											 */
+	SwissINDEX("2.16.756.5.30.2.6.1",
+			"SwissINDEX"), /**
+							 * OID: 2.16.756.5.32 <div class="en">WHO ATC
+							 * Code</div><div class="de">WHO ATC Code</div>
+							 * <div class="fr">WHO ATC Code</div>
+							 */
+	WHOATCCode("2.16.840.1.113883.6.73",
+			"WHO ATC Code"), /**
+								 * OID: 2.16.756.5.32 <div class="en">AHV Number
+								 * (the new one)</div> <div class="de">AHV
+								 * Nummer (die Neue)</div> <div class="fr">No
+								 * AVS (le nouveaux)</div>
+								 */
+	SwissSSN("2.16.756.5.32",
+			"AHV Nummer (die Neue)"), /**
+										 * OID: 2.16.756.5.31
+										 * <div class="en">AHV Number (the old
+										 * one)</div> <div class="de">AHV Nummer
+										 * (die Alte)</div> <div class="fr">No
+										 * AVS (le vieil)</div>
+										 */
+	SwissSSNDeprecated("2.16.756.5.31",
+			"AHV Nummer (die Alte)"), /**
+										 * OID: 2.16.756.5.30.1.123.100.1.1.1
+										 * <div class="en">Insurance Card Number
+										 * (VeKa)</div>
+										 * <div class="de">Kartennummern für die
+										 * Versichertenkarte (VeKa)</div>
+										 * <div class="fr">No carte d insurance
+										 * (VeKa)</div>
+										 */
+	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1",
+			"Kartennummern für die Versichertenkarte (VeKa)"), /**
+																 * OID:
+																 * 2.16.756.5.31
+																 * <div class=
+																 * "en">ICD-10
+																 * </div>
+																 * <div class=
+																 * "de">ICD-10
+																 * </div>
+																 * <div class=
+																 * "fr">ICD-10
+																 * </div>
+																 */
+	ICD10("2.16.756.5.30.1.126.3.2",
+			"ICD-10"), /**
+						 * OID: 2.16.840.1.113883.6.121 <div class="en">Language
+						 * Code</div>
+						 */
+	LanguageCode("2.16.840.1.113883.6.121",
+			"Language Code"), /**
+								 * OID: 2.16.840.1.113883.5.25
+								 * <div class="en">Confidentiality Code</div>
+								 */
+	ConfidentialityCode("2.16.840.1.113883.5.25",
+			"Confidentiality Code"), /**
+										 * OID: 2.16.840.1.113883.5.1
+										 * <div class="en">AdministrativeGender
+										 * </div>
+										 */
 	AdministrativeGender("2.16.840.1.113883.5.1", "AdministrativeGender"),
 
 	/**
@@ -151,7 +178,13 @@ public enum CodeSystems implements IdentityDomain {
 	/**
 	 * OID: 2.16.840.1.113883.5.1008 <div class="en">HL7nullFlavor</div>
 	 */
-	HL7nullFlavor("2.16.840.1.113883.5.1008", "HL7nullFlavor");
+	HL7nullFlavor("2.16.840.1.113883.5.1008", "HL7nullFlavor"),
+
+	/**
+	 * OID: 2.16.840.1.113883.6.294 <div class="en">WHO Drug Dictionary
+	 * Medicinal Product ID</div>
+	 */
+	WHO_D_D_MED_PPROD_ID("2.16.840.1.113883.6.294", "WHO Drug Dictionary Medicinal Product ID");
 
 	private String codeSystem;
 	private String codeSystemName;
