@@ -702,10 +702,25 @@ public class Util {
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public static String extractFileFromResource(String rscPath) {
+		return extractFileFromResource(rscPath, true);
+	}
+
+	/**
+	 * <div class="en"> Extracts a file from embedded resources in the Jar as
+	 * temporary file on the local filesystem
+	 *
+	 * @param rscPath
+	 *            path to the desired file in the Jar
+	 * @param pathfix
+	 *            if path should be corrected at start depending on ox system
+	 * @return Full path and file name of the created temporary file </div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public static String extractFileFromResource(String rscPath, boolean pathfix) {
 		final String filename = FilenameUtils.getName(rscPath);
 		String targetPath = null;
 
-		if (!rscPath.startsWith(getPlatformSpecificPathSeparator()))
+		if (pathfix && !rscPath.startsWith(getPlatformSpecificPathSeparator()))
 			rscPath = getPlatformSpecificPathSeparator() + rscPath;
 
 		try {
@@ -1275,5 +1290,7 @@ public class Util {
 		}
 		return sb;
 	}
+	
+	
 
 }
