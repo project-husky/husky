@@ -19,7 +19,7 @@ public abstract class AbstractAxis2Util {
 	 * Method to load axis2 config from ressource
 	 */
 	public static void initAxis2Config() {
-		String axis2File = Util.extractFileFromResource("/conf/axis2.xml");
+		String axis2File = Util.extractFileFromResource("/conf/axis2.xml", false);
 		log.debug("Loading Axis2 Config from " + axis2File);
 		System.setProperty("axis2.xml", axis2File);
 	}

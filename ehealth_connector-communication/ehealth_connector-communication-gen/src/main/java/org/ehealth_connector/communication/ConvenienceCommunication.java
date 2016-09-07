@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
@@ -84,6 +86,8 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * </div>
  */
 public class ConvenienceCommunication {
+	
+	static private final Log log = LogFactory.getLog(ConvenienceCommunication.class);
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -583,6 +587,7 @@ public class ConvenienceCommunication {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
 		} catch (final Exception e) {
 			e.printStackTrace();
+			log.error("Exception", e);
 		}
 		return null;
 	}
@@ -611,6 +616,7 @@ public class ConvenienceCommunication {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
 		} catch (final Exception e) {
 			e.printStackTrace();
+			log.error("Exception", e);
 		}
 		return null;
 	}
