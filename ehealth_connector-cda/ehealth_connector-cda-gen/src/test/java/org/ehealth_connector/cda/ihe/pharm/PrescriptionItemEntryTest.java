@@ -31,6 +31,14 @@ import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_event;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.SXPR_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.SetOperator;
+import org.openhealthtools.mdht.uml.hl7.vocab.TimingEvent;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -77,6 +85,63 @@ public class PrescriptionItemEntryTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
+	
+	@Test
+	public void testEffectiveTime() throws Exception {
+
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+		
+		SXPR_TS sxcmTs =  DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTs.setOperator(SetOperator.A);
+		SXPR_TS sxcmTsInner1 =  DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTs.getComps().add(sxcmTsInner1);
+		
+		IVL_TS ivlTs1= DatatypesFactory.eINSTANCE.createIVL_TS();
+		IVXB_TS low1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		low1.setValue("20120505");
+		IVXB_TS high1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		high1.setValue("20151105");
+		ivlTs1.setLow(low1);
+		ivlTs1.setHigh(high1);
+		sxcmTsInner1.getComps().add(ivlTs1);
+		
+		EIVL_TS eivlTs = DatatypesFactory.eINSTANCE.createEIVL_TS();
+		EIVL_event event = DatatypesFactory.eINSTANCE.createEIVL_event();
+		event.setCode(TimingEvent.ACM.getName());
+		eivlTs.setOperator(SetOperator.A);
+		eivlTs.setEvent(event);
+		sxcmTsInner1.getComps().add(eivlTs);
+
+		SXPR_TS sxcmTsInner2 =  DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTsInner2.setOperator(SetOperator.I);
+		sxcmTs.getComps().add(sxcmTsInner2);
+		
+		IVL_TS ivlTs2= DatatypesFactory.eINSTANCE.createIVL_TS();
+		IVXB_TS low2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		low2.setValue("20120505");
+		IVXB_TS high2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		high2.setValue("20151105");
+		ivlTs2.setLow(low2);
+		ivlTs2.setHigh(high2);
+		sxcmTsInner2.getComps().add(ivlTs2);
+
+		EIVL_TS eivlTs2 = DatatypesFactory.eINSTANCE.createEIVL_TS();
+		EIVL_event event2 = DatatypesFactory.eINSTANCE.createEIVL_event();
+		event2.setCode(TimingEvent.ACV.getName());
+		eivlTs2.setOperator(SetOperator.A);
+		eivlTs2.setEvent(event2);
+		sxcmTsInner2.getComps().add(eivlTs2);
+		
+		
+		entry.getMdht().getEffectiveTimes().add(sxcmTs);
+
+		
+//		SXCM_TS
+		
+		final Document document = entry.getDocument();
+
+	}
+
 
 	@Test
 	public void testInstructionsEntry() throws Exception {
