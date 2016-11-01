@@ -18,12 +18,14 @@ package org.ehealth_connector.communication;
 
 import java.util.Date;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQuery;
 import org.ehealth_connector.fhir.FhirPatient;
+import org.hl7.v3.V3Package;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
@@ -33,19 +35,6 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  * the Patient Demographics Query (PDQ) ITI-47.
  */
 public class MasterPatientIndexQuery {
-
-//	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
-
-	static {
-		// org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE needs to be
-		// initialized before org.hl7.v3.impl.V3FactoryImpl, otherwise a
-		// classcast Exception occurs
-		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
-		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
-	//	if (FACTORY == null) {
-	//		throw new ExceptionInInitializerError();
-	//	}
-	}
 
 	/** The v3 pdq query. */
 	private final V3PdqQuery v3PdqQuery;
@@ -57,8 +46,15 @@ public class MasterPatientIndexQuery {
 	 *            the dest
 	 */
 	public MasterPatientIndexQuery(Destination dest) {
+		// OHT SAGE HACK!! Save the loaded EPackage off
+		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage(V3Package.eNS_URI);
+		EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, V3Package.eINSTANCE);
+
 		v3PdqQuery = new V3PdqQuery(dest.getSenderApplicationOid(), dest.getSenderFacilityOid(),
 				dest.getReceiverApplicationOid(), dest.getReceiverFacilityOid());
+		
+		if (eOrigPackage != null)
+			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
 	}
 
 	/**
