@@ -45,7 +45,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
 
-	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
+	// static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 
 	static {
 		// org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE needs to be
@@ -53,9 +53,9 @@ public class ConvenienceMasterPatientIndexV3 {
 		// classcast Exception occurs
 		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
 		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
-		if (FACTORY == null) {
-			throw new ExceptionInInitializerError();
-		}
+//		if (FACTORY == null) {
+//			throw new ExceptionInInitializerError();
+//		}
 		AbstractAxis2Util.initAxis2Config();
 	}
 

@@ -34,7 +34,7 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  */
 public class MasterPatientIndexQuery {
 
-	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
+//	static final private org.openhealthtools.mdht.uml.cda.CDAFactory FACTORY = org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE;
 
 	static {
 		// org.openhealthtools.mdht.uml.cda.CDAFactory.eINSTANCE needs to be
@@ -42,9 +42,9 @@ public class MasterPatientIndexQuery {
 		// classcast Exception occurs
 		// java.lang.ClassCastException: org.hl7.v3.impl.V3FactoryImpl cannot be
 		// cast to org.openhealthtools.mdht.uml.cda.CDAFactory
-		if (FACTORY == null) {
-			throw new ExceptionInInitializerError();
-		}
+	//	if (FACTORY == null) {
+	//		throw new ExceptionInInitializerError();
+	//	}
 	}
 
 	/** The v3 pdq query. */

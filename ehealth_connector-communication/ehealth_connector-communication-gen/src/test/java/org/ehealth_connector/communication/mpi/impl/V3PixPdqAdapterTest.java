@@ -37,7 +37,7 @@ import ca.uhn.fhir.model.dstu2.resource.Organization;
  */
 public class V3PixPdqAdapterTest {
 
-	private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
+//	private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
 
 	/**
 	 * Method implementing
