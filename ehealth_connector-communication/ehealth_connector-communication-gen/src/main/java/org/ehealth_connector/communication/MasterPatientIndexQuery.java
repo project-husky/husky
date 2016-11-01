@@ -18,6 +18,8 @@ package org.ehealth_connector.communication;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
@@ -36,23 +38,31 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  */
 public class MasterPatientIndexQuery {
 
+	/** The Constant log. */
+	static private final Log log = LogFactory.getLog(MasterPatientIndexQuery.class);
+
 	/** The orginal model package. */
 	private EPackage eOrigPackage;
 	
 	/** The v3 pdq query. */
 	private final V3PdqQuery v3PdqQuery;
+	
 
 	/**
 	 * Fix v3 package.
 	 */
 	private void fixV3Package() {
 		// OHT SAGE HACK!! Save the loaded EPackage off
-		eOrigPackage = EPackage.Registry.INSTANCE.getEPackage(V3Package.eNS_URI);
+		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
 		if (eOrigPackage != null) {
 			String name = eOrigPackage.getClass().getName();
 			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
-				EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, V3Package.eINSTANCE);
-			}
+				log.debug("fixV3Package class loaded, resetting :"+name);
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", null);		
+				log.debug("fixV3Package class loaded, setting V3Package :"+V3Package.eINSTANCE.getName());
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
+				this.eOrigPackage = eOrigPackage;
+			} 
 		}
 	}
 	
