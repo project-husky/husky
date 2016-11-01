@@ -36,8 +36,35 @@ import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
  */
 public class MasterPatientIndexQuery {
 
+	/** The orginal model package. */
+	private EPackage eOrigPackage;
+	
 	/** The v3 pdq query. */
 	private final V3PdqQuery v3PdqQuery;
+
+	/**
+	 * Fix v3 package.
+	 */
+	private void fixV3Package() {
+		// OHT SAGE HACK!! Save the loaded EPackage off
+		eOrigPackage = EPackage.Registry.INSTANCE.getEPackage(V3Package.eNS_URI);
+		if (eOrigPackage != null) {
+			String name = eOrigPackage.getClass().getName();
+			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
+				EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, V3Package.eINSTANCE);
+			}
+		}
+	}
+	
+	/**
+	 * Post fix v3 package.
+	 */
+	private void postFixV3Package() {
+		if (eOrigPackage != null) {
+			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
+			eOrigPackage = null;
+		}
+	}
 
 	/**
 	 * Instantiates a new master patient index query.
@@ -46,15 +73,10 @@ public class MasterPatientIndexQuery {
 	 *            the dest
 	 */
 	public MasterPatientIndexQuery(Destination dest) {
-		// OHT SAGE HACK!! Save the loaded EPackage off
-		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage(V3Package.eNS_URI);
-		EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, V3Package.eINSTANCE);
-
+		fixV3Package();
 		v3PdqQuery = new V3PdqQuery(dest.getSenderApplicationOid(), dest.getSenderFacilityOid(),
 				dest.getReceiverApplicationOid(), dest.getReceiverFacilityOid());
-		
-		if (eOrigPackage != null)
-			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
+		postFixV3Package();
 	}
 
 	/**
@@ -65,7 +87,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addDomainToReturn(String organizationOID) {
+		fixV3Package();
 		v3PdqQuery.addDomainToReturn(organizationOID);
+		postFixV3Package();
 		return this;
 	}
 
@@ -80,7 +104,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addMothersMaidenName(boolean useFuzzySearch, Name name) {
+		fixV3Package();
 		v3PdqQuery.addMothersMaidenName(useFuzzySearch, FhirPatient.convertName(name));
+		postFixV3Package();
 		return this;
 	}
 
@@ -92,7 +118,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientAddress(Address address) {
+		fixV3Package();
 		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address.getMdhtAdress()));
+		postFixV3Package();
 		return this;
 	}
 
@@ -104,8 +132,10 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
+		fixV3Package();
 		v3PdqQuery.addPatientIdentifier(new IdentifierDt("urn:oid:" + identificator.getRoot(),
 				identificator.getExtension()));
+		postFixV3Package();
 		return this;
 	}
 
@@ -120,7 +150,9 @@ public class MasterPatientIndexQuery {
 	 * @return the master patient index query
 	 */
 	public MasterPatientIndexQuery addPatientName(boolean useFuzzySearch, Name name) {
+		fixV3Package();
 		v3PdqQuery.addPatientName(useFuzzySearch, FhirPatient.convertName(name));
+		postFixV3Package();
 		return this;
 	}
 
@@ -132,7 +164,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientTelecom(TEL tel) {
+		fixV3Package();
 		v3PdqQuery.addPatientTelecom(FhirPatient.convertTelecom(tel));
+		postFixV3Package();
 		return this;
 	}
 
@@ -142,7 +176,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery cancelQuery() {
+		fixV3Package();
 		v3PdqQuery.cancelQuery();
+		postFixV3Package();
 		return this;
 	}
 
@@ -152,7 +188,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery continueQuery() {
+		fixV3Package();
 		v3PdqQuery.continueQuery();
+		postFixV3Package();
 		return this;
 	}
 
@@ -172,7 +210,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setNistContinuationQueryId() {
+		fixV3Package();
 		v3PdqQuery.getV3PdqConsumerQuery().setQueryId("1.2.3.4", "NIST_CONTINUATION", "");
+		postFixV3Package();
 		return this;
 	}
 
@@ -185,7 +225,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPageCount(int pageCount) {
+		fixV3Package();
 		v3PdqQuery.setPageCount(pageCount);
+		postFixV3Package();
 		return this;
 	}
 
@@ -197,7 +239,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPatientDateOfBirth(Date birthDate) {
+		fixV3Package();
 		v3PdqQuery.setPatientBirthDate(birthDate);
+		postFixV3Package();
 		return this;
 	}
 
@@ -209,7 +253,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPatientSex(AdministrativeGender adminstrativeGender) {
+		fixV3Package();
 		v3PdqQuery.setPatientSex(FhirPatient.convertGender(adminstrativeGender));
+		postFixV3Package();
 		return this;
 	}
 
