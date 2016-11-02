@@ -47,6 +47,16 @@ public class MasterPatientIndexQuery {
 	/** The v3 pdq query. */
 	private final V3PdqQuery v3PdqQuery;
 	
+	/** If not add  exception is thrown when deserializing to a cda model 
+	    org.eclipse.emf.ecore.resource.Resource$IOWrappedException: Class 'ClinicalDocument' is not found or is abstract. (http:///resource0.xml, -1, -1)
+		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.handleErrors(FleXMLLoadImpl.java:171)
+		at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:418)
+		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:92)
+		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:55)
+		at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+		at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518) */
+	@SuppressWarnings("unused")
+	static private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
 
 	/**
 	 * Fix v3 package.
