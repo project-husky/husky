@@ -30,6 +30,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.fhir.FhirPatient;
@@ -57,6 +58,7 @@ import org.hl7.v3.PRPAMT201310UV02Patient;
 import org.hl7.v3.PRPAMT201310UV02PersonalRelationship;
 import org.hl7.v3.TEL;
 import org.hl7.v3.TS1;
+import org.hl7.v3.V3Package;
 import org.hl7.v3.WorkPlaceAddressUse;
 import org.openhealthtools.ihe.atna.auditor.PDQConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXConsumerAuditor;
@@ -144,6 +146,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/** The v3 pix consumer. */
 	private V3PixConsumer v3PixConsumer;
+	
+	/** The orginal model package. */
+	private EPackage eOrigPackage;
+
 
 	/**
 	 * Instantiates a new v3 pix adapter.
@@ -166,6 +172,34 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			for (final String oid : adapterConfig.getOtherOidIds()) {
 				otherIdsOidSet.add(oid);
 			}
+		}
+	}
+	
+	/**
+	 * Fix v3 package.
+	 */
+	private void fixV3Package() {
+		// OHT SAGE HACK!! Save the loaded EPackage off
+		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
+		if (eOrigPackage != null) {
+			String name = eOrigPackage.getClass().getName();
+			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
+				log.debug("fixV3Package class loaded, resetting :"+name);
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", null);		
+				log.debug("fixV3Package class loaded, setting V3Package :"+V3Package.eINSTANCE.getName());
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
+				this.eOrigPackage = eOrigPackage;
+			} 
+		}
+	}
+	
+	/**
+	 * Post fix v3 package.
+	 */
+	private void postFixV3Package() {
+		if (eOrigPackage != null) {
+			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
+			eOrigPackage = null;
 		}
 	}
 
@@ -634,6 +668,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			return false;
 		}
 		log.debug("configure end");
+		fixV3Package(); 
 		return true;
 	}
 
@@ -1075,6 +1110,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			queryResponse.setSuccess(false);
 			return queryResponse;
 		}
+		this.postFixV3Package();
 		return queryResponse;
 	}
 
