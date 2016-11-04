@@ -335,6 +335,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	public boolean addPatient(FhirPatient patient) {
 		configurePix(true);
 		log.debug("creating v3RecordAddedMessage");
+		boolean ret = false;
 		final V3PixSourceMessageHelper v3RecordAddedMessage = new V3PixSourceMessageHelper(true,
 				false, false, adapterCfg.getSenderApplicationOid(),
 				adapterCfg.getSenderFacilityOid(), adapterCfg.getReceiverApplicationOid(),
@@ -346,11 +347,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			final V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage());
 			printMessage("sendRecordAdded", v3pixack.getRequest());
-			return checkResponse(v3pixack);
+			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			log.error("addPatient failed", e);
-			return false;
 		}
+		this.postFixV3Package();
+		return ret;
 	}
 
 	/**
@@ -716,6 +718,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			log.error("configuring not successful", e);
 			return false;
 		}
+		fixV3Package(); 
 		log.debug("configure end");
 		return true;
 	}
@@ -905,6 +908,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (!configurePix(true)) {
 			return false;
 		}
+		
+		boolean ret = false;
 
 		final V3PixSourceMessageHelper v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false,
 				false, true, adapterCfg.getSenderApplicationOid(),
@@ -920,11 +925,12 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			final V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage());
 			printMessage("sourceMerge", v3pixack.getRequest());
-			return checkResponse(v3pixack);
+			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			log.error("mergePatient failed", e);
-			return false;
 		}
+		postFixV3Package();
+		return ret;
 	}
 
 	/**
@@ -1038,15 +1044,19 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 						returnIds[i] = getPatientDomainId(v3PixConsumerResponse,
 								domainToReturnOids[i]);
 					}
+					postFixV3Package();
 					return returnIds;
 				}
+				postFixV3Package();
 				return null;
 			} catch (final Exception e) {
 				log.error("exception queryPatient", e);
+				postFixV3Package();
 				return null;
 			}
 		} else {
 			log.error("homeCommunityPatientId not provided");
+			postFixV3Package();
 			return null;
 		}
 	}
