@@ -30,38 +30,201 @@ import net.sf.saxon.s9api.XdmValue;
 
 public class PdfValidator {
 
+	/** Not installed error message */
 	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
+
+	/** Not initialized error message */
 	public final static String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
+
+	/** Invalid license error message */
 	public final static String ERR_INVALID_LICENSE = "Invalid PdfValidatorAPI license";
 
+	/** Current configuration */
 	private final Configuration config;
+
+	/** PDF compliance level as string */
 	private String pdfLevel;
-	private PdfValidationResult pdfValidationResult;
+
+	/** PDF compliance level as enum/int */
+	private int comlianceLevel = COMPLIANCE.ePDFUnk;
+
+	/** Current PDF validation results */
+	private PdfValidationResult pdfValidationResult = null;
+
+	/** PDF validator API */
+	private PdfValidatorAPI pdfValidator = null;
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * Default constructor
+	 *
+	 * @param config
+	 *            Current configuration
+	 */
 	public PdfValidator(Configuration config) {
 		this.config = config;
 		this.pdfLevel = config.getPdfLevel();
 	}
 
+	/**
+	 * Gets the PDF compliance level
+	 *
+	 * @return the PDF compliance level
+	 */
 	public String getPdfLevel() {
 		return pdfLevel;
 	}
 
+	/**
+	 * Gets the current PDF validation results
+	 *
+	 * @return the current PDF validation results
+	 */
 	public PdfValidationResult getPdfValidationResults() {
 		return pdfValidationResult;
 	}
 
+	/**
+	 * Gets the API version of the PDF validator
+	 *
+	 * @return the API version of the PDF validator
+	 */
+	public String getPdfValidatorVersion() {
+		String retVal = "none";
+		if (pdfValidator == null) {
+			initialize("none");
+		}
+		if (pdfValidator != null)
+			retVal = com.pdftools.pdfvalidator.PdfValidatorAPI.VERSION;
+		return retVal;
+	}
+
+	/**
+	 * Initializes the PDF validator
+	 *
+	 * @param lineNumber
+	 *            the line number where the PDF starts within the CDA document
+	 */
+	private void initialize(String lineNumber) {
+		if (pdfValidator == null) {
+			log.info("Trying to initialize PdfValidatorAPI...");
+			pdfValidationResult = new PdfValidationResult();
+			try {
+				pdfValidator = new PdfValidatorAPI();
+			} catch (UnsatisfiedLinkError ue) {
+				String errorMsg = ERR_NOT_INSTALLED + " (" + ue.getMessage() + ")";
+				log.error(errorMsg);
+				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setLineNumber(lineNumber);
+				pdfValidationResult.add(failure);
+			} catch (NoClassDefFoundError e) {
+				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
+				log.error(errorMsg);
+				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setLineNumber(lineNumber);
+				pdfValidationResult.add(failure);
+			} catch (ExceptionInInitializerError e) {
+				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
+				log.error(errorMsg);
+				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setLineNumber(lineNumber);
+				pdfValidationResult.add(failure);
+			}
+			if (pdfValidator != null) {
+				log.info("PdfValidatorAPI initialized (Version "
+						+ com.pdftools.pdfvalidator.PdfValidatorAPI.VERSION + ")");
+				pdfValidator.setNoTempFiles(true);
+				final String licenseKey = config.getLicenseKey();
+				if (!PdfValidatorAPI.setLicenseKey(licenseKey)) {
+					String errorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
+					log.error(errorMsg);
+					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					failure.setErrMsg(errorMsg, SEVERITY.Error);
+					failure.setLineNumber(lineNumber);
+					pdfValidationResult.add(failure);
+				}
+			}
+
+			if (pdfValidator != null) {
+				String reportingLevel = config.getPdfReportingLevel();
+				if (reportingLevel == null)
+					reportingLevel = "";
+				switch (reportingLevel) {
+				case "1":
+					pdfValidator.setReportingLevel(1);
+					break;
+				case "2":
+					pdfValidator.setReportingLevel(2);
+					break;
+				case "3":
+					pdfValidator.setReportingLevel(3);
+					break;
+				default:
+					pdfValidator.setReportingLevel(1);
+				}
+
+				if (pdfLevel == null)
+					pdfLevel = "";
+				switch (pdfLevel) {
+				case "1a":
+					comlianceLevel = COMPLIANCE.ePDFA1a;
+					break;
+				case "1b":
+					comlianceLevel = COMPLIANCE.ePDFA1b;
+					break;
+				case "2a":
+					comlianceLevel = COMPLIANCE.ePDFA2a;
+					break;
+				case "2b":
+					comlianceLevel = COMPLIANCE.ePDFA2b;
+					break;
+				case "2u":
+					comlianceLevel = COMPLIANCE.ePDFA2u;
+					break;
+				case "3a":
+					comlianceLevel = COMPLIANCE.ePDFA3a;
+					break;
+				case "3b":
+					comlianceLevel = COMPLIANCE.ePDFA3b;
+					break;
+				case "3u":
+					comlianceLevel = COMPLIANCE.ePDFA3u;
+					break;
+				default:
+					comlianceLevel = COMPLIANCE.ePDFUnk;
+				}
+			}
+		} else
+			log.info("PdfValidatorAPI already initialized...");
+	}
+
+	/**
+	 * Sets the given PDF validation results
+	 *
+	 * @param pdfValidationResults
+	 *            the desired PDF validation results
+	 */
 	public void setPdfValidationResults(PdfValidationResult pdfValidationResults) {
 		this.pdfValidationResult = pdfValidationResults;
 	}
 
+	/**
+	 * Validates all PDF within the given CDA document
+	 *
+	 * @param cdaFile
+	 *            the desired CDA document to be validated
+	 * @throws ConfigurationException
+	 * @throws SaxonApiException
+	 * @throws IOException
+	 */
 	public void validateCdaFile(File cdaFile)
 			throws ConfigurationException, SaxonApiException, IOException {
 
-		pdfValidationResult = new PdfValidationResult();
 		final Processor proc = new Processor(false);
 
 		final DocumentBuilder builder = proc.newDocumentBuilder();
@@ -86,99 +249,23 @@ public class PdfValidator {
 		}
 	}
 
+	/**
+	 * Validates the given PDF
+	 *
+	 * @param pdfStrB64
+	 *            the desired PDF as Base64 string taken from the CDA document
+	 * @param lineNumber
+	 *            the line number where the PDF starts within the CDA document
+	 * @return the PDF validation results
+	 * @throws IOException
+	 * @throws ConfigurationException
+	 */
 	private PdfValidationResult validatePdf(String pdfStrB64, String lineNumber)
 			throws IOException, ConfigurationException {
 
+		initialize(lineNumber);
 		pdfValidationResult.resetIsDone();
-		PdfValidatorAPI pdfValidator = null;
-		log.info("Trying to initialize PdfValidatorAPI...	");
-		try {
-			pdfValidator = new PdfValidatorAPI();
-		} catch (UnsatisfiedLinkError ue) {
-			String errorMsg = ERR_NOT_INSTALLED + " (" + ue.getMessage() + ")";
-			log.error(errorMsg);
-			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
-			failure.setLineNumber(lineNumber);
-			pdfValidationResult.add(failure);
-		} catch (NoClassDefFoundError e) {
-			String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
-			log.error(errorMsg);
-			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
-			failure.setLineNumber(lineNumber);
-			pdfValidationResult.add(failure);
-		} catch (ExceptionInInitializerError e) {
-			String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
-			log.error(errorMsg);
-			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
-			failure.setLineNumber(lineNumber);
-			pdfValidationResult.add(failure);
-		}
 		if (pdfValidator != null) {
-			log.info("PdfValidatorAPI initialized");
-			pdfValidator.setNoTempFiles(true);
-			final String licenseKey = config.getLicenseKey();
-			if (!PdfValidatorAPI.setLicenseKey(licenseKey)) {
-				String errorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
-				log.error(errorMsg);
-				PdfValidationResultEntry failure = new PdfValidationResultEntry();
-				failure.setErrMsg(errorMsg, SEVERITY.Error);
-				failure.setLineNumber(lineNumber);
-				pdfValidationResult.add(failure);
-			}
-		}
-
-		if (pdfValidator != null) {
-			String reportingLevel = config.getPdfReportingLevel();
-			if (reportingLevel == null)
-				reportingLevel = "";
-			switch (reportingLevel) {
-			case "1":
-				pdfValidator.setReportingLevel(1);
-				break;
-			case "2":
-				pdfValidator.setReportingLevel(2);
-				break;
-			case "3":
-				pdfValidator.setReportingLevel(3);
-				break;
-			default:
-				pdfValidator.setReportingLevel(1);
-			}
-
-			int comlianceLevel = COMPLIANCE.ePDFUnk;
-			if (pdfLevel == null)
-				pdfLevel = "";
-			switch (pdfLevel) {
-			case "1a":
-				comlianceLevel = COMPLIANCE.ePDFA1a;
-				break;
-			case "1b":
-				comlianceLevel = COMPLIANCE.ePDFA1b;
-				break;
-			case "2a":
-				comlianceLevel = COMPLIANCE.ePDFA2a;
-				break;
-			case "2b":
-				comlianceLevel = COMPLIANCE.ePDFA2b;
-				break;
-			case "2u":
-				comlianceLevel = COMPLIANCE.ePDFA2u;
-				break;
-			case "3a":
-				comlianceLevel = COMPLIANCE.ePDFA3a;
-				break;
-			case "3b":
-				comlianceLevel = COMPLIANCE.ePDFA3b;
-				break;
-			case "3u":
-				comlianceLevel = COMPLIANCE.ePDFA3u;
-				break;
-			default:
-				comlianceLevel = COMPLIANCE.ePDFUnk;
-			}
 			pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "", comlianceLevel);
 
 			pdfValidator.validate();
@@ -218,5 +305,4 @@ public class PdfValidator {
 		}
 		return pdfValidationResult;
 	}
-
 }

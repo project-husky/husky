@@ -16,10 +16,6 @@
 
 package org.ehealth_connector.validation.service.api;
 
-/**
- * @author ich
- *
- */
 public class XsdValidationResult {
 
 	private boolean isXsdValid;

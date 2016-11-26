@@ -16,13 +16,18 @@
 
 package org.ehealth_connector.validation.service.schematron.result;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.JAXBElement;
+
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.validation.service.schematron.bind.ActivePattern;
 import org.ehealth_connector.validation.service.schematron.bind.FailedAssert;
 import org.ehealth_connector.validation.service.schematron.bind.FiredRule;
+import org.ehealth_connector.validation.service.schematron.bind.LangTextType;
 import org.ehealth_connector.validation.service.schematron.bind.SuccessfulReport;
 
 /**
@@ -32,14 +37,80 @@ import org.ehealth_connector.validation.service.schematron.bind.SuccessfulReport
  */
 public class ActivePatternResult {
 
+	/**
+	 * Returns the text in the desired language
+	 *
+	 * @param text
+	 *            multiple language text as it comes from the schematron output
+	 * @param lang
+	 *            the desired language
+	 * @return text in the desired language
+	 */
+	public static String getLangText(
+			org.ehealth_connector.validation.service.schematron.bind.Text text, LanguageCode lang) {
+		return getLangText(text, lang, null);
+	}
+
+	/**
+	 * Returns the text in the desired languages
+	 *
+	 * @param text
+	 *            multiple language text as it comes from the schematron output
+	 * @param langPrio1
+	 *            the desired language top priority
+	 * @param langPrio2
+	 *            alternatively desired language
+	 * @return text in the desired language
+	 */
+	public static String getLangText(
+			org.ehealth_connector.validation.service.schematron.bind.Text text,
+			LanguageCode langPrio1, LanguageCode langPrio2) {
+
+		String retVal = "";
+		String langTextPrio1 = null;
+		String langTextPrio2 = null;
+		String noLangText = "";
+		for (Serializable item : text.getContent()) {
+			if (item instanceof JAXBElement) {
+				@SuppressWarnings("unchecked")
+				LangTextType langText = ((JAXBElement<LangTextType>) item).getValue();
+				if (langPrio1 != null)
+					if (langPrio1.getCodeValue().startsWith(langText.getLang()))
+						langTextPrio1 = langText.getValue();
+				if (langPrio2 != null)
+					if (langPrio2.getCodeValue().startsWith(langText.getLang()))
+						langTextPrio2 = langText.getValue();
+			} else
+				noLangText = item.toString();
+		}
+
+		if (langTextPrio1 != null) {
+			retVal = langTextPrio1;
+		} else if (langTextPrio2 != null) {
+			retVal = langTextPrio2;
+		} else {
+			retVal = noLangText;
+		}
+
+		return retVal;
+	}
+
+	/** Active pattern */
 	private ActivePattern ap;
+
+	/** Active pattern childs */
 	private List<Object> apChilds;
 
+	/**
+	 * Default constructor
+	 */
 	public ActivePatternResult() {
 		apChilds = new ArrayList<Object>();
 	}
 
 	/**
+	 * Gets the underlying ActivePattern
+	 *
 	 * @return the underlying ActivePattern
 	 */
 	public ActivePattern getAp() {
@@ -47,13 +118,17 @@ public class ActivePatternResult {
 	}
 
 	/**
-	 * @return a list with all active-pattern childs
+	 * Gets a list with all active-pattern children
+	 *
+	 * @return a list with all active-pattern children
 	 */
 	public List<Object> getApChilds() {
 		return apChilds;
 	}
 
 	/**
+	 * Gets a List of all fired rules
+	 *
 	 * @return a List of all fired rules
 	 */
 	public List<FiredRule> getFiredRules() {
@@ -69,6 +144,8 @@ public class ActivePatternResult {
 	}
 
 	/**
+	 * Gets a list of fired-rules with failed-assert or successful-report
+	 *
 	 * @return a list of fired-rules with failed-assert or successful-report
 	 */
 	public List<FiredRuleResult> getFiredRulesSuccessFailed() {
@@ -110,33 +187,59 @@ public class ActivePatternResult {
 	}
 
 	/**
+	 * Gets the id of the ActivePattern
+	 *
 	 * @return the id of the ActivePattern
 	 */
 	public String getId() {
 		return ap.getId();
 	}
 
+	/**
+	 * Gets the name of the active pattern
+	 *
+	 * @return the name of the active pattern
+	 */
 	public String getName() {
 		return ap.getName();
 	}
 
+	/**
+	 * Sets the active pattern
+	 *
+	 * @param ap
+	 *            the desired active pattern
+	 */
 	public void setAp(ActivePattern ap) {
 		this.ap = ap;
 	}
 
+	/**
+	 * Sets the children of the active pattern
+	 *
+	 * @param apChilds
+	 *            the children of the active pattern
+	 */
 	public void setApChilds(List<Object> apChilds) {
 		this.apChilds = apChilds;
 	}
 
 	/**
+	 * Gets the name of the ActivePattern
+	 *
 	 * @return the name of the ActivePattern
 	 */
 	public void setId(String id) {
 		ap.setId(id);
 	}
 
+	/**
+	 * Sets the name of the ActivePattern
+	 *
+	 * @param name
+	 *            the desired name of the ActivePattern
+	 */
 	public void setName(String name) {
 		ap.setName(name);
 	}
-
 }

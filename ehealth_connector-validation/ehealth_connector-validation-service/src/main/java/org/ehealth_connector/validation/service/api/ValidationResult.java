@@ -20,66 +20,152 @@ import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 
 /**
- * @author ich
- *
+ * Contains all validation results
  */
 public class ValidationResult {
 
-	private boolean xsdValid;
+	/** The Schema validation results */
+	private XsdValidationResult xsdValRes = null;
 
-	private XsdValidationResult xsdValRes;
+	/** The Schematron validation results */
+	private SchematronValidationResult schValRes = null;
 
-	private SchematronValidationResult schValRes;
+	/** The PDF validation results */
+	private PdfValidationResult pdfValRes = null;
 
-	private PdfValidationResult pdfValRes;
-
+	/**
+	 * Default constructor
+	 */
 	public ValidationResult() {
-		this.xsdValRes = new XsdValidationResult();
-		this.schValRes = new SchematronValidationResult();
 	}
 
+	/**
+	 * Gets the PDF validation results
+	 *
+	 * @return the PDF validation results
+	 */
 	public PdfValidationResult getPdfValidationResult() {
 		return pdfValRes;
 	}
 
+	/**
+	 * Gets the Schematron validation results
+	 *
+	 * @return the Schematron validation results
+	 */
 	public SchematronValidationResult getSchValidationResult() {
 		return schValRes;
 	}
 
+	/**
+	 * Gets the Schema validation results
+	 *
+	 * @return the Schema validation results
+	 */
 	public XsdValidationResult getXsdValidationResult() {
 		return xsdValRes;
 	}
 
+	/**
+	 * Indicates whether the embedded PDFs are valid
+	 *
+	 * @return true when the embedded PDFs are valid, false otherwise
+	 */
 	public boolean isPdfValid() {
 		return pdfValRes.isPdfValid();
 	}
 
+	/**
+	 * Indicates whether the PDF validation was performed
+	 *
+	 * @return true when the PDF validation was performed, false otherwise
+	 */
+	public boolean isPdfValidationPerformed() {
+		return (pdfValRes != null);
+	}
+
+	/**
+	 * Indicates whether the CDA contains Schematron failures
+	 *
+	 * @return true when CDA does not contain any Schematron failures, false
+	 *         otherwise
+	 */
 	public boolean isSchValid() {
-		return schValRes.isSchematronValid();
+		if (schValRes != null)
+			return schValRes.isSchematronValid();
+		else
+			return false;
 	}
 
+	/**
+	 * Indicates whether the Schematron validation was performed
+	 *
+	 * @return true when the Schematron validation was performed, false
+	 *         otherwise
+	 */
+	public boolean isSchValidationPerformed() {
+		return (schValRes != null);
+	}
+
+	/**
+	 * Indicates whether the CDA contains Schema failures
+	 *
+	 * @return true when CDA does not contain any Schema failures, false
+	 *         otherwise
+	 */
 	public boolean isXsdValid() {
-		return xsdValid;
+		if (xsdValRes != null)
+			return xsdValRes.isXsdValid();
+		else
+			return false;
 	}
 
+	/**
+	 * Indicates whether the Schema validation was performed
+	 *
+	 * @return true when the Schema validation was performed, false otherwise
+	 */
+	public boolean isXsdValidationPerformed() {
+		return (xsdValRes != null);
+	}
+
+	/**
+	 * Sets the given PDF validation results
+	 *
+	 * @param pdfValRes
+	 *            the desired PDF validation results
+	 */
 	public void setPdfValidationResult(PdfValidationResult pdfValRes) {
 		this.pdfValRes = pdfValRes;
 	}
 
+	/**
+	 * Sets the Schematron validation success indicator
+	 *
+	 * @param schematronValid
+	 *            the Schematron validation success indicator
+	 */
 	public void setSchValid(boolean schematronValid) {
 		this.getSchValidationResult().setSchematronValid(schematronValid);
 	}
 
+	/**
+	 * Sets the given Schematron validation results
+	 *
+	 * @param schValRes
+	 *            the desired Schematron validation results
+	 */
 	public void setSchValidationResult(SchematronValidationResult schValRes) {
 		this.schValRes = schValRes;
 	}
 
-	public void setXsdValid(boolean xsdValid) {
-		this.xsdValid = xsdValid;
-	}
-
+	/**
+	 * Sets the given Schema validation results
+	 *
+	 * @param xsdValRes
+	 *            the desired Schema validation results
+	 */
 	public void setXsdValidationResult(XsdValidationResult xsdValRes) {
 		this.xsdValRes = xsdValRes;
 	}
-
 }
