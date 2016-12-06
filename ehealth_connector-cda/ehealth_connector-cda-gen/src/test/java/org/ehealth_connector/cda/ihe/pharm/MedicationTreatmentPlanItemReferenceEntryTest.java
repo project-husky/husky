@@ -55,7 +55,7 @@ public class MedicationTreatmentPlanItemReferenceEntryTest {
 		final Document document = entry.getDocument();
 
 		XPathExpression expr = xpath
-				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.9999.1']");
+				.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.10']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

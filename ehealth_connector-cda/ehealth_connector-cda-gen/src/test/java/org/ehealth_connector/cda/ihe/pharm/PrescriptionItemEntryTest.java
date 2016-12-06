@@ -340,6 +340,31 @@ public class PrescriptionItemEntryTest {
 		assertEquals("id2", entry.getReasonFor().getExtension());
 
 	}
+	
+	@Test
+	public void testCompResolving() {
+		
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
+		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(
+				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
+		entry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				substitutionHandlingEntry.getSubstanceAdminSubstitution());
+
+		entry.setSupplyQuantityValue(new BigDecimal(1.5));
+
+		assertEquals(new BigDecimal(1.5), entry.getSupplyQuantityValue());
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				substitutionHandlingEntry.getSubstanceAdminSubstitution());
+		
+		final Document document = entry.getDocument(true);
+
+
+	}
 
 	@Test
 	public void testSubstitutionHandlingEntry() throws Exception {

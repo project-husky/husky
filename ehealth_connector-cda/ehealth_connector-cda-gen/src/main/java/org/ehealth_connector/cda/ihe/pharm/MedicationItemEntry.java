@@ -35,6 +35,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.InternalReference;
 import org.openhealthtools.mdht.uml.cda.ihe.SupplyEntry;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSupplyEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -397,7 +398,7 @@ public class MedicationItemEntry
 			final SupplyEntry supplyEntry = getMdht().getPharmSupplyEntry();
 			supplyEntry.setQuantity(pq);
 		} else {
-			final SupplyEntry supplyEntry = IHEFactory.eINSTANCE.createSupplyEntry().init();
+			final PharmSupplyEntry supplyEntry = PHARMFactory.eINSTANCE.createPharmSupplyEntry().init();
 			supplyEntry.setQuantity(pq);
 			supplyEntry.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
 			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE

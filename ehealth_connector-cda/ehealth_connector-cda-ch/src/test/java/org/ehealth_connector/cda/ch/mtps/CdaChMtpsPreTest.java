@@ -23,6 +23,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.math.BigDecimal;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -30,8 +31,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.ehealth_connector.cda.ihe.pharm.PharmSubstitutionHandlingEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.cda.testhelper.TestUtils;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
@@ -183,6 +187,20 @@ public class CdaChMtpsPreTest extends TestUtils {
 
 		final PrescriptionItemEntry preEntry = new PrescriptionItemEntry();
 		preEntry.setTextReference("#pre");
+		
+		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(
+				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
+		preEntry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				substitutionHandlingEntry.getSubstanceAdminSubstitution());
+
+		preEntry.setSupplyQuantityValue(new BigDecimal(1.5));
+
+
+		
+		
 		cda.getPrescriptionSection().addPrescriptionItemEntry(preEntry);
 
 		final String deserialized = this.serializeDocument(cda);
@@ -193,6 +211,14 @@ public class CdaChMtpsPreTest extends TestUtils {
 
 		assertEquals("#pre", cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
 				.get(0).getTextReference());
+		
+		assertEquals(new BigDecimal(1.5), cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
+				.get(0).getSupplyQuantityValue());
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
+				.get(0).getPharmSubstitutionHandlingEntry().getSubstanceAdminSubstitution());
+
 	}
 
 }
