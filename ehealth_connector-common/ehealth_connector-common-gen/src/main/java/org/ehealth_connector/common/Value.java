@@ -238,7 +238,19 @@ public class Value {
 		mValue = rto;
 	}
 
-	public Value(ED ed) {
+	/**
+	 * Erstellt einen neuen Wert double.
+	 *
+	 * @param value
+	 *            Der eigentliche Wert
+	 */
+	public Value(double value) {
+		this(DatatypesFactory.eINSTANCE.createPQ());
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+public Value(ED ed) {
 		mValue = ed;
 	}
 
@@ -457,6 +469,16 @@ public class Value {
 		final Code code = new Code((CD) mValue);
 		return code.getOriginalTextReference();
 	}
+	
+	/**
+	 * Get mdht physical quantity.
+	 *
+	 * @return PQ the PQ object
+	 */
+	public PQ getPhysicalQuantity() {
+		return ((PQ) mValue);
+	}
+
 
 	/**
 	 * <div class="en">Returns the higher bound of an interval of physical
