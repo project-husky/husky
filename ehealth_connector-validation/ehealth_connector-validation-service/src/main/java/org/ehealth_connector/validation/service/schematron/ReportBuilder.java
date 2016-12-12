@@ -19,9 +19,11 @@ package org.ehealth_connector.validation.service.schematron;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +45,12 @@ import org.xml.sax.SAXException;
 import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.XPathCompiler;
 import net.sf.saxon.s9api.XPathExecutable;
 import net.sf.saxon.s9api.XPathSelector;
 import net.sf.saxon.s9api.XdmAtomicValue;
+import net.sf.saxon.s9api.XdmDestination;
 import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XsltExecutable;
@@ -73,114 +77,46 @@ public class ReportBuilder {
 	/** Style sheet for generating Validation XML output */
 	public static final String SVRL_TO_XML = xslDir + JarUtils.separator + "ms-svrl.xsl";
 
-	/**
-	 * Tries to auto-detect the matching rule-set from the specified input
-	 * source document.
-	 *
-	 * @param processor
-	 *            the <cite>Saxon Processor</cite> instance.
-	 * @param source
-	 *            the source document.
-	 * @param ruleSetList
-	 *            the list of available rule-sets.
-	 * @return the one and only one matching rule-set for the specified input
-	 *         source document.
-	 * @throws RuleSetDetectionException
-	 *             if no rule-set or if more than one rule-set was found for the
-	 *             specified document, or if an error occurs when building the
-	 *             document, for example a parsing error or because the type of
-	 *             document supplied does not match the required type.
-	 * @throws NullPointerException
-	 *             if either the specified processor or source document is
-	 *             <tt>null</tt>.
-	 */
-	public static RuleSet detectRuleSet(Processor processor, Source source, RuleSet[] ruleSetList)
-			throws RuleSetDetectionException {
-		if (processor == null) {
-			throw new NullPointerException("Processor is null.");
-		} else if (source == null) {
-			throw new NullPointerException("Source document is null.");
-		} else if (ruleSetList == null) {
-			throw new RuleSetDetectionException(new ArrayList<RuleSet>());
-		}
-		final Map<String, RuleSet> ruleSetOidMap = new HashMap<String, RuleSet>();
-		for (final RuleSet ruleSet : ruleSetList) {
-			if (ruleSet.getTemplateId() != null) {
-				ruleSetOidMap.put(ruleSet.getTemplateId(), ruleSet);
-			}
-		}
-		final List<RuleSet> matchingRuleSets = new ArrayList<RuleSet>();
-		final String expression = "/cda:ClinicalDocument/cda:templateId/@root";
-
-		final DocumentBuilder builder = processor.newDocumentBuilder();
-		final XPathCompiler compiler = processor.newXPathCompiler();
-		compiler.declareNamespace("cda", "urn:hl7-org:v3");
-
-		XPathSelector selector;
-		try {
-			final XdmNode document = builder.build(source);
-			final XPathExecutable executable = compiler.compile(expression);
-			selector = executable.load();
-			selector.setContextItem(document);
-		} catch (final SaxonApiException cause) {
-			throw new RuleSetDetectionException(cause);
-		}
-		RuleSet match;
-		String value;
-		for (final XdmItem item : selector) {
-			value = ((XdmNode) item).getStringValue();
-			if ((match = ruleSetOidMap.get(value)) != null) {
-				matchingRuleSets.add(match);
-			}
-		}
-		if (matchingRuleSets.size() != 1) {
-			throw new RuleSetDetectionException(matchingRuleSets);
-		}
-		return matchingRuleSets.get(0);
-	}
-
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	/** Validator class used for validatio */
+	/** Validator class used for validation */
 	private final Validators validators;
 
 	/** URI Resolver */
 	private final URIResolver resolver;
 
-	/** StylesheetFactoty */
+	/** Stylesheet Factory */
 	private final StylesheetFactory factory;
+
+	/** Rule Set List */
+	private Collection<RuleSet> ruleSetList = null;
+
+	/** Rule Set OID map */
+	private Map<String, RuleSet> ruleSetOidMap = null;
+
+	/** XPath Selector */
+	private XPathSelector xPathSelector;
 
 	/**
 	 * Creates a new report builder instance.
 	 *
 	 * @param validators
 	 *            a valid reference to the {@link Validators} instance.
+	 * @param ruleSetList
+	 *            the list of available rule-sets.
 	 * @throws NullPointerException
 	 *             if the specified <tt>Validators</tt> instance is
 	 *             <tt>null</tt>.
 	 */
-	public ReportBuilder(Validators validators) {
+	public ReportBuilder(Validators validators, Collection<RuleSet> ruleSetList) {
 		if (validators == null) {
 			throw new NullPointerException("Validators instance is null.");
 		}
 		this.validators = validators;
+		this.ruleSetList = ruleSetList;
 		this.resolver = new StylesheetURIResolver(xslDir);
 		this.factory = new StylesheetFactory(getProcessor(), this.resolver);
-	}
-
-	/**
-	 * Not used
-	 *
-	 * @param source
-	 * @param ruleSet
-	 * @throws RuleSetDetectionException
-	 */
-	public void checkRuleSet(Source source, RuleSet ruleSet)
-			throws SAXException, RuleSetDetectionException {
-		if (ruleSet.getTemplateId() != null) {
-			detectRuleSet(source, new RuleSet[] { ruleSet });
-		}
 	}
 
 	/**
@@ -204,6 +140,59 @@ public class ReportBuilder {
 		} catch (final SaxonApiException cause) {
 			throw new TransformationException(cause);
 		}
+	}
+
+	/**
+	 * Creates an HTML validation report for the specified input document.
+	 * <p>
+	 * This method tries to auto-detect the rule-set to use for the validation
+	 * process from the specified input document and the list of available
+	 * rule-sets.
+	 * </p>
+	 *
+	 * @param ruleSetList
+	 *            the list of available rule-sets.
+	 *
+	 * @param workDir
+	 *            the work directory where to put/read precompiled Schematron
+	 *            stylesheets
+	 *
+	 * @param input
+	 *            the XML input to be validated as an array of bytes.
+	 *
+	 * @param parameters
+	 *            XSLT parameters
+	 *
+	 * @return an HTML validation report as an array of bytes.
+	 *
+	 * @throws RuleSetDetectionException
+	 *             if no rule-set or if more than one rule-set was found for the
+	 *             specified document, or if an error occurs when building the
+	 *             document, for example a parsing error or because the type of
+	 *             document supplied does not match the required type.
+	 *
+	 * @throws TransformationException
+	 *             if the construction of the validator stylesheet aborted by
+	 *             throwing an exception, if any stylesheet contains static
+	 *             errors or cannot be read, or during the transformation phase,
+	 *             if an error occurs when setting the source for the
+	 *             transformation, or if any dynamic error occurs during the
+	 *             transformation.
+	 * @throws InterruptedException
+	 *             if the construction of the validator stylesheet was
+	 *             interrupted.
+	 * @throws NullPointerException
+	 *             if the specified input source document is <tt>null</tt>.
+	 * @see #detectRuleSet(Source, RuleSet[])
+	 * @see #createHTMLReport(RuleSet, byte[])
+	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
+	 */
+	public byte[] createHTMLReport(Collection<RuleSet> ruleSetList, File workDir, byte[] input,
+			Properties parameters) throws SAXException, RuleSetDetectionException,
+			TransformationException, InterruptedException {
+		final ByteArrayInputStream in = new ByteArrayInputStream(input);
+		final RuleSet ruleSet = detectRuleSet(new StreamSource(in));
+		return createHTMLReport(ruleSet, workDir, input, parameters);
 	}
 
 	/**
@@ -314,59 +303,6 @@ public class ReportBuilder {
 	}
 
 	/**
-	 * Creates an HTML validation report for the specified input document.
-	 * <p>
-	 * This method tries to auto-detect the rule-set to use for the validation
-	 * process from the specified input document and the list of available
-	 * rule-sets.
-	 * </p>
-	 *
-	 * @param ruleSetList
-	 *            the list of available rule-sets.
-	 *
-	 * @param workDir
-	 *            the work directory where to put/read precompiled Schematron
-	 *            stylesheets
-	 *
-	 * @param input
-	 *            the XML input to be validated as an array of bytes.
-	 *
-	 * @param parameters
-	 *            XSLT parameters
-	 *
-	 * @return an HTML validation report as an array of bytes.
-	 *
-	 * @throws RuleSetDetectionException
-	 *             if no rule-set or if more than one rule-set was found for the
-	 *             specified document, or if an error occurs when building the
-	 *             document, for example a parsing error or because the type of
-	 *             document supplied does not match the required type.
-	 *
-	 * @throws TransformationException
-	 *             if the construction of the validator stylesheet aborted by
-	 *             throwing an exception, if any stylesheet contains static
-	 *             errors or cannot be read, or during the transformation phase,
-	 *             if an error occurs when setting the source for the
-	 *             transformation, or if any dynamic error occurs during the
-	 *             transformation.
-	 * @throws InterruptedException
-	 *             if the construction of the validator stylesheet was
-	 *             interrupted.
-	 * @throws NullPointerException
-	 *             if the specified input source document is <tt>null</tt>.
-	 * @see #detectRuleSet(Source, RuleSet[])
-	 * @see #createHTMLReport(RuleSet, byte[])
-	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
-	 */
-	public byte[] createHTMLReport(RuleSet[] ruleSetList, File workDir, byte[] input,
-			Properties parameters) throws SAXException, RuleSetDetectionException,
-			TransformationException, InterruptedException {
-		final ByteArrayInputStream in = new ByteArrayInputStream(input);
-		final RuleSet ruleSet = detectRuleSet(new StreamSource(in), ruleSetList);
-		return createHTMLReport(ruleSet, workDir, input, parameters);
-	}
-
-	/**
 	 *
 	 * Creates a Schematrron result in the SVRL format
 	 *
@@ -391,45 +327,132 @@ public class ReportBuilder {
 	 */
 	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		final ByteArrayOutputStream baos_ms = new ByteArrayOutputStream();
+
 		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
 		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
-		t1.transform(in, baos);
-		final byte[] svrl = baos.toByteArray();
+		XdmDestination destination = new XdmDestination();
+		t1.transform(new StreamSource(in), destination);
 
 		// for debugging only - comment these lines for productive releases
 		// OutputStream outputStream1 = null;
 		// try {
 		// outputStream1 = new FileOutputStream("/temp/svrl_raw_out.xml");
-		// baos.writeTo(outputStream1);
+		// Serializer serializer = new Serializer();
+		// serializer.setOutputStream(outputStream1);
+		// getProcessor().writeXdmValue(destination.getXdmNode(), serializer);
 		// outputStream1.close();
-		// } catch (IOException e) {
+		// } catch (IOException | SaxonApiException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
 		// end of debugging only
 
-		final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
-		t2.setURIResolver(this.resolver);
-		t2.setParameters(parameters);
-		t2.transform(new ByteArrayInputStream(svrl), baos_ms);
-		final byte[] svrl_ms = baos_ms.toByteArray();
+		boolean destContainsXhtml = false;
+		final XPathCompiler xpathCompiler = getProcessor().newXPathCompiler();
+		xpathCompiler.declareNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 
-		// for debugging only - comment these lines for productive releases
-		// OutputStream outputStream2 = null;
-		// try {
-		// outputStream2 = new FileOutputStream("/temp/svrl2xml_out.xml");
-		// baos_ms.writeTo(outputStream2);
-		// outputStream2.close();
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// end of debugging only
+		final String expression = "//xhtml:p";
+		try {
+			final XdmItem item = xpathCompiler.evaluateSingle(expression, destination.getXdmNode());
+			destContainsXhtml = (item != null);
+		} catch (SaxonApiException e) {
+			// Do nothing
+		}
 
-		return svrl_ms;
+		XdmNode returnNode = destination.getXdmNode();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		if (destContainsXhtml) {
+			XdmDestination destination2 = new XdmDestination();
+			final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
+			t2.setURIResolver(this.resolver);
+			t2.setParameters(parameters);
+			t2.transform(destination.getXdmNode().asSource(), destination2);
+			returnNode = destination2.getXdmNode();
+
+			// for debugging only - comment these lines for productive releases
+			// OutputStream outputStream2 = null;
+			// try {
+			// outputStream2 = new FileOutputStream("/temp/svrl2xml_out.xml");
+			// Serializer serializer = new Serializer();
+			// serializer.setOutputStream(outputStream2);
+			// getProcessor().writeXdmValue(destination2.getXdmNode(),
+			// serializer);
+			// outputStream2.close();
+			// } catch (IOException | SaxonApiException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// end of debugging only
+
+		}
+
+		Serializer serializer = new Serializer();
+		serializer.setOutputStream(baos);
+		try {
+			getProcessor().writeXdmValue(returnNode, serializer);
+			baos.close();
+		} catch (SaxonApiException | IOException e) {
+			// Do nothing
+		}
+
+		return baos.toByteArray();
+
+	}
+
+	/**
+	 * Tries to auto-detect the matching rule-set from the specified input
+	 * source document.
+	 *
+	 * @param processor
+	 *            the <cite>Saxon Processor</cite> instance.
+	 * @param source
+	 *            the source document.
+	 * @return the one and only one matching rule-set for the specified input
+	 *         source document.
+	 * @throws RuleSetDetectionException
+	 *             if no rule-set or if more than one rule-set was found for the
+	 *             specified document, or if an error occurs when building the
+	 *             document, for example a parsing error or because the type of
+	 *             document supplied does not match the required type.
+	 * @throws NullPointerException
+	 *             if either the specified processor or source document is
+	 *             <tt>null</tt>.
+	 */
+	public RuleSet detectRuleSet(Processor processor, Source source)
+			throws RuleSetDetectionException {
+		if (processor == null) {
+			throw new NullPointerException("Processor is null.");
+		} else if (source == null) {
+			throw new NullPointerException("Source document is null.");
+		} else if (ruleSetList == null) {
+			throw new RuleSetDetectionException(new ArrayList<RuleSet>());
+		}
+
+		prepareSelector();
+
+		final DocumentBuilder builder = getProcessor().newDocumentBuilder();
+		try {
+			final XdmNode document = builder.build(source);
+			xPathSelector.setContextItem(document);
+		} catch (SaxonApiException e) {
+			e.printStackTrace();
+			// Do nothing
+		}
+
+		RuleSet match;
+		String value;
+		final List<RuleSet> matchingRuleSets = new ArrayList<RuleSet>();
+		for (final XdmItem item : xPathSelector) {
+			value = ((XdmNode) item).getStringValue();
+			if ((match = ruleSetOidMap.get(value)) != null) {
+				matchingRuleSets.add(match);
+			}
+		}
+		if (matchingRuleSets.size() != 1) {
+			throw new RuleSetDetectionException(matchingRuleSets);
+		}
+		return matchingRuleSets.get(0);
 	}
 
 	/**
@@ -438,8 +461,6 @@ public class ReportBuilder {
 	 *
 	 * @param source
 	 *            the source document.
-	 * @param ruleSetList
-	 *            the list of available rule-sets.
 	 * @return the one and only one matching rule-set for the specified input
 	 *         source document.
 	 * @throws RuleSetDetectionException
@@ -450,9 +471,8 @@ public class ReportBuilder {
 	 * @throws NullPointerException
 	 *             if the specified source document is <tt>null</tt>.
 	 */
-	public RuleSet detectRuleSet(Source source, RuleSet[] ruleSetList)
-			throws SAXException, RuleSetDetectionException {
-		return detectRuleSet(getProcessor(), source, ruleSetList);
+	public RuleSet detectRuleSet(Source source) throws SAXException, RuleSetDetectionException {
+		return detectRuleSet(getProcessor(), source);
 	}
 
 	/**
@@ -492,6 +512,29 @@ public class ReportBuilder {
 	public XsltExecutable getValidator(RuleSet ruleSet, File workDir)
 			throws TransformationException, InterruptedException {
 		return validators.get(ruleSet, workDir);
+	}
+
+	private void prepareSelector() throws RuleSetDetectionException {
+
+		ruleSetOidMap = new HashMap<String, RuleSet>();
+		for (final RuleSet ruleSet : ruleSetList) {
+			if (ruleSet.getTemplateId() != null) {
+				ruleSetOidMap.put(ruleSet.getTemplateId(), ruleSet);
+			}
+		}
+		final String expression = "/cda:ClinicalDocument/cda:templateId/@root";
+
+		final XPathCompiler compiler = getProcessor().newXPathCompiler();
+		compiler.declareNamespace("cda", "urn:hl7-org:v3");
+
+		// try {
+		XPathExecutable executable;
+		try {
+			executable = compiler.compile(expression);
+		} catch (SaxonApiException e) {
+			throw new RuleSetDetectionException(e);
+		}
+		xPathSelector = executable.load();
 	}
 
 } // End of ReportBuilder

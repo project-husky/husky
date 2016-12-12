@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -103,10 +104,10 @@ public class CdaValidator {
 	private Validators validators = null;
 	/** ReportBuilder for schematron results */
 	private ReportBuilder reportBuilder = null;
-	/** CDA file to be validated */
-	private File cdaFile = null;
 	/** Result of the validation */
 	private ValidationResult validationResult = null;
+	/** List of available Rule Sets */
+	private Collection<RuleSet> ruleSetList = null;
 
 	/** PDF Validator */
 	private PdfValidator pdfValidator = null;
@@ -129,23 +130,6 @@ public class CdaValidator {
 	 *             If the configuration fails, an exception will be thrown
 	 */
 	public CdaValidator(File configFile) throws ConfigurationException {
-		initialize(configFile);
-	}
-
-	/**
-	 * Constructor initializes configuration and CDA document to be validated
-	 *
-	 * @param cdaFilePath
-	 *            The CDA document to be validated
-	 * @param configFile
-	 *            The configuration file with following attributes: baseDir,
-	 *            document-schema, pdf-level, pdf-reporting-level, pdf validator
-	 *            license-key, schematron rule-set
-	 * @throws ConfigurationException
-	 *             If the configuration fails, an exception will be thrown
-	 */
-	public CdaValidator(File cdaFile, File configFile) throws ConfigurationException {
-		this.cdaFile = cdaFile;
 		initialize(configFile);
 	}
 
@@ -369,15 +353,6 @@ public class CdaValidator {
 		return new Validators(factory);
 	}
 
-	/**
-	 * Returns the validator's input CDA document
-	 *
-	 * @return the validator's input CDA document
-	 */
-	public File getCdaFile() {
-		return this.cdaFile;
-	}
-
 	public PdfValidator getPdfValidator() {
 		return pdfValidator;
 	}
@@ -394,17 +369,23 @@ public class CdaValidator {
 		return retVal;
 	}
 
-	private void initialize(File configFile) throws ConfigurationException {
+	private void initialize(Configuration config) throws ConfigurationException {
 
-		this.configuration = configure(configFile);
+		this.configuration = config;
+		this.ruleSetList = config.getRuleSetList();
 		this.validators = createValidators(this.configuration);
-		this.reportBuilder = new ReportBuilder(validators);
+		this.reportBuilder = new ReportBuilder(validators, ruleSetList);
 
 		if (this.configuration.getLicenseKey() != null) {
 			if (checkConfiguredPdfLevel() && checkConfiguredReportingLevel()) {
 				this.pdfValidator = new PdfValidator(this.configuration);
 			}
 		}
+	}
+
+	private void initialize(File configFile) throws ConfigurationException {
+
+		initialize(configure(configFile));
 	}
 
 	/**
@@ -451,13 +432,15 @@ public class CdaValidator {
 	}
 
 	/**
-	 * Sets the validator's input CDA document
+	 * initializes the configuration
 	 *
-	 * @param cdaFile
-	 *            the validator's input CDA document
+	 * @param configuration
+	 *            The configuration
+	 * @throws ConfigurationException
+	 *             If the configuration fails, an exception will be thrown
 	 */
-	public void setCdaFile(File cdaFile) {
-		this.cdaFile = cdaFile;
+	public void setConfigFile(Configuration config) throws ConfigurationException {
+		initialize(config);
 	}
 
 	/**
@@ -478,33 +461,34 @@ public class CdaValidator {
 	 * Executes a XSD, a Schematron and the PDF validation (if a license key is
 	 * provided)
 	 *
+	 * @param cdaFile
+	 *            the CDA document to be validated
 	 * @return ValidationResult object, containing of all results
 	 * @throws ConfigurationException
 	 */
-	public ValidationResult validate() {
+	public ValidationResult validate(File cdaFile) {
 		this.validationResult = new ValidationResult();
 
-		validationResult.setXsdValidationResult(validateXsd());
-		validationResult.setSchValidationResult(validateSch());
-		validationResult.setPdfValidationResult(validatePdf());
+		validationResult.setXsdValidationResult(validateXsd(cdaFile));
+		validationResult.setSchValidationResult(validateSch(cdaFile));
+		validationResult.setPdfValidationResult(validatePdf(cdaFile));
 		return validationResult;
 	}
 
 	/**
-	 * Executes a PDF validation of the current CDA document
+	 * Executes a PDF validation of the given CDA document
 	 *
+	 * @param cdaFile
+	 *            the CDA document to be validated
 	 * @return ArrayList of PDF Validation results
-	 * @throws ConfigurationException
-	 * @throws SaxonApiException
-	 * @throws IOException
 	 */
-	public PdfValidationResult validatePdf() {
+	public PdfValidationResult validatePdf(File cdaFile) {
 
 		log.info("Start of PDF validation");
 		PdfValidationResult retVal = new PdfValidationResult();
 		if (pdfValidator != null) {
 			try {
-				pdfValidator.validateCdaFile(this.cdaFile);
+				pdfValidator.validateCdaFile(cdaFile);
 			} catch (ConfigurationException | SaxonApiException | IOException e) {
 				PdfValidationResultEntry failure = new PdfValidationResultEntry();
 				failure.setErrMsg(e.getMessage(), SEVERITY.Error);
@@ -520,33 +504,16 @@ public class CdaValidator {
 	}
 
 	/**
-	 * Executes a PDF validation of the given CDA document
+	 * Executes a Schematron validation of the given CDA document
 	 *
 	 * @param cdaFile
 	 *            the CDA document to be validated
-	 * @return ArrayList of PDF Validation results
-	 * @throws ConfigurationException
-	 * @throws SaxonApiException
-	 * @throws IOException
-	 */
-	public PdfValidationResult validatePdf(File cdaFile)
-			throws ConfigurationException, SaxonApiException, IOException {
-		this.cdaFile = cdaFile;
-		final PdfValidator pdfValidator = new PdfValidator(this.configuration);
-		pdfValidator.validateCdaFile(this.cdaFile);
-
-		return pdfValidator.getPdfValidationResults();
-	}
-
-	/**
-	 * Executes a Schematron validation of the current CDA document
-	 *
 	 * @return the Schematron validation results
 	 */
-	public SchematronValidationResult validateSch() {
+	public SchematronValidationResult validateSch(File cdaFile) {
 		SchematronValidationResult schValRes = null;
 		try {
-			final SchematronOutput schOut = validateSchRaw();
+			final SchematronOutput schOut = validateSchRaw(cdaFile);
 			schValRes = convertSchematronOutput(schOut);
 
 		} catch (SAXException | FileNotFoundException | RuleSetDetectionException
@@ -561,28 +528,10 @@ public class CdaValidator {
 	}
 
 	/**
-	 * Executes a Schematron validation of the given CDA document
+	 * Executes a raw Schematron validation of the given CDA document
 	 *
 	 * @param cdaFile
 	 *            the CDA document to be validated
-	 * @return the Schematron validation results
-	 * @throws SAXException
-	 * @throws FileNotFoundException
-	 * @throws RuleSetDetectionException
-	 * @throws TransformationException
-	 * @throws InterruptedException
-	 * @throws ConfigurationException
-	 */
-	public SchematronValidationResult validateSch(File cdaFile)
-			throws SAXException, FileNotFoundException, RuleSetDetectionException,
-			TransformationException, InterruptedException, ConfigurationException {
-		this.cdaFile = cdaFile;
-		return this.convertSchematronOutput(validateSchRaw());
-	}
-
-	/**
-	 * Executes a raw Schematron validation of the current CDA document
-	 *
 	 * @return the raw Schematron validation results
 	 * @throws SAXException
 	 * @throws FileNotFoundException
@@ -591,66 +540,50 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchRaw()
+	public SchematronOutput validateSchRaw(File cdaFile)
 			throws SAXException, FileNotFoundException, RuleSetDetectionException,
 			TransformationException, InterruptedException, ConfigurationException {
 
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
-		if (this.cdaFile == null)
-			throw new ConfigurationException("No CDA-File to validate");
+		if (cdaFile == null)
+			throw new ConfigurationException("No CDA-File provided for validation");
 
-		final RuleSet[] ruleSetList = this.configuration.getRuleSetList();
-		final Source source = new StreamSource(this.cdaFile);
-		final RuleSet ruleSet = reportBuilder.detectRuleSet(source, ruleSetList);
+		final Source source = new StreamSource(cdaFile);
+		final RuleSet ruleSet = reportBuilder.detectRuleSet(source);
 
-		final InputStream in = new BufferedInputStream(new FileInputStream(this.cdaFile));
+		final InputStream in = new BufferedInputStream(new FileInputStream(cdaFile));
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
 		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet,
 				configuration.getWorkDir(), in, out, null);
 		SchematronOutput retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
 		retVal.setRuleSet(ruleSet);
-		retVal.setSourceFile(this.cdaFile);
+		retVal.setSourceFile(cdaFile);
 
 		return retVal;
 	}
 
 	/**
-	 * Executes a raw Schematron validation of the given XML document
+	 * Executes a XSD validation of the given CDA document
 	 *
-	 * @param schFile
-	 *            the input file to be validated
-	 * @return the raw Schematron validation results
-	 * @throws SAXException
-	 * @throws FileNotFoundException
-	 * @throws RuleSetDetectionException
-	 * @throws TransformationException
-	 * @throws InterruptedException
-	 * @throws ConfigurationException
-	 */
-	public SchematronOutput validateSchRaw(File schFile)
-			throws SAXException, FileNotFoundException, RuleSetDetectionException,
-			TransformationException, InterruptedException, ConfigurationException {
-		this.cdaFile = schFile;
-		return validateSchRaw();
-	}
-
-	/**
-	 * Executes a XSD validation of the current CDA document
-	 *
+	 * @param cdaFile
+	 *            the CDA document to be validated
 	 * @return the schema validation result
 	 * @throws ConfigurationException
 	 */
-	public XsdValidationResult validateXsd() {
+	public XsdValidationResult validateXsd(File cdaFile) {
 		String errorMsg = null;
 		if (this.configuration == null)
 			errorMsg = "No configuration available";
-		if (this.cdaFile == null)
-			errorMsg = "No CDA-File to validate";
+		if (cdaFile == null)
+			errorMsg = "No CDA-File provided for validation";
 		final XsdValidationResult xsdValRes = new XsdValidationResult();
 		if (errorMsg == null) {
 			try {
-				validateXsdSchema();
+				final Schema schema = loadSchema(configuration.getDocumentSchema());
+				final Validator validator = schema.newValidator();
+				validator.validate(new StreamSource(cdaFile));
 				xsdValRes.setXsdValid(true);
 				xsdValRes.setXsdValidationMsg("XSD Valid");
 			} catch (SAXException | IOException | ConfigurationException e) {
@@ -662,31 +595,5 @@ public class CdaValidator {
 			xsdValRes.setXsdValidationMsg(errorMsg);
 		}
 		return xsdValRes;
-	}
-
-	/**
-	 * Executes a XSD validation of the given XML document
-	 *
-	 * @param xsdFile
-	 *            the input file to be validated
-	 * @return the schema validation result
-	 * @throws ConfigurationException
-	 */
-	public XsdValidationResult validateXsd(File xsdFile) throws ConfigurationException {
-		this.cdaFile = xsdFile;
-		return validateXsd();
-	}
-
-	/**
-	 * Validates the current XML schema
-	 *
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws ConfigurationException
-	 */
-	private void validateXsdSchema() throws SAXException, IOException, ConfigurationException {
-		final Schema schema = loadSchema(configuration.getDocumentSchema());
-		final Validator validator = schema.newValidator();
-		validator.validate(new StreamSource(this.cdaFile));
 	}
 }

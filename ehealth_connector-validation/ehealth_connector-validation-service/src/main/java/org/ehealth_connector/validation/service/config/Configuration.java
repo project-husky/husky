@@ -18,6 +18,7 @@ package org.ehealth_connector.validation.service.config;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -191,15 +192,15 @@ public class Configuration {
 	 *
 	 * @return the list of available rule-sets as an array.
 	 */
-	public RuleSet[] getRuleSetList() {
-		return ruleSetMap.values().toArray(new RuleSet[0]);
+	public Collection<RuleSet> getRuleSetList() {
+		return ruleSetMap.values();
 	}
 
 	/**
 	 * @return
 	 */
 	public int getRuleSetsCount() {
-		return getRuleSetList().length;
+		return getRuleSetList().size();
 	}
 
 	/**
