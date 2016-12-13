@@ -228,6 +228,8 @@ public class PdfValidator {
 	public void validateCdaFile(File cdaFile)
 			throws ConfigurationException, SaxonApiException, IOException {
 
+		pdfValidationResult = new PdfValidationResult();
+
 		final Processor proc = new Processor(false);
 
 		final DocumentBuilder builder = proc.newDocumentBuilder();
@@ -278,8 +280,6 @@ public class PdfValidator {
 				while (err != null) {
 					final String sErrorMsg = err.getMessage();
 					final int errorCode = err.getErrorCode();
-					// log.info("PDF Validation Message: " + errorCode + " "
-					// + sErrorMsg);
 					if (errorCode != -2092890606) {
 						final BitSet tempBS = BitSet
 								.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
@@ -302,6 +302,10 @@ public class PdfValidator {
 					}
 					err = pdfValidator.getNextError();
 				}
+			} else {
+				PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+				pdfVResult.setLineNumber(lineNumber);
+				pdfValidationResult.add(pdfVResult);
 			}
 			pdfValidator.close();
 			pdfValidator.destroyObject();

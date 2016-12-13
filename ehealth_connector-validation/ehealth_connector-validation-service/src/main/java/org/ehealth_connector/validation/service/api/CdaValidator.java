@@ -467,8 +467,7 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 */
 	public ValidationResult validate(File cdaFile) {
-		this.validationResult = new ValidationResult();
-
+		validationResult = new ValidationResult();
 		validationResult.setXsdValidationResult(validateXsd(cdaFile));
 		validationResult.setSchValidationResult(validateSch(cdaFile));
 		validationResult.setPdfValidationResult(validatePdf(cdaFile));
