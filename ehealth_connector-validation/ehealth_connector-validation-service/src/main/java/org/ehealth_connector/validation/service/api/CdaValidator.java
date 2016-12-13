@@ -432,7 +432,7 @@ public class CdaValidator {
 	}
 
 	/**
-	 * initializes the configuration
+	 * Sets the configuration
 	 *
 	 * @param configuration
 	 *            The configuration

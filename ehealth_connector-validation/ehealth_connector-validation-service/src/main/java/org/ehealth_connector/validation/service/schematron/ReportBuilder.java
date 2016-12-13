@@ -10,7 +10,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * Year of publication: 2015
+ * Year of publication: 2016
  *
  *******************************************************************************/
 
@@ -38,8 +38,6 @@ import org.ehealth_connector.validation.service.transform.StylesheetURIResolver;
 import org.ehealth_connector.validation.service.transform.Transformation;
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.ehealth_connector.validation.service.util.JarUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import net.sf.saxon.s9api.DocumentBuilder;
@@ -76,9 +74,6 @@ public class ReportBuilder {
 	public static final String SVRL_TO_HTML = xslDir + JarUtils.separator + "svrl_to_html.xsl";
 	/** Style sheet for generating Validation XML output */
 	public static final String SVRL_TO_XML = xslDir + JarUtils.separator + "ms-svrl.xsl";
-
-	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Validator class used for validation */
 	private final Validators validators;
@@ -304,7 +299,7 @@ public class ReportBuilder {
 
 	/**
 	 *
-	 * Creates a Schematrron result in the SVRL format
+	 * Creates a Schematron result in the SVRL format
 	 *
 	 * @param ruleSet
 	 *            the list of available rule-sets.
@@ -343,7 +338,7 @@ public class ReportBuilder {
 		// getProcessor().writeXdmValue(destination.getXdmNode(), serializer);
 		// outputStream1.close();
 		// } catch (IOException | SaxonApiException e) {
-		// // TODO Auto-generated catch block
+		// // do nothing
 		// e.printStackTrace();
 		// }
 		// end of debugging only
@@ -380,7 +375,7 @@ public class ReportBuilder {
 			// serializer);
 			// outputStream2.close();
 			// } catch (IOException | SaxonApiException e) {
-			// // TODO Auto-generated catch block
+			// // do nothing
 			// e.printStackTrace();
 			// }
 			// end of debugging only
@@ -514,6 +509,11 @@ public class ReportBuilder {
 		return validators.get(ruleSet, workDir);
 	}
 
+	/**
+	 * Initialization of the XPathXelector for the use in detectRuleSet
+	 *
+	 * @throws RuleSetDetectionException
+	 */
 	private void prepareSelector() throws RuleSetDetectionException {
 
 		ruleSetOidMap = new HashMap<String, RuleSet>();
