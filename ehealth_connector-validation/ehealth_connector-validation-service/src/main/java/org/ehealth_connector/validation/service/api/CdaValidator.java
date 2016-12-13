@@ -122,6 +122,16 @@ public class CdaValidator {
 	/**
 	 * Constructor initializes configuration only
 	 *
+	 * @param config
+	 *            The configuration
+	 */
+	public CdaValidator(Configuration config) throws ConfigurationException {
+		initialize(config);
+	}
+
+	/**
+	 * Constructor initializes configuration only
+	 *
 	 * @param configFile
 	 *            The configuration file with following attributes: baseDir,
 	 *            document-schema, pdf-level, pdf-reporting-level, pdf validator
