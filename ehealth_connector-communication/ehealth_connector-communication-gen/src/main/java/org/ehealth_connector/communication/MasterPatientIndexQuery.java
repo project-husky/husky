@@ -67,8 +67,12 @@ public class MasterPatientIndexQuery {
 		if (eOrigPackage != null) {
 			String name = eOrigPackage.getClass().getName();
 			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
-				log.debug("fixV3Package class loaded, resetting :"+name);
-				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", null);		
+				try {
+					log.debug("fixV3Package class loaded, resetting :"+name);
+					EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", null);		
+				} catch (NullPointerException e) {
+					// in java pure this not working, in osgi necessary
+				}
 				log.debug("fixV3Package class loaded, setting V3Package :"+V3Package.eINSTANCE.getName());
 				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
 				this.eOrigPackage = eOrigPackage;
