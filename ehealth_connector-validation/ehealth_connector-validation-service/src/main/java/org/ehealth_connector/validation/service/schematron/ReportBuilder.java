@@ -320,14 +320,14 @@ public class ReportBuilder {
 	 * @throws TransformationException
 	 * @throws InterruptedException
 	 */
-	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, InputStream in, OutputStream out,
+	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, StreamSource in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
 
 		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
 		final Transformation t1 = new Transformation(styleSheet);
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		XdmDestination destination = new XdmDestination();
-		t1.transform(new StreamSource(in), destination);
+		t1.transform(in, destination);
 
 		// for debugging only - comment these lines for productive releases
 		// OutputStream outputStream1 = null;

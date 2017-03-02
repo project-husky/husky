@@ -1,7 +1,6 @@
 package org.ehealth_connector.validation.service.pdf;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.BitSet;
@@ -225,7 +224,21 @@ public class PdfValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public void validateCdaFile(File cdaFile)
+	public void validateCda(File cdaFile)
+			throws ConfigurationException, SaxonApiException, IOException {
+		validateCda(new StreamSource(cdaFile));
+	}
+
+	/**
+	 * Validates all PDF within the given CDA document
+	 *
+	 * @param cdaStream
+	 *            the desired CDA document to be validated
+	 * @throws ConfigurationException
+	 * @throws SaxonApiException
+	 * @throws IOException
+	 */
+	public void validateCda(StreamSource cdaStream)
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValidationResult = new PdfValidationResult();
@@ -236,7 +249,7 @@ public class PdfValidator {
 		builder.setLineNumbering(true);
 		XdmNode hl7Doc;
 
-		hl7Doc = builder.build(new StreamSource(new FileInputStream(cdaFile)));
+		hl7Doc = builder.build(cdaStream);
 
 		final XPathCompiler xpath = proc.newXPathCompiler();
 		xpath.declareNamespace("", "urn:hl7-org:v3");
