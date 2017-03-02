@@ -131,8 +131,9 @@ public class ConfigurationType {
 
 	/**
 	 * Returns the application's work directory. This is the directory, where
-	 * the transformed rule-sets (the <cite>Schematron Validator</cite> files)
-	 * and the archived rule-sets (the .zip file) are placed.
+	 * the transformed (pre-compiled) rule-sets (the <cite>Schematron
+	 * Validator</cite> files) and the archived rule-sets (the .zip file) are
+	 * placed.
 	 *
 	 * @return the application's work directory.
 	 */
@@ -186,6 +187,32 @@ public class ConfigurationType {
 	 */
 	public void setSchematron(SchematronType value) {
 		this.schematron = value;
+	}
+
+	/**
+	 * Sets the application's work directory. This is the directory, where the
+	 * transformed (pre-compiled) rule-sets (the <cite>Schematron
+	 * Validator</cite> files) and the archived rule-sets (the .zip file) are
+	 * placed.
+	 *
+	 * @param workDir
+	 *            the application's work directory
+	 */
+	public void setWorkDir(File workDir) {
+		this.workDir = workDir.getAbsolutePath();
+	}
+
+	/**
+	 * Sets the application's work directory. This is the directory, where the
+	 * transformed (pre-compiled) rule-sets (the <cite>Schematron
+	 * Validator</cite> files) and the archived rule-sets (the .zip file) are
+	 * placed.
+	 *
+	 * @param workDir
+	 *            the application's work directory
+	 */
+	public void setWorkDir(String workDir) {
+		this.workDir = workDir;
 	}
 
 }

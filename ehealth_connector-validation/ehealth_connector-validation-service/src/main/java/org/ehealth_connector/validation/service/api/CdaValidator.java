@@ -363,6 +363,15 @@ public class CdaValidator {
 		return new Validators(factory);
 	}
 
+	/**
+	 * Gets the current configuration
+	 *
+	 * @return current configuration
+	 */
+	public Configuration getConfiguration() {
+		return this.configuration;
+	}
+
 	public PdfValidator getPdfValidator() {
 		return pdfValidator;
 	}
@@ -449,7 +458,7 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 *             If the configuration fails, an exception will be thrown
 	 */
-	public void setConfigFile(Configuration config) throws ConfigurationException {
+	public void setConfiguration(Configuration config) throws ConfigurationException {
 		initialize(config);
 	}
 
@@ -463,7 +472,7 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 *             If the configuration fails, an exception will be thrown
 	 */
-	public void setConfigFile(File configFile) throws ConfigurationException {
+	public void setConfiguration(File configFile) throws ConfigurationException {
 		initialize(configFile);
 	}
 
@@ -590,7 +599,7 @@ public class CdaValidator {
 		final XsdValidationResult xsdValRes = new XsdValidationResult();
 		if (errorMsg == null) {
 			try {
-				final Schema schema = loadSchema(configuration.getDocumentSchema());
+				final Schema schema = loadSchema(configuration.getCdaDocumentSchema());
 				final Validator validator = schema.newValidator();
 				validator.validate(new StreamSource(cdaFile));
 				xsdValRes.setXsdValid(true);

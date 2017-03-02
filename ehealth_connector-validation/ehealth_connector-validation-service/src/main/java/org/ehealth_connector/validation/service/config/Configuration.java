@@ -24,6 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.validation.service.config.bind.ApplicationType;
 import org.ehealth_connector.validation.service.config.bind.ConfigurationType;
 import org.ehealth_connector.validation.service.config.bind.RuleSetType;
@@ -64,7 +65,7 @@ public class Configuration {
 			throw new NullPointerException("Configuration is null.");
 		}
 		this.configuration = configuration;
-		createRuleSetMaps();
+		createRuleSetMaps(createRuleSetList());
 	}
 
 	/**
@@ -87,12 +88,12 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Creates the RuleSetMaps.
 	 */
-	private void createRuleSetMaps() {
+	private void createRuleSetMaps(Collection<RuleSet> ruleSetList) {
 		ruleSetMap.clear();
 		ruleSetOidMap.clear();
-		for (final RuleSet ruleSet : createRuleSetList()) {
+		for (final RuleSet ruleSet : ruleSetList) {
 			ruleSetMap.put(ruleSet.getId(), ruleSet);
 			if (ruleSet.getTemplateId() != null) {
 				RuleSet first = null;
@@ -107,20 +108,24 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the BaseDir. This is a read-only system property containing the
+	 * Catalina Base Dir and only used by Online CDA Validators.
+	 *
+	 * @return the BaseDir.
 	 */
 	public File getBaseDir() {
 		return configuration.getBaseDir();
 	}
 
-	public File getConfigurationDir() {
-		return configuration.getConfigurationDir();
-	}
-
 	/**
-	 * @return
+	 * Gets the HL7 CDA DocumentSchema. This is the XSD to be used for CDA
+	 * Schema Validation.
+	 *
+	 * @return the HL7 CDA DocumentSchema.
+	 * @throws ConfigurationException
+	 *             if the specified DocumentSchema does not exist or is invalid.
 	 */
-	public String getDocumentSchema() throws ConfigurationException {
+	public String getCdaDocumentSchema() throws ConfigurationException {
 		final ApplicationType application = configuration.getApplication();
 		if (application != null) {
 			File schema = new File(application.getDocumentSchema());
@@ -143,7 +148,21 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the ConfigurationDir. This is a read-only system property containing
+	 * the configuration directory of Tomcat and only used by Online CDA
+	 * Validators.
+	 *
+	 * @return the ConfigurationDir.
+	 */
+	public File getConfigurationDir() {
+		return configuration.getConfigurationDir();
+	}
+
+	/**
+	 * Gets the DownloadsUrl. This is only used by Online CDA Validators and
+	 * therefore currently read-only.
+	 *
+	 * @return the DownloadsUrl.
 	 */
 	public String getDownloadsUrl() {
 		final ApplicationType application = configuration.getApplication();
@@ -151,7 +170,10 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 *
+	 * @return the the LicenseKey for the external PDF-Tools PdfValidator
+	 *         engine.
 	 */
 	public String getLicenseKey() {
 		final ApplicationType application = configuration.getApplication();
@@ -159,7 +181,11 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the PdfLevel to be validated by the external PDF-Tools PdfValidator
+	 * engine.
+	 *
+	 * @return the PdfLevel to be validated by the external PDF-Tools
+	 *         PdfValidator engine.
 	 */
 	public String getPdfLevel() {
 		final ApplicationType application = configuration.getApplication();
@@ -167,7 +193,11 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the level of messages to be reported by the external PDF-Tools
+	 * PdfValidator engine.
+	 *
+	 * @return the level of messages to be reported by the external PDF-Tools
+	 *         PdfValidator engine.
 	 */
 	public String getPdfReportingLevel() {
 		final ApplicationType application = configuration.getApplication();
@@ -175,8 +205,8 @@ public class Configuration {
 	}
 
 	/**
-	 * Returns the rule-set to which the specified <tt>id</tt> is mapped, or
-	 * <tt>null</tt> if no such rule-set is found.
+	 * Gets the rule-set to which the specified <tt>id</tt> is mapped, or
+	 * <tt>null</tt> if no such rule-set is found. This is a read-only property.
 	 *
 	 * @param id
 	 *            the identifier of the rule-set.
@@ -188,26 +218,29 @@ public class Configuration {
 	}
 
 	/**
-	 * Returns an ordered list of all available rule-sets.
+	 * Gets the ordered list of all available rule-sets.
 	 *
 	 * @return the list of available rule-sets as an array.
 	 */
-	public Collection<RuleSet> getRuleSetList() {
-		return ruleSetMap.values();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List<RuleSet> getRuleSetList() {
+		return new ArrayList(ruleSetMap.values());
 	}
 
 	/**
-	 * @return
+	 * Gets the number of configured rule-sets. This is a read-only property.
+	 *
+	 * @return the number of configured rule-sets.
 	 */
 	public int getRuleSetsCount() {
 		return getRuleSetList().size();
 	}
 
 	/**
-	 * Returns the base directory of the <cite>Schematron</cite> rule-sets.
+	 * Gets the base directory containing the <cite>Schematron</cite> rule-sets.
 	 *
-	 * @return the absolute path denoted by the <tt>dir</tt> attribute of the
-	 *         <tt>schematron</tt> element.
+	 * @return the base directory containing the <cite>Schematron</cite>
+	 *         rule-sets.
 	 */
 	public File getRuleSetsDir() throws ConfigurationException {
 		File schematron = new File(configuration.getSchematron().getDirectory());
@@ -229,7 +262,10 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the theme (JQuery Theme). This is only used by Online CDA Validators
+	 * and therefore currently read-only.
+	 *
+	 * @return the theme (JQuery Theme).
 	 */
 	public String getTheme() {
 		final ApplicationType application = configuration.getApplication();
@@ -237,14 +273,20 @@ public class Configuration {
 	}
 
 	/**
-	 * @return
+	 * Gets the directory where java was run from, where you started the JVM.
+	 * This is a read-only system property.
+	 *
+	 * @return the directory where java was run from, where you started the JVM.
 	 */
 	public File getUserDir() {
 		return configuration.getUserDir();
 	}
 
 	/**
-	 * @return
+	 * Gets the WorkDir. This the path where the CdaValidsator will store
+	 * pre-compiled Schematrons.
+	 *
+	 * @return the WorkDir.
 	 */
 	public File getWorkDir() {
 		try {
@@ -253,6 +295,131 @@ public class Configuration {
 			log.error("<<< Configuration failed: " + e.getCause());
 			return configuration.getBaseDir();
 		}
+	}
+
+	/**
+	 * Sets the HL7 CDA DocumentSchema. This is the XSD to be used for CDA
+	 * Schema Validation.
+	 *
+	 * @param cdaDocumentSchema
+	 *            the HL7 CDA DocumentSchema.
+	 */
+	public void setCdaDocumentSchema(File cdaDocumentSchema) {
+		setCdaDocumentSchema(cdaDocumentSchema.getAbsolutePath());
+	}
+
+	/**
+	 * Sets the HL7 CDA DocumentSchema. This is the XSD to be used for CDA
+	 * Schema Validation.
+	 *
+	 * @param cdaDocumentSchema
+	 *            the HL7 CDA DocumentSchema.
+	 */
+	public void setCdaDocumentSchema(String cdaDocumentSchema) {
+		final ApplicationType application = configuration.getApplication();
+		if (application != null) {
+			application.setDocumentSchema(cdaDocumentSchema);
+		}
+	}
+
+	/**
+	 * Sets the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 *
+	 * @param licenseKey
+	 *            the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 */
+	public void setLicenseKey(String licenseKey) {
+		final ApplicationType application = configuration.getApplication();
+		if (application != null)
+			application.setLicenseKey(licenseKey);
+	}
+
+	/**
+	 * Sets the PdfLevel to be validated by the external PDF-Tools PdfValidator
+	 * engine.
+	 * 
+	 * @param pdfLevel
+	 *            the PdfLevel to be validated by the external PDF-Tools
+	 *            PdfValidator engine.
+	 */
+	public void setPdfLevel(String pdfLevel) {
+		final ApplicationType application = configuration.getApplication();
+		if (application != null)
+			application.setPdfLevel(pdfLevel);
+	}
+
+	/**
+	 * Sets the level of messages to be reported by the external PDF-Tools
+	 * PdfValidator engine.
+	 *
+	 * @param pdfReportingLevel
+	 *            the level of messages to be reported by the external PDF-Tools
+	 *            PdfValidator engine.
+	 */
+	public void setPdfReportingLevel(String pdfReportingLevel) {
+		final ApplicationType application = configuration.getApplication();
+		if (application != null)
+			application.setPdfReportingLevel(pdfReportingLevel);
+	}
+
+	/**
+	 * Sets the list of available rule-sets.
+	 *
+	 * @param ruleSetList
+	 *            the list of available rule-sets
+	 */
+	public void setRuleSetList(Collection<RuleSet> ruleSetList) {
+		createRuleSetMaps(ruleSetList);
+	}
+
+	/**
+	 * Sets the base directory containing the <cite>Schematron</cite> rule-sets.
+	 *
+	 * @param ruleSetsDir
+	 *            the base directory containing the <cite>Schematron</cite>
+	 *            rule-sets.
+	 */
+	public void setRuleSetsDir(File ruleSetsDir) {
+		String ruleSetPath = ruleSetsDir.getAbsolutePath();
+		configuration.getSchematron().setDirectory(ruleSetPath);
+		for (RuleSet ruleSet : ruleSetMap.values()) {
+			File oldPath = ruleSet.getPath();
+			File newPath = new File(FileUtil.combinePath(ruleSetPath, oldPath.getName()));
+			ruleSet.setPath(newPath);
+		}
+	}
+
+	/**
+	 * Sets the base directory containing the <cite>Schematron</cite> rule-sets.
+	 *
+	 * @param ruleSetsDir
+	 *            the base directory containing the <cite>Schematron</cite>
+	 *            rule-sets.
+	 */
+	public void setRuleSetsDir(String ruleSetsDir) {
+		setRuleSetsDir(new File(ruleSetsDir));
+	}
+
+	/**
+	 * Sets the WorkDir. This the path where the CdaValidsator will store
+	 * pre-compiled Schematrons.
+	 *
+	 * @param workDir
+	 *            the WorkDir
+	 */
+	public void setWorkDir(File workDir) {
+		configuration.setWorkDir(workDir);
+	}
+
+	/**
+	 * Sets the WorkDir. This the path where the CdaValidsator will store
+	 * pre-compiled Schematrons.
+	 *
+	 * @param workDir
+	 *            the WorkDir
+	 */
+	public void setWorkDir(String workDir) {
+		configuration.setWorkDir(workDir);
 	}
 
 }

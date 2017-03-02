@@ -31,6 +31,34 @@ import java.util.Random;
 public class FileUtil {
 
 	/**
+	 * Returns a combined Path of path1 and path2.
+	 * 
+	 * @param path1
+	 *            the first part (head) of the combined path.
+	 * @param path2
+	 *            the second part (tail) of the combined path.
+	 * @return the combined Path of path1 and path2.
+	 */
+	public static String combinePath(String path1, String path2) {
+		if (!(path1.endsWith("/") || path1.endsWith("\\")))
+			return path1 + getPlatformSpecificPathSeparator() + path2;
+		else
+			return path1 + path2;
+	}
+
+	/**
+	 * Returns "/" for Unix based platforms or "\" for Windows based platforms
+	 *
+	 * @return "/" for Unix based platforms or "\" for Windows based platforms
+	 */
+	public static String getPlatformSpecificPathSeparator() {
+		String retVal = "/";
+		if (Util.isWindows())
+			retVal = "\\";
+		return retVal;
+	}
+
+	/**
 	 * Returns a random File from within the given path
 	 *
 	 * @param path

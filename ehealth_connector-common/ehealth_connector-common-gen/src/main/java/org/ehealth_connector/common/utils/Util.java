@@ -720,8 +720,8 @@ public class Util {
 		final String filename = FilenameUtils.getName(rscPath);
 		String targetPath = null;
 
-		if (pathfix && !rscPath.startsWith(getPlatformSpecificPathSeparator()))
-			rscPath = getPlatformSpecificPathSeparator() + rscPath;
+		if (pathfix && !rscPath.startsWith(FileUtil.getPlatformSpecificPathSeparator()))
+			rscPath = FileUtil.getPlatformSpecificPathSeparator() + rscPath;
 
 		try {
 			targetPath = File.createTempFile(filename, "").getAbsolutePath();
@@ -862,18 +862,6 @@ public class Util {
 	}
 
 	/**
-	 * Returns "/" for Unix based platforms or "\" for Windows based platforms
-	 *
-	 * @return "/" for Unix based platforms or "\" for Windows based platforms
-	 */
-	public static String getPlatformSpecificPathSeparator() {
-		String retVal = "/";
-		if (isWindows())
-			retVal = "\\";
-		return retVal;
-	}
-
-	/**
 	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
 	 * ArrayList<TEL>
 	 *
@@ -919,7 +907,7 @@ public class Util {
 				log.debug("Trying to use temp folder set by environment variable '" + envVariable
 						+ "': " + tempDirectoryPath);
 			} else {
-				tempDirectoryPath = getPlatformSpecificPathSeparator() + "temp";
+				tempDirectoryPath = FileUtil.getPlatformSpecificPathSeparator() + "temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
 			final File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
@@ -1290,7 +1278,5 @@ public class Util {
 		}
 		return sb;
 	}
-	
-	
 
 }

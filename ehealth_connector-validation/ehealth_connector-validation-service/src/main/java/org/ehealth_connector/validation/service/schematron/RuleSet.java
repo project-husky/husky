@@ -38,4 +38,6 @@ public interface RuleSet {
 
 	boolean isPersistable();
 
+	void setPath(File path);
+
 }

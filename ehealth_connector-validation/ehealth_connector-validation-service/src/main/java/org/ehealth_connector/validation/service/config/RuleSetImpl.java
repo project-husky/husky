@@ -30,7 +30,7 @@ public class RuleSetImpl implements RuleSet {
 	private final RuleSetType ruleSetType;
 
 	/** The base directory used for relative paths. */
-	private final File path;
+	private File path;
 
 	public RuleSetImpl(RuleSetType ruleSetType, File baseDir) {
 		if (ruleSetType == null) {
@@ -83,6 +83,11 @@ public class RuleSetImpl implements RuleSet {
 	@Override
 	public boolean isPersistable() {
 		return ruleSetType.isPersistable();
+	}
+
+	@Override
+	public void setPath(File path) {
+		this.path = path;
 	}
 
 }

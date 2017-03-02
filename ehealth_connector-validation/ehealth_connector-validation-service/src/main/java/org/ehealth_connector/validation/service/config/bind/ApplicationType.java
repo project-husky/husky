@@ -70,9 +70,9 @@ public class ApplicationType {
 	protected String licenseKey;
 
 	/**
-	 * Gets the value of the documentSchema property.
+	 * Gets the value of documentSchema.
 	 *
-	 * @return possible object is {@link String }
+	 * @return the value of documentSchema
 	 *
 	 */
 	public String getDocumentSchema() {
@@ -80,31 +80,51 @@ public class ApplicationType {
 	}
 
 	/**
-	 * Gets the value of the downloadsUrl property.
+	 * Gets the downloadsUrl.
 	 *
-	 * @return possible object is {@link String }
+	 * @return the downloadsUrl
 	 *
 	 */
 	public String getDownloadsUrl() {
 		return downloadsUrl;
 	}
 
+	/**
+	 * Gets the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 *
+	 * @return the LicenseKey for the external PDF-Tools PdfValidator engine
+	 */
 	public String getLicenseKey() {
 		return licenseKey;
 	}
 
+	/**
+	 * Gets the PdfLevel to be validated by the external PDF-Tools PdfValidator
+	 * engine.
+	 *
+	 * @return the PdfLevel to be validated by the external PDF-Tools
+	 *         PdfValidator engine.
+	 */
 	public String getPdfLevel() {
 		return pdfLevel;
 	}
 
+	/**
+	 * Gets the level of messages to be reported by the external PDF-Tools
+	 * PdfValidator engine.
+	 *
+	 * @return the level of messages to be reported by the external PDF-Tools
+	 *         PdfValidator engine.
+	 */
 	public String getPdfReportingLevel() {
 		return pdfReportingLevel;
 	}
 
 	/**
-	 * Gets the value of the theme property (JQuery Theme).
+	 * Gets the theme (JQuery Theme). This is only used by Online CDA
+	 * Validators.
 	 *
-	 * @return possible object is {@link String }
+	 * @return the value of the theme (JQuery Theme)
 	 *
 	 */
 	public String getTheme() {
@@ -112,48 +132,68 @@ public class ApplicationType {
 	}
 
 	/**
-	 * Sets the value of the documentSchema property.
+	 * Sets the value of documentSchema
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 *            the value of documentSchema
 	 */
 	public void setDocumentSchema(String value) {
 		this.documentSchema = value;
 	}
 
 	/**
-	 * Sets the value of the downloadsUrl property.
+	 * Sets the downloadsUrl
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 *            the downloadsUrl
 	 */
 	public void setDownloadsUrl(String value) {
 		this.downloadsUrl = value;
 	}
 
+	/**
+	 * Sets the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 *
+	 * @param licenseKey
+	 *            the LicenseKey for the external PDF-Tools PdfValidator engine.
+	 */
 	public void setLicenseKey(String licenseKey) {
 		this.licenseKey = licenseKey;
 	}
 
+	/**
+	 * Sets the PdfLevel to be validated by the external PDF-Tools PdfValidator
+	 * engine.
+	 *
+	 * @param pdfLevel
+	 *            the PdfLevel to be validated by the external PDF-Tools
+	 *            PdfValidator engine.
+	 */
 	public void setPdfLevel(String pdfLevel) {
 		this.pdfLevel = pdfLevel;
 	}
 
+	/**
+	 * Sets the level of messages to be reported by the external PDF-Tools
+	 * PdfValidator engine.
+	 *
+	 * @param pdfReportingLevel
+	 *            the level of messages to be reported by the external PDF-Tools
+	 *            PdfValidator engine.
+	 */
 	public void setPdfReportingLevel(String pdfReportingLevel) {
 		this.pdfReportingLevel = pdfReportingLevel;
 	}
 
 	/**
-	 * Sets the value of the theme property (JQuery Theme).
+	 * Sets the theme (JQuery Theme). This is only used by Online CDA
+	 * Validators.
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 *            the theme (JQuery Theme). This is only used by Online CDA
+	 *            Validators.
 	 */
 	public void setTheme(String value) {
 		this.theme = value;
 	}
-
 }
