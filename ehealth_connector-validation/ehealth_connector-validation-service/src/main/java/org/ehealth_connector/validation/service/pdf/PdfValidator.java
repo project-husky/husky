@@ -56,6 +56,9 @@ public class PdfValidator {
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
+	/** Error Message in case the License is invalid */
+	private String licenseErrorMsg = null;
+
 	/**
 	 * Default constructor
 	 *
@@ -143,10 +146,10 @@ public class PdfValidator {
 				pdfValidator.setNoTempFiles(true);
 				final String licenseKey = config.getLicenseKey();
 				if (!PdfValidatorAPI.setLicenseKey(licenseKey)) {
-					String errorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
-					log.error(errorMsg);
+					licenseErrorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
+					log.error(licenseErrorMsg);
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
-					failure.setErrMsg(errorMsg, SEVERITY.Error);
+					failure.setErrMsg(licenseErrorMsg, SEVERITY.Error);
 					failure.setLineNumber(lineNumber);
 					pdfValidationResult.add(failure);
 				}
@@ -274,55 +277,64 @@ public class PdfValidator {
 	 *            the desired PDF as Base64 string taken from the CDA document
 	 * @param lineNumber
 	 *            the line number where the PDF starts within the CDA document
-	 * @return the PDF validation results
 	 * @throws IOException
 	 * @throws ConfigurationException
 	 */
-	private PdfValidationResult validatePdf(String pdfStrB64, String lineNumber)
+	private void validatePdf(String pdfStrB64, String lineNumber)
 			throws IOException, ConfigurationException {
 
 		initialize(lineNumber);
-		pdfValidationResult.resetIsDone();
 		if (pdfValidator != null) {
-			pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "", comlianceLevel);
+			if (licenseErrorMsg == null) {
+				pdfValidationResult.resetIsDone();
 
-			pdfValidator.validate();
-			pdfValidationResult.setIsDone();
-			PdfError err = pdfValidator.getFirstError();
-			if (err != null) {
-				while (err != null) {
-					final String sErrorMsg = err.getMessage();
-					final int errorCode = err.getErrorCode();
-					if (errorCode != -2092890606) {
-						final BitSet tempBS = BitSet
-								.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
-						SEVERITY severity = SEVERITY.Information;
+				pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "",
+						comlianceLevel);
 
-						// ErrorCode --> Bit 7 = Error, Bit 23 = Warnung, sonst
-						// Info
-						if (tempBS.get(7))
-							severity = SEVERITY.Error;
-						if (tempBS.get(23))
-							severity = SEVERITY.Warning;
-						if ("The XMP property 'pdfaid:conformance' has the invalid value 'B'. Required is 'A'."
-								.equals(sErrorMsg)) {
-							severity = SEVERITY.CustomWarning;
+				pdfValidator.validate();
+				pdfValidationResult.setIsDone();
+				PdfError err = pdfValidator.getFirstError();
+				if (err != null) {
+					while (err != null) {
+						final String sErrorMsg = err.getMessage();
+						final int errorCode = err.getErrorCode();
+						if (errorCode != -2092890606) {
+							final BitSet tempBS = BitSet
+									.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
+							SEVERITY severity = SEVERITY.Information;
+
+							// ErrorCode --> Bit 7 = Error, Bit 23 = Warnung,
+							// sonst
+							// Info
+							if (tempBS.get(7))
+								severity = SEVERITY.Error;
+							if (tempBS.get(23))
+								severity = SEVERITY.Warning;
+							if ("The XMP property 'pdfaid:conformance' has the invalid value 'B'. Required is 'A'."
+									.equals(sErrorMsg)) {
+								severity = SEVERITY.CustomWarning;
+							}
+							PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+							pdfVResult.setErrMsg(sErrorMsg, severity);
+							pdfVResult.setLineNumber(lineNumber);
+							pdfValidationResult.add(pdfVResult);
 						}
-						PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
-						pdfVResult.setErrMsg(sErrorMsg, severity);
-						pdfVResult.setLineNumber(lineNumber);
-						pdfValidationResult.add(pdfVResult);
+						err = pdfValidator.getNextError();
 					}
-					err = pdfValidator.getNextError();
+				} else {
+					PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+					pdfVResult.setLineNumber(lineNumber);
+					pdfValidationResult.add(pdfVResult);
 				}
+				pdfValidator.close();
+				pdfValidator.destroyObject();
 			} else {
 				PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+				pdfVResult.setErrMsg(licenseErrorMsg, SEVERITY.Error);
 				pdfVResult.setLineNumber(lineNumber);
 				pdfValidationResult.add(pdfVResult);
+				pdfValidationResult.setIsDone();
 			}
-			pdfValidator.close();
-			pdfValidator.destroyObject();
 		}
-		return pdfValidationResult;
 	}
 }

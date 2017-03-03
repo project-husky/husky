@@ -18,10 +18,8 @@ package org.ehealth_connector.validation.service.config;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.ehealth_connector.common.utils.FileUtil;
@@ -42,13 +40,20 @@ public class Configuration {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The underlying unmarshalled configuration element. */
-	private final ConfigurationType configuration;
+	private ConfigurationType configuration;
 
 	/** Map object with current RuleSets */
 	private final Map<String, RuleSet> ruleSetMap = new LinkedHashMap<String, RuleSet>();
 
 	/** Map object with current RuleSets */
 	private final Map<String, RuleSet> ruleSetOidMap = new HashMap<String, RuleSet>();
+
+	/**
+	 * Default constructor
+	 */
+	public Configuration() {
+		configuration = null;
+	}
 
 	/**
 	 * Creates a new configuration instance wrapping the specified
@@ -73,9 +78,9 @@ public class Configuration {
 	 *
 	 * @return the list of configured rule-sets.
 	 */
-	protected List<RuleSet> createRuleSetList() {
+	protected ArrayList<RuleSet> createRuleSetList() {
 		final SchematronType schematron = configuration.getSchematron();
-		final List<RuleSet> ruleSetList = new ArrayList<RuleSet>();
+		final ArrayList<RuleSet> ruleSetList = new ArrayList<RuleSet>();
 		try {
 			final File ruleSetDir = getRuleSetsDir();
 			for (final RuleSetType ruleSetType : schematron.getRuleSets()) {
@@ -90,7 +95,7 @@ public class Configuration {
 	/**
 	 * Creates the RuleSetMaps.
 	 */
-	private void createRuleSetMaps(Collection<RuleSet> ruleSetList) {
+	private void createRuleSetMaps(ArrayList<RuleSet> ruleSetList) {
 		ruleSetMap.clear();
 		ruleSetOidMap.clear();
 		for (final RuleSet ruleSet : ruleSetList) {
@@ -114,6 +119,9 @@ public class Configuration {
 	 * @return the BaseDir.
 	 */
 	public File getBaseDir() {
+		if (configuration == null)
+			configuration = new ConfigurationType();
+
 		return configuration.getBaseDir();
 	}
 
@@ -126,9 +134,16 @@ public class Configuration {
 	 *             if the specified DocumentSchema does not exist or is invalid.
 	 */
 	public String getCdaDocumentSchema() throws ConfigurationException {
+		String retVal = null;
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
 		final ApplicationType application = configuration.getApplication();
-		if (application != null) {
-			File schema = new File(application.getDocumentSchema());
+		String xsd = application.getDocumentSchema();
+		if (xsd != null) {
+			File schema = new File(xsd);
 			if (!schema.isFile()) {
 				schema = new File(getBaseDir() + "/" + application.getDocumentSchema());
 			}
@@ -142,9 +157,9 @@ public class Configuration {
 			if (!schema.canRead()) {
 				throw new ConfigurationException("Document schema is not readable");
 			}
-			return schema.getAbsolutePath();
+			retVal = schema.getAbsolutePath();
 		}
-		return null;
+		return retVal;
 	}
 
 	/**
@@ -155,6 +170,10 @@ public class Configuration {
 	 * @return the ConfigurationDir.
 	 */
 	public File getConfigurationDir() {
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+
 		return configuration.getConfigurationDir();
 	}
 
@@ -165,8 +184,12 @@ public class Configuration {
 	 * @return the DownloadsUrl.
 	 */
 	public String getDownloadsUrl() {
-		final ApplicationType application = configuration.getApplication();
-		return (application != null ? application.getDownloadsUrl() : null);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		return configuration.getApplication().getDownloadsUrl();
 	}
 
 	/**
@@ -176,8 +199,12 @@ public class Configuration {
 	 *         engine.
 	 */
 	public String getLicenseKey() {
-		final ApplicationType application = configuration.getApplication();
-		return (application != null ? application.getLicenseKey() : null);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		return configuration.getApplication().getLicenseKey();
 	}
 
 	/**
@@ -188,8 +215,12 @@ public class Configuration {
 	 *         PdfValidator engine.
 	 */
 	public String getPdfLevel() {
-		final ApplicationType application = configuration.getApplication();
-		return (application != null ? application.getPdfLevel() : null);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		return configuration.getApplication().getPdfLevel();
 	}
 
 	/**
@@ -200,8 +231,12 @@ public class Configuration {
 	 *         PdfValidator engine.
 	 */
 	public String getPdfReportingLevel() {
-		final ApplicationType application = configuration.getApplication();
-		return (application != null ? application.getPdfReportingLevel() : null);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		return configuration.getApplication().getPdfReportingLevel();
 	}
 
 	/**
@@ -222,9 +257,8 @@ public class Configuration {
 	 *
 	 * @return the list of available rule-sets as an array.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<RuleSet> getRuleSetList() {
-		return new ArrayList(ruleSetMap.values());
+	public ArrayList<RuleSet> getRuleSetList() {
+		return new ArrayList<RuleSet>(ruleSetMap.values());
 	}
 
 	/**
@@ -243,22 +277,34 @@ public class Configuration {
 	 *         rule-sets.
 	 */
 	public File getRuleSetsDir() throws ConfigurationException {
-		File schematron = new File(configuration.getSchematron().getDirectory());
-		if (!schematron.getAbsoluteFile().isDirectory()) {
-			schematron = new File(
-					getBaseDir() + "/" + configuration.getSchematron().getDirectory());
+		File retVal = null;
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getSchematron() == null)
+			configuration.setSchematron(new SchematronType());
+
+		String dir = configuration.getSchematron().getDirectory();
+		if (dir != null) {
+			File schematron = new File(dir);
+			if (!schematron.getAbsoluteFile().isDirectory()) {
+				schematron = new File(
+						getBaseDir() + "/" + configuration.getSchematron().getDirectory());
+			}
+			if (!schematron.isDirectory()) {
+				schematron = new File(
+						getConfigurationDir() + "/" + configuration.getSchematron().getDirectory());
+			}
+			if (!schematron.isDirectory()) {
+				throw new ConfigurationException("Schematron directory not found");
+			}
+			if (!schematron.canRead()) {
+				throw new ConfigurationException("Schematron directory is not readable");
+			}
+			retVal = schematron.getAbsoluteFile();
 		}
-		if (!schematron.isDirectory()) {
-			schematron = new File(
-					getConfigurationDir() + "/" + configuration.getSchematron().getDirectory());
-		}
-		if (!schematron.isDirectory()) {
-			throw new ConfigurationException("Schematron directory not found");
-		}
-		if (!schematron.canRead()) {
-			throw new ConfigurationException("Schematron directory is not readable");
-		}
-		return schematron.getAbsoluteFile();
+		return retVal;
+
 	}
 
 	/**
@@ -268,8 +314,12 @@ public class Configuration {
 	 * @return the theme (JQuery Theme).
 	 */
 	public String getTheme() {
-		final ApplicationType application = configuration.getApplication();
-		return (application != null ? application.getTheme() : null);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		return configuration.getApplication().getTheme();
 	}
 
 	/**
@@ -279,6 +329,9 @@ public class Configuration {
 	 * @return the directory where java was run from, where you started the JVM.
 	 */
 	public File getUserDir() {
+		if (configuration == null)
+			configuration = new ConfigurationType();
+
 		return configuration.getUserDir();
 	}
 
@@ -289,6 +342,9 @@ public class Configuration {
 	 * @return the WorkDir.
 	 */
 	public File getWorkDir() {
+		if (configuration == null)
+			configuration = new ConfigurationType();
+
 		try {
 			return configuration.getWorkDir();
 		} catch (final ConfigurationException e) {
@@ -316,10 +372,14 @@ public class Configuration {
 	 *            the HL7 CDA DocumentSchema.
 	 */
 	public void setCdaDocumentSchema(String cdaDocumentSchema) {
-		final ApplicationType application = configuration.getApplication();
-		if (application != null) {
-			application.setDocumentSchema(cdaDocumentSchema);
-		}
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		configuration.getApplication().setDocumentSchema(cdaDocumentSchema);
+
 	}
 
 	/**
@@ -329,23 +389,29 @@ public class Configuration {
 	 *            the LicenseKey for the external PDF-Tools PdfValidator engine.
 	 */
 	public void setLicenseKey(String licenseKey) {
-		final ApplicationType application = configuration.getApplication();
-		if (application != null)
-			application.setLicenseKey(licenseKey);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		configuration.getApplication().setLicenseKey(licenseKey);
 	}
 
 	/**
 	 * Sets the PdfLevel to be validated by the external PDF-Tools PdfValidator
 	 * engine.
-	 * 
+	 *
 	 * @param pdfLevel
 	 *            the PdfLevel to be validated by the external PDF-Tools
 	 *            PdfValidator engine.
 	 */
 	public void setPdfLevel(String pdfLevel) {
-		final ApplicationType application = configuration.getApplication();
-		if (application != null)
-			application.setPdfLevel(pdfLevel);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		configuration.getApplication().setPdfLevel(pdfLevel);
 	}
 
 	/**
@@ -357,9 +423,12 @@ public class Configuration {
 	 *            PdfValidator engine.
 	 */
 	public void setPdfReportingLevel(String pdfReportingLevel) {
-		final ApplicationType application = configuration.getApplication();
-		if (application != null)
-			application.setPdfReportingLevel(pdfReportingLevel);
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		configuration.getApplication().setPdfReportingLevel(pdfReportingLevel);
 	}
 
 	/**
@@ -368,7 +437,7 @@ public class Configuration {
 	 * @param ruleSetList
 	 *            the list of available rule-sets
 	 */
-	public void setRuleSetList(Collection<RuleSet> ruleSetList) {
+	public void setRuleSetList(ArrayList<RuleSet> ruleSetList) {
 		createRuleSetMaps(ruleSetList);
 	}
 
@@ -380,6 +449,12 @@ public class Configuration {
 	 *            rule-sets.
 	 */
 	public void setRuleSetsDir(File ruleSetsDir) {
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getSchematron() == null)
+			configuration.setSchematron(new SchematronType());
+
 		String ruleSetPath = ruleSetsDir.getAbsolutePath();
 		configuration.getSchematron().setDirectory(ruleSetPath);
 		for (RuleSet ruleSet : ruleSetMap.values()) {
@@ -419,7 +494,7 @@ public class Configuration {
 	 *            the WorkDir
 	 */
 	public void setWorkDir(String workDir) {
-		configuration.setWorkDir(workDir);
+		setWorkDir(new File(workDir));
 	}
 
 }

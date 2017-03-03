@@ -31,6 +31,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.ehealth_connector.common.utils.FileUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 
 /**
@@ -92,10 +94,15 @@ public class ConfigurationType {
 	 *
 	 */
 	public File getBaseDir() {
+		File retVal = null;
 		if (baseDir == null) {
-			baseDir = new File(System.getProperty("catalina.base")).getAbsolutePath();
+			String catalinaBase = System.getProperty("catalina.base");
+			if (catalinaBase != null)
+				baseDir = new File(catalinaBase).getAbsolutePath();
 		}
-		return new File(baseDir).getAbsoluteFile();
+		if (baseDir != null)
+			retVal = new File(baseDir).getAbsoluteFile();
+		return retVal;
 	}
 
 	/**
@@ -140,7 +147,10 @@ public class ConfigurationType {
 	public File getWorkDir() throws ConfigurationException {
 		File wD = null;
 		if (workDir == null) {
-			wD = new File(getBaseDir() + "/work");
+			File baseDir = getBaseDir();
+			if (baseDir == null)
+				baseDir = new File(Util.getTempDirectory());
+			wD = new File(FileUtil.combinePath(baseDir.getAbsolutePath(), "work"));
 			if (!wD.isDirectory()) {
 				if (!wD.mkdir()) {
 					throw new ConfigurationException(
@@ -148,7 +158,8 @@ public class ConfigurationType {
 				}
 			}
 			if (!wD.canWrite()) {
-				throw new ConfigurationException("Working directory is not writable");
+				throw new ConfigurationException(
+						String.format("Working directory is not writable: '%s'", wD));
 			}
 		} else
 			wD = new File(workDir);
@@ -200,19 +211,6 @@ public class ConfigurationType {
 	 */
 	public void setWorkDir(File workDir) {
 		this.workDir = workDir.getAbsolutePath();
-	}
-
-	/**
-	 * Sets the application's work directory. This is the directory, where the
-	 * transformed (pre-compiled) rule-sets (the <cite>Schematron
-	 * Validator</cite> files) and the archived rule-sets (the .zip file) are
-	 * placed.
-	 *
-	 * @param workDir
-	 *            the application's work directory
-	 */
-	public void setWorkDir(String workDir) {
-		this.workDir = workDir;
 	}
 
 }
