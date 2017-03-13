@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.zip.ZipFile;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
@@ -35,6 +33,7 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 //import org.ehealth_connector.communication.ch.DocumentMetadataCh;
 //import org.ehealth_connector.communication.ch.enums.AuthorRole;
@@ -62,6 +61,8 @@ import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -86,8 +87,9 @@ import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
  * </div>
  */
 public class ConvenienceCommunication {
-	
-	static private final Log log = LogFactory.getLog(ConvenienceCommunication.class);
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -129,6 +131,7 @@ public class ConvenienceCommunication {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
+		CustomHttpsTLSv11v12SocketFactory.setup();
 		AbstractAxis2Util.initAxis2Config();
 	}
 
@@ -142,6 +145,7 @@ public class ConvenienceCommunication {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
+		CustomHttpsTLSv11v12SocketFactory.setup();
 		AbstractAxis2Util.initAxis2Config();
 	}
 
@@ -169,6 +173,7 @@ public class ConvenienceCommunication {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
+		CustomHttpsTLSv11v12SocketFactory.setup();
 		AbstractAxis2Util.initAxis2Config();
 	}
 
@@ -189,7 +194,7 @@ public class ConvenienceCommunication {
 			doc = new XDSDocumentFromStream(desc, inputStream);
 			retVal = addXdsDocument(doc, desc);
 		} catch (final IOException e) {
-			e.printStackTrace();
+			log.error("Error adding document from inputstream.", e);
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
@@ -248,9 +253,9 @@ public class ConvenienceCommunication {
 
 			return docMetadata;
 		} catch (final MetadataExtractionException e) {
-			e.printStackTrace();
+			log.error("Error adding document by extracting metadata.", e);
 		} catch (final SubmitTransactionCompositionException e) {
-			e.printStackTrace();
+			log.error("Error adding document by submit transaction.", e);
 		}
 		return null;
 	}
@@ -586,7 +591,6 @@ public class ConvenienceCommunication {
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
 		} catch (final Exception e) {
-			e.printStackTrace();
 			log.error("Exception", e);
 		}
 		return null;
@@ -615,7 +619,6 @@ public class ConvenienceCommunication {
 		try {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
 		} catch (final Exception e) {
-			e.printStackTrace();
 			log.error("Exception", e);
 		}
 		return null;
@@ -652,7 +655,7 @@ public class ConvenienceCommunication {
 		// Put the Repository to the OHT Repository HashMap
 		HashMap<String, URI> repositoryMap = null;
 		for (final DocumentRequest element : docReq) {
-			repositoryMap = new HashMap<String, URI>();
+			repositoryMap = new HashMap<>();
 			repositoryMap.put(element.getRepositoryId(), element.getRepositoryUri());
 
 			// Add Document Request

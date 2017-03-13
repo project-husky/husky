@@ -23,6 +23,7 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
+import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.slf4j.Logger;
@@ -46,6 +47,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
 
 	static {
+		CustomHttpsTLSv11v12SocketFactory.setup();
 		AbstractAxis2Util.initAxis2Config();
 	}
 
@@ -249,7 +251,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		final String[] ids = v3PixAdapter.queryPatientId(new FhirPatient(patient),
 				requestedCommunityOIDs, null);
-		final List<Identificator> list = new ArrayList<Identificator>();
+		final List<Identificator> list = new ArrayList<>();
 		if (requestedCommunityOIDs != null) {
 			for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
 				String id = "";
