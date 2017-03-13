@@ -58,26 +58,26 @@ public class CdaPharmMtpsTest extends TestUtils {
 		super();
 	}
 
-	private CdaChMtpsMtp deserializeCda(String document) throws Exception {
+	private MedicationListSection deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsMtp(
+		return new MedicationListSection(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) CDAUtil.load(source));
 	}
 
-	private CdaChMtpsMtp deserializeCdaDirect(String document) throws Exception {
+	private MedicationListSection deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
 				CHPackage.eINSTANCE.getCdaChMtpsMtp());
-		return new CdaChMtpsMtp(
+		return new MedicationListSection(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) clinicalDocument);
 	}
 
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp(LanguageCode.FRENCH);
+		final MedicationListSection cda = new MedicationListSection(LanguageCode.FRENCH);
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
-		final CdaChMtpsMtp cdaDeserialized = deserializeCdaDirect(deserialized);
+		final MedicationListSection cdaDeserialized = deserializeCdaDirect(deserialized);
 		assertTrue(cdaDeserialized != null);
 
 		final String deserialized2 = this.serializeDocument(cda);
@@ -90,19 +90,19 @@ public class CdaPharmMtpsTest extends TestUtils {
 
 	@Test
 	public void deserializeCdaTest() throws Exception {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp();
+		final MedicationListSection cda = new MedicationListSection();
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
-		final CdaChMtpsMtp cdaDeserialized = deserializeCda(deserialized);
+		final MedicationListSection cdaDeserialized = deserializeCda(deserialized);
 		assertTrue(cdaDeserialized != null);
 	}
 
 	@Test
 	public void deserializeCdaTestTemplateId() throws Exception {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp();
+		final MedicationListSection cda = new MedicationListSection();
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
-		final CdaChMtpsMtp cdaDeserialized = deserializeCda(deserialized);
+		final MedicationListSection cdaDeserialized = deserializeCda(deserialized);
 		assertTrue(cdaDeserialized != null);
 	}
 
@@ -113,7 +113,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp();
+		final MedicationListSection cda = new MedicationListSection();
 		final String deserialized = this.serializeDocument(cda);
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
@@ -122,7 +122,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 				cda.getMedicationTreatmentPlanSection().getTitle());
 	}
 
-	private String serializeDocument(CdaChMtpsMtp doc) throws Exception {
+	private String serializeDocument(MedicationListSection doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
@@ -130,7 +130,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp();
+		final MedicationListSection cda = new MedicationListSection();
 		final Document document = cda.getDocument();
 
 		// realmCode
@@ -166,7 +166,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 
 	@Test
 	public void testDocumentSection() throws XPathExpressionException {
-		final CdaChMtpsMtp cda = new CdaChMtpsMtp(LanguageCode.GERMAN);
+		final MedicationListSection cda = new MedicationListSection(LanguageCode.GERMAN);
 		final Document document = cda.getDocument();
 
 		XPathExpression expr = xpath
