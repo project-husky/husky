@@ -27,9 +27,11 @@ import java.util.HashMap;
 import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.EHealthConnectorVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
@@ -39,6 +41,7 @@ import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 //import org.ehealth_connector.communication.ch.enums.AuthorRole;
 //import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
+import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
@@ -52,7 +55,9 @@ import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.openhealthtools.ihe.xds.metadata.FolderType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
@@ -261,6 +266,46 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 * <div class="en">Adds a xds folder.</div>
+	 *
+	 * @param submissionSetContentType
+	 *            the contenttype code for submission set
+	 * @return the metadata of the new fold
+	 */
+	public FolderMetadata addFolder(Code submissionSetContentType) {
+		if (txnData == null) {
+			txnData = new SubmitTransactionData();
+		}
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
+
+		final String fodlerEntryUUID = txnData.addFolder();
+		final FolderMetadata folderMeta = new FolderMetadata(txnData.getFolder(fodlerEntryUUID));
+
+		if (folderMeta.getUniqueId() == null) {
+			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+			folderMeta.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+		}
+		txnData.getSubmissionSet().setContentTypeCode(
+				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(submissionSetContentType));
+
+		return folderMeta;
+	}
+
+	/**
+	 * 
+	 * <div class="en">Add a document to a folder by theire ids</div>
+	 *
+	 * @param documentEntryUUID
+	 *            the entry uuid of the document
+	 * @param folderEntryUUID
+	 *            the entry uuid of the folder
+	 */
+	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
+		txnData.addDocumentToFolder(documentEntryUUID, folderEntryUUID);
+	}
+
+	/**
 	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
 	 * methods, which are unsafe, because an XDS registry might use another
 	 * value set.</div>
@@ -428,52 +473,107 @@ public class ConvenienceCommunication {
 	 */
 	private void generateDefaultSubmissionSetAttributes() {
 
-		final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
-				.getDocumentEntry().get(0);
-		if (firstDocEntry.getPatientId() == null) {
-			throw new IllegalStateException(
-					"Missing destination patient ID in DocumentMetadata of first document.");
-		}
-
-		// Create SubmissionSet
-		final SubmissionSetType subSet = txnData.getSubmissionSet();
-
-		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-			// This is the eHealth Connector Root OID
-			// default value just in case...
-			String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
-
-			if (subSet.getUniqueId() == null) {
-				subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+		if ((txnData.getMetadata().getDocumentEntry() != null)
+				&& !txnData.getMetadata().getDocumentEntry().isEmpty()
+				&& (txnData.getMetadata().getDocumentEntry().get(0) instanceof DocumentEntryType)) {
+			final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
+					.getDocumentEntry().get(0);
+			if (firstDocEntry.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
 			}
 
-			if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
-				organizationalId = firstDocEntry.getPatientId().getAssigningAuthorityUniversalId();
-			}
-			// set submission set source id
-			if (subSet.getSourceId() == null) {
-				subSet.setSourceId(organizationalId);
-			}
-		}
+			// Create SubmissionSet
+			final SubmissionSetType subSet = txnData.getSubmissionSet();
 
-		// set submission time
-		if (subSet.getSubmissionTime() == null) {
-			subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
-		}
-		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
-		// Use the PatientId of the first Document for the Submission set ID
-		if (subSet.getPatientId() == null) {
-			final CX testCx = firstDocEntry.getPatientId();
-			subSet.setPatientId(EcoreUtil.copy(testCx));
-		}
+				// This is the eHealth Connector Root OID
+				// default value just in case...
+				String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
 
-		// set ContentTypeCode
-		if (subSet.getContentTypeCode() == null) {
-			if (firstDocEntry.getTypeCode() != null) {
-				subSet.setContentTypeCode(EcoreUtil.copy(firstDocEntry.getTypeCode()));
+				if (subSet.getUniqueId() == null) {
+					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+				}
+
+				if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
+					organizationalId = firstDocEntry.getPatientId()
+							.getAssigningAuthorityUniversalId();
+				}
+				// set submission set source id
+				if (subSet.getSourceId() == null) {
+					subSet.setSourceId(organizationalId);
+				}
 			}
+
+			// set submission time
+			if (subSet.getSubmissionTime() == null) {
+				subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+			}
+			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+			// Use the PatientId of the first Document for the Submission set ID
+			if (subSet.getPatientId() == null) {
+				final CX testCx = firstDocEntry.getPatientId();
+				subSet.setPatientId(EcoreUtil.copy(testCx));
+			}
+
+			// set ContentTypeCode
+			if (subSet.getContentTypeCode() == null) {
+				if (firstDocEntry.getTypeCode() != null) {
+					subSet.setContentTypeCode(EcoreUtil.copy(firstDocEntry.getTypeCode()));
+				}
+			}
+		} else if ((txnData.getMetadata().getFolder() != null)
+				&& !txnData.getMetadata().getFolder().isEmpty()
+				&& (txnData.getMetadata().getFolder().get(0) instanceof FolderType)) {
+			final FolderType firstFolder = (FolderType) txnData.getMetadata().getFolder().get(0);
+			if (firstFolder.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
+			}
+			// Create SubmissionSet
+			final SubmissionSetType subSet = txnData.getSubmissionSet();
+
+			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+				// This is the eHealth Connector Root OID
+				// default value just in case...
+				String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+
+				if (subSet.getUniqueId() == null) {
+					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+				}
+
+				if (!txnData.getMetadata().getFolder().isEmpty()) {
+					organizationalId = firstFolder.getPatientId()
+							.getAssigningAuthorityUniversalId();
+				}
+				// set submission set source id
+				if (subSet.getSourceId() == null) {
+					subSet.setSourceId(organizationalId);
+				}
+			}
+
+			// set submission time
+			if (subSet.getSubmissionTime() == null) {
+				subSet.setSubmissionTime(DateUtil.nowAsTS().getValue());
+			}
+			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+			// Use the PatientId of the first Document for the Submission set ID
+			if (subSet.getPatientId() == null) {
+				final CX testCx = firstFolder.getPatientId();
+				subSet.setPatientId(EcoreUtil.copy(testCx));
+			}
+
+			if (subSet.getContentTypeCode() == null) {
+				if ((firstFolder.getCode() != null) && (firstFolder.getCode().get(0) != null)) {
+					subSet.setContentTypeCode(
+							EcoreUtil.copy((CodedMetadataType) firstFolder.getCode().get(0)));
+				}
+			}
+
 		}
 	}
 
@@ -570,6 +670,20 @@ public class ConvenienceCommunication {
 	 */
 	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) {
 		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	}
+
+	/**
+	 * <div class="en">Queries the document registry of the affinity domain for
+	 * documents, using a find documents query.
+	 *
+	 * @param queryParameter
+	 *            a findFoldersQuery object filled with your query parameters
+	 * @return the OHT XDSQueryResponseType containing full folder metadata
+	 *         </div>
+	 * 
+	 */
+	public XDSQueryResponseType queryFolders(FindFoldersStoredQuery queryParameter) {
+		return this.queryDocuments(queryParameter);
 	}
 
 	/**

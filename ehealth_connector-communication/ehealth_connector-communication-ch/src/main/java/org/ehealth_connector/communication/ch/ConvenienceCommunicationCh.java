@@ -50,6 +50,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * Default constructor to instanciate the object
 	 */
 	public ConvenienceCommunicationCh() {
+		super();
 	}
 
 	/**

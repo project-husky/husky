@@ -32,6 +32,7 @@ import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
+import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
@@ -116,8 +117,8 @@ public class DocumentMetadata {
 		 * The following attributes will be generated as described, if they are
 		 * not present in the document entries:
 		 *
-		 * <table summary=
-		 * "Empty document entries attributes generation" width="100%">
+		 * <table summary= "Empty document entries attributes generation" width=
+		 * "100%">
 		 * <thead>
 		 * <tr>
 		 * <th>XDS Metadata Attribute</th>
@@ -249,6 +250,16 @@ public class DocumentMetadata {
 	public void addConfidentialityCode(Confidentiality code) {
 		xDoc.getConfidentialityCode().add(XdsMetadataUtil.createCodedMetadata(
 				code.getCodeSystemOid(), code.getCodeValue(), code.getDisplayName(), null));
+	}
+
+	/**
+	 * 
+	 * Method to get the AvailabilityStatus
+	 *
+	 * @return the Availabilitystatus of the document
+	 */
+	public AvailabilityStatusType getAvailabilityStatus() {
+		return xDoc.getAvailabilityStatus();
 	}
 
 	/**
@@ -431,7 +442,7 @@ public class DocumentMetadata {
 	 * @return ArrayList with Author objects
 	 */
 	public List<Author> getAuthors() {
-		final List<Author> authorList = new ArrayList<Author>();
+		final List<Author> authorList = new ArrayList<>();
 
 		for (int i = 0; i < xDoc.getAuthors().size(); i++) {
 			final AuthorType at = (AuthorType) xDoc.getAuthors().get(i);
@@ -449,6 +460,10 @@ public class DocumentMetadata {
 		return XdsMetadataUtil.convertOhtCodedMetadataType(xDoc.getClassCode());
 	}
 
+	public String getComments() {
+		return XdsMetadataUtil.convertInternationalStringType(xDoc.getComments());
+	}
+
 	/**
 	 * Gets the codedLanguage
 	 *
@@ -464,7 +479,7 @@ public class DocumentMetadata {
 	 * @return the ArrayList with ConfidentialityCodes
 	 */
 	public List<Code> getConfidentialityCodes() {
-		final List<Code> confCodes = new ArrayList<Code>();
+		final List<Code> confCodes = new ArrayList<>();
 
 		if (!xDoc.getConfidentialityCode().isEmpty()) {
 			for (int i = 0; i < xDoc.getConfidentialityCode().size(); i++) {
@@ -571,8 +586,8 @@ public class DocumentMetadata {
 
 	/**
 	 * Gets the practice setting code. This is the medical speciality of the
-	 * practice where the document was produced (e.g. Code for
-	 * "General Medicine")
+	 * practice where the document was produced (e.g. Code for "General
+	 * Medicine")
 	 *
 	 * @return the practiceSettingCode as Code
 	 */
@@ -611,6 +626,15 @@ public class DocumentMetadata {
 	 */
 	public Code getTypeCode() {
 		return XdsMetadataUtil.convertOhtCodedMetadataType(xDoc.getTypeCode());
+	}
+
+	/**
+	 * Gets the EntryUUID
+	 *
+	 * @return the EntryUUID
+	 */
+	public String getEntryUUID() {
+		return xDoc.getEntryUUID();
 	}
 
 	/**
@@ -824,8 +848,8 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (required) practice setting code. This is the medical speciality
-	 * of the practice where the document was produced (e.g. Code for
-	 * "General Medicine")
+	 * of the practice where the document was produced (e.g. Code for "General
+	 * Medicine")
 	 *
 	 * @param code
 	 *            the new practice setting code
@@ -858,8 +882,8 @@ public class DocumentMetadata {
 
 	/**
 	 * Sets the (required) type code. Specifies the type of the document (like
-	 * the class code, but more specific) (e.g. Code for
-	 * "Summarization of Episode Note")
+	 * the class code, but more specific) (e.g. Code for "Summarization of
+	 * Episode Note")
 	 *
 	 * @param code
 	 *            the new type code
@@ -878,6 +902,16 @@ public class DocumentMetadata {
 	 */
 	public void setUniqueId(String id) {
 		xDoc.setUniqueId(id);
+	}
+
+	/**
+	 * Sets the entry uuid.
+	 *
+	 * @param entryUuid
+	 *            the uuid to be set
+	 */
+	public void setEntryUUID(String entryUuid) {
+		xDoc.setEntryUUID(entryUuid);
 	}
 
 	/**

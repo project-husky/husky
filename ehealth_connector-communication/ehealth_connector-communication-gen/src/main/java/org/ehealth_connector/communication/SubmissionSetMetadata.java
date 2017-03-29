@@ -149,6 +149,15 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
+	 * Gets the EntryUUID
+	 *
+	 * @return the EntryUUID
+	 */
+	public String getEntryUUID() {
+		return s.getEntryUUID();
+	}
+
+	/**
 	 * Gets the OHT SubmissionSet Object, which is wrapped by this class.
 	 *
 	 * @return the OHT SubmissionSet Object
@@ -182,6 +191,16 @@ public class SubmissionSetMetadata {
 	 */
 	public String getTitle() {
 		return XdsMetadataUtil.convertInternationalStringType(s.getTitle());
+	}
+
+	/**
+	 * 
+	 * Gets the uniqueid of the submission set
+	 *
+	 * @return hte unique id
+	 */
+	public String getUniqueId() {
+		return s.getUniqueId();
 	}
 
 	/**
@@ -241,6 +260,16 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
+	 * Sets the entry uuid.
+	 *
+	 * @param entryUuid
+	 *            the uuid to be set
+	 */
+	public void setEntryUUID(String entryUuid) {
+		s.setEntryUUID(entryUuid);
+	}
+
+	/**
 	 * Sets the ID for the patient in the destination
 	 *
 	 * @param id
@@ -268,6 +297,16 @@ public class SubmissionSetMetadata {
 	 */
 	public void setTitle(String title) {
 		s.setTitle(XdsMetadataUtil.createInternationalString(title));
+	}
+
+	/**
+	 * Sets the unique id.
+	 *
+	 * @param uniqueyId
+	 *            the unique id to be set
+	 */
+	public void setUniqueId(String uniqueyId) {
+		s.setUniqueId(uniqueyId);
 	}
 
 	/**

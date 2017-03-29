@@ -199,6 +199,7 @@ public class CustomHttpsTLSv11v12SocketFactory implements SecureProtocolSocketFa
 	@Override
 	public Socket createSocket(String host, int port, InetAddress localAddress, int localPort,
 			HttpConnectionParams params) throws IOException {
+		logger.debug(host + " " + port + " " + params);
 		return checkAndAddTLS11_12(base.createSocket(host, port, localAddress, localPort, params));
 	}
 

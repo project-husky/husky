@@ -16,6 +16,10 @@
 
 package org.ehealth_connector.common.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -47,6 +51,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
  * Context.</div>
  */
 public class XdsMetadataUtil {
+
+	public static final String DTM_FMT_Y = "yyyy";
+	public static final String DTM_FMT_YM = "yyyyMM";
+	public static final String DTM_FMT_YMD = "yyyyMMdd";
+	public static final String DTM_FMT_YMDH = "yyyyMMddHH";
+	public static final String DTM_FMT_YMDHM = "yyyyMMddHHmm";
+	public static final String DTM_FMT_YMDHMS = "yyyyMMddHHmmss";
+
+	public static final String[] DTM_FMT = { DTM_FMT_YMDHMS, DTM_FMT_YMDHM, DTM_FMT_YMDH,
+			DTM_FMT_YMD, DTM_FMT_YM, DTM_FMT_Y };
 
 	/**
 	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
@@ -270,6 +284,9 @@ public class XdsMetadataUtil {
 	 * @return the Identificator
 	 */
 	public static Identificator convertOhtCx(CX cx) {
+		if (cx == null) {
+			return null;
+		}
 		return new Identificator(cx.getAssigningAuthorityUniversalId(), cx.getIdNumber());
 	}
 
@@ -510,6 +527,51 @@ public class XdsMetadataUtil {
 
 	private XdsMetadataUtil() {
 
+	}
+
+	/**
+	 * <div class="en">Method to convert the DTM string to a Date object. The
+	 * String will be parsed using the formats int the following definition and
+	 * order: yyyyMMddHHmmss yyyyMMddHHmm yyyyMMddHH yyyyMMdd yyyyMM yyyy";
+	 * 
+	 * @param dateTimeString
+	 *            the string with DTM format
+	 * @return the representing Date object </div>
+	 */
+	public static Date convertDTMStringToDate(String dateTimeString) {
+		Date retVal = null;
+		if ((dateTimeString != null) && !"".equals(dateTimeString)) {
+			final SimpleDateFormat sdf = new SimpleDateFormat();
+
+			int count = 0;
+			while ((retVal == null) && (count < DTM_FMT.length)) {
+				sdf.applyPattern(DTM_FMT[count]);
+				try {
+					retVal = sdf.parse(dateTimeString);
+				} catch (final ParseException e) {
+				}
+				++count;
+			}
+		}
+
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Method to convert a Date object to an DTM formatted
+	 * string using the format yyyyMMddHHmmss.
+	 *
+	 * @param dateTime
+	 *            the date to be formatted to a string
+	 * @return the string representing the date object</div>
+	 */
+	public static String convertDateToDTMString(Date dateTime) {
+		String retVal = null;
+		if (dateTime != null) {
+			final SimpleDateFormat sdf = new SimpleDateFormat(DTM_FMT_YMDHMS);
+			retVal = sdf.format(dateTime);
+		}
+		return retVal;
 	}
 
 	// /**

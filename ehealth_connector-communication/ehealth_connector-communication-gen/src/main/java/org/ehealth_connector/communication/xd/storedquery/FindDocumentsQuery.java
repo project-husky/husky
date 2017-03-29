@@ -21,15 +21,16 @@ import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
  * FindDocumentsQuery)
  */
-public class FindDocumentsQuery implements StoredQueryInterface {
-	private org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery ohtStoredQuery;
+public class FindDocumentsQuery /* implements StoredQueryInterface */ extends AbstractStoredQuery {
+	// private
+	// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery
+	// ohtStoredQuery;
 
 	/**
 	 * Constructs a FindDocuments Query
@@ -41,9 +42,14 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 */
 	public FindDocumentsQuery(Identificator patientId, AvailabilityStatusType status) {
 		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-					XdsMetadataUtil.convertEhcIdentificator(patientId),
-					new AvailabilityStatusType[] { status });
+			// ohtStoredQuery = new
+			// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+			// XdsMetadataUtil.convertEhcIdentificator(patientId),
+			// new AvailabilityStatusType[] { status });
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+							XdsMetadataUtil.convertEhcIdentificator(patientId),
+							new AvailabilityStatusType[] { status }));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -82,23 +88,45 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			AvailabilityStatusType status) {
 
 		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-					XdsMetadataUtil.convertEhcIdentificator(patientId),
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(classCodes),
-					XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes),
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(healthCareFacilityCodes),
-					null, // Event
-					// code
-					// is
-					// currently
-					// not
-					// used
-					// in
-					// Switzerland
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes),
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(formatCodes), authorPerson,
-					new AvailabilityStatusType[] { status });
+			// ohtStoredQuery = new
+			// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+			// XdsMetadataUtil.convertEhcIdentificator(patientId),
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(classCodes),
+			// XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes),
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(healthCareFacilityCodes),
+			// null, // Event
+			// // code
+			// // is
+			// // currently
+			// // not
+			// // used
+			// // in
+			// // Switzerland
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes),
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(formatCodes),
+			// authorPerson,
+			// new AvailabilityStatusType[] { status });
+
+			setOhtStoredQuery(
+					new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
+							XdsMetadataUtil.convertEhcIdentificator(patientId),
+							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(classCodes),
+							XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
+							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes),
+							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(
+									healthCareFacilityCodes),
+							null, // Event
+							// code
+							// is
+							// currently
+							// not
+							// used
+							// in
+							// Switzerland
+							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes),
+							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(formatCodes),
+							authorPerson, new AvailabilityStatusType[] { status }));
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -117,20 +145,25 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 */
 	public void addConfidentialityCodes(Code[] confidentialityCodes) {
 		try {
-			ohtStoredQuery.addConfidentialityCodes(
-					XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+			// ohtStoredQuery.addConfidentialityCodes(
+			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
+			((org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery) getOhtStoredQuery())
+					.addConfidentialityCodes(XdsMetadataUtil
+							.convertEhcCodeToCodedMetadataType(confidentialityCodes));
 		} catch (final MalformedStoredQueryException e) {
+			e.printStackTrace();
+		} catch (final ClassCastException e) {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Gets the OHT StoredQuery object, which is being wrapped by this class
-	 *
-	 * @return the OHT StoredQuery
-	 */
-	@Override
-	public StoredQuery getOhtStoredQuery() {
-		return ohtStoredQuery;
-	}
+	//
+	// /**
+	// * Gets the OHT StoredQuery object, which is being wrapped by this class
+	// *
+	// * @return the OHT StoredQuery
+	// */
+	// @Override
+	// public StoredQuery getOhtStoredQuery() {
+	// return ohtStoredQuery;
+	// }
 }
