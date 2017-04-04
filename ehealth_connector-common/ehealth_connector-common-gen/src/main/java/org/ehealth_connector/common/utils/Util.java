@@ -128,7 +128,7 @@ public class Util {
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
 	public static List<Identificator> convertIds(EList<II> mII) {
-		final List<Identificator> il = new ArrayList<Identificator>();
+		final List<Identificator> il = new ArrayList<>();
 		for (final II mId : mII) {
 			final Identificator id = new Identificator(mId);
 			il.add(id);
@@ -720,8 +720,9 @@ public class Util {
 		final String filename = FilenameUtils.getName(rscPath);
 		String targetPath = null;
 
-		if (pathfix && !rscPath.startsWith(FileUtil.getPlatformSpecificPathSeparator()))
-			rscPath = FileUtil.getPlatformSpecificPathSeparator() + rscPath;
+		if (pathfix && !rscPath.startsWith("/")) {
+			rscPath = "/" + rscPath;
+		}
 
 		try {
 			targetPath = File.createTempFile(filename, "").getAbsolutePath();
@@ -873,7 +874,7 @@ public class Util {
 	 * @return the HashMap with TEL objects of the given type
 	 */
 	private static Map<String, AddressUse> getTelecomType(List<TEL> telecoms, String type) {
-		final Map<String, AddressUse> tl = new HashMap<String, AddressUse>();
+		final Map<String, AddressUse> tl = new HashMap<>();
 		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
 				tl.put(tel.getValue(), (tel.getUses().size() > 0
@@ -1077,9 +1078,9 @@ public class Util {
 	 */
 	public static boolean isUnix() {
 
-		return (System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0
-				|| System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0
-				|| System.getProperty("os.name").toLowerCase().indexOf("aix") > 0);
+		return ((System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0)
+				|| (System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0)
+				|| (System.getProperty("os.name").toLowerCase().indexOf("aix") > 0));
 
 	}
 
@@ -1145,7 +1146,7 @@ public class Util {
 		}
 		final String names = list.get(0).getText();
 		if (list.size() > 1) {
-			final List<String> nameList = new ArrayList<String>();
+			final List<String> nameList = new ArrayList<>();
 			for (int i = 0; i < list.size(); i++) {
 				nameList.add(list.get(i).getText());
 			}
@@ -1177,8 +1178,8 @@ public class Util {
 	 */
 	@SuppressWarnings("unused")
 	private static void traverse(FeatureMap root) {
-		final Stack<FeatureMap> stack = new Stack<FeatureMap>();
-		final Stack<String> stack2 = new Stack<String>();
+		final Stack<FeatureMap> stack = new Stack<>();
+		final Stack<String> stack2 = new Stack<>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
 			final FeatureMap featureMap = stack.pop();
