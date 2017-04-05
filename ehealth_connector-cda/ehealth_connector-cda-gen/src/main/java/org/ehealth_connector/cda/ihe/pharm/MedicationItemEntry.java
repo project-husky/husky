@@ -273,7 +273,7 @@ public class MedicationItemEntry
 			}
 		} else {
 			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
-			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 			entryRelationship.setAct(entry.getMdht());
 			entryRelationship.setInversionInd(Boolean.TRUE);
 			this.getMdht().getEntryRelationships().add(entryRelationship);
@@ -312,7 +312,7 @@ public class MedicationItemEntry
 			}
 		} else {
 			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
-			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 			entryRelationShip.setAct(entry.getMdht());
 			entryRelationShip.setInversionInd(Boolean.TRUE);
 			this.getMdht().getEntryRelationships().add(entryRelationShip);

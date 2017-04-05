@@ -34,6 +34,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
 import org.openhealthtools.mdht.uml.cda.Material;
+import org.openhealthtools.mdht.uml.cda.PharmSubjectOf4;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
@@ -306,7 +307,10 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		substitutionPermissionSo4.setCode(pharmCode);
 		possibleSubstitution.getTemplateIds()
 				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
-		substitutionSupply.setSubjectOf4(substitutionPermissionSo4);
+		
+		final PharmSubjectOf4 pharmSubjectOf4 = CDAFactory.eINSTANCE.createPharmSubjectOf4();
+		pharmSubjectOf4.setSubstitutionPermission(substitutionPermissionSo4);
+		substitutionSupply.setSubjectOf4(pharmSubjectOf4);
 
 		possibleSubstitution.setSupply(substitutionSupply);
 		return possibleSubstitution;

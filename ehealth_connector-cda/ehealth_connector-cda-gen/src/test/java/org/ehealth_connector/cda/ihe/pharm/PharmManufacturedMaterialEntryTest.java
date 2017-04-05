@@ -122,7 +122,7 @@ public class PharmManufacturedMaterialEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//pharm:quantity/pharm:nominator[@unit='mg' and @value='1000.0']");
+		expr = xpath.compile("//pharm:quantity/pharm:numerator[@unit='mg' and @value='1000.0']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

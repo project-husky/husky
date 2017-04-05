@@ -20,6 +20,7 @@ import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.PharmSubjectOf4;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -67,8 +68,8 @@ public class PharmSubstitutionHandlingEntry extends
 	 * @return the substance admin substitution
 	 */
 	public SubstanceAdminSubstitution getSubstanceAdminSubstitution() {
-		if (this.getMdht().getSubjectOf4() != null) {
-			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4();
+		if (this.getMdht().getSubjectOf4() != null && (this.getMdht().getSubjectOf4().getSubstitutionPermission()!=null)) {
+			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4().getSubstitutionPermission();
 			if (pharmSubstitution.getCode() != null) {
 				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
 			}
@@ -87,14 +88,16 @@ public class PharmSubstitutionHandlingEntry extends
 	public void setSubstanceAdminSubstitution(SubstanceAdminSubstitution substanceAdminSubstitution,
 			LanguageCode languageCode) {
 		if (substanceAdminSubstitution != null) {
-			if (this.getMdht().getSubjectOf4() == null) {
+			if (this.getMdht().getSubjectOf4() == null || this.getMdht().getSubjectOf4().getSubstitutionPermission()==null) {
 				final PharmSubstitutionPermission pharmSubstitution = CDAFactory.eINSTANCE
 						.createPharmSubstitutionPermission();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.PERM);
-				this.getMdht().setSubjectOf4(pharmSubstitution);
+				PharmSubjectOf4 subjectOf4 =  CDAFactory.eINSTANCE.createPharmSubjectOf4(); 
+				subjectOf4.setSubstitutionPermission(pharmSubstitution);
+				this.getMdht().setSubjectOf4(subjectOf4);
 			}
-			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4();
+			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4().getSubstitutionPermission();
 			pharmSubstitution.setCode(substanceAdminSubstitution.getCode(languageCode).getCE());
 		} else {
 			this.getMdht().setSubjectOf4(null);

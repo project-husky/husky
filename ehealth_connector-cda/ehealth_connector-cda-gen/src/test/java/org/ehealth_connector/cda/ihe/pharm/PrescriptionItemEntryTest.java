@@ -393,7 +393,7 @@ public class PrescriptionItemEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//pharm:subjectOf4[@moodCode='PERM' and @classCode='SUBST']");
+		expr = xpath.compile("//pharm:subjectOf4/pharm:substitutionPermission[@moodCode='PERM' and @classCode='SUBST']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

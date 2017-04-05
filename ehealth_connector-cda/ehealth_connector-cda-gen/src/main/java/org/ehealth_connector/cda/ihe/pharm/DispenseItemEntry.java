@@ -28,6 +28,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.PharmComponent1;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionMade;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
@@ -232,7 +233,7 @@ public class DispenseItemEntry
 	 */
 	public SubstanceAdminSubstitution getSubstanceAdminSubstitutionMade() {
 		if (this.getMdht().getComponent1() != null) {
-			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1().getSubstitutionMade();
 			if (pharmSubstitution.getCode() != null) {
 				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
 			}
@@ -475,9 +476,12 @@ public class DispenseItemEntry
 						.createPharmSubstitutionMade();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.EVN);
-				this.getMdht().setComponent1(pharmSubstitution);
+				final PharmComponent1 component1 = CDAFactory.eINSTANCE
+						.createPharmComponent1();
+				component1.setSubstitutionMade(pharmSubstitution);
+				this.getMdht().setComponent1(component1);
 			}
-			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1();
+			final PharmSubstitutionMade pharmSubstitution = this.getMdht().getComponent1().getSubstitutionMade();
 			pharmSubstitution.setCode(substanceAdminSubstitution.getCode(languageCode).getCE());
 		} else {
 			this.getMdht().setComponent1(null);

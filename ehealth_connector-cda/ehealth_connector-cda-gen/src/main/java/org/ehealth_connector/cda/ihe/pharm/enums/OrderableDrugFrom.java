@@ -483,7 +483,7 @@ public enum OrderableDrugFrom {
 	public static final String CODE_SYSTEM_NAME = "OrderableDrugFrom";
 
 	/** The Constant CODE_SYSTEM_OID. */
-	public static final String CODE_SYSTEM_OID = "OID 2.16.840.1.113883.5.85";
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.85";
 
 	/**
 	 * Gets the enum.

@@ -60,7 +60,7 @@ public class PharmXPath {
 					return "sdtc";
 				} else if ("http://www.w3.org/2001/XMLSchema-instance".equals(namespaceURI)) {
 					return "xsi";
-				} else if ("urn:1ihe:pharm:medication".equals(namespaceURI)) {
+				} else if ("urn:ihe:pharm:medication".equals(namespaceURI)) {
 					return "pharm";
 				}
 				return null;

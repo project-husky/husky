@@ -78,8 +78,10 @@ import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.PharmAsContent;
+import org.openhealthtools.mdht.uml.cda.PharmComponent1;
 import org.openhealthtools.mdht.uml.cda.PharmIngredient;
 import org.openhealthtools.mdht.uml.cda.PharmPackagedMedicine;
+import org.openhealthtools.mdht.uml.cda.PharmSubjectOf4;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionMade;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.Product;
@@ -559,7 +561,10 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final CE pharmCode = DatatypesFactory.eINSTANCE.createCE("2.16.840.1.113883.5.1070",
 				"HL7 Substance Admin Substitution");
 		substitution.setCode(pharmCode);
-		disEntry.getMdht().setComponent1(substitution);
+		
+		final PharmComponent1 component1 = CDAFactory.eINSTANCE.createPharmComponent1();
+		component1.setSubstitutionMade(substitution);
+		disEntry.getMdht().setComponent1(component1);
 
 		return disEntry;
 	}
@@ -1574,7 +1579,10 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		substitutionPermissionSo4.setCode(pharmCode);
 		possibleSubstitution.getTemplateIds()
 				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
-		substitutionSupply.setSubjectOf4(substitutionPermissionSo4);
+		
+		PharmSubjectOf4 subjectOf4 =  CDAFactory.eINSTANCE.createPharmSubjectOf4(); 
+		subjectOf4.setSubstitutionPermission(substitutionPermissionSo4);
+		substitutionSupply.setSubjectOf4(subjectOf4);
 
 		possibleSubstitution.setSupply(substitutionSupply);
 		return possibleSubstitution;
@@ -1741,7 +1749,11 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final CE pharmCode = DatatypesFactory.eINSTANCE.createCE("2.16.840.1.113883.5.1070",
 				"HL7 Substance Admin Substitution");
 		substitution.setCode(pharmCode);
-		deliveredProduct.setComponent1(substitution);
+		
+		final PharmComponent1 component1 = CDAFactory.eINSTANCE.createPharmComponent1();
+		component1.setSubstitutionMade(substitution);
+		deliveredProduct.setComponent1(component1);
+
 		return deliveredProduct;
 	}
 

@@ -152,7 +152,7 @@ public class PharmManufacturedMaterialEntry extends
 		if ((pharmIngredient != null) && (pharmIngredient.getQuantity() != null)) {
 			final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
 			rto.setDenominator(pharmIngredient.getQuantity().getDenominator());
-			rto.setNumerator(pharmIngredient.getQuantity().getNominator());
+			rto.setNumerator(pharmIngredient.getQuantity().getNumerator());
 			return new Value(rto);
 		}
 		return null;
@@ -377,7 +377,7 @@ public class PharmManufacturedMaterialEntry extends
 				final PharmQuantity pharmQuantity = CDAFactory.eINSTANCE.createPharmQuantity();
 				pharmIngredient.setQuantity(pharmQuantity);
 				pharmQuantity.setDenominator(quantity.copyMdhtRto().getDenominator());
-				pharmQuantity.setNominator(quantity.copyMdhtRto().getNumerator());
+				pharmQuantity.setNumerator(quantity.copyMdhtRto().getNumerator());
 			}
 		} else {
 			pharmIngredient.setQuantity(null);

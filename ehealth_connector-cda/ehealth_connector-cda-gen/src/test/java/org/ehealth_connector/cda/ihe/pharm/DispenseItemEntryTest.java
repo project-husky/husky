@@ -237,7 +237,7 @@ public class DispenseItemEntryTest {
 		final Document document = entry.getDocument(true);
 
 		XPathExpression expr = xpath
-				.compile("//pharm:component1[@moodCode='EVN' and @classCode='SUBST']");
+				.compile("//pharm:component1/pharm:substitutionMade[@moodCode='EVN' and @classCode='SUBST']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
