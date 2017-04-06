@@ -21,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -617,7 +618,23 @@ public class CdaValidator {
 		if (cdaStream == null)
 			throw new ConfigurationException("No CDA-Document provided for validation");
 
+		// final RuleSet ruleSet = reportBuilder.detectRuleSet(cdaStream);
+		try {
+			InputStream is = cdaStream.getInputStream();
+			if (is != null)
+				cdaStream.getInputStream().reset();
+		} catch (IOException e) {
+			// Do nothing
+		}
 		final RuleSet ruleSet = reportBuilder.detectRuleSet(cdaStream);
+
+		try {
+			InputStream is = cdaStream.getInputStream();
+			if (is != null)
+				cdaStream.getInputStream().reset();
+		} catch (IOException e) {
+			// Do nothing
+		}
 
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
