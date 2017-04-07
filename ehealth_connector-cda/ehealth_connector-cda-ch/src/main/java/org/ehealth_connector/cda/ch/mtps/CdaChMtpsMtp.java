@@ -21,12 +21,14 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
 import org.ehealth_connector.cda.ihe.pharm.PatientMedicalInstructionsEntry;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -42,6 +44,7 @@ import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PatientMedicalInstructions;
+import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -238,14 +241,126 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 				.addSubstanceAdministration(substanceAdministration);
 	}
 
+	public void addSubstanceAdministration(Code priorityCode, Code routeCode, Double doseQuantity,
+			Double rateQuantity, SXCM_TS planificationTime, Consumable consumable, Author author,
+			CD approachSite, SXCM_TS startTime, SXCM_TS endTime,
+			org.ehealth_connector.cda.ch.mtps.enums.RouteOfAdministration routeOfAdministration,
+			SXCM_TS uniqueDailyDoseTime, SXCM_TS multipleDailyDoseTime, Double prescribedQuantity,
+			String unitOfPrescribedQuantity, boolean isSubstitionPossible) {
+		final SubstanceAdministration substanceAdministration = CDAFactory.eINSTANCE
+				.createSubstanceAdministration();
+		substanceAdministration.setClassCode(ActClass.SBADM);
+		substanceAdministration.setMoodCode(x_DocumentSubstanceMood.EVN);
+
+		substanceAdministration.getTemplateIds()
+				.add(new Identificator("2.16.756.5.30.1.1.1.1.1", "CDA-CH.Body.MediL3").getIi());
+		substanceAdministration.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "IHE PHARM").getIi());
+		substanceAdministration.getTemplateIds()
+				.add(new Identificator("2.16.840.1.113883.10.20.1.24", "HL7 CCD").getIi());
+		substanceAdministration.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7", "IHE PHARM").getIi());
+		////////////
+		/*
+		 * final MedicationFrequencyContentModule mfcm; final
+		 * MedicationFrequency mefreq = new MedicationFrequency();
+		 *
+		 * mefreq.dosage = mfcm.setMedicationFrequencyPeriod(value, unit,
+		 * institutionSpecified, timingEvents, freqValue, freqUnit,
+		 * freqInstitutionSpecified, doseQuantities);
+		 */
+		///////////////
+
+		substanceAdministration.getIds().add(DatatypesFactory.eINSTANCE.createII(NullFlavor.NA));
+		final Code code = new Code("2.16.840.1.113883.5.4", "DRUG", "Medikamentöse Therapie");
+		substanceAdministration.setCode(code.getCD());
+		substanceAdministration.setText(Util.createReference("null"));
+		substanceAdministration.setStatusCode(createStatusCode("completed").getCS());
+		substanceAdministration.setPriorityCode(priorityCode.getCE());
+		// doseQuantity - Quantité unitaire (unit of Quantité [supply] class)
+		substanceAdministration.setDoseQuantity(createDosage(doseQuantity));
+		// rateQuantity
+		substanceAdministration.setRateQuantity(createDosage(rateQuantity));
+		substanceAdministration.getEffectiveTimes().add(planificationTime);
+		// Consumable (Substance(s) active(s) et Produit)
+		substanceAdministration.setConsumable(consumable.getMdht());
+
+		// Authors
+		substanceAdministration.getAuthors().add(author.getAuthorMdht());
+
+		// Site d’administration
+		substanceAdministration.getApproachSiteCodes().add(approachSite);
+
+		// Date de début -> effectiveTime (planification)
+		substanceAdministration.getEffectiveTimes().add(startTime);
+
+		// Date de fin
+		substanceAdministration.getEffectiveTimes().add(endTime);
+
+		// Voie d’administration (routeCode)
+		substanceAdministration.setRouteCode(routeCode.getCE());
+		// mtpEntry.setRouteOfAdministration(getRouteOfAdministration());
+
+		// Dose journalière- fréquence (prise quotidienne unique)
+		if (uniqueDailyDoseTime != null) {
+			substanceAdministration.getEffectiveTimes().add(uniqueDailyDoseTime);
+		}
+		// Dose journalière- fréquence (prise quotidienne multiple)
+		if (multipleDailyDoseTime != null) {
+			substanceAdministration.getEffectiveTimes().add(multipleDailyDoseTime);
+		}
+
+		// Quantité prescrite / à remettre
+		substanceAdministration.getEntryRelationships()
+				.add(getPrescribedQty(prescribedQuantity, unitOfPrescribedQuantity));
+
+		// Raison du traitement (see Act -> SetReasonForTreatment)
+
+		// Substitution autorisée
+		if (isSubstitionPossible) {
+			substanceAdministration.getEntryRelationships().add(getPossibleSubstitution());
+		}
+		// Reference ID de MTP
+		final Reference referenceXCRPTToMTP = CDAFactory.eINSTANCE.createReference();
+		referenceXCRPTToMTP.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
+		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
+		documentEntry.setId(this.getId());
+		referenceXCRPTToMTP.setExternalDocument(documentEntry.getMdht());
+		substanceAdministration.getReferences().add(referenceXCRPTToMTP);
+		this.getMdht().getMedicationTreatmentPlanSection()
+				.addSubstanceAdministration(substanceAdministration);
+	}
+
 	public void addSubstanceAdministration(SubstanceAdministration substance) {
 		this.getMedicationTreatmentPlanSection().getMdht().addSubstanceAdministration(substance);
+	}
+
+	public IVL_PQ createDosage(Double doseQuantity) {
+		final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivl_pq.setUnit("ml");
+		ivl_pq.setValue(doseQuantity);
+		return ivl_pq;
+	}
+
+	private Code createStatusCode(String statusCode) {
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setNullFlavor(NullFlavor.UNK);
+		cs.setCode(statusCode);
+		return new Code(cs);
 	}
 
 	private CS getCS(String code) {
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
+	}
+
+	public Value getDosage() {
+		if (((SubstanceAdministration) getMdht()).getDoseQuantity() != null) {
+			final Value value = new Value(((SubstanceAdministration) getMdht()).getDoseQuantity());
+			return value;
+		}
+		return null;
 	}
 
 	public MedicationTreatmentPlanItemReferenceEntry getMedicationTreatmentPlanItemReferenceEntry() {
@@ -307,16 +422,15 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		substitutionPermissionSo4.setCode(pharmCode);
 		possibleSubstitution.getTemplateIds()
 				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
-		
 		final PharmSubjectOf4 pharmSubjectOf4 = CDAFactory.eINSTANCE.createPharmSubjectOf4();
 		pharmSubjectOf4.setSubstitutionPermission(substitutionPermissionSo4);
 		substitutionSupply.setSubjectOf4(pharmSubjectOf4);
-
 		possibleSubstitution.setSupply(substitutionSupply);
+
 		return possibleSubstitution;
 	}
 
-	private EntryRelationship getPrescribedQty(Double Value, String unit) {
+	private EntryRelationship getPrescribedQty(Double value, String unit) {
 		// TODO Auto-generated method stub
 		final EntryRelationship prescribedQty = CDAFactory.eINSTANCE.createEntryRelationship();
 		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
@@ -324,7 +438,6 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		prescribedQuantity.setClassCode(ActClassSupply.SPLY);
 		prescribedQuantity.setMoodCode(x_DocumentSubstanceMood.RQO);
 		prescribedQuantity.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-		final Double value = new Double(10);
 		prescribedQuantity.setQuantity(
 				DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), value.toString()));
 		prescribedQuantity.setText(DatatypesFactory.eINSTANCE.createED(value + " " + unit));
@@ -335,6 +448,10 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	public EList<Reference> getReferences() {
 		return this.getMedicationTreatmentPlanSection().getMdht()
 				.getMedicationTreatmentPlanItemEntries().get(0).getReferences();
+	}
+
+	public void getStatusCode(Code statusCode) {
+		getMdht().setCode(statusCode.getCS());
 	}
 
 	/*
@@ -372,7 +489,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return flag;
 	}
 
-	private void initMTPEntry() {
+	private void initializeMedicationTreatmentPlanSection() {
 		// TODO Auto-generated method stub
 		// final
 		// org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry
@@ -381,10 +498,53 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		// this.getMdht().getMedicationTreatmentPlanSection().getMedicationTreatmentPlanItemEntries().add(e);
 	}
 
+	public void setMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry mtpEntry) {
+		final EList<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry> entriesMedicationSections = getMdht()
+				.getMedicationTreatmentPlanSection().getMedicationTreatmentPlanItemEntries();
+		if (entriesMedicationSections != null) {
+
+			final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry iheMtpItemEntry = PHARMFactory.eINSTANCE
+					.createMedicationTreatmentPlanItemEntry();
+
+			/** setID **/
+			iheMtpItemEntry.getIds().add(mtpEntry.getId().getIi());
+
+			/** Patients instruction **/
+			iheMtpItemEntry.getPatientMedicalInstructionss()
+					.add(mtpEntry.getPatientMedicalInstructions().getMdht());
+
+			/** Professional instructions **/
+			final EList<EntryRelationship> professionalInstructionsEntryRelationships = mtpEntry
+					.getMedicationFullfillmentInstructions().getMdht().getEntryRelationships();
+			for (final EntryRelationship entryRelationship : professionalInstructionsEntryRelationships) {
+				iheMtpItemEntry.getMedicationFullfillmentInstructions().getEntryRelationships()
+						.add(entryRelationship);
+			}
+
+			/** Reference **/
+			final EList<Reference> references = mtpEntry.getMdht().getReferences();
+			for (final Reference reference : references) {
+				iheMtpItemEntry.getReferences().add(reference);
+			}
+
+			/** set substanceAdministration */
+			final EList<SubstanceAdministration> substanceAdministrations = mtpEntry.getMdht()
+					.getSubstanceAdministrations();
+			for (final SubstanceAdministration substanceAdministration : substanceAdministrations) {
+				iheMtpItemEntry.addSubstanceAdministration(substanceAdministration);
+			}
+
+			entriesMedicationSections.add(iheMtpItemEntry);
+		}
+		// this.getMdht().getMedicationTreatmentPlanSection().getEntries().clear();
+		// this.getMdht().getMedicationTreatmentPlanSection().getEntries().add((Entry)
+		System.out.println(entriesMedicationSections);
+	}
+
 	public void setPatientInstructions(String instructions) {
 		// find or create (and add) the Section
 		if (!hasItemEntry()) {
-			initMTPEntry();
+			initializeMedicationTreatmentPlanSection();
 			// init if doesn't exist
 		}
 		final PatientMedicalInstructions pmi = IHEFactory.eINSTANCE
@@ -419,7 +579,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		// find or create (and add) the Section
 
 		if (!hasItemEntry()) {
-			initMTPEntry();
+			initializeMedicationTreatmentPlanSection();
 			// create if doesn't exist
 		}
 		this.getMedicationTreatmentPlanSection().getMdht().getMedicationTreatmentPlanItemEntries()
@@ -427,39 +587,39 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 				.setText(DatatypesFactory.eINSTANCE.createED(instructions));
 	}
 
-	public void setReasonForTreatment(String r) {
+	public void setReasonForTreatment(String reasonForTreatment) {
 		// find or create (and add) the Section
 		if (!hasItemEntry()) {
-			initMTPEntry();
+			initializeMedicationTreatmentPlanSection();
 			// create if doesn't exist
 		}
-		final Act reasonOfTreatment = CDAFactory.eINSTANCE.createAct();
-		reasonOfTreatment.setClassCode(x_ActClassDocumentEntryAct.ACT);
-		reasonOfTreatment.setMoodCode(x_DocumentActMood.EVN);
-		reasonOfTreatment.getTemplateIds()
+		final Act actReasonOfTreatment = CDAFactory.eINSTANCE.createAct();
+		actReasonOfTreatment.setClassCode(x_ActClassDocumentEntryAct.ACT);
+		actReasonOfTreatment.setMoodCode(x_DocumentActMood.EVN);
+		actReasonOfTreatment.getTemplateIds()
 				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.4.1", "IHE PHARM").getIi());
-		reasonOfTreatment.setText(DatatypesFactory.eINSTANCE.createED(r));
+		actReasonOfTreatment.setText(DatatypesFactory.eINSTANCE.createED(reasonForTreatment));
 		// prendre la référence de l'élément indiquant la raison dans le
 		// document
 		// mtpEntry.setReasonFor();
-		reasonOfTreatment.getIds()
+		actReasonOfTreatment.getIds()
 				.add(/* mtpEntry.getReasonFor().getIi() */new Identificator("root", "extension")
 						.getIi());
-		reasonOfTreatment.setStatusCode(getCS("completed"));
+		actReasonOfTreatment.setStatusCode(getCS("completed"));
 		final EntryRelationship reason = CDAFactory.eINSTANCE.createEntryRelationship();
 		reason.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 		reason.setInversionInd(false);
-		reason.setAct(reasonOfTreatment);
-		reasonOfTreatment.getEntryRelationships().add(reason);
+		reason.setAct(actReasonOfTreatment);
+		actReasonOfTreatment.getEntryRelationships().add(reason);
 		this.getMedicationTreatmentPlanSection().getMdht().getMedicationTreatmentPlanItemEntries()
-				.get(0).addAct(reasonOfTreatment);
+				.get(0).addAct(actReasonOfTreatment);
 	}
 
 	public void setReference(Identificator id) {
 		/** Reference from document where this document is (PML) **/
 		// create if doesn't exist
 		if (!hasItemEntry()) {
-			initMTPEntry();
+			initializeMedicationTreatmentPlanSection();
 		}
 		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
 		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
@@ -469,5 +629,9 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 
 		this.getMedicationTreatmentPlanSection().getMdht().getMedicationTreatmentPlanItemEntries()
 				.get(0).getReferences().add(referenceXCRPT);
+	}
+
+	public void setStatusCode(Code statusCode) {
+		getMdht().setCode(statusCode.getCS());
 	}
 }

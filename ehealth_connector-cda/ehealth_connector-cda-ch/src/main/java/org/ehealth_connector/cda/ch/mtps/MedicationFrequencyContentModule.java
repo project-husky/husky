@@ -58,7 +58,7 @@ public class MedicationFrequencyContentModule
 	};
 
 	/**
-	 * The Class MedicationFrequency. Data access objects for convenvience API
+	 * The Class MedicationFrequency. Data access objects for convenience API
 	 */
 	public class MedicationFrequency {
 
@@ -94,7 +94,7 @@ public class MedicationFrequencyContentModule
 
 	/**
 	 * @param medicationItemEntry
-	 *          the medication item entry
+	 *            the medication item entry
 	 */
 	public MedicationFrequencyContentModule(MedicationItemEntry medicationItemEntry) {
 		super(medicationItemEntry);
@@ -104,18 +104,18 @@ public class MedicationFrequencyContentModule
 	 * Gets the events out of the SXCM_TS datatype.
 	 *
 	 * @param scxm
-	 *          the scxm
+	 *            the scxm
 	 * @return the events
 	 */
 	private EIVL_TS[] getEvents(SXCM_TS scxm) {
 		if (scxm instanceof EIVL_TS) {
-			EIVL_TS[] eivlts = new EIVL_TS[1];
+			final EIVL_TS[] eivlts = new EIVL_TS[1];
 			eivlts[0] = (EIVL_TS) scxm;
 			return eivlts;
 		}
 		if (scxm instanceof SXPR_TS) {
-			EList<SXCM_TS> comps = ((SXPR_TS) scxm).getComps();
-			EIVL_TS[] eivlts = new EIVL_TS[comps.size()];
+			final EList<SXCM_TS> comps = ((SXPR_TS) scxm).getComps();
+			final EIVL_TS[] eivlts = new EIVL_TS[comps.size()];
 			for (int i = 0; i < comps.size(); ++i) {
 				eivlts[i] = (EIVL_TS) comps.get(i);
 			}
@@ -128,7 +128,7 @@ public class MedicationFrequencyContentModule
 	 * Gets the IVL_PQ datatype for a dose quantits
 	 *
 	 * @param doseQuantity
-	 *          the dose quantity
+	 *            the dose quantity
 	 * @return the IVL_PQ datatype
 	 */
 	public IVL_PQ getIVLPQ(Value doseQuantity) {
@@ -145,7 +145,7 @@ public class MedicationFrequencyContentModule
 	 * @return the medication frequency for a substanceadministration
 	 */
 	public MedicationFrequency getMedicationFrequency() {
-		SXCM_TS effectiveTime = super.getMedicationFrequencyEffectiveTime();
+		final SXCM_TS effectiveTime = super.getMedicationFrequencyEffectiveTime();
 		IVL_PQ[] dosings = null;
 		EIVL_TS[] events = null;
 		if (this.hasSplitDosing()) {
@@ -172,8 +172,9 @@ public class MedicationFrequencyContentModule
 		}
 		if (effectiveTime instanceof SXPR_TS) {
 			final SXPR_TS components = (SXPR_TS) effectiveTime;
-			EList<SXCM_TS> comps = components.getComps();
-			if ((comps.size() == 2) && (comps.get(0) instanceof PIVL_TS) && isEvents(comps.get(1))) {
+			final EList<SXCM_TS> comps = components.getComps();
+			if ((comps.size() == 2) && (comps.get(0) instanceof PIVL_TS)
+					&& isEvents(comps.get(1))) {
 				final PIVL_TS period = (PIVL_TS) comps.get(0);
 				return getMedicationFrequency(period, null, getEvents(comps.get(1)), null);
 			}
@@ -191,21 +192,21 @@ public class MedicationFrequencyContentModule
 	 * Gets the medication frequency data access object out of the datatypes.
 	 *
 	 * @param period
-	 *          the period
+	 *            the period
 	 * @param freqPeriod
-	 *          the frequency
+	 *            the frequency
 	 * @param events
-	 *          the events
+	 *            the events
 	 * @param dosages
-	 *          the dosages
+	 *            the dosages
 	 * @return the medication frequency
 	 */
 	protected MedicationFrequency getMedicationFrequency(PIVL_TS period, PIVL_TS freqPeriod,
 			EIVL_TS[] events, IVL_PQ[] dosages) {
-		MedicationFrequency medicationFrequency = new MedicationFrequency();
+		final MedicationFrequency medicationFrequency = new MedicationFrequency();
 		if (period != null) {
 			if (period.getInstitutionSpecified().booleanValue()) {
-				PQ pq = period.getPeriod();
+				final PQ pq = period.getPeriod();
 				if (pq != null && Ucum.Hour.getCodeValue().equals(pq.getUnit())) {
 					medicationFrequency.posology = PosologyType.NTimesADay;
 					medicationFrequency.posologyFactor = 24.0 / pq.getValue().doubleValue();
@@ -219,7 +220,7 @@ public class MedicationFrequencyContentModule
 					medicationFrequency.posologyFactor = 1.0 / pq.getValue().doubleValue();
 				}
 			} else {
-				PQ pq = period.getPeriod();
+				final PQ pq = period.getPeriod();
 				if (pq != null && Ucum.Hour.getCodeValue().equals(pq.getUnit())) {
 					medicationFrequency.posology = PosologyType.EveryXHours;
 					medicationFrequency.posologyFactor = pq.getValue().doubleValue();
@@ -228,7 +229,7 @@ public class MedicationFrequencyContentModule
 		}
 		if (freqPeriod != null) {
 			if (freqPeriod.getInstitutionSpecified().booleanValue()) {
-				PQ pq = freqPeriod.getPeriod();
+				final PQ pq = freqPeriod.getPeriod();
 				if (pq != null && Ucum.Week.getCodeValue().equals(pq.getUnit())) {
 					medicationFrequency.frequency = FrequencyType.XTimesAWeek;
 					medicationFrequency.frequencyFactor = 1.0 / pq.getValue().doubleValue();
@@ -238,7 +239,7 @@ public class MedicationFrequencyContentModule
 					medicationFrequency.frequencyFactor = 1.0 / pq.getValue().doubleValue();
 				}
 			} else {
-				PQ pq = freqPeriod.getPeriod();
+				final PQ pq = freqPeriod.getPeriod();
 				if (pq != null && Ucum.Day.getCodeValue().equals(pq.getUnit())) {
 					medicationFrequency.frequency = FrequencyType.EveryXDay;
 					medicationFrequency.frequencyFactor = pq.getValue().doubleValue();
@@ -259,7 +260,8 @@ public class MedicationFrequencyContentModule
 			}
 			medicationFrequency.timingEvents = new TimingEvent[events.length];
 			for (int i = 0; i < events.length; ++i) {
-				medicationFrequency.timingEvents[i] = TimingEvent.getEnum(events[i].getEvent().getCode());
+				medicationFrequency.timingEvents[i] = TimingEvent
+						.getEnum(events[i].getEvent().getCode());
 			}
 			if (dosages != null) {
 				medicationFrequency.dosage = DosageType.Split;
@@ -276,7 +278,7 @@ public class MedicationFrequencyContentModule
 	 * Gets the value out of a dose quantity
 	 *
 	 * @param doseQuantity
-	 *          the dose quantity
+	 *            the dose quantity
 	 * @return the value
 	 */
 	public Value getValue(IVL_PQ doseQuantity) {
@@ -288,7 +290,7 @@ public class MedicationFrequencyContentModule
 	 * Checks if the SCXM_TS component is based on events (EIVL_TS)
 	 *
 	 * @param component
-	 *          the component
+	 *            the component
 	 * @return true, if is events
 	 */
 	public boolean isEvents(SXCM_TS component) {
@@ -298,7 +300,7 @@ public class MedicationFrequencyContentModule
 		if (!(component instanceof SXPR_TS)) {
 			return false;
 		}
-		for (SXCM_TS comp : ((SXPR_TS) component).getComps()) {
+		for (final SXCM_TS comp : ((SXPR_TS) component).getComps()) {
 			if (!(comp instanceof EIVL_TS)) {
 				return false;
 			}
@@ -307,10 +309,11 @@ public class MedicationFrequencyContentModule
 	}
 
 	/**
-	 * Setting the medication frequency according the mtps rules NOTE: first draft version, no support for TAPERED Dosing currently
+	 * Setting the medication frequency according the mtps rules NOTE: first
+	 * draft version, no support for TAPERED Dosing currently
 	 *
 	 * @param medicationFrequency
-	 *          the medication frequency
+	 *            the medication frequency
 	 * @return true, if successful
 	 */
 	public boolean setMedicationFrequency(MedicationFrequency medicationFrequency) {
@@ -321,22 +324,23 @@ public class MedicationFrequencyContentModule
 	}
 
 	/**
-	 * Setting the medication frequency according the mtps rules NOTE: first draft version, no support for TAPERED Dosing currently
+	 * Setting the medication frequency according the mtps rules NOTE: first
+	 * draft version, no support for TAPERED Dosing currently
 	 *
 	 * @param posology
-	 *          the posology
+	 *            the posology
 	 * @param posologyFactory
-	 *          the posology factory
+	 *            the posology factory
 	 * @param timingEvents
-	 *          the timing events
+	 *            the timing events
 	 * @param frequency
-	 *          the frequency
+	 *            the frequency
 	 * @param frequencyFactor
-	 *          the frequency factor
+	 *            the frequency factor
 	 * @param dosage
-	 *          the dosage
+	 *            the dosage
 	 * @param doseQuantities
-	 *          the dose quantities
+	 *            the dose quantities
 	 * @return true, if successful
 	 */
 	public boolean setMedicationFrequency(PosologyType posology, double posologyFactory,
@@ -431,28 +435,29 @@ public class MedicationFrequencyContentModule
 	}
 
 	/**
-	 * Setting the medication frequency according the mtps rules NOTE: first draft version, no support for TAPERED Dosing currently
+	 * Setting the medication frequency according the mtps rules NOTE: first
+	 * draft version, no support for TAPERED Dosing currently
 	 *
 	 * @param value
-	 *          the value
+	 *            the value
 	 * @param unit
-	 *          the unit
+	 *            the unit
 	 * @param institutionSpecified
-	 *          the institution specified
+	 *            the institution specified
 	 * @param timingEvents
-	 *          the timing events
+	 *            the timing events
 	 * @param freqValue
-	 *          the freq value
+	 *            the freq value
 	 * @param freqUnit
-	 *          the freq unit
+	 *            the freq unit
 	 * @param freqInstitutionSpecified
-	 *          the freq institution specified
+	 *            the freq institution specified
 	 * @param doseQuantities
-	 *          the dose quantities
+	 *            the dose quantities
 	 */
 	public void setMedicationFrequencyPeriod(double value, Ucum unit, boolean institutionSpecified,
-			TimingEvent[] timingEvents, double freqValue, Ucum freqUnit, boolean freqInstitutionSpecified,
-			Value[] doseQuantities) {
+			TimingEvent[] timingEvents, double freqValue, Ucum freqUnit,
+			boolean freqInstitutionSpecified, Value[] doseQuantities) {
 
 		if (timingEvents == null && freqUnit == null) {
 			setMedicationFrequencyEffectiveTime(getPeriod(value, unit, institutionSpecified, true));
@@ -465,7 +470,7 @@ public class MedicationFrequencyContentModule
 		}
 
 		boolean setOperatorA = false;
-		SXPR_TS sxcmTs = DatatypesFactory.eINSTANCE.createSXPR_TS();
+		final SXPR_TS sxcmTs = DatatypesFactory.eINSTANCE.createSXPR_TS();
 		sxcmTs.setOperator(SetOperator.A);
 		if (unit != null) {
 			sxcmTs.getComps().add(getPeriod(value, unit, institutionSpecified, setOperatorA));
@@ -473,11 +478,12 @@ public class MedicationFrequencyContentModule
 		}
 
 		if (freqUnit != null) {
-			sxcmTs.getComps().add(getPeriod(freqValue, freqUnit, freqInstitutionSpecified, setOperatorA));
+			sxcmTs.getComps()
+					.add(getPeriod(freqValue, freqUnit, freqInstitutionSpecified, setOperatorA));
 			setOperatorA = true;
 		}
 		if (timingEvents != null && doseQuantities == null) {
-			SXCM_TS eivlTs = getTimingEvents(timingEvents, setOperatorA);
+			final SXCM_TS eivlTs = getTimingEvents(timingEvents, setOperatorA);
 			sxcmTs.getComps().add(eivlTs);
 		}
 		if (doseQuantities != null) {
