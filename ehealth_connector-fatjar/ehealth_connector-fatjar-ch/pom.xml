@@ -12,16 +12,17 @@
 
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.${current.time}</dll.version>
 	</properties>
 
 	<dependencies>
-   		<dependency>
+		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>addressing</artifactId>
 			<type>mar</type>
 			<version>1.41</version>
 		</dependency>
- 		<dependency>
+		<dependency>
 			<groupId>org.ehealth_connector.communication.ch</groupId>
 			<artifactId>ehealth_connector-communication-ch</artifactId>
 			<version>1.4-SNAPSHOT</version>
@@ -40,7 +41,7 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -89,10 +90,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> 
-				<configuration> <target> <copy failonerror="false" file="${project.build.directory}/ehealthconnector-ch.jar" tofile="${basedir}../../../../demo/javascript/ehealthconnector-ch.jar" /> 
-				</target> </configuration> <executions> <execution> <phase>package</phase> 
-				<goals> <goal>run</goal> </goals> </execution> </executions> </plugin -->
+			<!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-antrun-plugin</artifactId> <configuration> <target> <copy failonerror="false" 
+				file="${project.build.directory}/ehealthconnector-ch.jar" tofile="${basedir}../../../../demo/javascript/ehealthconnector-ch.jar" /> </target> </configuration> 
+				<executions> <execution> <phase>package</phase> <goals> <goal>run</goal> </goals> </execution> </executions> </plugin -->
 		</plugins>
 	</build>
 
@@ -130,7 +130,24 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
+						<configuration>
+							<name>current.time</name>
+							<pattern>mmss</pattern>
+							<timeZone>GMT+1</timeZone>
+						</configuration>
 						<executions>
+							<execution>
+								<id>parse-version</id>
+								<goals>
+									<goal>parse-version</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>timestamp-property</id>
+								<goals>
+									<goal>timestamp-property</goal>
+								</goals>
+							</execution>
 							<execution>
 								<id>attach-artifacts</id>
 								<phase>package</phase>

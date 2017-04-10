@@ -11,10 +11,11 @@
 
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.${current.time}</dll.version>
 	</properties>
 
 	<dependencies>
-   		<dependency>
+		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>addressing</artifactId>
 			<type>mar</type>
@@ -121,7 +122,24 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
+						<configuration>
+							<name>current.time</name>
+							<pattern>mmss</pattern>
+							<timeZone>GMT+1</timeZone>
+						</configuration>
 						<executions>
+							<execution>
+								<id>parse-version</id>
+								<goals>
+									<goal>parse-version</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>timestamp-property</id>
+								<goals>
+									<goal>timestamp-property</goal>
+								</goals>
+							</execution>
 							<execution>
 								<id>attach-artifacts</id>
 								<phase>package</phase>

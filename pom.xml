@@ -14,10 +14,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<version>1.4-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<dll.version>1.4.0.0</dll.version>
-	</properties>
-
 	<modules>
 		<module>ehealth_connector-common</module>
 		<module>ehealth_connector-cda</module>
@@ -61,8 +57,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 								<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
-							<!-- simpler configuration without reportSets available for usual 
-								cases -->
+							<!-- simpler configuration without reportSets available for usual cases -->
 							<reports>
 								<report>dependencies</report>
 								<report>scm</report>
