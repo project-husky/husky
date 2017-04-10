@@ -11,7 +11,7 @@
 
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.0.${current.time}</dll.version>
+		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${current.time}</dll.version>
 	</properties>
 
 	<dependencies>
@@ -124,7 +124,7 @@
 						<artifactId>build-helper-maven-plugin</artifactId>
 						<configuration>
 							<name>current.time</name>
-							<pattern>mmss</pattern>
+							<pattern>yyDDD.HHmm</pattern>
 							<timeZone>GMT+1</timeZone>
 						</configuration>
 						<executions>
