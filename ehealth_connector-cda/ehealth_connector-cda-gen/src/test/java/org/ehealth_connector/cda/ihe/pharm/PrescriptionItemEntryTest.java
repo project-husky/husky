@@ -28,12 +28,15 @@ import javax.xml.xpath.XPathExpressionException;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.Util;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_event;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXPR_TS;
@@ -417,5 +420,26 @@ public class PrescriptionItemEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
+	
+	
+	@Test
+	public void testFeaturesPre() throws XPathExpressionException {
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
+		entry.getMdht().setText(Util.createEd("Text"));
+		
+		Code code = new Code("system","code","displayname");
+		entry.getMdht().getApproachSiteCodes().add(code.getCE());
+		
+		final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivl_pq.setUnit("ml");
+		ivl_pq.setValue(Double.valueOf("2.0"));
+		
+		entry.getMdht().setRateQuantity(ivl_pq);
+
+		final Document document = entry.getDocument();
+
+	}
+
 
 }

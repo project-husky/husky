@@ -67,5 +67,38 @@ public class MedicationTreatmentPlanItemEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
+	
+	@Test
+	public void testInstructionsEntry() throws Exception {
+
+		final MedicationTreatmentPlanItemEntry entry = new MedicationTreatmentPlanItemEntry();
+
+		MedicationFullfillmentInstructionsEntry medicalFullfillmentInstruction = new MedicationFullfillmentInstructionsEntry();
+		medicalFullfillmentInstruction.setTextReference("#abc");
+		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstruction);
+		assertEquals("#abc", entry.getMedicationFullfillmentInstructions().getTextReference());
+
+		MedicationFullfillmentInstructionsEntry medicalFullfillmentInstructionDisrupt = new MedicationFullfillmentInstructionsEntry();
+		medicalFullfillmentInstructionDisrupt.setTextReference("#ghi");
+		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstructionDisrupt);
+		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
+
+		PatientMedicalInstructionsEntry patientInstructions = new PatientMedicalInstructionsEntry();
+		patientInstructions.setTextReference("#def");
+		entry.setPatientMedicalInstructions(patientInstructions);
+
+		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
+		assertEquals("#def", entry.getPatientMedicalInstructions().getTextReference());
+
+		PatientMedicalInstructionsEntry patientInstructionsDisrupt = new PatientMedicalInstructionsEntry();
+		patientInstructionsDisrupt.setTextReference("#jkl");
+		entry.setPatientMedicalInstructions(patientInstructionsDisrupt);
+
+		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
+		assertEquals("#jkl", entry.getPatientMedicalInstructions().getTextReference());
+
+		entry.getDocument();
+	}
+
 
 }
