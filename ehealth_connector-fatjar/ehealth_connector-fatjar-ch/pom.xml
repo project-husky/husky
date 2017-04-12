@@ -113,6 +113,7 @@
 									<arg value="-version:${dll.version}" />
 									<arg value="-target:library" />
 									<arg value="-nowarn:warning" />
+									<arg value="-nostacktraceinfo" />
 									<arg value="-out:${project.build.directory}/ehealthconnector-ch.dll" />
 									<arg value="${project.build.directory}/ehealthconnector-ch.jar" />
 								</exec>
