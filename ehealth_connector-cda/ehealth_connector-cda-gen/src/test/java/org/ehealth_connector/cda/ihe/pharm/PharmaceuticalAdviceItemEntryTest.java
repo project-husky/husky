@@ -126,6 +126,25 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals(PharmaceuticalAdviceStatusList.CANCEL,
 				entry.getPharmaceuticalAdviceStatusList());
 	}
+	
+	@Test
+	public void testPharmaceuticalAdviceConcernEntry() throws Exception {
+
+		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
+		
+		final PharmaceuticalAdviceConcernEntry concernEntry = new PharmaceuticalAdviceConcernEntry();
+		concernEntry.setTextReference("Test");
+		entry.setPharmaceuticalAdviceConcernEntry(concernEntry);
+		
+		final Document document = entry.getDocument();
+		
+		assertEquals(entry.getPharmaceuticalAdviceConcernEntry().getTextReference(), "#Test");
+
+		XPathExpression expr = xpath
+				.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
 
 	@Test
 	public void testPrecondition() throws Exception {

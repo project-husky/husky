@@ -204,7 +204,18 @@ public class PharmaceuticalAdviceItemEntry extends
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Gets the pharmaceutical advice concern entry.
+	 *
+	 * @return the pharmaceutical advice concern entry
+	 */
+	public PharmaceuticalAdviceConcernEntry getPharmaceuticalAdviceConcernEntry() {
+		if (getMdht().getPharmaceuticalAdviceConcernEntry() != null) {
+					return new PharmaceuticalAdviceConcernEntry(getMdht().getPharmaceuticalAdviceConcernEntry());	
+		}
+		return null;
+	}
 	/**
 	 * Gets the precondition entries.
 	 *
@@ -230,7 +241,7 @@ public class PharmaceuticalAdviceItemEntry extends
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Gets the text reference.
 	 *
@@ -393,6 +404,31 @@ public class PharmaceuticalAdviceItemEntry extends
 	public void setPharmaceuticalAdviceStatus(PharmaceuticalAdviceStatusList code) {
 		if (code != null) {
 			this.getMdht().setCode(code.getCode().getCD());
+		}
+	}
+	
+	/**
+	 * Sets the phamaceutical advice concern entry
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void setPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
+		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
+		if (old != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setAct(entry.getMdht());
+					break;
+				}
+			}
+		}else {
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setAct(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
 	}
 
