@@ -1,15 +1,18 @@
-/* **********************************************************************
- * Author: roeland
- * Date  : Mar 8, 2017
- * File  : XdsMetadataUtilTest.java
- * **********************************************************************
- * ehealth_connector-common-gen
+/*******************************************************************************
  *
- * Copyright (c) 2017
- * Arpage AG, CH - 8700 Kuesnacht ZH
- * All rights reserved
- * **********************************************************************
- */
+ * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. http://medshare.net
+ *
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ *
+ * This code is are made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * Year of publication: 2017
+ *
+ *******************************************************************************/
 package org.ehealth_connector.common.utils;
 
 import static org.junit.Assert.assertEquals;
@@ -74,24 +77,24 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearNullEmpty() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(null);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(null);
 		assertNull(ref1);
 
-		final Date ref2 = XdsMetadataUtil.convertDTMStringToDate("");
+		final Date ref2 = XdsMetadataUtil.convertDtmStringToDate("");
 		assertNull(ref2);
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDTMStringToDateYear() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_Y);
+	public void testConvertDtmStringToDateYear() {
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_Y);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);
@@ -105,11 +108,11 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearMonth() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_YM);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YM);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);
@@ -123,11 +126,11 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearMonthDay() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_YMD);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMD);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);
@@ -141,11 +144,11 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearMonthDayHour() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_YMDH);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDH);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);
@@ -159,11 +162,11 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearMonthDayHourMinute() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_YMDHM);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDHM);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);
@@ -177,11 +180,11 @@ public class XdsMetadataUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDTMStringToDate(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
 	public void testConvertDTMStringToDateYearMonthDayHourMinuteSecond() {
-		final Date ref1 = XdsMetadataUtil.convertDTMStringToDate(testDTM_YMDHMS);
+		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDHMS);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
 		refCal1.setTime(ref1);

@@ -137,35 +137,6 @@ public class XdsMetadataUtil {
 		}
 	}
 
-	// /**
-	// * Converts a list of eHC DateTimeRange to a list of OHT DateTimeRange.
-	// *
-	// * @param dtr
-	// * the OHT DateTimeRange
-	// * @return the DateTimeRange Array
-	// */
-	// public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[]
-	// convertEhcDateTimeRange(
-	// org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dtr) {
-	// if (dtr == null)
-	// return null;
-	// else {
-	// final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray
-	// = new
-	// org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
-	//
-	// int i = 0;
-	// for (final
-	// org.ehealth_connector.communication.xd.storedquery.DateTimeRange dt :
-	// dtr) {
-	// dtrArray[i] = dt.getOhtDateTimeRange();
-	// i++;
-	// }
-	//
-	// return dtrArray;
-	// }
-	// }
-
 	/**
 	 * <div class="en">Convert identificator to OHT CX</div>
 	 *
@@ -538,7 +509,7 @@ public class XdsMetadataUtil {
 	 *            the string with DTM format
 	 * @return the representing Date object </div>
 	 */
-	public static Date convertDTMStringToDate(String dateTimeString) {
+	public static Date convertDtmStringToDate(String dateTimeString) {
 		Date retVal = null;
 		if ((dateTimeString != null) && !"".equals(dateTimeString)) {
 			final SimpleDateFormat sdf = new SimpleDateFormat();
@@ -574,52 +545,4 @@ public class XdsMetadataUtil {
 		return retVal;
 	}
 
-	// /**
-	// * Creates a document name in conformance with the XDM document naming
-	// * scheme
-	// *
-	// * @param xdsDoc
-	// * the OHT XDSDocument
-	// * @param docNr
-	// * the number of the document
-	// * @return the name of the document
-	// */
-	// public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
-	// // compile the path and filename for the zip file
-	// String fileName = "DOC";
-	//
-	// // Fix DocumentDescriptor problem...
-	// DocumentDescriptor dd = xdsDoc.getDescriptor();
-	// if (dd.toString().startsWith("UNKNOWN!")) {
-	// String mimeType = dd.toString().replace("UNKNOWN!", "");
-	// mimeType = mimeType.substring(mimeType.indexOf("!") + 1,
-	// mimeType.length());
-	// dd = DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
-	// }
-	// // if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
-	// // dd = DocumentDescriptor.CDA_R2;
-	//
-	// final String fileNameExtension = DocDescriptor.getFileExtension(dd);
-	// fileName = fileName.concat(String.format("%5s", docNr).replace(' ',
-	// '0'));
-	// fileName = fileName.concat("." + fileNameExtension.toUpperCase());
-	// return fileName;
-	// }
-	//
-	// /**
-	// * Creates a document path and name in conformance with the XDM document
-	// * naming scheme
-	// *
-	// * @param xdsDoc
-	// * the OHT XDSDocument
-	// * @param docNr
-	// * the number of the document
-	// * @return the path and name of the document
-	// */
-	// public static String createXdmDocPathAndName(XDSDocument xdsDoc, int
-	// docNr) {
-	// final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc,
-	// docNr);
-	// return filePath;
-	// }
 }

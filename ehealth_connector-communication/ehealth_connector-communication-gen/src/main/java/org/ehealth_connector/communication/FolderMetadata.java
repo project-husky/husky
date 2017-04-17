@@ -86,6 +86,7 @@ public class FolderMetadata {
 	 */
 	public List<Code> getCodeList() {
 		final List<Code> retVal = new ArrayList<>();
+		@SuppressWarnings("unchecked")
 		final EList<CodedMetadataType> eList = f.getCode();
 		for (int i = 0; i < eList.size(); ++i) {
 			retVal.add(XdsMetadataUtil.convertOhtCodedMetadataType(eList.get(i)));
@@ -101,6 +102,7 @@ public class FolderMetadata {
 	 *            the list of codes to be set </div>
 	 */
 	public void setCodeList(List<Code> codeList) {
+		@SuppressWarnings("unchecked")
 		final EList<CodedMetadataType> eList = f.getCode();
 		eList.clear();
 		for (final Code code : codeList) {
@@ -116,6 +118,7 @@ public class FolderMetadata {
 	 *            the code to be added
 	 */
 	public void addCode(Code aCode) {
+		@SuppressWarnings("unchecked")
 		final EList<CodedMetadataType> eList = f.getCode();
 		eList.add(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(aCode));
 	}
@@ -169,7 +172,7 @@ public class FolderMetadata {
 	 * @return the update time </div>
 	 */
 	public Date getLastUpdateTime() {
-		return XdsMetadataUtil.convertDTMStringToDate(f.getLastUpdateTime());
+		return XdsMetadataUtil.convertDtmStringToDate(f.getLastUpdateTime());
 	}
 
 	/**
