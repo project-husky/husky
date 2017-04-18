@@ -443,107 +443,26 @@ public class CdaChLrph
 
 	}
 
-	// /**
-	// * Convenience function to add a Laboratory Battery Organizer and create
-	// the
-	// * necessary elements, if they do not exist. If the elements exist, their
-	// * contents will not be overwritten.
-	// *
-	// * These elements are: LaboratorySpecialtySection (section code is derived
-	// * automatically from the LaboratoryObservation enum)
-	// * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
-	// * Battery Organizer
-	// *
-	// * @param organizer
-	// * the LaboratoryBatteryOrganizer holding at least one
-	// * LaboratoryObservation
-	// */
-	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
-	// organizer) {
-	// org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection
-	// laboratorySpecialtySection;
-	// // Try to determine the right code from the LaboratoryObservation and set
-	// it
-	// // in the Section
-	// final String section =
-	// getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
-	// Code sectionCode = null;
-	// if (section != null) {
-	// sectionCode = LrphSections.getEnum(section).getCode();
-	// }
-	// if (getLaboratorySpecialtySection() == null) {
-	// if (sectionCode != null) {
-	// laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode);
-	// getMdht().setCode(sectionCode.getCE());
-	// } else {
-	// laboratorySpecialtySection = new LaboratorySpecialtySection();
-	// }
-	// } else {
-	// laboratorySpecialtySection = getLaboratorySpecialtySection();
-	// }
-	//
-	// LaboratoryReportDataProcessingEntry lrdpe;
-	// if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry()
-	// ==
-	// null) {
-	// lrdpe = new LaboratoryReportDataProcessingEntry();
-	// } else {
-	// lrdpe =
-	// laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
-	// }
-	//
-	// SpecimenAct se;
-	// if (lrdpe.getSpecimenAct() == null) {
-	// se = new SpecimenAct();
-	// if (sectionCode != null) {
-	// se.setCode(sectionCode);
-	// }
-	// } else {
-	// se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
-	// }
-	//
-	// se.addLaboratoryBatteryOrganizer(organizer);
-	// lrdpe.setSpecimenAct(se);
-	// laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
-	// setLaboratorySpecialtySection(laboratorySpecialtySection);
-	// }
-
-	// /**
-	// * Convenience function which applies the right privacy protection
-	// algorithm,
-	// * depending on an existing LaboratoryObservation element. This element
-	// has
-	// to
-	// * be added to this document before. If different privacy filter related
-	// * observations exist, this function will apply the most restrictive
-	// privacy
-	// * filter.
-	// *
-	// * @throws IllegalArgumentException
-	// * when the needed element for applying the anonymization does not
-	// * exist in the current instance of the document.
-	// */
-	// public void applyPrivacyFilter() throws IllegalArgumentException {
-	// for (LaboratoryBatteryOrganizer lbo :
-	// getLaboratoryBatteryOrganizerList())
-	// {
-	// String privacyFilter =
-	// getPrivacyFilterFromLaboratoryObservationEnum(lbo);
-	// if (privacyFilter == null)
-	// throw new IllegalArgumentException();
-	// switch (privacyFilter) {
-	// case "none":
-	// break;
-	// case "initials":
-	// applyPrivacyFilterInitials(getMdht());
-	// break;
-	// case "conditional":
-	// break;
-	// case "hiv":
-	// break;
-	// }
-	// }
-	// }
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport#
+	 * createDocumentTitle()
+	 */
+	@Override
+	protected String createDocumentTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire soumis à déclaration");
+		case GERMAN:
+			return ("Meldepflichtiger Laborbefund");
+		case ITALIAN:
+			return ("it: TOTRANSLATE");
+		case ENGLISH:
+			return ("Laboratory Reports for Public Health");
+		}
+		return "Laboratory report";
+	}
 
 	/**
 	 * Convenience function to return all LaboratoryBatteryOrganizers directly
@@ -600,65 +519,6 @@ public class CdaChLrph
 		}
 		return null;
 	}
-
-	// /**
-	// * Convenience function to return the
-	// * PatientPrivacyFilter(none,initials,conditional,hiv) from a
-	// * LaboratoryObservation, which is hold in the given
-	// * LaboratoryBatteryOrganizer.
-	// *
-	// * @param organizer
-	// * the LaboratoryBatteryOrganizer
-	// * @return the section code
-	// */
-	// private String getPrivacyFilterFromLaboratoryObservationEnum(
-	// LaboratoryBatteryOrganizer organizer) {
-	// if (!organizer.getLaboratoryObservations().isEmpty()) {
-	// if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null)
-	// {
-	// // if present return LOINC Enum
-	// return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
-	// .getPatientPrivacyFilter();
-	// } else {
-	// // if present return SNOMED Enum
-	// if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() !=
-	// null) {
-	// return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
-	// .getPatientPrivacyFilter();
-	// }
-	// }
-	// }
-	// return null;
-	// }
-
-	// /**
-	// * Convenience function to return the (LOINC) section code from a given
-	// * LaboratoryObservation, which is hold in the given
-	// * LaboratoryBatteryOrganizer.
-	// *
-	// * @param organizer
-	// * the LaboratoryBatteryOrganizer
-	// * @return the section code
-	// */
-	// private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
-	// LaboratoryBatteryOrganizer organizer) {
-	// if (!organizer.getLaboratoryObservations().isEmpty()) {
-	// if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null)
-	// {
-	// // if present return LOINC Enum
-	// return
-	// organizer.getLaboratoryObservations().get(0).getCodeAsEnum().getSectionCode();
-	// } else {
-	// // if present return SNOMED Enum
-	// if (organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum() !=
-	// null) {
-	// return organizer.getLaboratoryObservations().get(0).getCodeAsSnomedEnum()
-	// .getSectionCode();
-	// }
-	// }
-	// }
-	// return null;
-	// }
 
 	/**
 	 * Sets a LaboratorySpecialtySection.

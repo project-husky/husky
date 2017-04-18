@@ -344,6 +344,27 @@ public class CdaChLrqc
 		getMdht().getParticipants().add(participant.getMdht());
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport#
+	 * createDocumentTitle()
+	 */
+	@Override
+	protected String createDocumentTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire pour le contrôle de la qualité");
+		case GERMAN:
+			return ("Laborbefund für Qualitätskontrolle");
+		case ITALIAN:
+			return ("Rapporto di laboratorio per l’assicurazione di qualità");
+		case ENGLISH:
+			return ("Laboratory report for quality control");
+		}
+		return "Laboratory report";
+	}
+
 	/**
 	 * Gets the intended recipients for LRQC.
 	 *
@@ -574,4 +595,5 @@ public class CdaChLrqc
 		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
+
 }

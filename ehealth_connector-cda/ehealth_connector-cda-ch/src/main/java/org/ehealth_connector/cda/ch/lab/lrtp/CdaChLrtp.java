@@ -383,6 +383,27 @@ public class CdaChLrtp
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport#
+	 * createDocumentTitle()
+	 */
+	@Override
+	protected String createDocumentTitle() {
+		switch (this.getLanguageCode()) {
+		case FRENCH:
+			return ("Rapport de laboratoire dans le processus de transplantation");
+		case GERMAN:
+			return ("Laborbefund im Transplantationsprozess");
+		case ITALIAN:
+			return ("it: TOTRANSLATE");
+		case ENGLISH:
+			return ("Laboratory Report in the Transplantation Process");
+		}
+		return "Laboratory report";
+	}
+
 	/**
 	 * Gets the BloodGroupObservation.
 	 *
@@ -658,4 +679,5 @@ public class CdaChLrtp
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
+
 }

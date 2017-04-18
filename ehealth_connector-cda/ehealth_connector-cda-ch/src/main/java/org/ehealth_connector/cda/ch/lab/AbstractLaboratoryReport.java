@@ -50,6 +50,11 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * @param <EClinicalDocument>
  *            the generic type
  */
+/**
+ * @author tony
+ *
+ * @param <EClinicalDocument>
+ */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaCh<EClinicalDocument> {
 
@@ -96,7 +101,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		} else {
 			this.setLanguageCode(languageCode);
 		}
-		setTitle(createSpecialitySectionTitle());
+		setTitle(createDocumentTitle());
 		initCda();
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
@@ -132,23 +137,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	/**
-	 * Gets the speciality section title.
+	 * Creates the CDA document title in the given language.
 	 *
-	 * @return the speciality section title
+	 * @return the CDA document title in the given language.
 	 */
-	private String createSpecialitySectionTitle() {
-		switch (this.getLanguageCode()) {
-		case FRENCH:
-			return ("Rapport de laboratoire");
-		case GERMAN:
-			return ("Laborbefund");
-		case ITALIAN:
-			return ("Rapporto di laboratorio");
-		case ENGLISH:
-			return ("Laboratory report");
-		}
-		return "Laboratory report";
-	}
+	protected abstract String createDocumentTitle();
 
 	/**
 	 * Convenience function that returns a list of all order ids of all
