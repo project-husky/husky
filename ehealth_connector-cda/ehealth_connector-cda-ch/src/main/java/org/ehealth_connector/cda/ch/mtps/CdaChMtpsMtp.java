@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.mtps;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractCda;
@@ -25,6 +26,7 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.cda.ihe.pharm.MedicationFullfillmentInstructionsEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
@@ -489,6 +491,17 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return null;
 	}
 
+	public MedicationTreatmentPlanItemEntry getMtpEntry() {
+		MedicationTreatmentPlanItemEntry mtpEntry = null;
+		final List<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry> entries = getMdht()
+				.getMedicationTreatmentPlanSection().getMedicationTreatmentPlanItemEntries();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry entry : entries) {
+			mtpEntry = new MedicationTreatmentPlanItemEntry(entry);
+		}
+
+		return mtpEntry;
+	}
+
 	public PatientMedicalInstructionsEntry getPatientInstructions() {
 
 		final PatientMedicalInstructionsEntry pi = new PatientMedicalInstructionsEntry();
@@ -557,6 +570,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		getMdht().setCode(statusCode.getCS());
 	}
 
+	@Deprecated
 	public EList<SubstanceAdministration> getSubstanceadministrations() {
 		final EList<SubstanceAdministration> substances = this.getMdht()
 				.getMedicationTreatmentPlanSection().getSubstanceAdministrations();
@@ -579,6 +593,35 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		// TODO Auto-generated method stub
 
 		this.getMdht().getMedicationTreatmentPlanSection().init();
+	}
+
+	@Deprecated
+	public void old_setMtpEntry(MedicationTreatmentPlanItemEntry mtpEntry) {
+		if (mtpEntry != null) {
+			/**
+			 * Set ID identically to the one of the Clinical Document, see
+			 * 7.5.2.4
+			 **/
+			this.getMedicationTreatmentPlanSection().getMdht().setId(
+					/* mtpEntry.getMdht().getClinicalDocument().getId() */mtpEntry.getId().getIi());
+			/** Patient Instructions **/
+
+			setPatientInstructions(
+					mtpEntry.getPatientMedicalInstructions().getMdht().getText().getText());
+
+			/** Professional Instructions **/
+			final MedicationFullfillmentInstructionsEntry proInstructions = mtpEntry
+					.getMedicationFullfillmentInstructions();
+			/** Reference **/
+			final EList<Reference> references = mtpEntry.getMdht().getReferences();
+			/** Entry content -> substanceAdmin **/
+			final EList<SubstanceAdministration> substAdministrations = mtpEntry.getMdht()
+					.getSubstanceAdministrations();
+			for (final SubstanceAdministration substanceAdministration : substAdministrations) {
+				this.getMedicationTreatmentPlanSection().getMdht()
+						.addSubstanceAdministration(substanceAdministration);
+			}
+		}
 	}
 
 	@Deprecated
@@ -623,15 +666,10 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		System.out.println(entriesMedicationSections);
 	}
 
-	public void setMtpEntry(MedicationTreatmentPlanItemEntry mtpEntry) {
-		if (mtpEntry != null) {
-			final EList<SubstanceAdministration> substAdministrations = mtpEntry.getMdht()
-					.getSubstanceAdministrations();
-			for (final SubstanceAdministration substanceAdministration : substAdministrations) {
-				this.getMedicationTreatmentPlanSection().getMdht()
-						.addSubstanceAdministration(substanceAdministration);
-			}
-		}
+	// use this one
+	public void setMtpEntry(MedicationTreatmentPlanItemEntry mtp) {
+		this.getMdht().getMedicationTreatmentPlanSection()
+				.addSubstanceAdministration(mtp.getMdht());
 	}
 
 	public void setPatientInstructions(String instructions) {

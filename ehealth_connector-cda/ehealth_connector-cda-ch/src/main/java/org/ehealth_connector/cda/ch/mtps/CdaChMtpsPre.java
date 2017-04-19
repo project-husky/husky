@@ -16,6 +16,9 @@
 
 package org.ehealth_connector.cda.ch.mtps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
@@ -83,8 +86,18 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			 * substAdministrations) { this.getPrescriptionSection().getMdht()
 			 * .addSubstanceAdministration(substanceAdministration); }
 			 */
+			this.getMdht().getPrescriptionSection().addSubstanceAdministration(entry.getMdht());
 
 		}
+	}
+
+	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
+		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht()
+				.getPrescriptionSection().getPrescriptionItemEntries()) {
+			entries.add(new PrescriptionItemEntry(entry));
+		}
+		return entries;
 	}
 
 	/**

@@ -17,8 +17,11 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemReferenceEntry;
+import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceSection;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
@@ -74,6 +77,23 @@ public class CdaChMtpsPadv
 		super(doc);
 	}
 
+	public PharmaceuticalAdviceItemEntry getPadvItemEntry() {
+		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
+		final org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry entry = this
+				.getMdht().getPharmaceuticalAdviceSection().getPharmaceuticalAdviceItemEntry();
+		final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry mtpItemRefEntry = entry
+				.getMedicationTreatmentPlanItemReferenceEntry();
+		final org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry disItemRefEntry = entry
+				.getDispenseItemReferenceEntry();
+		final org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemReferenceEntry preItemRefEntry = entry
+				.getPrescriptionItemReferenceEntry();
+		padvEntry.setMedicationTreatmentPlanItemReferenceEntry(
+				new MedicationTreatmentPlanItemReferenceEntry(mtpItemRefEntry));
+		padvEntry.setDispenseItemReferenceEntry(new DispenseItemReferenceEntry(disItemRefEntry));
+		padvEntry.setNewPresciptionEntry(new PrescriptionItemEntry(preItemRefEntry));
+		return padvEntry;
+	}
+
 	/**
 	 * Gets the pharmaceutical advice section.
 	 *
@@ -87,6 +107,7 @@ public class CdaChMtpsPadv
 		if (entry != null) {
 			// do a list of Padv, which are an encapsulation of observations
 			// entryRelationships
+			this.getMdht().getPharmaceuticalAdviceSection().addObservation(entry.getMdht());
 
 		}
 	}
