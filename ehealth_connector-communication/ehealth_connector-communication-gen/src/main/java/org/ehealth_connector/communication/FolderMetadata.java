@@ -181,7 +181,7 @@ public class FolderMetadata {
 	 * @param lastUpdateTime
 	 */
 	public void setLastUpdateTime(Date lastUpdateTime) {
-		f.setLastUpdateTime(XdsMetadataUtil.convertDateToDTMString(lastUpdateTime));
+		f.setLastUpdateTime(XdsMetadataUtil.convertDateToDtmString(lastUpdateTime));
 	}
 
 	/**

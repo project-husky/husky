@@ -536,7 +536,7 @@ public class XdsMetadataUtil {
 	 *            the date to be formatted to a string
 	 * @return the string representing the date object</div>
 	 */
-	public static String convertDateToDTMString(Date dateTime) {
+	public static String convertDateToDtmString(Date dateTime) {
 		String retVal = null;
 		if (dateTime != null) {
 			final SimpleDateFormat sdf = new SimpleDateFormat(DTM_FMT_YMDHMS);
