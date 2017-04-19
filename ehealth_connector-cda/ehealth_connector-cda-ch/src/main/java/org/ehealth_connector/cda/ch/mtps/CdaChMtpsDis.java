@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -78,5 +79,12 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 */
 	public DispenseSection getDispenseSection() {
 		return new DispenseSection(this.getMdht().getDispenseSection());
+	}
+
+	public void setDispenseItemEntry(DispenseItemEntry entry) {
+		// TODO Auto-generated method stub
+		if (entry != null) {
+			// todo: add into a list of disEntries [deliveredProduct = supply]
+		}
 	}
 }

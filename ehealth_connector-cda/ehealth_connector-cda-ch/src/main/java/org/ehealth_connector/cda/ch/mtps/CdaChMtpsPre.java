@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -69,6 +70,21 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 */
 	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre doc) {
 		super(doc);
+	}
+
+	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
+		if (entry != null) {
+
+			// do list of Pre, which are substanceAdmin
+			/*
+			 * final EList<SubstanceAdministration> substAdministrations =
+			 * entry.getMdht() .getSubstanceAdministrations(); for (final
+			 * SubstanceAdministration substanceAdministration :
+			 * substAdministrations) { this.getPrescriptionSection().getMdht()
+			 * .addSubstanceAdministration(substanceAdministration); }
+			 */
+
+		}
 	}
 
 	/**

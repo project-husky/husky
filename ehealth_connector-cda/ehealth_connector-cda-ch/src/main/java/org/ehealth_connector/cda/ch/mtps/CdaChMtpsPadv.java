@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceSection;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -81,4 +82,13 @@ public class CdaChMtpsPadv
 	public PharmaceuticalAdviceSection getPharmaceuticalAdviceSection() {
 		return new PharmaceuticalAdviceSection(this.getMdht().getPharmaceuticalAdviceSection());
 	}
+
+	public void setPadvItemEntry(PharmaceuticalAdviceItemEntry entry) {
+		if (entry != null) {
+			// do a list of Padv, which are an encapsulation of observations
+			// entryRelationships
+
+		}
+	}
+
 }

@@ -16,17 +16,14 @@
 
 package org.ehealth_connector.cda.ch.mtps;
 
-import org.ehealth_connector.cda.ExternalDocumentEntry;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
-import org.ehealth_connector.cda.ch.vacd.Immunization;
 import org.ehealth_connector.cda.ihe.pharm.MedicationListSection;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipExternalReference;
 
 /**
  * The Class CdaChMtpsPml. See also CDA CH MTPS 7.4.2.2
@@ -38,9 +35,8 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 */
 	public CdaChMtpsPml() {
 		this(LanguageCode.ENGLISH);
-		// super(CHFactory.eINSTANCE.createCdaChMtpsPml().init());
 		super.initCda();
-		// initPml();
+
 	}
 
 	/**
@@ -80,7 +76,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		super(doc);
 	}
 
-	public void addMTP(MedicationTreatmentPlanItemEntry mtp) {
+	public void addMtpEntry(MedicationTreatmentPlanItemEntry mtp) {
 		MedicationListSection section = null;
 		if (getMdht().getMedicationListSection() == null) {
 			section = new MedicationListSection(getLanguageCode());
@@ -103,23 +99,15 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return null;
 	}
 
-	public Reference getReference() {
-		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
-		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
-		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
-		documentEntry.setId(new Identificator(getMdht().getId()));
-		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
-		return referenceXCRPT;
+	public List<MedicationTreatmentPlanItemEntry> getMedicationTreatmentPlanItemEntries() {
+		final List<MedicationTreatmentPlanItemEntry> entries = new ArrayList<MedicationTreatmentPlanItemEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry entry : getMdht()
+				.getMedicationListSection().getMedicationTreatmentPlanItemEntries()) {
+			entries.add(new MedicationTreatmentPlanItemEntry(entry));
+		}
+		return entries;
 	}
 
 	// Gets the default section table.
 
-	public String getTable() {
-		return null;
-	}
-
-	// adds a section the table for a pml
-	public String getTableRow(Immunization immunization, String contendIdPrefix) {
-		return null;
-	}
 }
