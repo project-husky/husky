@@ -351,7 +351,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		// test the entry add in Mtp
 		final CdaChMtpsMtp cdaMtp = new CdaChMtpsMtp();
 		cdaMtp.setMtpEntry(mtpItem1);
-
+		cdaMtp.getMtpEntry();
 		// MTPItemEntry
 		pmlMtpsDoc.addMtpEntry(mtpItem1);
 		// PRE: Prescriptions -> chapitre 7.5.7 à la page 65.
@@ -361,6 +361,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		// test the entry add in Pre (list of substanceAdmin)
 		final CdaChMtpsPre cdaPre = new CdaChMtpsPre();
 		cdaPre.addPrescriptionItemEntry(preItem1);
+		cdaPre.getPrescriptionItemEntries();
 
 		pmlMtpsDoc.getMedicationListSection().addPrescriptionItemEntry(preItem1);
 		// DIS: Dispensations -> chapitre 7.5.8 à la page 69.
@@ -370,19 +371,19 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		// test the entry set in Dis (list of disItems)
 		final CdaChMtpsDis cdaDis = new CdaChMtpsDis();
 		cdaDis.setDispenseItemEntry(disItem1);
-
+		cdaDis.getDispenseItemEntry();
 		pmlMtpsDoc.getMedicationListSection().addDispenseItemEntry(disItem1);
 		// PADV: Conseils pharmaceutiques -> chapitre 7.5.9 à la page 72.
 		padvItem1 = createPadvItemEntry();
-
-		// test the entry add in Padv (list of Padv entries)
-		final CdaChMtpsPadv cdaPadv = new CdaChMtpsPadv();
-		cdaPadv.setPadvItemEntry(padvItem1);
 
 		// Add the references
 		padvItem1.setDispenseItemReferenceEntry(createDispenseItemReferenceEntry(disItem1));
 		padvItem1.setPrescriptionItemReferenceEntry(createPreItemReferenceEntry(preItem1));
 		padvItem1.setMedicationTreatmentPlanItemReferenceEntry(refToMTP1);
+		// test the entry add in Padv (list of Padv entries)
+		final CdaChMtpsPadv cdaPadv = new CdaChMtpsPadv();
+		cdaPadv.setPadvItemEntry(padvItem1);
+		cdaPadv.getPadvItemEntry();
 		pmlMtpsDoc.getMedicationListSection().addPharmaceuticalAdviceItemEntry(padvItem1);
 	}
 
@@ -544,7 +545,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final PharmComponent1 component1 = CDAFactory.eINSTANCE.createPharmComponent1();
 		component1.setSubstitutionMade(substitution);
 		disEntry.getMdht().setComponent1(component1);
-
 		return disEntry;
 	}
 
@@ -895,6 +895,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		final PatientMedicalInstructionsEntry pi = new PatientMedicalInstructionsEntry();
 		pi.setTextReference(instructions);
+		pi.getMdht().setText(DatatypesFactory.eINSTANCE.createED(instructions));
 		return pi;
 	}
 
@@ -1089,7 +1090,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		// Date de début -> effectiveTime (planification)
 		substanceAdministration.getEffectiveTimes().add(startTime);
-
 		// Date de fin
 		substanceAdministration.getEffectiveTimes().add(endTime);
 
@@ -1817,10 +1817,9 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		substanceAdministrationMtp1 = createSubstanceAdministration(getNullFlavorCe(),
 				getNullFlavorCe(), getDoseQuantity(), getRateQuantity(), createTime("09.09.2016"),
 				getConsumable(), createAuthor1(), createApproachSiteCode1(),
-				createTime("10.10.2016"), createTime("12.12.2016"), rOa,
-				createUniqueDailyDose("09.12.206"), getMultipleDailyDoses(), doseQuantity,
+				createTime("10.10.2016"), createTime("12.04.2017"), rOa,
+				createUniqueDailyDose("09.12.2016"), getMultipleDailyDoses(), doseQuantity,
 				getQtyUnit(), isSubstituable, idMtp1, templateIds);
-		// substanceAdministrationMTP1 = createSubstanceAdministration1();
 		medicationFullfillmentInstructions1 = createProfessionalInstructions1(
 				medicationinstructions);
 		patientMedicalInstructions1 = createPatientMedicalInstructions1(patientinstructions);
