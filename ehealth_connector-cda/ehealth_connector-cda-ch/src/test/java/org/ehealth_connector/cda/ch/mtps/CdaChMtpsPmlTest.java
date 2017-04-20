@@ -75,7 +75,6 @@ import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
 import org.openhealthtools.mdht.uml.cda.Material;
-import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.PharmAsContent;
 import org.openhealthtools.mdht.uml.cda.PharmComponent1;
@@ -89,7 +88,6 @@ import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -317,7 +315,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private MedicationFullfillmentInstructionsEntry medicationFullfillmentInstructions1;
 	private MedicationTreatmentPlanItemEntry mtpItem1 = null;
-	private CdaChMtpsMtp mtpMtpsDoc;
 	private PharmaceuticalAdviceItemEntry padvItem1 = null;
 	private PatientMedicalInstructionsEntry patientMedicalInstructions1;
 	private CdaChMtpsPml pmlMtpsDoc;
@@ -341,7 +338,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	 */
 	private void addBodySections() {
 
-		// Create MTP Items Plan de traitement médicamenteux
+		// Create MTP Items Medication Treament Plan
 		mtpItem1 = createMedicationTreatmentPlanItemEntry1();
 		/** REFR to MTPItem **/
 		final MedicationTreatmentPlanItemReferenceEntry refToMTP1 = createMtpItemReferenceEntry(
@@ -385,20 +382,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		cdaPadv.setPadvItemEntry(padvItem1);
 		cdaPadv.getPadvItemEntry();
 		pmlMtpsDoc.getMedicationListSection().addPharmaceuticalAdviceItemEntry(padvItem1);
-	}
-
-	private void addBodySectionsMtp() {
-
-		// Create MTP Items Plan de traitement médicamenteux
-		mtpMtpsDoc.setId(idMtp1);
-		mtpMtpsDoc.setPatientInstructions("humecter uniquement avec du NaCl");
-		mtpMtpsDoc.setProfessionalInstructions("découper avant de panser");
-		mtpMtpsDoc.setReference(createIdentificator1());
-		mtpMtpsDoc.addSubstanceAdministration(getNullFlavorCe(), getNullFlavorCe(),
-				getDoseQuantity(), getRateQuantity(), createStartTime(), getConsumable(),
-				createAuthor1(), createApproachSiteCode1(), createStartTime(), getEndTime(),
-				RouteOfAdministration.PO, createUniqueDailyDose("25.12.2016"),
-				getMultipleDailyDoses(), new Double(10), getQtyUnit(), true);
 	}
 
 	private Reference assignReference(Identificator idRoot) {
@@ -448,6 +431,47 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		return approachSiteCode;
 	}
 
+	/**
+	 * Product Name (manufacturer) of the medication (consumable ->
+	 * manufacturedProduct) Name (manufacturer) of the package and form of
+	 * dispense. number of lot and size of package
+	 **/
+	private Consumable createConsumable() {
+
+		final Consumable consumable = new Consumable("CANDESARTAN Spirig HC cpr 16 mg");
+		consumable.setLotNr("lotNr");
+		consumable.setManufacturedProductId(getGtin());
+		consumable.setWhoAtcCode(getCodeWhoAtc());
+		consumable.setManufacturer(getOrganization());
+		// Produit
+		consumable.getMdht().setManufacturedProduct(getProduct());
+		return consumable;
+	}
+
+	private EntryRelationship createDailyDosage() {
+
+		final EntryRelationship dailyDosage = CDAFactory.eINSTANCE.createEntryRelationship();
+		dailyDosage.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+
+		final SubstanceAdministration administration = CDAFactory.eINSTANCE
+				.createSubstanceAdministration();
+		administration.setClassCode(ActClass.SBADM);
+		administration.setMoodCode(x_DocumentSubstanceMood.INT);
+		administration.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.6", "IHE PHARM").getIi());
+		final CD approachSiteCode = createApproachSiteCode1();
+		administration.getApproachSiteCodes().add(approachSiteCode);
+		administration.setRouteCode(getNullFlavorCe());
+		administration.setDoseQuantity(getNullFlavorIvlPq());
+		administration.setRateQuantity(getNullFlavorIvlPq());
+		administration.getEffectiveTimes().add(getNullFlavorIvlTs());
+		final Consumable consumable = createConsumable();
+		consumable.getMdht().setNullFlavor(NullFlavor.NA);
+		administration.setConsumable(createConsumable().getMdht());
+		dailyDosage.setSubstanceAdministration(administration);
+		return dailyDosage;
+	}
+
 	public DispenseItemEntry createDispenseItemEntry() {
 		/** DIS Item Declaration **/
 		final DispenseItemEntry disEntry = new DispenseItemEntry(getLanguageCode());
@@ -459,23 +483,19 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		/** ExternalDocument MTP **/
 		/*
-		 * [R2] Identifiant du document duquel cet élément provient lorsque
-		 * l’élément se trouve dans un document PML [NP] Lorsque l’élément se
-		 * trouve dans un document PRE
+		 * [R2] Identity of the parent document when it's in a PML doc; [NP]
+		 * when it's in a PRE doc
 		 */
 
 		/** Precondition/Criterion/Text **/
 		/*
-		 * Préconditions pour l’utilisation du médicament. La référence au texte
-		 * correspondant dans la partie lisible pour l’être humain doit être
-		 * indiquée au moyen de criterion/text/reference[@value=‘#<valeur de
-		 * content[@ID]>‘]
+		 * Preconditions to use a drug. the reference corresponding should be
+		 * indicated with criterion/text/reference[@value=‘#<content
+		 * value[@ID]>‘]
 		 */
 
 		/** DispenseItem **/
 
-		// final Supply deliveredProduct = getSupply();
-		// disEntry.getMdht().addSupply(deliveredProduct);
 		disEntry.getMdht().setClassCode(ActClassSupply.SPLY);
 		disEntry.getMdht().setMoodCode(x_DocumentSubstanceMood.RQO);
 		disEntry.getMdht().setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
@@ -499,40 +519,34 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		documentEntry.setId(pmlMtpsDoc.getId());
 		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
 		disEntry.getMdht().getReferences().add(referenceXCRPT);
-		/** OK **/
+
 		// Authors
 		disEntry.getMdht().getAuthors().add(createDispenseAuthor1().getAuthorMdht());
 
-		/** OK **/
-		// Date de début de prescription
+		// Prescription Date => begin
 		disEntry.getMdht().getEffectiveTimes().add(createStartTime());
 
-		/** OK **/
-		// Date de fin
-		disEntry.getMdht().getEffectiveTimes().add(getEndTime());
+		// Prescription Date => end
+		disEntry.getMdht().getEffectiveTimes().add(createEndTime());
 
-		// Prescripteur
+		// Prescribers
 
-		// Auteur Prescription
+		// Authors Prescription
 		disEntry.getMdht().getAuthors().add(createPrescriptionAuthor2().getAuthorMdht());
 
 		// Auteur Dispensation
 
 		disEntry.getMdht().getAuthors().add(createDispenseAuthor2().getAuthorMdht());
 
-		/** OK **/
 		// Dose journalière
-		disEntry.getMdht().getEntryRelationships().add(getDailyDosage());
+		disEntry.getMdht().getEntryRelationships().add(createDailyDosage());
 
-		/** OK **/
 		// Quantité prescrite / à remettre
 		disEntry.getMdht().getEntryRelationships().add(getPrescribedQty());
 
-		/** OK **/
 		// Raison du traitement
 		disEntry.getMdht().addAct(getReasonOfTreatment());
 
-		/** OK **/
 		// Substitution autorisée
 		final PharmSubstitutionMade substitution = CDAFactory.eINSTANCE
 				.createPharmSubstitutionMade();
@@ -577,11 +591,33 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		return referenceEntry;
 	}
 
+	private IVL_PQ createDoseQuantity() {
+
+		final IVL_PQ doseQuantity = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		doseQuantity.setUnit("mg");
+		final IVXB_PQ highDose = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		highDose.setValue((double) 16);
+		final IVXB_PQ lowDose = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		highDose.setValue((double) 1);
+		doseQuantity.setHigh(highDose);
+		doseQuantity.setLow(lowDose);
+		doseQuantity.setUnit("mg");
+		return doseQuantity;
+
+	}
+
 	private IVL_TS createEffectiveTimePadv1() {
 
 		final IVL_TS ivlTs1 = DatatypesFactory.eINSTANCE.createIVL_TS();
 		ivlTs1.setValue("20161931093000");
 		return ivlTs1;
+	}
+
+	private SXCM_TS createEndTime() {
+
+		final SXCM_TS endTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
+		endTime.setValue(DateUtil.formatDate(DateUtil.date("27.10.2017")));
+		return endTime;
 	}
 
 	private CdaChMtpsPml createHeader() {
@@ -611,63 +647,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		d.setId(mtpsPmlId);
 		referenceXcrpt = assignReference(mtpsPmlId);
 		return d;
-	}
-
-	private CdaChMtpsMtp createHeaderMtp() {
-
-		final Author md = getMdInfo();
-		final Author legalAuthenticator = getLegalAuthenticatorInfo();
-		final Organization mdOrganization = new Organization("HUG", "7608888888888");
-		final Address mdAddress = new Address("rue Gabrielle-Perret-Gentil, 4", "1205", "Geneva",
-				AddressUse.BUSINESS);
-		mdAddress.setCountry("CH");
-
-		mdOrganization.addAddress(mdAddress);
-		mdOrganization.setTelecoms(md.getTelecoms());
-
-		// Patient (recordTarget)
-		final Name patientName = new Name("David", "Issom");
-		final Patient patient = new Patient(patientName, AdministrativeGender.MALE,
-				DateUtil.date("27.10.1987"));
-		final Address patientAdresse = new Address("rue Le-Corbusier", "13A", "1208",
-				"Genève"/*
-						 * , AddressUse.PRIVATE
-						 */);
-		final Telecoms patientTelecoms = new Telecoms();
-		patientTelecoms.addPhone("+41763064535", AddressUse.PRIVATE);
-		patient.setTelecoms(patientTelecoms);
-
-		// Adding an id using an OID that is already known by the convenience
-		// API (AHV-Nr/No AVS/SSN)
-		// patient.addId(new
-		// Identificator(CodeSystems.SwissSSNDeprecated.getCodeSystemId(),"123.71.332.115"));
-
-		// Adding an id using an OID that is not known by the convenience API,
-		// yet
-		patient.addId(new Identificator("8077560000000000000000", "2.16.756.5.30.1.123.100.1.1.1"));
-		patient.addAddress(patientAdresse);
-		final Identificator mtpsPmlId = createPmlId();
-
-		// Create CDACHMTPSPML (Header)
-		final CdaChMtpsMtp d = new CdaChMtpsMtp();
-		d.setTimestamp(new Date());
-		d.setLegalAuthenticator(legalAuthenticator);
-		d.setCustodian(mdOrganization);
-		d.setLanguageCode(getLanguageCode());
-		d.addAuthor(md); // author obligatoire
-		d.setPatient(patient); // recordTarget obligatoire
-		d.setId(mtpsPmlId);
-		referenceXcrpt = assignReference(mtpsPmlId);
-		return d;
-	}
-
-	@SuppressWarnings("unused")
-	private Identificator createIdentificator(MedicationItemEntry medicationItemEntry) {
-		Identificator id = null;
-		if ((medicationItemEntry.getIds() != null) && (medicationItemEntry.getIds().size() > 0)) {
-			id = new Identificator(medicationItemEntry.getIds().get(0));
-		}
-		return id;
 	}
 
 	private Identificator createIdentificator(String oid, String id) {
@@ -722,81 +701,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		referenceEntry.getMdht().addSubstanceAdministration(administration);
 
 		return referenceEntry;
-	}
-
-	@SuppressWarnings("unused")
-	private Observation createObservation(II mtpId) {
-
-		final Observation observationPadv = CDAFactory.eINSTANCE.createObservation();
-		/** REFR to MTPItem **/
-		//
-		/*
-		 * if (mtpId != null) {
-		 * observationPadv.getEntryRelationships().add(getMtpReference(mtpId));
-		 * }
-		 */
-		/** ExternalDocument MTP **/
-		/*
-		 * [R2] Identifiant du document duquel cet élément provient lorsque
-		 * l’élément se trouve dans un document PML [NP] Lorsque l’élément se
-		 * trouve dans un document PRE
-		 */
-
-		/** Precondition/Criterion/Text **/
-		/*
-		 * Préconditions pour l’utilisation du médicament. La référence au texte
-		 * correspondant dans la partie lisible pour l’être humain doit être
-		 * indiquée au moyen de criterion/text/reference[@value=‘#<valeur de
-		 * content[@ID]>‘]
-		 */
-
-		observationPadv.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.3", "IHE PHARM").getIi());
-		observationPadv.setClassCode(ActClassObservation.OBS);
-		observationPadv.setMoodCode(x_ActMoodDocumentObservation.EVN);
-		observationPadv.setCode(DatatypesFactory.eINSTANCE.createCD("1.3.6.1.4.1.19376.1.9.2.1",
-				PharmaceuticalAdviceStatusList.CODE_SYSTEM_NAME));
-		observationPadv.setText(DatatypesFactory.eINSTANCE.createED("reference value='#...'"));
-
-		/** OBSERVATION **/
-		observationPadv.addSubstanceAdministration(createSubstanceAdministration1());
-
-		/** OK **/
-		// Authors
-
-		observationPadv.getAuthors().add(createPlanificationAuthor().getAuthorMdht());
-
-		/** OK **/
-		// Nouvelle prescription
-		final EntryRelationship newPrescription = CDAFactory.eINSTANCE.createEntryRelationship();
-		newPrescription.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		newPrescription.setInversionInd(false);
-		final Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
-		organizer.setClassCode(x_ActClassDocumentEntryOrganizer.CLUSTER);
-		organizer.setMoodCode(ActMood.EVN);
-		final CS statusCodeOrganizer = DatatypesFactory.eINSTANCE.createCS();
-		statusCodeOrganizer.setCode(StatusCode.COMPLETED_CODE);
-		organizer.setStatusCode(statusCodeOrganizer);
-		final Component4 newPrescriptionComponent = CDAFactory.eINSTANCE.createComponent4();
-		newPrescriptionComponent.setSeperatableInd(DatatypesFactory.eINSTANCE.createBL(false));
-		newPrescriptionComponent.setSubstanceAdministration(createSubstanceAdministration1());
-		organizer.getComponents().add(newPrescriptionComponent);
-		newPrescription.setOrganizer(organizer);
-		observationPadv.getEntryRelationships().add(newPrescription);
-
-		/** OK **/
-		// NewPlanification
-		final EntryRelationship newPlanification = CDAFactory.eINSTANCE.createEntryRelationship();
-		newPlanification.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		newPlanification.setInversionInd(false);
-		newPlanification.setSubstanceAdministration(createSubstanceAdministration1());
-		observationPadv.getEntryRelationships().add(newPlanification);
-
-		/** OK **/
-		// Dosage
-		observationPadv.getEntryRelationships().add(getDailyDosage());
-
-		return observationPadv;
 	}
 
 	private PharmaceuticalAdviceItemEntry createPadvItemEntry() {
@@ -855,11 +759,10 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		/** EFFECTIVE TIMES **/
 		padvEntry.getMdht().setEffectiveTime(effectiveTimePadv1);
-		/** OK **/
+
 		// Authors
 		padvEntry.getMdht().getAuthors().add(createAdviceAuthor1().getAuthorMdht());
 
-		/** OK **/
 		// Nouvelle prescription
 		final EntryRelationship newPrescription = CDAFactory.eINSTANCE.createEntryRelationship();
 		newPrescription.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
@@ -877,7 +780,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		newPrescription.setOrganizer(organizer);
 		padvEntry.getMdht().getEntryRelationships().add(newPrescription);
 
-		/** OK **/
 		// NewPlanification
 		final EntryRelationship newPlanification = CDAFactory.eINSTANCE.createEntryRelationship();
 		newPlanification.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
@@ -885,9 +787,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		newPlanification.setSubstanceAdministration(createSubstanceAdministration1());
 		padvEntry.getMdht().getEntryRelationships().add(newPlanification);
 
-		/** OK **/
 		// Dosage
-		padvEntry.getMdht().getEntryRelationships().add(getDailyDosage());
+		padvEntry.getMdht().getEntryRelationships().add(createDailyDosage());
 		return padvEntry;
 	}
 
@@ -928,12 +829,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		return new Identificator("2.16.756.5.30.4.9.1.1.9000.97005632.20150813083515.1",
 				"MTPS-V1-PML-FULL");
-	}
-
-	private Identificator createPreIdentificator1() {
-
-		return new Identificator("2.16.756.5.30.4.9.1.1.9000.97005632.20150505140000.1",
-				"MTPS-V1-PRE1.1");
 	}
 
 	private PrescriptionItemReferenceEntry createPreItemReferenceEntry(PrescriptionItemEntry mdht) {
@@ -980,19 +875,15 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		/** Reference **/
 		substanceAdministration.getReferences().add(referenceXcrpt);
 
-		/** OK **/
 		// Consumable (Substance(s) active(s) et Produit)
-		preEntry.getMdht().setConsumable(getConsumable().getMdht());
+		preEntry.getMdht().setConsumable(createConsumable().getMdht());
 
-		/** OK **/
 		// Authors
 		preEntry.getMdht().getAuthors().add(createPrescriptionAuthor().getAuthorMdht());
 
-		/** OK **/
 		// Site d’administration
 		preEntry.getMdht().getApproachSiteCodes().add(createApproachSiteCode1());
 
-		/** OK **/
 		// Date de début de prescription
 		preEntry.getMdht().getEffectiveTimes().add(createStartTime());
 
@@ -1003,33 +894,26 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		preEntry.getMdht().getEffectiveTimes().add(getMultipleDailyDoses());
 
 		// doseQuantity - Quantité unitaire (unit of Quantité [supply] class)
-		preEntry.getMdht().setDoseQuantity(getDoseQuantity());
+		preEntry.getMdht().setDoseQuantity(createDoseQuantity());
 
-		/** OK **/
 		// Date de fin
-		preEntry.getMdht().getEffectiveTimes().add(getEndTime());
+		preEntry.getMdht().getEffectiveTimes().add(createEndTime());
 
-		/** OK **/
 		// Dose journalière- fréquence (prise quotidienne unique)
 		preEntry.getMdht().getEffectiveTimes().add(createUniqueDailyDose("04.04.2014"));
 
-		/** OK **/
 		// repeatNumber
 		preEntry.getMdht().setRepeatNumber(getRepeatNumber());
 
-		/** OK **/
 		// rateQuantity
 		preEntry.getMdht().setRateQuantity(getRateQuantity());
 
-		/** OK **/
 		// Quantité prescrite / à remettre
 		preEntry.getMdht().getEntryRelationships().add(getPrescribedQty());
 
-		/** OK **/
 		// Raison du traitement
 		preEntry.getMdht().addAct(getReasonOfTreatment());
 
-		/** OK **/
 		// Substitution autorisée
 		preEntry.getMdht().getEntryRelationships().add(getPossibleSubstitution());
 		preEntry.getMdht().addSubstanceAdministration(substanceAdministration);
@@ -1048,7 +932,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private SXCM_TS createStartTime() {
 
 		final SXCM_TS startTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		startTime.setValue(DateUtil.formatDate(new Date(2016, 10, 7, 12, 30)));
+		startTime.setValue(DateUtil.formatDate(DateUtil.nowAsDate()));
 		return startTime;
 	}
 
@@ -1074,50 +958,49 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		substanceAdministration.setText(Util.createReference("null"));
 		substanceAdministration.setStatusCode(getCs("completed"));
 		substanceAdministration.setPriorityCode(priorityCode);
-		// doseQuantity - Quantité unitaire (unit of Quantité [supply] class)
+		// doseQuantity - (unit of Quantity [supply] class)
 		substanceAdministration.setDoseQuantity(doseQuantity);
 		// rateQuantity
 		substanceAdministration.setRateQuantity(rateQuantity);
 		substanceAdministration.getEffectiveTimes().add(planificationTime);
-		// Consumable (Substance(s) active(s) et Produit)
+		// Consumable (active substance and product)
 		substanceAdministration.setConsumable(consumable.getMdht());
 
 		// Authors
 		substanceAdministration.getAuthors().add(author.getAuthorMdht());
 
-		// Site d’administration
+		// administration site
 		substanceAdministration.getApproachSiteCodes().add(approachSite);
 
-		// Date de début -> effectiveTime (planification)
+		// Begin date -> effectiveTime (planification)
 		substanceAdministration.getEffectiveTimes().add(startTime);
-		// Date de fin
+		// End date
 		substanceAdministration.getEffectiveTimes().add(endTime);
 
-		// Voie d’administration (routeCode)
+		// Way of administration (routeCode)
 		substanceAdministration
 				.setRouteCode(routeOfAdministration.getCode(this.getLanguageCode()).getCE());
-		// mtpEntry.setRouteOfAdministration(getRouteOfAdministration());
 
-		// Dose journalière- fréquence (prise quotidienne unique)
+		// Daily dosage - frequency (for unique intake)
 		if (uniqueDailyDoseTime != null) {
 			substanceAdministration.getEffectiveTimes().add(uniqueDailyDoseTime);
 		}
-		// Dose journalière- fréquence (prise quotidienne multiple)
+		// Daily dosage - frequency (for multiple daily intake)
 		if (multipleDailyDoseTime != null) {
 			substanceAdministration.getEffectiveTimes().add(multipleDailyDoseTime);
 		}
 
-		// Quantité prescrite / à remettre
+		// Prescribed Quantity - that should be given to the patient
 		substanceAdministration.getEntryRelationships()
 				.add(getPrescribedQty(prescribedQuantity, unitOfPrescribedQuantity));
 
-		// Raison du traitement (see Act -> SetReasonForTreatment)
+		// Reason for the treatment (see Act -> SetReasonForTreatment)
 
-		// Substitution autorisée
+		// Authorization of substitution
 		if (isSubstitionPossible) {
 			substanceAdministration.getEntryRelationships().add(getPossibleSubstitution());
 		}
-		// Reference ID de MTP
+		// Reference ID of the MTP doc
 		final Reference referenceXCRPTToMTP = CDAFactory.eINSTANCE.createReference();
 		referenceXCRPTToMTP.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
 		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
@@ -1153,43 +1036,42 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		substanceAdministration.setRateQuantity(getNullFlavorIvlPq());
 		substanceAdministration.getEffectiveTimes().add(getNullFlavorIvlTs());
 		// Consumable (Substance(s) active(s) et Produit)
-		substanceAdministration.setConsumable(getConsumable().getMdht());
+		substanceAdministration.setConsumable(createConsumable().getMdht());
 
 		// Authors
 		substanceAdministration.getAuthors().add(createPlanificationAuthor().getAuthorMdht());
 
-		// Site d’administration
+		// Administration site
 		substanceAdministration.getApproachSiteCodes().add(createApproachSiteCode1());
 
-		// Date de début -> effectiveTime (planification)
+		// Beginning date -> effectiveTime (planification)
 		substanceAdministration.getEffectiveTimes().add(createStartTime());
 
-		// Date de fin
-		substanceAdministration.getEffectiveTimes().add(getEndTime());
+		// End date
+		substanceAdministration.getEffectiveTimes().add(createEndTime());
 
-		// Voie d’administration (routeCode)
+		// Route/Way of administration (routeCode)
 		substanceAdministration.setRouteCode(getRouteOfAdministration().getCE());
-		// mtpEntry.setRouteOfAdministration(getRouteOfAdministration());
 
-		// Dose journalière- fréquence (prise quotidienne unique)
+		// daily dosage - frequency (unique daily intake)
 		substanceAdministration.getEffectiveTimes().add(createUniqueDailyDose("31.10.2016"));
 
-		// Dose journalière- fréquence (prise quotidienne multiple)
+		// daily dosage - frequency (multiple daily intake)
 		substanceAdministration.getEffectiveTimes().add(getMultipleDailyDoses());
 
-		// doseQuantity - Quantité unitaire (unit of Quantité [supply] class)
-		substanceAdministration.setDoseQuantity(getDoseQuantity());
+		// doseQuantity - unit of Quantité [supply] class)
+		substanceAdministration.setDoseQuantity(createDoseQuantity());
 
 		// rateQuantity
 		substanceAdministration.setRateQuantity(getRateQuantity());
 
-		// Quantité prescrite / à remettre
+		// Prescribed quantity that should be handed out to the patient
 		substanceAdministration.getEntryRelationships().add(getPrescribedQty());
 
-		// Raison du traitement
+		// Reason of treatment
 		substanceAdministration.addAct(getReasonOfTreatment());
 
-		// Substitution autorisée
+		// Authorization of substition
 		substanceAdministration.getEntryRelationships().add(getPossibleSubstitution());
 		// Reference
 		final Reference referenceXCRPTToMTP = CDAFactory.eINSTANCE.createReference();
@@ -1209,9 +1091,9 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	}
 
 	/**
-	 * Fréquence de prise/administration/Dose journalière @7.5.10 ////
-	 * Medication Frequency Content Module // Auteur de la planification (PML)
-	 * ou pas d'auteur [NP] lors de MTP //// (p.88)
+	 * Frequency of intake / administration / daily dosage, see @7.5.10 ////
+	 * Medication Frequency Content Module // Author of planification if [PML]
+	 * or no author if [NP] in MTP doc //// (p.88)
 	 **/
 	private SXCM_TS createUniqueDailyDose(String dateMMDDYYYY) {
 
@@ -1229,9 +1111,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	private CdaChMtpsPml deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsPml(// BUG: There would be an exception caught here
-								// because SXPR_TS has
-				// issues, and still has problems of implementation
+		return new CdaChMtpsPml(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) CDAUtil.load(source));
 	}
 
@@ -1323,73 +1203,10 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	}
 
-	/**
-	 * Produit Nom (commercial) du médicament (consumable ->
-	 * manufacturedProduct) Nom (commercial) de l’emballage Forme de
-	 * dispensation Numéro de lot Taille de l’emballage
-	 **/
-	private Consumable getConsumable() {
-
-		final Consumable consumable = new Consumable("CANDESARTAN Spirig HC cpr 16 mg");
-		consumable.setLotNr("lotNr");
-		consumable.setManufacturedProductId(getGtin());
-		consumable.setWhoAtcCode(getCodeWhoAtc());
-		consumable.setManufacturer(getOrganization());
-		// Produit
-		consumable.getMdht().setManufacturedProduct(getProduct());
-		return consumable;
-	}
-
 	private CS getCs(String code) {
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(code);
 		return cs;
-	}
-
-	private EntryRelationship getDailyDosage() {
-
-		final EntryRelationship dailyDosage = CDAFactory.eINSTANCE.createEntryRelationship();
-		dailyDosage.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
-
-		final SubstanceAdministration administration = CDAFactory.eINSTANCE
-				.createSubstanceAdministration();
-		administration.setClassCode(ActClass.SBADM);
-		administration.setMoodCode(x_DocumentSubstanceMood.INT);
-		administration.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.6", "IHE PHARM").getIi());
-		final CD approachSiteCode = createApproachSiteCode1();
-		administration.getApproachSiteCodes().add(approachSiteCode);
-		administration.setRouteCode(getNullFlavorCe());
-		administration.setDoseQuantity(getNullFlavorIvlPq());
-		administration.setRateQuantity(getNullFlavorIvlPq());
-		administration.getEffectiveTimes().add(getNullFlavorIvlTs());
-		final Consumable consumable = getConsumable();
-		consumable.getMdht().setNullFlavor(NullFlavor.NA);
-		administration.setConsumable(getConsumable().getMdht());
-		dailyDosage.setSubstanceAdministration(administration);
-		return dailyDosage;
-	}
-
-	private IVL_PQ getDoseQuantity() {
-
-		final IVL_PQ doseQuantity = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		doseQuantity.setUnit("mg");
-		final IVXB_PQ highDose = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		highDose.setValue((double) 16);
-		final IVXB_PQ lowDose = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		highDose.setValue((double) 1);
-		doseQuantity.setHigh(highDose);
-		doseQuantity.setLow(lowDose);
-		doseQuantity.setUnit("mg");
-		return doseQuantity;
-
-	}
-
-	private SXCM_TS getEndTime() {
-
-		final SXCM_TS endTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		endTime.setValue(DateUtil.formatDate(DateUtil.date("27.10.2017")));
-		return endTime;
 	}
 
 	private Identificator getGtin() {
@@ -1439,35 +1256,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		return mMname;
 	}
 
-	@SuppressWarnings("unused")
-	private EntryRelationship getMtpReference(Identificator mtpId) {
-
-		final EntryRelationship refToMtp = CDAFactory.eINSTANCE.createEntryRelationship();
-		refToMtp.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		refToMtp.setSubstanceAdministration(null);
-		final CE mtpCode = DatatypesFactory.eINSTANCE.createCE();
-		mtpCode.setCodeSystem("1.3.6.1.4.1.19376.1.9.2.2");
-		mtpCode.setCodeSystemName("IHE Pharmacy Item Type List’");
-		mtpCode.setCode("MTPItem");
-		mtpCode.setDisplayName("Medication Treatment Plan Item’");
-		final Consumable consumable = new Consumable(false);
-		final ManufacturedProduct product = CDAFactory.eINSTANCE.createManufacturedProduct();
-		final Material manufacturedMaterial = CDAFactory.eINSTANCE.createMaterial();
-		manufacturedMaterial.setNullFlavor(NullFlavor.NA);
-		product.setManufacturedMaterial(manufacturedMaterial);
-		consumable.getMdht().setManufacturedProduct(product);
-		final SubstanceAdministration administration = CDAFactory.eINSTANCE
-				.createSubstanceAdministration();
-		administration.setClassCode(ActClass.SBADM);
-		administration.setMoodCode(x_DocumentSubstanceMood.EVN);
-		administration.getTemplateIds().add(mtpId.getIi());
-		administration.setCode(mtpCode);
-		administration.setClassCode(ActClass.SBADM);
-		administration.setMoodCode(x_DocumentSubstanceMood.INT);
-		refToMtp.setSubstanceAdministration(administration);
-		return refToMtp;
-	}
-
 	/**
 	 * If one or more effectiveTime elements appear, the first one shall contain
 	 * either the time of a single dose in the value element using the TS data
@@ -1484,12 +1272,11 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		// beginning dose 1
 		final SXPR_TS sxcmTsInner1 = DatatypesFactory.eINSTANCE.createSXPR_TS();
-		// sxcmTs.getComps().add(sxcmTsInner1);
 		final IVL_TS ivlTs1 = DatatypesFactory.eINSTANCE.createIVL_TS();
 		final IVXB_TS low1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		low1.setValue("20120505");
 		final IVXB_TS high1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		high1.setValue("20151105");
+		high1.setValue("20171105");
 		ivlTs1.setLow(low1);
 		ivlTs1.setHigh(high1);
 		sxcmTsInner1.getComps().add(ivlTs1);
@@ -1509,7 +1296,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		final IVL_TS ivlTs2 = DatatypesFactory.eINSTANCE.createIVL_TS();
 		final IVXB_TS low2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		low2.setValue("20130404");
+		low2.setValue("20140404");
 		final IVXB_TS high2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
 		high2.setValue("20161107");
 		ivlTs2.setLow(low2);
@@ -1650,7 +1437,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	private String getQtyUnit() {
 
-		return " comprimés";
+		return " caps";
 	}
 
 	private IVL_PQ getRateQuantity() {
@@ -1694,75 +1481,6 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private Code getRouteOfAdministration() {
 
 		return RouteOfAdministration.PO.getCode(getLanguageCode());
-	}
-
-	@SuppressWarnings("unused")
-	private Supply getSupply() {
-
-		final Supply deliveredProduct = CDAFactory.eINSTANCE.createSupply();
-		deliveredProduct.setClassCode(ActClassSupply.SPLY);
-		deliveredProduct.setMoodCode(x_DocumentSubstanceMood.RQO);
-		deliveredProduct.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-		deliveredProduct.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.4", "IHE PHARM").getIi());
-		deliveredProduct.getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.34", "HL7 CCD").getIi());
-		deliveredProduct.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.3", "IHE PCC").getIi());
-		deliveredProduct.setClassCode(ActClassSupply.SPLY);
-		deliveredProduct.setMoodCode(x_DocumentSubstanceMood.EVN);
-		deliveredProduct.setCode(DatatypesFactory.eINSTANCE.createCD("2.16.840.1.113883.5.4",
-				CodeSystems.HL7ActCode.getCodeSystemName()));
-		final Product product = CDAFactory.eINSTANCE.createProduct();
-		product.setManufacturedProduct(getProduct());
-		deliveredProduct.setProduct(product);
-
-		/** OK **/
-		deliveredProduct.getAuthors().add(createPlanificationAuthor().getAuthorMdht());
-
-		/** OK **/
-		// Date de début de prescription
-		deliveredProduct.getEffectiveTimes().add(createTime("10.11.2016"));
-
-		/** OK **/
-		// Date de fin
-		deliveredProduct.getEffectiveTimes().add(createTime("10.12.2016"));
-
-		// Prescripteur
-
-		// Auteur Prescription
-		deliveredProduct.getAuthors().add(createPrescriptionAuthor().getAuthorMdht());
-
-		// Auteur Dispensation
-		deliveredProduct.getAuthors().add(createPrescriptionAuthor2().getAuthorMdht());
-
-		/** OK **/
-		// Dose journalière
-		deliveredProduct.getEntryRelationships().add(getDailyDosage());
-
-		/** OK **/
-		// Quantité prescrite / à remettre
-		deliveredProduct.getEntryRelationships().add(getPrescribedQty());
-
-		/** OK **/
-		// Raison du traitement
-		deliveredProduct.addAct(getReasonOfTreatment());
-
-		/** OK **/
-		// Substitution autorisée
-		final PharmSubstitutionMade substitution = CDAFactory.eINSTANCE
-				.createPharmSubstitutionMade();
-		substitution.setClassCode(ActClassRoot.SUBST);
-		substitution.setMoodCode(ActMood.EVN);
-		final CE pharmCode = DatatypesFactory.eINSTANCE.createCE("2.16.840.1.113883.5.1070",
-				"HL7 Substance Admin Substitution");
-		substitution.setCode(pharmCode);
-
-		final PharmComponent1 component1 = CDAFactory.eINSTANCE.createPharmComponent1();
-		component1.setSubstitutionMade(substitution);
-		deliveredProduct.setComponent1(component1);
-
-		return deliveredProduct;
 	}
 
 	public Consumable initConsumable() {
@@ -1815,9 +1533,9 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		templateIds.add(templateIdSubstance4);
 
 		substanceAdministrationMtp1 = createSubstanceAdministration(getNullFlavorCe(),
-				getNullFlavorCe(), getDoseQuantity(), getRateQuantity(), createTime("09.09.2016"),
-				getConsumable(), createAuthor1(), createApproachSiteCode1(),
-				createTime("10.10.2016"), createTime("12.04.2017"), rOa,
+				getNullFlavorCe(), createDoseQuantity(), getRateQuantity(),
+				createTime("09.09.2016"), createConsumable(), createAuthor1(),
+				createApproachSiteCode1(), createTime("10.10.2016"), createTime("12.04.2017"), rOa,
 				createUniqueDailyDose("09.12.2016"), getMultipleDailyDoses(), doseQuantity,
 				getQtyUnit(), isSubstituable, idMtp1, templateIds);
 		medicationFullfillmentInstructions1 = createProfessionalInstructions1(
