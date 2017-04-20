@@ -24,18 +24,24 @@ import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
+import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryOrganizer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipExternalReference;
 
 /**
  * Implements the Base Class PharmaceuticalAdviceItemEntry from the IHE PHARM
@@ -70,7 +76,7 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @param mdht
 	 *            the mdht model object
 	 */
-	protected PharmaceuticalAdviceItemEntry(
+	public PharmaceuticalAdviceItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry mdht) {
 		super(mdht, null, null);
 	}
@@ -474,6 +480,118 @@ public class PharmaceuticalAdviceItemEntry extends
 	@Override
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
+	}
+
+	/**
+	 * Set the document reference (used when the item is in a PML document)
+	 * 
+	 * @param documentId
+	 * 			ID of the parent document
+	 * 
+	 */
+	public void addXCRPTReference(Identificator documentId) {
+		
+		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
+		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
+		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
+		documentEntry.getMdht().getTemplateIds().clear();
+		documentEntry.setId(documentId);
+		documentEntry.getMdht().unsetMoodCode();
+		documentEntry.getMdht().unsetClassCode();
+		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
+		this.getMdht().getReferences().add(referenceXCRPT);
+		
+	}
+	
+	/**
+	 * Returns the authors
+	 * 
+	 * @return authors list 
+	 * 
+	 */
+	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
+
+		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
+
+		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
+			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
+		}
+		
+		return authors;
+		
+	}
+	
+	/**
+	 * Adds an author to the authors list
+	 * 
+	 * @param author
+	 * 			Author to add to the list
+	 * 
+	 */
+	public void addAuthor(org.ehealth_connector.common.Author author) {
+
+		this.getMdht().getAuthors().add(author.getAuthorMdht());
+		
+	}
+
+	/**
+	 * Add the modified MTP Item
+	 * 
+	 * @param	newMtpItem
+	 * 				Modified MTP Item
+	 */
+	public void addModifiedMtpItem(EntryRelationship newMtpItem) {
+		
+		this.getMdht().getEntryRelationships().add(newMtpItem);
+
+		
+	}
+	
+	/**
+	 * Add the modified Prescription
+	 * 
+	 * @param	modifiedPrescription
+	 * 					New prescription (substrance administration)
+	 */
+	public void addModifiedPrescription(SubstanceAdministration substanceAdministration) {
+		
+		final EntryRelationship newPrescription = CDAFactory.eINSTANCE.createEntryRelationship();
+		newPrescription.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newPrescription.setInversionInd(false);
+
+		final Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
+		organizer.setClassCode(x_ActClassDocumentEntryOrganizer.CLUSTER);
+		organizer.setMoodCode(ActMood.EVN);
+		
+		final CS statusCodeOrganizer = DatatypesFactory.eINSTANCE.createCS();
+		statusCodeOrganizer.setCode(StatusCode.COMPLETED_CODE);
+		organizer.setStatusCode(statusCodeOrganizer);
+		
+		final Component4 newPrescriptionComponent = CDAFactory.eINSTANCE.createComponent4();
+		newPrescriptionComponent.setSeperatableInd(DatatypesFactory.eINSTANCE.createBL(false));
+		newPrescriptionComponent.setSubstanceAdministration(substanceAdministration);
+		organizer.getComponents().add(newPrescriptionComponent);
+		newPrescription.setOrganizer(organizer);
+		this.getMdht().getEntryRelationships().add(newPrescription);
+		
+	}
+
+	/**
+	 * Add the modified Dosage instructions
+	 * 
+	 * @param	modifiedDosageInstructions
+	 * 					New dosage instructions (substrance administration)
+	 */
+	public void addModifiedDosageInstructions(SubstanceAdministration substanceAdministration) {
+		
+		final EntryRelationship newDosageInstructions = CDAFactory.eINSTANCE.createEntryRelationship();
+		newDosageInstructions.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newDosageInstructions.setInversionInd(false);
+
+		newDosageInstructions.setSubstanceAdministration(substanceAdministration);
+
+		this.getMdht().getEntryRelationships().add(newDosageInstructions);
+		
 	}
 
 }
