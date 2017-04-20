@@ -16,28 +16,17 @@
 
 package org.ehealth_connector.cda.ch.mtps;
 
-import java.util.Iterator;
+import java.util.Date;
 
-import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.Author;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.Product;
-import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClassSupply;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipExternalReference;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * The Class CdaChMtpsDis. see also CDA CH MTPS 7.4.2.5
@@ -45,17 +34,27 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis> {
 
 	/**
-	 * Instantiates a new cda ch mtps dis.
+	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return <div class="en">Created PRE Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis() {
 		this(LanguageCode.ENGLISH);
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps dis.
+	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param languageCode
 	 *            the language code
+	 *
+	 * @return <div class="en">Created DIS Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
@@ -80,115 +79,78 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps dis.
+	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            mdht model document
+	 *            the MDHT document
+	 *
+	 * @return <div class="en">Created DIS Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {
 		super(doc);
 	}
 
-	public DispenseItemEntry createDispenseItemEntry(
-			org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry entry) {
-		/** DIS Item Declaration **/
-		final DispenseItemEntry disEntry = new DispenseItemEntry(getLanguageCode());
+	/**
+	 * <div class="en">Creates the header for a sample CDA-CH-MTPS DIS document
+	 * using the eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param author
+	 *            Author of document
+	 * @param legalAuthenticator
+	 *            Legal authenticator of document
+	 * @param organization
+	 *            Parent organization
+	 * @param mtpsDisId
+	 *            ID of document
+	 * @param dateOfDocument
+	 *            Creation date
+	 * @param languageCode
+	 *            Langague code for document
+	 */
+	public void createDisHeader(Author author, Author legalAuthenticator, Organization organization,
+			Patient patient, Identificator mtpsDisId, Date dateOfDocument,
+			LanguageCode languageCode) {
 
-		/** REFR to MTPItem **/
-		//
-		/** Document ID **/
-		disEntry.setId(new Identificator(entry.getClinicalDocument().getId()));
-
-		/** ExternalDocument MTP **/
-		/*
-		 * [R2] Identifiant du document duquel cet élément provient lorsque
-		 * l’élément se trouve dans un document PML [NP] Lorsque l’élément se
-		 * trouve dans un document PRE
-		 */
-
-		/** Precondition/Criterion/Text **/
-		/*
-		 * Préconditions pour l’utilisation du médicament. La référence au texte
-		 * correspondant dans la partie lisible pour l’être humain doit être
-		 * indiquée au moyen de criterion/text/reference[@value=‘#<valeur de
-		 * content[@ID]>‘]
-		 */
-
-		/** DispenseItem **/
-
-		// final Supply deliveredProduct = getSupply();
-		// disEntry.getMdht().addSupply(deliveredProduct);
-		disEntry.getMdht().setClassCode(ActClassSupply.SPLY);
-		disEntry.getMdht().setMoodCode(x_DocumentSubstanceMood.RQO);
-		disEntry.getMdht().setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-		disEntry.getMdht().getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.4", "IHE PHARM").getIi());
-		disEntry.getMdht().getTemplateIds()
-				.add(new Identificator("2.16.840.1.113883.10.20.1.34", "HL7 CCD").getIi());
-		disEntry.getMdht().getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.3", "IHE PCC").getIi());
-		disEntry.getMdht().setClassCode(ActClassSupply.SPLY);
-		disEntry.getMdht().setMoodCode(x_DocumentSubstanceMood.EVN);
-		disEntry.getMdht().setCode(DatatypesFactory.eINSTANCE.createCD("2.16.840.1.113883.5.4",
-				CodeSystems.HL7ActCode.getCodeSystemName()));
-		final Product product = CDAFactory.eINSTANCE.createProduct();
-		product.setManufacturedProduct(entry.getProduct().getManufacturedProduct());
-		disEntry.getMdht().setProduct(product);
-		/** Reference **/
-		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
-		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
-		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
-		documentEntry.setId(new Identificator(entry.getClinicalDocument().getId()));
-		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
-		disEntry.getMdht().getReferences().add(referenceXCRPT);
-		/** OK **/
-		// Authors
-		final EList<Author> authors = entry.getAuthors();
-		for (final Iterator<Author> iterator = authors.iterator(); iterator.hasNext();) {
-			final Author author = iterator.next();
-			iterator.remove();
-			disEntry.getMdht().getAuthors().add(author);
+		if (dateOfDocument != null)
+			this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null)
+			this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null)
+			this.setCustodian(organization);
+		if (languageCode != null)
+			this.setLanguageCode(languageCode);
+		if (author != null)
+			this.addAuthor(author);
+		if (patient != null)
+			this.setPatient(patient);
+		if (mtpsDisId != null) {
+			this.setId(mtpsDisId);
+			this.getDispenseSection().getMdht().setId(mtpsDisId.getIi());
 		}
-		// Dates
-		final EList<SXCM_TS> effectiveTimes = entry.getEffectiveTimes();
-		for (final SXCM_TS sxcm_TS : effectiveTimes) {
-			disEntry.getMdht().getEffectiveTimes().add(sxcm_TS);
-		}
-
-		/** OK **/
-		// entryRelationships
-		final EList<EntryRelationship> entryRelationships = entry.getEntryRelationships();
-		for (final Iterator<EntryRelationship> iterator = entryRelationships.iterator(); iterator
-				.hasNext();) {
-			final EntryRelationship entryRelationship = iterator.next();
-
-			iterator.remove();
-			disEntry.getMdht().getEntryRelationships().add(entryRelationship);
-
-		}
-		/** OK **/
-		// Acts
-		final EList<Act> acts = entry.getActs();
-		for (final Act act : acts) {
-			disEntry.getMdht().addAct(act);
-		}
-
-		/** OK **/
-		// Substitution authorised
-		disEntry.getMdht().setComponent1(entry.getComponent1());
-		return disEntry;
 	}
 
+	/**
+	 * <div class="en">Returns the DIS Item Entry using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return DIS item
+	 *
+	 */
 	public DispenseItemEntry getDispenseItemEntry() {
 		final org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry entry = this.getMdht()
 				.getDispenseSection().getDispenseItemEntry();
 
-		final DispenseItemEntry disEntry = createDispenseItemEntry(entry);
+		final DispenseItemEntry disEntry = new DispenseItemEntry(entry);
 		return disEntry;
 	}
 
 	/**
-	 * Gets the dispense section.
+	 * <div class="en">Returns the DIS Section using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
 	 *
 	 * @return the dispense section
 	 */
@@ -196,10 +158,16 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return new DispenseSection(this.getMdht().getDispenseSection());
 	}
 
+	/**
+	 * <div class="en">Sets the DIS Item Entry using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param entry
+	 *            DIS Item Entry
+	 *
+	 */
 	public void setDispenseItemEntry(DispenseItemEntry entry) {
-		// TODO Auto-generated method stub
 		if (entry != null) {
-			// todo: add into a list of disEntries [deliveredProduct = supply]
 			this.getMdht().getDispenseSection().addSupply(entry.getMdht());
 		}
 	}

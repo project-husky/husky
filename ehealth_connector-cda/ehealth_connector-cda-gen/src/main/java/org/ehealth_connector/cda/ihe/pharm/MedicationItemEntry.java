@@ -16,34 +16,53 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
+import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.Consumable;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.PharmSubjectOf4;
+import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
+import org.openhealthtools.mdht.uml.cda.Supply;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.InternalReference;
 import org.openhealthtools.mdht.uml.cda.ihe.SupplyEntry;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmSupplyEntry;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_INT;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClassRoot;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClassSupply;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActClassDocumentEntryAct;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipExternalReference;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -470,5 +489,310 @@ public class MedicationItemEntry
 		entryRelationship.setSequenceNumber(seqNumber);
 		this.getMdht().getEntryRelationships().add(entryRelationship);
 	}
+	
+	/**
+	 * Set the XCRPT document reference (used when the item is in a PML document)
+	 * 
+	 * @param documentId
+	 * 			ID of the parent document
+	 * 
+	 */
+	public void addXCRPTReference(Identificator documentId) {
+		
+		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
+		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
+		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
+		documentEntry.getMdht().getTemplateIds().clear();
+		documentEntry.setId(documentId);
+		documentEntry.getMdht().unsetMoodCode();
+		documentEntry.getMdht().unsetClassCode();
+		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
+		this.getMdht().getReferences().add(referenceXCRPT);
+		
+	}
+	
+	/**
+	 * Returns the dose quantity
+	 * 
+	 * @return dose quantity 
+	 */
+	public IVL_PQ getDoseQuantity() {
 
+		return this.getMdht().getDoseQuantity();
+		
+	}
+	
+	/**
+	 * Set the dose quantity
+	 * 
+	 * @param doseQuantity
+	 * 			Dose quantity of the medication
+	 * 
+	 */
+	public void setDoseQuantity(IVL_PQ doseQuantity) {
+
+		this.getMdht().setDoseQuantity(doseQuantity);
+		
+	}
+	
+	/**
+	 * Returns the rate quantity
+	 * 
+	 * @return rate quantity
+	 */
+	public IVL_PQ getRateQuantity() {
+
+		return this.getMdht().getRateQuantity();
+		
+	}
+	
+	/**
+	 * Set the rate quantity
+	 * 
+	 * @param doseQuantity
+	 * 			Dose quantity of the medication
+	 * 
+	 */
+	public void setRateQuantity(IVL_PQ rateQuantity) {
+
+		this.getMdht().setRateQuantity(rateQuantity);
+		
+	}
+	
+	/**
+	 * Returns the medication (consumable)
+	 * 
+	 * @return medication 
+	 * 
+	 */
+	public Consumable getConsumable() {
+
+		return this.getMdht().getConsumable();
+		
+	}
+	
+	/**
+	 * Set the medication (consumable)
+	 * 
+	 * @param consumable
+	 * 			Dose quantity of the medication
+	 * 
+	 */
+	public void setConsumable(org.ehealth_connector.cda.Consumable consumable) {
+
+		this.getMdht().setConsumable(consumable.getMdht());
+		
+	}
+
+	/**
+	 * Returns the authors
+	 * 
+	 * @return authors list 
+	 * 
+	 */
+	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
+
+		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
+
+		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
+			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
+		}
+		
+		return authors;
+		
+	}
+	
+	/**
+	 * Adds an author to the authors list
+	 * 
+	 * @param author
+	 * 			Author to add to the list
+	 * 
+	 */
+	public void addAuthor(org.ehealth_connector.common.Author author) {
+
+		this.getMdht().getAuthors().add(author.getAuthorMdht());
+		
+	}
+	
+	/**
+	 * Returns the Approach Site
+	 * 
+	 * @return approach site 
+	 * 
+	 */
+	public CD getApproachSiteCode() {
+
+		return this.getMdht().getApproachSiteCodes().get(0);
+		
+	}
+	
+	/**
+	 * Set the Approach Site code
+	 * 
+	 * @param approachSite
+	 * 			Approach site code
+	 * 
+	 */
+	public void setApproachSiteCode(CD approachSiteCode) {
+
+		this.getMdht().getApproachSiteCodes().add(approachSiteCode);
+		
+	}
+
+	/**
+	 * Returns all effectiveTime
+	 * 
+	 * @return List of effective time
+	 * 
+	 */
+	public EList<SXCM_TS> getEffectiveTime() {
+
+		return this.getMdht().getEffectiveTimes();
+		
+	}
+	
+	/**
+	 * Adds an effectiveTime
+	 * 
+	 * @param effectiveTime
+	 * 			Effective time to add to the list
+	 * 
+	 */
+	public void addEffectiveTime(SXCM_TS effectiveTime) {
+
+		this.getMdht().getEffectiveTimes().add(effectiveTime);
+		
+	}
+
+	/**
+	 * Defines the possible substitutions
+	 * 
+	 * @param substanceAdminSubstitution
+	 * 			Possible substitution
+	 * 
+	 */
+	public Supply getPossibleSubstitution(LanguageCode languageCode) { 
+
+		Supply supply;
+		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+			if (entryRelationship.getTypeCode().getValue() == x_ActRelationshipEntryRelationship.COMP.getValue()) {
+				if ((supply = entryRelationship.getSupply()) != null) {
+					if (supply.getClassCode().getValue() == ActClassSupply.SPLY.getValue() && supply.getMoodCode().getValue() == x_DocumentSubstanceMood.RQO.getValue()) {
+						for (final II templateId : supply.getTemplateIds()) {
+							if (templateId.getRoot().equalsIgnoreCase(SubstanceAdminSubstitution.CODE_SYSTEM_OID)) return supply;
+						}
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Defines the possible substitutions
+	 * 
+	 * @param substanceAdminSubstitution
+	 * 			Posisble substitution
+	 * 
+	 */
+	public void addPossibleSubstitution(LanguageCode languageCode, SubstanceAdminSubstitution substanceAdminSubstitution) { 
+
+		final EntryRelationship possibleSubstitution = CDAFactory.eINSTANCE
+				.createEntryRelationship();
+		
+		possibleSubstitution.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+		
+		final Supply substitutionSupply = CDAFactory.eINSTANCE.createSupply();
+		substitutionSupply.getTemplateIds()
+			.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
+		substitutionSupply.setClassCode(ActClassSupply.SPLY);
+		substitutionSupply.setMoodCode(x_DocumentSubstanceMood.RQO);
+		substitutionSupply.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
+
+		final PharmSubjectOf4 subjectOf4 = CDAFactory.eINSTANCE.createPharmSubjectOf4();
+		
+		final PharmSubstitutionPermission substitutionPermission = CDAFactory.eINSTANCE.createPharmSubstitutionPermission();
+		substitutionPermission.setClassCode(ActClassRoot.SUBST);
+		substitutionPermission.setMoodCode(ActMood.PERM);
+
+		final CE pharmCode = DatatypesFactory.eINSTANCE.createCE();
+		final Code substCode = substanceAdminSubstitution.getCode(languageCode);
+		pharmCode.setCodeSystem(substCode.getCodeSystem());
+		pharmCode.setCodeSystemName(substCode.getCodeSystemName());
+		pharmCode.setCode(substCode.getCode());
+		pharmCode.setDisplayName(substCode.getDisplayName());
+		
+		substitutionPermission.setCode(pharmCode);
+		
+		subjectOf4.setSubstitutionPermission(substitutionPermission);
+		
+		substitutionSupply.setSubjectOf4(subjectOf4);
+
+		possibleSubstitution.setSupply(substitutionSupply);
+		
+		this.getMdht().getEntryRelationships().add(possibleSubstitution);
+	}
+	
+	/**
+	 * Adds the prescribed quantity element
+	 * 
+	 * @param value
+	 * 			Amount prescribed
+	 * @param valueUnit
+	 * 			Units of prescribed amount (e.g. "1" for tabs)
+	 * @param textualUnit
+	 * 			Type of units (e.g. "tabs")
+	 * 
+	 */
+	public void addPrescribedQuantity(Double value, String valueUnit, String textualUnit) { 
+
+		final EntryRelationship prescribedQty = CDAFactory.eINSTANCE.createEntryRelationship();
+		
+		prescribedQty.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.8", "Amount of units of the consumable").getIi());
+		
+		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+		
+		final Supply prescribedQuantity = CDAFactory.eINSTANCE.createSupply();
+		prescribedQuantity.setClassCode(ActClassSupply.SPLY);
+		prescribedQuantity.setMoodCode(x_DocumentSubstanceMood.RQO);
+		prescribedQuantity.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
+		prescribedQuantity.setQuantity(
+				DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), valueUnit));
+		prescribedQuantity.setText(DatatypesFactory.eINSTANCE.createED(value + " " + textualUnit));
+		prescribedQty.setSupply(prescribedQuantity);
+		
+		this.getMdht().getEntryRelationships().add(prescribedQty);
+
+	}
+
+	/**
+	 * Sets the amount of possible repetition of the prescription
+	 * 
+	 * @param repeatNumber
+	 * 			Amount of possible repetitions
+	 * 
+	 */
+	public void setRepeatNumber (BigInteger amount) {
+		
+		final IVL_INT repeatNumber = DatatypesFactory.eINSTANCE.createIVL_INT();
+		repeatNumber.setValue(amount);
+		this.getMdht().setRepeatNumber(repeatNumber);
+	}
+	
+	/**
+	 * Get the amount of possible repetition of the prescription
+	 * 
+	 * return Amount of possible repetitions
+	 * 
+	 */
+	public BigInteger getRepeatNumber () {
+		
+		IVL_INT repeatNumber = this.getMdht().getRepeatNumber();
+		if (repeatNumber != null) return repeatNumber.getValue();
+		return null;
+	}
+	
 }
+

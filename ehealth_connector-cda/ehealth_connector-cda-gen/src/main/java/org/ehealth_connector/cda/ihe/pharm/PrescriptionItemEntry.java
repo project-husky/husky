@@ -16,11 +16,18 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
+import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClass;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Implements the IHE PrescriptionItemEntry.
@@ -42,6 +49,15 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 */
 	public PrescriptionItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPrescriptionItemEntry().init());
+		
+		this.getMdht().setClassCode(ActClass.SBADM);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		
+		// Priority code --> null flavor
+		final CE nullFlavorCode = DatatypesFactory.eINSTANCE.createCE();
+		nullFlavorCode.setNullFlavor(NullFlavor.NA);
+		this.getMdht().setPriorityCode(nullFlavorCode);
+
 	}
 
 	/**
@@ -53,6 +69,9 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	public PrescriptionItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry mdht) {
 		super(mdht);
+		
+		this.getMdht().setClassCode(ActClass.SBADM);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
 	}
 
 	/**
@@ -95,4 +114,36 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 		}
 	}
 
+	/**
+	 * <div class="en">Creates a Reference to a PRE Entry
+	 * using the eHealth Connector convenience
+	 * API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param prescriptionItemEntry
+	 *            <div class="en">PRE Entry</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return <div class="en">created Reference to PRE Entry</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */		
+	public PrescriptionItemReferenceEntry createPREItemReferenceEntry() {
+
+		final PrescriptionItemReferenceEntry referenceEntry = new PrescriptionItemReferenceEntry();
+		
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		
+		cd.setCode(PharmacyItemTypeList.PREItem.getCode().getCode());
+		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
+		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
+		cd.setDisplayName(PharmacyItemTypeList.PREItem.getCode().getDisplayName());
+
+		referenceEntry.getMdht().setCode(cd);
+
+		referenceEntry.getMdht().setRouteCode(null);
+		referenceEntry.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		referenceEntry.getMdht().setClassCode(ActClass.SBADM);
+		referenceEntry.getMdht().getIds().add(this.getId().getIi());
+		
+		return referenceEntry;
+	}
 }

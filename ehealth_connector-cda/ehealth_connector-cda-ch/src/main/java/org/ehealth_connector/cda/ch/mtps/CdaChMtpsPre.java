@@ -17,13 +17,20 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * The Class CdaChMtpsPre. See also CDA CH MTPS 7.4.2.4
@@ -31,17 +38,27 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
 
 	/**
-	 * Instantiates a new cda ch mtps pre.
+	 * <div class="en">Instantiates a new cda ch mtps PRE Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return <div class="en">Created PRE Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPre() {
 		this(LanguageCode.ENGLISH);
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps pre.
+	 * <div class="en">Instantiates a new cda ch mtps PRE Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param languageCode
 	 *            the language code
+	 *
+	 * @return <div class="en">Created PRE Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPre(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPre().init());
@@ -66,31 +83,75 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps pre.
+	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            the doc
+	 *            the MDHT document
+	 *
+	 * @return <div class="en">Created PRE Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre doc) {
 		super(doc);
 	}
 
+	/**
+	 * <div class="en">Adds a PRE Item Entry using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param entry
+	 *            PRE Item Entry
+	 * 
+	 */
 	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
 		if (entry != null) {
-
-			// do list of Pre, which are substanceAdmin
-			/*
-			 * final EList<SubstanceAdministration> substAdministrations =
-			 * entry.getMdht() .getSubstanceAdministrations(); for (final
-			 * SubstanceAdministration substanceAdministration :
-			 * substAdministrations) { this.getPrescriptionSection().getMdht()
-			 * .addSubstanceAdministration(substanceAdministration); }
-			 */
 			this.getMdht().getPrescriptionSection().addSubstanceAdministration(entry.getMdht());
 
 		}
 	}
 
+	/**
+	 * <div class="en">Creates the header for a sample CDA-CH-MTPS PRE document
+	 * using the eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param author
+	 * 			Author of document
+	 * @param legalAuthenticator
+	 * 			Legal authenticator of document
+	 * @param organization
+	 * 			Parent organization
+	 * @param mtpsPreId
+	 * 			ID of document
+	 * @param dateOfDocument
+	 * 			Creation date
+	 * @param languageCode
+	 * 			Langague code for document
+	 */
+	public void createPreHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient, Identificator mtpsPreId, Date dateOfDocument, LanguageCode languageCode) {
+
+		if (dateOfDocument != null) this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null) this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null) this.setCustodian(organization);
+		if (languageCode != null) this.setLanguageCode(languageCode);
+		if (author != null) this.addAuthor(author);
+		if (patient != null) this.setPatient(patient);
+		if (mtpsPreId != null) {
+			this.setId(mtpsPreId);
+			this.getPrescriptionSection().getMdht().setId(mtpsPreId.getIi());
+		}
+	}
+	
+	/**
+	 * <div class="en">Returns the list of PRE Item Entries using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return List of PRE items
+	 * 
+	 */
 	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
 		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht()
@@ -101,7 +162,8 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * Gets the prescription section.
+	 * <div class="en">Returns the PRE Section using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
 	 *
 	 * @return the prescription section
 	 */

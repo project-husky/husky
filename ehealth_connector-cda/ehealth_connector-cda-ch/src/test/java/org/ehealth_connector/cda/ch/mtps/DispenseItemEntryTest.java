@@ -23,8 +23,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.mtps.enums.DispenseCodeList;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.enums.DispenseCodeList;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -35,8 +35,12 @@ import org.w3c.dom.NodeList;
  */
 public class DispenseItemEntryTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
+
+	public void test() {
+		final DispenseItemEntry d;
+	}
 
 	@Test
 	public void testDispenseCodeList() throws Exception {
@@ -47,9 +51,9 @@ public class DispenseItemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		XPathExpression expr = xpath
+		final XPathExpression expr = xpath
 				.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 		assertEquals(DispenseCodeList.REFILL_COMPLETE,
 				DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));

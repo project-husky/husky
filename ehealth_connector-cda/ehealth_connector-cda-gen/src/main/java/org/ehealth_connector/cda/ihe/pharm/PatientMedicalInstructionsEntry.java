@@ -20,6 +20,7 @@ import org.ehealth_connector.cda.MdhtEntryActFacade;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PatientMedicalInstructions;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -47,6 +48,12 @@ public class PatientMedicalInstructionsEntry
 		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
 		statusCodeCompleted.setCode("completed");
 		this.getMdht().setStatusCode(statusCodeCompleted);
+		
+		final CD pmiCode = DatatypesFactory.eINSTANCE.createCD();
+		pmiCode.setCode("PINSTRUCT");
+		pmiCode.setCodeSystem("1.3.6.1.4.1.19376.1.5.3.2");
+		pmiCode.setCodeSystemName("IHEActCode");
+		this.getMdht().setCode(pmiCode);
 	}
 
 	/**

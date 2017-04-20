@@ -16,8 +16,16 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
+import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClass;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Implements the IHE MedicationTreatmentPlanItemEntry.
@@ -39,6 +47,14 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	 */
 	public MedicationTreatmentPlanItemEntry(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemEntry().init());
+		
+		this.getMdht().setClassCode(ActClass.SBADM);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		
+		// Priority code --> null flavor
+		final CE nullFlavorCode = DatatypesFactory.eINSTANCE.createCE();
+		nullFlavorCode.setNullFlavor(NullFlavor.NA);
+		this.getMdht().setPriorityCode(nullFlavorCode);
 	}
 
 	/**
@@ -52,4 +68,37 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 		super(mdht);
 	}
 
+	/**
+	 * <div class="en">Creates a Reference to a Medication Treatment Plan Entry
+	 * using the eHealth Connector convenience
+	 * API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param mtpe
+	 *            <div class="en">Medication Treatment Plan Entry to which we need a reference</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return <div class="en">created Reference to Medication Treatment Plan Entry</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */	
+
+	public MedicationTreatmentPlanItemReferenceEntry createMTPItemReferenceEntry() {
+
+		final MedicationTreatmentPlanItemReferenceEntry referenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
+		
+		CD cd = DatatypesFactory.eINSTANCE.createCD();
+		
+		cd.setCode(PharmacyItemTypeList.MTPItem.getCode().getCode());
+		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
+		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
+		cd.setDisplayName(PharmacyItemTypeList.MTPItem.getCode().getDisplayName());
+		
+		referenceEntry.getMdht().setCode(cd);
+
+		referenceEntry.getMdht().setRouteCode(null);
+		referenceEntry.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		referenceEntry.getMdht().setClassCode(ActClass.SBADM);
+		referenceEntry.getMdht().getIds().add(this.getId().getIi());
+		
+		return referenceEntry;
+	}
 }

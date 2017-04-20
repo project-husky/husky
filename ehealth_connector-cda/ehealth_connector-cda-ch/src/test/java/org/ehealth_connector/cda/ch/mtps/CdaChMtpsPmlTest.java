@@ -347,10 +347,10 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		// test the entry add in Mtp
 		final CdaChMtpsMtp cdaMtp = new CdaChMtpsMtp();
-		cdaMtp.setMtpEntry(mtpItem1);
-		cdaMtp.getMtpEntry();
+		cdaMtp.setMedicationTreatmentPlanItemEntry(mtpItem1);
+		cdaMtp.getMedicationTreatmentPlanEntry();
 		// MTPItemEntry
-		pmlMtpsDoc.addMtpEntry(mtpItem1);
+		pmlMtpsDoc.addMedicationTreatmentPlanEntry(mtpItem1);
 		// PRE: Prescriptions -> chapitre 7.5.7 à la page 65.
 		preItem1 = createPrescriptionItemEntry();
 		preItem1.setMedicationTreatmentPlanItemReferenceEntry(refToMTP1);
@@ -379,8 +379,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		padvItem1.setMedicationTreatmentPlanItemReferenceEntry(refToMTP1);
 		// test the entry add in Padv (list of Padv entries)
 		final CdaChMtpsPadv cdaPadv = new CdaChMtpsPadv();
-		cdaPadv.setPadvItemEntry(padvItem1);
-		cdaPadv.getPadvItemEntry();
+		cdaPadv.setPharmaceuticalAdviceItemEntry(padvItem1);
+		cdaPadv.getPharmaceuticalAdviceItemEntry();
 		pmlMtpsDoc.getMedicationListSection().addPharmaceuticalAdviceItemEntry(padvItem1);
 	}
 

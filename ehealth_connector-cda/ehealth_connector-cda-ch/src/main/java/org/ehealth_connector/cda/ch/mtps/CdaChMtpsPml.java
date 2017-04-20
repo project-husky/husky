@@ -17,11 +17,19 @@
 package org.ehealth_connector.cda.ch.mtps;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationListSection;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
+import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
@@ -31,7 +39,12 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml> {
 
 	/**
-	 * Instantiates a new cda ch mtps pml.
+	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return <div class="en">Created PML Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPml() {
 		this(LanguageCode.ENGLISH);
@@ -40,10 +53,15 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps pml.
+	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param languageCode
 	 *            the language code
+	 *
+	 * @return <div class="en">Created PML Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPml(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPml().init());
@@ -67,16 +85,29 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps pml.
+	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            the doc
+	 *            the MDHT document
+	 *
+	 * @return <div class="en">Created PML Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPml(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml doc) {
 		super(doc);
 	}
 
-	public void addMtpEntry(MedicationTreatmentPlanItemEntry mtp) {
+	/**
+	 * <div class="en">Adds an DIS entry to the PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param disEntry
+	 *            the DIS Entry
+	 */
+	public void addDispenseItemEntry(DispenseItemEntry disEntry) {
 		MedicationListSection section = null;
 		if (getMdht().getMedicationListSection() == null) {
 			section = new MedicationListSection(getLanguageCode());
@@ -84,13 +115,100 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		} else {
 			section = new MedicationListSection(getMdht().getMedicationListSection());
 		}
-		section.addMedicationTreatmentPlanItemEntry(mtp);
+		section.addDispenseItemEntry(disEntry);
 	}
 
 	/**
-	 * Gets the medication list section.
+	 * <div class="en">Adds an MTP entry to the PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
-	 * @return the medication list section
+	 * @param mtpEntry
+	 *            the MTP Entry
+	 */
+	public void addMedicationTreatmentPlanEntry(MedicationTreatmentPlanItemEntry mtpEntry) {
+		MedicationListSection section = null;
+		if (getMdht().getMedicationListSection() == null) {
+			section = new MedicationListSection(getLanguageCode());
+			this.getMdht().addSection(section.getMdht());
+		} else {
+			section = new MedicationListSection(getMdht().getMedicationListSection());
+		}
+		section.addMedicationTreatmentPlanItemEntry(mtpEntry);
+	}
+
+	/**
+	 * <div class="en">Adds an PADV entry to the PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param padvEntry
+	 *            the PADV Entry
+	 */
+	public void addPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry padvEntry) {
+		MedicationListSection section = null;
+		if (getMdht().getMedicationListSection() == null) {
+			section = new MedicationListSection(getLanguageCode());
+			this.getMdht().addSection(section.getMdht());
+		} else {
+			section = new MedicationListSection(getMdht().getMedicationListSection());
+		}
+		section.addPharmaceuticalAdviceItemEntry(padvEntry);
+	}
+
+	/**
+	 * <div class="en">Adds an PRE entry to the PML Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param preEntry
+	 *            the PRE Entry
+	 */
+	public void addPrescriptionItemEntry(PrescriptionItemEntry preEntry) {
+		MedicationListSection section = null;
+		if (getMdht().getMedicationListSection() == null) {
+			section = new MedicationListSection(getLanguageCode());
+			this.getMdht().addSection(section.getMdht());
+		} else {
+			section = new MedicationListSection(getMdht().getMedicationListSection());
+		}
+		section.addPrescriptionItemEntry(preEntry);
+	}
+
+	/**
+	 * <div class="en">Creates the header for a sample CDA-CH-MTPS PADV document
+	 * using the eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param author
+	 * 			Author of document
+	 * @param legalAuthenticator
+	 * 			Legal authenticator of document
+	 * @param organization
+	 * 			Parent organization
+	 * @param mtpsMtpId
+	 * 			ID of document
+	 * @param dateOfDocument
+	 * 			Creation date
+	 * @param languageCode
+	 * 			Langague code for document
+	 */
+	public void createPmlHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient, Identificator mtpsMtpId, Date dateOfDocument, LanguageCode languageCode) {
+
+		if (dateOfDocument != null) this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null) this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null) this.setCustodian(organization);
+		if (languageCode != null) this.setLanguageCode(languageCode);
+		if (author != null) this.addAuthor(author);
+		if (patient != null) this.setPatient(patient);
+		if (mtpsMtpId != null) this.setId(mtpsMtpId);
+	}
+	
+	/**
+	 * <div class="en">Returns the Medication List Section using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return the Medication List section
 	 */
 	public MedicationListSection getMedicationListSection() {
 		if (this.getMdht().getMedicationListSection() != null) {
@@ -99,6 +217,27 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return null;
 	}
 
+	/**
+	 * <div class="en">Returns the DIS Entries using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return the List of DIS Items
+	 */
+	public List<DispenseItemEntry> getDispenseItemEntries() {
+		final List<DispenseItemEntry> entries = new ArrayList<DispenseItemEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry entry : getMdht()
+				.getMedicationListSection().getDispenseItemEntries()) {
+			entries.add(new DispenseItemEntry(entry));
+		}
+		return entries;
+	}
+
+	/**
+	 * <div class="en">Returns the MTP Entries using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return the List of MTP Items
+	 */
 	public List<MedicationTreatmentPlanItemEntry> getMedicationTreatmentPlanItemEntries() {
 		final List<MedicationTreatmentPlanItemEntry> entries = new ArrayList<MedicationTreatmentPlanItemEntry>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemEntry entry : getMdht()
@@ -108,6 +247,35 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		return entries;
 	}
 
-	// Gets the default section table.
+	/**
+	 * <div class="en">Returns the PADV Entries using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return the List of PADV Items
+	 */
+	public List<PharmaceuticalAdviceItemEntry> getPharmaceuticalAdviceItemEntries() {
+		final List<PharmaceuticalAdviceItemEntry> entries = new ArrayList<PharmaceuticalAdviceItemEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry entry : getMdht()
+				.getMedicationListSection().getPharmaceuticalAdviceItemEntries()) {
+			entries.add(new PharmaceuticalAdviceItemEntry(entry));
+		}
+		return entries;
+	}
+
+	/**
+	 * <div class="en">Returns the PRE Entries using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return the List of PRE Items
+	 */
+	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
+		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry entry : getMdht()
+				.getMedicationListSection().getPrescriptionItemEntries()) {
+			entries.add(new PrescriptionItemEntry(entry));
+		}
+		return entries;
+	}
+
 
 }

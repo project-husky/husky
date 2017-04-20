@@ -16,14 +16,23 @@
 
 package org.ehealth_connector.cda.ch.mtps;
 
+import java.util.Date;
+
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceSection;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * The Class CdaChMtpsPadv. see also CDA CH MTPS 7.4.2.6
@@ -32,17 +41,27 @@ public class CdaChMtpsPadv
 		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 
 	/**
-	 * Instantiates a new cda ch mtps padv.
+	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return <div class="en">Created PADV Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv() {
 		this(LanguageCode.ENGLISH);
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps padv.
+	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param languageCode
 	 *            the language code
+	 *
+	 * @return <div class="en">Created PADV Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPadv().init());
@@ -68,34 +87,71 @@ public class CdaChMtpsPadv
 	}
 
 	/**
-	 * Instantiates a new cda ch mtps padv.
+	 * <div class="en">Creates the header for a sample CDA-CH-MTPS PADV document
+	 * using the eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param author
+	 * 			Author of document
+	 * @param legalAuthenticator
+	 * 			Legal authenticator of document
+	 * @param organization
+	 * 			Parent organization
+	 * @param mtpsPadvId
+	 * 			ID of document
+	 * @param dateOfDocument
+	 * 			Creation date
+	 * @param languageCode
+	 * 			Langague code for document
+	 */
+	public void createPadvHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient, Identificator mtpsPadvId, Date dateOfDocument, LanguageCode languageCode) {
+
+		if (dateOfDocument != null) this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null) this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null) this.setCustodian(organization);
+		if (languageCode != null) this.setLanguageCode(languageCode);
+		if (author != null) this.addAuthor(author);
+		if (patient != null) this.setPatient(patient);
+		if (mtpsPadvId != null) {
+			this.setId(mtpsPadvId);
+			this.getPharmaceuticalAdviceSection().getMdht().setId(mtpsPadvId.getIi());
+		}
+	}
+	
+	/**
+	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
 	 *
 	 * @param doc
-	 *            the doc
+	 *            the MDHT document
+	 *
+	 * @return <div class="en">Created PADV Document</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv doc) {
 		super(doc);
 	}
 
-	public PharmaceuticalAdviceItemEntry getPadvItemEntry() {
-		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry();
+	/**
+	 * <div class="en">Returns the PADV Item Entry using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return PADV item
+	 * 
+	 */
+	public PharmaceuticalAdviceItemEntry getPharmaceuticalAdviceItemEntry() {
+		
 		final org.openhealthtools.mdht.uml.cda.ihe.pharm.PharmaceuticalAdviceItemEntry entry = this
 				.getMdht().getPharmaceuticalAdviceSection().getPharmaceuticalAdviceItemEntry();
-		final org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationTreatmentPlanItemReferenceEntry mtpItemRefEntry = entry
-				.getMedicationTreatmentPlanItemReferenceEntry();
-		final org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry disItemRefEntry = entry
-				.getDispenseItemReferenceEntry();
-		final org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemReferenceEntry preItemRefEntry = entry
-				.getPrescriptionItemReferenceEntry();
-		padvEntry.setMedicationTreatmentPlanItemReferenceEntry(
-				new MedicationTreatmentPlanItemReferenceEntry(mtpItemRefEntry));
-		padvEntry.setDispenseItemReferenceEntry(new DispenseItemReferenceEntry(disItemRefEntry));
-		padvEntry.setNewPresciptionEntry(new PrescriptionItemEntry(preItemRefEntry));
+		final PharmaceuticalAdviceItemEntry padvEntry = new PharmaceuticalAdviceItemEntry(entry);
+		
 		return padvEntry;
 	}
 
 	/**
-	 * Gets the pharmaceutical advice section.
+	 * <div class="en">Returns the PADV Section using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
 	 *
 	 * @return the pharmaceutical advice section
 	 */
@@ -103,7 +159,15 @@ public class CdaChMtpsPadv
 		return new PharmaceuticalAdviceSection(this.getMdht().getPharmaceuticalAdviceSection());
 	}
 
-	public void setPadvItemEntry(PharmaceuticalAdviceItemEntry entry) {
+	/**
+	 * <div class="en">Sets the PADV Item Entry using the eHealth Connector
+	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @param entry
+	 *            PADV Item Entry
+	 * 
+	 */
+	public void setPharmaceuticalAdviceItemEntry(PharmaceuticalAdviceItemEntry entry) {
 		if (entry != null) {
 			// do a list of Padv, which are an encapsulation of observations
 			// entryRelationships
