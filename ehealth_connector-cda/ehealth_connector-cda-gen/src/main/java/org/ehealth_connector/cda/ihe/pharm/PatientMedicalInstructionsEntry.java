@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ihe.pharm;
 
@@ -48,7 +50,7 @@ public class PatientMedicalInstructionsEntry
 		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
 		statusCodeCompleted.setCode("completed");
 		this.getMdht().setStatusCode(statusCodeCompleted);
-		
+
 		final CD pmiCode = DatatypesFactory.eINSTANCE.createCD();
 		pmiCode.setCode("PINSTRUCT");
 		pmiCode.setCodeSystem("1.3.6.1.4.1.19376.1.5.3.2");

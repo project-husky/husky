@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication.ch.enums;
 
 import org.ehealth_connector.common.Code;
@@ -39,9 +41,9 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 */
 	AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM("20010", "Ambulante Einrichtung, inkl. Ambulatorium"),
 	/**
-	 * <div class="de"> Andere Gesundheits- Organisation </div>
-	 * <div class="fr"> Autres prestateurs de soins</div> <div class="it"> Altre
-	 * organizzazioni sanitarie</div>
+	 * <div class="de"> Andere Gesundheits- Organisation </div> <div class="fr">
+	 * Autres prestateurs de soins</div> <div class="it"> Altre organizzazioni
+	 * sanitarie</div>
 	 */
 	ANDERE_GESUNDHEITS_ORGANISATION("20999", "Andere Gesundheits-Organisation"),
 	/**
@@ -68,14 +70,14 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	GESUNDHEITSEINRICHTUNG_IN_DER_HAFTANSTALT("20007", "Gesundheitseinrichtung in der Haftanstalt"),
 	/**
 	 * <div class="de"> Institut für medizinische Diagnostik</div>
-	 * <div class="fr"> Institut d’aide au diagnostic</div>
-	 * <div class="it"> Istituto di diagnosi medica</div>
+	 * <div class="fr"> Institut d’aide au diagnostic</div> <div class="it">
+	 * Istituto di diagnosi medica</div>
 	 */
 	INSTITUT_FÜR_MEDIZINISCHE_DIAGNOSTIK("20001", "Institut für medizinische Diagnostik"),
 	/**
-	 * <div class="de"> Notfall- / Rettungsdienste</div>
-	 * <div class="fr"> Service d'urgence et de sauvetage</div>
-	 * <div class="it"> Servizio di pronto soccorso e di salvataggio</div>
+	 * <div class="de"> Notfall- / Rettungsdienste</div> <div class="fr">
+	 * Service d'urgence et de sauvetage</div> <div class="it"> Servizio di
+	 * pronto soccorso e di salvataggio</div>
 	 */
 	NOTFALL_RETTUNGSDIENSTE("20002", "Notfall- / Rettungsdienste"),
 	/**
@@ -91,9 +93,9 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 */
 	ORGANISATION_FÜR_STATIONÄRE_REHABILITATION("20011", "Organisation für stationäre Rehabilitation"),
 	/**
-	 * <div class="de"> Sozio- Medizinische Institution</div>
-	 * <div class="fr"> Etablissement médico-social </div>
-	 * <div class="it"> Istituto/casa di cura</div>
+	 * <div class="de"> Sozio- Medizinische Institution</div> <div class="fr">
+	 * Etablissement médico-social </div> <div class="it"> Istituto/casa di
+	 * cura</div>
 	 */
 	SOZIO_MEDIZINISCHE_INSTITUTION("20008", "Sozio-Medizinische Institution"),
 	/**
@@ -107,8 +109,8 @@ public enum HealthcareFacilityTypeCode implements CodedMetadataEnumInterface {
 	 */
 	UNBEKANNT("20900", "Unbekannt"),
 	/**
-	 * <div class="de">zu Hause</div> <div class="fr"> </div>
-	 * <div class="it"> </div>
+	 * <div class="de">zu Hause</div> <div class="fr"> </div> <div class="it">
+	 * </div>
 	 */
 	ZU_HAUSE("20012", "zu Hause");
 

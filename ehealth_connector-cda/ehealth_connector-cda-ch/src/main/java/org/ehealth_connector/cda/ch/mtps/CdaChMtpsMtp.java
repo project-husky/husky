@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ch.mtps;
 
@@ -37,6 +39,25 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
  * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
  */
 public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp> {
+
+	/**
+	 * <div class="en">Creates a Patient Medical Instructions Entry using the
+	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @param textReference
+	 *            <div class="en">Instructions for the patient</div>
+	 *            <div class="de"></div> <div class="fr"></div>
+	 *
+	 * @return <div class="en">Created PatientMedicalInstructionsEntry</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	public static PatientMedicalInstructionsEntry createPatientMedicalInstruction(
+			String textReference) {
+		final PatientMedicalInstructionsEntry pi = new PatientMedicalInstructionsEntry();
+		pi.setTextReference(textReference);
+		return pi;
+	}
 
 	/**
 	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
@@ -80,7 +101,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			break;
 		}
 
-		final MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(getLanguageCode());
+		final MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(
+				getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 
@@ -117,8 +139,9 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * @param languageCode
 	 *            Langague code for document
 	 */
-	public void createMtpHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient,
-			Identificator mtpsMtpId, Date dateOfDocument, LanguageCode languageCode) {
+	public void createMtpHeader(Author author, Author legalAuthenticator, Organization organization,
+			Patient patient, Identificator mtpsMtpId, Date dateOfDocument,
+			LanguageCode languageCode) {
 
 		if (dateOfDocument != null)
 			this.setTimestamp(dateOfDocument);
@@ -137,24 +160,6 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			this.getMedicationTreatmentPlanSection().getMdht().setId(mtpsMtpId.getIi());
 		}
 
-	}
-
-	/**
-	 * <div class="en">Creates a Patient Medical Instructions Entry using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
-	 * <div class="fr"></div>
-	 *
-	 * @param textReference
-	 *            <div class="en">Instructions for the patient</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 *
-	 * @return <div class="en">Created PatientMedicalInstructionsEntry</div>
-	 *         <div class="de"></div> <div class="fr"></div>
-	 */
-	public static PatientMedicalInstructionsEntry createPatientMedicalInstruction(String textReference) {
-		final PatientMedicalInstructionsEntry pi = new PatientMedicalInstructionsEntry();
-		pi.setTextReference(textReference);
-		return pi;
 	}
 
 	/**
@@ -214,7 +219,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 */
 	public MedicationTreatmentPlanSection getMedicationTreatmentPlanSection() {
 		if (this.getMdht().getMedicationTreatmentPlanSection() != null) {
-			return new MedicationTreatmentPlanSection(this.getMdht().getMedicationTreatmentPlanSection());
+			return new MedicationTreatmentPlanSection(
+					this.getMdht().getMedicationTreatmentPlanSection());
 		}
 		return null;
 	}
@@ -231,8 +237,9 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 
 		final PatientMedicalInstructionsEntry pi = new PatientMedicalInstructionsEntry();
 
-		pi.setTextReference(this.getMdht().getMedicationTreatmentPlanSection().getMedicationTreatmentPlanItemEntries()
-				.get(0).getPatientInstructions().get(0).getText().getText());
+		pi.setTextReference(this.getMdht().getMedicationTreatmentPlanSection()
+				.getMedicationTreatmentPlanItemEntries().get(0).getPatientInstructions().get(0)
+				.getText().getText());
 		return pi;
 	}
 
@@ -245,7 +252,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public String getProfessionalInstructions() {
-		return this.getMedicationTreatmentPlanSection().getMdht().getMedicationTreatmentPlanItemEntries().get(0)
+		return this.getMedicationTreatmentPlanSection().getMdht()
+				.getMedicationTreatmentPlanItemEntries().get(0)
 				.getMedicationFullfillmentInstructions().getText().getText();
 	}
 
@@ -258,8 +266,9 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *         <div class="fr"></div>
 	 */
 	public String getReasonForTreatment() {
-		return this.getMedicationTreatmentPlanSection().getMdht().getMedicationTreatmentPlanItemEntries().get(0)
-				.getActs().get(0).getText().getText();
+		return this.getMedicationTreatmentPlanSection().getMdht()
+				.getMedicationTreatmentPlanItemEntries().get(0).getActs().get(0).getText()
+				.getText();
 	}
 
 	/**
@@ -285,7 +294,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	public boolean hasItemEntry() {
 		boolean flag = false;
 		if (getMdht().getMedicationTreatmentPlanSection() != null) {
-			if (getMdht().getMedicationTreatmentPlanSection().getMedicationTreatmentPlanItemEntries().size() > 0) {
+			if (getMdht().getMedicationTreatmentPlanSection()
+					.getMedicationTreatmentPlanItemEntries().size() > 0) {
 				flag = true;
 			}
 		}
@@ -301,7 +311,8 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 */
 	public void setMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry mtpItem) {
-		this.getMdht().getMedicationTreatmentPlanSection().addSubstanceAdministration(mtpItem.getMdht());
+		this.getMdht().getMedicationTreatmentPlanSection()
+				.addSubstanceAdministration(mtpItem.getMdht());
 	}
 
 }

@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.common.ch.enums;
 
 import org.ehealth_connector.common.Code;
@@ -48,8 +50,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	APOTHEKERINAPOTHEKER_IN_OFFIZINPHARMAZIE("50045", "Apothekerin/Apotheker in Offizinpharmazie "),
 	/**
 	 * <div class="de"> Apothekerin/ Apotheker in Spitalpharmazie </div>
-	 * <div class="fr"> Pharmacien d’officine en hôpital</div>
-	 * <div class="it"> Farmacista in una farmacia d'ospedale</div>
+	 * <div class="fr"> Pharmacien d’officine en hôpital</div> <div class="it">
+	 * Farmacista in una farmacia d'ospedale</div>
 	 */
 	APOTHEKERINAPOTHEKER_IN_SPITALPHARMAZIE("50046", "Apothekerin/Apotheker in Spitalpharmazie"),
 	/**
@@ -65,9 +67,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	CHIROPRAKTORINCHIROPRAKTIKER("50049", "Chiropraktorin/Chiropraktiker"),
 	/**
-	 * <div class = "de"> Diätologin / Diätologe </div>
-	 * <div class = "fr"> Diabétologue </div> <div class = "it"> Dietologo /
-	 * a </div>
+	 * <div class = "de"> Diätologin / Diätologe </div> <div class = "fr">
+	 * Diabétologue </div> <div class = "it"> Dietologo / a </div>
 	 */
 	DIATOLOGINDIATOLOGE("50058", "Diätologin/Diätologe"),
 	/**
@@ -78,31 +79,31 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN("50062", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann"),
 	/**
 	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
-	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss
-	 * (Bachelor) </div> <div class = "fr"> Infirmière diplômée / Infirmier
-	 * diplômé avec un Bachelor de Science en soins infirmiers </div>
-	 * <div class = "it"> Infermiere /a con titolo accademico (Bachelor) </div>
+	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)
+	 * </div> <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un
+	 * Bachelor de Science en soins infirmiers </div> <div class = "it">
+	 * Infermiere /a con titolo accademico (Bachelor) </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_BACHELOR("50063", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Bachelor)"),
 	/**
 	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
-	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss
-	 * (Master) </div> <div class = "fr"> Infirmière diplômée / Infirmier
-	 * diplômé avec un Master de Science en soins infirmiers </div>
-	 * <div class = "it"> Infermiere / a con titolo accademico (Master) </div>
+	 * Pflegefachmann mit akademischem pflegefachlichem Abschluss (Master)
+	 * </div> <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un
+	 * Master de Science en soins infirmiers </div> <div class = "it">
+	 * Infermiere / a con titolo accademico (Master) </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_AKADEMISCHEM_PFLEGEFACHLICHEM_ABSCHLUSS_MASTER("50064", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit akademischem pflegefachlichem Abschluss (Master)"),
 	/**
 	 * <div class = "de"> diplomierte Pflegefachfrau / diplomierter
 	 * Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen
-	 * wie Diabetesberaterin, Stillberaterin etc. </div>
-	 * <div class = "fr"> Infirmière diplômée / Infirmier diplômé avec un cours
-	 * de spécialisation postgrades et des formation spéciale supplémentaires
-	 * comme Conseiller / Conseillère aux diabétiques, conseiller / Coonseillère
-	 * en cas d ’ allaitement </div> <div class = "it"> Infermiere / a diplomato
-	 * / a con corso post - diploma di approfondimento della materia e altre
-	 * formazioni supplementari, come consulente per il diabete, consulente per
-	 * l ' allattamento al seno ecc. </div>
+	 * wie Diabetesberaterin, Stillberaterin etc. </div> <div class = "fr">
+	 * Infirmière diplômée / Infirmier diplômé avec un cours de spécialisation
+	 * postgrades et des formation spéciale supplémentaires comme Conseiller /
+	 * Conseillère aux diabétiques, conseiller / Coonseillère en cas d ’
+	 * allaitement </div> <div class = "it"> Infermiere / a diplomato / a con
+	 * corso post - diploma di approfondimento della materia e altre formazioni
+	 * supplementari, come consulente per il diabete, consulente per l '
+	 * allattamento al seno ecc. </div>
 	 */
 	DIPLOMIERTE_PFLEGEFACHFRAUDIPLOMIERTER_PFLEGEFACHMANN_MIT_FACHVERTIEFENDEM_NDK_UND_WEITEREN_ZUSATZAUSBILDUNGEN_WIE_DIABETESBERATERIN_STILLBERATERIN_ETC("50066", "diplomierte Pflegefachfrau/diplomierter Pflegefachmann mit fachvertiefendem NDK und weiteren Zusatzausbildungen wie Diabetesberaterin, Stillberaterin etc."),
 	/**
@@ -139,8 +140,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_ALLERGOLOGIE_UND_IMMUNOLOGIE("50073", "Fachärztin/Facharzt für Allergologie und Immunologie"),
 	/**
-	 * <div class = "de"> Fachärztin / Facharzt für Allgemeine Innere
-	 * Medizin </div> <div class = "fr"> Médecin spécialiste en médecine interne
+	 * <div class = "de"> Fachärztin / Facharzt für Allgemeine Innere Medizin
+	 * </div> <div class = "fr"> Médecin spécialiste en médecine interne
 	 * générale </div> <div class = "it"> Medico specializzato /a in medicina
 	 * generale e interna </div>
 	 */
@@ -164,9 +165,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_ARBEITSMEDIZIN("50003", "Fachärztin/Facharzt für Arbeitsmedizin"),
 	/**
-	 * <div class="de"> Fachärztin/Facharzt für Chirurgie</div>
-	 * <div class="fr"> Médecin spécialiste en chirurgie</div>
-	 * <div class="it"> Medico specializzato/a in chirurgia</div>
+	 * <div class="de"> Fachärztin/Facharzt für Chirurgie</div> <div class="fr">
+	 * Médecin spécialiste en chirurgie</div> <div class="it"> Medico
+	 * specializzato/a in chirurgia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_CHIRURGIE("50004", "Fachärztin/Facharzt für Chirurgie"),
 	/**
@@ -190,10 +191,10 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_GASTROENTEROLOGIE("50007", "Fachärztin/Facharzt für Gastroenterologie"),
 	/**
-	 * <div class="de"> Fachärztin/ Facharzt für Gynäkologie und
-	 * Geburtshilfe </div> <div class="fr"> Médecin spécialiste en gynécologie
-	 * et obstétrique</div> <div class="it"> Medico specializzato/a in
-	 * ginecologia e ostetricia</div>
+	 * <div class="de"> Fachärztin/ Facharzt für Gynäkologie und Geburtshilfe
+	 * </div> <div class="fr"> Médecin spécialiste en gynécologie et
+	 * obstétrique</div> <div class="it"> Medico specializzato/a in ginecologia
+	 * e ostetricia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_GYNAKOLOGIE_UND_GEBURTSHILFE("50008", "Fachärztin/Facharzt für Gynäkologie und Geburtshilfe"),
 	/**
@@ -235,8 +236,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_KARDIOLOGIE("50012", "Fachärztin/Facharzt für Kardiologie"),
 	/**
 	 * <div class="de"> Fachärztin/Facharzt für Kinder- und Jugendmedizin</div>
-	 * <div class="fr"> Médecin spécialiste en pédiatrie</div>
-	 * <div class="it"> Medico specializzato/a in pediatria</div>
+	 * <div class="fr"> Médecin spécialiste en pédiatrie</div> <div class="it">
+	 * Medico specializzato/a in pediatria</div>
 	 */
 	FACHARZTINFACHARZT_FUR_KINDER_UND_JUGENDMEDIZIN("50013", "Fachärztin/Facharzt für Kinder- und Jugendmedizin"),
 	/**
@@ -292,8 +293,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHARZTINFACHARZT_FUR_NEUROCHIRURGIE("50019", "Fachärztin/Facharzt für Neurochirurgie"),
 	/**
 	 * <div class="de"> Fachärztin/Facharzt für Neurologie</div>
-	 * <div class="fr"> Médecin spécialiste en neurologie</div>
-	 * <div class="it"> Medico specializzato/a in neurologia</div>
+	 * <div class="fr"> Médecin spécialiste en neurologie</div> <div class="it">
+	 * Medico specializzato/a in neurologia</div>
 	 */
 	FACHARZTINFACHARZT_FUR_NEUROLOGIE("50020", "Fachärztin/Facharzt für Neurologie"),
 	/**
@@ -323,9 +324,9 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	FACHARZTINFACHARZT_FUR_ORTHOPADISCHE_CHIRURGIE_UND_TRAUMATOLOGIE_DES_BEWEGUNGSAPPARATES("50023", "Fachärztin/Facharzt für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates"),
 	/**
-	 * <div class = "de"> Fachärztin / Facharzt für Oto - Rhino -
-	 * Laryngologie </div> <div class = "fr"> Médecin spécialiste en oto - rhino
-	 * - laryngologie </div> <div class = "it"> Medico specializzato / a in
+	 * <div class = "de"> Fachärztin / Facharzt für Oto - Rhino - Laryngologie
+	 * </div> <div class = "fr"> Médecin spécialiste en oto - rhino -
+	 * laryngologie </div> <div class = "it"> Medico specializzato / a in
 	 * otorinolaringoiatria </div>
 	 */
 	FACHARZTINFACHARZT_FUR_OTO_RHINO_LARYNGOLOGIE("50024", "Fachärztin/Facharzt für Oto-Rhino-Laryngologie"),
@@ -424,8 +425,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	FACHFRAUFACHMANN_GESUNDHEIT_FAGE_MIT_EIDG_FAHIGKEITSZEUGNIS("50068", "Fachfrau/Fachmann Gesundheit, FaGe mit eidg. Fähigkeitszeugnis"),
 	/**
 	 * <div class= "de"> Gesundheits- und Sozialberatung </div>
-	 * <div class= "fr"> Conseiller sanitaire et social</div>
-	 * <div class= "it"> Consulenza sociosanitaria </div>
+	 * <div class= "fr"> Conseiller sanitaire et social</div> <div class= "it">
+	 * Consulenza sociosanitaria </div>
 	 */
 	GESUNDHEITS_UND_SOZIALBERATUNG("50071", "Gesundheits- und Sozialberatung"),
 	/**
@@ -463,8 +464,8 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	 */
 	KLINISCHER_PSYCHOLOGEKLINISCHE_PSYCHOLOGIN("50051", "Klinischer Psychologe/Klinische Psychologin"),
 	/**
-	 * <div class="de"> Logopädin/ Logopäde</div>
-	 * <div class="fr"> Orthophoniste </div> <div class="it"> Logopedista</div>
+	 * <div class="de"> Logopädin/ Logopäde</div> <div class="fr"> Orthophoniste
+	 * </div> <div class="it"> Logopedista</div>
 	 */
 	LOGOPADINLOGOPADE("50060", "Logopädin/Logopäde"),
 	/**
@@ -487,20 +488,20 @@ public enum AuthorSpeciality implements CodedMetadataEnumInterface {
 	PFLEGEFACHFRAUPFLEGEFACHMANN_MIT_ATTESTABSCHLUSS("50067", "Pflegefachfrau/Pflegefachmann mit Attestabschluss"),
 	/**
 	 * <div class= "de"> Pharma- Assistentin / Pharma- Assistent </div>
-	 * <div class= "fr"> Assistant en pharmacie </div>
-	 * <div class= "it"> assistente di farmacia </div>
+	 * <div class= "fr"> Assistant en pharmacie </div> <div class= "it">
+	 * assistente di farmacia </div>
 	 */
 	PHARMA_ASSISTENTIN_PHARMA_ASSISTENT("50075", "Pharma-Assistentin / Pharma-Assistent"),
 	/**
 	 * <div class="de"> Physiotherapeutin/ Physiotherapeut</div>
-	 * <div class="fr"> Physiothérapeute </div>
-	 * <div class="it"> Psicoterapeuta</div>
+	 * <div class="fr"> Physiothérapeute </div> <div class="it">
+	 * Psicoterapeuta</div>
 	 */
 	PHYSIOTHERAPEUTINPHYSIOTHERAPEUT("50055", "Physiotherapeutin/Physiotherapeut"),
 	/**
 	 * <div class="de"> Psychotherapeutin/ Psychotherapeut</div>
-	 * <div class="fr"> Psychothérapeute</div>
-	 * <div class="it"> Psicoterapeuta</div>
+	 * <div class="fr"> Psychothérapeute</div> <div class="it">
+	 * Psicoterapeuta</div>
 	 */
 	PSYCHOTHERAPEUTINPSYCHOTHERAPEUT("50050", "Psychotherapeutin/Psychotherapeut"),
 	/**

@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ihe.pharm;
 
@@ -68,8 +70,10 @@ public class PharmSubstitutionHandlingEntry extends
 	 * @return the substance admin substitution
 	 */
 	public SubstanceAdminSubstitution getSubstanceAdminSubstitution() {
-		if (this.getMdht().getSubjectOf4() != null && (this.getMdht().getSubjectOf4().getSubstitutionPermission()!=null)) {
-			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4().getSubstitutionPermission();
+		if (this.getMdht().getSubjectOf4() != null
+				&& (this.getMdht().getSubjectOf4().getSubstitutionPermission() != null)) {
+			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4()
+					.getSubstitutionPermission();
 			if (pharmSubstitution.getCode() != null) {
 				return SubstanceAdminSubstitution.getEnum(pharmSubstitution.getCode().getCode());
 			}
@@ -88,16 +92,18 @@ public class PharmSubstitutionHandlingEntry extends
 	public void setSubstanceAdminSubstitution(SubstanceAdminSubstitution substanceAdminSubstitution,
 			LanguageCode languageCode) {
 		if (substanceAdminSubstitution != null) {
-			if (this.getMdht().getSubjectOf4() == null || this.getMdht().getSubjectOf4().getSubstitutionPermission()==null) {
+			if (this.getMdht().getSubjectOf4() == null
+					|| this.getMdht().getSubjectOf4().getSubstitutionPermission() == null) {
 				final PharmSubstitutionPermission pharmSubstitution = CDAFactory.eINSTANCE
 						.createPharmSubstitutionPermission();
 				pharmSubstitution.setClassCode(ActClassRoot.SUBST);
 				pharmSubstitution.setMoodCode(ActMood.PERM);
-				PharmSubjectOf4 subjectOf4 =  CDAFactory.eINSTANCE.createPharmSubjectOf4(); 
+				PharmSubjectOf4 subjectOf4 = CDAFactory.eINSTANCE.createPharmSubjectOf4();
 				subjectOf4.setSubstitutionPermission(pharmSubstitution);
 				this.getMdht().setSubjectOf4(subjectOf4);
 			}
-			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4().getSubstitutionPermission();
+			final PharmSubstitutionPermission pharmSubstitution = this.getMdht().getSubjectOf4()
+					.getSubstitutionPermission();
 			pharmSubstitution.setCode(substanceAdminSubstitution.getCode(languageCode).getCE());
 		} else {
 			this.getMdht().setSubjectOf4(null);

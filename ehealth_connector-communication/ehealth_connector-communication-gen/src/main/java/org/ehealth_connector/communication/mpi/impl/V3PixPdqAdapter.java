@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.io.StringWriter;
@@ -146,10 +148,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	/** The v3 pix consumer. */
 	private V3PixConsumer v3PixConsumer;
-	
+
 	/** The orginal model package. */
 	private EPackage eOrigPackage;
-
 
 	/**
 	 * Instantiates a new v3 pix adapter.
@@ -172,32 +173,6 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			for (final String oid : adapterConfig.getOtherOidIds()) {
 				otherIdsOidSet.add(oid);
 			}
-		}
-	}
-	
-	private void fixV3Package() {
-		// OHT SAGE HACK!! Save the loaded EPackage off
-		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
-		if (eOrigPackage != null) {
-			String name = eOrigPackage.getClass().getName();
-			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
-				log.debug("fixV3Package class loaded, removing here:"+name);
-				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");		
-				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
-				log.debug("V3Package "+V3Package.eINSTANCE.getClass().getName());
-				log.debug("Now set for urn:hl7-org:v3"+ EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3"));
-				this.eOrigPackage = eOrigPackage;
-			} 
-		}
-	}
-	
-	/**
-	 * Post fix v3 package.
-	 */
-	private void postFixV3Package() {
-		if (eOrigPackage != null) {
-			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
-			eOrigPackage = null;
 		}
 	}
 
@@ -668,7 +643,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			return false;
 		}
 		log.debug("configure end");
-		fixV3Package(); 
+		fixV3Package();
 		return true;
 	}
 
@@ -716,9 +691,26 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			log.error("configuring not successful", e);
 			return false;
 		}
-		fixV3Package(); 
+		fixV3Package();
 		log.debug("configure end");
 		return true;
+	}
+
+	private void fixV3Package() {
+		// OHT SAGE HACK!! Save the loaded EPackage off
+		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
+		if (eOrigPackage != null) {
+			String name = eOrigPackage.getClass().getName();
+			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
+				log.debug("fixV3Package class loaded, removing here:" + name);
+				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
+				log.debug("V3Package " + V3Package.eINSTANCE.getClass().getName());
+				log.debug("Now set for urn:hl7-org:v3"
+						+ EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3"));
+				this.eOrigPackage = eOrigPackage;
+			}
+		}
 	}
 
 	/**
@@ -906,7 +898,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (!configurePix(true)) {
 			return false;
 		}
-		
+
 		boolean ret = false;
 
 		final V3PixSourceMessageHelper v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false,
@@ -929,6 +921,16 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		}
 		postFixV3Package();
 		return ret;
+	}
+
+	/**
+	 * Post fix v3 package.
+	 */
+	private void postFixV3Package() {
+		if (eOrigPackage != null) {
+			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
+			eOrigPackage = null;
+		}
 	}
 
 	/**

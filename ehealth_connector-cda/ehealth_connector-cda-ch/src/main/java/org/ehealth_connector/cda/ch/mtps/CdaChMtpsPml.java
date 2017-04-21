@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ch.mtps;
 
@@ -100,8 +102,8 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Adds an DIS entry to the PML Document using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="en">Adds an DIS entry to the PML Document using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
 	 * @param disEntry
@@ -119,8 +121,8 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Adds an MTP entry to the PML Document using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="en">Adds an MTP entry to the PML Document using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
 	 * @param mtpEntry
@@ -138,8 +140,8 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Adds an PADV entry to the PML Document using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="en">Adds an PADV entry to the PML Document using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
 	 * @param padvEntry
@@ -157,8 +159,8 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Adds an PRE entry to the PML Document using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
+	 * <div class="en">Adds an PRE entry to the PML Document using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
 	 * @param preEntry
@@ -181,40 +183,36 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="fr"></div>
 	 *
 	 * @param author
-	 * 			Author of document
+	 *            Author of document
 	 * @param legalAuthenticator
-	 * 			Legal authenticator of document
+	 *            Legal authenticator of document
 	 * @param organization
-	 * 			Parent organization
+	 *            Parent organization
 	 * @param mtpsMtpId
-	 * 			ID of document
+	 *            ID of document
 	 * @param dateOfDocument
-	 * 			Creation date
+	 *            Creation date
 	 * @param languageCode
-	 * 			Langague code for document
+	 *            Langague code for document
 	 */
-	public void createPmlHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient, Identificator mtpsMtpId, Date dateOfDocument, LanguageCode languageCode) {
+	public void createPmlHeader(Author author, Author legalAuthenticator, Organization organization,
+			Patient patient, Identificator mtpsMtpId, Date dateOfDocument,
+			LanguageCode languageCode) {
 
-		if (dateOfDocument != null) this.setTimestamp(dateOfDocument);
-		if (legalAuthenticator != null) this.setLegalAuthenticator(legalAuthenticator);
-		if (organization != null) this.setCustodian(organization);
-		if (languageCode != null) this.setLanguageCode(languageCode);
-		if (author != null) this.addAuthor(author);
-		if (patient != null) this.setPatient(patient);
-		if (mtpsMtpId != null) this.setId(mtpsMtpId);
-	}
-	
-	/**
-	 * <div class="en">Returns the Medication List Section using the eHealth Connector
-	 * convenience API</div> <div class="de"></div> <div class="fr"></div>
-	 *
-	 * @return the Medication List section
-	 */
-	public MedicationListSection getMedicationListSection() {
-		if (this.getMdht().getMedicationListSection() != null) {
-			return new MedicationListSection(this.getMdht().getMedicationListSection());
-		}
-		return null;
+		if (dateOfDocument != null)
+			this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null)
+			this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null)
+			this.setCustodian(organization);
+		if (languageCode != null)
+			this.setLanguageCode(languageCode);
+		if (author != null)
+			this.addAuthor(author);
+		if (patient != null)
+			this.setPatient(patient);
+		if (mtpsMtpId != null)
+			this.setId(mtpsMtpId);
 	}
 
 	/**
@@ -230,6 +228,20 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 			entries.add(new DispenseItemEntry(entry));
 		}
 		return entries;
+	}
+
+	/**
+	 * <div class="en">Returns the Medication List Section using the eHealth
+	 * Connector convenience API</div> <div class="de"></div>
+	 * <div class="fr"></div>
+	 *
+	 * @return the Medication List section
+	 */
+	public MedicationListSection getMedicationListSection() {
+		if (this.getMdht().getMedicationListSection() != null) {
+			return new MedicationListSection(this.getMdht().getMedicationListSection());
+		}
+		return null;
 	}
 
 	/**
@@ -276,6 +288,5 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		}
 		return entries;
 	}
-
 
 }

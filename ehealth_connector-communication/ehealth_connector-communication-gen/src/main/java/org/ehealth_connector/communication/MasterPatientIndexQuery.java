@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.communication;
 
@@ -41,51 +43,30 @@ public class MasterPatientIndexQuery {
 	/** The Constant log. */
 	static private final Log log = LogFactory.getLog(MasterPatientIndexQuery.class);
 
-	/** The orginal model package. */
-	private EPackage eOrigPackage;
-	
-	/** The v3 pdq query. */
-	private final V3PdqQuery v3PdqQuery;
-	
-	/** If not add  exception is thrown when deserializing to a cda model 
-	    org.eclipse.emf.ecore.resource.Resource$IOWrappedException: Class 'ClinicalDocument' is not found or is abstract. (http:///resource0.xml, -1, -1)
-		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.handleErrors(FleXMLLoadImpl.java:171)
-		at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:418)
-		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:92)
-		at org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:55)
-		at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
-		at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518) */
+	/**
+	 * If not add exception is thrown when deserializing to a cda model
+	 * org.eclipse.emf.ecore.resource.Resource$IOWrappedException: Class
+	 * 'ClinicalDocument' is not found or is abstract. (http:///resource0.xml,
+	 * -1, -1) at
+	 * org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.handleErrors(FleXMLLoadImpl.java:171)
+	 * at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:418)
+	 * at
+	 * org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:92)
+	 * at
+	 * org.openhealthtools.mdht.emf.runtime.resource.impl.FleXMLLoadImpl.load(FleXMLLoadImpl.java:55)
+	 * at
+	 * org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	 * at
+	 * org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	 */
 	@SuppressWarnings("unused")
 	static private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
 
-	/**
-	 * Fix v3 package.
-	 */
-	private void fixV3Package() {
-		// OHT SAGE HACK!! Save the loaded EPackage off
-		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
-		if (eOrigPackage != null) {
-			String name = eOrigPackage.getClass().getName();
-			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
-				log.debug("fixV3Package class loaded, removing here:"+name);
-				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");		
-				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
-				log.debug("V3Package "+V3Package.eINSTANCE.getClass().getName());
-				log.debug("Now set for urn:hl7-org:v3"+ EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3"));
-				this.eOrigPackage = eOrigPackage;
-			} 
-		}
-	}
-	
-	/**
-	 * Post fix v3 package.
-	 */
-	private void postFixV3Package() {
-		if (eOrigPackage != null) {
-			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
-			eOrigPackage = null;
-		}
-	}
+	/** The orginal model package. */
+	private EPackage eOrigPackage;
+
+	/** The v3 pdq query. */
+	private final V3PdqQuery v3PdqQuery;
 
 	/**
 	 * Instantiates a new master patient index query.
@@ -216,12 +197,42 @@ public class MasterPatientIndexQuery {
 	}
 
 	/**
+	 * Fix v3 package.
+	 */
+	private void fixV3Package() {
+		// OHT SAGE HACK!! Save the loaded EPackage off
+		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
+		if (eOrigPackage != null) {
+			String name = eOrigPackage.getClass().getName();
+			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
+				log.debug("fixV3Package class loaded, removing here:" + name);
+				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");
+				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
+				log.debug("V3Package " + V3Package.eINSTANCE.getClass().getName());
+				log.debug("Now set for urn:hl7-org:v3"
+						+ EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3"));
+				this.eOrigPackage = eOrigPackage;
+			}
+		}
+	}
+
+	/**
 	 * gets the pdq query object
 	 *
 	 * @return query object
 	 */
 	protected V3PdqQuery getV3PdqQuery() {
 		return v3PdqQuery;
+	}
+
+	/**
+	 * Post fix v3 package.
+	 */
+	private void postFixV3Package() {
+		if (eOrigPackage != null) {
+			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
+			eOrigPackage = null;
+		}
 	}
 
 	/**

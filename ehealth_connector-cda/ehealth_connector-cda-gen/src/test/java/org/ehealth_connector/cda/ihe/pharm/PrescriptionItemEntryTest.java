@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ihe.pharm;
 
@@ -53,6 +55,84 @@ public class PrescriptionItemEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
+	public void testCompResolving() {
+
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
+		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(
+				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
+		entry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				substitutionHandlingEntry.getSubstanceAdminSubstitution());
+
+		entry.setSupplyQuantityValue(new BigDecimal(1.5));
+
+		assertEquals(new BigDecimal(1.5), entry.getSupplyQuantityValue());
+
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				substitutionHandlingEntry.getSubstanceAdminSubstitution());
+
+		final Document document = entry.getDocument(true);
+
+	}
+
+	@Test
+	public void testEffectiveTime() throws Exception {
+
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
+		SXPR_TS sxcmTs = DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTs.setOperator(SetOperator.A);
+		SXPR_TS sxcmTsInner1 = DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTs.getComps().add(sxcmTsInner1);
+
+		IVL_TS ivlTs1 = DatatypesFactory.eINSTANCE.createIVL_TS();
+		IVXB_TS low1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		low1.setValue("20120505");
+		IVXB_TS high1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		high1.setValue("20151105");
+		ivlTs1.setLow(low1);
+		ivlTs1.setHigh(high1);
+		sxcmTsInner1.getComps().add(ivlTs1);
+
+		EIVL_TS eivlTs = DatatypesFactory.eINSTANCE.createEIVL_TS();
+		EIVL_event event = DatatypesFactory.eINSTANCE.createEIVL_event();
+		event.setCode(TimingEvent.ACM.getName());
+		eivlTs.setOperator(SetOperator.A);
+		eivlTs.setEvent(event);
+		sxcmTsInner1.getComps().add(eivlTs);
+
+		SXPR_TS sxcmTsInner2 = DatatypesFactory.eINSTANCE.createSXPR_TS();
+		sxcmTsInner2.setOperator(SetOperator.I);
+		sxcmTs.getComps().add(sxcmTsInner2);
+
+		IVL_TS ivlTs2 = DatatypesFactory.eINSTANCE.createIVL_TS();
+		IVXB_TS low2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		low2.setValue("20120505");
+		IVXB_TS high2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		high2.setValue("20151105");
+		ivlTs2.setLow(low2);
+		ivlTs2.setHigh(high2);
+		sxcmTsInner2.getComps().add(ivlTs2);
+
+		EIVL_TS eivlTs2 = DatatypesFactory.eINSTANCE.createEIVL_TS();
+		EIVL_event event2 = DatatypesFactory.eINSTANCE.createEIVL_event();
+		event2.setCode(TimingEvent.ACV.getName());
+		eivlTs2.setOperator(SetOperator.A);
+		eivlTs2.setEvent(event2);
+		sxcmTsInner2.getComps().add(eivlTs2);
+
+		entry.getMdht().getEffectiveTimes().add(sxcmTs);
+
+		// SXCM_TS
+
+		final Document document = entry.getDocument();
+
+	}
+
+	@Test
 	public void testExternalDocumentEntry() throws Exception {
 
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
@@ -77,6 +157,25 @@ public class PrescriptionItemEntryTest {
 	}
 
 	@Test
+	public void testFeaturesPre() throws XPathExpressionException {
+		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
+
+		entry.getMdht().setText(Util.createEd("Text"));
+
+		Code code = new Code("system", "code", "displayname");
+		entry.getMdht().getApproachSiteCodes().add(code.getCE());
+
+		final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		ivl_pq.setUnit("ml");
+		ivl_pq.setValue(Double.valueOf("2.0"));
+
+		entry.getMdht().setRateQuantity(ivl_pq);
+
+		final Document document = entry.getDocument();
+
+	}
+
+	@Test
 	public void testIdentifier() throws Exception {
 
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
@@ -88,63 +187,6 @@ public class PrescriptionItemEntryTest {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
-	
-	@Test
-	public void testEffectiveTime() throws Exception {
-
-		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		
-		SXPR_TS sxcmTs =  DatatypesFactory.eINSTANCE.createSXPR_TS();
-		sxcmTs.setOperator(SetOperator.A);
-		SXPR_TS sxcmTsInner1 =  DatatypesFactory.eINSTANCE.createSXPR_TS();
-		sxcmTs.getComps().add(sxcmTsInner1);
-		
-		IVL_TS ivlTs1= DatatypesFactory.eINSTANCE.createIVL_TS();
-		IVXB_TS low1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		low1.setValue("20120505");
-		IVXB_TS high1 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		high1.setValue("20151105");
-		ivlTs1.setLow(low1);
-		ivlTs1.setHigh(high1);
-		sxcmTsInner1.getComps().add(ivlTs1);
-		
-		EIVL_TS eivlTs = DatatypesFactory.eINSTANCE.createEIVL_TS();
-		EIVL_event event = DatatypesFactory.eINSTANCE.createEIVL_event();
-		event.setCode(TimingEvent.ACM.getName());
-		eivlTs.setOperator(SetOperator.A);
-		eivlTs.setEvent(event);
-		sxcmTsInner1.getComps().add(eivlTs);
-
-		SXPR_TS sxcmTsInner2 =  DatatypesFactory.eINSTANCE.createSXPR_TS();
-		sxcmTsInner2.setOperator(SetOperator.I);
-		sxcmTs.getComps().add(sxcmTsInner2);
-		
-		IVL_TS ivlTs2= DatatypesFactory.eINSTANCE.createIVL_TS();
-		IVXB_TS low2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		low2.setValue("20120505");
-		IVXB_TS high2 = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		high2.setValue("20151105");
-		ivlTs2.setLow(low2);
-		ivlTs2.setHigh(high2);
-		sxcmTsInner2.getComps().add(ivlTs2);
-
-		EIVL_TS eivlTs2 = DatatypesFactory.eINSTANCE.createEIVL_TS();
-		EIVL_event event2 = DatatypesFactory.eINSTANCE.createEIVL_event();
-		event2.setCode(TimingEvent.ACV.getName());
-		eivlTs2.setOperator(SetOperator.A);
-		eivlTs2.setEvent(event2);
-		sxcmTsInner2.getComps().add(eivlTs2);
-		
-		
-		entry.getMdht().getEffectiveTimes().add(sxcmTs);
-
-		
-//		SXCM_TS
-		
-		final Document document = entry.getDocument();
-
-	}
-
 
 	@Test
 	public void testInstructionsEntry() throws Exception {
@@ -343,31 +385,6 @@ public class PrescriptionItemEntryTest {
 		assertEquals("id2", entry.getReasonFor().getExtension());
 
 	}
-	
-	@Test
-	public void testCompResolving() {
-		
-		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-
-		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
-		substitutionHandlingEntry.setSubstanceAdminSubstitution(
-				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
-		entry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
-
-		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
-				substitutionHandlingEntry.getSubstanceAdminSubstitution());
-
-		entry.setSupplyQuantityValue(new BigDecimal(1.5));
-
-		assertEquals(new BigDecimal(1.5), entry.getSupplyQuantityValue());
-
-		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
-				substitutionHandlingEntry.getSubstanceAdminSubstitution());
-		
-		final Document document = entry.getDocument(true);
-
-
-	}
 
 	@Test
 	public void testSubstitutionHandlingEntry() throws Exception {
@@ -396,7 +413,8 @@ public class PrescriptionItemEntryTest {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//pharm:subjectOf4/pharm:substitutionPermission[@moodCode='PERM' and @classCode='SUBST']");
+		expr = xpath.compile(
+				"//pharm:subjectOf4/pharm:substitutionPermission[@moodCode='PERM' and @classCode='SUBST']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -420,26 +438,5 @@ public class PrescriptionItemEntryTest {
 
 		assertEquals("#reference1", entry.getTextReference());
 	}
-	
-	
-	@Test
-	public void testFeaturesPre() throws XPathExpressionException {
-		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-
-		entry.getMdht().setText(Util.createEd("Text"));
-		
-		Code code = new Code("system","code","displayname");
-		entry.getMdht().getApproachSiteCodes().add(code.getCE());
-		
-		final IVL_PQ ivl_pq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		ivl_pq.setUnit("ml");
-		ivl_pq.setValue(Double.valueOf("2.0"));
-		
-		entry.getMdht().setRateQuantity(ivl_pq);
-
-		final Document document = entry.getDocument();
-
-	}
-
 
 }

@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ihe.pharm;
 
@@ -113,6 +115,25 @@ public class PharmaceuticalAdviceItemEntryTest {
 	}
 
 	@Test
+	public void testPharmaceuticalAdviceConcernEntry() throws Exception {
+
+		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
+
+		final PharmaceuticalAdviceConcernEntry concernEntry = new PharmaceuticalAdviceConcernEntry();
+		concernEntry.setTextReference("Test");
+		entry.setPharmaceuticalAdviceConcernEntry(concernEntry);
+
+		final Document document = entry.getDocument();
+
+		assertEquals(entry.getPharmaceuticalAdviceConcernEntry().getTextReference(), "#Test");
+
+		XPathExpression expr = xpath
+				.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
 	public void testPharmaceuticalAdviceStatus() throws Exception {
 
 		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
@@ -125,25 +146,6 @@ public class PharmaceuticalAdviceItemEntryTest {
 		assertEquals(1, nodes.getLength());
 		assertEquals(PharmaceuticalAdviceStatusList.CANCEL,
 				entry.getPharmaceuticalAdviceStatusList());
-	}
-	
-	@Test
-	public void testPharmaceuticalAdviceConcernEntry() throws Exception {
-
-		final PharmaceuticalAdviceItemEntry entry = new PharmaceuticalAdviceItemEntry();
-		
-		final PharmaceuticalAdviceConcernEntry concernEntry = new PharmaceuticalAdviceConcernEntry();
-		concernEntry.setTextReference("Test");
-		entry.setPharmaceuticalAdviceConcernEntry(concernEntry);
-		
-		final Document document = entry.getDocument();
-		
-		assertEquals(entry.getPharmaceuticalAdviceConcernEntry().getTextReference(), "#Test");
-
-		XPathExpression expr = xpath
-				.compile("//entryRelationship[@typeCode='SUBJ' and @inversionInd='false']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
 	}
 
 	@Test

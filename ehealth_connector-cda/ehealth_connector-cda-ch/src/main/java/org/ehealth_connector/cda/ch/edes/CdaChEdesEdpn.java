@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ch.edes;
 
@@ -41,8 +43,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 /**
  * <div class="en">This class represents a EDES EDPN CDA document. Note that for
  * the section naming, the data element index of IHE EDES was used. See also
- * CDA-CH-EDES, Tabelle 25: Überblick Datenelemente in EDES
- * Inhaltsprofilen </div>
+ * CDA-CH-EDES, Tabelle 25: Überblick Datenelemente in EDES Inhaltsprofilen
+ * </div>
  *
  */
 public class CdaChEdesEdpn
@@ -128,9 +130,9 @@ public class CdaChEdesEdpn
 	 *
 	 * @param activeProblemConcern
 	 *            <br>
-	 *            <div class="en"> active problem concern</div>
-	 *            <div class="de"> Das aktive Leiden</div>
-	 *            <div class="fr"></div> <div class="it"></div>
+	 *            <div class="en"> active problem concern</div> <div class="de">
+	 *            Das aktive Leiden</div> <div class="fr"></div>
+	 *            <div class="it"></div>
 	 */
 	public void addActiveProblemConcern(ActiveProblemConcern activeProblemConcern) {
 		mCommon.addActiveProblemConcern(activeProblemConcern, getDoc().getActiveProblemsSection());

@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
+/*
+ * 
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
- *
+ * 
  * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
  * For exact developer information, please refer to the commit history of the forge.
- *
+ * 
  * This code is made available under the terms of the Eclipse Public License v1.0.
- *
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication;
 
 import static org.junit.Assert.assertEquals;
@@ -97,6 +99,27 @@ public class FolderMetadataTest {
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.communication.FolderMetadata#addCode(org.ehealth_connector.common.Code)}.
+	 */
+	@Test
+	public void testAddCode() {
+		final FolderMetadata ref = new FolderMetadata();
+		assertNotNull(ref.getCodeList());
+		assertEquals(0, ref.getCodeList().size());
+
+		ref.addCode(testCode1);
+		assertNotNull(ref.getCodeList());
+		assertEquals(1, ref.getCodeList().size());
+		assertEquals(testCode1, ref.getCodeList().get(0));
+
+		ref.addCode(testCode2);
+		assertNotNull(ref.getCodeList());
+		assertEquals(2, ref.getCodeList().size());
+		assertEquals(testCode2, ref.getCodeList().get(1));
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.communication.FolderMetadata#setAvailabilityStatus(org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType)}.
 	 */
 	@Test
@@ -127,27 +150,6 @@ public class FolderMetadataTest {
 		assertEquals(testCode1, ref.getCodeList().get(0));
 		assertEquals(testCode2, ref.getCodeList().get(1));
 
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.communication.FolderMetadata#addCode(org.ehealth_connector.common.Code)}.
-	 */
-	@Test
-	public void testAddCode() {
-		final FolderMetadata ref = new FolderMetadata();
-		assertNotNull(ref.getCodeList());
-		assertEquals(0, ref.getCodeList().size());
-
-		ref.addCode(testCode1);
-		assertNotNull(ref.getCodeList());
-		assertEquals(1, ref.getCodeList().size());
-		assertEquals(testCode1, ref.getCodeList().get(0));
-
-		ref.addCode(testCode2);
-		assertNotNull(ref.getCodeList());
-		assertEquals(2, ref.getCodeList().size());
-		assertEquals(testCode2, ref.getCodeList().get(1));
 	}
 
 	/**

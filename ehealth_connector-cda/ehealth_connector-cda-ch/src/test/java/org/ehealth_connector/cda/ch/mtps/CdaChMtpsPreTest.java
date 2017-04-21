@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.cda.ch.mtps;
 
 import static org.junit.Assert.assertEquals;
@@ -67,13 +69,16 @@ public class CdaChMtpsPreTest extends TestUtils {
 
 	private CdaChMtpsPre deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
+		return new CdaChMtpsPre(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
 	}
 
 	private CdaChMtpsPre deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getCdaChMtpsPre());
-		return new CdaChMtpsPre((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChMtpsPre());
+		return new CdaChMtpsPre(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
 	}
 
 	@Test
@@ -83,7 +88,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChMtpsPre cdaDeserialized = deserializeCdaDirect(deserialized);
 		assertTrue(cdaDeserialized != null);
-		assertEquals("Prescription for medication", cdaDeserialized.getPrescriptionSection().getTitle());
+		assertEquals("Prescription for medication",
+				cdaDeserialized.getPrescriptionSection().getTitle());
 
 	}
 
@@ -136,7 +142,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath
+				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -165,11 +172,13 @@ public class CdaChMtpsPreTest extends TestUtils {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
 		final Document document = cda.getDocument();
 
-		XPathExpression expr = xpath.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.1']");
+		XPathExpression expr = xpath
+				.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.1']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
+		expr = xpath.compile(
+				"//*/section/code[@code='57828-6' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -185,8 +194,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		preEntry.setTextReference("#pre");
 
 		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
-		substitutionHandlingEntry.setSubstanceAdminSubstitution(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
-				LanguageCode.ENGLISH);
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(
+				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
 		preEntry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
 
 		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
@@ -195,8 +204,8 @@ public class CdaChMtpsPreTest extends TestUtils {
 		preEntry.setSupplyQuantityValue(new BigDecimal(1.5));
 
 		MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(preEntry);
-		frequency.setMedicationFrequency(PosologyType.NTimesADay, 2, new TimingEvent[] { TimingEvent.DURING_MEAL },
-				null, 0, null, null);
+		frequency.setMedicationFrequency(PosologyType.NTimesADay, 2,
+				new TimingEvent[] { TimingEvent.DURING_MEAL }, null, 0, null, null);
 
 		cda.getPrescriptionSection().addPrescriptionItemEntry(preEntry);
 
@@ -206,11 +215,11 @@ public class CdaChMtpsPreTest extends TestUtils {
 
 		assertTrue(cdaDeserialized != null);
 
-		assertEquals("#pre",
-				cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries().get(0).getTextReference());
+		assertEquals("#pre", cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries()
+				.get(0).getTextReference());
 
-		assertEquals(new BigDecimal(1.5),
-				cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries().get(0).getSupplyQuantityValue());
+		assertEquals(new BigDecimal(1.5), cdaDeserialized.getPrescriptionSection()
+				.getPrescriptionItemEntries().get(0).getSupplyQuantityValue());
 
 		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
 				cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries().get(0)

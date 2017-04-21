@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.cda.ch;
 
 import java.util.Date;
@@ -82,9 +84,9 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            entry</div> <div class="it"> problem entry</div>
 	 * @param concernStatus
 	 *            <div class="en">status of the concern</div>
-	 *            <div class="de">Status des Leidens</div>
-	 *            <div class="fr"> problem status code</div>
-	 *            <div class="it"> problem status code</div>
+	 *            <div class="de">Status des Leidens</div> <div class="fr">
+	 *            problem status code</div> <div class="it"> problem status
+	 *            code</div>
 	 */
 	public ActiveProblemConcern(String concern, AbstractProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus) {
@@ -108,9 +110,9 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            entry</div> <div class="it"> problem entry</div>
 	 * @param problemStatusCode
 	 *            <div class="en">status of the concern</div>
-	 *            <div class="de">Status des Leidens</div>
-	 *            <div class="fr"> problem status code</div>
-	 *            <div class="it"> problem status code</div>
+	 *            <div class="de">Status des Leidens</div> <div class="fr">
+	 *            problem status code</div> <div class="it"> problem status
+	 *            code</div>
 	 */
 	public ActiveProblemConcern(String concern, Date date, AbstractProblemEntry problemEntry,
 			ProblemConcernStatusCode problemStatusCode) {
@@ -142,9 +144,9 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            entry</div> <div class="it"> problem entry</div>
 	 * @param problemConcernStatus
 	 *            <div class="en">Status of the concern</div>
-	 *            <div class="de">Status des Leidens</div>
-	 *            <div class="fr"> problem concern status</div>
-	 *            <div class="it"> problem concern status</div>
+	 *            <div class="de">Status des Leidens</div> <div class="fr">
+	 *            problem concern status</div> <div class="it"> problem concern
+	 *            status</div>
 	 */
 	public ActiveProblemConcern(String concern, Date begin, Date end,
 			AbstractProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {

@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2016
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 
 package org.ehealth_connector.cda.ch.mtps;
 
@@ -160,12 +162,13 @@ public class MedicationFrequencyContentModule
 		if (effectiveTime instanceof SXPR_TS) {
 			final SXPR_TS components = (SXPR_TS) effectiveTime;
 			final EList<SXCM_TS> comps = components.getComps();
-			if ((comps.size() == 2) && (comps.get(0) instanceof PIVL_TS) && isEvents(comps.get(1))) {
+			if ((comps.size() == 2) && (comps.get(0) instanceof PIVL_TS)
+					&& isEvents(comps.get(1))) {
 				final PIVL_TS period = (PIVL_TS) comps.get(0);
 				return getMedicationFrequency(period, null, getEvents(comps.get(1)), null);
 			}
-			if ((comps.size() == 3) && (comps.get(0) instanceof PIVL_TS && (comps.get(1) instanceof PIVL_TS)
-					&& isEvents(comps.get(2)))) {
+			if ((comps.size() == 3) && (comps.get(0) instanceof PIVL_TS
+					&& (comps.get(1) instanceof PIVL_TS) && isEvents(comps.get(2)))) {
 				final PIVL_TS period = (PIVL_TS) comps.get(0);
 				final PIVL_TS freqPeriod = (PIVL_TS) comps.get(1);
 				return getMedicationFrequency(period, freqPeriod, getEvents(comps.get(2)), null);
@@ -187,8 +190,8 @@ public class MedicationFrequencyContentModule
 	 *            the dosages
 	 * @return the medication frequency
 	 */
-	protected MedicationFrequency getMedicationFrequency(PIVL_TS period, PIVL_TS freqPeriod, EIVL_TS[] events,
-			IVL_PQ[] dosages) {
+	protected MedicationFrequency getMedicationFrequency(PIVL_TS period, PIVL_TS freqPeriod,
+			EIVL_TS[] events, IVL_PQ[] dosages) {
 		final MedicationFrequency medicationFrequency = new MedicationFrequency();
 		if (period != null) {
 			if (period.getInstitutionSpecified().booleanValue()) {
@@ -246,7 +249,8 @@ public class MedicationFrequencyContentModule
 			}
 			medicationFrequency.timingEvents = new TimingEvent[events.length];
 			for (int i = 0; i < events.length; ++i) {
-				medicationFrequency.timingEvents[i] = TimingEvent.getEnum(events[i].getEvent().getCode());
+				medicationFrequency.timingEvents[i] = TimingEvent
+						.getEnum(events[i].getEvent().getCode());
 			}
 			if (dosages != null) {
 				medicationFrequency.dosage = DosageType.Split;
@@ -301,8 +305,9 @@ public class MedicationFrequencyContentModule
 	 * @return true, if successful
 	 */
 	public boolean setMedicationFrequency(MedicationFrequency medicationFrequency) {
-		return this.setMedicationFrequency(medicationFrequency.posology, medicationFrequency.posologyFactor,
-				medicationFrequency.timingEvents, medicationFrequency.frequency, medicationFrequency.frequencyFactor,
+		return this.setMedicationFrequency(medicationFrequency.posology,
+				medicationFrequency.posologyFactor, medicationFrequency.timingEvents,
+				medicationFrequency.frequency, medicationFrequency.frequencyFactor,
 				medicationFrequency.dosage, medicationFrequency.doseQuantities);
 	}
 
@@ -326,8 +331,9 @@ public class MedicationFrequencyContentModule
 	 *            the dose quantities
 	 * @return true, if successful
 	 */
-	public boolean setMedicationFrequency(PosologyType posology, double posologyFactory, TimingEvent[] timingEvents,
-			FrequencyType frequency, double frequencyFactor, DosageType dosage, Value[] doseQuantities) {
+	public boolean setMedicationFrequency(PosologyType posology, double posologyFactory,
+			TimingEvent[] timingEvents, FrequencyType frequency, double frequencyFactor,
+			DosageType dosage, Value[] doseQuantities) {
 
 		if (dosage == null) {
 			dosage = DosageType.Normal;
@@ -408,8 +414,8 @@ public class MedicationFrequencyContentModule
 			default:
 				break;
 			}
-			setMedicationFrequencyPeriod(posFactor, posUnit, posInstitiutionSpecified, timingEvents, freqFactor,
-					freqUnit, freqInstitiutionSpecified, doseQuantities);
+			setMedicationFrequencyPeriod(posFactor, posUnit, posInstitiutionSpecified, timingEvents,
+					freqFactor, freqUnit, freqInstitiutionSpecified, doseQuantities);
 			return true;
 		}
 
@@ -438,8 +444,8 @@ public class MedicationFrequencyContentModule
 	 *            the dose quantities
 	 */
 	public void setMedicationFrequencyPeriod(double value, Ucum unit, boolean institutionSpecified,
-			TimingEvent[] timingEvents, double freqValue, Ucum freqUnit, boolean freqInstitutionSpecified,
-			Value[] doseQuantities) {
+			TimingEvent[] timingEvents, double freqValue, Ucum freqUnit,
+			boolean freqInstitutionSpecified, Value[] doseQuantities) {
 
 		if (timingEvents == null && freqUnit == null) {
 			setMedicationFrequencyEffectiveTime(getPeriod(value, unit, institutionSpecified, true));
@@ -460,7 +466,8 @@ public class MedicationFrequencyContentModule
 		}
 
 		if (freqUnit != null) {
-			sxcmTs.getComps().add(getPeriod(freqValue, freqUnit, freqInstitutionSpecified, setOperatorA));
+			sxcmTs.getComps()
+					.add(getPeriod(freqValue, freqUnit, freqInstitutionSpecified, setOperatorA));
 			setOperatorA = true;
 		}
 		if (timingEvents != null && doseQuantities == null) {
@@ -470,8 +477,8 @@ public class MedicationFrequencyContentModule
 		if (doseQuantities != null) {
 			setSplitDosing();
 			for (int i = 0; i < timingEvents.length; ++i) {
-				this.setSubordinateSubstanceAdministration(i + 1, getTimingEvent(timingEvents[i], false, false),
-						getIVLPQ(doseQuantities[i]));
+				this.setSubordinateSubstanceAdministration(i + 1,
+						getTimingEvent(timingEvents[i], false, false), getIVLPQ(doseQuantities[i]));
 			}
 			if (sxcmTs.getComps() != null && sxcmTs.getComps().size() == 0) {
 				return;

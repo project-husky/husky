@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication.ch.enums;
 
 import org.ehealth_connector.common.Code;
@@ -65,8 +67,8 @@ public enum TypeCode implements CodedMetadataEnumInterface {
 	 */
 	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN("60046", "Dokument mit Kontraindikationen, Unverträglichkeiten…."),
 	/**
-	 * <div class = "de"> Echokardiographie - Befund </div>
-	 * <div class = "fr"> </div> <div class = "it"> </div>
+	 * <div class = "de"> Echokardiographie - Befund </div> <div class = "fr">
+	 * </div> <div class = "it"> </div>
 	 */
 	ECHOKARDIOGRAPHIE_BEFUND("60029", "Echokardiographie-Befund"),
 	/**

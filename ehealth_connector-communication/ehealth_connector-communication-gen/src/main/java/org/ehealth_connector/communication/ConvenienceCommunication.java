@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication;
 
 import java.io.File;
@@ -224,6 +226,46 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 *
+	 * <div class="en">Add a document to a folder by theire ids</div>
+	 *
+	 * @param documentEntryUUID
+	 *            the entry uuid of the document
+	 * @param folderEntryUUID
+	 *            the entry uuid of the folder
+	 */
+	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
+		txnData.addDocumentToFolder(documentEntryUUID, folderEntryUUID);
+	}
+
+	/**
+	 * <div class="en">Adds a xds folder.</div>
+	 *
+	 * @param submissionSetContentType
+	 *            the contenttype code for submission set
+	 * @return the metadata of the new fold
+	 */
+	public FolderMetadata addFolder(Code submissionSetContentType) {
+		if (txnData == null) {
+			txnData = new SubmitTransactionData();
+		}
+		XDSSourceAuditor.getAuditor().getConfig()
+				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
+
+		final String fodlerEntryUUID = txnData.addFolder();
+		final FolderMetadata folderMeta = new FolderMetadata(txnData.getFolder(fodlerEntryUUID));
+
+		if (folderMeta.getUniqueId() == null) {
+			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+			folderMeta.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+		}
+		txnData.getSubmissionSet().setContentTypeCode(
+				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(submissionSetContentType));
+
+		return folderMeta;
+	}
+
+	/**
 	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
 	 *
 	 * @param doc
@@ -263,46 +305,6 @@ public class ConvenienceCommunication {
 			log.error("Error adding document by submit transaction.", e);
 		}
 		return null;
-	}
-
-	/**
-	 * <div class="en">Adds a xds folder.</div>
-	 *
-	 * @param submissionSetContentType
-	 *            the contenttype code for submission set
-	 * @return the metadata of the new fold
-	 */
-	public FolderMetadata addFolder(Code submissionSetContentType) {
-		if (txnData == null) {
-			txnData = new SubmitTransactionData();
-		}
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
-
-		final String fodlerEntryUUID = txnData.addFolder();
-		final FolderMetadata folderMeta = new FolderMetadata(txnData.getFolder(fodlerEntryUUID));
-
-		if (folderMeta.getUniqueId() == null) {
-			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
-			folderMeta.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-		}
-		txnData.getSubmissionSet().setContentTypeCode(
-				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(submissionSetContentType));
-
-		return folderMeta;
-	}
-
-	/**
-	 * 
-	 * <div class="en">Add a document to a folder by theire ids</div>
-	 *
-	 * @param documentEntryUUID
-	 *            the entry uuid of the document
-	 * @param folderEntryUUID
-	 *            the entry uuid of the folder
-	 */
-	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		txnData.addDocumentToFolder(documentEntryUUID, folderEntryUUID);
 	}
 
 	/**
@@ -673,20 +675,6 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Queries the document registry of the affinity domain for
-	 * documents, using a find documents query.
-	 *
-	 * @param queryParameter
-	 *            a findFoldersQuery object filled with your query parameters
-	 * @return the OHT XDSQueryResponseType containing full folder metadata
-	 *         </div>
-	 * 
-	 */
-	public XDSQueryResponseType queryFolders(FindFoldersStoredQuery queryParameter) {
-		return this.queryDocuments(queryParameter);
-	}
-
-	/**
 	 * <div class="en">Queries the registry of the affinity domain for all
 	 * documents satisfying the given query parameters.
 	 *
@@ -736,6 +724,20 @@ public class ConvenienceCommunication {
 			log.error("Exception", e);
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Queries the document registry of the affinity domain for
+	 * documents, using a find documents query.
+	 *
+	 * @param queryParameter
+	 *            a findFoldersQuery object filled with your query parameters
+	 * @return the OHT XDSQueryResponseType containing full folder metadata
+	 *         </div>
+	 *
+	 */
+	public XDSQueryResponseType queryFolders(FindFoldersStoredQuery queryParameter) {
+		return this.queryDocuments(queryParameter);
 	}
 
 	/**

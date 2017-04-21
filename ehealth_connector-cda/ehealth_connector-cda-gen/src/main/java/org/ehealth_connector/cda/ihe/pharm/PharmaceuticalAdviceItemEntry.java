@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.cda.ihe.pharm;
 
 import java.util.ArrayList;
@@ -82,6 +84,79 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
+	 * Adds an author to the authors list
+	 *
+	 * @param author
+	 *            Author to add to the list
+	 *
+	 */
+	public void addAuthor(org.ehealth_connector.common.Author author) {
+
+		this.getMdht().getAuthors().add(author.getAuthorMdht());
+
+	}
+
+	/**
+	 * Add the modified Dosage instructions
+	 *
+	 * @param modifiedDosageInstructions
+	 *            New dosage instructions (substrance administration)
+	 */
+	public void addModifiedDosageInstructions(SubstanceAdministration substanceAdministration) {
+
+		final EntryRelationship newDosageInstructions = CDAFactory.eINSTANCE
+				.createEntryRelationship();
+		newDosageInstructions.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newDosageInstructions.setInversionInd(false);
+
+		newDosageInstructions.setSubstanceAdministration(substanceAdministration);
+
+		this.getMdht().getEntryRelationships().add(newDosageInstructions);
+
+	}
+
+	/**
+	 * Add the modified MTP Item
+	 *
+	 * @param newMtpItem
+	 *            Modified MTP Item
+	 */
+	public void addModifiedMtpItem(EntryRelationship newMtpItem) {
+
+		this.getMdht().getEntryRelationships().add(newMtpItem);
+
+	}
+
+	/**
+	 * Add the modified Prescription
+	 *
+	 * @param modifiedPrescription
+	 *            New prescription (substrance administration)
+	 */
+	public void addModifiedPrescription(SubstanceAdministration substanceAdministration) {
+
+		final EntryRelationship newPrescription = CDAFactory.eINSTANCE.createEntryRelationship();
+		newPrescription.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newPrescription.setInversionInd(false);
+
+		final Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
+		organizer.setClassCode(x_ActClassDocumentEntryOrganizer.CLUSTER);
+		organizer.setMoodCode(ActMood.EVN);
+
+		final CS statusCodeOrganizer = DatatypesFactory.eINSTANCE.createCS();
+		statusCodeOrganizer.setCode(StatusCode.COMPLETED_CODE);
+		organizer.setStatusCode(statusCodeOrganizer);
+
+		final Component4 newPrescriptionComponent = CDAFactory.eINSTANCE.createComponent4();
+		newPrescriptionComponent.setSeperatableInd(DatatypesFactory.eINSTANCE.createBL(false));
+		newPrescriptionComponent.setSubstanceAdministration(substanceAdministration);
+		organizer.getComponents().add(newPrescriptionComponent);
+		newPrescription.setOrganizer(organizer);
+		this.getMdht().getEntryRelationships().add(newPrescription);
+
+	}
+
+	/**
 	 * Adds the precondition entry.
 	 *
 	 * @param entry
@@ -91,6 +166,45 @@ public class PharmaceuticalAdviceItemEntry extends
 		final Precondition precondition = CDAFactory.eINSTANCE.createPrecondition();
 		precondition.setCriterion(entry.getMdht());
 		getMdht().getPreconditions().add(precondition);
+	}
+
+	/**
+	 * Set the document reference (used when the item is in a PML document)
+	 *
+	 * @param documentId
+	 *            ID of the parent document
+	 *
+	 */
+	public void addXCRPTReference(Identificator documentId) {
+
+		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
+		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
+		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
+		documentEntry.getMdht().getTemplateIds().clear();
+		documentEntry.setId(documentId);
+		documentEntry.getMdht().unsetMoodCode();
+		documentEntry.getMdht().unsetClassCode();
+		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
+		this.getMdht().getReferences().add(referenceXCRPT);
+
+	}
+
+	/**
+	 * Returns the authors
+	 *
+	 * @return authors list
+	 *
+	 */
+	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
+
+		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
+
+		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
+			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
+		}
+
+		return authors;
+
 	}
 
 	/**
@@ -184,6 +298,19 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
+	 * Gets the pharmaceutical advice concern entry.
+	 *
+	 * @return the pharmaceutical advice concern entry
+	 */
+	public PharmaceuticalAdviceConcernEntry getPharmaceuticalAdviceConcernEntry() {
+		if (getMdht().getPharmaceuticalAdviceConcernEntry() != null) {
+			return new PharmaceuticalAdviceConcernEntry(
+					getMdht().getPharmaceuticalAdviceConcernEntry());
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the pharmaceutical advice status.
 	 *
 	 * @return the pharmaceutical advice status
@@ -210,18 +337,7 @@ public class PharmaceuticalAdviceItemEntry extends
 		}
 		return null;
 	}
-	
-	/**
-	 * Gets the pharmaceutical advice concern entry.
-	 *
-	 * @return the pharmaceutical advice concern entry
-	 */
-	public PharmaceuticalAdviceConcernEntry getPharmaceuticalAdviceConcernEntry() {
-		if (getMdht().getPharmaceuticalAdviceConcernEntry() != null) {
-					return new PharmaceuticalAdviceConcernEntry(getMdht().getPharmaceuticalAdviceConcernEntry());	
-		}
-		return null;
-	}
+
 	/**
 	 * Gets the precondition entries.
 	 *
@@ -247,7 +363,7 @@ public class PharmaceuticalAdviceItemEntry extends
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gets the text reference.
 	 *
@@ -392,6 +508,31 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
+	 * Sets the phamaceutical advice concern entry
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void setPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
+		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
+		if (old != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setAct(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setAct(entry.getMdht());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+
+	/**
 	 * Sets the pharmaceutical advice status.
 	 *
 	 * @param code
@@ -410,31 +551,6 @@ public class PharmaceuticalAdviceItemEntry extends
 	public void setPharmaceuticalAdviceStatus(PharmaceuticalAdviceStatusList code) {
 		if (code != null) {
 			this.getMdht().setCode(code.getCode().getCD());
-		}
-	}
-	
-	/**
-	 * Sets the phamaceutical advice concern entry
-	 *
-	 * @param entry
-	 *            the entry
-	 */
-	public void setPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
-		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
-		if (old != null) {
-			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setAct(entry.getMdht());
-					break;
-				}
-			}
-		}else {
-			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
-					.createEntryRelationship();
-			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-			entryRelationship.setInversionInd(Boolean.FALSE);
-			entryRelationship.setAct(entry.getMdht());
-			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
 	}
 
@@ -480,118 +596,6 @@ public class PharmaceuticalAdviceItemEntry extends
 	@Override
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
-	}
-
-	/**
-	 * Set the document reference (used when the item is in a PML document)
-	 * 
-	 * @param documentId
-	 * 			ID of the parent document
-	 * 
-	 */
-	public void addXCRPTReference(Identificator documentId) {
-		
-		final Reference referenceXCRPT = CDAFactory.eINSTANCE.createReference();
-		referenceXCRPT.setTypeCode(x_ActRelationshipExternalReference.XCRPT);
-		final ExternalDocumentEntry documentEntry = new ExternalDocumentEntry();
-		documentEntry.getMdht().getTemplateIds().clear();
-		documentEntry.setId(documentId);
-		documentEntry.getMdht().unsetMoodCode();
-		documentEntry.getMdht().unsetClassCode();
-		referenceXCRPT.setExternalDocument(documentEntry.getMdht());
-		this.getMdht().getReferences().add(referenceXCRPT);
-		
-	}
-	
-	/**
-	 * Returns the authors
-	 * 
-	 * @return authors list 
-	 * 
-	 */
-	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
-
-		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
-
-		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
-			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
-		}
-		
-		return authors;
-		
-	}
-	
-	/**
-	 * Adds an author to the authors list
-	 * 
-	 * @param author
-	 * 			Author to add to the list
-	 * 
-	 */
-	public void addAuthor(org.ehealth_connector.common.Author author) {
-
-		this.getMdht().getAuthors().add(author.getAuthorMdht());
-		
-	}
-
-	/**
-	 * Add the modified MTP Item
-	 * 
-	 * @param	newMtpItem
-	 * 				Modified MTP Item
-	 */
-	public void addModifiedMtpItem(EntryRelationship newMtpItem) {
-		
-		this.getMdht().getEntryRelationships().add(newMtpItem);
-
-		
-	}
-	
-	/**
-	 * Add the modified Prescription
-	 * 
-	 * @param	modifiedPrescription
-	 * 					New prescription (substrance administration)
-	 */
-	public void addModifiedPrescription(SubstanceAdministration substanceAdministration) {
-		
-		final EntryRelationship newPrescription = CDAFactory.eINSTANCE.createEntryRelationship();
-		newPrescription.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		newPrescription.setInversionInd(false);
-
-		final Organizer organizer = CDAFactory.eINSTANCE.createOrganizer();
-		organizer.setClassCode(x_ActClassDocumentEntryOrganizer.CLUSTER);
-		organizer.setMoodCode(ActMood.EVN);
-		
-		final CS statusCodeOrganizer = DatatypesFactory.eINSTANCE.createCS();
-		statusCodeOrganizer.setCode(StatusCode.COMPLETED_CODE);
-		organizer.setStatusCode(statusCodeOrganizer);
-		
-		final Component4 newPrescriptionComponent = CDAFactory.eINSTANCE.createComponent4();
-		newPrescriptionComponent.setSeperatableInd(DatatypesFactory.eINSTANCE.createBL(false));
-		newPrescriptionComponent.setSubstanceAdministration(substanceAdministration);
-		organizer.getComponents().add(newPrescriptionComponent);
-		newPrescription.setOrganizer(organizer);
-		this.getMdht().getEntryRelationships().add(newPrescription);
-		
-	}
-
-	/**
-	 * Add the modified Dosage instructions
-	 * 
-	 * @param	modifiedDosageInstructions
-	 * 					New dosage instructions (substrance administration)
-	 */
-	public void addModifiedDosageInstructions(SubstanceAdministration substanceAdministration) {
-		
-		final EntryRelationship newDosageInstructions = CDAFactory.eINSTANCE.createEntryRelationship();
-		newDosageInstructions.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		newDosageInstructions.setInversionInd(false);
-
-		newDosageInstructions.setSubstanceAdministration(substanceAdministration);
-
-		this.getMdht().getEntryRelationships().add(newDosageInstructions);
-		
 	}
 
 }

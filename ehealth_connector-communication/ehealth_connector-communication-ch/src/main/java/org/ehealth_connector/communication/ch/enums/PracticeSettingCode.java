@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.communication.ch.enums;
 
 import org.ehealth_connector.common.Code;
@@ -82,9 +84,9 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 */
 	DERMATOLOGIE_UND_VENEROLOGIE("10009", "Dermatologie und Venerologie"),
 	/**
-	 * <div class="de"> Endokrinologie/Diabetologie </div>
-	 * <div class="fr"> Endocrinologie/diabétologie </div>
-	 * <div class="it"> Endocrinologia/diabetologia </div>
+	 * <div class="de"> Endokrinologie/Diabetologie </div> <div class="fr">
+	 * Endocrinologie/diabétologie </div> <div class="it">
+	 * Endocrinologia/diabetologia </div>
 	 */
 	ENDOKRINOLOGIEDIABETOLOGIE("10010", "Endokrinologie/Diabetologie"),
 	/**
@@ -247,8 +249,8 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	PHARMAKOLOGIE("10005", "Pharmakologie"),
 	/**
 	 * <div class="de">Physikalische Medizin </div>
-	 * <div class="fr">Kinésithérapie </div> <div class="it">Medicina
-	 * fisica </div>
+	 * <div class="fr">Kinésithérapie </div> <div class="it">Medicina fisica
+	 * </div>
 	 */
 	PHYSIKALISCHE_MEDIZIN("10039", "Physikalische Medizin "),
 	/**
@@ -264,9 +266,8 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 */
 	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE("10041", "Plastische, Rekonstruktive und Asthetische Chirurgie"),
 	/**
-	 * <div class = "de"> Pneumologie </div>
-	 * <div class = "fr"> Pneumologie </div>
-	 * <div class = "it"> Pneumologia </div>
+	 * <div class = "de"> Pneumologie </div> <div class = "fr"> Pneumologie
+	 * </div> <div class = "it"> Pneumologia </div>
 	 */
 	PNEUMOLOGIE("10042", "Pneumologie"),
 	/**
@@ -366,8 +367,8 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="de">Code für Allgemeinmedizin </div> <div class="fr">Code de
-	 * Médecine générale </div> <div class="it">Code per Medicina
-	 * generale </div>
+	 * Médecine générale </div> <div class="it">Code per Medicina generale
+	 * </div>
 	 */
 	public static final String ALLGEMEINMEDIZIN_CODE = "10002";
 

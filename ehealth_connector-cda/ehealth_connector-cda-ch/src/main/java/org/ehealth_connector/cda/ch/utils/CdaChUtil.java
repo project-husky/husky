@@ -1,18 +1,20 @@
-/*******************************************************************************
- *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+/*
+ * 
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ * 
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
- *
+ * For exact developer information, please refer to the commit history of the forge.
+ * 
  * This code is made available under the terms of the Eclipse Public License v1.0.
- *
+ * 
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- *
- * Year of publication: 2015
- *
- *******************************************************************************/
+ * 
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * 
+ */
 package org.ehealth_connector.cda.ch.utils;
 
 import java.io.FileInputStream;
@@ -24,12 +26,12 @@ import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
-import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
-import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPml;
-import org.ehealth_connector.cda.ch.mtps.CdaChMtpsMtp;
-import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPre;
 import org.ehealth_connector.cda.ch.mtps.CdaChMtpsDis;
+import org.ehealth_connector.cda.ch.mtps.CdaChMtpsMtp;
 import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPadv;
+import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPml;
+import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPre;
+import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -44,6 +46,39 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtil {
+
+	/**
+	 * <div class="en">Loads a CdaChMtpsDis document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChMtpsDis aus einer Datei.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param filePath
+	 *            path to the XML file
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChVacd Document
+	 */
+	public static CdaChMtpsDis loadDisFromFile(String filePath) throws Exception {
+		final InputStream inputstream = new FileInputStream(filePath);
+		return loadDisFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChMtpsDis document from an input stream.</div>
+	 * <div class="de">Lädt ein CdaChMtpsDis aus einem inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the input stream
+	 * @return the CdaChMtpsDis Document
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static CdaChMtpsDis loadDisFromStream(InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChMtpsDis> loader = new CdaChLoader<CdaChMtpsDis>();
+		return loader.loadFromStream(inputStream, CdaChMtpsDis.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis.class);
+	}
 
 	/**
 	 * <div class="en">Loads a CdaChEdesCtnn document from a given File.</div>
@@ -211,36 +246,69 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChVacd document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChVacd aus einer Datei.</div>
+	 * <div class="en">Loads a CdaChMtpsMtp document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChMtpsMtp aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param filePath
 	 *            path to the XML file
 	 * @throws Exception
 	 *             the exception
-	 * @return the CdaChVacd Document
+	 * @return the CdaChMtpsMtp Document
 	 */
-	public static CdaChVacd loadVacdFromFile(String filePath) throws Exception {
+	public static CdaChMtpsMtp loadMtpFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadVacdFromStream(inputstream);
+		return loadMtpFromStream(inputstream);
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChVacd document from an input stream.</div>
-	 * <div class="de">Lädt ein CdaChVacd aus einem inputstream.</div>
+	 * <div class="en">Loads a CdaChMtpsMtp document from an input stream.</div>
+	 * <div class="de">Lädt ein CdaChMtpsMtp aus einem inputstream.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param inputStream
 	 *            the input stream
-	 * @return the CdaChVacd Document
+	 * @return the CdaChMtpsMtp Document
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChVacd loadVacdFromStream(InputStream inputStream) throws Exception {
-		final CdaChLoader<CdaChVacd> loader = new CdaChLoader<CdaChVacd>();
-		return loader.loadFromStream(inputStream, CdaChVacd.class,
-				org.openhealthtools.mdht.uml.cda.ch.VACD.class);
+	public static CdaChMtpsMtp loadMtpFromStream(InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChMtpsMtp> loader = new CdaChLoader<CdaChMtpsMtp>();
+		return loader.loadFromStream(inputStream, CdaChMtpsMtp.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp.class);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChMtpsPadv document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChMtpsPadv aus einer Datei.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param filePath
+	 *            path to the XML file
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChMtpsPadv Document
+	 */
+	public static CdaChMtpsPadv loadPadvFromFile(String filePath) throws Exception {
+		final InputStream inputstream = new FileInputStream(filePath);
+		return loadPadvFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChMtpsPadv document from an input
+	 * stream.</div> <div class="de">Lädt ein CdaChMtpsPadv aus einem
+	 * inputstream.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the input stream
+	 * @return the CdaChMtpsPadv Document
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static CdaChMtpsPadv loadPadvFromStream(InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChMtpsPadv> loader = new CdaChLoader<CdaChMtpsPadv>();
+		return loader.loadFromStream(inputStream, CdaChMtpsPadv.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv.class);
 	}
 
 	/**
@@ -277,39 +345,6 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChMtpsMtp document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChMtpsMtp aus einer Datei.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param filePath
-	 *            path to the XML file
-	 * @throws Exception
-	 *             the exception
-	 * @return the CdaChMtpsMtp Document
-	 */
-	public static CdaChMtpsMtp loadMtpFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpFromStream(inputstream);
-	}
-
-	/**
-	 * <div class="en">Loads a CdaChMtpsMtp document from an input stream.</div>
-	 * <div class="de">Lädt ein CdaChMtpsMtp aus einem inputstream.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param inputStream
-	 *            the input stream
-	 * @return the CdaChMtpsMtp Document
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static CdaChMtpsMtp loadMtpFromStream(InputStream inputStream) throws Exception {
-		final CdaChLoader<CdaChMtpsMtp> loader = new CdaChLoader<CdaChMtpsMtp>();
-		return loader.loadFromStream(inputStream, CdaChMtpsMtp.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp.class);
-	}
-
-	/**
 	 * <div class="en">Loads a CdaChMtpsPre document from a given File.</div>
 	 * <div class="de">Lädt ein CdaChMtpsPre aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -343,8 +378,8 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChMtpsDis document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChMtpsDis aus einer Datei.</div>
+	 * <div class="en">Loads a CdaChVacd document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChVacd aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param filePath
@@ -353,59 +388,26 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *             the exception
 	 * @return the CdaChVacd Document
 	 */
-	public static CdaChMtpsDis loadDisFromFile(String filePath) throws Exception {
+	public static CdaChVacd loadVacdFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadDisFromStream(inputstream);
+		return loadVacdFromStream(inputstream);
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChMtpsDis document from an input stream.</div>
-	 * <div class="de">Lädt ein CdaChMtpsDis aus einem inputstream.</div>
+	 * <div class="en">Loads a CdaChVacd document from an input stream.</div>
+	 * <div class="de">Lädt ein CdaChVacd aus einem inputstream.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param inputStream
 	 *            the input stream
-	 * @return the CdaChMtpsDis Document
+	 * @return the CdaChVacd Document
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChMtpsDis loadDisFromStream(InputStream inputStream) throws Exception {
-		final CdaChLoader<CdaChMtpsDis> loader = new CdaChLoader<CdaChMtpsDis>();
-		return loader.loadFromStream(inputStream, CdaChMtpsDis.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis.class);
-	}
-
-	/**
-	 * <div class="en">Loads a CdaChMtpsPadv document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChMtpsPadv aus einer Datei.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param filePath
-	 *            path to the XML file
-	 * @throws Exception
-	 *             the exception
-	 * @return the CdaChMtpsPadv Document
-	 */
-	public static CdaChMtpsPadv loadPadvFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadPadvFromStream(inputstream);
-	}
-
-	/**
-	 * <div class="en">Loads a CdaChMtpsPadv document from an input stream.</div>
-	 * <div class="de">Lädt ein CdaChMtpsPadv aus einem inputstream.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param inputStream
-	 *            the input stream
-	 * @return the CdaChMtpsPadv Document
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static CdaChMtpsPadv loadPadvFromStream(InputStream inputStream) throws Exception {
-		final CdaChLoader<CdaChMtpsPadv> loader = new CdaChLoader<CdaChMtpsPadv>();
-		return loader.loadFromStream(inputStream, CdaChMtpsPadv.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv.class);
+	public static CdaChVacd loadVacdFromStream(InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChVacd> loader = new CdaChLoader<CdaChVacd>();
+		return loader.loadFromStream(inputStream, CdaChVacd.class,
+				org.openhealthtools.mdht.uml.cda.ch.VACD.class);
 	}
 
 	/**
