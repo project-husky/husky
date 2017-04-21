@@ -57,8 +57,7 @@ public class MedicationListSection extends AbstractCdaCh<org.openhealthtools.mdh
 			setTitle("Medication Treatment Plan");
 			break;
 		}
-		final MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(
-				getLanguageCode());
+		final MedicationTreatmentPlanSection section = new MedicationTreatmentPlanSection(getLanguageCode());
 		this.getDoc().addSection(section.getMdht());
 	}
 
@@ -79,8 +78,7 @@ public class MedicationListSection extends AbstractCdaCh<org.openhealthtools.mdh
 	 */
 	public MedicationTreatmentPlanSection getMedicationTreatmentPlanSection() {
 		if (this.getMdht().getMedicationTreatmentPlanSection() != null) {
-			return new MedicationTreatmentPlanSection(
-					this.getMdht().getMedicationTreatmentPlanSection());
+			return new MedicationTreatmentPlanSection(this.getMdht().getMedicationTreatmentPlanSection());
 		}
 		return null;
 	}

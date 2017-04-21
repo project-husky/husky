@@ -29,8 +29,6 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * The Class CdaChMtpsPre. See also CDA CH MTPS 7.4.2.4
@@ -103,7 +101,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 * @param entry
 	 *            PRE Item Entry
-	 * 
+	 *
 	 */
 	public void addPrescriptionItemEntry(PrescriptionItemEntry entry) {
 		if (entry != null) {
@@ -118,39 +116,47 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="fr"></div>
 	 *
 	 * @param author
-	 * 			Author of document
+	 *            Author of document
 	 * @param legalAuthenticator
-	 * 			Legal authenticator of document
+	 *            Legal authenticator of document
 	 * @param organization
-	 * 			Parent organization
+	 *            Parent organization
 	 * @param mtpsPreId
-	 * 			ID of document
+	 *            ID of document
 	 * @param dateOfDocument
-	 * 			Creation date
+	 *            Creation date
 	 * @param languageCode
-	 * 			Langague code for document
+	 *            Langague code for document
 	 */
-	public void createPreHeader(Author author, Author legalAuthenticator, Organization organization, Patient patient, Identificator mtpsPreId, Date dateOfDocument, LanguageCode languageCode) {
+	public void createPreHeader(Author author, Author legalAuthenticator, Organization organization,
+			Patient patient, Identificator mtpsPreId, Date dateOfDocument,
+			LanguageCode languageCode) {
 
-		if (dateOfDocument != null) this.setTimestamp(dateOfDocument);
-		if (legalAuthenticator != null) this.setLegalAuthenticator(legalAuthenticator);
-		if (organization != null) this.setCustodian(organization);
-		if (languageCode != null) this.setLanguageCode(languageCode);
-		if (author != null) this.addAuthor(author);
-		if (patient != null) this.setPatient(patient);
+		if (dateOfDocument != null)
+			this.setTimestamp(dateOfDocument);
+		if (legalAuthenticator != null)
+			this.setLegalAuthenticator(legalAuthenticator);
+		if (organization != null)
+			this.setCustodian(organization);
+		if (languageCode != null)
+			this.setLanguageCode(languageCode);
+		if (author != null)
+			this.addAuthor(author);
+		if (patient != null)
+			this.setPatient(patient);
 		if (mtpsPreId != null) {
 			this.setId(mtpsPreId);
 			this.getPrescriptionSection().getMdht().setId(mtpsPreId.getIi());
 		}
 	}
-	
+
 	/**
 	 * <div class="en">Returns the list of PRE Item Entries using the eHealth
 	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
 	 * @return List of PRE items
-	 * 
+	 *
 	 */
 	public List<PrescriptionItemEntry> getPrescriptionItemEntries() {
 		final List<PrescriptionItemEntry> entries = new ArrayList<PrescriptionItemEntry>();

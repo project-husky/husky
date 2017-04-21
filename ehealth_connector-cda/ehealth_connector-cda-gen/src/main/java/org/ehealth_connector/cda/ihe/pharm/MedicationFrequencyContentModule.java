@@ -31,7 +31,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_event;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PIVL_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXPR_TS;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -44,12 +43,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class MedicationFrequencyContentModule {
 
 	/** The medication item entry. */
-	private MedicationItemEntry medicationItemEntry;
+	private final MedicationItemEntry medicationItemEntry;
 
 	/**
 	 * Instantiates a new medication frequency content module.
 	 *
-	 * @param medicationItemEntry the medication item entry
+	 * @param medicationItemEntry
+	 *            the medication item entry
 	 */
 	public MedicationFrequencyContentModule(MedicationItemEntry medicationItemEntry) {
 		this.medicationItemEntry = medicationItemEntry;
@@ -70,7 +70,7 @@ public class MedicationFrequencyContentModule {
 	 * @return the medication frequency effective time
 	 */
 	protected SXCM_TS getMedicationFrequencyEffectiveTime() {
-		EList<SXCM_TS> effectiveTimes = medicationItemEntry.getMdht().getEffectiveTimes();
+		final EList<SXCM_TS> effectiveTimes = medicationItemEntry.getMdht().getEffectiveTimes();
 		if (effectiveTimes.size() > 1) {
 			return effectiveTimes.get(1);
 		}
@@ -80,15 +80,19 @@ public class MedicationFrequencyContentModule {
 	/**
 	 * Gets the period.
 	 *
-	 * @param value the value
-	 * @param unit the unit
-	 * @param institutionSpecified the institution specified
-	 * @param setOperatorA the set operator A
+	 * @param value
+	 *            the value
+	 * @param unit
+	 *            the unit
+	 * @param institutionSpecified
+	 *            the institution specified
+	 * @param setOperatorA
+	 *            the set operator A
 	 * @return the period
 	 */
 	protected SXCM_TS getPeriod(double value, Ucum unit, boolean institutionSpecified,
 			boolean setOperatorA) {
-		PIVL_TS pivlTs = DatatypesFactory.eINSTANCE.createPIVL_TS();
+		final PIVL_TS pivlTs = DatatypesFactory.eINSTANCE.createPIVL_TS();
 		if (setOperatorA) {
 			pivlTs.setOperator(SetOperator.A);
 		}
@@ -98,23 +102,14 @@ public class MedicationFrequencyContentModule {
 	}
 
 	/**
-	 * Gets the subordinate substance administration.
-	 *
-	 * @param sequenceNumber the sequence number
-	 * @return the subordinate substance administration
-	 */
-	protected SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
-		return this.medicationItemEntry.getSubordinateSubstanceAdministration(sequenceNumber);
-	}
-
-	/**
 	 * Gets the subordinate substance administration dose quantity.
 	 *
-	 * @param sequenceNumber the sequence number
+	 * @param sequenceNumber
+	 *            the sequence number
 	 * @return the subordinate substance administration dose quantity
 	 */
 	protected IVL_PQ getSubordinateSubstanceAdminiatrationDoseQuantity(int sequenceNumber) {
-		SubstanceAdministration sub = medicationItemEntry
+		final SubstanceAdministration sub = medicationItemEntry
 				.getSubordinateSubstanceAdministration(sequenceNumber);
 		return sub.getDoseQuantity();
 	}
@@ -122,27 +117,42 @@ public class MedicationFrequencyContentModule {
 	/**
 	 * Gets the subordinate substance administration effective time.
 	 *
-	 * @param sequenceNumber the sequence number
+	 * @param sequenceNumber
+	 *            the sequence number
 	 * @return the subordinate substance administration effective time
 	 */
 	protected SXCM_TS getSubordinateSubstanceAdminiatrationEffectiveTime(int sequenceNumber) {
-		SubstanceAdministration sub = medicationItemEntry
+		final SubstanceAdministration sub = medicationItemEntry
 				.getSubordinateSubstanceAdministration(sequenceNumber);
 		return sub.getEffectiveTimes().get(0);
 	}
 
 	/**
+	 * Gets the subordinate substance administration.
+	 *
+	 * @param sequenceNumber
+	 *            the sequence number
+	 * @return the subordinate substance administration
+	 */
+	protected SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
+		return this.medicationItemEntry.getSubordinateSubstanceAdministration(sequenceNumber);
+	}
+
+	/**
 	 * Gets the timing event.
 	 *
-	 * @param timingEvent the timing event
-	 * @param setOperatorA the set operator A
-	 * @param setOperatorI the set operator I
+	 * @param timingEvent
+	 *            the timing event
+	 * @param setOperatorA
+	 *            the set operator A
+	 * @param setOperatorI
+	 *            the set operator I
 	 * @return the timing event
 	 */
 	protected EIVL_TS getTimingEvent(TimingEvent timingEvent, boolean setOperatorA,
 			boolean setOperatorI) {
-		EIVL_TS eivlTs = DatatypesFactory.eINSTANCE.createEIVL_TS();
-		EIVL_event event = DatatypesFactory.eINSTANCE.createEIVL_event();
+		final EIVL_TS eivlTs = DatatypesFactory.eINSTANCE.createEIVL_TS();
+		final EIVL_event event = DatatypesFactory.eINSTANCE.createEIVL_event();
 		event.setCode(timingEvent.getCode(null).getCode());
 		if (setOperatorA) {
 			eivlTs.setOperator(SetOperator.A);
@@ -157,8 +167,10 @@ public class MedicationFrequencyContentModule {
 	/**
 	 * Gets the timing events.
 	 *
-	 * @param timingEvents the timing events
-	 * @param setOperatorA the set operator A
+	 * @param timingEvents
+	 *            the timing events
+	 * @param setOperatorA
+	 *            the set operator A
 	 * @return the timing events
 	 */
 	protected SXCM_TS getTimingEvents(TimingEvent[] timingEvents, boolean setOperatorA) {
@@ -168,7 +180,7 @@ public class MedicationFrequencyContentModule {
 		if (timingEvents.length == 1) {
 			return getTimingEvent(timingEvents[0], setOperatorA, false);
 		}
-		SXPR_TS sxcmTs = DatatypesFactory.eINSTANCE.createSXPR_TS();
+		final SXPR_TS sxcmTs = DatatypesFactory.eINSTANCE.createSXPR_TS();
 		if (setOperatorA) {
 			sxcmTs.setOperator(SetOperator.A);
 		}
@@ -184,7 +196,7 @@ public class MedicationFrequencyContentModule {
 	 * @return true, if successful
 	 */
 	public boolean hasSplitDosing() {
-		for (II ii : medicationItemEntry.getMdht().getTemplateIds()) {
+		for (final II ii : medicationItemEntry.getMdht().getTemplateIds()) {
 			if ("1.3.6.1.4.1.19376.1.5.3.1.4.9".equals(ii.getRoot())) {
 				return true;
 			}
@@ -195,10 +207,11 @@ public class MedicationFrequencyContentModule {
 	/**
 	 * Sets the medication frequency effective time.
 	 *
-	 * @param frequency the new medication frequency effective time
+	 * @param frequency
+	 *            the new medication frequency effective time
 	 */
 	protected void setMedicationFrequencyEffectiveTime(SXCM_TS frequency) {
-		EList<SXCM_TS> effectiveTimes = medicationItemEntry.getMdht().getEffectiveTimes();
+		final EList<SXCM_TS> effectiveTimes = medicationItemEntry.getMdht().getEffectiveTimes();
 		if (effectiveTimes.size() == 0) {
 			effectiveTimes.add(DatatypesFactory.eINSTANCE.createSXCM_TS());
 		}
@@ -222,13 +235,16 @@ public class MedicationFrequencyContentModule {
 	/**
 	 * Sets the subordinate substance administration.
 	 *
-	 * @param sequenceNumber the sequence number
-	 * @param effectiveTime the effective time
-	 * @param doseQuantity the dose quantity
+	 * @param sequenceNumber
+	 *            the sequence number
+	 * @param effectiveTime
+	 *            the effective time
+	 * @param doseQuantity
+	 *            the dose quantity
 	 */
 	protected void setSubordinateSubstanceAdministration(int sequenceNumber, SXCM_TS effectiveTime,
 			IVL_PQ doseQuantity) {
-		SubstanceAdministration sub = CDAFactory.eINSTANCE.createSubstanceAdministration();
+		final SubstanceAdministration sub = CDAFactory.eINSTANCE.createSubstanceAdministration();
 		sub.setMoodCode(x_DocumentSubstanceMood.INT);
 
 		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();

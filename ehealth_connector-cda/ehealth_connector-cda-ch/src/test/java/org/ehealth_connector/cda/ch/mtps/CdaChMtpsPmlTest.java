@@ -1480,7 +1480,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	private Code getRouteOfAdministration() {
 
-		return RouteOfAdministration.PO.getCode(getLanguageCode());
+		return RouteOfAdministration.PER_OS.getCode(getLanguageCode());
 	}
 
 	public Consumable initConsumable() {
@@ -1511,7 +1511,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final String strTemplateIdSubstance4Oid = "1.3.6.1.4.1.19376.1.5.3.1.4.7";
 		final String strTemplateIdSubstance4Id = "IHE PHARM";
 		final Double doseQuantity = new Double(10);
-		final RouteOfAdministration rOa = RouteOfAdministration.PO;
+		final RouteOfAdministration rOa = RouteOfAdministration.PER_OS;
 		final boolean isSubstituable = true;
 		// Convenience API Types
 		idMtp1 = createIdentificator(strMtpOid1, strMtpId1);

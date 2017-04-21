@@ -43,7 +43,7 @@ public class PrescriptionItemEntryTest {
 
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
 
-		entry.setRouteOfAdministration(RouteOfAdministration.CHEW.getCode(LanguageCode.FRENCH));
+		entry.setRouteOfAdministration(RouteOfAdministration.CHEW_ORAL.getCode(LanguageCode.FRENCH));
 
 		final Document document = entry.getDocument();
 
@@ -51,7 +51,7 @@ public class PrescriptionItemEntryTest {
 				.compile("//routeCode[@code='CHEW' and @codeSystem='2.16.840.1.113883.5.112']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		assertEquals(RouteOfAdministration.CHEW,
+		assertEquals(RouteOfAdministration.CHEW_ORAL,
 				RouteOfAdministration.getEnum(entry.getRouteOfAdministration().getCode()));
 	}
 
