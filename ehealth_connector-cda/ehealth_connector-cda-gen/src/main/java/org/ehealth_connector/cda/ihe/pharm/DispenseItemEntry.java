@@ -87,7 +87,7 @@ public class DispenseItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.c
 	 * Instantiates a new facade for the provided mdht object.
 	 *
 	 * @param mdht
-	 *            the mdht model object
+	 *            the MDHT model object
 	 */
 	public DispenseItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemEntry mdht) {
 		super(mdht, null, null);

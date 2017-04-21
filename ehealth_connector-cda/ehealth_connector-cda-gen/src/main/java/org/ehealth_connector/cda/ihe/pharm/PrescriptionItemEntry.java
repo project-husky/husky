@@ -69,9 +69,6 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	public PrescriptionItemEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.PrescriptionItemEntry mdht) {
 		super(mdht);
-		
-		this.getMdht().setClassCode(ActClass.SBADM);
-		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
 	}
 
 	/**
