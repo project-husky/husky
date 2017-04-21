@@ -1,18 +1,19 @@
-/*******************************************************************************
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
  *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * For exact developer information, please refer to the commit history of the forge.
  *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
+ * This code is made available under the terms of the Eclipse Public License v1.0.
  *
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * Year of publication: 2015
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
- *******************************************************************************/
+ */
 
 package org.ehealth_connector.common;
 
@@ -207,6 +208,18 @@ public class Value {
 	}
 
 	/**
+	 * Erstellt einen neuen Wert double.
+	 *
+	 * @param value
+	 *            Der eigentliche Wert
+	 */
+	public Value(double value) {
+		this(DatatypesFactory.eINSTANCE.createPQ());
+		final PQ pq = (PQ) mValue;
+		pq.setValue(Double.valueOf(value));
+	}
+
+	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * RTO Objekt (A quantity constructed as the quotient of a numerator
 	 * quantity divided by a denominator quantity.).</div>
@@ -238,19 +251,7 @@ public class Value {
 		mValue = rto;
 	}
 
-	/**
-	 * Erstellt einen neuen Wert double.
-	 *
-	 * @param value
-	 *            Der eigentliche Wert
-	 */
-	public Value(double value) {
-		this(DatatypesFactory.eINSTANCE.createPQ());
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
-	}
-
-public Value(ED ed) {
+	public Value(ED ed) {
 		mValue = ed;
 	}
 
@@ -469,7 +470,7 @@ public Value(ED ed) {
 		final Code code = new Code((CD) mValue);
 		return code.getOriginalTextReference();
 	}
-	
+
 	/**
 	 * Get mdht physical quantity.
 	 *
@@ -478,7 +479,6 @@ public Value(ED ed) {
 	public PQ getPhysicalQuantity() {
 		return ((PQ) mValue);
 	}
-
 
 	/**
 	 * <div class="en">Returns the higher bound of an interval of physical

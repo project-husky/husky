@@ -1,19 +1,19 @@
 /*
- * 
+ *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
- * 
+ *
  * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
  * For exact developer information, please refer to the commit history of the forge.
- * 
+ *
  * This code is made available under the terms of the Eclipse Public License v1.0.
- * 
+ *
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
- * 
+ *
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- * 
+ *
  */
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.8-b130911.1802 generiert
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>
@@ -85,24 +85,24 @@ public class BatchProcessType {
 
 	/**
 	 * Gets the value of the batchEntry property.
-	 * 
+	 *
 	 * <p>
 	 * This accessor method returns a reference to the live list, not a
 	 * snapshot. Therefore any modification you make to the returned list will
 	 * be present inside the JAXB object. This is why there is not a
 	 * <CODE>set</CODE> method for the batchEntry property.
-	 * 
+	 *
 	 * <p>
 	 * For example, to add a new item, do as follows: <pre>
 	 *    getBatchEntry().add(newItem);
 	 * </pre>
-	 * 
-	 * 
+	 *
+	 *
 	 * <p>
 	 * Objects of the following type(s) are allowed in the list
 	 * {@link BatchEntryType }
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public List<BatchEntryType> getBatchEntry() {
 		if (batchEntry == null) {
@@ -113,9 +113,9 @@ public class BatchProcessType {
 
 	/**
 	 * Ruft den Wert der configFile-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getConfigFile() {
 		return configFile;
@@ -123,9 +123,9 @@ public class BatchProcessType {
 
 	/**
 	 * Ruft den Wert der id-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getId() {
 		return id;
@@ -133,7 +133,7 @@ public class BatchProcessType {
 
 	/**
 	 * Ruft den Wert der validatePDF-Eigenschaft ab.
-	 * 
+	 *
 	 */
 	public boolean isValidatePDF() {
 		return validatePDF;
@@ -141,7 +141,7 @@ public class BatchProcessType {
 
 	/**
 	 * Ruft den Wert der validateSchema-Eigenschaft ab.
-	 * 
+	 *
 	 */
 	public boolean isValidateSchema() {
 		return validateSchema;
@@ -149,7 +149,7 @@ public class BatchProcessType {
 
 	/**
 	 * Ruft den Wert der validateSchematron-Eigenschaft ab.
-	 * 
+	 *
 	 */
 	public boolean isValidateSchematron() {
 		return validateSchematron;
@@ -157,10 +157,10 @@ public class BatchProcessType {
 
 	/**
 	 * Legt den Wert der configFile-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setConfigFile(String value) {
 		this.configFile = value;
@@ -168,10 +168,10 @@ public class BatchProcessType {
 
 	/**
 	 * Legt den Wert der id-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setId(String value) {
 		this.id = value;
@@ -179,7 +179,7 @@ public class BatchProcessType {
 
 	/**
 	 * Legt den Wert der validatePDF-Eigenschaft fest.
-	 * 
+	 *
 	 */
 	public void setValidatePDF(boolean value) {
 		this.validatePDF = value;
@@ -187,7 +187,7 @@ public class BatchProcessType {
 
 	/**
 	 * Legt den Wert der validateSchema-Eigenschaft fest.
-	 * 
+	 *
 	 */
 	public void setValidateSchema(boolean value) {
 		this.validateSchema = value;
@@ -195,7 +195,7 @@ public class BatchProcessType {
 
 	/**
 	 * Legt den Wert der validateSchematron-Eigenschaft fest.
-	 * 
+	 *
 	 */
 	public void setValidateSchematron(boolean value) {
 		this.validateSchematron = value;

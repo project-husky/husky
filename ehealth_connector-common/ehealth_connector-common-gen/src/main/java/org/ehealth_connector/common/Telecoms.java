@@ -1,18 +1,19 @@
-/*******************************************************************************
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
  *
- * The authorship of this code and the accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. http://medshare.net
- *
+ * Source code, documentation and other resources have been contributed by various people.
  * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * For exact developer information, please refer to the commit history of the forge.
  *
- * This code is are made available under the terms of the Eclipse Public License v1.0.
+ * This code is made available under the terms of the Eclipse Public License v1.0.
  *
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * Year of publication: 2015
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
- *******************************************************************************/
+ */
 
 package org.ehealth_connector.common;
 
@@ -76,8 +77,8 @@ public class Telecoms {
 	 *            e.g. Phone number "+41.32.234.66.77"
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div>
-	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
-	 *            Mobil) </div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            </div>
 	 */
 	public void add(String type, String endpointIdentifier, AddressUse usage) {
 		TEL tel = null;
@@ -111,8 +112,8 @@ public class Telecoms {
 	 *            eMail address
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div>
-	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
-	 *            Mobil) </div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            </div>
 	 */
 	public void addEMail(String eMail, AddressUse usage) {
 		mTels.add(Util.createEMail(eMail, usage));
@@ -129,8 +130,8 @@ public class Telecoms {
 	 *            <div class="de"> fax</div>
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div>
-	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
-	 *            Mobil) </div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            </div>
 	 */
 	public void addFax(String fax, AddressUse usage) {
 		mTels.add(Util.createFax(fax, usage));
@@ -148,8 +149,8 @@ public class Telecoms {
 	 *            ohne Sonderzeichen: "+41.32.234.66.77"</div>
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div>
-	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
-	 *            Mobil) </div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            </div>
 	 */
 	public void addPhone(String phoneNr, AddressUse usage) {
 		mTels.add(Util.createTel(phoneNr, usage));
@@ -166,8 +167,8 @@ public class Telecoms {
 	 *            "http://www.ehealth-connector.org")</div>
 	 * @param usage
 	 *            <div class="en">use of this endpoint</div>
-	 *            <div class="de">Verwendungszweck (Privat, Geschäft,
-	 *            Mobil) </div>
+	 *            <div class="de">Verwendungszweck (Privat, Geschäft, Mobil)
+	 *            </div>
 	 */
 	public void addWebsite(String url, AddressUse usage) {
 		final TEL t = DatatypesFactory.eINSTANCE.createTEL();
