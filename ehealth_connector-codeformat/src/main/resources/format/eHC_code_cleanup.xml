@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <profiles version="2">
-<profile kind="CleanUpProfile" name="eHCCleanUpBasedForRelease" version="2">
+<profile kind="CleanUpProfile" name="eHC_code_cleanup" version="2">
 <setting id="cleanup.qualify_static_method_accesses_with_declaring_class" value="false"/>
 <setting id="cleanup.always_use_this_for_non_static_method_access" value="false"/>
 <setting id="cleanup.organize_imports" value="true"/>
@@ -9,8 +9,12 @@
 <setting id="cleanup.qualify_static_field_accesses_with_declaring_class" value="false"/>
 <setting id="cleanup.add_generated_serial_version_id" value="false"/>
 <setting id="cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class" value="true"/>
+<setting id="cleanup.remove_redundant_type_arguments" value="false"/>
 <setting id="cleanup.remove_unused_imports" value="true"/>
+<setting id="cleanup.insert_inferred_type_arguments" value="false"/>
 <setting id="cleanup.make_private_fields_final" value="true"/>
+<setting id="cleanup.use_lambda" value="true"/>
+<setting id="jautodoc.cleanup.add_header" value="true"/>
 <setting id="cleanup.always_use_blocks" value="true"/>
 <setting id="cleanup.use_this_for_non_static_field_access_only_if_necessary" value="true"/>
 <setting id="cleanup.sort_members_all" value="false"/>
@@ -33,6 +37,7 @@
 <setting id="cleanup.remove_unnecessary_casts" value="false"/>
 <setting id="cleanup.use_blocks_only_for_return_and_throw" value="false"/>
 <setting id="cleanup.format_source_code" value="true"/>
+<setting id="cleanup.convert_functional_interfaces" value="false"/>
 <setting id="cleanup.add_default_serial_version_id" value="true"/>
 <setting id="cleanup.remove_unused_private_methods" value="true"/>
 <setting id="cleanup.remove_trailing_whitespaces" value="true"/>
@@ -40,6 +45,8 @@
 <setting id="cleanup.add_serial_version_id" value="false"/>
 <setting id="cleanup.use_this_for_non_static_method_access" value="false"/>
 <setting id="cleanup.use_this_for_non_static_method_access_only_if_necessary" value="true"/>
+<setting id="cleanup.use_anonymous_class_creation" value="false"/>
+<setting id="jautodoc.cleanup.replace_header" value="true"/>
 <setting id="cleanup.add_missing_override_annotations_interface_methods" value="true"/>
 <setting id="cleanup.remove_unused_private_members" value="false"/>
 <setting id="cleanup.make_local_variable_final" value="true"/>
