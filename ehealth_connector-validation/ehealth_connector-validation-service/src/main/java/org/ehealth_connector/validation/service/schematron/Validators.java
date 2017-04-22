@@ -212,7 +212,7 @@ public class Validators {
 	 * </p>
 	 * <p>
 	 * If the rule-set is persistable, then the output file equals the value
-	 * returned by the {@link #createOutputFile(File)} method.
+	 * returned by the {@link #createOutputFile(File, File)} method.
 	 * </p>
 	 * <p>
 	 * Note that this method blocks until the validator is available.
@@ -238,9 +238,6 @@ public class Validators {
 	 * @throws NullPointerException
 	 *             if the specified rule-set is <tt>null</tt>.
 	 *
-	 * @see #load(RuleSet)
-	 * @see #get(File, File, boolean)
-	 * @see #createOutputFile(File)
 	 */
 	public XsltExecutable get(RuleSet ruleSet, File workDir)
 			throws TransformationException, InterruptedException {
@@ -307,7 +304,7 @@ public class Validators {
 	 * </p>
 	 * <p>
 	 * If the rule-set is persistable, then the output file equals the value
-	 * returned by the {@link #createOutputFile(File)} method.
+	 * returned by the {@link #createOutputFile(File, File)} method.
 	 * </p>
 	 *
 	 * @param ruleSet
@@ -319,8 +316,6 @@ public class Validators {
 	 *
 	 * @return the compiled validator stylesheet wrapped in a <tt>Future</tt>.
 	 *
-	 * @throws NullPointerException
-	 *             if the specified rule-set is <tt>null</tt>.
 	 */
 	public Future<XsltExecutable> load(RuleSet ruleSet, File workDir) {
 		final File in = ruleSet.getPath();

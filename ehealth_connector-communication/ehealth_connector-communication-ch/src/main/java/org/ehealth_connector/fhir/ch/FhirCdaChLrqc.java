@@ -319,8 +319,8 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		/**
 		 * Sets the information recipient.
 		 *
-		 * @param the
-		 *            information recipient
+		 * @param informationRecipient
+		 *            the information recipient
 		 */
 		public void setInformationRecipient(Basic informationRecipient) {
 			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();

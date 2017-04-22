@@ -142,7 +142,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractCda#setSetId(java.lang.String)
+	 * @see org.ehealth_connector.cda.AbstractCda#setSetId(org.ehealth_connector.common.Identificator)
 	 */
 	@Override
 	public void setSetId(Identificator id) {

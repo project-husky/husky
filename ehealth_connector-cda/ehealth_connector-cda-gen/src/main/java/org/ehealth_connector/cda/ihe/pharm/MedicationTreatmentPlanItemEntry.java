@@ -74,11 +74,6 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	 * using the eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
-	 * @param mtpe
-	 *            <div class="en">Medication Treatment Plan Entry to which we
-	 *            need a reference</div> <div class="de"></div>
-	 *            <div class="fr"></div>
-	 *
 	 * @return <div class="en">created Reference to Medication Treatment Plan
 	 *         Entry</div> <div class="de"></div> <div class="fr"></div>
 	 */

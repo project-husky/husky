@@ -453,7 +453,7 @@ public class CdaValidator {
 	/**
 	 * Sets the configuration
 	 *
-	 * @param configuration
+	 * @param config
 	 *            The configuration
 	 * @throws ConfigurationException
 	 *             If the configuration fails, an exception will be thrown

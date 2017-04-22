@@ -65,7 +65,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div> xxx
-	 * @param langTexts
+	 * @param targetSiteLangTexts
 	 *            the langTexts for the Value
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime,
@@ -116,7 +116,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @param value
 	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
 	 *            <div class="fr"></div> <div class="it"></div>
-	 * @param langTexts
+	 * @param valueLangTexts
 	 *            the langTexts for the Value
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime, Value value,

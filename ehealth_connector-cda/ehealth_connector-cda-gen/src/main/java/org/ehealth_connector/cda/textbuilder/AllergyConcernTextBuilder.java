@@ -65,8 +65,8 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	/**
 	 * adds one table row in the narrative text
 	 *
-	 * @param problemConcern
-	 *            the problem concern to be displayed in the narrative text
+	 * @param allergyConcern
+	 *            the allergy concern to be displayed in the narrative text
 	 * @param i
 	 *            the row index (used for the creation of the content id
 	 *            elements; make sure you do not use duplicate indexes other

@@ -27,7 +27,6 @@ import java.util.concurrent.Callable;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
-import org.ehealth_connector.validation.service.transform.StylesheetFactory;
 import org.ehealth_connector.validation.service.transform.Transformation;
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.slf4j.Logger;
@@ -66,7 +65,7 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	/**
 	 * Creates a new <cite>Schematron Validator</cite> builder instance. This is
 	 * equivalent to the invocation of the constructor
-	 * {@link #ValidatorBuilder(StylesheetFactory, File, File)} with
+	 * {@link #ValidatorBuilder(RuleSetTransformer, File, File)} with
 	 * <tt>null</tt> as output file parameter.
 	 *
 	 * @param factory
@@ -125,7 +124,6 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 *             be read.
 	 * @see #call()
 	 */
-	@SuppressWarnings("deprecation")
 	private XsltExecutable buildTransientValidator(Source source) throws TransformationException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final Destination destination = new Serializer(baos);
@@ -178,7 +176,7 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 *
 	 * @param in
 	 *            the input <cite>Schematron</cite> file.
-	 * @param the
+	 * @param out
 	 *            output file for the validator (<tt>null</tt> allowed).
 	 * @return a compiled XSL stylesheet that can be used as validator.
 	 * @throws TransformationException
@@ -186,7 +184,6 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 *             if the resulting stylesheet contains static errors or cannot
 	 *             be read.
 	 */
-	@SuppressWarnings("deprecation")
 	protected XsltExecutable createValidator(File in, File out) throws TransformationException {
 		XsltExecutable stylesheet;
 		final Source source = new StreamSource(in);

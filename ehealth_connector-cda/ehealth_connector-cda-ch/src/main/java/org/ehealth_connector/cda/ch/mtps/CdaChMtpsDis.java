@@ -39,9 +39,6 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="en">Instantiates a new CDA-CH-MTPS DIS Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
-	 *
-	 * @return <div class="en">Created PRE Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis() {
 		this(LanguageCode.ENGLISH);
@@ -54,9 +51,6 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 * @param languageCode
 	 *            the language code
-	 *
-	 * @return <div class="en">Created DIS Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsDis().init());
@@ -87,9 +81,6 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 * @param doc
 	 *            the MDHT document
-	 *
-	 * @return <div class="en">Created DIS Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsDis(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis doc) {
 		super(doc);

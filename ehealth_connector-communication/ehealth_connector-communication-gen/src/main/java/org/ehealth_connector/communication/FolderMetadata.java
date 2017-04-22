@@ -43,7 +43,7 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 public class FolderMetadata {
 
 	/** the OHT FolderType */
-	private FolderType f;
+	private final FolderType f;
 
 	/**
 	 * Default constructor to instanciate the object
@@ -55,7 +55,7 @@ public class FolderMetadata {
 	/**
 	 * <div class="en">Default constructor to instanciate the object
 	 *
-	 * @param f
+	 * @param ohtFolderType
 	 *            OHT FolderType </div>
 	 */
 	public FolderMetadata(FolderType ohtFolderType) {

@@ -63,9 +63,6 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
-	 *
-	 * @return <div class="en">Created MTP Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsMtp() {
 		this(LanguageCode.ENGLISH);
@@ -78,9 +75,6 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 * @param languageCode
 	 *            the language code
-	 *
-	 * @return <div class="en">Created MTP Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsMtp(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init());
@@ -113,9 +107,6 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *
 	 * @param doc
 	 *            the document
-	 *
-	 * @return <div class="en">Created MTP Document</div> <div class="de"></div>
-	 *         <div class="fr"></div>
 	 */
 	public CdaChMtpsMtp(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp doc) {
 		super(doc);
@@ -276,8 +267,9 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
-	 * @return <div class="en">Status code</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @param statusCode
+	 *            <div class="en">Status code</div> <div class="de"></div>
+	 *            <div class="fr"></div>
 	 */
 	public void getStatusCode(Code statusCode) {
 		getMdht().setCode(statusCode.getCS());

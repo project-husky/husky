@@ -99,8 +99,8 @@ public class PharmaceuticalAdviceItemEntry extends
 	/**
 	 * Add the modified Dosage instructions
 	 *
-	 * @param modifiedDosageInstructions
-	 *            New dosage instructions (substrance administration)
+	 * @param substanceAdministration
+	 *            New dosage instructions (substance administration)
 	 */
 	public void addModifiedDosageInstructions(SubstanceAdministration substanceAdministration) {
 
@@ -130,8 +130,8 @@ public class PharmaceuticalAdviceItemEntry extends
 	/**
 	 * Add the modified Prescription
 	 *
-	 * @param modifiedPrescription
-	 *            New prescription (substrance administration)
+	 * @param substanceAdministration
+	 *            New prescription (substance administration)
 	 */
 	public void addModifiedPrescription(SubstanceAdministration substanceAdministration) {
 

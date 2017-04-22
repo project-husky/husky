@@ -180,9 +180,6 @@ public class ReportBuilder {
 	 *             interrupted.
 	 * @throws NullPointerException
 	 *             if the specified input source document is <tt>null</tt>.
-	 * @see #detectRuleSet(Source, RuleSet[])
-	 * @see #createHTMLReport(RuleSet, byte[])
-	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
 	 */
 	public byte[] createHTMLReport(Collection<RuleSet> ruleSetList, File workDir, byte[] input,
 			Properties parameters) throws SAXException, RuleSetDetectionException,
@@ -225,8 +222,6 @@ public class ReportBuilder {
 	 * @throws NullPointerException
 	 *             if either the specified rule-set or input stream is
 	 *             <tt>null</tt>.
-	 * @see #createHTMLReport(RuleSet[], byte[])
-	 * @see #createHTMLReport(RuleSet, InputStream, OutputStream)
 	 */
 	public byte[] createHTMLReport(RuleSet ruleSet, File workDir, byte[] input,
 			Properties parameters) throws TransformationException, InterruptedException {
@@ -244,19 +239,16 @@ public class ReportBuilder {
 	 * @param ruleSet
 	 *            a valid <cite>Schematron Rule-Set</cite> instance to be used
 	 *            for the validation process.
-	 *
 	 * @param workDir
 	 *            the work directory where to put/read precompiled Schematron
 	 *            stylesheets
-	 *
 	 * @param in
 	 *            the XML input to be validated.
 	 * @param out
 	 *            the output stream, where the validation results are written.
-	 *
 	 * @param parameters
 	 *            XSLT parameters
-	 *
+	 * @return number of errors
 	 * @throws TransformationException
 	 *             if the construction of the validator stylesheet aborted by
 	 *             throwing an exception, if any stylesheet contains static
@@ -267,9 +259,6 @@ public class ReportBuilder {
 	 * @throws InterruptedException
 	 *             if the construction of the validator stylesheet was
 	 *             interrupted.
-	 * @throws NullPointerException
-	 *             if either the specified rule-set or input stream is
-	 *             <tt>null</tt>.
 	 */
 	public long createHTMLReport(RuleSet ruleSet, File workDir, InputStream in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
@@ -300,27 +289,31 @@ public class ReportBuilder {
 	}
 
 	/**
-	 *
 	 * Creates a Schematron result in the SVRL format
 	 *
 	 * @param ruleSet
-	 *            the list of available rule-sets.
-	 *
+	 *            a valid <cite>Schematron Rule-Set</cite> instance to be used
+	 *            for the validation process.
 	 * @param workDir
 	 *            the work directory where to put/read precompiled Schematron
 	 *            stylesheets
-	 *
 	 * @param in
-	 *            the XML input to be validated as an stream
+	 *            the XML input to be validated.
 	 * @param out
 	 *            the output stream, where the validation results are written.
-	 *
 	 * @param parameters
 	 *            XSLT parameters
-	 *
-	 * @return
+	 * @return Schematron result in the SVRL format
 	 * @throws TransformationException
+	 *             if the construction of the validator stylesheet aborted by
+	 *             throwing an exception, if any stylesheet contains static
+	 *             errors or cannot be read, or during the transformation phase,
+	 *             if an error occurs when setting the source for the
+	 *             transformation, or if any dynamic error occurs during the
+	 *             transformation.
 	 * @throws InterruptedException
+	 *             if the construction of the validator stylesheet was
+	 *             interrupted.
 	 */
 	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, StreamSource in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {

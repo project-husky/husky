@@ -119,8 +119,6 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
 	 */
 	public void setLaboratoryReportDataProcessingEntry(

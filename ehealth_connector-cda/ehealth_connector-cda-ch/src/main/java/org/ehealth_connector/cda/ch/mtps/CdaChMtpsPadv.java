@@ -40,9 +40,6 @@ public class CdaChMtpsPadv
 	 * <div class="en">Instantiates a new CDA-CH-MTPS PADV Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
-	 *
-	 * @return <div class="en">Created PADV Document</div>
-	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv() {
 		this(LanguageCode.ENGLISH);
@@ -55,9 +52,6 @@ public class CdaChMtpsPadv
 	 *
 	 * @param languageCode
 	 *            the language code
-	 *
-	 * @return <div class="en">Created PADV Document</div>
-	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv(LanguageCode languageCode) {
 		super(CHFactory.eINSTANCE.createCdaChMtpsPadv().init());
@@ -89,9 +83,6 @@ public class CdaChMtpsPadv
 	 *
 	 * @param doc
 	 *            the MDHT document
-	 *
-	 * @return <div class="en">Created PADV Document</div>
-	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public CdaChMtpsPadv(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv doc) {
 		super(doc);

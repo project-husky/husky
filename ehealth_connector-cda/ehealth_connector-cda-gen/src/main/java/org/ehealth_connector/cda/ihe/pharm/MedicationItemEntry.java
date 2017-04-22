@@ -393,13 +393,11 @@ public class MedicationItemEntry
 	}
 
 	/**
-	 * Defines the possible substitutions
+	 * Gets the possible substitutions
 	 *
-	 * @param substanceAdminSubstitution
-	 *            Possible substitution
-	 *
+	 * @return the possible substitutions
 	 */
-	public Supply getPossibleSubstitution(LanguageCode languageCode) {
+	public Supply getPossibleSubstitution() {
 
 		Supply supply;
 		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
@@ -534,7 +532,7 @@ public class MedicationItemEntry
 	/**
 	 * Set the Approach Site code
 	 *
-	 * @param approachSite
+	 * @param approachSiteCode
 	 *            Approach site code
 	 *
 	 */
@@ -694,8 +692,8 @@ public class MedicationItemEntry
 	/**
 	 * Set the rate quantity
 	 *
-	 * @param doseQuantity
-	 *            Dose quantity of the medication
+	 * @param rateQuantity
+	 *            Rate quantity of the medication
 	 *
 	 */
 	public void setRateQuantity(IVL_PQ rateQuantity) {
@@ -735,7 +733,7 @@ public class MedicationItemEntry
 	/**
 	 * Sets the amount of possible repetition of the prescription
 	 *
-	 * @param repeatNumber
+	 * @param amount
 	 *            Amount of possible repetitions
 	 *
 	 */

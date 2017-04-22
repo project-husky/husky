@@ -124,7 +124,7 @@ public class CdaChEdesCtnn
 	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param AllergiesOrOtherAdverseReaction
+	 * @param allergyOrOtherAdverseReaction
 	 *            <br>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
@@ -159,7 +159,7 @@ public class CdaChEdesCtnn
 	 * vergangenes Leiden hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param PastIllness
+	 * @param pastIllness
 	 *            the past problem concern
 	 */
 	public void addPastIllness(PastProblemConcern pastIllness) {

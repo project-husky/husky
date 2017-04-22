@@ -227,9 +227,10 @@ public class ActivePatternResult {
 	}
 
 	/**
-	 * Gets the name of the ActivePattern
-	 *
-	 * @return the name of the ActivePattern
+	 * Sets the id of the ActivePattern
+	 * 
+	 * @param id
+	 *            the id of the ActivePattern
 	 */
 	public void setId(String id) {
 		ap.setId(id);

@@ -78,10 +78,6 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
-	 * @param prescriptionItemEntry
-	 *            <div class="en">PRE Entry</div> <div class="de"></div>
-	 *            <div class="fr"></div>
-	 *
 	 * @return <div class="en">created Reference to PRE Entry</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */

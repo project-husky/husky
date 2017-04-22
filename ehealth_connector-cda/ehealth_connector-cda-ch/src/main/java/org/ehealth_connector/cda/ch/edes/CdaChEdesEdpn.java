@@ -58,8 +58,6 @@ public class CdaChEdesEdpn
 
 	private final CdaChEdesCommon mCommon;
 
-	// private CodedVitalSignsSection mCodedVitalSigns;
-
 	/**
 	 * <div class="en">Creates a new EDES EDPN CDA document</div>
 	 * <div class="de">Erstellt ein neues EDES EDPN CDA Dokument.</div>
@@ -143,7 +141,7 @@ public class CdaChEdesEdpn
 	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param AllergiesOrOtherAdverseReaction
+	 * @param allergyOrOtherAdverseReaction
 	 *            <br>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
 	 *            <div class="it"></div>
@@ -192,7 +190,7 @@ public class CdaChEdesEdpn
 	 * vergangenes Leiden hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param PastIllness
+	 * @param pastIllness
 	 *            the past problem concern
 	 */
 	public void addPastIllness(PastProblemConcern pastIllness) {

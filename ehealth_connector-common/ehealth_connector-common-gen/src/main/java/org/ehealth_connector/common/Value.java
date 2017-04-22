@@ -146,9 +146,9 @@ public class Value {
 	 * initialisiert (CDA Datentyp: BL)</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
+	 * @param bl
+	 *            <div class="en">the boolean value</div> <div class="de">der
+	 *            boolean Wert</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
 	public Value(BL bl) {

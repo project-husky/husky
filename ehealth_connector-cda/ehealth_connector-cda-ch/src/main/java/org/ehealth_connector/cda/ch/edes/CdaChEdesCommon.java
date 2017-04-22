@@ -72,15 +72,15 @@ public class CdaChEdesCommon {
 	private CodedVitalSignsSection mCodedVitalSigns;
 
 	private final ClinicalDocument mdhtDocument;
-	private final AbstractCda cdaDocument;
+	private final AbstractCda<?> cdaDocument;
 
 	/**
 	 * Create a new common EDES CDA.
 	 *
-	 * @param document
+	 * @param cdaDocument
 	 *            MDHT ClinicalDocument object
 	 */
-	public CdaChEdesCommon(AbstractCda cdaDocument) {
+	public CdaChEdesCommon(AbstractCda<?> cdaDocument) {
 		this.cdaDocument = cdaDocument;
 		this.mdhtDocument = cdaDocument.getDoc();
 	}
@@ -128,8 +128,15 @@ public class CdaChEdesCommon {
 	 * <div class="de">Fügt ein Allergie-Leiden hinzu</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param AllergiesOrOtherAdverseReaction
+	 * @param allergyOrOtherAdverseReaction
+	 *            <div class="en">Allergy or other adverse reaction</div>
 	 *            <div class="de">Allergie leiden</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 *
+	 * @param section
+	 *            <div class="en">the desired CDA section (null creates a new
+	 *            section)</div> <div class="de">die gewünschte CDA Section
+	 *            (null erstellt eine neue section)</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
 	public void addAllergiesOrOtherAdverseReaction(AllergyConcern allergyOrOtherAdverseReaction,
@@ -231,8 +238,17 @@ public class CdaChEdesCommon {
 	 * vergangenes Leiden hinzu</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param PastIllness
-	 *            the past problem concern
+	 * @param pastIllness
+	 *            <div class="en">the past problem concern</div>
+	 *            <div class="de">das frühere Leiden</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param section
+	 *            <div class="en">the desired CDA section (null creates a new
+	 *            section)</div> <div class="de">die gewünschte CDA Section
+	 *            (null erstellt eine neue section)</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 *
 	 */
 	public void addPastIllness(PastProblemConcern pastIllness,
 			HistoryOfPastIllnessSection section) {
@@ -723,7 +739,6 @@ public class CdaChEdesCommon {
 	}
 
 	public boolean updateProblemConcernReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
-		@SuppressWarnings("unused")
 		int i = 0;
 		for (final Act act : acts) {
 			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;

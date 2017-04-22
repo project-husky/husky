@@ -155,10 +155,6 @@ public class DispenseItemEntry
 	 * Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
-	 * @param dispenseItemEntry
-	 *            <div class="en">DIS Entry</div> <div class="de"></div>
-	 *            <div class="fr"></div>
-	 *
 	 * @return <div class="en">created Reference to DIS Entry</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
@@ -388,7 +384,7 @@ public class DispenseItemEntry
 	/**
 	 * Sets the dispense code.
 	 *
-	 * @param code
+	 * @param dispenseCode
 	 *            the new dispense code
 	 */
 	public void setDispenseCode(Code dispenseCode) {

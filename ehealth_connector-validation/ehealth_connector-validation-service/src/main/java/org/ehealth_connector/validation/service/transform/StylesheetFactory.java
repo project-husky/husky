@@ -72,8 +72,6 @@ public class StylesheetFactory {
 	 *
 	 * @param processor
 	 *            the <cite>Saxon Processor</cite> instance.
-	 * @throws NullPointerException
-	 *             if the specified <tt>processor</tt> is <tt>null</tt>.
 	 */
 	public StylesheetFactory(Processor processor) {
 		this(processor, null);
@@ -96,8 +94,6 @@ public class StylesheetFactory {
 	 * @throws TransformationException
 	 *             if the stylesheet contains static errors or if it cannot be
 	 *             read.
-	 * @throws NullPointerException
-	 *             if the specified source is <tt>null</tt>.
 	 */
 	private XsltExecutable compileStylesheet(Source source) throws TransformationException {
 		if (source == null)
@@ -134,8 +130,6 @@ public class StylesheetFactory {
 	 * @throws TransformationException
 	 *             if the stylesheet contains static errors or if it cannot be
 	 *             read.
-	 * @throws NullPointerException
-	 *             if the specified file is <tt>null</tt>.
 	 */
 	public XsltExecutable getStylesheet(File file, boolean useCache)
 			throws TransformationException {
@@ -149,14 +143,12 @@ public class StylesheetFactory {
 	 *
 	 * @param source
 	 *            the source XSL stylesheet to be compiled.
-	 * @param cacheable
+	 * @param useCache
 	 *            allows/disallows usage of the cache.
 	 * @return a compiled stylesheet instance.
 	 * @throws TransformationException
 	 *             if the stylesheet contains static errors or if it cannot be
 	 *             read.
-	 * @throws NullPointerException
-	 *             if the specified source is <tt>null</tt>.
 	 */
 	public XsltExecutable getStylesheet(Source source, boolean useCache)
 			throws TransformationException {
@@ -181,8 +173,6 @@ public class StylesheetFactory {
 	 * @throws TransformationException
 	 *             if the stylesheet contains static errors or if it cannot be
 	 *             read.
-	 * @throws NullPointerException
-	 *             if the specified URI is <tt>null</tt>.
 	 */
 	public XsltExecutable getStylesheet(String uri, boolean useCache)
 			throws TransformationException {
