@@ -65,6 +65,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 * Instantiates a new laboratory observation.
 	 */
 	public LaboratoryObservation() {
+		super(null);
 		mLaboratoryObservation = LABFactory.eINSTANCE.createLaboratoryObservation().init();
 		mLaboratoryObservation.setStatusCode(StatusCode.COMPLETED.getCS());
 	}
@@ -92,6 +93,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 */
 	public LaboratoryObservation(Code code, boolean immuneProtection, Date dateTimeOfResult,
 			Organization laboratory) {
+		super(null);
 		mLaboratoryObservation = LABFactory.eINSTANCE.createLaboratoryObservation().init();
 
 		setCode(code);
@@ -172,6 +174,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 */
 	public LaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation labObs) {
+		super(labObs);
 		mLaboratoryObservation = labObs;
 	}
 
@@ -218,6 +221,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 * @param value
 	 *            the new value
 	 */
+	@Override
 	public void addValue(Value value) {
 		if (value.isPhysicalQuantity()) {
 			mLaboratoryObservation.getValues().add(value.copyMdhtPhysicalQuantity());
@@ -315,6 +319,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 *
 	 * @return the effective time as date
 	 */
+	@Override
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
 	}
@@ -416,6 +421,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 *
 	 * @return all problem values as ArrayList.
 	 */
+	@Override
 	public List<Value> getValues() {
 		final List<Value> vl = new ArrayList<Value>();
 		for (final ANY a : mLaboratoryObservation.getValues()) {
@@ -460,6 +466,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 * @param dateTimeOfResult
 	 *            the new date time of result
 	 */
+	@Override
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
 			mLaboratoryObservation

@@ -37,6 +37,7 @@ import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.Confidentiality;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ParticipantType;
+import org.ehealth_connector.common.enums.Signature;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
@@ -62,9 +63,11 @@ import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 
 /**
@@ -134,6 +137,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		auth.setAssignedEntity(entity);
+		auth.setTime(EcoreUtil.copy(authenticator.getAuthorMdht().getTime()));
 		entity.setAssignedPerson(
 				authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
@@ -146,13 +150,24 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @param authenticator
 	 *            Unterzeichner
+	 * @param authenticationTime
+	 *            Zeitpunkt der Unterzeichnung
 	 */
-	public void addAuthenticator(Person authenticator) {
+	public void addAuthenticator(Person authenticator, Date authenticationTime) {
 		final Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
-		auth.setAssignedEntity(entity);
+		// Set time
+		auth.setTime(DateUtil.ts(authenticationTime));
+
+		// Set signature Code to 's'
+		final CS cs = Signature.SIGNED.getCS();
+		auth.setSignatureCode(cs);
+
+		// Set assigned entity
+		entity.getIds().add(DatatypesFactory.eINSTANCE.createII(NullFlavor.NA));
 		entity.setAssignedPerson(authenticator.copyMdhtPerson());
+		auth.setAssignedEntity(entity);
 
 		getDoc().getAuthenticators().add(auth);
 	}

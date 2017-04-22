@@ -69,9 +69,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 public class CdaChEdesCommon {
 
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
-	private CodedVitalSignsSection mCodedVitalSigns;
 
+	private CodedVitalSignsSection mCodedVitalSigns;
 	private final ClinicalDocument mdhtDocument;
+
 	private final AbstractCda<?> cdaDocument;
 
 	/**
@@ -662,6 +663,28 @@ public class CdaChEdesCommon {
 		return sb.toString();
 	}
 
+	/**
+	 * Initializes internal lists when the CDA was loaded from file
+	 */
+	public void initCtnnAfterLoad(CdaChEdesCtnn cda) {
+		mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
+				cdaDocument.getLanguageCode(),
+				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) cda
+						.getCodedVitalSignsSection().getMdht());
+		mCodedVitalSigns.initAfterLoad();
+	}
+
+	/**
+	 * Initializes internal lists when the CDA was loaded from file
+	 */
+	public void initEdpnAfterLoad(CdaChEdesEdpn cda) {
+		mCodedVitalSigns = new org.ehealth_connector.cda.ch.edes.CodedVitalSignsSection(
+				cdaDocument.getLanguageCode(),
+				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) cda
+						.getCodedVitalSignsSection().getMdht());
+		mCodedVitalSigns.initAfterLoad();
+	}
+
 	public void setNarrativeTextSection(SectionsEDES sectionEdes, Section section, String text) {
 		if (section == null) {
 			section = sectionEdes.createSection();
@@ -766,4 +789,5 @@ public class CdaChEdesCommon {
 		}
 		return true;
 	}
+
 }

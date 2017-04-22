@@ -18,6 +18,7 @@
 
 package org.ehealth_connector.cda.ch.textbuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractObservation;
@@ -67,6 +68,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private void addHeader() {
 		append("<thead>");
 		append("<tr>");
+		append("<th>Zeitpunkt</th>");
 		append("<th>Beobachtung</th>");
 		append("<th>Resultat</th>");
 		append("<th>Code</th>");
@@ -78,6 +80,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 	private void addRow(AbstractObservation observation, int i) {
 		append("<tr>");
+		// Zeitpunkt
+		if (observation.getEffectiveTime() != null) {
+			final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			addCell(sdf.format(observation.getEffectiveTime()));
+		} else
+			addCell("");
+
 		// Beobachtung
 		if (observation.getCode() != null) {
 			// using display name just in case the language texts are missing...

@@ -18,6 +18,7 @@
 
 package org.ehealth_connector.cda.ch.edes;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
@@ -29,6 +30,7 @@ import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -41,6 +43,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital sign observation.
 	 */
 	public VitalSignObservation() {
+		super(null);
 		initMdht();
 		setMethodCodeTranslation(null);
 	}
@@ -71,6 +74,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	public VitalSignObservation(Code code, Date effectiveTime,
 			ObservationInterpretationForVitalSign interpretation, ActSite targetSite, Value value,
 			LangTexts valueLangTexts, LangTexts targetSiteLangTexts) {
+		super(null);
 		initMdht();
 
 		setCode(code);
@@ -134,6 +138,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public VitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
+		super(null);
 		setVitalSignObservation(observation);
 	}
 
@@ -197,11 +202,37 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		getVitalSignObservation().getEntryRelationships().get(nb).setInversionInd(true);
 	}
 
+	/**
+	 * Gets the Effective Time
+	 *
+	 * @return the effective time as date
+	 */
+	@Override
+	public Date getEffectiveTime() {
+		return DateUtil.parseIVL_TSVDateTimeValue(getVitalSignObservation().getEffectiveTime());
+	}
+
 	@Override
 	protected void initMdht() {
 		super.initMdht();
 		final Identificator id = new Identificator(AbstractCdaCh.OID_V1, "CDA-CH.Body.VitalSignL3");
 		getVitalSignObservation().getTemplateIds().add(id.getIi());
+	}
+
+	/**
+	 * Sets the date time of result.
+	 *
+	 * @param dateTimeOfResult
+	 *            the new date time of result
+	 */
+	@Override
+	public void setEffectiveTime(Date dateTimeOfResult) {
+		try {
+			getVitalSignObservation()
+					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -234,4 +265,5 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		}
 		getVitalSignObservation().getMethodCodes().add(ce);
 	}
+
 }

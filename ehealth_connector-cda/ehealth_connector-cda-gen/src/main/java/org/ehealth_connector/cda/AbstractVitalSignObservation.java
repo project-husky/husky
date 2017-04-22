@@ -31,6 +31,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -43,6 +44,10 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 
 	/** The m vital sign observation. */
 	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
+
+	protected AbstractVitalSignObservation(Observation mdht) {
+		super(mdht);
+	}
 
 	/**
 	 * Adds the id.
@@ -92,6 +97,7 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 	 *
 	 * @return the effective time as date
 	 */
+	@Override
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(getVitalSignObservation().getEffectiveTime());
 	}
@@ -157,6 +163,7 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 	 *
 	 * @return the text reference
 	 */
+	@Override
 	public String getTextReference() {
 		if ((getVitalSignObservation().getText() != null)
 				&& (getVitalSignObservation().getText().getReference() != null)) {
@@ -237,6 +244,7 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 	 * @param dateTimeOfResult
 	 *            the new date time of result
 	 */
+	@Override
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
 			getVitalSignObservation()
@@ -301,6 +309,7 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 	 * @param prefix
 	 *            the prefix
 	 */
+	@Override
 	public void setTextReference(String prefix) {
 		getVitalSignObservation().setText(Util.createReference(prefix));
 	}

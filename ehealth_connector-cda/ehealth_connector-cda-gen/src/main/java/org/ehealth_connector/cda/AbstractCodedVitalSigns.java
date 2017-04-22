@@ -43,7 +43,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 
-	private final List<AbstractObservation> myVitalSignObservations = new ArrayList<AbstractObservation>();
+	protected final List<AbstractObservation> myVitalSignObservations = new ArrayList<AbstractObservation>();
 
 	// default language is German
 	private LanguageCode languageCode = LanguageCode.GERMAN;

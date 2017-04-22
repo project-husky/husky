@@ -352,6 +352,17 @@ public class DispenseItemEntry
 	}
 
 	/**
+	 * Gets the dispensed quantity element
+	 * 
+	 * @return the dispensed quantity element
+	 */
+	public PQ getQuantity() {
+
+		return this.getMdht().getQuantity();
+
+	}
+
+	/**
 	 * Gets the substance admin substitution.
 	 *
 	 * @return the substance admin substitution

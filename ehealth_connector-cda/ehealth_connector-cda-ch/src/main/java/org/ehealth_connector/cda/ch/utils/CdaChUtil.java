@@ -109,8 +109,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChEdesCtnn loadEdesCtnnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesCtnn> loader = new CdaChLoader<CdaChEdesCtnn>();
-		return loader.loadFromStream(inputStream, CdaChEdesCtnn.class,
+		CdaChEdesCtnn retVal = loader.loadFromStream(inputStream, CdaChEdesCtnn.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn.class);
+		retVal.initAfterLoad();
+		return retVal;
 	}
 
 	/**
@@ -142,8 +144,10 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChEdesEdpn loadEdesEdpnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesEdpn> loader = new CdaChLoader<CdaChEdesEdpn>();
-		return loader.loadFromStream(inputStream, CdaChEdesEdpn.class,
+		CdaChEdesEdpn retVal = loader.loadFromStream(inputStream, CdaChEdesEdpn.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn.class);
+		retVal.initAfterLoad();
+		return retVal;
 	}
 
 	/**
@@ -246,6 +250,39 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
+	 * <div class="en">Loads a CdaChMtpsDis document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChMtpsDis aus einer Datei.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param filePath
+	 *            path to the XML file
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChMtpsDis Document
+	 */
+	public static CdaChMtpsDis loadMtpsDisFromFile(String filePath) throws Exception {
+		final InputStream inputstream = new FileInputStream(filePath);
+		return loadMtpsDisFromStream(inputstream);
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChMtpsDis document from an input stream.</div>
+	 * <div class="de">Lädt ein CdaChMtpsDis aus einem inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the input stream
+	 * @return the CdaChMtpsDis Document
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static CdaChMtpsDis loadMtpsDisFromStream(InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChMtpsDis> loader = new CdaChLoader<CdaChMtpsDis>();
+		return loader.loadFromStream(inputStream, CdaChMtpsDis.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis.class);
+	}
+
+	/**
 	 * <div class="en">Loads a CdaChMtpsMtp document from a given File.</div>
 	 * <div class="de">Lädt ein CdaChMtpsMtp aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -256,9 +293,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *             the exception
 	 * @return the CdaChMtpsMtp Document
 	 */
-	public static CdaChMtpsMtp loadMtpFromFile(String filePath) throws Exception {
+	public static CdaChMtpsMtp loadMtpsMtpFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpFromStream(inputstream);
+		return loadMtpsMtpFromStream(inputstream);
 	}
 
 	/**
@@ -272,7 +309,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChMtpsMtp loadMtpFromStream(InputStream inputStream) throws Exception {
+	public static CdaChMtpsMtp loadMtpsMtpFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsMtp> loader = new CdaChLoader<CdaChMtpsMtp>();
 		return loader.loadFromStream(inputStream, CdaChMtpsMtp.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp.class);
@@ -289,9 +326,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *             the exception
 	 * @return the CdaChMtpsPadv Document
 	 */
-	public static CdaChMtpsPadv loadPadvFromFile(String filePath) throws Exception {
+	public static CdaChMtpsPadv loadMtpsPadvFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadPadvFromStream(inputstream);
+		return loadMtpsPadvFromStream(inputstream);
 	}
 
 	/**
@@ -305,7 +342,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChMtpsPadv loadPadvFromStream(InputStream inputStream) throws Exception {
+	public static CdaChMtpsPadv loadMtpsPadvFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPadv> loader = new CdaChLoader<CdaChMtpsPadv>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPadv.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv.class);
@@ -322,9 +359,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *             the exception
 	 * @return the CdaChMtpsPml Document
 	 */
-	public static CdaChMtpsPml loadPmlFromFile(String filePath) throws Exception {
+	public static CdaChMtpsPml loadMtpsPmlFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadPmlFromStream(inputstream);
+		return loadMtpsPmlFromStream(inputstream);
 	}
 
 	/**
@@ -338,7 +375,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChMtpsPml loadPmlFromStream(InputStream inputStream) throws Exception {
+	public static CdaChMtpsPml loadMtpsPmlFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPml> loader = new CdaChLoader<CdaChMtpsPml>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPml.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml.class);
@@ -355,9 +392,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 *             the exception
 	 * @return the CdaChVacd Document
 	 */
-	public static CdaChMtpsPre loadPreFromFile(String filePath) throws Exception {
+	public static CdaChMtpsPre loadMtpsPreFromFile(String filePath) throws Exception {
 		final InputStream inputstream = new FileInputStream(filePath);
-		return loadPreFromStream(inputstream);
+		return loadMtpsPreFromStream(inputstream);
 	}
 
 	/**
@@ -371,7 +408,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static CdaChMtpsPre loadPreFromStream(InputStream inputStream) throws Exception {
+	public static CdaChMtpsPre loadMtpsPreFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPre> loader = new CdaChLoader<CdaChMtpsPre>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPre.class,
 				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre.class);

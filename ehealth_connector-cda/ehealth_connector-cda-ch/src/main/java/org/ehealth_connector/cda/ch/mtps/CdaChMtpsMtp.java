@@ -65,19 +65,37 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="fr"></div>
 	 */
 	public CdaChMtpsMtp() {
-		this(LanguageCode.ENGLISH);
+		this(LanguageCode.ENGLISH, null, null);
 	}
 
 	/**
-	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
-	 * eHealth Connector convenience API</div> <div class="de"></div>
-	 * <div class="fr"></div>
+	 * <div class="en">Creates a new MTPS MTP CDA document</div>
+	 * <div class="de">Erstellt ein neues MTPS MTP CDA Dokument.</div>
 	 *
-	 * @param languageCode
-	 *            the language code
+	 * @param language
+	 *            <br>
+	 *            <div class="en">document language</div>
+	 *            <div class="de">Sprache des Dokments</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param stylesheet
+	 *            <div class="en">stylesheet, which should be referenced to
+	 *            render a human readable representation of the document</div>
+	 *            <div class="de">Stylesheet, welches im CDA mittels
+	 *            ?xml-stylesheet für die menschlich lesbare Darstellung
+	 *            referenziert werden soll (z.B.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
+	 *            >
+	 * @param cascadingStylesheet
+	 *            <div class="en">Cascading stylesheet, which should be
+	 *            referenced to render a human readable representation of the
+	 *            document</div> <div class="de">Cascasing Stylesheet, welches
+	 *            Designinformationen für die menschlich lesbare Darstellung
+	 *            referenziert (z.B.
+	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
+	 *            >
 	 */
-	public CdaChMtpsMtp(LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init());
+	public CdaChMtpsMtp(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
+		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init(), stylesheet, cascadingStylesheet);
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {

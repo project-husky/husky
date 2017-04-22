@@ -47,6 +47,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * Instantiates a new vital signs observation.
 	 */
 	public VitalSignObservation() {
+		super(null);
 		initMdht();
 		setMethodCodeTranslation(null);
 		super.getVitalSignObservation().getInterpretationCodes().clear();
@@ -65,6 +66,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 *            the value according to [IHE PCC TF-2] 6.3.4.22.3
 	 */
 	public VitalSignObservation(Code code, Date effectiveTime, Value value) {
+		super(null);
 		setCode(code);
 		setValue(value);
 		setEffectiveTime(effectiveTime);
@@ -80,6 +82,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public VitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
+		super(null);
 		setVitalSignObservation(observation);
 	}
 

@@ -65,7 +65,7 @@ public class CdaChEdesCtnn
 
 	/**
 	 * <div class="en">Creates a new EDES CTNN CDA document</div>
-	 * <div class="de">Erstellt ein neues EDED CTNN CDA Dokument.</div>
+	 * <div class="de">Erstellt ein neues EDES CTNN CDA Dokument.</div>
 	 *
 	 * @param language
 	 *            <br>
@@ -523,6 +523,13 @@ public class CdaChEdesCtnn
 	}
 
 	/**
+	 * Initializes internal lists when the CDA was loaded from file
+	 */
+	public void initAfterLoad() {
+		mCommon.initCtnnAfterLoad(this);
+	}
+
+	/**
 	 * Sets the CodedVitalSignsSection.
 	 *
 	 * @param codedVitalSigns
@@ -868,5 +875,4 @@ public class CdaChEdesCtnn
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
-
 }
