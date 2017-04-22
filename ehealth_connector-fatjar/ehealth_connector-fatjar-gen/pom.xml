@@ -11,7 +11,7 @@
 
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${svn.revision}</dll.version>
+		<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.${buildNumber}</dll.version>
 	</properties>
 
 	<dependencies>
@@ -150,31 +150,49 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
-						<artifactId>svn-revision-number-maven-plugin</artifactId>
-						<version>1.13</version>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>buildnumber-maven-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>1</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>create-timestamp</goal>
+								</goals>
+								<configuration>
+									<timestampFormat>yyDDD</timestampFormat>
+									<timestampPropertyName>rev.scm.fail</timestampPropertyName>
+								</configuration>
+							</execution>
+							<execution>
+								<id>2</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>create</goal>
+								</goals>
+								<configuration>
+									<doCheck>false</doCheck>
+									<doUpdate>false</doUpdate>
+									<providerImplementations>
+										<svn>javasvn</svn>
+									</providerImplementations>
+									<revisionOnScmFailure>${rev.scm.fail}</revisionOnScmFailure>
+								</configuration>
+							</execution>
+						</executions>
 						<dependencies>
+							<dependency>
+								<groupId>com.google.code.maven-scm-provider-svnjava</groupId>
+								<artifactId>maven-scm-provider-svnjava</artifactId>
+								<version>2.0.2</version>
+							</dependency>
 							<dependency>
 								<groupId>org.tmatesoft.svnkit</groupId>
 								<artifactId>svnkit</artifactId>
 								<version>1.8.10</version>
 							</dependency>
 						</dependencies>
-						<executions>
-							<execution>
-								<goals>
-									<goal>revision</goal>
-								</goals>
-								<phase>validate</phase>
-							</execution>
-						</executions>
-						<configuration>
-							<entries>
-								<entry>
-									<prefix>svn</prefix> <!-- create the ${svn.revision} -->
-								</entry>
-							</entries>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
