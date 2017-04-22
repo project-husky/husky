@@ -40,10 +40,6 @@ public class DispenseItemEntryTest {
 	private final XPathFactory xpathFactory = XPathFactory.newInstance();
 	private final XPath xpath = xpathFactory.newXPath();
 
-	public void test() {
-		final DispenseItemEntry d;
-	}
-
 	@Test
 	public void testDispenseCodeList() throws Exception {
 

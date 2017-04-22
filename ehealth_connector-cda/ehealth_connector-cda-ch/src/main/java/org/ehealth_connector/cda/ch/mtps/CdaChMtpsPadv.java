@@ -31,13 +31,13 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPadv. see also CDA CH MTPS 7.4.2.6
+ * The Class CdaChMtpsPadv. See also CDA-CH-MTPS 7.4.2.6
  */
 public class CdaChMtpsPadv
 		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv> {
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PADV Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -49,7 +49,7 @@ public class CdaChMtpsPadv
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PADV Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -65,16 +65,16 @@ public class CdaChMtpsPadv
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case FRENCH:
-			setTitle("Conseils sur les médicaments"); // CDA CH MTPS 7.4.2.6
+			setTitle("Conseils sur les médicaments"); // CDA-CH-MTPS 7.4.2.6
 			break;
 		case GERMAN:
-			this.setTitle("Hinweise zur Medikation"); // CDA CH MTPS 7.4.2.6
+			this.setTitle("Hinweise zur Medikation"); // CDA-CH-MTPS 7.4.2.6
 			break;
 		case ITALIAN:
-			setTitle("Consigli sui farmaci"); // CDA CH MTPS 7.4.2.6
+			setTitle("Consigli sui farmaci"); // CDA-CH-MTPS 7.4.2.6
 			break;
 		case ENGLISH:
-			setTitle("Pharmacy Pharmaceutical Advice"); // CDA CH MTPS 7.4.2.6
+			setTitle("Pharmacy Pharmaceutical Advice"); // CDA-CH-MTPS 7.4.2.6
 			break;
 		}
 		final PharmaceuticalAdviceSection section = new PharmaceuticalAdviceSection(
@@ -83,7 +83,7 @@ public class CdaChMtpsPadv
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PADV Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PADV Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *

@@ -156,12 +156,12 @@ public class CdaChMtpsPreTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm pre
+		// ihe pharm pre template id
 		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm dis code
+		// ihe pharm pre code
 		expr = xpath.compile("/clinicaldocument/code[@code='57833-6']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

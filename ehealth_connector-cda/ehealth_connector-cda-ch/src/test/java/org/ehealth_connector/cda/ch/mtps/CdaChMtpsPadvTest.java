@@ -138,7 +138,7 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm padv
+		// ihe pharm padv template id
 		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.2']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

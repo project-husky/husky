@@ -36,7 +36,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 
 /**
- * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
+ * The Class CdaChMtpsMtp. See also CDA-CH-MTPS 7.4.2.3
  */
 public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp> {
 
@@ -60,7 +60,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -72,7 +72,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -107,7 +107,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *

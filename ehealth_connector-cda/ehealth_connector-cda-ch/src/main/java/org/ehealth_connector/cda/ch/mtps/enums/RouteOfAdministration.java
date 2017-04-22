@@ -27,22 +27,22 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum RouteOfAdministration {
 
 	/**
-	 * <div class="en"> topical application, buccal</div><div class="fr">dans la
-	 * bouche</div>
-	 */
-	BUCCAL("BUC", "topical application, buccal", "dans la bouche"),
-
-	/**
 	 * <div class="en"> chew, oral</div><div class="fr">à mâcher ou à
 	 * sucer</div>
 	 */
 	CHEW_ORAL("CHEW", "chew, oral", "à mâcher ou à sucer"),
 
 	/**
-	 * <div class="en"> instillation, gastrostomy tube</div><div class="fr">par
-	 * sonde gastrostomie</div>
+	 * <div class="en"> dissolve, sublingual</div><div class="fr">sous la
+	 * langue</div>
 	 */
-	GASTROTOMY_TUBE("GT", "instillation, gastrostomy tube", "par sonde gastrostomie"),
+	DISSOLVE_SUBLINGUAL("SL", "dissolve, sublingual", "sous la langue"),
+
+	/**
+	 * <div class="en"> infusion, intravenous</div><div class="fr">par voie
+	 * intraveineuse</div>
+	 */
+	INFUSION_INTRANEOUS("IV", "infusion, intravenous", "par voie intraveineuse"),
 
 	/**
 	 * <div class="en"> injection, intra-abdominal</div><div class="fr">intra
@@ -69,90 +69,90 @@ public enum RouteOfAdministration {
 	INJECTION_INTRAMUSCULAR("IM", "injection, intramuscular", "par voie intramusculaire"),
 
 	/**
-	 * <div class="en"> infusion, intravenous</div><div class="fr">par voie
-	 * intraveineuse</div>
-	 */
-	INTRANEOUS("IV", "infusion, intravenous", "par voie intraveineuse"),
-
-	/**
-	 * <div class="en"> topical application, nail</div><div class="fr">sur
-	 * l'ongle</div>
-	 */
-	NAIL("NAIL", "topical application, nail", "sur l'ongle"),
-
-	/**
-	 * <div class="en"> instillation, nasal</div><div class="fr">par
-	 * inhalation</div>
-	 */
-	NASAL_INSTILLATION("NASALINSTIL", "instillation, nasal", "par inhalation"),
-
-	/**
-	 * <div class="en"> instillation, nasogastric</div><div class="fr">par sonde
-	 * naso gastrique</div>
-	 */
-	NASOGASTRIC_INSTILLATION("NASOGASINSTIL", "instillation, nasogastric", "par sonde naso gastrique"),
-
-	/**
-	 * <div class="en"> topical application, ophthalmic</div>
-	 * <div class="fr">dans l'oeil</div>
-	 */
-	OPHTALMIC_APPLICATION("OPTHALTA", "topical application, ophthalmic", "dans l'oeil"),
-
-	/**
-	 * <div class="en"> instillation, otic</div><div class="fr">dans
-	 * l'oreille</div>
-	 */
-	OTIC_INSTILLATION("OT", "instillation, otic", "dans l'oreille"),
-
-	/**
 	 * <div class="en"> injection, paranasal sinuses</div><div class="fr">par
 	 * voie nasale</div>
 	 */
-	PARANASAL_INJECTION("PNSINJ", "injection, paranasal sinuses", "par voie nasale"),
-
-	/**
-	 * <div class="en"> swallow, oral</div><div class="fr">par la bouche</div>
-	 */
-	PER_OS("PO", "swallow, oral", "par la bouche"),
-
-	/**
-	 * <div class="en"> insertion, rectal</div><div class="fr">par voie
-	 * rectale</div>
-	 */
-	RECTAL("PR", "insertion, rectal", "par voie rectale"),
-
-	/**
-	 * <div class="en"> topical application, skin</div><div class="fr">en
-	 * application cutanée</div>
-	 */
-	SKIN("SKIN", "topical application, skin", "en application cutanée"),
-
-	/**
-	 * <div class="en"> dissolve, sublingual</div><div class="fr">sous la
-	 * langue</div>
-	 */
-	SUBLINGUAL("SL", "dissolve, sublingual", "sous la langue"),
+	INJECTION_PARANASAL("PNSINJ", "injection, paranasal sinuses", "par voie nasale"),
 
 	/**
 	 * <div class="en"> injection, subcutaneous</div><div class="fr">par voie
 	 * sous cutané</div>
 	 */
-	SUBCUTANEOUS("SQ", "injection, subcutaneous", "par voie sous cutané"),
-
-	/** <div class="en"> suck, oromucosal</div><div class="fr">à sucer</div> */
-	SUCK("SUCK", "suck, oromucosal", "à sucer"),
+	INJECTION_SUBCUTANEOUS("SQ", "injection, subcutaneous", "par voie sous cutané"),
 
 	/**
-	 * <div class="en"> topical application, vaginal</div><div class="fr">par
-	 * voie transdermique</div>
+	 * <div class="en"> insertion, rectal</div><div class="fr">par voie
+	 * rectale</div>
 	 */
-	TRANSDEMIC("TRNSDERM", "topical application, vaginal", "par voie transdermique"),
+	INSERTION_RECTAL("PR", "insertion, rectal", "par voie rectale"),
 
 	/**
 	 * <div class="en"> insertion, vaginal</div><div class="fr">par voie
 	 * vaginale</div>
 	 */
-	VAGINS("VAGINS", "insertion, vaginal", "par voie vaginale");
+	INSERTION_VAGINAL("VAGINS", "insertion, vaginal", "par voie vaginale"),
+
+	/**
+	 * <div class="en"> instillation, gastrostomy tube</div><div class="fr">par
+	 * sonde gastrostomie</div>
+	 */
+	INSTILLATION_GASTROTOMY_TUBE("GT", "instillation, gastrostomy tube", "par sonde gastrostomie"),
+
+	/**
+	 * <div class="en"> instillation, nasal</div><div class="fr">par
+	 * inhalation</div>
+	 */
+	INSTILLATION_NASAL("NASALINSTIL", "instillation, nasal", "par inhalation"),
+
+	/**
+	 * <div class="en"> instillation, nasogastric</div><div class="fr">par sonde
+	 * naso gastrique</div>
+	 */
+	INSTILLATION_NASOGASTRIC("NASOGASINSTIL", "instillation, nasogastric", "par sonde naso gastrique"),
+
+	/**
+	 * <div class="en"> instillation, otic</div><div class="fr">dans
+	 * l'oreille</div>
+	 */
+	INSTILLATION_OTIC("OT", "instillation, otic", "dans l'oreille"),
+
+	/** <div class="en"> suck, oromucosal</div><div class="fr">à sucer</div> */
+	SUCK_OROMUCOSAL("SUCK", "suck, oromucosal", "à sucer"),
+
+	/**
+	 * <div class="en"> swallow, oral</div><div class="fr">par la bouche</div>
+	 */
+	SWALLOW_ORAL("PO", "swallow, oral", "par la bouche"),
+
+	/**
+	 * <div class="en"> topical application, buccal</div><div class="fr">dans la
+	 * bouche</div>
+	 */
+	TOPICAL_BUCCAL("BUC", "topical application, buccal", "dans la bouche"),
+
+	/**
+	 * <div class="en"> topical application, nail</div><div class="fr">sur
+	 * l'ongle</div>
+	 */
+	TOPICAL_NAIL("NAIL", "topical application, nail", "sur l'ongle"),
+
+	/**
+	 * <div class="en"> topical application, ophthalmic</div>
+	 * <div class="fr">dans l'oeil</div>
+	 */
+	TOPICAL_OPHTALMIC("OPTHALTA", "topical application, ophthalmic", "dans l'oeil"),
+
+	/**
+	 * <div class="en"> topical application, skin</div><div class="fr">en
+	 * application cutanée</div>
+	 */
+	TOPICAL_SKIN("SKIN", "topical application, skin", "en application cutanée"),
+
+	/**
+	 * <div class="en"> topical application, vaginal</div><div class="fr">par
+	 * voie transdermique</div>
+	 */
+	TOPICAL_VAGINAL("TRNSDERM", "topical application, vaginal", "par voie transdermique");
 
 	public static final String CODE_SYSTEM_NAME = "RouteOfAdministration";
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.112";

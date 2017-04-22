@@ -31,12 +31,12 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsDis. see also CDA CH MTPS 7.4.2.5
+ * The Class CdaChMtpsDis. See also CDA-CH-MTPS 7.4.2.5
  */
 public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis> {
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS DIS Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -48,7 +48,7 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS DIS Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -64,13 +64,13 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case FRENCH:
-			setTitle("Dispensation des médicaments"); // CDA CH MTPS 7.4.2.5
+			setTitle("Dispensation des médicaments"); // CDA-CH-MTPS 7.4.2.5
 			break;
 		case GERMAN:
-			this.setTitle("Abgabe von Medikamenten"); // CDA CH MTPS 7.4.2.5
+			this.setTitle("Abgabe von Medikamenten"); // CDA-CH-MTPS 7.4.2.5
 			break;
 		case ITALIAN:
-			setTitle("Dispensazioni di farmaci"); // CDA CH MTPS 7.4.2.5
+			setTitle("Dispensazioni di farmaci"); // CDA-CH-MTPS 7.4.2.5
 			break;
 		case ENGLISH:
 			setTitle("Medication dispensed"); // IHE PHARM DIS L350
@@ -81,7 +81,7 @@ public class CdaChMtpsDis extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps DIS Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS DIS Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *

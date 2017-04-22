@@ -288,7 +288,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	public static Author getMdInfo() {
 		final Name docName = new Name("John", "Doe", "Prof.");
-		final Author doc = new Author(docName, "7608888888888"); // G
+		final Author doc = new Author(docName, "7608888888888");
 		final Telecoms docTelecoms = new Telecoms();
 		docTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
 		docTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
@@ -1482,7 +1482,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 	private Code getRouteOfAdministration() {
 
-		return RouteOfAdministration.PER_OS.getCode(getLanguageCode());
+		return RouteOfAdministration.SWALLOW_ORAL.getCode(getLanguageCode());
 	}
 
 	public Consumable initConsumable() {
@@ -1513,7 +1513,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final String strTemplateIdSubstance4Oid = "1.3.6.1.4.1.19376.1.5.3.1.4.7";
 		final String strTemplateIdSubstance4Id = "IHE PHARM";
 		final Double doseQuantity = new Double(10);
-		final RouteOfAdministration rOa = RouteOfAdministration.PER_OS;
+		final RouteOfAdministration rOa = RouteOfAdministration.SWALLOW_ORAL;
 		final boolean isSubstituable = true;
 		// Convenience API Types
 		idMtp1 = createIdentificator(strMtpOid1, strMtpId1);
@@ -1596,12 +1596,12 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm pml
+		// ihe pharm pml template id
 		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.5']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm dis code
+		// ihe pharm pml code
 		expr = xpath.compile("//code[@code='56445-0']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

@@ -48,7 +48,7 @@ import org.xml.sax.InputSource;
  *
  *
  */
-public class CdaPharmMtpsTest extends TestUtils {
+public class CdaChMtpsMtpTest extends TestUtils {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -56,7 +56,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 	private final XPathFactory xpathFactory = XPathFactory.newInstance();
 	private final XPath xpath = xpathFactory.newXPath();
 
-	public CdaPharmMtpsTest() {
+	public CdaChMtpsMtpTest() {
 		super();
 	}
 
@@ -155,7 +155,7 @@ public class CdaPharmMtpsTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// ihe pharm pmö
+		// ihe pharm mtp template id
 		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.1.6']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

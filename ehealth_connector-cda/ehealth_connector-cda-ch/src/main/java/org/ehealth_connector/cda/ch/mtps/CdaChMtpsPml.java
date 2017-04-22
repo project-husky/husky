@@ -36,12 +36,12 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPml. See also CDA CH MTPS 7.4.2.2
+ * The Class CdaChMtpsPml. See also CDA-CH-MTPS 7.4.2.2
  */
 public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml> {
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PML Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -55,7 +55,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PML Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -87,7 +87,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PML Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PML Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *

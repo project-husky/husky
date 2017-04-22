@@ -33,12 +33,12 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
 /**
- * The Class CdaChMtpsPre. See also CDA CH MTPS 7.4.2.4
+ * The Class CdaChMtpsPre. See also CDA-CH-MTPS 7.4.2.4
  */
 public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PRE Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PRE Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -50,7 +50,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps PRE Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS PRE Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
@@ -66,13 +66,13 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case GERMAN:
-			this.setTitle("Verordnung von Medikamenten"); // CDA CH MTPS 7.4.2.4
+			this.setTitle("Verordnung von Medikamenten"); // CDA-CH-MTPS 7.4.2.4
 			break;
 		case FRENCH:
-			setTitle("Prescriptions des médicaments"); // CDA CH MTPS 7.4.2.4
+			setTitle("Prescriptions des médicaments"); // CDA-CH-MTPS 7.4.2.4
 			break;
 		case ITALIAN:
-			setTitle("Prescrizione farmacologica"); // CDA CH MTPS 7.4.2.4
+			setTitle("Prescrizione farmacologica"); // CDA-CH-MTPS 7.4.2.4
 			break;
 		case ENGLISH:
 			setTitle("Pharmacy Prescription");
@@ -83,7 +83,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	}
 
 	/**
-	 * <div class="en">Instantiates a new cda ch mtps MTP Document using the
+	 * <div class="en">Instantiates a new CDA-CH-MTPS MTP Document using the
 	 * eHealth Connector convenience API</div> <div class="de"></div>
 	 * <div class="fr"></div>
 	 *
