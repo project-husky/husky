@@ -57,7 +57,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	private V3PixPdqAdapter v3PixAdapter;
 	private V3PixPdqAdapterConfig v3PixAdapterCfg;
 
-	// TODO: fill below in from test tool before running test and remove @Ignore
+	// note: fill below in from test tool before running test and remove @Ignore
 	// Annotation above to run the tests manual
 	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1454";
 	final private String ipAddress = "129.6.24.79";

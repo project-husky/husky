@@ -50,4 +50,23 @@ public enum ValidationType {
 		this.displayName = displayName;
 	}
 
+	/**
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return this.displayName;
+	}
 }

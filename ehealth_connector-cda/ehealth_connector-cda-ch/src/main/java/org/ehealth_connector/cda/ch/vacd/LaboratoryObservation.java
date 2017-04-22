@@ -528,7 +528,10 @@ public class LaboratoryObservation extends AbstractObservation {
 
 	@Override
 	public void setTargetSite(ActSite actSite) {
-		// TODO Auto-generated method stub
+		if (actSite != null) {
+			mLaboratoryObservation.getTargetSiteCodes().clear();
+			mLaboratoryObservation.getTargetSiteCodes().add(actSite.getCD());
+		}
 	}
 
 	@Override

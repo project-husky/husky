@@ -66,7 +66,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipExternalReference
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
-// TODO: Auto-generated Javadoc
 /**
  * Implements the Base Class MedicationItemEntry from the IHE PHARM Model.
  */

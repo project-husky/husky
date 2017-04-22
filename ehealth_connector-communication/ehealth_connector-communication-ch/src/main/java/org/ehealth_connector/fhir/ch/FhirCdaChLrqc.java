@@ -484,6 +484,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 	 * @return eHC Vacd document type code (full or masked patient
 	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
 	 */
+	@SuppressWarnings("unused")
 	private DocTypeCode getDocType(Bundle bundle) {
 		DocTypeCode retVal = DocTypeCode.PATIENT; // default
 		for (final Entry entry : bundle.getEntry()) {

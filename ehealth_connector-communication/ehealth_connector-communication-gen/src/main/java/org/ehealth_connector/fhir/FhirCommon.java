@@ -62,7 +62,6 @@ import ca.uhn.fhir.model.primitive.BoundCodeDt;
 import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.model.primitive.XhtmlDt;
 
-// TODO: Auto-generated Javadoc
 /**
  * <div class="en">Common material for Fhir package</div> <div class="de"></div>
  * <div class="fr"></div>.

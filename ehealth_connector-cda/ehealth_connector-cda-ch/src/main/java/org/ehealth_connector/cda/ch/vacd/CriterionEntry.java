@@ -27,7 +27,6 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Criterion;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * CriterionEntry implements the structured recommendation category for
  * immunization in switzerland, see chapter 7.5.1.8. CDA-CH-VACD Valueset

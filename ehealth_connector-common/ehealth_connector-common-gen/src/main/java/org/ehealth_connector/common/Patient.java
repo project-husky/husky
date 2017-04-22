@@ -42,9 +42,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
  */
 public class Patient extends Person {
 
-	private RecordTarget mRecordTarget;
-	private PatientRole mPatientRole;
-	private org.openhealthtools.mdht.uml.cda.Patient mPatient;
+	private final RecordTarget mRecordTarget;
+	private final PatientRole mPatientRole;
+	private final org.openhealthtools.mdht.uml.cda.Patient mPatient;
 
 	/**
 	 * CDA R2 extensions for the PIX Profile as proposed on
@@ -79,10 +79,10 @@ public class Patient extends Person {
 	/**
 	 * Mother's Maiden Name Citing Keith Boone, the CDA Book p237: in CDA
 	 * Release 2.0 there is no appropriate place beneath <recordTarget> where
-	 * this information would appear insteaad a <participant> would need to be
-	 * added to the CDA header that identified the mother of the patient TODO:
-	 * only use at the moment in the OHT PIX communication, for CDA no
-	 * functionality yet
+	 * this information would appear instead a <participant> would need to be
+	 * added to the CDA header that identified the mother of the patient: only
+	 * use at the moment in the OHT PIX communication, for CDA no functionality
+	 * yet
 	 */
 	private String mothersMaidenName;
 

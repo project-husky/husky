@@ -19,12 +19,81 @@ package org.ehealth_connector.validation.service.enums;
 
 public enum SchematronType {
 
+	/** failed assert */
 	FAILED_ASSERT("svrl_fail", "FAILED_ASSERT"),
 
+	/** successful report */
 	SUCESSFUL_REPORT("svrl_succ", "SUCESSFUL_REPORT");
 
+	/**
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static SchematronType getEnum(String code) {
+		for (final SchematronType x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *            <br>
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(SchematronType.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *            <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (SchematronType x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Machine interpretable and (inside this class) unique
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
+	 */
 	private String code;
 
+	/**
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
+	 */
 	private String displayName;
 
 	/**
@@ -44,4 +113,23 @@ public enum SchematronType {
 		this.displayName = displayName;
 	}
 
+	/**
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeValue() {
+		return this.code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return this.displayName;
+	}
 }

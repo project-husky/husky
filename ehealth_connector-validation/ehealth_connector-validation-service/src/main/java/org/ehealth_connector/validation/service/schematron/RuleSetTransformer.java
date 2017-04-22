@@ -47,8 +47,6 @@ import net.sf.saxon.s9api.XsltExecutable;
  * </p>
  */
 public class RuleSetTransformer extends StylesheetFactory {
-	// TODO Make stylesheets optionally cacheable.
-
 	public static final String ISO_ABSTRACT_EXPAND;
 
 	public static final String ISO_DSDL_INCLUDE;

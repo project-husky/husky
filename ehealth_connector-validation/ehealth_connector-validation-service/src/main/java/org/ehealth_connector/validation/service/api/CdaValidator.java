@@ -324,8 +324,6 @@ public class CdaValidator {
 			final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			return (SchematronOutput) jaxbUnmarshaller.unmarshal(in);
 		} catch (final JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return null;
 	}

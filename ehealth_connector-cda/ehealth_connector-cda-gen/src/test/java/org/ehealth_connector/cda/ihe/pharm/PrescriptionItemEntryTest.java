@@ -52,7 +52,7 @@ import org.w3c.dom.NodeList;
  */
 public class PrescriptionItemEntryTest {
 
-	private XPath xpath = PharmXPath.getXPath();
+	private final XPath xpath = PharmXPath.getXPath();
 
 	@Test
 	public void testCompResolving() {
@@ -73,8 +73,6 @@ public class PrescriptionItemEntryTest {
 
 		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
 				substitutionHandlingEntry.getSubstanceAdminSubstitution());
-
-		final Document document = entry.getDocument(true);
 
 	}
 
@@ -126,10 +124,6 @@ public class PrescriptionItemEntryTest {
 
 		entry.getMdht().getEffectiveTimes().add(sxcmTs);
 
-		// SXCM_TS
-
-		final Document document = entry.getDocument();
-
 	}
 
 	@Test
@@ -170,8 +164,6 @@ public class PrescriptionItemEntryTest {
 		ivl_pq.setValue(Double.valueOf("2.0"));
 
 		entry.getMdht().setRateQuantity(ivl_pq);
-
-		final Document document = entry.getDocument();
 
 	}
 

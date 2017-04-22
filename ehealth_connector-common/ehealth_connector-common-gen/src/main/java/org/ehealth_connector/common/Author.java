@@ -661,8 +661,6 @@ public class Author {
 	public void setFunctionCode(Code code) {
 		if (code != null) {
 			mAuthor.setFunctionCode(code.getCE());
-		} else {
-			CE ce = mAuthor.getFunctionCode();
 		}
 	}
 

@@ -93,8 +93,6 @@ public class FileUtil {
 					new OutputStreamWriter(new FileOutputStream(outputFileName), "UTF-8"));
 			out.write(outputString);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			try {
 				out.close();

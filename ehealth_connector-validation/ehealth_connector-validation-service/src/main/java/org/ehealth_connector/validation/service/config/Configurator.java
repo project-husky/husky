@@ -22,8 +22,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.ehealth_connector.validation.service.config.bind.ConfigurationType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Configures the application given an XML configuration file. Configuring the
@@ -35,9 +33,6 @@ import org.slf4j.LoggerFactory;
  * </ul>
  */
 public class Configurator {
-
-	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** Parser used to process the application's XML configuration file */
 	private final ConfigurationParser configurationParser;

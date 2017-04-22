@@ -926,13 +926,4 @@ public class DocumentMetadata {
 		xDoc.setUri(uri);
 	}
 
-	// /**
-	// * Converts this (more general) DocumentMetadata object to a more specific
-	// * swiss DocumentMetadataCh object.
-	// *
-	// * @return the uniqueId
-	// */
-	// public DocumentMetadata toDocumentMetadataCh() {
-	// return new DocumentMetadataCh(this);
-	// }
 }

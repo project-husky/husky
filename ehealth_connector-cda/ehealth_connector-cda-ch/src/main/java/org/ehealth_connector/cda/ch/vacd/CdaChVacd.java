@@ -1462,7 +1462,6 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	private boolean updateProblemConcernReferences(EList<Act> acts, SectionsVACD loincSectionCode) {
-		@SuppressWarnings("unused")
 		int i = 0;
 		for (final Act act : acts) {
 			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;

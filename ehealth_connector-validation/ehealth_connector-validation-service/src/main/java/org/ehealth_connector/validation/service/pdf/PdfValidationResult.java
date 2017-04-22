@@ -21,13 +21,7 @@ package org.ehealth_connector.validation.service.pdf;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class PdfValidationResult {
-
-	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private boolean validationDone = false;
 

@@ -118,6 +118,7 @@ public class Text {
 			while (iter.hasNext()) {
 				Object tempObj = iter.next();
 				if (tempObj instanceof JAXBElement) {
+					@SuppressWarnings("unchecked")
 					LangTextType tempObj2 = ((JAXBElement<LangTextType>) tempObj).getValue();
 					return tempObj2.getValue();
 				}

@@ -469,6 +469,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 	 * @return list of eHC EDES VitalSignObservation </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
+	@SuppressWarnings("unused")
 	private List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> getCodedVitalSigns(
 			Bundle bundle) {
 		final List<org.ehealth_connector.cda.ch.edes.VitalSignObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.edes.VitalSignObservation>();
@@ -555,8 +556,6 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 	}
 
 	private Identificator getInFulfillmentOf(Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer>();
-
 		// Iterate over all Bundle Entries
 		for (final Entry entry : bundle.getEntry()) {
 			// Get all InFulfillmentOfs

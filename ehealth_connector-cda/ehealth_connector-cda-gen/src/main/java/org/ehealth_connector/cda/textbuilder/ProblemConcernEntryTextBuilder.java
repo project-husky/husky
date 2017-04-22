@@ -32,7 +32,6 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 
 	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
-	private final String contentIdPrefix;
 
 	/**
 	 * Constructor.
@@ -45,7 +44,6 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
-		contentIdPrefix = section.getContentIdPrefix();
 	}
 
 	private void addBody() {

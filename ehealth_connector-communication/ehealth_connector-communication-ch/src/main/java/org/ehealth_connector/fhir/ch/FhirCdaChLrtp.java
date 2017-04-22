@@ -496,8 +496,6 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 					Author author = new Author("");
 					author.addId(FhirCommon
 							.fhirIdentifierToEhcIdentificator(fPerf.getIdentifierFirstRep()));
-					// Time
-					// TODO
 				}
 
 			}
@@ -514,6 +512,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 * @return list of eHC LRTP VitalSignObservation </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
+	@SuppressWarnings("unused")
 	private List<VitalSignObservation> getCodedVitalSigns(Bundle bundle) {
 		final List<VitalSignObservation> retVal = new ArrayList<VitalSignObservation>();
 		for (final Entry entry : bundle.getEntry()) {
