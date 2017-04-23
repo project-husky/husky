@@ -119,6 +119,10 @@ public abstract class CdaUtil {
 		return CDAFactory.eINSTANCE;
 	}
 
+	public static DatatypesFactory getMdhtDatatypesFactoryInstance() {
+		return DatatypesFactory.eINSTANCE;
+	}
+
 	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
 			EList<EntryRelationship> entryRelationships) {
 		final int erNb = entryRelationships.size() - 1;
