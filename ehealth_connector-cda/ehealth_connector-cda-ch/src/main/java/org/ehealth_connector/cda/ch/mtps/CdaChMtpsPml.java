@@ -53,7 +53,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * <div class="en">Creates a new MTPS PML CDA document</div>
 	 * <div class="de">Erstellt ein neues MTPS PML CDA Dokument.</div>
 	 *
-	 * @param language
+	 * @param languageCode
 	 *            <br>
 	 *            <div class="en">document language</div>
 	 *            <div class="de">Sprache des Dokments</div>
