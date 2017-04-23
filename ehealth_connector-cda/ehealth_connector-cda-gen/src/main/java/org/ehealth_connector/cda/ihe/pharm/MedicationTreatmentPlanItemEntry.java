@@ -78,7 +78,7 @@ public class MedicationTreatmentPlanItemEntry extends MedicationItemEntry {
 	 *         Entry</div> <div class="de"></div> <div class="fr"></div>
 	 */
 
-	public MedicationTreatmentPlanItemReferenceEntry createMTPItemReferenceEntry() {
+	public MedicationTreatmentPlanItemReferenceEntry createMtpItemReferenceEntry() {
 
 		final MedicationTreatmentPlanItemReferenceEntry referenceEntry = new MedicationTreatmentPlanItemReferenceEntry();
 
