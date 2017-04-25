@@ -56,16 +56,30 @@ public class CdaChMtpsDisTest extends TestUtils {
 	private final XPathFactory xpathFactory = XPathFactory.newInstance();
 	private final XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 *<div class="en">Test class for the PHARM DIS document.</div>
+	 * <div class="de"></div>	 
+	 */
 	public CdaChMtpsDisTest() {
 		super();
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsDis deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsDis(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) CDAUtil.load(source));
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsDis deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
@@ -74,6 +88,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) clinicalDocument);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -83,6 +100,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaTest() throws Exception {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -93,6 +113,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertEquals("Pharmacy Dispense", cdaDeserialized.getDispenseSection().getTitle());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaTestTemplateId() throws Exception {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -102,11 +125,19 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return CDAUtil.load(source);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -116,6 +147,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void failedModellingTest() throws XPathExpressionException {
 		org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseSection cda = PHARMFactory.eINSTANCE
@@ -129,29 +163,26 @@ public class CdaChMtpsDisTest extends TestUtils {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		// expr = xpath.compile("//*/code[@code='60590-7' and
-		// @codeSystem='2.16.840.1.113883.6.1']");
-		// nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		// assertEquals(1, nodes.getLength());
-		// should be blowe
-
-		// expr = xpath.compile("//*/section/title[text()='Pharmacy
-		// Dispense']");
-		// nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		// assertEquals(1, nodes.getLength());
-
 		expr = xpath.compile("//*/code[@code='10160-0' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 	}
 
+	/**
+	 * @param doc
+	 * @return
+	 * @throws Exception
+	 */
 	private String serializeDocument(CdaChMtpsDis doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -188,6 +219,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumentSection() throws XPathExpressionException {
 		final CdaChMtpsDis cda = new CdaChMtpsDis();
@@ -211,6 +245,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void testDocumentSectionDeserializeWithEntries() throws Exception {
 

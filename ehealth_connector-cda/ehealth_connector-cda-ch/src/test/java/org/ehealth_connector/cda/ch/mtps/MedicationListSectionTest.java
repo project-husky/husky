@@ -25,38 +25,40 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.ehealth_connector.cda.ch.mtps.enums.PosologyType;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.enums.DispenseCodeList;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.Ucum;
 import org.junit.Test;
+import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PIVL_TS;
+import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * The Class DispenseItemEntry.
+ * The Class MedicationFrequency.
  */
-public class DispenseItemEntryTest {
-
-	private final XPathFactory xpathFactory = XPathFactory.newInstance();
-	private final XPath xpath = xpathFactory.newXPath();
+public class MedicationListSectionTest {
 
 	/**
-	 * <div class="en">Test class for the Dispense Code List of the
-	 * DispenseItemEntry.</div> <div class="de"></div>
+	 * Test method for the MedicationnListSection
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	public void testDispenseCodeList() throws Exception {
+	public void testMedicationListSection() throws Exception {
 
-		final DispenseItemEntry entry = new DispenseItemEntry();
-
-		entry.setDispenseCode(DispenseCodeList.REFILL_COMPLETE.getCode(LanguageCode.FRENCH));
-
-		final Document document = entry.getDocument();
-
-		final XPathExpression expr = xpath.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
-		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-		assertEquals(DispenseCodeList.REFILL_COMPLETE, DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
+		final MedicationListSection medicationListSection = new MedicationListSection();
+		assertEquals("1.3.6.1.4.1.19376.1.9.1.2.6",
+				medicationListSection.getMedicationTreatmentPlanSection().getTemplateId());
+		assertEquals("77604-7",
+				medicationListSection.getMedicationTreatmentPlanSection().getMdht().getCode().getCode());
+		assertEquals("2.16.840.1.113883.6.1",
+				medicationListSection.getMedicationTreatmentPlanSection().getMdht().getCode().getCodeSystem());
 	}
 
 }

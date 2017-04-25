@@ -44,6 +44,11 @@ public class PharmaceuticalAdviceConcernEntryTest {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 * Test method for the ProblemConcernEntry class
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testProblemConcernEntry() throws Exception {
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();

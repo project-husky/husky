@@ -40,6 +40,11 @@ public class PrescriptionItemEntryTest {
 	private XPathFactory xpathFactory = XPathFactory.newInstance();
 	private XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 * Test method for the MedicationSpecialConditions
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testMedicationsSpecialConditions() throws Exception {
 

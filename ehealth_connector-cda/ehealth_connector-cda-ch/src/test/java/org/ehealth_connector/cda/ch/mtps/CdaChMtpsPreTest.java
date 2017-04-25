@@ -33,8 +33,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.mtps.MedicationFrequencyContentModule.MedicationFrequency;
-import org.ehealth_connector.cda.ch.mtps.MedicationFrequencyContentModule.PosologyType;
+import org.ehealth_connector.cda.ch.mtps.enums.PosologyType;
 import org.ehealth_connector.cda.ihe.pharm.PharmSubstitutionHandlingEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
@@ -63,16 +62,30 @@ public class CdaChMtpsPreTest extends TestUtils {
 	private final XPathFactory xpathFactory = XPathFactory.newInstance();
 	private final XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 *<div class="en">Test class for the PHARM PRE document.</div>
+	 * <div class="de"></div>	 
+	 */
 	public CdaChMtpsPreTest() {
 		super();
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsPre deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsPre(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsPre deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
@@ -81,6 +94,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -93,6 +109,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaTest() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -102,6 +121,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaTestTemplateId() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -111,11 +133,19 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return CDAUtil.load(source);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -125,12 +155,20 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @param doc
+	 * @return
+	 * @throws Exception
+	 */
 	private String serializeDocument(CdaChMtpsPre doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -167,6 +205,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumentSection() throws XPathExpressionException {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -186,6 +227,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 		assertEquals("Prescription for medication", cda.getPrescriptionSection().getTitle());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void testDocumentSectionDeserializeWithEntries() throws Exception {
 		final CdaChMtpsPre cda = new CdaChMtpsPre();
@@ -204,7 +248,7 @@ public class CdaChMtpsPreTest extends TestUtils {
 		preEntry.setSupplyQuantityValue(new BigDecimal(1.5));
 
 		MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(preEntry);
-		frequency.setMedicationFrequency(PosologyType.NTimesADay, 2,
+		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2,
 				new TimingEvent[] { TimingEvent.DURING_MEAL }, null, 0, null, null);
 
 		cda.getPrescriptionSection().addPrescriptionItemEntry(preEntry);
@@ -229,9 +273,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 				cdaDeserialized.getPrescriptionSection().getPrescriptionItemEntries().get(0));
 
 		MedicationFrequency medicationFrequency = frequencyDeserialized.getMedicationFrequency();
-		assertEquals(PosologyType.NTimesADay, medicationFrequency.posology);
-		assertEquals(new Double(2.0), new Double(medicationFrequency.posologyFactor));
-		assertEquals(TimingEvent.DURING_MEAL, medicationFrequency.timingEvents[0]);
+		assertEquals(PosologyType.N_TIMES_A_DAY, medicationFrequency.getPosology());
+		assertEquals(new Double(2.0), new Double(medicationFrequency.getPosologyFactor()));
+		assertEquals(TimingEvent.DURING_MEAL, medicationFrequency.getTimingEvents()[0]);
 
 	}
 

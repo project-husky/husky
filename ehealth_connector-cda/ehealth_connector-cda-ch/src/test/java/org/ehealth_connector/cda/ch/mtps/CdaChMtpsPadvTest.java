@@ -55,16 +55,30 @@ public class CdaChMtpsPadvTest extends TestUtils {
 	private final XPathFactory xpathFactory = XPathFactory.newInstance();
 	private final XPath xpath = xpathFactory.newXPath();
 
+	/**
+	 *<div class="en">Test class for the PHARM PADV document.</div>
+	 * <div class="de"></div>	 
+	 */
 	public CdaChMtpsPadvTest() {
 		super();
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsPadv deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsPadv(
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv) CDAUtil.load(source));
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private CdaChMtpsPadv deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
@@ -73,6 +87,9 @@ public class CdaChMtpsPadvTest extends TestUtils {
 				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv) clinicalDocument);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaDirectTest() throws Exception {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
@@ -82,6 +99,9 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeCdaTest() throws Exception {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
@@ -93,11 +113,19 @@ public class CdaChMtpsPadvTest extends TestUtils {
 				cdaDeserialized.getPharmaceuticalAdviceSection().getTitle());
 	}
 
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
 	private ClinicalDocument deserializeClinicalDocument(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return CDAUtil.load(source);
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void deserializeClinicalDocumentTest() throws Exception {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
@@ -107,12 +135,20 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		assertTrue(cdaDeserialized != null);
 	}
 
+	/**
+	 * @param doc
+	 * @return
+	 * @throws Exception
+	 */
 	private String serializeDocument(CdaChMtpsPadv doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumenHeader() throws XPathExpressionException {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
@@ -149,6 +185,9 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
+	/**
+	 * @throws XPathExpressionException
+	 */
 	@Test
 	public void testDocumentSection() throws XPathExpressionException {
 		final CdaChMtpsPadv cda = new CdaChMtpsPadv();
@@ -169,6 +208,9 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
+	/**
+	 * @throws Exception
+	 */
 	@Test
 	public void testDocumentSectionDeserializeWithEntries() throws Exception {
 
