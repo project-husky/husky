@@ -1167,7 +1167,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		final PharmAsContent boxDescription = CDAFactory.eINSTANCE.createPharmAsContent();
 		boxDescription.setClassCode(EntityClassManufacturedMaterial.CONT);
-		boxDescription.setAsContainerPackagedMedicine(getPackMedicine());
+		boxDescription.setContainerPackagedMedicine(getPackMedicine());
 
 		return boxDescription;
 	}

@@ -163,9 +163,6 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//*/section/templateId[@root='2.16.840.1.113883.10.20.1.8']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
 
 		expr = xpath.compile("//*/code[@code='61357-0' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);

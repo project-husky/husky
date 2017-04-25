@@ -176,11 +176,6 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile(
-				"//*/section/code[@code='77603-9' and @codeSystem='2.16.840.1.113883.6.1']");
-		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-
 		assertNotNull(cda.getMedicationTreatmentPlanSection());
 		assertEquals("Medikamentöser Behandlungsplan",
 				cda.getMedicationTreatmentPlanSection().getTitle());

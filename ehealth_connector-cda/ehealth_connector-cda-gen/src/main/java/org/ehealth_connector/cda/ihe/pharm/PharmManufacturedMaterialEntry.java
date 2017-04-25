@@ -191,7 +191,7 @@ public class PharmManufacturedMaterialEntry extends
 	 */
 	private PharmPackagedMedicine getPackagedMedicine() {
 		if ((this.getMdht() != null) && (this.getMdht().getAsContent() != null)) {
-			return getMdht().getAsContent().getAsContainerPackagedMedicine();
+			return getMdht().getAsContent().getContainerPackagedMedicine();
 		}
 		return null;
 	}
@@ -277,12 +277,12 @@ public class PharmManufacturedMaterialEntry extends
 			this.getMdht().setAsContent(pharmAsContent);
 		}
 
-		if (this.getMdht().getAsContent().getAsContainerPackagedMedicine() == null) {
+		if (this.getMdht().getAsContent().getContainerPackagedMedicine() == null) {
 			final PharmPackagedMedicine packagedMedicine = CDAFactory.eINSTANCE
 					.createPharmPackagedMedicine();
 			packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
 			packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
-			this.getMdht().getAsContent().setAsContainerPackagedMedicine(packagedMedicine);
+			this.getMdht().getAsContent().setContainerPackagedMedicine(packagedMedicine);
 		}
 
 		if (this.getMdht().getIngredient() == null) {
@@ -417,10 +417,10 @@ public class PharmManufacturedMaterialEntry extends
 	public void setPackagedMedicineFormCode(Code formCode) {
 		init();
 		if (formCode != null) {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine()
+			this.getMdht().getAsContent().getContainerPackagedMedicine()
 					.setFormCode(formCode.getCE());
 		} else {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setFormCode(null);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setFormCode(null);
 		}
 	}
 
@@ -435,9 +435,9 @@ public class PharmManufacturedMaterialEntry extends
 		if (name != null) {
 			final EN en = DatatypesFactory.eINSTANCE.createEN();
 			en.addText(name);
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setName(en);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setName(en);
 		} else {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setName(null);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setName(null);
 		}
 	}
 
@@ -450,10 +450,10 @@ public class PharmManufacturedMaterialEntry extends
 	public void setPackagedMedicineProductCode(Code productCode) {
 		init();
 		if (productCode != null) {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine()
+			this.getMdht().getAsContent().getContainerPackagedMedicine()
 					.setCode(productCode.getCE());
 		} else {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setCode(null);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setCode(null);
 		}
 	}
 
@@ -468,9 +468,9 @@ public class PharmManufacturedMaterialEntry extends
 		if (value != null) {
 			final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
 			pq.setValue(value);
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setCapacityQuantity(pq);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setCapacityQuantity(pq);
 		} else {
-			this.getMdht().getAsContent().getAsContainerPackagedMedicine().setFormCode(null);
+			this.getMdht().getAsContent().getContainerPackagedMedicine().setFormCode(null);
 		}
 	}
 
