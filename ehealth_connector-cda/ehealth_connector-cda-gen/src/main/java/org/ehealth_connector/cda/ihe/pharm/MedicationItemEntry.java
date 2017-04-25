@@ -189,12 +189,12 @@ public class MedicationItemEntry
 
 		final EntryRelationship prescribedQty = CDAFactory.eINSTANCE.createEntryRelationship();
 
-		prescribedQty.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.8",
-				"Amount of units of the consumable").getIi());
 
 		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		final Supply prescribedQuantity = CDAFactory.eINSTANCE.createSupply();
+		prescribedQuantity.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.8",
+				"Amount of units of the consumable").getIi());
 		prescribedQuantity.setClassCode(ActClassSupply.SPLY);
 		prescribedQuantity.setMoodCode(x_DocumentSubstanceMood.RQO);
 		prescribedQuantity.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
