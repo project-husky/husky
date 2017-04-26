@@ -20,24 +20,11 @@ package org.ehealth_connector.cda.ch.mtps;
 
 import static org.junit.Assert.assertEquals;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
 import org.ehealth_connector.cda.ch.mtps.enums.PosologyType;
-import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
-import org.ehealth_connector.cda.ihe.pharm.enums.DispenseCodeList;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.Ucum;
 import org.junit.Test;
-import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 /**
  * The Class MedicationFrequency.
@@ -46,7 +33,7 @@ public class MedicationFrequencyTest {
 
 	/**
 	 * Test method for the MedicationFrequency
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -59,11 +46,11 @@ public class MedicationFrequencyTest {
 		periodQuantity.setUnit("h");
 		period.setPeriod(periodQuantity);
 
-		final MedicationFrequency medicationFrequency = MedicationFrequency.getMedicationFrequency(period, null, null,
-				null);
+		final MedicationFrequency medicationFrequency = MedicationFrequency
+				.getMedicationFrequency(period, null, null, null);
 
 		assertEquals(PosologyType.EVERY_X_HOURS, medicationFrequency.getPosology());
-		assertEquals((double) 2, medicationFrequency.getPosologyFactor(), 0.0001);
+		assertEquals(2, medicationFrequency.getPosologyFactor(), 0.0001);
 	}
 
 }

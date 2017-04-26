@@ -47,7 +47,7 @@ import org.ehealth_connector.cda.ihe.pharm.PharmManufacturedMaterialEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemReferenceEntry;
-import org.ehealth_connector.cda.ihe.pharm.enums.OrderableDrugFrom;
+import org.ehealth_connector.cda.ihe.pharm.enums.OrderableDrugForm;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Address;
@@ -1404,7 +1404,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		manufacturedMaterial.setDeterminerCode(EntityDeterminerDetermined.KIND);
 		manufacturedMaterial.setLotNumberText(DatatypesFactory.eINSTANCE.createST("lotNumber"));
 		manufacturedMaterial.setName(getManufacturedMaterialName());
-		manufacturedMaterial.setFormCode(OrderableDrugFrom.TAB.getCode().getCE());
+		manufacturedMaterial.setFormCode(OrderableDrugForm.TAB.getCode().getCE());
 		manufacturedMaterial.setAsContent(getBoxDescription());
 		manufacturedMaterial.setCode(getCodeManufacturedMaterial());
 		manufacturedMaterial.setIngredient(getIngredient());
@@ -1542,7 +1542,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		packMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
 		packMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
 		packMedicine.setCode(getCodeAsContent());
-		packMedicine.setFormCode(OrderableDrugFrom.TAB.getCode().getCE());
+		packMedicine.setFormCode(OrderableDrugForm.TAB.getCode().getCE());
 		packMedicine.setCapacityQuantity(getCapacityQuantity());
 		return packMedicine;
 	}

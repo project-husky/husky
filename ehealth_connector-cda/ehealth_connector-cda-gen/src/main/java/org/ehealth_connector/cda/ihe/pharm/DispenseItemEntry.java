@@ -158,7 +158,7 @@ public class DispenseItemEntry
 	 * @return <div class="en">created Reference to DIS Entry</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public DispenseItemReferenceEntry createDISItemReferenceEntry() {
+	public DispenseItemReferenceEntry createDisItemReferenceEntry() {
 
 		final DispenseItemReferenceEntry referenceEntry = new DispenseItemReferenceEntry();
 

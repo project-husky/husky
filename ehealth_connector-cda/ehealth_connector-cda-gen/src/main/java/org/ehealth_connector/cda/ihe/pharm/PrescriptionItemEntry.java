@@ -81,7 +81,7 @@ public class PrescriptionItemEntry extends MedicationItemEntry {
 	 * @return <div class="en">created Reference to PRE Entry</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public PrescriptionItemReferenceEntry createPREItemReferenceEntry() {
+	public PrescriptionItemReferenceEntry createPreItemReferenceEntry() {
 
 		final PrescriptionItemReferenceEntry referenceEntry = new PrescriptionItemReferenceEntry();
 

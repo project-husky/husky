@@ -23,7 +23,7 @@ import org.ehealth_connector.common.Code;
 /**
  * The Enum OrderableDrugFrom MaterialForm (OID 2.16.840.1.113883.5.85)
  */
-public enum OrderableDrugFrom {
+public enum OrderableDrugForm {
 
 	/** <div class="en"> Aerosol</div> */
 	AER("AER", "Aerosol"),
@@ -494,8 +494,8 @@ public enum OrderableDrugFrom {
 	 *            the code
 	 * @return the enum
 	 */
-	public static OrderableDrugFrom getEnum(String code) {
-		for (final OrderableDrugFrom x : values()) {
+	public static OrderableDrugForm getEnum(String code) {
+		for (final OrderableDrugForm x : values()) {
 			if (x.code.equals(code)) {
 				return x;
 			}
@@ -519,7 +519,7 @@ public enum OrderableDrugFrom {
 	 * @param displayNameFr
 	 *            the display name fr
 	 */
-	private OrderableDrugFrom(String code, String displayNameEn) {
+	private OrderableDrugForm(String code, String displayNameEn) {
 		this.code = code;
 		this.displayNameEn = displayNameEn;
 	}
