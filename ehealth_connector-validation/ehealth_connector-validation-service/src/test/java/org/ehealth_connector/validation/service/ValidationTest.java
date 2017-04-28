@@ -20,9 +20,14 @@ package org.ehealth_connector.validation.service;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.ehealth_connector.validation.service.api.CdaValidator;
 import org.ehealth_connector.validation.service.api.XsdValidationResult;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
@@ -69,16 +74,41 @@ public class ValidationTest {
 	public void testPdfValidation() throws ConfigurationException, SaxonApiException, IOException {
 
 		String testFile = null;
+
+		// test validation by passing the CDA document as file
 		testFile = cdaFilePath_ValidPdf;
 		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		log.info("PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
 		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
 		testFile = cdaFilePath_InvalidPdf;
 		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-		log.info("PDF validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		log.info("PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		// note that an external license is required for PDF validation.
+		// As this is not available in the open source environment, PDF
+		// validation will be skipped when the PDF Validator can not be
+		// initialized. Therefore this test is kind of stupid ;-)
 		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 
+		// test validation by passing the CDA document as stream
+		testFile = cdaFilePath_ValidPdf;
+		pdfValiRes = cdaVali.validatePdf(new StreamSource(new File(testFile).getAbsoluteFile()));
+		log.info("PDF stream validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+
+		// test validation by passing the CDA document as byte[]
+		testFile = cdaFilePath_ValidPdf;
+		// read the file into a byte[]
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] cdaByteArray = null;
+		try {
+			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+			cdaByteArray = baos.toByteArray();
+		} catch (IOException e) {
+		}
+		pdfValiRes = cdaVali.validatePdf(cdaByteArray);
+		log.info("PDF byte[] validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 	}
 
 	@Test
@@ -88,30 +118,72 @@ public class ValidationTest {
 
 		String testFile = null;
 
+		// test validation by passing the CDA document as file
 		testFile = cdaFilePath_Valid;
 		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
-		log.info("Schematron validation result of '" + testFile + "': "
+		log.info("Schematron file validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchemaAndSchematronFailure;
 		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
-		log.info("Schematron validation result of '" + testFile + "': "
+		log.info("Schematron file validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(!schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchemaFailure;
 		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
-		log.info("Schematron validation result of '" + testFile + "': "
+		log.info("Schematron file validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(schValiRes.isSchematronValid());
 
 		testFile = cdaFilePath_SchematronFailures;
 		schValiRes = cdaVali.validateSch(new File(testFile).getAbsoluteFile());
-		log.info("Schematron validation result of '" + testFile + "': "
+		log.info("Schematron file validation result of '" + testFile + "': "
 				+ schValiRes.isSchematronValid());
 		assertTrue(!schValiRes.isSchematronValid());
 
+		// test validation by passing the CDA document as stream
+		testFile = cdaFilePath_Valid;
+		schValiRes = cdaVali.validateSch(new StreamSource(new File(testFile).getAbsoluteFile()));
+		log.info("Schematron stream validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(schValiRes.isSchematronValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		schValiRes = cdaVali.validateSch(new StreamSource(new File(testFile).getAbsoluteFile()));
+		log.info("Schematron stream validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(!schValiRes.isSchematronValid());
+
+		// test validation by passing the CDA document as byte[]
+		testFile = cdaFilePath_Valid;
+		// read the file into a byte[]
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] cdaByteArray = null;
+		try {
+			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+			cdaByteArray = baos.toByteArray();
+		} catch (IOException e) {
+		}
+		schValiRes = cdaVali.validateSch(cdaByteArray);
+		log.info("Schematron byte[] validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(schValiRes.isSchematronValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		// read the file into a byte[]
+		baos = new ByteArrayOutputStream();
+		cdaByteArray = null;
+		try {
+			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+			cdaByteArray = baos.toByteArray();
+		} catch (IOException e) {
+		}
+		schValiRes = cdaVali.validateSch(cdaByteArray);
+		log.info("Schematron byte[] validation result of '" + testFile + "': "
+				+ schValiRes.isSchematronValid());
+		assertTrue(!schValiRes.isSchematronValid());
 	}
 
 	@Test
@@ -119,24 +191,63 @@ public class ValidationTest {
 
 		String testFile = null;
 
+		// test validation by passing the CDA document as file
 		testFile = cdaFilePath_Valid;
 		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
-		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchemaAndSchematronFailure;
 		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
-		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(!xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchemaFailure;
 		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
-		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(!xsdValiRes.isXsdValid());
 
 		testFile = cdaFilePath_SchematronFailures;
 		xsdValiRes = cdaVali.validateXsd(new File(testFile).getAbsoluteFile());
-		log.info("Schema validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		assertTrue(xsdValiRes.isXsdValid());
+
+		// test validation by passing the CDA document as stream
+		testFile = cdaFilePath_Valid;
+		xsdValiRes = cdaVali.validateXsd(new StreamSource(new File(testFile).getAbsoluteFile()));
+		log.info("Schema stream validation result of '" + testFile + "': "
+				+ xsdValiRes.isXsdValid());
+		assertTrue(xsdValiRes.isXsdValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		xsdValiRes = cdaVali.validateXsd(new StreamSource(new File(testFile).getAbsoluteFile()));
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
+		assertTrue(xsdValiRes.isXsdValid());
+
+		// test validation by passing the CDA document as byte[]
+		testFile = cdaFilePath_Valid;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] cdaByteArray = null;
+		try {
+			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+			cdaByteArray = baos.toByteArray();
+		} catch (IOException e) {
+		}
+		xsdValiRes = cdaVali.validateXsd(cdaByteArray);
+		log.info("Schema stream validation result of '" + testFile + "': "
+				+ xsdValiRes.isXsdValid());
+		assertTrue(xsdValiRes.isXsdValid());
+
+		testFile = cdaFilePath_SchematronFailures;
+		baos = new ByteArrayOutputStream();
+		cdaByteArray = null;
+		try {
+			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+			cdaByteArray = baos.toByteArray();
+		} catch (IOException e) {
+		}
+		xsdValiRes = cdaVali.validateXsd(cdaByteArray);
+		log.info("Schema file validation result of '" + testFile + "': " + xsdValiRes.isXsdValid());
 		assertTrue(xsdValiRes.isXsdValid());
 	}
 }
