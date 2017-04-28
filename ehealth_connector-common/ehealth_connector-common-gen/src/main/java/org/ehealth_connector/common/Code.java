@@ -23,15 +23,14 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
-
-import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
-import ca.uhn.fhir.model.dstu2.composite.CodingDt;
 
 /**
  * <div class="en">Class Code. A Code consists of the code itself and an
@@ -90,7 +89,7 @@ public class Code {
 	 *            <div class="de"> code</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public Code(CodeableConceptDt code) {
+	public Code(CodeableConcept code) {
 		this(code.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
 				code.getCodingFirstRep().getCode(), code.getText());
 	}
@@ -105,7 +104,7 @@ public class Code {
 	 *            <div class="de"> code</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public Code(CodingDt code) {
+	public Code(Coding code) {
 		this(code.getSystem().replace("urn:oid:", ""), code.getCode(), code.getDisplay());
 	}
 

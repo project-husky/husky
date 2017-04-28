@@ -27,6 +27,7 @@ import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CodedResultsSection;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeWeeksSimpleObservation;
+import org.openhealthtools.mdht.uml.cda.ihe.ProcedureEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -260,6 +261,9 @@ public class GestationalAge extends CodedResults {
 		if (mDays != null) {
 			mDays.getIds().clear();
 			mDays.getIds().add(id.getIi());
+			for (ProcedureEntry proc : getCrs().getProcedureEntries()) {
+				proc.getIds().add(id.getIi());
+			}
 		}
 	}
 
@@ -273,6 +277,9 @@ public class GestationalAge extends CodedResults {
 		if (mWeeks != null) {
 			mWeeks.getIds().clear();
 			mWeeks.getIds().add(id.getIi());
+			for (ProcedureEntry proc : getCrs().getProcedureEntries()) {
+				proc.getIds().add(id.getIi());
+			}
 		}
 	}
 
@@ -296,6 +303,9 @@ public class GestationalAge extends CodedResults {
 		mDays.getIds().clear();
 		mWeeks.getValues().clear();
 		mWeeks.getIds().clear();
+		for (ProcedureEntry proc : getCrs().getProcedureEntries()) {
+			proc.getIds().clear();
+		}
 		setWeeksOfWeeksAndDays(weeks);
 		setDaysOfWeeksAndDays(days);
 	}

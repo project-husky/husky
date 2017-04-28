@@ -125,6 +125,18 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	/**
 	 * Adds the vital signs observation.
 	 *
+	 * @param observation
+	 *            the observation
+	 */
+	public void addVitalSignObservation(VitalSignObservation observation) {
+		getMdht().addObservation(observation.getMdhtCopy());
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
+	}
+
+	/**
+	 * Adds the vital signs observation.
+	 *
 	 * @param vitalSignObservation
 	 *            the observation
 	 */

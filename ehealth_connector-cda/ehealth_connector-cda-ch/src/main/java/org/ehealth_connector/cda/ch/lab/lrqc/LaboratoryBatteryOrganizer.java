@@ -23,8 +23,10 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
  * The Class LaboratoryBatteryOrganizer.
@@ -72,6 +74,18 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	public LaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
 	}
 
 	/**
@@ -126,4 +140,5 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		}
 		return ol;
 	}
+
 }

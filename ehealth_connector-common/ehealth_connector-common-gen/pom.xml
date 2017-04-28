@@ -21,7 +21,7 @@ are ok.</description>
 
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>hapi-fhir-structures-dstu2</artifactId>
+			<artifactId>hapi-fhir-structures-dstu3</artifactId>
 		</dependency>
 
 		<dependency>

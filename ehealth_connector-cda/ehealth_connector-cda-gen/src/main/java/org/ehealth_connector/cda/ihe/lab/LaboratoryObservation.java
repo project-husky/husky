@@ -24,10 +24,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Performer;
+import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
@@ -139,14 +141,21 @@ public class LaboratoryObservation extends
 	// }
 
 	/**
-	 * Adds the id.
+	 * Add a comment entry.
 	 *
-	 * @param id
-	 *            the new id
+	 * @param commentEntry
+	 *            the new comment entry
 	 */
-	public void addId(Identificator id) {
-		// final II ii = CdaChUtil.createUuidVacdIdentificator(id);
-		// mLaboratoryObservation.getIds().add(ii);
+	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
+		this.getMdht().addAct(commentEntry.copy());
+		// need to add the the Subj and setInversionInd, cannot do this
+		// automatically with mdht
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getAct() instanceof Comment) {
+				entryRelationShip.setInversionInd(true);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			}
+		}
 	}
 
 	/**
@@ -211,6 +220,16 @@ public class LaboratoryObservation extends
 		getMdht().getValues().add(value.getValue());
 	}
 
+	// /**
+	// * Gets the text of the comment text element (this is not necessarily the
+	// * comment itself)
+	// *
+	// * @return the comment text
+	// */
+	// public String getCommentText() {
+	// return Util.getCommentText(getMdht().getEntryRelationships());
+	// }
+
 	/**
 	 * <div class="en">Gets the code of the observation</div>
 	 * <div class="de">Gibt den Code der Beobachtung zurück.</div>
@@ -222,16 +241,6 @@ public class LaboratoryObservation extends
 		final Code code = new Code(getMdht().getCode());
 		return code;
 	}
-
-	// /**
-	// * Gets the text of the comment text element (this is not necessarily the
-	// * comment itself)
-	// *
-	// * @return the comment text
-	// */
-	// public String getCommentText() {
-	// return Util.getCommentText(getMdht().getEntryRelationships());
-	// }
 
 	/**
 	 * Gets the reference to the comment in the level 2 section text (when set).
@@ -449,4 +458,18 @@ public class LaboratoryObservation extends
 		}
 		getMdht().getPerformers().add(perf);
 	}
+
+	/**
+	 * Sets the reference range <div class="de">(Referenzbereich)</div>.
+	 *
+	 * @param referenceRange
+	 *            the new reference range
+	 */
+	public void setReferenceRange(ReferenceRange referenceRange) {
+		if (referenceRange != null) {
+			getMdht().getReferenceRanges().clear();
+			getMdht().getReferenceRanges().add(referenceRange.getMdht());
+		}
+	}
+
 }

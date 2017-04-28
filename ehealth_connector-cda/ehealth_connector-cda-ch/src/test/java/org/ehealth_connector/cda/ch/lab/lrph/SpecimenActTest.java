@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -30,14 +31,14 @@ public class SpecimenActTest extends TestUtils {
 
 	@Test
 	public void testLrph() throws XPathExpressionException {
-		SpecimenAct act = new SpecimenAct();
+		AbstractSpecimenAct act = new AbstractSpecimenAct();
 
 		// LaboratoryIsolateOrganizer
 		LaboratoryIsolateOrganizer labIsolateOrganizer = new LaboratoryIsolateOrganizer();
 		act.addLaboratoryIsolateOrganizer(labIsolateOrganizer);
 
-		assertNotNull(act.getLaboratoryIsolateOrganizers());
-		assertTrue(!act.getLaboratoryIsolateOrganizers().isEmpty());
+		assertNotNull(act.getLrphLaboratoryIsolateOrganizers());
+		assertTrue(!act.getLrphLaboratoryIsolateOrganizers().isEmpty());
 		Document document = act.getDocument();
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.5']"));
 
@@ -62,13 +63,13 @@ public class SpecimenActTest extends TestUtils {
 
 	@Test
 	public void testModel() throws XPathExpressionException {
-		SpecimenAct act = new SpecimenAct();
+		AbstractSpecimenAct act = new AbstractSpecimenAct();
 		// add
 		// LabortatoryBatteryOrganizer
 		act.addLaboratoryBatteryOrganizer(new LaboratoryBatteryOrganizer());
 
-		assertTrue(act.getLaboratoryBatteryOrganizers() != null
-				&& !act.getLaboratoryBatteryOrganizers().isEmpty());
+		assertTrue(act.getLrphLaboratoryBatteryOrganizers() != null
+				&& !act.getLrphLaboratoryBatteryOrganizers().isEmpty());
 		Document document = act.getDocument();
 		assertTrue(xExist(document, "//entryRelationship[@typeCode='COMP']"));
 		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']"));

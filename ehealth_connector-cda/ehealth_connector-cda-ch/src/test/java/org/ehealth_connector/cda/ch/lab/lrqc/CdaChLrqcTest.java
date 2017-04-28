@@ -31,7 +31,9 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
@@ -97,7 +99,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		final CdaChLrqc cda = new CdaChLrqc();
 		LaboratorySpecialtySection sps = new LaboratorySpecialtySection();
 		LaboratoryReportDataProcessingEntry lrd = new LaboratoryReportDataProcessingEntry();
-		SpecimenAct spa = new SpecimenAct();
+		AbstractSpecimenAct spa = new AbstractSpecimenAct();
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		LaboratoryObservation lo = new LaboratoryObservation();
 
@@ -124,12 +126,12 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
+				.getSpecimenAct().getLrqcLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getSpecimenAct().getLrqcLaboratoryBatteryOrganizers().get(0)
 				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getSpecimenAct().getLrqcLaboratoryBatteryOrganizers().get(0)
 				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
@@ -151,13 +153,13 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0));
+				.getLrqcLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+				.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
 		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries()
 				.get(0).getCommentEntryList().get(0));
@@ -174,8 +176,8 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertTrue(LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-						.getCodeAsEnum().getCode()));
+						.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
+						.get(0).getCodeAsEnum().getCode()));
 	}
 
 	@Test
@@ -341,7 +343,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				xExist(document, "/clinicaldocument/legalAuthenticator/signatureCode[@code='S']"));
 
 		// Participant
-		Participant p = new Participant("456", "999", true);
+		ParticipantClaimer p = new ParticipantClaimer("456", "999", true);
 		cda.addParticipant(p);
 		document = cda.getDocument();
 		assertNotNull(cda.getParticipantsLrqc());

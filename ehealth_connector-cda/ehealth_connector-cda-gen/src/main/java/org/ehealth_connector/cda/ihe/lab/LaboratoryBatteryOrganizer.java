@@ -20,8 +20,10 @@ package org.ehealth_connector.cda.ihe.lab;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
  * The Class LaboratoryBatteryOrganizer. A Laboratory Battery Organizer is used
@@ -49,6 +51,18 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	}
 
 	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
+	}
+
+	/**
 	 * Adds the laboratory observation.
 	 *
 	 * @param observation
@@ -71,5 +85,4 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		}
 		return ol;
 	}
-
 }

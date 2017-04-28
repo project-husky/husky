@@ -33,7 +33,7 @@ import org.w3c.dom.NodeList;
 
 public class LaboratoryBatteryOrganizerTest extends TestUtils {
 	Document document;
-	private LaboratoryBatteryOrganizer organizer;
+	private final LaboratoryBatteryOrganizer organizer;
 
 	public LaboratoryBatteryOrganizerTest() {
 		super.init();
@@ -42,8 +42,8 @@ public class LaboratoryBatteryOrganizerTest extends TestUtils {
 
 	@Test
 	public void testAddId() throws XPathExpressionException {
-		organizer.addIdForHiv(id1);
-		organizer.addIdForHiv(id2);
+		organizer.addId(id1);
+		organizer.addId(id2);
 		assertTrue(isEqual(id1, organizer.getIdForHivList().get(0)));
 		assertTrue(isEqual(id2, organizer.getIdForHivList().get(1)));
 		document = organizer.getDocument();

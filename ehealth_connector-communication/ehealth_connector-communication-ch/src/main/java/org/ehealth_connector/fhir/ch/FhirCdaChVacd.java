@@ -18,9 +18,7 @@
 
 package org.ehealth_connector.fhir.ch;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.Consumable;
@@ -31,64 +29,58 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.CriterionEntry;
-import org.ehealth_connector.cda.ch.vacd.GestationalAge;
 import org.ehealth_connector.cda.ch.vacd.Immunization;
 import org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation;
 import org.ehealth_connector.cda.ch.vacd.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.vacd.MedicationTargetEntry;
-import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
-import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.Confidentiality;
-import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirCommon;
+import org.hl7.fhir.dstu3.model.Basic;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.DocumentManifest;
+import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
+import org.hl7.fhir.dstu3.model.Dosage;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.ListResource.ListEntryComponent;
+import org.hl7.fhir.dstu3.model.Medication;
+import org.hl7.fhir.dstu3.model.MedicationStatement;
+import org.hl7.fhir.dstu3.model.MedicationStatement.MedicationStatementTaken;
+import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.Person;
+import org.hl7.fhir.dstu3.model.Quantity;
+import org.hl7.fhir.dstu3.model.Ratio;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.dstu3.model.TimeType;
+import org.hl7.fhir.exceptions.FHIRException;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.ExtensionDt;
+import ca.uhn.fhir.context.FhirVersionEnum;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
-import ca.uhn.fhir.model.dstu2.composite.CodingDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
-import ca.uhn.fhir.model.dstu2.composite.RatioDt;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
-import ca.uhn.fhir.model.dstu2.resource.Basic;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
-import ca.uhn.fhir.model.dstu2.resource.Condition;
-import ca.uhn.fhir.model.dstu2.resource.ListResource;
-import ca.uhn.fhir.model.dstu2.resource.Medication;
-import ca.uhn.fhir.model.dstu2.resource.MedicationStatement;
-import ca.uhn.fhir.model.dstu2.resource.MedicationStatement.Dosage;
-import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.Organization;
-import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.resource.Person;
-import ca.uhn.fhir.model.dstu2.valueset.ConditionClinicalStatusCodesEnum;
-import ca.uhn.fhir.model.primitive.DateDt;
-import ca.uhn.fhir.model.primitive.DateTimeDt;
-import ca.uhn.fhir.model.primitive.StringDt;
-import ca.uhn.fhir.model.primitive.TimeDt;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.util.ElementUtil;
 
 /**
  * FhirCdaChVacd supports the creation of a CDA-CH-CH document from HL7 FHIR
- * bundle resources. The content of these resources is not currently documented.
+ * resources. The content of these resources is not currently documented.
  * These resources may be created by the class
  * org.ehealth_connector.demo.cda.VACDResources. This is currently the one any
- * only way to create valid FHIR bundle resources for CDA-CH-VACD. You may edit
+ * only way to create valid FHIR resources for CDA-CH-VACD. You may edit
  * these FHIR resources in a text editor in order to change the payload of the
  * resulting CdaChVacd object on your own risk.
  *
@@ -100,8 +92,8 @@ import ca.uhn.fhir.util.ElementUtil;
 public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 	/**
-	 * <div class="en">Type of the bundle to define whether the resulting CDA
-	 * document contains full or masked patient demographics</div>
+	 * <div class="en">Type of the FHIR resource to define whether the resulting
+	 * CDA document contains full or masked patient demographics</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static enum DocTypeCode {
@@ -141,7 +133,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		@Child(name = "author")
 		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Person who documented the medication statement")
-		private ResourceReferenceDt author;
+		private Reference author;
 
 		/**
 		 * <div class="en">Code of the medication administration</div>
@@ -150,7 +142,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		@Child(name = "code")
 		@Extension(url = FhirCommon.urnUseAsCode, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Code of the medication administration")
-		private CodingDt code;
+		private Coding code;
 
 		/**
 		 * <div class="en">Remark for this medication statement</div>
@@ -159,7 +151,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		@Child(name = "comment")
 		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Remark for this medication statement")
-		private StringDt comment;
+		private StringType comment;
 
 		/**
 		 * <div class="en">List of reasons for this medication statement</div>
@@ -167,8 +159,8 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		@Child(name = "externalDocument")
 		@Extension(url = FhirCommon.urnUseAsExternalDocument, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "reference to the guidline for the immunization recommendation")
-		private ResourceReferenceDt externalDocument;
+		@Description(shortDefinition = "reference to the guidline for theimmunization recommendation")
+		private Reference externalDocument;
 
 		/**
 		 * <div class="en">LotNumber for this medication statement</div>
@@ -177,7 +169,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		@Child(name = "lot")
 		@Extension(url = FhirCommon.urnUseAsLotNumbertext, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "LotNumber for this medication statement")
-		private StringDt lot;
+		private StringType lot;
 
 		/**
 		 * <div class="en">Person who performed the medication
@@ -185,8 +177,8 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		@Child(name = "performer")
 		@Extension(url = FhirCommon.urnUseAsPerformer, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "Person who performed the medication administration")
-		private ResourceReferenceDt performer;
+		@Description(shortDefinition = "Person who performed the medicationadministration")
+		private Reference performer;
 
 		/**
 		 * <div class="en">List of reasons for this medication statement</div>
@@ -194,8 +186,8 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		@Child(name = "reasons")
 		@Extension(url = FhirCommon.urnUseAsReason, definedLocally = false, isModifier = false)
-		@Description(shortDefinition = "List of reasons for this medication statement")
-		private ResourceReferenceDt reasons;
+		@Description(shortDefinition = "List of reasons for this medicationstatement")
+		private Reference reasons;
 
 		/**
 		 * <div class="en">Empty constructor (default)</div>
@@ -203,6 +195,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public MyMedicationStatement() {
 			super();
+			setTaken(MedicationStatementTaken.UNK);
 		}
 
 		/**
@@ -210,9 +203,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         <div class="de">Autor dieses MedicationStatements</div>
 		 *         <div class="fr">auteur de ce MedicationStatement</div>
 		 */
-		public ResourceReferenceDt getAuthor() {
+		public Reference getAuthor() {
 			if (this.author == null) {
-				this.author = new ResourceReferenceDt();
+				this.author = new Reference();
 			}
 			return author;
 		}
@@ -222,7 +215,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         <div class="de">Code für dieses MedicationStatement</div>
 		 *         <div class="fr">code de ce MedicationStatement</div>
 		 */
-		public CodingDt getCode() {
+		public Coding getCode() {
 			return code;
 		}
 
@@ -231,9 +224,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         <div class="de">Kommentar zu diesem Medikament</div>
 		 *         <div class="fr">commentaire tu médicament</div>
 		 */
-		public StringDt getComment() {
+		public StringType getComment() {
 			if (this.comment == null) {
-				this.comment = new StringDt();
+				this.comment = new StringType();
 			}
 			return comment;
 		}
@@ -243,9 +236,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *
 		 * @return the external document
 		 */
-		public ResourceReferenceDt getExternalDocument() {
+		public Reference getExternalDocument() {
 			if (this.externalDocument == null) {
-				this.externalDocument = new ResourceReferenceDt();
+				this.externalDocument = new Reference();
 			}
 			return externalDocument;
 		}
@@ -255,9 +248,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         <div class="de">Lotnummer des Medikaments</div>
 		 *         <div class="fr">numero lot du médicament</div>
 		 */
-		public StringDt getLot() {
+		public StringType getLot() {
 			if (this.lot == null) {
-				this.lot = new StringDt();
+				this.lot = new StringType();
 			}
 			return lot;
 		}
@@ -268,9 +261,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         Medikament verabreicht hat</div><div class="fr">personne qui
 		 *         a effectué l'administration du médicament</div>
 		 */
-		public ResourceReferenceDt getPerformer() {
+		public Reference getPerformer() {
 			if (this.performer == null) {
-				this.performer = new ResourceReferenceDt();
+				this.performer = new Reference();
 			}
 			return performer;
 		}
@@ -280,9 +273,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *         <div class="de">Begründung für dieses Medikament</div>
 		 *         <div class="fr">Justification de ce médicament</div>
 		 */
-		public ResourceReferenceDt getReasons() {
+		public Reference getReasons() {
 			if (this.reasons == null) {
-				this.reasons = new ResourceReferenceDt();
+				this.reasons = new Reference();
 			}
 			return reasons;
 		}
@@ -304,7 +297,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            <div class="de">Autor dieses MedicationStatements</div>
 		 *            <div class="fr">auteur de ce MedicationStatement</div>
 		 */
-		public void setAuthor(ResourceReferenceDt author) {
+		public void setAuthor(Reference author) {
 			this.author = author;
 		}
 
@@ -314,7 +307,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            <div class="de">Code für dieses MedicationStatement</div>
 		 *            <div class="fr">code de ce MedicationStatement</div>
 		 */
-		public void setCode(CodingDt code) {
+		public void setCode(Coding code) {
 			this.code = code;
 		}
 
@@ -324,7 +317,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            <div class="de">Kommentar zu diesem Medikament</div>
 		 *            <div class="fr">commentaire tu médicament</div>
 		 */
-		public void setComment(StringDt comment) {
+		public void setComment(StringType comment) {
 			this.comment = comment;
 		}
 
@@ -334,7 +327,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 * @param externalDocument
 		 *            the new external document
 		 */
-		public void setExternalDocument(ResourceReferenceDt externalDocument) {
+		public void setExternalDocument(Reference externalDocument) {
 			this.externalDocument = externalDocument;
 		}
 
@@ -344,7 +337,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            <div class="de">Lotnummer des Medikaments</div>
 		 *            <div class="fr">numero lot du médicament</div>
 		 */
-		public void setLot(StringDt lot) {
+		public void setLot(StringType lot) {
 			this.lot = lot;
 		}
 
@@ -355,7 +348,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            Medikament verabreicht hat</div><div class="fr">personne
 		 *            qui a effectué l'administration du médicament</div>
 		 */
-		public void setPerformer(ResourceReferenceDt performer) {
+		public void setPerformer(Reference performer) {
 			this.performer = performer;
 		}
 
@@ -365,19 +358,19 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            <div class="de">Begründung für dieses Medikament</div>
 		 *            <div class="fr">Justification de ce médicament</div>
 		 */
-		public void setReasons(ResourceReferenceDt reasons) {
+		public void setReasons(Reference reasons) {
 			this.reasons = reasons;
 		}
 
 	}
 
 	/**
-	 * The class VacdDocument is a derived FHIR Bundle containing all
+	 * The class VacdDocument is a derived FHIR resource containing all
 	 * information of an immunization document corresponding to the CDA-CH-VACD
 	 * specification
 	 */
-	@ResourceDef(name = "Bundle")
-	public static class VacdDocument extends Bundle {
+	@ResourceDef(name = "DocumentManifest")
+	public static class VacdDocument extends DocumentManifest {
 
 		private static final long serialVersionUID = -1316775746486313864L;
 
@@ -385,97 +378,97 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		@Child(name = "activeProblemConcernEntries", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsActiveProblemConcernEntries, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "activeProblemConcernEntries")
-		private List<ResourceReferenceDt> activeProblemConcernEntries; // Condition
+		private List<Reference> activeProblemConcernEntries; // Condition
 
 		/** The allergy problem concern entries. */
 		@Child(name = "allergyProblemConcernEntries", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsAllergyProblemConcernEntries, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "allergyProblemConcernEntries")
-		private List<ResourceReferenceDt> allergyProblemConcernEntries; // Condition
+		private List<Reference> allergyProblemConcernEntries; // Condition
 
 		/** The coded result observations. */
 		@Child(name = "codedResultObservations", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsCodedResultObservations, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "codedResultObservations")
-		private List<ResourceReferenceDt> codedResultObservations; // codedResults
+		private List<Reference> codedResultObservations; // codedResults
 
 		/** The comment. */
 		@Child(name = "comment")
 		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
-		private ResourceReferenceDt comment;
+		private Reference comment;
 
 		/** The confidentiality. */
 		@Child(name = "confidentiality")
 		@Extension(url = FhirCommon.urnUseAsConfidentiality, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "confidentiality")
-		private ResourceReferenceDt confidentiality;
+		private Reference confidentiality;
 
 		/** The custodian. */
 		@Child(name = "custodian")
 		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
-		private ResourceReferenceDt custodian;
+		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
 		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
-		private ResourceReferenceDt docAuthor;
+		private Reference docAuthor;
 
 		/** The doc language. */
 		@Child(name = "docLanguage")
 		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docLanguage")
-		private ResourceReferenceDt docLanguage;
+		private Reference docLanguage;
 
 		/** The doc type. */
 		@Child(name = "docType")
 		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
-		private ResourceReferenceDt docType;
+		private Reference docType;
 
 		/** The immunization recommendations. */
 		@Child(name = "immunizationRecommendations", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsImmunizationRecommendation, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "immunizationRecommendations")
-		private List<ResourceReferenceDt> immunizationRecommendations;
+		private List<Reference> immunizationRecommendations;
 
 		/** The immunizations. */
 		@Child(name = "immunizations", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsImmunization, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "immunizations")
-		private List<ResourceReferenceDt> immunizations;
+		private List<Reference> immunizations;
 
 		/** The laboratory observations. */
 		@Child(name = "laboratoryObservations", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsLaboratoryObservations, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "laboratoryObservations")
-		private List<ResourceReferenceDt> laboratoryObservations; // Observations
+		private List<Reference> laboratoryObservations; // Observations
 
 		/** The legal authenticator. */
 		@Child(name = "legalAuthenticator")
 		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "legalAuthenticator")
-		private ResourceReferenceDt legalAuthenticator;
+		private Reference legalAuthenticator;
 
 		/** The past problem concern entries. */
 		@Child(name = "pastProblemConcernEntries", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsPastProblemConcernEntries, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "pastProblemConcernEntries")
-		private List<ResourceReferenceDt> pastProblemConcernEntries; // Condition
+		private List<Reference> pastProblemConcernEntries; // Condition
 
 		/** The patient. */
 		@Child(name = "patient")
 		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
-		private ResourceReferenceDt patient;
+		private Reference patient;
 
 		/** The pregnancy observation. */
 		@Child(name = "pregnancyObservation,", max = Child.MAX_UNLIMITED)
 		@Extension(url = FhirCommon.urnUseAsPregnancyObservation, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "pregnancyObservation")
-		private ResourceReferenceDt pregnancyObservation; // Observation
+		private Reference pregnancyObservation; // Observation
 
 		/**
 		 * Adds the active problem concern entry.
@@ -485,9 +478,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addActiveProblemConcernEntry(Condition activeProbemlConcernEntry) {
 			if (activeProblemConcernEntries == null) {
-				activeProblemConcernEntries = new ArrayList<ResourceReferenceDt>();
+				activeProblemConcernEntries = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(activeProbemlConcernEntry);
 			this.activeProblemConcernEntries.add(resourceRef);
 		}
@@ -500,9 +493,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addAllergyProblemConcernEntry(Condition allergyProblemConcernEntry) {
 			if (allergyProblemConcernEntries == null) {
-				allergyProblemConcernEntries = new ArrayList<ResourceReferenceDt>();
+				allergyProblemConcernEntries = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(allergyProblemConcernEntry);
 			this.allergyProblemConcernEntries.add(resourceRef);
 		}
@@ -515,9 +508,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addCodedResultObservation(Observation laboratoryObservation) {
 			if (codedResultObservations == null) {
-				codedResultObservations = new ArrayList<ResourceReferenceDt>();
+				codedResultObservations = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(laboratoryObservation);
 			this.codedResultObservations.add(resourceRef);
 		}
@@ -530,9 +523,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addImmunization(MyMedicationStatement immunization) {
 			if (immunizations == null) {
-				immunizations = new ArrayList<ResourceReferenceDt>();
+				immunizations = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(immunization);
 			this.immunizations.add(resourceRef);
 		}
@@ -545,9 +538,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addImmunizationRecommendation(MedicationStatement immunizationRecommendation) {
 			if (immunizationRecommendations == null) {
-				immunizationRecommendations = new ArrayList<ResourceReferenceDt>();
+				immunizationRecommendations = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(immunizationRecommendation);
 			this.immunizationRecommendations.add(resourceRef);
 		}
@@ -560,9 +553,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addLaboratoryObservation(Observation laboratoryObservation) {
 			if (laboratoryObservations == null) {
-				laboratoryObservations = new ArrayList<ResourceReferenceDt>();
+				laboratoryObservations = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(laboratoryObservation);
 			this.laboratoryObservations.add(resourceRef);
 		}
@@ -575,9 +568,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 */
 		public void addPastProblemConcernEntry(Condition pastProblemConcernEntry) {
 			if (pastProblemConcernEntries == null) {
-				pastProblemConcernEntries = new ArrayList<ResourceReferenceDt>();
+				pastProblemConcernEntries = new ArrayList<Reference>();
 			}
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(pastProblemConcernEntry);
 			this.pastProblemConcernEntries.add(resourceRef);
 		}
@@ -590,7 +583,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<Condition> getActiveProblemConcernEntries() {
 			final List<Condition> list = new ArrayList<Condition>();
 			if (this.activeProblemConcernEntries != null) {
-				for (final ResourceReferenceDt resource : this.activeProblemConcernEntries) {
+				for (final Reference resource : this.activeProblemConcernEntries) {
 					list.add((Condition) resource.getResource());
 				}
 			}
@@ -605,7 +598,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<Condition> getAllergyProblemConcernEntries() {
 			final List<Condition> list = new ArrayList<Condition>();
 			if (this.allergyProblemConcernEntries != null) {
-				for (final ResourceReferenceDt resource : allergyProblemConcernEntries) {
+				for (final Reference resource : allergyProblemConcernEntries) {
 					list.add((Condition) resource.getResource());
 				}
 			}
@@ -620,7 +613,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<Observation> getCodedResultObservations() {
 			final List<Observation> list = new ArrayList<Observation>();
 			if (this.codedResultObservations != null) {
-				for (final ResourceReferenceDt resource : codedResultObservations) {
+				for (final Reference resource : codedResultObservations) {
 					list.add((Observation) resource.getResource());
 				}
 			}
@@ -707,7 +700,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<MedicationStatement> getImmunizationRecommendations() {
 			final List<MedicationStatement> list = new ArrayList<MedicationStatement>();
 			if (this.immunizationRecommendations != null) {
-				for (final ResourceReferenceDt resource : immunizationRecommendations) {
+				for (final Reference resource : immunizationRecommendations) {
 					list.add((MedicationStatement) resource.getResource());
 				}
 			}
@@ -722,7 +715,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<MedicationStatement> getImmunizations() {
 			final List<MedicationStatement> list = new ArrayList<MedicationStatement>();
 			if (this.immunizations != null) {
-				for (final ResourceReferenceDt resource : immunizations) {
+				for (final Reference resource : immunizations) {
 					list.add((MedicationStatement) resource.getResource());
 				}
 			}
@@ -737,7 +730,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<Observation> getLaboratoryObservations() {
 			final List<Observation> list = new ArrayList<Observation>();
 			if (this.laboratoryObservations != null) {
-				for (final ResourceReferenceDt resource : laboratoryObservations) {
+				for (final Reference resource : laboratoryObservations) {
 					list.add((Observation) resource.getResource());
 				}
 			}
@@ -764,7 +757,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		public List<Condition> getPastProblemConcernEntries() {
 			final List<Condition> list = new ArrayList<Condition>();
 			if (this.pastProblemConcernEntries != null) {
-				for (final ResourceReferenceDt resource : pastProblemConcernEntries) {
+				for (final Reference resource : pastProblemConcernEntries) {
 					list.add((Condition) resource.getResource());
 				}
 			}
@@ -802,7 +795,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new comment
 		 */
 		public void setComment(Observation comment) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(comment);
 			this.comment = resourceRef;
 		}
@@ -814,7 +807,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new confidentiality code
 		 */
 		public void setConfidentiality(Basic confidentiality) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(confidentiality);
 			this.confidentiality = resourceRef;
 		}
@@ -826,7 +819,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new custodian
 		 */
 		public void setCustodian(Organization custodian) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(custodian);
 			this.custodian = resourceRef;
 		}
@@ -838,7 +831,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new doc author
 		 */
 		public void setDocAuthor(Person author) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(author);
 			this.docAuthor = resourceRef;
 		}
@@ -850,7 +843,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new doc language
 		 */
 		public void setDocLanguage(Basic language) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(language);
 			this.docLanguage = resourceRef;
 		}
@@ -862,7 +855,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new doc type
 		 */
 		public void setDocType(Basic typePseudonymized) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(typePseudonymized);
 			this.docType = resourceRef;
 		}
@@ -874,7 +867,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new legal authenticator
 		 */
 		public void setLegalAuthenticator(Person legalAuthenticator) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(legalAuthenticator);
 			this.legalAuthenticator = resourceRef;
 		}
@@ -886,7 +879,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new patient
 		 */
 		public void setPatient(Patient patient) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(patient);
 			this.patient = resourceRef;
 		}
@@ -898,7 +891,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		 *            the new pregnancy observation
 		 */
 		public void setPregnancyObservation(Observation pregnancyObservation) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(pregnancyObservation);
 			this.pregnancyObservation = resourceRef;
 		}
@@ -918,7 +911,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	 */
 	public static final String OID_VACD = "urn:oid:" + CdaChVacd.OID_MAIN;
 
-	private final FhirContext fhirCtx = new FhirContext();
+	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 
 	/**
 	 * <div class="en">Empty constructor (default)</div><div class="de"></div>
@@ -929,10 +922,10 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 	/**
 	 * <div class="en">Creates an eHC CdaChVacd instance from a valid FHIR
-	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
+	 * resource</div> <div class="de"></div> <div class="fr"></div>
 	 *
-	 * @param bundle
-	 *            <div class="en">valid CdaChVacd FHIR bundle resource</div>
+	 * @param docManifest
+	 *            <div class="en">valid CdaChVacd FHIR resource</div>
 	 *            <div class="de"></div> <div class="fr"></div>
 	 * @param xsl
 	 *            <div class="en">desired stylesheet for the CDA document</div>
@@ -941,215 +934,82 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	 *            <div class="en">desired CSS for the CDA document</div>
 	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC CdaChVacd instance containing payload of the
-	 *         given FHIR Bundle resource</div> <div class="de"></div>
+	 *         given FHIR resource</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public CdaChVacd createCdaChVacdFromFHIRBundle(Bundle bundle, String xsl, String css) {
-
+	public CdaChVacd createCdaChVacdFromFHIR(DocumentManifest docManifest, String xsl, String css) {
 		// Header
-		final CdaChVacd doc = new CdaChVacd(getDocLanguage(bundle), xsl, css);
-		final DocTypeCode docType = getDocType(bundle);
-		doc.setId(getDocumentId(bundle));
-		doc.setSetId(getDocumentId(bundle));
-		doc.setTimestamp(getDocumentDate(bundle));
-		doc.setConfidentialityCode(getConfidentialityCode(bundle));
-		doc.setPatient(FhirCommon.getPatient(bundle));
+		final CdaChVacd doc = new CdaChVacd(getDocLanguage(docManifest), xsl, css);
+		final DocTypeCode docType = getVacdDocType(docManifest);
+		doc.setId(getDocumentId(docManifest));
+		doc.setSetId(getDocumentId(docManifest));
+		doc.setTimestamp(getDocumentDate(docManifest));
+		doc.setConfidentialityCode(getConfidentialityCode(docManifest));
+		doc.setPatient(FhirCommon.getPatient(docManifest));
 		if (docType == DocTypeCode.PSEUDONYMIZED)
 			doc.pseudonymization();
 
-		for (final Author author : getAuthors(bundle)) {
+		for (final Author author : getAuthors(docManifest)) {
 			author.setTime(DateUtil.date("15.12.2014"));
 			doc.addAuthor(author);
 		}
-		doc.setCustodian(getCustodian(bundle));
-		doc.setLegalAuthenticator(getLegalAuthenticator(bundle));
+		doc.setCustodian(getCustodian(docManifest));
+		doc.setLegalAuthenticator(getLegalAuthenticator(docManifest));
 
 		// Body
 		// Immunizations / Impfungen
-		for (final Immunization immunization : getImmunizations(bundle)) {
+		for (final Immunization immunization : getVacdImmunizations(docManifest)) {
 			doc.addImmunization(immunization);
 		}
 
 		// Active Problems / Problemliste
 		for (final ActiveProblemConcern activeProblemConcernEntry : getActiveProblemConcernEntries(
-				bundle)) {
+				docManifest)) {
 			doc.addActiveProblemConcern(activeProblemConcernEntry);
 		}
 
 		// History of Past Illness / Bisherige Krankheiten/Anamnese
-		for (final PastProblemConcern pastProblemConcern : getPastProblemConcernEntries(bundle)) {
+		for (final PastProblemConcern pastProblemConcern : getPastProblemConcernEntries(
+				docManifest)) {
 			doc.addPastProblemConcern(pastProblemConcern);
 		}
 
 		// Allergies and Basic Adverse Reactions / Allergien und
 		// Unverträglichkeiten
-		for (final AllergyConcern allergyProblemConcern : getAllergyProblemConcernEntries(bundle)) {
+		for (final AllergyConcern allergyProblemConcern : getAllergyProblemConcernEntries(
+				docManifest)) {
 			doc.addAllergyConcern(allergyProblemConcern);
 		}
 
 		// Coded Results for gestational age / Codierte Resultate für
 		// Gestationsalter
-		final CodedResults cr = getGestationalAge(bundle);
+		final CodedResults cr = getGestationalAge(docManifest);
 		if (cr != null) {
 			doc.addCodedResults(cr);
 		}
 
 		// Laboratory Specialty Section / Relevante Laborbefunde
-		for (final LaboratoryObservation laboratoryObservation : getLaboratoryObservations(
-				bundle)) {
+		for (final LaboratoryObservation laboratoryObservation : getVacdLaboratoryObservations(
+				docManifest)) {
 			doc.addLaboratoryObservation(laboratoryObservation);
 		}
 
 		// Schwangerschaftsanamnese
 		// Coded Results for gestational age / Codierte Resultate für
 		// Gestationsalter
-		final PregnancyHistory ph = getPregnancyHistory(bundle);
+		final PregnancyHistory ph = getPregnancyHistory(docManifest);
 		if (ph != null) {
 			doc.addPregnancyHistory(ph);
 		}
 
 		for (final ImmunizationRecommendation immunizationRecommendation : getImmunizationRecommendations(
-				bundle)) {
+				docManifest)) {
 			doc.addImmunizationRecommendation(immunizationRecommendation);
 		}
 
-		doc.addComment(getComment(bundle));
+		doc.addComment(getComment(docManifest));
 
 		return doc;
-	}
-
-	private org.ehealth_connector.cda.ch.ActiveProblemConcern getActiveProblemConcern(
-			Condition fhirCondition) {
-
-		final String concern = fhirCondition.getNotes();
-		final Date date = fhirCondition.getDateRecorded();
-
-		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
-		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
-				fhirCondition);
-
-		// Create the ActiveProblemConcern
-		final org.ehealth_connector.cda.ch.ActiveProblemConcern retVal = new org.ehealth_connector.cda.ch.ActiveProblemConcern(
-				concern, date, problemEntry, problemStatusCode);
-
-		return retVal;
-
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC ActiveProblemConcerns from the given
-	 * FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC ActiveProblemConcerns </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.ActiveProblemConcern> getActiveProblemConcernEntries(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.ActiveProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.ActiveProblemConcern>();
-		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern);
-			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
-				Condition fhirCondition = (Condition) entry.getResource();
-				ActiveProblemConcern concern = getActiveProblemConcern(fhirCondition);
-				for (ExtensionDt ext : extensions) {
-					if (ext.getValue() instanceof DateDt) {
-						concern.setStart(((DateDt) ext.getValue()).getValue());
-					}
-					if (ext.getValue() instanceof StringDt) {
-						concern.getMdht().getIds().clear();
-						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
-								((StringDt) ext.getValue()).toString()));
-					}
-				}
-				retVal.add(concern);
-			}
-			// if
-			// (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsActiveProblemConcern)
-			// .isEmpty() && (entry.getResource() instanceof Condition)) {
-			// retVal.add(getActiveProblemConcern((Condition)
-			// entry.getResource()));
-			// }
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.ch.AllergyConcern getAllergyProblemConcern(
-			Condition fhirCondition) {
-
-		final String concern = fhirCondition.getNotes();
-		final org.ehealth_connector.cda.ch.AllergyProblem problemEntry = getAllergyProblemEntry(
-				fhirCondition);
-
-		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
-				fhirCondition);
-
-		final org.ehealth_connector.cda.ch.AllergyConcern retVal = new org.ehealth_connector.cda.ch.AllergyConcern(
-				concern, fhirCondition.getDateRecorded(), null, problemEntry, problemStatusCode);
-
-		return retVal;
-
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC AllergyConcerns from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC AllergyConcerns </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.AllergyConcern> getAllergyProblemConcernEntries(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.AllergyConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.AllergyConcern>();
-		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern);
-			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
-				Condition fhirCondition = (Condition) entry.getResource();
-				AllergyConcern concern = getAllergyProblemConcern(fhirCondition);
-				for (ExtensionDt ext : extensions) {
-					if (ext.getValue() instanceof DateDt) {
-						concern.setStart(((DateDt) ext.getValue()).getValue());
-					}
-					if (ext.getValue() instanceof StringDt) {
-						concern.getMdht().getIds().clear();
-						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
-								((StringDt) ext.getValue()).toString()));
-					}
-				}
-				retVal.add(concern);
-			}
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.ch.AllergyProblem getAllergyProblemEntry(
-			Condition fhirCondition) {
-
-		final org.ehealth_connector.cda.ch.AllergyProblem retVal = new org.ehealth_connector.cda.ch.AllergyProblem();
-		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-
-		// Add Problem Entry Identifiers
-		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
-		// currently only Drug intolerances supported
-		retVal.setCode(AllergiesAndIntolerances.DRUG_INTOLERANCE);
-
-		// Date
-		retVal.setStartDate(fhirCondition.getDateRecorded());
-
-		// Value
-		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
-
-		return retVal;
 	}
 
 	/**
@@ -1164,18 +1024,19 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	public org.ehealth_connector.common.Author getAuthor(
 			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.common.Author retVal = null;
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			List<ExtensionDt> extensions = ref
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
+			List<org.hl7.fhir.dstu3.model.Extension> extensions = ref
+					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty() && (ref.getResource() instanceof Person)) {
 				retVal = FhirCommon.getAuthor((Person) ref.getResource());
-				if (extensions.get(0).getValue() instanceof TimeDt) {
-					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
+				if (extensions.get(0).getValue() instanceof TimeType) {
+					TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 					if (timeStamp.getValue().length() > 8)
 						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 					else
 						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+					break;
 				}
 			}
 		}
@@ -1183,31 +1044,17 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets a list of eHC Authors from the given FHIR bundle
+	 * Gets the code of the given medication
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC Authors </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @param fhirMedicationStatement
+	 *            the FHIR resource
+	 * @return the code of the given medication
 	 */
-	@Override
-	public List<org.ehealth_connector.common.Author> getAuthors(Bundle bundle) {
-		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsAuthor).isEmpty()
-					&& (entry.getResource() instanceof Person)) {
-				retVal.add(FhirCommon.getAuthor((Person) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
 	private Code getCode(MedicationStatement fhirMedicationStatement) {
 		Code retVal = null;
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode)
-				.isEmpty()) {
-			final CodingDt fhirCode = (CodingDt) fhirMedicationStatement
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCode).get(0).getValue();
+		if (!fhirMedicationStatement.getExtensionsByUrl(FhirCommon.urnUseAsCode).isEmpty()) {
+			final Coding fhirCode = (Coding) fhirMedicationStatement
+					.getExtensionsByUrl(FhirCommon.urnUseAsCode).get(0).getValue();
 			retVal = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
 					fhirCode.getDisplay());
 		}
@@ -1215,96 +1062,38 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the comment from the given FHIR bundle
+	 * Gets the Consumable of the given medication
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Author object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @param fhirMedicationStatement
+	 *            the FHIR resource
+	 * @return the Consumable of the given medication
 	 */
-	public String getComment(Bundle bundle) {
-		String retVal = "";
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment).isEmpty()
-					&& (entry.getResource() instanceof Observation)) {
-				retVal = ((Observation) entry.getResource()).getComments();
-			}
-		}
-		return retVal;
-	}
-
-	private String getComment(MedicationStatement fhirMedicationStatement) {
-		String retVal = "";
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment)
-				.isEmpty()) {
-			final StringDt comment = (StringDt) fhirMedicationStatement
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment).get(0).getValue();
-			retVal = comment.toString();
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en"> Gets the eHC confidentiality code from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC confidentiality code </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	@Override
-	public Confidentiality getConfidentialityCode(Bundle bundle) {
-		Confidentiality retVal = Confidentiality.NORMAL; // default
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Basic) {
-				final Basic fhirBasic = (Basic) entry.getResource();
-				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (langCode.getSystem().equals(OID_CONFIDENTIALITY_CODE)) {
-					if ("veryrestricted".equals(langCode.getCode().toLowerCase())) {
-						retVal = Confidentiality.VERY_RESTRICTED;
-						break;
-					} else if ("restricted".equals(langCode.getCode().toLowerCase())) {
-						retVal = Confidentiality.RESTRICED;
-						break;
-					} else if ("normal".equals(langCode.getCode().toLowerCase())) {
-						retVal = Confidentiality.NORMAL;
-						break;
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
 	private org.ehealth_connector.cda.Consumable getConsumable(
 			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.cda.Consumable retVal = null;
 
-		if (fhirMedicationStatement.getMedication() instanceof ResourceReferenceDt) {
-			final ResourceReferenceDt ref = (ResourceReferenceDt) fhirMedicationStatement
-					.getMedication();
+		if (fhirMedicationStatement.getMedication() instanceof Reference) {
+			final Reference ref = (Reference) fhirMedicationStatement.getMedication();
 			final Medication fhirMedi = (Medication) ref.getResource();
 			// Create the consumable
 			retVal = new org.ehealth_connector.cda.Consumable(fhirMedi.getCode().getText());
 
 			// Set id
-			if (!fhirMedi.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).isEmpty()) {
-				final IdentifierDt id = (IdentifierDt) fhirMedi
-						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0)
-						.getValue();
+			if (!fhirMedi.getExtensionsByUrl(FhirCommon.urnUseAsIdentifier).isEmpty()) {
+				final Identifier id = (Identifier) fhirMedi
+						.getExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0).getValue();
 				retVal.setManufacturedProductId(new org.ehealth_connector.common.Identificator(
 						FhirCommon.removeURIPrefix(id.getSystem()), id.getValue()));
 			}
 
 			// Set code
-			final CodingDt fhirCode = fhirMedi.getCode().getCodingFirstRep();
+			final Coding fhirCode = fhirMedi.getCode().getCodingFirstRep();
 			final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 					fhirCode.getCode(), fhirCode.getDisplay());
 			retVal.setWhoAtcCode(code);
 
 			// Set manufacturer
-			final ResourceReferenceDt refManufacturer = fhirMedi.getManufacturer();
+			final Reference refManufacturer = fhirMedi.getManufacturer();
 			retVal.setManufacturer(FhirCommon.getOrganization(refManufacturer.getResource()));
 
 			// LotNumber
@@ -1328,233 +1117,22 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	 */
 	public ListResource getCriterions(MedicationStatement fhirMedicationStatement) {
 		ListResource retVal = new ListResource();
-		// fhirMedicationStatement.getSupportingInformation();
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCriterion).isEmpty()) {
+		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
+			if (!ref.getExtensionsByUrl(FhirCommon.urnUseAsCriterion).isEmpty()) {
 				retVal = (ListResource) ref.getResource();
+				break;
 			}
 		}
 		return retVal;
 	}
 
 	/**
-	 * <div class="en">Gets the eHC Custodian from the given FHIR bundle
+	 * Gets the Immunization Recommendation
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 * @param fhirMedicationStatement
+	 *            the FHIR resource
+	 * @return the Immunization Recommendation
 	 */
-	@Override
-	public org.ehealth_connector.common.Organization getCustodian(Bundle bundle) {
-		org.ehealth_connector.common.Organization retVal = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCustodian).isEmpty()
-					&& (entry.getResource() instanceof Organization)) {
-				retVal = FhirCommon.getOrganization((Organization) entry.getResource());
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en"> Gets the eHC document language code from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC document language </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	@Override
-	public LanguageCode getDocLanguage(Bundle bundle) {
-		LanguageCode retVal = LanguageCode.GERMAN; // default
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Basic) {
-				final Basic fhirBasic = (Basic) entry.getResource();
-				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (langCode.getSystem().equals(FhirCommon.oidLanguage)) {
-					if (langCode.getCode().toLowerCase().startsWith("de")) {
-						retVal = LanguageCode.GERMAN;
-						break;
-					} else if (langCode.getCode().toLowerCase().startsWith("fr")) {
-						retVal = LanguageCode.FRENCH;
-						break;
-					} else if (langCode.getCode().toLowerCase().startsWith("it")) {
-						retVal = LanguageCode.ITALIAN;
-						break;
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
-	 * patient demographics) from the given FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Vacd document type code (full or masked patient
-	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
-	 */
-	public DocTypeCode getDocType(Bundle bundle) {
-		DocTypeCode retVal = DocTypeCode.PATIENT; // default
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Basic) {
-				final Basic fhirBasic = (Basic) entry.getResource();
-				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (OID_VACD.equals(langCode.getSystem())) {
-					if ("patient".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PATIENT;
-						break;
-					} else if ("pseudonymized".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PSEUDONYMIZED;
-						break;
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en"> Gets the eHC CodedResults object from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC CodedResults object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public org.ehealth_connector.cda.ch.CodedResults getGestationalAge(Bundle bundle) {
-		GestationalAge retVal = null;
-		BigInteger gWeek = BigInteger.valueOf(-1);
-		BigInteger gDay = BigInteger.valueOf(-1);
-		Identificator idWeek = null;
-		Identificator idDay = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPregnancyObservation)
-					.isEmpty() && (entry.getResource() instanceof Observation)) {
-				final Observation fhirObs = (Observation) entry.getResource();
-				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				if ("49051-6".equals(fhirCode.getCode())) {
-					gWeek = ((QuantityDt) fhirObs.getValue()).getValue().toBigInteger();
-					if (!fhirObs.getIdentifier().isEmpty()) {
-						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
-						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
-						idWeek = new Identificator(codeSystem, idTemp.getValue());
-					}
-				}
-				if ("49052-4".equals(fhirCode.getCode())) {
-					gDay = ((QuantityDt) fhirObs.getValue()).getValue().toBigInteger();
-					if (!fhirObs.getIdentifier().isEmpty()) {
-						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
-						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
-						idDay = new Identificator(codeSystem, idTemp.getValue());
-					}
-				}
-			}
-		}
-
-		if ((gDay.intValue() > -1) && (gWeek.intValue() > -1)) {
-			retVal = new GestationalAge(gWeek.intValue(), gDay.intValue());
-			if (idWeek != null)
-				retVal.setGestationalAgeWeeksId(idWeek);
-			if (idDay != null)
-				retVal.setGestationalAgeDaysId(idDay);
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.ch.vacd.Immunization getImmunization(
-			MedicationStatement fhirMedicationStatement) {
-
-		final Code code = getCode(fhirMedicationStatement);
-
-		// Create the immunization
-		final org.ehealth_connector.cda.ch.vacd.Immunization retVal = new org.ehealth_connector.cda.ch.vacd.Immunization();
-
-		// Add Identifiers
-		retVal.getMdht().getIds().clear();
-		for (final IdentifierDt id : fhirMedicationStatement.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
-		// author
-		retVal.setAuthor(getAuthor(fhirMedicationStatement));
-
-		if (!"IMMUNIZ".equals(code.getCode())) {
-			// code
-			retVal.setCode(MedicationsSpecialConditions.getEnum(code.getCode()));
-		} else {
-			// code
-			if (fhirMedicationStatement.getMedication() instanceof CodeableConceptDt) {
-				final CodeableConceptDt cc = (CodeableConceptDt) fhirMedicationStatement
-						.getMedication();
-
-				retVal.setCode(
-						MedicationsSpecialConditions.getEnum(cc.getCodingFirstRep().getCode()));
-			}
-
-			// effectiveTime
-			retVal.setApplyDate(fhirMedicationStatement.getDateAsserted());
-
-			// doseQuantity
-			Double doseQuantity = null;
-			for (final Dosage dosage : fhirMedicationStatement.getDosage()) {
-				doseQuantity = ((QuantityDt) dosage.getQuantity()).getValue().doubleValue();
-				retVal.setDosage(doseQuantity);
-				break; // currently only support for one doseQuantity
-			}
-
-			// consumable
-			final Consumable consumable = getConsumable(fhirMedicationStatement);
-			if (consumable != null)
-				retVal.setConsumable(consumable);
-
-			// perfomer
-			final Author author = getPerformer(fhirMedicationStatement);
-			if (author != null)
-				retVal.setPerformer(author);
-
-			// medication targets
-			final ListResource medicationTargets = getMedicationTargets(fhirMedicationStatement);
-			for (final ResourceReferenceDt refObs : medicationTargets
-					.getAllPopulatedChildElementsOfType(ResourceReferenceDt.class)) {
-				final Observation fhirObs = (Observation) refObs.getResource();
-				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				final MedicationTargetEntry entry = new MedicationTargetEntry();
-				entry.setId(new Identificator(fhirObs.getIdentifierFirstRep().getSystem(),
-						fhirObs.getIdentifierFirstRep().getValue()));
-				entry.setImmunizationTargetCode(
-						new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-								fhirCode.getCode(), fhirCode.getDisplay()));
-				retVal.addMedicationTargetEntry(entry);
-			}
-
-			// criterion
-			final ListResource criterions = getCriterions(fhirMedicationStatement);
-			for (final ResourceReferenceDt refObs : criterions
-					.getAllPopulatedChildElementsOfType(ResourceReferenceDt.class)) {
-				final Observation fhirObs = (Observation) refObs.getResource();
-				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				final CriterionEntry entry = new CriterionEntry();
-				entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-						fhirCode.getCode(), fhirCode.getDisplay()));
-				retVal.setCriterionEntry(entry);
-			}
-
-			// comment
-			retVal.setCommentText(getComment(fhirMedicationStatement));
-
-		}
-
-		return retVal;
-
-	}
-
 	private org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation getImmunizationRecommendation(
 			MedicationStatement fhirMedicationStatement) {
 		org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation retVal = null;
@@ -1563,7 +1141,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		retVal = new org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation();
 
 		// Add Identifiers
-		for (final IdentifierDt id : fhirMedicationStatement.getIdentifier()) {
+		for (final Identifier id : fhirMedicationStatement.getIdentifier()) {
 			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
@@ -1579,20 +1157,25 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 			retVal.setCode(specialConditions);
 		} else {
 			// code
-			if (fhirMedicationStatement.getMedication() instanceof CodeableConceptDt) {
-				final CodeableConceptDt cc = (CodeableConceptDt) fhirMedicationStatement
+			if (fhirMedicationStatement.getMedication() instanceof CodeableConcept) {
+				final CodeableConcept cc = (CodeableConcept) fhirMedicationStatement
 						.getMedication();
 
 				retVal.setCode(
 						MedicationsSpecialConditions.getEnum(cc.getCodingFirstRep().getCode()));
 			} else {
-				retVal.setShallNotBeAdministerd(fhirMedicationStatement.getWasNotTaken());
+				if (fhirMedicationStatement.getTaken() == MedicationStatementTaken.N)
+					retVal.setShallNotBeAdministerd();
 
 				// doseQuantity
 				Double doseQuantity = null;
 				for (final Dosage dosage : fhirMedicationStatement.getDosage()) {
-					doseQuantity = ((QuantityDt) dosage.getQuantity()).getValue().doubleValue();
-					retVal.setDosage(doseQuantity);
+					try {
+						doseQuantity = ((Quantity) dosage.getDoseSimpleQuantity()).getValue()
+								.doubleValue();
+						retVal.setDosage(doseQuantity);
+					} catch (FHIRException e) {
+					}
 					break; // currently only support for one doseQuantity
 				}
 
@@ -1605,32 +1188,29 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 		// medication targets
 		final ListResource medicationTargets = getMedicationTargets(fhirMedicationStatement);
-		for (final ResourceReferenceDt refObs : medicationTargets
-				.getAllPopulatedChildElementsOfType(ResourceReferenceDt.class)) {
-			final Observation fhirObs = (Observation) refObs.getResource();
-			final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+		for (ListEntryComponent listEntry : medicationTargets.getEntry()) {
+			Reference ref = listEntry.getItem();
+			final Observation fhirObs = (Observation) ref.getResource();
+			final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
 			final MedicationTargetEntry entry = new MedicationTargetEntry();
+			entry.setId(new Identificator(
+					fhirObs.getIdentifierFirstRep().getSystem().replace(FhirCommon.oidUrn, ""),
+					fhirObs.getIdentifierFirstRep().getValue()));
 			entry.setImmunizationTargetCode(
 					new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
 							fhirCode.getDisplay()));
-			entry.setId(new Identificator(fhirObs.getIdentifierFirstRep().getSystem(),
-					fhirObs.getIdentifierFirstRep().getValue().toString()));
 			retVal.addMedicationTargetEntry(entry);
 		}
 
 		// criterion
 		final ListResource criterions = getCriterions(fhirMedicationStatement);
-		for (final ResourceReferenceDt refObs : criterions
-				.getAllPopulatedChildElementsOfType(ResourceReferenceDt.class)) {
-			final Observation fhirObs = (Observation) refObs.getResource();
-			final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
+		for (ListEntryComponent listEntry : criterions.getEntry()) {
+			Reference ref = listEntry.getItem();
+			final Observation fhirObs = (Observation) ref.getResource();
+			final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
 			final CriterionEntry entry = new CriterionEntry();
 			entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
 					fhirCode.getCode(), fhirCode.getDisplay()));
-			// not supported, yet
-			// entry.addId(
-			// new Identificator(fhirObs.getId().getIdPart(),
-			// fhirObs.getValue().toString()));
 			retVal.setCriterionEntry(entry);
 		}
 
@@ -1643,126 +1223,33 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 	/**
 	 * <div class="en">Gets a list of eHC ImmunizationRecommendations from the
-	 * given FHIR bundle
+	 * given FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
+	 * @param docManifest
+	 *            the FHIR resource
 	 * @return list of eHC ImmunizationRecommendations </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> getImmunizationRecommendations(
-			Bundle bundle) {
+			DocumentManifest docManifest) {
 		final List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation>();
-		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunizationRecommendation);
-			if (!extensions.isEmpty() && (entry.getResource() instanceof MedicationStatement)) {
-				MedicationStatement fhirObject = (MedicationStatement) entry.getResource();
-				ImmunizationRecommendation recom = getImmunizationRecommendation(fhirObject);
-				retVal.add(recom);
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsImmunizationRecommendation)
+					.isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					if (ref.getResource() instanceof MedicationStatement) {
+						MedicationStatement fhirObject = (MedicationStatement) ref.getResource();
+						ImmunizationRecommendation recom = getImmunizationRecommendation(
+								fhirObject);
+						retVal.add(recom);
+					}
+				}
 			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC Immunizations from the given FHIR
-	 * bundle
-	 *
-	 * @param bundle
-	 *            FHIR bundle
-	 * @return list of eHC Immunizations </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.vacd.Immunization> getImmunizations(Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.vacd.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.Immunization>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()
-					&& (entry.getResource() instanceof MedicationStatement)) {
-				retVal.add(getImmunization((MedicationStatement) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.ch.vacd.LaboratoryObservation getLaboratoryObservation(
-			Observation fhirObservation) {
-		final org.ehealth_connector.cda.ch.vacd.LaboratoryObservation retVal = new LaboratoryObservation();
-
-		final CodingDt fhirCode = fhirObservation.getCode().getCodingFirstRep();
-		retVal.setCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
-		retVal.setEffectiveTime(fhirObservation.getIssued());
-		if (!fhirObservation.getPerformer().isEmpty()) {
-			final ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
-			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
-					fhirObservation.getIssued());
-		}
-
-		if (fhirObservation.getValue() instanceof QuantityDt) {
-			// type PQ
-			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
-			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
-					Ucum.getEnum(fhirQuantity.getUnit())));
-		} else if (fhirObservation.getValue() instanceof CodeableConceptDt) {
-			// type CD
-			final CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
-					.getCodingFirstRep();
-			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
-					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
-		} else if (fhirObservation.getValue() instanceof RatioDt) {
-			// type RTO not yet implemented
-		}
-
-		if (fhirObservation.getReferenceRangeFirstRep() != null) {
-			// ReferenceRange not yet implemented
-		}
-
-		final CodingDt fhirInterpretationCode = fhirObservation.getInterpretation()
-				.getCodingFirstRep();
-		if (fhirInterpretationCode != null) {
-			if (fhirInterpretationCode.getSystem() != null) {
-				retVal.setInterpretationCode(new Code(
-						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
-						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
-			}
-		}
-
-		retVal.setCommentText(fhirObservation.getComments());
-
-		return retVal;
-
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC LaboratoryObservations from the given
-	 * FHIR bundle
-	 *
-	 * @param bundle
-	 *            FHIR bundle
-	 * @return list of eHC LaboratoryObservations </div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 */
-	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getLaboratoryObservations(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation>();
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratoryObservation)
-					.isEmpty() && (entry.getResource() instanceof Observation)) {
-				retVal.add(getLaboratoryObservation((Observation) entry.getResource()));
-			}
-		}
-		return retVal;
-	}
-
-	private String getLot(MedicationStatement fhirMedicationStatement) {
-		String retVal = "";
-		if (!fhirMedicationStatement.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLotNumbertext)
-				.isEmpty()) {
-			final StringDt lot = (StringDt) fhirMedicationStatement
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLotNumbertext).get(0)
-					.getValue();
-			retVal = lot.toString();
 		}
 		return retVal;
 	}
@@ -1778,91 +1265,175 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	 */
 	public ListResource getMedicationTargets(MedicationStatement fhirMedicationStatement) {
 		ListResource retVal = new ListResource();
-		// fhirMedicationStatement.getSupportingInformation();
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			if (!ref.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsMedicationTarget).isEmpty()) {
+		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
+			if (!ref.getExtensionsByUrl(FhirCommon.urnUseAsMedicationTarget).isEmpty()) {
 				retVal = (ListResource) ref.getResource();
 			}
 		}
 		return retVal;
 	}
 
-	private org.ehealth_connector.cda.ch.PastProblemConcern getPastProblemConcern(
-			Condition fhirCondition) {
-		org.ehealth_connector.cda.ch.PastProblemConcern retVal = null;
-
-		final String concern = fhirCondition.getNotes();
-
-		final org.ehealth_connector.cda.Problem problemEntry = getProblemEntry(fhirCondition);
-
-		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
-				fhirCondition);
-
-		// Create the PastProblemConcern
-		retVal = new PastProblemConcern(concern, problemEntry, problemStatusCode);
-
-		return retVal;
-
-	}
-
 	/**
-	 * <div class="en">Gets a list of eHC PastProblemConcerns from the given
-	 * FHIR bundle
+	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
+	 * patient demographics) from the given FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC PastProblemConcerns </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @param docManifest
+	 *            the FHIR resource
+	 * @return eHC Vacd document type code (full or masked patient
+	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.cda.ch.PastProblemConcern> getPastProblemConcernEntries(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.PastProblemConcern> retVal = new ArrayList<org.ehealth_connector.cda.ch.PastProblemConcern>();
-		for (final Entry entry : bundle.getEntry()) {
-			List<ExtensionDt> extensions = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPastProblemConcern);
-			if (!extensions.isEmpty() && (entry.getResource() instanceof Condition)) {
-				Condition fhirCondition = (Condition) entry.getResource();
-				PastProblemConcern concern = getPastProblemConcern(fhirCondition);
-				for (ExtensionDt ext : extensions) {
-					if (ext.getValue() instanceof DateDt) {
-						concern.setStart(((DateDt) ext.getValue()).getValue());
-					}
-					if (ext.getValue() instanceof StringDt) {
-						concern.getMdht().getIds().clear();
-						concern.addId(new Identificator(CdaChVacd.OID_MAIN,
-								((StringDt) ext.getValue()).toString()));
+	public DocTypeCode getVacdDocType(DocumentManifest docManifest) {
+
+		DocTypeCode retVal = DocTypeCode.PATIENT; // default
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsDocType).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					if (ref.getResource() instanceof Basic) {
+						final Basic fhirBasic = (Basic) ref.getResource();
+						final Coding langCode = fhirBasic.getCode().getCodingFirstRep();
+						if (OID_VACD.equals(langCode.getSystem())) {
+							if ("patient".equals(langCode.getCode().toLowerCase())) {
+								retVal = DocTypeCode.PATIENT;
+								break;
+							} else if ("pseudonymized".equals(langCode.getCode().toLowerCase())) {
+								retVal = DocTypeCode.PSEUDONYMIZED;
+								break;
+							}
+						}
 					}
 				}
-				retVal.add(concern);
 			}
 		}
 		return retVal;
 	}
 
 	/**
-	 * Gets an eHC Author object containing the performer from the given FHIR
-	 * MedicationStatement object
+	 * Gets the VACD Immunization
 	 *
 	 * @param fhirMedicationStatement
-	 *            the FHIR bundle
-	 * @return eHC Author object containing the performer
+	 *            the FHIR resource
+	 * @return the VACD Immunization
 	 */
-	public org.ehealth_connector.common.Author getPerformer(
+	private org.ehealth_connector.cda.ch.vacd.Immunization getVacdImmunization(
 			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.common.Author retVal = null;
-		// fhirMedicationStatement.getSupportingInformation();
-		for (final ResourceReferenceDt ref : fhirMedicationStatement.getSupportingInformation()) {
-			List<ExtensionDt> extensions = ref
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPerformer);
-			if (!extensions.isEmpty() && (ref.getResource() instanceof Person)) {
-				retVal = FhirCommon.getAuthor((Person) ref.getResource());
-				if (extensions.get(0).getValue() instanceof TimeDt) {
-					TimeDt timeStamp = ((TimeDt) extensions.get(0).getValue());
-					if (timeStamp.getValue().length() > 8)
-						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
-					else
-						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+		final Code code = getCode(fhirMedicationStatement);
+
+		// Create the immunization
+		final org.ehealth_connector.cda.ch.vacd.Immunization retVal = new org.ehealth_connector.cda.ch.vacd.Immunization();
+
+		// Add Identifiers
+		retVal.getMdht().getIds().clear();
+		for (final Identifier id : fhirMedicationStatement.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			retVal.addId(new Identificator(codeSystem, id.getValue()));
+		}
+
+		// author
+		retVal.setAuthor(getAuthor(fhirMedicationStatement));
+
+		if (!"IMMUNIZ".equals(code.getCode())) {
+			// code
+			retVal.setCode(MedicationsSpecialConditions.getEnum(code.getCode()));
+		} else {
+			// code
+			if (fhirMedicationStatement.getMedication() instanceof CodeableConcept) {
+				final CodeableConcept cc = (CodeableConcept) fhirMedicationStatement
+						.getMedication();
+
+				retVal.setCode(
+						MedicationsSpecialConditions.getEnum(cc.getCodingFirstRep().getCode()));
+			}
+
+			// effectiveTime
+			retVal.setApplyDate(fhirMedicationStatement.getDateAsserted());
+
+			// doseQuantity
+			Double doseQuantity = null;
+			for (final Dosage dosage : fhirMedicationStatement.getDosage()) {
+				try {
+					doseQuantity = ((Quantity) dosage.getDoseSimpleQuantity()).getValue()
+							.doubleValue();
+					retVal.setDosage(doseQuantity);
+				} catch (FHIRException e) {
+				}
+				break; // currently only support for one doseQuantity
+			}
+
+			// consumable
+			final Consumable consumable = getConsumable(fhirMedicationStatement);
+			if (consumable != null)
+				retVal.setConsumable(consumable);
+
+			// perfomer
+			final Author author = getPerformer(fhirMedicationStatement);
+			if (author != null)
+				retVal.setPerformer(author);
+
+			// medication targets
+			final ListResource medicationTargets = getMedicationTargets(fhirMedicationStatement);
+			for (ListEntryComponent listEntry : medicationTargets.getEntry()) {
+				Reference ref = listEntry.getItem();
+				final Observation fhirObs = (Observation) ref.getResource();
+				final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
+				final MedicationTargetEntry entry = new MedicationTargetEntry();
+				entry.setId(new Identificator(
+						fhirObs.getIdentifierFirstRep().getSystem().replace(FhirCommon.oidUrn, ""),
+						fhirObs.getIdentifierFirstRep().getValue()));
+				entry.setImmunizationTargetCode(
+						new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+								fhirCode.getCode(), fhirCode.getDisplay()));
+				retVal.addMedicationTargetEntry(entry);
+			}
+
+			// criterion
+			final ListResource criterions = getCriterions(fhirMedicationStatement);
+			for (ListEntryComponent listEntry : criterions.getEntry()) {
+				Reference ref = listEntry.getItem();
+				final Observation fhirObs = (Observation) ref.getResource();
+				final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
+				final CriterionEntry entry = new CriterionEntry();
+				entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+						fhirCode.getCode(), fhirCode.getDisplay()));
+				retVal.setCriterionEntry(entry);
+			}
+
+			// comment
+			retVal.setCommentText(getComment(fhirMedicationStatement));
+
+		}
+
+		return retVal;
+
+	}
+
+	//
+	/**
+	 * <div class="en">Gets a list of eHC Immunizations from the given FHIR
+	 * resource
+	 *
+	 * @param docManifest
+	 *            FHIR resource
+	 * @return list of eHC Immunizations </div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public List<org.ehealth_connector.cda.ch.vacd.Immunization> getVacdImmunizations(
+			DocumentManifest docManifest) {
+		final List<org.ehealth_connector.cda.ch.vacd.Immunization> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.Immunization>();
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					retVal.add(getVacdImmunization((MedicationStatement) ref.getResource()));
 				}
 			}
 		}
@@ -1870,85 +1441,96 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en">Gets the eHC PregnancyHistory object from the given FHIR
-	 * bundle
+	 * Gets the VACD Laboratory Observation
+	 * 
+	 * @param fhirObservation
+	 *            the FHIR resource
+	 * @return the VACD Laboratory Observation
+	 */
+	private org.ehealth_connector.cda.ch.vacd.LaboratoryObservation getVacdLaboratoryObservation(
+			Observation fhirObservation) {
+		final org.ehealth_connector.cda.ch.vacd.LaboratoryObservation retVal = new LaboratoryObservation();
+		// TODO tsc copy von Abstract...
+		final Coding fhirCode = fhirObservation.getCode().getCodingFirstRep();
+		retVal.setCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+				fhirCode.getCode(), fhirCode.getDisplay()));
+		retVal.setEffectiveTime(fhirObservation.getIssued());
+		if (!fhirObservation.getPerformer().isEmpty()) {
+			final Reference refPerf = fhirObservation.getPerformer().get(0);
+			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
+					fhirObservation.getIssued());
+		}
+
+		if (fhirObservation.getValue() instanceof Quantity) {
+			// type PQ
+			final Quantity fhirQuantity = (Quantity) fhirObservation.getValue();
+			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
+					Ucum.getEnum(fhirQuantity.getUnit())));
+		} else if (fhirObservation.getValue() instanceof CodeableConcept) {
+			// type CD
+			final Coding fhirValueCode = ((CodeableConcept) fhirObservation.getValue())
+					.getCodingFirstRep();
+			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
+					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+		} else if (fhirObservation.getValue() instanceof Ratio) {
+			// type RTO not yet implemented
+		}
+
+		if (fhirObservation.getReferenceRangeFirstRep() != null) {
+			// ReferenceRange not yet implemented
+		}
+
+		final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
+				.getCodingFirstRep();
+		if (fhirInterpretationCode != null) {
+			if (fhirInterpretationCode.getSystem() != null) {
+				retVal.setInterpretationCode(new Code(
+						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
+			}
+		}
+
+		retVal.setCommentText(fhirObservation.getComment());
+
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Gets a list of eHC LaboratoryObservations from the given
+	 * FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC PregnancyHistory object </div> <div class="de"></div>
+	 * @param docManifest
+	 *            FHIR resource
+	 * @return list of eHC LaboratoryObservations </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.cda.ch.PregnancyHistory getPregnancyHistory(Bundle bundle) {
-		PregnancyHistory retVal = null;
-		Date deliveryDate = null;
-		Identificator id = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsPregnancyObservation)
-					.isEmpty() && (entry.getResource() instanceof Observation)) {
-				final Observation fhirObs = (Observation) entry.getResource();
-				final CodingDt fhirCode = fhirObs.getCode().getCodingFirstRep();
-				if ("11778-8".equals(fhirCode.getCode())) {
-					deliveryDate = ((DateTimeDt) fhirObs.getValue()).getValue();
-					if (!fhirObs.getIdentifier().isEmpty()) {
-						IdentifierDt idTemp = fhirObs.getIdentifier().get(0);
-						final String codeSystem = FhirCommon.removeURIPrefix(idTemp.getSystem());
-						id = new Identificator(codeSystem, idTemp.getValue());
+	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getVacdLaboratoryObservations(
+			DocumentManifest docManifest) {
+		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> retVal = new ArrayList<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation>();
+
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh
+
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsLaboratoryObservation).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					if (ref.getResource() instanceof Observation) {
+						retVal.add(getVacdLaboratoryObservation((Observation) ref.getResource()));
 					}
 				}
 			}
 		}
-
-		if (deliveryDate != null) {
-			retVal = new PregnancyHistory(deliveryDate);
-			if (id != null)
-				retVal.setId(id);
-			// not yet implemented:
-			// retVal.setPerformer(perfomer);
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.enums.ProblemConcernStatusCode getProblemConcernStatusCode(
-			Condition condition)
-
-	{
-		org.ehealth_connector.cda.enums.ProblemConcernStatusCode retVal = ProblemConcernStatusCode.COMPLETED;
-		final ConditionClinicalStatusCodesEnum status = condition.getClinicalStatusElement()
-				.getValueAsEnum();
-		if (status == ConditionClinicalStatusCodesEnum.RESOLVED) {
-			retVal = ProblemConcernStatusCode.COMPLETED;
-		} else if (status == ConditionClinicalStatusCodesEnum.ACTIVE) {
-			retVal = ProblemConcernStatusCode.ACTIVE;
-		}
-		return retVal;
-	}
-
-	private org.ehealth_connector.cda.Problem getProblemEntry(Condition fhirCondition) {
-
-		final org.ehealth_connector.cda.Problem retVal = new org.ehealth_connector.cda.Problem();
-		final CodingDt fhirCode = fhirCondition.getCode().getCodingFirstRep();
-
-		// Add Problem Entry Identifiers
-		for (final IdentifierDt id : fhirCondition.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
-			retVal.setId(new Identificator(codeSystem, id.getValue()));
-		}
-
-		// currently only Problems supported
-		retVal.setCode(ProblemType.PROBLEM);
-
-		// Date
-		retVal.setStartDate(fhirCondition.getDateRecorded());
-
-		// Value
-		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
-
 		return retVal;
 	}
 
 	/**
-	 * Read the VacdDocument object from the FHIR bundle file
+	 * Read the VacdDocument object from the FHIR resource file
 	 *
 	 * @param fileName
 	 *            the file name

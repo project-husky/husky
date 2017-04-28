@@ -45,6 +45,7 @@ public class Patient extends Person {
 	private final RecordTarget mRecordTarget;
 	private final PatientRole mPatientRole;
 	private final org.openhealthtools.mdht.uml.cda.Patient mPatient;
+	private Boolean isNonHumenSubject = false;
 
 	/**
 	 * CDA R2 extensions for the PIX Profile as proposed on
@@ -478,6 +479,16 @@ public class Patient extends Person {
 		return telecoms;
 	}
 
+	/**
+	 * Indicates whether this Patient is not a human patient but a non human
+	 * subject
+	 *
+	 * @return true for non human subjects, false for human patients
+	 */
+	public Boolean isNonHumenSubject() {
+		return isNonHumenSubject;
+	}
+
 	private Date parseDate(String value) throws ParseException {
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.parse(value);
@@ -542,6 +553,27 @@ public class Patient extends Person {
 	 */
 	public void setEmployeeOccupation(String employeeOccupation) {
 		this.employeeOccupation = employeeOccupation;
+	}
+
+	/**
+	 * Configures the eHC Patient objects purpose: It is a human patient
+	 * (default setting)
+	 *
+	 * @param value
+	 *            true for non human subjects, false for human patients
+	 */
+	public void setIsHumanPatient() {
+		this.isNonHumenSubject = false;
+	}
+
+	/**
+	 * Configures the eHC Patient objects purpose: It is a non human subject
+	 *
+	 * @param value
+	 *            true for non human subjects, false for human patients
+	 */
+	public void setIsNonHumenSubject() {
+		this.isNonHumenSubject = true;
 	}
 
 	/**

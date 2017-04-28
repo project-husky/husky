@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
@@ -124,6 +125,20 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			final int nb = getMdht().getInformationRecipients().size() - 1;
 			getMdht().getInformationRecipients().get(nb).setTypeCode(x_InformationRecipient.PRCP);
 		}
+	}
+
+	/**
+	 * Adds the participant. <div class="en">Physicians performing examinations
+	 * in the given laboratory MAY be added as participants.</div>
+	 * <div class="de">Ärzte, welche in dem, in <CH-LRQC-CUST> angegebenen Labor
+	 * Untersuchungen durchführen KÖNNEN als Participant hinzugefügt
+	 * werden.</div>
+	 *
+	 * @param participant
+	 *            the participant
+	 */
+	public void addParticipant(ParticipantClaimer participant) {
+		getMdht().getParticipants().add(participant.getMdht());
 	}
 
 	/**
@@ -270,4 +285,5 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			getLaboratorySpecialtySection().createStrucDocText(text);
 		}
 	}
+
 }

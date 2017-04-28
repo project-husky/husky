@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.Isco08;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -44,8 +45,6 @@ public class Author {
 	final public static Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
 	final public static Code FUNCTION_CODE_AUTHORDEVICE = new Code("2.16.756.5.30.2.1.1.1",
 			"TASST");
-	final public static Code FUNCTION_CODE_AUTHORDOCTOR = new Code("2.16.840.1.113883.2.9.6.2.7",
-			"221", "ISCO-08", "Medical doctors");
 
 	/** assigned Author */
 	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
@@ -70,7 +69,7 @@ public class Author {
 		mAuthor.setAssignedAuthor(mAsAuthor);
 
 		// add functionCode and time
-		mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
+		mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
 		mAuthor.setTime(DateUtil.nowAsTS());
 
 		setTime(null);
@@ -85,6 +84,26 @@ public class Author {
 	public Author(AuthoringDevice device) {
 		this();
 		setAssignedAuthoringDevice(device);
+	}
+
+	/**
+	 * Instantiates a new author.
+	 */
+	public Author(Code functionCode) {
+		mAuthor = CDAFactory.eINSTANCE.createAuthor();
+		mPerson = CDAFactory.eINSTANCE.createPerson();
+		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+
+		mAsAuthor.setAssignedPerson(mPerson);
+		mAuthor.setAssignedAuthor(mAsAuthor);
+
+		// add functionCode and time
+		if (functionCode != null) {
+			mAuthor.setFunctionCode(functionCode.getCE());
+		}
+		mAuthor.setTime(DateUtil.nowAsTS());
+
+		setTime(null);
 	}
 
 	/**
@@ -174,27 +193,7 @@ public class Author {
 		if ((patientAsAuthor.getIds() != null) && (patientAsAuthor.getIds().size() > 0)) {
 			mAsAuthor.getIds().addAll(patientAsAuthor.copyMdhtPatientRole().getIds());
 		}
-		this.setAuthorIsPatient(true);
-	}
-
-	/**
-	 * Instantiates a new author.
-	 */
-	public Author(String functionCode) {
-		mAuthor = CDAFactory.eINSTANCE.createAuthor();
-		mPerson = CDAFactory.eINSTANCE.createPerson();
-		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
-
-		mAsAuthor.setAssignedPerson(mPerson);
-		mAuthor.setAssignedAuthor(mAsAuthor);
-
-		// add functionCode and time
-		if (functionCode != null && !functionCode.equals("")) {
-			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
-		}
-		mAuthor.setTime(DateUtil.nowAsTS());
-
-		setTime(null);
+		this.setFunctionCodePatient();
 	}
 
 	/**
@@ -639,20 +638,6 @@ public class Author {
 	}
 
 	/**
-	 * Sets the author patient.
-	 *
-	 * @param isAuthorPatient
-	 *            true if the author is not a doctor but the patient himself
-	 */
-	public void setAuthorIsPatient(boolean isAuthorPatient) {
-		if (isAuthorPatient) {
-			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHOR_PATIENT.getCE());
-		} else {
-			mAuthor.setFunctionCode(FUNCTION_CODE_AUTHORDOCTOR.getCE());
-		}
-	}
-
-	/**
 	 * Sets the functionCode of the author
 	 *
 	 * @param code
@@ -662,6 +647,14 @@ public class Author {
 		if (code != null) {
 			mAuthor.setFunctionCode(code.getCE());
 		}
+	}
+
+	/**
+	 * Indicates that the author is the patient itself.
+	 *
+	 */
+	public void setFunctionCodePatient() {
+		mAuthor.setFunctionCode(FUNCTION_CODE_AUTHOR_PATIENT.getCE());
 	}
 
 	/**

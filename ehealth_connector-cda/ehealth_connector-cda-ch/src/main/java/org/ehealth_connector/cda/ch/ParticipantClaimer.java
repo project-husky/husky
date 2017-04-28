@@ -15,13 +15,14 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.cda.ch.lab.lrqc;
+package org.ehealth_connector.cda.ch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Participant1;
@@ -36,12 +37,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
  * <div class="de">Ärzte, welche in dem, in <CH-LRQC-CUST> angegebenen Labor
  * Untersuchungen durchführen KÖNNEN als Participant hinzugefügt werden.</div>
  */
-public class Participant extends MdhtFacade<Participant1> {
+public class ParticipantClaimer extends MdhtFacade<Participant1> {
 
 	/**
 	 * Instantiates a new participant.
 	 */
-	public Participant() {
+	public ParticipantClaimer() {
 		super(CDAFactory.eINSTANCE.createParticipant1());
 		getMdht().setAssociatedEntity(CDAFactory.eINSTANCE.createAssociatedEntity());
 		getMdht().getAssociatedEntity().setClassCode(RoleClassAssociative.PROV);
@@ -53,7 +54,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public Participant(Participant1 mdht) {
+	public ParticipantClaimer(Participant1 mdht) {
 		super(mdht);
 	}
 
@@ -68,7 +69,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 *            true, if the associatedEntity is a physician. false if it is a
 	 *            laboratory.
 	 */
-	public Participant(String gln, boolean isPhysician) {
+	public ParticipantClaimer(String gln, boolean isPhysician) {
 		this();
 		if (isPhysician) {
 			getMdht().setTypeCode(ParticipationType.IND);
@@ -90,7 +91,7 @@ public class Participant extends MdhtFacade<Participant1> {
 	 *            true, if the associatedEntity is a physician. false if it is a
 	 *            laboratory.
 	 */
-	public Participant(String gln, String zsr, boolean isPhysician) {
+	public ParticipantClaimer(String gln, String zsr, boolean isPhysician) {
 		this(gln, isPhysician);
 		addZsrId(zsr);
 	}

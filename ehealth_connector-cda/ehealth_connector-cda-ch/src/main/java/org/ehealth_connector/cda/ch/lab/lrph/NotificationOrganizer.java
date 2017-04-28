@@ -59,34 +59,4 @@ public class NotificationOrganizer extends org.ehealth_connector.cda.ihe.lab.Not
 		this();
 		setOutbreakIdentification(observation);
 	}
-
-	/**
-	 * Gets the outbreak identification observation.
-	 *
-	 * @return the outbreak identification observation
-	 */
-	public OutbreakIdentificationObservation getOutbreakIdentificationObservation() {
-		return new OutbreakIdentificationObservation(getMdht().getOutbreakIdentifications().get(0));
-	}
-
-	/**
-	 * * <div class="en">This element will be added, according to
-	 * [Melde-Verordnung EDI].</div> <div class="de">Dieses Element wird dann
-	 * angegeben, wenn gemäss [Melde-Verordnung EDI] Beobachtungen über dem für
-	 * den betreffenden Zeitpunkt und Ort zu erwartenden Niveau festgestellt
-	 * werden, die sonst nicht innerhalb von 24 Stunden oder gar nicht gemeldet
-	 * werden müssen. </div>
-	 *
-	 * @param outbreakIdentification
-	 *            the outbreak identification
-	 */
-	public void setOutbreakIdentification(
-			OutbreakIdentificationObservation outbreakIdentification) {
-		if (!getMdht().getOutbreakIdentifications().isEmpty()) {
-			getMdht().getComponents().clear();
-			getMdht().addObservation(outbreakIdentification.copy());
-		} else {
-			getMdht().addObservation(outbreakIdentification.copy());
-		}
-	}
 }

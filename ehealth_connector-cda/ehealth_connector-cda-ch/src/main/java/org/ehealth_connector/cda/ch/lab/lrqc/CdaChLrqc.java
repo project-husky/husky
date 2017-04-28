@@ -20,7 +20,9 @@ package org.ehealth_connector.cda.ch.lab.lrqc;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.utils.CdaUtil;
@@ -63,7 +65,7 @@ public class CdaChLrqc
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
 
 	/** Root ID for the ZSR ID. */
-	public static final String ZSR_ID_ROOT = "2.16.756.5.30.1.123.100.2.1.1";
+	public static final String ZSR_ID_ROOT = CodeSystems.SwissZSR.getCodeSystemId();
 
 	/**
 	 * Standard constructor.
@@ -321,9 +323,9 @@ public class CdaChLrqc
 			sectionCode = SpecialtySections.getEnum(section).getCode();
 		}
 
-		SpecimenAct se;
+		AbstractSpecimenAct se;
 		if (getSpecimenAct() == null) {
-			se = new SpecimenAct();
+			se = new AbstractSpecimenAct();
 		} else {
 			se = getSpecimenAct();
 		}
@@ -333,17 +335,56 @@ public class CdaChLrqc
 	}
 
 	/**
-	 * Adds the participant. <div class="en">Physicians performing examinations
-	 * in the given laboratory MAY be added as participants.</div>
-	 * <div class="de">Ärzte, welche in dem, in <CH-LRQC-CUST> angegebenen Labor
-	 * Untersuchungen durchführen KÖNNEN als Participant hinzugefügt
-	 * werden.</div>
+	 * Convenience function to add a Laboratory Battery Organizer and create the
+	 * necessary elements, if they do not exist. If the elements exist, their
+	 * contents will not be overwritten.
 	 *
-	 * @param participant
-	 *            the participant
+	 * These elements are: LaboratorySpecialtySection,
+	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given
+	 * Laboratory Battery Organizer
+	 *
+	 * @param organizer
+	 *            the LaboratoryBatteryOrganizer holding at least one
+	 *            LaboratoryObservation
+	 * @param sectionCode
+	 *            the LOINC code for the LaboratorySpecialtySection
 	 */
-	public void addParticipant(Participant participant) {
-		getMdht().getParticipants().add(participant.getMdht());
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
+			Code sectionCode) {
+		LaboratorySpecialtySection laboratorySpecialtySection;
+		if (getLaboratorySpecialtySection() == null) {
+			if (sectionCode != null) {
+				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+						getLanguageCode());
+				getMdht().setCode(sectionCode.getCE());
+			} else {
+				laboratorySpecialtySection = new LaboratorySpecialtySection();
+			}
+		} else {
+			laboratorySpecialtySection = getLaboratorySpecialtySection();
+		}
+
+		LaboratoryReportDataProcessingEntry lrdpe;
+		if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry() == null) {
+			lrdpe = new LaboratoryReportDataProcessingEntry();
+		} else {
+			lrdpe = laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
+		}
+
+		AbstractSpecimenAct se;
+		if (lrdpe.getSpecimenAct() == null) {
+			se = new AbstractSpecimenAct();
+			if (sectionCode != null) {
+				se.setCode(sectionCode);
+			}
+		} else {
+			se = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
+		}
+
+		se.addLaboratoryBatteryOrganizer(organizer);
+		lrdpe.setSpecimenAct(se);
+		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
 
 	/*
@@ -398,9 +439,9 @@ public class CdaChLrqc
 			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				final SpecimenAct se = lrdpe.getSpecimenAct();
+				final AbstractSpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
-					lbol.addAll(se.getLaboratoryBatteryOrganizers());
+					lbol.addAll(se.getLrqcLaboratoryBatteryOrganizers());
 				}
 			}
 		}
@@ -425,13 +466,13 @@ public class CdaChLrqc
 	 *
 	 * @return the List of Participants
 	 */
-	public List<Participant> getParticipantsLrqc() {
-		final ArrayList<Participant> al = new ArrayList<Participant>();
+	public List<ParticipantClaimer> getParticipantsLrqc() {
+		final ArrayList<ParticipantClaimer> al = new ArrayList<ParticipantClaimer>();
 		for (final Participant1 p : getMdht().getParticipants()) {
 			if (p.getAssociatedEntity() != null) {
 				for (final II ii : p.getAssociatedEntity().getIds()) {
 					if (ii.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
-						al.add(new Participant(p));
+						al.add(new ParticipantClaimer(p));
 					}
 				}
 			}
@@ -489,7 +530,7 @@ public class CdaChLrqc
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public SpecimenAct getSpecimenAct() {
+	public AbstractSpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)
@@ -569,7 +610,7 @@ public class CdaChLrqc
 	 * @param sectionCode
 	 *            the section code
 	 */
-	public void setSpecimenAct(SpecimenAct act, Code sectionCode) {
+	public void setSpecimenAct(AbstractSpecimenAct act, Code sectionCode) {
 		LaboratorySpecialtySection laboratorySpecialtySection;
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {

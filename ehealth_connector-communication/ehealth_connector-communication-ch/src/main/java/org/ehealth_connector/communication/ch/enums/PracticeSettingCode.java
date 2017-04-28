@@ -43,7 +43,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Allgemeinmedizin </div> <div class="fr">Médecine
 	 * générale </div> <div class="it">Medicina generale </div>
 	 */
-	ALLGEMEINMEDIZIN("10002", "Allgemeinmedizin "),
+	ALLGEMEINMEDIZIN("10002", "Allgemeinmedizin"),
 	/**
 	 * <div class="de">Andere nicht näher spezifizierte medzinische
 	 * Fachrichtung</div> <div class="fr">Autres sans spécification</div>
@@ -236,7 +236,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Pathologie </div> <div class="fr">Pathologie</div>
 	 * <div class="it">Patologia </div>
 	 */
-	PATHOLOGIE("10037", "Pathologie "),
+	PATHOLOGIE("10037", "Pathologie"),
 	/**
 	 * <div class="de">Pflege</div> <div class="fr">Soins</div>
 	 * <div class="it">Cure</div>
@@ -252,7 +252,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="fr">Kinésithérapie </div> <div class="it">Medicina fisica
 	 * </div>
 	 */
-	PHYSIKALISCHE_MEDIZIN("10039", "Physikalische Medizin "),
+	PHYSIKALISCHE_MEDIZIN("10039", "Physikalische Medizin"),
 	/**
 	 * <div class="de">Physiotherapie</div> <div class="fr">Physiothérapie</div>
 	 * <div class="it">Fisioterapia</div>
@@ -279,7 +279,7 @@ public enum PracticeSettingCode implements CodedMetadataEnumInterface {
 	 * <div class="de">Prävention </div> <div class="fr">Prévention </div>
 	 * <div class="it">Prevenzione </div>
 	 */
-	PRAVENTION("10044", "Prävention "),
+	PRAVENTION("10044", "Prävention"),
 	/**
 	 * <div class="de">Psychiatrie und Psychotherapie</div>
 	 * <div class="fr">Psychiatrie et psychothérapie</div>

@@ -62,6 +62,19 @@ public class SpecimenAct extends AbstractSpecimenAct {
 	}
 
 	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	@Override
+	public void setCode(Code code) {
+		if (code != null) {
+			getMdht().setCode(code.getCD());
+		}
+	}
+
+	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct#setStatusCode(org.ehealth_connector.common.Code)

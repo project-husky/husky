@@ -25,14 +25,13 @@ import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -98,6 +97,18 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		this();
 		setCode(code);
 		setValue(value);
+	}
+
+	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
 	}
 
 	/**
@@ -196,36 +207,5 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 */
 	public void setCode(VitalSignList code) {
 		setCode(code.getCode());
-	}
-
-	/**
-	 * Set a new interpretations of the vital sign observation.
-	 *
-	 * @param code
-	 *            <div class="de">Beurteilung des Resultats</div>
-	 *            <div class="fr"></div> <div class="it"></div>
-	 */
-	public void setInterpretationCode(ObservationInterpretationForVitalSign code) {
-		if (code != null) {
-			getVitalSignObservation().getInterpretationCodes().clear();
-			getVitalSignObservation().getInterpretationCodes().add(code.getCE());
-		}
-	}
-
-	/**
-	 * Sets the method code translation (code with NullFlavor.Na and the given
-	 * translation)
-	 *
-	 * @param translation
-	 *            the new method code translation
-	 */
-	public void setMethodCodeTranslation(Code translation) {
-		getVitalSignObservation().getMethodCodes().clear();
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(NullFlavor.NA);
-		if (translation != null) {
-			ce.getTranslations().add(translation.getCE());
-		}
-		getVitalSignObservation().getMethodCodes().add(ce);
 	}
 }

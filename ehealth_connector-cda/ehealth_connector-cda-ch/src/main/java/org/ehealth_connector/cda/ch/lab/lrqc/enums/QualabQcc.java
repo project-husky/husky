@@ -20,6 +20,7 @@ package org.ehealth_connector.cda.ch.lab.lrqc.enums;
 import java.util.Date;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -57,7 +58,7 @@ public enum QualabQcc {
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>.
 	 */
-	public static final String CODE_SYSTEM_OID = "2.51.1.3";
+	public static final String CODE_SYSTEM_OID = CodeSystems.GLN.getCodeSystemId();
 
 	/** <div class="en">Code for Interregionale Blutspende SRK AG</div>. */
 	public static final String INTERREGIONALE_BLUTSPENDE_SRK_AG_CODE = "7601001363540";

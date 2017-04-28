@@ -39,14 +39,55 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-public abstract class AbstractVitalSignObservation extends AbstractObservation {
+public class AbstractVitalSignObservation extends AbstractObservation {
 
 	/** The m vital sign observation. */
 	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
 
+	/**
+	 * Instantiates a new vital signs observation.
+	 */
+	public AbstractVitalSignObservation() {
+		super(null);
+		initMdht();
+		setMethodCodeTranslation(null);
+	}
+
+	/**
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param code
+	 *            the code according to Lrtp specification chap. 5.6.5
+	 * @param effectiveTime
+	 *            the date time of result
+	 * @param value
+	 *            the value according to [IHE PCC TF-2] 6.3.4.22.3
+	 */
+	public AbstractVitalSignObservation(Code code, Date effectiveTime, Value value) {
+		super(null);
+		setCode(code);
+		setValue(value);
+		setEffectiveTime(effectiveTime);
+	}
+
 	protected AbstractVitalSignObservation(Observation mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Adds the comment entry.
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void addCommentEntry(SectionAnnotationCommentEntry entry) {
+		getVitalSignObservation().addAct(entry.getMdht());
+		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;
+		getVitalSignObservation().getEntryRelationships().get(nb)
+				.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		getVitalSignObservation().getEntryRelationships().get(nb).setInversionInd(true);
 	}
 
 	/**
@@ -255,6 +296,20 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 	}
 
 	/**
+	 * Set a new interpretations of the vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="de">Beurteilung des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 */
+	public void setInterpretationCode(Code code) {
+		if (code != null) {
+			getVitalSignObservation().getInterpretationCodes().clear();
+			getVitalSignObservation().getInterpretationCodes().add(code.getCE());
+		}
+	}
+
+	/**
 	 * Set a new language code of the vital sign observation, and its codes.
 	 *
 	 * @param languageCode
@@ -276,6 +331,23 @@ public abstract class AbstractVitalSignObservation extends AbstractObservation {
 				tsCode.setDisplayName(aSite.getDisplayName(languageCode));
 			}
 		}
+	}
+
+	/**
+	 * Sets the method code translation (code with NullFlavor.Na and the given
+	 * translation)
+	 *
+	 * @param translation
+	 *            the new method code translation
+	 */
+	public void setMethodCodeTranslation(Code translation) {
+		getVitalSignObservation().getMethodCodes().clear();
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(NullFlavor.NA);
+		if (translation != null) {
+			ce.getTranslations().add(translation.getCE());
+		}
+		getVitalSignObservation().getMethodCodes().add(ce);
 	}
 
 	/**

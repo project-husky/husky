@@ -18,9 +18,11 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtActFacade;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * The Class AbstractSpecimenAct.
@@ -45,6 +47,20 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	}
 
 	/**
+	 * Adds the laboratory battery organizer.
+	 *
+	 * @param laboratoryBatteryOrganizer
+	 *            the laboratory battery organizer
+	 */
+	public void addLaboratoryBatteryOrganizer(
+			LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
+		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
+		// Set the right type for the entryRelationship
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
+	}
+
+	/**
 	 * Gets the status code.
 	 *
 	 * @return the status code
@@ -54,6 +70,18 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 			return new Code(getMdht().getStatusCode());
 		}
 		return null;
+	}
+
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	public void setCode(Code code) {
+		if (code != null) {
+			getMdht().setCode(code.getCD());
+		}
 	}
 
 	/**

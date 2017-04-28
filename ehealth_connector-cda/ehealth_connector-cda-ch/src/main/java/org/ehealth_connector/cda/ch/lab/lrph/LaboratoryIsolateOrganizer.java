@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.cda.ihe.lab.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Participant;
 import org.ehealth_connector.common.Specimen;
@@ -30,9 +30,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
-import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
-import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
 
 /**
  * The Class LaboratoryIsolateOrganizer.
@@ -86,12 +84,7 @@ public class LaboratoryIsolateOrganizer
 	 *            reference
 	 */
 	public LaboratoryIsolateOrganizer(String reference) {
-		this();
-		final Code code = new Code();
-		code.setOriginalTextReference(reference);
-		final Specimen specimen = new Specimen();
-		specimen.setCode(code);
-		setSpecimen(specimen);
+		super(reference);
 	}
 
 	/**
@@ -114,7 +107,21 @@ public class LaboratoryIsolateOrganizer
 	 * @param labBatteryOrganizer
 	 *            the lab battery organizer
 	 */
+	@Override
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
+		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
+	}
+
+	/**
+	 * Adds the laboratory battery organizer.
+	 *
+	 * @param labBatteryOrganizer
+	 *            the lab battery organizer
+	 */
+	public void addLaboratoryBatteryOrganizer(
+			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer labBatteryOrganizer) {
 		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
@@ -183,30 +190,4 @@ public class LaboratoryIsolateOrganizer
 		return nl;
 	}
 
-	/**
-	 * Gets the specimen.
-	 *
-	 * @return the specimen
-	 */
-	public Specimen getSpecimen() {
-		if ((getMdht().getSpecimens() != null) && !getMdht().getSpecimens().isEmpty()) {
-			return new Specimen(getMdht().getSpecimens().get(0));
-		}
-		return null;
-	}
-
-	/**
-	 * Sets the specimen.
-	 *
-	 * @param specimen
-	 *            the new specimen
-	 */
-	public void setSpecimen(Specimen specimen) {
-		getMdht().getSpecimens().clear();
-		specimen.getMdht().setTypeCode(ParticipationType.SPC);
-		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
-		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
-				.setClassCode(EntityClassRoot.MIC);
-		getMdht().getSpecimens().add(specimen.getMdht());
-	}
 }

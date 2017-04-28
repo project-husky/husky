@@ -18,7 +18,14 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Specimen;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityClassRoot;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassSpecimen;
 
 /**
  * The Class LaboratoryIsolateOrganizer. The Laboratory Isolate Organizer SHALL
@@ -48,4 +55,74 @@ public class LaboratoryIsolateOrganizer extends
 		super(mdht);
 	}
 
+	/**
+	 *
+	 * Creates a new Laboratory Isolate Organizer. One specimen element
+	 * (specimen, specimenRole, and specimenPlayingEntity) will be created with
+	 * the given reference.
+	 *
+	 * @param reference
+	 *            the reference will be set into
+	 *            specimen/specimenRole/specimenPlayingEntity/originalText/
+	 *            reference
+	 */
+	public LaboratoryIsolateOrganizer(String reference) {
+		this();
+		final Code code = new Code();
+		code.setOriginalTextReference(reference);
+		final Specimen specimen = new Specimen();
+		specimen.setCode(code);
+		setSpecimen(specimen);
+	}
+
+	/**
+	 * Adds the author.
+	 *
+	 * @param author
+	 *            the author
+	 */
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
+	}
+
+	/**
+	 * Adds the laboratory battery organizer.
+	 *
+	 * @param labBatteryOrganizer
+	 *            the lab battery organizer
+	 */
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer labBatteryOrganizer) {
+		getMdht().addOrganizer(labBatteryOrganizer.getMdht());
+		final int nb = getMdht().getComponents().size() - 1;
+		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
+	}
+
+	/**
+	 * Gets the specimen.
+	 *
+	 * @return the specimen
+	 */
+	public Specimen getSpecimen() {
+		if ((getMdht().getSpecimens() != null) && !getMdht().getSpecimens().isEmpty()) {
+			return new Specimen(getMdht().getSpecimens().get(0));
+		}
+		return null;
+	}
+
+	/**
+	 * Sets the specimen.
+	 *
+	 * @param specimen
+	 *            the new specimen
+	 */
+	public void setSpecimen(Specimen specimen) {
+		getMdht().getSpecimens().clear();
+		specimen.getMdht().setTypeCode(ParticipationType.SPC);
+		specimen.getMdht().getSpecimenRole().setClassCode(RoleClassSpecimen.SPEC);
+		specimen.getMdht().getSpecimenRole().getSpecimenPlayingEntity()
+				.setClassCode(EntityClassRoot.MIC);
+		getMdht().getSpecimens().add(specimen.getMdht());
+	}
 }

@@ -26,9 +26,12 @@ import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * The Class BloodGroupObservation.
@@ -84,6 +87,24 @@ public class BloodGroupObservation
 	}
 
 	/**
+	 * Add a comment entry.
+	 *
+	 * @param commentEntry
+	 *            the new comment entry
+	 */
+	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
+		this.getMdht().addAct(commentEntry.copy());
+		// need to add the the Subj and setInversionInd, cannot do this
+		// automatically with mdht
+		for (final EntryRelationship entryRelationShip : getMdht().getEntryRelationships()) {
+			if (entryRelationShip.getAct() instanceof Comment) {
+				entryRelationShip.setInversionInd(true);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			}
+		}
+	}
+
+	/**
 	 * Gets the author list.
 	 *
 	 * @return the author list
@@ -124,6 +145,20 @@ public class BloodGroupObservation
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtFacade#getTextReference()
+	 */
+	@Override
+	public String getTextReference() {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
+			return this.getMdht().getText().getReference().getValue();
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the value enum.
 	 *
 	 * @return the value enum
@@ -158,6 +193,22 @@ public class BloodGroupObservation
 	 */
 	public void setContentIdReference(String reference) {
 		getMdht().setText(Util.createReference(reference));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtFacade#setTextReference(java.lang.String)
+	 */
+	@Override
+	public void setTextReference(String textReference) {
+		if (textReference != null) {
+			if (!textReference.equals("")) {
+				if (!textReference.startsWith("#"))
+					textReference = "#" + textReference;
+				this.getMdht().setText(Util.createReference(textReference));
+			}
+		}
 	}
 
 	/**

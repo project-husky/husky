@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
+import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -73,7 +74,20 @@ public class Identificator {
 		return null;
 	}
 
-	private II mII;
+	private final II mII;
+
+	/**
+	 * <div class="de">Creates a new Identificator</div>
+	 * <div class="de">Erstellt einen neuen Identifikator.</div>
+	 * 
+	 * @param identifier
+	 *            the identifier to be used
+	 */
+	public Identificator(Identifier identifier) {
+		mII = DatatypesFactory.eINSTANCE.createII();
+		setRoot(identifier.getSystem());
+		setExtension(identifier.getValue());
+	}
 
 	/**
 	 * <div class="de">Creates a new Identificator</div>

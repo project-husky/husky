@@ -27,12 +27,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.ehealth_connector.fhir.FhirPatient;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 import org.w3c.dom.Element;
-
-import ca.uhn.fhir.model.dstu2.resource.Organization;
 
 /**
  * Test of class V3PixPdqAdapter
@@ -87,17 +86,17 @@ public class V3PixPdqAdapterTest {
 		final List<FhirPatient> patients = v3PixPdqAdapter.getPatientsFromPdqQuery(response);
 		assertEquals(2, patients.size());
 		final FhirPatient james = patients.get(0);
-		assertEquals("Jones", james.getNameFirstRep().getFamilyAsSingleString());
+		assertEquals("Jones", james.getNameFirstRep().getFamily());
 		assertEquals("James", james.getNameFirstRep().getGivenAsSingleString());
 
-		assertEquals("work", james.getTelecom().get(0).getUse());
+		assertEquals("work", james.getTelecom().get(0).getUse().toCode().toLowerCase());
 		assertEquals("+1-481-555-7684;ext=2342", james.getTelecom().get(0).getValue());
-		assertEquals("home", james.getTelecom().get(1).getUse());
+		assertEquals("home", james.getTelecom().get(1).getUse().toCode().toLowerCase());
 		assertEquals("+1-765-555-4352", james.getTelecom().get(1).getValue());
-		assertEquals("male", james.getGender());
+		assertEquals("male", james.getGender().toCode().toLowerCase());
 		assertEquals("1963-08-04", james.getBirthDateElement().getValueAsString());
 		assertEquals("3443 North Arctic Avenue",
-				james.getAddressFirstRep().getLineFirstRep().getValue());
+				james.getAddressFirstRep().getLine().get(0).getValue());
 		assertEquals("Some City", james.getAddressFirstRep().getCity());
 		assertEquals("IL", james.getAddressFirstRep().getState());
 
@@ -118,13 +117,13 @@ public class V3PixPdqAdapterTest {
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
 		final FhirPatient jim = patients.get(1);
-		assertEquals("Jones", jim.getNameFirstRep().getFamilyAsSingleString());
+		assertEquals("Jones", jim.getNameFirstRep().getFamily());
 		assertEquals("Jim", jim.getNameFirstRep().getGivenAsSingleString());
-		assertEquals("home", jim.getTelecom().get(0).getUse());
+		assertEquals("home", jim.getTelecom().get(0).getUse().toCode().toLowerCase());
 		assertEquals("+1-795-555-4745", jim.getTelecom().get(0).getValue());
 		assertEquals("1963-07-13", jim.getBirthDateElement().getValueAsString());
 		assertEquals("8734 Blue Ocean Street",
-				jim.getAddressFirstRep().getLineFirstRep().getValue());
+				jim.getAddressFirstRep().getLine().get(0).getValue());
 		assertEquals("Other City", jim.getAddressFirstRep().getCity());
 		assertEquals("IL", jim.getAddressFirstRep().getState());
 

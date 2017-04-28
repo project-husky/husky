@@ -87,10 +87,12 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	 *            the new date time of result
 	 */
 	public void setEffectiveTime(Date dateTimeOfResult) {
-		try {
-			getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
-		} catch (final ParseException e) {
-			e.printStackTrace();
+		if (dateTimeOfResult != null) {
+			try {
+				getMdht().setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+			} catch (final ParseException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

@@ -51,8 +51,8 @@ import org.w3c.dom.NodeList;
  */
 public class ImmunizationRecommendationTest {
 
-	private XPathFactory xpathFactory = XPathFactory.newInstance();
-	private XPath xpath = xpathFactory.newXPath();
+	private final XPathFactory xpathFactory = XPathFactory.newInstance();
+	private final XPath xpath = xpathFactory.newXPath();
 
 	@Test
 	public void testAddCriterionEntry() throws Exception {
@@ -144,7 +144,7 @@ public class ImmunizationRecommendationTest {
 		final Author author = new Author(name);
 		author.addId(new Identificator("OID des jeweiligen Systems",
 				"D der eintragenden Person, welche innerhalb der OID des jeweiligen Systems eindeutig ist"));
-		author.setAuthorIsPatient(true);
+		author.setFunctionCodePatient();
 
 		immunization.setAuthor(author);
 

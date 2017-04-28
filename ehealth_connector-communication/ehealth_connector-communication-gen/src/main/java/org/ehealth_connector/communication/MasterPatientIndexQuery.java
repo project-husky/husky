@@ -29,10 +29,9 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQuery;
 import org.ehealth_connector.fhir.FhirPatient;
+import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.v3.V3Package;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 
 /**
  * Convenience class MasterPatientIndexQuery adds the MpiQuery functionality for
@@ -135,8 +134,9 @@ public class MasterPatientIndexQuery {
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
 		fixV3Package();
-		v3PdqQuery.addPatientIdentifier(new IdentifierDt("urn:oid:" + identificator.getRoot(),
-				identificator.getExtension()));
+		Identifier id = new Identifier();
+		id.setSystem(identificator.getRoot());
+		id.setValue(identificator.getExtension());
 		postFixV3Package();
 		return this;
 	}

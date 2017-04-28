@@ -157,7 +157,7 @@ public class ImmunizationTest {
 		final Author author = new Author(name);
 		author.addId(new Identificator("OID des jeweiligen Systems",
 				"D der eintragenden Person, welche innerhalb der OID des jeweiligen Systems eindeutig ist"));
-		author.setAuthorIsPatient(true);
+		author.setFunctionCodePatient();
 
 		immunization.setAuthor(author);
 

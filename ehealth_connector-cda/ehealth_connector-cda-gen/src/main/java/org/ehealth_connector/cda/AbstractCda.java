@@ -58,6 +58,8 @@ import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.Order;
 import org.openhealthtools.mdht.uml.cda.ParentDocument;
 import org.openhealthtools.mdht.uml.cda.Participant1;
+import org.openhealthtools.mdht.uml.cda.PatientRole;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.RelatedDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CDACH;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
@@ -65,9 +67,12 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClass;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 
 /**
@@ -710,10 +715,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		assCust.setRepresentedCustodianOrganization(
 				Util.createCustodianOrganizationFromOrganization(organization));
 
-		// Setzt die GLN des Arztes
-		if (organization.getMdhtOrganization().getIds().size() > 0) {
-			assCust.getRepresentedCustodianOrganization().getIds()
-					.addAll(organization.getMdhtOrganization().getIds());
+		if (organization != null) {
+			// Setzt die GLN des Arztes
+			if (organization.getMdhtOrganization().getIds().size() > 0) {
+				assCust.getRepresentedCustodianOrganization().getIds()
+						.addAll(organization.getMdhtOrganization().getIds());
+			}
 		}
 
 		mdhtCustodian.setAssignedCustodian(assCust);
@@ -792,7 +799,47 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            Patient
 	 */
 	public void setPatient(Patient patient) {
-		getDoc().getRecordTargets().add(patient.getMdhtRecordTarget());
+		if (patient != null) {
+			if (patient.isNonHumenSubject()) {
+				// Create a record target for a non-human subject
+				final RecordTarget rt = CDAFactory.eINSTANCE.createRecordTarget();
+				final PatientRole pr = CDAFactory.eINSTANCE.createPatientRole();
+				final org.openhealthtools.mdht.uml.cda.Patient p = CDAFactory.eINSTANCE
+						.createPatient();
+
+				// Patient
+				p.setNullFlavor(NullFlavor.OTH);
+				pr.setPatient(p);
+				// Patient Role
+				pr.setClassCode(RoleClass.PAT);
+				if (patient.getIds() != null) {
+					if (!patient.getIds().isEmpty()) {
+						for (Identificator item : patient.getIds()) {
+							pr.getIds().add(item.getIi());
+						}
+					}
+				}
+				if (patient.getIds() == null) {
+					final II ii = DatatypesFactory.eINSTANCE.createII();
+					ii.setNullFlavor(NullFlavor.NA);
+					pr.getIds().add(ii);
+				}
+
+				rt.setPatientRole(pr);
+				// Record Target
+				final II tIi = DatatypesFactory.eINSTANCE.createII();
+				// IHE Non-Human Subject
+				tIi.setRoot("1.3.6.1.4.1.19376.1.3.3.1.2");
+				rt.getTemplateIds().add(tIi);
+				rt.setTypeCode(ParticipationType.RCT);
+
+				getMdht().getRecordTargets().clear();
+				getMdht().getRecordTargets().add(rt);
+
+			} else
+				getDoc().getRecordTargets().add(patient.getMdhtRecordTarget());
+		}
+
 	}
 
 	/**

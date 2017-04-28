@@ -60,6 +60,13 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	SwissSSN("2.16.756.5.32", "AHV Nummer (die Neue)"),
 	/**
+	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
+	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
+	 * nouveaux)</div>
+	 */
+	SwissZSR("2.16.756.5.30.1.123.100.2.1.1", "ZSR Nummer der SASIS"),
+
+	/**
 	 * OID: 2.16.756.5.31 <div class="en">AHV Number (the old one)</div>
 	 * <div class="de">AHV Nummer (die Alte)</div> <div class="fr">No AVS (le
 	 * vieil)</div>

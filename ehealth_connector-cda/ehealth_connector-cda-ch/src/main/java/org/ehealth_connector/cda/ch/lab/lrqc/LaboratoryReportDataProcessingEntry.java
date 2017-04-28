@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryReportDataProcessingEntry;
 
 /**
@@ -38,6 +39,17 @@ public class LaboratoryReportDataProcessingEntry
 	}
 
 	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param act
+	 *            the SpecimentAct
+	 */
+	public LaboratoryReportDataProcessingEntry(AbstractSpecimenAct act) {
+		this();
+		setSpecimenAct(act);
+	}
+
+	/**
 	 * Instantiates a new laboratory report data processing entry.
 	 *
 	 * @param mdht
@@ -49,24 +61,13 @@ public class LaboratoryReportDataProcessingEntry
 	}
 
 	/**
-	 * Instantiates the class with the required elements.
-	 *
-	 * @param act
-	 *            the SpecimentAct
-	 */
-	public LaboratoryReportDataProcessingEntry(SpecimenAct act) {
-		this();
-		setSpecimenAct(act);
-	}
-
-	/**
 	 * Gets the specimen act.
 	 *
 	 * @return the specimen act
 	 */
-	public SpecimenAct getSpecimenAct() {
+	public AbstractSpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
-			return new SpecimenAct(getMdht().getAct());
+			return new AbstractSpecimenAct(getMdht().getAct());
 		}
 		return null;
 	}
@@ -77,7 +78,7 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param specimenAct
 	 *            the new specimen act
 	 */
-	public void setSpecimenAct(SpecimenAct specimenAct) {
+	public void setSpecimenAct(AbstractSpecimenAct specimenAct) {
 		getMdht().setAct(specimenAct.copy());
 	}
 }

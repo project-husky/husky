@@ -59,7 +59,7 @@ public class InMemoryMockMpiAdapterTests {
 		final FhirPatient patient = TestPatient.getFhirPatientMueller();
 		assertTrue(mpiAdapter.addPatient(patient));
 		final String patientId = mpiAdapter.queryPatientId(patient);
-		patient.getName().get(0).getFamily().get(0).setValue("Müster");
+		patient.getName().get(0).setFamily("Müster");
 		assertTrue(mpiAdapter.updatePatient(patient));
 		final String patientIdAfterUpdate = mpiAdapter.queryPatientId(patient);
 		assertEquals(patientId, patientIdAfterUpdate);

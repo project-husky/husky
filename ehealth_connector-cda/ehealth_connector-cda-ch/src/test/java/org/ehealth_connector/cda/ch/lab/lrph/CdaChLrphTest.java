@@ -32,6 +32,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
@@ -97,7 +98,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		final CdaChLrph cda = new CdaChLrph();
 		LaboratorySpecialtySection sps = new LaboratorySpecialtySection();
 		LaboratoryReportDataProcessingEntry lrd = new LaboratoryReportDataProcessingEntry();
-		SpecimenAct spa = new SpecimenAct();
+		AbstractSpecimenAct spa = new AbstractSpecimenAct();
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		LaboratoryObservation lo = new LaboratoryObservation();
 
@@ -126,12 +127,12 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
+				.getSpecimenAct().getLrphLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getSpecimenAct().getLrphLaboratoryBatteryOrganizers().get(0)
 				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
+				.getSpecimenAct().getLrphLaboratoryBatteryOrganizers().get(0)
 				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
@@ -139,7 +140,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntry().getSpecimenReceivedEntry());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
-				.getSpecimenAct().getLaboratoryIsolateOrganizers());
+				.getSpecimenAct().getLrphLaboratoryIsolateOrganizers());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getNotificationOrganizer());
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
@@ -157,13 +158,13 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0));
+				.getLrphLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+				.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
 
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
@@ -174,7 +175,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 				.getSpecimenCollectionEntry().getSpecimenReceivedEntry());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryIsolateOrganizers());
+				.getLrphLaboratoryIsolateOrganizers());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 				.getNotificationOrganizer());
@@ -188,8 +189,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(LabObsListSnomed.BRUCELLA.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-						.getCodeAsSnomedEnum().getCode()));
+						.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
+						.get(0).getCodeAsSnomedEnum().getCode()));
 	}
 
 	@Test

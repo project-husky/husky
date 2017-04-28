@@ -24,11 +24,10 @@ import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.communication.mpi.MpiQuery;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
 import org.ehealth_connector.fhir.FhirPatient;
+import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.ihe.utils.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
 
 /**
  * InMemoryMockMpiAdapter to test a basic MPI with no crossmatching of patient
@@ -74,7 +73,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				// just copied the id of the patient currently, no demographic
 				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
-				final IdentifierDt id = immutablePatient.addIdentifier();
+				final org.hl7.fhir.dstu3.model.Identifier id = immutablePatient.addIdentifier();
 				id.setSystem(URN_OID + mpiCommunityOid);
 				id.setValue(mpiIdendity);
 				map.put(mapKey, immutablePatient);
@@ -165,9 +164,9 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 */
 	private String getPatientId(FhirPatient patient, String system) {
 		initHomeCommunityId(patient);
-		for (final IdentifierDt identifierDt : patient.getIdentifier()) {
-			if (identifierDt.getSystem().equals(system)) {
-				return identifierDt.getValue();
+		for (final Identifier Identifier : patient.getIdentifier()) {
+			if (Identifier.getSystem().equals(system)) {
+				return Identifier.getValue();
 			}
 		}
 		return null;
@@ -309,7 +308,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				// just copied the id of the patient currently, no demographic
 				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
-				final IdentifierDt id = immutablePatient.addIdentifier();
+				final Identifier id = immutablePatient.addIdentifier();
 				id.setSystem(URN_OID + mpiCommunityOid);
 				id.setValue(getMpiPatientId(oldPatient));
 				map.put(mapKey, immutablePatient);

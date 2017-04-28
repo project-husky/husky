@@ -615,6 +615,24 @@ public class DateUtil {
 	}
 
 	/**
+	 * Parse date in format yyyy-MM-dd.
+	 *
+	 * @param value
+	 *            <br>
+	 *            <div class="de">value</div>
+	 * @return java.util.Date
+	 */
+	public static Date parseDateyyyyMMdd2(String value) {
+		try {
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException(
+					"Cannot parse date, value=[" + value + "]. Expected format is yyyy-MM-dd.", e);
+		}
+	}
+
+	/**
 	 * Parse date in format yyyyMMddHHmm.
 	 *
 	 * @param value

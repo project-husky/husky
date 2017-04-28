@@ -34,7 +34,7 @@ public enum Confidentiality {
 	/**
 	 * <div class="de">Vertraulich </div> <div class="fr"></div>
 	 */
-	RESTRICED("R", "2.16.840.1.113883.5.25", "Restricted"),
+	RESTRICTED("R", "2.16.840.1.113883.5.25", "Restricted"),
 
 	/**
 	 * <div class="de">Streng vertraulich</div> <div class="fr"></div>

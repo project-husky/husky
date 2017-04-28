@@ -22,74 +22,67 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
+import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation;
-import org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryReportDataProcessingEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection;
-import org.ehealth_connector.cda.ch.lab.lrtp.SpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignObservation;
 import org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
-import org.ehealth_connector.cda.enums.epsos.BloodGroup;
-import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
-import org.ehealth_connector.common.Address;
+import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.FhirCommon;
+import org.hl7.fhir.dstu3.model.Basic;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DocumentManifest;
+import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.Person;
+import org.hl7.fhir.dstu3.model.Practitioner;
+import org.hl7.fhir.dstu3.model.Quantity;
+import org.hl7.fhir.dstu3.model.Ratio;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.dstu3.model.TimeType;
+import org.hl7.fhir.exceptions.FHIRException;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.ExtensionDt;
-import ca.uhn.fhir.model.api.IDatatype;
-import ca.uhn.fhir.model.api.IResource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
-import ca.uhn.fhir.model.dstu2.composite.CodingDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.composite.QuantityDt;
-import ca.uhn.fhir.model.dstu2.composite.RatioDt;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
-import ca.uhn.fhir.model.dstu2.resource.Basic;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
-import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.Observation.Component;
-import ca.uhn.fhir.model.dstu2.resource.Observation.Related;
-import ca.uhn.fhir.model.dstu2.resource.Organization;
-import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.resource.Person;
-import ca.uhn.fhir.model.dstu2.resource.Practitioner;
-import ca.uhn.fhir.model.primitive.DateTimeDt;
-import ca.uhn.fhir.model.primitive.StringDt;
-import ca.uhn.fhir.model.primitive.XhtmlDt;
 import ca.uhn.fhir.parser.IParser;
 
 public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	/**
-	 * <div class="en">Type of the bundle to define whether the resulting CDA
-	 * document contains full or masked patient demographics</div>
+	 * <div class="en">Type of the docManifest to define whether the resulting
+	 * CDA document contains full or masked patient demographics</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static enum DocTypeCode {
@@ -111,12 +104,12 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	}
 
 	/**
-	 * The class FhirCdaChLrtp is a derived FHIR Bundle containing all
+	 * The class FhirCdaChLrtp is a derived FHIR docManifest containing all
 	 * information of an LRTP document corresponding to the CDA-CH-LRTP
 	 * specification
 	 */
-	@ResourceDef(name = "Bundle")
-	public static class LrtpDocument extends Bundle {
+	@ResourceDef(name = "DocumentManifest")
+	public static class LrtpDocument extends DocumentManifest {
 
 		private static final long serialVersionUID = 7883384366035439713L;
 
@@ -124,49 +117,49 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		@Child(name = "comment")
 		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
-		private ResourceReferenceDt comment;
+		private Reference comment;
 
 		/** The custodian. */
 		@Child(name = "custodian")
 		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
-		private ResourceReferenceDt custodian;
+		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
 		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
-		private ResourceReferenceDt docAuthor;
+		private Reference docAuthor;
 
 		/** The doc language. */
 		@Child(name = "docLanguage")
 		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docLanguage")
-		private ResourceReferenceDt docLanguage;
+		private Reference docLanguage;
 
 		/** The doc type. */
 		@Child(name = "docType")
 		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
-		private ResourceReferenceDt docType;
+		private Reference docType;
 
 		/** The informationRecipient. */
 		@Child(name = "docInformationRecipient")
 		@Extension(url = FhirCommon.urnUseAsInformationRecipient, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "informationRecipient")
-		private ResourceReferenceDt informationRecipient;
+		private Reference informationRecipient;
 
 		/** The legal authenticator. */
 		@Child(name = "legalAuthenticator")
 		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "legalAuthenticator")
-		private ResourceReferenceDt legalAuthenticator;
+		private Reference legalAuthenticator;
 
 		/** The patient. */
 		@Child(name = "patient")
 		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
-		private ResourceReferenceDt patient;
+		private Reference patient;
 
 		/**
 		 * Gets the comment.
@@ -271,7 +264,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new comment
 		 */
 		public void setComment(Observation comment) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(comment);
 			this.comment = resourceRef;
 		}
@@ -283,7 +276,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new custodian
 		 */
 		public void setCustodian(Organization custodian) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(custodian);
 			this.custodian = resourceRef;
 		}
@@ -295,7 +288,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new doc author
 		 */
 		public void setDocAuthor(Person author) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(author);
 			this.docAuthor = resourceRef;
 		}
@@ -307,7 +300,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new doc language
 		 */
 		public void setDocLanguage(Basic language) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(language);
 			this.docLanguage = resourceRef;
 		}
@@ -319,7 +312,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new doc type
 		 */
 		public void setDocType(Basic typePseudonymized) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(typePseudonymized);
 			this.docType = resourceRef;
 		}
@@ -331,7 +324,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the information recipient
 		 */
 		public void setInformationRecipient(Basic informationRecipient) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(informationRecipient);
 			this.informationRecipient = resourceRef;
 		}
@@ -343,7 +336,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new legal authenticator
 		 */
 		public void setLegalAuthenticator(Person legalAuthenticator) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(legalAuthenticator);
 			this.legalAuthenticator = resourceRef;
 		}
@@ -355,29 +348,19 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		 *            the new patient
 		 */
 		public void setPatient(Patient patient) {
-			final ResourceReferenceDt resourceRef = new ResourceReferenceDt();
+			final Reference resourceRef = new Reference();
 			resourceRef.setResource(patient);
 			this.patient = resourceRef;
 		}
 	}
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div>
-	 * <div class="de"></div><div class="fr"></div>
-	 */
-	public static final String OID_LRTP = "urn:oid:" + CdaChLrtp.OID_MAIN;
-
-	private CdaChLrtp doc;
-
-	private final FhirContext fhirCtx = new FhirContext();
-
-	/**
 	 * <div class="en">Creates an eHC CdaChLrtp instance from a valid FHIR
-	 * Bundle resource</div> <div class="de"></div> <div class="fr"></div>
+	 * resource</div> <div class="de"></div> <div class="fr"></div>
 	 *
-	 * @param bundle
-	 *            <div class="en">valid CdaChLrtp FHIR bundle resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
+	 * @param docManifest
+	 *            <div class="en">valid CdaChLrtp FHIR docManifest
+	 *            resource</div> <div class="de"></div> <div class="fr"></div>
 	 * @param xsl
 	 *            <div class="en">desired stylesheet for the CDA document</div>
 	 *            <div class="de"></div> <div class="fr"></div>
@@ -385,197 +368,251 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 	 *            <div class="en">desired CSS for the CDA document</div>
 	 *            <div class="de"></div> <div class="fr"></div>
 	 * @return <div class="en">eHC CdaChLrtp instance containing payload of the
-	 *         given FHIR Bundle resource</div> <div class="de"></div>
+	 *         given FHIR docManifest resource</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public CdaChLrtp createCdaChLrtpFromFHIRBundle(Bundle bundle, String xsl, String css) {
+	public CdaChLrtp createCdaChLrtpFromFhir(DocumentManifest docManifest, String xsl, String css) {
 
 		// Header
-		doc = new CdaChLrtp(getDocLanguage(bundle), xsl, css);
-		doc.setId(getDocumentId(bundle));
-		doc.setSetId(getDocumentId(bundle));
-		doc.setTimestamp(getDocumentDate(bundle));
-		doc.setConfidentialityCode(getConfidentialityCode(bundle));
+		final CdaChLrtp doc = new CdaChLrtp(getDocLanguage(docManifest), xsl, css);
+		doc.setId(getDocumentId(docManifest));
+		doc.setSetId(getDocumentId(docManifest));
+		doc.setTimestamp(getDocumentDate(docManifest));
+		doc.setConfidentialityCode(getConfidentialityCode(docManifest));
 		// RecordTarget
-		doc.setPatient(FhirCommon.getPatient(bundle));
+		doc.setPatient(FhirCommon.getPatient(docManifest));
 		// ReferralOrderingPhysician
-		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(bundle));
+		doc.addReferralOrderingPhysician(getReferralOrderingPhysician(docManifest));
 		// Authors
-		for (final Author author : getAuthors(bundle)) {
+		for (final Author author : getAuthors(docManifest)) {
 			doc.addAuthor(author);
 		}
 		// LegalAuthenticator
-		final Author legalAuth = getLegalAuthenticator(bundle);
+		final Author legalAuth = getLegalAuthenticator(docManifest);
 		if (legalAuth != null) {
 			doc.setLegalAuthenticator(legalAuth);
 		}
+		// Participant Claims
+		final List<ParticipantClaimer> participantsList = getClaimers(docManifest);
+		for (ParticipantClaimer p : participantsList) {
+			doc.addParticipant(p);
+		}
 		// Custodian
+		// doc.setCustodian(getCustodian(docManifest));
 		doc.setEmtpyCustodian();
 		// IntendedRecipient
-		final IntendedRecipient ir = getIntendedRecipient(bundle);
+		final IntendedRecipient ir = getIntendedRecipient(docManifest);
 		doc.addIntendedRecipient(ir);
 		// InFulfillmentOf
-		final Identificator ifoId = getInFulfillmentOf(bundle);
+		final Identificator ifoId = getInFulfillmentOf(docManifest);
 		if (ifoId != null) {
 			doc.addInFulfillmentOf(ifoId);
 		}
 		// DocumentationOf
-		String documentationOfCode = getDocumentationOf(bundle);
+		String documentationOfCode = getDocumentationOf(docManifest);
 		if (documentationOfCode != null) {
 			doc.addDocumentationOf(ReportScopes.getEnum(documentationOfCode));
 		}
 		// RelatedDocument
-		Identificator relatedDocument = getRelatedDocument(bundle);
+		Identificator relatedDocument = getRelatedDocument(docManifest);
 		if (relatedDocument != null) {
 			doc.setDocumentToReplaceIdentifier(relatedDocument);
 		}
 		// DocVersion
-		final Integer docVersion = getDocVersion(bundle);
+		final Integer docVersion = getDocVersion(docManifest);
 		if (docVersion != null) {
 			doc.setVersion(null, docVersion);
 		}
 		// DocType and Pseudonymization
-		if (getDocType(bundle) == DocTypeCode.PSEUDONYMIZED)
+		if (getLrtpDocType(docManifest) == DocTypeCode.PSEUDONYMIZED)
 			doc.applyPrivacyFilter();
 
 		// Body
 		// Laboratory SpecialtySections
-		final List<LaboratorySpecialtySection> lssList = getLaboratorySpecialtySections(bundle);
+		final List<LaboratorySpecialtySection> lssList = getLrtpLaboratorySpecialtySections(
+				docManifest);
 		for (LaboratorySpecialtySection lss : lssList) {
 			doc.addLaboratorySpecialtySection(lss);
 		}
 
 		// VitalSignsOrganizer
-		List<VitalSignsOrganizer> vsoList = getVitalSignsOrganizers(bundle);
+		List<VitalSignsOrganizer> vsoList = getLrtpVitalSignsOrganizers(docManifest);
 		for (VitalSignsOrganizer vso : vsoList) {
 			doc.setVitalSignsOrganizer(vso);
 		}
 
 		// BloodGroup
-		BloodGroupObservation bgo = getBloodGroupObservation(bundle);
+		BloodGroupObservation bgo = getBloodGroupObservation(docManifest);
 		if (bgo != null) {
 			doc.setBloodGroupObservation(bgo);
 		}
 
 		// Narrative Text: CodedVitalSigns
 		doc.setNarrativeTextSectionCodedVitalSignsSection(
-				getNarrative(bundle, FhirCommon.urnUseAsCodedVitalSigns));
+				getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));
 
 		// Narrative Text: StudiesSummary
 		doc.setNarrativeTextSectionStudiesSummarySection(
-				getNarrative(bundle, FhirCommon.urnUseAsStudiesSummary));
+				getNarrative(docManifest, FhirCommon.urnUseAsStudiesSummary));
 
 		return doc;
 	}
 
-	private String formatDiv(XhtmlDt text) {
-		String retVal = text.getValueAsString();
-		retVal = retVal.replace("</div>", "");
-		retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
-		return retVal;
-	}
-
-	private BloodGroupObservation getBloodGroupObservation(Bundle bundle) {
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all relevant elements
-			List<ExtensionDt> ifoEntries = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsBloodGroup);
-			if (ifoEntries != null && !ifoEntries.isEmpty()) {
-				Observation fObs = (Observation) entry.getResource();
-				BloodGroupObservation bgo = new BloodGroupObservation();
-				// Value
-				BloodGroup bg = BloodGroup.getEnum(fObs.getCode().getCodingFirstRep().getCode());
-				bgo.setValue(bg);
-				// comment
-				bgo.setComment(new SectionAnnotationCommentEntry(fObs.getComments()));
-				// Author
-				for (ResourceReferenceDt fPerfRef : fObs.getPerformer()) {
-					Practitioner fPerf = (Practitioner) fPerfRef.getResource();
-					// Id
-					Author author = new Author("");
-					author.addId(FhirCommon
-							.fhirIdentifierToEhcIdentificator(fPerf.getIdentifierFirstRep()));
-				}
-
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
-	 * given FHIR bundle
-	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC LRTP VitalSignObservation </div>
-	 *         <div class="de"></div> <div class="fr"></div>
-	 */
-	@SuppressWarnings("unused")
-	private List<VitalSignObservation> getCodedVitalSigns(Bundle bundle) {
-		final List<VitalSignObservation> retVal = new ArrayList<VitalSignObservation>();
-		for (final Entry entry : bundle.getEntry()) {
-			final List<ExtensionDt> observations = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
-			if ((observations != null) && !observations.isEmpty()
-					&& (entry.getResource() instanceof Observation)) {
-				final Observation observation = (Observation) entry.getResource();
-				final IDatatype fhirEffectiveTime = observation.getEffective();
-				Date effectiveTime = new Date();
-				if (fhirEffectiveTime instanceof DateTimeDt) {
-					effectiveTime = ((DateTimeDt) fhirEffectiveTime).getValue();
-				}
-				final List<Component> components = observation.getComponent();
-				for (final Component component : components) {
-					final CodingDt fhirCode = component.getCode().getCodingFirstRep();
-					final IDatatype fhirValue = component.getValue();
-
-					final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-							fhirCode.getCode(), fhirCode.getDisplay());
-					Value value = null;
-					if (fhirValue instanceof QuantityDt) {
-						// type PQ
-						final QuantityDt fhirQuantity = (QuantityDt) fhirValue;
-						final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
-						pq.setUnit(fhirQuantity.getUnit());
-						pq.setValue(fhirQuantity.getValue());
-						value = new Value(pq);
-					}
-					if ((code != null) && (value != null)) {
-						retVal.add(new VitalSignObservation(code, effectiveTime, value));
-					}
-				}
-			}
-		}
-		return retVal;
-	}
-
+	// /**
+	// * <div class="en">uniform resource name (urn) of this OID</div>
+	// * <div class="de"></div><div class="fr"></div>
+	// */
+	// public static final String OID_LRTP = "urn:oid:" + CdaChLrtp.OID_MAIN;
+	//
+	// private CdaChLrtp doc;
+	//
+	// private final FhirContext fhirCtx = new
+	// FhirContext(FhirVersionEnum.DSTU3);
+	//
+	// /**
+	// * <div class="en">Creates an eHC CdaChLrtp instance from a valid FHIR
+	// * docManifest resource</div> <div class="de"></div> <div
+	// class="fr"></div>
+	// *
+	// * @param docManifest
+	// * <div class="en">valid CdaChLrtp FHIR docManifest resource</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// * @param xsl
+	// * <div class="en">desired stylesheet for the CDA document</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// * @param css
+	// * <div class="en">desired CSS for the CDA document</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// * @return <div class="en">eHC CdaChLrtp instance containing payload of
+	// the
+	// * given FHIR docManifest resource</div> <div class="de"></div>
+	// * <div class="fr"></div>
+	// */
+	// public CdaChLrtp createCdaChLrtpFromFHIRdocManifest(docManifest
+	// docManifest, String xsl,
+	// String css) {
+	//
+	// // Header
+	// doc = new CdaChLrtp(getDocLanguage(docManifest), xsl, css);
+	// doc.setId(getDocumentId(docManifest));
+	// doc.setSetId(getDocumentId(docManifest));
+	// doc.setTimestamp(getDocumentDate(docManifest));
+	// doc.setConfidentialityCode(getConfidentialityCode(docManifest));
+	// // RecordTarget
+	// doc.setPatient(FhirCommon.getPatient(docManifest));
+	// // ReferralOrderingPhysician
+	// doc.addReferralOrderingPhysician(getReferralOrderingPhysician(docManifest));
+	// // Authors
+	// for (final Author author : getAuthors(docManifest)) {
+	// doc.addAuthor(author);
+	// }
+	// // LegalAuthenticator
+	// final Author legalAuth = getLegalAuthenticator(docManifest);
+	// if (legalAuth != null) {
+	// doc.setLegalAuthenticator(legalAuth);
+	// }
+	// // Custodian
+	// doc.setEmtpyCustodian();
+	// // IntendedRecipient
+	// final IntendedRecipient ir = getIntendedRecipient(docManifest);
+	// doc.addIntendedRecipient(ir);
+	// // InFulfillmentOf
+	// final Identificator ifoId = getInFulfillmentOf(docManifest);
+	// if (ifoId != null) {
+	// doc.addInFulfillmentOf(ifoId);
+	// }
+	// // DocumentationOf
+	// String documentationOfCode = getDocumentationOf(docManifest);
+	// if (documentationOfCode != null) {
+	// doc.addDocumentationOf(ReportScopes.getEnum(documentationOfCode));
+	// }
+	// // RelatedDocument
+	// Identificator relatedDocument = getRelatedDocument(docManifest);
+	// if (relatedDocument != null) {
+	// doc.setDocumentToReplaceIdentifier(relatedDocument);
+	// }
+	// // DocVersion
+	// final Integer docVersion = getDocVersion(docManifest);
+	// if (docVersion != null) {
+	// doc.setVersion(null, docVersion);
+	// }
+	// // DocType and Pseudonymization
+	// if (getDocType(docManifest) == DocTypeCode.PSEUDONYMIZED)
+	// doc.applyPrivacyFilter();
+	//
+	// // Body
+	// // Laboratory SpecialtySections
+	// final List<LaboratorySpecialtySection> lssList =
+	// getLaboratorySpecialtySections(docManifest);
+	// for (LaboratorySpecialtySection lss : lssList) {
+	// doc.addLaboratorySpecialtySection(lss);
+	// }
+	//
+	// // VitalSignsOrganizer
+	// List<VitalSignsOrganizer> vsoList = getVitalSignsOrganizers(docManifest);
+	// for (VitalSignsOrganizer vso : vsoList) {
+	// doc.setVitalSignsOrganizer(vso);
+	// }
+	//
+	// // BloodGroup
+	// BloodGroupObservation bgo = getBloodGroupObservation(docManifest);
+	// if (bgo != null) {
+	// doc.setBloodGroupObservation(bgo);
+	// }
+	//
+	// // Narrative Text: CodedVitalSigns
+	// doc.setNarrativeTextSectionCodedVitalSignsSection(
+	// getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));
+	//
+	// // Narrative Text: StudiesSummary
+	// doc.setNarrativeTextSectionStudiesSummarySection(
+	// getNarrative(docManifest, FhirCommon.urnUseAsStudiesSummary));
+	//
+	// return doc;
+	// }
+	//
+	// private String formatDiv(XhtmlDt text) {
+	// String retVal = text.getValueAsString();
+	// retVal = retVal.replace("</div>", "");
+	// retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
+	// return retVal;
+	// }
+	//
 	/**
 	 * <div class="en"> Gets the eHC Vacd document type code (full or masked
-	 * patient demographics) from the given FHIR bundle
+	 * patient demographics) from the given FHIR docManifest
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
+	 * @param docManifest
+	 *            the FHIR docManifest
 	 * @return eHC Vacd document type code (full or masked patient
 	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	private DocTypeCode getDocType(Bundle bundle) {
+	private DocTypeCode getLrtpDocType(DocumentManifest docManifest) {
 		DocTypeCode retVal = DocTypeCode.PATIENT; // default
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof Basic) {
-				final Basic fhirBasic = (Basic) entry.getResource();
-				final CodingDt langCode = fhirBasic.getCode().getCodingFirstRep();
-				if (OID_LRTP.equals(langCode.getSystem())) {
-					if ("patient".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PATIENT;
-						break;
-					} else if ("hiv".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.HIV;
-						break;
-					} else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
-						retVal = DocTypeCode.PSEUDONYMIZED;
-						break;
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsDocType).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					if (ref.getResource() instanceof Basic) {
+						final Basic fhirBasic = (Basic) ref.getResource();
+						final Coding langCode = fhirBasic.getCode().getCodingFirstRep();
+						if (CdaChLrtp.OID_MAIN
+								.equals(langCode.getSystem().replace(FhirCommon.oidUrn, ""))) {
+							if ("patient".equals(langCode.getCode().toLowerCase())) {
+								retVal = DocTypeCode.PATIENT;
+								break;
+							} else if ("hiv".equals(langCode.getCode().toLowerCase())) {
+								retVal = DocTypeCode.HIV;
+								break;
+							} else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
+								retVal = DocTypeCode.PSEUDONYMIZED;
+								break;
+							}
+						}
 					}
 				}
 			}
@@ -583,91 +620,137 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		return retVal;
 	}
 
-	private String getDocumentationOf(Bundle bundle) {
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all DocumentationOfs
-			List<ExtensionDt> ifoEntries = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentationOf);
-			if (ifoEntries != null && !ifoEntries.isEmpty()) {
-				Basic ifo = (Basic) entry.getResource();
-				return ifo.getCode().getCodingFirstRep().getCode();
-			}
-		}
-		return null;
-	}
+	/**
+	 * <div class="en">Gets a list of eHC LaboratoryBatteryOrganizers from the
+	 * given FHIR docManifest
+	 *
+	 * @param docManifest
+	 *            the FHIR docManifest
+	 * @return list of eHC LaboratoryBatteryOrganizers</div>
+	 *         <div class="de"></div> <div class="fr"></div>
+	 */
+	protected List<LaboratoryBatteryOrganizer> getLrtpLaboratoryBatteryOrganizers(
+			DocumentManifest docManifest) {
+		final List<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
 
-	private Integer getDocVersion(Bundle bundle) {
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all InFulfillmentOfs
-			final List<ExtensionDt> ifoEntries = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocVersion);
-			if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
-				final Basic ifo = (Basic) entry.getResource();
-				return Integer.parseInt(ifo.getCode().getCodingFirstRep().getCode());
-			}
-		}
-		return null;
-	}
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getLaboratoryBatteryOrganizers
 
-	private Identificator getInFulfillmentOf(Bundle bundle) {
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all InFulfillmentOfs
-			final List<ExtensionDt> ifoEntries = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInFulfillmentOf);
-			if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
-				final Basic ifo = (Basic) entry.getResource();
-				return FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsLaboratoryBatteryOrganizer)
+					.isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					final LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
+					final Observation obs = (Observation) ref.getResource();
+
+					// Set the Organizer Attributes
+					// Status Code
+					final String statusCode = getValueFromKeyValueString(obs, "statusCode");
+					if (statusCode != null) {
+						lbo.setStatusCode(StatusCode.getEnum(statusCode));
+					}
+
+					// Organizer Id
+					if (!obs.getIdentifier().isEmpty()) {
+						Identificator id = new Identificator(obs.getIdentifierFirstRep());
+						id.setRoot(id.getRoot().replace(FhirCommon.oidUrn, ""));
+						lbo.getMdht().getIds().add(id.getIi());
+					}
+
+					// EffectiveTime
+					final DateTimeType fTime = (DateTimeType) obs.getEffective();
+					if (fTime != null)
+						lbo.setEffectiveTime(fTime.getValue());
+
+					// Authors
+					for (Reference perfRef : obs.getPerformer()) {
+						Practitioner p = (Practitioner) perfRef.getResource();
+						Author author = new Author();
+						author.addId(FhirCommon
+								.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+						final List<org.hl7.fhir.dstu3.model.Extension> extensions = perfRef
+								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+						if (!extensions.isEmpty()) {
+							TimeType t = (TimeType) extensions.get(0).getValue();
+							author.setTime(DateUtil.parseDates(t.getValue()));
+						}
+						lbo.addAuthor(author);
+					}
+
+					// Add all LaboratoryObservations
+					for (final ObservationRelatedComponent relatedObs : obs.getRelated()) {
+						final Observation fhirObs = (org.hl7.fhir.dstu3.model.Observation) relatedObs
+								.getTarget().getResource();
+						final LaboratoryObservation labObs = getLrtpLaboratoryObservation(fhirObs);
+						lbo.addLaboratoryObservation(labObs);
+					}
+					retVal.add(lbo);
+				}
 			}
 		}
-		return null;
+		return retVal;
 	}
 
 	/**
 	 * <div class="en">Gets a list of eHC LRTP LaboratoryBatteryOrganizers from
-	 * the given FHIR bundle
+	 * the given FHIR docManifest
 	 *
 	 * @param fhirObs2
-	 *            the FHIR bundle
+	 *            the FHIR docManifest
 	 * @return list of eHC LRTP LaboratoryBatteryOrganizers</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer getLaboratoryBatteryOrganizers(
-			Observation labObsList, StringDt authorTimeStamp) {
-		final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer lbo = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
+	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer getLrtpLaboratoryBatteryOrganizers(
+			Observation labObsList) {
+		final LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
+
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getLaboratoryBatteryOrganizers
+
 		// Set the Organizer Attributes
 		// Status Code
-		final String statusCode = getValueFromKeyValueString(labObsList.getText(), "statusCode");
+		final String statusCode = getValueFromKeyValueString(labObsList, "statusCode");
 		if (statusCode != null) {
 			lbo.setStatusCode(StatusCode.getEnum(statusCode));
 		}
 		// EffectiveTime
-		final DateTimeDt fTime = (DateTimeDt) labObsList.getEffective();
-		lbo.setEffectiveTime(fTime.getValue());
+		final DateTimeType fTime = (DateTimeType) labObsList.getEffective();
+		if (fTime != null)
+			lbo.setEffectiveTime(fTime.getValue());
 
 		// Authors
-		for (ResourceReferenceDt perfRef : labObsList.getPerformer()) {
+		for (Reference perfRef : labObsList.getPerformer()) {
 			Practitioner p = (Practitioner) perfRef.getResource();
-			Author author = new Author("");
+			Author author = new Author();
 			author.addId(FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
-			author.setTime(DateUtil.parseDates(authorTimeStamp.getValue()));
+			final List<org.hl7.fhir.dstu3.model.Extension> extensions = perfRef
+					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+			if (!extensions.isEmpty()) {
+				TimeType t = (TimeType) extensions.get(0).getValue();
+				author.setTime(DateUtil.parseDates(t.getValue()));
+			}
 			lbo.addAuthor(author);
 		}
 
 		// Add all LaboratoryObservations
-		for (final Related relatedObs : labObsList.getRelated()) {
+		for (final ObservationRelatedComponent relatedObs : labObsList.getRelated()) {
 			final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-			final LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
+			final LaboratoryObservation labObs = getLrtpLaboratoryObservation(fhirObs);
 			lbo.addLaboratoryObservation(labObs);
 		}
 		return lbo;
 	}
 
-	private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation getLaboratoryObservation(
-			Observation fhirObservation) {
-		final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation retVal = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation();
+	protected LaboratoryObservation getLrtpLaboratoryObservation(Observation fhirObservation) {
+		final LaboratoryObservation retVal = new LaboratoryObservation();
+
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getLaboratoryBatteryOrganizers
 
 		fhirObservation.getCode().getCodingFirstRep();
 		retVal.setCode(FhirCommon.fhirCodeToEhcCode(fhirObservation.getCode()));
@@ -675,14 +758,14 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			retVal.setEffectiveTime(fhirObservation.getIssued());
 		}
 		if (!fhirObservation.getPerformer().isEmpty()) {
-			final ResourceReferenceDt refPerf = fhirObservation.getPerformer().get(0);
+			final Reference refPerf = fhirObservation.getPerformer().get(0);
 			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
 					fhirObservation.getIssued());
 		}
 		Value v = null;
 		// type PQ
-		if (fhirObservation.getValue() instanceof QuantityDt) {
-			final QuantityDt fhirQuantity = (QuantityDt) fhirObservation.getValue();
+		if (fhirObservation.getValue() instanceof Quantity) {
+			final Quantity fhirQuantity = (Quantity) fhirObservation.getValue();
 			v = new Value(fhirQuantity.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
 
 			// fix for the bug(?), which ommits the unit when it´s set to
@@ -698,8 +781,8 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			v.setUcumUnit(unit);
 		}
 		// type String
-		if (fhirObservation.getValue() instanceof StringDt) {
-			final StringDt fhirString = (StringDt) fhirObservation.getValue();
+		if (fhirObservation.getValue() instanceof StringType) {
+			final StringType fhirString = (StringType) fhirObservation.getValue();
 			// type BL
 			if (fhirString.getValueAsString().equalsIgnoreCase("false")
 					|| fhirString.getValueAsString().equalsIgnoreCase("true")
@@ -731,6 +814,14 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
 				}
 			}
+			if (fhirString.getValue().startsWith("ED:")) {
+				if (fhirString.getValue().startsWith("ED:#")) {
+					ED edValue = Util.createReference(fhirString.getValue().replace("ED:", ""));
+					v = new Value(edValue);
+				} else {
+					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
+				}
+			}
 			if (fhirString.getValue().startsWith("ST:")) {
 				if (fhirString.getValue().startsWith("ST:NA")) {
 					ST stValue = DatatypesFactory.eINSTANCE.createST();
@@ -744,15 +835,15 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 			}
 		}
 		// type CD
-		if (fhirObservation.getValue() instanceof CodeableConceptDt)
+		if (fhirObservation.getValue() instanceof CodeableConcept)
 
 		{
-			final CodingDt fhirValueCode = ((CodeableConceptDt) fhirObservation.getValue())
+			final Coding fhirValueCode = ((CodeableConcept) fhirObservation.getValue())
 					.getCodingFirstRep();
 			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
 					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
 		}
-		if (fhirObservation.getValue() instanceof RatioDt) {
+		if (fhirObservation.getValue() instanceof Ratio) {
 			// type RTO not yet implemented
 		}
 		if (v != null) {
@@ -763,19 +854,30 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
 			org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
 			// Value
-			v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
-					fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			if (fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null
+					&& fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null) {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getLow().getUnit(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit());
+			} else {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			}
+
 			rr.setValue(v);
 			// Interpretation;
-			ObservationInterpretation obsInt = ObservationInterpretation.getEnum(fhirObservation
-					.getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
-			if (obsInt != null) {
-				rr.setInterpretationCode(obsInt);
-			}
+			// TODO tsc
+			// ObservationInterpretation obsInt =
+			// ObservationInterpretation.getEnum(fhirObservation
+			// .getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
+			// if (obsInt != null) {
+			// rr.setInterpretationCode(obsInt);
+			// }
 			retVal.setReferenceRange(rr);
 		}
 
-		final CodingDt fhirInterpretationCode = fhirObservation.getInterpretation()
+		final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
 				.getCodingFirstRep();
 		if (fhirInterpretationCode != null) {
 			if (fhirInterpretationCode.getSystem() != null) {
@@ -787,128 +889,129 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 						new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 			}
 		}
-
-		if (fhirObservation.getComments() != null) {
-			retVal.addCommentEntry(
-					new SectionAnnotationCommentEntry(fhirObservation.getComments()));
+		// Text reference (inside the observation)
+		if (fhirObservation.getComment() != null && !fhirObservation.getComment().isEmpty()) {
+			retVal.setTextReference(fhirObservation.getComment());
 		}
+		// Comments
+		for (ObservationRelatedComponent commentRef : fhirObservation.getRelated()) {
+			if (commentRef.getTarget().getResource() instanceof Observation) {
+				Observation comment = (Observation) commentRef.getTarget().getResource();
+				if (comment.getComment() != null) {
+					retVal.addCommentEntry(new SectionAnnotationCommentEntry(comment.getComment()));
+				}
+			}
+		}
+
 		return retVal;
 	}
 
-	private List<LaboratorySpecialtySection> getLaboratorySpecialtySections(Bundle bundle) {
+	protected List<LaboratorySpecialtySection> getLrtpLaboratorySpecialtySections(
+			DocumentManifest docManifest) {
 
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getLaboratorySpecialtySections
 		final List<LaboratorySpecialtySection> lssList = new ArrayList<LaboratorySpecialtySection>();
 
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all LaboratorySpecialtySections
-			final List<ExtensionDt> specialtySections = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratorySpecialtySection);
-			if ((specialtySections != null) && !specialtySections.isEmpty()) {
-				final Observation obs = (Observation) entry.getResource();
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			final List<org.hl7.fhir.dstu3.model.Extension> extensions = entry
+					.getExtensionsByUrl(FhirCommon.urnUseAsLaboratorySpecialtySection);
+			if (!extensions.isEmpty()) {
+				Reference ref = null;
+				try {
+					if (entry.hasPReference())
+						ref = entry.getPReference();
+				} catch (FHIRException e) {
+				}
+				if (ref != null) {
+					final Observation obs = (Observation) ref.getResource();
 
-				// SectionCode
-				final Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
-				code.setCodeSystemName("LOINC");
-				final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection(
-						code, doc.getLanguageCode());
+					// SectionCode
+					final Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
+					code.setCodeSystemName("LOINC");
+					final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection lss = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection(
+							code, LanguageCode.getEnum(docManifest.getLanguage()));
 
-				// Add all LaboratoryBatteryOrganizers
-				SpecimenAct spa = new SpecimenAct();
-				spa.setCode(code);
-				for (final Related relatedObs : obs.getRelated()) {
-
-					final List<ExtensionDt> organizers = relatedObs.getTarget()
-							.getUndeclaredExtensionsByUrl(
-									FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
-					if ((organizers != null) && !organizers.isEmpty()) {
-						// AuthorTimeStamp
-						final StringDt authorTimeStamp = ((StringDt) organizers.get(0).getValue());
+					// Add all LaboratoryBatteryOrganizers
+					AbstractSpecimenAct spa = new AbstractSpecimenAct();
+					spa.setCode(code);
+					for (final ObservationRelatedComponent relatedObs : obs.getRelated()) {
 						final Observation fhirObs = (Observation) relatedObs.getTarget()
 								.getResource();
 						spa.addLaboratoryBatteryOrganizer(
-								getLaboratoryBatteryOrganizers(fhirObs, authorTimeStamp));
+								getLrtpLaboratoryBatteryOrganizers(fhirObs));
 					}
-				}
-				lss.setLaboratoryReportDataProcessingEntry(
-						new LaboratoryReportDataProcessingEntry(spa));
+					lss.setLaboratoryReportDataProcessingEntry(
+							new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryReportDataProcessingEntry(
+									spa));
 
-				// NarrativeText
-				lss.setText(formatDiv(obs.getText().getDiv()));
-				lssList.add(lss);
+					// NarrativeText
+					lss.setText(obs.getCategoryFirstRep().getCodingFirstRep().getDisplay());
+					lssList.add(lss);
+				}
 			}
 		}
 		return lssList;
 	}
 
 	/**
-	 * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given FHIR
-	 * bundle
+	 * Gets the specimen received entry.
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
+	 * @param docManifest
+	 *            the docManifest
+	 * @return the specimen received entry
 	 */
-	private org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician getReferralOrderingPhysician(
-			Bundle bundle) {
-		org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician retVal = null;
-		for (final Entry entry : bundle.getEntry()) {
-			if (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsReferralOrderingPhysician)
-					.isEmpty()) {
-				final Person physician = (Person) entry.getResource();
-
-				Name name = null;
-				if (physician.getNameFirstRep() != null) {
-					name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
+	protected SpecimenReceivedEntry getLrtpSpecimenReceivedEntry(DocumentManifest docManifest) {
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsSpecimenReceived).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
 				}
-				final Address address = FhirCommon
-						.fhirAddressToEhcAddress(physician.getAddressFirstRep());
-				final Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
+				if (ref != null) {
+					final Observation obs = (Observation) ref.getResource();
+					final SpecimenReceivedEntry sce = new SpecimenReceivedEntry();
 
-				final AssociatedEntity entity = new AssociatedEntity(name, address, telecoms);
-				for (final IdentifierDt id : physician.getIdentifier()) {
-					entity.addId(FhirCommon.fhirIdentifierToEhcIdentificator(id));
-				}
-
-				if ((physician.getContained() != null)
-						&& !physician.getContained().getContainedResources().isEmpty()) {
-					for (final IResource res : physician.getContained().getContainedResources()) {
-						if (res instanceof Organization) {
-							entity.setOrganization(FhirCommon.getOrganization(res));
-						}
+					final Identificator id = FhirCommon
+							.fhirIdentifierToEhcIdentificator(obs.getIdentifierFirstRep());
+					if (id != null) {
+						sce.addId(id);
+					} else {
+						org.openhealthtools.mdht.uml.hl7.datatypes.II ii = DatatypesFactory.eINSTANCE
+								.createII();
+						ii.setNullFlavor(NullFlavor.NA);
+						sce.addId(new Identificator(ii));
 					}
-				}
-				retVal = new ReferralOrderingPhysician(entity);
-			}
-		}
-		return retVal;
-	}
+					final DateTimeType fDate = (DateTimeType) obs.getEffective();
+					if (fDate != null) {
+						final Date date = fDate.getValue();
+						sce.setEffectiveTime(date);
+					}
 
-	private Identificator getRelatedDocument(Bundle bundle) {
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all relevant elements
-			List<ExtensionDt> ifoEntries = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRelatedDocument);
-			if (ifoEntries != null && !ifoEntries.isEmpty()) {
-				Basic ifo = (Basic) entry.getResource();
-				return FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+					return sce;
+				}
 			}
 		}
+
 		return null;
 	}
 
-	private VitalSignObservation getVitalSignObservation(Observation fhirObs) {
+	private VitalSignObservation getLrtpVitalSignObservation(Observation fhirObs) {
 		VitalSignObservation vso = new VitalSignObservation();
+
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getLaboratoryBatteryOrganizers
+
 		// Value
 		Value v = null;
-		if (fhirObs.getValue() instanceof QuantityDt) {
-			QuantityDt fValue = (QuantityDt) fhirObs.getValue();
+		if (fhirObs.getValue() instanceof Quantity) {
+			Quantity fValue = (Quantity) fhirObs.getValue();
 			v = new Value(fValue.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
 			v.setUcumUnit(fValue.getUnit());
 		}
-		if (fhirObs.getValue() instanceof StringDt) {
-			StringDt fValue = (StringDt) fhirObs.getValue();
+		if (fhirObs.getValue() instanceof StringType) {
+			StringType fValue = (StringType) fhirObs.getValue();
 			if (fValue.getValue().startsWith("INT:")) {
 				if (fValue.getValue().startsWith("INT:NA")) {
 					INT intValue = DatatypesFactory.eINSTANCE.createINT();
@@ -929,7 +1032,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		}
 
 		// Ids
-		for (IdentifierDt fId : fhirObs.getIdentifier()) {
+		for (Identifier fId : fhirObs.getIdentifier()) {
 			vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
 		}
 
@@ -937,86 +1040,667 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		ObservationInterpretationForVitalSign i = ObservationInterpretationForVitalSign
 				.getEnum(fhirObs.getInterpretation().getCodingFirstRep().getCode());
 		if (i != null) {
-			vso.setInterpretationCode(i);
+			vso.setInterpretationCode(i.getCode());
+		}
+
+		// Text reference (inside the observation)
+		if (fhirObs.getComment() != null && !fhirObs.getComment().isEmpty()) {
+			vso.setTextReference(fhirObs.getComment());
+		}
+
+		// Comments
+		for (ObservationRelatedComponent commentRef : fhirObs.getRelated()) {
+			if (commentRef.getTarget().getResource() instanceof Observation) {
+				Observation comment = (Observation) commentRef.getTarget().getResource();
+				if (comment.getComment() != null) {
+					vso.addCommentEntry(new SectionAnnotationCommentEntry(comment.getComment()));
+				}
+			}
 		}
 
 		// Method Code Translation
 		if (fhirObs.getCode().getCoding().size() > 1) {
-			Code translation = new Code(fhirObs.getCode().getCoding().get(1).getSystem(),
+			Code translation = new Code(
+					fhirObs.getCode().getCoding().get(1).getSystem().replace(FhirCommon.oidUrn, ""),
 					fhirObs.getCode().getCoding().get(1).getCode());
 			vso.setMethodCodeTranslation(translation);
 		}
-
-		// CommentEntry
-		vso.addCommentEntry(new SectionAnnotationCommentEntry(fhirObs.getComments()));
 
 		return vso;
 	}
 
 	/**
-	 * <div class="en">Gets a list of eHC LRTP VitalSignsOrganizers from the
-	 * given FHIR bundle
+	 * <div class="en">Gets a list of eHC VitalSignsOrganizers from the given
+	 * FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
-	 * @return list of eHC LRTP VitalSignsOrganizers</div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param docManifest
+	 *            the FHIR resource
+	 * @return list of eHC VitalSignsOrganizers</div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
-	private List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer> getVitalSignsOrganizers(
-			Bundle bundle) {
-		final List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer>();
+	protected List<VitalSignsOrganizer> getLrtpVitalSignsOrganizers(DocumentManifest docManifest) {
+		final List<VitalSignsOrganizer> retVal = new ArrayList<VitalSignsOrganizer>();
 
-		// Iterate over all Bundle Entries
-		for (final Entry entry : bundle.getEntry()) {
-			// Get all LaboratoryBatteryOrganizers
-			final List<ExtensionDt> vsoList = entry
-					.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsVitalSignsOrganizer);
-			if ((vsoList != null) && !vsoList.isEmpty()) {
-				final VitalSignsOrganizer vso = new org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer();
-				final Observation fVso = (Observation) entry.getResource();
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh.getVitalSignsOrganizers
 
-				// Set the Organizer Attributes
-				// Date
-				if (fVso.getEffective() != null && !fVso.isEmpty()) {
-					DateTimeDt fTime = (DateTimeDt) fVso.getEffective();
-					vso.setEffectiveTime(fTime.getValue());
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsVitalSignsOrganizer).isEmpty()) {
+				Reference ref = null;
+				try {
+					ref = entry.getPReference();
+				} catch (FHIRException e) {
 				}
-				// Ids
-				for (IdentifierDt fId : fVso.getIdentifier()) {
-					vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
-				}
-				// Authors
-				for (ResourceReferenceDt perfRef : fVso.getPerformer()) {
-					Practitioner p = (Practitioner) perfRef.getResource();
-					Author author = new Author("");
-					author.addId(
-							FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
-					final StringDt timeStamp = ((StringDt) vsoList.get(0).getValue());
-					author.setTime(DateUtil.parseDates(timeStamp.getValue()));
-					vso.addAuthor(author);
-				}
+				if (ref != null) {
+					final VitalSignsOrganizer lbo = new VitalSignsOrganizer();
+					final Observation obs = (Observation) ref.getResource();
 
-				// // Status Code
-				// final String statusCode =
-				// getValueFromKeyValueString(labObsList.getText(),
-				// "statusCode");
-				// if (statusCode != null) {
-				// vso.setStatusCode(StatusCode.getEnum(statusCode));
+					// Set the Organizer Attributes
+					// Status Code
+					final String statusCode = getValueFromKeyValueString(obs, "statusCode");
+					if (statusCode != null) {
+						lbo.setStatusCode(StatusCode.getEnum(statusCode));
+					}
 
-				// Add all VitalSignObservations
-				for (final Related relatedObs : fVso.getRelated()) {
-					final Observation fhirObs = (Observation) relatedObs.getTarget().getResource();
-					final VitalSignObservation vit = getVitalSignObservation(fhirObs);
-					vso.addVitalSignObservation(vit);
+					// Organizer Id
+					if (!obs.getIdentifier().isEmpty()) {
+						Identificator id = new Identificator(obs.getIdentifierFirstRep());
+						id.setRoot(id.getRoot().replace(FhirCommon.oidUrn, ""));
+						lbo.getMdht().getIds().add(id.getIi());
+					}
+
+					// EffectiveTime
+					final DateTimeType fTime = (DateTimeType) obs.getEffective();
+					if (fTime != null)
+						lbo.setEffectiveTime(fTime.getValue());
+
+					// Authors
+					for (Reference perfRef : obs.getPerformer()) {
+						Practitioner p = (Practitioner) perfRef.getResource();
+						Author author = new Author();
+						author.addId(FhirCommon
+								.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+						final List<org.hl7.fhir.dstu3.model.Extension> extensions = perfRef
+								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
+						if (!extensions.isEmpty()) {
+							TimeType t = (TimeType) extensions.get(0).getValue();
+							author.setTime(DateUtil.parseDates(t.getValue()));
+						}
+						lbo.addAuthor(author);
+					}
+
+					// Add all LaboratoryObservations
+					for (final ObservationRelatedComponent relatedObs : obs.getRelated()) {
+						final Observation fhirObs = (org.hl7.fhir.dstu3.model.Observation) relatedObs
+								.getTarget().getResource();
+						final VitalSignObservation labObs = getLrtpVitalSignObservation(fhirObs);
+						lbo.addVitalSignObservation(labObs);
+					}
+					retVal.add(lbo);
 				}
-				retVal.add(vso);
 			}
 		}
 		return retVal;
 	}
 
+	// /**
+	// * <div class="en">Gets a list of eHC EDES VitalSignObservation from the
+	// * given FHIR docManifest
+	// *
+	// * @param docManifest
+	// * the FHIR docManifest
+	// * @return list of eHC LRTP VitalSignObservation </div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// */
+	// @SuppressWarnings("unused")
+	// private List<VitalSignObservation> getCodedVitalSigns(docManifest
+	// docManifest) {
+	// final List<VitalSignObservation> retVal = new
+	// ArrayList<VitalSignObservation>();
+	// for (final Entry entry : docManifest.getEntry()) {
+	// final List<org.hl7.fhir.dstu3.model.Extension> observations = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignObservation);
+	// if ((observations != null) && !observations.isEmpty()
+	// && (entry.getResource() instanceof Observation)) {
+	// final Observation observation = (Observation) entry.getResource();
+	// final Type fhirEffectiveTime = observation.getEffective();
+	// Date effectiveTime = new Date();
+	// if (fhirEffectiveTime instanceof DateTimeType) {
+	// effectiveTime = ((DateTimeType) fhirEffectiveTime).getValue();
+	// }
+	// final List<Component> components = observation.getComponent();
+	// for (final Component component : components) {
+	// final Coding fhirCode = component.getCode().getCodingFirstRep();
+	// final Type fhirValue = component.getValue();
+	//
+	// final Code code = new
+	// Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+	// fhirCode.getCode(), fhirCode.getDisplay());
+	// Value value = null;
+	// if (fhirValue instanceof Quantity) {
+	// // type PQ
+	// final Quantity fhirQuantity = (Quantity) fhirValue;
+	// final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
+	// pq.setUnit(fhirQuantity.getUnit());
+	// pq.setValue(fhirQuantity.getValue());
+	// value = new Value(pq);
+	// }
+	// if ((code != null) && (value != null)) {
+	// retVal.add(new VitalSignObservation(code, effectiveTime, value));
+	// }
+	// }
+	// }
+	// }
+	// return retVal;
+	// }
+	//
+	// /**
+	// * <div class="en"> Gets the eHC Vacd document type code (full or masked
+	// * patient demographics) from the given FHIR docManifest
+	// *
+	// * @param docManifest
+	// * the FHIR docManifest
+	// * @return eHC Vacd document type code (full or masked patient
+	// * demographics)</div> <div class="de"></div> <div class="fr"></div>
+	// */
+	// private DocTypeCode getDocType(docManifest docManifest) {
+	// DocTypeCode retVal = DocTypeCode.PATIENT; // default
+	// for (final Entry entry : docManifest.getEntry()) {
+	// if (entry.getResource() instanceof Basic) {
+	// final Basic fhirBasic = (Basic) entry.getResource();
+	// final Coding langCode = fhirBasic.getCode().getCodingFirstRep();
+	// if (OID_LRTP.equals(langCode.getSystem())) {
+	// if ("patient".equals(langCode.getCode().toLowerCase())) {
+	// retVal = DocTypeCode.PATIENT;
+	// break;
+	// } else if ("hiv".equals(langCode.getCode().toLowerCase())) {
+	// retVal = DocTypeCode.HIV;
+	// break;
+	// } else if ("pseudo".equals(langCode.getCode().toLowerCase())) {
+	// retVal = DocTypeCode.PSEUDONYMIZED;
+	// break;
+	// }
+	// }
+	// }
+	// }
+	// return retVal;
+	// }
+	//
+	// private String getDocumentationOf(docManifest docManifest) {
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all DocumentationOfs
+	// List<org.hl7.fhir.dstu3.model.Extension> ifoEntries = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocumentationOf);
+	// if (ifoEntries != null && !ifoEntries.isEmpty()) {
+	// Basic ifo = (Basic) entry.getResource();
+	// return ifo.getCode().getCodingFirstRep().getCode();
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// private Integer getDocVersion(docManifest docManifest) {
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all InFulfillmentOfs
+	// final List<org.hl7.fhir.dstu3.model.Extension> ifoEntries = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsDocVersion);
+	// if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
+	// final Basic ifo = (Basic) entry.getResource();
+	// return Integer.parseInt(ifo.getCode().getCodingFirstRep().getCode());
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// private Identificator getInFulfillmentOf(docManifest docManifest) {
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all InFulfillmentOfs
+	// final List<org.hl7.fhir.dstu3.model.Extension> ifoEntries = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsInFulfillmentOf);
+	// if ((ifoEntries != null) && !ifoEntries.isEmpty()) {
+	// final Basic ifo = (Basic) entry.getResource();
+	// return
+	// FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// /**
+	// * <div class="en">Gets a list of eHC LRTP LaboratoryBatteryOrganizers
+	// from
+	// * the given FHIR docManifest
+	// *
+	// * @param fhirObs2
+	// * the FHIR docManifest
+	// * @return list of eHC LRTP LaboratoryBatteryOrganizers</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// */
+	// private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer
+	// getLaboratoryBatteryOrganizers(
+	// Observation labObsList, StringType authorTimeStamp) {
+	// final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer
+	// lbo = new
+	// org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer();
+	// // Set the Organizer Attributes
+	// // Status Code
+	// final String statusCode =
+	// getValueFromKeyValueString(labObsList.getText(), "statusCode");
+	// if (statusCode != null) {
+	// lbo.setStatusCode(StatusCode.getEnum(statusCode));
+	// }
+	// // EffectiveTime
+	// final DateTimeType fTime = (DateTimeType) labObsList.getEffective();
+	// lbo.setEffectiveTime(fTime.getValue());
+	//
+	// // Authors
+	// for (Reference perfRef : labObsList.getPerformer()) {
+	// Practitioner p = (Practitioner) perfRef.getResource();
+	// Author author = new Author("");
+	// author.addId(FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+	// author.setTime(DateUtil.parseDates(authorTimeStamp.getValue()));
+	// lbo.addAuthor(author);
+	// }
+	//
+	// // Add all LaboratoryObservations
+	// for (final Related relatedObs : labObsList.getRelated()) {
+	// final Observation fhirObs = (Observation)
+	// relatedObs.getTarget().getResource();
+	// final LaboratoryObservation labObs = getLaboratoryObservation(fhirObs);
+	// lbo.addLaboratoryObservation(labObs);
+	// }
+	// return lbo;
+	// }
+	//
+	// @Override
+	// private org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation
+	// getLaboratoryObservation(
+	// Observation fhirObservation) {
+	// final org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation retVal
+	// = new org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryObservation();
+	//
+	// fhirObservation.getCode().getCodingFirstRep();
+	// retVal.setCode(FhirCommon.fhirCodeToEhcCode(fhirObservation.getCode()));
+	// if (fhirObservation.getIssued() != null) {
+	// retVal.setEffectiveTime(fhirObservation.getIssued());
+	// }
+	// if (!fhirObservation.getPerformer().isEmpty()) {
+	// final Reference refPerf = fhirObservation.getPerformer().get(0);
+	// retVal.setLaboratory(FhirCommon.getOrganization((Organization)
+	// refPerf.getResource()),
+	// fhirObservation.getIssued());
+	// }
+	// Value v = null;
+	// // type PQ
+	// if (fhirObservation.getValue() instanceof Quantity) {
+	// final Quantity fhirQuantity = (Quantity) fhirObservation.getValue();
+	// v = new Value(fhirQuantity.getValue().toString(),
+	// Ucum.AHGEquivalentsPerMilliLiter);
+	//
+	// // fix for the bug(?), which ommits the unit when it´s set to
+	// // "1"
+	// // Seems to be a bug in the MDHT. Ucum Unit can´t be set to "1".
+	// // unit = fhirQuantity.getUnit().replace("#", "");
+	// String unit;
+	// if (fhirQuantity.getUnit().startsWith("#")) {
+	// unit = fhirQuantity.getUnit();
+	// } else {
+	// unit = fhirQuantity.getUnit();
+	// }
+	// v.setUcumUnit(unit);
+	// }
+	// // type String
+	// if (fhirObservation.getValue() instanceof StringType) {
+	// final StringType fhirString = (StringType) fhirObservation.getValue();
+	// // type BL
+	// if (fhirString.getValueAsString().equalsIgnoreCase("false")
+	// || fhirString.getValueAsString().equalsIgnoreCase("true")
+	// || fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+	// if (!fhirObservation.getDataAbsentReason().isEmpty()) {
+	// BL bl = DatatypesFactory.eINSTANCE.createBL();
+	// bl.setNullFlavor(NullFlavor.NA);
+	// v = new Value(bl);
+	// } else {
+	// if (fhirString.getValueAsString().equalsIgnoreCase("true")) {
+	// v = new Value(true);
+	// }
+	// if (fhirString.getValueAsString().equalsIgnoreCase("false")) {
+	// v = new Value(false);
+	// }
+	// if (fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+	// BL bl = DatatypesFactory.eINSTANCE.createBL();
+	// bl.setNullFlavor(NullFlavor.NA);
+	// v = new Value(bl);
+	// }
+	// }
+	// }
+	// if (fhirString.getValue().startsWith("INT:")) {
+	// if (fhirString.getValue().startsWith("INT:NA")) {
+	// INT intValue = DatatypesFactory.eINSTANCE.createINT();
+	// intValue.setNullFlavor(NullFlavor.NA);
+	// v = new Value(intValue);
+	// } else {
+	// v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:",
+	// "")));
+	// }
+	// }
+	// if (fhirString.getValue().startsWith("ST:")) {
+	// if (fhirString.getValue().startsWith("ST:NA")) {
+	// ST stValue = DatatypesFactory.eINSTANCE.createST();
+	// stValue.setNullFlavor(NullFlavor.NA);
+	// v = new Value(stValue);
+	// } else {
+	// ST stValue = DatatypesFactory.eINSTANCE
+	// .createST(fhirString.getValue().replace("ST:", ""));
+	// v = new Value(stValue);
+	// }
+	// }
+	// }
+	// // type CD
+	// if (fhirObservation.getValue() instanceof CodeableConceptDt)
+	//
+	// {
+	// final Coding fhirValueCode = ((CodeableConceptDt)
+	// fhirObservation.getValue())
+	// .getCodingFirstRep();
+	// retVal.addValue(new Code(new
+	// Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
+	// fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+	// }
+	// if (fhirObservation.getValue() instanceof RatioDt) {
+	// // type RTO not yet implemented
+	// }
+	// if (v != null) {
+	// retVal.addValue(v);
+	// }
+	//
+	// // ReferenceRange
+	// if (!fhirObservation.getReferenceRange().isEmpty()) {
+	// org.ehealth_connector.common.ReferenceRange rr = new
+	// org.ehealth_connector.common.ReferenceRange();
+	// // Value
+	// v = new
+	// Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+	// fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+	// rr.setValue(v);
+	// // Interpretation;
+	// ObservationInterpretation obsInt =
+	// ObservationInterpretation.getEnum(fhirObservation
+	// .getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
+	// if (obsInt != null) {
+	// rr.setInterpretationCode(obsInt);
+	// }
+	// retVal.setReferenceRange(rr);
+	// }
+	//
+	// final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
+	// .getCodingFirstRep();
+	// if (fhirInterpretationCode != null) {
+	// if (fhirInterpretationCode.getSystem() != null) {
+	// retVal.addInterpretationCode(new Code(
+	// FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+	// fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
+	// } else {
+	// retVal.addInterpretationCode(
+	// new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
+	// }
+	// }
+	//
+	// if (fhirObservation.getComments() != null) {
+	// retVal.addCommentEntry(
+	// new SectionAnnotationCommentEntry(fhirObservation.getComments()));
+	// }
+	// return retVal;
+	// }
+	//
+	// private List<LaboratorySpecialtySection>
+	// getLaboratorySpecialtySections(docManifest docManifest) {
+	//
+	// final List<LaboratorySpecialtySection> lssList = new
+	// ArrayList<LaboratorySpecialtySection>();
+	//
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all LaboratorySpecialtySections
+	// final List<org.hl7.fhir.dstu3.model.Extension> specialtySections = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsLaboratorySpecialtySection);
+	// if ((specialtySections != null) && !specialtySections.isEmpty()) {
+	// final Observation obs = (Observation) entry.getResource();
+	//
+	// // SectionCode
+	// final Code code = FhirCommon.fhirCodeToEhcCode(obs.getCode());
+	// code.setCodeSystemName("LOINC");
+	// final org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection
+	// lss = new
+	// org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection(
+	// code, doc.getLanguageCode());
+	//
+	// // Add all LaboratoryBatteryOrganizers
+	// SpecimenAct spa = new SpecimenAct();
+	// spa.setCode(code);
+	// for (final Related relatedObs : obs.getRelated()) {
+	//
+	// final List<org.hl7.fhir.dstu3.model.Extension> organizers = relatedObs
+	// .getTarget().getUndeclaredExtensionsByUrl(
+	// FhirCommon.urnUseAsLaboratoryBatteryOrganizer);
+	// if ((organizers != null) && !organizers.isEmpty()) {
+	// // AuthorTimeStamp
+	// final StringType authorTimeStamp = ((StringType) organizers.get(0)
+	// .getValue());
+	// final Observation fhirObs = (Observation) relatedObs.getTarget()
+	// .getResource();
+	// spa.addLaboratoryBatteryOrganizer(
+	// getLaboratoryBatteryOrganizers(fhirObs, authorTimeStamp));
+	// }
+	// }
+	// lss.setLaboratoryReportDataProcessingEntry(
+	// new LaboratoryReportDataProcessingEntry(spa));
+	//
+	// // NarrativeText
+	// lss.setText(formatDiv(obs.getText().getDiv()));
+	// lssList.add(lss);
+	// }
+	// }
+	// return lssList;
+	// }
+	//
+	// /**
+	// * <div class="en">Gets the eHC ReferralOrderingPhyscian from the given
+	// FHIR
+	// * docManifest
+	// *
+	// * @param docManifest
+	// * the FHIR docManifest
+	// * @return eHC Custodian</div> <div class="de"></div> <div
+	// class="fr"></div>
+	// */
+	// private org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician
+	// getReferralOrderingPhysician(
+	// docManifest docManifest) {
+	// org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician retVal =
+	// null;
+	// for (final Entry entry : docManifest.getEntry()) {
+	// if
+	// (!entry.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsReferralOrderingPhysician)
+	// .isEmpty()) {
+	// final Person physician = (Person) entry.getResource();
+	//
+	// Name name = null;
+	// if (physician.getNameFirstRep() != null) {
+	// name = FhirCommon.fhirNameToEhcName(physician.getNameFirstRep());
+	// }
+	// final Address address = FhirCommon
+	// .fhirAddressToEhcAddress(physician.getAddressFirstRep());
+	// final Telecoms telecoms = FhirCommon.getTelecoms(physician.getTelecom());
+	//
+	// final AssociatedEntity entity = new AssociatedEntity(name, address,
+	// telecoms);
+	// for (final Identifier id : physician.getIdentifier()) {
+	// entity.addId(FhirCommon.fhirIdentifierToEhcIdentificator(id));
+	// }
+	//
+	// if ((physician.getContained() != null)
+	// && !physician.getContained().getContainedResources().isEmpty()) {
+	// for (final IResource res :
+	// physician.getContained().getContainedResources()) {
+	// if (res instanceof Organization) {
+	// entity.setOrganization(FhirCommon.getOrganization(res));
+	// }
+	// }
+	// }
+	// retVal = new ReferralOrderingPhysician(entity);
+	// }
+	// }
+	// return retVal;
+	// }
+	//
+	// private Identificator getRelatedDocument(docManifest docManifest) {
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all relevant elements
+	// List<org.hl7.fhir.dstu3.model.Extension> ifoEntries = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRelatedDocument);
+	// if (ifoEntries != null && !ifoEntries.isEmpty()) {
+	// Basic ifo = (Basic) entry.getResource();
+	// return
+	// FhirCommon.fhirIdentifierToEhcIdentificator(ifo.getIdentifierFirstRep());
+	// }
+	// }
+	// return null;
+	// }
+	//
+	// private VitalSignObservation getVitalSignObservation(Observation fhirObs)
+	// {
+	// VitalSignObservation vso = new VitalSignObservation();
+	// // Value
+	// Value v = null;
+	// if (fhirObs.getValue() instanceof Quantity) {
+	// Quantity fValue = (Quantity) fhirObs.getValue();
+	// v = new Value(fValue.getValue().toString(),
+	// Ucum.AHGEquivalentsPerMilliLiter);
+	// v.setUcumUnit(fValue.getUnit());
+	// }
+	// if (fhirObs.getValue() instanceof StringType) {
+	// StringType fValue = (StringType) fhirObs.getValue();
+	// if (fValue.getValue().startsWith("INT:")) {
+	// if (fValue.getValue().startsWith("INT:NA")) {
+	// INT intValue = DatatypesFactory.eINSTANCE.createINT();
+	// intValue.setNullFlavor(NullFlavor.NA);
+	// v = new Value(intValue);
+	// } else {
+	// v = new Value(Integer.parseInt(fValue.getValue()));
+	// }
+	// }
+	// }
+	// vso.setValue(v);
+	//
+	// // Code
+	// VitalSignList codeEnum = VitalSignList
+	// .getEnum(fhirObs.getCode().getCodingFirstRep().getCode());
+	// if (codeEnum != null) {
+	// vso.setCode(codeEnum.getCode());
+	// }
+	//
+	// // Ids
+	// for (Identifier fId : fhirObs.getIdentifier()) {
+	// vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
+	// }
+	//
+	// // ObservationInterpretation
+	// ObservationInterpretationForVitalSign i =
+	// ObservationInterpretationForVitalSign
+	// .getEnum(fhirObs.getInterpretation().getCodingFirstRep().getCode());
+	// if (i != null) {
+	// vso.setInterpretationCode(i);
+	// }
+	//
+	// // Method Code Translation
+	// if (fhirObs.getCode().getCoding().size() > 1) {
+	// Code translation = new
+	// Code(fhirObs.getCode().getCoding().get(1).getSystem(),
+	// fhirObs.getCode().getCoding().get(1).getCode());
+	// vso.setMethodCodeTranslation(translation);
+	// }
+	//
+	// // CommentEntry
+	// vso.addCommentEntry(new
+	// SectionAnnotationCommentEntry(fhirObs.getComments()));
+	//
+	// return vso;
+	// }
+	//
+	// /**
+	// * <div class="en">Gets a list of eHC LRTP VitalSignsOrganizers from the
+	// * given FHIR docManifest
+	// *
+	// * @param docManifest
+	// * the FHIR docManifest
+	// * @return list of eHC LRTP VitalSignsOrganizers</div>
+	// * <div class="de"></div> <div class="fr"></div>
+	// */
+	// private List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer>
+	// getVitalSignsOrganizers(
+	// docManifest docManifest) {
+	// final List<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer>
+	// retVal = new
+	// ArrayList<org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer>();
+	//
+	// // Iterate over all docManifest Entries
+	// for (final Entry entry : docManifest.getEntry()) {
+	// // Get all LaboratoryBatteryOrganizers
+	// final List<org.hl7.fhir.dstu3.model.Extension> vsoList = entry
+	// .getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsVitalSignsOrganizer);
+	// if ((vsoList != null) && !vsoList.isEmpty()) {
+	// final VitalSignsOrganizer vso = new
+	// org.ehealth_connector.cda.ch.lab.lrtp.VitalSignsOrganizer();
+	// final Observation fVso = (Observation) entry.getResource();
+	//
+	// // Set the Organizer Attributes
+	// // Date
+	// if (fVso.getEffective() != null && !fVso.isEmpty()) {
+	// DateTimeType fTime = (DateTimeType) fVso.getEffective();
+	// vso.setEffectiveTime(fTime.getValue());
+	// }
+	// // Ids
+	// for (Identifier fId : fVso.getIdentifier()) {
+	// vso.addId(FhirCommon.fhirIdentifierToEhcIdentificator(fId));
+	// }
+	// // Authors
+	// for (Reference perfRef : fVso.getPerformer()) {
+	// Practitioner p = (Practitioner) perfRef.getResource();
+	// Author author = new Author("");
+	// author.addId(
+	// FhirCommon.fhirIdentifierToEhcIdentificator(p.getIdentifierFirstRep()));
+	// final StringType timeStamp = ((StringType) vsoList.get(0).getValue());
+	// author.setTime(DateUtil.parseDates(timeStamp.getValue()));
+	// vso.addAuthor(author);
+	// }
+	//
+	// // // Status Code
+	// // final String statusCode =
+	// // getValueFromKeyValueString(labObsList.getText(),
+	// // "statusCode");
+	// // if (statusCode != null) {
+	// // vso.setStatusCode(StatusCode.getEnum(statusCode));
+	//
+	// // Add all VitalSignObservations
+	// for (final Related relatedObs : fVso.getRelated()) {
+	// final Observation fhirObs = (Observation)
+	// relatedObs.getTarget().getResource();
+	// final VitalSignObservation vit = getVitalSignObservation(fhirObs);
+	// vso.addVitalSignObservation(vit);
+	// }
+	// retVal.add(vso);
+	// }
+	// }
+	// return retVal;
+	// }
+	//
 	/**
-	 * Read the LrtpDocument object from the FHIR bundle file
+	 * Read the LrtpDocument object from the FHIR docManifest file
 	 *
 	 * @param fileName
 	 *            the file name

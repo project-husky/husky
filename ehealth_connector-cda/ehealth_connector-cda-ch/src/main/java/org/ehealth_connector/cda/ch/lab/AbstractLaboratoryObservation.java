@@ -63,6 +63,7 @@ public abstract class AbstractLaboratoryObservation
 	 * @param commentEntry
 	 *            the new comment entry
 	 */
+	@Override
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		if (commentEntry != null) {
 			this.getMdht().addAct(commentEntry.copy());
@@ -141,19 +142,6 @@ public abstract class AbstractLaboratoryObservation
 		final Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
 		nullCode.addTranslation(code);
 		this.setCode(nullCode);
-	}
-
-	/**
-	 * Sets the reference range <div class="de">(Referenzbereich)</div>.
-	 *
-	 * @param referenceRange
-	 *            the new reference range
-	 */
-	public void setReferenceRange(ReferenceRange referenceRange) {
-		if (referenceRange != null) {
-			getMdht().getReferenceRanges().clear();
-			getMdht().getReferenceRanges().add(referenceRange.getMdht());
-		}
 	}
 
 	/**

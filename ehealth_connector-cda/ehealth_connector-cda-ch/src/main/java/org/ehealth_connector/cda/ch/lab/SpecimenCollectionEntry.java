@@ -19,16 +19,20 @@ package org.ehealth_connector.cda.ch.lab;
 
 import java.util.Date;
 
+import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Participant;
 import org.ehealth_connector.common.ParticipantRole;
 import org.ehealth_connector.common.PlayingEntity;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * The Class SpecimenCollectionEntry.
@@ -176,6 +180,31 @@ public class SpecimenCollectionEntry
 	 */
 	public void setEffectiveTimeNullFlavorUnk() {
 		getMdht().setEffectiveTime(Util.createEffectiveTimeNullFlavorUnk());
+	}
+
+	/**
+	 * Sets the specimen received entry.
+	 *
+	 * @param entry
+	 *            the new specimen received entry
+	 */
+	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
+		if (entry != null) {
+			// Check if the element already exist, if so, replace it, if not add
+			// it
+			boolean added = false;
+			for (Act o : getMdht().getActs()) {
+				if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived) {
+					o = entry.getMdht();
+					added = true;
+				}
+			}
+			if (added == false) {
+				getMdht().addAct(entry.copy());
+			}
+			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+					x_ActRelationshipEntryRelationship.COMP);
+		}
 	}
 
 	/**

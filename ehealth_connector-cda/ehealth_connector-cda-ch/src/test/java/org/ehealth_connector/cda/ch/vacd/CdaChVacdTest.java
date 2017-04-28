@@ -308,7 +308,7 @@ public class CdaChVacdTest extends TestUtils {
 		i.addId(id2);
 		i.setProposed();
 		i.setPossibleAppliance(startDate, endDate);
-		i.setShallNotBeAdministerd(true);
+		i.setShallNotBeAdministerd();
 		i.setConsumable(consumable1);
 		i.addId(id1);
 		i.setDosage(number);

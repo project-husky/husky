@@ -21,6 +21,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.communication.mpi.MpiQuery;
+import org.hl7.fhir.dstu3.model.ContactPoint;
+import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.dstu3.model.HumanName;
+import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.v3.PRPAMT201306UV02PatientTelecom;
 import org.hl7.v3.TEL;
 import org.hl7.v3.V3Factory;
@@ -29,14 +35,6 @@ import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerQuery;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
-import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.ContactPointSystemEnum;
-import ca.uhn.fhir.model.dstu2.valueset.ContactPointUseEnum;
 
 /**
  * The class V3PdqQuery implements the MpiQuery functionality for the Patient
@@ -106,42 +104,41 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanNameDt humanDt) {
-		v3PdqConsumerQuery.addPatientMothersMaidenName(useFuzzySearch,
-				humanDt.getFamilyAsSingleString(), humanDt.getGivenAsSingleString(), null,
-				humanDt.getSuffixAsSingleString(), humanDt.getPrefixAsSingleString());
+	public MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanName humanDt) {
+		v3PdqConsumerQuery.addPatientMothersMaidenName(useFuzzySearch, humanDt.getFamily(),
+				humanDt.getGivenAsSingleString(), null, humanDt.getSuffixAsSingleString(),
+				humanDt.getPrefixAsSingleString());
 		return this;
 	}
 
 	/**
 	 * Adds a patient address to the query.
 	 *
-	 * @param addressDt
+	 * @param Address
 	 *            the address to be queried for
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientAddress(AddressDt addressDt) {
-		if (addressDt == null) {
-			log.error("addressDt not specified");
+	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address Address) {
+		if (Address == null) {
+			log.error("Address not specified");
 			return this;
 		}
 
 		String addressStreetAddress = null;
-		if (addressDt.getLine().size() > 0) {
-			addressStreetAddress = addressDt.getLine().get(0).getValueAsString();
+		if (Address.getLine().size() > 0) {
+			addressStreetAddress = Address.getLine().get(0).getValueAsString();
 		}
 
 		String addressOtherDesignation = null;
-		if (addressDt.getLine().size() > 1) {
-			addressOtherDesignation = addressDt.getLine().get(1).getValueAsString();
+		if (Address.getLine().size() > 1) {
+			addressOtherDesignation = Address.getLine().get(1).getValueAsString();
 		}
 
 		// H, W WP
 		String addressType = null;
-		if ((addressDt.getUseElement() != null)
-				&& (addressDt.getUseElement().getValueAsEnum() != null)) {
-			switch (addressDt.getUseElement().getValueAsEnum()) {
+		if ((Address.getUseElement() != null) && (Address.getUseElement().getValue() != null)) {
+			switch (Address.getUseElement().getValue()) {
 			case HOME:
 				addressType = "H";
 				break;
@@ -152,8 +149,8 @@ public class V3PdqQuery implements MpiQuery {
 				break;
 			}
 		}
-		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, addressDt.getCity(), null,
-				addressDt.getState(), addressDt.getCountry(), addressDt.getPostalCode(),
+		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, Address.getCity(), null,
+				Address.getState(), Address.getCountry(), Address.getPostalCode(),
 				addressOtherDesignation, addressType);
 		return this;
 	}
@@ -161,19 +158,18 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Adds a patient identifier to be queried for
 	 *
-	 * @param identifierDt
+	 * @param Identifier
 	 *            patient identifier
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientIdentifier(IdentifierDt identifierDt) {
-		if ((identifierDt != null) && (identifierDt.getSystem().length() > 8)
-				&& (identifierDt.getSystem().startsWith("urn:oid:"))) {
-			final String oid = identifierDt.getSystem().substring(8);
-			v3PdqConsumerQuery.addPatientID(oid, identifierDt.getValue(), "");
+	public MpiQuery addPatientIdentifier(Identifier Identifier) {
+		if ((Identifier != null) && (Identifier.getSystem().length() > 8)
+				&& (Identifier.getSystem().startsWith("urn:oid:"))) {
+			final String oid = Identifier.getSystem().substring(8);
+			v3PdqConsumerQuery.addPatientID(oid, Identifier.getValue(), "");
 		} else {
-			log.error(
-					"identifier system is not starting with urn:oid: " + identifierDt.getSystem());
+			log.error("identifier system is not starting with urn:oid: " + Identifier.getSystem());
 		}
 		return this;
 	}
@@ -189,8 +185,8 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientName(boolean useFuzzySearch, HumanNameDt humanDt) {
-		v3PdqConsumerQuery.addPatientName(useFuzzySearch, humanDt.getFamilyAsSingleString(),
+	public MpiQuery addPatientName(boolean useFuzzySearch, HumanName humanDt) {
+		v3PdqConsumerQuery.addPatientName(useFuzzySearch, humanDt.getFamily(),
 				humanDt.getGivenAsSingleString(), null, humanDt.getSuffixAsSingleString(),
 				humanDt.getPrefixAsSingleString());
 		return this;
@@ -199,33 +195,31 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Adds a patient telecom to be queried for.
 	 *
-	 * @param contactPointDt
+	 * @param ContactPoint
 	 *            telecom
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientTelecom(ContactPointDt contactPointDt) {
-		if (contactPointDt == null) {
-			log.error("contactPointDt not specified");
+	public MpiQuery addPatientTelecom(ContactPoint ContactPoint) {
+		if (ContactPoint == null) {
+			log.error("ContactPoint not specified");
 			return this;
 		}
-		if (ContactPointSystemEnum.PHONE
-				.equals(contactPointDt.getSystemElement().getValueAsEnum())) {
+		if (ContactPointSystem.PHONE.equals(ContactPoint.getSystemElement().getValue())) {
 			String use = "";
-			if (ContactPointUseEnum.HOME.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+			if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
 				use = "HP";
-			} else if (ContactPointUseEnum.WORK
-					.equals(contactPointDt.getUseElement().getValueAsEnum())) {
+			} else if (ContactPointUse.WORK.equals(ContactPoint.getUseElement().getValue())) {
 				use = "WP";
 			}
 			// else if
-			// (ContactPointUseEnum.MOBILE.equals(contactPointDt.getUseElement().getValueAsEnum()))
+			// (ContactPointUse.MOBILE.equals(ContactPoint.getUseElement().getValue()))
 			// {
 			// }
-			addPatientTelecom(contactPointDt.getValue(), use);
+			addPatientTelecom(ContactPoint.getValue(), use);
 		} else {
-			log.error("no phone specified as telecom "
-					+ contactPointDt.getSystemElement().getValueAsEnum());
+			log.error(
+					"no phone specified as telecom " + ContactPoint.getSystemElement().getValue());
 		}
 		return this;
 	}
@@ -362,21 +356,21 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Sets the patient sex for the query.
 	 *
-	 * @param adminstrativeGenderEnum
+	 * @param administrativeGender
 	 *            gender
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum) {
-		if (adminstrativeGenderEnum == null) {
+	public MpiQuery setPatientSex(AdministrativeGender administrativeGender) {
+		if (administrativeGender == null) {
 			log.error("adminstrativeGenderEnum not specified");
 			return this;
 		}
-		if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.FEMALE)) {
+		if (administrativeGender.equals(AdministrativeGender.FEMALE)) {
 			v3PdqConsumerQuery.setPatientSex("F");
-		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.MALE)) {
+		} else if (administrativeGender.equals(AdministrativeGender.MALE)) {
 			v3PdqConsumerQuery.setPatientSex("M");
-		} else if (adminstrativeGenderEnum.equals(AdministrativeGenderEnum.OTHER)) {
+		} else if (administrativeGender.equals(AdministrativeGender.OTHER)) {
 			v3PdqConsumerQuery.setPatientSex("U");
 		}
 		return this;

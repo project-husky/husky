@@ -31,7 +31,7 @@ public class Address {
 	/**
 	 * Das HL7 Address Objekt.
 	 */
-	private AD mAd;
+	private final AD mAd;
 
 	public Address() {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
@@ -199,9 +199,9 @@ public class Address {
 	}
 
 	/**
-	 * Returns the State
+	 * Returns the Country
 	 *
-	 * @return State
+	 * @return Country
 	 */
 	public String getCountry() {
 		if (mAd.getCountries() != null) {
@@ -229,6 +229,20 @@ public class Address {
 	 */
 	public AD getMdhtAdress() {
 		return mAd;
+	}
+
+	/**
+	 * Returns the State
+	 *
+	 * @return State
+	 */
+	public String getState() {
+		if (mAd.getStates() != null) {
+			if (mAd.getStates().get(0) != null) {
+				return mAd.getStates().get(0).getText();
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -265,7 +279,8 @@ public class Address {
 	 *            Adress-Zeile 1
 	 */
 	public void setAddressline1(String addressline) {
-		mAd.addStreetAddressLine(addressline);
+		if (addressline != null)
+			mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -275,7 +290,8 @@ public class Address {
 	 *            Adress-Zeile 2
 	 */
 	public void setAddressline2(String addressline) {
-		mAd.addStreetAddressLine(addressline);
+		if (addressline != null)
+			mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -285,7 +301,8 @@ public class Address {
 	 *            Adress-Zeile 3
 	 */
 	public void setAddressline3(String addressline) {
-		mAd.addStreetAddressLine(addressline);
+		if (addressline != null)
+			mAd.addStreetAddressLine(addressline);
 	}
 
 	/**
@@ -324,6 +341,18 @@ public class Address {
 	 */
 	public void setHouseNumber(String aHouseNumber) {
 		mAd.addHouseNumber(aHouseNumber);
+	}
+
+	/**
+	 * Sets the state <div class="de">Setzt den Kanton</div>
+	 *
+	 * @param country
+	 *            the country
+	 */
+	public void setState(String state) {
+		if (state != null) {
+			mAd.addState(state);
+		}
 	}
 
 	/**

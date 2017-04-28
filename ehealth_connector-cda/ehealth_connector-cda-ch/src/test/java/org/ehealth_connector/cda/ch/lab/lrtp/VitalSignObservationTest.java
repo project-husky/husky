@@ -41,7 +41,7 @@ public class VitalSignObservationTest extends TestUtils {
 		assertTrue(code1.equals(o.getMethodCodeTranslation()));
 
 		// Observation Interpretation
-		o.setInterpretationCode(ObservationInterpretationForVitalSign.ABNORMAL);
+		o.setInterpretationCode(ObservationInterpretationForVitalSign.ABNORMAL.getCode());
 		assertEquals(ObservationInterpretationForVitalSign.ABNORMAL.getCodeValue(),
 				o.getInterpretationCode().getCode());
 		assertEquals(ObservationInterpretationForVitalSign.ABNORMAL.getCodeValue(),

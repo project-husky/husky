@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
@@ -190,14 +191,14 @@ public class CdaChLrph
 			lrdpe = laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
 		}
 
-		SpecimenAct se;
+		AbstractSpecimenAct se;
 		if (lrdpe.getSpecimenAct() == null) {
-			se = new SpecimenAct();
+			se = new AbstractSpecimenAct();
 			if (sectionCode != null) {
 				se.setCode(sectionCode);
 			}
 		} else {
-			se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
+			se = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
 
 		se.addLaboratoryBatteryOrganizer(organizer);
@@ -481,9 +482,9 @@ public class CdaChLrph
 			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				final SpecimenAct se = lrdpe.getSpecimenAct();
+				final AbstractSpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
-					lbol.addAll(se.getLaboratoryBatteryOrganizers());
+					lbol.addAll(se.getLrphLaboratoryBatteryOrganizers());
 				}
 			}
 		}
@@ -510,7 +511,7 @@ public class CdaChLrph
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public SpecimenAct getSpecimenAct() {
+	public AbstractSpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)

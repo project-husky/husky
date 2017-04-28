@@ -45,11 +45,22 @@ public class LaboratoryReportDataProcessingEntry
 	}
 
 	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param act
+	 *            the SpecimentAct
+	 */
+	public LaboratoryReportDataProcessingEntry(SpecimenAct act) {
+		this();
+		setSpecimenAct(act);
+	}
+
+	/**
 	 * Gets the specimen act.
 	 *
 	 * @return the specimen act
 	 */
-	protected org.ehealth_connector.cda.ihe.lab.SpecimenAct getSpecimenAct() {
+	protected SpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
 			return new SpecimenAct(
 					(org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenAct) getMdht().getAct());
@@ -70,14 +81,4 @@ public class LaboratoryReportDataProcessingEntry
 		return null;
 	}
 
-	/**
-	 * Sets the specimen act.
-	 *
-	 * @param specimenAct
-	 *            the new specimen act
-	 */
-	protected void setSpecimenAct(
-			org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
-		getMdht().setAct(specimenAct.getMdht());
-	}
 }

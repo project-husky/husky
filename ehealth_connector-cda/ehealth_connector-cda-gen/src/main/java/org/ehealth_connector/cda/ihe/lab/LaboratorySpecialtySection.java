@@ -18,6 +18,7 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * The Class LaboratorySpecialtySection. Every Laboratory Report SHALL contain
@@ -44,6 +45,18 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	public LaboratorySpecialtySection(Code code) {
 		this();
 		this.setCode(code);
+	}
+
+	/**
+	 * Instantiates the class.
+	 *
+	 * @param code
+	 *            the code for this section
+	 * @param languageCode
+	 *            the language code
+	 */
+	public LaboratorySpecialtySection(Code code, LanguageCode languageCode) {
+		super(code, languageCode);
 	}
 
 	/**

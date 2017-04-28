@@ -43,4 +43,25 @@ public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
 	}
+
+	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param act
+	 *            the SpecimentAct
+	 */
+	public AbstractLaboratoryReportDataProcessingEntry(SpecimenAct act) {
+		this();
+		setSpecimenAct(act);
+	}
+
+	/**
+	 * Sets the specimen act.
+	 *
+	 * @param specimenAct
+	 *            the new specimen act
+	 */
+	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
+		getMdht().setAct(specimenAct.getMdht());
+	}
 }

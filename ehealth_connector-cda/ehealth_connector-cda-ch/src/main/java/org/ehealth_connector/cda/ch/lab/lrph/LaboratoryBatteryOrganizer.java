@@ -20,11 +20,13 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
  * The Class LaboratoryBatteryOrganizer.
@@ -68,15 +70,15 @@ public class LaboratoryBatteryOrganizer
 	}
 
 	/**
-	 * Adds the id for HIV.
+	 * Adds the author.
 	 *
-	 * @param id
-	 *            the id root: OID of the used System e.g. Berda Code:
-	 *            2.16.756.5.30.1.129.1.2.1. extension: anonyme number for each
-	 *            consultation.
+	 * @param author
+	 *            the author
 	 */
-	public void addIdForHiv(Identificator id) {
-		getMdht().getIds().add(id.getIi());
+	public void addAuthor(Author author) {
+		getMdht().getAuthors().add(author.copyMdhtAuthor());
+		final int nb = getMdht().getAuthors().size() - 1;
+		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
 	}
 
 	/**

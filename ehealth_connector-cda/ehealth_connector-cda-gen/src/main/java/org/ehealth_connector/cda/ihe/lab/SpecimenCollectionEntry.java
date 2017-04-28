@@ -122,19 +122,21 @@ public class SpecimenCollectionEntry
 	 *            the new specimen received entry
 	 */
 	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
-		// Check if the element already exist, if so, replace it, if not add it
-		boolean added = false;
-		for (Act o : getMdht().getActs()) {
-			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived) {
-				o = entry.getMdht();
-				added = true;
+		if (entry != null) {
+			// Check if the element already exist, if so, replace it, if not add
+			// it
+			boolean added = false;
+			for (Act o : getMdht().getActs()) {
+				if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived) {
+					o = entry.getMdht();
+					added = true;
+				}
 			}
+			if (added == false) {
+				getMdht().addAct(entry.copy());
+			}
+			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+					x_ActRelationshipEntryRelationship.COMP);
 		}
-		if (added == false) {
-			getMdht().addAct(entry.copy());
-		}
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-				x_ActRelationshipEntryRelationship.COMP);
 	}
-
 }

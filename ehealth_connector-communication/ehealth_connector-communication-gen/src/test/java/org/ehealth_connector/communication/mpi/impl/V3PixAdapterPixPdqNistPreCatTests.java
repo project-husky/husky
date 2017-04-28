@@ -21,19 +21,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
 
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirPatient;
+import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.dstu3.model.HumanName;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.resource.Organization;
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.primitive.DateDt;
+import ca.uhn.fhir.context.FhirVersionEnum;
 
 /**
  * See http://pixpdqtests.nist.gov/pixpdqtool/ IHE PIX and PDQ Pre-Connectathon
@@ -73,7 +73,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 	private Organization getScopingOrganization() {
 		final Organization org = new Organization();
-		final IdentifierDt identifier = new IdentifierDt();
+		final Identifier identifier = new Identifier();
 		identifier.setValue("OHT");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		org.getIdentifier().add(identifier);
@@ -103,20 +103,20 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 		// ALPHA ALAN
 		final FhirPatient patient = new FhirPatient();
-		final HumanNameDt humanName = new HumanNameDt().addFamily("ALPHA").addGiven("ALAN");
+		final HumanName humanName = new HumanName().setFamily("ALPHA").addGiven("ALAN");
 		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("1 PINETREE").setPostalCode("63119")
-				.setCity("WEBSTER").setState("MO");
-		final IdentifierDt identifier = new IdentifierDt();
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine("1 PINETREE").setPostalCode("63119").setCity("WEBSTER").setState("MO");
+		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(new DateDt("19380224"));
+		patient.setBirthDate(DateUtil.date("19380224"));
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.MALE);
+		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext();
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -207,20 +207,20 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 		// LINCOLN MARY
 		final FhirPatient patient = new FhirPatient();
-		final HumanNameDt humanName = new HumanNameDt().addFamily("LINCOLN").addGiven("MARY");
+		final HumanName humanName = new HumanName().setFamily("LINCOLN").addGiven("MARY");
 		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("100 JORIE BLVD").setPostalCode("60523")
-				.setCity("CHICAGO").setState("IL");
-		final IdentifierDt identifier = new IdentifierDt();
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine("100 JORIE BLVD").setPostalCode("60523").setCity("CHICAGO").setState("IL");
+		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(new DateDt("19771208"));
+		patient.setBirthDate(DateUtil.date("19771208"));
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.FEMALE);
+		patient.setGender(AdministrativeGender.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext();
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -304,20 +304,21 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 		// TAU TERI
 		final FhirPatient patient = new FhirPatient();
-		final HumanNameDt humanName = new HumanNameDt().addFamily("TAU").addGiven("TERI");
+		final HumanName humanName = new HumanName().setFamily("TAU").addGiven("TERI");
 		patient.getName().add(humanName);
-		final AddressDt address = new AddressDt().addLine("202 KEN HABOR").setPostalCode("61000")
-				.setCity("NEW YORK CITY").setState("NY");
-		final IdentifierDt identifier = new IdentifierDt();
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine("202 KEN HABOR").setPostalCode("61000").setCity("NEW YORK CITY")
+				.setState("NY");
+		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(new DateDt("19780510"));
+		patient.setBirthDate(DateUtil.date("19780510"));
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.FEMALE);
+		patient.setGender(AdministrativeGender.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext();
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -402,12 +403,12 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		final FhirPatient patient = new FhirPatient();
-		final IdentifierDt identifier = new IdentifierDt();
+		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL1");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
 
-		final FhirContext ctx = new FhirContext();
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -508,12 +509,12 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterCfg);
 
 		final FhirPatient patient = new FhirPatient();
-		final IdentifierDt identifier = new IdentifierDt();
+		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL1");
 		identifier.setSystem("urn:oid:" + homeCommunityOid);
 		patient.getIdentifier().add(identifier);
 
-		final FhirContext ctx = new FhirContext();
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 

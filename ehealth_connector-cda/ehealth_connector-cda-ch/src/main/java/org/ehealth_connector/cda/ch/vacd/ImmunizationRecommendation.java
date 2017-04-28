@@ -94,13 +94,10 @@ public class ImmunizationRecommendation
 	 *            end of applicance for this immunization
 	 * @param intendedOrProposed
 	 *            if immunization is intended and or proposed
-	 * @param shallNotBeAdministerd
-	 *            if immunization should not be administred
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
 			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
-			Date endOfPossibleAppliance, boolean intendedOrProposed,
-			boolean shallNotBeAdministerd) {
+			Date endOfPossibleAppliance, boolean intendedOrProposed) {
 
 		this();
 		if (intendedOrProposed) {
@@ -111,7 +108,6 @@ public class ImmunizationRecommendation
 
 		// Set the Attributes of this class
 		addId(null);
-		setShallNotBeAdministerd(shallNotBeAdministerd);
 		setPossibleAppliance(startOfPossibleAppliance, endOfPossibleAppliance);
 		setAuthor(author);
 		setConsumable(consumable);
@@ -462,7 +458,8 @@ public class ImmunizationRecommendation
 	 */
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		getMdht().getAuthors().clear();
-		getMdht().getAuthors().add(author.getAuthorMdht());
+		if (author != null)
+			getMdht().getAuthors().add(author.getAuthorMdht());
 
 	}
 
@@ -482,7 +479,8 @@ public class ImmunizationRecommendation
 		this.getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
 		// this.getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new
 		// Date()));
-		this.getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
+		if (this.getMdht().getIds().size() == 0)
+			this.getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
 		final Consumable c = new Consumable(false);
 		setConsumable(c);
 	}
@@ -669,18 +667,9 @@ public class ImmunizationRecommendation
 	 * verabreicht werden soll.</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param shallNotBeAdministerd
-	 *            <div class="en">true, if the immunization shall not be
-	 *            administered. false, otherwise.</div> <div class="de">true,
-	 *            wenn die Impfung nicht verabreicht werden soll, sonst
-	 *            false</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public void setShallNotBeAdministerd(boolean shallNotBeAdministerd) {
-		if (shallNotBeAdministerd) {
-			this.getMdht().setNegationInd(true);
-		} else {
-			this.getMdht().setNegationInd(false);
-		}
+	public void setShallNotBeAdministerd() {
+		this.getMdht().setNegationInd(true);
 	}
 
 	/**

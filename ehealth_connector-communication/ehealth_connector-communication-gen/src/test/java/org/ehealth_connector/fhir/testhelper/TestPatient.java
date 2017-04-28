@@ -23,15 +23,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.common.enums.CountryCode;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.FhirPatient;
-
-import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.valueset.AddressUseEnum;
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.IdentifierUseEnum;
-import ca.uhn.fhir.model.primitive.DateDt;
+import org.hl7.fhir.dstu3.model.Address.AddressUse;
+import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.dstu3.model.HumanName;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Identifier.IdentifierUse;
 
 /**
  * Helper class TestPatient.
@@ -46,26 +44,27 @@ public class TestPatient {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMueller();
 
-		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1)
-				.setPostalCode(testPatient.addrPostalCode).setCity(testPatient.addrCity)
-				.setState(testPatient.addrState).setCountry(testPatient.addrCountry);
-		address.setUse(AddressUseEnum.valueOf(testPatient.addrUse.toUpperCase()));
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
+				.setCity(testPatient.addrCity).setState(testPatient.addrState)
+				.setCountry(testPatient.addrCountry);
+		address.setUse(AddressUse.valueOf(testPatient.addrUse.toUpperCase()));
 
-		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family)
+		final HumanName humanName = new HumanName().setFamily(testPatient.family)
 				.addGiven(testPatient.given);
 		patient.getName().add(humanName);
 
-		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setUse(IdentifierUseEnum.USUAL);
+		final Identifier identifier = new Identifier();
+		identifier.setUse(IdentifierUse.USUAL);
 		identifier.setSystem("urn:oid:" + oidLocalId);
 		identifier.setValue(testPatient.localId);
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(new DateDt(testPatient.birthDate));
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
 
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.valueOf(testPatient.gender.toUpperCase()));
+		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));
 
 		return patient;
 	}
@@ -74,26 +73,27 @@ public class TestPatient {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMuellerObsolete();
 
-		final AddressDt address = new AddressDt().addLine(testPatient.addrLine1)
-				.setPostalCode(testPatient.addrPostalCode).setCity(testPatient.addrCity)
-				.setState(testPatient.addrState).setCountry(testPatient.addrCountry);
-		address.setUse(AddressUseEnum.valueOf(testPatient.addrUse.toUpperCase()));
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
+				.setCity(testPatient.addrCity).setState(testPatient.addrState)
+				.setCountry(testPatient.addrCountry);
+		address.setUse(AddressUse.valueOf(testPatient.addrUse.toUpperCase()));
 
-		final HumanNameDt humanName = new HumanNameDt().addFamily(testPatient.family)
+		final HumanName humanName = new HumanName().setFamily(testPatient.family)
 				.addGiven(testPatient.given);
 		patient.getName().add(humanName);
 
-		final IdentifierDt identifier = new IdentifierDt();
-		identifier.setUse(IdentifierUseEnum.USUAL);
+		final Identifier identifier = new Identifier();
+		identifier.setUse(IdentifierUse.USUAL);
 		identifier.setSystem("urn:oid:" + oidLocalId);
 		identifier.setValue(testPatient.localId);
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(new DateDt(testPatient.birthDate));
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
 
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGenderEnum.valueOf(testPatient.gender.toUpperCase()));
+		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));
 
 		return patient;
 	}

@@ -22,11 +22,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -39,6 +41,7 @@ import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ServiceEvent;
+import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -488,6 +491,19 @@ public class CdaChLrtp
 	 *
 	 * @return the laboratory specialty section
 	 */
+	public LaboratorySpecialtySection getLaboratorySpecialtySection() {
+		if (!getMdht().getLaboratorySpecialtySections().isEmpty()) {
+			return new LaboratorySpecialtySection(
+					getMdht().getLaboratorySpecialtySections().get(0));
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
 		final List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
@@ -547,19 +563,18 @@ public class CdaChLrtp
 
 	/**
 	 * Convenience function, which returns the SpecimenAct directly from the
-	 * first underlying
-	 * LaboratorySpecialtySection[0]/LaboratoryReportDataProcessingEntry
+	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
 	 * element.
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public SpecimenAct getSpecimenAct() {
-		if ((getLaboratorySpecialtySections() != null)
-				&& (getLaboratorySpecialtySections().get(0)
+	public AbstractSpecimenAct getSpecimenAct() {
+		if ((getLaboratorySpecialtySection() != null)
+				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)
-				&& (getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+				&& (getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 						.getSpecimenAct() != null)) {
-			return getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
+			return getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 					.getSpecimenAct();
 		}
 		return null;
@@ -627,6 +642,27 @@ public class CdaChLrtp
 	}
 
 	/**
+	 * Sets a LaboratorySpecialtySection.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the section
+	 */
+	public void setLaboratorySpecialtySection(
+			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
+		// Create a new structured body
+		if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
+			getMdht().addSection(laboratorySpecialtySection.copy());
+		} else {
+			// We need to create a new Structured Body element, as the section
+			// list is
+			// not modifiable
+			final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
+			getMdht().setStructuredBody(sb);
+		}
+	}
+
+	/**
 	 * Sets the section/text element for the CodedVitalSignsSection.
 	 *
 	 * @param text
@@ -681,5 +717,4 @@ public class CdaChLrtp
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
-
 }

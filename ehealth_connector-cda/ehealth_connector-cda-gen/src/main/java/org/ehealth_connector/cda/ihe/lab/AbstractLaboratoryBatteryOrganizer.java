@@ -18,6 +18,7 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
@@ -45,4 +46,17 @@ public abstract class AbstractLaboratoryBatteryOrganizer extends
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
 	}
+
+	/**
+	 * Adds the id for HIV.
+	 *
+	 * @param id
+	 *            the id root: OID of the used System e.g. Berda Code:
+	 *            2.16.756.5.30.1.129.1.2.1. extension: anonyme number for each
+	 *            consultation.
+	 */
+	public void addId(Identificator id) {
+		getMdht().getIds().add(id.getIi());
+	}
+
 }

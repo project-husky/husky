@@ -19,11 +19,11 @@ package org.ehealth_connector.communication.mpi;
 
 import java.util.Date;
 
-import ca.uhn.fhir.model.dstu2.composite.AddressDt;
-import ca.uhn.fhir.model.dstu2.composite.ContactPointDt;
-import ca.uhn.fhir.model.dstu2.composite.HumanNameDt;
-import ca.uhn.fhir.model.dstu2.composite.IdentifierDt;
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
+import org.hl7.fhir.dstu3.model.Address;
+import org.hl7.fhir.dstu3.model.ContactPoint;
+import org.hl7.fhir.dstu3.model.Enumerations;
+import org.hl7.fhir.dstu3.model.HumanName;
+import org.hl7.fhir.dstu3.model.Identifier;
 
 /**
  * The interface MpiQuery defines a query object which allows to add the query
@@ -51,25 +51,25 @@ public interface MpiQuery {
 	 *            name
 	 * @return the query object
 	 */
-	public abstract MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanNameDt humanDt);
+	public abstract MpiQuery addMothersMaidenName(boolean useFuzzySearch, HumanName humanDt);
 
 	/**
 	 * Adds a patient address to the query.
 	 *
-	 * @param addressDt
+	 * @param Address
 	 *            the address to be queried for
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientAddress(AddressDt addressDt);
+	public abstract MpiQuery addPatientAddress(Address Address);
 
 	/**
 	 * Adds a patient identifier to be queried for.
 	 *
-	 * @param identifierDt
+	 * @param Identifier
 	 *            patient identifier
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientIdentifier(IdentifierDt identifierDt);
+	public abstract MpiQuery addPatientIdentifier(Identifier Identifier);
 
 	/**
 	 * Adds a patient name to the query.
@@ -81,16 +81,16 @@ public interface MpiQuery {
 	 *            name
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientName(boolean useFuzzySearch, HumanNameDt humanDt);
+	public abstract MpiQuery addPatientName(boolean useFuzzySearch, HumanName humanDt);
 
 	/**
 	 * Adds a patient telecom to be queried for.
 	 *
-	 * @param contactPointDt
+	 * @param ContactPoint
 	 *            telecom
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientTelecom(ContactPointDt contactPointDt);
+	public abstract MpiQuery addPatientTelecom(ContactPoint ContactPoint);
 
 	/**
 	 * Cancels the next query.
@@ -132,6 +132,7 @@ public interface MpiQuery {
 	 *            gender
 	 * @return the query object
 	 */
-	public abstract MpiQuery setPatientSex(AdministrativeGenderEnum adminstrativeGenderEnum);
+	public abstract MpiQuery setPatientSex(
+			Enumerations.AdministrativeGender adminstrativeGenderEnum);
 
 }

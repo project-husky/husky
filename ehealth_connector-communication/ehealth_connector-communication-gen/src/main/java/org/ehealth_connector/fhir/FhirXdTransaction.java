@@ -28,26 +28,26 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.SubmissionSetMetadata;
+import org.hl7.fhir.dstu3.model.DocumentManifest;
+import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
+import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.Enumerations.DocumentReferenceStatus;
+import org.hl7.fhir.dstu3.model.MessageHeader;
+import org.hl7.fhir.dstu3.model.MessageHeader.MessageDestinationComponent;
+import org.hl7.fhir.dstu3.model.MessageHeader.MessageSourceComponent;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.exceptions.FHIRException;
 //import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.model.api.ExtensionDt;
+import ca.uhn.fhir.context.FhirVersionEnum;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
-import ca.uhn.fhir.model.dstu2.resource.Bundle;
-import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
-import ca.uhn.fhir.model.dstu2.resource.DocumentManifest;
-import ca.uhn.fhir.model.dstu2.resource.DocumentReference;
-import ca.uhn.fhir.model.dstu2.resource.MessageHeader;
-import ca.uhn.fhir.model.dstu2.resource.MessageHeader.Destination;
-import ca.uhn.fhir.model.dstu2.resource.MessageHeader.Source;
-import ca.uhn.fhir.model.dstu2.valueset.BundleTypeEnum;
-import ca.uhn.fhir.model.dstu2.valueset.DocumentReferenceStatusEnum;
-import ca.uhn.fhir.model.primitive.StringDt;
 import ca.uhn.fhir.parser.IParser;
 
 /**
@@ -65,12 +65,13 @@ import ca.uhn.fhir.parser.IParser;
 public class FhirXdTransaction {
 
 	/**
-	 * The class Transaction is a derived FHIR Bundle containing all information
-	 * about destination and submission-set including documents for a
-	 * transaction (e.g. IHE XDS submission or IHE XDM portable media creation)
+	 * The class Transaction is a derived FHIR resource containing all
+	 * information about destination and submission-set including documents for
+	 * a transaction (e.g. IHE XDS submission or IHE XDM portable media
+	 * creation)
 	 */
-	@ResourceDef(name = "Bundle")
-	public static class Transaction extends Bundle {
+	@ResourceDef(name = "DocumentManifest")
+	public static class Transaction extends DocumentManifest {
 
 		/** The Constant urnUseAsAffinityDomain. */
 		public static final String urnUseAsAffinityDomain = "http://ehealth-connector.org/FhirExtension/useAsAffinityDomain";
@@ -85,57 +86,17 @@ public class FhirXdTransaction {
 		@Child(name = "affinityDomain", max = 1)
 		@Extension(url = urnUseAsAffinityDomain, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "affinityDomain")
-		private ResourceReferenceDt affinityDomain;
+		private Reference affinityDomain;
 
 		/** The submission-sets. */
 		@Child(name = "submissionSet", max = Child.MAX_UNLIMITED)
 		@Extension(url = urnUseAsSubmissionSet, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "submissionSet")
-		private ResourceReferenceDt submissionSet;
-
-		public Transaction() {
-			setType(BundleTypeEnum.COLLECTION);
-		}
-
-		/**
-		 * Adds an endpoint (destination) to the FHIR bundle
-		 *
-		 * @param destination
-		 *            - add the destination (FHIR MessageHeader)
-		 */
-		public void addDestination(MessageHeader destination) {
-			final Entry entry = this.addEntry();
-			entry.setResource(destination);
-			entry.setFullUrl("urn:uuid:4953a5a4-2952-0726-aa8a-fcbd41af02a3");
-		}
-
-		/**
-		 * Adds an document to the FHIR bundle
-		 *
-		 * @param document
-		 *            - add the document (FHIR DocumentReference)
-		 */
-		public void addDocument(DocumentReference document) {
-			final Entry entry = this.addEntry();
-			entry.setResource(document);
-			entry.setFullUrl("urn:uuid:4953a6e4-2952-0726-5295-fcbd41af02a3");
-		}
-
-		/**
-		 * Adds an submission-set to the FHIR bundle
-		 *
-		 * @param submissionSet
-		 *            - add the submission-set (FHIR DocumentManifest)
-		 */
-		public void addSubmissionSet(DocumentManifest submissionSet) {
-			final Entry entry = this.addEntry();
-			entry.setResource(submissionSet);
-			entry.setFullUrl("urn:uuid:4953a644-2952-0726-cc6c-fcbd41af02a3");
-		}
+		private Reference submissionSet;
 
 	};
 
-	private final FhirContext fhirCtx = new FhirContext();
+	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 
 	/**
 	 * <div class="en">Empty constructor (default)</div><div class="de"></div>
@@ -145,10 +106,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the eHC affinity domain object from the FHIR bundle
+	 * <div class="en"> Gets the eHC affinity domain object from the FHIR
+	 * resource
 	 *
 	 * @param transaction
-	 *            the FHIR bundle
+	 *            the FHIR resource
 	 * @return the eHC affinity domain object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
@@ -219,10 +181,10 @@ public class FhirXdTransaction {
 
 		// Create the Destination
 		try {
-			final Source source = fhirObject.getSource();
+			final MessageSourceComponent source = fhirObject.getSource();
 			sourceFacilityOid = source.getName();
 
-			final Destination destination = fhirObject.getDestinationFirstRep();
+			final MessageDestinationComponent destination = fhirObject.getDestinationFirstRep();
 			receiverFacilityOid = destination.getName();
 			uri = new URI(destination.getEndpoint());
 		} catch (final URISyntaxException e) {
@@ -240,10 +202,10 @@ public class FhirXdTransaction {
 
 	/**
 	 * <div class="en">Gets a list containing all document metadatas from the
-	 * FHIR bundle
+	 * FHIR resource
 	 *
 	 * @param transaction
-	 *            the FHIR bundle
+	 *            the FHIR resource
 	 * @param receiverFacilityOid
 	 *            the receiverFacilityOid will be used to determine which of the
 	 *            patient ids is the destination patient id
@@ -257,16 +219,16 @@ public class FhirXdTransaction {
 			String receiverFacilityOid, String senderFacilityOid) {
 		final List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
 
-		for (final Entry entry : transaction.getEntry()) {
-			if (entry.getResource() instanceof DocumentReference) {
-				final DocumentReference fhirObject = (DocumentReference) entry.getResource();
+		for (final Resource entry : getResources(transaction)) {
+			if (entry instanceof DocumentReference) {
+				final DocumentReference fhirObject = (DocumentReference) entry;
 
 				final DocumentMetadata metaData = new DocumentMetadata(
 						FhirCommon.getMetadataLanguage(fhirObject));
 				metaData.addAuthor(getAuthor(fhirObject));
 				metaData.addConfidentialityCode(new Code(fhirObject.getSecurityLabelFirstRep()));
 
-				metaData.setClassCode(new Code(fhirObject.getClassElement()));
+				metaData.setClassCode(new Code(fhirObject.getClass_()));
 				metaData.setCodedLanguage(fhirObject.getContentFirstRep().getAttachment()
 						.getLanguageElement().getValueAsString());
 				metaData.setCreationTime(fhirObject.getCreated());
@@ -297,59 +259,94 @@ public class FhirXdTransaction {
 
 	/**
 	 * <div class="en"> Gets the registry as eHC Destination object from the
-	 * FHIR bundle
+	 * FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
+	 * @param docManifest
+	 *            the FHIR resource
 	 * @return the registry as eHC Destination object </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public org.ehealth_connector.communication.Destination getRegistry(Bundle bundle) {
+	public org.ehealth_connector.communication.Destination getRegistry(
+			DocumentManifest docManifest) {
 		org.ehealth_connector.communication.Destination retVal = null;
 
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof MessageHeader) {
-				final MessageHeader fhirObject = (MessageHeader) entry.getResource();
-				if (!fhirObject.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
-						.isEmpty())
-					retVal = getDestination((MessageHeader) entry.getResource());
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			Reference ref = null;
+			try {
+				ref = entry.getPReference();
+			} catch (FHIRException e) {
+			}
+			if (ref != null) {
+				if (ref.getResource() instanceof MessageHeader) {
+					final MessageHeader fhirObject = (MessageHeader) ref.getResource();
+					if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
+							.isEmpty())
+						retVal = getDestination((MessageHeader) ref.getResource());
+				}
 			}
 		}
-
 		return retVal;
 	}
 
 	/**
 	 * <div class="en"> Gets a list of repositories as eHC Destination objects
-	 * from the FHIR bundle
+	 * from the FHIR resource
 	 *
-	 * @param bundle
-	 *            the FHIR bundle
+	 * @param docManifest
+	 *            the FHIR resource
 	 * @return list of repositories</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.communication.Destination> getRepositories(Bundle bundle) {
+	public List<org.ehealth_connector.communication.Destination> getRepositories(
+			DocumentManifest docManifest) {
 		final List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
 
-		for (final Entry entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof MessageHeader) {
-				final MessageHeader fhirObject = (MessageHeader) entry.getResource();
-				if (!fhirObject
-						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsRepositoryDestination)
-						.isEmpty())
-					retVal.add(getDestination((MessageHeader) entry.getResource()));
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			Reference ref = null;
+			try {
+				ref = entry.getPReference();
+			} catch (FHIRException e) {
+			}
+			if (ref != null) {
+				if (ref.getResource() instanceof MessageHeader) {
+					final MessageHeader fhirObject = (MessageHeader) ref.getResource();
+					if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRepositoryDestination)
+							.isEmpty())
+						retVal.add(getDestination((MessageHeader) ref.getResource()));
+				}
 			}
 		}
+		return retVal;
+	}
 
+	/**
+	 * Gets a list of Resources
+	 * 
+	 * @param docManifest
+	 *            the FHIR document
+	 * @return the list of Resources
+	 */
+	public List<Resource> getResources(DocumentManifest docManifest) {
+		List<Resource> retVal = new ArrayList<Resource>();
+		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
+			Reference ref = null;
+			try {
+				ref = entry.getPReference();
+			} catch (FHIRException e) {
+			}
+			if (ref != null) {
+				retVal.add((Resource) ref.getResource());
+			}
+		}
 		return retVal;
 	}
 
 	/**
 	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR
-	 * bundle
+	 * resource
 	 *
 	 * @param transaction
-	 *            the FHIR bundle
+	 *            the FHIR resource
 	 * @param receiverFacilityOid
 	 *            the receiverFacilityOid will be used to determine which of the
 	 *            patient ids is the destination patient id
@@ -359,24 +356,23 @@ public class FhirXdTransaction {
 			String receiverFacilityOid) {
 		final SubmissionSetMetadata retVal = new SubmissionSetMetadata();
 
-		for (final Entry entry : transaction.getEntry()) {
-			if (entry.getResource() instanceof DocumentManifest) {
-				final DocumentManifest fhirObject = (DocumentManifest) entry.getResource();
+		for (final Resource entry : getResources(transaction)) {
+			if (entry instanceof DocumentManifest) {
+				final DocumentManifest fhirObject = (DocumentManifest) entry;
 
 				retVal.setAuthor(getAuthor(fhirObject));
 
 				AvailabilityStatusType availabilityStatus = AvailabilityStatusType.APPROVED_LITERAL;
-				if (fhirObject.getStatusElement()
-						.getValueAsEnum() != DocumentReferenceStatusEnum.CURRENT) {
+				if (fhirObject.getStatusElement().getValue() != DocumentReferenceStatus.CURRENT) {
 					availabilityStatus = AvailabilityStatusType.DEPRECATED_LITERAL;
 				}
 				retVal.setAvailabilityStatus(availabilityStatus);
 
-				final List<ExtensionDt> extensions = fhirObject
-						.getUndeclaredExtensionsByUrl(FhirCommon.urnUseAsComment);
+				final List<org.hl7.fhir.dstu3.model.Extension> extensions = fhirObject
+						.getExtensionsByUrl(FhirCommon.urnUseAsComment);
 				if (!extensions.isEmpty())
 					retVal.setComments(
-							((StringDt) extensions.get(0).getValue()).getValueAsString());
+							((StringType) extensions.get(0).getValue()).getValueAsString());
 
 				retVal.setContentTypeCode(new Code(fhirObject.getType()));
 
@@ -395,7 +391,7 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * Read the transaction object from the FHIR bundle file
+	 * Read the transaction object from the FHIR resource file
 	 *
 	 * @param fileName
 	 *            the file name

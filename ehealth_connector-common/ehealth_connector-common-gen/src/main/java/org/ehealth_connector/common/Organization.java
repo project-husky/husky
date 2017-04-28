@@ -38,7 +38,7 @@ public class Organization {
 	/**
 	 * The mdht organization object.
 	 */
-	private org.openhealthtools.mdht.uml.cda.Organization mOrganization;
+	private final org.openhealthtools.mdht.uml.cda.Organization mOrganization;
 
 	public Organization() {
 		mOrganization = CDAFactory.eINSTANCE.createOrganization();
@@ -115,9 +115,11 @@ public class Organization {
 	 *            Name
 	 */
 	public void addName(String name) {
-		final ON orgaName = DatatypesFactory.eINSTANCE.createON();
-		getMdhtOrganization().getNames().add(orgaName);
-		orgaName.addText(name);
+		if (name != null) {
+			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
+			getMdhtOrganization().getNames().add(orgaName);
+			orgaName.addText(name);
+		}
 	}
 
 	/**
