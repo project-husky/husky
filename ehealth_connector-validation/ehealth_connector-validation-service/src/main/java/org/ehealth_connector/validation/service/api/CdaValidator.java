@@ -478,6 +478,19 @@ public class CdaValidator {
 	 * Executes a XSD, a Schematron and the PDF validation (if a license key is
 	 * provided)
 	 *
+	 * @param cdaByteArray
+	 *            the CDA document to be validated
+	 * @return ValidationResult object, containing of all results
+	 * @throws ConfigurationException
+	 */
+	public ValidationResult validate(byte[] cdaByteArray) {
+		return validate(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
+	}
+
+	/**
+	 * Executes a XSD, a Schematron and the PDF validation (if a license key is
+	 * provided)
+	 *
 	 * @param cdaFile
 	 *            the CDA document to be validated
 	 * @return ValidationResult object, containing of all results
@@ -502,6 +515,17 @@ public class CdaValidator {
 		validationResult.setSchValidationResult(validateSch(cdaStream));
 		validationResult.setPdfValidationResult(validatePdf(cdaStream));
 		return validationResult;
+	}
+
+	/**
+	 * Executes a PDF validation of the given CDA document
+	 *
+	 * @param cdaByteArray
+	 *            the CDA document to be validated
+	 * @return ArrayList of PDF Validation results
+	 */
+	public PdfValidationResult validatePdf(byte[] cdaByteArray) {
+		return validatePdf(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
 	}
 
 	/**
@@ -541,6 +565,17 @@ public class CdaValidator {
 
 		log.info("End of PDF validation");
 		return retVal;
+	}
+
+	/**
+	 * Executes a Schematron validation of the given CDA document
+	 *
+	 * @param cdaByteArray
+	 *            the CDA document to be validated
+	 * @return the Schematron validation results
+	 */
+	public SchematronValidationResult validateSch(byte[] cdaByteArray) {
+		return validateSch(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
 	}
 
 	/**
@@ -618,7 +653,6 @@ public class CdaValidator {
 		if (cdaStream == null)
 			throw new ConfigurationException("No CDA-Document provided for validation");
 
-		// final RuleSet ruleSet = reportBuilder.detectRuleSet(cdaStream);
 		try {
 			InputStream is = cdaStream.getInputStream();
 			if (is != null)
@@ -645,6 +679,18 @@ public class CdaValidator {
 		retVal.setSourceFile(null);
 
 		return retVal;
+	}
+
+	/**
+	 * Executes a XSD validation of the given CDA document
+	 *
+	 * @param cdaByteArray
+	 *            the CDA document to be validated
+	 * @return the schema validation result
+	 * @throws ConfigurationException
+	 */
+	public XsdValidationResult validateXsd(byte[] cdaByteArray) {
+		return validateXsd(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
 	}
 
 	/**

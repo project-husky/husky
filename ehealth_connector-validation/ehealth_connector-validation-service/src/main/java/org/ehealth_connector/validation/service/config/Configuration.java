@@ -22,6 +22,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.ehealth_connector.common.utils.FileUtil;
@@ -97,7 +98,7 @@ public class Configuration {
 	/**
 	 * Creates the RuleSetMaps.
 	 */
-	private void createRuleSetMaps(ArrayList<RuleSet> ruleSetList) {
+	private void createRuleSetMaps(List<RuleSet> ruleSetList) {
 		ruleSetMap.clear();
 		ruleSetOidMap.clear();
 		for (final RuleSet ruleSet : ruleSetList) {
@@ -259,7 +260,7 @@ public class Configuration {
 	 *
 	 * @return the list of available rule-sets as an array.
 	 */
-	public ArrayList<RuleSet> getRuleSetList() {
+	public List<RuleSet> getRuleSetList() {
 		return new ArrayList<RuleSet>(ruleSetMap.values());
 	}
 
@@ -439,7 +440,7 @@ public class Configuration {
 	 * @param ruleSetList
 	 *            the list of available rule-sets
 	 */
-	public void setRuleSetList(ArrayList<RuleSet> ruleSetList) {
+	public void setRuleSetList(List<RuleSet> ruleSetList) {
 		createRuleSetMaps(ruleSetList);
 	}
 
