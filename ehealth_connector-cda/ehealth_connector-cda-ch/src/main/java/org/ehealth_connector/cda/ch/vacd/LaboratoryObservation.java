@@ -48,9 +48,11 @@ import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -218,6 +220,18 @@ public class LaboratoryObservation extends AbstractObservation {
 	 */
 	public void addInterpretationCode(Code code) {
 		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
+	}
+
+	/**
+	 * Adds a nullFlavor interpretation code.
+	 *
+	 * @param the
+	 *            desired NullFlavor
+	 */
+	public void addInterpretationCode(NullFlavor na) {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(na);
+		getMdht().getInterpretationCodes().add(ce);
 	}
 
 	/**

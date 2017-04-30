@@ -356,7 +356,7 @@ public class CdaChLrqc
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
-				getMdht().setCode(sectionCode.getCE());
+				// getMdht().setCode(sectionCode.getCE());
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}

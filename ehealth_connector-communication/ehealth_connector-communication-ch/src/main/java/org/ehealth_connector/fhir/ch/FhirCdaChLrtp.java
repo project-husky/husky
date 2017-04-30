@@ -749,7 +749,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 			rr.setValue(v);
 
-			// Interpretation;
+			// Interpretation of the reference range
 			ObservationInterpretation obsInt = null;
 			if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo() != null) {
 				if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().size() > 0) {
@@ -770,6 +770,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 
 		}
 
+		// Interpretation of the observation
 		final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
 				.getCodingFirstRep();
 		if (fhirInterpretationCode != null) {
@@ -777,8 +778,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				retVal.addInterpretationCode(new Code(
 						FhirCommon.removeUrnOidPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
-			}
+			} else
+				retVal.addInterpretationCode(NullFlavor.NA);
 		}
+
 		// Text reference (inside the observation)
 		if (fhirObservation.getComment() != null && !fhirObservation.getComment().isEmpty()) {
 			retVal.setTextReference(fhirObservation.getComment());

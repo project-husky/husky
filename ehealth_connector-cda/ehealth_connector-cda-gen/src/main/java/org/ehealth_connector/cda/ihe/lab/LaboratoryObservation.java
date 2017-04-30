@@ -47,6 +47,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -155,6 +156,18 @@ public class LaboratoryObservation extends
 	}
 
 	/**
+	 * Adds a nullFlavor interpretation code.
+	 *
+	 * @param the
+	 *            desired NullFlavor
+	 */
+	public void addInterpretationCode(NullFlavor na) {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(na);
+		getMdht().getInterpretationCodes().add(ce);
+	}
+
+	/**
 	 * Adds the interpretation code.
 	 *
 	 * @param code
@@ -205,16 +218,6 @@ public class LaboratoryObservation extends
 	public void addValue(Value value) {
 		getMdht().getValues().add(value.getValue());
 	}
-
-	// /**
-	// * Gets the text of the comment text element (this is not necessarily the
-	// * comment itself)
-	// *
-	// * @return the comment text
-	// */
-	// public String getCommentText() {
-	// return Util.getCommentText(getMdht().getEntryRelationships());
-	// }
 
 	/**
 	 * <div class="en">Gets the code of the observation</div>
@@ -457,5 +460,4 @@ public class LaboratoryObservation extends
 			getMdht().getReferenceRanges().add(referenceRange.getMdht());
 		}
 	}
-
 }

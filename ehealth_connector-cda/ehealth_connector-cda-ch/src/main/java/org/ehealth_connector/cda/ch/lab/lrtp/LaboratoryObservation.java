@@ -21,6 +21,9 @@ import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * The Class LaboratoryObservation. <div class="en">Each laboratory result MUST
@@ -95,39 +98,17 @@ public class LaboratoryObservation
 		super(mdht);
 	}
 
-	// /**
-	// * Convenience function to add the two required SoasInfoEntries.
-	// *
-	// * @param centerSpecificAvoid
-	// * <div class="en">Center specific Avoid=true means that a
-	// * transplantation should not be performed, because of the
-	// * HLA-Antibody even if the MFI-value is in the acceptable
-	// * range.</div><div class="de"> Center specific Avoid=true
-	// * bedeutet,dass aufgrund des betreffende HLA-Antikörpers von einer
-	// * Transplantation abgesehen werden soll, auch wenn sein MFI-Wert
-	// * noch im akzeptablen Bereich liegt.</div>
-	// * @param previousTx
-	// * <div class="en">Prev-Tx=true means that the HLA-antibody has been
-	// * build due to a former transplantation.</div>
-	// * <div class="de">Prev-Tx=true bedeutet, dass der betreffende
-	// * HLA-Antikörper aufgrund einer früheren Transplantation gebildet
-	// * wurde.</div>
-	// */
-	// public void addSoasInfoEnties(boolean centerSpecificAvoid, boolean
-	// previousTx) {
-	// SoasInfoEntry csa = new SoasInfoEntry(centerSpecificAvoid);
-	// SoasInfoEntry ptx = new SoasInfoEntry();
-	// ptx.setPreviousTx(previousTx);
-	//
-	// addSoasInfoEntry(csa);
-	// addSoasInfoEntry(ptx);
-	// }
-
-	// public void addSoasInfoEntry(SoasInfoEntry entry) {
-	// getMdht().addObservation(entry.copy());
-	// CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-	// x_ActRelationshipEntryRelationship.COMP);
-	// }
+	/**
+	 * Adds a nullFlavor interpretation code.
+	 *
+	 * @param the
+	 *            desired NullFlavor
+	 */
+	public void addInterpretationCode(NullFlavor na) {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(na);
+		getMdht().getInterpretationCodes().add(ce);
+	}
 
 	/**
 	 * Gets the code as loinc enum.
@@ -140,22 +121,6 @@ public class LaboratoryObservation
 		}
 		return null;
 	}
-
-	// public List<SoasInfoEntry> getSoasInfoEnties() {
-	// List<SoasInfoEntry> sl = new ArrayList<SoasInfoEntry>();
-	// for (Observation o : getMdht().getObservations()) {
-	// // We have to check the templateID, because MDHT does not recognize the
-	// // swiss extension
-	// for (II id : o.getTemplateIds()) {
-	// if (id.getRoot().equals("2.16.756.5.30.1.1.1.1.3.4.1")
-	// && id.getExtension().equals("CDA-CH.LRTP.SOASInfo")) {
-	// sl.add(new
-	// SoasInfoEntry((org.openhealthtools.mdht.uml.cda.ch.SoasInfoEntry) o));
-	// }
-	// }
-	// }
-	// return sl;
-	// }
 
 	/**
 	 * Sets the code.
