@@ -85,6 +85,7 @@ public class LaboratoryIsolateOrganizer
 	 */
 	public LaboratoryIsolateOrganizer(String reference) {
 		super(reference);
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
 	/**

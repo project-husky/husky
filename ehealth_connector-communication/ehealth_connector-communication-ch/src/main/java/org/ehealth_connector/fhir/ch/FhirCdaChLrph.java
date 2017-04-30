@@ -697,6 +697,10 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 						lbo.addLaboratoryObservation(labObs);
 					}
 					sce.addLaboratoryBatteryOrganizer(lbo);
+
+					// Add the id of the subsequent organizer
+					sce.getMdht().getComponents().get(0).getOrganizer().getIds().add(id.getIi());
+
 					return sce;
 				}
 			}
